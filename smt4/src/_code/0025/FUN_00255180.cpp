@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00282924(int, unsigned int);
 
 /* Supplied declaration required: FUN_00282924. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 
 
 void FUN_00255180(unsigned int param_1,int param_2,unsigned short param_3)
@@ -16,7 +16,7 @@ void FUN_00255180(unsigned int param_1,int param_2,unsigned short param_3)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   FUN_00282924(temp_v0,param_1);
   if (temp_v0 != 0) {
     *(unsigned short *)(temp_v0 + param_2 * 2 + 0x72) = param_3;

@@ -8,7 +8,7 @@ int FUN_00250d74(unsigned char *);
 int FUN_002b7bca(unsigned char *, unsigned int, int, unsigned char *);
 int FUN_002b9024(void);
 int FUN_002c424c(int, int, unsigned int);
-int FUN_002c6650(void);
+int asdOperatorNewC(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_002c424c. */
-/* Supplied declaration required: FUN_002c6650. */
+/* Supplied declaration required: asdOperatorNewC. */
 
 
 void FUN_003d0d1c(int *param_1,int param_2)
@@ -54,7 +54,7 @@ void FUN_003d0d1c(int *param_1,int param_2)
   temp_v0 = FUN_002a8764();
   temp_v5 = (unsigned int)*(unsigned char *)(temp_v0 + 0x910b);
   pbVar2 = (unsigned char *)(temp_v5 << 2);
-  FUN_002c6650();
+  asdOperatorNewC();
   temp_v3 = 0;
   if (temp_v5 != 0) {
     pbVar10 = pbVar2;

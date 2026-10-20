@@ -8,7 +8,7 @@ int FUN_001bd53c(int, int);
 int FUN_001d1438(...);
 int FUN_004638ac(int, int, int *);
 int FUN_004639e4(int);
-int aeabi_uidivmod(unsigned int, unsigned int);
+int __aeabi_uidivmod(unsigned int, unsigned int);
 int nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam(unsigned short *, unsigned int, unsigned int, unsigned char *);
 int rt_memcpy(int, unsigned char *, int);
 
@@ -42,7 +42,7 @@ extern unsigned char DAT_00647d80; /* 0x647d80 */
 extern int FUN_004616ac(int, unsigned short *, int *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004638ac. */
 /* Supplied declaration required: FUN_004639e4. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 extern int nw_snd_internal_Util_GetByteBySample(unsigned int, unsigned char);
 /* Supplied declaration required: nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam. */
 /* Supplied declaration required: rt_memcpy. */
@@ -104,7 +104,7 @@ FUN_00463e10(int param_1,int param_2,int param_3,unsigned int param_4,int param_
       return 1;
     }
     temp_v7 = *(int *)(temp_v26 + 0x18);
-    temp_v0 = aeabi_uidivmod(*(unsigned int *)(temp_v26 + 0x58),*(unsigned int *)(temp_v7 + 0x1c));
+    temp_v0 = __aeabi_uidivmod(*(unsigned int *)(temp_v26 + 0x58),*(unsigned int *)(temp_v7 + 0x1c));
     *(int *)(temp_v26 + 0x38) = temp_v0;
     (**(romwright_code **)(**(int **)(temp_v26 + 0x14) + 0x40))
               (*(int **)(temp_v26 + 0x14),
@@ -129,7 +129,7 @@ FUN_00463e10(int param_1,int param_2,int param_3,unsigned int param_4,int param_
       temp_v10 = *(int *)(temp_v7 + 0x24);
       temp_v12 = *(int *)(temp_v7 + 0x28);
     }
-    aeabi_uidivmod(*(unsigned int *)(temp_v26 + 0x58),*(unsigned int *)(temp_v7 + 0x1c));
+    __aeabi_uidivmod(*(unsigned int *)(temp_v26 + 0x58),*(unsigned int *)(temp_v7 + 0x1c));
     temp_v22 = temp_v4;
     if (*(char *)(temp_v0 + 0xb94) == '\x03') {
       temp_v22 = (unsigned int)(((unsigned long long)temp_v4 * 0x49249249 + 0x49249249) >> 0x22) * 0xe;
@@ -226,7 +226,7 @@ FUN_00463e10(int param_1,int param_2,int param_3,unsigned int param_4,int param_
           *(unsigned int *)(temp_v26 + 0x58) = temp_v2;
           temp_v15 = temp_v15 + 1;
           temp_v7 = *(int *)(temp_v26 + 0x18);
-          temp_v0 = aeabi_uidivmod(*(unsigned int *)(temp_v26 + 0x58),*(unsigned int *)(temp_v7 + 0x1c));
+          temp_v0 = __aeabi_uidivmod(*(unsigned int *)(temp_v26 + 0x58),*(unsigned int *)(temp_v7 + 0x1c));
           *(int *)(temp_v26 + 0x38) = temp_v0;
           (**(romwright_code **)(**(int **)(temp_v26 + 0x14) + 0x40))
                     (*(int **)(temp_v26 + 0x14),
@@ -252,7 +252,7 @@ FUN_00463e10(int param_1,int param_2,int param_3,unsigned int param_4,int param_
       }
       temp_v15 = temp_v15 + 1;
       temp_v7 = *(int *)(temp_v26 + 0x18);
-      temp_v0 = aeabi_uidivmod(*(unsigned int *)(temp_v26 + 0x58),*(unsigned int *)(temp_v7 + 0x1c));
+      temp_v0 = __aeabi_uidivmod(*(unsigned int *)(temp_v26 + 0x58),*(unsigned int *)(temp_v7 + 0x1c));
       *(int *)(temp_v26 + 0x38) = temp_v0;
       (**(romwright_code **)(**(int **)(temp_v26 + 0x14) + 0x40))
                 (*(int **)(temp_v26 + 0x14),

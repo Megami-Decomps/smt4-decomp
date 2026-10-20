@@ -48,7 +48,7 @@ typedef struct {
     unsigned int spD8; /* 0xd8: local_d8 */
 } param_1_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0023b4f4. */
 /* Supplied declaration required: FUN_0023b5e0. */
@@ -102,9 +102,9 @@ void FUN_0034bcf4(fn_0034bcf4_arg0 *param_1)
   unsigned int temp_v27;
   
   temp_v4 = -11.0f;
-  FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(*(int *)((int)param_1->field_0x18 + 0x40) + 8));
-  temp_v3 = DAT_0044ea00;
-  piVar6 = (int *)(DAT_0044ea00 + 0x12ac);
+  FUN_002c1b64(g_titleScene,*(unsigned int *)(*(int *)((int)param_1->field_0x18 + 0x40) + 8));
+  temp_v3 = g_titleScene;
+  piVar6 = (int *)(g_titleScene + 0x12ac);
   temp_v0 = *(int *)((int)param_1->field_0x1c + 0x18);
   temp_v1 = *piVar6;
   temp_v2 = piVar6[temp_v1 + 2];
@@ -114,7 +114,7 @@ void FUN_0034bcf4(fn_0034bcf4_arg0 *param_1)
     (**(romwright_code **)(temp_v3 + 0x12c8))();
     *(unsigned char *)(temp_v3 + 0x12c4) = 0;
   }
-  temp_v3 = DAT_0044ea00;
+  temp_v3 = g_titleScene;
   temp_v0 = FUN_002c5d80(1,0);
   piVar6 = (int *)(temp_v3 + 0x124c);
   temp_v1 = *piVar6;
@@ -170,9 +170,9 @@ void FUN_0034bcf4(fn_0034bcf4_arg0 *param_1)
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 4);
   FUN_0025b750();
-  FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(*(int *)((int)param_1->field_0x18 + 0x84) + 8));
-  temp_v3 = DAT_0044ea00;
-  piVar6 = (int *)(DAT_0044ea00 + 0x12ac);
+  FUN_002c1b64(g_titleScene,*(unsigned int *)(*(int *)((int)param_1->field_0x18 + 0x84) + 8));
+  temp_v3 = g_titleScene;
+  piVar6 = (int *)(g_titleScene + 0x12ac);
   temp_v0 = *(int *)((int)param_1->field_0x1c + 0x40);
   temp_v1 = piVar6[*piVar6 + 2];
   piVar6[*piVar6 + 2] = temp_v0;
@@ -189,8 +189,8 @@ void FUN_0034bcf4(fn_0034bcf4_arg0 *param_1)
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 8);
   FUN_0025b750();
-  temp_v3 = DAT_0044ea00;
-  piVar6 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v3 = g_titleScene;
+  piVar6 = (int *)(g_titleScene + 0x124c);
   temp_v0 = *piVar6;
   temp_v1 = piVar6[temp_v0 + 2];
   *piVar6 = temp_v0 - 1;
@@ -198,8 +198,8 @@ void FUN_0034bcf4(fn_0034bcf4_arg0 *param_1)
     (**(romwright_code **)(temp_v3 + 0x1268))();
     *(unsigned char *)(temp_v3 + 0x1264) = 0;
   }
-  temp_v3 = DAT_0044ea00;
-  piVar6 = (int *)(DAT_0044ea00 + 0x12ac);
+  temp_v3 = g_titleScene;
+  piVar6 = (int *)(g_titleScene + 0x12ac);
   temp_v0 = *piVar6;
   temp_v1 = piVar6[temp_v0 + 2];
   *piVar6 = temp_v0 - 1;

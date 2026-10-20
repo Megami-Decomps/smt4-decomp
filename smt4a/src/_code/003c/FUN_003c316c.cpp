@@ -1,43 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c316c` (_code @ 0x3c316c, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction order only: in the loop retail loads the key's high word (r1) before the low word (r0) */
+/* Finds the entry with the given id in the table's entry list; NULL if there is none. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00187180(int, int);
-int FUN_00192748(...);
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s16 id;
+    /* 0x0E */ u8 unk0E[2];
+} Entry; /* 0x10 */
 
-/* Supplied declaration required: FUN_00187180. */
-/* Supplied declaration required: FUN_00192748. */
-extern int FUN_00192798(void);
+extern void *dataTableGet(u64 key);
+extern u32 dataTableGetCount(void *table);
+extern Entry *dataTableGetEntries(void *table);
 
-
-int FUN_003c316c(int param_1)
-
+Entry *FUN_003c316c(s32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v4 = 0;
-  FUN_00187180(0x29,6);
-  temp_v0 = FUN_00192748();
-  if (0 < temp_v0) {
-    do {
-      temp_v1 = FUN_00187180(0x29,6);
-      temp_v2 = FUN_00192798();
-      temp_v3 = FUN_00192748(temp_v1);
-      if (((temp_v4 < temp_v3) && (temp_v2 = temp_v2 + temp_v4 * 0x10, temp_v2 != 0)) &&
-         (*(short *)(temp_v2 + 0xc) == param_1)) {
-        return temp_v2;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while ((int)temp_v4 < temp_v0);
-  }
-  return 0;
+    s32 i = 0;
+    s32 count = dataTableGetCount(dataTableGet(0x600000029ULL));
+
+    for (; i < count; i++) {
+        void *table = dataTableGet(0x600000029ULL);
+        Entry *entries = dataTableGetEntries(table);
+        u32 entryCount = dataTableGetCount(table);
+
+        if (i < entryCount) {
+            Entry *entry = &entries[i];
+
+            if (entry != NULL && entry->id == id) {
+                return entry;
+            }
+        }
+    }
+    return NULL;
 }
 
-} /* extern "C" */
+}

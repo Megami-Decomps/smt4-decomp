@@ -1,60 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036b9a8` (_code @ 0x36b9a8, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: hoisted constants 2 and 3 are in r5/r6 in the opposite order from retail */
+/* Sets the current object's four setting bytes from the raw values (mode, level, id, extra). */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_4_stack;
+typedef struct Settings {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u8 mode;
+    /* 0x09 */ u8 level;
+    /* 0x0A */ u8 id;
+    /* 0x0B */ u8 extra;
+} Settings;
 
-extern unsigned char DAT_005b3f94; /* 0x5b3f94 */
+typedef struct SettingsHolder {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ Settings *settings;
+} SettingsHolder;
 
+extern SettingsHolder g_asdCec;
 
-void FUN_0036b9a8(int param_1,int param_2,int param_3,int param_4)
-
+void FUN_0036b9a8(s32 mode, s32 level, s32 id, s32 extra)
 {
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_005b3f94 + 0x4));
-  if ((*(int *)((unsigned char *)&DAT_005b3f94 + 0x4)) != 0) {
-    if (param_1 == 0) {
-      *(unsigned char *)((*(int *)((unsigned char *)&DAT_005b3f94 + 0x4)) + 8) = 2;
+    Settings *settings = g_asdCec.settings;
+
+    if (settings == NULL) {
+        return;
     }
-    else if (param_1 == 1) {
-      *(unsigned char *)((*(int *)((unsigned char *)&DAT_005b3f94 + 0x4)) + 8) = 1;
+    switch (mode) {
+    case 0:
+        settings->mode = 2;
+        break;
+    case 1:
+        settings->mode = 1;
+        break;
+    case 2:
+        settings->mode = 3;
+        break;
     }
-    else if (param_1 == 2) {
-      *(unsigned char *)((*(int *)((unsigned char *)&DAT_005b3f94 + 0x4)) + 8) = 3;
+    switch (level) {
+    case 0:
+        settings->level = 1;
+        break;
+    case 1:
+        settings->level = 2;
+        break;
+    case 2:
+        settings->level = 3;
+        break;
+    case 3:
+        settings->level = 0;
+        break;
     }
-    if (param_2 == 0) {
-      *(unsigned char *)(temp_v0 + 9) = 1;
+    if (id == 0xFF) {
+        settings->id = 0xFF;
+    } else {
+        settings->id = id;
     }
-    else if (param_2 == 1) {
-      *(unsigned char *)(temp_v0 + 9) = 2;
+    if (extra == 0) {
+        settings->extra = 1;
+    } else {
+        settings->extra = extra + 1;
     }
-    else if (param_2 == 2) {
-      *(unsigned char *)(temp_v0 + 9) = 3;
-    }
-    else if (param_2 == 3) {
-      *(unsigned char *)(temp_v0 + 9) = 0;
-    }
-    if (param_3 == 0xff) {
-      *(unsigned char *)(temp_v0 + 10) = 0xff;
-    }
-    else {
-      *(char *)(temp_v0 + 10) = (char)param_3;
-    }
-    if (param_4 != 0) {
-      *(char *)(temp_v0 + 0xb) = (char)param_4 + '\x01';
-    }
-    else {
-      *(unsigned char *)(temp_v0 + 0xb) = 1;
-    }
-    return;
-  }
-  return;
 }
 
-} /* extern "C" */
+}

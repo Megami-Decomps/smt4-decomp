@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_0019de98(int, unsigned int);
 int FUN_0037b578(...);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_002ebce4(void);
 /* Supplied declaration required: FUN_0037b578. */
@@ -31,22 +31,22 @@ void FUN_0049d140(int param_1,unsigned int param_2,unsigned char param_3)
   *(unsigned char *)(param_1 + 5) = param_3;
   switch(param_2) {
   case 0:
-    FUN_001681cc(*(unsigned int *)(param_1 + 0x46c) & 0xffff);
+    sysPlaySe(*(unsigned int *)(param_1 + 0x46c) & 0xffff);
     FUN_0019de98(0,0xf4f4f4ff);
     break;
   case 2:
-    FUN_001681cc(0x106);
+    sysPlaySe(0x106);
     FUN_0019de98(0,0xf4f4f4ff);
     break;
   case 3:
-    FUN_001681cc(0x106);
+    sysPlaySe(0x106);
     temp_v0 = *(unsigned int *)(param_1 + 0xc);
     temp_v2 = 0;
     FUN_0037b578(temp_v0,temp_v2);
     break;
   case 4:
   case 6:
-    FUN_001681cc(0x107);
+    sysPlaySe(0x107);
     temp_v0 = *(unsigned int *)(param_1 + 0xc);
     temp_v2 = 1;
     FUN_0037b578(temp_v0,temp_v2);
@@ -54,7 +54,7 @@ void FUN_0049d140(int param_1,unsigned int param_2,unsigned char param_3)
   case 7:
   case 8:
   case 9:
-    FUN_001681cc(0x115);
+    sysPlaySe(0x115);
     FUN_0037b578(*(unsigned int *)(param_1 + 0xc),1);
     break;
   case 10:

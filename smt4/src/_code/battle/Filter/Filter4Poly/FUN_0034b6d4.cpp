@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_0023b49c(int *, unsigned int, unsigned int);
-int FUN_002bfe28(int, unsigned int);
-int FUN_002c222c(...);
-int FUN_002c5300(int, int, int, int, int);
+int mtx44Copy(int, unsigned int);
+int asdOperatorNew(...);
+int asdMemoryAlloc(int, int, int, int, int);
 int FUN_0034b884(int *);
 
 typedef int romwright_code(...);
@@ -18,13 +18,13 @@ typedef struct {
 
 extern unsigned char DAT_00420710; /* 0x420710 */
 extern unsigned char DAT_00420888; /* 0x420888 */
-extern unsigned char DAT_00420950; /* 0x420950 */
+extern unsigned char g_filter4PolyVtable; /* 0x420950 */
 
 /* Supplied declaration required: FUN_0023b49c. */
 extern unsigned int FUN_002a7bc0(void);
-/* Supplied declaration required: FUN_002bfe28. */
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: mtx44Copy. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0034b884. */
 
 
@@ -40,7 +40,7 @@ int * FUN_0034b6d4(int param_1,unsigned int param_2,int param_3)
   
   if (param_3 != 0) {
     piVar1 = (int *)0xc;
-    FUN_002c222c();
+    asdOperatorNew();
     if (piVar1 != (int *)0x0) {
       piVar1[2] = 0x3f800000;
       *piVar1 = (int)&DAT_00420888;
@@ -49,7 +49,7 @@ int * FUN_0034b6d4(int param_1,unsigned int param_2,int param_3)
   }
   else {
     piVar1 = (int *)0x20;
-    FUN_002c222c();
+    asdOperatorNew();
     if (piVar1 != (int *)0x0) {
       piVar1[2] = 0;
       *piVar1 = (int)&DAT_00420710;
@@ -57,7 +57,7 @@ int * FUN_0034b6d4(int param_1,unsigned int param_2,int param_3)
     }
   }
   piVar2 = (int *)0x20;
-  FUN_002c222c(0x20,param_2);
+  asdOperatorNew(0x20,param_2);
   if (piVar2 == (int *)0x0) {
     piVar2 = (int *)0x0;
   }
@@ -66,17 +66,17 @@ int * FUN_0034b6d4(int param_1,unsigned int param_2,int param_3)
     piVar2[2] = 0;
     piVar2[3] = 0;
     piVar2[4] = 0x3c23d70a;
-    *piVar2 = (int)&DAT_00420950;
+    *piVar2 = (int)&g_filter4PolyVtable;
     piVar2[7] = 0;
     piVar2[5] = (int)piVar1;
   }
   piVar2[7] = param_1;
   FUN_0023b49c(piVar2,param_2,*(unsigned int *)(param_1 + 0x1c));
   temp_v0 = 0x100;
-  FUN_002c5300(0x100,0x100,0,0x50,1);
+  asdMemoryAlloc(0x100,0x100,0,0x50,1);
   piVar2[1] = temp_v0;
   temp_v0 = 0x100;
-  FUN_002c5300(0x100,0x100,0,*(int *)(piVar2[7] + 0x2c) * 0x50,1);
+  asdMemoryAlloc(0x100,0x100,0,*(int *)(piVar2[7] + 0x2c) * 0x50,1);
   piVar2[6] = temp_v0;
   FUN_0034b884(piVar2);
   (**(romwright_code **)(*piVar2 + 0x10))(piVar2);
@@ -85,7 +85,7 @@ int * FUN_0034b6d4(int param_1,unsigned int param_2,int param_3)
     do {
       temp_v2 = piVar2[6];
       temp_v1 = FUN_002a7bc0();
-      FUN_002bfe28(temp_v2 + temp_v0 * 0x50,temp_v1);
+      mtx44Copy(temp_v2 + temp_v0 * 0x50,temp_v1);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < *(int *)(piVar2[7] + 0x2c));
   }

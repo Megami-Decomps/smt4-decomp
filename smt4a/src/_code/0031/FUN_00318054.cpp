@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 
 void FUN_00318054(void)
@@ -16,8 +16,8 @@ void FUN_00318054(void)
   int temp_v2;
   int *piVar4;
   
-  temp_v0 = DAT_0059dbb4;
-  piVar4 = (int *)(DAT_0059dbb4 + 0x12b8);
+  temp_v0 = g_renderCtx;
+  piVar4 = (int *)(g_renderCtx + 0x12b8);
   temp_v1 = *piVar4;
   temp_v2 = piVar4[temp_v1 + 2];
   *piVar4 = temp_v1 - 1;

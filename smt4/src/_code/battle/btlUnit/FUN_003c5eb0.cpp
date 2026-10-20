@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022a358(...);
 int FUN_0022a400(...);
 int FUN_0025c2ec(...);
-int FUN_0025c318(...);
+int asdListBoxAddItems(...);
 int FUN_0025c58c(...);
 int FUN_00262914(...);
 
@@ -37,12 +37,12 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 
 /* Supplied declaration required: FUN_0022a358. */
 /* Supplied declaration required: FUN_0022a400. */
 /* Supplied declaration required: FUN_0025c2ec. */
-/* Supplied declaration required: FUN_0025c318. */
+/* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_0025c58c. */
 /* Supplied declaration required: FUN_00262914. */
 
@@ -56,12 +56,12 @@ void FUN_003c5eb0(fn_003c5eb0_arg0 *param_1,int param_2)
   temp_v0 = *(unsigned int *)(param_2 + 0x5c);
   FUN_0025c58c(temp_v0,0x73,0);
   *(unsigned int *)&param_1->field_0x10 = temp_v0;
-  FUN_0025c318();
+  asdListBoxAddItems();
   FUN_0025c2ec(*(unsigned int *)&param_1->field_0x10,1);
   FUN_00262914(*(unsigned int *)&param_1->field_0x10,"Camera UpDown Menu");
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0,(*(unsigned int *)(DAT_004342c8 + 0x634) & 0x20) >> 5);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,1,(*(unsigned int *)(DAT_004342c8 + 0x634) & 0x40) >> 6);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,2,(*(unsigned int *)(DAT_004342c8 + 0x634) & 0x80) >> 7);
+  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0,(*(unsigned int *)(g_btlMain + 0x634) & 0x20) >> 5);
+  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,1,(*(unsigned int *)(g_btlMain + 0x634) & 0x40) >> 6);
+  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,2,(*(unsigned int *)(g_btlMain + 0x634) & 0x80) >> 7);
   FUN_0022a358(*(unsigned int *)&param_1->field_0x10,3,0xfffffff6,10);
   FUN_0022a358(*(unsigned int *)&param_1->field_0x10,4,0,10);
   FUN_0022a358(*(unsigned int *)&param_1->field_0x10,5,0xfffffc19,999);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int aeabi_uidivmod(int, unsigned int);
+extern unsigned int __aeabi_uidivmod(int, unsigned int);
 
 
 unsigned int nw_snd_internal_PoolImpl_CreateImpl(unsigned int *param_1,int param_2,int param_3,int param_4)
@@ -17,7 +17,7 @@ unsigned int nw_snd_internal_PoolImpl_CreateImpl(unsigned int *param_1,int param
   
   puVar3 = (unsigned int *)((param_2 + 3U) & 0xfffffffc);
   temp_v2 = (param_4 + 3U) & 0xfffffffc;
-  temp_v0 = aeabi_uidivmod(param_3 - ((int)puVar3 - param_2),temp_v2);
+  temp_v0 = __aeabi_uidivmod(param_3 - ((int)puVar3 - param_2),temp_v2);
   temp_v1 = 0;
   if (temp_v1 < temp_v0) {
     do {

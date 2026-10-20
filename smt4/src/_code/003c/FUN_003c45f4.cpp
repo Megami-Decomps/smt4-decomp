@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022a358(...);
 int FUN_0022a3a8(...);
 int FUN_0025c2ec(...);
-int FUN_0025c318(...);
+int asdListBoxAddItems(...);
 int FUN_0025c58c(...);
 int FUN_00262914(...);
 
@@ -48,7 +48,7 @@ extern unsigned int DAT_00435e04; /* 0x435e04 */
 /* Supplied declaration required: FUN_0022a358. */
 /* Supplied declaration required: FUN_0022a3a8. */
 /* Supplied declaration required: FUN_0025c2ec. */
-/* Supplied declaration required: FUN_0025c318. */
+/* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_0025c58c. */
 /* Supplied declaration required: FUN_00262914. */
 
@@ -62,7 +62,7 @@ void FUN_003c45f4(fn_003c45f4_arg0 *param_1,int param_2)
   temp_v0 = *(unsigned int *)(param_2 + 0x5c);
   FUN_0025c58c(temp_v0,0x73,0);
   *(unsigned int *)&param_1->field_0x10 = temp_v0;
-  FUN_0025c318();
+  asdListBoxAddItems();
   FUN_0025c2ec(*(unsigned int *)&param_1->field_0x10,1);
   FUN_00262914(*(unsigned int *)&param_1->field_0x10,"btl Panel Menu");
   FUN_0022a3a8(*(unsigned int *)&param_1->field_0x10,0,DAT_00435e00,0,0xff,0);

@@ -10,7 +10,7 @@ extern unsigned char DAT_005894e4; /* 0x5894e4 */
 extern unsigned char DAT_005894e5; /* 0x5894e5 */
 extern unsigned char DAT_005894e6; /* 0x5894e6 */
 extern unsigned char DAT_005894ec; /* 0x5894ec */
-extern unsigned char DAT_006433d0; /* 0x6433d0 */
+extern unsigned char g_dspsndState; /* 0x6433d0 */
 
 /* Supplied declaration required: FUN_001a089c. */
 extern void nn_snd_CTR_Dspsnd_Finalize(unsigned int, unsigned char);
@@ -23,7 +23,7 @@ void FUN_0016f3e4(void)
   if ((DAT_005894e4 & ~DAT_005894e5) != 0) {
     FUN_001a089c(&DAT_005894ec,1);
     DAT_005894e6 = 1;
-    nn_snd_CTR_Dspsnd_Finalize((unsigned int)&DAT_006433d0,1);
+    nn_snd_CTR_Dspsnd_Finalize((unsigned int)&g_dspsndState,1);
     DAT_005894e5 = 1;
   }
   return;

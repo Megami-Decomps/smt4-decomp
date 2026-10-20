@@ -14,8 +14,8 @@ int FUN_0027da30(int, int);
 int FUN_00297468(unsigned char [128], unsigned int *, int);
 int FUN_002bf694(unsigned char [128], unsigned int);
 int FUN_002c29d8(...);
-int FUN_002c415c(void);
-int FUN_002c4938(unsigned char [128], int);
+int asdMemFree(void);
+int memClear(unsigned char [128], int);
 int FUN_00338424(int);
 int FUN_00338458(int);
 int FUN_00339de0(int);
@@ -30,7 +30,7 @@ typedef struct {
     unsigned int sp130; /* 0x130: local_130 */
 } param_2_stack;
 
-extern unsigned int DAT_004342c8; /* 0x4342c8 */
+extern unsigned int g_btlMain; /* 0x4342c8 */
 
 /* Supplied declaration required: FUN_0023fbdc. */
 /* Supplied declaration required: FUN_0023fffc. */
@@ -46,8 +46,8 @@ extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002c29d8. */
 extern int FUN_002c2a04(unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_00338424. */
 /* Supplied declaration required: FUN_00338458. */
 /* Supplied declaration required: FUN_00339de0. */
@@ -68,17 +68,17 @@ void FUN_0023f500(unsigned int *param_1,int param_2)
   unsigned char temp_v4 [128];
   unsigned char temp_v5 [128];
   
-  FUN_002c4938(temp_v4,0x80);
+  memClear(temp_v4,0x80);
   temp_v0 = FUN_00240448(param_2);
   FUN_002bf694(temp_v4,temp_v0);
   temp_v2 = FUN_002402c4(param_2,temp_v4);
   if (temp_v2 != 0) {
     *param_1 = 0xb;
-    FUN_002c4938(temp_v5,0x80);
+    memClear(temp_v5,0x80);
     temp_v0 = FUN_00240448(param_2);
     FUN_002bf694(temp_v5,temp_v0);
     if (param_1[1] != 0) {
-      FUN_002c415c();
+      asdMemFree();
       param_1[1] = 0;
     }
     FUN_00297468(temp_v5,param_1 + 1,0);
@@ -96,7 +96,7 @@ void FUN_0023f500(unsigned int *param_1,int param_2)
     FUN_0033a144(param_2);
     FUN_00338424(param_2);
     FUN_00339de0(param_2);
-    FUN_003d6ffc(DAT_004342c8);
+    FUN_003d6ffc(g_btlMain);
     if ((*(char *)(param_2 + 0x44b7) == '\0') &&
        (((*(unsigned int *)(param_2 + 0xe0) & 0x2000000) != 0 || ((*puVar5 & 2) != 0)))) {
       temp_v2 = 4;

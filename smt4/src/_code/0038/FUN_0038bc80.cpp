@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_00123934. */
 /* Supplied declaration required: FUN_002a12d8. */
@@ -44,7 +44,7 @@ void FUN_0038bc80(unsigned char *param_1)
   temp_v2 = puVar3[1];
   *puVar2 = *puVar3;
   puVar2[1] = temp_v2;
-  temp_v1 = DAT_00432fc8;
+  temp_v1 = g_aocMain;
   FUN_00123934();
   FUN_0035398c(&temp_v3,temp_v1 + 0x7c);
   *puVar2 = temp_v3;

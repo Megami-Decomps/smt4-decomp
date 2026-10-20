@@ -15,7 +15,7 @@ int FUN_002bf4f8(...);
 int FUN_002bf538(void);
 int FUN_002bf818(...);
 int VectorSignedToFloat(...);
-int aeabi_idivmod(int, unsigned int);
+int __aeabi_idivmod(int, unsigned int);
 int rt_memcpy_w(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -28,7 +28,7 @@ typedef struct {
 extern unsigned char LAB_0039c030; /* 0x39c030 */
 extern unsigned int DAT_0044cdcc; /* 0x44cdcc */
 extern unsigned int DAT_0044cdd0; /* 0x44cdd0 */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002be5a4. */
@@ -42,7 +42,7 @@ extern unsigned int DAT_0044ea00; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bf538. */
 /* Supplied declaration required: FUN_002bf818. */
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -65,13 +65,13 @@ void FUN_0039bd04(int param_1)
   int temp_v9;
   
   temp_v0 = FUN_002c5d80(1,0);
-  FUN_002bee04(DAT_0044ea00,3,temp_v0);
+  FUN_002bee04(g_titleScene,3,temp_v0);
   FUN_002bf538();
   FUN_002bed3c();
   temp_v9 = param_1 + 0x9f8;
   temp_v0 = FUN_002beda4();
   FUN_002bf380(2,0x1c,0x1d,temp_v0,0,0xd3);
-  aeabi_idivmod(*(int *)(param_1 + 0x9f0) + 1,DAT_0044cdcc);
+  __aeabi_idivmod(*(int *)(param_1 + 0x9f0) + 1,DAT_0044cdcc);
   puVar6 = (unsigned int *)(param_1 + 0x9f4);
   *(int *)(param_1 + 0x9f0) = temp_v3;
   if (temp_v3 < 1) {
@@ -112,7 +112,7 @@ void FUN_0039bd04(int param_1)
   VectorSignedToFloat((temp_v1 - 0xe) + (int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002be5a4(4,DAT_0044cdd0,temp_v8);
-  FUN_002bedb0(DAT_0044ea00,3);
+  FUN_002bedb0(g_titleScene,3);
   FUN_002bf538();
   FUN_002bf818(temp_v9);
   if ((*(char *)(param_1 + 0x9ed) != '\0') && (*(char *)(temp_v9 + 0x8a) != '\0')) {

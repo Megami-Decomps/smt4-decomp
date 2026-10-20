@@ -2,16 +2,16 @@
 
 extern "C" {
 
-int FUN_002e6dac(int);
+int rt_malloc(int);
 
-/* Supplied declaration required: FUN_002e6dac. */
+/* Supplied declaration required: rt_malloc. */
 
 
 void FUN_00311470(unsigned int param_1,int param_2)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002e6dac(param_2 * 0xb8);
+  rt_malloc(param_2 * 0xb8);
   return;
 }
 

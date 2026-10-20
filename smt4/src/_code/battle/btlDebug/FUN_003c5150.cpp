@@ -7,10 +7,10 @@ extern "C" {
 int FUN_0022a3a8(...);
 int FUN_0022a400(...);
 int FUN_0025c2ec(unsigned int, int);
-int FUN_0025c318(void);
+int asdListBoxAddItems(void);
 int FUN_0025c58c(unsigned int, int, int);
 int FUN_00262914(unsigned int, unsigned char *);
-int FUN_002c0cc4(void);
+int dataTableGetEntries(void);
 int FUN_003bbf3c(void);
 int FUN_003bc670(void);
 
@@ -28,12 +28,12 @@ extern unsigned int DAT_00435dd8; /* 0x435dd8 */
 /* Supplied declaration required: FUN_0022a3a8. */
 /* Supplied declaration required: FUN_0022a400. */
 /* Supplied declaration required: FUN_0025c2ec. */
-/* Supplied declaration required: FUN_0025c318. */
+/* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_0025c58c. */
 /* Supplied declaration required: FUN_00262914. */
-extern unsigned int FUN_002c0c74(unsigned int);
-/* Supplied declaration required: FUN_002c0cc4. */
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+/* Supplied declaration required: dataTableGetEntries. */
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003bbf3c. */
 /* Supplied declaration required: FUN_003bc670. */
 
@@ -49,7 +49,7 @@ void FUN_003c5150(int param_1,int param_2)
   temp_v0 = *(unsigned int *)(param_2 + 0x5c);
   FUN_0025c58c(temp_v0,0x73,0);
   *(unsigned int *)(param_1 + 0x10) = temp_v0;
-  FUN_0025c318();
+  asdListBoxAddItems();
   FUN_0025c2ec(*(unsigned int *)(param_1 + 0x10),1);
   FUN_00262914(*(unsigned int *)(param_1 + 0x10),&LAB_003c5364);
   temp_v1 = (unsigned int)DAT_00434388;
@@ -73,9 +73,9 @@ void FUN_003c5150(int param_1,int param_2)
   FUN_0022a400(*(unsigned int *)(param_1 + 0x10),0xc);
   FUN_0022a400(*(unsigned int *)(param_1 + 0x10),0xd,(*puVar3 & 0x100000) >> 0x14);
   FUN_0022a400(*(unsigned int *)(param_1 + 0x10),0xe,*puVar3 >> 0x1f);
-  temp_v0 = FUN_002c0cec(0x1c,2);
-  FUN_002c0cc4();
-  temp_v0 = FUN_002c0c74(temp_v0);
+  temp_v0 = dataTableGet(0x1c,2);
+  dataTableGetEntries();
+  temp_v0 = dataTableGetCount(temp_v0);
   FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),10,0,0,temp_v0,0);
   return;
 }

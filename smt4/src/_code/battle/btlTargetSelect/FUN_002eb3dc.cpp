@@ -32,7 +32,7 @@ typedef struct {
 } param_8_stack;
 
 extern unsigned char LAB_002eb5ac; /* 0x2eb5ac */
-extern int *DAT_00439c60; /* 0x439c60 */
+extern int *g_btlTargetSelect; /* 0x439c60 */
 
 /* Supplied declaration required: FUN_002630e0. */
 extern unsigned int FUN_0027db08(unsigned int);
@@ -61,7 +61,7 @@ void FUN_002eb3dc(unsigned int *param_1,fn_002eb3dc_arg1 *param_2,unsigned int p
   unsigned int uStack_2c;
   unsigned int temp_v5;
   
-  piVar1 = DAT_00439c60;
+  piVar1 = g_btlTargetSelect;
   puStack_34 = param_1;
   temp_v4 = param_2;
   uStack_2c = param_3;

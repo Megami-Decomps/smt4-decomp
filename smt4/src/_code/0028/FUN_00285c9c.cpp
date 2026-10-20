@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002c09d0(...);
-int FUN_002c415c(unsigned int);
+int asdMemFree(unsigned int);
 int FUN_0033f6d8(void);
 int FUN_0033f764(unsigned int);
 int rt_memcpy_w(int, unsigned int, int);
@@ -14,7 +14,7 @@ extern int DAT_0043e2ac; /* 0x43e2ac */
 extern unsigned int DAT_0043e2b0; /* 0x43e2b0 */
 
 /* Supplied declaration required: FUN_002c09d0. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0033f6d8. */
 /* Supplied declaration required: FUN_0033f764. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -72,7 +72,7 @@ void FUN_00285c9c(void)
   rt_memcpy_w(temp_v4,DAT_0043e2b0,0x24d28);
   *(unsigned int *)(temp_v0 + 0x1f4dc) = temp_v2;
   FUN_0033f764(uStack_58);
-  FUN_002c415c(uStack_58);
+  asdMemFree(uStack_58);
   return;
 }
 

@@ -18,12 +18,12 @@ int FUN_002a9fdc(...);
 int FUN_002ae794(...);
 int FUN_002b8838(...);
 int FUN_002b8cc8(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bee58(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int memClear(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int FUN_003b7b58(...);
 
 extern int FUN_0018c0ec(...); /* 0x18c0ec */
@@ -49,12 +49,12 @@ extern unsigned int *FUN_002a8764(void);
 /* Supplied declaration required: FUN_002ae794. */
 /* Supplied declaration required: FUN_002b8838. */
 /* Supplied declaration required: FUN_002b8cc8. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_003b7b58. */
 
 
@@ -78,16 +78,16 @@ unsigned int * FUN_0029b990(void)
   }
   FUN_002898e4();
   temp_v2 = 0x100;
-  FUN_002c498c(0x100,0x100,0,0xd658,1);
+  asdMemAlloc(0x100,0x100,0,0xd658,1);
   pcVar5 = "Result CALC";
   DAT_0044dc20 = (unsigned int *)temp_v2;
-  FUN_002c5788("Result CALC",2,0,0,FUN_0018c0ec,FUN_001c88d8,0);
+  asdProcessCreateSimple("Result CALC",2,0,0,FUN_0018c0ec,FUN_001c88d8,0);
   puVar8 = (unsigned int *)(temp_v2 + 0xd644);
   *puVar8 = (unsigned int)pcVar5;
-  FUN_002c4a08("Result DrawUpLeft",0x80,0,0,FUN_001a16c0,0,0,pcVar5);
-  FUN_002c4a08("Result DrawUpRight",0xde,0,0,FUN_001a16c0,0,0,*puVar8);
+  taskCreateDraw("Result DrawUpLeft",0x80,0,0,FUN_001a16c0,0,0,pcVar5);
+  taskCreateDraw("Result DrawUpRight",0xde,0,0,FUN_001a16c0,0,0,*puVar8);
   pcVar5 = "Result DDRAW";
-  FUN_002c4a08("Result DDRAW",0xe6,0,0,&LAB_001c8974,0,0,*puVar8);
+  taskCreateDraw("Result DDRAW",0xe6,0,0,&LAB_001c8974,0,0,*puVar8);
   *(char **)(temp_v2 + 0xd64c) = pcVar5;
   FUN_003b7b58(temp_v2);
   *(unsigned char *)(temp_v2 + 0x3560) = 0;
@@ -168,7 +168,7 @@ LAB_00296874:
       *(unsigned int *)(temp_v2 + 0x34) = 0;
       *(unsigned int *)(temp_v2 + 0x18) = temp_v4;
       *(unsigned int *)(temp_v2 + 0x38) = 0;
-      FUN_002c4938(temp_v2 + 0x3c,0x70);
+      memClear(temp_v2 + 0x3c,0x70);
       *(unsigned int *)(temp_v2 + 200) = 5;
       *(unsigned int *)(temp_v2 + 0xcc) = 0;
       *(unsigned int *)(temp_v2 + 0xd0) = 0;
@@ -219,7 +219,7 @@ LAB_00296874:
             FUN_002a9fdc(temp_v5,0,1);
           }
           else {
-            FUN_002bd8e8(temp_v5,3,0);
+            timerStart(temp_v5,3,0);
           }
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 2);

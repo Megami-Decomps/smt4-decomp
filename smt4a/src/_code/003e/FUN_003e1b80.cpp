@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0013cab8(int, int, int);
-int FUN_00192798(void);
+int dataTableGetEntries(void);
 int FUN_001a6f60(...);
 int FUN_002e5924(int);
 int FUN_003e0cd4(unsigned int *, int);
@@ -46,8 +46,8 @@ extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_0013cab8. */
 extern int FUN_0013def0(unsigned int);
-extern int FUN_00192748(unsigned int);
-/* Supplied declaration required: FUN_00192798. */
+extern int dataTableGetCount(unsigned int);
+/* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_001a6f60. */
 /* Supplied declaration required: FUN_002e5924. */
 /* Supplied declaration required: FUN_003e0cd4. */
@@ -129,8 +129,8 @@ void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
         else {
           temp_v6 = param_2;
           temp_v2 = FUN_001a6f60(temp_v0,1);
-          temp_v3 = FUN_00192798();
-          temp_v4 = FUN_00192748(temp_v2);
+          temp_v3 = dataTableGetEntries();
+          temp_v4 = dataTableGetCount(temp_v2);
           temp_v1 = temp_v4;
           if (0 < temp_v4) {
             temp_v1 = temp_v6;
@@ -144,7 +144,7 @@ void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
             } while (temp_v6 < temp_v4);
           }
           FUN_001a6f60(temp_v0,0);
-          piVar3 = (int *)FUN_00192798();
+          piVar3 = (int *)dataTableGetEntries();
         }
 LAB_003e1f28:
         do {
@@ -173,8 +173,8 @@ LAB_003e1f28:
       temp_v0 = *(int *)(param_2 + 0x2290);
       if (temp_v0 != 0) {
         temp_v2 = FUN_001a6f60(temp_v0,1);
-        temp_v7 = FUN_00192798();
-        temp_v1 = FUN_00192748(temp_v2);
+        temp_v7 = dataTableGetEntries();
+        temp_v1 = dataTableGetCount(temp_v2);
         if (0 < temp_v1) {
           param_3 = *(int *)(param_2 + 0xf0);
         }
@@ -190,7 +190,7 @@ LAB_003e1f28:
           } while (temp_v6 < temp_v1);
         }
         FUN_001a6f60(temp_v0,0);
-        FUN_00192798();
+        dataTableGetEntries();
       }
       FUN_004f3ee0(DAT_00571508,1,0);
     }

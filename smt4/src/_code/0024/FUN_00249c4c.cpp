@@ -36,7 +36,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 extern int FUN_0024ecc0(fn_00249c4c_arg0 *, unsigned int);
 /* Supplied declaration required: FUN_002a4e18. */
@@ -44,7 +44,7 @@ extern int FUN_0024ecc0(fn_00249c4c_arg0 *, unsigned int);
 /* Supplied declaration required: FUN_002a86d4. */
 /* Supplied declaration required: FUN_002a880c. */
 /* Supplied declaration required: FUN_002ae898. */
-extern int FUN_002c08f0(fn_00249c4c_arg0 *);
+extern int jobGetWork(fn_00249c4c_arg0 *);
 extern int FUN_002c09d0(unsigned int);
 
 
@@ -58,7 +58,7 @@ void FUN_00249c4c(fn_00249c4c_arg0 *param_1,unsigned int param_2,int param_3)
   
   temp_v0 = FUN_002c09d0(0x522);
   if ((temp_v0 == 0) || (param_1 != (fn_00249c4c_arg0 *)0x0)) {
-    temp_v1 = FUN_002c08f0(param_1);
+    temp_v1 = jobGetWork(param_1);
     temp_v2 = *(int *)(temp_v1 + 0x84) != -1;
     temp_v0 = temp_v1;
     if (temp_v2) {
@@ -66,7 +66,7 @@ void FUN_00249c4c(fn_00249c4c_arg0 *param_1,unsigned int param_2,int param_3)
     }
     if (temp_v2 && temp_v0 != 0) {
       FUN_002ae898(*(unsigned int *)(temp_v1 + 0x10));
-      FUN_002a60cc(DAT_00433158,*(unsigned int *)(temp_v1 + 0x10),*(unsigned int *)(temp_v1 + 0x84));
+      FUN_002a60cc(g_aocSystem,*(unsigned int *)(temp_v1 + 0x10),*(unsigned int *)(temp_v1 + 0x84));
       *(unsigned int *)(temp_v1 + 0x84) = 0xffffffff;
       *(unsigned int *)(temp_v1 + 0x80) = 0;
     }
@@ -92,7 +92,7 @@ void FUN_00249c4c(fn_00249c4c_arg0 *param_1,unsigned int param_2,int param_3)
       }
       if (temp_v0 == 3) {
         FUN_002a880c(temp_v1,5,0);
-        temp_v0 = FUN_002c08f0(param_1);
+        temp_v0 = jobGetWork(param_1);
         *(unsigned int *)(temp_v0 + 0x78) = 1;
         *(unsigned int *)(temp_v0 + 0x4c) = *(unsigned int *)(temp_v0 + 0x34);
         *(unsigned int *)(temp_v0 + 0x50) = *(unsigned int *)(temp_v0 + 0x38);

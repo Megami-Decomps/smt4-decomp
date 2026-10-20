@@ -8,9 +8,9 @@ int FUN_00275bc8(int, unsigned int);
 int FUN_00359974(int, unsigned int, unsigned int, int);
 int FUN_0037b578(unsigned int, int);
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 extern unsigned int FUN_001ba3d4(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00359974. */
@@ -47,10 +47,10 @@ void FUN_003e600c(int param_1)
     *(int *)(param_1 + 0x18) = temp_v0;
     *(unsigned int *)(temp_v0 + 0x108) = 2;
     temp_v8 = *(unsigned int *)(param_1 + 0x20);
-    temp_v1 = FUN_00187180(0x4f,0);
-    temp_v0 = FUN_00192798();
+    temp_v1 = dataTableGet(0x4f,0);
+    temp_v0 = dataTableGetEntries();
     if (temp_v0 != 0) {
-      temp_v2 = FUN_00192748(temp_v1);
+      temp_v2 = dataTableGetCount(temp_v1);
       *(unsigned int *)(param_1 + 0x24) = 0;
       *(unsigned int *)(param_1 + 0x28) = 0;
       *(unsigned int *)(param_1 + 0x2c) = 0;

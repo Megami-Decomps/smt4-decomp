@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0010df48(void);
 int FUN_001113b0(unsigned int, unsigned int *);
 int FUN_00111724(unsigned int, unsigned short [2]);
-int FUN_002c5ba0(void);
+int asdGxCommandListCreate(void);
 
 typedef struct fn_00105a10_arg0 fn_00105a10_arg0;
 struct fn_00105a10_arg0 {
@@ -56,8 +56,8 @@ extern unsigned int DAT_004dae2c; /* 0x4dae2c */
 /* Supplied declaration required: FUN_0010df48. */
 /* Supplied declaration required: FUN_001113b0. */
 /* Supplied declaration required: FUN_00111724. */
-extern unsigned int FUN_002c2ff0(void);
-/* Supplied declaration required: FUN_002c5ba0. */
+extern unsigned int asdMemoryGetDefaultAllocator(void);
+/* Supplied declaration required: asdGxCommandListCreate. */
 
 
 void FUN_00105a10(fn_00105a10_arg0 *param_1)
@@ -78,7 +78,7 @@ void FUN_00105a10(fn_00105a10_arg0 *param_1)
   unsigned int temp_v10;
   unsigned int uStack_20;
   
-  DAT_00471c40 = FUN_002c2ff0();
+  DAT_00471c40 = asdMemoryGetDefaultAllocator();
   DAT_004dae28 = 1;
   DAT_004dae2c = 0x280;
   temp_v6 = 0;
@@ -93,10 +93,10 @@ void FUN_00105a10(fn_00105a10_arg0 *param_1)
     temp_v4[0] = param_1->field_0x84;
   }
   temp_v8 = 0x702;
-  temp_v0 = FUN_002c2ff0();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   FUN_00111724(temp_v0,temp_v4);
   DAT_00464bb4 = temp_v0;
-  temp_v0 = FUN_002c2ff0();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   FUN_00111724(temp_v0,temp_v4);
   DAT_004dadb0 = 0x100;
   DAT_004dadb4 = 0x100;
@@ -109,7 +109,7 @@ void FUN_00105a10(fn_00105a10_arg0 *param_1)
     DAT_004dade8 = param_1->field_0x88;
   }
   DAT_00464bb8 = temp_v0;
-  temp_v0 = FUN_002c2ff0();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   FUN_001113b0(temp_v0,&DAT_004dadb0);
   DAT_004dadec = 0x100;
   DAT_004dadf0 = 0x100;
@@ -118,15 +118,15 @@ void FUN_00105a10(fn_00105a10_arg0 *param_1)
   DAT_004dae1c = 0x100;
   DAT_004dae00 = 10;
   DAT_00464b7c = temp_v0;
-  temp_v0 = FUN_002c2ff0();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   FUN_001113b0(temp_v0,&DAT_004dadec);
   temp_v2 = 0;
   DAT_00464b80 = temp_v0;
   do {
     temp_v1 = temp_v2 * 3;
-    FUN_002c5ba0();
+    asdGxCommandListCreate();
     (&DAT_004dad88)[temp_v2 * 6] = temp_v1;
-    FUN_002c5ba0();
+    asdGxCommandListCreate();
     *(int *)(temp_v2 * 0x18 + 0x4dad8c) = temp_v1;
     FUN_0010df48();
     temp_v3 = temp_v2 + 1;

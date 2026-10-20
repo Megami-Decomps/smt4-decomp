@@ -5,7 +5,7 @@ extern "C" {
 int FUN_001656e0(unsigned int, int);
 int FUN_0016572c(unsigned int, int);
 
-extern int FUN_00163e40(unsigned int);
+extern int jobIsValid(unsigned int);
 extern int FUN_00165058(unsigned int);
 /* Supplied declaration required: FUN_001656e0. */
 /* Supplied declaration required: FUN_0016572c. */
@@ -26,7 +26,7 @@ unsigned int FUN_002e536c(int *param_1)
     if (temp_v1 < *(int *)(temp_v2 + 0x44)) {
       do {
         temp_v3 = temp_v2 + temp_v1 * 4;
-        temp_v0 = FUN_00163e40(*(unsigned int *)(temp_v3 + 4));
+        temp_v0 = jobIsValid(*(unsigned int *)(temp_v3 + 4));
         if ((temp_v0 != 0) && (temp_v0 = FUN_00165058(*(unsigned int *)(temp_v3 + 4)), temp_v0 != 4)) {
           FUN_001656e0(*(unsigned int *)(temp_v3 + 4),0);
         }
@@ -36,7 +36,7 @@ unsigned int FUN_002e536c(int *param_1)
     temp_v1 = 0;
     do {
       temp_v3 = temp_v2 + temp_v1 * 4;
-      temp_v0 = FUN_00163e40(*(unsigned int *)(temp_v3 + 0x4c));
+      temp_v0 = jobIsValid(*(unsigned int *)(temp_v3 + 0x4c));
       if (temp_v0 != 0) {
         FUN_0016572c(*(unsigned int *)(temp_v3 + 0x4c),0);
       }

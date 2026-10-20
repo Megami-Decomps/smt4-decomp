@@ -9,7 +9,7 @@ int FUN_002ae898(int, unsigned int);
 int FUN_002b06c4(void);
 int FUN_002b9024(void);
 
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 extern int DAT_0044e15c; /* 0x44e15c */
 extern int DAT_0044e160; /* 0x44e160 */
 
@@ -75,7 +75,7 @@ void FUN_002958f8(unsigned int param_1,int param_2)
   temp_v3 = DAT_0044e15c;
   if (temp_v2 != 0) {
     FUN_002ae898(0x17,param_1);
-    FUN_002a60cc(DAT_00433158,0x17,param_1);
+    FUN_002a60cc(g_aocSystem,0x17,param_1);
     temp_v3 = DAT_0044e15c;
   }
   *(unsigned char *)(temp_v3 + param_1) = 0;

@@ -13,7 +13,7 @@ int FUN_003adc20(unsigned int);
 int FUN_003ae2ec(unsigned int, unsigned int, unsigned int);
 int FUN_003ae868(unsigned int);
 
-extern int DAT_0043427c; /* 0x43427c */
+extern int g_btlScriptUnit; /* 0x43427c */
 extern unsigned int DAT_00434290; /* 0x434290 */
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 
@@ -100,7 +100,7 @@ joined_r0x003ca0e4:
   case 1:
     temp_v2 = 5;
     temp_v1 = *(int *)(*param_1 + 0x84);
-    temp_v1 = DAT_0043427c + temp_v1 * 0xf1c;
+    temp_v1 = g_btlScriptUnit + temp_v1 * 0xf1c;
     break;
   case 2:
   case 3:
@@ -109,11 +109,11 @@ joined_r0x003ca0e4:
     if (temp_v1 == 0) {
       temp_v2 = 7;
       temp_v1 = *(int *)(*param_1 + 0x84);
-      temp_v1 = DAT_0043427c + temp_v1 * 0xf1c;
+      temp_v1 = g_btlScriptUnit + temp_v1 * 0xf1c;
       break;
     }
     temp_v2 = 5;
-    temp_v1 = DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c;
+    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
     break;
   case 4:
   case 0xb:
@@ -128,11 +128,11 @@ joined_r0x003ca0e4:
     param_2[0x168] = (int)temp_v0;
     if ((int)temp_v0 != 7) {
       temp_v2 = 5;
-      temp_v1 = DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c;
+      temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
       break;
     }
     temp_v2 = 0xb;
-    temp_v1 = DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c;
+    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
     break;
   case 8:
     temp_v1 = (int)*(short *)(param_2[10] + 0x14e);
@@ -142,22 +142,22 @@ joined_r0x003ca0e4:
       temp_v1 = FUN_002cf124();
       if (temp_v1 != 0) {
         temp_v2 = 5;
-        temp_v1 = DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c;
+        temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
         break;
       }
     }
     temp_v2 = 7;
-    temp_v1 = DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c;
+    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
     break;
   case 9:
   case 10:
   case 0xd:
     temp_v2 = 7;
-    temp_v1 = DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c;
+    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
     break;
   case 0xe:
     temp_v2 = 5;
-    temp_v1 = DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c;
+    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
   }
   *(unsigned char *)(temp_v1 + 9) = temp_v2;
   return 1;

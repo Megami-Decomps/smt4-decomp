@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp90; /* 0x90: local_90 */
 } param_1_stack;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0014e8f4. */
 /* Supplied declaration required: FUN_002b90f8. */
@@ -50,7 +50,7 @@ void FUN_002a8a58(unsigned int *param_1)
     param_1 = temp_v3;
   }
   FUN_0014e8f4(temp_v0);
-  FUN_002bfe20(&temp_v1,DAT_0044ea00);
+  FUN_002bfe20(&temp_v1,g_titleScene);
   *param_1 = temp_v1;
   param_1[1] = uStack_8c;
   param_1[2] = uStack_88;
@@ -68,7 +68,7 @@ void FUN_002a8a58(unsigned int *param_1)
   param_1[0xe] = uStack_58;
   param_1[0xf] = uStack_54;
   nn_math_ARMv6_MTX44MultAsm(temp_v0,param_1);
-  FUN_002b90f8(DAT_0044ea00,temp_v0);
+  FUN_002b90f8(g_titleScene,temp_v0);
   return;
 }
 

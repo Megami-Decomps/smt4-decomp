@@ -1,31 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035cfa0` (_code @ 0x35cfa0, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Starts the new scene: records the current scrGetArg value and (re)initializes the transition state with FUN_002360dc(1); returns 1. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e342c(unsigned int *, unsigned int);
+typedef struct SceneState {
+    /* 0x00 */ u8 unk00[0x5C];
+    /* 0x5C */ u32 value;
+    /* 0x60 */ u8 unk60[4];
+    /* 0x64 */ u8 transition[1];
+} SceneState;
 
-extern unsigned int DAT_005f1658; /* 0x5f1658 */
-extern unsigned int DAT_005f1660; /* 0x5f1660 */
+extern SceneState g_gameState;
 
-extern unsigned int FUN_00236038(void);
-extern unsigned int FUN_002360dc(unsigned int);
-/* Supplied declaration required: FUN_002e342c. */
+extern u32 scrGetArg(void);
+extern u32 FUN_002360dc(u32 arg);
+extern void FUN_002e342c(void *transition, u32 value);
 
-
-unsigned int FUN_0035cfa0(void)
-
+u32 FUN_0035cfa0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_00236038();
-  temp_v1 = FUN_002360dc(1);
-  DAT_005f1658 = temp_v0;
-  FUN_002e342c(&DAT_005f1660,temp_v1);
-  return 1;
+    u32 value = scrGetArg();
+    u32 transition = FUN_002360dc(1);
+
+    g_gameState.value = value;
+    FUN_002e342c(g_gameState.transition, transition);
+    return 1;
 }
 
-} /* extern "C" */
+}

@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_002e6e14(int);
 int FUN_00307a28(int, int, int, int *);
-int FUN_00307a5c(int *);
-int FUN_00307a6a(...);
+int vectorSize24A(int *);
+int vecCount24b(...);
 int FUN_0030c884(...);
 int FUN_0030d09c(...);
 int FUN_0030fd10(int *, int, int);
@@ -18,16 +18,16 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern int FUN_002e6dac(void);
+extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00307a28. */
 extern int FUN_00307a4a(unsigned int, int *);
-/* Supplied declaration required: FUN_00307a5c. */
-/* Supplied declaration required: FUN_00307a6a. */
+/* Supplied declaration required: vectorSize24A. */
+/* Supplied declaration required: vecCount24b. */
 /* Supplied declaration required: FUN_0030c884. */
 /* Supplied declaration required: FUN_0030d09c. */
 /* Supplied declaration required: FUN_0030fd10. */
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 void FUN_00133db6(int *param_1,int param_2,unsigned int param_3)
@@ -42,8 +42,8 @@ void FUN_00133db6(int *param_1,int param_2,unsigned int param_3)
   int temp_v5;
   int temp_v6;
   
-  temp_v0 = FUN_00307a6a();
-  temp_v1 = FUN_00307a5c(param_1);
+  temp_v0 = vecCount24b();
+  temp_v1 = vectorSize24A(param_1);
   if (temp_v1 < temp_v0) {
     temp_v5 = param_1[1];
     temp_v4 = temp_v5 - 0x18;
@@ -57,18 +57,18 @@ void FUN_00133db6(int *param_1,int param_2,unsigned int param_3)
     FUN_0030c884(param_2,param_3);
   }
   else {
-    temp_v2 = FUN_00307a5c(param_1);
+    temp_v2 = vectorSize24A(param_1);
     temp_v4 = FUN_00307a4a(temp_v2,param_1);
-    temp_v5 = FUN_002e6dac();
+    temp_v5 = rt_malloc();
     FUN_00307a28(*param_1,param_2,temp_v5,param_1);
-    temp_v3 = aeabi_idivmod(param_2 - *param_1,0x18);
+    temp_v3 = __aeabi_idivmod(param_2 - *param_1,0x18);
     FUN_0030d09c(param_1,temp_v3 * 0x18 + temp_v5,param_3);
-    temp_v3 = aeabi_idivmod(param_2 - *param_1,0x18);
+    temp_v3 = __aeabi_idivmod(param_2 - *param_1,0x18);
     FUN_00307a28(param_2,param_1[1],temp_v3 * 0x18 + temp_v5 + 0x18,param_1);
-    temp_v3 = FUN_00307a5c(param_1);
+    temp_v3 = vectorSize24A(param_1);
     FUN_0030fd10(param_1,*param_1,param_1[1]);
     temp_v6 = *param_1;
-    FUN_00307a6a(param_1);
+    vecCount24b(param_1);
     FUN_002e6e14(temp_v6);
     *param_1 = temp_v5;
     param_1[2] = temp_v4 * 0x18 + temp_v5;

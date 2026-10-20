@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_00162790(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00169a1c(int, int, int, int);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_00184310(void);
@@ -30,7 +30,7 @@ extern unsigned char LAB_003f66d0; /* 0x3f66d0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00169a1c. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -63,7 +63,7 @@ void FUN_003f6424(unsigned int param_1,int param_2,unsigned int param_3,int para
   iStack_30 = param_2;
   temp_v9 = param_3;
   iStack_28 = param_4;
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_001835b4(2,0x31,0x7b,param_4,param_5,param_6);
   FUN_001835b4(2,0x31,0x7c,param_4,param_5,param_6);
   temp_v3 = FUN_001834a4(0x31,0x7d);

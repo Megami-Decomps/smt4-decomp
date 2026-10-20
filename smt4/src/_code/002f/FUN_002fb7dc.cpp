@@ -14,8 +14,8 @@ int FUN_00281784(void);
 int FUN_002d508c(int);
 int VectorSignedToFloat(int, int);
 
-extern int DAT_00447060; /* 0x447060 */
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapMainState; /* 0x447060 */
+extern int g_lmapScene; /* 0x447e88 */
 extern unsigned int DAT_0049f920; /* 0x49f920 */
 extern unsigned char DAT_0049f934; /* 0x49f934 */
 extern unsigned char DAT_0049fb46; /* 0x49fb46 */
@@ -44,14 +44,14 @@ unsigned int FUN_002fb7dc(void)
   unsigned int in_fpscr;
   float temp_v5;
   
-  temp_v0 = DAT_00447060;
-  switch(*(unsigned int *)(DAT_00447060 + 0x18)) {
+  temp_v0 = g_lmapMainState;
+  switch(*(unsigned int *)(g_lmapMainState + 0x18)) {
   case 0:
-    puVar6 = (unsigned int *)(DAT_00447060 + 0x28);
-    temp_v3 = *(unsigned int *)(DAT_00447e88 + 0x1c);
-    temp_v4 = *(unsigned int *)(DAT_00447e88 + 0x20);
-    temp_v1 = *(unsigned int *)(DAT_00447e88 + 0x24);
-    *(unsigned int *)(DAT_00447060 + 0x20) = temp_v3;
+    puVar6 = (unsigned int *)(g_lmapMainState + 0x28);
+    temp_v3 = *(unsigned int *)(g_lmapScene + 0x1c);
+    temp_v4 = *(unsigned int *)(g_lmapScene + 0x20);
+    temp_v1 = *(unsigned int *)(g_lmapScene + 0x24);
+    *(unsigned int *)(g_lmapMainState + 0x20) = temp_v3;
     *(unsigned int *)(temp_v0 + 0x24) = temp_v4;
     *puVar6 = temp_v1;
     *(unsigned int *)(temp_v0 + 0x2c) = temp_v3;
@@ -68,11 +68,11 @@ unsigned int FUN_002fb7dc(void)
     *(unsigned int *)(temp_v0 + 0x1c) = 0;
     break;
   case 1:
-    FUN_002d508c(DAT_00447060);
+    FUN_002d508c(g_lmapMainState);
     temp_v2 = *(int *)(temp_v0 + 0x1c) + 1;
     *(int *)(temp_v0 + 0x1c) = temp_v2;
     temp_v5 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(float *)(DAT_00447e88 + 0x20) =
+    *(float *)(g_lmapScene + 0x20) =
          *(float *)(temp_v0 + 0x24) +
          (*(float *)(temp_v0 + 0x30) - *(float *)(temp_v0 + 0x24)) * temp_v5 * 0.033333335f;
     if (*(int *)(temp_v0 + 0x1c) >= 0x1e) {
@@ -84,13 +84,13 @@ unsigned int FUN_002fb7dc(void)
     }
     break;
   case 2:
-    FUN_002d508c(DAT_00447060);
+    FUN_002d508c(g_lmapMainState);
     break;
   case 5:
-    *(unsigned int *)(DAT_00447060 + 0x90) = 0x43480000;
+    *(unsigned int *)(g_lmapMainState + 0x90) = 0x43480000;
     FUN_00266a2c();
-    temp_v0 = DAT_00447060;
-    *(unsigned char *)(DAT_00447060 + 0xb) = 0;
+    temp_v0 = g_lmapMainState;
+    *(unsigned char *)(g_lmapMainState + 0xb) = 0;
     *(unsigned int *)(temp_v0 + 0xec) = *(unsigned int *)(temp_v0 + 0xec) & 0xfffffffd;
     FUN_00281784();
     FUN_00266584(*(unsigned int *)(temp_v0 + 0x40));

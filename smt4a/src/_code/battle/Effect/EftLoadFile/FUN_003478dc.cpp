@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00163060(...);
-int FUN_0019a5a0(...);
+int asdMemoryAllocTracked(...);
+int asdMemFree(...);
 int FUN_0023aa50(...);
 int FUN_0023aa8c(...);
 int FUN_0023aac8(...);
 int FUN_0023aca0(...);
-int FUN_002e6354(void);
+int sysMemClear(void);
 int FUN_002efbb8(...);
 int FUN_0030ea58(int, unsigned char *);
 int FUN_00389cf0(...);
@@ -61,14 +61,14 @@ extern unsigned char LAB_003480c4; /* 0x3480c4 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0023aa50. */
 /* Supplied declaration required: FUN_0023aa8c. */
 /* Supplied declaration required: FUN_0023aac8. */
 /* Supplied declaration required: FUN_0023aca0. */
-extern int FUN_002e3390(int);
-/* Supplied declaration required: FUN_002e6354. */
+extern int wstrlen(int);
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002efbb8. */
 /* Supplied declaration required: FUN_0030ea58. */
 extern unsigned int FUN_0031b53c(int);
@@ -144,8 +144,8 @@ unsigned int FUN_003478dc(unsigned int param_1,char *param_2)
   temp_v3 = 0x100;
   temp_v49 = param_1;
   pcStack_28 = param_2;
-  FUN_00163060();
-  FUN_002e6354();
+  asdMemoryAllocTracked();
+  sysMemClear();
   temp_v1 = *param_2;
   temp_v14 = temp_v1 == 'V';
   if (temp_v14) {
@@ -323,7 +323,7 @@ LAB_00347c88:
       }
       do {
         temp_v11 = temp_v4 + temp_v12 * 0x28;
-        temp_v5 = FUN_002e3390(temp_v11 + 0x204);
+        temp_v5 = wstrlen(temp_v11 + 0x204);
         if (temp_v5 >= 3) {
           temp_v11 = temp_v11 + temp_v5;
           temp_v6 = temp_v11 + 0x201;
@@ -359,7 +359,7 @@ LAB_00347c88:
     } while (temp_v13 < *(int *)(param_2 + 0x10));
   }
   temp_v12 = 0x100;
-  FUN_00163060(0x100,0x100,0,0x140,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x140,1);
   rt_memcpy_w(temp_v12,param_2 + 0xa4,*(int *)(param_2 + 0xc) * 0x14);
   if (temp_v2) {
     temp_v13 = 0;
@@ -510,8 +510,8 @@ LAB_00347c88:
   FUN_0023aca0(temp_v49,&temp_v23);
   FUN_0023aa50(temp_v49,&temp_v31);
   FUN_0023aa8c(temp_v49,&temp_v39);
-  FUN_0019a5a0(temp_v3);
-  FUN_0019a5a0(temp_v12);
+  asdMemFree(temp_v3);
+  asdMemFree(temp_v12);
   return temp_v49;
 }
 

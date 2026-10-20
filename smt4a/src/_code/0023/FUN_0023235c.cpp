@@ -3,14 +3,14 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern unsigned char DAT_005b3274;
+extern unsigned char g_handlerTable;
 
 void FUN_0023235c(int param_1)
 
 {
 /* irregular: 2 native warning(s); review required */
   romwright_code *UNRECOVERED_JUMPTABLE;
-  unsigned char *p = &DAT_005b3274 + (unsigned int)*(unsigned short *)(param_1 + 4) * 0x44;
+  unsigned char *p = &g_handlerTable + (unsigned int)*(unsigned short *)(param_1 + 4) * 0x44;
   
   UNRECOVERED_JUMPTABLE = *(romwright_code **)(p + 0x1c);
   if (UNRECOVERED_JUMPTABLE != (romwright_code *)0x0) {

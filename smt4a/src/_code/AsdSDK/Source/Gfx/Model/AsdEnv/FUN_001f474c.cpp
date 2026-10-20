@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001642e4(unsigned int, int, int, int);
 int FUN_00178b04(int, unsigned char *, int);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 int FUN_003168b8(void);
 
 typedef struct fn_001f474c_arg1 fn_001f474c_arg1;
@@ -30,10 +30,10 @@ extern unsigned char DAT_00636d20; /* 0x636d20 */
 
 /* Supplied declaration required: FUN_001642e4. */
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003168b8. */
-extern int FUN_0034101c(fn_001f474c_arg1 *);
-extern int FUN_0036baec(fn_001f474c_arg1 *);
+extern int asdModelGetSlotArray2(fn_001f474c_arg1 *);
+extern int asdModelGetSlotArray1(fn_001f474c_arg1 *);
 
 
 void FUN_001f474c(unsigned int param_1,fn_001f474c_arg1 *param_2)
@@ -47,17 +47,17 @@ void FUN_001f474c(unsigned int param_1,fn_001f474c_arg1 *param_2)
   int temp_v2;
   int temp_v3;
   
-  FUN_002e6354((int)param_2 * 0x284 + 0x635900,0x284);
-  FUN_002e6354((int)param_2 * 0x284 + 0x635e08,0x284);
-  FUN_002e6354((int)param_2 * 0x284 + 0x636310,0x284);
-  FUN_002e6354((int)param_2 * 0x284 + 0x636818,0x284);
+  sysMemClear((int)param_2 * 0x284 + 0x635900,0x284);
+  sysMemClear((int)param_2 * 0x284 + 0x635e08,0x284);
+  sysMemClear((int)param_2 * 0x284 + 0x636310,0x284);
+  sysMemClear((int)param_2 * 0x284 + 0x636818,0x284);
   temp_v0 = (int)param_2 * 0x14;
   *(unsigned int *)(&DAT_00636d20 + temp_v0) = 0;
   *(unsigned int *)(temp_v0 + 0x636d24) = 0;
   *(unsigned int *)(temp_v0 + 0x636d28) = 0;
   *(unsigned int *)(temp_v0 + 0x636d2c) = 0;
   *(unsigned int *)(temp_v0 + 0x636d30) = 0;
-  temp_v1 = FUN_0036baec(param_2);
+  temp_v1 = asdModelGetSlotArray1(param_2);
   piVar3 = *(int **)(temp_v1 + 0x18);
   temp_v2 = 1;
   temp_v0 = (*(int *)(temp_v1 + 0x1c) - (int)piVar3) >> 2;
@@ -72,7 +72,7 @@ void FUN_001f474c(unsigned int param_1,fn_001f474c_arg1 *param_2)
     } while (temp_v2 < temp_v0 + 1);
   }
   *(unsigned int *)(temp_v1 + 0x1c) = *(unsigned int *)(temp_v1 + 0x18);
-  temp_v1 = FUN_0034101c(param_2);
+  temp_v1 = asdModelGetSlotArray2(param_2);
   temp_v2 = 1;
   piVar3 = *(int **)(temp_v1 + 0x18);
   temp_v0 = (*(int *)(temp_v1 + 0x1c) - (int)piVar3) >> 2;

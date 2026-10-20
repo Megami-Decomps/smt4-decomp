@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_0019ea64(...);
 int FUN_0022677c(...);
 int FUN_003fd63c(...);
@@ -29,11 +29,11 @@ extern unsigned char LAB_002bd4f8; /* 0x2bd4f8 */
 extern unsigned char LAB_0031619c; /* 0x31619c */
 extern unsigned char LAB_003161b4; /* 0x3161b4 */
 extern unsigned char LAB_00358a40; /* 0x358a40 */
-extern unsigned int *DAT_0056fd30; /* 0x56fd30 */
+extern unsigned int *g_tmnl; /* 0x56fd30 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0019ea64. */
 /* Supplied declaration required: FUN_0022677c. */
@@ -51,8 +51,8 @@ void FUN_0027fdb8(unsigned int *param_1)
   unsigned char *puVar3;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x604,1);
-  DAT_0056fd30 = puVar1;
+  asdMemoryAllocTracked(0x100,0x100,0,0x604,1);
+  g_tmnl = puVar1;
   FUN_003fd63c(0x465,0,1);
   *(unsigned char *)((int)puVar1 + 5) = 1;
   puVar1[4] = 0;
@@ -100,11 +100,11 @@ void FUN_0027fdb8(unsigned int *param_1)
     FUN_0022677c(0,0xff);
   }
   puVar3 = &LAB_0027ffd8;
-  FUN_0014e38c(&LAB_0027ffd8,4,0,0,FUN_0027e0d8,&LAB_0031619c,0);
+  asdProcessCreateSimple(&LAB_0027ffd8,4,0,0,FUN_0027e0d8,&LAB_0031619c,0);
   *puVar1 = (unsigned int)puVar3;
-  FUN_0015155c(&LAB_0027ffe4,0x77,0,0,&LAB_002bd4f8,0,0,puVar3);
-  FUN_0015155c(&LAB_0027ffe4,0xd3,0,0,&LAB_00358a40,0,0,*puVar1);
-  FUN_0015155c(&LAB_0027fff4,0xeb,0,0,&LAB_003161b4,0,0,*puVar1);
+  taskCreateDraw(&LAB_0027ffe4,0x77,0,0,&LAB_002bd4f8,0,0,puVar3);
+  taskCreateDraw(&LAB_0027ffe4,0xd3,0,0,&LAB_00358a40,0,0,*puVar1);
+  taskCreateDraw(&LAB_0027fff4,0xeb,0,0,&LAB_003161b4,0,0,*puVar1);
   return;
 }
 

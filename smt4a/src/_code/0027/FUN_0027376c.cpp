@@ -1,29 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027376c` (_code @ 0x27376c, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register naming only: retail uses r1 for the global pointer and r2 for the index temp (swapped here) */
+/* Marks the slot's request as pending and kicks it off, if the slot has one. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0019c8c0(unsigned int);
+typedef struct Request {
+    /* 0x00 */ u8 unk00[0x5C];
+    /* 0x5C */ u32 handle;
+    /* 0x60 */ u8 pending;
+    /* 0x61 */ u8 unk61[3];
+} Request; /* 0x64 */
 
-extern int DAT_00580c8c; /* 0x580c8c */
+typedef struct RequestTable {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ Request requests[1];
+} RequestTable;
 
-/* Supplied declaration required: FUN_0019c8c0. */
+extern RequestTable *DAT_00580c8c;
 
+extern void FUN_0019c8c0(u32 handle);
 
-void FUN_0027376c(int param_1)
-
+void FUN_0027376c(s32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = DAT_00580c8c + param_1 * 100;
-  if (*(int *)(temp_v0 + 0x68) != 0) {
-    *(unsigned char *)(temp_v0 + 0x6c) = 1;
-    FUN_0019c8c0(*(unsigned int *)(temp_v0 + 0x68));
-    return;
-  }
-  return;
+    Request *request = &DAT_00580c8c->requests[index];
+
+    if (request->handle != 0) {
+        request->pending = 1;
+        FUN_0019c8c0(request->handle);
+    }
 }
 
-} /* extern "C" */
+}

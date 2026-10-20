@@ -1,90 +1,85 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049ea54` (_code @ 0x49ea54, 0x198 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only: retail stores the entry count (r0) before loading screen->index; built stores the copy (r1) after the load */
+/* Opens the entry screen: validates the resources, loads the selected entry of table 0x46 and starts the intro sequence. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0018206c(int, int);
-int FUN_001846d0(int, int);
-int FUN_001acf98(int, int);
-int FUN_00203b40(int, unsigned int, int, int, int, int);
-int FUN_002e08b0(int, int);
-int FUN_003d2150(int);
-int FUN_0049d140(...);
-int FUN_0049de10(int);
+typedef struct TableEntry {
+    /* 0x00 */ u8 unk00[0x36];
+    /* 0x36 */ u16 resourceA;
+    /* 0x38 */ u8 unk38[8];
+    /* 0x40 */ u16 resourceB;
+    /* 0x42 */ u8 unk42[2];
+} TableEntry; /* 0x44 */
 
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+typedef struct Screen {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ s32 active;
+    /* 0x00C */ s32 ready;
+    /* 0x010 */ TableEntry *entries;
+    /* 0x014 */ u32 entryCount;
+    /* 0x018 */ u8 unk018[0x6C];
+    /* 0x084 */ TableEntry *current;
+    /* 0x088 */ u8 unk088[0x0C];
+    /* 0x094 */ u32 unk094;
+    /* 0x098 */ u8 unk098[0x8C];
+    /* 0x124 */ u8 panel[0x64];
+    /* 0x188 */ u32 unk188;
+    /* 0x18C */ u8 unk18C[0xB0];
+    /* 0x23C */ u8 widgetA[0x8C];
+    /* 0x2C8 */ u8 widgetB[0x1A8];
+    /* 0x470 */ u32 index;
+} Screen;
 
-/* Supplied declaration required: FUN_0018206c. */
-/* Supplied declaration required: FUN_001846d0. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern unsigned int FUN_00192798(void);
-/* Supplied declaration required: FUN_001acf98. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_002e08b0. */
-extern int FUN_00341940(unsigned int);
-/* Supplied declaration required: FUN_003d2150. */
-extern int FUN_003f86c8(unsigned int);
-/* Supplied declaration required: FUN_0049d140. */
-/* Supplied declaration required: FUN_0049de10. */
+extern s32 FUN_0018206c(s32 group, s32 id);
+extern void FUN_001846d0(void *widget, s32 arg);
+extern void *dataTableGet(s32 group, s32 id);
+extern u32 dataTableGetCount(void *table);
+extern TableEntry *dataTableGetEntries(void);
+extern void FUN_001acf98(s32 group, s32 id);
+extern void FUN_00203b40(void *panel, u32 arg, s32 a, s32 b, s32 c, s32 d);
+extern void FUN_002e08b0(void *panel, s32 arg);
+extern s32 FUN_00341940(s32 id);
+extern void FUN_003d2150(u32 id);
+extern s32 FUN_003f86c8(s32 id);
+extern void FUN_0049d140(Screen *screen, s32 a, s32 b);
+extern void FUN_0049de10(Screen *screen);
 
-
-void FUN_0049ea54(int param_1)
-
+void FUN_0049ea54(Screen *screen)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  
-  temp_v6 = *(int *)(param_1 + 8) != 0;
-  temp_v1 = 0;
-  if (temp_v6) {
-    temp_v1 = *(int *)(param_1 + 0xc);
-  }
-  if ((((temp_v6 && temp_v1 != 0) && (temp_v1 = FUN_00341940(0x33), temp_v1 != 0)) &&
-      (temp_v1 = FUN_0018206c(0x33,0), temp_v1 != 0)) && (temp_v1 = FUN_003f86c8(0x46), temp_v1 != 0)) {
-    temp_v2 = FUN_00187180(0x46,0);
-    temp_v3 = FUN_00192798();
-    *(unsigned int *)(param_1 + 0x10) = temp_v3;
-    temp_v4 = FUN_00192748(temp_v2);
-    *(unsigned int *)(param_1 + 0x14) = temp_v4;
-    temp_v5 = *(unsigned int *)(param_1 + 0x470);
-    if (((int)temp_v5 <= 0) && (temp_v5 >= temp_v4)) {
-      FUN_0049d140(param_1,0,0);
-      return;
+    void *table;
+    s32 resource;
+
+    if (screen->active == 0 || screen->ready == 0) {
+        return;
     }
-    temp_v1 = *(int *)(param_1 + 0x10) + temp_v5 * 0x44;
-    *(int *)(param_1 + 0x84) = temp_v1;
-    temp_v0 = *(unsigned short *)(temp_v1 + 0x36);
-    if ((temp_v0 > 0) && (temp_v1 = FUN_0018206c(0x33,temp_v0), temp_v1 == 0)) {
-      FUN_001acf98(0x33,temp_v0);
+    if (FUN_00341940(0x33) == 0 || FUN_0018206c(0x33, 0) == 0 || FUN_003f86c8(0x46) == 0) {
+        return;
     }
-    temp_v0 = *(unsigned short *)(*(int *)(param_1 + 0x84) + 0x40);
-    if ((temp_v0 > 0) && (temp_v1 = FUN_0018206c(0x33,temp_v0), temp_v1 == 0)) {
-      FUN_001acf98(0x33,temp_v0);
+    table = dataTableGet(0x46, 0);
+    screen->entries = dataTableGetEntries();
+    screen->entryCount = dataTableGetCount(table);
+    if ((s32)screen->index <= 0 && screen->index >= screen->entryCount) {
+        FUN_0049d140(screen, 0, 0);
+        return;
     }
-    FUN_0049de10(param_1);
-    FUN_00203b40(param_1 + 0x124,*(unsigned int *)(param_1 + 0x94),9,1,1,1);
-    FUN_002e08b0(param_1 + 0x124,0);
-    *(unsigned int *)(param_1 + 0x188) = 0;
-    FUN_001846d0(param_1 + 0x23c,0);
-    FUN_001846d0(param_1 + 0x2c8,0);
-    FUN_0049d140(param_1,8,9);
+    screen->current = &screen->entries[screen->index];
+    resource = screen->current->resourceA;
+    if (resource > 0 && FUN_0018206c(0x33, resource) == 0) {
+        FUN_001acf98(0x33, resource);
+    }
+    resource = screen->current->resourceB;
+    if (resource > 0 && FUN_0018206c(0x33, resource) == 0) {
+        FUN_001acf98(0x33, resource);
+    }
+    FUN_0049de10(screen);
+    FUN_00203b40(screen->panel, screen->unk094, 9, 1, 1, 1);
+    FUN_002e08b0(screen->panel, 0);
+    screen->unk188 = 0;
+    FUN_001846d0(screen->widgetA, 0);
+    FUN_001846d0(screen->widgetB, 0);
+    FUN_0049d140(screen, 8, 9);
     FUN_003d2150(0x1000170);
-    return;
-  }
-  return;
 }
 
-} /* extern "C" */
+}

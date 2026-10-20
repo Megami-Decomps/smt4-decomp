@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern unsigned char g_gameState; /* 0x49f91c */
 
 
 void FUN_003944d4(int param_1)
@@ -16,7 +16,7 @@ void FUN_003944d4(int param_1)
   *(unsigned int *)(param_1 + 0x2a) = 0;
   *(unsigned int *)(param_1 + 0x2e) = 0;
   *(unsigned int *)(param_1 + 0x32) = 0;
-  (*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0x54)) = 0;
+  (*(unsigned int *)((unsigned char *)&g_gameState + 0x54)) = 0;
   return;
 }
 

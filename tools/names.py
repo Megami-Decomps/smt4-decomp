@@ -57,7 +57,11 @@ class Game:
         self.functions = {}  # name -> address
         for match in re.finditer(r"^(\S+) = (?:\S+:)?0x([0-9a-fA-F]+); // (.*)$", self.symbols, re.M):
             self.functions[match[1]] = int(match[2], 16)
-        self.renamed = []    # (old, new) source identifiers
+        self.by_address = {address: name for name, address in self.functions.items()}
+        self.units = {u["function"]: u for u in self.project["units"]}
+        self.renamed = []    # (old, new) identifiers, functions and globals
+        self.functions_renamed = {}  # old -> new, for symbols.txt, names.map, project, objdiff
+        self.new_symbols = []  # type:object lines to append
         self.files = []      # (old source, new source)
 
     def taken(self, name):
@@ -67,33 +71,29 @@ class Game:
         return next((s for s in self.sections if s[1] <= address < s[2]), None)
 
     def rename_function(self, old, new):
-        unit = next((u for u in self.project["units"] if u["function"] == old), None)
-        pattern = re.compile(r"^" + re.escape(old) + r"( = )", re.M)
-        self.symbols, count = pattern.subn(new + r"\1", self.symbols)
-        if count != 1:
-            raise SystemExit(f"{self.game}: {old} is not one line of {self.symbols_path.relative_to(ROOT)}")
         address = self.functions.pop(old)
         self.functions[new] = address
-        self.names_map = re.sub(r"^([0-9a-fA-F]{8}) " + re.escape(old) + r"$", r"\1 " + new, self.names_map, flags=re.M)
-        if not re.search(rf"^{address:08x} ", self.names_map, re.M | re.I):
-            self.names_map += f"{address:08x} {new}\n"
+        self.by_address[address] = new
+        self.functions_renamed[old] = new
+        unit = self.units.pop(old, None)
         if unit:
+            old_source = unit["source"]
             for key in ("function", "source", "object", "target"):
                 if key in unit:
                     unit[key] = re.sub(r"(?<![A-Za-z0-9_])" + re.escape(old) + r"(?![A-Za-z0-9_])", new, unit[key])
-            old_source = re.sub(r"(?<![A-Za-z0-9_])" + re.escape(new) + r"(?![A-Za-z0-9_])", old, unit["source"])
+            self.units[new] = unit
             self.files.append((old_source, unit["source"]))
-        self.objdiff = re.sub(r"(?<![A-Za-z0-9_])" + re.escape(old) + r"(?![A-Za-z0-9_])", new, self.objdiff)
         self.renamed.append((old, new))
 
     def name_global(self, address, new, size=None):
         section = self.section_of(address)
         if section is None or "x" in section[3]:
-            raise SystemExit(f"{self.game}: {address:#x} is not in a data section")
-        line = f"{new} = {section[0]}:{address:#x}; // type:object" + (f" size:{size:#x}" if size else "")
-        self.symbols = self.symbols.rstrip("\n") + "\n" + line + "\n"
+            return f"{self.game}: {address:#x} is not in a data section"
+        self.new_symbols.append(f"{new} = {section[0]}:{address:#x}; // type:object" + (f" size:{size:#x}" if size else ""))
         self.functions[new] = address
+        self.by_address[address] = new
         self.renamed.append((f"DAT_{address:08x}", new))
+        return None
 
     def write(self):
         if not self.renamed:
@@ -102,13 +102,28 @@ class Game:
             old_path, new_path = self.dir / old_source, self.dir / new_source
             if old_path.exists() and old_path != new_path:
                 subprocess.run(["git", "mv", str(old_path), str(new_path)], cwd=ROOT, check=True, capture_output=True)
-        pattern = re.compile(r"(?<![A-Za-z0-9_])(" + "|".join(re.escape(o) for o, _ in self.renamed) + r")(?![A-Za-z0-9_])")
+        word = lambda names: re.compile(r"(?<![A-Za-z0-9_])(" + "|".join(re.escape(n) for n in sorted(names, key=len, reverse=True)) + r")(?![A-Za-z0-9_])")
         mapping = dict(self.renamed)
-        for path in list((self.dir / "src").rglob("*.cpp")) + list((self.dir / "include").rglob("*.h")):
+        everything = word(mapping)
+        # The shared top-level include/ too: a header that declares one game's global uses that game's name.
+        headers = list((self.dir / "include").rglob("*.h")) + list((ROOT / "include").rglob("*.h"))
+        for path in list((self.dir / "src").rglob("*.cpp")) + headers:
             text = path.read_text(encoding="utf-8")
-            changed = pattern.sub(lambda m: mapping[m[1]], text)
+            changed = everything.sub(lambda m: mapping[m[1]], text)
             if changed != text:
                 path.write_text(changed, encoding="utf-8", newline="\n")
+        if self.functions_renamed:
+            functions = self.functions_renamed
+            self.symbols = re.sub(r"^(\S+)( = )", lambda m: functions.get(m[1], m[1]) + m[2], self.symbols, flags=re.M)
+            self.names_map = re.sub(r"^([0-9a-fA-F]{8}) (\S+)$", lambda m: f"{m[1]} {functions.get(m[2], m[2])}", self.names_map, flags=re.M)
+            self.objdiff = word(functions).sub(lambda m: functions[m[1]], self.objdiff)
+        mapped = {int(m[1], 16) for m in re.finditer(r"^([0-9a-fA-F]{8}) ", self.names_map, re.M)}
+        for old, new in self.functions_renamed.items():
+            address = self.functions[new]
+            if address not in mapped:
+                self.names_map += f"{address:08x} {new}\n"
+        if self.new_symbols:
+            self.symbols = self.symbols.rstrip("\n") + "\n" + "\n".join(self.new_symbols) + "\n"
         self.symbols_path.write_text(self.symbols, encoding="utf-8", newline="\n")
         self.project_path.write_text(json.dumps(self.project, indent=2) + "\n", encoding="utf-8", newline="\n")
         self.objdiff_path.write_text(self.objdiff, encoding="utf-8", newline="\n")
@@ -124,23 +139,42 @@ def main():
     args = parser.parse_args()
     games = {}
     sources = []
+    errors = []
     for number, game, what, new, kind, note in read_rows(args.rows):
         state = games.setdefault(game, Game(game))
+        where = f"{args.rows}:{number}"
         if not IDENT.match(new) or new.startswith(("FUN_", "DAT_", "LAB_")):
-            raise SystemExit(f"{args.rows}:{number}: {new!r} is not a name")
+            errors.append(f"{where}: {new!r} is not a name")
+            continue
         if state.taken(new):
-            raise SystemExit(f"{args.rows}:{number}: {game} already has {new}")
-        address = int(what, 16) if re.fullmatch(r"(0x)?[0-9a-fA-F]{6,8}", what) else state.functions.get(what)
+            errors.append(f"{where}: {game} already has {new}")
+            continue
+        placeholder = re.fullmatch(r"(?:FUN|DAT|LAB)_([0-9a-fA-F]{8})", what)
+        if placeholder:
+            address = int(placeholder[1], 16)
+        elif re.fullmatch(r"(0x)?[0-9a-fA-F]{6,8}", what):
+            address = int(what, 16)
+        else:
+            address = state.functions.get(what)
         if address is None:
-            raise SystemExit(f"{args.rows}:{number}: {game} has no {what}")
-        old = next((name for name, at in state.functions.items() if at == address), None)
-        if old is not None and state.section_of(address) and "x" in state.section_of(address)[3]:
+            errors.append(f"{where}: {game} has no {what}")
+            continue
+        old = state.by_address.get(address)
+        section = state.section_of(address)
+        if old is not None and section and "x" in section[3]:
             state.rename_function(old, new)
         elif old is None:
-            state.name_global(address, new)
+            problem = state.name_global(address, new)
+            if problem:
+                errors.append(f"{where}: {problem}")
+                continue
         else:
-            raise SystemExit(f"{args.rows}:{number}: {game} {address:#x} is already named {old}")
+            errors.append(f"{where}: {game} {address:#x} is already named {old}")
+            continue
         sources.append((game, f"{address:08x} {new} {kind} {note}".rstrip()))
+    if errors:
+        print("\n".join(errors))
+        raise SystemExit(f"{len(errors)} rows rejected; nothing was changed")
     if args.command == "check":
         print(f"{len(sources)} rows ok")
         return

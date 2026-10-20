@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_004639e4(int);
-int aeabi_uidivmod(...);
+int __aeabi_uidivmod(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
 extern int *DAT_005c1d30; /* 0x5c1d30 */
 
 /* Supplied declaration required: FUN_004639e4. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 unsigned int FUN_00463618(int param_1,int param_2)
@@ -58,7 +58,7 @@ unsigned int FUN_00463618(int param_1,int param_2)
       *(unsigned int *)(*(int *)(param_1 + 0x18) + 0x20) = 0x800;
       *(unsigned int *)(*(int *)(param_1 + 0x18) + 0x24) = 0x800;
       temp_v4 = *(int *)(param_1 + 0x18);
-      temp_v0 = aeabi_uidivmod(*(int *)(temp_v4 + 0x10) - 1,*(unsigned int *)(temp_v4 + 0x1c));
+      temp_v0 = __aeabi_uidivmod(*(int *)(temp_v4 + 0x10) - 1,*(unsigned int *)(temp_v4 + 0x1c));
       *(int *)(param_1 + 0x3c) = temp_v0;
       if (*(char *)(temp_v4 + 8) == '\0') {
         temp_v0 = 0x400;
@@ -81,7 +81,7 @@ unsigned int FUN_00463618(int param_1,int param_2)
         }
       }
       temp_v4 = *(int *)(param_1 + 0x18);
-      temp_v0 = aeabi_uidivmod(*(unsigned int *)(temp_v4 + 0xc),*(unsigned int *)(temp_v4 + 0x1c));
+      temp_v0 = __aeabi_uidivmod(*(unsigned int *)(temp_v4 + 0xc),*(unsigned int *)(temp_v4 + 0x1c));
       *(int *)(param_1 + 0x40) = temp_v0;
       *(int *)(param_1 + 0x4c) = *(int *)(temp_v4 + 0xc) - temp_v0 * *(int *)(temp_v4 + 0x1c);
       if (*(romwright_code **)(param_1 + 0x30) != (romwright_code *)0x0) {

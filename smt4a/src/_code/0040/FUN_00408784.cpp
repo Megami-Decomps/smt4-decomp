@@ -1,36 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00408784` (_code @ 0x408784, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the two stack arguments of FUN_00164b5c are stored int first, float second (retail: float first). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00164b5c(int, int, unsigned int, unsigned int, unsigned int, int);
-int FUN_001677c0(void);
+typedef struct Request {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ f32 scale;
+    /* 0x08 */ f32 volume;
+    /* 0x0C */ u32 target;
+} Request;
 
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+__softfp int FUN_00164b5c(int arg0, int arg1, u32 target, u32 id, f32 scale, int arg5);
+int efctSetSpeed(f32 volume);
 
-/* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001677c0. */
-
-
-void FUN_00408784(unsigned int *param_1)
-
+/* Sets the volume, issues the request (kind 2, op 0x2b), then resets the volume to 1.0. */
+void FUN_00408784(Request *request)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *param_1;
-  temp_v1 = param_1[1];
-  FUN_001677c0();
-  FUN_00164b5c(2,0x2b,param_1[3],temp_v0,temp_v1,2);
-  FUN_001677c0();
-  return;
+    u32 id = request->id;
+    f32 scale = request->scale;
+
+    efctSetSpeed(request->volume);
+    FUN_00164b5c(2, 0x2b, request->target, id, scale, 2);
+    efctSetSpeed(1.0f);
 }
 
 } /* extern "C" */

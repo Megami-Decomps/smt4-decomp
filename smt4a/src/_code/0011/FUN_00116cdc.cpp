@@ -1,28 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00116cdc` (_code @ 0x116cdc, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail's function symbol excludes the string literal armcc emits right after the function; the code itself is identical and fdiff only reports the trailing literal-pool row(s) */
+/* Resets the object's pending state and re-registers its callback, bumping the reference count. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002f76ca(int, unsigned char *);
-int FUN_002f7824(int);
+typedef struct Object {
+    /* 0x00 */ u8 unk00[0xE4];
+    /* 0xE4 */ s32 refCount;
+    /* 0xE8 */ u32 pending;
+    /* 0xEC */ u8 listener[0x0C];
+    /* 0xF8 */ u8 flag;
+    /* 0xF9 */ u8 unkF9[3];
+    /* 0xFC */ u8 callback[1];
+} Object;
 
-extern unsigned char LAB_00116d04; /* 0x116d04 */
+extern void FUN_002f76ca(void *slot, const char *name);
+extern void FUN_002f7824(void *listener);
 
-/* Supplied declaration required: FUN_002f76ca. */
-/* Supplied declaration required: FUN_002f7824. */
-
-
-void FUN_00116cdc(int param_1)
-
+void FUN_00116cdc(Object *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  *(unsigned int *)(param_1 + 0xe8) = 0;
-  FUN_002f7824(param_1 + 0xec);
-  *(unsigned char *)(param_1 + 0xf8) = 0;
-  FUN_002f76ca(param_1 + 0xfc,&LAB_00116d04);
-  *(int *)(param_1 + 0xe4) = *(int *)(param_1 + 0xe4) + 1;
-  return;
+    obj->pending = 0;
+    FUN_002f7824(obj->listener);
+    obj->flag = 0;
+    FUN_002f76ca(obj->callback, "");
+    obj->refCount++;
 }
 
-} /* extern "C" */
+}

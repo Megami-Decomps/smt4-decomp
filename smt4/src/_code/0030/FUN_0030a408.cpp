@@ -2,10 +2,10 @@
 
 extern "C" {
 
-extern unsigned int FUN_00296cc8(unsigned int);
-extern int FUN_002bf244(unsigned int);
-extern int FUN_002c08f0(unsigned int);
-extern int aeabi_idivmod(unsigned int, unsigned int);
+extern unsigned int scrGetArg(unsigned int);
+extern int jobIsValid(unsigned int);
+extern int jobGetWork(unsigned int);
+extern int __aeabi_idivmod(unsigned int, unsigned int);
 
 
 unsigned int FUN_0030a408(void)
@@ -16,12 +16,12 @@ unsigned int FUN_0030a408(void)
   int temp_v2;
   int temp_v3;
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_00296cc8(1);
-  temp_v2 = FUN_002bf244(temp_v0);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = jobIsValid(temp_v0);
   if (temp_v2 != 0) {
-    temp_v2 = FUN_002c08f0(temp_v0);
-    temp_v3 = aeabi_idivmod(*(unsigned int *)(temp_v2 + 0x10),temp_v1);
+    temp_v2 = jobGetWork(temp_v0);
+    temp_v3 = __aeabi_idivmod(*(unsigned int *)(temp_v2 + 0x10),temp_v1);
     *(int *)(temp_v2 + 0x60) = -temp_v3;
   }
   return 1;

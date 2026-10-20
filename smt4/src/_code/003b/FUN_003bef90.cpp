@@ -7,8 +7,8 @@ extern "C" {
 int SBORROW4(int, int);
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_0023eae0(unsigned int);
-extern int FUN_002939f4(void);
+extern int randRange(unsigned int);
+extern int btlGetMainState(void);
 extern int FUN_0029ebac(int, unsigned int);
 extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
@@ -28,7 +28,7 @@ unsigned int FUN_003bef90(void)
   int temp_v7;
   unsigned char temp_v8;
   
-  temp_v1 = FUN_002939f4();
+  temp_v1 = btlGetMainState();
   if (*(int *)(temp_v1 + 0xc4) < 0) {
     temp_v7 = 0;
     temp_v1 = FUN_002a8764();
@@ -52,11 +52,11 @@ unsigned int FUN_003bef90(void)
             else {
               temp_v3 = 99;
             }
-            temp_v4 = FUN_002939f4();
+            temp_v4 = btlGetMainState();
             if ((*(unsigned int *)(temp_v4 + 0x44a8) & 0x10000) != 0) {
               temp_v3 = 100;
             }
-            temp_v5 = FUN_0023eae0(99);
+            temp_v5 = randRange(99);
             temp_v8 = SBORROW4(temp_v5,temp_v3);
             temp_v4 = temp_v5 - temp_v3;
             if (temp_v5 < temp_v3) {
@@ -64,7 +64,7 @@ unsigned int FUN_003bef90(void)
               temp_v4 = temp_v7 - 1;
             }
             if (temp_v4 < 0 != temp_v8) {
-              temp_v4 = FUN_002939f4();
+              temp_v4 = btlGetMainState();
               temp_v3 = temp_v7 * 4;
               temp_v7 = temp_v7 + 1;
               *(unsigned int *)(temp_v4 + temp_v3 + 0x158) = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);
@@ -74,7 +74,7 @@ unsigned int FUN_003bef90(void)
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < (int)(unsigned int)*(unsigned char *)(temp_v1 + 0x910b));
       if (0 < temp_v7) {
-        temp_v1 = FUN_002939f4();
+        temp_v1 = btlGetMainState();
         *(unsigned int *)(temp_v1 + 0x44a0) = *(unsigned int *)(temp_v1 + 0x44a0) | 0x200;
         return 1;
       }

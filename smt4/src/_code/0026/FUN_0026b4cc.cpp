@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
+extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 
 /* Supplied declaration required: FUN_002c567c. */
 extern int FUN_003e0c80(unsigned int *);
@@ -47,7 +47,7 @@ void FUN_0026b4cc(void)
   temp_v1 = FUN_003e0c80((unsigned int *)&temp_v5);
   temp_v2 = FUN_003e0ce8((unsigned int *)&temp_v5);
   temp_v3 = FUN_003e0d54((unsigned int *)&temp_v5);
-  *(int *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0xc)) + 4) = temp_v3 + (temp_v2 + (temp_v1 + temp_v0 * 0x18) * 0x3c) * 0x3c;
+  *(int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0xc)) + 4) = temp_v3 + (temp_v2 + (temp_v1 + temp_v0 * 0x18) * 0x3c) * 0x3c;
   return;
 }
 

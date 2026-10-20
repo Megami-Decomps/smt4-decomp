@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016007c(int, int);
+int asdOperatorNew(int, int);
 int FUN_0031416c(int, int, int, int, int, int, int, int, int, int, int, int);
 int FUN_0040ae70(unsigned int, int);
 int FUN_0040b0f8(unsigned int, unsigned char *);
@@ -26,10 +26,10 @@ extern unsigned char LAB_00343e48; /* 0x343e48 */
 extern unsigned char DAT_00557c60; /* 0x557c60 */
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 
-/* Supplied declaration required: FUN_0016007c. */
-extern int FUN_00164a34(void);
+/* Supplied declaration required: asdOperatorNew. */
+extern int lmapMainIsRunning(void);
 /* Supplied declaration required: FUN_0031416c. */
-extern int FUN_003792d4(void);
+extern int lmapSceneGetScript(void);
 extern unsigned int *FUN_003e5d10(void);
 /* Supplied declaration required: FUN_0040ae70. */
 extern int FUN_0040af60(unsigned int);
@@ -45,12 +45,12 @@ void FUN_00343d04(int param_1)
   int temp_v1;
   unsigned int *puVar3;
   
-  temp_v1 = FUN_003792d4();
-  if ((temp_v1 != 0) || (temp_v1 = FUN_00164a34(), temp_v1 != 0)) {
+  temp_v1 = lmapSceneGetScript();
+  if ((temp_v1 != 0) || (temp_v1 = lmapMainIsRunning(), temp_v1 != 0)) {
     FUN_0031416c(200,200,200,0x82,0x82,0x82,0x1e,0x1e,0x1e,0x96,0x96,0x96);
   }
   temp_v1 = 0x130;
-  FUN_0016007c(0x130,param_1);
+  asdOperatorNew(0x130,param_1);
   puVar3 = (unsigned int *)0x0;
   if (temp_v1 != 0) {
     puVar3 = (unsigned int *)FUN_003e5d10();
@@ -59,8 +59,8 @@ void FUN_00343d04(int param_1)
   *(unsigned int **)(param_1 + 0x1c) = puVar3;
   FUN_0040ba38();
   *(unsigned char *)(param_1 + 0x2c) = 0;
-  temp_v1 = FUN_00164a34();
-  if ((temp_v1 == 0) && (temp_v1 = FUN_003792d4(), temp_v1 == 0)) {
+  temp_v1 = lmapMainIsRunning();
+  if ((temp_v1 == 0) && (temp_v1 = lmapSceneGetScript(), temp_v1 == 0)) {
     *(unsigned char *)(param_1 + 0x2c) = 1;
     temp_v0 = DAT_0056fcc0;
     temp_v1 = FUN_0040af60(DAT_0056fcc0);

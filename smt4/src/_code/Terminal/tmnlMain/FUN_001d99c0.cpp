@@ -12,7 +12,7 @@ int FUN_002b827c(...);
 int VectorSignedToFloat(...);
 
 int FUN_00152bec(void);
-int FUN_00208bd4(void);
+int gameStateClearFlag(void);
 int FUN_00263588(...);
 int FUN_002636b0(void);
 int FUN_002636d0(...);
@@ -27,16 +27,16 @@ int FUN_0029c2cc(...);
 int FUN_0029c3b0(...);
 int FUN_002a4d14(void);
 int FUN_002a71fc(...);
-int FUN_002a7218(void);
+int scrScriptProcessDestroy(void);
 int FUN_002a72c0(...);
-int FUN_002a775c(...);
+int asdMdlManagerDestroy(...);
 int FUN_002a7890(void);
 int FUN_002bf810(...);
 int FUN_002bff50(void);
 int FUN_002c2264(void);
-int FUN_002c415c(void);
-int FUN_002c43b4(...);
-int FUN_002c57c8(...);
+int asdMemFree(void);
+int jobStop(...);
+int asdSequenceRequest(...);
 int FUN_002cf384(void);
 
 int FUN_0019e0c0(...);
@@ -75,7 +75,7 @@ int FUN_00294450(unsigned int, unsigned int, int);
 int FUN_002947c0(void);
 int FUN_00295660(...);
 int FUN_00298d50(...);
-int FUN_0029bb3c(unsigned char *, int);
+int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a03a0(...);
 int FUN_002a0428(...);
 int FUN_002a04f0(int);
@@ -87,7 +87,7 @@ int FUN_002c159c(unsigned int *);
 int FUN_002c1e30(...);
 int FUN_002c1edc(...);
 int FUN_002c2044(unsigned int *, int);
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 int FUN_002e2948(...);
 
 typedef int romwright_code(...);
@@ -117,17 +117,17 @@ extern unsigned char LAB_001da2b0; /* 0x1da2b0 */
 extern unsigned char LAB_001da2c8; /* 0x1da2c8 */
 extern unsigned char DAT_003ff040; /* 0x3ff040 */
 extern unsigned char DAT_004207d8; /* 0x4207d8 */
-extern unsigned int *DAT_00432ce0; /* 0x432ce0 */
+extern unsigned int *g_tmnl; /* 0x432ce0 */
 extern unsigned short DAT_00432cf8; /* 0x432cf8 */
 extern char s_Mikado_00432cfe[7]; /* 0x432cfe */
-extern unsigned int DAT_0049f91c; /* 0x49f91c */
+extern unsigned int g_gameState; /* 0x49f91c */
 extern unsigned int DAT_0049f920; /* 0x49f920 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00152bec. */
 /* Supplied declaration required: FUN_0019e0c0. */
 /* Supplied declaration required: FUN_001d04a4. */
-/* Supplied declaration required: FUN_00208bd4. */
+/* Supplied declaration required: gameStateClearFlag. */
 /* Supplied declaration required: FUN_0020ffe8. */
 extern int FUN_0025a030(unsigned int);
 /* Supplied declaration required: FUN_00263588. */
@@ -165,11 +165,11 @@ extern unsigned int *FUN_002947f4(void);
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_00297684. */
 /* Supplied declaration required: FUN_00298d50. */
-extern unsigned int FUN_0029a034(unsigned char *, unsigned int);
+extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0029ae60. */
 /* Supplied declaration required: FUN_0029b8ec. */
 /* Supplied declaration required: FUN_0029bb08. */
-/* Supplied declaration required: FUN_0029bb3c. */
+/* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: FUN_0029c3b0. */
@@ -190,9 +190,9 @@ extern int FUN_0029e1c8(void);
 /* Supplied declaration required: FUN_002a4e98. */
 /* Supplied declaration required: FUN_002a5704. */
 /* Supplied declaration required: FUN_002a71fc. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002a72c0. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: FUN_002a7890. */
 extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: FUN_002adf00. */
@@ -201,7 +201,7 @@ extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: FUN_002b8838. */
 extern int FUN_002b8cec(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bff50. */
 extern int FUN_002c09d0(unsigned int);
@@ -210,15 +210,15 @@ extern int FUN_002c09d0(unsigned int);
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
 /* Supplied declaration required: FUN_002c2044. */
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002c2264. */
 /* Supplied declaration required: FUN_002c29d8. */
 extern int FUN_002c2a04(unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
-/* Supplied declaration required: FUN_002c57c8. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
+/* Supplied declaration required: asdSequenceRequest. */
 extern unsigned int FUN_002c5c04(unsigned char *);
-extern unsigned int FUN_002c5c14(unsigned char *, unsigned char *, unsigned int, unsigned int);
+extern unsigned int asdLoadFileSync(unsigned char *, unsigned char *, unsigned int, unsigned int);
 extern int FUN_002c79c4(unsigned int);
 /* Supplied declaration required: FUN_002cf384. */
 /* Supplied declaration required: FUN_002cf570. */
@@ -269,10 +269,10 @@ unsigned int FUN_001d99c0(void)
   unsigned int uStack_48;
   unsigned int temp_v15;
   
-  puVar2 = DAT_00432ce0;
+  puVar2 = g_tmnl;
   psVar12 = temp_v7;
-  if ((unsigned int)DAT_00432ce0[4] >= 2) {
-    FUN_002adf00(temp_v7,DAT_00432ce0[DAT_00432ce0[0x154] + 0xf]);
+  if ((unsigned int)g_tmnl[4] >= 2) {
+    FUN_002adf00(temp_v7,g_tmnl[g_tmnl[0x154] + 0xf]);
     FUN_002c159c(puVar2 + 0x12);
     FUN_002c1edc(puVar2 + 0x12,temp_v7,temp_v8,temp_v9);
     FUN_002c1e30(puVar2 + 0x12,1);
@@ -289,14 +289,14 @@ unsigned int FUN_001d99c0(void)
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 4);
   }
-  puVar7 = DAT_00432ce0;
+  puVar7 = g_tmnl;
   temp_v6 = puVar2[4];
   if (temp_v6 != 10) {
     if (9 >= temp_v6) {
       switch(temp_v6) {
       case 0:
         temp_v6 = 0x100;
-        FUN_002c222c();
+        asdOperatorNew();
         puVar5 = (unsigned int *)0x0;
         if (temp_v6 != 0) {
           puVar5 = (unsigned int *)FUN_002947f4();
@@ -313,7 +313,7 @@ unsigned int FUN_001d99c0(void)
         puVar7[0x158] = temp_v6;
         if (temp_v6 != 0) {
           puVar6 = &LAB_001d9d8c;
-          FUN_0029bb3c(&LAB_001d9d8c,7);
+          asdMdlManagerCreateLoaded(&LAB_001d9d8c,7);
           puVar7[0xe] = (unsigned int)puVar6;
           FUN_002a0428();
           puVar9 = (unsigned int *)puVar7[0xe];
@@ -322,7 +322,7 @@ unsigned int FUN_001d99c0(void)
         }
         else {
           puVar6 = &LAB_001da26c;
-          FUN_0029bb3c(&LAB_001da26c,7);
+          asdMdlManagerCreateLoaded(&LAB_001da26c,7);
           puVar7[0xd] = (unsigned int)puVar6;
           FUN_002a0428();
           puVar9 = (unsigned int *)puVar7[0xd];
@@ -348,13 +348,13 @@ unsigned int FUN_001d99c0(void)
         FUN_002637c8();
         FUN_002898e4();
         FUN_0028d6d0();
-        temp_v3 = FUN_002c5c14(&LAB_001d9e0c,temp_v11,1,0x80);
+        temp_v3 = asdLoadFileSync(&LAB_001d9e0c,temp_v11,1,0x80);
         puVar7[0x159] = temp_v3;
-        temp_v3 = FUN_002c5c14(&LAB_001d9e28,temp_v11,1,0x80);
+        temp_v3 = asdLoadFileSync(&LAB_001d9e28,temp_v11,1,0x80);
         puVar7[0x15c] = temp_v3;
-        temp_v3 = FUN_002c5c14(&LAB_001d9e44,temp_v11,1,0x80);
+        temp_v3 = asdLoadFileSync(&LAB_001d9e44,temp_v11,1,0x80);
         puVar7[0x15f] = temp_v3;
-        temp_v3 = FUN_002c5c14(&LAB_001d9e60,temp_v11,1,0x80);
+        temp_v3 = asdLoadFileSync(&LAB_001d9e60,temp_v11,1,0x80);
         puVar7[0x162] = temp_v3;
         temp_v12 = 0;
         uStack_7c = 0x42c80000;
@@ -454,7 +454,7 @@ unsigned int FUN_001d99c0(void)
         if (temp_v6 != 0) {
           FUN_002a5704(puVar2[0xc],0);
           FUN_0029bb08(puVar2[0xc]);
-          puVar2[6] = DAT_0049f91c;
+          puVar2[6] = g_gameState;
           puVar2[7] = DAT_0049f920;
           temp_v3 = FUN_002c5c04(&LAB_001da298);
           puVar2[8] = temp_v3;
@@ -482,8 +482,8 @@ unsigned int FUN_001d99c0(void)
             FUN_002c29d8(1,10,0xff);
           }
           FUN_002fc008(puVar2);
-          if (*(unsigned char *)((int)DAT_00432ce0 + 9) != 0) {
-            pcVar10 = s_Mikado_00432cfe + (unsigned int)*(unsigned char *)((int)DAT_00432ce0 + 9) * 0x24;
+          if (*(unsigned char *)((int)g_tmnl + 9) != 0) {
+            pcVar10 = s_Mikado_00432cfe + (unsigned int)*(unsigned char *)((int)g_tmnl + 9) * 0x24;
           }
           else {
             pcVar10 = (char *)FUN_00288f60();
@@ -731,8 +731,8 @@ LAB_001da638:
           if (temp_v6 != 0xc) {
             if (temp_v6 != 0xd) {
               if (temp_v6 == 0x14) {
-                if (*(unsigned char *)((int)DAT_00432ce0 + 9) != 0) {
-                  pcVar10 = s_Mikado_00432cfe + (unsigned int)*(unsigned char *)((int)DAT_00432ce0 + 9) * 0x24;
+                if (*(unsigned char *)((int)g_tmnl + 9) != 0) {
+                  pcVar10 = s_Mikado_00432cfe + (unsigned int)*(unsigned char *)((int)g_tmnl + 9) * 0x24;
                 }
                 else {
                   pcVar10 = (char *)FUN_00288f60();
@@ -759,11 +759,11 @@ LAB_001da638:
         }
         else {
           if (puVar2[0x158] != 0) {
-            temp_v3 = FUN_0029a034(&LAB_001d9d8c,7);
+            temp_v3 = asdMdlManagerCreateSecondList(&LAB_001d9d8c,7);
             puVar2[0xe] = temp_v3;
           }
           else {
-            temp_v3 = FUN_0029a034(&LAB_001da26c,7);
+            temp_v3 = asdMdlManagerCreateSecondList(&LAB_001da26c,7);
             puVar2[0xd] = temp_v3;
           }
           puVar2[4] = puVar2[4] + 1;
@@ -797,24 +797,24 @@ LAB_001da638:
         if (temp_v6 != 0x62) {
           if ((temp_v6 == 99) && (temp_v6 = FUN_00282b28(), temp_v6 == 0)) {
             if (puVar2[10] != 0) {
-              FUN_002a7218();
+              scrScriptProcessDestroy();
               puVar2[10] = 0;
             }
             if (puVar2[8] != 0) {
-              FUN_002c415c();
+              asdMemFree();
               puVar2[8] = 0;
             }
             if (puVar2[9] != 0) {
-              FUN_002c415c();
+              asdMemFree();
               puVar2[9] = 0;
             }
             if (puVar2[0xb] != 0) {
-              FUN_002c415c();
+              asdMemFree();
               puVar2[0xb] = 0;
             }
             FUN_002bff50();
             FUN_002a72c0(0);
-            puVar7 = DAT_00432ce0;
+            puVar7 = g_tmnl;
             FUN_002a4d14();
             if (puVar7[0xc] != 0) {
               FUN_00288728();
@@ -829,7 +829,7 @@ LAB_001da638:
                 if (0 < *(int *)(*(int *)(puVar7[temp_v6 + 0xd] + 8) + 0xc)) {
                   FUN_00152bec();
                 }
-                FUN_002a775c(puVar7[temp_v6 + 0xd]);
+                asdMdlManagerDestroy(puVar7[temp_v6 + 0xd]);
                 puVar7[temp_v6 + 0xd] = 0;
               }
               temp_v6 = temp_v6 + 1;
@@ -855,7 +855,7 @@ LAB_001da638:
                 puVar7[temp_v6 * 3 + 0x15a] = 0;
               }
               if (puVar7[temp_v6 * 3 + 0x159] != 0) {
-                FUN_002c415c();
+                asdMemFree();
                 puVar7[temp_v6 * 3 + 0x159] = 0;
               }
               temp_v6 = temp_v6 + 1;
@@ -865,14 +865,14 @@ LAB_001da638:
               FUN_002a03d8(0,1);
               FUN_002a03d8(1);
               FUN_0029c3b0(0xf);
-              puVar2 = DAT_00432ce0;
-              temp_v6 = FUN_002bf244(*DAT_00432ce0);
+              puVar2 = g_tmnl;
+              temp_v6 = jobIsValid(*g_tmnl);
               if (temp_v6 != 0) {
-                FUN_002c43b4(*puVar2,0);
+                jobStop(*puVar2,0);
               }
             }
             else {
-              FUN_00208bd4();
+              gameStateClearFlag();
               temp_v6 = (unsigned int)*(unsigned char *)((int)puVar2 + 9) * 0x24;
               temp_v0 = (&DAT_00432cf8)[(unsigned int)*(unsigned char *)((int)puVar2 + 9) * 0x12];
               if (temp_v0 >= 200) {
@@ -888,7 +888,7 @@ LAB_001da638:
                 psVar12 = (short *)0x0;
                 temp_v3 = 6;
               }
-              FUN_002c57c8(temp_v3,psVar12,temp_v5);
+              asdSequenceRequest(temp_v3,psVar12,temp_v5);
             }
             FUN_002e2948(0);
             return 0xffffffff;
@@ -961,7 +961,7 @@ LAB_001da638:
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 0x14);
       FUN_002fc008(puVar2);
-      FUN_002a775c(puVar2[puVar2[0x158] + 0xd]);
+      asdMdlManagerDestroy(puVar2[puVar2[0x158] + 0xd]);
       puVar2[puVar2[0x158] + 0xd] = 0;
       puVar2[0x158] = (int)*(char *)((unsigned int)*(unsigned char *)((int)puVar2 + 9) * 0x24 + 0x432cfd);
       puVar2[4] = puVar2[4] + 1;

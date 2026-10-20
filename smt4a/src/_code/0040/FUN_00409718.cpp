@@ -1,41 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00409718` (_code @ 0x409718, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00187a84(int, int, int, int);
-int FUN_00187d90(unsigned int, int);
+typedef struct Sprite {
+    /* 0x0000 */ u8 unk0000[0x52C];
+    /* 0x052C */ u32 state;
+    /* 0x0530 */ u32 context;
+    /* 0x0534 */ u8 target[0xC4];
+    /* 0x05F8 */ u8 mode;           /* 3, 4 or 0 */
+    /* 0x05F9 */ u8 unk05F9[0x83];
+    /* 0x067C */ u8 normal[0x40];
+    /* 0x06BC */ u8 alternate[0x40];
+    /* 0x06FC */ u8 unk06FC[0xA9C];
+    /* 0x1198 */ u8 output[4];
+} Sprite;
 
-/* Supplied declaration required: FUN_00187a84. */
-/* Supplied declaration required: FUN_00187d90. */
+int FUN_00187a84(Sprite *sprite, void *source, int arg2, void *target);
+int FUN_00187d90(u32 context, void *dest);
 
-
-void FUN_00409718(int param_1)
-
+/* Switches the sprite's mode by state (0/1 -> 3 with `normal`, 2 -> 4 with `alternate`, else 0); on a change re-initialises it and stores the new mode. */
+void FUN_00409718(Sprite *sprite)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  char temp_v1;
-  
-  temp_v0 = 0;
-  if (*(unsigned int *)(param_1 + 0x52c) < 2) {
-    temp_v1 = '\x03';
-    temp_v0 = param_1 + 0x67c;
-  }
-  else if (*(unsigned int *)(param_1 + 0x52c) != 2) {
-    temp_v1 = '\0';
-  }
-  else {
-    temp_v1 = '\x04';
-    temp_v0 = param_1 + 0x6bc;
-  }
-  if (*(char *)(param_1 + 0x5f8) != temp_v1) {
-    FUN_00187a84(param_1,temp_v0,0,param_1 + 0x534);
-    FUN_00187d90(*(unsigned int *)(param_1 + 0x530),param_1 + 0x1198);
-    *(char *)(param_1 + 0x5f8) = temp_v1;
-  }
-  return;
+    void *source = NULL;
+    u8 mode;
+
+    if (sprite->state == 0 || sprite->state == 1) {
+        source = sprite->normal;
+        mode = 3;
+    } else if (sprite->state != 2) {
+        mode = 0;
+    } else {
+        source = sprite->alternate;
+        mode = 4;
+    }
+    if (sprite->mode != mode) {
+        FUN_00187a84(sprite, source, 0, sprite->target);
+        FUN_00187d90(sprite->context, sprite->output);
+        sprite->mode = mode;
+    }
 }
 
 } /* extern "C" */

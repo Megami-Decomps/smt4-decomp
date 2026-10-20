@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_0031d890(void);
 int FUN_0034280c(int);
 int FUN_0037b708(void);
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_002bf508(void);
 extern int FUN_002e2014(void);
 /* Supplied declaration required: FUN_0031d890. */
@@ -30,7 +30,7 @@ unsigned int FUN_00281744(int param_1)
     temp_v0 = FUN_002e2014();
     if (temp_v0 != 0) {
       FUN_0037b708();
-      FUN_001681cc(0x10d);
+      sysPlaySe(0x10d);
       *(unsigned int *)(param_1 + 0x144) = 1;
       *(unsigned int *)(param_1 + 0x14c) = 0;
       FUN_0031d890();

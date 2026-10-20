@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char LAB_002947e0; /* 0x2947e0 */
 
-extern unsigned int FUN_0029a034(unsigned char *);
+extern unsigned int asdMdlManagerCreateSecondList(unsigned char *);
 
 
 void FUN_002947c0(int param_1)
@@ -14,7 +14,7 @@ void FUN_002947c0(int param_1)
 {
   unsigned int temp_v0;
   
-  temp_v0 = FUN_0029a034(&LAB_002947e0);
+  temp_v0 = asdMdlManagerCreateSecondList(&LAB_002947e0);
   *(unsigned int *)(param_1 + 4) = 1;
   *(unsigned int *)(param_1 + 8) = temp_v0;
   return;

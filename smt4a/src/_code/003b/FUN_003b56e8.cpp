@@ -1,26 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b56e8` (_code @ 0x3b56e8, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Returns the entry count of the data table keyed 0x100000023 plus the offset stored in the global state. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00187180(int, int);
+typedef struct GlobalState {
+    /* 0x000 */ u8 unk000[0x3EC];
+    /* 0x3EC */ s32 offset;
+} GlobalState;
 
-extern int DAT_00570280; /* 0x570280 */
+extern GlobalState *g_aocSystem;
 
-/* Supplied declaration required: FUN_00187180. */
-extern int FUN_00192748(void);
+extern void *dataTableGet(u64 key);
+extern s32 dataTableGetCount(void *table);
 
-
-int FUN_003b56e8(void)
-
+s32 FUN_003b56e8(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_00187180(0x23,1);
-  temp_v0 = FUN_00192748();
-  return temp_v0 + *(int *)(DAT_00570280 + 0x3ec);
+    return dataTableGetCount(dataTableGet(0x100000023ULL)) + g_aocSystem->offset;
 }
 
-} /* extern "C" */
+}

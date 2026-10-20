@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002c52f8(void);
 
-extern unsigned int FUN_002c1364(int *, unsigned int, unsigned int, unsigned int);
+extern unsigned int asdModelForwardChecked(int *, unsigned int, unsigned int, unsigned int);
 extern int FUN_002c1398(void);
 extern unsigned int FUN_002c30c4(unsigned int);
 /* Supplied declaration required: FUN_002c52f8. */
@@ -29,7 +29,7 @@ unsigned int nn_cfg_CTR_detail_InitializeBase(int *param_1,unsigned int param_2)
   }
   else {
     temp_v2 = FUN_002c30c4(param_2);
-    temp_v1 = FUN_002c1364(param_1,param_2,temp_v2,0);
+    temp_v1 = asdModelForwardChecked(param_1,param_2,temp_v2,0);
     if ((temp_v1 & 0x80000000) != 0) {
       temp_v1 = 0xd92103fb;
     }

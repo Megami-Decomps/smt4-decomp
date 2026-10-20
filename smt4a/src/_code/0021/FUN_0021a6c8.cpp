@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010063a(int, unsigned int, int, unsigned char *);
+int qsort(int, unsigned int, int, unsigned char *);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned char LAB_00270d30; /* 0x270d30 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 
 
 void FUN_0021a6c8(int param_1)
@@ -32,7 +32,7 @@ void FUN_0021a6c8(int param_1)
   unsigned int temp_v7 [3];
   
   puVar4 = (unsigned int *)(param_1 + 0x4850);
-  FUN_0010063a(param_1 + 0x4858,*puVar4,0x40,&LAB_00270d30);
+  qsort(param_1 + 0x4858,*puVar4,0x40,&LAB_00270d30);
   temp_v7[0] = 0;
   temp_v7[1] = 0;
   temp_v2 = *puVar4;

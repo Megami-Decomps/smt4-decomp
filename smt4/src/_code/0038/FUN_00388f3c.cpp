@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c564c(int);
+int jyoucyuGetTableEntry(int);
 int FUN_003df5d0(int *, int, int [2], unsigned int [192], int, int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -14,13 +14,13 @@ typedef struct {
     unsigned int sp330; /* 0x330: local_330 */
 } param_2_stack;
 
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 extern unsigned char *FUN_002a1130(unsigned int, unsigned int);
 extern int FUN_002a12d8(unsigned char *);
 extern int FUN_002a2dec(unsigned int *);
 extern int FUN_002a2df8(void);
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_003df5d0. */
 
 
@@ -51,7 +51,7 @@ void FUN_00388f3c(unsigned int param_1,int param_2)
     *puVar1 = 100;
     temp_v0 = FUN_002a12d8(puVar1 + 4);
     if (temp_v0 != -0x36bec6eb) {
-      if ((*(unsigned int *)(DAT_00432fc8 + 0x754) & 0x100) == 0) {
+      if ((*(unsigned int *)(g_aocMain + 0x754) & 0x100) == 0) {
         temp_v1 = 0x96;
       }
       else {
@@ -61,7 +61,7 @@ void FUN_00388f3c(unsigned int param_1,int param_2)
       *puVar1 = 0x6a;
       return;
     }
-    FUN_002c564c(0);
+    jyoucyuGetTableEntry(0);
   }
   else {
     *(unsigned int *)(param_2 + 0x310) = 0;

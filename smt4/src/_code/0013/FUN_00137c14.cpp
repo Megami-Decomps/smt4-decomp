@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002c4938(int, int);
+int memClear(int, int);
 
 typedef int romwright_code(...);
 extern romwright_code *DAT_0044e330; /* 0x44e330 */
 
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 int FUN_00137c14(void)
@@ -28,7 +28,7 @@ int FUN_00137c14(void)
   else {
     temp_v3 = (*DAT_0044e330)(0x10000,0x100,0,0x348);
     if (temp_v3 != 0) {
-      FUN_002c4938(temp_v3,0x348);
+      memClear(temp_v3,0x348);
       temp_v2 = 0;
       do {
         temp_v1 = temp_v3 + temp_v2 * 0x10;

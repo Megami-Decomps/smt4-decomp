@@ -2,10 +2,10 @@
 
 extern "C" {
 
-int FUN_001884b0(unsigned int);
+int vcallSlot12IfValid(unsigned int);
 int FUN_00195fc8(void);
 
-/* Supplied declaration required: FUN_001884b0. */
+/* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: FUN_00195fc8. */
 
 
@@ -17,7 +17,7 @@ unsigned int FUN_00317c60(int param_1)
     if ((*(unsigned int *)(param_1 + 8) & 1) != 0) {
       FUN_00195fc8();
     }
-    FUN_001884b0(*(unsigned int *)(param_1 + 8) & 0xfffffffe);
+    vcallSlot12IfValid(*(unsigned int *)(param_1 + 8) & 0xfffffffe);
     *(unsigned int *)(param_1 + 8) = 0;
   }
   return 0;

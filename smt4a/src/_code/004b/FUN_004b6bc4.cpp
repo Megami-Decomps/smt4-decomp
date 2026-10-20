@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(unsigned char [32], unsigned char *, int);
 int FUN_001b4a74(int);
 int FUN_00275f44(unsigned int, unsigned int);
-int FUN_002e6354(char [256], int);
+int sysMemClear(char [256], int);
 int FUN_0046eb24(int, int);
 int FUN_00470080(int, int, int);
 int FUN_004b75d0(...);
@@ -26,9 +26,9 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char DAT_005328fc; /* 0x5328fc */
-extern int DAT_00570280; /* 0x570280 */
+extern int g_aocSystem; /* 0x570280 */
 extern int DAT_0058800c; /* 0x58800c */
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
@@ -36,8 +36,8 @@ extern int FUN_0018719c(void);
 /* Supplied declaration required: FUN_001b4a74. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275f44. */
-/* Supplied declaration required: FUN_002e6354. */
-extern int FUN_0032482c(void);
+/* Supplied declaration required: sysMemClear. */
+extern int gameStateIsFlagSetAndLarge(void);
 extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0046eb24. */
 /* Supplied declaration required: FUN_00470080. */
@@ -97,7 +97,7 @@ void FUN_004b6bc4(int param_1,int param_2,int param_3)
   temp_v0 = FUN_004bb0f8(temp_v10,*(unsigned int *)(param_1 + 0x1120),0);
   puVar2 = temp_v10;
   FUN_004bb158(puVar2,*(unsigned int *)(param_1 + 0x1120));
-  FUN_002e6354(acStack_168,0x100);
+  sysMemClear(acStack_168,0x100);
   temp_v1 = 0;
   if (temp_v1 < (int)puVar2) {
     do {
@@ -125,13 +125,13 @@ LAB_004b6d80:
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < (int)puVar2);
   }
-  temp_v0 = DAT_00570280;
-  FUN_0046eb24(DAT_00570280,*(int *)(param_1 + 0x1120) + 1);
+  temp_v0 = g_aocSystem;
+  FUN_0046eb24(g_aocSystem,*(int *)(param_1 + 0x1120) + 1);
   temp_v1 = 0;
   if (temp_v1 < temp_v0) {
     do {
-      temp_v3 = DAT_00570280;
-      FUN_00470080(DAT_00570280,*(int *)(param_1 + 0x1120) + 1,temp_v1);
+      temp_v3 = g_aocSystem;
+      FUN_00470080(g_aocSystem,*(int *)(param_1 + 0x1120) + 1,temp_v1);
       if ((*(unsigned char *)(temp_v3 + 0x20) == 0) || (acStack_168[*(unsigned char *)(temp_v3 + 0x20)] == '\0')) {
         temp_v4 = *(unsigned int *)(param_1 + 0x1144);
         temp_v5 = *(unsigned int *)(param_1 + 0x114c);
@@ -156,10 +156,10 @@ LAB_004b6ea0:
     } while (temp_v1 < temp_v0);
   }
   FUN_004bb064(param_1 + 0x9c);
-  temp_v1 = FUN_0032482c();
+  temp_v1 = gameStateIsFlagSetAndLarge();
   temp_v0 = -1;
   if (temp_v1 != 0) {
-    temp_v0 = (*(int *)((unsigned char *)&DAT_005f15fc + 0x57c));
+    temp_v0 = (*(int *)((unsigned char *)&g_gameState + 0x57c));
   }
   if (*(short *)(param_1 + 0x40) != 0) {
     temp_v0 = (int)*(short *)(param_1 + 0x40);

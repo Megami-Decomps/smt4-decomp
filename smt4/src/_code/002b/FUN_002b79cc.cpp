@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp130; /* 0x130: local_130 */
 } param_4_stack;
 
-extern int aeabi_uidivmod(int, unsigned int);
+extern int __aeabi_uidivmod(int, unsigned int);
 
 
 void FUN_002b79cc(unsigned int param_1,unsigned int param_2,unsigned int param_3,romwright_code *param_4)
@@ -221,7 +221,7 @@ void FUN_002b79cc(unsigned int param_1,unsigned int param_2,unsigned int param_3
             } while (temp_v2 != 0);
           }
           puVar7 = (unsigned int *)((int)puVar7 - param_3);
-          temp_v3 = aeabi_uidivmod((int)puVar7 - (int)puVar8,param_3);
+          temp_v3 = __aeabi_uidivmod((int)puVar7 - (int)puVar8,param_3);
           temp_v1 = temp_v9;
           temp_v2 = temp_v3 - 1;
           temp_v5 = (temp_v10 - temp_v2) - 1;

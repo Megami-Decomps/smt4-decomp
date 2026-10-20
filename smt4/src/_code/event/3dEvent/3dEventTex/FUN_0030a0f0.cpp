@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002459d8(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int memClear(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -28,10 +28,10 @@ extern int FUN_002db9a0(...); /* 0x2db9a0 */
 /* Supplied declaration required: FUN_002459d8. */
 extern int FUN_00294090(int, unsigned int);
 extern int FUN_002c1d5c(void);
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 
 
 char * FUN_0030a0f0(int param_1)
@@ -49,8 +49,8 @@ char * FUN_0030a0f0(int param_1)
   
   temp_v2 = romwright_piece_4_4(in_s1,in_s0);
   piVar1 = (int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x48,1);
-  FUN_002c4938();
+  asdMemAlloc(0x100,0x100,0,0x48,1);
+  memClear();
   temp_v3 = 0.0f;
   piVar1[2] = 0x3f800000;
   piVar1[3] = 0;
@@ -95,8 +95,8 @@ char * FUN_0030a0f0(int param_1)
   *(unsigned char *)((int)piVar1 + 0x16) = 1;
   *(unsigned char *)((int)piVar1 + 0x15) = 0;
   pcVar3 = "EVE_BtlTex";
-  FUN_002c5788("EVE_BtlTex",2,0,0,FUN_001e00c0,FUN_002db9a0,piVar1);
-  FUN_002c4a08("EVE_BtlTexDraw",0x6f,0,0,FUN_001e023c,0,piVar1,pcVar3);
+  asdProcessCreateSimple("EVE_BtlTex",2,0,0,FUN_001e00c0,FUN_002db9a0,piVar1);
+  taskCreateDraw("EVE_BtlTexDraw",0x6f,0,0,FUN_001e023c,0,piVar1,pcVar3);
   return pcVar3;
 }
 

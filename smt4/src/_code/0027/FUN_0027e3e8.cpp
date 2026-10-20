@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int FUN_00290d74(int, char *);
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 extern int FUN_003bf570(int);
 
 
@@ -33,7 +33,7 @@ unsigned int FUN_0027e3e8(int *param_1,int param_2,int param_3)
       param_1[9] = 0;
       param_1[1] = 0;
     }
-    temp_v1 = FUN_002939f4();
+    temp_v1 = btlGetMainState();
     pcVar6 = (char *)param_1[6];
     temp_v4 = 0;
     if (temp_v4 < param_1[7]) {

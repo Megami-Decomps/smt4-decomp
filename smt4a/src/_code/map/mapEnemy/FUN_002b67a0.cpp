@@ -12,7 +12,7 @@ int FUN_00357b18(char *, int, int, int, int, int, int);
 int FUN_00364444(...);
 int FUN_00368b8c(...);
 int FUN_00379958(void);
-int FUN_0040aa90(void);
+int moriModelContentCopyBody(void);
 int FUN_0040ace8(unsigned int, unsigned int);
 int VectorSignedToFloat(int, int);
 
@@ -27,7 +27,7 @@ typedef struct {
 extern unsigned char LAB_002b6c7c; /* 0x2b6c7c */
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 extern int DAT_005806d4; /* 0x5806d4 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -46,7 +46,7 @@ extern int FUN_0018719c(void);
 /* Supplied declaration required: FUN_00379958. */
 extern int FUN_003b99d4(void);
 extern int FUN_003ded68(unsigned short);
-/* Supplied declaration required: FUN_0040aa90. */
+/* Supplied declaration required: moriModelContentCopyBody. */
 extern unsigned int FUN_0040ac08(void);
 /* Supplied declaration required: FUN_0040ace8. */
 
@@ -149,7 +149,7 @@ unsigned int FUN_002b67a0(int param_1)
                   *(short *)(temp_v4 + 0x16e) = temp_v10;
                   FUN_002d7c88(*(unsigned int *)(temp_v4 + 0x1b0));
                   *(int *)(temp_v4 + 0xac) = (int)pcVar4[0xb];
-                  temp_v2 = *(int *)(DAT_00581288 + 0x1c);
+                  temp_v2 = *(int *)(g_lmapScene + 0x1c);
                   FUN_002b5cb4();
                   if (temp_v2 >= 0x43480000) {
                     temp_v1 = (unsigned short)(unsigned char)pcVar4[10];
@@ -189,7 +189,7 @@ LAB_002b6ad4:
                         temp_v9 = FUN_0040ac08();
                       }
                       *(unsigned int *)(temp_v4 + 0x1b4) = temp_v9;
-                      FUN_0040aa90();
+                      moriModelContentCopyBody();
                       FUN_0040ace8(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v4 + 0x1b4) + 4));
                       *(unsigned char *)(temp_v4 + 0x1b9) = 1;
                     }

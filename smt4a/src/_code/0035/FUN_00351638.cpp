@@ -8,7 +8,7 @@ int FUN_00201890(void);
 int FUN_00222104(void);
 int FUN_00222434(void);
 int FUN_00271d28(void);
-int FUN_003b40fc(void);
+int effPolyTexPivotCreate(void);
 int rt_memcpy_w(int, int, int);
 
 /* Supplied declaration required: FUN_00201890. */
@@ -16,7 +16,7 @@ extern unsigned int FUN_00201940(unsigned int);
 /* Supplied declaration required: FUN_00222104. */
 /* Supplied declaration required: FUN_00222434. */
 /* Supplied declaration required: FUN_00271d28. */
-/* Supplied declaration required: FUN_003b40fc. */
+/* Supplied declaration required: effPolyTexPivotCreate. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -28,7 +28,7 @@ int FUN_00351638(int param_1)
   unsigned int temp_v1;
   
   temp_v0 = 0;
-  FUN_003b40fc();
+  effPolyTexPivotCreate();
   temp_v1 = *(unsigned int *)(param_1 + 0x13c);
   FUN_00271d28();
   *(unsigned int *)(temp_v0 + 0x13c) = temp_v1;

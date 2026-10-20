@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_00164af0(...);
 int FUN_001656a0(...);
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int FUN_001b640c(void);
@@ -97,7 +97,7 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_00164af0. */
 /* Supplied declaration required: FUN_001656a0. */
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: FUN_001b640c. */
@@ -319,7 +319,7 @@ LAB_003c01a8:
     in_d9 = CONCAT44(temp_v14 * temp_v21,temp_v16);
     if (DAT_0059dbe2 + temp_v9 == 0) {
       temp_v10 = 0x10000;
-      FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+      memAlloc(0x10000,0x100,0,0x68,0x10,1);
       *(float *)(temp_v10 + 8) = temp_v28;
       *(float *)(temp_v10 + 0xc) = temp_v29;
       *(float *)(temp_v10 + 0x10) = temp_v30;
@@ -363,7 +363,7 @@ LAB_003c01a8:
     }
     else {
       temp_v10 = 0x10000;
-      FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+      memAlloc(0x10000,0x100,0,0x68,0x10,1);
       *(float *)(temp_v10 + 8) = temp_v28;
       *(float *)(temp_v10 + 0xc) = temp_v29;
       *(float *)(temp_v10 + 0x10) = temp_v30;
@@ -407,7 +407,7 @@ LAB_003c01a8:
     }
     if (temp_v10 != 0) {
       temp_v11 = 0x10000;
-      FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+      memAlloc(0x10000,0x100,0,0x68,0x10,1);
       rt_memcpy_w();
       FUN_00300124(temp_v11,2);
     }

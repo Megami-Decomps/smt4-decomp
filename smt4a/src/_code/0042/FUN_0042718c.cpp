@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00102b6c(unsigned char [96], unsigned char [48], int);
-int FUN_001884b0(void);
+int vcallSlot12IfValid(void);
 int FUN_001b57a8(...);
 int FUN_0042b17c(int *, int, int, int *);
 int FUN_0043c2f4(unsigned char [48], int, unsigned char *);
@@ -28,7 +28,7 @@ extern unsigned char LAB_00427334; /* 0x427334 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_00102b6c. */
-/* Supplied declaration required: FUN_001884b0. */
+/* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: FUN_001b57a8. */
 extern int FUN_002e783c(void);
 /* Supplied declaration required: FUN_0042b17c. */
@@ -87,13 +87,13 @@ void FUN_0042718c(unsigned int *param_1,int *param_2,unsigned int param_3)
         uStack_24 = temp_v4;
         FUN_001b57a8(&temp_v4,temp_v1);
         if (temp_v9 != 0) {
-          FUN_001884b0();
+          vcallSlot12IfValid();
         }
       }
       else {
         FUN_001b57a8(&temp_v11,0);
         if (temp_v9 != 0) {
-          FUN_001884b0();
+          vcallSlot12IfValid();
         }
       }
       *param_1 = temp_v11;
@@ -103,7 +103,7 @@ void FUN_0042718c(unsigned int *param_1,int *param_2,unsigned int param_3)
     FUN_001b57a8(&temp_v4,piVar2);
   }
   if (temp_v9 != 0) {
-    FUN_001884b0();
+    vcallSlot12IfValid();
   }
   *param_1 = temp_v4;
   param_1[1] = in_stack_ffffff34;

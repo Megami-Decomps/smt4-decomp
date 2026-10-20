@@ -1,33 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b3988` (_code @ 0x2b3988, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail loads a's info into r1 (reusing the parameter) and b's into r0 (swapped here) */
+/* Returns 1 if `a`'s class record sorts before `b`'s (or if `b` is NULL), else 0. */
+#include "common.h"
 
 extern "C" {
 
+typedef struct ClassInfo {
+    /* 0x00 */ u32 flags;       /* both bits 30 and 0 must be set for a valid record */
+    /* 0x04 */ u8 unk04[0x48];
+    /* 0x4C */ u32 order;
+} ClassInfo;
 
-unsigned int FUN_002b3988(unsigned int param_1,int param_2,int param_3)
+typedef struct Object {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ ClassInfo *info;
+} Object;
 
+static __inline ClassInfo *validInfo(Object *obj)
 {
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  
-  if (param_3 == 0) {
-    return 1;
-  }
-  if (param_2 != 0) {
-    puVar2 = *(unsigned int **)(param_2 + 8);
-    if ((puVar2 != (unsigned int *)0x0) && ((~*puVar2 & 0x40000001) != 0)) {
-      puVar2 = (unsigned int *)0x0;
+    ClassInfo *info = obj->info;
+
+    if (info != NULL && (~info->flags & 0x40000001) != 0) {
+        info = NULL;
     }
-    puVar1 = *(unsigned int **)(param_3 + 8);
-    if ((puVar1 != (unsigned int *)0x0) && ((~*puVar1 & 0x40000001) != 0)) {
-      puVar1 = (unsigned int *)0x0;
-    }
-    if (puVar2[0x13] < puVar1[0x13]) {
-      return 1;
-    }
-  }
-  return 0;
+    return info;
 }
 
-} /* extern "C" */
+u32 FUN_002b3988(u32 unused, Object *a, Object *b)
+{
+    if (b == NULL) {
+        return 1;
+    }
+    if (a != NULL) {
+        ClassInfo *infoA = validInfo(a);
+        ClassInfo *infoB = validInfo(b);
+
+        if (infoA->order < infoB->order) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+}

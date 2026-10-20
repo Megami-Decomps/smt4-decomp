@@ -8,10 +8,10 @@ extern unsigned int DAT_00570288; /* 0x570288 */
 extern unsigned int DAT_0057028c; /* 0x57028c */
 extern unsigned int DAT_005702b0; /* 0x5702b0 */
 extern unsigned int DAT_005702b4; /* 0x5702b4 */
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-extern int FUN_0014aa78(void);
-extern int FUN_004ee568(unsigned int);
+extern int btlGetMainState(void);
+extern int btlUnitGet(unsigned int);
 
 
 void FUN_003283c8(int param_1)
@@ -27,13 +27,13 @@ void FUN_003283c8(int param_1)
   temp_v4 = 0;
   temp_v3 = 4;
   do {
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     puVar3 = (unsigned int *)(*(int *)(temp_v0 + 0x1ffc) + temp_v3 * 0x408);
     temp_v1 = *puVar3;
     temp_v2 = puVar3[1];
     if (((DAT_00570288 & temp_v1) == 0 && (DAT_0057028c & temp_v2) == 0) &&
        ((temp_v1 & DAT_005702b0) == 0 && (temp_v2 & DAT_005702b4) == 0)) {
-      temp_v0 = FUN_004ee568(DAT_0057113c);
+      temp_v0 = btlUnitGet(g_btlScriptUnit);
       temp_v4 = (int)(char)((char)temp_v4 + '\x01');
       *(char *)(temp_v0 + temp_v3 + 0x38) = (char)temp_v3;
       if (param_1 <= temp_v4) {

@@ -1,71 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dff6c` (_code @ 0x3dff6c, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Fills the shared 100-byte work record from `stats`, a name and a level, and applies the level-ups. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e6354(unsigned short *, int);
-int FUN_003df7c4(int);
-int FUN_004cc6d4(unsigned short *, int, int);
-int FUN_004ccf78(int);
-int strncpy(unsigned short *, unsigned int, int);
+typedef struct WorkRecord {
+    /* 0x00 */ u16 stat0;
+    /* 0x02 */ u16 stat1;
+    /* 0x04 */ u16 stat2;
+    /* 0x06 */ u16 stat3;
+    /* 0x08 */ u16 stat4;
+    /* 0x0A */ u16 stat5;
+    /* 0x0C */ u16 stat6;
+    /* 0x0E */ u16 unk0E[7];
+    /* 0x1C */ u16 unk1C;
+    /* 0x1E */ u16 unk1E;
+    /* 0x20 */ u8 unk20[0x0A];
+    /* 0x2A */ u16 unk2A;
+    /* 0x2C */ u16 unk2C;
+    /* 0x2E */ u8 unk2E[0x1E];
+    /* 0x4C */ char name[0x12];
+    /* 0x5E */ u8 unk5E[2];
+    /* 0x60 */ u16 unk60;
+    /* 0x62 */ u16 level;
+} WorkRecord;
 
-typedef struct fn_003dff6c_arg0 fn_003dff6c_arg0;
-struct fn_003dff6c_arg0 {
-    undefined2 field_0x0; /* +0x0 */
-    undefined2 field_0x2; /* +0x2 */
-    undefined2 field_0x4; /* +0x4 */
-    undefined2 field_0x6; /* +0x6 */
-    undefined2 field_0x8; /* +0x8 */
-    undefined2 field_0xa; /* +0xa */
-    undefined2 field_0xc; /* +0xc */
-    unsigned char pad_0xe[0xe];
-    ushort field_0x1c; /* +0x1c */
-    ushort field_0x1e; /* +0x1e */
-    unsigned char pad_0x20[0xa];
-    undefined2 field_0x2a; /* +0x2a */
-    undefined2 field_0x2c; /* +0x2c */
-    unsigned char pad_0x2e[0x2f];
-    undefined1 field_0x5d; /* +0x5d */
-    unsigned char pad_0x5e[0x2];
-    undefined2 field_0x60; /* +0x60 */
-    undefined2 field_0x62; /* +0x62 */
-};
+extern WorkRecord *FUN_001801a4(void);
+extern void sysMemClear(void *buffer, s32 size);
+extern void FUN_003df7c4(s32 arg);
+extern void FUN_004cc6d4(WorkRecord *record, s32 levels, s32 arg);
+extern void FUN_004ccf78(s32 arg);
+extern char *strncpy(char *dest, const char *src, u32 count);
 
-extern unsigned short *FUN_001801a4(void);
-/* Supplied declaration required: FUN_002e6354. */
-/* Supplied declaration required: FUN_003df7c4. */
-/* Supplied declaration required: FUN_004cc6d4. */
-/* Supplied declaration required: FUN_004ccf78. */
-
-
-void FUN_003dff6c(int param_1,unsigned int param_2,unsigned short *param_3)
-
+void FUN_003dff6c(s32 level, const char *name, const u16 *stats)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned short *puVar1;
-  
-  puVar1 = (unsigned short *)FUN_001801a4();
-  FUN_002e6354(puVar1,100);
-  puVar1[0x30] = 0;
-  puVar1[0x31] = (short)param_1;
-  strncpy(puVar1 + 0x26,param_2,0x12);
-  *(unsigned char *)((int)puVar1 + 0x5d) = 0;
-  FUN_004ccf78(0);
-  if (param_1 > 1) {
-    FUN_004cc6d4(puVar1,(int)(short)(param_1 - 1),1);
-  }
-  *puVar1 = *param_3;
-  puVar1[1] = param_3[1];
-  puVar1[2] = param_3[2];
-  puVar1[3] = param_3[3];
-  puVar1[4] = param_3[4];
-  puVar1[5] = param_3[5];
-  puVar1[6] = param_3[6];
-  FUN_003df7c4(0);
-  puVar1[0x15] = puVar1[0xe];
-  puVar1[0x16] = puVar1[0xf];
-  return;
+    WorkRecord *record = FUN_001801a4();
+
+    sysMemClear(record, 100);
+    record->level = level;
+    record->unk60 = 0;
+    strncpy(record->name, name, 0x12);
+    record->name[0x11] = 0;
+    FUN_004ccf78(0);
+    if (level > 1) {
+        FUN_004cc6d4(record, (s16)(level - 1), 1);
+    }
+    record->stat0 = stats[0];
+    record->stat1 = stats[1];
+    record->stat2 = stats[2];
+    record->stat3 = stats[3];
+    record->stat4 = stats[4];
+    record->stat5 = stats[5];
+    record->stat6 = stats[6];
+    FUN_003df7c4(0);
+    record->unk2A = record->unk1C;
+    record->unk2C = record->unk1E;
 }
 
-} /* extern "C" */
+}

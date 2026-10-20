@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_002693b4(unsigned int, unsigned int, int, int);
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 
 /* Supplied declaration required: FUN_002693b4. */
 extern unsigned int FUN_002693e4(void);
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 
 
 unsigned int FUN_002d58b4(int param_1,unsigned int param_2)
@@ -20,7 +20,7 @@ unsigned int FUN_002d58b4(int param_1,unsigned int param_2)
   unsigned int temp_v1;
   
   temp_v0 = 0x7e8;
-  FUN_002c222c();
+  asdOperatorNew();
   if (temp_v0 == 0) {
     temp_v1 = 0;
   }

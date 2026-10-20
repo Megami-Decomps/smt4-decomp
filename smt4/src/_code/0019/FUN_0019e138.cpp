@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_002b2368(...);
 int FUN_002b70cc(void);
-int FUN_002c415c(void);
-int FUN_002c43b4(...);
+int asdMemFree(void);
+int jobStop(...);
 
 int FUN_001f4f14(...);
 int FUN_0021799c(void);
@@ -42,7 +42,7 @@ int FUN_0028be84(void);
 int FUN_0028bed4(void);
 int FUN_0028bf2c(void);
 int FUN_0028cb40(...);
-int FUN_002954dc(int);
+int btlTalkBustUpSetUnk2F4(int);
 int FUN_002954f4(int, int);
 int FUN_002b06c4(void);
 int FUN_002c1658(...);
@@ -61,7 +61,7 @@ int FUN_0028bfac(unsigned int);
 int FUN_0028bfe4(int);
 int FUN_0028c028(...);
 int FUN_0028c040(void);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_0029a128(int);
 int FUN_002bee58(int, int);
 int FUN_002bf818(...);
@@ -133,8 +133,8 @@ extern int FUN_0028c600(int);
 /* Supplied declaration required: FUN_00291944. */
 /* Supplied declaration required: FUN_00292c0c. */
 extern int FUN_00293230(void);
-/* Supplied declaration required: FUN_002939f4. */
-/* Supplied declaration required: FUN_002954dc. */
+/* Supplied declaration required: btlGetMainState. */
+/* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
 extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_0029a128. */
@@ -153,11 +153,11 @@ extern int FUN_002b8cec(unsigned int);
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf818. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c09f4. */
 /* Supplied declaration required: FUN_002c1658. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 extern unsigned int FUN_002cdd74(void);
 extern int FUN_002d0080(int);
 extern int FUN_002d0298(int);
@@ -167,7 +167,7 @@ extern int FUN_002dc3ec(int);
 /* Supplied declaration required: FUN_002dc55c. */
 extern int FUN_002e4354(void);
 extern int FUN_002f25c4(void);
-extern int FUN_00313158(unsigned int);
+extern int btlTalkBustUpIsUnk2F8(unsigned int);
 /* Supplied declaration required: FUN_00318c5c. */
 /* Supplied declaration required: FUN_00337a0c. */
 /* Supplied declaration required: FUN_0033c6d4. */
@@ -208,7 +208,7 @@ unsigned int FUN_0019e138(void)
   unsigned int temp_v20;
   int temp_v21;
   
-  temp_v4 = FUN_002c08f0();
+  temp_v4 = jobGetWork();
   temp_v0 = DAT_00439ca8;
   if (DAT_00439ca8 == 0) {
     return 0;
@@ -387,9 +387,9 @@ unsigned int FUN_0019e138(void)
         }
       }
     }
-    temp_v12 = FUN_002939f4();
+    temp_v12 = btlGetMainState();
     if ((*(unsigned int *)(temp_v12 + 0x44a8) & 0x2000) != 0) {
-      temp_v12 = FUN_00313158(*(unsigned int *)(temp_v4 + 0x2268));
+      temp_v12 = btlTalkBustUpIsUnk2F8(*(unsigned int *)(temp_v4 + 0x2268));
       if (temp_v12 == 0) {
         puVar7 = (unsigned short *)0x0;
         FUN_002b06c4();
@@ -406,8 +406,8 @@ unsigned int FUN_0019e138(void)
           DAT_00439c88 = 0;
           FUN_0028bf2c();
           FUN_002954f4(*puVar7,1);
-          FUN_002954dc(1);
-          temp_v12 = FUN_002939f4();
+          btlTalkBustUpSetUnk2F4(1);
+          temp_v12 = btlGetMainState();
           if ((*(unsigned int *)(temp_v12 + 0x44a8) & 0x40000) != 0) {
             FUN_001ed64c(*(char *)((int)puVar7 + 0xa3) + '\x02',*(unsigned int *)(temp_v4 + 0x2230),1);
           }
@@ -499,7 +499,7 @@ unsigned int FUN_0019e138(void)
     }
     else {
 LAB_0019e7b8:
-      FUN_002939f4();
+      btlGetMainState();
       temp_v4 = FUN_00293230();
       if (temp_v4 == 0) break;
     }
@@ -814,10 +814,10 @@ LAB_0019ef1c:
       FUN_002b2368(*(unsigned int *)(temp_v8 + 0x7e20));
       *(unsigned int *)(temp_v8 + 0x7e20) = 0;
       if (DAT_00439ca8 != 0) {
-        FUN_002c415c();
+        asdMemFree();
         DAT_00439ca8 = 0;
       }
-      FUN_002c43b4(*(unsigned int *)(temp_v4 + 0x54),0);
+      jobStop(*(unsigned int *)(temp_v4 + 0x54),0);
     }
   }
   puVar14 = (unsigned int *)(temp_v0 + 0x5cf0);

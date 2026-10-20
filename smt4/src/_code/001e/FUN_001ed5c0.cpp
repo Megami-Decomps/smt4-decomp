@@ -9,7 +9,7 @@ int FUN_002592d8(int);
 extern unsigned int FUN_00100bd4(void);
 extern int FUN_001eb398(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002592d8. */
-extern unsigned int FUN_00296cc8(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 
 
 unsigned char FUN_001ed5c0(void)
@@ -20,7 +20,7 @@ unsigned char FUN_001ed5c0(void)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_00296cc8(0);
+  temp_v0 = scrGetArg(0);
   FUN_002592d8(1);
   temp_v1 = FUN_00100bd4();
   temp_v2 = FUN_001eb398(temp_v0,temp_v1);

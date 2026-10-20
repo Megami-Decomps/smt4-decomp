@@ -32,7 +32,7 @@ extern int FUN_001ab854(void);
 extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_002a7b74. */
 /* Supplied declaration required: FUN_0035dd74. */
-extern int FUN_003792d4(void);
+extern int lmapSceneGetScript(void);
 /* Supplied declaration required: FUN_003857b4. */
 /* Supplied declaration required: FUN_003d2d34. */
 /* Supplied declaration required: FUN_003e5b9c. */
@@ -91,7 +91,7 @@ void FUN_003b0940(void)
   FUN_002a7b74();
   FUN_0023c08c(0x12);
   FUN_0020b908(0x26,1);
-  temp_v0 = FUN_003792d4();
+  temp_v0 = lmapSceneGetScript();
   if (temp_v0 != 0) {
     FUN_003857b4(1);
     FUN_003e5b9c(temp_v0);

@@ -41,7 +41,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001573e4. */
 /* Supplied declaration required: FUN_00158f90. */
 extern unsigned int FUN_002bafb0(void);
-extern int aeabi_idivmod(unsigned int);
+extern int __aeabi_idivmod(unsigned int);
 /* Supplied declaration required: nw_snd_internal_CurveAdshr_GetValue. */
 /* Supplied declaration required: nw_snd_internal_CurveLfo_Update. */
 /* Supplied declaration required: nw_snd_internal_driver_ChannelManager_Free. */
@@ -84,7 +84,7 @@ void FUN_001552fc(int param_1,int param_2)
     }
     else {
       temp_v0 = *(unsigned char *)(param_1 + 0x110);
-      temp_v2 = aeabi_idivmod(((unsigned int)*(unsigned char *)(param_1 + 0x111) - (unsigned int)temp_v0) * (unsigned int)temp_v4);
+      temp_v2 = __aeabi_idivmod(((unsigned int)*(unsigned char *)(param_1 + 0x111) - (unsigned int)temp_v0) * (unsigned int)temp_v4);
       temp_v1 = (temp_v2 + (unsigned int)temp_v0) & 0xff;
     }
     temp_v5 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);

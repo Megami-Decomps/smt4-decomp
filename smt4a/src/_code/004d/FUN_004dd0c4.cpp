@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00192550(void);
 int FUN_001aba54(void);
 int FUN_001b4a90(unsigned int *, int, unsigned int);
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 int FUN_002e6dd4(int, int);
 int FUN_003f0e20(unsigned int *, int);
 int FUN_004aa798(unsigned int, int, int);
@@ -31,7 +31,7 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } param_2_stack;
 
-extern unsigned int DAT_00571138; /* 0x571138 */
+extern unsigned int g_btlAction; /* 0x571138 */
 extern unsigned int DAT_00571148; /* 0x571148 */
 extern unsigned int DAT_0057114c; /* 0x57114c */
 extern unsigned int DAT_00571150; /* 0x571150 */
@@ -53,7 +53,7 @@ extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_001aba54. */
 /* Supplied declaration required: FUN_001b4a90. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004aa798. */
@@ -206,9 +206,9 @@ LAB_004dd43c:
         temp_v12 = temp_v17;
       } while (temp_v21 < 0x85);
       FUN_004aa798(DAT_0057a9c8,*param_1 + 0x1ec8,5);
-      FUN_002e6354(param_2 + 0xe,0x85);
+      sysMemClear(param_2 + 0xe,0x85);
       FUN_002e6dd4((int)param_2 + 0xbd,0x85);
-      DAT_00571138 = 0xffffffff;
+      g_btlAction = 0xffffffff;
       temp_v12 = 0;
       do {
         if ((*(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v12 * 0x1d0 + 0x50) & 4) != 0) {

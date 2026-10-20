@@ -28,7 +28,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern unsigned int DAT_00573898; /* 0x573898 */
+extern unsigned int g_btlEvent; /* 0x573898 */
 
 /* Supplied declaration required: FUN_003e1114. */
 /* Supplied declaration required: FUN_003e2470. */
@@ -46,7 +46,7 @@ unsigned int * FUN_003e11ac(unsigned int *param_1,fn_003e11ac_arg1 *param_2)
 /* irregular: 4 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_004d84e8(DAT_00573898);
+  temp_v0 = FUN_004d84e8(g_btlEvent);
   if (temp_v0 != 0) {
     return (unsigned int *)0x0;
   }

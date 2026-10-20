@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern unsigned char DAT_004e6f64; /* 0x4e6f64 */
+extern unsigned char g_dspsndState; /* 0x4e6f64 */
 
 extern int FUN_002bb274(void);
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_SetSoundOutputMode. */
@@ -24,7 +24,7 @@ void nn_snd_CTR_MasterManagerImpl_SetSoundOutputMode(int param_1,unsigned int pa
   temp_v0 = FUN_002bb274();
   if (temp_v0 != 0) {
     *(char *)(param_1 + 2) = (char)param_2;
-    nn_snd_CTR_Dspsnd_SetSoundOutputMode(&DAT_004e6f64,param_2);
+    nn_snd_CTR_Dspsnd_SetSoundOutputMode(&g_dspsndState,param_2);
     return;
   }
   return;

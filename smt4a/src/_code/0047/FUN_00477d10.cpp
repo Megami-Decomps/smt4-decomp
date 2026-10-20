@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00182084(void);
 int FUN_00183318(...);
 int FUN_00183f58(...);
@@ -19,9 +19,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00182084. */
 /* Supplied declaration required: FUN_00183318. */
 /* Supplied declaration required: FUN_00183f58. */
@@ -46,7 +46,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
   switch(param_2) {
   case 0:
     *param_1 = *param_1 | 0x100000;
-    FUN_001681cc(0xcb);
+    sysPlaySe(0xcb);
     temp_v2 = 0;
     do {
       FUN_0019d36c();
@@ -57,7 +57,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
   case 1:
     *param_1 = *param_1 | 0x100000;
     if (param_3 != 0) {
-      FUN_001681cc(0xcc);
+      sysPlaySe(0xcc);
       temp_v2 = 0;
       do {
         FUN_0019d36c();
@@ -74,10 +74,10 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
     return;
   case 2:
     *param_1 = *param_1 | 0x100000;
-    temp_v2 = DAT_00570260;
+    temp_v2 = g_aocMain;
     FUN_004cfe4c(param_1 + 0x90);
     if (param_3 != 0) {
-      FUN_001681cc(0xcd);
+      sysPlaySe(0xcd);
       temp_v1 = 0;
       do {
         FUN_0019d36c();
@@ -138,7 +138,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
   case 3:
     *param_1 = *param_1 | 0x100000;
     if (param_3 != 0) {
-      FUN_001681cc(0xcc);
+      sysPlaySe(0xcc);
       temp_v2 = 0;
       do {
         FUN_0019d36c();
@@ -158,7 +158,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
   case 4:
     *param_1 = *param_1 | 0x100000;
     if (param_3 != 0) {
-      FUN_001681cc(0xd0);
+      sysPlaySe(0xd0);
       return;
     }
     break;

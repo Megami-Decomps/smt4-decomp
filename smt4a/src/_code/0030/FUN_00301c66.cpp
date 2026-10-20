@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0030d3f4(unsigned char *, unsigned int);
+int copyObjectCtorDerived(unsigned char *, unsigned int);
 
-/* Supplied declaration required: FUN_0030d3f4. */
+/* Supplied declaration required: copyObjectCtorDerived. */
 
 
 void FUN_00301c66(unsigned char *param_1,unsigned char *param_2,unsigned int param_3)
@@ -14,7 +14,7 @@ void FUN_00301c66(unsigned char *param_1,unsigned char *param_2,unsigned int par
 {
 /* irregular: 1 native warning(s); review required */
   *param_1 = *param_2;
-  FUN_0030d3f4(param_1 + 8,param_3);
+  copyObjectCtorDerived(param_1 + 8,param_3);
   return;
 }
 

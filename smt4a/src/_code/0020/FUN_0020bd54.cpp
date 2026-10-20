@@ -46,7 +46,7 @@ typedef struct {
 
 extern unsigned char LAB_00192824; /* 0x192824 */
 extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
@@ -248,7 +248,7 @@ void FUN_0020bd54(void)
           FUN_00164b5c(2,10,0,temp_v9,temp_v10,0xb);
         }
       }
-      temp_v10 = DAT_0059dbb4;
+      temp_v10 = g_renderCtx;
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 6);
     temp_v7 = FUN_00169294(6,7,0);
@@ -540,7 +540,7 @@ LAB_0020c7bc:
         }
       }
 LAB_0020c98c:
-      temp_v10 = DAT_0059dbb4;
+      temp_v10 = g_renderCtx;
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 6);
     temp_v7 = FUN_00169294(6,1,0);
@@ -578,7 +578,7 @@ LAB_0020c98c:
         }
         FUN_0025c848(temp_v5 + temp_v7 * 0x8c + 0x34);
       }
-      temp_v10 = DAT_0059dbb4;
+      temp_v10 = g_renderCtx;
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 6);
     temp_v5 = FUN_00169294(6,7,0);

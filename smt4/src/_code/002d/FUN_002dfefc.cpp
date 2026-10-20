@@ -15,11 +15,11 @@ typedef struct {
 
 extern unsigned char DAT_00404464; /* 0x404464 */
 extern unsigned int *DAT_00447a98; /* 0x447a98 */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_gameState; /* 0x49f91c */
 extern unsigned char DAT_004b7608; /* 0x4b7608 */
 
 /* Supplied declaration required: FUN_002829d4. */
-extern int FUN_00292f28(unsigned int);
+extern int padIsButtonDown(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bfc24. */
 extern unsigned int FUN_002bfdc4(void);
@@ -50,7 +50,7 @@ void FUN_002dfefc(int param_1)
     temp_v5 = (int)(temp_v7 + ((unsigned int)((int)temp_v7 >> 0x1f) >> 0x1d)) >> 3;
     temp_v4 = 1 << (((int)temp_v7 % 8) & 0xffU);
     if ((*(unsigned char *)(temp_v3 + temp_v5 + 0xd9c) & temp_v4) == 0) {
-      temp_v3 = FUN_00292f28(temp_v7);
+      temp_v3 = padIsButtonDown(temp_v7);
       temp_v1 = (unsigned char)temp_v4;
       if (temp_v3 != 0) {
         temp_v3 = FUN_002c2950();
@@ -68,7 +68,7 @@ void FUN_002dfefc(int param_1)
     }
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 0x8d);
-  if ((((param_1 == 0) && (temp_v0)) && (DAT_0049f91c != 0x24)) &&
+  if ((((param_1 == 0) && (temp_v0)) && (g_gameState != 0x24)) &&
      (temp_v5 = FUN_002c09d0(0x408), temp_v5 != 0)) {
     DAT_004b7608 = 0;
     FUN_002be624(&DAT_004b7608,&DAT_00404464);

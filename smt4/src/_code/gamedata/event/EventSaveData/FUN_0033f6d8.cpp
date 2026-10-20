@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002adc88(void);
-int FUN_002c5300(int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 int rt_memcpy(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_002adc88. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -26,7 +26,7 @@ unsigned int FUN_0033f6d8(void)
   
   FUN_002adc88();
   temp_v0 = 0x100;
-  FUN_002c5300(0x100,0x100,0,0x44,1);
+  asdMemoryAlloc(0x100,0x100,0,0x44,1);
   rt_memcpy();
   return temp_v0;
 }

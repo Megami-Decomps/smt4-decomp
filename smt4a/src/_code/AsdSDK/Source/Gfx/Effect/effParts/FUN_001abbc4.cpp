@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00167ab4(...);
+int memAlloc(...);
 int FUN_001ac8ec(...);
 int FUN_001acb48(...);
 int FUN_001b4ba4(int);
@@ -13,7 +13,7 @@ int FUN_001b4ddc(...);
 int FUN_001b4e80(void);
 int FUN_001b4eb8(...);
 int FUN_002e342c(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int rt_memcpy_w(...);
 
 typedef int romwright_code(...);
@@ -32,7 +32,7 @@ typedef struct {
 
 extern char s______________________005b3274[113]; /* 0x5b3274 */
 
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_001ac8ec. */
 /* Supplied declaration required: FUN_001acb48. */
 /* Supplied declaration required: FUN_001b4ba4. */
@@ -41,7 +41,7 @@ extern char s______________________005b3274[113]; /* 0x5b3274 */
 /* Supplied declaration required: FUN_001b4e80. */
 /* Supplied declaration required: FUN_001b4eb8. */
 /* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -72,8 +72,8 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
   
   FUN_001b4ba4(3);
   puVar2 = (unsigned int *)0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0x90,0x10,1);
-  FUN_002e6354();
+  memAlloc(0x10000,0x100,0,0x90,0x10,1);
+  sysMemClear();
   puVar2[0x20] = 0;
   puVar2[0x21] = 0;
   FUN_001b4ddc(puVar2);
@@ -98,9 +98,9 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
     temp_v10 = 0;
     do {
       temp_v1 = 0x10000;
-      FUN_00167ab4(0x10000,0x100,0,0xc0,0x10,1);
-      FUN_002e6354();
-      FUN_002e6354(temp_v1,0x90);
+      memAlloc(0x10000,0x100,0,0xc0,0x10,1);
+      sysMemClear();
+      sysMemClear(temp_v1,0x90);
       *(unsigned int *)(temp_v1 + 0x84) = 1;
       *(unsigned char *)(temp_v1 + 0x88) = 8;
       *(unsigned char *)(temp_v1 + 0x89) = 0;
@@ -126,7 +126,7 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
         temp_v3 = *(int *)(temp_v2 + 0x90);
         temp_v0 = *(unsigned short *)(temp_v3 + 4);
         puVar6 = (unsigned int *)0x10000;
-        FUN_00167ab4(0x10000,0x100,0,0x2c,0x10,1);
+        memAlloc(0x10000,0x100,0,0x2c,0x10,1);
         puVar6[1] = 0;
         puVar6[2] = 0;
         puVar6[3] = 0;
@@ -151,7 +151,7 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
         puVar13 = *(unsigned int **)(temp_v9 + 0x90);
         temp_v0 = *(unsigned short *)(puVar13 + 1);
         puVar6 = (unsigned int *)0x10000;
-        FUN_00167ab4(0x10000,0x100,0,0x2c,0x10,1);
+        memAlloc(0x10000,0x100,0,0x2c,0x10,1);
         puVar6[1] = 0;
         puVar6[2] = 0;
         puVar6[3] = 0;
@@ -196,9 +196,9 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
     if (0 < temp_v9) {
       do {
         temp_v3 = 0x10000;
-        FUN_00167ab4(0x10000,0x100,0,0xc0,0x10,1);
-        FUN_002e6354();
-        FUN_002e6354(temp_v3,0x90);
+        memAlloc(0x10000,0x100,0,0xc0,0x10,1);
+        sysMemClear();
+        sysMemClear(temp_v3,0x90);
         *(unsigned int *)(temp_v3 + 0x84) = 1;
         *(unsigned char *)(temp_v3 + 0x88) = 8;
         *(unsigned char *)(temp_v3 + 0x89) = 0;
@@ -214,7 +214,7 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
           temp_v2 = *(int *)(temp_v7 + 0x90);
           temp_v0 = *(unsigned short *)(temp_v2 + 4);
           puVar6 = (unsigned int *)0x10000;
-          FUN_00167ab4(0x10000,0x100,0,0x2c,0x10,1);
+          memAlloc(0x10000,0x100,0,0x2c,0x10,1);
           puVar6[1] = 0;
           puVar6[2] = 0;
           puVar6[3] = 0;
@@ -255,7 +255,7 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
             puVar6[8] = temp_v2 - (int)puVar6;
             temp_v0 = *(unsigned short *)(puVar6 + 1);
             puVar13 = (unsigned int *)0x10000;
-            FUN_00167ab4(0x10000,0x100,0,0x2c,0x10,1);
+            memAlloc(0x10000,0x100,0,0x2c,0x10,1);
             puVar13[1] = 0;
             puVar13[2] = 0;
             puVar13[3] = 0;
@@ -281,7 +281,7 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
           else {
             temp_v0 = *(unsigned short *)(puVar6 + 1);
             puVar13 = (unsigned int *)0x10000;
-            FUN_00167ab4(0x10000,0x100,0,0x2c,0x10,1);
+            memAlloc(0x10000,0x100,0,0x2c,0x10,1);
             puVar13[1] = 0;
             puVar13[2] = 0;
             puVar13[3] = 0;

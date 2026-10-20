@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_0019a730(void);
-int FUN_002e6354(int, int);
+int asdTextureCreate(void);
+int sysMemClear(int, int);
 int FUN_0030ea58(int *, unsigned int);
 int strncpy(int, unsigned int, int);
 
 extern int DAT_005cc500; /* 0x5cc500 */
 
-/* Supplied declaration required: FUN_0019a730. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: asdTextureCreate. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0030ea58. */
 
 
@@ -53,10 +53,10 @@ void FUN_0031b53c(unsigned int param_1)
     } while (temp_v1 < DAT_005cc500);
   }
   if (DAT_005cc500 < 0x40) {
-    FUN_002e6354(DAT_005cc500 * 0x4c + 0x5cb200,0x4c);
+    sysMemClear(DAT_005cc500 * 0x4c + 0x5cb200,0x4c);
     strncpy(DAT_005cc500 * 0x4c + 0x5cb204,param_1,0x40);
     temp_v0 = 0;
-    FUN_0019a730();
+    asdTextureCreate();
     *(unsigned int *)(DAT_005cc500 * 0x4c + 0x5cb200) = temp_v0;
     DAT_005cc500 = DAT_005cc500 + 1;
   }
@@ -66,10 +66,10 @@ LAB_0031b638:
     return;
   }
   if (DAT_005cc500 < 0x40) {
-    FUN_002e6354(DAT_005cc500 * 0x4c + 0x5cb200,0x4c);
+    sysMemClear(DAT_005cc500 * 0x4c + 0x5cb200,0x4c);
     strncpy(DAT_005cc500 * 0x4c + 0x5cb204,param_1,0x40);
     temp_v0 = 0;
-    FUN_0019a730();
+    asdTextureCreate();
     *(unsigned int *)(DAT_005cc500 * 0x4c + 0x5cb200) = temp_v0;
     DAT_005cc500 = DAT_005cc500 + 1;
   }

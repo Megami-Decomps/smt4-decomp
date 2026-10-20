@@ -41,7 +41,7 @@ struct fn_00138954_arg0 {
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002a880c. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 
 
 void FUN_00138954(fn_00138954_arg0 *param_1,int param_2,unsigned int param_3)
@@ -56,7 +56,7 @@ void FUN_00138954(fn_00138954_arg0 *param_1,int param_2,unsigned int param_3)
   unsigned long long temp_v2;
   
   temp_v2 = romwright_piece_4_4(in_s1,in_s0);
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   if (param_2 != 0) {
     *(unsigned int *)(temp_v0 + 0x6c) = 0;
     *(unsigned int *)(temp_v0 + 0x70) = 0;

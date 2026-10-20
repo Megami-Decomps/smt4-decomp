@@ -1,15 +1,12 @@
-#include "romwright_types.h"
+#include "map/lmapMain.h"
 
 extern "C" {
 
-extern unsigned char DAT_005806a0; /* 0x5806a0 */
-
+extern LmapExtraGlobalsA DAT_005806a0;
 
 void FUN_0030354c(void)
-
 {
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x2a8) = 0;
-  return;
+    DAT_005806a0.extra->unk2A8 = 0;
 }
 
 } /* extern "C" */

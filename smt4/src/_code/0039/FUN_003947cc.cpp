@@ -21,14 +21,14 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char LAB_00394a24; /* 0x394a24 */
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern char s_ef_e_atk01_00436028[11]; /* 0x436028 */
 
 /* Supplied declaration required: FUN_002505c0. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002aa568. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002c564c(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 unsigned int FUN_003947cc(unsigned int param_1,unsigned int param_2,unsigned int param_3)
@@ -53,7 +53,7 @@ unsigned int FUN_003947cc(unsigned int param_1,unsigned int param_2,unsigned int
   unsigned int temp_v12;
   
   temp_v4 = (unsigned long long)in_s0;
-  temp_v0 = FUN_002c564c(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 != 0) {
     return 0;
   }
@@ -77,7 +77,7 @@ unsigned int FUN_003947cc(unsigned int param_1,unsigned int param_2,unsigned int
   } while (temp_v0 < 0x191);
   pcVar5 = (char *)0x0;
 LAB_0039488c:
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   switch(param_3) {
   case 2:
   case 5:
@@ -106,7 +106,7 @@ LAB_0039498c:
     }
     break;
   default:
-    temp_v1 = *(float *)(DAT_004342c8 + 0x574);
+    temp_v1 = *(float *)(g_btlMain + 0x574);
     if (temp_v3 < temp_v1 + -17.0f) goto LAB_00394938;
     if (temp_v3 < temp_v1 + -9.0f) goto LAB_00394954;
     if (temp_v1 + 17.0f < temp_v3) goto LAB_00394970;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003d8f24(void);
 
-extern int DAT_0057f3b0; /* 0x57f3b0 */
+extern int g_eventTex; /* 0x57f3b0 */
 
 extern int FUN_00203a5c(void);
 extern float *FUN_00208bfc(int);
@@ -24,8 +24,8 @@ unsigned int FUN_002ad130(void)
   if (temp_v0 != 0) {
     FUN_003d8f24();
     pfVar2 = (float *)FUN_00208bfc(temp_v0);
-    temp_v0 = DAT_0057f3b0;
-    *(float *)(DAT_0057f3b0 + 0x90) = *pfVar2 * 30.0f;
+    temp_v0 = g_eventTex;
+    *(float *)(g_eventTex + 0x90) = *pfVar2 * 30.0f;
     *(float *)(temp_v0 + 0x94) = pfVar2[1] * 30.0f;
   }
   return 0;

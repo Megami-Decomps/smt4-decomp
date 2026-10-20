@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_001568f8(int, int);
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_00184310(void);
 int FUN_00275bc8(void);
 int FUN_00275f44(int, int);
@@ -33,7 +33,7 @@ extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001568f8. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_00224880(int);
 /* Supplied declaration required: FUN_00275bc8. */
@@ -127,7 +127,7 @@ unsigned int FUN_004c97cc(int *param_1,int param_2)
     param_1[4] = temp_v2;
     *(unsigned int *)(temp_v2 + 0x108) = 1;
     FUN_00275f44(param_1[4],0);
-    FUN_001681cc(0x3e);
+    sysPlaySe(0x3e);
     temp_v2 = 2;
     break;
   case 2:

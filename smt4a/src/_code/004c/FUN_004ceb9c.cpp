@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001517b4(...);
 int FUN_001641b4(...);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00275f44(...);
 int FUN_0034913c(...);
 int FUN_0037c8b4(...);
@@ -40,7 +40,7 @@ extern unsigned char LAB_004ced40; /* 0x4ced40 */
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001641b4. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_00224880(unsigned int);
 extern int FUN_00239414(void);
 extern int FUN_0026272c(void);
@@ -62,7 +62,7 @@ void FUN_004ceb9c(fn_004ceb9c_arg0 *param_1)
   int temp_v0;
   
   temp_v0 = FUN_00224880(param_1->field_0x18);
-  FUN_001681cc(0x122);
+  sysPlaySe(0x122);
   if (temp_v0 != 2) {
     temp_v0 = 1;
     FUN_001517b4();

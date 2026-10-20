@@ -20,7 +20,7 @@ extern unsigned char DAT_0044e7c2; /* 0x44e7c2 */
 extern unsigned char DAT_0044e7c4; /* 0x44e7c4 */
 extern unsigned char DAT_0044e7c8; /* 0x44e7c8 */
 extern unsigned char DAT_004e6f14; /* 0x4e6f14 */
-extern unsigned char DAT_004e6f64; /* 0x4e6f64 */
+extern unsigned char g_dspsndState; /* 0x4e6f64 */
 extern unsigned char uRam1ff810c0; /* 0x1ff810c0 */
 
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Synchronization (CALLOTHER). */
@@ -34,7 +34,7 @@ void FUN_00129478(void)
 {
 /* irregular: 4 native warning(s); review required */
   if ((DAT_0044e7c0 & DAT_0044e7c1) != 0) {
-    FUN_00129214(&DAT_004e6f64,1);
+    FUN_00129214(&g_dspsndState,1);
     DAT_0044e7c4 = uRam1ff810c0;
     FUN_00146e40(&DAT_004e6f14);
     DAT_0044e7c1 = 0;

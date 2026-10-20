@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a780c(void);
-int FUN_002c43b4(unsigned int, int);
+int jobStop(unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,8 +13,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002a780c. */
-extern int FUN_002bf244(unsigned int);
-/* Supplied declaration required: FUN_002c43b4. */
+extern int jobIsValid(unsigned int);
+/* Supplied declaration required: jobStop. */
 
 
 void FUN_0027eb30(unsigned int *param_1)
@@ -23,14 +23,14 @@ void FUN_0027eb30(unsigned int *param_1)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002bf244(param_1[1]);
+  temp_v0 = jobIsValid(param_1[1]);
   if (temp_v0 != 0) {
     if (param_1[0x107] != 0) {
       FUN_002a780c();
       param_1[0x107] = 0;
     }
     *param_1 = *param_1 & 0xffffffcf;
-    FUN_002c43b4(param_1[1],0);
+    jobStop(param_1[1],0);
     return;
   }
   return;

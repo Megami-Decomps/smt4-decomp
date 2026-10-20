@@ -1,47 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037fddc` (_code @ 0x37fddc, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Starts a channel: resets its envelope and LFO, queues the wave buffer on the voice, applies pan/interpolation settings, and starts it. */
+#include "nw/snd/Voice.h"
 
 extern "C" {
 
-int FUN_0037bff0(unsigned int, unsigned int, unsigned int);
-int nw_snd_internal_CurveAdshr_Reset(int);
-int nw_snd_internal_CurveLfo_Reset(int);
-int nw_snd_internal_driver_Channel_AppendWaveBuffer(int, unsigned int, unsigned int);
-int nw_snd_internal_driver_Voice_SetInterpolationType(unsigned int, int);
-int nw_snd_internal_driver_Voice_SetPanCurve(unsigned int, int);
-int nw_snd_internal_driver_Voice_SetPanMode(unsigned int, int);
-int nw_snd_internal_driver_Voice_Start(unsigned int);
+typedef struct {
+    u8 unk000[0x90];                      /* 0x000 */
+    u8 adshr[0x1c];                       /* 0x090 CurveAdshr */
+    u8 lfo[0x1a];                         /* 0x0ac CurveLfo */
+    u8 started;                           /* 0x0c6 */
+    u8 unk0c7[0x31];                      /* 0x0c7 */
+    u32 unk0f8;                           /* 0x0f8 */
+    u8 unk0fc[0x24];                      /* 0x0fc */
+    u32 userParam;                        /* 0x120 */
+    u8 panMode;                           /* 0x124 */
+    u8 panCurve;                          /* 0x125 */
+    u8 unk126[3];                         /* 0x126 */
+    u8 interpolationType;                 /* 0x129 */
+    u8 unk12a[0xa];                       /* 0x12a */
+    nw_snd_internal_driver_Voice *voice;  /* 0x134 */
+} Channel;
 
-/* Supplied declaration required: FUN_0037bff0. */
-/* Supplied declaration required: nw_snd_internal_CurveAdshr_Reset. */
-/* Supplied declaration required: nw_snd_internal_CurveLfo_Reset. */
-/* Supplied declaration required: nw_snd_internal_driver_Channel_AppendWaveBuffer. */
-/* Supplied declaration required: nw_snd_internal_driver_Voice_SetInterpolationType. */
-/* Supplied declaration required: nw_snd_internal_driver_Voice_SetPanCurve. */
-/* Supplied declaration required: nw_snd_internal_driver_Voice_SetPanMode. */
-/* Supplied declaration required: nw_snd_internal_driver_Voice_Start. */
+extern f32 DAT_00414a50;
 
+void FUN_0037bff0(nw_snd_internal_driver_Voice *voice, u32 waveBuffer, u32 bufferParam);
+void nw_snd_internal_CurveAdshr_Reset(u8 *adshr, f32 initial);
+void nw_snd_internal_CurveLfo_Reset(u8 *lfo);
+void nw_snd_internal_driver_Channel_AppendWaveBuffer(Channel *channel, u32 waveBuffer, u32 bufferParam);
+void nw_snd_internal_driver_Voice_SetInterpolationType(nw_snd_internal_driver_Voice *voice, s32 type);
+void nw_snd_internal_driver_Voice_SetPanCurve(nw_snd_internal_driver_Voice *voice, s32 curve);
+void nw_snd_internal_driver_Voice_SetPanMode(nw_snd_internal_driver_Voice *voice, s32 mode);
+void nw_snd_internal_driver_Voice_Start(nw_snd_internal_driver_Voice *voice);
 
-void FUN_0037fddc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+void FUN_0037fddc(Channel *channel, u32 waveBuffer, u32 userParam, u32 bufferParam)
 {
-/* irregular: 8 native warning(s); review required */
-  *(unsigned int *)(param_1 + 0x120) = param_3;
-  nw_snd_internal_CurveLfo_Reset(param_1 + 0xac);
-  nw_snd_internal_CurveAdshr_Reset(param_1 + 0x90);
-  *(unsigned int *)(param_1 + 0xf8) = 0;
-  FUN_0037bff0(*(unsigned int *)(param_1 + 0x134),param_2,param_4);
-  nw_snd_internal_driver_Channel_AppendWaveBuffer(param_1,param_2,param_4);
-  nw_snd_internal_driver_Voice_SetPanMode
-            (*(unsigned int *)(param_1 + 0x134),*(unsigned char *)(param_1 + 0x124));
-  nw_snd_internal_driver_Voice_SetPanCurve
-            (*(unsigned int *)(param_1 + 0x134),*(unsigned char *)(param_1 + 0x125));
-  nw_snd_internal_driver_Voice_SetInterpolationType
-            (*(unsigned int *)(param_1 + 0x134),*(unsigned char *)(param_1 + 0x129));
-  nw_snd_internal_driver_Voice_Start(*(unsigned int *)(param_1 + 0x134));
-  *(unsigned char *)(param_1 + 0xc6) = 1;
-  return;
+    channel->userParam = userParam;
+    nw_snd_internal_CurveLfo_Reset(channel->lfo);
+    nw_snd_internal_CurveAdshr_Reset(channel->adshr, DAT_00414a50);
+    channel->unk0f8 = 0;
+    FUN_0037bff0(channel->voice, waveBuffer, bufferParam);
+    nw_snd_internal_driver_Channel_AppendWaveBuffer(channel, waveBuffer, bufferParam);
+    nw_snd_internal_driver_Voice_SetPanMode(channel->voice, channel->panMode);
+    nw_snd_internal_driver_Voice_SetPanCurve(channel->voice, channel->panCurve);
+    nw_snd_internal_driver_Voice_SetInterpolationType(channel->voice, channel->interpolationType);
+    nw_snd_internal_driver_Voice_Start(channel->voice);
+    channel->started = 1;
 }
 
 } /* extern "C" */

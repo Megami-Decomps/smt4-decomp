@@ -16,8 +16,8 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_00580238; /* 0x580238 */
-extern int DAT_0058103c; /* 0x58103c */
+extern int g_lmapMainState; /* 0x580238 */
+extern int g_mapIf; /* 0x58103c */
 
 /* Supplied declaration required: FUN_00244ac8. */
 /* Supplied declaration required: FUN_002747dc. */
@@ -38,14 +38,14 @@ void FUN_0039933c(void)
   unsigned int temp_v4;
   unsigned char temp_v5;
   
-  temp_v0 = DAT_00580238;
+  temp_v0 = g_lmapMainState;
   FUN_00244ac8();
-  temp_v2 = DAT_00580238;
+  temp_v2 = g_lmapMainState;
   temp_v4 = *(unsigned int *)(temp_v0 + 0x40);
   FUN_002747dc();
   FUN_00364740(temp_v4,*(unsigned int *)(temp_v2 + 0x48));
   FUN_002ddea0();
-  temp_v0 = DAT_0058103c;
+  temp_v0 = g_mapIf;
   temp_v2 = 0;
   do {
     temp_v1 = temp_v2 + 1;

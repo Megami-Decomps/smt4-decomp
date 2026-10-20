@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00283480(void);
-int FUN_003283ac(unsigned int);
+int eventTexSetJobParam(void);
+int scrSetResult(unsigned int);
 int FUN_0036f298(unsigned int);
 int FUN_0039af48(unsigned int, int, unsigned int);
 
-extern unsigned int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_00283480. */
-/* Supplied declaration required: FUN_003283ac. */
+extern unsigned int scrGetArg(unsigned int);
+/* Supplied declaration required: eventTexSetJobParam. */
+/* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_0036f298. */
 extern int FUN_0039af04(void);
 /* Supplied declaration required: FUN_0039af48. */
@@ -26,17 +26,17 @@ unsigned int FUN_0023909c(void)
   int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
   temp_v2 = FUN_0039af04();
   temp_v3 = 0;
   if (temp_v2 != 0) {
     FUN_0039af48(temp_v0,0,temp_v1);
-    FUN_00283480();
+    eventTexSetJobParam();
     FUN_0036f298(temp_v0);
     temp_v3 = temp_v0;
   }
-  FUN_003283ac(temp_v3);
+  scrSetResult(temp_v3);
   return 1;
 }
 

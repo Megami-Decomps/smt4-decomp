@@ -1,25 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00287800` (_code @ 0x287800, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002b6b20(void);
-extern int FUN_002b6b38(void);
+/* Record queried here: a flag halfword at 0x44 and a count halfword at 0x2a. */
+typedef struct {
+    u8 unk00[0x2a];
+    u16 count;          /* 0x2a */
+    u8 unk2c[0x18];
+    u16 flags;          /* 0x44 */
+} Record;
 
+Record *gameGetOptions(void);
+int FUN_002b6b38(void);
 
-unsigned int FUN_00287800(void)
-
+/* True when the mode is 2 and the current record has flag 2 set or an empty count. */
+u32 FUN_00287800(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002b6b38();
-  if ((((temp_v0 != 0) && (temp_v0 != 1)) && (temp_v0 == 2)) &&
-     ((temp_v0 = FUN_002b6b20(), (*(unsigned short *)(temp_v0 + 0x44) & 2) != 0 ||
-      (*(short *)(temp_v0 + 0x2a) == 0)))) {
-    return 1;
-  }
-  return 0;
+    int mode = FUN_002b6b38();
+
+    if (mode == 0) {
+        return 0;
+    }
+    if (mode == 1) {
+        return 0;
+    }
+    if (mode == 2) {
+        Record *record = gameGetOptions();
+
+        if ((record->flags & 2) != 0 || record->count == 0) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 } /* extern "C" */

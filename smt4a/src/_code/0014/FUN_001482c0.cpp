@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
+int asdProcessCreateSimple(...);
 int FUN_0015f258(...);
 int FUN_0015f378(...);
 int FUN_0016ccb4(...);
@@ -12,7 +12,7 @@ int FUN_0016ce28(...);
 int FUN_0019a46c(...);
 int FUN_001a089c(...);
 int FUN_001b57a8(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -25,7 +25,7 @@ extern unsigned char LAB_001484e4; /* 0x1484e4 */
 extern unsigned char LAB_001484f4; /* 0x1484f4 */
 extern int FUN_0015f2ec(...); /* 0x15f2ec */
 
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_001585bc(int);
 extern int FUN_001585d4(int);
 /* Supplied declaration required: FUN_0015f258. */
@@ -40,7 +40,7 @@ extern int FUN_0016cd0c(int);
 /* Supplied declaration required: FUN_001a089c. */
 /* Supplied declaration required: FUN_001b57a8. */
 extern unsigned int *FUN_001b5acc(int);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 unsigned int * FUN_001482c0(int param_1)
@@ -101,7 +101,7 @@ unsigned int * FUN_001482c0(int param_1)
   puVar2[-0x1d1] = 0x19a2;
   puVar2[-0x1d0] = (unsigned int)puVar4 & 0xff000000;
   FUN_0016ccb4(puVar2 + -0x1b7);
-  FUN_002e6354(puVar2 + -0x1d6,0xb);
+  sysMemClear(puVar2 + -0x1d6,0xb);
   FUN_0019a46c(puVar2 + -0x1d6,&LAB_001484e4,0xb);
   puVar2[-0x32] = 0;
   puVar2[-0x31] = 0;
@@ -119,7 +119,7 @@ unsigned int * FUN_001482c0(int param_1)
   puVar2[-0x25] = 0;
   puVar2[-0x24] = 0;
   puVar2[-0x23] = 0;
-  FUN_002e6354(puVar2 + -0x22,0x80);
+  sysMemClear(puVar2 + -0x22,0x80);
   FUN_0015f378(puVar2 + -0x1b5,0x8000);
   FUN_0016ce28(puVar2 + -0x1b1);
   FUN_0015f258(puVar2 + 4);
@@ -127,7 +127,7 @@ unsigned int * FUN_001482c0(int param_1)
   uStack_1c = 0;
   puVar5 = &LAB_001484f4;
   temp_v4 = puVar2 + -0x1d7;
-  FUN_0014e38c(&LAB_001484f4,4,0);
+  asdProcessCreateSimple(&LAB_001484f4,4,0);
   puVar2[0x182] = (unsigned int)puVar5;
   return puVar2 + -0x1d7;
 }

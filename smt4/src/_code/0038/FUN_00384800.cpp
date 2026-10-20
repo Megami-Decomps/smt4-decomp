@@ -1,55 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00384800` (_code @ 0x384800, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail's function symbol excludes the string literal armcc emits right after the function; the code itself is identical and fdiff only reports the trailing literal-pool row(s) */
+/* Picks the next state: mode 13 when both checks pass (after FUN_002b8838(0x3c)), otherwise mode 6 after rebuilding the display. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00235554(int, unsigned char *);
-int FUN_002355ac(int);
-int FUN_00259258(void);
-int FUN_0026374c(void);
-int FUN_002b8838(int);
-int FUN_00385b24(int, int);
+typedef struct StateObject {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 state;
+    /* 0x08 */ u32 stateStep;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ s8 slot;
+    /* 0x11 */ u8 unk11[0x0F];
+    /* 0x20 */ u8 display[1];
+} StateObject;
 
-extern unsigned char LAB_0038489c; /* 0x38489c */
-extern unsigned char LAB_003848ac; /* 0x3848ac */
+extern s32 FUN_00348f70(void);
+extern s32 FUN_0034904c(void);
+extern s32 FUN_002c09d0(u32 id);
+extern void FUN_00235554(StateObject *obj, const char *name);
+extern void FUN_002355ac(s32 arg);
+extern void FUN_00259258(void);
+extern void FUN_0026374c(void);
+extern void FUN_002b8838(s32 arg);
+extern void FUN_00385b24(void *display, s32 slot);
 
-/* Supplied declaration required: FUN_00235554. */
-/* Supplied declaration required: FUN_002355ac. */
-/* Supplied declaration required: FUN_00259258. */
-/* Supplied declaration required: FUN_0026374c. */
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002c09d0(unsigned int);
-extern int FUN_00348f70(void);
-extern int FUN_0034904c(void);
-/* Supplied declaration required: FUN_00385b24. */
-
-
-void FUN_00384800(int param_1)
-
+void FUN_00384800(StateObject *obj)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_0034904c();
-  if ((temp_v0 != 0) && (temp_v0 = FUN_00348f70(), temp_v0 != 0)) {
-    FUN_002b8838(0x3c);
-    FUN_00235554(param_1,&LAB_0038489c);
-    *(unsigned int *)(param_1 + 4) = 0xd;
-    *(unsigned int *)(param_1 + 8) = 0;
-    return;
-  }
-  temp_v0 = FUN_002c09d0(0x24);
-  if (temp_v0 != 0) {
-    FUN_002355ac(1);
-  }
-  FUN_00259258();
-  FUN_00235554(param_1,&LAB_003848ac);
-  FUN_00385b24(param_1 + 0x20,(int)*(signed char *)(param_1 + 0x10));
-  FUN_0026374c();
-  *(unsigned int *)(param_1 + 4) = 6;
-  *(unsigned int *)(param_1 + 8) = 0;
-  return;
+    if (FUN_0034904c() != 0 && FUN_00348f70() != 0) {
+        FUN_002b8838(0x3C);
+        FUN_00235554(obj, "qc_sysque_add");
+        obj->state = 13;
+        obj->stateStep = 0;
+        return;
+    }
+    if (FUN_002c09d0(0x24) != 0) {
+        FUN_002355ac(1);
+    }
+    FUN_00259258();
+    FUN_00235554(obj, "qc_start");
+    FUN_00385b24(obj->display, obj->slot);
+    FUN_0026374c();
+    obj->state = 6;
+    obj->stateStep = 0;
 }
 
-} /* extern "C" */
+}

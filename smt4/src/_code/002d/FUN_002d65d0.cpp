@@ -2,9 +2,9 @@
 
 extern "C" {
 
-extern int FUN_002bf244(void);
-extern int FUN_002c08f0(int);
-extern int FUN_002e15cc(int);
+extern int jobIsValid(void);
+extern int jobGetWork(int);
+extern int bustupCutAnimGetSlot(int);
 
 
 void FUN_002d65d0(void)
@@ -16,9 +16,9 @@ void FUN_002d65d0(void)
   
   temp_v2 = 1;
   do {
-    temp_v0 = FUN_002e15cc(temp_v2);
-    if ((temp_v0 != -1) && (temp_v1 = FUN_002bf244(), temp_v1 != 0)) {
-      temp_v0 = FUN_002c08f0(temp_v0);
+    temp_v0 = bustupCutAnimGetSlot(temp_v2);
+    if ((temp_v0 != -1) && (temp_v1 = jobIsValid(), temp_v1 != 0)) {
+      temp_v0 = jobGetWork(temp_v0);
       *(unsigned char *)(temp_v0 + 0x8c) = 0;
     }
     temp_v2 = temp_v2 + 1;

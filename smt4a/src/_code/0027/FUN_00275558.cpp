@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_002b5cb4(void);
-int FUN_0037b0c0(void);
+int asd3dSoundActorIsPlaying(void);
 int FUN_003d5000(...);
 
 extern int DAT_005806a4; /* 0x5806a4 */
 extern int DAT_005821a0; /* 0x5821a0 */
 
 /* Supplied declaration required: FUN_002b5cb4. */
-/* Supplied declaration required: FUN_0037b0c0. */
+/* Supplied declaration required: asd3dSoundActorIsPlaying. */
 extern unsigned int FUN_003d4ed8(unsigned int);
 /* Supplied declaration required: FUN_003d5000. */
 
@@ -47,7 +47,7 @@ void FUN_00275558(void)
             *(unsigned int *)(temp_v4 + 0x14) = 0;
           }
           else {
-            FUN_0037b0c0();
+            asd3dSoundActorIsPlaying();
             if ((temp_v1 == 0) &&
                (temp_v0 = *(short *)(temp_v4 + 0x1e) + 1, *(short *)(temp_v4 + 0x1e) = temp_v0, temp_v0 >= 9))
             {

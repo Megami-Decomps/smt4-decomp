@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0019a5a0(int);
+int asdMemFree(int);
 
 extern int iRam005e2488; /* 0x5e2488 */
 extern signed char cRam005e2490; /* 0x5e2490 */
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 
 
 unsigned int FUN_001add1c(void)
@@ -23,7 +23,7 @@ unsigned int FUN_001add1c(void)
   }
   else {
     if (cRam005e2490 == '\0') {
-      FUN_0019a5a0(iRam005e2488);
+      asdMemFree(iRam005e2488);
       iRam005e2488 = 0;
       return 1;
     }

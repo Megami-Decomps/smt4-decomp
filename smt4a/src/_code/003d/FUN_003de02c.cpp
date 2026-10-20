@@ -8,7 +8,7 @@ extern unsigned char DAT_00588fac; /* 0x588fac */
 extern unsigned int DAT_0061951c; /* 0x61951c */
 extern unsigned int DAT_0061953c; /* 0x61953c */
 
-extern int FUN_00180008(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 void FUN_003de02c(unsigned int param_1)
@@ -19,7 +19,7 @@ void FUN_003de02c(unsigned int param_1)
   unsigned int temp_v1;
   unsigned char temp_v2;
   
-  temp_v0 = FUN_00180008(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
     puVar2 = (unsigned int *)0x0;
     if ((*(int *)((unsigned char *)&DAT_00588fac + 0x4)) == 0) {

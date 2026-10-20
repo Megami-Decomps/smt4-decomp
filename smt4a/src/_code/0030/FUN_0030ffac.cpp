@@ -9,7 +9,7 @@ int FUN_001107c4(int, unsigned int, int);
 extern unsigned char LAB_0030ffdc; /* 0x30ffdc */
 
 /* Supplied declaration required: FUN_001107c4. */
-extern int FUN_002e3390(int);
+extern int wstrlen(int);
 extern unsigned int FUN_002e786a(int, unsigned char *, unsigned int);
 
 
@@ -21,7 +21,7 @@ void FUN_0030ffac(unsigned int *param_1,int param_2)
   unsigned int temp_v1;
   
   if (param_2 != 0) {
-    temp_v0 = FUN_002e3390(param_2);
+    temp_v0 = wstrlen(param_2);
     temp_v1 = FUN_002e786a(temp_v0 + 1,&LAB_0030ffdc,0);
     *param_1 = temp_v1;
     FUN_001107c4(param_2,temp_v1,temp_v0 + 1);

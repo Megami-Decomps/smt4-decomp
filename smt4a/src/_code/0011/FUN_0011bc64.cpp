@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00133ab8(int, int);
-int FUN_002e6dac(...);
+int rt_malloc(...);
 int FUN_002e9300(unsigned char [12], unsigned char *);
 int FUN_002e9318(unsigned char [12]);
 int FUN_002f5020(int, unsigned char *, int, int);
@@ -34,7 +34,7 @@ extern int DAT_00594a5c; /* 0x594a5c */
 extern int FUN_0012272c(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00133ab8. */
 extern int *FUN_002e4e86(int *, unsigned int *);
-/* Supplied declaration required: FUN_002e6dac. */
+/* Supplied declaration required: rt_malloc. */
 extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: FUN_002e9300. */
 /* Supplied declaration required: FUN_002e9318. */
@@ -84,7 +84,7 @@ int FUN_0011bc64(unsigned int *param_1)
   temp_v12[0] = FUN_00311532(0,piVar6);
   piVar2 = (int *)FUN_002e4e86(&temp_v11,temp_v12);
   temp_v4 = *piVar2;
-  temp_v1 = FUN_002e6dac(temp_v4 * 0xc);
+  temp_v1 = rt_malloc(temp_v4 * 0xc);
   *piVar6 = temp_v1;
   temp_v8 = &temp_v6;
   for (temp_v2 = temp_v11; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
@@ -105,7 +105,7 @@ int FUN_0011bc64(unsigned int *param_1)
   temp_v12[0] = FUN_00311520(0,piVar6);
   piVar2 = (int *)FUN_002e4e86(&temp_v10,temp_v12);
   temp_v1 = *piVar2;
-  temp_v4 = FUN_002e6dac();
+  temp_v4 = rt_malloc();
   *piVar6 = temp_v4;
   temp_v6 = (unsigned int)temp_v7;
   for (temp_v2 = temp_v10; temp_v2 != 0; temp_v2 = temp_v2 - 1) {

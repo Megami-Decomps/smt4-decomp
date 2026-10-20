@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00162790(...);
 int FUN_00164b5c(int, int, int, int, int, int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_0018152c(...);
 int FUN_001834a4(...);
@@ -53,7 +53,7 @@ extern unsigned char LAB_002a9e00; /* 0x2a9e00 */
 extern unsigned int FUN_0014bf3c(short, unsigned int);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_00180114(short);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
@@ -99,7 +99,7 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
   temp_v10 = param_4;
   temp_v0 = FUN_0022e9b8();
   if (temp_v0 != 0) {
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_00164b5c(2,0x1a,1,param_1,param_2,0x65);
     FUN_001835b4(2,0x1a,0x163,param_1,param_2,0x6a);
     FUN_001835b4(2,0x1a,0x164,param_1,param_2,0x6a);
@@ -123,12 +123,12 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                  param_1 - ((int)(*(int *)(temp_v0 + 0x3fc) +
                                  ((unsigned int)(*(int *)(temp_v0 + 0x3fc) >> 0x1f) >> 0x1e)) >> 2) % 3,
                  param_2,0x6f);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,0x1a,0x16e,
                  param_1 - ((int)(*(int *)(temp_v0 + 0x3fc) +
                                  ((unsigned int)(*(int *)(temp_v0 + 0x3fc) >> 0x1f) >> 0x1e)) >> 2) % 3,
                  param_2,0x74);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,0x1a,0x4f,param_1,param_2,0x6a);
     if (temp_v10 != 0) {
       psVar3 = (short *)(unsigned int)*(unsigned short *)(temp_v0 + 0x5238);
@@ -247,12 +247,12 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
       FUN_00162790(2,0xf4f4f4ff,temp_v7,(int)*(short *)(temp_v5 + 8));
     }
     FUN_003afa60(temp_v0,temp_v6,param_5,param_1,param_2);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,0x1a,0x273,param_1,param_2,0x97);
     FUN_00344cd0(temp_v0 + 0x8e14,param_1,param_2,0x1a,0x2a,0x2b,0x2c,0x26,0x28,0x27,0x29,
                  (int)*(short *)(temp_v0 + 0x476),(int)*(short *)(temp_v0 + 0x472),
                  (int)*(short *)(temp_v0 + 0x474),0x97,0);
-    FUN_001677c0();
+    efctSetSpeed();
   }
   return;
 }

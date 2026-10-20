@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00192748(void);
-int FUN_00192798(unsigned int);
+int dataTableGetCount(void);
+int dataTableGetEntries(unsigned int);
 int FUN_003da99c(int, int *);
 int FUN_003daaf8(int, int *);
 int FUN_003df7c4(int);
@@ -34,9 +34,9 @@ typedef struct {
 #define romwright_piece_1_3(upper, lower) ((unsigned int)(((unsigned int)(unsigned char)(upper) << 24) | ((unsigned int)(lower) & 0xffffffULL)))
 #endif
 extern int FUN_001801a4(void);
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00192748. */
-/* Supplied declaration required: FUN_00192798. */
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+/* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_003da99c. */
 /* Supplied declaration required: FUN_003daaf8. */
 /* Supplied declaration required: FUN_003df7c4. */
@@ -68,17 +68,17 @@ void FUN_004ccf78(void)
   *(unsigned short *)(temp_v2 + 0x62) = 1;
   *(unsigned int *)(temp_v2 + 0x30) = 0;
   *(unsigned short *)(temp_v2 + 0x5e) = 0;
-  temp_v3 = FUN_00187180(9,0);
-  FUN_00192748();
-  pcVar5 = (char *)FUN_00192798(temp_v3);
+  temp_v3 = dataTableGet(9,0);
+  dataTableGetCount();
+  pcVar5 = (char *)dataTableGetEntries(temp_v3);
   *(short *)(temp_v2 + 0x12) = (short)*pcVar5;
   *(short *)(temp_v2 + 0x14) = (short)pcVar5[1];
   *(short *)(temp_v2 + 0x16) = (short)pcVar5[2];
   *(short *)(temp_v2 + 0x18) = (short)pcVar5[3];
   *(short *)(temp_v2 + 0x1a) = (short)pcVar5[4];
-  temp_v4 = FUN_00187180(9,0);
-  FUN_00192748();
-  temp_v5 = FUN_00192798(temp_v4);
+  temp_v4 = dataTableGet(9,0);
+  dataTableGetCount();
+  temp_v5 = dataTableGetEntries(temp_v4);
   temp_v11 = 0;
   temp_v6 = *(unsigned int *)(temp_v5 + 5);
   uStack_40 = romwright_piece_3_1((unsigned int)*(unsigned char *)(temp_v5 + 10) << 8,*(unsigned char *)(temp_v5 + 9));

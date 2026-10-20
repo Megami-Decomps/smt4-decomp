@@ -8,7 +8,7 @@ int FUN_0022a358(...);
 int FUN_0022a3a8(...);
 int FUN_0022a400(unsigned int, int, unsigned int);
 int FUN_0025c2ec(unsigned int, int);
-int FUN_0025c318(void);
+int asdListBoxAddItems(void);
 int FUN_0025c58c(unsigned int, int, int);
 int FUN_00262914(unsigned int, unsigned char *);
 
@@ -19,7 +19,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_003c5de0; /* 0x3c5de0 */
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_004342d4; /* 0x4342d4 */
 extern unsigned int DAT_004342d8; /* 0x4342d8 */
 extern unsigned int DAT_004342e0; /* 0x4342e0 */
@@ -46,7 +46,7 @@ extern unsigned int DAT_00439cec; /* 0x439cec */
 /* Supplied declaration required: FUN_0022a3a8. */
 /* Supplied declaration required: FUN_0022a400. */
 /* Supplied declaration required: FUN_0025c2ec. */
-/* Supplied declaration required: FUN_0025c318. */
+/* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_0025c58c. */
 /* Supplied declaration required: FUN_00262914. */
 
@@ -60,10 +60,10 @@ void FUN_003c59fc(int param_1,int param_2)
   temp_v0 = *(unsigned int *)(param_2 + 0x5c);
   FUN_0025c58c(temp_v0,0x73,0);
   *(unsigned int *)(param_1 + 0x10) = temp_v0;
-  FUN_0025c318();
+  asdListBoxAddItems();
   FUN_0025c2ec(*(unsigned int *)(param_1 + 0x10),1);
   FUN_00262914(*(unsigned int *)(param_1 + 0x10),&LAB_003c5de0);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),0,(*(unsigned int *)(DAT_004342c8 + 0x634) & 0x100) >> 8);
+  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),0,(*(unsigned int *)(g_btlMain + 0x634) & 0x100) >> 8);
   FUN_0022a358(*(unsigned int *)(param_1 + 0x10),1,0xfffffff6,10);
   FUN_0022a400(*(unsigned int *)(param_1 + 0x10),2,(*(unsigned int *)(param_2 + 0x44a8) & 0x40000000) >> 0x1e)
   ;

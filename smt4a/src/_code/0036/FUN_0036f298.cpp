@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00165058(...);
 
-extern int DAT_0057f3b0; /* 0x57f3b0 */
+extern int g_eventTex; /* 0x57f3b0 */
 
-extern int FUN_00163e40(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00165058. */
 
 
@@ -25,12 +25,12 @@ void FUN_0036f298(unsigned int param_1)
   int temp_v6;
   int temp_v7;
   
-  temp_v1 = DAT_0057f3b0;
+  temp_v1 = g_eventTex;
   temp_v5 = 0;
-  if (0 < *(int *)(DAT_0057f3b0 + 0x44)) {
+  if (0 < *(int *)(g_eventTex + 0x44)) {
     do {
       temp_v6 = temp_v1 + temp_v5 * 4;
-      temp_v2 = FUN_00163e40(*(unsigned int *)(temp_v6 + 4));
+      temp_v2 = jobIsValid(*(unsigned int *)(temp_v6 + 4));
       if (temp_v2 == 0) {
         *(unsigned int *)(temp_v6 + 4) = 0;
       }

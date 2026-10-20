@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_002b7bca(unsigned int, int, int, unsigned char *);
 int FUN_002b9024(void);
-int FUN_002c0cc4(void);
-int FUN_002c498c(int, int, int, unsigned int, int);
+int dataTableGetEntries(void);
+int asdMemAlloc(int, int, int, unsigned int, int);
 
 /* stack frame of param_1: 15 slot(s), 60 byte(s) */
 typedef struct {
@@ -32,10 +32,10 @@ extern unsigned char LAB_002196fc; /* 0x2196fc */
 
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_002b9024. */
-extern unsigned int FUN_002c0c74(unsigned int);
-/* Supplied declaration required: FUN_002c0cc4. */
-extern unsigned int FUN_002c0cec(unsigned int);
-/* Supplied declaration required: FUN_002c498c. */
+extern unsigned int dataTableGetCount(unsigned int);
+/* Supplied declaration required: dataTableGetEntries. */
+extern unsigned int dataTableGet(unsigned int);
+/* Supplied declaration required: asdMemAlloc. */
 
 
 unsigned int * FUN_003c9c94(unsigned int *param_1)
@@ -53,9 +53,9 @@ unsigned int * FUN_003c9c94(unsigned int *param_1)
   int temp_v6;
   unsigned char temp_v7 [60];
   
-  temp_v0 = FUN_002c0cec(0);
-  FUN_002c0cc4();
-  temp_v1 = FUN_002c0c74(temp_v0);
+  temp_v0 = dataTableGet(0);
+  dataTableGetEntries();
+  temp_v1 = dataTableGetCount(temp_v0);
   temp_v7[0] = 0;
   temp_v7[1] = 0;
   temp_v7[2] = 0;
@@ -143,7 +143,7 @@ unsigned int * FUN_003c9c94(unsigned int *param_1)
     param_1[temp_v5 + 0xe] = 0;
     if (*(char *)((int)param_1 + temp_v5) != '\0') {
       temp_v0 = 0x100;
-      FUN_002c498c(0x100,0x100,0,(unsigned int)*(unsigned char *)((int)param_1 + temp_v5) << 2,1);
+      asdMemAlloc(0x100,0x100,0,(unsigned int)*(unsigned char *)((int)param_1 + temp_v5) << 2,1);
       param_1[temp_v5 + 0xe] = temp_v0;
     }
     temp_v5 = temp_v5 + 1;

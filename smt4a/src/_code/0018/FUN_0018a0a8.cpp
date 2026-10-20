@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern unsigned char DAT_006433d0; /* 0x6433d0 */
+extern unsigned char g_dspsndState; /* 0x6433d0 */
 
 extern int FUN_001c6e20(unsigned char);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -46,20 +46,20 @@ void FUN_0018a0a8(char *param_1,float param_2)
     param_1[5] = '\0';
     param_1[6] = -0x80;
     param_1[7] = '?';
-    nn_snd_CTR_Dspsnd_SetMasterVolume((unsigned int)&DAT_006433d0,param_2);
+    nn_snd_CTR_Dspsnd_SetMasterVolume((unsigned int)&g_dspsndState,param_2);
     param_2 = temp_v2;
   }
   if (*param_1 != '\0') {
     *(unsigned int *)(param_1 + 8) = temp_v3;
-    nn_snd_CTR_Dspsnd_SetMasterVolume((unsigned int)&DAT_006433d0,param_2);
+    nn_snd_CTR_Dspsnd_SetMasterVolume((unsigned int)&g_dspsndState,param_2);
   }
   if (*param_1 != '\0') {
     *(unsigned int *)(param_1 + 0xc) = temp_v3;
-    nn_snd_CTR_Dspsnd_SetAuxReturnVolume(&DAT_006433d0,0);
+    nn_snd_CTR_Dspsnd_SetAuxReturnVolume(&g_dspsndState,0);
   }
   if (*param_1 != '\0') {
     *(unsigned int *)(param_1 + 0x10) = temp_v3;
-    nn_snd_CTR_Dspsnd_SetAuxReturnVolume(&DAT_006433d0,1);
+    nn_snd_CTR_Dspsnd_SetAuxReturnVolume(&g_dspsndState,1);
   }
   nn_os_CriticalSection_Enter((unsigned int)(param_1 + 0x34));
   param_1[0x14] = '\0';
@@ -70,7 +70,7 @@ void FUN_0018a0a8(char *param_1,float param_2)
   param_1[0x1d] = '\0';
   param_1[0x1e] = '\0';
   param_1[0x1f] = '\0';
-  nn_snd_CTR_Dspsnd_EnableAuxBus(&DAT_006433d0,0,(int)param_1[0x30]);
+  nn_snd_CTR_Dspsnd_EnableAuxBus(&g_dspsndState,0,(int)param_1[0x30]);
   nn_os_CriticalSection_Leave((unsigned int)(param_1 + 0x34));
   nn_os_CriticalSection_Enter((unsigned int)(param_1 + 0x34));
   param_1[0x18] = '\0';
@@ -81,30 +81,30 @@ void FUN_0018a0a8(char *param_1,float param_2)
   param_1[0x21] = '\0';
   param_1[0x22] = '\0';
   param_1[0x23] = '\0';
-  nn_snd_CTR_Dspsnd_EnableAuxBus(&DAT_006433d0,1,(int)param_1[0x31]);
+  nn_snd_CTR_Dspsnd_EnableAuxBus(&g_dspsndState,1,(int)param_1[0x31]);
   nn_os_CriticalSection_Leave((unsigned int)(param_1 + 0x34));
   param_1[0x24] = '\0';
-  nn_snd_CTR_Dspsnd_SetAuxFrontBypass(&DAT_006433d0,0);
+  nn_snd_CTR_Dspsnd_SetAuxFrontBypass(&g_dspsndState,0);
   param_1[0x25] = '\0';
-  nn_snd_CTR_Dspsnd_SetAuxFrontBypass(&DAT_006433d0,1);
+  nn_snd_CTR_Dspsnd_SetAuxFrontBypass(&g_dspsndState,1);
   param_1[0x2a] = '\0';
   param_1[0x2b] = -0x80;
-  nn_snd_CTR_Dspsnd_SetRearRatio((unsigned int)&DAT_006433d0,0x8000);
+  nn_snd_CTR_Dspsnd_SetRearRatio((unsigned int)&g_dspsndState,0x8000);
   param_1[0x28] = -1;
   param_1[0x29] = '\x7f';
-  temp_v0 = nn_snd_CTR_Dspsnd_SetSurroundDepth((unsigned int)&DAT_006433d0,0x7fff);
+  temp_v0 = nn_snd_CTR_Dspsnd_SetSurroundDepth((unsigned int)&g_dspsndState,0x7fff);
   temp_v1 = FUN_001c6e20(temp_v0);
   if (temp_v1 != 0) {
     param_1[1] = '\x01';
-    nn_snd_CTR_Dspsnd_SetClippingMode(&DAT_006433d0,1);
+    nn_snd_CTR_Dspsnd_SetClippingMode(&g_dspsndState,1);
   }
   param_1[0x30] = '\0';
   param_1[0x31] = '\0';
   param_1[0x32] = '\x02';
   param_1[0x33] = '\0';
-  nn_snd_CTR_Dspsnd_SetOutputBufferCount((unsigned int)&DAT_006433d0,2);
+  nn_snd_CTR_Dspsnd_SetOutputBufferCount((unsigned int)&g_dspsndState,2);
   param_1[3] = '\0';
-  nn_snd_CTR_Dspsnd_SetSyncMode(&DAT_006433d0);
+  nn_snd_CTR_Dspsnd_SetSyncMode(&g_dspsndState);
   return;
 }
 

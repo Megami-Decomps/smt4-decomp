@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002c3944(unsigned short *, int);
-int FUN_002c5300(int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 
 /* stack frame of param_9: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ extern unsigned int DAT_004c5834; /* 0x4c5834 */
 extern unsigned int DAT_004c5838; /* 0x4c5838 */
 
 /* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 void taskCreate(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -36,7 +36,7 @@ void taskCreate(unsigned int param_1,unsigned int param_2,unsigned int param_3,u
   
   puVar5 = &g_taskLists + param_7 * 4;
   puVar2 = (unsigned short *)0x100;
-  FUN_002c5300(0x100,0x100,0,param_6 + 0x34,1);
+  asdMemoryAlloc(0x100,0x100,0,param_6 + 0x34,1);
   if (puVar2 != (unsigned short *)0x0) {
     *(char *)((int)puVar2 + 3) = (char)param_7;
     *puVar2 = param_8;

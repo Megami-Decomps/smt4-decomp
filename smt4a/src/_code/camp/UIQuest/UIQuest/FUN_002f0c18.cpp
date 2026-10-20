@@ -8,10 +8,10 @@ int FUN_0014384c(...);
 int FUN_0014afd0(...);
 int FUN_0014e188(...);
 int FUN_0014e220(...);
-int FUN_0014e38c(...);
+int asdProcessCreateSimple(...);
 int FUN_001505ac(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_001846d0(...);
 int FUN_00184758(...);
 int FUN_00184c00(...);
@@ -19,9 +19,9 @@ int FUN_00184c40(...);
 int FUN_001ad9b4(...);
 int FUN_001ff724(...);
 int FUN_0020214c(...);
-int FUN_0023b4b4(...);
+int uiFadeSetVisible(...);
 int FUN_00275bc8(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_00387240(...);
 int FUN_003872b8(...);
 int FUN_003f86f8(...);
@@ -58,10 +58,10 @@ extern unsigned int *DAT_0057f28c; /* 0x57f28c */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_0014e220. */
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_00184c00. */
@@ -72,9 +72,9 @@ extern int FUN_001ab940(void);
 extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: FUN_001ff724. */
 /* Supplied declaration required: FUN_0020214c. */
-/* Supplied declaration required: FUN_0023b4b4. */
+/* Supplied declaration required: uiFadeSetVisible. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: FUN_003872b8. */
 extern int FUN_003deeb4(unsigned short);
@@ -100,19 +100,19 @@ void FUN_002f0c18(void)
   
   if (DAT_0057f28c == (unsigned int *)0x0) {
     puVar2 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0xd50,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0xd50,1);
     DAT_0057f28c = puVar2;
   }
   puVar2 = DAT_0057f28c;
-  FUN_002e6354();
+  sysMemClear();
   puVar3 = &LAB_002f1034;
-  FUN_0014e38c(&LAB_002f1034,4,0,0,FUN_00215cb8,0,0);
+  asdProcessCreateSimple(&LAB_002f1034,4,0,0,FUN_00215cb8,0,0);
   *puVar2 = (unsigned int)puVar3;
-  FUN_0015155c(&LAB_002f1048,0x81,0,0,FUN_0023b4cc,0,0,puVar3);
-  FUN_0015155c(&LAB_002f105c,0xdd,0,0,FUN_0023b4cc,0,0,*puVar2);
-  FUN_0015155c(&LAB_002f1074,0xea,0,0,&LAB_0028587c,0,0,*puVar2);
+  taskCreateDraw(&LAB_002f1048,0x81,0,0,FUN_0023b4cc,0,0,puVar3);
+  taskCreateDraw(&LAB_002f105c,0xdd,0,0,FUN_0023b4cc,0,0,*puVar2);
+  taskCreateDraw(&LAB_002f1074,0xea,0,0,&LAB_0028587c,0,0,*puVar2);
   puVar2 = DAT_0057f28c;
-  FUN_0023b4b4(0);
+  uiFadeSetVisible(0);
   puVar3 = &LAB_002f1084;
   FUN_0020214c();
   puVar2[0x23d] = (unsigned int)puVar3;

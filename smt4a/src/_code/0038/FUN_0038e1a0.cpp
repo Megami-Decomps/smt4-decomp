@@ -35,12 +35,12 @@ extern unsigned int DAT_005710e8; /* 0x5710e8 */
 extern unsigned int DAT_005710ec; /* 0x5710ec */
 extern unsigned int DAT_00571108; /* 0x571108 */
 extern unsigned int DAT_0057110c; /* 0x57110c */
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-extern int FUN_0014aa78(void);
-extern int FUN_00236038(unsigned int);
+extern int btlGetMainState(void);
+extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_003ee0c0. */
-extern unsigned int FUN_004ee568(unsigned int);
+extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fc094. */
 
@@ -58,10 +58,10 @@ unsigned int FUN_0038e1a0(void)
   unsigned int *puVar7;
   int temp_v6;
   
-  temp_v1 = FUN_00236038(0);
-  temp_v2 = FUN_00236038(1);
-  temp_v3 = FUN_0014aa78();
-  temp_v4 = FUN_004ee568(DAT_0057113c);
+  temp_v1 = scrGetArg(0);
+  temp_v2 = scrGetArg(1);
+  temp_v3 = btlGetMainState();
+  temp_v4 = btlUnitGet(g_btlScriptUnit);
   temp_v5 = 0;
   do {
     puVar7 = (unsigned int *)(*(int *)(temp_v3 + 0x1ffc) + temp_v5 * 0x408);

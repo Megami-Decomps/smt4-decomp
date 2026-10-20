@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_001568f8(int, int);
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_001568f8. */
-extern int aeabi_idivmod(int, int);
+extern int __aeabi_idivmod(int, int);
 
 
 unsigned int FUN_0027099c(void)
@@ -23,20 +23,20 @@ unsigned int FUN_0027099c(void)
   int temp_v5;
   int temp_v6;
   
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   if (temp_v1 != 0) {
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     temp_v0 = *(short *)(temp_v1 + 0x2356);
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     FUN_001568f8(temp_v1,(int)temp_v0);
     if (temp_v1 != 0) {
       temp_v5 = 0;
-      temp_v1 = FUN_0014aa78();
+      temp_v1 = btlGetMainState();
       temp_v6 = 0;
       temp_v0 = *(short *)(temp_v1 + 0x1ec0);
       temp_v1 = 0;
       do {
-        temp_v2 = FUN_0014aa78();
+        temp_v2 = btlGetMainState();
         temp_v2 = *(int *)(temp_v2 + 0x1ed4) + temp_v1 * 0x1d0;
         temp_v4 = *(unsigned int *)(temp_v2 + 0x50);
         if ((((temp_v4 & 1) != 0 && (temp_v4 & 2) != 0) && (temp_v4 & 0x10) != 0) &&
@@ -45,7 +45,7 @@ unsigned int FUN_0027099c(void)
         }
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 0x6d);
-      if ((temp_v0 == 0) || (temp_v5 = aeabi_idivmod(temp_v6 * 100,(int)temp_v0), temp_v5 < 0x46)) {
+      if ((temp_v0 == 0) || (temp_v5 = __aeabi_idivmod(temp_v6 * 100,(int)temp_v0), temp_v5 < 0x46)) {
         if (temp_v5 < 0x28) {
           temp_v3 = 3;
         }

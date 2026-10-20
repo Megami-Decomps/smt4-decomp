@@ -40,7 +40,7 @@ extern int FUN_0026c63c(void);
 extern int FUN_002762e0(void);
 /* Supplied declaration required: FUN_0029ca58. */
 /* Supplied declaration required: FUN_0029da34. */
-extern int FUN_0029e010(void);
+extern int gameGetFlagByte12e8(void);
 /* Supplied declaration required: FUN_0029e1ec. */
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: FUN_0029e39c. */
@@ -126,7 +126,7 @@ void FUN_003a98b8(int param_1)
   if (temp_v5 != 0) {
     *(unsigned int *)(param_1 + 0x14) = 4;
     *(unsigned int *)(param_1 + 0x18) = 0;
-    temp_v2 = FUN_0029e010();
+    temp_v2 = gameGetFlagByte12e8();
     if (temp_v2 == 1) {
       temp_v4 = 1;
     }

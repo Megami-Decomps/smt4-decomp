@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00640118; /* 0x640118 */
+extern int g_asdProcess; /* 0x640118 */
 
 
 void FUN_00141870(unsigned int param_1,unsigned int param_2)
@@ -12,7 +12,7 @@ void FUN_00141870(unsigned int param_1,unsigned int param_2)
 {
   int temp_v0;
   
-  for (temp_v0 = *(int *)(DAT_00640118 + (param_1 >> 0x14) * 8); temp_v0 != 0;
+  for (temp_v0 = *(int *)(g_asdProcess + (param_1 >> 0x14) * 8); temp_v0 != 0;
       temp_v0 = *(int *)(temp_v0 + 0x4c)) {
     if (*(unsigned int *)(temp_v0 + 0x24) == (param_1 & 0xfffff)) {
       *(unsigned int *)(temp_v0 + 100) = param_2;

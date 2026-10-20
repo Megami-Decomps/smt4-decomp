@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010063a(int *, int, int, unsigned char *);
+int qsort(int *, int, int, unsigned char *);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 
 extern unsigned char LAB_003d213c; /* 0x3d213c */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 
 
 int FUN_004e7b7c(unsigned int param_1,int param_2,int param_3,int param_4,int param_5)
@@ -35,7 +35,7 @@ int FUN_004e7b7c(unsigned int param_1,int param_2,int param_3,int param_4,int pa
     } while (temp_v1 < param_4);
   }
   if (param_5 <= param_4) {
-    FUN_0010063a(aiStack_380 + 2,param_4,8,&LAB_003d213c);
+    qsort(aiStack_380 + 2,param_4,8,&LAB_003d213c);
     aiStack_380[2] = aiStack_380[param_5 * 2];
   }
   psVar3 = (short *)(param_3 + aiStack_380[2] * 4);

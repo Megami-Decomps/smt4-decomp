@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_00357a90(void);
 int FUN_00379be8(void);
 int FUN_003b61ec(void);
 int FUN_003c5848(void);
 
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_0018719c(unsigned int);
-extern int FUN_00236038(void);
+extern int scrGetArg(void);
 /* Supplied declaration required: FUN_00357a90. */
 /* Supplied declaration required: FUN_00379be8. */
 /* Supplied declaration required: FUN_003b61ec. */
@@ -27,17 +27,17 @@ unsigned int FUN_0038ae5c(void)
 /* irregular: 5 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_00236038();
+  temp_v0 = scrGetArg();
   if (temp_v0 != 0) {
-    if ((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x295)) == '\0') {
-      (*(signed char *)((unsigned char *)&DAT_005f15fc + 0x295)) = '\x01';
+    if ((*(signed char *)((unsigned char *)&g_gameState + 0x295)) == '\0') {
+      (*(signed char *)((unsigned char *)&g_gameState + 0x295)) = '\x01';
       FUN_00379be8();
       FUN_003b61ec();
-      FUN_001681cc(0x92);
+      sysPlaySe(0x92);
     }
   }
-  else if ((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x295)) != '\0') {
-    (*(signed char *)((unsigned char *)&DAT_005f15fc + 0x295)) = '\0';
+  else if ((*(signed char *)((unsigned char *)&g_gameState + 0x295)) != '\0') {
+    (*(signed char *)((unsigned char *)&g_gameState + 0x295)) = '\0';
     temp_v0 = FUN_0018719c(0x49a);
     if (temp_v0 != 0) {
       FUN_003c5848();

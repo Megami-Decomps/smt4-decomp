@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_1_stack;
 
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern unsigned char g_gameState; /* 0x49f91c */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -27,7 +27,7 @@ extern unsigned char DAT_0049f91c; /* 0x49f91c */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: FUN_00231bb8. */
-extern float *FUN_00232658(int);
+extern float *lmapSceneGetObj(int);
 extern int FUN_0024c2ec(unsigned char, unsigned char);
 extern int FUN_002c09d0(void);
 /* Supplied declaration required: FUN_002c2950. */
@@ -60,7 +60,7 @@ void FUN_0039eb4c(int param_1)
   
   FUN_002c2950();
   temp_v1 = NaviMain_GetPosX();
-  pfVar3 = (float *)FUN_00232658(param_1 + 0x162);
+  pfVar3 = (float *)lmapSceneGetObj(param_1 + 0x162);
   temp_v8 = *pfVar3;
   temp_v9 = pfVar3[2];
   puVar4 = (unsigned long long *)NaviMain_GetCursorPos(param_1 + 0x162);
@@ -92,7 +92,7 @@ void FUN_0039eb4c(int param_1)
   if (0 < temp_v4) {
     do {
       temp_v2 = param_1 + temp_v1 * 0x4c;
-      if (((*(int *)((unsigned char *)&DAT_0049f91c + 0x3e0)) == 0) &&
+      if (((*(int *)((unsigned char *)&g_gameState + 0x3e0)) == 0) &&
          (((temp_v3 = FUN_0024c2ec(*(unsigned char *)(temp_v2 + 0xe8c),*(unsigned char *)(temp_v2 + 0xe8d)),
            temp_v3 == 0 || ((*(short *)(temp_v2 + 0xeb8) != 0 && (temp_v3 = FUN_002c09d0(), temp_v3 == 0))))
           || ((*(short *)(temp_v2 + 0xeba) != 0 && (temp_v3 = FUN_002c09d0(), temp_v3 != 0)))))) {

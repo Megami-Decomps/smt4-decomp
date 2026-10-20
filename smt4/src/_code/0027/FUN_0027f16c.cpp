@@ -14,7 +14,7 @@ extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
 extern int FUN_002a8778(void);
 extern int FUN_002b63ac(void);
-extern int FUN_002b6b20(void);
+extern int gameGetOptions(void);
 extern int FUN_002b6b38(void);
 
 
@@ -116,9 +116,9 @@ LAB_0027f25c:
   temp_v2 = FUN_002b6b38();
   if ((temp_v2 == 2) &&
      ((((temp_v2 = FUN_002b6b38(), temp_v2 == 0 || (temp_v2 == 1)) || (temp_v2 != 2)) ||
-      ((temp_v2 = FUN_002b6b20(), (*(unsigned short *)(temp_v2 + 0x44) & 2) == 0 &&
+      ((temp_v2 = gameGetOptions(), (*(unsigned short *)(temp_v2 + 0x44) & 2) == 0 &&
        (*(short *)(temp_v2 + 0x2a) != 0)))))) {
-    temp_v3 = FUN_002b6b20();
+    temp_v3 = gameGetOptions();
     temp_v8 = (int)*(short *)(temp_v3 + 0xe);
     temp_v2 = (temp_v8 * param_2) / 100;
     if (temp_v2 < 1) {

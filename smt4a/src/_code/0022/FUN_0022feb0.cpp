@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_00192748(unsigned int);
-int FUN_00192798(void);
-int FUN_002e6354(int *, int);
+int dataTableGetCount(unsigned int);
+int dataTableGetEntries(void);
+int sysMemClear(int *, int);
 int FUN_0040816c(int);
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00192748. */
-/* Supplied declaration required: FUN_00192798. */
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+/* Supplied declaration required: dataTableGetEntries. */
 extern unsigned int FUN_001b564c(unsigned short);
 extern unsigned int FUN_00261424(void);
 extern int FUN_002e50d4(void);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0040816c. */
 
 
@@ -36,20 +36,20 @@ void FUN_0022feb0(int param_1)
   int unaff_r8;
   
   if (param_1 != 0) {
-    temp_v1 = FUN_00187180(0x37,0);
-    FUN_00192798();
-    temp_v2 = FUN_00192748(temp_v1);
+    temp_v1 = dataTableGet(0x37,0);
+    dataTableGetEntries();
+    temp_v2 = dataTableGetCount(temp_v1);
     piVar4 = (int *)(param_1 + 0x48c);
-    FUN_002e6354(piVar4,0x260);
+    sysMemClear(piVar4,0x260);
     if (0 < temp_v2) {
       unaff_r8 = param_1 + 0x400;
     }
     temp_v7 = 0;
     if ((int)temp_v7 < temp_v2) {
       do {
-        temp_v1 = FUN_00187180(0x37,0);
-        temp_v3 = FUN_00192798();
-        temp_v4 = FUN_00192748(temp_v1);
+        temp_v1 = dataTableGet(0x37,0);
+        temp_v3 = dataTableGetEntries();
+        temp_v4 = dataTableGetCount(temp_v1);
         if (((temp_v7 < temp_v4) &&
             (puVar10 = (unsigned short *)(temp_v3 + temp_v7 * 0x40), puVar10 != (unsigned short *)0x0)) &&
            (temp_v0 = *puVar10, -1 < (short)temp_v0)) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00163060(int, int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int, int);
 int nn_math_ARMv6_VEC3TransformAsm_2A87B4(float *, int *, int *);
 
 /* stack frame of param_2: 8 slot(s), 32 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
     unsigned int spB0; /* 0xb0: local_b0 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 extern int FUN_0019c49c(int, int, int);
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2A87B4. */
 
@@ -70,7 +70,7 @@ unsigned int FUN_00185b84(int param_1,int param_2)
   }
   if (((temp_v7 && temp_v0 != 0) && param_2 != 0) && (temp_v0 = *(int *)(temp_v0 + 0x28), 0 < temp_v0)) {
     temp_v1 = 0x100;
-    FUN_00163060(0x100,0x100,0,temp_v0 * 0x1c,1);
+    asdMemoryAllocTracked(0x100,0x100,0,temp_v0 * 0x1c,1);
     temp_v6 = 0;
     temp_v13 = 0;
     temp_v12 = 0.5f;
@@ -98,7 +98,7 @@ unsigned int FUN_00185b84(int param_1,int param_2)
       }
       temp_v4 = *(int *)(temp_v4 + 0xc4);
       temp_v1 = 0x100;
-      FUN_00163060(0x100,0x100,0,temp_v4 * 0x84,1);
+      asdMemoryAllocTracked(0x100,0x100,0,temp_v4 * 0x84,1);
       temp_v8 = (float)temp_v13;
       *puVar9 = temp_v1;
       puVar9[1] = temp_v4;

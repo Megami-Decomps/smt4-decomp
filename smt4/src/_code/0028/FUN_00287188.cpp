@@ -7,10 +7,10 @@ extern "C" {
 int FUN_00205bf4(void);
 int FUN_002917b8(void);
 int FUN_002958f8(...);
-int FUN_002ae7e8(int);
+int asdTMTexTableFreeEntry(int);
 int FUN_002ae898(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_002b8cc8(void);
-int FUN_002c415c(...);
+int asdMemFree(...);
 int FUN_002d661c(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -25,13 +25,13 @@ extern unsigned int DAT_0043da34; /* 0x43da34 */
 /* Supplied declaration required: FUN_00205bf4. */
 /* Supplied declaration required: FUN_002917b8. */
 /* Supplied declaration required: FUN_002958f8. */
-/* Supplied declaration required: FUN_002ae7e8. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002ae898. */
 extern int FUN_002b6a54(int, unsigned short);
 extern int FUN_002b6ad0(void);
-extern int FUN_002b6b20(void);
+extern int gameGetOptions(void);
 /* Supplied declaration required: FUN_002b8cc8. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002d661c. */
 
 
@@ -46,7 +46,7 @@ void FUN_00287188(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   unsigned int in_lr;
   
   if (*(int *)(param_1 + 0x59bc) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(int *)(param_1 + 0x59bc) = 0;
   }
   FUN_00205bf4();
@@ -61,9 +61,9 @@ void FUN_00287188(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   } while (temp_v2 < 3);
   temp_v2 = FUN_002b6ad0();
   if (temp_v2 != 0) {
-    temp_v2 = FUN_002b6b20();
+    temp_v2 = gameGetOptions();
     temp_v0 = *(unsigned short *)(temp_v2 + 0x606);
-    temp_v2 = FUN_002b6b20();
+    temp_v2 = gameGetOptions();
     temp_v2 = FUN_002b6a54((int)*(short *)(temp_v2 + 0x604),temp_v0);
     FUN_002958f8((int)(short)(*(short *)(temp_v2 + 0x5a) + 1),0);
   }
@@ -79,10 +79,10 @@ void FUN_00287188(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   DAT_0043da29 = DAT_0043da29 - '\x01';
   if (DAT_0043da29 < '\x01') {
     FUN_002d661c();
-    FUN_002c415c(DAT_0043da30);
-    FUN_002c415c(DAT_0043da34);
+    asdMemFree(DAT_0043da30);
+    asdMemFree(DAT_0043da34);
     FUN_002ae898(0x12,0,param_3,param_4,unaff_r4,in_lr);
-    FUN_002ae7e8(0x12);
+    asdTMTexTableFreeEntry(0x12);
     DAT_0043da29 = '\0';
   }
   return;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00119ba8(...);
+int eventTexCallIfIdle(...);
 int FUN_0011a0d4(...);
 int FUN_002bff38(...);
 int rt_memcpy_w(...);
@@ -20,7 +20,7 @@ int FUN_002be624(...);
 int FUN_002be650(...);
 int FUN_002bf694(...);
 int FUN_002bff50(void);
-int FUN_002c4938(unsigned char [128], int);
+int memClear(unsigned char [128], int);
 
 /* stack frame of param_6: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -37,7 +37,7 @@ extern unsigned char LAB_0010d0ec; /* 0x10d0ec */
 #endif
 extern int FUN_00118f1c(short);
 extern int FUN_0011921c(short);
-/* Supplied declaration required: FUN_00119ba8. */
+/* Supplied declaration required: eventTexCallIfIdle. */
 /* Supplied declaration required: FUN_0011a0d4. */
 extern unsigned int FUN_0011b454(void);
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
@@ -56,7 +56,7 @@ extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bff38. */
 /* Supplied declaration required: FUN_002bff50. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -80,7 +80,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
   unsigned char temp_v11 [128];
   unsigned char temp_v12 [132];
   
-  FUN_002c4938(temp_v11,0x80);
+  memClear(temp_v11,0x80);
   if (param_1 != 0xf874) {
     if (param_1 < 0xf874) {
       if (param_1 == 0xf844) {
@@ -244,7 +244,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       if (temp_v7 != 0) {
         return 1;
       }
-      FUN_00119ba8(temp_v10,temp_v4,1);
+      eventTexCallIfIdle(temp_v10,temp_v4,1);
       return 1;
     case 0xf87c:
       temp_v9 = *param_4 + 1;

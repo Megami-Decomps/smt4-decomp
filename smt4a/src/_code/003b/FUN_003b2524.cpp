@@ -2,10 +2,10 @@
 
 extern "C" {
 
-int FUN_001f4998(void);
+int asdMdlManagerDestroy(void);
 
-extern int FUN_001f4948(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001f4998. */
+extern int asdMdlManagerClone(unsigned int, unsigned int);
+/* Supplied declaration required: asdMdlManagerDestroy. */
 
 
 void FUN_003b2524(int param_1,int param_2)
@@ -16,9 +16,9 @@ void FUN_003b2524(int param_1,int param_2)
   
   if (*(short *)(param_2 + 0xc) == 3) {
     if (*(int *)(param_1 + 0x54) != 0) {
-      FUN_001f4998();
+      asdMdlManagerDestroy();
     }
-    temp_v0 = FUN_001f4948(*(unsigned int *)(param_2 + 0x54),0);
+    temp_v0 = asdMdlManagerClone(*(unsigned int *)(param_2 + 0x54),0);
     *(int *)(param_1 + 0x54) = temp_v0;
     *(unsigned int *)(*(int *)(*(int *)(*(int *)(*(int *)(temp_v0 + 8) + 0x2c) + 0x220) + 8) + 0x28) = 1
     ;

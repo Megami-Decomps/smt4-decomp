@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_002939f4(void);
-extern unsigned int FUN_00296cc8(void);
+extern int btlGetMainState(void);
+extern unsigned int scrGetArg(void);
 
 
 unsigned int FUN_0030bbc8(void)
@@ -17,8 +17,8 @@ unsigned int FUN_0030bbc8(void)
   int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_00296cc8();
-  temp_v1 = FUN_002939f4();
+  temp_v0 = scrGetArg();
+  temp_v1 = btlGetMainState();
   temp_v2 = 4;
   do {
     puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + temp_v2 * 0x288);

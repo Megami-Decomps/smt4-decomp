@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_0016007c(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdOperatorNew(...);
 int FUN_0049d140(...);
 int FUN_0049d3f0(...);
 
@@ -24,9 +24,9 @@ extern unsigned char LAB_002c2b88; /* 0x2c2b88 */
 extern unsigned char LAB_002c2bac; /* 0x2c2bac */
 extern unsigned int *DAT_0057f240; /* 0x57f240 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdOperatorNew. */
 extern int FUN_00162858(void);
 extern unsigned int FUN_00167f08(void);
 /* Supplied declaration required: FUN_0049d140. */
@@ -44,14 +44,14 @@ void FUN_00348d7c(int param_1)
   int temp_v2;
   
   puVar2 = (unsigned int *)0x478;
-  FUN_0016007c();
+  asdOperatorNew();
   pcVar3 = "HOW_TO PROC";
   DAT_0057f240 = puVar2;
-  FUN_0014e38c("HOW_TO PROC",4,0,0,&LAB_002840fc,0,0);
+  asdProcessCreateSimple("HOW_TO PROC",4,0,0,&LAB_002840fc,0,0);
   *puVar2 = (unsigned int)pcVar3;
-  FUN_0015155c("HOW_TO UL",0x81,0,0,&LAB_002c2bac,0,0,pcVar3);
-  FUN_0015155c("HOW_TO UR",0xdd,0,0,&LAB_002c2bac,0,0,*puVar2);
-  FUN_0015155c("HOW_TO DD",0xeb,0,0,&LAB_002c2b88,0,0,*puVar2);
+  taskCreateDraw("HOW_TO UL",0x81,0,0,&LAB_002c2bac,0,0,pcVar3);
+  taskCreateDraw("HOW_TO UR",0xdd,0,0,&LAB_002c2bac,0,0,*puVar2);
+  taskCreateDraw("HOW_TO DD",0xeb,0,0,&LAB_002c2b88,0,0,*puVar2);
   FUN_0049d3f0(puVar2);
   temp_v1 = FUN_00167f08();
   puVar2[0x11b] = temp_v1;

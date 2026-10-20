@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0013c884(int, int);
-int FUN_0014e38c(unsigned char *, unsigned int, int, int, unsigned char *, unsigned char *, int);
+int asdProcessCreateSimple(unsigned char *, unsigned int, int, int, unsigned char *, unsigned char *, int);
 int FUN_0014f0dc(int, unsigned int *, unsigned char *);
 int FUN_001523b8(int, int);
-int FUN_00163060(int, int, int, int, int);
-int FUN_002e6354(void);
+int asdMemoryAllocTracked(int, int, int, int, int);
+int sysMemClear(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -25,11 +25,11 @@ extern unsigned int DAT_006309a0; /* 0x6309a0 */
 extern unsigned char DAT_006309ac; /* 0x6309ac */
 
 /* Supplied declaration required: FUN_0013c884. */
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_0013a48c(unsigned int param_1)
@@ -41,8 +41,8 @@ void FUN_0013a48c(unsigned int param_1)
   unsigned char *puVar3;
   
   temp_v0 = 0x100;
-  FUN_00163060(0x100,0x100,0,0xaa0,1);
-  FUN_002e6354();
+  asdMemoryAllocTracked(0x100,0x100,0,0xaa0,1);
+  sysMemClear();
   DAT_0059dbc4 = temp_v0;
   FUN_0013c884(temp_v0 + 0x88,1);
   FUN_0014f0dc(temp_v0 + 0x88,&DAT_006309a0,&DAT_006309ac);
@@ -54,7 +54,7 @@ void FUN_0013a48c(unsigned int param_1)
   *(int *)(temp_v0 + 0x80) = temp_v0 + 0x88;
   *(int *)(temp_v0 + 0x84) = temp_v1;
   puVar3 = &LAB_0013a5d0;
-  FUN_0014e38c(&LAB_0013a5d0,param_1,0,0,&LAB_001444ec,&LAB_00144c7c,DAT_0059dbc4);
+  asdProcessCreateSimple(&LAB_0013a5d0,param_1,0,0,&LAB_001444ec,&LAB_00144c7c,DAT_0059dbc4);
   DAT_0059dbc0 = puVar3;
   return;
 }

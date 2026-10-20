@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b93c8. */
@@ -55,8 +55,8 @@ void FUN_00392b2c(int param_1)
   if (0 < *(int *)(param_1 + 4)) {
     FUN_002bed3c();
     FUN_002bf538();
-    FUN_002c39a4(DAT_0044ea00);
-    temp_v3 = DAT_0044ea00;
+    FUN_002c39a4(g_titleScene);
+    temp_v3 = g_titleScene;
     temp_v0 = FUN_002c5d80(1,0);
     piVar4 = (int *)(temp_v3 + 0x124c);
     temp_v1 = *piVar4;
@@ -67,7 +67,7 @@ void FUN_00392b2c(int param_1)
       (**(romwright_code **)(temp_v3 + 0x1268))();
       *(unsigned char *)(temp_v3 + 0x1264) = 0;
     }
-    temp_v3 = DAT_0044ea00;
+    temp_v3 = g_titleScene;
     temp_v0 = FUN_002c5da8(6,7,0);
     piVar4 = (int *)(temp_v3 + 0x12ac);
     temp_v1 = *piVar4;
@@ -79,14 +79,14 @@ void FUN_00392b2c(int param_1)
       *(unsigned char *)(temp_v3 + 0x12c4) = 0;
     }
     temp_v4 = 0.38f;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     FUN_002bf380(2,0x11,0,0,0,0xb);
     FUN_002bf538();
     FUN_002bf288(2,0x1d,2000,(int)temp_v4,0,0xb);
     FUN_002bf538();
     temp_v4 = 0.36f;
-    FUN_002ba12c(DAT_0044ea00);
-    temp_v3 = DAT_0044ea00;
+    FUN_002ba12c(g_titleScene);
+    temp_v3 = g_titleScene;
     temp_v5 = (unsigned long long)(unsigned int)(int)temp_v4;
     temp_v0 = FUN_002c5da8(6,1,0);
     piVar4 = (int *)(temp_v3 + 0x12ac);
@@ -102,10 +102,10 @@ void FUN_00392b2c(int param_1)
     do {
       VectorSignedToFloat((int)temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_002b93c8(param_1 + temp_v3 * 0x8c + 0x37c);
-      temp_v0 = DAT_0044ea00;
+      temp_v0 = g_titleScene;
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x18);
-    piVar4 = (int *)(DAT_0044ea00 + 0x12ac);
+    piVar4 = (int *)(g_titleScene + 0x12ac);
     temp_v3 = *piVar4;
     temp_v1 = piVar4[temp_v3 + 2];
     *piVar4 = temp_v3 - 1;
@@ -113,8 +113,8 @@ void FUN_00392b2c(int param_1)
       (**(romwright_code **)(temp_v0 + 0x12c8))(piVar4[temp_v3 + 1]);
       *(unsigned char *)(temp_v0 + 0x12c4) = 0;
     }
-    temp_v3 = DAT_0044ea00;
-    piVar4 = (int *)(DAT_0044ea00 + 0x12ac);
+    temp_v3 = g_titleScene;
+    piVar4 = (int *)(g_titleScene + 0x12ac);
     temp_v0 = *piVar4;
     temp_v1 = piVar4[temp_v0 + 2];
     *piVar4 = temp_v0 - 1;
@@ -122,8 +122,8 @@ void FUN_00392b2c(int param_1)
       (**(romwright_code **)(temp_v3 + 0x12c8))(piVar4[temp_v0 + 1]);
       *(unsigned char *)(temp_v3 + 0x12c4) = 0;
     }
-    temp_v3 = DAT_0044ea00;
-    piVar4 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v3 = g_titleScene;
+    piVar4 = (int *)(g_titleScene + 0x124c);
     temp_v0 = *piVar4;
     temp_v1 = piVar4[temp_v0 + 2];
     *piVar4 = temp_v0 - 1;
@@ -133,8 +133,8 @@ void FUN_00392b2c(int param_1)
     }
     FUN_002bed3c();
     FUN_002bf538();
-    FUN_002c198c(DAT_0044ea00);
-    FUN_002c18e4(DAT_0044ea00);
+    FUN_002c198c(g_titleScene);
+    FUN_002c18e4(g_titleScene);
     temp_v3 = param_1 + *(int *)(param_1 + 4) * 8;
     UNRECOVERED_JUMPTABLE = *(romwright_code **)(temp_v3 + 0xb8);
     if ((UNRECOVERED_JUMPTABLE != (romwright_code *)0x0) ||

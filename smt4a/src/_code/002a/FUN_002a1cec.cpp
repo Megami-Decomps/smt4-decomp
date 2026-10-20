@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001f4934(int, int);
-int FUN_002e3390(...);
+int wstrlen(...);
 
 /* stack frame of param_3: 4 slot(s), 14 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ extern unsigned short DAT_005b3d94; /* 0x5b3d94 */
 
 extern int FUN_0019a37c(unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_001f4934. */
-/* Supplied declaration required: FUN_002e3390. */
+/* Supplied declaration required: wstrlen. */
 
 
 int FUN_002a1cec(int param_1,int param_2,int param_3)
@@ -61,10 +61,10 @@ LAB_002a1d08:
   temp_v0 = DAT_005b3d94;
   while (temp_v0 != 0xf890) {
     if (*(int *)(puVar11 + 6) != 0) {
-      temp_v4 = FUN_002e3390();
+      temp_v4 = wstrlen();
       temp_v5 = FUN_0019a37c(*(unsigned int *)(puVar11 + 6),temp_v11,temp_v4);
       if (temp_v5 == 0) {
-        temp_v5 = FUN_002e3390(*(unsigned int *)(puVar11 + 6));
+        temp_v5 = wstrlen(*(unsigned int *)(puVar11 + 6));
         temp_v10 = 0;
         if (*(int *)(puVar11 + 2) == 0) goto LAB_002a1ef0;
         if (*(char *)(temp_v11 + temp_v5) == '\0') goto LAB_002a1edc;

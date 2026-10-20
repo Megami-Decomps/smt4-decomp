@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_3_stack;
 
-extern unsigned int *DAT_004342c8; /* 0x4342c8 */
+extern unsigned int *g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_004342cc; /* 0x4342cc */
 extern unsigned int DAT_004342d0; /* 0x4342d0 */
 
@@ -33,31 +33,31 @@ void FUN_003c63a8(int param_1,unsigned int param_2,unsigned int param_3)
   case 0:
     temp_v0 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10));
     if (temp_v0 != 0) {
-      if ((DAT_004342c8[0x18d] & 0x20) != 0) {
+      if ((g_btlMain[0x18d] & 0x20) != 0) {
         return;
       }
       FUN_003d88a0();
       return;
     }
     FUN_003d88a0();
-    temp_v2 = DAT_004342c8[0x18d] & 0xffffffdf;
+    temp_v2 = g_btlMain[0x18d] & 0xffffffdf;
     break;
   case 1:
     temp_v0 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10));
     if (temp_v0 != 0) {
-      temp_v2 = DAT_004342c8[0x18d] | 0x40;
+      temp_v2 = g_btlMain[0x18d] | 0x40;
     }
     else {
-      temp_v2 = DAT_004342c8[0x18d] & 0xffffffbf;
+      temp_v2 = g_btlMain[0x18d] & 0xffffffbf;
     }
     break;
   case 2:
     temp_v0 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10));
     if (temp_v0 == 0) {
-      DAT_004342c8[0x18d] = DAT_004342c8[0x18d] & 0xffffff7f;
+      g_btlMain[0x18d] = g_btlMain[0x18d] & 0xffffff7f;
       return;
     }
-    temp_v2 = DAT_004342c8[0x18d] | 0x80;
+    temp_v2 = g_btlMain[0x18d] | 0x80;
     break;
   case 3:
     puVar3 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10),param_3);
@@ -73,20 +73,20 @@ void FUN_003c63a8(int param_1,unsigned int param_2,unsigned int param_3)
     return;
   case 5:
     puVar3 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10),param_3);
-    *DAT_004342c8 = *puVar3;
+    *g_btlMain = *puVar3;
     return;
   case 6:
     puVar3 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10),param_3);
-    DAT_004342c8[1] = *puVar3;
+    g_btlMain[1] = *puVar3;
     return;
   case 7:
     puVar3 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10),param_3);
-    DAT_004342c8[2] = *puVar3;
+    g_btlMain[2] = *puVar3;
     return;
   default:
     return;
   }
-  DAT_004342c8[0x18d] = temp_v2;
+  g_btlMain[0x18d] = temp_v2;
   return;
 }
 

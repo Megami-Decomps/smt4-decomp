@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e33f0(void);
+int asdOperatorNewC(void);
 int FUN_0030ea58(int, unsigned char *);
 int FUN_0030eca8(int *);
 int FUN_0030ed04(int *, int, int);
@@ -18,7 +18,7 @@ extern unsigned char DAT_0055780c; /* 0x55780c */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int *FUN_002e2a98(void);
-/* Supplied declaration required: FUN_002e33f0. */
+/* Supplied declaration required: asdOperatorNewC. */
 /* Supplied declaration required: FUN_0030ea58. */
 /* Supplied declaration required: FUN_0030eca8. */
 /* Supplied declaration required: FUN_0030ed04. */
@@ -46,7 +46,7 @@ unsigned long long FUN_001247f4(int param_1,unsigned int param_2,unsigned int pa
   FUN_0030ea58(param_1,&LAB_001248b0);
   if ((temp_v1 != 0) && (temp_v1 = param_1, FUN_0030ea58(param_1,&LAB_001248b4), temp_v1 != 0)) {
     temp_v1 = 0x200;
-    FUN_002e33f0();
+    asdOperatorNewC();
     FUN_0030ed04(&uStack_20,param_1,2);
     temp_v5 = 0;
     piVar3 = (int *)FUN_002e2a98();

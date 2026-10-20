@@ -1,21 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004185c4` (_code @ 0x4185c4, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Sets bit 1 of the flag byte of the given slot. */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_001ab940(void);
+typedef struct {
+    u8 unk00[0x2a2];   /* 0x000 */
+    struct {
+        u8 flags;      /* +0 bit 1: enabled */
+        u8 unk01[3];   /* +1 */
+    } slots[1];        /* 0x2a2 */
+} SlotTable;
 
+SlotTable *FUN_001ab940(s32 index);
 
-void FUN_004185c4(int param_1,char param_2)
-
+void FUN_004185c4(s32 index, s8 enabled)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_001ab940();
-  temp_v0 = temp_v0 + param_1 * 4;
-  *(unsigned char *)(temp_v0 + 0x2a2) = (*(unsigned char *)(temp_v0 + 0x2a2) & 0xfd) | (param_2 << 1);
-  return;
+    u8 *flags = &FUN_001ab940(index)->slots[index].flags;
+
+    *flags = (*flags & ~2) | (enabled << 1);
 }
 
 } /* extern "C" */

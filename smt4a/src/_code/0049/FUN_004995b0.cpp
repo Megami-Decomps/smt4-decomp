@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00184528(...);
 int FUN_00275f44(...);
 int FUN_0040a55c(...);
@@ -38,7 +38,7 @@ extern unsigned char LAB_004999c8; /* 0x4999c8 */
 /* Supplied declaration required: FUN_00163aa4. */
 extern unsigned int FUN_001654d8(unsigned int *);
 extern unsigned int FUN_001654e4(unsigned int *);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184528. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_00224880. */
@@ -238,7 +238,7 @@ void FUN_004995b0(unsigned int *param_1)
     temp_v1 = FUN_00357bc8(param_1[0x61],&LAB_004999a8);
     FUN_00275f44(param_1[99],temp_v1);
     FUN_00224880(param_1[99]);
-    FUN_001681cc(0xa0);
+    sysPlaySe(0xa0);
     param_1[4] = param_1[1];
     param_1[1] = 4;
     param_1[2] = 0;

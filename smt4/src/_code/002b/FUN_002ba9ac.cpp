@@ -1,43 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ba9ac` (_code @ 0x2ba9ac, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b486c(...);
-int FUN_002b4b88(...);
+/* Object with counters at 0x310/0x314/0x350 and an owned handle at 0x318. */
+typedef struct {
+    u8 unk000[0x310];
+    u32 unk310;         /* 0x310 */
+    u32 unk314;         /* 0x314 */
+    void *handle;       /* 0x318 */
+    u8 unk31c[0x34];
+    u32 unk350;         /* 0x350 */
+} Owner;
 
-typedef struct fn_002ba9ac_arg0 fn_002ba9ac_arg0;
-struct fn_002ba9ac_arg0 {
-    unsigned char pad_0x0[0x310];
-    undefined4 field_0x310; /* +0x310 */
-    undefined4 field_0x314; /* +0x314 */
-    int field_0x318; /* +0x318 */
-    unsigned char pad_0x31c[0x34];
-    undefined4 field_0x350; /* +0x350 */
-};
+/* Global block with a flag word at 0x754. */
+typedef struct {
+    u8 unk000[0x754];
+    u32 flags;          /* 0x754 */
+} GlobalBlock;
 
-extern int FUN_00131968(...); /* 0x131968 */
-extern int DAT_00432fc8; /* 0x432fc8 */
+int FUN_00131968(...);
+int FUN_002b486c(Owner *owner);
+int FUN_002b4b88(void *handle, int (*callback)(...));
 
-/* Supplied declaration required: FUN_002b486c. */
-/* Supplied declaration required: FUN_002b4b88. */
+extern GlobalBlock *g_aocMain;
 
-
-void FUN_002ba9ac(fn_002ba9ac_arg0 *param_1)
-
+/* Tears the owner down: clears its counters, releases its handle with FUN_00131968, then clears flag 0x10000 in the global block. */
+void FUN_002ba9ac(Owner *owner)
 {
-/* irregular: 3 native warning(s); review required */
-  param_1->field_0x310 = 0;
-  param_1->field_0x314 = 0;
-  param_1->field_0x350 = 0;
-  if (param_1->field_0x318 != 0) {
-    FUN_002b4b88(param_1->field_0x318,FUN_00131968);
-    param_1->field_0x318 = 0;
-  }
-  FUN_002b486c(param_1);
-  *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xfffeffff;
-  return;
+    owner->unk310 = 0;
+    owner->unk314 = 0;
+    owner->unk350 = 0;
+    if (owner->handle != NULL) {
+        FUN_002b4b88(owner->handle, FUN_00131968);
+        owner->handle = NULL;
+    }
+    FUN_002b486c(owner);
+    g_aocMain->flags = g_aocMain->flags & ~0x10000;
 }
 
 } /* extern "C" */

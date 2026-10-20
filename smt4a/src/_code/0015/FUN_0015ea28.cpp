@@ -15,7 +15,7 @@ int FUN_00175750(int, unsigned char [96]);
 /* Supplied declaration required: FUN_001748a0. */
 /* Supplied declaration required: FUN_00174a00. */
 /* Supplied declaration required: FUN_00175750. */
-extern unsigned int FUN_002e3390(char *);
+extern unsigned int wstrlen(char *);
 
 
 unsigned int FUN_0015ea28(int param_1,char *param_2)
@@ -49,7 +49,7 @@ unsigned int FUN_0015ea28(int param_1,char *param_2)
   else if (aiStack_a0[0] == 0x40) {
     FUN_00175750(param_1 + 0x13c,temp_v5);
     FUN_001739d4(param_1,param_1 + 0x13c);
-    temp_v2 = FUN_002e3390(param_2);
+    temp_v2 = wstrlen(param_2);
     do {
       temp_v0 = temp_v2;
       temp_v2 = temp_v0 - 1;

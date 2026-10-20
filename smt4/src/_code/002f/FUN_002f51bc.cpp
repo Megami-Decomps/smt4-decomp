@@ -16,8 +16,8 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
-extern unsigned int DAT_004e39e0; /* 0x4e39e0 */
+extern int g_titleScene; /* 0x44ea00 */
+extern unsigned int g_asdGxPresets; /* 0x4e39e0 */
 extern unsigned int DAT_004e3a0c; /* 0x4e3a0c */
 extern unsigned int *DAT_004e3b4c; /* 0x4e3b4c */
 
@@ -37,10 +37,10 @@ void FUN_002f51bc(unsigned int param_1,unsigned int param_2)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  temp_v0 = *(unsigned int *)(DAT_0044ea00 + 0x528);
+  temp_v0 = *(unsigned int *)(g_titleScene + 0x528);
   temp_v3 = (unsigned int)in_d1;
   temp_v4 = (unsigned int)((unsigned long long)in_d1 >> 0x20);
-  if (DAT_004e3b4c == &DAT_004e39e0) {
+  if (DAT_004e3b4c == &g_asdGxPresets) {
     temp_v1 = 0;
   }
   else if (DAT_004e3b4c == &DAT_004e3a0c) {
@@ -49,11 +49,11 @@ void FUN_002f51bc(unsigned int param_1,unsigned int param_2)
   else {
     temp_v1 = 2;
   }
-  *(unsigned int *)(DAT_0044ea00 + 0x528) = temp_v1;
-  FUN_002c3a14(DAT_0044ea00);
-  FUN_002c39a4(DAT_0044ea00);
-  FUN_00343364(DAT_0044ea00,temp_v2,param_1,param_2);
-  *(unsigned int *)(DAT_0044ea00 + 0x528) = temp_v0;
+  *(unsigned int *)(g_titleScene + 0x528) = temp_v1;
+  FUN_002c3a14(g_titleScene);
+  FUN_002c39a4(g_titleScene);
+  FUN_00343364(g_titleScene,temp_v2,param_1,param_2);
+  *(unsigned int *)(g_titleScene + 0x528) = temp_v0;
   return;
 }
 

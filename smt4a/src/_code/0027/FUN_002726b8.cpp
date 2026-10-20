@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0015155c(...);
-int FUN_0016007c(void);
+int taskCreateDraw(...);
+int asdOperatorNew(void);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -29,8 +29,8 @@ extern unsigned char DAT_00557e84; /* 0x557e84 */
 extern int DAT_0056fcc0; /* 0x56fcc0 */
 extern unsigned int *DAT_0057aa08; /* 0x57aa08 */
 
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdOperatorNew. */
 
 
 void FUN_002726b8(unsigned int *param_1)
@@ -41,13 +41,13 @@ void FUN_002726b8(unsigned int *param_1)
   unsigned int *puVar2;
   
   puVar1 = &LAB_002727b4;
-  FUN_0015155c(&LAB_002727b4,4,0,0,&LAB_0024ebe4,FUN_002df6f0,param_1,*param_1);
+  taskCreateDraw(&LAB_002727b4,4,0,0,&LAB_0024ebe4,FUN_002df6f0,param_1,*param_1);
   param_1[0x16] = (unsigned int)puVar1;
-  FUN_0015155c(&LAB_002727c8,0x71,0,0,FUN_002987c4,0,param_1,puVar1);
-  FUN_0015155c(&LAB_002727dc,0x7d,0,0,FUN_002df754,0,param_1,param_1[0x16]);
-  FUN_0015155c(&LAB_002727f4,0xd9,0,0,FUN_002df754,0,param_1,param_1[0x16]);
+  taskCreateDraw(&LAB_002727c8,0x71,0,0,FUN_002987c4,0,param_1,puVar1);
+  taskCreateDraw(&LAB_002727dc,0x7d,0,0,FUN_002df754,0,param_1,param_1[0x16]);
+  taskCreateDraw(&LAB_002727f4,0xd9,0,0,FUN_002df754,0,param_1,param_1[0x16]);
   puVar2 = (unsigned int *)0x14;
-  FUN_0016007c();
+  asdOperatorNew();
   if (puVar2 != (unsigned int *)0x0) {
     *puVar2 = (unsigned int)&DAT_00557e84;
     puVar2[1] = (unsigned int)param_1;

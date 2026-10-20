@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_001008a2(unsigned char [64], unsigned int);
-int FUN_00167eec(void);
+int asdSoundGetObjectCount(void);
 int FUN_00167f94(void);
 int FUN_00168750(unsigned char [64], int, int, unsigned char *, unsigned char *);
 int FUN_002e342c(int, unsigned char [64]);
@@ -24,10 +24,10 @@ extern signed char DAT_00619972; /* 0x619972 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001008a2. */
 extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_00167eec. */
+/* Supplied declaration required: asdSoundGetObjectCount. */
 /* Supplied declaration required: FUN_00167f94. */
 /* Supplied declaration required: FUN_00168750. */
-extern int FUN_00180008(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: FUN_002e6dd0. */
 
@@ -49,7 +49,7 @@ unsigned int FUN_001628c0(unsigned int param_1,int param_2,unsigned char param_3
   FUN_002e6dd0(temp_v2,0x40);
   FUN_002e6dd0(temp_v3,0x40);
   FUN_002e6dd0(temp_v4,0x40);
-  temp_v0 = FUN_00180008(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if ((((temp_v0 != 0) || (temp_v0 = FUN_00162ea4(), temp_v0 != 0)) || (DAT_00619972 != '\0')) ||
      (param_2 == 0)) {
     return 0xffffffff;
@@ -57,7 +57,7 @@ unsigned int FUN_001628c0(unsigned int param_1,int param_2,unsigned char param_3
   FUN_00100388(temp_v3,"snd/voice/");
   FUN_001008a2(temp_v3,param_1);
   FUN_00100388(temp_v2,"%s.bcwav",temp_v3);
-  FUN_00167eec();
+  asdSoundGetObjectCount();
   temp_v1 = 0;
   do {
     pcVar2 = (char *)(&DAT_0061978c + temp_v1 * 0x78);

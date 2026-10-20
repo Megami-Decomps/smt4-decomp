@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_001527d8(...);
 int FUN_00164b5c(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00169a1c(...);
 int FUN_00180310(...);
 int FUN_001834a4(...);
@@ -32,14 +32,14 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_002c0234; /* 0x2c0234 */
-extern int DAT_0057f11c; /* 0x57f11c */
+extern int g_campCecRanking; /* 0x57f11c */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int FUN_001654d8(int);
 extern int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00169a1c. */
 /* Supplied declaration required: FUN_00180310. */
 extern int FUN_0018206c(unsigned int, unsigned int);
@@ -76,7 +76,7 @@ int FUN_002bfd94(void)
   unsigned int temp_v17;
   int temp_v18;
   
-  temp_v2 = DAT_0057f11c;
+  temp_v2 = g_campCecRanking;
   temp_v3 = FUN_0018719c(0x4f6);
   temp_v4 = 0;
   if (temp_v3 != 0) {
@@ -92,7 +92,7 @@ int FUN_002bfd94(void)
       if (temp_v3 != 0) {
         temp_v4 = FUN_001654d8(temp_v2 + 0xc);
         temp_v3 = FUN_001654e4(temp_v2 + 0xc);
-        FUN_001677c0();
+        efctSetSpeed();
         FUN_001835b4(2,0x2e,0x44d,temp_v4,temp_v3,0x65);
         FUN_00164b5c(2,0x2e,0x1a,temp_v4,temp_v3,0x65);
         temp_v7 = 0;
@@ -200,7 +200,7 @@ int FUN_002bfd94(void)
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < 10);
         FUN_00183bb0();
-        FUN_001677c0();
+        efctSetSpeed();
         temp_v4 = 0;
       }
     }

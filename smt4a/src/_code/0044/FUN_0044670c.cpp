@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001c3fc8(...);
-int FUN_002e3390(...);
+int wstrlen(...);
 int FUN_00458a68(...);
 int nw_ut_ResDicPatricia_Get(...);
 
@@ -55,7 +55,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_001c3fc8. */
-/* Supplied declaration required: FUN_002e3390. */
+/* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: FUN_00458a68. */
 extern unsigned int *FUN_00459870(int, int, fn_0044670c_arg0 *, int *);
 /* Supplied declaration required: nw_ut_ResDicPatricia_Get. */
@@ -197,7 +197,7 @@ int FUN_0044670c(fn_0044670c_arg0 *param_1,int *param_2)
       }
       temp_v10 = &temp_v9;
       if (!(temp_v9 == 0 || ppiVar15 == (int **)0x0)) {
-        temp_v2 = FUN_002e3390(ppiVar15);
+        temp_v2 = wstrlen(ppiVar15);
         temp_v6 = nw_ut_ResDicPatricia_Get(temp_v10,ppiVar15,temp_v2);
         if (temp_v6 != 0) {
           temp_v7 = *(int *)(temp_v6 + 0xc);
@@ -270,7 +270,7 @@ int FUN_0044670c(fn_0044670c_arg0 *param_1,int *param_2)
           temp_v10 = (int *)0x0;
         }
         if (!(temp_v10 == (int *)0x0 || piVar12 == (int *)0x0)) {
-          temp_v2 = FUN_002e3390(piVar12);
+          temp_v2 = wstrlen(piVar12);
           temp_v5 = nw_ut_ResDicPatricia_Get(ppiVar15,piVar12,temp_v2);
           if (temp_v5 != 0) {
             temp_v6 = *(int *)(temp_v5 + 0xc);

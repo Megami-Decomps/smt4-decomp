@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0029ee6c(int, int);
 int FUN_002b8cc8(void);
-int FUN_002bd8e8(int, int, int);
+int timerStart(int, int, int);
 int FUN_002c424c(int, int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -16,10 +16,10 @@ typedef struct {
 
 extern int DAT_0044e190; /* 0x44e190 */
 
-extern int FUN_0029e010(void);
+extern int gameGetFlagByte12e8(void);
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002b8cc8. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002c424c. */
 
 
@@ -39,14 +39,14 @@ void FUN_00292ca0(unsigned int param_1)
   }
   *(unsigned char *)(DAT_0044e190 + 0x3fd) = *(unsigned char *)(DAT_0044e190 + 0x3fc);
   *(char *)(temp_v0 + 0x3fc) = (char)param_1;
-  temp_v1 = FUN_0029e010();
+  temp_v1 = gameGetFlagByte12e8();
   if (temp_v1 < 0) {
-    FUN_002bd8e8(temp_v0 + 0x28,3,0);
+    timerStart(temp_v0 + 0x28,3,0);
   }
   else {
-    temp_v1 = FUN_0029e010();
+    temp_v1 = gameGetFlagByte12e8();
     if (0 < temp_v1) {
-      FUN_002bd8e8(temp_v0 + 0x28,2,0);
+      timerStart(temp_v0 + 0x28,2,0);
     }
   }
   temp_v1 = DAT_0044e190;

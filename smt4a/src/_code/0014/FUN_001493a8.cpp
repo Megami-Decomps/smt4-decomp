@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00178b38(int);
 int FUN_0017e75c(unsigned int, int);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -20,7 +20,7 @@ extern int *DAT_005b4428; /* 0x5b4428 */
 
 /* Supplied declaration required: FUN_00178b38. */
 /* Supplied declaration required: FUN_0017e75c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_001493a8(void)
@@ -140,7 +140,7 @@ void FUN_001493a8(void)
       *(unsigned int *)(temp_v2 + 0x6c) = 0;
       *(unsigned int *)(temp_v2 + 100) = 0;
       *(unsigned int *)(temp_v2 + 0x70) = 0;
-      FUN_002e6354(temp_v2 + 0x74,0x80);
+      sysMemClear(temp_v2 + 0x74,0x80);
       *(unsigned int *)(temp_v2 + 0xf4) = 0;
       temp_v2 = *DAT_005b4428;
       FUN_00178b38(temp_v2 + 0x34);

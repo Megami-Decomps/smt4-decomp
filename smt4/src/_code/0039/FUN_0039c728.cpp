@@ -17,7 +17,7 @@ typedef struct {
 } param_1_stack;
 
 extern float DAT_0044cdc8; /* 0x44cdc8 */
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -59,7 +59,7 @@ void FUN_0039c728(int param_1)
   temp_v1 = param_1 + 0x162;
   if ((*(unsigned int *)(param_1 + 0x10) & 0x20000) != 0) {
     temp_v0 = FUN_002bffd8(&temp_v7,&temp_v6);
-    if ((temp_v0 == 0) || ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x18)) != '\0')) {
+    if ((temp_v0 == 0) || ((*(signed char *)((unsigned char *)&g_gameState + 0x18)) != '\0')) {
       *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
       if (*(char *)(param_1 + 0x54) >= '\x03') {
         *(unsigned int *)(param_1 + 0x3c) = temp_v5;

@@ -30,11 +30,11 @@ extern unsigned int DAT_0049fc08; /* 0x49fc08 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_00248dfc(void);
 extern int FUN_00253154(int);
-extern unsigned int FUN_0025bc18(unsigned int, unsigned int, unsigned int);
+extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0025beb8. */
 /* Supplied declaration required: FUN_0027ee24. */
-extern unsigned int FUN_0028522c(unsigned int, unsigned int);
-extern unsigned int FUN_0029a034(unsigned char *, unsigned int);
+extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
+extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
 extern int FUN_002adee0(unsigned int);
 extern int FUN_002c09d0(void);
@@ -163,41 +163,41 @@ unsigned int FUN_0027c3d0(void)
           if (temp_v7 != 4) {
             if (temp_v7 != 5) {
               if (temp_v7 != 6) {
-                temp_v3 = FUN_0029a034(&LAB_0027c9a4,0x1c0);
+                temp_v3 = asdMdlManagerCreateSecondList(&LAB_0027c9a4,0x1c0);
                 *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
               }
               else {
-                temp_v3 = FUN_0029a034(&LAB_0027c9f4,0x1c0);
+                temp_v3 = asdMdlManagerCreateSecondList(&LAB_0027c9f4,0x1c0);
                 *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
               }
             }
             else {
-              temp_v3 = FUN_0029a034(&LAB_0027c9e0,0x1c0);
+              temp_v3 = asdMdlManagerCreateSecondList(&LAB_0027c9e0,0x1c0);
               *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
             }
           }
           else {
-            temp_v3 = FUN_0029a034(&LAB_0027c9cc,0x1c0);
+            temp_v3 = asdMdlManagerCreateSecondList(&LAB_0027c9cc,0x1c0);
             *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
           }
         }
         else {
-          temp_v3 = FUN_0025bc18(DAT_0049fc04,DAT_0049fc08,0x1c0);
+          temp_v3 = asdMdlManagerCreateFromSource(DAT_0049fc04,DAT_0049fc08,0x1c0);
           *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
         }
       }
       else {
-        temp_v3 = FUN_0029a034(&LAB_0027c9b8,0x1c0);
+        temp_v3 = asdMdlManagerCreateSecondList(&LAB_0027c9b8,0x1c0);
         *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
       }
     }
     else {
-      temp_v3 = FUN_0025bc18(DAT_0049fbfc,DAT_0049fc00,0x1c0);
+      temp_v3 = asdMdlManagerCreateFromSource(DAT_0049fbfc,DAT_0049fc00,0x1c0);
       *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
     }
   }
   else {
-    temp_v3 = FUN_0025bc18(DAT_0049fbf4,DAT_0049fbf8,0x1c0);
+    temp_v3 = asdMdlManagerCreateFromSource(DAT_0049fbf4,DAT_0049fbf8,0x1c0);
     *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
   }
   temp_v2 = DAT_0044cd88;
@@ -222,7 +222,7 @@ LAB_0027c7c0:
       *(unsigned char *)(temp_v7 + 0x9d8) = 1;
       *(unsigned char *)(temp_v7 + 0x9f8) = 0;
       *(unsigned char *)(temp_v7 + 0xa04) = 1;
-      temp_v3 = FUN_0028522c(*(unsigned int *)(DAT_0044cd88 + 0x34),0);
+      temp_v3 = asdMdlManagerClone(*(unsigned int *)(DAT_0044cd88 + 0x34),0);
       *(unsigned int *)(temp_v7 + 0xa08) = temp_v3;
       *(unsigned char *)(temp_v7 + 0xa0c) = 1;
       *(unsigned int *)(temp_v7 + 0xa10) = 0;
@@ -306,7 +306,7 @@ LAB_0027c7c0:
               *(unsigned int *)(temp_v4 + 0x98) = 0xffffffff;
               if (temp_v7 != 0) {
                 *(unsigned char *)(temp_v4 + 0x84) = 1;
-                temp_v3 = FUN_0028522c(*(unsigned int *)(temp_v2 + *(short *)(temp_v2 + 10) * 8 + 0x1c),0);
+                temp_v3 = asdMdlManagerClone(*(unsigned int *)(temp_v2 + *(short *)(temp_v2 + 10) * 8 + 0x1c),0);
                 *(unsigned int *)(temp_v4 + 0x88) = temp_v3;
                 *(unsigned char *)(temp_v4 + 0x8c) = 1;
                 *(unsigned int *)(temp_v4 + 0x90) = 0;

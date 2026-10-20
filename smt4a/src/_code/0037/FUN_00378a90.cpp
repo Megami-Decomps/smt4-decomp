@@ -22,8 +22,8 @@ extern int *DAT_00581270; /* 0x581270 */
 /* Supplied declaration required: FUN_001a9110. */
 extern int FUN_001ab8c0(int);
 /* Supplied declaration required: FUN_001ac2d4. */
-extern int FUN_001f4948(int, unsigned int);
-extern int FUN_001f4a48(unsigned char *, unsigned int);
+extern int asdMdlManagerClone(int, unsigned int);
+extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00280c5c. */
 /* Supplied declaration required: FUN_0032c5c4. */
 /* Supplied declaration required: FUN_00341060. */
@@ -92,7 +92,7 @@ unsigned int FUN_00378a90(void)
           DAT_00581270[1] = 0;
           piVar3[0x4ae] = 2;
           FUN_00100388(temp_v5,&LAB_00378dc4,2);
-          temp_v1 = FUN_001f4a48(temp_v5,7);
+          temp_v1 = asdMdlManagerCreateSecondList(temp_v5,7);
           piVar3[0x4b0] = temp_v1;
           *(unsigned char *)(piVar3 + 0x4af) = 0;
           *DAT_00581270 = *DAT_00581270 + 1;
@@ -104,7 +104,7 @@ unsigned int FUN_00378a90(void)
           piVar7 = DAT_00581270 + temp_v1 * 0xb + 0x445;
           DAT_00581270[temp_v1 * 0xb + 1099] = 1;
           FUN_00100388(temp_v5,&LAB_00378dc4,1);
-          temp_v3 = FUN_001f4948(DAT_00581270[0x44d],0);
+          temp_v3 = asdMdlManagerClone(DAT_00581270[0x44d],0);
           piVar3[temp_v1 * 0xb + 0x44d] = temp_v3;
           *(unsigned char *)(piVar3 + temp_v1 * 0xb + 0x44c) = 1;
           *(unsigned char *)piVar7 = 1;
@@ -143,7 +143,7 @@ unsigned int FUN_00378a90(void)
         DAT_00581270[1] = 0;
         piVar3[1099] = 1;
         FUN_00100388(temp_v5,&LAB_00378dc4,1);
-        temp_v1 = FUN_001f4a48(temp_v5,0x38);
+        temp_v1 = asdMdlManagerCreateSecondList(temp_v5,0x38);
         piVar3[0x44d] = temp_v1;
         *(unsigned char *)(piVar3 + 0x44c) = 0;
         temp_v1 = *DAT_00581270 + 1;
@@ -158,7 +158,7 @@ unsigned int FUN_00378a90(void)
         piVar7 = DAT_00581270 + temp_v1 * 0xb + 0x4a8;
         DAT_00581270[temp_v1 * 0xb + 0x4ae] = 2;
         FUN_00100388(temp_v5,&LAB_00378dc4,2);
-        temp_v3 = FUN_001f4948(DAT_00581270[0x4b0],0);
+        temp_v3 = asdMdlManagerClone(DAT_00581270[0x4b0],0);
         piVar3[temp_v1 * 0xb + 0x4b0] = temp_v3;
         *(unsigned char *)(piVar3 + temp_v1 * 0xb + 0x4af) = 1;
         *(unsigned char *)piVar7 = 1;

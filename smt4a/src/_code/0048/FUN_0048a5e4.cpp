@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00162790(...);
 int FUN_00164b5c(int, int, int, int, int, int);
 int FUN_001654d8(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_0016c69c(...);
 int FUN_0016c6f0(...);
 int FUN_00183bb0(void);
@@ -17,7 +17,7 @@ int FUN_003849cc(unsigned int, unsigned int, int, unsigned char [132], unsigned 
 int FUN_00384cf4(...);
 int FUN_0048816c(...);
 int FUN_004927dc(...);
-int FUN_00492be8(unsigned char *);
+int lmapSceneGetObj(unsigned char *);
 int FUN_00492c5c(...);
 int FUN_0049325c(...);
 int FUN_0049359c(int, float *);
@@ -40,7 +40,7 @@ typedef struct {
 } param_1_stack;
 
 extern int DAT_00587f20; /* 0x587f20 */
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern signed char DAT_005f1a5c; /* 0x5f1a5c */
 extern signed char DAT_005f1a5e; /* 0x5f1a5e */
 
@@ -50,7 +50,7 @@ extern int FUN_00162e8c(void);
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: FUN_001654d8. */
 extern unsigned int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_00169240(unsigned int);
 extern unsigned int FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
@@ -68,7 +68,7 @@ extern int FUN_003847e8(void);
 /* Supplied declaration required: FUN_0048816c. */
 /* Supplied declaration required: FUN_004927dc. */
 extern unsigned int FUN_00492bc0(void);
-/* Supplied declaration required: FUN_00492be8. */
+/* Supplied declaration required: lmapSceneGetObj. */
 extern unsigned int FUN_00492c34(unsigned char *);
 /* Supplied declaration required: FUN_00492c5c. */
 extern unsigned int FUN_00492c70(unsigned char *);
@@ -110,12 +110,12 @@ void FUN_0048a5e4(int param_1)
   
   temp_v1 = FUN_00162e8c();
   temp_v2 = FUN_001692ac(5,1);
-  FUN_0016c6f0(DAT_0059dbb4,3,temp_v2);
+  FUN_0016c6f0(g_renderCtx,3,temp_v2);
   temp_v19 = (unsigned char *)(param_1 + 0x4cc);
   VectorSignedToFloat(0x100 - DAT_00587f20,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v3 = FUN_00492bc0();
   temp_v2 = FUN_00492c34(temp_v19);
-  FUN_00492be8(temp_v19);
+  lmapSceneGetObj(temp_v19);
   temp_v16 = 0.0f;
   temp_v15 = 0.0f;
   if (DAT_005f1a5e != '\0') {
@@ -125,7 +125,7 @@ void FUN_0048a5e4(int param_1)
   if ((*(unsigned int *)(param_1 + 0x10) & 0x1000000) != 0) {
     FUN_0049359c(param_1 + 0x4d0,&temp_v15);
   }
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_00183bb0();
   FUN_00164b5c(2,0x13,8,(int)temp_v15,(int)temp_v16,DAT_00587f20);
   temp_v9 = param_1 + 0x205ac;
@@ -198,12 +198,12 @@ void FUN_0048a5e4(int param_1)
     }
   }
   temp_v2 = FUN_00169294(6,1,0);
-  FUN_0016c6f0(DAT_0059dbb4,6,temp_v2);
+  FUN_0016c6f0(g_renderCtx,6,temp_v2);
   FUN_0049368c(param_1 + 0x4d0,4000,0,0,DAT_00587f20,1);
   FUN_0049368c(param_1 + 0x4d0,0xfa1,0,0,DAT_00587f20,1);
   FUN_0049368c(param_1 + 0x4d0,0xfa2,0,0,DAT_00587f20,1);
   FUN_0049368c(param_1 + 0x4d0,0xfa3,0,0,DAT_00587f20,1);
-  FUN_0016c69c(DAT_0059dbb4,6);
+  FUN_0016c69c(g_renderCtx,6);
   temp_v9 = 0xfa5;
   do {
     FUN_0049368c(param_1 + 0x4d0,temp_v9,0,0,DAT_00587f20,1);
@@ -215,7 +215,7 @@ void FUN_0048a5e4(int param_1)
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 0xfad);
   if ((*(unsigned int *)(param_1 + 0x10) & 0x1000) != 0) {
-    FUN_0016c69c(DAT_0059dbb4,3);
+    FUN_0016c69c(g_renderCtx,3);
     return;
   }
   if (*(char *)(param_1 + 0xc) != '\0') {
@@ -336,7 +336,7 @@ LAB_0048ae60:
     NaviMain_GetCurrentMap(temp_v19);
     temp_v9 = FUN_003847e8();
     if (temp_v9 == 2 || temp_v9 == 3) {
-      FUN_0016c69c(DAT_0059dbb4,3);
+      FUN_0016c69c(g_renderCtx,3);
       return;
     }
     if (*(int *)(temp_v1 + 0x1514) != 0) {
@@ -428,7 +428,7 @@ LAB_0048ae60:
       FUN_0049325c(0x1244,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);
     }
   }
-  FUN_0016c69c(DAT_0059dbb4,3);
+  FUN_0016c69c(g_renderCtx,3);
   return;
 }
 

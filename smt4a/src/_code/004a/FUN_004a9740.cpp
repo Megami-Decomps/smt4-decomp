@@ -31,7 +31,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00358e94. */
 /* Supplied declaration required: FUN_00387240. */
 extern unsigned int FUN_004aaff0(unsigned int, int);
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 void FUN_004a9740(unsigned int param_1,int param_2,int param_3,unsigned int param_4,int param_5,
@@ -111,24 +111,24 @@ void FUN_004a9740(unsigned int param_1,int param_2,int param_3,unsigned int para
     FUN_00358e94(temp_v7,(int)(short)(int)(temp_v9 + temp_v8),(int)(short)(int)temp_v10);
     if (param_5 == 0) {
       if (param_6 != 0) {
-        temp_v4 = aeabi_idivmod(param_3,temp_v5);
+        temp_v4 = __aeabi_idivmod(param_3,temp_v5);
         temp_v4 = temp_v4 + 0x7f8;
       }
       else {
-        temp_v4 = aeabi_idivmod(param_3,temp_v5);
+        temp_v4 = __aeabi_idivmod(param_3,temp_v5);
         temp_v4 = temp_v4 + 0x7e4;
       }
     }
     else if (param_6 != 0) {
-      temp_v4 = aeabi_idivmod(param_3,temp_v5);
+      temp_v4 = __aeabi_idivmod(param_3,temp_v5);
       temp_v4 = temp_v4 + 0x802;
     }
     else {
-      temp_v4 = aeabi_idivmod(param_3,temp_v5);
+      temp_v4 = __aeabi_idivmod(param_3,temp_v5);
       temp_v4 = temp_v4 + 0x7ee;
     }
     FUN_00184b80(temp_v7,temp_v4);
-    temp_v7 = aeabi_idivmod(param_3,temp_v5);
+    temp_v7 = __aeabi_idivmod(param_3,temp_v5);
     temp_v3 = temp_v3 - 1;
     param_3 = param_3 - temp_v7 * temp_v5;
     temp_v5 = temp_v5 / 10;

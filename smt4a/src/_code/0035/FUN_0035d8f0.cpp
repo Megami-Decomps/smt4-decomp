@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_5_stack;
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_0017ffa8. */
 /* Supplied declaration required: FUN_00184310. */
@@ -74,12 +74,12 @@ void FUN_0035d8f0(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v1 = param_1;
   FUN_003a7a88(param_1,param_5);
   if (temp_v1 != 0) {
-    temp_v0 = FUN_0046c4f4(DAT_00570280,temp_v3,temp_v2);
+    temp_v0 = FUN_0046c4f4(g_aocSystem,temp_v3,temp_v2);
     if (temp_v0 == 0) {
       FUN_0017ffa8(2,temp_v3,temp_v2 * 1000 + 1,param_2,param_3,param_4);
       return;
     }
-    FUN_0046fa94(DAT_00570280,param_1,2,temp_v3,temp_v2,param_2,param_3,param_4);
+    FUN_0046fa94(g_aocSystem,param_1,2,temp_v3,temp_v2,param_2,param_3,param_4);
   }
   return;
 }

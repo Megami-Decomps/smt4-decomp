@@ -1,38 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033b748` (_code @ 0x33b748, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Formats a message into a local 52-byte wide-character buffer whose first character is the given one. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b46f8(unsigned short [26], unsigned int, unsigned int, int, unsigned char *);
+s32 FUN_002b46f8(u16 *buffer, u32 arg1, u32 arg2, s32 size, u8 *format);
+u32 dataTableGetCount(u32 id);
+u32 dataTableGetEntries(void);
+u32 dataTableGet(u32 category, u32 variant);
 
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_1_stack;
-
-
-/* Supplied declaration required: FUN_002b46f8. */
-extern unsigned int FUN_002c0c74(unsigned int);
-extern unsigned int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
-
-
-void FUN_0033b748(unsigned short param_1)
-
+void FUN_0033b748(u16 character)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned short temp_v2 [26];
-  
-  temp_v0 = FUN_002c0cec(0x14,1);
-  temp_v1 = FUN_002c0cc4();
-  temp_v0 = FUN_002c0c74(temp_v0);
-  temp_v2[0] = param_1;
-  FUN_002b46f8(temp_v2,temp_v1,temp_v0,0x34,(unsigned char *)0x1b1804);
-  return;
+    u32 id;
+    u32 arg1;
+    u32 arg2;
+    u16 buffer[26];
+
+    id = dataTableGet(0x14, 1);
+    arg1 = dataTableGetEntries();
+    arg2 = dataTableGetCount(id);
+    buffer[0] = character;
+    FUN_002b46f8(buffer, arg1, arg2, 0x34, (u8 *)0x001b1804); /* format string in rodata */
 }
 
 } /* extern "C" */

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_0030ea58(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -17,14 +17,14 @@ typedef struct {
 
 extern int FUN_002761fc(...); /* 0x2761fc */
 extern unsigned char LAB_00291c98; /* 0x291c98 */
-extern int FUN_00314fd4(...); /* 0x314fd4 */
+extern int btlEventDestroy(...); /* 0x314fd4 */
 extern unsigned char DAT_005285d8; /* 0x5285d8 */
-extern unsigned int *DAT_00573898; /* 0x573898 */
+extern unsigned int *g_btlEvent; /* 0x573898 */
 
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
-extern int FUN_00163e40(unsigned int);
-extern int FUN_002e3390(unsigned int *);
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+extern int jobIsValid(unsigned int);
+extern int wstrlen(unsigned int *);
 /* Supplied declaration required: FUN_0030ea58. */
 
 
@@ -37,18 +37,18 @@ void FUN_00291bd4(unsigned int *param_1)
   unsigned int *puVar3;
   unsigned int *puVar4;
   
-  temp_v0 = FUN_00163e40(param_1[0x1d]);
+  temp_v0 = jobIsValid(param_1[0x1d]);
   if (temp_v0 == 0) {
     puVar2 = &LAB_00291c98;
-    FUN_0015155c(&LAB_00291c98,4,0,0,FUN_002761fc,FUN_00314fd4,param_1,*param_1);
+    taskCreateDraw(&LAB_00291c98,4,0,0,FUN_002761fc,btlEventDestroy,param_1,*param_1);
     param_1[0x1d] = (unsigned int)puVar2;
     puVar3 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x30,1);
-    DAT_00573898 = puVar3;
+    asdMemoryAllocTracked(0x100,0x100,0,0x30,1);
+    g_btlEvent = puVar3;
     *puVar3 = 0;
     puVar4 = param_1 + 0x4c;
     FUN_0030ea58(puVar4,&DAT_005285d8);
-    if ((puVar4 != (unsigned int *)0x0) && (temp_v0 = FUN_002e3390(param_1 + 0x4c), temp_v0 != 0)) {
+    if ((puVar4 != (unsigned int *)0x0) && (temp_v0 = wstrlen(param_1 + 0x4c), temp_v0 != 0)) {
       *puVar3 = 1;
       *(unsigned char *)(puVar3 + 0xb) = 0;
     }

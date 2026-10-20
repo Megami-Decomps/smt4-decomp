@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0024bc7c(unsigned short *, int);
+int bitsetSetBit(unsigned short *, int);
 int FUN_0029c6b0(unsigned short *);
 int FUN_002b9024(void);
-int FUN_002c4938(unsigned short *, int);
+int memClear(unsigned short *, int);
 
 typedef struct fn_0029dc74_arg0 fn_0029dc74_arg0;
 struct fn_0029dc74_arg0 {
@@ -35,10 +35,10 @@ struct fn_0029dc74_arg0 {
     ushort field_0x4a; /* +0x4a */
 };
 
-/* Supplied declaration required: FUN_0024bc7c. */
+/* Supplied declaration required: bitsetSetBit. */
 /* Supplied declaration required: FUN_0029c6b0. */
 /* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_0029dc74(fn_0029dc74_arg0 *param_1,unsigned short *param_2)
@@ -49,7 +49,7 @@ void FUN_0029dc74(fn_0029dc74_arg0 *param_1,unsigned short *param_2)
   
   pfVar1 = param_1;
   FUN_002b9024();
-  FUN_002c4938(param_2,0x604);
+  memClear(param_2,0x604);
   param_2[0x23] = (short)(int)param_1;
   *(unsigned char *)(param_2 + 0x24) = pfVar1->field_0x3;
   *param_2 = pfVar1->field_0x14;
@@ -75,7 +75,7 @@ void FUN_0029dc74(fn_0029dc74_arg0 *param_1,unsigned short *param_2)
   param_2[0x20] = pfVar1->field_0x48;
   param_2[0x21] = pfVar1->field_0x4a;
   *(unsigned int *)(param_2 + 0x18) = 0;
-  FUN_0024bc7c(param_2,pfVar1->field_0x38);
+  bitsetSetBit(param_2,pfVar1->field_0x38);
   FUN_0029c6b0(param_2);
   param_2[0x15] = param_2[7];
   param_2[0x16] = param_2[8];

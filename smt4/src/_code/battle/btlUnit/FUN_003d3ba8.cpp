@@ -89,7 +89,7 @@ typedef struct {
     unsigned int sp4F0; /* 0x4f0: local_4f0 */
 } param_2_stack;
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_004342d4; /* 0x4342d4 */
 extern unsigned int DAT_004342d8; /* 0x4342d8 */
 extern int DAT_004342e0; /* 0x4342e0 */
@@ -130,7 +130,7 @@ extern int FUN_00229914(unsigned int *, unsigned int *, int);
 /* Supplied declaration required: FUN_0023c5c0. */
 extern int FUN_0023c684(unsigned int);
 extern unsigned int FUN_0023dcfc(unsigned int);
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_0023f27c. */
 /* Supplied declaration required: FUN_00246080. */
 /* Supplied declaration required: FUN_00246454. */
@@ -360,7 +360,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       *param_2 = *param_2 | 0x2000;
       FUN_00256898(1,param_2);
       FUN_002568c4(0,param_2);
-      *(unsigned int *)(DAT_004342c8 + 0x760) = 0xffffffff;
+      *(unsigned int *)(g_btlMain + 0x760) = 0xffffffff;
       break;
     case 0xb:
       temp_v9 = *psVar12;
@@ -523,7 +523,7 @@ LAB_003d444c:
         puVar7 = (unsigned int *)((int)puVar7 + 1);
       } while (temp_v6 != 0);
       if (temp_v7 != 0) {
-        temp_v5 = FUN_0023eae0((temp_v7 - 1U) & 0xffff);
+        temp_v5 = randRange((temp_v7 - 1U) & 0xffff);
         temp_v9 = asStack_264[temp_v5 * 2];
         asStack_264[temp_v5 * 2 + 1] = asStack_264[temp_v5 * 2 + 1] + 1;
         psVar12[temp_v4 * 2 + 2] = temp_v9;
@@ -718,7 +718,7 @@ LAB_003d444c:
     temp_v14 = temp_v14 + 1;
   } while (temp_v4 != 0);
   temp_v15 = 0;
-  if ((*(unsigned int *)(DAT_004342c8 + 0x634) & 0x100) == 0) {
+  if ((*(unsigned int *)(g_btlMain + 0x634) & 0x100) == 0) {
     temp_v14 = 0;
     do {
       if (*(int *)(DAT_00435d18 + 0x1cfc) != 0) {
@@ -746,7 +746,7 @@ LAB_003d444c:
             else if ((*param_2 & 0x1080) == 0) {
               temp_v15 = (unsigned int)*(unsigned char *)(temp_v4 + 0x161);
               FUN_003de978(temp_v15,param_2,*(unsigned char *)(temp_v4 + 0x162));
-              *(unsigned int *)(DAT_004342c8 + 0x634) = *(unsigned int *)(DAT_004342c8 + 0x634) | 0x1000000;
+              *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x1000000;
             }
           }
           else if ((*param_2 & 0x1080) == 0) {

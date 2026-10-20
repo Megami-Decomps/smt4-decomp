@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00137ee0(int, int *);
-int FUN_0016007c(void);
+int asdSequenceRequest(int, int *);
+int asdOperatorNew(void);
 int FUN_002bf464(void);
 int FUN_002e3328(void);
 int FUN_00318d6c(void);
@@ -29,8 +29,8 @@ typedef struct {
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_00137ee0. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdSequenceRequest. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002bf464. */
 /* Supplied declaration required: FUN_002e3328. */
 /* Supplied declaration required: FUN_00318d6c. */
@@ -75,7 +75,7 @@ unsigned int FUN_0024b5b0(int *param_1,unsigned int param_2,unsigned int param_3
         }
         else {
           temp_v4 = romwright_piece_3_1((int)((unsigned int)param_4 >> 8),1);
-          FUN_00137ee0(1,&temp_v4);
+          asdSequenceRequest(1,&temp_v4);
         }
         *(unsigned char *)(temp_v3 + 0x1a) = 3;
         *(unsigned char *)(temp_v3 + 0x18) = 1;
@@ -101,7 +101,7 @@ unsigned int FUN_0024b5b0(int *param_1,unsigned int param_2,unsigned int param_3
     FUN_002bf464();
     FUN_00342010();
     temp_v1 = 0x26f0;
-    FUN_0016007c();
+    asdOperatorNew();
     temp_v2 = 0;
     if (temp_v1 != 0) {
       temp_v2 = FUN_0047c8b8();

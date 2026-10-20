@@ -17,7 +17,7 @@ int FUN_0017dd84(void);
 int FUN_0018b600(void);
 int FUN_0018b610(void);
 int FUN_001963e0(void);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int SBORROW4(...);
 
 typedef int romwright_code(...);
@@ -148,7 +148,7 @@ extern unsigned int FUN_00170344(void);
 /* Supplied declaration required: FUN_0018b600. */
 /* Supplied declaration required: FUN_0018b610. */
 /* Supplied declaration required: FUN_001963e0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern int nngxGetVramEndAddr(unsigned int);
 extern int vldtr_initializeStateValidator(int);
 
@@ -177,7 +177,7 @@ unsigned int FUN_00149ae0(romwright_code *param_1,romwright_code *param_2)
   if ((param_1 == (romwright_code *)0x0 || param_2 == (romwright_code *)0x0) || (DAT_0061a480 != '\0')) {
     return 0;
   }
-  FUN_002e6354(&DAT_0061a470,0x180);
+  sysMemClear(&DAT_0061a470,0x180);
   DAT_0061a470 = 0xf0;
   DAT_0061a474 = 0xf0;
   DAT_0061a478 = 400;
@@ -226,7 +226,7 @@ unsigned int FUN_00149ae0(romwright_code *param_1,romwright_code *param_2)
         puVar1[2] = 0x10000;
         puVar1[6] = temp_v0 + 0x10000;
         puVar1[7] = 0x10;
-        FUN_002e6354(temp_v0 + 0x10000,0x1c0);
+        sysMemClear(temp_v0 + 0x10000,0x1c0);
         DAT_005b40e0 = puVar1[1];
         DAT_005b40e4 = puVar1[2] + DAT_005b40e0;
       }

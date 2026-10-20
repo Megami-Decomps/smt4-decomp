@@ -4,22 +4,22 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_0022677c(...);
 int FUN_0024b0c0(...);
 int FUN_00275bc8(...);
 
 int FUN_00100388(unsigned char [128], unsigned char *, unsigned int, unsigned int);
-int FUN_001631d0(unsigned int, int);
+int jobStop(unsigned int, int);
 int FUN_001656e0(unsigned int, int);
 int FUN_00167f94(void);
 int FUN_001695a0(void);
 int FUN_0018719c(void);
-int FUN_0019a5a0(void);
-int FUN_0019c364(void);
+int asdMemFree(void);
+int scrScriptProcessDestroy(void);
 int FUN_0020214c(void);
 int FUN_00212204(int);
-int FUN_002371b4(int);
+int asdLoadFileSetUseRawPaths(int);
 int FUN_002844e4(void);
 int FUN_002852f0(int);
 int FUN_002e6dd0(unsigned int *, int);
@@ -27,10 +27,10 @@ int FUN_0031a400(void);
 int FUN_00342010(void);
 int FUN_0035b304(void);
 int FUN_0035bea0(void);
-int FUN_0037b240(void);
+int bustupCutAnimStopJob(void);
 int FUN_0037b450(void);
 int FUN_003b61ec(void);
-int FUN_003b6a3c(void);
+int eventCommandStop(void);
 int FUN_003bb45c(void);
 int FUN_003d2d6c(int);
 int FUN_003fd63c(...);
@@ -39,32 +39,32 @@ int FUN_0046bed0(int, unsigned int, int);
 
 extern unsigned char LAB_00299154; /* 0x299154 */
 extern unsigned char LAB_0029916c; /* 0x29916c */
-extern int DAT_00570260; /* 0x570260 */
-extern int DAT_00570280; /* 0x570280 */
+extern int g_aocMain; /* 0x570260 */
+extern int g_aocSystem; /* 0x570280 */
 extern unsigned int *DAT_0057f568; /* 0x57f568 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 extern int FUN_00164af0(unsigned int);
 extern int FUN_001656a0(unsigned int);
 /* Supplied declaration required: FUN_001656e0. */
 /* Supplied declaration required: FUN_00167f94. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
-extern int FUN_00180008(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: FUN_0018719c. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_00212204. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
-/* Supplied declaration required: FUN_002371b4. */
+/* Supplied declaration required: asdLoadFileSetUseRawPaths. */
 extern int FUN_00239414(void);
 /* Supplied declaration required: FUN_0024b0c0. */
 /* Supplied declaration required: FUN_00275bc8. */
 extern int FUN_00275f44(unsigned int, unsigned int);
-extern int FUN_0028029c(void);
+extern int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: FUN_002844e4. */
 /* Supplied declaration required: FUN_002852f0. */
 extern int FUN_002a4b60(void);
@@ -74,10 +74,10 @@ extern int FUN_002a4b60(void);
 extern int FUN_003483bc(void);
 /* Supplied declaration required: FUN_0035b304. */
 /* Supplied declaration required: FUN_0035bea0. */
-/* Supplied declaration required: FUN_0037b240. */
+/* Supplied declaration required: bustupCutAnimStopJob. */
 /* Supplied declaration required: FUN_0037b450. */
 /* Supplied declaration required: FUN_003b61ec. */
-/* Supplied declaration required: FUN_003b6a3c. */
+/* Supplied declaration required: eventCommandStop. */
 /* Supplied declaration required: FUN_003bb45c. */
 /* Supplied declaration required: FUN_003d2d6c. */
 /* Supplied declaration required: FUN_003fd63c. */
@@ -104,7 +104,7 @@ unsigned int FUN_00298978(void)
   puVar2 = DAT_0057f568;
   puVar7 = temp_v4;
   puVar8 = temp_v4;
-  if ((*(unsigned int *)(DAT_00570260 + 0x754) & 4) != 0 || (*(unsigned int *)(DAT_00570260 + 0x754) & 8) != 0) {
+  if ((*(unsigned int *)(g_aocMain + 0x754) & 4) != 0 || (*(unsigned int *)(g_aocMain + 0x754) & 8) != 0) {
     return 0;
   }
   temp_v1 = DAT_0057f568[2];
@@ -164,20 +164,20 @@ unsigned int FUN_00298978(void)
     FUN_0037b450();
     FUN_001695a0();
     FUN_002844e4();
-    FUN_0037b240();
+    bustupCutAnimStopJob();
     FUN_0035bea0();
-    FUN_003b6a3c();
+    eventCommandStop();
     FUN_003bb45c();
     if (puVar2[0xc] != 0) {
-      FUN_0019c364();
+      scrScriptProcessDestroy();
       puVar2[0xc] = 0;
     }
     if (puVar2[0xb] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       puVar2[0xb] = 0;
     }
     if (puVar2[0xd] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       puVar2[0xd] = 0;
     }
     puVar2[2] = 1;
@@ -200,8 +200,8 @@ unsigned int FUN_00298978(void)
     if (temp_v1 != 99) {
       return 0;
     }
-    FUN_001631d0(*DAT_0057f568,0);
-    *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xffffff8f;
+    jobStop(*DAT_0057f568,0);
+    *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
     return 0;
   }
   if (temp_v1 == 0) {
@@ -216,19 +216,19 @@ unsigned int FUN_00298978(void)
     if (temp_v1 != 2) {
       return 0;
     }
-    if ((*(char *)(DAT_0057f568 + 8) != '\0') && (temp_v1 = FUN_0028029c(), temp_v1 == 0)) {
-      FUN_002371b4(1);
+    if ((*(char *)(DAT_0057f568 + 8) != '\0') && (temp_v1 = asdLoadFileGetUseRawPaths(), temp_v1 == 0)) {
+      asdLoadFileSetUseRawPaths(1);
       *(unsigned char *)((int)puVar2 + 0x21) = 1;
     }
     FUN_00100388(temp_v4,&LAB_00299154,puVar2[5],puVar2[5]);
     FUN_00100388(temp_v5,&LAB_0029916c,puVar2[5],puVar2[5]);
-    temp_v1 = FUN_0046e08c(DAT_00570280,puVar2[5],0);
+    temp_v1 = FUN_0046e08c(g_aocSystem,puVar2[5],0);
     if (temp_v1 != 0) {
-      temp_v1 = DAT_00570280;
-      FUN_0046bed0(DAT_00570280,puVar2[5],0);
+      temp_v1 = g_aocSystem;
+      FUN_0046bed0(g_aocSystem,puVar2[5],0);
       puVar2[0xb] = temp_v1;
-      temp_v1 = DAT_00570280;
-      FUN_0046be60(DAT_00570280,puVar2[5],0);
+      temp_v1 = g_aocSystem;
+      FUN_0046be60(g_aocSystem,puVar2[5],0);
       puVar2[0xd] = temp_v1;
       if (puVar2[0xb] == 0 || temp_v1 == 0) {
         puVar2[2] = 1;
@@ -252,9 +252,9 @@ unsigned int FUN_00298978(void)
     FUN_0031a400();
     FUN_00342010();
     FUN_003b61ec();
-    FUN_001681cc(0x92);
+    sysPlaySe(0x92);
     if (*(char *)((int)puVar2 + 0x21) != '\0') {
-      FUN_002371b4(0);
+      asdLoadFileSetUseRawPaths(0);
       *(unsigned char *)((int)puVar2 + 0x21) = 0;
     }
     if (*(char *)((int)puVar2 + 0x23) != '\0') {
@@ -433,7 +433,7 @@ unsigned int FUN_00298978(void)
     }
     break;
   case 3:
-    temp_v1 = FUN_00180008(2);
+    temp_v1 = jyoucyuGetTableEntry(2);
     if ((temp_v1 == 0) &&
        ((temp_v1 = FUN_00164af0(4), temp_v1 != 0 || (temp_v1 = FUN_00164af0(3), temp_v1 != 0)))) {
       *(unsigned char *)(puVar2 + 8) = *(char *)(puVar2 + 8) != '\x01';

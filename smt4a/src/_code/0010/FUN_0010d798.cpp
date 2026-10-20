@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7634(unsigned char [32]);
+int strInit(unsigned char [32]);
 int FUN_002e9300(...);
 int FUN_002e9318(...);
 int FUN_002e9520(...);
@@ -13,7 +13,7 @@ int FUN_002ea2e8(...);
 int FUN_002ea3a8(...);
 int FUN_002ec70c(...);
 int FUN_002ec890(...);
-int FUN_002ec9f4(...);
+int strDestroy(...);
 int FUN_002ee818(...);
 int FUN_002f42be(...);
 int FUN_002f79dc(void);
@@ -42,7 +42,7 @@ extern unsigned char LAB_0010da18; /* 0x10da18 */
 extern unsigned char LAB_0010da24; /* 0x10da24 */
 extern unsigned char LAB_0010da30; /* 0x10da30 */
 
-/* Supplied declaration required: FUN_002e7634. */
+/* Supplied declaration required: strInit. */
 /* Supplied declaration required: FUN_002e9300. */
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002e9520. */
@@ -52,7 +52,7 @@ extern unsigned int FUN_002ea100(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002ea3a8. */
 /* Supplied declaration required: FUN_002ec70c. */
 /* Supplied declaration required: FUN_002ec890. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ee818. */
 extern unsigned int FUN_002eea7c(unsigned char *);
 /* Supplied declaration required: FUN_002f42be. */
@@ -96,7 +96,7 @@ void FUN_0010d798(int param_1)
   
   temp_v0 = param_1 + 0x158;
   FUN_002f79dc();
-  FUN_002e7634(temp_v11);
+  strInit(temp_v11);
   FUN_002f7a28(temp_v6);
   FUN_002e9520(temp_v7,param_1 + 0x134);
   while (temp_v1 = FUN_002eea7c(temp_v7), temp_v1 < 0x10) {
@@ -110,7 +110,7 @@ void FUN_0010d798(int param_1)
   FUN_002f7af2(temp_v6,param_1 + 0x7c,temp_v11);
   FUN_002e9318(temp_v7);
   FUN_002ec70c(temp_v6);
-  FUN_002e7634(temp_v12);
+  strInit(temp_v12);
   FUN_002f7a28(temp_v6);
   FUN_002e9520(temp_v9);
   while (temp_v1 = FUN_002eea7c(temp_v9), temp_v1 < 0x10) {
@@ -170,8 +170,8 @@ void FUN_0010d798(int param_1)
     FUN_002ea3a8(temp_v4);
   }
   FUN_002e9318(temp_v17);
-  FUN_002ec9f4(temp_v12);
-  FUN_002ec9f4(temp_v11);
+  strDestroy(temp_v12);
+  strDestroy(temp_v11);
   return;
 }
 

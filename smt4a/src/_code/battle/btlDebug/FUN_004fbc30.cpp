@@ -10,7 +10,7 @@ int FUN_003f0e20(unsigned int *, int);
 int FUN_004102d8(int, int, int, unsigned int);
 
 extern int DAT_005712f0; /* 0x5712f0 */
-extern unsigned int DAT_00573898; /* 0x573898 */
+extern unsigned int g_btlEvent; /* 0x573898 */
 extern unsigned int DAT_00573c18; /* 0x573c18 */
 extern unsigned int DAT_00573c1c; /* 0x573c1c */
 extern unsigned int DAT_00573c20; /* 0x573c20 */
@@ -18,7 +18,7 @@ extern unsigned int DAT_00573c24; /* 0x573c24 */
 extern unsigned int DAT_00573c28; /* 0x573c28 */
 extern unsigned int DAT_00573c2c; /* 0x573c2c */
 
-extern unsigned int *FUN_0014aa78(void);
+extern unsigned int *btlGetMainState(void);
 /* Supplied declaration required: FUN_003f0254. */
 /* Supplied declaration required: FUN_003f06b4. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -37,13 +37,13 @@ unsigned int FUN_004fbc30(short param_1,unsigned int param_2,int param_3)
   unsigned int temp_v1;
   
   if ((*(unsigned int *)(param_3 + 0x50) & 1) != 0 && (*(unsigned int *)(param_3 + 0x50) & 0x80) != 0) {
-    puVar1 = (unsigned int *)FUN_0014aa78();
+    puVar1 = (unsigned int *)btlGetMainState();
     puVar2 = puVar1;
     FUN_003f0e20(puVar1,(int)*(short *)(param_3 + 0x6a));
     temp_v1 = DAT_00573c2c | DAT_00573c24;
     *puVar2 = DAT_00573c28 | DAT_00573c20 | *puVar2;
     puVar2[1] = puVar2[1] | temp_v1;
-    temp_v0 = FUN_004d7a60(DAT_00573898,param_3,1);
+    temp_v0 = FUN_004d7a60(g_btlEvent,param_3,1);
     if ((temp_v0 == 0) ||
        (((puVar4 = puVar1, FUN_003f06b4(puVar1,param_3), puVar4 != (unsigned int *)0x0 &&
          (FUN_003f0254(puVar1,param_3), puVar1 == (unsigned int *)0x0)) ||

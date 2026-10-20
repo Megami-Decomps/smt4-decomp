@@ -59,7 +59,7 @@ extern unsigned int DAT_00407ed0; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
-extern unsigned int DAT_0049f91c; /* 0x49f91c */
+extern unsigned int g_gameState; /* 0x49f91c */
 extern unsigned int DAT_0049faf0; /* 0x49faf0 */
 extern unsigned int DAT_0049faf4; /* 0x49faf4 */
 extern unsigned int DAT_0049faf8; /* 0x49faf8 */
@@ -452,7 +452,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
               temp_v46 = temp_v46 + temp_v10;
               FUN_00291c20(pcVar4[2],(int)*(short *)(pcVar4 + 0x12),(int)pcVar4[3]);
               temp_v0 = pcVar4[2];
-              puVar3 = &DAT_0049f91c + temp_v0;
+              puVar3 = &g_gameState + temp_v0;
               (&DAT_0049faf0)[temp_v0] = (&DAT_0049faf0)[temp_v0] + 1;
             }
           }

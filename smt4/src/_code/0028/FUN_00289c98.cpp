@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_002a87e8(void);
 int FUN_002a9fdc(int, int, int);
-int FUN_002bd8e8(int, int, int);
+int timerStart(int, int, int);
 int FUN_002bee58(int, int);
 
 extern unsigned char DAT_0043da28; /* 0x43da28 */
 
 /* Supplied declaration required: FUN_002a87e8. */
 /* Supplied declaration required: FUN_002a9fdc. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bee58. */
 
 
@@ -45,7 +45,7 @@ void FUN_00289c98(int param_1)
       FUN_002a9fdc(temp_v1,0,1);
     }
     else {
-      FUN_002bd8e8(temp_v1,3,0);
+      timerStart(temp_v1,3,0);
     }
     temp_v1 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
     temp_v2 = temp_v2 + 1;

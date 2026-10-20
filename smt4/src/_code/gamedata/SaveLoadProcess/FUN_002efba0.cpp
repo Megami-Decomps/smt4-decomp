@@ -9,8 +9,8 @@ int FUN_00247af8(int, int, unsigned int, unsigned int, unsigned int);
 int FUN_0026b4cc(void);
 int FUN_002ad8b4(int, unsigned int);
 int FUN_002c09bc(void);
-int FUN_002c415c(unsigned int);
-int FUN_002c498c(int, int, int, unsigned int, int);
+int asdMemFree(unsigned int);
+int asdMemAlloc(int, int, int, unsigned int, int);
 int FUN_002e0cc8(void);
 int rt_memcpy(unsigned int, unsigned int, int);
 int rt_memcpy_w(unsigned short *, unsigned int, int);
@@ -29,10 +29,10 @@ extern unsigned char DAT_0043e2f4; /* 0x43e2f4 */
 extern unsigned int FUN_0026b5c8(void);
 extern unsigned int FUN_0026b5dc(void);
 /* Supplied declaration required: FUN_002ad8b4. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c09bc. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c498c. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMemAlloc. */
 extern int FUN_002cedbc(void);
 /* Supplied declaration required: FUN_002e0cc8. */
 /* Supplied declaration required: rt_memcpy. */
@@ -48,7 +48,7 @@ unsigned int FUN_002efba0(void)
   int temp_v2;
   unsigned short *puVar4;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   temp_v2 = *(int *)(temp_v0 + 4);
   if (temp_v2 != 0) {
     if (temp_v2 != 1) {
@@ -69,12 +69,12 @@ unsigned int FUN_002efba0(void)
     if (temp_v2 == 1) {
       temp_v2 = FUN_002cedbc();
       if (temp_v2 != 0) {
-        FUN_002c415c(*(unsigned int *)(temp_v0 + 8));
+        asdMemFree(*(unsigned int *)(temp_v0 + 8));
         *(unsigned int *)(temp_v0 + 4) = 3;
         *(unsigned int *)(temp_v0 + 8) = 0;
       }
       else {
-        FUN_002c415c(*(unsigned int *)(temp_v0 + 8));
+        asdMemFree(*(unsigned int *)(temp_v0 + 8));
         *(unsigned int *)(temp_v0 + 4) = 2;
         *(unsigned int *)(temp_v0 + 8) = 0;
       }
@@ -83,7 +83,7 @@ unsigned int FUN_002efba0(void)
   else {
     *(unsigned int *)(temp_v0 + 0xc) = 0x24db0;
     temp_v1 = 0x100;
-    FUN_002c498c(0x100,0x100,0,*(unsigned int *)(temp_v0 + 0xc),1);
+    asdMemAlloc(0x100,0x100,0,*(unsigned int *)(temp_v0 + 0xc),1);
     *(unsigned int *)(temp_v0 + 8) = temp_v1;
     FUN_002e0cc8();
     temp_v2 = FUN_002c09bc();

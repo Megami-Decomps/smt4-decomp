@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e74c4(unsigned char [32], int, int, unsigned int);
+int strAssign(unsigned char [32], int, int, unsigned int);
 int FUN_002e75c2(unsigned char [8], unsigned char [8]);
 int FUN_002e7908(unsigned int *, int *);
 int FUN_002e9ff4(int *);
-int FUN_002ec9f4(unsigned char [32]);
+int strDestroy(unsigned char [32]);
 int FUN_002ecad4(unsigned int *, unsigned int, int);
 int FUN_002f4e14(unsigned char [8], int *);
 int FUN_002f4e90(unsigned char [8], unsigned char [32]);
@@ -26,12 +26,12 @@ typedef struct {
 
 extern unsigned char DAT_0055af54; /* 0x55af54 */
 
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e75c2. */
 /* Supplied declaration required: FUN_002e7908. */
 extern unsigned int *FUN_002e9f80(unsigned char *, int, int *);
 /* Supplied declaration required: FUN_002e9ff4. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ecad4. */
 /* Supplied declaration required: FUN_002f4e14. */
 extern int FUN_002f4e70(unsigned char *);
@@ -68,7 +68,7 @@ void FUN_0010d6d4(unsigned int *param_1,int param_2,int *param_3)
     puVar1 = (unsigned int *)FUN_002e9f80(temp_v9,param_3[1],param_3 + 2);
     *puVar1 = (unsigned int)&DAT_0055af54;
     FUN_002ecad4(puVar1,temp_v2,0);
-    FUN_002e74c4(temp_v9,*param_3,param_3[1] - *param_3,0xffffffff);
+    strAssign(temp_v9,*param_3,param_3[1] - *param_3,0xffffffff);
     FUN_002f4e90(temp_v3,temp_v9);
     FUN_002e9ff4(&temp_v7);
     FUN_002f4e14(temp_v3,&temp_v7);
@@ -92,7 +92,7 @@ void FUN_0010d6d4(unsigned int *param_1,int param_2,int *param_3)
       param_1[2] = uStack_44;
     }
     FUN_002f4f00(temp_v3);
-    FUN_002ec9f4(temp_v9);
+    strDestroy(temp_v9);
   }
   return;
 }

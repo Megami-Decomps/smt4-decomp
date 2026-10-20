@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0028c618(unsigned int, int);
 int FUN_0028c640(unsigned int, int, int);
-int FUN_0029bb3c(unsigned char *, int);
+int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a0428(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -15,11 +15,11 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_001b44f8; /* 0x1b44f8 */
-extern int DAT_00447a78; /* 0x447a78 */
+extern int g_mapIf; /* 0x447a78 */
 
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: FUN_0028c640. */
-/* Supplied declaration required: FUN_0029bb3c. */
+/* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
 
 
@@ -35,9 +35,9 @@ void FUN_001b4478(void)
   unsigned int in_s2;
   unsigned int in_s3;
   
-  temp_v0 = DAT_00447a78;
-  puVar3 = (unsigned int *)(DAT_00447a78 + 0xcc1c);
-  *(unsigned char *)(DAT_00447a78 + 0xcc10) = 1;
+  temp_v0 = g_mapIf;
+  puVar3 = (unsigned int *)(g_mapIf + 0xcc1c);
+  *(unsigned char *)(g_mapIf + 0xcc10) = 1;
   *(unsigned int *)(temp_v0 + 0xcc14) = 0;
   *(unsigned int *)(temp_v0 + 0xcc18) = 0;
   puVar2 = &LAB_001b44f8;
@@ -45,7 +45,7 @@ void FUN_001b4478(void)
   *(unsigned int *)(temp_v0 + 0xcc20) = in_s1;
   *(unsigned int *)(temp_v0 + 0xcc24) = in_s2;
   *(unsigned int *)(temp_v0 + 0xcc28) = in_s3;
-  FUN_0029bb3c(&LAB_001b44f8,7);
+  asdMdlManagerCreateLoaded(&LAB_001b44f8,7);
   *(unsigned char **)(temp_v0 + 0xcc2c) = puVar2;
   FUN_002a0428();
   FUN_0028c640(*(unsigned int *)(*(int *)(temp_v0 + 0xcc2c) + 8),0,temp_v0 + 0xcc1c);

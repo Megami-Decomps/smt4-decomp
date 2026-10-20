@@ -10,14 +10,14 @@ int FUN_00249678(void);
 int FUN_0024c418(void);
 int FUN_0024dd00(...);
 int FUN_0024dd80(...);
-int FUN_002571b8(...);
+int effMenuListAppend(...);
 int FUN_0028836c(void);
 int FUN_002a2c00(void);
 int FUN_002b7064(void);
 int FUN_002b70cc(void);
 int FUN_002b8cec(...);
 int FUN_002bfde4(...);
-int FUN_002c32a0(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_003f6b88(...);
 int VectorSignedToFloat(...);
 int rt_memcpy_w(void);
@@ -100,14 +100,14 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024c418. */
 /* Supplied declaration required: FUN_0024dd00. */
 /* Supplied declaration required: FUN_0024dd80. */
-/* Supplied declaration required: FUN_002571b8. */
+/* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: FUN_0028836c. */
 /* Supplied declaration required: FUN_002a2c00. */
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_002b8cec. */
 /* Supplied declaration required: FUN_002bfde4. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_003f6b88. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -320,7 +320,7 @@ LAB_00321f54:
     if (DAT_0044ea82 + temp_v10 == 0) {
       temp_v13 = 0xff008080;
       temp_v11 = 0x10000;
-      FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+      memAlloc(0x10000,0x100,0,0x68,0x10,1);
       *(float *)(temp_v11 + 8) = temp_v29;
       *(float *)(temp_v11 + 0xc) = temp_v30;
       *(float *)(temp_v11 + 0x10) = temp_v31;
@@ -329,7 +329,7 @@ LAB_00321f54:
     else {
       temp_v13 = 0xff808080;
       temp_v11 = 0x10000;
-      FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+      memAlloc(0x10000,0x100,0,0x68,0x10,1);
       *(float *)(temp_v11 + 8) = temp_v29;
       *(float *)(temp_v11 + 0xc) = temp_v30;
       *(float *)(temp_v11 + 0x10) = temp_v31;
@@ -369,11 +369,11 @@ LAB_00321f54:
     *(int *)(temp_v11 + 0x18) = (int)((unsigned long long)in_d9 >> 0x20);
     *(unsigned int *)(temp_v11 + 0x1c) = temp_v13;
     *(unsigned int *)(temp_v11 + 4) = 7;
-    FUN_002571b8(temp_v11,1);
+    effMenuListAppend(temp_v11,1);
     temp_v13 = 0x10000;
-    FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+    memAlloc(0x10000,0x100,0,0x68,0x10,1);
     rt_memcpy_w();
-    FUN_002571b8(temp_v13,2);
+    effMenuListAppend(temp_v13,2);
     temp_v10 = temp_v10 + 1;
   } while (temp_v10 < 9);
   temp_v28 = -(float)in_d10;

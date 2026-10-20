@@ -11,7 +11,7 @@ extern unsigned int DAT_005702cc; /* 0x5702cc */
 extern unsigned int DAT_005702d0; /* 0x5702d0 */
 extern unsigned int DAT_005702d4; /* 0x5702d4 */
 
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 unsigned int FUN_003b84bc(unsigned int *param_1)
@@ -22,7 +22,7 @@ unsigned int FUN_003b84bc(unsigned int *param_1)
   unsigned int temp_v2;
   unsigned int *puVar4;
   
-  temp_v1 = FUN_004ee568(*param_1);
+  temp_v1 = btlUnitGet(*param_1);
   temp_v0 = DAT_005702d0;
   puVar4 = *(unsigned int **)(temp_v1 + 0x20);
   temp_v2 = DAT_005702c0 | *puVar4 | DAT_005702c8;

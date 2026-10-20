@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int aeabi_idivmod(int, int);
+int __aeabi_idivmod(int, int);
 
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 int FUN_0026e6a0(int param_1,int param_2,int param_3,int param_4,int param_5)
@@ -26,8 +26,8 @@ int FUN_0026e6a0(int param_1,int param_2,int param_3,int param_4,int param_5)
     if (param_4 < 0) {
       param_4 = -param_4;
     }
-    aeabi_idivmod(param_4,param_3);
-    temp_v0 = aeabi_idivmod((temp_v2 - param_3 / 2) * (param_1 - temp_v1),param_3 / 2);
+    __aeabi_idivmod(param_4,param_3);
+    temp_v0 = __aeabi_idivmod((temp_v2 - param_3 / 2) * (param_1 - temp_v1),param_3 / 2);
     if (temp_v0 < 0) {
       temp_v0 = -temp_v0;
     }

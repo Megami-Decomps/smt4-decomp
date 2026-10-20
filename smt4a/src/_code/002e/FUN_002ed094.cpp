@@ -1,31 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ed094` (_code @ 0x2ed094, 0x2a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the stack frame pads with r6 (push {r4-r6, lr}) where retail pads with r3 (push {r3-r5, lr}); the code is otherwise identical. */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_00310314(void);
+typedef struct TreeNode {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ struct TreeNode *parent;
+    /* 0x08 */ struct TreeNode *left;
+    /* 0x0C */ struct TreeNode *right;
+} TreeNode;
 
+typedef struct Tree {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ TreeNode *header;   /* sentinel node */
+    /* 0x14 */ u32 count;
+    /* 0x18 */ u8 unk18;
+    /* 0x19 */ u8 flag;
+} Tree;
 
-unsigned int * FUN_002ed094(unsigned int *param_1,unsigned char param_2)
+TreeNode *FUN_00310314(void);
 
+/* Constructs an empty tree: allocates the sentinel header node, linked to itself on both sides. */
+Tree *FUN_002ed094(Tree *tree, u8 flag)
 {
-  int temp_v0;
-  
-  *param_1 = 0;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  *(unsigned char *)(param_1 + 6) = 0;
-  *(unsigned char *)((int)param_1 + 0x19) = param_2;
-  param_1[3] = 0;
-  param_1[2] = 0;
-  param_1[1] = 0;
-  temp_v0 = FUN_00310314();
-  param_1[4] = temp_v0;
-  *(unsigned int *)(temp_v0 + 4) = 0;
-  *(unsigned int *)(param_1[4] + 8) = param_1[4];
-  *(unsigned int *)(param_1[4] + 0xc) = param_1[4];
-  return param_1;
+    tree->unk00 = 0;
+    tree->header = NULL;
+    tree->count = 0;
+    tree->unk18 = 0;
+    tree->flag = flag;
+    tree->unk0C = 0;
+    tree->unk08 = 0;
+    tree->unk04 = 0;
+    tree->header = FUN_00310314();
+    tree->header->parent = NULL;
+    tree->header->left = tree->header;
+    tree->header->right = tree->header;
+    return tree;
 }
 
 } /* extern "C" */

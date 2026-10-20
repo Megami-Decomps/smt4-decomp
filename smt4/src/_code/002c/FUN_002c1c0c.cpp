@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_002b93b0(void);
+extern int asdTMTexTableCallFileB(void);
 
 
 unsigned int FUN_002c1c0c(void)
@@ -10,7 +10,7 @@ unsigned int FUN_002c1c0c(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_002b93b0();
+  temp_v0 = asdTMTexTableCallFileB();
   return *(unsigned int *)(temp_v0 + 8);
 }
 

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002ea20c(int *);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(unsigned int, int);
-int aeabi_uidivmod(unsigned int, unsigned int, unsigned int);
+int __aeabi_uidivmod(unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 8 byte(s) */
 typedef struct {
@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002ea20c. */
 extern int FUN_002eab1c(unsigned int *, int);
 extern unsigned int FUN_002ffa9c(unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 double FUN_004322f4(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -53,7 +53,7 @@ double FUN_004322f4(int param_1,unsigned int param_2,unsigned int param_3,unsign
       temp_v3 = (float)VectorUnsignedToFloat
                                (*(unsigned int *)(param_1 + 0x40),(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v4 = (double)((temp_v3 / temp_v2) * 1000.0f);
-      aeabi_uidivmod(*(unsigned int *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x40),
+      __aeabi_uidivmod(*(unsigned int *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x40),
                      *(unsigned int *)(param_1 + 0x28));
     }
   }

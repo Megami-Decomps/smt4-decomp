@@ -53,7 +53,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char LAB_00141adc; /* 0x141adc */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int DAT_004d46ac; /* 0x4d46ac */
 extern unsigned int DAT_004d46b0; /* 0x4d46b0 */
 extern unsigned int DAT_004d46b4; /* 0x4d46b4 */
@@ -63,7 +63,7 @@ extern unsigned int DAT_004d46cc; /* 0x4d46cc */
 extern unsigned int DAT_004d46dc; /* 0x4d46dc */
 extern unsigned char DAT_004d46ec; /* 0x4d46ec */
 extern float DAT_004d4704; /* 0x4d4704 */
-extern unsigned char DAT_004d4880; /* 0x4d4880 */
+extern unsigned char g_asdSoundOptions; /* 0x4d4880 */
 extern signed char DAT_004d4912; /* 0x4d4912 */
 extern signed char DAT_004d4913; /* 0x4d4913 */
 extern unsigned int DAT_004d4914; /* 0x4d4914 */
@@ -165,7 +165,7 @@ int FUN_002af63c(unsigned int param_1,int param_2,unsigned int *param_3)
   temp_v15 = DAT_004d4704;
   FUN_002c5d5c(temp_v24 + 0x10,&LAB_00141adc,0x10,4);
   FUN_002c5d5c(temp_v24,&LAB_00141adc,0x10,4);
-  temp_v28 = &DAT_004d4880;
+  temp_v28 = &g_asdSoundOptions;
   temp_v23 = 0;
   if (DAT_004d4912 != '\0') {
     temp_v6 = param_3[3] + (unsigned int)*(unsigned char *)(param_2 + 0x10);
@@ -174,7 +174,7 @@ int FUN_002af63c(unsigned int param_1,int param_2,unsigned int *param_3)
     }
     param_3[3] = temp_v6;
   }
-  temp_v9 = DAT_0044ea00;
+  temp_v9 = g_titleScene;
   temp_v8 = 0;
   do {
     temp_v24[temp_v8 * 4 + 0x10] = 1.0f;
@@ -215,7 +215,7 @@ int FUN_002af63c(unsigned int param_1,int param_2,unsigned int *param_3)
 LAB_002af7a0:
       if (DAT_004d4913 != '\0') {
         temp_v8 = (&DAT_004d4914)[temp_v0 >> 6];
-        piVar15 = (int *)(DAT_0044ea00 + 0x12ac);
+        piVar15 = (int *)(g_titleScene + 0x12ac);
         temp_v7 = *piVar15;
         temp_v11 = piVar15[temp_v7 + 2];
         *piVar15 = temp_v7 + 1;
@@ -226,7 +226,7 @@ LAB_002af7a0:
         }
         temp_v5 = 1;
       }
-      temp_v9 = DAT_0044ea00;
+      temp_v9 = g_titleScene;
       if (((*(unsigned char *)(temp_v13 + 0xc) & 4) != 0) && (temp_v8 = 0, (*param_3 & 4) == 0)) {
         do {
           if (temp_v8 == 2) {
@@ -387,7 +387,7 @@ LAB_002af7a0:
             temp_v15 = (float)VectorSignedToFloat(0x100 - temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v15 = temp_v15 * temp_v17;
           }
-          FUN_002ba12c(DAT_0044ea00);
+          FUN_002ba12c(g_titleScene);
           in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v16 == temp_v18) << 0x1e);
           if (temp_v28[0x91] != '\0') {
             temp_v15 = (float)VectorSignedToFloat((int)temp_v15,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -404,14 +404,14 @@ LAB_002af7a0:
           temp_v16 = (float)VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
           param_3[1] = (int)(temp_v16 + temp_v15);
         }
-        FUN_002c1b64(DAT_0044ea00,0);
+        FUN_002c1b64(g_titleScene,0);
         VectorUnsignedToFloat(param_3[6],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorUnsignedToFloat(param_3[5],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(param_3[2],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002b76d0(&DAT_004d46ac,&DAT_004d46bc,&DAT_004d46cc,&DAT_004d46dc);
         if (temp_v2) {
-          FUN_002b90f8(DAT_0044ea00,temp_v24 + 0x20);
+          FUN_002b90f8(g_titleScene,temp_v24 + 0x20);
         }
         if (temp_v3) {
           FUN_002bf538();
@@ -435,9 +435,9 @@ LAB_002af7a0:
           fStack_5c = temp_v24[3];
           FUN_002b1fc4(&temp_v32,&temp_v31,&temp_v30,&temp_v21,temp_v29,0);
         }
-        temp_v13 = DAT_0044ea00;
+        temp_v13 = g_titleScene;
         if (temp_v5) {
-          piVar15 = (int *)(DAT_0044ea00 + 0x12ac);
+          piVar15 = (int *)(g_titleScene + 0x12ac);
           temp_v9 = *piVar15;
           temp_v8 = piVar15[temp_v9 + 2];
           *piVar15 = temp_v9 - 1;
@@ -449,7 +449,7 @@ LAB_002af7a0:
         return 1;
       }
       if (temp_v5) {
-        piVar15 = (int *)(DAT_0044ea00 + 0x12ac);
+        piVar15 = (int *)(g_titleScene + 0x12ac);
         temp_v13 = *piVar15;
         temp_v8 = piVar15[temp_v13 + 2];
         *piVar15 = temp_v13 - 1;
@@ -486,9 +486,9 @@ LAB_002af9f0:
       fStack_9c = temp_v24[3];
       FUN_002b1fc4(&temp_v27,&temp_v26,&temp_v25,temp_v24 + 0x20,temp_v29,0);
     }
-    temp_v13 = DAT_0044ea00;
+    temp_v13 = g_titleScene;
     if (temp_v5) {
-      piVar15 = (int *)(DAT_0044ea00 + 0x12ac);
+      piVar15 = (int *)(g_titleScene + 0x12ac);
       temp_v9 = *piVar15;
       temp_v8 = piVar15[temp_v9 + 2];
       *piVar15 = temp_v9 - 1;

@@ -7,13 +7,13 @@ extern "C" {
 int FUN_00158f64(...);
 int FUN_00159030(...);
 int FUN_00159d60(...);
-int FUN_0016007c(...);
-int FUN_00167ab4(...);
+int asdOperatorNew(...);
+int memAlloc(...);
 int FUN_0016dfc4(...);
 int FUN_0016f368(...);
 int FUN_00188b60(...);
 int FUN_002e3140(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_002fb0d4(...);
 
 typedef int romwright_code(...);
@@ -46,13 +46,13 @@ extern unsigned int DAT_00618518; /* 0x618518 */
 /* Supplied declaration required: FUN_00158f64. */
 /* Supplied declaration required: FUN_00159030. */
 /* Supplied declaration required: FUN_00159d60. */
-/* Supplied declaration required: FUN_0016007c. */
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_0016dfc4. */
 /* Supplied declaration required: FUN_0016f368. */
 /* Supplied declaration required: FUN_00188b60. */
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002fb0d4. */
 
 
@@ -85,16 +85,16 @@ unsigned int FUN_00422940(unsigned int *param_1,int param_2,char param_3)
       DAT_005880e4 = 0;
       return 0;
     }
-    FUN_002e6354(DAT_005880d8,DAT_005880e4 * 0x70);
+    sysMemClear(DAT_005880d8,DAT_005880e4 * 0x70);
     DAT_005880e8 = 0;
     DAT_005880ec = 0;
     FUN_00188b60(&DAT_00618518);
     if (DAT_005880d1 != '\0') {
       temp_v0 = 0x100;
-      FUN_00167ab4(0x100,0x100,0,0x1000,0x1000,1);
+      memAlloc(0x100,0x100,0,0x1000,0x1000,1);
       puVar2 = (unsigned int *)0x18;
       DAT_005880dc = temp_v0;
-      FUN_0016007c(0x18,0);
+      asdOperatorNew(0x18,0);
       if (puVar2 != (unsigned int *)0x0) {
         *puVar2 = 0;
         puVar2[1] = 0;

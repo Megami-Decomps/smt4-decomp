@@ -1,22 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00348784` (_code @ 0x348784, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Initializes the 0x544-byte sub-object at +4 (2 elements, comparator at 0x33B5BC) and returns the object. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002c66cc(int, unsigned char *, int, int);
+typedef struct Container {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u8 items[0x544];
+} Container;
 
-extern unsigned char LAB_0033b5bc; /* 0x33b5bc */
+extern void FUN_002c66cc(void *items, void *callback, s32 size, s32 count);
 
-/* Supplied declaration required: FUN_002c66cc. */
-
-
-int FUN_00348784(int param_1)
-
+Container *FUN_00348784(Container *container)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002c66cc(param_1 + 4,&LAB_0033b5bc,0x544,2);
-  return param_1;
+    FUN_002c66cc(container->items, (void *)0x0033B5BC, 0x544, 2);
+    return container;
 }
 
-} /* extern "C" */
+}

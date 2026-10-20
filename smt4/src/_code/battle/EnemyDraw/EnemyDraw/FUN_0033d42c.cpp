@@ -58,7 +58,7 @@ typedef struct {
 
 extern unsigned int DAT_00433d9c; /* 0x433d9c */
 extern float DAT_00433da0; /* 0x433da0 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int DAT_00476634; /* 0x476634 */
 extern unsigned int DAT_004efd6c; /* 0x4efd6c */
 extern unsigned int DAT_004efd70; /* 0x4efd70 */
@@ -161,7 +161,7 @@ void FUN_0033d42c(int param_1,int param_2,float *param_3,unsigned int param_4,in
         iStack_30 = param_2;
         temp_v38 = param_3;
         do {
-          temp_v2 = DAT_0044ea00;
+          temp_v2 = g_titleScene;
           pfVar7 = (float *)(*(int *)(param_1 + 0x18) + temp_v5 * 0x28);
           if (param_5 != 1) {
             if ((param_5 != 2 && param_5 != 3) || (*(char *)((int)pfVar7 + 0x25) != '\0')) {
@@ -226,7 +226,7 @@ LAB_0033d500:
                   *(unsigned char *)(temp_v2 + 0x12c4) = 0;
                 }
               }
-              FUN_002c1b64(DAT_0044ea00,
+              FUN_002c1b64(g_titleScene,
                            *(unsigned int *)
                             (*(int *)(param_1 + 0x14) + (unsigned int)*(unsigned char *)(pfVar7 + 9) * 0x20 + 0x18));
               if (!(*(char *)((int)pfVar7 + 0x25) == '\0' || param_5 == 3)) {

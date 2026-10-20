@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(void);
 int FUN_002a6894(unsigned short *);
-int FUN_002e6354(unsigned short *, int);
+int sysMemClear(unsigned short *, int);
 int FUN_004bcd90(unsigned short *);
 int VectorSignedToFloat(int, int);
 
@@ -20,7 +20,7 @@ extern int FUN_0018416c(unsigned short);
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_002a6894. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_004bcd90. */
 
 
@@ -34,7 +34,7 @@ void FUN_003e5178(unsigned short *param_1,int param_2)
   unsigned int in_fpscr;
   float temp_v3;
   
-  FUN_002e6354(param_1,300);
+  sysMemClear(param_1,300);
   temp_v0 = FUN_0019e52c(param_1[0x96]);
   temp_v2 = param_2 == 0;
   if (temp_v2) {

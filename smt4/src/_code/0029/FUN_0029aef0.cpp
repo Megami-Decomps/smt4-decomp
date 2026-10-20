@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002c4938(char *, int);
+int memClear(char *, int);
 
 extern int FUN_00229e84(void);
 extern int FUN_0029ea68(unsigned int);
 extern int FUN_002c09bc(void);
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 int FUN_0029aef0(void)
@@ -26,7 +26,7 @@ int FUN_0029aef0(void)
   temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 8);
   temp_v1 = FUN_00229e84();
   temp_v0 = *(unsigned short *)(temp_v1 + 10);
-  FUN_002c4938(acStack_7d + 5,100);
+  memClear(acStack_7d + 5,100);
   if (temp_v3 <= temp_v0) {
     do {
       temp_v1 = FUN_0029ea68(temp_v3 & 0xffff);

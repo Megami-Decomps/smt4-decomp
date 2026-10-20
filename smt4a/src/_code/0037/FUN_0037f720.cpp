@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
-int FUN_003283ac(int);
+int btlGetMainState(void);
+int scrSetResult(int);
 
-/* Supplied declaration required: FUN_0014aa78. */
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: btlGetMainState. */
+/* Supplied declaration required: scrSetResult. */
 extern int FUN_003ecd94(void);
 
 
@@ -16,9 +16,9 @@ unsigned int FUN_0037f720(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  FUN_0014aa78();
+  btlGetMainState();
   temp_v0 = FUN_003ecd94();
-  FUN_003283ac(temp_v0 != 0);
+  scrSetResult(temp_v0 != 0);
   return 1;
 }
 

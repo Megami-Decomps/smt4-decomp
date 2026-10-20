@@ -11,7 +11,7 @@ typedef struct {
 } param_4_stack;
 
 extern int *FUN_002e4e86(int *, unsigned int *);
-extern unsigned int *FUN_002e6dac(void);
+extern unsigned int *rt_malloc(void);
 extern unsigned int FUN_0030c5c6(unsigned int, int *);
 
 
@@ -33,7 +33,7 @@ int * FUN_002ece70(int *param_1,int param_2,unsigned int param_3,unsigned int pa
   temp_v3 = FUN_0030c5c6(0,param_1);
   piVar1 = (int *)FUN_002e4e86(&temp_v2,(unsigned int *)&temp_v3);
   temp_v0 = *piVar1;
-  puVar3 = (unsigned int *)FUN_002e6dac();
+  puVar3 = (unsigned int *)rt_malloc();
   *param_1 = (int)puVar3;
   for (temp_v1 = temp_v2; temp_v1 != 0; temp_v1 = temp_v1 - 1) {
     if (puVar3 != (unsigned int *)0x0) {

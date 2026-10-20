@@ -3,13 +3,13 @@
 extern "C" {
 
 int FUN_00232388(void);
-int FUN_00236038(...);
-int FUN_003283ac(int);
+int scrGetArg(...);
+int scrSetResult(int);
 
 extern int *FUN_001ab888(void);
 /* Supplied declaration required: FUN_00232388. */
-/* Supplied declaration required: FUN_00236038. */
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrGetArg. */
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_0037fdc0(void)
@@ -19,11 +19,11 @@ unsigned int FUN_0037fdc0(void)
   int temp_v0;
   int *piVar2;
   
-  temp_v0 = FUN_00236038();
-  FUN_00236038(1);
+  temp_v0 = scrGetArg();
+  scrGetArg(1);
   FUN_00232388();
   piVar2 = (int *)FUN_001ab888();
-  FUN_003283ac(*piVar2 <= temp_v0);
+  scrSetResult(*piVar2 <= temp_v0);
   return 1;
 }
 

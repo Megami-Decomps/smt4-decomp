@@ -46,7 +46,7 @@ extern unsigned int DAT_00407ed0; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -172,7 +172,7 @@ void FUN_0032b4f8(int param_1,int param_2,int param_3)
   temp_v24 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v24 = temp_v24 * 0.003921569f;
   temp_v2 = FUN_002c1c0c(0x14,3);
-  FUN_002c1b64(DAT_0044ea00,temp_v2);
+  FUN_002c1b64(g_titleScene,temp_v2);
   VectorSignedToFloat(0x100 - param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v13 = temp_v25[2];
   FUN_002c1ac8(&temp_v21);
@@ -182,7 +182,7 @@ void FUN_0032b4f8(int param_1,int param_2,int param_3)
   temp_v22 = temp_v19;
   temp_v23 = temp_v19;
   temp_v1 = FUN_002c1c0c(0x14,2);
-  FUN_002c1b64(DAT_0044ea00,temp_v1);
+  FUN_002c1b64(g_titleScene,temp_v1);
   temp_v25[0] = -42.0f;
   temp_v25[1] = -42.0f;
   temp_v27 = temp_v25[2];

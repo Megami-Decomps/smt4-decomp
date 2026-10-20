@@ -26,7 +26,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0026e70c. */
@@ -66,7 +66,7 @@ void FUN_00247c74(fn_00247c74_arg0 *param_1,int param_2)
       VectorSignedToFloat(temp_v0 - 0x14,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_0026e70c(temp_v0 - 0x14);
     }
-    temp_v0 = DAT_0044ea00;
+    temp_v0 = g_titleScene;
     temp_v1 = FUN_002c5da8(6,1,0);
     piVar5 = (int *)(temp_v0 + 0x12ac);
     temp_v2 = piVar5[*piVar5 + 2];
@@ -78,7 +78,7 @@ void FUN_00247c74(fn_00247c74_arg0 *param_1,int param_2)
     FUN_002bf538();
     FUN_002bf288(2,0x2d,0x12,0,temp_v4,param_2 + 3);
     FUN_002bf538();
-    temp_v0 = DAT_0044ea00;
+    temp_v0 = g_titleScene;
     temp_v1 = FUN_002c5da8(6,7,0);
     piVar5 = (int *)(temp_v0 + 0x12ac);
     temp_v2 = piVar5[*piVar5 + 2];

@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_0028dcb0(unsigned int);
-int FUN_00296cc8(int);
-int FUN_002c0c74(unsigned int);
+int scrSetResult(unsigned int);
+int scrGetArg(int);
+int dataTableGetCount(unsigned int);
 
 extern unsigned int FUN_002451ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0028dcb0. */
-extern unsigned int FUN_002939f4(void);
-/* Supplied declaration required: FUN_00296cc8. */
-/* Supplied declaration required: FUN_002c0c74. */
-extern int FUN_002c0cc4(void);
+/* Supplied declaration required: scrSetResult. */
+extern unsigned int btlGetMainState(void);
+/* Supplied declaration required: scrGetArg. */
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(void);
 
 
 unsigned int FUN_00312da8(void)
@@ -26,12 +26,12 @@ unsigned int FUN_00312da8(void)
   int temp_v3;
   unsigned int temp_v4;
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_00296cc8(1);
-  temp_v2 = FUN_002939f4();
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = btlGetMainState();
   temp_v2 = FUN_002451ac(temp_v2,0xe);
-  temp_v3 = FUN_002c0cc4();
-  FUN_002c0c74(temp_v2);
+  temp_v3 = dataTableGetEntries();
+  dataTableGetCount(temp_v2);
   temp_v4 = 0xffffffff;
   switch(temp_v1) {
   case 0:
@@ -52,7 +52,7 @@ unsigned int FUN_00312da8(void)
   case 5:
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + temp_v0 * 0xc + 10);
   }
-  FUN_0028dcb0(temp_v4);
+  scrSetResult(temp_v4);
   return 1;
 }
 

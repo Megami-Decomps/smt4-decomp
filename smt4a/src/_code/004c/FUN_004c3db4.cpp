@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_0019cac4(void);
 int FUN_00261424(void);
-int FUN_002e3d04(void);
+int asdOperatorNewD(void);
 int FUN_002e6490(unsigned int *);
 int VectorSignedToFloat(...);
-int aeabi_idivmod(unsigned int, unsigned int);
+int __aeabi_idivmod(unsigned int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,20 +21,20 @@ extern unsigned int DAT_0057144c; /* 0x57144c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern unsigned int FUN_0014bef4(unsigned int);
 extern int FUN_001633a0(unsigned int);
 extern int FUN_0018719c(void);
 /* Supplied declaration required: FUN_0019cac4. */
 /* Supplied declaration required: FUN_00261424. */
 extern int FUN_002626e0(void);
-/* Supplied declaration required: FUN_002e3d04. */
+/* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: FUN_002e6490. */
 extern int FUN_003e8244(int, unsigned int);
 extern int FUN_003e9b28(int);
 extern int FUN_003eaea0(int, int);
 extern unsigned int FUN_003eaf04(int);
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_004c3db4(unsigned int *param_1)
@@ -62,7 +62,7 @@ void FUN_004c3db4(unsigned int *param_1)
   float temp_v14;
   float temp_v15;
   
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   piVar12 = (int *)(temp_v1 + 0x1b0);
   temp_v2 = (unsigned int)*(unsigned short *)((int)param_1 + 0x166);
   FUN_0019cac4();
@@ -120,7 +120,7 @@ void FUN_004c3db4(unsigned int *param_1)
         if (temp_v3 < temp_v10) {
           temp_v2 = FUN_003eaf04(temp_v1);
           puVar7 = (unsigned int *)(temp_v2 << 2);
-          FUN_002e3d04();
+          asdOperatorNewD();
           if (0 < (int)temp_v2) {
             temp_v13 = (temp_v2 & 1) != 0;
             puVar11 = puVar7 + -1;
@@ -140,7 +140,7 @@ void FUN_004c3db4(unsigned int *param_1)
           if (temp_v5 < (int)temp_v2) {
             do {
               temp_v4 = FUN_0014bef4(temp_v2 & 0xffff);
-              aeabi_idivmod(temp_v4,temp_v2);
+              __aeabi_idivmod(temp_v4,temp_v2);
               temp_v4 = puVar7[temp_v5];
               puVar7[temp_v5] = puVar7[temp_v9];
               temp_v5 = temp_v5 + 1;

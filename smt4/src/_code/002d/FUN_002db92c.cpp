@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00294f64(void);
 int FUN_002ae898(...);
-int FUN_002c415c(int);
+int asdMemFree(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,8 +15,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00294f64. */
 /* Supplied declaration required: FUN_002ae898. */
-extern int FUN_002c08f0(void);
-/* Supplied declaration required: FUN_002c415c. */
+extern int jobGetWork(void);
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_002db92c(void)
@@ -25,7 +25,7 @@ void FUN_002db92c(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   if (*(int *)(temp_v0 + 0x48) != 0) {
     FUN_00294f64();
     *(unsigned int *)(temp_v0 + 0x48) = 0;
@@ -39,7 +39,7 @@ void FUN_002db92c(void)
       FUN_002ae898(0x32,0);
     }
   }
-  FUN_002c415c(temp_v0);
+  asdMemFree(temp_v0);
   return;
 }
 

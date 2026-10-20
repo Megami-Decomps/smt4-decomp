@@ -9,8 +9,8 @@ int FUN_001c2200(int);
 int FUN_001c24e4(int);
 int FUN_001c2778(int);
 int FUN_002be624(...);
-int FUN_002c415c(int);
-int FUN_002c5300(int, int, int, int, int);
+int asdMemFree(int);
+int asdMemoryAlloc(int, int, int, int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -40,8 +40,8 @@ extern int *DAT_00447018; /* 0x447018 */
 /* Supplied declaration required: FUN_001c2778. */
 /* Supplied declaration required: FUN_002be624. */
 extern int FUN_002c3124(unsigned char *, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 void FUN_0027b2b4(int param_1,unsigned int param_2,int param_3,unsigned int param_4)
@@ -101,22 +101,22 @@ void FUN_0027b2b4(int param_1,unsigned int param_2,int param_3,unsigned int para
   piVar5[8] = piVar5[8] + temp_v1;
   piVar5[10] = temp_v1 + piVar5[10];
   temp_v2 = 0x100;
-  FUN_002c5300(0x100,0x100,0,0x15000,1);
+  asdMemoryAlloc(0x100,0x100,0,0x15000,1);
   temp_v3 = 0x100;
   DAT_00447000 = temp_v2;
-  FUN_002c5300(0x100,0x100,0,0xfc00,1);
+  asdMemoryAlloc(0x100,0x100,0,0xfc00,1);
   temp_v2 = 0x100;
   DAT_00447004 = temp_v3;
-  FUN_002c5300(0x100,0x100,0,0x6900,1);
+  asdMemoryAlloc(0x100,0x100,0,0x6900,1);
   temp_v3 = 0x100;
   DAT_00447008 = temp_v2;
-  FUN_002c5300(0x100,0x100,0,0x1f800,1);
+  asdMemoryAlloc(0x100,0x100,0,0x1f800,1);
   DAT_0044700c = temp_v3;
   FUN_001c24e4(0);
   FUN_001c2778(0);
   FUN_001c1ee8(0);
   FUN_001c2200(0);
-  FUN_002c415c(DAT_00447010);
+  asdMemFree(DAT_00447010);
   DAT_00447010 = 0;
   if (temp_v0) {
     temp_v1 = FUN_002c3124(temp_v6,temp_v4,0);
@@ -134,7 +134,7 @@ void FUN_0027b2b4(int param_1,unsigned int param_2,int param_3,unsigned int para
     FUN_001c2778(1);
     FUN_001c1ee8(1);
     FUN_001c2200(1);
-    FUN_002c415c(DAT_00447010);
+    asdMemFree(DAT_00447010);
   }
   DAT_00447010 = 0;
   return;

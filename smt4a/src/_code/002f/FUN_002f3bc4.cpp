@@ -18,7 +18,7 @@ typedef struct {
 
 extern unsigned int *DAT_0057f290; /* 0x57f290 */
 
-extern int FUN_0019e4d4(unsigned int);
+extern int slotRecordFindById(unsigned int);
 /* Supplied declaration required: FUN_0028a538. */
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: FUN_0032ff20. */
@@ -43,10 +43,10 @@ unsigned int FUN_002f3bc4(int param_1,int param_2,int param_3,unsigned int param
       if (param_3 != 2) {
         return 0;
       }
-      temp_v2 = FUN_0019e4d4((DAT_0057f290[param_2 * 2 + 0x241e] & 0x3fffffff) >> 0xf);
+      temp_v2 = slotRecordFindById((DAT_0057f290[param_2 * 2 + 0x241e] & 0x3fffffff) >> 0xf);
     }
     else {
-      temp_v2 = FUN_0019e4d4(DAT_0057f290[param_2 * 2 + 0x241e] & 0x7fff);
+      temp_v2 = slotRecordFindById(DAT_0057f290[param_2 * 2 + 0x241e] & 0x7fff);
     }
     if (temp_v2 == 0) {
       return 0;
@@ -59,8 +59,8 @@ unsigned int FUN_002f3bc4(int param_1,int param_2,int param_3,unsigned int param
     }
     FUN_0032ff20((DAT_0057f290[param_2 * 2 + 0x241f] & 0x1ffff) >> 2,param_1,0x1fffc,param_4,param_4
                 );
-    temp_v2 = FUN_0019e4d4(puVar1[param_2 * 2 + 0x241e] & 0x7fff);
-    temp_v0 = FUN_0019e4d4((puVar1[param_2 * 2 + 0x241e] & 0x3fffffff) >> 0xf);
+    temp_v2 = slotRecordFindById(puVar1[param_2 * 2 + 0x241e] & 0x7fff);
+    temp_v0 = slotRecordFindById((puVar1[param_2 * 2 + 0x241e] & 0x3fffffff) >> 0xf);
     if (temp_v2 == 0 || temp_v0 == 0) {
       return 0;
     }

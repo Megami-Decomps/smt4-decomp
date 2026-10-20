@@ -16,7 +16,7 @@ int FUN_002694f8(...);
 int FUN_00269508(...);
 int FUN_00269694(unsigned int, int, int, int);
 int FUN_002ad314(...);
-int FUN_002bfe28(...);
+int mtx44Copy(...);
 int FUN_002f81b0(...);
 int SBORROW4(int, int);
 int VectorFloatToUnsigned(...);
@@ -147,7 +147,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00269694. */
 extern int FUN_00269a58(void);
 /* Supplied declaration required: FUN_002ad314. */
-/* Supplied declaration required: FUN_002bfe28. */
+/* Supplied declaration required: mtx44Copy. */
 extern int FUN_002bfefc(unsigned int *);
 /* Supplied declaration required: FUN_002f81b0. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
@@ -428,7 +428,7 @@ void FUN_002dea74(int param_1)
     DAT_004efdd0 = DAT_004efda0;
     DAT_004efdd4 = DAT_004efda0;
   }
-  FUN_002bfe28(temp_v27,&DAT_004efd9c);
+  mtx44Copy(temp_v27,&DAT_004efd9c);
   temp_v86 = temp_v10 * (float)temp_v23;
   temp_v88 = temp_v10 * (float)((unsigned long long)temp_v23 >> 0x20);
   temp_v87 = temp_v10;

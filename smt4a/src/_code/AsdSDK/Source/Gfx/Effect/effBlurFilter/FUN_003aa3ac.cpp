@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_00514500(int);
 int FUN_00514540(int);
 int VectorSignedToFloat(int, int);
-int aeabi_uidivmod(void);
+int __aeabi_uidivmod(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,10 +16,10 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00514500. */
 /* Supplied declaration required: FUN_00514540. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 int FUN_003aa3ac(int *param_1)
@@ -45,7 +45,7 @@ int FUN_003aa3ac(int *param_1)
   
   temp_v4 = *param_1;
   temp_v0 = 0x10000;
-  FUN_00167ab4(0x10000,0x100,0,temp_v4 * 0x34,0x10,1);
+  memAlloc(0x10000,0x100,0,temp_v4 * 0x34,0x10,1);
   temp_v3 = 0;
   if (0 < temp_v4) {
     temp_v12 = 0xc0490fdb;
@@ -55,7 +55,7 @@ int FUN_003aa3ac(int *param_1)
     do {
       puVar4 = (unsigned int *)(temp_v0 + temp_v3 * 0x34);
       FUN_00514500(0);
-      aeabi_uidivmod();
+      __aeabi_uidivmod();
       *puVar4 = temp_v1;
       puVar4[1] = temp_v12;
       puVar4[4] = param_1[4];

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002571b8(...);
-int FUN_002c32a0(int, int, int, int, int, int);
+int effMenuListAppend(...);
+int memAlloc(int, int, int, int, int, int);
 int rt_memcpy_w(void);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
@@ -32,8 +32,8 @@ extern unsigned int DAT_00472924; /* 0x472924 */
 extern unsigned int DAT_00472928; /* 0x472928 */
 extern unsigned int DAT_0047292c; /* 0x47292c */
 
-/* Supplied declaration required: FUN_002571b8. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: effMenuListAppend. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -52,7 +52,7 @@ void FUN_0021a250(unsigned int *param_1,unsigned int param_2,unsigned int *param
   unsigned int temp_v7;
   
   temp_v0 = 0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+  memAlloc(0x10000,0x100,0,0x68,0x10,1);
   temp_v1 = param_1[1];
   temp_v2 = param_1[2];
   temp_v3 = param_1[3];
@@ -128,11 +128,11 @@ void FUN_0021a250(unsigned int *param_1,unsigned int param_2,unsigned int *param
   *(unsigned int *)(temp_v0 + 4) = 7;
   *(unsigned int *)(temp_v0 + 0x1c) = param_2;
   *(unsigned int *)(temp_v0 + 0x60) = param_4;
-  FUN_002571b8(temp_v0,1);
+  effMenuListAppend(temp_v0,1);
   temp_v1 = 0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+  memAlloc(0x10000,0x100,0,0x68,0x10,1);
   rt_memcpy_w();
-  FUN_002571b8(temp_v1,2);
+  effMenuListAppend(temp_v1,2);
   return;
 }
 

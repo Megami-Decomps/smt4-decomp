@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00236038(int);
+int scrGetArg(int);
 int FUN_00301a08(unsigned int, int *, int [2]);
-int FUN_003283ac(int);
+int scrSetResult(int);
 int FUN_003eaf20(void);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -22,11 +22,11 @@ extern unsigned int DAT_005702a4; /* 0x5702a4 */
 extern unsigned int DAT_005702b0; /* 0x5702b0 */
 extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern unsigned int FUN_00232388(void);
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_00301a08. */
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003eaf20. */
 
 
@@ -45,7 +45,7 @@ unsigned int FUN_003c1964(void)
   int temp_v7;
   int temp_v8 [2];
   
-  temp_v0 = FUN_00236038(0);
+  temp_v0 = scrGetArg(0);
   temp_v6 = 0;
   if (temp_v0 == 0) {
     temp_v6 = 7;
@@ -59,14 +59,14 @@ unsigned int FUN_003c1964(void)
   else if (temp_v0 == 3) {
     temp_v6 = 0xb;
   }
-  temp_v1 = FUN_00236038(1);
-  FUN_00236038(2);
+  temp_v1 = scrGetArg(1);
+  scrGetArg(2);
   temp_v2 = FUN_00232388();
   FUN_00301a08(temp_v2,&temp_v7,temp_v8);
   temp_v0 = temp_v7;
   if (temp_v7 < temp_v8[0] + temp_v7) {
     do {
-      temp_v3 = FUN_0014aa78();
+      temp_v3 = btlGetMainState();
       puVar7 = (unsigned int *)(*(int *)(temp_v3 + 0x1ffc) + temp_v0 * 0x408);
       temp_v4 = *puVar7;
       temp_v5 = puVar7[1];
@@ -74,22 +74,22 @@ unsigned int FUN_003c1964(void)
            ((DAT_0057028c & temp_v5) != 0 || (DAT_00570288 & temp_v4) != 0)) &&
           ((temp_v5 & DAT_005702b4) == 0 && (DAT_005702b0 & temp_v4) == 0)) &&
          (temp_v1 < (int)puVar7[temp_v6 + 0x1d])) {
-        FUN_003283ac(1);
+        scrSetResult(1);
         return 1;
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < temp_v7 + temp_v8[0]);
   }
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   if (*(char *)(temp_v0 + 0x4cd1) != '\0') {
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     FUN_003eaf20();
     if ((temp_v0 != 0) && (temp_v1 < *(int *)(temp_v0 + temp_v6 * 4 + 0x74))) {
-      FUN_003283ac(1);
+      scrSetResult(1);
       return 1;
     }
   }
-  FUN_003283ac(0);
+  scrSetResult(0);
   return 1;
 }
 

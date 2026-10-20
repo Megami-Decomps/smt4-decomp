@@ -22,7 +22,7 @@ extern float DAT_004ea948; /* 0x4ea948 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned long long aeabi_idivmod(unsigned int, int);
+extern unsigned long long __aeabi_idivmod(unsigned int, int);
 
 
 void FUN_0031f554(int param_1,int param_2,unsigned int param_3)
@@ -53,7 +53,7 @@ void FUN_0031f554(int param_1,int param_2,unsigned int param_3)
     DAT_004ea940 = DAT_004ea920;
     DAT_004ea944 = DAT_004ea924;
     DAT_004ea948 = DAT_004ea928;
-    temp_v14 = aeabi_idivmod(param_3,temp_v0);
+    temp_v14 = __aeabi_idivmod(param_3,temp_v0);
     temp_v6 = (float)VectorSignedToFloat((int)((unsigned long long)temp_v14 >> 0x20),(unsigned char)(in_fpscr >> 0x16) & 3
                                       );
     temp_v3 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);

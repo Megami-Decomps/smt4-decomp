@@ -26,8 +26,8 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } param_1_stack;
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_00162e8c(void);
@@ -76,7 +76,7 @@ void FUN_00490a10(int param_1)
   temp_v17 = 0;
   temp_v11 = temp_v12;
   temp_v3 = FUN_001692ac(1,0);
-  FUN_0016c6f0(DAT_0059dbb4,3,temp_v3);
+  FUN_0016c6f0(g_renderCtx,3,temp_v3);
   temp_v7 = 0;
   if (0 < *(int *)(param_1 + 0x7b8c)) {
     temp_v14 = 0xc1800000;
@@ -97,7 +97,7 @@ void FUN_00490a10(int param_1)
             if (((temp_v1 != 5 && temp_v1 != 6) && (temp_v1 != 8 && temp_v1 != 9)) &&
                (temp_v1 != 10 && temp_v1 != 0xc)) {
 LAB_00490b04:
-              if ((*(short *)(temp_v6 + 0x17c0) != 0) || ((*(int *)((unsigned char *)&DAT_005f15fc + 0x660)) != 0)) {
+              if ((*(short *)(temp_v6 + 0x17c0) != 0) || ((*(int *)((unsigned char *)&g_gameState + 0x660)) != 0)) {
                 FUN_00184e64(*(unsigned int *)(temp_v6 + 0x17d4));
                 FUN_0037b138(*(unsigned int *)(temp_v6 + 0x17d4) & 0xff);
                 if (*(short *)(temp_v6 + 0x17c2) == 0x1bd2) {
@@ -263,7 +263,7 @@ LAB_00490c50:
     } while (temp_v7 < *(int *)(param_1 + 0x7b8c));
   }
   FUN_00183bb0();
-  FUN_0016c69c(DAT_0059dbb4,3);
+  FUN_0016c69c(g_renderCtx,3);
   return;
 }
 

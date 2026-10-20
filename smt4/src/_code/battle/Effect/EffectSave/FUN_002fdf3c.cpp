@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c5300(int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 int rt_memcpy_w(void);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -24,7 +24,7 @@ void FUN_002fdf3c(int param_1,unsigned int param_2,int param_3)
   
   if (0 < param_3) {
     temp_v0 = 0x100;
-    FUN_002c5300(0x100,0x100,0,param_3 * 0x348,1);
+    asdMemoryAlloc(0x100,0x100,0,param_3 * 0x348,1);
     *(unsigned int *)(param_1 * 0x148 + 0x478024) = temp_v0;
     rt_memcpy_w();
   }

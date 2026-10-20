@@ -23,7 +23,7 @@ struct fn_004f61b0_arg0 {
     uint field_0x33d0; /* +0x33d0 */
 };
 
-extern unsigned int FUN_0014aa78(void);
+extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: FUN_00208b84. */
 extern void *FUN_003eae20(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_003eda28(unsigned int);
@@ -43,7 +43,7 @@ void FUN_004f61b0(fn_004f61b0_arg0 *param_1,unsigned int param_2,unsigned int pa
   param_1->field_0x33b0 = (short)param_2;
   param_1->field_0x33b2 = (short)param_3;
   param_1->field_0x339c = param_1->field_0x339c | 0x4000;
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   pvVar3 = (void *)FUN_003eae20(temp_v1,param_2,param_3);
   if (pvVar3 == (void *)0x0) {
     param_1->field_0x33b4 = 0xd;

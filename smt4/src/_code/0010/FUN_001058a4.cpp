@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_0010a52c(void);
-int FUN_0010af10(void);
+int asdGxCommandListFlip(void);
+int asdGxCommandListBindBack(void);
 int FUN_0010ec90(int, unsigned int);
 int FUN_00123934(void);
 int FUN_002bdb44(void);
 int FUN_002bef68(unsigned char *, int);
 int FUN_002bf0d8(void);
 int FUN_002c2424(unsigned int, unsigned int);
-int FUN_002c2428(void);
+int asdModelResetCommandBuffer(void);
 int nngxRunCmdlist(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -21,18 +21,18 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char DAT_004e3b1c; /* 0x4e3b1c */
-extern unsigned char DAT_004e39e0; /* 0x4e39e0 */
+extern unsigned char g_asdGxPresets; /* 0x4e39e0 */
 extern int DAT_004e3bd4; /* 0x4e3bd4 */
 
-/* Supplied declaration required: FUN_0010a52c. */
-/* Supplied declaration required: FUN_0010af10. */
+/* Supplied declaration required: asdGxCommandListFlip. */
+/* Supplied declaration required: asdGxCommandListBindBack. */
 /* Supplied declaration required: FUN_0010ec90. */
 /* Supplied declaration required: FUN_00123934. */
 /* Supplied declaration required: FUN_002bdb44. */
 /* Supplied declaration required: FUN_002bef68. */
 /* Supplied declaration required: FUN_002bf0d8. */
 /* Supplied declaration required: FUN_002c2424. */
-/* Supplied declaration required: FUN_002c2428. */
+/* Supplied declaration required: asdModelResetCommandBuffer. */
 extern unsigned int FUN_002c3984(void);
 extern unsigned int FUN_002c3994(void);
 /* Supplied declaration required: nngxRunCmdlist. */
@@ -46,19 +46,19 @@ void FUN_001058a4(unsigned int param_1)
   unsigned int temp_v1;
   
   FUN_002bdb44();
-  FUN_002bef68(&DAT_004e3b1c,(*(int *)((unsigned char *)&DAT_004e39e0 + 0x150)) == 0);
+  FUN_002bef68(&DAT_004e3b1c,(*(int *)((unsigned char *)&g_asdGxPresets + 0x150)) == 0);
   FUN_00123934();
-  FUN_002c2428();
-  FUN_0010af10();
+  asdModelResetCommandBuffer();
+  asdGxCommandListBindBack();
   temp_v0 = FUN_002c3984();
   temp_v1 = FUN_002c3994();
   FUN_002c2424(temp_v1,temp_v0);
-  FUN_002bef68(&DAT_004e3b1c,(*(int *)((unsigned char *)&DAT_004e39e0 + 0x150)));
+  FUN_002bef68(&DAT_004e3b1c,(*(int *)((unsigned char *)&g_asdGxPresets + 0x150)));
   FUN_002bf0d8();
   nngxRunCmdlist();
-  (*(int *)((unsigned char *)&DAT_004e39e0 + 0x150)) = 1 - (*(int *)((unsigned char *)&DAT_004e39e0 + 0x150));
-  FUN_0010a52c();
-  FUN_002bef68(&DAT_004e3b1c,(*(int *)((unsigned char *)&DAT_004e39e0 + 0x150)));
+  (*(int *)((unsigned char *)&g_asdGxPresets + 0x150)) = 1 - (*(int *)((unsigned char *)&g_asdGxPresets + 0x150));
+  asdGxCommandListFlip();
+  FUN_002bef68(&DAT_004e3b1c,(*(int *)((unsigned char *)&g_asdGxPresets + 0x150)));
   if (DAT_004e3bd4 == 0) {
     FUN_0010ec90(0,param_1);
     return;

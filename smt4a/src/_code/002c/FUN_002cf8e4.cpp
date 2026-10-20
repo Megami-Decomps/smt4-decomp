@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern int DAT_005f0ca8; /* 0x5f0ca8 */
 extern signed char DAT_005f0d34; /* 0x5f0d34 */
 extern signed char DAT_005f161c; /* 0x5f161c */
@@ -42,7 +42,7 @@ void FUN_002cf8e4(void)
     }
     if ((DAT_005f161d == '\0' && temp_v0 == '\0') && (DAT_005f0ca8 == 8 || DAT_005f0ca8 == 9)) {
       FUN_002d8ac4();
-      temp_v1 = *(int *)(DAT_00581288 + 0x1c);
+      temp_v1 = *(int *)(g_lmapScene + 0x1c);
       FUN_002b5cb4();
       if (temp_v1 < 0x43c80000) {
         temp_v2 = 0xef6c3eff;

@@ -8,9 +8,9 @@ int FUN_00240cec(...);
 int FUN_00289880(...);
 int FUN_002898e4(...);
 int FUN_0028d6d0(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int NaviMain_InitInstance(...);
 int NaviMain_ResetFlags(...);
 
@@ -34,9 +34,9 @@ extern unsigned int *DAT_0044cdf0; /* 0x44cdf0 */
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: FUN_0028d6d0. */
 extern int FUN_002c09d0(unsigned int);
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: NaviMain_InitInstance. */
 /* Supplied declaration required: NaviMain_ResetFlags. */
 
@@ -52,7 +52,7 @@ void NaviMain_Start(unsigned int param_1,unsigned int param_2)
   unsigned char *pbVar5;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x12344,1);
+  asdMemAlloc(0x100,0x100,0,0x12344,1);
   DAT_0044cdf0 = puVar1;
   *(unsigned char *)((int)puVar1 + 10) = 0;
   *(unsigned char *)((int)puVar1 + 9) = 0;
@@ -75,13 +75,13 @@ void NaviMain_Start(unsigned int param_1,unsigned int param_2)
   FUN_0028d6d0();
   FUN_00240cec(param_2);
   pcVar3 = "NAVI PROC";
-  FUN_002c5788("NAVI PROC",2,0,0,NAVI_PROC,&LAB_001a96a4,puVar1);
+  asdProcessCreateSimple("NAVI PROC",2,0,0,NAVI_PROC,&LAB_001a96a4,puVar1);
   *puVar1 = (unsigned int)pcVar3;
   pcVar4 = "NAVI DOWN";
-  FUN_002c4a08("NAVI DOWN",0xe5,1,0,NAVI_DOWN,0,puVar1,pcVar3);
+  taskCreateDraw("NAVI DOWN",0xe5,1,0,NAVI_DOWN,0,puVar1,pcVar3);
   puVar1[1] = (unsigned int)pcVar4;
   pcVar3 = "NAVI FADE DRAW";
-  FUN_002c4a08("NAVI FADE DRAW",0xe6,0,0,&LAB_001fc4f8,0,0,*puVar1);
+  taskCreateDraw("NAVI FADE DRAW",0xe6,0,0,&LAB_001fc4f8,0,0,*puVar1);
   puVar1[0x48cc] = (unsigned int)pcVar3;
   NaviMain_ResetFlags(puVar1 + 0x48cd,1);
   puVar1 = DAT_0044cdf0;

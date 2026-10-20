@@ -7,8 +7,8 @@ extern "C" {
 int FUN_002b5820(...);
 int FUN_002bcc60(...);
 int FUN_002bcd44(...);
-int FUN_002c222c(...);
-int FUN_002c32a0(...);
+int asdOperatorNew(...);
+int memAlloc(...);
 int FUN_002c38fc(...);
 int FUN_002c526c(...);
 int software_interrupt(...);
@@ -35,8 +35,8 @@ extern unsigned int *DAT_0044d134; /* 0x44d134 */
 /* Supplied declaration required: FUN_002b5820. */
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002bcd44. */
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c38fc. */
 /* Supplied declaration required: FUN_002c526c. */
 
@@ -95,10 +95,10 @@ unsigned int FUN_0034dddc(unsigned int *param_1,int *param_2,unsigned int *param
   temp_v1[0] = 0x1000;
   temp_v1[1] = 1;
   temp_v0 = 0x100;
-  FUN_002c32a0(0x100,0x100,0,0x1000);
+  memAlloc(0x100,0x100,0,0x1000);
   puVar4 = (unsigned int *)0x18;
   DAT_0044d130 = temp_v0;
-  FUN_002c222c();
+  asdOperatorNew();
   if (puVar4 != (unsigned int *)0x0) {
     *puVar4 = 0;
     puVar4[1] = 0;

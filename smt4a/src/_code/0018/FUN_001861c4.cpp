@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0059dbb8; /* 0x59dbb8 */
+extern int g_texTable; /* 0x59dbb8 */
 
 
 int FUN_001861c4(int param_1,int param_2)
@@ -13,7 +13,7 @@ int FUN_001861c4(int param_1,int param_2)
   int *piVar1;
   int temp_v0;
   
-  piVar1 = *(int **)(DAT_0059dbb8 + param_1 * 0x18);
+  piVar1 = *(int **)(g_texTable + param_1 * 0x18);
   temp_v0 = 0;
   if (piVar1 != (int *)0x0) {
     temp_v0 = *piVar1 + param_2 * 0x20;

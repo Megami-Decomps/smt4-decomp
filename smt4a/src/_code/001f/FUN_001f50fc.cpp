@@ -9,7 +9,7 @@ typedef struct {
     unsigned int spC; /* 0xc: local_c */
 } param_2_stack;
 
-extern unsigned char DAT_0057f698; /* 0x57f698 */
+extern unsigned char g_gameDataBlocks; /* 0x57f698 */
 
 
 void FUN_001f50fc(int param_1,int param_2)
@@ -22,7 +22,7 @@ void FUN_001f50fc(int param_1,int param_2)
   piVar2 = (int *)0x0;
   temp_v0 = 0;
   while( 1 ) {
-    piVar1 = (int *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + temp_v0 * 0x28 + 0x29510);
+    piVar1 = (int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + temp_v0 * 0x28 + 0x29510);
     if (*piVar1 == 0 && piVar2 == (int *)0x0) {
       piVar2 = piVar1;
     }

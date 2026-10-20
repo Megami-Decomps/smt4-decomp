@@ -1,20 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004611ac` (_code @ 0x4611ac, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail loads the vtable address into r2 and the offset 0x208 into r3 (swapped here) */
+/* Resets the object: installs its vtable and clears the link and the 0x208 state fields. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0055c11c; /* 0x55c11c */
+typedef struct Object {
+    /* 0x000 */ const void *vtbl;
+    /* 0x004 */ u32 link;
+    /* 0x008 */ u8 unk008[0x200];
+    /* 0x208 */ u16 state;
+    /* 0x20A */ u8 flag;
+} Object;
 
+extern u8 DAT_0055c11c;
 
-void FUN_004611ac(unsigned int *param_1)
-
+void FUN_004611ac(Object *obj)
 {
-  param_1[1] = 0;
-  *param_1 = (unsigned int)&DAT_0055c11c;
-  *(unsigned short *)(param_1 + 0x82) = 0;
-  *(unsigned char *)((int)param_1 + 0x20a) = 0;
-  return;
+    obj->link = 0;
+    obj->vtbl = &DAT_0055c11c;
+    obj->state = 0;
+    obj->flag = 0;
 }
 
-} /* extern "C" */
+}

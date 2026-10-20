@@ -17,7 +17,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_001801a4(void);
 extern int FUN_0018416c(unsigned short);
-extern int FUN_0019a7dc(void);
+extern int gameGetOptions(void);
 extern int FUN_001ab854(void);
 extern int FUN_001ab888(void);
 extern int FUN_001b347c(void);
@@ -150,9 +150,9 @@ LAB_0049f9a4:
   temp_v2 = FUN_001b34b8();
   if ((temp_v2 == 2) &&
      ((((temp_v2 = FUN_001b34b8(), temp_v2 == 0 || (temp_v2 == 1)) || (temp_v2 != 2)) ||
-      ((temp_v2 = FUN_0019a7dc(), (*(unsigned short *)(temp_v2 + 0x60) & 2) == 0 &&
+      ((temp_v2 = gameGetOptions(), (*(unsigned short *)(temp_v2 + 0x60) & 2) == 0 &&
        (*(short *)(temp_v2 + 0x2a) != 0)))))) {
-    temp_v3 = FUN_0019a7dc();
+    temp_v3 = gameGetOptions();
     temp_v8 = (int)*(short *)(temp_v3 + 0xe);
     temp_v2 = (temp_v8 * param_2) / 100;
     if (temp_v2 < 1) {

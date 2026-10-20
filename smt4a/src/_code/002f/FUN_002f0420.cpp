@@ -27,9 +27,9 @@ typedef struct {
 
 extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 
-extern unsigned int FUN_00192748(unsigned int);
-extern unsigned int FUN_00192798(void);
-extern int FUN_0019e4d4(unsigned short);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int dataTableGetEntries(void);
+extern int slotRecordFindById(unsigned short);
 extern unsigned int FUN_001a6f60(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0021af2c. */
 /* Supplied declaration required: FUN_00230d2c. */
@@ -101,7 +101,7 @@ void FUN_002f0420(int param_1,unsigned int param_2,short *param_3)
   temp_v16 = 0;
   if ((*psVar13 >= 1) && (temp_v4 = *(char *)(temp_v1 + 0x2017), !(temp_v4 == '\a' || temp_v4 == '\x10'))) {
     if ((temp_v4 == '\x02' || temp_v4 == '\x03') || (temp_v4 == '\x11' || temp_v4 == '\x04')) {
-      temp_v9 = FUN_0019e4d4(*(unsigned short *)(temp_v1 + 0x1390));
+      temp_v9 = slotRecordFindById(*(unsigned short *)(temp_v1 + 0x1390));
       temp_v4 = '\0';
       if (temp_v9 != 0) {
         temp_v4 = *(char *)(temp_v9 + 0x67);
@@ -149,9 +149,9 @@ void FUN_002f0420(int param_1,unsigned int param_2,short *param_3)
   else {
     if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x20c0) == 0) {
       temp_v5 = FUN_001a6f60(*(unsigned int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x20bc),0);
-      temp_v6 = FUN_00192798();
+      temp_v6 = dataTableGetEntries();
       *(unsigned int *)(temp_v9 + 0x20c0) = temp_v6;
-      temp_v5 = FUN_00192748(temp_v5);
+      temp_v5 = dataTableGetCount(temp_v5);
       *(unsigned int *)(temp_v9 + 0x20c4) = temp_v5;
     }
     temp_v2 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));

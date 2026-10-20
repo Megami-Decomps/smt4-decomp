@@ -8,7 +8,7 @@ int FUN_001aba54(void);
 
 extern int FUN_001ab854(void);
 /* Supplied declaration required: FUN_001aba54. */
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 extern int FUN_003e0044(unsigned int);
 extern int FUN_004bd098(int, int);
 extern int FUN_004bd340(int, unsigned int);
@@ -31,7 +31,7 @@ unsigned int FUN_00372794(int param_1,int param_2,int param_3)
       param_3 = FUN_001ab854();
     }
     else {
-      param_3 = FUN_002919a4();
+      param_3 = btlMainGetUnk14();
     }
     temp_v1 = FUN_004bd340(param_3,4);
   }

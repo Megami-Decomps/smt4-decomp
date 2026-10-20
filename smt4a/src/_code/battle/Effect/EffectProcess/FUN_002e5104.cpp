@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_005702f4; /* 0x5702f4 */
+extern int g_effectProcessActive; /* 0x5702f4 */
 
 
 void FUN_002e5104(unsigned int *param_1)
@@ -14,10 +14,10 @@ void FUN_002e5104(unsigned int *param_1)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = DAT_005702f4;
+  temp_v0 = g_effectProcessActive;
   temp_v1 = *param_1;
   temp_v2 = param_1[1];
-  *(unsigned int *)(DAT_005702f4 + 0x514) = param_1[2];
+  *(unsigned int *)(g_effectProcessActive + 0x514) = param_1[2];
   *(unsigned int *)(temp_v0 + 0x50c) = temp_v1;
   *(unsigned int *)(temp_v0 + 0x510) = temp_v2;
   return;

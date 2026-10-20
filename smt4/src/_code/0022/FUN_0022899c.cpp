@@ -14,10 +14,10 @@ int FUN_00247478(...);
 int FUN_0027da30(unsigned int *, unsigned int);
 int FUN_00282924(...);
 int FUN_00283e48(void);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_002ae164(void);
 int FUN_002b4670(void);
-int FUN_002c4938(...);
+int memClear(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
@@ -59,7 +59,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0022aa38. */
 /* Supplied declaration required: FUN_0022ab08. */
 /* Supplied declaration required: FUN_0022abe0. */
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 extern unsigned short FUN_00245cc0(unsigned int);
 /* Supplied declaration required: FUN_00246134. */
 /* Supplied declaration required: FUN_002463e8. */
@@ -67,10 +67,10 @@ extern unsigned short FUN_00245cc0(unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: FUN_00282924. */
 /* Supplied declaration required: FUN_00283e48. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002b4670. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int
@@ -123,7 +123,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
   uStack_30 = param_2;
   pfStack_2c = param_3;
   temp_v31 = param_4;
-  temp_v27 = (unsigned int *)FUN_002939f4();
+  temp_v27 = (unsigned int *)btlGetMainState();
   temp_v30 = 0;
   FUN_002ae164();
   if (param_1 != 0) {
@@ -174,9 +174,9 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
   temp_v26 = puVar5;
   FUN_00282924(temp_v27,param_5);
   temp_v5 = temp_v31;
-  temp_v4 = FUN_002939f4();
+  temp_v4 = btlGetMainState();
   FUN_00282924(temp_v4,temp_v5);
-  temp_v5 = FUN_002939f4();
+  temp_v5 = btlGetMainState();
   FUN_00247478(&temp_v16,temp_v5,temp_v4);
   temp_v9 = temp_v16 >> 0x10;
   if (temp_v9 < 2) {
@@ -185,7 +185,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
   temp_v6 = param_5;
   FUN_00246134(param_5,temp_v9,(int)(short)temp_v17,0xffffffff);
   if (((temp_v6 & 0x80000000) != 0) && ((*(unsigned short *)((int)puVar6 + 0xfa) & 0x10) == 0)) {
-    FUN_002939f4();
+    btlGetMainState();
     temp_v16 = 0;
     temp_v17 = 0;
     temp_v18 = 0;
@@ -224,8 +224,8 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
     temp_v0 = *(unsigned char *)(param_1 + 0x23);
     if (temp_v0 >= 2) {
       if (temp_v0 == 2) {
-        FUN_002c4938(&temp_v16,0x48);
-        FUN_002c4938(temp_v25,0x48);
+        memClear(&temp_v16,0x48);
+        memClear(temp_v25,0x48);
         temp_v1 = *(char *)(param_1 + 0x2f);
         if (temp_v1 == '\x01') {
           temp_v16 = temp_v9;
@@ -264,7 +264,7 @@ LAB_00228c48:
         temp_v25[temp_v8] = temp_v9 | temp_v7;
         if ((((temp_v9 | temp_v7) & 0x80000000) != 0) &&
            ((*(unsigned short *)((int)puVar6 + 0xfa) & 0x10) == 0)) {
-          FUN_002939f4();
+          btlGetMainState();
           temp_v28[0] = 0;
           temp_v28[1] = 0;
           temp_v28[2] = 0;
@@ -296,7 +296,7 @@ LAB_00228c48:
         goto LAB_00228da0;
       }
       if (((temp_v0 == 8) &&
-          (temp_v10 = FUN_0023eae0(99), temp_v10 < (int)(unsigned int)*(unsigned char *)((int)puVar6 + 0x14a))) &&
+          (temp_v10 = randRange(99), temp_v10 < (int)(unsigned int)*(unsigned char *)((int)puVar6 + 0x14a))) &&
          (((1 << *(signed char *)(param_1 + 0x44)) & 0xffffU & (unsigned int)*(unsigned short *)((int)puVar6 + 0xfa)) != 0
          )) {
         return 5;
@@ -334,7 +334,7 @@ LAB_00228de4:
           temp_v10 = 99;
         }
         temp_v15 = 0x3f800000;
-        temp_v8 = FUN_002939f4();
+        temp_v8 = btlGetMainState();
         FUN_00282924(temp_v8,temp_v5);
         temp_v14 = (float)temp_v15;
         if (temp_v8 != 0) {
@@ -401,14 +401,14 @@ LAB_00228de4:
         else if ((*(unsigned short *)((int)puVar6 + 0xfa) & 0x10) != 0) {
           temp_v10 = -1;
         }
-        temp_v8 = FUN_0023eae0(99);
+        temp_v8 = randRange(99);
         temp_v5 = temp_v31;
         if (temp_v8 <= temp_v10) {
           temp_v5 = 1;
           return temp_v5;
         }
         temp_v3 = FUN_00245cc0(0x1a);
-        temp_v10 = FUN_002939f4();
+        temp_v10 = btlGetMainState();
         FUN_00282924(temp_v10,temp_v5);
         if (temp_v10 != 0) {
           *(unsigned short *)(temp_v10 + 0xa6) = temp_v3;

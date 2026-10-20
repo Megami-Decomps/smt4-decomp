@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0014aa78(...);
+int btlGetMainState(...);
 int FUN_0030ea58(...);
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_0030ea58. */
 extern int FUN_003e8430(void);
 
@@ -20,7 +20,7 @@ int FUN_004f6478(int param_1)
   char *pcVar2;
   int temp_v1;
   
-  FUN_0014aa78();
+  btlGetMainState();
   temp_v0 = FUN_003e8430();
   if (temp_v0 != 0) {
     temp_v0 = -1;

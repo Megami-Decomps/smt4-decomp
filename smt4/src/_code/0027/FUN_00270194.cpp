@@ -1,42 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00270194` (_code @ 0x270194, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Frees every slot's resource (last slot first), then runs the two cleanup steps. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00192420(void);
-int FUN_002a775c(void);
-int FUN_002e0094(void);
+typedef struct Slot {
+    /* 0x00 */ void *resource;
+    /* 0x04 */ u8 unk04[0x34];
+} Slot; /* 0x38 */
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+typedef struct SlotPool {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ Slot slots[64];
+} SlotPool;
 
-extern int DAT_00447e58; /* 0x447e58 */
+extern SlotPool *DAT_00447e58;
 
-/* Supplied declaration required: FUN_00192420. */
-/* Supplied declaration required: FUN_002a775c. */
-/* Supplied declaration required: FUN_002e0094. */
-
+extern void FUN_00192420(void);
+extern void asdMdlManagerDestroy(void *resource);
+extern void FUN_002e0094(void);
 
 void FUN_00270194(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0x3f;
-  do {
-    if (*(int *)(DAT_00447e58 + temp_v0 * 0x38 + 0x3c) != 0) {
-      FUN_002a775c();
-      *(unsigned int *)(DAT_00447e58 + temp_v0 * 0x38 + 0x3c) = 0;
+    s32 i;
+
+    for (i = 63; i >= 0; i--) {
+        if (DAT_00447e58->slots[i].resource != NULL) {
+            asdMdlManagerDestroy(DAT_00447e58->slots[i].resource);
+            DAT_00447e58->slots[i].resource = NULL;
+        }
     }
-    temp_v0 = temp_v0 - 1;
-  } while (-1 < temp_v0);
-  FUN_002e0094();
-  FUN_00192420();
-  return;
+    FUN_002e0094();
+    FUN_00192420();
 }
 
-} /* extern "C" */
+}

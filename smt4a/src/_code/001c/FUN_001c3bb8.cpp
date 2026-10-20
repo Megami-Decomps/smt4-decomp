@@ -10,7 +10,7 @@ typedef struct {
 } param_4_stack;
 
 extern int FUN_0019a37c(unsigned int, int, int, unsigned int, int *, char *);
-extern int FUN_002e3390(unsigned int);
+extern int wstrlen(unsigned int);
 
 
 unsigned char FUN_001c3bb8(int *param_1,char *param_2,unsigned int param_3,unsigned int param_4)
@@ -37,7 +37,7 @@ unsigned char FUN_001c3bb8(int *param_1,char *param_2,unsigned int param_3,unsig
   temp_v4 = *(int *)(temp_v5 + 0x30);
   temp_v7 = *(int *)(temp_v5 + 0x38) + temp_v5;
   pcVar10 = param_2;
-  temp_v3 = FUN_002e3390(param_3);
+  temp_v3 = wstrlen(param_3);
   temp_v6 = 0;
   if (*(int *)(temp_v5 + 0x34) != 0) {
     do {

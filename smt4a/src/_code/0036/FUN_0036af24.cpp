@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00352d30(unsigned int *);
 
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_00581274; /* 0x581274 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_mapMain; /* 0x581274 */
+extern int g_lmapScene; /* 0x581288 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern unsigned int DAT_005f16bc; /* 0x5f16bc */
 extern unsigned int DAT_005f16c0; /* 0x5f16c0 */
@@ -41,7 +41,7 @@ void FUN_0036af24(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_00581274;
+  temp_v0 = g_mapMain;
   if (DAT_005f18c4 != '\0') {
     DAT_005f18c4 = '\0';
   }
@@ -51,10 +51,10 @@ void FUN_0036af24(void)
     DAT_005f1b74 = *(unsigned int *)(temp_v0 + 0x30);
     DAT_005f1b78 = *(unsigned int *)(temp_v0 + 0x34);
     DAT_005f1b7c = DAT_005f1604;
-    DAT_005f1b80 = *(unsigned int *)(DAT_00581288 + 0x1c);
-    DAT_005f1b84 = *(unsigned int *)(DAT_00581288 + 0x20);
-    DAT_005f1b88 = *(unsigned int *)(DAT_00581288 + 0x24);
-    DAT_005f1b8c = *(unsigned int *)(DAT_00581288 + 0x4c);
+    DAT_005f1b80 = *(unsigned int *)(g_lmapScene + 0x1c);
+    DAT_005f1b84 = *(unsigned int *)(g_lmapScene + 0x20);
+    DAT_005f1b88 = *(unsigned int *)(g_lmapScene + 0x24);
+    DAT_005f1b8c = *(unsigned int *)(g_lmapScene + 0x4c);
     DAT_005f1b90 = *(unsigned int *)(DAT_005806a4 + 0x18);
     DAT_005f1b94 = *(unsigned int *)(temp_v0 + 0x30);
     DAT_005f1b98 = *(unsigned int *)(temp_v0 + 0x34);

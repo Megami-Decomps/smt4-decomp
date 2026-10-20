@@ -10,7 +10,7 @@ int FUN_00256898(int, int);
 int FUN_002568c4(int);
 int FUN_00292dd0(int);
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 
@@ -32,8 +32,8 @@ unsigned int FUN_003c7760(unsigned int *param_1,int param_2)
   
   puVar2 = (unsigned int *)(param_2 + 0x44a0);
   if (((*puVar2 & 0x100000) != 0) && ((param_1[1] & 1) == 0)) {
-    if ((-1 < *(int *)(DAT_004342c8 + 0x760)) &&
-       (temp_v0 = FUN_00256940(DAT_004342c8,param_2,1), temp_v0 != 0)) {
+    if ((-1 < *(int *)(g_btlMain + 0x760)) &&
+       (temp_v0 = FUN_00256940(g_btlMain,param_2,1), temp_v0 != 0)) {
       FUN_002568c4(0);
     }
     FUN_00256898(1,0);

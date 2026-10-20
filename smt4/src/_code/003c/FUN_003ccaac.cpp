@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00227c60(...);
 int FUN_00227d18(void);
 int FUN_00227d70(...);
-int FUN_00227e4c(...);
+int btlEffectFindSlotId(...);
 int FUN_00227fac(void);
 int FUN_002280b0(...);
 int FUN_0023c0d0(...);
@@ -114,7 +114,7 @@ typedef struct {
 } param_12_stack;
 
 extern int DAT_00435d18; /* 0x435d18 */
-extern unsigned int DAT_00435d48; /* 0x435d48 */
+extern unsigned int g_btlEvent; /* 0x435d48 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -128,7 +128,7 @@ extern int FUN_00227c30(int, int);
 /* Supplied declaration required: FUN_00227d18. */
 /* Supplied declaration required: FUN_00227d70. */
 extern int FUN_00227dbc(int);
-/* Supplied declaration required: FUN_00227e4c. */
+/* Supplied declaration required: btlEffectFindSlotId. */
 extern int FUN_00227ecc(int, unsigned int);
 /* Supplied declaration required: FUN_00227fac. */
 /* Supplied declaration required: FUN_002280b0. */
@@ -160,7 +160,7 @@ extern int FUN_00255158(int, unsigned int);
 /* Supplied declaration required: FUN_002551ac. */
 /* Supplied declaration required: FUN_0027df30. */
 /* Supplied declaration required: FUN_0027e3e8. */
-extern int FUN_0027e928(int *);
+extern int btlUnitGet(int *);
 /* Supplied declaration required: FUN_00282924. */
 extern int FUN_0028299c(int);
 /* Supplied declaration required: FUN_00283e48. */
@@ -798,7 +798,7 @@ LAB_003cd944:
       }
       temp_v8 = FUN_003dcad0(DAT_00435d18);
       temp_v8 = temp_v8 + temp_v7;
-      temp_v10 = FUN_00227e4c(DAT_00435d18);
+      temp_v10 = btlEffectFindSlotId(DAT_00435d18);
       temp_v14 = FUN_0022810c(DAT_00435d18,1);
       temp_v14 = temp_v14 + temp_v7;
       temp_v11 = FUN_00227dbc(DAT_00435d18);
@@ -823,7 +823,7 @@ LAB_003cd944:
       FUN_002550d8(param_8,2,temp_v4,0);
       if (temp_v16 == 0) {
         temp_v11 = 3;
-        temp_v5 = FUN_0027e928(param_1);
+        temp_v5 = btlUnitGet(param_1);
         temp_v8 = 0;
         temp_v14 = 0x85;
         do {
@@ -836,7 +836,7 @@ LAB_003cd944:
           temp_v8 = temp_v8 + 1;
         } while (temp_v14 != 0);
         temp_v26 = 2;
-        temp_v5 = FUN_0027e928(param_1);
+        temp_v5 = btlUnitGet(param_1);
         temp_v8 = 0;
         do {
           temp_v14 = temp_v5 + temp_v8 * 8;
@@ -873,7 +873,7 @@ LAB_003cd944:
           temp_v37 = *(int *)(*param_1 + 0x1e98) + *(short *)(temp_v5 + 8) * 0x114;
           temp_v14 = FUN_003dcad0(DAT_00435d18);
           temp_v14 = temp_v14 + temp_v7;
-          temp_v26 = FUN_00227e4c(DAT_00435d18);
+          temp_v26 = btlEffectFindSlotId(DAT_00435d18);
           temp_v11 = FUN_0022810c(DAT_00435d18,1);
           temp_v11 = temp_v11 + temp_v7;
           temp_v12 = FUN_00227dbc(DAT_00435d18);
@@ -951,7 +951,7 @@ LAB_003cd944:
               }
               temp_v33 = 4;
               FUN_0022a8c8(*param_1,param_7,0);
-              temp_v5 = FUN_0027e928(param_1);
+              temp_v5 = btlUnitGet(param_1);
               temp_v7 = 0;
               goto LAB_003ce3ec;
             }
@@ -1033,7 +1033,7 @@ LAB_003ce46c:
       }
       temp_v5 = FUN_0028299c(DAT_00435d18);
       temp_v5 = temp_v5 * param_11;
-      temp_v26 = FUN_00227e4c(DAT_00435d18);
+      temp_v26 = btlEffectFindSlotId(DAT_00435d18);
       temp_v7 = FUN_0022810c(DAT_00435d18,1);
       temp_v8 = FUN_00227dbc(DAT_00435d18);
       FUN_0027df30(0,param_2,*(int *)(*param_1 + 0x1e98) + param_8 * 0x114,0,temp_v42,temp_v34,
@@ -1065,7 +1065,7 @@ LAB_003ce46c:
           if ((temp_v17 && temp_v0 == '\0') && ((*(unsigned char *)(temp_v53 + 0x35) & 2) == 0))
           goto LAB_003ce96c;
         }
-        temp_v26 = FUN_00227e4c(DAT_00435d18);
+        temp_v26 = btlEffectFindSlotId(DAT_00435d18);
         temp_v5 = FUN_00227dbc(DAT_00435d18);
         temp_v5 = temp_v5 + temp_v30;
         temp_v7 = FUN_00227dbc(DAT_00435d18);
@@ -1183,7 +1183,7 @@ LAB_003ce96c:
         temp_v51 = 1;
       }
     }
-    temp_v11 = FUN_00227e4c(DAT_00435d18);
+    temp_v11 = btlEffectFindSlotId(DAT_00435d18);
     temp_v11 = temp_v11 + temp_v14;
     temp_v12 = FUN_0022810c(DAT_00435d18,1);
     temp_v13 = FUN_00227dbc(DAT_00435d18);
@@ -1239,9 +1239,9 @@ LAB_003ce96c:
       }
     }
 LAB_003cecbc:
-    temp_v5 = FUN_0027e3e8(DAT_00435d48,*(int *)(*param_1 + 0x1e98) + param_8 * 0x114,1);
+    temp_v5 = FUN_0027e3e8(g_btlEvent,*(int *)(*param_1 + 0x1e98) + param_8 * 0x114,1);
     if (temp_v5 != 0) {
-      FUN_0027e3e8(DAT_00435d48,*(int *)(*param_1 + 0x1e98) + param_8 * 0x114,0);
+      FUN_0027e3e8(g_btlEvent,*(int *)(*param_1 + 0x1e98) + param_8 * 0x114,0);
     }
     else if ((*(unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v7 * 0x288) & 0x10) != 0) {
       *(unsigned char *)(param_2 + 0x167) = 1;

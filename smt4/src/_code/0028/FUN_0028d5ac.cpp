@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned char DAT_0043dd20; /* 0x43dd20 */
+extern unsigned char g_useCounter; /* 0x43dd20 */
 
 /* Supplied declaration required: FUN_00220d24. */
 /* Supplied declaration required: FUN_00295214. */
@@ -29,9 +29,9 @@ void FUN_0028d5ac(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0043dd20 + 0x4));
+  temp_v0 = (*(int *)((unsigned char *)&g_useCounter + 0x4));
   temp_v1 = 0;
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0043dd20 + 0x4)) + 0x744) = 4;
+  *(unsigned int *)((*(int *)((unsigned char *)&g_useCounter + 0x4)) + 0x744) = 4;
   if (0 < *(short *)(temp_v0 + 0x786)) {
     do {
       *(unsigned short *)(temp_v0 + temp_v1 * 2 + 0x76c) = 0xffff;

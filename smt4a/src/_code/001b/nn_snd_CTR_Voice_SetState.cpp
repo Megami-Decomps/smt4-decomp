@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern unsigned char DAT_006433d0; /* 0x6433d0 */
+extern unsigned char g_dspsndState; /* 0x6433d0 */
 extern unsigned short uRam006446ea; /* 0x6446ea */
 
 extern int FUN_001c6e20(void);
@@ -32,7 +32,7 @@ void nn_snd_CTR_Voice_SetState(int param_1,int param_2)
   *(char *)((int)puVar1 + 0xd) = (char)param_2;
   if (param_2 != 0) {
     if (param_2 == 1) {
-      nn_snd_CTR_Dspsnd_SetChannelPlayStop((unsigned int)&DAT_006433d0,(unsigned char)*puVar1);
+      nn_snd_CTR_Dspsnd_SetChannelPlayStop((unsigned int)&g_dspsndState,(unsigned char)*puVar1);
       *(unsigned char *)(puVar1 + 3) = 0;
       temp_v0 = *puVar1;
       temp_v1 = FUN_001c6e20();

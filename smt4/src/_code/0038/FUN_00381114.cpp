@@ -1,45 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00381114` (_code @ 0x381114, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register/copy choice only: retail makes the virtual getCount call with r0 still holding the container (`ldr r1,[r0]`), built reloads it from r8 */
+/* Frees every element of the object's array (calling FUN_003f51fc on each), clears its state and returns the old value of field 1. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003f51fc(int, int *);
+struct Container;
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
+typedef struct ContainerVtbl {
+    /* 0x00 */ void *slots[26];
+    /* 0x68 */ s32 (*getCount)(struct Container *container);
+} ContainerVtbl;
 
-/* Supplied declaration required: FUN_003f51fc. */
+typedef struct Element {
+    /* 0x00 */ void *ptr;
+    /* 0x04 */ u8 unk04[0x10];
+} Element; /* 0x14 */
 
+typedef struct Container {
+    /* 0x00 */ ContainerVtbl *vtbl;
+    /* 0x04 */ s32 head;
+    /* 0x08 */ s32 tail;
+    /* 0x0C */ Element *elements;
+} Container;
 
-int FUN_00381114(int *param_1,unsigned int param_2,unsigned int param_3,int param_4)
+extern void FUN_003f51fc(s32 count, void *pointer);
 
+s32 FUN_00381114(Container *container, u32 unused1, u32 unused2, s32 unused3)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v2 = param_1[3];
-  if (temp_v2 != 0) {
-    temp_v0 = (**(romwright_code **)(*param_1 + 0x68))(param_1);
-    for (temp_v1 = 0; temp_v1 < temp_v0; temp_v1++) {
-      temp_v3 = *(int *)(temp_v2 + temp_v1 * 0x14);
-      if (temp_v3 != 0) {
-        FUN_003f51fc(1,&temp_v3);
-        *(unsigned int *)(temp_v2 + temp_v1 * 0x14) = 0;
-      }
+    Element *elements = container->elements;
+    s32 head;
+
+    if (elements != NULL) {
+        s32 count = container->vtbl->getCount(container);
+        s32 i;
+
+        for (i = 0; i < count; i++) {
+            void *ptr = elements[i].ptr;
+
+            if (ptr != NULL) {
+                FUN_003f51fc(1, &ptr);
+                elements[i].ptr = NULL;
+            }
+        }
+        container->elements = NULL;
     }
-    param_1[3] = 0;
-  }
-  temp_v2 = param_1[1];
-  param_1[1] = 0;
-  param_1[2] = 0;
-  return temp_v2;
+    head = container->head;
+    container->head = 0;
+    container->tail = 0;
+    return head;
 }
 
-} /* extern "C" */
+}

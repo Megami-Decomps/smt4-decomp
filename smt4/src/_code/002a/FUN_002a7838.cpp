@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002b2368(int);
-int FUN_002c415c(unsigned int *);
-int FUN_002c43b4(unsigned int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+int asdMemFree(unsigned int *);
+int jobStop(unsigned int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_003b8b0c(void);
 int FUN_003b980c(int);
 
@@ -18,8 +18,8 @@ typedef struct {
 extern unsigned int *DAT_0043e140; /* 0x43e140 */
 
 /* Supplied declaration required: FUN_002b2368. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_003b8b0c. */
 /* Supplied declaration required: FUN_003b980c. */
 
@@ -41,8 +41,8 @@ void FUN_002a7838(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   }
   *(unsigned int *)(param_1 + 0xe5c) = 0;
   puVar1 = DAT_0043e140;
-  FUN_002c43b4(*DAT_0043e140,0,param_3,param_4,unaff_r4,unaff_r5,unaff_r6,in_lr);
-  FUN_002c415c(puVar1);
+  jobStop(*DAT_0043e140,0,param_3,param_4,unaff_r4,unaff_r5,unaff_r6,in_lr);
+  asdMemFree(puVar1);
   DAT_0043e140 = (unsigned int *)0x0;
   return;
 }

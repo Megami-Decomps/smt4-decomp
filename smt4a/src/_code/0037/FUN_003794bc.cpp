@@ -12,7 +12,7 @@ typedef struct {
 } param_1_stack;
 
 extern int DAT_005821c4; /* 0x5821c4 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_00297988. */
@@ -24,9 +24,9 @@ void FUN_003794bc(int param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  if (DAT_005f15fc != 0x27) {
-    if (DAT_005f15fc != 0x14) {
-      if ((DAT_005f15fc == 0x1a) &&
+  if (g_gameState != 0x27) {
+    if (g_gameState != 0x14) {
+      if ((g_gameState == 0x1a) &&
          ((((temp_v0 = FUN_0018719c(0x4c9), temp_v0 != 0 && (temp_v0 = FUN_0018719c(0x179), temp_v0 != 0))
            && (temp_v0 = FUN_0018719c(0x19f), temp_v0 == 0)) ||
           (((temp_v0 = FUN_0018719c(0x4c9), temp_v0 == 0 && (temp_v0 = FUN_0018719c(0x179), temp_v0 != 0))

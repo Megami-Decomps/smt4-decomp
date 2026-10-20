@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_0014aa78(void);
-extern unsigned int FUN_00236038(void);
+extern int btlGetMainState(void);
+extern unsigned int scrGetArg(void);
 
 
 unsigned int FUN_0035f9cc(void)
@@ -14,8 +14,8 @@ unsigned int FUN_0035f9cc(void)
   unsigned int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00236038();
-  temp_v1 = FUN_0014aa78();
+  temp_v0 = scrGetArg();
+  temp_v1 = btlGetMainState();
   *(unsigned int *)(temp_v1 + 0x4cc8) = *(unsigned int *)(temp_v1 + 0x4cc8) | (1 << (temp_v0 & 0xff));
   return 1;
 }

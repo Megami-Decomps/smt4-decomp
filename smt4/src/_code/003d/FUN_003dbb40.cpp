@@ -7,16 +7,16 @@ extern "C" {
 int FUN_00297468(...);
 int FUN_002be624(...);
 int FUN_002bf694(...);
-int FUN_002c415c(...);
-int FUN_002c4938(...);
+int asdMemFree(...);
+int memClear(...);
 
 extern int FUN_0024a808(int);
 extern int FUN_002522e0(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_003dbb40(int param_1)
@@ -28,14 +28,14 @@ unsigned int FUN_003dbb40(int param_1)
   unsigned char temp_v2 [132];
   
   *(unsigned char *)(param_1 + 0x2f9c) = 0xff;
-  FUN_002c4938(param_1 + 0x2fa4,0x80);
+  memClear(param_1 + 0x2fa4,0x80);
   if (*(int *)(param_1 + 0x2fa0) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x2fa0) = 0;
   }
   *(unsigned char *)(param_1 + 0x3024) = 0;
-  FUN_002c4938(temp_v1,0x80);
-  FUN_002c4938(temp_v2,0x80);
+  memClear(temp_v1,0x80);
+  memClear(temp_v2,0x80);
   FUN_002be624(temp_v2,"battle/effect/%s.eft","ef_d_niyari");
   FUN_002bf694(temp_v1,temp_v2);
   temp_v0 = FUN_002522e0(temp_v1,0x2f);

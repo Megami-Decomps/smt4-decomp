@@ -3,12 +3,12 @@
 extern "C" {
 
 int FUN_00221c70(int);
-int FUN_002c415c(int *);
+int asdMemFree(int *);
 
 /* Supplied declaration required: FUN_00221c70. */
-extern int *FUN_00296cc8(void);
+extern int *scrGetArg(void);
 extern int FUN_002c1d5c(void);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 unsigned int FUN_00323e1c(void)
@@ -19,13 +19,13 @@ unsigned int FUN_00323e1c(void)
   unsigned int temp_v0;
   int temp_v1;
   
-  piVar1 = (int *)FUN_00296cc8();
+  piVar1 = (int *)scrGetArg();
   if (piVar1 == (int *)0x0) {
     temp_v0 = 1;
   }
   else {
     if (*piVar1 == 0) {
-      FUN_002c415c(piVar1);
+      asdMemFree(piVar1);
       return 1;
     }
     temp_v1 = FUN_002c1d5c();

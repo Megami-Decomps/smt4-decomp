@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00237a20. */
 /* Supplied declaration required: FUN_00238170. */
 /* Supplied declaration required: FUN_00238aac. */
-extern int FUN_002c1870(int, unsigned int, int);
+extern int rt_memcmp(int, unsigned int, int);
 /* Supplied declaration required: FUN_0035d7e8. */
 /* Supplied declaration required: FUN_003f7120. */
 /* Supplied declaration required: FUN_003f7168. */
@@ -78,7 +78,7 @@ unsigned int FUN_0035e164(int *param_1,int *param_2)
       }
     }
     FUN_0023799c(param_1,temp_v2);
-    temp_v3 = FUN_002c1870(temp_v2,*(unsigned int *)(*param_2 + 0x24),param_1[4]);
+    temp_v3 = rt_memcmp(temp_v2,*(unsigned int *)(*param_2 + 0x24),param_1[4]);
     if (temp_v3 != 0) {
       FUN_0035d7e8(&temp_v4,param_1,temp_v2);
       if (temp_v4 == 0) {

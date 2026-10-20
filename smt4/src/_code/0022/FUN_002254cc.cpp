@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00434210; /* 0x434210 */
+extern int g_btlTalkBustUp; /* 0x434210 */
 
 
 int FUN_002254cc(void)
@@ -13,8 +13,8 @@ int FUN_002254cc(void)
   int temp_v0;
   
   temp_v0 = 0;
-  if (DAT_00434210 != 0) {
-    temp_v0 = (int)*(char *)(DAT_00434210 + 0x2f5);
+  if (g_btlTalkBustUp != 0) {
+    temp_v0 = (int)*(char *)(g_btlTalkBustUp + 0x2f5);
   }
   return temp_v0;
 }

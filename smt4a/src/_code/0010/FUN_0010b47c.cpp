@@ -10,7 +10,7 @@ int FUN_002e6e5c(unsigned char [12]);
 int FUN_002e9318(unsigned char [16]);
 int FUN_002ea0e4(unsigned char [16]);
 int FUN_002f42be(unsigned char [16], unsigned char *, unsigned int);
-int FUN_002f4ba8(unsigned int *, int);
+int onlineObjectThreadRootStart(unsigned int *, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -28,7 +28,7 @@ extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002ea0e4. */
 /* Supplied declaration required: FUN_002f42be. */
-/* Supplied declaration required: FUN_002f4ba8. */
+/* Supplied declaration required: onlineObjectThreadRootStart. */
 
 
 unsigned int FUN_0010b47c(int param_1,unsigned int param_2)
@@ -67,7 +67,7 @@ unsigned int FUN_0010b47c(int param_1,unsigned int param_2)
       puVar3[0xc] = 0;
       puVar3[9] = 0x10b455;
       temp_v3[0] = puVar3;
-      FUN_002f4ba8(puVar3,0);
+      onlineObjectThreadRootStart(puVar3,0);
       puVar3 = *(unsigned int **)(param_1 + 0x3c);
       if (puVar3 != *(unsigned int **)(param_1 + 0x40)) {
         *(unsigned int **)(param_1 + 0x3c) = puVar3 + 1;

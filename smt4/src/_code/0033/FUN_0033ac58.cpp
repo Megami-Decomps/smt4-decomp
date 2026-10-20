@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0023fb84(int);
-int FUN_00293f98(int, int);
+int aocHandleButtons(int, int);
 
 /* Supplied declaration required: FUN_0023fb84. */
-/* Supplied declaration required: FUN_00293f98. */
+/* Supplied declaration required: aocHandleButtons. */
 extern int FUN_00294fe0(int);
 extern int FUN_0029505c(int);
 
@@ -48,7 +48,7 @@ LAB_0033acc8:
         }
         else {
           *puVar5 = *puVar5 | 1;
-          FUN_00293f98(temp_v0,7);
+          aocHandleButtons(temp_v0,7);
         }
       }
       if ((*puVar5 & 2) == 0) {

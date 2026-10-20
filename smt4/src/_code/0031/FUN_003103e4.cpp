@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00238f44(unsigned int);
-int FUN_00263308(int, unsigned int, unsigned int);
+int asdCecMessageBoxClose(unsigned int);
+int asdCecMessageBoxOpen(int, unsigned int, unsigned int);
 int FUN_003580a4(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int, int, unsigned int, unsigned int, int);
 
 /* stack frame of param_8: 7 slot(s), 28 byte(s) */
@@ -19,10 +19,10 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_8_stack;
 
-extern unsigned char DAT_00464fa8; /* 0x464fa8 */
+extern unsigned char g_asdCec; /* 0x464fa8 */
 
-/* Supplied declaration required: FUN_00238f44. */
-/* Supplied declaration required: FUN_00263308. */
+/* Supplied declaration required: asdCecMessageBoxClose. */
+/* Supplied declaration required: asdCecMessageBoxOpen. */
 extern int FUN_002b5a48(unsigned int);
 /* Supplied declaration required: FUN_003580a4. */
 
@@ -39,8 +39,8 @@ FUN_003103e4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
   unsigned int temp_v2;
   
   temp_v2 = 5;
-  temp_v0 = (*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4))[6];
-  FUN_00263308(temp_v0,param_1,param_2);
+  temp_v0 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];
+  asdCecMessageBoxOpen(temp_v0,param_1,param_2);
   if (temp_v0 < 0) {
     if (temp_v0 != -0x377ef411) {
       if (temp_v0 != -0x377ef416) {
@@ -49,7 +49,7 @@ FUN_003103e4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
       return 2;
     }
     temp_v0 = FUN_002b5a48(param_6);
-    temp_v1 = (*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4))[6];
+    temp_v1 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];
     FUN_003580a4(temp_v1,param_1,param_2,param_3,param_4,param_5,param_6,temp_v0 << 1,0x80000,0x80000,
                  param_7,param_8,0x19000);
     if (temp_v1 == -0x371ef798) {
@@ -58,8 +58,8 @@ FUN_003103e4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
     if (temp_v1 == -0x371ef799) {
       temp_v2 = 4;
     }
-    temp_v0 = (*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4))[6];
-    FUN_00263308(temp_v0,param_1,param_2);
+    temp_v0 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];
+    asdCecMessageBoxOpen(temp_v0,param_1,param_2);
     if (temp_v0 < 0) {
       return temp_v2;
     }
@@ -68,12 +68,12 @@ FUN_003103e4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
   else {
     temp_v2 = 6;
   }
-  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4));
-  if ((*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4)) != (unsigned int *)0x0) {
-    *(*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4)) = param_1;
+  puVar1 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4));
+  if ((*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)) != (unsigned int *)0x0) {
+    *(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)) = param_1;
     puVar1[1] = param_2;
   }
-  FUN_00238f44(puVar1[6]);
+  asdCecMessageBoxClose(puVar1[6]);
   return temp_v2;
 }
 

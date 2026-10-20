@@ -1,29 +1,22 @@
-#include "romwright_types.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
-int FUN_00324bc8(unsigned int, unsigned int, unsigned int);
+void FUN_00324bc8(u32 a, u32 b, u32 c);
+u32 scrGetArg(s32 index);
 
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern GameStateA g_gameState;
 
-extern unsigned int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_00324bc8. */
-
-
-unsigned int FUN_0035cf38(void)
-
+/* Script command: runs FUN_00324bc8 on the script's first three arguments and clears unk574. */
+s32 FUN_0035cf38(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  temp_v2 = FUN_00236038(2);
-  FUN_00324bc8(temp_v0,temp_v1,temp_v2);
-  (*(unsigned char *)((unsigned char *)&DAT_005f15fc + 0x574)) = 0;
-  return 1;
+    u32 a = scrGetArg(0);
+    u32 b = scrGetArg(1);
+    u32 c = scrGetArg(2);
+
+    FUN_00324bc8(a, b, c);
+    g_gameState.unk574 = 0;
+    return 1;
 }
 
 } /* extern "C" */

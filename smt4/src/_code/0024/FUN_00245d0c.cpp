@@ -28,9 +28,9 @@ extern unsigned char LAB_00245ec8; /* 0x245ec8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int FUN_0023eae0(unsigned int);
+extern unsigned int randRange(unsigned int);
 /* Supplied declaration required: FUN_00282924. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002be624. */
 
 
@@ -54,7 +54,7 @@ unsigned int FUN_00245d0c(unsigned int param_1,int param_2)
   unsigned int temp_v12;
   unsigned int temp_v13;
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   FUN_00282924(temp_v0,param_1);
   temp_v5 = 20.0f;
   if (param_2 == 3) {
@@ -77,7 +77,7 @@ unsigned int FUN_00245d0c(unsigned int param_1,int param_2)
     temp_v3 = temp_v5;
   }
   temp_v4 = (float)VectorSignedToFloat((int)*(short *)(temp_v0 + 0x1c4),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   FUN_00282924(temp_v0,param_1);
   if (temp_v0 != 0) {
     temp_v0 = (int)*(short *)(temp_v0 + temp_v2 * 2 + 0x72);
@@ -117,7 +117,7 @@ unsigned int FUN_00245d0c(unsigned int param_1,int param_2)
   else {
     FUN_002be624(&temp_v6,&LAB_00245ec8);
   }
-  temp_v1 = FUN_0023eae0(99);
+  temp_v1 = randRange(99);
   temp_v5 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   if (temp_v5 < temp_v3) {
     return 1;

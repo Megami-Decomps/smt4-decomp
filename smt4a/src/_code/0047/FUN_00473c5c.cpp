@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e3494(int);
 int FUN_002e98ea(int, int, unsigned int);
-int FUN_0030cb44(int, int);
+int asdOperatorNewE(int, int);
 int FUN_004315a8(...);
 
 /* stack frame of param_4: 4 slot(s), 16 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e3494. */
 /* Supplied declaration required: FUN_002e98ea. */
-/* Supplied declaration required: FUN_0030cb44. */
+/* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_004315a8. */
 
 
@@ -47,7 +47,7 @@ void FUN_00473c5c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   FUN_004315a8(0,temp_v2,param_4,temp_v2 + 1);
   if (-1 < temp_v0) {
     temp_v1 = temp_v2[0] * 2 + 2;
-    FUN_0030cb44(temp_v1,param_2);
+    asdOperatorNewE(temp_v1,param_2);
     temp_v0 = temp_v1;
     FUN_004315a8();
     if (-1 < temp_v0) {

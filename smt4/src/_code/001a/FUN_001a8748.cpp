@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00192564(void);
-int FUN_0020d088(void);
+int mapIfLoadWidgets(void);
 int FUN_00287c34(int);
-int FUN_002c4c2c(int);
+int asdTMTexTableLoadSprites(int);
 int FUN_002c58c8(int, int);
-int FUN_002c5c14(...);
+int asdLoadFileSync(...);
 int FUN_002f58e0(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -32,7 +32,7 @@ extern unsigned char LAB_001a89e0; /* 0x1a89e0 */
 extern unsigned char LAB_001a89f4; /* 0x1a89f4 */
 extern unsigned char LAB_001a8a08; /* 0x1a8a08 */
 extern unsigned char LAB_001a8a1c; /* 0x1a8a1c */
-extern int DAT_004474d8; /* 0x4474d8 */
+extern int g_mapDepartWork; /* 0x4474d8 */
 extern unsigned int DAT_0049fba4; /* 0x49fba4 */
 extern unsigned int DAT_0049fba8; /* 0x49fba8 */
 extern unsigned int DAT_0049fbac; /* 0x49fbac */
@@ -63,12 +63,12 @@ extern unsigned int DAT_0049fc0c; /* 0x49fc0c */
 extern unsigned char DAT_0049fc10; /* 0x49fc10 */
 
 /* Supplied declaration required: FUN_00192564. */
-/* Supplied declaration required: FUN_0020d088. */
+/* Supplied declaration required: mapIfLoadWidgets. */
 /* Supplied declaration required: FUN_00287c34. */
-/* Supplied declaration required: FUN_002c4c2c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c58c8. */
 extern unsigned int FUN_002c5c04(unsigned char *);
-/* Supplied declaration required: FUN_002c5c14. */
+/* Supplied declaration required: asdLoadFileSync. */
 /* Supplied declaration required: FUN_002f58e0. */
 
 
@@ -80,28 +80,28 @@ void FUN_001a8748(void)
   
   FUN_00287c34(0);
   FUN_00192564();
-  FUN_0020d088();
+  mapIfLoadWidgets();
   FUN_002f58e0();
-  FUN_002c4c2c(0x1c);
+  asdTMTexTableLoadSprites(0x1c);
   FUN_002c58c8(0x1c,3);
   FUN_002c58c8(0x1c,4);
   DAT_0049fba4 = FUN_002c5c04(&LAB_001a88dc);
   DAT_0049fba8 = FUN_002c5c04(&LAB_001a88f8);
-  DAT_0049fbac = FUN_002c5c14(&LAB_001a8910,&DAT_0049fbb0,1,0x10);
-  DAT_0049fbb4 = FUN_002c5c14(&LAB_001a8924,&DAT_0049fbb8,1,0x10);
-  DAT_0049fbbc = FUN_002c5c14(&LAB_001a893c,&DAT_0049fbc0,1,0x10);
-  DAT_0049fbc4 = FUN_002c5c14(&LAB_001a8954,&DAT_0049fbc8,1,0x10);
-  DAT_0049fbcc = FUN_002c5c14(&LAB_001a896c,&DAT_0049fbd0,1,0x10);
-  DAT_0049fbd4 = FUN_002c5c14(&LAB_001a8984,&DAT_0049fbd8,1,0x10);
-  DAT_0049fbdc = FUN_002c5c14(&LAB_001a899c,&DAT_0049fbe0,1,0x10);
-  DAT_0049fbe4 = FUN_002c5c14(&LAB_001a89b4,&DAT_0049fbe8,1,0x10);
-  DAT_0049fbec = FUN_002c5c14(&LAB_001a89cc,&DAT_0049fbf0,1,0x10);
-  DAT_0049fbf4 = FUN_002c5c14(&LAB_001a89e0,&DAT_0049fbf8,1,0x10);
-  DAT_0049fbfc = FUN_002c5c14(&LAB_001a89f4,&DAT_0049fc00,1,0x10);
-  DAT_0049fc04 = FUN_002c5c14(&LAB_001a8a08,&DAT_0049fc08,1,0x10);
-  DAT_0049fc0c = FUN_002c5c14(&LAB_001a8a1c,&DAT_0049fc10,1,0x10);
-  temp_v0 = DAT_004474d8;
-  *(unsigned short *)(DAT_004474d8 + 0x14) = 0;
+  DAT_0049fbac = asdLoadFileSync(&LAB_001a8910,&DAT_0049fbb0,1,0x10);
+  DAT_0049fbb4 = asdLoadFileSync(&LAB_001a8924,&DAT_0049fbb8,1,0x10);
+  DAT_0049fbbc = asdLoadFileSync(&LAB_001a893c,&DAT_0049fbc0,1,0x10);
+  DAT_0049fbc4 = asdLoadFileSync(&LAB_001a8954,&DAT_0049fbc8,1,0x10);
+  DAT_0049fbcc = asdLoadFileSync(&LAB_001a896c,&DAT_0049fbd0,1,0x10);
+  DAT_0049fbd4 = asdLoadFileSync(&LAB_001a8984,&DAT_0049fbd8,1,0x10);
+  DAT_0049fbdc = asdLoadFileSync(&LAB_001a899c,&DAT_0049fbe0,1,0x10);
+  DAT_0049fbe4 = asdLoadFileSync(&LAB_001a89b4,&DAT_0049fbe8,1,0x10);
+  DAT_0049fbec = asdLoadFileSync(&LAB_001a89cc,&DAT_0049fbf0,1,0x10);
+  DAT_0049fbf4 = asdLoadFileSync(&LAB_001a89e0,&DAT_0049fbf8,1,0x10);
+  DAT_0049fbfc = asdLoadFileSync(&LAB_001a89f4,&DAT_0049fc00,1,0x10);
+  DAT_0049fc04 = asdLoadFileSync(&LAB_001a8a08,&DAT_0049fc08,1,0x10);
+  DAT_0049fc0c = asdLoadFileSync(&LAB_001a8a1c,&DAT_0049fc10,1,0x10);
+  temp_v0 = g_mapDepartWork;
+  *(unsigned short *)(g_mapDepartWork + 0x14) = 0;
   *(unsigned int *)(temp_v0 + 0x20) = 0;
   *(unsigned int *)(temp_v0 + 0x24) = 0;
   *(unsigned int *)(temp_v0 + 0x28) = 0;

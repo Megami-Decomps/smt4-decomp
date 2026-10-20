@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_002c8644(void);
+extern int lmapMainGetUnkCC(void);
 
 
 unsigned char FUN_00310c9c(void)
@@ -10,7 +10,7 @@ unsigned char FUN_00310c9c(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_002c8644();
+  temp_v0 = lmapMainGetUnkCC();
   if (temp_v0 == 5) {
     return 0;
   }

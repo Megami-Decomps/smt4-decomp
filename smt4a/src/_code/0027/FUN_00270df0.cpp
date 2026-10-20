@@ -44,7 +44,7 @@ static float romwright_sqrt_4(float value)
 #endif
 extern unsigned int FUN_001931d8(void);
 extern int FUN_001acf08(void);
-extern int FUN_0031688c(int, unsigned int);
+extern int asdModelBankGetModel(int, unsigned int);
 /* Supplied declaration required: FUN_0034f8b4. */
 /* Supplied declaration required: FUN_0038136c. */
 /* Supplied declaration required: FUN_003d21b0. */
@@ -213,7 +213,7 @@ LAB_00271128:
        ((temp_v4 + temp_v10 * temp_v7 * temp_v6) * temp_v9 - param_1[0x38] * temp_v9 * temp_v9 * temp_v12);
   param_1[0x3b] = param_1[2] + (temp_v5 + temp_v1 * temp_v7 * temp_v6) * temp_v9;
   param_1[0x3c] = temp_v11;
-  if ((param_1[0x32] == 0.0f) && (temp_v0 = FUN_0031688c((int)romwright_subpiece_4_2_0(param_1[0x33],0),0), temp_v0 != 0)) {
+  if ((param_1[0x32] == 0.0f) && (temp_v0 = asdModelBankGetModel((int)romwright_subpiece_4_2_0(param_1[0x33],0),0), temp_v0 != 0)) {
     temp_v5 = param_1[0x3e];
     temp_v4 = param_1[0x3f];
     temp_v0 = *(int *)(*(int *)(romwright_subpiece_4_2_0(param_1[0x33],0) * 4 + 0x635b64) + 8);

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00143ae8(void);
 int FUN_00148880(unsigned int, unsigned short [2]);
-int FUN_00153c50(void);
+int asdGxCommandListCreate(void);
 
 typedef struct fn_0013a1e4_arg0 fn_0013a1e4_arg0;
 struct fn_0013a1e4_arg0 {
@@ -50,8 +50,8 @@ extern unsigned int DAT_00636eac; /* 0x636eac */
 
 /* Supplied declaration required: FUN_00143ae8. */
 /* Supplied declaration required: FUN_00148880. */
-/* Supplied declaration required: FUN_00153c50. */
-extern unsigned int FUN_00168188(void);
+/* Supplied declaration required: asdGxCommandListCreate. */
+extern unsigned int asdMemoryGetDefaultAllocator(void);
 
 
 void FUN_0013a1e4(fn_0013a1e4_arg0 *param_1)
@@ -86,10 +86,10 @@ void FUN_0013a1e4(fn_0013a1e4_arg0 *param_1)
     temp_v4[0] = param_1->field_0x84;
   }
   temp_v8 = 0x702;
-  temp_v0 = FUN_00168188();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   FUN_00148880(temp_v0,temp_v4);
   DAT_005b3cb8 = temp_v0;
-  temp_v0 = FUN_00168188();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   FUN_00148880(temp_v0,temp_v4);
   DAT_00636e30 = 0x100;
   DAT_00636e34 = 0x100;
@@ -111,9 +111,9 @@ void FUN_0013a1e4(fn_0013a1e4_arg0 *param_1)
   DAT_005b3cbc = temp_v0;
   do {
     temp_v1 = temp_v2 * 3;
-    FUN_00153c50();
+    asdGxCommandListCreate();
     (&DAT_00636e08)[temp_v2 * 6] = temp_v1;
-    FUN_00153c50();
+    asdGxCommandListCreate();
     *(int *)(temp_v2 * 0x18 + 0x636e0c) = temp_v1;
     FUN_00143ae8();
     temp_v3 = temp_v2 + 1;

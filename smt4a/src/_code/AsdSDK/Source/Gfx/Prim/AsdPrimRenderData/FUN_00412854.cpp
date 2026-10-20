@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
-int FUN_0019d4d8(int, int, int, undefined4, int, int);
+int memAlloc(int, int, int, int, int, int);
+int asdMemoryAllocAligned(int, int, int, undefined4, int, int);
 
 typedef struct fn_00412854_arg0 fn_00412854_arg0;
 struct fn_00412854_arg0 {
@@ -31,8 +31,8 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00167ab4. */
-/* Supplied declaration required: FUN_0019d4d8. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
 
 
 void FUN_00412854(fn_00412854_arg0 *param_1)
@@ -78,7 +78,7 @@ void FUN_00412854(fn_00412854_arg0 *param_1)
     temp_v1 = param_1->field_0xc * 0xc;
   }
   temp_v2 = 0x10000;
-  FUN_00167ab4(0x10000,0x100,0,temp_v5 + temp_v7 + temp_v3 + temp_v8 + temp_v4 + temp_v1,0x10,1);
+  memAlloc(0x10000,0x100,0,temp_v5 + temp_v7 + temp_v3 + temp_v8 + temp_v4 + temp_v1,0x10,1);
   param_1->field_0x2c = temp_v2;
   temp_v3 = 0;
   if ((param_1->field_0x4 & 1) != 0) {
@@ -128,7 +128,7 @@ void FUN_00412854(fn_00412854_arg0 *param_1)
     param_1->field_0x3c = temp_v3 + param_1->field_0x2c;
   }
   puVar5 = (unsigned short *)0x10000;
-  FUN_0019d4d8(0x10000,0x100,0,param_1->field_0x18 << 1,0x10,1);
+  asdMemoryAllocAligned(0x10000,0x100,0,param_1->field_0x18 << 1,0x10,1);
   param_1->field_0x48 = (undefined4)puVar5;
   if (param_1->field_0x18 != 0) {
     temp_v0 = param_1->field_0x18 & 1;

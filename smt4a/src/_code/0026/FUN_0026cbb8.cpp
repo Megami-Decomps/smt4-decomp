@@ -17,9 +17,9 @@ int FUN_00336de4(...);
 int FUN_003450d4(...);
 int FUN_003491e8(void);
 int FUN_00359b6c(...);
-int FUN_0035fd38(...);
+int btlTalkBustUpSetUnk2F4(...);
 int FUN_0037b578(...);
-int FUN_0037e234(...);
+int whisperEffectStart(...);
 int FUN_003d2204(...);
 int FUN_003d2d34(...);
 int FUN_003d2d6c(...);
@@ -29,9 +29,9 @@ int FUN_003e0174(...);
 int FUN_003e40b8(...);
 int SBORROW4(...);
 
-int FUN_0010063a(...);
+int qsort(...);
 int FUN_00163aa4(...);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00183e58(void);
 int FUN_001846d0(...);
 int FUN_00184758(...);
@@ -45,7 +45,7 @@ int FUN_002a4894(...);
 int FUN_002a7288(void);
 int FUN_0031d1d8(...);
 int FUN_0032fea0(...);
-int FUN_00372198(void);
+int whisperEffectFinish(void);
 int FUN_003df4a4(...);
 int FUN_004bca68(...);
 
@@ -77,14 +77,14 @@ extern unsigned char LAB_00321c94; /* 0x321c94 */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_001517b4. */
 extern int FUN_001632fc(void);
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: FUN_001641b4. */
 /* Supplied declaration required: FUN_001643b4. */
 extern int FUN_00167f08(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_001801a4(void);
 /* Supplied declaration required: FUN_00183e58. */
 /* Supplied declaration required: FUN_001846d0. */
@@ -112,7 +112,7 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002a7288. */
 extern int FUN_002c2c68(unsigned int);
 extern int FUN_002effbc(void);
-extern int FUN_002f4524(void);
+extern int whisperEffectIsIdle(void);
 extern int FUN_0031d1a0(void);
 /* Supplied declaration required: FUN_0031d1d8. */
 extern int FUN_0032169c(void);
@@ -123,10 +123,10 @@ extern int FUN_00348ed0(unsigned int);
 /* Supplied declaration required: FUN_003491e8. */
 /* Supplied declaration required: FUN_00359b6c. */
 extern int FUN_0035fd00(unsigned short);
-/* Supplied declaration required: FUN_0035fd38. */
-/* Supplied declaration required: FUN_00372198. */
+/* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
+/* Supplied declaration required: whisperEffectFinish. */
 /* Supplied declaration required: FUN_0037b578. */
-/* Supplied declaration required: FUN_0037e234. */
+/* Supplied declaration required: whisperEffectStart. */
 /* Supplied declaration required: FUN_003d2204. */
 /* Supplied declaration required: FUN_003d2d34. */
 /* Supplied declaration required: FUN_003d2d6c. */
@@ -371,7 +371,7 @@ void FUN_0026cbb8(int param_1)
           }
           *(unsigned int *)(param_1 + 0x436c) = 1;
           temp_v8 = 0xe3;
-          FUN_001681cc(temp_v8);
+          sysPlaySe(temp_v8);
           return;
         }
         if (temp_v9 != 0x1e) {
@@ -586,7 +586,7 @@ LAB_0026e1e4:
         else {
           temp_v8 = 0x6d;
         }
-        FUN_001681cc(temp_v8);
+        sysPlaySe(temp_v8);
         *(unsigned int *)(param_1 + 0x436c) = *(unsigned int *)(param_1 + 0x4370);
       }
       else {
@@ -597,8 +597,8 @@ LAB_0026e1e4:
           *(unsigned short *)(param_1 + *puVar27 * 2 + 0x76c4) = 0;
           *puVar27 = *puVar27 - 1;
         }
-        FUN_0010063a(temp_v27,8,2,&LAB_00321c94);
-        FUN_00372198();
+        qsort(temp_v27,8,2,&LAB_00321c94);
+        whisperEffectFinish();
         FUN_00183e58();
       }
       FUN_0019ea64(1);
@@ -615,7 +615,7 @@ LAB_0026e1e4:
     if (temp_v5 == 0) {
       return;
     }
-    temp_v5 = FUN_002f4524();
+    temp_v5 = whisperEffectIsIdle();
     if (temp_v5 == 0) {
       return;
     }
@@ -635,7 +635,7 @@ LAB_0026e1e4:
       FUN_00275f44(*(unsigned int *)(param_1 + 0x43a0),3);
       *(unsigned int *)(param_1 + 0x436c) = 0x14;
       temp_v8 = 0xa0;
-      FUN_001681cc(temp_v8);
+      sysPlaySe(temp_v8);
       return;
     }
   case 1:
@@ -659,7 +659,7 @@ LAB_0026e1e4:
     *puVar27 = 0;
     *piVar22 = 0;
     *(unsigned int *)(param_1 + 0x436c) = 2;
-    FUN_0037e234(*(unsigned short *)(temp_v5 + 0x62));
+    whisperEffectStart(*(unsigned short *)(temp_v5 + 0x62));
     break;
   case 2:
     if (*(char *)(param_1 + 0x7f50) != '\0') {
@@ -679,7 +679,7 @@ LAB_0026e1e4:
       if (temp_v9 == 0) {
         FUN_00336de4(*(unsigned short *)(temp_v5 + 0x62),1);
       }
-      FUN_0035fd38(1);
+      btlTalkBustUpSetUnk2F4(1);
     }
     temp_v9 = 0;
     temp_v28 = 0;
@@ -894,14 +894,14 @@ LAB_0026e66c:
       temp_v9 = FUN_00167f08();
       if (temp_v9 == 0xe3) {
         temp_v8 = 0x6d;
-        FUN_001681cc(temp_v8);
+        sysPlaySe(temp_v8);
       }
     }
     else {
       temp_v9 = FUN_00167f08();
       if (temp_v9 == 0x6d) {
         temp_v8 = 0xe3;
-        FUN_001681cc(temp_v8);
+        sysPlaySe(temp_v8);
       }
     }
     temp_v28 = FUN_002a4894(temp_v26);
@@ -955,7 +955,7 @@ LAB_0026e66c:
     if (temp_v9 - 1 <= temp_v28) {
       FUN_001641b4(0x100020e);
       FUN_003491e8();
-      FUN_001681cc(0x9c);
+      sysPlaySe(0x9c);
       temp_v8 = *(unsigned int *)(param_1 + 0x436c);
       *(unsigned int *)(param_1 + 0x436c) = 99;
       *(unsigned int *)(param_1 + 0x4370) = temp_v8;
@@ -1073,14 +1073,14 @@ LAB_0026d4c4:
       temp_v6 = FUN_00167f08();
       if (temp_v6 == 0xe3) {
         temp_v8 = 0x6d;
-        FUN_001681cc(temp_v8);
+        sysPlaySe(temp_v8);
       }
     }
     else {
       temp_v6 = FUN_00167f08();
       if (temp_v6 == 0x6d) {
         temp_v8 = 0xe3;
-        FUN_001681cc(temp_v8);
+        sysPlaySe(temp_v8);
       }
     }
     temp_v6 = FUN_002a4894(temp_v30);
@@ -1215,7 +1215,7 @@ LAB_0026d4c4:
             temp_v14 = temp_v14 + 1;
           } while (temp_v14 < (int)temp_v7);
         }
-        FUN_0010063a(temp_v29,8,2,&LAB_00321c94);
+        qsort(temp_v29,8,2,&LAB_00321c94);
         *(short *)(temp_v9 + 0x76a4) = temp_v4;
         *(unsigned short *)(temp_v9 + 0x76b4) = 0;
         temp_v14 = FUN_003dfd5c();

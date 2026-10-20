@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002c424c(int, int, int);
-int FUN_002c4938(int, int);
+int memClear(int, int);
 
 extern int DAT_004655c0; /* 0x4655c0 */
 
 /* Supplied declaration required: FUN_002c424c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_00122a6c(int param_1)
@@ -31,7 +31,7 @@ unsigned int FUN_00122a6c(int param_1)
   unsigned int temp_v11;
   
   DAT_004655c0 = param_1;
-  FUN_002c4938(param_1,0x868);
+  memClear(param_1,0x868);
   temp_v0 = DAT_004655c0;
   *(unsigned char *)(DAT_004655c0 + 0x18) = 0;
   *(unsigned char *)(temp_v0 + 0x19) = 0;
@@ -72,7 +72,7 @@ unsigned int FUN_00122a6c(int param_1)
   *(unsigned char *)(temp_v0 + 0x106) = 0;
   *(unsigned char *)(temp_v0 + 0x109) = 0;
   *(unsigned int *)(temp_v0 + 0x100) = 0;
-  FUN_002c4938(temp_v0 + 0x74,0x80);
+  memClear(temp_v0 + 0x74,0x80);
   temp_v0 = DAT_004655c0;
   temp_v1 = 0;
   temp_v2 = 0x10;

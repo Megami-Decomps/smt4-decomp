@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002be61c(unsigned int, int);
+int libc_sprintf(unsigned int, int);
 
-/* Supplied declaration required: FUN_002be61c. */
+/* Supplied declaration required: libc_sprintf. */
 
 
 void FUN_0024bc98(unsigned int param_1,int param_2)
@@ -14,39 +14,39 @@ void FUN_0024bc98(unsigned int param_1,int param_2)
 {
 /* irregular: 1 native warning(s); review required */
   if (param_2 == 0) {
-    FUN_002be61c(param_1,0x24bd34);
+    libc_sprintf(param_1,0x24bd34);
     return;
   }
   if (param_2 == 1) {
-    FUN_002be61c(param_1,0x24bd44);
+    libc_sprintf(param_1,0x24bd44);
     return;
   }
   if (param_2 != 2) {
     if (param_2 != 3) {
       if (param_2 == 4) {
-        FUN_002be61c(param_1,0x24bd5c);
+        libc_sprintf(param_1,0x24bd5c);
         return;
       }
       if (param_2 == 5) {
-        FUN_002be61c(param_1,0x24bd68);
+        libc_sprintf(param_1,0x24bd68);
         return;
       }
       if (param_2 == 6) {
-        FUN_002be61c(param_1,0x24bd7c);
+        libc_sprintf(param_1,0x24bd7c);
         return;
       }
       if (param_2 == 7) {
-        FUN_002be61c(param_1,0x24bd98);
+        libc_sprintf(param_1,0x24bd98);
         return;
       }
       if (param_2 != 8) {
         return;
       }
     }
-    FUN_002be61c(param_1,0x24bd1c);
+    libc_sprintf(param_1,0x24bd1c);
     return;
   }
-  FUN_002be61c(param_1,0x24bd98);
+  libc_sprintf(param_1,0x24bd98);
   return;
 }
 

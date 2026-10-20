@@ -32,11 +32,11 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00285584. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c39a4. */
@@ -54,9 +54,9 @@ void FUN_003a37dc(fn_003a37dc_arg0 *param_1)
   int *piVar5;
   
   if ((0 < *(int *)&param_1->field_0x4) && (*(int *)&param_1->field_0x4 < 0x12)) {
-    FUN_002c39a4(DAT_0044ea00);
+    FUN_002c39a4(g_titleScene);
     FUN_002bed3c();
-    temp_v1 = DAT_0044ea00;
+    temp_v1 = g_titleScene;
     temp_v0 = FUN_002c5d80(1,0);
     piVar5 = (int *)(temp_v1 + 0x124c);
     temp_v2 = *piVar5;
@@ -67,16 +67,16 @@ void FUN_003a37dc(fn_003a37dc_arg0 *param_1)
       (**(romwright_code **)(temp_v1 + 0x1268))();
       *(unsigned char *)(temp_v1 + 0x1264) = 0;
     }
-    temp_v1 = FUN_002bf244(*(unsigned int *)&param_1[0x13].field_0x9a0);
+    temp_v1 = jobIsValid(*(unsigned int *)&param_1[0x13].field_0x9a0);
     if (temp_v1 != 0) {
       FUN_00285584(*(unsigned int *)&param_1[0x13].field_0x9a0,0);
     }
-    temp_v1 = FUN_002bf244(*(unsigned int *)&param_1[0x13].field_0x9a4);
+    temp_v1 = jobIsValid(*(unsigned int *)&param_1[0x13].field_0x9a4);
     if (temp_v1 != 0) {
       FUN_00285584(*(unsigned int *)&param_1[0x13].field_0x9a4,0);
     }
-    temp_v1 = DAT_0044ea00;
-    piVar5 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v1 = g_titleScene;
+    piVar5 = (int *)(g_titleScene + 0x124c);
     temp_v0 = *piVar5;
     temp_v2 = piVar5[temp_v0 + 2];
     *piVar5 = temp_v0 - 1;
@@ -84,8 +84,8 @@ void FUN_003a37dc(fn_003a37dc_arg0 *param_1)
       (**(romwright_code **)(temp_v1 + 0x1268))();
       *(unsigned char *)(temp_v1 + 0x1264) = 0;
     }
-    FUN_002c198c(DAT_0044ea00);
-    FUN_002c18e4(DAT_0044ea00);
+    FUN_002c198c(g_titleScene);
+    FUN_002c18e4(g_titleScene);
     return;
   }
   return;

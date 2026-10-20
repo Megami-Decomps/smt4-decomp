@@ -1,27 +1,24 @@
-#include "romwright_types.h"
+#include "map/mapGimic.h"
 
 extern "C" {
 
-extern int DAT_00580ca0; /* 0x580ca0 */
+s32 FUN_004ffba8(u32 handle);
 
-extern int FUN_004ffba8(unsigned int);
+extern MapGimic *DAT_00580ca0;
 
-
-unsigned int FUN_00398110(int param_1)
+/* True when a slot with the given id is active and FUN_004ffba8 accepts its object. */
+bool FUN_00398110(s32 id)
 {
-  int temp_v0;
-  int temp_v1;
-  char *p;
-  
-  temp_v1 = 0;
-  while (p = (char *)(DAT_00580ca0 + temp_v1 * 0x18 + 0x8c4),
-         (*p == '\0' || *(short *)(p + 4) != param_1) ||
-         (temp_v0 = FUN_004ffba8(*(unsigned int *)(*(int *)(p + 8) + 4)), temp_v0 == 0)) {
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 10) {
-      return 0;
+    MapGimicSlot *slot;
+    s32 i;
+
+    for (i = 0; i < MAP_GIMIC_SLOTS; i++) {
+        slot = &DAT_00580ca0->slots[i];
+        if (slot->active != 0 && slot->id == id && FUN_004ffba8(slot->obj->handle) != 0) {
+            return true;
+        }
     }
-  }
-  return 1;
+    return false;
 }
+
 } /* extern "C" */

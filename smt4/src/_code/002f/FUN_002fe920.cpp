@@ -2,19 +2,19 @@
 
 extern "C" {
 
-int FUN_0021e150(void);
-int FUN_002c8628(void);
+int mapMainCallIfActive(void);
+int lmapMainCallIfActive(void);
 
-/* Supplied declaration required: FUN_0021e150. */
-/* Supplied declaration required: FUN_002c8628. */
+/* Supplied declaration required: mapMainCallIfActive. */
+/* Supplied declaration required: lmapMainCallIfActive. */
 
 
 unsigned int FUN_002fe920(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_0021e150();
-  FUN_002c8628();
+  mapMainCallIfActive();
+  lmapMainCallIfActive();
   return 1;
 }
 

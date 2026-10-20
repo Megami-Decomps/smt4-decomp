@@ -9,7 +9,7 @@ int FUN_003e6bd8(void);
 int FUN_004aa380(unsigned int);
 int FUN_004ddd10(...);
 int FUN_004de37c(int *, unsigned int *, int, unsigned int);
-int FUN_004de8b8(int *, int, int);
+int btlUnitSetParam(int *, int, int);
 int FUN_004e0314(...);
 int FUN_004e05d4(...);
 int FUN_004e1354(...);
@@ -32,7 +32,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571150; /* 0x571150 */
 extern unsigned int DAT_00571154; /* 0x571154 */
 extern unsigned int DAT_00571160; /* 0x571160 */
@@ -45,10 +45,10 @@ extern unsigned int DAT_00571288; /* 0x571288 */
 extern unsigned int DAT_0057128c; /* 0x57128c */
 extern unsigned int DAT_005712f0; /* 0x5712f0 */
 extern int DAT_00573808; /* 0x573808 */
-extern unsigned int DAT_00573898; /* 0x573898 */
+extern unsigned int g_btlEvent; /* 0x573898 */
 extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
-extern int FUN_00163e40(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002e3328. */
 extern int FUN_003e69ac(unsigned int);
 /* Supplied declaration required: FUN_003e6bd8. */
@@ -65,7 +65,7 @@ extern int FUN_004d84e8(unsigned int);
 extern int *FUN_004dc72c(int *, unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_004ddd10. */
 /* Supplied declaration required: FUN_004de37c. */
-/* Supplied declaration required: FUN_004de8b8. */
+/* Supplied declaration required: btlUnitSetParam. */
 extern int *FUN_004e0170(int *, unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_004e0314. */
 /* Supplied declaration required: FUN_004e05d4. */
@@ -101,7 +101,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
   unsigned int *puVar9;
   
   temp_v6 = *param_1;
-  temp_v4 = DAT_0057113c + *(int *)(temp_v6 + 0xa4) * 0x1254;
+  temp_v4 = g_btlScriptUnit + *(int *)(temp_v6 + 0xa4) * 0x1254;
   puVar9 = (unsigned int *)(temp_v4 + 4);
   switch(param_2) {
   case 0:
@@ -114,14 +114,14 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     FUN_004ec950(param_1,puVar9,temp_v6,param_4);
     return param_1;
   case 3:
-    temp_v6 = FUN_00163e40(*(unsigned int *)(temp_v6 + 0x80));
+    temp_v6 = jobIsValid(*(unsigned int *)(temp_v6 + 0x80));
     if (temp_v6 != 0) {
       return (int *)0x0;
     }
     temp_v4 = *(int *)(temp_v4 + 0x2c);
     *(unsigned short *)(temp_v4 + 0x1be) = 2;
     *(short *)(temp_v4 + 0x1c0) = (short)*(unsigned int *)(*param_1 + 0x4cd4);
-    FUN_004de8b8(param_1,1,0);
+    btlUnitSetParam(param_1,1,0);
     FUN_004eb838(param_1,puVar9);
     break;
   case 4:
@@ -155,7 +155,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     *(unsigned short *)(*(int *)(temp_v4 + 0x2c) + 0x1be) = 10;
     temp_v4 = *(int *)(*param_1 + 0xa4);
     temp_v3 = 0xb;
-    temp_v4 = DAT_0057113c + temp_v4 * 0x1254;
+    temp_v4 = g_btlScriptUnit + temp_v4 * 0x1254;
     *(unsigned char *)(temp_v4 + 9) = temp_v3;
     break;
   case 0xb:
@@ -169,7 +169,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     *(unsigned char *)(temp_v4 + 9) = temp_v3;
     break;
   case 0xd:
-    temp_v4 = FUN_00163e40(*(unsigned int *)(temp_v6 + 0x40));
+    temp_v4 = jobIsValid(*(unsigned int *)(temp_v6 + 0x40));
     if (temp_v4 != 0) {
       return (int *)0x0;
     }
@@ -178,7 +178,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
       return (int *)0x0;
     }
     temp_v3 = 0xe;
-    temp_v4 = DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254;
+    temp_v4 = g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254;
     *(unsigned char *)(temp_v4 + 9) = temp_v3;
     break;
   case 0xe:
@@ -195,7 +195,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
       temp_v4 = *(int *)(temp_v4 + 0xa4);
       temp_v3 = 0xb;
     }
-    temp_v4 = DAT_0057113c + temp_v4 * 0x1254;
+    temp_v4 = g_btlScriptUnit + temp_v4 * 0x1254;
     *(unsigned char *)(temp_v4 + 9) = temp_v3;
     break;
   case 0xf:
@@ -218,13 +218,13 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
       if (temp_v6 != 0) {
         return (int *)0x0;
       }
-      *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
       FUN_004f8f08(DAT_00573808);
       *puVar9 = *puVar9 & 0xffdfffff;
       *(unsigned short *)(*(int *)(temp_v4 + 0x2c) + 0x1be) = 0;
       return (int *)0x1;
     }
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
     break;
   case 0x14:
     FUN_004e1354(param_1,puVar9,temp_v6,param_4);
@@ -245,12 +245,12 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     FUN_004eb740(param_1,puVar9);
     break;
   case 0x1a:
-    temp_v4 = FUN_004d84e8(DAT_00573898);
+    temp_v4 = FUN_004d84e8(g_btlEvent);
     if (temp_v4 != 0) {
       return (int *)0x0;
     }
     temp_v3 = 0xb;
-    temp_v4 = DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254;
+    temp_v4 = g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254;
     *(unsigned char *)(temp_v4 + 9) = temp_v3;
     break;
   case 0x1d:
@@ -307,7 +307,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     }
     temp_v4 = *(int *)(*param_1 + 0xa4);
     temp_v3 = 0x23;
-    temp_v4 = DAT_0057113c + temp_v4 * 0x1254;
+    temp_v4 = g_btlScriptUnit + temp_v4 * 0x1254;
     *(unsigned char *)(temp_v4 + 9) = temp_v3;
     break;
   case 0x23:
@@ -321,7 +321,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     FUN_004eb740(param_1,puVar9);
     break;
   case 0x24:
-    temp_v6 = FUN_004d84e8(DAT_00573898);
+    temp_v6 = FUN_004d84e8(g_btlEvent);
     if (temp_v6 != 0) {
       return (int *)0x0;
     }
@@ -347,7 +347,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
       *(unsigned int *)(temp_v4 + 0x45a4) = temp_v2 & ~DAT_0057125c;
       *(unsigned int *)(temp_v4 + 0x45a0) = temp_v5 & temp_v0;
     }
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x26;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x26;
     return (int *)0x1;
   case 0x25:
     temp_v3 = 0x26;

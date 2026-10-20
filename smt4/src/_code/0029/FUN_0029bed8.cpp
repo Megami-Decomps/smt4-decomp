@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp64; /* 0x64: local_64 */
 } param_1_stack;
 
-extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
+extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 
 
 void FUN_0029bed8(unsigned int param_1)
@@ -47,19 +47,19 @@ void FUN_0029bed8(unsigned int param_1)
   unsigned int temp_v20;
   
   temp_v14 = 0;
-  if (*(char *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x9197) != '\0') {
+  if (*(char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x9197) != '\0') {
     do {
-      temp_v15 = (int)*(char *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x8c + temp_v14 + 0x90f0);
+      temp_v15 = (int)*(char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x8c + temp_v14 + 0x90f0);
       if ((-1 < temp_v15) &&
-         (temp_v15 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x8c + temp_v15 * 0x604, puVar17 = (unsigned int *)(temp_v15 + 0x90),
+         (temp_v15 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x8c + temp_v15 * 0x604, puVar17 = (unsigned int *)(temp_v15 + 0x90),
          *(unsigned short *)(temp_v15 + 0xd6) == param_1)) goto LAB_0029bf50;
       temp_v14 = temp_v14 + 1;
-    } while (temp_v14 < *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x9197));
+    } while (temp_v14 < *(unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x9197));
   }
   puVar17 = (unsigned int *)0x0;
 LAB_0029bf50:
   if (param_1 < 0x501) {
-    temp_v15 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + param_1 * 0x34;
+    temp_v15 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + param_1 * 0x34;
     temp_v0 = *(unsigned char *)(puVar17 + 0x12);
     temp_v11 = *puVar17;
     temp_v1 = *(unsigned short *)(puVar17 + 1);

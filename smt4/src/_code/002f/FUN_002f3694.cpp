@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_gameState; /* 0x49f91c */
 
 extern int FUN_001fc314(int);
 extern int FUN_002481b0(void);
@@ -52,7 +52,7 @@ void FUN_002f3694(void)
       if (temp_v4 == -1) {
         return;
       }
-      if ((DAT_0049f91c == temp_v4) &&
+      if ((g_gameState == temp_v4) &&
          (temp_v2 = temp_v0 + *(short *)(temp_v1 + 0x28) * 4, *(int *)(temp_v2 + 0xe60) == 0)) {
         temp_v3 = 0;
         *(int *)(temp_v2 + 0xe60) = *(short *)(temp_v1 + 0x26) * 0x708;

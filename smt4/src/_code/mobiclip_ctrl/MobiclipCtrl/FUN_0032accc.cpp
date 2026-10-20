@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002adba8. */
@@ -41,8 +41,8 @@ void FUN_0032accc(void)
   if (temp_v0 != 1) {
     return;
   }
-  if (*(int *)(DAT_0044ea00 + 0x528) != 0) {
-    if (*(int *)(DAT_0044ea00 + 0x528) != 1) {
+  if (*(int *)(g_titleScene + 0x528) != 0) {
+    if (*(int *)(g_titleScene + 0x528) != 1) {
       return;
     }
     temp_v0 = 1;
@@ -53,7 +53,7 @@ void FUN_0032accc(void)
   if (*(int *)(temp_v0 * 4 + 0x4c3a60) == 0) {
     return;
   }
-  FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(temp_v0 * 0x20 + 0x4c3aa0));
+  FUN_002c1b64(g_titleScene,*(unsigned int *)(temp_v0 * 0x20 + 0x4c3aa0));
   temp_v0 = *(int *)(temp_v0 * 0x20 + 0x4c3aa0);
   VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);

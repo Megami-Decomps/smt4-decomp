@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned int FUN_002865f8(void);
 /* Supplied declaration required: FUN_002866b4. */
 extern unsigned int FUN_002893d8(void);
-extern unsigned int FUN_00296cc8(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 extern unsigned char FUN_003821b8(void);
 /* Supplied declaration required: QuestCenter_GetActiveEntry. */
 
@@ -35,7 +35,7 @@ void scrComm_Message_ShowFromQuestState(void)
   QuestCenter_GetActiveEntry();
   temp_v0 = FUN_003821b8();
   temp_v1 = FUN_002865f8();
-  temp_v2 = FUN_00296cc8(0);
+  temp_v2 = scrGetArg(0);
   temp_v3 = FUN_002893d8();
   FUN_002866b4(temp_v1,temp_v2,temp_v3,temp_v0,0,0,unaff_r4);
   return;

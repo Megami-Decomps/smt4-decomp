@@ -1,25 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00321500` (_code @ 0x321500, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the pool offset 0x2438 and the constant 5 take r2/r3 in the opposite order. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184758(int, int, int);
+/* Object with a sub-object at 0x20f0, a counter at 0x2438 and a state word at 0x243c. */
+typedef struct {
+    u8 unk0000[0x20f0];
+    u8 sub[0x348];      /* 0x20f0 */
+    u32 counter;        /* 0x2438 */
+    u32 state;          /* 0x243c */
+} Owner;
 
-/* Supplied declaration required: FUN_00184758. */
+int FUN_00184758(u8 *sub, int a, int b);
 
-
-void FUN_00321500(int param_1)
-
+/* When the state is 0, switches to state 5, clears the counter and restarts the sub-object. */
+void FUN_00321500(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x243c) == 0) {
-    *(int *)(param_1 + 0x243c) = 5;
-    *(unsigned int *)(param_1 + 0x2438) = 0;
-    FUN_00184758(param_1 + 0x20f0,0,0);
-    return;
-  }
-  return;
+    u32 *state = &owner->state;
+
+    if (*state == 0) {
+        *state = 5;
+        owner->counter = 0;
+        FUN_00184758(owner->sub, 0, 0);
+    }
 }
 
 } /* extern "C" */

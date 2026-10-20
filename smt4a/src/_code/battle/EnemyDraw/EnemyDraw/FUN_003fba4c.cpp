@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(...);
 int FUN_0016c4b8(...);
-int FUN_0019a0e8(float *, unsigned int *);
+int mtx44Copy(float *, unsigned int *);
 int FUN_0019a0fc(...);
 int FUN_001b4a20(float *, float *, int *);
 int FUN_001d3de0(...);
@@ -74,7 +74,7 @@ extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
 extern float DAT_00570d5c; /* 0x570d5c */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_005c4c30; /* 0x5c4c30 */
 extern unsigned int DAT_0064c084; /* 0x64c084 */
 extern unsigned int DAT_0064c088; /* 0x64c088 */
@@ -108,7 +108,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: FUN_001b4a20. */
 /* Supplied declaration required: FUN_001d3de0. */
@@ -303,14 +303,14 @@ void FUN_003fba4c(fn_003fba4c_arg0 *param_1,int param_2,int param_3,unsigned int
       DAT_0064c0bc = temp_v7;
       DAT_0064c0c0 = DAT_0064c084;
     }
-    FUN_0019a0e8(&temp_v20,&DAT_0064c084);
+    mtx44Copy(&temp_v20,&DAT_0064c084);
     FUN_001b4a20(&temp_v20,&temp_v20,&temp_v49);
     FUN_001d3de0(&temp_v20,&temp_v20,temp_v52);
     FUN_0019a0fc(&temp_v20,&temp_v20,&temp_v32);
-    FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)((int)param_1->field_0x14 + 0x18));
-    temp_v4 = DAT_0059dbb4;
+    FUN_0016c4b8(g_renderCtx,*(unsigned int *)((int)param_1->field_0x14 + 0x18));
+    temp_v4 = g_renderCtx;
     temp_v5 = unaff_r6 * 0x58 + 0x54;
-    piVar8 = (int *)(DAT_0059dbb4 + 0x12b8);
+    piVar8 = (int *)(g_renderCtx + 0x12b8);
     temp_v2 = *(int *)(param_1->field_0x2c + temp_v5);
     temp_v3 = piVar8[*piVar8 + 2];
     piVar8[*piVar8 + 2] = temp_v2;
@@ -319,11 +319,11 @@ void FUN_003fba4c(fn_003fba4c_arg0 *param_1,int param_2,int param_3,unsigned int
       *(unsigned char *)(temp_v4 + 0x12d0) = 0;
     }
     temp_v4 = *(int *)(param_1->field_0x2c + temp_v5);
-    for (; temp_v2 = DAT_0059dbb4, (int)unaff_r6 <= unaff_r9; unaff_r6 = unaff_r6 + 1) {
+    for (; temp_v2 = g_renderCtx, (int)unaff_r6 <= unaff_r9; unaff_r6 = unaff_r6 + 1) {
       temp_v5 = unaff_r6 * 0x58 + 0x54;
       temp_v3 = *(int *)(param_1->field_0x2c + temp_v5);
       if (temp_v3 != temp_v4) {
-        piVar8 = (int *)(DAT_0059dbb4 + 0x12b8);
+        piVar8 = (int *)(g_renderCtx + 0x12b8);
         temp_v4 = piVar8[*piVar8 + 2];
         piVar8[*piVar8 + 2] = temp_v3;
         if (*(char *)(temp_v2 + 0x12d0) != '\0' || temp_v4 != temp_v3) {

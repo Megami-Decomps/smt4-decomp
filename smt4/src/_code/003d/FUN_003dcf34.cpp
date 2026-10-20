@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_002aa568(int, unsigned int);
 
-extern unsigned char DAT_00435d00; /* 0x435d00 */
+extern unsigned char g_btlEffect; /* 0x435d00 */
 
 extern int FUN_00293230(void);
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002aa568. */
 
 
@@ -22,13 +22,13 @@ int FUN_003dcf34(int param_1)
   int temp_v1;
   int *piVar3;
   
-  FUN_002939f4();
+  btlGetMainState();
   temp_v0 = FUN_00293230();
   if ((temp_v0 == 0) && (piVar3 = (int *)(param_1 + 0x1cfc), *piVar3 != 0)) {
     temp_v0 = 0;
     do {
       temp_v1 = *piVar3 + temp_v0 * 0x16;
-      if ((temp_v1 != 0) && (FUN_002aa568(temp_v1,(*(unsigned int *)((unsigned char *)&DAT_00435d00 + 0x14))), temp_v1 == 0)) {
+      if ((temp_v1 != 0) && (FUN_002aa568(temp_v1,(*(unsigned int *)((unsigned char *)&g_btlEffect + 0x14))), temp_v1 == 0)) {
         temp_v0 = *piVar3 + temp_v0 * 0x16;
         if (temp_v0 != 0) {
           return (int)*(short *)(temp_v0 + 0x10);

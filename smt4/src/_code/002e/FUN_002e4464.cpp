@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00434210; /* 0x434210 */
+extern int g_btlTalkBustUp; /* 0x434210 */
 
 
 unsigned int FUN_002e4464(void)
@@ -13,8 +13,8 @@ unsigned int FUN_002e4464(void)
   unsigned int temp_v0;
   
   temp_v0 = 0;
-  if (((DAT_00434210 != 0) && (*(char *)(DAT_00434210 + 0xaa) == '\0')) &&
-     (*(short *)(DAT_00434210 + 0x7c) == 10)) {
+  if (((g_btlTalkBustUp != 0) && (*(char *)(g_btlTalkBustUp + 0xaa) == '\0')) &&
+     (*(short *)(g_btlTalkBustUp + 0x7c) == 10)) {
     temp_v0 = 1;
   }
   return temp_v0;

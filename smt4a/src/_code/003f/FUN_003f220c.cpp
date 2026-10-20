@@ -1,28 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003d2150(int);
-int FUN_004a99bc(unsigned int);
+void FUN_003d2150(u32 id);
+void FUN_004a99bc(u32 arg);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
-
-/* Supplied declaration required: FUN_003d2150. */
-/* Supplied declaration required: FUN_004a99bc. */
-
+extern u32 DAT_0057a9c8;
 
 void FUN_003f220c(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_004a99bc(DAT_0057a9c8);
-  FUN_003d2150(0x100026a);
-  return;
+    FUN_004a99bc(DAT_0057a9c8);
+    FUN_003d2150(0x100026A);
 }
 
 } /* extern "C" */

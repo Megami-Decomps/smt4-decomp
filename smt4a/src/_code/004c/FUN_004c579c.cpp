@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_003ea884(unsigned int, unsigned int *, int);
 int FUN_003f0e20(unsigned int *, unsigned int);
 
@@ -20,7 +20,7 @@ extern unsigned int DAT_00571444; /* 0x571444 */
 extern unsigned int DAT_00571478; /* 0x571478 */
 extern unsigned int DAT_0057147c; /* 0x57147c */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_003ea884. */
 /* Supplied declaration required: FUN_003f0e20. */
 
@@ -32,18 +32,18 @@ void FUN_004c579c(unsigned int param_1)
   unsigned int *puVar1;
   unsigned int temp_v0;
   
-  puVar1 = (unsigned int *)FUN_0014aa78();
+  puVar1 = (unsigned int *)btlGetMainState();
   FUN_003f0e20(puVar1,param_1);
   if ((puVar1[1] & DAT_0057143c) != 0 || (*puVar1 & DAT_00571438) != 0) {
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     FUN_003ea884(temp_v0,puVar1,1);
   }
   if ((*puVar1 & DAT_00571440) != 0 || (puVar1[1] & DAT_00571444) != 0) {
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     FUN_003ea884(temp_v0,puVar1,2);
   }
   if ((DAT_0057147c & puVar1[1]) != 0 || (DAT_00571478 & *puVar1) != 0) {
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     FUN_003ea884(temp_v0,puVar1,3);
     return;
   }

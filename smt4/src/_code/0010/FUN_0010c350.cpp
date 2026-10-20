@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bda30(int, int);
-int FUN_002c415c(...);
+int asdMemFree(...);
 int nw_snd_SoundHandle_DetachSound(...);
 int nw_snd_SoundHeap_Destroy(int);
 int nw_snd_SoundHeap_LoadState(int, unsigned int);
@@ -23,7 +23,7 @@ extern unsigned char DAT_004e2636; /* 0x4e2636 */
 extern unsigned char DAT_004e2637; /* 0x4e2637 */
 
 /* Supplied declaration required: FUN_002bda30. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
 /* Supplied declaration required: nw_snd_SoundHeap_Destroy. */
 /* Supplied declaration required: nw_snd_SoundHeap_LoadState. */
@@ -50,7 +50,7 @@ void FUN_0010c350(void)
         nw_snd_SoundHeap_LoadState(temp_v0 + 0x4e2424,*(unsigned int *)(temp_v0 + 0x4e2468));
         *(unsigned int *)(temp_v0 + 0x4e2468) = 0;
         nw_snd_SoundHeap_Destroy(temp_v0 + 0x4e2424);
-        FUN_002c415c(*(unsigned int *)(temp_v0 + 0x4e2464));
+        asdMemFree(*(unsigned int *)(temp_v0 + 0x4e2464));
       }
     }
     temp_v2 = temp_v2 + 1;
@@ -67,7 +67,7 @@ void FUN_0010c350(void)
       }
       *(unsigned int *)(temp_v0 + 0x4e2590) = 0;
       nw_snd_SoundHeap_Destroy(temp_v0 + 0x4e2564);
-      FUN_002c415c();
+      asdMemFree();
     }
     do {
       temp_v2 = temp_v2 + 1;
@@ -111,7 +111,7 @@ void FUN_0010c350(void)
                   } while (temp_v3 < 4);
                   if ((&DAT_004e2637)[temp_v0] != '\0') {
                     nw_snd_SoundHeap_Destroy(temp_v5);
-                    FUN_002c415c();
+                    asdMemFree();
                     *(unsigned int *)(temp_v0 + 0x4e2630) = 0;
                     (&DAT_004e2637)[temp_v0] = 0;
                   }

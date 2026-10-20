@@ -14,7 +14,7 @@ typedef struct {
 extern unsigned char LAB_002deac8; /* 0x2deac8 */
 
 /* Supplied declaration required: FUN_00100388. */
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 
 
 unsigned int FUN_002dea9c(void)
@@ -24,7 +24,7 @@ unsigned int FUN_002dea9c(void)
   unsigned int temp_v0;
   unsigned char temp_v1 [40];
   
-  temp_v0 = FUN_00236038(0);
+  temp_v0 = scrGetArg(0);
   FUN_00100388(temp_v1,&LAB_002deac8,temp_v0);
                     /* WARNING: Treating indirect jump as return */
   return 1;

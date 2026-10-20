@@ -14,7 +14,7 @@ int FUN_002bed3c(void);
 int FUN_002bf380(int, int, int, int, int, int);
 int FUN_002bf4f8(int, int);
 int FUN_002bf538(void);
-int FUN_002c0cec(int, int);
+int dataTableGet(int, int);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -28,9 +28,9 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } void_stack;
 
-extern int DAT_0044de2c; /* 0x44de2c */
+extern int g_saveLoadUI; /* 0x44de2c */
 extern int DAT_0044de30; /* 0x44de30 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001c0b88. */
@@ -43,8 +43,8 @@ extern int DAT_0044ea00; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c0cc4(void);
-/* Supplied declaration required: FUN_002c0cec. */
+extern int dataTableGetEntries(void);
+/* Supplied declaration required: dataTableGet. */
 extern int FUN_002c30c4(int);
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
@@ -73,16 +73,16 @@ unsigned char FUN_001ed9a0(void)
   unsigned int temp_v15;
   unsigned int temp_v16;
   
-  temp_v6 = DAT_0044de2c;
-  if ((*(char *)(DAT_0044de2c + 0x378) == '\0') && (*(char *)(DAT_0044de2c + 0x354) != '\0')) {
+  temp_v6 = g_saveLoadUI;
+  if ((*(char *)(g_saveLoadUI + 0x378) == '\0') && (*(char *)(g_saveLoadUI + 0x354) != '\0')) {
     temp_v12 = 0x3f800000;
-    if (*(char *)(DAT_0044de2c + DAT_0044de30 + 0x34c) == '\0') {
+    if (*(char *)(g_saveLoadUI + DAT_0044de30 + 0x34c) == '\0') {
       FUN_0029dfc0(0);
       FUN_002996d8(0);
-      temp_v5 = DAT_0044de2c;
+      temp_v5 = g_saveLoadUI;
       if ((*(char *)(temp_v6 + 0x70) != '\0') && (*(char *)(temp_v6 + 0x71) == '\0')) {
         FUN_002bed3c();
-        temp_v4 = DAT_0044ea00;
+        temp_v4 = g_titleScene;
         temp_v3 = FUN_002c5d80(1,0);
         piVar10 = (int *)(temp_v4 + 0x124c);
         temp_v7 = *piVar10;
@@ -97,13 +97,13 @@ unsigned char FUN_001ed9a0(void)
         FUN_002bf4f8(0x36,0x56);
         temp_v4 = FUN_002bf4f8(0x36,0x59);
         temp_v10 = 0.305f;
-        FUN_002ba12c(DAT_0044ea00);
+        FUN_002ba12c(g_titleScene);
         FUN_002bf380(2,0x36,7,(int)temp_v10,0,0xf1);
         temp_v0 = *(char *)(temp_v5 + 0x49);
         temp_v1 = **(short **)(temp_v4 + 0xc);
         temp_v2 = (*(short **)(temp_v4 + 0xc))[1];
-        FUN_002c0cec(0x3d,0);
-        temp_v5 = FUN_002c0cc4();
+        dataTableGet(0x3d,0);
+        temp_v5 = dataTableGetEntries();
         temp_v5 = temp_v5 + temp_v0 * 0x54;
         temp_v3 = FUN_002c30c4(temp_v5);
         temp_v11 = (float)VectorSignedToFloat(temp_v3 * temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -112,8 +112,8 @@ unsigned char FUN_001ed9a0(void)
         VectorSignedToFloat((int)temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v4 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002be5a4(4,0xffffffff,temp_v5);
-        temp_v5 = DAT_0044ea00;
-        piVar10 = (int *)(DAT_0044ea00 + 0x124c);
+        temp_v5 = g_titleScene;
+        piVar10 = (int *)(g_titleScene + 0x124c);
         temp_v4 = *piVar10;
         temp_v3 = piVar10[temp_v4 + 2];
         *piVar10 = temp_v4 - 1;
@@ -124,7 +124,7 @@ unsigned char FUN_001ed9a0(void)
         FUN_002bf538();
       }
     }
-    temp_v5 = DAT_0044ea00;
+    temp_v5 = g_titleScene;
     if (*(char *)(temp_v6 + 0x55) != '\0') {
       temp_v9 = *(char *)(temp_v6 + 0x49) != '\0';
       temp_v0 = '\0';
@@ -149,8 +149,8 @@ unsigned char FUN_001ed9a0(void)
         temp_v15 = temp_v13;
         FUN_002ae038(&temp_v13);
         FUN_001c0b88(0,0,400,0xf0,0xf5);
-        temp_v6 = DAT_0044ea00;
-        piVar10 = (int *)(DAT_0044ea00 + 0x124c);
+        temp_v6 = g_titleScene;
+        piVar10 = (int *)(g_titleScene + 0x124c);
         temp_v5 = *piVar10;
         temp_v4 = piVar10[temp_v5 + 2];
         *piVar10 = temp_v5 - 1;

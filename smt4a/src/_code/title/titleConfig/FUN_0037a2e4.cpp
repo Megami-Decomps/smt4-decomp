@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0014e188(...);
-int FUN_0014e38c(...);
+int asdProcessCreateSimple(...);
 int FUN_001505ac(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
-int FUN_001681cc(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
+int sysPlaySe(...);
 int FUN_00184758(...);
 int FUN_00184c00(...);
 int FUN_0019de98(...);
@@ -32,7 +32,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_002a0b58; /* 0x2a0b58 */
-extern int FUN_0032b9ac(...); /* 0x32b9ac */
+extern int titleConfigDestroy(...); /* 0x32b9ac */
 extern int FUN_0032ba8c(...); /* 0x32ba8c */
 extern unsigned char LAB_0037a570; /* 0x37a570 */
 extern unsigned char LAB_0037a588; /* 0x37a588 */
@@ -44,16 +44,16 @@ extern unsigned char DAT_00588fc0; /* 0x588fc0 */
 extern unsigned char DAT_00588fc1; /* 0x588fc1 */
 extern unsigned char DAT_00588fc2; /* 0x588fc2 */
 extern unsigned char DAT_00588fc4; /* 0x588fc4 */
-extern unsigned int *DAT_00589164; /* 0x589164 */
+extern unsigned int *g_titleConfig; /* 0x589164 */
 
 extern int FUN_0014af84(void);
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_0015155c. */
+/* Supplied declaration required: taskCreateDraw. */
 extern int FUN_00162858(void);
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_00184c00. */
 /* Supplied declaration required: FUN_0019de98. */
@@ -77,12 +77,12 @@ void FUN_0037a2e4(void)
   unsigned int temp_v1;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x160,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x160,1);
   puVar2 = &LAB_0037a570;
-  DAT_00589164 = puVar1;
-  FUN_0014e38c(&LAB_0037a570,4,0,0,&LAB_002a0b58,FUN_0032b9ac,puVar1);
+  g_titleConfig = puVar1;
+  asdProcessCreateSimple(&LAB_0037a570,4,0,0,&LAB_002a0b58,titleConfigDestroy,puVar1);
   *puVar1 = (unsigned int)puVar2;
-  FUN_0015155c(&LAB_0037a588,0xea,0,0,FUN_0032ba8c,0,0,puVar2);
+  taskCreateDraw(&LAB_0037a588,0xea,0,0,FUN_0032ba8c,0,0,puVar2);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0xf);
   FUN_001505ac(puVar1 + 0xf,&DAT_00536bec,0x30,&DAT_00536c1c,0x30,0,0,0,0,0,0);
   temp_v1 = 0x3f800000;
@@ -98,7 +98,7 @@ void FUN_0037a2e4(void)
   *(unsigned short *)(puVar1 + 9) = 0;
   FUN_002804b0(&LAB_0037a5a0,puVar1 + 0x55,0);
   FUN_002804b0(&LAB_0037a5b0,puVar1 + 0x56,0);
-  FUN_001681cc(0x9b);
+  sysPlaySe(0x9b);
   FUN_0019de98(0,0xf4f4f4ff);
   temp_v0 = FUN_00162858();
   if ((temp_v0 != 0) && (temp_v0 = FUN_0014af84(), *(char *)(temp_v0 + 0x27e94) != '\0')) {

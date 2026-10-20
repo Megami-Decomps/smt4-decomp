@@ -52,7 +52,7 @@ typedef struct {
     unsigned int spE8; /* 0xe8: local_e8 */
 } param_1_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_0023b5e0. */
@@ -116,9 +116,9 @@ void FUN_0034b208(fn_0034b208_arg0 *param_1)
   unsigned int temp_v34;
   
   temp_v8 = -11.0f;
-  FUN_002c1b64(DAT_0044ea00,*(unsigned int *)((int)param_1->field_0x8 + 8));
-  temp_v4 = DAT_0044ea00;
-  piVar8 = (int *)(DAT_0044ea00 + 0x12ac);
+  FUN_002c1b64(g_titleScene,*(unsigned int *)((int)param_1->field_0x8 + 8));
+  temp_v4 = g_titleScene;
+  piVar8 = (int *)(g_titleScene + 0x12ac);
   temp_v0 = *(int *)((int)param_1->field_0x1c + 0x18);
   temp_v1 = *piVar8;
   temp_v2 = piVar8[temp_v1 + 2];
@@ -128,7 +128,7 @@ void FUN_0034b208(fn_0034b208_arg0 *param_1)
     (**(romwright_code **)(temp_v4 + 0x12c8))();
     *(unsigned char *)(temp_v4 + 0x12c4) = 0;
   }
-  temp_v4 = DAT_0044ea00;
+  temp_v4 = g_titleScene;
   temp_v0 = FUN_002c5d80(1,0);
   piVar8 = (int *)(temp_v4 + 0x124c);
   temp_v1 = *piVar8;
@@ -193,8 +193,8 @@ void FUN_0034b208(fn_0034b208_arg0 *param_1)
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < *(int *)((int)param_1->field_0x1c + 0x2c));
   }
-  temp_v4 = DAT_0044ea00;
-  piVar8 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v4 = g_titleScene;
+  piVar8 = (int *)(g_titleScene + 0x124c);
   temp_v0 = *piVar8;
   temp_v1 = piVar8[temp_v0 + 2];
   *piVar8 = temp_v0 - 1;
@@ -202,8 +202,8 @@ void FUN_0034b208(fn_0034b208_arg0 *param_1)
     (**(romwright_code **)(temp_v4 + 0x1268))();
     *(unsigned char *)(temp_v4 + 0x1264) = 0;
   }
-  temp_v4 = DAT_0044ea00;
-  piVar8 = (int *)(DAT_0044ea00 + 0x12ac);
+  temp_v4 = g_titleScene;
+  piVar8 = (int *)(g_titleScene + 0x12ac);
   temp_v0 = *piVar8;
   temp_v1 = piVar8[temp_v0 + 2];
   *piVar8 = temp_v0 - 1;

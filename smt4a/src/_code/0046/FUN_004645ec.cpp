@@ -71,7 +71,7 @@ typedef struct {
 extern int *DAT_005c1d30; /* 0x5c1d30 */
 
 /* Supplied declaration required: FUN_004638ac. */
-extern unsigned int aeabi_uidivmod(unsigned int, unsigned int);
+extern unsigned int __aeabi_uidivmod(unsigned int, unsigned int);
 
 
 unsigned int
@@ -139,7 +139,7 @@ FUN_004645ec(fn_004645ec_arg0 *param_1,fn_004645ec_arg1 *param_2,unsigned int *p
       param_2->field_0x1c = 0;
       return 1;
     }
-    temp_v2 = aeabi_uidivmod(param_1->field_0x58,*(unsigned int *)((int)param_1->field_0x18 + 0x1c));
+    temp_v2 = __aeabi_uidivmod(param_1->field_0x58,*(unsigned int *)((int)param_1->field_0x18 + 0x1c));
     param_1->field_0x38 = temp_v2;
     (**(romwright_code **)(*(int *)param_1->field_0x14 + 0x40))(param_1->field_0x14,0);
     temp_v0 = 0;
@@ -212,7 +212,7 @@ FUN_004645ec(fn_004645ec_arg0 *param_1,fn_004645ec_arg1 *param_2,unsigned int *p
   if ((unsigned int)param_1->field_0x3c < temp_v5) {
     if (param_1->field_0x27 != 0) {
       param_1->field_0x58 = 0;
-      temp_v2 = aeabi_uidivmod(0,*(unsigned int *)((int)param_1->field_0x18 + 0x1c));
+      temp_v2 = __aeabi_uidivmod(0,*(unsigned int *)((int)param_1->field_0x18 + 0x1c));
       param_1->field_0x38 = temp_v2;
       (**(romwright_code **)(*(int *)param_1->field_0x14 + 0x40))(param_1->field_0x14,0);
       temp_v2 = (unsigned int)temp_v7;

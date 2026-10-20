@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001654d8(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(...);
 
 /* stack frame of param_6: 5 slot(s), 20 byte(s) */
@@ -21,7 +21,7 @@ extern unsigned char DAT_0057f588; /* 0x57f588 */
 
 /* Supplied declaration required: FUN_001654d8. */
 extern unsigned int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001835b4. */
 
 
@@ -62,7 +62,7 @@ void FUN_00151aa4(unsigned int param_1,unsigned int param_2,unsigned int param_3
   FUN_001835b4(2,4,param_2,temp_v1,temp_v2,0xf1);
   FUN_001835b4(2,4,param_4,temp_v4,temp_v3,0xf1);
   FUN_001835b4(2,4,param_5,temp_v4,temp_v3,0xf1);
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

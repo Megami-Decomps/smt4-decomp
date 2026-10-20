@@ -5,7 +5,7 @@
 extern "C" {
 
 extern unsigned char DAT_0055937c; /* 0x55937c */
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 
 extern int FUN_002e760a(unsigned int);
 extern int FUN_002e9520(unsigned int *);
@@ -32,7 +32,7 @@ int FUN_001104e8(unsigned int *param_1)
     temp_v2 = FUN_002fb252();
   }
   *(unsigned int *)(temp_v0 + 8) = temp_v2;
-  *(unsigned int *)(temp_v0 + 0x10) = (*(unsigned int *)((unsigned char *)&DAT_00594958 + 0x64));
+  *(unsigned int *)(temp_v0 + 0x10) = (*(unsigned int *)((unsigned char *)&g_flagBlock + 0x64));
   return temp_v0 - 4;
 }
 

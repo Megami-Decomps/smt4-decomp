@@ -20,7 +20,7 @@ int FUN_005147dc(void);
 int FUN_00514904(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
-int aeabi_uidivmod(void);
+int __aeabi_uidivmod(void);
 
 /* stack frame of param_1: 7 slot(s), 25 byte(s) */
 typedef struct {
@@ -75,7 +75,7 @@ extern int FUN_0037a844(void);
 /* Supplied declaration required: FUN_005145f4. */
 /* Supplied declaration required: FUN_005147dc. */
 /* Supplied declaration required: FUN_00514904. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_00361418(int param_1)
@@ -312,7 +312,7 @@ void FUN_00361418(int param_1)
             pfVar8[4] = 0.0f;
             if (temp_v26[0] != '\0') {
               FUN_00514500(0);
-              aeabi_uidivmod();
+              __aeabi_uidivmod();
               temp_v14 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
               pfVar7[9] = pfVar7[9] - temp_v3 * temp_v14 * temp_v14 * (float)temp_v22;
               temp_v10 = pfVar7[5] + pfVar7[6] * temp_v14;

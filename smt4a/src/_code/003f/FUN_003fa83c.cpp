@@ -16,8 +16,8 @@ int FUN_00432998(void);
 int FUN_00441f84(void);
 int FUN_00442630(void);
 int FUN_00442a94(void);
-int FUN_004d92f4(void);
-int FUN_004d9c00(void);
+int nexUtilInit(void);
+int nexUtilShutdown(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -45,8 +45,8 @@ extern unsigned int *FUN_003fa580(unsigned int *);
 /* Supplied declaration required: FUN_00441f84. */
 /* Supplied declaration required: FUN_00442630. */
 /* Supplied declaration required: FUN_00442a94. */
-/* Supplied declaration required: FUN_004d92f4. */
-/* Supplied declaration required: FUN_004d9c00. */
+/* Supplied declaration required: nexUtilInit. */
+/* Supplied declaration required: nexUtilShutdown. */
 
 
 unsigned int * FUN_003fa83c(unsigned int *param_1)
@@ -90,7 +90,7 @@ unsigned int * FUN_003fa83c(unsigned int *param_1)
     temp_v0 = 3;
     break;
   case 3:
-    FUN_004d92f4();
+    nexUtilInit();
     temp_v0 = 4;
     break;
   case 4:
@@ -169,7 +169,7 @@ unsigned int * FUN_003fa83c(unsigned int *param_1)
     temp_v0 = 0xc;
     break;
   case 0xc:
-    FUN_004d9c00();
+    nexUtilShutdown();
     temp_v0 = 0xd;
     break;
   case 0xd:

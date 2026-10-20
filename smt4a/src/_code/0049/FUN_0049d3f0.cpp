@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0013f1b8(int, int);
+int asdTMTexTableLoadTmx(int, int);
 int FUN_0014e188(...);
 int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int FUN_001527d8(unsigned int, unsigned int);
 int FUN_001846d0(...);
 int FUN_001acf98(int, int);
 int FUN_002804b0(...);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 int FUN_0049dd74(int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
 
@@ -30,15 +30,15 @@ extern unsigned char DAT_0052cd2c; /* 0x52cd2c */
 extern unsigned char DAT_0052cd50; /* 0x52cd50 */
 extern unsigned char DAT_0052cd98; /* 0x52cd98 */
 
-/* Supplied declaration required: FUN_0013f1b8. */
-extern unsigned int FUN_0014bce0(unsigned int);
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
+extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001505ac. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0049dd74. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
@@ -54,11 +54,11 @@ void FUN_0049d3f0(int param_1)
   *(unsigned int *)(param_1 + 0xc) = 0;
   *(unsigned int *)(param_1 + 0x10) = 0;
   *(unsigned int *)(param_1 + 0x14) = 0;
-  FUN_002e6354(param_1 + 0x18,0xd0);
+  sysMemClear(param_1 + 0x18,0xd0);
   temp_v1 = 0;
   *(unsigned int *)(param_1 + 0x80) = 0;
   do {
-    temp_v0 = FUN_0014bce0(0);
+    temp_v0 = spriteHandleCreate(0);
     *(unsigned int *)(param_1 + temp_v1 * 4 + 0x88) = temp_v0;
     FUN_001527d8(temp_v0,0xffffffff);
     temp_v1 = temp_v1 + 1;
@@ -66,7 +66,7 @@ void FUN_0049d3f0(int param_1)
   FUN_0049dd74(param_1);
   FUN_002804b0("event/HowTo/HowTo.mbm",param_1 + 8,0);
   FUN_002804b0("event/HowTo/HowToHelp.mbm",param_1 + 0xc,0);
-  FUN_0013f1b8(0x33,0);
+  asdTMTexTableLoadTmx(0x33,0);
   FUN_001acf98(0x33,0);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x21c);
   FUN_001505ac(param_1 + 0x21c,&DAT_0052cd2c,0x24,&DAT_0052cd50,0x48,0,0,0,0,&DAT_0052cd98,0x150);

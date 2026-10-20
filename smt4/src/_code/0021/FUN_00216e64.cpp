@@ -16,7 +16,7 @@ int FUN_00215b40(int);
 int FUN_0026a978(...);
 int FUN_0028bf2c(void);
 int FUN_002954bc(...);
-int FUN_002954dc(...);
+int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
 int FUN_00295660(int, unsigned char [32]);
 int FUN_00296f4c(...);
@@ -27,7 +27,7 @@ int FUN_0029c424(...);
 int FUN_0029c6b0(...);
 int FUN_0029ca58(void);
 int FUN_0029d8f4(int, int);
-int FUN_002a7218(unsigned int);
+int scrScriptProcessDestroy(unsigned int);
 int FUN_002b63ac(void);
 int FUN_002b7bca(int, int, int, unsigned char *);
 int FUN_002b9024(...);
@@ -35,7 +35,7 @@ int FUN_002bd06c(unsigned int);
 int FUN_002be624(...);
 int FUN_002bf694(unsigned char [32], unsigned int);
 int FUN_002bf818(int);
-int FUN_002c415c(unsigned int);
+int asdMemFree(unsigned int);
 int FUN_0033bb94(int, unsigned int);
 
 /* stack frame of param_1: 10 slot(s), 38 byte(s) */
@@ -64,7 +64,7 @@ extern int FUN_0026a9cc(unsigned short, unsigned char, int, short *, unsigned ch
 /* Supplied declaration required: FUN_0028bf2c. */
 /* Supplied declaration required: FUN_0029541c. */
 /* Supplied declaration required: FUN_002954bc. */
-/* Supplied declaration required: FUN_002954dc. */
+/* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
 extern int FUN_002955fc(void);
 extern int FUN_00295618(void);
@@ -82,7 +82,7 @@ extern int FUN_0029c8f4(int);
 /* Supplied declaration required: FUN_0029d8f4. */
 extern int FUN_0029ea68(void);
 extern int FUN_002a0ce8(void);
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 extern int FUN_002a8740(int);
 /* Supplied declaration required: FUN_002b63ac. */
 /* Supplied declaration required: FUN_002b7bca. */
@@ -95,10 +95,10 @@ extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bf818. */
-extern unsigned int FUN_002c0c74(unsigned int);
-extern unsigned int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+/* Supplied declaration required: asdMemFree. */
 extern unsigned int FUN_002c5c04(unsigned char *);
 /* Supplied declaration required: FUN_0033bb94. */
 extern unsigned int FUN_0033c0c0(int);
@@ -149,7 +149,7 @@ void FUN_00216e64(int param_1)
     }
     FUN_002bf818(temp_v14);
     if (*piVar17 == 0x10) {
-      FUN_002954dc(0);
+      btlTalkBustUpSetUnk2F4(0);
       FUN_0028bf2c();
       *(unsigned char *)(temp_v11 + 0x3c70) = 0;
       *(unsigned char *)(temp_v11 + 0x3c71) = 0;
@@ -183,7 +183,7 @@ void FUN_00216e64(int param_1)
       }
       *(unsigned char *)(param_1 + 0xd044) = temp_v0;
       FUN_002954f4(*(unsigned short *)(temp_v2 + 0x46),0);
-      FUN_002954dc(1);
+      btlTalkBustUpSetUnk2F4(1);
       FUN_0029d8f4(temp_v2,0);
       FUN_001ce0fc(temp_v2 + 0x34);
       FUN_00215b40((int)*(short *)(temp_v2 + 0x46));
@@ -249,14 +249,14 @@ void FUN_00216e64(int param_1)
       temp_v4 = FUN_002bce30(*(unsigned short *)(temp_v2 + 0x46),1);
       FUN_002bf694(temp_v16,temp_v4);
       FUN_00295660(0x10,temp_v16);
-      FUN_002a7218(*puVar16);
-      FUN_002c415c(*(unsigned int *)(param_1 + 0x3578));
+      scrScriptProcessDestroy(*puVar16);
+      asdMemFree(*(unsigned int *)(param_1 + 0x3578));
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);
       FUN_002b9024();
       temp_v1 = *(char *)(temp_v6 + 0x30);
-      temp_v4 = FUN_002c0cec(0x25,0);
-      pcVar15 = (char *)FUN_002c0cc4();
-      temp_v6 = FUN_002c0c74(temp_v4);
+      temp_v4 = dataTableGet(0x25,0);
+      pcVar15 = (char *)dataTableGetEntries();
+      temp_v6 = dataTableGetCount(temp_v4);
       temp_v7 = 0;
       if (temp_v7 < temp_v6) {
         do {
@@ -321,7 +321,7 @@ LAB_002174ac:
         temp_v3 = FUN_002955fc();
         if (temp_v3 == 0) {
           FUN_002954f4(*(unsigned short *)(temp_v2 + 0x46),1);
-          FUN_002954dc(1);
+          btlTalkBustUpSetUnk2F4(1);
         }
         temp_v2 = *(int *)(temp_v11 + 0x3c6c);
         if (temp_v2 == 0) {

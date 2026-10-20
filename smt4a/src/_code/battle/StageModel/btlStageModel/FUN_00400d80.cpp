@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_00178b04(...);
 int FUN_001cd3ec(void);
 int FUN_0040ae70(int, int);
@@ -43,10 +43,10 @@ extern unsigned int DAT_005710d8; /* 0x5710d8 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00178b04. */
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 extern unsigned int FUN_001a6f60(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001cd3ec. */
 extern int FUN_00240c34(unsigned int *);
@@ -93,8 +93,8 @@ void FUN_00400d80(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   *(unsigned int *)(param_1 + 8) = param_2;
   *(unsigned int *)(param_1 + 0xc) = param_3;
   temp_v0 = FUN_001a6f60(DAT_005710d8,0);
-  temp_v1 = FUN_00192798();
-  temp_v2 = FUN_00192748(temp_v0);
+  temp_v1 = dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v0);
   if (temp_v2 != 0) {
     param_4 = *(unsigned int *)(param_1 + 8);
   }
@@ -135,7 +135,7 @@ void FUN_00400d80(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v23 = 0;
   temp_v24 = 0;
   temp_v25 = 0;
-  FUN_0014aa78();
+  btlGetMainState();
   temp_v1 = DAT_0056fcc0;
   FUN_00100388(&temp_v10,&LAB_004010f0,&LAB_004010dc,param_2,param_3);
   temp_v4 = FUN_00240c34((unsigned int *)&temp_v10);
@@ -171,8 +171,8 @@ void FUN_00400d80(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   *(unsigned int *)(param_1 + 0x1c) = temp_v0;
   FUN_001cd3ec();
   temp_v0 = FUN_001a6f60(DAT_005710d8,0);
-  temp_v1 = FUN_00192798();
-  temp_v3 = FUN_00192748(temp_v0);
+  temp_v1 = dataTableGetEntries();
+  temp_v3 = dataTableGetCount(temp_v0);
   if (temp_v3 != 0) {
     temp_v2 = *(unsigned int *)(param_1 + 8);
   }

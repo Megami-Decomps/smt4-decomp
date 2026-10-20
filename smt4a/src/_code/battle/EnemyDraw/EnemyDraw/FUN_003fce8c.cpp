@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00163060(...);
-int FUN_0019d4d8(...);
+int asdMemoryAllocTracked(...);
+int asdMemoryAllocAligned(...);
 int FUN_002f5020(unsigned char *, int, int, int);
 int FUN_0042c8f8(...);
 int nn_gr_CTR_Shader_SearchBindSymbol(...);
@@ -17,8 +17,8 @@ typedef struct {
 
 extern unsigned char DAT_005cc554; /* 0x5cc554 */
 
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_0019d4d8. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_0042c8f8. */
 extern int func_0x004ff3c0(int, int, unsigned int);
@@ -69,13 +69,13 @@ void FUN_003fce8c(int param_1,int param_2)
     if (param_2 != 0) {
       temp_v0 = 0x100;
       temp_v8 = 1;
-      FUN_00163060(0x100,0x100,0,0x14);
+      asdMemoryAllocTracked(0x100,0x100,0,0x14);
       *(int *)(param_1 + 0x44) = temp_v0;
     }
     else {
       temp_v0 = 0x10000;
       temp_v8 = 1;
-      FUN_00163060(0x10000,0x100,0,0x14);
+      asdMemoryAllocTracked(0x10000,0x100,0,0x14);
       *(int *)(param_1 + 0x44) = temp_v0;
     }
     uStack_38 = 0;
@@ -129,24 +129,24 @@ void FUN_003fce8c(int param_1,int param_2)
     *(unsigned int *)(temp_v0 + 0x10) = temp_v1;
     if (param_2 != 0) {
       temp_v1 = 0x100;
-      FUN_00163060(0x100,0x100,0,*(int *)(temp_v0 + 0x10) << 2,1);
+      asdMemoryAllocTracked(0x100,0x100,0,*(int *)(temp_v0 + 0x10) << 2,1);
       *(unsigned int *)(temp_v0 + 8) = temp_v1;
       temp_v1 = 0x100;
-      FUN_00163060(0x100,0x100,0,*(int *)(temp_v0 + 0x10) << 2,1);
+      asdMemoryAllocTracked(0x100,0x100,0,*(int *)(temp_v0 + 0x10) << 2,1);
       *(unsigned int *)(temp_v0 + 4) = temp_v1;
       temp_v1 = 0x100;
-      FUN_00163060(0x100,0x100,0,*(int *)(temp_v0 + 0x10) << 2,1);
+      asdMemoryAllocTracked(0x100,0x100,0,*(int *)(temp_v0 + 0x10) << 2,1);
       *(unsigned int *)(temp_v0 + 0xc) = temp_v1;
     }
     else {
       temp_v1 = 0x10000;
-      FUN_00163060(0x10000,0x100,0,*(int *)(temp_v0 + 0x10) << 2,1);
+      asdMemoryAllocTracked(0x10000,0x100,0,*(int *)(temp_v0 + 0x10) << 2,1);
       *(unsigned int *)(temp_v0 + 8) = temp_v1;
       temp_v1 = 0x10000;
-      FUN_00163060(0x10000,0x100,0,*(int *)(temp_v0 + 0x10) << 2,1);
+      asdMemoryAllocTracked(0x10000,0x100,0,*(int *)(temp_v0 + 0x10) << 2,1);
       *(unsigned int *)(temp_v0 + 4) = temp_v1;
       temp_v1 = 0x10000;
-      FUN_00163060(0x10000,0x100,0,*(int *)(temp_v0 + 0x10) << 2,1);
+      asdMemoryAllocTracked(0x10000,0x100,0,*(int *)(temp_v0 + 0x10) << 2,1);
       *(unsigned int *)(temp_v0 + 0xc) = temp_v1;
     }
     temp_v5 = 0;
@@ -165,26 +165,26 @@ void FUN_003fce8c(int param_1,int param_2)
         if (temp_v6 != 0) {
           if (param_2 != 0) {
             temp_v2 = 0x100;
-            FUN_00163060(0x100,0x100,0,0x7ac,1);
+            asdMemoryAllocTracked(0x100,0x100,0,0x7ac,1);
             *(int *)(*(int *)(temp_v0 + 8) + temp_v5 * 4) = temp_v2;
             *(int *)(temp_v2 + 4) = temp_v6;
             temp_v1 = 0x10000;
-            FUN_0019d4d8(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0x90,0x80,1);
+            asdMemoryAllocAligned(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0x90,0x80,1);
             *(unsigned int *)(temp_v2 + 8) = temp_v1;
             temp_v1 = 0x10000;
-            FUN_0019d4d8(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0xc,0x80,1);
+            asdMemoryAllocAligned(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0xc,0x80,1);
             *(unsigned int *)(temp_v2 + 0xc) = temp_v1;
           }
           else {
             temp_v2 = 0x10000;
-            FUN_00163060(0x10000,0x100,0,0x7ac,1);
+            asdMemoryAllocTracked(0x10000,0x100,0,0x7ac,1);
             *(int *)(*(int *)(temp_v0 + 8) + temp_v5 * 4) = temp_v2;
             *(int *)(temp_v2 + 4) = temp_v6;
             temp_v1 = 0x10000;
-            FUN_0019d4d8(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0x90,0x80,1);
+            asdMemoryAllocAligned(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0x90,0x80,1);
             *(unsigned int *)(temp_v2 + 8) = temp_v1;
             temp_v1 = 0x10000;
-            FUN_0019d4d8(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0xc,0x80,1);
+            asdMemoryAllocAligned(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0xc,0x80,1);
             *(unsigned int *)(temp_v2 + 0xc) = temp_v1;
           }
           FUN_0042c8f8(*(unsigned int *)(*(int *)(temp_v0 + 8) + temp_v5 * 4),temp_v7,iStack_2c,temp_v5,5
@@ -194,26 +194,26 @@ void FUN_003fce8c(int param_1,int param_2)
         if (temp_v6 != 0) {
           if (param_2 != 0) {
             temp_v2 = 0x100;
-            FUN_00163060(0x100,0x100,0,0x7ac,1);
+            asdMemoryAllocTracked(0x100,0x100,0,0x7ac,1);
             *(int *)(*(int *)(temp_v0 + 4) + temp_v5 * 4) = temp_v2;
             *(int *)(temp_v2 + 4) = temp_v6;
             temp_v1 = 0x10000;
-            FUN_0019d4d8(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0x90,0x80,1);
+            asdMemoryAllocAligned(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0x90,0x80,1);
             *(unsigned int *)(temp_v2 + 8) = temp_v1;
             temp_v1 = 0x10000;
-            FUN_0019d4d8(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0xc,0x80,1);
+            asdMemoryAllocAligned(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0xc,0x80,1);
             *(unsigned int *)(temp_v2 + 0xc) = temp_v1;
           }
           else {
             temp_v2 = 0x10000;
-            FUN_00163060(0x10000,0x100,0,0x7ac,1);
+            asdMemoryAllocTracked(0x10000,0x100,0,0x7ac,1);
             *(int *)(*(int *)(temp_v0 + 4) + temp_v5 * 4) = temp_v2;
             *(int *)(temp_v2 + 4) = temp_v6;
             temp_v1 = 0x10000;
-            FUN_0019d4d8(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0x90,0x80,1);
+            asdMemoryAllocAligned(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0x90,0x80,1);
             *(unsigned int *)(temp_v2 + 8) = temp_v1;
             temp_v1 = 0x10000;
-            FUN_0019d4d8(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0xc,0x80,1);
+            asdMemoryAllocAligned(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0xc,0x80,1);
             *(unsigned int *)(temp_v2 + 0xc) = temp_v1;
           }
           FUN_0042c8f8(*(unsigned int *)(*(int *)(temp_v0 + 4) + temp_v5 * 4),temp_v7,iStack_2c,temp_v5,4
@@ -223,26 +223,26 @@ void FUN_003fce8c(int param_1,int param_2)
         if (temp_v6 != 0) {
           if (param_2 != 0) {
             temp_v2 = 0x100;
-            FUN_00163060(0x100,0x100,0,0x7ac,1);
+            asdMemoryAllocTracked(0x100,0x100,0,0x7ac,1);
             *(int *)(*(int *)(temp_v0 + 0xc) + temp_v5 * 4) = temp_v2;
             *(int *)(temp_v2 + 4) = temp_v6;
             temp_v1 = 0x10000;
-            FUN_0019d4d8(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0x90,0x80,1);
+            asdMemoryAllocAligned(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0x90,0x80,1);
             *(unsigned int *)(temp_v2 + 8) = temp_v1;
             temp_v1 = 0x10000;
-            FUN_0019d4d8(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0xc,0x80,1);
+            asdMemoryAllocAligned(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0xc,0x80,1);
             *(unsigned int *)(temp_v2 + 0xc) = temp_v1;
           }
           else {
             temp_v2 = 0x10000;
-            FUN_00163060(0x10000,0x100,0,0x7ac,1);
+            asdMemoryAllocTracked(0x10000,0x100,0,0x7ac,1);
             *(int *)(*(int *)(temp_v0 + 0xc) + temp_v5 * 4) = temp_v2;
             *(int *)(temp_v2 + 4) = temp_v6;
             temp_v1 = 0x10000;
-            FUN_0019d4d8(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0x90,0x80,1);
+            asdMemoryAllocAligned(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0x90,0x80,1);
             *(unsigned int *)(temp_v2 + 8) = temp_v1;
             temp_v1 = 0x10000;
-            FUN_0019d4d8(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0xc,0x80,1);
+            asdMemoryAllocAligned(0x10000,0x100,0,*(int *)(temp_v2 + 4) * 0xc,0x80,1);
             *(unsigned int *)(temp_v2 + 0xc) = temp_v1;
           }
           FUN_0042c8f8(*(unsigned int *)(*(int *)(temp_v0 + 0xc) + temp_v5 * 4),temp_v7,iStack_2c,temp_v5

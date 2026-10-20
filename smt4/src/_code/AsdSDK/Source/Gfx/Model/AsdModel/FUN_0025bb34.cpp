@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002aa568(unsigned char *, unsigned int);
 
-extern unsigned char DAT_004d9880; /* 0x4d9880 */
+extern unsigned char g_asdModelBanks; /* 0x4d9880 */
 extern unsigned char DAT_004d9d88; /* 0x4d9d88 */
 
 /* Supplied declaration required: FUN_002aa568. */
@@ -54,7 +54,7 @@ int FUN_0025bb34(int param_1,unsigned int param_2,int param_3)
       }
     }
     else {
-      puVar1 = &DAT_004d9880 + temp_v0 * 0x4c + param_3 * 0x284;
+      puVar1 = &g_asdModelBanks + temp_v0 * 0x4c + param_3 * 0x284;
       puVar1 = puVar1 + 4;
       if ((temp_v1 == 0) && (FUN_002aa568(puVar1,param_2), puVar1 == (unsigned char *)0x0)) {
         return temp_v0;

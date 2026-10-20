@@ -8,10 +8,10 @@ int FUN_00249a08(void);
 int FUN_00249ac4(unsigned int, unsigned int);
 int FUN_002b9520(void);
 
-extern unsigned int DAT_005f15fc; /* 0x5f15fc */
+extern unsigned int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 
-extern int FUN_00236038(void);
+extern int scrGetArg(void);
 /* Supplied declaration required: FUN_00249a08. */
 /* Supplied declaration required: FUN_00249ac4. */
 extern int FUN_002b950c(void);
@@ -24,7 +24,7 @@ unsigned int FUN_0038af08(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_00236038();
+  temp_v0 = scrGetArg();
   if (temp_v0 != 0) {
     FUN_00249a08();
   }
@@ -34,7 +34,7 @@ unsigned int FUN_0038af08(void)
       FUN_002b9520();
     }
     else {
-      FUN_00249ac4(DAT_005f15fc,DAT_005f1600);
+      FUN_00249ac4(g_gameState,DAT_005f1600);
     }
   }
   return 1;

@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern unsigned int FUN_0014aa78(void);
+extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004c39b0. */
@@ -32,7 +32,7 @@ unsigned int FUN_004c5848(unsigned int param_1)
   int temp_v2;
   unsigned short temp_v3 [10];
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   FUN_003f0e20(temp_v0,param_1);
   temp_v3[0] = 0;
   temp_v3[1] = 0;

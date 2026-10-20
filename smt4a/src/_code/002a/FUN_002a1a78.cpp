@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp4; /* 0x4: local_4 */
 } param_1_stack;
 
-extern int DAT_00640118; /* 0x640118 */
+extern int g_asdProcess; /* 0x640118 */
 
 
 unsigned char FUN_002a1a78(unsigned int param_1)
@@ -18,7 +18,7 @@ unsigned char FUN_002a1a78(unsigned int param_1)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = *(int *)(DAT_00640118 + (param_1 >> 0x14) * 8);
+  temp_v0 = *(int *)(g_asdProcess + (param_1 >> 0x14) * 8);
   temp_v1 = temp_v0;
   while( 1 ) {
     if (temp_v1 == 0) {

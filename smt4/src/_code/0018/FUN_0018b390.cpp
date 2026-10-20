@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00297488(int);
+int scrPopFloat(int);
 
-/* Supplied declaration required: FUN_00297488. */
+/* Supplied declaration required: scrPopFloat. */
 extern int FUN_00297514(int);
 
 
@@ -29,7 +29,7 @@ unsigned int FUN_0018b390(int param_1)
     break;
   case 1:
   case 3:
-    FUN_00297488(param_1);
+    scrPopFloat(param_1);
     if (in_s0 != 0.0f) {
       temp_v0 = *(int *)(param_1 + 0x18) + 1;
       *(int *)(param_1 + 0x18) = temp_v0;

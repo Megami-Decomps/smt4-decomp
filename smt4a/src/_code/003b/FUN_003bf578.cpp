@@ -1,29 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bf578` (_code @ 0x3bf578, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Returns 1 if the object's sub-state is active and FUN_0018719c accepts its handle, else 0. */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0018719c(unsigned int);
+typedef struct SubState {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[0x23];
+    /* 0x24 */ u32 handle;
+} SubState;
 
+typedef struct Object {
+    /* 0x000 */ u8 unk000[0x9B4];
+    /* 0x9B4 */ SubState sub;
+} Object;
 
-unsigned int FUN_003bf578(int *param_1)
+extern s32 FUN_0018719c(u32 handle);
 
+u32 FUN_003bf578(Object **object)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  if (*(char *)(*param_1 + 0x9b4) == '\0') {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v1 = FUN_0018719c(*(unsigned int *)(*param_1 + 0x9d8));
-    temp_v0 = 0;
-    if (temp_v1 != 0) {
-      temp_v0 = 1;
+    SubState *sub = &(*object)->sub;
+    if (sub->active == 0) {
+        return 0;
     }
-  }
-  return temp_v0;
+    return FUN_0018719c(sub->handle) != 0;
 }
 
-} /* extern "C" */
+}

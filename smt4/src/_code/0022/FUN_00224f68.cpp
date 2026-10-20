@@ -12,7 +12,7 @@ int VectorSignedToFloat(int, int);
 
 extern unsigned char LAB_0019d734; /* 0x19d734 */
 extern float DAT_00435e20; /* 0x435e20 */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b7bca. */
@@ -41,11 +41,11 @@ void FUN_00224f68(int param_1,int param_2)
   char acStack_68 [68];
   
   pcVar3 = acStack_68;
-  FUN_002c39a4(DAT_0044ea00);
+  FUN_002c39a4(g_titleScene);
   temp_v5 = 0;
   if (param_2 != 0) {
     temp_v6 = DAT_00435e20;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v5 = (int)temp_v6;
   }
   temp_v1 = '\0';

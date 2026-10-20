@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_00275f44(unsigned int);
 int FUN_004d7ca8(unsigned int *, int);
 int FUN_004f741c(int);
@@ -20,7 +20,7 @@ extern int DAT_00573808; /* 0x573808 */
 extern unsigned int DAT_005738b8; /* 0x5738b8 */
 extern unsigned int DAT_005738bc; /* 0x5738bc */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00275f44. */
 /* Supplied declaration required: FUN_004d7ca8. */
 /* Supplied declaration required: FUN_004f741c. */
@@ -79,13 +79,13 @@ LAB_004d7eec:
   puVar4 = (unsigned int *)(param_2 + 0x45a0);
   param_1[10] = 0;
   if ((*puVar4 & DAT_005738b8) != 0 || (*(unsigned int *)(param_2 + 0x45a4) & DAT_005738bc) != 0) {
-    FUN_001681cc(0xdf);
+    sysPlaySe(0xdf);
   }
   if (param_1[9] == 5) {
     temp_v2 = *(unsigned int *)(param_2 + 0x45a4) | DAT_005738bc;
     *puVar4 = DAT_005738b8 | *puVar4;
     *(unsigned int *)(param_2 + 0x45a4) = temp_v2;
-    FUN_001681cc(0xdf);
+    sysPlaySe(0xdf);
   }
   FUN_004d7ca8(param_1,param_2);
   return;

@@ -11,7 +11,7 @@ int FUN_0019a270(unsigned int *, int, int);
 int FUN_0019a2ac(unsigned int *, int, int);
 int FUN_0019eafc(void);
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_001575cc. */
 extern unsigned int *FUN_001696f4(void);
@@ -37,7 +37,7 @@ unsigned int FUN_00157e98(int param_1,int param_2)
   temp_v1 = 0;
   puVar1 = (unsigned int *)FUN_001696f4();
   if (puVar1 == (unsigned int *)0x1) {
-    puVar1 = *(unsigned int **)(DAT_0059dbb4 + 0x52c);
+    puVar1 = *(unsigned int **)(g_renderCtx + 0x52c);
     if (puVar1 == (unsigned int *)0x0) {
       temp_v0 = param_2 + 0x248;
       temp_v1 = param_2 + 0x1d8;
@@ -65,7 +65,7 @@ unsigned int FUN_00157e98(int param_1,int param_2)
   FUN_001960f0(puVar1,puVar1 + 0x24);
   FUN_0017cdcc(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x9c) * 0x4c + 0x48),
                *(unsigned int *)(param_1 + 0xa0));
-  FUN_001575cc(DAT_0059dbb4);
+  FUN_001575cc(g_renderCtx);
   return 1;
 }
 

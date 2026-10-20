@@ -73,7 +73,7 @@ extern int FUN_0037ab50(int, int *, unsigned int *);
 /* Supplied declaration required: FUN_0037aeb0. */
 /* Supplied declaration required: FUN_0037bd50. */
 /* Supplied declaration required: FUN_0037be24. */
-extern int FUN_003e60c4(unsigned int, unsigned int);
+extern int vcallSlot5(unsigned int, unsigned int);
 extern int FUN_003e6a28(int *, int, int *);
 /* Supplied declaration required: nw_snd_internal_BasicSound_SetInitialVolume. */
 extern int nw_snd_internal_driver_MmlParser_ParseAllocTrack(unsigned int, int, unsigned int *);
@@ -130,7 +130,7 @@ FUN_00378698(int param_1,int param_2,unsigned int *param_3,unsigned int *param_4
   temp_v33 = param_2;
   puStack_2c = param_3;
   puStack_28 = param_4;
-  temp_v0 = FUN_003e60c4(*(unsigned int *)(param_1 + 0xbc),*param_3);
+  temp_v0 = vcallSlot5(*(unsigned int *)(param_1 + 0xbc),*param_3);
   temp_v8[8] = *param_4;
   temp_v9 = param_4[5];
   if (param_7 != (int *)0x0) {
@@ -175,7 +175,7 @@ FUN_00378698(int param_1,int param_2,unsigned int *param_3,unsigned int *param_4
     temp_v21 = 0xffffffff;
     temp_v2 = FUN_0014d3cc(*(unsigned int *)(param_1 + 4),temp_v8[temp_v6 * 2],(unsigned int *)&temp_v21);
     if (temp_v2 != 0) {
-      temp_v2 = FUN_003e60c4(*(unsigned int *)(param_1 + 0xbc),temp_v21);
+      temp_v2 = vcallSlot5(*(unsigned int *)(param_1 + 0xbc),temp_v21);
       temp_v8[temp_v6 * 2 + 1] = temp_v2;
       if (temp_v2 == 0) {
         if (temp_v1 == 0) {

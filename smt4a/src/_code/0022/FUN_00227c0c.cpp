@@ -5,7 +5,7 @@ extern "C" {
 int FUN_00333784(unsigned int, unsigned int);
 int FUN_00371b74(void);
 
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 extern int FUN_00268690(void);
 extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_00333784. */
@@ -28,8 +28,8 @@ unsigned char FUN_00227c0c(void)
     }
     return temp_v0 != 0;
   }
-  temp_v1 = FUN_00236038(0);
-  temp_v2 = FUN_00236038(1);
+  temp_v1 = scrGetArg(0);
+  temp_v2 = scrGetArg(1);
   FUN_00333784(temp_v1,temp_v2);
   return 0;
 }

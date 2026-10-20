@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(...);
 int FUN_0018a924(...);
-int FUN_0019a0e8(...);
+int mtx44Copy(...);
 int FUN_0019a0fc(...);
 int FUN_001d3e14(...);
 int FUN_001d3e54(...);
@@ -136,7 +136,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Supplied declaration required: FUN_0018a924. */
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 extern int FUN_001acf08(void);
 /* Supplied declaration required: FUN_001d3e14. */
@@ -428,7 +428,7 @@ void FUN_003516c0(int param_1)
     DAT_0064c0b8 = DAT_0064c088;
     DAT_0064c0bc = DAT_0064c088;
   }
-  FUN_0019a0e8(temp_v27,&DAT_0064c084);
+  mtx44Copy(temp_v27,&DAT_0064c084);
   temp_v86 = temp_v10 * (float)temp_v23;
   temp_v88 = temp_v10 * (float)((unsigned long long)temp_v23 >> 0x20);
   temp_v87 = temp_v10;

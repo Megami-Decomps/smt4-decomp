@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_7_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002598f0. */
 /* Supplied declaration required: FUN_00296ae8. */
@@ -52,8 +52,8 @@ void FUN_002ec2e0(unsigned int param_1,unsigned int param_2,int param_3,int para
   FUN_002bf288(2,0x39,0xdf,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),0x21);
   FUN_002bf288(2,0x39,param_6,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),0x22);
   temp_v1 = FUN_002bf4f8(0x39,0xe0);
-  temp_v2 = DAT_0044ea00;
-  piVar5 = (int *)(DAT_0044ea00 + 0x130c);
+  temp_v2 = g_titleScene;
+  piVar5 = (int *)(g_titleScene + 0x130c);
   temp_v3 = piVar5[*piVar5 + 2];
   piVar5[*piVar5 + 2] = 3;
   if (*(char *)(temp_v2 + 0x1324) != '\0' || temp_v3 != 3) {
@@ -64,8 +64,8 @@ void FUN_002ec2e0(unsigned int param_1,unsigned int param_2,int param_3,int para
                (int)*(short *)(temp_v0 + 10) + (int)*(short *)(temp_v1 + 10),
                (int)**(short **)(temp_v1 + 0xc),(int)(*(short **)(temp_v1 + 0xc))[1],1);
   FUN_002bf288(2,0x39,0xe2,*(short *)(temp_v0 + 8) + param_7,(int)*(short *)(temp_v0 + 10),0x65);
-  temp_v2 = DAT_0044ea00;
-  piVar5 = (int *)(DAT_0044ea00 + 0x130c);
+  temp_v2 = g_titleScene;
+  piVar5 = (int *)(g_titleScene + 0x130c);
   temp_v1 = piVar5[*piVar5 + 2];
   piVar5[*piVar5 + 2] = 0;
   if (*(char *)(temp_v2 + 0x1324) != '\0' || temp_v1 != 0) {

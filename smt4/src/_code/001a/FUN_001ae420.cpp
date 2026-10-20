@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00284828(...);
+int callGlobalHook(...);
 int FUN_002c3944(int *, int);
 
 extern unsigned char DAT_0040bc5c; /* 0x40bc5c */
 extern unsigned char DAT_0040dd5c; /* 0x40dd5c */
 extern unsigned char DAT_0040fe5c; /* 0x40fe5c */
 
-/* Supplied declaration required: FUN_00284828. */
+/* Supplied declaration required: callGlobalHook. */
 /* Supplied declaration required: FUN_002c3944. */
 
 
@@ -32,7 +32,7 @@ unsigned int FUN_001ae420(int *param_1,unsigned int param_2,unsigned int param_3
     }
     if (temp_v4) {
       FUN_002c3944(param_1,0x20);
-      temp_v0 = FUN_00284828(0x670);
+      temp_v0 = callGlobalHook(0x670);
       *param_1 = temp_v0;
       temp_v2 = 0;
       if (temp_v0 != 0) {
@@ -52,7 +52,7 @@ unsigned int FUN_001ae420(int *param_1,unsigned int param_2,unsigned int param_3
         param_1[2] = param_4;
         param_1[7] = 1;
         param_1[5] = param_5;
-        temp_v0 = FUN_00284828(param_4 << 2);
+        temp_v0 = callGlobalHook(param_4 << 2);
         param_1[1] = temp_v0;
         temp_v2 = 0;
         if (temp_v0 != 0) {
@@ -60,7 +60,7 @@ unsigned int FUN_001ae420(int *param_1,unsigned int param_2,unsigned int param_3
           temp_v3 = 0;
           if (temp_v3 < param_4) {
             do {
-              temp_v1 = FUN_00284828(temp_v0 * (param_3 + (param_3 >> 1) + 1));
+              temp_v1 = callGlobalHook(temp_v0 * (param_3 + (param_3 >> 1) + 1));
               *(int *)(param_1[1] + temp_v3 * 4) = temp_v1;
               if (temp_v1 == 0) {
                 return 0;

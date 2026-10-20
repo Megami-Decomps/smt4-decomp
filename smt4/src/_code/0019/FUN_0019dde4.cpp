@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0029bb3c(unsigned char *, int);
+int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a0428(void);
 
 extern unsigned char LAB_0019de94; /* 0x19de94 */
 extern unsigned int *DAT_0044cda0; /* 0x44cda0 */
 extern int DAT_0049faf8; /* 0x49faf8 */
 
-/* Supplied declaration required: FUN_0029bb3c. */
+/* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
 
 
@@ -42,7 +42,7 @@ void FUN_0019dde4(void)
   DAT_0044cda0[2] = DAT_0049faf8;
   if (0 < temp_v0) {
     puVar3 = &LAB_0019de94;
-    FUN_0029bb3c(&LAB_0019de94,7);
+    asdMdlManagerCreateLoaded(&LAB_0019de94,7);
     puVar1[0xb] = (unsigned int)puVar3;
     FUN_002a0428();
     puVar4 = (unsigned int *)puVar1[0xb];

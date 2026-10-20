@@ -29,7 +29,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int *DAT_00581288; /* 0x581288 */
+extern int *g_lmapScene; /* 0x581288 */
 extern int DAT_005f0c88; /* 0x5f0c88 */
 extern int DAT_005f0c8c; /* 0x5f0c8c */
 extern int DAT_005f0c90; /* 0x5f0c90 */
@@ -124,7 +124,7 @@ void FUN_00292268(void)
   temp_v22 = DAT_005f0c98;
   fStack_54 = DAT_005f0c9c;
   temp_v16 = 40.0f;
-  if ((DAT_005f161f != '\0') || (*DAT_00581288 == 0x1d)) {
+  if ((DAT_005f161f != '\0') || (*g_lmapScene == 0x1d)) {
     temp_v1 = *(int *)(DAT_005f0c8c + 4);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 1;
@@ -258,7 +258,7 @@ void FUN_00292268(void)
   DAT_005f0c94 = temp_v23;
   DAT_005f0c98 = DAT_005f0c98 + (temp_v24 - DAT_005f0c98) * 0.33333334f;
   DAT_005f0c9c = temp_v25;
-  temp_v1 = DAT_00581288[7];
+  temp_v1 = g_lmapScene[7];
   FUN_002b5cb4();
   DAT_005f0cf8 = temp_v1 >= 0x43fa0001;
   temp_v18 = -40.0f;
@@ -266,7 +266,7 @@ void FUN_00292268(void)
   temp_v15 = 1.0f;
   if (DAT_005f0cf9 == '\0') {
     if (DAT_005f0ca8 != 0xc) {
-      temp_v1 = FUN_0036d984(&DAT_005f0c94,DAT_00581288 + 7,0);
+      temp_v1 = FUN_0036d984(&DAT_005f0c94,g_lmapScene + 7,0);
       if (temp_v1 == -1) {
         DAT_005f0cb4 = 0;
         goto LAB_002928a4;
@@ -307,9 +307,9 @@ void FUN_00292268(void)
       DAT_005f0d30 = temp_v7;
       if (DAT_005f0cb8 == '\0' || temp_v1 == 0xc) {
         DAT_005f0ca8 = 0xc;
-        temp_v19 = (float)DAT_00581288[7];
-        fStack_64 = (float)DAT_00581288[8];
-        temp_v20 = (float)DAT_00581288[9];
+        temp_v19 = (float)g_lmapScene[7];
+        fStack_64 = (float)g_lmapScene[8];
+        temp_v20 = (float)g_lmapScene[9];
         temp_v11 = (temp_v6 + 180.0f) * temp_v14;
         temp_v6 = temp_v11;
         FUN_001bc124();
@@ -317,7 +317,7 @@ void FUN_00292268(void)
         temp_v19 = temp_v19 + temp_v11 * 400.0f;
         FUN_001bbf0c();
         temp_v20 = temp_v20 + temp_v6 * temp_v7;
-        temp_v1 = FUN_0036d984(DAT_00581288 + 7,&temp_v19,0);
+        temp_v1 = FUN_0036d984(g_lmapScene + 7,&temp_v19,0);
         if (temp_v1 == -1) {
           temp_v21 = temp_v19;
           fStack_54 = temp_v20;

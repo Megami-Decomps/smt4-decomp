@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e6dac(int);
+int rt_malloc(int);
 
 extern int FUN_0012d33a(unsigned int, int *, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002e6dac. */
+/* Supplied declaration required: rt_malloc. */
 
 
 void FUN_003102ae(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -34,8 +34,8 @@ void FUN_003102ae(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
         temp_v0 = 0;
       }
       temp_v1 = FUN_0012d33a(temp_v0,param_1,param_3,param_4,param_4);
-      piVar4 = (int *)FUN_002e6dac(0xc);
-      temp_v2 = FUN_002e6dac(temp_v1 * 0x18);
+      piVar4 = (int *)rt_malloc(0xc);
+      temp_v2 = rt_malloc(temp_v1 * 0x18);
       piVar4[2] = temp_v2;
       temp_v2 = *param_1;
       piVar4[1] = temp_v1;

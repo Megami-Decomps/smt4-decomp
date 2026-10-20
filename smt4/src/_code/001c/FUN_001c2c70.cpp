@@ -17,8 +17,8 @@ int FUN_00291620(...);
 int FUN_002916ac(...);
 int FUN_002a7bc0(...);
 int FUN_002b2144(...);
-int FUN_002bfe28(...);
-int FUN_002c4938(float *, int);
+int mtx44Copy(...);
+int memClear(float *, int);
 int FUN_0032ad34(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
@@ -76,8 +76,8 @@ extern int DAT_00433238; /* 0x433238 */
 extern int FUN_00296d6c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a7bc0. */
 /* Supplied declaration required: FUN_002b2144. */
-/* Supplied declaration required: FUN_002bfe28. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: mtx44Copy. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_0032ad34. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 
@@ -151,7 +151,7 @@ void FUN_001c2c70(float *param_1)
       }
     }
     else {
-      FUN_002c4938(param_1,100);
+      memClear(param_1,100);
       temp_v14 = (float)VectorSignedToFloat(param_1[0x79],(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v16 = param_1 + 6;
       param_1[0x15] = param_1[0x61];
@@ -245,7 +245,7 @@ void FUN_001c2c70(float *param_1)
       }
       unaff_r6 = 0x168 - temp_v4;
       temp_v5 = FUN_002a7bc0();
-      FUN_002bfe28(&uStack_e8,temp_v5);
+      mtx44Copy(&uStack_e8,temp_v5);
       temp_v16 = (float *)romwright_f2u((float)((*(float *)((int)temp_v3 + 0x36c) + temp_v11)));
       VectorSignedToFloat(unaff_r6,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v17 = (float *)romwright_f2u((float)(temp_v14));
@@ -290,7 +290,7 @@ void FUN_001c2c70(float *param_1)
           temp_v4 = temp_v4 + 0x168;
         }
         temp_v5 = FUN_002a7bc0(temp_v4);
-        FUN_002bfe28(temp_v27,temp_v5);
+        mtx44Copy(temp_v27,temp_v5);
         VectorSignedToFloat(0x168 - temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v23 = temp_v20;
         temp_v24 = temp_v21;
@@ -348,7 +348,7 @@ void FUN_001c2c70(float *param_1)
           temp_v4 = temp_v4 + 0x168;
         }
         temp_v5 = FUN_002a7bc0(temp_v4);
-        FUN_002bfe28(&temp_v25,temp_v5);
+        mtx44Copy(&temp_v25,temp_v5);
         temp_v21 = *(float *)((int)temp_v9 + 0x36c) + temp_v3;
         VectorSignedToFloat(0x168 - temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v22 = temp_v14;

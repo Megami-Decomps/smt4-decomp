@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int DAT_00581288; /* 0x581288 */
-extern int *DAT_00587f0c; /* 0x587f0c */
+extern int g_lmapScene; /* 0x581288 */
+extern int *g_mapTrap; /* 0x587f0c */
 
 
 void FUN_002ba400(int param_1)
@@ -16,9 +16,9 @@ void FUN_002ba400(int param_1)
   int temp_v1;
   int temp_v2;
   
-  piVar2 = DAT_00587f0c;
-  if (*DAT_00587f0c == 1) {
-    DAT_00587f0c[1] = 0;
+  piVar2 = g_mapTrap;
+  if (*g_mapTrap == 1) {
+    g_mapTrap[1] = 0;
     *piVar2 = 2;
     *(unsigned char *)(piVar2 + 3) = 0;
     *(unsigned char *)(piVar2 + 0x1b) = 0;
@@ -29,10 +29,10 @@ void FUN_002ba400(int param_1)
       *(unsigned char *)((int)piVar2 + 0x61) = 0;
     }
     *(unsigned char *)(piVar2 + 4) = 1;
-    temp_v0 = DAT_00581288;
-    temp_v1 = *(int *)(DAT_00581288 + 0x20);
-    temp_v2 = *(int *)(DAT_00581288 + 0x24);
-    piVar2[5] = *(int *)(DAT_00581288 + 0x1c);
+    temp_v0 = g_lmapScene;
+    temp_v1 = *(int *)(g_lmapScene + 0x20);
+    temp_v2 = *(int *)(g_lmapScene + 0x24);
+    piVar2[5] = *(int *)(g_lmapScene + 0x1c);
     piVar2[6] = temp_v1;
     piVar2[7] = temp_v2;
     piVar2[8] = *(int *)(temp_v0 + 0x4c);

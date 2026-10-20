@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002d7894(int, unsigned int, unsigned int);
 
-extern int DAT_004e3cf4; /* 0x4e3cf4 */
+extern int g_asdProcess; /* 0x4e3cf4 */
 extern int DAT_004e3cf8; /* 0x4e3cf8 */
 
 /* Supplied declaration required: FUN_002d7894. */
@@ -27,8 +27,8 @@ void FUN_001ec9d0(unsigned int param_1,unsigned int param_2,int param_3)
   int temp_v3;
   
   temp_v0 = DAT_004e3cf8;
-  temp_v3 = DAT_004e3cf4;
-  piVar3 = (int *)(DAT_004e3cf4 + (param_1 >> 0x14) * 8);
+  temp_v3 = g_asdProcess;
+  piVar3 = (int *)(g_asdProcess + (param_1 >> 0x14) * 8);
   if (param_3 == 0) {
     for (temp_v3 = *piVar3; temp_v3 != 0; temp_v3 = *(int *)(temp_v3 + 0x4c)) {
       if (*(unsigned int *)(temp_v3 + 0x24) == (param_1 & 0xfffff)) {

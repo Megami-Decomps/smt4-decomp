@@ -6,15 +6,15 @@ extern "C" {
 
 int FUN_0019cac4(void);
 int FUN_001aba54(void);
-int FUN_003283ac(unsigned int);
+int scrSetResult(unsigned int);
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
 /* Supplied declaration required: FUN_0019cac4. */
 /* Supplied declaration required: FUN_001aba54. */
-extern unsigned int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_003283ac. */
-extern int FUN_004ee568(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
+/* Supplied declaration required: scrSetResult. */
+extern int btlUnitGet(unsigned int);
 
 
 unsigned int FUN_003a8790(void)
@@ -28,8 +28,8 @@ unsigned int FUN_003a8790(void)
   unsigned int temp_v4;
   int temp_v5;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_004ee568(DAT_0057113c);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = btlUnitGet(g_btlScriptUnit);
   temp_v1 = *(int *)(temp_v1 + 0x20);
   if (*(int *)(temp_v1 + 0x3f8) != 0) {
     temp_v5 = 0;
@@ -38,7 +38,7 @@ unsigned int FUN_003a8790(void)
       FUN_001aba54();
       if ((temp_v2 != 0) && (temp_v0 == (*(unsigned int *)(temp_v2 + 0x28) & 0xffff) >> 0xb)) {
         temp_v4 = 1;
-        FUN_003283ac(temp_v4);
+        scrSetResult(temp_v4);
         return 1;
       }
       temp_v5 = temp_v5 + 1;
@@ -51,7 +51,7 @@ unsigned int FUN_003a8790(void)
       FUN_001aba54();
       if ((temp_v2 != 0) && (temp_v0 == (*(unsigned int *)(temp_v2 + 0x28) & 0xffff) >> 0xb)) {
         temp_v4 = 1;
-        FUN_003283ac(temp_v4);
+        scrSetResult(temp_v4);
         return 1;
       }
       temp_v5 = temp_v5 + 1;
@@ -66,14 +66,14 @@ unsigned int FUN_003a8790(void)
       FUN_001aba54();
       if ((temp_v3 != 0) && (temp_v0 == (*(unsigned int *)(temp_v3 + 0x28) & 0xffff) >> 0xb)) {
         temp_v4 = 1;
-        FUN_003283ac(temp_v4);
+        scrSetResult(temp_v4);
         return 1;
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 8);
   }
   temp_v4 = 0;
-  FUN_003283ac(temp_v4);
+  scrSetResult(temp_v4);
   return 1;
 }
 

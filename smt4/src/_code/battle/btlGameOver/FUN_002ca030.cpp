@@ -11,9 +11,9 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_00435d60; /* 0x435d60 */
+extern int g_btlGameOver; /* 0x435d60 */
 
-extern unsigned int FUN_002c08f0(void);
+extern unsigned int jobGetWork(void);
 /* Supplied declaration required: FUN_00335b80. */
 
 
@@ -23,9 +23,9 @@ void FUN_002ca030(void)
 /* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   
-  temp_v0 = FUN_002c08f0();
-  if (DAT_00435d60 != 0) {
-    FUN_00335b80(DAT_00435d60,temp_v0);
+  temp_v0 = jobGetWork();
+  if (g_btlGameOver != 0) {
+    FUN_00335b80(g_btlGameOver,temp_v0);
     return;
   }
   return;

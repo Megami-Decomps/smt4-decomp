@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int asdMemoryAllocTracked(...);
 int FUN_00283498(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -17,18 +17,18 @@ typedef struct {
 
 extern int FUN_0026c568(...); /* 0x26c568 */
 extern int FUN_00334a54(...); /* 0x334a54 */
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 extern unsigned int FUN_0014afd0(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 extern int FUN_0018719c(unsigned int);
 extern unsigned int FUN_00191e00(unsigned int, unsigned int, unsigned int, unsigned int);
 extern int FUN_0019e378(void);
 extern int FUN_001a6508(unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_00283498. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_0039c840(unsigned int param_1,int param_2)
@@ -48,8 +48,8 @@ void FUN_0039c840(unsigned int param_1,int param_2)
     }
   }
   puVar2 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0xa8,1);
-  FUN_002e6354();
+  asdMemoryAllocTracked(0x100,0x100,0,0xa8,1);
+  sysMemClear();
   *puVar2 = param_1;
   puVar2[0x21] = 0xffffffff;
   puVar2[6] = 0xffffffff;
@@ -67,9 +67,9 @@ void FUN_0039c840(unsigned int param_1,int param_2)
   }
   else {
     if (puVar2[5] != -1) {
-      temp_v0 = FUN_001a6508(DAT_00570280,puVar2[4],puVar2[5],1);
+      temp_v0 = FUN_001a6508(g_aocSystem,puVar2[4],puVar2[5],1);
       if (temp_v0 != 0) {
-        temp_v1 = FUN_00191e00(DAT_00570280,puVar2[4],puVar2[5],0x10000);
+        temp_v1 = FUN_00191e00(g_aocSystem,puVar2[4],puVar2[5],0x10000);
       }
       else {
         temp_v1 = FUN_0014afd0(puVar2[4],puVar2[5]);
@@ -88,7 +88,7 @@ void FUN_0039c840(unsigned int param_1,int param_2)
   puVar2[0x27] = 0;
   puVar2[0x28] = 0;
   puVar2[0x29] = 0;
-  FUN_0014e38c("EVE_BustupTex",4,0,0,FUN_0026c568,FUN_00334a54,puVar2);
+  asdProcessCreateSimple("EVE_BustupTex",4,0,0,FUN_0026c568,FUN_00334a54,puVar2);
   return;
 }
 

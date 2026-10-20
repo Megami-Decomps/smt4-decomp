@@ -8,7 +8,7 @@ int CONCAT44(...);
 int FUN_0015f7c8(...);
 int FUN_0023e388(...);
 int FUN_002929d8(...);
-int FUN_002c5300(int, int, int, unsigned int, int);
+int asdMemoryAlloc(int, int, int, unsigned int, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_MTX34CopyAsm(...);
@@ -76,12 +76,12 @@ extern unsigned int FUN_001a0fb4(unsigned int);
 /* Supplied declaration required: FUN_002929d8. */
 extern int FUN_002b8660(void);
 extern int FUN_002b8694(void);
-extern int FUN_002b879c(void);
+extern int lmapMainIsRunning(void);
 extern int FUN_002b8804(void);
 extern int FUN_002bfefc(unsigned int *);
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemoryAlloc. */
 extern float FUN_002c5da8(unsigned int, unsigned int, unsigned int);
-extern int MapMode_IsBusy(void);
+extern int mapMainIsBusy(void);
 extern int QuestCenterMode_IsBusy(void);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
@@ -159,8 +159,8 @@ void FUN_0033e8a8(int param_1)
     }
   }
   temp_v3 = FUN_002b8804();
-  if (((((temp_v3 != 0) || (temp_v3 = FUN_002b879c(), temp_v3 != 0)) ||
-       (temp_v3 = MapMode_IsBusy(), temp_v3 != 0)) || (temp_v3 = QuestCenterMode_IsBusy(), temp_v3 != 0)) &&
+  if (((((temp_v3 != 0) || (temp_v3 = lmapMainIsRunning(), temp_v3 != 0)) ||
+       (temp_v3 = mapMainIsBusy(), temp_v3 != 0)) || (temp_v3 = QuestCenterMode_IsBusy(), temp_v3 != 0)) &&
      ((temp_v3 = FUN_002b8694(), temp_v3 == 0 && (temp_v3 = FUN_002b8660(), temp_v3 != 0)))) {
     temp_v20 = romwright_piece_4_4((int)(temp_v20 >> 0x20),0x3fc00000);
   }
@@ -199,10 +199,10 @@ void FUN_0033e8a8(int param_1)
                        *(int *)(*(int *)(param_1 + 0x20) + temp_v3 * 0x18) * 4 + 2);
   }
   temp_v4 = 0x100;
-  FUN_002c5300(0x100,0x100,0,temp_v8 * 0x58,1);
+  asdMemoryAlloc(0x100,0x100,0,temp_v8 * 0x58,1);
   *(unsigned int *)(param_1 + 0x2c) = temp_v4;
   temp_v4 = 0x100;
-  FUN_002c5300(0x100,0x100,0,(unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x10) + 0xc) * 0xc,1);
+  asdMemoryAlloc(0x100,0x100,0,(unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x10) + 0xc) * 0xc,1);
   *(unsigned int *)(param_1 + 0x30) = temp_v4;
   temp_v28 = 0;
   temp_v3 = *(int *)(param_1 + 0x10);

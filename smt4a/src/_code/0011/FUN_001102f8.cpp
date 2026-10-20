@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0010473c(unsigned int, unsigned int, int);
-int aeabi_uidivmod(unsigned int, unsigned int);
+int __aeabi_uidivmod(unsigned int, unsigned int);
 
 /* Supplied declaration required: FUN_0010473c. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_001102f8(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -17,7 +17,7 @@ void FUN_001102f8(unsigned int param_1,int param_2,unsigned int param_3,unsigned
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  aeabi_uidivmod(param_3,*(unsigned int *)(param_2 + 8));
+  __aeabi_uidivmod(param_3,*(unsigned int *)(param_2 + 8));
   FUN_0010473c(param_1,param_4,temp_v0 + *(int *)(param_2 + 4));
   return;
 }

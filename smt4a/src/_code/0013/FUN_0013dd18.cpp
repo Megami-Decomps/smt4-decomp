@@ -7,12 +7,12 @@ extern "C" {
 int FUN_0014a960(int);
 int FUN_00157558(unsigned int);
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_0014a960. */
 extern int FUN_001546e8(unsigned int);
 /* Supplied declaration required: FUN_00157558. */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 
 
 unsigned char FUN_0013dd18(void)
@@ -21,10 +21,10 @@ unsigned char FUN_0013dd18(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   if (((*(char *)(temp_v0 + 0x144e) != '\0') && (*(char *)(temp_v0 + 0x1450) != '\0')) &&
      (temp_v0 = FUN_001546e8(0), temp_v0 == 0)) {
-    FUN_00157558(DAT_0059dbb4);
+    FUN_00157558(g_renderCtx);
     FUN_0014a960(0);
     return 0;
   }

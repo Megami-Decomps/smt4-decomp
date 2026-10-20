@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001517b4(...);
 int FUN_00163aa4(...);
 int FUN_001641b4(...);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00184310(void);
 int FUN_0019cac4(void);
 int FUN_0021a6c8(int);
@@ -44,7 +44,7 @@ typedef struct {
 extern int FUN_001643a0(void);
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
 extern int FUN_00165070(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_0019cac4. */
 /* Supplied declaration required: FUN_0021a6c8. */
@@ -170,7 +170,7 @@ LAB_002f9458:
           temp_v8 = temp_v8 + 1;
           *(short *)(param_1 + 0x480c) = *(short *)(param_1 + 0x480c) + 1;
         } while (temp_v8 < (int)*puVar13);
-        FUN_001681cc(0x35);
+        sysPlaySe(0x35);
         temp_v5 = 0;
         if (temp_v6 != 0) {
           FUN_00184310();
@@ -179,7 +179,7 @@ LAB_002f9458:
         if ((!temp_v0) && ((temp_v5 == 0 || ((*(unsigned char *)(temp_v5 + 0xb3) & 2) == 0)))) break;
         temp_v3 = 0x11b;
       }
-      FUN_001681cc(temp_v3);
+      sysPlaySe(temp_v3);
     }
     break;
   case 2:
@@ -376,9 +376,9 @@ LAB_002f9924:
       puVar9 = (unsigned short *)FUN_002c7e24();
       temp_v6 = (unsigned int)*puVar9;
       FUN_00184310();
-      FUN_001681cc(0x35);
+      sysPlaySe(0x35);
       if ((*(unsigned char *)(temp_v6 + 0xb3) & 2) != 0) {
-        FUN_001681cc(0x11b);
+        sysPlaySe(0x11b);
       }
       temp_v8 = FUN_0026264c(*puVar7);
       if (temp_v8 != 0) {

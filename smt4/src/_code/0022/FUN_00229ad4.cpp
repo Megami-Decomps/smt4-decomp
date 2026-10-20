@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0043427c; /* 0x43427c */
+extern int g_btlScriptUnit; /* 0x43427c */
 
 
 void FUN_00229ad4(int *param_1)
@@ -18,7 +18,7 @@ void FUN_00229ad4(int *param_1)
   else {
     temp_v0 = 10;
   }
-  *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = temp_v0;
+  *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = temp_v0;
   return;
 }
 

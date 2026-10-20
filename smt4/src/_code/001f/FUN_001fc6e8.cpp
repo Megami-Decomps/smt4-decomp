@@ -17,13 +17,13 @@ int FUN_00295ba4(...);
 int FUN_00297468(...);
 int FUN_0029c3b0(...);
 int FUN_0029c3c0(...);
-int FUN_002a7218(void);
+int scrScriptProcessDestroy(void);
 int FUN_002b8838(...);
 int FUN_002b9024(void);
 int FUN_002bd06c(...);
 int FUN_002bf694(...);
-int FUN_002c415c(void);
-int FUN_002c43b4(...);
+int asdMemFree(void);
+int jobStop(...);
 int FUN_002e82d4(...);
 int FUN_00308d5c(...);
 int FUN_0033a670(...);
@@ -71,7 +71,7 @@ int FUN_00256124(void);
 int FUN_00256194(void);
 int FUN_0027dc24(int, int, int);
 int FUN_0028ee90(void);
-int FUN_002c4938(...);
+int memClear(...);
 int FUN_002f34cc(...);
 int FUN_003370ac(int);
 int FUN_00337cfc(...);
@@ -106,13 +106,13 @@ typedef struct {
     unsigned int sp2B8; /* 0x2b8: local_2b8 */
 } param_1_stack;
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 extern int DAT_00435d18; /* 0x435d18 */
-extern unsigned int *DAT_00435d48; /* 0x435d48 */
-extern int DAT_00435d90; /* 0x435d90 */
+extern unsigned int *g_btlEvent; /* 0x435d48 */
+extern int g_btlMainState; /* 0x435d90 */
 extern unsigned int DAT_004398d4; /* 0x4398d4 */
 extern int DAT_00439ca8; /* 0x439ca8 */
-extern int DAT_004474d8; /* 0x4474d8 */
+extern int g_mapDepartWork; /* 0x4474d8 */
 extern int DAT_0049fb9c; /* 0x49fb9c */
 
 /* Supplied declaration required: FUN_001a84d8. */
@@ -153,7 +153,7 @@ extern int FUN_00255de0(unsigned int, unsigned int);
 extern int FUN_0027e3b8(unsigned int *);
 /* Supplied declaration required: FUN_0027e3f8. */
 /* Supplied declaration required: FUN_0027e760. */
-extern unsigned int *FUN_0027e928(unsigned int);
+extern unsigned int *btlUnitGet(unsigned int);
 extern int FUN_00287894(void);
 /* Supplied declaration required: FUN_0028ee90. */
 extern int FUN_0029022c(void);
@@ -168,19 +168,19 @@ extern int FUN_00295bd0(void);
 /* Supplied declaration required: FUN_0029c3b0. */
 /* Supplied declaration required: FUN_0029c3c0. */
 /* Supplied declaration required: FUN_002a03a0. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 extern int FUN_002a8764(void);
-extern int FUN_002b6b20(void);
+extern int gameGetOptions(void);
 extern int FUN_002b6b38(void);
 /* Supplied declaration required: FUN_002b8838. */
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_002bd06c. */
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bff50. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002e82d4. */
 /* Supplied declaration required: FUN_002f34cc. */
 /* Supplied declaration required: FUN_00308d5c. */
@@ -253,12 +253,12 @@ void FUN_001fc6e8(unsigned int param_1)
   int temp_v32;
   unsigned char temp_v33 [448];
   
-  temp_v4 = DAT_00435d90;
-  if (DAT_00435d90 == 0) {
+  temp_v4 = g_btlMainState;
+  if (g_btlMainState == 0) {
     return;
   }
-  temp_v8 = *(unsigned int *)(DAT_00435d90 + 100);
-  *(unsigned int *)(DAT_00435d90 + 100) = param_1;
+  temp_v8 = *(unsigned int *)(g_btlMainState + 100);
+  *(unsigned int *)(g_btlMainState + 100) = param_1;
   *(unsigned int *)(temp_v4 + 0x70) = 0;
   *(unsigned int *)(temp_v4 + 0x6c) = temp_v8;
   *(unsigned int *)(temp_v4 + 0x68) = 0xffffffff;
@@ -274,7 +274,7 @@ void FUN_001fc6e8(unsigned int param_1)
     else {
       *(unsigned int *)(temp_v4 + 0x44a0) = *(unsigned int *)(temp_v4 + 0x44a0) & 0xfffffffe;
     }
-    FUN_002c4938((unsigned int *)(temp_v4 + 200),0x74);
+    memClear((unsigned int *)(temp_v4 + 200),0x74);
     *(unsigned int *)(temp_v4 + 200) = 0;
     *(unsigned int *)(temp_v4 + 0xcc) = 0;
     *(unsigned int *)(temp_v4 + 0xd0) = 0;
@@ -341,7 +341,7 @@ void FUN_001fc6e8(unsigned int param_1)
     FUN_002f34cc(temp_v4);
     FUN_001f7ecc(temp_v4);
     FUN_001d25c8(temp_v4);
-    temp_v3 = FUN_002bf244(*(unsigned int *)(temp_v4 + 0x54));
+    temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + 0x54));
     if (temp_v3 == 0) {
       FUN_001a84d8(temp_v4);
     }
@@ -414,7 +414,7 @@ void FUN_001fc6e8(unsigned int param_1)
     *(unsigned char *)(temp_v4 + 0x44b5) = 0;
     *(unsigned int *)(temp_v4 + 0x2314) = 0;
     FUN_00336830(temp_v4);
-    temp_v3 = FUN_002bf244(*(unsigned int *)(temp_v4 + 0x50));
+    temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + 0x50));
     if (temp_v3 == 0) {
       FUN_001e2240(temp_v4);
     }
@@ -561,24 +561,24 @@ void FUN_001fc6e8(unsigned int param_1)
     }
     break;
   case 0xb:
-    temp_v3 = FUN_0027e3b8(DAT_00435d48);
+    temp_v3 = FUN_0027e3b8(g_btlEvent);
     if (temp_v3 == 0) {
       if ((*(unsigned int *)(temp_v4 + 0x44a0) & 4) != 0) {
-        puVar5 = DAT_00435d48;
-        FUN_0027e3f8(DAT_00435d48,2,0xffffffff,0);
+        puVar5 = g_btlEvent;
+        FUN_0027e3f8(g_btlEvent,2,0xffffffff,0);
         if (puVar5 == (unsigned int *)0x0) {
           return;
         }
       }
       else {
-        puVar5 = DAT_00435d48;
-        FUN_0027e3f8(DAT_00435d48,1,0xffffffff,0);
+        puVar5 = g_btlEvent;
+        FUN_0027e3f8(g_btlEvent,1,0xffffffff,0);
         if (puVar5 == (unsigned int *)0x0) {
           return;
         }
       }
-      puVar5 = DAT_00435d48;
-      *DAT_00435d48 = 9;
+      puVar5 = g_btlEvent;
+      *g_btlEvent = 9;
       *(unsigned char *)(puVar5 + 0xb) = 0;
       *(unsigned int *)(DAT_00435d18 + 0x2f98) = 0;
       return;
@@ -620,7 +620,7 @@ void FUN_001fc6e8(unsigned int param_1)
   case 0xd:
     FUN_0033b3c4(temp_v4,&temp_v16);
     FUN_001f7d50(temp_v4,temp_v16,temp_v17,temp_v18,temp_v19);
-    temp_v3 = FUN_002bf244(*(unsigned int *)(temp_v4 + 0x1c));
+    temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + 0x1c));
     if (temp_v3 == 0) {
       FUN_002e82d4(temp_v4);
     }
@@ -628,8 +628,8 @@ void FUN_001fc6e8(unsigned int param_1)
   case 0xe:
     *(unsigned int *)(temp_v4 + 0x88) = 0;
     FUN_00254f58(temp_v4);
-    if (DAT_00435d90 != 0) {
-      *(unsigned int *)(DAT_00435d90 + 0x68) = 0xc;
+    if (g_btlMainState != 0) {
+      *(unsigned int *)(g_btlMainState + 0x68) = 0xc;
     }
     return;
   case 0xf:
@@ -639,7 +639,7 @@ void FUN_001fc6e8(unsigned int param_1)
         FUN_002903f0();
         temp_v3 = FUN_00287894();
         if (temp_v3 != 0 && temp_v3 != 3) {
-          temp_v3 = FUN_002b6b20();
+          temp_v3 = gameGetOptions();
           temp_v0 = *(unsigned short *)(temp_v3 + 0x608);
           temp_v14 = (temp_v0 & 1) != 0;
           if (temp_v14) {
@@ -712,22 +712,22 @@ LAB_001fd348:
     case 8:
       break;
     default:
-      temp_v4 = FUN_0027e3b8(DAT_00435d48);
+      temp_v4 = FUN_0027e3b8(g_btlEvent);
       if ((temp_v4 == 0) &&
-         (puVar5 = DAT_00435d48, FUN_0027e3f8(DAT_00435d48,8,0xffffffff,0),
+         (puVar5 = g_btlEvent, FUN_0027e3f8(g_btlEvent,8,0xffffffff,0),
          puVar5 != (unsigned int *)0x0)) {
-        puVar5 = DAT_00435d48;
-        *DAT_00435d48 = 9;
+        puVar5 = g_btlEvent;
+        *g_btlEvent = 9;
         *(unsigned char *)(puVar5 + 0xb) = 0;
         *(unsigned int *)(DAT_00435d18 + 0x2f98) = 0;
         return;
       }
       break;
     case 3:
-      temp_v3 = FUN_002b6b20();
+      temp_v3 = gameGetOptions();
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v3 + 0x46);
       if ((temp_v6 != 0) && (temp_v10 = temp_v6, FUN_002b9024(), temp_v10 != 0)) {
-        FUN_002c4938(&temp_v16,0x60);
+        memClear(&temp_v16,0x60);
         FUN_002bd06c(temp_v6);
         FUN_002bf694(&temp_v16,temp_v6);
         FUN_00295660(0xd,&temp_v16);
@@ -746,9 +746,9 @@ LAB_001fd348:
     if (temp_v3 != 0) {
       FUN_00295ba4(1);
     }
-    temp_v3 = FUN_002bf244(*(unsigned int *)(temp_v4 + 0x24));
+    temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + 0x24));
     if (temp_v3 != 0) {
-      FUN_002c43b4(*(unsigned int *)(temp_v4 + 0x24),0);
+      jobStop(*(unsigned int *)(temp_v4 + 0x24),0);
     }
     FUN_0021af44(temp_v4);
     return;
@@ -847,12 +847,12 @@ LAB_001fd348:
         if ((*(unsigned int *)(temp_v4 + 0xe0) & 0x800000) == 0) {
           FUN_003c0294();
           FUN_001f8290(temp_v4);
-          temp_v4 = DAT_004474d8;
+          temp_v4 = g_mapDepartWork;
           if (DAT_0049fb9c != 1) {
-            *(unsigned short *)(DAT_004474d8 + 0x14) = 0;
+            *(unsigned short *)(g_mapDepartWork + 0x14) = 0;
           }
           else {
-            *(unsigned short *)(DAT_004474d8 + 0x14) = 1;
+            *(unsigned short *)(g_mapDepartWork + 0x14) = 1;
             *(unsigned int *)(temp_v4 + 0x20) = 0;
             *(unsigned int *)(temp_v4 + 0x24) = 0;
             *(unsigned int *)(temp_v4 + 0x28) = 0;
@@ -869,11 +869,11 @@ LAB_001fd348:
       if (*(int *)(temp_v4 + 0x88) == 1) {
         piVar19 = (int *)(temp_v4 + 0x4a44);
         if (*piVar19 != 0) {
-          FUN_002c415c();
+          asdMemFree();
           *piVar19 = 0;
         }
         if (*(int *)(temp_v4 + 0x4a48) != 0) {
-          FUN_002a7218();
+          scrScriptProcessDestroy();
           *(int *)(temp_v4 + 0x4a48) = 0;
         }
         piVar15 = (int *)(temp_v4 + 0x4a4c);
@@ -901,22 +901,22 @@ LAB_001fd348:
     }
     break;
   case 0x17:
-    temp_v3 = FUN_002bf244(*(unsigned int *)(temp_v4 + *(int *)(temp_v4 + 0x84) * 4 + 0xc));
+    temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + *(int *)(temp_v4 + 0x84) * 4 + 0xc));
     if (temp_v3 != 0) {
-      FUN_002c43b4(*(unsigned int *)(temp_v4 + *(int *)(temp_v4 + 0x84) * 4 + 0xc),0);
+      jobStop(*(unsigned int *)(temp_v4 + *(int *)(temp_v4 + 0x84) * 4 + 0xc),0);
     }
     *(unsigned int *)(temp_v4 + 0x84) = 0;
-    puVar5 = (unsigned int *)FUN_0027e928(DAT_0043427c);
+    puVar5 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
     *puVar5 = 0;
     FUN_001e204c(temp_v4,1);
     return;
   case 0x18:
-    temp_v3 = FUN_002bf244(*(unsigned int *)(temp_v4 + *(int *)(temp_v4 + 0x84) * 4 + 0xc));
+    temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + *(int *)(temp_v4 + 0x84) * 4 + 0xc));
     if (temp_v3 != 0) {
-      FUN_002c43b4(*(unsigned int *)(temp_v4 + *(int *)(temp_v4 + 0x84) * 4 + 0xc),0);
+      jobStop(*(unsigned int *)(temp_v4 + *(int *)(temp_v4 + 0x84) * 4 + 0xc),0);
     }
     *(unsigned int *)(temp_v4 + 0x84) = 0;
-    puVar5 = (unsigned int *)FUN_0027e928(DAT_0043427c);
+    puVar5 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
     *puVar5 = 0;
     FUN_001f7fac(temp_v4);
     return;

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00119e54(int, int *, unsigned int **, unsigned int **, int);
 int FUN_00120b5c(void);
 int FUN_002c05f4(...);
-int FUN_002c2ff0(void);
+int asdMemoryGetDefaultAllocator(void);
 int VectorUnsignedToFloat(unsigned int, int);
 int nw_gfx_Camera_DynamicBuilder_Create(unsigned char *, unsigned int);
 int nw_gfx_SceneNode_AttachChild(...);
@@ -52,7 +52,7 @@ extern unsigned int DAT_00464ba0; /* 0x464ba0 */
 /* Supplied declaration required: FUN_00119e54. */
 /* Supplied declaration required: FUN_00120b5c. */
 /* Supplied declaration required: FUN_002c05f4. */
-/* Supplied declaration required: FUN_002c2ff0. */
+/* Supplied declaration required: asdMemoryGetDefaultAllocator. */
 /* Supplied declaration required: nw_gfx_Camera_DynamicBuilder_Create. */
 /* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
 
@@ -91,7 +91,7 @@ void FUN_001079d8(void)
   unsigned int *temp_v20;
   unsigned int *temp_v21;
   
-  temp_v0 = FUN_002c2ff0();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   temp_v3 = 0x4170000041a00000;
   temp_v4 = 1.0f;
   puVar9 = (unsigned int *)0x0;
@@ -166,7 +166,7 @@ void FUN_001079d8(void)
       temp_v15 = puVar9;
       temp_v20 = puVar9;
       temp_v21 = puVar9;
-      temp_v1 = FUN_002c2ff0();
+      temp_v1 = asdMemoryGetDefaultAllocator();
       VectorUnsignedToFloat((unsigned int)DAT_00464af4,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_00119e54(temp_v1,&temp_v10,&temp_v13,&temp_v20,0);
       DAT_00464b34 = temp_v1;
@@ -179,7 +179,7 @@ void FUN_001079d8(void)
     temp_v11 = puVar9;
     temp_v12 = temp_v5;
     temp_v13 = puVar9;
-    temp_v1 = FUN_002c2ff0();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     FUN_002c05f4(temp_v1,&temp_v8,&temp_v11,0);
     DAT_00464b34 = temp_v1;
     *(float *)(temp_v1 + 0x294) = temp_v4 / DAT_00464b40;
@@ -192,7 +192,7 @@ void FUN_001079d8(void)
   temp_v18 = puVar9;
   uStack_50 = temp_v5;
   temp_v19 = puVar9;
-  temp_v2 = FUN_002c2ff0();
+  temp_v2 = asdMemoryGetDefaultAllocator();
   FUN_002c05f4(temp_v2,&temp_v16,&temp_v18,0);
   DAT_00464b1c = temp_v2;
   nw_gfx_SceneNode_AttachChild(DAT_00464ba0,temp_v2);

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0024bc7c(short *, int);
+int bitsetSetBit(short *, int);
 int FUN_00288154(...);
 int FUN_0029c6b0(short *);
 int FUN_002b9024(void);
-int FUN_002c4938(short *, int);
+int memClear(short *, int);
 
 /* stack frame of param_1: 53 slot(s), 107 byte(s) */
 typedef struct {
@@ -67,12 +67,12 @@ typedef struct {
     unsigned short sp688; /* 0x688: local_688 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0024bc7c. */
+/* Supplied declaration required: bitsetSetBit. */
 /* Supplied declaration required: FUN_00288154. */
 /* Supplied declaration required: FUN_0029c6b0. */
 extern unsigned int FUN_0029c8f4(short *);
 /* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_002cd37c(short *param_1)
@@ -147,7 +147,7 @@ unsigned int FUN_002cd37c(short *param_1)
     temp_v4 = temp_v7;
     FUN_002b9024();
     FUN_00288154(temp_v7,temp_v8);
-    FUN_002c4938(&temp_v31,0x604);
+    memClear(&temp_v31,0x604);
     temp_v56 = temp_v8[0];
     temp_v31 = temp_v20;
     temp_v32 = temp_v21;
@@ -174,7 +174,7 @@ unsigned int FUN_002cd37c(short *param_1)
     temp_v49 = temp_v30;
     temp_v57 = (unsigned char)(((unsigned int)temp_v19 << 0x1a) >> 0x1c);
     temp_v55 = temp_v0;
-    FUN_0024bc7c(&temp_v31,*(unsigned short *)(temp_v4 + 0x38));
+    bitsetSetBit(&temp_v31,*(unsigned short *)(temp_v4 + 0x38));
     FUN_0029c6b0(&temp_v31);
     temp_v47 = temp_v38;
     temp_v48 = temp_v39;

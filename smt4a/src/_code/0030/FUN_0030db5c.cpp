@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int aeabi_uidivmod(...);
+int __aeabi_uidivmod(...);
 
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 unsigned int FUN_0030db5c(unsigned int param_1,unsigned char *param_2,unsigned int param_3,unsigned int param_4)
@@ -64,7 +64,7 @@ unsigned int FUN_0030db5c(unsigned int param_1,unsigned char *param_2,unsigned i
     if (temp_v21 >= 0xfff1) {
       temp_v21 = temp_v21 - 0xfff1;
     }
-    aeabi_uidivmod(param_1);
+    __aeabi_uidivmod(param_1);
     param_1 = temp_v16;
   }
   else {
@@ -94,8 +94,8 @@ unsigned int FUN_0030db5c(unsigned int param_1,unsigned char *param_2,unsigned i
         param_2 = param_2 + 0x10;
         temp_v1 = temp_v1 - 1;
       } while (temp_v1 != 0);
-      aeabi_uidivmod(temp_v21,0xfff1,(unsigned int)*pbVar1,temp_v2,param_4);
-      aeabi_uidivmod(param_1,0xfff1);
+      __aeabi_uidivmod(temp_v21,0xfff1,(unsigned int)*pbVar1,temp_v2,param_4);
+      __aeabi_uidivmod(param_1,0xfff1);
       temp_v21 = temp_v17;
       param_1 = temp_v18;
     }
@@ -127,8 +127,8 @@ unsigned int FUN_0030db5c(unsigned int param_1,unsigned char *param_2,unsigned i
         temp_v21 = temp_v0 + temp_v21;
         param_1 = param_1 + temp_v21;
       }
-      aeabi_uidivmod(temp_v21,0xfff1);
-      aeabi_uidivmod(param_1,0xfff1);
+      __aeabi_uidivmod(temp_v21,0xfff1);
+      __aeabi_uidivmod(param_1,0xfff1);
       temp_v21 = temp_v19;
       param_1 = temp_v20;
     }

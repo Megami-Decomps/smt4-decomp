@@ -22,8 +22,8 @@ typedef struct {
     unsigned int sp448; /* 0x448: local_448 */
 } void_stack;
 
-extern unsigned int DAT_00432fc8; /* 0x432fc8 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_aocMain; /* 0x432fc8 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0023342c(unsigned char *, unsigned int);
@@ -33,7 +33,7 @@ extern int FUN_0023342c(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
@@ -61,11 +61,11 @@ unsigned int FUN_0038f924(void)
   unsigned int temp_v14 [5];
   unsigned int temp_v15;
   
-  temp_v3 = FUN_002c08f0();
-  temp_v2 = DAT_00432fc8;
+  temp_v3 = jobGetWork();
+  temp_v2 = g_aocMain;
   temp_v11 = *(unsigned int *)(temp_v3 + 0x1798);
-  FUN_002c39a4(DAT_0044ea00);
-  temp_v6 = DAT_0044ea00;
+  FUN_002c39a4(g_titleScene);
+  temp_v6 = g_titleScene;
   temp_v4 = FUN_002c5d80(1,0);
   piVar11 = (int *)(temp_v6 + 0x124c);
   temp_v8 = *piVar11;
@@ -120,12 +120,12 @@ unsigned int FUN_0038f924(void)
           FUN_002bf288(2,0xe,0x154,temp_v9,temp_v7,0x81);
         }
       }
-      temp_v9 = DAT_0044ea00;
+      temp_v9 = g_titleScene;
       temp_v8 = temp_v8 + 1;
     } while (temp_v8 < 3);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 3);
-  piVar11 = (int *)(DAT_0044ea00 + 0x124c);
+  piVar11 = (int *)(g_titleScene + 0x124c);
   temp_v6 = *piVar11;
   temp_v3 = piVar11[temp_v6 + 2];
   *piVar11 = temp_v6 - 1;

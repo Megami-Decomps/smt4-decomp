@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00152f44(void);
 
-extern int *DAT_0058104c; /* 0x58104c */
+extern int *g_popupState; /* 0x58104c */
 
 /* Supplied declaration required: FUN_00152f44. */
 extern int FUN_002d8b58(unsigned int, int);
@@ -21,14 +21,14 @@ void FUN_00312aa0(int param_1)
   int temp_v0;
   
   FUN_00152f44();
-  piVar1 = DAT_0058104c;
-  if (*DAT_0058104c == 0) {
-    piVar2 = DAT_0058104c + 1;
-    *DAT_0058104c = 3;
+  piVar1 = g_popupState;
+  if (*g_popupState == 0) {
+    piVar2 = g_popupState + 1;
+    *g_popupState = 3;
     *piVar2 = 0;
     piVar1[6] = param_1;
     temp_v0 = FUN_002d8b58(0xb,param_1);
-    DAT_0058104c[5] = temp_v0;
+    g_popupState[5] = temp_v0;
   }
   return;
 }

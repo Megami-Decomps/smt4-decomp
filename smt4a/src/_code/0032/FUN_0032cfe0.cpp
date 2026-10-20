@@ -37,7 +37,7 @@ extern unsigned int DAT_0057f0cc; /* 0x57f0cc */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00184310. */
-extern unsigned int FUN_0019e4d4(unsigned short);
+extern unsigned int slotRecordFindById(unsigned short);
 /* Supplied declaration required: FUN_0020d164. */
 /* Supplied declaration required: FUN_00230c1c. */
 /* Supplied declaration required: FUN_002a1f60. */
@@ -72,7 +72,7 @@ void FUN_0032cfe0(int param_1)
     temp_v2 = FUN_004cfe4c(param_1 + 0x20);
     temp_v1 = *(unsigned short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
     if (*(char *)(param_1 + 0x861) == '\x01') {
-      temp_v3 = FUN_0019e4d4(temp_v1);
+      temp_v3 = slotRecordFindById(temp_v1);
       temp_v2 = DAT_0057f0c8;
       temp_v4 = (unsigned int)temp_v1;
       FUN_00184310();

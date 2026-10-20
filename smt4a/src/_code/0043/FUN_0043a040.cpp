@@ -10,7 +10,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int FUN_0016f988(unsigned int *, unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_002e3390(unsigned int);
+extern unsigned int wstrlen(unsigned int);
 
 
 unsigned int FUN_0043a040(unsigned int *param_1,unsigned int param_2)
@@ -21,7 +21,7 @@ unsigned int FUN_0043a040(unsigned int *param_1,unsigned int param_2)
   int temp_v2;
   
   temp_v2 = 0;
-  temp_v0 = FUN_002e3390(param_2);
+  temp_v0 = wstrlen(param_2);
   temp_v1 = FUN_0016f988((unsigned int *)&temp_v2,param_2,temp_v0,0);
   if ((temp_v1 & 0x80000000) == 0) {
     *param_1 = temp_v2;

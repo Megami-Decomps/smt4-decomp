@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_00178b04. */
-extern unsigned int FUN_00340fa0(void);
+extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
@@ -44,7 +44,7 @@ void FUN_0035dec0(int param_1)
   FUN_004ff920(*(unsigned int *)(*(int *)(param_1 + 0x9208) + 4));
   if (*(int *)(param_1 + 0x920c) == 0) {
     temp_v3 = 0x20000;
-    temp_v0 = FUN_00340fa0();
+    temp_v0 = asdVramBGetFreeBytes();
     if (temp_v0 >= 0x20001) {
       temp_v3 = 0x30000;
     }

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002c4938(unsigned int *, int);
+int memClear(unsigned int *, int);
 
 typedef int romwright_code(...);
 extern romwright_code *DAT_0044e330; /* 0x44e330 */
 extern unsigned int DAT_0044e338; /* 0x44e338 */
 
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_001233d4(int param_1,int param_2)
@@ -32,7 +32,7 @@ void FUN_001233d4(int param_1,int param_2)
       else {
         puVar4 = (unsigned int *)(*DAT_0044e330)(0x10000,0x100,0,0x44);
       }
-      FUN_002c4938(puVar4,0x44);
+      memClear(puVar4,0x44);
       puVar4[0xb] = 0x300;
       while( 1 ) {
         temp_v0 = (DAT_0044e338 & 0x1f) * 4;

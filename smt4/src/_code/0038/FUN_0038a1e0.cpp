@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf818. */
-extern unsigned int *FUN_002c08f0(void);
+extern unsigned int *jobGetWork(void);
 
 
 unsigned int FUN_0038a1e0(void)
@@ -35,7 +35,7 @@ unsigned int FUN_0038a1e0(void)
   unsigned int *puVar4;
   unsigned int temp_v1;
   
-  puVar2 = (unsigned int *)FUN_002c08f0();
+  puVar2 = (unsigned int *)jobGetWork();
   temp_v0 = (puVar2[0x106] + 1) * -0x33333333;
   temp_v1 = (puVar2[0x106] + 1) % 0x28;
   puVar2[0x106] = temp_v1;

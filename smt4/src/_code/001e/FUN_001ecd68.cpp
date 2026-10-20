@@ -52,7 +52,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_0043dc24; /* 0x43dc24 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002b1fc4. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -116,8 +116,8 @@ int FUN_001ecd68(void)
     temp_v0 = *(int *)(DAT_0043dc24 + 8);
   }
   if (DAT_0043dc24 != 0 && temp_v0 != 0) {
-    FUN_002c39a4(DAT_0044ea00);
-    temp_v0 = DAT_0044ea00;
+    FUN_002c39a4(g_titleScene);
+    temp_v0 = g_titleScene;
     temp_v1 = FUN_002c5d80(1,0);
     piVar6 = (int *)(temp_v0 + 0x124c);
     temp_v2 = *piVar6;
@@ -148,7 +148,7 @@ int FUN_001ecd68(void)
       temp_v14 = 0x3f800000;
       FUN_002b1fc4(&temp_v11,&temp_v15,&temp_v19,&temp_v7,0,1);
       FUN_002bf288(2,0x11,0,0,0,1);
-      temp_v0 = DAT_0044ea00;
+      temp_v0 = g_titleScene;
       temp_v1 = FUN_002c5da8(6,1,0);
       piVar6 = (int *)(temp_v0 + 0x12ac);
       temp_v2 = piVar6[*piVar6 + 2];
@@ -199,7 +199,7 @@ int FUN_001ecd68(void)
       temp_v21 = temp_v5;
       temp_v22 = temp_v5;
       FUN_002b1fc4(&temp_v7,&temp_v19,&temp_v15,&temp_v11,0,1);
-      temp_v0 = DAT_0044ea00;
+      temp_v0 = g_titleScene;
       temp_v1 = FUN_002c5da8(6,1,0);
       piVar6 = (int *)(temp_v0 + 0x12ac);
       temp_v2 = piVar6[*piVar6 + 2];
@@ -212,7 +212,7 @@ int FUN_001ecd68(void)
       do {
         temp_v1 = temp_v4 + temp_v0 * 0x14;
         FUN_002bf288(2,0x11,1,(int)*(float *)(temp_v1 + 0x18),(int)*(float *)(temp_v1 + 0x1c),2);
-        temp_v1 = DAT_0044ea00;
+        temp_v1 = g_titleScene;
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 5);
       temp_v0 = FUN_002c5da8(6,7,0);
@@ -227,8 +227,8 @@ int FUN_001ecd68(void)
     else {
       FUN_002bf380(2,0x11,0,0,0,1);
     }
-    temp_v0 = DAT_0044ea00;
-    piVar6 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v0 = g_titleScene;
+    piVar6 = (int *)(g_titleScene + 0x124c);
     temp_v4 = *piVar6;
     temp_v1 = piVar6[temp_v4 + 2];
     *piVar6 = temp_v4 - 1;
@@ -236,8 +236,8 @@ int FUN_001ecd68(void)
       (**(romwright_code **)(temp_v0 + 0x1268))();
       *(unsigned char *)(temp_v0 + 0x1264) = 0;
     }
-    FUN_002c198c(DAT_0044ea00);
-    FUN_002c18e4(DAT_0044ea00);
+    FUN_002c198c(g_titleScene);
+    FUN_002c18e4(g_titleScene);
     temp_v0 = 0;
   }
   return temp_v0;

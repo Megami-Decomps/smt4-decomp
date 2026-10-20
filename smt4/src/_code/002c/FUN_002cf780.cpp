@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00250798(void);
 int FUN_0028fe0c(int, int);
-int FUN_002bd8e8(int, int);
+int timerStart(int, int);
 
 extern int DAT_0043dd50; /* 0x43dd50 */
 
@@ -14,7 +14,7 @@ extern int DAT_0043dd50; /* 0x43dd50 */
 /* Supplied declaration required: FUN_0028fe0c. */
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(void);
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 
 
 void FUN_002cf780(void)
@@ -31,7 +31,7 @@ void FUN_002cf780(void)
   temp_v1 = FUN_0029efc0();
   temp_v2 = FUN_0029efa8(temp_v0 + 0x5fc);
   FUN_0028fe0c(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x6c4),1);
-  FUN_002bd8e8(temp_v0 + 0x34,0);
+  timerStart(temp_v0 + 0x34,0);
   temp_v0 = DAT_0043dd50;
   *(unsigned int *)(DAT_0043dd50 + 8) = *(unsigned int *)(DAT_0043dd50 + 4);
   *(unsigned int *)(temp_v0 + 4) = 1;

@@ -10,7 +10,7 @@ int FUN_004ff364(int, int);
 int FUN_004ff8ac(void);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(unsigned int, int);
-int aeabi_idivmod(void);
+int __aeabi_idivmod(void);
 
 /* stack frame of param_5: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00184964. */
 /* Supplied declaration required: FUN_004ff364. */
 /* Supplied declaration required: FUN_004ff8ac. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 int FUN_0038aa84(unsigned int *param_1,int param_2,int param_3,int param_4,int param_5)
@@ -134,7 +134,7 @@ int FUN_0038aa84(unsigned int *param_1,int param_2,int param_3,int param_4,int p
                   *(short *)(param_1 + 1) = temp_v1;
                 }
                 if ((int)temp_v10 <= (int)*(short *)(param_1 + 1)) {
-                  aeabi_idivmod();
+                  __aeabi_idivmod();
                   *(unsigned short *)(param_1 + 1) = temp_v5;
                 }
               }

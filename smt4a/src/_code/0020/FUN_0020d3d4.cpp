@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned int DAT_00573bb0; /* 0x573bb0 */
 extern unsigned int DAT_00573bb4; /* 0x573bb4 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_0018719c(void);
 extern int FUN_001ab854(int);
@@ -52,7 +52,7 @@ void FUN_0020d3d4(int param_1)
          ((*(short *)(pcVar2 + 0x5c) == 0 || (temp_v1 = FUN_0018719c(), temp_v1 != 0)))) &&
         (((*(short *)(pcVar2 + 0x5e) == 0 || (temp_v1 = FUN_003e46f4(), temp_v1 != 0)) &&
          ((pcVar2[0x5b] == '\0' ||
-          (temp_v1 = FUN_0014aa78(),
+          (temp_v1 = btlGetMainState(),
           (*(unsigned int *)(temp_v1 + 0x45a0) & DAT_00573bb0) == 0 &&
           (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_00573bb4) == 0)))))) &&
        (((temp_v0 = *pcVar2, temp_v0 != '\x02' &&
@@ -80,7 +80,7 @@ void FUN_0020d3d4(int param_1)
                ((*(short *)(pcVar2 + 0x5c) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) &&
               ((*(short *)(pcVar2 + 0x5e) == 0 || (temp_v2 = FUN_003e46f4(), temp_v2 != 0)))) &&
              ((pcVar2[0x5b] == '\0' ||
-              (temp_v2 = FUN_0014aa78(),
+              (temp_v2 = btlGetMainState(),
               (DAT_00573bb4 & *(unsigned int *)(temp_v2 + 0x45a4)) == 0 &&
               (*(unsigned int *)(temp_v2 + 0x45a0) & DAT_00573bb0) == 0)))) {
             if (*pcVar2 != '\x05') {

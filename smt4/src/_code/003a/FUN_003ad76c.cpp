@@ -10,7 +10,7 @@ int FUN_002069d8(int);
 int FUN_002af5c0(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
-int FUN_002c222c(...);
+int asdOperatorNew(...);
 int FUN_002c312c(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
 
@@ -55,7 +55,7 @@ extern int DAT_00439ca8; /* 0x439ca8 */
 /* Supplied declaration required: FUN_002af5c0. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002c312c. */
 extern unsigned int FUN_0033d3e4(void);
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -124,7 +124,7 @@ void FUN_003ad76c(fn_003ad76c_arg0 *param_1,int param_2)
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 0xc);
   temp_v6 = 0x3a4;
-  FUN_002c222c(0x3a4,param_2);
+  asdOperatorNew(0x3a4,param_2);
   temp_v2 = 0;
   if (temp_v6 != 0) {
     temp_v2 = FUN_0033d3e4();

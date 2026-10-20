@@ -13,7 +13,7 @@ int FUN_0029a128(int);
 int FUN_0029e788(void);
 int FUN_0029e874(int);
 int FUN_002a0cc8(int);
-int FUN_002c4c2c(int);
+int asdTMTexTableLoadSprites(int);
 int FUN_002c58c8(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -23,7 +23,7 @@ typedef struct {
 
 extern unsigned char LAB_003ad4b8; /* 0x3ad4b8 */
 
-extern int *FUN_0022c970(unsigned int);
+extern int *asdTMTexTableGetEntry(unsigned int);
 /* Supplied declaration required: FUN_002898e4. */
 extern int FUN_00289d58(void);
 /* Supplied declaration required: FUN_0028c040. */
@@ -34,7 +34,7 @@ extern int FUN_00289d58(void);
 /* Supplied declaration required: FUN_0029e788. */
 /* Supplied declaration required: FUN_0029e874. */
 /* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: FUN_002c4c2c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c58c8. */
 
 
@@ -52,13 +52,13 @@ void FUN_003ad3dc(int param_1)
     FUN_0028d9b0();
     FUN_0028d6d0();
   }
-  piVar2 = (int *)FUN_0022c970(0xd);
+  piVar2 = (int *)asdTMTexTableGetEntry(0xd);
   if (*piVar2 == 0) {
     *(unsigned char *)(param_1 + 0x1d) = 1;
   }
-  piVar2 = (int *)FUN_0022c970(0x1d);
+  piVar2 = (int *)asdTMTexTableGetEntry(0x1d);
   if (*piVar2 == 0) {
-    FUN_002c4c2c(0x1d);
+    asdTMTexTableLoadSprites(0x1d);
     temp_v0 = 0;
     do {
       FUN_002c58c8(0x1d,temp_v0);

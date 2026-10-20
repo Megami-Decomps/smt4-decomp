@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014aa88(void);
-int FUN_00163060(int, int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 extern int DAT_00580c8c; /* 0x580c8c */
 
 /* Supplied declaration required: FUN_0014aa88. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 
 
 void FUN_00244894(void)
@@ -27,7 +27,7 @@ void FUN_00244894(void)
   int temp_v2;
   
   temp_v0 = 0x100;
-  FUN_00163060(0x100,0x100,0,0x64c,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x64c,1);
   DAT_00580c8c = temp_v0;
   FUN_0014aa88();
   temp_v1 = 0;

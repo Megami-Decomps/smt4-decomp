@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned char DAT_004e1f68; /* 0x4e1f68 */
+extern unsigned char g_asdSound; /* 0x4e1f68 */
 extern int iRam004e1f6c; /* 0x4e1f6c */
 
 /* Supplied declaration required: FUN_00141bdc. */
@@ -25,7 +25,7 @@ int FUN_0010bf44(unsigned int param_1)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_002bf684(&DAT_004e1f68);
+  temp_v0 = FUN_002bf684(&g_asdSound);
   temp_v1 = iRam004e1f6c;
   if (temp_v0 == 0) {
     return 0;

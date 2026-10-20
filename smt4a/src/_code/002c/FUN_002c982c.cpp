@@ -11,7 +11,7 @@ int FUN_00334214(unsigned char [42], int, int, int);
 int FUN_0036d318(...);
 int FUN_0037e09c(int);
 int FUN_003b076c(void);
-int aeabi_idivmod(int, int);
+int __aeabi_idivmod(int, int);
 
 /* stack frame of param_1: 4 slot(s), 10 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern short *FUN_002c7e24(void);
 /* Supplied declaration required: FUN_0036d318. */
 /* Supplied declaration required: FUN_0037e09c. */
 /* Supplied declaration required: FUN_003b076c. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_002c982c(int param_1)
@@ -84,7 +84,7 @@ void FUN_002c982c(int param_1)
               temp_v2 = temp_v2 + 1;
             } while ((int)temp_v2 < 0xe);
             if (*(int *)(param_1 + 0x4adc) >= 0x18) {
-              aeabi_idivmod(*piVar6 + 1,temp_v3);
+              __aeabi_idivmod(*piVar6 + 1,temp_v3);
               *piVar6 = temp_v1;
               *(int *)(param_1 + 0x4adc) = 0;
             }

@@ -10,8 +10,8 @@ int FUN_002454c4(int, int *, int, int);
 int FUN_0024550c(void);
 int FUN_00282820(int, unsigned int, int, int);
 int FUN_00282924(unsigned int *, int);
-int FUN_002939f4(void);
-int FUN_00296cc8(int);
+int btlGetMainState(void);
+int scrGetArg(int);
 int FUN_002aa568(int, unsigned char *);
 
 /* stack frame of void: 13 slot(s), 52 byte(s) */
@@ -32,21 +32,21 @@ typedef struct {
 } void_stack;
 
 extern unsigned char DAT_00400440; /* 0x400440 */
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 extern int DAT_00435d18; /* 0x435d18 */
-extern unsigned int DAT_00435d48; /* 0x435d48 */
+extern unsigned int g_btlEvent; /* 0x435d48 */
 
 /* Supplied declaration required: ARM_common_memcpy4_9. */
 /* Supplied declaration required: FUN_00245420. */
 /* Supplied declaration required: FUN_002454c4. */
 /* Supplied declaration required: FUN_0024550c. */
 extern int FUN_0027e3b8(unsigned int);
-extern unsigned int FUN_0027e928(unsigned int);
+extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_00282820. */
 /* Supplied declaration required: FUN_00282924. */
 extern int FUN_0028299c(int);
-/* Supplied declaration required: FUN_002939f4. */
-/* Supplied declaration required: FUN_00296cc8. */
+/* Supplied declaration required: btlGetMainState. */
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_002aa568. */
 extern int FUN_002c30c4(int);
 
@@ -79,9 +79,9 @@ void scrComm_Battle_PlayPositionedEffect(void)
   int temp_v19;
   int *temp_v20;
   
-  temp_v17 = FUN_00296cc8(0);
-  temp_v0 = FUN_00296cc8(1);
-  temp_v1 = FUN_0027e3b8(DAT_00435d48);
+  temp_v17 = scrGetArg(0);
+  temp_v0 = scrGetArg(1);
+  temp_v1 = FUN_0027e3b8(g_btlEvent);
   if (((temp_v1 == 0) || (temp_v1 = DAT_00435d18, FUN_0024550c(), temp_v1 != 0)) && (temp_v0 != 0)) {
     temp_v8 = 0;
     temp_v9 = 0;
@@ -99,14 +99,14 @@ void scrComm_Battle_PlayPositionedEffect(void)
     }
     ARM_common_memcpy4_9(&temp_v8,pcVar5);
     FUN_002454c4(DAT_00435d18,&temp_v8,1,0);
-    temp_v1 = FUN_002939f4();
-    temp_v16 = FUN_0027e928(DAT_0043427c);
+    temp_v1 = btlGetMainState();
+    temp_v16 = btlUnitGet(g_btlScriptUnit);
     temp_v7 = 0;
     temp_v5 = *(int *)(DAT_00435d18 + 0x1cfc);
     temp_v20 = (int *)(temp_v1 + 0x1e98);
     temp_v19 = 0;
     do {
-      temp_v1 = FUN_002939f4();
+      temp_v1 = btlGetMainState();
       puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + temp_v19 * 0x288);
       temp_v3 = *puVar3;
       if ((((temp_v3 & 1) != 0) && ((temp_v3 & 0x40) == 0)) &&
@@ -119,7 +119,7 @@ void scrComm_Battle_PlayPositionedEffect(void)
         temp_v14 = temp_v16;
         temp_v12 = (int)*(short *)(temp_v1 + 0x62);
         temp_v13 = temp_v12;
-        temp_v18 = (unsigned int *)FUN_002939f4();
+        temp_v18 = (unsigned int *)btlGetMainState();
         temp_v1 = 0;
         do {
           temp_v4 = temp_v5 + temp_v1 * 0x16;

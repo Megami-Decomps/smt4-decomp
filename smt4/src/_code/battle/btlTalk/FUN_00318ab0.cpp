@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_0028dcb0(int);
-int FUN_002c0c74(void);
+int scrSetResult(int);
+int dataTableGetCount(void);
 
-extern unsigned int DAT_00439b58; /* 0x439b58 */
+extern unsigned int g_btlTalk; /* 0x439b58 */
 
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_00296cc8(unsigned int);
-/* Supplied declaration required: FUN_002c0c74. */
-extern int FUN_002c0cc4(unsigned int);
+/* Supplied declaration required: scrSetResult. */
+extern int scrGetArg(unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(unsigned int);
 extern unsigned int FUN_003c0868(unsigned int);
 
 
@@ -27,19 +27,19 @@ unsigned int FUN_00318ab0(void)
   unsigned int temp_v4;
   int temp_v5;
   
-  temp_v1 = FUN_00296cc8(0);
-  temp_v2 = FUN_00296cc8(1);
-  temp_v3 = FUN_00296cc8(2);
-  temp_v4 = FUN_003c0868(DAT_00439b58);
-  FUN_002c0c74();
-  temp_v5 = FUN_002c0cc4(temp_v4);
+  temp_v1 = scrGetArg(0);
+  temp_v2 = scrGetArg(1);
+  temp_v3 = scrGetArg(2);
+  temp_v4 = FUN_003c0868(g_btlTalk);
+  dataTableGetCount();
+  temp_v5 = dataTableGetEntries(temp_v4);
   if (temp_v2 != 0) {
     temp_v0 = *(unsigned short *)(((temp_v5 + temp_v1 * 0x7c + temp_v2 * 0x24) - 0x1c) + temp_v3 * 2);
   }
   else {
     temp_v0 = *(unsigned short *)(temp_v5 + temp_v1 * 0x7c + temp_v3 * 2);
   }
-  FUN_0028dcb0(temp_v0);
+  scrSetResult(temp_v0);
   return 1;
 }
 

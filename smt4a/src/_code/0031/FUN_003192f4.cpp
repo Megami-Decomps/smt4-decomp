@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_001aeafc(unsigned int);
-int FUN_0031f5f4(void);
+int statusCameraDestroy(void);
 int FUN_003857b4(int);
 
 typedef int romwright_code(...);
@@ -15,8 +15,8 @@ typedef struct {
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_001aeafc. */
-/* Supplied declaration required: FUN_0031f5f4. */
-extern int FUN_003792d4(void);
+/* Supplied declaration required: statusCameraDestroy. */
+extern int lmapSceneGetScript(void);
 /* Supplied declaration required: FUN_003857b4. */
 
 
@@ -26,8 +26,8 @@ void FUN_003192f4(int param_1)
 /* irregular: 5 native warning(s); review required */
   int temp_v0;
   
-  FUN_0031f5f4();
-  temp_v0 = FUN_003792d4();
+  statusCameraDestroy();
+  temp_v0 = lmapSceneGetScript();
   if (temp_v0 != 0) {
     FUN_003857b4(1);
   }

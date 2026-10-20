@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00163060(int, int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_00182a9c(void);
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_0019dc44(...);
 int FUN_002a1970(...);
 int FUN_002a1cec(char *, unsigned char *, int);
@@ -34,9 +34,9 @@ extern unsigned char DAT_0063af98; /* 0x63af98 */
 extern unsigned char DAT_0063afa8; /* 0x63afa8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_00182a9c. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 extern int FUN_0019be8c(unsigned int);
 /* Supplied declaration required: FUN_0019dc44. */
 /* Supplied declaration required: FUN_002a1970. */
@@ -100,7 +100,7 @@ void FUN_0036bea0(int *param_1,unsigned int param_2,int param_3,unsigned int par
   param_1[0x2c] = 0;
   temp_v4 = 0;
   if (*param_1 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *param_1 = 0;
   }
   if (*param_6 != '\0') {
@@ -109,7 +109,7 @@ void FUN_0036bea0(int *param_1,unsigned int param_2,int param_3,unsigned int par
     FUN_00341968(&DAT_00636f88,&DAT_00638f88,0);
     param_1[1] = (int)puVar2;
     temp_v3 = 0x100;
-    FUN_00163060(0x100,0x100,0,(int)puVar2 << 5,0);
+    asdMemoryAllocTracked(0x100,0x100,0,(int)puVar2 << 5,0);
     *param_1 = temp_v3;
     temp_v5 = (int *)0x0;
     temp_v6 = (int *)0x0;

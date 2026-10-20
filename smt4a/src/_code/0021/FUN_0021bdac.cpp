@@ -7,13 +7,13 @@ extern "C" {
 int FUN_0014bf2c(unsigned int, int);
 int FUN_00164cd0(unsigned int, int);
 int FUN_00165088(int, int);
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_00169548(void);
 int FUN_00203da4(...);
 int FUN_002852f0(int);
 int FUN_0028b350(int, int);
 int FUN_002c76c0(unsigned int);
-int FUN_003283ac(unsigned int);
+int scrSetResult(unsigned int);
 
 /* stack frame of param_6: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -33,14 +33,14 @@ extern int FUN_00162ea4(void);
 /* Supplied declaration required: FUN_00164cd0. */
 /* Supplied declaration required: FUN_00165088. */
 extern unsigned short FUN_00167f08(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern unsigned int FUN_001688c4(unsigned int);
 /* Supplied declaration required: FUN_00169548. */
 /* Supplied declaration required: FUN_00203da4. */
 /* Supplied declaration required: FUN_002852f0. */
 /* Supplied declaration required: FUN_0028b350. */
 /* Supplied declaration required: FUN_002c76c0. */
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 extern unsigned short FUN_00341f54(unsigned int);
 extern unsigned char FUN_0037b538(unsigned int);
 extern int FUN_003aeaf0(unsigned int);
@@ -122,7 +122,7 @@ FUN_0021bdac(unsigned int param_1,int param_2,int param_3,int param_4,int param_
         temp_v6 = *(char *)(temp_v2 + 8);
       }
       if (temp_v2 == 0 || temp_v6 == '\0') {
-        FUN_003283ac(*(unsigned int *)(temp_v5 + 0x18));
+        scrSetResult(*(unsigned int *)(temp_v5 + 0x18));
         FUN_002c76c0(0xffffffff);
         FUN_002852f0(0);
         return 1;
@@ -130,7 +130,7 @@ FUN_0021bdac(unsigned int param_1,int param_2,int param_3,int param_4,int param_
       return 0;
     }
     if (temp_v6 == '\x05') {
-      FUN_003283ac(*(unsigned int *)(temp_v5 + 0x18));
+      scrSetResult(*(unsigned int *)(temp_v5 + 0x18));
       return 1;
     }
     temp_v2 = FUN_00162ea4();
@@ -195,7 +195,7 @@ FUN_0021bdac(unsigned int param_1,int param_2,int param_3,int param_4,int param_
         *(unsigned char *)(temp_v5 + 0x19da) = 1;
         temp_v1 = FUN_00167f08();
         *(unsigned short *)(temp_v5 + 0x19c6) = temp_v1;
-        FUN_001681cc(0xde);
+        sysPlaySe(0xde);
       }
       if (param_4 != 0x14) {
         return 0;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00213d1c(...);
 int taskCreate(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int rt_memcpy_w(...);
 
 typedef int romwright_code(...);
@@ -25,7 +25,7 @@ extern int FUN_00238490(...); /* 0x238490 */
 
 /* Supplied declaration required: FUN_00213d1c. */
 /* Supplied declaration required: taskCreate. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -62,7 +62,7 @@ romwright_code * FUN_00347688(unsigned int param_1,unsigned int param_2,int para
     taskCreate(FUN_002129b8,FUN_00238490,0,0,param_7,0x3f0,temp_v1,0,0);
   }
   if (unaff_r4 != (romwright_code *)0x0) {
-    FUN_002e6354(unaff_r4,0x3f0);
+    sysMemClear(unaff_r4,0x3f0);
     temp_v2 = (unsigned long long)param_6 << 0x20;
     *(unsigned int *)((unsigned char *)unaff_r4 + 0x26c) = 0xbf000000;
     *(unsigned int *)((unsigned char *)unaff_r4 + 0x270) = 0xbf000000;

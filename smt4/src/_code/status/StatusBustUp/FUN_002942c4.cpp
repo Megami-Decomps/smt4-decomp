@@ -10,7 +10,7 @@ int FUN_002a60b4(...);
 int FUN_002b06c4(void);
 int FUN_002b9024(void);
 
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 extern int DAT_0044e15c; /* 0x44e15c */
 extern int DAT_0044e160; /* 0x44e160 */
 
@@ -59,9 +59,9 @@ void FUN_002942c4(unsigned int param_1,int param_2)
 LAB_00294358:
   if ((*(char *)(DAT_0044e15c + param_1) < '\x01') &&
      (temp_v2 = FUN_002a60b4(0x17,param_1), temp_v2 == 0)) {
-    temp_v2 = FUN_002ae98c(DAT_00433158,0x17,param_1,1);
+    temp_v2 = FUN_002ae98c(g_aocSystem,0x17,param_1,1);
     if (temp_v2 != 0) {
-      FUN_002a5ee4(DAT_00433158,0x17,param_1,0x10000);
+      FUN_002a5ee4(g_aocSystem,0x17,param_1,0x10000);
     }
     else {
       FUN_002a5ed0(0x17,param_1);

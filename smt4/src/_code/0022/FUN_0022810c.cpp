@@ -1,38 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022810c` (_code @ 0x22810c, 0x98 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tests flag 2 with `and`/`movs` (the masked value stays in r0); built uses a single `tst`. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002939f4(...);
+/* Entry whose signed index sits at 400 (negative = invalid). */
+typedef struct {
+    u8 unk00[400];
+    s16 index;          /* 0x190 */
+} Entry;
 
-extern int FUN_00293230(void);
-/* Supplied declaration required: FUN_002939f4. */
+typedef struct {
+    u8 unk00[0x1cfc];
+    Entry *entry;       /* 0x1cfc */
+} Owner;
 
+/* Game state with a flag word at 0x44ac. */
+typedef struct {
+    u8 unk00[0x44ac];
+    u32 flags;          /* 0x44ac */
+} GameState;
 
-int FUN_0022810c(int param_1,int param_2)
+GameState *btlGetMainState(void);
+int FUN_00293230(void);
 
+/* Returns the owner's entry index, 0 when the state's flag 2 is set, or -1 when there is no usable entry. */
+int FUN_0022810c(Owner *owner, int strict)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0x1cfc);
-  if ((temp_v0 == 0) || (*(short *)(temp_v0 + 400) < 0)) {
-    return -1;
-  }
-  FUN_002939f4();
-  temp_v0 = FUN_00293230();
-  if ((temp_v0 != 0) && (temp_v0 = FUN_002939f4(), (*(unsigned int *)(temp_v0 + 0x44ac) & 2) != 0)) {
-    return 0;
-  }
-  if (param_2 != 0) {
-    FUN_002939f4(0);
-    temp_v0 = FUN_00293230();
-    if (temp_v0 != 0) {
-      return -1;
+    if (owner->entry == NULL || owner->entry->index < 0) {
+        return -1;
     }
-  }
-  return (int)*(short *)(*(int *)(param_1 + 0x1cfc) + 400);
+    btlGetMainState();
+    if (FUN_00293230() != 0) {
+        u32 masked = btlGetMainState()->flags & 2;
+
+        if (masked != 0) {
+            return 0;
+        }
+    }
+    if (strict != 0) {
+        btlGetMainState();
+        if (FUN_00293230() != 0) {
+            return -1;
+        }
+    }
+    return owner->entry->index;
 }
 
 } /* extern "C" */

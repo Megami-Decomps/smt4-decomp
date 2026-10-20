@@ -4,21 +4,21 @@
 
 extern "C" {
 
-int FUN_001630d4(int, int, int, unsigned int, int);
+int asdMemoryAlloc(int, int, int, unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 void FUN_00178b04(unsigned int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_001630d4(0x100,0x100,0,param_1,1);
+  asdMemoryAlloc(0x100,0x100,0,param_1,1);
   return;
 }
 

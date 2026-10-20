@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00192608(void);
 int FUN_002b4e7c(void);
 int FUN_002e342c(unsigned short *, unsigned int);
-int FUN_002e6354(unsigned short *, int);
+int sysMemClear(unsigned short *, int);
 int FUN_003df7c4(unsigned short *);
 int FUN_003dfad4(unsigned char *, unsigned short *);
 int FUN_00480a00(void);
@@ -29,7 +29,7 @@ extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: FUN_002b4e7c. */
 /* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003df7c4. */
 /* Supplied declaration required: FUN_003dfad4. */
 extern int FUN_003dfd5c(void);
@@ -67,7 +67,7 @@ void FUN_002cb55c(unsigned short *param_1,unsigned short *param_2,unsigned int *
   unsigned short temp_v14;
   unsigned char bStack_31;
   
-  FUN_002e6354(param_1,0x640);
+  sysMemClear(param_1,0x640);
   FUN_003df7c4(param_2);
   temp_v0 = param_2[0x31];
   *param_1 = 0xffff;
@@ -160,7 +160,7 @@ void FUN_002cb55c(unsigned short *param_1,unsigned short *param_2,unsigned int *
   *(unsigned int *)(param_1 + 0x4a) = 0;
   *(unsigned int *)(param_1 + 0x4c) = 0;
   *(unsigned int *)(param_1 + 0x4e) = 0;
-  FUN_002e6354(param_1 + 0x50,0x500);
+  sysMemClear(param_1 + 0x50,0x500);
   if (param_3 != (unsigned int *)0x0) {
     *(unsigned int *)(param_1 + 0x30d) = *param_3;
     *(unsigned int *)(param_1 + 0x30f) = param_3[1];

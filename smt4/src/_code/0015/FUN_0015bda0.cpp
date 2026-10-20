@@ -8,8 +8,8 @@ int FUN_002bc11c(...);
 int FUN_002c37a0(int);
 
 extern unsigned char DAT_0040b8a8; /* 0x40b8a8 */
-extern unsigned int *DAT_004652a0; /* 0x4652a0 */
-extern unsigned int DAT_004652a4; /* 0x4652a4 */
+extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
+extern unsigned int g_commandBufferEnd; /* 0x4652a4 */
 
 /* Supplied declaration required: FUN_002bc11c. */
 /* Supplied declaration required: FUN_002c37a0. */
@@ -33,7 +33,7 @@ unsigned int FUN_0015bda0(int param_1,int *param_2,int param_3)
   }
   puVar4 = *(unsigned int **)(param_1 + 8);
   if (*(unsigned int **)(param_1 + 8) == (unsigned int *)0x0) {
-    puVar4 = DAT_004652a0;
+    puVar4 = g_commandBufferCursor;
   }
   FUN_002c37a0(0x20000);
   temp_v0 = FUN_002bc11c();
@@ -103,19 +103,19 @@ unsigned int FUN_0015bda0(int param_1,int *param_2,int param_3)
       return 0x70;
     }
   }
-  else if (DAT_004652a4 < (unsigned int)(DAT_004652a0 + 0x1c)) {
+  else if (g_commandBufferEnd < (unsigned int)(g_commandBufferCursor + 0x1c)) {
     return 0x70;
   }
   puVar5 = puVar4;
   if (puVar4 == (unsigned int *)0x0) {
-    puVar5 = DAT_004652a0;
+    puVar5 = g_commandBufferCursor;
   }
   puVar1 = puVar5 + 0x1c;
   if (puVar4 != (unsigned int *)0x0) {
     *(unsigned int **)(param_1 + 8) = puVar5 + 0x1c;
-    puVar1 = DAT_004652a0;
+    puVar1 = g_commandBufferCursor;
   }
-  DAT_004652a0 = puVar1;
+  g_commandBufferCursor = puVar1;
   return 0x70;
 }
 

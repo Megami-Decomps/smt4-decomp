@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_0029a794(...);
 int FUN_00480a54(...);
 
@@ -29,13 +29,13 @@ extern unsigned char LAB_00329d64; /* 0x329d64 */
 extern int FUN_003581bc(...); /* 0x3581bc */
 extern unsigned char LAB_0037a070; /* 0x37a070 */
 extern unsigned char LAB_0037a074; /* 0x37a074 */
-extern unsigned int *DAT_005806c4; /* 0x5806c4 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern unsigned int *g_mapDepart; /* 0x5806c4 */
+extern int g_gameState; /* 0x5f15fc */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
 extern int FUN_00162e8c(void);
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_0029a794. */
 extern unsigned int FUN_00480738(unsigned int);
 /* Supplied declaration required: FUN_00480a54. */
@@ -53,8 +53,8 @@ void FUN_002941c8(int *param_1)
   unsigned char *puVar5;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x4cc,1);
-  DAT_005806c4 = puVar1;
+  asdMemoryAllocTracked(0x100,0x100,0,0x4cc,1);
+  g_mapDepart = puVar1;
   temp_v0 = FUN_00162e8c();
   if (param_1 != (int *)0x0) {
     temp_v1 = *param_1;
@@ -114,7 +114,7 @@ void FUN_002941c8(int *param_1)
           puVar1[0x2c] = 0;
           puVar1[0x2d] = 0;
           puVar1[0x34] = 0;
-          if (DAT_005f15fc >= 100) {
+          if (g_gameState >= 100) {
             puVar1[0x1f] = param_1[0xf];
             puVar1[0x20] = param_1[0x10];
             puVar1[0x21] = param_1[0x11];
@@ -155,7 +155,7 @@ void FUN_002941c8(int *param_1)
         puVar1[0x31] = param_1[0x1d];
         puVar1[0x32] = param_1[0x1e];
         puVar1[0x33] = param_1[0x1f];
-        if (DAT_005f15fc >= 100) {
+        if (g_gameState >= 100) {
           puVar1[0x1f] = param_1[0xf];
           puVar1[0x20] = param_1[0x10];
           puVar1[0x21] = param_1[0x11];
@@ -180,7 +180,7 @@ void FUN_002941c8(int *param_1)
         puVar1[temp_v0 + 0x2f] = temp_v2;
         temp_v0 = temp_v1;
       } while (temp_v1 < 5);
-      if (DAT_005f15fc >= 100) {
+      if (g_gameState >= 100) {
         puVar1[0x1f] = param_1[0xf];
         puVar1[0x20] = param_1[0x10];
         puVar1[0x21] = param_1[0x11];
@@ -194,11 +194,11 @@ void FUN_002941c8(int *param_1)
   }
   *(unsigned char *)(puVar1 + 2) = 0;
   puVar5 = &LAB_0029462c;
-  FUN_0014e38c(&LAB_0029462c,4,0,0,FUN_002991d4,&LAB_00329a78,0);
+  asdProcessCreateSimple(&LAB_0029462c,4,0,0,FUN_002991d4,&LAB_00329a78,0);
   *puVar1 = (unsigned int)puVar5;
-  FUN_0015155c(&LAB_00294640,0x71,0,0,&LAB_00329d64,&LAB_0037a074,0,puVar5);
-  FUN_0015155c(&LAB_00294654,0x75,0,0,FUN_00329a90,&LAB_0037a070,0,*puVar1);
-  FUN_0015155c(&LAB_00294664,0xea,0,0,FUN_003581bc,0,0,*puVar1);
+  taskCreateDraw(&LAB_00294640,0x71,0,0,&LAB_00329d64,&LAB_0037a074,0,puVar5);
+  taskCreateDraw(&LAB_00294654,0x75,0,0,FUN_00329a90,&LAB_0037a070,0,*puVar1);
+  taskCreateDraw(&LAB_00294664,0xea,0,0,FUN_003581bc,0,0,*puVar1);
   return;
 }
 

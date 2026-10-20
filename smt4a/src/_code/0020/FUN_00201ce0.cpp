@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0032cc8c(int, unsigned char [16]);
 int FUN_00359768(int, int, unsigned int);
 int FUN_0036bca0(int, int);
-int FUN_0037b0c0(void);
+int asd3dSoundActorIsPlaying(void);
 int FUN_003875b8(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -17,12 +17,12 @@ typedef struct {
 
 extern unsigned int FUN_0014af98(void);
 extern int FUN_00162ea4(void);
-extern int FUN_00180008(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: FUN_0032cc8c. */
 /* Supplied declaration required: FUN_00359768. */
 extern int FUN_0036bc6c(int);
 /* Supplied declaration required: FUN_0036bca0. */
-/* Supplied declaration required: FUN_0037b0c0. */
+/* Supplied declaration required: asd3dSoundActorIsPlaying. */
 /* Supplied declaration required: FUN_003875b8. */
 
 
@@ -46,12 +46,12 @@ int FUN_00201ce0(int param_1)
   temp_v6 = -1;
   iStack_28 = param_1;
   temp_v1 = FUN_0014af98();
-  temp_v2 = FUN_00180008(1);
+  temp_v2 = jyoucyuGetTableEntry(1);
   if ((temp_v2 == 0) && (temp_v2 = FUN_00162ea4(), temp_v2 == 0)) {
     temp_v2 = 0;
     do {
       temp_v3 = temp_v2;
-      FUN_0037b0c0();
+      asd3dSoundActorIsPlaying();
       if (temp_v3 == 0) {
         FUN_0032cc8c(temp_v2,temp_v7);
         if (param_1 + 0xfeffff84U < 0x191) {

@@ -31,7 +31,7 @@ typedef struct {
 
 extern unsigned char LAB_001a06b0; /* 0x1a06b0 */
 extern int DAT_0043da90; /* 0x43da90 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0019715c. */
@@ -76,8 +76,8 @@ unsigned int FUN_001a012c(void)
   unsigned int in_fpscr;
   
   temp_v1 = DAT_0043da90;
-  FUN_002c39a4(DAT_0044ea00);
-  temp_v3 = DAT_0044ea00;
+  FUN_002c39a4(g_titleScene);
+  temp_v3 = g_titleScene;
   temp_v2 = FUN_002c5d80(1,0);
   piVar11 = (int *)(temp_v3 + 0x124c);
   temp_v7 = *piVar11;
@@ -266,8 +266,8 @@ LAB_001a03b8:
     }
     break;
   }
-  temp_v1 = DAT_0044ea00;
-  piVar11 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v1 = g_titleScene;
+  piVar11 = (int *)(g_titleScene + 0x124c);
   temp_v3 = *piVar11;
   temp_v2 = piVar11[temp_v3 + 2];
   *piVar11 = temp_v3 - 1;
@@ -275,8 +275,8 @@ LAB_001a03b8:
     (**(romwright_code **)(temp_v1 + 0x1268))();
     *(unsigned char *)(temp_v1 + 0x1264) = 0;
   }
-  FUN_002c198c(DAT_0044ea00);
-  FUN_002c18e4(DAT_0044ea00);
+  FUN_002c198c(g_titleScene);
+  FUN_002c18e4(g_titleScene);
   return 0;
 }
 

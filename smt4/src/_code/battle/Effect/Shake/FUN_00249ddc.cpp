@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c5300(int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 void FUN_00249ddc(void)
@@ -21,7 +21,7 @@ void FUN_00249ddc(void)
   unsigned int *puVar1;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_002c5300(0x100,0x100,0,0x14,0);
+  asdMemoryAlloc(0x100,0x100,0,0x14,0);
   *puVar1 = 0;
   puVar1[1] = 0;
   puVar1[2] = 0;

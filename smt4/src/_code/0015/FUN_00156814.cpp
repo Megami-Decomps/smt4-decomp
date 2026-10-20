@@ -40,7 +40,7 @@ struct fn_00156814_arg1 {
     int field_0x84; /* +0x84 */
 };
 
-extern int DAT_004652a0; /* 0x4652a0 */
+extern int g_commandBufferCursor; /* 0x4652a0 */
 
 /* Supplied declaration required: FUN_0015bd68. */
 /* Supplied declaration required: nnnstdMemCpy. */
@@ -93,13 +93,13 @@ void FUN_00156814(fn_00156814_arg0 *param_1,fn_00156814_arg1 *param_2)
 LAB_0015689c:
   if (!temp_v7) {
     temp_v6 = *(unsigned int *)(unaff_r7 + 0x3c);
-    nnnstdMemCpy(DAT_004652a0,*(unsigned int *)(unaff_r7 + 0x38),temp_v6);
-    DAT_004652a0 = DAT_004652a0 + (temp_v6 & 0xfffffffc);
+    nnnstdMemCpy(g_commandBufferCursor,*(unsigned int *)(unaff_r7 + 0x38),temp_v6);
+    g_commandBufferCursor = g_commandBufferCursor + (temp_v6 & 0xfffffffc);
   }
   temp_v6 = param_2->field_0x80;
-  nnnstdMemCpy(DAT_004652a0,*(unsigned int *)&param_2->field_0x7c);
+  nnnstdMemCpy(g_commandBufferCursor,*(unsigned int *)&param_2->field_0x7c);
   temp_v3 = 0;
-  DAT_004652a0 = DAT_004652a0 + (temp_v6 & 0xfffffffc);
+  g_commandBufferCursor = g_commandBufferCursor + (temp_v6 & 0xfffffffc);
   temp_v5 = *(int *)(unaff_r7 + 0x40);
   temp_v0 = *(int *)(temp_v5 + param_2->field_0xc * 4 + 8);
   temp_v4 = 0;

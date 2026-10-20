@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00137ee0(int, int);
+int asdSequenceRequest(int, int);
 int FUN_00268250(int, int, int, unsigned int, int);
 int FUN_002e342c(unsigned char [132], unsigned int);
 int FUN_002e6dd0(...);
 int FUN_00320c64(void);
 int FUN_003332d8(void);
 int FUN_003416a0(int, unsigned char [132]);
-int FUN_0034dd9c(void);
+int aocBootStop(void);
 int FUN_003c113c(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -19,17 +19,17 @@ typedef struct {
     unsigned int sp98; /* 0x98: local_98 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00137ee0. */
+/* Supplied declaration required: asdSequenceRequest. */
 extern int FUN_00229c9c(void);
 extern unsigned int FUN_00239288(void);
-extern int FUN_00240a6c(void);
+extern int aocBootIsFinished(void);
 /* Supplied declaration required: FUN_00268250. */
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: FUN_002e6dd0. */
 /* Supplied declaration required: FUN_00320c64. */
 /* Supplied declaration required: FUN_003332d8. */
 /* Supplied declaration required: FUN_003416a0. */
-/* Supplied declaration required: FUN_0034dd9c. */
+/* Supplied declaration required: aocBootStop. */
 extern unsigned int FUN_00371b10(unsigned int);
 extern int FUN_0038b310(void);
 /* Supplied declaration required: FUN_003c113c. */
@@ -56,11 +56,11 @@ void FUN_00408610(int param_1)
     FUN_00320c64();
     *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
   case 2:
-    temp_v2 = FUN_00240a6c();
+    temp_v2 = aocBootIsFinished();
     if (temp_v2 == 0) {
       return;
     }
-    FUN_0034dd9c();
+    aocBootStop();
     *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
   case 3:
     temp_v0 = FUN_00239288();
@@ -79,7 +79,7 @@ void FUN_00408610(int param_1)
       }
       FUN_003332d8();
       *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
-      FUN_00137ee0(1,0);
+      asdSequenceRequest(1,0);
       *(unsigned char *)(param_1 + 4) = 1;
       temp_v2 = *(int *)(param_1 + 8) + 1;
       break;
@@ -94,7 +94,7 @@ void FUN_00408610(int param_1)
     FUN_003332d8();
     *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
   case 5:
-    FUN_00137ee0(1,0);
+    asdSequenceRequest(1,0);
     *(unsigned char *)(param_1 + 4) = 1;
     temp_v2 = *(int *)(param_1 + 8) + 1;
     break;

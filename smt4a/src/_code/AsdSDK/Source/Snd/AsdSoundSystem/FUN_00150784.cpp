@@ -11,7 +11,7 @@ int FUN_00173c1c(unsigned char *);
 int FUN_00173c7c(unsigned char *);
 int FUN_001742e4(...);
 int FUN_0018feac(unsigned char *);
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_001b6668(unsigned char *, unsigned char *);
 int nw_snd_SoundHandle_DetachSound(...);
 
@@ -48,7 +48,7 @@ extern int FUN_0015fe30(unsigned char *);
 /* Supplied declaration required: FUN_00173c7c. */
 /* Supplied declaration required: FUN_001742e4. */
 /* Supplied declaration required: FUN_0018feac. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001b6668. */
 /* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
 
@@ -135,23 +135,23 @@ void FUN_00150784(void)
       } while (temp_v1 < 0x10);
       FUN_001b6668(&DAT_0063ea48,&DAT_0063f45c);
       FUN_00173a94(&DAT_0063ea3c);
-      FUN_0019a5a0(DAT_0063f4c0);
+      asdMemFree(DAT_0063f4c0);
     }
     DAT_0063e6cc = 0;
     FUN_00173c1c(&DAT_0063e494);
     FUN_00173c7c(&DAT_0063e37c);
     FUN_0018feac(&DAT_0063e1e8);
     if (DAT_0063e6b8 != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     if (DAT_0063e6bc != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     if (DAT_0063e6c0 != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     if (DAT_0063e6c4 != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       return;
     }
   }

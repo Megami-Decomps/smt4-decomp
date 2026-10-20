@@ -11,7 +11,7 @@ extern int DAT_00434290; /* 0x434290 */
 
 /* Supplied declaration required: FUN_0022699c. */
 /* Supplied declaration required: FUN_0027da30. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 
 
 int FUN_003de8c4(short param_1,unsigned int param_2,int param_3)
@@ -28,7 +28,7 @@ int FUN_003de8c4(short param_1,unsigned int param_2,int param_3)
     temp_v1 = *(int *)(DAT_00434290 + 8);
     do {
       if (temp_v1 == 0) {
-        temp_v0 = FUN_002939f4();
+        temp_v0 = btlGetMainState();
         temp_v1 = DAT_00434290;
         FUN_0022699c(DAT_00434290,(int)param_1,0,param_2);
         FUN_0027da30(temp_v0,(int)*(short *)(param_3 + 0x62));

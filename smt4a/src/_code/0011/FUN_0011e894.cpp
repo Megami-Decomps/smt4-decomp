@@ -12,7 +12,7 @@ extern unsigned char LAB_0011e8dc; /* 0x11e8dc */
 extern unsigned char DAT_0055ab98; /* 0x55ab98 */
 extern unsigned char *DAT_005949ac; /* 0x5949ac */
 extern unsigned char *DAT_005949b0; /* 0x5949b0 */
-extern signed char DAT_0059935c; /* 0x59935c */
+extern signed char g_systemTable; /* 0x59935c */
 
 extern int FUN_00110594(int);
 extern int FUN_0011400c(unsigned int *, unsigned int);
@@ -36,10 +36,10 @@ int FUN_0011e894(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   temp_v1 = FUN_0011400c(param_1 + 1,temp_v0);
   FUN_002e9318(&uStack_10);
   temp_v1 = FUN_00110594(temp_v1 + 0x28);
-  if (DAT_0059935c == '\0') {
+  if (g_systemTable == '\0') {
     DAT_005949ac = &LAB_00117569;
     DAT_005949b0 = &LAB_00117579;
-    DAT_0059935c = '\x01';
+    g_systemTable = '\x01';
   }
   return temp_v1 - 0x2c;
 }

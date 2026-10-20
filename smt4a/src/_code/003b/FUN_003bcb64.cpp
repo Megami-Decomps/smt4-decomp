@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0014bef4(int);
-int FUN_002e6354(int [109], int);
-int FUN_003283ac(...);
+int sysMemClear(int [109], int);
+int scrSetResult(...);
 int FUN_003f0e20(int, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -22,11 +22,11 @@ extern unsigned int DAT_00571104; /* 0x571104 */
 extern unsigned int DAT_00571108; /* 0x571108 */
 extern unsigned int DAT_0057110c; /* 0x57110c */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_0014bef4. */
 extern int FUN_002a4b28(void);
-/* Supplied declaration required: FUN_002e6354. */
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: sysMemClear. */
+/* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003f0e20. */
 extern int FUN_004d0bf0(unsigned short);
 
@@ -48,23 +48,23 @@ unsigned int FUN_003bcb64(void)
   int temp_v8;
   unsigned int *temp_v9;
   
-  temp_v2 = FUN_0014aa78();
+  temp_v2 = btlGetMainState();
   temp_v0 = *(short *)(temp_v2 + 0x2356);
-  temp_v2 = FUN_0014aa78();
+  temp_v2 = btlGetMainState();
   FUN_003f0e20(temp_v2,(int)temp_v0);
   temp_v8 = temp_v2 + 0x100;
   temp_v1 = 0;
   do {
-    FUN_002e6354(aiStack_1e0,0x1b4);
+    sysMemClear(aiStack_1e0,0x1b4);
     temp_v7 = 0;
     if ((temp_v1) && (temp_v3 = FUN_0014bef4(99), temp_v3 < 0x5a)) {
       temp_v2 = -1;
-      FUN_003283ac(temp_v2);
+      scrSetResult(temp_v2);
       return 1;
     }
     temp_v6 = 0;
     do {
-      temp_v4 = FUN_0014aa78();
+      temp_v4 = btlGetMainState();
       puVar8 = (unsigned int *)(*(int *)(temp_v4 + 0x1ffc) + temp_v6 * 0x408);
       temp_v3 = *puVar8;
       temp_v5 = puVar8[1];
@@ -99,11 +99,11 @@ unsigned int FUN_003bcb64(void)
     if (temp_v7 != 0) {
       temp_v2 = FUN_0014bef4((temp_v7 - 1) & 0xffff);
       temp_v2 = (int)*(short *)(aiStack_1e0[temp_v2] + 8);
-      FUN_003283ac(temp_v2);
+      scrSetResult(temp_v2);
       return 1;
     }
     if (temp_v1) {
-      FUN_003283ac(0xffffffff);
+      scrSetResult(0xffffffff);
       return 1;
     }
     temp_v1 = 1;

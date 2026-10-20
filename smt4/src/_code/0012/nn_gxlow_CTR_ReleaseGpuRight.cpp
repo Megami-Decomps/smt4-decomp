@@ -9,7 +9,7 @@ int nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents(int, int);
 extern int FUN_002ad244(void);
 extern int FUN_002ad254(void);
 extern unsigned int FUN_002ad264(void);
-extern int FUN_002b3abc(void);
+extern int nngxCheckVramBank(void);
 extern unsigned int nn_gxlow_CTR_Gpu_ReleaseRight(unsigned int);
 /* Supplied declaration required: nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents. */
 
@@ -29,7 +29,7 @@ unsigned int nn_gxlow_CTR_ReleaseGpuRight(void)
   else {
     temp_v2 = FUN_002ad264();
     temp_v1 = nn_gxlow_CTR_Gpu_ReleaseRight(temp_v2);
-    if ((-1 < (int)temp_v1) && (temp_v0 = FUN_002b3abc(), temp_v0 != 0)) {
+    if ((-1 < (int)temp_v1) && (temp_v0 = nngxCheckVramBank(), temp_v0 != 0)) {
       temp_v0 = FUN_002ad244();
       nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents(temp_v0 + 0x30,1);
     }

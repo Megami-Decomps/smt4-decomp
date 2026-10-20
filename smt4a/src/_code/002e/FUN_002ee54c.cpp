@@ -1,24 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ee54c` (_code @ 0x2ee54c, 0x16 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e7232(unsigned int);
+typedef struct Object {
+    /* 0x00 */ void *vtbl;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 handle;
+} Object;
 
-extern unsigned char DAT_0055b2e0; /* 0x55b2e0 */
+extern u8 DAT_0055b2e0;
 
-/* Supplied declaration required: FUN_002e7232. */
+int FUN_002e7232(u32 handle);
 
-
-unsigned int * FUN_002ee54c(unsigned int *param_1)
-
+/* Destructor body: installs the vtable, releases the handle and clears it. */
+Object *FUN_002ee54c(Object *self)
 {
-/* irregular: 1 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_0055b2e0;
-  FUN_002e7232(param_1[2]);
-  param_1[2] = 0;
-  return param_1;
+    self->vtbl = &DAT_0055b2e0;
+    FUN_002e7232(self->handle);
+    self->handle = 0;
+    return self;
 }
 
 } /* extern "C" */

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_005b406c; /* 0x5b406c */
+extern unsigned char g_asdMemory; /* 0x5b406c */
 
 extern unsigned int FUN_00431f04(int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -18,8 +18,8 @@ unsigned int FUN_002a1bac(void)
   int temp_v1;
   int temp_v2;
   
-  temp_v2 = (*(int *)((unsigned char *)&DAT_005b406c + 0x4)) + 0x1c;
-  temp_v1 = (*(int *)((unsigned char *)&DAT_005b406c + 0x4)) + 0x74;
+  temp_v2 = (*(int *)((unsigned char *)&g_asdMemory + 0x4)) + 0x1c;
+  temp_v1 = (*(int *)((unsigned char *)&g_asdMemory + 0x4)) + 0x74;
   nn_os_CriticalSection_Enter(temp_v1);
   temp_v0 = FUN_00431f04(temp_v2);
   nn_os_CriticalSection_Leave(temp_v1);

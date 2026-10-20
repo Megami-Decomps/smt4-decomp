@@ -21,7 +21,7 @@ extern unsigned char *DAT_0044e648; /* 0x44e648 */
 /* Supplied declaration required: FUN_0011bb90. */
 extern unsigned int FUN_002bbaf8(void);
 /* Supplied declaration required: FUN_002bbb2c. */
-extern int FUN_002c1364(unsigned int *, char *, unsigned int, unsigned int);
+extern int asdModelForwardChecked(unsigned int *, char *, unsigned int, unsigned int);
 extern int FUN_002c1398(void);
 extern unsigned int FUN_002c30c4(char *);
 extern int nn_fs_ipc_FileSystem_SetPriority(unsigned int *, unsigned int);
@@ -47,7 +47,7 @@ void FUN_0010f5dc(void)
     }
   }
   temp_v1 = FUN_002c30c4("fs:USER");
-  temp_v0 = FUN_002c1364((unsigned int *)&DAT_0044e644,"fs:USER",temp_v1,0);
+  temp_v0 = asdModelForwardChecked((unsigned int *)&DAT_0044e644,"fs:USER",temp_v1,0);
   if (temp_v0 < 0) {
     FUN_002bbb2c(temp_v0,0x10f630);
   }

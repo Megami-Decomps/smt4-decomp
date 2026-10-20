@@ -3,17 +3,17 @@
 extern "C" {
 
 int FUN_002e6e14(void);
-int FUN_002ec9f4(void);
+int strDestroy(void);
 
 /* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 
 
 void FUN_00105d20(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_002ec9f4();
+  strDestroy();
   FUN_002e6e14();
   return;
 }

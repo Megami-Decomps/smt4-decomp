@@ -4,20 +4,20 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
+int jobStop(unsigned int, int);
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 extern unsigned int *DAT_0057f568; /* 0x57f568 */
 
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 
 
 void FUN_00291968(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_001631d0(*DAT_0057f568,0);
-  *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xffffff8f;
+  jobStop(*DAT_0057f568,0);
+  *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
   return;
 }
 

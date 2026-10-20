@@ -7,7 +7,7 @@ extern "C" {
 typedef int romwright_code(...);
 extern int *DAT_0057f658; /* 0x57f658 */
 
-extern int FUN_00163e40(int);
+extern int jobIsValid(int);
 
 
 unsigned int FUN_003247d8(void)
@@ -18,7 +18,7 @@ unsigned int FUN_003247d8(void)
   
   temp_v1 = 0;
   if (DAT_0057f658 != (int *)0x0) {
-    temp_v0 = FUN_00163e40(DAT_0057f658[1]);
+    temp_v0 = jobIsValid(DAT_0057f658[1]);
     if (temp_v0 != 0) {
       temp_v1 = 1;
     }

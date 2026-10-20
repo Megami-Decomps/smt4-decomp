@@ -9,7 +9,7 @@ int FUN_002c52f8(void);
 extern unsigned char DAT_00465710; /* 0x465710 */
 extern int DAT_00472a50; /* 0x472a50 */
 
-extern unsigned int FUN_002c1364(unsigned int *, char *, unsigned int, unsigned int);
+extern unsigned int asdModelForwardChecked(unsigned int *, char *, unsigned int, unsigned int);
 extern int FUN_002c1398(void);
 extern unsigned int FUN_002c30c4(char *);
 /* Supplied declaration required: FUN_002c52f8. */
@@ -33,7 +33,7 @@ unsigned int FUN_00128334(void)
     }
     else {
       temp_v1 = FUN_002c30c4("cfg:u");
-      temp_v2 = FUN_002c1364((unsigned int *)&DAT_00472a50,"cfg:u",temp_v1,0);
+      temp_v2 = asdModelForwardChecked((unsigned int *)&DAT_00472a50,"cfg:u",temp_v1,0);
       if ((temp_v2 & 0x80000000) != 0) {
         temp_v2 = 0xd92103fb;
       }

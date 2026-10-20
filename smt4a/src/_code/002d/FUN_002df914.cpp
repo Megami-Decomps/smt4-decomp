@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_00580238; /* 0x580238 */
+extern int g_lmapMainState; /* 0x580238 */
 extern unsigned int DAT_005f1628; /* 0x5f1628 */
 extern signed char DAT_005f1749; /* 0x5f1749 */
 extern signed char DAT_005f1776; /* 0x5f1776 */
@@ -30,7 +30,7 @@ void FUN_002df914(void)
   int temp_v0;
   
   if (((DAT_005f1776 == '\0') && (DAT_005f1749 != '\0')) &&
-     (*(char *)(DAT_00580238 + 0x9e1) == '\0')) {
+     (*(char *)(g_lmapMainState + 0x9e1) == '\0')) {
     DAT_005f1628 = 0x100003e;
     temp_v0 = FUN_0018719c(0x137);
     if ((temp_v0 != 0) && (temp_v0 = FUN_0018719c(0x189), temp_v0 == 0)) {

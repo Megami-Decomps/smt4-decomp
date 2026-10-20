@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 
 extern unsigned char LAB_0039a7ac; /* 0x39a7ac */
 extern int FUN_003bab24(...); /* 0x3bab24 */
 extern signed char DAT_0057f20a; /* 0x57f20a */
 extern unsigned int *DAT_0057f214; /* 0x57f214 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 
 
 void FUN_0037ed38(void)
@@ -28,7 +28,7 @@ void FUN_0037ed38(void)
   if (DAT_0057f20a == '\0') {
     if (DAT_0057f214 == (unsigned int *)0x0) {
       puVar1 = (unsigned int *)0x100;
-      FUN_00163060(0x100,0x100,0,0x20,1);
+      asdMemoryAllocTracked(0x100,0x100,0,0x20,1);
       DAT_0057f214 = puVar1;
     }
     puVar1 = DAT_0057f214;
@@ -41,9 +41,9 @@ void FUN_0037ed38(void)
     puVar1[6] = 0;
     puVar1[7] = 0;
     pcVar2 = "CrazingSumaho Calc";
-    FUN_0014e38c("CrazingSumaho Calc",4,0,0,&LAB_0039a7ac,0,0);
+    asdProcessCreateSimple("CrazingSumaho Calc",4,0,0,&LAB_0039a7ac,0,0);
     *puVar1 = (unsigned int)pcVar2;
-    FUN_0015155c("CrazingSumaho DrawDown",0xee,0,0,FUN_003bab24,0,0,pcVar2);
+    taskCreateDraw("CrazingSumaho DrawDown",0xee,0,0,FUN_003bab24,0,0,pcVar2);
     puVar1[3] = 0;
     puVar1[4] = 0;
     puVar1[5] = 0x3f4ccccd;

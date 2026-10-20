@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010063a(...);
+int qsort(...);
 int FUN_002a6894(...);
 int FUN_004bcd90(...);
 int FUN_004bd30c(...);
@@ -20,7 +20,7 @@ typedef struct {
 
 extern int FUN_002c2bf4(...); /* 0x2c2bf4 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern int FUN_001ab854(unsigned char);
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_002a6894. */
@@ -103,7 +103,7 @@ unsigned int FUN_003f33b0(int param_1,unsigned int param_2,int param_3)
     }
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 8);
-  FUN_0010063a(param_3,8,2,FUN_002c2bf4);
+  qsort(param_3,8,2,FUN_002c2bf4);
   temp_v2 = FUN_004bd21c(temp_v3);
   if (0 < 8 - temp_v1) {
     *(unsigned short *)(param_3 + temp_v1 * 2) = 0;

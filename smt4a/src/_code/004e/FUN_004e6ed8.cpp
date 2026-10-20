@@ -8,7 +8,7 @@ extern unsigned int DAT_00571190; /* 0x571190 */
 extern unsigned int DAT_00571194; /* 0x571194 */
 
 extern int FUN_004e9ae8(int *, int *, int, unsigned int);
-extern int FUN_004ee568(int *);
+extern int btlUnitGet(int *);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -46,7 +46,7 @@ void FUN_004e6ed8(int *param_1,int param_2)
   if (param_2 != 0) {
     temp_v0 = FUN_004e9ae8(param_1,aiStack_1dc + 1,temp_v0,1);
   }
-  temp_v1 = FUN_004ee568(param_1);
+  temp_v1 = btlUnitGet(param_1);
   *(unsigned char *)(aiStack_1dc[temp_v0] + temp_v1 + 0x38) = 1;
   return;
 }

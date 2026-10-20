@@ -8,7 +8,7 @@ int FUN_0018cfe4(unsigned int, unsigned int);
 int FUN_0018e9d8(unsigned int, int);
 int FUN_0034103c(unsigned int);
 
-extern unsigned int DAT_005b3c80; /* 0x5b3c80 */
+extern unsigned int g_effAsdLightHandle; /* 0x5b3c80 */
 extern unsigned int DAT_005b3c84; /* 0x5b3c84 */
 extern unsigned int DAT_005b3c88; /* 0x5b3c88 */
 extern unsigned int DAT_005b3c8c; /* 0x5b3c8c */
@@ -145,11 +145,11 @@ void FUN_00280d2c(unsigned int *param_1)
     (&DAT_00636e04)[temp_v4 * 0x18] = 0;
     (&DAT_00636e05)[temp_v4 * 0x18] = 0;
     FUN_0018e9d8((&DAT_005b3c88)[temp_v4],(&DAT_005b3c98)[temp_v4]);
-    FUN_0018cfe4((&DAT_005b3c80)[temp_v4],(&DAT_005b3c88)[temp_v4]);
+    FUN_0018cfe4((&g_effAsdLightHandle)[temp_v4],(&DAT_005b3c88)[temp_v4]);
   }
   if (*(int *)(temp_v0 + 0x14) != 0) {
     if (*(int *)(*(int *)(temp_v0 + 0x14) + 8) == 0) {
-      FUN_0018cfe4(DAT_005b3c80,DAT_005b3c88);
+      FUN_0018cfe4(g_effAsdLightHandle,DAT_005b3c88);
       DAT_00636e00 = DAT_00636e00 - 1;
     }
     else {
@@ -158,7 +158,7 @@ void FUN_00280d2c(unsigned int *param_1)
     }
   }
   else if (*(int *)(temp_v0 + 0xc) < 3) {
-    FUN_0018cfe4(DAT_005b3c80,DAT_005b3c88);
+    FUN_0018cfe4(g_effAsdLightHandle,DAT_005b3c88);
     DAT_00636e00 = DAT_00636e00 - 1;
   }
   else {

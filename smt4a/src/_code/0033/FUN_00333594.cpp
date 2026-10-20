@@ -4,14 +4,14 @@
 
 extern "C" {
 
-extern unsigned char DAT_0057f698; /* 0x57f698 */
+extern unsigned char g_gameDataBlocks; /* 0x57f698 */
 
 
 void FUN_00333594(unsigned int param_1,unsigned int param_2)
 
 {
   if (param_1 < 5) {
-    *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x10)) + param_1 * 4) = param_2;
+    *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x10)) + param_1 * 4) = param_2;
   }
   return;
 }

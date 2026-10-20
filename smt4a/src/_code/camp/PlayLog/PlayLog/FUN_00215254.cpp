@@ -7,13 +7,13 @@ extern "C" {
 int FUN_0014384c(int);
 int FUN_0014e188(int, int, int, int, int);
 int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int FUN_00163060(int, int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_00184758(int, int, int);
 int FUN_00184c00(...);
 int FUN_001acf98(int, int);
 int FUN_00203b40(...);
 int FUN_0022feb0(...);
-int FUN_002e6354(void);
+int sysMemClear(void);
 int FUN_003f86f8(int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
 int rt_memcpy_w(...);
@@ -31,19 +31,19 @@ typedef struct {
 extern unsigned char DAT_0052dd98; /* 0x52dd98 */
 extern unsigned char DAT_0052dde0; /* 0x52dde0 */
 extern unsigned char DAT_0052ddf8; /* 0x52ddf8 */
-extern int DAT_0057f278; /* 0x57f278 */
+extern int g_playLog; /* 0x57f278 */
 
 /* Supplied declaration required: FUN_0014384c. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_00184c00. */
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_0022feb0. */
 extern int FUN_00261458(void);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003f86f8. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -57,13 +57,13 @@ void FUN_00215254(void)
   int temp_v1;
   int temp_v2;
   
-  if (DAT_0057f278 == 0) {
+  if (g_playLog == 0) {
     temp_v0 = 0x100;
-    FUN_00163060(0x100,0x100,0,0x6f4,1);
-    DAT_0057f278 = temp_v0;
+    asdMemoryAllocTracked(0x100,0x100,0,0x6f4,1);
+    g_playLog = temp_v0;
   }
-  temp_v0 = DAT_0057f278;
-  FUN_002e6354();
+  temp_v0 = g_playLog;
+  sysMemClear();
   *(unsigned int *)(temp_v0 + 0x344) = 0;
   *(unsigned int *)(temp_v0 + 0x6ec) = 0;
   FUN_0014384c(0x25);

@@ -6,16 +6,16 @@ extern "C" {
 
 int FUN_00100388(unsigned char [260], unsigned char *, int);
 int FUN_001642e4(unsigned char [260], int, int, int);
-int FUN_0019a5a0(unsigned char *);
-int FUN_00387368(void);
+int asdMemFree(unsigned char *);
+int asdEffectTextureCreate(void);
 
 extern unsigned char LAB_003874d4; /* 0x3874d4 */
 extern signed char DAT_005b3270; /* 0x5b3270 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001642e4. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_00387368. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdEffectTextureCreate. */
 
 
 void FUN_00387454(void)
@@ -34,9 +34,9 @@ void FUN_00387454(void)
       puVar1 = temp_v1;
       FUN_001642e4(temp_v1,0,1,0x80);
       puVar2 = puVar1;
-      FUN_00387368();
+      asdEffectTextureCreate();
       *(unsigned char **)(temp_v0 * 4 + 0x635770) = puVar2;
-      FUN_0019a5a0(puVar1);
+      asdMemFree(puVar1);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 0x16);
     DAT_005b3270 = '\x01';

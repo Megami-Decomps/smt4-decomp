@@ -13,7 +13,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_0058103c; /* 0x58103c */
+extern int g_mapIf; /* 0x58103c */
 extern int DAT_005f1b30; /* 0x5f1b30 */
 extern int DAT_005f1b34; /* 0x5f1b34 */
 extern int DAT_005f1b38; /* 0x5f1b38 */
@@ -32,9 +32,9 @@ void FUN_002d8748(void)
   unsigned int temp_v2;
   
   temp_v1 = DAT_005f1b30;
-  temp_v0 = DAT_0058103c;
-  puVar2 = (unsigned char *)(DAT_0058103c + 0xcc7c);
-  *(int *)(DAT_0058103c + 0xcc9c) = DAT_005f1b30;
+  temp_v0 = g_mapIf;
+  puVar2 = (unsigned char *)(g_mapIf + 0xcc7c);
+  *(int *)(g_mapIf + 0xcc9c) = DAT_005f1b30;
   temp_v1 = *(int *)(temp_v1 + 4);
   FUN_0040ace8(DAT_0056fcc0,temp_v1);
   *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 3;

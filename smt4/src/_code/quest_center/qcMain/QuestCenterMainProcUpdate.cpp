@@ -18,8 +18,8 @@ int FUN_002a6fb8(void);
 int FUN_002b2368(unsigned int);
 int FUN_002bf694(unsigned char [28]);
 int FUN_002c09d0(...);
-int FUN_002c222c(void);
-int FUN_002c57c8(...);
+int asdOperatorNew(void);
+int asdSequenceRequest(...);
 int FUN_0032c69c(void);
 int FUN_00381b8c(void);
 int FUN_003840f4(unsigned int, int, unsigned int, int);
@@ -39,7 +39,7 @@ extern int DAT_0044db98; /* 0x44db98 */
 extern int DAT_0049fc18; /* 0x49fc18 */
 
 /* Supplied declaration required: FUN_0028727c. */
-extern int FUN_002872d4(void);
+extern int gameStateIsFlagSetAndLarge(void);
 extern int FUN_00287304(void);
 extern int FUN_00287314(unsigned int *);
 /* Supplied declaration required: FUN_00287328. */
@@ -59,8 +59,8 @@ extern int FUN_00298e20(unsigned int);
 /* Supplied declaration required: FUN_002b2368. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002c09d0. */
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c57c8. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_0032c69c. */
 /* Supplied declaration required: FUN_00381b8c. */
 /* Supplied declaration required: FUN_003840f4. */
@@ -149,7 +149,7 @@ unsigned int QuestCenterMainProcUpdate(void)
               temp_v7[0] = (unsigned int)*(unsigned short *)(temp_v2 + 0x44dbc0);
               temp_v7[1] = 0xffffffff;
               FUN_002bf694(temp_v8);
-              FUN_002c57c8(4,temp_v7,0x20);
+              asdSequenceRequest(4,temp_v7,0x20);
               return 0;
             }
             break;
@@ -175,7 +175,7 @@ LAB_001a9c38:
       FUN_00289880();
     }
     puVar3 = (unsigned int *)0xfc4;
-    FUN_002c222c();
+    asdOperatorNew();
     temp_v2 = 0;
     if (puVar3 != (unsigned int *)0x0) {
       *puVar3 = 0;
@@ -206,7 +206,7 @@ LAB_001a9c38:
     temp_v2 = *(int *)(DAT_0044db8c + 0x1c);
     if ((((temp_v2 == 0) || (FUN_00385278(), temp_v2 == 0)) && (temp_v2 = FUN_00287304(), temp_v2 != 0)) &&
        (DAT_0044db98 == 0)) {
-      temp_v2 = FUN_002872d4();
+      temp_v2 = gameStateIsFlagSetAndLarge();
       if (temp_v2 != 0) {
         temp_v4 = 4;
         temp_v7[0] = DAT_0049fc18 - 200;
@@ -217,7 +217,7 @@ LAB_001a9c38:
         puVar6 = (unsigned int *)0x0;
         temp_v3 = 6;
       }
-      FUN_002c57c8(temp_v3,puVar6,temp_v4);
+      asdSequenceRequest(temp_v3,puVar6,temp_v4);
     }
     *(unsigned char *)(temp_v0 + 0x19) = 4;
     *(unsigned char *)(temp_v0 + 0x18) = 1;

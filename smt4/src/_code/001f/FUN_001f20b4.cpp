@@ -36,7 +36,7 @@ extern unsigned char LAB_001f25bc; /* 0x1f25bc */
 extern unsigned char LAB_001f29bc; /* 0x1f29bc */
 extern unsigned char LAB_001f29c4; /* 0x1f29c4 */
 extern unsigned char LAB_001f3028; /* 0x1f3028 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002580d4. */
@@ -249,8 +249,8 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
           FUN_002bf288(2,0x24,0x7e,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,
                        0xc9);
           temp_v5 = FUN_002bf4f8(0x24,0x7a);
-          temp_v4 = DAT_0044ea00;
-          piVar13 = (int *)(DAT_0044ea00 + 0x130c);
+          temp_v4 = g_titleScene;
+          piVar13 = (int *)(g_titleScene + 0x130c);
           temp_v7 = piVar13[*piVar13 + 2];
           piVar13[*piVar13 + 2] = 3;
           if (*(char *)(temp_v4 + 0x1324) != '\0' || temp_v7 != 3) {
@@ -265,8 +265,8 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
           temp_v1 = FUN_002beda4(temp_v1 + 0xb0);
           FUN_002bf288(2,0x24,0x7c,temp_v1 + param_1 + (int)*(short *)(temp_v6 + 8),
                        temp_v4 + param_2 + (int)temp_v0,0xce);
-          temp_v1 = DAT_0044ea00;
-          piVar13 = (int *)(DAT_0044ea00 + 0x130c);
+          temp_v1 = g_titleScene;
+          piVar13 = (int *)(g_titleScene + 0x130c);
           temp_v4 = piVar13[*piVar13 + 2];
           piVar13[*piVar13 + 2] = 0;
           if (*(char *)(temp_v1 + 0x1324) != '\0' || temp_v4 != 0) {
@@ -336,7 +336,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
           else {
             temp_v2 = FUN_002bf4f8(0x24,0x81);
           }
-          temp_v1 = DAT_0044ea00;
+          temp_v1 = g_titleScene;
           temp_v4 = FUN_002c5da8(6,1,0);
           piVar13 = (int *)(temp_v1 + 0x12ac);
           temp_v5 = piVar13[*piVar13 + 2];
@@ -351,7 +351,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
           FUN_002bf288(2,0x24,0x59,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8) + param_1
                        ,(int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,0xdd);
           FUN_002bf538();
-          temp_v1 = DAT_0044ea00;
+          temp_v1 = g_titleScene;
           temp_v2 = FUN_002c5da8(6,7,0);
           piVar13 = (int *)(temp_v1 + 0x12ac);
           temp_v6 = piVar13[*piVar13 + 2];

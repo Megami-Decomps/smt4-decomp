@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c415c(void);
+int asdMemFree(void);
 
 extern unsigned char DAT_00446fe8; /* 0x446fe8 */
 extern unsigned int DAT_00446fec; /* 0x446fec */
@@ -17,7 +17,7 @@ extern int DAT_00447004; /* 0x447004 */
 extern int DAT_00447008; /* 0x447008 */
 extern int DAT_0044700c; /* 0x44700c */
 
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_002702dc(void)
@@ -25,19 +25,19 @@ void FUN_002702dc(void)
 {
 /* irregular: 1 native warning(s); review required */
   if (DAT_00447000 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     DAT_00447000 = 0;
   }
   if (DAT_00447004 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     DAT_00447004 = 0;
   }
   if (DAT_00447008 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     DAT_00447008 = 0;
   }
   if (DAT_0044700c != 0) {
-    FUN_002c415c();
+    asdMemFree();
     DAT_0044700c = 0;
   }
   DAT_00446fec = 0;

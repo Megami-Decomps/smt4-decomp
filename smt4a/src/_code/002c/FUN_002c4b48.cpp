@@ -18,7 +18,7 @@ int FUN_00275fe4(...);
 int FUN_002852f0(int);
 int FUN_002c76c0(...);
 int FUN_002e342c(unsigned int [32], unsigned int);
-int FUN_002e6354(unsigned int [32], int);
+int sysMemClear(unsigned int [32], int);
 int FUN_003180c4(int, unsigned int [32]);
 int FUN_00359974(int, unsigned int, unsigned int, int);
 int FUN_0037c88c(void);
@@ -51,7 +51,7 @@ extern int FUN_002ba85c(void);
 /* Supplied declaration required: FUN_002c76c0. */
 extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003180c4. */
 extern int FUN_00331194(void);
 /* Supplied declaration required: FUN_00359974. */
@@ -122,7 +122,7 @@ unsigned int FUN_002c4b48(void)
       if (temp_v0 != 1) {
         if (temp_v0 == 2) {
           temp_v1 = 1;
-          FUN_002e6354(temp_v12,0x80);
+          sysMemClear(temp_v12,0x80);
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v9 + 0x102);
           FUN_00180118(temp_v5);
           FUN_002e342c(temp_v12,temp_v5);
@@ -150,7 +150,7 @@ unsigned int FUN_002c4b48(void)
       else {
         temp_v14 = (unsigned int)*(unsigned short *)(temp_v9 + 0x102);
         temp_v8 = *(unsigned int *)(temp_v9 + 0x104);
-        FUN_002e6354(temp_v12,0x80);
+        sysMemClear(temp_v12,0x80);
         temp_v5 = temp_v14;
         FUN_0015f858(temp_v14,1);
         FUN_002e342c(temp_v12,temp_v5);

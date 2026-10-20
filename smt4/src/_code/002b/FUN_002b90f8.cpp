@@ -1,36 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b90f8` (_code @ 0x2b90f8, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bbb74(unsigned int, int);
-int FUN_002bbbc8(int, int, int, int);
-int FUN_002bfe28(int, unsigned int);
-int nn_math_ARMv6_MTX44TransposeAsm(int, int);
+typedef struct Camera {
+    /* 0x000 */ u8 unk000[0x52C];
+    /* 0x52C */ u32 unk52C;
+    /* 0x530 */ f32 view[16];           /* 4x4 matrix */
+    /* 0x570 */ f32 viewTransposed[16];
+    /* 0x5B0 */ u8 dirty;
+    /* 0x5B1 */ u8 unk5B1[0xB5B];
+    /* 0x110C */ f32 matrixA[16];
+    /* 0x114C */ f32 matrixB[16];
+    /* 0x118C */ f32 matrixC[16];
+} Camera;
 
-/* Supplied declaration required: FUN_002bbb74. */
-/* Supplied declaration required: FUN_002bbbc8. */
-/* Supplied declaration required: FUN_002bfe28. */
-extern int FUN_002c1870(unsigned int, int, unsigned int);
-/* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
+int FUN_002bbb74(u32 arg0, void *dst);
+int FUN_002bbbc8(Camera *cam, void *a, void *b, void *view);
+int mtx44Copy(void *dst, void *src);
+int rt_memcmp(void *a, void *b, u32 size);
+int nn_math_ARMv6_MTX44TransposeAsm(void *dst, void *src);
 
-
-void FUN_002b90f8(int param_1,unsigned int param_2)
-
+/* Updates the camera's view matrix from `matrix` when it changed (or is dirty) and rebuilds the data derived from it. */
+void FUN_002b90f8(Camera *cam, void *matrix)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  if ((*(char *)(param_1 + 0x5b0) != '\0') ||
-     (temp_v0 = FUN_002c1870(param_2,param_1 + 0x530,0x40), temp_v0 != 0)) {
-    FUN_002bfe28(param_1 + 0x530,param_2);
-    nn_math_ARMv6_MTX44TransposeAsm(param_1 + 0x570,param_1 + 0x530);
-    FUN_002bbbc8(param_1,param_1 + 0x114c,param_1 + 0x110c,param_1 + 0x530);
-    FUN_002bbb74(*(unsigned int *)(param_1 + 0x52c),param_1 + 0x118c);
-    *(unsigned char *)(param_1 + 0x5b0) = 0;
-  }
-  return;
+    if (cam->dirty != 0 || rt_memcmp(matrix, cam->view, 0x40) != 0) {
+        mtx44Copy(cam->view, matrix);
+        nn_math_ARMv6_MTX44TransposeAsm(cam->viewTransposed, cam->view);
+        FUN_002bbbc8(cam, cam->matrixB, cam->matrixA, cam->view);
+        FUN_002bbb74(cam->unk52C, cam->matrixC);
+        cam->dirty = 0;
+    }
 }
 
 } /* extern "C" */

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00266be4(void);
+int asd3dSoundActorIsPlaying(void);
 int FUN_002bda30(int, unsigned int);
 
 extern unsigned char DAT_004e2f68; /* 0x4e2f68 */
 extern unsigned int DAT_004e312c; /* 0x4e312c */
 extern signed char DAT_004e3134; /* 0x4e3134 */
 
-/* Supplied declaration required: FUN_00266be4. */
+/* Supplied declaration required: asd3dSoundActorIsPlaying. */
 /* Supplied declaration required: FUN_002bda30. */
 
 
@@ -21,7 +21,7 @@ void FUN_002ebdd8(unsigned int param_1,unsigned int param_2)
 /* irregular: 2 native warning(s); review required */
   unsigned int temp_v0;
   
-  if (((DAT_004e3134 != '\0') && (param_1 < 0x10)) && (temp_v0 = param_1, FUN_00266be4(), temp_v0 != 0))
+  if (((DAT_004e3134 != '\0') && (param_1 < 0x10)) && (temp_v0 = param_1, asd3dSoundActorIsPlaying(), temp_v0 != 0))
   {
     if (*(int *)(&DAT_004e2f68 + param_1 * 4) != 0) {
       FUN_002bda30(*(int *)(&DAT_004e2f68 + param_1 * 4),param_2);

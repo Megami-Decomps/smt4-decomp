@@ -10,7 +10,7 @@ int FUN_00100388(...);
 int FUN_0015f858(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001689e8(...);
 int FUN_00180310(...);
 int FUN_001834a4(...);
@@ -46,7 +46,7 @@ extern int DAT_0057f108; /* 0x57f108 */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int FUN_001654d8(void);
 extern int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001689e8. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -98,33 +98,33 @@ void FUN_0021775c(int param_1,int param_2)
   if (temp_v1 >= 0x140) {
     return;
   }
-  FUN_001677c0();
+  efctSetSpeed();
   temp_v1 = DAT_0057f108;
   if (param_1 != 0x18) {
     if (param_1 < 0x19) {
       if (param_1 != 0xe) {
         if (param_1 >= 0xe) {
           if (param_1 - 0x13U >= 5) {
-            FUN_001677c0();
+            efctSetSpeed();
             return;
           }
           FUN_0023c8c0(param_1,temp_v2,temp_v3,param_2);
-          FUN_001677c0();
+          efctSetSpeed();
           return;
         }
         if (param_1 == 10) {
-          FUN_001677c0();
+          efctSetSpeed();
           return;
         }
         if (param_1 < 0xb) {
           if (param_1 == 1 || param_1 == 9) {
             FUN_0023d230(temp_v2,temp_v3,param_2);
           }
-          FUN_001677c0();
+          efctSetSpeed();
           return;
         }
         if (param_1 != 0xb && param_1 != 0xd) {
-          FUN_001677c0();
+          efctSetSpeed();
           return;
         }
       }
@@ -134,7 +134,7 @@ void FUN_0021775c(int param_1,int param_2)
       if (param_1 != 0xb) {
         if (param_1 != 0xd) {
           if (param_1 != 0xe) {
-            FUN_001677c0();
+            efctSetSpeed();
             return;
           }
           temp_v12 = DAT_0057f108 + 0x188;
@@ -246,14 +246,14 @@ void FUN_0021775c(int param_1,int param_2)
                      (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v2,
                      (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,0x88,0);
       }
-      FUN_001677c0();
+      efctSetSpeed();
       return;
     }
     if (param_1 != 0x4a) {
       if (param_1 < 0x4b) {
         if (param_1 == 0x2b) {
           FUN_00214dc4();
-          FUN_001677c0();
+          efctSetSpeed();
           return;
         }
         if (param_1 < 0x2c) {
@@ -261,23 +261,23 @@ void FUN_0021775c(int param_1,int param_2)
             if (param_1 == 0x29) {
               FUN_002027fc();
             }
-            FUN_001677c0();
+            efctSetSpeed();
             return;
           }
         }
         else if (param_1 != 0x48 && param_1 != 0x49) {
-          FUN_001677c0();
+          efctSetSpeed();
           return;
         }
       }
       else if ((param_1 != 0x4b && param_1 != 0x4c) && (param_1 != 0x4d && param_1 != 0x4e)) {
-        FUN_001677c0();
+        efctSetSpeed();
         return;
       }
     }
   }
   FUN_0023c8c0(param_1,temp_v2,temp_v3,param_2);
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

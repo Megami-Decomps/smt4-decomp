@@ -7,10 +7,10 @@ extern "C" {
 int FUN_0026e68c(...);
 int FUN_002b722c(...);
 int FUN_002c425c(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int memClear(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -25,16 +25,16 @@ extern int FUN_001f42d4(...); /* 0x1f42d4 */
 extern unsigned char LAB_002e36d8; /* 0x2e36d8 */
 extern unsigned char LAB_002ee9e0; /* 0x2ee9e0 */
 extern unsigned char LAB_002ee9f0; /* 0x2ee9f0 */
-extern unsigned int *DAT_0043ded0; /* 0x43ded0 */
+extern unsigned int *g_eventTex; /* 0x43ded0 */
 
 /* Supplied declaration required: FUN_0026e68c. */
 /* Supplied declaration required: FUN_002b722c. */
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002c425c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 
 
 unsigned int FUN_002ee6f8(void)
@@ -51,31 +51,31 @@ unsigned int FUN_002ee6f8(void)
   unsigned int temp_v5;
   int temp_v6;
   
-  if (DAT_0043ded0 != (unsigned int *)0x0) {
-    return *DAT_0043ded0;
+  if (g_eventTex != (unsigned int *)0x0) {
+    return *g_eventTex;
   }
   puVar2 = (unsigned int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x68,1);
-  FUN_002c4938();
-  DAT_0043ded0 = puVar2;
+  asdMemAlloc(0x100,0x100,0,0x68,1);
+  memClear();
+  g_eventTex = puVar2;
   *(unsigned char *)(puVar2 + 0x17) = 1;
   puVar3 = &LAB_002ee9e0;
-  FUN_002c5788(&LAB_002ee9e0,2,0,0,FUN_001f4264,&LAB_002e36d8,puVar2);
+  asdProcessCreateSimple(&LAB_002ee9e0,2,0,0,FUN_001f4264,&LAB_002e36d8,puVar2);
   *puVar2 = (unsigned int)puVar3;
-  FUN_002c4a08(&LAB_002ee9f0,0x7d,0,0,FUN_001f42d4,0,puVar2,puVar3);
-  FUN_002c4a08(&LAB_002ee9f0,0xdb,0,0,FUN_001f42d4,0,puVar2,*puVar2);
+  taskCreateDraw(&LAB_002ee9f0,0x7d,0,0,FUN_001f42d4,0,puVar2,puVar3);
+  taskCreateDraw(&LAB_002ee9f0,0xdb,0,0,FUN_001f42d4,0,puVar2,*puVar2);
   temp_v6 = 0;
 LAB_002ee7d0:
-  temp_v1 = FUN_002bf244(*(unsigned int *)(temp_v6 * 4 + 0x493790));
+  temp_v1 = jobIsValid(*(unsigned int *)(temp_v6 * 4 + 0x493790));
   if (temp_v1 != 0) {
     FUN_0026e68c(*(unsigned int *)(temp_v6 * 4 + 0x493790),1);
-    FUN_002c425c(*DAT_0043ded0,*(unsigned int *)(temp_v6 * 4 + 0x493790));
-    puVar2 = DAT_0043ded0;
+    FUN_002c425c(*g_eventTex,*(unsigned int *)(temp_v6 * 4 + 0x493790));
+    puVar2 = g_eventTex;
     temp_v5 = *(unsigned int *)(temp_v6 * 4 + 0x493790);
     temp_v1 = 0;
-    if (0 < (int)DAT_0043ded0[0xb]) {
+    if (0 < (int)g_eventTex[0xb]) {
       do {
-        temp_v2 = FUN_002bf244(puVar2[temp_v1 + 1]);
+        temp_v2 = jobIsValid(puVar2[temp_v1 + 1]);
         if (temp_v2 == 0) {
           puVar2[temp_v1 + 1] = 0;
         }
@@ -146,7 +146,7 @@ LAB_002ee8c8:
 LAB_002ee968:
   temp_v6 = temp_v6 + 1;
   if (temp_v6 >= 4) {
-    return *DAT_0043ded0;
+    return *g_eventTex;
   }
   goto LAB_002ee7d0;
 }

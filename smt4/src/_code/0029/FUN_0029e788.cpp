@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002bd8e8(int, int, int);
+int timerStart(int, int, int);
 int FUN_002bee58(int, int);
 
 extern int DAT_0044e144; /* 0x44e144 */
 
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bee58. */
 
 
@@ -28,8 +28,8 @@ void FUN_0029e788(void)
   temp_v1 = 0;
   do {
     temp_v2 = temp_v0 + temp_v1 * 0x8c;
-    FUN_002bd8e8(temp_v2 + 0x7ec,4,0);
-    FUN_002bd8e8(temp_v2 + 0xd64,1,0);
+    timerStart(temp_v2 + 0x7ec,4,0);
+    timerStart(temp_v2 + 0xd64,1,0);
     temp_v2 = DAT_0044e144;
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 10);

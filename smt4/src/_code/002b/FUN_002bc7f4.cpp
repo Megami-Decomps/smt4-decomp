@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-extern int *DAT_004652a0; /* 0x4652a0 */
+extern int *g_commandBufferCursor; /* 0x4652a0 */
 extern signed char DAT_004c62a1; /* 0x4c62a1 */
 extern int *DAT_004c632c; /* 0x4c632c */
 extern int *DAT_004c6330; /* 0x4c6330 */
@@ -48,7 +48,7 @@ int * FUN_002bc7f4(unsigned int param_1,int *param_2)
     }
     break;
   case 0x202:
-    temp_v0 = (int)DAT_004652a0 - DAT_004c632c[1];
+    temp_v0 = (int)g_commandBufferCursor - DAT_004c632c[1];
     DAT_004c632c[3] = temp_v0;
     *param_2 = temp_v0;
     return piVar2;
@@ -71,7 +71,7 @@ int * FUN_002bc7f4(unsigned int param_1,int *param_2)
     }
     break;
   case 0x208:
-    piVar2 = DAT_004652a0;
+    piVar2 = g_commandBufferCursor;
     break;
   case 0x209:
     piVar2 = (int *)DAT_004c632c[4];

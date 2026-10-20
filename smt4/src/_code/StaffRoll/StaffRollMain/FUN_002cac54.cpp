@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0024c1e4(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int uiGetEntrySize(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int FUN_002c58c8(...);
-int FUN_002c5914(...);
+int asdTMTexTableLoadTmx(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -28,23 +28,23 @@ extern unsigned char LAB_002caf4c; /* 0x2caf4c */
 extern unsigned char LAB_002caf60; /* 0x2caf60 */
 extern unsigned char LAB_002e0820; /* 0x2e0820 */
 extern unsigned char LAB_002eb734; /* 0x2eb734 */
-extern int FUN_002f4b38(...); /* 0x2f4b38 */
+extern int staffRollClose(...); /* 0x2f4b38 */
 extern unsigned char LAB_002f4bc0; /* 0x2f4bc0 */
 extern unsigned char LAB_0030947c; /* 0x30947c */
-extern int FUN_003094b8(...); /* 0x3094b8 */
+extern int staffRollScrollUpdate(...); /* 0x3094b8 */
 extern unsigned char LAB_0031005c; /* 0x31005c */
-extern int FUN_00316f20(...); /* 0x316f20 */
+extern int staffRollEnterState2(...); /* 0x316f20 */
 extern unsigned char LAB_0031b82c; /* 0x31b82c */
-extern int FUN_00321988(...); /* 0x321988 */
-extern unsigned int *DAT_00432cc8; /* 0x432cc8 */
+extern int staffRollEnterState5(...); /* 0x321988 */
+extern unsigned int *g_staffRoll; /* 0x432cc8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0024c1e4. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: uiGetEntrySize. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_002c58c8. */
-/* Supplied declaration required: FUN_002c5914. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 
 
 void FUN_002cac54(int param_1)
@@ -70,13 +70,13 @@ void FUN_002cac54(int param_1)
   
   puVar1 = (unsigned int *)0x10000;
   temp_v9 = (unsigned char *)0x1;
-  FUN_002c498c(0x10000,0x100,0,0x764);
+  asdMemAlloc(0x10000,0x100,0,0x764);
   temp_v6 = 0;
-  DAT_00432cc8 = puVar1;
+  g_staffRoll = puVar1;
   *(unsigned char *)((int)puVar1 + 5) = 0;
   *(unsigned char *)(puVar1 + 0x4a) = 0;
   puVar1[0x54] = 0;
-  FUN_002c5914(0x34,0);
+  asdTMTexTableLoadTmx(0x34,0);
   temp_v1 = 0;
   do {
     FUN_002c58c8(0x34,temp_v1);
@@ -88,7 +88,7 @@ void FUN_002cac54(int param_1)
   temp_v8 = 520.0f;
   temp_v0 = 0;
   do {
-    FUN_0024c1e4(0x34,temp_v0 * 1000,&temp_v10,&temp_v9);
+    uiGetEntrySize(0x34,temp_v0 * 1000,&temp_v10,&temp_v9);
     temp_v3 = (float)VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
     *(float *)&puVar1[temp_v0 * 2 + 0x32] = temp_v3;
     temp_v4 = VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -113,12 +113,12 @@ void FUN_002cac54(int param_1)
   puVar1[0x1d6] = 0;
   *(unsigned char *)(puVar1 + 0x1d7) = 0;
   puVar1[0x1d8] = 0xa5;
-  DAT_00432cc8[0x53] = 0;
+  g_staffRoll[0x53] = 0;
   puVar1[0x4b] = (unsigned int)&LAB_0030947c;
-  puVar1[0x4c] = (unsigned int)FUN_00316f20;
-  puVar1[0x4d] = (unsigned int)FUN_003094b8;
+  puVar1[0x4c] = (unsigned int)staffRollEnterState2;
+  puVar1[0x4d] = (unsigned int)staffRollScrollUpdate;
   puVar1[0x4e] = (unsigned int)&LAB_0031005c;
-  puVar1[0x4f] = (unsigned int)FUN_00321988;
+  puVar1[0x4f] = (unsigned int)staffRollEnterState5;
   puVar1[0x50] = (unsigned int)&LAB_002eb734;
   puVar1[0x51] = (unsigned int)&LAB_0031b82c;
   puVar1[0x53] = 0;
@@ -128,26 +128,26 @@ void FUN_002cac54(int param_1)
   }
   *(unsigned char *)((int)puVar1 + 5) = 0;
   temp_v9 = &LAB_002ca708;
-  temp_v10 = FUN_002f4b38;
+  temp_v10 = staffRollClose;
   temp_v11 = 0;
   puVar2 = &LAB_002caf30;
-  FUN_002c5788(&LAB_002caf30,2,0);
+  asdProcessCreateSimple(&LAB_002caf30,2,0);
   *puVar1 = (unsigned int)puVar2;
   temp_v9 = &LAB_002e0820;
   temp_v10 = (romwright_code *)0x0;
   temp_v11 = 0;
   temp_v12 = puVar2;
-  FUN_002c4a08(&LAB_002caf40,0x7a,0);
+  taskCreateDraw(&LAB_002caf40,0x7a,0);
   temp_v12 = (unsigned char *)*puVar1;
   temp_v9 = &LAB_002e0820;
   temp_v10 = (romwright_code *)0x0;
   temp_v11 = 0;
-  FUN_002c4a08(&LAB_002caf4c,0xd8,0);
+  taskCreateDraw(&LAB_002caf4c,0xd8,0);
   temp_v12 = (unsigned char *)*puVar1;
   temp_v9 = &LAB_002f4bc0;
   temp_v10 = (romwright_code *)0x0;
   temp_v11 = 0;
-  FUN_002c4a08(&LAB_002caf60,0xe8,0);
+  taskCreateDraw(&LAB_002caf60,0xe8,0);
   return;
 }
 

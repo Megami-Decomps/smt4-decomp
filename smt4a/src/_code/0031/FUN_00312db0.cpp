@@ -1,32 +1,20 @@
-#include "romwright_types.h"
+#include "map/mapMain.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
-int FUN_00275f44(unsigned int, unsigned int);
+void FUN_00275f44(u32 job, u32 value);
+u32 FUN_00357bc8(u32 a, u32 b);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+extern MapMainA *g_mapMain;
+extern GameStateA g_gameState;
 
-extern int DAT_00581274; /* 0x581274 */
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
-
-/* Supplied declaration required: FUN_00275f44. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned int);
-
-
-void FUN_00312db0(unsigned int param_1)
-
+void FUN_00312db0(u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = DAT_00581274;
-  temp_v1 = FUN_00357bc8((*(unsigned int *)((unsigned char *)&DAT_005f15fc + 0x50c)),param_1);
-  FUN_00275f44(*(unsigned int *)(temp_v0 + 0x58),temp_v1);
-  return;
+    MapMainA *main = g_mapMain;
+    u32 result = FUN_00357bc8(g_gameState.unk50C, value);
+
+    FUN_00275f44(main->job, result);
 }
 
 } /* extern "C" */

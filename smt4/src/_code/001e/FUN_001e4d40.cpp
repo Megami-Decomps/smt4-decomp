@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 
 
 unsigned int FUN_001e4d40(void)
@@ -14,7 +14,7 @@ unsigned int FUN_001e4d40(void)
   int *piVar2;
   int temp_v1;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   piVar2 = (int *)(temp_v0 + 0x1ea0);
   temp_v0 = *piVar2;
   temp_v1 = temp_v0 + 1;

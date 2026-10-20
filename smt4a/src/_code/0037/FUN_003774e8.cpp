@@ -20,16 +20,16 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_4_stack;
 
-extern int DAT_005806c4; /* 0x5806c4 */
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern int g_mapDepart; /* 0x5806c4 */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0014bef4. */
 extern int FUN_0015688c(void);
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int FUN_0018719c(unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_00480838. */
 /* Supplied declaration required: FUN_00480e30. */
@@ -74,14 +74,14 @@ int FUN_003774e8(unsigned int param_1,int param_2,int param_3,int *param_4)
   int temp_v26;
   int *piStack_28;
   
-  temp_v5 = DAT_005806c4;
+  temp_v5 = g_mapDepart;
   uStack_34 = param_1;
   iStack_30 = param_2;
   temp_v26 = param_3;
   piStack_28 = param_4;
-  temp_v6 = FUN_00187180(0x42,0);
-  temp_v7 = FUN_00192798();
-  temp_v8 = FUN_00192748(temp_v6);
+  temp_v6 = dataTableGet(0x42,0);
+  temp_v7 = dataTableGetEntries();
+  temp_v8 = dataTableGetCount(temp_v6);
   if (param_1 < temp_v8) {
     temp_v22 = param_1 * 3;
     temp_v7 = temp_v7 + param_1 * 0xc;
@@ -90,7 +90,7 @@ int FUN_003774e8(unsigned int param_1,int param_2,int param_3,int *param_4)
       temp_v8 = param_1;
     }
     if ((temp_v7 != 0 && param_1 != 0) && -1 < (int)temp_v8) {
-      if ((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x666)) == '\0') {
+      if ((*(signed char *)((unsigned char *)&g_gameState + 0x666)) == '\0') {
         temp_v6 = FUN_0014bef4(99);
         temp_v19 = VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
         if (temp_v19 >= 0x41a00000) {
@@ -126,9 +126,9 @@ int FUN_003774e8(unsigned int param_1,int param_2,int param_3,int *param_4)
           temp_v20 = FUN_0015688c();
           if (temp_v20 != 0) {
             temp_v21 = (unsigned char *)asStack_1e0;
-            temp_v6 = FUN_00187180(0x42,0);
-            temp_v15 = FUN_00192798();
-            temp_v8 = FUN_00192748(temp_v6);
+            temp_v6 = dataTableGet(0x42,0);
+            temp_v15 = dataTableGetEntries();
+            temp_v8 = dataTableGetCount(temp_v6);
             if (param_1 >= temp_v8) {
               temp_v15 = 0;
             }

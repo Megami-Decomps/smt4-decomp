@@ -1,26 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nw_gfx_res_ResLookupTable_Dereference` (_code @ 0x2a7c50, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+#define RES_TYPE_NONE 0x80000000
+#define RES_TYPE_RELATIVE 0x40000000
 
-int * nw_gfx_res_ResLookupTable_Dereference(int *param_1)
+typedef struct ResRef {
+    /* 0x00 */ s32 offset;     /* from this field to the referenced data; 0 = null */
+} ResRef;
 
+typedef struct ResEntry {
+    /* 0x00 */ u32 type;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ ResRef ref;
+} ResEntry;
+
+/* Resolves a lookup-table slot: returns the entry itself for the "none" type, the data its relative reference points to for the relative type, else NULL. */
+ResEntry *nw_gfx_res_ResLookupTable_Dereference(ResEntry **slot)
 {
-  int temp_v0;
-  
-  param_1 = (int *)*param_1;
-  if (*param_1 != -0x80000000) {
-    if (*param_1 == 0x40000000) {
-      temp_v0 = param_1[3];
-      if (temp_v0 != 0) {
-        return (int *)((int)(param_1 + 3) + temp_v0);
-      }
+    ResEntry *entry = *slot;
+
+    if (entry->type != RES_TYPE_NONE) {
+        if (entry->type == RES_TYPE_RELATIVE) {
+            ResRef *ref = &entry->ref;
+
+            if (ref->offset != 0) {
+                return (ResEntry *)((u8 *)ref + ref->offset);
+            }
+        }
+        entry = NULL;
     }
-    param_1 = (int *)0x0;
-  }
-  return param_1;
+    return entry;
 }
 
 } /* extern "C" */

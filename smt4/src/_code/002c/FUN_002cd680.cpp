@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int DAT_0043de68; /* 0x43de68 */
+extern int g_cecProcess; /* 0x43de68 */
 
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
@@ -31,10 +31,10 @@ unsigned int FUN_002cd680(void)
   int iStack_18;
   unsigned char temp_v3 [4];
   
-  temp_v0 = DAT_0043de68;
+  temp_v0 = g_cecProcess;
   temp_v2 = 0;
-  if (DAT_0043de68 != 0) {
-    iStack_18 = *(int *)(DAT_0043de68 + 0x42c);
+  if (g_cecProcess != 0) {
+    iStack_18 = *(int *)(g_cecProcess + 0x42c);
     if (iStack_18 != 0) {
       puVar3 = temp_v3;
       FUN_002c40f8(puVar3,&iStack_18,1,0,0,0);

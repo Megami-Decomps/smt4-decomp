@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(int);
+int asdMemFree(int);
 int FUN_002b2f08(void);
 int FUN_002b40ec(void);
 int FUN_00350ca4(unsigned int);
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002b2f08. */
 /* Supplied declaration required: FUN_002b40ec. */
 /* Supplied declaration required: FUN_00350ca4. */
@@ -31,12 +31,12 @@ void FUN_00338800(int param_1)
     temp_v0 = *(int *)(param_1 + 0x28);
     FUN_00350ca4(*(unsigned int *)(temp_v0 + 0x10));
     FUN_00350ca4(*(unsigned int *)(temp_v0 + 0x14));
-    FUN_0019a5a0(temp_v0);
+    asdMemFree(temp_v0);
   }
   if (*(int *)(param_1 + 0x30) != 0) {
     FUN_002b2f08();
   }
-  FUN_0019a5a0(param_1);
+  asdMemFree(param_1);
   return;
 }
 

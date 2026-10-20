@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_002ae7e8(int);
+int asdTMTexTableFreeEntry(int);
 int FUN_002ae898(int);
-int FUN_002c415c(void);
+int asdMemFree(void);
 
 extern int DAT_0044e2e8; /* 0x44e2e8 */
 
-/* Supplied declaration required: FUN_002ae7e8. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002ae898. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00126420(void)
@@ -21,9 +21,9 @@ void FUN_00126420(void)
 /* irregular: 3 native warning(s); review required */
   *(unsigned char *)(DAT_0044e2e8 + 4) = 1;
   FUN_002ae898(0);
-  FUN_002ae7e8(0);
+  asdTMTexTableFreeEntry(0);
   if (DAT_0044e2e8 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     DAT_0044e2e8 = 0;
   }
   return;

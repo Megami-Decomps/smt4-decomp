@@ -9,7 +9,7 @@ typedef struct {
     unsigned int spC; /* 0xc: local_c */
 } param_1_stack;
 
-extern int *DAT_00439c60; /* 0x439c60 */
+extern int *g_btlTargetSelect; /* 0x439c60 */
 
 
 void FUN_002eb278(unsigned int param_1)
@@ -21,10 +21,10 @@ void FUN_002eb278(unsigned int param_1)
   int temp_v2;
   int temp_v3;
   
-  piVar1 = DAT_00439c60;
-  if (*(unsigned char *)(DAT_00439c60 + 2) != param_1) {
+  piVar1 = g_btlTargetSelect;
+  if (*(unsigned char *)(g_btlTargetSelect + 2) != param_1) {
     if (param_1 == 1) {
-      temp_v0 = *DAT_00439c60;
+      temp_v0 = *g_btlTargetSelect;
       temp_v2 = 0;
       temp_v1 = 0;
       *(unsigned int *)(temp_v0 + 0xf0) = 0;

@@ -12,7 +12,7 @@ int FUN_004c89e8(void);
 int FUN_004c8b10(void);
 int FUN_004c8bb8(...);
 
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_005712f0; /* 0x5712f0 */
 extern unsigned int DAT_005713b8; /* 0x5713b8 */
 extern unsigned int DAT_005713bc; /* 0x5713bc */
@@ -32,9 +32,9 @@ extern int DAT_00571508; /* 0x571508 */
 extern int DAT_0057a9c8; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_001517b4. */
-extern int FUN_00163e40(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_001641b4. */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00203d04. */
 extern int FUN_002619e0(void);
 /* Supplied declaration required: FUN_003ea20c. */
@@ -46,7 +46,7 @@ extern int FUN_004a9428(void);
 /* Supplied declaration required: FUN_004c8b10. */
 /* Supplied declaration required: FUN_004c8bb8. */
 extern int FUN_004c8ecc(void);
-extern int FUN_004ee568(void);
+extern int btlUnitGet(void);
 
 
 unsigned int FUN_0024b718(void)
@@ -63,7 +63,7 @@ unsigned int FUN_0024b718(void)
   unsigned int *puVar8;
   unsigned char temp_v7;
   
-  temp_v3 = FUN_00164a9c();
+  temp_v3 = jobGetWork();
   if (!(((DAT_005713e4 | DAT_005713ec) & *(unsigned int *)(temp_v3 + 0x45ac)) == 0 &&
        ((DAT_005713e0 | DAT_005713e8) & *(unsigned int *)(temp_v3 + 0x45a8)) == 0)) {
     temp_v4 = ~DAT_005713b8;
@@ -95,7 +95,7 @@ unsigned int FUN_0024b718(void)
         *(unsigned int *)(temp_v3 + 0x45a4) = temp_v6 & temp_v0 & temp_v1;
         return 0;
       }
-      temp_v5 = FUN_00163e40(*(unsigned int *)(temp_v3 + 0x40));
+      temp_v5 = jobIsValid(*(unsigned int *)(temp_v3 + 0x40));
       if (temp_v5 != 0) {
         temp_v4 = ~DAT_005713bc;
         temp_v6 = ~DAT_005713c4;
@@ -126,13 +126,13 @@ unsigned int FUN_0024b718(void)
           *(unsigned int *)(temp_v3 + 0x45a4) = *(unsigned int *)(temp_v3 + 0x45a4) & temp_v4 & temp_v6;
           return 0;
         }
-        if (DAT_0057113c != 0) {
-          temp_v5 = FUN_004ee568();
+        if (g_btlScriptUnit != 0) {
+          temp_v5 = btlUnitGet();
           temp_v7 = temp_v5 != 0;
-          if (DAT_0057113c != 0 && temp_v7) {
+          if (g_btlScriptUnit != 0 && temp_v7) {
             temp_v5 = *(int *)(temp_v5 + 0x28);
           }
-          if (((DAT_0057113c != 0 && temp_v7) && temp_v5 != 0) &&
+          if (((g_btlScriptUnit != 0 && temp_v7) && temp_v5 != 0) &&
              (temp_v2 = *(short *)(temp_v5 + 0x1be), (temp_v2 == 7 || temp_v2 == 9) || temp_v2 == 0xd)) {
             temp_v6 = ~DAT_005713b8;
             temp_v4 = ~DAT_005713c0;

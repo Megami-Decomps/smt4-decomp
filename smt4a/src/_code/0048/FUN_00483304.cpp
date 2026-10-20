@@ -27,7 +27,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0018719c(unsigned int);
-extern unsigned int FUN_00294688(unsigned int);
+extern unsigned int mapEnemyLookupByte(unsigned int);
 extern unsigned int FUN_002b7478(unsigned int);
 /* Supplied declaration required: FUN_00356308. */
 /* Supplied declaration required: FUN_00482414. */
@@ -99,7 +99,7 @@ void FUN_00483304(int param_1,int param_2,unsigned int param_3)
       FUN_0048269c(temp_v1,&temp_v14);
       *(unsigned int *)(temp_v1 + 0x20) = temp_v2;
       *(int *)(temp_v1 + 0x24) = param_2;
-      temp_v3 = FUN_00294688(temp_v2);
+      temp_v3 = mapEnemyLookupByte(temp_v2);
       *(unsigned int *)(temp_v1 + 100) = temp_v3;
       temp_v2 = FUN_002b7478(temp_v2);
       *(unsigned int *)(temp_v1 + 0x68) = temp_v2;

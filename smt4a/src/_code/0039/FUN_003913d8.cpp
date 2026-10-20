@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_1_stack;
 
-extern float DAT_005c1100; /* 0x5c1100 */
+extern float g_polyDefaultColor; /* 0x5c1100 */
 extern float DAT_005c1104; /* 0x5c1104 */
 extern float DAT_005c1108; /* 0x5c1108 */
 extern float DAT_005c110c; /* 0x5c110c */
@@ -113,17 +113,17 @@ void FUN_003913d8(int param_1)
     temp_v19 = (float)VectorUnsignedToFloat(*(unsigned int *)(temp_v3 + 0x38),(unsigned char)(temp_v6 >> 0x16) & 3);
     pfVar9 = &DAT_006472e0;
     temp_v15 = *(float *)(temp_v3 + 0x50) + temp_v15 + (romwright_fabs_4(temp_v12) + temp_v13 * temp_v7 * 0.5f) * temp_v7;
-    temp_v16 = DAT_005c1100 * temp_v15;
+    temp_v16 = g_polyDefaultColor * temp_v15;
     temp_v12 = *(float *)(temp_v3 + 0x54) + temp_v15;
     DAT_006472f8 = *(float *)(temp_v3 + 0x58) + temp_v12;
     temp_v17 = DAT_005c1104 * temp_v15;
     temp_v18 = DAT_005c1108 * temp_v15;
     temp_v15 = DAT_005c110c * temp_v15;
-    temp_v14 = DAT_005c1100 * temp_v12;
+    temp_v14 = g_polyDefaultColor * temp_v12;
     DAT_006472e0 = DAT_005c1104 * temp_v12;
     DAT_006472e4 = DAT_005c1108 * temp_v12;
     temp_v12 = DAT_005c110c * temp_v12;
-    temp_v7 = DAT_005c1100 * DAT_006472f8;
+    temp_v7 = g_polyDefaultColor * DAT_006472f8;
     temp_v13 = DAT_005c1104 * DAT_006472f8;
     if (temp_v0 != 0) {
       pfVar9 = (float *)&DAT_005c1120;

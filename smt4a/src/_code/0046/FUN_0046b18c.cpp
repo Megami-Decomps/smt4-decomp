@@ -7,17 +7,17 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_001008a2(...);
 int FUN_001654f8(unsigned char [64], unsigned char [136], int);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_001695a0(void);
-int FUN_00180008(...);
-int FUN_0019a5a0(void);
-int FUN_0019c364(void);
+int jyoucyuGetTableEntry(...);
+int asdMemFree(void);
+int scrScriptProcessDestroy(void);
 int FUN_00275bc8(...);
 int FUN_00275f44(...);
 int FUN_002804b0(...);
 int FUN_002a4b74(void);
 int FUN_002e342c(unsigned char [64], unsigned int);
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 int FUN_003423cc(int);
 int FUN_0035d058(unsigned int, unsigned int);
 int FUN_003c1060(void);
@@ -38,12 +38,12 @@ extern unsigned char LAB_0046b910; /* 0x46b910 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001008a2. */
 /* Supplied declaration required: FUN_001654f8. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
-/* Supplied declaration required: FUN_00180008. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 extern unsigned int FUN_001801b8(unsigned short, unsigned char);
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00275f44. */
@@ -51,7 +51,7 @@ extern int FUN_00224880(unsigned int);
 extern unsigned int FUN_002a4b60(void);
 /* Supplied declaration required: FUN_002a4b74. */
 /* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern int FUN_0031d62c(void);
 /* Supplied declaration required: FUN_003423cc. */
 extern unsigned int FUN_00357bc8(unsigned int, int);
@@ -99,7 +99,7 @@ void FUN_0046b18c(unsigned int *param_1)
     param_1[2] = param_1[2] + 1;
     puVar2 = param_1 + 0x2b7;
     param_1[0x2b5] = 0;
-    FUN_002e6354(puVar2,0x200);
+    sysMemClear(puVar2,0x200);
     param_1[0x2b4] = 0;
     temp_v2 = 0;
     if (0 < (int)param_1[0x2ae]) {
@@ -180,7 +180,7 @@ void FUN_0046b18c(unsigned int *param_1)
             temp_v3 = temp_v4;
           } while (temp_v4 < (int)param_1[0x2b4]);
         }
-        FUN_001681cc(0xa4);
+        sysPlaySe(0xa4);
         param_1[0x33c] = param_1[0x2b5];
         return;
       }
@@ -241,15 +241,15 @@ void FUN_0046b18c(unsigned int *param_1)
       *(unsigned int *)(*(int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4) + 0x1fc) = temp_v5;
       FUN_001695a0();
       if (param_1[0xa9] != 0) {
-        FUN_0019c364();
+        scrScriptProcessDestroy();
         param_1[0xa9] = 0;
       }
       if (param_1[0xa7] != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         param_1[0xa7] = 0;
       }
       if (param_1[0xa8] != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         param_1[0xa8] = 0;
       }
       param_1[2] = 0;
@@ -276,7 +276,7 @@ void FUN_0046b18c(unsigned int *param_1)
     temp_v3 = *(int *)(param_1[param_1[temp_v2 * 2 + 0x29d] + 0x283] + 4);
     *(unsigned int *)(temp_v3 + 0x1fc) = 0x3f800000;
     FUN_003fe86c(temp_v3,0);
-    FUN_001681cc(0xa4);
+    sysPlaySe(0xa4);
     temp_v3 = FUN_0046bbd8((int)param_1 + 0x19,0);
     temp_v0 = *(unsigned short *)(temp_v3 + *(int *)param_1[0x2b6] * 0x88 + 0x6a);
     FUN_00100388(temp_v7,&LAB_0046b8f0,temp_v0,temp_v0);
@@ -309,7 +309,7 @@ LAB_0046b85c:
     *(unsigned int *)(temp_v2 + 0x108) = 2;
     temp_v3 = FUN_0046bbd8((int)param_1 + 0x19,0);
     temp_v4 = *(int *)param_1[0x2b6];
-    FUN_00180008(0);
+    jyoucyuGetTableEntry(0);
     temp_v5 = FUN_00357bc8(param_1[0xa7],temp_v3 + temp_v4 * 0x88 + 0x6c);
     FUN_00275f44(param_1[0xa9],temp_v5);
     temp_v2 = param_1[2] + 1;
@@ -321,15 +321,15 @@ LAB_0046b85c:
       *(unsigned int *)(*(int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4) + 0x1fc) = temp_v5;
       FUN_001695a0();
       if (param_1[0xa9] != 0) {
-        FUN_0019c364();
+        scrScriptProcessDestroy();
         param_1[0xa9] = 0;
       }
       if (param_1[0xa7] != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         param_1[0xa7] = 0;
       }
       if (param_1[0xa8] != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         param_1[0xa8] = 0;
       }
       *param_1 = *param_1 & 0xfffffeff;

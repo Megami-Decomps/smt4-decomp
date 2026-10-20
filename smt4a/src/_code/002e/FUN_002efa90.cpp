@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 
 typedef int romwright_code(...);
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 
 
@@ -24,7 +24,7 @@ unsigned int FUN_002efa90(int *param_1)
   int *piVar5;
   int temp_v4;
   
-  temp_v0 = DAT_0059dbb4;
+  temp_v0 = g_renderCtx;
   temp_v4 = *param_1;
   if (temp_v4 != 0) {
     temp_v1 = FUN_001692ac(1,0);
@@ -38,8 +38,8 @@ unsigned int FUN_002efa90(int *param_1)
       *(unsigned char *)(temp_v0 + 0x1270) = 0;
     }
     (**(romwright_code **)(**(int **)(temp_v4 + 8) + 0x18))();
-    temp_v0 = DAT_0059dbb4;
-    piVar5 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v0 = g_renderCtx;
+    piVar5 = (int *)(g_renderCtx + 0x1258);
     temp_v4 = *piVar5;
     temp_v1 = piVar5[temp_v4 + 2];
     *piVar5 = temp_v4 - 1;
@@ -47,7 +47,7 @@ unsigned int FUN_002efa90(int *param_1)
       (**(romwright_code **)(temp_v0 + 0x1274))();
       *(unsigned char *)(temp_v0 + 0x1270) = 0;
     }
-    FUN_001677c0();
+    efctSetSpeed();
   }
   return 0;
 }

@@ -1,23 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ea6e8` (_code @ 0x2ea6e8, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail loads the vtable address into r1 and zero into r2 (swapped here) */
+/* Constructs the object: allocates it, installs its vtable and clears the flag. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_005594b4; /* 0x5594b4 */
+typedef struct Object {
+    /* 0x00 */ const void *vtbl;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u8 flag;
+} Object;
 
-extern unsigned int *FUN_002fd0e4(void);
+extern u8 DAT_005594b4;
 
+extern Object *FUN_002fd0e4(void);
 
 void FUN_002ea6e8(void)
-
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)FUN_002fd0e4();
-  *puVar1 = (unsigned int)&DAT_005594b4;
-  *(unsigned char *)(puVar1 + 2) = 0;
-  return;
+    Object *obj = FUN_002fd0e4();
+
+    obj->vtbl = &DAT_005594b4;
+    obj->flag = 0;
 }
 
-} /* extern "C" */
+}

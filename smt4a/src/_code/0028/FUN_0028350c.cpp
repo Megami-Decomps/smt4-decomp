@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
+int jobStop(unsigned int, int);
 int FUN_003bb088(unsigned int);
 
-/* Supplied declaration required: FUN_001631d0. */
-extern int FUN_00163e40(void);
-extern int FUN_00164a9c(unsigned int);
-extern unsigned int FUN_00236038(unsigned int);
+/* Supplied declaration required: jobStop. */
+extern int jobIsValid(void);
+extern int jobGetWork(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_003bb088. */
 
 
@@ -21,13 +21,13 @@ unsigned int FUN_0028350c(void)
   unsigned int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00163e40();
+  temp_v0 = scrGetArg(0);
+  temp_v1 = jobIsValid();
   if (temp_v1 != 0) {
-    temp_v1 = FUN_00164a9c(temp_v0);
+    temp_v1 = jobGetWork(temp_v0);
     FUN_003bb088(temp_v0);
     if (*(int *)(temp_v1 + 0xc) == 1) {
-      FUN_001631d0(temp_v0,0);
+      jobStop(temp_v0,0);
       return 1;
     }
     *(unsigned char *)(temp_v1 + 0x30) = 1;

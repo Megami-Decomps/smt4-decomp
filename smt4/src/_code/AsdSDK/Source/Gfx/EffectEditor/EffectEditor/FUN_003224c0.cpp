@@ -11,10 +11,10 @@ int FUN_002496cc(int);
 int FUN_0024dd48(unsigned char *);
 int FUN_0024dd80(int);
 int FUN_0024dd90(unsigned char *);
-int FUN_002571b8(void);
+int effMenuListAppend(void);
 int FUN_002a2c7c(void);
 int FUN_002bfde4(...);
-int FUN_002c32a0(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 
 /* stack frame of param_2: 12 slot(s), 48 byte(s) */
 typedef struct {
@@ -83,10 +83,10 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: FUN_0024dd48. */
 /* Supplied declaration required: FUN_0024dd80. */
 /* Supplied declaration required: FUN_0024dd90. */
-/* Supplied declaration required: FUN_002571b8. */
+/* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: FUN_002a2c7c. */
 /* Supplied declaration required: FUN_002bfde4. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 
 
 unsigned int FUN_003224c0(int param_1,int param_2)
@@ -230,7 +230,7 @@ unsigned int FUN_003224c0(int param_1,int param_2)
   temp_v12 = 0x41f00000;
   temp_v13 = 0x42480000;
   temp_v3 = 0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+  memAlloc(0x10000,0x100,0,0x68,0x10,1);
   *(unsigned int *)(temp_v3 + 8) = temp_v27;
   *(float *)&*(unsigned int *)(temp_v3 + 0xc) = uStack_8c;
   *(float *)&*(unsigned int *)(temp_v3 + 0x10) = uStack_88;
@@ -256,17 +256,17 @@ unsigned int FUN_003224c0(int param_1,int param_2)
   *(unsigned int *)(temp_v3 + 4) = 10;
   *(unsigned int *)(temp_v3 + 0x20) = 0xff00c0c0;
   *(unsigned int *)(temp_v3 + 100) = 0;
-  FUN_002571b8();
+  effMenuListAppend();
   FUN_00243224(&temp_v27,&temp_v25,0xff0000ff,0);
   temp_v3 = 0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+  memAlloc(0x10000,0x100,0,0x68,0x10,1);
   *(unsigned int *)(temp_v3 + 0x18) = 0;
   *(unsigned int *)(temp_v3 + 4) = 9;
   *(unsigned int *)(temp_v3 + 8) = temp_v27;
   *(float *)&*(unsigned int *)(temp_v3 + 0xc) = uStack_8c;
   *(float *)&*(unsigned int *)(temp_v3 + 0x10) = uStack_88;
   *(float *)&*(unsigned int *)(temp_v3 + 0x14) = temp_v28;
-  FUN_002571b8();
+  effMenuListAppend();
   DAT_004ea980 = temp_v22;
   DAT_004ea97c = temp_v21;
   DAT_004ea978 = temp_v20;

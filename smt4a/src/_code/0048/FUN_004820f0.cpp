@@ -32,7 +32,7 @@ extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -132,9 +132,9 @@ void FUN_004820f0(int param_1)
   temp_v15 = 0.0f;
   temp_v16 = 0.0f;
   nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v14,&temp_v17);
-  temp_v14 = temp_v14 * temp_v13 + *(float *)(DAT_00581288 + 0x1c);
-  temp_v15 = temp_v15 * temp_v13 + *(float *)(DAT_00581288 + 0x20);
-  temp_v16 = temp_v16 * temp_v13 + *(float *)(DAT_00581288 + 0x24);
+  temp_v14 = temp_v14 * temp_v13 + *(float *)(g_lmapScene + 0x1c);
+  temp_v15 = temp_v15 * temp_v13 + *(float *)(g_lmapScene + 0x20);
+  temp_v16 = temp_v16 * temp_v13 + *(float *)(g_lmapScene + 0x24);
   *(float *)(temp_v1 + 0x2c) = temp_v14;
   *(float *)(temp_v1 + 0x30) = temp_v15;
   *(float *)(temp_v1 + 0x34) = temp_v16;

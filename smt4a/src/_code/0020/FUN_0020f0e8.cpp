@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0013f1b8(int, int);
+int asdTMTexTableLoadTmx(int, int);
 int FUN_0020214c(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ extern unsigned char LAB_0020f114; /* 0x20f114 */
 extern unsigned char *DAT_005821c8; /* 0x5821c8 */
 extern unsigned int DAT_005821dc; /* 0x5821dc */
 
-/* Supplied declaration required: FUN_0013f1b8. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_0020214c. */
 
 
@@ -30,7 +30,7 @@ void FUN_0020f0e8(void)
   FUN_0020214c();
   DAT_005821dc = 0;
   DAT_005821c8 = puVar1;
-  FUN_0013f1b8(0x2d,0);
+  asdTMTexTableLoadTmx(0x2d,0);
   return;
 }
 

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002939f4(void);
+int btlGetMainState(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
 extern int FUN_00227668(unsigned int);
 extern int FUN_00227ecc(unsigned int, unsigned int);
 extern int FUN_00293230(void);
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 
 
 int FUN_00227d70(unsigned int param_1,unsigned int param_2)
@@ -22,7 +22,7 @@ int FUN_00227d70(unsigned int param_1,unsigned int param_2)
   int temp_v0;
   int temp_v1;
   
-  FUN_002939f4();
+  btlGetMainState();
   temp_v0 = FUN_00293230();
   if (temp_v0 != 0) {
     temp_v0 = 5;

@@ -1,26 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00310d0a` (_code @ 0x310d0a, 0x2e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the empty element-walk loop compares (end, p) instead of (p, end). */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002fc046(int);
-extern int FUN_00310d38(int, unsigned int, int);
+typedef struct ByteVector {
+    /* 0x00 */ u8 *begin;
+    /* 0x04 */ u8 *end;
+} ByteVector;
 
+int FUN_002fc046(ByteVector *vec);
+u8 *FUN_00310d38(u8 *first, u8 *last, u8 *dest);
 
-int FUN_00310d0a(int param_1,int param_2,int param_3)
-
+/* Erases [first, last) from the vector: moves the tail down, walks the vacated elements, shrinks end. Returns first. */
+u8 *FUN_00310d0a(ByteVector *vec, u8 *first, u8 *last)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002fc046(param_1);
-  if (temp_v0 == 0) {
-    temp_v0 = FUN_00310d38(param_3,*(unsigned int *)(param_1 + 4),param_2);
-    for (; *(int *)(param_1 + 4) != temp_v0; temp_v0 = temp_v0 + 1) {
+    if (FUN_002fc046(vec) == 0) {
+        u8 *newEnd = FUN_00310d38(last, vec->end, first);
+
+        for (u8 *p = newEnd; p != vec->end; p++) {
+        }
+        vec->end -= last - first;
     }
-    *(int *)(param_1 + 4) = *(int *)(param_1 + 4) - (param_3 - param_2);
-  }
-  return param_2;
+    return first;
 }
 
 } /* extern "C" */

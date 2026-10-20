@@ -18,10 +18,10 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0022abe0. */
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00282924. */
 /* Supplied declaration required: FUN_00283e48. */
-extern unsigned int FUN_002939f4(void);
+extern unsigned int btlGetMainState(void);
 
 
 unsigned short FUN_003bee64(unsigned int param_1)
@@ -35,7 +35,7 @@ unsigned short FUN_003bee64(unsigned int param_1)
   unsigned int *puVar5;
   unsigned short temp_v4 [12];
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   FUN_00282924(temp_v0,param_1);
   temp_v4[0] = 0;
   temp_v4[1] = 0;
@@ -58,7 +58,7 @@ unsigned short FUN_003bee64(unsigned int param_1)
         temp_v0 = (unsigned int)*(unsigned char *)(temp_v1 + 0x27);
       }
       if (temp_v1 != 0 && temp_v0 != 0) {
-        temp_v2 = FUN_0023eae0(99);
+        temp_v2 = randRange(99);
         if ((*puVar5 & 0x40000) != 0) {
           temp_v2 = 0;
         }

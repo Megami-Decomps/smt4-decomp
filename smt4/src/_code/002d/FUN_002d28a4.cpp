@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002df5f8(void);
 
 extern int DAT_004474f4; /* 0x4474f4 */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 
 /* Supplied declaration required: FUN_002df5f8. */
@@ -36,10 +36,10 @@ void FUN_002d28a4(int param_1,int param_2)
   temp_v1 = 0x437a0000;
   temp_v2 = 0x442f0000;
   temp_v3 = 0x42480000;
-  if (DAT_0049f91c != 0x19) {
-    if (DAT_0049f91c != 0x1a) {
-      if (DAT_0049f91c != 0x1b) {
-        if (DAT_0049f91c != 0x1c) {
+  if (g_gameState != 0x19) {
+    if (g_gameState != 0x1a) {
+      if (g_gameState != 0x1b) {
+        if (g_gameState != 0x1c) {
           return;
         }
         if (DAT_0049f920 != 1) {

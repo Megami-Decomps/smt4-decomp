@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp3C; /* 0x3c: local_3c */
 } param_2_stack;
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
@@ -41,7 +41,7 @@ void FUN_00113de4(int param_1,int param_2)
   int iStack_1c;
   int temp_v6;
   
-  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0x5)) != '\0') {
+  if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x5)) != '\0') {
     iStack_1c = param_1;
     temp_v6 = param_2;
     FUN_002e6e34(temp_v3,param_1 + 0x18);

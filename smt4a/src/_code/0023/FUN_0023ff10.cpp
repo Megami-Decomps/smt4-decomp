@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00183f58(...);
 int FUN_001ad9b4(void);
 
@@ -14,9 +14,9 @@ typedef struct {
 } void_stack;
 
 extern int DAT_0057f28c; /* 0x57f28c */
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_002a4860(void);
@@ -42,30 +42,30 @@ void FUN_0023ff10(void)
   temp_v4 = DAT_0057f28c;
   temp_v1 = *(int *)(DAT_0057f28c + 0x918);
   if (*(char *)(DAT_0057f28c + 0x90c) != '\0') {
-    if ((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x460)) != '\0') {
+    if ((*(signed char *)((unsigned char *)&g_gameState + 0x460)) != '\0') {
       if (temp_v1 == 1) {
-        FUN_001681cc(0x10e);
+        sysPlaySe(0x10e);
       }
       if (*(int *)(temp_v4 + 0x918) == 2) {
         if (*(int *)(temp_v4 + 0x910) == 0) {
-          FUN_001681cc(0x10f);
+          sysPlaySe(0x10f);
         }
         if (*(int *)(temp_v4 + 0x910) == 1) {
-          FUN_001681cc(0x110);
+          sysPlaySe(0x110);
           return;
         }
       }
     }
     else {
       if (temp_v1 == 1) {
-        FUN_001681cc(0x6e);
+        sysPlaySe(0x6e);
       }
       if (*(int *)(temp_v4 + 0x918) == 2) {
         if (*(int *)(temp_v4 + 0x910) == 0) {
-          FUN_001681cc(0x6f);
+          sysPlaySe(0x6f);
         }
         if (*(int *)(temp_v4 + 0x910) == 1) {
-          FUN_001681cc(0x70);
+          sysPlaySe(0x70);
           return;
         }
       }
@@ -73,37 +73,37 @@ void FUN_0023ff10(void)
     return;
   }
   if (temp_v1 == 1) {
-    FUN_001681cc(0x71);
+    sysPlaySe(0x71);
   }
   if (*(int *)(temp_v4 + 0x918) == 2) {
     if (*(char *)(temp_v4 + 0x944) != '\0') {
       if (*(int *)(temp_v4 + 0x910) == 0) {
-        FUN_001681cc(0xf7);
+        sysPlaySe(0xf7);
       }
       if (*(int *)(temp_v4 + 0x910) == 1) {
         temp_v2 = 0xf8;
-        FUN_001681cc(temp_v2);
+        sysPlaySe(temp_v2);
       }
     }
     else {
       if (*(int *)(temp_v4 + 0x910) == 0) {
-        FUN_001681cc(0x72);
+        sysPlaySe(0x72);
       }
       if (*(int *)(temp_v4 + 0x910) == 1) {
         temp_v2 = 0x73;
-        FUN_001681cc(temp_v2);
+        sysPlaySe(temp_v2);
       }
     }
   }
   if (*(int *)(temp_v4 + 0x918) == 3) {
     if (*(int *)(temp_v4 + 0x910) == 0) {
-      FUN_001681cc(0x74);
+      sysPlaySe(0x74);
     }
     if (*(int *)(temp_v4 + 0x910) == 1) {
-      FUN_001681cc(0x75);
+      sysPlaySe(0x75);
     }
     if (*(int *)(temp_v4 + 0x910) == 2) {
-      FUN_001681cc(0x76);
+      sysPlaySe(0x76);
     }
   }
   temp_v1 = FUN_002a4860();

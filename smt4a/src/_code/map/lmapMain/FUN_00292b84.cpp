@@ -37,9 +37,9 @@ typedef struct {
 } void_stack;
 
 extern int *DAT_005806a4; /* 0x5806a4 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f10cc; /* 0x5f10cc */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern signed char DAT_005f199e; /* 0x5f199e */
 extern float DAT_005f1a88; /* 0x5f1a88 */
@@ -87,7 +87,7 @@ extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0036b824. */
 /* Supplied declaration required: FUN_003f9c6c. */
 /* Supplied declaration required: FUN_0050d8e4. */
-extern short aeabi_idivmod(short, int);
+extern short __aeabi_idivmod(short, int);
 
 
 void FUN_00292b84(void)
@@ -251,13 +251,13 @@ void FUN_00292b84(void)
       temp_v10 = (int)(short)temp_v2;
       if (0 < temp_v10) {
         temp_v1 = *(short *)((int)DAT_005806a4 + 0x2b2);
-        temp_v0 = aeabi_idivmod(temp_v1,temp_v10 + 5);
+        temp_v0 = __aeabi_idivmod(temp_v1,temp_v10 + 5);
         *(short *)((int)piVar5 + 0x2b2) = temp_v1 - temp_v0;
         temp_v11 = piVar5[0xad];
-        temp_v1 = aeabi_idivmod((short)temp_v11,temp_v10 + 5);
+        temp_v1 = __aeabi_idivmod((short)temp_v11,temp_v10 + 5);
         *(short *)(piVar5 + 0xad) = (short)temp_v11 - temp_v1;
         temp_v1 = *(short *)((int)piVar5 + 0x2b6);
-        temp_v0 = aeabi_idivmod(temp_v1,temp_v10 + 5);
+        temp_v0 = __aeabi_idivmod(temp_v1,temp_v10 + 5);
         *(short *)((int)piVar5 + 0x2b6) = temp_v1 - temp_v0;
         *(short *)(piVar5 + 0xac) = (short)temp_v2 - 1;
       }
@@ -326,23 +326,23 @@ void FUN_00292b84(void)
     return;
   }
   temp_v10 = FUN_003033d4();
-  temp_v2 = DAT_00581288;
+  temp_v2 = g_lmapScene;
   piVar5 = DAT_005806a4;
   temp_v13 = 0.017453292f;
-  DAT_005806a4[0x11] = *(int *)(DAT_00581288 + 0x1c);
+  DAT_005806a4[0x11] = *(int *)(g_lmapScene + 0x1c);
   piVar5[0x13] = *(int *)(temp_v2 + 0x24);
   temp_v7 = (float)piVar5[6] * 0.017453292f;
   FUN_001bc124();
   piVar5 = DAT_005806a4;
   DAT_005806a4[0xe] =
-       (int)(*(float *)(DAT_00581288 + 0x1c) - temp_v7 * (float)DAT_005806a4[temp_v10 + 99]);
+       (int)(*(float *)(g_lmapScene + 0x1c) - temp_v7 * (float)DAT_005806a4[temp_v10 + 99]);
   temp_v8 = (float)piVar5[6] * temp_v13;
   FUN_001bbf0c();
-  temp_v2 = DAT_00581288;
+  temp_v2 = g_lmapScene;
   piVar5 = DAT_005806a4;
   temp_v7 = 90.0f;
   DAT_005806a4[0x10] =
-       (int)(*(float *)(DAT_00581288 + 0x24) - temp_v8 * (float)DAT_005806a4[temp_v10 + 99]);
+       (int)(*(float *)(g_lmapScene + 0x24) - temp_v8 * (float)DAT_005806a4[temp_v10 + 99]);
   piVar5[0x12] = (int)(*(float *)(temp_v2 + 0x20) + (float)piVar5[temp_v10 + 0x33]);
   piVar5[0xf] = (int)(*(float *)(temp_v2 + 0x20) + (float)piVar5[temp_v10 + 0x43] + (float)piVar5[7]);
   temp_v8 = ((float)piVar5[6] - 90.0f) * temp_v13;
@@ -392,9 +392,9 @@ void FUN_00292b84(void)
   }
   piVar5[0xf] = (int)((float)piVar5[0xf] + temp_v13 + temp_v9);
   piVar5[0x87] = (int)(temp_v13 + temp_v9);
-  if (DAT_005f15fc != 1) {
-    if (DAT_005f15fc != 2) {
-      if ((DAT_005f15fc == 4) && (DAT_005f1600 == 2)) {
+  if (g_gameState != 1) {
+    if (g_gameState != 2) {
+      if ((g_gameState == 4) && (DAT_005f1600 == 2)) {
         temp_v2 = FUN_0018719c(0xf4);
         if (temp_v2 != 0) {
           temp_v2 = FUN_0018719c(0xf6);
@@ -434,9 +434,9 @@ void FUN_00292b84(void)
   DAT_005806a4[0xf] = (int)temp_v19;
   piVar5[0xc4] = (int)temp_v15;
   piVar5[0xc3] = (int)DAT_005f1a88;
-  temp_v2 = DAT_00581288;
+  temp_v2 = g_lmapScene;
   if (*(char *)((int)piVar5 + 0x305) == '\0') {
-    temp_v15 = *(float *)(DAT_00581288 + 0x20) + 5.0f;
+    temp_v15 = *(float *)(g_lmapScene + 0x20) + 5.0f;
     if (temp_v19 <= temp_v15) {
       temp_v19 = temp_v15;
     }
@@ -462,7 +462,7 @@ void FUN_00292b84(void)
     FUN_00352bc4();
     temp_v15 = (float)DAT_005806a4[6];
     FUN_002b5cd4();
-    temp_v19 = *(float *)(DAT_00581288 + 0x20);
+    temp_v19 = *(float *)(g_lmapScene + 0x20);
     if (temp_v15 < temp_v27) {
       temp_v15 = -temp_v15;
     }

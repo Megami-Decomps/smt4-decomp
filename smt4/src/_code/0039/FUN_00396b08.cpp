@@ -26,7 +26,7 @@ typedef struct {
     unsigned int sp888; /* 0x888: local_888 */
 } param_2_stack;
 
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapScene; /* 0x447e88 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
@@ -115,9 +115,9 @@ LAB_00396b7c:
       if (temp_v6 != 0) {
         unaff_r11 = temp_v23;
       }
-      temp_v12 = (unsigned long long)*(unsigned int *)(DAT_00447e88 + 0x1c);
-      temp_v11 = *(float *)(DAT_00447e88 + 0x20);
-      temp_v10 = *(float *)(DAT_00447e88 + 0x24);
+      temp_v12 = (unsigned long long)*(unsigned int *)(g_lmapScene + 0x1c);
+      temp_v11 = *(float *)(g_lmapScene + 0x20);
+      temp_v10 = *(float *)(g_lmapScene + 0x24);
       if (temp_v6 == 0) {
         return;
       }

@@ -22,7 +22,7 @@ extern signed char DAT_00471ac0; /* 0x471ac0 */
 extern unsigned int DAT_00472ab0; /* 0x472ab0 */
 
 extern int FUN_00128c30(unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *);
-extern int FUN_002c1364(unsigned int *, unsigned int, unsigned int, unsigned int);
+extern int asdModelForwardChecked(unsigned int *, unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002c1398(unsigned int);
 extern unsigned int FUN_002c30c4(unsigned int);
 /* Supplied declaration required: FUN_002c52f8. */
@@ -58,7 +58,7 @@ unsigned int FUN_0011c320(unsigned int *param_1,unsigned int param_2)
       FUN_002c52f8();
     }
     temp_v0 = FUN_002c30c4(param_2);
-    temp_v2 = FUN_002c1364(&DAT_00472ab0,param_2,temp_v0,0);
+    temp_v2 = asdModelForwardChecked(&DAT_00472ab0,param_2,temp_v0,0);
     if (temp_v2 < 0) {
       FUN_002c52f8();
     }

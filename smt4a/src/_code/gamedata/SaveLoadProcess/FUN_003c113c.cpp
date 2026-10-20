@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_002684ac(...);
 int FUN_002a2d14(...);
 int FUN_002c76d8(...);
@@ -35,9 +35,9 @@ extern unsigned short DAT_0057f6c2; /* 0x57f6c2 */
 extern unsigned int DAT_0057f6c4; /* 0x57f6c4 */
 
 extern int FUN_0014af84(void);
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_002684ac. */
 /* Supplied declaration required: FUN_002a2d14. */
 /* Supplied declaration required: FUN_002c76d8. */
@@ -54,7 +54,7 @@ unsigned int FUN_003c113c(void)
   unsigned char *puVar4;
   
   puVar2 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x1c,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x1c,1);
   FUN_002c76d8(1);
   FUN_002684ac(1);
   FUN_00333574(1);
@@ -73,11 +73,11 @@ unsigned int FUN_003c113c(void)
   DAT_0057f6bd = 0;
   DAT_0057f6be = 0;
   puVar4 = &LAB_003c12b0;
-  FUN_0014e38c(&LAB_003c12b0,4,0,0,FUN_0037116c,FUN_003c6038,puVar2);
+  asdProcessCreateSimple(&LAB_003c12b0,4,0,0,FUN_0037116c,FUN_003c6038,puVar2);
   *puVar2 = (unsigned int)puVar4;
   FUN_002a2d14();
-  FUN_0015155c(&LAB_003c12bc,0x86,0,0,FUN_003a7938,0,0,*puVar2);
-  FUN_0015155c(&LAB_003c12c8,0xe2,0,0,FUN_003a7938,0,0,*puVar2);
+  taskCreateDraw(&LAB_003c12bc,0x86,0,0,FUN_003a7938,0,0,*puVar2);
+  taskCreateDraw(&LAB_003c12c8,0xe2,0,0,FUN_003a7938,0,0,*puVar2);
   puVar2[1] = 0xc;
   return *puVar2;
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00152914(int, unsigned int, int);
+int eventTexCallIfMatch(int, unsigned int, int);
 int FUN_00153630(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00152914. */
+/* Supplied declaration required: eventTexCallIfMatch. */
 /* Supplied declaration required: FUN_00153630. */
 
 
@@ -25,7 +25,7 @@ unsigned int FUN_0013dadc(int param_1,unsigned int param_2)
   temp_v0 = param_1;
   FUN_00153630();
   if (temp_v0 == 0) {
-    FUN_00152914(param_1,param_2,0);
+    eventTexCallIfMatch(param_1,param_2,0);
   }
   return 1;
 }

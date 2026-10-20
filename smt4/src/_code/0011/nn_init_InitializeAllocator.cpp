@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00123a38(unsigned char *, unsigned int);
+int addressBlockInit(unsigned char *, unsigned int);
 int FUN_002c38fc(unsigned int);
 int FUN_002c3918(unsigned int *, unsigned int, unsigned int, int, unsigned int);
 
@@ -24,7 +24,7 @@ extern unsigned char uRam004d45ea; /* 0x4d45ea */
 extern unsigned char DAT_004d45ec; /* 0x4d45ec */
 extern int DAT_004d45f4; /* 0x4d45f4 */
 
-/* Supplied declaration required: FUN_00123a38. */
+/* Supplied declaration required: addressBlockInit. */
 /* Supplied declaration required: FUN_002c38fc. */
 /* Supplied declaration required: FUN_002c3918. */
 
@@ -38,7 +38,7 @@ void nn_init_InitializeAllocator(unsigned int param_1)
   unsigned int unaff_r4;
   unsigned int *puVar3;
   
-  FUN_00123a38(&DAT_004d45ec,param_1);
+  addressBlockInit(&DAT_004d45ec,param_1);
   temp_v1 = DAT_004d45f4;
   temp_v0 = (DAT_004d45f4 - 1U) & 0xfffffffc;
   puVar3 = (unsigned int *)(temp_v0 + 4);

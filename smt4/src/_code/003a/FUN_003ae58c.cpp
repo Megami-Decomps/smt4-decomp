@@ -1,40 +1,31 @@
-#include "romwright_types.h"
+#include "battle/btlUI.h"
 
 extern "C" {
 
-int FUN_0028cb40(int, int, int);
+s32 FUN_002062e8(BtlUiObjC *obj);
+void FUN_0028cb40(BtlUiObjC *obj, u16 *a, u16 *b);
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+extern BtlUiGlobals DAT_00439c88;
 
-extern int FUN_002062e8(int);
-/* Supplied declaration required: FUN_0028cb40. */
-
-
-int FUN_003ae58c(void)
-
+s32 FUN_003ae58c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v2;
-  int *piVar4;
-  
-  temp_v2 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20));
-  piVar4 = (int *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0x7e38);
-  if (*piVar4 == 0xb) {
-    return 0;
-  }
-  temp_v0 = FUN_002062e8(temp_v2 + 0x2460);
-  if (temp_v0 != 0) {
-    FUN_0028cb40(temp_v2 + 0x2460,temp_v2 + 0x7e4e,temp_v2 + 0x7e50);
-    if (*(short *)(temp_v2 + 0x7e4e) == 0xe) {
-      temp_v2 = 10;
+    BtlUi *ui = DAT_00439c88.ui;
+    s32 *state = &ui->state;
+    s32 result;
+
+    if (*state == 0xB) {
+        return 0;
     }
-    else {
-      temp_v2 = 0;
+    result = FUN_002062e8(&ui->objC);
+    if (result != 0) {
+        FUN_0028cb40(&ui->objC, &ui->unk7E4E, &ui->unk7E50);
+        if (ui->unk7E4E == 0xE) {
+            *state = 10;
+        } else {
+            *state = 0;
+        }
     }
-    *piVar4 = temp_v2;
-  }
-  return temp_v0;
+    return result;
 }
 
 } /* extern "C" */

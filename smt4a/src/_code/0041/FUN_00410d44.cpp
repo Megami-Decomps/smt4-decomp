@@ -22,7 +22,7 @@ typedef struct {
 extern unsigned char DAT_005297d4; /* 0x5297d4 */
 
 extern int FUN_0013def0(unsigned int);
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_00163e84(unsigned int);
 extern int FUN_00187168(void);
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
@@ -56,7 +56,7 @@ void FUN_00410d44(int param_1)
   int temp_v11;
   unsigned int temp_v12 [8];
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   temp_v1 = *(int *)(param_1 + 0x10);
   if (temp_v1 != 0) {
     if (temp_v1 != 1) {

@@ -1,26 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010b678` (_code @ 0x10b678, 0x1a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Constructor: sets the vtable and, when the global hook is installed, registers the object with it. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0010b628(unsigned int *);
+typedef struct {
+    const void *vtbl; /* 0x00 */
+} HookedObject;
 
-extern unsigned char DAT_00558d10; /* 0x558d10 */
-extern unsigned char DAT_0059935c; /* 0x59935c */
+typedef struct {
+    u8 unk00[0x1c]; /* 0x00 */
+    void *hook;     /* 0x1c */
+} SystemHooks;
 
-/* Supplied declaration required: FUN_0010b628. */
+extern u8 DAT_00558d10;
+extern SystemHooks g_systemTable;
 
+void FUN_0010b628(HookedObject *self);
 
-unsigned int * FUN_0010b678(unsigned int *param_1)
-
+HookedObject *FUN_0010b678(HookedObject *self)
 {
-/* irregular: 1 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_00558d10;
-  if ((*(int *)((unsigned char *)&DAT_0059935c + 0x1c)) != 0) {
-    FUN_0010b628(param_1);
-  }
-  return param_1;
+    self->vtbl = &DAT_00558d10;
+    if (g_systemTable.hook != NULL) {
+        FUN_0010b628(self);
+    }
+    return self;
 }
 
 } /* extern "C" */

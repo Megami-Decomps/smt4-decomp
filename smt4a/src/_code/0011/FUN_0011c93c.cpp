@@ -1,27 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011c93c` (_code @ 0x11c93c, 0x22 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the Thumb literal-pool alignment pad differs in fdiff (retail lists it as code `movs r0, r0`, the build as data `.short 0x0000`); the bytes are the same. */
+/* Destructor: restores the vtable and tears down the nested sub-objects (the embedded one at 0x2c first) back to the outer object, returning this. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0055a8f0; /* 0x55a8f0 */
+typedef struct {
+    const void *vtbl; /* 0x00 */
+    u8 unk04[0x28];   /* 0x04 */
+    u8 inner[1];      /* 0x2c */
+} NestedObject;
 
-extern int FUN_002e9318(int);
-extern int FUN_002eda5a(unsigned int *);
-extern int FUN_00307368(int);
+extern u8 DAT_0055a8f0;
 
+u8 *FUN_002e9318(u8 *self);
+u8 *FUN_002eda5a(u8 *self);
+u8 *FUN_00307368(u8 *self);
 
-int FUN_0011c93c(unsigned int *param_1)
-
+NestedObject *FUN_0011c93c(NestedObject *self)
 {
-  int temp_v0;
-  
-  *param_1 = (unsigned int)&DAT_0055a8f0;
-  temp_v0 = FUN_002eda5a(param_1 + 0xb);
-  temp_v0 = FUN_00307368(temp_v0 - 0xc);
-  temp_v0 = FUN_00307368(temp_v0 - 0xc);
-  temp_v0 = FUN_002e9318(temp_v0 - 8);
-  return temp_v0 - 0xc;
+    u8 *part;
+
+    self->vtbl = &DAT_0055a8f0;
+    part = FUN_002eda5a(self->inner);
+    part = FUN_00307368(part - 0xc);
+    part = FUN_00307368(part - 0xc);
+    part = FUN_002e9318(part - 8);
+    return (NestedObject *)(part - 0xc);
 }
 
 } /* extern "C" */

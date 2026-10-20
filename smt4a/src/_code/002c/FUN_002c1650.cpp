@@ -2,16 +2,16 @@
 
 extern "C" {
 
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_002c1650(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002e6354(0x5cb200,0x1308);
+  sysMemClear(0x5cb200,0x1308);
   return;
 }
 

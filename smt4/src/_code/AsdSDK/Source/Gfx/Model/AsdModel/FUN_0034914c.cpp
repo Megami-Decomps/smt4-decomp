@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ab8dc(unsigned int);
+int asdGxCommandListStartRecord(unsigned int);
 int FUN_002c35b0(int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -22,7 +22,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_002ab8dc. */
+/* Supplied declaration required: asdGxCommandListStartRecord. */
 /* Supplied declaration required: FUN_002c35b0. */
 
 
@@ -54,19 +54,19 @@ void FUN_0034914c(int param_1,int param_2)
       else {
         temp_v1 = ((unsigned int)romwright_fabs_4(temp_v2) >> 0x17) - 0x40;
         if ((int)temp_v1 < 0) {
-          FUN_002ab8dc(DAT_004dad90);
+          asdGxCommandListStartRecord(DAT_004dad90);
           return;
         }
         if ((int)temp_v1 >= 0x80) {
           DAT_004720f0 = 0x7f0000;
-          FUN_002ab8dc(DAT_004dad90);
+          asdGxCommandListStartRecord(DAT_004dad90);
           return;
         }
       }
       DAT_004720f0 = (((unsigned int)temp_v2 & 0x7fffff) >> 7) | DAT_004720f0 | ((temp_v1 & 0x7f) << 0x10);
     }
   }
-  FUN_002ab8dc(DAT_004dad90);
+  asdGxCommandListStartRecord(DAT_004dad90);
   return;
 }
 

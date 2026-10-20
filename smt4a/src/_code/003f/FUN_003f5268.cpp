@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_0019de98(int, unsigned int);
 int FUN_0037b578(unsigned int, unsigned int);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_002ebce4(void);
 /* Supplied declaration required: FUN_0037b578. */
@@ -35,7 +35,7 @@ void FUN_003f5268(int param_1,unsigned int param_2,unsigned int param_3)
   switch(param_2) {
   case 0:
   case 1:
-    FUN_001681cc(0xfc);
+    sysPlaySe(0xfc);
     FUN_0019de98(0,0xf4f4f4ff);
     return;
   case 4:
@@ -58,7 +58,7 @@ void FUN_003f5268(int param_1,unsigned int param_2,unsigned int param_3)
   case 0xb:
     return;
   }
-  FUN_001681cc(temp_v0);
+  sysPlaySe(temp_v0);
   temp_v1 = FUN_002ebce4();
   if (temp_v1 == 0) {
     return;

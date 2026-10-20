@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int FUN_00192748(void);
+extern int dataTableGetCount(void);
 /* Supplied declaration required: FUN_001a6f60. */
 extern int FUN_001b315c(unsigned int);
 /* Supplied declaration required: FUN_001b31ac. */
@@ -49,7 +49,7 @@ int FUN_0046eb24(int param_1,unsigned int param_2)
             if ((*(char *)(temp_v1 + temp_v3 * 0x40) == '\x06') &&
                (*(char *)(*(int *)(temp_v4 + 0x4c) + temp_v3 * 0x10 + 0xc) != '\0')) {
               FUN_001a6f60(*(unsigned int *)(*(int *)(temp_v4 + 0x4c) + temp_v3 * 0x10),param_2);
-              temp_v0 = FUN_00192748();
+              temp_v0 = dataTableGetCount();
               temp_v5 = temp_v5 + temp_v0;
             }
             temp_v3 = temp_v3 + 1;

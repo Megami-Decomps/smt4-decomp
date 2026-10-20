@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_001388dc(void);
 int FUN_00141fd0(unsigned char *, int);
-int FUN_00266be4(void);
+int asd3dSoundActorIsPlaying(void);
 int VectorUnsignedToFloat(unsigned int, int);
 int nw_snd_SoundStartable_StartSound(unsigned int, unsigned char *, int, int);
 
-extern unsigned char DAT_004e1f68; /* 0x4e1f68 */
+extern unsigned char g_asdSound; /* 0x4e1f68 */
 extern unsigned char DAT_004e2f68; /* 0x4e2f68 */
 extern unsigned int DAT_004e312c; /* 0x4e312c */
 extern signed char DAT_004e3134; /* 0x4e3134 */
@@ -20,7 +20,7 @@ extern int DAT_004e3180; /* 0x4e3180 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001388dc. */
 /* Supplied declaration required: FUN_00141fd0. */
-/* Supplied declaration required: FUN_00266be4. */
+/* Supplied declaration required: asd3dSoundActorIsPlaying. */
 extern int FUN_002bf684(unsigned char *);
 /* Supplied declaration required: nw_snd_SoundStartable_StartSound. */
 
@@ -40,13 +40,13 @@ unsigned char FUN_002ebc68(int param_1,unsigned int param_2)
   
   temp_v1 = DAT_004e3180;
   temp_v3 = 0;
-  puVar5 = &DAT_004e1f68;
+  puVar5 = &g_asdSound;
   if ((((DAT_004e3134 != '\0') && (param_2 < 0x10)) &&
-      (temp_v0 = FUN_002bf684(&DAT_004e1f68), temp_v0 != 0)) &&
-     ((puVar2 = puVar5, FUN_00141fd0(&DAT_004e1f68,param_1),
-      puVar2 != (unsigned char *)0x0 && temp_v1 != 0 && (temp_v2 = param_2, FUN_00266be4(), temp_v2 == 0))))
+      (temp_v0 = FUN_002bf684(&g_asdSound), temp_v0 != 0)) &&
+     ((puVar2 = puVar5, FUN_00141fd0(&g_asdSound,param_1),
+      puVar2 != (unsigned char *)0x0 && temp_v1 != 0 && (temp_v2 = param_2, asd3dSoundActorIsPlaying(), temp_v2 == 0))))
   {
-    FUN_00141fd0(&DAT_004e1f68,param_1);
+    FUN_00141fd0(&g_asdSound,param_1);
     if ((*(char *)(temp_v1 + 0x3b) != '\0') && (puVar5 == (unsigned char *)0x3)) {
       temp_v1 = param_1;
       FUN_001388dc();

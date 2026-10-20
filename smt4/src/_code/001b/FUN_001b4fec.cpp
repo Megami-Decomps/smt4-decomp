@@ -15,9 +15,9 @@ int FUN_00296fec(void);
 int FUN_0029c3b0(int);
 int FUN_002a03d8(...);
 int FUN_002b2368(void);
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 int FUN_002c5700(void);
-int FUN_002c57c8(int, int *);
+int asdSequenceRequest(int, int *);
 int FUN_00392e74(unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 1 byte(s) */
@@ -40,9 +40,9 @@ typedef struct {
 /* Supplied declaration required: FUN_0029c3b0. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002b2368. */
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002c5700. */
-/* Supplied declaration required: FUN_002c57c8. */
+/* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_00392e74. */
 extern unsigned int FUN_00393340(void);
 
@@ -75,7 +75,7 @@ unsigned int FUN_001b4fec(int *param_1,unsigned int param_2,unsigned int param_3
         }
         else {
           temp_v4 = romwright_piece_3_1((int)((unsigned int)param_4 >> 8),1);
-          FUN_002c57c8(1,&temp_v4);
+          asdSequenceRequest(1,&temp_v4);
         }
         *(unsigned char *)(temp_v3 + 0x1a) = 3;
         *(unsigned char *)(temp_v3 + 0x18) = 1;
@@ -101,7 +101,7 @@ unsigned int FUN_001b4fec(int *param_1,unsigned int param_2,unsigned int param_3
     FUN_0028d9b0();
     FUN_0028d6d0();
     temp_v1 = 0x2434;
-    FUN_002c222c();
+    asdOperatorNew();
     temp_v2 = 0;
     if (temp_v1 != 0) {
       temp_v2 = FUN_00393340();

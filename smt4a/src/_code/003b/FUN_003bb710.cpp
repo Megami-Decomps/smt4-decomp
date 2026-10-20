@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(void);
 int FUN_00203b40(int, int, int, int, int, int);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 int FUN_0032fea0(int, int);
 int rt_memcpy_w(int, int, int);
 
@@ -30,7 +30,7 @@ extern int DAT_0057f290; /* 0x57f290 */
 
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -60,7 +60,7 @@ void FUN_003bb710(fn_003bb710_arg0 *param_1)
   temp_v2 = temp_v1 + 0x8cf0;
   *(unsigned int *)(temp_v1 + 0x8b60) = temp_v7;
   *(unsigned int *)(temp_v1 + 0x8b64) = temp_v8;
-  FUN_002e6354(temp_v2,0xc0);
+  sysMemClear(temp_v2,0xc0);
   temp_v9 = 0;
   do {
     temp_v3 = temp_v1 + temp_v9 * 2;

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00157558(int);
 int FUN_00162790(int, unsigned int, int);
 int FUN_00164b5c(int, int, int, int, int, int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00183bb0(void);
 int FUN_001879d0(int);
 int VectorSignedToFloat(int, int);
@@ -20,7 +20,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_0057f578; /* 0x57f578 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00157558. */
@@ -28,7 +28,7 @@ extern int DAT_0059dbb4; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int FUN_001654d8(int);
 extern int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
@@ -57,8 +57,8 @@ char FUN_003d0110(void)
     temp_v1 = *(char *)(DAT_0057f578 + 0x10);
   }
   if (temp_v6 && temp_v1 != '\0') {
-    FUN_00157558(DAT_0059dbb4);
-    temp_v3 = DAT_0059dbb4;
+    FUN_00157558(g_renderCtx);
+    temp_v3 = g_renderCtx;
     temp_v2 = FUN_001692ac(1,0);
     piVar7 = (int *)(temp_v3 + 0x1258);
     temp_v4 = *piVar7;
@@ -71,7 +71,7 @@ char FUN_003d0110(void)
     }
     temp_v3 = FUN_001654d8(temp_v0 + 0x34);
     temp_v7 = 0.25f;
-    FUN_001879d0(DAT_0059dbb4);
+    FUN_001879d0(g_renderCtx);
     temp_v2 = FUN_001654e4(temp_v0 + 0x34);
     FUN_00164b5c(2,8,0xe,temp_v3 + (int)temp_v7,temp_v2,0x65);
     temp_v4 = FUN_001834a4(8,0x10b);
@@ -80,9 +80,9 @@ char FUN_003d0110(void)
                        );
     FUN_00162790(3,0xffffffff,temp_v0 + 0xc0);
     FUN_00183bb0();
-    FUN_001677c0();
-    temp_v0 = DAT_0059dbb4;
-    piVar7 = (int *)(DAT_0059dbb4 + 0x1258);
+    efctSetSpeed();
+    temp_v0 = g_renderCtx;
+    piVar7 = (int *)(g_renderCtx + 0x1258);
     temp_v3 = *piVar7;
     temp_v2 = piVar7[temp_v3 + 2];
     *piVar7 = temp_v3 - 1;

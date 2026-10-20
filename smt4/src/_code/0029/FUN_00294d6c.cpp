@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00282c90(void);
+int statusCameraSetEye(void);
 int VectorSignedToFloat(int, int);
 
-extern unsigned char DAT_0044e140; /* 0x44e140 */
+extern unsigned char g_gameGlobals; /* 0x44e140 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00282c90. */
+/* Supplied declaration required: statusCameraSetEye. */
 
 
 void FUN_00294d6c(void)
@@ -21,9 +21,9 @@ void FUN_00294d6c(void)
   int temp_v1;
   unsigned int in_fpscr;
   
-  temp_v1 = *(int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1ea0);
+  temp_v1 = *(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1ea0);
   if (0 < temp_v1) {
-    temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1ea4);
+    temp_v0 = *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1ea4);
     if (temp_v0 != '\0') {
       if (temp_v0 != '\x01') {
         if (temp_v0 == '\x02') {
@@ -38,7 +38,7 @@ void FUN_00294d6c(void)
       VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     }
   }
-  FUN_00282c90();
+  statusCameraSetEye();
   return;
 }
 

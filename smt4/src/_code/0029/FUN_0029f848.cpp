@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00296c60. */
 /* Supplied declaration required: FUN_00296c80. */
 /* Supplied declaration required: FUN_00316f58. */
-extern long long aeabi_idivmod(int, int, int, int, int);
+extern long long __aeabi_idivmod(int, int, int, int, int);
 
 
 void FUN_0029f848(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6)
@@ -45,7 +45,7 @@ void FUN_0029f848(int param_1,int param_2,int param_3,int param_4,int param_5,in
     }
     *(int *)(param_1 + 0x50) = param_2;
     *(unsigned char *)(param_1 + 0x62) = 0;
-    temp_v3 = aeabi_idivmod(param_2,param_4,param_3,param_4,param_4);
+    temp_v3 = __aeabi_idivmod(param_2,param_4,param_3,param_4,param_4);
     temp_v0 = (int)temp_v3;
     if (0xffffffff < temp_v3) {
       temp_v0 = temp_v0 + 1;

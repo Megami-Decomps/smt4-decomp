@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00145084(int);
-int FUN_00152f68(unsigned int, int);
+int asdGxCommandListEnd(unsigned int, int);
 
 extern signed char DAT_0057ffd0; /* 0x57ffd0 */
 extern signed char DAT_0057ffd1; /* 0x57ffd1 */
 extern unsigned int DAT_0057ffdc; /* 0x57ffdc */
 
 /* Supplied declaration required: FUN_00145084. */
-/* Supplied declaration required: FUN_00152f68. */
+/* Supplied declaration required: asdGxCommandListEnd. */
 extern int FUN_001696f4(void);
 
 
@@ -23,7 +23,7 @@ unsigned int FUN_00136f74(void)
   int temp_v0;
   
   if (((DAT_0057ffd0 == '\0') && (temp_v0 = FUN_001696f4(), temp_v0 == 1)) && (DAT_0057ffd1 != '\0')) {
-    FUN_00152f68(DAT_0057ffdc,1);
+    asdGxCommandListEnd(DAT_0057ffdc,1);
   }
   FUN_00145084(0x400);
   return 0;

@@ -1,25 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00143ae8` (_code @ 0x143ae8, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail has a stripped debug call (file/line setup + nop) before the allocation. */
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
+void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 
-int FUN_00163060(int, int, int, int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-/* Supplied declaration required: FUN_00163060. */
-
-
-void FUN_00143ae8(void)
-
+/* Allocates a 16-byte block from the main heap. */
+void *FUN_00143ae8(void)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00163060(0x100,0x100,0,0x10,1);
-  return;
+    return asdMemoryAllocTracked(0x100, 0x100, 0, 0x10, 1);
 }
 
 } /* extern "C" */

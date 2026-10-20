@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_0018719c(...);
 
-extern int DAT_00573920; /* 0x573920 */
+extern int g_btlMain; /* 0x573920 */
 
 /* Supplied declaration required: FUN_0018719c. */
-extern int FUN_00213b78(void);
+extern int flagSelectVariant(void);
 extern int FUN_002e2b38(void);
 
 
@@ -22,7 +22,7 @@ unsigned int FUN_002b25a8(void)
   
   temp_v0 = FUN_0018719c();
   if (temp_v0 == 0) {
-    temp_v0 = FUN_00213b78();
+    temp_v0 = flagSelectVariant();
     if (temp_v0 != 1) {
       if (temp_v0 != 2) {
         return 0;
@@ -38,8 +38,8 @@ unsigned int FUN_002b25a8(void)
         return 0;
       }
     }
-    temp_v0 = DAT_00573920;
-    if (DAT_00573920 != 0) {
+    temp_v0 = g_btlMain;
+    if (g_btlMain != 0) {
       temp_v1 = FUN_0018719c(0x1fd);
       if (temp_v1 != 0) {
         return 1;

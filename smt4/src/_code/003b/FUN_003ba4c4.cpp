@@ -8,7 +8,7 @@ int FUN_00249b18(int, int);
 int FUN_002769b4(...);
 int FUN_002a03d8(int, int);
 int FUN_002bd808(int, int);
-int FUN_002c57c8(unsigned int, int);
+int asdSequenceRequest(unsigned int, int);
 int FUN_003b82c4(int);
 int FUN_003b8b0c(int);
 
@@ -19,7 +19,7 @@ extern int DAT_0049fd14; /* 0x49fd14 */
 extern int FUN_00282b28(void);
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002bd808. */
-/* Supplied declaration required: FUN_002c57c8. */
+/* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_003b82c4. */
 /* Supplied declaration required: FUN_003b8b0c. */
 
@@ -47,7 +47,7 @@ void FUN_003ba4c4(int param_1)
           else {
             temp_v3 = 8;
           }
-          FUN_002c57c8(temp_v3,0);
+          asdSequenceRequest(temp_v3,0);
         }
         else {
           if ((temp_v2 & 0x100000) == 0) {

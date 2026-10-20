@@ -23,8 +23,8 @@ extern int FUN_0010d2d4(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0010ddcc. */
 extern unsigned int FUN_0010df80(int);
 extern unsigned int FUN_0010f134(void);
-extern unsigned long long FUN_002c1870(void);
-extern int FUN_002c564c(unsigned int);
+extern unsigned long long rt_memcmp(void);
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 void FUN_0010633c(void)
@@ -43,7 +43,7 @@ void FUN_0010633c(void)
   unsigned char temp_v7;
   unsigned long long temp_v8;
   
-  temp_v0 = FUN_002c564c(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
     temp_v0 = 0;
     do {
@@ -138,7 +138,7 @@ void FUN_0010633c(void)
           }
           FUN_0010bf44((&DAT_004c53d0)[temp_v0 * 8]);
           temp_v1 = (unsigned int)DAT_0044e098;
-          temp_v8 = FUN_002c1870();
+          temp_v8 = rt_memcmp();
           temp_v3 = (int)((unsigned long long)temp_v8 >> 0x20);
           if (((int)temp_v8 == 0) && (temp_v2 = (&DAT_004c53d0)[temp_v0 * 8], temp_v2 != 0x100007b)) {
             if (temp_v2 != 0x100007c) {

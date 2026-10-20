@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ae7e8(int);
+int asdTMTexTableFreeEntry(int);
 int FUN_002ae898(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002ae7e8. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002ae898. */
 
 
@@ -24,7 +24,7 @@ void FUN_00291730(int param_1)
     FUN_002ae898(0x33);
     *(unsigned int *)(param_1 + 0xb7c) = 0;
   }
-  FUN_002ae7e8(0x33);
+  asdTMTexTableFreeEntry(0x33);
   return;
 }
 

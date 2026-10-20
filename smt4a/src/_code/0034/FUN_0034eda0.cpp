@@ -1,20 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034eda0` (_code @ 0x34eda0, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Marks slot `index` as used, clears its first value and stores `value` in its second. */
+#include "common.h"
 
 extern "C" {
 
+typedef struct SlotSet {
+    /* 0x0000 */ u8 unk0000[0x41B8];
+    /* 0x41B8 */ u8 used[8];
+    /* 0x41C0 */ u32 first[5];
+    /* 0x41D4 */ u32 second[5];
+} SlotSet;
 
-void FUN_0034eda0(int param_1,int param_2,unsigned int param_3)
-
+void FUN_0034eda0(SlotSet *set, s32 index, u32 value)
 {
-  int temp_v0;
-  
-  temp_v0 = param_1 + param_2 * 4;
-  *(unsigned char *)(param_1 + param_2 + 0x41b8) = 1;
-  *(unsigned int *)(temp_v0 + 0x41c0) = 0;
-  *(unsigned int *)(temp_v0 + 0x41d4) = param_3;
-  return;
+    set->used[index] = 1;
+    set->first[index] = 0;
+    set->second[index] = value;
 }
 
-} /* extern "C" */
+}

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_0018719c(unsigned int);
 
 
@@ -70,7 +70,7 @@ void FUN_00498ff0(int param_1)
     uStack_34 = 0x860085;
     temp_v1 = *(unsigned short *)((int)&temp_v2 + *(int *)(param_1 + 0xb44) * 2);
   }
-  FUN_001681cc(temp_v1);
+  sysPlaySe(temp_v1);
   return;
 }
 

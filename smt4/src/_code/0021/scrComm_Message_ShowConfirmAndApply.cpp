@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00254e2c. */
 extern int FUN_002893d8(void);
 /* Supplied declaration required: FUN_0028ed3c. */
-extern unsigned short FUN_00296cc8(unsigned int);
+extern unsigned short scrGetArg(unsigned int);
 extern int FUN_002b47f4(unsigned int);
 /* Supplied declaration required: FUN_002bff50. */
 /* Supplied declaration required: FUN_00348a1c. */
@@ -36,7 +36,7 @@ unsigned char scrComm_Message_ShowConfirmAndApply(void)
   unsigned int temp_v2;
   int temp_v3;
   
-  temp_v0 = FUN_00296cc8(0);
+  temp_v0 = scrGetArg(0);
   temp_v1 = FUN_002893d8();
   if (temp_v1 == 0) {
     FUN_002542d4(0);

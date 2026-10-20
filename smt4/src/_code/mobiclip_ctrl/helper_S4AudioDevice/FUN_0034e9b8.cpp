@@ -11,7 +11,7 @@ int FUN_002b2368(int);
 int FUN_002bd430(void);
 int FUN_002c3f5c(int);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int FUN_002c415c(unsigned int);
+int asdMemFree(unsigned int);
 int FUN_002c526c(void);
 int software_interrupt(int);
 
@@ -41,7 +41,7 @@ extern unsigned int DAT_004c4100; /* 0x4c4100 */
 /* Supplied declaration required: FUN_002bd430. */
 /* Supplied declaration required: FUN_002c3f5c. */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c526c. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -95,7 +95,7 @@ void FUN_0034e9b8(void)
     FUN_002b2368(temp_v0);
   }
   DAT_0044d108 = 0;
-  FUN_002c415c(DAT_0044d104);
+  asdMemFree(DAT_0044d104);
   DAT_0044d104 = 0;
   temp_v1 = 0;
   if (DAT_0044d10c == 0) {

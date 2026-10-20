@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001d0984(unsigned int, int, int);
 int FUN_001d0b98(...);
 int FUN_001d13e8(...);
-int aeabi_uidivmod(...);
+int __aeabi_uidivmod(...);
 int rt_memcpy(...);
 
 /* stack frame of param_2: 22 slot(s), 74 byte(s) */
@@ -39,7 +39,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001d0984. */
 /* Supplied declaration required: FUN_001d0b98. */
 /* Supplied declaration required: FUN_001d13e8. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -86,11 +86,11 @@ unsigned int FUN_001cc1d0(int param_1,unsigned int param_2)
   temp_v6 = *(unsigned int *)(param_1 + 0xa4);
   iStack_2c = param_1;
   temp_v33 = param_2;
-  temp_v0 = aeabi_uidivmod(*(int *)(param_1 + 0x98) - 1,temp_v6);
+  temp_v0 = __aeabi_uidivmod(*(int *)(param_1 + 0x98) - 1,temp_v6);
   temp_v4 = *(int *)(param_1 + 0x94);
-  aeabi_uidivmod(temp_v4,temp_v6);
+  __aeabi_uidivmod(temp_v4,temp_v6);
   temp_v28 = temp_v2;
-  temp_v12 = aeabi_uidivmod(temp_v4 - temp_v2,temp_v6);
+  temp_v12 = __aeabi_uidivmod(temp_v4 - temp_v2,temp_v6);
   temp_v32 = (temp_v0 - temp_v12) + 1;
   temp_v7 = 0;
   if (*(int *)(param_1 + 0x68) != 0) {
@@ -107,7 +107,7 @@ unsigned int FUN_001cc1d0(int param_1,unsigned int param_2)
       temp_v21 = 0;
       temp_v22 = 0;
       if (temp_v0 < temp_v7) {
-        aeabi_uidivmod(temp_v7 - temp_v0,temp_v32);
+        __aeabi_uidivmod(temp_v7 - temp_v0,temp_v32);
         temp_v4 = temp_v3;
       }
       if ((!(temp_v0 == 0 || temp_v0 == temp_v7)) && ((!(temp_v0 != 0 && temp_v0 < temp_v7) || (temp_v4 != 0)))) {

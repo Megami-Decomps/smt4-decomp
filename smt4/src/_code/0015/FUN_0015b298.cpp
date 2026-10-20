@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern unsigned int *DAT_004652a0; /* 0x4652a0 */
+extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
 
 /* Supplied declaration required: nw_gfx_internal_NWCopyVec4Reverse. */
 
@@ -38,19 +38,19 @@ void FUN_0015b298(int param_1)
   float temp_v8;
   unsigned int temp_v9;
   
-  puVar1 = DAT_004652a0;
+  puVar1 = g_commandBufferCursor;
   piVar5 = *(int **)(param_1 + 0x44);
   if ((piVar5 != (int *)0x0) && ((~**(unsigned int **)(*(int *)(param_1 + 8) + 8) & 4) == 0)) {
     temp_v1 = piVar5[2];
-    *DAT_004652a0 = 0x80000016;
+    *g_commandBufferCursor = 0x80000016;
     puVar1[1] = 0x804f02c0;
     nw_gfx_internal_NWCopyVec4Reverse(puVar1 + 2,temp_v1 + 0xb8);
-    puVar1 = DAT_004652a0;
-    DAT_004652a0 = DAT_004652a0 + 6;
-    *DAT_004652a0 = 0x80000017;
+    puVar1 = g_commandBufferCursor;
+    g_commandBufferCursor = g_commandBufferCursor + 6;
+    *g_commandBufferCursor = 0x80000017;
     puVar1[7] = 0x804f02c0;
     nw_gfx_internal_NWCopyVec4Reverse(puVar1 + 8,temp_v1 + 200);
-    DAT_004652a0 = DAT_004652a0 + 6;
+    g_commandBufferCursor = g_commandBufferCursor + 6;
     temp_v2 = *(float *)(temp_v1 + 0xd8);
     temp_v4 = *(float *)(temp_v1 + 0xdc);
     temp_v3 = *(float *)(temp_v1 + 0xe0);
@@ -63,7 +63,7 @@ void FUN_0015b298(int param_1)
       temp_v4 = pfVar2[4] * temp_v3 + pfVar2[5] * temp_v6 + pfVar2[6] * temp_v5;
       temp_v3 = pfVar2[8] * temp_v3 + pfVar2[9] * temp_v6 + pfVar2[10] * temp_v5;
     }
-    puVar1 = DAT_004652a0;
+    puVar1 = g_commandBufferCursor;
     temp_v0 = *(int *)(param_1 + 0xa4);
     temp_v9 = *(unsigned int *)(temp_v1 + 0xe4);
     temp_v7 = *(float *)(temp_v0 + 0x148) * temp_v2 + *(float *)(temp_v0 + 0x14c) * temp_v4 +
@@ -72,10 +72,10 @@ void FUN_0015b298(int param_1)
                 *(float *)(temp_v0 + 0x160) * temp_v3;
     temp_v8 = *(float *)(temp_v0 + 0x168) * temp_v2 + *(float *)(temp_v0 + 0x16c) * temp_v4 +
                *(float *)(temp_v0 + 0x170) * temp_v3;
-    *DAT_004652a0 = 0x80000018;
+    *g_commandBufferCursor = 0x80000018;
     puVar1[1] = 0x804f02c0;
     nw_gfx_internal_NWCopyVec4Reverse(puVar1 + 2,&temp_v7);
-    DAT_004652a0 = DAT_004652a0 + 6;
+    g_commandBufferCursor = g_commandBufferCursor + 6;
   }
   return;
 }

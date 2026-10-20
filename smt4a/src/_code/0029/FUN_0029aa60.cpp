@@ -37,9 +37,9 @@ typedef struct {
 } param_1_stack;
 
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_0058103c; /* 0x58103c */
+extern int g_mapIf; /* 0x58103c */
 extern int DAT_00581040; /* 0x581040 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern signed char DAT_005f1614; /* 0x5f1614 */
 extern signed char DAT_005f1859; /* 0x5f1859 */
 extern unsigned char DAT_005f185a; /* 0x5f185a */
@@ -83,7 +83,7 @@ extern int FUN_0029d6f0(void);
 extern int FUN_0036d984(float *, unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_003a3e60. */
 /* Supplied declaration required: FUN_003d4ed8. */
-extern short aeabi_idivmod(int, int);
+extern short __aeabi_idivmod(int, int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -134,12 +134,12 @@ void FUN_0029aa60(int param_1)
   int temp_v32;
   int temp_v33;
   
-  temp_v5 = DAT_0058103c;
+  temp_v5 = g_mapIf;
   temp_v3 = 0;
   temp_v32 = 0;
   temp_v30 = 0;
-  puVar12 = (unsigned char *)(DAT_0058103c + 0xcd10);
-  piVar9 = (int *)(DAT_0058103c + 0xcd14);
+  puVar12 = (unsigned char *)(g_mapIf + 0xcd10);
+  piVar9 = (int *)(g_mapIf + 0xcd14);
   if (DAT_005f1614 != '\0') {
     *puVar12 = 1;
     *piVar9 = 2;
@@ -167,10 +167,10 @@ void FUN_0029aa60(int param_1)
     DAT_005f185a = 0;
     *(unsigned char *)(temp_v5 + 0xcd10) = 1;
   }
-  temp_v8 = DAT_0058103c;
+  temp_v8 = g_mapIf;
   temp_v14 = *(int *)(DAT_005806a4 + 0x5c);
   FUN_002b5cb4();
-  temp_v9 = DAT_0058103c;
+  temp_v9 = g_mapIf;
   temp_v23 = 0x4248000000000000;
   temp_v24 = 0x3f800000;
   if (temp_v14 >= 0x3f800000) {
@@ -178,11 +178,11 @@ void FUN_0029aa60(int param_1)
     do {
       temp_v11 = temp_v9 + temp_v14 * 0x194;
       if (*(char *)(temp_v11 + 0x1dc) != '\0') {
-        temp_v15 = *(unsigned int *)(DAT_00581288 + 0x1c);
+        temp_v15 = *(unsigned int *)(g_lmapScene + 0x1c);
         FUN_002b5cb4();
         *(unsigned int *)(temp_v11 + 0x224) = temp_v15;
       }
-      temp_v11 = DAT_0058103c;
+      temp_v11 = g_mapIf;
       temp_v18 = (float)((unsigned long long)temp_v23 >> 0x20);
       temp_v14 = temp_v14 + 1;
     } while (temp_v14 < 0x80);
@@ -267,11 +267,11 @@ LAB_0029ae94:
 LAB_0029ad50:
           if ((0 >= *(int *)(temp_v14 + 0x1f8)) || (*(char *)(temp_v14 + 0x228) != '\0')) {
             if (*(int *)(temp_v14 + 0x1f8) == -1) {
-              temp_v27[1] = *(float *)(DAT_00581288 + 0x1c);
-              temp_v27[3] = *(float *)(DAT_00581288 + 0x24);
+              temp_v27[1] = *(float *)(g_lmapScene + 0x1c);
+              temp_v27[3] = *(float *)(g_lmapScene + 0x24);
               temp_v28 = *(unsigned int *)(temp_v14 + 0x238);
               uStack_cc = *(unsigned int *)(temp_v14 + 0x240);
-              temp_v27[2] = *(float *)(DAT_00581288 + 0x20) + temp_v18;
+              temp_v27[2] = *(float *)(g_lmapScene + 0x20) + temp_v18;
               temp_v29 = *(float *)(temp_v14 + 0x23c) + temp_v18;
               temp_v11 = FUN_0036d984(temp_v27 + 1,(unsigned int *)&temp_v28,0);
               if (temp_v11 != -1) goto LAB_0029ae94;
@@ -924,7 +924,7 @@ LAB_0029ad50:
         *(float *)(temp_v9 + 0x24c) =
              *(float *)(temp_v9 + 0x24c) +
              (*(float *)(temp_v9 + 0x240) - *(float *)(temp_v9 + 0x24c)) * temp_v16;
-        temp_v18 = *(float *)(DAT_00581288 + 0x50) + 180.0f;
+        temp_v18 = *(float *)(g_lmapScene + 0x50) + 180.0f;
         *(float *)(temp_v9 + 0x250) = temp_v18;
         if ((int)temp_v18 >= 0x43b40001) {
           *(float *)(temp_v9 + 0x250) = temp_v18 - 360.0f;
@@ -998,7 +998,7 @@ LAB_0029ad50:
              *(float *)(temp_v9 + 0x24c) +
              (*(float *)(temp_v9 + 0x240) - *(float *)(temp_v9 + 0x24c)) * 0.25f;
         *(unsigned int *)(temp_v9 + 0x268) = 0xc2700000;
-        temp_v18 = *(float *)(DAT_00581288 + 0x50) + 180.0f;
+        temp_v18 = *(float *)(g_lmapScene + 0x50) + 180.0f;
         *(float *)(temp_v9 + 0x250) = temp_v18;
         if ((int)temp_v18 >= 0x43b40001) {
           *(float *)(temp_v9 + 0x250) = temp_v18 - 360.0f;
@@ -1043,7 +1043,7 @@ LAB_0029ad50:
         *(float *)(temp_v9 + 0x24c) =
              *(float *)(temp_v9 + 0x24c) +
              (*(float *)(temp_v9 + 0x240) - *(float *)(temp_v9 + 0x24c)) * temp_v16;
-        temp_v18 = *(float *)(DAT_00581288 + 0x50) + 180.0f;
+        temp_v18 = *(float *)(g_lmapScene + 0x50) + 180.0f;
         *(float *)(temp_v9 + 0x250) = temp_v18;
         if ((int)temp_v18 >= 0x43b40001) {
           *(float *)(temp_v9 + 0x250) = temp_v18 - 360.0f;
@@ -1112,7 +1112,7 @@ LAB_0029ad50:
              *(float *)(temp_v9 + 0x24c) +
              (*(float *)(temp_v9 + 0x240) - *(float *)(temp_v9 + 0x24c)) * 0.25f;
         *(unsigned int *)(temp_v9 + 0x268) = 0xc25c0000;
-        temp_v18 = *(float *)(DAT_00581288 + 0x50) + 180.0f;
+        temp_v18 = *(float *)(g_lmapScene + 0x50) + 180.0f;
         *(float *)(temp_v9 + 0x250) = temp_v18;
         if ((int)temp_v18 >= 0x43b40001) {
           *(float *)(temp_v9 + 0x250) = temp_v18 - 360.0f;
@@ -1472,28 +1472,28 @@ joined_r0x0029d070:
     *(unsigned char *)(temp_v5 + 0x1d) = 0;
     FUN_00203d04(1);
   }
-  temp_v5 = DAT_00581288;
+  temp_v5 = g_lmapScene;
   if (temp_v32 == 0) {
-    *(unsigned char *)(DAT_00581288 + 0x194) = 0;
+    *(unsigned char *)(g_lmapScene + 0x194) = 0;
   }
   else {
-    if (*(char *)(DAT_00581288 + 0x194) == '\0') {
-      *(unsigned char *)(DAT_00581288 + 0x195) = 1;
+    if (*(char *)(g_lmapScene + 0x194) == '\0') {
+      *(unsigned char *)(g_lmapScene + 0x195) = 1;
     }
     *(unsigned char *)(temp_v5 + 0x194) = 1;
   }
-  temp_v5 = DAT_00581288;
+  temp_v5 = g_lmapScene;
   if (!temp_v3) {
-    *(unsigned char *)(DAT_00581288 + 0x196) = 0;
+    *(unsigned char *)(g_lmapScene + 0x196) = 0;
   }
   else {
-    if (*(char *)(DAT_00581288 + 0x196) == '\0') {
-      *(char *)(DAT_00581288 + 0x198) = (char)temp_v30;
+    if (*(char *)(g_lmapScene + 0x196) == '\0') {
+      *(char *)(g_lmapScene + 0x198) = (char)temp_v30;
       *(unsigned char *)(temp_v5 + 0x197) = 1;
     }
     *(unsigned char *)(temp_v5 + 0x196) = 1;
   }
-  temp_v5 = DAT_0058103c;
+  temp_v5 = g_mapIf;
   temp_v26[1] = 0.6f;
   acStack_f8[0] = -0x66;
   acStack_f8[1] = -0x67;
@@ -1503,21 +1503,21 @@ joined_r0x0029d070:
   acStack_f8[5] = -0x67;
   acStack_f8[6] = '\x19';
   acStack_f8[7] = '?';
-  if (*(char *)(DAT_0058103c + 0xccf0) != '\0') {
-    if (*(short *)(DAT_0058103c + 0xccf2) == 0) {
-      *(unsigned char *)(DAT_0058103c + 0xccf0) = 0;
+  if (*(char *)(g_mapIf + 0xccf0) != '\0') {
+    if (*(short *)(g_mapIf + 0xccf2) == 0) {
+      *(unsigned char *)(g_mapIf + 0xccf0) = 0;
     }
     else {
       temp_v16 = 0.5f;
       temp_v23 = 0x40000000;
       temp_v8 = 0;
-      temp_v18 = (float)VectorSignedToFloat((int)*(short *)(DAT_0058103c + 0xccf4),
+      temp_v18 = (float)VectorSignedToFloat((int)*(short *)(g_mapIf + 0xccf4),
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v27[0] = temp_v18 * 0.01f;
-      temp_v18 = (float)VectorSignedToFloat((int)*(short *)(DAT_0058103c + 0xccf6),
+      temp_v18 = (float)VectorSignedToFloat((int)*(short *)(g_mapIf + 0xccf6),
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v27[1] = temp_v18 * 0.01f;
-      temp_v18 = (float)VectorSignedToFloat((int)*(short *)(DAT_0058103c + 0xccf8),
+      temp_v18 = (float)VectorSignedToFloat((int)*(short *)(g_mapIf + 0xccf8),
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v27[2] = temp_v18 * 0.01f;
       do {
@@ -1559,13 +1559,13 @@ joined_r0x0029d070:
       temp_v8 = (int)temp_v6;
       if (0 < temp_v8) {
         temp_v1 = *(short *)(temp_v5 + 0xccf4);
-        temp_v7 = aeabi_idivmod((int)temp_v1,temp_v8 + 5);
+        temp_v7 = __aeabi_idivmod((int)temp_v1,temp_v8 + 5);
         *(short *)(temp_v5 + 0xccf4) = temp_v1 - temp_v7;
         temp_v1 = *(short *)(temp_v5 + 0xccf6);
-        temp_v7 = aeabi_idivmod((int)temp_v1,temp_v8 + 5);
+        temp_v7 = __aeabi_idivmod((int)temp_v1,temp_v8 + 5);
         *(short *)(temp_v5 + 0xccf6) = temp_v1 - temp_v7;
         temp_v1 = *(short *)(temp_v5 + 0xccf8);
-        temp_v7 = aeabi_idivmod((int)temp_v1,temp_v8 + 5);
+        temp_v7 = __aeabi_idivmod((int)temp_v1,temp_v8 + 5);
         *(short *)(temp_v5 + 0xccf8) = temp_v1 - temp_v7;
         *(short *)(temp_v5 + 0xccf2) = temp_v6 - 1;
         return;
@@ -1574,7 +1574,7 @@ joined_r0x0029d070:
   }
   else {
     temp_v15 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
-    *(unsigned int *)(DAT_0058103c + 0xccfc) = temp_v15;
+    *(unsigned int *)(g_mapIf + 0xccfc) = temp_v15;
     *(unsigned int *)(temp_v5 + 0xcd00) = temp_v15;
     *(unsigned int *)(temp_v5 + 0xcd04) = temp_v15;
   }

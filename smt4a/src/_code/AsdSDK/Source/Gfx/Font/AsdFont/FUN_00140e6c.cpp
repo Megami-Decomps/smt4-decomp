@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0015ef04(void);
-int FUN_001630d4(int, int, int, unsigned int, int);
+int asdMemoryAlloc(int, int, int, unsigned int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_001800b8(unsigned int);
-int FUN_0019a5a0(...);
-int FUN_0019a730(void);
+int asdMemFree(...);
+int asdTextureCreate(void);
 int FUN_0019a840(void);
 
 typedef int romwright_code(...);
@@ -24,11 +24,11 @@ extern unsigned int *DAT_005b3bc4; /* 0x5b3bc4 */
 
 /* Supplied declaration required: FUN_0015ef04. */
 extern int FUN_0015f0dc(void);
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001800b8. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019a730. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_0019a840. */
 
 
@@ -68,7 +68,7 @@ unsigned int FUN_00140e6c(unsigned int *param_1,int param_2)
             temp_v7 = temp_v7 + 1;
           } while (temp_v7 < (unsigned int)piVar11[4]);
         }
-        FUN_0019a5a0(piVar11[3]);
+        asdMemFree(piVar11[3]);
         piVar11[3] = 0;
       }
       if ((int *)piVar11[2] != (int *)0x0) {
@@ -76,7 +76,7 @@ unsigned int FUN_00140e6c(unsigned int *param_1,int param_2)
         piVar11[2] = 0;
       }
       if (*piVar11 != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         *piVar11 = 0;
       }
       piVar11[1] = 0;
@@ -107,7 +107,7 @@ unsigned int FUN_00140e6c(unsigned int *param_1,int param_2)
       piVar11[1] = (int)piVar10;
       temp_v3 = piVar10[2];
       temp_v4 = 0x100;
-      FUN_001630d4(0x100,0x100,0,(unsigned int)*(unsigned short *)(temp_v3 + 8) << 2,1);
+      asdMemoryAlloc(0x100,0x100,0,(unsigned int)*(unsigned short *)(temp_v3 + 8) << 2,1);
       piVar11[3] = temp_v4;
       piVar11[4] = (unsigned int)*(unsigned short *)(temp_v3 + 8);
       piVar11[10] = 0;
@@ -184,7 +184,7 @@ unsigned int FUN_00140e6c(unsigned int *param_1,int param_2)
       if (temp_v7 < (unsigned int)piVar11[4]) {
         do {
           temp_v5 = 0;
-          FUN_0019a730();
+          asdTextureCreate();
           *(int *)(piVar11[3] + temp_v7 * 4) = temp_v5;
           temp_v1 = *(unsigned short *)(temp_v3 + 0x10);
           temp_v2 = *(unsigned short *)(temp_v3 + 0x12);

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00153f74(unsigned int);
+int asdGxCommandListBegin(unsigned int);
 
 extern signed char DAT_0057ffd0; /* 0x57ffd0 */
 extern signed char DAT_0057ffd1; /* 0x57ffd1 */
 extern unsigned int DAT_0057ffdc; /* 0x57ffdc */
 
-/* Supplied declaration required: FUN_00153f74. */
+/* Supplied declaration required: asdGxCommandListBegin. */
 extern int FUN_001696f4(void);
 
 
@@ -21,7 +21,7 @@ unsigned int FUN_00137020(void)
   int temp_v0;
   
   if (((DAT_0057ffd0 == '\0') && (temp_v0 = FUN_001696f4(), temp_v0 == 1)) && (DAT_0057ffd1 != '\0')) {
-    FUN_00153f74(DAT_0057ffdc);
+    asdGxCommandListBegin(DAT_0057ffdc);
   }
   return 0;
 }

@@ -25,7 +25,7 @@ typedef struct {
 
 extern unsigned char LAB_0039000c; /* 0x39000c */
 extern unsigned char LAB_00390028; /* 0x390028 */
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_0019e0c0. */
 extern int FUN_0023360c(unsigned int *);
@@ -69,7 +69,7 @@ void FUN_0038fd40(unsigned int *param_1)
   unsigned int uStack_14;
   
   FUN_002340e4(&temp_v4);
-  temp_v1 = DAT_00432fc8;
+  temp_v1 = g_aocMain;
   temp_v0 = param_1[2];
   if (temp_v0 != 3) {
     if ((int)temp_v0 < 3) {

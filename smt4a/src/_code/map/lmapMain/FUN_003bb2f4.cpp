@@ -16,7 +16,7 @@ extern unsigned int DAT_005f1a78; /* 0x5f1a78 */
 extern unsigned int DAT_005f1a7c; /* 0x5f1a7c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 
 
 unsigned int FUN_003bb2f4(void)
@@ -31,12 +31,12 @@ unsigned int FUN_003bb2f4(void)
   unsigned int in_fpscr;
   
   DAT_005f1a61 = 1;
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  temp_v2 = FUN_00236038(2);
-  temp_v3 = FUN_00236038(3);
-  temp_v4 = FUN_00236038(4);
-  DAT_005f1a7c = FUN_00236038(5);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = scrGetArg(2);
+  temp_v3 = scrGetArg(3);
+  temp_v4 = scrGetArg(4);
+  DAT_005f1a7c = scrGetArg(5);
   DAT_005f1a6c = VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
   DAT_005f1a64 = VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
   DAT_005f1a68 = 0;

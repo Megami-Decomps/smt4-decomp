@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010063a(char [68], int, int, unsigned char *);
+int qsort(char [68], int, int, unsigned char *);
 int FUN_00157558(unsigned int);
 int FUN_001634b4(int);
 int FUN_001879d0(unsigned int);
@@ -12,10 +12,10 @@ int VectorSignedToFloat(int, int);
 
 extern unsigned char LAB_002219e4; /* 0x2219e4 */
 extern float DAT_00573c00; /* 0x573c00 */
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_001634b4. */
 /* Supplied declaration required: FUN_001879d0. */
@@ -42,11 +42,11 @@ void FUN_003210bc(int param_1,int param_2)
   char acStack_68 [68];
   
   pcVar3 = acStack_68;
-  FUN_00157558(DAT_0059dbb4);
+  FUN_00157558(g_renderCtx);
   temp_v5 = 0;
   if (param_2 != 0) {
     temp_v6 = DAT_00573c00;
-    FUN_001879d0(DAT_0059dbb4);
+    FUN_001879d0(g_renderCtx);
     temp_v5 = (int)temp_v6;
   }
   temp_v1 = '\0';
@@ -69,7 +69,7 @@ void FUN_003210bc(int param_1,int param_2)
     *pcVar6 = temp_v0 != '\0';
     pcVar6 = pcVar6 + 4;
   } while (temp_v2 != 0);
-  FUN_0010063a(acStack_68,0x10,4,&LAB_002219e4);
+  qsort(acStack_68,0x10,4,&LAB_002219e4);
   temp_v2 = 0;
   do {
     temp_v1 = acStack_68[temp_v2 * 4];

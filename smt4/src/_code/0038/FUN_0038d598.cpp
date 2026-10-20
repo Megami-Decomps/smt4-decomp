@@ -8,11 +8,11 @@ int FUN_00234170(...);
 int FUN_00234330(...);
 int FUN_002344d8(...);
 int FUN_0026281c(...);
-int FUN_00262888(...);
+int asdOperatorNewB(...);
 int FUN_002b4b80(int, int);
 int FUN_002b5a48(...);
-int FUN_002c4938(...);
-int FUN_002c564c(...);
+int memClear(...);
+int jyoucyuGetTableEntry(...);
 int FUN_002c5d5c(unsigned int *, unsigned char *, int, int);
 int FUN_002c5e80(...);
 int FUN_002c6a10(...);
@@ -56,7 +56,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_00394160; /* 0x394160 */
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_00234170. */
 /* Supplied declaration required: FUN_00234330. */
@@ -64,14 +64,14 @@ extern unsigned int FUN_0023445c(int);
 extern unsigned int FUN_00234468(int);
 /* Supplied declaration required: FUN_002344d8. */
 /* Supplied declaration required: FUN_0026281c. */
-/* Supplied declaration required: FUN_00262888. */
+/* Supplied declaration required: asdOperatorNewB. */
 extern int FUN_002a12d8(int);
 extern unsigned char FUN_002a2dec(int);
 extern unsigned char FUN_002a2df8(int);
 /* Supplied declaration required: FUN_002b4b80. */
 /* Supplied declaration required: FUN_002b5a48. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_002c5d5c. */
 /* Supplied declaration required: FUN_002c5e80. */
 /* Supplied declaration required: FUN_002c6a10. */
@@ -232,17 +232,17 @@ int FUN_0038d598(int param_1)
   short asStack_830 [1028];
   int temp_v42;
   
-  temp_v7 = DAT_00432fc8;
-  if (*(int *)(DAT_00432fc8 + 0x68c) == 0) {
+  temp_v7 = g_aocMain;
+  if (*(int *)(g_aocMain + 0x68c) == 0) {
     return 0;
   }
   temp_v42 = param_1;
-  if (*(int *)(DAT_00432fc8 + 0x688) != 0) {
-    FUN_002b4b80(*(int *)(DAT_00432fc8 + 0x688),0x394214);
+  if (*(int *)(g_aocMain + 0x688) != 0) {
+    FUN_002b4b80(*(int *)(g_aocMain + 0x688),0x394214);
   }
   temp_v9 = *(int *)(temp_v7 + 0x68c);
   puVar4 = (unsigned int *)(temp_v9 * 0x9c8 + 8);
-  FUN_00262888();
+  asdOperatorNewB();
   puVar5 = (unsigned int *)0x0;
   if (puVar4 != (unsigned int *)0x0) {
     puVar5 = puVar4 + 2;
@@ -322,7 +322,7 @@ int FUN_0038d598(int param_1)
       if (temp_v5 < 0) {
         return temp_v5;
       }
-      FUN_002c4938(asStack_830,0x800);
+      memClear(asStack_830,0x800);
       temp_v3 = FUN_00234468(temp_v7 + 0x28);
       temp_v4 = FUN_0023445c(temp_v7 + 0x28);
       FUN_00234330(&temp_v35,3,temp_v4,temp_v3);
@@ -428,7 +428,7 @@ int FUN_0038d598(int param_1)
       temp_v6 = FUN_00234170(temp_v16,&temp_v17);
       if (temp_v6 == 0) {
         *(unsigned short *)(temp_v39 + 0xa8) = 0;
-        FUN_002c4938(temp_v41,0x1200);
+        memClear(temp_v41,0x1200);
       }
       else {
         FUN_002c5e80(temp_v6,0,10);
@@ -443,7 +443,7 @@ int FUN_0038d598(int param_1)
           }
         }
         else {
-          FUN_002c4938(temp_v41,0x1200);
+          memClear(temp_v41,0x1200);
         }
       }
       FUN_0038bee4(temp_v12 + 0x9bc,temp_v41);
@@ -460,7 +460,7 @@ int FUN_0038d598(int param_1)
       *(unsigned int *)(temp_v12 + 0x9a4) = temp_v14;
       temp_v5 = FUN_003df63c(temp_v16);
       temp_v9 = temp_v5 * 0x18;
-      FUN_00262888(temp_v9,temp_v7);
+      asdOperatorNewB(temp_v9,temp_v7);
       temp_v1 = 1;
       temp_v2 = 1;
       temp_v14 = 0;
@@ -496,7 +496,7 @@ int FUN_0038d598(int param_1)
     } while (temp_v31 < *(unsigned int *)(temp_v7 + 0x68c));
   }
   if (*(int *)(temp_v7 + 0x68c) != temp_v32) {
-    FUN_002c564c(0);
+    jyoucyuGetTableEntry(0);
     *(int *)(temp_v7 + 0x68c) = temp_v32;
   }
   return 0;

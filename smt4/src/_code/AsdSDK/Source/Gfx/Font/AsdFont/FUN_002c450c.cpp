@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_00121c60(void);
 int FUN_002bd540(void);
-int FUN_002bd75c(void);
+int asdTextureCreate(void);
 int FUN_002c0894(unsigned int);
-int FUN_002c222c(void);
-int FUN_002c415c(...);
-int FUN_002c5300(int, int, int, unsigned int, int);
+int asdOperatorNew(void);
+int asdMemFree(...);
+int asdMemoryAlloc(int, int, int, unsigned int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -24,11 +24,11 @@ extern unsigned int *DAT_00464a74; /* 0x464a74 */
 /* Supplied declaration required: FUN_00121c60. */
 extern int FUN_00121e38(void);
 /* Supplied declaration required: FUN_002bd540. */
-/* Supplied declaration required: FUN_002bd75c. */
+/* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_002c0894. */
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 unsigned int FUN_002c450c(unsigned int *param_1,int param_2)
@@ -67,7 +67,7 @@ unsigned int FUN_002c450c(unsigned int *param_1,int param_2)
             temp_v7 = temp_v7 + 1;
           } while (temp_v7 < (unsigned int)piVar11[4]);
         }
-        FUN_002c415c(piVar11[3]);
+        asdMemFree(piVar11[3]);
         piVar11[3] = 0;
       }
       if ((int *)piVar11[2] != (int *)0x0) {
@@ -75,14 +75,14 @@ unsigned int FUN_002c450c(unsigned int *param_1,int param_2)
         piVar11[2] = 0;
       }
       if (*piVar11 != 0) {
-        FUN_002c415c();
+        asdMemFree();
         *piVar11 = 0;
       }
       piVar11[1] = 0;
     }
     temp_v3 = 0x18;
     *piVar11 = param_2;
-    FUN_002c222c();
+    asdOperatorNew();
     temp_v4 = 0;
     if (temp_v3 != 0) {
       temp_v4 = FUN_00121e38();
@@ -106,7 +106,7 @@ unsigned int FUN_002c450c(unsigned int *param_1,int param_2)
       piVar11[1] = (int)piVar9;
       temp_v3 = piVar9[2];
       temp_v4 = 0x100;
-      FUN_002c5300(0x100,0x100,0,(unsigned int)*(unsigned short *)(temp_v3 + 8) << 2,1);
+      asdMemoryAlloc(0x100,0x100,0,(unsigned int)*(unsigned short *)(temp_v3 + 8) << 2,1);
       piVar11[3] = temp_v4;
       piVar11[4] = (unsigned int)*(unsigned short *)(temp_v3 + 8);
       piVar11[10] = 0;
@@ -183,7 +183,7 @@ unsigned int FUN_002c450c(unsigned int *param_1,int param_2)
       if (temp_v7 < (unsigned int)piVar11[4]) {
         do {
           temp_v5 = 0;
-          FUN_002bd75c();
+          asdTextureCreate();
           *(int *)(piVar11[3] + temp_v7 * 4) = temp_v5;
           temp_v6 = *(int *)(temp_v3 + 0x14);
           temp_v1 = *(unsigned short *)(temp_v3 + 0x10);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bd420(char *, unsigned int, unsigned int);
-int FUN_002c32a0(...);
+int memAlloc(...);
 int FUN_002c3944(void);
 int FUN_00313760(unsigned int *, int, int);
 int FUN_0031ce4c(unsigned int *);
@@ -38,9 +38,9 @@ typedef struct {
 
 extern char *FUN_0024c3d8(fn_003138a4_arg0 *);
 extern int FUN_0024c3f8(void);
-extern unsigned int FUN_0025bc18(unsigned int, unsigned int, unsigned int);
+extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bd420. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c3944. */
 /* Supplied declaration required: FUN_00313760. */
 /* Supplied declaration required: FUN_0031ce4c. */
@@ -71,7 +71,7 @@ unsigned int * FUN_003138a4(fn_003138a4_arg0 *param_1)
     temp_v3 = 100;
   }
   puVar4 = (unsigned int *)0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0xa8,0x10,1);
+  memAlloc(0x10000,0x100,0,0xa8,0x10,1);
   FUN_002c3944();
   puVar4[1] = 0xffffffff;
   *puVar4 = temp_v3;
@@ -94,10 +94,10 @@ unsigned int * FUN_003138a4(fn_003138a4_arg0 *param_1)
         }
         if (temp_v6) {
           temp_v3 = 0x10000;
-          FUN_002c32a0(0x10000,0x100,0,temp_v4,0x10,1);
+          memAlloc(0x10000,0x100,0,temp_v4,0x10,1);
           puVar4[0x16] = temp_v3;
           FUN_002bd420(pcVar5,temp_v3,temp_v4);
-          temp_v3 = FUN_0025bc18(puVar4[0x16],temp_v4,7);
+          temp_v3 = asdMdlManagerCreateFromSource(puVar4[0x16],temp_v4,7);
           puVar4[0x15] = temp_v3;
           *(unsigned int *)
            (*(int *)(*(int *)(*(int *)(*(int *)(temp_v3 + 8) + 0x2c) + 0x220) + 8) + 0x28) = 1;

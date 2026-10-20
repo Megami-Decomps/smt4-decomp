@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_003fc0b8(unsigned int, int);
+int aocHandleButtons(unsigned int, int);
 
-extern int FUN_00163e40(unsigned int);
+extern int jobIsValid(unsigned int);
 extern int FUN_0018206c(unsigned int, unsigned int);
 extern int FUN_0031bc88(unsigned int);
-/* Supplied declaration required: FUN_003fc0b8. */
+/* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(unsigned int, unsigned int);
 extern int FUN_003fcf5c(unsigned int);
 
@@ -42,7 +42,7 @@ unsigned int FUN_004962e4(unsigned int *param_1)
       if (temp_v1 == 0) {
         return 0;
       }
-      FUN_003fc0b8(param_1[0x5815],7);
+      aocHandleButtons(param_1[0x5815],7);
       param_1[0x5814] = param_1[0x5814] + 1;
       temp_v1 = FUN_003fce08(param_1[0x5815],1);
       if (temp_v1 == 0) {
@@ -59,11 +59,11 @@ unsigned int FUN_004962e4(unsigned int *param_1)
     temp_v1 = FUN_0018206c(0x20,0);
     temp_v0 = 0;
     if (temp_v1 != 0) {
-      temp_v1 = FUN_00163e40(param_1[0x5808]);
+      temp_v1 = jobIsValid(param_1[0x5808]);
       if ((temp_v1 != 0) && (temp_v1 = FUN_0031bc88(param_1[0x5808]), temp_v1 == 0)) {
         return 0;
       }
-      temp_v1 = FUN_00163e40(param_1[0x5809]);
+      temp_v1 = jobIsValid(param_1[0x5809]);
       if ((temp_v1 != 0) && (temp_v1 = FUN_0031bc88(param_1[0x5809]), temp_v1 == 0)) {
         return 0;
       }

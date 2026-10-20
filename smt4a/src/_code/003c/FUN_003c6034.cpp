@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0016007c(...);
-int FUN_001681cc(...);
+int asdProcessCreateSimple(...);
+int asdOperatorNew(...);
+int sysPlaySe(...);
 int FUN_0019de98(...);
 int FUN_002c7ce8(...);
 int FUN_002c7e6c(...);
@@ -21,10 +21,10 @@ extern unsigned char LAB_00358f28; /* 0x358f28 */
 extern int FUN_00387308(...); /* 0x387308 */
 extern unsigned int *DAT_00588c48; /* 0x588c48 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: asdOperatorNew. */
 extern unsigned short FUN_00167f08(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_002c7ce8. */
 /* Supplied declaration required: FUN_002c7e6c. */
@@ -45,7 +45,7 @@ void FUN_003c6034(int param_1,unsigned short param_2)
   char *pcVar3;
   
   puVar2 = (unsigned int *)0x44;
-  FUN_0016007c();
+  asdOperatorNew();
   if (puVar2 == (unsigned int *)0x0) {
     puVar2 = (unsigned int *)0x0;
   }
@@ -60,7 +60,7 @@ void FUN_003c6034(int param_1,unsigned short param_2)
   }
   pcVar3 = "ArousalSkill PROC";
   DAT_00588c48 = puVar2;
-  FUN_0014e38c("ArousalSkill PROC",4,0,0,&LAB_00358f28,FUN_00387308,0);
+  asdProcessCreateSimple("ArousalSkill PROC",4,0,0,&LAB_00358f28,FUN_00387308,0);
   *puVar2 = (unsigned int)pcVar3;
   puVar2[0xd] = param_1;
   *(unsigned short *)(puVar2 + 0xe) = param_2;
@@ -84,7 +84,7 @@ void FUN_003c6034(int param_1,unsigned short param_2)
   FUN_0038b6bc();
   FUN_003b7314();
   FUN_00342010();
-  FUN_001681cc(0xf4);
+  sysPlaySe(0xf4);
   FUN_0019de98(0,0xf4f4f4ff);
   puVar2[4] = 0;
   puVar2[2] = 1;

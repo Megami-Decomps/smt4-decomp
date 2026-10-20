@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3390(...);
+int wstrlen(...);
 int FUN_0043b24c(int, int, int, unsigned int, int);
 int software_interrupt(int);
 
@@ -17,7 +17,7 @@ extern signed char DAT_00647634; /* 0x647634 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern int FUN_0016f988(int, char *, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002e3390. */
+/* Supplied declaration required: wstrlen. */
 extern int FUN_0043b1ec(void);
 /* Supplied declaration required: FUN_0043b24c. */
 extern int FUN_0043b45c(int, unsigned int);
@@ -42,10 +42,10 @@ int FUN_0043ad40(int param_1,int param_2,unsigned int param_3,int param_4)
   }
   else {
     temp_v0 = 0x64765c;
-    temp_v1 = FUN_002e3390(param_2);
+    temp_v1 = wstrlen(param_2);
     FUN_0043b24c(0x64765c,param_2,temp_v1 + 1,param_3,param_1 + 4);
     if (-1 < temp_v0) {
-      temp_v2 = FUN_002e3390("http:C");
+      temp_v2 = wstrlen("http:C");
       temp_v0 = FUN_0016f988(param_1 + 8,"http:C",temp_v2,0);
       if (-1 < temp_v0) {
         *(unsigned int *)(param_1 + 0xc) = *(unsigned int *)(param_1 + 8);

@@ -1,28 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00482364` (_code @ 0x482364, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction scheduling only: in the z update retail loads motion->z before effect->velZ */
+/* Advances the effect's position by its velocity, and every 10 ticks runs the periodic update. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00481dd8(int);
+typedef struct Motion {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ f32 x;
+    /* 0x08 */ f32 y;
+    /* 0x0C */ f32 z;
+} Motion;
 
-/* Supplied declaration required: FUN_00481dd8. */
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ Motion motion;
+    /* 0x38 */ u8 unk38[0x24];
+    /* 0x5C */ s32 tick;
+} Owner;
 
+typedef struct Effect {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ Owner *owner;
+    /* 0x10 */ f32 velX;
+    /* 0x14 */ f32 velY;
+    /* 0x18 */ f32 velZ;
+} Effect;
 
-void FUN_00482364(int param_1)
+extern void FUN_00481dd8(Effect *effect);
 
+void FUN_00482364(Effect *effect)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0xc);
-  if (*(int *)(temp_v0 + 0x5c) % 10 == 0) {
-    FUN_00481dd8(param_1);
-  }
-  *(float *)(temp_v0 + 0x2c) = *(float *)(temp_v0 + 0x2c) + *(float *)(param_1 + 0x10);
-  *(float *)(temp_v0 + 0x30) = *(float *)(temp_v0 + 0x30) + *(float *)(param_1 + 0x14);
-  *(float *)(temp_v0 + 0x34) = *(float *)(temp_v0 + 0x34) + *(float *)(param_1 + 0x18);
-  return;
+    Owner *owner = effect->owner;
+    Motion *motion = &owner->motion;
+
+    if (owner->tick % 10 == 0) {
+        FUN_00481dd8(effect);
+    }
+    motion->x += effect->velX;
+    motion->y += effect->velY;
+    motion->z += effect->velZ;
 }
 
-} /* extern "C" */
+}

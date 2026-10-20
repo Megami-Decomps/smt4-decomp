@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00573c98; /* 0x573c98 */
 extern unsigned int DAT_00573c9c; /* 0x573c9c */
 extern unsigned int DAT_00573ca0; /* 0x573ca0 */
@@ -13,7 +13,7 @@ extern unsigned int DAT_00573ca4; /* 0x573ca4 */
 extern int FUN_0018719c(unsigned int);
 extern int FUN_001ab854(void);
 extern int FUN_001ab888(void);
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 unsigned int FUN_003ff5b8(unsigned int *param_1)
@@ -32,7 +32,7 @@ unsigned int FUN_003ff5b8(unsigned int *param_1)
   }
   if (param_1 != (unsigned int *)0x0) {
     if (!((DAT_00573c98 & *param_1) == 0 && (DAT_00573c9c & param_1[1]) == 0)) {
-      temp_v1 = FUN_004ee568(DAT_0057113c);
+      temp_v1 = btlUnitGet(g_btlScriptUnit);
       puVar3 = *(unsigned int **)(temp_v1 + 0x20);
       if ((puVar3 != (unsigned int *)0x0) &&
          ((puVar3[1] & DAT_00573c9c) != 0 || (*puVar3 & DAT_00573c98) != 0)) {

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e3390(void);
+int wstrlen(void);
 
 extern int FUN_001a7a20(int, unsigned int);
-/* Supplied declaration required: FUN_002e3390. */
+/* Supplied declaration required: wstrlen. */
 
 
 unsigned int FUN_0045ab90(int *param_1,int param_2,int param_3)
@@ -35,7 +35,7 @@ unsigned int FUN_0045ab90(int *param_1,int param_2,int param_3)
         puVar4 = *(unsigned int **)(*(int *)(param_2 + 0xc) + temp_v5 * 4);
         if (*(short *)(puVar4 + 1) != 0x33) {
           temp_v2 = *puVar4;
-          FUN_002e3390();
+          wstrlen();
           temp_v3 = FUN_001a7a20(param_3 + 0x38,temp_v2);
           if (temp_v3 == 0xffff) {
             temp_v1 = 1;

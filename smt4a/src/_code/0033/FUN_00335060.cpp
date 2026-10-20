@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001654e4(int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001834a4(int, int);
 int FUN_00183bb0(void);
 int FUN_002ca878(int, unsigned int, int);
@@ -21,19 +21,19 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_0015688c(void);
 extern unsigned int FUN_001654d8(int);
 /* Supplied declaration required: FUN_001654e4. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00183bb0. */
 extern int FUN_00187068(int);
 extern int FUN_00187168(void);
 extern int FUN_0018719c(unsigned int);
-extern int FUN_00213b78(void);
+extern int flagSelectVariant(void);
 /* Supplied declaration required: FUN_002ca878. */
 /* Supplied declaration required: FUN_003721b0. */
 /* Supplied declaration required: FUN_0037e8a4. */
@@ -56,7 +56,7 @@ void FUN_00335060(int param_1)
   int *piVar10;
   unsigned int temp_v9;
   
-  temp_v4 = DAT_0059dbb4;
+  temp_v4 = g_renderCtx;
   temp_v3 = FUN_001692ac(1,0);
   piVar10 = (int *)(temp_v4 + 0x1258);
   temp_v7 = *piVar10;
@@ -98,7 +98,7 @@ void FUN_00335060(int param_1)
   } while (temp_v4 < 0xc);
   temp_v4 = FUN_0018719c(0x4d0);
   if ((temp_v4 != 0) ||
-     ((temp_v4 = FUN_00213b78(), temp_v4 == 2 && (temp_v4 = FUN_0018719c(0x4db), temp_v4 != 0)))) {
+     ((temp_v4 = flagSelectVariant(), temp_v4 == 2 && (temp_v4 = FUN_0018719c(0x4db), temp_v4 != 0)))) {
     temp_v4 = FUN_001834a4(0x14,temp_v3 + 0xbba);
     temp_v7 = FUN_001834a4(0x14,0xc17);
     temp_v0 = *(short *)(temp_v4 + 10);
@@ -115,9 +115,9 @@ void FUN_00335060(int param_1)
   temp_v6 = FUN_001654e4(temp_v4);
   FUN_0037eb64(param_1,temp_v5,temp_v6);
   FUN_00183bb0();
-  FUN_001677c0();
-  temp_v4 = DAT_0059dbb4;
-  piVar10 = (int *)(DAT_0059dbb4 + 0x1258);
+  efctSetSpeed();
+  temp_v4 = g_renderCtx;
+  piVar10 = (int *)(g_renderCtx + 0x1258);
   temp_v3 = *piVar10;
   temp_v7 = piVar10[temp_v3 + 2];
   *piVar10 = temp_v3 - 1;

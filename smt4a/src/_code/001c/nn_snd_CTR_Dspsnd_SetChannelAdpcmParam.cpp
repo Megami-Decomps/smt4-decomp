@@ -1,32 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nn_snd_CTR_Dspsnd_SetChannelAdpcmParam` (_code @ 0x1c785c, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps `channel` in r5 and `flags` in r6 (swapped here) */
+/* Copies a 0x20-byte ADPCM parameter block into the channel's pending slot and marks the channel dirty. */
+#include "common.h"
 
 extern "C" {
 
-int rt_memcpy(unsigned int, unsigned int, int);
+typedef struct Dspsnd {
+    /* 0x0000 */ u8 unk0000[0x10B0];
+    /* 0x10B0 */ u32 *channelFlags[2][24];  /* per double-buffer slot, per channel */
+    /* 0x1170 */ u8 unk1170[0xC0];
+    /* 0x1230 */ void *adpcmParam[2][24];
+    /* 0x12F0 */ u8 unk12F0[0x2A];
+    /* 0x131A */ u16 flagSlot;              /* bit 0 selects the channelFlags slot */
+    /* 0x131C */ u8 unk131C[2];
+    /* 0x131E */ u16 paramSlot;
+} Dspsnd;
 
-extern int FUN_001c6e20(void);
-/* Supplied declaration required: rt_memcpy. */
+extern s32 FUN_001c6e20(void);
+extern s32 rt_memcpy(void *dest, const void *src, s32 size);
 
-
-unsigned char nn_snd_CTR_Dspsnd_SetChannelAdpcmParam(int param_1,unsigned char param_2,unsigned int param_3)
-
+u8 nn_snd_CTR_Dspsnd_SetChannelAdpcmParam(Dspsnd *dspsnd, u8 channel, const void *param)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  temp_v0 = FUN_001c6e20();
-  if (temp_v0 != 0) {
-    puVar2 = *(unsigned int **)(param_1 + (*(unsigned short *)(param_1 + 0x131a) & 1) * 0x60 + (unsigned int)param_2 * 4 +
-                       0x10b0);
-    rt_memcpy(*(unsigned int *)
-               (param_1 + (unsigned int)*(unsigned short *)(param_1 + 0x131e) * 0x60 + (unsigned int)param_2 * 4 + 0x1230),
-              param_3,0x20);
-    *puVar2 = *puVar2 | 4;
-  }
-  return temp_v0 != 0;
+    s32 ready = FUN_001c6e20();
+
+    if (ready != 0) {
+        u32 *flags = dspsnd->channelFlags[dspsnd->flagSlot & 1][channel];
+
+        rt_memcpy(dspsnd->adpcmParam[dspsnd->paramSlot][channel], param, 0x20);
+        *flags |= 4;
+    }
+    return ready != 0;
 }
 
-} /* extern "C" */
+}

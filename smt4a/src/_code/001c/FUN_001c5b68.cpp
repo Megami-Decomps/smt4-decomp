@@ -2,9 +2,9 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_001c5b68(unsigned int *param_1)
@@ -22,7 +22,7 @@ void FUN_001c5b68(unsigned int *param_1)
   *(unsigned char *)(param_1 + 8) = 0;
   param_1[10] = 0x80;
   param_1[9] = 0;
-  FUN_002e6354(param_1 + 0xb,0x100);
+  sysMemClear(param_1 + 0xb,0x100);
   param_1[0x4b] = 0;
   param_1[0x4c] = 0;
   param_1[0x4d] = 0;

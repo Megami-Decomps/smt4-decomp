@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern unsigned char DAT_0044e140; /* 0x44e140 */
+extern unsigned char g_gameGlobals; /* 0x44e140 */
 
 /* Supplied declaration required: FUN_001ee690. */
 /* Supplied declaration required: FUN_001ee8b4. */
@@ -59,18 +59,18 @@ void FUN_00258a24(int param_1)
   unsigned int temp_v8;
   unsigned int temp_v9;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0044e140 + 0x4));
+  temp_v1 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
   temp_v2 = 8;
-  psVar9 = (short *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1300);
-  psVar8 = (short *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1300);
+  psVar9 = (short *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1300);
+  psVar8 = (short *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1300);
   temp_v0 = *psVar9;
   if (param_1 != 0) {
-    psVar8 = (short *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x18b0);
+    psVar8 = (short *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x18b0);
   }
   if (temp_v0 < 0) {
     temp_v2 = FUN_0029aafc();
   }
-  else if ((0 < temp_v0) && (*(char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e66) != '\x06')) {
+  else if ((0 < temp_v0) && (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e66) != '\x06')) {
     temp_v2 = FUN_0029c8f4(0);
   }
   FUN_00215b5c(temp_v1 + 0x1348,temp_v2);
@@ -107,9 +107,9 @@ void FUN_00258a24(int param_1)
     puVar7 = (unsigned int *)0x0;
   }
   FUN_0026a978(puVar7,temp_v4);
-  temp_v4 = (*(int *)((unsigned char *)&DAT_0044e140 + 0x4));
+  temp_v4 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
   if (*(char *)(temp_v1 + 0x1e67) == '\x06') {
-    *(unsigned int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x12e4) = 0;
+    *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) = 0;
     FUN_00293ba8();
     *(unsigned char *)(temp_v4 + 0x1e63) = 0;
   }

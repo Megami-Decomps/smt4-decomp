@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-extern int FUN_002e3390(unsigned int);
+extern int wstrlen(unsigned int);
 extern unsigned int FUN_0043b0dc(int, unsigned int, unsigned int, int, unsigned int, int);
 
 
@@ -24,8 +24,8 @@ unsigned int FUN_002fbe30(int param_1,unsigned int param_2,unsigned int param_3)
     temp_v0 = 0xd8a0a064;
   }
   else {
-    temp_v1 = FUN_002e3390(param_3);
-    temp_v2 = FUN_002e3390(param_2);
+    temp_v1 = wstrlen(param_3);
+    temp_v2 = wstrlen(param_2);
     temp_v0 = FUN_0043b0dc(param_1 + 0xc,*(unsigned int *)(param_1 + 4),param_2,temp_v2 + 1,param_3,
                          temp_v1 + 1);
   }

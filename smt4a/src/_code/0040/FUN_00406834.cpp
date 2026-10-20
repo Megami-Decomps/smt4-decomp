@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 extern int FUN_001a7a20(int, unsigned int, unsigned int);
-extern unsigned int FUN_002e3390(unsigned int);
+extern unsigned int wstrlen(unsigned int);
 /* Supplied declaration required: FUN_004064a8. */
 
 
@@ -53,7 +53,7 @@ void FUN_00406834(int param_1,unsigned int param_2)
           do {
             temp_v1 = *(int *)(unaff_r7 + 0x30);
             temp_v6 = *(unsigned int *)(*(int *)(temp_v5 + 4) + temp_v4 * 4);
-            temp_v2 = FUN_002e3390(temp_v6);
+            temp_v2 = wstrlen(temp_v6);
             temp_v1 = FUN_001a7a20(temp_v1 + 0x40,temp_v6,temp_v2);
             if (temp_v1 != 0xffff) {
               temp_v1 = *(int *)(*(int *)(*(int *)(unaff_r7 + 0x30) + 0x3c) + temp_v1 * 4);

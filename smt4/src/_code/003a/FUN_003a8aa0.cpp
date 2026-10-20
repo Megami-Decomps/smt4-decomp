@@ -14,7 +14,7 @@ int FUN_00233818(void);
 int FUN_00233854(unsigned int);
 int FUN_002b06c4(void);
 int FUN_002b9024(void);
-int FUN_002c564c(int);
+int jyoucyuGetTableEntry(int);
 int FUN_003a9bb4(int);
 
 typedef int romwright_code(...);
@@ -38,7 +38,7 @@ extern unsigned char FUN_0022e0b0(int, unsigned int);
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_002b06c4. */
 /* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_003a9bb4. */
 
 
@@ -84,8 +84,8 @@ void FUN_003a8aa0(int param_1)
     *(unsigned char *)(param_1 + 0x2d) = 1;
     temp_v0 = FUN_0022e0b0(param_1 + 0x5a8,1);
     *(unsigned char *)(param_1 + 0x94) = temp_v0;
-    FUN_002c564c(0);
-    FUN_002c564c(0);
+    jyoucyuGetTableEntry(0);
+    jyoucyuGetTableEntry(0);
   }
   else {
     FUN_003a9bb4(param_1);

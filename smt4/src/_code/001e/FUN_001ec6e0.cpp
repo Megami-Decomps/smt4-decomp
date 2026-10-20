@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a07e4(void);
+int cecProcessStart(void);
 int FUN_002005a0(int *);
 int FUN_00259784(int);
 int FUN_002597c0(void);
@@ -16,7 +16,7 @@ int FUN_002a5ed0(int, int);
 int FUN_002bb150(...);
 int FUN_002bd2b4(...);
 int FUN_002c3940(...);
-int FUN_002c4c2c(int);
+int asdTMTexTableLoadSprites(int);
 
 typedef struct fn_001ec6e0_arg0 fn_001ec6e0_arg0;
 struct fn_001ec6e0_arg0 {
@@ -47,7 +47,7 @@ extern unsigned char LAB_001ec97c; /* 0x1ec97c */
 extern unsigned char LAB_001ec990; /* 0x1ec990 */
 extern int DAT_0043daa8; /* 0x43daa8 */
 
-/* Supplied declaration required: FUN_001a07e4. */
+/* Supplied declaration required: cecProcessStart. */
 /* Supplied declaration required: FUN_002005a0. */
 extern int FUN_00259594(unsigned int);
 extern int FUN_002595bc(void);
@@ -62,9 +62,9 @@ extern unsigned int FUN_00259800(void);
 /* Supplied declaration required: FUN_002a5ed0. */
 /* Supplied declaration required: FUN_002bb150. */
 /* Supplied declaration required: FUN_002bd2b4. */
-extern int FUN_002c1870(unsigned char *, int, unsigned int);
+extern int rt_memcmp(unsigned char *, int, unsigned int);
 /* Supplied declaration required: FUN_002c3940. */
-/* Supplied declaration required: FUN_002c4c2c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 
 
 void FUN_001ec6e0(fn_001ec6e0_arg0 *param_1)
@@ -95,14 +95,14 @@ void FUN_001ec6e0(fn_001ec6e0_arg0 *param_1)
       }
     }
     else {
-      FUN_001a07e4();
+      cecProcessStart();
       FUN_00297410(0x25);
       FUN_00295720();
       FUN_00297468(&LAB_001ec94c,&param_1->field_0xcec,0);
       FUN_00297468(&LAB_001ec964,&param_1->field_0xcf0,0);
       FUN_00297468(&LAB_001ec97c,&param_1->field_0xcf4,0);
       FUN_00297468(&LAB_001ec990,temp_v6,0);
-      FUN_002c4c2c(0x39);
+      asdTMTexTableLoadSprites(0x39);
       FUN_002a5ed0(0x39,0);
       temp_v4 = FUN_00259800();
       temp_v3 = FUN_002597e0();
@@ -116,7 +116,7 @@ void FUN_001ec6e0(fn_001ec6e0_arg0 *param_1)
       param_1->field_0xd60 = (char)temp_v1;
       if ((temp_v1 != 0) && (temp_v1 = FUN_00259594(0x20), temp_v1 != 0)) {
         FUN_002005a0(&temp_v3);
-        temp_v1 = FUN_002c1870(temp_v5,DAT_0043daa8 + 0x80,0x14);
+        temp_v1 = rt_memcmp(temp_v5,DAT_0043daa8 + 0x80,0x14);
         if (temp_v1 != 0) {
           if (*(short *)(DAT_0043daa8 + 0x90) != 0) {
             FUN_002597c0();

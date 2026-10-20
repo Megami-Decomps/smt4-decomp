@@ -8,7 +8,7 @@ int FUN_00100388(...);
 int FUN_001b2ebc(...);
 int FUN_001b31ac(...);
 int FUN_001b31e0(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int rt_memcpy_w(...);
 
 typedef struct fn_004701d8_arg0 fn_004701d8_arg0;
@@ -33,14 +33,14 @@ typedef struct {
     unsigned int spD0; /* 0xd0: local_d0 */
 } param_4_stack;
 
-extern unsigned int DAT_0057027c; /* 0x57027c */
+extern unsigned int g_aocDisplay; /* 0x57027c */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001b2ebc. */
 extern int FUN_001b315c(void);
 /* Supplied declaration required: FUN_001b31ac. */
 /* Supplied declaration required: FUN_001b31e0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -69,7 +69,7 @@ void FUN_004701d8(fn_004701d8_arg0 *param_1,int param_2,int param_3,int param_4)
   iStack_30 = param_2;
   iStack_2c = param_3;
   temp_v11 = param_4;
-  FUN_002e6354(temp_v7,0x80);
+  sysMemClear(temp_v7,0x80);
   temp_v6 = 0;
   temp_v8 = 0;
   if (temp_v8 < (int)temp_v10->field_0x310) {
@@ -96,8 +96,8 @@ void FUN_004701d8(fn_004701d8_arg0 *param_1,int param_2,int param_3,int param_4)
               puVar9 = (unsigned int *)(temp_v11 + temp_v6 * 0x10);
               rt_memcpy_w(puVar9,*(int *)(temp_v0 + 0x4c) + temp_v5 * 0x10,0xe);
               FUN_00100388(temp_v7,"%s/%s",temp_v9,pcVar7 + 1);
-              temp_v4 = DAT_0057027c;
-              FUN_001b2ebc(DAT_0057027c,temp_v7,0,puVar9 + 2,1,0x80,0);
+              temp_v4 = g_aocDisplay;
+              FUN_001b2ebc(g_aocDisplay,temp_v7,0,puVar9 + 2,1,0x80,0);
               *puVar9 = temp_v4;
               *(unsigned char *)(puVar9 + 3) = 1;
               temp_v1 = temp_v6 * 0x10;

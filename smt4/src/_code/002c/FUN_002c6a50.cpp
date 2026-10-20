@@ -1,19 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c6a50` (_code @ 0x2c6a50, 0x10 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses the flag-setting `adds r0, r0, #4`; the compiler emits a plain add here. */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002c6a04(void);
+u8 *FUN_002c6a04(void);
 
-
-int FUN_002c6a50(void)
-
+/* Returns FUN_002c6a04() advanced by 4 bytes. */
+u8 *FUN_002c6a50(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002c6a04();
-  return temp_v0 + 4;
+    return FUN_002c6a04() + 4;
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 extern signed char DAT_00471a10; /* 0x471a10 */
 
-extern int FUN_002c1364(unsigned int, unsigned int, unsigned int, unsigned int);
+extern int asdModelForwardChecked(unsigned int, unsigned int, unsigned int, unsigned int);
 extern int FUN_002c1398(unsigned int);
 extern unsigned int FUN_002c30c4(unsigned int);
 
@@ -24,7 +24,7 @@ int FUN_0010feb4(unsigned int param_1,unsigned int param_2)
     temp_v0 = FUN_002c1398(0);
     if (-1 < temp_v0) {
       temp_v1 = FUN_002c30c4(param_2);
-      temp_v0 = FUN_002c1364(param_1,param_2,temp_v1,0);
+      temp_v0 = asdModelForwardChecked(param_1,param_2,temp_v1,0);
       if (-1 < temp_v0) {
         DAT_00471a10 = '\x01';
         temp_v0 = 0;

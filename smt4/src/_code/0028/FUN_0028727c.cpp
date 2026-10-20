@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_002ae7e8(int);
+int asdTMTexTableFreeEntry(int);
 int FUN_002ae898(int, int);
-int FUN_002c415c(unsigned int);
+int asdMemFree(unsigned int);
 int FUN_002d661c(void);
 
 extern signed char DAT_0043da29; /* 0x43da29 */
 extern unsigned int DAT_0043da30; /* 0x43da30 */
 extern unsigned int DAT_0043da34; /* 0x43da34 */
 
-/* Supplied declaration required: FUN_002ae7e8. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002ae898. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002d661c. */
 
 
@@ -26,10 +26,10 @@ void FUN_0028727c(void)
   DAT_0043da29 = DAT_0043da29 - '\x01';
   if (DAT_0043da29 < '\x01') {
     FUN_002d661c();
-    FUN_002c415c(DAT_0043da30);
-    FUN_002c415c(DAT_0043da34);
+    asdMemFree(DAT_0043da30);
+    asdMemFree(DAT_0043da34);
     FUN_002ae898(0x12,0);
-    FUN_002ae7e8(0x12);
+    asdTMTexTableFreeEntry(0x12);
     DAT_0043da29 = '\0';
   }
   return;

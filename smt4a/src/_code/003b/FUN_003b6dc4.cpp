@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_001add24(int);
 int FUN_002e3494(void);
 
@@ -13,9 +13,9 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_00570280; /* 0x570280 */
+extern int g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001add24. */
 /* Supplied declaration required: FUN_002e3494. */
 
@@ -31,18 +31,18 @@ void FUN_003b6dc4(void)
   int temp_v3;
   
   FUN_001add24(0x45);
-  temp_v1 = DAT_00570280;
+  temp_v1 = g_aocSystem;
   temp_v2 = 0;
-  piVar4 = (int *)(DAT_00570280 + 0x44c);
-  if (0 < *(int *)(DAT_00570280 + 0x444)) {
+  piVar4 = (int *)(g_aocSystem + 0x44c);
+  if (0 < *(int *)(g_aocSystem + 0x444)) {
     do {
       temp_v3 = temp_v2 * 0x10 + 4;
       if (*(int *)(*(int *)(temp_v1 + 0x44c) + temp_v3) != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         *(unsigned int *)(*piVar4 + temp_v3) = 0;
       }
       if (*(int *)(*(int *)(temp_v1 + 0x44c) + temp_v2 * 0x10) != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         *(unsigned int *)(*piVar4 + temp_v2 * 0x10) = 0;
       }
       temp_v3 = temp_v2 * 0x10;

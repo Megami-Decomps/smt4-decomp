@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_3_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int DAT_00476634; /* 0x476634 */
 extern unsigned int DAT_004efd6c; /* 0x4efd6c */
 extern unsigned int DAT_004efd70; /* 0x4efd70 */
@@ -50,8 +50,8 @@ void FUN_0023b5e0(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned int temp_v7;
   unsigned char temp_v8 [60];
   
-  if (*(int *)(DAT_0044ea00 + 0x6f8) != 0) {
-    temp_v0 = FUN_002a81a8(temp_v8,*(int *)(DAT_0044ea00 + 0x6f8) + 0x38);
+  if (*(int *)(g_titleScene + 0x6f8) != 0) {
+    temp_v0 = FUN_002a81a8(temp_v8,*(int *)(g_titleScene + 0x6f8) + 0x38);
     temp_v2 = 0x3f800000;
     temp_v1 = 0;
     if (temp_v0 == 0) {

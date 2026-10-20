@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_00282bfc(int, int);
-int FUN_002c498c(int, int, int, int, int);
-int FUN_002c4a08(...);
-int FUN_002c5788(unsigned char *, int, int, int, unsigned char *, unsigned char *, unsigned int *);
+int asdMemAlloc(int, int, int, int, int);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, unsigned int *);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -27,9 +27,9 @@ extern unsigned char LAB_0020ed2c; /* 0x20ed2c */
 extern unsigned int *DAT_00433048; /* 0x433048 */
 
 /* Supplied declaration required: FUN_00282bfc. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 
 
 void FUN_001b0c04(int param_1)
@@ -40,7 +40,7 @@ void FUN_001b0c04(int param_1)
   unsigned char *puVar2;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x20,1);
+  asdMemAlloc(0x100,0x100,0,0x20,1);
   DAT_00433048 = puVar1;
   *(unsigned char *)(puVar1 + 6) = 0;
   *(unsigned char *)((int)puVar1 + 0x19) = 0;
@@ -52,12 +52,12 @@ void FUN_001b0c04(int param_1)
     FUN_00282bfc(1,0xff);
   }
   puVar2 = &LAB_001b0d64;
-  FUN_002c5788(&LAB_001b0d64,2,0,0,&LAB_001b4fe8,&LAB_0020ece4,DAT_00433048);
+  asdProcessCreateSimple(&LAB_001b0d64,2,0,0,&LAB_001b4fe8,&LAB_0020ece4,DAT_00433048);
   *puVar1 = (unsigned int)puVar2;
-  FUN_002c4a08(&LAB_001b0d74,0x7d,1,0,&LAB_001e470c,0,DAT_00433048,puVar2);
-  FUN_002c4a08(&LAB_001b0d80,0xdb,1,0,&LAB_001e470c,0,DAT_00433048,*puVar1);
+  taskCreateDraw(&LAB_001b0d74,0x7d,1,0,&LAB_001e470c,0,DAT_00433048,puVar2);
+  taskCreateDraw(&LAB_001b0d80,0xdb,1,0,&LAB_001e470c,0,DAT_00433048,*puVar1);
   puVar2 = &LAB_001b0d90;
-  FUN_002c4a08(&LAB_001b0d90,0xe7,1,0,&LAB_0020ed2c,0,DAT_00433048,*puVar1);
+  taskCreateDraw(&LAB_001b0d90,0xe7,1,0,&LAB_0020ed2c,0,DAT_00433048,*puVar1);
   puVar1[3] = (unsigned int)puVar2;
   return;
 }

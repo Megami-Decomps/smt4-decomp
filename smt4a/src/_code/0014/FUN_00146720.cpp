@@ -24,7 +24,7 @@ extern int FUN_001588c0(unsigned int *, unsigned int);
 extern int FUN_0016f864(void);
 extern int FUN_0016f988(unsigned int *, char *, unsigned int, unsigned int);
 extern unsigned int FUN_00188688(void);
-extern unsigned int FUN_002e3390(char *);
+extern unsigned int wstrlen(char *);
 
 
 void FUN_00146720(void)
@@ -46,7 +46,7 @@ void FUN_00146720(void)
       FUN_0016e800(temp_v0,0x14674c);
     }
   }
-  temp_v1 = FUN_002e3390("fs:USER");
+  temp_v1 = wstrlen("fs:USER");
   temp_v0 = FUN_0016f988((unsigned int *)&DAT_00589390,"fs:USER",temp_v1,0);
   if (temp_v0 < 0) {
     FUN_0016e800(temp_v0,0x146774);

@@ -13,7 +13,7 @@ int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
 typedef int romwright_code(...);
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern int DAT_005b3bc0; /* 0x5b3bc0 */
 extern unsigned int *DAT_005b3bc4; /* 0x5b3bc4 */
 
@@ -33,8 +33,8 @@ extern unsigned int *DAT_005b3bc4; /* 0x5b3bc4 */
 /* Supplied declaration required: FUN_0019f7dc. */
 /* Supplied declaration required: FUN_001a64f4. */
 /* Supplied declaration required: FUN_001a9084. */
-extern int FUN_002e3390(int);
-extern int aeabi_uidivmod(unsigned int, int);
+extern int wstrlen(int);
+extern int __aeabi_uidivmod(unsigned int, int);
 
 
 void FUN_00162758(float *param_1,unsigned int *param_2,unsigned int param_3,int param_4)
@@ -107,7 +107,7 @@ void FUN_00162758(float *param_1,unsigned int *param_2,unsigned int param_3,int 
   uStack_24 = (unsigned int)((unsigned long long)in_d8 >> 0x20);
   temp_v15 = 0.0f;
   uStack_20 = in_d9;
-  temp_v2 = FUN_002e3390(param_4);
+  temp_v2 = wstrlen(param_4);
   uStack_64 = romwright_piece_4_4(uStack_24,uStack_28);
   temp_v13 = 1.0f;
   uStack_5c = uStack_20;
@@ -131,7 +131,7 @@ void FUN_00162758(float *param_1,unsigned int *param_2,unsigned int param_3,int 
   piVar15 = *(int **)(temp_v8 + 8);
   temp_v3 = temp_v9;
   FUN_001a9084(&iStack_94,piVar15,0x30);
-  FUN_0019f7dc(DAT_0059dbb4);
+  FUN_0019f7dc(g_renderCtx);
   iStack_94 = param_4;
   temp_v18 = (unsigned long long)temp_v9 << 0x20;
   temp_v17 = (unsigned long long)temp_v3;
@@ -239,9 +239,9 @@ LAB_00181ed4:
           }
           temp_v9 = (unsigned int)*(unsigned short *)(temp_v4 + 2);
 LAB_00181ef0:
-          temp_v4 = aeabi_uidivmod(temp_v9,(unsigned int)*(unsigned short *)(*(int *)(temp_v4 + 8) + 0xc) *
+          temp_v4 = __aeabi_uidivmod(temp_v9,(unsigned int)*(unsigned short *)(*(int *)(temp_v4 + 8) + 0xc) *
                                         (unsigned int)*(unsigned short *)(*(int *)(temp_v4 + 8) + 0xe));
-          FUN_0019f764(DAT_0059dbb4,*(unsigned int *)(*(int *)(temp_v8 + 0xc) + temp_v4 * 4),
+          FUN_0019f764(g_renderCtx,*(unsigned int *)(*(int *)(temp_v8 + 0xc) + temp_v4 * 4),
                        *(unsigned char *)(temp_v8 + 0x24));
           VectorUnsignedToFloat((unsigned int)uStack_7c,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorUnsignedToFloat((unsigned int)uStack_80,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -303,7 +303,7 @@ LAB_00181ef0:
       temp_v17 = (unsigned long long)(unsigned int)temp_v12;
     } while (temp_v2 >= iStack_94 - param_4);
   }
-  FUN_0019f7dc(DAT_0059dbb4);
+  FUN_0019f7dc(g_renderCtx);
   return;
 }
 

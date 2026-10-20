@@ -36,7 +36,7 @@ extern int *DAT_00646074; /* 0x646074 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0019a46c. */
 /* Supplied declaration required: FUN_001bcd48. */
-extern unsigned int FUN_002e3390(char *);
+extern unsigned int wstrlen(char *);
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_0042cc10. */
 extern int FUN_0043de60(unsigned int *);
@@ -58,7 +58,7 @@ int FUN_0043f440(int *param_1,int param_2,unsigned int param_3,unsigned int para
   unsigned char temp_v3;
   char *pcVar9;
   
-  temp_v0 = FUN_002e3390("soc:U");
+  temp_v0 = wstrlen("soc:U");
   DAT_00646070 = (**(romwright_code **)*param_1)(param_1,param_2 * 0xc,4,*(romwright_code **)*param_1,param_4);
   if (DAT_00646070 == 0) {
     temp_v1 = -0x279f8c0d;

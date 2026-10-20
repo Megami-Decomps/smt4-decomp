@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 extern unsigned char DAT_0062db8c; /* 0x62db8c */
 
 /* Supplied declaration required: FUN_001223ac. */
@@ -25,7 +25,7 @@ void FUN_00433ac4(void)
 
 {
 /* irregular: 3 native warning(s); review required */
-  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0x2)) == '\0') {
+  if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x2)) == '\0') {
     FUN_002f6650();
     FUN_001223ac();
   }

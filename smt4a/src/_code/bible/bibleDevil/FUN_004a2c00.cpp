@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0014e38c(unsigned char *, int, int, int, unsigned char *, unsigned char *, int *);
-int FUN_0015155c(...);
-int FUN_0016007c(void);
-int FUN_00163060(int, int, int, int, int);
+int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, int *);
+int taskCreateDraw(...);
+int asdOperatorNew(void);
+int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_0019de98(...);
 int FUN_002c8550(...);
 int FUN_0034a9c4(...);
@@ -42,10 +42,10 @@ extern unsigned char DAT_0055c90c; /* 0x55c90c */
 extern int *DAT_0057f0b4; /* 0x57f0b4 */
 extern unsigned int DAT_0057f0b8; /* 0x57f0b8 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_0016007c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_002c8550. */
 /* Supplied declaration required: FUN_0034a9c4. */
@@ -84,21 +84,21 @@ void FUN_004a2c00(int *param_1)
   (**(romwright_code **)(*param_1 + 0x20))(param_1);
   FUN_002c8550(2);
   piVar1 = (int *)0x100;
-  FUN_00163060(0x100,0x100,0,4,1);
+  asdMemoryAllocTracked(0x100,0x100,0,4,1);
   DAT_0057f0b4 = piVar1;
   *piVar1 = (int)param_1;
   puVar2 = &LAB_004a2e94;
-  FUN_0014e38c(&LAB_004a2e94,4,0,0,&LAB_004a6e54,&LAB_004a6e7c,piVar1);
+  asdProcessCreateSimple(&LAB_004a2e94,4,0,0,&LAB_004a6e54,&LAB_004a6e7c,piVar1);
   param_1[1] = (int)puVar2;
   puVar3 = &LAB_004a2eac;
-  FUN_0015155c(&LAB_004a2eac,0x71,1,0,&LAB_004a6f64,0,DAT_0057f0b4,puVar2);
+  taskCreateDraw(&LAB_004a2eac,0x71,1,0,&LAB_004a6f64,0,DAT_0057f0b4,puVar2);
   param_1[2] = (int)puVar3;
   puVar2 = &LAB_004a2ec0;
-  FUN_0015155c(&LAB_004a2ec0,0xea,1,0,&LAB_004a7260,0,DAT_0057f0b4,param_1[1]);
+  taskCreateDraw(&LAB_004a2ec0,0xea,1,0,&LAB_004a7260,0,DAT_0057f0b4,param_1[1]);
   param_1[3] = (int)puVar2;
   FUN_00493660(param_1 + 0x32,0x140,0,0x14);
   temp_v0 = 0x68;
-  FUN_0016007c();
+  asdOperatorNew();
   puVar5 = (unsigned int *)0x0;
   if (temp_v0 != 0) {
     puVar5 = (unsigned int *)FUN_004d0b3c();

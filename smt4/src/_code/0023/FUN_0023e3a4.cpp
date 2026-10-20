@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int DAT_00432fc8; /* 0x432fc8 */
+extern unsigned int g_aocMain; /* 0x432fc8 */
 
 extern int FUN_002a6c5c(unsigned int, unsigned int, unsigned int);
 extern int FUN_002a6d08(unsigned int);
@@ -16,7 +16,7 @@ unsigned int FUN_0023e3a4(unsigned int param_1,unsigned int param_2,int param_3)
   int temp_v0;
   unsigned int temp_v1;
   
-  if (((param_3 == 0) || (temp_v0 = FUN_002a6d08(DAT_00432fc8), temp_v1 = 0, temp_v0 != 0)) &&
+  if (((param_3 == 0) || (temp_v0 = FUN_002a6d08(g_aocMain), temp_v1 = 0, temp_v0 != 0)) &&
      (temp_v0 = FUN_002a6c5c(param_1,0x10,param_2), temp_v1 = 0, temp_v0 != 0)) {
     temp_v1 = 1;
   }

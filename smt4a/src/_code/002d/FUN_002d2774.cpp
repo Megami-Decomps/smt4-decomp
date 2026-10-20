@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0013c174(unsigned char *, int *, int);
-int FUN_0019a5a0(unsigned char *);
-int FUN_0019a730(void);
+int asdMemFree(unsigned char *);
+int asdTextureCreate(void);
 int FUN_0019a840(int);
 int FUN_00226970(int, unsigned char *, int, int);
 
@@ -19,8 +19,8 @@ extern unsigned char LAB_002d2820; /* 0x2d2820 */
 extern int *DAT_005806cc; /* 0x5806cc */
 
 /* Supplied declaration required: FUN_0013c174. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019a730. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_0019a840. */
 /* Supplied declaration required: FUN_00226970. */
 
@@ -38,12 +38,12 @@ void FUN_002d2774(void)
   
   temp_v0 = 0;
   temp_v2 = in_r3;
-  FUN_0019a730();
+  asdTextureCreate();
   *DAT_005806cc = temp_v0;
   puVar3 = &LAB_002d2820;
   FUN_0013c174(&LAB_002d2820,&temp_v2,0);
   FUN_00226970(temp_v0,puVar3,temp_v2,0x10000);
-  FUN_0019a5a0(puVar3);
+  asdMemFree(puVar3);
   FUN_0019a840(temp_v0);
   piVar1 = DAT_005806cc;
   *(unsigned int *)(*DAT_005806cc + 0x3c) = 1;

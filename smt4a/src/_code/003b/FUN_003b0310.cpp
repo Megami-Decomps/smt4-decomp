@@ -8,8 +8,8 @@ int FUN_002b945c(int);
 int FUN_00324bc8(int, int, int);
 int FUN_00376fb8(int);
 
-extern int DAT_00581288; /* 0x581288 */
-extern unsigned int DAT_005f15fc; /* 0x5f15fc */
+extern int g_lmapScene; /* 0x581288 */
+extern unsigned int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern unsigned char DAT_005f1623; /* 0x5f1623 */
@@ -37,11 +37,11 @@ unsigned int FUN_003b0310(void)
   DAT_005f1623 = 1;
   DAT_005f1b70 = 0;
   *(short *)(temp_v1 + 0x2c) = (short)(int)DAT_005f16bc;
-  *(short *)(temp_v1 + 0x2e) = (short)DAT_005f15fc;
+  *(short *)(temp_v1 + 0x2e) = (short)g_gameState;
   *(short *)(temp_v1 + 0x30) = (short)DAT_005f1600;
   *(unsigned int *)(temp_v1 + 0xe10) = DAT_005f1604;
-  temp_v0 = DAT_00581288;
-  *(short *)(temp_v1 + 0x32) = (short)(int)*(float *)(DAT_00581288 + 0x1c);
+  temp_v0 = g_lmapScene;
+  *(short *)(temp_v1 + 0x32) = (short)(int)*(float *)(g_lmapScene + 0x1c);
   *(short *)(temp_v1 + 0x34) = (short)(int)*(float *)(temp_v0 + 0x20);
   *(short *)(temp_v1 + 0x36) = (short)(int)*(float *)(temp_v0 + 0x24);
   *(short *)(temp_v1 + 0x38) = (short)(int)DAT_005f16cc;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023fb84(...);
 int FUN_0027da30(...);
-int FUN_00293f98(...);
+int aocHandleButtons(...);
 int FUN_00338318(...);
 int FUN_00339210(...);
 int FUN_003af1dc(...);
@@ -31,7 +31,7 @@ extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 extern unsigned int FUN_0027d9e8(int, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_0027dab0(int, fn_003c174c_arg1 *);
-/* Supplied declaration required: FUN_00293f98. */
+/* Supplied declaration required: aocHandleButtons. */
 extern unsigned int FUN_00294090(unsigned int, unsigned int);
 extern int FUN_00294fe0(unsigned int);
 extern int FUN_0029505c(unsigned int);
@@ -100,7 +100,7 @@ void FUN_003c174c(int param_1,fn_003c174c_arg1 *param_2)
       temp_v2 = FUN_0029505c(temp_v1);
       if (temp_v2 == 0) goto LAB_003c1934;
       param_2->field_0x54 = param_2->field_0x54 | 0x100;
-      FUN_00293f98(temp_v1,7);
+      aocHandleButtons(temp_v1,7);
     }
     if ((param_2->field_0x54 & 0x200) == 0) {
       temp_v2 = FUN_00294fe0(temp_v1);

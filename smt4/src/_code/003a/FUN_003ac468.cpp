@@ -4,13 +4,13 @@
 
 extern "C" {
 
-extern unsigned char DAT_0043d9e0; /* 0x43d9e0 */
+extern unsigned char g_countdown; /* 0x43d9e0 */
 
 
 void FUN_003ac468(void)
 
 {
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043d9e0 + 0x4)) + 0x1d) = 5;
+  *(unsigned char *)((*(int *)((unsigned char *)&g_countdown + 0x4)) + 0x1d) = 5;
   return;
 }
 

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022d1a8(int);
-int FUN_0024bc7c(unsigned char [14], int);
+int bitsetSetBit(unsigned char [14], int);
 int FUN_00258a24(unsigned int);
 int FUN_0029c4c8(int);
 int FUN_0029c4e4(unsigned char [14], int);
@@ -14,7 +14,7 @@ int FUN_0029d684(int);
 int FUN_0029d8a0(unsigned int);
 int FUN_0029dfc0(int);
 int FUN_002b9024(void);
-int FUN_002c4938(unsigned char [1412], int);
+int memClear(unsigned char [1412], int);
 int rt_memcpy_w(unsigned char [14], int, int);
 
 /* stack frame of param_1: 22 slot(s), 78 byte(s) */
@@ -45,7 +45,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0022d1a8. */
 extern int FUN_0023360c(int);
-/* Supplied declaration required: FUN_0024bc7c. */
+/* Supplied declaration required: bitsetSetBit. */
 /* Supplied declaration required: FUN_00258a24. */
 /* Supplied declaration required: FUN_0029c4c8. */
 /* Supplied declaration required: FUN_0029c4e4. */
@@ -56,7 +56,7 @@ extern int FUN_0023360c(int);
 extern int FUN_0029e0f8(void);
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -169,8 +169,8 @@ void FUN_0022de74(int param_1)
       temp_v27 = 0;
       temp_v28 = 0;
       temp_v29 = 0;
-      FUN_002c4938(temp_v30,0x500);
-      FUN_0024bc7c(temp_v8,*(unsigned short *)(temp_v6 + 0x38));
+      memClear(temp_v30,0x500);
+      bitsetSetBit(temp_v8,*(unsigned short *)(temp_v6 + 0x38));
       FUN_0029c6b0(temp_v8);
       temp_v13 = 0;
       temp_v11 = temp_v9;

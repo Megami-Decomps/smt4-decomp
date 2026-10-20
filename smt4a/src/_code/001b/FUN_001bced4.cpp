@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_001696f4(void);
 extern int FUN_001c5b4c(int);
@@ -27,19 +27,19 @@ void FUN_001bced4(unsigned int *param_1)
   unsigned int temp_v9;
   unsigned int temp_v10;
   
-  temp_v1 = *(int *)(DAT_0059dbb4 + 0x52c);
+  temp_v1 = *(int *)(g_renderCtx + 0x52c);
   temp_v0 = 0;
-  if (*(char *)(DAT_0059dbb4 + 0x5f8) != '\x03') {
-    if (*(char *)(DAT_0059dbb4 + 0x5f8) != '\x04') {
+  if (*(char *)(g_renderCtx + 0x5f8) != '\x03') {
+    if (*(char *)(g_renderCtx + 0x5f8) != '\x04') {
       temp_v2 = FUN_001c5b4c(temp_v1);
     }
     else {
-      temp_v2 = FUN_001c5bd8(DAT_0059dbb4);
+      temp_v2 = FUN_001c5bd8(g_renderCtx);
       temp_v0 = 1;
     }
   }
   else {
-    temp_v2 = DAT_0059dbb4 + 0x700;
+    temp_v2 = g_renderCtx + 0x700;
     temp_v0 = 1;
   }
   if (temp_v1 == 2) {

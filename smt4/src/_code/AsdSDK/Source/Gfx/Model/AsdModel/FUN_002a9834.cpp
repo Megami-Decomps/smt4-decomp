@@ -11,9 +11,9 @@ int FUN_002a63d8(int *, int);
 int FUN_002a65d8(int *, int);
 int FUN_002af294(...);
 int FUN_002b3acc(int *, int, int, unsigned int);
-int FUN_002c2ff0(void);
+int asdMemoryGetDefaultAllocator(void);
 int FUN_002c30c4(...);
-int FUN_002c5300(int, int, int, unsigned int);
+int asdMemoryAlloc(int, int, int, unsigned int);
 int nw_gfx_SceneBuilder_CreateObject(int *, unsigned int, unsigned int);
 int nw_gfx_SceneHelper_ResolveReferenceImpl(...);
 int nw_gfx_SceneNode_IsCircularReference(void);
@@ -61,10 +61,10 @@ extern unsigned int DAT_00464b8c; /* 0x464b8c */
 /* Supplied declaration required: FUN_002af294. */
 /* Supplied declaration required: FUN_002b3acc. */
 extern int FUN_002b4414(int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c2ff0. */
-extern unsigned int FUN_002c300c(void);
+/* Supplied declaration required: asdMemoryGetDefaultAllocator. */
+extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: FUN_002c30c4. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: nw_gfx_SceneHelper_ResolveReferenceImpl. */
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
@@ -129,16 +129,16 @@ void FUN_002a9834(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
   else if ((param_3 & 0x80) != 0) {
     FUN_002a6264(param_1,0x2030000);
   }
-  temp_v1 = FUN_002c2ff0();
+  temp_v1 = asdMemoryGetDefaultAllocator();
   piVar15 = param_1;
   nw_gfx_res_ResGraphicsFile_Setup(param_1,temp_v1,*param_1);
   temp_v2 = DAT_00464b6c;
   if (((int)piVar15 < 0) && (((unsigned int)piVar15 & 2) != 0)) {
-    temp_v1 = FUN_002c2ff0();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     nw_gfx_res_ResGraphicsFile_Setup(param_1,temp_v1,temp_v2);
     param_3 = temp_v2;
   }
-  temp_v13 = (int *)FUN_002c2ff0();
+  temp_v13 = (int *)asdMemoryGetDefaultAllocator();
   temp_v14 = (int *)0x0;
   temp_v8 = 0;
   temp_v15 = (int *)0x0;
@@ -147,7 +147,7 @@ void FUN_002a9834(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
   param_2[10] = *(unsigned int *)(*param_1 + 0x1c);
   temp_v11 = 1;
   temp_v2 = 0x100;
-  FUN_002c5300(0x100,0x100,0,param_2[10] << 2);
+  asdMemoryAlloc(0x100,0x100,0,param_2[10] << 2);
   param_2[9] = temp_v2;
   temp_v6 = *(int *)(*param_1 + 0x20);
   if (temp_v6 != 0) {
@@ -173,7 +173,7 @@ void FUN_002a9834(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
         else {
           temp_v7 = *(int *)(param_3 + 0xc) + param_3 + 0xc;
         }
-        temp_v1 = FUN_002c300c();
+        temp_v1 = asdMemoryGetAllocatorA();
         temp_v17 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v17 + 2)),0x101);
         temp_v20 = 1;
         temp_v21 = 0;
@@ -192,8 +192,8 @@ void FUN_002a9834(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
         else {
           temp_v6 = 0;
         }
-        temp_v1 = FUN_002c2ff0();
-        temp_v3 = FUN_002c300c();
+        temp_v1 = asdMemoryGetDefaultAllocator();
+        temp_v3 = asdMemoryGetAllocatorA();
         temp_v20 = 4;
         temp_v19 = 8;
         temp_v26 = 1;

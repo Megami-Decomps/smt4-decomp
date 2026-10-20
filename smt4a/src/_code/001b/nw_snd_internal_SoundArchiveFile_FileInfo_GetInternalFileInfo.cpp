@@ -1,22 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nw_snd_internal_SoundArchiveFile_FileInfo_GetInternalFileInfo` (_code @ 0x1bbd64, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the type tag is compared through a second register (sub r2, r1, #8192) where retail reuses r1. */
+#include "common.h"
 
 extern "C" {
 
+#define FILE_INFO_TYPE_INTERNAL 0x220c
 
-int nw_snd_internal_SoundArchiveFile_FileInfo_GetInternalFileInfo(short *param_1)
+typedef struct FileInfo {
+    /* 0x00 */ u16 type;           /* reference type tag; 0 = null reference */
+    /* 0x02 */ u16 unk02;
+    /* 0x04 */ s32 offset;         /* from the start of this structure */
+} FileInfo;
 
+/* Returns the internal file info this entry refers to (offset from the entry itself), or NULL if it is not an internal reference. */
+u8 *nw_snd_internal_SoundArchiveFile_FileInfo_GetInternalFileInfo(FileInfo *info)
 {
-  int temp_v0;
-  
-  if ((*param_1 != 0) && (*param_1 == 0x220c)) {
-    temp_v0 = (int)param_1 + *(int *)(param_1 + 2);
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    if (info->type != 0 && info->type == FILE_INFO_TYPE_INTERNAL) {
+        return (u8 *)info + info->offset;
+    }
+    return NULL;
 }
 
 } /* extern "C" */

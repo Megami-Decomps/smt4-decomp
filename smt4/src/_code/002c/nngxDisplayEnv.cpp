@@ -4,14 +4,14 @@
 
 extern "C" {
 
-extern unsigned char DAT_004c6290; /* 0x4c6290 */
+extern unsigned char g_asdGfxContext; /* 0x4c6290 */
 
 
 void nngxDisplayEnv(unsigned int param_1,unsigned int param_2)
 
 {
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_004c6290 + 0x124)) * 4 + 0x4c63c4) = param_1;
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_004c6290 + 0x124)) * 4 + 0x4c63d0) = param_2;
+  *(unsigned int *)((*(int *)((unsigned char *)&g_asdGfxContext + 0x124)) * 4 + 0x4c63c4) = param_1;
+  *(unsigned int *)((*(int *)((unsigned char *)&g_asdGfxContext + 0x124)) * 4 + 0x4c63d0) = param_2;
   return;
 }
 

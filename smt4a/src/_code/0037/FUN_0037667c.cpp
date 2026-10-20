@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001642e4(...);
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_00290edc(...);
 int FUN_003007a0(...);
 
@@ -33,7 +33,7 @@ struct fn_0037667c_arg1 {
 };
 
 /* Supplied declaration required: FUN_001642e4. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_00290edc. */
 /* Supplied declaration required: FUN_003007a0. */
 
@@ -50,7 +50,7 @@ void FUN_0037667c(fn_0037667c_arg0 *param_1,fn_0037667c_arg1 *param_2,unsigned i
   FUN_001642e4(param_2,&uStack_18,1,0x80);
   pfVar1 = param_2;
   FUN_00290edc();
-  FUN_0019a5a0();
+  asdMemFree();
   FUN_003007a0();
   param_2->field_0xac = 0;
   param_2->field_0x90 = (int)pfVar1;

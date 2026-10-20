@@ -19,7 +19,7 @@ int FUN_00164288(void);
 int FUN_00165088(...);
 int FUN_00166f80(...);
 int FUN_00167f08(void);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00183f58(...);
 int FUN_00184b80(...);
 
@@ -36,7 +36,7 @@ int FUN_0019a7f4(int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(unsigned int, int);
 int VectorUnsignedToFloat(int, int);
-int aeabi_idivmod(...);
+int __aeabi_idivmod(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -84,8 +84,8 @@ extern int FUN_0016430c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016431c. */
 extern int FUN_001643a0(void);
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
-extern int FUN_00164a34(void);
-extern int FUN_00164a9c(void);
+extern int lmapMainIsRunning(void);
+extern int jobGetWork(void);
 extern int FUN_00164af0(unsigned int);
 /* Supplied declaration required: FUN_00164cd0. */
 extern int FUN_00165070(void);
@@ -95,7 +95,7 @@ extern int FUN_00165070(void);
 /* Supplied declaration required: FUN_00167458. */
 extern int FUN_00167e54(void);
 /* Supplied declaration required: FUN_00167f08. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00168980. */
 extern int FUN_00169168(unsigned int);
 /* Supplied declaration required: FUN_00169548. */
@@ -106,9 +106,9 @@ extern int FUN_0018206c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183f58. */
 /* Supplied declaration required: FUN_00184b80. */
 /* Supplied declaration required: FUN_0019a7f4. */
-extern int MapMode_IsBusy(void);
+extern int mapMainIsBusy(void);
 extern int QuestCenterMode_IsBusy(void);
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 unsigned int FUN_0014c01c(void)
@@ -148,7 +148,7 @@ unsigned int FUN_0014c01c(void)
   unsigned int uStack_44;
   int temp_v23 [7];
   
-  temp_v2 = FUN_00164a9c();
+  temp_v2 = jobGetWork();
   temp_v17 = 0.0f;
   temp_v15 = 1.0f;
   if (DAT_0057f590 == temp_v2) {
@@ -190,7 +190,7 @@ unsigned int FUN_0014c01c(void)
           break;
         case 3:
           if (*(int *)(DAT_0057f590 + 0x170) >= 1) {
-            temp_v3 = aeabi_idivmod(*(unsigned int *)(DAT_0057f590 + 0x188),
+            temp_v3 = __aeabi_idivmod(*(unsigned int *)(DAT_0057f590 + 0x188),
                                   *(unsigned int *)(DAT_0057f590 + 0x174));
             temp_v14 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v14 = temp_v14 + *(float *)(temp_v8 + 0x184);
@@ -952,7 +952,7 @@ LAB_0014d5c4:
               if (temp_v0 != 0x92) {
                 if (temp_v0 == 0xa2) {
                   temp_v3 = 0xa3;
-                  FUN_001681cc(temp_v3);
+                  sysPlaySe(temp_v3);
                 }
                 else if (temp_v0 != 0xab) {
                   if (!((temp_v0 == 0xcb || temp_v0 == 0xcc) || temp_v0 == 0xcd)) {
@@ -974,8 +974,8 @@ LAB_0014d5c4:
                     }
                     else {
                       temp_v8 = FUN_00167e54();
-                      if (((((temp_v8 == 0) && (temp_v8 = FUN_00164a34(), temp_v8 == 0)) &&
-                           (temp_v8 = MapMode_IsBusy(), temp_v8 == 0)) &&
+                      if (((((temp_v8 == 0) && (temp_v8 = lmapMainIsRunning(), temp_v8 == 0)) &&
+                           (temp_v8 = mapMainIsBusy(), temp_v8 == 0)) &&
                           (temp_v8 = QuestCenterMode_IsBusy(), temp_v8 == 0)) ||
                          ((temp_v8 = FUN_00162858(), temp_v8 != 0 ||
                           (temp_v8 = FUN_00162880(), temp_v8 == 0)))) {
@@ -985,7 +985,7 @@ LAB_0014d5c4:
                         temp_v3 = 0xd4;
                       }
                     }
-                    FUN_001681cc(temp_v3);
+                    sysPlaySe(temp_v3);
                   }
                 }
                 else {
@@ -995,7 +995,7 @@ LAB_0014d5c4:
                   else {
                     temp_v3 = 0xac;
                   }
-                  FUN_001681cc(temp_v3);
+                  sysPlaySe(temp_v3);
                 }
               }
               else {
@@ -1008,7 +1008,7 @@ LAB_0014d5c4:
                 else {
                   temp_v3 = 0x93;
                 }
-                FUN_001681cc(temp_v3);
+                sysPlaySe(temp_v3);
               }
             }
             else if (*(char *)(temp_v2 + 0x30) != '\0') {
@@ -1018,10 +1018,10 @@ LAB_0014d5c4:
               else {
                 temp_v3 = 0x9f;
               }
-              FUN_001681cc(temp_v3);
+              sysPlaySe(temp_v3);
             }
             else {
-              FUN_001681cc(0x9d);
+              sysPlaySe(0x9d);
             }
           }
         }
@@ -1147,7 +1147,7 @@ LAB_0014d428:
               if (((temp_v6 == '\a' || temp_v6 == '\b') || temp_v6 == '\t') &&
                  (FUN_00163aa4(temp_v2 + 0x4fc), *(short *)(temp_v2 + 0x19c6) != 0)) {
                 if (*(char *)(temp_v2 + 0x19da) != '\0') {
-                  FUN_001681cc();
+                  sysPlaySe();
                   temp_v4 = 0;
                   do {
                     FUN_00183f58(temp_v4 & 0xff,*(unsigned char *)(temp_v2 + temp_v4 + 0x19c8),
@@ -1196,7 +1196,7 @@ LAB_0014d428:
             if (*(short *)(temp_v2 + 0x19c6) != 0) {
               if (*(char *)(temp_v2 + 0x19da) != '\0') {
                 if (*(short *)(temp_v2 + 0x19c6) != 0xa2) {
-                  FUN_001681cc();
+                  sysPlaySe();
                   temp_v4 = 0;
                   do {
                     FUN_00183f58(temp_v4 & 0xff,*(unsigned char *)(temp_v2 + temp_v4 + 0x19c8),
@@ -1455,7 +1455,7 @@ LAB_0014c97c:
     if (temp_v9 < 0) {
       temp_v9 = 0;
     }
-    aeabi_idivmod(temp_v9,temp_v23[3]);
+    __aeabi_idivmod(temp_v9,temp_v23[3]);
     temp_v9 = temp_v20;
     temp_v10 = temp_v7;
     temp_v14 = temp_v17;

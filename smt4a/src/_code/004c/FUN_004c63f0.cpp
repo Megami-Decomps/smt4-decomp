@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_0034a290(void);
 int FUN_003ebd40(...);
 int FUN_003f0e20(...);
@@ -28,7 +28,7 @@ extern unsigned int DAT_0057147c; /* 0x57147c */
 extern unsigned int DAT_005714b0; /* 0x5714b0 */
 extern unsigned int DAT_005714b4; /* 0x5714b4 */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 extern int FUN_001633a0(unsigned int);
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0034a290. */
@@ -49,21 +49,21 @@ unsigned int FUN_004c63f0(unsigned int param_1)
   unsigned int temp_v4;
   unsigned short temp_v5 [10];
   
-  puVar1 = (unsigned int *)FUN_0014aa78();
+  puVar1 = (unsigned int *)btlGetMainState();
   FUN_003f0e20(puVar1,param_1);
   temp_v4 = 0;
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   FUN_003f0e20(temp_v0,param_1);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = *(int *)(temp_v0 + 0xd4);
   }
   if ((temp_v0 != 0 && temp_v1 != 0) && -1 < temp_v1) {
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     FUN_003ebd40(temp_v1,puVar1,3);
     if (temp_v1 == 0) {
       temp_v1 = FUN_001633a0(99);
-      temp_v0 = FUN_0014aa78();
+      temp_v0 = btlGetMainState();
       if ((*(unsigned int *)(temp_v0 + 0x45ac) & DAT_005714b4) != 0 ||
           (DAT_005714b0 & *(unsigned int *)(temp_v0 + 0x45a8)) != 0) {
         temp_v1 = 0;
@@ -90,7 +90,7 @@ unsigned int FUN_004c63f0(unsigned int param_1)
   do {
     temp_v2 = (unsigned int)temp_v5[temp_v1];
     if (((temp_v2 != 0) && (FUN_0034a290(), temp_v2 != 0)) && (temp_v4 < (*(unsigned int *)(temp_v2 + 0x44) & 3))) {
-      temp_v0 = FUN_0014aa78();
+      temp_v0 = btlGetMainState();
       FUN_003ebd40(temp_v0,puVar1,*(unsigned int *)(temp_v2 + 0x44) & 3);
       if (temp_v0 == 0) {
         temp_v4 = *(unsigned int *)(temp_v2 + 0x44) & 3;
@@ -102,7 +102,7 @@ unsigned int FUN_004c63f0(unsigned int param_1)
     return 0;
   }
 LAB_004c6530:
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   FUN_003ebd40(temp_v1,puVar1,temp_v4);
   temp_v3 = DAT_0057147c;
   temp_v2 = DAT_00571438;

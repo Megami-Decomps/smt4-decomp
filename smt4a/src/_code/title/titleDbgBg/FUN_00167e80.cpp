@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 
 extern int DAT_00589168; /* 0x589168 */
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00167e80(void)
@@ -20,7 +20,7 @@ void FUN_00167e80(void)
   temp_v0 = DAT_00589168 != 0;
   *(unsigned char *)(DAT_00589168 + 4) = 1;
   if (temp_v0) {
-    FUN_0019a5a0();
+    asdMemFree();
     DAT_00589168 = 0;
   }
   return;

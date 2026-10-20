@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_002b722c(...);
 
-extern int DAT_0043ded0; /* 0x43ded0 */
+extern int g_eventTex; /* 0x43ded0 */
 
 /* Supplied declaration required: FUN_002b722c. */
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 
 
 void FUN_00289234(unsigned int param_1)
@@ -25,12 +25,12 @@ void FUN_00289234(unsigned int param_1)
   int temp_v6;
   int temp_v7;
   
-  temp_v1 = DAT_0043ded0;
+  temp_v1 = g_eventTex;
   temp_v5 = 0;
-  if (0 < *(int *)(DAT_0043ded0 + 0x2c)) {
+  if (0 < *(int *)(g_eventTex + 0x2c)) {
     do {
       temp_v6 = temp_v1 + temp_v5 * 4;
-      temp_v2 = FUN_002bf244(*(unsigned int *)(temp_v6 + 4));
+      temp_v2 = jobIsValid(*(unsigned int *)(temp_v6 + 4));
       if (temp_v2 == 0) {
         *(unsigned int *)(temp_v6 + 4) = 0;
       }

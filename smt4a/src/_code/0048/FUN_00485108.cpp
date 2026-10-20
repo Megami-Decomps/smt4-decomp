@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, unsigned int, unsigned int, int);
 
 typedef int romwright_code(...);
@@ -15,9 +15,9 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 
@@ -31,12 +31,12 @@ void FUN_00485108(int param_1,unsigned int param_2,unsigned int param_3)
   int *piVar3;
   int temp_v2;
   
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_001835b4(2,0x23,0x153,param_2,param_3,0x1f);
   FUN_001835b4(2,0x23,0x154,param_2,param_3,0x1f);
   FUN_001835b4(2,0x23,0x150,param_2,param_3,0x24);
-  FUN_001677c0();
-  temp_v2 = DAT_0059dbb4;
+  efctSetSpeed();
+  temp_v2 = g_renderCtx;
   temp_v0 = FUN_00169294(6,1,0);
   piVar3 = (int *)(temp_v2 + 0x12b8);
   temp_v1 = piVar3[*piVar3 + 2];
@@ -48,7 +48,7 @@ void FUN_00485108(int param_1,unsigned int param_2,unsigned int param_3)
   temp_v2 = 0;
   do {
     FUN_001835b4(2,0x23,temp_v2 + 0x155,param_2,param_3,0x29);
-    temp_v0 = DAT_0059dbb4;
+    temp_v0 = g_renderCtx;
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 4);
   temp_v2 = FUN_00169294(6,7,0);
@@ -62,7 +62,7 @@ void FUN_00485108(int param_1,unsigned int param_2,unsigned int param_3)
   if (0 < *(short *)(param_1 + 0x560)) {
     FUN_001835b4(2,0x23,0x159,param_2,param_3,0x29);
   }
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

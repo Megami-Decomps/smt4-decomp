@@ -1,28 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048e40c` (_code @ 0x48e40c, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0018719c(unsigned int);
-extern int FUN_003e46f4(unsigned int);
+int FUN_0018719c(u32 id);
+int FUN_003e46f4(u32 id);
 
-
-unsigned int FUN_0048e40c(void)
-
+/* True when conditions 0x49a, 0x400 and 0x76 hold and either 0xc is clear or 0x10 holds. */
+u32 FUN_0048e40c(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_0018719c(0x49a);
-  temp_v1 = 0;
-  if ((((temp_v0 != 0) && (temp_v0 = FUN_0018719c(0x400), temp_v1 = 0, temp_v0 != 0)) &&
-      (temp_v0 = FUN_003e46f4(0x76), temp_v1 = 0, temp_v0 != 0)) &&
-     ((temp_v0 = FUN_0018719c(0xc), temp_v0 == 0 || (temp_v0 = FUN_0018719c(0x10), temp_v1 = 0, temp_v0 != 0))
-     )) {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    if (FUN_0018719c(0x49a) == 0) {
+        return 0;
+    }
+    if (FUN_0018719c(0x400) == 0) {
+        return 0;
+    }
+    if (FUN_003e46f4(0x76) == 0) {
+        return 0;
+    }
+    if (FUN_0018719c(0xc) != 0) {
+        if (FUN_0018719c(0x10) == 0) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 } /* extern "C" */

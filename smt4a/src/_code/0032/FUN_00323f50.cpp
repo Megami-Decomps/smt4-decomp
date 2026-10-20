@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(...);
 int FUN_0016c4b8(...);
 int FUN_00184c4c(...);
-int FUN_00187d04(...);
+int camSetMatrixA(...);
 int FUN_001a1ee0(...);
 int FUN_001b4a00(...);
 int FUN_001b4a20(...);
@@ -82,7 +82,7 @@ typedef struct {
     unsigned int sp17C; /* 0x17c: local_17c */
 } param_1_stack;
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_005c1120; /* 0x5c1120 */
 extern float DAT_006472dc; /* 0x6472dc */
 extern float DAT_006472e0; /* 0x6472e0 */
@@ -114,7 +114,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_00184c4c. */
-/* Supplied declaration required: FUN_00187d04. */
+/* Supplied declaration required: camSetMatrixA. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b4a00. */
 /* Supplied declaration required: FUN_001b4a20. */
@@ -226,7 +226,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
   fStack_88 = temp_v22;
   FUN_001b4a20(temp_v30,temp_v30,&temp_v42);
   FUN_001b4a00(temp_v30,&temp_v45);
-  FUN_00187d04(DAT_0059dbb4,temp_v30);
+  camSetMatrixA(g_renderCtx,temp_v30);
   temp_v3 = pfVar4->field_0x8;
   if (param_1->field_0xc == 7) {
     temp_v17 = 255.0f;
@@ -312,7 +312,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
             DAT_00647334 = temp_v1;
             if ((temp_v0 & 0xff) != 0) {
               FUN_00291644(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
-              FUN_0016c4b8(DAT_0059dbb4,temp_v29);
+              FUN_0016c4b8(g_renderCtx,temp_v29);
               FUN_001b63b0();
               FUN_001a1ee0();
               temp_v18 = (unsigned long long)(unsigned int)temp_v12 << 0x20;
@@ -359,7 +359,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
             DAT_006472f8 = temp_v4;
             if ((temp_v0 & 0xff) != 0) {
               FUN_00291644(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
-              FUN_0016c4b8(DAT_0059dbb4,temp_v29);
+              FUN_0016c4b8(g_renderCtx,temp_v29);
               FUN_001b63b0();
               FUN_001a1ee0();
               temp_v18 = (unsigned long long)(unsigned int)temp_v19 << 0x20;

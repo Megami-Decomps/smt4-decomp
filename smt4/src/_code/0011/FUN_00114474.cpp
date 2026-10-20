@@ -64,7 +64,7 @@ extern int FUN_0012650c(unsigned int);
 extern unsigned short FUN_002b8584(unsigned int, unsigned int);
 extern int FUN_002b8660(void);
 extern int FUN_002b8694(void);
-extern int FUN_002b879c(void);
+extern int lmapMainIsRunning(void);
 extern int FUN_002b8804(void);
 /* Supplied declaration required: FUN_002b8838. */
 /* Supplied declaration required: FUN_002b898c. */
@@ -86,12 +86,12 @@ extern int FUN_002b8d90(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bc02c. */
 extern int FUN_002bc088(void);
 /* Supplied declaration required: FUN_002bf818. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 extern int FUN_002c15fc(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: FUN_002c49f8. */
 /* Supplied declaration required: FUN_002c53f4. */
-extern int MapMode_IsBusy(void);
+extern int mapMainIsBusy(void);
 extern int QuestCenterMode_IsBusy(void);
 
 
@@ -119,7 +119,7 @@ unsigned int FUN_00114474(void)
   unsigned int temp_v15;
   unsigned long long temp_v16;
   
-  temp_v3 = FUN_002c08f0();
+  temp_v3 = jobGetWork();
   if (DAT_0043e190 == temp_v3) {
     temp_v7 = *(char *)(temp_v3 + 0x7d);
     temp_v10 = temp_v7 == '\0';
@@ -658,8 +658,8 @@ LAB_001151e4:
                   }
                   else {
                     temp_v6 = FUN_002b8804();
-                    if ((((temp_v6 == 0) && (temp_v6 = FUN_002b879c(), temp_v6 == 0)) &&
-                        ((temp_v6 = MapMode_IsBusy(), temp_v6 == 0 &&
+                    if ((((temp_v6 == 0) && (temp_v6 = lmapMainIsRunning(), temp_v6 == 0)) &&
+                        ((temp_v6 = mapMainIsBusy(), temp_v6 == 0 &&
                          (temp_v6 = QuestCenterMode_IsBusy(), temp_v6 == 0)))) ||
                        ((temp_v6 = FUN_002b8694(), temp_v6 != 0 || (temp_v6 = FUN_002b8660(), temp_v6 == 0))
                        )) {

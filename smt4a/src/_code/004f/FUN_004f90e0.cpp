@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 
 
 unsigned int FUN_004f90e0(void)
@@ -18,7 +18,7 @@ unsigned int FUN_004f90e0(void)
   temp_v0 = 0;
   while (temp_v0 = temp_v0 + 1, temp_v0 < 0x6d) {
     if (temp_v0 >= 4) {
-      FUN_0014aa78();
+      btlGetMainState();
     }
   }
   return 1;

@@ -12,12 +12,12 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int DAT_00570280; /* 0x570280 */
+extern int g_aocSystem; /* 0x570280 */
 
 extern int FUN_0014bef4(short);
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019cac4. */
 /* Supplied declaration required: FUN_0046fd8c. */
 extern int FUN_004bb80c(void);
@@ -36,11 +36,11 @@ unsigned short FUN_004bc2dc(unsigned int param_1,int param_2)
   short *psVar7;
   short temp_v6;
   
-  temp_v0 = FUN_00187180(2,1);
-  temp_v1 = FUN_00192798();
+  temp_v0 = dataTableGet(2,1);
+  temp_v1 = dataTableGetEntries();
   temp_v5 = temp_v1;
-  if (((-1 < (int)param_1) && (temp_v2 = FUN_00192748(temp_v0), param_1 < temp_v2)) &&
-     (temp_v5 = DAT_00570280, FUN_0046fd8c(DAT_00570280,param_1), temp_v5 == 0)) {
+  if (((-1 < (int)param_1) && (temp_v2 = dataTableGetCount(temp_v0), param_1 < temp_v2)) &&
+     (temp_v5 = g_aocSystem, FUN_0046fd8c(g_aocSystem,param_1), temp_v5 == 0)) {
     temp_v5 = temp_v1 + param_1 * 0x78;
   }
   temp_v6 = 0;

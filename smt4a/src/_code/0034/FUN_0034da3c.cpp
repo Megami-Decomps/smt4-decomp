@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(int);
+int asdMemFree(int);
 int FUN_0019a7f4(...);
 int FUN_0040a244(void);
 
@@ -13,8 +13,8 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int FUN_00164a9c(void);
-/* Supplied declaration required: FUN_0019a5a0. */
+extern int jobGetWork(void);
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019a7f4. */
 /* Supplied declaration required: FUN_0040a244. */
 
@@ -25,7 +25,7 @@ void FUN_0034da3c(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   if (*(int *)(temp_v0 + 0x4c) != 0) {
     FUN_0040a244();
     *(unsigned int *)(temp_v0 + 0x4c) = 0;
@@ -39,7 +39,7 @@ void FUN_0034da3c(void)
       FUN_0019a7f4(0x27,0);
     }
   }
-  FUN_0019a5a0(temp_v0);
+  asdMemFree(temp_v0);
   return;
 }
 

@@ -48,7 +48,7 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 /* Supplied declaration required: FUN_0019a270. */
 /* Supplied declaration required: FUN_001a063c. */
 extern int FUN_001a7a20(int *, char *, unsigned int);
-extern unsigned int FUN_002e3390(void);
+extern unsigned int wstrlen(void);
 extern int FUN_002eba64(unsigned int *);
 
 
@@ -82,7 +82,7 @@ void FUN_0016c058(fn_0016c058_arg0 *param_1,int *param_2)
   if (piVar9 == (int *)0x0) {
     return;
   }
-  temp_v2 = FUN_002e3390();
+  temp_v2 = wstrlen();
   temp_v3 = FUN_001a7a20(piVar9 + 1,"$shadowmap",temp_v2);
   if (temp_v3 == 0xffff) {
     return;

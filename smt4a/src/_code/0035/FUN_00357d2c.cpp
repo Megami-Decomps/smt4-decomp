@@ -9,7 +9,7 @@ int FUN_003e4e4c(int);
 
 extern int FUN_0015688c(void);
 extern int FUN_00187168(int);
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_003e48dc. */
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_003e4e4c. */
@@ -25,7 +25,7 @@ unsigned int FUN_00357d2c(void)
   int temp_v3;
   unsigned int temp_v4;
   
-  temp_v1 = FUN_00236038(0);
+  temp_v1 = scrGetArg(0);
   temp_v2 = FUN_0015688c();
   if ((temp_v2 != 0) && (*(unsigned short *)(temp_v2 + 300) == temp_v1)) {
     temp_v4 = 0;

@@ -8,7 +8,7 @@ int FUN_0018cfe4(unsigned int, unsigned int);
 int FUN_002246d0(unsigned int);
 int FUN_0034103c(unsigned int);
 
-extern unsigned int DAT_005b3c80; /* 0x5b3c80 */
+extern unsigned int g_effAsdLightHandle; /* 0x5b3c80 */
 extern unsigned int DAT_005b3c88; /* 0x5b3c88 */
 extern int DAT_005b3c90; /* 0x5b3c90 */
 extern int DAT_005b3c94; /* 0x5b3c94 */
@@ -54,7 +54,7 @@ void FUN_00280c5c(unsigned int *param_1,int param_2)
   if (temp_v2 != 0) {
     FUN_002246d0(temp_v0);
     temp_v3 = (unsigned int)(param_2 >= 3);
-    FUN_0018cfe4((&DAT_005b3c80)[temp_v3],(&DAT_005b3c88)[temp_v3]);
+    FUN_0018cfe4((&g_effAsdLightHandle)[temp_v3],(&DAT_005b3c88)[temp_v3]);
     (&DAT_00636e00)[temp_v3 * 6] = (&DAT_00636e00)[temp_v3 * 6] + 1;
     *(int *)(temp_v0 + 0xc) = param_2;
     *(int *)(temp_v0 + 0x10) = param_2;

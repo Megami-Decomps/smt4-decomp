@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 
 
 int FUN_00165058(void)
@@ -12,7 +12,7 @@ int FUN_00165058(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   return *(int *)(temp_v0 + 8) + *(int *)(temp_v0 + 4);
 }
 

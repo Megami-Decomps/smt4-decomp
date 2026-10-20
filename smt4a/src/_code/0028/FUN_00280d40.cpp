@@ -20,7 +20,7 @@ struct fn_00280d40_arg0 {
     int field_0x28; /* +0x28 */
 };
 
-extern unsigned int DAT_005b3c80; /* 0x5b3c80 */
+extern unsigned int g_effAsdLightHandle; /* 0x5b3c80 */
 extern unsigned int DAT_005b3c84; /* 0x5b3c84 */
 extern unsigned int DAT_005b3c88; /* 0x5b3c88 */
 extern unsigned int DAT_005b3c8c; /* 0x5b3c8c */
@@ -155,11 +155,11 @@ void FUN_00280d40(fn_00280d40_arg0 *param_1)
     (&DAT_00636e04)[temp_v3 * 0x18] = 0;
     (&DAT_00636e05)[temp_v3 * 0x18] = 0;
     FUN_0018e9d8((&DAT_005b3c88)[temp_v3],(&DAT_005b3c98)[temp_v3]);
-    FUN_0018cfe4((&DAT_005b3c80)[temp_v3],(&DAT_005b3c88)[temp_v3]);
+    FUN_0018cfe4((&g_effAsdLightHandle)[temp_v3],(&DAT_005b3c88)[temp_v3]);
   }
   if (param_1->field_0x14 != (void *)0x0) {
     if (*(int *)((int)param_1->field_0x14 + 8) == 0) {
-      FUN_0018cfe4(DAT_005b3c80,DAT_005b3c88);
+      FUN_0018cfe4(g_effAsdLightHandle,DAT_005b3c88);
       DAT_00636e00 = DAT_00636e00 - 1;
     }
     else {
@@ -168,7 +168,7 @@ void FUN_00280d40(fn_00280d40_arg0 *param_1)
     }
   }
   else if (param_1->field_0xc < 3) {
-    FUN_0018cfe4(DAT_005b3c80,DAT_005b3c88);
+    FUN_0018cfe4(g_effAsdLightHandle,DAT_005b3c88);
     DAT_00636e00 = DAT_00636e00 - 1;
   }
   else {

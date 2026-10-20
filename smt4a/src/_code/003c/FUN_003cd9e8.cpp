@@ -4,9 +4,9 @@
 
 extern "C" {
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 
 
 int FUN_003cd9e8(int param_1)
@@ -21,9 +21,9 @@ int FUN_003cd9e8(int param_1)
   short *psVar7;
   int temp_v6;
   
-  temp_v0 = FUN_00187180(6,2);
-  temp_v1 = FUN_00192798();
-  temp_v2 = FUN_00192748(temp_v0);
+  temp_v0 = dataTableGet(6,2);
+  temp_v1 = dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v0);
   temp_v4 = 0;
   temp_v6 = 0;
   temp_v3 = 0;

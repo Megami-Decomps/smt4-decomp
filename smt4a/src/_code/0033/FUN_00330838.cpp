@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_00236038(int);
+int scrGetArg(int);
 int FUN_0038a1d4(unsigned int, int, int);
 int SBORROW4(int, int);
 
-extern int DAT_0057f554; /* 0x57f554 */
+extern int g_eventCommand; /* 0x57f554 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int FUN_00203d74(void);
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: scrGetArg. */
 extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_0038a1d4. */
 
@@ -28,8 +28,8 @@ unsigned char FUN_00330838(void)
   
   temp_v0 = FUN_002deb84();
   if (temp_v0 == 0) {
-    temp_v1 = FUN_00236038(0);
-    temp_v2 = FUN_00236038(1);
+    temp_v1 = scrGetArg(0);
+    temp_v2 = scrGetArg(1);
     temp_v0 = FUN_00203d74();
     temp_v3 = temp_v0 != 0;
     temp_v0 = 0;
@@ -42,7 +42,7 @@ unsigned char FUN_00330838(void)
     FUN_0038a1d4(temp_v1,temp_v2,1);
     return 0;
   }
-  return *(int *)(DAT_0057f554 + 0x10) == *(int *)(DAT_0057f554 + 0x14);
+  return *(int *)(g_eventCommand + 0x10) == *(int *)(g_eventCommand + 0x14);
 }
 
 } /* extern "C" */

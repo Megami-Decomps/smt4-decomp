@@ -7,9 +7,9 @@ extern "C" {
 int FUN_002826d4(int, int, int, int, unsigned int);
 int FUN_00282780(int, int, int, int);
 int FUN_002be624(...);
-int FUN_002c32a0(...);
+int memAlloc(...);
 int VectorSignedToFloat(int, int);
-int aeabi_idivmod(...);
+int __aeabi_idivmod(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 8 byte(s) */
@@ -151,9 +151,9 @@ extern unsigned int *DAT_004ea7f4; /* 0x4ea7f4 */
 /* Supplied declaration required: FUN_002826d4. */
 /* Supplied declaration required: FUN_00282780. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c32a0. */
-/* Supplied declaration required: aeabi_idivmod. */
-extern unsigned int aeabi_uidivmod(unsigned int);
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: __aeabi_idivmod. */
+extern unsigned int __aeabi_uidivmod(unsigned int);
 
 
 void FUN_001b1b94(int *param_1,int param_2)
@@ -234,31 +234,31 @@ void FUN_001b1b94(int *param_1,int param_2)
           case 0:
             break;
           case 1:
-            temp_v2 = aeabi_idivmod((int)*(char *)piVar8[2],temp_v8);
+            temp_v2 = __aeabi_idivmod((int)*(char *)piVar8[2],temp_v8);
             FUN_002be624(temp_v10,&LAB_001b1ef0,*piVar8,temp_v2);
             goto LAB_001b24c4;
           case 2:
-            temp_v2 = aeabi_idivmod(*(unsigned char *)piVar8[2],temp_v8);
+            temp_v2 = __aeabi_idivmod(*(unsigned char *)piVar8[2],temp_v8);
             FUN_002be624(temp_v10,&LAB_001b1ef0,*piVar8,temp_v2);
             goto LAB_001b24c4;
           case 3:
-            temp_v2 = aeabi_idivmod((int)*(short *)piVar8[2],temp_v8);
+            temp_v2 = __aeabi_idivmod((int)*(short *)piVar8[2],temp_v8);
             FUN_002be624(temp_v10,&LAB_001b1ef0,*piVar8,temp_v2);
             goto LAB_001b24c4;
           case 4:
-            temp_v2 = aeabi_idivmod(*(unsigned short *)piVar8[2],temp_v8);
+            temp_v2 = __aeabi_idivmod(*(unsigned short *)piVar8[2],temp_v8);
             FUN_002be624(temp_v10,&LAB_001b1ef0,*piVar8,temp_v2);
             goto LAB_001b24c4;
           case 5:
-            temp_v2 = aeabi_idivmod(*(unsigned int *)piVar8[2],temp_v8);
+            temp_v2 = __aeabi_idivmod(*(unsigned int *)piVar8[2],temp_v8);
             FUN_002be624(temp_v10,&LAB_001b1ef0,*piVar8,temp_v2);
             goto LAB_001b24c4;
           case 6:
-            temp_v2 = aeabi_uidivmod(*(unsigned int *)piVar8[2]);
+            temp_v2 = __aeabi_uidivmod(*(unsigned int *)piVar8[2]);
             FUN_002be624(temp_v10,&LAB_001b1ef0,*piVar8,temp_v2);
             goto LAB_001b24c4;
           case 7:
-            temp_v2 = aeabi_uidivmod(*(unsigned int *)piVar8[2]);
+            temp_v2 = __aeabi_uidivmod(*(unsigned int *)piVar8[2]);
             FUN_002be624(temp_v10,&LAB_001b2224,*piVar8,temp_v2);
             goto LAB_001b24c4;
           case 8:
@@ -343,7 +343,7 @@ void FUN_001b1b94(int *param_1,int param_2)
             temp_v5 = (int)temp_v9;
             temp_v8 = (int)(temp_v7 + 150.0f);
             puVar5 = (unsigned int *)0x10000;
-            FUN_002c32a0(0x10000,0x100,0,0x68,0x10);
+            memAlloc(0x10000,0x100,0,0x68,0x10);
             puVar5[2] = temp_v6;
             puVar5[3] = temp_v5;
             puVar5[4] = temp_v8;
@@ -585,7 +585,7 @@ LAB_001b24c4:
             FUN_002be624(temp_v10,&LAB_001b2964,*piVar8);
             break;
           case 0x2c:
-            temp_v2 = aeabi_idivmod((int)*(short *)piVar8[2],temp_v8);
+            temp_v2 = __aeabi_idivmod((int)*(short *)piVar8[2],temp_v8);
             FUN_002be624(temp_v10,&LAB_001b2cd0,*piVar8,temp_v2);
             break;
           case 0x2d:

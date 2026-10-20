@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 int FUN_002e6dd4(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
 
 
@@ -31,7 +31,7 @@ void nn_swkbd_CTR_InitializeConfig(unsigned int *param_1)
   *(unsigned short *)(param_1 + 9) = 0;
   FUN_002e6dd4((int)param_1 + 0x26,0x66);
   param_1[0x23] = 0;
-  FUN_002e6354(param_1 + 0x24,0x82);
+  sysMemClear(param_1 + 0x24,0x82);
   *(unsigned char *)((int)param_1 + 0x112) = 0;
   *(unsigned char *)((int)param_1 + 0x113) = 1;
   *(unsigned char *)(param_1 + 0x45) = 0;
@@ -57,7 +57,7 @@ void nn_swkbd_CTR_InitializeConfig(unsigned int *param_1)
   param_1[0x51] = 0xffffffff;
   *(unsigned short *)(param_1 + 0x52) = 0;
   param_1[0x53] = 0;
-  FUN_002e6354(param_1 + 0x54,0x202);
+  sysMemClear(param_1 + 0x54,0x202);
   return;
 }
 

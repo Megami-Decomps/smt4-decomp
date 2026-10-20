@@ -23,7 +23,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00157558. */
@@ -60,8 +60,8 @@ unsigned char FUN_002e169c(void)
   
   temp_v1 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
   if (*(char *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x5e0) != '\0') {
-    FUN_00157558(DAT_0059dbb4);
-    temp_v4 = DAT_0059dbb4;
+    FUN_00157558(g_renderCtx);
+    temp_v4 = g_renderCtx;
     temp_v2 = FUN_001692ac(1,0);
     piVar10 = (int *)(temp_v4 + 0x1258);
     temp_v8 = *piVar10;
@@ -123,8 +123,8 @@ unsigned char FUN_002e169c(void)
         }
       }
     }
-    temp_v1 = DAT_0059dbb4;
-    piVar10 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v1 = g_renderCtx;
+    piVar10 = (int *)(g_renderCtx + 0x1258);
     temp_v4 = *piVar10;
     temp_v2 = piVar10[temp_v4 + 2];
     *piVar10 = temp_v4 - 1;
@@ -132,8 +132,8 @@ unsigned char FUN_002e169c(void)
       (**(romwright_code **)(temp_v1 + 0x1274))();
       *(unsigned char *)(temp_v1 + 0x1270) = 0;
     }
-    FUN_0016c560(DAT_0059dbb4);
-    FUN_0016c410(DAT_0059dbb4);
+    FUN_0016c560(g_renderCtx);
+    FUN_0016c410(g_renderCtx);
   }
   return 0;
 }

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00180008(...);
+int jyoucyuGetTableEntry(...);
 int FUN_00184310(void);
-int FUN_00187180(...);
-int FUN_00192798(void);
+int dataTableGet(...);
+int dataTableGetEntries(void);
 int FUN_001a9698(void);
 int FUN_0032ff20(...);
 int FUN_0035ad50(unsigned int, unsigned char [104]);
@@ -59,10 +59,10 @@ extern signed char DAT_0057f0ac; /* 0x57f0ac */
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00180008. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00187180. */
-/* Supplied declaration required: FUN_00192798. */
+/* Supplied declaration required: dataTableGet. */
+/* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_001a9698. */
 extern int FUN_001ab888(void);
 extern int FUN_00213b5c(void);
@@ -161,7 +161,7 @@ unsigned int FUN_004a8750(unsigned int param_1,int param_2,int param_3,unsigned 
     }
   }
   if (param_5 != 0) {
-    FUN_00180008(0);
+    jyoucyuGetTableEntry(0);
   }
   temp_v7 = temp_v42;
   puVar12 = temp_v19;
@@ -217,8 +217,8 @@ LAB_004a8864:
                                       (int)*(short *)(puVar12 + 0x16) +
                                       (int)*(short *)(puVar12 + 0x18) +
                                       (int)*(short *)(puVar12 + 0x1a),(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00187180(0x22,0);
-  puVar2 = (unsigned int *)FUN_00192798();
+  dataTableGet(0x22,0);
+  puVar2 = (unsigned int *)dataTableGetEntries();
   temp_v8 = (float)VectorSignedToFloat(*puVar2,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(puVar2[1],(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v9 = (float)VectorSignedToFloat(puVar2[2],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -227,15 +227,15 @@ LAB_004a8864:
   temp_v8 = temp_v8 * 0.01f;
   temp_v9 = temp_v9 * 0.01f;
   if (DAT_0057f0ac != '\0') {
-    FUN_00180008(0);
-    FUN_00180008(0);
-    FUN_00180008(0);
-    FUN_00180008(0);
-    FUN_00180008(0);
-    FUN_00180008(0);
-    FUN_00180008(0);
-    FUN_00180008(0);
-    FUN_00180008(0);
+    jyoucyuGetTableEntry(0);
+    jyoucyuGetTableEntry(0);
+    jyoucyuGetTableEntry(0);
+    jyoucyuGetTableEntry(0);
+    jyoucyuGetTableEntry(0);
+    jyoucyuGetTableEntry(0);
+    jyoucyuGetTableEntry(0);
+    jyoucyuGetTableEntry(0);
+    jyoucyuGetTableEntry(0);
   }
   temp_v10 = temp_v10 / temp_v8;
   temp_v11 = temp_v11 / temp_v9;
@@ -253,8 +253,8 @@ LAB_004a8864:
     acStack_a4[temp_v7] = (char)(int)puVar3;
     temp_v7 = temp_v7 + 1;
   } while ((int)temp_v7 < 8);
-  FUN_00187180(0x22,1);
-  piVar4 = (int *)FUN_00192798();
+  dataTableGet(0x22,1);
+  piVar4 = (int *)dataTableGetEntries();
   temp_v39[0] = '\0';
   temp_v39[1] = '\x01';
   temp_v39[2] = '\x02';
@@ -282,7 +282,7 @@ LAB_004a8864:
   (*(unsigned int *)&uStack_304) = romwright_piece_2_2(((short)(temp_v3 / 100) + (short)(temp_v3 >> 0x1f)) -
                          (short)((long long)temp_v3 * 0x51eb851f >> 0x3f),5);
   if (DAT_0057f0ac != '\0') {
-    FUN_00180008(0);
+    jyoucyuGetTableEntry(0);
   }
   temp_v3 = 0;
   do {
@@ -297,7 +297,7 @@ LAB_004a8864:
     } while (temp_v4 < 6);
     temp_v6 = temp_v6 + temp_v5;
     if (DAT_0057f0ac != '\0') {
-      FUN_00180008(0);
+      jyoucyuGetTableEntry(0);
     }
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 8);
@@ -311,7 +311,7 @@ LAB_004a8864:
   FUN_0032ff20(temp_v42,temp_v36);
   temp_v6 = 0;
   if (DAT_0057f0ac != '\0') {
-    FUN_00180008(0);
+    jyoucyuGetTableEntry(0);
   }
   temp_v3 = 0;
   do {
@@ -321,11 +321,11 @@ LAB_004a8864:
       if (temp_v7 >= 0x20) {
         temp_v7 = 0x1f;
       }
-      FUN_00187180(0x22,2);
-      temp_v4 = FUN_00192798();
+      dataTableGet(0x22,2);
+      temp_v4 = dataTableGetEntries();
       temp_v6 = temp_v6 + *(int *)(temp_v4 + temp_v7 * 4);
       if (DAT_0057f0ac != '\0') {
-        FUN_00180008(0);
+        jyoucyuGetTableEntry(0);
       }
     }
     temp_v3 = temp_v3 + 1;
@@ -358,15 +358,15 @@ LAB_004a8864:
       if (temp_v2 >= 0x20) {
         temp_v2 = 0x1f;
       }
-      FUN_00187180(0x22,2);
-      temp_v3 = FUN_00192798();
+      dataTableGet(0x22,2);
+      temp_v3 = dataTableGetEntries();
       temp_v3 = *(int *)(temp_v3 + temp_v2 * 4);
       if (DAT_0057f0ac != '\0') {
-        FUN_00180008(0);
-        FUN_00180008(0);
+        jyoucyuGetTableEntry(0);
+        jyoucyuGetTableEntry(0);
       }
-      FUN_00187180(0x22,3);
-      piVar4 = (int *)FUN_00192798();
+      dataTableGet(0x22,3);
+      piVar4 = (int *)dataTableGetEntries();
       temp_v7 = (temp_v3 * piVar4[3] + temp_v6 * piVar4[2] +
                (int)(temp_v8 * temp_v10) * piVar4[1] + temp_v38 * *piVar4) *
                (*(unsigned short *)(temp_v40 + 0x9a) / 10);
@@ -375,12 +375,12 @@ LAB_004a8864:
         temp_v7 = temp_v7 * 3;
       }
       if (param_5 != 0) {
-        FUN_00180008(0);
-        FUN_00180008(0);
-        FUN_00180008(0);
-        FUN_00180008(0);
-        FUN_00180008(0);
-        FUN_00180008(0);
+        jyoucyuGetTableEntry(0);
+        jyoucyuGetTableEntry(0);
+        jyoucyuGetTableEntry(0);
+        jyoucyuGetTableEntry(0);
+        jyoucyuGetTableEntry(0);
+        jyoucyuGetTableEntry(0);
       }
       temp_v6 = FUN_003e46f4(0x2d);
       if (temp_v6 != 0) {

@@ -1,35 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039a3bc` (_code @ 0x39a3bc, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: `slots` and `index` are held in swapped callee-saved registers (r4/r5), and the state slot is accessed with a write-back load. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001acf98(int, unsigned int);
+#define STATE_READY 2
+#define STATE_BUSY 3
 
-extern int FUN_0018206c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001acf98. */
-extern unsigned int FUN_002adba8(int);
+typedef struct Slots {
+    /* 0x00 */ u8 unk00[0x94];
+    /* 0x94 */ int state[1];
+} Slots;
 
+int FUN_001acf98(int kind, u32 id);
+int FUN_0018206c(u32 kind, u32 id);
+u32 FUN_002adba8(int index);
 
-void FUN_0039a3bc(int param_1,int param_2)
-
+/* If slot `index` is not yet marked and FUN_0018206c has nothing for it, issues FUN_001acf98 and marks the slot ready. */
+void FUN_0039a3bc(Slots *slots, int index)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_002adba8(param_2);
-  temp_v1 = FUN_0018206c(0x2e,temp_v0);
-  if (temp_v1 == 0) {
-    param_1 = param_1 + param_2 * 4;
-    temp_v1 = *(int *)(param_1 + 0x94);
-    if ((temp_v1 != 3) && (temp_v1 != 2)) {
-      temp_v0 = FUN_002adba8(param_2);
-      FUN_001acf98(0x2e,temp_v0);
-      *(unsigned int *)(param_1 + 0x94) = 2;
+    u32 id = FUN_002adba8(index);
+
+    if (FUN_0018206c(0x2e, id) == 0) {
+        int *state = &slots->state[index];
+
+        if (*state != STATE_BUSY && *state != STATE_READY) {
+            id = FUN_002adba8(index);
+            FUN_001acf98(0x2e, id);
+            *state = STATE_READY;
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

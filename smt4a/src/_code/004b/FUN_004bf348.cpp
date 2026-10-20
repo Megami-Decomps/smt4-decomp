@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_003f0e20(...);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -37,12 +37,12 @@ extern unsigned int DAT_005714e8; /* 0x5714e8 */
 extern unsigned int DAT_005714ec; /* 0x5714ec */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 extern int FUN_001633a0(unsigned int);
 extern int FUN_0018719c(unsigned int);
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: FUN_003f0e20. */
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 unsigned int FUN_004bf348(fn_004bf348_arg0 *param_1,int param_2,int param_3)
@@ -59,7 +59,7 @@ unsigned int FUN_004bf348(fn_004bf348_arg0 *param_1,int param_2,int param_3)
   unsigned int in_fpscr;
   float temp_v5;
   
-  puVar1 = (unsigned int *)FUN_0014aa78();
+  puVar1 = (unsigned int *)btlGetMainState();
   if (((DAT_005714e8 & puVar1[0x116a]) != 0 || (DAT_005714ec & puVar1[0x116b]) != 0) ||
      (temp_v0 = FUN_0018719c(0x46e), temp_v0 != 0)) {
     return 1;
@@ -81,7 +81,7 @@ unsigned int FUN_004bf348(fn_004bf348_arg0 *param_1,int param_2,int param_3)
         }
         if (((param_2 != 1) && (param_2 == 2)) &&
            ((temp_v3 & DAT_00571474) != 0 || (DAT_00571470 & temp_v1) != 0)) {
-          temp_v2 = FUN_0014aa78();
+          temp_v2 = btlGetMainState();
           FUN_003f0e20(temp_v2,param_1);
           temp_v0 = 0;
           if (temp_v2 != 0) {
@@ -95,7 +95,7 @@ unsigned int FUN_004bf348(fn_004bf348_arg0 *param_1,int param_2,int param_3)
       else if (!((DAT_00571418 & temp_v1) == 0 && (DAT_0057141c & temp_v3) == 0)) {
         if (((param_2 != 1) && (param_2 == 2)) &&
            ((temp_v1 & DAT_00571470) != 0 || (temp_v3 & DAT_00571474) != 0)) {
-          temp_v2 = FUN_0014aa78();
+          temp_v2 = btlGetMainState();
           FUN_003f0e20(temp_v2,param_1);
           temp_v0 = 0;
           if (temp_v2 != 0) {
@@ -116,7 +116,7 @@ unsigned int FUN_004bf348(fn_004bf348_arg0 *param_1,int param_2,int param_3)
         }
         if (((param_2 != 1) && (param_2 == 2)) &&
            ((temp_v1 & DAT_00571470) != 0 || (temp_v3 & DAT_00571474) != 0)) {
-          temp_v2 = FUN_0014aa78();
+          temp_v2 = btlGetMainState();
           FUN_003f0e20(temp_v2,param_1);
           temp_v0 = 0;
           if (temp_v2 != 0) {
@@ -130,7 +130,7 @@ unsigned int FUN_004bf348(fn_004bf348_arg0 *param_1,int param_2,int param_3)
       temp_v1 = *puVar3;
       temp_v3 = puVar3[1];
       if ((((DAT_00571410 & temp_v1) != 0 || (DAT_00571414 & temp_v3) != 0) &&
-          (temp_v0 = aeabi_idivmod(puVar3[0x96] * 100,puVar3[0x97]), temp_v0 < 0x29)) && (temp_v4 < 0x50))
+          (temp_v0 = __aeabi_idivmod(puVar3[0x96] * 100,puVar3[0x97]), temp_v0 < 0x29)) && (temp_v4 < 0x50))
       {
         temp_v4 = 0x50;
       }

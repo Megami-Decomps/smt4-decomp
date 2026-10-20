@@ -4,13 +4,13 @@
 
 extern "C" {
 
-extern int DAT_004652a0; /* 0x4652a0 */
+extern int g_commandBufferCursor; /* 0x4652a0 */
 
 
 void FUN_002af390(int param_1,int param_2)
 
 {
-  DAT_004652a0 = ((param_2 - param_1) & 0xfffffffcU) + DAT_004652a0;
+  g_commandBufferCursor = ((param_2 - param_1) & 0xfffffffcU) + g_commandBufferCursor;
   return;
 }
 

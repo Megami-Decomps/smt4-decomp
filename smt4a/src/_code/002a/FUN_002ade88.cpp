@@ -17,7 +17,7 @@ typedef struct {
 
 extern int DAT_0057f268; /* 0x57f268 */
 
-extern int FUN_0019e4d4(unsigned int);
+extern int slotRecordFindById(unsigned int);
 /* Supplied declaration required: FUN_001ab854. */
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_001b4a90. */
@@ -199,7 +199,7 @@ void FUN_002ade88(void)
       if (temp_v7 < *(int *)(temp_v0 + 0xe84)) {
         do {
           temp_v4 = *(unsigned int *)(temp_v0 + temp_v7 * 4 + 0xe7c);
-          if ((-1 < (int)temp_v4) && (temp_v2 = FUN_0019e4d4(temp_v4 & 0xffff), temp_v2 != 0)) {
+          if ((-1 < (int)temp_v4) && (temp_v2 = slotRecordFindById(temp_v4 & 0xffff), temp_v2 != 0)) {
             temp_v3 = 0;
             do {
               if ((-1 < *(char *)(temp_v1 + temp_v3 + 0x1ca0)) &&

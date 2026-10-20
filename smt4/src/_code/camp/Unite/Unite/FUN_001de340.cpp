@@ -10,7 +10,7 @@ int FUN_0029defc(...);
 int FUN_0029f848(...);
 int FUN_002b7bca(...);
 int FUN_002b9024(void);
-int FUN_002c415c(...);
+int asdMemFree(...);
 
 int FUN_002624c4(...);
 int FUN_00262770(...);
@@ -18,8 +18,8 @@ int FUN_00269bc4(...);
 int FUN_00288154(int, unsigned short [14]);
 int FUN_002b066c(...);
 int FUN_002bb150(...);
-int FUN_002c4938(int *, int);
-int FUN_002c5300(...);
+int memClear(int *, int);
+int asdMemoryAlloc(...);
 int FUN_003c8bb8(int, int);
 int FUN_003c8da0(...);
 int FUN_003c8f58(int);
@@ -97,9 +97,9 @@ extern int FUN_002b63ac(void);
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_002bb150. */
 extern int FUN_002c09bc(void);
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_003c8bb8. */
 /* Supplied declaration required: FUN_003c8da0. */
 /* Supplied declaration required: FUN_003c8f58. */
@@ -253,7 +253,7 @@ void FUN_001de340(int *param_1)
       }
       param_1[0x16d] = 0;
       *temp_v28 = 0;
-      FUN_002c4938(temp_v19,16000);
+      memClear(temp_v19,16000);
       param_1[0x16e] = 0;
       temp_v16 = *(char *)((int)temp_v26 + 0x13) == '\0';
       temp_v2 = 0;
@@ -338,7 +338,7 @@ LAB_001dea48:
           temp_v2 = FUN_002a0d0c();
           temp_v17 = 1;
           temp_v13 = 0x100;
-          FUN_002c5300(0x100,0x100,0,0xa00);
+          asdMemoryAlloc(0x100,0x100,0,0xa00);
           temp_v3 = *piVar9;
           temp_v17 = temp_v13;
           FUN_003c9590(temp_v3,temp_v13);
@@ -444,7 +444,7 @@ LAB_001dedf4:
               temp_v20 = temp_v20 + 1;
             } while (temp_v20 < temp_v3);
           }
-          FUN_002c415c(temp_v17);
+          asdMemFree(temp_v17);
           temp_v2 = param_1[0x16f];
           while (temp_v2 < 0x1e) {
             FUN_002bb150(10000000,0);
@@ -504,7 +504,7 @@ LAB_001dedf4:
           temp_v2 = 0;
           temp_v17 = 1;
           piVar8 = (int *)0x100;
-          FUN_002c5300(0x100,0x100,0,param_1[0x16d] << 3);
+          asdMemoryAlloc(0x100,0x100,0,param_1[0x16d] << 3);
           piVar19 = (int *)0x0;
           piVar9 = (int *)0x0;
           piVar12 = temp_v9;
@@ -542,7 +542,7 @@ LAB_001dedf4:
             param_1[(int)piVar12 * 2 + 0x4e5] = temp_v4;
             piVar12 = (int *)((int)piVar12 + 1);
           }
-          FUN_002c415c(piVar8);
+          asdMemFree(piVar8);
         }
         temp_v13 = param_1[0x16d];
         if ((temp_v13 < (unsigned int)param_1[0x16c]) && (temp_v13 != 0)) {
@@ -551,7 +551,7 @@ LAB_001dedf4:
               temp_v2 = 0;
               temp_v17 = 1;
               piVar8 = (int *)0x100;
-              FUN_002c5300(0x100,0x100,0,param_1[0x16d] << 3);
+              asdMemoryAlloc(0x100,0x100,0,param_1[0x16d] << 3);
               piVar19 = (int *)0x0;
               piVar9 = (int *)0x0;
               piVar12 = temp_v10;
@@ -588,7 +588,7 @@ LAB_001dedf4:
                 param_1[(int)piVar12 * 2 + 0x4e5] = temp_v4;
                 piVar12 = (int *)((int)piVar12 + 1);
               }
-              FUN_002c415c(piVar8);
+              asdMemFree(piVar8);
               FUN_002b7bca(temp_v19,param_1[0x16d],8,&LAB_002dcf9c);
             }
             else {

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0011778e(...);
 int FUN_002e7232(...);
 int FUN_002e7378(...);
-int FUN_002e74c4(...);
+int strAssign(...);
 int FUN_002e7658(...);
 int FUN_002eb17c(...);
 int FUN_002ed258(...);
@@ -49,7 +49,7 @@ extern int *FUN_0011595c(int, int);
 /* Supplied declaration required: FUN_0011778e. */
 /* Supplied declaration required: FUN_002e7232. */
 /* Supplied declaration required: FUN_002e7378. */
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: FUN_002e7658. */
 /* Supplied declaration required: FUN_002eb17c. */
@@ -124,7 +124,7 @@ LAB_00109882:
           piVar2 = (int *)0x0;
           return piVar2;
         }
-        FUN_002e74c4(param_4,param_4->field_0xc + param_4->field_0x18 + temp_v1,temp_v0,0);
+        strAssign(param_4,param_4->field_0xc + param_4->field_0x18 + temp_v1,temp_v0,0);
         param_4->field_0x10 = temp_v0;
       }
       FUN_002e7378(temp_v4,0);

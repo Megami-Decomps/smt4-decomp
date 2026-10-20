@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 
 void FUN_0035ae58(int param_1,int param_2,unsigned int param_3,int param_4,int param_5)
@@ -17,7 +17,7 @@ void FUN_0035ae58(int param_1,int param_2,unsigned int param_3,int param_4,int p
   unsigned int temp_v3;
   int *piVar5;
   
-  temp_v0 = DAT_0059dbb4;
+  temp_v0 = g_renderCtx;
   temp_v2 = 0x140;
   if (param_5 == 0) {
     temp_v2 = 400;
@@ -39,16 +39,16 @@ void FUN_0035ae58(int param_1,int param_2,unsigned int param_3,int param_4,int p
     param_2 = 0;
   }
   temp_v1 = temp_v1 | (param_2 << 0x10);
-  piVar5 = (int *)(DAT_0059dbb4 + 0x1338);
+  piVar5 = (int *)(g_renderCtx + 0x1338);
   temp_v3 = piVar5[*piVar5 + 2];
   piVar5[*piVar5 + 2] = temp_v1;
   if (*(char *)(temp_v0 + 0x1350) != '\0' || temp_v3 != temp_v1) {
     (**(romwright_code **)(temp_v0 + 0x1354))();
     *(unsigned char *)(temp_v0 + 0x1350) = 0;
   }
-  temp_v0 = DAT_0059dbb4;
+  temp_v0 = g_renderCtx;
   param_3 = param_3 | (param_4 << 0x10);
-  piVar5 = (int *)(DAT_0059dbb4 + 0x1358);
+  piVar5 = (int *)(g_renderCtx + 0x1358);
   temp_v1 = piVar5[*piVar5 + 2];
   piVar5[*piVar5 + 2] = param_3;
   if (*(char *)(temp_v0 + 0x1370) != '\0' || temp_v1 != param_3) {

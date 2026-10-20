@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int *DAT_00447e88; /* 0x447e88 */
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern int *g_lmapScene; /* 0x447e88 */
+extern unsigned char g_gameState; /* 0x49f91c */
 
 
 void FUN_0027fa98(int param_1)
@@ -15,9 +15,9 @@ void FUN_0027fa98(int param_1)
   int *piVar1;
   int in_s0;
   
-  piVar1 = DAT_00447e88;
-  if (*DAT_00447e88 != param_1) {
-    *DAT_00447e88 = param_1;
+  piVar1 = g_lmapScene;
+  if (*g_lmapScene != param_1) {
+    *g_lmapScene = param_1;
     piVar1[1] = 0;
     if (param_1 == 1) {
       in_s0 = 0x40a00000;
@@ -27,7 +27,7 @@ void FUN_0027fa98(int param_1)
       piVar1[0x16] = in_s0;
     }
     else if (param_1 != 3) {
-      (*(unsigned char *)((unsigned char *)&DAT_0049f91c + 0x17c)) = 0;
+      (*(unsigned char *)((unsigned char *)&g_gameState + 0x17c)) = 0;
     }
   }
   return;

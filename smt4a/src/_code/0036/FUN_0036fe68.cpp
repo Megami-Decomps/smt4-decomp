@@ -9,7 +9,7 @@ int FUN_00234b30(void);
 int FUN_0023534c(void);
 int FUN_0023a52c(void);
 int FUN_00249a08(void);
-int FUN_0024b078(void);
+int mikadoSetCameraFlag80(void);
 int FUN_002737a8(void);
 int FUN_00296530(void);
 int FUN_00297c3c(void);
@@ -40,12 +40,12 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern int DAT_0058069c; /* 0x58069c */
+extern int g_mapDepartWork; /* 0x58069c */
 extern signed char DAT_005806b4; /* 0x5806b4 */
 extern signed char DAT_005806b5; /* 0x5806b5 */
 extern signed char DAT_005806b6; /* 0x5806b6 */
 extern int DAT_005806b8; /* 0x5806b8 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern int DAT_005f1610; /* 0x5f1610 */
 extern unsigned char DAT_005f161f; /* 0x5f161f */
@@ -58,7 +58,7 @@ extern int FUN_00162858(void);
 /* Supplied declaration required: FUN_0023534c. */
 /* Supplied declaration required: FUN_0023a52c. */
 /* Supplied declaration required: FUN_00249a08. */
-/* Supplied declaration required: FUN_0024b078. */
+/* Supplied declaration required: mikadoSetCameraFlag80. */
 /* Supplied declaration required: FUN_002737a8. */
 /* Supplied declaration required: FUN_00296530. */
 /* Supplied declaration required: FUN_00297c3c. */
@@ -68,7 +68,7 @@ extern int FUN_00162858(void);
 /* Supplied declaration required: FUN_002c23cc. */
 /* Supplied declaration required: FUN_002c2610. */
 /* Supplied declaration required: FUN_002c3398. */
-extern int FUN_002de890(void);
+extern int mikadoIsCameraNotState7(void);
 /* Supplied declaration required: FUN_002efc0c. */
 /* Supplied declaration required: FUN_0031416c. */
 /* Supplied declaration required: FUN_0033099c. */
@@ -93,13 +93,13 @@ unsigned int FUN_0036fe68(void)
     DAT_005806b6 = '\x01';
     FUN_002efc0c(1);
   }
-  temp_v0 = DAT_00581288;
+  temp_v0 = g_lmapScene;
   if (DAT_005f1610 == 3) {
     if (DAT_005806b4 == '\0') {
-      FUN_0024b078();
+      mikadoSetCameraFlag80();
       DAT_005806b4 = '\x01';
     }
-    temp_v0 = FUN_002de890();
+    temp_v0 = mikadoIsCameraNotState7();
     if (temp_v0 == 0) {
       return 0;
     }
@@ -136,7 +136,7 @@ unsigned int FUN_0036fe68(void)
     }
     if (DAT_005806b8 == 0xb) {
       DAT_005f161f = 1;
-      *(unsigned char *)(DAT_0058069c + 10) = 0;
+      *(unsigned char *)(g_mapDepartWork + 10) = 0;
       FUN_002235f4();
       FUN_002c2610();
     }
@@ -145,9 +145,9 @@ unsigned int FUN_0036fe68(void)
     }
   }
   else {
-    puVar3 = (unsigned int *)(DAT_00581288 + 0x20);
-    temp_v1 = *(unsigned int *)(DAT_00581288 + 0x24);
-    *(unsigned int *)(DAT_00581288 + 0x28) = *(unsigned int *)(DAT_00581288 + 0x1c);
+    puVar3 = (unsigned int *)(g_lmapScene + 0x20);
+    temp_v1 = *(unsigned int *)(g_lmapScene + 0x24);
+    *(unsigned int *)(g_lmapScene + 0x28) = *(unsigned int *)(g_lmapScene + 0x1c);
     *(unsigned int *)(temp_v0 + 0x2c) = *puVar3;
     *(unsigned int *)(temp_v0 + 0x30) = temp_v1;
     DAT_005806b8 = DAT_005806b8 + 1;
@@ -177,9 +177,9 @@ unsigned int FUN_0036fe68(void)
       FUN_0023534c();
       FUN_002737a8();
       FUN_00234b30();
-      *(unsigned char *)(DAT_0058069c + 10) = 1;
+      *(unsigned char *)(g_mapDepartWork + 10) = 1;
       FUN_002235f4();
-      FUN_003e5b9c(*(unsigned int *)(DAT_00581288 + 0x1a8));
+      FUN_003e5b9c(*(unsigned int *)(g_lmapScene + 0x1a8));
       FUN_00296530();
       FUN_0023a52c();
       DAT_005806b5 = 1;

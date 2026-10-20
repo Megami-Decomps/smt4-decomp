@@ -12,7 +12,7 @@ int FUN_00287aec(void);
 int FUN_00287b0c(void);
 int FUN_00287be4(void);
 int FUN_00291e40(int);
-int FUN_002a775c(void);
+int asdMdlManagerDestroy(void);
 int FUN_002df824(int, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -34,7 +34,7 @@ extern short DAT_0049faae; /* 0x49faae */
 /* Supplied declaration required: FUN_00287b0c. */
 /* Supplied declaration required: FUN_00287be4. */
 /* Supplied declaration required: FUN_00291e40. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: FUN_002df824. */
 
 
@@ -112,7 +112,7 @@ unsigned int FUN_001a8cf8(void)
         break;
       case 5:
         if (*(int *)(temp_v4 + 0x50) != 0) {
-          FUN_002a775c();
+          asdMdlManagerDestroy();
           *(unsigned int *)(temp_v4 + 0x50) = 0;
         }
         *(char *)(temp_v4 + 0x24) = '\0';

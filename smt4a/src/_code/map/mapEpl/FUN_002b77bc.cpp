@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(unsigned char [44], unsigned char *, char *);
-int FUN_00163060(int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int);
 int FUN_001642e4(unsigned char *, unsigned int [2], int, int);
 int FUN_0018719c(...);
 int FUN_001abbc4(void);
@@ -19,11 +19,11 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_002b79c0; /* 0x2b79c0 */
-extern unsigned int *DAT_00580c88; /* 0x580c88 */
+extern unsigned int *g_mapEpl; /* 0x580c88 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001642e4. */
 /* Supplied declaration required: FUN_0018719c. */
 /* Supplied declaration required: FUN_001abbc4. */
@@ -53,11 +53,11 @@ void FUN_002b77bc(int param_1,int param_2)
   unsigned char temp_v9 [44];
   
   temp_v7 = 0;
-  if (DAT_00580c88 == (unsigned int *)0x0) {
+  if (g_mapEpl == (unsigned int *)0x0) {
     puVar2 = (unsigned int *)0x100;
     temp_v8[0] = 1;
-    FUN_00163060(0x100,0x100,0,0x188);
-    DAT_00580c88 = puVar2;
+    asdMemoryAllocTracked(0x100,0x100,0,0x188);
+    g_mapEpl = puVar2;
     *puVar2 = 0;
     puVar2[1] = 0;
     temp_v1 = 0;
@@ -90,11 +90,11 @@ void FUN_002b77bc(int param_1,int param_2)
         }
         if (temp_v3 && temp_v1 == param_2) {
           FUN_00100388(temp_v9,&LAB_002b79c0,pcVar4 + 8);
-          puVar2 = DAT_00580c88;
+          puVar2 = g_mapEpl;
           puVar5 = temp_v9;
           temp_v1 = 0;
           do {
-            if (DAT_00580c88[temp_v1 * 6 + 7] == 0) {
+            if (g_mapEpl[temp_v1 * 6 + 7] == 0) {
               FUN_001642e4(puVar5,temp_v8,1,0x80);
               puVar2[temp_v1 * 6 + 6] = (unsigned int)puVar5;
               FUN_001abbc4();
@@ -105,12 +105,12 @@ void FUN_002b77bc(int param_1,int param_2)
             temp_v1 = temp_v1 + 1;
             temp_v2 = -1;
           } while (temp_v1 < 0x10);
-          puVar2 = DAT_00580c88;
+          puVar2 = g_mapEpl;
           temp_v6 = VectorSignedToFloat((int)*(short *)(pcVar4 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v4 = VectorSignedToFloat((int)*(short *)(pcVar4 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v5 = VectorSignedToFloat((int)*(short *)(pcVar4 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-          if (DAT_00580c88[temp_v2 * 6 + 7] != 0) {
-            DAT_00580c88[temp_v2 * 6 + 2] = temp_v6;
+          if (g_mapEpl[temp_v2 * 6 + 7] != 0) {
+            g_mapEpl[temp_v2 * 6 + 2] = temp_v6;
             puVar2[temp_v2 * 6 + 5] = (int)temp_v7;
             puVar2[temp_v2 * 6 + 3] = temp_v4;
             puVar2[temp_v2 * 6 + 4] = temp_v5;

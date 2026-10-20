@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int FUN_002e3390(unsigned int);
+extern int wstrlen(unsigned int);
 /* Supplied declaration required: FUN_0043e088. */
 /* Supplied declaration required: FUN_0043e31c. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -41,7 +41,7 @@ int FUN_0043df7c(int param_1,unsigned int param_2)
     *piVar5 = 0;
   }
   temp_v2[2] = 0;
-  temp_v0 = FUN_002e3390(param_2);
+  temp_v0 = wstrlen(param_2);
   temp_v2[0] = temp_v0 + 1U;
   temp_v2[1] = 0x100;
   puVar1 = temp_v2;

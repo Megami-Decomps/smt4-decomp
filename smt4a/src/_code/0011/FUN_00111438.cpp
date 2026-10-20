@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_00111482(unsigned int, unsigned int, unsigned char [32], unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_002e74c4(unsigned char [32], unsigned int, unsigned int, unsigned int);
-int FUN_002e7634(unsigned char [32]);
-int FUN_002ec9f4(unsigned char [32]);
+int strAssign(unsigned char [32], unsigned int, unsigned int, unsigned int);
+int strInit(unsigned char [32]);
+int strDestroy(unsigned char [32]);
 
 /* stack frame of param_7: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -18,10 +18,10 @@ typedef struct {
 } param_7_stack;
 
 /* Supplied declaration required: FUN_00111482. */
-extern unsigned int FUN_002e3390(unsigned int);
-/* Supplied declaration required: FUN_002e74c4. */
-/* Supplied declaration required: FUN_002e7634. */
-/* Supplied declaration required: FUN_002ec9f4. */
+extern unsigned int wstrlen(unsigned int);
+/* Supplied declaration required: strAssign. */
+/* Supplied declaration required: strInit. */
+/* Supplied declaration required: strDestroy. */
 
 
 unsigned int
@@ -41,11 +41,11 @@ FUN_00111438(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
   uStack_20 = param_2;
   uStack_1c = param_3;
   temp_v2 = param_4;
-  FUN_002e7634(temp_v1);
-  temp_v0 = FUN_002e3390(param_3);
-  FUN_002e74c4(temp_v1,param_3,temp_v0,0xffffffff);
+  strInit(temp_v1);
+  temp_v0 = wstrlen(param_3);
+  strAssign(temp_v1,param_3,temp_v0,0xffffffff);
   FUN_00111482(param_1,param_2,temp_v1,temp_v2,param_5,param_6,param_7);
-  FUN_002ec9f4(temp_v1);
+  strDestroy(temp_v1);
   return param_1;
 }
 

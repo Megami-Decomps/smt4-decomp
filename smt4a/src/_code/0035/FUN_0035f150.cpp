@@ -4,10 +4,10 @@
 
 extern "C" {
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-extern unsigned int FUN_00236038(unsigned int);
-extern int FUN_004ee568(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 unsigned int FUN_0035f150(void)
@@ -17,10 +17,10 @@ unsigned int FUN_0035f150(void)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
   if (temp_v1 < 0x10) {
-    temp_v2 = FUN_004ee568(DAT_0057113c);
+    temp_v2 = btlUnitGet(g_btlScriptUnit);
     *(unsigned int *)(*(int *)(temp_v2 + 0x20) + temp_v1 * 4 + 0x3b4) = temp_v0;
   }
   return 1;

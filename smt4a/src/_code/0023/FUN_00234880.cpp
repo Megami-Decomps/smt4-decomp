@@ -6,23 +6,23 @@ extern "C" {
 
 int FUN_00152f44(void);
 int FUN_0018719c(...);
-int FUN_00192748(unsigned int);
-int FUN_00192798(void);
+int dataTableGetCount(unsigned int);
+int dataTableGetEntries(void);
 int FUN_002d8b58(int, int);
 int VectorSignedToFloat(int, int);
 
-extern int *DAT_0058104c; /* 0x58104c */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int *g_popupState; /* 0x58104c */
+extern int g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0014bef4(unsigned int);
 /* Supplied declaration required: FUN_00152f44. */
 extern int FUN_0015688c(void);
 extern int FUN_0017760c(void);
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018719c. */
-/* Supplied declaration required: FUN_00192748. */
-/* Supplied declaration required: FUN_00192798. */
+/* Supplied declaration required: dataTableGetCount. */
+/* Supplied declaration required: dataTableGetEntries. */
 extern int FUN_001ab854(void);
 extern int FUN_001ab888(void);
 extern int FUN_001b347c(void);
@@ -55,12 +55,12 @@ void FUN_00234880(void)
   unsigned long long temp_v14;
   
   FUN_00152f44();
-  if ((*DAT_0058104c == 0) && (temp_v2 = FUN_0015688c(), temp_v2 != 0)) {
+  if ((*g_popupState == 0) && (temp_v2 = FUN_0015688c(), temp_v2 != 0)) {
     temp_v1 = 0;
     temp_v3 = FUN_0018719c(0x1a2);
     if (((temp_v3 != 0) && (temp_v3 = FUN_0014bef4(99), temp_v3 + 1 < 0x33)) &&
-       ((DAT_005f15fc == 0x1c || DAT_005f15fc == 0x1d ||
-        ((DAT_005f15fc == 0x1e || DAT_005f15fc == 0x1f) || DAT_005f15fc == 0x20)))) {
+       ((g_gameState == 0x1c || g_gameState == 0x1d ||
+        ((g_gameState == 0x1e || g_gameState == 0x1f) || g_gameState == 0x20)))) {
       temp_v1 = 1;
     }
     temp_v3 = FUN_003e0024();
@@ -82,15 +82,15 @@ void FUN_00234880(void)
     temp_v12 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v13 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v14 = (unsigned long long)(unsigned int)((temp_v12 / temp_v13) * 100.0f);
-    temp_v8 = FUN_00187180(0x43,0);
-    FUN_00192798();
-    temp_v3 = FUN_00192748(temp_v8);
+    temp_v8 = dataTableGet(0x43,0);
+    dataTableGetEntries();
+    temp_v3 = dataTableGetCount(temp_v8);
     temp_v11 = 0;
     if (0 < temp_v3) {
       do {
-        temp_v8 = FUN_00187180(0x43,0);
-        temp_v4 = FUN_00192798();
-        temp_v9 = FUN_00192748(temp_v8);
+        temp_v8 = dataTableGet(0x43,0);
+        temp_v4 = dataTableGetEntries();
+        temp_v9 = dataTableGetCount(temp_v8);
         puVar13 = (unsigned int *)0x0;
         if (temp_v11 < temp_v9) {
           puVar13 = (unsigned int *)(temp_v4 + temp_v11 * 0x20);
@@ -98,7 +98,7 @@ void FUN_00234880(void)
         if ((((puVar13[1] == 8 || puVar13[1] == 9) && (*puVar13 == (unsigned int)*(unsigned short *)(temp_v2 + 300)))
             && (((short)puVar13[2] == 0 || (temp_v4 = FUN_0018719c(), temp_v4 != 0)))) &&
            ((*(short *)((int)puVar13 + 10) == 0 || (temp_v4 = FUN_0018719c(), temp_v4 == 0)))) {
-          piVar3 = DAT_0058104c;
+          piVar3 = g_popupState;
           temp_v12 = (float)VectorSignedToFloat((int)(short)puVar13[3],(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v13 = (float)temp_v14;
           if (puVar13[1] != 8) {
@@ -106,15 +106,15 @@ void FUN_00234880(void)
                        ((unsigned int)(temp_v12 <= temp_v13) << 0x1d);
             temp_v0 = (unsigned char)(in_fpscr >> 0x18);
             if (!(unsigned char)((temp_v0 >> 5) & 1) || (unsigned char)(temp_v0 >> 6)) {
-              *DAT_0058104c = 5;
+              *g_popupState = 5;
               piVar3[1] = 0;
               if (temp_v1) {
                 temp_v2 = FUN_002d8b58(9,0xad);
-                DAT_0058104c[5] = temp_v2;
+                g_popupState[5] = temp_v2;
                 return;
               }
               temp_v2 = FUN_002d8b58(9,*(unsigned short *)(temp_v2 + 300));
-              DAT_0058104c[5] = temp_v2;
+              g_popupState[5] = temp_v2;
               return;
             }
           }
@@ -123,15 +123,15 @@ void FUN_00234880(void)
                        ((unsigned int)(temp_v13 <= temp_v12) << 0x1d);
             temp_v0 = (unsigned char)(in_fpscr >> 0x18);
             if (!(unsigned char)((temp_v0 >> 5) & 1) || (unsigned char)(temp_v0 >> 6)) {
-              *DAT_0058104c = 5;
+              *g_popupState = 5;
               piVar3[1] = 0;
               if (temp_v1) {
                 temp_v2 = FUN_002d8b58(8,0xad);
-                DAT_0058104c[5] = temp_v2;
+                g_popupState[5] = temp_v2;
                 return;
               }
               temp_v2 = FUN_002d8b58(8,*(unsigned short *)(temp_v2 + 300));
-              DAT_0058104c[5] = temp_v2;
+              g_popupState[5] = temp_v2;
               return;
             }
           }

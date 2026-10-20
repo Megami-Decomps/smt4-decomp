@@ -7,8 +7,8 @@ extern "C" {
 int FUN_0020d8ec(void);
 int FUN_002aa18c(...);
 
-extern int DAT_00447600; /* 0x447600 */
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern int g_mapEnemy; /* 0x447600 */
+extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_0020d8ec. */
 /* Supplied declaration required: FUN_002aa18c. */
@@ -37,8 +37,8 @@ void FUN_001f9ce0(void)
   unsigned long long temp_v16;
   float temp_v17;
   
-  temp_v1 = DAT_00447600;
-  if (((DAT_00447600 != 0) && (*(int *)(DAT_00447600 + 4) == 8)) && ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x20)) == '\0')) {
+  temp_v1 = g_mapEnemy;
+  if (((g_mapEnemy != 0) && (*(int *)(g_mapEnemy + 4) == 8)) && ((*(signed char *)((unsigned char *)&g_gameState + 0x20)) == '\0')) {
     temp_v13 = 90.0f;
     temp_v14 = 1.9888889f;
     temp_v11 = 198.0f;

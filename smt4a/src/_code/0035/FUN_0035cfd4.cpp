@@ -1,32 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035cfd4` (_code @ 0x35cfd4, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: store scheduling only: retail stores 13 then 0 and uses a writeback `str [r1,#468]!` for the last store */
+/* Resets the FUN_00162e8c state and starts mode 13 with the scrGetArg value as its argument; always returns 1. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00162e8c(void);
+typedef struct State {
+    /* 0x000 */ u8 unk000[0x1D0];
+    /* 0x1D0 */ u32 mode;
+    /* 0x1D4 */ u32 modeStep;
+    /* 0x1D8 */ u8 unk1D8[0x50];
+    /* 0x228 */ u32 value;
+    /* 0x22C */ u8 unk22C[0x0C];
+    /* 0x238 */ u32 value2;
+} State;
 
-extern int DAT_00581288; /* 0x581288 */
+extern State *g_lmapScene;
 
-/* Supplied declaration required: FUN_00162e8c. */
-extern unsigned int FUN_00236038(unsigned int);
+extern void FUN_00162e8c(void);
+extern u32 scrGetArg(u32 arg);
 
-
-unsigned int FUN_0035cfd4(void)
-
+s32 FUN_0035cfd4(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  FUN_00162e8c();
-  temp_v1 = FUN_00236038(0);
-  temp_v0 = DAT_00581288;
-  *(unsigned int *)(DAT_00581288 + 0x228) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0x1d0) = 0xd;
-  *(unsigned int *)(temp_v0 + 0x1d4) = 0;
-  *(unsigned int *)(temp_v0 + 0x238) = temp_v1;
-  return 1;
+    State *state;
+    u32 value;
+
+    FUN_00162e8c();
+    value = scrGetArg(0);
+    state = g_lmapScene;
+    state->value = value;
+    state->mode = 13;
+    state->modeStep = 0;
+    state->value2 = value;
+    return 1;
 }
 
-} /* extern "C" */
+}

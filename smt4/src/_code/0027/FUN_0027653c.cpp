@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0019dc04(void);
 int FUN_0019dd38(void);
 int FUN_001a8cf8(void);
-int FUN_001b4304(void);
+int mapEplUpdateEntries(void);
 int FUN_001b4b54(void);
 int FUN_001d350c(void);
 int FUN_001d36cc(void);
@@ -33,12 +33,12 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_00447e28; /* 0x447e28 */
+extern int g_mapMain; /* 0x447e28 */
 
 /* Supplied declaration required: FUN_0019dc04. */
 /* Supplied declaration required: FUN_0019dd38. */
 /* Supplied declaration required: FUN_001a8cf8. */
-/* Supplied declaration required: FUN_001b4304. */
+/* Supplied declaration required: mapEplUpdateEntries. */
 /* Supplied declaration required: FUN_001b4b54. */
 /* Supplied declaration required: FUN_001d350c. */
 /* Supplied declaration required: FUN_001d36cc. */
@@ -68,8 +68,8 @@ void FUN_0027653c(void)
   int temp_v0;
   unsigned char temp_v1;
   
-  temp_v0 = DAT_00447e28;
-  FUN_001b4304();
+  temp_v0 = g_mapMain;
+  mapEplUpdateEntries();
   FUN_002d5374();
   FUN_002f3c28();
   FUN_00208cbc();

@@ -10,7 +10,7 @@ int FUN_002c159c(int);
 int FUN_002c1e30(int, int);
 int FUN_002c1edc(int, float *, float *, float [7]);
 int FUN_002c2044(int, int);
-int FUN_002c4938(int, int);
+int memClear(int, int);
 
 /* stack frame of void: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern int DAT_0044e178; /* 0x44e178 */
+extern int g_statusCamera; /* 0x44e178 */
 
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: FUN_002bc644. */
@@ -29,7 +29,7 @@ extern int DAT_0044e178; /* 0x44e178 */
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
 /* Supplied declaration required: FUN_002c2044. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_002d9208(void)
@@ -48,13 +48,13 @@ void FUN_002d9208(void)
   float temp_v8;
   float temp_v9 [7];
   
-  temp_v0 = DAT_0044e178;
-  if (DAT_0044e178 != 0) {
+  temp_v0 = g_statusCamera;
+  if (g_statusCamera != 0) {
     temp_v2 = 0.0f;
     temp_v3 = 0x40900000;
     temp_v4 = 0x40c9999a;
     temp_v5 = 0xbf800000;
-    FUN_002c4938(DAT_0044e178,0x53c);
+    memClear(g_statusCamera,0x53c);
     *(unsigned int *)(temp_v0 + 0x530) = 0x420c0000;
     *(unsigned int *)(temp_v0 + 0x534) = 0x3dcccccd;
     *(unsigned int *)(temp_v0 + 0x538) = 0x46c80000;

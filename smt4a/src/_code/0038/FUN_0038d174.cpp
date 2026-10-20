@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_003283ac(int);
+int scrSetResult(int);
 
 extern unsigned int DAT_005702d8; /* 0x5702d8 */
 extern unsigned int DAT_005702dc; /* 0x5702dc */
 
-extern int FUN_0014aa78(void);
-/* Supplied declaration required: FUN_003283ac. */
+extern int btlGetMainState(void);
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_0038d174(void)
@@ -19,8 +19,8 @@ unsigned int FUN_0038d174(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_0014aa78();
-  FUN_003283ac((*(unsigned int *)(temp_v0 + 0x45a0) & DAT_005702d8) != 0 ||
+  temp_v0 = btlGetMainState();
+  scrSetResult((*(unsigned int *)(temp_v0 + 0x45a0) & DAT_005702d8) != 0 ||
                (*(unsigned int *)(temp_v0 + 0x45a4) & DAT_005702dc) != 0);
   return 1;
 }

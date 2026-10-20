@@ -21,7 +21,7 @@ extern signed char DAT_0044e7c3; /* 0x44e7c3 */
 extern unsigned char DAT_0044e7c5; /* 0x44e7c5 */
 extern unsigned char DAT_0044e7c8; /* 0x44e7c8 */
 extern unsigned char DAT_004a95c0; /* 0x4a95c0 */
-extern unsigned char DAT_004e6f64; /* 0x4e6f64 */
+extern unsigned char g_dspsndState; /* 0x4e6f64 */
 
 /* Supplied declaration required: FUN_0015d38c. */
 /* Supplied declaration required: FUN_002bb150. */
@@ -38,10 +38,10 @@ void FUN_002a208c(unsigned int param_1,unsigned int param_2)
   unsigned char *puVar1;
   
   if (DAT_0044e7c2 != '\0') {
-    puVar1 = &DAT_004e6f64;
-    nn_snd_CTR_Dspsnd_WaitPipe_15D540(&DAT_004e6f64,param_2,0x952b80,0);
+    puVar1 = &g_dspsndState;
+    nn_snd_CTR_Dspsnd_WaitPipe_15D540(&g_dspsndState,param_2,0x952b80,0);
     if (puVar1 != (unsigned char *)0x0) {
-      FUN_0015d38c(&DAT_004e6f64);
+      FUN_0015d38c(&g_dspsndState);
       DAT_0044e7c5 = 0;
       return;
     }
@@ -55,8 +55,8 @@ void FUN_002a208c(unsigned int param_1,unsigned int param_2)
     FUN_002bb150(&DAT_004a95c0,0);
     return;
   }
-  nn_snd_CTR_Dspsnd_WaitPipe_15D5E0(&DAT_004e6f64);
-  FUN_0015d38c(&DAT_004e6f64);
+  nn_snd_CTR_Dspsnd_WaitPipe_15D5E0(&g_dspsndState);
+  FUN_0015d38c(&g_dspsndState);
   DAT_0044e7c5 = 0;
   return;
 }

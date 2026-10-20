@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002c415c(...);
+int asdMemFree(...);
 int nw_gfx_res_ResGraphicsFile_Cleanup(int *);
 
 typedef struct fn_00263588_arg0 fn_00263588_arg0;
@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Cleanup. */
 
 
@@ -47,8 +47,8 @@ unsigned int FUN_00263588(fn_00263588_arg0 *param_1,unsigned int param_2,unsigne
   if (temp_v0 != 0) {
     nw_gfx_res_ResGraphicsFile_Cleanup(&temp_v0);
   }
-  FUN_002c415c(*(unsigned int *)(param_1 + 1));
-  FUN_002c415c(param_1);
+  asdMemFree(*(unsigned int *)(param_1 + 1));
+  asdMemFree(param_1);
   return 1;
 }
 

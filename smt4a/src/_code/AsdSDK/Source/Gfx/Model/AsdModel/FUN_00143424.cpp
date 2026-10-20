@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001529a0(...);
 int FUN_0015493c(int, int *, unsigned int **, unsigned int **);
 int FUN_0015dda4(void);
-int FUN_00168188(void);
+int asdMemoryGetDefaultAllocator(void);
 int FUN_0017314c(int *, unsigned int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -52,7 +52,7 @@ extern float DAT_005b3c44; /* 0x5b3c44 */
 /* Supplied declaration required: FUN_001529a0. */
 /* Supplied declaration required: FUN_0015493c. */
 /* Supplied declaration required: FUN_0015dda4. */
-/* Supplied declaration required: FUN_00168188. */
+/* Supplied declaration required: asdMemoryGetDefaultAllocator. */
 /* Supplied declaration required: FUN_0017314c. */
 
 
@@ -94,7 +94,7 @@ void FUN_00143424(void)
   
   puVar2 = (unsigned int *)&temp_v6;
   puVar4 = (unsigned int *)&temp_v6;
-  temp_v0 = FUN_00168188();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   temp_v3 = 0x4170000041a00000;
   temp_v4 = 1.0f;
   puVar10 = (unsigned int *)0x0;
@@ -164,7 +164,7 @@ void FUN_00143424(void)
       temp_v15 = puVar10;
       temp_v20 = puVar10;
       temp_v21 = puVar10;
-      temp_v1 = FUN_00168188();
+      temp_v1 = asdMemoryGetDefaultAllocator();
       temp_v6 = 0;
       VectorUnsignedToFloat((unsigned int)DAT_005b3bf8,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_0015493c(temp_v1,&temp_v11,&temp_v14,&temp_v20);
@@ -178,7 +178,7 @@ void FUN_00143424(void)
     temp_v12 = puVar10;
     temp_v13 = temp_v5;
     temp_v14 = puVar10;
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     FUN_001529a0(temp_v1,&temp_v9,&temp_v12,0);
     DAT_005b3c38 = temp_v1;
     *(float *)(temp_v1 + 0x294) = temp_v4 / DAT_005b3c44;
@@ -190,7 +190,7 @@ void FUN_00143424(void)
   temp_v18 = puVar10;
   uStack_48 = temp_v5;
   temp_v19 = puVar10;
-  temp_v2 = FUN_00168188();
+  temp_v2 = asdMemoryGetDefaultAllocator();
   FUN_001529a0(temp_v2,&temp_v16,&temp_v18,0);
   DAT_005b3c20 = temp_v2;
   return;

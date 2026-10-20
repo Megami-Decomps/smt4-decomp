@@ -32,7 +32,7 @@ typedef struct {
 extern unsigned char LAB_003a25c0; /* 0x3a25c0 */
 extern unsigned char LAB_003a2838; /* 0x3a2838 */
 extern unsigned char LAB_003a283c; /* 0x3a283c */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
@@ -117,8 +117,8 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
       temp_v4 = (temp_v6 + temp_v9) - (*(unsigned short *)(temp_v4 + 4) & 0xffff7fff);
       temp_v5 = FUN_002bed98(temp_v5);
       FUN_00231bcc(param_1 + 0x380,0x4d,temp_v4,temp_v5 + temp_v3,temp_v2,1);
-      temp_v4 = DAT_0044ea00;
-      piVar12 = (int *)(DAT_0044ea00 + 0x130c);
+      temp_v4 = g_titleScene;
+      piVar12 = (int *)(g_titleScene + 0x130c);
       temp_v5 = piVar12[*piVar12 + 2];
       piVar12[*piVar12 + 2] = 0;
       if (*(char *)(temp_v4 + 0x1324) != '\0' || temp_v5 != 0) {

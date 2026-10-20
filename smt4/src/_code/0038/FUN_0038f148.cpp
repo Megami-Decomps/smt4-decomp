@@ -9,7 +9,7 @@ int FUN_0023392c(unsigned int *, unsigned int, int);
 int FUN_00233d78(unsigned int *);
 int FUN_00233db8(unsigned int *, int);
 int FUN_002340e4(int *);
-int FUN_0027e990(unsigned int);
+int aocClearDisplayFlag(unsigned int);
 int FUN_0027eb30(unsigned int *);
 int FUN_002a126c(int *, unsigned int);
 int FUN_002b8244(int);
@@ -24,8 +24,8 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern int DAT_00432fc8; /* 0x432fc8 */
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern int g_aocMain; /* 0x432fc8 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_00126fb8. */
 /* Supplied declaration required: FUN_0023392c. */
@@ -33,7 +33,7 @@ extern unsigned int DAT_00433158; /* 0x433158 */
 /* Supplied declaration required: FUN_00233db8. */
 /* Supplied declaration required: FUN_002340e4. */
 extern int FUN_0026b564(void);
-/* Supplied declaration required: FUN_0027e990. */
+/* Supplied declaration required: aocClearDisplayFlag. */
 extern int FUN_0027ea14(unsigned int *);
 /* Supplied declaration required: FUN_0027eb30. */
 /* Supplied declaration required: FUN_002a126c. */
@@ -65,8 +65,8 @@ void FUN_0038f148(unsigned int *param_1)
   unsigned int uStack_1c;
   
   FUN_002340e4(&temp_v3);
-  temp_v0 = *(unsigned int *)(DAT_00432fc8 + 0x754);
-  *(unsigned int *)(DAT_00432fc8 + 0x754) = temp_v0 & 0xffffff8f;
+  temp_v0 = *(unsigned int *)(g_aocMain + 0x754);
+  *(unsigned int *)(g_aocMain + 0x754) = temp_v0 & 0xffffff8f;
   if ((temp_v0 & 0x10) != 0) {
     FUN_0023392c(param_1,0xffffffff,0);
     FUN_0027eb30(param_1 + 0x46c);
@@ -77,12 +77,12 @@ void FUN_0038f148(unsigned int *param_1)
       (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
       param_1[0x82] = 0;
     }
-    FUN_00126fb8(DAT_00432fc8 + 0x80);
-    FUN_0027e990(DAT_00433158);
-    FUN_002ba9ac(DAT_00433158);
-    temp_v1 = FUN_002ad1e0(DAT_00432fc8 + 0x98);
+    FUN_00126fb8(g_aocMain + 0x80);
+    aocClearDisplayFlag(g_aocSystem);
+    FUN_002ba9ac(g_aocSystem);
+    temp_v1 = FUN_002ad1e0(g_aocMain + 0x98);
     if (temp_v1 != 0) {
-      *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xfffeffff;
+      *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
     }
   }
   else {
@@ -98,7 +98,7 @@ void FUN_0038f148(unsigned int *param_1)
             return;
           }
           FUN_00233db8(param_1,1);
-          FUN_00387af0(DAT_00433158);
+          FUN_00387af0(g_aocSystem);
           temp_v0 = 2;
         }
         else {
@@ -111,11 +111,11 @@ void FUN_0038f148(unsigned int *param_1)
       }
       if (temp_v2 != 3) {
         if ((temp_v2 == 9999 && (temp_v0 & 4) == 0) && ((temp_v0 & 8) == 0)) {
-          FUN_0027e990(DAT_00433158);
-          FUN_002ba9ac(DAT_00433158);
-          temp_v1 = FUN_002ad1e0(DAT_00432fc8 + 0x98);
+          aocClearDisplayFlag(g_aocSystem);
+          FUN_002ba9ac(g_aocSystem);
+          temp_v1 = FUN_002ad1e0(g_aocMain + 0x98);
           if (temp_v1 != 0) {
-            *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xfffeffff;
+            *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
           }
           piVar3 = (int *)param_1[0x82];
           param_1[1] = 3;
@@ -130,8 +130,8 @@ void FUN_0038f148(unsigned int *param_1)
       else {
         temp_v1 = FUN_0026b564();
         if (temp_v1 != 0) {
-          FUN_0027e990(DAT_00433158);
-          FUN_002a126c(&temp_v4,DAT_00433158);
+          aocClearDisplayFlag(g_aocSystem);
+          FUN_002a126c(&temp_v4,g_aocSystem);
           param_1[1] = 5;
           param_1[2] = 0;
           piVar3 = (int *)param_1[0x82];
@@ -145,7 +145,7 @@ void FUN_0038f148(unsigned int *param_1)
       }
     }
     else if ((*param_1 & 0x200) != 0) {
-      FUN_003887cc(&temp_v4,DAT_00433158);
+      FUN_003887cc(&temp_v4,g_aocSystem);
       temp_v3 = temp_v4;
       uStack_3c = uStack_28;
       uStack_38 = uStack_24;
@@ -159,9 +159,9 @@ void FUN_0038f148(unsigned int *param_1)
         temp_v1 = FUN_002a1520((unsigned int *)&temp_v3);
         if (temp_v1 != 0) {
           param_1[2] = 9999;
-          temp_v1 = FUN_002ad1e0(DAT_00432fc8 + 0x98);
+          temp_v1 = FUN_002ad1e0(g_aocMain + 0x98);
           if (temp_v1 != 0) {
-            *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xfffeffff;
+            *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
           }
           FUN_00233d78(param_1);
           return;

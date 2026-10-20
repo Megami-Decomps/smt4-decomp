@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00236038(int);
+int scrGetArg(int);
 int FUN_00318174(unsigned int, unsigned int, int);
 int SBORROW4(int, int);
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int FUN_00203d74(void);
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_00318174. */
 
 
@@ -24,9 +24,9 @@ unsigned int FUN_0034875c(void)
   int temp_v3;
   unsigned char temp_v4;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  temp_v2 = FUN_00236038(2);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = scrGetArg(2);
   temp_v3 = FUN_00203d74();
   temp_v4 = temp_v3 != 0;
   temp_v3 = 0;

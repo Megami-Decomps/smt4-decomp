@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_0013f1b8(...);
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdTMTexTableLoadTmx(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_001acf98(...);
 
 /* stack frame of param_4: 4 slot(s), 16 byte(s) */
@@ -27,10 +27,10 @@ extern unsigned char LAB_0035c660; /* 0x35c660 */
 extern int DAT_0057f3c4; /* 0x57f3c4 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_0013f1b8. */
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 extern int FUN_0018206c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001acf98. */
 extern int FUN_00341940(unsigned int);
@@ -50,7 +50,7 @@ int FUN_0035c3d0(unsigned int param_1,int param_2,int param_3,int param_4)
   do {
     if (*(int *)(temp_v1 * 4 + 0x57f3c8) == 0) {
       piVar1 = (int *)0x100;
-      FUN_00163060(0x100,0x100,0,0x38,1);
+      asdMemoryAllocTracked(0x100,0x100,0,0x38,1);
       *(int **)(temp_v1 * 4 + 0x57f3c8) = piVar1;
       if (temp_v1 >= 2) {
         return 0;
@@ -71,12 +71,12 @@ int FUN_0035c3d0(unsigned int param_1,int param_2,int param_3,int param_4)
       piVar1[0xd] = 0;
       FUN_00100388(temp_v2,&LAB_0035c628,temp_v1);
       puVar2 = temp_v2;
-      FUN_0014e38c(puVar2,3,0,0,FUN_00283a48,0,piVar1);
+      asdProcessCreateSimple(puVar2,3,0,0,FUN_00283a48,0,piVar1);
       *piVar1 = (int)puVar2;
       FUN_00100388(temp_v2,&LAB_0035c640,temp_v1);
-      FUN_0015155c(temp_v2,0x85,0,0,FUN_002835f4,0,piVar1,*piVar1);
+      taskCreateDraw(temp_v2,0x85,0,0,FUN_002835f4,0,piVar1,*piVar1);
       FUN_00100388(temp_v2,&LAB_0035c660,temp_v1);
-      FUN_0015155c(temp_v2,0xe1,0,0,FUN_002835f4,0,piVar1,*piVar1);
+      taskCreateDraw(temp_v2,0xe1,0,0,FUN_002835f4,0,piVar1,*piVar1);
       piVar1[4] = 0;
       piVar1[9] = param_1;
       piVar1[10] = param_2;
@@ -93,7 +93,7 @@ int FUN_0035c3d0(unsigned int param_1,int param_2,int param_3,int param_4)
           DAT_0057f3c4 = DAT_0057f3c4 + 1;
         }
         else {
-          FUN_0013f1b8(0x35,0);
+          asdTMTexTableLoadTmx(0x35,0);
           DAT_0057f3c4 = 0;
         }
         temp_v1 = param_1 * 0x10;

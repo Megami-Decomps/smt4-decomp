@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00447a78; /* 0x447a78 */
+extern int g_mapIf; /* 0x447a78 */
 
 
 void FUN_002dfe08(int param_1)
@@ -14,14 +14,14 @@ void FUN_002dfe08(int param_1)
   int temp_v1;
   
   temp_v0 = 0;
-  while ((temp_v1 = DAT_00447a78 + temp_v0 * 0x194, *(char *)(temp_v1 + 0x1d0) == '\0' ||
+  while ((temp_v1 = g_mapIf + temp_v0 * 0x194, *(char *)(temp_v1 + 0x1d0) == '\0' ||
          (*(int *)(temp_v1 + 0x1e8) != param_1))) {
     temp_v0 = temp_v0 + 1;
     if (temp_v0 >= 0x80) {
       return;
     }
   }
-  *(unsigned char *)(DAT_00447a78 + temp_v0 * 0x194 + 0x211) = 1;
+  *(unsigned char *)(g_mapIf + temp_v0 * 0x194 + 0x211) = 1;
   return;
 }
 

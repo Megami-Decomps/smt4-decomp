@@ -13,7 +13,7 @@ extern int FUN_0016f864(void);
 extern unsigned int FUN_0016f988(unsigned int *, char *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00195fc8. */
 extern unsigned int FUN_001a0e10(void);
-extern unsigned int FUN_002e3390(char *);
+extern unsigned int wstrlen(char *);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -38,7 +38,7 @@ unsigned int FUN_0016e468(void)
       temp_v3 = 0xd8a103f9;
     }
     else {
-      temp_v2 = FUN_002e3390("cfg:u");
+      temp_v2 = wstrlen("cfg:u");
       temp_v3 = FUN_0016f988((unsigned int *)&DAT_005b479c,"cfg:u",temp_v2,0);
       if ((temp_v3 & 0x80000000) != 0) {
         temp_v3 = 0xd92103fb;

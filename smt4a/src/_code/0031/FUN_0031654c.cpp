@@ -1,22 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031654c` (_code @ 0x31654c, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction scheduling only: retail loads the table pointer before computing index*0x50 */
+/* Adds `delta` to the s16 counter of item `index` (0-0x500) in the global item table; out-of-range indices are ignored. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f698; /* 0x57f698 */
+typedef struct Item {
+    /* 0x00 */ u8 unk00[0x4E];
+    /* 0x4E */ s16 counter;
+    /* 0x50 */
+} Item; /* 0x50 */
 
+typedef struct ItemTable {
+    /* 0x0000 */ u8 unk0000[0x5F0C];
+    /* 0x5F0C */ Item items[1];
+} ItemTable;
 
-void FUN_0031654c(unsigned int param_1,short param_2)
+typedef struct ItemTableHolder {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ ItemTable *table;
+} ItemTableHolder;
 
+extern ItemTableHolder g_gameDataBlocks;
+
+void FUN_0031654c(u32 index, s16 delta)
 {
-  int temp_v0;
-  
-  if (param_1 < 0x501) {
-    temp_v0 = (*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + param_1 * 0x50;
-    *(short *)(temp_v0 + 0x5f5a) = param_2 + *(short *)(temp_v0 + 0x5f5a);
-  }
-  return;
+    if (index <= 0x500) {
+        ItemTable *table = g_gameDataBlocks.table;
+        Item *item = &table->items[index];
+
+        item->counter = item->counter + delta;
+    }
 }
 
-} /* extern "C" */
+}

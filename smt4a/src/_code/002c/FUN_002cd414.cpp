@@ -13,8 +13,8 @@ int FUN_00358f1c(int);
 int FUN_003d44ac(...);
 int VectorSignedToFloat(int, int);
 
-extern unsigned int DAT_00570280; /* 0x570280 */
-extern int DAT_005710dc; /* 0x5710dc */
+extern unsigned int g_aocSystem; /* 0x570280 */
+extern int g_btlTalkBustUp; /* 0x5710dc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0014bef4(unsigned int);
@@ -41,11 +41,11 @@ unsigned int FUN_002cd414(void)
   float temp_v5;
   float temp_v6;
   
-  temp_v0 = DAT_005710dc;
-  if (DAT_005710dc == 0) {
+  temp_v0 = g_btlTalkBustUp;
+  if (g_btlTalkBustUp == 0) {
     return 0;
   }
-  temp_v1 = *(int *)(DAT_005710dc + 0x2e8);
+  temp_v1 = *(int *)(g_btlTalkBustUp + 0x2e8);
   if (temp_v1 == 0) {
     *(int *)(temp_v0 + 0x2ec) = *(int *)(temp_v0 + 0x2ec) + 1;
     return 0;
@@ -55,11 +55,11 @@ unsigned int FUN_002cd414(void)
       *(int *)(temp_v0 + 0x2ec) = *(int *)(temp_v0 + 0x2ec) + 1;
       return 0;
     }
-    if (*(char *)(DAT_005710dc + 0x2f5) != '\0') {
-      switch(*(unsigned int *)(DAT_005710dc + 0x2f0)) {
+    if (*(char *)(g_btlTalkBustUp + 0x2f5) != '\0') {
+      switch(*(unsigned int *)(g_btlTalkBustUp + 0x2f0)) {
       case 0:
       case 1:
-        temp_v1 = DAT_005710dc + 0x20;
+        temp_v1 = g_btlTalkBustUp + 0x20;
         FUN_00163aa4(temp_v1);
         break;
       case 2:
@@ -74,12 +74,12 @@ unsigned int FUN_002cd414(void)
       case 0x11:
       case 0x12:
       case 0x13:
-        FUN_00163aa4(DAT_005710dc + 0x20);
+        FUN_00163aa4(g_btlTalkBustUp + 0x20);
         temp_v1 = temp_v0 + 0xac;
         FUN_00163aa4(temp_v1);
         break;
       case 3:
-        FUN_00163aa4(DAT_005710dc + 0x20);
+        FUN_00163aa4(g_btlTalkBustUp + 0x20);
         FUN_00163aa4(temp_v0 + 0xac);
         temp_v3 = *(unsigned int *)(temp_v0 + 0x2ec);
         temp_v1 = (int)(((long long)(int)temp_v3 * -0x77777777 + ((unsigned long long)temp_v3 << 0x20)) >> 0x20);
@@ -124,7 +124,7 @@ unsigned int FUN_002cd414(void)
         FUN_00358f1c(temp_v0 + 0xac);
         break;
       case 4:
-        FUN_00163aa4(DAT_005710dc + 0x20);
+        FUN_00163aa4(g_btlTalkBustUp + 0x20);
         temp_v1 = 0;
         do {
           temp_v4 = temp_v0 + temp_v1;
@@ -148,7 +148,7 @@ unsigned int FUN_002cd414(void)
         FUN_00163aa4(temp_v1);
         break;
       case 8:
-        FUN_00163aa4(DAT_005710dc + 0x20);
+        FUN_00163aa4(g_btlTalkBustUp + 0x20);
         temp_v3 = *(unsigned int *)(temp_v0 + 0x2ec);
         temp_v1 = (int)(((long long)(int)temp_v3 * -0x77777777 + ((unsigned long long)temp_v3 << 0x20)) >> 0x20);
         temp_v1 = temp_v3 + ((temp_v1 >> 7) - (temp_v1 >> 0x1f)) * -0xf0;
@@ -191,27 +191,27 @@ unsigned int FUN_002cd414(void)
         break;
       case 0xc:
       case 0x10:
-        FUN_00163aa4(DAT_005710dc + 0x20);
+        FUN_00163aa4(g_btlTalkBustUp + 0x20);
         FUN_00163aa4(temp_v0 + 0xac);
         temp_v1 = temp_v0 + 0x138;
         FUN_00163aa4(temp_v1);
       }
     }
     else {
-      FUN_00163aa4(DAT_005710dc + 0x20);
-      temp_v1 = DAT_005710dc;
+      FUN_00163aa4(g_btlTalkBustUp + 0x20);
+      temp_v1 = g_btlTalkBustUp;
       if (*(char *)(temp_v0 + 0xaa) != '\0') {
         if (*(short *)(temp_v0 + 0x7c) != 10) {
           FUN_0021ba5c(temp_v0);
           *(unsigned char *)(temp_v0 + 0x2f5) = 1;
         }
-        else if (DAT_005710dc != 0) {
-          if (-1 < *(int *)(DAT_005710dc + 0x2f8)) {
+        else if (g_btlTalkBustUp != 0) {
+          if (-1 < *(int *)(g_btlTalkBustUp + 0x2f8)) {
             FUN_0019a7f4(0x10);
-            if (DAT_005710dc != 0) {
-              *(unsigned char *)(DAT_005710dc + 0x2f4) = 0;
+            if (g_btlTalkBustUp != 0) {
+              *(unsigned char *)(g_btlTalkBustUp + 0x2f4) = 0;
             }
-            FUN_001b2d54(DAT_00570280,0x10,*(unsigned int *)(temp_v1 + 0x2f8));
+            FUN_001b2d54(g_aocSystem,0x10,*(unsigned int *)(temp_v1 + 0x2f8));
             *(unsigned int *)(temp_v1 + 0x2f8) = 0xffffffff;
           }
           *(unsigned int *)(temp_v1 + 0x2e8) = 3;
@@ -221,7 +221,7 @@ unsigned int FUN_002cd414(void)
     }
   }
   else {
-    temp_v1 = FUN_0018206c(0x10,*(unsigned int *)(DAT_005710dc + 0x2f8));
+    temp_v1 = FUN_0018206c(0x10,*(unsigned int *)(g_btlTalkBustUp + 0x2f8));
     if (temp_v1 != 0) {
       FUN_003d44ac(temp_v0);
       *(unsigned int *)(temp_v0 + 0x2e8) = 2;

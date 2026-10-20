@@ -1,33 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003233bc` (_code @ 0x3233bc, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00282924(int, unsigned int);
-int FUN_00296cc8(int);
+/* Record with an accumulator at 0x274. */
+typedef struct {
+    u8 unk00[0x274];
+    s32 total;          /* 0x274 */
+} TotalRecord;
 
-/* Supplied declaration required: FUN_00282924. */
-extern int FUN_002939f4(void);
-/* Supplied declaration required: FUN_00296cc8. */
+u32 scrGetArg(u32 index);
+void *btlGetMainState(void);
+TotalRecord *FUN_00282924(void *context, u32 id);
 
-
-unsigned int FUN_003233bc(void)
-
+/* Adds entry 1 to the accumulator of the record selected by entry 0; always reports success. */
+u32 FUN_003233bc(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_00296cc8(1);
-  temp_v2 = FUN_002939f4();
-  FUN_00282924(temp_v2,temp_v0);
-  if (temp_v2 != 0) {
-    *(int *)(temp_v2 + 0x274) = *(int *)(temp_v2 + 0x274) + temp_v1;
-  }
-  return 1;
+    u32 id = scrGetArg(0);
+    u32 amount = scrGetArg(1);
+    TotalRecord *record = FUN_00282924(btlGetMainState(), id);
+
+    if (record != NULL) {
+        record->total += amount;
+    }
+    return 1;
 }
 
 } /* extern "C" */

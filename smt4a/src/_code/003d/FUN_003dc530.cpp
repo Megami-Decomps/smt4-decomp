@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned char LAB_003dc600; /* 0x3dc600 */
 extern int DAT_0057f28c; /* 0x57f28c */
 
-extern unsigned int FUN_0014bce0(unsigned int);
+extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_00151408. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_0020214c. */
@@ -34,19 +34,19 @@ void FUN_003dc530(void)
   puVar2 = &LAB_003dc600;
   FUN_0020214c();
   *(unsigned char **)(temp_v0 + 0x930) = puVar2;
-  temp_v1 = FUN_0014bce0(0);
+  temp_v1 = spriteHandleCreate(0);
   *(unsigned int *)(temp_v0 + 0x91c) = temp_v1;
   FUN_001527d8(temp_v1,0xffffffff);
   FUN_00151408(*(unsigned int *)(temp_v0 + 0x91c),0,0x646464ff);
-  temp_v1 = FUN_0014bce0(0);
+  temp_v1 = spriteHandleCreate(0);
   *(unsigned int *)(temp_v0 + 0x920) = temp_v1;
   FUN_001527d8(temp_v1,0x5eaabaff);
   FUN_00151408(*(unsigned int *)(temp_v0 + 0x920),0,0x646464ff);
-  temp_v1 = FUN_0014bce0(0);
+  temp_v1 = spriteHandleCreate(0);
   *(unsigned int *)(temp_v0 + 0x924) = temp_v1;
   FUN_001527d8(temp_v1,0xffffffff);
   FUN_00151408(*(unsigned int *)(temp_v0 + 0x924),0,0x646464ff);
-  temp_v1 = FUN_0014bce0(0);
+  temp_v1 = spriteHandleCreate(0);
   *(unsigned int *)(temp_v0 + 0x928) = temp_v1;
   FUN_001527d8(temp_v1,0xffffffff);
   FUN_00151408(*(unsigned int *)(temp_v0 + 0x928),0,0x646464ff);

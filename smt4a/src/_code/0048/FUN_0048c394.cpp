@@ -54,7 +54,7 @@ typedef struct {
 } param_1_stack;
 
 extern float DAT_00587f10; /* 0x587f10 */
-extern unsigned int DAT_005f15fc; /* 0x5f15fc */
+extern unsigned int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f1614; /* 0x5f1614 */
 extern signed char DAT_005f161d; /* 0x5f161d */
 extern signed char DAT_005f1a5c; /* 0x5f1a5c */
@@ -319,7 +319,7 @@ void FUN_0048c394(int param_1)
                 puVar4 = (unsigned int *)NaviMain_GetCurrentMap(temp_v11);
                 temp_v2 = puVar7 == puVar4;
                 if (temp_v2) {
-                  puVar4 = &DAT_005f15fc;
+                  puVar4 = &g_gameState;
                 }
                 temp_v0 = 0;
                 if (temp_v2) {

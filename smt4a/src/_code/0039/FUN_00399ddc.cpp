@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f4c4; /* 0x57f4c4 */
+extern int g_bustupCutAnim; /* 0x57f4c4 */
 
 
 unsigned int FUN_00399ddc(void)
@@ -13,8 +13,8 @@ unsigned int FUN_00399ddc(void)
   unsigned int temp_v0;
   
   temp_v0 = 0;
-  if (DAT_0057f4c4 != 0) {
-    if (*(int *)(DAT_0057f4c4 + 0x5f0) == 5) {
+  if (g_bustupCutAnim != 0) {
+    if (*(int *)(g_bustupCutAnim + 0x5f0) == 5) {
       temp_v0 = 1;
     }
     else {

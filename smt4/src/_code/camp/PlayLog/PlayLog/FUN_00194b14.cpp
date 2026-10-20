@@ -26,7 +26,7 @@ typedef struct {
 extern unsigned char LAB_00194e60; /* 0x194e60 */
 extern unsigned char LAB_00194e68; /* 0x194e68 */
 extern unsigned char LAB_00194e78; /* 0x194e78 */
-extern int DAT_0043dd08; /* 0x43dd08 */
+extern int g_playLog; /* 0x43dd08 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002907c4. */
@@ -39,9 +39,9 @@ extern int FUN_0029efc0(int);
 extern int FUN_002beda4(int);
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-extern unsigned int FUN_002c0c74(unsigned int);
-extern int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 
 
 void FUN_00194b14(void)
@@ -64,9 +64,9 @@ void FUN_00194b14(void)
   unsigned char temp_v11 [16];
   unsigned char temp_v12 [28];
   
-  temp_v0 = DAT_0043dd08;
+  temp_v0 = g_playLog;
   temp_v8 = 0;
-  temp_v1 = FUN_0029d644(DAT_0043dd08 + 0x2dc);
+  temp_v1 = FUN_0029d644(g_playLog + 0x2dc);
   if (0 < temp_v1) {
     do {
       temp_v1 = FUN_002beda4(temp_v0 + temp_v8 * 0x8c + 0x20);
@@ -82,9 +82,9 @@ void FUN_00194b14(void)
       FUN_002bf380(2,0x30,1,*(short *)(temp_v2 + 8) + temp_v1,(int)*(short *)(temp_v2 + 10),0xb);
       temp_v3 = FUN_0029efc0(temp_v0 + 0x2dc);
       temp_v9 = (unsigned int)*(short *)(temp_v0 + (temp_v3 + temp_v8) * 2 + 0x424);
-      temp_v4 = FUN_002c0cec(0x37,0);
-      temp_v3 = FUN_002c0cc4();
-      temp_v5 = FUN_002c0c74(temp_v4);
+      temp_v4 = dataTableGet(0x37,0);
+      temp_v3 = dataTableGetEntries();
+      temp_v5 = dataTableGetCount(temp_v4);
       if ((temp_v9 < temp_v5) && (temp_v3 = temp_v3 + temp_v9 * 0x40, temp_v3 != 0)) {
         temp_v6 = FUN_002bf4f8(0x30,0x13);
         FUN_002be624(temp_v10,&LAB_00194e60,temp_v3 + 2);

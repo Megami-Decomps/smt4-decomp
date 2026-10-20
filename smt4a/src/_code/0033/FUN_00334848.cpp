@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_00163e40(...);
+int jobIsValid(...);
 int FUN_0016c410(int);
 int FUN_0016c560(int);
 int FUN_00281428(unsigned int);
 int FUN_002a2194(...);
 
 typedef int romwright_code(...);
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_00163e40. */
-extern int FUN_00164a9c(void);
+/* Supplied declaration required: jobIsValid. */
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_00281428. */
@@ -37,11 +37,11 @@ unsigned int FUN_00334848(void)
   float in_s0;
   float temp_v7;
   
-  temp_v1 = FUN_00164a9c();
+  temp_v1 = jobGetWork();
   temp_v5 = 0;
   do {
     temp_v6 = temp_v1 + temp_v5 * 4;
-    if ((*(int *)(temp_v6 + 0x60c) != 0) && (temp_v2 = FUN_00163e40(), temp_v2 == 0)) {
+    if ((*(int *)(temp_v6 + 0x60c) != 0) && (temp_v2 = jobIsValid(), temp_v2 == 0)) {
       *(unsigned int *)(temp_v6 + 0x60c) = 0;
     }
     temp_v5 = temp_v5 + 1;
@@ -69,7 +69,7 @@ unsigned int FUN_00334848(void)
         temp_v0 = 1;
         *(unsigned int *)(temp_v6 + 0x610) = 0;
       }
-      temp_v6 = DAT_0059dbb4;
+      temp_v6 = g_renderCtx;
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 9);
   } while (temp_v0);
@@ -87,7 +87,7 @@ unsigned int FUN_00334848(void)
     temp_v5 = 0;
     do {
       temp_v2 = temp_v1 + temp_v5 * 4;
-      temp_v6 = FUN_00163e40(*(unsigned int *)(temp_v2 + 0x60c));
+      temp_v6 = jobIsValid(*(unsigned int *)(temp_v2 + 0x60c));
       if (temp_v6 != 0) {
         FUN_00281428(*(unsigned int *)(temp_v2 + 0x60c));
       }
@@ -95,13 +95,13 @@ unsigned int FUN_00334848(void)
     } while (temp_v5 < 10);
   }
   else {
-    temp_v5 = FUN_00163e40(*(unsigned int *)(temp_v1 + 0x634));
+    temp_v5 = jobIsValid(*(unsigned int *)(temp_v1 + 0x634));
     if (temp_v5 != 0) {
       FUN_00281428(*(unsigned int *)(temp_v1 + 0x634));
     }
   }
-  temp_v1 = DAT_0059dbb4;
-  piVar7 = (int *)(DAT_0059dbb4 + 0x1278);
+  temp_v1 = g_renderCtx;
+  piVar7 = (int *)(g_renderCtx + 0x1278);
   temp_v5 = *piVar7;
   temp_v6 = piVar7[temp_v5 + 2];
   *piVar7 = temp_v5 - 1;
@@ -109,8 +109,8 @@ unsigned int FUN_00334848(void)
     (**(romwright_code **)(temp_v1 + 0x1294))();
     *(unsigned char *)(temp_v1 + 0x1290) = 0;
   }
-  FUN_0016c560(DAT_0059dbb4);
-  FUN_0016c410(DAT_0059dbb4);
+  FUN_0016c560(g_renderCtx);
+  FUN_0016c410(g_renderCtx);
   return 0;
 }
 

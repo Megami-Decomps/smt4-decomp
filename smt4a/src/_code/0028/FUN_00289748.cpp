@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern unsigned int *FUN_00164a9c(void);
+extern unsigned int *jobGetWork(void);
 
 
 unsigned int FUN_00289748(void)
@@ -15,7 +15,7 @@ unsigned int FUN_00289748(void)
   int temp_v0;
   float temp_v1;
   
-  puVar1 = (unsigned int *)FUN_00164a9c();
+  puVar1 = (unsigned int *)jobGetWork();
   (**(romwright_code **)(*(int *)*puVar1 + 8))();
   temp_v0 = (**(romwright_code **)(*(int *)*puVar1 + 0x18))();
   if ((temp_v0 != 0) &&

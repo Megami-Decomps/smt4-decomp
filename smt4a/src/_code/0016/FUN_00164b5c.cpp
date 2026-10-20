@@ -23,7 +23,7 @@ typedef struct {
 
 extern int FUN_001695c8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00184efc. */
-extern int FUN_001861ac(unsigned int, int);
+extern int asdTMTexTableCallFileC(unsigned int, int);
 
 
 unsigned int
@@ -72,7 +72,7 @@ FUN_00164b5c(unsigned int param_1,unsigned int param_2,unsigned int param_3,int 
       temp_v1 = piVar2[4];
       temp_v7 = piVar2[2] + temp_v18;
       temp_v6 = piVar2[1] + *piVar2 * 1000;
-      temp_v2 = FUN_001861ac(temp_v17,temp_v6);
+      temp_v2 = asdTMTexTableCallFileC(temp_v17,temp_v6);
       temp_v6 = **(int **)(temp_v2 + 4) + (temp_v6 % 1000) * 0x14;
       psVar5 = *(short **)(temp_v6 + 0xc);
       temp_v10 = 0;

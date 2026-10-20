@@ -1,56 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00323f74` (_code @ 0x323f74, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+/* 0x288-byte entity record. */
+typedef struct {
+    u32 flags;          /* 0x00: bit 0 active, bit 4 enabled, bit 6 hidden */
+    u8 unk04[0x8a];
+    s16 primary;        /* 0x8e */
+    u8 unk90[2];
+    s16 secondary;      /* 0x92 */
+    u8 unk94[0x3a];
+    u16 id;             /* 0xce */
+    u8 unkd0[0x1b8];
+} Entity;
 
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_002939f4(void);
-extern unsigned int FUN_00296cc8(unsigned int);
+/* Game state with an entity array pointer at 0x1fc0. */
+typedef struct {
+    u8 unk00[0x1fc0];
+    Entity *entities;   /* 0x1fc0 */
+} GameState;
 
+#define ENTITY_COUNT 109
 
-unsigned int FUN_00323f74(void)
+GameState *btlGetMainState(void);
+int scrSetResult(int found);
+u32 scrGetArg(u32 index);
 
+/* Reports (via scrSetResult) whether an active, visible entity with the id from entry 0 has a positive counter. */
+u32 FUN_00323f74(void)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v1 = FUN_00296cc8(0);
-  temp_v4 = 0;
-  do {
-    temp_v2 = FUN_002939f4();
-    puVar4 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288);
-    temp_v3 = *puVar4;
-    if ((temp_v3 & 0x10) != 0 && (temp_v3 & 1) != 0) {
-      temp_v5 = (temp_v3 & 0x40) == 0;
-      if (temp_v5) {
-        temp_v3 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
-      }
-      if (temp_v5 && temp_v3 == temp_v1) {
-        temp_v0 = *(short *)((int)puVar4 + 0x8e);
-        if (temp_v0 < 1) {
-          temp_v0 = *(short *)((int)puVar4 + 0x92);
+    u32 id = scrGetArg(0);
+    int i;
+
+    i = 0;
+    do {
+        Entity *entity = &btlGetMainState()->entities[i];
+        u32 flags = entity->flags;
+
+        if ((flags & 0x10) != 0 && (flags & 1) != 0 && (flags & 0x40) == 0 && entity->id == id) {
+            if (entity->primary > 0 || entity->secondary > 0) {
+                scrSetResult(1);
+                return 1;
+            }
         }
-        if (0 < temp_v0) {
-          FUN_0028dcb0(1);
-          return 1;
-        }
-      }
-    }
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 0x6d) {
-      FUN_0028dcb0(0);
-      return 1;
-    }
-  } while( 1 );
+        i++;
+    } while (i < ENTITY_COUNT);
+    scrSetResult(0);
+    return 1;
 }
 
 } /* extern "C" */

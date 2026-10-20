@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002bd954(...);
-int FUN_002c222c(int, unsigned int *);
+int asdOperatorNew(int, unsigned int *);
 int FUN_002c312c(...);
-int FUN_002c4a08(...);
-int FUN_002c5300(int, int, int, int, int);
+int taskCreateDraw(...);
+int asdMemoryAlloc(int, int, int, int, int);
 int FUN_002c5d5c(unsigned int *, unsigned char *, int, int);
 int FUN_002eb76c(...);
 int FUN_00342fbc(void);
@@ -30,17 +30,17 @@ extern unsigned char LAB_002e84dc; /* 0x2e84dc */
 extern unsigned char LAB_002e84f8; /* 0x2e84f8 */
 extern unsigned char LAB_002e8510; /* 0x2e8510 */
 extern int FUN_002f4aec(...); /* 0x2f4aec */
-extern int FUN_00309424(...); /* 0x309424 */
+extern int btlTargetSelectDestroy(...); /* 0x309424 */
 extern unsigned char LAB_00349210; /* 0x349210 */
 extern unsigned char DAT_004017f4; /* 0x4017f4 */
 extern unsigned char DAT_004208bc; /* 0x4208bc */
-extern int *DAT_00439c60; /* 0x439c60 */
+extern int *g_btlTargetSelect; /* 0x439c60 */
 
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_002c5d5c. */
 /* Supplied declaration required: FUN_002eb76c. */
 /* Supplied declaration required: FUN_00342fbc. */
@@ -59,16 +59,16 @@ void FUN_002e82d4(unsigned int *param_1)
   unsigned char *puVar6;
   
   piVar1 = (int *)0x100;
-  FUN_002c5300(0x100,0x100,0,0xb8,1);
+  asdMemoryAlloc(0x100,0x100,0,0xb8,1);
   temp_v0 = 300;
-  DAT_00439c60 = piVar1;
-  FUN_002c222c(300,param_1);
+  g_btlTargetSelect = piVar1;
+  asdOperatorNew(300,param_1);
   if (temp_v0 != 0) {
     FUN_00342fbc();
   }
   *piVar1 = temp_v0;
   puVar3 = (unsigned int *)0x60;
-  FUN_002c222c(0x60,param_1);
+  asdOperatorNew(0x60,param_1);
   puVar5 = (unsigned int *)0x0;
   if (puVar3 != (unsigned int *)0x0) {
     puVar4 = puVar3 + 1;
@@ -86,10 +86,10 @@ void FUN_002e82d4(unsigned int *param_1)
   piVar1[1] = (int)puVar5;
   *(unsigned char *)(piVar1 + 2) = 0;
   puVar6 = &LAB_002e84dc;
-  FUN_002c4a08(&LAB_002e84dc,2,0,0,FUN_002e0730,FUN_00309424,piVar1,*param_1);
+  taskCreateDraw(&LAB_002e84dc,2,0,0,FUN_002e0730,btlTargetSelectDestroy,piVar1,*param_1);
   param_1[7] = (unsigned int)puVar6;
-  FUN_002c4a08(&LAB_002e84f8,0x7a,0,0,FUN_002f4aec,0,piVar1,puVar6);
-  FUN_002c4a08(&LAB_002e8510,0xd8,0,0,FUN_002f4aec,0,piVar1,param_1[7]);
+  taskCreateDraw(&LAB_002e84f8,0x7a,0,0,FUN_002f4aec,0,piVar1,puVar6);
+  taskCreateDraw(&LAB_002e8510,0xd8,0,0,FUN_002f4aec,0,piVar1,param_1[7]);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(piVar1 + 3);
   FUN_002c312c(piVar1 + 3,0,0,0,0,0,0,&DAT_004017f4,0x10,0,0);
   FUN_002bd954(piVar1 + 0xb,0x14,0x71,piVar1 + 3,1);

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_00162758(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00180118(void);
 int FUN_0018349c(...);
 int FUN_0019cac4(void);
@@ -30,7 +30,7 @@ typedef struct {
 
 extern unsigned char LAB_004a657c; /* 0x4a657c */
 extern unsigned char LAB_004a6584; /* 0x4a6584 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
@@ -38,7 +38,7 @@ extern unsigned int FUN_0014bf3c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00162758. */
 extern int FUN_001654d8(void);
 extern int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_0018349c. */
 /* Supplied declaration required: FUN_0019cac4. */
@@ -87,11 +87,11 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
   temp_v10 = (int)*(short *)(temp_v2 + 8);
   temp_v2 = (int)*(short *)(temp_v2 + 10);
   if (param_3 != 0) {
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_004934ac(param_1 + 200,0x103a,temp_v10,temp_v2,temp_v9);
     FUN_004934ac(param_1 + 200,0x103b,temp_v10,temp_v2,temp_v9);
     FUN_004934ac(param_1 + 200,0x103c,temp_v10,temp_v2,temp_v9);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_0049368c(param_1 + 200,0x103d,temp_v10,temp_v2,temp_v9,1);
     FUN_0049368c(param_1 + 200,0x103e,temp_v10,temp_v2,temp_v9,1);
     temp_v3 = FUN_0018349c(param_1 + 200,0x1041);
@@ -104,8 +104,8 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     temp_v3 = FUN_001654e4(temp_v4);
     FUN_0049368c(param_1 + 200,0x1040,(temp_v5 + temp_v10) - (temp_v12 & 0xffff7fff),temp_v3 + temp_v2,temp_v9,
                  1);
-    temp_v3 = DAT_0059dbb4;
-    piVar12 = (int *)(DAT_0059dbb4 + 0x1318);
+    temp_v3 = g_renderCtx;
+    piVar12 = (int *)(g_renderCtx + 0x1318);
     temp_v4 = piVar12[*piVar12 + 2];
     piVar12[*piVar12 + 2] = 0;
     if (*(char *)(temp_v3 + 0x1330) != '\0' || temp_v4 != 0) {

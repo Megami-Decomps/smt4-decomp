@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002ac068(int, int);
 int FUN_002c0894(unsigned int);
-int FUN_002c415c(...);
+int asdMemFree(...);
 
 typedef struct fn_00141710_arg0 fn_00141710_arg0;
 struct fn_00141710_arg0 {
@@ -27,9 +27,9 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002ac068. */
 /* Supplied declaration required: FUN_002c0894. */
-extern unsigned int FUN_002c0c74(void);
-extern int FUN_002c0cc4(void);
-/* Supplied declaration required: FUN_002c415c. */
+extern unsigned int dataTableGetCount(void);
+extern int dataTableGetEntries(void);
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00141710(fn_00141710_arg0 *param_1,int param_2)
@@ -57,14 +57,14 @@ void FUN_00141710(fn_00141710_arg0 *param_1,int param_2)
   }
   if ((temp_v2 != 0 && temp_v4 != 0) && (param_1->field_0x45 != 0)) {
     FUN_002ac068(temp_v2,0);
-    temp_v4 = FUN_002c0cc4();
+    temp_v4 = dataTableGetEntries();
     temp_v0 = 0;
     if (temp_v4 != 0) {
       temp_v0 = param_1->field_0x45;
     }
     if ((temp_v4 != 0 && temp_v0 != 0) && (param_1->field_0x48 != 0)) {
       FUN_002ac068(param_1->field_0x48,0);
-      temp_v3 = FUN_002c0c74();
+      temp_v3 = dataTableGetCount();
       temp_v7 = 0;
       if (temp_v7 < temp_v3) {
         do {
@@ -111,7 +111,7 @@ LAB_00141864:
               if (!((temp_v1 == '\x15' || temp_v1 == '\x17') || temp_v1 == '\x1a')) {
                 temp_v5 = temp_v7 * 0x10 + 4;
                 if (*(int *)(temp_v2 + temp_v5) != 0) {
-                  FUN_002c415c();
+                  asdMemFree();
                   *(unsigned int *)(param_1->field_0x4c + temp_v5) = 0;
                 }
               }
@@ -123,12 +123,12 @@ LAB_00141864:
                     temp_v2 = *(int *)(puVar5[1] + 4);
                     while (temp_v2 != 0) {
                       temp_v6 = *(int *)(temp_v2 + 0x10);
-                      FUN_002c415c(*(unsigned int *)(temp_v2 + 0xc));
-                      FUN_002c415c(temp_v2);
+                      asdMemFree(*(unsigned int *)(temp_v2 + 0xc));
+                      asdMemFree(temp_v2);
                       temp_v2 = temp_v6;
                     }
-                    FUN_002c415c(*(unsigned int *)puVar5[1]);
-                    FUN_002c415c(puVar5[1]);
+                    asdMemFree(*(unsigned int *)puVar5[1]);
+                    asdMemFree(puVar5[1]);
                     puVar5[1] = 0;
                   }
                   if ((*pcVar7 == '\x1a') && (*(int *)*puVar5 != 0)) {
@@ -136,18 +136,18 @@ LAB_00141864:
                   }
                   piVar9 = (int *)*puVar5;
                   if (*piVar9 != 0) {
-                    FUN_002c415c();
+                    asdMemFree();
                     *piVar9 = 0;
                   }
-                  FUN_002c415c(*puVar5);
+                  asdMemFree(*puVar5);
                   if (*(int *)(param_1->field_0x4c + temp_v5) != 0) {
-                    FUN_002c415c();
+                    asdMemFree();
                     *(unsigned int *)(param_1->field_0x4c + temp_v5) = 0;
                   }
                 }
               }
               if (*(int *)(param_1->field_0x4c + temp_v7 * 0x10) != 0) {
-                FUN_002c415c();
+                asdMemFree();
                 *(unsigned int *)(param_1->field_0x4c + temp_v7 * 0x10) = 0;
               }
               *(unsigned char *)(param_1->field_0x4c + temp_v8) = 0;

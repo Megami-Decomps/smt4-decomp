@@ -13,7 +13,7 @@ int FUN_004d0310(int);
 int FUN_004d0738(int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
-int aeabi_idivmod(...);
+int __aeabi_idivmod(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -30,7 +30,7 @@ typedef struct {
 /* Supplied declaration required: FUN_004cf8dc. */
 /* Supplied declaration required: FUN_004d0310. */
 /* Supplied declaration required: FUN_004d0738. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 /* WARNING: Removing unreachable block (ram,0x004cf8ec) */
@@ -131,17 +131,17 @@ int FUN_004cf880(int param_1)
       temp_v8 = (float)VectorUnsignedToFloat((unsigned int)(unsigned short)psVar8[4],(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v7 = VectorFloatToUnsigned(temp_v8 / 1.0f,3) & 0xffff;
       if (*(char *)(param_1 + 0x7e0) != '\0') {
-        temp_v2 = aeabi_idivmod(((int)*psVar8 - (int)psVar8[2]) * 0x1000,temp_v7,temp_v2,temp_v4,in_d8,
+        temp_v2 = __aeabi_idivmod(((int)*psVar8 - (int)psVar8[2]) * 0x1000,temp_v7,temp_v2,temp_v4,in_d8,
                               unaff_r4);
         *(int *)(param_1 + 0x798) = *(int *)(param_1 + 0x798) + temp_v2;
-        temp_v2 = aeabi_idivmod(((int)psVar8[1] - (int)psVar8[3]) * 0x1000,temp_v7);
+        temp_v2 = __aeabi_idivmod(((int)psVar8[1] - (int)psVar8[3]) * 0x1000,temp_v7);
         *(int *)(param_1 + 0x79c) = *(int *)(param_1 + 0x79c) + temp_v2;
       }
       else {
-        temp_v2 = aeabi_idivmod(((int)psVar8[2] - (int)*psVar8) * 0x1000,temp_v7,temp_v2,temp_v4,in_d8,
+        temp_v2 = __aeabi_idivmod(((int)psVar8[2] - (int)*psVar8) * 0x1000,temp_v7,temp_v2,temp_v4,in_d8,
                               unaff_r4);
         *(int *)(param_1 + 0x798) = *(int *)(param_1 + 0x798) + temp_v2;
-        temp_v2 = aeabi_idivmod(((int)psVar8[3] - (int)psVar8[1]) * 0x1000,temp_v7);
+        temp_v2 = __aeabi_idivmod(((int)psVar8[3] - (int)psVar8[1]) * 0x1000,temp_v7);
         *(int *)(param_1 + 0x79c) = *(int *)(param_1 + 0x79c) + temp_v2;
       }
       temp_v6 = *(char *)(param_1 + 0x7e0) != '\0';

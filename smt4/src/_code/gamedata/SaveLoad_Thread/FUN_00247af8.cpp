@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00297468(...);
-int FUN_002c5300(int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ extern unsigned char *DAT_0043e314; /* 0x43e314 */
 extern unsigned int DAT_0043e31c; /* 0x43e31c */
 
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 void FUN_00247af8(unsigned char param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -30,7 +30,7 @@ void FUN_00247af8(unsigned char param_1,unsigned int param_2,unsigned int param_
   unsigned char *puVar1;
   
   puVar1 = (unsigned char *)0x100;
-  FUN_002c5300(0x100,0x100,0,0x5c,1);
+  asdMemoryAlloc(0x100,0x100,0,0x5c,1);
   DAT_0043e314 = puVar1;
   *puVar1 = param_1;
   *(unsigned int *)(puVar1 + 0x20) = 0xffffffff;

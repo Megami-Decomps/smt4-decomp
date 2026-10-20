@@ -19,7 +19,7 @@ int FUN_002b70cc(void);
 int FUN_00360e64(void);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
-int aeabi_uidivmod(void);
+int __aeabi_uidivmod(void);
 
 typedef struct fn_003041a0_arg0 fn_003041a0_arg0;
 struct fn_003041a0_arg0 {
@@ -114,7 +114,7 @@ extern int FUN_00269a58(void);
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_00360e64. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_003041a0(fn_003041a0_arg0 *param_1)
@@ -503,7 +503,7 @@ void FUN_003041a0(fn_003041a0_arg0 *param_1)
               temp_v22[5] = -1;
               if (0 < temp_v29) {
                 FUN_0024b77c(0);
-                aeabi_uidivmod();
+                __aeabi_uidivmod();
                 temp_v22[5] = temp_v22[5] - temp_v2;
               }
             }

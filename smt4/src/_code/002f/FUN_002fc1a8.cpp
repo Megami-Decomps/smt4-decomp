@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_0028c854(void);
+int asdEffectTextureCreate(void);
 int FUN_002be624(unsigned char [260], unsigned char *, int);
-int FUN_002c415c(unsigned int);
+int asdMemFree(unsigned int);
 
 extern unsigned char LAB_002fc228; /* 0x2fc228 */
 extern signed char DAT_004640e8; /* 0x4640e8 */
 
-/* Supplied declaration required: FUN_0028c854. */
+/* Supplied declaration required: asdEffectTextureCreate. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c415c. */
-extern unsigned int FUN_002c5c14(unsigned char *, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: asdMemFree. */
+extern unsigned int asdLoadFileSync(unsigned char *, unsigned int, unsigned int, unsigned int);
 
 
 void FUN_002fc1a8(void)
@@ -30,11 +30,11 @@ void FUN_002fc1a8(void)
     temp_v2 = 0;
     do {
       FUN_002be624(temp_v3,&LAB_002fc228,temp_v2 + 1);
-      temp_v0 = FUN_002c5c14(temp_v3,0,1,0x80);
+      temp_v0 = asdLoadFileSync(temp_v3,0,1,0x80);
       temp_v1 = temp_v0;
-      FUN_0028c854();
+      asdEffectTextureCreate();
       *(unsigned int *)(temp_v2 * 4 + 0x4d96f0) = temp_v1;
-      FUN_002c415c(temp_v0);
+      asdMemFree(temp_v0);
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 0x16);
     DAT_004640e8 = '\x01';

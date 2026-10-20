@@ -12,12 +12,12 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 extern int FUN_0014af84(void);
 extern int FUN_0017760c(int);
 extern int FUN_0018719c(unsigned int);
-extern int FUN_0019e4d4(void);
+extern int slotRecordFindById(void);
 /* Supplied declaration required: FUN_003e52bc. */
 /* Supplied declaration required: FUN_003fd63c. */
 extern int FUN_0046c458(unsigned int, unsigned int);
@@ -34,7 +34,7 @@ void FUN_00388068(void)
   int temp_v3;
   int temp_v4;
   
-  temp_v1 = FUN_0046c458(DAT_00570280,0x4f6);
+  temp_v1 = FUN_0046c458(g_aocSystem,0x4f6);
   if ((temp_v1 != 0) && (temp_v1 = FUN_0018719c(0x4f6), temp_v1 == 0)) {
     temp_v1 = FUN_0014af84();
     FUN_003fd63c(0x45b,1);
@@ -42,7 +42,7 @@ void FUN_00388068(void)
     temp_v4 = 0;
     do {
       if ((((*(unsigned int *)(temp_v1 + temp_v4 * 4 + 0x28310) & 0xffff) != 0) &&
-          (temp_v2 = FUN_0019e4d4(), temp_v2 != 0)) && (temp_v3 = FUN_004bd340(temp_v2,1), temp_v3 == 0)) {
+          (temp_v2 = slotRecordFindById(), temp_v2 != 0)) && (temp_v3 = FUN_004bd340(temp_v2,1), temp_v3 == 0)) {
         temp_v3 = FUN_0017760c(temp_v2);
         temp_v0 = ((short)temp_v3 - *(short *)(temp_v2 + 0xe)) + *(short *)(temp_v2 + 0x2a);
         if (temp_v0 <= temp_v3) {
@@ -54,7 +54,7 @@ void FUN_00388068(void)
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 10);
   }
-  temp_v1 = FUN_0046c458(DAT_00570280,0x4f7);
+  temp_v1 = FUN_0046c458(g_aocSystem,0x4f7);
   if ((temp_v1 != 0) && (temp_v1 = FUN_0018719c(0x4f7), temp_v1 == 0)) {
     FUN_003fd63c(0x45b,1);
     FUN_003fd63c(0x4f7,1);

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0018b760(void);
+int configOpen(void);
 int FUN_00194ec8(void);
-int FUN_001d1c1c(...);
-int FUN_001e067c(...);
+int bibleOpenMode0(...);
+int bibleOpenMode1(...);
 int FUN_00269cb8(...);
 int FUN_00269cd0(void);
 int FUN_00269da0(...);
@@ -16,17 +16,17 @@ int FUN_0028a924(...);
 int FUN_0029e774(void);
 int FUN_002a035c(void);
 int FUN_002cd37c(void);
-int FUN_002cfbe4(int);
+int bibleOpenMode3(int);
 int FUN_002e333c(void);
 
 int FUN_001a8040(int);
-int FUN_001f4b90(int);
+int bibleOpenMode2(int);
 int FUN_00223cf0(void);
 int FUN_00269dc8(void);
 int FUN_0026a348(void);
 int FUN_0026a38c(...);
 int FUN_0026a3c4(...);
-int FUN_0026a55c(void);
+int guestWinRequestClose(void);
 int FUN_0026a598(void);
 int FUN_0026d5a4(void);
 int FUN_00298940(void);
@@ -37,7 +37,7 @@ int FUN_0029cc44(...);
 int FUN_0029e788(void);
 int FUN_0029e874(int);
 int FUN_0029ee6c(int, int);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002cf780(void);
 int FUN_002e24c8(void);
 int FUN_003aacd0(void);
@@ -53,12 +53,12 @@ typedef struct {
 
 extern int DAT_0043da90; /* 0x43da90 */
 
-/* Supplied declaration required: FUN_0018b760. */
+/* Supplied declaration required: configOpen. */
 /* Supplied declaration required: FUN_00194ec8. */
 /* Supplied declaration required: FUN_001a8040. */
-/* Supplied declaration required: FUN_001d1c1c. */
-/* Supplied declaration required: FUN_001e067c. */
-/* Supplied declaration required: FUN_001f4b90. */
+/* Supplied declaration required: bibleOpenMode0. */
+/* Supplied declaration required: bibleOpenMode1. */
+/* Supplied declaration required: bibleOpenMode2. */
 /* Supplied declaration required: FUN_00223cf0. */
 /* Supplied declaration required: FUN_00269cb8. */
 /* Supplied declaration required: FUN_00269cd0. */
@@ -68,7 +68,7 @@ extern int FUN_00269d4c(void);
 /* Supplied declaration required: FUN_0026a348. */
 /* Supplied declaration required: FUN_0026a38c. */
 /* Supplied declaration required: FUN_0026a3c4. */
-/* Supplied declaration required: FUN_0026a55c. */
+/* Supplied declaration required: guestWinRequestClose. */
 /* Supplied declaration required: FUN_0026a598. */
 /* Supplied declaration required: FUN_0026d5a4. */
 /* Supplied declaration required: FUN_0028a368. */
@@ -89,10 +89,10 @@ extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002a035c. */
 extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002cd37c. */
 /* Supplied declaration required: FUN_002cf780. */
-/* Supplied declaration required: FUN_002cfbe4. */
+/* Supplied declaration required: bibleOpenMode3. */
 /* Supplied declaration required: FUN_002e24c8. */
 /* Supplied declaration required: FUN_002e333c. */
 /* Supplied declaration required: FUN_003aacd0. */
@@ -125,10 +125,10 @@ void FUN_001d0754(int *param_1)
     return;
   case 9:
     FUN_0026a598();
-    FUN_002bd8e8(temp_v2 + 0x6d4,1,0);
+    timerStart(temp_v2 + 0x6d4,1,0);
     FUN_0026d5a4();
     FUN_00298940();
-    FUN_0026a55c();
+    guestWinRequestClose();
     FUN_0029cc44(1);
     temp_v1 = FUN_0029ee54(temp_v2 + 0x1dc);
     if (0 < temp_v1) {
@@ -150,7 +150,7 @@ void FUN_001d0754(int *param_1)
       return;
     }
     FUN_0026a598();
-    FUN_002bd8e8(temp_v2 + 0x6d4,1,0);
+    timerStart(temp_v2 + 0x6d4,1,0);
     FUN_0026d5a4();
     FUN_003acb28();
     FUN_003ad0e0();
@@ -184,7 +184,7 @@ void FUN_001d0754(int *param_1)
       return;
     }
     FUN_0026a598();
-    FUN_002bd8e8(temp_v2 + 0x6d4,1,0);
+    timerStart(temp_v2 + 0x6d4,1,0);
     FUN_0026d5a4();
     if (temp_v1 != 0xb) {
       if (temp_v1 != 0xc) {
@@ -213,7 +213,7 @@ void FUN_001d0754(int *param_1)
     return;
   case 0xe:
     FUN_0026a598();
-    FUN_0026a55c();
+    guestWinRequestClose();
     FUN_0029cc44(1);
     temp_v1 = DAT_0043da90;
     puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
@@ -224,7 +224,7 @@ void FUN_001d0754(int *param_1)
     return;
   case 0x10:
     FUN_0026a598();
-    FUN_0026a55c();
+    guestWinRequestClose();
     FUN_0029cc44(1);
     temp_v1 = DAT_0043da90;
     puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
@@ -264,9 +264,9 @@ void FUN_001d0754(int *param_1)
     temp_v1 = FUN_0029ee54(temp_v4);
     if (0 < temp_v1) {
       FUN_0026a598();
-      FUN_002bd8e8(temp_v2 + 0x6d4,1,0);
+      timerStart(temp_v2 + 0x6d4,1,0);
       FUN_0026d5a4();
-      FUN_0026a55c();
+      guestWinRequestClose();
       FUN_0029cc44(1);
       FUN_0029e874(1);
       FUN_0029e788();
@@ -289,7 +289,7 @@ void FUN_001d0754(int *param_1)
     break;
   case 0x18:
     FUN_0026a598();
-    FUN_0026a55c();
+    guestWinRequestClose();
     FUN_0029cc44(1);
     FUN_0026a38c(0);
     temp_v1 = DAT_0043da90;
@@ -302,9 +302,9 @@ void FUN_001d0754(int *param_1)
   case 0x19:
     FUN_0026a598();
     FUN_0026d5a4();
-    FUN_0026a55c();
+    guestWinRequestClose();
     FUN_0029cc44(1);
-    FUN_001f4b90(0);
+    bibleOpenMode2(0);
     temp_v1 = DAT_0043da90;
     puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
     *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
@@ -323,13 +323,13 @@ void FUN_001d0754(int *param_1)
     *puVar5 = 0x22;
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
-    FUN_0026a55c();
+    guestWinRequestClose();
     FUN_0029cc44(1);
     FUN_0026a348();
     return;
   case 0x1b:
     FUN_0026d5a4();
-    FUN_0026a55c();
+    guestWinRequestClose();
     FUN_0029cc44(1);
     temp_v1 = DAT_0043da90;
     puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
@@ -343,7 +343,7 @@ void FUN_001d0754(int *param_1)
     return;
   case 0x1c:
     FUN_0026d5a4();
-    FUN_0026a55c();
+    guestWinRequestClose();
     FUN_0029cc44(1);
     temp_v1 = DAT_0043da90;
     puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
@@ -357,7 +357,7 @@ void FUN_001d0754(int *param_1)
     return;
   case 0x24:
     FUN_0026a598();
-    FUN_002cfbe4(0);
+    bibleOpenMode3(0);
     FUN_002a035c();
     temp_v1 = DAT_0043da90;
     puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
@@ -370,7 +370,7 @@ void FUN_001d0754(int *param_1)
   case 0x25:
     FUN_0026a598();
     FUN_0026d5a4();
-    FUN_0026a55c();
+    guestWinRequestClose();
     FUN_0029cc44(1);
     temp_v1 = DAT_0043da90;
     puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
@@ -382,7 +382,7 @@ void FUN_001d0754(int *param_1)
   case 0x26:
     FUN_0026a598();
     FUN_0026d5a4();
-    FUN_0026a55c();
+    guestWinRequestClose();
     FUN_0029cc44(1);
     temp_v1 = DAT_0043da90;
     puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
@@ -392,11 +392,11 @@ void FUN_001d0754(int *param_1)
     *(unsigned int *)(temp_v1 + 0x14) = 0;
     return;
   case 0x27:
-    FUN_0018b760();
+    configOpen();
     FUN_0026a598();
-    FUN_002bd8e8(temp_v2 + 0x6d4,1,0);
+    timerStart(temp_v2 + 0x6d4,1,0);
     FUN_0026d5a4();
-    FUN_0026a55c();
+    guestWinRequestClose();
     FUN_0029cc44(1);
     *(unsigned int *)(temp_v2 + 0x20) = 0x2b;
     temp_v1 = DAT_0043da90;
@@ -409,7 +409,7 @@ void FUN_001d0754(int *param_1)
   case 0x29:
     FUN_00194ec8();
     FUN_0026a598();
-    FUN_002bd8e8(temp_v2 + 0x6d4,0);
+    timerStart(temp_v2 + 0x6d4,0);
     FUN_0026d5a4();
     *(unsigned int *)(temp_v2 + 0x20) = 0x2c;
     temp_v1 = DAT_0043da90;
@@ -449,7 +449,7 @@ void FUN_001d0754(int *param_1)
     temp_v1 = FUN_00269d4c();
     if (temp_v1 != 0) {
       FUN_0026a598();
-      FUN_001d1c1c(0);
+      bibleOpenMode0(0);
       temp_v1 = DAT_0043da90;
       puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
       *(unsigned int *)(DAT_0043da90 + 0x1c) = 0;
@@ -474,7 +474,7 @@ void FUN_001d0754(int *param_1)
             FUN_002cd37c();
             if (temp_v2 == 0) {
               FUN_0026a598();
-              FUN_001e067c(0);
+              bibleOpenMode1(0);
               temp_v1 = DAT_0043da90;
               puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
               *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
@@ -517,7 +517,7 @@ void FUN_001d0754(int *param_1)
       FUN_00269da0(4);
       FUN_00269cd0();
       FUN_002e333c();
-      FUN_0026a55c();
+      guestWinRequestClose();
       FUN_0029cc44(1);
       FUN_0026a38c(1);
       FUN_0028a924(0xd,0,0xffffffff);

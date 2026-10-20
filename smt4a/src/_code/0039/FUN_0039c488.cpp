@@ -18,7 +18,7 @@ typedef struct {
 extern int DAT_00588fe8; /* 0x588fe8 */
 
 extern int FUN_001801a4(void);
-extern int FUN_0019e4d4(unsigned short);
+extern int slotRecordFindById(unsigned short);
 /* Supplied declaration required: FUN_00203b40. */
 extern int FUN_002857b8(void);
 /* Supplied declaration required: FUN_002c7e3c. */
@@ -83,7 +83,7 @@ void FUN_0039c488(void)
     }
   }
   else {
-    temp_v1 = FUN_0019e4d4(*(unsigned short *)(temp_v0 + 0x598));
+    temp_v1 = slotRecordFindById(*(unsigned short *)(temp_v0 + 0x598));
     *(int *)(temp_v0 + 0x24fc) = temp_v1;
     temp_v2 = FUN_004bd21c();
     *(int *)(temp_v0 + 0x24ec) = temp_v2;

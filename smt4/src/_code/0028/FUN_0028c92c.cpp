@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 extern int FUN_0024ac4c(int);
 extern int FUN_002c5210(void);
@@ -28,19 +28,19 @@ void FUN_0028c92c(unsigned int *param_1)
   unsigned int temp_v9;
   unsigned int temp_v10;
   
-  temp_v1 = *(int *)(DAT_0044ea00 + 0x528);
+  temp_v1 = *(int *)(g_titleScene + 0x528);
   temp_v0 = 0;
-  if (*(char *)(DAT_0044ea00 + 0x5f4) != '\x03') {
-    if (*(char *)(DAT_0044ea00 + 0x5f4) != '\x04') {
+  if (*(char *)(g_titleScene + 0x5f4) != '\x03') {
+    if (*(char *)(g_titleScene + 0x5f4) != '\x04') {
       temp_v2 = FUN_0024ac4c(temp_v1);
     }
     else {
-      temp_v2 = FUN_0034334c(DAT_0044ea00);
+      temp_v2 = FUN_0034334c(g_titleScene);
       temp_v0 = 1;
     }
   }
   else {
-    temp_v2 = FUN_00343358(DAT_0044ea00);
+    temp_v2 = FUN_00343358(g_titleScene);
     temp_v0 = 1;
   }
   if (temp_v1 == 2) {

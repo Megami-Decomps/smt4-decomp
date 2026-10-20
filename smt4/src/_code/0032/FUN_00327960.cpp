@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+int scrSetResult(int);
 
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_002939f4(void);
+/* Supplied declaration required: scrSetResult. */
+extern int btlGetMainState(void);
 
 
 unsigned int FUN_00327960(void)
@@ -22,7 +22,7 @@ unsigned int FUN_00327960(void)
   
   temp_v3 = 0;
   do {
-    temp_v1 = FUN_002939f4();
+    temp_v1 = btlGetMainState();
     puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + temp_v3 * 0x288);
     temp_v2 = *puVar3;
     if (((temp_v2 & 0x10) != 0 && (temp_v2 & 1) != 0) && ((temp_v2 & 0x40) == 0)) {
@@ -31,13 +31,13 @@ unsigned int FUN_00327960(void)
         temp_v0 = (short)puVar3[0x25];
       }
       if (0 < temp_v0) {
-        FUN_0028dcb0(1);
+        scrSetResult(1);
         return 1;
       }
     }
     temp_v3 = temp_v3 + 1;
     if (temp_v3 >= 0x6d) {
-      FUN_0028dcb0(0);
+      scrSetResult(0);
       return 1;
     }
   } while( 1 );

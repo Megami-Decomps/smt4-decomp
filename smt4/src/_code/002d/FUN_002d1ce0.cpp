@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned char LAB_002d1e18; /* 0x2d1e18 */
 extern unsigned char LAB_002d1e30; /* 0x2d1e30 */
-extern int DAT_004474d8; /* 0x4474d8 */
+extern int g_mapDepartWork; /* 0x4474d8 */
 
 /* Supplied declaration required: FUN_002a1248. */
 /* Supplied declaration required: FUN_002be624. */
@@ -28,21 +28,21 @@ unsigned int FUN_002d1ce0(void)
   int temp_v1;
   unsigned char temp_v2 [128];
   
-  temp_v1 = DAT_004474d8;
-  temp_v0 = *(short *)(DAT_004474d8 + 0x14);
+  temp_v1 = g_mapDepartWork;
+  temp_v0 = *(short *)(g_mapDepartWork + 0x14);
   if (temp_v0 != 3) {
     if (temp_v0 < 3) {
       if (temp_v0 == 0) {
         return 1;
       }
       if ((temp_v0 != 1) && (temp_v0 == 2)) {
-        if (*(int *)(DAT_004474d8 + 0x18) < 1) {
-          *(unsigned short *)(DAT_004474d8 + 0x14) = 10;
+        if (*(int *)(g_mapDepartWork + 0x18) < 1) {
+          *(unsigned short *)(g_mapDepartWork + 0x14) = 10;
         }
         else {
           FUN_002be624(temp_v2,&LAB_002d1e18);
-          FUN_002a1248(temp_v2,DAT_004474d8 + 0x28,3,0x80);
-          *(short *)(DAT_004474d8 + 0x14) = *(short *)(DAT_004474d8 + 0x14) + 1;
+          FUN_002a1248(temp_v2,g_mapDepartWork + 0x28,3,0x80);
+          *(short *)(g_mapDepartWork + 0x14) = *(short *)(g_mapDepartWork + 0x14) + 1;
         }
       }
     }
@@ -52,20 +52,20 @@ unsigned int FUN_002d1ce0(void)
           return 1;
         }
       }
-      else if (*(int *)(DAT_004474d8 + 0x20) != 0) {
-        *(unsigned int *)(DAT_004474d8 + 0x24) = 4;
+      else if (*(int *)(g_mapDepartWork + 0x20) != 0) {
+        *(unsigned int *)(g_mapDepartWork + 0x24) = 4;
         *(unsigned short *)(temp_v1 + 0x14) = 99;
       }
     }
     else {
-      FUN_002be624(temp_v2,&LAB_002d1e30,(int)*(short *)(DAT_004474d8 + 0x1c),
-                   (int)*(short *)(DAT_004474d8 + 0x1c),(int)*(short *)(DAT_004474d8 + 0x1e));
-      FUN_002a1248(temp_v2,DAT_004474d8 + 0x20,3,0x80);
-      *(short *)(DAT_004474d8 + 0x14) = *(short *)(DAT_004474d8 + 0x14) + 1;
+      FUN_002be624(temp_v2,&LAB_002d1e30,(int)*(short *)(g_mapDepartWork + 0x1c),
+                   (int)*(short *)(g_mapDepartWork + 0x1c),(int)*(short *)(g_mapDepartWork + 0x1e));
+      FUN_002a1248(temp_v2,g_mapDepartWork + 0x20,3,0x80);
+      *(short *)(g_mapDepartWork + 0x14) = *(short *)(g_mapDepartWork + 0x14) + 1;
     }
   }
-  else if (*(int *)(DAT_004474d8 + 0x28) != 0) {
-    *(unsigned int *)(DAT_004474d8 + 0x24) = 4;
+  else if (*(int *)(g_mapDepartWork + 0x28) != 0) {
+    *(unsigned int *)(g_mapDepartWork + 0x24) = 4;
     *(unsigned short *)(temp_v1 + 0x14) = 10;
   }
   return 0;

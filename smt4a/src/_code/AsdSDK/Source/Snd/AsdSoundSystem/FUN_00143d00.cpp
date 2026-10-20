@@ -10,7 +10,7 @@ int VectorUnsignedToFloat(unsigned int, int);
 
 extern int *DAT_0063e944; /* 0x63e944 */
 extern int DAT_0063e948; /* 0x63e948 */
-extern float DAT_0063f4c8; /* 0x63f4c8 */
+extern float g_asdSoundDuck; /* 0x63f4c8 */
 extern unsigned int DAT_0063f4cc; /* 0x63f4cc */
 extern unsigned int DAT_0063f4d0; /* 0x63f4d0 */
 extern int DAT_0063f4d4; /* 0x63f4d4 */
@@ -19,7 +19,7 @@ extern int DAT_0063f4dc; /* 0x63f4dc */
 extern unsigned char DAT_0063f4e0; /* 0x63f4e0 */
 extern signed char DAT_0063f4e1; /* 0x63f4e1 */
 extern signed char DAT_0063f4e2; /* 0x63f4e2 */
-extern int DAT_0063f4e4; /* 0x63f4e4 */
+extern int g_asdSoundStatus; /* 0x63f4e4 */
 extern unsigned int DAT_0063f4e8; /* 0x63f4e8 */
 extern int DAT_0063f504; /* 0x63f504 */
 extern int DAT_0063f508; /* 0x63f508 */
@@ -72,10 +72,10 @@ void FUN_00143d00(void)
               temp_v4 = DAT_0063f4e8 == temp_v2;
             }
             if (!temp_v4 && (-1 < (int)temp_v2 && (int)temp_v2 <= (int)DAT_0063f4e8)) {
-              temp_v3 = DAT_0063f4e4;
+              temp_v3 = g_asdSoundStatus;
               if (0 < (int)temp_v2) {
                 if ((temp_v2 & 1) != 0) {
-                  temp_v3 = *(int *)(DAT_0063f4e4 + 0xd8);
+                  temp_v3 = *(int *)(g_asdSoundStatus + 0xd8);
                 }
                 for (temp_v0 = (int)temp_v2 >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
                   temp_v3 = *(int *)(*(int *)(temp_v3 + 0xd8) + 0xd8);
@@ -213,10 +213,10 @@ LAB_001443e0:
             temp_v4 = DAT_0063f4e8 == temp_v2;
           }
           if (!temp_v4 && (-1 < (int)temp_v2 && (int)temp_v2 <= (int)DAT_0063f4e8)) {
-            temp_v3 = DAT_0063f4e4;
+            temp_v3 = g_asdSoundStatus;
             if (0 < (int)temp_v2) {
               if ((temp_v2 & 1) != 0) {
-                temp_v3 = *(int *)(DAT_0063f4e4 + 0xd8);
+                temp_v3 = *(int *)(g_asdSoundStatus + 0xd8);
               }
               for (temp_v0 = (int)temp_v2 >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
                 temp_v3 = *(int *)(*(int *)(temp_v3 + 0xd8) + 0xd8);
@@ -262,10 +262,10 @@ LAB_001443e0:
           temp_v4 = DAT_0063f4e8 == temp_v2;
         }
         if (!temp_v4 && (-1 < (int)temp_v2 && (int)temp_v2 <= (int)DAT_0063f4e8)) {
-          temp_v3 = DAT_0063f4e4;
+          temp_v3 = g_asdSoundStatus;
           if (0 < (int)temp_v2) {
             if ((temp_v2 & 1) != 0) {
-              temp_v3 = *(int *)(DAT_0063f4e4 + 0xd8);
+              temp_v3 = *(int *)(g_asdSoundStatus + 0xd8);
             }
             for (temp_v0 = (int)temp_v2 >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
               temp_v3 = *(int *)(*(int *)(temp_v3 + 0xd8) + 0xd8);
@@ -307,7 +307,7 @@ LAB_00143f68:
             temp_v1 = (unsigned int)*(unsigned char *)(temp_v3 + 0x39);
           }
           temp_v6 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v1 = VectorFloatToUnsigned(temp_v7 + temp_v6 * DAT_0063f4c8,3) & 0xff;
+          temp_v1 = VectorFloatToUnsigned(temp_v7 + temp_v6 * g_asdSoundDuck,3) & 0xff;
           if (temp_v2 < 2) {
             if (temp_v1 >= 0x80) {
               temp_v1 = 0x7f;
@@ -374,7 +374,7 @@ LAB_001440a4:
         }
         temp_v0 = 0;
         temp_v6 = (float)VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v2 = VectorFloatToUnsigned(temp_v7 + temp_v6 * DAT_0063f4c8,3) & 0xff;
+        temp_v2 = VectorFloatToUnsigned(temp_v7 + temp_v6 * g_asdSoundDuck,3) & 0xff;
         piVar3 = DAT_0063e944;
         if (0 < DAT_0063e948) {
           do {

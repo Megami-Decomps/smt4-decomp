@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00240170(void);
-int FUN_002efd90(void);
-int FUN_002efdc0(void);
+int statusCameraSetEye(void);
+int statusCameraApply(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,8 +16,8 @@ typedef struct {
 extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 
 /* Supplied declaration required: FUN_00240170. */
-/* Supplied declaration required: FUN_002efd90. */
-/* Supplied declaration required: FUN_002efdc0. */
+/* Supplied declaration required: statusCameraSetEye. */
+/* Supplied declaration required: statusCameraApply. */
 
 
 void FUN_002f0384(int param_1)
@@ -31,9 +31,9 @@ void FUN_002f0384(int param_1)
     FUN_00240170();
   }
   else {
-    FUN_002efd90();
+    statusCameraSetEye();
   }
-  FUN_002efdc0();
+  statusCameraApply();
   return;
 }
 

@@ -9,7 +9,7 @@ int FUN_0023553c(int);
 int FUN_00296f4c(unsigned int, unsigned int);
 int FUN_002bcfc0(unsigned int, int);
 int FUN_002be624(int, unsigned char *, int, unsigned int);
-int FUN_002c4938(int, int);
+int memClear(int, int);
 
 extern unsigned char LAB_0022e800; /* 0x22e800 */
 extern unsigned char LAB_0022e80c; /* 0x22e80c */
@@ -21,7 +21,7 @@ extern unsigned int FUN_00290d74(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00296f4c. */
 /* Supplied declaration required: FUN_002bcfc0. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_0022e740(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -35,7 +35,7 @@ void FUN_0022e740(int param_1,int param_2,unsigned int param_3,unsigned int para
   int uStack_20;
   
   uStack_20 = param_4;
-  FUN_002c4938(param_1 + 0x170,0x200);
+  memClear(param_1 + 0x170,0x200);
   temp_v2 = 0;
   if (temp_v2 < *(int *)(param_1 + 0x15d3c)) {
     do {

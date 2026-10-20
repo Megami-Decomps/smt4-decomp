@@ -1,57 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00304f72` (_code @ 0x304f72, 0xa6 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: final position/limit compare uses r0/r1 swapped (loads are scheduled the same). */
+#include "sys/StreamReader.h"
 
 extern "C" {
 
-int FUN_002fbc1a(int, int);
-int FUN_00300900(int, int);
-int FUN_00300934(int, int *);
-int FUN_00303608(int, int);
-int FUN_003072ae(int, int);
-int FUN_00307316(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
+/* Record read from the stream: six fields at 4-12 byte spacing. */
 typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
+    u8 unk00[4];
+    u8 unk04;       /* 0x04 */
+    u8 unk05[3];
+    u8 field08[8];  /* 0x08 */
+    u8 field10[8];  /* 0x10 */
+    u8 field18[12]; /* 0x18 */
+    u8 field24[12]; /* 0x24 */
+    u8 field30[12]; /* 0x30 */
+} Record;
 
-extern int FUN_002ee9da(int);
-/* Supplied declaration required: FUN_002fbc1a. */
-/* Supplied declaration required: FUN_00300900. */
-/* Supplied declaration required: FUN_00300934. */
-/* Supplied declaration required: FUN_00303608. */
-/* Supplied declaration required: FUN_003072ae. */
-/* Supplied declaration required: FUN_00307316. */
+int FUN_002fbc1a(StreamReader *reader, void *out);
+int FUN_00300900(StreamReader *reader, u8 *out);
+int FUN_00300934(StreamReader *reader, int *out);
+int FUN_00303608(StreamReader *reader, void *out);
+int FUN_003072ae(StreamReader *reader, void *out);
+int FUN_00307316(StreamReader *reader, void *out);
+int FUN_002ee9da(StreamReader *reader);
 
-
-void FUN_00304f72(int param_1,int param_2)
-
+/* Reads one record from `reader`; sets the reader's error flag when the declared length overruns. */
+void FUN_00304f72(StreamReader *reader, Record *record)
 {
-/* irregular: 6 native warning(s); review required */
-  signed char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  
-  *(unsigned char *)(param_2 + 4) = 0;
-  temp_v0 = *(char *)(param_1 + 0x3b);
-  temp_v2 = 0;
-  if (((temp_v0 != '\0') ||
-      ((FUN_00300900(param_1,param_2 + 4), *(char *)(param_1 + 4) == '\0' &&
-       (FUN_00300934(param_1,&temp_v2), *(char *)(param_1 + 4) == '\0')))) &&
-     ((temp_v1 = *(int *)(param_1 + 0xc), *(char *)(param_1 + 4) == '\0' &&
-      (((((FUN_00303608(param_1,param_2 + 8), *(char *)(param_1 + 4) == '\0' &&
-          (FUN_002fbc1a(param_1,param_2 + 0x10), *(char *)(param_1 + 4) == '\0')) &&
-         (FUN_003072ae(param_1,param_2 + 0x18), *(char *)(param_1 + 4) == '\0')) &&
-        ((FUN_003072ae(param_1,param_2 + 0x24), *(char *)(param_1 + 4) == '\0' &&
-         (FUN_00307316(param_1,param_2 + 0x30), *(char *)(param_1 + 4) == '\0')))) &&
-       ((temp_v0 == '\0' &&
-        (((unsigned int)(temp_v1 + temp_v2) < *(unsigned int *)(param_1 + 0xc) ||
-         (temp_v1 = FUN_002ee9da(param_1), temp_v1 == 0)))))))))) {
-    *(unsigned char *)(param_1 + 4) = 1;
-  }
-  return;
+    s8 skipHeader;
+    u32 start;
+    int length;
+
+    record->unk04 = 0;
+    skipHeader = reader->skipHeader;
+    length = 0;
+    if (skipHeader == 0) {
+        FUN_00300900(reader, &record->unk04);
+        if (reader->error != 0) {
+            return;
+        }
+        FUN_00300934(reader, &length);
+        if (reader->error != 0) {
+            return;
+        }
+    }
+    start = reader->position;
+    if (reader->error != 0) {
+        return;
+    }
+    FUN_00303608(reader, record->field08);
+    if (reader->error != 0) {
+        return;
+    }
+    FUN_002fbc1a(reader, record->field10);
+    if (reader->error != 0) {
+        return;
+    }
+    FUN_003072ae(reader, record->field18);
+    if (reader->error != 0) {
+        return;
+    }
+    FUN_003072ae(reader, record->field24);
+    if (reader->error != 0) {
+        return;
+    }
+    FUN_00307316(reader, record->field30);
+    if (reader->error != 0) {
+        return;
+    }
+    if (skipHeader == 0 && !(reader->position <= start + length && FUN_002ee9da(reader) != 0)) {
+        reader->error = 1;
+    }
 }
 
 } /* extern "C" */

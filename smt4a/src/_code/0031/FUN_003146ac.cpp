@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp4C; /* 0x4c: local_4c */
 } param_2_stack;
 
-extern int DAT_00570280; /* 0x570280 */
+extern int g_aocSystem; /* 0x570280 */
 #ifndef ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 #define ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 /* Storage views; not a recovered source structure. */
@@ -34,10 +34,10 @@ extern int FUN_0014af84(void);
 extern int FUN_0014bef4(unsigned int);
 extern int FUN_00162e8c(void);
 extern int FUN_001774d8(void);
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int FUN_0018719c(void);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 extern int FUN_001ba3d4(unsigned int);
 /* Supplied declaration required: FUN_0046e800. */
 /* Supplied declaration required: FUN_00480e30. */
@@ -63,18 +63,18 @@ unsigned int FUN_003146ac(unsigned int param_1,int param_2)
   unsigned int temp_v10 [7];
   
   *(unsigned char *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0x14) = 0;
-  temp_v2 = FUN_00187180(0x20,0);
-  temp_v3 = FUN_00192798();
-  temp_v4 = FUN_00192748(temp_v2);
+  temp_v2 = dataTableGet(0x20,0);
+  temp_v3 = dataTableGetEntries();
+  temp_v4 = dataTableGetCount(temp_v2);
   if ((param_1 < temp_v4) && (puVar6 = (unsigned short *)(temp_v3 + param_1 * 4), puVar6 != (unsigned short *)0x0)) {
     temp_v4 = (unsigned int)*puVar6;
     *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0x18) = (unsigned int)puVar6[1];
-    temp_v3 = DAT_00570280;
-    FUN_0046e800(DAT_00570280,temp_v4);
+    temp_v3 = g_aocSystem;
+    FUN_0046e800(g_aocSystem,temp_v4);
     if (temp_v3 == 0) {
-      temp_v2 = FUN_00187180(0x20,1);
-      temp_v3 = FUN_00192798();
-      temp_v7 = FUN_00192748(temp_v2);
+      temp_v2 = dataTableGet(0x20,1);
+      temp_v3 = dataTableGetEntries();
+      temp_v7 = dataTableGetCount(temp_v2);
       if (temp_v7 <= temp_v4) {
         return 0;
       }

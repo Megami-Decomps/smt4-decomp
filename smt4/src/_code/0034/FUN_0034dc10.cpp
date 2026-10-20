@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b5cf0(unsigned char *, unsigned int);
 int FUN_002b612c(unsigned int [6]);
-int FUN_002c4938(unsigned int *, int);
+int memClear(unsigned int *, int);
 int nn_gr_CTR_Combiner_MakeCommand(unsigned int [6], unsigned char *);
 int nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0(unsigned int [6]);
 
@@ -23,7 +23,7 @@ extern unsigned char DAT_0047e554; /* 0x47e554 */
 
 /* Supplied declaration required: FUN_002b5cf0. */
 /* Supplied declaration required: FUN_002b612c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 extern unsigned int FUN_00356e94(void);
 /* Supplied declaration required: nn_gr_CTR_Combiner_MakeCommand. */
 /* Supplied declaration required: nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0. */
@@ -63,7 +63,7 @@ unsigned int * FUN_0034dc10(void)
   *puVar3 = 0;
   puVar3[1] = 0xf0201;
   puVar3[2] = 0;
-  FUN_002c4938(puVar3 + 4,0x98);
+  memClear(puVar3 + 4,0x98);
   piVar4 = (int *)(puVar3 + 0x2a);
   puVar3[5] = 0x823f0203;
   temp_v1 = 0;

@@ -10,7 +10,7 @@ int FUN_0037f5d0(int);
 int FUN_0037f600(int, unsigned int, int);
 int VectorSignedToFloat(unsigned int, int);
 int VectorUnsignedToFloat(...);
-int aeabi_idivmod(...);
+int __aeabi_idivmod(...);
 int nw_snd_internal_driver_SequenceTrack_Close(void);
 int nw_snd_internal_driver_SequenceTrack_FreeAllChannel(int);
 int nw_snd_internal_driver_SequenceTrack_Open(int);
@@ -46,7 +46,7 @@ extern int FUN_001584f8(int, unsigned int);
 /* Supplied declaration required: FUN_0023578c. */
 /* Supplied declaration required: FUN_0037f5d0. */
 /* Supplied declaration required: FUN_0037f600. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 /* Supplied declaration required: nw_snd_internal_driver_SequenceTrack_Close. */
 /* Supplied declaration required: nw_snd_internal_driver_SequenceTrack_FreeAllChannel. */
 /* Supplied declaration required: nw_snd_internal_driver_SequenceTrack_Open. */
@@ -120,7 +120,7 @@ void FUN_003e738c(fn_003e738c_arg0 *param_1,int param_2,unsigned int param_3,uns
         if (param_5 == 0) {
           return;
         }
-        temp_v3 = aeabi_idivmod((int)(short)*puVar9);
+        temp_v3 = __aeabi_idivmod((int)(short)*puVar9);
         break;
       case 0x85:
         if ((int)param_5 >= 0) {
@@ -164,7 +164,7 @@ void FUN_003e738c(fn_003e738c_arg0 *param_1,int param_2,unsigned int param_3,uns
           if (param_5 == 0) {
             return;
           }
-          aeabi_idivmod((int)(short)*puVar9,param_5);
+          __aeabi_idivmod((int)(short)*puVar9,param_5);
           *puVar9 = temp_v6;
           return;
         }
@@ -480,7 +480,7 @@ void FUN_003e738c(fn_003e738c_arg0 *param_1,int param_2,unsigned int param_3,uns
       }
       else {
         temp_v0 = *pbVar8;
-        temp_v1 = aeabi_idivmod(((unsigned int)*(unsigned char *)(param_2 + 0x6d) - (unsigned int)temp_v0) *
+        temp_v1 = __aeabi_idivmod(((unsigned int)*(unsigned char *)(param_2 + 0x6d) - (unsigned int)temp_v0) *
                               (int)*(short *)(param_2 + 0x70));
         temp_v0 = temp_v1 + temp_v0;
       }
@@ -537,7 +537,7 @@ LAB_003e76cc:
   else {
 LAB_003e76d4:
     temp_v0 = *pbVar8;
-    temp_v1 = aeabi_idivmod(((int)(char)pbVar8[1] - (int)(char)temp_v0) * temp_v8);
+    temp_v1 = __aeabi_idivmod(((int)(char)pbVar8[1] - (int)(char)temp_v0) * temp_v8);
     temp_v0 = temp_v1 + temp_v0;
   }
   *pbVar8 = temp_v0;

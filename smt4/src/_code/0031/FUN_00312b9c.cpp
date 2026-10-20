@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 
 
 unsigned int FUN_00312b9c(void)
@@ -12,7 +12,7 @@ unsigned int FUN_00312b9c(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   *(unsigned int *)(temp_v0 + 0x44a4) = *(unsigned int *)(temp_v0 + 0x44a4) | 1;
   return 1;
 }

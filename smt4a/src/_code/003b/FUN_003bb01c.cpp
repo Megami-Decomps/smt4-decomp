@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e342c(unsigned char *);
-int FUN_003902b0(void);
+int effMenuNodeCreate(void);
 int FUN_00390364(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -19,10 +19,10 @@ extern unsigned int DAT_0059dbf4; /* 0x59dbf4 */
 extern unsigned int *DAT_0059dc24; /* 0x59dc24 */
 extern int DAT_0059e9b4; /* 0x59e9b4 */
 
-extern unsigned int FUN_002e3390(int);
+extern unsigned int wstrlen(int);
 /* Supplied declaration required: FUN_002e342c. */
 extern int FUN_00300778(unsigned int, int);
-/* Supplied declaration required: FUN_003902b0. */
+/* Supplied declaration required: effMenuNodeCreate. */
 /* Supplied declaration required: FUN_00390364. */
 
 
@@ -38,7 +38,7 @@ void FUN_003bb01c(void)
     FUN_00390364();
   }
   puVar2 = (unsigned int *)&LAB_003bb080;
-  FUN_003902b0();
+  effMenuNodeCreate();
   DAT_0059dc24 = puVar2;
   *puVar2 = 0xc2;
   puVar2[1] = 200;
@@ -46,7 +46,7 @@ void FUN_003bb01c(void)
   temp_v1 = FUN_00300778(DAT_0059dbf4,DAT_0059dbec + DAT_0059e9b4);
   puVar2 = DAT_0059dc24;
   FUN_002e342c((unsigned char *)((int)DAT_0059dc24 + 0x21));
-  temp_v0 = FUN_002e3390(temp_v1 + 0x9c);
+  temp_v0 = wstrlen(temp_v1 + 0x9c);
   puVar2[4] = temp_v0;
   return;
 }

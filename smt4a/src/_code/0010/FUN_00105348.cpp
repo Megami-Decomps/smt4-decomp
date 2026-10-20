@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(int *, int);
+int sysMemClear(int *, int);
 int FUN_002eb108(int *, int, int, int, int, int);
 int FUN_002eb7e0(int *, int, int, int, int, int);
 
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern int *FUN_002e760a(unsigned int);
 /* Supplied declaration required: FUN_002eb108. */
 extern int *FUN_002eb7d0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
@@ -37,7 +37,7 @@ int * FUN_00105348(int param_1,unsigned short param_2,unsigned int param_3,unsig
       if (piVar1 != (int *)0x0) {
         temp_v0 = FUN_002eb83c();
         if (temp_v0 != 0) {
-          FUN_002e6354(piVar1 + 0x28,0x1c);
+          sysMemClear(piVar1 + 0x28,0x1c);
           *(unsigned char *)(piVar1 + 9) = 0xd0;
           *(unsigned short *)((int)piVar1 + 0xa2) = 0;
           *(unsigned short *)((int)piVar1 + 0xa2) = *(unsigned short *)((int)piVar1 + 0xa2) | (param_2 & 0xf);
@@ -55,7 +55,7 @@ int * FUN_00105348(int param_1,unsigned short param_2,unsigned int param_3,unsig
   else {
     piVar1 = (int *)0x0;
   }
-  FUN_002e6354(piVar1 + 0x28,0x1c);
+  sysMemClear(piVar1 + 0x28,0x1c);
   *(unsigned char *)(piVar1 + 9) = 0xd0;
   *(unsigned short *)((int)piVar1 + 0xa2) = 0;
   *(unsigned short *)((int)piVar1 + 0xa2) = *(unsigned short *)((int)piVar1 + 0xa2) | (param_2 & 0xf);

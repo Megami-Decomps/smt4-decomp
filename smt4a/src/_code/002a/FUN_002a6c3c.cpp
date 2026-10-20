@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_5_stack;
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: FUN_0017ffa8. */
@@ -81,7 +81,7 @@ void FUN_002a6c3c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v1 = param_1;
   FUN_003a7a88(param_1,param_5);
   if (temp_v1 != 0) {
-    temp_v0 = FUN_001a6508(DAT_00570280,temp_v3,temp_v2,1);
+    temp_v0 = FUN_001a6508(g_aocSystem,temp_v3,temp_v2,1);
     if (temp_v0 == 0) {
       if (temp_v4 == '\0') {
         FUN_0017ffa8(2,temp_v3,temp_v2 * 1000,param_2,param_3,param_4);
@@ -91,10 +91,10 @@ void FUN_002a6c3c(unsigned int param_1,unsigned int param_2,unsigned int param_3
       return;
     }
     if (temp_v3 == 0x19) {
-      FUN_0046fa94(DAT_00570280,param_1,2,0x19,temp_v2,param_2,param_3,param_4);
+      FUN_0046fa94(g_aocSystem,param_1,2,0x19,temp_v2,param_2,param_3,param_4);
       return;
     }
-    FUN_00471244(DAT_00570280,param_1,2,temp_v2,0,param_2,param_3,param_4);
+    FUN_00471244(g_aocSystem,param_1,2,temp_v2,0,param_2,param_3,param_4);
   }
   return;
 }

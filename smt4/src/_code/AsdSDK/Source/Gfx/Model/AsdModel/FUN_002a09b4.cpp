@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0021f6e4(void);
-int FUN_002c222c(int, unsigned int);
-int FUN_002c4938(...);
+int asdOperatorNew(int, unsigned int);
+int memClear(...);
 
 typedef struct fn_002a09b4_arg1 fn_002a09b4_arg1;
 struct fn_002a09b4_arg1 {
@@ -24,16 +24,16 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern unsigned char DAT_004d9880; /* 0x4d9880 */
+extern unsigned char g_asdModelBanks; /* 0x4d9880 */
 extern unsigned char DAT_004d9d88; /* 0x4d9d88 */
-extern unsigned char DAT_004daca0; /* 0x4daca0 */
+extern unsigned char g_asdModelIdLists; /* 0x4daca0 */
 
 /* Supplied declaration required: FUN_0021f6e4. */
-extern int FUN_002a4268(fn_002a09b4_arg1 *);
-extern int FUN_002a4278(fn_002a09b4_arg1 *);
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c4938. */
-extern unsigned int FUN_002c5c14(unsigned int, unsigned int, unsigned int, unsigned int);
+extern int asdModelGetSlotArray2(fn_002a09b4_arg1 *);
+extern int asdModelGetSlotArray1(fn_002a09b4_arg1 *);
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: memClear. */
+extern unsigned int asdLoadFileSync(unsigned int, unsigned int, unsigned int, unsigned int);
 
 
 void FUN_002a09b4(unsigned int param_1,fn_002a09b4_arg1 *param_2)
@@ -48,17 +48,17 @@ void FUN_002a09b4(unsigned int param_1,fn_002a09b4_arg1 *param_2)
   int temp_v3;
   int temp_v4;
   
-  FUN_002c4938(&DAT_004d9880 + (int)param_2 * 0x284,0x284);
-  FUN_002c4938(&DAT_004d9d88 + (int)param_2 * 0x284,0x284);
-  FUN_002c4938((int)param_2 * 0x284 + 0x4da290,0x284);
-  FUN_002c4938((int)param_2 * 0x284 + 0x4da798,0x284);
+  memClear(&g_asdModelBanks + (int)param_2 * 0x284,0x284);
+  memClear(&DAT_004d9d88 + (int)param_2 * 0x284,0x284);
+  memClear((int)param_2 * 0x284 + 0x4da290,0x284);
+  memClear((int)param_2 * 0x284 + 0x4da798,0x284);
   temp_v0 = (int)param_2 * 0x14;
-  *(unsigned int *)(&DAT_004daca0 + temp_v0) = 0;
+  *(unsigned int *)(&g_asdModelIdLists + temp_v0) = 0;
   *(unsigned int *)(temp_v0 + 0x4daca4) = 0;
   *(unsigned int *)(temp_v0 + 0x4daca8) = 0;
   *(unsigned int *)(temp_v0 + 0x4dacac) = 0;
   *(unsigned int *)(temp_v0 + 0x4dacb0) = 0;
-  temp_v1 = FUN_002a4278(param_2);
+  temp_v1 = asdModelGetSlotArray1(param_2);
   piVar3 = *(int **)(temp_v1 + 0x18);
   temp_v3 = 1;
   temp_v0 = (*(int *)(temp_v1 + 0x1c) - (int)piVar3) >> 2;
@@ -73,7 +73,7 @@ void FUN_002a09b4(unsigned int param_1,fn_002a09b4_arg1 *param_2)
     } while (temp_v3 < temp_v0 + 1);
   }
   *(unsigned int *)(temp_v1 + 0x1c) = *(unsigned int *)(temp_v1 + 0x18);
-  temp_v1 = FUN_002a4268(param_2);
+  temp_v1 = asdModelGetSlotArray2(param_2);
   temp_v3 = 1;
   piVar3 = *(int **)(temp_v1 + 0x18);
   temp_v0 = (*(int *)(temp_v1 + 0x1c) - (int)piVar3) >> 2;
@@ -88,10 +88,10 @@ void FUN_002a09b4(unsigned int param_1,fn_002a09b4_arg1 *param_2)
     } while (temp_v3 < temp_v0 + 1);
   }
   *(unsigned int *)(temp_v1 + 0x1c) = *(unsigned int *)(temp_v1 + 0x18);
-  temp_v2 = FUN_002c5c14(param_1,0,1,0x80);
+  temp_v2 = asdLoadFileSync(param_1,0,1,0x80);
   *(unsigned int *)((int)param_2 * 4 + 0x464a9c) = temp_v2;
   puVar5 = (unsigned int *)0x4;
-  FUN_002c222c(4,param_1);
+  asdOperatorNew(4,param_1);
   if (puVar5 != (unsigned int *)0x0) {
     *puVar5 = *(unsigned int *)((int)param_2 * 4 + 0x464a9c);
   }

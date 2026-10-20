@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 int FUN_0030ea58(unsigned char *, unsigned int *);
 int FUN_00470340(unsigned int *, unsigned int);
 
@@ -15,12 +15,12 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned char LAB_004bc2c0; /* 0x4bc2c0 */
-extern unsigned int *DAT_00570280; /* 0x570280 */
+extern unsigned int *g_aocSystem; /* 0x570280 */
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern unsigned int *FUN_00192798(void);
-/* Supplied declaration required: FUN_002e6354. */
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int *dataTableGetEntries(void);
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0030ea58. */
 /* Supplied declaration required: FUN_00470340. */
 
@@ -44,14 +44,14 @@ void FUN_004bbc4c(unsigned int *param_1,unsigned int param_2,unsigned char param
   unsigned int temp_v9;
   unsigned int temp_v10;
   
-  temp_v1 = FUN_00187180(3,0);
-  puVar3 = (unsigned int *)FUN_00192798();
+  temp_v1 = dataTableGet(3,0);
+  puVar3 = (unsigned int *)dataTableGetEntries();
   puVar5 = puVar3;
-  if (((-1 < (int)param_2) && (temp_v2 = FUN_00192748(temp_v1), param_2 < temp_v2)) &&
-     (puVar5 = DAT_00570280, FUN_00470340(DAT_00570280,param_2), puVar5 == (unsigned int *)0x0)) {
+  if (((-1 < (int)param_2) && (temp_v2 = dataTableGetCount(temp_v1), param_2 < temp_v2)) &&
+     (puVar5 = g_aocSystem, FUN_00470340(g_aocSystem,param_2), puVar5 == (unsigned int *)0x0)) {
     puVar5 = puVar3 + param_2 * 0x18;
   }
-  FUN_002e6354(param_1,0x84);
+  sysMemClear(param_1,0x84);
   *param_1 = 0;
   param_1[1] = 0;
   param_1[2] = 0;

@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_001248c0(void);
-int FUN_002e3268(int);
+int asdOperatorNewB(int);
 int FUN_0030e924(void);
 
 /* Supplied declaration required: FUN_001248c0. */
-/* Supplied declaration required: FUN_002e3268. */
+/* Supplied declaration required: asdOperatorNewB. */
 /* Supplied declaration required: FUN_0030e924. */
 
 
@@ -18,16 +18,16 @@ void FUN_0012d0c4(int param_1)
 {
 /* irregular: 3 native warning(s); review required */
   if (param_1 == 0) {
-    FUN_002e3268(0x34);
+    asdOperatorNewB(0x34);
     FUN_0030e924();
     return;
   }
   if (param_1 != 1) {
-    FUN_002e3268(0x34);
+    asdOperatorNewB(0x34);
     FUN_001248c0();
     return;
   }
-  FUN_002e3268(0x34);
+  asdOperatorNewB(0x34);
   FUN_0030e924();
   return;
 }

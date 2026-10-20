@@ -1,39 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00104900` (_code @ 0x104900, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Runs the owner's handler on `item`: builds a 104-byte context from `arg` and passes it with the item (or NULL when the item has no field at +0x10). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ea974(unsigned char [104]);
-int FUN_002ea9c0(unsigned char [104], unsigned int);
-int FUN_002ea9dc(unsigned char [104]);
+struct Handler;
 
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002ea974. */
-/* Supplied declaration required: FUN_002ea9c0. */
-/* Supplied declaration required: FUN_002ea9dc. */
+typedef struct HandlerVtbl {
+    /* 0x00 */ void *slots[2];
+    /* 0x08 */ void (*process)(struct Handler *handler, void *owner, void *item, void *context);
+} HandlerVtbl;
 
+typedef struct Handler {
+    /* 0x00 */ HandlerVtbl *vtbl;
+} Handler;
 
-void FUN_00104900(int param_1,unsigned int param_2,int param_3)
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Handler *handler;
+} Owner;
 
+typedef struct Item {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s32 link;
+} Item;
+
+typedef struct Context {
+    u32 unk00[26];
+} Context; /* 0x68 */
+
+extern void FUN_002ea974(Context *context);
+extern void FUN_002ea9c0(Context *context, u32 arg);
+extern void FUN_002ea9dc(Context *context);
+
+void FUN_00104900(Owner *owner, u32 arg, Item *item)
 {
-/* irregular: 3 native warning(s); review required */
-  int *piVar1;
-  unsigned char temp_v0 [104];
-  
-  if (*(int *)(param_1 + 8) != 0) {
-    FUN_002ea974(temp_v0);
-    FUN_002ea9c0(temp_v0,param_2);
-    piVar1 = *(int **)(param_1 + 8);
-    if (*(int *)(param_3 + 0x10) != 0) {
-      (**(romwright_code **)(*piVar1 + 8))(piVar1,param_1,param_3,temp_v0);
+    if (owner->handler != NULL) {
+        Context context;
+
+        FUN_002ea974(&context);
+        FUN_002ea9c0(&context, arg);
+        if (item->link != 0) {
+            owner->handler->vtbl->process(owner->handler, owner, item, &context);
+        } else {
+            owner->handler->vtbl->process(owner->handler, owner, NULL, &context);
+        }
+        FUN_002ea9dc(&context);
     }
-    else {
-      (**(romwright_code **)(*piVar1 + 8))(piVar1,param_1,0,temp_v0);
-    }
-    FUN_002ea9dc(temp_v0);
-  }
-  return;
 }
 
-} /* extern "C" */
+}

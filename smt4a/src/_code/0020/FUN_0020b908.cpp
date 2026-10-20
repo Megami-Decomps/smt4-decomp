@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00183f58(int, int, int, int);
 int FUN_00184b90(...);
 int FUN_0019de98(...);
@@ -19,14 +19,14 @@ int FUN_0035ad50(unsigned int, unsigned char [304]);
 
 extern int DAT_0057f290; /* 0x57f290 */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
 /* Supplied declaration required: FUN_00184b90. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
-extern unsigned char *FUN_0019e4d4(unsigned int);
+extern unsigned char *slotRecordFindById(unsigned int);
 extern int FUN_002a4860(void);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002bf4f4. */
@@ -57,20 +57,20 @@ void FUN_0020b908(unsigned int param_1,int param_2)
   temp_v4 = 0;
   switch(param_1) {
   case 3:
-    FUN_001681cc();
+    sysPlaySe();
     break;
   case 0xb:
-    FUN_001681cc(0x55);
-    temp_v2 = FUN_00187180(0x24,2);
-    temp_v1 = FUN_00192798();
-    temp_v3 = FUN_00192748(temp_v2);
+    sysPlaySe(0x55);
+    temp_v2 = dataTableGet(0x24,2);
+    temp_v1 = dataTableGetEntries();
+    temp_v3 = dataTableGetCount(temp_v2);
     if (temp_v3 >= 2) {
       temp_v4 = temp_v1 + 0x55;
     }
     FUN_0019de98(temp_v4,0xf4f4f4ff);
     break;
   case 0xd:
-    FUN_001681cc(0x56);
+    sysPlaySe(0x56);
     temp_v4 = FUN_002a4860();
     temp_v1 = FUN_002a4894(temp_v0 + 0x67cc);
     temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + (temp_v1 + temp_v4) * 2 + 0x6832);
@@ -81,7 +81,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
     }
     if (*(char *)(temp_v0 + 0x6830) == '\x01') {
       temp_v4 = temp_v0 + temp_v3 * 8;
-      puVar2 = (unsigned char *)FUN_0019e4d4(*(unsigned int *)(temp_v4 + 0x13b8) & 0x7fff);
+      puVar2 = (unsigned char *)slotRecordFindById(*(unsigned int *)(temp_v4 + 0x13b8) & 0x7fff);
       if (puVar2 == (unsigned char *)0x0) {
         FUN_0035ad50(*(unsigned int *)(temp_v4 + 0x13b8) & 0x7fff,temp_v6);
         puVar2 = temp_v6;
@@ -90,7 +90,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
     }
     if (*(char *)(temp_v0 + 0x6830) == '\x02') {
       temp_v4 = temp_v0 + temp_v3 * 8;
-      puVar2 = (unsigned char *)FUN_0019e4d4((*(unsigned int *)(temp_v4 + 0x13b8) & 0x3fffffff) >> 0xf);
+      puVar2 = (unsigned char *)slotRecordFindById((*(unsigned int *)(temp_v4 + 0x13b8) & 0x3fffffff) >> 0xf);
       if (puVar2 == (unsigned char *)0x0) {
         FUN_0035ad50((*(unsigned int *)(temp_v4 + 0x13b8) & 0x3fffffff) >> 0xf,temp_v6);
         puVar2 = temp_v6;
@@ -101,7 +101,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
   case 0xf:
     temp_v4 = *(int *)(DAT_0057f290 + 0x400);
     if ((temp_v4 != 0x10 && temp_v4 != 0x11) && temp_v4 != 0x12) {
-      FUN_001681cc(0x57);
+      sysPlaySe(0x57);
       temp_v4 = FUN_002a4860();
       temp_v1 = FUN_002a4894(temp_v0 + 0x8e14);
       FUN_00359b6c(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v4) * 2 + 0x8b70));
@@ -109,7 +109,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
     }
     break;
   case 0x13:
-    FUN_001681cc(0x5f);
+    sysPlaySe(0x5f);
     if (*(char *)(temp_v0 + 0x9071) != '\0') {
       FUN_00183f58(2,9,0x44,1);
       FUN_00183f58(3,0,0,1);
@@ -119,7 +119,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
   case 0x1d:
   case 0x1f:
     temp_v4 = FUN_0032cfc8();
-    FUN_001681cc(0xa0);
+    sysPlaySe(0xa0);
     FUN_003343f0(1);
     FUN_00333dc8(1);
     if (temp_v4 == 0) {
@@ -143,17 +143,17 @@ void FUN_0020b908(unsigned int param_1,int param_2)
     else {
       temp_v2 = 0x5b;
     }
-    FUN_001681cc(temp_v2);
-    temp_v2 = FUN_00187180(0x24,2);
-    temp_v1 = FUN_00192798();
-    temp_v3 = FUN_00192748(temp_v2);
+    sysPlaySe(temp_v2);
+    temp_v2 = dataTableGet(0x24,2);
+    temp_v1 = dataTableGetEntries();
+    temp_v3 = dataTableGetCount(temp_v2);
     if (temp_v3 >= 2) {
       temp_v4 = temp_v1 + 0x55;
     }
     FUN_0019de98(temp_v4,0xf4f4f4ff);
     break;
   case 0x1c:
-    FUN_001681cc(0x5c);
+    sysPlaySe(0x5c);
     FUN_0019de98(0,0xf4f4f4ff);
     *(unsigned char *)(temp_v0 + 0x9070) = 1;
     break;
@@ -165,7 +165,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
   case 0x25:
   case 0x26:
   case 0x27:
-    FUN_001681cc();
+    sysPlaySe();
   }
   if (param_2 != 0) {
     *(unsigned int *)(temp_v0 + 0x404) = *(unsigned int *)(temp_v0 + 0x400);

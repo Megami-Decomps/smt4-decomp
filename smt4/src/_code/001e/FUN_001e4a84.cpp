@@ -1,34 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e4a84` (_code @ 0x1e4a84, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Calls FUN_003dd1a4 with the global's field at +0x18 and the jobGetWork value, if that field is set; returns its result or 0. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003dd1a4(int, unsigned int);
+typedef struct Global {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ void *target;
+} Global;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+extern Global g_btlEffect;
 
-extern unsigned char DAT_00435d00; /* 0x435d00 */
+extern u32 jobGetWork(void);
+extern s32 FUN_003dd1a4(void *target, u32 value);
 
-extern unsigned int FUN_002c08f0(void);
-/* Supplied declaration required: FUN_003dd1a4. */
-
-
-void FUN_001e4a84(void)
-
+s32 FUN_001e4a84(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_002c08f0();
-  if ((*(int *)((unsigned char *)&DAT_00435d00 + 0x18)) != 0) {
-    FUN_003dd1a4((*(int *)((unsigned char *)&DAT_00435d00 + 0x18)),temp_v0);
-    return;
-  }
-  return;
+    u32 value = jobGetWork();
+
+    if (g_btlEffect.target != NULL) {
+        return FUN_003dd1a4(g_btlEffect.target, value);
+    }
+    return 0;
 }
 
-} /* extern "C" */
+}

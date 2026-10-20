@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int DAT_005f15fc; /* 0x5f15fc */
+extern unsigned int g_gameState; /* 0x5f15fc */
 extern unsigned char DAT_005f162e; /* 0x5f162e */
 extern signed char DAT_005f1633; /* 0x5f1633 */
 
@@ -14,7 +14,7 @@ unsigned char FUN_003644bc(void)
 {
   unsigned int *puVar1;
   
-  puVar1 = &DAT_005f15fc;
+  puVar1 = &g_gameState;
   if (DAT_005f1633 == -1) {
     puVar1 = (unsigned int *)(unsigned int)DAT_005f162e;
   }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00268fc4(void);
 int FUN_002691d8(unsigned int, unsigned int, int);
 int FUN_00269334(void);
-int FUN_002c32a0(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_002c3944(void);
 int FUN_002e7ca4(unsigned int *, int);
 
@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00268fc4. */
 /* Supplied declaration required: FUN_002691d8. */
 /* Supplied declaration required: FUN_00269334. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c3944. */
 /* Supplied declaration required: FUN_002e7ca4. */
 
@@ -43,7 +43,7 @@ unsigned int * FUN_001d2450(int param_1)
     temp_v2 = 300;
   }
   puVar1 = (unsigned int *)0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0x5c,0x10,1);
+  memAlloc(0x10000,0x100,0,0x5c,0x10,1);
   FUN_002c3944();
   puVar1[1] = 0xffffffff;
   *puVar1 = temp_v2;

@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002b01a0(void);
+int asdFileQueueRequest(void);
 
-/* Supplied declaration required: FUN_002b01a0. */
+/* Supplied declaration required: asdFileQueueRequest. */
 
 
 void FUN_00155cb0(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002b01a0();
+  asdFileQueueRequest();
   *(unsigned int *)(param_1 + 0x130) = param_3;
   *(unsigned int *)(param_1 + 0x134) = param_4;
   return;

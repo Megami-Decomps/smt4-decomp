@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int rt_memcpy(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -29,7 +29,7 @@ unsigned short * FUN_002b2d74(int param_1,int param_2,int param_3)
   temp_v0 = *(int *)(param_1 * 0x14 + 0x5c1d6c);
   temp_v1 = param_2 * *(int *)(param_3 + 0xc0) * *(int *)(param_3 + 0xc4) + param_2;
   puVar1 = (unsigned short *)0x10000;
-  FUN_00167ab4(0x10000,0x100,0,
+  memAlloc(0x10000,0x100,0,
                *(int *)(param_1 * 0x14 + 0x5c1d68) * param_2 + temp_v1 * 0x28 + temp_v0 * 2 + 0x30,0x10,
                1);
   puVar3 = puVar1 + 0x18 + temp_v1 * 0x14;

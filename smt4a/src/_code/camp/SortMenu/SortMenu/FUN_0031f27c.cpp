@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_0014e188(...);
-int FUN_0014e38c(...);
+int asdProcessCreateSimple(...);
 int FUN_001505ac(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_001846d0(...);
 int FUN_00184c00(...);
 int FUN_001b4a90(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
@@ -37,14 +37,14 @@ extern signed char DAT_0057f27c; /* 0x57f27c */
 extern unsigned int *DAT_0057f280; /* 0x57f280 */
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_00184c00. */
 /* Supplied declaration required: FUN_001b4a90. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -61,16 +61,16 @@ void FUN_0031f27c(unsigned int param_1,unsigned char param_2)
   if (DAT_0057f27c < '\x01') {
     if (DAT_0057f280 == (unsigned int *)0x0) {
       puVar2 = (unsigned int *)0x100;
-      FUN_00163060(0x100,0x100,0,0x878,1);
+      asdMemoryAllocTracked(0x100,0x100,0,0x878,1);
       DAT_0057f280 = puVar2;
     }
     puVar2 = DAT_0057f280;
-    FUN_002e6354();
+    sysMemClear();
     puVar3 = &LAB_0031f4d8;
-    FUN_0014e38c(&LAB_0031f4d8,4,0,0,FUN_0022a0a0,0,0);
+    asdProcessCreateSimple(&LAB_0031f4d8,4,0,0,FUN_0022a0a0,0,0);
     *puVar2 = (unsigned int)puVar3;
     puVar4 = &LAB_0031f4e8;
-    FUN_0015155c(&LAB_0031f4e8,0xeb,0,0,FUN_0022a5d8,0,0,puVar3);
+    taskCreateDraw(&LAB_0031f4e8,0xeb,0,0,FUN_0022a5d8,0,0,puVar3);
     puVar2[1] = (unsigned int)puVar4;
     puVar1 = DAT_0057f280;
     Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(DAT_0057f280 + 2);

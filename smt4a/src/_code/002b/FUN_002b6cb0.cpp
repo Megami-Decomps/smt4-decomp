@@ -8,7 +8,7 @@ int FUN_0019af70(...);
 int FUN_002d8a94(void);
 
 extern int DAT_005806d4; /* 0x5806d4 */
-extern unsigned int DAT_005f15fc; /* 0x5f15fc */
+extern unsigned int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f161c; /* 0x5f161c */
 extern unsigned char DAT_005f161d; /* 0x5f161d */
 
@@ -42,7 +42,7 @@ void FUN_002b6cb0(void)
   
   temp_v1 = DAT_005806d4;
   if ((DAT_005806d4 != 0) && (*(int *)(DAT_005806d4 + 4) == 8)) {
-    puVar3 = &DAT_005f15fc;
+    puVar3 = &g_gameState;
     if (DAT_005f161c == '\0') {
       puVar3 = (unsigned int *)(unsigned int)DAT_005f161d;
     }

@@ -1,31 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038d7fc` (_code @ 0x38d7fc, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003283ac(int);
+typedef struct Inventory {
+    /* 0x0000 */ u8 unk0000[0x1CA3];
+    /* 0x1CA3 */ u8 capacity;
+} Inventory;
 
-extern int FUN_001ab888(void);
-extern int FUN_001b347c(void);
-extern int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_003283ac. */
+int FUN_001b347c(void);
+Inventory *FUN_001ab888(void);
+int scrSetResult(int value);
+int scrGetArg(u32 index);
 
-
-unsigned int FUN_0038d7fc(void)
-
+/* Script command: passes to scrSetResult whether script argument 0 fits in the remaining capacity (capacity - used). */
+u32 FUN_0038d7fc(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = FUN_00236038(0);
-  temp_v2 = FUN_001ab888();
-  temp_v0 = *(unsigned char *)(temp_v2 + 0x1ca3);
-  temp_v2 = FUN_001b347c();
-  FUN_003283ac(temp_v1 <= (int)((unsigned int)temp_v0 - temp_v2));
-  return 1;
+    int needed = scrGetArg(0);
+
+    scrSetResult(needed <= (int)(FUN_001ab888()->capacity - FUN_001b347c()));
+    return 1;
 }
 
 } /* extern "C" */

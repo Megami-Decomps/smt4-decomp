@@ -3,10 +3,10 @@
 extern "C" {
 
 int FUN_00168980(int);
-int FUN_0019a5a0(void);
-int FUN_0019c364(void);
+int asdMemFree(void);
+int scrScriptProcessDestroy(void);
 int FUN_00203d04(int);
-int FUN_002e132c(int);
+int asdTMTexTableFreeEntry(int);
 int FUN_00318d6c(void);
 int FUN_0035b304(void);
 int FUN_0037b450(void);
@@ -20,11 +20,11 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00168980. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_00203d04. */
 extern int FUN_002619e0(void);
-/* Supplied declaration required: FUN_002e132c. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_00318d6c. */
 /* Supplied declaration required: FUN_0035b304. */
 /* Supplied declaration required: FUN_0037b450. */
@@ -40,27 +40,27 @@ void FUN_004b87e4(int param_1)
   int temp_v0;
   
   if (*(int *)(param_1 + 0x114c) != 0) {
-    FUN_0019c364();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0x114c) = 0;
   }
   if (*(int *)(param_1 + 0x1144) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x1144) = 0;
   }
   if (*(int *)(param_1 + 0x1148) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x1148) = 0;
   }
   if (*(int *)(param_1 + 0x1140) != 0) {
-    FUN_0019c364();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0x1140) = 0;
   }
   if (*(int *)(param_1 + 0x1138) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x1138) = 0;
   }
   if (*(int *)(param_1 + 0x113c) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x113c) = 0;
   }
   FUN_004bb048(param_1 + 0x9c);
@@ -74,7 +74,7 @@ void FUN_004b87e4(int param_1)
   FUN_0037b450();
   FUN_00318d6c();
   FUN_0035b304();
-  FUN_002e132c(0x18);
+  asdTMTexTableFreeEntry(0x18);
   return;
 }
 

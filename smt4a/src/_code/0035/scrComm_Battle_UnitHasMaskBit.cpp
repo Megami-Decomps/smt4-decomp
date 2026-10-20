@@ -1,0 +1,22 @@
+#include "battle/btlUnit.h"
+
+extern "C" {
+
+void scrSetResult(s32 result);
+u32 scrGetArg(void);
+BtlUnitA *btlUnitGet(u32 unit);
+
+extern u32 g_btlScriptUnit;
+
+/* Script command: tests one bit of the unit's mask; the script's argument is the bit number. */
+s32 scrComm_Battle_UnitHasMaskBit(void)
+{
+    u32 bit = scrGetArg();
+    BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
+    BtlUnitDataA *data = unit->data;
+
+    scrSetResult((data->unk110 & (1 << (bit & 0xFF))) != 0);
+    return 1;
+}
+
+} /* extern "C" */

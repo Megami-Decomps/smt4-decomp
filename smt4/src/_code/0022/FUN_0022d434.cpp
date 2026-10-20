@@ -15,7 +15,7 @@ int FUN_00233854(unsigned int);
 int FUN_0029ce60(unsigned int, int, int);
 int FUN_0029ea68(...);
 int FUN_002b9024(...);
-int FUN_002c564c(...);
+int jyoucyuGetTableEntry(...);
 int FUN_002cd37c(void);
 
 typedef int romwright_code(...);
@@ -43,7 +43,7 @@ extern unsigned char FUN_0022e0b0(int, unsigned int);
 extern int FUN_002a0d0c(void);
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_002cd37c. */
 extern unsigned char FUN_003ad6a0(int, int);
 
@@ -123,7 +123,7 @@ void FUN_0022d434(int param_1)
     *(unsigned char *)(param_1 + 0x2d) = 1;
     temp_v1 = FUN_0022e0b0(temp_v2,1);
     *(unsigned char *)(param_1 + 0x94) = temp_v1;
-    FUN_002c564c(0);
+    jyoucyuGetTableEntry(0);
   }
   else {
     FUN_0022e2fc();
@@ -173,7 +173,7 @@ void FUN_0022d434(int param_1)
     } while (temp_v2 < 0x4ff);
     temp_v1 = FUN_003ad6a0(temp_v3,temp_v9);
     *(unsigned char *)(param_1 + 0x94) = temp_v1;
-    FUN_002c564c(0);
+    jyoucyuGetTableEntry(0);
   }
   (**(romwright_code **)(**(int **)(param_1 + 0x590) + 8))(*(int **)(param_1 + 0x590),param_1 + 0x20);
   puVar4 = (unsigned short *)(*(int *)(param_1 + 0x590) + 4);
@@ -184,7 +184,7 @@ void FUN_0022d434(int param_1)
   }
   FUN_00233670(param_1 + 0x55c,0x1d,0x40e,temp_v2);
   *(unsigned char *)(param_1 + 0x56c) = 1;
-  FUN_002c564c(0);
+  jyoucyuGetTableEntry(0);
   return;
 }
 

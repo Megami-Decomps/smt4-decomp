@@ -52,7 +52,7 @@ extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
 extern int DAT_004474f4; /* 0x4474f4 */
 extern unsigned int *DAT_004475d0; /* 0x4475d0 */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -129,7 +129,7 @@ void MapMain_DrawMinimapIcons(void)
   float temp_v43;
   float temp_v44;
   
-  FUN_002c1b64(DAT_0044ea00,*DAT_004475d0);
+  FUN_002c1b64(g_titleScene,*DAT_004475d0);
   temp_v1 = 0;
   temp_v17 = 57.32484f;
   temp_v18 = 0x3f360b61;

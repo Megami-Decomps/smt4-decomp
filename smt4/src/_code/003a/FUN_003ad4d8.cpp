@@ -10,10 +10,10 @@ int FUN_00291944(void);
 int FUN_00292c0c(void);
 int FUN_0029a128(int);
 int FUN_002a0cc8(int);
-int FUN_002a7218(void);
-int FUN_002ae7e8(int);
+int scrScriptProcessDestroy(void);
+int asdTMTexTableFreeEntry(int);
 int FUN_002ae898(int, int);
-int FUN_002c415c(void);
+int asdMemFree(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -26,10 +26,10 @@ typedef struct {
 /* Supplied declaration required: FUN_00292c0c. */
 /* Supplied declaration required: FUN_0029a128. */
 /* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: FUN_002a7218. */
-/* Supplied declaration required: FUN_002ae7e8. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002ae898. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_003ad4d8(int param_1)
@@ -39,15 +39,15 @@ void FUN_003ad4d8(int param_1)
   int temp_v0;
   
   if (*(int *)(param_1 + 0x5a0) != 0) {
-    FUN_002a7218();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0x5a0) = 0;
   }
   if (*(int *)(param_1 + 0x598) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x598) = 0;
   }
   if (*(int *)(param_1 + 0x59c) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x59c) = 0;
   }
   FUN_0029a128(0);
@@ -59,7 +59,7 @@ void FUN_003ad4d8(int param_1)
       FUN_002ae898(0x1d,temp_v0);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 3);
-    FUN_002ae7e8(0x1d);
+    asdTMTexTableFreeEntry(0x1d);
     *(unsigned char *)(param_1 + 0x1e) = 0;
   }
   if (*(char *)(param_1 + 0x1d) != '\0') {

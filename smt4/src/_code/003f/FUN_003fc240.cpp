@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int aeabi_uidivmod(unsigned int, int);
+int __aeabi_uidivmod(unsigned int, int);
 
 /* stack frame of param_7: 14 slot(s), 56 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int FUN_00100c90(unsigned int, unsigned char *, unsigned int);
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 extern unsigned int nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes(unsigned int, long long, unsigned int, unsigned int);
 
 
@@ -70,7 +70,7 @@ unsigned int FUN_003fc240(int *param_1,int *param_2,unsigned int *param_3,int *p
   temp_v17 = param_2;
   temp_v18 = param_3;
   piStack_28 = param_4;
-  aeabi_uidivmod(param_5,param_1[2]);
+  __aeabi_uidivmod(param_5,param_1[2]);
   temp_v0 = nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes
                     (param_1[3],romwright_piece_4_4(4,temp_v16),4,*param_1 + temp_v2 * 4);
   if (-1 < (int)temp_v0) {

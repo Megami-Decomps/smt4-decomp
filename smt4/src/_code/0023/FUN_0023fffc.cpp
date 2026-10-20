@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned int DAT_004342c8; /* 0x4342c8 */
+extern unsigned int g_btlMain; /* 0x4342c8 */
 
 /* Supplied declaration required: FUN_0023fbdc. */
 extern int FUN_002405c8(int, unsigned short);
@@ -81,7 +81,7 @@ void FUN_0023fffc(unsigned int *param_1,int param_2)
     }
     FUN_0033a01c(param_2);
     FUN_00339e38(param_2);
-    FUN_003d6ffc(DAT_004342c8);
+    FUN_003d6ffc(g_btlMain);
     if ((*(char *)(param_2 + 0x44b7) == '\0') &&
        (((*(unsigned int *)(param_2 + 0xe0) & 0x2000000) != 0 || ((*puVar9 & 2) != 0)))) {
       temp_v4 = 4;

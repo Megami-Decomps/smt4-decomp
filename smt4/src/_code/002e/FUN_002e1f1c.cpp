@@ -14,13 +14,13 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char LAB_00144ff8; /* 0x144ff8 */
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002b46f8. */
-extern unsigned int FUN_002c0c74(unsigned int);
-extern unsigned int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 
 
 void FUN_002e1f1c(unsigned short param_1,unsigned short *param_2,unsigned int param_3)
@@ -43,16 +43,16 @@ void FUN_002e1f1c(unsigned short param_1,unsigned short *param_2,unsigned int pa
   unsigned short temp_v10 [84];
   
   temp_v10[0] = param_1;
-  if (*(int *)(DAT_00433158 + 0x368) != 0) {
+  if (*(int *)(g_aocSystem + 0x368) != 0) {
     puVar4 = temp_v10;
-    FUN_002b46f8(puVar4,*(int *)(DAT_00433158 + 0x368),*(unsigned int *)(DAT_00433158 + 0x364),0xa8,
+    FUN_002b46f8(puVar4,*(int *)(g_aocSystem + 0x368),*(unsigned int *)(g_aocSystem + 0x364),0xa8,
                  &LAB_00144ff8);
     temp_v7 = temp_v5;
     if (puVar4 != (unsigned short *)0x0) goto LAB_002e1fa0;
   }
-  temp_v3 = FUN_002c0cec(0,1);
-  temp_v4 = FUN_002c0cc4();
-  temp_v3 = FUN_002c0c74(temp_v3);
+  temp_v3 = dataTableGet(0,1);
+  temp_v4 = dataTableGetEntries();
+  temp_v3 = dataTableGetCount(temp_v3);
   puVar4 = temp_v10;
   FUN_002b46f8(puVar4,temp_v4,temp_v3,0xa8,&LAB_00144ff8);
   temp_v7 = temp_v6;

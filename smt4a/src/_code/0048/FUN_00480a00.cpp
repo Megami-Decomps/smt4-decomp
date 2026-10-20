@@ -1,49 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00480a00` (_code @ 0x480a00, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation of the final base * percent step (r1/r2 swapped). */
+#include "common.h"
 
 extern "C" {
 
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
+/* Object with a 10-bit base value in its flags word and a percentage at 0x2e. */
+typedef struct {
+    u8 unk00[0x24];
+    u32 base : 10;      /* 0x24 */
+    u32 unk24b : 22;
+    u8 unk28[6];
+    u16 percent;        /* 0x2e */
+} PercentObj;
 
-
-unsigned long long FUN_00480a00(int param_1,unsigned int param_2)
-
+/* Scales the object's base value by its percentage (floor, at least 1); 0 when either is 0. */
+u32 FUN_00480a00(PercentObj *obj)
 {
-  unsigned long long temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = romwright_piece_4_4(param_1,param_2);
-  if (param_1 != 0) {
-    temp_v2 = *(unsigned int *)(param_1 + 0x24);
-    temp_v3 = (temp_v2 & 0x3ff) != 0;
-    if (temp_v3) {
-      temp_v1 = (unsigned int)*(unsigned short *)(param_1 + 0x2e);
+    u32 percent;
+    bool hasBase;
+
+    if (obj == NULL) {
+        return 0;
     }
-    else {
-      temp_v1 = 0;
-    }
-    temp_v0 = romwright_piece_4_4(temp_v1,temp_v2);
-    if (temp_v3 && temp_v1 != 0) {
-      temp_v3 = temp_v1 == 100;
-      if (temp_v3) {
-        temp_v1 = temp_v2 & 0x3ff;
-      }
-      temp_v0 = romwright_piece_4_4(temp_v1,temp_v2);
-      if (!temp_v3) {
-        temp_v0 = (unsigned long long)((temp_v2 & 0x3ff) * temp_v1) * 0x28f5c29ULL;
-        if ((int)(temp_v0 >> 32) <= 0) {
-          temp_v0 = romwright_piece_4_4(1,(int)temp_v0);
+    hasBase = obj->base != 0;
+    percent = hasBase ? obj->percent : 0;
+    if (hasBase && percent != 0) {
+        if (percent == 100) {
+            percent = obj->base;
+        } else {
+            percent = (u32)(((u64)0x28f5c29 * (obj->base * percent)) >> 32);
+            if ((int)percent <= 0) {
+                percent = 1;
+            }
         }
-      }
     }
-  }
-  return romwright_piece_4_4((int)temp_v0,(int)(temp_v0 >> 0x20));
+    return percent;
 }
 
 } /* extern "C" */

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100380(...);
+int libc_sprintf(...);
 int FUN_00100388(unsigned int, unsigned char *, unsigned char *);
 int rt_memcpy_w(unsigned char *[4], unsigned char *, int);
 
@@ -26,7 +26,7 @@ extern unsigned char DAT_005603ab; /* 0x5603ab */
 extern unsigned char DAT_00560458; /* 0x560458 */
 extern char s__U_U_U_U_U_U_U_U_U_U_0057f298[45]; /* 0x57f298 */
 
-/* Supplied declaration required: FUN_00100380. */
+/* Supplied declaration required: libc_sprintf. */
 /* Supplied declaration required: FUN_00100388. */
 extern unsigned int FUN_0014bd84(unsigned int);
 extern unsigned int FUN_00180114(unsigned int);
@@ -47,23 +47,23 @@ void FUN_0021b390(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   unsigned char *puStack_44;
   
   if ((int)param_3 < 0) {
-    FUN_00100380(param_4,0x21b4b4);
+    libc_sprintf(param_4,0x21b4b4);
     return;
   }
   if ((param_2 == 0 || param_2 == 0xe) || param_2 == 1) {
     temp_v0 = FUN_00180114(param_3 & 0xffff);
-    FUN_00100380(param_4,&LAB_0021b4d4,temp_v0);
+    libc_sprintf(param_4,&LAB_0021b4d4,temp_v0);
     return;
   }
   if (param_2 == 2) {
-    FUN_00100380(param_4,&LAB_0021b4d4,
+    libc_sprintf(param_4,&LAB_0021b4d4,
                  *(unsigned int *)(s__U_U_U_U_U_U_U_U_U_U_0057f298 + param_3 * 4));
     return;
   }
   if (param_2 != 3) {
     if (param_2 == 4) {
       temp_v0 = FUN_0014bd84(param_3);
-      FUN_00100380(param_4,&LAB_0021b4d4,temp_v0);
+      libc_sprintf(param_4,&LAB_0021b4d4,temp_v0);
       return;
     }
     if (param_2 != 5) {
@@ -88,7 +88,7 @@ void FUN_0021b390(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     return;
   }
   temp_v0 = FUN_002c1ce4(param_3,0);
-  FUN_00100380(param_4,&LAB_0021b4d4,temp_v0);
+  libc_sprintf(param_4,&LAB_0021b4d4,temp_v0);
   return;
 }
 

@@ -9,7 +9,7 @@ int FUN_0015f858(...);
 int FUN_00162790(...);
 int FUN_001634b4(...);
 int FUN_00164b5c(...);
-int FUN_001677c0(...);
+int efctSetSpeed(...);
 int FUN_001689e8(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -42,8 +42,8 @@ typedef struct {
 
 extern unsigned char LAB_0035580c; /* 0x35580c */
 extern unsigned char LAB_00355ef4; /* 0x355ef4 */
-extern int DAT_005806c4; /* 0x5806c4 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_mapDepart; /* 0x5806c4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_005f16d4; /* 0x5f16d4 */
 extern short DAT_005f1d72; /* 0x5f1d72 */
 extern short DAT_005f1e1a; /* 0x5f1e1a */
@@ -55,7 +55,7 @@ extern short DAT_005f1e1a; /* 0x5f1e1a */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_001634b4. */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001689e8. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
@@ -103,17 +103,17 @@ void FUN_00355428(void)
   int temp_v28;
   int temp_v29;
   
-  temp_v1 = DAT_005806c4;
-  if (*(char *)(DAT_005806c4 + 0x50) != '\0') {
+  temp_v1 = g_mapDepart;
+  if (*(char *)(g_mapDepart + 0x50) != '\0') {
     temp_v15 = 0;
     temp_v11 = 0.0f;
-    temp_v3 = *(int *)(DAT_005806c4 + 0x54);
+    temp_v3 = *(int *)(g_mapDepart + 0x54);
     if (temp_v3 < 6) {
       VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v11 = (float)VectorSignedToFloat(temp_v3 * 0x43,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v11 = temp_v11 + -400.0f;
     }
-    if (*(int *)(DAT_005806c4 + 0xc) == 0) {
+    if (*(int *)(g_mapDepart + 0xc) == 0) {
       temp_v3 = FUN_001834a4(8,0x10b);
       temp_v14 = (int)temp_v11;
       temp_v7 = 0x107;
@@ -146,7 +146,7 @@ void FUN_00355428(void)
       temp_v27 = FUN_001834a4(0x13,0x11cb);
       temp_v28 = FUN_001834a4(0x13,0x11cc);
       temp_v29 = FUN_001834a4(0x13,0x11cd);
-      FUN_001677c0();
+      efctSetSpeed();
       temp_v2 = 0 < *(int *)(temp_v1 + 0xbc);
       if (0 < *(int *)(temp_v1 + 0xc0)) {
         temp_v2 = temp_v2 + '\x01';
@@ -205,7 +205,7 @@ void FUN_00355428(void)
           FUN_001835b4(2,7,temp_v9 % 10,
                        (int)*(short *)(temp_v26 + 8) + (int)*(short *)(temp_v14 + 8) + temp_v7,
                        (int)*(short *)(temp_v14 + 10) + (int)*(short *)(temp_v26 + 10),0xb);
-          temp_v9 = DAT_0059dbb4;
+          temp_v9 = g_renderCtx;
           temp_v5 = FUN_00169294(6,1,0);
           piVar10 = (int *)(temp_v9 + 0x12b8);
           temp_v6 = piVar10[*piVar10 + 2];
@@ -215,12 +215,12 @@ void FUN_00355428(void)
             *(unsigned char *)(temp_v9 + 0x12d0) = 0;
           }
           temp_v9 = temp_v1 + (5 - temp_v3) * 0x8c;
-          FUN_001677c0();
+          efctSetSpeed();
           FUN_00184c40(temp_v9 + 0x148,(int)(short)(*(short *)(temp_v14 + 8) + (short)temp_v7),
                        (int)*(short *)(temp_v14 + 10));
           FUN_001634b4(temp_v9 + 0x148);
-          FUN_001677c0();
-          temp_v9 = DAT_0059dbb4;
+          efctSetSpeed();
+          temp_v9 = g_renderCtx;
           temp_v5 = FUN_00169294(6,7,0);
           piVar10 = (int *)(temp_v9 + 0x12b8);
           temp_v6 = piVar10[*piVar10 + 2];
@@ -233,7 +233,7 @@ void FUN_00355428(void)
         }
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 5);
-      FUN_001677c0();
+      efctSetSpeed();
     }
     temp_v16 = 0x110d;
     if (!(*(int *)(temp_v1 + 0xc) == 2 || *(int *)(temp_v1 + 0xc) == 3)) {
@@ -280,7 +280,7 @@ void FUN_00355428(void)
             temp_v5 = temp_v5 - 0x10;
             VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
           }
-          FUN_001677c0(temp_v5);
+          efctSetSpeed(temp_v5);
           temp_v5 = *(int *)(temp_v6 + 0x4a0) + 1;
           *(int *)(temp_v6 + 0x4a0) = temp_v5;
           if (temp_v5 >= 0x21) {
@@ -295,7 +295,7 @@ void FUN_00355428(void)
                            0xb);
               temp_v5 = temp_v5 + 1;
             } while (temp_v5 < 0x10bc);
-            FUN_001677c0();
+            efctSetSpeed();
           }
         }
         temp_v9 = (int)*(short *)(temp_v7 + 0x5f1d20);
@@ -362,7 +362,7 @@ LAB_00355f74:
             temp_v5 = temp_v5 - 0x10;
             VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
           }
-          FUN_001677c0(temp_v5);
+          efctSetSpeed(temp_v5);
           temp_v5 = *(int *)(temp_v6 + 0x4b0) + 1;
           *(int *)(temp_v6 + 0x4b0) = temp_v5;
           if (temp_v5 >= 0x21) {
@@ -377,7 +377,7 @@ LAB_00355f74:
                            0xb);
               temp_v5 = temp_v5 + 1;
             } while (temp_v5 < 0x10bc);
-            FUN_001677c0();
+            efctSetSpeed();
           }
         }
         temp_v9 = (int)*(short *)(temp_v7 + 0x5f1dc8);

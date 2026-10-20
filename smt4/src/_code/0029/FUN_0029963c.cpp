@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002945a4(...);
 
-extern unsigned char DAT_0044e140; /* 0x44e140 */
+extern unsigned char g_gameGlobals; /* 0x44e140 */
 
 /* Supplied declaration required: FUN_002945a4. */
 
@@ -22,23 +22,23 @@ void FUN_0029963c(int param_1,unsigned int param_2)
   if (param_1 != 0) {
     if (param_1 != 1) {
       if (param_1 == 2) {
-        FUN_002945a4(*(unsigned int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e80),2,param_2,7);
+        FUN_002945a4(*(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e80),2,param_2,7);
       }
-      temp_v0 = (*(int *)((unsigned char *)&DAT_0044e140 + 0x4));
-      *(unsigned int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x10) = 0;
+      temp_v0 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
+      *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x10) = 0;
       *(unsigned int *)(temp_v0 + 0x12dc) = 6;
       return;
     }
-    temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e80);
+    temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e80);
     temp_v2 = 1;
   }
   else {
-    temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e80);
+    temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e80);
     temp_v2 = 0;
   }
   FUN_002945a4(temp_v1,temp_v2,param_2,7);
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0044e140 + 0x4));
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x10) = 0;
+  temp_v0 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
+  *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x10) = 0;
   *(unsigned int *)(temp_v0 + 0x12dc) = 6;
   return;
 }

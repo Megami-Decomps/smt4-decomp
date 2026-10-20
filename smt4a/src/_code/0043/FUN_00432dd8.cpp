@@ -9,7 +9,7 @@ int FUN_0011e41a(unsigned char **, unsigned char *);
 int FUN_0012055e(unsigned int, unsigned char **);
 int FUN_0012083e(...);
 int FUN_001304a8(...);
-int FUN_002e6dac(...);
+int rt_malloc(...);
 int FUN_002e6e14(...);
 int FUN_002e9318(unsigned char [8]);
 int FUN_002e9598(unsigned int, unsigned int);
@@ -76,7 +76,7 @@ extern unsigned char DAT_0055add0; /* 0x55add0 */
 /* Supplied declaration required: FUN_0012055e. */
 /* Supplied declaration required: FUN_0012083e. */
 /* Supplied declaration required: FUN_001304a8. */
-/* Supplied declaration required: FUN_002e6dac. */
+/* Supplied declaration required: rt_malloc. */
 /* Supplied declaration required: FUN_002e6e14. */
 extern unsigned int FUN_002e9300(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002e9318. */
@@ -194,8 +194,8 @@ void FUN_00432dd8(unsigned int param_1)
   temp_v11 = (unsigned char *)0x0;
   temp_v12 = (unsigned char *)0x0;
   temp_v13 = 0;
-  puVar4 = (unsigned int *)FUN_002e6dac(0xc);
-  temp_v2 = FUN_002e6dac(0x700);
+  puVar4 = (unsigned int *)rt_malloc(0xc);
+  temp_v2 = rt_malloc(0x700);
   puVar4[2] = temp_v2;
   *puVar4 = (unsigned int)temp_v8;
   puVar4[1] = 0x20;
@@ -298,7 +298,7 @@ void FUN_00432dd8(unsigned int param_1)
           if (temp_v44 < temp_v0 + 0x20) {
             temp_v44 = temp_v0 + 0x20;
           }
-          temp_v19 = (unsigned int *)FUN_002e6dac(temp_v44 * 0x28);
+          temp_v19 = (unsigned int *)rt_malloc(temp_v44 * 0x28);
           puVar4 = temp_v19;
           for (puVar8 = (unsigned int *)*piVar10; puVar8 != temp_v18; puVar8 = puVar8 + 10) {
             if (puVar4 != (unsigned int *)0x0) {

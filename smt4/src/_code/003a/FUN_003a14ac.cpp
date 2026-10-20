@@ -12,7 +12,7 @@ int FUN_0029a128(int);
 int FUN_0029ca58(void);
 int FUN_0029d684(int);
 int FUN_0029defc(unsigned int, int);
-int FUN_002a775c(void);
+int asdMdlManagerDestroy(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -32,7 +32,7 @@ extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_0029d684. */
 /* Supplied declaration required: FUN_0029defc. */
 extern int FUN_0029e0f8(void);
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 extern int FUN_002ae3c0(short);
 
 
@@ -111,7 +111,7 @@ void FUN_003a14ac(int param_1)
       *piVar6 = 3;
       FUN_00230558(0);
       if (*(int *)(param_1 + 0x15d48) != 0) {
-        FUN_002a775c();
+        asdMdlManagerDestroy();
         *(int *)(param_1 + 0x15d48) = 0;
         return;
       }

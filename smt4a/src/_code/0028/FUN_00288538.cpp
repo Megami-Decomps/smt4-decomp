@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0015f858(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001689e8(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -38,7 +38,7 @@ extern int DAT_0057f108; /* 0x57f108 */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int FUN_001654d8(int);
 extern int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001689e8. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -76,7 +76,7 @@ void FUN_00288538(int param_1)
   temp_v1 = FUN_001654d8(temp_v0);
   temp_v0 = FUN_001654e4(temp_v0);
   FUN_0019d880();
-  FUN_001677c0();
+  efctSetSpeed();
   if (param_1 == 0) {
     FUN_001835b4(2,0x12,0x52d,temp_v1,temp_v0,0xbf);
     FUN_001835b4(2,0x12,0x52f,temp_v1,temp_v0,0xbf);
@@ -134,7 +134,7 @@ void FUN_00288538(int param_1)
       do {
         temp_v2 = temp_v2 + 1;
         if (temp_v2 >= 7) {
-          FUN_001677c0();
+          efctSetSpeed();
           return;
         }
       } while ((temp_v2 == 1 || temp_v2 == 2) && (temp_v0 = FUN_0018719c(0x410), temp_v0 == 0));
@@ -225,7 +225,7 @@ void FUN_00288538(int param_1)
         }
         FUN_003c40b4(temp_v12 + *(short *)(temp_v1 + 8),temp_v13 + *(short *)(temp_v1 + 10),temp_v9,
                      temp_v10,temp_v6,(int)*(short *)(temp_v11 + temp_v0 * 2 + 0x1b3e));
-        FUN_001677c0();
+        efctSetSpeed();
         return;
       }
     } while ((temp_v1 == 1 || temp_v1 == 2) && (temp_v2 = FUN_0018719c(0x410), temp_v2 == 0));

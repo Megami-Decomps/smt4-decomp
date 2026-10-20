@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+int scrSetResult(int);
 
 /* stack frame of void: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -16,10 +16,10 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_002939f4(void);
+/* Supplied declaration required: scrSetResult. */
+extern int btlGetMainState(void);
 extern int FUN_00295d7c(int);
-extern unsigned int FUN_00296cc8(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 extern int FUN_0029ebac(int, unsigned int);
 extern int FUN_002a8740(int);
 extern int FUN_002a8764(void);
@@ -42,7 +42,7 @@ unsigned int FUN_003188e8(void)
   int temp_v8;
   char temp_v9 [28];
   
-  temp_v2 = FUN_00296cc8(0);
+  temp_v2 = scrGetArg(0);
   temp_v9[0] = '\0';
   temp_v9[1] = '\0';
   temp_v9[2] = '\0';
@@ -103,7 +103,7 @@ unsigned int FUN_003188e8(void)
       temp_v0 = '\0';
       temp_v3 = 0;
       do {
-        temp_v5 = FUN_002939f4();
+        temp_v5 = btlGetMainState();
         puVar6 = (unsigned int *)(*(int *)(temp_v5 + 0x1fc0) + temp_v3 * 0x288);
         temp_v2 = *puVar6;
         if ((((temp_v2 & 1) != 0) && ((temp_v2 & 0x40) == 0)) &&
@@ -118,7 +118,7 @@ unsigned int FUN_003188e8(void)
       } while (temp_v3 < 0x6d);
     }
   }
-  FUN_0028dcb0(temp_v8);
+  scrSetResult(temp_v8);
   return 1;
 }
 

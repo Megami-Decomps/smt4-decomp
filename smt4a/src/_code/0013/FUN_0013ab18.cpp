@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0013ebe8(unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_001418b8(unsigned int);
-int FUN_00141d48(void);
+int asdSoundHandleListFind(void);
 
 extern unsigned char DAT_00588fac; /* 0x588fac */
 extern unsigned int DAT_00588fb0; /* 0x588fb0 */
@@ -22,10 +22,10 @@ extern unsigned int DAT_0061953c; /* 0x61953c */
 extern int FUN_00140924(unsigned int, unsigned int);
 extern int FUN_001414d4(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001418b8. */
-/* Supplied declaration required: FUN_00141d48. */
+/* Supplied declaration required: asdSoundHandleListFind. */
 extern unsigned int FUN_00145868(void);
-extern int FUN_00180008(unsigned int);
-extern int FUN_0030ef8c(void);
+extern int jyoucyuGetTableEntry(unsigned int);
+extern int rt_memcmp(void);
 
 
 void FUN_0013ab18(void)
@@ -43,7 +43,7 @@ void FUN_0013ab18(void)
   unsigned int *puVar9;
   unsigned char temp_v7;
   
-  temp_v0 = FUN_00180008(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
     temp_v0 = 0;
     do {
@@ -60,7 +60,7 @@ void FUN_0013ab18(void)
       if ((temp_v1 & 1) != 0) {
         if ((temp_v1 & 2) != 0) {
           temp_v1 = *puVar8;
-          FUN_00141d48();
+          asdSoundHandleListFind();
           temp_v4 = (&DAT_00619538)[temp_v0 * 8];
           if ((temp_v4 & 4) != 0) {
             if ((temp_v1 & 0x20) == 0) {
@@ -139,7 +139,7 @@ void FUN_0013ab18(void)
           }
           FUN_001418b8((&DAT_00619528)[temp_v0 * 8]);
           temp_v1 = (unsigned int)DAT_00588fac;
-          temp_v3 = FUN_0030ef8c();
+          temp_v3 = rt_memcmp();
           if (((temp_v3 == 0) && (temp_v3 = (&DAT_00619528)[temp_v0 * 8], temp_v3 != 0x100008b)) &&
              (temp_v3 != 0x100008c && temp_v3 != 0x100008d)) {
             temp_v2 = 0;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00296cc8(int);
+int scrGetArg(int);
 
-/* Supplied declaration required: FUN_00296cc8. */
+/* Supplied declaration required: scrGetArg. */
 extern int FUN_002f4f24(void);
 
 
@@ -16,7 +16,7 @@ unsigned char FUN_002cd9c0(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  FUN_00296cc8(0);
+  scrGetArg(0);
   temp_v0 = FUN_002f4f24();
   return temp_v0 != 0;
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ae43c(unsigned char [68], int, unsigned int, unsigned char *, int *, int);
+int asdLoadFileAsync(unsigned char [68], int, unsigned int, unsigned char *, int *, int);
 int FUN_002b64a0(...);
 int FUN_002bf694(unsigned char [68], int);
 
@@ -17,9 +17,9 @@ extern unsigned char LAB_00153068; /* 0x153068 */
 extern unsigned char LAB_002a6250; /* 0x2a6250 */
 extern unsigned char LAB_002a6258; /* 0x2a6258 */
 
-/* Supplied declaration required: FUN_002ae43c. */
+/* Supplied declaration required: asdLoadFileAsync. */
 /* Supplied declaration required: FUN_002b64a0. */
-extern int *FUN_002b93b0(void);
+extern int *asdTMTexTableCallFileB(void);
 /* Supplied declaration required: FUN_002bf694. */
 extern int FUN_002c30c4(unsigned int);
 
@@ -39,7 +39,7 @@ int * FUN_0023e3ec(void)
   int temp_v2;
   unsigned char temp_v3 [68];
   
-  piVar1 = (int *)FUN_002b93b0();
+  piVar1 = (int *)asdTMTexTableCallFileB();
   temp_v2 = piVar1[1];
   FUN_002bf694(temp_v3,*piVar1 + 0xc);
   pcVar3 = *(char **)(temp_v2 + 8);
@@ -76,7 +76,7 @@ int * FUN_0023e3ec(void)
         temp_v1 = temp_v1 | 2;
       }
     }
-    FUN_002ae43c(temp_v3,0,temp_v1,&LAB_00153068,piVar1,0x80);
+    asdLoadFileAsync(temp_v3,0,temp_v1,&LAB_00153068,piVar1,0x80);
   }
   return piVar1;
 }

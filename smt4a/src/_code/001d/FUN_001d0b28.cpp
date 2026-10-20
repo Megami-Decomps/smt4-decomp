@@ -1,20 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d0b28` (_code @ 0x1d0b28, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Forwards (this+0x1dc, other+4) to FUN_001b6668 (tail call). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001b6668(int, int);
+typedef struct {
+    u8 unk000[0x1dc];  /* 0x000 */
+    u8 member[1];      /* 0x1dc */
+} Owner;
 
-/* Supplied declaration required: FUN_001b6668. */
+typedef struct {
+    u8 unk00[4];       /* 0x00 */
+    u8 part[1];        /* 0x04 */
+} Other;
 
+void FUN_001b6668(u8 *member, u8 *part);
 
-void FUN_001d0b28(int param_1,int param_2)
-
+void FUN_001d0b28(Owner *owner, Other *other)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001b6668(param_1 + 0x1dc,param_2 + 4);
-  return;
+    u8 *member = owner->member;
+
+    FUN_001b6668(member, other->part);
 }
 
 } /* extern "C" */

@@ -10,7 +10,7 @@ int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
 typedef int romwright_code(...);
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -36,7 +36,7 @@ void FUN_00107784(int param_1)
   float temp_v6;
   unsigned int temp_v7;
   
-  temp_v0 = DAT_0044ea00;
+  temp_v0 = g_titleScene;
   temp_v3 = *(unsigned int *)(param_1 * 0x14 + 0x4d9764);
   temp_v6 = (float)VectorUnsignedToFloat(temp_v3 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v7 = VectorFloatToUnsigned(*(float *)(param_1 * 0x14 + 0x4d9758) * temp_v6,3);
@@ -54,14 +54,14 @@ void FUN_00107784(int param_1)
       (**(romwright_code **)(temp_v0 + 0x1268))();
       *(unsigned char *)(temp_v0 + 0x1264) = 0;
     }
-    FUN_002c1b64(DAT_0044ea00,0);
-    temp_v2 = FUN_002c15d4(*(unsigned int *)(DAT_0044ea00 + 0x528));
+    FUN_002c1b64(g_titleScene,0);
+    temp_v2 = FUN_002c15d4(*(unsigned int *)(g_titleScene + 0x528));
     VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v2 = FUN_002c15ac(*(unsigned int *)(DAT_0044ea00 + 0x528));
+    temp_v2 = FUN_002c15ac(*(unsigned int *)(g_titleScene + 0x528));
     VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002c0944((temp_v3 & 0xffffff00) | temp_v7);
-    temp_v0 = DAT_0044ea00;
-    piVar7 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v0 = g_titleScene;
+    piVar7 = (int *)(g_titleScene + 0x124c);
     temp_v1 = *piVar7;
     temp_v4 = piVar7[temp_v1 + 2];
     *piVar7 = temp_v1 - 1;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
-int FUN_0019a5a0(...);
-int FUN_0019c364(void);
+int jobStop(unsigned int, int);
+int asdMemFree(...);
+int scrScriptProcessDestroy(void);
 int FUN_004ab734(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -14,13 +14,13 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_0057a7b8; /* 0x57a7b8 */
+extern int g_btlTalk; /* 0x57a7b8 */
 extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_001631d0. */
-extern int FUN_00164a9c(void);
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: jobStop. */
+extern int jobGetWork(void);
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_004ab734. */
 
 
@@ -31,30 +31,30 @@ void FUN_002df5c8(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v1 = FUN_00164a9c();
-  temp_v0 = DAT_0057a7b8;
-  if (DAT_0057a7b8 != 0) {
+  temp_v1 = jobGetWork();
+  temp_v0 = g_btlTalk;
+  if (g_btlTalk != 0) {
     FUN_004ab734(DAT_0057a9c8);
     if (*(int *)(temp_v0 + 8) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v0 + 8) = 0;
     }
     if (*(int *)(temp_v0 + 0x10) != 0) {
-      FUN_0019c364();
+      scrScriptProcessDestroy();
       *(unsigned int *)(temp_v0 + 0x10) = 0;
     }
     if (*(int *)(temp_v0 + 0xc) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v0 + 0xc) = 0;
     }
     if (*(int *)(temp_v0 + 0x14) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v0 + 0x14) = 0;
     }
-    FUN_0019a5a0(DAT_0057a7b8);
-    DAT_0057a7b8 = 0;
+    asdMemFree(g_btlTalk);
+    g_btlTalk = 0;
   }
-  FUN_001631d0(*(unsigned int *)(temp_v1 + 0x40),0);
+  jobStop(*(unsigned int *)(temp_v1 + 0x40),0);
   return;
 }
 

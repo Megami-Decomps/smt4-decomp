@@ -7,9 +7,9 @@ extern "C" {
 int FUN_002baa40(...);
 int FUN_002be624(...);
 int FUN_002c3944(...);
-int FUN_002c415c(...);
-int FUN_002c5300(...);
-int FUN_002c564c(...);
+int asdMemFree(...);
+int asdMemoryAlloc(...);
+int jyoucyuGetTableEntry(...);
 int FUN_003550f4(...);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 extern int FUN_002a12d8(unsigned int *);
 extern int FUN_002ad1e0(int);
@@ -26,9 +26,9 @@ extern int FUN_002ad1e0(int);
 extern unsigned int *FUN_002bad5c(unsigned char *);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c5300. */
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMemoryAlloc. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_003550f4. */
 
 
@@ -47,7 +47,7 @@ void FUN_0038bae8(unsigned char *param_1,int param_2,unsigned int param_3)
   
   puVar2 = (unsigned int *)&temp_v2;
   if (*(int *)(param_2 + 0x20) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_2 + 0x20) = 0;
   }
   *param_1 = 0;
@@ -65,20 +65,20 @@ void FUN_0038bae8(unsigned char *param_1,int param_2,unsigned int param_3)
   FUN_002baa40(&temp_v3,temp_v0);
   temp_v0 = FUN_002a12d8((unsigned int *)&temp_v3);
   if (temp_v0 < 0) {
-    FUN_002c564c(0);
+    jyoucyuGetTableEntry(0);
     *(unsigned char *)(puVar1 + -1) = 100;
     *puVar1 = temp_v3;
     puVar1[1] = uStack_1c;
     temp_v0 = FUN_002a12d8((unsigned int *)&temp_v3);
-    if ((temp_v0 != -0x36bec76f) && (temp_v0 = FUN_002ad1e0(DAT_00432fc8 + 0x98), temp_v0 != 0)) {
-      *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xfffeffff;
+    if ((temp_v0 != -0x36bec76f) && (temp_v0 = FUN_002ad1e0(g_aocMain + 0x98), temp_v0 != 0)) {
+      *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
       *(unsigned char *)(puVar1 + -1) = 200;
     }
     return;
   }
   temp_v2 = 1;
   temp_v1 = 0x100;
-  FUN_002c5300(0x100,0x100,0,*(unsigned int *)(param_2 + 0x34));
+  asdMemoryAlloc(0x100,0x100,0,*(unsigned int *)(param_2 + 0x34));
   *(unsigned int *)(param_2 + 0x20) = temp_v1;
   FUN_002c3944();
   FUN_002be624(param_2 + 0x24,"aoc%d:",param_3);

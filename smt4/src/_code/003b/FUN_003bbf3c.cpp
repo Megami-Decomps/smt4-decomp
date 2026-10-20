@@ -4,24 +4,24 @@
 
 extern "C" {
 
-int FUN_002c0c74(void);
-int FUN_002c0cec(int);
+int dataTableGetCount(void);
+int dataTableGet(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_002c0c74. */
-/* Supplied declaration required: FUN_002c0cec. */
+/* Supplied declaration required: dataTableGetCount. */
+/* Supplied declaration required: dataTableGet. */
 
 
 void FUN_003bbf3c(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_002c0cec(2);
-  FUN_002c0c74();
+  dataTableGet(2);
+  dataTableGetCount();
   return;
 }
 

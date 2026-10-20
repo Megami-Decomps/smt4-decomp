@@ -11,7 +11,7 @@ int FUN_001575cc(unsigned int);
 
 extern signed char DAT_0057ffd0; /* 0x57ffd0 */
 extern signed char DAT_0057ffd1; /* 0x57ffd1 */
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00142a78. */
 /* Supplied declaration required: FUN_00145e24. */
@@ -30,11 +30,11 @@ unsigned int FUN_00138068(void)
   if (((DAT_0057ffd0 == '\0') && (temp_v0 = FUN_001696f4(), temp_v0 == 1)) && (DAT_0057ffd1 != '\0')) {
     FUN_00142a78(0);
   }
-  FUN_001575cc(DAT_0059dbb4);
+  FUN_001575cc(g_renderCtx);
   temp_v0 = FUN_00152f54();
   if (temp_v0 != 0) {
     temp_v1 = FUN_00152f54();
-    FUN_00145e24(DAT_0059dbb4,temp_v1);
+    FUN_00145e24(g_renderCtx,temp_v1);
   }
   return 0;
 }

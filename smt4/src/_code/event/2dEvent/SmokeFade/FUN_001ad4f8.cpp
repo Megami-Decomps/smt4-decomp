@@ -21,7 +21,7 @@ extern unsigned int DAT_0043df40; /* 0x43df40 */
 extern int DAT_0043df44; /* 0x43df44 */
 extern unsigned int DAT_0043df4c; /* 0x43df4c */
 extern int DAT_0043df50; /* 0x43df50 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bed3c. */
@@ -44,8 +44,8 @@ unsigned char FUN_001ad4f8(int *param_1)
   
   if (*(char *)(*param_1 + 0x24) != '\0') {
     FUN_002bed3c();
-    FUN_002c39a4(DAT_0044ea00);
-    temp_v3 = DAT_0044ea00;
+    FUN_002c39a4(g_titleScene);
+    temp_v3 = g_titleScene;
     temp_v0 = FUN_002c5d80(1,0);
     piVar4 = (int *)(temp_v3 + 0x124c);
     temp_v1 = *piVar4;
@@ -59,7 +59,7 @@ unsigned char FUN_001ad4f8(int *param_1)
     temp_v3 = DAT_0043df44 * 1000;
     FUN_002bf538();
     FUN_002bf288(2,DAT_0043df40,temp_v3,0,0,0xfa);
-    temp_v3 = DAT_0044ea00;
+    temp_v3 = g_titleScene;
     temp_v0 = FUN_002c5da8(6,1,0);
     piVar4 = (int *)(temp_v3 + 0x12ac);
     temp_v1 = *piVar4;
@@ -70,12 +70,12 @@ unsigned char FUN_001ad4f8(int *param_1)
       (**(romwright_code **)(temp_v3 + 0x12c8))();
       *(unsigned char *)(temp_v3 + 0x12c4) = 0;
     }
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v3 = DAT_0043df50 * 1000;
     FUN_002bf538();
     FUN_002bf288(2,DAT_0043df4c,temp_v3,0,0,0xfb);
-    temp_v3 = DAT_0044ea00;
-    piVar4 = (int *)(DAT_0044ea00 + 0x12ac);
+    temp_v3 = g_titleScene;
+    piVar4 = (int *)(g_titleScene + 0x12ac);
     temp_v0 = *piVar4;
     temp_v1 = piVar4[temp_v0 + 2];
     *piVar4 = temp_v0 - 1;
@@ -85,8 +85,8 @@ unsigned char FUN_001ad4f8(int *param_1)
     }
     FUN_002bed3c();
     FUN_002bf538();
-    temp_v3 = DAT_0044ea00;
-    piVar4 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v3 = g_titleScene;
+    piVar4 = (int *)(g_titleScene + 0x124c);
     temp_v0 = *piVar4;
     temp_v1 = piVar4[temp_v0 + 2];
     *piVar4 = temp_v0 - 1;

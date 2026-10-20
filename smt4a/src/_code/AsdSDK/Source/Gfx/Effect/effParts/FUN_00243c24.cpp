@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 
 extern char s______________________005b3274[113]; /* 0x5b3274 */
 
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 
 
 unsigned int * FUN_00243c24(unsigned int *param_1)
@@ -27,7 +27,7 @@ unsigned int * FUN_00243c24(unsigned int *param_1)
   
   temp_v0 = *(unsigned short *)(param_1 + 1);
   puVar2 = (unsigned int *)0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0x2c,0x10,1);
+  memAlloc(0x10000,0x100,0,0x2c,0x10,1);
   puVar2[1] = 0;
   puVar2[2] = 0;
   puVar2[3] = 0;

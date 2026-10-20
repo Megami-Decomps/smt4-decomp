@@ -46,7 +46,7 @@ extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 /* Supplied declaration required: FUN_0024057c. */
 /* Supplied declaration required: FUN_00240614. */
 /* Supplied declaration required: FUN_002451c4. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 extern int FUN_0033a7f8(int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0033b1ac. */
 extern int FUN_003ae820(unsigned int);
@@ -66,7 +66,7 @@ void FUN_00343f44(unsigned int param_1,fn_00343f44_arg1 *param_2)
   unsigned int temp_v5;
   int temp_v6;
   
-  temp_v3 = FUN_002939f4();
+  temp_v3 = btlGetMainState();
   if (param_2->field_0x20 == 0) {
     FUN_0023ce90(temp_v3);
     FUN_003c1248((int)param_2->field_0x24,(int)param_2->field_0x26,(int)param_2->field_0x48,

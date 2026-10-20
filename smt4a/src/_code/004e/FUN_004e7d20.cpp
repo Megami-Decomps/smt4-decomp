@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010063a(unsigned int *, int, int, unsigned char *);
+int qsort(unsigned int *, int, int, unsigned char *);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,8 +15,8 @@ extern unsigned char LAB_003d213c; /* 0x3d213c */
 extern unsigned int DAT_00571190; /* 0x571190 */
 extern unsigned int DAT_00571194; /* 0x571194 */
 
-/* Supplied declaration required: FUN_0010063a. */
-extern int FUN_004ee568(int *);
+/* Supplied declaration required: qsort. */
+extern int btlUnitGet(int *);
 
 
 void FUN_004e7d20(int *param_1,int param_2)
@@ -50,12 +50,12 @@ void FUN_004e7d20(int *param_1,int param_2)
     temp_v0 = temp_v1;
   } while (temp_v2 != 0);
   if (temp_v1 >= param_2) {
-    FUN_0010063a(temp_v3 + 2,temp_v1,8,&LAB_003d213c);
-    temp_v0 = FUN_004ee568(param_1);
+    qsort(temp_v3 + 2,temp_v1,8,&LAB_003d213c);
+    temp_v0 = btlUnitGet(param_1);
     temp_v3[2] = temp_v3[param_2 * 2];
   }
   else {
-    temp_v0 = FUN_004ee568(param_1);
+    temp_v0 = btlUnitGet(param_1);
   }
   *(unsigned char *)(temp_v3[2] + temp_v0 + 0x38) = 1;
   return;

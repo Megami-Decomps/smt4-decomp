@@ -23,7 +23,7 @@ int FUN_002a03d8(int, int);
 int FUN_002a0400(...);
 int FUN_002b8e84(...);
 int FUN_002be624(...);
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 int FUN_003bbae0(void);
 
 int FUN_0022af9c(...);
@@ -39,7 +39,7 @@ int FUN_0026ff54(void);
 int FUN_00273c54(void);
 int FUN_00273d34(void);
 int FUN_00273f5c(void);
-int FUN_00273f84(void);
+int campGetState(void);
 int FUN_00275be8(int);
 int FUN_00275dc4(void);
 int FUN_0027d908(void);
@@ -54,7 +54,7 @@ int FUN_002a4bac(unsigned int);
 int FUN_002b2368(int);
 int FUN_002b63c0(void);
 int FUN_002bf694(unsigned char *, unsigned int);
-int FUN_002c415c(void);
+int asdMemFree(void);
 int FUN_002e1ba8(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -101,7 +101,7 @@ extern unsigned short FUN_0023360c(int);
 /* Supplied declaration required: FUN_00273c54. */
 /* Supplied declaration required: FUN_00273d34. */
 /* Supplied declaration required: FUN_00273f5c. */
-/* Supplied declaration required: FUN_00273f84. */
+/* Supplied declaration required: campGetState. */
 /* Supplied declaration required: FUN_00275be8. */
 /* Supplied declaration required: FUN_00275dc4. */
 /* Supplied declaration required: FUN_00275dec. */
@@ -128,10 +128,10 @@ extern int FUN_002b8694(void);
 extern int FUN_002c09bc(void);
 extern int FUN_002c09d0(void);
 extern int FUN_002c2218(int);
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 extern int FUN_002c2950(void);
 extern unsigned int FUN_002c3124(unsigned char *, int, unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002e1ba8. */
 /* Supplied declaration required: FUN_003bbae0. */
 
@@ -188,7 +188,7 @@ void FUN_003ba998(int param_1)
       do {
         piVar12 = (int *)(param_1 + temp_v6 * 4 + 0xe60);
         if (*piVar12 != 0) {
-          FUN_002c415c();
+          asdMemFree();
           *piVar12 = 0;
         }
         temp_v6 = temp_v6 + 1;
@@ -225,7 +225,7 @@ void FUN_003ba998(int param_1)
     if (temp_v6 != 0) {
       return;
     }
-    pcVar4 = (char *)FUN_00273f84();
+    pcVar4 = (char *)campGetState();
     if (pcVar4[4] != '\0') {
       if (pcVar4[1] != '\0') {
         temp_v3 = (unsigned int)*(unsigned short *)(pcVar4 + 8);
@@ -286,7 +286,7 @@ void FUN_003ba998(int param_1)
     *(int *)(param_1 + 0x2c) = temp_v6;
     break;
   case 5:
-    temp_v6 = FUN_00273f84();
+    temp_v6 = campGetState();
     if (*(char *)(temp_v6 + 4) != '\0') {
       temp_v6 = FUN_0022b8c0(param_1 + 0x9c);
       temp_v0 = *(unsigned char *)(temp_v6 + 0x20);
@@ -301,7 +301,7 @@ void FUN_003ba998(int param_1)
     FUN_0022b6c4(param_1 + 0x9c);
     *(unsigned char *)(param_1 + 0x6cc) = 0;
     FUN_0022b064(param_1);
-    temp_v6 = FUN_00273f84();
+    temp_v6 = campGetState();
     temp_v1 = *(char *)(temp_v6 + 10);
     temp_v8 = temp_v1 == '\0';
     if (temp_v8) {
@@ -313,7 +313,7 @@ void FUN_003ba998(int param_1)
     *(int *)(param_1 + 0x2c) = *(int *)(param_1 + 0x2c) + 1;
     if (*(char *)(param_1 + 0xe58) != '\0') {
       temp_v4 = 0x17f0;
-      FUN_002c222c();
+      asdOperatorNew();
       temp_v6 = 0;
       if (temp_v4 != 0) {
         temp_v6 = FUN_002c2218(temp_v4 + 0x4cc);

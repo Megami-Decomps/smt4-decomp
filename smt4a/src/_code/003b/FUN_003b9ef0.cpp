@@ -32,11 +32,11 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_00581274; /* 0x581274 */
-extern int DAT_00581288; /* 0x581288 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_mapMain; /* 0x581274 */
+extern int g_lmapScene; /* 0x581288 */
+extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern unsigned int DAT_005f1608; /* 0x5f1608 */
@@ -117,7 +117,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
   unsigned char temp_v8;
   unsigned int in_fpscr;
   
-  temp_v2 = DAT_00581274;
+  temp_v2 = g_mapMain;
   if (DAT_005f1890 != '\0') {
     DAT_005f1890 = '\0';
     temp_v1 = FUN_002a4b74();
@@ -202,7 +202,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       if (temp_v1 != 0) {
         temp_v5 = FUN_00376f94();
       }
-      temp_v1 = DAT_00581288;
+      temp_v1 = g_lmapScene;
       temp_v3 = *(int *)(temp_v2 + 0x30);
       temp_v7 = temp_v3 == DAT_005f1c98;
       if (temp_v7) {
@@ -217,8 +217,8 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
         return;
       }
       if (DAT_005f1add != '\0') {
-        puVar6 = (unsigned int *)(DAT_00581288 + 0x28);
-        *(unsigned int *)(DAT_00581288 + 0x1c) = DAT_005f1ae0;
+        puVar6 = (unsigned int *)(g_lmapScene + 0x28);
+        *(unsigned int *)(g_lmapScene + 0x1c) = DAT_005f1ae0;
         *(unsigned int *)(temp_v1 + 0x20) = DAT_005f1ae4;
         *(unsigned int *)(temp_v1 + 0x24) = DAT_005f1ae8;
         temp_v4 = *(unsigned int *)(temp_v1 + 0x20);
@@ -236,9 +236,9 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
         FUN_003b5714(temp_v3,temp_v5,DAT_005f1ca0);
         if (temp_v3 != -1) {
           temp_v5 = FUN_003798f0();
-          temp_v1 = DAT_00581288;
+          temp_v1 = g_lmapScene;
           temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v5 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(DAT_00581288 + 0x1c) = temp_v4;
+          *(unsigned int *)(g_lmapScene + 0x1c) = temp_v4;
           temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v5 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
           *(unsigned int *)(temp_v1 + 0x20) = temp_v4;
           temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -282,8 +282,8 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       }
     }
     else {
-      if (*(char *)(DAT_00570260 + 0xc0) != '\0') {
-        *(unsigned char *)(DAT_00570260 + 0xc0) = 0;
+      if (*(char *)(g_aocMain + 0xc0) != '\0') {
+        *(unsigned char *)(g_aocMain + 0xc0) = 0;
         *(unsigned int *)(temp_v2 + 0x28) = 0x1f;
         *(unsigned int *)(temp_v2 + 0x2c) = 0;
         return;
@@ -316,8 +316,8 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
   }
   DAT_005f1650 = 0;
   FUN_00314c38(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
-  if (DAT_005f15fc != 5) {
-    if ((DAT_005f15fc != 3) || (DAT_005f1600 != 3)) goto LAB_003ba158;
+  if (g_gameState != 5) {
+    if ((g_gameState != 3) || (DAT_005f1600 != 3)) goto LAB_003ba158;
   }
   else if (DAT_005f1600 != 6) goto LAB_003ba158;
   if (DAT_005f16e0 < 99) {

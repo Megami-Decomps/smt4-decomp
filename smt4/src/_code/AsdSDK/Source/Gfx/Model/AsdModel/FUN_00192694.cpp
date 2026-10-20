@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001457ec(unsigned int *, unsigned int);
 int FUN_002a9244(void);
 int FUN_002b3acc(int *, int, unsigned int, unsigned int);
-int FUN_002c5300(int, int, int, unsigned int);
+int asdMemoryAlloc(int, int, int, unsigned int);
 int FUN_002fb604(unsigned int);
 
 /* stack frame of param_3: 8 slot(s), 32 byte(s) */
@@ -31,8 +31,8 @@ extern unsigned char DAT_00464af0; /* 0x464af0 */
 /* Supplied declaration required: FUN_001457ec. */
 /* Supplied declaration required: FUN_002a9244. */
 /* Supplied declaration required: FUN_002b3acc. */
-extern unsigned int FUN_002c300c(void);
-/* Supplied declaration required: FUN_002c5300. */
+extern unsigned int asdMemoryGetAllocatorA(void);
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_002fb604. */
 
 
@@ -59,7 +59,7 @@ void FUN_00192694(unsigned int *param_1,unsigned int *param_2,int param_3)
   puVar4 = (unsigned int *)&temp_v2;
   if (param_3 != 1) {
     if (param_3 == 0) {
-      temp_v1 = FUN_002c300c();
+      temp_v1 = asdMemoryGetAllocatorA();
       temp_v2 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v2 + 2)),0x101);
       temp_v5 = 0x834;
       temp_v4 = 1;
@@ -75,7 +75,7 @@ void FUN_00192694(unsigned int *param_1,unsigned int *param_2,int param_3)
   else {
     temp_v0 = *(int *)(*(int *)(param_2[0xb] + 0x220) + 8);
     *(unsigned int *)(temp_v0 + 0x28) = *(unsigned int *)(temp_v0 + 0x28) | 1;
-    temp_v1 = FUN_002c300c();
+    temp_v1 = asdMemoryGetAllocatorA();
     temp_v2 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v2 + 2)),0x101);
     temp_v4 = 1;
     temp_v5 = 0;
@@ -98,7 +98,7 @@ void FUN_00192694(unsigned int *param_1,unsigned int *param_2,int param_3)
   param_1[10] = 1;
   temp_v2 = 1;
   puVar6 = (unsigned int *)0x100;
-  FUN_002c5300(0x100,0x100,0,param_1[10] << 2);
+  asdMemoryAlloc(0x100,0x100,0,param_1[10] << 2);
   param_1[9] = (unsigned int)puVar6;
   *puVar6 = param_1[0xb];
   if (param_3 == 0) {

@@ -1,36 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b7be0` (_code @ 0x2b7be0, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Calls FUN_001aea28 for every slot (last to first) whose entry has a linked child. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001aea28(unsigned int);
+typedef struct Entry {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ void *child;
+} Entry;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_00580ca0; /* 0x580ca0 */
+typedef struct Slot {
+    /* 0x00 */ Entry *entry;
+    /* 0x04 */ u8 unk04[0x38];
+} Slot; /* 0x3C */
 
-/* Supplied declaration required: FUN_001aea28. */
+typedef struct SlotTable {
+    /* 0x00 */ u8 unk00[0xA8];
+    /* 0xA8 */ Slot slots[35];
+} SlotTable;
 
+extern u32 DAT_0056fcc0;
+extern SlotTable *DAT_00580ca0;
+
+extern void FUN_001aea28(u32 arg, void *child);
 
 void FUN_002b7be0(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  for (temp_v2 = 0x22; temp_v2 >= 0; temp_v2--) {
-    temp_v0 = *(int *)(DAT_00580ca0 + temp_v2 * 0x3c + 0xa8);
-    temp_v1 = DAT_00580ca0;
-    if (temp_v0 != 0) {
-      temp_v1 = *(int *)(temp_v0 + 4);
+    s32 i;
+
+    for (i = 34; i >= 0; i--) {
+        Entry *entry = DAT_00580ca0->slots[i].entry;
+
+        if (entry != NULL && entry->child != NULL) {
+            FUN_001aea28(DAT_0056fcc0, entry->child);
+        }
     }
-    if (temp_v0 != 0 && temp_v1 != 0) {
-      FUN_001aea28(DAT_0056fcc0);
-    }
-  }
-  return;
 }
 
-} /* extern "C" */
+}

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 unsigned int * nw_snd_internal_driver_SoundThread_SoundThread_sub_object(unsigned int *param_1)
@@ -21,7 +21,7 @@ unsigned int * nw_snd_internal_driver_SoundThread_SoundThread_sub_object(unsigne
   param_1[4] = 0;
   param_1[0x6c] = 0;
   param_1[0x6b] = 0;
-  FUN_002e6354(param_1 + 6,0x194);
+  sysMemClear(param_1 + 6,0x194);
   *(unsigned char *)(param_1 + 0x6d) = 0;
   param_1[0x71] = 0;
   param_1[0x73] = 0xffffffff;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019cac4(void);
 
-extern unsigned char DAT_0057f698; /* 0x57f698 */
+extern unsigned char g_gameDataBlocks; /* 0x57f698 */
 
 /* Supplied declaration required: FUN_0019cac4. */
 
@@ -28,11 +28,11 @@ unsigned short FUN_0026264c(unsigned int param_1)
   FUN_0019cac4();
   temp_v1 = *(unsigned short *)(temp_v2 + 0x16) & 1;
   if ((*(unsigned short *)(temp_v2 + 0x16) & 1) != 0) {
-    temp_v0 = *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + param_1 * 0x50 + 0x5f22);
+    temp_v0 = *(unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + param_1 * 0x50 + 0x5f22);
     temp_v3 = temp_v0 & 2;
     if ((temp_v0 & 2) == 0) {
       while ((temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + temp_v3 * 2 + 0x80), temp_v4 == 0 ||
-             ((*(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + temp_v4 * 0x50 + 0x5f22) & 2) == 0))) {
+             ((*(unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + temp_v4 * 0x50 + 0x5f22) & 2) == 0))) {
         temp_v3 = temp_v3 + 1;
         if (temp_v3 >= 3) {
           return 0;

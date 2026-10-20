@@ -17,7 +17,7 @@ int FUN_002a3ab0(...);
 int FUN_002a4e98(void);
 int FUN_002c79c4(...);
 
-int FUN_001d2560(void);
+int effPartCreate(void);
 int FUN_002468e0(...);
 int FUN_00246908(...);
 int FUN_0024dd00(...);
@@ -27,9 +27,9 @@ int FUN_002629f0(...);
 int FUN_002b8cec(...);
 int FUN_002be624(...);
 int FUN_002bfde4(...);
-int FUN_002c32a0(int, int, int, unsigned int, int, int);
+int memAlloc(int, int, int, unsigned int, int, int);
 int FUN_002c3944(void);
-int FUN_002c415c(...);
+int asdMemFree(...);
 int rt_memcpy_w(...);
 
 /* stack frame of void: 5 slot(s), 20 byte(s) */
@@ -99,7 +99,7 @@ extern unsigned int DAT_004d8c20; /* 0x4d8c20 */
 extern unsigned int uRam004d8c84; /* 0x4d8c84 */
 extern unsigned char DAT_004d8ca0; /* 0x4d8ca0 */
 
-/* Supplied declaration required: FUN_001d2560. */
+/* Supplied declaration required: effPartCreate. */
 extern unsigned int FUN_0021a468(int);
 /* Supplied declaration required: FUN_00246854. */
 /* Supplied declaration required: FUN_002468e0. */
@@ -123,9 +123,9 @@ extern unsigned char *FUN_0024dd90(void);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bfde4. */
 extern int FUN_002c15fc(unsigned int);
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c79c4. */
 extern int FUN_002f310c(int);
 /* Supplied declaration required: rt_memcpy_w. */
@@ -166,7 +166,7 @@ unsigned int FUN_002fcd98(void)
     DAT_0044f868 = DAT_0044f868 & 0xfffffffe;
   }
   if (DAT_0044ea94 == 0) {
-    FUN_001d2560();
+    effPartCreate();
   }
   temp_v2 = FUN_00246908();
   temp_v1 = 0;
@@ -282,7 +282,7 @@ LAB_002fd050:
   }
   temp_v9 = temp_v11 + 10;
   temp_v4 = 0x10000;
-  FUN_002c32a0(0x10000,0x100,0,temp_v9 * 0x2c,0x10,1);
+  memAlloc(0x10000,0x100,0,temp_v9 * 0x2c,0x10,1);
   FUN_002c3944();
   puVar12 = (unsigned char *)0x80;
   temp_v12 = temp_v4 + temp_v9 * 0x18;
@@ -475,7 +475,7 @@ LAB_002fd1c8:
     DAT_0044eab4 = DAT_0044eab8;
     DAT_0044eab8 = (unsigned char *)0x0;
   }
-  FUN_002c415c(temp_v3);
+  asdMemFree(temp_v3);
   if (DAT_0044ea87 == '\0') {
     temp_v8 = 0x800001;
   }

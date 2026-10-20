@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001a28a8(int, int);
 
-extern int FUN_0018b620(void);
+extern int nngxCheckVramBank(void);
 extern int FUN_001a2480(void);
 /* Supplied declaration required: FUN_001a28a8. */
 extern int FUN_001a2a4c(void);
@@ -29,7 +29,7 @@ unsigned int FUN_0018b1d0(void)
   else {
     temp_v2 = FUN_001a2a5c();
     temp_v1 = nn_gxlow_CTR_Gpu_AcquireRight(temp_v2,0xffff8001,0);
-    if ((-1 < (int)temp_v1) && (temp_v0 = FUN_0018b620(), temp_v0 != 0)) {
+    if ((-1 < (int)temp_v1) && (temp_v0 = nngxCheckVramBank(), temp_v0 != 0)) {
       temp_v0 = FUN_001a2a4c();
       FUN_001a28a8(temp_v0 + 0x30,0);
     }

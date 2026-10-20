@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned char [100], int);
+int sysMemClear(unsigned char [100], int);
 int nn_cec_CTR_MessageBox_ReadMessageBoxList(void);
 
 typedef int romwright_code(...);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp98; /* 0x98: local_98 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern unsigned int nn_cec_CTR_Base64Str2CecTitleId(unsigned char *);
 /* Supplied declaration required: nn_cec_CTR_MessageBox_ReadMessageBoxList. */
 
@@ -39,7 +39,7 @@ void nn_cec_CTR_MessageBox_GetMessageBoxNum(int *param_1)
       temp_v0 = nn_cec_CTR_Base64Str2CecTitleId((unsigned char *)(param_1 + temp_v1 * 4 + 7));
       if (temp_v0 != 0) {
         temp_v2 = 0;
-        FUN_002e6354(temp_v3,0x60);
+        sysMemClear(temp_v3,0x60);
         (**(romwright_code **)(*param_1 + 0x34))(param_1,temp_v3,0x60,&temp_v2,temp_v0,2,0x12);
       }
       temp_v1 = temp_v1 + 1;

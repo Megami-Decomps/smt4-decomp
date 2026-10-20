@@ -1,35 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ffa80` (_code @ 0x4ffa80, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001a7a20(int, unsigned int, unsigned int);
+typedef struct Slot {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u8 payload[4];
+} Slot;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct Inner {
+    /* 0x00 */ u8 unk00[0x60];
+    /* 0x60 */ Slot slot;
+} Inner;
 
-/* Supplied declaration required: FUN_001a7a20. */
-extern unsigned int FUN_002e3390(unsigned int);
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ Inner *inner;
+} Holder;
 
+typedef struct Owner {
+    /* 0x000 */ u8 unk000[0x20C];
+    /* 0x20C */ Holder *holder;   /* NULL: the Owner itself (+0xC) is used */
+} Owner;
 
-void FUN_004ffa80(int param_1,unsigned int param_2)
+int FUN_001a7a20(void *payload, u32 value, u32 arg);
+u32 wstrlen(u32 value);
 
+/* Forwards `value` to the payload of the slot of the owner's holder (or of the owner's own embedded holder when it has none). */
+void FUN_004ffa80(Owner *owner, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 0x20c);
-  if (temp_v0 != 0) {
-    temp_v0 = temp_v0 + 0xc;
-  }
-  temp_v0 = *(int *)(temp_v0 + 0x30);
-  temp_v1 = FUN_002e3390(param_2);
-  FUN_001a7a20(temp_v0 + 100,param_2,temp_v1);
-  return;
+    Holder *holder = owner->holder;
+    Slot *slot;
+    u32 arg;
+
+    if (holder != NULL) {
+        holder = (Holder *)((u8 *)holder + 0xc);
+    }
+    slot = &holder->inner->slot;
+    arg = wstrlen(value);
+    FUN_001a7a20(slot->payload, value, arg);
 }
 
 } /* extern "C" */

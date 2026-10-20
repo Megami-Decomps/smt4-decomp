@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0031cf00(void);
-int FUN_003283ac(int);
+int scrSetResult(int);
 
-extern int DAT_0057f128; /* 0x57f128 */
+extern int g_campCecRecv; /* 0x57f128 */
 
-extern int FUN_00236038(void);
+extern int scrGetArg(void);
 /* Supplied declaration required: FUN_0031cf00. */
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_0039ec08(void)
@@ -21,19 +21,19 @@ unsigned int FUN_0039ec08(void)
   unsigned short temp_v0;
   int temp_v1;
   
-  temp_v1 = FUN_00236038();
-  if (DAT_0057f128 == 0) {
+  temp_v1 = scrGetArg();
+  if (g_campCecRecv == 0) {
     temp_v0 = 0;
   }
   else {
     if (temp_v1 != 0) {
-      FUN_003283ac(*(unsigned short *)(DAT_0057f128 + 0x14e));
+      scrSetResult(*(unsigned short *)(g_campCecRecv + 0x14e));
       return 1;
     }
     FUN_0031cf00();
     temp_v0 = *(unsigned short *)(temp_v1 + 0x62);
   }
-  FUN_003283ac(temp_v0);
+  scrSetResult(temp_v0);
   return 1;
 }
 

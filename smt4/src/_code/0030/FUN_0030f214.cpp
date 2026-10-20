@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001f7140(void);
+int effEmitterCreate(void);
 int FUN_0021a37c(int, unsigned int *);
 int FUN_002493a4(int, int, unsigned int);
 int FUN_002de424(int, unsigned int *);
@@ -14,7 +14,7 @@ int FUN_003026d8(int, unsigned int *);
 int FUN_0030ee9c(int, unsigned int *);
 int FUN_0031d0bc(int, unsigned int);
 
-/* Supplied declaration required: FUN_001f7140. */
+/* Supplied declaration required: effEmitterCreate. */
 /* Supplied declaration required: FUN_0021a37c. */
 /* Supplied declaration required: FUN_002493a4. */
 /* Supplied declaration required: FUN_002de424. */
@@ -33,7 +33,7 @@ void FUN_0030f214(int *param_1,unsigned int param_2,unsigned int *param_3)
   
   if (param_1[0xb] == 0) {
     temp_v0 = *param_1;
-    FUN_001f7140();
+    effEmitterCreate();
     param_1[0xb] = temp_v0;
     *(int *)(temp_v0 + 0x4c) = param_1[0xc];
   }

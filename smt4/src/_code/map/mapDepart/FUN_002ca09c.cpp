@@ -29,9 +29,9 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_002ca4f8; /* 0x2ca4f8 */
-extern int DAT_004475b8; /* 0x4475b8 */
-extern int DAT_0044ea00; /* 0x44ea00 */
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern int g_mapDepart; /* 0x4475b8 */
+extern int g_titleScene; /* 0x44ea00 */
+extern unsigned char g_gameState; /* 0x49f91c */
 extern unsigned char DAT_0049fd38; /* 0x49fd38 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -73,10 +73,10 @@ unsigned int FUN_002ca09c(void)
   int temp_v15;
   int temp_v16;
   
-  temp_v2 = DAT_004475b8;
-  if ((*(int *)(DAT_004475b8 + 0x18) >= 2) && (*(int *)(DAT_004475b8 + 0x18) < 0xb)) {
-    FUN_002c39a4(DAT_0044ea00);
-    temp_v9 = DAT_0044ea00;
+  temp_v2 = g_mapDepart;
+  if ((*(int *)(g_mapDepart + 0x18) >= 2) && (*(int *)(g_mapDepart + 0x18) < 0xb)) {
+    FUN_002c39a4(g_titleScene);
+    temp_v9 = g_titleScene;
     temp_v1 = FUN_002c5d80(1,0);
     piVar10 = (int *)(temp_v9 + 0x124c);
     temp_v7 = *piVar10;
@@ -90,16 +90,16 @@ unsigned int FUN_002ca09c(void)
     if (*(int *)(temp_v2 + 0x18) == 5 || *(int *)(temp_v2 + 0x18) == 6) {
       FUN_002bf538();
       FUN_002bed3c();
-      temp_v14 = DAT_004475b8;
-      if (*(char *)(DAT_004475b8 + 0x20) != '\0') {
+      temp_v14 = g_mapDepart;
+      if (*(char *)(g_mapDepart + 0x20) != '\0') {
         temp_v12 = 0.0f;
         temp_v10 = temp_v12;
-        if (*(int *)(DAT_004475b8 + 0x24) < 10) {
-          temp_v10 = (float)VectorSignedToFloat(*(int *)(DAT_004475b8 + 0x24) * 0x28,
+        if (*(int *)(g_mapDepart + 0x24) < 10) {
+          temp_v10 = (float)VectorSignedToFloat(*(int *)(g_mapDepart + 0x24) * 0x28,
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v10 = temp_v10 + -400.0f;
         }
-        if (*(int *)(DAT_004475b8 + 0xc) == 0) {
+        if (*(int *)(g_mapDepart + 0xc) == 0) {
           temp_v2 = FUN_002bf4f8(0xe,0x10b);
           temp_v11 = (unsigned long long)(unsigned int)(int)temp_v10;
           temp_v9 = 0x107;
@@ -107,8 +107,8 @@ unsigned int FUN_002ca09c(void)
             FUN_002bf288(2,0xe,temp_v9,(int)temp_v11,0,0xb);
             temp_v9 = temp_v9 + 1;
           } while (temp_v9 < 0x10b);
-          temp_v3 = (*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0xa8));
-          FUN_0025b670((*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0xa8)));
+          temp_v3 = (*(unsigned int *)((unsigned char *)&g_gameState + 0xa8));
+          FUN_0025b670((*(unsigned int *)((unsigned char *)&g_gameState + 0xa8)));
           FUN_002be624(temp_v13,&LAB_002ca4f8,temp_v3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -193,8 +193,8 @@ unsigned int FUN_002ca09c(void)
         }
       }
     }
-    temp_v2 = DAT_0044ea00;
-    piVar10 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v2 = g_titleScene;
+    piVar10 = (int *)(g_titleScene + 0x124c);
     temp_v9 = *piVar10;
     temp_v1 = piVar10[temp_v9 + 2];
     *piVar10 = temp_v9 - 1;

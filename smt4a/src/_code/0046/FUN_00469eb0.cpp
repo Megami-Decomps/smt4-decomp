@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
-int FUN_0019a5a0(void);
-int FUN_0019c364(void);
+int sysPlaySe(int);
+int asdMemFree(void);
+int scrScriptProcessDestroy(void);
 int FUN_00275bc8(unsigned int, unsigned int);
 int FUN_00275f44(unsigned int, unsigned int);
 int FUN_002804b0(unsigned char *, int, int);
@@ -17,9 +17,9 @@ extern unsigned char LAB_0046a048; /* 0x46a048 */
 extern unsigned char LAB_0046a074; /* 0x46a074 */
 extern unsigned char LAB_0046a0a0; /* 0x46a0a0 */
 
-/* Supplied declaration required: FUN_001681cc. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: sysPlaySe. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00275f44. */
@@ -40,7 +40,7 @@ void FUN_00469eb0(int param_1)
   
   temp_v0 = *(int *)(param_1 + 8);
   if (temp_v0 == 0) {
-    FUN_001681cc(0xa5);
+    sysPlaySe(0xa5);
     if (*(int *)(param_1 + 0x2a8) == 0) {
       FUN_002804b0(&LAB_0046a048,param_1 + 0x2a8,0);
     }
@@ -62,15 +62,15 @@ void FUN_00469eb0(int param_1)
       if (temp_v0 == 2) {
         *(unsigned int *)(*(int *)(*(int *)(param_1 + 0xa28) + 4) + 0x1fc) = 0x3f800000;
         if (*(int *)(param_1 + 0x2b0) != 0) {
-          FUN_0019c364();
+          scrScriptProcessDestroy();
           *(unsigned int *)(param_1 + 0x2b0) = 0;
         }
         if (*(int *)(param_1 + 0x2a8) != 0) {
-          FUN_0019a5a0();
+          asdMemFree();
           *(unsigned int *)(param_1 + 0x2a8) = 0;
         }
         if (*(int *)(param_1 + 0x2ac) != 0) {
-          FUN_0019a5a0();
+          asdMemFree();
           *(unsigned int *)(param_1 + 0x2ac) = 0;
         }
         temp_v1 = 3;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00236038(int);
+int scrGetArg(int);
 int FUN_004d888c(unsigned int, unsigned int, int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -22,8 +22,8 @@ extern unsigned int DAT_00570d90; /* 0x570d90 */
 extern unsigned int DAT_00570d94; /* 0x570d94 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0014aa78(void);
-/* Supplied declaration required: FUN_00236038. */
+extern int btlGetMainState(void);
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_004d888c. */
 
 
@@ -42,12 +42,12 @@ unsigned int FUN_0039e768(void)
   unsigned int *puVar9;
   unsigned int in_fpscr;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  temp_v2 = FUN_00236038(2);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = scrGetArg(2);
   VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v3 = FUN_00236038(3);
-  temp_v4 = FUN_0014aa78();
+  temp_v3 = scrGetArg(3);
+  temp_v4 = btlGetMainState();
   temp_v7 = 4;
   while( 1 ) {
     puVar9 = (unsigned int *)(*(int *)(temp_v4 + 0x1ffc) + temp_v7 * 0x408);

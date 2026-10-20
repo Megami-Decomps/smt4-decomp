@@ -9,8 +9,8 @@ int FUN_001bc124(void);
 int FUN_00352d30(unsigned int *);
 
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_00581274; /* 0x581274 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_mapMain; /* 0x581274 */
+extern int g_lmapScene; /* 0x581288 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern float DAT_005f16bc; /* 0x5f16bc */
 extern unsigned int DAT_005f16c0; /* 0x5f16c0 */
@@ -48,7 +48,7 @@ void FUN_0036b0cc(void)
   float temp_v3;
   float temp_v4;
   
-  temp_v0 = DAT_00581274;
+  temp_v0 = g_mapMain;
   FUN_00352d30(&DAT_005f16c0);
   DAT_005f1b70 = 1;
   DAT_005f1b74 = *(unsigned int *)(temp_v0 + 0x30);
@@ -56,9 +56,9 @@ void FUN_0036b0cc(void)
   temp_v2 = 180.0f;
   DAT_005f1b7c = DAT_005f1604;
   temp_v3 = 0.017453292f;
-  DAT_005f1b80 = *(float *)(DAT_00581288 + 0x1c);
-  DAT_005f1b84 = *(unsigned int *)(DAT_00581288 + 0x20);
-  DAT_005f1b88 = *(float *)(DAT_00581288 + 0x24);
+  DAT_005f1b80 = *(float *)(g_lmapScene + 0x1c);
+  DAT_005f1b84 = *(unsigned int *)(g_lmapScene + 0x20);
+  DAT_005f1b88 = *(float *)(g_lmapScene + 0x24);
   temp_v1 = (DAT_005f16bc + 180.0f) * 0.017453292f;
   FUN_001bc124();
   temp_v4 = 120.0f;

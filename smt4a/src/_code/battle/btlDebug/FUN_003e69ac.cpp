@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00203d04(...);
 int FUN_00275bc8(...);
 int FUN_00275f44(...);
@@ -30,8 +30,8 @@ extern unsigned int DAT_005715f4; /* 0x5715f4 */
 extern unsigned int DAT_00573808; /* 0x573808 */
 extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
-extern int FUN_0014aa78(void);
-/* Supplied declaration required: FUN_001681cc. */
+extern int btlGetMainState(void);
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_00203d04. */
 extern int FUN_00224880(unsigned int);
@@ -71,7 +71,7 @@ unsigned int FUN_003e69ac(unsigned int *param_1)
     temp_v3 = 2;
     break;
   case 2:
-    temp_v2 = FUN_0014aa78();
+    temp_v2 = btlGetMainState();
     temp_v1 = param_1[1];
     FUN_00275bc8(temp_v1,*(unsigned int *)(temp_v2 + 0x2268));
     param_1[2] = temp_v1;
@@ -89,7 +89,7 @@ unsigned int FUN_003e69ac(unsigned int *param_1)
     break;
   case 3:
     FUN_00275f44(param_1[2],0);
-    FUN_001681cc(0xdf);
+    sysPlaySe(0xdf);
     *param_1 = 4;
     return 0;
   case 4:
@@ -99,7 +99,7 @@ unsigned int FUN_003e69ac(unsigned int *param_1)
     }
     temp_v2 = FUN_0018719c(0x590);
     if (temp_v2 != 0) {
-      temp_v2 = FUN_0014aa78();
+      temp_v2 = btlGetMainState();
       puVar5 = (unsigned int *)(temp_v2 + 0x45a0);
       if ((DAT_005715d0 & *puVar5) == 0 && (DAT_005715d4 & *(unsigned int *)(temp_v2 + 0x45a4)) == 0) {
         *(unsigned short *)(temp_v2 + 0x4c70) = 8;

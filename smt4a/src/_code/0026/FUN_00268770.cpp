@@ -23,7 +23,7 @@ int FUN_00359b6c(...);
 int FUN_0037b578(...);
 int FUN_003d4104(void);
 
-int FUN_0010063a(...);
+int qsort(...);
 int FUN_0015f490(...);
 int FUN_00169ddc(...);
 int FUN_001834a4(...);
@@ -40,7 +40,7 @@ int FUN_0035d8a4(void);
 int FUN_001517b4(...);
 int FUN_00163aa4(...);
 int FUN_001641b4(...);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00184310(void);
 int FUN_001846d0(...);
 int FUN_00184758(...);
@@ -79,7 +79,7 @@ extern int FUN_0035fd60(...); /* 0x35fd60 */
 extern int DAT_00588fe8; /* 0x588fe8 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern int FUN_0014bef4(unsigned int);
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_001517b4. */
@@ -89,7 +89,7 @@ extern int FUN_0016345c(void);
 /* Supplied declaration required: FUN_001641b4. */
 extern int FUN_00167458(int, unsigned int);
 extern int FUN_00167f08(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00169ddc. */
 extern unsigned int FUN_00180114(unsigned short, short);
 /* Supplied declaration required: FUN_001834a4. */
@@ -391,7 +391,7 @@ LAB_00268c6c:
               if ((((!temp_v16 || temp_v6 != 3) && (temp_v6 = FUN_002c7e54(), temp_v6 != 5)) &&
                   (temp_v6 = FUN_002c7e54(), temp_v6 != 6)) && (temp_v6 = FUN_002c7e54(), temp_v6 != 7)) {
                 FUN_003423e8(temp_v12);
-                FUN_001681cc(temp_v7);
+                sysPlaySe(temp_v7);
               }
             }
           }
@@ -935,7 +935,7 @@ joined_r0x002694c0:
       else {
         temp_v7 = 0x2b;
       }
-      FUN_001681cc(temp_v7);
+      sysPlaySe(temp_v7);
       *(unsigned char *)(temp_v2 + 0x528) = 1;
       temp_v6 = DAT_00588fe8;
       *(unsigned int *)(DAT_00588fe8 + 0x524) = 0;
@@ -951,28 +951,28 @@ joined_r0x002694c0:
         temp_v14 = FUN_0026140c();
         if ((*(unsigned char *)(temp_v14 + 0x15) & 0x7f) == 1) {
           if ((char)*(unsigned char *)(temp_v14 + 0x15) < '\0') {
-            FUN_0010063a(temp_v6 + 0x6e0,(int)*(short *)(temp_v6 + 0xee0),4,FUN_0035fd60);
+            qsort(temp_v6 + 0x6e0,(int)*(short *)(temp_v6 + 0xee0),4,FUN_0035fd60);
           }
           else {
-            FUN_0010063a(temp_v6 + 0x6e0,(int)*(short *)(temp_v6 + 0xee0),4,FUN_002ce088);
+            qsort(temp_v6 + 0x6e0,(int)*(short *)(temp_v6 + 0xee0),4,FUN_002ce088);
           }
         }
         temp_v0 = *(unsigned char *)(temp_v14 + 0x15);
         if ((temp_v0 & 0x7f) == 0x21) {
           if ((char)temp_v0 < '\0') {
-            FUN_0010063a(temp_v6 + 0x6e0,(int)*(short *)(temp_v6 + 0xee0),4,FUN_0034f2e0);
+            qsort(temp_v6 + 0x6e0,(int)*(short *)(temp_v6 + 0xee0),4,FUN_0034f2e0);
           }
           else {
-            FUN_0010063a(temp_v6 + 0x6e0,(int)*(short *)(temp_v6 + 0xee0),4,FUN_002b29fc);
+            qsort(temp_v6 + 0x6e0,(int)*(short *)(temp_v6 + 0xee0),4,FUN_002b29fc);
           }
         }
         temp_v0 = *(unsigned char *)(temp_v14 + 0x15);
         if ((temp_v0 & 0x7f) == 3) {
           if ((char)temp_v0 < '\0') {
-            FUN_0010063a(temp_v6 + 0x6e0,(int)*(short *)(temp_v6 + 0xee0),4,FUN_0034f378);
+            qsort(temp_v6 + 0x6e0,(int)*(short *)(temp_v6 + 0xee0),4,FUN_0034f378);
           }
           else {
-            FUN_0010063a(temp_v6 + 0x6e0,(int)*(short *)(temp_v6 + 0xee0),4,FUN_002b2a94);
+            qsort(temp_v6 + 0x6e0,(int)*(short *)(temp_v6 + 0xee0),4,FUN_002b2a94);
           }
         }
         *(unsigned char *)(temp_v2 + 0x528) = 1;
@@ -1100,7 +1100,7 @@ LAB_00269f7c:
       else {
         temp_v7 = 0x2c;
       }
-      FUN_001681cc(temp_v7);
+      sysPlaySe(temp_v7);
       *(unsigned char *)(temp_v2 + 0x528) = 1;
       temp_v6 = DAT_00588fe8;
       *(unsigned int *)(DAT_00588fe8 + 0x524) = 0;
@@ -1403,13 +1403,13 @@ LAB_00269f7c:
       if (*(char *)(temp_v6 + 0x24f0) != '\0') {
         temp_v6 = FUN_00167f08();
         if (temp_v6 != 0x109) {
-          FUN_001681cc();
+          sysPlaySe();
         }
         break;
       }
       temp_v6 = FUN_00167f08();
       if (temp_v6 != 0x108) {
-        FUN_001681cc(0x108);
+        sysPlaySe(0x108);
       }
       break;
     case 2:
@@ -1432,13 +1432,13 @@ LAB_00269f7c:
       if (*(char *)(temp_v6 + 0x24f0) == '\0') {
         temp_v6 = FUN_00167f08();
         if (temp_v6 != 0x108) {
-          FUN_001681cc(0x108);
+          sysPlaySe(0x108);
         }
         break;
       }
       temp_v6 = FUN_00167f08();
       if (temp_v6 != 0x109) {
-        FUN_001681cc();
+        sysPlaySe();
       }
       break;
     case 3:

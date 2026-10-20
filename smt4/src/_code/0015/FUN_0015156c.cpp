@@ -17,7 +17,7 @@ extern unsigned char DAT_00421004; /* 0x421004 */
 extern unsigned char DAT_0042138c; /* 0x42138c */
 extern unsigned char DAT_0042165c; /* 0x42165c */
 
-extern int *FUN_002c2ff0(void);
+extern int *asdMemoryGetDefaultAllocator(void);
 
 
 int * FUN_0015156c(int param_1)
@@ -43,7 +43,7 @@ int * FUN_0015156c(int param_1)
   int temp_v10;
   
   temp_v4 = *(unsigned int *)(*(int *)(param_1 + 0x2c) + 0x228);
-  piVar1 = (int *)FUN_002c2ff0();
+  piVar1 = (int *)asdMemoryGetDefaultAllocator();
   piVar2 = (int *)(**(romwright_code **)(*piVar1 + 8))(piVar1,0x44,4);
   if (piVar2 == (int *)0x0) {
     piVar2 = (int *)0x0;

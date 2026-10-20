@@ -8,9 +8,9 @@ int FUN_002c0a9c(int, int, int);
 
 extern int FUN_002c09bc(void);
 /* Supplied declaration required: FUN_002c0a9c. */
-extern int FUN_002c0c74(unsigned int);
-extern int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+extern int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 
 
 void FUN_003bbf54(void)
@@ -26,9 +26,9 @@ void FUN_003bbf54(void)
   unsigned char *puVar7;
   int temp_v5;
   
-  temp_v0 = FUN_002c0cec(2,3);
-  temp_v1 = FUN_002c0cc4();
-  temp_v2 = FUN_002c0c74(temp_v0);
+  temp_v0 = dataTableGet(2,3);
+  temp_v1 = dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v0);
   temp_v3 = FUN_002c09bc();
   temp_v5 = 0;
   if (temp_v5 < temp_v2) {

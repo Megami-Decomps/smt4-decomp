@@ -50,7 +50,7 @@ extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern float DAT_005f19b4; /* 0x5f19b4 */
 
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
@@ -121,9 +121,9 @@ unsigned int FUN_00367fac(void)
   temp_v17 = 0.0f;
   temp_v3 = FUN_00162e8c();
   temp_v23 = *(float *)(temp_v3 + 0x1528);
-  if ((romwright_isnan(*(float *)(DAT_00581288 + 0x20) - 200.0f) || (in_s1 != in_s1)) &&
-     (in_s1 < *(float *)(DAT_00581288 + 0x20) + 200.0f)) {
-    temp_v7 = *(float *)(DAT_00581288 + 0x21c) * 0.7111111f;
+  if ((romwright_isnan(*(float *)(g_lmapScene + 0x20) - 200.0f) || (in_s1 != in_s1)) &&
+     (in_s1 < *(float *)(g_lmapScene + 0x20) + 200.0f)) {
+    temp_v7 = *(float *)(g_lmapScene + 0x21c) * 0.7111111f;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v17 < temp_v7) << 0x1f) |
             ((unsigned int)(temp_v17 == temp_v7) << 0x1e);
     temp_v1 = (unsigned char)(temp_v0 >> 0x18);
@@ -187,10 +187,10 @@ unsigned int FUN_00367fac(void)
     temp_v3 = 0;
     do {
       pfVar6 = afStack_140 + temp_v3 * 3;
-      *pfVar6 = *pfVar6 + *(float *)(DAT_00581288 + 0x208);
-      afStack_140[temp_v3 * 3 + 1] = afStack_140[temp_v3 * 3 + 1] + *(float *)(DAT_00581288 + 0x20c);
+      *pfVar6 = *pfVar6 + *(float *)(g_lmapScene + 0x208);
+      afStack_140[temp_v3 * 3 + 1] = afStack_140[temp_v3 * 3 + 1] + *(float *)(g_lmapScene + 0x20c);
       temp_v5 = temp_v3 + 1;
-      temp_v11 = *(float *)(temp_v18 + (temp_v3 * 0xc - 4)) + *(float *)(DAT_00581288 + 0x210);
+      temp_v11 = *(float *)(temp_v18 + (temp_v3 * 0xc - 4)) + *(float *)(g_lmapScene + 0x210);
       *(float *)(temp_v18 + (temp_v3 * 0xc - 4)) = temp_v11;
       temp_v36[temp_v3 * 2] = *pfVar6;
       temp_v36[temp_v3 * 2 + 1] = temp_v11;

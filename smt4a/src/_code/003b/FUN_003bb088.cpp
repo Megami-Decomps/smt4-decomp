@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int DAT_0057f3b0; /* 0x57f3b0 */
+extern int g_eventTex; /* 0x57f3b0 */
 
 
 void FUN_003bb088(int param_1)
@@ -21,12 +21,12 @@ void FUN_003bb088(int param_1)
   int temp_v3;
   int temp_v4;
   
-  temp_v0 = DAT_0057f3b0;
+  temp_v0 = g_eventTex;
   temp_v3 = 0x10;
   temp_v1 = 0;
   do {
-    if (*(int *)(DAT_0057f3b0 + temp_v1 * 4 + 4) == param_1) {
-      *(unsigned int *)(DAT_0057f3b0 + temp_v1 * 4 + 4) = 0;
+    if (*(int *)(g_eventTex + temp_v1 * 4 + 4) == param_1) {
+      *(unsigned int *)(g_eventTex + temp_v1 * 4 + 4) = 0;
       temp_v3 = temp_v1;
       break;
     }

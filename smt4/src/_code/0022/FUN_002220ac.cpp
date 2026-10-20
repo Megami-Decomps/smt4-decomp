@@ -8,8 +8,8 @@ extern unsigned int DAT_0043df58; /* 0x43df58 */
 
 extern unsigned int FUN_002592d8(unsigned int);
 extern int FUN_002893d8(void);
-extern unsigned int FUN_00296cc8(unsigned int);
-extern int FUN_002bf244(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_0030a2c0. */
 
 
@@ -24,12 +24,12 @@ unsigned int FUN_002220ac(void)
   int temp_v4;
   
   temp_v0 = FUN_002592d8(0);
-  temp_v1 = FUN_00296cc8(1);
-  temp_v2 = FUN_00296cc8(2);
-  temp_v3 = FUN_00296cc8(3);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = scrGetArg(2);
+  temp_v3 = scrGetArg(3);
   temp_v4 = FUN_002893d8();
   if (temp_v4 != 0) {
-    temp_v4 = FUN_002bf244(DAT_0043df58);
+    temp_v4 = jobIsValid(DAT_0043df58);
     if (temp_v4 == 0) {
       return 1;
     }

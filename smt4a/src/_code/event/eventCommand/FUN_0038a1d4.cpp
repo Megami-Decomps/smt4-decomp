@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
@@ -22,16 +22,16 @@ extern int FUN_0035c0c8(...); /* 0x35c0c8 */
 extern unsigned char LAB_0038a3a4; /* 0x38a3a4 */
 extern unsigned char LAB_0038a3c0; /* 0x38a3c0 */
 extern unsigned char LAB_003b01c8; /* 0x3b01c8 */
-extern unsigned int *DAT_0057f554; /* 0x57f554 */
+extern unsigned int *g_eventCommand; /* 0x57f554 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 
 
 void FUN_0038a1d4(unsigned int param_1,int param_2,int param_3)
@@ -46,21 +46,21 @@ void FUN_0038a1d4(unsigned int param_1,int param_2,int param_3)
   float temp_v1;
   
   temp_v1 = 0.0f;
-  if (DAT_0057f554 == (unsigned int *)0x0) {
+  if (g_eventCommand == (unsigned int *)0x0) {
     puVar2 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x18,1);
-    DAT_0057f554 = puVar2;
+    asdMemoryAllocTracked(0x100,0x100,0,0x18,1);
+    g_eventCommand = puVar2;
     *(float *)&puVar2[2] = temp_v1;
     puVar2[5] = 0;
     puVar2[4] = 0;
     puVar3 = &LAB_0038a3a4;
-    FUN_0014e38c(&LAB_0038a3a4,4,0,0,FUN_0035c0c8,&LAB_003b01c8,puVar2);
+    asdProcessCreateSimple(&LAB_0038a3a4,4,0,0,FUN_0035c0c8,&LAB_003b01c8,puVar2);
     *puVar2 = (unsigned int)puVar3;
-    FUN_0015155c(&LAB_0038a3c0,0x85,0,0,FUN_0035bf60,0,puVar2,puVar3);
-    FUN_0015155c(&LAB_0038a3c0,0xe1,0,0,FUN_0035bf60,0,puVar2,*puVar2);
+    taskCreateDraw(&LAB_0038a3c0,0x85,0,0,FUN_0035bf60,0,puVar2,puVar3);
+    taskCreateDraw(&LAB_0038a3c0,0xe1,0,0,FUN_0035bf60,0,puVar2,*puVar2);
   }
-  puVar2 = DAT_0057f554;
-  DAT_0057f554[5] = param_2;
+  puVar2 = g_eventCommand;
+  g_eventCommand[5] = param_2;
   puVar2[4] = 0;
   if (param_3 == 0) {
     if (param_2 == 0) {

@@ -9,7 +9,7 @@ int FUN_001b1a48(int, unsigned int, unsigned int, int);
 int FUN_00245420(int, unsigned int, int, unsigned int);
 int FUN_002454c4(int, int *, int, int);
 int FUN_0024550c(void);
-int FUN_00296cc8(int);
+int scrGetArg(int);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -23,9 +23,9 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 extern int DAT_00435d18; /* 0x435d18 */
-extern unsigned int DAT_00435d48; /* 0x435d48 */
+extern unsigned int g_btlEvent; /* 0x435d48 */
 
 /* Supplied declaration required: ARM_common_memcpy4_9. */
 /* Supplied declaration required: FUN_001b1a48. */
@@ -33,9 +33,9 @@ extern unsigned int DAT_00435d48; /* 0x435d48 */
 /* Supplied declaration required: FUN_002454c4. */
 /* Supplied declaration required: FUN_0024550c. */
 extern int FUN_0027e3b8(unsigned int);
-extern unsigned int FUN_0027e928(unsigned int);
-extern int FUN_002939f4(void);
-/* Supplied declaration required: FUN_00296cc8. */
+extern unsigned int btlUnitGet(unsigned int);
+extern int btlGetMainState(void);
+/* Supplied declaration required: scrGetArg. */
 
 
 void scrComm_Battle_PlayCommonEffectExt(void)
@@ -57,10 +57,10 @@ void scrComm_Battle_PlayCommonEffectExt(void)
   unsigned int temp_v11;
   unsigned int temp_v12;
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_00296cc8(1);
-  temp_v2 = FUN_00296cc8(2);
-  temp_v3 = FUN_0027e3b8(DAT_00435d48);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = scrGetArg(2);
+  temp_v3 = FUN_0027e3b8(g_btlEvent);
   if (((temp_v3 == 0) || (temp_v3 = DAT_00435d18, FUN_0024550c(), temp_v3 != 0)) && (temp_v2 != 0)) {
     temp_v5 = 0;
     temp_v6 = 0;
@@ -78,8 +78,8 @@ void scrComm_Battle_PlayCommonEffectExt(void)
     temp_v12 = 0;
     ARM_common_memcpy4_9(&temp_v5,pcVar6);
     FUN_002454c4(DAT_00435d18,&temp_v5,0,0);
-    temp_v4 = FUN_0027e928(DAT_0043427c);
-    temp_v3 = FUN_002939f4();
+    temp_v4 = btlUnitGet(g_btlScriptUnit);
+    temp_v3 = btlGetMainState();
     temp_v7 = 0xffffffff;
     temp_v6 = 0;
     temp_v5 = temp_v2;

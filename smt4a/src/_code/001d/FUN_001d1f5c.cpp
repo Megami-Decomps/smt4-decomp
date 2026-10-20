@@ -9,7 +9,7 @@ int FUN_001d326c(...);
 int FUN_001d3278(unsigned int, unsigned int);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
-int aeabi_idivmod(...);
+int __aeabi_idivmod(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ typedef struct {
 #endif
 /* Supplied declaration required: FUN_001d326c. */
 /* Supplied declaration required: FUN_001d3278. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_001d1f5c(int param_1)
@@ -72,7 +72,7 @@ void FUN_001d1f5c(int param_1)
     }
     else {
       temp_v0 = *(unsigned char *)(param_1 + 0x8c);
-      temp_v3 = aeabi_idivmod(((unsigned int)*(unsigned char *)(param_1 + 0x8d) - (unsigned int)temp_v0) *
+      temp_v3 = __aeabi_idivmod(((unsigned int)*(unsigned char *)(param_1 + 0x8d) - (unsigned int)temp_v0) *
                             (int)*(short *)(param_1 + 0x90));
       temp_v8 = (temp_v3 + (unsigned int)temp_v0) & 0xff;
     }
@@ -81,7 +81,7 @@ void FUN_001d1f5c(int param_1)
     }
     else {
       temp_v0 = *(unsigned char *)(param_1 + 0x92);
-      temp_v3 = aeabi_idivmod(((unsigned int)*(unsigned char *)(param_1 + 0x93) - (unsigned int)temp_v0) *
+      temp_v3 = __aeabi_idivmod(((unsigned int)*(unsigned char *)(param_1 + 0x93) - (unsigned int)temp_v0) *
                             (int)*(short *)(param_1 + 0x96));
       temp_v4 = (temp_v3 + (unsigned int)temp_v0) & 0xff;
     }
@@ -91,7 +91,7 @@ void FUN_001d1f5c(int param_1)
     }
     else {
       temp_v0 = *(unsigned char *)(temp_v3 + 0x78);
-      temp_v6 = aeabi_idivmod(((unsigned int)*(unsigned char *)(temp_v3 + 0x79) - (unsigned int)temp_v0) *
+      temp_v6 = __aeabi_idivmod(((unsigned int)*(unsigned char *)(temp_v3 + 0x79) - (unsigned int)temp_v0) *
                             (int)*(short *)(temp_v3 + 0x7c));
       temp_v5 = (temp_v6 + (unsigned int)temp_v0) & 0xff;
     }
@@ -105,7 +105,7 @@ void FUN_001d1f5c(int param_1)
              temp_v10 * 4.881899e-07f * temp_v10 * 4.881899e-07f;
     if (temp_v7 < *(short *)(param_1 + 0xa6)) {
       temp_v1 = *(char *)(param_1 + 0xa4);
-      temp_v2 = aeabi_idivmod(((int)*(char *)(param_1 + 0xa5) - (int)temp_v1) * temp_v6);
+      temp_v2 = __aeabi_idivmod(((int)*(char *)(param_1 + 0xa5) - (int)temp_v1) * temp_v6);
       temp_v6 = (int)(char)(temp_v2 + temp_v1);
     }
     temp_v11 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -120,7 +120,7 @@ void FUN_001d1f5c(int param_1)
                       temp_v11 * 0.0078125f * temp_v12);
     if (temp_v7 < *(short *)(param_1 + 0x9a)) {
       temp_v1 = *(char *)(param_1 + 0x98);
-      temp_v2 = aeabi_idivmod(((int)*(char *)(param_1 + 0x99) - (int)temp_v1) * temp_v6);
+      temp_v2 = __aeabi_idivmod(((int)*(char *)(param_1 + 0x99) - (int)temp_v1) * temp_v6);
       temp_v6 = (int)(char)(temp_v2 + temp_v1);
     }
     temp_v18 = 0.015873017f;
@@ -146,7 +146,7 @@ void FUN_001d1f5c(int param_1)
                              temp_v11 * *(float *)(param_1 + 0x18) * *(float *)(temp_v3 + 0x60));
     if (temp_v7 < *(short *)(param_1 + 0xa0)) {
       temp_v1 = *(char *)(param_1 + 0x9e);
-      temp_v2 = aeabi_idivmod(((int)*(char *)(param_1 + 0x9f) - (int)temp_v1) * temp_v6);
+      temp_v2 = __aeabi_idivmod(((int)*(char *)(param_1 + 0x9f) - (int)temp_v1) * temp_v6);
       temp_v6 = (int)(char)(temp_v2 + temp_v1);
     }
     temp_v10 = 2.0f;

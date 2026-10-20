@@ -10,12 +10,12 @@ extern unsigned int DAT_005702e0; /* 0x5702e0 */
 extern unsigned int DAT_005702e4; /* 0x5702e4 */
 extern unsigned int DAT_005702e8; /* 0x5702e8 */
 extern unsigned int DAT_005702ec; /* 0x5702ec */
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-extern int FUN_0014aa78(void);
-extern int FUN_00236038(unsigned int);
+extern int btlGetMainState(void);
+extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_003fd63c. */
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 unsigned int FUN_0035e9fc(void)
@@ -25,16 +25,16 @@ unsigned int FUN_0035e9fc(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_004ee568(DAT_0057113c);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = btlUnitGet(g_btlScriptUnit);
   temp_v1 = *(int *)(temp_v1 + 0x28);
   *(unsigned short *)(temp_v1 + 0x1be) = 2;
   *(short *)(temp_v1 + 0x1c0) = (short)temp_v0;
   if (*(short *)(temp_v1 + 2) == 0x323 && temp_v0 == 0x80) {
-    temp_v0 = FUN_004ee568(DAT_0057113c);
+    temp_v0 = btlUnitGet(g_btlScriptUnit);
     *(int *)(*(int *)(temp_v0 + 0x20) + 0x3b4) = *(int *)(*(int *)(temp_v0 + 0x20) + 0x3b4) + 1;
   }
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   if (((((DAT_005702e0 & *(unsigned int *)(temp_v0 + 0x45a0)) != 0 ||
          (DAT_005702e4 & *(unsigned int *)(temp_v0 + 0x45a4)) != 0) &&
        ((*(unsigned int *)(temp_v0 + 0x45a4) & DAT_005702ec) == 0 &&

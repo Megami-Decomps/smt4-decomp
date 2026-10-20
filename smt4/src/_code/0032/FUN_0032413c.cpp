@@ -3,13 +3,13 @@
 extern "C" {
 
 int FUN_002451ac(unsigned int, int);
-int FUN_0028dcb0(int);
+int scrSetResult(int);
 
 /* Supplied declaration required: FUN_002451ac. */
-/* Supplied declaration required: FUN_0028dcb0. */
-extern unsigned int FUN_002939f4(void);
-extern int FUN_00296cc8(unsigned int);
-extern int FUN_002c0cc4(void);
+/* Supplied declaration required: scrSetResult. */
+extern unsigned int btlGetMainState(void);
+extern int scrGetArg(unsigned int);
+extern int dataTableGetEntries(void);
 
 
 unsigned int FUN_0032413c(void)
@@ -22,11 +22,11 @@ unsigned int FUN_0032413c(void)
   int temp_v3;
   unsigned short temp_v4;
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_00296cc8(1);
-  temp_v2 = FUN_002939f4();
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = btlGetMainState();
   FUN_002451ac(temp_v2,5);
-  temp_v3 = FUN_002c0cc4();
+  temp_v3 = dataTableGetEntries();
   temp_v4 = 0;
   switch (temp_v1) {
   case 1:
@@ -39,7 +39,7 @@ unsigned int FUN_0032413c(void)
     temp_v4 = *(unsigned short *)(temp_v3 + temp_v0 * 6 + 4);
     break;
   }
-  FUN_0028dcb0(temp_v4);
+  scrSetResult(temp_v4);
   return 1;
 }
 

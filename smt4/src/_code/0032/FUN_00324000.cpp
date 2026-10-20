@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_002499fc(unsigned int, int [4], int *);
-int FUN_0028dcb0(int);
-int FUN_002939f4(void);
-int FUN_00296cc8(int);
+int scrSetResult(int);
+int btlGetMainState(void);
+int scrGetArg(int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -18,9 +18,9 @@ typedef struct {
 extern int FUN_002499b4(void);
 /* Supplied declaration required: FUN_002499fc. */
 extern unsigned int FUN_00249a54(void);
-/* Supplied declaration required: FUN_0028dcb0. */
-/* Supplied declaration required: FUN_002939f4. */
-/* Supplied declaration required: FUN_00296cc8. */
+/* Supplied declaration required: scrSetResult. */
+/* Supplied declaration required: btlGetMainState. */
+/* Supplied declaration required: scrGetArg. */
 
 
 unsigned int FUN_00324000(void)
@@ -38,14 +38,14 @@ unsigned int FUN_00324000(void)
   int temp_v7;
   int temp_v8 [4];
   
-  temp_v1 = FUN_00296cc8(0);
-  FUN_00296cc8(1);
+  temp_v1 = scrGetArg(0);
+  scrGetArg(1);
   temp_v2 = FUN_00249a54();
   FUN_002499fc(temp_v2,temp_v8,&temp_v7);
   temp_v5 = temp_v8[0];
   if (temp_v8[0] < temp_v7 + temp_v8[0]) {
     do {
-      temp_v3 = FUN_002939f4();
+      temp_v3 = btlGetMainState();
       puVar5 = (unsigned int *)(*(int *)(temp_v3 + 0x1fc0) + temp_v5 * 0x288);
       temp_v4 = *puVar5;
       if (((temp_v4 & 0x10) == 0) && ((temp_v4 & 1) != 0)) {
@@ -59,7 +59,7 @@ unsigned int FUN_00324000(void)
             temp_v0 = *(short *)((int)puVar5 + 0x92);
           }
           if (0 < temp_v0) {
-            FUN_0028dcb0(1);
+            scrSetResult(1);
             return 1;
           }
         }
@@ -67,9 +67,9 @@ unsigned int FUN_00324000(void)
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < temp_v8[0] + temp_v7);
   }
-  temp_v5 = FUN_002939f4();
+  temp_v5 = btlGetMainState();
   if (*(char *)(temp_v5 + 0x49c5) != '\0') {
-    FUN_002939f4();
+    btlGetMainState();
     temp_v5 = FUN_002499b4();
     if ((temp_v5 != 0) && (*(unsigned short *)(temp_v5 + 0xce) == temp_v1)) {
       temp_v0 = *(short *)(temp_v5 + 0x8e);
@@ -77,12 +77,12 @@ unsigned int FUN_00324000(void)
         temp_v0 = *(short *)(temp_v5 + 0x92);
       }
       if (0 < temp_v0) {
-        FUN_0028dcb0(1);
+        scrSetResult(1);
         return 1;
       }
     }
   }
-  FUN_0028dcb0(0);
+  scrSetResult(0);
   return 1;
 }
 

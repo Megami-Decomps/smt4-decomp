@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c4ed4(unsigned int);
-int FUN_002c50f4(unsigned int, int);
+int asdGxCommandListBegin(unsigned int);
+int asdGxCommandListEnd(unsigned int, int);
 
 extern int DAT_004e3cfc; /* 0x4e3cfc */
 extern signed char DAT_004e3d04; /* 0x4e3d04 */
 
-/* Supplied declaration required: FUN_002c4ed4. */
-/* Supplied declaration required: FUN_002c50f4. */
+/* Supplied declaration required: asdGxCommandListBegin. */
+/* Supplied declaration required: asdGxCommandListEnd. */
 
 
 void FUN_0010d230(int param_1)
@@ -21,14 +21,14 @@ void FUN_0010d230(int param_1)
   if (param_1 != 0) {
     if (DAT_004e3d04 == '\0') {
       if ((DAT_004e3cfc != 0) && (*(int *)(DAT_004e3cfc + 100) == 0)) {
-        FUN_002c4ed4(*(unsigned int *)(DAT_004e3cfc + 0x60));
+        asdGxCommandListBegin(*(unsigned int *)(DAT_004e3cfc + 0x60));
       }
       DAT_004e3d04 = '\x01';
     }
   }
   else if (DAT_004e3d04 == '\x01') {
     if ((DAT_004e3cfc != 0) && (*(int *)(DAT_004e3cfc + 100) == 0)) {
-      FUN_002c50f4(*(unsigned int *)(DAT_004e3cfc + 0x60),0);
+      asdGxCommandListEnd(*(unsigned int *)(DAT_004e3cfc + 0x60),0);
     }
     DAT_004e3d04 = '\0';
   }

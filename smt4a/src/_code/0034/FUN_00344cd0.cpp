@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_16_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -112,8 +112,8 @@ void FUN_00344cd0(unsigned int param_1,int param_2,int param_3,unsigned int para
         temp_v2 = **(short **)(temp_v8 + 0xc) - temp_v9;
       }
     }
-    temp_v4 = DAT_0059dbb4;
-    piVar12 = (int *)(DAT_0059dbb4 + 0x1318);
+    temp_v4 = g_renderCtx;
+    piVar12 = (int *)(g_renderCtx + 0x1318);
     temp_v5 = piVar12[*piVar12 + 2];
     piVar12[*piVar12 + 2] = 3;
     if (*(char *)(temp_v4 + 0x1330) != '\0' || temp_v5 != 3) {
@@ -153,8 +153,8 @@ void FUN_00344cd0(unsigned int param_1,int param_2,int param_3,unsigned int para
         temp_v2 = temp_v5 - temp_v4;
       }
     }
-    temp_v5 = DAT_0059dbb4;
-    piVar12 = (int *)(DAT_0059dbb4 + 0x1318);
+    temp_v5 = g_renderCtx;
+    piVar12 = (int *)(g_renderCtx + 0x1318);
     temp_v9 = piVar12[*piVar12 + 2];
     piVar12[*piVar12 + 2] = 3;
     if (*(char *)(temp_v5 + 0x1330) != '\0' || temp_v9 != 3) {
@@ -170,8 +170,8 @@ void FUN_00344cd0(unsigned int param_1,int param_2,int param_3,unsigned int para
     param_6 = param_7;
   }
   FUN_001835b4(2,param_4,param_6,param_2,param_3,temp_v0 + 5);
-  temp_v0 = DAT_0059dbb4;
-  piVar12 = (int *)(DAT_0059dbb4 + 0x1318);
+  temp_v0 = g_renderCtx;
+  piVar12 = (int *)(g_renderCtx + 0x1318);
   temp_v8 = piVar12[*piVar12 + 2];
   piVar12[*piVar12 + 2] = 0;
   if (*(char *)(temp_v0 + 0x1330) != '\0' || temp_v8 != 0) {

@@ -7,11 +7,11 @@ extern "C" {
 int FUN_003fd8dc(...);
 int FUN_00406768(...);
 
-int FUN_00137ee0(...);
+int asdSequenceRequest(...);
 int FUN_001695a0(void);
 int FUN_001836b0(void);
-int FUN_0019a5a0(void);
-int FUN_0019c364(void);
+int asdMemFree(void);
+int scrScriptProcessDestroy(void);
 int FUN_0019e2dc(void);
 int FUN_0019ea64(...);
 int FUN_001ad6d8(void);
@@ -20,7 +20,7 @@ int FUN_001aeafc(...);
 int FUN_001f3eec(...);
 int FUN_00214da4(void);
 int FUN_0022677c(...);
-int FUN_002d1fec(void);
+int gameStateClearFlag(void);
 int FUN_00314c38(...);
 int FUN_00324bc8(...);
 int FUN_00324c48(...);
@@ -39,7 +39,7 @@ int FUN_00100388(...);
 int FUN_0013cab8(...);
 int FUN_001517b4(...);
 int FUN_001642e4(...);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_0019c8c0(...);
 int FUN_001abbc4(void);
 int FUN_001b4eb8(void);
@@ -66,7 +66,7 @@ int FUN_0013c884(...);
 int FUN_001418fc(...);
 int FUN_0014f0dc(...);
 int FUN_001523b8(...);
-int FUN_0016007c(void);
+int asdOperatorNew(void);
 int FUN_00178b04(...);
 int FUN_0019c0e0(unsigned int);
 int FUN_003e4740(...);
@@ -110,7 +110,7 @@ extern unsigned char LAB_003290e4; /* 0x3290e4 */
 extern unsigned char DAT_00526180; /* 0x526180 */
 extern unsigned char DAT_00557c60; /* 0x557c60 */
 extern int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_0056fccc; /* 0x56fccc */
+extern int g_localTmnl; /* 0x56fccc */
 extern unsigned char DAT_005f1727; /* 0x5f1727 */
 extern unsigned char DAT_005f1728; /* 0x5f1728 */
 extern unsigned char DAT_005f1729; /* 0x5f1729 */
@@ -123,7 +123,7 @@ extern unsigned int DAT_005f1b7c; /* 0x5f1b7c */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_00137ee0. */
+/* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_0013c884. */
 /* Supplied declaration required: FUN_0013cab8. */
@@ -132,15 +132,15 @@ extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001523b8. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_001642e4. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001836b0. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019c0e0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019c8c0. */
 /* Supplied declaration required: FUN_0019e2dc. */
 /* Supplied declaration required: FUN_0019ea64. */
@@ -161,7 +161,7 @@ extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275f44. */
 extern int FUN_002802c8(void);
 extern int FUN_002a4b74(void);
-/* Supplied declaration required: FUN_002d1fec. */
+/* Supplied declaration required: gameStateClearFlag. */
 /* Supplied declaration required: FUN_00314c38. */
 /* Supplied declaration required: FUN_0031a400. */
 /* Supplied declaration required: FUN_0031e198. */
@@ -256,11 +256,11 @@ unsigned int FUN_00328838(void)
   unsigned char temp_v15 [4];
   unsigned char temp_v16 [24];
   
-  temp_v0 = DAT_0056fccc;
-  if (*(unsigned int *)(DAT_0056fccc + 8) >= 2) {
-    temp_v7 = (float)VectorSignedToFloat(*(unsigned int *)(DAT_0056fccc + 0x3c),
+  temp_v0 = g_localTmnl;
+  if (*(unsigned int *)(g_localTmnl + 8) >= 2) {
+    temp_v7 = (float)VectorSignedToFloat(*(unsigned int *)(g_localTmnl + 0x3c),
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v4 = *(int *)(DAT_0056fccc + *(int *)(DAT_0056fccc + 0x54c) * 4 + 0x30);
+    temp_v4 = *(int *)(g_localTmnl + *(int *)(g_localTmnl + 0x54c) * 4 + 0x30);
     temp_v8 = *(float *)(**(int **)(*(int *)(temp_v4 + 0x34) + 0x90) + 8);
     temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v8 < temp_v7) << 0x1f) |
             ((unsigned int)(temp_v8 == temp_v7) << 0x1e);
@@ -290,11 +290,11 @@ unsigned int FUN_00328838(void)
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 4);
   }
-  temp_v4 = DAT_0056fccc;
+  temp_v4 = g_localTmnl;
   switch(*(unsigned int *)(temp_v0 + 8)) {
   case 0:
     temp_v6 = 0x130;
-    FUN_0016007c();
+    asdOperatorNew();
     puVar4 = (unsigned int *)0x0;
     if (temp_v6 != 0) {
       puVar4 = (unsigned int *)FUN_003e5d10();
@@ -447,8 +447,8 @@ unsigned int FUN_00328838(void)
     if (temp_v4 == 3) {
       FUN_0013cab8(1,10,0xff);
     }
-    temp_v4 = DAT_0056fccc;
-    if (*(int *)(*(int *)(DAT_0056fccc + 0x560) * 0x10 + 0x56fcd8) == 0) {
+    temp_v4 = g_localTmnl;
+    if (*(int *)(*(int *)(g_localTmnl + 0x560) * 0x10 + 0x56fcd8) == 0) {
       FUN_00100388(&temp_v9,&DAT_00526180);
     }
     if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 1) {
@@ -461,7 +461,7 @@ unsigned int FUN_00328838(void)
       FUN_00100388(&temp_v9,"厂钂袂䂁憂銂膂躂薂＀");
     }
     FUN_0020401c(&temp_v9);
-    FUN_001681cc(0x92);
+    sysPlaySe(0x92);
     *(unsigned int *)(temp_v0 + 0xc) = 0;
     FUN_00275f44(*(unsigned int *)(temp_v0 + 0x20),
                  *(unsigned int *)(*(int *)(temp_v0 + 0x560) * 0x10 + 0x56fcdc));
@@ -601,11 +601,11 @@ unsigned int FUN_00328838(void)
     break;
   case 10:
     temp_v6 = FUN_002802c8();
-    temp_v4 = DAT_0056fccc;
+    temp_v4 = g_localTmnl;
     if (temp_v6 != 0) break;
     if (*(char *)(temp_v0 + 0x558) == '\0') {
       if (*(int *)(temp_v0 + 0x554) == 0x56) {
-        if (*(int *)(*(int *)(DAT_0056fccc + 0x560) * 0x10 + 0x56fcd8) == 0) {
+        if (*(int *)(*(int *)(g_localTmnl + 0x560) * 0x10 + 0x56fcd8) == 0) {
           FUN_00100388(&temp_v9,&DAT_00526180);
         }
         if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 1) {
@@ -641,7 +641,7 @@ unsigned int FUN_00328838(void)
     *(unsigned char *)(temp_v0 + 0x558) = 0;
     FUN_003d2150(0x10000b2);
     FUN_00387ac4(0);
-    FUN_001681cc(0x59);
+    sysPlaySe(0x59);
     FUN_00387ac4(0);
     *(unsigned int *)(temp_v0 + 8) = 5;
     *(unsigned int *)(temp_v0 + 0xc) = 0;
@@ -665,24 +665,24 @@ unsigned int FUN_00328838(void)
     temp_v4 = FUN_002802c8();
     if (temp_v4 == 0) {
       if (*(int *)(temp_v0 + 0x20) != 0) {
-        FUN_0019c364();
+        scrScriptProcessDestroy();
         *(unsigned int *)(temp_v0 + 0x20) = 0;
       }
       if (*(int *)(temp_v0 + 0x18) != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         *(unsigned int *)(temp_v0 + 0x18) = 0;
       }
       if (*(int *)(temp_v0 + 0x1c) != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         *(unsigned int *)(temp_v0 + 0x1c) = 0;
       }
       if (*(int *)(temp_v0 + 0x24) != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         *(unsigned int *)(temp_v0 + 0x24) = 0;
       }
       FUN_001695a0();
       FUN_001aeafc(DAT_0056fcc0);
-      temp_v4 = DAT_0056fccc;
+      temp_v4 = g_localTmnl;
       FUN_001ad6d8();
       if (*(int *)(temp_v4 + 0x28) != 0) {
         FUN_003e5c00();
@@ -719,13 +719,13 @@ unsigned int FUN_00328838(void)
           *(unsigned int *)(temp_v2 + 0x568) = 0;
         }
         if (*(int *)(temp_v2 + 0x564) != 0) {
-          FUN_0019a5a0();
+          asdMemFree();
           *(unsigned int *)(temp_v2 + 0x564) = 0;
         }
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 4);
       FUN_0019ea64(1);
-      FUN_002d1fec();
+      gameStateClearFlag();
       temp_v0 = *(int *)(temp_v0 + 0x560) * 0x10;
       if ((DAT_005f1b74 == *(short *)(temp_v0 + 0x56fcd0)) &&
          (DAT_005f1b78 == *(char *)(temp_v0 + 0x56fcd2))) {
@@ -738,8 +738,8 @@ unsigned int FUN_00328838(void)
         temp_v9 = (unsigned int)DAT_005f1729;
         FUN_00314c38(0,0,DAT_005f1727,DAT_005f1728);
       }
-      FUN_002d1fec();
-      FUN_00137ee0(6,0);
+      gameStateClearFlag();
+      asdSequenceRequest(6,0);
       return 0xffffffff;
     }
   }

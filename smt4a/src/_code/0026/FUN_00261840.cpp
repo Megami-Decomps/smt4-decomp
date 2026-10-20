@@ -12,7 +12,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0032c49c. */
-extern unsigned long long aeabi_idivmod(int, int);
+extern unsigned long long __aeabi_idivmod(int, int);
 
 
 void FUN_00261840(int param_1)
@@ -29,7 +29,7 @@ void FUN_00261840(int param_1)
   if ((0 < *(int *)(param_1 + 0x50)) &&
      (temp_v0 = *(int *)(param_1 + 0x24), temp_v1 = *(int *)(param_1 + 0x20),
      temp_v2 = *(int *)(param_1 + 0x38), temp_v3 = *(int *)(param_1 + 0x48),
-     temp_v4 = *(int *)(param_1 + 0x50), temp_v5 = aeabi_idivmod(temp_v4 - 1,temp_v2),
+     temp_v4 = *(int *)(param_1 + 0x50), temp_v5 = __aeabi_idivmod(temp_v4 - 1,temp_v2),
      temp_v4 <= (temp_v0 + temp_v1) * temp_v2 + temp_v3)) {
     FUN_0032c49c(param_1,(int)temp_v5);
     FUN_0032c49c(param_1 + 0x28,(int)((unsigned long long)temp_v5 >> 0x20));

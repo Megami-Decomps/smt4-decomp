@@ -22,7 +22,7 @@ extern unsigned int DAT_005f0c90; /* 0x5f0c90 */
 extern unsigned int DAT_005f0d44; /* 0x5f0d44 */
 extern unsigned int DAT_005f0d48; /* 0x5f0d48 */
 extern int DAT_005f0d4c; /* 0x5f0d4c */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 
 extern int FUN_00162e8c(void);
 /* Supplied declaration required: FUN_00178b04. */
@@ -45,12 +45,12 @@ void FUN_0029203c(void)
   unsigned int in_lr;
   
   temp_v2 = FUN_00162e8c();
-  if (DAT_005f15fc == 5) {
+  if (g_gameState == 5) {
     FUN_003fd63c(0x4d0,0,1);
   }
   if ((*(int *)(temp_v2 + 0x16a0) != 0) &&
-     ((DAT_005f15fc == 0x1c || DAT_005f15fc == 0x1d ||
-      ((DAT_005f15fc == 0x1e || DAT_005f15fc == 0x1f) || DAT_005f15fc == 0x20)))) {
+     ((g_gameState == 0x1c || g_gameState == 0x1d ||
+      ((g_gameState == 0x1e || g_gameState == 0x1f) || g_gameState == 0x20)))) {
     FUN_003fd63c(0x4d0,1);
     *(int *)(temp_v2 + 0x16a0) = 0;
   }

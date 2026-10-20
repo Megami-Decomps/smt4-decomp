@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00180008(int);
+int jyoucyuGetTableEntry(int);
 int FUN_00470ce0(int, unsigned int);
 int FUN_00480838(void);
 int FUN_00480e30(...);
@@ -20,19 +20,19 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_4_stack;
 
-extern int DAT_00570280; /* 0x570280 */
-extern unsigned char *DAT_005806c4; /* 0x5806c4 */
+extern int g_aocSystem; /* 0x570280 */
+extern unsigned char *g_mapDepart; /* 0x5806c4 */
 
 extern int FUN_0014bef4(unsigned int);
-/* Supplied declaration required: FUN_00180008. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+/* Supplied declaration required: jyoucyuGetTableEntry. */
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00470ce0. */
 /* Supplied declaration required: FUN_00480838. */
 /* Supplied declaration required: FUN_00480e30. */
 extern int FUN_004813bc(int);
-extern unsigned int aeabi_idivmod(int, unsigned int);
+extern unsigned int __aeabi_idivmod(int, unsigned int);
 
 
 unsigned int FUN_002b5e08(unsigned int param_1,int param_2,int param_3,unsigned int *param_4)
@@ -66,21 +66,21 @@ unsigned int FUN_002b5e08(unsigned int param_1,int param_2,int param_3,unsigned 
   int iStack_2c;
   unsigned int *puStack_28;
   
-  temp_v15 = DAT_005806c4;
-  temp_v11 = DAT_00570280;
+  temp_v15 = g_mapDepart;
+  temp_v11 = g_aocSystem;
   temp_v20 = param_1;
   iStack_30 = param_2;
   iStack_2c = param_3;
   puStack_28 = param_4;
-  FUN_00470ce0(DAT_00570280,param_1);
+  FUN_00470ce0(g_aocSystem,param_1);
   temp_v8 = temp_v20;
   temp_v16 = temp_v20 * 7;
   if (temp_v11 == 0) {
-    temp_v4 = FUN_00187180(0x21,0);
-    temp_v11 = FUN_00192798();
-    temp_v13 = FUN_00192748(temp_v4);
+    temp_v4 = dataTableGet(0x21,0);
+    temp_v11 = dataTableGetEntries();
+    temp_v13 = dataTableGetCount(temp_v4);
     if (temp_v13 <= temp_v8) {
-      FUN_00180008(0);
+      jyoucyuGetTableEntry(0);
       return 0;
     }
     temp_v11 = temp_v11 + temp_v16 * 4;
@@ -100,7 +100,7 @@ unsigned int FUN_002b5e08(unsigned int param_1,int param_2,int param_3,unsigned 
     }
     else {
       temp_v2 = FUN_0014bef4((temp_v13 - temp_v8) & 0xffff);
-      temp_v14 = aeabi_idivmod(temp_v2 * 100,temp_v13 - temp_v8);
+      temp_v14 = __aeabi_idivmod(temp_v2 * 100,temp_v13 - temp_v8);
       temp_v13 = temp_v8 + temp_v2;
     }
     if (0 < (int)temp_v13) {
@@ -134,13 +134,13 @@ unsigned int FUN_002b5e08(unsigned int param_1,int param_2,int param_3,unsigned 
         temp_v8 = temp_v20;
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 3);
-      temp_v11 = DAT_00570280;
+      temp_v11 = g_aocSystem;
       temp_v15 = (unsigned char *)asStack_1e0;
-      FUN_00470ce0(DAT_00570280,temp_v20);
+      FUN_00470ce0(g_aocSystem,temp_v20);
       if (temp_v11 == 0) {
-        temp_v4 = FUN_00187180(0x21,0);
-        temp_v11 = FUN_00192798();
-        temp_v6 = FUN_00192748(temp_v4);
+        temp_v4 = dataTableGet(0x21,0);
+        temp_v11 = dataTableGetEntries();
+        temp_v6 = dataTableGetCount(temp_v4);
         if (temp_v8 >= temp_v6) {
           temp_v11 = 0;
         }
@@ -209,7 +209,7 @@ unsigned int FUN_002b5e08(unsigned int param_1,int param_2,int param_3,unsigned 
       }
     }
   }
-  FUN_00180008(0);
+  jyoucyuGetTableEntry(0);
   return 0;
 }
 

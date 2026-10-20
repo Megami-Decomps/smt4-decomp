@@ -5,8 +5,8 @@
 extern "C" {
 
 extern int DAT_004474f4; /* 0x4474f4 */
-extern int DAT_00447e28; /* 0x447e28 */
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_mapMain; /* 0x447e28 */
+extern int g_lmapScene; /* 0x447e88 */
 extern unsigned int DAT_0049f924; /* 0x49f924 */
 extern signed char DAT_0049fba0; /* 0x49fba0 */
 extern unsigned char DAT_0049fc14; /* 0x49fc14 */
@@ -35,20 +35,20 @@ void FUN_00275e4c(void)
   }
   else {
     DAT_0049fc14 = 1;
-    DAT_0049fc18 = *(unsigned int *)(DAT_00447e28 + 0x2c);
-    DAT_0049fc1c = *(unsigned int *)(DAT_00447e28 + 0x30);
+    DAT_0049fc18 = *(unsigned int *)(g_mapMain + 0x2c);
+    DAT_0049fc1c = *(unsigned int *)(g_mapMain + 0x30);
     DAT_0049fc20 = DAT_0049f924;
-    DAT_0049fc24 = *(unsigned int *)(DAT_00447e88 + 0x1c);
-    DAT_0049fc28 = *(unsigned int *)(DAT_00447e88 + 0x20);
-    DAT_0049fc2c = *(unsigned int *)(DAT_00447e88 + 0x24);
-    DAT_0049fc30 = *(unsigned int *)(DAT_00447e88 + 0x4c);
+    DAT_0049fc24 = *(unsigned int *)(g_lmapScene + 0x1c);
+    DAT_0049fc28 = *(unsigned int *)(g_lmapScene + 0x20);
+    DAT_0049fc2c = *(unsigned int *)(g_lmapScene + 0x24);
+    DAT_0049fc30 = *(unsigned int *)(g_lmapScene + 0x4c);
     DAT_0049fc34 = *(unsigned int *)(DAT_004474f4 + 0x18);
-    DAT_0049fc38 = *(unsigned int *)(DAT_00447e28 + 0x2c);
-    DAT_0049fc3c = *(unsigned int *)(DAT_00447e28 + 0x30);
-    DAT_0049fc40 = *(unsigned int *)(DAT_00447e88 + 0x1c);
-    DAT_0049fc44 = *(unsigned int *)(DAT_00447e88 + 0x20);
-    DAT_0049fc48 = *(unsigned int *)(DAT_00447e88 + 0x24);
-    DAT_0049fc4c = *(unsigned int *)(DAT_00447e88 + 0x4c);
+    DAT_0049fc38 = *(unsigned int *)(g_mapMain + 0x2c);
+    DAT_0049fc3c = *(unsigned int *)(g_mapMain + 0x30);
+    DAT_0049fc40 = *(unsigned int *)(g_lmapScene + 0x1c);
+    DAT_0049fc44 = *(unsigned int *)(g_lmapScene + 0x20);
+    DAT_0049fc48 = *(unsigned int *)(g_lmapScene + 0x24);
+    DAT_0049fc4c = *(unsigned int *)(g_lmapScene + 0x4c);
     DAT_0049fc50 = *(unsigned int *)(DAT_004474f4 + 0x18);
   }
   return;

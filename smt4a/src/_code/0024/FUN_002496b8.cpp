@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0016007c(void);
+int asdOperatorNew(void);
 
 extern unsigned char DAT_00557c60; /* 0x557c60 */
-extern unsigned int *DAT_00581288; /* 0x581288 */
+extern unsigned int *g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f17ac; /* 0x5f17ac */
 extern unsigned int DAT_005f17b0; /* 0x5f17b0 */
 extern unsigned int DAT_005f17b4; /* 0x5f17b4 */
@@ -30,7 +30,7 @@ extern unsigned int DAT_005f19e0; /* 0x5f19e0 */
 extern unsigned int DAT_005f19e4; /* 0x5f19e4 */
 extern unsigned short DAT_005f19e8; /* 0x5f19e8 */
 
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 extern unsigned int *FUN_003e5d10(void);
 
 
@@ -44,10 +44,10 @@ void FUN_002496b8(void)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  puVar2 = DAT_00581288;
+  puVar2 = g_lmapScene;
   temp_v2 = 0;
-  puVar3 = DAT_00581288 + 10;
-  *DAT_00581288 = 0;
+  puVar3 = g_lmapScene + 10;
+  *g_lmapScene = 0;
   puVar2[1] = 0;
   puVar2[2] = 0;
   *(unsigned char *)(puVar2 + 4) = 0;
@@ -83,14 +83,14 @@ void FUN_002496b8(void)
   puVar2[0x58] = 0x447a0000;
   *(unsigned char *)(puVar2 + 0x4d) = 1;
   temp_v0 = 0x130;
-  FUN_0016007c();
+  asdOperatorNew();
   puVar2 = (unsigned int *)0x0;
   if (temp_v0 != 0) {
     puVar2 = (unsigned int *)FUN_003e5d10();
     *puVar2 = (unsigned int)&DAT_00557c60;
   }
-  puVar3 = DAT_00581288;
-  DAT_00581288[0x6a] = (unsigned int)puVar2;
+  puVar3 = g_lmapScene;
+  g_lmapScene[0x6a] = (unsigned int)puVar2;
   *(unsigned char *)(puVar3 + 0x6b) = 0;
   puVar3[0x6c] = 0;
   puVar3[0x6d] = 0;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00137ee0(...);
-int FUN_001631d0(...);
-int FUN_001681cc(...);
+int asdSequenceRequest(...);
+int jobStop(...);
+int sysPlaySe(...);
 int FUN_0019de98(...);
 int FUN_001f3fa8(...);
 int FUN_001f4908(...);
@@ -25,17 +25,17 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern unsigned int *DAT_0057f394; /* 0x57f394 */
+extern unsigned int *g_clearSave; /* 0x57f394 */
 
-/* Supplied declaration required: FUN_00137ee0. */
-/* Supplied declaration required: FUN_001631d0. */
-extern int FUN_00164a9c(void);
+/* Supplied declaration required: asdSequenceRequest. */
+/* Supplied declaration required: jobStop. */
+extern int jobGetWork(void);
 extern int FUN_00164af0(unsigned int);
 extern int FUN_001656a0(unsigned int);
-/* Supplied declaration required: FUN_001681cc. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+/* Supplied declaration required: sysPlaySe. */
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_001ab888(void);
 extern unsigned int FUN_001b347c(void);
@@ -70,7 +70,7 @@ unsigned int FUN_00241058(void)
   int temp_v5;
   unsigned int temp_v6;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   switch(*(unsigned int *)(temp_v0 + 0xc)) {
   case 0:
     *(unsigned int *)(temp_v0 + 0xc) = 1;
@@ -86,7 +86,7 @@ unsigned int FUN_00241058(void)
     temp_v5 = FUN_002e07f4();
     if (temp_v5 != 0) {
       *(unsigned int *)(temp_v0 + 0xc) = 8;
-      FUN_001681cc(0xa9);
+      sysPlaySe(0xa9);
       FUN_00275f44(*(unsigned int *)(temp_v0 + 0x90),1);
     }
     break;
@@ -150,9 +150,9 @@ unsigned int FUN_00241058(void)
       return 0;
     }
     temp_v2 = *(unsigned int *)(temp_v0 + 0x20);
-    temp_v4 = FUN_00187180(0x3c,0);
-    temp_v0 = FUN_00192798();
-    temp_v3 = FUN_00192748(temp_v4);
+    temp_v4 = dataTableGet(0x3c,0);
+    temp_v0 = dataTableGetEntries();
+    temp_v3 = dataTableGetCount(temp_v4);
     if (temp_v2 >= temp_v3) {
       temp_v0 = 0;
     }
@@ -227,9 +227,9 @@ unsigned int FUN_00241058(void)
       break;
     }
     temp_v2 = FUN_002a4b60();
-    temp_v4 = FUN_00187180(0x3c,0);
-    temp_v0 = FUN_00192798();
-    temp_v3 = FUN_00192748(temp_v4);
+    temp_v4 = dataTableGet(0x3c,0);
+    temp_v0 = dataTableGetEntries();
+    temp_v3 = dataTableGetCount(temp_v4);
     if (temp_v2 < temp_v3) {
       temp_v0 = temp_v0 + temp_v2 * 0x50;
       FUN_0019de98(temp_v0,0xf4f4f4ff);
@@ -247,7 +247,7 @@ unsigned int FUN_00241058(void)
     if (temp_v5 == 0) {
       FUN_00239b08();
       *(unsigned int *)(temp_v0 + 0xc) = 10;
-      FUN_001681cc(0xa9);
+      sysPlaySe(0xa9);
       temp_v4 = *(unsigned int *)(temp_v0 + 0x90);
       temp_v6 = 2;
       FUN_00275f44(temp_v4,temp_v6);
@@ -283,10 +283,10 @@ unsigned int FUN_00241058(void)
       if (*(char *)(temp_v0 + 8) != '\0') {
         FUN_00212204(0);
         FUN_00212204(1);
-        FUN_001631d0(*DAT_0057f394,0);
+        jobStop(*g_clearSave,0);
       }
       else {
-        FUN_00137ee0(1,0);
+        asdSequenceRequest(1,0);
       }
       return 0xffffffff;
     }

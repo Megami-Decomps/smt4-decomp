@@ -1,46 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00290ba4` (_code @ 0x290ba4, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only: retail loads the DAT_0057a9b8 address before calling FUN_0035b304, built after */
+/* Tears down the session: resets its sub-state, releases its handle, frees the session itself and notifies the owner's window. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
-int FUN_0019a5a0(void);
-int FUN_002e3328(unsigned int);
-int FUN_00318c3c(int);
-int FUN_0035b304(void);
+typedef struct Session {
+    /* 0x0000 */ u8 unk0000[0x28C4];
+    /* 0x28C4 */ u8 subState[0x4BC4];
+    /* 0x7488 */ u32 handle;
+} Session;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+typedef struct SessionHolder {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ Session *session;
+} SessionHolder;
 
-extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[0x78];
+    /* 0x78 */ u32 window;
+} Owner;
 
-/* Supplied declaration required: FUN_001631d0. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_002e3328. */
-/* Supplied declaration required: FUN_00318c3c. */
-/* Supplied declaration required: FUN_0035b304. */
+extern SessionHolder DAT_0057a9b8;
 
+extern void jobStop(u32 window, s32 arg);
+extern void asdMemFree(Session *session);
+extern void FUN_002e3328(u32 handle);
+extern void FUN_00318c3c(void *subState);
+extern void FUN_0035b304(void);
 
-void FUN_00290ba4(int param_1)
-
+void FUN_00290ba4(Owner *owner)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_0035b304();
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
-  FUN_00318c3c((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x28c4);
-  FUN_002e3328(*(unsigned int *)(temp_v0 + 0x7488));
-  *(unsigned int *)(temp_v0 + 0x7488) = 0;
-  if ((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) != 0) {
-    FUN_0019a5a0();
-    (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) = 0;
-  }
-  FUN_001631d0(*(unsigned int *)(param_1 + 0x78),0);
-  return;
+    Session *session;
+
+    FUN_0035b304();
+    session = DAT_0057a9b8.session;
+    FUN_00318c3c(session->subState);
+    FUN_002e3328(session->handle);
+    session->handle = 0;
+    if (DAT_0057a9b8.session != NULL) {
+        asdMemFree(DAT_0057a9b8.session);
+        DAT_0057a9b8.session = NULL;
+    }
+    jobStop(owner->window, 0);
 }
 
-} /* extern "C" */
+}

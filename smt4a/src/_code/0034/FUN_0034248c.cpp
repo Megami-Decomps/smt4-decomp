@@ -20,7 +20,7 @@ int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
 typedef int romwright_code(...);
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern signed char DAT_005b3d54; /* 0x5b3d54 */
 extern int DAT_005b3d64; /* 0x5b3d64 */
 extern romwright_code *DAT_005b3d74; /* 0x5b3d74 */
@@ -173,7 +173,7 @@ void FUN_0034248c(int param_1,int param_2,float *param_3,int param_4,int param_5
   iStack_a0 = 0;
   piStack_30 = piVar9;
   if (DAT_005b3d54 != '\0') {
-    FUN_001879d0(DAT_0059dbb4);
+    FUN_001879d0(g_renderCtx);
     temp_v14 = temp_v17 + temp_v14;
   }
   temp_v24 = (unsigned long long)(unsigned int)temp_v14;
@@ -422,7 +422,7 @@ LAB_00180bc0:
         temp_v18 = *(unsigned int *)
                   (*(int *)(piVar9[5] + 0xc) + *(int *)(*piVar9 + temp_v7 * 0x20 + 0x1c) * 4);
         if (uStack_158 != 0) {
-          FUN_0019f764(DAT_0059dbb4,temp_v18,temp_v0);
+          FUN_0019f764(g_renderCtx,temp_v18,temp_v0);
           if (uStack_158 == 2) {
             temp_v25 = temp_v25 & 0xffffffff00000000;
             FUN_0019aee4(piVar10,temp_v6,temp_v13,temp_v13,temp_v13,temp_v13);
@@ -437,7 +437,7 @@ LAB_00180bc0:
           temp_v23 = (unsigned long long)(unsigned int)temp_v17 << 0x20;
         }
         else {
-          FUN_0019f764(DAT_0059dbb4,temp_v18,temp_v0);
+          FUN_0019f764(g_renderCtx,temp_v18,temp_v0);
           FUN_0019aee4(piVar10,temp_v6,uStack_13c,uStack_13c,uStack_13c,uStack_13c);
         }
         temp_v22 = (unsigned long long)(unsigned int)((float)piVar9[6] + temp_v14 + temp_v21);
@@ -473,7 +473,7 @@ LAB_00180f28:
         VectorSignedToFloat((int)*(char *)(temp_v5 + 6),(unsigned char)(temp_v11 >> 0x16) & 3);
         VectorUnsignedToFloat((unsigned int)*(unsigned char *)(temp_v5 + 5),(unsigned char)(temp_v11 >> 0x16) & 3);
         VectorUnsignedToFloat((unsigned int)*(unsigned char *)(temp_v5 + 7),(unsigned char)(temp_v11 >> 0x16) & 3);
-        FUN_0019f764(DAT_0059dbb4,
+        FUN_0019f764(g_renderCtx,
                      *(unsigned int *)
                       (*(int *)(piVar9[0x29] + 0xc) +
                       *(int *)(*piVar9 + aiStack_138[temp_v6] * 0x20 + 0x1c) * 4),

@@ -2,13 +2,13 @@
 
 extern "C" {
 
-int FUN_003283ac(int);
+int scrSetResult(int);
 int FUN_003ef960(unsigned int, int);
 
-extern unsigned int FUN_0014aa78(void);
-extern int FUN_00192798(void);
-extern int FUN_00236038(void);
-/* Supplied declaration required: FUN_003283ac. */
+extern unsigned int btlGetMainState(void);
+extern int dataTableGetEntries(void);
+extern int scrGetArg(void);
+/* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003ef960. */
 
 
@@ -20,11 +20,11 @@ unsigned int FUN_003c68e8(void)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_00236038();
-  temp_v1 = FUN_0014aa78();
+  temp_v0 = scrGetArg();
+  temp_v1 = btlGetMainState();
   FUN_003ef960(temp_v1,4);
-  temp_v2 = FUN_00192798();
-  FUN_003283ac(*(unsigned short *)(temp_v2 + temp_v0 * 4 + 2));
+  temp_v2 = dataTableGetEntries();
+  scrSetResult(*(unsigned short *)(temp_v2 + temp_v0 * 4 + 2));
   return 1;
 }
 

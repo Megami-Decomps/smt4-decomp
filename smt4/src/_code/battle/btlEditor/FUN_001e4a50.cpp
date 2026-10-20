@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_0022713c(...);
+int asdListBoxAddItem(...);
 int FUN_002271e8(...);
 int FUN_00227200(void);
 int FUN_0025628c(unsigned int);
-int FUN_0025b730(...);
+int asdLoadFileSetUseRawPaths(...);
 int FUN_0025c2ec(...);
 int FUN_00262914(...);
-int FUN_002631dc(...);
+int asdListBoxCreate(...);
 int FUN_0027da30(...);
 int FUN_002bf694(...);
-int FUN_002c43b4(...);
-int FUN_002c4938(...);
+int jobStop(...);
+int memClear(...);
 int FUN_003d88dc(unsigned int *, int);
 int FUN_003d8a18(unsigned int *, int);
 int FUN_003d8b34(unsigned int *, int, unsigned int);
@@ -28,27 +28,27 @@ typedef struct {
 } void_stack;
 
 extern unsigned char DAT_00400588; /* 0x400588 */
-extern unsigned int *DAT_004342c8; /* 0x4342c8 */
+extern unsigned int *g_btlMain; /* 0x4342c8 */
 extern unsigned int *DAT_00435ce8; /* 0x435ce8 */
 
-/* Supplied declaration required: FUN_0022713c. */
+/* Supplied declaration required: asdListBoxAddItem. */
 /* Supplied declaration required: FUN_002271e8. */
 /* Supplied declaration required: FUN_00227200. */
 extern unsigned int *FUN_0022a344(unsigned int, unsigned int);
 extern unsigned int *FUN_0022a464(unsigned int, unsigned int);
 extern unsigned int FUN_00240448(int);
 /* Supplied declaration required: FUN_0025628c. */
-/* Supplied declaration required: FUN_0025b730. */
-extern unsigned int FUN_0025b740(void);
+/* Supplied declaration required: asdLoadFileSetUseRawPaths. */
+extern unsigned int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: FUN_0025c2ec. */
 /* Supplied declaration required: FUN_00262914. */
-/* Supplied declaration required: FUN_002631dc. */
+/* Supplied declaration required: asdListBoxCreate. */
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: FUN_002bf694. */
 extern int FUN_002bfde4(unsigned int);
-extern int FUN_002c08f0(void);
-/* Supplied declaration required: FUN_002c43b4. */
-/* Supplied declaration required: FUN_002c4938. */
+extern int jobGetWork(void);
+/* Supplied declaration required: jobStop. */
+/* Supplied declaration required: memClear. */
 extern int FUN_002c5c04(unsigned int *);
 /* Supplied declaration required: FUN_003d88dc. */
 /* Supplied declaration required: FUN_003d8a18. */
@@ -75,7 +75,7 @@ unsigned int FUN_001e4a50(void)
   unsigned int *puVar11;
   unsigned int temp_v7 [34];
   
-  temp_v1 = FUN_002c08f0();
+  temp_v1 = jobGetWork();
   puVar7 = DAT_00435ce8;
   if (DAT_00435ce8 == (unsigned int *)0x0) {
     return 0;
@@ -112,14 +112,14 @@ unsigned int FUN_001e4a50(void)
     }
     temp_v2 = *(unsigned int *)(temp_v1 + 0x58);
     temp_v7[0] = 4;
-    FUN_002631dc(temp_v2,0xeb,0x10,0x20);
+    asdListBoxCreate(temp_v2,0xeb,0x10,0x20);
     puVar7[3] = temp_v2;
     FUN_00227200();
     FUN_002271e8(puVar7[3],0xc,0x10);
     FUN_00262914(puVar7[3],0x400660);
-    FUN_0022713c(puVar7[3],0x400658);
-    FUN_0022713c(puVar7[3],0x400650);
-    FUN_0022713c(puVar7[3],0x400648);
+    asdListBoxAddItem(puVar7[3],0x400658);
+    asdListBoxAddItem(puVar7[3],0x400650);
+    asdListBoxAddItem(puVar7[3],0x400648);
     FUN_0025c2ec(puVar7[3],1);
     temp_v2 = 1;
     break;
@@ -130,12 +130,12 @@ unsigned int FUN_001e4a50(void)
       if (temp_v1 == 0) {
         return 0;
       }
-      FUN_002c43b4(puVar7[3],0);
+      jobStop(puVar7[3],0);
       puVar7[3] = 0;
       return 0xffffffff;
     }
     temp_v4 = FUN_0025628c(puVar7[3]);
-    FUN_002c43b4(puVar7[3],0);
+    jobStop(puVar7[3],0);
     puVar7[3] = 0;
     if (temp_v4 == 0) goto code_r0x003d9140;
     if (temp_v4 == 1) {
@@ -152,7 +152,7 @@ unsigned int FUN_001e4a50(void)
     temp_v4 = FUN_002bfde4(0);
     if (temp_v4 != 0) {
       temp_v4 = FUN_0025628c(puVar7[3]);
-      FUN_002c43b4(puVar7[3],0);
+      jobStop(puVar7[3],0);
       puVar7[3] = 0;
       if (temp_v4 == 0) {
         FUN_003d8a18(puVar7,temp_v1);
@@ -166,7 +166,7 @@ unsigned int FUN_001e4a50(void)
       if (temp_v1 == 0) {
         return 0;
       }
-      FUN_002c43b4(puVar7[3],0);
+      jobStop(puVar7[3],0);
       puVar7[3] = 0;
     }
   case 5:
@@ -190,7 +190,7 @@ unsigned int FUN_001e4a50(void)
     temp_v4 = FUN_002bfde4(0);
     if (temp_v4 != 0) {
       temp_v3 = FUN_0025628c(puVar7[3]);
-      FUN_002c43b4(puVar7[3],0);
+      jobStop(puVar7[3],0);
       puVar7[3] = 0;
       if (temp_v3 < 3) {
         FUN_003d8c88(puVar7,temp_v1,*(unsigned int *)(temp_v1 + 0x58),temp_v3 & 0xffff);
@@ -203,30 +203,30 @@ unsigned int FUN_001e4a50(void)
       if (temp_v4 == 0) {
         return 0;
       }
-      FUN_002c43b4(puVar7[3],0);
+      jobStop(puVar7[3],0);
       puVar7[3] = 0;
     }
 code_r0x003d9140:
     temp_v2 = *(unsigned int *)(temp_v1 + 0x58);
     temp_v7[0] = 4;
-    FUN_002631dc(temp_v2,0xeb,0x10,0x20);
+    asdListBoxCreate(temp_v2,0xeb,0x10,0x20);
     puVar7[3] = temp_v2;
     FUN_00227200();
     FUN_002271e8(puVar7[3],0xc,0x10);
     FUN_00262914(puVar7[3],"MODE");
-    FUN_0022713c(puVar7[3],"슌쪕튕垏");
-    FUN_0022713c(puVar7[3],"䪃膃覃튕垏");
+    asdListBoxAddItem(puVar7[3],"슌쪕튕垏");
+    asdListBoxAddItem(puVar7[3],"䪃膃覃튕垏");
     FUN_0025c2ec(puVar7[3],1);
     temp_v2 = 2;
     break;
   case 6:
-    FUN_002c4938(temp_v7,0x80);
+    memClear(temp_v7,0x80);
     temp_v2 = FUN_00240448(temp_v1);
     FUN_002bf694(temp_v7,temp_v2);
-    temp_v2 = FUN_0025b740();
-    FUN_0025b730(1);
+    temp_v2 = asdLoadFileGetUseRawPaths();
+    asdLoadFileSetUseRawPaths(1);
     temp_v4 = FUN_002c5c04(temp_v7);
-    FUN_0025b730(temp_v2);
+    asdLoadFileSetUseRawPaths(temp_v2);
     if (*(char *)(temp_v4 + 10) == '\x01') {
       FUN_003d9628(puVar7,temp_v1,temp_v4);
     }
@@ -250,7 +250,7 @@ code_r0x003d9140:
       *(unsigned int *)(temp_v1 + 0x14) = *(unsigned int *)(temp_v4 + 0x14);
       return 0;
     }
-    FUN_002c43b4(puVar7[3],0);
+    jobStop(puVar7[3],0);
     puVar7[3] = 0;
     temp_v2 = 3;
     break;
@@ -264,16 +264,16 @@ code_r0x003d9140:
           return 0;
         }
         puVar7 = (unsigned int *)FUN_0022a464(temp_v2,0);
-        DAT_004342c8[9] = *puVar7;
+        g_btlMain[9] = *puVar7;
         return 0;
       }
       if (temp_v0 == 0) {
         puVar7 = (unsigned int *)(temp_v1 + 0x1ea4);
-        puVar11 = DAT_004342c8 + 3;
+        puVar11 = g_btlMain + 3;
       }
       else {
         puVar7 = (unsigned int *)(temp_v1 + 0x1eb0);
-        puVar11 = DAT_004342c8 + 6;
+        puVar11 = g_btlMain + 6;
       }
       puVar6 = (unsigned int *)FUN_0022a344(temp_v2,0);
       *puVar11 = *puVar6;
@@ -286,27 +286,27 @@ code_r0x003d9140:
       *puVar7 = *puVar11;
       puVar7[1] = temp_v2;
       puVar7[2] = temp_v6;
-      puVar7 = DAT_004342c8;
+      puVar7 = g_btlMain;
       temp_v2 = puVar11[1];
       temp_v6 = puVar11[2];
-      *DAT_004342c8 = *puVar11;
+      *g_btlMain = *puVar11;
       puVar7[1] = temp_v2;
       puVar7[2] = temp_v6;
       return 0;
     }
-    FUN_002c43b4(puVar7[3],0);
+    jobStop(puVar7[3],0);
     puVar7[3] = 0;
 code_r0x003d9244:
     temp_v2 = *(unsigned int *)(temp_v1 + 0x58);
     temp_v7[0] = 4;
-    FUN_002631dc(temp_v2,0xeb,0x10,0x20);
+    asdListBoxCreate(temp_v2,0xeb,0x10,0x20);
     puVar7[3] = temp_v2;
     FUN_00227200();
     FUN_002271e8(puVar7[3],0xc,0x10);
     FUN_00262914(puVar7[3],"CAMERA");
-    FUN_0022713c(puVar7[3],0x4005a0);
-    FUN_0022713c(puVar7[3],0x400598);
-    FUN_0022713c(puVar7[3],&DAT_00400588);
+    asdListBoxAddItem(puVar7[3],0x4005a0);
+    asdListBoxAddItem(puVar7[3],0x400598);
+    asdListBoxAddItem(puVar7[3],&DAT_00400588);
     FUN_0025c2ec(puVar7[3],1);
     *puVar7 = 4;
     return 0;

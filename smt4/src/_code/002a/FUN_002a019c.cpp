@@ -10,7 +10,7 @@ int FUN_0029eaa4(...);
 int FUN_002b7bca(...);
 int FUN_002b9024(...);
 int FUN_002c3944(...);
-int FUN_002c4938(...);
+int memClear(...);
 
 extern int FUN_001f6524(...); /* 0x1f6524 */
 extern int *DAT_0043dd68; /* 0x43dd68 */
@@ -25,7 +25,7 @@ extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_002a019c(void)
@@ -46,7 +46,7 @@ void FUN_002a019c(void)
   
   piVar1 = DAT_0043dd68;
   temp_v0 = FUN_002a0d0c();
-  FUN_002c4938(piVar1 + 0x170,0x962);
+  memClear(piVar1 + 0x170,0x962);
   temp_v1 = (int)piVar1 + 0xf22;
   FUN_002c3944(temp_v1,0x70);
   FUN_002c3944((int)piVar1 + 0xf92,0x3ea);

@@ -1,38 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00337f48` (_code @ 0x337f48, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00399768(...);
-int FUN_003ba614(int, int);
+typedef struct Resources {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ int effect;
+    /* 0x14 */ u8 unk14[0xC];
+    /* 0x20 */ int sound;
+} Resources;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+extern Resources DAT_0059dbe0;
 
-extern unsigned char DAT_0059dbe0; /* 0x59dbe0 */
-extern int DAT_0059dc00; /* 0x59dc00 */
+int FUN_00399768(int handle, int arg);
+int FUN_003ba614(int handle, int arg);
 
-/* Supplied declaration required: FUN_00399768. */
-/* Supplied declaration required: FUN_003ba614. */
-
-
-void FUN_00337f48(unsigned int param_1)
-
+/* Frees the global effect and sound handles (clearing them), then frees `handle`. */
+void FUN_00337f48(int handle)
 {
-/* irregular: 2 native warning(s); review required */
-  if ((*(int *)((unsigned char *)&DAT_0059dbe0 + 0x10)) != 0) {
-    FUN_003ba614((*(int *)((unsigned char *)&DAT_0059dbe0 + 0x10)),3);
-    (*(int *)((unsigned char *)&DAT_0059dbe0 + 0x10)) = 0;
-  }
-  if (DAT_0059dc00 != 0) {
-    FUN_00399768(DAT_0059dc00,3);
-    DAT_0059dc00 = 0;
-  }
-  FUN_00399768(param_1,3);
-  return;
+    if (DAT_0059dbe0.effect != 0) {
+        FUN_003ba614(DAT_0059dbe0.effect, 3);
+        DAT_0059dbe0.effect = 0;
+    }
+    if (DAT_0059dbe0.sound != 0) {
+        FUN_00399768(DAT_0059dbe0.sound, 3);
+        DAT_0059dbe0.sound = 0;
+    }
+    FUN_00399768(handle, 3);
 }
 
 } /* extern "C" */

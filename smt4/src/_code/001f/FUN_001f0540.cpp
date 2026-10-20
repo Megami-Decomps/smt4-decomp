@@ -59,7 +59,7 @@ extern unsigned char LAB_001f12fc; /* 0x1f12fc */
 extern unsigned char LAB_001f1310; /* 0x1f1310 */
 extern unsigned char LAB_001f1a6c; /* 0x1f1a6c */
 extern unsigned char LAB_001f1a84; /* 0x1f1a84 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002580d4. */
@@ -348,7 +348,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
           temp_v7 = FUN_0029efa8(temp_v17);
           if (*(short *)(temp_v14 + 0x9010) == *(short *)(temp_v1 + (temp_v7 + temp_v10) * 2 + 0x9020)) {
             FUN_002bf538();
-            temp_v14 = DAT_0044ea00;
+            temp_v14 = g_titleScene;
             temp_v10 = FUN_002c5da8(6,1,0);
             piVar17 = (int *)(temp_v14 + 0x12ac);
             temp_v7 = piVar17[*piVar17 + 2];
@@ -359,7 +359,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
             }
             FUN_002bf288(2,0x24,0x173,*(short *)(temp_v5 + 8) + temp_v13,*(short *)(temp_v5 + 10) + temp_v2,
                          0x65);
-            temp_v13 = DAT_0044ea00;
+            temp_v13 = g_titleScene;
             temp_v2 = FUN_002c5da8(6,7,0);
             piVar17 = (int *)(temp_v13 + 0x12ac);
             temp_v5 = piVar17[*piVar17 + 2];
@@ -502,8 +502,8 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
         FUN_002bf288(2,0x24,0x19d,temp_v11,temp_v8,0x7e);
       }
       temp_v8 = FUN_002bf4f8(0x24,0x19c);
-      temp_v7 = DAT_0044ea00;
-      piVar17 = (int *)(DAT_0044ea00 + 0x130c);
+      temp_v7 = g_titleScene;
+      piVar17 = (int *)(g_titleScene + 0x130c);
       temp_v11 = piVar17[*piVar17 + 2];
       piVar17[*piVar17 + 2] = 3;
       if (*(char *)(temp_v7 + 0x1324) != '\0' || temp_v11 != 3) {
@@ -518,8 +518,8 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
       temp_v8 = FUN_002beda4(temp_v1 + 0xb0);
       FUN_002bf288(2,0x24,0x19e,temp_v8 + temp_v13 + (int)*(short *)(temp_v10 + 8),
                    temp_v7 + temp_v2 + (int)temp_v0,0x83);
-      temp_v7 = DAT_0044ea00;
-      piVar17 = (int *)(DAT_0044ea00 + 0x130c);
+      temp_v7 = g_titleScene;
+      piVar17 = (int *)(g_titleScene + 0x130c);
       temp_v8 = piVar17[*piVar17 + 2];
       piVar17[*piVar17 + 2] = 0;
       if (*(char *)(temp_v7 + 0x1324) != '\0' || temp_v8 != 0) {

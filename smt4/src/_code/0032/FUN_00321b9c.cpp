@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned char DAT_0043e188; /* 0x43e188 */
 
-extern unsigned int FUN_00296cc8(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 extern unsigned int *FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b8da0. */
 /* Supplied declaration required: FUN_002bd954. */
@@ -32,7 +32,7 @@ unsigned int FUN_00321b9c(void)
   unsigned int temp_v2;
   int temp_v3;
   
-  temp_v1 = FUN_00296cc8(0);
+  temp_v1 = scrGetArg(0);
   temp_v0 = (*(int *)((unsigned char *)&DAT_0043e188 + 0x8));
   *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x8)) + 0x7d) = 1;
   *(unsigned char *)(temp_v0 + 0x7c) = 1;

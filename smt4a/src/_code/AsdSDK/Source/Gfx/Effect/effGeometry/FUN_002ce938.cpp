@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_002e1450(unsigned int *);
 int FUN_00412648(unsigned int, int, int, int);
@@ -18,7 +18,7 @@ typedef struct {
 
 extern unsigned char DAT_0054baf8; /* 0x54baf8 */
 
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_002e1450. */
 /* Supplied declaration required: FUN_00412648. */
@@ -37,7 +37,7 @@ unsigned int * FUN_002ce938(int param_1,int param_2,int param_3,unsigned short p
   unsigned int in_s0;
   
   puVar1 = (unsigned int *)0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0x5c,0x10,1);
+  memAlloc(0x10000,0x100,0,0x5c,0x10,1);
   temp_v0 = 0x4c;
   FUN_00178b04(0x4c,&DAT_0054baf8,0x1fa);
   if (temp_v0 == 0) {
@@ -49,7 +49,7 @@ unsigned int * FUN_002ce938(int param_1,int param_2,int param_3,unsigned short p
   FUN_00412648(temp_v2,0x25,param_3 * param_1 * 3,param_2 * param_1);
   *puVar1 = temp_v2;
   temp_v2 = 0x10000;
-  FUN_00167ab4(0x10000,0x100,0,param_1 << 4,0x10,1);
+  memAlloc(0x10000,0x100,0,param_1 << 4,0x10,1);
   if (0 < param_1) {
     in_s0 = 0x3f800000;
   }

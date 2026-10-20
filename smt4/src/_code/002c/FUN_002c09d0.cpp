@@ -1,19 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c09d0` (_code @ 0x2c09d0, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the shift count is built in r2 and the result via movne r0, #1 (retail: shift count in r3, movne r0, r1). */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002adc88(void);
+u8 *FUN_002adc88(u32 index);
 
-
-unsigned char FUN_002c09d0(unsigned int param_1)
-
+/* Tests bit `index` of the flag bitmap returned by FUN_002adc88. */
+bool FUN_002c09d0(u32 index)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002adc88();
-  return ((unsigned int)*(unsigned char *)(temp_v0 + (param_1 >> 3)) & (1 << (param_1 & 7))) != 0;
+    u8 *flags = FUN_002adc88(index);
+
+    return (flags[index >> 3] & (1 << (index & 7))) != 0;
 }
 
 } /* extern "C" */

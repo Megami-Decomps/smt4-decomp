@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001742e4(int, int);
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int nw_snd_SoundHandle_DetachSound(...);
 int nw_snd_SoundHeap_Destroy(int);
 int nw_snd_SoundHeap_LoadState(int, unsigned int);
@@ -21,7 +21,7 @@ extern unsigned char DAT_0063e986; /* 0x63e986 */
 extern unsigned char DAT_0063e987; /* 0x63e987 */
 
 /* Supplied declaration required: FUN_001742e4. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
 /* Supplied declaration required: nw_snd_SoundHeap_Destroy. */
 /* Supplied declaration required: nw_snd_SoundHeap_LoadState. */
@@ -49,7 +49,7 @@ void FUN_00141b24(void)
         nw_snd_SoundHeap_LoadState(temp_v0 + 0x63e70c,*(unsigned int *)(temp_v0 + 0x63e770));
         *(unsigned int *)(temp_v0 + 0x63e770) = 0;
         nw_snd_SoundHeap_Destroy(temp_v0 + 0x63e70c);
-        FUN_0019a5a0(*(unsigned int *)(temp_v0 + 0x63e76c));
+        asdMemFree(*(unsigned int *)(temp_v0 + 0x63e76c));
       }
     }
     temp_v2 = temp_v2 + 1;
@@ -66,7 +66,7 @@ void FUN_00141b24(void)
       }
       *(unsigned int *)(temp_v0 + 0x63e8f8) = 0;
       nw_snd_SoundHeap_Destroy(temp_v0 + 0x63e8cc);
-      FUN_0019a5a0();
+      asdMemFree();
     }
     do {
       temp_v2 = temp_v2 + 1;
@@ -78,7 +78,7 @@ void FUN_00141b24(void)
             nw_snd_SoundHandle_DetachSound(piVar2);
           }
           piVar6 = (int *)piVar2[5];
-          FUN_0019a5a0(piVar2);
+          asdMemFree(piVar2);
           piVar2 = piVar6;
         }
         DAT_0063e944 = (int *)0x0;
@@ -101,7 +101,7 @@ void FUN_00141b24(void)
               } while (temp_v3 < 4);
               if ((&DAT_0063e987)[temp_v0] != '\0') {
                 nw_snd_SoundHeap_Destroy(temp_v5);
-                FUN_0019a5a0(*(unsigned int *)(temp_v0 + 0x63e97c));
+                asdMemFree(*(unsigned int *)(temp_v0 + 0x63e97c));
                 *(unsigned int *)(temp_v0 + 0x63e980) = 0;
                 (&DAT_0063e987)[temp_v0] = 0;
               }

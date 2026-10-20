@@ -9,7 +9,7 @@ int FUN_00162790(int, unsigned int, unsigned char [64]);
 int FUN_001634b4(...);
 int FUN_001654d8(...);
 int FUN_001654e4(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_0018408c(unsigned char *, int);
 int FUN_001879d0(int);
@@ -30,7 +30,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_002f64c4; /* 0x2f64c4 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
@@ -39,7 +39,7 @@ extern unsigned int FUN_00156850(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001634b4. */
 /* Supplied declaration required: FUN_001654d8. */
 /* Supplied declaration required: FUN_001654e4. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -76,8 +76,8 @@ void FUN_002f6048(int param_1)
   
   FUN_0019d880();
   temp_v13 = (unsigned int)*(unsigned short *)(param_1 + 0xcca);
-  FUN_001677c0();
-  temp_v3 = DAT_0059dbb4;
+  efctSetSpeed();
+  temp_v3 = g_renderCtx;
   temp_v2 = FUN_00169294(6,1,0);
   piVar10 = (int *)(temp_v3 + 0x12b8);
   temp_v6 = piVar10[*piVar10 + 2];
@@ -87,7 +87,7 @@ void FUN_002f6048(int param_1)
     *(unsigned char *)(temp_v3 + 0x12d0) = 0;
   }
   FUN_002f6f44(0x4b,0xc9,0,1);
-  temp_v3 = DAT_0059dbb4;
+  temp_v3 = g_renderCtx;
   temp_v2 = FUN_00169294(6,7,0);
   piVar10 = (int *)(temp_v3 + 0x12b8);
   temp_v6 = piVar10[*piVar10 + 2];
@@ -98,7 +98,7 @@ void FUN_002f6048(int param_1)
   }
   temp_v11 = 0.26f;
   temp_v9 = temp_v11;
-  FUN_001879d0(DAT_0059dbb4);
+  FUN_001879d0(g_renderCtx);
   VectorSignedToFloat((int)temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_001634b4(param_1 + 0x5ac);
   temp_v3 = FUN_001834a4(0x1e,0x51);
@@ -111,14 +111,14 @@ void FUN_002f6048(int param_1)
   FUN_0018408c(puVar6,3);
   temp_v2 = FUN_001834a4(0x1e,0x55);
   temp_v3 = ((int)**(short **)(temp_v2 + 0xc) - (int)(puVar6 + temp_v8 + (int)temp_v0)) / 2;
-  FUN_001879d0(DAT_0059dbb4);
+  FUN_001879d0(g_renderCtx);
   temp_v10 = (int)temp_v9;
   temp_v14 = param_1 + 0x638;
   temp_v6 = FUN_001654d8();
   temp_v15 = *(short *)(temp_v2 + 8) + temp_v3 + temp_v6 + temp_v10;
   temp_v6 = FUN_001654e4(temp_v14);
   temp_v6 = temp_v6 + *(short *)(temp_v2 + 10);
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_001835b4(2,0x1e,0x51,temp_v15,temp_v6,0xa6);
   FUN_0037ce80(temp_v13,temp_v15 + 1,temp_v6 + 1,0xa6);
   temp_v6 = FUN_001654d8(temp_v14);
@@ -128,7 +128,7 @@ void FUN_002f6048(int param_1)
   VectorSignedToFloat(temp_v5 + *(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(temp_v6 + temp_v1 + temp_v3 + temp_v7 + (int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(3,0xffffffff,temp_v12);
-  temp_v3 = DAT_0059dbb4;
+  temp_v3 = g_renderCtx;
   temp_v2 = FUN_00169294(6,1,0);
   piVar10 = (int *)(temp_v3 + 0x12b8);
   temp_v6 = piVar10[*piVar10 + 2];
@@ -139,7 +139,7 @@ void FUN_002f6048(int param_1)
   }
   VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_001634b4(param_1 + 0x868);
-  temp_v3 = DAT_0059dbb4;
+  temp_v3 = g_renderCtx;
   temp_v2 = FUN_00169294(6,7,0);
   piVar10 = (int *)(temp_v3 + 0x12b8);
   temp_v6 = piVar10[*piVar10 + 2];
@@ -150,8 +150,8 @@ void FUN_002f6048(int param_1)
   }
   VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_001634b4(param_1 + 0x6c4);
-  FUN_001677c0();
-  temp_v3 = DAT_0059dbb4;
+  efctSetSpeed();
+  temp_v3 = g_renderCtx;
   temp_v2 = FUN_00169294(6,1,0);
   piVar10 = (int *)(temp_v3 + 0x12b8);
   temp_v6 = piVar10[*piVar10 + 2];
@@ -161,7 +161,7 @@ void FUN_002f6048(int param_1)
     *(unsigned char *)(temp_v3 + 0x12d0) = 0;
   }
   FUN_002f6f44(0x57,0xc9,1);
-  temp_v3 = DAT_0059dbb4;
+  temp_v3 = g_renderCtx;
   temp_v2 = FUN_00169294(6,7,0);
   piVar10 = (int *)(temp_v3 + 0x12b8);
   temp_v6 = piVar10[*piVar10 + 2];
@@ -170,7 +170,7 @@ void FUN_002f6048(int param_1)
     (**(romwright_code **)(temp_v3 + 0x12d4))();
     *(unsigned char *)(temp_v3 + 0x12d0) = 0;
   }
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

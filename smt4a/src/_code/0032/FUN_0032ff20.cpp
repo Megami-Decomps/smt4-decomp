@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_00184310(int);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_004bcd90(...);
 int FUN_004bd6b0(...);
 int rt_memcpy_w(...);
@@ -25,7 +25,7 @@ struct fn_0032ff20_arg0 {
 
 extern unsigned short FUN_0017760c(unsigned short *);
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: FUN_004bd6b0. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -40,7 +40,7 @@ void FUN_0032ff20(int param_1,unsigned short *param_2)
   int temp_v1;
   
   pfVar2 = (fn_0032ff20_arg0 *)FUN_00184310(param_1);
-  FUN_002e6354(param_2,300);
+  sysMemClear(param_2,300);
   param_2[0x31] = (short)param_1;
   param_2[0x32] = pfVar2->field_0x6;
   *param_2 = pfVar2->field_0x18;

@@ -30,7 +30,7 @@ extern int *FUN_002e4e86(unsigned int *, unsigned int *);
 extern int FUN_0030fd62(int *, int, int);
 /* Supplied declaration required: FUN_0030fd70. */
 extern unsigned int FUN_0030fd7e(unsigned int, int *);
-extern unsigned int aeabi_idivmod(int, unsigned int);
+extern unsigned int __aeabi_idivmod(int, unsigned int);
 
 
 unsigned long long FUN_00133c2c(int *param_1,unsigned int param_2)
@@ -54,7 +54,7 @@ unsigned long long FUN_00133c2c(int *param_1,unsigned int param_2)
     temp_v5 = 0x6666666;
     FUN_002e32a4(8,&LAB_00133cb8,&LAB_00133cb8);
   }
-  temp_v0 = aeabi_idivmod(param_1[2] - *param_1,0x28);
+  temp_v0 = __aeabi_idivmod(param_1[2] - *param_1,0x28);
   if (temp_v0 < temp_v6) {
     temp_v1 = FUN_0030fd70(param_1);
     temp_v5 = FUN_0030fd7e(temp_v1,param_1);

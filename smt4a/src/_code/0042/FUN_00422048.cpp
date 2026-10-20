@@ -8,7 +8,7 @@ int FUN_00158b88(unsigned int [6]);
 int FUN_00158bf8(unsigned int [6]);
 int FUN_0015fcec(unsigned int [6], unsigned char *);
 int FUN_00177e6c(unsigned char *, unsigned int);
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 
 /* stack frame of void: 5 slot(s), 5 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ extern unsigned char DAT_005cc554; /* 0x5cc554 */
 /* Supplied declaration required: FUN_00158bf8. */
 /* Supplied declaration required: FUN_0015fcec. */
 /* Supplied declaration required: FUN_00177e6c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern unsigned int FUN_0042c5d0(void);
 
 
@@ -63,7 +63,7 @@ unsigned int * FUN_00422048(void)
   *puVar3 = 0;
   puVar3[2] = 0;
   puVar3[3] = 0xf0202;
-  FUN_002e6354(puVar3 + 4,0x98);
+  sysMemClear(puVar3 + 4,0x98);
   piVar4 = (int *)(puVar3 + 0x2a);
   puVar3[5] = 0x823f0203;
   temp_v1 = 0;

@@ -1,23 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003079e8` (_code @ 0x3079e8, 0x22 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail enters the loop with a branch to the bottom test; the built loop pre-tests the range with cmp/beq. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00301e56(unsigned int, int, int);
+/* Opaque 28-byte element. */
+typedef struct {
+    u8 data[28];
+} Element;
 
-/* Supplied declaration required: FUN_00301e56. */
+int FUN_00301e56(u32 allocator, Element *dest, Element *source);
 
-
-int FUN_003079e8(int param_1,int param_2,int param_3,unsigned int param_4)
-
+/* Constructs a copy of each element of [first, last) at `dest`; returns the end of the copied range. */
+Element *FUN_003079e8(Element *first, Element *last, Element *dest, u32 allocator)
 {
-/* irregular: 1 native warning(s); review required */
-  for (; param_1 != param_2; param_1 = param_1 + 0x1c) {
-    FUN_00301e56(param_4,param_3,param_1);
-    param_3 = param_3 + 0x1c;
-  }
-  return param_3;
+    while (first != last) {
+        FUN_00301e56(allocator, dest, first);
+        ++first;
+        ++dest;
+    }
+    return dest;
 }
 
 } /* extern "C" */

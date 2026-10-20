@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_003283ac(unsigned int);
+int scrSetResult(unsigned int);
 
 extern unsigned char DAT_00588c40; /* 0x588c40 */
 
 extern int FUN_001ab854(int);
-extern int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_003283ac. */
+extern int scrGetArg(unsigned int);
+/* Supplied declaration required: scrSetResult. */
 extern int FUN_0032faf4(void);
 extern unsigned int FUN_003af94c(unsigned int);
 extern unsigned int FUN_003b6128(void);
@@ -24,10 +24,10 @@ unsigned int FUN_003c4e64(void)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_00236038(0);
+  temp_v0 = scrGetArg(0);
   if ((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) != 0) {
     if (temp_v0 != 0) {
-      FUN_003283ac(*(unsigned int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x75cc));
+      scrSetResult(*(unsigned int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x75cc));
       return 1;
     }
     temp_v0 = FUN_001ab854((int)*(char *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + *(int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x74c0) * 0x150 +
@@ -46,7 +46,7 @@ unsigned int FUN_003c4e64(void)
       temp_v1 = FUN_003af94c(0);
     }
   }
-  FUN_003283ac(temp_v1);
+  scrSetResult(temp_v1);
   return 1;
 }
 

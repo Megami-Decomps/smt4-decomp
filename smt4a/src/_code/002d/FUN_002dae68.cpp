@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b5cd4(void);
 
-extern float DAT_00581288; /* 0x581288 */
+extern float g_lmapScene; /* 0x581288 */
 
 /* Supplied declaration required: FUN_002b5cd4. */
 
@@ -20,7 +20,7 @@ void FUN_002dae68(void)
   float temp_v2;
   float temp_v3;
   
-  temp_v0 = *(float *)((int)DAT_00581288 + 0x4c);
+  temp_v0 = *(float *)((int)g_lmapScene + 0x4c);
   FUN_002b5cd4();
   temp_v1 = temp_v0;
   if (temp_v0 < 0.0f) {
@@ -38,16 +38,16 @@ void FUN_002dae68(void)
     temp_v3 = 5.0f;
   }
   if (temp_v1 <= temp_v3) {
-    temp_v2 = DAT_00581288;
+    temp_v2 = g_lmapScene;
   }
   if (temp_v1 <= temp_v3) {
     temp_v3 = *(float *)((int)temp_v2 + 0x50);
   }
   else if (temp_v0 < 0.0f) {
-    temp_v3 = *(float *)((int)DAT_00581288 + 0x4c) - temp_v3;
+    temp_v3 = *(float *)((int)g_lmapScene + 0x4c) - temp_v3;
   }
   else {
-    temp_v3 = *(float *)((int)DAT_00581288 + 0x4c) + temp_v3;
+    temp_v3 = *(float *)((int)g_lmapScene + 0x4c) + temp_v3;
   }
   if (temp_v3 < 0.0f) {
     temp_v3 = temp_v3 + 360.0f;
@@ -55,7 +55,7 @@ void FUN_002dae68(void)
   if ((int)temp_v3 >= 0x43b40001) {
     temp_v3 = temp_v3 - 360.0f;
   }
-  *(float *)((int)DAT_00581288 + 0x4c) = temp_v3;
+  *(float *)((int)g_lmapScene + 0x4c) = temp_v3;
   return;
 }
 

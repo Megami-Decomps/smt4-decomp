@@ -12,7 +12,7 @@ int FUN_002e75fa(unsigned int);
 int FUN_002e760a(int);
 int FUN_002e9300(unsigned char [4], unsigned char *);
 int FUN_002e9318(unsigned char [4]);
-int FUN_002f4ba8(int, int);
+int onlineObjectThreadRootStart(int, int);
 int FUN_002f8da8(void);
 
 typedef int romwright_code(...);
@@ -57,7 +57,7 @@ extern int *FUN_00116770(void);
 /* Supplied declaration required: FUN_002e9300. */
 /* Supplied declaration required: FUN_002e9318. */
 extern unsigned int *FUN_002eb77c(int, unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_002f4ba8. */
+/* Supplied declaration required: onlineObjectThreadRootStart. */
 extern unsigned int *FUN_002f58d0(int, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002f8da8. */
 
@@ -95,7 +95,7 @@ void FUN_0010e4dc(int param_1)
       *(unsigned int *)(temp_v0 + 0x28) = 0;
       *(int *)(temp_v0 + 0x2c) = param_1;
       *(unsigned int *)(temp_v0 + 0x30) = 0;
-      FUN_002f4ba8(temp_v0,0);
+      onlineObjectThreadRootStart(temp_v0,0);
     }
   }
   else if ((*(int *)(param_1 + 0x154) == 0) && (temp_v0 = FUN_002e6e26(), temp_v0 != 0)) {

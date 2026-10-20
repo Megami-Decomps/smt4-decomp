@@ -21,8 +21,8 @@ int FUN_00409d8c(int, int);
 int SBORROW4(int, int);
 int VectorSignedToFloat(...);
 
-extern int DAT_00581288; /* 0x581288 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_lmapScene; /* 0x581288 */
+extern int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f17ac; /* 0x5f17ac */
 extern float DAT_005f17b0; /* 0x5f17b0 */
 extern short DAT_005f17c2; /* 0x5f17c2 */
@@ -94,9 +94,9 @@ unsigned int FUN_0033b100(int param_1)
   temp_v4 = FUN_001801a4();
   temp_v5 = FUN_0018719c(0x300);
   if ((((temp_v5 != 0) || (temp_v5 = FUN_0018719c(0x301), temp_v5 != 0)) &&
-      (DAT_005f15fc != 0x29 && DAT_005f15fc != 0x2a)) &&
-     ((DAT_005f15fc != 0x2b && DAT_005f15fc != 0x2c &&
-      ((DAT_005f15fc != 0x2d && DAT_005f15fc != 0x2e) && DAT_005f15fc != 0x2f)))) {
+      (g_gameState != 0x29 && g_gameState != 0x2a)) &&
+     ((g_gameState != 0x2b && g_gameState != 0x2c &&
+      ((g_gameState != 0x2d && g_gameState != 0x2e) && g_gameState != 0x2f)))) {
     return 0;
   }
   puVar7 = &DAT_005f18fc;
@@ -216,7 +216,7 @@ unsigned int FUN_0033b100(int param_1)
     DAT_005f19c4 = 2;
     return 0;
   }
-  if ((*(int *)(temp_v3 + 0x109c) != 0) && (*(char *)(DAT_00581288 + 0x224) != '\0')) {
+  if ((*(int *)(temp_v3 + 0x109c) != 0) && (*(char *)(g_lmapScene + 0x224) != '\0')) {
     return 0;
   }
   temp_v12 = DAT_005f17b0;

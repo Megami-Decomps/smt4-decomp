@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c0c74(...);
-int FUN_002c0cec(int, int);
+int dataTableGetCount(...);
+int dataTableGet(int, int);
 
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 
-/* Supplied declaration required: FUN_002c0c74. */
-extern int FUN_002c0cc4(void);
-/* Supplied declaration required: FUN_002c0cec. */
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(void);
+/* Supplied declaration required: dataTableGet. */
 
 
 unsigned int FUN_00248e8c(int param_1)
@@ -25,20 +25,20 @@ unsigned int FUN_00248e8c(int param_1)
   unsigned int temp_v3;
   
   temp_v3 = 0;
-  FUN_002c0cec(0x23,0);
-  temp_v0 = FUN_002c0c74();
-  if (0 < temp_v0 + *(int *)(DAT_00433158 + 0x3e4)) {
+  dataTableGet(0x23,0);
+  temp_v0 = dataTableGetCount();
+  if (0 < temp_v0 + *(int *)(g_aocSystem + 0x3e4)) {
     do {
-      temp_v1 = FUN_002c0cec(0x23,0);
-      temp_v0 = FUN_002c0cc4();
-      temp_v2 = FUN_002c0c74(temp_v1);
+      temp_v1 = dataTableGet(0x23,0);
+      temp_v0 = dataTableGetEntries();
+      temp_v2 = dataTableGetCount(temp_v1);
       if (temp_v3 < temp_v2) {
         piVar4 = (int *)(temp_v0 + temp_v3 * 0x20);
       }
       else {
         piVar4 = (int *)0x0;
-        if (temp_v3 < temp_v2 + *(int *)(DAT_00433158 + 0x3e4)) {
-          piVar4 = (int *)(*(int *)(DAT_00433158 + 1000) + (temp_v3 - temp_v2) * 0x20);
+        if (temp_v3 < temp_v2 + *(int *)(g_aocSystem + 0x3e4)) {
+          piVar4 = (int *)(*(int *)(g_aocSystem + 1000) + (temp_v3 - temp_v2) * 0x20);
         }
       }
       if ((char)piVar4[2] == -1) {
@@ -48,9 +48,9 @@ unsigned int FUN_00248e8c(int param_1)
         return temp_v3;
       }
       temp_v3 = temp_v3 + 1;
-      FUN_002c0cec(0x23,0);
-      temp_v0 = FUN_002c0c74();
-    } while ((int)temp_v3 < temp_v0 + *(int *)(DAT_00433158 + 0x3e4));
+      dataTableGet(0x23,0);
+      temp_v0 = dataTableGetCount();
+    } while ((int)temp_v3 < temp_v0 + *(int *)(g_aocSystem + 0x3e4));
   }
   return 0xffffffff;
 }

@@ -54,7 +54,7 @@ extern unsigned int DAT_00643080; /* 0x643080 */
 /* Supplied declaration required: FUN_0016f864. */
 /* Supplied declaration required: FUN_0016f988. */
 /* Supplied declaration required: FUN_0018b28c. */
-extern unsigned int FUN_002e3390(void);
+extern unsigned int wstrlen(void);
 extern unsigned int nn_gxlow_CTR_Gpu_AcquireRight(unsigned int, unsigned int, unsigned char);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -80,7 +80,7 @@ void FUN_00170050(void)
     s_______005c0aa3.whole[0] = '\x01';
   }
   temp_v0 = (*(unsigned int *)&s_______005c0aa3.u1[1]);
-  temp_v1 = FUN_002e3390();
+  temp_v1 = wstrlen();
   FUN_0016f988(s_______005c0aa3.whole + 0xd,temp_v0,temp_v1,0);
   DAT_005c0ab4 = (*(unsigned int *)0x005c0ab0);
   nn_gxlow_CTR_Gpu_AcquireRight((unsigned int)&DAT_005c0ab4,0xffff8001,(unsigned char)DAT_005c0aa2);

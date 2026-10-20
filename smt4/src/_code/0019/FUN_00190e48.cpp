@@ -42,7 +42,7 @@ typedef struct {
 
 extern unsigned char LAB_00141adc; /* 0x141adc */
 extern unsigned char DAT_0043da28; /* 0x43da28 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
@@ -160,7 +160,7 @@ void FUN_00190e48(void)
     else {
       acStack_130[temp_v7] = '\0';
     }
-    temp_v9 = DAT_0044ea00;
+    temp_v9 = g_titleScene;
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 6);
   if (temp_v10 != 0) {
@@ -233,7 +233,7 @@ void FUN_00190e48(void)
           FUN_002bf380(2,0x12,0,temp_v9,temp_v10,0xb);
         }
       }
-      temp_v10 = DAT_0044ea00;
+      temp_v10 = g_titleScene;
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 6);
     temp_v7 = FUN_002c5da8(6,7,0);
@@ -426,7 +426,7 @@ void FUN_00190e48(void)
           FUN_002bf288(2,0x12,temp_v4,temp_v9,temp_v10,0xd);
         }
       }
-      temp_v10 = DAT_0044ea00;
+      temp_v10 = g_titleScene;
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 6);
     temp_v7 = FUN_002c5da8(6,1,0);
@@ -464,7 +464,7 @@ void FUN_00190e48(void)
         }
         FUN_0029a268(temp_v5 + temp_v7 * 0x8c + 0x34);
       }
-      temp_v10 = DAT_0044ea00;
+      temp_v10 = g_titleScene;
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 6);
     temp_v5 = FUN_002c5da8(6,7,0);

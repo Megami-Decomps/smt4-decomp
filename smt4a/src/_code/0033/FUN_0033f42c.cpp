@@ -16,7 +16,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_005821fc; /* 0x5821fc */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern short DAT_005f1854; /* 0x5f1854 */
 extern signed char DAT_005f1858; /* 0x5f1858 */
 extern signed char DAT_005f185c; /* 0x5f185c */
@@ -84,7 +84,7 @@ void FUN_0033f42c(void)
     temp_v0 = -2;
   }
   FUN_00348c28(1);
-  if (DAT_005f15fc >= 100) {
+  if (g_gameState >= 100) {
     VectorSignedToFloat(DAT_005f1c2c,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(DAT_005f1c28,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00283c54(DAT_005f1c30,

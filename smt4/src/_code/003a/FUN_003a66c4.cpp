@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern int FUN_00292f28(unsigned int);
+extern int padIsButtonDown(unsigned int);
 extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
 extern int FUN_002b63ac(void);
@@ -40,12 +40,12 @@ void FUN_003a66c4(void)
   temp_v8 = 0;
   temp_v1 = FUN_002b63ac();
   if ((*(unsigned short *)(temp_v1 + 0x72) & 2) == 0) {
-    temp_v1 = FUN_00292f28(0x6b);
-    if ((temp_v1 != 0) || (temp_v1 = FUN_00292f28(0x69), temp_v1 != 0)) {
+    temp_v1 = padIsButtonDown(0x6b);
+    if ((temp_v1 != 0) || (temp_v1 = padIsButtonDown(0x69), temp_v1 != 0)) {
       temp_v8 = 5;
     }
     else {
-      temp_v1 = FUN_00292f28(0x68);
+      temp_v1 = padIsButtonDown(0x68);
       if (temp_v1 != 0) {
         temp_v8 = 2;
       }
@@ -75,7 +75,7 @@ void FUN_003a66c4(void)
       }
       *(short *)(temp_v1 + 0x2a) = temp_v6;
     }
-    if ((temp_v8 != 0) && (temp_v1 = FUN_00292f28(0x6b), temp_v1 != 0)) {
+    if ((temp_v8 != 0) && (temp_v1 = padIsButtonDown(0x6b), temp_v1 != 0)) {
       temp_v1 = FUN_002a8764();
       temp_v2 = 0;
       do {

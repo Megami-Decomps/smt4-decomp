@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002fa06c(int);
+int deflateEnd(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_8: 1 slot(s), 4 byte(s) */
@@ -16,8 +16,8 @@ extern unsigned char LAB_001289e1; /* 0x1289e1 */
 extern unsigned char LAB_001289ed; /* 0x1289ed */
 
 extern unsigned int FUN_001274fc(int);
-/* Supplied declaration required: FUN_002fa06c. */
-extern int aeabi_uidivmod(int, unsigned int);
+/* Supplied declaration required: deflateEnd. */
+extern int __aeabi_uidivmod(int, unsigned int);
 
 
 unsigned int
@@ -77,7 +77,7 @@ FUN_0012736c(int param_1,int param_2,int param_3,unsigned int param_4,int param_
         piVar1[0x13] = temp_v2;
         piVar1[0x14] = param_5 + 7U;
         piVar1[0x15] = temp_v2 - 1;
-        temp_v2 = aeabi_uidivmod(param_5 + 9,3);
+        temp_v2 = __aeabi_uidivmod(param_5 + 9,3);
         piVar1[0x16] = temp_v2;
         temp_v0 = (**(romwright_code **)(param_1 + 0x20))(*(unsigned int *)(param_1 + 0x28),temp_v0,2);
         piVar1[0xe] = temp_v0;
@@ -103,7 +103,7 @@ FUN_0012736c(int param_1,int param_2,int param_3,unsigned int param_4,int param_
         }
         piVar1[1] = 0x29a;
         *(char **)(param_1 + 0x18) = "insufficient memory";
-        FUN_002fa06c(param_1);
+        deflateEnd(param_1);
       }
       return 0xfffffffc;
     }

@@ -55,7 +55,7 @@ typedef struct {
 extern unsigned int FUN_001988bc(unsigned int, unsigned char *);
 extern int FUN_001a7a20(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001b4030. */
-extern unsigned int FUN_002e3390(unsigned int);
+extern unsigned int wstrlen(unsigned int);
 /* Supplied declaration required: FUN_0030ea58. */
 /* Supplied declaration required: hardfp_floorf. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -202,7 +202,7 @@ void FUN_0016a438(int param_1,int param_2)
               else {
                 temp_v1 = puVar14[0xc];
                 temp_v8 = *(unsigned int *)(pcVar11 + 8);
-                temp_v4 = FUN_002e3390(temp_v8);
+                temp_v4 = wstrlen(temp_v8);
                 temp_v1 = FUN_001a7a20(temp_v1 + 0x88,temp_v8,temp_v4);
                 if (temp_v1 < (int)temp_v25) {
                   temp_v1 = *(int *)(*(int *)(puVar14[0xc] + 0x84) + temp_v1 * 4);
@@ -421,7 +421,7 @@ void FUN_0016a438(int param_1,int param_2)
           do {
             temp_v1 = puVar14[0xc];
             temp_v8 = *(unsigned int *)(piVar10[1] + temp_v0 * 4);
-            temp_v4 = FUN_002e3390(temp_v8);
+            temp_v4 = wstrlen(temp_v8);
             temp_v1 = FUN_001a7a20(temp_v1 + 0x40,temp_v8,temp_v4);
             temp_v1 = *(int *)(*(int *)(puVar14[0xc] + 0x3c) + temp_v1 * 4);
             if ((*(unsigned char *)(temp_v1 + 0x28) & 4) != 0) {

@@ -12,16 +12,16 @@ int FUN_00296f4c(...);
 int FUN_00297060(unsigned int, unsigned int);
 int FUN_002973d8(void);
 int FUN_00297468(unsigned char [64], unsigned int *, int);
-int FUN_002a7218(void);
+int scrScriptProcessDestroy(void);
 int FUN_002b64a0(...);
 int FUN_002b8838(int);
 int FUN_002bcfc0(unsigned char [64], unsigned char [140]);
 int FUN_002be624(...);
 int FUN_002bf694(unsigned char [64], unsigned int);
 int FUN_002bff50(void);
-int FUN_002c415c(void);
-int FUN_002c4938(unsigned int *, int);
-int FUN_002c564c(int);
+int asdMemFree(void);
+int memClear(unsigned int *, int);
+int jyoucyuGetTableEntry(int);
 int FUN_002d582c(...);
 int FUN_002e1230(...);
 
@@ -48,16 +48,16 @@ extern int FUN_00290eb0(void);
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_002973d8. */
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002b64a0. */
 /* Supplied declaration required: FUN_002b8838. */
 /* Supplied declaration required: FUN_002bcfc0. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bff50. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_002d582c. */
 /* Supplied declaration required: FUN_002e1230. */
 
@@ -95,7 +95,7 @@ void FUN_00384be8(unsigned int *param_1)
     param_1[2] = param_1[2] + 1;
     puVar6 = param_1 + 0x36b;
     param_1[0x369] = 0;
-    FUN_002c4938(puVar6,0x200);
+    memClear(puVar6,0x200);
     param_1[0x368] = 0;
     temp_v2 = 0;
     if (0 < (int)param_1[0x363]) {
@@ -216,7 +216,7 @@ void FUN_00384be8(unsigned int *param_1)
       *(unsigned int *)(temp_v2 + 0x108) = 2;
       temp_v4 = FUN_00235378(param_1 + 8,0);
       temp_v5 = *(int *)*puVar6;
-      FUN_002c564c(0);
+      jyoucyuGetTableEntry(0);
       temp_v3 = FUN_00290d74(*puVar8,temp_v4 + temp_v5 * 0x88 + 0x6c);
       FUN_00296f4c(param_1[0x170],temp_v3);
       param_1[2] = param_1[2] + 1;
@@ -230,15 +230,15 @@ void FUN_00384be8(unsigned int *param_1)
       FUN_002e1230(param_1[*(int *)(*puVar6 + 4) + 0x343],0);
       FUN_002bff50();
       if (param_1[0x170] != 0) {
-        FUN_002a7218();
+        scrScriptProcessDestroy();
         param_1[0x170] = 0;
       }
       if (param_1[0x16e] != 0) {
-        FUN_002c415c();
+        asdMemFree();
         *puVar8 = 0;
       }
       if (param_1[0x16f] != 0) {
-        FUN_002c415c();
+        asdMemFree();
         param_1[0x16f] = 0;
       }
       param_1[2] = 0;

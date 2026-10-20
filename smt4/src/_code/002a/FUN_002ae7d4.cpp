@@ -5,17 +5,17 @@
 extern "C" {
 
 int FUN_002ae898(void);
-int FUN_002c415c(...);
+int asdMemFree(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_0044ea28; /* 0x44ea28 */
+extern int g_texTable; /* 0x44ea28 */
 
 /* Supplied declaration required: FUN_002ae898. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_002ae7d4(void)
@@ -29,30 +29,30 @@ void FUN_002ae7d4(void)
   unsigned int *puVar5;
   
   FUN_002ae898();
-  temp_v1 = DAT_0044ea28;
-  puVar5 = (unsigned int *)(DAT_0044ea28 + 0x360);
-  if (*(int *)(DAT_0044ea28 + 0x364) != 0) {
-    temp_v0 = *(int *)(*(int *)(DAT_0044ea28 + 0x364) + 4);
+  temp_v1 = g_texTable;
+  puVar5 = (unsigned int *)(g_texTable + 0x360);
+  if (*(int *)(g_texTable + 0x364) != 0) {
+    temp_v0 = *(int *)(*(int *)(g_texTable + 0x364) + 4);
     while (temp_v0 != 0) {
       temp_v2 = *(int *)(temp_v0 + 0x10);
-      FUN_002c415c(*(unsigned int *)(temp_v0 + 0xc));
-      FUN_002c415c(temp_v0);
+      asdMemFree(*(unsigned int *)(temp_v0 + 0xc));
+      asdMemFree(temp_v0);
       temp_v0 = temp_v2;
     }
-    FUN_002c415c(**(unsigned int **)(temp_v1 + 0x364));
-    FUN_002c415c(*(unsigned int *)(temp_v1 + 0x364));
+    asdMemFree(**(unsigned int **)(temp_v1 + 0x364));
+    asdMemFree(*(unsigned int *)(temp_v1 + 0x364));
     *(unsigned int *)(temp_v1 + 0x364) = 0;
   }
   piVar3 = (int *)*puVar5;
   if (*piVar3 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *piVar3 = 0;
   }
   if (piVar3[2] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     piVar3[2] = 0;
   }
-  FUN_002c415c(piVar3);
+  asdMemFree(piVar3);
   *puVar5 = 0;
   return;
 }

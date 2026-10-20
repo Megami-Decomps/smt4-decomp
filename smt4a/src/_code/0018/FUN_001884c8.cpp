@@ -18,7 +18,7 @@ extern int DAT_005893b0; /* 0x5893b0 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001bcd48. */
-extern int aeabi_uidivmod(unsigned int, char);
+extern int __aeabi_uidivmod(unsigned int, char);
 
 
 void FUN_001884c8(int param_1)
@@ -39,7 +39,7 @@ void FUN_001884c8(int param_1)
   temp_v2 = 0;
   if (DAT_00589398 != '\0') {
     if ((DAT_00589399 != 0) && (software_interrupt(0x28), (DAT_00589399 & 0x10) != 0)) {
-      temp_v2 = aeabi_uidivmod(temp_v3,(DAT_00589399 & 0xf) + 1);
+      temp_v2 = __aeabi_uidivmod(temp_v3,(DAT_00589399 & 0xf) + 1);
     }
     temp_v0 = DAT_005893b0 + temp_v2;
     if (temp_v0 != 0) {

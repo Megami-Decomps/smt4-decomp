@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00238f44(unsigned int);
-int FUN_00263308(int, unsigned int, unsigned int);
+int asdCecMessageBoxClose(unsigned int);
+int asdCecMessageBoxOpen(int, unsigned int, unsigned int);
 int FUN_00358664(unsigned int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -13,10 +13,10 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned char DAT_00464fa8; /* 0x464fa8 */
+extern unsigned char g_asdCec; /* 0x464fa8 */
 
-/* Supplied declaration required: FUN_00238f44. */
-/* Supplied declaration required: FUN_00263308. */
+/* Supplied declaration required: asdCecMessageBoxClose. */
+/* Supplied declaration required: asdCecMessageBoxOpen. */
 /* Supplied declaration required: FUN_00358664. */
 
 
@@ -26,11 +26,11 @@ void FUN_002e0df8(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = (*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4))[6];
-  FUN_00263308(temp_v0,*(*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4)),(*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4))[1]);
+  temp_v0 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];
+  asdCecMessageBoxOpen(temp_v0,*(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)),(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[1]);
   if (-1 < temp_v0) {
-    FUN_00358664((*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4))[6],1);
-    FUN_00238f44((*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4))[6]);
+    FUN_00358664((*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6],1);
+    asdCecMessageBoxClose((*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6]);
     return;
   }
   return;

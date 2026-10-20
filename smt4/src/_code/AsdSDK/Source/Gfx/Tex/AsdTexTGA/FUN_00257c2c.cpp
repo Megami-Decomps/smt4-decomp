@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_002b4414(...);
-int FUN_002bf5c0(int, int, int, unsigned int);
+int asdMemoryAllocAligned(int, int, int, unsigned int);
 int rt_memcpy(...);
 
 /* Supplied declaration required: FUN_002b4414. */
-/* Supplied declaration required: FUN_002bf5c0. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -42,7 +42,7 @@ void FUN_00257c2c(int param_1,int param_2,unsigned int param_3,unsigned int para
           uStack_2c = 1;
           uStack_30 = 0x80;
           temp_v3 = 0x10000;
-          FUN_002bf5c0(0x10000,0x100,0,*(unsigned int *)(param_1 + 0x28));
+          asdMemoryAllocAligned(0x10000,0x100,0,*(unsigned int *)(param_1 + 0x28));
           *(unsigned int *)(param_1 + 0x24) = temp_v3;
           rt_memcpy();
         }

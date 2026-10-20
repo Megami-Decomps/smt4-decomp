@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a0e8(unsigned char [64], unsigned int);
+int mtx44Copy(unsigned char [64], unsigned int);
 int FUN_0019a0fc(unsigned char [64], unsigned char [64], unsigned char [64]);
 int FUN_001a1c28(unsigned char [64]);
 int FUN_0043b5b4(int *, unsigned char [64]);
@@ -19,7 +19,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern unsigned int FUN_0018aeb8(void);
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: FUN_001a1c28. */
 /* Supplied declaration required: FUN_0043b5b4. */
@@ -42,7 +42,7 @@ void FUN_003d2480(unsigned int *param_1,unsigned int *param_2,unsigned int param
   unsigned int uStack_2c;
   
   temp_v0 = FUN_0018aeb8();
-  FUN_0019a0e8(temp_v1,temp_v0);
+  mtx44Copy(temp_v1,temp_v0);
   temp_v5 = *param_2;
   temp_v6 = param_2[1];
   temp_v7 = param_2[2];

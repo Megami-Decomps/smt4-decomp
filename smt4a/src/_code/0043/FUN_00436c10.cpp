@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-extern int FUN_0030ef8c(int, unsigned int, unsigned int);
+extern int rt_memcmp(int, unsigned int, unsigned int);
 extern int FUN_00434d04(int *, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00434d9c. */
 extern int FUN_0043756c(unsigned int *, int **);
@@ -34,7 +34,7 @@ void FUN_00436c10(unsigned int *param_1,unsigned int *param_2,unsigned int param
   temp_v1 = param_4;
   if (piVar3 != (int *)(param_2 + 1)) {
     do {
-      temp_v0 = FUN_0030ef8c(piVar3[9],param_3,param_2[4]);
+      temp_v0 = rt_memcmp(piVar3[9],param_3,param_2[4]);
       if (temp_v0 != 0) {
         piVar3 = (int *)piVar3[1];
       }

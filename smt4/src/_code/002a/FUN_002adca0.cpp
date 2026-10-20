@@ -43,7 +43,7 @@ struct fn_002adca0_arg0 {
 /* Supplied declaration required: FUN_002a86d4. */
 /* Supplied declaration required: FUN_002aeb38. */
 extern int FUN_002aecd8(int, unsigned int);
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 
 
 void FUN_002adca0(fn_002adca0_arg0 *param_1,unsigned int *param_2,unsigned int *param_3,
@@ -59,7 +59,7 @@ void FUN_002adca0(fn_002adca0_arg0 *param_1,unsigned int *param_2,unsigned int *
   unsigned int temp_v4;
   unsigned int temp_v5;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   temp_v4 = VectorSignedToFloat(param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(temp_v0 + 100) = param_4;
   temp_v5 = 0;

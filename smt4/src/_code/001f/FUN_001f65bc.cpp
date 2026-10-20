@@ -1,44 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f65bc` (_code @ 0x1f65bc, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Shuts the object down: notifies its resource when idle (state 1, value 0), frees the object and updates the global pair. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002abb24(unsigned int, unsigned int);
-int FUN_002c415c(int);
-int FUN_002d5604(void);
+typedef struct SubState {
+    /* 0x00 */ u8 unk00[0x94];
+    /* 0x94 */ s32 state;
+    /* 0x98 */ s32 value;
+} SubState;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct Object {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ SubState sub;
+    /* 0xCC */ u8 unkCC[0x40];
+    /* 0x10C */ void *resource;
+} Object;
 
-extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int DAT_00464b84; /* 0x464b84 */
+extern u32 DAT_00464b7c;
+extern u32 DAT_00464b84;
 
-/* Supplied declaration required: FUN_002abb24. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002d5604. */
+extern void FUN_002abb24(u32 a, u32 b);
+extern void asdMemFree(Object *obj);
+extern void FUN_002d5604(void *resource);
 
-
-void FUN_001f65bc(int param_1)
-
+void FUN_001f65bc(Object *obj)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  
-  temp_v0 = param_1 + 0x30;
-  temp_v1 = *(int *)(param_1 + 0xc4) == 1;
-  if (temp_v1) {
-    temp_v0 = *(int *)(param_1 + 200);
-  }
-  if ((temp_v1 && temp_v0 == 0) && (*(int *)(param_1 + 0x10c) != 0)) {
-    FUN_002d5604();
-  }
-  FUN_002c415c(param_1);
-  FUN_002abb24(DAT_00464b7c,DAT_00464b84);
-  return;
+    SubState *sub = &obj->sub;
+
+    if (sub->state == 1 && sub->value == 0 && obj->resource != NULL) {
+        FUN_002d5604(obj->resource);
+    }
+    asdMemFree(obj);
+    FUN_002abb24(DAT_00464b7c, DAT_00464b84);
 }
 
-} /* extern "C" */
+}

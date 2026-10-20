@@ -12,7 +12,7 @@ int FUN_002505c0(...);
 int FUN_002550d8(...);
 int FUN_0027da30(int, int);
 int FUN_00282924(unsigned int *, int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_0029be5c(...);
 int FUN_002b7bca(int [2], int, int, unsigned char *);
 int FUN_003ddee0(int, unsigned int, int, int);
@@ -36,7 +36,7 @@ typedef struct {
 } param_25_stack;
 
 extern unsigned char LAB_0019d7bc; /* 0x19d7bc */
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 extern int DAT_00434290; /* 0x434290 */
 extern int DAT_00435d18; /* 0x435d18 */
 extern unsigned char DAT_00439960; /* 0x439960 */
@@ -52,10 +52,10 @@ extern unsigned char DAT_00439960; /* 0x439960 */
 extern short FUN_00255158(int, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_0027dab0(unsigned int, int);
-extern int FUN_0027e928(unsigned int);
+extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_00282924. */
 extern int FUN_00293230(unsigned int *);
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: FUN_002b7bca. */
 extern int FUN_003bd0e8(int);
@@ -114,7 +114,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
   uStack_30 = param_2;
   iStack_2c = param_3;
   temp_v24 = param_4;
-  puVar5 = (unsigned int *)FUN_002939f4();
+  puVar5 = (unsigned int *)btlGetMainState();
   temp_v20 = param_1 + param_16;
   temp_v23 = &DAT_00439960 + param_13 * 0xc;
   temp_v19 = puVar5;
@@ -184,7 +184,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
           temp_v3 = temp_v6;
         }
         if (0 < temp_v6) {
-          temp_v4 = FUN_0027e928(DAT_0043427c);
+          temp_v4 = btlUnitGet(g_btlScriptUnit);
           *(unsigned char *)(temp_v4 + 0x59c) = 1;
           temp_v4 = 0;
           if (param_13 == 0) {
@@ -283,10 +283,10 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
                                    (int)(short)((short)*(unsigned int *)(temp_v4 + 0x5c) +
                                                (short)temp_v20),0);
                       temp_v14[0] = temp_v6;
-                      temp_v6 = FUN_002939f4();
+                      temp_v6 = btlGetMainState();
                       FUN_0027da30(temp_v6,(int)*(short *)(temp_v4 + 0x62));
                       temp_v17 = temp_v6;
-                      temp_v5 = FUN_002939f4();
+                      temp_v5 = btlGetMainState();
                       temp_v6 = FUN_0027dab0(temp_v5,temp_v4);
                       if (temp_v6 < 0) {
                         temp_v6 = 0;

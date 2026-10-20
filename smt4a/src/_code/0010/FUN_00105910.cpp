@@ -14,7 +14,7 @@ int FUN_002ec8a8(int, unsigned char [16]);
 int FUN_002ec8f8(void);
 int FUN_002ec934(int *, int, unsigned int);
 int FUN_002ec964(int, unsigned int, int, int *);
-int FUN_002ec9f4(unsigned char [16]);
+int strDestroy(unsigned char [16]);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -35,7 +35,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002ec8f8. */
 /* Supplied declaration required: FUN_002ec934. */
 /* Supplied declaration required: FUN_002ec964. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 
 
 void FUN_00105910(int param_1)
@@ -90,7 +90,7 @@ void FUN_00105910(int param_1)
   else {
     FUN_002ea446(param_1,0);
   }
-  FUN_002ec9f4(temp_v2);
+  strDestroy(temp_v2);
   return;
 }
 

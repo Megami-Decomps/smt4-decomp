@@ -4,11 +4,11 @@
 
 extern "C" {
 
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 
-extern unsigned int FUN_002c0c74(unsigned int);
-extern int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 
 
 int FUN_00229f30(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -21,9 +21,9 @@ int FUN_00229f30(unsigned int param_1,unsigned int param_2,unsigned int param_3,
   unsigned int temp_v4;
   unsigned short *puVar6;
   
-  temp_v2 = *(int *)(DAT_00433158 + 0x398);
+  temp_v2 = *(int *)(g_aocSystem + 0x398);
   if (temp_v2 != 0) {
-    param_4 = *(unsigned int *)(DAT_00433158 + 0x394);
+    param_4 = *(unsigned int *)(g_aocSystem + 0x394);
   }
   if (temp_v2 != 0 && param_4 != 0) {
     temp_v0 = param_4 & 1;
@@ -47,9 +47,9 @@ int FUN_00229f30(unsigned int param_1,unsigned int param_2,unsigned int param_3,
       }
     }
   }
-  temp_v1 = FUN_002c0cec(0x1c,2);
-  temp_v2 = FUN_002c0cc4();
-  temp_v4 = FUN_002c0c74(temp_v1);
+  temp_v1 = dataTableGet(0x1c,2);
+  temp_v2 = dataTableGetEntries();
+  temp_v4 = dataTableGetCount(temp_v1);
   temp_v0 = 0;
   if (temp_v4 != 0) {
     temp_v0 = temp_v4 & 1;

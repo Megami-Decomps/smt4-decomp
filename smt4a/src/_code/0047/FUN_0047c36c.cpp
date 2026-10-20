@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
+int jobStop(unsigned int, int);
 int FUN_00163aa4(unsigned int *);
 int FUN_001641c4(void);
 int FUN_0016ccb4(int);
 int FUN_001760cc(unsigned int);
 int FUN_001b57a8(unsigned int [5], int);
-int FUN_0046c428(unsigned int);
+int aocClearDisplayFlag(unsigned int);
 int FUN_0047314c(unsigned int *);
 int FUN_00477d10(unsigned int *, unsigned int, int);
 int FUN_0047b1e4(unsigned int *);
@@ -21,18 +21,18 @@ typedef struct {
     unsigned int sp14; /* 0x14: local_14 */
 } param_1_stack;
 
-extern int DAT_00570260; /* 0x570260 */
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern int g_aocMain; /* 0x570260 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_00163aa4. */
-extern int FUN_00163e40(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_001641c4. */
 /* Supplied declaration required: FUN_0016ccb4. */
 /* Supplied declaration required: FUN_001760cc. */
 extern int FUN_001af210(int);
 /* Supplied declaration required: FUN_001b57a8. */
-/* Supplied declaration required: FUN_0046c428. */
+/* Supplied declaration required: aocClearDisplayFlag. */
 /* Supplied declaration required: FUN_0047314c. */
 /* Supplied declaration required: FUN_00477d10. */
 /* Supplied declaration required: FUN_0047b1e4. */
@@ -49,7 +49,7 @@ void FUN_0047c36c(unsigned int *param_1)
   unsigned int temp_v2 [5];
   
   puVar2 = temp_v2;
-  if ((param_1[1] - 4 >= 11) || (temp_v0 = FUN_001af210(DAT_00570260 + 0x98), temp_v0 == 0)) {
+  if ((param_1[1] - 4 >= 11) || (temp_v0 = FUN_001af210(g_aocMain + 0x98), temp_v0 == 0)) {
     temp_v0 = 0;
     do {
       FUN_00163aa4(param_1 + temp_v0 * 0x23 + 0xdf);
@@ -75,18 +75,18 @@ void FUN_0047c36c(unsigned int *param_1)
     (*UNRECOVERED_JUMPTABLE)();
     return;
   }
-  *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xfffeffff;
+  *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
   FUN_00477d10(param_1,0xffffffff,0);
   FUN_0047314c(param_1 + 0x46c);
   FUN_0047b1e4(param_1);
-  temp_v0 = FUN_00163e40(param_1[0x5e8]);
+  temp_v0 = jobIsValid(param_1[0x5e8]);
   if (temp_v0 != 0) {
     if (param_1[0x5eb] != 0xffffffff) {
       param_1[0x5eb] = 0xffffffff;
       FUN_001641c4();
     }
     *param_1 = *param_1 & 0xffffcfff;
-    FUN_001631d0(param_1[0x5e8],0);
+    jobStop(param_1[0x5e8],0);
   }
   *(unsigned char *)(param_1 + 0x84) = 1;
   param_1[0x87] = 0;
@@ -94,11 +94,11 @@ void FUN_0047c36c(unsigned int *param_1)
   temp_v1 = puVar2[1];
   param_1[0x85] = *puVar2;
   param_1[0x86] = temp_v1;
-  FUN_0016ccb4(DAT_00570260 + 0x80);
-  *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xfffeffff;
+  FUN_0016ccb4(g_aocMain + 0x80);
+  *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
   if (param_1[1] == 10) {
-    FUN_0046c428(DAT_00570280);
-    FUN_001760cc(DAT_00570280);
+    aocClearDisplayFlag(g_aocSystem);
+    FUN_001760cc(g_aocSystem);
   }
   param_1[1] = 0x11;
   param_1[2] = 0;

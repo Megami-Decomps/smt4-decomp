@@ -32,7 +32,7 @@ extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -104,9 +104,9 @@ void FUN_00481dd8(int param_1)
   temp_v1 = FUN_0014bef4(99);
   temp_v15 = 1.0f;
   if (temp_v1 % 10 == 0) {
-    temp_v10 = *(float *)(DAT_00581288 + 0x1c) - *(float *)(temp_v0 + 0x2c);
-    temp_v5 = *(float *)(DAT_00581288 + 0x20) - *(float *)(temp_v0 + 0x30);
-    temp_v9 = *(float *)(DAT_00581288 + 0x24) - *(float *)(temp_v0 + 0x34);
+    temp_v10 = *(float *)(g_lmapScene + 0x1c) - *(float *)(temp_v0 + 0x2c);
+    temp_v5 = *(float *)(g_lmapScene + 0x20) - *(float *)(temp_v0 + 0x30);
+    temp_v9 = *(float *)(g_lmapScene + 0x24) - *(float *)(temp_v0 + 0x34);
     temp_v11 = 1.0f / romwright_sqrt_4(temp_v10 * temp_v10 + temp_v5 * temp_v5 + temp_v9 * temp_v9);
     *(float *)(param_1 + 0x10) = temp_v10 * temp_v11 * temp_v14;
     *(float *)(param_1 + 0x14) = temp_v5 * temp_v11 * temp_v14;

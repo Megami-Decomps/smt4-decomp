@@ -23,7 +23,7 @@ extern unsigned int DAT_00435d18; /* 0x435d18 */
 /* Supplied declaration required: FUN_00282820. */
 /* Supplied declaration required: FUN_00282924. */
 extern int FUN_0028299c(unsigned int);
-extern unsigned int *FUN_002939f4(void);
+extern unsigned int *btlGetMainState(void);
 /* Supplied declaration required: FUN_002aa568. */
 extern int FUN_002c30c4(int);
 
@@ -42,7 +42,7 @@ void FUN_001b1a48(int param_1,unsigned int param_2,int param_3,int param_4,unsig
   int temp_v4;
   unsigned int temp_v5;
   
-  puVar2 = (unsigned int *)FUN_002939f4();
+  puVar2 = (unsigned int *)btlGetMainState();
   temp_v3 = 0;
   do {
     temp_v2 = param_3 + temp_v3 * 0x16;

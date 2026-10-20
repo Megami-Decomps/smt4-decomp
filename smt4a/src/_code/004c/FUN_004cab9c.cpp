@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_001568f8(int, int);
 int FUN_003eda04(unsigned int, int);
 
@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned int DAT_0057aa68; /* 0x57aa68 */
 extern unsigned int DAT_0057aa6c; /* 0x57aa6c */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
 /* Supplied declaration required: FUN_003eda04. */
 
@@ -33,11 +33,11 @@ void FUN_004cab9c(int param_1)
   unsigned int temp_v4;
   unsigned int temp_v5;
   
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   FUN_001568f8(temp_v1,(int)*(short *)(param_1 + 0x6a));
   if (temp_v1 != 0) {
     if ((*(unsigned short *)(temp_v1 + 0x110) & 0x180) != 0) {
-      FUN_0014aa78();
+      btlGetMainState();
       *(unsigned int *)(param_1 + 0x48) = 3;
       *(unsigned int *)(param_1 + 0x4c) = 0;
       *(unsigned int *)(param_1 + 0xac) = 0;
@@ -46,7 +46,7 @@ void FUN_004cab9c(int param_1)
       *(unsigned int *)(param_1 + 0x48) = 0;
       *(unsigned int *)(param_1 + 0x4c) = 0;
       *(unsigned int *)(param_1 + 0xac) = 0;
-      temp_v3 = FUN_0014aa78();
+      temp_v3 = btlGetMainState();
       if (-1 < *(short *)(param_1 + 0x68)) {
         puVar3 = (unsigned int *)(*(int *)(temp_v3 + 0x1ffc) + *(short *)(param_1 + 0x68) * 0x408);
         temp_v4 = ~DAT_0057aa6c;
@@ -55,11 +55,11 @@ void FUN_004cab9c(int param_1)
       }
     }
     if ((*(unsigned short *)(temp_v1 + 0x110) & 0x3dc2) != 0) {
-      temp_v2 = FUN_0014aa78();
+      temp_v2 = btlGetMainState();
       FUN_003eda04(temp_v2,temp_v1);
     }
     if ((-1 < *(short *)(param_1 + 0x68)) &&
-       (temp_v3 = FUN_0014aa78(), *(int *)(temp_v3 + 0x1ffc) + *(short *)(param_1 + 0x68) * 0x408 != 0))
+       (temp_v3 = btlGetMainState(), *(int *)(temp_v3 + 0x1ffc) + *(short *)(param_1 + 0x68) * 0x408 != 0))
     {
       temp_v0 = *(unsigned short *)(temp_v1 + 0x110);
       temp_v4 = (unsigned int)temp_v0;

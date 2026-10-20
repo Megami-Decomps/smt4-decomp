@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002a43bc(int, unsigned int, int);
 int FUN_002a6e00(int);
 int FUN_002a6e2c(int, int);
-int FUN_002bd75c(void);
+int asdTextureCreate(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,8 +19,8 @@ extern unsigned char LAB_00394114; /* 0x394114 */
 /* Supplied declaration required: FUN_002a43bc. */
 /* Supplied declaration required: FUN_002a6e00. */
 /* Supplied declaration required: FUN_002a6e2c. */
-/* Supplied declaration required: FUN_002bd75c. */
-extern int FUN_002c1870(int, unsigned char *, unsigned int);
+/* Supplied declaration required: asdTextureCreate. */
+extern int rt_memcmp(int, unsigned char *, unsigned int);
 
 
 void FUN_00393fa4(unsigned int *param_1,int *param_2)
@@ -44,7 +44,7 @@ void FUN_00393fa4(unsigned int *param_1,int *param_2)
     }
     FUN_002a43bc(temp_v4,temp_v2,0x80);
   }
-  temp_v0 = FUN_002c1870(temp_v4,&LAB_00394114,4);
+  temp_v0 = rt_memcmp(temp_v4,&LAB_00394114,4);
   if (temp_v0 != 0) {
     return;
   }
@@ -53,7 +53,7 @@ void FUN_00393fa4(unsigned int *param_1,int *param_2)
   }
   else {
     temp_v1 = (unsigned int)((*(unsigned int *)(temp_v3 + 0x10) & 0x10000) != 0);
-    FUN_002bd75c();
+    asdTextureCreate();
     *(unsigned int *)(temp_v3 + 8) = temp_v1;
     *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v4 + 8);
     *(unsigned int *)(*(int *)(temp_v3 + 8) + 0x14) = *(unsigned int *)(temp_v4 + 0xc);

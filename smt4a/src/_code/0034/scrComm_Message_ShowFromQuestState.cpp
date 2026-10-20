@@ -15,7 +15,7 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_0021bdac. */
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 extern unsigned int FUN_002ba85c(void);
 extern unsigned int FUN_002deb84(void);
 extern unsigned char FUN_00468858(void);
@@ -35,7 +35,7 @@ void scrComm_Message_ShowFromQuestState(void)
   QuestCenter_GetActiveEntry();
   temp_v0 = FUN_00468858();
   temp_v1 = FUN_002ba85c();
-  temp_v2 = FUN_00236038(0);
+  temp_v2 = scrGetArg(0);
   temp_v3 = FUN_002deb84();
   FUN_0021bdac(temp_v1,temp_v2,temp_v3,temp_v0,0,0,unaff_r4);
   return;

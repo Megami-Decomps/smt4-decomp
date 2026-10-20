@@ -1,39 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003120e8` (_code @ 0x3120e8, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the slot constant 0 is set before the argument call, and the stat is addressed with mov r1, #114 / register offset instead of add + ldrsh [r0, #114]. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+typedef struct Stats {
+    /* 0x00 */ u8 unk00[0x72];
+    /* 0x72 */ s16 values[12];
+} Stats;
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+typedef struct Character {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ Stats *stats;
+} Character;
 
-extern int FUN_0027e928(unsigned int);
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_00296cc8(void);
+extern u32 g_btlScriptUnit;
 
+int btlUnitGet(u32 id);
+int scrSetResult(int value);
+int scrGetArg(int index);
 
-unsigned int FUN_003120e8(void)
-
+/* Script command: passes to scrSetResult whether the stat selected by script argument 0 (0 -> 7, 1 -> 10, 2 -> 11) is positive. */
+u32 FUN_003120e8(int firstArg)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_00296cc8();
-  temp_v1 = 0;
-  if (temp_v0 == 0) {
-    temp_v1 = 7;
-  }
-  else if (temp_v0 == 1) {
-    temp_v1 = 10;
-  }
-  else if (temp_v0 == 2) {
-    temp_v1 = 0xb;
-  }
-  temp_v0 = FUN_0027e928(DAT_0043427c);
-  FUN_0028dcb0(0 < *(short *)(*(int *)(temp_v0 + 0x20) + temp_v1 * 2 + 0x72));
-  return 1;
+    int which = scrGetArg(firstArg);
+    int slot = 0;
+
+    if (which == 0) {
+        slot = 7;
+    } else if (which == 1) {
+        slot = 10;
+    } else if (which == 2) {
+        slot = 11;
+    }
+    scrSetResult(((Character *)btlUnitGet(g_btlScriptUnit))->stats->values[slot] >= 1);
+    return 1;
 }
 
 } /* extern "C" */

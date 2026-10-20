@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern unsigned char DAT_0044e140; /* 0x44e140 */
+extern unsigned char g_gameGlobals; /* 0x44e140 */
 
 
 void FUN_0029a084(int param_1,unsigned int param_2)
 
 {
-  int base = *(int *)((unsigned char *)&DAT_0044e140 + 0x4);
+  int base = *(int *)((unsigned char *)&g_gameGlobals + 0x4);
   switch (param_1) {
   case 1:
     *(unsigned int *)(base + 0x1eac) = param_2;

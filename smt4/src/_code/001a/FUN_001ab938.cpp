@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00296cc8(void);
+int scrGetArg(void);
 
-/* Supplied declaration required: FUN_00296cc8. */
-extern int FUN_002c08f0(void);
+/* Supplied declaration required: scrGetArg. */
+extern int jobGetWork(void);
 
 
 unsigned int FUN_001ab938(void)
@@ -16,8 +16,8 @@ unsigned int FUN_001ab938(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  FUN_00296cc8();
-  temp_v0 = FUN_002c08f0();
+  scrGetArg();
+  temp_v0 = jobGetWork();
   if (temp_v0 != 0) {
     *(unsigned int *)(temp_v0 + 0xc) = 0;
     *(unsigned int *)(temp_v0 + 0x10) = 0;

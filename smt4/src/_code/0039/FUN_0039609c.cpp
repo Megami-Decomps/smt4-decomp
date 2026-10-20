@@ -15,8 +15,8 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_00447e88; /* 0x447e88 */
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern int g_lmapScene; /* 0x447e88 */
+extern unsigned char g_gameState; /* 0x49f91c */
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
 #define ROMWRIGHT_SQRT_4_DEFINED
@@ -45,9 +45,9 @@ void FUN_0039609c(int param_1)
   float temp_v6;
   
   if (((*(unsigned int *)(param_1 + 0x70) & 4) != 0) &&
-     (temp_v2 = *(float *)(param_1 + 0x28) - *(float *)(DAT_00447e88 + 0x1c),
-     temp_v3 = *(float *)(param_1 + 0x2c) - *(float *)(DAT_00447e88 + 0x20),
-     temp_v1 = *(float *)(param_1 + 0x30) - *(float *)(DAT_00447e88 + 0x24),
+     (temp_v2 = *(float *)(param_1 + 0x28) - *(float *)(g_lmapScene + 0x1c),
+     temp_v3 = *(float *)(param_1 + 0x2c) - *(float *)(g_lmapScene + 0x20),
+     temp_v1 = *(float *)(param_1 + 0x30) - *(float *)(g_lmapScene + 0x24),
      (int)romwright_sqrt_4(temp_v2 * temp_v2 + temp_v3 * temp_v3 + temp_v1 * temp_v1) >= 0x43960001)) {
     *(unsigned int *)(param_1 + 0x70) = (*(unsigned int *)(param_1 + 0x70) & 0xfffffffb) | 1;
   }
@@ -70,7 +70,7 @@ void FUN_0039609c(int param_1)
     }
     else {
       puVar1 = *(unsigned int **)(param_1 + 0x6c);
-      if ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x22)) == '\0') {
+      if ((*(signed char *)((unsigned char *)&g_gameState + 0x22)) == '\0') {
         if ((*puVar1 & 2) == 0) {
           return;
         }

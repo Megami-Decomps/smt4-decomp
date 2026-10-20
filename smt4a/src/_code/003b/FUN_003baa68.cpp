@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0016431c(unsigned int);
 int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
-int FUN_002c1d50(void);
+int eventTexRequestStopAll(void);
 int FUN_002deb84(void);
-int FUN_00318124(void);
+int bustupCutAnimRequestStopSlots(void);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -20,11 +20,11 @@ extern unsigned char DAT_0057f588; /* 0x57f588 */
 
 /* Supplied declaration required: FUN_0016431c. */
 /* Supplied declaration required: FUN_0021bdac. */
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 extern unsigned int FUN_002ba85c(void);
-/* Supplied declaration required: FUN_002c1d50. */
+/* Supplied declaration required: eventTexRequestStopAll. */
 /* Supplied declaration required: FUN_002deb84. */
-/* Supplied declaration required: FUN_00318124. */
+/* Supplied declaration required: bustupCutAnimRequestStopSlots. */
 
 
 unsigned int FUN_003baa68(void)
@@ -38,13 +38,13 @@ unsigned int FUN_003baa68(void)
   int temp_v4;
   
   temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x4));
-  FUN_00318124();
-  FUN_002c1d50();
+  bustupCutAnimRequestStopSlots();
+  eventTexRequestStopAll();
   if ((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) != 0) {
     *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) + 0x19c5) = 0x15;
   }
   temp_v1 = FUN_002ba85c();
-  temp_v2 = FUN_00236038(0);
+  temp_v2 = scrGetArg(0);
   temp_v3 = FUN_002deb84();
   FUN_0021bdac(temp_v1,temp_v2,temp_v3,6,0,0);
   temp_v4 = FUN_002deb84();

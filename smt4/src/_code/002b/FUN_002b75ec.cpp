@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_6_stack;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 extern signed char DAT_00464d48; /* 0x464d48 */
 extern int DAT_00464d58; /* 0x464d58 */
 extern romwright_code *DAT_00464d64; /* 0x464d64 */
@@ -116,7 +116,7 @@ void FUN_002b75ec(int *param_1,unsigned int param_2,unsigned int param_3,int par
   iStack_148 = 0;
   piStack_30 = param_1;
   if (DAT_00464d48 != '\0') {
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v14 = temp_v16 + temp_v14;
   }
   temp_v4 = param_1[5];
@@ -379,7 +379,7 @@ LAB_002b0a30:
           temp_v17 = *(unsigned int *)
                     (*(int *)(param_1[5] + 0xc) + *(int *)(*param_1 + temp_v8 * 0x20 + 0x1c) * 4);
           if (uStack_13c != 0) {
-            FUN_002aa200(DAT_0044ea00,temp_v17,temp_v0);
+            FUN_002aa200(g_titleScene,temp_v17,temp_v0);
             if (uStack_13c == 2) {
               temp_v23 = temp_v23 & 0xffffffff00000000;
               FUN_002aa100(piVar8,temp_v4,temp_v13,temp_v13,temp_v13,temp_v13);
@@ -392,7 +392,7 @@ LAB_002b0a30:
             FUN_002aa100(piVar8,temp_v4,uStack_1ac,uStack_1ac,uStack_1ac,uStack_1ac);
           }
           else {
-            FUN_002aa200(DAT_0044ea00,temp_v17,temp_v0);
+            FUN_002aa200(g_titleScene,temp_v17,temp_v0);
             if ((param_5 & 0x80) != 0) {
               FUN_002aa100(piVar8,temp_v4,uStack_b0,(temp_v18 & 0xff) | temp_v7,uStack_90,uStack_ac);
             }
@@ -442,7 +442,7 @@ LAB_002b0dac:
         }
         VectorUnsignedToFloat((unsigned int)*(unsigned char *)(temp_v6 + 5),(unsigned char)(temp_v12 >> 0x16) & 3);
         VectorUnsignedToFloat((unsigned int)*(unsigned char *)(temp_v6 + 7),(unsigned char)(temp_v12 >> 0x16) & 3);
-        FUN_002aa200(DAT_0044ea00,
+        FUN_002aa200(g_titleScene,
                      *(unsigned int *)
                       (*(int *)(param_1[0x29] + 0xc) +
                       *(int *)(*param_1 + aiStack_130[temp_v4] * 0x20 + 0x1c) * 4),

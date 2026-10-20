@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c32a0(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -12,9 +12,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned char DAT_00464110; /* 0x464110 */
+extern unsigned char g_handlerTable; /* 0x464110 */
 
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 
 
 unsigned int * FUN_0024fc18(unsigned int *param_1)
@@ -27,7 +27,7 @@ unsigned int * FUN_0024fc18(unsigned int *param_1)
   
   temp_v0 = *(unsigned short *)(param_1 + 1);
   puVar2 = (unsigned int *)0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0x2c,0x10,1);
+  memAlloc(0x10000,0x100,0,0x2c,0x10,1);
   puVar2[1] = 0;
   puVar2[2] = 0;
   puVar2[3] = 0;
@@ -43,7 +43,7 @@ unsigned int * FUN_0024fc18(unsigned int *param_1)
   *puVar2 = *param_1;
   *(unsigned short *)(puVar2 + 3) = *(unsigned short *)(param_1 + 3);
   *(unsigned short *)(puVar2 + 7) = *(unsigned short *)(param_1 + 7);
-  temp_v1 = (**(romwright_code **)(&DAT_00464110 + (unsigned int)temp_v0 * 0x44))(param_1);
+  temp_v1 = (**(romwright_code **)(&g_handlerTable + (unsigned int)temp_v0 * 0x44))(param_1);
   puVar2[2] = temp_v1;
   return puVar2;
 }

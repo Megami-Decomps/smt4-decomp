@@ -50,7 +50,7 @@ extern unsigned char DAT_0055cacc; /* 0x55cacc */
 /* Supplied declaration required: FUN_0011b704. */
 /* Supplied declaration required: FUN_0011bf74. */
 /* Supplied declaration required: FUN_0011fdd8. */
-extern unsigned int *FUN_002e6dac(int);
+extern unsigned int *rt_malloc(int);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_002e760a. */
 extern unsigned int FUN_002fafd8(int, unsigned int);
@@ -160,7 +160,7 @@ void FUN_004134f8(int param_1)
         if (temp_v16 < temp_v0 + 0x20) {
           temp_v16 = temp_v0 + 0x20;
         }
-        puVar2 = (unsigned int *)FUN_002e6dac(temp_v16 * 0x30);
+        puVar2 = (unsigned int *)rt_malloc(temp_v16 * 0x30);
         puVar10 = puVar2;
         for (puVar5 = (unsigned int *)*piVar8; puVar5 != puVar6; puVar5 = puVar5 + 0xc) {
           if (puVar10 != (unsigned int *)0x0) {

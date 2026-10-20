@@ -8,7 +8,7 @@ int FUN_002e6e34(int *, int);
 int FUN_002e6e5c(int *);
 
 typedef int romwright_code(...);
-extern unsigned char DAT_0059935c; /* 0x59935c */
+extern unsigned char g_systemTable; /* 0x59935c */
 
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
@@ -29,8 +29,8 @@ void FUN_00116594(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_8 = param_4;
   temp_v0 = FUN_002e6e26();
   FUN_002e6e34(&uStack_10,temp_v0 + 0x58);
-  if ((*(int * *)((unsigned char *)&DAT_0059935c + 0xc)) != (int *)0x0) {
-    (**(romwright_code **)(*(*(int * *)((unsigned char *)&DAT_0059935c + 0xc)) + 0xc))();
+  if ((*(int * *)((unsigned char *)&g_systemTable + 0xc)) != (int *)0x0) {
+    (**(romwright_code **)(*(*(int * *)((unsigned char *)&g_systemTable + 0xc)) + 0xc))();
   }
   FUN_002e6e5c(&uStack_10);
   return;

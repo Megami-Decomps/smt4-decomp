@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00100388(int, unsigned char *, unsigned int);
 int FUN_001656a0(...);
-int FUN_00167ab4(int, int, int, unsigned int, int, int);
-int FUN_0019a5a0(...);
+int memAlloc(int, int, int, unsigned int, int, int);
+int asdMemFree(...);
 int FUN_001b4ddc(...);
 int FUN_00200bcc(unsigned int *);
 int FUN_00202178(int);
@@ -16,7 +16,7 @@ int FUN_0020ea14(void);
 int FUN_00222260(...);
 int FUN_00243c24(void);
 int FUN_00272204(unsigned int, unsigned int [2], int);
-int FUN_00290e98(unsigned int, int, int);
+int taskRunWithObject(unsigned int, int, int);
 int FUN_002b41e4(void);
 int FUN_002e342c(int, unsigned int);
 int FUN_00350a8c(void);
@@ -70,8 +70,8 @@ extern unsigned int uRam00634d68; /* 0x634d68 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001656a0. */
-/* Supplied declaration required: FUN_00167ab4. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001b4ddc. */
 /* Supplied declaration required: FUN_00200bcc. */
 /* Supplied declaration required: FUN_00202178. */
@@ -80,7 +80,7 @@ extern unsigned int uRam00634d68; /* 0x634d68 */
 /* Supplied declaration required: FUN_00222260. */
 /* Supplied declaration required: FUN_00243c24. */
 /* Supplied declaration required: FUN_00272204. */
-/* Supplied declaration required: FUN_00290e98. */
+/* Supplied declaration required: taskRunWithObject. */
 extern unsigned int FUN_002b41c4(void);
 /* Supplied declaration required: FUN_002b41e4. */
 /* Supplied declaration required: FUN_002e342c. */
@@ -116,7 +116,7 @@ unsigned int FUN_0039a9d0(unsigned int param_1,int param_2,unsigned int param_3)
   temp_v8 = param_1;
   iStack_2c = param_2;
   uStack_28 = param_3;
-  FUN_00167ab4(0x10000,0x100,0,param_3 * 0x2c,0x10,1);
+  memAlloc(0x10000,0x100,0,param_3 * 0x2c,0x10,1);
   temp_v4 = 0;
   temp_v3 = 0;
   temp_v6 = temp_v0 + param_3 * 0x18;
@@ -194,7 +194,7 @@ LAB_0039ab4c:
         FUN_002b41e4();
       }
       if (*(int *)(temp_v6 + 0x1c) != 0) {
-        FUN_00290e98(temp_v1,*(int *)(temp_v6 + 0x1c),*(unsigned short *)(temp_v6 + 0x18));
+        taskRunWithObject(temp_v1,*(int *)(temp_v6 + 0x1c),*(unsigned short *)(temp_v6 + 0x18));
       }
       else {
         temp_v7[0] = 0;
@@ -251,7 +251,7 @@ LAB_0039ab4c:
       temp_v6 = VectorFloatToUnsigned(*(unsigned int *)(temp_v0 + DAT_0059ea24 * 0x18 + 0x14),3);
       if (DAT_0059dc00 != 0) {
         if (DAT_0059ea24 == temp_v3) {
-          FUN_0019a5a0(temp_v0);
+          asdMemFree(temp_v0);
           return temp_v1;
         }
         FUN_00399768(DAT_0059dc00,3);
@@ -279,7 +279,7 @@ LAB_0039ab4c:
     FUN_00399768(DAT_0059dc00,3);
     DAT_0059dc00 = 0;
   }
-  FUN_0019a5a0(temp_v0);
+  asdMemFree(temp_v0);
   return temp_v1;
 }
 

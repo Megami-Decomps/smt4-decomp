@@ -6,7 +6,7 @@ int FUN_0014cbcc(unsigned char [128], int, int);
 int FUN_0014ed4c(void);
 int FUN_002a6e00(int);
 int FUN_002a6e2c(int, unsigned int);
-int FUN_002c4938(unsigned char [128], int);
+int memClear(unsigned char [128], int);
 
 /* Supplied declaration required: FUN_0014cbcc. */
 /* Supplied declaration required: FUN_0014ed4c. */
@@ -14,8 +14,8 @@ int FUN_002c4938(unsigned char [128], int);
 /* Supplied declaration required: FUN_002a6e2c. */
 extern int FUN_002a6e7c(unsigned int, int, unsigned int, unsigned char *);
 extern int FUN_002a6f48(unsigned int);
-extern int FUN_002b93b0(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c4938. */
+extern int asdTMTexTableCallFileB(unsigned int, unsigned int);
+/* Supplied declaration required: memClear. */
 
 
 int FUN_002ae8e4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -28,9 +28,9 @@ int FUN_002ae8e4(unsigned int param_1,unsigned int param_2,unsigned int param_3,
   
   temp_v0 = FUN_002a6f48(param_2);
   if (temp_v0 != -1) {
-    FUN_002c4938(temp_v2,0x80);
+    memClear(temp_v2,0x80);
     temp_v0 = FUN_002a6e7c(param_1,temp_v0,param_3,temp_v2);
-    if ((temp_v0 != 0) && (temp_v1 = FUN_002b93b0(param_2,param_3), temp_v1 != 0)) {
+    if ((temp_v0 != 0) && (temp_v1 = asdTMTexTableCallFileB(param_2,param_3), temp_v1 != 0)) {
       FUN_0014ed4c();
       FUN_0014cbcc(temp_v2,temp_v1,temp_v0);
       FUN_002a6e2c(temp_v1,param_4);

@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_00163060(int, int, int, int, int);
-int FUN_00163e40(unsigned int);
+int asdMemoryAllocTracked(int, int, int, int, int);
+int jobIsValid(unsigned int);
 int FUN_00180000(void);
-int FUN_0019a5a0(void);
-int FUN_0019c364(void);
+int asdMemFree(void);
+int scrScriptProcessDestroy(void);
 int FUN_001b4a90(unsigned int *, int, unsigned int);
 int FUN_00215978(int);
-int FUN_00221c2c(void);
-int FUN_002e6354(...);
+int btlActionAllocData(void);
+int sysMemClear(...);
 int FUN_003f0f58(unsigned int *);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -20,17 +20,17 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern unsigned char DAT_00573920; /* 0x573920 */
+extern unsigned char g_btlMain; /* 0x573920 */
 
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_00163e40. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: jobIsValid. */
 /* Supplied declaration required: FUN_00180000. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_00215978. */
-/* Supplied declaration required: FUN_00221c2c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: btlActionAllocData. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003f0f58. */
 
 
@@ -46,8 +46,8 @@ void FUN_0024d9c4(unsigned int *param_1)
   unsigned short temp_v2;
   unsigned int temp_v3;
   
-  FUN_00221c2c();
-  FUN_00163e40(*param_1);
+  btlActionAllocData();
+  jobIsValid(*param_1);
   FUN_00215978(0);
   *param_1 = 0;
   param_1[1] = 0;
@@ -111,7 +111,7 @@ void FUN_0024d9c4(unsigned int *param_1)
   FUN_003f0f58(param_1);
   param_1[0x3b] = 0xffffffff;
   param_1[0x3c] = 0xffffffff;
-  FUN_002e6354(param_1 + 0x3d,0x84);
+  sysMemClear(param_1 + 0x3d,0x84);
   param_1[0x3d] = 0;
   param_1[0x3e] = 0;
   param_1[0x3f] = 0;
@@ -131,12 +131,12 @@ void FUN_0024d9c4(unsigned int *param_1)
   param_1[0x68] = 0;
   param_1[0x69] = 0;
   temp_v0 = 0x100;
-  FUN_00163060(0x100,0x100,0,0xf110,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0xf110,1);
   piVar4 = (int *)(param_1 + 0x7b5);
   temp_v2 = 0;
   *piVar4 = temp_v0;
   do {
-    FUN_002e6354(*piVar4 + temp_v2 * 0x1d0,0x1d0);
+    sysMemClear(*piVar4 + temp_v2 * 0x1d0,0x1d0);
     *(short *)(*piVar4 + temp_v2 * 0x1d0 + 0x6a) = (short)temp_v2;
     *(unsigned short *)(*piVar4 + temp_v2 * 0x1d0 + 0x68) = 0xffff;
     temp_v0 = temp_v2 * 0x1d0;
@@ -148,7 +148,7 @@ void FUN_0024d9c4(unsigned int *param_1)
   } while (temp_v2 < 0x85);
   *(unsigned char *)((int)param_1 + 0x1ed9) = 0;
   temp_v0 = 0x100;
-  FUN_00163060(0x100,0x100,0,0x4b0,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x4b0,1);
   temp_v3 = 0;
   temp_v2 = 0;
   param_1[0x7fe] = temp_v0;
@@ -171,7 +171,7 @@ void FUN_0024d9c4(unsigned int *param_1)
   param_1[0x7bd] = 0;
   param_1[0x7be] = 0;
   temp_v0 = 0x100;
-  FUN_00163060(0x100,0x100,0,0x1b768,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x1b768,1);
   piVar4 = (int *)(param_1 + 0x7ff);
   temp_v2 = 0;
   *piVar4 = temp_v0;
@@ -215,10 +215,10 @@ LAB_0024dd20:
         temp_v2 = temp_v2 + 1;
         *(unsigned char *)(*piVar4 + temp_v0 + 0x3f4) = 0;
         if (temp_v2 >= 0x6d) {
-          FUN_002e6354(param_1 + 0x85b,0xa8);
-          FUN_002e6354(param_1 + 0x885,0x54);
-          FUN_002e6354(param_1 + 0x42c,0xe10);
-          FUN_002e6354(param_1 + 0x7b2,10);
+          sysMemClear(param_1 + 0x85b,0xa8);
+          sysMemClear(param_1 + 0x885,0x54);
+          sysMemClear(param_1 + 0x42c,0xe10);
+          sysMemClear(param_1 + 0x7b2,10);
           *(unsigned short *)(param_1 + 0x800) = 0;
           *(unsigned short *)((int)param_1 + 0x2002) = 0;
           *(unsigned short *)(param_1 + 0x801) = 0xffff;
@@ -274,9 +274,9 @@ LAB_0024dd20:
           *(unsigned short *)((int)param_1 + 0x234a) = 0;
           *(unsigned char *)((int)param_1 + 0x234f) = 0;
           temp_v3 = 0x100;
-          FUN_00163060(0x100,0x100,0,0x80,1);
+          asdMemoryAllocTracked(0x100,0x100,0,0x80,1);
           param_1[0x904] = temp_v3;
-          FUN_002e6354();
+          sysMemClear();
           param_1[0x905] = 0;
           *(unsigned short *)((int)param_1 + 0x301e) = 0xffff;
           *(unsigned short *)(param_1 + 0xc08) = 0xffff;
@@ -310,25 +310,25 @@ LAB_0024dd20:
           param_1[0x1353] = 0;
           *(unsigned char *)(param_1 + 0x1154) = 0;
           param_1[0x1155] = 0xffffffff;
-          param_1[0x1339] = (*(unsigned int *)((unsigned char *)&DAT_00573920 + 0x20));
+          param_1[0x1339] = (*(unsigned int *)((unsigned char *)&g_btlMain + 0x20));
           param_1[0x133d] = 0xffffffff;
           param_1[0x133b] = 0;
           param_1[0x133c] = 0;
           if (param_1[0x1354] != 0) {
-            FUN_0019a5a0();
+            asdMemFree();
             param_1[0x1354] = 0;
           }
           if (param_1[0x1355] != 0) {
-            FUN_0019c364();
+            scrScriptProcessDestroy();
             param_1[0x1355] = 0;
           }
           param_1[0x1356] = 0;
           if (param_1[0x138e] != 0) {
-            FUN_0019a5a0();
+            asdMemFree();
             param_1[0x138e] = 0;
           }
           if (param_1[0x138f] != 0) {
-            FUN_0019c364();
+            scrScriptProcessDestroy();
             param_1[0x138f] = 0;
           }
           param_1[0x1390] = 0;

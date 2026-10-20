@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0014e220(...);
-int FUN_0014e38c(...);
+int asdProcessCreateSimple(...);
 int FUN_001505ac(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_001846d0(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -33,15 +33,15 @@ extern unsigned char DAT_0052f7bc; /* 0x52f7bc */
 extern unsigned char DAT_0052f7d4; /* 0x52f7d4 */
 extern unsigned char DAT_0052f804; /* 0x52f804 */
 extern unsigned char DAT_0052f84c; /* 0x52f84c */
-extern unsigned int *DAT_0057f56c; /* 0x57f56c */
+extern unsigned int *g_menuState; /* 0x57f56c */
 
 /* Supplied declaration required: FUN_0014e220. */
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -53,20 +53,20 @@ void FUN_0013f578(void)
   unsigned char *puVar2;
   unsigned int *puVar3;
   
-  if (DAT_0057f56c == (unsigned int *)0x0) {
+  if (g_menuState == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x2cc,1);
-    DAT_0057f56c = puVar1;
+    asdMemoryAllocTracked(0x100,0x100,0,0x2cc,1);
+    g_menuState = puVar1;
   }
-  puVar1 = DAT_0057f56c;
-  FUN_002e6354();
+  puVar1 = g_menuState;
+  sysMemClear();
   puVar2 = &LAB_0013f76c;
-  FUN_0014e38c(&LAB_0013f76c,3,0,0,FUN_00156230,0,0);
+  asdProcessCreateSimple(&LAB_0013f76c,3,0,0,FUN_00156230,0,0);
   *puVar1 = (unsigned int)puVar2;
-  FUN_0015155c(&LAB_0013f77c,0x86,0,0,FUN_0015519c,0,0,puVar2);
-  FUN_0015155c(&LAB_0013f790,0xe2,0,0,FUN_0015519c,0,0,*puVar1);
-  puVar1 = DAT_0057f56c;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(DAT_0057f56c + 7);
+  taskCreateDraw(&LAB_0013f77c,0x86,0,0,FUN_0015519c,0,0,puVar2);
+  taskCreateDraw(&LAB_0013f790,0xe2,0,0,FUN_0015519c,0,0,*puVar1);
+  puVar1 = g_menuState;
+  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_menuState + 7);
   FUN_001505ac(puVar1 + 7,&DAT_0052f7bc,0x18,&DAT_0052f7d4,0x30,&DAT_0052f804,0x48,0,0,&DAT_0052f84c
                ,0x1dc);
   puVar3 = puVar1 + 7;

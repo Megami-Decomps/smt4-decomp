@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00180008(int);
+int jyoucyuGetTableEntry(int);
 int FUN_001d25ec(int);
 int FUN_002e3494(int);
-int FUN_0030cb44(void);
+int asdOperatorNewE(void);
 int FUN_0042979c(int *, int, int);
 int FUN_004ffee0(int *, unsigned char [4], unsigned char [8], unsigned short [12]);
 int FUN_005001f8(unsigned char [4], unsigned int, unsigned int);
@@ -22,13 +22,13 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_1_stack;
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
-/* Supplied declaration required: FUN_00180008. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 extern int FUN_001a7470(unsigned short *);
 /* Supplied declaration required: FUN_001d25ec. */
 /* Supplied declaration required: FUN_002e3494. */
-/* Supplied declaration required: FUN_0030cb44. */
+/* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_0042979c. */
 extern unsigned int FUN_004ffd4c(unsigned char *);
 /* Supplied declaration required: FUN_004ffee0. */
@@ -56,8 +56,8 @@ unsigned char * FUN_004733cc(int param_1)
   unsigned short temp_v11 [12];
   unsigned char temp_v12 [8];
   
-  temp_v3 = DAT_00570260;
-  FUN_0042979c(&temp_v8,DAT_00570260 + 0x20,DAT_00570260 + 0x18);
+  temp_v3 = g_aocMain;
+  FUN_0042979c(&temp_v8,g_aocMain + 0x20,g_aocMain + 0x18);
   *(unsigned int *)(param_1 + 0xc) = temp_v8;
   *(unsigned int *)(param_1 + 0x10) = uStack_5c;
   temp_v0 = FUN_001d25ec(param_1 + 0xc);
@@ -67,7 +67,7 @@ unsigned char * FUN_004733cc(int param_1)
   FUN_005001f8(temp_v9,*(unsigned int *)(temp_v3 + 0x5a8),*(unsigned int *)(param_1 + 0x14));
   temp_v1 = FUN_004ffd4c(temp_v9);
   temp_v0 = temp_v1 << 1;
-  FUN_0030cb44();
+  asdOperatorNewE();
   temp_v5 = 0;
   if (temp_v0 != 0) {
     temp_v4 = 0;
@@ -102,7 +102,7 @@ unsigned char * FUN_004733cc(int param_1)
       FUN_002e3494(temp_v0);
       return temp_v9;
     }
-    FUN_00180008(0);
+    jyoucyuGetTableEntry(0);
     FUN_002e3494(temp_v0);
   }
   return temp_v9;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00180008(int);
+int jyoucyuGetTableEntry(int);
 int FUN_001919a4(void);
 int FUN_002e3328(unsigned int);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00180008. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_001919a4. */
 /* Supplied declaration required: FUN_002e3328. */
 
@@ -31,7 +31,7 @@ void FUN_002bd364(int param_1)
     FUN_002e3328(*(unsigned int *)(temp_v0 + 0x1c));
     *(unsigned int *)(temp_v0 + 0x1c) = 0;
   }
-  FUN_00180008(0);
+  jyoucyuGetTableEntry(0);
   return;
 }
 

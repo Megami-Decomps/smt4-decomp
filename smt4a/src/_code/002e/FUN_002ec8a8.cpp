@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e74c4(...);
+int strAssign(...);
 int FUN_002ed294(...);
 int FUN_0031011e(...);
 
@@ -32,7 +32,7 @@ struct fn_002ec8a8_arg1 {
     byte field_0x1d; /* +0x1d */
 };
 
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002ed294. */
 /* Supplied declaration required: FUN_0031011e. */
 
@@ -50,9 +50,9 @@ int FUN_002ec8a8(fn_002ec8a8_arg0 *param_1,fn_002ec8a8_arg1 *param_2)
     if (param_1->field_0x14 < temp_v0) {
       FUN_0031011e(param_1,temp_v0);
     }
-    FUN_002e74c4(param_1,*(unsigned int *)&param_2->field_0xc,temp_v0,0xffffffff);
+    strAssign(param_1,*(unsigned int *)&param_2->field_0xc,temp_v0,0xffffffff);
     FUN_002ed294(param_1,param_2->field_0x18);
-    param_1->field_0x1c = (param_2->field_0x1c & 0xfb) | (param_1->field_0x1c & 4);
+    param_1->field_0x1c = (param_2->field_0x1c & ~4) | (param_1->field_0x1c & 4);
     param_1->field_0x1d = param_2->field_0x1d;
   }
   return (int)param_1;

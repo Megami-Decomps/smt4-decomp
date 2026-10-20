@@ -20,7 +20,7 @@ typedef struct {
     unsigned int spBC; /* 0xbc: local_bc */
 } param_3_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int DAT_00476628; /* 0x476628 */
 extern unsigned int DAT_004d46ac; /* 0x4d46ac */
 extern unsigned int DAT_004d46bc; /* 0x4d46bc */
@@ -29,7 +29,7 @@ extern unsigned int DAT_004d46dc; /* 0x4d46dc */
 extern signed char DAT_004d46fd; /* 0x4d46fd */
 extern signed char DAT_004d4910; /* 0x4d4910 */
 extern signed char DAT_004d4911; /* 0x4d4911 */
-extern float DAT_004efd2c; /* 0x4efd2c */
+extern float g_asdSoundListener; /* 0x4efd2c */
 extern float DAT_004efd30; /* 0x4efd30 */
 extern float DAT_004efd34; /* 0x4efd34 */
 
@@ -92,11 +92,11 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
   
   temp_v19 = 0.0f;
   if (((DAT_00476628 & 1) == 0) && (temp_v3 = FUN_002bfefc(&DAT_00476628), temp_v3 != 0)) {
-    DAT_004efd2c = temp_v19;
+    g_asdSoundListener = temp_v19;
     DAT_004efd30 = temp_v19;
     DAT_004efd34 = temp_v19;
   }
-  temp_v16 = CONCAT44(DAT_004efd30,DAT_004efd2c);
+  temp_v16 = CONCAT44(DAT_004efd30,g_asdSoundListener);
   temp_v4 = 0;
   switch(*(unsigned char *)(*(int *)(param_3 + 4) + 5)) {
   case 0:
@@ -219,7 +219,7 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
   temp_v12 = (float)VectorSignedToFloat(0x100 - param_2[3],(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v20 = CONCAT44(temp_v12 * 0.00390625f,temp_v19);
   if ((temp_v6 & 0x40000000) == 0) {
-    FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(param_3 + 8),temp_v8);
+    FUN_002c1b64(g_titleScene,*(unsigned int *)(param_3 + 8),temp_v8);
   }
   puVar13 = (unsigned int *)0x0;
   puVar14 = (unsigned int *)0x0;
@@ -234,9 +234,9 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
   if ((*param_2 & 0x80000000) != 0) {
     temp_v14 = temp_v17;
     temp_v15 = temp_v18;
-    temp_v4 = FUN_002c15ac(*(unsigned int *)(DAT_0044ea00 + 0x528));
+    temp_v4 = FUN_002c15ac(*(unsigned int *)(g_titleScene + 0x528));
     temp_v12 = (float)VectorUnsignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v4 = FUN_002c15d4(*(unsigned int *)(DAT_0044ea00 + 0x528));
+    temp_v4 = FUN_002c15d4(*(unsigned int *)(g_titleScene + 0x528));
     temp_v7 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v17 < temp_v12) << 0x1f) |
             ((unsigned int)(temp_v17 == temp_v12) << 0x1e);
     temp_v8 = temp_v7 | ((unsigned int)((temp_v17 != temp_v17) || (temp_v12 != temp_v12)) << 0x1c);
@@ -328,7 +328,7 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
       temp_v17 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v17 = temp_v17 * temp_v21;
     }
-    FUN_002ba12c(DAT_0044ea00,temp_v7);
+    FUN_002ba12c(g_titleScene,temp_v7);
     temp_v7 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v19 == (float)temp_v20) << 0x1e);
     if (DAT_004d4911 != '\0') {
       VectorSignedToFloat((int)temp_v17,(unsigned char)(temp_v7 >> 0x16) & 3);
@@ -340,7 +340,7 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
   }
   FUN_002c1ac8(puVar13,puVar14,puVar11,puVar12);
   if (temp_v2) {
-    FUN_002b90f8(DAT_0044ea00,temp_v22);
+    FUN_002b90f8(g_titleScene,temp_v22);
   }
   return 1;
 }

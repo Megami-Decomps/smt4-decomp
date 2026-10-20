@@ -1,28 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004495a0` (_code @ 0x4495a0, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps &holder->ref (this + 8) live in r5 and derives the return value as r5 - 8; built keeps the holder pointer. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct Allocator Allocator;
+typedef struct Resource Resource;
 
-unsigned int * FUN_004495a0(unsigned int *param_1,unsigned int param_2)
+/* Virtual tables: Resource slot 0 destroys the object, Allocator slot 3 (0xc) frees it. */
+typedef struct {
+    void (*destroy)(Resource *self);
+} ResourceVtbl;
 
+typedef struct {
+    void *slots[3];
+    void (*free)(Allocator *self, Resource *resource); /* 0x0c */
+} AllocatorVtbl;
+
+struct Allocator {
+    const AllocatorVtbl *vtbl;
+};
+
+struct Resource {
+    const ResourceVtbl *vtbl;   /* 0x00 */
+    Allocator *allocator;       /* 0x04 */
+};
+
+/* Owning reference to a resource: destroys and frees it when `owned` is set. */
+typedef struct {
+    Resource *resource;     /* 0x00 */
+    u8 owned;               /* 0x04 */
+} ResourceRef;
+
+typedef struct {
+    const void *vtbl;       /* 0x00 */
+    u32 unk04;
+    ResourceRef ref;        /* 0x08 */
+} Holder;
+
+static __inline void resourceRefRelease(ResourceRef *ref)
 {
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  
-  *param_1 = param_2;
-  puVar2 = (unsigned int *)param_1[2];
-  puVar1 = param_1;
-  if (puVar2 != (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)(unsigned int)*(unsigned char *)(param_1 + 3);
-  }
-  if (puVar2 != (unsigned int *)0x0 && puVar1 != (unsigned int *)0x0) {
-    (**(romwright_code **)*puVar2)(puVar2);
-    (**(romwright_code **)(*(int *)puVar2[1] + 0xc))((int *)puVar2[1],puVar2);
-  }
-  return param_1;
+    Resource *resource = ref->resource;
+
+    if (resource != NULL && ref->owned != 0) {
+        resource->vtbl->destroy(resource);
+        resource->allocator->vtbl->free(resource->allocator, resource);
+    }
+}
+
+/* Sets the vtable, releases the owned resource and returns the holder. */
+Holder *FUN_004495a0(Holder *holder, const void *vtbl)
+{
+    holder->vtbl = vtbl;
+    resourceRefRelease(&holder->ref);
+    return holder;
 }
 
 } /* extern "C" */

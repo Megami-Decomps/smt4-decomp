@@ -2,16 +2,16 @@
 
 extern "C" {
 
-int FUN_002c415c(unsigned int);
+int asdMemFree(unsigned int);
 
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00269334(int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002c415c(*(unsigned int *)(param_1 + 0x28));
+  asdMemFree(*(unsigned int *)(param_1 + 0x28));
   return;
 }
 

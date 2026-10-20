@@ -1,30 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002eea94` (_code @ 0x2eea94, 0x22 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the Thumb literal-pool alignment pad differs in fdiff (retail lists it as code `movs r0, r0`, the build as data `.short 0x0000`); the bytes are the same. */
+/* Replaces the owned 16-bit string: frees the old one, allocates a new empty one of the given capacity. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e98d4(void);
+typedef struct {
+    u8 unk00[4];   /* 0x00 */
+    u16 *buffer;   /* 0x04 */
+} StringHolder;
 
-extern unsigned char DAT_0053a204; /* 0x53a204 */
+extern u8 DAT_0053a204;
 
-extern unsigned short *FUN_002e786a(unsigned int, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002e98d4. */
+void FUN_002e98d4(void);
+u16 *FUN_002e786a(u32 capacity, u8 *tag, u32 flags);
 
-
-void FUN_002eea94(int param_1,unsigned int param_2)
-
+void FUN_002eea94(StringHolder *self, u32 capacity)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short *puVar1;
-  
-  if (*(int *)(param_1 + 4) != 0) {
-    FUN_002e98d4();
-  }
-  puVar1 = (unsigned short *)FUN_002e786a(param_2,&DAT_0053a204,0);
-  *(unsigned short **)(param_1 + 4) = puVar1;
-  *puVar1 = 0;
-  return;
+    u16 *buffer;
+
+    if (self->buffer != NULL) {
+        FUN_002e98d4();
+    }
+    buffer = FUN_002e786a(capacity, &DAT_0053a204, 0);
+    self->buffer = buffer;
+    *buffer = 0;
 }
 
 } /* extern "C" */

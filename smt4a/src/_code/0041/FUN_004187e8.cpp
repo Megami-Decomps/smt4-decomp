@@ -1,30 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004187e8` (_code @ 0x4187e8, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_001ab940(void);
+typedef struct Slot {
+    /* 0x00 */ u8 state;      /* bit 1: configurable */
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ u8 flags;      /* bit 2: enabled */
+    /* 0x03 */ u8 unk03;
+} Slot;
 
+typedef struct SlotTable {
+    /* 0x000 */ u8 unk000[0x2A0];
+    /* 0x2A0 */ Slot slots[1];
+} SlotTable;
 
-void FUN_004187e8(int param_1,int param_2)
+SlotTable *FUN_001ab940(int index);
 
+/* Sets or clears the enabled flag (bit 2) of slot `index`, if the slot is configurable. */
+void FUN_004187e8(int index, int enabled)
 {
-  int temp_v0;
-  unsigned char temp_v1;
-  
-  temp_v0 = FUN_001ab940();
-  temp_v0 = temp_v0 + param_1 * 4;
-  if ((*(unsigned char *)(temp_v0 + 0x2a0) & 2) != 0) {
-    if (param_2 != 0) {
-      temp_v1 = *(unsigned char *)(temp_v0 + 0x2a2) | 4;
+    Slot *slot = &FUN_001ab940(index)->slots[index];
+
+    if ((slot->state & 2) != 0) {
+        u8 flags;
+
+        if (enabled != 0) {
+            flags = slot->flags | 4;
+        } else {
+            flags = slot->flags & ~4;
+        }
+        slot->flags = flags;
     }
-    else {
-      temp_v1 = *(unsigned char *)(temp_v0 + 0x2a2) & 0xfb;
-    }
-    *(unsigned char *)(temp_v0 + 0x2a2) = temp_v1;
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -10,7 +10,7 @@ int FUN_0040a3c8(unsigned int);
 int FUN_0040a5e4(unsigned int);
 
 extern int FUN_001bcea0(void);
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_0040a378. */
 /* Supplied declaration required: FUN_0040a3a0. */
 /* Supplied declaration required: FUN_0040a3c8. */
@@ -26,8 +26,8 @@ unsigned int FUN_002c5214(void)
   int temp_v2;
   unsigned int *puVar4;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
   temp_v0 = temp_v0 & 0xff;
   temp_v2 = FUN_001bcea0();
   puVar4 = (unsigned int *)(temp_v2 + temp_v0 * 4);

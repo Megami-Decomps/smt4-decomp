@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0013ebd8(void);
-int FUN_001884b0(unsigned int);
+int vcallSlot12IfValid(unsigned int);
 int FUN_00195fc8(void);
 int FUN_0032ca54(int);
 
@@ -16,7 +16,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0013ebd8. */
-/* Supplied declaration required: FUN_001884b0. */
+/* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: FUN_00195fc8. */
 /* Supplied declaration required: FUN_0032ca54. */
 
@@ -38,7 +38,7 @@ int FUN_002e0c80(int *param_1,unsigned int param_2,unsigned int param_3,unsigned
       if ((param_1[2] & 1U) != 0) {
         FUN_00195fc8();
       }
-      FUN_001884b0(param_1[2] & 0xfffffffe);
+      vcallSlot12IfValid(param_1[2] & 0xfffffffe);
       param_1[2] = 0;
     }
     return temp_v0;

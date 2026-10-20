@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002a3d58(int);
-int FUN_002c32a0(int, int, int, int, int, int);
-int FUN_002c4938(...);
+int memAlloc(int, int, int, int, int, int);
+int memClear(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,8 +14,8 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_002a3d58. */
-/* Supplied declaration required: FUN_002c32a0. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: memClear. */
 
 
 int FUN_0025c870(void)
@@ -25,9 +25,9 @@ int FUN_0025c870(void)
   int temp_v0;
   
   temp_v0 = 0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0xc0,0x10,1);
-  FUN_002c4938();
-  FUN_002c4938(temp_v0,0x90);
+  memAlloc(0x10000,0x100,0,0xc0,0x10,1);
+  memClear();
+  memClear(temp_v0,0x90);
   *(unsigned int *)(temp_v0 + 0x84) = 1;
   *(unsigned char *)(temp_v0 + 0x88) = 8;
   *(unsigned char *)(temp_v0 + 0x89) = 0;

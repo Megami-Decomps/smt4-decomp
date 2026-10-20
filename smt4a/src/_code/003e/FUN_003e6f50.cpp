@@ -21,7 +21,7 @@ typedef struct {
 
 extern int DAT_00573808; /* 0x573808 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_0014af84(void);
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
@@ -126,7 +126,7 @@ unsigned int * FUN_003e6f50(unsigned int *param_1)
     if (temp_v2 == 2) {
       FUN_0035b304();
       FUN_0037b450();
-      temp_v2 = FUN_0014aa78();
+      temp_v2 = btlGetMainState();
       if (*(int *)(temp_v2 + 0x4c80) != 1) {
         *param_1 = 9;
         puVar4 = (unsigned int *)FUN_003e71a8(param_1);

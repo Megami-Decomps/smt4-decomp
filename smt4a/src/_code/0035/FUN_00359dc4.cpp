@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_00182054(void);
 int FUN_00275bc8(int, unsigned int);
 int FUN_00281720(...);
@@ -21,7 +21,7 @@ int FUN_003a7a88(int, int);
 int FUN_003e5810(unsigned int, int);
 int FUN_003e5c68(unsigned int, int);
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern unsigned int FUN_001801a4(void);
 /* Supplied declaration required: FUN_00182054. */
 /* Supplied declaration required: FUN_00275bc8. */
@@ -103,7 +103,7 @@ void FUN_00359dc4(int param_1)
             FUN_0037b578(temp_v1,0xf);
           }
           if (*(char *)(param_1 + 0x113) != '\0') {
-            FUN_001681cc(0xe4);
+            sysPlaySe(0xe4);
             *(unsigned int *)(param_1 + 0xf8) = 2;
           }
           else {

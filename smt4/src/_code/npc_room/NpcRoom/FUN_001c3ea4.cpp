@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0026dcd4(int);
 
-extern int DAT_0044d198; /* 0x44d198 */
+extern int g_npcRoom; /* 0x44d198 */
 
 /* Supplied declaration required: FUN_0026dcd4. */
 
@@ -21,7 +21,7 @@ void FUN_001c3ea4(unsigned short *param_1)
   else {
     FUN_0026dcd4(0);
   }
-  *(unsigned char *)(DAT_0044d198 + 0xe8) = param_1 == (unsigned short *)0x0;
+  *(unsigned char *)(g_npcRoom + 0xe8) = param_1 == (unsigned short *)0x0;
   return;
 }
 

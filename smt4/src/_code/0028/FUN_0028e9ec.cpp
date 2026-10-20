@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00292960(char *, int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_0029f848(int, int, int, int, int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -17,9 +17,9 @@ typedef struct {
 extern int FUN_0023dcb8(void);
 extern int FUN_00292914(int);
 /* Supplied declaration required: FUN_00292960. */
-extern int FUN_00292f28(void);
+extern int padIsButtonDown(void);
 extern int FUN_00293988(void);
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_0029f848. */
 extern int FUN_002a8740(int);
 extern int FUN_002a8764(void);
@@ -44,13 +44,13 @@ void FUN_0028e9ec(int param_1)
     FUN_00292960(pcVar1,1);
     if (((((pcVar1 != (char *)0x0) && (pcVar1[1] == '\x01')) &&
          ((*(short *)(pcVar1 + 0x5c) == 0 || (temp_v0 = FUN_002c09d0(), temp_v0 != 0)))) &&
-        ((*(short *)(pcVar1 + 0x5e) == 0 || (temp_v0 = FUN_00292f28(), temp_v0 != 0)))) &&
+        ((*(short *)(pcVar1 + 0x5e) == 0 || (temp_v0 = padIsButtonDown(), temp_v0 != 0)))) &&
        ((pcVar1[0x5b] == '\0' ||
-        (temp_v0 = FUN_002939f4(), (*(unsigned int *)(temp_v0 + 0x44a0) & 0x40000) == 0)))) {
+        (temp_v0 = btlGetMainState(), (*(unsigned int *)(temp_v0 + 0x44a0) & 0x40000) == 0)))) {
       if (*pcVar1 == '\x02') {
-        FUN_002939f4();
+        btlGetMainState();
         temp_v0 = FUN_00293988();
-        if ((temp_v0 != 0) && (temp_v0 = FUN_002939f4(), (*(unsigned int *)(temp_v0 + 0x44a0) & 0x40000) == 0)) {
+        if ((temp_v0 != 0) && (temp_v0 = btlGetMainState(), (*(unsigned int *)(temp_v0 + 0x44a0) & 0x40000) == 0)) {
           if ((*pcVar1 == '\x06' || *pcVar1 == '\b') || (temp_v0 = FUN_0023dcb8(), temp_v0 == 0)) {
             temp_v3 = temp_v3 + 1;
           }
@@ -77,9 +77,9 @@ void FUN_0028e9ec(int param_1)
               FUN_00292960(pcVar1,0);
               if ((((pcVar1 != (char *)0x0) && (pcVar1[1] == '\x01')) &&
                   ((*(short *)(pcVar1 + 0x5c) == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 != 0)))) &&
-                 (((*(short *)(pcVar1 + 0x5e) == 0 || (temp_v1 = FUN_00292f28(), temp_v1 != 0)) &&
+                 (((*(short *)(pcVar1 + 0x5e) == 0 || (temp_v1 = padIsButtonDown(), temp_v1 != 0)) &&
                   ((pcVar1[0x5b] == '\0' ||
-                   (temp_v1 = FUN_002939f4(), (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) == 0)))))) {
+                   (temp_v1 = btlGetMainState(), (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) == 0)))))) {
                 if (*pcVar1 != '\x05') {
                   if ((*pcVar1 != '\x03') || (temp_v1 = FUN_00292914(temp_v0), temp_v1 != 0)) {
                     temp_v4 = temp_v4 + 1;

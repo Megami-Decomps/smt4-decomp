@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002b2368(int);
 int FUN_002c3f5c(...);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int FUN_002c415c(unsigned int);
+int asdMemFree(unsigned int);
 int FUN_002c526c(void);
 int software_interrupt(int);
 
@@ -24,7 +24,7 @@ extern int DAT_0044d134; /* 0x44d134 */
 /* Supplied declaration required: FUN_002b2368. */
 /* Supplied declaration required: FUN_002c3f5c. */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c526c. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
@@ -62,7 +62,7 @@ void FUN_0034e140(unsigned int *param_1)
       FUN_002b2368(temp_v0);
     }
     DAT_0044d134 = 0;
-    FUN_002c415c(DAT_0044d130);
+    asdMemFree(DAT_0044d130);
     DAT_0044d130 = 0;
     param_1[0x12] = 0xffffffff;
     if (param_1[0x13] != 0) {

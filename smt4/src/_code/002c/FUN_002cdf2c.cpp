@@ -44,9 +44,9 @@ extern int FUN_0029ebac(int, unsigned int);
 extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b63ac. */
-extern int FUN_002b879c(void);
+extern int lmapMainIsRunning(void);
 extern int FUN_0033361c(void);
-extern int MapMode_IsBusy(void);
+extern int mapMainIsBusy(void);
 
 
 /* WARNING: Removing unreachable block (ram,0x002cdff4) */
@@ -86,8 +86,8 @@ void FUN_002cdf2c(int param_1)
   FUN_00296774(temp_v2,0);
   FUN_00269dc8();
   FUN_00203640(*(unsigned short *)(param_1 + 0x38));
-  temp_v4 = MapMode_IsBusy();
-  if ((temp_v4 != 0) || (temp_v4 = FUN_002b879c(), temp_v4 != 0)) {
+  temp_v4 = mapMainIsBusy();
+  if ((temp_v4 != 0) || (temp_v4 = lmapMainIsRunning(), temp_v4 != 0)) {
     FUN_0026f9b4();
     FUN_0029c3b0(0xf);
     FUN_0027581c();

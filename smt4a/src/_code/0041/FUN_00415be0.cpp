@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016007c(...);
+int asdOperatorNew(...);
 int FUN_00415cd8(void);
 
 typedef int romwright_code(...);
@@ -12,7 +12,7 @@ extern unsigned char DAT_00557b40; /* 0x557b40 */
 extern unsigned char DAT_00557cd8; /* 0x557cd8 */
 extern unsigned char DAT_00557d30; /* 0x557d30 */
 
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00415cd8. */
 
 
@@ -30,7 +30,7 @@ unsigned int * FUN_00415be0(int param_1,unsigned int param_2,int param_3)
   temp_v1 = 0;
   if (param_3 != 0) {
     piVar1 = (int *)0xc;
-    FUN_0016007c();
+    asdOperatorNew();
     if (piVar1 != (int *)0x0) {
       puVar3 = &DAT_00557d30;
       piVar1[2] = temp_v0;
@@ -40,7 +40,7 @@ unsigned int * FUN_00415be0(int param_1,unsigned int param_2,int param_3)
   }
   else {
     piVar1 = (int *)0x20;
-    FUN_0016007c();
+    asdOperatorNew();
     if (piVar1 != (int *)0x0) {
       puVar3 = &DAT_00557b40;
       piVar1[2] = temp_v1;
@@ -49,7 +49,7 @@ unsigned int * FUN_00415be0(int param_1,unsigned int param_2,int param_3)
     }
   }
   puVar2 = (unsigned int *)0x68;
-  FUN_0016007c(0x68,param_1);
+  asdOperatorNew(0x68,param_1);
   if (puVar2 != (unsigned int *)0x0) {
     puVar2[1] = 0;
     puVar2[2] = 0;

@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0025c2d0(int, int);
-int FUN_002c415c(int);
-int FUN_002c43b4(unsigned int, int);
+int asdMemFree(int);
+int jobStop(unsigned int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,9 +17,9 @@ extern int DAT_00435ce8; /* 0x435ce8 */
 extern int DAT_00439ca8; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_0025c2d0. */
-extern int FUN_002c08f0(void);
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+extern int jobGetWork(void);
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 
 
 void FUN_002c9edc(void)
@@ -32,7 +32,7 @@ void FUN_002c9edc(void)
   int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   if (DAT_00439ca8 != 0) {
     FUN_0025c2d0(DAT_00439ca8,0);
   }
@@ -66,10 +66,10 @@ void FUN_002c9edc(void)
       }
     }
     *(unsigned int *)(temp_v0 + 0x44a8) = *(unsigned int *)(temp_v0 + 0x44a8) & 0xfff7ffff;
-    FUN_002c415c(DAT_00435ce8);
+    asdMemFree(DAT_00435ce8);
     DAT_00435ce8 = 0;
   }
-  FUN_002c43b4(*(unsigned int *)(temp_v0 + 0x58),0);
+  jobStop(*(unsigned int *)(temp_v0 + 0x58),0);
   return;
 }
 

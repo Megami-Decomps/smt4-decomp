@@ -18,8 +18,8 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_00447e28; /* 0x447e28 */
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern int g_mapMain; /* 0x447e28 */
+extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_002646d4. */
 /* Supplied declaration required: FUN_00277bdc. */
@@ -40,8 +40,8 @@ void FUN_00273b78(void)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = DAT_00447e28;
-  if ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x26)) == '\0') {
+  temp_v0 = g_mapMain;
+  if ((*(signed char *)((unsigned char *)&g_gameState + 0x26)) == '\0') {
     FUN_00281784();
     temp_v3 = *(unsigned int *)(temp_v0 + 0x2c);
     temp_v2 = *(unsigned int *)(temp_v0 + 0x30);

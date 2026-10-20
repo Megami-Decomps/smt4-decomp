@@ -34,7 +34,7 @@ int FUN_00100388(...);
 int FUN_00157558(int);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
@@ -103,7 +103,7 @@ extern unsigned char LAB_0022da10; /* 0x22da10 */
 extern unsigned char LAB_0022da18; /* 0x22da18 */
 extern unsigned char LAB_0022e370; /* 0x22e370 */
 extern int DAT_00588fd4; /* 0x588fd4 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
@@ -118,7 +118,7 @@ extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00164168. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: FUN_001676b0. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001689e8. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
@@ -217,8 +217,8 @@ unsigned char FUN_0022b2d4(void)
   if (*(char *)(DAT_00588fd4 + 0x2012) == '\0') {
     return 0;
   }
-  FUN_00157558(DAT_0059dbb4);
-  temp_v4 = DAT_0059dbb4;
+  FUN_00157558(g_renderCtx);
+  temp_v4 = g_renderCtx;
   temp_v3 = FUN_001692ac(1,0);
   piVar19 = (int *)(temp_v4 + 0x1258);
   temp_v7 = *piVar19;
@@ -232,12 +232,12 @@ unsigned char FUN_0022b2d4(void)
   temp_v22 = 0;
   if (*(char *)(temp_v2 + 0x2018) != '\x03' && *(char *)(temp_v2 + 0x2018) != '\n') {
     FUN_00230a50(temp_v27 + 5,temp_v27 + 6,10);
-    FUN_001677c0();
+    efctSetSpeed();
     temp_v24 = 1.80768e-43f;
     FUN_001835b4(2,0x12,0,temp_v27[5],temp_v27[6]);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_00230a50(temp_v27 + 5,temp_v27 + 6,8);
-    FUN_001677c0();
+    efctSetSpeed();
     temp_v24 = 1.80768e-43f;
     FUN_001835b4(2,0x12,1,temp_v27[5],temp_v27[6]);
     temp_v4 = temp_v28;
@@ -289,9 +289,9 @@ unsigned char FUN_0022b2d4(void)
         }
       }
     }
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_00230a50(temp_v27 + 5,temp_v27 + 6,9);
-    FUN_001677c0();
+    efctSetSpeed();
     temp_v24 = 1.80768e-43f;
     FUN_001835b4(2,0x12,2,temp_v27[5],temp_v27[6]);
   }
@@ -313,7 +313,7 @@ joined_r0x0022b6e4:
         if (*(int *)(temp_v28 + 0x1370) == 7) {
 LAB_0022b750:
           FUN_00230a50(temp_v27 + 5,temp_v27 + 6,9);
-          FUN_001677c0();
+          efctSetSpeed();
           temp_v24 = 1.80768e-43f;
           FUN_001835b4(2,0x12,3,temp_v27[5],temp_v27[6]);
           temp_v24 = 1.80768e-43f;
@@ -380,11 +380,11 @@ LAB_0022b750:
         temp_v10 = *(unsigned int *)(temp_v28 + 0x1930);
         if (*(char *)(temp_v2 + 0x2017) == '\r' || *(char *)(temp_v2 + 0x2017) == '\v') {
           temp_v10 = 0x9b9b9bff;
-          FUN_001677c0();
+          efctSetSpeed();
         }
         if (*(char *)(temp_v2 + 0x2017) == '\x0e') {
           temp_v10 = 0xff;
-          FUN_001677c0();
+          efctSetSpeed();
         }
         temp_v4 = temp_v28;
         temp_v0 = *(char *)(temp_v2 + 0x2018);
@@ -424,7 +424,7 @@ LAB_0022b9b8:
             FUN_003fabfc(*(unsigned int *)(temp_v2 + 0x2028),0,&temp_v24,temp_v10 | 0xff,0);
           }
         }
-        FUN_001677c0();
+        efctSetSpeed();
         if (*(char *)(temp_v2 + 0x2017) == '\x0e') {
           temp_v24 = 1.97583e-43f;
           FUN_00164b5c(2,0x12,0x1a,temp_v27[5],temp_v27[6]);
@@ -436,7 +436,7 @@ LAB_0022b9b8:
   if (((*(char *)(temp_v2 + 0x2018) != '\t') && (*(short *)(temp_v28 + 0x1390) != 0)) &&
      ((*(char *)(temp_v2 + 0x2011) != '\0' || (*(char *)(temp_v2 + 0x2018) != '\n')))) {
     FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0xf);
-    FUN_001677c0();
+    efctSetSpeed();
     temp_v24 = 3.0268e-43f;
     if (*(unsigned short *)(temp_v4 + 0x1392) >= 100) {
       FUN_001835b4(2,0x12,0x129,temp_v27[5],temp_v27[6]);
@@ -457,7 +457,7 @@ LAB_0022b9b8:
       FUN_00164b5c(2,0x12,0,temp_v27[5],temp_v27[6]);
     }
     FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x10);
-    FUN_001677c0();
+    efctSetSpeed();
     temp_v24 = 3.0268e-43f;
     FUN_001835b4(2,0x12,0x2d,temp_v27[5],temp_v27[6]);
     temp_v24 = 3.0268e-43f;
@@ -469,7 +469,7 @@ LAB_0022b9b8:
       FUN_001835b4(2,0x12,0x39,temp_v27[5],temp_v27[6]);
     }
     FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x11);
-    FUN_001677c0();
+    efctSetSpeed();
     if (*(char *)(temp_v2 + 0x2017) != '\x04') {
       temp_v24 = 3.0268e-43f;
       FUN_001835b4(2,0x12,0x4a,temp_v27[5],temp_v27[6]);
@@ -477,7 +477,7 @@ LAB_0022b9b8:
         temp_v4 = 0;
         do {
           FUN_00230a50(temp_v27 + 5,temp_v27 + 6,temp_v4 + 0x12);
-          FUN_001677c0();
+          efctSetSpeed();
           temp_v3 = FUN_001834a4(0x12,temp_v4 + 0x7b);
           temp_v24 = 3.0268e-43f;
           FUN_001835b4(2,0x12,0x68,temp_v27[5],temp_v27[6] + *(short *)(temp_v3 + 10));
@@ -494,7 +494,7 @@ LAB_0022b9b8:
       }
     }
     FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x17);
-    FUN_001677c0();
+    efctSetSpeed();
     if ((*(char *)(temp_v2 + 0x2011) != '\0') && (*(char *)(temp_v2 + 0x2017) == '\0')) {
       temp_v24 = 3.0268e-43f;
       FUN_001835b4(2,0x12,0x8a,temp_v27[5],temp_v27[6]);
@@ -607,7 +607,7 @@ LAB_0022b9b8:
         }
       }
       FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0xf);
-      FUN_001677c0();
+      efctSetSpeed();
       puVar22 = (unsigned char *)(unsigned int)*(unsigned short *)(temp_v4 + 0x1392);
       FUN_00184e64(0xffffffff);
       if (*(char *)(temp_v2 + 0x2013) != '\0') {
@@ -645,7 +645,7 @@ LAB_0022b9b8:
       }
       FUN_00183bb0();
       FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0xf);
-      FUN_001677c0();
+      efctSetSpeed();
       temp_v3 = temp_v28;
       temp_v0 = *(char *)(temp_v2 + 0x2017);
       if ((temp_v0 != '\x0e' && temp_v0 != '\a') && temp_v0 != '\x10') {
@@ -678,7 +678,7 @@ LAB_0022b9b8:
       FUN_0014af84();
       FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x10);
       temp_v22 = (unsigned long long)temp_v10 << 0x20;
-      FUN_001677c0();
+      efctSetSpeed();
       temp_v3 = temp_v28;
       puVar8 = *(unsigned char **)(temp_v28 + 0x13a0);
       puVar7 = *(unsigned char **)(temp_v28 + 0x1398);
@@ -859,7 +859,7 @@ LAB_0022b9b8:
       temp_v27[0] = (unsigned char *)0x46;
       FUN_00183788(puVar22,puVar8,*(unsigned int *)(temp_v2 + 0x201c),0,0x12);
       if (*(int *)(temp_v2 + 0x201c) != 0) {
-        FUN_001677c0();
+        efctSetSpeed();
         temp_v27[3] = (unsigned char *)0xde;
         temp_v27[4] = (unsigned char *)0x1;
         temp_v24 = 9.3887e-44f;
@@ -869,7 +869,7 @@ LAB_0022b9b8:
         temp_v27[1] = temp_v27[5];
         temp_v27[2] = temp_v27[6];
         FUN_00183788(puVar22,puVar8,*(unsigned int *)(temp_v2 + 0x201c),0,0x12);
-        FUN_001677c0();
+        efctSetSpeed();
       }
       if ((*(char *)(temp_v2 + 0x2013) != '\0') &&
          (puVar22 = (unsigned char *)
@@ -1047,7 +1047,7 @@ LAB_0022b9b8:
         temp_v27[2] = (unsigned char *)0xdd;
         FUN_0025e704(puVar22,puVar8,*(unsigned int *)(temp_v2 + 0x2020),0,0x12);
         if (*(int *)(temp_v2 + 0x2020) != 0) {
-          FUN_001677c0();
+          efctSetSpeed();
           temp_v25 = (unsigned char *)0x49;
           temp_v24 = 9.94922e-44f;
           temp_v27[2] = (unsigned char *)0xde;
@@ -1056,7 +1056,7 @@ LAB_0022b9b8:
           temp_v27[0] = temp_v27[5];
           temp_v27[1] = temp_v27[6];
           FUN_0025e704(puVar22,puVar8,*(unsigned int *)(temp_v2 + 0x2020),0,0x12);
-          FUN_001677c0();
+          efctSetSpeed();
         }
         if ((*(char *)(temp_v2 + 0x2013) != '\0') &&
            (puVar22 = (unsigned char *)
@@ -1097,7 +1097,7 @@ LAB_0022b9b8:
         }
         if (*(char *)(temp_v2 + 0x2017) != '\x04') {
           FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x11);
-          FUN_001677c0();
+          efctSetSpeed();
           FUN_00183bb0();
           temp_v7 = 0;
           do {
@@ -1172,7 +1172,7 @@ LAB_0022b9b8:
       }
       temp_v22 = (unsigned long long)temp_v10 << 0x20;
       FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x17);
-      FUN_001677c0();
+      efctSetSpeed();
       FUN_00184e64(0xffffffff);
       if ((*(char *)(temp_v2 + 0x2011) != '\0') && (*(char *)(temp_v2 + 0x2017) == '\0')) {
         puVar22 = (unsigned char *)(int)*(short *)(temp_v4 + 0x13a8);
@@ -1397,7 +1397,7 @@ LAB_0022b9b8:
       goto LAB_0022dd30;
     }
     FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0xe);
-    FUN_001677c0();
+    efctSetSpeed();
     temp_v24 = 3.09687e-43f;
     FUN_001835b4(2,0x12,0xc2,temp_v27[5],temp_v27[6]);
     temp_v10 = (unsigned int)*(unsigned short *)(temp_v2 + 0x20ae);
@@ -1424,18 +1424,18 @@ LAB_0022e040:
       temp_v26 = (unsigned char *)0x0;
       FUN_0019d880();
       temp_v22 = (unsigned long long)(unsigned int)temp_v21 << 0x20;
-      FUN_001677c0();
+      efctSetSpeed();
       FUN_00230a50(&temp_v25,&temp_v26,0xc);
       temp_v24 = 2.81661e-43f;
       FUN_001835b4(2,0x12,0xbb,temp_v25,temp_v26);
-      FUN_001677c0();
+      efctSetSpeed();
       temp_v24 = 2.88667e-43f;
       FUN_001835b4(2,0x12,0xbd,temp_v25,temp_v26);
       temp_v24 = 2.88667e-43f;
       FUN_001835b4(2,0x12,0xbe,temp_v25,temp_v26);
       temp_v24 = 2.88667e-43f;
       FUN_001835b4(2,0x12,0xc5,temp_v25,temp_v26);
-      FUN_001677c0();
+      efctSetSpeed();
       temp_v6 = 0xbc;
       if (temp_v4 >= 100) {
         temp_v3 = 3;
@@ -1478,7 +1478,7 @@ LAB_0022e040:
           temp_v4 = temp_v4 + 1;
         } while (temp_v4 < temp_v3);
       }
-      FUN_001677c0();
+      efctSetSpeed();
     }
     temp_v4 = DAT_00588fd4;
     temp_v20 = (float)((unsigned long long)temp_v23 >> 0x20);
@@ -1492,7 +1492,7 @@ LAB_0022e040:
       temp_v26 = (unsigned char *)0x0;
       FUN_00230a50(&temp_v25,&temp_v26,0xf);
       temp_v22 = (unsigned long long)(unsigned int)temp_v21 << 0x20;
-      FUN_001677c0();
+      efctSetSpeed();
       temp_v3 = 0;
       do {
         temp_v24 = 1.76564e-43f;
@@ -1518,11 +1518,11 @@ LAB_0022e040:
   }
 LAB_0022e46c:
   if (*(char *)(temp_v2 + 0x20ad) != '\0') {
-    FUN_001879d0(DAT_0059dbb4);
+    FUN_001879d0(g_renderCtx);
     temp_v27[5] = (unsigned char *)(int)temp_v20;
     if (temp_v21 < *(float *)(temp_v28 + 0x294)) {
-      FUN_001677c0();
-      temp_v2 = DAT_0059dbb4;
+      efctSetSpeed();
+      temp_v2 = g_renderCtx;
       temp_v4 = FUN_00169294(6,1,0);
       piVar19 = (int *)(temp_v2 + 0x12b8);
       temp_v3 = piVar19[*piVar19 + 2];
@@ -1533,7 +1533,7 @@ LAB_0022e46c:
       }
       temp_v24 = 3.09687e-43f;
       FUN_001835b4(2,0x12,0xc6,temp_v27[5],0);
-      temp_v2 = DAT_0059dbb4;
+      temp_v2 = g_renderCtx;
       temp_v4 = FUN_00169294(6,7,0);
       piVar19 = (int *)(temp_v2 + 0x12b8);
       temp_v3 = piVar19[*piVar19 + 2];
@@ -1542,11 +1542,11 @@ LAB_0022e46c:
         (**(romwright_code **)(temp_v2 + 0x12d4))();
         *(unsigned char *)(temp_v2 + 0x12d0) = 0;
       }
-      FUN_001677c0();
+      efctSetSpeed();
     }
     if (temp_v21 < *(float *)(temp_v28 + 800)) {
-      FUN_001677c0();
-      temp_v2 = DAT_0059dbb4;
+      efctSetSpeed();
+      temp_v2 = g_renderCtx;
       temp_v4 = FUN_00169294(6,1,0);
       piVar19 = (int *)(temp_v2 + 0x12b8);
       temp_v3 = piVar19[*piVar19 + 2];
@@ -1557,7 +1557,7 @@ LAB_0022e46c:
       }
       temp_v24 = 3.09687e-43f;
       FUN_001835b4(2,0x12,0xc6,temp_v27[5],0);
-      temp_v2 = DAT_0059dbb4;
+      temp_v2 = g_renderCtx;
       temp_v4 = FUN_00169294(6,7,0);
       piVar19 = (int *)(temp_v2 + 0x12b8);
       temp_v3 = piVar19[*piVar19 + 2];
@@ -1566,12 +1566,12 @@ LAB_0022e46c:
         (**(romwright_code **)(temp_v2 + 0x12d4))();
         *(unsigned char *)(temp_v2 + 0x12d0) = 0;
       }
-      FUN_001677c0();
+      efctSetSpeed();
     }
   }
-  FUN_001677c0();
-  temp_v2 = DAT_0059dbb4;
-  piVar19 = (int *)(DAT_0059dbb4 + 0x1258);
+  efctSetSpeed();
+  temp_v2 = g_renderCtx;
+  piVar19 = (int *)(g_renderCtx + 0x1258);
   temp_v4 = *piVar19;
   temp_v3 = piVar19[temp_v4 + 2];
   *piVar19 = temp_v4 - 1;
@@ -1579,7 +1579,7 @@ LAB_0022e46c:
     (**(romwright_code **)(temp_v2 + 0x1274))();
     *(unsigned char *)(temp_v2 + 0x1270) = 0;
   }
-  temp_v2 = DAT_0059dbb4;
+  temp_v2 = g_renderCtx;
   temp_v4 = FUN_00169294(6,7,0);
   piVar19 = (int *)(temp_v2 + 0x12b8);
   temp_v3 = piVar19[*piVar19 + 2];
@@ -1588,8 +1588,8 @@ LAB_0022e46c:
     (**(romwright_code **)(temp_v2 + 0x12d4))();
     *(unsigned char *)(temp_v2 + 0x12d0) = 0;
   }
-  FUN_0016c560(DAT_0059dbb4);
-  FUN_0016c410(DAT_0059dbb4);
+  FUN_0016c560(g_renderCtx);
+  FUN_0016c410(g_renderCtx);
   return 0;
 LAB_0022dbfc:
   if (((unsigned int)*(unsigned short *)(temp_v4 + 0x13ac) & (1 << (temp_v10 & 0xff))) != 0) {

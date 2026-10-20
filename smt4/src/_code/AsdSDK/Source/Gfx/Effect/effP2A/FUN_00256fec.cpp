@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001d22a0(void);
-int FUN_002c32a0(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_001d22a0. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 
 
 int * FUN_00256fec(int *param_1)
@@ -26,7 +26,7 @@ int * FUN_00256fec(int *param_1)
   temp_v0 = *param_1;
   *(int *)(temp_v0 + 0x10) = *(int *)(temp_v0 + 0x10) + 1;
   piVar1 = (int *)0x10000;
-  FUN_002c32a0(0x10000,0x100,0,*(int *)(temp_v0 + 8) * 0x14 + 0x18,0x10,1);
+  memAlloc(0x10000,0x100,0,*(int *)(temp_v0 + 8) * 0x14 + 0x18,0x10,1);
   piVar1[4] = (int)(piVar1 + 6);
   *piVar1 = temp_v0;
   FUN_001d22a0();

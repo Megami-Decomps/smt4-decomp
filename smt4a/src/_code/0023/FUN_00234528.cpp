@@ -26,7 +26,7 @@ extern unsigned char DAT_00561353; /* 0x561353 */
 extern unsigned char DAT_00561366; /* 0x561366 */
 extern unsigned char DAT_00561373; /* 0x561373 */
 extern unsigned char DAT_00561384; /* 0x561384 */
-extern int *DAT_0058104c; /* 0x58104c */
+extern int *g_popupState; /* 0x58104c */
 
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_0014bef4(unsigned int);
@@ -57,11 +57,11 @@ unsigned int FUN_00234528(int param_1,int param_2)
   unsigned char temp_v6 [84];
   
   FUN_00152f44();
-  if ((((*DAT_0058104c == 0) && (temp_v0 = FUN_0015688c(), temp_v0 != 0)) &&
+  if ((((*g_popupState == 0) && (temp_v0 = FUN_0015688c(), temp_v0 != 0)) &&
       ((temp_v1 = FUN_0018719c(0x8d), temp_v1 == 0 ||
        ((temp_v1 = FUN_0018719c(0xc2), temp_v1 != 0 || (*(short *)(temp_v0 + 300) != 0xb1)))))) &&
      ((temp_v1 = FUN_0018719c(0x1a2), temp_v1 == 0 || (temp_v1 = FUN_0014bef4(99), temp_v1 + 1 >= 0x33)))) {
-    piVar1 = DAT_0058104c;
+    piVar1 = g_popupState;
     temp_v2 = 0xc;
     temp_v3[0] = &DAT_00561366;
     temp_v3[1] = &DAT_00561366;
@@ -81,15 +81,15 @@ unsigned int FUN_00234528(int param_1,int param_2)
     temp_v4 = &DAT_00561373;
     puStack_74 = &DAT_005612f2;
     puStack_70 = &DAT_00561325;
-    *DAT_0058104c = 8;
+    *g_popupState = 8;
     piVar1[1] = 0;
     temp_v1 = FUN_002d8b58(temp_v2,*(unsigned short *)(temp_v0 + 300));
-    piVar1 = DAT_0058104c;
-    DAT_0058104c[5] = temp_v1;
+    piVar1 = g_popupState;
+    g_popupState[5] = temp_v1;
     piVar1[6] = (unsigned int)*(unsigned short *)(temp_v0 + 300);
     rt_memcpy(temp_v6,temp_v1,0x48);
     FUN_00100388((int)piVar1 + 0x25,temp_v6,temp_v3[param_1]);
-    DAT_0058104c[5] = (int)DAT_0058104c + 0x25;
+    g_popupState[5] = (int)g_popupState + 0x25;
     return 1;
   }
   return 0;

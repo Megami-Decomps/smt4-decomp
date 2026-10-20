@@ -16,7 +16,7 @@ int FUN_002694f8(...);
 int FUN_00269508(...);
 int FUN_00269694(unsigned int, int, int, int);
 int FUN_002ad314(...);
-int FUN_002bfe28(...);
+int mtx44Copy(...);
 int FUN_002f81b0(...);
 int SBORROW4(int, int);
 int VectorFloatToUnsigned(...);
@@ -135,7 +135,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: FUN_00269694. */
 extern int FUN_00269a58(void);
 /* Supplied declaration required: FUN_002ad314. */
-/* Supplied declaration required: FUN_002bfe28. */
+/* Supplied declaration required: mtx44Copy. */
 extern int FUN_002bfefc(unsigned int *);
 /* Supplied declaration required: FUN_002f81b0. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
@@ -389,7 +389,7 @@ void FUN_001f735c(int param_1)
     DAT_004efdd8 = DAT_004efd9c;
   }
   temp_v18 = (unsigned int)((unsigned long long)temp_v17 >> 0x20);
-  FUN_002bfe28(temp_v34,&DAT_004efd9c);
+  mtx44Copy(temp_v34,&DAT_004efd9c);
   temp_v80 = temp_v18;
   temp_v81 = temp_v18;
   temp_v82 = temp_v18;

@@ -9,17 +9,17 @@ int FUN_0029ede8(unsigned int, unsigned int, unsigned int, int);
 int FUN_002bd06c(unsigned int);
 int FUN_002be650(unsigned int, int);
 int FUN_002bf694(unsigned char [132], unsigned int);
-int FUN_002c4938(unsigned char [132], int);
+int memClear(unsigned char [132], int);
 
 extern unsigned int FUN_0028e934(int, unsigned int);
 /* Supplied declaration required: FUN_00295660. */
-extern unsigned int FUN_00296cc8(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_0029ede8. */
 extern unsigned int FUN_002bce00(unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_00211a30(void)
@@ -31,9 +31,9 @@ unsigned int FUN_00211a30(void)
   unsigned int temp_v2;
   unsigned char temp_v3 [132];
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_00296cc8(1);
-  FUN_002c4938(temp_v3,0x80);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  memClear(temp_v3,0x80);
   switch(temp_v0) {
   case 0:
   case 1:

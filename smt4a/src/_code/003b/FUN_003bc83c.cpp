@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00192550(void);
 int FUN_001aba54(void);
-int FUN_00236038(int);
-int FUN_002e6354(int [21], int);
+int scrGetArg(int);
+int sysMemClear(int [21], int);
 
 extern unsigned int DAT_00570288; /* 0x570288 */
 extern unsigned int DAT_0057028c; /* 0x57028c */
@@ -16,11 +16,11 @@ extern unsigned int DAT_005702a4; /* 0x5702a4 */
 extern unsigned int DAT_005702b0; /* 0x5702b0 */
 extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_001aba54. */
-/* Supplied declaration required: FUN_00236038. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: scrGetArg. */
+/* Supplied declaration required: sysMemClear. */
 
 
 unsigned int FUN_003bc83c(void)
@@ -45,17 +45,17 @@ unsigned int FUN_003bc83c(void)
   int *piVar16;
   int aiStack_70 [21];
   
-  temp_v1 = FUN_00236038(0);
-  temp_v2 = FUN_00236038(1);
-  FUN_002e6354(aiStack_70,0x54);
-  temp_v3 = FUN_0014aa78();
+  temp_v1 = scrGetArg(0);
+  temp_v2 = scrGetArg(1);
+  sysMemClear(aiStack_70,0x54);
+  temp_v3 = btlGetMainState();
   if (temp_v1 != 0) {
     piVar15 = (int *)(temp_v3 + 0x4e58);
     piVar16 = (int *)(temp_v3 + 0x4e5c);
     if (*piVar15 != *piVar16) {
       temp_v1 = 0;
       do {
-        temp_v4 = FUN_0014aa78();
+        temp_v4 = btlGetMainState();
         puVar13 = (unsigned int *)(*(int *)(temp_v4 + 0x1ffc) + temp_v1 * 0x408);
         temp_v5 = *puVar13;
         temp_v6 = puVar13[1];

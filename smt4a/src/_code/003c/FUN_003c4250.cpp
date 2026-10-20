@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00185dd4(...);
 int FUN_0019d880(void);
 
@@ -20,14 +20,14 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_6_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: FUN_0019d880. */
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 void FUN_003c4250(int param_1,int param_2,unsigned int param_3,int param_4,int param_5,int param_6)
@@ -56,7 +56,7 @@ void FUN_003c4250(int param_1,int param_2,unsigned int param_3,int param_4,int p
   temp_v0 = (short)param_5;
   temp_v2 = FUN_001834a4(0x12,0x6e);
   psVar9 = *(short **)(temp_v2 + 0xc);
-  temp_v2 = aeabi_idivmod((int)*psVar9 << 0xc,temp_v8);
+  temp_v2 = __aeabi_idivmod((int)*psVar9 << 0xc,temp_v8);
   temp_v2 = temp_v2 * temp_v0 >> 0xc;
   if ((0 < temp_v0) && (temp_v2 < 1)) {
     temp_v2 = 1;
@@ -66,7 +66,7 @@ void FUN_003c4250(int param_1,int param_2,unsigned int param_3,int param_4,int p
     temp_v1 = (short)param_6;
     temp_v6 = FUN_001834a4(0x12,0x6e);
     psVar9 = *(short **)(temp_v6 + 0xc);
-    temp_v6 = aeabi_idivmod((int)*psVar9 << 0xc,200);
+    temp_v6 = __aeabi_idivmod((int)*psVar9 << 0xc,200);
     temp_v2 = temp_v6 * (short)(temp_v0 - temp_v1) >> 0xc;
     if ((0 < (short)(temp_v0 - temp_v1)) && (temp_v2 < 1)) {
       temp_v2 = 1;
@@ -74,15 +74,15 @@ void FUN_003c4250(int param_1,int param_2,unsigned int param_3,int param_4,int p
     temp_v9 = (int)psVar9[1];
     temp_v6 = FUN_001834a4(0x12,0x76);
     psVar9 = *(short **)(temp_v6 + 0xc);
-    temp_v6 = aeabi_idivmod((int)*psVar9 << 0xc,200);
+    temp_v6 = __aeabi_idivmod((int)*psVar9 << 0xc,200);
     temp_v6 = temp_v6 * temp_v1 >> 0xc;
     if ((0 < temp_v1) && (temp_v6 < 1)) {
       temp_v6 = 1;
     }
     temp_v7 = (int)psVar9[1];
     FUN_00185dd4(2,0x12,0x76,param_2 + temp_v2,param_3,temp_v6,temp_v7,0xdd);
-    FUN_001677c0();
-    temp_v4 = DAT_0059dbb4;
+    efctSetSpeed();
+    temp_v4 = g_renderCtx;
     temp_v3 = FUN_00169294(6,1,0);
     piVar8 = (int *)(temp_v4 + 0x12b8);
     temp_v5 = piVar8[*piVar8 + 2];
@@ -92,7 +92,7 @@ void FUN_003c4250(int param_1,int param_2,unsigned int param_3,int param_4,int p
       *(unsigned char *)(temp_v4 + 0x12d0) = 0;
     }
     FUN_00185dd4(2,0x12,0x77,param_2 + temp_v2,param_3,temp_v6,temp_v7,0xde);
-    temp_v4 = DAT_0059dbb4;
+    temp_v4 = g_renderCtx;
     temp_v3 = FUN_00169294(6,7,0);
     piVar8 = (int *)(temp_v4 + 0x12b8);
     temp_v5 = piVar8[*piVar8 + 2];
@@ -101,14 +101,14 @@ void FUN_003c4250(int param_1,int param_2,unsigned int param_3,int param_4,int p
       (**(romwright_code **)(temp_v4 + 0x12d4))();
       *(unsigned char *)(temp_v4 + 0x12d0) = 0;
     }
-    FUN_001677c0();
+    efctSetSpeed();
   }
   FUN_00185dd4(2,0x12,0x6e,param_2,param_3,temp_v2,temp_v9,0xdd);
   if (param_5 < param_4) {
     temp_v3 = (int)(short)((short)param_4 - temp_v0);
     temp_v4 = FUN_001834a4(0x12,0x6f);
     psVar9 = *(short **)(temp_v4 + 0xc);
-    temp_v4 = aeabi_idivmod((int)*psVar9 << 0xc,200);
+    temp_v4 = __aeabi_idivmod((int)*psVar9 << 0xc,200);
     temp_v4 = temp_v4 * temp_v3 >> 0xc;
     if ((0 < temp_v3) && (temp_v4 < 1)) {
       temp_v4 = 1;
@@ -119,7 +119,7 @@ void FUN_003c4250(int param_1,int param_2,unsigned int param_3,int param_4,int p
     temp_v3 = (int)(short)(temp_v0 - (short)param_4);
     temp_v4 = FUN_001834a4(0x12,0x71);
     psVar9 = *(short **)(temp_v4 + 0xc);
-    temp_v4 = aeabi_idivmod((int)*psVar9 << 0xc,200);
+    temp_v4 = __aeabi_idivmod((int)*psVar9 << 0xc,200);
     temp_v4 = temp_v4 * temp_v3 >> 0xc;
     if ((0 < temp_v3) && (temp_v4 < 1)) {
       temp_v4 = 1;

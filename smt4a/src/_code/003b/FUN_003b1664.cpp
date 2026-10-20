@@ -9,8 +9,8 @@ int FUN_004c8c10(unsigned int, unsigned int, int);
 extern unsigned int DAT_00570de8; /* 0x570de8 */
 extern unsigned int DAT_00570dec; /* 0x570dec */
 
-extern int FUN_0014aa78(void);
-extern unsigned int FUN_00236038(unsigned int);
+extern int btlGetMainState(void);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_004c8c10. */
 
 
@@ -23,12 +23,12 @@ unsigned int FUN_003b1664(void)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   temp_v3 = DAT_00570dec | *(unsigned int *)(temp_v0 + 0x45a4);
   *(unsigned int *)(temp_v0 + 0x45a0) = DAT_00570de8 | *(unsigned int *)(temp_v0 + 0x45a0);
   *(unsigned int *)(temp_v0 + 0x45a4) = temp_v3;
-  temp_v1 = FUN_00236038(0);
-  temp_v2 = FUN_00236038(1);
+  temp_v1 = scrGetArg(0);
+  temp_v2 = scrGetArg(1);
   FUN_004c8c10(temp_v1,temp_v2,1);
   return 1;
 }

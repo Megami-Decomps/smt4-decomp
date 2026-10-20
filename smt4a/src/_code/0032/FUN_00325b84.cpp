@@ -1,19 +1,15 @@
-#include "romwright_types.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
-extern int DAT_00581280; /* 0x581280 */
-
+extern MapDepartExtraA *DAT_00581280;
 
 void FUN_00325b84(void)
-
 {
-  int temp_v0;
-  
-  temp_v0 = DAT_00581280;
-  *(unsigned short *)(DAT_00581280 + 0xf42) = 0;
-  *(unsigned short *)(temp_v0 + 0xf44) = 0;
-  return;
+    MapDepartExtraA *extra = DAT_00581280;
+
+    extra->unkF42 = 0;
+    extra->unkF44 = 0;
 }
 
 } /* extern "C" */

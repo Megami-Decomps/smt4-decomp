@@ -14,7 +14,7 @@ typedef struct {
 
 extern int DAT_004475d0; /* 0x4475d0 */
 extern unsigned int DAT_004475d4; /* 0x4475d4 */
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapScene; /* 0x447e88 */
 
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
@@ -37,10 +37,10 @@ void FUN_0025bdc4(void)
   float temp_v8;
   float temp_v9;
   
-  temp_v7 = *(float *)(DAT_00447e88 + 0x1c);
-  temp_v8 = *(float *)(DAT_00447e88 + 0x20);
-  temp_v9 = *(float *)(DAT_00447e88 + 0x24);
-  temp_v5 = (*(float *)(DAT_00447e88 + 0x4c) + in_s0) * 0.017453292f;
+  temp_v7 = *(float *)(g_lmapScene + 0x1c);
+  temp_v8 = *(float *)(g_lmapScene + 0x20);
+  temp_v9 = *(float *)(g_lmapScene + 0x24);
+  temp_v5 = (*(float *)(g_lmapScene + 0x4c) + in_s0) * 0.017453292f;
   temp_v6 = temp_v5;
   FUN_0028250c();
   temp_v7 = temp_v7 + temp_v5 * in_s1;

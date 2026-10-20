@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0014bdb4(unsigned int, unsigned int);
-int FUN_0015155c(...);
-int FUN_00163060(int, int, int, int, int);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_0031b654(void);
 int FUN_004f55c8(void);
 
@@ -22,12 +22,12 @@ extern int FUN_00298508(...); /* 0x298508 */
 extern unsigned char LAB_002b537c; /* 0x2b537c */
 extern unsigned char LAB_002b5390; /* 0x2b5390 */
 extern int FUN_002dece8(...); /* 0x2dece8 */
-extern int FUN_003286e0(...); /* 0x3286e0 */
-extern unsigned char DAT_005737f0; /* 0x5737f0 */
+extern int btlEffectDestroy(...); /* 0x3286e0 */
+extern unsigned char g_btlEffect; /* 0x5737f0 */
 
 /* Supplied declaration required: FUN_0014bdb4. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_0031b654. */
 /* Supplied declaration required: FUN_004f55c8. */
 
@@ -40,18 +40,18 @@ void FUN_002b52a4(unsigned int *param_1)
   unsigned int temp_v0;
   
   puVar1 = &LAB_002b537c;
-  FUN_0015155c(&LAB_002b537c,4,0,0,FUN_00298508,FUN_003286e0,param_1,*param_1);
+  taskCreateDraw(&LAB_002b537c,4,0,0,FUN_00298508,btlEffectDestroy,param_1,*param_1);
   param_1[0x17] = (unsigned int)puVar1;
   temp_v0 = 0;
   FUN_0031b654();
   param_1[0x18] = temp_v0;
   FUN_0014bdb4(*param_1,temp_v0);
   puVar1 = &LAB_002b5390;
-  FUN_0015155c(&LAB_002b5390,0x73,0,0,FUN_002dece8,0,param_1,*param_1);
+  taskCreateDraw(&LAB_002b5390,0x73,0,0,FUN_002dece8,0,param_1,*param_1);
   param_1[0x19] = (unsigned int)puVar1;
   temp_v0 = 0x100;
-  FUN_00163060(0x100,0x100,0,0x9c74,1);
-  (*(unsigned int *)((unsigned char *)&DAT_005737f0 + 0x18)) = temp_v0;
+  asdMemoryAllocTracked(0x100,0x100,0,0x9c74,1);
+  (*(unsigned int *)((unsigned char *)&g_btlEffect + 0x18)) = temp_v0;
   FUN_004f55c8();
   return;
 }

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_0023eae0(unsigned int);
-extern int FUN_0027e928(int *);
+extern int randRange(unsigned int);
+extern int btlUnitGet(int *);
 
 
 void FUN_003cf1a8(int *param_1)
@@ -30,8 +30,8 @@ void FUN_003cf1a8(int *param_1)
     puVar1 = puVar1 + 0xa2;
     psVar3 = psVar3 + 0x144;
   } while (temp_v1 != 0);
-  temp_v0 = FUN_0023eae0((temp_v0 - 1U) & 0xffff);
-  temp_v1 = FUN_0027e928(param_1);
+  temp_v0 = randRange((temp_v0 - 1U) & 0xffff);
+  temp_v1 = btlUnitGet(param_1);
   *(unsigned char *)(aiStack_1c0[temp_v0] + temp_v1 + 0x38) = 1;
   return;
 }

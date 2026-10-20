@@ -1,30 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039a638` (_code @ 0x39a638, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001846d0(int, int);
+/* Menu object with a panel at 0xb00. */
+typedef struct {
+    u8 unk00[0xb00];
+    u8 panel[1];        /* 0xb00 */
+} Menu;
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+/* Global block: the menu pointer sits at +8. */
+typedef struct {
+    u8 unk00[8];
+    Menu *menu;         /* 0x08 */
+} MenuBlock;
 
-extern int FUN_0014af84(void);
-/* Supplied declaration required: FUN_001846d0. */
+/* Game data with a flag word at 0x21d8c. */
+typedef struct {
+    u8 unk00[0x21d8c];
+    u32 flag;           /* 0x21d8c */
+} GameData;
 
+extern MenuBlock DAT_0057f588;
 
-unsigned int FUN_0039a638(void)
+GameData *FUN_0014af84(void);
+int FUN_001846d0(u8 *panel, int arg);
 
+/* Starts the menu panel animation 7 when the game data flag is set; always reports success. */
+u32 FUN_0039a638(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
-  temp_v1 = FUN_0014af84();
-  if (*(int *)(temp_v1 + 0x21d8c) != 0) {
-    FUN_001846d0(temp_v0 + 0xb00,7);
-  }
-  return 1;
+    Menu *menu = DAT_0057f588.menu;
+
+    if (FUN_0014af84()->flag == 0) {
+        return 1;
+    }
+    FUN_001846d0(menu->panel, 7);
+    return 1;
 }
 
 } /* extern "C" */

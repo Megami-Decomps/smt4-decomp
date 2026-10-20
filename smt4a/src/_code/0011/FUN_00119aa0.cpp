@@ -16,7 +16,7 @@ extern int FUN_0011077c(unsigned int *);
 extern int FUN_002e9318(int);
 extern int FUN_002ea00c(int);
 /* Supplied declaration required: FUN_002ea9dc. */
-extern int FUN_002ec9f4(int);
+extern int strDestroy(int);
 /* Supplied declaration required: FUN_002ecac4. */
 /* Supplied declaration required: FUN_002f9f12. */
 extern int FUN_002fb028(int);
@@ -39,7 +39,7 @@ void FUN_00119aa0(unsigned int *param_1)
   temp_v0 = FUN_0011077c(param_1 + 0x82);
   temp_v0 = temp_v0 - 0x6c;
   FUN_002ea9dc(temp_v0);
-  temp_v0 = FUN_002ec9f4(temp_v0 - 0x24);
+  temp_v0 = strDestroy(temp_v0 - 0x24);
   temp_v0 = FUN_002fb028(temp_v0 - 0x90);
   temp_v0 = FUN_002ea00c(temp_v0 - 0x60);
   temp_v0 = FUN_002e9318(temp_v0 - 0x10);

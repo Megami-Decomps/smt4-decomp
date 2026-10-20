@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002011a4(void);
-int FUN_00220554(void);
+int eventTexRequestStopAll(void);
+int bustupCutAnimRequestStopSlots(void);
 int FUN_002866b4(unsigned int, unsigned int, unsigned int, int, int, int);
 int FUN_002893d8(void);
 int FUN_002b8234(unsigned int);
@@ -18,12 +18,12 @@ typedef struct {
 
 extern unsigned char DAT_0043e188; /* 0x43e188 */
 
-/* Supplied declaration required: FUN_002011a4. */
-/* Supplied declaration required: FUN_00220554. */
+/* Supplied declaration required: eventTexRequestStopAll. */
+/* Supplied declaration required: bustupCutAnimRequestStopSlots. */
 extern unsigned int FUN_002865f8(void);
 /* Supplied declaration required: FUN_002866b4. */
 /* Supplied declaration required: FUN_002893d8. */
-extern unsigned int FUN_00296cc8(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_002b8234. */
 
 
@@ -38,13 +38,13 @@ unsigned int scrComm_Message_ShowConfirmAndClear(void)
   int temp_v4;
   
   temp_v0 = (*(int *)((unsigned char *)&DAT_0043e188 + 0x4));
-  FUN_00220554();
-  FUN_002011a4();
+  bustupCutAnimRequestStopSlots();
+  eventTexRequestStopAll();
   if ((*(int *)((unsigned char *)&DAT_0043e188 + 0x4)) != 0) {
     *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x4)) + 0xa11) = 0x14;
   }
   temp_v1 = FUN_002865f8();
-  temp_v2 = FUN_00296cc8(0);
+  temp_v2 = scrGetArg(0);
   temp_v3 = FUN_002893d8();
   FUN_002866b4(temp_v1,temp_v2,temp_v3,6,0,0);
   temp_v4 = FUN_002893d8();

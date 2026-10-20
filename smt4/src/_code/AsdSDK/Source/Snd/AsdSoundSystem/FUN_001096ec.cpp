@@ -11,9 +11,9 @@ int FUN_0012113c(...);
 int FUN_001216cc(unsigned char *, unsigned int, unsigned int);
 int FUN_00121824(unsigned char *, unsigned char *);
 int FUN_0012201c(unsigned char *, unsigned char *);
-int FUN_002bf5c0(...);
+int asdMemoryAllocAligned(...);
 int FUN_002bf694(unsigned char *, unsigned int);
-int FUN_002c5300(...);
+int asdMemoryAlloc(...);
 int nw_snd_Sound3DActor_Initialize(...);
 int nw_snd_Sound3DActor_SetPosition(...);
 int nw_snd_Sound3DManager_GetRequiredMemSize(...);
@@ -30,7 +30,7 @@ typedef struct {
 
 extern unsigned char LAB_00109a88; /* 0x109a88 */
 extern unsigned int DAT_00476628; /* 0x476628 */
-extern unsigned char DAT_004e1f68; /* 0x4e1f68 */
+extern unsigned char g_asdSound; /* 0x4e1f68 */
 extern unsigned char DAT_004e2094; /* 0x4e2094 */
 extern unsigned char DAT_004e20ec; /* 0x4e20ec */
 extern unsigned char DAT_004e21ac; /* 0x4e21ac */
@@ -58,7 +58,7 @@ extern unsigned int DAT_004e312c; /* 0x4e312c */
 extern unsigned int DAT_004e3130; /* 0x4e3130 */
 extern signed char DAT_004e3134; /* 0x4e3134 */
 extern unsigned char DAT_004e3184; /* 0x4e3184 */
-extern unsigned int DAT_004efd2c; /* 0x4efd2c */
+extern unsigned int g_asdSoundListener; /* 0x4efd2c */
 extern unsigned int DAT_004efd30; /* 0x4efd30 */
 extern unsigned int DAT_004efd34; /* 0x4efd34 */
 
@@ -73,12 +73,12 @@ extern unsigned int DAT_004efd34; /* 0x4efd34 */
 /* Supplied declaration required: FUN_001216cc. */
 /* Supplied declaration required: FUN_00121824. */
 /* Supplied declaration required: FUN_0012201c. */
-/* Supplied declaration required: FUN_002bf5c0. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
 extern int FUN_002bf684(unsigned char *);
 /* Supplied declaration required: FUN_002bf694. */
 extern int FUN_002bfefc(unsigned int *);
-extern int FUN_002c1870(unsigned char *, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002c5300. */
+extern int rt_memcmp(unsigned char *, unsigned char *, unsigned int);
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: nw_snd_Sound3DActor_Initialize. */
 /* Supplied declaration required: nw_snd_Sound3DActor_SetPosition. */
 /* Supplied declaration required: nw_snd_Sound3DManager_GetRequiredMemSize. */
@@ -104,56 +104,56 @@ unsigned int FUN_001096ec(unsigned int param_1,int param_2,unsigned char *param_
   unsigned char *temp_v7;
   
   FUN_002bf694(&DAT_004e23e4,param_1);
-  temp_v0 = FUN_002c1870(&DAT_004e23e4,&LAB_00109a88,4);
+  temp_v0 = rt_memcmp(&DAT_004e23e4,&LAB_00109a88,4);
   if (temp_v0 != 0) {
     DAT_004e3184 = 1;
   }
-  temp_v0 = FUN_002bf684(&DAT_004e1f68);
+  temp_v0 = FUN_002bf684(&g_asdSound);
   if (temp_v0 != 0) {
     FUN_001177e0();
   }
-  FUN_00121824(&DAT_004e1f68,&DAT_004e23e4);
+  FUN_00121824(&g_asdSound,&DAT_004e23e4);
   temp_v1 = nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(&DAT_004e2094);
   temp_v2 = 0x10000;
   temp_v5 = (unsigned char *)0x1;
-  FUN_002c5300(0x10000,0x100,0,temp_v1);
+  asdMemoryAlloc(0x10000,0x100,0,temp_v1);
   DAT_004e23d0 = temp_v2;
-  FUN_001216cc(&DAT_004e1f68,temp_v2,temp_v1);
-  temp_v1 = nw_snd_SoundDataManager_GetRequiredMemSize(&DAT_004e21ac,&DAT_004e1f68);
+  FUN_001216cc(&g_asdSound,temp_v2,temp_v1);
+  temp_v1 = nw_snd_SoundDataManager_GetRequiredMemSize(&DAT_004e21ac,&g_asdSound);
   temp_v2 = 0x10000;
   temp_v5 = (unsigned char *)0x1;
-  FUN_002c5300(0x10000,0x100,0,temp_v1);
+  asdMemoryAlloc(0x10000,0x100,0,temp_v1);
   DAT_004e23d4 = temp_v2;
-  FUN_00121030(&DAT_004e21ac,&DAT_004e1f68,temp_v2,temp_v1);
+  FUN_00121030(&DAT_004e21ac,&g_asdSound,temp_v2,temp_v1);
   puVar4 = &DAT_004e20ec;
-  FUN_0012201c(&DAT_004e20ec,&DAT_004e1f68);
+  FUN_0012201c(&DAT_004e20ec,&g_asdSound);
   temp_v1 = 0x10000;
   temp_v6 = 1;
   temp_v5 = (unsigned char *)0x20;
-  FUN_002bf5c0(0x10000,0x100,0,puVar4);
+  asdMemoryAllocAligned(0x10000,0x100,0,puVar4);
   DAT_004e23d8 = temp_v1;
   if (param_3 == (unsigned char *)0x0) {
     param_3 = &DAT_004e20ec;
-    nw_snd_SoundArchivePlayer_GetRequiredStreamBufferSize(&DAT_004e20ec,&DAT_004e1f68);
+    nw_snd_SoundArchivePlayer_GetRequiredStreamBufferSize(&DAT_004e20ec,&g_asdSound);
   }
   temp_v1 = 0x10000;
   temp_v6 = 1;
   temp_v5 = (unsigned char *)0x20;
-  FUN_002bf5c0(0x10000,0x100,0,param_3);
+  asdMemoryAllocAligned(0x10000,0x100,0,param_3);
   temp_v5 = puVar4;
   temp_v6 = temp_v1;
   temp_v7 = param_3;
   DAT_004e23dc = temp_v1;
-  FUN_0012113c(&DAT_004e20ec,&DAT_004e1f68,&DAT_004e21ac,DAT_004e23d8);
+  FUN_0012113c(&DAT_004e20ec,&g_asdSound,&DAT_004e21ac,DAT_004e23d8);
   if (param_2 != 0) {
     puVar4 = &DAT_004e26ec;
     DAT_004e3134 = '\x01';
-    nw_snd_Sound3DManager_GetRequiredMemSize(&DAT_004e26ec,&DAT_004e1f68);
+    nw_snd_Sound3DManager_GetRequiredMemSize(&DAT_004e26ec,&g_asdSound);
     temp_v1 = 0x10000;
     temp_v5 = (unsigned char *)0x1;
-    FUN_002c5300(0x10000,0x100,0,puVar4);
+    asdMemoryAlloc(0x10000,0x100,0,puVar4);
     DAT_004e3130 = temp_v1;
-    nw_snd_Sound3DManager_Initialize_120F48(&DAT_004e26ec,&DAT_004e1f68,temp_v1,puVar4);
+    nw_snd_Sound3DManager_Initialize_120F48(&DAT_004e26ec,&g_asdSound,temp_v1,puVar4);
     temp_v1 = 0;
     DAT_004e2708 = 0x20;
     DAT_004e2710 = 0x40b55555;
@@ -181,14 +181,14 @@ unsigned int FUN_001096ec(unsigned int param_1,int param_2,unsigned char *param_
       nw_snd_Sound3DActor_Initialize(temp_v3 * 0x84 + 0x4e2728,&DAT_004e20ec,&DAT_004e26ec);
       if ((DAT_004e3134 != '\0') && (temp_v3 < 0x10)) {
         if (((DAT_00476628 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476628), temp_v0 != 0)) {
-          DAT_004efd2c = (unsigned int)temp_v4;
-          DAT_004efd30 = DAT_004efd2c;
-          DAT_004efd34 = DAT_004efd2c;
+          g_asdSoundListener = (unsigned int)temp_v4;
+          DAT_004efd30 = g_asdSoundListener;
+          DAT_004efd34 = g_asdSoundListener;
         }
         temp_v2 = DAT_004efd34;
         temp_v1 = DAT_004efd30;
         temp_v0 = temp_v3 * 0xc;
-        *(unsigned int *)(temp_v0 + 0x4e2fa8) = DAT_004efd2c;
+        *(unsigned int *)(temp_v0 + 0x4e2fa8) = g_asdSoundListener;
         *(unsigned int *)(temp_v0 + 0x4e2fac) = temp_v1;
         *(unsigned int *)(temp_v0 + 0x4e2fb0) = temp_v2;
         nw_snd_Sound3DActor_SetPosition(temp_v3 * 0x84 + 0x4e2728,temp_v0 + 0x4e2fa8);

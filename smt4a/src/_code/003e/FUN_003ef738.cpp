@@ -7,14 +7,14 @@ extern "C" {
 int FUN_00184310(void);
 int FUN_001aba54(void);
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_001aba54. */
 extern int FUN_004aba3c(unsigned int);
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 void FUN_003ef738(void)
@@ -27,7 +27,7 @@ void FUN_003ef738(void)
   unsigned char temp_v3;
   unsigned char temp_v4;
   
-  temp_v0 = FUN_004ee568(DAT_0057113c);
+  temp_v0 = btlUnitGet(g_btlScriptUnit);
   temp_v3 = temp_v0 == 0;
   temp_v1 = 0;
   if (!temp_v3) {
@@ -39,7 +39,7 @@ void FUN_003ef738(void)
   }
   if (((temp_v3 || temp_v4) || temp_v1 == 0) ||
      (temp_v1 = FUN_0019acdc(*(unsigned short *)(temp_v1 + 300),0), temp_v1 != 1)) {
-    temp_v0 = FUN_004ee568(DAT_0057113c);
+    temp_v0 = btlUnitGet(g_btlScriptUnit);
     temp_v3 = temp_v0 != 0;
     temp_v1 = 0;
     if (temp_v3) {
@@ -51,7 +51,7 @@ void FUN_003ef738(void)
     }
     if (((!temp_v3 || !temp_v4) || temp_v1 == 0) ||
        (temp_v1 = FUN_0019acdc(*(unsigned short *)(temp_v1 + 300),0), temp_v1 != 4)) {
-      temp_v0 = FUN_004ee568(DAT_0057113c);
+      temp_v0 = btlUnitGet(g_btlScriptUnit);
       temp_v3 = temp_v0 != 0;
       temp_v1 = 0;
       if (temp_v3) {
@@ -75,7 +75,7 @@ void FUN_003ef738(void)
     temp_v1 = FUN_004aba3c(DAT_0057a9c8);
   }
   else {
-    temp_v1 = FUN_004ee568(DAT_0057113c);
+    temp_v1 = btlUnitGet(g_btlScriptUnit);
     if (*(short *)(*(int *)(temp_v1 + 0x28) + 0x1be) != 2) {
       return;
     }
@@ -83,7 +83,7 @@ void FUN_003ef738(void)
   }
   FUN_001aba54();
   if (temp_v1 != 0) {
-    temp_v2 = FUN_004ee568(DAT_0057113c);
+    temp_v2 = btlUnitGet(g_btlScriptUnit);
     temp_v3 = temp_v2 != 0;
     temp_v0 = 0;
     if (temp_v3) {
@@ -95,7 +95,7 @@ void FUN_003ef738(void)
     }
     if ((!((temp_v3 && temp_v4) && temp_v0 != 0)) ||
        (temp_v0 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300),0), temp_v0 != 1)) {
-      temp_v2 = FUN_004ee568(DAT_0057113c);
+      temp_v2 = btlUnitGet(g_btlScriptUnit);
       temp_v3 = temp_v2 != 0;
       temp_v0 = 0;
       if (temp_v3) {
@@ -107,7 +107,7 @@ void FUN_003ef738(void)
       }
       if ((!((temp_v3 && temp_v4) && temp_v0 != 0)) ||
          (temp_v0 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300),0), temp_v0 != 4)) {
-        temp_v2 = FUN_004ee568(DAT_0057113c);
+        temp_v2 = btlUnitGet(g_btlScriptUnit);
         temp_v3 = temp_v2 != 0;
         temp_v0 = 0;
         if (temp_v3) {

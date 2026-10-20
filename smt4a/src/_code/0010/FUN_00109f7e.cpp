@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int aeabi_uidivmod(unsigned int, int);
+int __aeabi_uidivmod(unsigned int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_002ec674(int);
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_00109f7e(int param_1)
@@ -50,7 +50,7 @@ void FUN_00109f7e(int param_1)
     pbVar6 = (unsigned char *)(param_1 + temp_v7 + 0x28);
     *(unsigned char *)(param_1 + temp_v1 + 0x28) = *pbVar6;
     *pbVar6 = temp_v0;
-    aeabi_uidivmod(temp_v6 + 1,temp_v3 - temp_v5);
+    __aeabi_uidivmod(temp_v6 + 1,temp_v3 - temp_v5);
     temp_v1 = temp_v1 + 1;
     temp_v6 = (unsigned int)temp_v4;
   } while (temp_v1 < 0x100);

@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002abb24(unsigned int, unsigned int);
-int FUN_002c32a0(int, int, int, int, int, int);
-int FUN_002c4938(void);
+int memAlloc(int, int, int, int, int, int);
+int memClear(void);
 int FUN_002cb80c(void);
 int FUN_002e113c(void);
 int rt_memcpy(unsigned int *, unsigned int, int);
@@ -21,8 +21,8 @@ extern unsigned int DAT_00464b84; /* 0x464b84 */
 
 extern unsigned int FUN_0024c3f8(int);
 /* Supplied declaration required: FUN_002abb24. */
-/* Supplied declaration required: FUN_002c32a0. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002cb80c. */
 /* Supplied declaration required: FUN_002e113c. */
 /* Supplied declaration required: rt_memcpy. */
@@ -37,8 +37,8 @@ unsigned int * FUN_002dcfe0(int param_1)
   unsigned int *puVar3;
   
   puVar1 = (unsigned int *)0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0x110,0x10,1);
-  FUN_002c4938();
+  memAlloc(0x10000,0x100,0,0x110,0x10,1);
+  memClear();
   *puVar1 = 0;
   puVar1[1] = 0;
   puVar1[2] = 0;

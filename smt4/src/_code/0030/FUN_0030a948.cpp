@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002c564c(int);
-int FUN_002c57c8(int, int *, int);
+int jyoucyuGetTableEntry(int);
+int asdSequenceRequest(int, int *, int);
 
 /* stack frame of void: 2 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,9 +20,9 @@ extern unsigned int DAT_0049fc1c; /* 0x49fc1c */
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-extern int FUN_002872d4(void);
-/* Supplied declaration required: FUN_002c564c. */
-/* Supplied declaration required: FUN_002c57c8. */
+extern int gameStateIsFlagSetAndLarge(void);
+/* Supplied declaration required: jyoucyuGetTableEntry. */
+/* Supplied declaration required: asdSequenceRequest. */
 
 
 unsigned int FUN_0030a948(void)
@@ -34,11 +34,11 @@ unsigned int FUN_0030a948(void)
   int temp_v1;
   
   temp_v1 = in_r3;
-  FUN_002c564c(0);
-  temp_v0 = FUN_002872d4();
+  jyoucyuGetTableEntry(0);
+  temp_v0 = gameStateIsFlagSetAndLarge();
   if (temp_v0 != 0) {
     temp_v1 = romwright_piece_2_2((short)DAT_0049fc1c,(short)DAT_0049fc18 - 200);
-    FUN_002c57c8(0xe,&temp_v1,4);
+    asdSequenceRequest(0xe,&temp_v1,4);
   }
   return 1;
 }

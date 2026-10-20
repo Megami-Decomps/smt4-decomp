@@ -8,7 +8,7 @@ int FUN_002340e4(int *);
 int FUN_002353b4(void);
 int FUN_0028971c(void);
 int FUN_00297060(void *, unsigned int);
-int FUN_002a7218(int);
+int scrScriptProcessDestroy(int);
 int FUN_002b8cc8(void);
 int FUN_002ba968(int, int *);
 int FUN_002baa40(unsigned int *, int);
@@ -39,7 +39,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 #ifndef ROMWRIGHT_PIECE_3_1_DEFINED
 #define ROMWRIGHT_PIECE_3_1_DEFINED
@@ -49,7 +49,7 @@ extern int DAT_00432fc8; /* 0x432fc8 */
 /* Supplied declaration required: FUN_002353b4. */
 /* Supplied declaration required: FUN_0028971c. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002b8cc8. */
 /* Supplied declaration required: FUN_002ba968. */
 /* Supplied declaration required: FUN_002baa40. */
@@ -79,10 +79,10 @@ void FUN_0038f464(fn_0038f464_arg0 *param_1)
     if (param_1->field_0x8 != 1) {
       return;
     }
-    if ((*(unsigned int *)(DAT_00432fc8 + 0x754) & 4) != 0 || (*(unsigned int *)(DAT_00432fc8 + 0x754) & 8) != 0) {
+    if ((*(unsigned int *)(g_aocMain + 0x754) & 4) != 0 || (*(unsigned int *)(g_aocMain + 0x754) & 8) != 0) {
       return;
     }
-    FUN_002a7218(param_1->field_0x358);
+    scrScriptProcessDestroy(param_1->field_0x358);
     param_1->field_0x358 = 0;
     pvVar1 = param_1->field_0x350;
     FUN_00297060(pvVar1,*(unsigned int *)&param_1->field_0x354);
@@ -100,8 +100,8 @@ void FUN_0038f464(fn_0038f464_arg0 *param_1)
     }
   }
   else {
-    temp_v0 = *(unsigned int *)(DAT_00432fc8 + 0x754);
-    *(unsigned int *)(DAT_00432fc8 + 0x754) = temp_v0 & 0xffffff8f;
+    temp_v0 = *(unsigned int *)(g_aocMain + 0x754);
+    *(unsigned int *)(g_aocMain + 0x754) = temp_v0 & 0xffffff8f;
     if ((temp_v0 & 0x10) == 0) {
       FUN_002340e4(&temp_v1);
       puVar3 = temp_v8;
@@ -116,7 +116,7 @@ void FUN_0038f464(fn_0038f464_arg0 *param_1)
       uStack_28 = temp_v4;
       uStack_30 = temp_v2;
       uStack_2c = temp_v3;
-      FUN_002ba968(DAT_00432fc8,&temp_v6);
+      FUN_002ba968(g_aocMain,&temp_v6);
       param_1->field_0x8 = 1;
       return;
     }

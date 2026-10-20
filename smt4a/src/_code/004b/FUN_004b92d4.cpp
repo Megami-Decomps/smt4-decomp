@@ -10,7 +10,7 @@ int FUN_0047e32c(int);
 int FUN_0047e430(int, int);
 int FUN_004b7d88(int);
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: FUN_00261a14. */
 /* Supplied declaration required: FUN_004731d8. */
@@ -28,9 +28,9 @@ void FUN_004b92d4(int param_1)
   int temp_v0;
   
   if (*(int *)(param_1 + 0x2c) != 0) {
-    if ((*(int *)(param_1 + 0x2c) == 1) && (temp_v0 = FUN_0047dfec(DAT_00570260 + 0xa8), temp_v0 != 0))
+    if ((*(int *)(param_1 + 0x2c) == 1) && (temp_v0 = FUN_0047dfec(g_aocMain + 0xa8), temp_v0 != 0))
     {
-      FUN_0047e32c(DAT_00570260 + 0xa8);
+      FUN_0047e32c(g_aocMain + 0xa8);
       temp_v0 = FUN_00473244();
       if (temp_v0 == 0) {
         FUN_004731d8();
@@ -44,11 +44,11 @@ void FUN_004b92d4(int param_1)
       *(unsigned int *)(param_1 + 0x2c) = 0;
     }
   }
-  else if ((*(unsigned int *)(DAT_00570260 + 0x754) & 4) == 0 && (*(unsigned int *)(DAT_00570260 + 0x754) & 8) == 0)
+  else if ((*(unsigned int *)(g_aocMain + 0x754) & 4) == 0 && (*(unsigned int *)(g_aocMain + 0x754) & 8) == 0)
   {
     FUN_00261a14(0);
-    temp_v0 = DAT_00570260;
-    *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xffffff8f;
+    temp_v0 = g_aocMain;
+    *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
     FUN_0047e430(temp_v0 + 0xa8,1);
     *(unsigned int *)(param_1 + 0x2c) = 1;
     return;

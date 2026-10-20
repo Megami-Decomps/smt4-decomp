@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern unsigned int *DAT_005f1600; /* 0x5f1600 */
 
 
@@ -31,11 +31,11 @@ unsigned int FUN_003683c8(unsigned int param_1)
   case 6:
     break;
   case 7:
-    puVar1 = (unsigned int *)&DAT_005f15fc;
-    if (DAT_005f15fc == 5) {
+    puVar1 = (unsigned int *)&g_gameState;
+    if (g_gameState == 5) {
       puVar1 = DAT_005f1600;
     }
-    if (DAT_005f15fc == 5 && puVar1 == (unsigned int *)0x6) {
+    if (g_gameState == 5 && puVar1 == (unsigned int *)0x6) {
       temp_v0 = 0x11;
     }
     else {
@@ -110,8 +110,8 @@ unsigned int FUN_003683c8(unsigned int param_1)
   case 0x37:
     return 0x26;
   case 0x38:
-    if ((DAT_005f15fc != 0x1c && DAT_005f15fc != 0x1d) &&
-       (DAT_005f15fc != 0x1e && DAT_005f15fc != 0x1f)) {
+    if ((g_gameState != 0x1c && g_gameState != 0x1d) &&
+       (g_gameState != 0x1e && g_gameState != 0x1f)) {
       return 0x12;
     }
     return 0x2c;
@@ -138,8 +138,8 @@ unsigned int FUN_003683c8(unsigned int param_1)
   case 0x4d:
     return 0x28;
   }
-  if (DAT_005f15fc != 5) {
-    if ((DAT_005f15fc == 3) && (DAT_005f1600 == (unsigned int *)0x3)) {
+  if (g_gameState != 5) {
+    if ((g_gameState == 3) && (DAT_005f1600 == (unsigned int *)0x3)) {
       return 0xf;
     }
   }

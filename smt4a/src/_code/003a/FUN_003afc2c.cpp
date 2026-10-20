@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_001028b8(unsigned char [132], int, unsigned char *, unsigned char *, char *);
 int FUN_0013c174(unsigned char *, int *, int);
-int FUN_0019a5a0(unsigned int);
-int FUN_0019a730(void);
+int asdMemFree(unsigned int);
+int asdTextureCreate(void);
 int FUN_0019a840(int);
 int FUN_002267b0(int, unsigned char *, int, int);
 
@@ -23,8 +23,8 @@ extern char s_flar02_02_00570300[10]; /* 0x570300 */
 
 /* Supplied declaration required: FUN_001028b8. */
 /* Supplied declaration required: FUN_0013c174. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019a730. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_0019a840. */
 /* Supplied declaration required: FUN_002267b0. */
 
@@ -47,7 +47,7 @@ void FUN_003afc2c(void)
     piVar4 = (int *)(temp_v0 + 0x5702fc);
     if ((*(char *)(temp_v0 + 0x570346) != '\x01') && (*piVar4 == 0)) {
       temp_v1 = 0;
-      FUN_0019a730();
+      asdTextureCreate();
       *piVar4 = temp_v1;
       FUN_001028b8(temp_v4,0x80,&LAB_003afd24,&LAB_003afd10,s_flar02_02_00570300 + temp_v0);
       puVar3 = temp_v4;
@@ -60,7 +60,7 @@ void FUN_003afc2c(void)
       *(unsigned int *)(*piVar4 + 0x38) = 0;
       FUN_0019a840(*piVar4);
       *(unsigned char *)(temp_v0 + 0x570344) = 1;
-      FUN_0019a5a0(*(unsigned int *)(temp_v0 + 0x570340));
+      asdMemFree(*(unsigned int *)(temp_v0 + 0x570340));
       *(unsigned int *)(temp_v0 + 0x570340) = 0;
     }
     temp_v2 = temp_v2 + 1;

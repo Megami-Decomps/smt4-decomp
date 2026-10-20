@@ -8,7 +8,7 @@ int FUN_002769b4(unsigned int, unsigned int);
 int FUN_0027db90(void);
 int FUN_00289508(void);
 int FUN_002a03d8(int, int);
-int FUN_002c57c8(unsigned int, unsigned int *, unsigned int);
+int asdSequenceRequest(unsigned int, unsigned int *, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -28,12 +28,12 @@ extern unsigned int DAT_0049fc34; /* 0x49fc34 */
 extern int FUN_002080e8(void);
 /* Supplied declaration required: FUN_002769b4. */
 /* Supplied declaration required: FUN_0027db90. */
-extern int FUN_002872d4(void);
+extern int gameStateIsFlagSetAndLarge(void);
 extern int FUN_00287304(void);
 /* Supplied declaration required: FUN_00289508. */
 extern char *FUN_00289594(void);
 /* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002c57c8. */
+/* Supplied declaration required: asdSequenceRequest. */
 
 
 void FUN_00394508(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -55,7 +55,7 @@ void FUN_00394508(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   if (temp_v0 != '\x01') {
     if (temp_v0 != '\x02') {
       if (temp_v0 != '\x03') {
-        temp_v1 = FUN_002872d4();
+        temp_v1 = gameStateIsFlagSetAndLarge();
         if (temp_v1 != 0) {
           temp_v3 = 4;
           temp_v4 = DAT_0049fc18 - 200;
@@ -69,7 +69,7 @@ void FUN_00394508(int param_1,unsigned int param_2,unsigned int param_3,unsigned
               temp_v3 = 0;
               puVar5 = (unsigned int *)0x0;
               temp_v2 = 6;
-              FUN_002c57c8(temp_v2,puVar5,temp_v3);
+              asdSequenceRequest(temp_v2,puVar5,temp_v3);
             }
             FUN_002a03d8(0,10);
             FUN_002a03d8(1,10);
@@ -122,7 +122,7 @@ void FUN_00394508(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     puVar5 = (unsigned int *)0x0;
     temp_v2 = 6;
   }
-  FUN_002c57c8(temp_v2,puVar5,temp_v3);
+  asdSequenceRequest(temp_v2,puVar5,temp_v3);
   FUN_002a03d8(0,10);
   FUN_002a03d8(1,10);
   FUN_002769b4(0xffffffff,0xffffffff);

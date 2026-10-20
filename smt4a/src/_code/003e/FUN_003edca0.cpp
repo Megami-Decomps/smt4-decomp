@@ -30,7 +30,7 @@ extern int FUN_001ab888(void);
 extern int FUN_001b347c(void);
 extern int FUN_003e0044(unsigned int);
 extern int FUN_003e46f4(unsigned int);
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 unsigned int FUN_003edca0(int param_1)
@@ -87,7 +87,7 @@ unsigned int FUN_003edca0(int param_1)
           }
           if (!((*(unsigned int *)(param_1 + 0x45ac) & DAT_00573b44) != 0 || (*puVar8 & DAT_00573b40) != 0))
           {
-            temp_v1 = aeabi_idivmod(puVar7[0x96] * 100,puVar7[0x97]);
+            temp_v1 = __aeabi_idivmod(puVar7[0x96] * 100,puVar7[0x97]);
             temp_v6 = 0xf;
             temp_v3 = FUN_003e46f4(0x3e);
             if (temp_v3 != 0) {

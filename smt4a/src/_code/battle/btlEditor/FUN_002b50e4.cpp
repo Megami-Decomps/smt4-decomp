@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0015155c(...);
-int FUN_00163060(int, int, int, int, int);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_004aa780(int, int);
 int FUN_004fb670(int, int);
 int FUN_004feecc(int, int);
@@ -30,8 +30,8 @@ extern unsigned int DAT_005737e8; /* 0x5737e8 */
 extern unsigned int DAT_005737ec; /* 0x5737ec */
 extern int DAT_0057a9c8; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_004aa780. */
 extern int FUN_004f2708(int, unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_004fb670. */
@@ -48,11 +48,11 @@ void FUN_002b50e4(unsigned int *param_1)
   unsigned int temp_v1;
   
   puVar1 = &LAB_002b5238;
-  FUN_0015155c(&LAB_002b5238,4,0,0,FUN_002984d4,FUN_003285dc,param_1,*param_1);
+  taskCreateDraw(&LAB_002b5238,4,0,0,FUN_002984d4,FUN_003285dc,param_1,*param_1);
   param_1[0x1f] = (unsigned int)puVar1;
-  FUN_0015155c(&LAB_002b524c,0x75,0,0,FUN_002decb4,0,param_1,puVar1);
+  taskCreateDraw(&LAB_002b524c,0x75,0,0,FUN_002decb4,0,param_1,puVar1);
   puVar2 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x18,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x18,1);
   DAT_005737e0 = puVar2;
   *puVar2 = 0;
   puVar2[1] = (unsigned int)*(unsigned char *)((int)param_1 + 0x1ed9);

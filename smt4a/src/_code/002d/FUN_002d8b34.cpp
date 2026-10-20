@@ -1,22 +1,16 @@
-#include "romwright_types.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+s32 FUN_002a4b28(u32 value);
 
-extern int FUN_002a4b28(unsigned int);
+extern GameStateA g_gameState;
 
-
-void FUN_002d8b34(unsigned int param_1)
-
+void FUN_002d8b34(u32 value)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002a4b28(param_1 & 0xffff);
-  if (temp_v0 == 0) {
-    (*(unsigned int *)((unsigned char *)&DAT_005f15fc + 0x308)) = param_1;
-  }
-  return;
+    if (FUN_002a4b28(value & 0xFFFF) == 0) {
+        g_gameState.unk308 = value;
+    }
 }
 
 } /* extern "C" */

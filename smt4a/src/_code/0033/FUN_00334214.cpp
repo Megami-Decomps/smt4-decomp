@@ -26,7 +26,7 @@ typedef struct {
 
 extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 
-extern int FUN_001641e8(void);
+extern int btlMainIsRunning(void);
 /* Supplied declaration required: FUN_0019cac4. */
 extern int FUN_002626e0(void);
 /* Supplied declaration required: FUN_0026fd50. */
@@ -66,7 +66,7 @@ void FUN_00334214(fn_00334214_arg0 *param_1,int param_2,unsigned int param_3,uns
     }
   }
   else {
-    temp_v2 = FUN_001641e8();
+    temp_v2 = btlMainIsRunning();
     if ((temp_v2 == 0) || (temp_v2 = FUN_00291e14(), temp_v2 == 0)) {
       temp_v1 = 2;
     }

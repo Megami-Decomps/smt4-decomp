@@ -11,14 +11,14 @@ int FUN_0038b548(...);
 int FUN_003f3fcc(...);
 int FUN_003f525c(...);
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00215bbc(void);
 int FUN_00230ac0(...);
 int FUN_0026f0c4(void);
-int FUN_00270b7c(...);
+int bibleOpenMode0(...);
 int FUN_0028187c(...);
 int FUN_00284ee4(...);
-int FUN_0028cacc(...);
+int bibleOpenMode1(...);
 int FUN_002a4708(void);
 int FUN_002abff8(...);
 int FUN_002c39dc(...);
@@ -36,7 +36,7 @@ int FUN_003f86f8(...);
 int FUN_00184c00(...);
 int FUN_0019de98(...);
 int FUN_001f4908(int, int, int);
-int FUN_00202d2c(...);
+int configOpen(...);
 int FUN_0020b660(...);
 int FUN_00215254(void);
 int FUN_00215bd0(void);
@@ -48,7 +48,7 @@ int FUN_0026f148(...);
 int FUN_0026fc00(...);
 int FUN_002a5cf4(void);
 int FUN_002a7b74(void);
-int FUN_002ae3a8(...);
+int bibleOpenMode2(...);
 int FUN_002c8538(...);
 int FUN_002e738c(int);
 int FUN_002f0c18(void);
@@ -69,13 +69,13 @@ typedef struct {
 extern int DAT_0057f108; /* 0x57f108 */
 extern int DAT_0057f268; /* 0x57f268 */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184c00. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_001f4908. */
-/* Supplied declaration required: FUN_00202d2c. */
+/* Supplied declaration required: configOpen. */
 /* Supplied declaration required: FUN_0020b660. */
 extern unsigned int FUN_00213b5c(void);
 /* Supplied declaration required: FUN_00215254. */
@@ -90,10 +90,10 @@ extern unsigned int FUN_00213b5c(void);
 /* Supplied declaration required: FUN_0026f0c4. */
 /* Supplied declaration required: FUN_0026f148. */
 /* Supplied declaration required: FUN_0026fc00. */
-/* Supplied declaration required: FUN_00270b7c. */
+/* Supplied declaration required: bibleOpenMode0. */
 /* Supplied declaration required: FUN_0028187c. */
 /* Supplied declaration required: FUN_00284ee4. */
-/* Supplied declaration required: FUN_0028cacc. */
+/* Supplied declaration required: bibleOpenMode1. */
 /* Supplied declaration required: FUN_002a4708. */
 extern int FUN_002a4860(int);
 extern unsigned int FUN_002a4878(int);
@@ -102,7 +102,7 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a7b74. */
 extern int FUN_002ab790(void);
 /* Supplied declaration required: FUN_002abff8. */
-/* Supplied declaration required: FUN_002ae3a8. */
+/* Supplied declaration required: bibleOpenMode2. */
 extern int FUN_002c2c68(int);
 /* Supplied declaration required: FUN_002c39dc. */
 /* Supplied declaration required: FUN_002c8538. */
@@ -315,7 +315,7 @@ void FUN_002a4cfc(void)
     FUN_0026fc00(2,3,0xffffffff,0);
     FUN_002a5cf4();
     FUN_00388758(1);
-    FUN_002ae3a8(0);
+    bibleOpenMode2(0);
     FUN_0020b660(0x24);
     return;
   case 0x1c:
@@ -364,7 +364,7 @@ void FUN_002a4cfc(void)
     return;
   case 0x29:
     temp_v1 = FUN_00213b5c();
-    FUN_00202d2c(temp_v1,1);
+    configOpen(temp_v1,1);
     FUN_0026fc00(2,3,0xffffffff,0);
     FUN_0021b274(0,0xffffffff);
     FUN_002a5cf4();
@@ -401,7 +401,7 @@ void FUN_002a4cfc(void)
     temp_v3 = FUN_002c90b0();
     if (temp_v3 != 0) {
       FUN_0026fc00(2,3,0xffffffff,0);
-      FUN_00270b7c(0);
+      bibleOpenMode0(0);
       FUN_0020b660(0x24);
       FUN_002a7b74();
       FUN_0026f0c4();
@@ -421,7 +421,7 @@ void FUN_002a4cfc(void)
             FUN_0032fbd0();
             if (temp_v2 == 0) {
               FUN_0026fc00(2,3,0xffffffff,0);
-              FUN_0028cacc(0);
+              bibleOpenMode1(0);
               FUN_0020b660(0x24);
               FUN_002a7b74();
               FUN_0026f0c4();
@@ -477,7 +477,7 @@ void FUN_002a4cfc(void)
       *(unsigned int *)(temp_v3 + 0x2c) = 0;
       *(unsigned int *)(temp_v3 + 0x1c) = 0x35;
       FUN_0028187c(0x26);
-      FUN_001681cc(0x92);
+      sysPlaySe(0x92);
       FUN_00388758(1);
       FUN_0039a638();
       FUN_00184c00(temp_v3 + 0x1634,7,0);

@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00100388(unsigned char [132], unsigned char *, int, int);
 int FUN_001695a0(void);
-int FUN_0019a5a0(...);
-int FUN_0019c364(int);
+int asdMemFree(...);
+int scrScriptProcessDestroy(int);
 int FUN_0020214c(void);
 int FUN_00275bc8(int, unsigned char *);
 int FUN_00275f44(int, unsigned int);
@@ -32,8 +32,8 @@ extern unsigned char DAT_005f1798; /* 0x5f1798 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001695a0. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0020214c. */
 extern int FUN_00224880(int);
 /* Supplied declaration required: FUN_00275bc8. */
@@ -57,11 +57,11 @@ void FUN_004b88e0(fn_004b88e0_arg0 *param_1)
   FUN_004b75d0();
   if (param_1->field_0x2c != 0) {
     if ((param_1->field_0x2c == 1) && (temp_v0 = FUN_00224880(param_1->field_0x1178), temp_v0 == 2)) {
-      FUN_0019c364(param_1->field_0x1178);
+      scrScriptProcessDestroy(param_1->field_0x1178);
       param_1->field_0x1178 = 0;
-      FUN_0019a5a0(param_1->field_0x1170);
+      asdMemFree(param_1->field_0x1170);
       param_1->field_0x1170 = 0;
-      FUN_0019a5a0(param_1->field_0x1174);
+      asdMemFree(param_1->field_0x1174);
       param_1->field_0x1174 = (void *)0x0;
       param_1->field_0x28 = 5;
       param_1->field_0x2c = 0;

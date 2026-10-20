@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern int DAT_0058103c; /* 0x58103c */
+extern int g_mapIf; /* 0x58103c */
 
 /* Supplied declaration required: FUN_00152f44. */
 /* Supplied declaration required: FUN_00246450. */
@@ -24,7 +24,7 @@ void FUN_00365920(unsigned int param_1,unsigned int param_2,unsigned int param_3
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_0058103c;
+  temp_v0 = g_mapIf;
   FUN_00152f44();
   *(unsigned char *)(temp_v0 + 0x1d) = 1;
   *(unsigned int *)(temp_v0 + 0x20) = 0;

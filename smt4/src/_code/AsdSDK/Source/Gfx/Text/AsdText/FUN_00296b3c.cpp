@@ -7,8 +7,8 @@ extern "C" {
 int FUN_002869e8(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int);
 int FUN_002b23bc(int, int, unsigned int, unsigned char *);
 int FUN_002c30c4(...);
-int FUN_002c415c(int);
-int FUN_002c498c(int, int, int, int, int);
+int asdMemFree(int);
+int asdMemAlloc(int, int, int, int, int);
 
 /* stack frame of param_6: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -20,8 +20,8 @@ typedef struct {
 /* Supplied declaration required: FUN_002869e8. */
 /* Supplied declaration required: FUN_002b23bc. */
 /* Supplied declaration required: FUN_002c30c4. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c498c. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMemAlloc. */
 
 
 void FUN_00296b3c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -35,7 +35,7 @@ void FUN_00296b3c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned char uStack00000008;
   
   temp_v0 = 0x100;
-  FUN_002c498c(0x100,0x100,0,0x1000,0);
+  asdMemAlloc(0x100,0x100,0,0x1000,0);
   FUN_002c30c4(param_6);
   FUN_002b23bc(temp_v0,0x1000,param_6,&uStack00000008);
   *(unsigned char *)(temp_v0 + 0xfff) = 0;
@@ -54,7 +54,7 @@ void FUN_00296b3c(unsigned int param_1,unsigned int param_2,unsigned int param_3
     *(unsigned char *)(temp_v2 + 3) = 0;
   }
   FUN_002869e8(param_1,param_2,param_3,param_4,param_5,temp_v0);
-  FUN_002c415c(temp_v0);
+  asdMemFree(temp_v0);
   return;
 }
 

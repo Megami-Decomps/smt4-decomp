@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e9318(unsigned char [12]);
 int FUN_002e9520(int, unsigned int);
 
-extern int FUN_002e6dac(int);
+extern int rt_malloc(int);
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002e9520. */
 extern unsigned int FUN_002ea0e4(unsigned char *);
@@ -31,7 +31,7 @@ int * FUN_0030395c(int *param_1,unsigned int param_2)
   *param_1 = 0;
   param_1[1] = 0;
   param_1[2] = 0;
-  temp_v1 = FUN_002e6dac(temp_v3 << 3);
+  temp_v1 = rt_malloc(temp_v3 << 3);
   *param_1 = temp_v1;
   for (temp_v2 = param_2; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
     if (temp_v1 != 0) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010063a(int, int, int, unsigned char *);
+int qsort(int, int, int, unsigned char *);
 
 /* stack frame of param_4: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ typedef struct {
 
 extern unsigned char LAB_00321c94; /* 0x321c94 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern int FUN_003df4a4(unsigned short);
 extern int FUN_004bca68(unsigned int, unsigned short);
 
@@ -65,7 +65,7 @@ void FUN_00267d74(int param_1,unsigned int param_2,int param_3,int param_4)
       temp_v3 = param_1 + temp_v8 * 2;
       if (*(short *)(temp_v3 + 0x76c6) == *(short *)(param_1 + 0x76c4)) {
         *(unsigned short *)(temp_v3 + 0x76c6) = 0;
-        FUN_0010063a(temp_v2,8,2,&LAB_00321c94);
+        qsort(temp_v2,8,2,&LAB_00321c94);
       }
       temp_v9 = temp_v9 - 1;
       temp_v8 = temp_v8 + 1;
@@ -125,7 +125,7 @@ void FUN_00267d74(int param_1,unsigned int param_2,int param_3,int param_4)
           temp_v3 = param_1 + temp_v8 * 2;
           if (*(short *)(temp_v3 + 0x76c6) == *(short *)(param_1 + 0x76c4)) {
             *(unsigned short *)(temp_v3 + 0x76c6) = 0;
-            FUN_0010063a(temp_v2,8,2,&LAB_00321c94);
+            qsort(temp_v2,8,2,&LAB_00321c94);
           }
           temp_v9 = temp_v9 - 1;
           temp_v8 = temp_v8 + 1;
@@ -134,7 +134,7 @@ void FUN_00267d74(int param_1,unsigned int param_2,int param_3,int param_4)
     }
     else {
       *(unsigned short *)(param_1 + 0x76c4) = 0;
-      FUN_0010063a(temp_v2,8,2,&LAB_00321c94);
+      qsort(temp_v2,8,2,&LAB_00321c94);
     }
     temp_v2 = FUN_003df4a4(temp_v0);
     piVar12 = (int *)(param_1 + 0x7858);

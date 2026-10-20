@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_0019a5a0(void *block);
+void asdMemFree(void *block);
 
 /* Runs a list for one frame: live tasks get their update callback; a task being killed counts
  * killDelay down and, when it reaches zero, gets its destroy callback and is unlinked and freed. */
@@ -34,7 +34,7 @@ void taskListUpdate(u8 listIndex)
                     list->tail = prev;
                 }
                 list->count--;
-                FUN_0019a5a0(task);
+                asdMemFree(task);
                 task = next;
             } else {
                 task = task->next;

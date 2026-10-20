@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001245c4(unsigned int);
+int asdMemoryFreeRegion(unsigned int);
 int FUN_002a8554(unsigned int, int *, int, int, int, int, unsigned int, unsigned int);
 int hasExclusiveAccess(int *);
 
@@ -16,7 +16,7 @@ extern int DAT_00465158; /* 0x465158 */
 extern unsigned int DAT_00471b58; /* 0x471b58 */
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Supplied declaration required: FUN_001245c4. */
+/* Supplied declaration required: asdMemoryFreeRegion. */
 extern unsigned int FUN_001246cc(unsigned int);
 /* Supplied declaration required: FUN_002a8554. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -38,7 +38,7 @@ void FUN_0024dcfc(unsigned int param_1)
      ((param_1 < DAT_00465148 || (DAT_00465148 + DAT_00465158 < param_1)))) {
     param_1 = FUN_001246cc(param_1);
   }
-  FUN_001245c4(param_1);
+  asdMemoryFreeRegion(param_1);
   piVar2 = DAT_00465124;
   temp_v2 = DAT_00465124[2];
   DAT_00465124[2] = temp_v2 - 1;

@@ -42,7 +42,7 @@ extern unsigned char DAT_00439c88; /* 0x439c88 */
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 extern int FUN_002b6a54(int, unsigned short);
-extern int FUN_002b6b20(void);
+extern int gameGetOptions(void);
 /* Supplied declaration required: FUN_002b9024. */
 extern unsigned int FUN_002bce00(unsigned short);
 /* Supplied declaration required: FUN_002be624. */
@@ -93,9 +93,9 @@ void FUN_00227334(unsigned int param_1,unsigned int param_2,int param_3,int para
       }
     }
     else if (param_6 != 0) {
-      temp_v2 = FUN_002b6b20();
+      temp_v2 = gameGetOptions();
       temp_v0 = *(unsigned short *)(temp_v2 + 0x606);
-      temp_v2 = FUN_002b6b20();
+      temp_v2 = gameGetOptions();
       temp_v2 = FUN_002b6a54((int)*(short *)(temp_v2 + 0x604),temp_v0);
       if ((*(unsigned int *)(temp_v2 + 8) & 0x3fffff) >> 0x11 != 1) {
         temp_v5 = (short)(int)temp_v6;

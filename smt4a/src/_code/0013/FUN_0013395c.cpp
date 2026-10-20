@@ -24,7 +24,7 @@ extern unsigned char LAB_001339dc; /* 0x1339dc */
 #endif
 /* Supplied declaration required: FUN_002e32a4. */
 extern int *FUN_002e4e86(unsigned int *, unsigned int *);
-extern int FUN_002e6dac(void);
+extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00307b08. */
 extern unsigned int FUN_00307b2a(unsigned int, int *);
@@ -57,7 +57,7 @@ unsigned long long FUN_0013395c(int *param_1,unsigned int param_2)
     temp_v4 = FUN_00307b2a(temp_v0,param_1);
     piVar2 = (int *)FUN_002e4e86(&temp_v5,(unsigned int *)&temp_v4);
     temp_v1 = *piVar2;
-    temp_v2 = FUN_002e6dac();
+    temp_v2 = rt_malloc();
     FUN_00307b08(*param_1,param_1[1],temp_v2,param_1);
     FUN_0030fd90(param_1,*param_1,param_1[1]);
     FUN_002e6e14(*param_1);

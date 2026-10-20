@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_002b63c0(void);
-int FUN_002c564c(int);
+int jyoucyuGetTableEntry(int);
 int FUN_003489c8(unsigned int);
 int FUN_00348e10(void);
 
 extern int FUN_00240a6c(unsigned int);
 extern int FUN_00298fa0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b63c0. */
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_003489c8. */
 /* Supplied declaration required: FUN_00348e10. */
 
@@ -37,7 +37,7 @@ int FUN_00381ae0(unsigned int param_1)
          ((*(unsigned short *)(temp_v1 + 0x19c) != 0 && (*(unsigned short *)(temp_v1 + 0x19c) == param_1)))) {
         FUN_003489c8(temp_v2 & 0xffff);
         temp_v3 = 1;
-        FUN_002c564c(0);
+        jyoucyuGetTableEntry(0);
       }
     }
     temp_v2 = temp_v2 + 1;

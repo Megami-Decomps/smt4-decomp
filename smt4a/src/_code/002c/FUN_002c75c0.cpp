@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_0016007c(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdOperatorNew(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -22,9 +22,9 @@ extern unsigned char LAB_002ef9ec; /* 0x2ef9ec */
 extern unsigned char LAB_002efa8c; /* 0x2efa8c */
 extern unsigned int *DAT_00588e2c; /* 0x588e2c */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdOperatorNew. */
 
 
 void FUN_002c75c0(void)
@@ -35,7 +35,7 @@ void FUN_002c75c0(void)
   char *pcVar2;
   
   puVar1 = (unsigned int *)0x10;
-  FUN_0016007c();
+  asdOperatorNew();
   if (puVar1 != (unsigned int *)0x0) {
     puVar1[2] = 0;
     *(unsigned char *)(puVar1 + 1) = 0;
@@ -45,11 +45,11 @@ void FUN_002c75c0(void)
   }
   pcVar2 = "SAVELOAD_UI C";
   DAT_00588e2c = puVar1;
-  FUN_0014e38c("SAVELOAD_UI C",4,0,0,FUN_002681b0,&LAB_002ef9ec,0);
+  asdProcessCreateSimple("SAVELOAD_UI C",4,0,0,FUN_002681b0,&LAB_002ef9ec,0);
   *puVar1 = (unsigned int)pcVar2;
-  FUN_0015155c("SAVELOAD_UI UD",0x83,0,0,&LAB_002a60c8,0,0,pcVar2);
-  FUN_0015155c("SAVELOAD_UI UDD",0xdf,0,0,&LAB_002a60c8,0,0,*puVar1);
-  FUN_0015155c("SAVELOAD_UI D",0xec,0,0,&LAB_002efa8c,0,0,*puVar1);
+  taskCreateDraw("SAVELOAD_UI UD",0x83,0,0,&LAB_002a60c8,0,0,pcVar2);
+  taskCreateDraw("SAVELOAD_UI UDD",0xdf,0,0,&LAB_002a60c8,0,0,*puVar1);
+  taskCreateDraw("SAVELOAD_UI D",0xec,0,0,&LAB_002efa8c,0,0,*puVar1);
   return;
 }
 

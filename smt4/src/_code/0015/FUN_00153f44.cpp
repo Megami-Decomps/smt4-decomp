@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002a1828(...);
 
-extern unsigned int *DAT_004652a0; /* 0x4652a0 */
+extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
 extern unsigned int DAT_00476634; /* 0x476634 */
 extern unsigned int DAT_004efd6c; /* 0x4efd6c */
 extern unsigned int DAT_004efd70; /* 0x4efd70 */
@@ -33,12 +33,12 @@ void FUN_00153f44(int param_1,int param_2)
   int temp_v0;
   unsigned int *puVar3;
   
-  puVar1 = DAT_004652a0;
+  puVar1 = g_commandBufferCursor;
   if ((~*(unsigned int *)(*(int *)(*(int *)(param_2 + 0x220) + 8) + 0x28) & 1) == 0) {
-    DAT_004652a0[1] = 0xf02c0;
+    g_commandBufferCursor[1] = 0xf02c0;
     *puVar1 = 0x80000000;
     FUN_002a1828(puVar1 + 2,param_2 + 0x8c,0xbf02c1);
-    puVar1 = DAT_004652a0;
+    puVar1 = g_commandBufferCursor;
   }
   else {
     if (((DAT_00476634 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476634), temp_v0 != 0)) {
@@ -55,18 +55,18 @@ void FUN_00153f44(int param_1,int param_2)
       DAT_004efd94 = 0x3f800000;
       DAT_004efd98 = 0;
     }
-    puVar1 = DAT_004652a0;
-    puVar3 = DAT_004652a0 + 1;
-    *DAT_004652a0 = 0x80000000;
+    puVar1 = g_commandBufferCursor;
+    puVar3 = g_commandBufferCursor + 1;
+    *g_commandBufferCursor = 0x80000000;
     *puVar3 = 0xf02c0;
     FUN_002a1828(puVar1 + 2,&DAT_004efd6c,0xbf02c1);
-    puVar1 = DAT_004652a0;
+    puVar1 = g_commandBufferCursor;
   }
-  DAT_004652a0 = puVar1 + 0x10;
-  *DAT_004652a0 = 0x80000003;
+  g_commandBufferCursor = puVar1 + 0x10;
+  *g_commandBufferCursor = 0x80000003;
   puVar1[0x11] = 0xf02c0;
   FUN_002a1828(puVar1 + 0x12,param_2 + 0x1bc,0xbf02c1);
-  DAT_004652a0 = DAT_004652a0 + 0x10;
+  g_commandBufferCursor = g_commandBufferCursor + 0x10;
   *(int *)(param_1 + 0x1c) = param_2;
   return;
 }

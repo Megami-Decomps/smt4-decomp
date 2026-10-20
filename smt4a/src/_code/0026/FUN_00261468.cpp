@@ -17,9 +17,9 @@ extern unsigned char LAB_002b2b24; /* 0x2b2b24 */
 extern int DAT_0057f69c; /* 0x57f69c */
 
 /* Supplied declaration required: FUN_00100854. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern unsigned int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int dataTableGetEntries(void);
 
 
 unsigned short * FUN_00261468(unsigned int param_1)
@@ -96,9 +96,9 @@ unsigned short * FUN_00261468(unsigned int param_1)
       puVar1 = (unsigned short *)0x2617f8;
     }
     else {
-      temp_v0 = FUN_00187180(0x38,0);
-      temp_v1 = FUN_00192798();
-      temp_v0 = FUN_00192748(temp_v0);
+      temp_v0 = dataTableGet(0x38,0);
+      temp_v1 = dataTableGetEntries();
+      temp_v0 = dataTableGetCount(temp_v0);
       puVar1 = temp_v2;
       temp_v2[0] = (unsigned short)param_1;
       FUN_00100854(puVar1,temp_v1,temp_v0,0x68,&LAB_002b2b24);

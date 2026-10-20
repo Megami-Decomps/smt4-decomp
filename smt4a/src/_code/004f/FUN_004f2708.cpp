@@ -15,7 +15,7 @@ struct fn_004f2708_arg1 {
     uint field_0x45ac; /* +0x45ac */
 };
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern int DAT_00571508; /* 0x571508 */
 extern unsigned int DAT_00571550; /* 0x571550 */
 extern unsigned int DAT_00571554; /* 0x571554 */
@@ -27,7 +27,7 @@ extern unsigned int DAT_00571568; /* 0x571568 */
 extern unsigned int DAT_0057156c; /* 0x57156c */
 
 extern int FUN_003eb1cc(void);
-extern unsigned int *FUN_004ee568(unsigned int);
+extern unsigned int *btlUnitGet(unsigned int);
 
 
 unsigned int FUN_004f2708(unsigned int param_1,fn_004f2708_arg1 *param_2,int param_3)
@@ -50,7 +50,7 @@ unsigned int FUN_004f2708(unsigned int param_1,fn_004f2708_arg1 *param_2,int par
     {
       return 0;
     }
-    puVar2 = (unsigned int *)FUN_004ee568(DAT_0057113c);
+    puVar2 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
     if ((puVar2 != (unsigned int *)0x0) && ((*puVar2 & 0x2000) != 0)) {
       return 0;
     }

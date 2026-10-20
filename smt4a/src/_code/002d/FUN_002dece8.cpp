@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_00164a9c(void);
+int jobGetWork(void);
 int FUN_0016c410(int);
 int FUN_0016c560(int);
 
 typedef int romwright_code(...);
-extern unsigned char DAT_005737f0; /* 0x5737f0 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned char g_btlEffect; /* 0x5737f0 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_00164a9c. */
+/* Supplied declaration required: jobGetWork. */
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c560. */
 extern int FUN_00387580(unsigned int);
@@ -31,14 +31,14 @@ unsigned int FUN_002dece8(void)
   int *piVar7;
   unsigned char temp_v6;
   
-  FUN_00164a9c();
-  temp_v3 = DAT_0059dbb4;
-  temp_v0 = (*(int *)((unsigned char *)&DAT_005737f0 + 0x18));
-  if ((*(int *)((unsigned char *)&DAT_005737f0 + 0x18)) != 0) {
-    temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_005737f0 + 0x18)) + 0x339c);
+  jobGetWork();
+  temp_v3 = g_renderCtx;
+  temp_v0 = (*(int *)((unsigned char *)&g_btlEffect + 0x18));
+  if ((*(int *)((unsigned char *)&g_btlEffect + 0x18)) != 0) {
+    temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&g_btlEffect + 0x18)) + 0x339c);
     temp_v6 = (temp_v1 & 2) != 0;
     if (temp_v6) {
-      temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_005737f0 + 0x18)) + 0x33a8);
+      temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&g_btlEffect + 0x18)) + 0x33a8);
     }
     if (temp_v6 && temp_v1 != 0) {
       temp_v2 = FUN_00387580(6);
@@ -52,8 +52,8 @@ unsigned int FUN_002dece8(void)
         *(unsigned char *)(temp_v3 + 0x1290) = 0;
       }
       (**(romwright_code **)(**(int **)(temp_v0 + 0x33a8) + 0xc))();
-      temp_v0 = DAT_0059dbb4;
-      piVar7 = (int *)(DAT_0059dbb4 + 0x1278);
+      temp_v0 = g_renderCtx;
+      piVar7 = (int *)(g_renderCtx + 0x1278);
       temp_v3 = *piVar7;
       temp_v2 = piVar7[temp_v3 + 2];
       *piVar7 = temp_v3 - 1;
@@ -61,8 +61,8 @@ unsigned int FUN_002dece8(void)
         (**(romwright_code **)(temp_v0 + 0x1294))(piVar7[temp_v3 + 1]);
         *(unsigned char *)(temp_v0 + 0x1290) = 0;
       }
-      FUN_0016c560(DAT_0059dbb4);
-      FUN_0016c410(DAT_0059dbb4);
+      FUN_0016c560(g_renderCtx);
+      FUN_0016c410(g_renderCtx);
     }
   }
   return 0;

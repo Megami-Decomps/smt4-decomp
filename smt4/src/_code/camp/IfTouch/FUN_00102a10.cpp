@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002c4938(void);
-int FUN_002c498c(int, int, int, int, int);
-int FUN_002c5788(unsigned char *, int, int, int, unsigned char *, unsigned char *, int);
+int memClear(void);
+int asdMemAlloc(int, int, int, int, int);
+int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -20,9 +20,9 @@ extern unsigned char LAB_0010a2f4; /* 0x10a2f4 */
 extern signed char DAT_0043dcb0; /* 0x43dcb0 */
 extern unsigned int *DAT_0043dcb4; /* 0x43dcb4 */
 
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 
 
 void FUN_00102a10(void)
@@ -35,13 +35,13 @@ void FUN_00102a10(void)
   if (DAT_0043dcb0 < '\x01') {
     if (DAT_0043dcb4 == (unsigned int *)0x0) {
       puVar1 = (unsigned int *)0x100;
-      FUN_002c498c(0x100,0x100,0,0x680,1);
+      asdMemAlloc(0x100,0x100,0,0x680,1);
       DAT_0043dcb4 = puVar1;
     }
     puVar1 = DAT_0043dcb4;
-    FUN_002c4938();
+    memClear();
     puVar2 = &LAB_00102b04;
-    FUN_002c5788(&LAB_00102b04,1,0,0,&LAB_00107d28,&LAB_0010a2f4,0);
+    asdProcessCreateSimple(&LAB_00102b04,1,0,0,&LAB_00107d28,&LAB_0010a2f4,0);
     *puVar1 = (unsigned int)puVar2;
     *(unsigned short *)((int)puVar1 + 0x64e) = 0xffff;
     *(unsigned short *)((int)puVar1 + 0x64a) = 10;

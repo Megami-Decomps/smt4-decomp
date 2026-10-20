@@ -1,48 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011b28c` (_code @ 0x11b28c, 0x86 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction scheduling only: retail loads `length` straight into r1 and `pos` second; built computes `end` first */
+/* Reads one record from `reader` into `out`: a flag and length header, then the payload fields; marks the reader done if the length checks out. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00300900(int, int);
-int FUN_00300934(...);
-int FUN_0030727e(int, int);
+typedef struct Reader {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 done;         /* nonzero once reading must stop */
+    /* 0x05 */ u8 unk05[7];
+    /* 0x0C */ u32 pos;
+    /* 0x10 */ u8 unk10[0x2B];
+    /* 0x3B */ s8 headerless;   /* record has no flag/length header */
+} Reader;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
+typedef struct Record {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 flag;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u8 field8[8];
+    /* 0x10 */ u8 field10[8];
+    /* 0x18 */ u8 field18[8];
+} Record;
 
-extern int FUN_002ee9da(int);
-/* Supplied declaration required: FUN_00300900. */
-/* Supplied declaration required: FUN_00300934. */
-/* Supplied declaration required: FUN_0030727e. */
+extern void FUN_00300900(Reader *reader, u8 *out);
+extern void FUN_00300934(Reader *reader, void *out);
+extern void readerRead8(Reader *reader, void *out);
+extern s32 FUN_002ee9da(Reader *reader, u32 end);
 
-
-void FUN_0011b28c(int param_1,int param_2)
-
+void FUN_0011b28c(Reader *reader, Record *out)
 {
-/* irregular: 3 native warning(s); review required */
-  signed char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  *(unsigned char *)(param_2 + 4) = 0;
-  temp_v0 = *(char *)(param_1 + 0x3b);
-  temp_v2 = 0;
-  if (((temp_v0 != '\0') ||
-      ((FUN_00300900(param_1,param_2 + 4), *(char *)(param_1 + 4) == '\0' &&
-       (FUN_00300934(param_1,&temp_v2), *(char *)(param_1 + 4) == '\0')))) &&
-     ((temp_v1 = *(int *)(param_1 + 0xc), *(char *)(param_1 + 4) == '\0' &&
-      ((((FUN_0030727e(param_1,param_2 + 8), *(char *)(param_1 + 4) == '\0' &&
-         (FUN_00300934(param_1,param_2 + 0x10), *(char *)(param_1 + 4) == '\0')) &&
-        (FUN_0030727e(param_1,param_2 + 0x18), *(char *)(param_1 + 4) == '\0')) &&
-       ((temp_v0 == '\0' &&
-        (((unsigned int)(temp_v1 + temp_v2) < *(unsigned int *)(param_1 + 0xc) ||
-         (temp_v1 = FUN_002ee9da(param_1), temp_v1 == 0)))))))))) {
-    *(unsigned char *)(param_1 + 4) = 1;
-  }
-  return;
+    s8 headerless;
+    s32 length;
+    u32 start;
+    u32 end;
+
+    out->flag = 0;
+    headerless = reader->headerless;
+    length = 0;
+    if (headerless == 0) {
+        FUN_00300900(reader, &out->flag);
+        if (reader->done != 0) {
+            return;
+        }
+        FUN_00300934(reader, &length);
+        if (reader->done != 0) {
+            return;
+        }
+    }
+    start = reader->pos;
+    if (reader->done != 0) {
+        return;
+    }
+    readerRead8(reader, out->field8);
+    if (reader->done != 0) {
+        return;
+    }
+    FUN_00300934(reader, out->field10);
+    if (reader->done != 0) {
+        return;
+    }
+    readerRead8(reader, out->field18);
+    if (reader->done != 0) {
+        return;
+    }
+    if (headerless != 0) {
+        return;
+    }
+    end = start + length;
+    if (reader->pos > end || FUN_002ee9da(reader, end) == 0) {
+        reader->done = 1;
+    }
 }
 
-} /* extern "C" */
+}

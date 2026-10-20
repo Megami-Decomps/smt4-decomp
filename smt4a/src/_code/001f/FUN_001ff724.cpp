@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0010063a(...);
+int qsort(...);
 int FUN_001ad9b4(...);
 int FUN_00203b40(...);
 int FUN_002a48e0(...);
 int FUN_002a4964(...);
 int FUN_002c2728(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_002e6dd4(...);
 int FUN_0031d1d8(...);
 int FUN_003d18e0(...);
@@ -25,7 +25,7 @@ typedef struct {
 extern int FUN_0029093c(...); /* 0x29093c */
 extern int DAT_0057f28c; /* 0x57f28c */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern int FUN_0019f18c(unsigned int);
 extern int FUN_0019f1a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
@@ -35,7 +35,7 @@ extern int FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: FUN_002c2728. */
 extern int FUN_002c2c68(int);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
 /* Supplied declaration required: FUN_0031d1d8. */
 extern int FUN_00348ed0(int);
@@ -66,7 +66,7 @@ void FUN_001ff724(void)
   temp_v5 = DAT_0057f28c;
   temp_v9 = 0;
   temp_v8 = 0;
-  FUN_002e6354(DAT_0057f28c + 0xa10,0xc6);
+  sysMemClear(DAT_0057f28c + 0xa10,0xc6);
   FUN_002e6dd4(temp_v5 + 0xad6,500);
   temp_v7 = 0;
   do {
@@ -136,7 +136,7 @@ void FUN_001ff724(void)
 LAB_001ff908:
       temp_v7 = (temp_v7 + 1) & 0xffff;
       if (temp_v7 >= 400) {
-        FUN_0010063a(temp_v5 + 0xa10,temp_v9,2,FUN_0029093c);
+        qsort(temp_v5 + 0xa10,temp_v9,2,FUN_0029093c);
         temp_v1 = temp_v5 + 0x948;
         temp_v10[0] = 1;
         temp_v10[1] = 1;

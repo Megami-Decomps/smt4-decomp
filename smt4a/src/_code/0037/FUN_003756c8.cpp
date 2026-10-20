@@ -4,20 +4,20 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_00573920; /* 0x573920 */
+extern int g_btlMain; /* 0x573920 */
 extern unsigned int DAT_005739f0; /* 0x5739f0 */
 extern unsigned int DAT_005739f4; /* 0x5739f4 */
 extern unsigned int DAT_00573a28; /* 0x573a28 */
 extern unsigned int DAT_00573a2c; /* 0x573a2c */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_0018719c(unsigned int);
 extern int FUN_003e46f4(unsigned int);
 
@@ -28,13 +28,13 @@ void FUN_003756c8(int param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  if ((DAT_005739f0 & *(unsigned int *)(DAT_00573920 + 0x45a0)) == 0 &&
-      (DAT_005739f4 & *(unsigned int *)(DAT_00573920 + 0x45a4)) == 0) {
-    if ((*(unsigned int *)(DAT_00573920 + 0x45a4) & DAT_00573a2c) == 0 &&
-        (*(unsigned int *)(DAT_00573920 + 0x45a0) & DAT_00573a28) == 0) {
+  if ((DAT_005739f0 & *(unsigned int *)(g_btlMain + 0x45a0)) == 0 &&
+      (DAT_005739f4 & *(unsigned int *)(g_btlMain + 0x45a4)) == 0) {
+    if ((*(unsigned int *)(g_btlMain + 0x45a4) & DAT_00573a2c) == 0 &&
+        (*(unsigned int *)(g_btlMain + 0x45a0) & DAT_00573a28) == 0) {
       temp_v0 = FUN_0018719c(0x525);
       if (temp_v0 != 0) {
-        FUN_001681cc(0xe7);
+        sysPlaySe(0xe7);
         return;
       }
       temp_v0 = FUN_003e46f4(0x10);
@@ -42,47 +42,47 @@ void FUN_003756c8(int param_1)
         temp_v0 = FUN_003e46f4(0x7f);
         if (temp_v0 == 0) {
           if (param_1 != 0) {
-            FUN_001681cc(0xc9);
+            sysPlaySe(0xc9);
             return;
           }
-          FUN_001681cc(0xaf);
+          sysPlaySe(0xaf);
           return;
         }
         if (param_1 != 0) {
-          FUN_001681cc(0x38);
+          sysPlaySe(0x38);
           return;
         }
-        FUN_001681cc(0x39);
+        sysPlaySe(0x39);
         return;
       }
       temp_v0 = FUN_003e46f4(0x7f);
       if (temp_v0 == 0) {
         if (param_1 != 0) {
-          FUN_001681cc(200);
+          sysPlaySe(200);
           return;
         }
-        FUN_001681cc(0xae);
+        sysPlaySe(0xae);
         return;
       }
       if (param_1 != 0) {
-        FUN_001681cc(0x36);
+        sysPlaySe(0x36);
         return;
       }
-      FUN_001681cc(0x37);
+      sysPlaySe(0x37);
       return;
     }
   }
   temp_v0 = FUN_0018719c(0x525);
   if (temp_v0 != 0) {
-    FUN_001681cc(0xe6);
+    sysPlaySe(0xe6);
     return;
   }
   temp_v0 = FUN_003e46f4(0x10);
   if (temp_v0 != 0) {
-    FUN_001681cc(0xb5);
+    sysPlaySe(0xb5);
     return;
   }
-  FUN_001681cc(0xb6);
+  sysPlaySe(0xb6);
   return;
 }
 

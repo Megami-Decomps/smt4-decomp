@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00114a88(void);
-int FUN_002e6dac(unsigned int);
+int rt_malloc(unsigned int);
 
 extern unsigned long long FUN_0011499c(void);
 /* Supplied declaration required: FUN_00114a88. */
-/* Supplied declaration required: FUN_002e6dac. */
+/* Supplied declaration required: rt_malloc. */
 
 
 void FUN_003100f6(int param_1)
@@ -28,7 +28,7 @@ void FUN_003100f6(int param_1)
     FUN_00114a88();
     return;
   }
-  FUN_002e6dac(temp_v0);
+  rt_malloc(temp_v0);
   return;
 }
 

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002878e4(void);
 int FUN_00287aec(void);
 
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_gameState; /* 0x49f91c */
 
 #ifndef ROMWRIGHT_FABS_4_DEFINED
 #define ROMWRIGHT_FABS_4_DEFINED
@@ -30,7 +30,7 @@ unsigned int FUN_0025b408(void)
   float in_s6;
   float in_s7;
   
-  if (DAT_0049f91c >= 100) {
+  if (g_gameState >= 100) {
     FUN_002878e4();
     if (in_s0 < in_s6) {
       return 1;

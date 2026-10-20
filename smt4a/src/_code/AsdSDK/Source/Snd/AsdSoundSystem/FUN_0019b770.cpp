@@ -8,7 +8,7 @@ int CONCAT44(double, double);
 int FUN_001640cc(...);
 int FUN_0016c4b8(...);
 int FUN_001879d0(...);
-int FUN_00187d04(...);
+int camSetMatrixA(...);
 int FUN_0019ac70(...);
 int FUN_0019f678(...);
 int FUN_001a1ee0(void);
@@ -24,16 +24,16 @@ typedef struct {
     unsigned int spF8; /* 0xf8: local_f8 */
 } param_4_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_005c4c20; /* 0x5c4c20 */
 extern unsigned int DAT_00630724; /* 0x630724 */
 extern unsigned int DAT_00630734; /* 0x630734 */
 extern unsigned int DAT_00630744; /* 0x630744 */
 extern unsigned int DAT_00630754; /* 0x630754 */
 extern signed char DAT_00630775; /* 0x630775 */
-extern unsigned char DAT_006308f8; /* 0x6308f8 */
+extern unsigned char g_asdSoundOptions; /* 0x6308f8 */
 extern signed char DAT_00630988; /* 0x630988 */
-extern float DAT_0064c014; /* 0x64c014 */
+extern float g_asdSoundListener; /* 0x64c014 */
 extern float DAT_0064c018; /* 0x64c018 */
 extern float DAT_0064c01c; /* 0x64c01c */
 
@@ -54,7 +54,7 @@ extern unsigned int FUN_00168854(unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 extern unsigned int FUN_00184df8(unsigned int);
 /* Supplied declaration required: FUN_001879d0. */
-/* Supplied declaration required: FUN_00187d04. */
+/* Supplied declaration required: camSetMatrixA. */
 /* Supplied declaration required: FUN_0019ac70. */
 /* Supplied declaration required: FUN_0019f678. */
 /* Supplied declaration required: FUN_001a1ee0. */
@@ -98,11 +98,11 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
   
   temp_v18 = 0.0f;
   if (((DAT_005c4c20 & 1) == 0) && (temp_v2 = FUN_002eba64(&DAT_005c4c20), temp_v2 != 0)) {
-    DAT_0064c014 = temp_v18;
+    g_asdSoundListener = temp_v18;
     DAT_0064c018 = temp_v18;
     DAT_0064c01c = temp_v18;
   }
-  temp_v15 = CONCAT44(DAT_0064c018,DAT_0064c014);
+  temp_v15 = CONCAT44(DAT_0064c018,g_asdSoundListener);
   temp_v3 = 0;
   switch(*(unsigned char *)(*(int *)(param_3 + 4) + 5)) {
   case 0:
@@ -233,7 +233,7 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
   temp_v11 = (float)VectorSignedToFloat(0x100 - param_2[3],(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v19 = CONCAT44(temp_v11 * 0.00390625f,temp_v18);
   if ((temp_v5 & 0x40000000) == 0 && param_4 == 0) {
-    FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(param_3 + 8),temp_v6,temp_v8);
+    FUN_0016c4b8(g_renderCtx,*(unsigned int *)(param_3 + 8),temp_v6,temp_v8);
   }
   puVar12 = (unsigned int *)0x0;
   temp_v21 = (unsigned int *)0x0;
@@ -248,9 +248,9 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
   if ((*param_2 & 0x80000000) != 0) {
     temp_v13 = temp_v16;
     temp_v14 = temp_v17;
-    temp_v3 = FUN_00184df8(*(unsigned int *)(DAT_0059dbb4 + 0x52c));
+    temp_v3 = FUN_00184df8(*(unsigned int *)(g_renderCtx + 0x52c));
     temp_v11 = (float)VectorUnsignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v3 = FUN_00168854(*(unsigned int *)(DAT_0059dbb4 + 0x52c));
+    temp_v3 = FUN_00168854(*(unsigned int *)(g_renderCtx + 0x52c));
     temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v16 < temp_v11) << 0x1f) |
             ((unsigned int)(temp_v16 == temp_v11) << 0x1e);
     temp_v7 = temp_v6 | ((unsigned int)((temp_v16 != temp_v16) || (temp_v11 != temp_v11)) << 0x1c);
@@ -313,12 +313,12 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
     temp_v23 = 1;
     temp_v18 = (float)param_2[0xc];
   }
-  temp_v24 = &DAT_006308f8;
+  temp_v24 = &g_asdSoundOptions;
   if (DAT_00630988 != '\0') {
     if (param_4 != 0) {
       FUN_0019f678(param_4,*(unsigned int *)(param_3 + 8),temp_v21,puVar12,puVar10,puVar11);
       if (temp_v23 != 0) {
-        FUN_00187d04(DAT_0059dbb4,temp_v22);
+        camSetMatrixA(g_renderCtx,temp_v22);
       }
       return 1;
     }
@@ -345,7 +345,7 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
       temp_v16 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v16 = temp_v16 * temp_v20;
     }
-    FUN_001879d0(DAT_0059dbb4,temp_v6);
+    FUN_001879d0(g_renderCtx,temp_v6);
     temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 == (float)temp_v19) << 0x1e);
     if (temp_v24[0x91] != '\0') {
       VectorSignedToFloat((int)temp_v16,(unsigned char)(temp_v6 >> 0x16) & 3);
@@ -358,13 +358,13 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
   else if (param_4 != 0) {
     FUN_0019f678(param_4,*(unsigned int *)(param_3 + 8),temp_v21,puVar12,puVar10,puVar11);
     if (temp_v23 != 0) {
-      FUN_00187d04(DAT_0059dbb4,temp_v22);
+      camSetMatrixA(g_renderCtx,temp_v22);
     }
     return 1;
   }
   FUN_001640cc(temp_v21,puVar12,puVar10,puVar11);
   if (temp_v23 != 0) {
-    FUN_00187d04(DAT_0059dbb4,temp_v22);
+    camSetMatrixA(g_renderCtx,temp_v22);
   }
   return 1;
 }

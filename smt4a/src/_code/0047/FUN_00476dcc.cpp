@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: FUN_001b3428. */
 /* Supplied declaration required: FUN_002e3328. */
@@ -23,7 +23,7 @@ void FUN_00476dcc(unsigned int *param_1,unsigned int param_2)
 {
 /* irregular: 2 native warning(s); review required */
   *param_1 = param_2;
-  FUN_001b3428(DAT_00570260 + 0x88);
+  FUN_001b3428(g_aocMain + 0x88);
   FUN_002e3328(param_1);
   return;
 }

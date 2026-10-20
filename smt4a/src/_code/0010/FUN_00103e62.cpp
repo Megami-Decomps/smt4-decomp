@@ -1,27 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00103e62` (_code @ 0x103e62, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: operand order only: retail computes `adds r0,r0,r1` (data + pos), built `adds r0,r1,r0` */
+/* Reads the next byte of the stream into *out (0 if the stream is exhausted) and advances the position. */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002e7328(int, unsigned int);
-extern int FUN_002e76b6(unsigned int);
+typedef struct Stream {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 source;
+    /* 0x0C */ s32 pos;
+} Stream;
 
+extern s32 FUN_002e7328(Stream *stream, u32 count);
+extern u8 *FUN_002e76b6(u32 source);
 
-void FUN_00103e62(int param_1,unsigned char *param_2)
-
+void FUN_00103e62(Stream *stream, u8 *out)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002e7328(param_1,1);
-  if (temp_v0 != 0) {
-    temp_v0 = FUN_002e76b6(*(unsigned int *)(param_1 + 8));
-    *param_2 = *(unsigned char *)(temp_v0 + *(int *)(param_1 + 0xc));
-    *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + 1;
-    return;
-  }
-  *param_2 = 0;
-  return;
+    if (FUN_002e7328(stream, 1) != 0) {
+        u8 *data = FUN_002e76b6(stream->source);
+        u8 *byte = data + stream->pos;
+
+        *out = *byte;
+        stream->pos++;
+        return;
+    }
+    *out = 0;
 }
 
-} /* extern "C" */
+}

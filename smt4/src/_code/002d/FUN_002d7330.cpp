@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002947c0(void);
 int FUN_00294834(int, int, int, int, int, int, int, int, int, int, int, int);
 int FUN_002a09b4(int, int);
-int FUN_002c222c(int, int);
+int asdOperatorNew(int, int);
 
 /* stack frame of param_1: 9 slot(s), 36 byte(s) */
 typedef struct {
@@ -28,9 +28,9 @@ extern unsigned char DAT_004207d8; /* 0x4207d8 */
 extern unsigned int *FUN_002947f4(void);
 /* Supplied declaration required: FUN_00294834. */
 /* Supplied declaration required: FUN_002a09b4. */
-extern int FUN_002a0b34(void);
-extern int FUN_002b879c(void);
-/* Supplied declaration required: FUN_002c222c. */
+extern int lmapSceneGetScript(void);
+extern int lmapMainIsRunning(void);
+/* Supplied declaration required: asdOperatorNew. */
 
 
 void FUN_002d7330(int param_1)
@@ -40,12 +40,12 @@ void FUN_002d7330(int param_1)
   int temp_v0;
   unsigned int *puVar2;
   
-  temp_v0 = FUN_002a0b34();
-  if ((temp_v0 != 0) || (temp_v0 = FUN_002b879c(), temp_v0 != 0)) {
+  temp_v0 = lmapSceneGetScript();
+  if ((temp_v0 != 0) || (temp_v0 = lmapMainIsRunning(), temp_v0 != 0)) {
     FUN_00294834(200,200,200,0x82,0x82,0x82,0x1e,0x1e,0x1e,0x96,0x96,0x96);
   }
   temp_v0 = 0x100;
-  FUN_002c222c(0x100,param_1);
+  asdOperatorNew(0x100,param_1);
   puVar2 = (unsigned int *)0x0;
   if (temp_v0 != 0) {
     puVar2 = (unsigned int *)FUN_002947f4();
@@ -54,8 +54,8 @@ void FUN_002d7330(int param_1)
   *(unsigned int **)(param_1 + 0x1c) = puVar2;
   FUN_002947c0();
   *(unsigned char *)(param_1 + 0x2c) = 0;
-  temp_v0 = FUN_002b879c();
-  if ((temp_v0 == 0) && (temp_v0 = FUN_002a0b34(), temp_v0 == 0)) {
+  temp_v0 = lmapMainIsRunning();
+  if ((temp_v0 == 0) && (temp_v0 = lmapSceneGetScript(), temp_v0 == 0)) {
     *(unsigned char *)(param_1 + 0x2c) = 1;
     FUN_002a09b4(0x2d744c,0);
     return;

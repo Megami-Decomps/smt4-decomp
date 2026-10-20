@@ -16,7 +16,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int *FUN_002e4e86(int *, unsigned int *);
-extern unsigned int *FUN_002e6dac(void);
+extern unsigned int *rt_malloc(void);
 
 
 unsigned long long FUN_002fec68(int param_1,int param_2)
@@ -38,7 +38,7 @@ unsigned long long FUN_002fec68(int param_1,int param_2)
   temp_v2 = param_2;
   piVar1 = (int *)FUN_002e4e86(&temp_v2,(unsigned int *)&temp_v4);
   temp_v0 = *piVar1;
-  puVar3 = (unsigned int *)FUN_002e6dac();
+  puVar3 = (unsigned int *)rt_malloc();
   *(unsigned int **)(param_1 + 4) = puVar3;
   for (temp_v1 = temp_v2; temp_v1 != 0; temp_v1 = temp_v1 - 1) {
     if (puVar3 != (unsigned int *)0x0) {

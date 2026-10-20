@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022a4ac(void);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_0022a4ac. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 
 
 void FUN_003c033c(void)
@@ -23,7 +23,7 @@ void FUN_003c033c(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  FUN_002939f4();
+  btlGetMainState();
   temp_v0 = 0;
   FUN_0022a4ac();
   *(unsigned short *)(temp_v0 + 6) = *(unsigned short *)(temp_v0 + 6) | 1;

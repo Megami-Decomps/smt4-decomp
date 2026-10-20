@@ -14,7 +14,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002c1d78. */
 /* Supplied declaration required: FUN_002c1dd8. */
-extern int FUN_002c564c(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 void FUN_00394750(unsigned int param_1)
@@ -24,7 +24,7 @@ void FUN_00394750(unsigned int param_1)
   int temp_v0;
   unsigned short *puVar2;
   
-  temp_v0 = FUN_002c564c(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
     temp_v0 = 0;
     do {
@@ -36,7 +36,7 @@ void FUN_00394750(unsigned int param_1)
         if (puVar2 == (unsigned short *)0x0 || param_1 == 0) {
           return;
         }
-        temp_v0 = FUN_002c564c(1);
+        temp_v0 = jyoucyuGetTableEntry(1);
         if (temp_v0 != 0) {
           return;
         }

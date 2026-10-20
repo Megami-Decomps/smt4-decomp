@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00282bfc(...);
-int FUN_00296cc8(...);
+int scrGetArg(...);
 int FUN_0029c3c0(...);
 
 /* Supplied declaration required: FUN_00282bfc. */
 extern int FUN_002893d8(void);
-/* Supplied declaration required: FUN_00296cc8. */
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_0029c3c0. */
 extern int FUN_002b89a4(void);
 extern int FUN_002c1d5c(void);
@@ -23,7 +23,7 @@ unsigned int FUN_002c9cb0(void)
   unsigned int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00296cc8();
+  temp_v0 = scrGetArg();
   temp_v1 = FUN_002893d8();
   if (temp_v1 != 0) {
     temp_v1 = FUN_002b89a4();
@@ -32,7 +32,7 @@ unsigned int FUN_002c9cb0(void)
     }
     temp_v1 = FUN_002c1d5c();
     if (temp_v1 != 0) {
-      temp_v1 = FUN_00296cc8(0);
+      temp_v1 = scrGetArg(0);
       if (temp_v1 != 0) {
         if (temp_v1 == 1) {
           FUN_00282bfc(0,0xffffffff);
@@ -44,7 +44,7 @@ unsigned int FUN_002c9cb0(void)
     }
   }
   else {
-    temp_v1 = FUN_00296cc8(0);
+    temp_v1 = scrGetArg(0);
     if (temp_v1 != 0) {
       if (temp_v1 != 1) {
         return 1;

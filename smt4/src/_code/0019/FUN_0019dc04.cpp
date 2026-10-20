@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_0020d660(void);
+int mapIfStart(void);
 
 extern int *DAT_00447a98; /* 0x447a98 */
 
-/* Supplied declaration required: FUN_0020d660. */
+/* Supplied declaration required: mapIfStart. */
 
 
 void FUN_0019dc04(void)
@@ -22,7 +22,7 @@ void FUN_0019dc04(void)
       if (piVar1[5] == 0) {
         return;
       }
-      FUN_0020d660();
+      mapIfStart();
     }
     piVar1 = DAT_00447a98;
     if (piVar1[1] > 60) {

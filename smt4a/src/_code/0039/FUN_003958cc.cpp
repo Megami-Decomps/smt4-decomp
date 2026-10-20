@@ -1,26 +1,17 @@
-#include "romwright_types.h"
+#include "map/lmapMain.h"
 
 extern "C" {
 
-extern unsigned char DAT_005806a0; /* 0x5806a0 */
+s32 FUN_003f9e6c(u32 value);
 
-extern int FUN_003f9e6c(unsigned int);
+extern LmapExtraGlobalsA DAT_005806a0;
 
-
-unsigned int FUN_003958cc(void)
-
+bool FUN_003958cc(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if ((*(char *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x304) == '\0') ||
-     (temp_v0 = FUN_003f9e6c(*(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 700)), temp_v0 == 0)) {
-    temp_v1 = 1;
-  }
-  else {
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    if (DAT_005806a0.extra->unk304 == 0 || FUN_003f9e6c(DAT_005806a0.extra->unk2BC) == 0) {
+        return true;
+    }
+    return false;
 }
 
 } /* extern "C" */

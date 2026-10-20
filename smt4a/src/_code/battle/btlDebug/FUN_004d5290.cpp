@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001631d0(...);
+int jobStop(...);
 int FUN_00280328(...);
 int FUN_002ea508(...);
 int FUN_00317508(...);
-int FUN_0032c1bc(...);
+int asdListBoxAddItems(...);
 int FUN_0032c450(...);
 int FUN_00340edc(...);
 int FUN_003592dc(...);
@@ -38,12 +38,12 @@ typedef struct {
 
 extern int DAT_00571508; /* 0x571508 */
 
-/* Supplied declaration required: FUN_001631d0. */
-extern int FUN_00163e40(unsigned int);
+/* Supplied declaration required: jobStop. */
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00280328. */
 /* Supplied declaration required: FUN_002ea508. */
 /* Supplied declaration required: FUN_00317508. */
-/* Supplied declaration required: FUN_0032c1bc. */
+/* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_0032c450. */
 /* Supplied declaration required: FUN_00340edc. */
 /* Supplied declaration required: FUN_003592dc. */
@@ -56,15 +56,15 @@ void FUN_004d5290(fn_004d5290_arg0 *param_1,int param_2)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_00163e40(*(unsigned int *)&param_1->field_0x10);
+  temp_v0 = jobIsValid(*(unsigned int *)&param_1->field_0x10);
   if (temp_v0 != 0) {
     FUN_003592dc(*(unsigned int *)&param_1->field_0x10);
-    FUN_001631d0(*(unsigned int *)&param_1->field_0x10,0);
+    jobStop(*(unsigned int *)&param_1->field_0x10,0);
   }
   temp_v1 = *(unsigned int *)(param_2 + 0x80);
   FUN_00280328(temp_v1,0x75,0);
   *(unsigned int *)&param_1->field_0x10 = temp_v1;
-  FUN_0032c1bc();
+  asdListBoxAddItems();
   FUN_00317508(*(unsigned int *)&param_1->field_0x10,1);
   FUN_002ea508(*(unsigned int *)&param_1->field_0x10,"Camera Ctrl");
   FUN_0032c450(*(unsigned int *)&param_1->field_0x10,0,

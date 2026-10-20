@@ -17,7 +17,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0025beb8. */
-extern unsigned int FUN_0028522c(unsigned int, unsigned int);
+extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: FUN_0028c640. */
 /* Supplied declaration required: FUN_002a0428. */
@@ -33,7 +33,7 @@ void FUN_002329a8(int param_1,unsigned int param_2)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_0028522c(param_2,0);
+  temp_v0 = asdMdlManagerClone(param_2,0);
   *(unsigned int *)(param_1 + 0x6c) = temp_v0;
   FUN_002a0428(temp_v0,1);
   puVar2 = *(unsigned int **)(param_1 + 0x6c);

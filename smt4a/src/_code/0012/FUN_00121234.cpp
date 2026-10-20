@@ -4,13 +4,13 @@
 
 extern "C" {
 
-extern unsigned int DAT_00594ad8; /* 0x594ad8 */
+extern unsigned int g_listenerTable; /* 0x594ad8 */
 
 
 unsigned int FUN_00121234(void)
 
 {
-  return DAT_00594ad8;
+  return g_listenerTable;
 }
 
 } /* extern "C" */

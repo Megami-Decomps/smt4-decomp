@@ -11,7 +11,7 @@ extern int DAT_0057f268; /* 0x57f268 */
 
 extern int FUN_001ab854(void);
 extern int FUN_001ab888(void);
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 /* Supplied declaration required: FUN_002a4878. */
 /* Supplied declaration required: FUN_002a4894. */
 
@@ -100,7 +100,7 @@ int FUN_002cab18(unsigned int param_1,unsigned int param_2,int param_3)
     temp_v1 = *(int *)(temp_v1 + temp_v3 * 8 + 0xa80);
 LAB_002cacd8:
     if (temp_v1 == -2) {
-      temp_v1 = FUN_002919a4();
+      temp_v1 = btlMainGetUnk14();
       if (temp_v1 == 0) {
         return -1;
       }

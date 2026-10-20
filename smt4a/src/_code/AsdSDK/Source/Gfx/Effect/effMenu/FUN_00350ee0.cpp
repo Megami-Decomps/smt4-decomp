@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_002e342c(unsigned int *, unsigned int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002e342c. */
 
 
@@ -26,7 +26,7 @@ void FUN_00350ee0(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
   int temp_v1;
   
   puVar2 = (unsigned int *)0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0x44,0x10,1);
+  memAlloc(0x10000,0x100,0,0x44,0x10,1);
   *puVar2 = param_3;
   puVar2[1] = param_4;
   puVar2[2] = param_5;

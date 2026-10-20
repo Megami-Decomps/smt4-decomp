@@ -33,7 +33,7 @@ typedef struct {
 
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 extern int *DAT_00580ca0; /* 0x580ca0 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern signed char DAT_005f161f; /* 0x5f161f */
 
@@ -342,19 +342,19 @@ void FUN_002737a8(void)
           }
 LAB_00273ee8:
           if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x4e) {
-            if (DAT_005f15fc == 0x1c) {
+            if (g_gameState == 0x1c) {
               temp_v2 = FUN_0018719c(0x37c);
               goto joined_r0x00273f44;
             }
-            if (DAT_005f15fc == 0x1d) {
+            if (g_gameState == 0x1d) {
               temp_v2 = FUN_0018719c(0x37d);
               goto joined_r0x00273f44;
             }
-            if (DAT_005f15fc == 0x1e) {
+            if (g_gameState == 0x1e) {
               temp_v2 = FUN_0018719c(0x37e);
               goto joined_r0x00273f44;
             }
-            if (DAT_005f15fc != 0x1f) goto LAB_00274348;
+            if (g_gameState != 0x1f) goto LAB_00274348;
             if (DAT_005f1600 != 1) {
               temp_v2 = FUN_0018719c(0x308);
 joined_r0x00273f44:
@@ -382,7 +382,7 @@ joined_r0x00273f44:
             }
           }
           if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x44) {
-            if (DAT_005f15fc != 0x1a) goto LAB_00274348;
+            if (g_gameState != 0x1a) goto LAB_00274348;
             if (DAT_005f1600 != 1) {
               if (DAT_005f1600 != 3) {
                 if (DAT_005f1600 != 5) {
@@ -516,11 +516,11 @@ LAB_00274348:
       }
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 0x23);
-    temp_v0 = DAT_005f15fc;
-    if (DAT_005f15fc == 0x20) {
+    temp_v0 = g_gameState;
+    if (g_gameState == 0x20) {
       temp_v0 = DAT_005f1600;
     }
-    if (DAT_005f15fc == 0x20 && temp_v0 == 2) {
+    if (g_gameState == 0x20 && temp_v0 == 2) {
       temp_v0 = 0;
       do {
         piVar1 = DAT_00580ca0;

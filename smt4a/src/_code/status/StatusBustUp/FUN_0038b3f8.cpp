@@ -9,7 +9,7 @@ int FUN_0019a7f4(int, unsigned int);
 int FUN_0019cac4(void);
 int FUN_001b2d54(unsigned int, int, unsigned int);
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 extern int DAT_00588fdc; /* 0x588fdc */
 extern int DAT_00588fe0; /* 0x588fe0 */
 
@@ -62,7 +62,7 @@ void FUN_0038b3f8(unsigned int param_1,int param_2)
         temp_v1 = DAT_00588fe0;
         if (temp_v3 != 0) {
           FUN_0019a7f4(0x19,param_1);
-          FUN_001b2d54(DAT_00570280,0x19,param_1);
+          FUN_001b2d54(g_aocSystem,0x19,param_1);
           temp_v1 = DAT_00588fe0;
         }
         *(unsigned char *)(temp_v1 + param_1) = 0;
@@ -83,7 +83,7 @@ void FUN_0038b3f8(unsigned int param_1,int param_2)
   temp_v1 = DAT_00588fdc;
   if (temp_v3 != 0) {
     FUN_0019a7f4(0xf,param_1);
-    FUN_001b2d54(DAT_00570280,0xf,param_1);
+    FUN_001b2d54(g_aocSystem,0xf,param_1);
     temp_v1 = DAT_00588fdc;
   }
   *(unsigned char *)(temp_v1 + param_1) = 0;

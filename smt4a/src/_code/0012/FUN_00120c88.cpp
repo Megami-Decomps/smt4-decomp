@@ -7,7 +7,7 @@ extern "C" {
 int FUN_003104dc(...);
 int FUN_003104ec(...);
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 extern signed char DAT_00594969; /* 0x594969 */
 extern signed char DAT_0059496a; /* 0x59496a */
 extern signed char DAT_0059496c; /* 0x59496c */
@@ -24,7 +24,7 @@ void FUN_00120c88(void)
   
   FUN_003104ec(0xffffffff);
   FUN_003104dc(0x10);
-  puVar1 = &DAT_00594958;
+  puVar1 = &g_flagBlock;
   if ((DAT_00594969 != '\0') || (DAT_0059496a != '\0')) {
     if (DAT_0059496c == '\0') {
       FUN_003104dc(0xffffffff);

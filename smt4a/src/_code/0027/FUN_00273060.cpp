@@ -27,7 +27,7 @@ typedef struct {
 extern int *DAT_005806a4; /* 0x5806a4 */
 extern int DAT_005806d4; /* 0x5806d4 */
 extern int DAT_00581280; /* 0x581280 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern signed char DAT_005f1614; /* 0x5f1614 */
 extern signed char DAT_005f161c; /* 0x5f161c */
 extern signed char DAT_005f161d; /* 0x5f161d */
@@ -149,11 +149,11 @@ void FUN_00273060(void)
       }
       if (temp_v8) {
         FUN_003b959c();
-        temp_v2 = DAT_00581288;
+        temp_v2 = g_lmapScene;
         temp_v14 = 0.017453292f;
-        temp_v4 = *(unsigned int *)(DAT_00581288 + 0x2c);
-        temp_v5 = *(unsigned int *)(DAT_00581288 + 0x30);
-        *(unsigned int *)(temp_v1 + 0x14) = *(unsigned int *)(DAT_00581288 + 0x28);
+        temp_v4 = *(unsigned int *)(g_lmapScene + 0x2c);
+        temp_v5 = *(unsigned int *)(g_lmapScene + 0x30);
+        *(unsigned int *)(temp_v1 + 0x14) = *(unsigned int *)(g_lmapScene + 0x28);
         *(unsigned int *)(temp_v1 + 0x18) = temp_v4;
         *(unsigned int *)(temp_v1 + 0x1c) = temp_v5;
         *(unsigned int *)(temp_v1 + 0x20) = *(unsigned int *)(temp_v2 + 0x7c);

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0030ea58(int, int);
 
-extern int FUN_002e3390(int);
+extern int wstrlen(int);
 /* Supplied declaration required: FUN_0030ea58. */
 
 
@@ -30,7 +30,7 @@ void FUN_00508650(int param_1,unsigned int param_2,int param_3)
   temp_v3 = 0;
   if (*puVar5 < puVar5[1]) {
     puVar4 = puVar5 + *puVar5 * 5 + 2;
-    temp_v1 = FUN_002e3390(param_3);
+    temp_v1 = wstrlen(param_3);
     temp_v0 = (unsigned short)*puVar4;
     while ((temp_v0 & 1) == 0) {
       temp_v2 = (unsigned int)(*(unsigned short *)((int)puVar4 + 2) >> 3);

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002a775c(unsigned int);
+int asdMdlManagerDestroy(unsigned int);
 
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 
 
 void FUN_001fa734(int *param_1)
@@ -16,7 +16,7 @@ void FUN_001fa734(int *param_1)
   int temp_v0;
   
   temp_v0 = *param_1;
-  FUN_002a775c(*(unsigned int *)(temp_v0 + 0xcbec));
+  asdMdlManagerDestroy(*(unsigned int *)(temp_v0 + 0xcbec));
   *(unsigned int *)(temp_v0 + 0xcbec) = 0;
   *(unsigned char *)(temp_v0 + 0xcbd0) = 0;
   return;

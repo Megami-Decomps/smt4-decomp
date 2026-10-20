@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00249dc4(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int bustupCutAnimSetJobParam(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -24,12 +24,12 @@ extern unsigned char DAT_00403738; /* 0x403738 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern unsigned int FUN_00246644(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00249dc4. */
-extern unsigned int FUN_00296cc8(unsigned int);
+/* Supplied declaration required: bustupCutAnimSetJobParam. */
+extern unsigned int scrGetArg(unsigned int);
 extern int FUN_002c1d5c(void);
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 
 
 unsigned int EVE_EffectLineStart(void)
@@ -43,11 +43,11 @@ unsigned int EVE_EffectLineStart(void)
   char *pcVar5;
   unsigned int in_fpscr;
   
-  temp_v0 = FUN_00296cc8(0);
+  temp_v0 = scrGetArg(0);
   temp_v1 = FUN_002c1d5c();
   if (temp_v1 == 0) {
     puVar3 = (unsigned int *)0x100;
-    FUN_002c498c(0x100,0x100,0,0xc,1);
+    asdMemAlloc(0x100,0x100,0,0xc,1);
     *puVar3 = 0;
     puVar3[1] = 0;
     puVar3[2] = 0;
@@ -57,9 +57,9 @@ unsigned int EVE_EffectLineStart(void)
     puVar3[1] = 0;
     puVar3[2] = temp_v0;
     pcVar5 = "EffectLine";
-    FUN_002c5788("EffectLine",2,0,0,FUN_001dfbe0,FUN_002db900,puVar3);
-    FUN_002c4a08(&DAT_00403738,0x71,0,0,&LAB_001dfc44,0,puVar3,pcVar5);
-    FUN_00249dc4(pcVar5);
+    asdProcessCreateSimple("EffectLine",2,0,0,FUN_001dfbe0,FUN_002db900,puVar3);
+    taskCreateDraw(&DAT_00403738,0x71,0,0,&LAB_001dfc44,0,puVar3,pcVar5);
+    bustupCutAnimSetJobParam(pcVar5);
   }
   return 1;
 }

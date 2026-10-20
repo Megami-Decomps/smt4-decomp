@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(int *);
+int asdMemFree(int *);
 int FUN_001ab878(int);
 
 typedef int romwright_code(...);
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001ab878. */
 extern int FUN_001ab8ac(int);
 
@@ -47,7 +47,7 @@ void FUN_001bcd8c(int *param_1)
     *(unsigned int *)(temp_v1 + 0xc) = 0;
   }
   FUN_001ab878(*param_1);
-  FUN_0019a5a0(param_1);
+  asdMemFree(param_1);
   return;
 }
 

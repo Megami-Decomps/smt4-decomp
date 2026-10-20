@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
 
 /* Supplied declaration required: FUN_00256898. */
@@ -57,8 +57,8 @@ void FUN_003c06ac(int *param_1)
   FUN_00297468("battle/talk/talk.bf",param_1 + 3,0);
   FUN_003dadd8(DAT_00435d18);
   param_1[6] = 1;
-  if ((-1 < *(int *)(DAT_004342c8 + 0x760)) &&
-     (temp_v1 = FUN_00256940(DAT_004342c8,*param_1,1), temp_v1 != 0)) {
+  if ((-1 < *(int *)(g_btlMain + 0x760)) &&
+     (temp_v1 = FUN_00256940(g_btlMain,*param_1,1), temp_v1 != 0)) {
     FUN_002568c4(0);
   }
   FUN_00256898(1,0);

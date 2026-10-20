@@ -56,7 +56,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_005712f8; /* 0x5712f8 */
 extern unsigned int DAT_005712fc; /* 0x5712fc */
 extern unsigned int DAT_00571328; /* 0x571328 */
@@ -66,7 +66,7 @@ extern unsigned int DAT_0057135c; /* 0x57135c */
 extern unsigned int DAT_00571368; /* 0x571368 */
 extern unsigned int DAT_0057136c; /* 0x57136c */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_001632f8(void);
 extern int FUN_002c7bf4(fn_0040ca18_arg1_p28 *);
 extern int FUN_004c600c(int);
@@ -77,7 +77,7 @@ extern int FUN_004c86ec(fn_0040ca18_arg1_p28 *);
 /* Supplied declaration required: FUN_004e699c. */
 extern int FUN_004e8300(int);
 /* Supplied declaration required: FUN_004ea5e8. */
-extern int FUN_004ee568(int);
+extern int btlUnitGet(int);
 
 
 void FUN_0040ca18(fn_0040ca18_arg0 *param_1,fn_0040ca18_arg1 *param_2)
@@ -97,7 +97,7 @@ void FUN_0040ca18(fn_0040ca18_arg0 *param_1,fn_0040ca18_arg1 *param_2)
   unsigned int temp_v9;
   void *temp_v10;
   
-  temp_v2 = FUN_0014aa78();
+  temp_v2 = btlGetMainState();
   if (((DAT_00571368 | DAT_00571358) & *(unsigned int *)(temp_v2 + 0x45a0)) != 0 ||
       ((DAT_0057136c | DAT_0057135c) & *(unsigned int *)(temp_v2 + 0x45a4)) != 0) {
     param_2->field_0x2 = 0;
@@ -112,11 +112,11 @@ void FUN_0040ca18(fn_0040ca18_arg0 *param_1,fn_0040ca18_arg1 *param_2)
   else {
     temp_v7 = 0;
     temp_v0 = 0;
-    temp_v3 = FUN_004e8300(DAT_0057113c);
+    temp_v3 = FUN_004e8300(g_btlScriptUnit);
     temp_v10 = (void *)0x0;
     temp_v1 = 1;
     temp_v8 = 0;
-    temp_v4 = FUN_004ee568(DAT_0057113c);
+    temp_v4 = btlUnitGet(g_btlScriptUnit);
     if (temp_v3 != 5) {
       temp_v5 = FUN_002c7bf4(param_2->field_0x28);
       if (temp_v5 == 0) {
@@ -214,10 +214,10 @@ LAB_0040cc5c:
     }
     else {
       temp_v7 = 0x25;
-      temp_v2 = DAT_0057113c;
+      temp_v2 = g_btlScriptUnit;
       FUN_004ea5e8();
       temp_v0 = temp_v2 < 2;
-      FUN_004e699c(DAT_0057113c,(int)*(short *)(*(int *)(temp_v4 + 0x20) + 0x6e),5);
+      FUN_004e699c(g_btlScriptUnit,(int)*(short *)(*(int *)(temp_v4 + 0x20) + 0x6e),5);
       FUN_004c8e30(temp_v7,temp_v8,1);
     }
     if (temp_v0) {

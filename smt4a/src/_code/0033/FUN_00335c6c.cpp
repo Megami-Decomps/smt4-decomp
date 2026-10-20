@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001006ec(int, int, int);
 int FUN_00192550(void);
 int FUN_001aba54(void);
-int FUN_002e6354(int [21], int);
+int sysMemClear(int [21], int);
 
 extern unsigned int DAT_00570288; /* 0x570288 */
 extern unsigned int DAT_0057028c; /* 0x57028c */
@@ -18,10 +18,10 @@ extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern unsigned short *FUN_001006c2(int, unsigned int);
 /* Supplied declaration required: FUN_001006ec. */
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_001aba54. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern int FUN_00481104(int);
 
 
@@ -56,7 +56,7 @@ void FUN_00335c6c(void)
   unsigned char temp_v13;
   int aiStack_78 [21];
   
-  temp_v6 = FUN_0014aa78();
+  temp_v6 = btlGetMainState();
   piVar22 = (int *)(temp_v6 + 0x4e58);
   temp_v9 = *(int *)(temp_v6 + 0x4e5c);
   if (*piVar22 != temp_v9) {
@@ -219,7 +219,7 @@ void FUN_00335c6c(void)
     temp_v4 = 0;
     temp_v9 = 0;
     do {
-      temp_v7 = FUN_0014aa78();
+      temp_v7 = btlGetMainState();
       puVar19 = (unsigned int *)(*(int *)(temp_v7 + 0x1ffc) + temp_v9 * 0x408);
       temp_v8 = *puVar19;
       temp_v11 = puVar19[1];
@@ -296,10 +296,10 @@ LAB_00336174:
       } while ((unsigned short *)*piVar24 != puVar23);
     }
     if (*piVar22 != *piVar24) {
-      FUN_002e6354(aiStack_78,0x54);
+      sysMemClear(aiStack_78,0x54);
       temp_v9 = 0;
       do {
-        temp_v7 = FUN_0014aa78();
+        temp_v7 = btlGetMainState();
         puVar19 = (unsigned int *)(*(int *)(temp_v7 + 0x1ffc) + temp_v9 * 0x408);
         temp_v8 = *puVar19;
         temp_v11 = puVar19[1];
@@ -335,7 +335,7 @@ LAB_00336174:
               }
             }
             else if (((temp_v11 & 0x1e0) != 0) ||
-                    (temp_v9 = FUN_0014aa78(), (int)*(short *)(temp_v9 + 0x2002) != aiStack_78[temp_v8]
+                    (temp_v9 = btlGetMainState(), (int)*(short *)(temp_v9 + 0x2002) != aiStack_78[temp_v8]
                     )) {
               puVar23 = puVar23 + 1;
               continue;

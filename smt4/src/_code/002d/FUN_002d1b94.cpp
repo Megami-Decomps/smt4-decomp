@@ -19,8 +19,8 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int DAT_00447060; /* 0x447060 */
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapMainState; /* 0x447060 */
+extern int g_lmapScene; /* 0x447e88 */
 extern unsigned int DAT_0049f920; /* 0x49f920 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -45,15 +45,15 @@ void FUN_002d1b94(unsigned int param_1,unsigned int param_2)
   unsigned int in_fpscr;
   unsigned int temp_v2;
   
-  temp_v0 = DAT_00447060;
-  FUN_0027d7b0(*(unsigned int *)(DAT_00447060 + 0x40),param_1,param_2);
+  temp_v0 = g_lmapMainState;
+  FUN_0027d7b0(*(unsigned int *)(g_lmapMainState + 0x40),param_1,param_2);
   pcVar3 = (char *)FUN_0027d748();
   FUN_002769b4((int)*pcVar3,(int)pcVar3[1],pcVar3[2]);
   *(unsigned int *)(temp_v0 + 0x48) = param_1;
-  temp_v1 = DAT_00447e88;
+  temp_v1 = g_lmapScene;
   temp_v2 = VectorSignedToFloat((int)*(short *)(pcVar3 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
   DAT_0049f920 = param_1;
-  *(unsigned int *)(DAT_00447e88 + 0x1c) = temp_v2;
+  *(unsigned int *)(g_lmapScene + 0x1c) = temp_v2;
   temp_v2 = VectorSignedToFloat((int)*(short *)(pcVar3 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(temp_v1 + 0x20) = temp_v2;
   temp_v2 = VectorSignedToFloat((int)*(short *)(pcVar3 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -72,9 +72,9 @@ void FUN_002d1b94(unsigned int param_1,unsigned int param_2)
   FUN_00264444(temp_v0 + 0xec);
   FUN_002666a0(temp_v0 + 0xec,*(int *)(temp_v0 + 0x40) - 100,*(unsigned int *)(temp_v0 + 0x48));
   FUN_002664d8(temp_v0 + 0xec);
-  temp_v0 = DAT_00447060;
-  if (*(int *)(DAT_00447060 + 0xcc) != 3) {
-    *(unsigned int *)(DAT_00447060 + 0xcc) = 3;
+  temp_v0 = g_lmapMainState;
+  if (*(int *)(g_lmapMainState + 0xcc) != 3) {
+    *(unsigned int *)(g_lmapMainState + 0xcc) = 3;
     *(unsigned int *)(temp_v0 + 0xd0) = 0;
     *(unsigned int *)(temp_v0 + 0xd4) = 0;
   }

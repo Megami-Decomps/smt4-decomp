@@ -1,29 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00359334` (_code @ 0x359334, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the lock pointer in r4 and the data pointer in r5 (swapped here) */
+/* Runs FUN_00431f04 on the owner's data block while holding the owner's lock; returns its result. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_005b406c; /* 0x5b406c */
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[0x88];
+    /* 0x88 */ u8 data[0x58];
+    /* 0xE0 */ u8 lock[1];      /* CriticalSection */
+} Owner;
 
-extern unsigned int FUN_00431f04(int);
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
+typedef struct OwnerHolder {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ Owner *owner;
+} OwnerHolder;
 
+extern OwnerHolder g_asdMemory;
 
-unsigned int FUN_00359334(void)
+extern void nn_os_CriticalSection_Enter(void *cs);
+extern void nn_os_CriticalSection_Leave(void *cs);
+extern u32 FUN_00431f04(void *data);
 
+u32 FUN_00359334(void)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = (*(int *)((unsigned char *)&DAT_005b406c + 0x4)) + 0x88;
-  temp_v1 = (*(int *)((unsigned char *)&DAT_005b406c + 0x4)) + 0xe0;
-  nn_os_CriticalSection_Enter(temp_v1);
-  temp_v0 = FUN_00431f04(temp_v2);
-  nn_os_CriticalSection_Leave(temp_v1);
-  return temp_v0;
+    void *lock = g_asdMemory.owner->lock;
+    void *data = g_asdMemory.owner->data;
+    u32 result;
+
+    nn_os_CriticalSection_Enter(lock);
+    result = FUN_00431f04(data);
+    nn_os_CriticalSection_Leave(lock);
+    return result;
 }
 
-} /* extern "C" */
+}

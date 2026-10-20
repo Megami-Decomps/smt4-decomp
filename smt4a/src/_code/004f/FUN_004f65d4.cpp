@@ -8,7 +8,7 @@ int FUN_001a79e8(...);
 int FUN_003fd7c0(...);
 int FUN_0040ace8(...);
 
-int FUN_0016007c(void);
+int asdOperatorNew(void);
 int FUN_00178b04(...);
 int FUN_003478dc(unsigned int, char *);
 int FUN_003afd30(void);
@@ -41,9 +41,9 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_0057a4f8; /* 0x57a4f8 */
+extern int g_btlStageModel; /* 0x57a4f8 */
 
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001a79e8. */
 extern int FUN_0022a00c(void);
@@ -130,8 +130,8 @@ void FUN_004f65d4(int param_1)
       FUN_003d37bc(*(unsigned int *)(param_1 + 0x33d0),(unsigned int *)(param_1 + 0x33dc),
                    param_1 + 0x33e0);
     }
-    temp_v4 = DAT_0057a4f8;
-    *(unsigned int *)(DAT_0057a4f8 + 0xb0) = *(unsigned int *)(param_1 + 0x33d4);
+    temp_v4 = g_btlStageModel;
+    *(unsigned int *)(g_btlStageModel + 0xb0) = *(unsigned int *)(param_1 + 0x33d4);
     *(unsigned int *)(temp_v4 + 0xb4) = *(unsigned int *)(param_1 + 0x33d8);
   }
   switch(*(unsigned char *)(param_1 + 0x33b4)) {
@@ -201,7 +201,7 @@ void FUN_004f65d4(int param_1)
       temp_v4 = *(int *)(param_1 + 0x33c0);
       if (temp_v4 != 0) goto code_r0x0042138c;
       temp_v4 = 0x44;
-      FUN_0016007c();
+      asdOperatorNew();
       temp_v9 = 0;
       if (temp_v4 != 0) {
         temp_v9 = FUN_004218dc();
@@ -215,7 +215,7 @@ void FUN_004f65d4(int param_1)
     temp_v4 = *(int *)(param_1 + 0x33c0);
     if (temp_v4 != 0) goto code_r0x0042138c;
     temp_v4 = 0x44;
-    FUN_0016007c();
+    asdOperatorNew();
     temp_v9 = 0;
     if (temp_v4 != 0) {
       temp_v9 = FUN_004218dc();

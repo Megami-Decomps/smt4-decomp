@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001631d0(...);
-int FUN_0019a5a0(void);
+int jobStop(...);
+int asdMemFree(void);
 int FUN_001a1ee0(void);
 int FUN_002e3328(...);
 int FUN_00318c3c(...);
@@ -34,7 +34,7 @@ int FUN_004a9588(...);
 int FUN_004aa0b0(...);
 int VectorSignedToFloat(...);
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_001517b4(void);
 int FUN_0019cac4(void);
 int FUN_00284ee4(...);
@@ -45,13 +45,13 @@ int FUN_00336de4(int, int);
 int FUN_003493dc(...);
 int FUN_0035d0e4(void);
 int FUN_0035fc4c(void);
-int FUN_0035fd38(int);
+int btlTalkBustUpSetUnk2F4(int);
 int FUN_0039ebcc(void);
 int FUN_003b2178(...);
 
 int FUN_00163aa4(...);
 int FUN_001846d0(int, int);
-int FUN_001f4c20(void);
+int menuStateStartConfirm(void);
 int FUN_0021d13c(int);
 int FUN_00280030(void);
 int FUN_002b1838(int);
@@ -60,7 +60,7 @@ int FUN_002c7e6c(void);
 int FUN_002c85b0(int);
 int FUN_002cc36c(int);
 int FUN_002cdd18(int);
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 int FUN_00336da0(int);
 int FUN_0034efe0(void);
 int FUN_0034f018(int);
@@ -96,26 +96,26 @@ extern unsigned int DAT_0057a9fc; /* 0x57a9fc */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_0014bef4. */
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: FUN_001641b4. */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 extern int FUN_00164af0(unsigned int);
 extern int FUN_0018206c(unsigned int, int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_00184748. */
 /* Supplied declaration required: FUN_00184c00. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019cac4. */
 /* Supplied declaration required: FUN_001a1ee0. */
 extern int FUN_001ab854(int);
 extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_001f4c20. */
-extern int FUN_00213b78(void);
+/* Supplied declaration required: menuStateStartConfirm. */
+extern int flagSelectVariant(void);
 /* Supplied declaration required: FUN_0021d13c. */
 extern int FUN_0026c3a0(void);
 extern int FUN_00270bfc(int);
@@ -133,7 +133,7 @@ extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_002ccde8. */
 /* Supplied declaration required: FUN_002cdd18. */
 /* Supplied declaration required: FUN_002e3328. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002f9418. */
 extern int FUN_002fc0a4(int);
 /* Supplied declaration required: FUN_00318c3c. */
@@ -162,7 +162,7 @@ extern int FUN_0035f9fc(void);
 extern int FUN_0035fa18(int, int, int);
 /* Supplied declaration required: FUN_0035fb28. */
 /* Supplied declaration required: FUN_0035fc4c. */
-/* Supplied declaration required: FUN_0035fd38. */
+/* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_0037418c. */
 extern int FUN_00375688(void);
 /* Supplied declaration required: FUN_0037dab0. */
@@ -171,7 +171,7 @@ extern int FUN_00381198(int);
 extern int FUN_0038e704(int);
 /* Supplied declaration required: FUN_0039ebcc. */
 /* Supplied declaration required: FUN_003a7a88. */
-extern int FUN_003aa088(unsigned int);
+extern int btlTalkBustUpIsUnk2F8(unsigned int);
 /* Supplied declaration required: FUN_003b2178. */
 extern int FUN_003c2d78(int);
 extern int FUN_003e8430(void);
@@ -219,7 +219,7 @@ unsigned int FUN_002248f8(void)
   unsigned int temp_v20;
   int temp_v21;
   
-  temp_v4 = FUN_00164a9c();
+  temp_v4 = jobGetWork();
   temp_v0 = DAT_0057a9c8;
   if (DAT_0057a9c8 == 0) {
     return 0;
@@ -252,7 +252,7 @@ unsigned int FUN_002248f8(void)
      (temp_v10 = *(int *)(temp_v0 + 0xc048) + 1, *(int *)(temp_v0 + 0xc048) = temp_v10,
      *(int *)(temp_v0 + 0xc044) < temp_v10)) {
     *(unsigned char *)(temp_v0 + 0xc040) = 0;
-    FUN_001f4c20();
+    menuStateStartConfirm();
   }
   temp_v10 = 0;
   temp_v14 = 0x3f8000003e490fdb;
@@ -392,7 +392,7 @@ unsigned int FUN_002248f8(void)
     temp_v10 = temp_v0 + 0x28c4;
     temp_v9 = FUN_0035f9fc();
     if (temp_v9 != 0) {
-      FUN_002e6354(&temp_v16,0x180);
+      sysMemClear(&temp_v16,0x180);
       temp_v10 = temp_v0;
       FUN_004ab10c(temp_v0,&temp_v16);
       FUN_003f9970(*(unsigned int *)(temp_v0 + 0x7488),&temp_v16,temp_v10);
@@ -444,10 +444,10 @@ unsigned int FUN_002248f8(void)
         }
       }
     }
-    temp_v10 = FUN_0014aa78();
+    temp_v10 = btlGetMainState();
     if (((*(unsigned int *)(temp_v10 + 0x45ac) & DAT_0057a9fc) != 0 ||
          (*(unsigned int *)(temp_v10 + 0x45a8) & DAT_0057a9f8) != 0) &&
-       (temp_v10 = FUN_003aa088(*(unsigned int *)(temp_v4 + 0x2364)), temp_v10 == 0)) {
+       (temp_v10 = btlTalkBustUpIsUnk2F8(*(unsigned int *)(temp_v4 + 0x2364)), temp_v10 == 0)) {
       puVar8 = (unsigned short *)0x0;
       FUN_0019cac4();
       temp_v8 = 0;
@@ -463,7 +463,7 @@ unsigned int FUN_002248f8(void)
         DAT_0057a9b8 = 0;
         FUN_0035fc4c();
         FUN_00336de4(*puVar8,1);
-        FUN_0035fd38(1);
+        btlTalkBustUpSetUnk2F4(1);
       }
     }
     break;
@@ -550,7 +550,7 @@ unsigned int FUN_002248f8(void)
     }
     else {
 LAB_00225054:
-      FUN_0014aa78();
+      btlGetMainState();
       temp_v4 = FUN_003e8430();
       if (temp_v4 == 0) break;
     }
@@ -832,7 +832,7 @@ LAB_002255d4:
         temp_v7 = 0x120;
         *(unsigned int *)(temp_v0 + 0x12ffc) = 1;
         temp_v4 = FUN_0014bef4(2);
-        temp_v10 = FUN_00213b78();
+        temp_v10 = flagSelectVariant();
         if ((temp_v10 != 1) && (temp_v10 == 2)) {
           if (temp_v4 == 0) {
             temp_v7 = 0x121;
@@ -927,10 +927,10 @@ LAB_002255d4:
       FUN_002e3328(*(unsigned int *)(temp_v10 + 0x7488));
       *(unsigned int *)(temp_v10 + 0x7488) = 0;
       if (DAT_0057a9c8 != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         DAT_0057a9c8 = 0;
       }
-      FUN_001631d0(*(unsigned int *)(temp_v4 + 0x78),0);
+      jobStop(*(unsigned int *)(temp_v4 + 0x78),0);
     }
   }
 LAB_00225ce8:

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_003e7fa4(unsigned int, int, int);
 int FUN_003f0e20(unsigned int *, int);
 int FUN_004aa0b0(...);
@@ -41,7 +41,7 @@ extern unsigned int DAT_00571320; /* 0x571320 */
 extern unsigned int DAT_00571324; /* 0x571324 */
 extern int DAT_0057a9c8; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_003e7fa4. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004aa0b0. */
@@ -64,7 +64,7 @@ void FUN_0040d97c(unsigned int param_1,fn_0040d97c_arg1 *param_2)
   int temp_v7;
   int temp_v8;
   
-  puVar3 = (unsigned int *)FUN_0014aa78();
+  puVar3 = (unsigned int *)btlGetMainState();
   FUN_003f0e20(puVar3,(int)*(short *)((int)param_2->field_0x14 + 0x6a));
   if (puVar3 == (unsigned int *)0x0) {
     param_2->field_0x2 = 0;
@@ -81,7 +81,7 @@ void FUN_0040d97c(unsigned int param_1,fn_0040d97c_arg1 *param_2)
     temp_v3 = *puVar3;
     temp_v5 = puVar3[1];
     if (!((DAT_00571318 & temp_v3) == 0 && (DAT_0057131c & temp_v5) == 0)) {
-      temp_v2 = FUN_0014aa78();
+      temp_v2 = btlGetMainState();
       FUN_003e7fa4(temp_v2,(int)*(short *)((int)param_2->field_0x14 + 0x6a),0);
       temp_v4 = param_2->field_0x28;
       if (temp_v4 == 1) {

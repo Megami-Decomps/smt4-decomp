@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00411e8c(int, int);
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_003e4a00(void);
 /* Supplied declaration required: FUN_00411e8c. */
 
@@ -24,7 +24,7 @@ void FUN_00411c04(int param_1,int param_2)
   int temp_v5;
   int temp_v6;
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   if (temp_v0 != 0) {
     temp_v6 = 0;
     temp_v5 = 0;

@@ -10,7 +10,7 @@ int FUN_002505c0(...);
 int FUN_002550d8(int, int, int, int);
 int FUN_0027da30(...);
 int FUN_00282924(int, int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 
 /* stack frame of param_13: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -31,7 +31,7 @@ extern int DAT_00434290; /* 0x434290 */
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: FUN_00282924. */
 extern unsigned int FUN_00293230(void);
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 
 
 unsigned int
@@ -53,7 +53,7 @@ FUN_0027df30(int param_1,unsigned int param_2,int param_3,unsigned int param_4,i
   }
   temp_v1 = (short)param_9 + (short)param_1;
   if (-1 < param_9) {
-    temp_v2 = FUN_002939f4();
+    temp_v2 = btlGetMainState();
     FUN_00282924(temp_v2,(int)*(short *)(param_3 + 0x62));
     if (((temp_v0) && (temp_v2 != 0)) && (-1 < param_11)) {
       temp_v4 = DAT_00434290;
@@ -82,7 +82,7 @@ FUN_0027df30(int param_1,unsigned int param_2,int param_3,unsigned int param_4,i
       *(int *)(temp_v4 + 0x14) = param_3;
       *(unsigned int *)(temp_v4 + 0x28) = 1;
       *(int *)(temp_v4 + 0x4c) = param_6;
-      FUN_002939f4();
+      btlGetMainState();
       temp_v3 = FUN_00293230();
     }
     else {
@@ -96,7 +96,7 @@ LAB_0027e16c:
       *(int *)(temp_v4 + 0x14) = param_3;
       *(unsigned int *)(temp_v4 + 0x28) = 0;
       *(int *)(temp_v4 + 0x4c) = param_5;
-      FUN_002939f4();
+      btlGetMainState();
       temp_v3 = FUN_00293230();
       temp_v3 = temp_v3 & ~param_13;
     }
@@ -114,7 +114,7 @@ LAB_0027e16c:
     *(int *)(temp_v4 + 0x14) = param_3;
     *(unsigned int *)(temp_v4 + 0x28) = 1;
     *(int *)(temp_v4 + 0x4c) = param_6;
-    FUN_002939f4();
+    btlGetMainState();
     temp_v3 = FUN_00293230();
     if (temp_v3 != 0) {
       FUN_002505c0(0,0,0x10001c1,0,1,0,0);
@@ -125,7 +125,7 @@ LAB_0027e16c:
     temp_v3 = 0;
     temp_v0 = *(short *)(param_3 + 0x62) < 0x6d;
     if (temp_v0) {
-      temp_v2 = FUN_002939f4();
+      temp_v2 = btlGetMainState();
       FUN_0027da30(temp_v2,(int)*(short *)(param_3 + 0x62));
       if (temp_v2 != 0) {
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0xfa);

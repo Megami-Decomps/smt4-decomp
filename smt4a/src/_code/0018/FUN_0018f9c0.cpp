@@ -19,7 +19,7 @@ struct fn_0018f9c0_arg0 {
 };
 
 extern int FUN_001a7a20(int, int, unsigned int);
-extern unsigned int FUN_002e3390(int);
+extern unsigned int wstrlen(int);
 /* Supplied declaration required: FUN_0030ea58. */
 
 
@@ -39,7 +39,7 @@ unsigned int FUN_0018f9c0(fn_0018f9c0_arg0 *param_1,int param_2)
   if (((param_1->field_0x4c == 0) && (temp_v3 = param_1->field_0x5c, temp_v3 != 0)) &&
      (param_1->field_0x60 != 0)) {
     temp_v0 = *(int *)(param_2 + 0x30);
-    temp_v1 = FUN_002e3390(temp_v3);
+    temp_v1 = wstrlen(temp_v3);
     temp_v3 = FUN_001a7a20(temp_v0 + 0x34,temp_v3,temp_v1);
     if (temp_v3 == 0xffff) {
       temp_v5 = 0x80000020;
@@ -76,7 +76,7 @@ unsigned int FUN_0018f9c0(fn_0018f9c0_arg0 *param_1,int param_2)
     return temp_v5;
   }
   temp_v0 = *(int *)(param_2 + 0x30);
-  temp_v1 = FUN_002e3390(temp_v3);
+  temp_v1 = wstrlen(temp_v3);
   temp_v3 = FUN_001a7a20(temp_v0 + 0x34,temp_v3,temp_v1);
   if (temp_v3 == 0xffff) {
     return 0x80000020;

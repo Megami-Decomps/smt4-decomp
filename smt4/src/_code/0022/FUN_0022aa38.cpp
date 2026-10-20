@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0022abe0. */
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_00283e48. */
-extern unsigned int FUN_002939f4(void);
+extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: FUN_002ae164. */
 
 
@@ -38,7 +38,7 @@ unsigned int FUN_0022aa38(unsigned int param_1,int param_2)
   unsigned char temp_v5 [22];
   short temp_v6;
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   FUN_00247478(temp_v5,temp_v0,param_1);
   temp_v1 = (int)temp_v6;
   if (temp_v1 != 0) {

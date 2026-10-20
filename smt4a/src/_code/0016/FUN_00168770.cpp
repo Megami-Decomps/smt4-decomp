@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 
 unsigned int FUN_00168770(void)
@@ -16,8 +16,8 @@ unsigned int FUN_00168770(void)
   int temp_v2;
   int *piVar4;
   
-  temp_v0 = DAT_0059dbb4;
-  piVar4 = (int *)(DAT_0059dbb4 + 0x1318);
+  temp_v0 = g_renderCtx;
+  piVar4 = (int *)(g_renderCtx + 0x1318);
   temp_v1 = *piVar4;
   temp_v2 = piVar4[temp_v1 + 2];
   *piVar4 = temp_v1 - 1;
@@ -25,8 +25,8 @@ unsigned int FUN_00168770(void)
     (**(romwright_code **)(temp_v0 + 0x1334))();
     *(unsigned char *)(temp_v0 + 0x1330) = 0;
   }
-  temp_v0 = DAT_0059dbb4;
-  piVar4 = (int *)(DAT_0059dbb4 + 0x1358);
+  temp_v0 = g_renderCtx;
+  piVar4 = (int *)(g_renderCtx + 0x1358);
   temp_v1 = *piVar4;
   temp_v2 = piVar4[temp_v1 + 2];
   *piVar4 = temp_v1 - 1;
@@ -34,8 +34,8 @@ unsigned int FUN_00168770(void)
     (**(romwright_code **)(temp_v0 + 0x1374))();
     *(unsigned char *)(temp_v0 + 0x1370) = 0;
   }
-  temp_v0 = DAT_0059dbb4;
-  piVar4 = (int *)(DAT_0059dbb4 + 0x1338);
+  temp_v0 = g_renderCtx;
+  piVar4 = (int *)(g_renderCtx + 0x1338);
   temp_v1 = *piVar4;
   temp_v2 = piVar4[temp_v1 + 2];
   *piVar4 = temp_v1 - 1;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00187d04(unsigned int, unsigned char [64]);
+int camSetMatrixA(unsigned int, unsigned char [64]);
 int FUN_0019a0dc(int *, unsigned int);
 int FUN_0019a0fc(unsigned char [64], unsigned int *);
 int FUN_001ac6ec(unsigned char [64]);
@@ -15,9 +15,9 @@ typedef struct {
     unsigned int sp90; /* 0x90: local_90 */
 } param_1_stack;
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_00187d04. */
+/* Supplied declaration required: camSetMatrixA. */
 /* Supplied declaration required: FUN_0019a0dc. */
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: FUN_001ac6ec. */
@@ -50,7 +50,7 @@ void FUN_0019ac70(unsigned int *param_1)
     param_1 = temp_v3;
   }
   FUN_001ac6ec(temp_v0);
-  FUN_0019a0dc(&temp_v1,DAT_0059dbb4);
+  FUN_0019a0dc(&temp_v1,g_renderCtx);
   *param_1 = temp_v1;
   param_1[1] = uStack_8c;
   param_1[2] = uStack_88;
@@ -68,7 +68,7 @@ void FUN_0019ac70(unsigned int *param_1)
   param_1[0xe] = uStack_58;
   param_1[0xf] = uStack_54;
   FUN_0019a0fc(temp_v0,param_1);
-  FUN_00187d04(DAT_0059dbb4,temp_v0);
+  camSetMatrixA(g_renderCtx,temp_v0);
   return;
 }
 

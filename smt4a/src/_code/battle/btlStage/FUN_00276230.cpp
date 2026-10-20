@@ -11,9 +11,9 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned char DAT_0057a4f4; /* 0x57a4f4 */
+extern unsigned char g_btlStage; /* 0x57a4f4 */
 
-extern unsigned int FUN_00164a9c(void);
+extern unsigned int jobGetWork(void);
 /* Supplied declaration required: FUN_004d8d40. */
 
 
@@ -23,9 +23,9 @@ void FUN_00276230(void)
 /* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   
-  temp_v0 = FUN_00164a9c();
-  if ((*(int *)((unsigned char *)&DAT_0057a4f4 + 0x4)) != 0) {
-    FUN_004d8d40((*(int *)((unsigned char *)&DAT_0057a4f4 + 0x4)),temp_v0);
+  temp_v0 = jobGetWork();
+  if ((*(int *)((unsigned char *)&g_btlStage + 0x4)) != 0) {
+    FUN_004d8d40((*(int *)((unsigned char *)&g_btlStage + 0x4)),temp_v0);
     return;
   }
   return;

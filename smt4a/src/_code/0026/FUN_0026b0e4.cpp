@@ -11,7 +11,7 @@ int FUN_00100388(...);
 int FUN_0015f858(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001689e8(...);
 int FUN_00180310(...);
 int FUN_0018152c(...);
@@ -46,7 +46,7 @@ extern unsigned char LAB_0026be98; /* 0x26be98 */
 extern unsigned char LAB_0026be9c; /* 0x26be9c */
 extern unsigned char DAT_00536b70; /* 0x536b70 */
 extern int DAT_00588fe8; /* 0x588fe8 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
@@ -56,7 +56,7 @@ extern int DAT_0059dbb4; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int FUN_001654d8(int);
 extern int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001689e8. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180310. */
@@ -157,7 +157,7 @@ unsigned int FUN_0026b0e4(void)
     temp_v19 = FUN_002a4894(DAT_00588fe8 + 0x67c);
     temp_v18 = 0;
     temp_v17 = (unsigned char *)0x0;
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_00164b5c(2,0x12,0xc,temp_v0,temp_v1,0xb3);
     FUN_001835b4(2,0x12,0x52b,temp_v0,temp_v1,0xb5);
     FUN_001835b4(2,0x12,0x52c,temp_v0,temp_v1,0xb5);
@@ -257,11 +257,11 @@ LAB_0026b298:
       return 0;
     }
     temp_v2 = FUN_001834a4(0x12,temp_v19 + 0x477);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,0x12,0x46d,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0xbf);
     FUN_001835b4(2,0x12,0x46e,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0xbf);
     FUN_001835b4(2,0x12,0x46f,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0xbf);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,0x12,0x470,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0xc4);
     temp_v11 = *(int *)(temp_v4 + 0x530);
     temp_v15 = temp_v11 != 0;
@@ -295,9 +295,9 @@ LAB_0026b644:
     FUN_001835b4(2,0x12,temp_v11 + 1,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0xc4
                 );
     FUN_001835b4(2,0x12,temp_v12,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0xc4);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,0x12,temp_v14,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0xc4);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,0x12,0x474,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0xc4);
     if (0 < (int)temp_v18) {
       temp_v11 = FUN_001834a4(0x12,0x476);
@@ -336,12 +336,12 @@ LAB_0026b644:
     temp_v2 = FUN_002a4860();
     temp_v10 = FUN_002a4894(temp_v11);
     temp_v11 = FUN_002a4878(temp_v11);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_00164b5c(2,0x12,0x10,temp_v0,temp_v1,0xb3);
     FUN_0022fb78(temp_v0,temp_v1);
     temp_v24 = temp_v4 + 0x2300;
     if (*(short *)(temp_v4 + 0x234a) < 1) {
-      FUN_001677c0();
+      efctSetSpeed();
     }
     temp_v19 = temp_v11 + (temp_v2 + temp_v10) * 4;
     temp_v11 = 0;
@@ -352,7 +352,7 @@ LAB_0026b644:
         temp_v10 = temp_v2 + (temp_v10 + temp_v11) * 4;
         if (*(short *)(temp_v24 + 0x48) <= temp_v10) break;
         temp_v5 = FUN_001834a4(0x12,temp_v2 + temp_v11 * 4 + 0x4ae);
-        temp_v7 = DAT_0059dbb4;
+        temp_v7 = g_renderCtx;
         temp_v6 = *(int *)(temp_v4 + 0x518);
         temp_v8 = temp_v6;
         if (temp_v6 == 0x16) {
@@ -373,7 +373,7 @@ LAB_0026b644:
           }
           FUN_001835b4(2,0x12,0x4a2,*(short *)(temp_v5 + 8) + temp_v0,*(short *)(temp_v5 + 10) + temp_v1,
                        0xb5);
-          temp_v8 = DAT_0059dbb4;
+          temp_v8 = g_renderCtx;
           temp_v7 = FUN_00169294(6,7,0);
           piVar14 = (int *)(temp_v8 + 0x12b8);
           temp_v6 = piVar14[*piVar14 + 2];
@@ -411,13 +411,13 @@ LAB_0026b644:
       } while (temp_v2 < 4);
       temp_v11 = temp_v11 + 1;
     } while (temp_v11 < 9);
-    FUN_001677c0();
+    efctSetSpeed();
     if ((*(int *)(temp_v4 + 0x518) == 0x16) && (0 < *(short *)(temp_v24 + 0x4a))) {
       temp_v11 = FUN_002a4878(temp_v23);
       temp_v2 = FUN_002a4894(temp_v23);
       temp_v2 = FUN_001834a4(0x12,temp_v11 + temp_v2 * 4 + 0x4ae);
-      FUN_001677c0();
-      temp_v11 = DAT_0059dbb4;
+      efctSetSpeed();
+      temp_v11 = g_renderCtx;
       temp_v10 = FUN_00169294(6,1,0);
       piVar14 = (int *)(temp_v11 + 0x12b8);
       temp_v8 = piVar14[*piVar14 + 2];
@@ -427,7 +427,7 @@ LAB_0026b644:
         *(unsigned char *)(temp_v11 + 0x12d0) = 0;
       }
       FUN_001835b4(2,0x12,0x4a7,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0xc9);
-      temp_v11 = DAT_0059dbb4;
+      temp_v11 = g_renderCtx;
       temp_v2 = FUN_00169294(6,7,0);
       piVar14 = (int *)(temp_v11 + 0x12b8);
       temp_v10 = piVar14[*piVar14 + 2];
@@ -436,7 +436,7 @@ LAB_0026b644:
         (**(romwright_code **)(temp_v11 + 0x12d4))();
         *(unsigned char *)(temp_v11 + 0x12d0) = 0;
       }
-      FUN_001677c0();
+      efctSetSpeed();
     }
     FUN_001835b4(2,0x12,0x5a1,temp_v0,temp_v1,0xbf);
     iStack_9c = (int)*(short *)(temp_v4 + 0x590);
@@ -464,7 +464,7 @@ LAB_0026b644:
     }
     break;
   case 0x18:
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_00164b5c(2,0x12,0xf,temp_v0,temp_v1,0xb3);
     FUN_00164b5c(2,0x12,0xe,temp_v0,temp_v1,0xb3);
     FUN_0022fb78(temp_v0,temp_v1);
@@ -525,16 +525,16 @@ LAB_0026b644:
       temp_v18 = 0x486;
       FUN_00344cd0(temp_v4 + 0x23c0,temp_v0,temp_v1,0x12,0x48a,0x48b);
     }
-    FUN_001677c0();
+    efctSetSpeed();
     break;
   case 0x1f:
-    FUN_001677c0();
+    efctSetSpeed();
     temp_v11 = 0;
     do {
       FUN_001835b4(2,0x12,temp_v11 + 0x553,temp_v0,temp_v1,0xbf);
       temp_v11 = temp_v11 + 1;
     } while (temp_v11 < 3);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_00289418(temp_v0,temp_v1);
   }
   return 0;

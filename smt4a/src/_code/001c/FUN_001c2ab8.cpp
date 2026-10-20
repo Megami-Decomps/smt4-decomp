@@ -33,7 +33,7 @@ extern int FUN_001c2484(void);
 extern int FUN_001cc570(int, int);
 /* Supplied declaration required: FUN_001cd1e8. */
 extern int FUN_001cd210(unsigned char *, unsigned int *, unsigned int);
-extern unsigned int aeabi_uidivmod(unsigned int);
+extern unsigned int __aeabi_uidivmod(unsigned int);
 extern unsigned int *nw_snd_internal_StreamSoundFile_InfoBlockBody_GetChannelInfoTable(unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Free. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Free. */
@@ -80,7 +80,7 @@ void FUN_001c2ab8(int param_1,unsigned char *param_2)
       *(unsigned char *)(param_1 + 0xc) = 1;
       temp_v0 = FUN_001cc570(param_1,param_1 + 0x88);
       if ((temp_v0 != 0) && (*(unsigned int *)(param_1 + 0xa8) < 0x2001)) {
-        temp_v1 = aeabi_uidivmod(*(unsigned int *)(*(int *)(param_1 + 100) + 8));
+        temp_v1 = __aeabi_uidivmod(*(unsigned int *)(*(int *)(param_1 + 100) + 8));
         *(unsigned int *)(param_1 + 0x68) = temp_v1;
         if (temp_v1 >= 4) {
           if (temp_v1 >= 0x21) {

@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00291e40(int);
 
-extern int DAT_00447a78; /* 0x447a78 */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_mapIf; /* 0x447a78 */
+extern int g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_00291e40. */
 
@@ -20,16 +20,16 @@ void FUN_00266fac(int param_1,int param_2)
   int temp_v1;
   unsigned char temp_v2;
   
-  temp_v0 = DAT_00447a78;
-  temp_v1 = (int)*(char *)(DAT_00447a78 + 0x16);
+  temp_v0 = g_mapIf;
+  temp_v1 = (int)*(char *)(g_mapIf + 0x16);
   temp_v2 = temp_v1 == param_1;
   if (temp_v2) {
-    temp_v1 = *(int *)(DAT_00447a78 + 0x1cc);
+    temp_v1 = *(int *)(g_mapIf + 0x1cc);
   }
-  if ((!temp_v2 || temp_v1 != param_2) && (*(char *)(DAT_00447a78 + 0x16) = (char)param_1, param_1 != 0)
+  if ((!temp_v2 || temp_v1 != param_2) && (*(char *)(g_mapIf + 0x16) = (char)param_1, param_1 != 0)
      ) {
     *(int *)(temp_v0 + 0x1cc) = param_2;
-    if (DAT_0049f91c >= 101) {
+    if (g_gameState >= 101) {
       FUN_00291e40(0x10001fd);
     }
     *(unsigned int *)(temp_v0 + 0x98) = 0;

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002c4938(int, int);
+int memClear(int, int);
 int rt_memcpy(int, int, int);
 
 extern int DAT_0043e0f8; /* 0x43e0f8 */
 
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -23,7 +23,7 @@ void FUN_0026c7b8(int param_1)
   temp_v0 = DAT_0043e0f8;
   *(unsigned char *)(DAT_0043e0f8 + 0x10) = 0;
   if (param_1 != 0) {
-    FUN_002c4938(temp_v0 + 0x154,0x31);
+    memClear(temp_v0 + 0x154,0x31);
     temp_v1 = 0;
     do {
       if (*(char *)(param_1 + temp_v1) == '\0') {

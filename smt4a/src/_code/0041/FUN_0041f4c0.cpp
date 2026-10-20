@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00187180(...);
+int dataTableGet(...);
 int FUN_0019de98(...);
 int FUN_002f0384(...);
 int FUN_0041e58c(...);
@@ -30,8 +30,8 @@ struct fn_0041f4c0_arg0 {
 };
 
 extern int FUN_00163fd4(unsigned int);
-/* Supplied declaration required: FUN_00187180. */
-extern int FUN_00192798(void);
+/* Supplied declaration required: dataTableGet. */
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_0023b3d0(void);
 extern int FUN_002857dc(void);
@@ -65,8 +65,8 @@ void FUN_0041f4c0(fn_0041f4c0_arg0 *param_1)
       param_1->field_0x68 = 0;
     }
     temp_v1 = param_1->field_0x5;
-    FUN_00187180(0x3d,0);
-    temp_v2 = FUN_00192798();
+    dataTableGet(0x3d,0);
+    temp_v2 = dataTableGetEntries();
     FUN_0019de98(temp_v2 + temp_v1 * 0x54 + 0x14,0xf4f4f4ff);
     temp_v0 = param_1->field_0x7;
     param_1->field_0x8 = 0;

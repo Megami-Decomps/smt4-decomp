@@ -32,7 +32,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_0022b064. */
 /* Supplied declaration required: FUN_002305e8. */
@@ -53,8 +53,8 @@ void FUN_003b9a84(fn_003b9a84_arg0 *param_1)
   int temp_v0;
   
   if (param_1->field_0x2c != 0) {
-    if ((param_1->field_0x2c == 1) && (temp_v0 = FUN_002736e8(DAT_00432fc8 + 0xa8), temp_v0 != 0)) {
-      FUN_0027369c(DAT_00432fc8 + 0xa8);
+    if ((param_1->field_0x2c == 1) && (temp_v0 = FUN_002736e8(g_aocMain + 0xa8), temp_v0 != 0)) {
+      FUN_0027369c(g_aocMain + 0xa8);
       FUN_0022b064(param_1);
       FUN_0027db24(0);
       FUN_0027e774(0);
@@ -69,7 +69,7 @@ void FUN_003b9a84(fn_003b9a84_arg0 *param_1)
     }
   }
   else {
-    FUN_00273644(DAT_00432fc8 + 0xa8);
+    FUN_00273644(g_aocMain + 0xa8);
     FUN_002b8838(0x9e);
     param_1->field_0x2c = 1;
   }

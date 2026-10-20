@@ -2,9 +2,9 @@
 
 extern "C" {
 
-int FUN_003283ac(int);
+int scrSetResult(int);
 
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_00373d40(int *param_1)
@@ -12,10 +12,10 @@ unsigned int FUN_00373d40(int *param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (*(char *)(*param_1 + 0x33b4) != '\r') {
-    FUN_003283ac(0);
+    scrSetResult(0);
     return 0;
   }
-  FUN_003283ac(1);
+  scrSetResult(1);
   return 1;
 }
 

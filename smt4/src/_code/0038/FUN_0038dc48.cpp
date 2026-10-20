@@ -41,7 +41,7 @@ extern unsigned char LAB_0038e08c; /* 0x38e08c */
 extern unsigned char LAB_0038e09c; /* 0x38e09c */
 extern unsigned char LAB_0038e0ac; /* 0x38e0ac */
 extern unsigned char LAB_0038e0bc; /* 0x38e0bc */
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_002341d4. */
 /* Supplied declaration required: FUN_00234330. */
@@ -121,8 +121,8 @@ void FUN_0038dc48(int param_1)
   unsigned int uStack_34;
   unsigned char temp_v17 [16];
   
-  temp_v0 = DAT_00432fc8;
-  FUN_0023499c(&temp_v8,DAT_00432fc8 + 0x28,DAT_00432fc8 + 0x18);
+  temp_v0 = g_aocMain;
+  FUN_0023499c(&temp_v8,g_aocMain + 0x28,g_aocMain + 0x18);
   *(unsigned int *)(param_1 + 0xc) = temp_v8;
   *(unsigned int *)(param_1 + 0x10) = uStack_f4;
   temp_v1 = FUN_002a12d8(param_1 + 0xc);

@@ -9,8 +9,8 @@ int FUN_002a36fc(unsigned int *);
 int FUN_002a3958(unsigned int *, int *);
 int FUN_002a3ab0(unsigned int *, int *);
 int FUN_002a3d58(...);
-int FUN_002c32a0(int, int, int, int, int, int);
-int FUN_002c4938(...);
+int memAlloc(int, int, int, int, int, int);
+int memClear(...);
 int rt_memcpy_w(int, int, int);
 
 typedef int romwright_code(...);
@@ -28,8 +28,8 @@ typedef struct {
 /* Supplied declaration required: FUN_002a3958. */
 /* Supplied declaration required: FUN_002a3ab0. */
 /* Supplied declaration required: FUN_002a3d58. */
-/* Supplied declaration required: FUN_002c32a0. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -52,8 +52,8 @@ unsigned int * FUN_00248f70(unsigned int *param_1)
   unsigned int temp_v10;
   
   puVar2 = (unsigned int *)0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0x90,0x10,1);
-  FUN_002c4938();
+  memAlloc(0x10000,0x100,0,0x90,0x10,1);
+  memClear();
   puVar2[0x20] = 0;
   puVar2[0x21] = 0;
   FUN_002a3d58(puVar2);
@@ -75,9 +75,9 @@ unsigned int * FUN_00248f70(unsigned int *param_1)
   puVar2[0x1a] = param_1[0x1a];
   for (temp_v5 = param_1[0x23]; temp_v5 != 0; temp_v5 = *(int *)(temp_v5 + 0xac)) {
     temp_v1 = 0x10000;
-    FUN_002c32a0(0x10000,0x100,0,0xc0,0x10,1);
-    FUN_002c4938();
-    FUN_002c4938(temp_v1,0x90);
+    memAlloc(0x10000,0x100,0,0xc0,0x10,1);
+    memClear();
+    memClear(temp_v1,0x90);
     *(unsigned int *)(temp_v1 + 0x84) = 1;
     *(unsigned char *)(temp_v1 + 0x88) = 8;
     *(unsigned char *)(temp_v1 + 0x89) = 0;
@@ -86,7 +86,7 @@ unsigned int * FUN_00248f70(unsigned int *param_1)
     temp_v6 = *(int *)(temp_v5 + 0x90);
     temp_v0 = *(unsigned short *)(temp_v6 + 4);
     puVar4 = (unsigned int *)0x10000;
-    FUN_002c32a0(0x10000,0x100,0,0x2c,0x10,1);
+    memAlloc(0x10000,0x100,0,0x2c,0x10,1);
     puVar4[1] = 0;
     puVar4[2] = 0;
     puVar4[3] = 0;

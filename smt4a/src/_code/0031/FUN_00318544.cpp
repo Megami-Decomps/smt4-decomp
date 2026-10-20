@@ -16,10 +16,10 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_5_stack;
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00164a9c(int);
+extern int jobGetWork(int);
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0019a7f4. */
 /* Supplied declaration required: FUN_0019d96c. */
@@ -42,7 +42,7 @@ void FUN_00318544(int param_1,unsigned int param_2,int param_3,unsigned int para
   
   temp_v0 = FUN_0018719c(0x522);
   if ((temp_v0 == 0) || (param_1 != 0)) {
-    temp_v1 = FUN_00164a9c(param_1);
+    temp_v1 = jobGetWork(param_1);
     temp_v2 = *(int *)(temp_v1 + 0x84) != -1;
     temp_v0 = temp_v1;
     if (temp_v2) {
@@ -50,7 +50,7 @@ void FUN_00318544(int param_1,unsigned int param_2,int param_3,unsigned int para
     }
     if (temp_v2 && temp_v0 != 0) {
       FUN_0019a7f4(*(unsigned int *)(temp_v1 + 0x10));
-      FUN_001b2d54(DAT_00570280,*(unsigned int *)(temp_v1 + 0x10),*(unsigned int *)(temp_v1 + 0x84));
+      FUN_001b2d54(g_aocSystem,*(unsigned int *)(temp_v1 + 0x10),*(unsigned int *)(temp_v1 + 0x84));
       *(unsigned int *)(temp_v1 + 0x84) = 0xffffffff;
       *(unsigned int *)(temp_v1 + 0x80) = 0;
     }
@@ -86,7 +86,7 @@ void FUN_00318544(int param_1,unsigned int param_2,int param_3,unsigned int para
       }
       if (temp_v0 == 3) {
         FUN_0019d96c(temp_v1,5,0);
-        temp_v0 = FUN_00164a9c(param_1);
+        temp_v0 = jobGetWork(param_1);
         *(unsigned int *)(temp_v0 + 0x78) = 1;
         *(unsigned int *)(temp_v0 + 0x4c) = *(unsigned int *)(temp_v0 + 0x34);
         *(unsigned int *)(temp_v0 + 0x50) = *(unsigned int *)(temp_v0 + 0x38);

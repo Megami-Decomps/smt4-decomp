@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0010a9a0(void);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 
 extern unsigned char DAT_0055afbc; /* 0x55afbc */
 
 /* Supplied declaration required: FUN_0010a9a0. */
 extern unsigned int FUN_00117358(int);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern int FUN_002e760a(unsigned int);
 
 
@@ -28,7 +28,7 @@ unsigned int * FUN_00121328(unsigned int *param_1)
   temp_v0 = FUN_002e760a(0x3c);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    FUN_002e6354(temp_v0,0x3c);
+    sysMemClear(temp_v0,0x3c);
     temp_v1 = FUN_00117358(temp_v0);
   }
   param_1[2] = temp_v1;

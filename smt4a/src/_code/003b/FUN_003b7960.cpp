@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_5_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_001654d8(int);
 extern int FUN_001654e4(int);
@@ -41,10 +41,10 @@ void FUN_003b7960(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   
   temp_v1 = FUN_001834a4(0x12,0x6e);
   FUN_001835b4(2,0x12,param_5,param_2,param_3,0xdd);
-  temp_v2 = DAT_0059dbb4;
+  temp_v2 = g_renderCtx;
   temp_v0 = 0;
-  if (*(int *)(DAT_0059dbb4 + *(int *)(DAT_0059dbb4 + 0x1318) * 4 + 0x1320) == 3) {
-    temp_v4 = DAT_0059dbb4 + 0x1318 + *(int *)(DAT_0059dbb4 + 0x1318) * 4;
+  if (*(int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1318) * 4 + 0x1320) == 3) {
+    temp_v4 = g_renderCtx + 0x1318 + *(int *)(g_renderCtx + 0x1318) * 4;
     temp_v3 = *(int *)(temp_v4 + 8);
     *(unsigned int *)(temp_v4 + 8) = 0;
     if (*(char *)(temp_v2 + 0x1330) != '\0' || temp_v3 != 0) {
@@ -55,7 +55,7 @@ void FUN_003b7960(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   }
   FUN_00168e00(*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,
                (int)**(short **)(temp_v1 + 0xc),(int)(*(short **)(temp_v1 + 0xc))[1]);
-  temp_v2 = DAT_0059dbb4;
+  temp_v2 = g_renderCtx;
   temp_v1 = FUN_00169294(6,1,0);
   piVar6 = (int *)(temp_v2 + 0x12b8);
   temp_v3 = piVar6[*piVar6 + 2];
@@ -67,7 +67,7 @@ void FUN_003b7960(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   temp_v2 = FUN_001654e4(param_1 + 0x44);
   temp_v1 = FUN_001654d8(param_1 + 0x44);
   FUN_001835b4(2,0x12,param_4,temp_v1 + param_2,temp_v2 + param_3,0xdd);
-  temp_v2 = DAT_0059dbb4;
+  temp_v2 = g_renderCtx;
   temp_v1 = FUN_00169294(6,7,0);
   piVar6 = (int *)(temp_v2 + 0x12b8);
   temp_v3 = piVar6[*piVar6 + 2];
@@ -76,9 +76,9 @@ void FUN_003b7960(int param_1,int param_2,int param_3,unsigned int param_4,unsig
     (**(romwright_code **)(temp_v2 + 0x12d4))();
     *(unsigned char *)(temp_v2 + 0x12d0) = 0;
   }
-  temp_v2 = DAT_0059dbb4;
+  temp_v2 = g_renderCtx;
   if (temp_v0) {
-    piVar6 = (int *)(DAT_0059dbb4 + 0x1318);
+    piVar6 = (int *)(g_renderCtx + 0x1318);
     temp_v1 = piVar6[*piVar6 + 2];
     piVar6[*piVar6 + 2] = 3;
     if (*(char *)(temp_v2 + 0x1330) != '\0' || temp_v1 != 3) {

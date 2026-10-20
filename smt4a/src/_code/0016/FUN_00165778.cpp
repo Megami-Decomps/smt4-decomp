@@ -10,9 +10,9 @@ int FUN_0016c560(unsigned int);
 int FUN_00180310(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_0018408c(int, int);
-int FUN_00187d04(...);
+int camSetMatrixA(...);
 int FUN_0019a0dc(...);
-int FUN_0019a0e8(...);
+int mtx44Copy(...);
 int FUN_0019a0fc(...);
 int VectorSignedToFloat(...);
 
@@ -43,7 +43,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_00165aec; /* 0x165aec */
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00162790. */
@@ -54,10 +54,10 @@ extern int FUN_001654d8(int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: FUN_00187d04. */
+/* Supplied declaration required: camSetMatrixA. */
 extern unsigned int FUN_0018aeb8(void);
 /* Supplied declaration required: FUN_0019a0dc. */
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 
 
@@ -118,7 +118,7 @@ void FUN_00165778(int param_1,int param_2)
   VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(4,0xffffffff,param_1 + 0x26c);
   FUN_001689e8((int)*(short *)(param_1 + 0x18),temp_v0 - 0xd,8,0x79,0);
-  FUN_0016c560(DAT_0059dbb4);
+  FUN_0016c560(g_renderCtx);
   temp_v0 = FUN_001834a4(8,0x1ab);
   temp_v1 = FUN_001654d8(param_1 + 0x154);
   FUN_001835b4(2,8,0x1a8,*(short *)(temp_v0 + 8) + temp_v1,(int)*(short *)(temp_v0 + 10),0x65);
@@ -146,11 +146,11 @@ void FUN_00165778(int param_1,int param_2)
     temp_v8 = (temp_v6 - temp_v5 * temp_v6) * temp_v8;
   }
   temp_v3 = FUN_0018aeb8();
-  FUN_0019a0e8(&temp_v14,temp_v3);
+  mtx44Copy(&temp_v14,temp_v3);
   temp_v3 = FUN_0018aeb8();
-  FUN_0019a0e8(temp_v13,temp_v3);
+  mtx44Copy(temp_v13,temp_v3);
   temp_v3 = FUN_0018aeb8();
-  FUN_0019a0e8(temp_v12,temp_v3);
+  mtx44Copy(temp_v12,temp_v3);
   temp_v12[1] = 0.0f;
   temp_v12[3] = (float)VectorSignedToFloat((int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v1 + 8),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -191,7 +191,7 @@ void FUN_00165778(int param_1,int param_2)
   temp_v12[5] = temp_v5;
   temp_v12[10] = (float)temp_v3;
   FUN_0019a0fc(temp_v13,temp_v13,temp_v12);
-  FUN_0019a0dc(&temp_v10,DAT_0059dbb4);
+  FUN_0019a0dc(&temp_v10,g_renderCtx);
   temp_v14 = temp_v10;
   uStack_7c = uStack_144;
   uStack_78 = uStack_140;
@@ -208,9 +208,9 @@ void FUN_00165778(int param_1,int param_2)
   uStack_4c = uStack_114;
   uStack_48 = uStack_110;
   uStack_44 = uStack_10c;
-  FUN_00187d04(DAT_0059dbb4,temp_v13);
+  camSetMatrixA(g_renderCtx,temp_v13);
   FUN_00180310(6,0,0,1,temp_v4,0x79,&LAB_00165aec,*(unsigned int *)(param_1 + 0x2c8));
-  FUN_00187d04(DAT_0059dbb4,&temp_v14);
+  camSetMatrixA(g_renderCtx,&temp_v14);
   return;
 }
 

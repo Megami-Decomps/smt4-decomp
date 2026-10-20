@@ -9,7 +9,7 @@ int FUN_00282924(int, int);
 
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: FUN_00282924. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 extern int FUN_002a8740(int);
 
 
@@ -23,7 +23,7 @@ void FUN_003c000c(int param_1,int param_2,int param_3)
   unsigned short temp_v3;
   unsigned short *puVar5;
   
-  temp_v1 = FUN_002939f4();
+  temp_v1 = btlGetMainState();
   if (param_1 >= 0x6d) {
     temp_v1 = FUN_002a8740(param_1 - 0x6d);
     if (param_2 == 0) {

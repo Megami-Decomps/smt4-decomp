@@ -23,7 +23,7 @@ extern unsigned int *FUN_0022a464(unsigned int, unsigned int);
 extern unsigned int FUN_00245768(unsigned short);
 extern unsigned int *FUN_002561d8(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_0025628c(unsigned int);
-extern unsigned int FUN_002939f4(void);
+extern unsigned int btlGetMainState(void);
 
 
 void FUN_003c4ac4(int param_1,unsigned int param_2)
@@ -48,7 +48,7 @@ void FUN_003c4ac4(int param_1,unsigned int param_2)
   case 0:
     puVar4 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),temp_v0);
     *(unsigned int *)(param_1 + 0x1c) = *puVar4;
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     puVar2 = (unsigned int *)FUN_002561d8(temp_v0,*(unsigned int *)(param_1 + 0x1c),1);
     if (puVar2 != (unsigned int *)0x0) {
       FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),1,(int)(short)puVar2[0x6d],1,9999,0);

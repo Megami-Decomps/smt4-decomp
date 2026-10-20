@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_6_stack;
 
-extern int FUN_002e3390(unsigned int);
+extern int wstrlen(unsigned int);
 /* Supplied declaration required: FUN_00426204. */
 /* Supplied declaration required: FUN_004397e4. */
 
@@ -32,7 +32,7 @@ void FUN_004395fc(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v0 = param_5;
   FUN_00426204();
   if ((unsigned char *)((unsigned int)__current_sp()) != (unsigned char *)0x0) {
-    temp_v2 = FUN_002e3390(param_1);
+    temp_v2 = wstrlen(param_1);
     FUN_004397e4(param_1,temp_v2 + 1,param_2,param_3,param_4,temp_v0,temp_v0,temp_v1);
   }
   return;

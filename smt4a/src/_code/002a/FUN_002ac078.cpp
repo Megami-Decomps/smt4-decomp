@@ -30,7 +30,7 @@ static float romwright_u2f(unsigned int value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-extern float *FUN_00164a9c(void);
+extern float *jobGetWork(void);
 /* Supplied declaration required: FUN_00184964. */
 
 
@@ -56,7 +56,7 @@ unsigned int FUN_002ac078(void)
   unsigned long long temp_v13;
   float temp_v14;
   
-  pfVar2 = (float *)FUN_00164a9c();
+  pfVar2 = (float *)jobGetWork();
   temp_v12 = 0x3f800000;
   temp_v8 = pfVar2[3];
   temp_v11 = pfVar2[4];

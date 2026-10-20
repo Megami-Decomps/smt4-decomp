@@ -43,7 +43,7 @@ extern unsigned int FUN_00191548(void);
 /* Supplied declaration required: FUN_001c1bb4. */
 /* Supplied declaration required: FUN_001c373c. */
 /* Supplied declaration required: FUN_001c422c. */
-extern int aeabi_idivmod(int);
+extern int __aeabi_idivmod(int);
 /* Supplied declaration required: nw_snd_internal_CurveAdshr_GetValue. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Free. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_SetBiquadFilter. */
@@ -85,7 +85,7 @@ void FUN_001b9bc4(int param_1,int param_2)
     }
     else {
       temp_v0 = *(unsigned char *)(param_1 + 0x180);
-      temp_v2 = aeabi_idivmod(((unsigned int)*(unsigned char *)(param_1 + 0x181) - (unsigned int)temp_v0) * (unsigned int)temp_v4);
+      temp_v2 = __aeabi_idivmod(((unsigned int)*(unsigned char *)(param_1 + 0x181) - (unsigned int)temp_v0) * (unsigned int)temp_v4);
       temp_v1 = (temp_v2 + (unsigned int)temp_v0) & 0xff;
     }
     temp_v5 = 0x3b808081;

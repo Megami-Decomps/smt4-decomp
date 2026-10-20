@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_002939f4(void);
-extern int FUN_00296cc8(void);
+extern int btlGetMainState(void);
+extern int scrGetArg(void);
 
 
 unsigned int FUN_0031cb20(void)
@@ -15,8 +15,8 @@ unsigned int FUN_0031cb20(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00296cc8();
-  temp_v1 = FUN_002939f4();
+  temp_v0 = scrGetArg();
+  temp_v1 = btlGetMainState();
   temp_v2 = *(unsigned int *)(temp_v1 + 0x44a0);
   if (temp_v0 >= 1) {
     temp_v2 = temp_v2 | 0x80000;

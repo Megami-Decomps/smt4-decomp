@@ -8,13 +8,13 @@ int FUN_00154edc(int, int);
 int FUN_00155024(int, int);
 int FUN_00157558(unsigned int);
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_001546e8(unsigned int);
 /* Supplied declaration required: FUN_00154edc. */
 /* Supplied declaration required: FUN_00155024. */
 /* Supplied declaration required: FUN_00157558. */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 
 
 char FUN_0013cb90(void)
@@ -33,7 +33,7 @@ char FUN_0013cb90(void)
   int *piVar8;
   unsigned char temp_v5;
   
-  temp_v2 = FUN_00164a9c();
+  temp_v2 = jobGetWork();
   *(unsigned char *)(temp_v2 + 0xfad) = 0;
   temp_v5 = *(char *)(temp_v2 + 0xfa4) != '\0';
   temp_v1 = '\0';
@@ -48,7 +48,7 @@ char FUN_0013cb90(void)
         temp_v1 = '\0';
       }
       else {
-        FUN_00157558(DAT_0059dbb4);
+        FUN_00157558(g_renderCtx);
         *(unsigned int *)(*piVar8 + 0x14) = 0x200;
         *(unsigned int *)(*piVar8 + 0x18) = 0x200;
         temp_v0 = 0;

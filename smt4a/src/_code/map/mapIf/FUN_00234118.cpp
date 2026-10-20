@@ -17,8 +17,8 @@ extern unsigned char LAB_00234250; /* 0x234250 */
 extern unsigned char LAB_00234268; /* 0x234268 */
 extern unsigned char LAB_00234284; /* 0x234284 */
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_0058103c; /* 0x58103c */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_mapIf; /* 0x58103c */
+extern int g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00178b04. */
@@ -44,22 +44,22 @@ void FUN_00234118(void)
   unsigned int in_s3;
   unsigned char temp_v3 [140];
   
-  temp_v0 = DAT_0058103c;
-  *(unsigned char *)(DAT_0058103c + 0xcbdc) = 1;
+  temp_v0 = g_mapIf;
+  *(unsigned char *)(g_mapIf + 0xcbdc) = 1;
   *(unsigned int *)(temp_v0 + 0xcbe0) = 0;
   *(unsigned int *)(temp_v0 + 0xcbe4) = 0;
   *(unsigned int *)(temp_v0 + 0xcbe8) = in_s0;
   *(unsigned int *)(temp_v0 + 0xcbec) = in_s1;
   *(unsigned int *)(temp_v0 + 0xcbf0) = in_s2;
   *(unsigned int *)(temp_v0 + 0xcbf4) = in_s3;
-  if (DAT_005f15fc != 0x18) {
+  if (g_gameState != 0x18) {
     FUN_00100388(temp_v3,&LAB_00234250);
   }
   else {
     FUN_00100388(temp_v3,&LAB_00234268);
   }
-  if ((DAT_005f15fc == 0x2c || DAT_005f15fc == 0x2d) ||
-     (DAT_005f15fc == 0x2e || DAT_005f15fc == 0x2f)) {
+  if ((g_gameState == 0x2c || g_gameState == 0x2d) ||
+     (g_gameState == 0x2e || g_gameState == 0x2f)) {
     FUN_00100388(temp_v3,&LAB_00234250,0x2b);
   }
   temp_v1 = 0x20;

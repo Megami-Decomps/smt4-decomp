@@ -5,8 +5,8 @@
 extern "C" {
 
 extern int FUN_0018719c(void);
-extern int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 extern unsigned int FUN_001a6f60(unsigned int, unsigned int);
 extern int FUN_00261458(void);
 
@@ -23,8 +23,8 @@ char * FUN_002f72dc(int param_1)
   unsigned int temp_v6;
   
   temp_v0 = FUN_001a6f60(*(unsigned int *)(param_1 + 0x20cc),0);
-  temp_v1 = FUN_00192798();
-  temp_v2 = FUN_00192748(temp_v0);
+  temp_v1 = dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v0);
   temp_v3 = *(int *)(param_1 + 0x20a8);
   if (-1 < temp_v3) {
     return (char *)(temp_v1 + temp_v3 * 0x18);

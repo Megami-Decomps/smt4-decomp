@@ -44,7 +44,7 @@ int FUN_0029f5d8(...);
 int FUN_0029f848(...);
 int FUN_002b8838(...);
 int FUN_002bc01c(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bee58(...);
 int FUN_002bf818(...);
 int FUN_002c1658(...);
@@ -81,7 +81,7 @@ extern int FUN_00288498(void);
 /* Supplied declaration required: FUN_0029212c. */
 extern int FUN_00293ac0(void);
 /* Supplied declaration required: FUN_00295228. */
-extern int FUN_00295380(unsigned int);
+extern int asdSoundSlotBIsPlaying(unsigned int);
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_00296e90. */
 /* Supplied declaration required: FUN_002992bc. */
@@ -120,7 +120,7 @@ extern int FUN_002b8ee0(int, unsigned int);
 extern int FUN_002bc088(void);
 extern unsigned int FUN_002bce30(unsigned int, unsigned int);
 extern unsigned int FUN_002bd068(unsigned int);
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -215,10 +215,10 @@ unsigned int FUN_001ca748(void)
     if (*(char *)(temp_v2 + 0xb2) != '\0') {
       if (*(int *)(temp_v2 + 0x408) != 0) {
         if (*(short *)(temp_v2 + 0x78) != 3) {
-          FUN_002bd8e8(temp_v2 + 0x28,1,0);
+          timerStart(temp_v2 + 0x28,1,0);
         }
         else {
-          FUN_002bd8e8(temp_v2 + 0x28,0,0);
+          timerStart(temp_v2 + 0x28,0,0);
         }
         temp_v6 = DAT_0044e190;
         *(unsigned int *)(DAT_0044e190 + 0x40c) = 0;
@@ -395,7 +395,7 @@ LAB_001cabe4:
         FUN_0029f848(temp_v2 + 0x4d4,temp_v15 + 1,8,1,0,1);
         FUN_0029d620(temp_v2 + 0x4d4,temp_v15);
         *(unsigned char *)(temp_v2 + 0x410) = 1;
-        FUN_002bd8e8(temp_v2 + 0x2e4,0);
+        timerStart(temp_v2 + 0x2e4,0);
         FUN_002bee58(temp_v2 + 0x370,2);
         FUN_00295eb0(temp_v2 + 0x370,0x1a,temp_v15 + 0x414);
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
@@ -502,7 +502,7 @@ LAB_001cabe4:
   case 7:
     FUN_002bf818(temp_v2 + 0xb4);
     FUN_002bf818(temp_v2 + 0x1cc);
-    temp_v6 = FUN_00295380(*(unsigned int *)(temp_v2 + 0x238c));
+    temp_v6 = asdSoundSlotBIsPlaying(*(unsigned int *)(temp_v2 + 0x238c));
     if ((temp_v6 == 0) && (*(char *)(temp_v2 + 0x2391) != '\0')) {
       temp_v6 = FUN_0029ee54(temp_v2 + 0x4d4);
       if (temp_v6 - 1 == *(int *)(temp_v2 + 0x53c)) {
@@ -553,7 +553,7 @@ LAB_001cb104:
           FUN_0029d620(temp_v6);
         }
         *(unsigned char *)(temp_v2 + 0x410) = 1;
-        FUN_002bd8e8(temp_v2 + 0x2e4,0);
+        timerStart(temp_v2 + 0x2e4,0);
         FUN_002bee58(temp_v2 + 0x370,2);
         FUN_00295eb0(temp_v2 + 0x370,0x1a,*(int *)(temp_v2 + 0x53c) + 0x414);
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
@@ -616,7 +616,7 @@ LAB_001cb104:
                (short)*(unsigned int *)(temp_v2 + 0x540);
           temp_v6 = FUN_0029ee54();
           FUN_0029f848(temp_v2 + 0x4d4,temp_v6 - 1,8,1,0,1);
-          FUN_002bd8e8(temp_v2 + 0x2e4,0);
+          timerStart(temp_v2 + 0x2e4,0);
           FUN_002bee58(temp_v2 + 0x370,2);
           FUN_00295eb0(temp_v2 + 0x370,0x1a,*(int *)(temp_v2 + 0x544) + 0x414);
           *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
@@ -1064,7 +1064,7 @@ LAB_001cbbac:
         } while (temp_v15 < 8);
         FUN_0029d620(temp_v2 + 0x230c,temp_v15);
         *(unsigned char *)(temp_v2 + 0x410) = 1;
-        FUN_002bd8e8(temp_v2 + 0x2e4,0);
+        timerStart(temp_v2 + 0x2e4,0);
         FUN_002bee58(temp_v2 + 0x370,2);
         FUN_00295eb0(temp_v2 + 0x370,0x1a,temp_v15 + 0x414);
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
@@ -1164,7 +1164,7 @@ LAB_001cbbac:
           FUN_0029f848(temp_v6,temp_v8 - 1,8,1,1,1);
           FUN_0029d620(temp_v6,temp_v15);
           *(unsigned char *)(temp_v2 + 0x410) = 1;
-          FUN_002bd8e8(temp_v2 + 0x2e4,0);
+          timerStart(temp_v2 + 0x2e4,0);
           FUN_002bee58(temp_v2 + 0x370,2);
           FUN_00295eb0(temp_v2 + 0x370,0x1a,temp_v15 + 0x414);
           *(unsigned short *)(temp_v2 + 0x388) = 0xa0;

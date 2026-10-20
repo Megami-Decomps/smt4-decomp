@@ -1,60 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00424b54` (_code @ 0x424b54, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail branches around `state = 7` (mov r1/str r1); built predicates it (moveq/streq). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00425448(int);
+typedef struct Device Device;
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
+/* Device vtable: slot 4 reports how many steps are pending, slot 7 performs one step. */
 typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
+    void *slots[4];
+    void (*getPending)(Device *self, int *count);   /* 0x10 */
+    void *slots5to6[2];
+    void (*step)(Device *self);                     /* 0x1c */
+} DeviceVtbl;
 
-extern int FUN_0042337c(int);
-extern int FUN_0042348c(int);
-/* Supplied declaration required: FUN_00425448. */
+struct Device {
+    const DeviceVtbl *vtbl;
+};
 
+/* Owner with a state word at 0xc, a gate object at 0x158, a device table at 0x2ec and two channels' bookkeeping. */
+typedef struct {
+    u8 unk00[0xc];
+    u32 state;              /* 0x00c */
+    u8 unk10[0x148];
+    u8 gate[0x194];         /* 0x158 */
+    Device *devices[96];    /* 0x2ec */
+    s32 deviceIndex[2];     /* 0x46c: per channel, index into devices (negative = unused) */
+    s32 unk474[2];          /* 0x474 */
+    s32 unk47c[2];          /* 0x47c */
+} Owner;
 
-void FUN_00424b54(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
+int FUN_0042337c(u8 *gate);
+int FUN_0042348c(u8 *gate);
+int FUN_00425448(Owner *owner);
 
+/* Runs the owner's gate logic, then lets each active channel's device finish its pending steps. */
+void FUN_00424b54(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = param_4;
-  temp_v0 = FUN_0042348c(param_1 + 0x158);
-  if (temp_v0 != 0) {
-    temp_v0 = FUN_0042337c(param_1 + 0x158);
-    if (temp_v0 == 0) {
-      *(unsigned int *)(param_1 + 0xc) = 7;
+    int count;
+    int channel;
+
+    if (FUN_0042348c(owner->gate) != 0) {
+        if (FUN_0042337c(owner->gate) == 0) {
+            owner->state = 7;
+        }
+        FUN_00425448(owner);
     }
-    FUN_00425448(param_1);
-  }
-  temp_v0 = 0;
-  do {
-    temp_v2 = param_1 + temp_v0 * 4;
-    if (-1 < *(int *)(temp_v2 + 0x46c)) {
-      piVar2 = *(int **)(param_1 + *(int *)(temp_v2 + 0x46c) * 4 + 0x2ec);
-      (**(romwright_code **)(*piVar2 + 0x10))(piVar2,&temp_v3);
-      temp_v1 = 0;
-      if (temp_v1 < temp_v3) {
-        do {
-          (**(romwright_code **)(**(int **)(param_1 + *(int *)(temp_v2 + 0x46c) * 4 + 0x2ec) + 0x1c))();
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < temp_v3);
-      }
-      *(unsigned int *)(temp_v2 + 0x474) = 0;
-      *(unsigned int *)(temp_v2 + 0x47c) = 0;
-    }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 2);
-  return;
+    channel = 0;
+    do {
+        if (owner->deviceIndex[channel] >= 0) {
+            int step;
+
+            owner->devices[owner->deviceIndex[channel]]->vtbl->getPending(owner->devices[owner->deviceIndex[channel]], &count);
+            step = 0;
+            if (count > 0) {
+                do {
+                    owner->devices[owner->deviceIndex[channel]]->vtbl->step(owner->devices[owner->deviceIndex[channel]]);
+                    step++;
+                } while (count > step);
+            }
+            owner->unk474[channel] = 0;
+            owner->unk47c[channel] = 0;
+        }
+        channel++;
+    } while (channel < 2);
 }
 
 } /* extern "C" */

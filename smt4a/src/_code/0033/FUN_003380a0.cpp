@@ -7,10 +7,10 @@ extern "C" {
 int FUN_0016c410(int);
 int FUN_0016c4b8(int, unsigned int);
 int FUN_0016c560(int);
-int FUN_002e6354(unsigned char *, int);
+int sysMemClear(unsigned char *, int);
 int FUN_002f5020(unsigned char *, unsigned char *, int, int);
 int FUN_002ff8e8(unsigned int);
-int FUN_0040967c(int, int *);
+int camSetMatrixB(int, int *);
 int FUN_00409bc8(int, unsigned int);
 int FUN_00412678(unsigned int, unsigned char [352], int *);
 int FUN_00412aec(unsigned int, int *, int, int);
@@ -33,16 +33,16 @@ typedef struct {
 
 extern unsigned char LAB_0042cb68; /* 0x42cb68 */
 extern unsigned char LAB_0042cbb0; /* 0x42cbb0 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0016c560. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_002ff8e8. */
-/* Supplied declaration required: FUN_0040967c. */
+/* Supplied declaration required: camSetMatrixB. */
 /* Supplied declaration required: FUN_00409bc8. */
 /* Supplied declaration required: FUN_00412678. */
 /* Supplied declaration required: FUN_00412aec. */
@@ -86,7 +86,7 @@ void FUN_003380a0(unsigned int *param_1,unsigned int param_2)
   unsigned int temp_v17;
   unsigned char temp_v18;
   
-  FUN_0016c4b8(DAT_0059dbb4,param_1[5]);
+  FUN_0016c4b8(g_renderCtx,param_1[5]);
   temp_v8 = param_1[6];
   uStack_804 = param_1[7];
   uStack_800 = param_1[8];
@@ -104,9 +104,9 @@ void FUN_003380a0(unsigned int *param_1,unsigned int param_2)
   temp_v10 = 0;
   temp_v12 = 0;
   temp_v13 = 0x3f800000;
-  FUN_0040967c(DAT_0059dbb4,&temp_v8);
+  camSetMatrixB(g_renderCtx,&temp_v8);
   FUN_002ff8e8(param_2);
-  temp_v5 = DAT_0059dbb4;
+  temp_v5 = g_renderCtx;
   if ((*(unsigned short *)((int)param_1 + 0x12) & 0x100) != 0) {
     temp_v0 = FUN_001692ac(5,0);
     piVar5 = (int *)(temp_v5 + 0x1258);
@@ -139,7 +139,7 @@ void FUN_003380a0(unsigned int *param_1,unsigned int param_2)
   puVar2 = puVar2 + 0x540;
   FUN_002f5020(puVar2,&LAB_0042cb68,0x14,0xc);
   *(unsigned int *)(puVar2 + -0x6a0) = 0;
-  FUN_002e6354(puVar2 + -0x69c,0x150);
+  sysMemClear(puVar2 + -0x69c,0x150);
   temp_v3 = 0;
   do {
     puVar2[temp_v3 - 0x54c] = 0;
@@ -161,17 +161,17 @@ void FUN_003380a0(unsigned int *param_1,unsigned int param_2)
   temp_v5 = 0;
   if (temp_v5 < *(short *)(param_1 + 2)) {
     do {
-      FUN_00409bc8(DAT_0059dbb4,param_1[1] + temp_v5 * 0x10);
+      FUN_00409bc8(g_renderCtx,param_1[1] + temp_v5 * 0x10);
       FUN_00412aec(*param_1,&temp_v16,(int)*(short *)(param_1 + 3) * temp_v5 * 3,
                    *(short *)(param_1 + 3) * 3);
       FUN_00412678(*param_1,temp_v14,&temp_v16);
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < *(short *)(param_1 + 2));
   }
-  FUN_0016c410(DAT_0059dbb4);
-  FUN_0016c560(DAT_0059dbb4);
-  temp_v5 = DAT_0059dbb4;
-  piVar5 = (int *)(DAT_0059dbb4 + 0x1258);
+  FUN_0016c410(g_renderCtx);
+  FUN_0016c560(g_renderCtx);
+  temp_v5 = g_renderCtx;
+  piVar5 = (int *)(g_renderCtx + 0x1258);
   temp_v0 = *piVar5;
   temp_v1 = piVar5[temp_v0 + 2];
   *piVar5 = temp_v0 - 1;

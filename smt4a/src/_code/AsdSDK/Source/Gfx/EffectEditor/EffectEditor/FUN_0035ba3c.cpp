@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001656a0(...);
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_00200bcc(int);
 int FUN_00202178(int);
 int FUN_0020e9dc(int);
@@ -23,7 +23,7 @@ extern unsigned char DAT_0059dbe0; /* 0x59dbe0 */
 extern unsigned char DAT_0059dc7c; /* 0x59dc7c */
 
 /* Supplied declaration required: FUN_001656a0. */
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00200bcc. */
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: FUN_0020e9dc. */
@@ -50,7 +50,7 @@ unsigned char * FUN_0035ba3c(unsigned long long *param_1,unsigned int param_2,in
   temp_v1 = 0x43360000;
   temp_v2 = 0x42200000;
   temp_v0 = 0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+  memAlloc(0x10000,0x100,0,0x68,0x10,1);
   *(unsigned int *)(temp_v0 + 8) = temp_v1;
   *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
   *(int *)(temp_v0 + 0x10) = (int)temp_v3;

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0019a5a0(int);
-int FUN_001f4998(void);
+int asdMemFree(int);
+int asdMdlManagerDestroy(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -13,8 +13,8 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_001f4998. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 
 
 void FUN_00202054(int param_1)
@@ -30,7 +30,7 @@ void FUN_00202054(int param_1)
   for (temp_v2 = *(int *)(param_1 + 0xc); temp_v2 != 0; temp_v2 = *(int *)(temp_v2 + 0x18)) {
     piVar5 = *(int **)(temp_v2 + 8);
     if (*piVar5 != 0) {
-      FUN_001f4998();
+      asdMdlManagerDestroy();
       *piVar5 = 0;
     }
   }
@@ -70,7 +70,7 @@ void FUN_00202054(int param_1)
     if (*(romwright_code **)(temp_v2 + 0x10) != (romwright_code *)0x0) {
       (**(romwright_code **)(temp_v2 + 0x10))(*(unsigned int *)(temp_v2 + 8));
     }
-    FUN_0019a5a0(temp_v2);
+    asdMemFree(temp_v2);
     temp_v2 = temp_v0;
   }
   return;

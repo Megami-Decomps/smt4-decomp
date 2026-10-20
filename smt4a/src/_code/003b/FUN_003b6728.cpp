@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001630d4(int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 int rt_memcpy_w(void);
 
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -22,7 +22,7 @@ void FUN_003b6728(int param_1,unsigned int param_2,int param_3)
   }
   if (0 < param_3) {
     temp_v0 = 0x100;
-    FUN_001630d4(0x100,0x100,0,param_3 * 0x14,1);
+    asdMemoryAlloc(0x100,0x100,0,param_3 * 0x14,1);
     *(unsigned int *)(param_1 * 0x148 + 0x5c613c) = temp_v0;
     rt_memcpy_w();
   }

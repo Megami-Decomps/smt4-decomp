@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00236038(int);
+int scrGetArg(int);
 int FUN_003b5714(int, unsigned int, unsigned int);
 int VectorSignedToFloat(...);
 
@@ -26,7 +26,7 @@ extern unsigned int DAT_005f1bac; /* 0x5f1bac */
 extern unsigned int DAT_005f1bb0; /* 0x5f1bb0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: scrGetArg. */
 extern int FUN_003798f0(void);
 /* Supplied declaration required: FUN_003b5714. */
 
@@ -46,12 +46,12 @@ unsigned int FUN_0039bd28(unsigned int param_1,int param_2)
   
   *(unsigned char *)(param_2 + 0x574) = 1;
   *(unsigned char *)(param_2 + 0x4cf) = 1;
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  temp_v2 = FUN_00236038(2);
-  temp_v3 = FUN_00236038(3);
-  temp_v4 = FUN_00236038(4);
-  temp_v5 = FUN_00236038(5);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = scrGetArg(2);
+  temp_v3 = scrGetArg(3);
+  temp_v4 = scrGetArg(4);
+  temp_v5 = scrGetArg(5);
   temp_v6 = temp_v0;
   FUN_003b5714(temp_v0,temp_v1,temp_v2);
   if (temp_v6 != -1) {

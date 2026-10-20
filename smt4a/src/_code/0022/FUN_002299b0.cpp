@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned char DAT_0057f698; /* 0x57f698 */
+extern unsigned char g_gameDataBlocks; /* 0x57f698 */
 
 extern int FUN_0018719c(unsigned int);
 extern unsigned char FUN_00371f3c(void);
@@ -27,8 +27,8 @@ void FUN_002299b0(unsigned short *param_1)
   unsigned char temp_v1;
   int temp_v2;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f698 + 0x4));
-  *(unsigned short *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + 0x4e) = *param_1;
+  temp_v0 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
+  *(unsigned short *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x4e) = *param_1;
   rt_memcpy_w(temp_v0,param_1 + 0x2a,0x12);
   *(unsigned char *)(temp_v0 + 0x10) = 0;
   *(unsigned int *)(temp_v0 + 0x12) = *(unsigned int *)(param_1 + 4);
@@ -84,7 +84,7 @@ void FUN_002299b0(unsigned short *param_1)
   else {
     *(unsigned short *)(temp_v0 + 0x5a) = (unsigned short)*(unsigned char *)((int)param_1 + 0x3def);
   }
-  *(unsigned char *)(temp_v0 + 99) = *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + 0x27ec4);
+  *(unsigned char *)(temp_v0 + 99) = *(unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x27ec4);
   temp_v2 = FUN_0018719c(0x410);
   if (temp_v2 != 0) {
     *(unsigned char *)(temp_v0 + 0x4c) = 1;
@@ -131,8 +131,8 @@ void FUN_002299b0(unsigned short *param_1)
   else {
     *(unsigned char *)(temp_v0 + 0x6b) = 0;
   }
-  temp_v2 = (*(int *)((unsigned char *)&DAT_0057f698 + 0x4));
-  *(unsigned int *)(temp_v0 + 0x6c) = *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + 0x5448);
+  temp_v2 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
+  *(unsigned int *)(temp_v0 + 0x6c) = *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x5448);
   rt_memcpy_w(temp_v2 + 0x270cc,temp_v0,0x80);
   return;
 }

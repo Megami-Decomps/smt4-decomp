@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001a1648(void);
 int FUN_002bff50(void);
-int FUN_002ed45c(...);
+int bannerShow(...);
 
 int FUN_002542bc(...);
 int FUN_002542d4(...);
@@ -22,7 +22,7 @@ int FUN_002b63c0(void);
 int FUN_002bd06c(unsigned int);
 int FUN_002be650(unsigned int, int);
 int FUN_002bf694(unsigned int [32], unsigned int);
-int FUN_002c4938(unsigned int [32], int);
+int memClear(unsigned int [32], int);
 int FUN_00383674(void);
 int QuestCenter_GetActiveEntry(void);
 
@@ -56,8 +56,8 @@ extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bff50. */
 extern int FUN_002c2950(void);
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002ed45c. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: bannerShow. */
 extern int FUN_002f61e8(void);
 /* Supplied declaration required: FUN_00383674. */
 /* Supplied declaration required: QuestCenter_GetActiveEntry. */
@@ -121,7 +121,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
       if (temp_v0 != 1) {
         if (temp_v0 == 2) {
           temp_v1 = 1;
-          FUN_002c4938(temp_v12,0x80);
+          memClear(temp_v12,0x80);
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v9 + 0x16e);
           FUN_002bd06c(temp_v5);
           FUN_002bf694(temp_v12,temp_v5);
@@ -149,7 +149,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
       else {
         temp_v14 = (unsigned int)*(unsigned short *)(temp_v9 + 0x16e);
         temp_v8 = *(unsigned int *)(temp_v9 + 0x170);
-        FUN_002c4938(temp_v12,0x80);
+        memClear(temp_v12,0x80);
         temp_v5 = temp_v14;
         FUN_002be650(temp_v14,1);
         FUN_002bf694(temp_v12,temp_v5);
@@ -302,7 +302,7 @@ LAB_00201ed0:
         if (*(short *)(temp_v4 + temp_v3 * 8 + 0x16c) != 1) {
           return 0;
         }
-        FUN_002ed45c(temp_v14);
+        bannerShow(temp_v14);
         return 0;
       }
     }
@@ -342,7 +342,7 @@ LAB_00201ed0:
   if (*(short *)(temp_v4 + temp_v3 * 8 + 0x16c) != 1) {
     return 0;
   }
-  FUN_002ed45c(temp_v14);
+  bannerShow(temp_v14);
   return 0;
 }
 

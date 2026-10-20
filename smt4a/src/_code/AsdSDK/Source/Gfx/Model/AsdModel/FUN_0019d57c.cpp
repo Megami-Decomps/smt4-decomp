@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00163060(int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int);
 int FUN_001abbc4(void);
 int FUN_002e59f8(int, unsigned int [2], int);
 int SBORROW4(int, int);
@@ -17,10 +17,10 @@ typedef struct {
 } param_2_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001abbc4. */
 /* Supplied declaration required: FUN_002e59f8. */
-extern int FUN_0030ef8c(int, char *, unsigned int);
+extern int rt_memcmp(int, char *, unsigned int);
 
 
 void FUN_0019d57c(int param_1,int param_2)
@@ -50,8 +50,8 @@ void FUN_0019d57c(int param_1,int param_2)
   piVar12 = (int *)(param_1 + 0x94);
   iStack_2c = param_1;
   temp_v11 = param_2;
-  temp_v0 = FUN_0030ef8c(param_2,"ATBC",4);
-  if ((temp_v0 == 0) || (temp_v0 = FUN_0030ef8c(param_2,"ABCH",4), temp_v0 == 0)) {
+  temp_v0 = rt_memcmp(param_2,"ATBC",4);
+  if ((temp_v0 == 0) || (temp_v0 = rt_memcmp(param_2,"ABCH",4), temp_v0 == 0)) {
     temp_v4 = *(int *)(param_2 + 8);
   }
   temp_v0 = 0;
@@ -62,8 +62,8 @@ void FUN_0019d57c(int param_1,int param_2)
   if (0 < temp_v4) {
     do {
       temp_v0 = temp_v11;
-      temp_v4 = FUN_0030ef8c(temp_v11,"ATBC",4);
-      if ((temp_v4 == 0) || (temp_v4 = FUN_0030ef8c(temp_v0,"ABCH",4), temp_v4 == 0)) {
+      temp_v4 = rt_memcmp(temp_v11,"ATBC",4);
+      if ((temp_v4 == 0) || (temp_v4 = rt_memcmp(temp_v0,"ABCH",4), temp_v4 == 0)) {
         temp_v6 = *(int *)(temp_v0 + 8);
         temp_v8 = temp_v6 == 0;
         temp_v4 = temp_v6;
@@ -75,7 +75,7 @@ void FUN_0019d57c(int param_1,int param_2)
           temp_v4 = 0;
           temp_v0 = temp_v0 + *(int *)(temp_v0 + 0x10);
           do {
-            temp_v1 = FUN_0030ef8c(temp_v0,"EPLSIGN",7);
+            temp_v1 = rt_memcmp(temp_v0,"EPLSIGN",7);
             if (temp_v1 != 0) break;
             FUN_002e59f8(temp_v0,temp_v9,0x10);
             unaff_r7 = (unsigned short *)(temp_v0 + 0x10);
@@ -102,15 +102,15 @@ void FUN_0019d57c(int param_1,int param_2)
   else {
     temp_v9[0] = 1;
     temp_v2 = 0x100;
-    FUN_00163060(0x100,0x100,0,*(int *)(param_1 + 0x98) * 0xc);
+    asdMemoryAllocTracked(0x100,0x100,0,*(int *)(param_1 + 0x98) * 0xc);
     *(unsigned int *)(param_1 + 0x9c) = temp_v2;
     temp_v0 = 0;
     temp_v4 = 0;
     if (temp_v4 < *piVar12) {
       do {
         temp_v5 = temp_v11;
-        temp_v7 = FUN_0030ef8c(temp_v11,"ATBC",4);
-        if ((temp_v7 == 0) || (temp_v7 = FUN_0030ef8c(temp_v5,"ABCH",4), temp_v7 == 0)) {
+        temp_v7 = rt_memcmp(temp_v11,"ATBC",4);
+        if ((temp_v7 == 0) || (temp_v7 = rt_memcmp(temp_v5,"ABCH",4), temp_v7 == 0)) {
           temp_v6 = *(int *)(temp_v5 + 8);
           temp_v8 = temp_v6 == 0;
           temp_v7 = temp_v6;
@@ -122,7 +122,7 @@ void FUN_0019d57c(int param_1,int param_2)
             temp_v7 = 0;
             temp_v5 = temp_v5 + *(int *)(temp_v5 + 0x10);
             do {
-              temp_v1 = FUN_0030ef8c(temp_v5,"EPLSIGN",7);
+              temp_v1 = rt_memcmp(temp_v5,"EPLSIGN",7);
               if (temp_v1 != 0) break;
               FUN_002e59f8(temp_v5,temp_v9,0x10);
               unaff_r7 = (unsigned short *)(temp_v5 + 0x10);

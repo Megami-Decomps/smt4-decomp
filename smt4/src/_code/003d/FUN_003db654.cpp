@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_002aa568(int, unsigned char *);
 
 extern unsigned char LAB_003db7b0; /* 0x3db7b0 */
 
 extern int FUN_00293230(void);
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002aa568. */
 extern int FUN_002c30c4(int);
 
@@ -26,7 +26,7 @@ int FUN_003db654(int param_1)
   
   piVar3 = (int *)(param_1 + 0x1cfc);
   if (*piVar3 != 0) {
-    FUN_002939f4();
+    btlGetMainState();
     temp_v0 = FUN_00293230();
     if (temp_v0 == 0) {
       temp_v0 = 0;

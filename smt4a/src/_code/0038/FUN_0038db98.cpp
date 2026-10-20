@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_00236038(int);
+int scrGetArg(int);
 int FUN_003f220c(unsigned int, int, int);
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern unsigned int FUN_0014aa78(unsigned int, unsigned int);
+extern unsigned int btlGetMainState(unsigned int, unsigned int);
 extern unsigned long long FUN_00203d74(void);
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_003f220c. */
 
 
@@ -27,15 +27,15 @@ unsigned int FUN_0038db98(void)
   unsigned int temp_v3;
   unsigned long long temp_v4;
   
-  temp_v1 = FUN_00236038(0);
-  temp_v2 = FUN_00236038(1);
+  temp_v1 = scrGetArg(0);
+  temp_v2 = scrGetArg(1);
   temp_v4 = FUN_00203d74();
   temp_v0 = romwright_piece_4_4((int)temp_v4,(int)((unsigned long long)temp_v4 >> 0x20));
   if ((int)temp_v4 != 0) {
     temp_v0 = (long long)(temp_v2 << 1) * 0x55555556;
     temp_v2 = (temp_v2 << 1) / 3;
   }
-  temp_v3 = FUN_0014aa78((int)((unsigned long long)temp_v0 >> 0x20),(int)temp_v0);
+  temp_v3 = btlGetMainState((int)((unsigned long long)temp_v0 >> 0x20),(int)temp_v0);
   FUN_003f220c(temp_v3,temp_v1,temp_v2);
   return 1;
 }

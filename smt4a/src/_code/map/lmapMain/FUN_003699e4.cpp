@@ -83,7 +83,7 @@ typedef struct {
     unsigned int sp224; /* 0x224: local_224 */
 } param_1_stack;
 
-extern int DAT_00580238; /* 0x580238 */
+extern int g_lmapMainState; /* 0x580238 */
 extern unsigned int DAT_005c4c28; /* 0x5c4c28 */
 extern float DAT_0064c030; /* 0x64c030 */
 extern float DAT_0064c034; /* 0x64c034 */
@@ -206,11 +206,11 @@ void FUN_003699e4(int param_1)
   float temp_v84;
   float temp_v85;
   
-  temp_v0 = DAT_00580238;
-  if (DAT_00580238 != 0) {
-    param_1 = *(int *)(DAT_00580238 + 0xae4);
+  temp_v0 = g_lmapMainState;
+  if (g_lmapMainState != 0) {
+    param_1 = *(int *)(g_lmapMainState + 0xae4);
   }
-  if (DAT_00580238 != 0 && param_1 != 0) {
+  if (g_lmapMainState != 0 && param_1 != 0) {
     temp_v1 = FUN_00152f54();
     temp_v19 = 0.0f;
     temp_v79[0] = 1.0f;
@@ -403,7 +403,7 @@ void FUN_003699e4(int param_1)
       }
       nn_math_ARMv6_MTX33CopyAsm(&temp_v65,&DAT_0064c030);
       temp_v80 = &temp_v62;
-      temp_v1 = DAT_00580238 + temp_v3 * 0x88;
+      temp_v1 = g_lmapMainState + temp_v3 * 0x88;
       temp_v65 = *(unsigned int *)(temp_v1 + 0xb00);
       temp_v66 = *(float *)(temp_v1 + 0xb04);
       temp_v69 = *(unsigned int *)(temp_v1 + 0xb14);
@@ -448,7 +448,7 @@ void FUN_003699e4(int param_1)
         FUN_00399290(temp_v3,0);
       }
     }
-    if ((*(int *)(DAT_00580238 + 0x40) != 100) && (*(int *)(temp_v0 + 0x4ef8) != 0)) {
+    if ((*(int *)(g_lmapMainState + 0x40) != 100) && (*(int *)(temp_v0 + 0x4ef8) != 0)) {
       for (temp_v3 = 0; temp_v3 < *(unsigned int *)(*(int *)(*(int *)(temp_v0 + 0x4ef8) + 8) + 0x10);
           temp_v3 = temp_v3 + 1) {
         if (*(char *)(temp_v0 + temp_v3 * 0x88 + 0x4f84) != '\0') {

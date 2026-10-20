@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00297468(...);
 int FUN_002be624(...);
 int FUN_002bf694(...);
-int FUN_002c415c(...);
-int FUN_002c4938(...);
+int asdMemFree(...);
+int memClear(...);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -21,12 +21,12 @@ typedef struct {
 
 extern int FUN_0024a808(int);
 extern int FUN_002522e0(unsigned char *, unsigned int);
-extern unsigned int FUN_002939f4(void);
+extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
 extern int FUN_003397b8(unsigned int, unsigned int);
 
 
@@ -45,7 +45,7 @@ unsigned int FUN_003dc19c(int param_1)
   unsigned int temp_v8;
   unsigned int temp_v9;
   
-  temp_v5 = FUN_002939f4();
+  temp_v5 = btlGetMainState();
   temp_v2 = 0;
   do {
     temp_v6 = 0;
@@ -56,14 +56,14 @@ unsigned int FUN_003dc19c(int param_1)
     FUN_002bf694(&temp_v6,temp_v0 + 4);
     temp_v0 = param_1 + temp_v2 * 0x8c;
     *(unsigned char *)(temp_v0 + 0x3070) = 0xff;
-    FUN_002c4938(temp_v0 + 0x3078,0x80);
+    memClear(temp_v0 + 0x3078,0x80);
     if (*(int *)(temp_v0 + 0x3074) != 0) {
-      FUN_002c415c();
+      asdMemFree();
       *(unsigned int *)(temp_v0 + 0x3074) = 0;
     }
     *(unsigned char *)(temp_v0 + 0x30f8) = 0;
-    FUN_002c4938(temp_v3,0x80);
-    FUN_002c4938(temp_v4,0x80);
+    memClear(temp_v3,0x80);
+    memClear(temp_v4,0x80);
     FUN_002be624(temp_v4,"battle/effect/%s.eft",&temp_v6);
     FUN_002bf694(temp_v3,temp_v4);
     temp_v1 = FUN_002522e0(temp_v3,0x2f);

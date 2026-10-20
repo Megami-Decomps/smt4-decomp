@@ -16,8 +16,8 @@ int FUN_00364740(unsigned int, unsigned int);
 int FUN_00376f94(void);
 int FUN_003cb744(void);
 
-extern int DAT_0058103c; /* 0x58103c */
-extern int DAT_00581274; /* 0x581274 */
+extern int g_mapIf; /* 0x58103c */
+extern int g_mapMain; /* 0x581274 */
 extern signed char DAT_005f1623; /* 0x5f1623 */
 
 /* Supplied declaration required: FUN_00244ac8. */
@@ -45,7 +45,7 @@ void FUN_003b5d1c(void)
   unsigned int temp_v5;
   unsigned char temp_v6;
   
-  temp_v0 = DAT_00581274;
+  temp_v0 = g_mapMain;
   if (DAT_005f1623 != '\0') {
     temp_v2 = FUN_00376f94();
     if (temp_v2 != 0) {
@@ -74,7 +74,7 @@ void FUN_003b5d1c(void)
     FUN_002b7ce0();
     FUN_003cb744();
   }
-  temp_v0 = DAT_0058103c;
+  temp_v0 = g_mapIf;
   temp_v2 = 0;
   do {
     temp_v1 = temp_v2 + 1;

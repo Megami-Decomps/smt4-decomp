@@ -7,7 +7,7 @@ extern "C" {
 extern unsigned int DAT_004c53e0; /* 0x4c53e0 */
 extern unsigned int DAT_004c5400; /* 0x4c5400 */
 
-extern int FUN_002c564c(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 unsigned int FUN_0033361c(void)
@@ -16,7 +16,7 @@ unsigned int FUN_0033361c(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_002c564c(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 != 0) {
     temp_v1 = 0;
   }

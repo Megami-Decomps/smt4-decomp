@@ -10,9 +10,9 @@ int FUN_0012fe3c(...);
 int FUN_002e6e34(...);
 int FUN_002e6e5c(...);
 int FUN_002e7232(...);
-int FUN_002e74c4(int *, int, int, unsigned int);
+int strAssign(int *, int, int, unsigned int);
 int FUN_002e75c2(unsigned char [6], unsigned char ***);
-int FUN_002e7634(int [4]);
+int strInit(int [4]);
 int FUN_002e7658(unsigned char [6]);
 int FUN_002e9538(...);
 int FUN_002e995c(...);
@@ -20,7 +20,7 @@ int FUN_002eb17c(...);
 int FUN_002eb588(...);
 int FUN_002eb87c(...);
 int FUN_002eb914(...);
-int FUN_002ec9f4(...);
+int strDestroy(...);
 int FUN_002ed258(unsigned char [6], int);
 int FUN_002ede60(...);
 int FUN_002eea8a(unsigned char [6], unsigned short [2]);
@@ -71,9 +71,9 @@ extern unsigned int FUN_0010a53c(int, unsigned int);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e75c2. */
-/* Supplied declaration required: FUN_002e7634. */
+/* Supplied declaration required: strInit. */
 /* Supplied declaration required: FUN_002e7658. */
 extern int FUN_002e76b6(unsigned int);
 /* Supplied declaration required: FUN_002e9538. */
@@ -83,7 +83,7 @@ extern int FUN_002e76b6(unsigned int);
 extern int FUN_002eb83c(void);
 /* Supplied declaration required: FUN_002eb87c. */
 /* Supplied declaration required: FUN_002eb914. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ed258. */
 /* Supplied declaration required: FUN_002ede60. */
 /* Supplied declaration required: FUN_002eea8a. */
@@ -170,7 +170,7 @@ unsigned int FUN_0010a5b0(int param_1,unsigned int param_2,unsigned int param_3,
     return 0;
   }
   FUN_002e995c(temp_v20);
-  FUN_002e7634(aiStack_1bc);
+  strInit(aiStack_1bc);
   temp_v19 = aiStack_1bc;
   FUN_002ed258(temp_v14,temp_v9);
   FUN_002e75c2(temp_v14,&temp_v23);
@@ -182,7 +182,7 @@ unsigned int FUN_0010a5b0(int param_1,unsigned int param_2,unsigned int param_3,
   temp_v13 = 0;
   temp_v10 = *(int *)(temp_v16 + 0x10) - temp_v17;
   temp_v9 = FUN_002e76b6(temp_v16);
-  FUN_002e74c4(temp_v19,temp_v9 + temp_v17,temp_v10,0xffffffff);
+  strAssign(temp_v19,temp_v9 + temp_v17,temp_v10,0xffffffff);
   FUN_002e7658(temp_v14);
   temp_v7 = *(unsigned short *)(temp_v44 + 0x3c) & 0xf;
   temp_v24 = temp_v44 + 0xdc;
@@ -292,12 +292,12 @@ unsigned int FUN_0010a5b0(int param_1,unsigned int param_2,unsigned int param_3,
           }
         }
         temp_v11 = 1;
-        FUN_002ec9f4(aiStack_1bc);
+        strDestroy(aiStack_1bc);
         FUN_002e7232(temp_v44);
         return temp_v11;
       }
     }
-    FUN_002ec9f4(aiStack_1bc);
+    strDestroy(aiStack_1bc);
   }
   else {
     FUN_002ede60(temp_v14,temp_v20);
@@ -306,11 +306,11 @@ unsigned int FUN_0010a5b0(int param_1,unsigned int param_2,unsigned int param_3,
                       (*(int **)(temp_v3 + 0x30),temp_v43,aiStack_1bc,temp_v14);
     if (temp_v4 == 0) {
       FUN_002eb914(temp_v3,temp_v14);
-      FUN_002ec9f4(aiStack_1bc);
+      strDestroy(aiStack_1bc);
       return temp_v11;
     }
     temp_v11 = 1;
-    FUN_002ec9f4(aiStack_1bc);
+    strDestroy(aiStack_1bc);
     FUN_002e7232(temp_v44);
   }
   return temp_v11;

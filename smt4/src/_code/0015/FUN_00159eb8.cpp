@@ -22,7 +22,7 @@ extern signed char DAT_0044e7c3; /* 0x44e7c3 */
 extern unsigned char DAT_0044e7c5; /* 0x44e7c5 */
 extern unsigned char DAT_0044e7c8; /* 0x44e7c8 */
 extern unsigned char DAT_004a95c0; /* 0x4a95c0 */
-extern unsigned char DAT_004e6f64; /* 0x4e6f64 */
+extern unsigned char g_dspsndState; /* 0x4e6f64 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0015d38c. */
@@ -45,11 +45,11 @@ void FUN_00159eb8(int *param_1,unsigned int param_2)
   int temp_v3;
   
   if (DAT_0044e7c2 != '\0') {
-    puVar1 = &DAT_004e6f64;
-    nn_snd_CTR_Dspsnd_WaitPipe_15D540(&DAT_004e6f64,param_2,0x952b80,0);
+    puVar1 = &g_dspsndState;
+    nn_snd_CTR_Dspsnd_WaitPipe_15D540(&g_dspsndState,param_2,0x952b80,0);
     if (puVar1 != (unsigned char *)0x0) {
       software_interrupt(0x28);
-      puVar2 = &DAT_004e6f64;
+      puVar2 = &g_dspsndState;
       FUN_0015d38c();
       DAT_0044e7c5 = 0;
       software_interrupt(0x28);
@@ -64,10 +64,10 @@ void FUN_00159eb8(int *param_1,unsigned int param_2)
     nn_os_LightEvent_ClearSignal((unsigned int)&DAT_0044e7c8);
   }
   if (DAT_0044e7c3 == '\0') {
-    puVar1 = &DAT_004e6f64;
+    puVar1 = &g_dspsndState;
     nn_snd_CTR_Dspsnd_WaitPipe_15D5E0();
     software_interrupt(0x28);
-    puVar2 = &DAT_004e6f64;
+    puVar2 = &g_dspsndState;
     FUN_0015d38c();
     DAT_0044e7c5 = 0;
     software_interrupt(0x28);

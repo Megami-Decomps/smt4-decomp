@@ -8,7 +8,7 @@ int FUN_00184310(void);
 int FUN_001aba54(void);
 int FUN_002a2cbc(void);
 int FUN_002e6340(void);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 int FUN_002e6dd4(int, int);
 int FUN_003339ec(void);
 int FUN_0034c8e8(void);
@@ -27,7 +27,7 @@ extern unsigned int *DAT_0057f6a4; /* 0x57f6a4 */
 /* Supplied declaration required: FUN_001aba54. */
 /* Supplied declaration required: FUN_002a2cbc. */
 /* Supplied declaration required: FUN_002e6340. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
 /* Supplied declaration required: FUN_003339ec. */
 /* Supplied declaration required: FUN_0034c8e8. */
@@ -54,7 +54,7 @@ void FUN_0022838c(void)
   unsigned short *puVar8;
   unsigned int temp_v5;
   
-  FUN_002e6354(DAT_0057f69c + 0x88,0x2a71c);
+  sysMemClear(DAT_0057f69c + 0x88,0x2a71c);
   puVar1 = DAT_0057f6a4;
   temp_v3 = 0x18;
   *DAT_0057f6a4 = 0;
@@ -196,7 +196,7 @@ void FUN_0022838c(void)
   *(unsigned int *)(temp_v4 + 0x4ab4) = 0;
   *(unsigned int *)(temp_v4 + 0x4ab8) = 0;
   *(unsigned int *)(temp_v4 + 0x4abc) = 0;
-  FUN_002e6354(temp_v4 + 0x4ac0,0x80);
+  sysMemClear(temp_v4 + 0x4ac0,0x80);
   *(unsigned int *)(temp_v4 + 0x4bc0) = 0;
   *(unsigned int *)(temp_v4 + 0x4bc4) = 0;
   *(unsigned int *)(temp_v4 + 0x4bc8) = 0;
@@ -229,7 +229,7 @@ void FUN_0022838c(void)
   *(unsigned char *)(temp_v4 + 0x3eae) = 1;
   *(unsigned char *)(temp_v4 + 0x3eaf) = 1;
   *(unsigned char *)(temp_v4 + 0x463a) = 0;
-  FUN_002e6354(temp_v4 + 0x4d08,0xc0);
+  sysMemClear(temp_v4 + 0x4d08,0xc0);
   *(unsigned char *)(temp_v4 + 0x4c88) = 0;
   *(unsigned char *)(temp_v4 + 0x4c89) = 0;
   *(unsigned char *)(temp_v4 + 0x4c8a) = 0;

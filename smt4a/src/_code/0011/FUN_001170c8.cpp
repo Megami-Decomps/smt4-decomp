@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0012143c(int *, unsigned int, unsigned char [24]);
-int FUN_002e7634(...);
+int strInit(...);
 int FUN_002ec890(...);
 int FUN_002ec934(unsigned char [24], int, unsigned int);
-int FUN_002ec9f4(...);
+int strDestroy(...);
 int FUN_002ee524(...);
 int FUN_002ee54c(...);
 int FUN_002fde5c(...);
@@ -47,10 +47,10 @@ extern int *FUN_001214c4(int, unsigned char *, unsigned int);
 extern int FUN_001242f8(int *);
 extern unsigned long long FUN_00124458(unsigned char *, unsigned char *);
 extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002e7634. */
+/* Supplied declaration required: strInit. */
 /* Supplied declaration required: FUN_002ec890. */
 /* Supplied declaration required: FUN_002ec934. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ee524. */
 /* Supplied declaration required: FUN_002ee54c. */
 /* Supplied declaration required: FUN_002fde5c. */
@@ -107,13 +107,13 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
   temp_v26 = param_2;
   iStack_1c = param_3;
   temp_v27 = param_4;
-  FUN_002e7634(temp_v17);
+  strInit(temp_v17);
   FUN_00303038(param_1,temp_v17);
   FUN_002ee524(temp_v7,temp_v17);
-  FUN_002e7634(temp_v3);
+  strInit(temp_v3);
   FUN_00303038(temp_v7,temp_v3);
   FUN_002ec934(temp_v19,temp_v4 + temp_v6,temp_v5);
-  FUN_002e7634(temp_v18);
+  strInit(temp_v18);
   FUN_00303038(temp_v7,temp_v18);
   if ((*(char *)(param_1 + 4) != '\0') || (temp_v8 != '\0')) {
     FUN_002fde5c(temp_v24);
@@ -147,9 +147,9 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
     else {
       temp_v0 = FUN_001242f8(piVar2);
       if (temp_v0 != 0) {
-        FUN_002e7634(temp_v20);
+        strInit(temp_v20);
         FUN_00303038(param_1,temp_v20);
-        FUN_002e7634(temp_v21);
+        strInit(temp_v21);
         FUN_00303158(*(unsigned int *)(param_3 + 0x14),temp_v20,temp_v21,piVar2 + 0xd);
         FUN_002ee524(temp_v9,temp_v21);
         FUN_003031e4(temp_v9,&temp_v14);
@@ -173,13 +173,13 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
             *param_5 = (unsigned int)piVar2;
             FUN_002ee54c(temp_v22);
             FUN_002ee54c(temp_v9);
-            FUN_002ec9f4(temp_v21);
-            FUN_002ec9f4(temp_v20);
-            FUN_002ec9f4(temp_v18);
+            strDestroy(temp_v21);
+            strDestroy(temp_v20);
+            strDestroy(temp_v18);
             FUN_002ec890(temp_v19);
-            FUN_002ec9f4(temp_v3);
+            strDestroy(temp_v3);
             FUN_002ee54c(temp_v7);
-            FUN_002ec9f4(temp_v17);
+            strDestroy(temp_v17);
             return 1;
           }
           if (piVar2 != (int *)0x0) {
@@ -192,13 +192,13 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
         FUN_0030314e(temp_v26,temp_v24);
         FUN_002ee54c(temp_v24);
         FUN_002ee54c(temp_v9);
-        FUN_002ec9f4(temp_v21);
-        FUN_002ec9f4(temp_v20);
-        FUN_002ec9f4(temp_v18);
+        strDestroy(temp_v21);
+        strDestroy(temp_v20);
+        strDestroy(temp_v18);
         FUN_002ec890(temp_v19);
-        FUN_002ec9f4(temp_v3);
+        strDestroy(temp_v3);
         FUN_002ee54c(temp_v7);
-        FUN_002ec9f4(temp_v17);
+        strDestroy(temp_v17);
         return 0;
       }
       if (piVar2 != (int *)0x0) {
@@ -212,11 +212,11 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
   }
   FUN_0030314e(temp_v26,temp_v24);
   FUN_002ee54c(temp_v24);
-  FUN_002ec9f4(temp_v18);
+  strDestroy(temp_v18);
   FUN_002ec890(temp_v19);
-  FUN_002ec9f4(temp_v3);
+  strDestroy(temp_v3);
   FUN_002ee54c(temp_v7);
-  FUN_002ec9f4(temp_v17);
+  strDestroy(temp_v17);
   return 0;
 }
 

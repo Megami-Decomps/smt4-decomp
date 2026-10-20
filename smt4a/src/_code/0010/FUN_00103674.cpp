@@ -1,26 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00103674` (_code @ 0x103674, 0x3e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e7194(int, int);
-int rt_memcpy_w(int, int, int);
+/* Copyable record: a header assigned by FUN_002e7194, a word, two 0x78-byte blocks and a trailing word. */
+typedef struct {
+    u8 unk00[4];
+    u8 header[0x30];    /* 0x04 */
+    u32 unk34;          /* 0x34 */
+    u8 blockA[0x78];    /* 0x38 */
+    u8 blockB[0x78];    /* 0xb0 */
+    u32 unk128;         /* 0x128 */
+} Record;
 
-/* Supplied declaration required: FUN_002e7194. */
-/* Supplied declaration required: rt_memcpy_w. */
+int FUN_002e7194(u8 *dest, u8 *source);
+int rt_memcpy_w(u8 *dest, u8 *source, int size);
 
-
-int FUN_00103674(int param_1,int param_2)
-
+/* Assignment: copies every part of `source` into `dest` and returns `dest`. */
+Record *FUN_00103674(Record *dest, Record *source)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_002e7194(param_1 + 4,param_2 + 4);
-  *(unsigned int *)(param_1 + 0x34) = *(unsigned int *)(param_2 + 0x34);
-  rt_memcpy_w(param_1 + 0x38,param_2 + 0x38,0x78);
-  rt_memcpy_w(param_1 + 0xb0,param_2 + 0xb0,0x78);
-  *(unsigned int *)(param_1 + 0x128) = *(unsigned int *)(param_2 + 0x128);
-  return param_1;
+    FUN_002e7194(dest->header, source->header);
+    dest->unk34 = source->unk34;
+    rt_memcpy_w(dest->blockA, source->blockA, 0x78);
+    rt_memcpy_w(dest->blockB, source->blockB, 0x78);
+    dest->unk128 = source->unk128;
+    return dest;
 }
 
 } /* extern "C" */

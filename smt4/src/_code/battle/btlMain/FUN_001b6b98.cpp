@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_0019d954(void);
+int btlActionAllocData(void);
 int FUN_0027db24(int);
-int FUN_002a7218(void);
+int scrScriptProcessDestroy(void);
 int FUN_002a8178(unsigned int *);
 int FUN_002ae164(void);
-int FUN_002bf244(unsigned int);
-int FUN_002c415c(void);
+int jobIsValid(unsigned int);
+int asdMemFree(void);
 int FUN_002c424c(unsigned int *, int, unsigned int);
-int FUN_002c4938(...);
-int FUN_002c498c(int, int, int, int, int);
+int memClear(...);
+int asdMemAlloc(int, int, int, int, int);
 int FUN_0033a414(unsigned int *);
 int FUN_00394a50(void);
 
@@ -22,16 +22,16 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0019d954. */
+/* Supplied declaration required: btlActionAllocData. */
 /* Supplied declaration required: FUN_0027db24. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002a8178. */
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002bf244. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: jobIsValid. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c424c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: FUN_0033a414. */
 /* Supplied declaration required: FUN_00394a50. */
 
@@ -51,8 +51,8 @@ void FUN_001b6b98(unsigned int *param_1)
   unsigned int *puVar8;
   unsigned int temp_v6;
   
-  FUN_0019d954();
-  FUN_002bf244(*param_1);
+  btlActionAllocData();
+  jobIsValid(*param_1);
   FUN_0027db24(0);
   *param_1 = 0;
   param_1[1] = 0;
@@ -104,7 +104,7 @@ void FUN_001b6b98(unsigned int *param_1)
   FUN_0033a414(param_1);
   param_1[0x30] = 0xffffffff;
   param_1[0x31] = 0xffffffff;
-  FUN_002c4938(param_1 + 0x32,0x74);
+  memClear(param_1 + 0x32,0x74);
   param_1[0x32] = 0;
   param_1[0x33] = 0;
   param_1[0x34] = 0;
@@ -124,12 +124,12 @@ void FUN_001b6b98(unsigned int *param_1)
   param_1[0x59] = 0;
   param_1[0x5a] = 0;
   temp_v0 = 0x100;
-  FUN_002c498c(0x100,0x100,0,0x8f64,1);
+  asdMemAlloc(0x100,0x100,0,0x8f64,1);
   piVar7 = (int *)(param_1 + 0x7a6);
   temp_v6 = 0;
   *piVar7 = temp_v0;
   do {
-    FUN_002c4938(*piVar7 + temp_v6 * 0x114,0x114);
+    memClear(*piVar7 + temp_v6 * 0x114,0x114);
     *(short *)(*piVar7 + temp_v6 * 0x114 + 0x62) = (short)temp_v6;
     *(unsigned short *)(*piVar7 + temp_v6 * 0x114 + 0x60) = 0xffff;
     temp_v0 = temp_v6 * 0x114;
@@ -141,7 +141,7 @@ void FUN_001b6b98(unsigned int *param_1)
   } while (temp_v6 < 0x85);
   *(unsigned char *)((int)param_1 + 0x1e9d) = 0;
   temp_v0 = 0x100;
-  FUN_002c498c(0x100,0x100,0,0x4b0,1);
+  asdMemAlloc(0x100,0x100,0,0x4b0,1);
   temp_v6 = 0;
   param_1[0x7ef] = temp_v0;
   do {
@@ -163,7 +163,7 @@ void FUN_001b6b98(unsigned int *param_1)
   param_1[0x7ae] = 0;
   param_1[0x7af] = 0;
   temp_v0 = 0x100;
-  FUN_002c498c(0x100,0x100,0,0x113e8,1);
+  asdMemAlloc(0x100,0x100,0,0x113e8,1);
   piVar7 = (int *)(param_1 + 0x7f0);
   temp_v6 = 0;
   *piVar7 = temp_v0;
@@ -189,9 +189,9 @@ LAB_001b6eb0:
         temp_v6 = (temp_v6 + 1) & 0xffff;
         *(unsigned short *)(*piVar7 + temp_v0 + 0xd4) = 0xffff;
         if (temp_v6 >= 0x6d) {
-          FUN_002c4938(param_1 + 0x84d,0xa8);
-          FUN_002c4938(param_1 + 0x877,0x54);
-          FUN_002c4938(param_1 + 0x41d,0xe10);
+          memClear(param_1 + 0x84d,0xa8);
+          memClear(param_1 + 0x877,0x54);
+          memClear(param_1 + 0x41d,0xe10);
           FUN_002a8178(param_1 + 0x7a3);
           *(unsigned short *)(param_1 + 0x7f1) = 0;
           *(unsigned short *)((int)param_1 + 0x1fc6) = 0;
@@ -218,9 +218,9 @@ LAB_001b6eb0:
           param_1[0x1126] = 0;
           FUN_002c424c(param_1 + 0x7f8,3,0xffffffff);
           temp_v1 = 0x100;
-          FUN_002c498c(0x100,0x100,0,0x80,1);
+          asdMemAlloc(0x100,0x100,0,0x80,1);
           param_1[0x8c4] = temp_v1;
-          FUN_002c4938();
+          memClear();
           param_1[0x8c5] = 0;
           *(unsigned short *)((int)param_1 + 0x2f1e) = 0xffff;
           *(unsigned short *)(param_1 + 0xbc8) = 0xffff;
@@ -257,11 +257,11 @@ LAB_001b6eb0:
           param_1[0x127a] = 0xffffffff;
           param_1[0x1278] = 0;
           if (param_1[0x1291] != 0) {
-            FUN_002c415c();
+            asdMemFree();
             param_1[0x1291] = 0;
           }
           if (param_1[0x1292] != 0) {
-            FUN_002a7218();
+            scrScriptProcessDestroy();
             param_1[0x1292] = 0;
           }
           temp_v6 = 1;

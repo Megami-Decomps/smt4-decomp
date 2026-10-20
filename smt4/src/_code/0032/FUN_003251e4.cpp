@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00242914(unsigned int, int);
 
 /* Supplied declaration required: FUN_00242914. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 
 
 unsigned int FUN_003251e4(unsigned int *param_1)
@@ -17,7 +17,7 @@ unsigned int FUN_003251e4(unsigned int *param_1)
   int temp_v0;
   
   FUN_00242914(*param_1,1);
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   *(unsigned int *)(temp_v0 + 0x44a0) = *(unsigned int *)(temp_v0 + 0x44a0) | 0x20000000;
   return 1;
 }

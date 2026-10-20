@@ -1,23 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00147a7c` (_code @ 0x147a7c, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instructions identical to retail; the retail object additionally starts with a `nop` of function alignment padding. */
+#include "common.h"
 
 extern "C" {
 
-
-int FUN_00147a7c(int param_1)
-
+/* Rebases an address from one of two memory windows (0x14000000.. or 0x1f000000..+0x600000, 0x1f600000) onto its counterpart; 0 if outside both. */
+int FUN_00147a7c(u32 addr)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (param_1 + 0xec000000U < 0x8000000) {
-    temp_v0 = param_1 + 0xc000000;
-  }
-  else if ((param_1 + 0xe1000000U < 0x600000) || (param_1 == 0x1f600000)) {
-    temp_v0 = param_1 - 0x7000000;
-  }
-  return temp_v0;
+    int result = 0;
+
+    if (addr - 0x14000000 < 0x8000000) {
+        result = addr + 0xc000000;
+    } else if (addr - 0x1f000000 < 0x600000 || addr == 0x1f600000) {
+        result = addr - 0x7000000;
+    }
+    return result;
 }
 
 } /* extern "C" */

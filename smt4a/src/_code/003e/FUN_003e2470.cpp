@@ -1,68 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e2470` (_code @ 0x3e2470, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003e1114(...);
-int FUN_003ebec8(...);
-int FUN_003f1334(...);
-
-typedef struct fn_003e2470_arg1 fn_003e2470_arg1;
-struct fn_003e2470_arg1 {
-    unsigned char pad_0x0[0x3];
-    byte field_0x3; /* +0x3 */
-    unsigned char pad_0x4[0x30];
-    undefined4 field_0x34; /* +0x34 */
-    unsigned char pad_0x38[0x32];
-    short field_0x6a; /* +0x6a */
-    unsigned char pad_0x6c[0x398];
-    void *field_0x404; /* +0x404 */
-};
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
+/* State machine record: phase plus two counters reset on every phase change. */
 typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+    u32 state;      /* 0x00 */
+    u8 unk04[8];
+    u32 counter0c;  /* 0x0c */
+    u32 counter10;  /* 0x10 */
+} PhaseState;
 
-/* Supplied declaration required: FUN_003e1114. */
-extern int FUN_003e9b28(fn_003e2470_arg1 *);
-/* Supplied declaration required: FUN_003ebec8. */
-extern int FUN_003f0f40(fn_003e2470_arg1 *);
-/* Supplied declaration required: FUN_003f1334. */
-extern int FUN_003f86c8(unsigned int);
+typedef struct Actor Actor;
 
+int FUN_003e1114(PhaseState *phase, Actor *actor);
+int FUN_003ebec8(Actor *actor);
+int FUN_003e9b28(Actor *actor);
+int FUN_003f0f40(Actor *actor);
+int FUN_003f1334(Actor *actor);
+int FUN_003f86c8(u32 id);
 
-void FUN_003e2470(unsigned int *param_1,fn_003e2470_arg1 *param_2)
-
+/* Enters `state` and restarts its counters. */
+static __inline void phaseEnter(PhaseState *phase, u32 state)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_003f86c8(0x4e);
-  if (temp_v0 == 0) {
-    return;
-  }
-  FUN_003ebec8(param_2);
-  temp_v0 = FUN_003e9b28(param_2);
-  if (temp_v0 != 0) {
-    *param_1 = 4;
-    param_1[4] = 0;
-    param_1[3] = 0;
-    FUN_003f1334(param_2);
-    *param_1 = 5;
-    param_1[4] = 0;
-    param_1[3] = 0;
-    temp_v0 = FUN_003f0f40(param_2);
-    if (temp_v0 == 0) {
-      return;
+    phase->state = state;
+    phase->counter10 = 0;
+    phase->counter0c = 0;
+}
+
+/* Runs the phase 4 -> 5 -> 6 transition for `actor`, then hands over to FUN_003e1114. */
+void FUN_003e2470(PhaseState *phase, Actor *actor)
+{
+    if (FUN_003f86c8(0x4e) == 0) {
+        return;
     }
-  }
-  param_1[4] = 0;
-  *param_1 = 6;
-  param_1[3] = 0;
-  FUN_003e1114(param_1,param_2);
-  return;
+    FUN_003ebec8(actor);
+    if (FUN_003e9b28(actor) != 0) {
+        phase->state = 4;
+        phase->counter10 = 0;
+        phase->counter0c = 0;
+        FUN_003f1334(actor);
+        phase->state = 5;
+        phase->counter10 = 0;
+        phase->counter0c = 0;
+        if (FUN_003f0f40(actor) == 0) {
+            return;
+        }
+    }
+    phaseEnter(phase, 6);
+    FUN_003e1114(phase, actor);
 }
 
 } /* extern "C" */

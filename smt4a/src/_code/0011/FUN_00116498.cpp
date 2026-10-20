@@ -26,9 +26,9 @@ struct fn_00116498_arg0 {
 extern unsigned char LAB_0011653c; /* 0x11653c */
 extern unsigned char DAT_00559ce4; /* 0x559ce4 */
 
-extern int FUN_002e3390(unsigned int);
+extern int wstrlen(unsigned int);
 /* Supplied declaration required: FUN_002e342c. */
-extern int FUN_002e7634(int);
+extern int strInit(int);
 extern unsigned int FUN_002e784e(int, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002e9598. */
 extern int FUN_002ea0e4(int);
@@ -60,11 +60,11 @@ int FUN_00116498(fn_00116498_arg0 *param_1,unsigned int param_2,unsigned int par
   temp_v0 = FUN_002ec75c(puVar1 + 0x18);
   temp_v0 = FUN_002ea0e4(temp_v0 + 0x18);
   temp_v0 = FUN_002fafd8(temp_v0 + 0x20,0);
-  temp_v0 = FUN_002e7634(temp_v0 + 0x78);
+  temp_v0 = strInit(temp_v0 + 0x78);
   *(unsigned int *)(temp_v0 - 0x11c) = param_3;
   *(unsigned int *)(temp_v0 - 0x120) = param_2;
   FUN_002e9598(temp_v0 - 0x98,param_5);
-  temp_v1 = FUN_002e3390(param_6);
+  temp_v1 = wstrlen(param_6);
   temp_v2 = FUN_002e784e(temp_v1 + 1,&LAB_0011653c,0);
   *(unsigned int *)(temp_v0 - 0x90) = temp_v2;
   FUN_002e342c(temp_v2,param_6);

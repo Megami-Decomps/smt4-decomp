@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192748(void);
+int dataTableGetCount(void);
 int FUN_003df7c4(int);
 int FUN_004cd340(int, int *, int);
 
@@ -31,9 +31,9 @@ typedef struct {
 #define ROMWRIGHT_PIECE_1_3_DEFINED
 #define romwright_piece_1_3(upper, lower) ((unsigned int)(((unsigned int)(unsigned char)(upper) << 24) | ((unsigned int)(lower) & 0xffffffULL)))
 #endif
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00192748. */
-extern int FUN_00192798(unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(unsigned int);
 extern unsigned int FUN_00203b1c(unsigned int);
 extern unsigned int FUN_002e0798(void);
 /* Supplied declaration required: FUN_003df7c4. */
@@ -62,9 +62,9 @@ void FUN_004cc6dc(int param_1,int param_2,int param_3)
   unsigned int uStack_30;
   unsigned int temp_v9;
   
-  temp_v2 = FUN_00187180(9,0);
-  FUN_00192748();
-  temp_v3 = FUN_00192798(temp_v2);
+  temp_v2 = dataTableGet(9,0);
+  dataTableGetCount();
+  temp_v3 = dataTableGetEntries(temp_v2);
   temp_v8 = *(unsigned int *)(temp_v3 + 5);
   uStack_38 = romwright_piece_3_1((unsigned int)*(unsigned char *)(temp_v3 + 10) << 8,*(unsigned char *)(temp_v3 + 9));
   temp_v7 = romwright_piece_1_3(*(unsigned char *)(temp_v3 + 0xd),

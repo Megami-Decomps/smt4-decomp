@@ -34,7 +34,7 @@ extern unsigned char LAB_003a9644; /* 0x3a9644 */
 extern unsigned char LAB_003a965c; /* 0x3a965c */
 
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00178b04. */
 extern unsigned int FUN_002360dc(unsigned int);
 extern int FUN_002deb84(void);
@@ -69,7 +69,7 @@ unsigned int FUN_003a9540(void)
   unsigned int temp_v17;
   unsigned int temp_v18;
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   temp_v1 = FUN_002deb84();
   if (temp_v1 != 0) {
     temp_v1 = FUN_004d87e4(*(unsigned int *)(temp_v0 + 0x2298));

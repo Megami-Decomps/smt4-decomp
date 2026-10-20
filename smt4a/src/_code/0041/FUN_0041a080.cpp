@@ -3,11 +3,11 @@
 extern "C" {
 
 int FUN_001836b0(void);
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_002e3328(int);
 
 /* Supplied declaration required: FUN_001836b0. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002e3328. */
 
 
@@ -36,7 +36,7 @@ void FUN_0041a080(int *param_1)
     } while (unaff_r4 < *param_1);
   }
   if (param_1[1] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1[1] = 0;
   }
   *param_1 = 0;

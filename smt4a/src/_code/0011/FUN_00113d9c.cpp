@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -38,7 +38,7 @@ unsigned long long FUN_00113d9c(int *param_1,unsigned int param_2,unsigned int p
   
   temp_v1 = param_1;
   uStack_14 = param_2;
-  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0x5)) != '\0') {
+  if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x5)) != '\0') {
     uStack_10 = param_3;
     uStack_c = param_4;
     FUN_002e6e34(&uStack_14,param_1 + 6);

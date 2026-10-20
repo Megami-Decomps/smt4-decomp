@@ -43,7 +43,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0038048c. */
 /* Supplied declaration required: FUN_00380594. */
 /* Supplied declaration required: FUN_003806a0. */
-extern int FUN_003e60c4(unsigned int, unsigned int);
+extern int vcallSlot5(unsigned int, unsigned int);
 /* Supplied declaration required: nw_snd_internal_BasicSound_SetInitialVolume. */
 
 
@@ -73,7 +73,7 @@ void FUN_00377a10(int param_1,fn_00377a10_arg1 *param_2,unsigned int *param_3,un
   temp_v4 = param_2->field_0x4;
   temp_v10 = 0xffffffff;
   iStack_34 = 0;
-  temp_v1 = FUN_003e60c4(*(unsigned int *)(param_1 + 0xbc),*param_3);
+  temp_v1 = vcallSlot5(*(unsigned int *)(param_1 + 0xbc),*param_3);
   temp_v10 = param_2->field_0x9c;
   temp_v3 = 0;
   iStack_34 = temp_v1;

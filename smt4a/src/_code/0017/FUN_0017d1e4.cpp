@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(...);
+int sysMemClear(...);
 
 typedef struct fn_0017d1e4_arg0 fn_0017d1e4_arg0;
 struct fn_0017d1e4_arg0 {
@@ -29,7 +29,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_0017d1e4(fn_0017d1e4_arg0 *param_1,unsigned int param_2,unsigned int param_3,int param_4,
@@ -38,7 +38,7 @@ void FUN_0017d1e4(fn_0017d1e4_arg0 *param_1,unsigned int param_2,unsigned int pa
 {
 /* irregular: 1 native warning(s); review required */
   if (param_1 != (fn_0017d1e4_arg0 *)0x0) {
-    FUN_002e6354(param_1,0x44);
+    sysMemClear(param_1,0x44);
     param_1->field_0x2c = 0x300;
     param_1->field_0xc = 0;
     param_1->field_0x8 = param_2;
@@ -51,7 +51,7 @@ void FUN_0017d1e4(fn_0017d1e4_arg0 *param_1,unsigned int param_2,unsigned int pa
     param_1->field_0x18 = param_5;
     param_1->field_0x1c = param_4;
     param_1->field_0x30 = 0;
-    FUN_002e6354(param_5,param_4 * 0x1c);
+    sysMemClear(param_5,param_4 * 0x1c);
     return;
   }
   return;

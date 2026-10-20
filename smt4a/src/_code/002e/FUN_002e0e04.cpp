@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_002e3390(...);
+int wstrlen(...);
 int FUN_002e6dd0(...);
 int SBORROW4(...);
 
@@ -21,7 +21,7 @@ extern unsigned int DAT_005b40c0; /* 0x5b40c0 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_002e3390. */
+/* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: FUN_002e6dd0. */
 
 
@@ -43,7 +43,7 @@ unsigned int FUN_002e0e04(int param_1,short *param_2,int param_3)
   char acStack_129 [281];
   
   if (param_3 != 3) {
-    temp_v3 = FUN_002e3390();
+    temp_v3 = wstrlen();
     if (temp_v3 >= 0xf8) {
       return 0;
     }
@@ -89,7 +89,7 @@ unsigned int FUN_002e0e04(int param_1,short *param_2,int param_3)
   else {
     FUN_00100388(acStack_129 + 1,"%s/%s",DAT_005b40b4,param_1);
   }
-  temp_v5 = FUN_002e3390(acStack_129 + 1);
+  temp_v5 = wstrlen(acStack_129 + 1);
   if ((int)temp_v5 >= 0xf9) {
     return 0;
   }

@@ -8,7 +8,7 @@ int FUN_002ea4bc(void);
 int FUN_003104fc(unsigned char *);
 int FUN_00310506(unsigned char *);
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 
 /* Supplied declaration required: FUN_0010d35c. */
@@ -30,7 +30,7 @@ void FUN_002ecf40(void)
   FUN_0010d35c();
   temp_v0 = FUN_002ea4bc();
   if (temp_v0 == 0) {
-    (*(unsigned char *)((unsigned char *)&DAT_00594958 + 0x3)) = 0;
+    (*(unsigned char *)((unsigned char *)&g_flagBlock + 0x3)) = 0;
   }
   FUN_003104fc(&DAT_0062e6a0);
   return;

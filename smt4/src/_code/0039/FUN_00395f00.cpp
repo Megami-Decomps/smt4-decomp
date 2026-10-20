@@ -1,33 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00395f00` (_code @ 0x395f00, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: after the conditional decrement the count is reloaded only on the not-decremented path (ldrle); retail always reloads it. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct Child Child;
+typedef struct ChildVtbl {
+    /* 0x00 */ void *unk00[3];
+    /* 0x0C */ void (*update)(Child *self);
+} ChildVtbl;
+struct Child {
+    /* 0x00 */ ChildVtbl *vtbl;
+};
 
+typedef struct Timer Timer;
+typedef struct TimerVtbl {
+    /* 0x00 */ void *unk00[6];
+    /* 0x18 */ void (*update)(Timer *self);
+} TimerVtbl;
+struct Timer {
+    /* 0x00 */ TimerVtbl *vtbl;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u8 flags;           /* bit 0: running */
+    /* 0x09 */ u8 unk09[0x4F];
+    /* 0x58 */ int frames;         /* frames left */
+    /* 0x5C */ u8 unk5C[0xC];
+    /* 0x68 */ Child *child;
+};
 
-void FUN_00395f00(int *param_1)
-
+/* Counts the timer down one frame (clearing `running` at 0), updates its child and then the timer itself via its vtable. */
+void FUN_00395f00(Timer *timer)
 {
-/* irregular: 2 native warning(s); review required */
-  if (0 < param_1[0x16]) {
-    param_1[0x16] = param_1[0x16] - 1;
-  }
-  if (param_1[0x16] == 0) {
-    *(unsigned char *)(param_1 + 2) = *(unsigned char *)(param_1 + 2) & ~1;
-  }
-  if ((int *)param_1[0x1a] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[0x1a] + 0xc))(param_1[0x1a]);
-  }
-                    /* WARNING: Could not recover jumptable at 0x00395f58. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(romwright_code **)(*param_1 + 0x18))(param_1);
-  return;
+    if (timer->frames > 0) {
+        timer->frames--;
+    }
+    if (timer->frames == 0) {
+        timer->flags = timer->flags & ~1;
+    }
+    if (timer->child != NULL) {
+        timer->child->vtbl->update(timer->child);
+    }
+    timer->vtbl->update(timer);
 }
 
 } /* extern "C" */

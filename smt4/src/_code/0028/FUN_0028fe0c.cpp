@@ -22,7 +22,7 @@ typedef struct {
 
 extern unsigned char LAB_0028ff98; /* 0x28ff98 */
 extern unsigned char LAB_0028ffb4; /* 0x28ffb4 */
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 extern int DAT_0043dd50; /* 0x43dd50 */
 
 extern int FUN_00241c40(int);
@@ -51,7 +51,7 @@ void FUN_0028fe0c(int param_1,unsigned int param_2)
   temp_v0 = DAT_0043dd50;
   if (param_1 != 0) {
     FUN_0028ed3c(param_1,1);
-    temp_v3 = (unsigned char *)FUN_00385ccc(DAT_00433158,param_1);
+    temp_v3 = (unsigned char *)FUN_00385ccc(g_aocSystem,param_1);
     if (temp_v3 != (unsigned char *)0x0) {
       *(unsigned char **)(temp_v0 + 0x5e0) = temp_v3;
       *(unsigned char *)(temp_v0 + 0x5f7) = 1;

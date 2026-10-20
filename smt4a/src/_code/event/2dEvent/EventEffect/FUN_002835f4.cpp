@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00157558(int);
 int FUN_001640cc(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_0016c4b8(...);
 int FUN_00183bb0(void);
 int FUN_00184e64(...);
@@ -39,15 +39,15 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_00192824; /* 0x192824 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern unsigned int FUN_00153f64(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_001640cc. */
-extern int FUN_00164a9c(void);
-/* Supplied declaration required: FUN_001677c0. */
+extern int jobGetWork(void);
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 extern int FUN_001834a4(unsigned int, int);
@@ -92,13 +92,13 @@ unsigned int FUN_002835f4(void)
   unsigned int temp_v25;
   unsigned int temp_v26;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   if (*(int *)(temp_v0 + 0xc) == 0 || *(int *)(temp_v0 + 0xc) == 2) {
     return 0;
   }
   temp_v1 = *(int *)(*(int *)(temp_v0 + 0x24) * 0x10 + 0x57f440);
-  FUN_00157558(DAT_0059dbb4);
-  temp_v3 = DAT_0059dbb4;
+  FUN_00157558(g_renderCtx);
+  temp_v3 = g_renderCtx;
   temp_v2 = FUN_001692ac(1,0);
   piVar12 = (int *)(temp_v3 + 0x1258);
   temp_v6 = *piVar12;
@@ -218,10 +218,10 @@ unsigned int FUN_002835f4(void)
     VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorUnsignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
   }
-  FUN_001879d0(DAT_0059dbb4,temp_v8,temp_v9,temp_v10);
+  FUN_001879d0(g_renderCtx,temp_v8,temp_v9,temp_v10);
   temp_v3 = *(int *)(temp_v0 + 0x24) * 0x10;
   temp_v4 = FUN_00153f64(*(unsigned int *)(temp_v3 + 0x57f43c),*(unsigned int *)(temp_v3 + 0x57f440));
-  FUN_0016c4b8(DAT_0059dbb4,temp_v4);
+  FUN_0016c4b8(g_renderCtx,temp_v4);
   VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x30),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x34),(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_001640cc(&temp_v11,&temp_v15,&temp_v19,&temp_v23);
@@ -235,13 +235,13 @@ unsigned int FUN_002835f4(void)
       temp_v4 = 0xffff00ff;
     }
     FUN_00184e64(temp_v4);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_0025cba0(0,0,400,0xf0,0x2e);
   }
   FUN_00183bb0();
-  FUN_001677c0();
-  temp_v0 = DAT_0059dbb4;
-  piVar12 = (int *)(DAT_0059dbb4 + 0x1258);
+  efctSetSpeed();
+  temp_v0 = g_renderCtx;
+  piVar12 = (int *)(g_renderCtx + 0x1258);
   temp_v3 = *piVar12;
   temp_v1 = piVar12[temp_v3 + 2];
   *piVar12 = temp_v3 - 1;

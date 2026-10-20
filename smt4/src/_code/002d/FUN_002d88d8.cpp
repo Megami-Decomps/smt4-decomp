@@ -1,31 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d88d8` (_code @ 0x2d88d8, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00259324(unsigned int, int, int);
+int FUN_00259324(u32 color, int arg1, int arg2, float scale);
+int scrGetArg(int index);
 
-/* Supplied declaration required: FUN_00259324. */
-extern int FUN_00296cc8(void);
-
-
-unsigned int FUN_002d88d8(void)
-
+/* Script command: starts the fade (scale 1.0) with color 0xff, or 0xffffffff when script argument 0 is nonzero. */
+u32 FUN_002d88d8(int firstArg)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_00296cc8();
-  if (temp_v0 == 0) {
-    temp_v1 = 0xff;
-  }
-  else {
-    temp_v1 = 0xffffffff;
-  }
-  FUN_00259324(temp_v1,0,1);
-  return 1;
+    u32 color;
+
+    if (scrGetArg(firstArg) == 0) {
+        color = 0xff;
+    } else {
+        color = 0xffffffff;
+    }
+    FUN_00259324(color, 0, 1, 1.0f);
+    return 1;
 }
 
 } /* extern "C" */

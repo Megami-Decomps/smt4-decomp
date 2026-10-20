@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0043de68; /* 0x43de68 */
+extern int g_cecProcess; /* 0x43de68 */
 
 extern unsigned int FUN_003bbcf4(unsigned int);
 
@@ -14,8 +14,8 @@ unsigned int FUN_002fcabc(void)
 {
   unsigned int temp_v0;
   
-  if (DAT_0043de68 != 0) {
-    temp_v0 = FUN_003bbcf4(*(unsigned int *)(DAT_0043de68 + 4));
+  if (g_cecProcess != 0) {
+    temp_v0 = FUN_003bbcf4(*(unsigned int *)(g_cecProcess + 4));
     return temp_v0;
   }
   return 0;

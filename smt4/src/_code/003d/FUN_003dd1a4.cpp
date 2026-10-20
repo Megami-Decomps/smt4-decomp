@@ -10,12 +10,12 @@ int FUN_0023c6e4(...);
 int FUN_0023ea20(...);
 int FUN_00254a2c(...);
 int FUN_0028c618(...);
-int FUN_002939f4(...);
+int btlGetMainState(...);
 int FUN_00297468(...);
 int FUN_002a0428(...);
 int FUN_002be624(...);
 int FUN_002bf694(...);
-int FUN_002c4938(...);
+int memClear(...);
 int FUN_002d582c(...);
 int FUN_003da0ec(...);
 int FUN_003daf6c(...);
@@ -31,7 +31,7 @@ typedef struct {
     unsigned int sp128; /* 0x128: local_128 */
 } param_4_stack;
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
 
 /* Supplied declaration required: FUN_00201148. */
@@ -42,13 +42,13 @@ extern int FUN_0024a808(int);
 extern int FUN_002522e0(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00254a2c. */
 /* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_002a0428. */
 extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002d582c. */
 extern int FUN_002d8214(void);
 /* Supplied declaration required: FUN_003da0ec. */
@@ -85,9 +85,9 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v1 = *(unsigned int *)(param_1 + 0x3034);
   }
   if (temp_v7 && temp_v1 != 0) {
-    if ((DAT_004342c8 != 0) &&
+    if ((g_btlMain != 0) &&
        (temp_v0 = *(char *)(param_1 + 0x3038), (temp_v0 == '\x02' || temp_v0 == '\b') || temp_v0 == '\t')) {
-      *(unsigned int *)(DAT_004342c8 + 0x634) = *(unsigned int *)(DAT_004342c8 + 0x634) | 0x4000000;
+      *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x4000000;
     }
     (**(romwright_code **)(**(int **)(param_1 + 0x3034) + 8))();
     temp_v2 = (**(romwright_code **)(**(int **)(param_1 + 0x3034) + 0x14))();
@@ -131,7 +131,7 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
     if (*(int *)(param_1 + 0x302c) != 0 && *(int *)(param_1 + 0x302c) != 0x16) {
       temp_v2 = 0;
       do {
-        temp_v3 = FUN_002939f4();
+        temp_v3 = btlGetMainState();
         temp_v3 = temp_v3 + temp_v2 * 0x1c;
         temp_v4 = *(int *)(temp_v3 + 0x2318);
         if (-1 < temp_v4) {
@@ -204,7 +204,7 @@ LAB_003dd4ac:
     temp_v2 = 0;
     while (temp_v2 = temp_v2 + 1, temp_v2 < 0x6d) {
       if (temp_v2 >= 4) {
-        FUN_002939f4();
+        btlGetMainState();
       }
     }
     temp_v1 = *(unsigned int *)(param_1 + 0x3028) & 0xffffff0f;
@@ -213,8 +213,8 @@ LAB_003dd4ac:
   if ((temp_v1 & 0x100) != 0) {
     temp_v2 = 0;
     do {
-      FUN_002c4938(temp_v8,0x80);
-      FUN_002c4938(temp_v10,0x80);
+      memClear(temp_v8,0x80);
+      memClear(temp_v10,0x80);
       FUN_002be624(temp_v10,"battle/effect/%s.eft","ef_e_ref" + temp_v2 * 0x20);
       FUN_002bf694(temp_v8,temp_v10);
       temp_v3 = param_1 + temp_v2 * 0x8c;

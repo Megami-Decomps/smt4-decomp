@@ -11,7 +11,7 @@ int FUN_00290ed8(int);
 int FUN_0029c3b0(int);
 int FUN_002a03a0(unsigned int, int, int);
 int FUN_002bfde4(int);
-int FUN_002c43b4(unsigned int, int);
+int jobStop(unsigned int, int);
 
 extern unsigned int *DAT_0044e110; /* 0x44e110 */
 
@@ -23,7 +23,7 @@ extern unsigned int *DAT_0044e110; /* 0x44e110 */
 /* Supplied declaration required: FUN_002a03a0. */
 extern int FUN_002b8cec(unsigned int);
 /* Supplied declaration required: FUN_002bfde4. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: jobStop. */
 
 
 unsigned int FUN_001e960c(void)
@@ -48,7 +48,7 @@ unsigned int FUN_001e960c(void)
     if (temp_v0 != 99) {
       return 0;
     }
-    FUN_002c43b4(*DAT_0044e110,0);
+    jobStop(*DAT_0044e110,0);
     return 0xffffffff;
   }
   temp_v0 = FUN_002b8cec(4);

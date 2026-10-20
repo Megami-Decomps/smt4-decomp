@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001e5e78(int);
 int FUN_00280ccc(void);
 
-extern int DAT_00447a78; /* 0x447a78 */
+extern int g_mapIf; /* 0x447a78 */
 
 /* Supplied declaration required: FUN_001e5e78. */
 /* Supplied declaration required: FUN_00280ccc. */
@@ -23,7 +23,7 @@ void FUN_002646d4(int param_1)
   int temp_v3;
   unsigned char temp_v4;
   
-  temp_v0 = DAT_00447a78;
+  temp_v0 = g_mapIf;
   temp_v2 = 0;
   do {
     temp_v1 = temp_v2 + 1;

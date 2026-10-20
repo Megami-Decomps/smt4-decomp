@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0013f1b8(...);
+int asdTMTexTableLoadTmx(...);
 int FUN_0013f578(...);
 int FUN_001402d0(...);
 int FUN_001409e4(...);
@@ -13,7 +13,7 @@ int FUN_001445a0(...);
 int FUN_00144efc(...);
 int FUN_00145280(...);
 int FUN_0014bf2c(...);
-int FUN_0015155c(...);
+int taskCreateDraw(...);
 int FUN_001527d8(...);
 
 typedef int romwright_code(...);
@@ -34,7 +34,7 @@ extern unsigned int *DAT_0057f590; /* 0x57f590 */
 extern unsigned int *DAT_0057f594; /* 0x57f594 */
 extern romwright_code *pcRam005b3d84; /* 0x5b3d84 */
 
-/* Supplied declaration required: FUN_0013f1b8. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_0013f578. */
 /* Supplied declaration required: FUN_001402d0. */
 /* Supplied declaration required: FUN_001409e4. */
@@ -44,7 +44,7 @@ extern romwright_code *pcRam005b3d84; /* 0x5b3d84 */
 /* Supplied declaration required: FUN_00145280. */
 extern unsigned int *FUN_0014afd0(unsigned int, int);
 /* Supplied declaration required: FUN_0014bf2c. */
-/* Supplied declaration required: FUN_0015155c. */
+/* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
 
 
@@ -57,7 +57,7 @@ void FUN_00137144(void)
   unsigned int *puVar3;
   int temp_v2;
   
-  FUN_0013f1b8(3,0);
+  asdTMTexTableLoadTmx(3,0);
   FUN_0014384c(8);
   temp_v2 = 0;
   do {
@@ -92,7 +92,7 @@ void FUN_00137144(void)
   FUN_001402d0();
   FUN_0013f578();
   FUN_001409e4();
-  FUN_0015155c(&LAB_00137338,0xef,0,0,FUN_0013f7c4,0,DAT_0057f58c,*DAT_0057f58c);
+  taskCreateDraw(&LAB_00137338,0xef,0,0,FUN_0013f7c4,0,DAT_0057f58c,*DAT_0057f58c);
   puVar3 = DAT_0057f58c;
   *(unsigned char *)(DAT_0057f58c + 0x671) = 1;
   *(unsigned char *)(DAT_0057f590 + 0x671) = 0;

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e33f0(void);
+int asdOperatorNewC(void);
 int FUN_002e342c(void);
 int FUN_0030f220(...);
 
-extern int FUN_002e3390(void);
-/* Supplied declaration required: FUN_002e33f0. */
+extern int wstrlen(void);
+/* Supplied declaration required: asdOperatorNewC. */
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: FUN_0030f220. */
 
@@ -25,9 +25,9 @@ FUN_0030ed04(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   temp_v0 = FUN_0030f220(param_3,0,param_3,param_4,param_4);
   param_1[1] = temp_v0;
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002e3390();
+    temp_v0 = wstrlen();
     temp_v0 = temp_v0 + 1;
-    FUN_002e33f0();
+    asdOperatorNewC();
     FUN_002e342c();
     param_1[1] = temp_v0;
   }

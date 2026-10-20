@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00155b74(void);
 
 /* Supplied declaration required: FUN_00155b74. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 
 
 void FUN_0024ef90(void)
@@ -16,7 +16,7 @@ void FUN_0024ef90(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   FUN_00155b74();
   *(unsigned int *)(temp_v0 + 0x70) = 0;
   *(unsigned int *)(temp_v0 + 0x6c) = 0;

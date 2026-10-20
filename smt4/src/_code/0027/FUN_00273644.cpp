@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_002a7218(unsigned int);
-int FUN_002c415c(unsigned int);
+int scrScriptProcessDestroy(unsigned int);
+int asdMemFree(unsigned int);
 
-/* Supplied declaration required: FUN_002a7218. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00273644(unsigned int *param_1)
@@ -16,15 +16,15 @@ void FUN_00273644(unsigned int *param_1)
   param_1[1] = 0xf;
   *param_1 = 0;
   if (param_1[3] != 0) {
-    FUN_002c415c(param_1[3]);
+    asdMemFree(param_1[3]);
     param_1[3] = 0;
   }
   if (param_1[4] != 0) {
-    FUN_002c415c(param_1[4]);
+    asdMemFree(param_1[4]);
     param_1[4] = 0;
   }
   if (param_1[5] != 0) {
-    FUN_002a7218(param_1[5]);
+    scrScriptProcessDestroy(param_1[5]);
     param_1[5] = 0;
   }
   return;

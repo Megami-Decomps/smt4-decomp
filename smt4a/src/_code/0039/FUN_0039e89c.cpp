@@ -19,8 +19,8 @@ extern unsigned int DAT_00570d94; /* 0x570d94 */
 extern unsigned int DAT_00570d98; /* 0x570d98 */
 extern unsigned int DAT_00570d9c; /* 0x570d9c */
 
-extern int FUN_0014aa78(void);
-extern unsigned int FUN_00236038(unsigned int);
+extern int btlGetMainState(void);
+extern unsigned int scrGetArg(unsigned int);
 
 
 unsigned int FUN_0039e89c(void)
@@ -41,8 +41,8 @@ unsigned int FUN_0039e89c(void)
   int temp_v12;
   unsigned int *puVar14;
   
-  temp_v8 = FUN_00236038(0);
-  temp_v9 = FUN_0014aa78();
+  temp_v8 = scrGetArg(0);
+  temp_v9 = btlGetMainState();
   temp_v7 = DAT_00570d9c;
   temp_v6 = DAT_00570d98;
   temp_v5 = DAT_00570d94;

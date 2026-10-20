@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-extern int FUN_002e3390(int);
+extern int wstrlen(int);
 /* Supplied declaration required: FUN_0030ea58. */
 
 
@@ -47,7 +47,7 @@ void FUN_00507c74(int param_1,int param_2,unsigned int param_3)
   temp_v4 = 0;
   if (*puVar7 < puVar7[1]) {
     puVar6 = puVar7 + *puVar7 * 5 + 2;
-    temp_v2 = FUN_002e3390(param_2);
+    temp_v2 = wstrlen(param_2);
     temp_v0 = (unsigned short)*puVar6;
     while ((temp_v0 & 1) == 0) {
       temp_v3 = (unsigned int)(*(unsigned short *)((int)puVar6 + 2) >> 3);

@@ -1,45 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00254e4c` (_code @ 0x254e4c, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Loads the four setting values from the owner's table into the context and refreshes dependent state. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0027eb88(unsigned int *, unsigned int);
-int FUN_002ad8a8(unsigned int *, unsigned int *);
+typedef struct Settings {
+    /* 0x00 */ u16 value[4];
+} Settings;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+typedef struct Context {
+    /* 0x0000 */ u32 owner;
+    /* 0x0004 */ u8 unk0004[0x245C];
+    /* 0x2460 */ u8 unk2460[0x5A34];
+    /* 0x7E94 */ Settings settings;
+} Context;
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+typedef struct ContextHolder {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ Context *context;
+} ContextHolder;
 
-extern unsigned short FUN_0022c930(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0027eb88. */
-/* Supplied declaration required: FUN_002ad8a8. */
+extern ContextHolder DAT_00439c88;
 
+extern void FUN_0027eb88(Settings *settings, s32 arg);
+extern u16 FUN_0022c930(u32 owner, s32 index);
+extern void FUN_002ad8a8(void *dest, Settings *settings);
 
 void FUN_00254e4c(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned short temp_v0;
-  unsigned int *puVar3;
-  
-  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_00439c88 + 0x20));
-  puVar3 = (*(unsigned int * *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0x1fa5;
-  FUN_0027eb88(puVar3,0xffffffff);
-  temp_v0 = FUN_0022c930(*puVar1,0);
-  *(unsigned short *)(puVar1 + 0x1fa5) = temp_v0;
-  temp_v0 = FUN_0022c930(*puVar1,1);
-  *(unsigned short *)((int)puVar1 + 0x7e96) = temp_v0;
-  temp_v0 = FUN_0022c930(*puVar1,2);
-  *(unsigned short *)(puVar1 + 0x1fa6) = temp_v0;
-  temp_v0 = FUN_0022c930(*puVar1,3);
-  *(unsigned short *)((int)puVar1 + 0x7e9a) = temp_v0;
-  FUN_002ad8a8(puVar1 + 0x918,puVar3);
-  return;
+    Context *context = DAT_00439c88.context;
+
+    FUN_0027eb88(&context->settings, -1);
+    context->settings.value[0] = FUN_0022c930(context->owner, 0);
+    context->settings.value[1] = FUN_0022c930(context->owner, 1);
+    context->settings.value[2] = FUN_0022c930(context->owner, 2);
+    context->settings.value[3] = FUN_0022c930(context->owner, 3);
+    FUN_002ad8a8(context->unk2460, &context->settings);
 }
 
-} /* extern "C" */
+}

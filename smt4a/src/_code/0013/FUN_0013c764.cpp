@@ -7,11 +7,11 @@ extern "C" {
 int FUN_00150d38(int);
 int FUN_00157558(unsigned int);
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00150d38. */
 /* Supplied declaration required: FUN_00157558. */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 
 
 unsigned int FUN_0013c764(void)
@@ -23,7 +23,7 @@ unsigned int FUN_0013c764(void)
   unsigned int temp_v2;
   unsigned char temp_v3;
   
-  temp_v1 = FUN_00164a9c();
+  temp_v1 = jobGetWork();
   temp_v2 = temp_v1 + 0xf00;
   temp_v3 = *(char *)(temp_v1 + 0xff4) != '\0';
   temp_v0 = '\0';
@@ -35,7 +35,7 @@ unsigned int FUN_0013c764(void)
   }
   if ((((temp_v3 && temp_v0 != '\0') && temp_v2 != 0) && (*(int *)(temp_v1 + 0x1490) != 0)) &&
      (*(char *)(temp_v1 + 0x148c) == '\0')) {
-    FUN_00157558(DAT_0059dbb4);
+    FUN_00157558(g_renderCtx);
     FUN_00150d38(1);
     return 0;
   }

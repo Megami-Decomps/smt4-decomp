@@ -18,8 +18,8 @@ int FUN_003d6fd4(...);
 int FUN_003dba3c(...);
 int FUN_003dcb94(...);
 
-extern int DAT_0043427c; /* 0x43427c */
-extern unsigned int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlScriptUnit; /* 0x43427c */
+extern unsigned int g_btlMain; /* 0x4342c8 */
 extern int DAT_00435d18; /* 0x435d18 */
 
 extern int FUN_0023fad8(int);
@@ -52,11 +52,11 @@ unsigned int FUN_003d1c1c(int *param_1,int param_2)
   
   switch(*(unsigned int *)(param_2 + 8)) {
   case 0:
-    FUN_003d6fd4(DAT_004342c8,"battle/army_summon/army_summon.bccam");
+    FUN_003d6fd4(g_btlMain,"battle/army_summon/army_summon.bccam");
     *(unsigned int *)(param_2 + 8) = 1;
     return 0;
   case 1:
-    temp_v1 = FUN_003d6b48(DAT_004342c8);
+    temp_v1 = FUN_003d6b48(g_btlMain);
     if (temp_v1 == 0) {
       return 0;
     }
@@ -114,7 +114,7 @@ unsigned int FUN_003d1c1c(int *param_1,int param_2)
     temp_v1 = FUN_00293ed0(*param_1);
     if (temp_v1 != 0) {
       FUN_00294414(*param_1);
-      *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0xd;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0xd;
       return 1;
     }
   default:

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c4938(int, int);
+int memClear(int, int);
 int nw_snd_internal_TaskManager_AppendTask(unsigned int, unsigned int *, int);
 int nw_ut_internal_LinkListImpl_insert(int, int, unsigned int *);
 
@@ -17,7 +17,7 @@ extern unsigned char DAT_00421d2c; /* 0x421d2c */
 
 extern unsigned int *FUN_002a7b78(int);
 extern unsigned int FUN_002bb020(void);
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 extern int nw_snd_internal_PoolImpl_AllocImpl(int);
 /* Supplied declaration required: nw_snd_internal_TaskManager_AppendTask. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
@@ -39,7 +39,7 @@ void FUN_0015c404(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
     puVar2 = (unsigned int *)0x0;
   }
   else {
-    FUN_002c4938(temp_v0,0x50);
+    memClear(temp_v0,0x50);
     puVar2 = (unsigned int *)FUN_002a7b78(temp_v0);
     *puVar2 = (unsigned int)&DAT_00421d2c;
     puVar2[0x12] = 0;

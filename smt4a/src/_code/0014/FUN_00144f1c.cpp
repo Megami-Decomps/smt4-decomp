@@ -9,7 +9,7 @@ int FUN_00161044(int);
 int FUN_00161074(unsigned int);
 int FUN_00161694(int);
 int FUN_0017d294(void);
-int aeabi_uidivmod(int, int);
+int __aeabi_uidivmod(int, int);
 
 extern unsigned int DAT_0063fd88; /* 0x63fd88 */
 extern int DAT_0063fd8c; /* 0x63fd8c */
@@ -28,7 +28,7 @@ extern int DAT_0063fdf4; /* 0x63fdf4 */
 /* Supplied declaration required: FUN_00161074. */
 /* Supplied declaration required: FUN_00161694. */
 /* Supplied declaration required: FUN_0017d294. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_00144f1c(int param_1,int param_2)
@@ -76,11 +76,11 @@ void FUN_00144f1c(int param_1,int param_2)
     FUN_00154ca4(&DAT_0063fde0,1);
   }
   FUN_00161694(0x402);
-  aeabi_uidivmod(DAT_0063fd9c + 1,DAT_0063fd8c);
+  __aeabi_uidivmod(DAT_0063fd9c + 1,DAT_0063fd8c);
   DAT_0063fd9c = temp_v1;
-  aeabi_uidivmod(DAT_0063fdc8 + 1,DAT_0063fdb8);
+  __aeabi_uidivmod(DAT_0063fdc8 + 1,DAT_0063fdb8);
   DAT_0063fdc8 = temp_v2;
-  aeabi_uidivmod(DAT_0063fdf4 + 1,DAT_0063fde4);
+  __aeabi_uidivmod(DAT_0063fdf4 + 1,DAT_0063fde4);
   DAT_0063fdf4 = temp_v3;
   return;
 }

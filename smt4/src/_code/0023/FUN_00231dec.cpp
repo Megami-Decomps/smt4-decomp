@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00231bb8(int, float *);
 int FUN_00231bcc(...);
-int FUN_00232658(int);
+int lmapSceneGetObj(int);
 int FUN_0025090c(unsigned int, unsigned int, int, unsigned char [128]);
 int FUN_00288f78(...);
 int FUN_002be5a4(...);
@@ -34,14 +34,14 @@ typedef struct {
 
 extern unsigned char LAB_00232470; /* 0x232470 */
 extern int DAT_0044cdd8; /* 0x44cdd8 */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern unsigned int g_titleScene; /* 0x44ea00 */
+extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00231bb8. */
 /* Supplied declaration required: FUN_00231bcc. */
-/* Supplied declaration required: FUN_00232658. */
+/* Supplied declaration required: lmapSceneGetObj. */
 extern unsigned int FUN_0023342c(int, unsigned int);
 /* Supplied declaration required: FUN_0025090c. */
 /* Supplied declaration required: FUN_00288f78. */
@@ -95,12 +95,12 @@ void FUN_00231dec(int param_1)
   
   temp_v2 = FUN_002c2950();
   temp_v3 = FUN_002c5d80(5,1);
-  FUN_002bee04(DAT_0044ea00,3,temp_v3);
+  FUN_002bee04(g_titleScene,3,temp_v3);
   temp_v18 = param_1 + 0x162;
   VectorSignedToFloat(0x100 - DAT_0044cdd8,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v3 = NaviMain_GetPosX();
   temp_v1 = NaviMain_GetPosY(temp_v18);
-  FUN_00232658(temp_v18);
+  lmapSceneGetObj(temp_v18);
   temp_v17 = 0.0f;
   temp_v16 = 0.0f;
   if ((*(unsigned int *)(param_1 + 0x10) & 0x1000000) != 0) {
@@ -143,12 +143,12 @@ void FUN_00231dec(int param_1)
     FUN_002be5a4(2,0xffffffff,temp_v9);
   }
   temp_v3 = FUN_002c5da8(6,1,0);
-  FUN_002bee04(DAT_0044ea00,6,temp_v3);
+  FUN_002bee04(g_titleScene,6,temp_v3);
   FUN_00231bcc(param_1 + 0x164,4000,0,0,DAT_0044cdd8,1);
   FUN_00231bcc(param_1 + 0x164,0xfa1,0,0,DAT_0044cdd8,1);
   FUN_00231bcc(param_1 + 0x164,0xfa2,0,0,DAT_0044cdd8,1);
   FUN_00231bcc(param_1 + 0x164,0xfa3,0,0,DAT_0044cdd8,1);
-  FUN_002bedb0(DAT_0044ea00,6);
+  FUN_002bedb0(g_titleScene,6);
   temp_v9 = 0xfa5;
   do {
     FUN_00231bcc(param_1 + 0x164,temp_v9,0,0,DAT_0044cdd8,1);
@@ -159,7 +159,7 @@ void FUN_00231dec(int param_1)
     FUN_00231bcc(param_1 + 0x164,temp_v9,0,0,DAT_0044cdd8,1);
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 0xfad);
-  if (((DAT_0049f91c != 0x13) || ((DAT_0049f920 != 6 && DAT_0049f920 != 7) && DAT_0049f920 != 8)) &&
+  if (((g_gameState != 0x13) || ((DAT_0049f920 != 6 && DAT_0049f920 != 7) && DAT_0049f920 != 8)) &&
      ((*(unsigned int *)(param_1 + 0x10) & 0x1000) == 0)) {
     if (*(char *)(param_1 + 0xc) != '\0') {
       NaviMain_GetCurrentMap(temp_v18);
@@ -275,7 +275,7 @@ LAB_002323cc:
       }
     }
   }
-  FUN_002bedb0(DAT_0044ea00,3);
+  FUN_002bedb0(g_titleScene,3);
   return;
 LAB_002324e4:
   temp_v11 = temp_v11 + 1;

@@ -7,21 +7,21 @@ extern "C" {
 int FUN_00293a04(...);
 int FUN_00293ba8(void);
 int FUN_00296284(...);
-int FUN_002a0b48(void);
+int statusCameraApply(void);
 int FUN_002b8e84(...);
 int FUN_002b8ee0(...);
 int FUN_002bc01c(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bee58(...);
 int FUN_002c1658(...);
-int aeabi_uidivmod(...);
+int __aeabi_uidivmod(...);
 
 int FUN_0020ffe8(...);
 int FUN_00293db0(...);
 int FUN_00293e08(...);
 int FUN_00293e78(...);
 int FUN_00293f10(...);
-int FUN_00293f98(...);
+int aocHandleButtons(...);
 int FUN_002942c4(int, int);
 int FUN_00294450(...);
 int FUN_002945a4(...);
@@ -35,11 +35,11 @@ int FUN_002950e8(...);
 int FUN_002958f8(...);
 int FUN_00297684(...);
 int FUN_0029ae60(int);
-int FUN_0029b97c(int);
+int lmapSceneSetUnk134(int);
 int FUN_002a09b4(unsigned char *, int);
 int FUN_002b06c4(void);
 int FUN_002bf818(...);
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 int VectorSignedToFloat(...);
 
 #ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
@@ -89,7 +89,7 @@ extern int FUN_00293b8c(void);
 /* Supplied declaration required: FUN_00293e78. */
 extern int FUN_00293edc(unsigned int);
 /* Supplied declaration required: FUN_00293f10. */
-/* Supplied declaration required: FUN_00293f98. */
+/* Supplied declaration required: aocHandleButtons. */
 extern unsigned int FUN_00294090(int, unsigned int);
 /* Supplied declaration required: FUN_002942c4. */
 /* Supplied declaration required: FUN_00294450. */
@@ -107,29 +107,29 @@ extern int FUN_0029505c(unsigned int);
 /* Supplied declaration required: FUN_00296284. */
 /* Supplied declaration required: FUN_00297684. */
 /* Supplied declaration required: FUN_0029ae60. */
-/* Supplied declaration required: FUN_0029b97c. */
+/* Supplied declaration required: lmapSceneSetUnk134. */
 extern int FUN_0029c46c(void);
 extern int FUN_0029c48c(void);
 extern int FUN_0029e1c8(void);
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_002a09b4. */
-extern int FUN_002a0b34(void);
-/* Supplied declaration required: FUN_002a0b48. */
+extern int lmapSceneGetScript(void);
+/* Supplied declaration required: statusCameraApply. */
 extern unsigned int FUN_002b05d0(unsigned int);
 /* Supplied declaration required: FUN_002b06c4. */
-extern int FUN_002b879c(void);
+extern int lmapMainIsRunning(void);
 /* Supplied declaration required: FUN_002b8e84. */
 /* Supplied declaration required: FUN_002b8ee0. */
 /* Supplied declaration required: FUN_002bc01c. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 extern unsigned int FUN_002beda4(char *);
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int FUN_002bfde4(unsigned int);
 extern int FUN_002c15fc(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 unsigned int FUN_0018f660(void)
@@ -311,8 +311,8 @@ unsigned int FUN_0018f660(void)
       FUN_00294e18(0);
       pcVar4[0x1ea4] = '\0';
       FUN_00294d6c();
-      temp_v7 = FUN_002a0b34();
-      if ((temp_v7 != 0) || (temp_v7 = FUN_002b879c(), temp_v7 != 0)) {
+      temp_v7 = lmapSceneGetScript();
+      if ((temp_v7 != 0) || (temp_v7 = lmapMainIsRunning(), temp_v7 != 0)) {
         temp_v19 = 0x96;
         temp_v20 = 0x96;
         temp_v21 = 0x96;
@@ -343,20 +343,20 @@ unsigned int FUN_0018f660(void)
       pcVar4[0x1e8d] = '\0';
       pcVar4[0x1e8e] = '\0';
       pcVar4[0x1e8f] = '?';
-      temp_v7 = FUN_002a0b34();
+      temp_v7 = lmapSceneGetScript();
       piVar14 = (int *)(pcVar4 + 0x1e80);
       *piVar14 = temp_v7;
       pcVar4[0x12fe] = -1;
       pcVar4[0x12ff] = -1;
       if (temp_v7 != 0) {
         in_s0 = temp_v10;
-        FUN_0029b97c(0);
+        lmapSceneSetUnk134(0);
         FUN_0029ae60(*piVar14);
         DAT_0044e142 = 0;
       }
       else {
         temp_v7 = 0x100;
-        FUN_002c222c();
+        asdOperatorNew();
         puVar7 = (unsigned int *)0x0;
         if (temp_v7 != 0) {
           puVar7 = (unsigned int *)FUN_002947f4();
@@ -366,7 +366,7 @@ unsigned int FUN_0018f660(void)
         DAT_0044e142 = 1;
         FUN_002947c0();
         in_s0 = temp_v10;
-        temp_v7 = FUN_002b879c();
+        temp_v7 = lmapMainIsRunning();
         if (temp_v7 == 0) {
           FUN_002a09b4(&LAB_0018fd9c,0);
         }
@@ -411,7 +411,7 @@ LAB_0018fbe4:
     if (temp_v7 != 0) {
       pcVar4[0x1e7c] = '\0';
       pcVar4[0x1e7d] = '\x01';
-      FUN_00293f98(*(unsigned int *)(pcVar4 + 0x1e74),7);
+      aocHandleButtons(*(unsigned int *)(pcVar4 + 0x1e74),7);
       goto LAB_0018fbe4;
     }
     break;
@@ -452,7 +452,7 @@ LAB_0018fbe4:
         FUN_00293db0(*(unsigned int *)pcVar13,pcVar4 + 0x1e90);
 LAB_0018fd84:
         if ((pcVar4[0x12f2] != '\0') || ((*pcVar5 != '\x03' && (*pcVar5 != '\t')))) {
-          FUN_002bd8e8(pcVar4 + 0x38c,1,0);
+          timerStart(pcVar4 + 0x38c,1,0);
           pcVar4[0x12f2] = '\0';
         }
         if (*(int *)(pcVar4 + 0x12e0) != 0) {
@@ -472,8 +472,8 @@ LAB_0018fd84:
               pcVar4[0x6cd] = '\0';
               pcVar4[0x759] = '\0';
               pcVar4[0x7e5] = '\0';
-              FUN_002bd8e8(pcVar4 + 0x648,8,0);
-              FUN_002bd8e8(pcVar4 + 0x6d4,9,0);
+              timerStart(pcVar4 + 0x648,8,0);
+              timerStart(pcVar4 + 0x6d4,9,0);
               FUN_002bee58(pcVar4 + 0x760,5);
               pcVar5 = DAT_0044e144;
               pcVar5[0x10] = '\0';
@@ -594,7 +594,7 @@ LAB_0018ffcc:
           }
           pcVar5 = pcVar4 + 0x1e80;
           FUN_00293db0(*(unsigned int *)pcVar5,pcVar4 + 0x1e90);
-          FUN_002a0b48();
+          statusCameraApply();
           FUN_00297684(*(unsigned int *)pcVar5);
           temp_v6 = FUN_002beda4(pcVar4 + 0x38c);
           temp_v16 = *(unsigned int *)(pcVar4 + 0x1e88);
@@ -759,7 +759,7 @@ LAB_00190190:
               FUN_002c1658(10,1);
               if (temp_v7 != 0) {
                 pcVar4[0x12f0] = pcVar4[0x12f0] != '\x01';
-                FUN_002bd8e8(pcVar4 + 0x5bc,7,0);
+                timerStart(pcVar4 + 0x5bc,7,0);
                 temp_v6 = 0x100016d;
                 FUN_002bc01c(temp_v6);
               }
@@ -860,7 +860,7 @@ joined_r0x00190660:
       piVar14 = (int *)(pcVar4 + 0x1e78);
       *piVar14 = *piVar14 + 2;
       FUN_00293a04(*(int *)(pcVar4 + 0x1e74),0);
-      aeabi_uidivmod(*piVar14,(int)in_s0);
+      __aeabi_uidivmod(*piVar14,(int)in_s0);
       *piVar14 = temp_v8;
     }
     FUN_002bf818(pcVar4 + 0x5bc);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00145008(unsigned int *);
+int asdVramHeapAlloc(unsigned int *);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -12,10 +12,10 @@ typedef struct {
 } param_5_stack;
 
 extern int DAT_00465174; /* 0x465174 */
-extern unsigned int DAT_004e4100; /* 0x4e4100 */
-extern unsigned int DAT_004e411c; /* 0x4e411c */
+extern unsigned int g_asdVramHeapA; /* 0x4e4100 */
+extern unsigned int g_asdVramHeapB; /* 0x4e411c */
 
-/* Supplied declaration required: FUN_00145008. */
+/* Supplied declaration required: asdVramHeapAlloc. */
 extern unsigned int nn_fnd_ExpHeapBase_Allocate(unsigned int, unsigned int, int, unsigned char, int, unsigned char);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -58,13 +58,13 @@ FUN_002b24d8(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
       if (param_1 != 0x10000) {
         if (param_1 != 0x20000) {
           if (param_1 == 0x30000) {
-            puVar1 = &DAT_004e411c;
-            FUN_00145008(&DAT_004e411c);
+            puVar1 = &g_asdVramHeapB;
+            asdVramHeapAlloc(&g_asdVramHeapB);
           }
         }
         else {
-          puVar1 = &DAT_004e4100;
-          FUN_00145008(&DAT_004e4100);
+          puVar1 = &g_asdVramHeapA;
+          asdVramHeapAlloc(&g_asdVramHeapA);
         }
       }
       else {

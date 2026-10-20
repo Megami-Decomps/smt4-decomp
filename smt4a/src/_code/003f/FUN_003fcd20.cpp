@@ -25,7 +25,7 @@ struct fn_003fcd20_arg0 {
     undefined1 field_0x3c; /* +0x3c */
 };
 
-extern int *DAT_00570280; /* 0x570280 */
+extern int *g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_0020214c. */
@@ -47,10 +47,10 @@ void FUN_003fcd20(fn_003fcd20_arg0 *param_1,int param_2)
   FUN_00100388(aiStack_50,"event/npcgtix/npc%03d.bin",param_2);
   param_1->field_0x8 = 2;
   param_1->field_0xc = param_2;
-  temp_v1 = FUN_004705ec(DAT_00570280,param_2,1);
+  temp_v1 = FUN_004705ec(g_aocSystem,param_2,1);
   if (temp_v1 != 0) {
-    piVar3 = DAT_00570280;
-    FUN_0046e150(DAT_00570280,param_2,aiStack_50);
+    piVar3 = g_aocSystem;
+    FUN_0046e150(g_aocSystem,param_2,aiStack_50);
   }
   else {
     FUN_0020214c();

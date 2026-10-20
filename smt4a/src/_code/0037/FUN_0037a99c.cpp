@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_0063fd88; /* 0x63fd88 */
 extern unsigned int DAT_0063fdb4; /* 0x63fdb4 */
 extern unsigned int *DAT_0063fef4; /* 0x63fef4 */
@@ -37,7 +37,7 @@ void FUN_0037a99c(unsigned int param_1,unsigned int param_2)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  temp_v0 = *(unsigned int *)(DAT_0059dbb4 + 0x52c);
+  temp_v0 = *(unsigned int *)(g_renderCtx + 0x52c);
   temp_v3 = (unsigned int)in_d1;
   temp_v4 = (unsigned int)((unsigned long long)in_d1 >> 0x20);
   if (DAT_0063fef4 == &DAT_0063fd88) {
@@ -49,11 +49,11 @@ void FUN_0037a99c(unsigned int param_1,unsigned int param_2)
   else {
     temp_v1 = 2;
   }
-  *(unsigned int *)(DAT_0059dbb4 + 0x52c) = temp_v1;
-  FUN_001575cc(DAT_0059dbb4);
-  FUN_00157558(DAT_0059dbb4);
-  FUN_004097b4(DAT_0059dbb4,temp_v2,param_1,param_2);
-  *(unsigned int *)(DAT_0059dbb4 + 0x52c) = temp_v0;
+  *(unsigned int *)(g_renderCtx + 0x52c) = temp_v1;
+  FUN_001575cc(g_renderCtx);
+  FUN_00157558(g_renderCtx);
+  FUN_004097b4(g_renderCtx,temp_v2,param_1,param_2);
+  *(unsigned int *)(g_renderCtx + 0x52c) = temp_v0;
   return;
 }
 

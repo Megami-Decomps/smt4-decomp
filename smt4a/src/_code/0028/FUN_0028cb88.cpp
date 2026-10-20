@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
@@ -50,7 +50,7 @@ void FUN_0028cb88(int param_1)
   int *piVar4;
   int *piVar5;
   
-  FUN_00157558(DAT_0059dbb4);
+  FUN_00157558(g_renderCtx);
   FUN_00183bb0();
   piVar5 = (int *)(param_1 + 0x387c);
   if (*piVar5 == 6) {
@@ -226,7 +226,7 @@ LAB_0028cbdc:
   if (*piVar5 == 6) {
     FUN_003743a4(param_1);
   }
-  temp_v0 = DAT_0059dbb4;
+  temp_v0 = g_renderCtx;
   temp_v1 = FUN_00169294(6,7,0);
   piVar5 = (int *)(temp_v0 + 0x12b8);
   temp_v2 = piVar5[*piVar5 + 2];
@@ -235,8 +235,8 @@ LAB_0028cbdc:
     (**(romwright_code **)(temp_v0 + 0x12d4))();
     *(unsigned char *)(temp_v0 + 0x12d0) = 0;
   }
-  FUN_0016c560(DAT_0059dbb4);
-  FUN_0016c410(DAT_0059dbb4);
+  FUN_0016c560(g_renderCtx);
+  FUN_0016c410(g_renderCtx);
   return;
 }
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0057f698; /* 0x57f698 */
+extern unsigned char g_gameDataBlocks; /* 0x57f698 */
 
 
 void FUN_00331410(void)
@@ -15,7 +15,7 @@ void FUN_00331410(void)
   int temp_v2;
   int temp_v3;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f698 + 0x4));
+  temp_v1 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
   temp_v2 = 0;
   do {
     temp_v3 = temp_v1 + temp_v2 * 0x50;

@@ -5,8 +5,8 @@
 extern "C" {
 
 int ARM_common_memset4_6(...);
-int FUN_001630d4(int, int, int, unsigned int);
-int FUN_00168188(void);
+int asdMemoryAlloc(int, int, int, unsigned int);
+int asdMemoryGetDefaultAllocator(void);
 int FUN_0018d9f0(...);
 int FUN_001aa528(...);
 int FUN_001acca0(void);
@@ -16,7 +16,7 @@ int FUN_001b4288(int *, int);
 int FUN_001b431c(int *, int);
 int FUN_001b451c(int *, int);
 int FUN_001b6d08(int *, int, int, unsigned int);
-int FUN_002e3390(...);
+int wstrlen(...);
 int nw_gfx_SceneNode_IsCircularReference(void);
 
 typedef int romwright_code(...);
@@ -55,20 +55,20 @@ extern char s__V_V_V_005b3cc8[13]; /* 0x5b3cc8 */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Supplied declaration required: ARM_common_memset4_6. */
-/* Supplied declaration required: FUN_001630d4. */
-/* Supplied declaration required: FUN_00168188. */
+/* Supplied declaration required: asdMemoryAlloc. */
+/* Supplied declaration required: asdMemoryGetDefaultAllocator. */
 /* Supplied declaration required: FUN_0018d9f0. */
 extern int FUN_0019a37c(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001aa528. */
 /* Supplied declaration required: FUN_001acca0. */
-extern unsigned int FUN_001ad6fc(void);
+extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: FUN_001b0758. */
 /* Supplied declaration required: FUN_001b0e10. */
 /* Supplied declaration required: FUN_001b4288. */
 /* Supplied declaration required: FUN_001b431c. */
 /* Supplied declaration required: FUN_001b451c. */
 /* Supplied declaration required: FUN_001b6d08. */
-/* Supplied declaration required: FUN_002e3390. */
+/* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
 extern int nw_ut_ResDicPatricia_Get(int *, int, unsigned int);
 
@@ -130,16 +130,16 @@ void FUN_0019afe4(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
   else if ((param_3 & 0x80) != 0) {
     FUN_001b451c(param_1,0x2030000);
   }
-  temp_v1 = FUN_00168188();
+  temp_v1 = asdMemoryGetDefaultAllocator();
   piVar15 = param_1;
   FUN_0018d9f0(param_1,temp_v1,*param_1);
   temp_v2 = DAT_005b3c70;
   if (((int)piVar15 < 0) && (((unsigned int)piVar15 & 2) != 0)) {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     FUN_0018d9f0(param_1,temp_v1,temp_v2);
     param_3 = temp_v2;
   }
-  temp_v13 = (int *)FUN_00168188();
+  temp_v13 = (int *)asdMemoryGetDefaultAllocator();
   temp_v14 = (int *)0x0;
   temp_v8 = 0;
   temp_v15 = (int *)0x0;
@@ -148,7 +148,7 @@ void FUN_0019afe4(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
   param_2[10] = *(unsigned int *)(*param_1 + 0x1c);
   temp_v11 = 1;
   temp_v2 = 0x100;
-  FUN_001630d4(0x100,0x100,0,param_2[10] << 2);
+  asdMemoryAlloc(0x100,0x100,0,param_2[10] << 2);
   param_2[9] = temp_v2;
   temp_v6 = *(int *)(*param_1 + 0x20);
   if (temp_v6 != 0) {
@@ -174,7 +174,7 @@ void FUN_0019afe4(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
         else {
           temp_v7 = *(int *)(param_3 + 0xc) + param_3 + 0xc;
         }
-        temp_v1 = FUN_001ad6fc();
+        temp_v1 = asdMemoryGetAllocatorA();
         temp_v17 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v17 + 2)),0x101);
         temp_v20 = 1;
         temp_v21 = 0;
@@ -193,8 +193,8 @@ void FUN_0019afe4(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
         else {
           temp_v6 = 0;
         }
-        temp_v1 = FUN_00168188();
-        temp_v3 = FUN_001ad6fc();
+        temp_v1 = asdMemoryGetDefaultAllocator();
+        temp_v3 = asdMemoryGetAllocatorA();
         temp_v20 = 4;
         temp_v19 = 8;
         temp_v26 = 1;
@@ -306,7 +306,7 @@ LAB_0019b358:
           temp_v9 = 0;
         }
         do {
-          temp_v1 = FUN_002e3390(*(unsigned int *)(s__V_V_V_005b3cc8 + temp_v7 * 4));
+          temp_v1 = wstrlen(*(unsigned int *)(s__V_V_V_005b3cc8 + temp_v7 * 4));
           temp_v5 = FUN_0019a37c(temp_v9,*(unsigned int *)(s__V_V_V_005b3cc8 + temp_v7 * 4),temp_v1);
           if (temp_v5 == 0) {
             temp_v9 = *(int *)(s__V_V_V_005b3cc8 + temp_v7 * 4);
@@ -317,7 +317,7 @@ LAB_0019b358:
               temp_v11 = 0;
             }
             if (!(temp_v11 == 0 || temp_v9 == 0)) {
-              temp_v1 = FUN_002e3390(temp_v9);
+              temp_v1 = wstrlen(temp_v9);
               temp_v9 = nw_ut_ResDicPatricia_Get(&temp_v11,temp_v9,temp_v1);
               if (temp_v9 == 0) {
                 temp_v0 = 0xffff;

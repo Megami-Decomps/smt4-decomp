@@ -10,17 +10,17 @@ int FUN_002bc01c(int);
 int FUN_002c1658(...);
 int FUN_003c033c(...);
 
-extern int DAT_0043427c; /* 0x43427c */
+extern int g_btlScriptUnit; /* 0x43427c */
 extern unsigned int DAT_00434290; /* 0x434290 */
 extern int DAT_00439ca8; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_0027e874. */
-extern int FUN_0027e928(void);
+extern int btlUnitGet(void);
 /* Supplied declaration required: FUN_00295ba4. */
 extern int FUN_00295bd0(void);
 /* Supplied declaration required: FUN_002bc01c. */
-extern int FUN_002bf244(unsigned int);
-extern int FUN_002c08f0(void);
+extern int jobIsValid(unsigned int);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c1658. */
 extern int FUN_00337324(int);
 extern int FUN_003382e8(int);
@@ -42,7 +42,7 @@ unsigned int FUN_001b5154(void)
   int temp_v4;
   unsigned int *puVar6;
   
-  temp_v1 = FUN_002c08f0();
+  temp_v1 = jobGetWork();
   if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x80001) != 0) {
     *(unsigned int *)(temp_v1 + 0x44a0) = *(unsigned int *)(temp_v1 + 0x44a0) & 0xfffffebf;
     temp_v1 = FUN_00295bd0();
@@ -59,7 +59,7 @@ unsigned int FUN_001b5154(void)
         *puVar6 = *puVar6 & 0xfffffebf;
         return 0;
       }
-      temp_v3 = FUN_002bf244(*(unsigned int *)(temp_v1 + 0x20));
+      temp_v3 = jobIsValid(*(unsigned int *)(temp_v1 + 0x20));
       if (temp_v3 != 0) {
         *puVar6 = *puVar6 & 0xfffffebf;
         temp_v1 = FUN_00295bd0();
@@ -75,8 +75,8 @@ unsigned int FUN_001b5154(void)
             *puVar6 = *puVar6 & 0xfffffebf;
             return 0;
           }
-          if (DAT_0043427c != 0) {
-            temp_v4 = FUN_0027e928();
+          if (g_btlScriptUnit != 0) {
+            temp_v4 = btlUnitGet();
             temp_v3 = 0;
             if (temp_v4 != 0) {
               temp_v3 = *(int *)(temp_v4 + 0x28);

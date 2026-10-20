@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(...);
+int efctSetSpeed(...);
 int FUN_001835b4(int, int, int, unsigned int, int, int);
 int FUN_001849bc(int, int, int, unsigned int, int, int, int *);
 int FUN_002bf0d4(int, int, int *);
@@ -20,12 +20,12 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-extern int DAT_0058103c; /* 0x58103c */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_mapIf; /* 0x58103c */
+extern int g_renderCtx; /* 0x59dbb4 */
+extern int g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001849bc. */
@@ -50,10 +50,10 @@ void FUN_002342d0(unsigned int param_1)
   int temp_v8;
   int temp_v9;
   
-  temp_v1 = DAT_0059dbb4;
-  temp_v5 = DAT_0058103c;
-  pcVar6 = (char *)(DAT_0058103c + 0xcd1c);
-  if ((*pcVar6 != '\0') && (DAT_005f15fc < 100)) {
+  temp_v1 = g_renderCtx;
+  temp_v5 = g_mapIf;
+  pcVar6 = (char *)(g_mapIf + 0xcd1c);
+  if ((*pcVar6 != '\0') && (g_gameState < 100)) {
     temp_v0 = FUN_001692ac(1,0);
     piVar5 = (int *)(temp_v1 + 0x1258);
     temp_v2 = *piVar5;
@@ -81,17 +81,17 @@ void FUN_002342d0(unsigned int param_1)
       temp_v1 = temp_v1 - 0x19;
       VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     }
-    FUN_001677c0(temp_v1);
+    efctSetSpeed(temp_v1);
     FUN_001835b4(2,0x13,0x11f8,param_1,0,0xb);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,0x13,0x11f9,param_1,0,0xb);
     FUN_002bf0d4(0x13,0x11fa,&temp_v8);
     temp_v4 = (float)VectorSignedToFloat((temp_v9 - temp_v8) - 0x17,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v5 = (int)((temp_v6 - temp_v7) * temp_v4);
     temp_v8 = temp_v8 + temp_v5;
     FUN_001849bc(2,0x13,0x11fa,param_1,temp_v5,0xb,&temp_v8);
-    temp_v5 = DAT_0059dbb4;
-    piVar5 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v5 = g_renderCtx;
+    piVar5 = (int *)(g_renderCtx + 0x1258);
     temp_v1 = *piVar5;
     temp_v0 = piVar5[temp_v1 + 2];
     *piVar5 = temp_v1 - 1;

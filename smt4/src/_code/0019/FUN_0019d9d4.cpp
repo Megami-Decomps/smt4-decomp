@@ -8,7 +8,7 @@ int FUN_002c0944(unsigned int);
 int FUN_002c1b64(int, int);
 
 typedef int romwright_code(...);
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002c0944. */
 /* Supplied declaration required: FUN_002c1b64. */
@@ -29,8 +29,8 @@ void FUN_0019d9d4(unsigned int *param_1)
   
   temp_v3 = *param_1;
   temp_v0 = *(unsigned char *)((int)param_1 + 3);
-  FUN_002c1b64(DAT_0044ea00,0);
-  temp_v1 = DAT_0044ea00;
+  FUN_002c1b64(g_titleScene,0);
+  temp_v1 = g_titleScene;
   temp_v2 = FUN_002c5d80(1,0);
   piVar7 = (int *)(temp_v1 + 0x124c);
   temp_v4 = *piVar7;
@@ -43,8 +43,8 @@ void FUN_0019d9d4(unsigned int *param_1)
   }
   FUN_002c0944((temp_v3 << 0x18) | (((temp_v3 >> 8) & 0xff) << 0x10) | (((temp_v3 >> 0x10) & 0xff) << 8) |
                (unsigned int)temp_v0);
-  temp_v1 = DAT_0044ea00;
-  piVar7 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v1 = g_titleScene;
+  piVar7 = (int *)(g_titleScene + 0x124c);
   temp_v2 = *piVar7;
   temp_v4 = piVar7[temp_v2 + 2];
   *piVar7 = temp_v2 - 1;

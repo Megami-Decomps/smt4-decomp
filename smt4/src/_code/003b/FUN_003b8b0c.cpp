@@ -5,25 +5,25 @@
 extern "C" {
 
 int FUN_002636b0(void);
-int FUN_00273f84(void);
+int campGetState(void);
 int FUN_002a4bac(unsigned int);
-int FUN_002a7218(void);
+int scrScriptProcessDestroy(void);
 int FUN_002ae898(int, unsigned int);
-int FUN_002c415c(void);
+int asdMemFree(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_002636b0. */
-/* Supplied declaration required: FUN_00273f84. */
+/* Supplied declaration required: campGetState. */
 /* Supplied declaration required: FUN_002a4bac. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002ae898. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_003b8b0c(int param_1)
@@ -34,39 +34,39 @@ void FUN_003b8b0c(int param_1)
   int *piVar2;
   
   if (*(int *)(param_1 + 0xd74) != 0) {
-    FUN_002a7218();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0xd74) = 0;
   }
   if (*(int *)(param_1 + 0xd6c) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0xd6c) = 0;
   }
   if (*(int *)(param_1 + 0xd70) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0xd70) = 0;
   }
   if (*(int *)(param_1 + 0xd9c) != 0) {
-    FUN_002a7218();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0xd9c) = 0;
   }
   if (*(int *)(param_1 + 0xd94) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0xd94) = 0;
   }
   if (*(int *)(param_1 + 0xd98) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0xd98) = 0;
   }
   FUN_002ae898(0x21,*(unsigned int *)(param_1 + 0x90));
-  FUN_00273f84();
-  if ((*(char *)(param_1 + 0xe58) != '\0') && ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x34)) == '\0')) {
+  campGetState();
+  if ((*(char *)(param_1 + 0xe58) != '\0') && ((*(signed char *)((unsigned char *)&g_gameState + 0x34)) == '\0')) {
     *(unsigned char *)(param_1 + 0xe58) = 0;
     FUN_002a4bac(*(unsigned int *)(param_1 + 0xe5c));
     temp_v0 = 0;
     do {
       piVar2 = (int *)(param_1 + temp_v0 * 4 + 0xe60);
       if (*piVar2 != 0) {
-        FUN_002c415c();
+        asdMemFree();
         *piVar2 = 0;
       }
       temp_v0 = temp_v0 + 1;

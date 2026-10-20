@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+int scrSetResult(int);
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
-extern int FUN_0027e928(unsigned int);
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_00296cc8(void);
-extern int aeabi_idivmod(int, int);
+extern int btlUnitGet(unsigned int);
+/* Supplied declaration required: scrSetResult. */
+extern int scrGetArg(void);
+extern int __aeabi_idivmod(int, int);
 
 
 unsigned int FUN_002dbbb8(void)
@@ -21,11 +21,11 @@ unsigned int FUN_002dbbb8(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00296cc8();
-  temp_v1 = FUN_0027e928(DAT_0043427c);
-  temp_v1 = aeabi_idivmod(*(short *)(*(int *)(temp_v1 + 0x28) + 0xe8) * 100,
+  temp_v0 = scrGetArg();
+  temp_v1 = btlUnitGet(g_btlScriptUnit);
+  temp_v1 = __aeabi_idivmod(*(short *)(*(int *)(temp_v1 + 0x28) + 0xe8) * 100,
                         (int)*(short *)(*(int *)(temp_v1 + 0x28) + 0xea));
-  FUN_0028dcb0(temp_v1 <= temp_v0);
+  scrSetResult(temp_v1 <= temp_v0);
   return 1;
 }
 

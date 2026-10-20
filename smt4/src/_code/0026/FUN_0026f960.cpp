@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c57c8(int, unsigned char [2], int);
+int asdSequenceRequest(int, unsigned char [2], int);
 
 /* stack frame of param_1: 10 slot(s), 20 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ typedef struct {
     unsigned char sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002c57c8. */
+/* Supplied declaration required: asdSequenceRequest. */
 
 
 unsigned int FUN_0026f960(unsigned short param_1)
@@ -46,7 +46,7 @@ unsigned int FUN_0026f960(unsigned short param_1)
   temp_v7 = 0;
   temp_v8 = 0;
   temp_v1 = param_1;
-  FUN_002c57c8(5,temp_v0,0x12);
+  asdSequenceRequest(5,temp_v0,0x12);
                     /* WARNING: Treating indirect jump as return */
   return 1;
 }

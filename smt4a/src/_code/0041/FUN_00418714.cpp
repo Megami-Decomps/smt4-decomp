@@ -8,7 +8,7 @@ int FUN_001ad9b4(void);
 
 extern int FUN_001ab940(char);
 /* Supplied declaration required: FUN_001ad9b4. */
-extern unsigned int FUN_002e3390(int);
+extern unsigned int wstrlen(int);
 
 
 unsigned int FUN_00418714(int param_1)
@@ -21,7 +21,7 @@ unsigned int FUN_00418714(int param_1)
   
   temp_v1 = param_1;
   FUN_001ad9b4();
-  temp_v0 = FUN_002e3390(temp_v1 + 0xc4);
+  temp_v0 = wstrlen(temp_v1 + 0xc4);
   temp_v2 = temp_v0 == 1;
   if (temp_v0 < 2) {
     temp_v2 = *(char *)(temp_v1 + 0xc4) == '0';

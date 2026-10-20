@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int, int);
-int FUN_00341e80(int);
+int sysMemClear(unsigned int, int);
+int asdPrimAlloc(int);
 int FUN_0042c7c8(unsigned int, unsigned char *, unsigned int, int);
 int rt_memcpy(int, unsigned int);
 
@@ -29,8 +29,8 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int FUN_001bc2ec(int);
-/* Supplied declaration required: FUN_002e6354. */
-/* Supplied declaration required: FUN_00341e80. */
+/* Supplied declaration required: sysMemClear. */
+/* Supplied declaration required: asdPrimAlloc. */
 /* Supplied declaration required: FUN_0042c7c8. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -57,7 +57,7 @@ void FUN_00412c54(int param_1,unsigned int param_2)
   unsigned char temp_v15;
   unsigned int temp_v16;
   
-  FUN_002e6354(param_2,0x790);
+  sysMemClear(param_2,0x790);
   temp_v16 = 0;
   temp_v7 = 0;
   temp_v12 = 0;
@@ -75,7 +75,7 @@ void FUN_00412c54(int param_1,unsigned int param_2)
   temp_v6 = 0;
   if ((*(unsigned int *)(param_1 + 4) & 1) != 0) {
     temp_v0 = *(int *)(param_1 + 0xc) * 0xc;
-    FUN_00341e80(temp_v0);
+    asdPrimAlloc(temp_v0);
     rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x30));
     temp_v9 = 0;
     temp_v1 = FUN_001bc2ec(temp_v0);
@@ -83,7 +83,7 @@ void FUN_00412c54(int param_1,unsigned int param_2)
   }
   if ((*(unsigned int *)(param_1 + 4) & 2) != 0) {
     temp_v0 = *(int *)(param_1 + 0xc) << 4;
-    FUN_00341e80(temp_v0);
+    asdPrimAlloc(temp_v0);
     rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x34));
     temp_v4 = 1;
     temp_v1 = FUN_001bc2ec(temp_v0);
@@ -91,7 +91,7 @@ void FUN_00412c54(int param_1,unsigned int param_2)
   }
   if ((*(unsigned int *)(param_1 + 4) & 0x20) != 0) {
     temp_v0 = *(int *)(param_1 + 0xc) << 2;
-    FUN_00341e80(temp_v0);
+    asdPrimAlloc(temp_v0);
     rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x38));
     temp_v4 = 1;
     temp_v1 = FUN_001bc2ec(temp_v0);
@@ -99,7 +99,7 @@ void FUN_00412c54(int param_1,unsigned int param_2)
   }
   if ((*(unsigned int *)(param_1 + 4) & 4) != 0) {
     temp_v0 = *(int *)(param_1 + 0xc) << 3;
-    FUN_00341e80(temp_v0);
+    asdPrimAlloc(temp_v0);
     rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x3c));
     temp_v14 = 2;
     temp_v1 = FUN_001bc2ec(temp_v0);

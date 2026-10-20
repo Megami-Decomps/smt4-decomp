@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0013f1b8(...);
+int asdTMTexTableLoadTmx(...);
 int FUN_001527d8(unsigned int, unsigned int);
 int FUN_001acf98(int, int);
 int FUN_002804b0(...);
@@ -17,10 +17,10 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_0013f1b8. */
-extern unsigned int FUN_0014bce0(unsigned int);
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
+extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_002804b0. */
@@ -49,9 +49,9 @@ void FUN_00402e34(int param_1)
   *(unsigned int *)(param_1 + 0x14) = 0;
   FUN_002804b0("event/HunterDataBase/HunterDataBase.mbm",param_1 + 8,0);
   FUN_002804b0("event/HunterDataBase/HunterDataBaseHelp.mbm",param_1 + 0xc,0);
-  FUN_00471d94(DAT_00570280);
+  FUN_00471d94(g_aocSystem);
   *(unsigned short *)(param_1 + 0x18) = 0;
-  FUN_0013f1b8(0x32,0);
+  asdTMTexTableLoadTmx(0x32,0);
   do {
     FUN_001acf98(0x32,temp_v0);
     temp_v0 = temp_v0 + 1;
@@ -69,14 +69,14 @@ void FUN_00402e34(int param_1)
     }
     temp_v0 = FUN_00341940(temp_v2);
     if (temp_v0 == 0) {
-      FUN_0013f1b8(temp_v2,0);
+      asdTMTexTableLoadTmx(temp_v2,0);
       *(unsigned char *)(param_1 + temp_v1 + 0x18) = 1;
     }
     temp_v1 = temp_v1 + 1;
   } while ((int)temp_v1 < 2);
   temp_v0 = 0;
   do {
-    temp_v2 = FUN_0014bce0(0);
+    temp_v2 = spriteHandleCreate(0);
     *(unsigned int *)(param_1 + temp_v0 * 4 + 0x66c) = temp_v2;
     FUN_001527d8(temp_v2,0xffffffff);
     temp_v0 = temp_v0 + 1;

@@ -5,11 +5,11 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_00184310(void);
 int FUN_00192550(void);
 int FUN_001aba54(void);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_002efc44(...);
 int FUN_0034a290(void);
 int FUN_0034a304(...);
@@ -79,7 +79,7 @@ typedef struct {
     unsigned int sp200; /* 0x200: local_200 */
 } param_4_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_005713f8; /* 0x5713f8 */
 extern unsigned int DAT_005713fc; /* 0x5713fc */
 extern unsigned int DAT_00571408; /* 0x571408 */
@@ -110,7 +110,7 @@ extern unsigned int uRam005714dc; /* 0x5714dc */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 extern int FUN_001633a0(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_0018719c(unsigned int);
@@ -118,7 +118,7 @@ extern int FUN_0018719c(unsigned int);
 extern unsigned int FUN_0019f240(unsigned int);
 /* Supplied declaration required: FUN_001aba54. */
 extern int FUN_0028cb6c(void);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002efc44. */
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: FUN_0034a304. */
@@ -133,7 +133,7 @@ extern unsigned int FUN_004bf9a0(unsigned int);
 /* Supplied declaration required: FUN_004c3ac0. */
 /* Supplied declaration required: FUN_004c60c0. */
 /* Supplied declaration required: FUN_004c8340. */
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -207,7 +207,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
   iStack_30 = param_2;
   temp_v53 = param_3;
   temp_v54 = param_4;
-  temp_v45 = (unsigned int *)FUN_0014aa78();
+  temp_v45 = (unsigned int *)btlGetMainState();
   temp_v1 = temp_v52;
   FUN_001aba54();
   FUN_00192550();
@@ -246,7 +246,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
   }
   temp_v3 = VectorUnsignedToFloat((unsigned int)temp_v41,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v23 = (unsigned long long)temp_v3 << 0x20;
-  temp_v4 = FUN_004ee568(DAT_0057113c);
+  temp_v4 = btlUnitGet(g_btlScriptUnit);
   temp_v51 = 0;
   if ((*(short *)(*(int *)(temp_v4 + 0x28) + 0x1be) == 2) &&
      (*(short *)(*(int *)(temp_v4 + 0x28) + 0x1c0) == 0x189)) {
@@ -271,9 +271,9 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
     temp_v27 = temp_v25 >> 0x20;
   }
   temp_v3 = temp_v53;
-  temp_v5 = FUN_0014aa78();
+  temp_v5 = btlGetMainState();
   FUN_003f0e20(temp_v5,temp_v3);
-  temp_v6 = FUN_0014aa78();
+  temp_v6 = btlGetMainState();
   FUN_003e8bb0(&temp_v31,temp_v6,temp_v5);
   temp_v46 = (unsigned int *)(int)temp_v32;
   if ((temp_v1 != 0) && (*(short *)(temp_v1 + 0x86) == 1)) {
@@ -285,9 +285,9 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
       return (unsigned short)temp_v49[0x44] & 0x10;
     }
   }
-  FUN_002e6354(temp_v37,0x54);
+  sysMemClear(temp_v37,0x54);
   temp_v4 = 0;
-  FUN_002e6354(temp_v44 + 0xe,0x54);
+  sysMemClear(temp_v44 + 0xe,0x54);
   temp_v44[0] = 0;
   temp_v44[1] = 0;
   temp_v44[2] = 0;
@@ -446,7 +446,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
       temp_v12 = temp_v37[temp_v11];
       if (((temp_v10 | temp_v8) & 0x170000) == 0) {
         temp_v34 = temp_v54;
-        temp_v7 = FUN_0014aa78();
+        temp_v7 = btlGetMainState();
         FUN_003f0e20(temp_v7,temp_v34);
         if ((temp_v7 != 0) && (*(int *)(temp_v7 + 0xd8) != 0)) {
           temp_v10 = 0;
@@ -635,7 +635,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
           temp_v16 = (float)VectorUnsignedToFloat
                                     (temp_v44[temp_v19 + 0xe] & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v22 = CONCAT44(temp_v16 * temp_v17,temp_v18 + temp_v14 + temp_v15);
-          puVar11 = (unsigned int *)FUN_0014aa78();
+          puVar11 = (unsigned int *)btlGetMainState();
           FUN_003f0e20(puVar11,temp_v10);
           temp_v10 = *puVar11;
           temp_v8 = puVar11[1];
@@ -730,7 +730,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
           temp_v25 = CONCAT44(temp_v26,temp_v16);
           temp_v10 = temp_v44[temp_v19] & 0xffff;
           temp_v22 = CONCAT44(temp_v6,temp_v18 + temp_v16 * temp_v17 * temp_v18);
-          temp_v20 = FUN_0014aa78();
+          temp_v20 = btlGetMainState();
           FUN_003f0e20(temp_v20,temp_v2);
           if (temp_v20 == 0) {
             temp_v18 = (float)((unsigned long long)temp_v21 >> 0x20);

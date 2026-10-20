@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_1_stack;
 
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_00233e70. */
@@ -55,7 +55,7 @@ void FUN_003928b4(int param_1)
   unsigned int uStack_20;
   
   FUN_002340e4(&temp_v3);
-  temp_v2 = DAT_00432fc8;
+  temp_v2 = g_aocMain;
   temp_v0 = *(int *)(param_1 + 8);
   if (temp_v0 != 3) {
     if (temp_v0 >= 3) {

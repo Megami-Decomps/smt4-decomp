@@ -22,13 +22,13 @@ extern unsigned int DAT_004341f8; /* 0x4341f8 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002402c4. */
-extern int FUN_002939f4(void);
-extern unsigned int FUN_0029a034(unsigned char *, unsigned int);
+extern int btlGetMainState(void);
+extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a09b4. */
 extern unsigned int FUN_002ac068(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002be624. */
-extern unsigned int FUN_002c0c74(unsigned int);
-extern int FUN_002c0cc4(void);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 
 
 void FUN_003400f0(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -52,7 +52,7 @@ void FUN_003400f0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   *(unsigned int *)(param_1 + 8) = param_2;
   *(unsigned int *)(param_1 + 0xc) = param_3;
   FUN_002be624(temp_v9,&LAB_003402fc,&LAB_003402e8,param_2,param_3);
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   FUN_002402c4(temp_v0,temp_v9);
   if (temp_v0 == 0) {
     FUN_002be624(temp_v9,&LAB_003402fc,&LAB_003402e8,1,1);
@@ -62,7 +62,7 @@ void FUN_003400f0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   FUN_002a09b4(temp_v9,0);
   puVar6 = &LAB_003402e8;
   FUN_002be624(temp_v9,&LAB_00340310,&LAB_003402e8,param_2,param_3);
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   FUN_002402c4(temp_v0,temp_v9);
   if (temp_v0 == 0) {
     puVar6 = &LAB_003402e8;
@@ -70,11 +70,11 @@ void FUN_003400f0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     *(unsigned int *)(param_1 + 8) = 1;
     *(unsigned int *)(param_1 + 0xc) = 1;
   }
-  temp_v1 = FUN_0029a034(temp_v9,param_4);
+  temp_v1 = asdMdlManagerCreateSecondList(temp_v9,param_4);
   *(unsigned int *)(param_1 + 0x10) = temp_v1;
   temp_v1 = FUN_002ac068(DAT_004341f8,0);
-  temp_v0 = FUN_002c0cc4();
-  temp_v2 = FUN_002c0c74(temp_v1);
+  temp_v0 = dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v1);
   if (temp_v2 != 0) {
     puVar6 = *(unsigned char **)(param_1 + 8);
   }
@@ -94,7 +94,7 @@ void FUN_003400f0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
         temp_v6 = temp_v0 + temp_v5 * 0x24;
         if (*(char *)(temp_v6 + 4) != '0') {
           FUN_002be624(temp_v9,&LAB_00340328,&LAB_003402e8,temp_v6 + 4);
-          temp_v1 = FUN_0029a034(temp_v9,param_4);
+          temp_v1 = asdMdlManagerCreateSecondList(temp_v9,param_4);
           *(unsigned int *)(param_1 + temp_v5 * 4 + 0x14) = temp_v1;
           temp_v4 = param_1 + temp_v5 * 0xc;
           temp_v8 = VectorUnsignedToFloat

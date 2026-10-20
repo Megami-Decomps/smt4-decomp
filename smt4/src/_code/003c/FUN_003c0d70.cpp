@@ -9,7 +9,7 @@ int FUN_002505c0(int, int, int, int, int, int, int);
 int FUN_00262f68(...);
 int FUN_002c3944(...);
 int FUN_002c424c(...);
-int FUN_002c4938(...);
+int memClear(...);
 int FUN_003369e0(int, unsigned int, int);
 int FUN_00336a70(int);
 int FUN_00337a34(int);
@@ -33,12 +33,12 @@ extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 /* Supplied declaration required: FUN_0023eab0. */
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00262f68. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 extern int FUN_0029ebac(unsigned int, unsigned int);
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002c3944. */
 /* Supplied declaration required: FUN_002c424c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_003369e0. */
 /* Supplied declaration required: FUN_00336a70. */
 /* Supplied declaration required: FUN_00337a34. */
@@ -61,7 +61,7 @@ void FUN_003c0d70(int param_1,unsigned int param_2,int param_3,int param_4)
   int unaff_r6;
   unsigned char temp_v6;
   
-  temp_v1 = FUN_002939f4();
+  temp_v1 = btlGetMainState();
   puVar6 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + param_1 * 0x288);
   if ((*puVar6 & 0x200000) != 0) {
     FUN_00337a34(temp_v1);
@@ -228,7 +228,7 @@ void FUN_003c0d70(int param_1,unsigned int param_2,int param_3,int param_4)
     if (temp_v0 == 0 && temp_v4 == 0) {
       FUN_002c424c(puVar6 + 2,100,0xffffffff);
       *(unsigned short *)(puVar6 + 2) = 0;
-      FUN_002c4938(puVar6 + 0x33,0x18c);
+      memClear(puVar6 + 0x33,0x18c);
     }
     *(unsigned short *)(puVar6 + 0x1b) = 0xffff;
     FUN_002c3944((int)puVar6 + 0x72,0x3c);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e33f0(void);
+int asdOperatorNewC(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_6: 5 slot(s), 20 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_002e33f0. */
+/* Supplied declaration required: asdOperatorNewC. */
 
 
 int FUN_00102610(int param_1,int param_2,int param_3,romwright_code *param_4,unsigned int param_5,romwright_code *param_6)
@@ -42,7 +42,7 @@ int FUN_00102610(int param_1,int param_2,int param_3,romwright_code *param_4,uns
     }
   }
   else {
-    FUN_002e33f0();
+    asdOperatorNewC();
     temp_v1 = temp_v1 + param_3;
   }
   if (temp_v1 != 0) {

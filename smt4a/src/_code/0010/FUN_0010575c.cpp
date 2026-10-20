@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int *, unsigned int);
+int sysMemClear(unsigned int *, unsigned int);
 
 extern unsigned char DAT_00558788; /* 0x558788 */
 
-/* Supplied declaration required: FUN_002e6354. */
-extern unsigned int *FUN_002e6dac(int);
+/* Supplied declaration required: sysMemClear. */
+extern unsigned int *rt_malloc(int);
 extern int FUN_002e7168(unsigned int *, unsigned int, unsigned int, unsigned int, unsigned int);
 extern unsigned int *FUN_002e760a(unsigned int);
 
@@ -35,7 +35,7 @@ int FUN_0010575c(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   puVar6 = (unsigned short *)(temp_v0 + 0x3c);
   *(unsigned int **)(temp_v0 + 0x30) = puVar2;
   *puVar6 = (unsigned short)param_2;
-  puVar3 = (unsigned int *)FUN_002e6dac(param_2 + 4);
+  puVar3 = (unsigned int *)rt_malloc(param_2 + 4);
   *puVar3 = param_2;
   for (temp_v1 = 0; temp_v1 < param_2; temp_v1 = temp_v1 + 1) {
   }
@@ -47,12 +47,12 @@ int FUN_0010575c(unsigned int *param_1,unsigned int param_2,unsigned int param_3
     temp_v2 = temp_v2 + 1;
   }
   temp_v3 = (unsigned int)*puVar6;
-  puVar3 = (unsigned int *)FUN_002e6dac(temp_v3 * 4 + 4);
+  puVar3 = (unsigned int *)rt_malloc(temp_v3 * 4 + 4);
   *puVar3 = temp_v3;
   for (temp_v1 = 0; temp_v1 < temp_v3; temp_v1 = temp_v1 + 1) {
   }
   *(unsigned int **)(temp_v0 + 0x34) = puVar3 + 1;
-  FUN_002e6354(puVar3 + 1,(unsigned int)*puVar6 << 2);
+  sysMemClear(puVar3 + 1,(unsigned int)*puVar6 << 2);
   *(unsigned int *)(temp_v0 + 0x38) = 0;
   return temp_v0 - 4;
 }

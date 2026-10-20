@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(unsigned char [128], unsigned char *, unsigned int, unsigned int);
 int FUN_001695a0(void);
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_0020214c(void);
 int FUN_0024b0c0(unsigned int, int);
 int FUN_00275bc8(int, unsigned char *);
@@ -16,14 +16,14 @@ int FUN_0046bed0(unsigned char *, unsigned int, int);
 
 extern unsigned char LAB_002e0510; /* 0x2e0510 */
 extern unsigned char LAB_002e0528; /* 0x2e0528 */
-extern unsigned char *DAT_00570280; /* 0x570280 */
-extern int DAT_00581274; /* 0x581274 */
+extern unsigned char *g_aocSystem; /* 0x570280 */
+extern int g_mapMain; /* 0x581274 */
 extern short DAT_005f172e; /* 0x5f172e */
 extern signed char DAT_005f1c72; /* 0x5f1c72 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001695a0. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_0024b0c0. */
 /* Supplied declaration required: FUN_00275bc8. */
@@ -46,28 +46,28 @@ unsigned int FUN_002e0398(void)
   unsigned char temp_v4 [128];
   unsigned char temp_v5 [128];
   
-  temp_v0 = DAT_00581274;
+  temp_v0 = g_mapMain;
   puVar3 = temp_v4;
   FUN_001695a0();
   FUN_00100388(temp_v4,&LAB_002e0510,*(unsigned int *)(temp_v0 + 0x68),*(unsigned int *)(temp_v0 + 0x68)
               );
   FUN_00100388(temp_v5,&LAB_002e0528,*(unsigned int *)(temp_v0 + 0x68),*(unsigned int *)(temp_v0 + 0x68))
   ;
-  temp_v1 = FUN_0046e08c(DAT_00570280,*(unsigned int *)(temp_v0 + 0x68),0);
+  temp_v1 = FUN_0046e08c(g_aocSystem,*(unsigned int *)(temp_v0 + 0x68),0);
   if (temp_v1 != 0) {
-    puVar3 = DAT_00570280;
-    FUN_0046bed0(DAT_00570280,*(unsigned int *)(temp_v0 + 0x68),0);
+    puVar3 = g_aocSystem;
+    FUN_0046bed0(g_aocSystem,*(unsigned int *)(temp_v0 + 0x68),0);
     *(unsigned char **)(temp_v0 + 0x90) = puVar3;
-    puVar3 = DAT_00570280;
-    FUN_0046be60(DAT_00570280,*(unsigned int *)(temp_v0 + 0x68),0);
+    puVar3 = g_aocSystem;
+    FUN_0046be60(g_aocSystem,*(unsigned int *)(temp_v0 + 0x68),0);
     *(unsigned char **)(temp_v0 + 0x94) = puVar3;
     if (*(int *)(temp_v0 + 0x90) != 0) {
       if (puVar3 != (unsigned char *)0x0) goto LAB_002e0474;
-      FUN_0019a5a0(*(int *)(temp_v0 + 0x90));
+      asdMemFree(*(int *)(temp_v0 + 0x90));
       *(unsigned int *)(temp_v0 + 0x90) = 0;
     }
     if (*(int *)(temp_v0 + 0x94) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v0 + 0x94) = 0;
     }
     return 0;

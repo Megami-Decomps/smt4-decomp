@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_001b31ac(...);
 int FUN_001b31e0(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_00471fec(...);
 int rt_memcpy_w(...);
 
@@ -21,13 +21,13 @@ typedef struct {
     unsigned int spC8; /* 0xc8: local_c8 */
 } param_4_stack;
 
-extern unsigned int DAT_0057027c; /* 0x57027c */
+extern unsigned int g_aocDisplay; /* 0x57027c */
 
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_001b315c(void);
 /* Supplied declaration required: FUN_001b31ac. */
 /* Supplied declaration required: FUN_001b31e0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00471fec. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -56,7 +56,7 @@ void FUN_00471468(int param_1,int param_2,int param_3,int param_4)
   iStack_30 = param_2;
   iStack_2c = param_3;
   temp_v11 = param_4;
-  FUN_002e6354(temp_v6,0x80);
+  sysMemClear(temp_v6,0x80);
   temp_v4 = 0;
   temp_v5 = 0;
   if (temp_v5 < *(int *)(temp_v10 + 0x310)) {
@@ -83,7 +83,7 @@ void FUN_00471468(int param_1,int param_2,int param_3,int param_4)
               temp_v8 = temp_v11 + temp_v4 * 0x10;
               rt_memcpy_w(temp_v8,*(int *)(temp_v7 + 0x4c) + temp_v3 * 0x10,0xe);
               FUN_00100388(temp_v6,"%s/%s",temp_v9,pcVar5 + 1);
-              FUN_00471fec(DAT_0057027c,temp_v6,temp_v8,1,0x80,temp_v8);
+              FUN_00471fec(g_aocDisplay,temp_v6,temp_v8,1,0x80,temp_v8);
               temp_v4 = temp_v4 + 1;
               *(unsigned char *)(temp_v8 + 0xc) = 1;
             }

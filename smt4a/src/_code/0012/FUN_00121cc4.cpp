@@ -10,7 +10,7 @@ int FUN_00121a7c(int, int);
 int FUN_00121b54(int);
 int FUN_00121b6c(int);
 int FUN_00121c24(unsigned int);
-int FUN_00121c94(int *, int);
+int netSetPayload(int *, int);
 int FUN_002e7168(...);
 int FUN_002ecef0(void);
 int FUN_002ed0c0(int, int);
@@ -25,7 +25,7 @@ typedef struct {
 extern unsigned char DAT_0055909c; /* 0x55909c */
 extern unsigned char DAT_0055b0ec; /* 0x55b0ec */
 extern unsigned char DAT_0059496f; /* 0x59496f */
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 extern unsigned char DAT_00594a58; /* 0x594a58 */
 
 extern int *FUN_00106fa8(void);
@@ -38,7 +38,7 @@ extern int FUN_0011456c(int);
 /* Supplied declaration required: FUN_00121b54. */
 /* Supplied declaration required: FUN_00121b6c. */
 /* Supplied declaration required: FUN_00121c24. */
-/* Supplied declaration required: FUN_00121c94. */
+/* Supplied declaration required: netSetPayload. */
 extern int FUN_00128cd0(int);
 /* Supplied declaration required: FUN_002e7168. */
 extern int FUN_002e760a(unsigned int);
@@ -112,7 +112,7 @@ int FUN_00121cc4(void)
   *(unsigned int *)(temp_v0 - 0x2c4) = temp_v1;
   *(unsigned int *)(temp_v0 - 0x7c) = 0;
   FUN_00121a7c(temp_v3,DAT_0059496f);
-  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0x18)) != '\0') {
+  if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x18)) != '\0') {
     FUN_00121b54(temp_v3);
   }
   temp_v2 = FUN_002e760a(0xb0);
@@ -123,7 +123,7 @@ int FUN_00121cc4(void)
   *(unsigned int *)(temp_v0 - 0x78) = temp_v1;
   temp_v4 = 0x4030201;
   temp_v5 = 0x8070605;
-  FUN_00121c94(&temp_v4,8);
+  netSetPayload(&temp_v4,8);
   temp_v2 = FUN_002e760a(0x2c);
   temp_v1 = 0;
   if (temp_v2 != 0) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010063a(...);
+int qsort(...);
 int FUN_00312830(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -22,7 +22,7 @@ extern int FUN_0035fdb0(...); /* 0x35fdb0 */
 extern int FUN_0035fe34(...); /* 0x35fe34 */
 extern int DAT_00588fe8; /* 0x588fe8 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_00312830. */
 
@@ -40,26 +40,26 @@ void FUN_003d4104(void)
   pbVar3 = (unsigned char *)(temp_v1 + 0x16);
   if ((*(unsigned char *)(temp_v1 + 0x16) & 0x7f) == 1) {
     if ((char)*(unsigned char *)(temp_v1 + 0x16) < '\0') {
-      FUN_0010063a(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_0035fe34);
+      qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_0035fe34);
     }
     else {
-      FUN_0010063a(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_002ce15c);
+      qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_002ce15c);
     }
   }
   if ((*pbVar3 & 0x7f) == 8) {
     if ((char)*pbVar3 < '\0') {
-      FUN_0010063a(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_0035fdb0);
+      qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_0035fdb0);
     }
     else {
-      FUN_0010063a(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_002ce0d8);
+      qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_002ce0d8);
     }
   }
   if ((*pbVar3 & 0x7f) == 2) {
     if ((char)*pbVar3 < '\0') {
-      FUN_0010063a(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_00321c18);
+      qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_00321c18);
     }
     else {
-      FUN_0010063a(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_00270cb4);
+      qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_00270cb4);
     }
   }
   if ((*pbVar3 & 0x7f) != 3) {

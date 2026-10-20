@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001630d4(...);
+int asdMemoryAlloc(...);
 int FUN_001a9110(unsigned int, unsigned int);
 int rt_memcpy_w(...);
 
@@ -18,7 +18,7 @@ extern unsigned int DAT_00588e20; /* 0x588e20 */
 extern unsigned int DAT_00588e24; /* 0x588e24 */
 
 extern unsigned int FUN_0014af84(void);
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_001a9110. */
 extern unsigned int FUN_00228af0(void);
 extern unsigned int FUN_00261458(void);
@@ -35,14 +35,14 @@ void FUN_002ac390(void)
   
   if (DAT_00588e1c == 0) {
     temp_v0 = 0x100;
-    FUN_001630d4(0x100,0x100,0,0x80,1);
+    asdMemoryAlloc(0x100,0x100,0,0x80,1);
     temp_v1 = 0x100;
     DAT_00588e1c = temp_v0;
-    FUN_001630d4(0x100,0x100,0,8,1);
+    asdMemoryAlloc(0x100,0x100,0,8,1);
     temp_v0 = 0x100;
     temp_v2 = 1;
     DAT_00588e20 = temp_v1;
-    FUN_001630d4(0x100,0x100,0,0x2a71c);
+    asdMemoryAlloc(0x100,0x100,0,0x2a71c);
     DAT_00588e24 = temp_v0;
     temp_v0 = FUN_00261458();
     rt_memcpy_w(DAT_00588e1c,temp_v0,0x80);

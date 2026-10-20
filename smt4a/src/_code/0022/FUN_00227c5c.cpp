@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
-int FUN_0019a5a0(unsigned int *);
+int jobStop(unsigned int, int);
+int asdMemFree(unsigned int *);
 int VectorSignedToFloat(int, int);
 
 extern signed char DAT_0057f20a; /* 0x57f20a */
@@ -13,9 +13,9 @@ extern int DAT_0057f20c; /* 0x57f20c */
 extern unsigned int *DAT_0057f214; /* 0x57f214 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 extern int FUN_002ef9f0(void);
 
 
@@ -87,8 +87,8 @@ unsigned int FUN_00227c5c(void)
     }
     if ((temp_v2 != 0 && unaff_r5 != (unsigned int *)0x0) &&
        (DAT_0057f20a = DAT_0057f20a - '\x01', DAT_0057f20a < '\x01')) {
-      FUN_001631d0(*unaff_r5,0);
-      FUN_0019a5a0(unaff_r5);
+      jobStop(*unaff_r5,0);
+      asdMemFree(unaff_r5);
       DAT_0057f214 = (unsigned int *)0x0;
       DAT_0057f20a = '\0';
     }

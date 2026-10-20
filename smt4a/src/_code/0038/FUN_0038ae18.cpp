@@ -3,10 +3,10 @@
 extern "C" {
 
 int FUN_00312d6c(void);
-int FUN_00324ae4(void);
+int lmapMainCallIfActive(void);
 
 /* Supplied declaration required: FUN_00312d6c. */
-/* Supplied declaration required: FUN_00324ae4. */
+/* Supplied declaration required: lmapMainCallIfActive. */
 
 
 unsigned int FUN_0038ae18(void)
@@ -14,7 +14,7 @@ unsigned int FUN_0038ae18(void)
 {
 /* irregular: 2 native warning(s); review required */
   FUN_00312d6c();
-  FUN_00324ae4();
+  lmapMainCallIfActive();
   return 1;
 }
 

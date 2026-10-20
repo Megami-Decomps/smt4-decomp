@@ -8,7 +8,7 @@ int FUN_0016780c(unsigned int, unsigned int, int);
 int FUN_00176480(void);
 int FUN_001764f4(unsigned int);
 
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_0016780c. */
 extern unsigned int FUN_0016a0f0(unsigned int);
 /* Supplied declaration required: FUN_00176480. */
@@ -24,7 +24,7 @@ unsigned int FUN_0015f2ec(void)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   temp_v1 = *(unsigned int *)(temp_v0 + 0x754);
   if ((temp_v1 & 1) != 0) {
     if (((temp_v1 & 8) == 0) || ((temp_v1 & 2) != 0)) {

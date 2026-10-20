@@ -1,25 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003024d8` (_code @ 0x3024d8, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* If the global state's active id matches `id`, forwards the pointer stored in its record to FUN_003fd7c0 with mode 2 and a default scale. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003fd7c0(unsigned int, unsigned int, int);
+typedef struct Record {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ void *target;
+} Record;
 
-extern int DAT_0058069c; /* 0x58069c */
+typedef struct State {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ Record *record;
+    /* 0x14 */ u8 unk14[8];
+    /* 0x1C */ s32 activeId;
+} State;
 
-/* Supplied declaration required: FUN_003fd7c0. */
+extern State *g_mapDepartWork;
 
+extern void FUN_003fd7c0(void *target, u32 arg, s32 mode, f32 scale);
 
-void FUN_003024d8(int param_1,unsigned int param_2)
-
+void FUN_003024d8(s32 id, u32 arg)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(DAT_0058069c + 0x1c) == param_1) {
-    FUN_003fd7c0(*(unsigned int *)(*(int *)(DAT_0058069c + 0x10) + 4),param_2,2);
-    return;
-  }
-  return;
+    if (g_mapDepartWork->activeId == id) {
+        FUN_003fd7c0(g_mapDepartWork->record->target, arg, 2, 0.0f);
+    }
 }
 
-} /* extern "C" */
+}

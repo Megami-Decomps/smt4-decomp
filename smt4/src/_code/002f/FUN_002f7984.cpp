@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002505c0(...);
 int FUN_00250720(void);
 int FUN_002551ac(int, unsigned int, unsigned int, int, int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 
 /* stack frame of void: 17 slot(s), 68 byte(s) */
 typedef struct {
@@ -30,14 +30,14 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } void_stack;
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00250720. */
 /* Supplied declaration required: FUN_002551ac. */
-extern unsigned int FUN_0027e928(unsigned int);
-/* Supplied declaration required: FUN_002939f4. */
-extern int FUN_00296cc8(unsigned int);
+extern unsigned int btlUnitGet(unsigned int);
+/* Supplied declaration required: btlGetMainState. */
+extern int scrGetArg(unsigned int);
 
 
 unsigned int FUN_002f7984(void)
@@ -50,20 +50,20 @@ unsigned int FUN_002f7984(void)
   unsigned int temp_v3;
   int temp_v4;
   
-  temp_v2 = FUN_00296cc8(0);
-  temp_v3 = FUN_0027e928(DAT_0043427c);
-  FUN_002939f4();
+  temp_v2 = scrGetArg(0);
+  temp_v3 = btlUnitGet(g_btlScriptUnit);
+  btlGetMainState();
   FUN_00250720();
-  temp_v4 = FUN_002939f4();
+  temp_v4 = btlGetMainState();
   if (*(short *)(*(int *)(temp_v4 + 0x1fc0) + 0x1b4) <= temp_v2) {
-    temp_v2 = FUN_002939f4();
+    temp_v2 = btlGetMainState();
     temp_v2 = *(short *)(*(int *)(temp_v2 + 0x1fc0) + 0x1b4) - 1;
   }
-  temp_v4 = FUN_002939f4();
+  temp_v4 = btlGetMainState();
   temp_v0 = *(short *)(*(int *)(temp_v4 + 0x1fc0) + 0x1b6);
-  temp_v4 = FUN_002939f4();
+  temp_v4 = btlGetMainState();
   temp_v1 = *(short *)(*(int *)(temp_v4 + 0x1fc0) + 0x1b4);
-  temp_v4 = FUN_002939f4();
+  temp_v4 = btlGetMainState();
   FUN_002551ac(0,temp_v3,*(unsigned int *)(temp_v4 + 0x1e98),0,temp_v2,0xffffffff,0xffffffff,(int)temp_v1,
                (int)temp_v0,0,0,0,0,1,0,0,0,0,0,1,0,1,1,0,1);
   FUN_002505c0(0,temp_v3,0x1000185,0,0,0,0);

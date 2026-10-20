@@ -17,7 +17,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002ac0c4. */
 /* Supplied declaration required: FUN_002ac0f8. */
 extern int FUN_002ac12c(unsigned int);
-extern int FUN_002c0c74(void);
+extern int dataTableGetCount(void);
 
 
 int FUN_0025bed8(int param_1,int param_2,unsigned int param_3)
@@ -49,7 +49,7 @@ int FUN_0025bed8(int param_1,int param_2,unsigned int param_3)
             if ((*(char *)(temp_v1 + temp_v3 * 0x40) == param_2) &&
                (*(char *)(*(int *)(temp_v4 + 0x4c) + temp_v3 * 0x10 + 0xc) != '\0')) {
               FUN_002ac068(*(unsigned int *)(*(int *)(temp_v4 + 0x4c) + temp_v3 * 0x10),param_3);
-              temp_v0 = FUN_002c0c74();
+              temp_v0 = dataTableGetCount();
               temp_v6 = temp_v6 + temp_v0;
             }
             temp_v3 = temp_v3 + 1;

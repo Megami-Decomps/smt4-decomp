@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_002b3324(int, unsigned int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -17,7 +17,7 @@ extern unsigned int DAT_005c1fb8; /* 0x5c1fb8 */
 extern unsigned int DAT_005c1fbc; /* 0x5c1fbc */
 extern unsigned int DAT_005c1fc0; /* 0x5c1fc0 */
 
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002b3324. */
 
 
@@ -31,7 +31,7 @@ unsigned short * FUN_00350cf4(int param_1,unsigned int param_2)
   unsigned short *puVar4;
   
   puVar4 = (unsigned short *)0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0x58,0x10,1);
+  memAlloc(0x10000,0x100,0,0x58,0x10,1);
   *puVar4 = 0x300;
   puVar4[1] = 0;
   FUN_002b3324(param_1,param_2,0);

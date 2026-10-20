@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00588124; /* 0x588124 */
+extern int g_npcRoom; /* 0x588124 */
 
 
 unsigned char FUN_00284d94(void)
@@ -13,10 +13,10 @@ unsigned char FUN_00284d94(void)
   int temp_v0;
   
   temp_v0 = 0;
-  if (DAT_00588124 != 0) {
-    temp_v0 = *(int *)(DAT_00588124 + 0xf0);
+  if (g_npcRoom != 0) {
+    temp_v0 = *(int *)(g_npcRoom + 0xf0);
   }
-  return DAT_00588124 != 0 && temp_v0 != 7;
+  return g_npcRoom != 0 && temp_v0 != 7;
 }
 
 } /* extern "C" */

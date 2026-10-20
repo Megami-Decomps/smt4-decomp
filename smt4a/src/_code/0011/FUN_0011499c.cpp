@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_00594ad8; /* 0x594ad8 */
+extern unsigned char g_listenerTable; /* 0x594ad8 */
 
 
 unsigned int FUN_0011499c(void)
@@ -13,8 +13,8 @@ unsigned int FUN_0011499c(void)
   unsigned int temp_v0;
   
   temp_v0 = 0;
-  if ((*(int *)((unsigned char *)&DAT_00594ad8 + 0x50)) != 0) {
-    temp_v0 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_00594ad8 + 0x50)) + 8);
+  if ((*(int *)((unsigned char *)&g_listenerTable + 0x50)) != 0) {
+    temp_v0 = *(unsigned int *)((*(int *)((unsigned char *)&g_listenerTable + 0x50)) + 8);
   }
   return temp_v0;
 }

@@ -30,7 +30,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
 #define ROMWRIGHT_SQRT_4_DEFINED
@@ -129,16 +129,16 @@ void FUN_00376c64(void)
   temp_v13 = *(unsigned int *)(temp_v1 + 0x58);
   temp_v12 = *(unsigned int *)(temp_v1 + 0x50);
   uStack_a0 = *(unsigned int *)(temp_v1 + 0x54);
-  temp_v3 = *(unsigned int *)(DAT_00581288 + 0x1c);
+  temp_v3 = *(unsigned int *)(g_lmapScene + 0x1c);
   FUN_00352bc4();
   temp_v1 = DAT_005806a4;
   temp_v10 = 90.0f;
   temp_v5 = 0.017453292f;
   temp_v2 = DAT_005806a4 + temp_v0 * 4;
   *(unsigned int *)(DAT_005806a4 + 0x18) = temp_v3;
-  temp_v6 = *(float *)(DAT_00581288 + 0x28);
-  temp_v8 = *(float *)(DAT_00581288 + 0x30);
-  temp_v9 = *(float *)(DAT_00581288 + 0x2c) + *(float *)(temp_v2 + 0xcc);
+  temp_v6 = *(float *)(g_lmapScene + 0x28);
+  temp_v8 = *(float *)(g_lmapScene + 0x30);
+  temp_v9 = *(float *)(g_lmapScene + 0x2c) + *(float *)(temp_v2 + 0xcc);
   temp_v4 = (*(float *)(temp_v1 + 0x18) - 90.0f) * 0.017453292f;
   temp_v22 = temp_v3;
   FUN_001bc124();
@@ -150,12 +150,12 @@ void FUN_00376c64(void)
   temp_v14 = temp_v6;
   temp_v15 = temp_v9;
   FUN_001bc124();
-  temp_v8 = *(float *)(DAT_00581288 + 0x28) - temp_v4 * *(float *)(DAT_005806a4 + temp_v0 * 4 + 0x18c);
+  temp_v8 = *(float *)(g_lmapScene + 0x28) - temp_v4 * *(float *)(DAT_005806a4 + temp_v0 * 4 + 0x18c);
   temp_v4 = *(float *)(DAT_005806a4 + 0x18) * temp_v5;
   FUN_001bbf0c();
   temp_v1 = DAT_005806a4 + temp_v0 * 4;
-  temp_v6 = *(float *)(DAT_00581288 + 0x30) - temp_v4 * *(float *)(temp_v1 + 0x18c);
-  temp_v9 = *(float *)(DAT_00581288 + 0x2c) + *(float *)(temp_v1 + 0x10c) +
+  temp_v6 = *(float *)(g_lmapScene + 0x30) - temp_v4 * *(float *)(temp_v1 + 0x18c);
+  temp_v9 = *(float *)(g_lmapScene + 0x2c) + *(float *)(temp_v1 + 0x10c) +
            *(float *)(DAT_005806a4 + 0x1c);
   temp_v4 = (*(float *)(DAT_005806a4 + 0x18) - temp_v10) * temp_v5;
   FUN_001bc124();

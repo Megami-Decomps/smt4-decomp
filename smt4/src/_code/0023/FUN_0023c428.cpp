@@ -9,7 +9,7 @@ int FUN_0023ac2c(int, float *);
 int FUN_0023adf4(unsigned int, int, unsigned char [16]);
 int FUN_0027da30(int, int);
 int FUN_0028c640(unsigned int, int, float *);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_002a0428(int, int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_0027dab0(unsigned int, int);
 /* Supplied declaration required: FUN_0028c640. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002a0428. */
 
 
@@ -51,15 +51,15 @@ void FUN_0023c428(int param_1,int param_2)
     if (*(int *)(*(int *)(temp_v0 + 8) + 0xc) < 0) {
       FUN_002a0428(temp_v0,1);
     }
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     temp_v4 = *(int *)(temp_v0 + 0x1e98) + param_2 * 0x114;
-    temp_v1 = FUN_002939f4();
+    temp_v1 = btlGetMainState();
     temp_v0 = FUN_0027dab0(temp_v1,temp_v4);
     if (temp_v0 < 0) {
       temp_v0 = 0;
     }
     temp_v5 = 0;
-    temp_v2 = FUN_002939f4();
+    temp_v2 = btlGetMainState();
     FUN_0027da30(temp_v2,(int)*(short *)(temp_v4 + 0x62));
     temp_v3 = 0;
     do {

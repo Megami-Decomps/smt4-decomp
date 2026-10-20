@@ -8,7 +8,7 @@ int FUN_00100388(unsigned char [100], unsigned char *, unsigned char *, unsigned
 int FUN_00362768(unsigned int *, unsigned char [50]);
 int FUN_00375ec8(void);
 int FUN_003762a8(unsigned int *, unsigned char [50]);
-int FUN_003902b0(void);
+int effMenuNodeCreate(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern unsigned int *DAT_0059dc28; /* 0x59dc28 */
 /* Supplied declaration required: FUN_00362768. */
 /* Supplied declaration required: FUN_00375ec8. */
 /* Supplied declaration required: FUN_003762a8. */
-/* Supplied declaration required: FUN_003902b0. */
+/* Supplied declaration required: effMenuNodeCreate. */
 
 
 /* WARNING: Removing unreachable block (ram,0x002febdc) */
@@ -55,7 +55,7 @@ unsigned char * FUN_002feb40(void)
   }
   else {
     puVar1 = (unsigned int *)&LAB_002fec58;
-    FUN_003902b0();
+    effMenuNodeCreate();
     DAT_0059dc28 = puVar1;
     *puVar1 = 0xb6;
     puVar1[1] = 100;

@@ -1,47 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f2740` (_code @ 0x2f2740, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail compares the two groups with `subs`, built uses `cmp`. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002497f8(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
+/* Object whose int at +4 is a handle (negative = none). */
 typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+    u8 unk00[4];
+    s32 handle;     /* 0x04 */
+} HandleHolder;
 
-/* Supplied declaration required: FUN_002497f8. */
-extern int FUN_002a8740(void);
+/* Record looked up for a handle; only the group id is used here. */
+typedef struct {
+    u8 unk00[0x46];
+    u16 group;      /* 0x46 */
+} HandleRecord;
 
+HandleRecord *FUN_002a8740(void);
+int FUN_002497f8(HandleHolder *first, HandleHolder *second);
 
-void FUN_002f2740(int param_1,int param_2)
-
+/* Calls FUN_002497f8 when both holders resolve to the same group (a holder without a handle counts as group 0). */
+void FUN_002f2740(HandleHolder *first, HandleHolder *second)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  short temp_v2;
-  
-  if (*(int *)(param_1 + 4) < 0) {
-    temp_v2 = 0;
-  }
-  else {
-    temp_v1 = FUN_002a8740();
-    temp_v2 = *(short *)(temp_v1 + 0x46);
-  }
-  if (*(int *)(param_2 + 4) < 0) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v1 = FUN_002a8740();
-    temp_v0 = *(short *)(temp_v1 + 0x46);
-  }
-  if (temp_v0 != temp_v2) {
-    return;
-  }
-  FUN_002497f8(param_1,param_2);
-  return;
+    u16 firstGroup;
+    u16 secondGroup;
+
+    if (first->handle < 0) {
+        firstGroup = 0;
+    } else {
+        firstGroup = FUN_002a8740()->group;
+    }
+    if (second->handle < 0) {
+        secondGroup = 0;
+    } else {
+        secondGroup = FUN_002a8740()->group;
+    }
+    if (secondGroup != firstGroup) {
+        return;
+    }
+    FUN_002497f8(first, second);
 }
 
 } /* extern "C" */

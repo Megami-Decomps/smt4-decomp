@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b4414(...);
-int FUN_002bf5c0(int, int, int, int);
+int asdMemoryAllocAligned(int, int, int, int);
 int rt_memcpy(...);
 
 typedef struct fn_00257c38_arg0 fn_00257c38_arg0;
@@ -29,7 +29,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002b4414. */
-/* Supplied declaration required: FUN_002bf5c0. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -60,7 +60,7 @@ void FUN_00257c38(fn_00257c38_arg0 *param_1,int param_2,unsigned int param_3,uns
         temp_v5 = 1;
         temp_v4 = 0x80;
         temp_v3 = 0x10000;
-        FUN_002bf5c0(0x10000,0x100,0,param_1->field_0x28);
+        asdMemoryAllocAligned(0x10000,0x100,0,param_1->field_0x28);
         param_1->field_0x24 = temp_v3;
         rt_memcpy();
       }

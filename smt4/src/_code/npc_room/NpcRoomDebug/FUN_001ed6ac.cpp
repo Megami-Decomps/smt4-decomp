@@ -6,18 +6,18 @@ extern "C" {
 
 int FUN_0026dcd4(int);
 int FUN_002a03d8(...);
-int FUN_002c415c(unsigned int *);
-int FUN_002c43b4(unsigned int, int);
+int asdMemFree(unsigned int *);
+int jobStop(unsigned int, int);
 
-extern unsigned int *DAT_0044d1b0; /* 0x44d1b0 */
+extern unsigned int *g_npcRoomDebug; /* 0x44d1b0 */
 
-extern int FUN_001a1668(void);
+extern int npcRoomIsDone(void);
 /* Supplied declaration required: FUN_0026dcd4. */
 /* Supplied declaration required: FUN_002a03d8. */
 extern int FUN_002b8cec(unsigned int);
 extern int FUN_002bfde4(unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 
 
 unsigned int FUN_001ed6ac(void)
@@ -28,18 +28,18 @@ unsigned int FUN_001ed6ac(void)
   unsigned int *puVar2;
   int temp_v1;
   
-  puVar2 = DAT_0044d1b0;
-  temp_v1 = DAT_0044d1b0[1];
+  puVar2 = g_npcRoomDebug;
+  temp_v1 = g_npcRoomDebug[1];
   if (temp_v1 != 0) {
     if (temp_v1 != 1) {
-      if ((temp_v1 == 2) && (DAT_0044d1b0 != (unsigned int *)0x0)) {
-        FUN_002c43b4(*DAT_0044d1b0,0);
-        FUN_002c415c(puVar2);
-        DAT_0044d1b0 = (unsigned int *)0x0;
+      if ((temp_v1 == 2) && (g_npcRoomDebug != (unsigned int *)0x0)) {
+        jobStop(*g_npcRoomDebug,0);
+        asdMemFree(puVar2);
+        g_npcRoomDebug = (unsigned int *)0x0;
       }
     }
     else {
-      temp_v1 = FUN_001a1668();
+      temp_v1 = npcRoomIsDone();
       if (temp_v1 != 0) {
         FUN_002a03d8(0,1);
         FUN_002a03d8(1);

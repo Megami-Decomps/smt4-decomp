@@ -12,9 +12,9 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_4_stack;
 
-extern int DAT_0058103c; /* 0x58103c */
+extern int g_mapIf; /* 0x58103c */
 extern unsigned int *DAT_00581040; /* 0x581040 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_0018a924. */
 
@@ -46,14 +46,14 @@ int FUN_00244c70(unsigned int param_1,int param_2,unsigned int param_3,unsigned 
   if (param_2 != 0) {
     temp_v2 = 0;
     do {
-      if (*(char *)(DAT_0058103c + temp_v2 * 0x194 + 0x1dc) == '\0') {
+      if (*(char *)(g_mapIf + temp_v2 * 0x194 + 0x1dc) == '\0') {
         if (temp_v2 == -1) {
           return -1;
         }
         temp_v5 = 120.0f;
         temp_v7 = 60.0f;
         temp_v6 = 150.0f;
-        temp_v1 = DAT_0058103c + temp_v2 * 0x194;
+        temp_v1 = g_mapIf + temp_v2 * 0x194;
         temp_v4 = 0x41c00000;
         *(unsigned char *)(temp_v1 + 0x1dc) = 1;
         *(unsigned int *)(temp_v1 + 0x200) = param_3;
@@ -815,7 +815,7 @@ LAB_00244db8:
                           *(unsigned int *)(temp_v1 + 0x210) = 0x44960000;
                           *(unsigned int *)(temp_v1 + 0x214) = 0x44960000;
                         }
-                        else if (DAT_005f15fc < 100) {
+                        else if (g_gameState < 100) {
                           temp_v11 = DAT_00581040[0x1e];
                           temp_v10 = DAT_00581040[6];
                           *(unsigned int *)(temp_v1 + 0x1ec) = 1;

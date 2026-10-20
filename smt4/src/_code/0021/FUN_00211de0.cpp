@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00296cc8(int);
+int scrGetArg(int);
 int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00296cc8. */
-extern int FUN_002c08f0(unsigned int);
+/* Supplied declaration required: scrGetArg. */
+extern int jobGetWork(unsigned int);
 
 
 unsigned int FUN_00211de0(void)
@@ -22,9 +22,9 @@ unsigned int FUN_00211de0(void)
   unsigned int in_fpscr;
   float temp_v3;
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_00296cc8(1);
-  temp_v2 = FUN_002c08f0(temp_v0);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = jobGetWork(temp_v0);
   if (temp_v1 == 0) {
     *(unsigned int *)(temp_v2 + 0x24) = 0x3f800000;
     *(unsigned int *)(temp_v2 + 0x28) = 0;

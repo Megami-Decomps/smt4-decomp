@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
+extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 
 
 int FUN_00262f94(void)
@@ -20,12 +20,12 @@ int FUN_00262f94(void)
   int temp_v2;
   
   temp_v0 = 0;
-  temp_v2 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x8c;
-  if ((int)*(short *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x24bac) != 0) {
+  temp_v2 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x8c;
+  if ((int)*(short *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x24bac) != 0) {
     temp_v0 = 0;
     while ((temp_v1 = (int)*(char *)(temp_v2 + temp_v0 + 0x90f0), temp_v1 < 0 ||
            ((unsigned int)*(unsigned short *)(temp_v2 + temp_v1 * 0x604 + 0xd6) !=
-            (int)*(short *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x24bac)))) {
+            (int)*(short *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x24bac)))) {
       temp_v0 = temp_v0 + 1;
       if (temp_v0 >= 0x18) {
         return 0;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_00300124(...);
 int rt_memcpy_w(void);
 
@@ -32,7 +32,7 @@ extern unsigned int DAT_005c1424; /* 0x5c1424 */
 extern unsigned int DAT_005c1428; /* 0x5c1428 */
 extern unsigned int DAT_005c142c; /* 0x5c142c */
 
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00300124. */
 extern int FUN_00399c60(void);
 /* Supplied declaration required: rt_memcpy_w. */
@@ -53,7 +53,7 @@ void FUN_002ffe14(unsigned int *param_1,unsigned int param_2,unsigned int *param
   unsigned int temp_v7;
   
   temp_v0 = 0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+  memAlloc(0x10000,0x100,0,0x68,0x10,1);
   temp_v1 = param_1[1];
   temp_v2 = param_1[2];
   temp_v3 = param_1[3];
@@ -133,7 +133,7 @@ void FUN_002ffe14(unsigned int *param_1,unsigned int param_2,unsigned int *param
   temp_v0 = FUN_00399c60();
   if (temp_v0 != 0) {
     temp_v1 = 0x10000;
-    FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+    memAlloc(0x10000,0x100,0,0x68,0x10,1);
     rt_memcpy_w();
     FUN_00300124(temp_v1,2);
     return;

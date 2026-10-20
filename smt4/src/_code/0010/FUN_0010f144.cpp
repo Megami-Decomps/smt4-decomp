@@ -11,7 +11,7 @@ int FUN_002bbf8c(void);
 int FUN_002c1e30(...);
 int FUN_002c1edc(...);
 int FUN_002c2044(int, int);
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_MTX44PivotC_FAST(int, int);
 
@@ -39,8 +39,8 @@ extern unsigned int FUN_002c15d4(unsigned int);
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
 /* Supplied declaration required: FUN_002c2044. */
-/* Supplied declaration required: FUN_002c222c. */
-extern unsigned int FUN_002c5c14(char *, unsigned int *, unsigned int, unsigned int);
+/* Supplied declaration required: asdOperatorNew. */
+extern unsigned int asdLoadFileSync(char *, unsigned int *, unsigned int, unsigned int);
 /* Supplied declaration required: nn_math_ARMv6_MTX44PivotC_FAST. */
 
 
@@ -81,13 +81,13 @@ void FUN_0010f144(int param_1)
     *(unsigned char *)(param_1 + temp_v3 * 0x20 + 0x1204) = 1;
   } while (temp_v1 < 0xc);
   temp_v1 = 0x12a48;
-  FUN_002c222c();
+  asdOperatorNew();
   temp_v0 = 0;
   if (temp_v1 != 0) {
     temp_v0 = FUN_0011b588();
   }
   *(unsigned int *)(param_1 + 0x52c) = temp_v0;
-  temp_v0 = FUN_002c5c14("DefaultTextureVS.shbin",(unsigned int *)&temp_v6,1,0x80);
+  temp_v0 = asdLoadFileSync("DefaultTextureVS.shbin",(unsigned int *)&temp_v6,1,0x80);
   FUN_0011b498(*(unsigned int *)(param_1 + 0x52c),temp_v0,temp_v6,0);
   temp_v0 = FUN_002c15ac(0);
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);

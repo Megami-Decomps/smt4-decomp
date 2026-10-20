@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 
 extern int DAT_0057392c; /* 0x57392c */
 extern int DAT_00573930; /* 0x573930 */
@@ -12,7 +12,7 @@ extern int DAT_00573934; /* 0x573934 */
 extern int DAT_00573938; /* 0x573938 */
 extern int DAT_0057393c; /* 0x57393c */
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_003ec580(int param_1,int param_2)
@@ -21,28 +21,28 @@ void FUN_003ec580(int param_1,int param_2)
 /* irregular: 1 native warning(s); review required */
   if (param_2 != 0) {
     if (DAT_0057392c != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       DAT_0057392c = 0;
     }
     if (DAT_00573930 != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       DAT_00573930 = 0;
     }
     if (DAT_00573934 != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       DAT_00573934 = 0;
     }
   }
   if (DAT_00573938 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     DAT_00573938 = 0;
   }
   if (DAT_0057393c != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     DAT_0057393c = 0;
   }
   if (*(int *)(param_1 + 0x4e48) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(int *)(param_1 + 0x4e48) = 0;
   }
   return;

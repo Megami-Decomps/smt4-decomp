@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_002a1248(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_4: 4 slot(s), 16 byte(s) */
@@ -24,9 +24,9 @@ extern unsigned char LAB_002fed38; /* 0x2fed38 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002a1248. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 
 
 unsigned int FUN_0030a2c0(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -41,7 +41,7 @@ unsigned int FUN_0030a2c0(unsigned int param_1,unsigned int param_2,unsigned int
   unsigned int temp_v2;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x2c,1);
+  asdMemAlloc(0x100,0x100,0,0x2c,1);
   *puVar1 = 0;
   puVar1[1] = 0;
   puVar1[2] = 0;
@@ -54,10 +54,10 @@ unsigned int FUN_0030a2c0(unsigned int param_1,unsigned int param_2,unsigned int
   puVar1[9] = 0;
   puVar1[10] = 0;
   pcVar2 = "EventEplEffect";
-  FUN_002c5788("EventEplEffect",2,0,0,FUN_00224820,&LAB_002fed38,puVar1);
+  asdProcessCreateSimple("EventEplEffect",2,0,0,FUN_00224820,&LAB_002fed38,puVar1);
   *puVar1 = (unsigned int)pcVar2;
-  FUN_002c4a08("EventEplEffect_Draw",0x75,0,0,FUN_002248b8,0,puVar1,pcVar2);
-  FUN_002c4a08("EventEplEffect_Draw",0xd3,0,0,FUN_002248b8,0,puVar1,*puVar1);
+  taskCreateDraw("EventEplEffect_Draw",0x75,0,0,FUN_002248b8,0,puVar1,pcVar2);
+  taskCreateDraw("EventEplEffect_Draw",0xd3,0,0,FUN_002248b8,0,puVar1,*puVar1);
   temp_v2 = VectorSignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v0 = VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v1 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);

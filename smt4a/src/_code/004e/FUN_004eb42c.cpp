@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00169ddc(int);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 
 extern int FUN_00164af0(unsigned int);
 /* Supplied declaration required: FUN_00169ddc. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern int FUN_0033413c(void);
 
 
@@ -34,7 +34,7 @@ unsigned int FUN_004eb42c(int *param_1,int param_2)
     temp_v0 = temp_v0 + 1;
     temp_v2 = 0xffffffff;
   } while ((int)temp_v0 < 0x6d);
-  FUN_002e6354(param_2 + 0x38,0x6d);
+  sysMemClear(param_2 + 0x38,0x6d);
   temp_v1 = FUN_00164af0(3);
   temp_v6 = param_2 + 0x38;
   if (((temp_v1 != 0) || (temp_v1 = FUN_00164af0(0xc), temp_v1 != 0)) ||

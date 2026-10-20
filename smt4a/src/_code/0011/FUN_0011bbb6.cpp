@@ -10,7 +10,7 @@ int FUN_00311544(int *);
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_002f4ab0. */
 /* Supplied declaration required: FUN_00311544. */
-extern int FUN_0031155e(int *);
+extern int vectorSize12B(int *);
 
 
 void FUN_0011bbb6(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -24,7 +24,7 @@ void FUN_0011bbb6(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
   if ((char)param_1[1] == '\0') {
     *(unsigned char *)(param_1 + 1) = 1;
     uStack_18 = param_4;
-    temp_v0 = FUN_0031155e(param_1 + 0x10);
+    temp_v0 = vectorSize12B(param_1 + 0x10);
     for (temp_v1 = 0; temp_v1 < temp_v0; temp_v1 = temp_v1 + 1) {
       *(unsigned short *)((int)&uStack_18 + temp_v1 * 2) = *(unsigned short *)(param_1[0x10] + temp_v1 * 0xc);
     }

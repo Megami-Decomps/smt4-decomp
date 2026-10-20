@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_005702f4; /* 0x5702f4 */
+extern int g_effectProcessActive; /* 0x5702f4 */
 
 
 void FUN_0031b91c(void)
@@ -13,7 +13,7 @@ void FUN_0031b91c(void)
 /* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
   unsigned int in_s0;
   
-  *(unsigned int *)(DAT_005702f4 + 0x524) = in_s0;
+  *(unsigned int *)(g_effectProcessActive + 0x524) = in_s0;
   return;
 }
 

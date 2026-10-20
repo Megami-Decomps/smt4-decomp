@@ -1,36 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0042bb1c` (_code @ 0x42bb1c, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the pool pointer and the lock address are held in swapped callee-saved registers (r4/r6). */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct PoolObject PoolObject;
+typedef struct PoolObjectVtbl {
+    /* 0x00 */ void *unk00[13];
+    /* 0x34 */ void (*destroy)(PoolObject *self);
+} PoolObjectVtbl;
+struct PoolObject {
+    /* 0x00 */ union {
+        PoolObjectVtbl *vtbl;
+        PoolObject *nextFree;    /* while in the free list */
+    };
+};
 
-extern unsigned char DAT_00589398; /* 0x589398 */
+typedef struct Pool {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ PoolObject *freeList;
+    /* 0x28 */ u32 unk28;
+    /* 0x2C */ int liveCount;
+    /* 0x30 */ u8 lock[4];
+} Pool;
 
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
+typedef struct Globals {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ Pool *pool;
+} Globals;
 
+extern Globals DAT_00589398;
 
-void FUN_0042bb1c(int *param_1)
+void nn_os_CriticalSection_Enter(void *cs);
+void nn_os_CriticalSection_Leave(void *cs);
 
+/* Destroys `object` and returns it to the global pool's free list under the pool lock. */
+void FUN_0042bb1c(PoolObject *object)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  (**(romwright_code **)(*param_1 + 0x34))(param_1);
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00589398 + 0x4));
-  temp_v1 = (*(int *)((unsigned char *)&DAT_00589398 + 0x4)) + 0x30;
-  nn_os_CriticalSection_Enter(temp_v1);
-  *param_1 = *(int *)(temp_v0 + 0x24);
-  *(int **)(temp_v0 + 0x24) = param_1;
-  *(int *)(temp_v0 + 0x2c) = *(int *)(temp_v0 + 0x2c) - 1;
-  nn_os_CriticalSection_Leave(temp_v1);
-  return;
+    Pool *pool;
+    void *lock;
+
+    object->vtbl->destroy(object);
+    pool = DAT_00589398.pool;
+    lock = pool->lock;
+    nn_os_CriticalSection_Enter(lock);
+    object->nextFree = pool->freeList;
+    pool->freeList = object;
+    pool->liveCount--;
+    nn_os_CriticalSection_Leave(lock);
 }
 
 } /* extern "C" */

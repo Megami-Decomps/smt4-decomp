@@ -35,7 +35,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571148; /* 0x571148 */
 extern unsigned int DAT_0057114c; /* 0x57114c */
 extern unsigned int DAT_00571178; /* 0x571178 */
@@ -125,7 +125,7 @@ unsigned int FUN_004e0314(int *param_1,fn_004e0314_arg1 *param_2)
     FUN_0047f7ac(0,temp_v8);
     FUN_004fdc9c(temp_v6 + 0xf,param_2,*(unsigned short *)(*piVar7 + 300),temp_v7);
   }
-  *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x20;
+  *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x20;
   return 1;
 }
 

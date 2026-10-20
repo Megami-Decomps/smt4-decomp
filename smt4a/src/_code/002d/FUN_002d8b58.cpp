@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_00192748(unsigned int);
-int FUN_00192798(void);
+int dataTableGetCount(unsigned int);
+int dataTableGetEntries(void);
 
-extern int DAT_0058104c; /* 0x58104c */
+extern int g_popupState; /* 0x58104c */
 
 extern int FUN_0014bef4(unsigned int);
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int FUN_0018719c(void);
-/* Supplied declaration required: FUN_00192748. */
-/* Supplied declaration required: FUN_00192798. */
+/* Supplied declaration required: dataTableGetCount. */
+/* Supplied declaration required: dataTableGetEntries. */
 extern int FUN_00365bc4(int);
 
 
@@ -32,15 +32,15 @@ int FUN_002d8b58(int param_1,int param_2)
   unsigned char temp_v7;
   
   if ((param_1 < 0x1a) && (param_1 != 7)) {
-    temp_v0 = FUN_00187180(0x43,0);
-    FUN_00192798();
-    temp_v1 = FUN_00192748(temp_v0);
+    temp_v0 = dataTableGet(0x43,0);
+    dataTableGetEntries();
+    temp_v1 = dataTableGetCount(temp_v0);
     temp_v6 = 0;
     if ((int)temp_v6 < temp_v1) {
       do {
-        temp_v0 = FUN_00187180(0x43,0);
-        temp_v2 = FUN_00192798();
-        temp_v3 = FUN_00192748(temp_v0);
+        temp_v0 = dataTableGet(0x43,0);
+        temp_v2 = dataTableGetEntries();
+        temp_v3 = dataTableGetCount(temp_v0);
         piVar7 = (int *)0x0;
         if (temp_v6 < temp_v3) {
           piVar7 = (int *)(temp_v2 + temp_v6 * 0x20);
@@ -60,8 +60,8 @@ int FUN_002d8b58(int param_1,int param_2)
             temp_v5 = temp_v5 + *(short *)((int)piVar7 + temp_v4 * 4 + 0x12);
             if (temp_v2 + 1 <= temp_v5) {
               temp_v2 = FUN_00365bc4((int)(short)piVar7[temp_v4 + 4]);
-              temp_v1 = DAT_0058104c;
-              *(int *)(DAT_0058104c + 0x18) = *piVar7;
+              temp_v1 = g_popupState;
+              *(int *)(g_popupState + 0x18) = *piVar7;
               *(int *)(temp_v1 + 0x1c) = temp_v2 + 4;
               return temp_v2 + 0x24;
             }

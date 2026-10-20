@@ -5,7 +5,7 @@
 extern "C" {
 
 int VectorSignedToFloat(unsigned int, int);
-int aeabi_uidivmod(unsigned int);
+int __aeabi_uidivmod(unsigned int);
 
 typedef struct fn_00256cd8_arg0 fn_00256cd8_arg0;
 struct fn_00256cd8_arg0 {
@@ -18,7 +18,7 @@ struct fn_00256cd8_arg0 {
 };
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_00256cd8(fn_00256cd8_arg0 *param_1,unsigned int param_2,unsigned int *param_3)
@@ -42,7 +42,7 @@ void FUN_00256cd8(fn_00256cd8_arg0 *param_1,unsigned int param_2,unsigned int *p
   }
   else {
     if ((param_1->field_0x8 & 1) != 0) {
-      aeabi_uidivmod(param_2);
+      __aeabi_uidivmod(param_2);
       param_2 = temp_v0;
     }
     else if ((*(unsigned int *)(param_1 + 1) <= param_2) &&

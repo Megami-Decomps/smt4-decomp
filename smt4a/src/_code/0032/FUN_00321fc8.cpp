@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_00271be0(unsigned int, unsigned int);
 int FUN_002e6dd4(void);
-int FUN_00387368(void);
+int asdEffectTextureCreate(void);
 
 typedef struct fn_00321fc8_arg0 fn_00321fc8_arg0;
 struct fn_00321fc8_arg0 {
@@ -23,14 +23,14 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00271be0. */
 extern unsigned int *FUN_002721e4(fn_00321fc8_arg0 *);
 extern unsigned int FUN_002b41c4(void);
 /* Supplied declaration required: FUN_002e6dd4. */
 extern unsigned int FUN_0037a7f4(unsigned int *);
 extern unsigned int *FUN_0037a834(unsigned int);
-/* Supplied declaration required: FUN_00387368. */
+/* Supplied declaration required: asdEffectTextureCreate. */
 
 
 unsigned int FUN_00321fc8(fn_00321fc8_arg0 *param_1)
@@ -55,7 +55,7 @@ unsigned int FUN_00321fc8(fn_00321fc8_arg0 *param_1)
   }
   temp_v2 = (unsigned int)param_1->field_0x1c;
   puVar3 = (unsigned int *)0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0xc,0x10,1);
+  memAlloc(0x10000,0x100,0,0xc,0x10,1);
   FUN_002e6dd4();
   *puVar3 = temp_v2;
   puVar3[1] = 1;
@@ -65,7 +65,7 @@ unsigned int FUN_00321fc8(fn_00321fc8_arg0 *param_1)
         *(unsigned int **)(temp_v1 + 0x28) = puVar3;
         return temp_v1;
       }
-      FUN_00387368();
+      asdEffectTextureCreate();
     }
     else {
       puVar2 = (unsigned int *)FUN_0037a834(*puVar2 & 0xffff);

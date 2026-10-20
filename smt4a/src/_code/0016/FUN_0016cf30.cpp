@@ -8,7 +8,7 @@ int FUN_001885e8(int *, int *, int, int, int, unsigned int *****, int, int, unsi
 int FUN_0019fc70(int *, int *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_001a007c(void);
 int FUN_001a0164(void);
-int FUN_002e6354(void);
+int sysMemClear(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_7: 12 slot(s), 48 byte(s) */
@@ -33,7 +33,7 @@ extern unsigned int DAT_005893a8; /* 0x5893a8 */
 /* Supplied declaration required: FUN_0019fc70. */
 /* Supplied declaration required: FUN_001a007c. */
 /* Supplied declaration required: FUN_001a0164. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 unsigned int *
@@ -55,7 +55,7 @@ FUN_0016cf30(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int
   piVar1 = param_1;
   FUN_001a007c();
   if (piVar1 != (int *)0x0) {
-    FUN_002e6354();
+    sysMemClear();
     FUN_001a0164();
     if (piVar1 != (int *)0x0) {
       temp_v4 = (unsigned int *****)&temp_v4;

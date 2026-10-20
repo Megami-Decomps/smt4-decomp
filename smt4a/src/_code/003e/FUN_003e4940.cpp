@@ -1,25 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e4940` (_code @ 0x3e4940, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* True when the object exists, is enabled, and none of its blocking state bits (0x2, 0x4, 0x400) are set. */
+#include "common.h"
 
 extern "C" {
 
+typedef struct {
+    u8 unk000[0x60];   /* 0x000 */
+    u16 state;         /* 0x060 */
+    u8 unk062[0xce];   /* 0x062 */
+    u32 flags;         /* 0x130 */
+} Actor;
 
-unsigned int FUN_003e4940(int param_1)
-
+u32 FUN_003e4940(Actor *actor)
 {
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  
-  if ((((param_1 == 0) || ((*(unsigned int *)(param_1 + 0x130) & 1) == 0)) ||
-      (temp_v0 = *(unsigned short *)(param_1 + 0x60), (temp_v0 & 2) != 0)) ||
-     ((temp_v0 & 0x400) != 0 || (temp_v0 & 4) != 0)) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    return actor != NULL && (actor->flags & 1) != 0 && (actor->state & 2) == 0 && (actor->state & 0x400) == 0 && (actor->state & 4) == 0;
 }
 
 } /* extern "C" */

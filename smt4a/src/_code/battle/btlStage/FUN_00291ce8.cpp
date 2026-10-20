@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_003e9fe4(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -17,11 +17,11 @@ typedef struct {
 
 extern int FUN_00276230(...); /* 0x276230 */
 extern unsigned char LAB_00291dc8; /* 0x291dc8 */
-extern int FUN_00315080(...); /* 0x315080 */
-extern int DAT_0057a4f8; /* 0x57a4f8 */
+extern int btlStageDestroy(...); /* 0x315080 */
+extern int g_btlStageModel; /* 0x57a4f8 */
 
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_003e9fe4. */
 
 
@@ -36,11 +36,11 @@ void FUN_00291ce8(unsigned int *param_1)
   unsigned char temp_v3;
   
   puVar1 = &LAB_00291dc8;
-  FUN_0015155c(&LAB_00291dc8,4,0,0,FUN_00276230,FUN_00315080,param_1,*param_1);
+  taskCreateDraw(&LAB_00291dc8,4,0,0,FUN_00276230,btlStageDestroy,param_1,*param_1);
   param_1[0x15] = (unsigned int)puVar1;
   temp_v0 = 0x100;
-  FUN_00163060(0x100,0x100,0,0xc4,1);
-  DAT_0057a4f8 = temp_v0;
+  asdMemoryAllocTracked(0x100,0x100,0,0xc4,1);
+  g_btlStageModel = temp_v0;
   *(unsigned int *)(temp_v0 + 0xb8) = 0;
   *(unsigned int *)(temp_v0 + 0xb4) = 0;
   *(unsigned int *)(temp_v0 + 0xb0) = 0;

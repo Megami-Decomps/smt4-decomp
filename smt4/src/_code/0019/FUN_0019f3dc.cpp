@@ -8,8 +8,8 @@ int FUN_002893ec(...);
 int FUN_00289508(void);
 int FUN_00289574(...);
 int FUN_002895a8(...);
-int FUN_002c43b4(...);
-int FUN_002c57c8(...);
+int jobStop(...);
+int asdSequenceRequest(...);
 
 int FUN_00289608(int, int);
 int FUN_0028971c(void);
@@ -29,14 +29,14 @@ int FUN_00291944(void);
 int FUN_00296f4c(unsigned int, int);
 int FUN_00297060(int, unsigned int);
 int FUN_002a03d8(...);
-int FUN_002a7218(void);
+int scrScriptProcessDestroy(void);
 int FUN_002b8838(int);
 int FUN_002be624(...);
 int FUN_002bff50(void);
-int FUN_002c415c(void);
+int asdMemFree(void);
 int FUN_002e2028(void);
-int FUN_002f59d0(void);
-int FUN_0031be7c(void);
+int bustupCutAnimStopJob(void);
+int eventCommandStop(void);
 int FUN_0031eb34(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -46,8 +46,8 @@ typedef struct {
 
 extern unsigned char LAB_0019f7d0; /* 0x19f7d0 */
 extern unsigned char LAB_0019f7e8; /* 0x19f7e8 */
-extern int DAT_00432fc8; /* 0x432fc8 */
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocMain; /* 0x432fc8 */
+extern int g_aocSystem; /* 0x433158 */
 extern unsigned int *DAT_0043e0d0; /* 0x43e0d0 */
 extern unsigned int DAT_004937c4; /* 0x4937c4 */
 extern unsigned int DAT_004937c8; /* 0x4937c8 */
@@ -96,19 +96,19 @@ extern int FUN_00290d74(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00296f4c. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002b8838. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bff50. */
 extern int FUN_002c1d5c(void);
 extern int FUN_002c2a04(unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
-/* Supplied declaration required: FUN_002c57c8. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
+/* Supplied declaration required: asdSequenceRequest. */
 extern unsigned int FUN_002c5c04(unsigned char *);
 /* Supplied declaration required: FUN_002e2028. */
-/* Supplied declaration required: FUN_002f59d0. */
-/* Supplied declaration required: FUN_0031be7c. */
+/* Supplied declaration required: bustupCutAnimStopJob. */
+/* Supplied declaration required: eventCommandStop. */
 /* Supplied declaration required: FUN_0031eb34. */
 
 
@@ -129,21 +129,21 @@ unsigned int FUN_0019f3dc(void)
   unsigned char temp_v8 [132];
   
   puVar2 = DAT_0043e0d0;
-  if ((*(unsigned int *)(DAT_00432fc8 + 0x754) & 4) != 0 || (*(unsigned int *)(DAT_00432fc8 + 0x754) & 8) != 0) {
+  if ((*(unsigned int *)(g_aocMain + 0x754) & 4) != 0 || (*(unsigned int *)(g_aocMain + 0x754) & 8) != 0) {
     return 0;
   }
   temp_v3 = DAT_0043e0d0[2];
   if (temp_v3 == 0x5f) {
     temp_v2 = FUN_002896bc();
-    temp_v3 = DAT_00432fc8;
+    temp_v3 = g_aocMain;
     if (temp_v2 == 0) {
       return 0;
     }
-    temp_v4 = *(unsigned int *)(DAT_00432fc8 + 0x754);
+    temp_v4 = *(unsigned int *)(g_aocMain + 0x754);
     if ((temp_v4 & 4) != 0 || (temp_v4 & 8) != 0) {
       return 0;
     }
-    *(unsigned int *)(DAT_00432fc8 + 0x754) = temp_v4 & 0xffffff8f;
+    *(unsigned int *)(g_aocMain + 0x754) = temp_v4 & 0xffffff8f;
     FUN_00289608(temp_v3 + 0xa8,0);
     puVar2[2] = 0x60;
     return 0;
@@ -156,13 +156,13 @@ unsigned int FUN_0019f3dc(void)
       puVar2[6] = DAT_004937c8;
       FUN_002be624(temp_v7,&LAB_0019f7d0,temp_v1,temp_v1);
       FUN_002be624(temp_v8,&LAB_0019f7e8,puVar2[5],puVar2[5]);
-      temp_v3 = FUN_00289e54(DAT_00433158,puVar2[5],0);
+      temp_v3 = FUN_00289e54(g_aocSystem,puVar2[5],0);
       if (temp_v3 != 0) {
-        temp_v3 = DAT_00433158;
-        FUN_00289de4(DAT_00433158,puVar2[5],0);
+        temp_v3 = g_aocSystem;
+        FUN_00289de4(g_aocSystem,puVar2[5],0);
         puVar2[0xb] = temp_v3;
-        temp_v3 = DAT_00433158;
-        FUN_00289d74(DAT_00433158,puVar2[5],0);
+        temp_v3 = g_aocSystem;
+        FUN_00289d74(g_aocSystem,puVar2[5],0);
         puVar2[0xd] = temp_v3;
         if (puVar2[0xb] == 0 || temp_v3 == 0) {
           puVar2[2] = 0x5f;
@@ -247,20 +247,20 @@ unsigned int FUN_0019f3dc(void)
         FUN_002917b8();
         FUN_002bff50();
         FUN_0028971c();
-        FUN_002f59d0();
+        bustupCutAnimStopJob();
         FUN_002e2028();
-        FUN_0031be7c();
+        eventCommandStop();
         FUN_0031eb34();
         if (puVar2[0xc] != 0) {
-          FUN_002a7218();
+          scrScriptProcessDestroy();
           puVar2[0xc] = 0;
         }
         if (puVar2[0xb] != 0) {
-          FUN_002c415c();
+          asdMemFree();
           puVar2[0xb] = 0;
         }
         if (puVar2[0xd] != 0) {
-          FUN_002c415c();
+          asdMemFree();
           puVar2[0xd] = 0;
         }
         puVar2[2] = 99;
@@ -276,11 +276,11 @@ unsigned int FUN_0019f3dc(void)
     return 0;
   }
   if (temp_v3 == 0x60) {
-    temp_v3 = FUN_002734ec(DAT_00432fc8 + 0xa8);
+    temp_v3 = FUN_002734ec(g_aocMain + 0xa8);
     if (temp_v3 == 0) {
       return 0;
     }
-    FUN_002895a8(DAT_00432fc8 + 0xa8);
+    FUN_002895a8(g_aocMain + 0xa8);
     temp_v3 = FUN_002903c8();
     if (temp_v3 == 0) {
       temp_v1 = 0x62;
@@ -290,13 +290,13 @@ unsigned int FUN_0019f3dc(void)
     }
     puVar2[2] = temp_v1;
     if (puVar2[0xb] != 0) {
-      FUN_002c415c();
+      asdMemFree();
       puVar2[0xb] = 0;
     }
     if (puVar2[0xd] == 0) {
       return 0;
     }
-    FUN_002c415c();
+    asdMemFree();
     puVar2[0xd] = 0;
     return 0;
   }
@@ -305,9 +305,9 @@ unsigned int FUN_0019f3dc(void)
       if (temp_v3 != 99) {
         return 0;
       }
-      FUN_002c43b4(*DAT_0043e0d0,0);
-      temp_v3 = DAT_00432fc8;
-      *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xffffff8f;
+      jobStop(*DAT_0043e0d0,0);
+      temp_v3 = g_aocMain;
+      *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
       if (*(char *)(temp_v3 + 0xc0) == '\0') {
         return 0;
       }
@@ -317,14 +317,14 @@ unsigned int FUN_0019f3dc(void)
     }
     if (DAT_0049fc14 != '\0') {
       if (DAT_0049f930 == 1) {
-        FUN_002c57c8(6,0);
+        asdSequenceRequest(6,0);
       }
       if (DAT_0049f930 == 2) {
-        FUN_002c57c8(8,0);
+        asdSequenceRequest(8,0);
       }
       if (DAT_0049f930 == 3) {
         temp_v6 = romwright_piece_2_2((short)DAT_0049fc1c,(short)DAT_0049fc18 - 200);
-        FUN_002c57c8(0xe,&temp_v6,4);
+        asdSequenceRequest(0xe,&temp_v6,4);
       }
     }
   }
@@ -335,27 +335,27 @@ unsigned int FUN_0019f3dc(void)
       if (temp_v0 != '\x02') {
         if (temp_v0 == '\x03') {
           temp_v6 = (unsigned int)(unsigned char)pcVar5[1];
-          FUN_002c57c8(0xe,&temp_v6,4);
+          asdSequenceRequest(0xe,&temp_v6,4);
         }
       }
       else {
         FUN_00289574((unsigned char)pcVar5[1] + 100,pcVar5[2],0xffffffff);
         DAT_0049f924 = 0xffffffff;
         temp_v1 = 8;
-        FUN_002c57c8(temp_v1,0);
+        asdSequenceRequest(temp_v1,0);
       }
     }
     else {
       FUN_00289574(pcVar5[1],pcVar5[2],pcVar5[3]);
       temp_v1 = 6;
-      FUN_002c57c8(temp_v1,0);
+      asdSequenceRequest(temp_v1,0);
     }
     DAT_0049fc14 = '\0';
     DAT_0049f970 = 0;
     FUN_00289508();
   }
-  FUN_002c43b4(*DAT_0043e0d0,0);
-  *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xffffff8f;
+  jobStop(*DAT_0043e0d0,0);
+  *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
   puVar2[2] = 100;
   return 0;
 }

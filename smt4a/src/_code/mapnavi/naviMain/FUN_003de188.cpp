@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_0031a400(...);
 int FUN_00342010(...);
 int FUN_003b61ec(...);
@@ -36,10 +36,10 @@ extern unsigned char LAB_003de414; /* 0x3de414 */
 extern unsigned int *DAT_00587f28; /* 0x587f28 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
 extern int FUN_00162e8c(void);
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0031a400. */
 /* Supplied declaration required: FUN_00342010. */
@@ -64,7 +64,7 @@ void FUN_003de188(unsigned int param_1,unsigned int param_2)
   unsigned int in_fpscr;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x206cc,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x206cc,1);
   DAT_00587f28 = puVar1;
   temp_v0 = FUN_00162e8c();
   *(unsigned char *)((int)puVar1 + 10) = 0;
@@ -95,13 +95,13 @@ void FUN_003de188(unsigned int param_1,unsigned int param_2)
   FUN_00342010();
   FUN_004930e4(param_2);
   puVar4 = &LAB_003de3f4;
-  FUN_0014e38c(&LAB_003de3f4,4,0,0,FUN_00235ce0,&LAB_00235cc4,puVar1);
+  asdProcessCreateSimple(&LAB_003de3f4,4,0,0,FUN_00235ce0,&LAB_00235cc4,puVar1);
   *puVar1 = (unsigned int)puVar4;
   puVar5 = &LAB_003de404;
-  FUN_0015155c(&LAB_003de404,0xe8,1,0,FUN_002ba754,0,puVar1,puVar4);
+  taskCreateDraw(&LAB_003de404,0xe8,1,0,FUN_002ba754,0,puVar1,puVar4);
   puVar1[1] = (unsigned int)puVar5;
   puVar4 = &LAB_003de414;
-  FUN_0015155c(&LAB_003de414,0xea,0,0,&LAB_002ba728,0,0,*puVar1);
+  taskCreateDraw(&LAB_003de414,0xea,0,0,&LAB_002ba728,0,0,*puVar1);
   puVar1[0x81ae] = (unsigned int)puVar4;
   NaviMain_ResetFlags(puVar1 + 0x81af,1);
   if (DAT_00587f28 != (unsigned int *)0x0) {

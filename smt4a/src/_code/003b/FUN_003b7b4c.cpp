@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184964(...);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 int rt_memcpy_w(int [24], unsigned char *, int);
 
 /* stack frame of param_1: 8 slot(s), 32 byte(s) */
@@ -23,7 +23,7 @@ typedef struct {
 extern unsigned char DAT_00530df0; /* 0x530df0 */
 
 /* Supplied declaration required: FUN_00184964. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -126,8 +126,8 @@ void FUN_003b7b4c(int param_1)
   temp_v10[1] = 0;
   temp_v10[2] = 0;
   temp_v10[3] = 0;
-  FUN_002e6354(param_1 + 0x1198,0x60);
-  FUN_002e6354(param_1 + 0x11f8,0x1e0);
+  sysMemClear(param_1 + 0x1198,0x60);
+  sysMemClear(param_1 + 0x11f8,0x1e0);
   temp_v5 = 0;
   do {
     temp_v0 = aiStack_a8[temp_v5];

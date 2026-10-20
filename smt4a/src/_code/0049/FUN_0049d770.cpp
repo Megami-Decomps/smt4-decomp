@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010063a(...);
+int qsort(...);
 int FUN_001643b4(...);
 int FUN_00202400(...);
 int FUN_00203b40(...);
@@ -20,13 +20,13 @@ typedef struct {
 
 extern int FUN_0049ebf0(...); /* 0x49ebf0 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_001643b4. */
 extern int FUN_0018206c(unsigned int, unsigned int);
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int FUN_0018719c(unsigned short);
-extern int FUN_00192748(unsigned int);
-extern unsigned int FUN_00192798(void);
+extern int dataTableGetCount(unsigned int);
+extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00202400. */
 /* Supplied declaration required: FUN_00203b40. */
 extern int FUN_00341940(unsigned int);
@@ -58,10 +58,10 @@ void FUN_0049d770(int param_1)
      (temp_v1 = FUN_0018206c(0x33,0), temp_v1 == 0)) {
     return;
   }
-  temp_v2 = FUN_00187180(0x46,0);
-  temp_v3 = FUN_00192798();
+  temp_v2 = dataTableGet(0x46,0);
+  temp_v3 = dataTableGetEntries();
   *(unsigned int *)(param_1 + 0x10) = temp_v3;
-  temp_v1 = FUN_00192748(temp_v2);
+  temp_v1 = dataTableGetCount(temp_v2);
   temp_v6 = 0;
   temp_v5 = 0;
   *(int *)(param_1 + 0x14) = temp_v1;
@@ -93,7 +93,7 @@ void FUN_0049d770(int param_1)
     } while (temp_v5 < *(unsigned int *)(param_1 + 0x14));
   }
   *(int *)(param_1 + 0x80) = temp_v6;
-  FUN_0010063a(param_1 + 0x18,temp_v6,2,FUN_0049ebf0);
+  qsort(param_1 + 0x18,temp_v6,2,FUN_0049ebf0);
   FUN_00203b40(param_1 + 0x18c,*(unsigned int *)(param_1 + 0x80),10,1,1,1);
   *(unsigned int *)(param_1 + 0x1f0) = 0;
   *(unsigned int *)(param_1 + 500) = 0;

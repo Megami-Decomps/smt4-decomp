@@ -19,14 +19,14 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int DAT_0043427c; /* 0x43427c */
+extern int g_btlScriptUnit; /* 0x43427c */
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00227ab4. */
 /* Supplied declaration required: FUN_00227b14. */
 /* Supplied declaration required: FUN_002296f4. */
 /* Supplied declaration required: FUN_0022a5d8. */
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_002550d8. */
 extern int FUN_00255158(int, unsigned int);
 /* Supplied declaration required: FUN_002569ac. */
@@ -65,7 +65,7 @@ unsigned int FUN_003d2ea0(int *param_1,unsigned int *param_2)
     FUN_0022a5d8(temp_v1,puVar5,1);
     FUN_0026beb4(temp_v5,param_2,0,param_2[9],1);
     FUN_002296f4(param_1,param_2,(int)*(short *)(param_2[9] + 0x62),0,0x1e,0x1e);
-    *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1b;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1b;
   }
   else if ((temp_v0 & 0x100) != 0) {
     if ((*(unsigned int *)param_2[8] & 0x30) == 0) {
@@ -76,7 +76,7 @@ unsigned int FUN_003d2ea0(int *param_1,unsigned int *param_2)
     FUN_0022a5d8(temp_v1,puVar5,1);
     FUN_0026beb4(temp_v5,param_2,0,param_2[9],1);
     FUN_002296f4(param_1,param_2,(int)*(short *)(param_2[9] + 0x62),0,0x1e,0x1e);
-    *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1b;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1b;
   }
   else if ((*(unsigned int *)param_2[8] & 0x60000) != 0) {
     if ((*(unsigned int *)param_2[8] & 0x30) == 0) {
@@ -98,13 +98,13 @@ unsigned int FUN_003d2ea0(int *param_1,unsigned int *param_2)
     }
     FUN_0026beb4(temp_v5,param_2,0,param_2[9],1);
     FUN_002296f4(param_1,param_2,(int)*(short *)(param_2[9] + 0x62),0,0x1e,0x1e);
-    *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1b;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1b;
   }
   else {
     if ((temp_v0 & 0x40) == 0) {
       return 1;
     }
-    temp_v2 = FUN_0023eae0(99);
+    temp_v2 = randRange(99);
     if (((*(unsigned int *)(*param_1 + 0x44a0) & 0x40000) == 0) && (temp_v2 < 0x32)) {
       FUN_003c0484(param_2[8],0,1);
       if ((*(unsigned int *)param_2[8] & 0x30) != 0) {
@@ -114,14 +114,14 @@ unsigned int FUN_003d2ea0(int *param_1,unsigned int *param_2)
         else {
           temp_v3 = 3;
         }
-        *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = temp_v3;
+        *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = temp_v3;
       }
       else {
-        *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
+        *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
       }
     }
     else {
-      *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x11;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x11;
     }
   }
   if ((*(unsigned int *)param_2[8] & 0x60000) != 0) {

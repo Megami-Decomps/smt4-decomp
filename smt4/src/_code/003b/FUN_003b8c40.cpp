@@ -16,7 +16,7 @@ extern unsigned char LAB_003b8e04; /* 0x3b8e04 */
 extern unsigned char LAB_003b8e14; /* 0x3b8e14 */
 extern unsigned char LAB_003b8e28; /* 0x3b8e28 */
 extern unsigned char LAB_003b8e40; /* 0x3b8e40 */
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_0022b064. */
@@ -46,7 +46,7 @@ void FUN_003b8c40(int param_1)
     FUN_0022b064(param_1);
     temp_v0 = FUN_0023360c(param_1 + 0x9c);
     *(unsigned short *)(param_1 + 0x4c) = temp_v0;
-    if (*(char *)(DAT_00432fc8 + 0xc1) == '\0') {
+    if (*(char *)(g_aocMain + 0xc1) == '\0') {
       temp_v1 = *(int *)(param_1 + 0xdb0);
       if (temp_v1 != 1) {
         if (temp_v1 == 2) {
@@ -97,7 +97,7 @@ void FUN_003b8c40(int param_1)
       *(unsigned int *)(param_1 + 0xdb0) = 0;
       return;
     }
-    *(unsigned char *)(DAT_00432fc8 + 0xc1) = 0;
+    *(unsigned char *)(g_aocMain + 0xc1) = 0;
     *(unsigned int *)(param_1 + 0x28) = 10;
     *(unsigned int *)(param_1 + 0x2c) = 0;
   }

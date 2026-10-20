@@ -1,24 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016a10c` (_code @ 0x16a10c, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the mode word is built through an extra register copy (mov r3, #1; mov r2, r3) and a branch where retail predicates the store (movne r2, #1; strne r2, [r0, #36]). */
+#include "common.h"
 
 extern "C" {
 
+#define FLAG_ENABLED 0x01
+#define FLAG_EXTRA   0x02
+#define MODE_ENABLED 0x01
+#define MODE_EXTRA   0x10
 
-void FUN_0016a10c(int param_1,unsigned int param_2)
+typedef struct Config {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ u32 mode;
+} Config;
 
+/* Translates the request flags (bit 0, bit 1) into the config's mode word (bit 0, bit 4). */
+void FUN_0016a10c(Config *config, u32 flags)
 {
-  unsigned char temp_v0;
-  
-  temp_v0 = (param_2 & 1) != 0;
-  *(unsigned int *)(param_1 + 0x24) = 0;
-  if (temp_v0) {
-    *(unsigned int *)(param_1 + 0x24) = 1;
-  }
-  if ((param_2 & 2) != 0) {
-    *(unsigned int *)(param_1 + 0x24) = temp_v0 | 0x10;
-  }
-  return;
+    u32 mode = 0;
+
+    config->mode = mode;
+    if ((flags & FLAG_ENABLED) != 0) {
+        mode = MODE_ENABLED;
+        config->mode = mode;
+    }
+    if ((flags & FLAG_EXTRA) != 0) {
+        config->mode = mode | MODE_EXTRA;
+    }
 }
 
 } /* extern "C" */

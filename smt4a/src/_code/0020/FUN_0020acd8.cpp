@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_001641c4(void);
-int FUN_001681cc(void);
+int sysPlaySe(void);
 int FUN_001b4a90(int, int, unsigned int);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_0020ad6c(int, int, int);
@@ -20,10 +20,10 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001641c4. */
 extern int FUN_00167f08(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_0020ad6c. */
@@ -138,20 +138,20 @@ void FUN_0020acd8(int param_1,unsigned int param_2,int param_3)
     }
     if (*piVar3 == 0x13 || *piVar3 == 0x16) {
       FUN_00341f88();
-      FUN_001681cc();
+      sysPlaySe();
     }
     temp_v0 = *piVar3;
     if ((temp_v0 == 0x22 || temp_v0 == 0x23) || temp_v0 == 0x24) {
       FUN_00341f88();
-      FUN_001681cc();
+      sysPlaySe();
     }
     temp_v0 = FUN_00167f08();
     if (temp_v0 == 0x3f) {
-      FUN_0014aa78();
+      btlGetMainState();
       temp_v0 = FUN_003e8430();
       if (temp_v0 == 0) {
         FUN_00341f88();
-        FUN_001681cc();
+        sysPlaySe();
       }
     }
     if (*piVar3 == 7) {

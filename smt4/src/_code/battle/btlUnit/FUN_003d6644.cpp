@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b9024(void);
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00493554; /* 0x493554 */
 extern unsigned int DAT_00493558; /* 0x493558 */
 extern unsigned int DAT_0049355c; /* 0x49355c */
@@ -44,7 +44,7 @@ void FUN_003d6644(int param_1,int param_2,int param_3)
   if ((*(unsigned int *)(param_2 + 0xe4) & 0x10) != 0 || (*puVar4 & 0x200) != 0) {
     return;
   }
-  if ((DAT_004342c8 != 0) && ((*(unsigned int *)(DAT_004342c8 + 0x634) & 0x2000000) != 0)) {
+  if ((g_btlMain != 0) && ((*(unsigned int *)(g_btlMain + 0x634) & 0x2000000) != 0)) {
     return;
   }
   *(unsigned int *)(param_1 + 0x75c) = *(unsigned int *)(param_1 + 0x760);

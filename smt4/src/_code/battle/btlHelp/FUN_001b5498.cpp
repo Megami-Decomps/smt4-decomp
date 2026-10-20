@@ -10,9 +10,9 @@ int FUN_0027e7b4(unsigned int, unsigned int);
 int FUN_00295660(unsigned int, unsigned char [100]);
 int FUN_002bd06c(unsigned int);
 int FUN_002bf694(unsigned char [100], unsigned int);
-int FUN_002c08f0(void);
-int FUN_002c415c(void);
-int FUN_002c4938(unsigned char [100], int);
+int jobGetWork(void);
+int asdMemFree(void);
+int memClear(unsigned char [100], int);
 
 extern unsigned int *DAT_00435d78; /* 0x435d78 */
 
@@ -25,9 +25,9 @@ extern int FUN_002b6b04(void);
 /* Supplied declaration required: FUN_002bd06c. */
 extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c08f0. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: jobGetWork. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_001b5498(void)
@@ -43,7 +43,7 @@ unsigned int FUN_001b5498(void)
   short *psVar7;
   unsigned char temp_v4 [100];
   
-  FUN_002c08f0();
+  jobGetWork();
   if (DAT_00435d78 == (unsigned int *)0x0) {
     return 0;
   }
@@ -68,7 +68,7 @@ unsigned int FUN_001b5498(void)
       *(unsigned int *)(*(int *)(psVar2 + 0x152) + 0x2a8) = *(unsigned int *)(psVar2 + 0x154);
     }
     puVar3[2] = puVar3[2] - 1;
-    FUN_002c415c();
+    asdMemFree();
     psVar2 = psVar7;
   }
   if (psVar2[1] != 0) {
@@ -81,7 +81,7 @@ unsigned int FUN_001b5498(void)
   else {
     temp_v3 = FUN_002b6b04();
     if ((temp_v3 == 0) && (temp_v3 = FUN_00295bd0(), temp_v3 == 0)) {
-      FUN_002c4938(temp_v4,0x60);
+      memClear(temp_v4,0x60);
       temp_v0 = *psVar2;
       if (temp_v0 != 0) {
         if (temp_v0 == 1) {

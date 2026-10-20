@@ -30,12 +30,12 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_002ae8e4. */
 extern int FUN_002ae98c(unsigned int, unsigned int, unsigned int, unsigned int);
 extern unsigned short *FUN_002aecd8(int, unsigned int);
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 extern int FUN_002c1d5c(void);
 /* Supplied declaration required: FUN_002c58c8. */
 
@@ -48,7 +48,7 @@ void FUN_0012630c(fn_0012630c_arg0 *param_1,unsigned int param_2,int param_3)
   unsigned short *puVar2;
   int temp_v1;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   if ((*(int *)(temp_v0 + 0x54) != 0) && (*(int *)(temp_v0 + 0x48) == 0)) {
     if (param_3 == 0) {
       *(unsigned int *)(temp_v0 + 0x34) = 0;
@@ -71,10 +71,10 @@ void FUN_0012630c(fn_0012630c_arg0 *param_1,unsigned int param_2,int param_3)
         if (temp_v1 == 0) {
           *(unsigned int *)(temp_v0 + 0xc) = 0;
           *(unsigned int *)(temp_v0 + 0x2c) = 0x3f800000;
-          temp_v1 = FUN_002ae98c(DAT_00433158,*(unsigned int *)(temp_v0 + 0x3c),
+          temp_v1 = FUN_002ae98c(g_aocSystem,*(unsigned int *)(temp_v0 + 0x3c),
                                *(unsigned int *)(temp_v0 + 0x40),1);
           if (temp_v1 != 0) {
-            FUN_002ae8e4(DAT_00433158,*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40),
+            FUN_002ae8e4(g_aocSystem,*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40),
                          0x10000);
             return;
           }

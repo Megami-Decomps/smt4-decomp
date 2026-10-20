@@ -9,7 +9,7 @@ int VectorSignedToFloat(int, int);
 
 extern unsigned char DAT_0044de28; /* 0x44de28 */
 extern unsigned char DAT_0044de29; /* 0x44de29 */
-extern int DAT_0044de2c; /* 0x44de2c */
+extern int g_saveLoadUI; /* 0x44de2c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00202ab4. */
@@ -26,8 +26,8 @@ void FUN_0030a9d8(void)
   unsigned int temp_v2;
   
   FUN_00202ab4(0);
-  temp_v0 = DAT_0044de2c;
-  *(unsigned int *)(DAT_0044de2c + 0x14) = 0;
+  temp_v0 = g_saveLoadUI;
+  *(unsigned int *)(g_saveLoadUI + 0x14) = 0;
   DAT_0044de28 = 0;
   DAT_0044de29 = 0;
   *(unsigned char *)(temp_v0 + 0x49) = 0;

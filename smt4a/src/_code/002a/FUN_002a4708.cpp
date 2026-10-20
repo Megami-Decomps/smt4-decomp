@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(unsigned char *, int, int, int, unsigned char *, int, int);
-int FUN_0015155c(...);
-int FUN_0016007c(void);
+int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
+int taskCreateDraw(...);
+int asdOperatorNew(void);
 int FUN_0049d140(...);
 int FUN_0049d3f0(...);
 
@@ -28,9 +28,9 @@ extern unsigned char LAB_002c2b88; /* 0x2c2b88 */
 extern unsigned char LAB_002c2bac; /* 0x2c2bac */
 extern unsigned int *DAT_0057f240; /* 0x57f240 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_0049d140. */
 /* Supplied declaration required: FUN_0049d3f0. */
 
@@ -43,14 +43,14 @@ void FUN_002a4708(void)
   unsigned char *puVar2;
   
   puVar1 = (unsigned int *)0x478;
-  FUN_0016007c();
+  asdOperatorNew();
   puVar2 = &LAB_002a47f4;
   DAT_0057f240 = puVar1;
-  FUN_0014e38c(&LAB_002a47f4,4,0,0,&LAB_002840fc,0,0);
+  asdProcessCreateSimple(&LAB_002a47f4,4,0,0,&LAB_002840fc,0,0);
   *puVar1 = (unsigned int)puVar2;
-  FUN_0015155c(&LAB_002a4804,0x7e,0,0,&LAB_002c2bac,0,0,puVar2);
-  FUN_0015155c(&LAB_002a4810,0xda,0,0,&LAB_002c2bac,0,0,*puVar1);
-  FUN_0015155c(&LAB_002a4820,0xeb,0,0,&LAB_002c2b88,0,0,*puVar1);
+  taskCreateDraw(&LAB_002a4804,0x7e,0,0,&LAB_002c2bac,0,0,puVar2);
+  taskCreateDraw(&LAB_002a4810,0xda,0,0,&LAB_002c2bac,0,0,*puVar1);
+  taskCreateDraw(&LAB_002a4820,0xeb,0,0,&LAB_002c2b88,0,0,*puVar1);
   FUN_0049d3f0(puVar1);
   puVar1[0x11b] = 0;
   FUN_0049d140(puVar1,2,0);

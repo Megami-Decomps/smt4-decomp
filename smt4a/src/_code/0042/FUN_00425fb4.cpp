@@ -12,7 +12,7 @@ int FUN_0043a4a8(unsigned int, int, int, int);
 int FUN_0043a59c(unsigned int, int, int, int);
 int FUN_0043a654(int);
 int FUN_0043a718(int);
-int FUN_0043a734(void);
+int nnResultCheckReport0043aab4(void);
 int FUN_0043a750(int);
 int FUN_0043a76c(void);
 int FUN_0043a794(void);
@@ -40,7 +40,7 @@ extern int DAT_00589538; /* 0x589538 */
 /* Supplied declaration required: FUN_0043a59c. */
 /* Supplied declaration required: FUN_0043a654. */
 /* Supplied declaration required: FUN_0043a718. */
-/* Supplied declaration required: FUN_0043a734. */
+/* Supplied declaration required: nnResultCheckReport0043aab4. */
 /* Supplied declaration required: FUN_0043a750. */
 /* Supplied declaration required: FUN_0043a76c. */
 /* Supplied declaration required: FUN_0043a794. */
@@ -71,7 +71,7 @@ void FUN_00425fb4(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   temp_v3 = param_10;
   temp_v2 = param_9;
   puVar7 = (unsigned int *)&param_9;
-  FUN_0043a734();
+  nnResultCheckReport0043aab4();
   do {
     FUN_0043a794();
   } while (puVar7 != (unsigned int *)0x0);

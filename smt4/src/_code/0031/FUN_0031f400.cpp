@@ -1,65 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031f400` (_code @ 0x31f400, 0x120 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail predicates the -1 (mvneq) and has no alignment nop before the final scrSetResult call; built emits an unconditional mvn and a nop. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00282924(int, int);
-int FUN_0028dcb0(int);
-int FUN_002c4938(int [109], int);
+/* Per-entity detail record; bit 9 of the halfword at 0x16 marks an eligible entity. */
+typedef struct {
+    u8 unk00[0x16];
+    u16 flags;          /* 0x16 */
+} EntityDetail;
 
-extern int FUN_0024ea50(unsigned short);
-/* Supplied declaration required: FUN_00282924. */
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_002939f4(void);
-extern int FUN_002c09f4(unsigned int);
-/* Supplied declaration required: FUN_002c4938. */
+/* 0x288-byte entity record. */
+typedef struct {
+    u32 flags;          /* 0x000: bit 0 active, bit 4 enabled, bit 6 hidden */
+    u8 unk04[4];
+    s16 id;             /* 0x008 */
+    u8 unk0a[0x64];
+    s16 group;          /* 0x06e */
+    u8 unk70[0x5e];
+    u16 type;           /* 0x0ce */
+    u8 unkd0[0xfc];
+    u16 level;          /* 0x1cc */
+    u8 unk1ce[0xb6];
+    EntityDetail *detail; /* 0x284 */
+} Entity;
 
+/* Game state with an entity array pointer at 0x1fc0 and the player's entity index at 0x225a. */
+typedef struct {
+    u8 unk00[0x1fc0];
+    Entity *entities;   /* 0x1fc0 */
+    u8 unk1fc4[0x296];
+    s16 playerIndex;    /* 0x225a */
+} GameState;
 
-unsigned int FUN_0031f400(void)
+#define ENTITY_COUNT 109
 
+GameState *btlGetMainState(void);
+Entity *FUN_00282924(GameState *state, int index);
+int FUN_0024ea50(u16 type);
+int scrSetResult(int id);
+int FUN_002c09f4(u32 range);
+int memClear(Entity **buffer, int size);
+
+/* Collects the eligible other-group entities no stronger than the player's and reports the id of a random one (-1 if none). */
+u32 FUN_0031f400(void)
 {
-/* irregular: 3 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int *puVar6;
-  unsigned char temp_v5;
-  int aiStack_1d0 [109];
-  
-  temp_v1 = FUN_002939f4();
-  temp_v0 = *(short *)(temp_v1 + 0x225a);
-  temp_v1 = FUN_002939f4();
-  FUN_00282924(temp_v1,(int)temp_v0);
-  FUN_002c4938(aiStack_1d0,0x1b4);
-  temp_v5 = 0;
-  temp_v4 = 0;
-  do {
-    temp_v2 = FUN_002939f4();
-    puVar6 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288);
-    temp_v3 = *puVar6;
-    if (((((((temp_v3 & 1) != 0) && ((temp_v3 & 0x40) == 0)) && ((temp_v3 & 0x10) != 0)) &&
-         ((*(short *)((int)puVar6 + 0x6e) != *(short *)(temp_v1 + 0x6e) &&
-          ((unsigned short)puVar6[0x73] <= *(unsigned short *)(temp_v1 + 0x1cc))))) &&
-        ((temp_v2 = FUN_0024ea50(*(unsigned short *)((int)puVar6 + 0xce)), temp_v2 == 0 &&
-         ((puVar6[0xa1] != 0 && ((*(unsigned short *)(puVar6[0xa1] + 0x16) & 0x200) != 0)))))) &&
-       (*(short *)(temp_v1 + 0xce) != *(short *)((int)puVar6 + 0xce))) {
-      aiStack_1d0[temp_v5] = (int)puVar6;
-      temp_v5 = temp_v5 + 1;
+    Entity *candidates[ENTITY_COUNT];
+    Entity *player;
+    u8 count;
+    int i;
+    int id;
+
+    player = FUN_00282924(btlGetMainState(), btlGetMainState()->playerIndex);
+    memClear(candidates, sizeof(candidates));
+    count = 0;
+    i = 0;
+    do {
+        Entity *entity = &btlGetMainState()->entities[i];
+        u32 flags = entity->flags;
+
+        if ((flags & 1) != 0 && (flags & 0x40) == 0 && (flags & 0x10) != 0 && entity->group != player->group
+            && entity->level <= player->level && FUN_0024ea50(entity->type) == 0 && entity->detail != NULL
+            && (entity->detail->flags & 0x200) != 0 && player->type != entity->type) {
+            candidates[count] = entity;
+            count++;
+        }
+        i++;
+    } while (i < ENTITY_COUNT);
+    if (count == 0) {
+        id = -1;
+    } else {
+        id = candidates[FUN_002c09f4((count - 1) & 0xffff)]->id;
     }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 0x6d);
-  if (temp_v5 == 0) {
-    temp_v1 = -1;
-  }
-  else {
-    temp_v1 = FUN_002c09f4((temp_v5 - 1) & 0xffff);
-    temp_v1 = (int)*(short *)(aiStack_1d0[temp_v1] + 8);
-  }
-  FUN_0028dcb0(temp_v1);
-  return 1;
+    scrSetResult(id);
+    return 1;
 }
 
 } /* extern "C" */

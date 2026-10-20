@@ -25,7 +25,7 @@ extern int DAT_005b3c74; /* 0x5b3c74 */
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
 /* Supplied declaration required: FUN_001b5314. */
-extern unsigned int FUN_002e3390(unsigned char *);
+extern unsigned int wstrlen(unsigned char *);
 extern int nw_ut_ResDicPatricia_Get(int *, unsigned char *, unsigned int);
 
 
@@ -101,7 +101,7 @@ LAB_001acd0c:
           }
           temp_v9 = &temp_v8;
           if (temp_v8 != 0) {
-            temp_v1 = FUN_002e3390(&LAB_001acefc);
+            temp_v1 = wstrlen(&LAB_001acefc);
             temp_v0 = nw_ut_ResDicPatricia_Get(temp_v9,&LAB_001acefc,temp_v1);
             if (temp_v0 != 0) {
               temp_v2 = *(int *)(temp_v0 + 0xc);

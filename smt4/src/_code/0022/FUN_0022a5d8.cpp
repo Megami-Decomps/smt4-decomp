@@ -14,7 +14,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_0022a4ac. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 
 
 void FUN_0022a5d8(unsigned int param_1,int param_2,unsigned int param_3)
@@ -26,7 +26,7 @@ void FUN_0022a5d8(unsigned int param_1,int param_2,unsigned int param_3)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   if ((*(unsigned int *)(temp_v0 + 0x44a0) & 0x40) == 0 && (*(unsigned int *)(temp_v0 + 0x44a0) & 0x100) == 0) {
     if (param_2 != 0) {
       temp_v2 = *(unsigned int *)(temp_v0 + 0x2230);
@@ -34,7 +34,7 @@ void FUN_0022a5d8(unsigned int param_1,int param_2,unsigned int param_3)
       temp_v1 = 1;
     }
     else {
-      temp_v0 = FUN_002939f4();
+      temp_v0 = btlGetMainState();
       if ((*(unsigned int *)(temp_v0 + 0x44a0) & 0x40) != 0 || (*(unsigned int *)(temp_v0 + 0x44a0) & 0x100) != 0) {
         return;
       }

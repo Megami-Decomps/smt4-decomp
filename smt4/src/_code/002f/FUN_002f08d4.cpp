@@ -1,82 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f08d4` (_code @ 0x2f08d4, 0x138 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Checks whether any usable unit (or the fallback unit) has `value` in the stat slot selected by scrGetArg(1); always returns 1 and reports the result through scrSetResult. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002499fc(unsigned int, int *, int *);
-int FUN_0028dcb0(int);
-int FUN_002939f4(void);
-int FUN_00296cc8(int);
+typedef struct Unit {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x6E];
+    /* 0x072 */ s16 stats[1];
+    /* 0x074 */ u8 unk074[0x214];
+} Unit; /* 0x288 */
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+typedef struct UnitManager {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ Unit *units;
+    /* 0x1FC4 */ u8 unk1FC4[0x2A01];
+    /* 0x49C5 */ s8 hasFallback;
+} UnitManager;
 
-extern int FUN_002499b4(void);
-/* Supplied declaration required: FUN_002499fc. */
-extern unsigned int FUN_00249a54(void);
-/* Supplied declaration required: FUN_0028dcb0. */
-/* Supplied declaration required: FUN_002939f4. */
-/* Supplied declaration required: FUN_00296cc8. */
+extern UnitManager *btlGetMainState(void);
+extern Unit *FUN_002499b4(void);
+extern u32 FUN_00249a54(void);
+extern void FUN_002499fc(u32 owner, s32 *first, s32 *count);
+extern void scrSetResult(s32 found);
+extern s32 scrGetArg(s32 index);
 
-
-unsigned int FUN_002f08d4(void)
-
+u32 FUN_002f08d4(void)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  
-  FUN_00296cc8(0);
-  temp_v0 = FUN_00249a54();
-  temp_v1 = FUN_00296cc8(1);
-  temp_v5 = 0;
-  if (temp_v1 == 0) {
-    temp_v5 = 7;
-  }
-  else if (temp_v1 == 1) {
-    temp_v5 = 10;
-  }
-  else if (temp_v1 == 2) {
-    temp_v5 = 0xb;
-  }
-  temp_v2 = FUN_00296cc8(2);
-  FUN_002499fc(temp_v0,&temp_v6,&temp_v7);
-  temp_v1 = temp_v6;
-  if (temp_v6 < temp_v7 + temp_v6) {
-    do {
-      temp_v3 = FUN_002939f4();
-      puVar5 = (unsigned int *)(*(int *)(temp_v3 + 0x1fc0) + temp_v1 * 0x288);
-      temp_v4 = *puVar5;
-      if (((((temp_v4 & 0x10) == 0) && ((temp_v4 & 1) != 0)) && ((temp_v4 & 0x40) == 0)) &&
-         (*(short *)((int)puVar5 + temp_v5 * 2 + 0x72) == temp_v2)) {
-        FUN_0028dcb0(1);
-        return 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < temp_v6 + temp_v7);
-  }
-  temp_v1 = FUN_002939f4();
-  if (*(signed char *)(temp_v1 + 0x49c5) != 0) {
-    FUN_002939f4();
-    temp_v1 = FUN_002499b4();
-    if ((temp_v1 != 0) && (*(short *)(temp_v1 + temp_v5 * 2 + 0x72) == temp_v2)) {
-      FUN_0028dcb0(1);
-      return 1;
+    u32 owner;
+    s32 slot;
+    s32 kind;
+    s32 value;
+    s32 first;
+    s32 count;
+    s32 i;
+
+    scrGetArg(0);
+    owner = FUN_00249a54();
+    kind = scrGetArg(1);
+    slot = 0;
+    if (kind == 0) {
+        slot = 7;
+    } else if (kind == 1) {
+        slot = 10;
+    } else if (kind == 2) {
+        slot = 11;
     }
-  }
-  FUN_0028dcb0(0);
-  return 1;
+    value = scrGetArg(2);
+    FUN_002499fc(owner, &first, &count);
+    for (i = first; i < first + count; i++) {
+        Unit *unit = &btlGetMainState()->units[i];
+
+        if ((unit->flags & 0x10) == 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0
+            && unit->stats[slot] == value) {
+            scrSetResult(1);
+            return 1;
+        }
+    }
+    if (btlGetMainState()->hasFallback != 0) {
+        Unit *unit;
+
+        btlGetMainState();
+        unit = FUN_002499b4();
+        if (unit != NULL && unit->stats[slot] == value) {
+            scrSetResult(1);
+            return 1;
+        }
+    }
+    scrSetResult(0);
+    return 1;
 }
 
-} /* extern "C" */
+}

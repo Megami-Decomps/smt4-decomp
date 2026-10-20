@@ -20,7 +20,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_0019d874; /* 0x19d874 */
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
 extern unsigned int DAT_00439a20; /* 0x439a20 */
 extern unsigned int DAT_00439a24; /* 0x439a24 */
@@ -59,7 +59,7 @@ void FUN_00336bec(int param_1)
   int temp_v12;
   int temp_v13;
   
-  *(unsigned int *)(DAT_004342c8 + 0x634) = *(unsigned int *)(DAT_004342c8 + 0x634) | 0x4000;
+  *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x4000;
   temp_v13 = param_1;
   FUN_00240614(DAT_00435d18);
   temp_v9 = 0;
@@ -113,7 +113,7 @@ void FUN_00336bec(int param_1)
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < temp_v9);
   }
-  FUN_0024082c(DAT_004342c8,0x78);
+  FUN_0024082c(g_btlMain,0x78);
   return;
 }
 

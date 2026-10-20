@@ -37,7 +37,7 @@ typedef struct {
     unsigned int sp128; /* 0x128: local_128 */
 } param_3_stack;
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 extern unsigned int FUN_00152f54(void);
@@ -95,7 +95,7 @@ void FUN_0032c5ec(float *param_1,unsigned int param_2,int param_3)
   temp_v4 = 0.0f;
   temp_v0 = FUN_00152f54();
   if (param_3 == 0) {
-    param_3 = FUN_0040970c(DAT_0059dbb4);
+    param_3 = FUN_0040970c(g_renderCtx);
   }
   FUN_00167bc8(param_3,&temp_v10,0x40);
   temp_v13 = *param_1;

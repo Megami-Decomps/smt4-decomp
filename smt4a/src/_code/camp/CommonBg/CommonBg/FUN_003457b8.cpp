@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0014384c(int);
 int FUN_0014afd0(int, int);
-int FUN_0015155c(...);
-int FUN_001630d4(int, int, int, int, int);
+int taskCreateDraw(...);
+int asdMemoryAlloc(int, int, int, int, int);
 int FUN_0023723c(unsigned int, int, unsigned int, int, int, unsigned char *);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -30,9 +30,9 @@ extern unsigned int *DAT_0057f210; /* 0x57f210 */
 
 /* Supplied declaration required: FUN_0014384c. */
 /* Supplied declaration required: FUN_0014afd0. */
-extern unsigned int FUN_0014bce0(unsigned int);
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_001630d4. */
+extern unsigned int spriteHandleCreate(unsigned int);
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0023723c. */
 
 
@@ -45,7 +45,7 @@ void FUN_003457b8(void)
   unsigned char *puVar3;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_001630d4(0x100,0x100,0,0x24,1);
+  asdMemoryAlloc(0x100,0x100,0,0x24,1);
   *puVar1 = 0;
   puVar1[1] = 0;
   puVar1[2] = 0;
@@ -56,18 +56,18 @@ void FUN_003457b8(void)
   puVar1[7] = 0;
   puVar1[8] = 0;
   DAT_0057f210 = puVar1;
-  temp_v0 = FUN_0014bce0(0);
+  temp_v0 = spriteHandleCreate(0);
   puVar1[3] = temp_v0;
   FUN_0023723c(temp_v0,2,0xffffffff,0,0,&LAB_00345924);
-  temp_v0 = FUN_0014bce0(0);
+  temp_v0 = spriteHandleCreate(0);
   puVar1[4] = temp_v0;
   FUN_0023723c(temp_v0,2,0xffffffff,0,0,&LAB_00345934);
   FUN_0014384c(0x22);
   FUN_0014afd0(0x22,0);
   puVar3 = &LAB_0034596c;
-  FUN_0015155c(&LAB_0034596c,4,8,0,FUN_0031a5e4,FUN_0036dfa8,puVar1,*DAT_0057f20c);
+  taskCreateDraw(&LAB_0034596c,4,8,0,FUN_0031a5e4,FUN_0036dfa8,puVar1,*DAT_0057f20c);
   *puVar1 = (unsigned int)puVar3;
-  FUN_0015155c(&LAB_00345980,0xeb,8,0,FUN_0036dff4,0,puVar1,puVar3);
+  taskCreateDraw(&LAB_00345980,0xeb,8,0,FUN_0036dff4,0,puVar1,puVar3);
   return;
 }
 

@@ -12,7 +12,7 @@ int FUN_004a9c40(unsigned int, unsigned int, unsigned int);
 int FUN_004aa7c8(unsigned int);
 int FUN_004eb838(int *, unsigned int *);
 
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571150; /* 0x571150 */
 extern unsigned int DAT_00571154; /* 0x571154 */
 extern unsigned int DAT_00571160; /* 0x571160 */
@@ -94,7 +94,7 @@ unsigned int FUN_004dc72c(int *param_1,unsigned int *param_2)
   switch(*(unsigned short *)(param_2[10] + 0x1be)) {
   case 1:
   case 0xe:
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 6;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 6;
     break;
   case 2:
   case 3:
@@ -102,14 +102,14 @@ unsigned int FUN_004dc72c(int *param_1,unsigned int *param_2)
     temp_v1 = FUN_00333758();
 joined_r0x004dca3c:
     if (temp_v1 != 0) {
-      *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 6;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 6;
       break;
     }
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 8;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 8;
     break;
   case 4:
   case 0xb:
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0xb;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0xb;
     break;
   case 6:
   case 0xf:
@@ -119,10 +119,10 @@ joined_r0x004dca3c:
     temp_v0 = *(short *)(param_2[10] + 0x1c0);
     param_2[0x16a] = (int)temp_v0;
     if ((int)temp_v0 == 4) {
-      *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0xb;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0xb;
       break;
     }
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 6;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 6;
     break;
   case 8:
     temp_v1 = (int)*(short *)(param_2[10] + 0x1c0);
@@ -132,7 +132,7 @@ joined_r0x004dca3c:
       temp_v1 = FUN_00333758();
       goto joined_r0x004dca3c;
     }
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 8;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 8;
     break;
   case 9:
   case 10:
@@ -140,10 +140,10 @@ joined_r0x004dca3c:
     if ((((DAT_00571150 | DAT_00571160) & *(unsigned int *)param_2[8]) != 0 ||
          ((DAT_00571154 | DAT_00571164) & ((unsigned int *)param_2[8])[1]) != 0) &&
        (temp_v1 = FUN_003e7adc(*param_1), temp_v1 == 0)) {
-      *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0xb;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0xb;
       return 1;
     }
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 8;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 8;
   }
   return 1;
 }

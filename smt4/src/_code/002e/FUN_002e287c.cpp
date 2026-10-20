@@ -13,7 +13,7 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_0028529c. */
-extern unsigned char FUN_00296cc8(unsigned int);
+extern unsigned char scrGetArg(unsigned int);
 
 
 unsigned int FUN_002e287c(void)
@@ -23,8 +23,8 @@ unsigned int FUN_002e287c(void)
   unsigned char temp_v0;
   unsigned char temp_v1;
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_00296cc8(1);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
   FUN_0028529c(temp_v0,temp_v1,0,0,0,0);
   return 1;
 }

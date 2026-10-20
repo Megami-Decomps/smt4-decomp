@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b2144(...);
-int FUN_002bfe28(float *, unsigned int);
+int mtx44Copy(float *, unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 int nn_math_ARMv6_MTX44MultAsm(...);
 
@@ -28,7 +28,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern unsigned int FUN_002a7bc0(void);
 /* Supplied declaration required: FUN_002b2144. */
-/* Supplied declaration required: FUN_002bfe28. */
+/* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 
 
@@ -70,7 +70,7 @@ void FUN_00291434(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   temp_v5 = param_1[2];
   temp_v6 = 1.0f;
   temp_v0 = FUN_002a7bc0();
-  FUN_002bfe28(&temp_v8,temp_v0);
+  mtx44Copy(&temp_v8,temp_v0);
   VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002b2144(temp_v20);
   nn_math_ARMv6_MTX44MultAsm(&temp_v8,&temp_v8,temp_v20);
@@ -79,7 +79,7 @@ void FUN_00291434(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   temp_v3 = temp_v16 * temp_v4 + temp_v17 * temp_v7 + temp_v18 * temp_v5 + temp_v19 * temp_v6;
   temp_v4 = fStack_110 * temp_v4 + fStack_10c * temp_v7 + fStack_108 * temp_v5 + fStack_104 * temp_v6;
   temp_v0 = FUN_002a7bc0();
-  FUN_002bfe28(&temp_v8,temp_v0);
+  mtx44Copy(&temp_v8,temp_v0);
   VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002b2144(temp_v21);
   nn_math_ARMv6_MTX44MultAsm(&temp_v8,&temp_v8,temp_v21);
@@ -88,7 +88,7 @@ void FUN_00291434(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   temp_v7 = temp_v16 * temp_v1 + temp_v17 * temp_v2 + temp_v18 * temp_v3 + temp_v19 * temp_v4;
   temp_v1 = fStack_110 * temp_v1 + fStack_10c * temp_v2 + fStack_108 * temp_v3 + fStack_104 * temp_v4;
   temp_v0 = FUN_002a7bc0();
-  FUN_002bfe28(&temp_v8,temp_v0);
+  mtx44Copy(&temp_v8,temp_v0);
   VectorSignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002b2144(temp_v22);
   nn_math_ARMv6_MTX44MultAsm(&temp_v8,&temp_v8,temp_v22);

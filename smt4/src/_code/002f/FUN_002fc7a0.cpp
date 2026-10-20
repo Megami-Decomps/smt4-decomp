@@ -12,7 +12,7 @@ int FUN_0026f204(unsigned int, int, unsigned int);
 int FUN_0026f800(unsigned int, int);
 int FUN_002bd2b4(int, int, int, int);
 int FUN_002c3940(int, int);
-int FUN_002c4938(int, int);
+int memClear(int, int);
 
 typedef struct fn_002fc7a0_arg0 fn_002fc7a0_arg0;
 struct fn_002fc7a0_arg0 {
@@ -73,7 +73,7 @@ extern int FUN_00201ab0(unsigned char, unsigned int, unsigned int);
 extern int FUN_0028a318(void);
 /* Supplied declaration required: FUN_002bd2b4. */
 /* Supplied declaration required: FUN_002c3940. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_002fc7a0(fn_002fc7a0_arg0 *param_1,unsigned int param_2,unsigned int param_3)
@@ -89,7 +89,7 @@ unsigned int FUN_002fc7a0(fn_002fc7a0_arg0 *param_1,unsigned int param_2,unsigne
   temp_v0 = 0;
   if (param_1->field_0x126 != 0) {
     param_1->field_0x126 = 0;
-    FUN_002c4938(param_1->field_0x8,0x4c);
+    memClear(param_1->field_0x8,0x4c);
     FUN_002bd2b4(param_1->field_0x8,(int)(short)param_1->field_0x120,param_1->field_0x123,
                  param_1->field_0x13c + param_1->field_0x134 + param_1->field_0x148);
     FUN_002597c0();

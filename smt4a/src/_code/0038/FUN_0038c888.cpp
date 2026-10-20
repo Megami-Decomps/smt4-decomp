@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0019cac4(void);
 int FUN_001aba54(void);
-int FUN_00236038(int);
+int scrGetArg(int);
 int FUN_00301a08(unsigned int, int [6], int *);
-int FUN_003283ac(int);
+int scrSetResult(int);
 int FUN_003eaf20(void);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -24,14 +24,14 @@ extern unsigned int DAT_005702a4; /* 0x5702a4 */
 extern unsigned int DAT_005702b0; /* 0x5702b0 */
 extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_0019cac4. */
 /* Supplied declaration required: FUN_001aba54. */
 extern unsigned int FUN_00232388(void);
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: scrGetArg. */
 extern int FUN_0027281c(void);
 /* Supplied declaration required: FUN_00301a08. */
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003eaf20. */
 
 
@@ -49,14 +49,14 @@ unsigned int FUN_0038c888(void)
   int temp_v6;
   int temp_v7 [6];
   
-  temp_v0 = FUN_00236038(0);
-  FUN_00236038(1);
+  temp_v0 = scrGetArg(0);
+  scrGetArg(1);
   temp_v1 = FUN_00232388();
   FUN_00301a08(temp_v1,temp_v7,&temp_v6);
   temp_v5 = temp_v7[0];
   if (temp_v7[0] < temp_v6 + temp_v7[0]) {
     do {
-      temp_v2 = FUN_0014aa78();
+      temp_v2 = btlGetMainState();
       puVar6 = (unsigned int *)(*(int *)(temp_v2 + 0x1ffc) + temp_v5 * 0x408);
       temp_v4 = *puVar6;
       temp_v3 = puVar6[1];
@@ -70,7 +70,7 @@ unsigned int FUN_0038c888(void)
             temp_v3 = (unsigned int)*(unsigned short *)(puVar6[0xfe] + temp_v2 * 2 + 0x34);
             FUN_001aba54();
             if ((temp_v3 != 0) && (*(char *)(temp_v3 + 0x23) == '\x03')) {
-              FUN_003283ac(1);
+              scrSetResult(1);
               return 1;
             }
             temp_v2 = temp_v2 + 1;
@@ -82,7 +82,7 @@ unsigned int FUN_0038c888(void)
             temp_v3 = (unsigned int)*(unsigned short *)(puVar6[0xff] + temp_v2 * 2 + 0x34);
             FUN_001aba54();
             if ((temp_v3 != 0) && (*(char *)(temp_v3 + 0x23) == '\x03')) {
-              FUN_003283ac(1);
+              scrSetResult(1);
               return 1;
             }
             temp_v2 = temp_v2 + 1;
@@ -96,7 +96,7 @@ unsigned int FUN_0038c888(void)
             temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + temp_v2 * 2 + 0x50);
             FUN_001aba54();
             if ((temp_v4 != 0) && (*(char *)(temp_v4 + 0x23) == '\x03')) {
-              FUN_003283ac(1);
+              scrSetResult(1);
               return 1;
             }
             temp_v2 = temp_v2 + 1;
@@ -106,17 +106,17 @@ unsigned int FUN_0038c888(void)
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < temp_v7[0] + temp_v6);
   }
-  temp_v5 = FUN_0014aa78();
+  temp_v5 = btlGetMainState();
   if (*(char *)(temp_v5 + 0x4cd1) != '\0') {
-    temp_v5 = FUN_0014aa78();
+    temp_v5 = btlGetMainState();
     FUN_003eaf20();
     if (((temp_v5 != 0) && (*(unsigned short *)(temp_v5 + 0x166) == temp_v0)) &&
        (temp_v5 = FUN_0027281c(), temp_v5 != 0)) {
-      FUN_003283ac(1);
+      scrSetResult(1);
       return 1;
     }
   }
-  FUN_003283ac(0);
+  scrSetResult(0);
   return 1;
 }
 

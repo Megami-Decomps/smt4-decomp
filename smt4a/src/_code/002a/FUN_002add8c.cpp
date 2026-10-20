@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_002f3bc4(unsigned char [98], int, int);
 int FUN_0032d0c8(int, int, int, unsigned char [98]);
 int FUN_00331380(int);
@@ -17,7 +17,7 @@ typedef struct {
 
 extern int DAT_0057f108; /* 0x57f108 */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_002f3bc4. */
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_00331380. */
@@ -38,33 +38,33 @@ void FUN_002add8c(void)
   puVar2 = temp_v2;
   if (*(char *)(DAT_0057f108 + 0xb7) != '\0') {
     if (*(char *)(DAT_0057f108 + 0xb9) != '\x03') {
-      FUN_001681cc(0x52);
+      sysPlaySe(0x52);
       FUN_002f3bc4(temp_v2,(int)*(char *)(temp_v0 + 0xb9),(int)*(char *)(temp_v0 + 0xb8));
       if (puVar2 != (unsigned char *)0x0) {
         FUN_0032d0c8(0,1,temp_v3,temp_v2);
       }
       return;
     }
-    FUN_001681cc(0x51);
+    sysPlaySe(0x51);
     return;
   }
   temp_v1 = FUN_00349af0();
   if (temp_v1 == 0) {
     if (*(char *)(temp_v0 + 0xa4) != '\x01') {
-      FUN_001681cc(3);
+      sysPlaySe(3);
       FUN_00331380(0);
       return;
     }
-    FUN_001681cc(1);
+    sysPlaySe(1);
     FUN_00331380(1);
     return;
   }
   if (*(char *)(temp_v0 + 0xa4) != '\x01') {
-    FUN_001681cc(4);
+    sysPlaySe(4);
     FUN_00331380(0);
     return;
   }
-  FUN_001681cc(2);
+  sysPlaySe(2);
   FUN_00331380(1);
   return;
 }

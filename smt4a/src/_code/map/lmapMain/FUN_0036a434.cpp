@@ -27,7 +27,7 @@ typedef struct {
 } param_1_stack;
 
 extern int DAT_005806a4; /* 0x5806a4 */
-extern unsigned long long *DAT_00581288; /* 0x581288 */
+extern unsigned long long *g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f10cc; /* 0x5f10cc */
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
@@ -85,10 +85,10 @@ void FUN_0036a434(int param_1)
   temp_v1 = FUN_00162e8c();
   temp_v5 = *(int *)(param_1 + 0xcc) == 7;
   temp_v10 = 0.017453292f;
-  puVar5 = DAT_00581288;
+  puVar5 = g_lmapScene;
   if (temp_v5) {
-    temp_v11 = *(float *)(DAT_00581288 + 6);
-    puVar5 = DAT_00581288 + 5;
+    temp_v11 = *(float *)(g_lmapScene + 6);
+    puVar5 = g_lmapScene + 5;
   }
   if (!temp_v5) {
     temp_v11 = *(float *)((int)puVar5 + 0x24);

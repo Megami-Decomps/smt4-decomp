@@ -8,7 +8,7 @@ int FUN_001a7d48(...);
 int FUN_0029378c(...);
 int FUN_0029e8b8(...);
 int FUN_0029eb5c(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 
 int FUN_001d13b0(void);
 int FUN_00205a90(void);
@@ -52,7 +52,7 @@ extern int DAT_0043dcf0; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_00292be4. */
 /* Supplied declaration required: FUN_00293348. */
 /* Supplied declaration required: FUN_0029378c. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_0029e874. */
 /* Supplied declaration required: FUN_0029e8b8. */
 extern unsigned int FUN_0029e908(void);
@@ -63,7 +63,7 @@ extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002b4670. */
 /* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002c424c. */
 /* Supplied declaration required: FUN_002e36f8. */
 /* Supplied declaration required: FUN_002effac. */
@@ -372,8 +372,8 @@ LAB_0028ad80:
         FUN_0026c654(temp_v3,0xffffffff,temp_v5,1);
         if (temp_v3 == 1) {
           *(unsigned char *)(temp_v0 + 0x678) = 0;
-          temp_v3 = FUN_002939f4();
-          if ((temp_v3 != 0) && (temp_v3 = FUN_002939f4(), (*(unsigned int *)(temp_v3 + 0x44a8) & 0x2000000) != 0)
+          temp_v3 = btlGetMainState();
+          if ((temp_v3 != 0) && (temp_v3 = btlGetMainState(), (*(unsigned int *)(temp_v3 + 0x44a8) & 0x2000000) != 0)
              ) {
             *(unsigned char *)(temp_v0 + 0x678) = 1;
           }
@@ -636,7 +636,7 @@ LAB_0028b668:
                 }
                 else {
                   *(unsigned int *)(DAT_0043dcf0 + 0x2c) = *(unsigned int *)(DAT_0043dcf0 + 0x2c) ^ 1;
-                  FUN_002bd8e8(temp_v2 + 0x180,5,0);
+                  timerStart(temp_v2 + 0x180,5,0);
                   temp_v4 = 0;
                   do {
                     FUN_0029378c(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0x6c8),
@@ -659,7 +659,7 @@ LAB_0028b668:
               }
               else {
                 *(unsigned int *)(DAT_0043dcf0 + 0x2c) = *(unsigned int *)(DAT_0043dcf0 + 0x2c) ^ 1;
-                FUN_002bd8e8(temp_v2 + 0x180,4,0);
+                timerStart(temp_v2 + 0x180,4,0);
                 temp_v4 = 0;
                 do {
                   FUN_0029378c(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0x6c8),

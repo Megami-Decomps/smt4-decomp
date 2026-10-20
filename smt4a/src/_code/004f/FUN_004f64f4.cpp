@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_003478dc(unsigned int, char *);
 int FUN_003afd30(void);
 int FUN_004f7cd0(int);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 extern unsigned int FUN_002e4c2c(int);
 /* Supplied declaration required: FUN_003478dc. */
 /* Supplied declaration required: FUN_003afd30. */
@@ -40,7 +40,7 @@ void FUN_004f64f4(int param_1)
   unsigned char temp_v4;
   unsigned char temp_v5;
   
-  FUN_0014aa78();
+  btlGetMainState();
   temp_v1 = FUN_003e8430();
   if (temp_v1 != 0) {
     return;

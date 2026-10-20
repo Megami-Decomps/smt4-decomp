@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0023b6d8(int);
+int asdPrimAlloc(int);
 int FUN_0023b7d8(int, int, int *);
 int FUN_0023bb00(unsigned int *, unsigned int *, unsigned int *);
 int FUN_0023bba0(unsigned int *, int);
-int FUN_002af39c(unsigned int);
+int asdModelAdvanceCommandCursor(unsigned int);
 int FUN_002bc7f4(int, unsigned char *);
 int rt_memcpy(int, int, int);
 int rt_memcpy_w(unsigned int *, int, unsigned int);
@@ -21,11 +21,11 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_0023b6d8. */
+/* Supplied declaration required: asdPrimAlloc. */
 /* Supplied declaration required: FUN_0023b7d8. */
 /* Supplied declaration required: FUN_0023bb00. */
 /* Supplied declaration required: FUN_0023bba0. */
-/* Supplied declaration required: FUN_002af39c. */
+/* Supplied declaration required: asdModelAdvanceCommandCursor. */
 extern unsigned int FUN_002bc11c(int);
 /* Supplied declaration required: FUN_002bc7f4. */
 /* Supplied declaration required: rt_memcpy. */
@@ -62,7 +62,7 @@ void FUN_0023b724(int param_1,unsigned int param_2,int param_3,unsigned int *par
   temp_v0 = (int)param_4 << 1;
   temp_v1 = temp_v0;
   puVar8 = param_4;
-  FUN_0023b6d8(temp_v0);
+  asdPrimAlloc(temp_v0);
   rt_memcpy(temp_v1,*(int *)(param_1 + 0x48) + param_3 * 2,temp_v0);
   temp_v2 = FUN_002bc11c(temp_v1);
   *(unsigned int *)(param_1 + 0x7dc) = temp_v2;
@@ -139,7 +139,7 @@ void FUN_0023b724(int param_1,unsigned int param_2,int param_3,unsigned int *par
     }
     temp_v3 = temp_v3 + 1;
   } while ((int)temp_v3 < 0xc);
-  FUN_002af39c(((int)puVar5 - (int)puVar8) & 0xfffffffc);
+  asdModelAdvanceCommandCursor(((int)puVar5 - (int)puVar8) & 0xfffffffc);
   return;
 }
 

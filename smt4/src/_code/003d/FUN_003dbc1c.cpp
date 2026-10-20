@@ -10,7 +10,7 @@ int FUN_002b4414(...);
 int FUN_002be624(...);
 int FUN_002bf694(...);
 int FUN_002c30c4(...);
-int FUN_002c4938(...);
+int memClear(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -39,7 +39,7 @@ extern unsigned int FUN_0024a6b0(int);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002c30c4. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_003dbc1c(int param_1)
@@ -80,8 +80,8 @@ void FUN_003dbc1c(int param_1)
             }
             if ((temp_v3 == 0) ||
                (temp_v1 = temp_v3, FUN_002aa568(temp_v3,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[20])), temp_v1 != 0)) {
-              FUN_002c4938(temp_v7,0x80);
-              FUN_002c4938(temp_v8,0x80);
+              memClear(temp_v7,0x80);
+              memClear(temp_v8,0x80);
               FUN_002be624(temp_v8,"battle/effect/%s.eft",temp_v3);
               FUN_002bf694(temp_v7,temp_v8);
               temp_v1 = FUN_002c30c4(temp_v7);

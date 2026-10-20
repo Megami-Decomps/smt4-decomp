@@ -1,23 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ea6cc` (_code @ 0x2ea6cc, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0043d210(int, int);
+/* Object with an "initialised" flag at 0x68 and a member at 0x58. */
+typedef struct {
+    u8 unk00[0x58];
+    u8 member[0x10];    /* 0x58 */
+    u8 initialised;     /* 0x68 */
+} Lazy;
 
-/* Supplied declaration required: FUN_0043d210. */
+int FUN_0043d210(Lazy *self, u8 *member);
 
-
-void FUN_002ea6cc(int param_1)
-
+/* One-time setup: runs FUN_0043d210 on the member the first time it is called. */
+void FUN_002ea6cc(Lazy *self)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(char *)(param_1 + 0x68) == '\0') {
-    FUN_0043d210(param_1,param_1 + 0x58);
-    *(unsigned char *)(param_1 + 0x68) = 1;
-  }
-  return;
+    if (self->initialised == 0) {
+        FUN_0043d210(self, self->member);
+        self->initialised = 1;
+    }
 }
 
 } /* extern "C" */

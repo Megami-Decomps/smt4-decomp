@@ -11,7 +11,7 @@ int FUN_0038892c(unsigned char [256], unsigned int);
 int FUN_003c1060(void);
 
 extern unsigned char LAB_0038b124; /* 0x38b124 */
-extern int DAT_00588124; /* 0x588124 */
+extern int g_npcRoom; /* 0x588124 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001654f8. */
@@ -35,10 +35,10 @@ void FUN_0038b084(void)
   unsigned char temp_v4 [128];
   unsigned char temp_v5 [132];
   
-  temp_v0 = DAT_00588124;
+  temp_v0 = g_npcRoom;
   puVar5 = (unsigned char *)0x0;
   temp_v2 = 0;
-  if (0 < *(int *)(DAT_00588124 + 0xe4)) {
+  if (0 < *(int *)(g_npcRoom + 0xe4)) {
     do {
       temp_v1 = *(int *)(temp_v0 + *(short *)(temp_v0 + temp_v2 * 0x10 + 100) * 4 + 0x28);
       if (temp_v1 != 0) {

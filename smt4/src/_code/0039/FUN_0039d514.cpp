@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00292f28(unsigned int);
+extern int padIsButtonDown(unsigned int);
 extern int FUN_002c09d0(unsigned int);
 
 
@@ -16,7 +16,7 @@ unsigned int FUN_0039d514(void)
   
   temp_v0 = FUN_002c09d0(0x400);
   temp_v1 = 0;
-  if ((temp_v0 != 0) && (temp_v0 = FUN_00292f28(0x76), temp_v1 = 0, temp_v0 != 0)) {
+  if ((temp_v0 != 0) && (temp_v0 = padIsButtonDown(0x76), temp_v1 = 0, temp_v0 != 0)) {
     temp_v1 = 1;
   }
   return temp_v1;

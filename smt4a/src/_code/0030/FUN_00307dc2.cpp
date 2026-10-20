@@ -1,35 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00307dc2` (_code @ 0x307dc2, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail uses r5/r7/r6/r4 for result/list/position/node (built r6/r5/r4/r7) */
+/* Inserts a new node holding `value` before `*position` in the list, bumping its size; stores the new node in *result. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002fd5d4(int *, unsigned int);
+typedef struct Node {
+    /* 0x00 */ struct Node *next;
+    /* 0x04 */ struct Node *prev;
+    /* 0x08 */ u8 value[1];
+} Node;
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
+typedef struct List {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 size;
+} List;
 
-/* Supplied declaration required: FUN_002fd5d4. */
-extern int *FUN_00307dfe(int, unsigned int);
+extern Node *FUN_00307dfe(List *list, u32 arg);
+extern void FUN_002fd5d4(void *dest, u32 value);
 
-
-void FUN_00307dc2(int *param_1,int param_2,int *param_3,unsigned int param_4)
-
+void FUN_00307dc2(Node **result, List *list, Node **position, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  
-  piVar1 = (int *)FUN_00307dfe(param_2,0);
-  FUN_002fd5d4(piVar1 + 2,param_4);
-  *piVar1 = *param_3;
-  piVar1[1] = *(int *)(*param_3 + 4);
-  **(int **)(*param_3 + 4) = (int)piVar1;
-  *(int **)(*param_3 + 4) = piVar1;
-  *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) + 1;
-  *param_1 = (int)piVar1;
-  return;
+    Node *node = FUN_00307dfe(list, 0);
+
+    FUN_002fd5d4(node->value, value);
+    node->next = *position;
+    node->prev = (*position)->prev;
+    (*position)->prev->next = node;
+    (*position)->prev = node;
+    list->size++;
+    *result = node;
 }
 
-} /* extern "C" */
+}

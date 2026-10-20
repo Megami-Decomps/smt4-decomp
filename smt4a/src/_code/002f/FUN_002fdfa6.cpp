@@ -1,22 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fdfa6` (_code @ 0x2fdfa6, 0x1a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps obj/arg in r5/r4 and the method pointer in r2 (built r4/r5, r3) */
+/* Calls FUN_002ec8a8 on `arg`, then invokes the object's virtual method at slot 5 with it; returns 0. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ec8a8(unsigned int);
+struct Object;
 
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002ec8a8. */
+typedef struct ObjectVtbl {
+    /* 0x00 */ void *slots0to4[5];
+    /* 0x14 */ void (*method5)(struct Object *obj, u32 arg);
+} ObjectVtbl;
 
+typedef struct Object {
+    /* 0x00 */ ObjectVtbl *vtbl;
+} Object;
 
-unsigned int FUN_002fdfa6(int *param_1,unsigned int param_2,unsigned int param_3)
+extern s32 FUN_002ec8a8(u32 arg);
 
+u32 FUN_002fdfa6(Object *obj, u32 unused, u32 arg)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002ec8a8(param_3);
-  (**(romwright_code **)(*param_1 + 0x14))(param_1,param_3);
-  return 0;
+    FUN_002ec8a8(arg);
+    obj->vtbl->method5(obj, arg);
+    return 0;
 }
 
-} /* extern "C" */
+}

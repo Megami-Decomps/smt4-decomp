@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00297a00(void);
-int FUN_002c498c(int, int, int, int, int);
-int FUN_002c4a08(...);
+int asdMemAlloc(int, int, int, int, int);
+int taskCreateDraw(...);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ extern unsigned char LAB_001e5e50; /* 0x1e5e50 */
 extern int MAPIF_DrawUp(...); /* 0x1e8484 */
 extern unsigned char LAB_001e84f0; /* 0x1e84f0 */
 extern int FUN_0021ef10(...); /* 0x21ef10 */
-extern unsigned int *DAT_00447a78; /* 0x447a78 */
+extern unsigned int *g_mapIf; /* 0x447a78 */
 extern unsigned int DAT_004b5d30; /* 0x4b5d30 */
 extern unsigned int DAT_004b5d34; /* 0x4b5d34 */
 extern unsigned int DAT_004b5d38; /* 0x4b5d38 */
@@ -65,8 +65,8 @@ extern unsigned int DAT_004b69b8; /* 0x4b69b8 */
 extern unsigned int DAT_004b69bc; /* 0x4b69bc */
 
 /* Supplied declaration required: FUN_00297a00. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
 
 
 void MapIf_Register(unsigned int param_1,unsigned char param_2)
@@ -79,8 +79,8 @@ void MapIf_Register(unsigned int param_1,unsigned char param_2)
   unsigned int temp_v0;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0xcce8,1);
-  DAT_00447a78 = puVar1;
+  asdMemAlloc(0x100,0x100,0,0xcce8,1);
+  g_mapIf = puVar1;
   *(unsigned char *)(puVar1 + 5) = 0;
   *(unsigned char *)((int)puVar1 + 0x16) = 0;
   *(unsigned char *)(puVar1 + 6) = 0;
@@ -101,14 +101,14 @@ void MapIf_Register(unsigned int param_1,unsigned char param_2)
   *(unsigned char *)(puVar1 + 0x3338) = 0;
   puVar1[0x3339] = 0;
   puVar2 = &LAB_0018af1c;
-  FUN_002c4a08(&LAB_0018af1c,2,0,0,&LAB_0019fa80,&LAB_001e5e50,0,param_1);
+  taskCreateDraw(&LAB_0018af1c,2,0,0,&LAB_0019fa80,&LAB_001e5e50,0,param_1);
   *puVar1 = (unsigned int)puVar2;
   puVar3 = &LAB_0018af28;
-  FUN_002c4a08(&LAB_0018af28,0x73,0,0,MAPIF_DrawUp,0,0,puVar2);
+  taskCreateDraw(&LAB_0018af28,0x73,0,0,MAPIF_DrawUp,0,0,puVar2);
   puVar1[1] = (unsigned int)puVar3;
-  FUN_002c4a08(&LAB_0018af34,0x85,0,0,FUN_0021ef10,0,0,*puVar1);
+  taskCreateDraw(&LAB_0018af34,0x85,0,0,FUN_0021ef10,0,0,*puVar1);
   puVar2 = &LAB_0018af44;
-  FUN_002c4a08(&LAB_0018af44,0x6f,0,0,&LAB_001e84f0,0,0,*puVar1);
+  taskCreateDraw(&LAB_0018af44,0x6f,0,0,&LAB_001e84f0,0,0,*puVar1);
   puVar1[2] = (unsigned int)puVar2;
   DAT_004b5d30 = 0xc2800000;
   DAT_004b5d34 = 0x41800000;

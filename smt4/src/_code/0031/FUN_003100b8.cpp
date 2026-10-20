@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002c564c(void);
+int jyoucyuGetTableEntry(void);
 
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 extern char *FUN_00289594(void);
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 
 
 unsigned int FUN_003100b8(void)
@@ -19,11 +19,11 @@ unsigned int FUN_003100b8(void)
   char temp_v0;
   char *pcVar2;
   
-  FUN_002c564c();
+  jyoucyuGetTableEntry();
   pcVar2 = (char *)FUN_00289594();
   temp_v0 = *pcVar2;
   if ((temp_v0 == '\x01' || temp_v0 == '\x02') || temp_v0 == '\x03') {
-    *(unsigned char *)(DAT_00432fc8 + 0xc0) = 1;
+    *(unsigned char *)(g_aocMain + 0xc0) = 1;
   }
   return 1;
 }

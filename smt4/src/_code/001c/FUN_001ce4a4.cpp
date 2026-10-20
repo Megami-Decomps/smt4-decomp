@@ -13,7 +13,7 @@ int FUN_002ae898(unsigned int);
 int FUN_002aeb38(int, int, unsigned int);
 
 typedef int romwright_code(...);
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_0026e70c. */
 /* Supplied declaration required: FUN_002a4e18. */
@@ -24,7 +24,7 @@ extern int FUN_002a60b4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ae898. */
 extern int FUN_002ae98c(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002aeb38. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 extern int FUN_002c1d5c(void);
 
 
@@ -42,14 +42,14 @@ unsigned int FUN_001ce4a4(void)
   float temp_v7;
   float temp_v8;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   temp_v1 = 0;
   if ((*(char *)(temp_v0 + 0x7c) != '\0') && (temp_v1 = FUN_002c1d5c(), temp_v1 == 0)) {
-    temp_v1 = FUN_002ae98c(DAT_00433158,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14),1)
+    temp_v1 = FUN_002ae98c(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14),1)
     ;
     if (temp_v1 != 0) {
-      temp_v1 = DAT_00433158;
-      FUN_002a5ee4(DAT_00433158,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14),0x10000)
+      temp_v1 = g_aocSystem;
+      FUN_002a5ee4(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14),0x10000)
       ;
       *(int *)(temp_v0 + 0xc) = temp_v1;
     }
@@ -179,7 +179,7 @@ unsigned int FUN_001ce4a4(void)
           }
           if (temp_v3 && temp_v1 != 0) {
             FUN_002ae898(*(unsigned int *)(temp_v0 + 0x10));
-            FUN_002a60cc(DAT_00433158,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
+            FUN_002a60cc(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
             *(unsigned int *)(temp_v0 + 0x80) = 0;
             *(unsigned int *)(temp_v0 + 0x84) = 0xffffffff;
             temp_v5 = temp_v8;

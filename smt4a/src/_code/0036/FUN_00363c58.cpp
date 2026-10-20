@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_00215904(void);
-int FUN_002e6354(unsigned char *, int);
+int sysMemClear(unsigned char *, int);
 
-extern unsigned int DAT_005f15fc; /* 0x5f15fc */
+extern unsigned int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern unsigned char DAT_005f1614; /* 0x5f1614 */
@@ -337,7 +337,7 @@ extern unsigned int DAT_005f1aec; /* 0x5f1aec */
 extern unsigned char DAT_005f1af0; /* 0x5f1af0 */
 extern unsigned int DAT_005f1af4; /* 0x5f1af4 */
 extern unsigned int DAT_005f1af8; /* 0x5f1af8 */
-extern unsigned char DAT_005f1afc; /* 0x5f1afc */
+extern unsigned char g_lmapMain; /* 0x5f1afc */
 extern unsigned int DAT_005f1b00; /* 0x5f1b00 */
 extern unsigned char DAT_005f1b04; /* 0x5f1b04 */
 extern unsigned char DAT_005f1b05; /* 0x5f1b05 */
@@ -424,7 +424,7 @@ extern unsigned int DAT_005f1ca4; /* 0x5f1ca4 */
 
 extern int FUN_00162e8c(unsigned int *);
 /* Supplied declaration required: FUN_00215904. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern unsigned long long FUN_00324f74(int);
 
 
@@ -439,7 +439,7 @@ void FUN_00363c58(int param_1)
   unsigned int temp_v4;
   unsigned long long temp_v5;
   
-  DAT_005f15fc = 0;
+  g_gameState = 0;
   DAT_005f1600 = 3;
   DAT_005f1604 = 0xffffffff;
   DAT_005f1614 = 0;
@@ -751,7 +751,7 @@ void FUN_00363c58(int param_1)
   DAT_005f18fc = 0;
   DAT_005f1900 = 0;
   DAT_005f1904 = 0;
-  FUN_002e6354(&DAT_005f190c,0x80);
+  sysMemClear(&DAT_005f190c,0x80);
   DAT_005f19d4 = 0;
   DAT_005f19e8 = 0;
   DAT_005f19a0 = 0x42340000;
@@ -830,7 +830,7 @@ void FUN_00363c58(int param_1)
   DAT_005f1af0 = 0;
   DAT_005f1af4 = 0;
   DAT_005f1af8 = 0;
-  DAT_005f1afc = 0;
+  g_lmapMain = 0;
   DAT_005f1b00 = 0;
   DAT_005f1b04 = 0;
   DAT_005f1b05 = 0;
@@ -838,7 +838,7 @@ void FUN_00363c58(int param_1)
   DAT_005f1ae4 = temp_v3;
   DAT_005f1ae8 = temp_v3;
   DAT_005f1aec = temp_v3;
-  temp_v0 = FUN_00162e8c(&DAT_005f15fc);
+  temp_v0 = FUN_00162e8c(&g_gameState);
   temp_v2 = 0;
   do {
     temp_v5 = FUN_00324f74(temp_v2);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010063a(...);
+int qsort(...);
 int FUN_00312830(...);
 int FUN_004a8750(unsigned int, int, int, int, int);
 
@@ -25,7 +25,7 @@ extern int FUN_0034f0b4(...); /* 0x34f0b4 */
 extern int FUN_0034f1bc(...); /* 0x34f1bc */
 extern int DAT_0057f290; /* 0x57f290 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_00312830. */
 /* Supplied declaration required: FUN_004a8750. */
@@ -51,18 +51,18 @@ void FUN_002174f4(void)
   temp_v1 = ~(*(unsigned char *)(temp_v2 + 0x13) >> 7) & 1;
   if ((*(unsigned char *)(temp_v2 + 0x13) & 0x7f) == 1) {
     if (temp_v1 != 0) {
-      FUN_0010063a(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,FUN_002b27d4);
+      qsort(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,FUN_002b27d4);
     }
     else {
-      FUN_0010063a(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,FUN_0034f0b4);
+      qsort(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,FUN_0034f0b4);
     }
   }
   if ((*pbVar9 & 0x7f) == 2) {
     if (temp_v1 != 0) {
-      FUN_0010063a(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,FUN_0024162c);
+      qsort(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,FUN_0024162c);
     }
     else {
-      FUN_0010063a(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,FUN_002fd93c);
+      qsort(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,FUN_002fd93c);
     }
   }
   if ((*pbVar9 & 0x7f) == 7) {
@@ -88,10 +88,10 @@ void FUN_002174f4(void)
       } while (temp_v4 < *(unsigned int *)(temp_v0 + 0x73ec));
     }
     if (temp_v1 != 0) {
-      FUN_0010063a(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,FUN_002b28d8);
+      qsort(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,FUN_002b28d8);
     }
     else {
-      FUN_0010063a(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,FUN_0034f1bc);
+      qsort(temp_v0 + 0x6832,*(unsigned int *)(temp_v0 + 0x73ec),2,FUN_0034f1bc);
     }
   }
   if ((*pbVar9 & 0x7f) == 3) {

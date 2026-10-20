@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(unsigned int);
+int asdMemFree(unsigned int);
 int FUN_00422ef8(void);
 int FUN_00426140(void);
 int FUN_00512e38(void);
@@ -32,7 +32,7 @@ extern unsigned int DAT_00617dd8; /* 0x617dd8 */
 extern unsigned int DAT_00617e00; /* 0x617e00 */
 extern unsigned int DAT_00617e30; /* 0x617e30 */
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_00422ef8. */
 /* Supplied declaration required: FUN_00426140. */
 /* Supplied declaration required: FUN_00512e38. */
@@ -60,22 +60,22 @@ void FUN_001f51ac(void)
   FUN_00513620();
   temp_v0 = DAT_00617c78;
   nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617c48);
-  FUN_0019a5a0(temp_v0);
+  asdMemFree(temp_v0);
   temp_v0 = DAT_00617cd0;
   nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617ca0);
-  FUN_0019a5a0(temp_v0);
+  asdMemFree(temp_v0);
   temp_v0 = DAT_00617d28;
   nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617cf8);
-  FUN_0019a5a0(temp_v0);
+  asdMemFree(temp_v0);
   temp_v0 = DAT_00617d80;
   nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617d50);
-  FUN_0019a5a0(temp_v0);
+  asdMemFree(temp_v0);
   temp_v0 = DAT_00617dd8;
   nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617da8);
-  FUN_0019a5a0(temp_v0);
+  asdMemFree(temp_v0);
   temp_v0 = DAT_00617e30;
   nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617e00);
-  FUN_0019a5a0(temp_v0);
+  asdMemFree(temp_v0);
   return;
 }
 

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
+int jobStop(unsigned int, int);
 int FUN_002e3328(void);
 int FUN_004188ec(unsigned int *);
 
 typedef int romwright_code(...);
 extern unsigned int *DAT_00588e2c; /* 0x588e2c */
 
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_002e3328. */
 /* Supplied declaration required: FUN_004188ec. */
 
@@ -39,7 +39,7 @@ unsigned int FUN_002681b0(void)
         puVar2[2] = 0;
       }
       *(unsigned char *)(puVar2 + 1) = 1;
-      FUN_001631d0(*puVar2,0);
+      jobStop(*puVar2,0);
       if (DAT_00588e2c != (unsigned int *)0x0) {
         FUN_002e3328();
         DAT_00588e2c = (unsigned int *)0x0;

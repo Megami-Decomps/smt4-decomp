@@ -68,13 +68,13 @@ typedef struct {
 
 extern unsigned char LAB_00251798; /* 0x251798 */
 extern unsigned char LAB_00251c04; /* 0x251c04 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0025765c. */
 /* Supplied declaration required: FUN_0026242c. */
 /* Supplied declaration required: FUN_00269bf0. */
 /* Supplied declaration required: FUN_002888a8. */
-extern int FUN_00288da8(int, int);
+extern int isLowThreshold(int, int);
 /* Supplied declaration required: FUN_00288ddc. */
 extern int FUN_002a8740(void);
 extern unsigned int FUN_002b05d0(int);
@@ -165,7 +165,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
     if (!temp_v10 || temp_v0 != 0) {
       FUN_002bf288(2,0x19,0x3e,param_2,param_3,0x65);
     }
-    temp_v3 = DAT_0044ea00;
+    temp_v3 = g_titleScene;
     temp_v4 = FUN_002c5da8(6,1,0);
     piVar8 = (int *)(temp_v3 + 0x12ac);
     temp_v6 = piVar8[*piVar8 + 2];
@@ -175,7 +175,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
       *(unsigned char *)(temp_v3 + 0x12c4) = 0;
     }
     FUN_002bf288(2,0x19,0x3d,param_2,param_3,0x6a);
-    temp_v3 = DAT_0044ea00;
+    temp_v3 = g_titleScene;
     temp_v4 = FUN_002c5da8(6,7,0);
     piVar8 = (int *)(temp_v3 + 0x12ac);
     temp_v6 = piVar8[*piVar8 + 2];
@@ -252,7 +252,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
         FUN_002888a8(temp_v13,temp_v14,*(unsigned int *)&param_1->field_0x44,0,0x19,0x48,0x4a,0x49,
                      param_2,param_3,0x75,0);
         FUN_0033c1bc(param_1,param_2,param_3);
-        temp_v7 = DAT_0044ea00;
+        temp_v7 = g_titleScene;
         if (param_1->field_0x48 != 0) {
           temp_v8 = FUN_002c5da8(6,1,0);
           piVar8 = (int *)(temp_v7 + 0x12ac);
@@ -266,7 +266,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
           FUN_002be304();
           FUN_002bf288(2,0x19,0x7d1,param_2,param_3,0x79);
           FUN_002bed3c();
-          temp_v7 = DAT_0044ea00;
+          temp_v7 = g_titleScene;
           temp_v8 = FUN_002c5da8(6,7,0);
           piVar8 = (int *)(temp_v7 + 0x12ac);
           temp_v9 = piVar8[*piVar8 + 2];
@@ -306,7 +306,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
                    0x74,0);
       FUN_002888a8(temp_v13,temp_v14,*(unsigned int *)&param_1->field_0x44,0,0x19,9,0xb,10,param_2,
                    param_3,0x75,0);
-      temp_v7 = FUN_00288da8((int)(short)temp_v8,(int)(short)temp_v7);
+      temp_v7 = isLowThreshold((int)(short)temp_v8,(int)(short)temp_v7);
       if (temp_v7 != 0) {
         temp_v2 = 0xdc0f14ff;
         FUN_002be304(temp_v2);
@@ -325,7 +325,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
       FUN_002bdf94(2,*(short *)(temp_v7 + 8) + param_2,*(short *)(temp_v7 + 10) + param_3,1,4,0x79,
                    temp_v16);
       FUN_0033c1bc(param_1,param_2,param_3);
-      temp_v7 = DAT_0044ea00;
+      temp_v7 = g_titleScene;
       if (param_1->field_0x48 != 0) {
         temp_v8 = FUN_002c5da8(6,1,0);
         piVar8 = (int *)(temp_v7 + 0x12ac);
@@ -339,7 +339,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
         FUN_002be304();
         FUN_002bf288(2,0x19,2000,param_2,param_3,0x79);
         FUN_002bed3c();
-        temp_v7 = DAT_0044ea00;
+        temp_v7 = g_titleScene;
         temp_v8 = FUN_002c5da8(6,7,0);
         piVar8 = (int *)(temp_v7 + 0x12ac);
         temp_v9 = piVar8[*piVar8 + 2];

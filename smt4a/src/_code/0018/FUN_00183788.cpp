@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_12_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_00630724; /* 0x630724 */
 extern unsigned int DAT_00630728; /* 0x630728 */
 extern unsigned int DAT_0063072c; /* 0x63072c */
@@ -156,7 +156,7 @@ void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int p
     if (param_12 == 0) {
       FUN_00185dd4(2,param_5,param_6,param_10,temp_v11,temp_v9,(int)psVar4[1],temp_v12);
     }
-    temp_v1 = DAT_0059dbb4;
+    temp_v1 = g_renderCtx;
     if (temp_v5 == 0) {
       DAT_00630724 = 0x3f800000;
       DAT_00630728 = 0x3f800000;
@@ -188,7 +188,7 @@ void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int p
     }
     FUN_00185dd4(2,param_5,param_7,param_10 + temp_v9,(int)param_11,temp_v5,
                  (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),(int)((unsigned long long)param_11 >> 0x20));
-    temp_v1 = DAT_0059dbb4;
+    temp_v1 = g_renderCtx;
     temp_v0 = FUN_00169294(6,7,0);
     piVar7 = (int *)(temp_v1 + 0x12b8);
     temp_v5 = piVar7[*piVar7 + 2];
@@ -231,7 +231,7 @@ void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int p
     if (param_12 == 0) {
       FUN_00185dd4(2,param_5,param_6,param_10,temp_v11,temp_v7,(int)psVar4[1],temp_v12);
     }
-    temp_v1 = DAT_0059dbb4;
+    temp_v1 = g_renderCtx;
     if (temp_v5 == 0) {
       DAT_00630724 = 0x3f800000;
       DAT_00630728 = 0x3f800000;
@@ -263,7 +263,7 @@ void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int p
     }
     FUN_00185dd4(2,param_5,param_8,param_10 + temp_v7,(int)param_11,temp_v5,
                  (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),(int)((unsigned long long)param_11 >> 0x20));
-    temp_v1 = DAT_0059dbb4;
+    temp_v1 = g_renderCtx;
     temp_v0 = FUN_00169294(6,7,0);
     piVar7 = (int *)(temp_v1 + 0x12b8);
     temp_v5 = piVar7[*piVar7 + 2];

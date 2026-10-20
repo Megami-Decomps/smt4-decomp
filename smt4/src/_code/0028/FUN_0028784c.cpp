@@ -1,21 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028784c` (_code @ 0x28784c, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the two parameter copies at entry are emitted in the opposite order (r5 first in retail). */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002adc88(void);
+/* 4-byte slot whose third byte holds flags. */
+typedef struct {
+    u8 unk0;
+    u8 unk1;
+    u8 flags;       /* bit 1: toggled by the caller */
+    u8 unk3;
+} Slot;
 
+/* Table of slots starting at 0x200. */
+typedef struct {
+    u8 unk00[0x200];
+    Slot slots[1];  /* 0x200 */
+} SlotTable;
 
-void FUN_0028784c(int param_1,char param_2)
+SlotTable *FUN_002adc88(void);
 
+/* Stores `value` into bit 1 of the flags of slot `index`. */
+void FUN_0028784c(int index, char value)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002adc88();
-  temp_v0 = temp_v0 + param_1 * 4;
-  *(unsigned char *)(temp_v0 + 0x202) = (*(unsigned char *)(temp_v0 + 0x202) & 0xfd) | (param_2 << 1);
-  return;
+    Slot *slot = &FUN_002adc88()->slots[index];
+
+    slot->flags = (slot->flags & ~2) | (value << 1);
 }
 
 } /* extern "C" */

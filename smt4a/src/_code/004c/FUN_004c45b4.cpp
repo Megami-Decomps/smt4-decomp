@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int FUN_0014aa78(void);
+extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 
@@ -29,9 +29,9 @@ unsigned int FUN_004c45b4(unsigned int param_1)
   unsigned char temp_v2 [30];
   unsigned char temp_v3;
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   FUN_003f0e20(temp_v0,param_1);
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   FUN_003e8bb0(temp_v2,temp_v1,temp_v0);
   VectorUnsignedToFloat((unsigned int)temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
   return (unsigned int)temp_v3;

@@ -1,27 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031cb80` (_code @ 0x31cb80, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Reports through scrSetResult whether bit 8 of the record's flag halfword is set; always returns 1. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0028dcb0(int);
-int FUN_002b06c4(void);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x16];
+    /* 0x16 */ u16 unused : 8;
+    /*      */ u16 flag : 1;
+    /*      */ u16 rest : 7;
+} Record;
 
-/* Supplied declaration required: FUN_0028dcb0. */
-extern unsigned int FUN_00296cc8(void);
-/* Supplied declaration required: FUN_002b06c4. */
+extern s32 scrGetArg(void);
+extern Record *FUN_002b06c4(u16 id);
+extern void scrSetResult(s32 value);
 
-
-unsigned int FUN_0031cb80(void)
-
+u32 FUN_0031cb80(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  
-  temp_v0 = FUN_00296cc8();
-  FUN_002b06c4();
-  FUN_0028dcb0((*(unsigned short *)(temp_v0 + 0x16) & 0x1ff) >> 8);
-  return 1;
+    scrSetResult(FUN_002b06c4(scrGetArg())->flag);
+    return 1;
 }
 
-} /* extern "C" */
+}

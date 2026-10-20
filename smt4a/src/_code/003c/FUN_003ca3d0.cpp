@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_0016007c(...);
-int FUN_001631d0(...);
-int FUN_0019a5a0(...);
-int FUN_0019c364(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdOperatorNew(...);
+int jobStop(...);
+int asdMemFree(...);
+int scrScriptProcessDestroy(...);
 int FUN_0019de98(...);
 int FUN_001add24(...);
 int FUN_002804b0(...);
@@ -29,15 +29,15 @@ extern unsigned char LAB_00349b14; /* 0x349b14 */
 extern unsigned char LAB_003710f8; /* 0x3710f8 */
 extern unsigned int *DAT_00588130; /* 0x588130 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_0016007c. */
-/* Supplied declaration required: FUN_001631d0. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: jobStop. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_001add24. */
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_002804b0. */
 extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_002e3328. */
@@ -58,9 +58,9 @@ unsigned int FUN_003ca3d0(void)
   
   temp_v0 = FUN_002deb84();
   if (temp_v0 == 0) {
-    temp_v1 = FUN_00236038(0);
+    temp_v1 = scrGetArg(0);
     puVar3 = (unsigned int *)0x50;
-    FUN_0016007c();
+    asdOperatorNew();
     if (puVar3 != (unsigned int *)0x0) {
       puVar3[4] = 0;
       puVar3[5] = 0;
@@ -71,9 +71,9 @@ unsigned int FUN_003ca3d0(void)
     }
     pcVar4 = "SAINT_GERMAIN PROC";
     DAT_00588130 = puVar3;
-    FUN_0014e38c("SAINT_GERMAIN PROC",4,0,0,&LAB_00349b14,0,0);
+    asdProcessCreateSimple("SAINT_GERMAIN PROC",4,0,0,&LAB_00349b14,0,0);
     *puVar3 = (unsigned int)pcVar4;
-    FUN_0015155c("SAINT_GERMAIN DD",0xeb,0,0,&LAB_003710f8,0,0,pcVar4);
+    taskCreateDraw("SAINT_GERMAIN DD",0xeb,0,0,&LAB_003710f8,0,0,pcVar4);
     puVar3[8] = temp_v1;
     FUN_002804b0("npc_shop/SaintGermain/SaintGermain.mbm",puVar3 + 4,0);
     FUN_002804b0("npc_shop/SaintGermain/SaintGermain.bf",puVar3 + 5,0);
@@ -101,21 +101,21 @@ unsigned int FUN_003ca3d0(void)
       FUN_0019de98(0,0xf4f4f4ff);
       FUN_0037b450();
       if (puVar3[6] != 0) {
-        FUN_0019c364();
+        scrScriptProcessDestroy();
         puVar3[6] = 0;
       }
       if (puVar3[4] != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         puVar3[4] = 0;
       }
       if (puVar3[5] != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         puVar3[5] = 0;
       }
       if (*(char *)(puVar3 + 7) != '\0') {
         FUN_001add24(0x4f);
       }
-      FUN_001631d0(*puVar3,0);
+      jobStop(*puVar3,0);
       if (DAT_00588130 != (unsigned int *)0x0) {
         FUN_002e3328();
         DAT_00588130 = (unsigned int *)0x0;

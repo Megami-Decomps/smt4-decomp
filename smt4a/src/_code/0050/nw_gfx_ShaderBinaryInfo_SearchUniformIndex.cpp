@@ -12,7 +12,7 @@ typedef struct {
 } param_4_stack;
 
 extern int FUN_0019a37c(unsigned int, int, int);
-extern int FUN_002e3390(unsigned int);
+extern int wstrlen(unsigned int);
 
 
 void nw_gfx_ShaderBinaryInfo_SearchUniformIndex
@@ -36,7 +36,7 @@ void nw_gfx_ShaderBinaryInfo_SearchUniformIndex
   temp_v7 = *(int *)(param_2 + param_3 * 4 + 8);
   temp_v1 = *(int *)(temp_v7 + 0x38);
   temp_v4 = *(int *)(temp_v7 + 0x30);
-  temp_v2 = FUN_002e3390(param_4);
+  temp_v2 = wstrlen(param_4);
   temp_v5 = 0;
   if (temp_v5 < *(int *)(temp_v7 + 0x34)) {
     do {

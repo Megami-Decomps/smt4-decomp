@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0029bb3c(unsigned char *, int);
+int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a0428(unsigned int, int);
 int FUN_002c2950(void);
 
@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned char LAB_002e0384; /* 0x2e0384 */
 extern int DAT_0044cd88; /* 0x44cd88 */
 
-/* Supplied declaration required: FUN_0029bb3c. */
+/* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002c2950. */
 
@@ -40,7 +40,7 @@ void FUN_002e0274(int param_1)
   *(unsigned short *)(temp_v0 + 6) = 1;
   *(unsigned short *)(temp_v0 + 10) = 1;
   puVar2 = &LAB_002e0384;
-  FUN_0029bb3c(&LAB_002e0384,0x1c0);
+  asdMdlManagerCreateLoaded(&LAB_002e0384,0x1c0);
   temp_v0 = DAT_0044cd88;
   *(unsigned char **)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = puVar2;
   temp_v1 = 0;

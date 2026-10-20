@@ -7,8 +7,8 @@ extern "C" {
 int FUN_0030354c(void);
 int FUN_003d2158(int, int);
 
-extern int DAT_00581288; /* 0x581288 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_lmapScene; /* 0x581288 */
+extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 
 extern int FUN_0018719c(unsigned int);
@@ -22,9 +22,9 @@ void FUN_00354098(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  if (DAT_005f15fc != 1) {
-    if (DAT_005f15fc != 2) {
-      if (DAT_005f15fc == 4) {
+  if (g_gameState != 1) {
+    if (g_gameState != 2) {
+      if (g_gameState == 4) {
         if (DAT_005f1600 == 2) {
           return;
         }
@@ -32,10 +32,10 @@ void FUN_00354098(void)
         if (temp_v0 != 0) {
           temp_v0 = FUN_0018719c(0xf6);
           if (temp_v0 == 0) {
-            if (*(int *)(DAT_00581288 + 0x288) != 0) {
+            if (*(int *)(g_lmapScene + 0x288) != 0) {
               return;
             }
-            *(unsigned int *)(DAT_00581288 + 0x288) = 1;
+            *(unsigned int *)(g_lmapScene + 0x288) = 1;
             return;
           }
         }
@@ -47,10 +47,10 @@ void FUN_00354098(void)
       }
       temp_v0 = FUN_0018719c(0x91);
       if (temp_v0 == 0) {
-        if (*(int *)(DAT_00581288 + 0x288) != 0) {
+        if (*(int *)(g_lmapScene + 0x288) != 0) {
           return;
         }
-        *(unsigned int *)(DAT_00581288 + 0x288) = 1;
+        *(unsigned int *)(g_lmapScene + 0x288) = 1;
         return;
       }
     }
@@ -63,25 +63,25 @@ void FUN_00354098(void)
     if (temp_v0 != 0) {
       temp_v0 = FUN_0018719c(0xb1);
       if (temp_v0 == 0) {
-        if (*(int *)(DAT_00581288 + 0x288) != 0) {
+        if (*(int *)(g_lmapScene + 0x288) != 0) {
           return;
         }
-        *(unsigned int *)(DAT_00581288 + 0x288) = 1;
+        *(unsigned int *)(g_lmapScene + 0x288) = 1;
         return;
       }
     }
   }
-  if (*(int *)(DAT_00581288 + 0x288) == 0) {
+  if (*(int *)(g_lmapScene + 0x288) == 0) {
     return;
   }
-  if (*(int *)(DAT_00581288 + 0x288) == 3) {
+  if (*(int *)(g_lmapScene + 0x288) == 3) {
     FUN_0030354c();
-    if (*(int *)(DAT_00581288 + 0x28c) != 0) {
-      FUN_003d2158(*(int *)(DAT_00581288 + 0x28c),0);
+    if (*(int *)(g_lmapScene + 0x28c) != 0) {
+      FUN_003d2158(*(int *)(g_lmapScene + 0x28c),0);
     }
   }
-  temp_v0 = DAT_00581288;
-  *(unsigned int *)(DAT_00581288 + 0x280) = 0;
+  temp_v0 = g_lmapScene;
+  *(unsigned int *)(g_lmapScene + 0x280) = 0;
   *(unsigned int *)(temp_v0 + 0x288) = 0;
   *(unsigned int *)(temp_v0 + 0x284) = 0;
   *(unsigned int *)(temp_v0 + 0x28c) = 0;

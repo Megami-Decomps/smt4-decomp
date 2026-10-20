@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00158844(unsigned int, unsigned int, int, int);
 int FUN_0016e1a8(unsigned char **, int *);
 int FUN_0016e7c0(void);
-int FUN_001884b0(unsigned int);
+int vcallSlot12IfValid(unsigned int);
 int FUN_001886bc(void);
 int FUN_00188e0c(unsigned int *, int, int, unsigned int);
 int FUN_00188e28(void);
@@ -57,7 +57,7 @@ extern unsigned char DAT_005c0adc; /* 0x5c0adc */
 /* Supplied declaration required: FUN_00158844. */
 /* Supplied declaration required: FUN_0016e1a8. */
 /* Supplied declaration required: FUN_0016e7c0. */
-/* Supplied declaration required: FUN_001884b0. */
+/* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: FUN_001886bc. */
 /* Supplied declaration required: FUN_00188e0c. */
 /* Supplied declaration required: FUN_00188e28. */
@@ -154,7 +154,7 @@ void FUN_0016e2a8(void)
       if ((temp_v7 & 1) != 0) {
         FUN_00195fc8();
       }
-      FUN_001884b0(temp_v7 & 0xfffffffe);
+      vcallSlot12IfValid(temp_v7 & 0xfffffffe);
     }
   }
   else if (((((temp_v1 & 0x3fc00) != 0x4400) || ((temp_v1 & 0x3ff) < 0xb4)) || ((temp_v1 & 0x3ff) >= 200))

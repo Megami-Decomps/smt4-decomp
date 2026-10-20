@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern int DAT_005b3fe4; /* 0x5b3fe4 */
 extern int DAT_005b3fe8; /* 0x5b3fe8 */
 
@@ -43,7 +43,7 @@ void FUN_003c8538(int param_1)
   }
   temp_v0 = DAT_005b3fe4;
   temp_v3 = 0;
-  temp_v5 = *(unsigned int *)(DAT_0059dbb4 + *(int *)(DAT_0059dbb4 + 0x1298) * 4 + 0x12a0) & 0xf00;
+  temp_v5 = *(unsigned int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1298) * 4 + 0x12a0) & 0xf00;
   if (temp_v5 != 0) {
     temp_v3 = 0xf;
   }
@@ -57,8 +57,8 @@ void FUN_003c8538(int param_1)
   *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4) = temp_v1;
   *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4 + 4) = 0xf0113;
   DAT_005b3fe8 = DAT_005b3fe8 + 2;
-  temp_v4 = *(unsigned int *)(DAT_0059dbb4 + *(int *)(DAT_0059dbb4 + 0x1258) * 4 + 0x1260);
-  temp_v2 = *(unsigned int *)(DAT_0059dbb4 + *(int *)(DAT_0059dbb4 + 0x1218) * 4 + 0x1220);
+  temp_v4 = *(unsigned int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1258) * 4 + 0x1260);
+  temp_v2 = *(unsigned int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1218) * 4 + 0x1220);
   *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4) =
        (unsigned int)((-(temp_v2 & 1) & temp_v2 & 0x30) != 0 && (temp_v2 & 0xf0000000) != 0) |
        ((unsigned int)(temp_v5 != 0 || (temp_v4 & 0x1000) != 0) << 1);
@@ -66,7 +66,7 @@ void FUN_003c8538(int param_1)
   DAT_005b3fe8 = DAT_005b3fe8 + 2;
   *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4) =
        (unsigned int)((temp_v2 & -(temp_v2 & 1) & 0xff00) != 0 &&
-             *(int *)(DAT_0059dbb4 + *(int *)(DAT_0059dbb4 + 0x1238) * 4 + 0x1240) != 0) |
+             *(int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1238) * 4 + 0x1240) != 0) |
        ((unsigned int)((temp_v4 & 0x1000) != 0) << 1);
   *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4 + 4) = 0xf0115;
   DAT_005b3fe8 = DAT_005b3fe8 + 2;

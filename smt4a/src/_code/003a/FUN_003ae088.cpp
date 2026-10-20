@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002b5cb4(void);
 
 extern int DAT_005806d4; /* 0x5806d4 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 /* Supplied declaration required: FUN_002b5cb4. */
 
@@ -34,7 +34,7 @@ unsigned char FUN_003ae088(void)
       temp_v2 = *(int *)(temp_v1 + 0xb8);
     }
     if (temp_v5 && temp_v2 != 2) {
-      temp_v2 = *(int *)(DAT_00581288 + 0x1c);
+      temp_v2 = *(int *)(g_lmapScene + 0x1c);
       FUN_002b5cb4();
       if (temp_v2 < 0x43480001) {
         temp_v4 = temp_v4 + 1;

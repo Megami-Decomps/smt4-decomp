@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_002eb7c0(int);
-int FUN_002ec9f4(...);
+int strDestroy(...);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_005587c4; /* 0x5587c4 */
 
 /* Supplied declaration required: FUN_002eb7c0. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 
 
 void FUN_00105a54(unsigned int *param_1)
@@ -24,8 +24,8 @@ void FUN_00105a54(unsigned int *param_1)
   if ((int *)param_1[0x10] != (int *)0x0) {
     (**(romwright_code **)(*(int *)param_1[0x10] + 4))();
   }
-  temp_v0 = FUN_002ec9f4(param_1 + 0x1c);
-  temp_v0 = FUN_002ec9f4(temp_v0 - 0x2c);
+  temp_v0 = strDestroy(param_1 + 0x1c);
+  temp_v0 = strDestroy(temp_v0 - 0x2c);
   FUN_002eb7c0(temp_v0 - 0x44);
   return;
 }

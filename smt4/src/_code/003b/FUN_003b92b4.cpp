@@ -13,7 +13,7 @@ int FUN_0029c3b0(int);
 int FUN_002a03d8(int, int);
 int FUN_002b63c0(void);
 int FUN_002bf694(...);
-int FUN_002c57c8(...);
+int asdSequenceRequest(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -44,7 +44,7 @@ extern int FUN_002903f0(void);
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002b63c0. */
 /* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c57c8. */
+/* Supplied declaration required: asdSequenceRequest. */
 extern int FUN_003bb36c(int);
 
 
@@ -69,18 +69,18 @@ void FUN_003b92b4(int param_1)
   temp_v1 = *(unsigned int *)(param_1 + 0x20);
   if ((temp_v1 & 0x1000000) != 0) {
     temp_v5[0] = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0xd60) + 0x54);
-    FUN_002c57c8(10,temp_v5,4);
+    asdSequenceRequest(10,temp_v5,4);
   }
   else if ((temp_v1 & 0x2000000) != 0) {
     temp_v4 = 4;
     temp_v5[0] = *(unsigned short *)(*(int *)(param_1 + 0xd60) + 0x54) + 100;
     temp_v2 = 10;
     puVar5 = temp_v5;
-    FUN_002c57c8(temp_v2,puVar5,temp_v4);
+    asdSequenceRequest(temp_v2,puVar5,temp_v4);
   }
   else if ((temp_v1 & 0x8000000) != 0) {
     temp_v5[0] = romwright_piece_2_2((((unsigned int)(temp_v5[0]) >> 16) & 0xffffU),*(unsigned short *)(*(int *)(param_1 + 0xd60) + 0x54));
-    FUN_002c57c8(0x12,temp_v5,2);
+    asdSequenceRequest(0x12,temp_v5,2);
     FUN_002a03d8(0,10);
     FUN_002a03d8(1,10);
   }
@@ -91,7 +91,7 @@ void FUN_003b92b4(int param_1)
     temp_v4 = 0xc;
     temp_v2 = 0x10;
     puVar5 = temp_v5;
-    FUN_002c57c8(temp_v2,puVar5,temp_v4);
+    asdSequenceRequest(temp_v2,puVar5,temp_v4);
   }
   else {
     if ((temp_v1 & 0x200000) != 0) {
@@ -173,7 +173,7 @@ void FUN_003b92b4(int param_1)
       temp_v4 = 0x20;
       temp_v2 = 4;
     }
-    FUN_002c57c8(temp_v2,puVar5,temp_v4);
+    asdSequenceRequest(temp_v2,puVar5,temp_v4);
   }
 LAB_003b9564:
   if ((*(unsigned int *)(param_1 + 0x20) & 0x40) != 0) {

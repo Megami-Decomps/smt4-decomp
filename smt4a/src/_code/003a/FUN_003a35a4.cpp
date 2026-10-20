@@ -13,7 +13,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_00587f28; /* 0x587f28 */
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
 extern int FUN_001861ec(unsigned char);
 extern unsigned char *FUN_00398048(unsigned int);
@@ -51,7 +51,7 @@ void FUN_003a35a4(void)
     *(int *)(temp_v2 + 200) = (int)temp_v0;
     return;
   }
-  (*(unsigned char *)((unsigned char *)&DAT_005f15fc + 0x462)) = 1;
+  (*(unsigned char *)((unsigned char *)&g_gameState + 0x462)) = 1;
   FUN_0048d248(temp_v2 + 0x68,(int)*(short *)(temp_v3 + 0x32));
   return;
 }

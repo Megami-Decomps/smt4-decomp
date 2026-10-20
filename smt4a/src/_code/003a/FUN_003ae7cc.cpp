@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00164a9c(void);
+int jobGetWork(void);
 int FUN_00411458(int);
 
 extern int DAT_00573c50; /* 0x573c50 */
 
-extern int FUN_0014aa78(unsigned int *);
-/* Supplied declaration required: FUN_00164a9c. */
+extern int btlGetMainState(unsigned int *);
+/* Supplied declaration required: jobGetWork. */
 /* Supplied declaration required: FUN_00411458. */
 
 
@@ -21,9 +21,9 @@ unsigned int FUN_003ae7cc(void)
   int temp_v0;
   int temp_v1;
   
-  FUN_00164a9c();
+  jobGetWork();
   temp_v0 = DAT_00573c50;
-  if ((DAT_00573c50 != 0) && (temp_v1 = FUN_0014aa78((unsigned int *)&DAT_00573c50), temp_v1 != 0)) {
+  if ((DAT_00573c50 != 0) && (temp_v1 = btlGetMainState((unsigned int *)&DAT_00573c50), temp_v1 != 0)) {
     FUN_00411458(temp_v0);
   }
   return 0;

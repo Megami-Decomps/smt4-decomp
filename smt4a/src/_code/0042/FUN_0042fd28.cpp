@@ -1,32 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0042fd28` (_code @ 0x42fd28, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Dispatches to the active backend (primary, else secondary); returns 0xE0810BF8 when neither is enabled. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0042ffd8(unsigned int);
-int FUN_0043048c(void);
+extern s32 DAT_005c1fc4;
+extern s32 DAT_005c1fc8;
 
-extern int DAT_005c1fc4; /* 0x5c1fc4 */
-extern int DAT_005c1fc8; /* 0x5c1fc8 */
+extern u32 FUN_0042ffd8(u32 arg);
+extern u32 FUN_0043048c(void);
 
-/* Supplied declaration required: FUN_0042ffd8. */
-/* Supplied declaration required: FUN_0043048c. */
-
-
-void FUN_0042fd28(unsigned int param_1)
-
+u32 FUN_0042fd28(u32 arg)
 {
-/* irregular: 2 native warning(s); review required */
-  if (DAT_005c1fc8 != 0) {
-    FUN_0043048c();
-    return;
-  }
-  if (DAT_005c1fc4 != 0) {
-    FUN_0042ffd8(param_1);
-    return;
-  }
-  return;
+    if (DAT_005c1fc8 != 0) {
+        return FUN_0043048c();
+    }
+    if (DAT_005c1fc4 != 0) {
+        return FUN_0042ffd8(arg);
+    }
+    return 0xE0810BF8;
 }
 
-} /* extern "C" */
+}

@@ -1,37 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011a6dc` (_code @ 0x11a6dc, 0x3a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only: retail loads owner->data (r1) before obj->param (r2) while building the last call's arguments */
+/* Replaces the object's owned helper with a freshly constructed one (destroying the old), then forwards the new helper and the owner's data to FUN_00117044. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00117044(unsigned int, unsigned int, unsigned int, int);
+struct Helper;
 
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_00117044. */
-extern int FUN_002e760a(unsigned int);
-extern unsigned int FUN_002fde5c(void);
+typedef struct HelperVtbl {
+    /* 0x00 */ void *slot0;
+    /* 0x04 */ void (*destroy)(struct Helper *helper);
+} HelperVtbl;
 
+typedef struct Helper {
+    /* 0x00 */ HelperVtbl *vtbl;
+} Helper;
 
-void FUN_0011a6dc(int param_1)
+typedef struct Owner {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u8 unk004[0x14];
+    /* 0x018 */ u32 data;
+} Owner;
 
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ Owner *owner;
+} Holder;
+
+typedef struct Object {
+    /* 0x000 */ u8 unk000[0xB8];
+    /* 0x0B8 */ u32 param;
+    /* 0x0BC */ Helper *helper;
+    /* 0x0C0 */ u8 unk0C0[4];
+    /* 0x0C4 */ u8 extra[0xDC];
+    /* 0x1A0 */ Holder *holder;
+} Object;
+
+extern void FUN_00117044(Helper *helper, u32 a, u32 b, u8 *c);
+extern Helper *FUN_002e760a(u32 size);
+extern Helper *FUN_002fde5c(Helper *memory);
+
+void FUN_0011a6dc(Object *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = *(int *)(*(int *)(param_1 + 0x1a0) + 4);
-  if (*(int **)(param_1 + 0xbc) != (int *)0x0) {
-    (**(romwright_code **)(**(int **)(param_1 + 0xbc) + 4))();
-  }
-  temp_v0 = FUN_002e760a(0x18);
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    temp_v1 = FUN_002fde5c();
-  }
-  *(unsigned int *)(param_1 + 0xbc) = temp_v1;
-  FUN_00117044(temp_v1,*(unsigned int *)(temp_v2 + 0x18),*(unsigned int *)(param_1 + 0xb8),param_1 + 0xc4);
-  return;
+    Owner *owner = obj->holder->owner;
+    Helper *helper;
+
+    if (obj->helper != NULL) {
+        obj->helper->vtbl->destroy(obj->helper);
+    }
+    helper = FUN_002e760a(0x18);
+    if (helper != NULL) {
+        helper = FUN_002fde5c(helper);
+    }
+    obj->helper = helper;
+    FUN_00117044(helper, owner->data, obj->param, obj->extra);
 }
 
-} /* extern "C" */
+}

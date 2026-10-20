@@ -8,7 +8,7 @@ int FUN_002f4ab0(int, unsigned int);
 int FUN_002f8e58(unsigned int, unsigned int);
 
 typedef int romwright_code(...);
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 
 /* Supplied declaration required: FUN_002e6e26. */
 /* Supplied declaration required: FUN_002e7232. */
@@ -32,7 +32,7 @@ unsigned int FUN_0010e6a4(int param_1)
     }
     *(unsigned int *)(param_1 + 0x14c) = 0;
   }
-  if (((*(signed char *)((unsigned char *)&DAT_00594958 + 0x12)) != '\0') && (*(int **)(param_1 + 0x150) != (int *)0x0)) {
+  if (((*(signed char *)((unsigned char *)&g_flagBlock + 0x12)) != '\0') && (*(int **)(param_1 + 0x150) != (int *)0x0)) {
     (**(romwright_code **)(**(int **)(param_1 + 0x150) + 0xc))(*(int **)(param_1 + 0x150));
     if (*(int **)(param_1 + 0x150) != (int *)0x0) {
       (**(romwright_code **)(**(int **)(param_1 + 0x150) + 4))(*(int **)(param_1 + 0x150));

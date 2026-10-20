@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00168188(void);
+int asdMemoryGetDefaultAllocator(void);
 int FUN_0018d9f0(int *, unsigned int, int);
 int FUN_001aa528(...);
 int FUN_001b0758(int, int);
@@ -54,15 +54,15 @@ extern unsigned char DAT_00636d20; /* 0x636d20 */
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_00168188. */
+/* Supplied declaration required: asdMemoryGetDefaultAllocator. */
 /* Supplied declaration required: FUN_0018d9f0. */
 /* Supplied declaration required: FUN_001aa528. */
-extern unsigned int FUN_001ad6fc(void);
+extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: FUN_001b0758. */
 /* Supplied declaration required: FUN_001b0e10. */
-extern short FUN_002e3390(int);
-extern int FUN_0034101c(fn_003168b8_arg1 *);
-extern int FUN_0036baec(fn_003168b8_arg1 *);
+extern short wstrlen(int);
+extern int asdModelGetSlotArray2(fn_003168b8_arg1 *);
+extern int asdModelGetSlotArray1(fn_003168b8_arg1 *);
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -119,9 +119,9 @@ void FUN_003168b8(int *param_1,fn_003168b8_arg1 *param_2)
   piVar21 = (int *)0x0;
   temp_v29 = param_1;
   pfStack_28 = param_2;
-  temp_v3 = FUN_00168188();
+  temp_v3 = asdMemoryGetDefaultAllocator();
   FUN_0018d9f0(temp_v29,temp_v3,*temp_v29);
-  temp_v12 = (int *)FUN_00168188();
+  temp_v12 = (int *)asdMemoryGetDefaultAllocator();
   temp_v13 = (int *)0x0;
   temp_v14 = (int *)0x0;
   temp_v15 = 0x40000000;
@@ -151,8 +151,8 @@ void FUN_003168b8(int *param_1,fn_003168b8_arg1 *param_2)
       else {
         temp_v9 = 0;
       }
-      temp_v3 = FUN_00168188();
-      temp_v4 = FUN_001ad6fc();
+      temp_v3 = asdMemoryGetDefaultAllocator();
+      temp_v4 = asdMemoryGetAllocatorA();
       temp_v17 = 1;
       temp_v20 = 0;
       temp_v21 = 0;
@@ -218,7 +218,7 @@ LAB_00316ab4:
         if (temp_v6 != 0) {
           temp_v6 = temp_v6 + temp_v9 + 0xc;
         }
-        temp_v1 = FUN_002e3390(temp_v6);
+        temp_v1 = wstrlen(temp_v6);
         temp_v2 = *psVar22;
         if (*(int *)(temp_v7 + 0xc) != 0) {
           temp_v9 = temp_v7 + 0xc + *(int *)(temp_v7 + 0xc);
@@ -256,7 +256,7 @@ LAB_00316b80:
         if (temp_v6 != 0) {
           temp_v6 = temp_v6 + temp_v9 + 0xc;
         }
-        temp_v2 = FUN_002e3390(temp_v6);
+        temp_v2 = wstrlen(temp_v6);
         if (*(int *)(temp_v7 + 0xc) != 0) {
           temp_v9 = temp_v7 + 0xc + *(int *)(temp_v7 + 0xc);
         }
@@ -294,7 +294,7 @@ LAB_00316c58:
         if (temp_v6 != 0) {
           temp_v6 = temp_v6 + temp_v9 + 0xc;
         }
-        temp_v2 = FUN_002e3390(temp_v6);
+        temp_v2 = wstrlen(temp_v6);
         if (*(int *)(temp_v7 + 0xc) != 0) {
           temp_v9 = temp_v7 + 0xc + *(int *)(temp_v7 + 0xc);
         }
@@ -333,7 +333,7 @@ LAB_00316d2c:
         if (temp_v6 != 0) {
           temp_v6 = temp_v6 + temp_v9 + 0xc;
         }
-        temp_v2 = FUN_002e3390(temp_v6);
+        temp_v2 = wstrlen(temp_v6);
         if (*(int *)(temp_v7 + 0xc) != 0) {
           temp_v9 = temp_v7 + 0xc + *(int *)(temp_v7 + 0xc);
         }
@@ -381,8 +381,8 @@ LAB_00316d2c:
       else {
         temp_v9 = 0;
       }
-      temp_v3 = FUN_00168188();
-      temp_v4 = FUN_001ad6fc();
+      temp_v3 = asdMemoryGetDefaultAllocator();
+      temp_v4 = asdMemoryGetAllocatorA();
       temp_v17 = 1;
       temp_v18 = 8;
       temp_v19 = 4;
@@ -460,8 +460,8 @@ LAB_00316f40:
     temp_v13 = piVar3;
     piVar21 = piVar21 + 1;
   }
-  temp_v7 = FUN_0036baec(param_2);
-  temp_v10 = FUN_0034101c(param_2);
+  temp_v7 = asdModelGetSlotArray1(param_2);
+  temp_v10 = asdModelGetSlotArray2(param_2);
   piVar9 = temp_v14;
   piVar20 = temp_v14;
   piVar21 = temp_v13;
@@ -553,8 +553,8 @@ LAB_00317150:;
       else {
         temp_v6 = 0;
       }
-      temp_v3 = FUN_001ad6fc();
-      temp_v4 = FUN_00168188();
+      temp_v3 = asdMemoryGetAllocatorA();
+      temp_v4 = asdMemoryGetDefaultAllocator();
       temp_v19 = romwright_piece_3_1((((unsigned int)(temp_v19) >> 8) & 0xffffffU),1);
       temp_v22 = 0;
       temp_v23 = 0;

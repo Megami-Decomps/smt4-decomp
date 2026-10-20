@@ -8,7 +8,7 @@ int FUN_0023d9b8(int, int, int);
 int FUN_002ae164(void);
 
 /* Supplied declaration required: FUN_0023d9b8. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002ae164. */
 
 
@@ -37,7 +37,7 @@ unsigned int FUN_0033fd64(int param_1,int param_2)
       case 10:
         break;
       default:
-        temp_v1 = FUN_002939f4();
+        temp_v1 = btlGetMainState();
         if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x2000000) == 0) {
           if (*(char *)(param_2 + 0x23) != '\x03') {
             switch((*(unsigned int *)(param_2 + 0x28) & 0x1ff) >> 5) {

@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
 /* Supplied declaration required: FUN_0022a444. */
 extern unsigned int *FUN_0022a464(unsigned int, unsigned int);
@@ -27,7 +27,7 @@ extern unsigned int *FUN_0022a464(unsigned int, unsigned int);
 extern unsigned int FUN_0025628c(unsigned int);
 /* Supplied declaration required: FUN_00262f68. */
 /* Supplied declaration required: FUN_0026e61c. */
-extern unsigned int FUN_0027e928(unsigned int);
+extern unsigned int btlUnitGet(unsigned int);
 extern int FUN_00295d7c(void);
 extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
@@ -172,7 +172,7 @@ void FUN_003c33c8(int param_1,int param_2)
             temp_v5 = (int)*(short *)((int)puVar7 + temp_v4 * 2 + 8);
             if (-1 < temp_v5) {
               temp_v6 = *(int *)(param_2 + 0x1e98);
-              temp_v3 = FUN_0027e928(DAT_0043427c);
+              temp_v3 = btlUnitGet(g_btlScriptUnit);
               FUN_00246e24(0,temp_v3,temp_v6 + temp_v5 * 0x114,*(unsigned int *)(param_1 + 0x18),1);
             }
             temp_v4 = temp_v4 + 1;
@@ -222,7 +222,7 @@ void FUN_003c33c8(int param_1,int param_2)
       temp_v5 = (int)*(short *)(temp_v8 + temp_v4 * 2 + 8);
       if (-1 < temp_v5) {
         temp_v6 = *(int *)(param_2 + 0x1e98);
-        temp_v3 = FUN_0027e928(DAT_0043427c);
+        temp_v3 = btlUnitGet(g_btlScriptUnit);
         FUN_00246e24(0,temp_v3,temp_v6 + temp_v5 * 0x114,*(unsigned int *)(param_1 + 0x18),1);
       }
       temp_v4 = temp_v4 + 1;
@@ -247,7 +247,7 @@ void FUN_003c33c8(int param_1,int param_2)
               temp_v5 = (int)*(short *)((int)puVar7 + temp_v4 * 2 + 8);
               if (-1 < temp_v5) {
                 temp_v6 = *(int *)(param_2 + 0x1e98);
-                temp_v3 = FUN_0027e928(DAT_0043427c);
+                temp_v3 = btlUnitGet(g_btlScriptUnit);
                 FUN_00246d38(0,temp_v3,temp_v6 + temp_v5 * 0x114,*(unsigned int *)(param_1 + 0x18));
               }
               temp_v4 = temp_v4 + 1;
@@ -283,7 +283,7 @@ void FUN_003c33c8(int param_1,int param_2)
           temp_v5 = (int)*(short *)(temp_v8 + temp_v4 * 2 + 8);
           if (-1 < temp_v5) {
             temp_v6 = *(int *)(param_2 + 0x1e98);
-            temp_v3 = FUN_0027e928(DAT_0043427c);
+            temp_v3 = btlUnitGet(g_btlScriptUnit);
             FUN_00246d38(0,temp_v3,temp_v6 + temp_v5 * 0x114,*(unsigned int *)(param_1 + 0x18));
           }
           temp_v4 = temp_v4 + 1;

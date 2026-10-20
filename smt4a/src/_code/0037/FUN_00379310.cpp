@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003fd7c0(unsigned int, unsigned int, int);
 
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 /* Supplied declaration required: FUN_003fd7c0. */
 
@@ -15,8 +15,8 @@ void FUN_00379310(unsigned int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  if (*(int *)(DAT_00581288 + 0x180) != 0) {
-    FUN_003fd7c0(*(unsigned int *)(*(int *)(DAT_00581288 + 0x180) + 4),param_1,2);
+  if (*(int *)(g_lmapScene + 0x180) != 0) {
+    FUN_003fd7c0(*(unsigned int *)(*(int *)(g_lmapScene + 0x180) + 4),param_1,2);
     return;
   }
   return;

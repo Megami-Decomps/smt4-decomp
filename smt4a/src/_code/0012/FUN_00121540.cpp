@@ -10,7 +10,7 @@ extern unsigned char DAT_0055b00c; /* 0x55b00c */
 
 /* Supplied declaration required: FUN_002ea0b8. */
 extern int FUN_002ec890(unsigned int *);
-extern int FUN_002ec9f4(int);
+extern int strDestroy(int);
 
 
 void FUN_00121540(unsigned int *param_1)
@@ -21,7 +21,7 @@ void FUN_00121540(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_0055b00c;
   temp_v0 = FUN_002ec890(param_1 + 0xd);
-  temp_v0 = FUN_002ec9f4(temp_v0 - 0x28);
+  temp_v0 = strDestroy(temp_v0 - 0x28);
   FUN_002ea0b8(temp_v0 - 0xc);
   return;
 }

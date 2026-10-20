@@ -16,7 +16,7 @@ int FUN_00297468(...);
 int FUN_0029f848(...);
 int FUN_002af5c0(int, unsigned int, int);
 int FUN_002b7bca(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int FUN_002c312c(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
@@ -49,7 +49,7 @@ extern int FUN_0028dba8(unsigned int);
 extern int FUN_0028e9a0(unsigned int);
 extern int FUN_0028e9d4(unsigned int);
 /* Supplied declaration required: FUN_0028e9ec. */
-extern int FUN_00292f28(int);
+extern int padIsButtonDown(int);
 /* Supplied declaration required: FUN_002942c4. */
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_00297468. */
@@ -59,9 +59,9 @@ extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002af5c0. */
 extern int FUN_002b6a54(int, unsigned short);
 extern int FUN_002b6ad0(void);
-extern int FUN_002b6b20(void);
+extern int gameGetOptions(void);
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002c312c. */
@@ -135,7 +135,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   FUN_002bd954(param_1 + 0x96c,0x15,0x5e,param_1,6);
   temp_v1 = FUN_0028dba8(*(unsigned int *)(param_1 + 0x3040));
   if ((temp_v1 != 0) && (temp_v1 = FUN_002b6ad0(), temp_v1 != 0)) {
-    FUN_002bd8e8(param_1 + 0x96c,0xd,0);
+    timerStart(param_1 + 0x96c,0xd,0);
   }
   FUN_002bd954(param_1 + 0x20,0x15,0xdb,param_1,6);
   FUN_002bee58(param_1 + 0x20,0);
@@ -153,7 +153,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   FUN_002bd954(param_1 + 0x624,0x15,0x96,param_1,6);
   FUN_002bee58(param_1 + 0x624,3);
   FUN_002bd954(param_1 + 0x6b0,0x15,0x9c,param_1,6);
-  FUN_002bd8e8(param_1 + 0x6b0,6,0);
+  timerStart(param_1 + 0x6b0,6,0);
   temp_v1 = 0;
   do {
     FUN_002bd954(param_1 + temp_v1 * 0x8c + 0xe58,0x15,0x72,param_1,6);
@@ -215,9 +215,9 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   } while (temp_v1 < 3);
   temp_v1 = FUN_002b6ad0();
   if (temp_v1 != 0) {
-    temp_v1 = FUN_002b6b20();
+    temp_v1 = gameGetOptions();
     temp_v0 = *(unsigned short *)(temp_v1 + 0x606);
-    temp_v1 = FUN_002b6b20();
+    temp_v1 = gameGetOptions();
     temp_v1 = FUN_002b6a54((int)*(short *)(temp_v1 + 0x604),temp_v0);
     FUN_002942c4((int)(short)(*(short *)(temp_v1 + 0x5a) + 1),0);
   }
@@ -262,7 +262,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   temp_v5 = 0;
   temp_v1 = 0;
   do {
-    temp_v2 = FUN_00292f28(temp_v1 + 0x2e);
+    temp_v2 = padIsButtonDown(temp_v1 + 0x2e);
     if (temp_v2 != 0) {
       temp_v5 = temp_v5 + 1;
     }

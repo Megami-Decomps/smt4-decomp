@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
+int jobStop(unsigned int, int);
 int FUN_001641c4(void);
-int FUN_0019a5a0(...);
-int FUN_0019c364(void);
+int asdMemFree(...);
+int scrScriptProcessDestroy(void);
 int FUN_001b4a90(unsigned int *, int, unsigned int);
 int FUN_00237210(unsigned int);
 
 extern unsigned int *DAT_00588fe8; /* 0x588fe8 */
 
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_001641c4. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_00237210. */
 
@@ -42,19 +42,19 @@ void FUN_0037de7c(void)
   FUN_00237210(puVar1[0x8ee]);
   puVar2 = DAT_00588fe8;
   if (DAT_00588fe8[0x95d] != 0) {
-    FUN_0019c364();
+    scrScriptProcessDestroy();
     puVar2[0x95d] = 0;
   }
   if (puVar2[0x95b] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     puVar2[0x95b] = 0;
   }
   if (puVar2[0x95c] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     puVar2[0x95c] = 0;
   }
-  FUN_001631d0(*puVar1,0);
-  FUN_0019a5a0(puVar1);
+  jobStop(*puVar1,0);
+  asdMemFree(puVar1);
   DAT_00588fe8 = (unsigned int *)0x0;
   return;
 }

@@ -7,8 +7,8 @@ extern "C" {
 int FUN_001f6998(unsigned int, unsigned int, int);
 int FUN_002693b4(unsigned int, int, int, unsigned int);
 int FUN_002694f8(void);
-int FUN_002c222c(int, unsigned short *);
-int FUN_002c32a0(int, int, int, int, int, int);
+int asdOperatorNew(int, unsigned short *);
+int memAlloc(int, int, int, int, int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -25,8 +25,8 @@ extern unsigned int DAT_00473814; /* 0x473814 */
 /* Supplied declaration required: FUN_002693b4. */
 extern unsigned int FUN_002693e4(void);
 /* Supplied declaration required: FUN_002694f8. */
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: memAlloc. */
 
 
 unsigned short * FUN_00268fc4(unsigned short *param_1)
@@ -49,7 +49,7 @@ unsigned short * FUN_00268fc4(unsigned short *param_1)
     temp_v4 = *(unsigned int *)(*(int *)(param_1 + 6) + 0x14);
     temp_v5 = *(unsigned int *)(*(int *)(param_1 + 6) + 4) & 0xffff;
     puVar3 = (unsigned short *)0x10000;
-    FUN_002c32a0(0x10000,0x100,0,0x58,0x10,1);
+    memAlloc(0x10000,0x100,0,0x58,0x10,1);
     *puVar3 = 0x300;
     puVar3[1] = 0;
     FUN_001f6998(temp_v5,temp_v4,0);
@@ -73,9 +73,9 @@ unsigned short * FUN_00268fc4(unsigned short *param_1)
     temp_v6 = *(unsigned int *)(*(int *)(param_1 + 4) + 0xc);
     temp_v8 = *(int *)(*(int *)(param_1 + 4) + 0x14);
     puVar3 = (unsigned short *)0x10000;
-    FUN_002c32a0(0x10000,0x100,0,0x58,0x10,1);
+    memAlloc(0x10000,0x100,0,0x58,0x10,1);
     temp_v2 = 0x7e8;
-    FUN_002c222c(0x7e8,param_1);
+    asdOperatorNew(0x7e8,param_1);
     if (temp_v2 == 0) {
       temp_v7 = 0;
     }

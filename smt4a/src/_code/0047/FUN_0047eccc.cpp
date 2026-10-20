@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00180008(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 void FUN_0047eccc(unsigned int param_1)
@@ -12,7 +12,7 @@ void FUN_0047eccc(unsigned int param_1)
 {
   int temp_v0;
   
-  temp_v0 = FUN_00180008(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
     temp_v0 = 0;
     do {

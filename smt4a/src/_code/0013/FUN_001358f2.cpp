@@ -14,7 +14,7 @@ typedef struct {
 } param_3_stack;
 
 extern int FUN_0012d4c6(unsigned int, int *);
-extern int FUN_002e6dac(void);
+extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_002f00e8. */
 /* Supplied declaration required: FUN_00307574. */
@@ -56,7 +56,7 @@ void FUN_001358f2(int *param_1,unsigned short *param_2,unsigned short *param_3)
   }
   temp_v2 = FUN_002f00e8(param_1);
   temp_v0 = FUN_0012d4c6(temp_v2,param_1);
-  temp_v5 = FUN_002e6dac();
+  temp_v5 = rt_malloc();
   FUN_00307574(*param_1,param_2,temp_v5,param_1,piVar9,puVar3);
   puVar3 = (unsigned short *)((((int)param_2 - *param_1) & 0xfffffffeU) + temp_v5);
   if (puVar3 != (unsigned short *)0x0) {

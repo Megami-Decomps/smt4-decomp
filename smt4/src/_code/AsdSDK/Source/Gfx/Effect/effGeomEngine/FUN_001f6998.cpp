@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002bfe28(int *, unsigned int *);
-int FUN_002c32a0(int, int, int, unsigned int, int, int);
+int mtx44Copy(int *, unsigned int *);
+int memAlloc(int, int, int, unsigned int, int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -30,9 +30,9 @@ extern unsigned int DAT_004efdd0; /* 0x4efdd0 */
 extern unsigned int DAT_004efdd4; /* 0x4efdd4 */
 extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 
-/* Supplied declaration required: FUN_002bfe28. */
+/* Supplied declaration required: mtx44Copy. */
 extern int FUN_002bfefc(unsigned int *);
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 extern int FUN_002d58b4(unsigned int, unsigned int);
 
 
@@ -65,7 +65,7 @@ int * FUN_001f6998(unsigned int param_1,unsigned int param_2,int param_3)
     temp_v2 = temp_v2 + 0x10;
   }
   piVar1 = (int *)0x10000;
-  FUN_002c32a0(0x10000,0x100,0,temp_v2 * param_1 + 200,0x10,1);
+  memAlloc(0x10000,0x100,0,temp_v2 * param_1 + 200,0x10,1);
   if (((DAT_00476638 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476638), temp_v0 != 0)) {
     DAT_004efd9c = 0x3f800000;
     DAT_004efda0 = 0;
@@ -84,7 +84,7 @@ int * FUN_001f6998(unsigned int param_1,unsigned int param_2,int param_3)
     DAT_004efdd4 = 0;
     DAT_004efdd8 = 0x3f800000;
   }
-  FUN_002bfe28(piVar1 + 0x1a,&DAT_004efd9c);
+  mtx44Copy(piVar1 + 0x1a,&DAT_004efd9c);
   *piVar1 = (int)(piVar1 + 0x2e);
   piVar1[3] = 1;
   *(unsigned char *)(piVar1 + 0x19) = 0xff;

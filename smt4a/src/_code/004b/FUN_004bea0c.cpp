@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001517b4(...);
 int FUN_001641b4(...);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_0019de98(...);
 int FUN_00228b04(int, int);
 int FUN_00275f44(unsigned int);
@@ -35,7 +35,7 @@ extern unsigned char LAB_004bee70; /* 0x4bee70 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001641b4. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_00187168(void);
 /* Supplied declaration required: FUN_0019de98. */
 extern unsigned int FUN_0019e52c(unsigned short);
@@ -123,7 +123,7 @@ void FUN_004bea0c(int param_1)
       else {
         temp_v2 = 0xf0;
       }
-      FUN_001681cc(temp_v2);
+      sysPlaySe(temp_v2);
     }
     else {
       temp_v3 = 0;
@@ -152,7 +152,7 @@ void FUN_004bea0c(int param_1)
           return;
         }
         FUN_001641b4(0x100020e);
-        FUN_001681cc(0xf2);
+        sysPlaySe(0xf2);
         FUN_0035d03c(1);
         FUN_003343f0(1);
         *(unsigned int *)(param_1 + 8) = 5;

@@ -21,10 +21,10 @@ int FUN_00296f4c(...);
 int FUN_00297060(...);
 int FUN_00297410(int);
 int FUN_0029be5c(...);
-int FUN_002a7218(...);
+int scrScriptProcessDestroy(...);
 int FUN_002b8830(void);
-int FUN_002c415c(...);
-int FUN_002c564c(int);
+int asdMemFree(...);
+int jyoucyuGetTableEntry(int);
 int FUN_002c58c8(int, int);
 int FUN_002dfe08(unsigned int);
 int FUN_002f364c(...);
@@ -51,9 +51,9 @@ extern unsigned char LAB_001e59b8; /* 0x1e59b8 */
 extern unsigned char LAB_001e5d3c; /* 0x1e5d3c */
 extern unsigned char LAB_001e5d54; /* 0x1e5d54 */
 extern int DAT_004474f4; /* 0x4474f4 */
-extern int DAT_004475b8; /* 0x4475b8 */
+extern int g_mapDepart; /* 0x4475b8 */
 extern int DAT_004475bc; /* 0x4475bc */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_gameState; /* 0x49f91c */
 extern unsigned int DAT_0049f9c0; /* 0x49f9c0 */
 extern int DAT_0049f9c4; /* 0x49f9c4 */
 extern unsigned int DAT_0049fd38; /* 0x49fd38 */
@@ -83,13 +83,13 @@ extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_00297410. */
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: FUN_002a46d8. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002ae898. */
 /* Supplied declaration required: FUN_002b8830. */
 extern int FUN_002c09d0(unsigned int);
 extern int FUN_002c1c0c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_002c58c8. */
 extern unsigned int FUN_002c5c04(unsigned char *);
 /* Supplied declaration required: FUN_002dfe08. */
@@ -119,8 +119,8 @@ unsigned int FUN_001e553c(void)
   unsigned int temp_v11;
   unsigned int temp_v12;
   
-  temp_v2 = DAT_004475b8;
-  switch(*(unsigned int *)(DAT_004475b8 + 0x18)) {
+  temp_v2 = g_mapDepart;
+  switch(*(unsigned int *)(g_mapDepart + 0x18)) {
   case 0:
     FUN_002c58c8(10,4);
     temp_v4 = FUN_002c1c0c(10,4);
@@ -160,8 +160,8 @@ unsigned int FUN_001e553c(void)
     }
     break;
   case 1:
-    temp_v4 = *(int *)(DAT_004475b8 + 0x1c) + 1;
-    *(int *)(DAT_004475b8 + 0x1c) = temp_v4;
+    temp_v4 = *(int *)(g_mapDepart + 0x1c) + 1;
+    *(int *)(g_mapDepart + 0x1c) = temp_v4;
     if (temp_v4 < 0xb) {
       return 0;
     }
@@ -170,16 +170,16 @@ unsigned int FUN_001e553c(void)
     *(unsigned int *)(temp_v2 + 0x1c) = 0;
     break;
   case 4:
-    if (*(int *)(DAT_004475b8 + 0x1c) != 0) {
-      temp_v4 = FUN_0019e0c0(*(unsigned int *)(DAT_004475b8 + 0x60));
+    if (*(int *)(g_mapDepart + 0x1c) != 0) {
+      temp_v4 = FUN_0019e0c0(*(unsigned int *)(g_mapDepart + 0x60));
       if (temp_v4 == 2) {
         if (*(int *)(temp_v2 + 100) != 0) {
           FUN_0028975c(*(int *)(temp_v2 + 100),1);
         }
         FUN_0028dc68(0);
-        FUN_002a7218(*(unsigned int *)(temp_v2 + 0x60));
-        FUN_002c415c(*(unsigned int *)(temp_v2 + 0x58));
-        FUN_002c415c(*(unsigned int *)(temp_v2 + 0x5c));
+        scrScriptProcessDestroy(*(unsigned int *)(temp_v2 + 0x60));
+        asdMemFree(*(unsigned int *)(temp_v2 + 0x58));
+        asdMemFree(*(unsigned int *)(temp_v2 + 0x5c));
         *(unsigned int *)(temp_v2 + 0x60) = 0;
         *(unsigned int *)(temp_v2 + 0x58) = 0;
         temp_v4 = 5;
@@ -210,8 +210,8 @@ unsigned int FUN_001e553c(void)
     *(int *)(temp_v2 + 0x1c) = temp_v4 + 1;
     break;
   case 5:
-    temp_v4 = *(int *)(DAT_004475b8 + 0x1c) + 1;
-    *(int *)(DAT_004475b8 + 0x1c) = temp_v4;
+    temp_v4 = *(int *)(g_mapDepart + 0x1c) + 1;
+    *(int *)(g_mapDepart + 0x1c) = temp_v4;
     if (temp_v4 == 1) {
       if (*(int *)(temp_v2 + 0xc) != 0) {
         DAT_0049fd38 = *(unsigned int *)(temp_v2 + 0x14);
@@ -300,14 +300,14 @@ unsigned int FUN_001e553c(void)
       temp_v4 = 0;
       if (temp_v4 < DAT_0049fddc) {
         do {
-          FUN_002c564c(0);
+          jyoucyuGetTableEntry(0);
           temp_v4 = temp_v4 + 1;
         } while (temp_v4 < DAT_0049fddc);
       }
     }
     if (*(int *)(temp_v2 + 0x1c) == 6) {
       *(unsigned char *)(temp_v2 + 0x3c) = 1;
-      if (DAT_0049f91c < 100) {
+      if (g_gameState < 100) {
         FUN_00291e40(0x1000200);
       }
       else {
@@ -380,8 +380,8 @@ LAB_001e5a1c:
     }
     break;
   case 6:
-    temp_v4 = *(int *)(DAT_004475b8 + 0x1c);
-    *(unsigned int *)(DAT_004475b8 + 0x18) = 0xb;
+    temp_v4 = *(int *)(g_mapDepart + 0x1c);
+    *(unsigned int *)(g_mapDepart + 0x18) = 0xb;
     *(int *)(temp_v2 + 0x1c) = temp_v4 + 1;
     break;
   case 7:
@@ -401,13 +401,13 @@ LAB_001e5a1c:
     *(unsigned int *)(temp_v2 + 0x1c) = 0;
     break;
   case 8:
-    temp_v4 = FUN_0019e0c0(*(unsigned int *)(DAT_004475b8 + 0x60));
+    temp_v4 = FUN_0019e0c0(*(unsigned int *)(g_mapDepart + 0x60));
     if (temp_v4 != 2) {
       return 0;
     }
-    FUN_002a7218(*(unsigned int *)(temp_v2 + 0x60));
-    FUN_002c415c(*(unsigned int *)(temp_v2 + 0x58));
-    FUN_002c415c(*(unsigned int *)(temp_v2 + 0x5c));
+    scrScriptProcessDestroy(*(unsigned int *)(temp_v2 + 0x60));
+    asdMemFree(*(unsigned int *)(temp_v2 + 0x58));
+    asdMemFree(*(unsigned int *)(temp_v2 + 0x5c));
     *(unsigned int *)(temp_v2 + 0x60) = 0;
     *(unsigned int *)(temp_v2 + 0x58) = 0;
     temp_v4 = 0xb;
@@ -428,7 +428,7 @@ LAB_001e5a1c:
     FUN_00297060(temp_v4,temp_v3);
     *(int *)(temp_v2 + 0x60) = temp_v4;
     *(unsigned int *)(temp_v4 + 0x108) = 3;
-    if (DAT_0049f91c < 100) {
+    if (g_gameState < 100) {
       temp_v3 = 2;
     }
     else {
@@ -440,11 +440,11 @@ LAB_001e5a1c:
     *(unsigned int *)(temp_v2 + 0x1c) = 0;
     break;
   case 10:
-    temp_v4 = FUN_0019e0c0(*(unsigned int *)(DAT_004475b8 + 0x60));
+    temp_v4 = FUN_0019e0c0(*(unsigned int *)(g_mapDepart + 0x60));
     if (temp_v4 == 2) {
-      FUN_002a7218(*(unsigned int *)(temp_v2 + 0x60));
-      FUN_002c415c(*(unsigned int *)(temp_v2 + 0x58));
-      FUN_002c415c(*(unsigned int *)(temp_v2 + 0x5c));
+      scrScriptProcessDestroy(*(unsigned int *)(temp_v2 + 0x60));
+      asdMemFree(*(unsigned int *)(temp_v2 + 0x58));
+      asdMemFree(*(unsigned int *)(temp_v2 + 0x5c));
       *(unsigned int *)(temp_v2 + 0x60) = 0;
       *(unsigned int *)(temp_v2 + 0x58) = 0;
       *(unsigned int *)(temp_v2 + 0x5c) = 0;

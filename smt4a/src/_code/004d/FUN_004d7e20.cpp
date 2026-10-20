@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_00275bc8(int, unsigned int);
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_00275bc8. */
 
 
@@ -20,20 +20,20 @@ unsigned int FUN_004d7e20(unsigned int *param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v1 = *(unsigned int *)(DAT_00570260 + 0x754);
-  *(unsigned int *)(DAT_00570260 + 0x754) = temp_v1 & 0xffffff8f;
+  temp_v1 = *(unsigned int *)(g_aocMain + 0x754);
+  *(unsigned int *)(g_aocMain + 0x754) = temp_v1 & 0xffffff8f;
   if ((temp_v1 & 0x10) != 0) {
     *param_1 = 1;
     if (param_1[2] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       param_1[2] = 0;
     }
     if (param_1[3] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       param_1[3] = 0;
     }
     if (param_1[4] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       param_1[4] = 0;
     }
     return 0;

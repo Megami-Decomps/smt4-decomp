@@ -14,9 +14,9 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_0027e6f4. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 extern int FUN_002973ec(void);
-extern int aeabi_idivmod(int, int);
+extern int __aeabi_idivmod(int, int);
 
 
 int FUN_003bf1e4(void)
@@ -35,7 +35,7 @@ int FUN_003bf1e4(void)
   int temp_v7;
   int temp_v8;
   
-  temp_v1 = FUN_002939f4();
+  temp_v1 = btlGetMainState();
   if ((*(unsigned int *)(temp_v1 + 0xe0) & 0x40000) != 0) {
     return 0;
   }
@@ -72,8 +72,8 @@ int FUN_003bf1e4(void)
       temp_v2 = temp_v2 + *(short *)((int)puVar5 + 0x95a);
       temp_v3 = temp_v3 + (short)puVar5[599];
     }
-    temp_v2 = aeabi_idivmod(temp_v2,temp_v5);
-    temp_v3 = aeabi_idivmod(temp_v3,temp_v5);
+    temp_v2 = __aeabi_idivmod(temp_v2,temp_v5);
+    temp_v3 = __aeabi_idivmod(temp_v3,temp_v5);
     temp_v4 = 0;
     temp_v5 = 4;
     do {
@@ -85,8 +85,8 @@ int FUN_003bf1e4(void)
       }
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 0x36);
-    temp_v5 = aeabi_idivmod(temp_v6,temp_v4);
-    temp_v6 = aeabi_idivmod(temp_v7,temp_v4);
+    temp_v5 = __aeabi_idivmod(temp_v6,temp_v4);
+    temp_v6 = __aeabi_idivmod(temp_v7,temp_v4);
     FUN_0027e6f4(temp_v1,1);
     if (-1 < temp_v1) {
       temp_v8 = -0x32;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(...);
+int btlGetMainState(...);
 int FUN_001568f8(...);
 int FUN_003f0254(...);
 int FUN_003f06b4(...);
@@ -42,7 +42,7 @@ typedef struct {
 extern int DAT_005712f0; /* 0x5712f0 */
 extern int DAT_00571508; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
-extern unsigned int DAT_00573898; /* 0x573898 */
+extern unsigned int g_btlEvent; /* 0x573898 */
 extern unsigned int DAT_00573c18; /* 0x573c18 */
 extern unsigned int DAT_00573c1c; /* 0x573c1c */
 extern unsigned int DAT_00573c30; /* 0x573c30 */
@@ -50,7 +50,7 @@ extern unsigned int DAT_00573c34; /* 0x573c34 */
 extern unsigned int DAT_00573c38; /* 0x573c38 */
 extern unsigned int DAT_00573c3c; /* 0x573c3c */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
 extern int FUN_003ef9e0(unsigned int, int);
 /* Supplied declaration required: FUN_003f0254. */
@@ -84,9 +84,9 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
   unsigned char temp_v11;
   unsigned char temp_v12;
   
-  puVar2 = (unsigned int *)FUN_0014aa78();
+  puVar2 = (unsigned int *)btlGetMainState();
   temp_v8 = (param_3->field_0x50 & 0x10) >> 4;
-  temp_v1 = FUN_004d7a60(DAT_00573898,param_3,1);
+  temp_v1 = FUN_004d7a60(g_btlEvent,param_3,1);
   if ((temp_v1 != 0) && (puVar4 = puVar2, FUN_003f06b4(puVar2,param_3), puVar4 != (unsigned int *)0x0)) {
     puVar4 = puVar2;
     FUN_003f0e20(puVar2,(int)param_3->field_0x6a);
@@ -135,7 +135,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
       *(unsigned int *)(temp_v7 + 0x4c) = 0xc0;
       *(unsigned short *)(temp_v7 + 0x26) = 1;
       *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) | 0x2000000;
-      FUN_004d7a60(DAT_00573898,param_3,0);
+      FUN_004d7a60(g_btlEvent,param_3,0);
     }
   }
   if ((*puVar4 & DAT_00573c18) == 0 && (puVar4[1] & DAT_00573c1c) == 0) {
@@ -160,7 +160,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
     temp_v2 = DAT_005712f0;
     FUN_004102d8(DAT_005712f0,(int)(short)((short)param_3->field_0x64 + temp_v0 + 5),0,param_2);
     *(unsigned char *)(temp_v2 + 4) = 0x24;
-    temp_v2 = FUN_0014aa78();
+    temp_v2 = btlGetMainState();
     if (temp_v8 != 0) {
       puVar2 = puVar2 + 0x7b5;
     }
@@ -184,7 +184,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
           FUN_004102d8(DAT_005712f0,(int)(short)((short)*(unsigned int *)(temp_v2 + 100) + temp_v0 + 5),0,
                        param_2);
           *(unsigned char *)(temp_v10 + 4) = 0x24;
-          temp_v10 = FUN_0014aa78();
+          temp_v10 = btlGetMainState();
           *(char *)(temp_v10 + 0x3004) = *(char *)(temp_v10 + 0x3004) + '\x01';
           *(unsigned int *)(temp_v2 + 0x10c) = *(unsigned int *)(temp_v2 + 0x10c) | 2;
         }
@@ -216,7 +216,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
     else {
       FUN_004feb50(param_3->field_0x64 + param_1,param_2,param_3,9);
     }
-    temp_v7 = FUN_0014aa78();
+    temp_v7 = btlGetMainState();
     *(char *)(temp_v7 + 0x3004) = *(char *)(temp_v7 + 0x3004) + '\x01';
     *(unsigned int *)&param_3[2].field_0x34 = *(unsigned int *)&param_3[2].field_0x34 | 2;
     temp_v7 = DAT_005712f0;
@@ -253,9 +253,9 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
                 if (temp_v6 == 0) {
                   temp_v6 = DAT_005712f0;
                   FUN_004102d8(DAT_005712f0,(int)(short)((short)*(int *)(temp_v7 + 100) + temp_v0),0);
-                  temp_v3 = FUN_0014aa78();
+                  temp_v3 = btlGetMainState();
                   FUN_001568f8(temp_v3,(int)*(short *)(temp_v7 + 0x6a));
-                  temp_v4 = FUN_0014aa78();
+                  temp_v4 = btlGetMainState();
                   temp_v5 = FUN_003ef9e0(temp_v4,temp_v7);
                   if (temp_v5 < 0) {
                     temp_v5 = 0;
@@ -288,7 +288,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
                                     *(short *)(temp_v2 + 0x57a57e) + temp_v0),0,param_2);
           *(unsigned char *)(temp_v6 + 4) = 0x20;
           *(int *)(temp_v6 + 0x28) = param_4;
-          temp_v6 = FUN_0014aa78();
+          temp_v6 = btlGetMainState();
           *(char *)(temp_v6 + 0x3004) = *(char *)(temp_v6 + 0x3004) + '\x01';
           *(unsigned int *)(temp_v7 + 0x10c) = *(unsigned int *)(temp_v7 + 0x10c) | 2;
         }
@@ -300,7 +300,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
     if ((DAT_00573c30 & *puVar4) == 0 && (DAT_00573c34 & puVar4[1]) == 0) {
       temp_v2 = DAT_005712f0;
       FUN_004102d8(DAT_005712f0,(int)temp_v0,0,param_2);
-      temp_v7 = FUN_0014aa78();
+      temp_v7 = btlGetMainState();
       *(unsigned int *)(temp_v7 + 0xa8) = 8;
       *(unsigned char *)(temp_v2 + 4) = 0x32;
       *(fn_004fde5c_arg2 **)(temp_v2 + 0x14) = param_3;

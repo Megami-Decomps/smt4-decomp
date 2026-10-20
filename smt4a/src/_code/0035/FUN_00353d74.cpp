@@ -9,7 +9,7 @@ int FUN_001bc124(void);
 int FUN_00281b94(int);
 
 extern int DAT_00581284; /* 0x581284 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 
 /* Supplied declaration required: FUN_001bbf0c. */
@@ -28,7 +28,7 @@ void FUN_00353d74(void)
   do {
     temp_v0 = DAT_00581284 + temp_v1 * 0x48;
     if (*(char *)(temp_v0 + 0x14) != '\0') {
-      if ((DAT_005f15fc != 4) || (DAT_005f1600 != 1)) {
+      if ((g_gameState != 4) || (DAT_005f1600 != 1)) {
         if (*(int *)(temp_v0 + 0x38) == 2) {
           FUN_001bc124();
           FUN_001bbf0c();

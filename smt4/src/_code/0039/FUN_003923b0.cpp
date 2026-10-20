@@ -16,9 +16,9 @@ int FUN_0027eafc(...);
 int FUN_00296f4c(...);
 int FUN_002b8cc8(...);
 int FUN_002bc01c(...);
-int FUN_002c43b4(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int jobStop(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
@@ -34,7 +34,7 @@ typedef struct {
 extern int FUN_00391000(...); /* 0x391000 */
 extern unsigned char LAB_003910b8; /* 0x3910b8 */
 extern unsigned char LAB_003928a4; /* 0x3928a4 */
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_00233240. */
@@ -55,10 +55,10 @@ extern int FUN_0029d65c(int);
 extern int FUN_002a1520(unsigned int *);
 /* Supplied declaration required: FUN_002b8cc8. */
 /* Supplied declaration required: FUN_002bc01c. */
-extern int FUN_002bf244(unsigned int);
-/* Supplied declaration required: FUN_002c43b4. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+extern int jobIsValid(unsigned int);
+/* Supplied declaration required: jobStop. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 
 
 void FUN_003923b0(unsigned int *param_1)
@@ -107,13 +107,13 @@ void FUN_003923b0(unsigned int *param_1)
               FUN_00233240(param_1 + 0x5ec,0);
               FUN_00233240(param_1 + 0x5ec,1);
               pcVar5 = "Aoc guide CALC";
-              FUN_002c5788("Aoc guide CALC",2,0,0,FUN_00391000,0,param_1);
+              asdProcessCreateSimple("Aoc guide CALC",2,0,0,FUN_00391000,0,param_1);
               *puVar8 = (unsigned int)pcVar5;
-              FUN_002c4a08("Aoc guide DOWN",0xe8,1,0,&LAB_003910b8,0,param_1,pcVar5);
+              taskCreateDraw("Aoc guide DOWN",0xe8,1,0,&LAB_003910b8,0,param_1,pcVar5);
             }
             param_1[2] = 3;
             *param_1 = *param_1 | 0x10;
-            *(unsigned char *)(DAT_00432fc8 + 0xd50) = 3;
+            *(unsigned char *)(g_aocMain + 0xd50) = 3;
             return;
           }
         }
@@ -126,7 +126,7 @@ void FUN_003923b0(unsigned int *param_1)
           uStack_50 = uStack_3c;
           temp_v1 = FUN_0027ea14(&temp_v3);
           if (temp_v1 != 0) {
-            *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) | 0x100;
+            *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) | 0x100;
             FUN_0023392c(param_1,1);
             param_1[2] = 2;
             FUN_00233d78(param_1);
@@ -216,14 +216,14 @@ void FUN_003923b0(unsigned int *param_1)
       }
     }
     else if ((*param_1 & 0x1000) == 0) {
-      temp_v1 = FUN_002bf244(*puVar8);
+      temp_v1 = jobIsValid(*puVar8);
       if (temp_v1 != 0) {
         if (*puVar2 != 0xffffffff) {
           *puVar2 = 0xffffffff;
           FUN_002b8cc8();
         }
         *param_1 = *param_1 & 0xffffcfff;
-        FUN_002c43b4(*puVar8,0);
+        jobStop(*puVar8,0);
       }
       if ((*param_1 & 2) != 0) {
         param_1[2] = 5;

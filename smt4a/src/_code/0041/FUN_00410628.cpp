@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0013c174(unsigned char *, int);
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_001a6f60(void);
 int FUN_001b4a90(void);
 int FUN_001f4908(...);
-int FUN_002e3d04(void);
+int asdOperatorNewD(void);
 int FUN_002e6490(unsigned int *);
 int FUN_003d54f8(...);
 int FUN_003e503c(void);
@@ -67,7 +67,7 @@ extern unsigned int DAT_00573808; /* 0x573808 */
 extern int DAT_00573c50; /* 0x573c50 */
 extern unsigned int DAT_00573c68; /* 0x573c68 */
 extern unsigned int DAT_00573c6c; /* 0x573c6c */
-extern unsigned int DAT_0057a4f8; /* 0x57a4f8 */
+extern unsigned int g_btlStageModel; /* 0x57a4f8 */
 
 #ifndef ROMWRIGHT_ZEXT_4_8_DEFINED
 #define ROMWRIGHT_ZEXT_4_8_DEFINED
@@ -75,18 +75,18 @@ extern unsigned int DAT_0057a4f8; /* 0x57a4f8 */
 #endif
 /* Supplied declaration required: FUN_0013c174. */
 extern int FUN_0013def0(unsigned int);
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_001633a0(unsigned int);
 extern int FUN_00163e84(unsigned int);
 extern int FUN_001656a0(unsigned int);
 extern int FUN_00187168(void);
-extern unsigned int FUN_00192798(void);
-/* Supplied declaration required: FUN_0019a5a0. */
+extern unsigned int dataTableGetEntries(void);
+/* Supplied declaration required: asdMemFree. */
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_001a6f60. */
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_001f4908. */
-/* Supplied declaration required: FUN_002e3d04. */
+/* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: FUN_002e6490. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_003e503c. */
@@ -147,7 +147,7 @@ void FUN_00410628(int param_1)
   unsigned int temp_v18;
   unsigned int uStack_48;
   
-  temp_v16 = FUN_0014aa78();
+  temp_v16 = btlGetMainState();
   switch(*(unsigned int *)(param_1 + 0x10)) {
   case 0:
     temp_v3 = FUN_00163e84(0);
@@ -199,7 +199,7 @@ void FUN_00410628(int param_1)
     } while ((int)temp_v5 < 0xc);
     if ((int)temp_v6 >= 4) {
       puVar3 = (unsigned int *)(temp_v6 << 2);
-      FUN_002e3d04();
+      asdOperatorNewD();
       FUN_001b4a90();
       temp_v8 = (temp_v6 & 1) != 0;
       puVar8 = puVar3 + -1;
@@ -318,14 +318,14 @@ void FUN_00410628(int param_1)
       temp_v7 = FUN_001656a0(9);
       if (temp_v7 != 0) {
         if (*(int *)(param_1 + 0x184) != 0) {
-          FUN_0019a5a0();
+          asdMemFree();
           *(unsigned int *)(param_1 + 0x184) = 0;
         }
         puVar5 = &DAT_00529834;
         FUN_0013c174(&DAT_00529834,0);
         *(unsigned char **)(param_1 + 0x184) = puVar5;
         FUN_001a6f60();
-        temp_v2 = FUN_00192798();
+        temp_v2 = dataTableGetEntries();
         *(unsigned int *)(param_1 + 0x188) = temp_v2;
         FUN_00411c04(param_1,0);
       }
@@ -369,7 +369,7 @@ void FUN_00410628(int param_1)
       return;
     }
     FUN_004f1530(DAT_00571508);
-    FUN_004012f0(DAT_0057a4f8);
+    FUN_004012f0(g_btlStageModel);
     FUN_004f1c5c(DAT_00571508,0);
     FUN_004f1edc(DAT_00571508);
     temp_v3 = DAT_00571508;
@@ -377,7 +377,7 @@ void FUN_00410628(int param_1)
     *(unsigned int *)(temp_v3 + 0x10) = *(unsigned int *)(temp_v3 + 0x18);
     FUN_003ee080(temp_v16);
     if (*(int *)(param_1 + 0x184) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(param_1 + 0x184) = 0;
     }
     FUN_003efbac(temp_v16);

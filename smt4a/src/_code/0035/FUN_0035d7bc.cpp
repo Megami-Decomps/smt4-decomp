@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_001469a8(int);
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_001a0d08(int);
 int FUN_002e3140(void);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001469a8. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001a0d08. */
 /* Supplied declaration required: FUN_002e3140. */
 
@@ -33,7 +33,7 @@ void FUN_0035d7bc(int param_1)
   }
   FUN_001469a8(param_1 + 0x2c);
   if (*(int *)(param_1 + 0x28) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x28) = 0;
   }
   if (*(int *)(param_1 + 0x4c) != 0) {

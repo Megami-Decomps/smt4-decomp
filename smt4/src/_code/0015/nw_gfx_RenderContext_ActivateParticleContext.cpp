@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00154690(...);
+int asdModelPushCommandBlock(...);
 int FUN_002a4908(...);
 
 typedef struct fn_00150a14_arg0 fn_00150a14_arg0;
@@ -19,7 +19,7 @@ struct fn_00150a14_arg0 {
 };
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_00154690. */
+/* Supplied declaration required: asdModelPushCommandBlock. */
 /* Supplied declaration required: FUN_002a4908. */
 
 
@@ -30,7 +30,7 @@ void nw_gfx_RenderContext_ActivateParticleContext(fn_00150a14_arg0 *param_1)
   void *pvVar1;
   
   if (param_1->field_0x12 != 0) {
-    FUN_00154690();
+    asdModelPushCommandBlock();
     param_1->field_0x12 = 0;
   }
   pvVar1 = param_1->field_0x24;

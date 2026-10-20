@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e6e34(unsigned char [16], unsigned int);
 int FUN_002e6e5c(unsigned char [16]);
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
@@ -27,7 +27,7 @@ unsigned int FUN_002f86cc(int param_1,unsigned int param_2)
   
   iStack_10 = param_1;
   uStack_c = param_2;
-  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0x14)) != '\0') {
+  if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x14)) != '\0') {
     temp_v0 = FUN_002ea714();
     FUN_002e6e34(temp_v2,temp_v0);
     temp_v1 = FUN_002f9e1c(param_1 + 0x160,(unsigned int *)&uStack_c);

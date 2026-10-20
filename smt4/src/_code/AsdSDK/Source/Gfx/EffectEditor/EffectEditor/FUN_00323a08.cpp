@@ -12,9 +12,9 @@ int FUN_002496cc(int);
 int FUN_0024dd48(unsigned char *);
 int FUN_0024dd80(int);
 int FUN_0024dd90(unsigned char *);
-int FUN_002571b8(void);
+int effMenuListAppend(void);
 int FUN_002bfde4(...);
-int FUN_002c32a0(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 
 /* stack frame of param_2: 13 slot(s), 52 byte(s) */
 typedef struct {
@@ -73,9 +73,9 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024dd48. */
 /* Supplied declaration required: FUN_0024dd80. */
 /* Supplied declaration required: FUN_0024dd90. */
-/* Supplied declaration required: FUN_002571b8. */
+/* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: FUN_002bfde4. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 
 
 unsigned int FUN_00323a08(int param_1,int param_2)
@@ -237,14 +237,14 @@ unsigned int FUN_00323a08(int param_1,int param_2)
   FUN_00243224(&temp_v14,&temp_v20,0xff00c0c0,0);
   FUN_00243224(&temp_v17,&temp_v20,0xff00c0c0,0);
   temp_v5 = 0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+  memAlloc(0x10000,0x100,0,0x68,0x10,1);
   *(unsigned int *)(temp_v5 + 0x18) = 0;
   *(unsigned int *)(temp_v5 + 4) = 9;
   *(unsigned int *)(temp_v5 + 8) = temp_v20;
   *(float *)(temp_v5 + 0xc) = fStack_54;
   *(float *)&*(unsigned int *)(temp_v5 + 0x10) = uStack_50;
   *(float *)&*(unsigned int *)(temp_v5 + 0x14) = temp_v21;
-  FUN_002571b8();
+  effMenuListAppend();
   return temp_v6;
 }
 

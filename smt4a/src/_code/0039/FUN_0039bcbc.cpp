@@ -7,12 +7,12 @@ extern "C" {
 int FUN_00272f54(unsigned int);
 int FUN_00338ba4(unsigned int);
 
-extern int FUN_00164a34(void);
+extern int lmapMainIsRunning(void);
 /* Supplied declaration required: FUN_00272f54. */
 /* Supplied declaration required: FUN_00338ba4. */
 extern unsigned int FUN_00357ad8(void);
 extern unsigned int FUN_00368390(void);
-extern int MapMode_IsBusy(unsigned int);
+extern int mapMainIsBusy(unsigned int);
 
 
 unsigned int FUN_0039bcbc(void)
@@ -23,13 +23,13 @@ unsigned int FUN_0039bcbc(void)
   int temp_v1;
   
   temp_v0 = FUN_00368390();
-  temp_v1 = MapMode_IsBusy(temp_v0);
+  temp_v1 = mapMainIsBusy(temp_v0);
   if (temp_v1 != 0) {
     temp_v0 = FUN_00357ad8();
     FUN_00272f54(temp_v0);
   }
   else {
-    temp_v1 = FUN_00164a34();
+    temp_v1 = lmapMainIsRunning();
     if (temp_v1 != 0) {
       temp_v0 = FUN_00357ad8();
       FUN_00338ba4(temp_v0);

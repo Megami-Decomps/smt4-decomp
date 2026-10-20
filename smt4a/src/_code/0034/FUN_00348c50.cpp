@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0014e38c(unsigned char *, int, int, int, unsigned char *, int, int);
-int FUN_0016007c(void);
+int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
+int asdOperatorNew(void);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -17,8 +17,8 @@ extern unsigned char LAB_00348cbc; /* 0x348cbc */
 extern unsigned char LAB_00348cd0; /* 0x348cd0 */
 extern unsigned int *DAT_00589144; /* 0x589144 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: asdOperatorNew. */
 
 
 void FUN_00348c50(unsigned int param_1)
@@ -29,10 +29,10 @@ void FUN_00348c50(unsigned int param_1)
   unsigned char *puVar2;
   
   puVar1 = (unsigned int *)0x14;
-  FUN_0016007c();
+  asdOperatorNew();
   puVar2 = &LAB_00348cbc;
   DAT_00589144 = puVar1;
-  FUN_0014e38c(&LAB_00348cbc,4,0,0,&LAB_00348cd0,0,0);
+  asdProcessCreateSimple(&LAB_00348cbc,4,0,0,&LAB_00348cd0,0,0);
   *puVar1 = (unsigned int)puVar2;
   puVar1[1] = param_1;
   *(unsigned char *)(puVar1 + 2) = 0;

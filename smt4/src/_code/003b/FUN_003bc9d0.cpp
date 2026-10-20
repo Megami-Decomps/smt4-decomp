@@ -8,7 +8,7 @@ int FUN_00152bec(...);
 int FUN_00263588(...);
 int FUN_00298d50(...);
 int FUN_0029bb14(...);
-int FUN_0029bb3c(...);
+int asdMdlManagerCreateLoaded(...);
 int FUN_0029c2cc(...);
 int FUN_0029c3c0(...);
 int FUN_002a0428(...);
@@ -16,7 +16,7 @@ int FUN_002a043c(...);
 int FUN_002a09b4(...);
 int FUN_002a4d14(...);
 int FUN_002a72c0(...);
-int FUN_002a775c(...);
+int asdMdlManagerDestroy(...);
 int FUN_002a8638(...);
 int FUN_002c1e30(...);
 
@@ -50,7 +50,7 @@ extern void *FUN_00263c1c(char *);
 extern int FUN_00282b28(void);
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: FUN_0029bb14. */
-/* Supplied declaration required: FUN_0029bb3c. */
+/* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: FUN_0029c3c0. */
 /* Supplied declaration required: FUN_002a0428. */
@@ -58,7 +58,7 @@ extern int FUN_00282b28(void);
 /* Supplied declaration required: FUN_002a09b4. */
 /* Supplied declaration required: FUN_002a4d14. */
 /* Supplied declaration required: FUN_002a72c0. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: FUN_002a8638. */
 extern int FUN_002adee0(void);
 extern int FUN_002bfde4(unsigned int);
@@ -96,7 +96,7 @@ void FUN_003bc9d0(fn_003bc9d0_arg0 *param_1)
     FUN_002c1e30(temp_v1,1);
     FUN_00298d50(temp_v1);
     pcVar4 = "title/title_1.bam";
-    FUN_0029bb3c("title/title_1.bam",0x38);
+    asdMdlManagerCreateLoaded("title/title_1.bam",0x38);
     param_1->field_0x4 = pcVar4;
     temp_v0 = FUN_002adee0();
     if (temp_v0 != 0) {
@@ -145,7 +145,7 @@ void FUN_003bc9d0(fn_003bc9d0_arg0 *param_1)
     *puVar5 = *puVar5 | 2;
     *(unsigned char *)(*(int *)(puVar5[2] + 0x2c) + 0x1f6) = 0;
     FUN_00152bec(param_1->field_0x4);
-    FUN_002a775c(param_1->field_0x4);
+    asdMdlManagerDestroy(param_1->field_0x4);
     param_1->field_0x4 = (void *)0x0;
     FUN_0029c2cc(param_1->field_0x18,0);
     FUN_00263588(param_1->field_0x18);

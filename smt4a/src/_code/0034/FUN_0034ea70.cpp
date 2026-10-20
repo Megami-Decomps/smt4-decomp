@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(unsigned int, double);
 int FUN_00164b5c(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_0035ae58(int, int, int, int, int);
 int FUN_0035d8f0(int, int, int, int, int);
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -31,7 +31,7 @@ extern int DAT_0059dbb4; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int FUN_001654d8(void);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0035ae58. */
@@ -103,11 +103,11 @@ void FUN_0034ea70(int param_1)
     temp_v6 = temp_v6 + temp_v2;
     temp_v9 = romwright_piece_4_4(temp_v8,*(unsigned int *)(param_1 + 0x13f0));
   }
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_001835b4(2,0xd,0x1e0,temp_v6,temp_v5,0x51);
   temp_v3 = FUN_001834a4(0xd,0x1dd);
-  temp_v2 = DAT_0059dbb4;
-  piVar8 = (int *)(DAT_0059dbb4 + 0x1318);
+  temp_v2 = g_renderCtx;
+  piVar8 = (int *)(g_renderCtx + 0x1318);
   temp_v4 = piVar8[*piVar8 + 2];
   piVar8[*piVar8 + 2] = 3;
   if (*(char *)(temp_v2 + 0x1330) != '\0' || temp_v4 != 3) {
@@ -118,8 +118,8 @@ void FUN_0034ea70(int param_1)
                (int)**(short **)(temp_v3 + 0xc),(*(short **)(temp_v3 + 0xc))[1] + temp_v5,1);
   FUN_0035d8f0((int)*(short *)(param_1 + 0x4b14),*(short *)(temp_v1 + 8) + temp_v6,
                *(short *)(temp_v1 + 10) + temp_v5,0x15,1);
-  temp_v1 = DAT_0059dbb4;
-  piVar8 = (int *)(DAT_0059dbb4 + 0x1318);
+  temp_v1 = g_renderCtx;
+  piVar8 = (int *)(g_renderCtx + 0x1318);
   temp_v2 = piVar8[*piVar8 + 2];
   piVar8[*piVar8 + 2] = 0;
   if (*(char *)(temp_v1 + 0x1330) != '\0' || temp_v2 != 0) {
@@ -128,10 +128,10 @@ void FUN_0034ea70(int param_1)
   }
   FUN_00164b5c(2,0xd,0xd,temp_v6,temp_v5,0x56);
   if ((float)(temp_v9 >> 0x20) < (float)temp_v9) {
-    FUN_001677c0();
+    efctSetSpeed();
   }
   FUN_00164b5c(2,0xd,0xe,temp_v6,temp_v5,0x56);
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

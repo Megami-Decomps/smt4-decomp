@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_002c312c(...);
-int FUN_002c31a0(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int asdGxIndexBufferCreate(...);
+int memClear(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
 /* stack frame of void: 6 slot(s), 24 byte(s) */
@@ -72,11 +72,11 @@ extern unsigned char DAT_00404194; /* 0x404194 */
 extern unsigned int *DAT_0043e278; /* 0x43e278 */
 
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c31a0. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdGxIndexBufferCreate. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -90,20 +90,20 @@ void FUN_001043c8(void)
   unsigned char *puVar4;
   
   puVar2 = (unsigned int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0xfec,1);
+  asdMemAlloc(0x100,0x100,0,0xfec,1);
   DAT_0043e278 = puVar2;
-  FUN_002c4938();
+  memClear();
   temp_v0 = 0;
-  FUN_002c31a0();
+  asdGxIndexBufferCreate();
   puVar2[1] = temp_v0;
   temp_v0 = 0;
-  FUN_002c31a0();
+  asdGxIndexBufferCreate();
   puVar2[2] = temp_v0;
   temp_v0 = 0;
-  FUN_002c31a0();
+  asdGxIndexBufferCreate();
   puVar2[0x3c8] = temp_v0;
   temp_v0 = 0;
-  FUN_002c31a0();
+  asdGxIndexBufferCreate();
   puVar2[0x3c9] = temp_v0;
   puVar2[0x3f7] = 0;
   *(unsigned char *)(puVar2 + 3) = 0;
@@ -127,29 +127,29 @@ void FUN_001043c8(void)
   *(unsigned char *)((int)puVar2 + 0xf99) = 0;
   *(unsigned char *)(puVar2 + 0x3f8) = 0;
   puVar4 = &LAB_001047d8;
-  FUN_002c5788(&LAB_001047d8,0x6a,0,0,FUN_0010835c,FUN_001078ec,puVar1);
+  asdProcessCreateSimple(&LAB_001047d8,0x6a,0,0,FUN_0010835c,FUN_001078ec,puVar1);
   *puVar2 = (unsigned int)puVar4;
-  FUN_002c4a08(&LAB_001047e4,0xce,0,0,FUN_0010854c,0,DAT_0043e278,puVar4);
-  FUN_002c4a08(&LAB_001047f0,0x6b,0,0,FUN_001080c0,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_001047fc,0xcf,0,0,FUN_0010812c,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_00104808,0x6d,0,0,FUN_00108754,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_00104814,0xd1,0,0,FUN_001087f4,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_00104820,0x6c,0,0,FUN_001081b0,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_0010482c,0xd0,0,0,FUN_0010821c,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_00104838,0x78,0,0,FUN_00109348,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_00104844,0xd6,0,0,FUN_001093e8,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_00104850,0x65,0,0,FUN_0010889c,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_0010485c,0xcc,0,0,FUN_00108b0c,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_00104868,0x77,0,0,FUN_0010a3a4,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_00104878,0xd5,0,0,FUN_0010a450,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_00104888,0x82,0,0,FUN_0010a03c,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_00104898,0xe0,0,0,FUN_0010a110,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_00104868,0x7e,0,0,FUN_0010b224,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_00104878,0xdc,0,0,FUN_0010b2d0,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_00104980,0x77,0,0,FUN_00109f40,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_0010498c,0xd5,0,0,FUN_00109fb4,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_00104998,0x79,0,0,FUN_0010949c,0,DAT_0043e278,*puVar2);
-  FUN_002c4a08(&LAB_001049a4,0xd7,0,0,FUN_00109520,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_001047e4,0xce,0,0,FUN_0010854c,0,DAT_0043e278,puVar4);
+  taskCreateDraw(&LAB_001047f0,0x6b,0,0,FUN_001080c0,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_001047fc,0xcf,0,0,FUN_0010812c,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_00104808,0x6d,0,0,FUN_00108754,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_00104814,0xd1,0,0,FUN_001087f4,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_00104820,0x6c,0,0,FUN_001081b0,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_0010482c,0xd0,0,0,FUN_0010821c,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_00104838,0x78,0,0,FUN_00109348,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_00104844,0xd6,0,0,FUN_001093e8,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_00104850,0x65,0,0,FUN_0010889c,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_0010485c,0xcc,0,0,FUN_00108b0c,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_00104868,0x77,0,0,FUN_0010a3a4,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_00104878,0xd5,0,0,FUN_0010a450,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_00104888,0x82,0,0,FUN_0010a03c,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_00104898,0xe0,0,0,FUN_0010a110,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_00104868,0x7e,0,0,FUN_0010b224,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_00104878,0xdc,0,0,FUN_0010b2d0,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_00104980,0x77,0,0,FUN_00109f40,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_0010498c,0xd5,0,0,FUN_00109fb4,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_00104998,0x79,0,0,FUN_0010949c,0,DAT_0043e278,*puVar2);
+  taskCreateDraw(&LAB_001049a4,0xd7,0,0,FUN_00109520,0,DAT_0043e278,*puVar2);
   return;
 }
 

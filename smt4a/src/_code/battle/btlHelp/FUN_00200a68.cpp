@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00163060(int, int, int, int, int, unsigned int);
+int asdMemoryAllocTracked(int, int, int, int, int, unsigned int);
 int rt_memcpy_w(unsigned short *, int, int);
 
 /* stack frame of param_8: 4 slot(s), 16 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 
 extern int *DAT_005738e8; /* 0x5738e8 */
 
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -31,7 +31,7 @@ FUN_00200a68(unsigned int param_1,unsigned short param_2,unsigned int param_3,un
   unsigned short *puVar2;
   
   puVar2 = (unsigned short *)0x100;
-  FUN_00163060(0x100,0x100,0,0x880,1,param_1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x880,1,param_1);
   *puVar2 = (short)param_1;
   puVar2[2] = param_2;
   puVar2[1] = 0;

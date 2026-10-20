@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002c5c14(void);
+int asdLoadFileSync(void);
 
-/* Supplied declaration required: FUN_002c5c14. */
+/* Supplied declaration required: asdLoadFileSync. */
 
 
 void FUN_002c3124(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002c5c14();
+  asdLoadFileSync();
   return;
 }
 

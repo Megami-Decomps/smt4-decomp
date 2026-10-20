@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned char [24], int);
+int sysMemClear(unsigned char [24], int);
 int FUN_002e9ec8(int, unsigned int);
 int FUN_002ea214(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
@@ -23,7 +23,7 @@ typedef struct {
 extern unsigned char LAB_00104340; /* 0x104340 */
 extern unsigned char LAB_00104429; /* 0x104429 */
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
 extern int FUN_002e9af4(void);
 /* Supplied declaration required: FUN_002e9ec8. */
@@ -51,7 +51,7 @@ void FUN_0010428c(int param_1)
   unsigned char temp_v6 [16];
   
   temp_v4[0] = -0x181c0001;
-  FUN_002e6354(temp_v5,0x18);
+  sysMemClear(temp_v5,0x18);
   FUN_002ea458(param_1);
   temp_v0 = param_1 + 0x118;
   temp_v2 = 0;

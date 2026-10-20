@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002efdc0(void);
+int statusCameraApply(void);
 int FUN_003e5858(unsigned int);
 
 typedef int romwright_code(...);
@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned char DAT_0057f110; /* 0x57f110 */
 
-/* Supplied declaration required: FUN_002efdc0. */
+/* Supplied declaration required: statusCameraApply. */
 extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003e5858. */
 
@@ -43,7 +43,7 @@ unsigned int FUN_002021cc(void)
   }
   temp_v1 = *(int *)(temp_v0 + 0x140);
   if ((0 < temp_v1) && (temp_v1 != 10 && temp_v1 != 0xc)) {
-    FUN_002efdc0();
+    statusCameraApply();
     FUN_003e5858(*(unsigned int *)(temp_v0 + 0xcc));
   }
   temp_v5 = 0xfffffeb6;

@@ -9,7 +9,7 @@ int FUN_002571e8(unsigned int);
 int FUN_002c18e4(int);
 int FUN_002c198c(int);
 int FUN_002c1b64(int, unsigned int);
-int FUN_00343298(int, int *);
+int camSetMatrixB(int, int *);
 int FUN_00343810(int, unsigned int, unsigned int, unsigned int);
 int FUN_00347198(unsigned int);
 int FUN_0034724c(unsigned int);
@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_2_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001f6b74. */
@@ -34,7 +34,7 @@ extern int DAT_0044ea00; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c1b64. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00343298. */
+/* Supplied declaration required: camSetMatrixB. */
 /* Supplied declaration required: FUN_00343810. */
 /* Supplied declaration required: FUN_00347198. */
 /* Supplied declaration required: FUN_0034724c. */
@@ -67,7 +67,7 @@ void FUN_00256a50(unsigned short *param_1,unsigned int param_2)
   unsigned int uStack_20;
   unsigned int temp_v8;
   
-  temp_v0 = DAT_0044ea00;
+  temp_v0 = g_titleScene;
   if ((*param_1 & 0x100) != 0) {
     temp_v1 = FUN_002c5d80(5,0);
     piVar5 = (int *)(temp_v0 + 0x124c);
@@ -94,8 +94,8 @@ void FUN_00256a50(unsigned short *param_1,unsigned int param_2)
   }
   if ((*param_1 & 0x200) != 0) {
     FUN_001f6b74(*(unsigned int *)(param_1 + 6));
-    temp_v0 = DAT_0044ea00;
-    piVar5 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v0 = g_titleScene;
+    piVar5 = (int *)(g_titleScene + 0x124c);
     temp_v1 = *piVar5;
     temp_v2 = piVar5[temp_v1 + 2];
     *piVar5 = temp_v1 - 1;
@@ -104,7 +104,7 @@ void FUN_00256a50(unsigned short *param_1,unsigned int param_2)
     }
   }
   else {
-    FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(param_1 + 2));
+    FUN_002c1b64(g_titleScene,*(unsigned int *)(param_1 + 2));
     temp_v4 = *(unsigned int *)(param_1 + 8);
     uStack_54 = *(unsigned int *)(param_1 + 10);
     uStack_50 = *(unsigned int *)(param_1 + 0xc);
@@ -121,12 +121,12 @@ void FUN_00256a50(unsigned short *param_1,unsigned int param_2)
     temp_v6 = 0;
     temp_v7 = 0;
     temp_v8 = 0x3f800000;
-    FUN_00343298(DAT_0044ea00,&temp_v4);
+    camSetMatrixB(g_titleScene,&temp_v4);
     VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)param_1 + 0x53),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorUnsignedToFloat((unsigned int)(unsigned char)param_1[0x29],(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)param_1 + 0x51),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorUnsignedToFloat((unsigned int)(unsigned char)param_1[0x28],(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00343810(DAT_0044ea00,(unsigned int)(unsigned char)param_1[0x29],(unsigned int)*(unsigned char *)((int)param_1 + 0x51),
+    FUN_00343810(g_titleScene,(unsigned int)(unsigned char)param_1[0x29],(unsigned int)*(unsigned char *)((int)param_1 + 0x51),
                  (unsigned int)(unsigned char)param_1[0x28]);
     FUN_002571e8(param_2);
     if (*(int *)(param_1 + 0x2a) != 0) {
@@ -135,10 +135,10 @@ void FUN_00256a50(unsigned short *param_1,unsigned int param_2)
       param_1[0x2b] = 0;
     }
     FUN_0034724c(*(unsigned int *)(param_1 + 4));
-    FUN_002c18e4(DAT_0044ea00);
-    FUN_002c198c(DAT_0044ea00);
-    temp_v0 = DAT_0044ea00;
-    piVar5 = (int *)(DAT_0044ea00 + 0x124c);
+    FUN_002c18e4(g_titleScene);
+    FUN_002c198c(g_titleScene);
+    temp_v0 = g_titleScene;
+    piVar5 = (int *)(g_titleScene + 0x124c);
     temp_v1 = *piVar5;
     temp_v2 = piVar5[temp_v1 + 2];
     *piVar5 = temp_v1 - 1;

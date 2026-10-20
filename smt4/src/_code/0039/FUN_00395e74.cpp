@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 extern int FUN_003955e4(void);
 extern int FUN_0039580c(void);
 extern int FUN_00395e44(void);
@@ -32,7 +32,7 @@ void FUN_00395e74(int param_1,int param_2)
         return;
       }
       temp_v1 = 0x10;
-      FUN_002c222c();
+      asdOperatorNew();
       temp_v0 = 0;
       if (temp_v1 != 0) {
         temp_v0 = FUN_003955e4();
@@ -40,7 +40,7 @@ void FUN_00395e74(int param_1,int param_2)
     }
     else {
       temp_v1 = 0x1c;
-      FUN_002c222c();
+      asdOperatorNew();
       temp_v0 = 0;
       if (temp_v1 != 0) {
         temp_v0 = FUN_00395e44();
@@ -49,7 +49,7 @@ void FUN_00395e74(int param_1,int param_2)
   }
   else {
     temp_v1 = 0x24;
-    FUN_002c222c();
+    asdOperatorNew();
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = FUN_0039580c();

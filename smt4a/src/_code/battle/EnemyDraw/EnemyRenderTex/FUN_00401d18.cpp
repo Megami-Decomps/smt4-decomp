@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0015d8e0(int, unsigned int, int);
-int FUN_001630d4(int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 int FUN_00341224(int, int, unsigned int, int, int, int, unsigned int);
 int FUN_00401798(int, int);
 
@@ -23,8 +23,8 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0015d8e0. */
-/* Supplied declaration required: FUN_001630d4. */
-extern unsigned int FUN_001ad6fc(void);
+/* Supplied declaration required: asdMemoryAlloc. */
+extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: FUN_00341224. */
 /* Supplied declaration required: FUN_00401798. */
 extern unsigned int FUN_00450f58(unsigned int *, unsigned int);
@@ -95,7 +95,7 @@ void FUN_00401d18(int param_1,unsigned int param_2,unsigned int param_3,int para
   }
   FUN_00341224(temp_v8,temp_v2,param_2,0x1908,0x8033,0x81a5,param_3);
   *(int *)(param_1 + 8) = temp_v8;
-  temp_v1 = FUN_001ad6fc();
+  temp_v1 = asdMemoryGetAllocatorA();
   uStack_34 = 1;
   temp_v11 = 0x2020000;
   temp_v14 = 0;
@@ -106,13 +106,13 @@ void FUN_00401d18(int param_1,unsigned int param_2,unsigned int param_3,int para
   temp_v9 = *(unsigned int *)(*(int *)(*(int *)(param_1 + 8) + 0xc) + 0x18);
   temp_v1 = FUN_00450f58((unsigned int *)&temp_v9,temp_v1);
   *(unsigned int *)(param_1 + 0xc) = temp_v1;
-  temp_v1 = FUN_001ad6fc();
+  temp_v1 = asdMemoryGetAllocatorA();
   FUN_0015d8e0(param_1 + 0xc,temp_v1,0);
   FUN_00401798(param_1,param_4);
   temp_v2 = *(int *)(*(int *)(param_1 + 8) + 0xc);
   temp_v0 = *(unsigned int *)(temp_v2 + 0x34) & 0xff;
   puVar3 = (unsigned int *)0x10000;
-  FUN_001630d4(0x10000,0x100,0,0x30,1);
+  asdMemoryAlloc(0x10000,0x100,0,0x30,1);
   *(unsigned int **)(param_1 + 0x10) = puVar3;
   *puVar3 = 0;
   puVar3[1] = 0;
@@ -154,7 +154,7 @@ void FUN_00401d18(int param_1,unsigned int param_2,unsigned int param_3,int para
   puVar4[10] = 1;
   puVar4[0xb] = 0xf023d;
   puVar3 = (unsigned int *)0x10000;
-  FUN_001630d4(0x10000,0x100,0,0x30,1);
+  asdMemoryAlloc(0x10000,0x100,0,0x30,1);
   *(unsigned int **)(param_1 + 0x14) = puVar3;
   *puVar3 = 0;
   puVar3[1] = 0;
@@ -196,7 +196,7 @@ void FUN_00401d18(int param_1,unsigned int param_2,unsigned int param_3,int para
   puVar4[10] = 1;
   puVar4[0xb] = 0xf023d;
   puVar3 = (unsigned int *)0x10000;
-  FUN_001630d4(0x10000,0x100,0,0x30,1);
+  asdMemoryAlloc(0x10000,0x100,0,0x30,1);
   *(unsigned int **)(param_1 + 0x18) = puVar3;
   *puVar3 = 0;
   puVar3[1] = 0;

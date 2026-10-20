@@ -5,7 +5,7 @@ extern "C" {
 int FUN_0034291c(unsigned int);
 int FUN_00349214(unsigned int);
 
-extern unsigned int *FUN_002c08f0(void);
+extern unsigned int *jobGetWork(void);
 /* Supplied declaration required: FUN_0034291c. */
 /* Supplied declaration required: FUN_00349214. */
 
@@ -17,7 +17,7 @@ unsigned int FUN_002f4aec(void)
   char temp_v0;
   unsigned int *puVar2;
   
-  puVar2 = (unsigned int *)FUN_002c08f0();
+  puVar2 = (unsigned int *)jobGetWork();
   temp_v0 = *(char *)(puVar2 + 2);
   if (temp_v0 != '\0') {
     if (temp_v0 != '\x01') {

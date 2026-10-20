@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00180008(int);
+int jyoucyuGetTableEntry(int);
 int FUN_001b57a8(unsigned int *, int);
 int FUN_001ba1c0(int, int *, int, int);
 int FUN_001d0ea0(int *, unsigned int, unsigned int);
@@ -20,14 +20,14 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_3_stack;
 
-extern int DAT_00570260; /* 0x570260 */
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern int g_aocMain; /* 0x570260 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 #ifndef ROMWRIGHT_PIECE_3_1_DEFINED
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_00180008. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 extern int FUN_001af210(int);
 /* Supplied declaration required: FUN_001b57a8. */
 extern unsigned int *FUN_001b5acc(unsigned int *);
@@ -79,13 +79,13 @@ unsigned int FUN_00472350(unsigned int param_1,unsigned int param_2,unsigned int
   temp_v3 = *puVar1;
   uStack_48 = puVar1[1];
   (*(unsigned char *)((unsigned char *)&temp_v2 + 0)) = 100;
-  temp_v0 = FUN_001af210(DAT_00570260 + 0x98);
+  temp_v0 = FUN_001af210(g_aocMain + 0x98);
   if (temp_v0 != 0) {
-    *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xfffeffff;
+    *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
     temp_v2 = romwright_piece_3_1((((unsigned int)(temp_v2) >> 8) & 0xffffffU),200);
   }
   else {
-    FUN_001d0ea0(&temp_v5,DAT_00570280,param_3);
+    FUN_001d0ea0(&temp_v5,g_aocSystem,param_3);
     temp_v2 = temp_v5;
     temp_v3 = uStack_38;
     uStack_48 = uStack_34;
@@ -96,14 +96,14 @@ unsigned int FUN_00472350(unsigned int param_1,unsigned int param_2,unsigned int
       return 1;
     }
   }
-  FUN_00180008(0);
-  FUN_001d0fcc(&temp_v5,DAT_00570280);
-  *(unsigned int *)(DAT_00570260 + 0x754) = (*(unsigned int *)(DAT_00570260 + 0x754) & 0xfffeffff) | 0x10;
+  jyoucyuGetTableEntry(0);
+  FUN_001d0fcc(&temp_v5,g_aocSystem);
+  *(unsigned int *)(g_aocMain + 0x754) = (*(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff) | 0x10;
   temp_v0 = FUN_001d25ec((unsigned int *)&temp_v3);
   if (temp_v0 != -0x36bec76f) {
-    temp_v0 = FUN_001af210(DAT_00570260 + 0x98);
+    temp_v0 = FUN_001af210(g_aocMain + 0x98);
     if (temp_v0 != 0) {
-      *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xfffeffff;
+      *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
     }
     else if ((char)temp_v2 != -0x38) {
       temp_v5 = temp_v2;
@@ -111,25 +111,25 @@ unsigned int FUN_00472350(unsigned int param_1,unsigned int param_2,unsigned int
       uStack_34 = uStack_48;
       uStack_30 = temp_v4;
       uStack_2c = uStack_40;
-      temp_v0 = DAT_00570260;
-      FUN_001d1038(DAT_00570260,&temp_v5,temp_v3,uStack_48);
+      temp_v0 = g_aocMain;
+      FUN_001d1038(g_aocMain,&temp_v5,temp_v3,uStack_48);
       if (temp_v0 != 0) {
         return 0;
       }
-      FUN_00180008(0);
+      jyoucyuGetTableEntry(0);
       return 0;
     }
-    FUN_00180008(0);
+    jyoucyuGetTableEntry(0);
     temp_v2 = romwright_piece_3_1((((unsigned int)(temp_v2) >> 8) & 0xffffffU),200);
     temp_v6 = temp_v2;
     uStack_24 = temp_v3;
     uStack_20 = uStack_48;
     uStack_1c = temp_v4;
     uStack_18 = uStack_40;
-    FUN_001ba1c0(DAT_00570260,&temp_v6,0x65,0);
+    FUN_001ba1c0(g_aocMain,&temp_v6,0x65,0);
   }
   else {
-    FUN_00180008(0);
+    jyoucyuGetTableEntry(0);
   }
   return 0;
 }

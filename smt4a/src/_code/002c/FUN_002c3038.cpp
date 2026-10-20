@@ -24,13 +24,13 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_002c3324; /* 0x2c3324 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00102bbc. */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00167618. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c410. */
@@ -58,12 +58,12 @@ unsigned int FUN_002c3038(void)
   float temp_v10;
   float temp_v11;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   temp_v7 = 0.0f;
   temp_v6 = 1.0f;
   if (*(int *)(temp_v0 + 0x10) != 1) {
-    FUN_0016c560(DAT_0059dbb4);
-    FUN_00157558(DAT_0059dbb4);
+    FUN_0016c560(g_renderCtx);
+    FUN_00157558(g_renderCtx);
     temp_v1 = *(int *)(temp_v0 + 0x10);
     if (!((temp_v1 == 7 || temp_v1 == 8) || temp_v1 == 0xe)) {
       FUN_003d1fac();
@@ -73,7 +73,7 @@ unsigned int FUN_002c3038(void)
       temp_v9 = temp_v7;
       temp_v10 = temp_v7;
       temp_v11 = temp_v6;
-      FUN_0016c4b8(DAT_0059dbb4,0);
+      FUN_0016c4b8(g_renderCtx,0);
       FUN_00167618(&temp_v8);
     }
     if (*(float *)(temp_v0 + 0x6c) != temp_v7) {
@@ -81,8 +81,8 @@ unsigned int FUN_002c3038(void)
       temp_v9 = temp_v6;
       temp_v10 = temp_v6;
       temp_v11 = temp_v6;
-      FUN_00157558(DAT_0059dbb4);
-      temp_v1 = DAT_0059dbb4;
+      FUN_00157558(g_renderCtx);
+      temp_v1 = g_renderCtx;
       temp_v2 = FUN_001692ac(1,0);
       piVar6 = (int *)(temp_v1 + 0x1258);
       temp_v3 = *piVar6;
@@ -97,10 +97,10 @@ unsigned int FUN_002c3038(void)
       temp_v8 = temp_v6;
       temp_v9 = temp_v6;
       temp_v10 = temp_v6;
-      FUN_0016c4b8(DAT_0059dbb4,0);
+      FUN_0016c4b8(g_renderCtx,0);
       FUN_00167618(&temp_v8);
-      temp_v0 = DAT_0059dbb4;
-      piVar6 = (int *)(DAT_0059dbb4 + 0x1258);
+      temp_v0 = g_renderCtx;
+      piVar6 = (int *)(g_renderCtx + 0x1258);
       temp_v1 = *piVar6;
       temp_v2 = piVar6[temp_v1 + 2];
       *piVar6 = temp_v1 - 1;
@@ -117,8 +117,8 @@ unsigned int FUN_002c3038(void)
     if (temp_v2 < 10) {
       temp_v1 = temp_v2;
       if (temp_v2 < 1) {
-        FUN_0016c560(DAT_0059dbb4);
-        FUN_0016c410(DAT_0059dbb4);
+        FUN_0016c560(g_renderCtx);
+        FUN_0016c410(g_renderCtx);
         return 0;
       }
     }
@@ -139,8 +139,8 @@ unsigned int FUN_002c3038(void)
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < temp_v1);
   }
-  FUN_0016c560(DAT_0059dbb4);
-  FUN_0016c410(DAT_0059dbb4);
+  FUN_0016c560(g_renderCtx);
+  FUN_0016c410(g_renderCtx);
   return 0;
 }
 

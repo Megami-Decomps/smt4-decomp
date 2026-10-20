@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_00158bf8(unsigned char *);
 int FUN_0015fcec(unsigned char *, unsigned int);
-int FUN_001630d4(int, int, int, int);
+int asdMemoryAlloc(int, int, int, int);
 int FUN_0016d1f4(unsigned char [24]);
 int FUN_00177abc(float *, unsigned char *);
 int FUN_00177cdc(unsigned char *, unsigned char *, int);
 int FUN_0018a924(float *, unsigned int **);
-int FUN_0019d4d8(...);
+int asdMemoryAllocAligned(...);
 int FUN_0045af48(unsigned int, unsigned int, unsigned int, int);
 int FUN_005015b0(unsigned char *, unsigned int *);
 int FUN_00501660(unsigned int *, int);
@@ -98,12 +98,12 @@ extern unsigned int DAT_0056fcc4; /* 0x56fcc4 */
 
 /* Supplied declaration required: FUN_00158bf8. */
 /* Supplied declaration required: FUN_0015fcec. */
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0016d1f4. */
 /* Supplied declaration required: FUN_00177abc. */
 /* Supplied declaration required: FUN_00177cdc. */
 /* Supplied declaration required: FUN_0018a924. */
-/* Supplied declaration required: FUN_0019d4d8. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
 extern unsigned int FUN_001a04e0(unsigned int, unsigned int);
 extern int FUN_001af0d0(float *, unsigned int);
 extern unsigned int FUN_0042cbd8(unsigned int, unsigned int);
@@ -189,7 +189,7 @@ void FUN_003fed38(int param_1,fn_003fed38_arg1 *param_2)
   temp_v0 = 0x10000;
   temp_v11 = 1.4013e-45f;
   temp_v10 = (unsigned int *)0x10;
-  FUN_0019d4d8(0x10000,0x100,0);
+  asdMemoryAllocAligned(0x10000,0x100,0);
   *(unsigned int *)(param_1 + 8) = temp_v0;
   if ((temp_v40 == '\0') || (temp_v39 != '\0')) {
     temp_v1 = temp_v32 * temp_v33 * 4;
@@ -199,7 +199,7 @@ void FUN_003fed38(int param_1,fn_003fed38_arg1 *param_2)
   }
   temp_v0 = 0x30000;
   temp_v10 = (unsigned int *)0x1;
-  FUN_001630d4(0x30000,0x100,0,temp_v1);
+  asdMemoryAlloc(0x30000,0x100,0,temp_v1);
   *(unsigned int *)(param_1 + 0xc) = temp_v0;
   temp_v10 = (unsigned int *)&temp_v31;
   FUN_0045af48(*(unsigned int *)(param_1 + 4),*(unsigned int *)(param_1 + 8),temp_v0,0);
@@ -227,7 +227,7 @@ void FUN_003fed38(int param_1,fn_003fed38_arg1 *param_2)
   temp_v1 = 0x10000;
   temp_v11 = 1.4013e-45f;
   temp_v10 = (unsigned int *)0x10;
-  FUN_0019d4d8(0x10000,0x100,0,0x250);
+  asdMemoryAllocAligned(0x10000,0x100,0,0x250);
   *(int *)(param_1 + 0x18) = temp_v1;
   temp_v7 = *(unsigned long long *)(*(int *)(param_1 + 4) + 0x40);
   temp_v20 = 0;

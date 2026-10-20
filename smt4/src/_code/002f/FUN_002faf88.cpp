@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c57c8(...);
+int asdSequenceRequest(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ extern unsigned int DAT_0049fc48; /* 0x49fc48 */
 extern unsigned int DAT_0049fc4c; /* 0x49fc4c */
 extern int DAT_0049fd14; /* 0x49fd14 */
 
-/* Supplied declaration required: FUN_002c57c8. */
+/* Supplied declaration required: asdSequenceRequest. */
 
 
 void FUN_002faf88(void)
@@ -41,11 +41,11 @@ void FUN_002faf88(void)
     if (DAT_0049fc38 >= 200) {
       temp_v0[0] = DAT_0049fc38 - 200;
       DAT_0049fc1c = 0;
-      FUN_002c57c8(0xe,temp_v0,4);
+      asdSequenceRequest(0xe,temp_v0,4);
       return;
     }
     if (DAT_0049fc38 < 100) {
-      FUN_002c57c8(6,0,0,in_r3);
+      asdSequenceRequest(6,0,0,in_r3);
       return;
     }
     if (DAT_0049fc18 < 100) {
@@ -60,20 +60,20 @@ void FUN_002faf88(void)
   else {
     if (DAT_0049fd14 == -1) {
       temp_v0[0] = 3;
-      FUN_002c57c8(0xe,temp_v0,4);
+      asdSequenceRequest(0xe,temp_v0,4);
       return;
     }
     if (DAT_0049fd14 >= 200) {
       temp_v0[0] = DAT_0049fd14 - 200;
-      FUN_002c57c8(0xe,temp_v0,4);
+      asdSequenceRequest(0xe,temp_v0,4);
       return;
     }
     if (DAT_0049fd14 < 100) {
-      FUN_002c57c8(6,0,0,in_r3);
+      asdSequenceRequest(6,0,0,in_r3);
       return;
     }
   }
-  FUN_002c57c8(8,0,0,in_r3);
+  asdSequenceRequest(8,0,0,in_r3);
   return;
 }
 

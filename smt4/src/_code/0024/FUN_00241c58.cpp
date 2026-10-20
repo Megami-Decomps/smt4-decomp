@@ -5,7 +5,7 @@
 extern "C" {
 
 int taskListUpdate(int);
-int FUN_002c415c(int);
+int asdMemFree(int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ extern int DAT_004c5874; /* 0x4c5874 */
 extern int DAT_004c5878; /* 0x4c5878 */
 
 /* Supplied declaration required: taskListUpdate. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00241c58(void)
@@ -63,7 +63,7 @@ void FUN_00241c58(void)
         }
         DAT_004c5874 = temp_v2;
         DAT_004c5878 = DAT_004c5878 - 1;
-        FUN_002c415c(temp_v3);
+        asdMemFree(temp_v3);
         temp_v3 = temp_v4;
         continue;
       }

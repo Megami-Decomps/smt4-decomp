@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_0016007c(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdOperatorNew(...);
 int FUN_002804b0(...);
 int FUN_002c7e6c(...);
 int FUN_002c8538(...);
@@ -26,9 +26,9 @@ extern unsigned char LAB_003459d4; /* 0x3459d4 */
 extern unsigned char LAB_0036edf4; /* 0x36edf4 */
 extern unsigned int *DAT_0058812c; /* 0x58812c */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_002c7e6c. */
 /* Supplied declaration required: FUN_002c8538. */
@@ -48,7 +48,7 @@ void FUN_0035b404(unsigned int param_1)
   int temp_v0;
   
   puVar1 = (unsigned int *)0xac;
-  FUN_0016007c();
+  asdOperatorNew();
   if (puVar1 != (unsigned int *)0x0) {
     puVar1[4] = 0;
     puVar1[5] = 0;
@@ -59,9 +59,9 @@ void FUN_0035b404(unsigned int param_1)
   }
   pcVar2 = "DEVIL_MARKET PROC";
   DAT_0058812c = puVar1;
-  FUN_0014e38c("DEVIL_MARKET PROC",4,0,0,&LAB_003459d4,0,0);
+  asdProcessCreateSimple("DEVIL_MARKET PROC",4,0,0,&LAB_003459d4,0,0);
   *puVar1 = (unsigned int)pcVar2;
-  FUN_0015155c("DEVIL_MARKET DD",0xeb,0,0,&LAB_0036edf4,0,0,pcVar2);
+  taskCreateDraw("DEVIL_MARKET DD",0xeb,0,0,&LAB_0036edf4,0,0,pcVar2);
   puVar1[0x27] = param_1;
   FUN_002804b0("npc_shop/DevilMarket/DevilMarket.mbm",puVar1 + 4,0);
   FUN_002804b0("npc_shop/DevilMarket/DevilMarket.bf",puVar1 + 5,0);

@@ -7,7 +7,7 @@ extern "C" {
 extern unsigned char DAT_0055a884; /* 0x55a884 */
 extern unsigned char DAT_0055ad28; /* 0x55ad28 */
 
-extern int FUN_0030d3f4(unsigned int *, int);
+extern int copyObjectCtorDerived(unsigned int *, int);
 
 
 void FUN_0030d108(unsigned int param_1,unsigned int *param_2,int param_3)
@@ -19,7 +19,7 @@ void FUN_0030d108(unsigned int param_1,unsigned int *param_2,int param_3)
     *param_2 = (unsigned int)&DAT_0055ad28;
     *(unsigned char *)(param_2 + 1) = *(unsigned char *)(param_3 + 4);
     *(unsigned char *)((int)param_2 + 5) = *(unsigned char *)(param_3 + 5);
-    temp_v0 = FUN_0030d3f4(param_2 + 2,param_3 + 8);
+    temp_v0 = copyObjectCtorDerived(param_2 + 2,param_3 + 8);
     *(unsigned char **)(temp_v0 - 8) = &DAT_0055a884;
   }
   return;

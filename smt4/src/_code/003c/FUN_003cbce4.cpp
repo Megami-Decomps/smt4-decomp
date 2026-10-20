@@ -17,10 +17,10 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned char DAT_00434278; /* 0x434278 */
+extern unsigned char g_btlAction; /* 0x434278 */
 extern unsigned int DAT_00434290; /* 0x434290 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
-extern unsigned int DAT_00435d48; /* 0x435d48 */
+extern unsigned int g_btlEvent; /* 0x435d48 */
 
 /* Supplied declaration required: FUN_002296f4. */
 /* Supplied declaration required: FUN_00229a3c. */
@@ -46,7 +46,7 @@ unsigned int FUN_003cbce4(int *param_1,int param_2)
   if (((*(unsigned int *)(temp_v0 + 0x44a0) & 0x40000) == 0) && ((*(unsigned int *)(temp_v0 + 0xe0) & 0x40000) != 0)) {
     temp_v0 = FUN_0027e6bc(DAT_00434290,param_2);
     if (temp_v0 == 0) {
-      q = (int *)(*(int *)((unsigned char *)&DAT_00434278 + 0x4)) + *(int *)(*param_1 + 0x84) * 0x3c7;
+      q = (int *)(*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0x3c7;
       *((char *)q + 9) = 1;
       FUN_0022a304(DAT_00435d18);
       return 1;
@@ -69,7 +69,7 @@ unsigned int FUN_003cbce4(int *param_1,int param_2)
     }
     if (piVar2 != (int *)0x0) {
       *(unsigned int *)(param_2 + 0xf04) = 0;
-      q = (int *)(*(int *)((unsigned char *)&DAT_00434278 + 0x4)) + *(int *)(*param_1 + 0x84) * 0x3c7;
+      q = (int *)(*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0x3c7;
       *((char *)q + 9) = 0x1b;
       return 1;
     }
@@ -77,7 +77,7 @@ unsigned int FUN_003cbce4(int *param_1,int param_2)
       return 0;
     }
   }
-  temp_v0 = FUN_0027e3b8(DAT_00435d48);
+  temp_v0 = FUN_0027e3b8(g_btlEvent);
   if (temp_v0 == 0) {
     FUN_003d0220(param_1,param_2,1);
     piVar2 = FUN_003cfc84(param_1,param_2,1);
@@ -86,7 +86,7 @@ unsigned int FUN_003cbce4(int *param_1,int param_2)
     if ((temp_v0 <= 0) && (piVar2 != (int *)0x0)) {
       *(unsigned int *)(param_2 + 0xf04) = 0x1e;
       FUN_002296f4(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),0,0x11,0x11);
-      q = (int *)(*(int *)((unsigned char *)&DAT_00434278 + 0x4)) + *(int *)(*param_1 + 0x84) * 0x3c7;
+      q = (int *)(*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0x3c7;
       *((char *)q + 9) = 0x1b;
       return 1;
     }

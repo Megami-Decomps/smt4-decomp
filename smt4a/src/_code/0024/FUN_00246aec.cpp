@@ -1,43 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00246aec` (_code @ 0x246aec, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
+
+#define SLOT_COUNT 64
+
+typedef struct Resource Resource;
+typedef struct ResourceVtbl {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ void (*release)(Resource *self);
+} ResourceVtbl;
+struct Resource {
+    /* 0x00 */ ResourceVtbl *vtbl;
+};
+
+typedef struct Slot {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ Resource *resource;
+    /* 0x08 */ u8 unk08[0x34];
+} Slot;                          /* 0x3C bytes */
+
+typedef struct Pool {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ Slot slots[SLOT_COUNT];
+} Pool;
+
+extern Pool *DAT_00581280;
 
 int FUN_0020ef94(void);
 int FUN_00353d1c(void);
 
-typedef int romwright_code(...);
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern int DAT_00581280; /* 0x581280 */
-
-/* Supplied declaration required: FUN_0020ef94. */
-/* Supplied declaration required: FUN_00353d1c. */
-
-
+/* Releases the resource of every pool slot (highest first), then runs FUN_00353d1c and FUN_0020ef94. */
 void FUN_00246aec(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  
-  temp_v0 = 0x3f;
-  do {
-    piVar1 = *(int **)(DAT_00581280 + temp_v0 * 0x3c + 0x40);
-    if (piVar1 != (int *)0x0) {
-      (**(romwright_code **)(*piVar1 + 4))();
-      *(unsigned int *)(DAT_00581280 + temp_v0 * 0x3c + 0x40) = 0;
+    int i;
+
+    for (i = SLOT_COUNT - 1; i >= 0; i--) {
+        Resource *resource = DAT_00581280->slots[i].resource;
+
+        if (resource != NULL) {
+            resource->vtbl->release(resource);
+            DAT_00581280->slots[i].resource = NULL;
+        }
     }
-    temp_v0 = temp_v0 - 1;
-  } while (-1 < temp_v0);
-  FUN_00353d1c();
-  FUN_0020ef94();
-  return;
+    FUN_00353d1c();
+    FUN_0020ef94();
 }
 
 } /* extern "C" */

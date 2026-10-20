@@ -15,7 +15,7 @@ extern unsigned int DAT_005f1ba4; /* 0x5f1ba4 */
 extern unsigned int DAT_005f1ba8; /* 0x5f1ba8 */
 extern unsigned int DAT_005f1bac; /* 0x5f1bac */
 
-extern int FUN_00236038(void);
+extern int scrGetArg(void);
 /* Supplied declaration required: FUN_0035846c. */
 
 
@@ -25,7 +25,7 @@ unsigned int FUN_00330eb8(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_00236038();
+  temp_v0 = scrGetArg();
   if (temp_v0 == 0x164f) {
     FUN_0035846c();
     DAT_005f1b94 = 0x65;

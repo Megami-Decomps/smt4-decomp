@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00157558(int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(int, unsigned int, int, int, int, int);
 int FUN_00183bb0(void);
 int FUN_001879d0(int);
@@ -21,10 +21,10 @@ extern unsigned int DAT_0057f480; /* 0x57f480 */
 extern int DAT_0057f484; /* 0x57f484 */
 extern unsigned int DAT_0057f48c; /* 0x57f48c */
 extern int DAT_0057f490; /* 0x57f490 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -44,8 +44,8 @@ unsigned char FUN_0023ad64(int *param_1)
   
   if (*(char *)(*param_1 + 0x24) != '\0') {
     FUN_00183bb0();
-    FUN_00157558(DAT_0059dbb4);
-    temp_v3 = DAT_0059dbb4;
+    FUN_00157558(g_renderCtx);
+    temp_v3 = g_renderCtx;
     temp_v0 = FUN_001692ac(1,0);
     piVar4 = (int *)(temp_v3 + 0x1258);
     temp_v1 = *piVar4;
@@ -57,9 +57,9 @@ unsigned char FUN_0023ad64(int *param_1)
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
     temp_v3 = DAT_0057f484 * 1000;
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,DAT_0057f480,temp_v3,0,0,0xfa);
-    temp_v3 = DAT_0059dbb4;
+    temp_v3 = g_renderCtx;
     temp_v0 = FUN_00169294(6,1,0);
     piVar4 = (int *)(temp_v3 + 0x12b8);
     temp_v1 = *piVar4;
@@ -70,12 +70,12 @@ unsigned char FUN_0023ad64(int *param_1)
       (**(romwright_code **)(temp_v3 + 0x12d4))();
       *(unsigned char *)(temp_v3 + 0x12d0) = 0;
     }
-    FUN_001879d0(DAT_0059dbb4);
+    FUN_001879d0(g_renderCtx);
     temp_v3 = DAT_0057f490 * 1000;
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,DAT_0057f48c,temp_v3,0,0,0xfb);
-    temp_v3 = DAT_0059dbb4;
-    piVar4 = (int *)(DAT_0059dbb4 + 0x12b8);
+    temp_v3 = g_renderCtx;
+    piVar4 = (int *)(g_renderCtx + 0x12b8);
     temp_v0 = *piVar4;
     temp_v1 = piVar4[temp_v0 + 2];
     *piVar4 = temp_v0 - 1;
@@ -84,9 +84,9 @@ unsigned char FUN_0023ad64(int *param_1)
       *(unsigned char *)(temp_v3 + 0x12d0) = 0;
     }
     FUN_00183bb0();
-    FUN_001677c0();
-    temp_v3 = DAT_0059dbb4;
-    piVar4 = (int *)(DAT_0059dbb4 + 0x1258);
+    efctSetSpeed();
+    temp_v3 = g_renderCtx;
+    piVar4 = (int *)(g_renderCtx + 0x1258);
     temp_v0 = *piVar4;
     temp_v1 = piVar4[temp_v0 + 2];
     *piVar4 = temp_v0 - 1;

@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00167f94(void);
-int FUN_002e6354(unsigned char [256], int);
+int sysMemClear(unsigned char [256], int);
 
 /* Supplied declaration required: FUN_00167f94. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_00240c34(void)
@@ -17,7 +17,7 @@ void FUN_00240c34(void)
 /* irregular: 2 native warning(s); review required */
   unsigned char temp_v0 [256];
   
-  FUN_002e6354(temp_v0,0x100);
+  sysMemClear(temp_v0,0x100);
   FUN_00167f94();
   return;
 }

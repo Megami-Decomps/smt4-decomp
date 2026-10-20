@@ -8,7 +8,7 @@ int FUN_0023c9e8(unsigned int, int, int, int, int);
 int FUN_0023cd08(unsigned int, int, int);
 int FUN_00282924(unsigned int *, int);
 int FUN_00289fa8(...);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 
 typedef struct fn_00344cf4_arg1 fn_00344cf4_arg1;
 struct fn_00344cf4_arg1 {
@@ -34,7 +34,7 @@ extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 /* Supplied declaration required: FUN_0023cd08. */
 /* Supplied declaration required: FUN_00282924. */
 /* Supplied declaration required: FUN_00289fa8. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 extern int FUN_003ae638(unsigned int, int);
 
 
@@ -51,7 +51,7 @@ void FUN_00344cf4(unsigned int param_1,fn_00344cf4_arg1 *param_2)
   int temp_v5;
   int temp_v6;
   
-  puVar2 = (unsigned int *)FUN_002939f4();
+  puVar2 = (unsigned int *)btlGetMainState();
   FUN_00282924(puVar2,(int)*(short *)((int)param_2->field_0x14 + 0x62));
   if (puVar2 == (unsigned int *)0x0) {
     param_2->field_0x2 = 0;
@@ -67,7 +67,7 @@ void FUN_00344cf4(unsigned int param_1,fn_00344cf4_arg1 *param_2)
   else {
     temp_v4 = *puVar2;
     if ((temp_v4 & 0x10) != 0) {
-      temp_v1 = FUN_002939f4();
+      temp_v1 = btlGetMainState();
       FUN_0023cd08(temp_v1,(int)*(short *)((int)param_2->field_0x14 + 0x62),0);
       temp_v3 = param_2->field_0x28;
       if (temp_v3 != 1) {

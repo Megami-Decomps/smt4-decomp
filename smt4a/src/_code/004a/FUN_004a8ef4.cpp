@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014e188(...);
 int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
-int FUN_0016007c(...);
+int asdOperatorNew(...);
 int FUN_001846d0(...);
 int FUN_00184c00(...);
 int FUN_0021c45c(int, int);
@@ -51,7 +51,7 @@ extern int DAT_0057a9c8; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_00184c00. */
 /* Supplied declaration required: FUN_0021c45c. */
@@ -124,7 +124,7 @@ void FUN_004a8ef4(fn_004a8ef4_arg0 *param_1,int param_2)
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 0xc);
   temp_v6 = 0x420;
-  FUN_0016007c(0x420,param_2);
+  asdOperatorNew(0x420,param_2);
   temp_v2 = 0;
   if (temp_v6 != 0) {
     temp_v2 = FUN_003f9ab0();

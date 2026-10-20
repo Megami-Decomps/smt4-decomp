@@ -13,8 +13,8 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_0038e29c; /* 0x38e29c */
-extern unsigned int DAT_00432fc8; /* 0x432fc8 */
-extern int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocMain; /* 0x432fc8 */
+extern int g_aocSystem; /* 0x433158 */
 
 extern int FUN_0029022c(void);
 extern unsigned int FUN_002903f0(void);
@@ -35,9 +35,9 @@ unsigned int FUN_002764a8(int param_1)
   if ((temp_v0 != 0) && (temp_v1 = FUN_002903f0(), temp_v1 >= 0x15e)) {
     temp_v2[0] = (unsigned short)temp_v1;
     puVar3 = temp_v2;
-    FUN_002b46f8(puVar3,*(unsigned int *)(param_1 + 0x388),*(unsigned int *)(DAT_00433158 + 900),0x1b4,
+    FUN_002b46f8(puVar3,*(unsigned int *)(param_1 + 0x388),*(unsigned int *)(g_aocSystem + 900),0x1b4,
                  &LAB_0038e29c);
-    if ((puVar3 == (unsigned short *)0x0) || (temp_v0 = FUN_002a1534(DAT_00432fc8), temp_v0 == 0)) {
+    if ((puVar3 == (unsigned short *)0x0) || (temp_v0 = FUN_002a1534(g_aocMain), temp_v0 == 0)) {
       return 1;
     }
   }

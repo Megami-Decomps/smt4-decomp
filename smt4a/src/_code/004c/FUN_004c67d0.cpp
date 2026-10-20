@@ -28,11 +28,11 @@ extern unsigned int DAT_005714cc; /* 0x5714cc */
 extern unsigned int DAT_005714d0; /* 0x5714d0 */
 extern unsigned int DAT_005714d4; /* 0x5714d4 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_00213b5c(void);
 extern int FUN_002626e0(void);
 /* Supplied declaration required: FUN_003eebf4. */
-extern int aeabi_idivmod(int, int);
+extern int __aeabi_idivmod(int, int);
 
 
 int FUN_004c67d0(void)
@@ -53,7 +53,7 @@ int FUN_004c67d0(void)
   int temp_v9;
   int temp_v10;
   
-  temp_v3 = FUN_0014aa78();
+  temp_v3 = btlGetMainState();
   if ((*(unsigned int *)(temp_v3 + 0x10c) & 0x40000) != 0) {
     return 0;
   }
@@ -107,8 +107,8 @@ int FUN_004c67d0(void)
     temp_v4 = temp_v4 + *(short *)((int)puVar6 + 0xe86);
     temp_v5 = temp_v5 + (short)puVar6[0x3a2];
   }
-  temp_v4 = aeabi_idivmod(temp_v4,temp_v7);
-  temp_v5 = aeabi_idivmod(temp_v5,temp_v7);
+  temp_v4 = __aeabi_idivmod(temp_v4,temp_v7);
+  temp_v5 = __aeabi_idivmod(temp_v5,temp_v7);
   temp_v6 = 0;
   temp_v7 = 4;
   do {
@@ -121,8 +121,8 @@ int FUN_004c67d0(void)
     }
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 0x36);
-  temp_v7 = aeabi_idivmod(temp_v8,temp_v6);
-  temp_v8 = aeabi_idivmod(temp_v9,temp_v6);
+  temp_v7 = __aeabi_idivmod(temp_v8,temp_v6);
+  temp_v8 = __aeabi_idivmod(temp_v9,temp_v6);
   FUN_003eebf4(temp_v3,1);
   if (-1 < temp_v3) {
     temp_v10 = -0x32;

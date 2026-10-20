@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e6e14(int);
 int FUN_002e6e34(int *, int *);
 int FUN_002e6e5c(int *);
-int FUN_002f9ff8(int);
+int ringPop(int);
 
 typedef int romwright_code(...);
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -19,7 +19,7 @@ typedef int romwright_code(...);
 /* Supplied declaration required: FUN_002e6e5c. */
 extern int FUN_002f2910(int);
 extern int FUN_002f5966(int *);
-/* Supplied declaration required: FUN_002f9ff8. */
+/* Supplied declaration required: ringPop. */
 
 
 unsigned long long FUN_002f8da8(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -43,7 +43,7 @@ unsigned long long FUN_002f8da8(int *param_1,unsigned int param_2,unsigned int p
     if (piVar1 != (int *)0x0) {
       (**(romwright_code **)(*piVar1 + 4))();
     }
-    FUN_002f9ff8(*param_1);
+    ringPop(*param_1);
   }
   if (temp_v0 != 0) {
     temp_v0 = FUN_002f2910(temp_v0 + 4);

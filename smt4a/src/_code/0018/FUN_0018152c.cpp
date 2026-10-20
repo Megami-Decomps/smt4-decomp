@@ -26,7 +26,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_5_stack;
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
@@ -38,7 +38,7 @@ extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_00191f18. */
 /* Supplied declaration required: FUN_0019cac4. */
 /* Supplied declaration required: FUN_0019e130. */
-extern int FUN_0019e4d4(unsigned int);
+extern int slotRecordFindById(unsigned int);
 
 
 void FUN_0018152c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,int param_5)
@@ -56,7 +56,7 @@ void FUN_0018152c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   if ((int)param_1 < 0) {
     temp_v0 = FUN_0018719c(0x11);
     if (temp_v0 == 0) {
-      temp_v0 = FUN_00191f18(DAT_00570280,0x25d);
+      temp_v0 = FUN_00191f18(g_aocSystem,0x25d);
       if (temp_v0 == 0) {
         temp_v3 = 0x50;
         temp_v4 = 0x60;
@@ -65,7 +65,7 @@ void FUN_0018152c(unsigned int param_1,unsigned int param_2,unsigned int param_3
         FUN_001849bc(2,0x1b,3000,param_2,param_3,param_4,&temp_v3);
         return;
       }
-      FUN_00191ea8(DAT_00570280,0x25d,param_2,param_3,param_4);
+      FUN_00191ea8(g_aocSystem,0x25d,param_2,param_3,param_4);
       return;
     }
     FUN_001835b4(2,0x1b,1000,param_2,param_3,param_4);
@@ -79,14 +79,14 @@ void FUN_0018152c(unsigned int param_1,unsigned int param_2,unsigned int param_3
       FUN_001835b4(2,0x1b,2000,param_2,param_3,param_4);
       return;
     }
-    if (((param_5 != 0) && (temp_v0 = FUN_0019e4d4(param_1 & 0xffff), temp_v0 != 0)) &&
+    if (((param_5 != 0) && (temp_v0 = slotRecordFindById(param_1 & 0xffff), temp_v0 != 0)) &&
        ((*(unsigned short *)(temp_v0 + 0x60) & 2) != 0)) {
       FUN_0019e130(1);
       FUN_00184e64();
     }
-    temp_v0 = FUN_00191f18(DAT_00570280,*(unsigned short *)(temp_v1 + 0x9c));
+    temp_v0 = FUN_00191f18(g_aocSystem,*(unsigned short *)(temp_v1 + 0x9c));
     if (temp_v0 != 0) {
-      FUN_00191ea8(DAT_00570280,*(unsigned short *)(temp_v1 + 0x9c),param_2,param_3,param_4);
+      FUN_00191ea8(g_aocSystem,*(unsigned short *)(temp_v1 + 0x9c),param_2,param_3,param_4);
     }
     else {
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v1 + 0x9c);

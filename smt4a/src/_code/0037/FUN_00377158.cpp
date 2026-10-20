@@ -1,61 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00377158` (_code @ 0x377158, 0xe4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only in the final bit update (retail: r1 holds the mask temp chain differently) */
+/* Sets or clears flag `id` in the global flag bit array; alias ids are first mapped to their canonical flag. */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_00162e8c(void);
+typedef struct FlagSet {
+    /* 0x000 */ u8 unk000[0xCCC];
+    /* 0xCCC */ u32 bits[1];
+} FlagSet;
 
+extern FlagSet *FUN_00162e8c(void);
 
-void FUN_00377158(int param_1,int param_2)
-
+void FUN_00377158(s32 id, s32 set)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v1 = FUN_00162e8c();
-  if (param_1 == 0x17 || param_1 == 0x18) {
-    param_1 = 0xe;
-  }
-  else if (param_1 == 0x19 || param_1 == 0x1a) {
-    param_1 = 0x12;
-  }
-  else if (param_1 == 0x49 || param_1 == 0x4d) {
-    param_1 = 0x41;
-  }
-  else if (param_1 == 0x4a || param_1 == 0x4e) {
-    param_1 = 0x42;
-  }
-  else if (param_1 == 0x4b || param_1 == 0x4f) {
-    param_1 = 0x43;
-  }
-  else if (param_1 == 0x4c || param_1 == 0x50) {
-    param_1 = 0x44;
-  }
-  else if (param_1 == 0x94 || param_1 == 0x9e) {
-    param_1 = 0x8d;
-  }
-  else if (param_1 == 0x95 || param_1 == 0x9f) {
-    param_1 = 0x8e;
-  }
-  else if (param_1 == 0x96 || param_1 == 0xa0) {
-    param_1 = 0x91;
-  }
-  else if (param_1 == 0xa6 || param_1 == 0xa7) {
-    param_1 = 0xa4;
-  }
-  temp_v1 = temp_v1 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4;
-  temp_v2 = *(unsigned int *)(temp_v1 + 0xccc);
-  temp_v0 = 1 << ((param_1 % 0x20) & 0xffU);
-  if (param_2 != 0) {
-    temp_v2 = temp_v2 | temp_v0;
-  }
-  else {
-    temp_v2 = temp_v2 & ~temp_v0;
-  }
-  *(unsigned int *)(temp_v1 + 0xccc) = temp_v2;
-  return;
+    FlagSet *flags = FUN_00162e8c();
+
+    if (id == 0x17 || id == 0x18) {
+        id = 0xE;
+    } else if (id == 0x19 || id == 0x1A) {
+        id = 0x12;
+    } else if (id == 0x49 || id == 0x4D) {
+        id = 0x41;
+    } else if (id == 0x4A || id == 0x4E) {
+        id = 0x42;
+    } else if (id == 0x4B || id == 0x4F) {
+        id = 0x43;
+    } else if (id == 0x4C || id == 0x50) {
+        id = 0x44;
+    } else if (id == 0x94 || id == 0x9E) {
+        id = 0x8D;
+    } else if (id == 0x95 || id == 0x9F) {
+        id = 0x8E;
+    } else if (id == 0x96 || id == 0xA0) {
+        id = 0x91;
+    } else if (id == 0xA6 || id == 0xA7) {
+        id = 0xA4;
+    }
+    if (set != 0) {
+        flags->bits[id / 32] |= 1 << (id % 32);
+    } else {
+        flags->bits[id / 32] &= ~(1 << (id % 32));
+    }
 }
 
-} /* extern "C" */
+}

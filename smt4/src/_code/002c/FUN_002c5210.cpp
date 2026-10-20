@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern unsigned char DAT_004e39e0; /* 0x4e39e0 */
+extern unsigned char g_asdGxPresets; /* 0x4e39e0 */
 
 
 unsigned int FUN_002c5210(void)
 
 {
-  return (*(unsigned int *)((unsigned char *)&DAT_004e39e0 + 0x1c8));
+  return (*(unsigned int *)((unsigned char *)&g_asdGxPresets + 0x1c8));
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 
 
 void FUN_0031bca4(unsigned int param_1,int param_2,int param_3)
@@ -18,7 +18,7 @@ void FUN_0031bca4(unsigned int param_1,int param_2,int param_3)
   unsigned int in_fpscr;
   float temp_v1;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   if (param_3 != 0) {
     if (param_2 != 0) {
       *(unsigned int *)(temp_v0 + 0x24) = 0x3f800000;

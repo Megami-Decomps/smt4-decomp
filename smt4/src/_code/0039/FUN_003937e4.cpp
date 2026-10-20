@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002331c0(void);
 int FUN_00233218(void);
-int FUN_0026e754(void);
+int renderCtxCallB(void);
 int FUN_002a8a58(int *, unsigned int);
 int FUN_002a8ac4(...);
 int FUN_002b1fc4(...);
@@ -54,7 +54,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char LAB_00141adc; /* 0x141adc */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 extern unsigned int DAT_004d46ac; /* 0x4d46ac */
 extern unsigned int DAT_004d46b0; /* 0x4d46b0 */
 extern unsigned int DAT_004d46b4; /* 0x4d46b4 */
@@ -69,10 +69,10 @@ extern unsigned int DAT_004d46dc; /* 0x4d46dc */
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_002108b0(void);
+extern int asdSoundGetOption2(void);
 /* Supplied declaration required: FUN_002331c0. */
 /* Supplied declaration required: FUN_00233218. */
-/* Supplied declaration required: FUN_0026e754. */
+/* Supplied declaration required: renderCtxCallB. */
 /* Supplied declaration required: FUN_002a8a58. */
 /* Supplied declaration required: FUN_002a8ac4. */
 /* Supplied declaration required: FUN_002b1fc4. */
@@ -85,10 +85,10 @@ extern int FUN_002108b0(void);
 /* Supplied declaration required: FUN_002c5d5c. */
 extern float FUN_002c5da8(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002cc22c(void);
-extern int FUN_002cc23c(void);
+extern int asdSoundGetOption0(void);
 /* Supplied declaration required: FUN_002cc24c. */
-extern int FUN_002ebe48(void);
-extern int FUN_002ebe58(void);
+extern int asdSoundGetOption3(void);
+extern int asdSoundGetOption1(void);
 
 
 int FUN_003937e4(unsigned int param_1,int param_2,unsigned int *param_3)
@@ -162,7 +162,7 @@ int FUN_003937e4(unsigned int param_1,int param_2,unsigned int *param_3)
   FUN_002c5d5c(temp_v19 + 0x10,&LAB_00141adc,0x10,4);
   FUN_002c5d5c(temp_v19,&LAB_00141adc,0x10,4);
   temp_v18 = 0;
-  temp_v4 = FUN_002108b0();
+  temp_v4 = asdSoundGetOption2();
   if (temp_v4 != 0) {
     temp_v5 = param_3[3] + (unsigned int)*(unsigned char *)(param_2 + 0x10);
     if ((int)temp_v5 >= 0x100) {
@@ -207,7 +207,7 @@ int FUN_003937e4(unsigned int param_1,int param_2,unsigned int *param_3)
     }
     else {
 LAB_00393954:
-      temp_v4 = FUN_002ebe48();
+      temp_v4 = asdSoundGetOption3();
       temp_v10 = temp_v4 != 0;
       if (temp_v10) {
         temp_v19[0x20] = (float)FUN_002c5da8(6,7,0);
@@ -354,7 +354,7 @@ LAB_00393954:
           temp_v14 = (float)param_3[0xc];
           temp_v1 = 1;
         }
-        temp_v4 = FUN_002cc23c();
+        temp_v4 = asdSoundGetOption0();
         if (temp_v4 != 0) {
           temp_v5 = *param_3 & 0x400000;
           if ((*param_3 & 0x800000) != 0) {
@@ -376,9 +376,9 @@ LAB_00393954:
             temp_v12 = (float)VectorSignedToFloat(0x100 - temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v12 = temp_v12 * temp_v13;
           }
-          FUN_002ba12c(DAT_0044ea00);
+          FUN_002ba12c(g_titleScene);
           temp_v15 = temp_v12;
-          temp_v4 = FUN_002ebe58();
+          temp_v4 = asdSoundGetOption1();
           if (temp_v4 != 0) {
             temp_v12 = (float)(int)temp_v15;
           }
@@ -398,14 +398,14 @@ LAB_00393954:
           temp_v8 = (float)VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
           param_3[1] = (int)(temp_v8 + temp_v15);
         }
-        FUN_002c1b64(DAT_0044ea00,0);
+        FUN_002c1b64(g_titleScene,0);
         VectorUnsignedToFloat(param_3[6],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorUnsignedToFloat(param_3[5],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(param_3[2],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002b76d0(&DAT_004d46ac,&DAT_004d46bc,&DAT_004d46cc,&DAT_004d46dc);
         if (temp_v1) {
-          FUN_0026e754();
+          renderCtxCallB();
         }
         if (temp_v2) {
           FUN_002bf538();

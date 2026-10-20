@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_003fd784(...);
-int FUN_0040aa90(void);
+int moriModelContentCopyBody(void);
 int FUN_0040ace8(...);
 int VectorSignedToFloat(...);
 
@@ -49,7 +49,7 @@ extern int FUN_003b57f4(void);
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: FUN_0040aa6c. */
-/* Supplied declaration required: FUN_0040aa90. */
+/* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(unsigned int);
 extern unsigned int FUN_0040ac08(void);
@@ -557,7 +557,7 @@ LAB_003572ac:
         temp_v2 = FUN_0040ac08();
       }
       *(unsigned int *)(temp_v5 + 0xbd4) = temp_v2;
-      FUN_0040aa90();
+      moriModelContentCopyBody();
       temp_v1 = *(int *)(*(int *)(temp_v5 + 0xbd4) + 4);
       FUN_0040ace8(DAT_0056fcc0,temp_v1);
       FUN_003fd784(temp_v1);
@@ -662,7 +662,7 @@ LAB_0035755c:
                   temp_v2 = FUN_0040ac08();
                 }
                 *(unsigned int *)(temp_v7 + 0xd4) = temp_v2;
-                FUN_0040aa90();
+                moriModelContentCopyBody();
                 FUN_0040ace8(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v7 + 0xd4) + 4));
                 if (*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 4) >= 100) {
                   FUN_003fd784(*(unsigned int *)(*(int *)(temp_v7 + 0xd4) + 4));

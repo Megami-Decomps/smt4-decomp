@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_0014aa78(...);
+int btlGetMainState(...);
 int FUN_002804b0(...);
 int FUN_002c1c88(...);
 int FUN_002e342c(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_003e7840(...);
 int FUN_003fd7b4(...);
 int FUN_003fe86c(...);
@@ -37,11 +37,11 @@ extern unsigned int DAT_00573808; /* 0x573808 */
 
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_00100d60(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_002c1c88. */
 /* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern int FUN_00347664(void);
 extern int FUN_0035bcdc(int);
 /* Supplied declaration required: FUN_003e7840. */
@@ -135,7 +135,7 @@ unsigned int FUN_004fa828(int param_1,unsigned int param_2,unsigned int param_3,
     if (*(int *)(param_1 + 0x33a0) != 0 && *(int *)(param_1 + 0x33a0) != 0x16) {
       temp_v4 = 0;
       do {
-        temp_v2 = FUN_0014aa78();
+        temp_v2 = btlGetMainState();
         temp_v2 = temp_v2 + temp_v4 * 0x1c;
         temp_v3 = *(int *)(temp_v2 + 0x2418);
         if (-1 < temp_v3) {
@@ -197,11 +197,11 @@ LAB_004fab24:
   }
   else {
     temp_v7 = *(unsigned int *)(param_1 + 0x33a0);
-    temp_v4 = FUN_0014aa78();
+    temp_v4 = btlGetMainState();
     temp_v2 = 0;
     while (temp_v2 = temp_v2 + 1, temp_v2 < 0x6d) {
       if (temp_v2 >= 4) {
-        temp_v3 = FUN_0014aa78();
+        temp_v3 = btlGetMainState();
         temp_v6 = temp_v2 * 0x1d0 + 0x50;
         if (((*(unsigned int *)(*(int *)(temp_v3 + 0x1ed4) + temp_v6) & 1) != 0) &&
            ((*(unsigned int *)(*(int *)(temp_v4 + 0x1ed4) + temp_v6) & 0x400) != 0)) {
@@ -219,7 +219,7 @@ LAB_004fab24:
     temp_v4 = 0;
     while (temp_v4 = temp_v4 + 1, temp_v4 < 0x6d) {
       if (temp_v4 >= 4) {
-        FUN_0014aa78();
+        btlGetMainState();
       }
     }
     temp_v1 = *(unsigned int *)(param_1 + 0x339c) & 0xffffff0f;
@@ -228,8 +228,8 @@ LAB_004fab24:
   if ((temp_v1 & 0x100) != 0) {
     temp_v4 = 0;
     do {
-      FUN_002e6354(temp_v12,0x80);
-      FUN_002e6354(temp_v10,0x80);
+      sysMemClear(temp_v12,0x80);
+      sysMemClear(temp_v10,0x80);
       FUN_00100388(temp_v10,"battle/effect/%s.eft","ef_e_ref" + temp_v4 * 0x20);
       FUN_002e342c(temp_v12,temp_v10);
       temp_v2 = param_1 + temp_v4 * 0x8c;

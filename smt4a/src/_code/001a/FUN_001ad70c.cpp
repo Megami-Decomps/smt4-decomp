@@ -14,7 +14,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002e59f8. */
-extern int FUN_0030ef8c(int, char *, unsigned int);
+extern int rt_memcmp(int, char *, unsigned int);
 
 
 int FUN_001ad70c(int param_1,int param_2)
@@ -29,8 +29,8 @@ int FUN_001ad70c(int param_1,int param_2)
   unsigned char temp_v4 [8];
   int temp_v5;
   
-  temp_v0 = FUN_0030ef8c(param_1,"ATBC",4);
-  if ((temp_v0 == 0) || (temp_v0 = FUN_0030ef8c(param_1,"ABCH",4), temp_v0 == 0)) {
+  temp_v0 = rt_memcmp(param_1,"ATBC",4);
+  if ((temp_v0 == 0) || (temp_v0 = rt_memcmp(param_1,"ABCH",4), temp_v0 == 0)) {
     temp_v2 = *(int *)(param_1 + 8);
     temp_v3 = temp_v2 == 0;
     temp_v0 = temp_v2;
@@ -42,7 +42,7 @@ int FUN_001ad70c(int param_1,int param_2)
       temp_v0 = 0;
       param_1 = param_1 + *(int *)(param_1 + 0x10);
       do {
-        temp_v1 = FUN_0030ef8c(param_1,"EPLSIGN",7);
+        temp_v1 = rt_memcmp(param_1,"EPLSIGN",7);
         if (temp_v1 != 0) {
           return unaff_r8;
         }

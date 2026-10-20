@@ -8,7 +8,7 @@ int FUN_001223ac(void);
 int FUN_002f651c(unsigned char *, unsigned int);
 int FUN_002f6650(void);
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 extern unsigned char DAT_0062db8c; /* 0x62db8c */
 
 /* Supplied declaration required: FUN_001223ac. */
@@ -20,7 +20,7 @@ void FUN_002eb5c0(unsigned int param_1)
 
 {
 /* irregular: 3 native warning(s); review required */
-  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0x2)) == '\0') {
+  if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x2)) == '\0') {
     FUN_002f6650();
     FUN_001223ac();
   }

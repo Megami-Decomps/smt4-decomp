@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00303460(int);
 int FUN_00313648(int);
 int FUN_00363c3c(void);
-int FUN_003af9f4(void);
+int bannerShow(void);
 int FUN_003b61b0(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -15,15 +15,15 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f161d; /* 0x5f161d */
 extern signed char DAT_005f1a5c; /* 0x5f1a5c */
 
 /* Supplied declaration required: FUN_00303460. */
-extern int FUN_003135a8(void);
+extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: FUN_00363c3c. */
-/* Supplied declaration required: FUN_003af9f4. */
+/* Supplied declaration required: bannerShow. */
 /* Supplied declaration required: FUN_003b61b0. */
 
 
@@ -44,8 +44,8 @@ void FUN_002d22c0(char param_1)
       FUN_00303460(0);
       return;
     }
-    FUN_003af9f4();
-    if ((DAT_005f15fc >= 100) || (temp_v1 = FUN_003135a8(), temp_v0 = DAT_005f161d, temp_v1 == 1)) {
+    bannerShow();
+    if ((g_gameState >= 100) || (temp_v1 = lmapSceneGetUnk0(), temp_v0 = DAT_005f161d, temp_v1 == 1)) {
       DAT_005f161d = param_1;
       FUN_00313648(0x27);
       FUN_00303460(0x10);

@@ -9,7 +9,7 @@ int FUN_00195fc8(void);
 extern int FUN_0016f864(void);
 extern unsigned int FUN_0016f988(int *, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00195fc8. */
-extern unsigned int FUN_002e3390(unsigned int);
+extern unsigned int wstrlen(unsigned int);
 
 
 unsigned int nn_cfg_CTR_detail_InitializeBase(int *param_1,unsigned int param_2)
@@ -28,7 +28,7 @@ unsigned int nn_cfg_CTR_detail_InitializeBase(int *param_1,unsigned int param_2)
     temp_v1 = 0xd8a103f9;
   }
   else {
-    temp_v2 = FUN_002e3390(param_2);
+    temp_v2 = wstrlen(param_2);
     temp_v1 = FUN_0016f988(param_1,param_2,temp_v2,0);
     if ((temp_v1 & 0x80000000) != 0) {
       temp_v1 = 0xd92103fb;

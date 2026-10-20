@@ -7,12 +7,12 @@ extern "C" {
 int FUN_0023266c(unsigned char *, int, int, int);
 int FUN_0023346c(unsigned char *);
 int FUN_0027eb88(unsigned char *, int);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bd954(unsigned char *, int, int, unsigned char *, int);
 int FUN_002beed0(...);
 int FUN_002c312c(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int FUN_002c3944(unsigned char *, int);
-int FUN_002c5914(int, int);
+int asdTMTexTableLoadTmx(int, int);
 int FUN_003eb068(unsigned char *);
 int NaviMain_InitCallbacks(unsigned char *);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
@@ -35,13 +35,13 @@ extern unsigned char DAT_00404a9c; /* 0x404a9c */
 /* Supplied declaration required: FUN_0023266c. */
 /* Supplied declaration required: FUN_0023346c. */
 /* Supplied declaration required: FUN_0027eb88. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002beed0. */
 extern int FUN_002c2950(void);
 /* Supplied declaration required: FUN_002c312c. */
 /* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002c5914. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_003eb068. */
 /* Supplied declaration required: NaviMain_InitCallbacks. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -57,7 +57,7 @@ void NaviMain_InitInstance(unsigned char *param_1)
   
   temp_v0 = FUN_002c2950();
   NaviMain_InitCallbacks(param_1);
-  FUN_002c5914(0x33,0);
+  asdTMTexTableLoadTmx(0x33,0);
   param_1[0xc] = 0xff;
   *(unsigned int *)(param_1 + 0x14) = 0;
   *param_1 = 0;
@@ -75,7 +75,7 @@ void NaviMain_InitInstance(unsigned char *param_1)
   temp_v1 = 0;
   do {
     FUN_002bd954(param_1 + temp_v1 * 0x8c + 0x618,0x1c,0xfa1,puVar2,0x15);
-    FUN_002bd8e8(param_1 + temp_v1 * 0x8c + 0x618,4,0);
+    timerStart(param_1 + temp_v1 * 0x8c + 0x618,4,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 5);
   FUN_0023346c(param_1 + 0x178);
@@ -121,12 +121,12 @@ void NaviMain_InitInstance(unsigned char *param_1)
   param_1[0x9ee] = 0;
   *(unsigned int *)(param_1 + 0x9f0) = 0;
   FUN_002beed0(param_1 + 0x9f8,0x1c,0x1121,0x1d,puVar2,0x15);
-  FUN_002bd8e8(param_1 + 0x9f8,0);
+  timerStart(param_1 + 0x9f8,0);
   param_1[0xa84] = 0;
   param_1[0xa85] = 0;
   param_1[0xa86] = 0;
   FUN_002beed0(param_1 + 0xa88,0x1c,0x111a,0x1c,puVar2,0x15);
-  FUN_002bd8e8(param_1 + 0xa88,5,0);
+  timerStart(param_1 + 0xa88,5,0);
   return;
 }
 

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00236038(int);
+int scrGetArg(int);
 int FUN_002419c4(...);
 int FUN_002980e4(int, int);
-int FUN_004ee568(unsigned int);
+int btlUnitGet(unsigned int);
 int FUN_004f5a78(void);
 int FUN_004fb6f4(int, int, int, unsigned int, int, int, unsigned int);
 
@@ -17,18 +17,18 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_005712f0; /* 0x5712f0 */
 extern int DAT_00573808; /* 0x573808 */
-extern unsigned int DAT_00573898; /* 0x573898 */
+extern unsigned int g_btlEvent; /* 0x573898 */
 
-extern int FUN_0014aa78(void);
-/* Supplied declaration required: FUN_00236038. */
+extern int btlGetMainState(void);
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_002419c4. */
 /* Supplied declaration required: FUN_002980e4. */
 extern int FUN_0040de1c(unsigned int);
 extern int FUN_004d84e8(unsigned int);
-/* Supplied declaration required: FUN_004ee568. */
+/* Supplied declaration required: btlUnitGet. */
 /* Supplied declaration required: FUN_004f5a78. */
 /* Supplied declaration required: FUN_004fb6f4. */
 
@@ -44,26 +44,26 @@ unsigned char FUN_003a91a8(void)
   unsigned int temp_v4;
   int temp_v5;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  temp_v2 = FUN_00236038(2);
-  temp_v3 = FUN_004d84e8(DAT_00573898);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = scrGetArg(2);
+  temp_v3 = FUN_004d84e8(g_btlEvent);
   if ((temp_v3 != 0) && (temp_v3 = DAT_00573808, FUN_004f5a78(), temp_v3 == 0)) {
     return 0;
   }
-  FUN_004ee568(DAT_0057113c);
-  temp_v3 = FUN_0014aa78();
+  btlUnitGet(g_btlScriptUnit);
+  temp_v3 = btlGetMainState();
   if (!(*(int *)(temp_v3 + 0xf0) == 0x167 || *(int *)(temp_v3 + 0xf0) == 0x168)) {
     if (temp_v2 != 0) {
       FUN_002980e4(temp_v2,0);
-      temp_v4 = FUN_004ee568(DAT_0057113c);
-      temp_v3 = FUN_0014aa78();
+      temp_v4 = btlUnitGet(g_btlScriptUnit);
+      temp_v3 = btlGetMainState();
       FUN_004fb6f4(0,0,*(int *)(temp_v3 + 0x1ed4) + temp_v0 * 0x1d0,temp_v1,temp_v2,0,0xffffffff);
       FUN_002419c4(temp_v2,temp_v4,*(unsigned int *)(DAT_00573808 + 0x1f54),0,temp_v0,temp_v0);
     }
   }
   else if (temp_v2 != 0) {
-    temp_v3 = FUN_004ee568(DAT_0057113c);
+    temp_v3 = btlUnitGet(g_btlScriptUnit);
     if (*(int *)(temp_v3 + 0x1250) != 0) {
       temp_v0 = FUN_0040de1c(DAT_005712f0);
       if (temp_v0 < 1) {
@@ -72,7 +72,7 @@ unsigned char FUN_003a91a8(void)
       return temp_v0 < 1;
     }
     FUN_002980e4(temp_v2,0);
-    temp_v5 = FUN_0014aa78();
+    temp_v5 = btlGetMainState();
     FUN_004fb6f4(0,0,*(int *)(temp_v5 + 0x1ed4) + temp_v0 * 0x1d0,temp_v1,temp_v2,0,0xffffffff);
     FUN_002419c4(temp_v2,temp_v3,*(unsigned int *)(DAT_00573808 + 0x1f54),0,temp_v0,temp_v0);
     *(int *)(temp_v3 + 0x1250) = *(int *)(temp_v3 + 0x1250) + 1;

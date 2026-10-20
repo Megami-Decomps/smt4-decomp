@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
-int FUN_001630d4(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
+int asdMemoryAlloc(...);
 int FUN_002804b0(...);
 int FUN_002a2d14(...);
 int FUN_002e6dd0(...);
@@ -22,7 +22,7 @@ typedef struct {
 
 extern unsigned char LAB_002364fc; /* 0x2364fc */
 extern int FUN_0027dbac(...); /* 0x27dbac */
-extern int FUN_002bd408(...); /* 0x2bd408 */
+extern int s4LoadDestroy(...); /* 0x2bd408 */
 extern int FUN_002bd488(...); /* 0x2bd488 */
 extern unsigned char LAB_002c7314; /* 0x2c7314 */
 extern unsigned char LAB_002c7324; /* 0x2c7324 */
@@ -30,13 +30,13 @@ extern unsigned char LAB_002c7340; /* 0x2c7340 */
 extern unsigned char LAB_002c7354; /* 0x2c7354 */
 extern unsigned char LAB_002c7364; /* 0x2c7364 */
 extern unsigned char LAB_002c7378; /* 0x2c7378 */
-extern unsigned int *DAT_00589154; /* 0x589154 */
+extern unsigned int *g_s4Load; /* 0x589154 */
 
-extern unsigned int FUN_0014bce0(unsigned int);
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_001630d4. */
+extern unsigned int spriteHandleCreate(unsigned int);
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_002a2d14. */
 /* Supplied declaration required: FUN_002e6dd0. */
@@ -53,8 +53,8 @@ unsigned int FUN_002c7150(void)
   int temp_v2;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x3bc,1);
-  DAT_00589154 = puVar1;
+  asdMemoryAllocTracked(0x100,0x100,0,0x3bc,1);
+  g_s4Load = puVar1;
   puVar1[2] = 0;
   temp_v1 = 0;
   do {
@@ -71,17 +71,17 @@ unsigned int FUN_002c7150(void)
   puVar1[6] = 0x80;
   puVar1[0xac] = 0;
   temp_v0 = 0x100;
-  FUN_001630d4(0x100,0x100,0,puVar1[6],1);
+  asdMemoryAlloc(0x100,0x100,0,puVar1[6],1);
   puVar1[5] = temp_v0;
-  temp_v0 = FUN_0014bce0(0);
+  temp_v0 = spriteHandleCreate(0);
   puVar1[0xae] = temp_v0;
   *(unsigned char *)(puVar1 + 1) = 0;
   puVar3 = &LAB_002c7340;
-  FUN_0014e38c(&LAB_002c7340,4,0,0,&LAB_002364fc,FUN_002bd408,0);
+  asdProcessCreateSimple(&LAB_002c7340,4,0,0,&LAB_002364fc,s4LoadDestroy,0);
   *puVar1 = (unsigned int)puVar3;
-  FUN_0015155c(&LAB_002c7354,0x7e,0,0,FUN_0027dbac,0,0,puVar3);
-  FUN_0015155c(&LAB_002c7364,0xda,0,0,FUN_0027dbac,0,0,*puVar1);
-  FUN_0015155c(&LAB_002c7378,0xec,0,0,FUN_002bd488,0,0,*puVar1);
+  taskCreateDraw(&LAB_002c7354,0x7e,0,0,FUN_0027dbac,0,0,puVar3);
+  taskCreateDraw(&LAB_002c7364,0xda,0,0,FUN_0027dbac,0,0,*puVar1);
+  taskCreateDraw(&LAB_002c7378,0xec,0,0,FUN_002bd488,0,0,*puVar1);
   FUN_002a2d14(*puVar1,0x80000,0);
   return *puVar1;
 }

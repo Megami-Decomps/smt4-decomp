@@ -1,28 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00339828` (_code @ 0x339828, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Releases the object's resource: runs FUN_00152bec for valid (non-negative) resources, frees it and clears the slot. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00152bec(void);
-int FUN_002a775c(unsigned int);
+typedef struct ResourceInfo {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s32 index;
+} ResourceInfo;
 
-/* Supplied declaration required: FUN_00152bec. */
-/* Supplied declaration required: FUN_002a775c. */
+typedef struct Resource {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ ResourceInfo *info;
+} Resource;
 
+typedef struct Object {
+    /* 0x0000 */ u8 unk0000[0x4398];
+    /* 0x4398 */ Resource *resource;
+} Object;
 
-void FUN_00339828(int param_1)
+extern void FUN_00152bec(Resource *resource);
+extern void asdMdlManagerDestroy(Resource *resource);
 
+void FUN_00339828(Object *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  if (*(int *)(param_1 + 0x4398) != 0) {
-    if (-1 < *(int *)(*(int *)(*(int *)(param_1 + 0x4398) + 8) + 0xc)) {
-      FUN_00152bec();
+    if (obj->resource != NULL) {
+        if (obj->resource->info->index >= 0) {
+            FUN_00152bec(obj->resource);
+        }
+        asdMdlManagerDestroy(obj->resource);
+        obj->resource = NULL;
     }
-    FUN_002a775c(*(unsigned int *)(param_1 + 0x4398));
-    *(unsigned int *)(param_1 + 0x4398) = 0;
-  }
-  return;
 }
 
-} /* extern "C" */
+}

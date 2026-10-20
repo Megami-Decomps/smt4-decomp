@@ -9,7 +9,7 @@ int FUN_001192c8(void);
 
 /* Supplied declaration required: FUN_00117a70. */
 /* Supplied declaration required: FUN_001192c8. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 
 
 unsigned int FUN_001080c0(void)
@@ -21,7 +21,7 @@ unsigned int FUN_001080c0(void)
   int temp_v2;
   unsigned char temp_v3;
   
-  temp_v1 = FUN_002c08f0();
+  temp_v1 = jobGetWork();
   temp_v3 = *(char *)(temp_v1 + 0xe8c) != '\0';
   temp_v0 = '\0';
   if (temp_v3) {

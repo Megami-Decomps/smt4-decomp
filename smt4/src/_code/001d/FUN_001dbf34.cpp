@@ -27,7 +27,7 @@ int FUN_00292ca0(...);
 int FUN_00293f10(...);
 int FUN_002942c4(unsigned int, int);
 int FUN_002954bc(...);
-int FUN_002954dc(...);
+int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
 int FUN_00295660(int, unsigned char [32]);
 int FUN_00296f4c(...);
@@ -59,7 +59,7 @@ extern int FUN_00293aac(void);
 /* Supplied declaration required: FUN_00293f10. */
 /* Supplied declaration required: FUN_002942c4. */
 /* Supplied declaration required: FUN_002954bc. */
-/* Supplied declaration required: FUN_002954dc. */
+/* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
 extern int FUN_002955fc(void);
 extern int FUN_00295618(void);
@@ -130,7 +130,7 @@ unsigned int FUN_001dbf34(int param_1)
     if (temp_v3 != 2) {
       return 0;
     }
-    FUN_002954dc(1);
+    btlTalkBustUpSetUnk2F4(1);
     *piVar7 = *(int *)(param_1 + 0xd38) + 1;
     break;
   case 2:
@@ -357,7 +357,7 @@ LAB_001dc504:
       *(unsigned int *)(param_1 + 0xd2c) = temp_v6;
       *(unsigned int *)(param_1 + 0xd38) = 0;
       *(unsigned char *)(param_1 + 0xd62) = 1;
-      FUN_002954dc(1);
+      btlTalkBustUpSetUnk2F4(1);
       FUN_002b8838(0x3c);
       temp_v6 = 2;
     }

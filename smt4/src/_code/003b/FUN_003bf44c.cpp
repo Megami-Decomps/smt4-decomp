@@ -18,7 +18,7 @@ int VectorUnsignedToFloat(unsigned int, int);
 extern int FUN_0023ea94(void);
 /* Supplied declaration required: FUN_0025bfa4. */
 extern unsigned int FUN_002907a8(void);
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 extern unsigned int FUN_002a8764(void);
 extern int FUN_002b63ac(float, int);
 /* Supplied declaration required: FUN_002b99b8. */
@@ -36,7 +36,7 @@ int FUN_003bf44c(void)
   float temp_v4;
   float temp_v5;
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   temp_v1 = FUN_002a8764();
   temp_v5 = 0.0f;
   FUN_0025bfa4();

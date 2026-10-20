@@ -1,31 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e2914` (_code @ 0x2e2914, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bf694(unsigned int *, unsigned int);
+/* Global block: a value at 0x54 and a sub-object at 0x5c. */
+typedef struct {
+    u8 unk00[0x54];
+    u32 value;          /* 0x54 */
+    u8 unk58[4];
+    u8 sub[1];          /* 0x5c */
+} GlobalBlock;
 
-extern unsigned int DAT_0049f970; /* 0x49f970 */
-extern unsigned int DAT_0049f978; /* 0x49f978 */
+extern GlobalBlock g_gameState;
 
-extern unsigned int FUN_002592d8(unsigned int);
-extern unsigned int FUN_00296cc8(void);
-/* Supplied declaration required: FUN_002bf694. */
+u32 scrGetArg(...);
+u32 FUN_002592d8(u32 index);
+int FUN_002bf694(u8 *sub, u32 value);
 
-
-unsigned int FUN_002e2914(void)
-
+/* Stores the current scrGetArg value in the global block and updates its sub-object from entry 1; always reports success. */
+u32 FUN_002e2914(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_00296cc8();
-  temp_v1 = FUN_002592d8(1);
-  DAT_0049f970 = temp_v0;
-  FUN_002bf694(&DAT_0049f978,temp_v1);
-  return 1;
+    u32 value = scrGetArg();
+    u32 entry = FUN_002592d8(1);
+
+    g_gameState.value = value;
+    FUN_002bf694(g_gameState.sub, entry);
+    return 1;
 }
 
 } /* extern "C" */

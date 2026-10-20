@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002bd8e8(int, int, int);
+int timerStart(int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -11,7 +11,7 @@ typedef struct {
 
 extern int DAT_0043da90; /* 0x43da90 */
 
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 
 
 void FUN_0026a598(void)
@@ -22,13 +22,13 @@ void FUN_0026a598(void)
   int temp_v1;
   
   temp_v0 = DAT_0043da90;
-  FUN_002bd8e8(DAT_0043da90 + 0x648,3,0);
+  timerStart(DAT_0043da90 + 0x648,3,0);
   temp_v1 = 0;
   do {
-    FUN_002bd8e8(temp_v0 + temp_v1 * 0x8c + 0x904,3,0);
+    timerStart(temp_v0 + temp_v1 * 0x8c + 0x904,3,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);
-  FUN_002bd8e8(temp_v0 + 0x878,3,0);
+  timerStart(temp_v0 + 0x878,3,0);
   return;
 }
 

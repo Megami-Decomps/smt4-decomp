@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_00580238; /* 0x580238 */
+extern int g_lmapMainState; /* 0x580238 */
 extern signed char DAT_005f1bc4; /* 0x5f1bc4 */
 
 /* Supplied declaration required: FUN_00234b30. */
@@ -37,13 +37,13 @@ void FUN_00387014(void)
 /* irregular: 8 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_00580238;
+  temp_v0 = g_lmapMainState;
   if (DAT_005f1bc4 == '\0') {
-    if (*(char *)(DAT_00580238 + 0xb) != '\0') {
+    if (*(char *)(g_lmapMainState + 0xb) != '\0') {
       FUN_00386720();
     }
     else {
-      FUN_003401a4(DAT_00580238);
+      FUN_003401a4(g_lmapMainState);
     }
   }
   FUN_0036a434(temp_v0);
@@ -51,7 +51,7 @@ void FUN_00387014(void)
   FUN_00297c3c();
   FUN_00234b30();
   FUN_002737a8();
-  if (*(int *)(DAT_00580238 + 0x40) != 100) {
+  if (*(int *)(g_lmapMainState + 0x40) != 100) {
     FUN_003699e4();
     return;
   }

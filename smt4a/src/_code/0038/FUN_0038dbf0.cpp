@@ -9,12 +9,12 @@ int FUN_004fcde0(int, unsigned int, int);
 
 extern unsigned int DAT_00571128; /* 0x571128 */
 extern unsigned int DAT_0057112c; /* 0x57112c */
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-extern int FUN_0014aa78(void);
-extern unsigned int FUN_00236038(unsigned int);
+extern int btlGetMainState(void);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_003f0e20. */
-extern unsigned int FUN_004ee568(unsigned int);
+extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fcde0. */
 
 
@@ -28,9 +28,9 @@ unsigned int FUN_0038dbf0(void)
   int temp_v3;
   unsigned int temp_v4;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_0014aa78();
-  temp_v2 = FUN_004ee568(DAT_0057113c);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = btlGetMainState();
+  temp_v2 = btlUnitGet(g_btlScriptUnit);
   temp_v3 = temp_v1;
   FUN_003f0e20(temp_v1,temp_v0);
   FUN_004fcde0(0,temp_v2,temp_v3);

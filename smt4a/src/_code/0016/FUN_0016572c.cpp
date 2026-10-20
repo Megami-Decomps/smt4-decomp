@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int *FUN_00164a9c(void);
+extern int *jobGetWork(void);
 
 
 void FUN_0016572c(unsigned int param_1,int param_2)
@@ -14,7 +14,7 @@ void FUN_0016572c(unsigned int param_1,int param_2)
   int temp_v0;
   unsigned char temp_v1;
   
-  piVar1 = (int *)FUN_00164a9c();
+  piVar1 = (int *)jobGetWork();
   if (param_2 != 0) {
     piVar1[2] = 0x3f800000;
   }

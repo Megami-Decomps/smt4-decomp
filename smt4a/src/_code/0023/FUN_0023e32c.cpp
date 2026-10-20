@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_00192798(void);
+int dataTableGetEntries(void);
 
 /* stack frame of param_4: 13 slot(s), 50 byte(s) */
 typedef struct {
@@ -26,10 +26,10 @@ typedef struct {
 
 extern int FUN_0014bef4(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int FUN_0018719c(void);
-extern unsigned short *FUN_00192748(unsigned int);
-/* Supplied declaration required: FUN_00192798. */
+extern unsigned short *dataTableGetCount(unsigned int);
+/* Supplied declaration required: dataTableGetEntries. */
 extern int FUN_001ab854(int);
 extern int FUN_001ab888(void);
 extern int FUN_00239234(unsigned short, unsigned char *);
@@ -82,9 +82,9 @@ unsigned int FUN_0023e32c(unsigned short *param_1,unsigned short *param_2,unsign
   temp_v19 = param_2;
   puStack_2c = param_3;
   uStack_28 = param_4;
-  temp_v1 = FUN_00187180(0,0);
-  FUN_00192798();
-  puVar4 = (unsigned short *)FUN_00192748(temp_v1);
+  temp_v1 = dataTableGet(0,0);
+  dataTableGetEntries();
+  puVar4 = (unsigned short *)dataTableGetCount(temp_v1);
   puVar10 = (unsigned short *)0x0;
   if (puVar4 == (unsigned short *)0x0) {
     return 0;

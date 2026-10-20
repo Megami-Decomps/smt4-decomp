@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e7614(unsigned char [16], unsigned int);
 int FUN_002ec8a8(unsigned char [12], unsigned char [16]);
 int FUN_002ec934(unsigned int, int, unsigned int);
-int FUN_002ec9f4(...);
+int strDestroy(...);
 int FUN_002ece14(unsigned char [12], unsigned int);
 
 typedef int romwright_code(...);
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002e7614. */
 /* Supplied declaration required: FUN_002ec8a8. */
 /* Supplied declaration required: FUN_002ec934. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ece14. */
 
 
@@ -60,8 +60,8 @@ void FUN_001114f6(unsigned int param_1,int *param_2,unsigned int param_3,unsigne
     FUN_002ec8a8(temp_v2,temp_v6);
   }
   FUN_002ec934(temp_v9,temp_v3 + temp_v5,temp_v4);
-  FUN_002ec9f4(temp_v6);
-  FUN_002ec9f4(temp_v2);
+  strDestroy(temp_v6);
+  strDestroy(temp_v2);
   return;
 }
 

@@ -29,7 +29,7 @@ typedef struct {
 
 extern unsigned char DAT_003ff700; /* 0x3ff700 */
 extern float DAT_00433180; /* 0x433180 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b75ec. */
@@ -42,7 +42,7 @@ extern int FUN_002beda4(void);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf538. */
-extern unsigned int *FUN_002c08f0(void);
+extern unsigned int *jobGetWork(void);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
@@ -71,11 +71,11 @@ unsigned int FUN_0038a478(void)
   int temp_v11;
   int aiStack_78 [21];
   
-  puVar2 = (unsigned int *)FUN_002c08f0();
+  puVar2 = (unsigned int *)jobGetWork();
   if ((*puVar2 & 0x10) != 0) {
     temp_v10 = DAT_00433180;
-    FUN_002ba12c(DAT_0044ea00);
-    temp_v4 = DAT_0044ea00;
+    FUN_002ba12c(g_titleScene);
+    temp_v4 = g_titleScene;
     temp_v11 = (int)temp_v10;
     temp_v1 = FUN_002c5d80(1,0);
     piVar11 = (int *)(temp_v4 + 0x124c);
@@ -90,7 +90,7 @@ unsigned int FUN_0038a478(void)
     FUN_002bf538();
     FUN_002bf288(2,0xe,0x106,0,0,6);
     FUN_002bf538();
-    temp_v4 = DAT_0044ea00;
+    temp_v4 = g_titleScene;
     temp_v1 = FUN_002c5da8(6,1,0);
     piVar11 = (int *)(temp_v4 + 0x12ac);
     temp_v2 = piVar11[*piVar11 + 2];
@@ -101,7 +101,7 @@ unsigned int FUN_0038a478(void)
     }
     VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002b93c8(puVar2 + 0x156);
-    temp_v4 = DAT_0044ea00;
+    temp_v4 = g_titleScene;
     temp_v1 = FUN_002c5da8(6,7,0);
     piVar11 = (int *)(temp_v4 + 0x12ac);
     temp_v2 = piVar11[*piVar11 + 2];
@@ -112,8 +112,8 @@ unsigned int FUN_0038a478(void)
     }
     VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002b93c8(puVar2 + 0x110);
-    temp_v4 = DAT_0044ea00;
-    piVar11 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v4 = g_titleScene;
+    piVar11 = (int *)(g_titleScene + 0x124c);
     temp_v1 = *piVar11;
     temp_v2 = piVar11[temp_v1 + 2];
     *piVar11 = temp_v1 - 1;
@@ -126,7 +126,7 @@ unsigned int FUN_0038a478(void)
       temp_v4 = FUN_002beda4();
       temp_v4 = temp_v4 + temp_v11;
       temp_v2 = FUN_002bed98(puVar2 + 0x133);
-      temp_v1 = DAT_0044ea00;
+      temp_v1 = g_titleScene;
       temp_v3 = FUN_002c5d80(1,0);
       piVar11 = (int *)(temp_v1 + 0x124c);
       temp_v7 = *piVar11;
@@ -217,8 +217,8 @@ unsigned int FUN_0038a478(void)
           } while (temp_v2 < (int)puVar2[4]);
         }
       }
-      temp_v4 = DAT_0044ea00;
-      piVar11 = (int *)(DAT_0044ea00 + 0x124c);
+      temp_v4 = g_titleScene;
+      piVar11 = (int *)(g_titleScene + 0x124c);
       temp_v1 = *piVar11;
       temp_v2 = piVar11[temp_v1 + 2];
       *piVar11 = temp_v1 - 1;
@@ -228,8 +228,8 @@ unsigned int FUN_0038a478(void)
       }
       FUN_002bed3c();
       FUN_002bf538();
-      FUN_002c198c(DAT_0044ea00);
-      FUN_002c18e4(DAT_0044ea00);
+      FUN_002c198c(g_titleScene);
+      FUN_002c18e4(g_titleScene);
     }
   }
   return 0;

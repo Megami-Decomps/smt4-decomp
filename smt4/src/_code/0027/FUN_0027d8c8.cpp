@@ -1,25 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027d8c8` (_code @ 0x27d8c8, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Returns 1 if the global state's flag at +0x1F4DC is set or FUN_002c09d0(0x528) reports true, else 0. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
+typedef struct State {
+    /* 0x00000 */ u8 unk00000[0x1F4DC];
+    /* 0x1F4DC */ s32 flag;
+} State;
 
-extern int FUN_002c09d0(unsigned int);
+typedef struct StateHolder {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ State *state;
+} StateHolder;
 
+extern StateHolder g_gameDataBlocks;
 
-unsigned int FUN_0027d8c8(void)
+extern s32 FUN_002c09d0(u32 id);
 
+s32 FUN_0027d8c8(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if ((*(int *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x1f4dc) != 0) ||
-     (temp_v0 = FUN_002c09d0(0x528), temp_v1 = 0, temp_v0 != 0)) {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    s32 result;
+
+    if (g_gameDataBlocks.state->flag != 0) {
+        return 1;
+    }
+    result = FUN_002c09d0(0x528);
+    if (result != 0) {
+        return 1;
+    }
+    return result;
 }
 
-} /* extern "C" */
+}

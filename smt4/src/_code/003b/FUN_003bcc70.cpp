@@ -9,7 +9,7 @@ int FUN_002ae164(void);
 int FUN_002b4670(void);
 
 /* Supplied declaration required: FUN_0027da30. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 extern int FUN_002a8740(int);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002b4670. */
@@ -57,7 +57,7 @@ unsigned int FUN_003bcc70(int param_1,int param_2,unsigned int param_3,int param
       temp_v2 = 0x220;
     }
     if (param_4 < 0x6d) {
-      temp_v1 = FUN_002939f4();
+      temp_v1 = btlGetMainState();
       FUN_0027da30(temp_v1,param_4);
       temp_v0 = *(unsigned short *)(temp_v1 + 0xfa);
     }

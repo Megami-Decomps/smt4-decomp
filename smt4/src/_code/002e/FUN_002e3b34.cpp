@@ -4,10 +4,10 @@
 
 extern "C" {
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
-extern int FUN_0027e928(unsigned int);
-extern unsigned short FUN_00296cc8(void);
+extern int btlUnitGet(unsigned int);
+extern unsigned short scrGetArg(void);
 
 
 unsigned int FUN_002e3b34(void)
@@ -16,8 +16,8 @@ unsigned int FUN_002e3b34(void)
   unsigned short temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00296cc8();
-  temp_v1 = FUN_0027e928(DAT_0043427c);
+  temp_v0 = scrGetArg();
+  temp_v1 = btlUnitGet(g_btlScriptUnit);
   temp_v1 = *(int *)(temp_v1 + 0x28);
   *(unsigned short *)(temp_v1 + 0x14c) = 2;
   *(unsigned short *)(temp_v1 + 0x14e) = temp_v0;

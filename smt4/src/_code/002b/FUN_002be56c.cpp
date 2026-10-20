@@ -13,7 +13,7 @@ int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
 typedef int romwright_code(...);
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 extern int DAT_00464a70; /* 0x464a70 */
 extern unsigned int *DAT_00464a74; /* 0x464a74 */
 
@@ -34,7 +34,7 @@ extern unsigned int *DAT_00464a74; /* 0x464a74 */
 /* Supplied declaration required: FUN_002aea44. */
 /* Supplied declaration required: FUN_002aea50. */
 extern int FUN_002c30c4(int);
-extern int aeabi_uidivmod(unsigned int, int);
+extern int __aeabi_uidivmod(unsigned int, int);
 
 
 void FUN_002be56c(float *param_1,unsigned int *param_2,unsigned int param_3,int param_4)
@@ -131,7 +131,7 @@ void FUN_002be56c(float *param_1,unsigned int *param_2,unsigned int param_3,int 
   piVar15 = *(int **)(temp_v8 + 8);
   temp_v2 = temp_v9;
   FUN_002aea50(&iStack_94,piVar15,0x30);
-  FUN_001464cc(DAT_0044ea00);
+  FUN_001464cc(g_titleScene);
   iStack_94 = param_4;
   temp_v18 = (unsigned long long)temp_v9 << 0x20;
   temp_v17 = (unsigned long long)temp_v2;
@@ -239,9 +239,9 @@ LAB_002b2f7c:
           }
           temp_v9 = (unsigned int)*(unsigned short *)(temp_v3 + 2);
 LAB_002b2f98:
-          temp_v3 = aeabi_uidivmod(temp_v9,(unsigned int)*(unsigned short *)(*(int *)(temp_v3 + 8) + 0xc) *
+          temp_v3 = __aeabi_uidivmod(temp_v9,(unsigned int)*(unsigned short *)(*(int *)(temp_v3 + 8) + 0xc) *
                                         (unsigned int)*(unsigned short *)(*(int *)(temp_v3 + 8) + 0xe));
-          FUN_002aa200(DAT_0044ea00,*(unsigned int *)(*(int *)(temp_v8 + 0xc) + temp_v3 * 4),
+          FUN_002aa200(g_titleScene,*(unsigned int *)(*(int *)(temp_v8 + 0xc) + temp_v3 * 4),
                        *(unsigned char *)(temp_v8 + 0x24));
           VectorUnsignedToFloat((unsigned int)uStack_7c,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorUnsignedToFloat((unsigned int)uStack_80,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -303,7 +303,7 @@ LAB_002b2f98:
       temp_v17 = (unsigned long long)(unsigned int)temp_v12;
     } while (temp_v6 >= iStack_94 - param_4);
   }
-  FUN_001464cc(DAT_0044ea00);
+  FUN_001464cc(g_titleScene);
   return;
 }
 

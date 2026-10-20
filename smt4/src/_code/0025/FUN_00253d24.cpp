@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002c415c(...);
+int asdMemFree(...);
 
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00253d24(char *param_1)
@@ -14,9 +14,9 @@ void FUN_00253d24(char *param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (*param_1 != '\0') {
-    FUN_002c415c(*(unsigned int *)(param_1 + 0x2c));
+    asdMemFree(*(unsigned int *)(param_1 + 0x2c));
     if (*(int *)(param_1 + 0x48) != 0) {
-      FUN_002c415c();
+      asdMemFree();
       param_1[0x48] = '\0';
       param_1[0x49] = '\0';
       param_1[0x4a] = '\0';

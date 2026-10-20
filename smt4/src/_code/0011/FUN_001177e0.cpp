@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00119da8(unsigned int);
-int FUN_0011a1b8(unsigned int);
+int asdSoundSlotCSelect(unsigned int);
 int FUN_00126770(unsigned int);
 int FUN_0012f664(unsigned char *);
 int FUN_0012f7e4(unsigned char *);
 int FUN_0012f844(unsigned char *);
 int FUN_0014047c(unsigned char *);
 int FUN_002bda30(...);
-int FUN_002c415c(...);
+int asdMemFree(...);
 int nw_snd_SoundHandle_DetachSound(...);
 int nw_ut_internal_LinkListImpl_erase_2B743C(unsigned char *, unsigned char *);
 
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern unsigned char DAT_004e1f68; /* 0x4e1f68 */
+extern unsigned char g_asdSound; /* 0x4e1f68 */
 extern unsigned char DAT_004e20ec; /* 0x4e20ec */
 extern unsigned char DAT_004e21ac; /* 0x4e21ac */
 extern int DAT_004e23d0; /* 0x4e23d0 */
@@ -41,7 +41,7 @@ extern unsigned int DAT_004e3178; /* 0x4e3178 */
 extern int DAT_004e3180; /* 0x4e3180 */
 
 /* Supplied declaration required: FUN_00119da8. */
-/* Supplied declaration required: FUN_0011a1b8. */
+/* Supplied declaration required: asdSoundSlotCSelect. */
 /* Supplied declaration required: FUN_00126770. */
 /* Supplied declaration required: FUN_0012f664. */
 /* Supplied declaration required: FUN_0012f7e4. */
@@ -49,7 +49,7 @@ extern int DAT_004e3180; /* 0x4e3180 */
 /* Supplied declaration required: FUN_0014047c. */
 /* Supplied declaration required: FUN_002bda30. */
 extern int FUN_002bf684(unsigned char *);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 
@@ -65,7 +65,7 @@ void FUN_001177e0(void)
   int temp_v3;
   unsigned int *puVar6;
   
-  temp_v0 = FUN_002bf684(&DAT_004e1f68);
+  temp_v0 = FUN_002bf684(&g_asdSound);
   temp_v1 = DAT_004e316c;
   if (temp_v0 == 0) {
     return;
@@ -126,7 +126,7 @@ void FUN_001177e0(void)
         }
         DAT_004e316c = 0;
         FUN_00126770(0xffffffff);
-        FUN_0011a1b8(0xffffffff);
+        asdSoundSlotCSelect(0xffffffff);
         FUN_00119da8(0xffffffff);
         if (DAT_004e3134 == '\x01') {
           temp_v2 = 0;
@@ -140,25 +140,25 @@ void FUN_001177e0(void)
           } while (temp_v2 < 0x10);
           nw_ut_internal_LinkListImpl_erase_2B743C(&DAT_004e26f8,&DAT_004e30cc);
           FUN_0012f664(&DAT_004e26ec);
-          FUN_002c415c(DAT_004e3130);
+          asdMemFree(DAT_004e3130);
         }
         DAT_004e23e4 = 0;
         FUN_0012f7e4(&DAT_004e21ac);
         FUN_0012f844(&DAT_004e20ec);
-        FUN_0014047c(&DAT_004e1f68);
+        FUN_0014047c(&g_asdSound);
         if (DAT_004e23d0 != 0) {
-          FUN_002c415c();
+          asdMemFree();
         }
         if (DAT_004e23d4 != 0) {
-          FUN_002c415c();
+          asdMemFree();
         }
         if (DAT_004e23d8 != 0) {
-          FUN_002c415c();
+          asdMemFree();
         }
         if (DAT_004e23dc == 0) {
           return;
         }
-        FUN_002c415c();
+        asdMemFree();
         return;
       }
     } while (temp_v2 >= 2);

@@ -1,28 +1,22 @@
-#include "romwright_types.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
-int FUN_00270c58(unsigned int);
-int FUN_003b5050(void);
+void FUN_00270c58(u32 value);
+void FUN_003b5050(void);
+u32 scrGetArg(void);
 
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern GameStateA g_gameState;
 
-extern unsigned int FUN_00236038(void);
-/* Supplied declaration required: FUN_00270c58. */
-/* Supplied declaration required: FUN_003b5050. */
-
-
-unsigned int FUN_0031c388(void)
-
+/* Script command: runs FUN_003b5050 and FUN_00270c58 on the script's argument. */
+s32 FUN_0031c388(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_00236038();
-  FUN_003b5050();
-  (*(unsigned int *)((unsigned char *)&DAT_005f15fc + 0x454)) = 0xffffffff;
-  FUN_00270c58(temp_v0);
-  return 3;
+    u32 value = scrGetArg();
+
+    FUN_003b5050();
+    g_gameState.unk454 = -1;
+    FUN_00270c58(value);
+    return 3;
 }
 
 } /* extern "C" */

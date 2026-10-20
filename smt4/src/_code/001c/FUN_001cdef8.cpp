@@ -17,8 +17,8 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern unsigned char DAT_0044e140; /* 0x44e140 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned char g_gameGlobals; /* 0x44e140 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00288ef0. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -41,10 +41,10 @@ unsigned char FUN_001cdef8(void)
   
   temp_v4 = 0;
   temp_v5[0] = 0;
-  if ((*(char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e61) != '\0') &&
-     (*(char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e67) == '\x03' || *(char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e67) == '\t')) {
-    FUN_002c39a4(DAT_0044ea00);
-    temp_v0 = DAT_0044ea00;
+  if ((*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e61) != '\0') &&
+     (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e67) == '\x03' || *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e67) == '\t')) {
+    FUN_002c39a4(g_titleScene);
+    temp_v0 = g_titleScene;
     temp_v1 = FUN_002c5d80(1,0);
     piVar5 = (int *)(temp_v0 + 0x124c);
     temp_v2 = *piVar5;
@@ -66,8 +66,8 @@ unsigned char FUN_001cdef8(void)
     FUN_00288ef0(&temp_v4,temp_v5,8);
     FUN_002bf538();
     FUN_002bf288(2,0x1a,2,temp_v4,temp_v5[0],1);
-    temp_v0 = DAT_0044ea00;
-    piVar5 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v0 = g_titleScene;
+    piVar5 = (int *)(g_titleScene + 0x124c);
     temp_v1 = *piVar5;
     temp_v2 = piVar5[temp_v1 + 2];
     *piVar5 = temp_v1 - 1;

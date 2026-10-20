@@ -8,7 +8,7 @@ int FUN_00294450(unsigned int, unsigned int);
 int FUN_002947c0(unsigned int, int);
 int FUN_00343c58(unsigned int, unsigned int, unsigned int);
 
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapScene; /* 0x447e88 */
 
 /* Supplied declaration required: FUN_00294450. */
 /* Supplied declaration required: FUN_002947c0. */
@@ -21,18 +21,18 @@ void FUN_001b491c(void)
 /* irregular: 3 native warning(s); review required */
   unsigned int temp_v0;
   
-  FUN_002947c0(*(unsigned int *)(DAT_00447e88 + 0x194),0x1c0);
+  FUN_002947c0(*(unsigned int *)(g_lmapScene + 0x194),0x1c0);
   temp_v0 = 0;
-  if (*(char *)(DAT_00447e88 + 0x198) == '\0') {
+  if (*(char *)(g_lmapScene + 0x198) == '\0') {
     do {
-      FUN_00294450(*(unsigned int *)(DAT_00447e88 + 0x194),temp_v0 & 0xff);
+      FUN_00294450(*(unsigned int *)(g_lmapScene + 0x194),temp_v0 & 0xff);
       temp_v0 = temp_v0 + 1;
     } while ((int)temp_v0 < 3);
     return;
   }
   do {
-    FUN_00343c58(*(unsigned int *)(DAT_00447e88 + 0x194),temp_v0 & 0xff,
-                 *(unsigned int *)(DAT_00447e88 + temp_v0 * 4 + 0x19c));
+    FUN_00343c58(*(unsigned int *)(g_lmapScene + 0x194),temp_v0 & 0xff,
+                 *(unsigned int *)(g_lmapScene + temp_v0 * 4 + 0x19c));
     temp_v0 = temp_v0 + 1;
   } while ((int)temp_v0 < 3);
   return;

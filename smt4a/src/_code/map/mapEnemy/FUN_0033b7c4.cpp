@@ -28,8 +28,8 @@ typedef struct {
 
 extern unsigned char LAB_0033bc8c; /* 0x33bc8c */
 extern int DAT_005806d4; /* 0x5806d4 */
-extern int DAT_00581288; /* 0x581288 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_lmapScene; /* 0x581288 */
+extern int g_gameState; /* 0x5f15fc */
 extern unsigned char DAT_005f1776; /* 0x5f1776 */
 extern unsigned int DAT_005f1778; /* 0x5f1778 */
 extern unsigned char DAT_005f177c; /* 0x5f177c */
@@ -96,9 +96,9 @@ unsigned int FUN_0033b7c4(void)
   temp_v2 = FUN_001801a4();
   if (((DAT_005f1be0 == 0) && (*(int *)(temp_v4 + 4) != 0)) &&
      (((temp_v3 = FUN_0018719c(0x300), temp_v3 == 0 && (temp_v3 = FUN_0018719c(0x301), temp_v3 == 0)) ||
-      (((DAT_005f15fc == 0x29 || DAT_005f15fc == 0x2a ||
-        (DAT_005f15fc == 0x2b || DAT_005f15fc == 0x2c)) ||
-       ((DAT_005f15fc == 0x2d || DAT_005f15fc == 0x2e) || DAT_005f15fc == 0x2f)))))) {
+      (((g_gameState == 0x29 || g_gameState == 0x2a ||
+        (g_gameState == 0x2b || g_gameState == 0x2c)) ||
+       ((g_gameState == 0x2d || g_gameState == 0x2e) || g_gameState == 0x2f)))))) {
     DAT_005f17e8 = 0;
     DAT_005f17ec = 0;
     DAT_005f17cb = 0;
@@ -153,7 +153,7 @@ unsigned int FUN_0033b7c4(void)
         if ((((*pcVar7 != '\0') && (*(char *)(temp_v6 + 0x1b8) != '\0')) &&
             ((*(int *)(temp_v6 + 0xb8) != 3 || (*(int *)(temp_v6 + 0xbc) >= 0x14)))) &&
            (*(int *)(temp_v6 + 100) != 6)) {
-          temp_v8 = *(int *)(DAT_00581288 + 0x1c);
+          temp_v8 = *(int *)(g_lmapScene + 0x1c);
           FUN_002b5cb4();
           if (temp_v8 >= 0x42700000) {
             temp_v8 = *(int *)(temp_v6 + 0x1b0);
@@ -164,7 +164,7 @@ unsigned int FUN_0033b7c4(void)
             if (temp_v7) {
               FUN_001bc124();
               FUN_001bbf0c();
-              temp_v8 = *(int *)(DAT_00581288 + 0x1c);
+              temp_v8 = *(int *)(g_lmapScene + 0x1c);
               FUN_002b5cb4();
               if (temp_v8 < 0x42700000) goto LAB_0033baac;
             }
@@ -190,7 +190,7 @@ LAB_0033baac:
                 FUN_001bbf0c();
               }
               FUN_00352bc4();
-              temp_v8 = *(int *)(DAT_00581288 + 0x4c);
+              temp_v8 = *(int *)(g_lmapScene + 0x4c);
               FUN_0033abb4();
               if (temp_v8 >= 0x42f00001) {
                 DAT_005f17ca = 1;

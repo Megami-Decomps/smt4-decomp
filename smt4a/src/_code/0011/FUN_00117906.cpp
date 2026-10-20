@@ -10,7 +10,7 @@ int FUN_00300900(int, int);
 int FUN_00300934(...);
 int FUN_003026bc(...);
 int FUN_00303608(int, int);
-int FUN_00303610(int, int);
+int readerReadU16(int, int);
 int FUN_0030363c(int, int);
 int FUN_0030368e(int, int);
 int FUN_00303698(...);
@@ -27,7 +27,7 @@ extern int FUN_002ee9da(int);
 /* Supplied declaration required: FUN_00300934. */
 /* Supplied declaration required: FUN_003026bc. */
 /* Supplied declaration required: FUN_00303608. */
-/* Supplied declaration required: FUN_00303610. */
+/* Supplied declaration required: readerReadU16. */
 /* Supplied declaration required: FUN_0030363c. */
 /* Supplied declaration required: FUN_0030368e. */
 /* Supplied declaration required: FUN_00303698. */
@@ -52,13 +52,13 @@ void FUN_00117906(int param_1,int param_2)
          (FUN_00300934(param_1,param_2 + 0x10), *(char *)(param_1 + 4) == '\0')) &&
         (FUN_00300934(param_1,param_2 + 0x14), *(char *)(param_1 + 4) == '\0')) &&
        ((FUN_002fbc1a(param_1,param_2 + 0x18), *(char *)(param_1 + 4) == '\0' &&
-        (FUN_00303610(param_1,param_2 + 0x20), *(char *)(param_1 + 4) == '\0')))) &&
+        (readerReadU16(param_1,param_2 + 0x20), *(char *)(param_1 + 4) == '\0')))) &&
       ((((FUN_0030363c(param_1,param_2 + 0x24), *(char *)(param_1 + 4) == '\0' &&
          ((FUN_0030368e(param_1,param_2 + 0x44), *(char *)(param_1 + 4) == '\0' &&
           (FUN_0030368e(param_1,param_2 + 0x58), *(char *)(param_1 + 4) == '\0')))) &&
         ((FUN_003026bc(param_1,param_2 + 0x70), *(char *)(param_1 + 4) == '\0' &&
          (((((FUN_003026bc(param_1,param_2 + 0x78), *(char *)(param_1 + 4) == '\0' &&
-             (FUN_00303610(param_1,param_2 + 0x80), *(char *)(param_1 + 4) == '\0')) &&
+             (readerReadU16(param_1,param_2 + 0x80), *(char *)(param_1 + 4) == '\0')) &&
             (FUN_00300900(param_1,param_2 + 0x82), *(char *)(param_1 + 4) == '\0')) &&
            (((FUN_00300934(param_1,param_2 + 0x84), *(char *)(param_1 + 4) == '\0' &&
              (FUN_00300934(param_1,param_2 + 0x88), *(char *)(param_1 + 4) == '\0')) &&

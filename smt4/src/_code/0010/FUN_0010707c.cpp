@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 
 extern int FUN_00110e7c(void);
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 
 
 void FUN_0010707c(void)
@@ -19,16 +19,16 @@ void FUN_0010707c(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v1 = DAT_00433158;
-  if (DAT_00433158 == 0) {
+  temp_v1 = g_aocSystem;
+  if (g_aocSystem == 0) {
     temp_v0 = 0x450;
-    FUN_002c222c();
+    asdOperatorNew();
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_00110e7c();
     }
   }
-  DAT_00433158 = temp_v1;
+  g_aocSystem = temp_v1;
   return;
 }
 

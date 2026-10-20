@@ -11,7 +11,7 @@ extern signed char DAT_005b448a; /* 0x5b448a */
 extern unsigned int DAT_006426b4; /* 0x6426b4 */
 
 extern int FUN_0042fbd4(void);
-extern unsigned int FUN_004303d0(unsigned int);
+extern unsigned int resourceDispatch2(unsigned int);
 extern unsigned int FUN_004320c4(unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -34,7 +34,7 @@ unsigned int FUN_0042d5b4(int param_1)
         nn_os_CriticalSection_Leave((unsigned int)&DAT_006426b4);
         return temp_v1;
       }
-      temp_v1 = FUN_004303d0(0xe);
+      temp_v1 = resourceDispatch2(0xe);
     }
     if (DAT_005b4487 == '\0') {
       nn_os_CriticalSection_Leave((unsigned int)&DAT_006426b4);

@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002569ac(...);
-int FUN_002bf244(...);
-int FUN_002c4a08(...);
+int jobIsValid(...);
+int taskCreateDraw(...);
 
 /* stack frame of param_5: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -18,11 +18,11 @@ typedef struct {
 extern int FUN_001e48d0(...); /* 0x1e48d0 */
 extern unsigned char LAB_001f7ebc; /* 0x1f7ebc */
 extern int FUN_002c9e00(...); /* 0x2c9e00 */
-extern unsigned char DAT_00434278; /* 0x434278 */
+extern unsigned char g_btlAction; /* 0x434278 */
 
 /* Supplied declaration required: FUN_002569ac. */
-/* Supplied declaration required: FUN_002bf244. */
-/* Supplied declaration required: FUN_002c4a08. */
+/* Supplied declaration required: jobIsValid. */
+/* Supplied declaration required: taskCreateDraw. */
 
 
 void FUN_001f7d50(unsigned int *param_1,int param_2,int param_3,int param_4,int param_5)
@@ -37,9 +37,9 @@ void FUN_001f7d50(unsigned int *param_1,int param_2,int param_3,int param_4,int 
   
   temp_v0 = (param_1[0x21] + 1) % 4;
   param_1[0x21] = temp_v0;
-  FUN_002bf244(param_1[temp_v0 + 3]);
-  piVar1 = (*(int * *)((unsigned char *)&DAT_00434278 + 0x4));
-  *(*(int * *)((unsigned char *)&DAT_00434278 + 0x4)) = (int)param_1;
+  jobIsValid(param_1[temp_v0 + 3]);
+  piVar1 = (*(int * *)((unsigned char *)&g_btlAction + 0x4));
+  *(*(int * *)((unsigned char *)&g_btlAction + 0x4)) = (int)param_1;
   temp_v0 = param_1[0x21];
   *(unsigned char *)(piVar1 + temp_v0 * 0x3c7 + 2) = 0;
   temp_v1 = param_1[0x7f0];
@@ -64,7 +64,7 @@ void FUN_001f7d50(unsigned int *param_1,int param_2,int param_3,int param_4,int 
     if ((*(unsigned int *)(*piVar1 + 0x44a0) & 0x100) == 0) {
       FUN_002569ac(piVar1,*(unsigned int *)(*piVar1 + 0x84));
       puVar3 = &LAB_001f7ebc;
-      FUN_002c4a08(&LAB_001f7ebc,1,0,0,FUN_001e48d0,FUN_002c9e00,param_1,*param_1);
+      taskCreateDraw(&LAB_001f7ebc,1,0,0,FUN_001e48d0,FUN_002c9e00,param_1,*param_1);
       param_1[param_1[0x21] + 3] = (unsigned int)puVar3;
       return;
     }
@@ -73,7 +73,7 @@ void FUN_001f7d50(unsigned int *param_1,int param_2,int param_3,int param_4,int 
   piVar1[temp_v0 * 0x3c7 + 1] = temp_v1;
   FUN_002569ac(piVar1,*(unsigned int *)(*piVar1 + 0x84));
   puVar3 = &LAB_001f7ebc;
-  FUN_002c4a08(&LAB_001f7ebc,1,0,0,FUN_001e48d0,FUN_002c9e00,param_1,*param_1);
+  taskCreateDraw(&LAB_001f7ebc,1,0,0,FUN_001e48d0,FUN_002c9e00,param_1,*param_1);
   param_1[param_1[0x21] + 3] = (unsigned int)puVar3;
   return;
 }

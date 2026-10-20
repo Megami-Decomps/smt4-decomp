@@ -14,7 +14,7 @@ extern unsigned int DAT_00571410; /* 0x571410 */
 extern unsigned int DAT_00571414; /* 0x571414 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int *FUN_0014aa78(void);
+extern unsigned int *btlGetMainState(void);
 extern int FUN_0017760c(void);
 /* Supplied declaration required: FUN_001ab854. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -38,9 +38,9 @@ int FUN_004c2aec(unsigned int param_1,int param_2,int param_3,int param_4)
   
   temp_v4 = 1.0f;
   temp_v3 = in_s0;
-  puVar1 = (unsigned int *)FUN_0014aa78();
+  puVar1 = (unsigned int *)btlGetMainState();
   FUN_003f0e20(puVar1,param_2);
-  puVar2 = (unsigned int *)FUN_0014aa78();
+  puVar2 = (unsigned int *)btlGetMainState();
   FUN_003f0e20(puVar2,param_3);
   if (param_4 >= 1) {
     if (puVar2 != (unsigned int *)0x0) {

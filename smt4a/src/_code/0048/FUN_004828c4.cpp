@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern signed char DAT_005f161d; /* 0x5f161d */
 extern signed char DAT_005f161f; /* 0x5f161f */
 
@@ -46,9 +46,9 @@ void FUN_004828c4(int param_1)
   float temp_v7;
   
   if (((*(unsigned int *)(param_1 + 0x7c) & 4) != 0) &&
-     (temp_v3 = *(float *)(param_1 + 0x2c) - *(float *)(DAT_00581288 + 0x1c),
-     temp_v4 = *(float *)(param_1 + 0x30) - *(float *)(DAT_00581288 + 0x20),
-     temp_v2 = *(float *)(param_1 + 0x34) - *(float *)(DAT_00581288 + 0x24),
+     (temp_v3 = *(float *)(param_1 + 0x2c) - *(float *)(g_lmapScene + 0x1c),
+     temp_v4 = *(float *)(param_1 + 0x30) - *(float *)(g_lmapScene + 0x20),
+     temp_v2 = *(float *)(param_1 + 0x34) - *(float *)(g_lmapScene + 0x24),
      (int)romwright_sqrt_4(temp_v3 * temp_v3 + temp_v4 * temp_v4 + temp_v2 * temp_v2) >= 0x43960001)) {
     *(unsigned int *)(param_1 + 0x7c) = (*(unsigned int *)(param_1 + 0x7c) & 0xfffffffb) | 1;
   }

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int aeabi_idivmod(int, unsigned int);
+int __aeabi_idivmod(int, unsigned int);
 
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_003f97a4(int param_1)
@@ -73,7 +73,7 @@ void FUN_003f97a4(int param_1)
           else if ((int)temp_v5 >= 0x40800000) {
             temp_v0 = *(int *)(temp_v4 + 0x3c) + 1;
             *(int *)(temp_v4 + 0x3c) = temp_v0;
-            aeabi_idivmod(temp_v0,*(unsigned int *)(temp_v4 + 0x38));
+            __aeabi_idivmod(temp_v0,*(unsigned int *)(temp_v4 + 0x38));
             *(unsigned int *)(temp_v4 + 0x3c) = temp_v2;
             *(unsigned int *)(temp_v4 + 0x40) = temp_v8;
             *(unsigned char *)(temp_v4 + 0x44) = 1;

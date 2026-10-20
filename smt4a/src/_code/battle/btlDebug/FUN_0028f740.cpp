@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001654d8(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_002cc228(char *, int);
 int FUN_002fa1b0(int, int, int, int, int);
@@ -29,10 +29,10 @@ typedef struct {
 extern unsigned int DAT_00573be8; /* 0x573be8 */
 extern unsigned int DAT_00573bec; /* 0x573bec */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_001654d8. */
 extern int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
 extern int FUN_0018719c(void);
@@ -84,10 +84,10 @@ void FUN_0028f740(int param_1)
   temp_v5 = FUN_001654d8();
   temp_v6 = FUN_001654e4(param_1 + 0x20);
   temp_v7 = FUN_001654e4(temp_v4);
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_001835b4(2,0xd,0xdb,temp_v3 + temp_v5,temp_v6 + temp_v7,0x29);
   FUN_001835b4(2,0xd,0xdc,temp_v3 + temp_v5,temp_v6 + temp_v7,0x29);
-  FUN_001677c0();
+  efctSetSpeed();
   temp_v3 = FUN_002a4878(param_1 + *(int *)(param_1 + 0x3890) * 100 + 0x38bc);
   temp_v8 = FUN_002c2c4c(param_1 + *(int *)(param_1 + 0x3890) * 100 + 0x38bc);
   temp_v5 = 0;
@@ -122,7 +122,7 @@ void FUN_0028f740(int param_1)
               ((*(short *)(pcVar12 + 0x5c) == 0 || (temp_v11 = FUN_0018719c(), temp_v11 != 0)))) &&
              (((*(short *)(pcVar12 + 0x5e) == 0 || (temp_v11 = FUN_003e46f4(), temp_v11 != 0)) &&
               ((pcVar12[0x5b] == '\0' ||
-               (temp_v11 = FUN_0014aa78(),
+               (temp_v11 = btlGetMainState(),
                (*(unsigned int *)(temp_v11 + 0x45a0) & DAT_00573be8) == 0 &&
                (*(unsigned int *)(temp_v11 + 0x45a4) & DAT_00573bec) == 0)))))) {
             temp_v0 = *pcVar12;

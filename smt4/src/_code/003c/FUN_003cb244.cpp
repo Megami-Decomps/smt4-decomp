@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023ce90(int);
 
-extern unsigned char DAT_00434278; /* 0x434278 */
+extern unsigned char g_btlAction; /* 0x434278 */
 
 /* Supplied declaration required: FUN_0023ce90. */
 
@@ -19,7 +19,7 @@ unsigned int FUN_003cb244(int *param_1,int param_2)
   int temp_v1;
   
   FUN_0023ce90(*param_1);
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_00434278 + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1d;
+  *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1d;
   if (*(int *)(param_2 + 0x28) != 0) {
     *(unsigned short *)(*param_1 + 0x2f20) = *(unsigned short *)(param_2 + 0x2c);
     *(unsigned short *)(*param_1 + 0x2f22) = *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x14c);

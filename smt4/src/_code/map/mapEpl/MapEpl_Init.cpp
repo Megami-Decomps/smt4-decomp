@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002a3ab0(void);
 int FUN_002a4e98(void);
 int FUN_002be624(unsigned char [44], unsigned char *, char *);
-int FUN_002c498c(int, int, int, int);
+int asdMemAlloc(int, int, int, int);
 int FUN_002c9bf8(void);
 int VectorSignedToFloat(int, int);
 
@@ -17,14 +17,14 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_001fa668; /* 0x1fa668 */
-extern unsigned int *DAT_00447a10; /* 0x447a10 */
+extern unsigned int *g_mapEpl; /* 0x447a10 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002a3ab0. */
 /* Supplied declaration required: FUN_002a4e98. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c498c. */
-extern unsigned int FUN_002c5c14(unsigned char *, unsigned int *, unsigned int, unsigned int);
+/* Supplied declaration required: asdMemAlloc. */
+extern unsigned int asdLoadFileSync(unsigned char *, unsigned int *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c9bf8. */
 extern int FUN_002fb3f4(void);
 
@@ -48,11 +48,11 @@ void MapEpl_Init(int param_1,int param_2)
   unsigned char temp_v7 [44];
   
   temp_v5 = 0;
-  if (DAT_00447a10 == (unsigned int *)0x0) {
+  if (g_mapEpl == (unsigned int *)0x0) {
     temp_v6[0] = 1;
     puVar1 = (unsigned int *)0x100;
-    FUN_002c498c(0x100,0x100,0,0x188);
-    DAT_00447a10 = puVar1;
+    asdMemAlloc(0x100,0x100,0,0x188);
+    g_mapEpl = puVar1;
     *puVar1 = 0;
     puVar1[1] = 0;
     temp_v0 = 0;
@@ -76,11 +76,11 @@ void MapEpl_Init(int param_1,int param_2)
       FUN_002c9bf8();
       if (((*pcVar3 != -1) && (*pcVar3 == param_1)) && (pcVar3[1] == param_2)) {
         FUN_002be624(temp_v7,&LAB_001fa668,pcVar3 + 8);
-        puVar1 = DAT_00447a10;
+        puVar1 = g_mapEpl;
         temp_v0 = 0;
         do {
-          if (DAT_00447a10[temp_v0 * 6 + 7] == 0) {
-            temp_v2 = FUN_002c5c14(temp_v7,temp_v6,1,0x80);
+          if (g_mapEpl[temp_v0 * 6 + 7] == 0) {
+            temp_v2 = asdLoadFileSync(temp_v7,temp_v6,1,0x80);
             puVar1[temp_v0 * 6 + 6] = temp_v2;
             FUN_002a4e98();
             puVar1[temp_v0 * 6 + 7] = temp_v2;
@@ -90,13 +90,13 @@ void MapEpl_Init(int param_1,int param_2)
           temp_v0 = temp_v0 + 1;
           temp_v1 = -1;
         } while (temp_v0 < 0x10);
-        puVar1 = DAT_00447a10;
+        puVar1 = g_mapEpl;
         temp_v2 = VectorSignedToFloat((int)*(short *)(pcVar3 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v3 = VectorSignedToFloat((int)*(short *)(pcVar3 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v4 = VectorSignedToFloat((int)*(short *)(pcVar3 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-        puVar5 = DAT_00447a10 + temp_v1 * 6 + 2;
-        if (DAT_00447a10[temp_v1 * 6 + 7] != 0) {
-          DAT_00447a10[temp_v1 * 6 + 5] = (int)temp_v5;
+        puVar5 = g_mapEpl + temp_v1 * 6 + 2;
+        if (g_mapEpl[temp_v1 * 6 + 7] != 0) {
+          g_mapEpl[temp_v1 * 6 + 5] = (int)temp_v5;
           *puVar5 = temp_v2;
           puVar1[temp_v1 * 6 + 3] = temp_v3;
           puVar1[temp_v1 * 6 + 4] = temp_v4;

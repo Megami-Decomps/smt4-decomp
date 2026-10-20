@@ -7,7 +7,7 @@ extern "C" {
 int nn_snd_CTR_Dspsnd_SetDspDelayEffect(unsigned char *, int);
 int nn_snd_CTR_Dspsnd_SetDspReverbEffect(unsigned char *, int);
 
-extern unsigned char DAT_004e6f64; /* 0x4e6f64 */
+extern unsigned char g_dspsndState; /* 0x4e6f64 */
 
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_SetDspDelayEffect. */
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_SetDspReverbEffect. */
@@ -24,9 +24,9 @@ void FUN_0013a864(int param_1)
   do {
     temp_v1 = (int)(char)temp_v0;
     *(unsigned short *)(param_1 + temp_v1 * 0x14) = 0xffff;
-    nn_snd_CTR_Dspsnd_SetDspDelayEffect(&DAT_004e6f64,temp_v1);
+    nn_snd_CTR_Dspsnd_SetDspDelayEffect(&g_dspsndState,temp_v1);
     *(unsigned short *)(param_1 + temp_v1 * 0x34 + 0x28) = 0xffff;
-    nn_snd_CTR_Dspsnd_SetDspReverbEffect(&DAT_004e6f64,temp_v1);
+    nn_snd_CTR_Dspsnd_SetDspReverbEffect(&g_dspsndState,temp_v1);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 2);
   return;

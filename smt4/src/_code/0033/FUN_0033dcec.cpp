@@ -8,9 +8,9 @@ int FUN_0017fa3c(...);
 int FUN_002b90e6(...);
 int FUN_002bb5a4(...);
 int FUN_002bd540(...);
-int FUN_002bd75c(...);
+int asdTextureCreate(...);
 int FUN_002be624(...);
-int FUN_002c415c(...);
+int asdMemFree(...);
 int FUN_002c52f8(...);
 int FUN_002c618c(...);
 int FUN_0033e8a8(...);
@@ -44,7 +44,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char LAB_0033e08c; /* 0x33e08c */
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
 /* Supplied declaration required: FUN_0017fa3c. */
@@ -54,10 +54,10 @@ extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002b90e6. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002bd540. */
-/* Supplied declaration required: FUN_002bd75c. */
+/* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_002be624. */
 extern unsigned int FUN_002c3124(unsigned char *, unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c52f8. */
 extern int FUN_002c58c8(void *, unsigned int);
 /* Supplied declaration required: FUN_002c618c. */
@@ -103,27 +103,27 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
   if (param_3 != 0) {
     temp_v4 = 0;
     if ((param_2 & 8) != 0) {
-      temp_v4 = FUN_002ae98c(DAT_00433158,param_1->field_0x8,param_1->field_0xc,1);
+      temp_v4 = FUN_002ae98c(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002ae8e4(DAT_00433158,param_1->field_0x8,param_1->field_0xc,0x20000);
+        temp_v4 = FUN_002ae8e4(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x20000);
       }
       else {
         temp_v4 = FUN_002e151c(param_1->field_0x8,param_1->field_0xc);
       }
     }
     else if ((param_2 & 0x40) != 0) {
-      temp_v4 = FUN_002ae98c(DAT_00433158,param_1->field_0x8,param_1->field_0xc,1);
+      temp_v4 = FUN_002ae98c(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002ae8e4(DAT_00433158,param_1->field_0x8,param_1->field_0xc,0x30000);
+        temp_v4 = FUN_002ae8e4(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x30000);
       }
       else {
         temp_v4 = FUN_002e1574(param_1->field_0x8,param_1->field_0xc);
       }
     }
     else if ((param_2 & 1) != 0) {
-      temp_v4 = FUN_002ae98c(DAT_00433158,param_1->field_0x8,param_1->field_0xc,1);
+      temp_v4 = FUN_002ae98c(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002ae8e4(DAT_00433158,param_1->field_0x8,param_1->field_0xc,0x10000);
+        temp_v4 = FUN_002ae8e4(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x10000);
       }
       else {
         temp_v4 = FUN_002c58c8(param_1->field_0x8,param_1->field_0xc);
@@ -180,7 +180,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
         }
         if (-1 < (int)puVar4) {
           temp_v0 = 0;
-          FUN_002bd75c();
+          asdTextureCreate();
           temp_v1 = FUN_002c3124(temp_v9,temp_v8,0);
           FUN_0017fa3c(temp_v0,temp_v1,temp_v8[0]);
           if ((temp_v12 & 8) != 0) {
@@ -200,7 +200,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
             *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
           }
           FUN_002bd540(temp_v0);
-          FUN_002c415c(temp_v1);
+          asdMemFree(temp_v1);
           param_1->field_0x3d = 1;
           if (temp_v4 < (int)(unsigned int)*(unsigned short *)((int)param_1->field_0x10 + 4)) {
             pvVar2 = param_1->field_0x14;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e14(int);
-int FUN_00301ac0(int *);
+int vectorSize12A(int *);
 int FUN_00307900(int, int, int);
 int FUN_0030791e(int, int, int, int *);
 int FUN_00307974(int *);
@@ -18,9 +18,9 @@ typedef struct {
 } param_2_stack;
 
 extern int *FUN_002e4e86(unsigned int *, unsigned int *);
-extern int FUN_002e6dac(void);
+extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_00301ac0. */
+/* Supplied declaration required: vectorSize12A. */
 /* Supplied declaration required: FUN_00307900. */
 /* Supplied declaration required: FUN_0030791e. */
 extern unsigned int FUN_00307962(unsigned int, int *);
@@ -43,15 +43,15 @@ int * FUN_001343c8(int *param_1,int *param_2)
   unsigned int temp_v8 [2];
   
   if (param_2 != param_1) {
-    temp_v0 = FUN_00301ac0(param_2);
+    temp_v0 = vectorSize12A(param_2);
     temp_v1 = FUN_00307974(param_1);
     if (temp_v1 < temp_v0) {
-      temp_v2 = FUN_00301ac0(param_1);
+      temp_v2 = vectorSize12A(param_1);
       temp_v8[0] = FUN_00307962(temp_v2,param_1);
-      temp_v7 = FUN_00301ac0(param_2);
+      temp_v7 = vectorSize12A(param_2);
       piVar4 = (int *)FUN_002e4e86((unsigned int *)&temp_v7,temp_v8);
       temp_v3 = *piVar4;
-      temp_v4 = FUN_002e6dac();
+      temp_v4 = rt_malloc();
       FUN_0030791e(*param_2,param_2[1],temp_v4,param_1);
       temp_v6 = *param_1;
       for (temp_v5 = temp_v6; temp_v5 != param_1[1]; temp_v5 = temp_v5 + 0xc) {
@@ -59,18 +59,18 @@ int * FUN_001343c8(int *param_1,int *param_2)
       FUN_00307974(param_1);
       FUN_002e6e14(temp_v6);
       *param_1 = temp_v4;
-      temp_v5 = FUN_00301ac0(param_2);
+      temp_v5 = vectorSize12A(param_2);
       param_1[1] = temp_v5 * 0xc + *param_1;
       temp_v5 = *param_1 + temp_v3 * 0xc;
     }
     else {
-      temp_v0 = FUN_00301ac0(param_1);
-      temp_v1 = FUN_00301ac0(param_2);
+      temp_v0 = vectorSize12A(param_1);
+      temp_v1 = vectorSize12A(param_2);
       if (temp_v0 < temp_v1) {
-        temp_v5 = FUN_00301ac0(param_1);
+        temp_v5 = vectorSize12A(param_1);
         temp_v5 = temp_v5 * 0xc;
         FUN_00307900(*param_2,*param_2 + temp_v5,*param_1);
-        temp_v3 = FUN_00301ac0(param_2);
+        temp_v3 = vectorSize12A(param_2);
         param_1[1] = temp_v3 * 0xc + *param_1;
         FUN_0030791e(*param_2 + temp_v5,param_2[1],*param_1 + temp_v5,param_1);
         return param_1;
@@ -78,7 +78,7 @@ int * FUN_001343c8(int *param_1,int *param_2)
       temp_v5 = FUN_00307900(*param_2,param_2[1],*param_1);
       for (; temp_v5 != param_1[1]; temp_v5 = temp_v5 + 0xc) {
       }
-      temp_v5 = FUN_00301ac0(param_2);
+      temp_v5 = vectorSize12A(param_2);
       temp_v5 = temp_v5 * 0xc + *param_1;
       param_1[1] = temp_v5;
     }

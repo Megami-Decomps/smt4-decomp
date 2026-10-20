@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0011a1b8(unsigned int, unsigned int);
+int asdSoundSlotCSelect(unsigned int, unsigned int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ extern unsigned char DAT_004e25e9; /* 0x4e25e9 */
 extern signed char DAT_004e25ea; /* 0x4e25ea */
 extern signed char DAT_004e25fa; /* 0x4e25fa */
 
-/* Supplied declaration required: FUN_0011a1b8. */
+/* Supplied declaration required: asdSoundSlotCSelect. */
 
 
 unsigned int FUN_0010d3f8(unsigned int param_1)
@@ -37,7 +37,7 @@ unsigned int FUN_0010d3f8(unsigned int param_1)
     if (DAT_004e25fa != '\0') {
       temp_v1[DAT_004e25ea != '\0'] = 1;
     }
-    FUN_0011a1b8(temp_v1[0],temp_v1[1]);
+    asdSoundSlotCSelect(temp_v1[0],temp_v1[1]);
     return 1;
   }
   return 0;

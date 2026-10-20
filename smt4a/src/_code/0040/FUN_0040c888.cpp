@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_004fad68(unsigned int, unsigned int, int, int);
 int FUN_004fb43c(...);
 
@@ -27,7 +27,7 @@ typedef struct {
 extern int DAT_00571508; /* 0x571508 */
 extern unsigned int DAT_00573808; /* 0x573808 */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_004fad68. */
 /* Supplied declaration required: FUN_004fb43c. */
 
@@ -44,7 +44,7 @@ void FUN_0040c888(unsigned int param_1,fn_0040c888_arg1 *param_2)
   temp_v1 = param_2->field_0x28;
   temp_v2 = *(unsigned int *)(param_2 + 1);
   FUN_004fad68(DAT_00573808,temp_v1,(int)param_2->field_0x24,(int)param_2->field_0x26);
-  FUN_0014aa78();
+  btlGetMainState();
   switch(temp_v1) {
   case 2:
   case 5:

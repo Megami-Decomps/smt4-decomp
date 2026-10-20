@@ -9,7 +9,7 @@ int FUN_0027d9a8(void);
 int FUN_0027da30(...);
 int FUN_00281e34(void);
 int FUN_00282924(unsigned char *, int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_00293a04(unsigned int, int);
 int FUN_002b70cc(void);
 int FUN_003c14e8(...);
@@ -17,14 +17,14 @@ int FUN_003c174c(unsigned char *, int);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
-int aeabi_idivmod(int, double);
+int __aeabi_idivmod(int, double);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -41,14 +41,14 @@ extern int FUN_0027dab0(unsigned char *, int);
 extern int FUN_0027db08(unsigned int);
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: FUN_00282924. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00293a04. */
 extern int FUN_00296d6c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b70cc. */
-extern unsigned char *FUN_002c08f0(void);
+extern unsigned char *jobGetWork(void);
 /* Supplied declaration required: FUN_003c14e8. */
 /* Supplied declaration required: FUN_003c174c. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 unsigned int FUN_001b7a0c(void)
@@ -82,10 +82,10 @@ unsigned int FUN_001b7a0c(void)
   unsigned long long temp_v19;
   unsigned long long temp_v20;
   
-  pbVar1 = (unsigned char *)FUN_002c08f0();
+  pbVar1 = (unsigned char *)jobGetWork();
   temp_v16 = 0.0f;
   temp_v18 = temp_v16;
-  if (DAT_004342c8 != 0) {
+  if (g_btlMain != 0) {
     temp_v0 = FUN_0027db08(0);
     temp_v14 = *(float *)(temp_v0 + 0x10) - *(float *)(temp_v0 + 4);
     temp_v2 = in_fpscr & 0xfffffff;
@@ -137,7 +137,7 @@ unsigned int FUN_001b7a0c(void)
           *(short *)(temp_v10 + 0x5a) = *(short *)(temp_v10 + 0x5a) + 2;
           FUN_00293a04(temp_v4,0);
           in_s0 = (float)(int)in_s0;
-          aeabi_idivmod(*(unsigned short *)(temp_v10 + 0x5a),in_s0);
+          __aeabi_idivmod(*(unsigned short *)(temp_v10 + 0x5a),in_s0);
           *(unsigned short *)(temp_v10 + 0x5a) = temp_v7;
         }
         break;
@@ -151,11 +151,11 @@ unsigned int FUN_001b7a0c(void)
           *(unsigned int *)(temp_v10 + 0x10c) = 0;
           *(unsigned int *)(temp_v10 + 0x110) = 0;
           *(unsigned int *)(temp_v10 + 0x4c) = 0;
-          temp_v1 = FUN_002939f4();
+          temp_v1 = btlGetMainState();
           FUN_0027da30(temp_v1,(int)*(short *)(temp_v10 + 0x62));
           if (temp_v1 != 0) {
             if ((*(unsigned short *)(temp_v1 + 0xfa) & 0x180) != 0) {
-              FUN_002939f4();
+              btlGetMainState();
               *(unsigned int *)(temp_v10 + 0x48) = 3;
               *(unsigned int *)(temp_v10 + 0x4c) = 0;
               *(unsigned int *)(temp_v10 + 0xa0) = 0;
@@ -165,13 +165,13 @@ unsigned int FUN_001b7a0c(void)
               *(unsigned int *)(temp_v10 + 0x4c) = 0;
               *(unsigned int *)(temp_v10 + 0xa0) = 0;
               if (-1 < *(short *)(temp_v10 + 0x60)) {
-                temp_v3 = FUN_002939f4();
+                temp_v3 = btlGetMainState();
                 puVar8 = (unsigned int *)(*(int *)(temp_v3 + 0x1fc0) + *(short *)(temp_v10 + 0x60) * 0x288);
                 *puVar8 = *puVar8 & 0xfff7ffff;
               }
             }
             if (-1 < *(short *)(temp_v10 + 0x60)) {
-              temp_v3 = FUN_002939f4();
+              temp_v3 = btlGetMainState();
               puVar8 = (unsigned int *)(*(int *)(temp_v3 + 0x1fc0) + *(short *)(temp_v10 + 0x60) * 0x288);
               if (puVar8 != (unsigned int *)0x0) {
                 if ((*(unsigned short *)(temp_v1 + 0xfa) & 1000) == 0) {

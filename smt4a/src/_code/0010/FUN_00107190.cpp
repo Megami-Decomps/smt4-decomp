@@ -1,41 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00107190` (_code @ 0x107190, 0x62 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail's function symbol excludes the string literal armcc emits right after the function; the code itself is identical and fdiff only reports the trailing literal-pool row(s) */
+/* Formats the interface type flags (point-to-point, loopback, broadcast) as a wide string into `dest`, at most `count` characters. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e6354(unsigned char [1028], int);
-int FUN_002e98ea(int, unsigned char [1028], int);
-int FUN_002ee7f2(unsigned char [1028], unsigned char *);
+typedef struct Interface {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u32 flags;       /* bit 0: point-to-point, bit 2: loopback, bit 1: broadcast */
+} Interface;
 
-extern unsigned char LAB_001071f4; /* 0x1071f4 */
-extern unsigned char LAB_0010720c; /* 0x10720c */
-extern unsigned char LAB_00107220; /* 0x107220 */
+extern void sysMemClear(void *buffer, s32 size);
+extern void FUN_002e98ea(u16 *dest, void *buffer, s32 count);
+extern void FUN_002ee7f2(void *buffer, const u16 *text);
 
-/* Supplied declaration required: FUN_002e6354. */
-/* Supplied declaration required: FUN_002e98ea. */
-/* Supplied declaration required: FUN_002ee7f2. */
-
-
-unsigned int FUN_00107190(int param_1,int param_2,int param_3)
-
+u32 FUN_00107190(Interface *iface, u16 *dest, s32 count)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0 [1028];
-  
-  FUN_002e6354(temp_v0,0x400);
-  if ((*(unsigned int *)(param_1 + 0xc) & 1) != 0) {
-    FUN_002ee7f2(temp_v0,&LAB_001071f4);
-  }
-  if (*(int *)(param_1 + 0xc) << 0x1d < 0) {
-    FUN_002ee7f2(temp_v0,&LAB_0010720c);
-  }
-  if (*(int *)(param_1 + 0xc) << 0x1e < 0) {
-    FUN_002ee7f2(temp_v0,&LAB_00107220);
-  }
-  FUN_002e98ea(param_2,temp_v0,param_3);
-  *(unsigned short *)((param_3 * 2 + param_2) - 2) = 0;
-  return 1;
+    u16 buffer[514];
+
+    sysMemClear(buffer, 0x400);
+    if ((iface->flags & 1) != 0) {
+        FUN_002ee7f2(buffer, (const u16 *)L"POINT2POINT");
+    }
+    if ((s32)(iface->flags << 29) < 0) {
+        FUN_002ee7f2(buffer, (const u16 *)L"LOOPBACK");
+    }
+    if ((s32)(iface->flags << 30) < 0) {
+        FUN_002ee7f2(buffer, (const u16 *)L"BROADCAST");
+    }
+    FUN_002e98ea(dest, buffer, count);
+    dest[count - 1] = 0;
+    return 1;
 }
 
-} /* extern "C" */
+}

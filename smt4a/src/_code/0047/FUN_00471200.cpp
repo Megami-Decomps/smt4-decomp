@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-extern unsigned int DAT_0057027c; /* 0x57027c */
+extern unsigned int g_aocDisplay; /* 0x57027c */
 
 extern int FUN_001b2bd8(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00472350. */
@@ -23,7 +23,7 @@ void FUN_00471200(unsigned int param_1,unsigned int param_2,unsigned int param_3
   
   temp_v0 = FUN_001b2bd8(param_1,0x32,0,param_3);
   if (temp_v0 != 0) {
-    FUN_00472350(DAT_0057027c,param_2,param_3);
+    FUN_00472350(g_aocDisplay,param_2,param_3);
     return;
   }
   return;

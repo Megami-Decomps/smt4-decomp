@@ -1,20 +1,18 @@
-#include "romwright_types.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f3b4; /* 0x57f3b4 */
+extern EventEffectGlobalsA DAT_0057f3b4;
 
-
-unsigned char FUN_00239134(void)
-
+/* True when there is no effect or it has finished. */
+bool FUN_00239134(void)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if ((*(int *)((unsigned char *)&DAT_0057f3b4 + 0xc)) != 0) {
-    temp_v0 = *(int *)((*(int *)((unsigned char *)&DAT_0057f3b4 + 0xc)) + 4);
-  }
-  return (*(int *)((unsigned char *)&DAT_0057f3b4 + 0xc)) == 0 || temp_v0 == 3;
+    s32 state = 0;
+
+    if (DAT_0057f3b4.effect != NULL) {
+        state = DAT_0057f3b4.effect->state;
+    }
+    return DAT_0057f3b4.effect == NULL || state == EVENT_EFFECT_DONE;
 }
 
 } /* extern "C" */

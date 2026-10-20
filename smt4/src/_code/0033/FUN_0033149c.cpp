@@ -37,14 +37,14 @@ typedef struct {
 extern unsigned char LAB_00331944; /* 0x331944 */
 extern unsigned char LAB_0033196c; /* 0x33196c */
 extern unsigned char LAB_0033197c; /* 0x33197c */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00241f2c. */
 /* Supplied declaration required: FUN_00241f98. */
 /* Supplied declaration required: FUN_002829d4. */
 /* Supplied declaration required: FUN_00290994. */
-extern int FUN_00292f28(unsigned int);
+extern int padIsButtonDown(unsigned int);
 extern unsigned int FUN_00295cec(void);
 /* Supplied declaration required: FUN_0029a17c. */
 /* Supplied declaration required: FUN_0029a268. */
@@ -113,7 +113,7 @@ void FUN_0033149c(int param_1)
         temp_v4 = FUN_002bf4f8(0x1d,0x58f);
         FUN_002b6b8c(temp_v10 & 0xffff,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v0
                      ,(int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,0x6a);
-        temp_v4 = FUN_00292f28(temp_v10);
+        temp_v4 = padIsButtonDown(temp_v10);
         if (temp_v4 != 0) {
           temp_v11 = 0x8400ff;
           temp_v4 = FUN_002bf4f8(0x1d,0x595);
@@ -194,8 +194,8 @@ void FUN_0033149c(int param_1)
     temp_v4 = FUN_002bf4f8(0x1d,0x42a);
     temp_v8 = FUN_002beda4(param_1 + 0x3f0);
     temp_v6 = FUN_002bed98(param_1 + 0x3f0);
-    temp_v9 = DAT_0044ea00;
-    piVar11 = (int *)(DAT_0044ea00 + 0x130c);
+    temp_v9 = g_titleScene;
+    piVar11 = (int *)(g_titleScene + 0x130c);
     temp_v7 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = 3;
     if (*(char *)(temp_v9 + 0x1324) != '\0' || temp_v7 != 3) {
@@ -207,8 +207,8 @@ void FUN_0033149c(int param_1)
                  (int)**(short **)(temp_v2 + 0xc),(int)(*(short **)(temp_v2 + 0xc))[1],1,temp_v6);
     FUN_002bf288(2,0x1d,0x42c,(int)*(short *)(temp_v2 + 8) + temp_v8 + temp_v0,
                  temp_v6 + temp_v1 + (int)*(short *)(temp_v2 + 10),0x88);
-    temp_v9 = DAT_0044ea00;
-    piVar11 = (int *)(DAT_0044ea00 + 0x130c);
+    temp_v9 = g_titleScene;
+    piVar11 = (int *)(g_titleScene + 0x130c);
     temp_v4 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = 0;
     if (*(char *)(temp_v9 + 0x1324) != '\0' || temp_v4 != 0) {
@@ -219,7 +219,7 @@ void FUN_0033149c(int param_1)
     temp_v9 = FUN_002bf4f8(0x1d,0x598);
     FUN_002b6b8c(temp_v10 & 0xffff,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v0,
                  (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v2 + 10) + temp_v1,0x92);
-    temp_v9 = FUN_00292f28(temp_v10);
+    temp_v9 = padIsButtonDown(temp_v10);
     if (temp_v9 != 0) {
       temp_v11 = 0x72e027ff;
       temp_v9 = FUN_002bf4f8(0x1d,0x59e);
@@ -270,7 +270,7 @@ void FUN_0033149c(int param_1)
   FUN_00290994(param_1 + 0x10,temp_v0,temp_v1,0x1d,0x56a,0x56b,0x56c,0x566,0x568,0x567,0x569,
                (int)*(short *)(param_1 + 0x522),(int)*(short *)(param_1 + 0x51e),
                (int)*(short *)(param_1 + 0x520),0x97,0);
-  temp_v0 = DAT_0044ea00;
+  temp_v0 = g_titleScene;
   if (*(int *)(param_1 + 8) == 5) {
     temp_v1 = FUN_002c5da8(6,1,0);
     piVar11 = (int *)(temp_v0 + 0x12ac);
@@ -281,7 +281,7 @@ void FUN_0033149c(int param_1)
       *(unsigned char *)(temp_v0 + 0x12c4) = 0;
     }
     FUN_0029a268(param_1 + 0x47c);
-    temp_v0 = DAT_0044ea00;
+    temp_v0 = g_titleScene;
     temp_v1 = FUN_002c5da8(6,7,0);
     piVar11 = (int *)(temp_v0 + 0x12ac);
     temp_v2 = piVar11[*piVar11 + 2];

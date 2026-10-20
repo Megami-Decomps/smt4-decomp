@@ -21,7 +21,7 @@ extern int FUN_0028660c(void);
 /* Supplied declaration required: FUN_002866b4. */
 /* Supplied declaration required: FUN_002893d8. */
 /* Supplied declaration required: FUN_0028dc98. */
-extern unsigned int FUN_00296cc8(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 
 
 void scrComm_Message_ShowWaitLockConfirm(void)
@@ -48,7 +48,7 @@ void scrComm_Message_ShowWaitLockConfirm(void)
     temp_v1 = 5;
   }
   temp_v2 = FUN_002865f8();
-  temp_v3 = FUN_00296cc8(0);
+  temp_v3 = scrGetArg(0);
   temp_v4 = FUN_002893d8();
   FUN_002866b4(temp_v2,temp_v3,temp_v4,temp_v1,1,0);
   return;

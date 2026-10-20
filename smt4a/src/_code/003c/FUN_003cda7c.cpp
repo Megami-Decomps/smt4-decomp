@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_003283ac(int);
+int scrSetResult(int);
 
 extern int FUN_001ab854(int);
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 extern int FUN_003a7b74(void);
 
 
@@ -31,7 +31,7 @@ unsigned int FUN_003cda7c(unsigned int param_1,int param_2)
     }
     temp_v0 = *(unsigned short *)(*(int *)(param_2 + 8) + 0x3a);
   }
-  FUN_003283ac(temp_v0);
+  scrSetResult(temp_v0);
   return 1;
 }
 

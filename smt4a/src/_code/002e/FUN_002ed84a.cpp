@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e74c4(unsigned int, unsigned char *, int, unsigned int);
+int strAssign(unsigned int, unsigned char *, int, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 1 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 
 
 unsigned int FUN_002ed84a(int param_1,unsigned char *param_2,unsigned int param_3,unsigned int param_4)
@@ -28,7 +28,7 @@ unsigned int FUN_002ed84a(int param_1,unsigned char *param_2,unsigned int param_
   
   (*(unsigned int *)&temp_v0) = romwright_piece_3_1((int)((unsigned int)param_3 >> 8),*param_2);
   uStack_c = param_4;
-  FUN_002e74c4(*(unsigned int *)(param_1 + 8),&temp_v0,1,0xffffffff);
+  strAssign(*(unsigned int *)(param_1 + 8),&temp_v0,1,0xffffffff);
   return 1;
 }
 

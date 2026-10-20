@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int FUN_002e3390(void);
+extern unsigned int wstrlen(void);
 
 
 unsigned int FUN_0019dbb8(int param_1)
@@ -15,7 +15,7 @@ unsigned int FUN_0019dbb8(int param_1)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_002e3390();
+  temp_v0 = wstrlen();
   if ((int)temp_v0 >= 9) {
     temp_v0 = 8;
   }

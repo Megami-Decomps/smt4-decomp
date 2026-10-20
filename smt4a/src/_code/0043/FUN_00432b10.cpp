@@ -33,7 +33,7 @@ extern unsigned int DAT_0058955c; /* 0x58955c */
 
 /* Supplied declaration required: FUN_00110b28. */
 /* Supplied declaration required: FUN_00135804. */
-extern int FUN_002e6dac(unsigned int);
+extern int rt_malloc(unsigned int);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_002f6ed2. */
 /* Supplied declaration required: FUN_00302f28. */
@@ -64,14 +64,14 @@ unsigned int * FUN_00432b10(unsigned int *param_1)
   param_1[2] = 0;
   param_1[3] = 0;
   param_1[4] = 0;
-  temp_v0 = FUN_002e6dac(0x80);
+  temp_v0 = rt_malloc(0x80);
   param_1[2] = temp_v0;
   param_1[3] = temp_v0;
   param_1[4] = temp_v0 + 0x80;
   param_1[6] = 0;
   param_1[7] = 0;
   param_1[8] = 0;
-  temp_v0 = FUN_002e6dac(0x80);
+  temp_v0 = rt_malloc(0x80);
   param_1[6] = temp_v0;
   param_1[7] = temp_v0;
   param_1[8] = temp_v0 + 0x80;

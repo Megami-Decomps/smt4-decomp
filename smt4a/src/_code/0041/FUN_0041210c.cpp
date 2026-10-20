@@ -12,7 +12,7 @@ int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00410f84. */
 /* Supplied declaration required: FUN_00412248. */
 /* Supplied declaration required: FUN_00416840. */
@@ -43,7 +43,7 @@ unsigned int FUN_0041210c(int *param_1)
     param_1[5] = 0;
   }
   FUN_00412248(param_1);
-  temp_v2 = FUN_0014aa78();
+  temp_v2 = btlGetMainState();
   if (*param_1 != 1 && *param_1 != 2) {
     temp_v4 = 0;
     do {

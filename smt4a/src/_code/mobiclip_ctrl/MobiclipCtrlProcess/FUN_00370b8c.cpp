@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_0013a618(...);
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_002e342c(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
@@ -23,7 +23,7 @@ typedef struct {
 
 extern unsigned char LAB_00284524; /* 0x284524 */
 extern int FUN_002c3038(...); /* 0x2c3038 */
-extern int FUN_0038b024(...); /* 0x38b024 */
+extern int mobiclipProcessDestroy(...); /* 0x38b024 */
 extern unsigned char DAT_005329a0; /* 0x5329a0 */
 extern unsigned int *DAT_0058803c; /* 0x58803c */
 extern char s__V_V_V_V_V_V_V_V_V_V_00588040[129]; /* 0x588040 */
@@ -31,12 +31,12 @@ extern unsigned int DAT_0058804c; /* 0x58804c */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_0013a618. */
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
-extern int FUN_0028029c(void);
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+extern int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 unsigned int FUN_00370b8c(int param_1,unsigned char param_2)
@@ -54,21 +54,21 @@ unsigned int FUN_00370b8c(int param_1,unsigned char param_2)
   
   puVar1 = (unsigned int *)0x100;
   temp_v1 = (romwright_code *)0x1;
-  FUN_00163060(0x100,0x100,0,0x7c);
+  asdMemoryAllocTracked(0x100,0x100,0,0x7c);
   DAT_0058803c = puVar1;
-  FUN_002e6354();
+  sysMemClear();
   temp_v1 = (romwright_code *)&LAB_00284524;
-  temp_v2 = FUN_0038b024;
+  temp_v2 = mobiclipProcessDestroy;
   pcVar2 = "Move";
   temp_v3 = puVar1;
-  FUN_0014e38c("Move",4,0);
+  asdProcessCreateSimple("Move",4,0);
   *puVar1 = (unsigned int)pcVar2;
   pcVar3 = "Move NCL";
   temp_v2 = (romwright_code *)0x0;
   temp_v1 = FUN_002c3038;
   temp_v3 = puVar1;
   temp_v4 = pcVar2;
-  FUN_0015155c("Move NCL",0x7e,0,0);
+  taskCreateDraw("Move NCL",0x7e,0,0);
   puVar1[1] = (unsigned int)pcVar3;
   if ((&DAT_005329a0)[param_1] == '\0') {
     temp_v4 = (char *)*puVar1;
@@ -76,10 +76,10 @@ unsigned int FUN_00370b8c(int param_1,unsigned char param_2)
     temp_v2 = (romwright_code *)0x0;
     temp_v1 = FUN_002c3038;
     temp_v3 = puVar1;
-    FUN_0015155c("Move NCR",0xda,0);
+    taskCreateDraw("Move NCR",0xda,0);
     puVar1[2] = (unsigned int)pcVar2;
   }
-  temp_v0 = FUN_0028029c();
+  temp_v0 = asdLoadFileGetUseRawPaths();
   if (temp_v0 != 0) {
     puVar1[4] = 0xe;
   }

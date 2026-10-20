@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_00234624(unsigned char [4], unsigned int, unsigned int);
-int FUN_00262888(void);
+int asdOperatorNewB(void);
 int FUN_002a12d8(int);
-int FUN_002c564c(int);
+int jyoucyuGetTableEntry(int);
 int FUN_002c6a10(int);
 int FUN_00354608(int *, int, int);
 int FUN_003df0c4(int *, unsigned char [4], unsigned char [8], unsigned short [12]);
@@ -22,14 +22,14 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_1_stack;
 
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 extern unsigned int FUN_00234618(unsigned char *);
 /* Supplied declaration required: FUN_00234624. */
-/* Supplied declaration required: FUN_00262888. */
+/* Supplied declaration required: asdOperatorNewB. */
 /* Supplied declaration required: FUN_002a12d8. */
 extern int FUN_002a2dec(unsigned short *);
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_002c6a10. */
 /* Supplied declaration required: FUN_00354608. */
 /* Supplied declaration required: FUN_003df0c4. */
@@ -56,8 +56,8 @@ unsigned char * FUN_0038ae30(int param_1)
   unsigned short temp_v11 [12];
   unsigned char temp_v12 [8];
   
-  temp_v3 = DAT_00432fc8;
-  FUN_00354608(&temp_v8,DAT_00432fc8 + 0x20,DAT_00432fc8 + 0x18);
+  temp_v3 = g_aocMain;
+  FUN_00354608(&temp_v8,g_aocMain + 0x20,g_aocMain + 0x18);
   *(unsigned int *)(param_1 + 0xc) = temp_v8;
   *(unsigned int *)(param_1 + 0x10) = uStack_5c;
   temp_v0 = FUN_002a12d8(param_1 + 0xc);
@@ -67,7 +67,7 @@ unsigned char * FUN_0038ae30(int param_1)
   FUN_00234624(temp_v9,*(unsigned int *)(temp_v3 + 0x5a8),*(unsigned int *)(param_1 + 0x14));
   temp_v1 = FUN_00234618(temp_v9);
   temp_v0 = temp_v1 << 1;
-  FUN_00262888();
+  asdOperatorNewB();
   temp_v5 = 0;
   if (temp_v0 != 0) {
     temp_v4 = 0;
@@ -102,7 +102,7 @@ unsigned char * FUN_0038ae30(int param_1)
       FUN_002c6a10(temp_v0);
       return temp_v9;
     }
-    FUN_002c564c(0);
+    jyoucyuGetTableEntry(0);
     FUN_002c6a10(temp_v0);
   }
   return temp_v9;

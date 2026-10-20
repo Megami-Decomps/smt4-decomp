@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002f4cd6. */
 /* Supplied declaration required: FUN_0030fe20. */
 extern int FUN_0030fe5c(int, unsigned int *);
-extern int aeabi_uidivmod(unsigned int, int);
+extern int __aeabi_uidivmod(unsigned int, int);
 
 
 void FUN_00121fb0(int param_1,unsigned int param_2,int param_3,unsigned int param_4)
@@ -47,7 +47,7 @@ void FUN_00121fb0(int param_1,unsigned int param_2,int param_3,unsigned int para
   temp_v0 = FUN_0030fe5c(param_1 + 0x18,temp_v3);
   temp_v0 = temp_v0 / 2;
   if (temp_v0 != 0) {
-    temp_v1 = aeabi_uidivmod(param_2,temp_v0);
+    temp_v1 = __aeabi_uidivmod(param_2,temp_v0);
     param_2 = temp_v0 * (temp_v1 + 1);
   }
   if (param_2 < 10) {

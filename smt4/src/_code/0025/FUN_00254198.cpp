@@ -1,21 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00254198` (_code @ 0x254198, 0x20 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Clears the two mode bits (5-6) of entry `index` in the global table. */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002adc88(void);
+typedef struct Entry {
+    /* 0x00 */ u8 flags;
+    /* 0x01 */ u8 unk01[3];
+} Entry;
 
+typedef struct Table {
+    /* 0x000 */ u8 unk000[0x200];
+    /* 0x200 */ Entry entries[1];
+} Table;
 
-void FUN_00254198(int param_1)
+extern Table *FUN_002adc88(void);
 
+void FUN_00254198(s32 index)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002adc88();
-  temp_v0 = temp_v0 + param_1 * 4;
-  *(unsigned char *)(temp_v0 + 0x200) = *(unsigned char *)(temp_v0 + 0x200) & 0x9f;
-  return;
+    FUN_002adc88()->entries[index].flags &= ~0x60;
 }
 
-} /* extern "C" */
+}

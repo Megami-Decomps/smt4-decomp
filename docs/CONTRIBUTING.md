@@ -32,6 +32,10 @@ Every match must be one a programmer could have written for a reason.
 - A near miss stays as it is with a `/* NON_MATCHING: ... */` comment saying what still differs.
   Don't keep a fake match to raise the count.
 - `blx` against `bl` on a call is not a difference: the linker picks it (`fdiff` already ignores it).
+- **Compiler flags need evidence.** A unit can override the flags with a `cflags` list in
+  `config/project.json` when the retail code shows a different build: a constant division that calls
+  `__aeabi_idivmod`/`__aeabi_uidivmod` instead of multiplying is `-Ospace` (the STL and SDK containers
+  were built that way). Write the C as `/` and `%` and set the flag; never call the helper by hand.
 
 ## Readability standard
 

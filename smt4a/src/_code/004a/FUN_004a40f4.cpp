@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_003343f0(...);
 int FUN_0035d8a4(...);
 int FUN_004a3e04(...);
@@ -35,7 +35,7 @@ typedef struct {
 
 extern unsigned char DAT_0057f0b4; /* 0x57f0b4 */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_0023b258(void);
 extern int FUN_0026140c(void);
 extern int FUN_002c7c54(void);
@@ -57,7 +57,7 @@ void FUN_004a40f4(fn_004a40f4_arg0 *param_1)
   temp_v1 = FUN_0023b258();
   if (temp_v1 != 0) {
     FUN_0035d8a4();
-    FUN_001681cc(0x2f);
+    sysPlaySe(0x2f);
     FUN_003343f0(0);
     *(unsigned int *)&param_1->field_0x14 = 2;
     *(unsigned int *)&param_1->field_0x18 = 0;

@@ -9,9 +9,9 @@ int FUN_0025c870(void);
 int FUN_0028c6b8(void);
 int FUN_002a3d58(...);
 int FUN_002bf694(int, int);
-int FUN_002c32a0(int, int, int, int, int, int);
-int FUN_002c415c(unsigned int *);
-int FUN_002c4938(...);
+int memAlloc(int, int, int, int, int, int);
+int asdMemFree(unsigned int *);
+int memClear(...);
 int rt_memcpy_w(...);
 
 typedef struct fn_001e1a70_arg0 fn_001e1a70_arg0;
@@ -40,10 +40,10 @@ typedef struct {
 /* Supplied declaration required: FUN_0028c6b8. */
 /* Supplied declaration required: FUN_002a3d58. */
 /* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c32a0. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
-extern unsigned int *FUN_002c5c14(fn_001e1a70_arg0 *, unsigned char *, unsigned int, unsigned int);
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
+extern unsigned int *asdLoadFileSync(fn_001e1a70_arg0 *, unsigned char *, unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -65,10 +65,10 @@ unsigned int * FUN_001e1a70(fn_001e1a70_arg0 *param_1)
   unsigned char temp_v8;
   unsigned char temp_v9 [4];
   
-  puVar2 = (unsigned int *)FUN_002c5c14(param_1,temp_v9,1,0x80);
+  puVar2 = (unsigned int *)asdLoadFileSync(param_1,temp_v9,1,0x80);
   puVar3 = (unsigned int *)0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0x90,0x10,1);
-  FUN_002c4938();
+  memAlloc(0x10000,0x100,0,0x90,0x10,1);
+  memClear();
   puVar3[0x20] = 0;
   puVar3[0x21] = 0;
   FUN_002a3d58(puVar3);
@@ -103,7 +103,7 @@ unsigned int * FUN_001e1a70(fn_001e1a70_arg0 *param_1)
 LAB_001e1b4c:
         FUN_0025c870();
         rt_memcpy_w();
-        FUN_002c4938(temp_v0,0x90);
+        memClear(temp_v0,0x90);
         *(unsigned int *)(temp_v0 + 0x84) = 1;
         *(unsigned char *)(temp_v0 + 0x88) = 8;
         *(unsigned char *)(temp_v0 + 0x89) = 0;
@@ -160,7 +160,7 @@ LAB_001e1c50:
       *(unsigned int *)(temp_v0 + 0x98) = *puVar1;
     } while (temp_v6 < (unsigned int)puVar2[0x20]);
   }
-  FUN_002c415c(puVar2);
+  asdMemFree(puVar2);
   return puVar3;
 }
 

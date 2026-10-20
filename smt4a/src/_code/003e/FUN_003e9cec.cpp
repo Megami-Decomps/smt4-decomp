@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184310(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_002e6dd4(...);
 int FUN_004bd274(...);
 int FUN_004bd294(...);
@@ -36,7 +36,7 @@ struct fn_003e9cec_arg2 {
 
 extern unsigned int FUN_0017760c(fn_003e9cec_arg2 *);
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
 extern unsigned short FUN_004bca20(fn_003e9cec_arg2 *);
 /* Supplied declaration required: FUN_004bd274. */
@@ -151,7 +151,7 @@ void FUN_003e9cec(unsigned int param_1,unsigned char *param_2,fn_003e9cec_arg2 *
   *(unsigned int *)(param_2 + 0x11c) = temp_v5;
   *(unsigned int *)(param_2 + 0x120) = temp_v6;
   *(unsigned int *)(param_2 + 0x124) = temp_v7;
-  FUN_002e6354(param_2 + 0x17c,0x15);
+  sysMemClear(param_2 + 0x17c,0x15);
   *(unsigned int *)(param_2 + 0x191) = 0;
   *(unsigned int *)(param_2 + 0x195) = 0;
   *(unsigned int *)(param_2 + 0x199) = 0;

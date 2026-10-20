@@ -2,16 +2,16 @@
 
 extern "C" {
 
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 
 typedef int romwright_code(...);
-extern unsigned char DAT_005b3274[]; /* 0x5b3274 */
+extern unsigned char g_handlerTable[]; /* 0x5b3274 */
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_001836b0(int param_1)
@@ -28,26 +28,26 @@ void FUN_001836b0(int param_1)
     if ((*(unsigned int *)(temp_v0 + 0x98) & 1) == 0) {
       temp_v1 = *(int *)(temp_v0 + 0x90);
       if (*(int *)(temp_v1 + 8) != 0) {
-        (**(romwright_code **)(DAT_005b3274 + (unsigned int)*(unsigned short *)(temp_v1 + 4) * 0x44 + 0x10))(*(int *)(temp_v1 + 8));
+        (**(romwright_code **)(g_handlerTable + (unsigned int)*(unsigned short *)(temp_v1 + 4) * 0x44 + 0x10))(*(int *)(temp_v1 + 8));
       }
       if (*(int *)(temp_v1 + 0x18) != 0) {
-        FUN_0019a5a0(*(int *)(temp_v1 + 0x18));
+        asdMemFree(*(int *)(temp_v1 + 0x18));
         *(unsigned int *)(temp_v1 + 0x10) = 0;
         *(unsigned int *)(temp_v1 + 0x14) = 0;
         *(unsigned int *)(temp_v1 + 0x18) = 0;
       }
       if (*(int *)(temp_v1 + 0x28) != 0) {
-        FUN_0019a5a0(*(int *)(temp_v1 + 0x28));
+        asdMemFree(*(int *)(temp_v1 + 0x28));
         *(unsigned int *)(temp_v1 + 0x20) = 0;
         *(unsigned int *)(temp_v1 + 0x24) = 0;
         *(unsigned int *)(temp_v1 + 0x28) = 0;
       }
-      FUN_0019a5a0(temp_v1);
+      asdMemFree(temp_v1);
     }
-    FUN_0019a5a0(temp_v0);
+    asdMemFree(temp_v0);
     temp_v0 = temp_v2;
   }
-  FUN_0019a5a0(param_1);
+  asdMemFree(param_1);
   return;
 }
 

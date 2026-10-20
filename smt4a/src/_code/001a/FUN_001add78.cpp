@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100380(...);
+int libc_sprintf(...);
 int FUN_002e342c(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -12,8 +12,8 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00100380. */
-extern unsigned int FUN_002e3390(int);
+/* Supplied declaration required: libc_sprintf. */
+extern unsigned int wstrlen(int);
 /* Supplied declaration required: FUN_002e342c. */
 
 
@@ -25,7 +25,7 @@ void FUN_001add78(int param_1,int param_2)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_002e3390(param_2);
+  temp_v0 = wstrlen(param_2);
   if ((int)temp_v0 >= 9) {
     temp_v0 = 8;
   }
@@ -47,7 +47,7 @@ void FUN_001add78(int param_1,int param_2)
   }
   while( 1 ) {
     if ((int)temp_v0 <= (int)temp_v1) {
-      FUN_00100380(param_1 + 0x2c,"rom:/%s",param_2);
+      libc_sprintf(param_1 + 0x2c,"rom:/%s",param_2);
       return;
     }
     if ((*(char *)(param_2 + temp_v1) == ':') || (*(char *)(param_2 + temp_v1 + 1) == ':')) break;

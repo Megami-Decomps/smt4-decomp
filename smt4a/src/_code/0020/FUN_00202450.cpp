@@ -11,7 +11,7 @@ int FUN_00335060(int);
 
 typedef int romwright_code(...);
 extern int DAT_0057f108; /* 0x57f108 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
 extern int FUN_001692ac(unsigned int, unsigned int);
@@ -36,8 +36,8 @@ unsigned int FUN_00202450(void)
   int *piVar7;
   
   temp_v5 = DAT_0057f108;
-  FUN_00157558(DAT_0059dbb4);
-  temp_v2 = DAT_0059dbb4;
+  FUN_00157558(g_renderCtx);
+  temp_v2 = g_renderCtx;
   temp_v0 = FUN_001692ac(1,0);
   piVar7 = (int *)(temp_v2 + 0x1258);
   temp_v3 = *piVar7;
@@ -118,8 +118,8 @@ joined_r0x00202628:
     }
   }
 LAB_00202664:
-  temp_v5 = DAT_0059dbb4;
-  piVar7 = (int *)(DAT_0059dbb4 + 0x1258);
+  temp_v5 = g_renderCtx;
+  piVar7 = (int *)(g_renderCtx + 0x1258);
   temp_v2 = *piVar7;
   temp_v0 = piVar7[temp_v2 + 2];
   *piVar7 = temp_v2 - 1;
@@ -127,8 +127,8 @@ LAB_00202664:
     (**(romwright_code **)(temp_v5 + 0x1274))();
     *(unsigned char *)(temp_v5 + 0x1270) = 0;
   }
-  FUN_0016c560(DAT_0059dbb4);
-  FUN_0016c410(DAT_0059dbb4);
+  FUN_0016c560(g_renderCtx);
+  FUN_0016c410(g_renderCtx);
   return 0;
 }
 

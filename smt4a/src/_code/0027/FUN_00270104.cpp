@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_0019de98(unsigned int, unsigned int);
 int FUN_0032d0c8(unsigned int, int, int, unsigned int);
 int FUN_00342348(int);
@@ -23,13 +23,13 @@ typedef struct {
 extern unsigned char DAT_00573b88; /* 0x573b88 */
 extern unsigned int DAT_00573bcc; /* 0x573bcc */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 extern unsigned int FUN_001801a4(void);
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
-extern unsigned int FUN_0019e4d4(unsigned short);
+extern unsigned int slotRecordFindById(unsigned short);
 extern int FUN_001ab854(void);
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 extern int FUN_002a4860(unsigned int);
 extern int FUN_002a4894(unsigned int);
 extern int FUN_002cc9e0(int, unsigned int);
@@ -104,14 +104,14 @@ void FUN_00270104(int param_1)
       }
     }
     else {
-      temp_v1 = FUN_0014aa78();
+      temp_v1 = btlGetMainState();
       if (!((*(unsigned int *)(temp_v1 + 0x45a8) & (*(unsigned int *)((unsigned char *)&DAT_00573b88 + 0x40))) == 0 &&
            (*(unsigned int *)(temp_v1 + 0x45ac) & DAT_00573bcc) == 0)) {
-        temp_v3 = FUN_0014aa78();
+        temp_v3 = btlGetMainState();
         temp_v4 = FUN_003ef9b8(temp_v3,temp_v4);
       }
       else {
-        FUN_0014aa78();
+        btlGetMainState();
         temp_v4 = 0;
       }
       if (temp_v4 == 0) {
@@ -126,17 +126,17 @@ void FUN_00270104(int param_1)
     if (temp_v0 != -1) {
       if (temp_v4 == 0) {
         if (temp_v0 == -2) {
-          temp_v1 = FUN_002919a4();
-          temp_v3 = FUN_0019e4d4(*(unsigned short *)(temp_v1 + 0x62));
+          temp_v1 = btlMainGetUnk14();
+          temp_v3 = slotRecordFindById(*(unsigned short *)(temp_v1 + 0x62));
           FUN_0032d0c8(*puVar6,2,*(unsigned short *)(temp_v1 + 0x62),temp_v3);
           return;
         }
         temp_v1 = FUN_001ab854();
-        temp_v3 = FUN_0019e4d4(*(unsigned short *)(temp_v1 + 0x62));
+        temp_v3 = slotRecordFindById(*(unsigned short *)(temp_v1 + 0x62));
         FUN_0032d0c8(*puVar6,2,*(unsigned short *)(temp_v1 + 0x62),temp_v3);
         return;
       }
-      temp_v1 = FUN_0014aa78();
+      temp_v1 = btlGetMainState();
       if ((*(unsigned int *)(temp_v1 + 0x45ac) & DAT_00573bcc) != 0 ||
           (*(unsigned int *)(temp_v1 + 0x45a8) & (*(unsigned int *)((unsigned char *)&DAT_00573b88 + 0x40))) != 0) {
         FUN_00359b6c(temp_v4);
@@ -175,7 +175,7 @@ void FUN_00270104(int param_1)
       else {
         temp_v1 = -1;
       }
-      temp_v2 = FUN_0014aa78();
+      temp_v2 = btlGetMainState();
       if (!((*(unsigned int *)(temp_v2 + 0x45a8) & (*(unsigned int *)((unsigned char *)&DAT_00573b88 + 0x40))) == 0 &&
            (*(unsigned int *)(temp_v2 + 0x45ac) & DAT_00573bcc) == 0)) {
         temp_v4 = temp_v4 + temp_v1 + 1;

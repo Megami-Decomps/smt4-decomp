@@ -4,9 +4,9 @@
 
 extern "C" {
 
-extern unsigned int *DAT_0057f4c0; /* 0x57f4c0 */
+extern unsigned int *g_event3dOpening; /* 0x57f4c0 */
 
-extern int FUN_00163e40(unsigned int);
+extern int jobIsValid(unsigned int);
 
 
 void FUN_003bb45c(void)
@@ -15,9 +15,9 @@ void FUN_003bb45c(void)
   unsigned int *puVar1;
   int temp_v0;
   
-  if ((DAT_0057f4c0 != (unsigned int *)0x0) &&
-     (temp_v0 = FUN_00163e40(*DAT_0057f4c0), puVar1 = DAT_0057f4c0, temp_v0 != 0)) {
-    DAT_0057f4c0[0x15a] = 4;
+  if ((g_event3dOpening != (unsigned int *)0x0) &&
+     (temp_v0 = jobIsValid(*g_event3dOpening), puVar1 = g_event3dOpening, temp_v0 != 0)) {
+    g_event3dOpening[0x15a] = 4;
     puVar1[0x15b] = 0;
   }
   return;

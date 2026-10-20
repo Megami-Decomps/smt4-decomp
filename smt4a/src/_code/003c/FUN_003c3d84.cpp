@@ -10,7 +10,7 @@ extern unsigned char DAT_005f1776; /* 0x5f1776 */
 extern unsigned int DAT_005f1778; /* 0x5f1778 */
 extern unsigned char DAT_005f177c; /* 0x5f177c */
 
-extern unsigned int FUN_00236038(void);
+extern unsigned int scrGetArg(void);
 extern unsigned int FUN_002360dc(unsigned int);
 /* Supplied declaration required: FUN_002e342c. */
 
@@ -22,7 +22,7 @@ unsigned int FUN_003c3d84(void)
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_00236038();
+  temp_v0 = scrGetArg();
   temp_v1 = FUN_002360dc(1);
   DAT_005f1776 = 1;
   DAT_005f1778 = temp_v0;

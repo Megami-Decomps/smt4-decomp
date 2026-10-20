@@ -1,39 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ecd94` (_code @ 0x3ecd94, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00573920; /* 0x573920 */
+/* Sub-object embedded in each party entry. */
+typedef struct {
+    u8 unk00[0x62];
+    u16 unk62;          /* 0x62 */
+} PartySub;
 
-extern int FUN_004bd340(int, unsigned int);
+/* One 300-byte party entry. */
+typedef struct {
+    u8 unk00[0x68];
+    PartySub sub;       /* 0x68 */
+    u8 unk_end[300 - 0x68 - sizeof(PartySub)];
+} PartyEntry;
 
+/* Party block: an array of PartyEntry from offset 0, the live entry count at 0x1ca3. */
+typedef struct {
+    u8 unk00[0x1ca3];
+    u8 count;           /* 0x1ca3 */
+} PartyBlock;
 
-unsigned int FUN_003ecd94(int param_1)
+/* Global game state: party block pointer at 0xc and a checked object at 0x14. */
+typedef struct {
+    u8 unk00[0xc];
+    PartyBlock *party;  /* 0x0c */
+    u8 unk10[4];
+    void *unk14;        /* 0x14 */
+} GameState;
 
+extern GameState g_btlMain;
+
+int FUN_004bd340(void *object, int arg);
+
+/* Returns 1 when the object at 0x14 or some live party entry still fails the FUN_004bd340 check. */
+u32 FUN_003ecd94(u8 *owner)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  if ((*(int *)(param_1 + 300) != 0) && ((*(unsigned int *)((unsigned char *)&DAT_00573920 + 0xc)) != 0)) {
-    if (((*(int *)((unsigned char *)&DAT_00573920 + 0x14)) != 0) && (temp_v0 = FUN_004bd340((*(int *)((unsigned char *)&DAT_00573920 + 0x14)),1), temp_v0 == 0)) {
-      return 1;
+    int i;
+
+    if (*(int *)(owner + 300) == 0) {
+        return 0;
     }
-    for (temp_v0 = 0; temp_v0 < (int)(unsigned int)*(unsigned char *)((*(unsigned int *)((unsigned char *)&DAT_00573920 + 0xc)) + 0x1ca3); temp_v0++) {
-      temp_v1 = (*(unsigned int *)((unsigned char *)&DAT_00573920 + 0xc)) + temp_v0 * 300;
-      temp_v2 = temp_v1 + 0x68;
-      temp_v3 = (*(unsigned int *)((unsigned char *)&DAT_00573920 + 0xc));
-      if (temp_v2 != 0) {
-        temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
-      }
-      if ((temp_v2 != 0 && temp_v3 != 0) && (temp_v1 = FUN_004bd340(temp_v2,1), temp_v1 == 0)) {
+    if (g_btlMain.party == NULL) {
+        return 0;
+    }
+    if (g_btlMain.unk14 != NULL && FUN_004bd340(g_btlMain.unk14, 1) == 0) {
         return 1;
-      }
     }
-  }
-  return 0;
+    for (i = 0; i < g_btlMain.party->count; i++) {
+        PartyEntry *entry = &((PartyEntry *)g_btlMain.party)[i];
+        PartySub *sub = &entry->sub;
+
+        if (sub != NULL && sub->unk62 != 0 && FUN_004bd340(sub, 1) == 0) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 } /* extern "C" */

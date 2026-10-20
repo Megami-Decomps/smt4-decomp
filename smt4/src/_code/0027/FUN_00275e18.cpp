@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00447600; /* 0x447600 */
+extern int g_mapEnemy; /* 0x447600 */
 extern unsigned short DAT_0049fab0; /* 0x49fab0 */
 extern unsigned char DAT_0049fab5; /* 0x49fab5 */
 
@@ -14,8 +14,8 @@ void FUN_00275e18(void)
 {
   int temp_v0;
   
-  temp_v0 = DAT_00447600;
-  *(unsigned int *)(DAT_00447600 + 4) = 4;
+  temp_v0 = g_mapEnemy;
+  *(unsigned int *)(g_mapEnemy + 4) = 4;
   *(unsigned int *)(temp_v0 + 8) = 0;
   DAT_0049fab0 = 0;
   DAT_0049fab5 = 0;

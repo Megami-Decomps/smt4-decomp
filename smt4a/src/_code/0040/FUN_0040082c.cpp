@@ -23,7 +23,7 @@ extern unsigned int DAT_00573cb8; /* 0x573cb8 */
 extern unsigned int DAT_00573cbc; /* 0x573cbc */
 
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00192550. */
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_003ff73c. */
@@ -52,7 +52,7 @@ unsigned int FUN_0040082c(int param_1)
       FUN_004009d0(temp_v1,1);
       return temp_v1;
     }
-    temp_v2 = FUN_0014aa78();
+    temp_v2 = btlGetMainState();
     if ((*(unsigned int *)(temp_v2 + 0x45ac) & DAT_00573cbc) == 0 &&
         (*(unsigned int *)(temp_v2 + 0x45a8) & DAT_00573cb8) == 0) {
       if ((*(unsigned int *)(param_1 + 0x68) & 0x10) != 0) {

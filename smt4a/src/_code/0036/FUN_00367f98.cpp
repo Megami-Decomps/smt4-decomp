@@ -1,14 +1,12 @@
-#include "romwright_types.h"
+#include "map/lmapMain.h"
 
 extern "C" {
 
-extern int DAT_00581288; /* 0x581288 */
+extern LmapSceneA *g_lmapScene;
 
-
-unsigned int FUN_00367f98(void)
-
+u32 FUN_00367f98(void)
 {
-  return *(unsigned int *)(DAT_00581288 + 0x1d0);
+    return g_lmapScene->unk1D0;
 }
 
 } /* extern "C" */

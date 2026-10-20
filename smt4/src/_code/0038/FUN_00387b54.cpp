@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00234974(int);
 int FUN_0023499c(int *, int, int);
-int FUN_002c564c(int);
+int jyoucyuGetTableEntry(int);
 int FUN_00354608(int *, int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -15,13 +15,13 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_00234974. */
 /* Supplied declaration required: FUN_0023499c. */
 extern unsigned char *FUN_002a1130(unsigned int, unsigned int);
 extern int FUN_002a12d8(unsigned char *);
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00354608. */
 
 
@@ -44,20 +44,20 @@ void FUN_00387b54(unsigned int param_1,int param_2)
     temp_v0 = FUN_002a12d8(puVar1 + 4);
     if (((temp_v0 == -0x377ec76c) || (temp_v0 = FUN_002a12d8(puVar1 + 4), temp_v0 == -0x377ec779)) ||
        (temp_v0 = FUN_002a12d8(puVar1 + 4), temp_v0 == -0x36bec6eb)) {
-      FUN_002c564c(0);
+      jyoucyuGetTableEntry(0);
       return;
     }
     *puVar1 = 0x6a;
     *(unsigned int *)(puVar1 + 0x10) = 0x96;
   }
   else {
-    FUN_0023499c(&temp_v1,DAT_00432fc8 + 0x28,DAT_00432fc8 + 0x18);
+    FUN_0023499c(&temp_v1,g_aocMain + 0x28,g_aocMain + 0x18);
     *(unsigned int *)(puVar1 + 4) = temp_v1;
     *(unsigned int *)(puVar1 + 8) = uStack_14;
     temp_v0 = FUN_002a12d8(puVar1 + 4);
     if (-1 < temp_v0) {
-      FUN_00234974(DAT_00432fc8 + 0x28);
-      *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) | 0x10000;
+      FUN_00234974(g_aocMain + 0x28);
+      *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) | 0x10000;
       return;
     }
     *puVar1 = 100;

@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_0013dd78(unsigned int);
 int FUN_001836b0(unsigned int);
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_00222104(void);
 int FUN_00222434(void);
 int FUN_002b2f08(unsigned int);
@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0013dd78. */
 /* Supplied declaration required: FUN_001836b0. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_00222104. */
 /* Supplied declaration required: FUN_00222434. */
 /* Supplied declaration required: FUN_002b2f08. */
@@ -42,7 +42,7 @@ void FUN_002b40ec(unsigned int *param_1)
     for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0 = temp_v0 + 1) {
       FUN_0013dd78(*(unsigned int *)(param_1[0xd] + temp_v0 * 4));
     }
-    FUN_0019a5a0(param_1[0xe]);
+    asdMemFree(param_1[0xe]);
   }
   if (param_1[0x10] != 0) {
     temp_v0 = 0;
@@ -55,7 +55,7 @@ void FUN_002b40ec(unsigned int *param_1)
     for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0 = temp_v0 + 1) {
       FUN_001836b0(*(unsigned int *)(param_1[0xf] + temp_v0 * 4));
     }
-    FUN_0019a5a0(param_1[0x10]);
+    asdMemFree(param_1[0x10]);
   }
   if (param_1[0x11] != 0) {
     FUN_00222104();
@@ -69,7 +69,7 @@ void FUN_002b40ec(unsigned int *param_1)
   if (param_1[0x14] != 0) {
     FUN_002ce8d8();
   }
-  FUN_0019a5a0(param_1);
+  asdMemFree(param_1);
   return;
 }
 

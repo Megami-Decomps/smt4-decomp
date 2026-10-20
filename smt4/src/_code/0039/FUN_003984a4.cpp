@@ -8,11 +8,11 @@ int FUN_0028d6d0(void);
 int FUN_00297060(unsigned int, unsigned int);
 int FUN_0029f848(unsigned char *, int, int, int, int, int);
 int FUN_002af5c0(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int FUN_002c312c(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int FUN_002c4c2c(int);
+int asdTMTexTableLoadSprites(int);
 int FUN_002c58c8(int, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
 
@@ -40,11 +40,11 @@ extern unsigned int *FUN_00288f60(void);
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: FUN_002af5c0. */
 extern unsigned int *FUN_002bd1fc(void);
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c4c2c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c58c8. */
 extern unsigned int FUN_002c5c04(unsigned char *);
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -129,7 +129,7 @@ void FUN_003984a4(unsigned char *param_1)
   *(unsigned int *)(param_1 + 0xca) = *(unsigned int *)(param_1 + 0xb8);
   *(unsigned int *)(param_1 + 0xce) = *(unsigned int *)(param_1 + 0xbc);
   *(unsigned short *)(param_1 + 0xd2) = *(unsigned short *)(param_1 + 0xc0);
-  FUN_002c4c2c(0x2e);
+  asdTMTexTableLoadSprites(0x2e);
   FUN_002c58c8(0x2e,0);
   FUN_0029f848(param_1 + 0x580,0x69,7,0xf,1,1);
   FUN_0029f848(param_1 + 0x5e4,3,1,3,1,1);
@@ -145,7 +145,7 @@ void FUN_003984a4(unsigned char *param_1)
   FUN_002bd954(param_1 + 0x67c,0x2e,0,puVar3,1);
   FUN_002bee58(param_1 + 0x67c,0);
   FUN_002bd954(param_1 + 0x708,0x2e,0,puVar3,1);
-  FUN_002bd8e8(param_1 + 0x708,0);
+  timerStart(param_1 + 0x708,0);
   FUN_002bd954(param_1 + 0x794,0x2e,0,puVar3,1);
   FUN_002af5c0(param_1 + 0x794,0);
   FUN_0028d6d0();

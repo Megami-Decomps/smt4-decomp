@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a9a4c(void);
+int btlActionFreeData(void);
 int FUN_001e1874(unsigned int *);
 int FUN_002523f0(void);
 int FUN_0026a958(int);
@@ -12,12 +12,12 @@ int FUN_00288728(void);
 int FUN_00294f64(void);
 int FUN_00295ba4(int);
 int FUN_0029b074(void);
-int FUN_002a7218(void);
+int scrScriptProcessDestroy(void);
 int FUN_002b2368(int);
 int FUN_002c3f5c(void);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int FUN_002c415c(void);
-int FUN_002c43b4(unsigned int, int);
+int asdMemFree(void);
+int jobStop(unsigned int, int);
 int FUN_002c526c(void);
 int FUN_00310ac0(void);
 int FUN_00337a34(unsigned int *);
@@ -30,13 +30,13 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern unsigned int *DAT_00435d90; /* 0x435d90 */
+extern unsigned int *g_btlMainState; /* 0x435d90 */
 extern int DAT_00435d94; /* 0x435d94 */
 extern int DAT_00435d98; /* 0x435d98 */
 extern int DAT_00439ca8; /* 0x439ca8 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_001a9a4c. */
+/* Supplied declaration required: btlActionFreeData. */
 /* Supplied declaration required: FUN_001e1874. */
 /* Supplied declaration required: FUN_002523f0. */
 /* Supplied declaration required: FUN_0026a958. */
@@ -44,13 +44,13 @@ extern int DAT_00439ca8; /* 0x439ca8 */
 /* Supplied declaration required: FUN_00294f64. */
 /* Supplied declaration required: FUN_00295ba4. */
 /* Supplied declaration required: FUN_0029b074. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002b2368. */
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002c3f5c. */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_00310ac0. */
 /* Supplied declaration required: FUN_00337a34. */
@@ -69,9 +69,9 @@ void FUN_0020f04c(void)
   int iStack_20;
   unsigned char temp_v1 [4];
   
-  puVar1 = DAT_00435d90;
-  *(unsigned char *)(DAT_00435d90 + 0x18) = 1;
-  FUN_001a9a4c();
+  puVar1 = g_btlMainState;
+  *(unsigned char *)(g_btlMainState + 0x18) = 1;
+  btlActionFreeData();
   FUN_0026a958(0);
   if (DAT_00439ca8 != 0) {
     FUN_001e1874(puVar1);
@@ -101,7 +101,7 @@ void FUN_0020f04c(void)
     *piVar4 = 0;
   }
   if (puVar1[0x127d] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     puVar1[0x127d] = 0;
   }
   puVar1[0x1282] = 0xffffffff;
@@ -139,47 +139,47 @@ void FUN_0020f04c(void)
     puVar1[0x893] = 0;
   }
   if (puVar1[0x895] != 0) {
-    FUN_002a7218();
+    scrScriptProcessDestroy();
     puVar1[0x895] = 0;
   }
   if (puVar1[0x894] != 0) {
     puVar1[0x894] = 0;
   }
   if (puVar1[0x1291] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     puVar1[0x1291] = 0;
   }
   if (puVar1[0x1292] != 0) {
-    FUN_002a7218();
+    scrScriptProcessDestroy();
     puVar1[0x1292] = 0;
   }
   puVar1[0x1293] = 0;
   if (puVar1[0x8c4] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     puVar1[0x8c4] = 0;
   }
   if (puVar1[0x7a2] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     puVar1[0x7a2] = 0;
   }
   if (puVar1[0x7f0] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     puVar1[0x7f0] = 0;
   }
   if (puVar1[0x7a6] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     puVar1[0x7a6] = 0;
   }
   if (puVar1[0x7ef] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     puVar1[0x7ef] = 0;
   }
   if (DAT_00435d94 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     DAT_00435d94 = 0;
   }
   if (DAT_00435d98 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     DAT_00435d98 = 0;
   }
   temp_v0 = 0;
@@ -193,13 +193,13 @@ void FUN_0020f04c(void)
   FUN_00310ac0();
   FUN_002523f0();
   FUN_00295ba4(1);
-  temp_v0 = FUN_002bf244(*puVar1);
+  temp_v0 = jobIsValid(*puVar1);
   if (temp_v0 != 0) {
-    FUN_002c43b4(*puVar1,0);
+    jobStop(*puVar1,0);
   }
-  if (DAT_00435d90 != (unsigned int *)0x0) {
-    FUN_002c415c();
-    DAT_00435d90 = (unsigned int *)0x0;
+  if (g_btlMainState != (unsigned int *)0x0) {
+    asdMemFree();
+    g_btlMainState = (unsigned int *)0x0;
   }
   return;
 }

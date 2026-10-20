@@ -1,51 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024febc` (_code @ 0x24febc, 0x1d8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-float * FUN_0024febc(float *param_1,float *param_2,int param_3)
-
+/* Applies the scale vector (x, y, z) to the 4x4 matrix `m` (16 floats).
+ * mode 0: m becomes the scale matrix; mode 1: rows 0-2 are scaled by x, y, z respectively;
+ * mode 2: columns 0-2 are scaled by x, y, z in every row. Returns m, or NULL for an unknown mode. */
+f32 *FUN_0024febc(f32 *m, const f32 *scale, int mode)
 {
-  if (param_3 == 0) {
-    *param_1 = param_1[5] = param_1[10] = param_1[0xf] = 1.0f;
-    param_1[1] = param_1[2] = param_1[4] = param_1[3] = 0.0f;
-    param_1[6] = param_1[8] = param_1[9] = param_1[7] = 0.0f;
-    param_1[0xc] = param_1[0xd] = param_1[0xe] = param_1[0xb] = 0.0f;
-    *param_1 = *param_2;
-    param_1[5] = param_2[1];
-    param_1[10] = param_2[2];
-    return param_1;
-  }
-  if (param_3 != 1) {
-    if (param_3 == 2) {
-      *param_1 = *param_1 * *param_2;
-      param_1[1] = param_1[1] * param_2[1];
-      param_1[2] = param_1[2] * param_2[2];
-      param_1[4] = param_1[4] * *param_2;
-      param_1[5] = param_1[5] * param_2[1];
-      param_1[6] = param_1[6] * param_2[2];
-      param_1[8] = param_1[8] * *param_2;
-      param_1[9] = param_1[9] * param_2[1];
-      param_1[10] = param_1[10] * param_2[2];
-      param_1[0xc] = param_1[0xc] * *param_2;
-      param_1[0xd] = param_1[0xd] * param_2[1];
-      param_1[0xe] = param_1[0xe] * param_2[2];
-      return param_1;
+    if (mode == 0) {
+        m[0] = m[5] = m[10] = m[15] = 1.0f;
+        m[1] = m[2] = m[4] = m[3] = 0.0f;
+        m[6] = m[8] = m[9] = m[7] = 0.0f;
+        m[12] = m[13] = m[14] = m[11] = 0.0f;
+        m[0] = scale[0];
+        m[5] = scale[1];
+        m[10] = scale[2];
+        return m;
     }
-    return 0;
-  }
-  *param_1 = *param_1 * *param_2;
-  param_1[1] = param_1[1] * *param_2;
-  param_1[2] = param_1[2] * *param_2;
-  param_1[4] = param_1[4] * param_2[1];
-  param_1[5] = param_1[5] * param_2[1];
-  param_1[6] = param_1[6] * param_2[1];
-  param_1[8] = param_1[8] * param_2[2];
-  param_1[9] = param_1[9] * param_2[2];
-  param_1[10] = param_1[10] * param_2[2];
-  return param_1;
+    if (mode != 1) {
+        if (mode == 2) {
+            m[0] = m[0] * scale[0];
+            m[1] = m[1] * scale[1];
+            m[2] = m[2] * scale[2];
+            m[4] = m[4] * scale[0];
+            m[5] = m[5] * scale[1];
+            m[6] = m[6] * scale[2];
+            m[8] = m[8] * scale[0];
+            m[9] = m[9] * scale[1];
+            m[10] = m[10] * scale[2];
+            m[12] = m[12] * scale[0];
+            m[13] = m[13] * scale[1];
+            m[14] = m[14] * scale[2];
+            return m;
+        }
+        return NULL;
+    }
+    m[0] = m[0] * scale[0];
+    m[1] = m[1] * scale[0];
+    m[2] = m[2] * scale[0];
+    m[4] = m[4] * scale[1];
+    m[5] = m[5] * scale[1];
+    m[6] = m[6] * scale[1];
+    m[8] = m[8] * scale[2];
+    m[9] = m[9] * scale[2];
+    m[10] = m[10] * scale[2];
+    return m;
 }
 
 } /* extern "C" */

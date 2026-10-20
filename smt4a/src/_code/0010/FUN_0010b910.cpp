@@ -9,7 +9,7 @@ int FUN_002e9318(unsigned char [8]);
 int FUN_002e9ec8(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea446(int, int);
-int FUN_002f4ba8(int, int, int, int);
+int onlineObjectThreadRootStart(int, int, int, int);
 int FUN_002f5898(int, unsigned int);
 int FUN_002f5908(unsigned char *, unsigned char [4]);
 
@@ -33,7 +33,7 @@ extern int FUN_002e9af4(void);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea446. */
-/* Supplied declaration required: FUN_002f4ba8. */
+/* Supplied declaration required: onlineObjectThreadRootStart. */
 extern int FUN_002f587c(void);
 /* Supplied declaration required: FUN_002f5898. */
 extern unsigned int *FUN_002f58d0(int, unsigned char *, unsigned int);
@@ -92,7 +92,7 @@ void FUN_0010b910(int param_1)
       *(unsigned int *)(temp_v0 + 0x28) = 0;
       *(int *)(temp_v0 + 0x2c) = param_1;
       *(unsigned int *)(temp_v0 + 0x30) = 0;
-      FUN_002f4ba8(temp_v0,0,0,temp_v0 + 0x34);
+      onlineObjectThreadRootStart(temp_v0,0,0,temp_v0 + 0x34);
       temp_v1 = FUN_002ea3c0(temp_v5,0x10ba71,0,&LAB_0010ba0c);
       FUN_002ea3d0(param_1,temp_v1);
     }

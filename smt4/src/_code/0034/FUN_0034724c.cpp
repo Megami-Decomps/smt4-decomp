@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023b6d8(int);
+int asdPrimAlloc(int);
 int FUN_0023b7d8(int, int, unsigned int *);
 int FUN_00346f2c(int);
 int rt_memcpy(void);
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0023b6d8. */
+/* Supplied declaration required: asdPrimAlloc. */
 /* Supplied declaration required: FUN_0023b7d8. */
 extern unsigned int FUN_002bc11c(int);
 /* Supplied declaration required: FUN_00346f2c. */
@@ -34,7 +34,7 @@ void FUN_0034724c(int param_1)
       FUN_00346f2c(param_1);
       temp_v2 = *(int *)(param_1 + 0x18);
       temp_v0 = temp_v2 << 1;
-      FUN_0023b6d8(temp_v0);
+      asdPrimAlloc(temp_v0);
       rt_memcpy();
       temp_v1 = FUN_002bc11c(temp_v0);
       *(unsigned int *)(param_1 + 0x7dc) = temp_v1;

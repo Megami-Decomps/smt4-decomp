@@ -31,7 +31,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002c18e4. */
@@ -54,8 +54,8 @@ void FUN_003a8884(fn_003a8884_arg0 *param_1)
       *(unsigned int *)&param_1->field_0x594 = 0x1f;
       FUN_003a9440(param_1);
     }
-    FUN_002c198c(DAT_0044ea00);
-    FUN_002c18e4(DAT_0044ea00);
+    FUN_002c198c(g_titleScene);
+    FUN_002c18e4(g_titleScene);
     return;
   }
   return;

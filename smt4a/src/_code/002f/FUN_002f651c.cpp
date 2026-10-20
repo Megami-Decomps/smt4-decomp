@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002f670c(unsigned int *, int);
-int aeabi_uidivmod(unsigned int, int);
+int __aeabi_uidivmod(unsigned int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_002f670c. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 unsigned long long FUN_002f651c(unsigned int *param_1,int param_2)
@@ -62,7 +62,7 @@ unsigned long long FUN_002f651c(unsigned int *param_1,int param_2)
     temp_v0 = (param_1[temp_v0] >> 0xb) ^ param_1[temp_v0];
     temp_v0 = ((temp_v0 & 0x13a58ad) << 7) ^ temp_v0;
     temp_v0 = ((temp_v0 & 0x1df8c) << 0xf) ^ temp_v0;
-    aeabi_uidivmod((temp_v0 >> 0x12) ^ temp_v0,param_2);
+    __aeabi_uidivmod((temp_v0 >> 0x12) ^ temp_v0,param_2);
     temp_v1 = temp_v2;
   }
   return romwright_piece_4_4(uStack_20,temp_v1);

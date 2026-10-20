@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern unsigned char FUN_00236038(unsigned int);
+extern unsigned char scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00314c38. */
 
 
@@ -23,8 +23,8 @@ unsigned int FUN_0035ce64(void)
   unsigned char temp_v0;
   unsigned char temp_v1;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
   FUN_00314c38(temp_v0,temp_v1,0,0,0,0);
   return 1;
 }

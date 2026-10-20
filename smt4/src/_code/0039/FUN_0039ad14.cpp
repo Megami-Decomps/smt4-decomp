@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 extern signed char DAT_0049f934; /* 0x49f934 */
 
@@ -39,7 +39,7 @@ unsigned int FUN_0039ad14(int param_1)
   float temp_v4;
   
   if (((*(unsigned int *)(param_1 + 0x10) & 0x1000) == 0) &&
-     ((DAT_0049f91c != 0x13 || ((DAT_0049f920 != 6 && (DAT_0049f920 != 7 && DAT_0049f920 != 8))))))
+     ((g_gameState != 0x13 || ((DAT_0049f920 != 6 && (DAT_0049f920 != 7 && DAT_0049f920 != 8))))))
   {
     if ((*(unsigned int *)(param_1 + 0x10) & 0x10) != 0) {
       temp_v0 = *(int *)(param_1 + 0x18) + 1;

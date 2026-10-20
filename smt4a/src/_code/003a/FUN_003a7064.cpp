@@ -2,9 +2,9 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_003a7064(int *param_1)
@@ -18,7 +18,7 @@ void FUN_003a7064(int *param_1)
     param_1 = *(int **)(temp_v0 + 0x328);
   }
   if ((temp_v0 != 0 && param_1 != (int *)0x0) && (*param_1 != 0)) {
-    FUN_0019a5a0();
+    asdMemFree();
     **(unsigned int **)(temp_v0 + 0x328) = 0;
   }
   return;

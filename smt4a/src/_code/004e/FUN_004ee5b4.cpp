@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0015f490(...);
 int FUN_00192550(void);
 int FUN_001aba54(void);
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 int FUN_003ece9c(...);
 int FUN_003ed9b4(int);
 int FUN_003eebf4(int, int);
@@ -42,7 +42,7 @@ extern int FUN_0014bef4(unsigned int);
 /* Supplied declaration required: FUN_0015f490. */
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_001aba54. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern int FUN_003e7adc(int);
 extern int FUN_003e8430(int);
 /* Supplied declaration required: FUN_003ece9c. */
@@ -96,7 +96,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
     *(unsigned short *)(param_2[10] + 0x1be) = 2;
     *(unsigned short *)(param_2[10] + 0x1c0) = 0x8f;
     *param_2 = *param_2 | 0x100000;
-    FUN_002e6354(param_2 + 0xe,0x85);
+    sysMemClear(param_2 + 0xe,0x85);
     param_4 = 0;
     FUN_004fbeac(0,0,0,0x48,0);
   }

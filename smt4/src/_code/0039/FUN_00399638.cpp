@@ -1,38 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00399638` (_code @ 0x399638, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads slots[4].confirmed with ldrsb through a computed slot pointer; built folds it into an ldrb at a constant offset. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bf818(int);
+/* 0x8c-byte slot; the signed flag byte at 0x8a marks a confirmed slot. */
+typedef struct {
+    u8 unk00[0x8a];
+    s8 confirmed;       /* 0x8a */
+    u8 unk8b;
+} Slot;
 
-extern int FUN_00292f28(unsigned int);
-/* Supplied declaration required: FUN_002bf818. */
-extern int FUN_002c09d0(unsigned int);
+typedef struct {
+    u8 unk00[4];
+    u32 mode;           /* 0x04 */
+    u32 unk08;          /* 0x08 */
+    u8 unk0c[8];
+    s32 step;           /* 0x14 */
+    u8 unk18[0x600];
+    Slot slots[5];      /* 0x618 */
+} Screen;
 
+int FUN_002bf818(Slot *slot);
+int padIsButtonDown(u32 flag);
+int FUN_002c09d0(u32 mask);
 
-void FUN_00399638(int param_1)
-
+/* Advances the screen one step: updates every slot up to the current step and switches mode when the last slot is confirmed. */
+void FUN_00399638(Screen *screen)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002c09d0(0x400);
-  if ((temp_v0 != 0) && (temp_v0 = FUN_00292f28(0x76), temp_v0 != 0)) {
-    temp_v0 = 0;
-    do {
-      if (temp_v0 <= *(int *)(param_1 + 0x14)) {
-        FUN_002bf818(param_1 + temp_v0 * 0x8c + 0x618);
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 5);
-    if (*(char *)(param_1 + 0x8d2) != '\0') {
-      *(unsigned int *)(param_1 + 4) = 2;
-      *(unsigned int *)(param_1 + 8) = 0;
+    int i;
+
+    if (FUN_002c09d0(0x400) != 0 && padIsButtonDown(0x76) != 0) {
+        i = 0;
+        do {
+            if (i <= screen->step) {
+                FUN_002bf818(&screen->slots[i]);
+            }
+            i++;
+        } while (i < 5);
+        if (screen->slots[4].confirmed != 0) {
+            screen->mode = 2;
+            screen->unk08 = 0;
+        }
+        screen->step++;
     }
-    *(int *)(param_1 + 0x14) = *(int *)(param_1 + 0x14) + 1;
-  }
-  return;
 }
 
 } /* extern "C" */

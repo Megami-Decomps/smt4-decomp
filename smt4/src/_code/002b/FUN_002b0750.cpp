@@ -18,7 +18,7 @@ typedef struct {
 } param_8_stack;
 
 /* Supplied declaration required: FUN_002af63c. */
-extern int FUN_002afef4(unsigned int, int);
+extern int asdTMTexTableCallFileA(unsigned int, int);
 
 
 void FUN_002b0750(unsigned int param_1,unsigned int param_2,int param_3,unsigned int param_4,unsigned int param_5,
@@ -38,7 +38,7 @@ void FUN_002b0750(unsigned int param_1,unsigned int param_2,int param_3,unsigned
   unsigned short temp_v7;
   
   if (param_6 != 0 && param_7 != 0) {
-    temp_v0 = FUN_002afef4(param_2,param_3);
+    temp_v0 = asdTMTexTableCallFileA(param_2,param_3);
     temp_v1 = param_1 | 0x8000;
     temp_v5 = 0;
     iStack_4c = param_6;

@@ -70,7 +70,7 @@ extern int FUN_001946d4(unsigned int, int, unsigned int *);
 /* Supplied declaration required: FUN_00461888. */
 /* Supplied declaration required: FUN_004658c0. */
 extern unsigned int FUN_00466b9c(int, unsigned int, unsigned int *);
-extern int FUN_00507d20(unsigned int, unsigned int);
+extern int vcallSlot5(unsigned int, unsigned int);
 extern int FUN_00508854(int **, int, unsigned int *);
 
 
@@ -143,7 +143,7 @@ FUN_0045e228(int param_1,int param_2,unsigned int *param_3,unsigned int *param_4
   temp_v26 = *param_4;
   temp_v28 = param_4[5];
   if ((temp_v7 == 0) &&
-     (temp_v7 = FUN_00507d20(*(unsigned int *)(param_1 + 0x110),*param_3), param_7 != (int *)0x0)) {
+     (temp_v7 = vcallSlot5(*(unsigned int *)(param_1 + 0x110),*param_3), param_7 != (int *)0x0)) {
     if (*param_7 != 0) {
       temp_v7 = *param_7;
     }
@@ -233,7 +233,7 @@ FUN_0045e228(int param_1,int param_2,unsigned int *param_3,unsigned int *param_4
       temp_v15 = 0xffffffff;
       temp_v1 = FUN_001946d4(*(unsigned int *)(param_1 + 4),temp_v11[temp_v6 * 2],(unsigned int *)&temp_v15);
       if (temp_v1 != 0) {
-        temp_v1 = FUN_00507d20(*(unsigned int *)(param_1 + 0x110),temp_v15);
+        temp_v1 = vcallSlot5(*(unsigned int *)(param_1 + 0x110),temp_v15);
         temp_v11[temp_v6 * 2 + 1] = temp_v1;
         if (temp_v1 != 0) {
           temp_v8 = *(int **)(param_1 + 0x110);

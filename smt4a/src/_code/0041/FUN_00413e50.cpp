@@ -78,7 +78,7 @@ extern unsigned int FUN_0014bef4(unsigned int);
 extern int FUN_0018719c(unsigned int);
 extern int FUN_00237608(void);
 extern unsigned int FUN_002bf520(void);
-extern int FUN_002e6dac(unsigned int);
+extern int rt_malloc(unsigned int);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_002e760a. */
 /* Supplied declaration required: FUN_002e9318. */
@@ -173,7 +173,7 @@ void FUN_00413e50(int param_1)
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   *(unsigned int *)(temp_v0 + 0x14) = 0;
-  temp_v2 = FUN_002e6dac(0x500);
+  temp_v2 = rt_malloc(0x500);
   *(int *)(temp_v0 + 0xc) = temp_v2;
   *(int *)(temp_v0 + 0x10) = temp_v2;
   *(int *)(temp_v0 + 0x14) = temp_v2 + 0x500;

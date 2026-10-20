@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001a081c(unsigned char [60]);
 int FUN_001a5678(int, int *, unsigned char [60], int, int, int, unsigned int, unsigned int);
 int FUN_001a7a20(...);
-int FUN_002e3390(...);
+int wstrlen(...);
 int FUN_0030ea58(int, int);
 
 /* stack frame of param_4: 13 slot(s), 52 byte(s) */
@@ -30,7 +30,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001a081c. */
 /* Supplied declaration required: FUN_001a5678. */
 /* Supplied declaration required: FUN_001a7a20. */
-/* Supplied declaration required: FUN_002e3390. */
+/* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: FUN_0030ea58. */
 
 
@@ -81,7 +81,7 @@ unsigned int FUN_0018f69c(int param_1,int param_2,unsigned int param_3,unsigned 
         if (*(int *)(temp_v9 + 8) == 0) {
           temp_v0 = *(int *)(param_2 + 0x30);
           temp_v6 = *(unsigned int *)(temp_v9 + 0x104);
-          temp_v1 = FUN_002e3390(temp_v6);
+          temp_v1 = wstrlen(temp_v6);
           temp_v0 = FUN_001a7a20(temp_v0 + 0x1c,temp_v6,temp_v1);
           if (temp_v0 == 0xffff) {
             temp_v15 = temp_v15 | 0x80000010;
@@ -97,7 +97,7 @@ unsigned int FUN_0018f69c(int param_1,int param_2,unsigned int param_3,unsigned 
           if (((*(int *)(temp_v8 + 0x8c) == 0) && (temp_v2 = *(int *)(temp_v8 + 0xd4), temp_v2 != 0)) &&
              (*(int *)(temp_v8 + 0xec) != 0)) {
             temp_v4 = *(int *)(param_2 + 0x30);
-            temp_v1 = FUN_002e3390();
+            temp_v1 = wstrlen();
             temp_v2 = FUN_001a7a20(temp_v4 + 0x34,temp_v2,temp_v1);
             if (temp_v2 == 0xffff) {
               temp_v15 = temp_v15 | 0x80000020;
@@ -139,7 +139,7 @@ unsigned int FUN_0018f69c(int param_1,int param_2,unsigned int param_3,unsigned 
         piVar11 = temp_v10[temp_v5];
         if ((*piVar11 == 0) && (temp_v0 = piVar12[temp_v5 + 7], temp_v0 != 0)) {
           temp_v8 = *(int *)(param_2 + 0x30);
-          temp_v1 = FUN_002e3390();
+          temp_v1 = wstrlen();
           temp_v0 = FUN_001a7a20(temp_v8 + 0x28,temp_v0,temp_v1);
           if (temp_v0 == 0xffff) {
             temp_v15 = temp_v15 | 0x80000008;

@@ -8,8 +8,8 @@ int FUN_00291e40(int);
 int FUN_003e0e60(int);
 
 extern int *DAT_004474f4; /* 0x4474f4 */
-extern unsigned int DAT_00447a78; /* 0x447a78 */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern unsigned int g_mapIf; /* 0x447a78 */
+extern int g_gameState; /* 0x49f91c */
 extern signed char DAT_0049f934; /* 0x49f934 */
 
 /* Supplied declaration required: FUN_00291e40. */
@@ -29,10 +29,10 @@ unsigned int FUN_0024f034(unsigned char param_1,int param_2)
   int temp_v6;
   unsigned char temp_v7;
   
-  temp_v0 = DAT_00447a78;
-  *(unsigned char *)(DAT_00447a78 + 0x17) = param_1;
-  temp_v5 = DAT_00447a78 + param_2 * 0x194;
-  temp_v1 = DAT_00447a78;
+  temp_v0 = g_mapIf;
+  *(unsigned char *)(g_mapIf + 0x17) = param_1;
+  temp_v5 = g_mapIf + param_2 * 0x194;
+  temp_v1 = g_mapIf;
   if (param_2 != -1) {
     temp_v1 = (unsigned int)*(unsigned char *)(temp_v5 + 0x1d0);
   }
@@ -112,7 +112,7 @@ unsigned int FUN_0024f034(unsigned char param_1,int param_2)
           *(unsigned short *)(temp_v5 + 0x1fc) = 0;
           return 1;
         }
-        if (DAT_0049f91c >= 100) {
+        if (g_gameState >= 100) {
           FUN_003e0e60(temp_v5 + 0x22c);
           FUN_00291e40(0x10001ff);
           *(unsigned short *)(temp_v5 + 0x1fc) = 0;

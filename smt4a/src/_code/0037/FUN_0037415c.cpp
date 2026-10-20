@@ -1,23 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037415c` (_code @ 0x37415c, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0014aa78(void);
-extern unsigned int FUN_00236038(void);
+/* Game data with a bit mask at 0x4cc8. */
+typedef struct {
+    u8 unk00[0x4cc8];
+    u32 mask;           /* 0x4cc8 */
+} GameData;
 
+GameData *btlGetMainState(void);
+u32 scrGetArg(void);
 
-unsigned int FUN_0037415c(void)
-
+static __inline void maskClear(u32 *word, u32 bit)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_00236038();
-  temp_v1 = FUN_0014aa78();
-  *(unsigned int *)(temp_v1 + 0x4cc8) = *(unsigned int *)(temp_v1 + 0x4cc8) & ~(1 << (temp_v0 & 0xff));
-  return 1;
+    *word = *word & ~(1 << bit);
+}
+
+/* Clears the mask bit selected by scrGetArg; always reports success. */
+u32 FUN_0037415c(void)
+{
+    u32 bit = scrGetArg();
+    GameData *data = btlGetMainState();
+
+    maskClear(&data->mask, bit);
+    return 1;
 }
 
 } /* extern "C" */

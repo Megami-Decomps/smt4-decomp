@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 extern char *DAT_00573948; /* 0x573948 */
 extern char *DAT_0057394c; /* 0x57394c */
 extern char *DAT_00573950; /* 0x573950 */
@@ -68,7 +68,7 @@ void FUN_003f0794(int param_1)
       FUN_003f86f8(0x16);
       FUN_003f86f8(0x13);
       FUN_003f86f8(0x48);
-      FUN_00470e64(DAT_00570280);
+      FUN_00470e64(g_aocSystem);
       pcVar3 = "battle/Legion/LegionMsg.mbm";
       FUN_0020214c();
       pcVar4 = "battle/Legion/LegionMsgTable.tbb";

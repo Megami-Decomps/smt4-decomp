@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_001ab998(unsigned int);
-int FUN_002c415c(unsigned int *);
+int asdMemFree(unsigned int *);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -11,8 +11,8 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_001ab998. */
-extern unsigned int *FUN_002c08f0(void);
-/* Supplied declaration required: FUN_002c415c. */
+extern unsigned int *jobGetWork(void);
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_002db900(void)
@@ -21,10 +21,10 @@ void FUN_002db900(void)
 /* irregular: 2 native warning(s); review required */
   unsigned int *puVar1;
   
-  puVar1 = (unsigned int *)FUN_002c08f0();
+  puVar1 = (unsigned int *)jobGetWork();
   FUN_001ab998(*puVar1);
   if (puVar1 != (unsigned int *)0x0) {
-    FUN_002c415c(puVar1);
+    asdMemFree(puVar1);
     return;
   }
   return;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002aa790(int, int, unsigned int);
-int FUN_002c4938(unsigned int, int);
+int memClear(unsigned int, int);
 int func_0x002a691c(...);
 
 typedef int romwright_code(...);
@@ -16,8 +16,8 @@ typedef struct {
 
 extern romwright_code *DAT_0044e330; /* 0x44e330 */
 extern romwright_code *DAT_0044e334; /* 0x44e334 */
-extern int *DAT_004652a0; /* 0x4652a0 */
-extern unsigned int DAT_004652a4; /* 0x4652a4 */
+extern int *g_commandBufferCursor; /* 0x4652a0 */
+extern unsigned int g_commandBufferEnd; /* 0x4652a4 */
 extern int DAT_004652b4; /* 0x4652b4 */
 extern unsigned int DAT_004655c4; /* 0x4655c4 */
 extern unsigned int DAT_004655c8; /* 0x4655c8 */
@@ -30,7 +30,7 @@ extern unsigned int DAT_004655e0; /* 0x4655e0 */
 extern unsigned int DAT_004655e4; /* 0x4655e4 */
 
 /* Supplied declaration required: FUN_002aa790. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: func_0x002a691c. */
 
 
@@ -66,190 +66,190 @@ void FUN_00133568(unsigned int *param_1)
   DAT_004655d4 = 3;
   DAT_004655d8 = 0;
   DAT_004655e4 = 0x3000000;
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0x10245;
-    *DAT_004652a0 = 1;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0x10245;
+    *g_commandBufferCursor = 1;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0x10244;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0x10244;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0x80289;
-    *DAT_004652a0 = -0x80000000;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0x80289;
+    *g_commandBufferCursor = -0x80000000;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xb0229;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xb0229;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0252;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0252;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0251;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0251;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0254;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0254;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0x10253;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0x10253;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0242;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0242;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf024a;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf024a;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0x5025e;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0x5025e;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
   func_0x002a691c(0x101,7,0);
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf011f;
-    *DAT_004652a0 = 0x10140;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf011f;
+    *g_commandBufferCursor = 0x10140;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0100;
-    *DAT_004652a0 = 0xe40100;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0100;
+    *g_commandBufferCursor = 0xe40100;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0101;
-    *DAT_004652a0 = 0x1010000;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0101;
+    *g_commandBufferCursor = 0x1010000;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0107;
-    *DAT_004652a0 = 8000;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0107;
+    *g_commandBufferCursor = 8000;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0105;
-    *DAT_004652a0 = -0xff00f0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0105;
+    *g_commandBufferCursor = -0xff00f0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0x10061;
-    *DAT_004652a0 = 3;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0x10061;
+    *g_commandBufferCursor = 3;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0x10062;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0x10062;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0065;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0065;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0066;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0066;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0067;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0067;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0x10118;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0x10118;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf011b;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf011b;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0x7006a;
-    *DAT_004652a0 = 0xffffff;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0x7006a;
+    *g_commandBufferCursor = 0xffffff;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0102;
-    *DAT_004652a0 = 3;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0102;
+    *g_commandBufferCursor = 3;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0x80126;
-    *DAT_004652a0 = 0x3000000;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0x80126;
+    *g_commandBufferCursor = 0x3000000;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
   func_0x002a691c(0x40,0x10,0);
   func_0x002a691c(0x50,7,0x1f1f1f1f);
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0058;
-    *DAT_004652a0 = 0x100;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0058;
+    *g_commandBufferCursor = 0x100;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf004c;
-    *DAT_004652a0 = 1;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf004c;
+    *g_commandBufferCursor = 1;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf006f;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf006f;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0x20060;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0x20060;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xc0069;
-    *DAT_004652a0 = 0x20000;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xc0069;
+    *g_commandBufferCursor = 0x20000;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    *DAT_004652a0 = 0xf;
-    DAT_004652a0[1] = 0xf0113;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    *g_commandBufferCursor = 0xf;
+    g_commandBufferCursor[1] = 0xf0113;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    *DAT_004652a0 = 0xf;
-    DAT_004652a0[1] = 0xf0112;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    *g_commandBufferCursor = 0xf;
+    g_commandBufferCursor[1] = 0xf0112;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0114;
-    *DAT_004652a0 = 3;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0114;
+    *g_commandBufferCursor = 3;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0115;
-    *DAT_004652a0 = 3;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0115;
+    *g_commandBufferCursor = 3;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
   temp_v1 = 0;
   do {
-    if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-      *DAT_004652a0 = temp_v1 << 8;
-      DAT_004652a0[1] = 0xf01c5;
-      DAT_004652a0 = DAT_004652a0 + 2;
+    if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+      *g_commandBufferCursor = temp_v1 << 8;
+      g_commandBufferCursor[1] = 0xf01c5;
+      g_commandBufferCursor = g_commandBufferCursor + 2;
     }
     temp_v3 = 0;
     do {
@@ -258,10 +258,10 @@ void FUN_00133568(unsigned int *param_1)
     } while (temp_v3 < 0x100);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 7);
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf0290;
-    *DAT_004652a0 = -0x80000000;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf0290;
+    *g_commandBufferCursor = -0x80000000;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
   temp_v1 = 0;
   do {
@@ -274,56 +274,56 @@ void FUN_00133568(unsigned int *param_1)
   else {
     temp_v4 = (*DAT_0044e330)(0x10000,0x100,0,0x4000);
   }
-  FUN_002c4938(temp_v4,0x4000);
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf02cb;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  memClear(temp_v4,0x4000);
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf02cb;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
   FUN_002aa790(0x2cc,0x200,temp_v4);
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf029b;
-    *DAT_004652a0 = 0x200;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf029b;
+    *g_commandBufferCursor = 0x200;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
   FUN_002aa790(0x29c,0xe00,temp_v4);
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf02bf;
-    *DAT_004652a0 = 0;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf02bf;
+    *g_commandBufferCursor = 0;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
   if (DAT_0044e334 != (romwright_code *)0x0) {
     (*DAT_0044e334)(0x10000,0x100,0,temp_v4);
   }
   temp_v1 = 0;
   do {
-    if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-      DAT_004652a0[1] = (temp_v1 + 0x2b1U) | 0xf0000;
-      *DAT_004652a0 = 0;
-      DAT_004652a0 = DAT_004652a0 + 2;
+    if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+      g_commandBufferCursor[1] = (temp_v1 + 0x2b1U) | 0xf0000;
+      *g_commandBufferCursor = 0;
+      g_commandBufferCursor = g_commandBufferCursor + 2;
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 4);
   func_0x002a691c(0x28b,2);
   func_0x002a691c(0x205,0x24,0);
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf01d4;
-    *DAT_004652a0 = 1;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf01d4;
+    *g_commandBufferCursor = 1;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    DAT_004652a0[1] = 0xf00ae;
-    *DAT_004652a0 = -0x1030710;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    g_commandBufferCursor[1] = 0xf00ae;
+    *g_commandBufferCursor = -0x1030710;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
   temp_v1 = DAT_004652b4;
   temp_v3 = 0;
   do {
     pbVar3 = (unsigned char *)(temp_v1 + temp_v3 + 0x16b1);
-    if ((*pbVar3 != 0) && ((unsigned int)DAT_004652a0 < DAT_004652a4)) {
-      *DAT_004652a0 = *(int *)(temp_v1 + temp_v3 * 4 + 0x1300);
-      DAT_004652a0[1] = *(unsigned int *)(temp_v3 * 4 + 0x4e4f54) | ((unsigned int)*pbVar3 << 0x10);
-      DAT_004652a0 = DAT_004652a0 + 2;
+    if ((*pbVar3 != 0) && ((unsigned int)g_commandBufferCursor < g_commandBufferEnd)) {
+      *g_commandBufferCursor = *(int *)(temp_v1 + temp_v3 * 4 + 0x1300);
+      g_commandBufferCursor[1] = *(unsigned int *)(temp_v3 * 4 + 0x4e4f54) | ((unsigned int)*pbVar3 << 0x10);
+      g_commandBufferCursor = g_commandBufferCursor + 2;
     }
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0xbd);

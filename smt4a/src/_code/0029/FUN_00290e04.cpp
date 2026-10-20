@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int aeabi_uidivmod(unsigned int, unsigned int);
+int __aeabi_uidivmod(unsigned int, unsigned int);
 
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_00290e04(int param_1,unsigned int param_2)
@@ -23,7 +23,7 @@ void FUN_00290e04(int param_1,unsigned int param_2)
   if (0 < temp_v3) {
     do {
       temp_v2 = *(int *)(param_1 + 0x10) + temp_v1 * 0x14;
-      aeabi_uidivmod(param_2,*(unsigned int *)(*(int *)(temp_v2 + 0xc) + 0xc));
+      __aeabi_uidivmod(param_2,*(unsigned int *)(*(int *)(temp_v2 + 0xc) + 0xc));
       temp_v1 = temp_v1 + 1;
       *(unsigned int *)(temp_v2 + 4) = temp_v0;
       *(unsigned int *)(temp_v2 + 8) = 1;

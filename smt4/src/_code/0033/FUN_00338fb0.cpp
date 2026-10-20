@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00294f64(int);
-int FUN_002c415c(void);
-int FUN_002c4938(int, int);
+int asdMemFree(void);
+int memClear(int, int);
 
 /* Supplied declaration required: FUN_00294f64. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_00338fb0(int param_1)
@@ -29,7 +29,7 @@ void FUN_00338fb0(int param_1)
   unsigned char temp_v8;
   
   if (*(int *)(param_1 + 0x2f38) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(int *)(param_1 + 0x2f38) = 0;
   }
   temp_v7 = 0;
@@ -59,7 +59,7 @@ LAB_0033904c:
     } while (temp_v6 < 0x32);
     temp_v7 = temp_v7 + 1;
     if (temp_v7 >= 0x2a) {
-      FUN_002c4938(param_1 + 0x357c,0xe10);
+      memClear(param_1 + 0x357c,0xe10);
       temp_v7 = 0;
       temp_v0 = 0x2a;
       do {

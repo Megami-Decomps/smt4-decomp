@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00224880(unsigned int);
 int FUN_00275f44(unsigned int, int);
 int FUN_00333dc8(int);
@@ -15,7 +15,7 @@ int FUN_0039c448(void);
 int FUN_003a7b74(void);
 int FUN_003b0744(void);
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00224880. */
 extern int FUN_0026272c(void);
 /* Supplied declaration required: FUN_00275f44. */
@@ -50,7 +50,7 @@ unsigned int FUN_00417234(int param_1)
   case 1:
     FUN_00275f44(*(unsigned int *)(param_1 + 0x1c),0xf);
     *(unsigned short *)(param_1 + 0x3a) = 0;
-    FUN_001681cc(0x69);
+    sysPlaySe(0x69);
     *(unsigned int *)(param_1 + 0xc) = 2;
   case 2:
     FUN_00224880(*(unsigned int *)(param_1 + 0x1c));
@@ -66,7 +66,7 @@ unsigned int FUN_00417234(int param_1)
       *(unsigned int *)(param_1 + 0xc) = 7;
     }
     FUN_003491e8();
-    FUN_001681cc(0x9c);
+    sysPlaySe(0x9c);
     return 0;
   case 3:
     temp_v3 = FUN_0026272c();
@@ -116,7 +116,7 @@ unsigned int FUN_00417234(int param_1)
     else {
       temp_v2 = 0x11d;
     }
-    FUN_001681cc(temp_v2);
+    sysPlaySe(temp_v2);
     return 0;
   case 7:
     temp_v3 = FUN_0026272c();

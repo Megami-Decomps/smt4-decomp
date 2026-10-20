@@ -11,8 +11,8 @@ int FUN_00257108(void);
 int FUN_0025715c(void);
 int FUN_002c2264(unsigned int);
 int FUN_002c2318(unsigned int);
-int FUN_002c32a0(int, int, int, unsigned int, int, int);
-int FUN_002c415c(unsigned int);
+int memAlloc(int, int, int, unsigned int, int, int);
+int asdMemFree(unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -27,8 +27,8 @@ extern unsigned int FUN_00256fdc(unsigned int);
 /* Supplied declaration required: FUN_0025715c. */
 /* Supplied declaration required: FUN_002c2264. */
 /* Supplied declaration required: FUN_002c2318. */
-/* Supplied declaration required: FUN_002c32a0. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_002e7ca4(int param_1,int param_2)
@@ -67,7 +67,7 @@ void FUN_002e7ca4(int param_1,int param_2)
           temp_v1 = temp_v1 + 1;
         } while (temp_v1 < temp_v2);
       }
-      FUN_002c415c(*(unsigned int *)(param_1 + 0x38));
+      asdMemFree(*(unsigned int *)(param_1 + 0x38));
       *(unsigned int *)(param_1 + 0x34) = 0;
       *(unsigned int *)(param_1 + 0x38) = 0;
     }
@@ -75,7 +75,7 @@ void FUN_002e7ca4(int param_1,int param_2)
       return;
     }
     temp_v0 = 0x10000;
-    FUN_002c32a0(0x10000,0x100,0,temp_v2 << 2,0x10,1);
+    memAlloc(0x10000,0x100,0,temp_v2 << 2,0x10,1);
     *(unsigned int *)(param_1 + 0x38) = temp_v0;
     temp_v1 = 0;
     *(unsigned int *)(param_1 + 0x34) = temp_v0;
@@ -101,7 +101,7 @@ void FUN_002e7ca4(int param_1,int param_2)
           temp_v1 = temp_v1 + 1;
         } while (temp_v1 < temp_v2);
       }
-      FUN_002c415c(*(unsigned int *)(param_1 + 0x40));
+      asdMemFree(*(unsigned int *)(param_1 + 0x40));
       *(unsigned int *)(param_1 + 0x3c) = 0;
       *(unsigned int *)(param_1 + 0x40) = 0;
     }
@@ -109,7 +109,7 @@ void FUN_002e7ca4(int param_1,int param_2)
       return;
     }
     temp_v0 = 0x10000;
-    FUN_002c32a0(0x10000,0x100,0,temp_v2 << 2,0x10,1);
+    memAlloc(0x10000,0x100,0,temp_v2 << 2,0x10,1);
     *(unsigned int *)(param_1 + 0x40) = temp_v0;
     temp_v1 = 0;
     *(unsigned int *)(param_1 + 0x3c) = temp_v0;

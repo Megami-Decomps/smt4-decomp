@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00295f28(...);
 int FUN_002b63c0(void);
 int FUN_002c09f4(int);
-int FUN_002c0c74(unsigned int);
+int dataTableGetCount(unsigned int);
 
 typedef struct fn_00333b74_arg1 fn_00333b74_arg1;
 struct fn_00333b74_arg1 {
@@ -20,16 +20,16 @@ struct fn_00333b74_arg1 {
     void *field_0x15c; /* +0x15c */
 };
 
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 
 extern unsigned char *FUN_00240cd4(fn_00333b74_arg1 *);
 /* Supplied declaration required: FUN_00295f28. */
 extern int FUN_002b63ac(void);
 /* Supplied declaration required: FUN_002b63c0. */
 /* Supplied declaration required: FUN_002c09f4. */
-/* Supplied declaration required: FUN_002c0c74. */
-extern int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 
 
 void FUN_00333b74(unsigned int *param_1,fn_00333b74_arg1 *param_2)
@@ -69,10 +69,10 @@ void FUN_00333b74(unsigned int *param_1,fn_00333b74_arg1 *param_2)
       }
       else if (temp_v0 == 4) {
         temp_v0 = puVar17[1];
-        puVar6 = *(unsigned int **)(DAT_00433158 + 0x390);
+        puVar6 = *(unsigned int **)(g_aocSystem + 0x390);
         if (puVar6 != (unsigned int *)0x0) {
           temp_v8 = 0;
-          if (temp_v8 < *(unsigned int *)(DAT_00433158 + 0x38c)) {
+          if (temp_v8 < *(unsigned int *)(g_aocSystem + 0x38c)) {
             do {
               if (*puVar6 == (unsigned int)temp_v0) {
                 puVar6 = puVar6 + 1;
@@ -80,12 +80,12 @@ void FUN_00333b74(unsigned int *param_1,fn_00333b74_arg1 *param_2)
               }
               temp_v8 = temp_v8 + 1;
               puVar6 = puVar6 + 0x15;
-            } while (temp_v8 < *(unsigned int *)(DAT_00433158 + 0x38c));
+            } while (temp_v8 < *(unsigned int *)(g_aocSystem + 0x38c));
           }
         }
-        temp_v3 = FUN_002c0cec(0x1c,1);
-        temp_v7 = FUN_002c0cc4();
-        FUN_002c0c74(temp_v3);
+        temp_v3 = dataTableGet(0x1c,1);
+        temp_v7 = dataTableGetEntries();
+        dataTableGetCount(temp_v3);
         puVar6 = (unsigned int *)(temp_v7 + (unsigned int)temp_v0 * 0x50);
 LAB_00333c78:
         temp_v1 = *(short *)((int)puVar6 + 0x36);

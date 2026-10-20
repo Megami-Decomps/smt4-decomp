@@ -21,7 +21,7 @@ extern unsigned int DAT_00643080; /* 0x643080 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0016f988. */
 /* Supplied declaration required: FUN_00170358. */
-extern unsigned int FUN_002e3390(void);
+extern unsigned int wstrlen(void);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -39,7 +39,7 @@ void FUN_0043c434(void)
   }
   nn_os_CriticalSection_Enter((unsigned int)&DAT_00643080);
   temp_v0 = (*(unsigned int *)((unsigned char *)&DAT_005c0ab4 - 0x10));
-  temp_v1 = FUN_002e3390();
+  temp_v1 = wstrlen();
   FUN_0016f988(&DAT_005c0ab0,temp_v0,temp_v1,0);
   DAT_005c0ab4 = DAT_005c0ab0;
   FUN_00170358(&DAT_005c0ab4,1);

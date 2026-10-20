@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_001695a0(void);
-int FUN_0019a5a0(void);
-int FUN_0019c364(void);
+int asdMemFree(void);
+int scrScriptProcessDestroy(void);
 int FUN_0019de98(int, unsigned int);
 int FUN_0019e2dc(void);
 int FUN_0019ea64(int);
@@ -26,8 +26,8 @@ typedef struct {
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_001695a0. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0019e2dc. */
 /* Supplied declaration required: FUN_0019ea64. */
@@ -83,51 +83,51 @@ void FUN_001919a4(int param_1)
     } while (temp_v0 < *(int *)(param_1 + 0xabc));
   }
   if (*(int *)(param_1 + 0x28c) != 0) {
-    FUN_0019c364();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0x28c) = 0;
   }
   if (*(int *)(param_1 + 0x284) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x284) = 0;
   }
   if (*(int *)(param_1 + 0x288) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x288) = 0;
   }
   if (*(int *)(param_1 + 0x298) != 0) {
-    FUN_0019c364();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0x298) = 0;
   }
   if (*(int *)(param_1 + 0x290) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x290) = 0;
   }
   if (*(int *)(param_1 + 0x294) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x294) = 0;
   }
   if (*(int *)(param_1 + 0x2a4) != 0) {
-    FUN_0019c364();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0x2a4) = 0;
   }
   if (*(int *)(param_1 + 0x29c) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x29c) = 0;
   }
   if (*(int *)(param_1 + 0x2a0) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x2a0) = 0;
   }
   if (*(int *)(param_1 + 0x2b0) != 0) {
-    FUN_0019c364();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0x2b0) = 0;
   }
   if (*(int *)(param_1 + 0x2a8) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x2a8) = 0;
   }
   if (*(int *)(param_1 + 0x2ac) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x2ac) = 0;
   }
   FUN_001695a0();

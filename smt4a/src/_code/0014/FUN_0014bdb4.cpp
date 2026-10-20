@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-extern int DAT_00640118; /* 0x640118 */
+extern int g_asdProcess; /* 0x640118 */
 
 
 void FUN_0014bdb4(unsigned int param_1,unsigned int param_2)
@@ -22,13 +22,13 @@ void FUN_0014bdb4(unsigned int param_1,unsigned int param_2)
   int temp_v3;
   int temp_v4;
   
-  for (temp_v3 = *(int *)(DAT_00640118 + (param_1 >> 0x14) * 8); temp_v3 != 0;
+  for (temp_v3 = *(int *)(g_asdProcess + (param_1 >> 0x14) * 8); temp_v3 != 0;
       temp_v3 = *(int *)(temp_v3 + 0x4c)) {
     if (*(unsigned int *)(temp_v3 + 0x24) == (param_1 & 0xfffff)) goto LAB_0014bdf8;
   }
   temp_v3 = 0;
 LAB_0014bdf8:
-  temp_v0 = *(int *)(DAT_00640118 + (param_2 >> 0x14) * 8);
+  temp_v0 = *(int *)(g_asdProcess + (param_2 >> 0x14) * 8);
   for (temp_v1 = temp_v0; temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c)) {
     if (*(unsigned int *)(temp_v1 + 0x24) == (param_2 & 0xfffff)) goto LAB_0014be2c;
   }

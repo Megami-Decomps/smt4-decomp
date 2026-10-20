@@ -19,12 +19,12 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002b93c8. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -50,15 +50,15 @@ void FUN_002c6a64(int param_1)
   
   temp_v7 = 0.29f;
   temp_v6 = temp_v7;
-  FUN_002ba12c(DAT_0044ea00);
+  FUN_002ba12c(g_titleScene);
   temp_v8 = CONCAT44(temp_v6,(int)temp_v7);
-  temp_v3 = FUN_002939f4();
+  temp_v3 = btlGetMainState();
   if ((*(unsigned int *)(temp_v3 + 0x44a0) & 0x200) == 0) {
     VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002b93c8(param_1 + 0x1c4);
   }
   temp_v6 = (float)((unsigned long long)temp_v8 >> 0x20);
-  FUN_002ba12c(DAT_0044ea00);
+  FUN_002ba12c(g_titleScene);
   temp_v3 = (int)temp_v6;
   if (*(char *)(param_1 + 0x25c) != '\0') {
     temp_v7 = 0.0f;
@@ -76,7 +76,7 @@ void FUN_002c6a64(int param_1)
       temp_v1 = (unsigned char)(temp_v0 >> 0x18);
       if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
         FUN_002bf538();
-        temp_v2 = DAT_0044ea00;
+        temp_v2 = g_titleScene;
         temp_v4 = FUN_002c5da8(6,1,0);
         piVar7 = (int *)(temp_v2 + 0x12ac);
         temp_v5 = piVar7[*piVar7 + 2];
@@ -86,7 +86,7 @@ void FUN_002c6a64(int param_1)
           *(unsigned char *)(temp_v2 + 0x12c4) = 0;
         }
         FUN_002bf288(2,0x14,0x3e9,temp_v3,0,0x24);
-        temp_v2 = DAT_0044ea00;
+        temp_v2 = g_titleScene;
         temp_v4 = FUN_002c5da8(6,7,0);
         piVar7 = (int *)(temp_v2 + 0x12ac);
         temp_v5 = piVar7[*piVar7 + 2];
@@ -102,7 +102,7 @@ void FUN_002c6a64(int param_1)
   if (*(char *)(param_1 + 0x25d) != '\0') {
     VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002b93c8(param_1 + 0x20);
-    temp_v2 = DAT_0044ea00;
+    temp_v2 = g_titleScene;
     temp_v4 = FUN_002c5da8(6,1,0);
     piVar7 = (int *)(temp_v2 + 0x12ac);
     temp_v5 = piVar7[*piVar7 + 2];
@@ -113,7 +113,7 @@ void FUN_002c6a64(int param_1)
     }
     VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002b93c8(param_1 + 0x138);
-    temp_v2 = DAT_0044ea00;
+    temp_v2 = g_titleScene;
     temp_v4 = FUN_002c5da8(6,7,0);
     piVar7 = (int *)(temp_v2 + 0x12ac);
     temp_v5 = piVar7[*piVar7 + 2];

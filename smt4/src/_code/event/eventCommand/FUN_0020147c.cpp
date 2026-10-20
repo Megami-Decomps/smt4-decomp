@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_00259324(unsigned int, int, int);
 
-extern int DAT_0043e088; /* 0x43e088 */
+extern int g_eventCommand; /* 0x43e088 */
 
 /* Supplied declaration required: FUN_00259324. */
 extern int FUN_002893d8(void);
-extern int FUN_00296cc8(unsigned int);
+extern int scrGetArg(unsigned int);
 
 
 unsigned char FUN_0020147c(void)
@@ -22,7 +22,7 @@ unsigned char FUN_0020147c(void)
   
   temp_v0 = FUN_002893d8();
   if (temp_v0 == 0) {
-    temp_v0 = FUN_00296cc8(0);
+    temp_v0 = scrGetArg(0);
     if (temp_v0 == 0) {
       temp_v1 = 0xff;
     }
@@ -32,7 +32,7 @@ unsigned char FUN_0020147c(void)
     FUN_00259324(temp_v1,10,1);
     return 0;
   }
-  return *(int *)(DAT_0043e088 + 0x10) == *(int *)(DAT_0043e088 + 0x14);
+  return *(int *)(g_eventCommand + 0x10) == *(int *)(g_eventCommand + 0x14);
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023d02c(...);
 int FUN_002b2368(unsigned int *);
-int FUN_002c415c(...);
+int asdMemFree(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -14,12 +14,12 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned char DAT_00420798; /* 0x420798 */
+extern unsigned char g_filter4PolyBaseVtable; /* 0x420798 */
 extern unsigned char DAT_00420994; /* 0x420994 */
 
 /* Supplied declaration required: FUN_0023d02c. */
 /* Supplied declaration required: FUN_002b2368. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_0034c6b0(unsigned int *param_1)
@@ -42,16 +42,16 @@ void FUN_0034c6b0(unsigned int *param_1)
       unaff_r4 = unaff_r4 + 1;
       *(unsigned int *)(param_1[6] + temp_v0) = 0;
     } while (unaff_r4 < 2);
-    FUN_002c415c(param_1[6]);
+    asdMemFree(param_1[6]);
     param_1[6] = 0;
   }
-  *param_1 = (unsigned int)&DAT_00420798;
+  *param_1 = (unsigned int)&g_filter4PolyBaseVtable;
   if (param_1[2] != 0) {
     FUN_0023d02c();
     param_1[2] = 0;
   }
   if (param_1[1] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1[1] = 0;
   }
   if ((int *)param_1[5] != (int *)0x0) {

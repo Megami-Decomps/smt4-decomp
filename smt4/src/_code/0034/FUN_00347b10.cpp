@@ -36,7 +36,7 @@ typedef struct {
     unsigned int sp98; /* 0x98: local_98 */
 } param_1_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0023b5e0. */
 /* Supplied declaration required: FUN_00241d44. */
@@ -100,7 +100,7 @@ void FUN_00347b10(int param_1)
   temp_v12 = 0x3f800000;
   temp_v14 = *(float *)(*(int *)(param_1 + 0x60) + 0xc) * *(float *)(*(int *)(param_1 + 0x14) + 8);
   temp_v13 = 0x3f800000;
-  FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(*(int *)(param_1 + 8) + 8));
+  FUN_002c1b64(g_titleScene,*(unsigned int *)(*(int *)(param_1 + 8) + 8));
   FUN_0023b5e0(param_1,&temp_v19,param_1 + 0x18);
   temp_v0 = 0;
   if (temp_v0 < **(int **)(param_1 + 0x60) + 1) {
@@ -134,8 +134,8 @@ void FUN_00347b10(int param_1)
       pfVar6 = pfVar6 + 3;
     } while (temp_v5 < temp_v0 + 1U);
   }
-  temp_v0 = DAT_0044ea00;
-  piVar10 = (int *)(DAT_0044ea00 + 0x12ac);
+  temp_v0 = g_titleScene;
+  piVar10 = (int *)(g_titleScene + 0x12ac);
   temp_v1 = *(int *)(*(int *)(param_1 + 0x60) + 0x28);
   temp_v2 = *piVar10;
   temp_v3 = piVar10[temp_v2 + 2];
@@ -145,7 +145,7 @@ void FUN_00347b10(int param_1)
     (**(romwright_code **)(temp_v0 + 0x12c8))();
     *(unsigned char *)(temp_v0 + 0x12c4) = 0;
   }
-  temp_v0 = DAT_0044ea00;
+  temp_v0 = g_titleScene;
   temp_v1 = FUN_002c5d80(1,0);
   piVar10 = (int *)(temp_v0 + 0x124c);
   temp_v2 = *piVar10;
@@ -167,8 +167,8 @@ void FUN_00347b10(int param_1)
   }
   FUN_00241d44(&temp_v11);
   FUN_0025b750();
-  temp_v0 = DAT_0044ea00;
-  piVar10 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v0 = g_titleScene;
+  piVar10 = (int *)(g_titleScene + 0x124c);
   temp_v1 = *piVar10;
   temp_v2 = piVar10[temp_v1 + 2];
   *piVar10 = temp_v1 - 1;
@@ -176,8 +176,8 @@ void FUN_00347b10(int param_1)
     (**(romwright_code **)(temp_v0 + 0x1268))();
     *(unsigned char *)(temp_v0 + 0x1264) = 0;
   }
-  temp_v0 = DAT_0044ea00;
-  piVar10 = (int *)(DAT_0044ea00 + 0x12ac);
+  temp_v0 = g_titleScene;
+  piVar10 = (int *)(g_titleScene + 0x12ac);
   temp_v1 = *piVar10;
   temp_v2 = piVar10[temp_v1 + 2];
   *piVar10 = temp_v1 - 1;

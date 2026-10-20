@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002722a8(void);
+int effPartCreate(void);
 int FUN_00399768(int, int);
 int FUN_003ba614(...);
 
@@ -18,7 +18,7 @@ extern unsigned char DAT_0059e9a8; /* 0x59e9a8 */
 extern unsigned int DAT_0059e9b4; /* 0x59e9b4 */
 extern unsigned char DAT_00634c50; /* 0x634c50 */
 
-/* Supplied declaration required: FUN_002722a8. */
+/* Supplied declaration required: effPartCreate. */
 /* Supplied declaration required: FUN_00399768. */
 /* Supplied declaration required: FUN_003ba614. */
 
@@ -41,7 +41,7 @@ unsigned int FUN_003ca914(void)
   if (DAT_0059dbf4 != 0) {
     FUN_003ba614(DAT_0059dbf4,3);
   }
-  FUN_002722a8();
+  effPartCreate();
   DAT_0059dbf4 = temp_v0;
   DAT_0059e664 = 0;
   DAT_0059dbec = 0;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003fd63c(int, int);
 
-extern int *DAT_0058104c; /* 0x58104c */
+extern int *g_popupState; /* 0x58104c */
 extern int DAT_005f1ac0; /* 0x5f1ac0 */
 
 extern int FUN_0014bef4(unsigned int);
@@ -24,7 +24,7 @@ void FUN_002240f0(void)
   int *piVar2;
   int temp_v1;
   
-  if ((*DAT_0058104c == 0) && (temp_v1 = FUN_002d0044(), temp_v1 != 0)) {
+  if ((*g_popupState == 0) && (temp_v1 = FUN_002d0044(), temp_v1 != 0)) {
     temp_v0 = 1;
     temp_v1 = FUN_0018719c(0x111b);
     if (temp_v1 != 0) {
@@ -38,17 +38,17 @@ void FUN_002240f0(void)
       DAT_005f1ac0 = 0;
       FUN_003fd63c(0x111b,1);
     }
-    piVar2 = DAT_0058104c;
+    piVar2 = g_popupState;
     if (DAT_005f1ac0 >= 1) {
       DAT_005f1ac0 = DAT_005f1ac0 - 1;
     }
     else {
       DAT_005f1ac0 = 5;
       if (!temp_v0) {
-        *DAT_0058104c = 0x15;
+        *g_popupState = 0x15;
         piVar2[1] = 0;
         temp_v1 = FUN_002d8b58(0x16,0xbb);
-        DAT_0058104c[5] = temp_v1;
+        g_popupState[5] = temp_v1;
       }
     }
   }

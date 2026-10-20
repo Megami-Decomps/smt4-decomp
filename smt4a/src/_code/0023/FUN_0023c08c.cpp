@@ -2,13 +2,13 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_00224880(unsigned int);
 int FUN_003343f0(int);
 
 extern int DAT_0057f290; /* 0x57f290 */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00224880. */
 extern int FUN_00275f44(unsigned int, int);
 /* Supplied declaration required: FUN_003343f0. */
@@ -38,7 +38,7 @@ unsigned int FUN_0023c08c(int param_1)
         }
         else {
           FUN_003343f0(1);
-          FUN_001681cc(0xa0);
+          sysPlaySe(0xa0);
         }
         *(unsigned int *)(temp_v0 + 0x488) = 0xffffffff;
         *(int *)(temp_v0 + 0x434) = param_1;

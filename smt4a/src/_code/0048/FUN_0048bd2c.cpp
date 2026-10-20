@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
 extern int FUN_00163aa4(int);
 extern unsigned int FUN_001654d8(int);
@@ -49,7 +49,7 @@ void FUN_0048bd2c(int param_1)
   }
   else {
     FUN_00184528(param_1 + 0x4e4,1);
-    if ((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x295)) == '\0') {
+    if ((*(signed char *)((unsigned char *)&g_gameState + 0x295)) == '\0') {
       FUN_00168980(0x1b);
     }
     *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x1000000;

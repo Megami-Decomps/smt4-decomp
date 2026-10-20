@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_0044de2c; /* 0x44de2c */
+extern int g_saveLoadUI; /* 0x44de2c */
 extern int DAT_0044de30; /* 0x44de30 */
 
 /* Supplied declaration required: FUN_0026b5a8. */
@@ -46,10 +46,10 @@ void FUN_002d9014(void)
   unsigned int *puVar5;
   
   temp_v1 = DAT_0044de30;
-  temp_v0 = DAT_0044de2c;
-  if (((*(int *)(DAT_0044de2c + 0x18) != DAT_0044de30) && (*(char *)(DAT_0044de2c + 0x28) == '\0'))
-     && (*(char *)(DAT_0044de2c + 0x355) == '\0')) {
-    *(int *)(DAT_0044de2c + 0x18) = DAT_0044de30;
+  temp_v0 = g_saveLoadUI;
+  if (((*(int *)(g_saveLoadUI + 0x18) != DAT_0044de30) && (*(char *)(g_saveLoadUI + 0x28) == '\0'))
+     && (*(char *)(g_saveLoadUI + 0x355) == '\0')) {
+    *(int *)(g_saveLoadUI + 0x18) = DAT_0044de30;
     if (*(char *)(temp_v1 + temp_v0 + 0x34c) != '\0') {
       *(unsigned char *)(temp_v0 + 0x355) = 1;
       FUN_0029dfc0();

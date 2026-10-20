@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0010e9e0(unsigned int);
 int FUN_002e32a4(int, unsigned char *, unsigned char *, unsigned int, unsigned int);
-int aeabi_uidivmod(unsigned int, unsigned int);
+int __aeabi_uidivmod(unsigned int, unsigned int);
 
 typedef struct fn_00113f00_arg0 fn_00113f00_arg0;
 struct fn_00113f00_arg0 {
@@ -36,7 +36,7 @@ extern unsigned char LAB_00113f9c; /* 0x113f9c */
 /* Supplied declaration required: FUN_002e32a4. */
 extern unsigned int FUN_002ea704(void);
 extern int FUN_002f14a8(int, unsigned int);
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 unsigned int FUN_00113f00(fn_00113f00_arg0 *param_1,int *param_2)
@@ -57,7 +57,7 @@ unsigned int FUN_00113f00(fn_00113f00_arg0 *param_1,int *param_2)
     temp_v6 = 0;
     temp_v0 = FUN_002ea704();
     for (temp_v5 = 0; temp_v5 < param_1->field_0x1c; temp_v5 = temp_v5 + 1) {
-      aeabi_uidivmod(param_1->field_0x18 + temp_v5,*(unsigned int *)&param_1->field_0x20);
+      __aeabi_uidivmod(param_1->field_0x18 + temp_v5,*(unsigned int *)&param_1->field_0x20);
       temp_v1 = (param_1->field_0xc - param_1->field_0x8) >> 2;
       if (temp_v1 <= temp_v4) {
         FUN_002e32a4(9,&LAB_00113f9c,&LAB_00113f9c,temp_v4,temp_v1);

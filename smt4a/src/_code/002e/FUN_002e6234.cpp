@@ -14,10 +14,10 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int FUN_0018719c(void);
-extern unsigned int FUN_00192748(unsigned int);
-extern unsigned short *FUN_00192798(void);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned short *dataTableGetEntries(void);
 
 
 unsigned int FUN_002e6234(unsigned int param_1)
@@ -39,9 +39,9 @@ unsigned int FUN_002e6234(unsigned int param_1)
   temp_v5[5] = 0;
   temp_v5[6] = 0;
   temp_v5[7] = 0;
-  temp_v0 = FUN_00187180(0x35,1);
-  puVar2 = (unsigned short *)FUN_00192798();
-  temp_v1 = FUN_00192748(temp_v0);
+  temp_v0 = dataTableGet(0x35,1);
+  puVar2 = (unsigned short *)dataTableGetEntries();
+  temp_v1 = dataTableGetCount(temp_v0);
   temp_v4 = 0;
   for (temp_v3 = 0; temp_v3 < temp_v1; temp_v3 = temp_v3 + 1) {
     if ((((*puVar2 == param_1) && ((puVar2[7] == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) &&

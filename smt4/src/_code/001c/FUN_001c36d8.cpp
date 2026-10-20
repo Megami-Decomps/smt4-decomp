@@ -59,7 +59,7 @@ typedef struct {
     unsigned int spB4; /* 0xb4: local_b4 */
 } param_1_stack;
 
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 extern int FUN_001ed60c(void);
 /* Supplied declaration required: FUN_0026e324. */
@@ -71,7 +71,7 @@ extern int FUN_001ed60c(void);
 /* Supplied declaration required: FUN_00276218. */
 /* Supplied declaration required: FUN_00287c34. */
 /* Supplied declaration required: FUN_0028975c. */
-extern int FUN_00292f28(unsigned int);
+extern int padIsButtonDown(unsigned int);
 /* Supplied declaration required: FUN_00299370. */
 /* Supplied declaration required: FUN_0029c1c8. */
 /* Supplied declaration required: FUN_0029c6b0. */
@@ -226,7 +226,7 @@ void FUN_001c36d8(int param_1)
               temp_v17[6] = '\0';
               temp_v17[7] = '\0';
               do {
-                temp_v0 = FUN_00292f28(temp_v5);
+                temp_v0 = padIsButtonDown(temp_v5);
                 if (temp_v0 != 0) {
                   temp_v17[temp_v7] = '\x01';
                 }
@@ -440,7 +440,7 @@ void FUN_001c36d8(int param_1)
                 FUN_0028975c(0x466,1);
                 FUN_0028975c(0x410,1);
               }
-              FUN_0026e324(DAT_00433158);
+              FUN_0026e324(g_aocSystem);
               return;
             }
           } while (temp_v5 == 0x46f);

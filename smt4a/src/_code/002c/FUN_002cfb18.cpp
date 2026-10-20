@@ -51,7 +51,7 @@ extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern float DAT_005f0c94; /* 0x5f0c94 */
 extern float DAT_005f0c98; /* 0x5f0c98 */
 extern float DAT_005f0c9c; /* 0x5f0c9c */
@@ -143,7 +143,7 @@ void FUN_002cfb18(void)
   if ((((temp_v1 != 0) && (DAT_005f161c == '\0')) && (DAT_005f161d == '\0')) &&
      ((DAT_005f0ca8 == 8 || (DAT_005f0ca8 == 9)))) {
     temp_v20 = DAT_005f0c98 + 220.0f;
-    temp_v1 = *(int *)(DAT_00581288 + 0x1c);
+    temp_v1 = *(int *)(g_lmapScene + 0x1c);
     temp_v17 = 20.0f;
     temp_v15 = DAT_005f0c94;
     temp_v16 = DAT_005f0c9c;

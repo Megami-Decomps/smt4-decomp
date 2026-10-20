@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001224f4(int, int);
 int FUN_00122554(int, unsigned int, unsigned int, unsigned int, int, int, unsigned int);
 int FUN_0012259a(int, int);
-int FUN_002e74c4(unsigned int, int, unsigned int, unsigned int);
+int strAssign(unsigned int, int, unsigned int, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001224f4. */
 /* Supplied declaration required: FUN_00122554. */
 /* Supplied declaration required: FUN_0012259a. */
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 
 
 void FUN_0030fb34(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -39,7 +39,7 @@ void FUN_0030fb34(int param_1,int param_2,unsigned int param_3,unsigned int para
   }
   else {
     temp_v1 = param_3 >> 3;
-    FUN_002e74c4(*(unsigned int *)(param_1 + 8),param_2,temp_v1,*(unsigned int *)(param_1 + 0xc));
+    strAssign(*(unsigned int *)(param_1 + 8),param_2,temp_v1,*(unsigned int *)(param_1 + 0xc));
     *(unsigned int *)(param_1 + 0x14) = *(int *)(param_1 + 0x14) + temp_v1 * 8;
     *(unsigned int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + temp_v1;
   }

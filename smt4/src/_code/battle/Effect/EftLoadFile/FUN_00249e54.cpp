@@ -10,9 +10,9 @@ int FUN_001ad2a0(...);
 int FUN_001ad484(...);
 int FUN_00215a34(...);
 int FUN_002aa568(int, unsigned char *);
-int FUN_002c415c(...);
-int FUN_002c4938(void);
-int FUN_002c498c(...);
+int asdMemFree(...);
+int memClear(void);
+int asdMemAlloc(...);
 int FUN_002fdf34(...);
 int FUN_0031bae0(...);
 int SBORROW4(int, int);
@@ -69,9 +69,9 @@ extern unsigned char LAB_0024a638; /* 0x24a638 */
 extern unsigned int FUN_002217bc(int);
 /* Supplied declaration required: FUN_002aa568. */
 extern int FUN_002c30c4(int);
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: FUN_002fdf34. */
 /* Supplied declaration required: FUN_0031bae0. */
 /* Supplied declaration required: rt_memcpy. */
@@ -144,8 +144,8 @@ unsigned int FUN_00249e54(unsigned int param_1,char *param_2)
   temp_v3 = 0x100;
   temp_v49 = param_1;
   pcStack_28 = param_2;
-  FUN_002c498c();
-  FUN_002c4938();
+  asdMemAlloc();
+  memClear();
   temp_v1 = *param_2;
   temp_v14 = temp_v1 == 'V';
   if (temp_v14) {
@@ -359,7 +359,7 @@ LAB_0024a200:
     } while (temp_v13 < *(int *)(param_2 + 0x10));
   }
   temp_v12 = 0x100;
-  FUN_002c498c(0x100,0x100,0,0x140,1);
+  asdMemAlloc(0x100,0x100,0,0x140,1);
   rt_memcpy_w(temp_v12,param_2 + 0xa4,*(int *)(param_2 + 0xc) * 0x14);
   if (temp_v2) {
     temp_v13 = 0;
@@ -510,8 +510,8 @@ LAB_0024a200:
   FUN_001ad484(temp_v49,&temp_v23);
   FUN_001ad228(temp_v49,&temp_v31);
   FUN_001ad264(temp_v49,&temp_v39);
-  FUN_002c415c(temp_v3);
-  FUN_002c415c(temp_v12);
+  asdMemFree(temp_v3);
+  asdMemFree(temp_v12);
   return temp_v49;
 }
 

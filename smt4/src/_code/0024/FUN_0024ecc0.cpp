@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_00138954(unsigned int, unsigned int, int);
 
-extern int DAT_0043dfc0; /* 0x43dfc0 */
+extern int g_bustupCutAnim; /* 0x43dfc0 */
 
 /* Supplied declaration required: FUN_00138954. */
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 
 
 int FUN_0024ecc0(int param_1,int param_2)
@@ -22,13 +22,13 @@ int FUN_0024ecc0(int param_1,int param_2)
   int temp_v3;
   unsigned char temp_v4;
   
-  temp_v0 = DAT_0043dfc0;
+  temp_v0 = g_bustupCutAnim;
   temp_v2 = 2;
-  temp_v3 = DAT_0043dfc0 + param_2 * 4;
+  temp_v3 = g_bustupCutAnim + param_2 * 4;
   if (*(int *)(temp_v3 + 0x630) != param_1) {
-    temp_v4 = *(int *)(DAT_0043dfc0 + 0x630) == param_1;
+    temp_v4 = *(int *)(g_bustupCutAnim + 0x630) == param_1;
     if (temp_v4) {
-      *(unsigned int *)(DAT_0043dfc0 + 0x630) = 0;
+      *(unsigned int *)(g_bustupCutAnim + 0x630) = 0;
     }
     if (temp_v4) {
       temp_v2 = 3;
@@ -54,7 +54,7 @@ int FUN_0024ecc0(int param_1,int param_2)
     if (temp_v4) {
       temp_v2 = 3;
     }
-    temp_v1 = FUN_002bf244(*(unsigned int *)(temp_v3 + 0x630));
+    temp_v1 = jobIsValid(*(unsigned int *)(temp_v3 + 0x630));
     if ((temp_v1 != 0) &&
        (FUN_00138954(*(unsigned int *)(temp_v3 + 0x630),*(unsigned int *)(temp_v0 + 0x5e0),
                      (int)*(float *)(temp_v0 + 0x5d8)), temp_v2 != 3)) {

@@ -30,12 +30,12 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } void_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_003eaf20. */
 /* Supplied declaration required: FUN_003ee0c0. */
-extern unsigned int FUN_004ee568(unsigned int);
+extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fbc30. */
 /* Supplied declaration required: FUN_004fc094. */
 
@@ -49,12 +49,12 @@ void FUN_0039e21c(void)
   unsigned int temp_v2;
   int temp_v3;
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   temp_v1 = temp_v0;
   FUN_003eaf20();
   if (temp_v1 != 0) {
     temp_v3 = *(int *)(temp_v0 + 0x1ed4) + *(short *)(temp_v1 + 8) * 0x1d0;
-    temp_v2 = FUN_004ee568(DAT_0057113c);
+    temp_v2 = btlUnitGet(g_btlScriptUnit);
     FUN_003ee0c0(temp_v0);
     FUN_004fc094(0,temp_v2,0,temp_v3,0,*(unsigned int *)(temp_v1 + 0x25c),0xffffffff,0xffffffff,
                  *(unsigned int *)(temp_v1 + 600),*(unsigned int *)(temp_v1 + 0x25c),0,0,1,0,0,0,0,0,0,0,1,0

@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp90; /* 0x90: local_90 */
 } param_3_stack;
 
-extern unsigned int *DAT_004652a0; /* 0x4652a0 */
+extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
 extern unsigned char DAT_00472088; /* 0x472088 */
 extern unsigned char DAT_00472089; /* 0x472089 */
 extern signed char DAT_0047208a; /* 0x47208a */
@@ -114,11 +114,11 @@ void FUN_0036ce70(unsigned int param_1,int param_2,int param_3)
   if (((~*(unsigned int *)(temp_v9 + 0x18) & 0x10) == 0) && (*(int *)(param_2 + 0xa0) != 0)) {
     temp_v5 = 5;
   }
-  puVar12 = DAT_004652a0 + 2;
-  *DAT_004652a0 = temp_v5;
-  DAT_004652a0[1] = 0x100e0;
+  puVar12 = g_commandBufferCursor + 2;
+  *g_commandBufferCursor = temp_v5;
+  g_commandBufferCursor[1] = 0x100e0;
   temp_v11 = *(int *)(temp_v9 + 0x2b8);
-  DAT_004652a0 = puVar12;
+  g_commandBufferCursor = puVar12;
   if ((temp_v11 == 0) || (temp_v24 != temp_v11)) {
     DAT_0047208e = (~*(unsigned int *)(temp_v9 + 0x104) & 1) == 0;
     DAT_004720fc = *(float *)(temp_v9 + 0x10c);
@@ -166,12 +166,12 @@ void FUN_0036ce70(unsigned int param_1,int param_2,int param_3)
         }
       }
     }
-    nw_gfx_internal_FastWordCopyAsm_6(DAT_004652a0,&DAT_004efddc);
+    nw_gfx_internal_FastWordCopyAsm_6(g_commandBufferCursor,&DAT_004efddc);
     temp_v5 = *(unsigned int *)(temp_v9 + 0x114);
-    *DAT_004652a0 = *(unsigned int *)(temp_v9 + 0x110);
-    DAT_004652a0[1] = temp_v5;
+    *g_commandBufferCursor = *(unsigned int *)(temp_v9 + 0x110);
+    g_commandBufferCursor[1] = temp_v5;
     temp_v24 = temp_v11;
-    DAT_004652a0 = DAT_004652a0 + 2;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
   temp_v11 = *(int *)(temp_v9 + 0x2a8);
   if (temp_v25 != temp_v11) {
@@ -188,13 +188,13 @@ void FUN_0036ce70(unsigned int param_1,int param_2,int param_3)
     }
     if (temp_v12 != 0) {
       temp_v7 = *(unsigned int *)(temp_v12 + 0x48);
-      nnnstdMemCpy(DAT_004652a0,temp_v12 + 0x10,temp_v7);
-      DAT_004652a0 = (unsigned int *)((int)DAT_004652a0 + (temp_v7 & 0xfffffffc));
+      nnnstdMemCpy(g_commandBufferCursor,temp_v12 + 0x10,temp_v7);
+      g_commandBufferCursor = (unsigned int *)((int)g_commandBufferCursor + (temp_v7 & 0xfffffffc));
     }
-    *DAT_004652a0 = 0x10001;
-    DAT_004652a0[1] = 0x50080;
+    *g_commandBufferCursor = 0x10001;
+    g_commandBufferCursor[1] = 0x50080;
     temp_v12 = temp_v11;
-    DAT_004652a0 = DAT_004652a0 + 2;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
   temp_v3 = (unsigned int)temp_v23;
   if ((*(int *)(temp_v9 + 0x2b4) == 0) || (temp_v4 != *(int *)(temp_v9 + 0x2b4))) {
@@ -217,7 +217,7 @@ void FUN_0036ce70(unsigned int param_1,int param_2,int param_3)
     temp_v13 = 0;
   }
   if (temp_v13 || temp_v14) {
-    nw_gfx_internal_FastWordCopyAsm_6(DAT_004652a0,temp_v6 + 0xdc);
+    nw_gfx_internal_FastWordCopyAsm_6(g_commandBufferCursor,temp_v6 + 0xdc);
     temp_v7 = 0;
     do {
       temp_v10 = temp_v6 + temp_v7 * 0x1c;
@@ -256,7 +256,7 @@ void FUN_0036ce70(unsigned int param_1,int param_2,int param_3)
         temp_v3 = *(unsigned int *)(temp_v9 + 0xe4);
       }
       *(unsigned int *)(temp_v10 + 0x40) = temp_v3;
-      nw_gfx_internal_FastWordCopyAsm_6(DAT_004652a0,temp_v10 + 0x30);
+      nw_gfx_internal_FastWordCopyAsm_6(g_commandBufferCursor,temp_v10 + 0x30);
       temp_v3 = (unsigned int)temp_v23;
       temp_v7 = temp_v7 + 1;
       temp_v10 = temp_v11;
@@ -269,10 +269,10 @@ void FUN_0036ce70(unsigned int param_1,int param_2,int param_3)
     temp_v11 = 0;
   }
   temp_v5 = *(unsigned int *)(temp_v11 + 0xd8);
-  *DAT_004652a0 = *(unsigned int *)(temp_v11 + 0xd4);
-  DAT_004652a0[1] = temp_v5;
+  *g_commandBufferCursor = *(unsigned int *)(temp_v11 + 0xd4);
+  g_commandBufferCursor[1] = temp_v5;
   temp_v11 = *(int *)(temp_v9 + 0x2d0);
-  if ((temp_v11 == 0) || (puVar11 = DAT_004652a0 + 2, temp_v26 != temp_v11)) {
+  if ((temp_v11 == 0) || (puVar11 = g_commandBufferCursor + 2, temp_v26 != temp_v11)) {
     puVar11 = (unsigned int *)(temp_v9 + 0x158);
     temp_v7 = (unsigned int)DAT_00472089;
     temp_v13 = (~*(unsigned int *)(temp_v9 + 0x118) & 1) == 0;
@@ -295,17 +295,17 @@ void FUN_0036ce70(unsigned int param_1,int param_2,int param_3)
     DAT_00472089 = temp_v0;
     DAT_0047208b = temp_v13;
     DAT_0047208d = temp_v16;
-    DAT_004652a0[2] = (DAT_00472090 << 8) | (temp_v8 << 0xc);
-    DAT_004652a0[3] = 0x20107;
-    DAT_004652a0[4] = temp_v7 << 8;
-    DAT_004652a0[5] = 0x20105;
+    g_commandBufferCursor[2] = (DAT_00472090 << 8) | (temp_v8 << 0xc);
+    g_commandBufferCursor[3] = 0x20107;
+    g_commandBufferCursor[4] = temp_v7 << 8;
+    g_commandBufferCursor[5] = 0x20105;
     temp_v5 = *(unsigned int *)(temp_v9 + 0x120);
-    DAT_004652a0[6] = *(unsigned int *)(temp_v9 + 0x11c);
-    DAT_004652a0[7] = temp_v5;
+    g_commandBufferCursor[6] = *(unsigned int *)(temp_v9 + 0x11c);
+    g_commandBufferCursor[7] = temp_v5;
     temp_v5 = *(unsigned int *)(temp_v9 + 0x128);
-    DAT_004652a0[8] = *(unsigned int *)(temp_v9 + 0x124);
-    DAT_004652a0[9] = temp_v5;
-    puVar3 = DAT_004652a0 + 10;
+    g_commandBufferCursor[8] = *(unsigned int *)(temp_v9 + 0x124);
+    g_commandBufferCursor[9] = temp_v5;
+    puVar3 = g_commandBufferCursor + 10;
     if (puVar11 != (unsigned int *)0x0) {
       if ((*puVar11 & 1) != 0) {
         temp_v2 = 1;
@@ -332,14 +332,14 @@ void FUN_0036ce70(unsigned int param_1,int param_2,int param_3)
       }
       temp_v5 = *(unsigned int *)(temp_v9 + 0x15c);
       DAT_0047208c = temp_v2;
-      DAT_004652a0[10] = *puVar11;
-      DAT_004652a0[0xb] = temp_v5;
+      g_commandBufferCursor[10] = *puVar11;
+      g_commandBufferCursor[0xb] = temp_v5;
       temp_v5 = *(unsigned int *)(temp_v9 + 0x164);
-      DAT_004652a0[0xc] = *(unsigned int *)(temp_v9 + 0x160);
-      DAT_004652a0[0xd] = temp_v5;
-      puVar3 = DAT_004652a0 + 0xe;
+      g_commandBufferCursor[0xc] = *(unsigned int *)(temp_v9 + 0x160);
+      g_commandBufferCursor[0xd] = temp_v5;
+      puVar3 = g_commandBufferCursor + 0xe;
     }
-    DAT_004652a0 = puVar3;
+    g_commandBufferCursor = puVar3;
     temp_v7 = (unsigned int)DAT_00472089;
     temp_v14 = temp_v7 == 0;
     if (temp_v14) {
@@ -348,7 +348,7 @@ void FUN_0036ce70(unsigned int param_1,int param_2,int param_3)
     temp_v8 = (~*(unsigned int *)(temp_v9 + 300) & 0x80000000) == 0 ^ 1;
     DAT_00472089 = !temp_v14 || temp_v7 != temp_v8;
     DAT_0047208a = (char)temp_v8;
-    nw_gfx_internal_FastWordCopyAsm_6(DAT_004652a0,temp_v9 + 0x140);
+    nw_gfx_internal_FastWordCopyAsm_6(g_commandBufferCursor,temp_v9 + 0x140);
     temp_v7 = *(unsigned int *)(temp_v9 + 0x140) & 3;
     if (DAT_00472088 != temp_v7) {
       DAT_00472088 = (unsigned char)temp_v7;
@@ -393,11 +393,11 @@ LAB_0036d510:
       }
     }
     else if (DAT_00472089 != 0) goto LAB_0036d510;
-    nnnstdMemCpy(DAT_004652a0,&DAT_004720b8,0x28);
+    nnnstdMemCpy(g_commandBufferCursor,&DAT_004720b8,0x28);
     temp_v26 = temp_v11;
-    puVar11 = DAT_004652a0 + 10;
+    puVar11 = g_commandBufferCursor + 10;
   }
-  DAT_004652a0 = puVar11;
+  g_commandBufferCursor = puVar11;
   *(int *)(param_2 + 0x100) = (int)temp_v21;
   *(int *)(param_2 + 0x104) = (int)((unsigned long long)temp_v21 >> 0x20);
   *(int *)(param_2 + 0x108) = temp_v4;

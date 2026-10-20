@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0025c870(void);
 int FUN_0028c6b8(void);
-int FUN_002c415c(void);
+int asdMemFree(void);
 
 typedef struct fn_002f325c_arg0 fn_002f325c_arg0;
 typedef struct fn_002f325c_arg1 fn_002f325c_arg1;
@@ -33,8 +33,8 @@ struct fn_002f325c_arg1 {
 
 /* Supplied declaration required: FUN_0025c870. */
 /* Supplied declaration required: FUN_0028c6b8. */
-/* Supplied declaration required: FUN_002c415c. */
-extern void *FUN_002c5c14(fn_002f325c_arg1 *, unsigned int *, unsigned int, unsigned int);
+/* Supplied declaration required: asdMemFree. */
+extern void *asdLoadFileSync(fn_002f325c_arg1 *, unsigned int *, unsigned int, unsigned int);
 
 
 void FUN_002f325c(fn_002f325c_arg0 *param_1,fn_002f325c_arg1 *param_2,unsigned int param_3,
@@ -47,10 +47,10 @@ void FUN_002f325c(fn_002f325c_arg0 *param_1,fn_002f325c_arg1 *param_2,unsigned i
   int uStack_18;
   
   uStack_18 = param_4;
-  pvVar1 = (void *)FUN_002c5c14(param_2,(unsigned int *)&uStack_18,1,0x80);
+  pvVar1 = (void *)asdLoadFileSync(param_2,(unsigned int *)&uStack_18,1,0x80);
   pvVar2 = pvVar1;
   FUN_0028c6b8();
-  FUN_002c415c();
+  asdMemFree();
   FUN_0025c870();
   *(unsigned int *)((int)pvVar1 + 0xac) = 0;
   *(void **)((int)pvVar1 + 0x90) = pvVar2;

@@ -33,7 +33,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
 
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571148; /* 0x571148 */
 extern unsigned int DAT_0057114c; /* 0x57114c */
 extern unsigned int DAT_00571150; /* 0x571150 */
@@ -231,7 +231,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
     *(unsigned int *)(temp_v2 + 0x50) = *(unsigned int *)(temp_v2 + 0x50) & 0xff7fffff;
   }
   if ((*param_2 & 0x2000) != 0) {
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x14;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x14;
     return 1;
   }
   temp_v1 = 1;
@@ -430,11 +430,11 @@ LAB_004e0ac0:
   if (((*(int *)(*param_1 + 0xa8) == 0) && (temp_v2 = FUN_003ec814(), temp_v2 != 0)) &&
      (temp_v2 = FUN_003eda88(*param_1), temp_v2 != 0)) {
     temp_v6 = 0x18;
-    temp_v2 = DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254;
+    temp_v2 = g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254;
   }
   else {
     temp_v6 = 0x21;
-    temp_v2 = DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254;
+    temp_v2 = g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254;
   }
   *(unsigned char *)(temp_v2 + 9) = temp_v6;
   return 1;

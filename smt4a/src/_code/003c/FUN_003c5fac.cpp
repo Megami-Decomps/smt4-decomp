@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_003135a8(void);
+extern int lmapSceneGetUnk0(void);
 
 
 unsigned char FUN_003c5fac(void)
@@ -10,7 +10,7 @@ unsigned char FUN_003c5fac(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_003135a8();
+  temp_v0 = lmapSceneGetUnk0();
   if (temp_v0 == 0x2d) {
     return 0;
   }

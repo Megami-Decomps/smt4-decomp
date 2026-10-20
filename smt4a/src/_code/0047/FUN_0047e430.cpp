@@ -1,61 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047e430` (_code @ 0x47e430, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only at the start: retail keeps `mov r0,#12` before loading bufferA, built hoists the load */
+/* Resets the object to state 12 with the given flag, frees its three buffers, then enters state 13 and pokes the two device slots that are in mode 3. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0019a5a0(void);
-int FUN_0019c364(void);
-int FUN_00342010(void);
-int FUN_003d54f8(int, int);
+typedef struct Object {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 state;
+    /* 0x08 */ u8 flag;
+    /* 0x09 */ u8 unk09[3];
+    /* 0x0C */ void *bufferA;
+    /* 0x10 */ void *bufferB;
+    /* 0x14 */ void *bufferC;
+} Object;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+extern void asdMemFree(void *buffer);
+extern void scrScriptProcessDestroy(void *buffer);
+extern void FUN_00342010(u8 flag);
+extern void FUN_003d54f8(s32 slot, s32 mode);
+extern s32 FUN_0013def0(s32 slot);
 
-extern int FUN_0013def0(unsigned int);
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
-/* Supplied declaration required: FUN_00342010. */
-/* Supplied declaration required: FUN_003d54f8. */
-
-
-void FUN_0047e430(unsigned int *param_1,unsigned char param_2)
-
+void FUN_0047e430(Object *obj, u8 flag)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  *(unsigned char *)(param_1 + 2) = param_2;
-  param_1[1] = 0xc;
-  *param_1 = 0;
-  if (param_1[3] != 0) {
-    FUN_0019a5a0();
-    param_1[3] = 0;
-  }
-  if (param_1[4] != 0) {
-    FUN_0019a5a0();
-    param_1[4] = 0;
-  }
-  if (param_1[5] != 0) {
-    FUN_0019c364();
-    param_1[5] = 0;
-  }
-  if (*(char *)(param_1 + 2) != '\0') {
-    FUN_00342010();
-  }
-  param_1[1] = 0xd;
-  temp_v0 = FUN_0013def0(0);
-  if (temp_v0 == 3) {
-    FUN_003d54f8(0,5);
-  }
-  temp_v0 = FUN_0013def0(1);
-  if (temp_v0 == 3) {
-    FUN_003d54f8(1,5);
-    return;
-  }
-  return;
+    obj->flag = flag;
+    obj->state = 12;
+    obj->unk00 = 0;
+    if (obj->bufferA != NULL) {
+        asdMemFree(obj->bufferA);
+        obj->bufferA = NULL;
+    }
+    if (obj->bufferB != NULL) {
+        asdMemFree(obj->bufferB);
+        obj->bufferB = NULL;
+    }
+    if (obj->bufferC != NULL) {
+        scrScriptProcessDestroy(obj->bufferC);
+        obj->bufferC = NULL;
+    }
+    if (obj->flag != 0) {
+        FUN_00342010(obj->flag);
+    }
+    obj->state = 13;
+    if (FUN_0013def0(0) == 3) {
+        FUN_003d54f8(0, 5);
+    }
+    if (FUN_0013def0(1) == 3) {
+        FUN_003d54f8(1, 5);
+    }
 }
 
-} /* extern "C" */
+}

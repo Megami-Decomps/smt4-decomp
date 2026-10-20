@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00137ee0(int, int *, int);
-int FUN_00180008(int);
+int asdSequenceRequest(int, int *, int);
+int jyoucyuGetTableEntry(int);
 
 /* stack frame of void: 2 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,9 +17,9 @@ typedef struct {
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-/* Supplied declaration required: FUN_00137ee0. */
-/* Supplied declaration required: FUN_00180008. */
-extern unsigned short FUN_00236038(unsigned int);
+/* Supplied declaration required: asdSequenceRequest. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
+extern unsigned short scrGetArg(unsigned int);
 
 
 unsigned int FUN_0037d700(void)
@@ -31,12 +31,12 @@ unsigned int FUN_0037d700(void)
   int temp_v1;
   
   temp_v1 = in_r3;
-  FUN_00180008(0);
-  temp_v0 = FUN_00236038(0);
+  jyoucyuGetTableEntry(0);
+  temp_v0 = scrGetArg(0);
   temp_v1 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v1 + 2)),temp_v0);
-  temp_v0 = FUN_00236038(1);
+  temp_v0 = scrGetArg(1);
   temp_v1 = romwright_piece_2_2(temp_v0,(unsigned short)temp_v1);
-  FUN_00137ee0(0xe,&temp_v1,4);
+  asdSequenceRequest(0xe,&temp_v1,4);
   return 1;
 }
 

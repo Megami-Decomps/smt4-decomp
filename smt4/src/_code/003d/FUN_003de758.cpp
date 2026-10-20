@@ -17,7 +17,7 @@ typedef struct {
 extern int DAT_00434290; /* 0x434290 */
 
 /* Supplied declaration required: FUN_0022699c. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 
 
 unsigned int FUN_003de758(short param_1,unsigned int param_2,unsigned int param_3)
@@ -31,7 +31,7 @@ unsigned int FUN_003de758(short param_1,unsigned int param_2,unsigned int param_
   int temp_v4;
   unsigned int temp_v5;
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   temp_v3 = 4;
   do {
     temp_v4 = *(int *)(temp_v0 + 0x1e98) + temp_v3 * 0x114;

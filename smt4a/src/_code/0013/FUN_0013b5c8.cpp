@@ -15,7 +15,7 @@ extern int FUN_00146650(void);
 /* Supplied declaration required: FUN_0014668c. */
 extern unsigned char *FUN_0016f864(void);
 extern unsigned char *FUN_0016f988(unsigned int *, char *, unsigned int, unsigned int);
-extern unsigned int FUN_002e3390(char *);
+extern unsigned int wstrlen(char *);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -41,7 +41,7 @@ unsigned char * FUN_0013b5c8(void)
   if (temp_v2) {
     puVar2 = (unsigned char *)FUN_0016f864();
     if (-1 < (int)puVar2) {
-      temp_v1 = FUN_002e3390("ac:u");
+      temp_v1 = wstrlen("ac:u");
       puVar2 = (unsigned char *)FUN_0016f988(&DAT_005b4438,"ac:u",temp_v1,0);
       if (-1 < (int)puVar2) {
         DAT_005891a8 = DAT_005891a8 + 1;

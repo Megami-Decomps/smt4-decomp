@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001527d8(...);
 int FUN_00164b5c(...);
 int FUN_001654f8(...);
-int FUN_001677c0(...);
+int efctSetSpeed(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_0023723c(...);
@@ -30,7 +30,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: FUN_001654f8. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0023723c. */
@@ -64,18 +64,18 @@ void FUN_0036cb0c(unsigned int param_1,unsigned int param_2,int param_3,int para
     param_9 = 0x28 - param_9;
   }
   VectorSignedToFloat(param_9,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_001677c0(param_9);
+  efctSetSpeed(param_9);
   FUN_001835b4(2,0x2e,0xf9,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),0x22);
-  FUN_001677c0();
+  efctSetSpeed();
   if (param_6 != 0) {
     temp_v2 = 0x10d;
     do {
       FUN_001835b4(2,0x2e,temp_v2,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),0x22);
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 0x110);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,0x2e,0x110,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),0x22);
-    FUN_001677c0();
+    efctSetSpeed();
   }
   temp_v2 = FUN_001834a4(0x2e,0xe4);
   param_4 = param_3 + param_5 + param_4;

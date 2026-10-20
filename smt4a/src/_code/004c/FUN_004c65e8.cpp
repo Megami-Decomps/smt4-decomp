@@ -9,7 +9,7 @@ int FUN_003f0e20(unsigned int *, unsigned int);
 extern unsigned int DAT_00571400; /* 0x571400 */
 extern unsigned int DAT_00571404; /* 0x571404 */
 
-extern unsigned int *FUN_0014aa78(void);
+extern unsigned int *btlGetMainState(void);
 /* Supplied declaration required: FUN_003f0e20. */
 
 
@@ -20,7 +20,7 @@ unsigned int FUN_004c65e8(unsigned int param_1)
   unsigned int *puVar1;
   unsigned int temp_v0;
   
-  puVar1 = (unsigned int *)FUN_0014aa78();
+  puVar1 = (unsigned int *)btlGetMainState();
   FUN_003f0e20(puVar1,param_1);
   temp_v0 = 0;
   if ((DAT_00571400 & *puVar1) != 0 || (puVar1[1] & DAT_00571404) != 0) {

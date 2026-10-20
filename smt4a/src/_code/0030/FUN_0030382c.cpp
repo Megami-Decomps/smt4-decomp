@@ -20,7 +20,7 @@ extern unsigned char DAT_0055a4c0; /* 0x55a4c0 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int *FUN_002e4e86(int *, unsigned int *);
-extern int FUN_002e6dac(void);
+extern int rt_malloc(void);
 extern unsigned int FUN_002ff8b4(unsigned int, int *);
 extern int FUN_002ff8c6(unsigned int *);
 /* Supplied declaration required: FUN_002ff8ce. */
@@ -54,7 +54,7 @@ unsigned long long FUN_0030382c(unsigned int *param_1,int param_2,unsigned int p
   temp_v2 = FUN_002ff8c6(puVar5);
   piVar2 = (int *)FUN_002e4e86(&temp_v2,(unsigned int *)&temp_v3);
   temp_v0 = *piVar2;
-  temp_v1 = FUN_002e6dac();
+  temp_v1 = rt_malloc();
   *piVar1 = temp_v1;
   FUN_002ff8ce(*puVar5,*(unsigned int *)(param_2 + 0xc),temp_v1,piVar1);
   temp_v1 = FUN_002ff8c6(puVar5);

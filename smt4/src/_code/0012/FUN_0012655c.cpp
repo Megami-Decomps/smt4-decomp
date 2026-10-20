@@ -10,7 +10,7 @@ int VectorUnsignedToFloat(int, int);
 int nw_snd_SoundStartable_StartSound(unsigned char *, int, int, int);
 int nw_snd_internal_BasicSound_SetVolume(...);
 
-extern unsigned char DAT_004e1f68; /* 0x4e1f68 */
+extern unsigned char g_asdSound; /* 0x4e1f68 */
 extern unsigned char DAT_004e20ec; /* 0x4e20ec */
 extern int DAT_004e316c; /* 0x4e316c */
 
@@ -50,10 +50,10 @@ int FUN_0012655c(int param_1,int param_2,unsigned int param_3)
         if (temp_v2 == -1) {
           return -1;
         }
-        puVar4 = &DAT_004e1f68;
-        temp_v0 = FUN_002bf684(&DAT_004e1f68);
+        puVar4 = &g_asdSound;
+        temp_v0 = FUN_002bf684(&g_asdSound);
         if (temp_v0 != 0) {
-          FUN_00141fd0(&DAT_004e1f68,param_1);
+          FUN_00141fd0(&g_asdSound,param_1);
           if (puVar4 == (unsigned char *)0x0) {
             return temp_v2;
           }

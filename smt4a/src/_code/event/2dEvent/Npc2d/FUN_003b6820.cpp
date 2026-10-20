@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int asdMemoryAllocTracked(...);
 int FUN_00191e00(...);
 int FUN_0019e378(...);
 int FUN_001acf98(...);
 int FUN_00283498(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,18 +19,18 @@ typedef struct {
 
 extern int FUN_002897cc(...); /* 0x2897cc */
 extern int FUN_0034da3c(...); /* 0x34da3c */
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_00191e00. */
 /* Supplied declaration required: FUN_0019e378. */
 extern int FUN_001a6508(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_00283498. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_003b6820(unsigned int param_1,int param_2,unsigned int param_3)
@@ -52,8 +52,8 @@ void FUN_003b6820(unsigned int param_1,int param_2,unsigned int param_3)
     }
   }
   puVar2 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0xbc,1);
-  FUN_002e6354();
+  asdMemoryAllocTracked(0x100,0x100,0,0xbc,1);
+  sysMemClear();
   temp_v2 = 0;
   puVar2[8] = 0x3f800000;
   puVar2[9] = 0x3f800000;
@@ -104,16 +104,16 @@ void FUN_003b6820(unsigned int param_1,int param_2,unsigned int param_3)
   }
   else {
     puVar2[3] = 0;
-    temp_v0 = FUN_001a6508(DAT_00570280,puVar2[0x10],puVar2[0x11],1);
+    temp_v0 = FUN_001a6508(g_aocSystem,puVar2[0x10],puVar2[0x11],1);
     if (temp_v0 != 0) {
-      FUN_00191e00(DAT_00570280,puVar2[0x10],puVar2[0x11],0x10000);
+      FUN_00191e00(g_aocSystem,puVar2[0x10],puVar2[0x11],0x10000);
     }
     else {
       FUN_001acf98(puVar2[0x10],puVar2[0x11]);
     }
   }
   puVar2[6] = 0x3e851eb8;
-  FUN_0014e38c("EVE_2dTex",4,0,0,FUN_002897cc,FUN_0034da3c,puVar2);
+  asdProcessCreateSimple("EVE_2dTex",4,0,0,FUN_002897cc,FUN_0034da3c,puVar2);
   return;
 }
 

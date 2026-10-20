@@ -9,7 +9,7 @@ int FUN_001879d0(unsigned int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern signed char DAT_005b3d54; /* 0x5b3d54 */
 extern unsigned int DAT_005b3d60; /* 0x5b3d60 */
 
@@ -49,7 +49,7 @@ void FUN_00163ec4(int param_1,unsigned int param_2,unsigned int param_3,int para
     }
     temp_v1 = DAT_005b3d60 | temp_v1;
     if (DAT_005b3d54 != '\0') {
-      FUN_001879d0(DAT_0059dbb4);
+      FUN_001879d0(g_renderCtx);
     }
     FUN_00162790(*(unsigned int *)(param_1 + 0x50),temp_v1,param_1 + 0x5c);
   }

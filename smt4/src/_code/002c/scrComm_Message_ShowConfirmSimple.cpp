@@ -12,7 +12,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00254e2c. */
 extern unsigned int FUN_002893d8(void);
-extern unsigned int FUN_00296cc8(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 extern unsigned int FUN_002b47f4(unsigned int);
 /* Supplied declaration required: FUN_002bff50. */
 
@@ -25,7 +25,7 @@ void scrComm_Message_ShowConfirmSimple(void)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00296cc8(0);
+  temp_v0 = scrGetArg(0);
   temp_v1 = FUN_002b47f4(0x1e);
   temp_v2 = FUN_002893d8();
   FUN_002bff50();

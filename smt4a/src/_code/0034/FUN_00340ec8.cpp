@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_003174bc(void);
+extern int asdListBoxFindItem(void);
 
 
 int FUN_00340ec8(void)
@@ -10,7 +10,7 @@ int FUN_00340ec8(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_003174bc();
+  temp_v0 = asdListBoxFindItem();
   if (temp_v0 != 0) {
     temp_v0 = temp_v0 + 0x20c;
   }

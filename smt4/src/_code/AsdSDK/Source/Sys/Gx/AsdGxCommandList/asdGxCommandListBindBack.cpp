@@ -1,0 +1,17 @@
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
+
+extern "C" {
+extern AsdGxState g_asdGxState;
+extern u32 g_asdGxCommandLists[2]; /* the two nngx command lists */
+
+void FUN_002bef70(u32 cmdList);
+void asdModelResetCommandBuffer(void);
+
+/* Binds the command list that is not being recorded. */
+void asdGxCommandListBindBack(void)
+{
+    FUN_002bef70(g_asdGxCommandLists[g_asdGxState.current ^ 1]);
+    asdModelResetCommandBuffer();
+}
+
+} /* extern "C" */

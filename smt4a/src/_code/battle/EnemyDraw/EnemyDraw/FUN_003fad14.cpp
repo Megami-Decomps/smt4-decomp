@@ -58,7 +58,7 @@ typedef struct {
 
 extern unsigned int DAT_00570d60; /* 0x570d60 */
 extern float DAT_00570d64; /* 0x570d64 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
 extern unsigned int DAT_0064c054; /* 0x64c054 */
 extern unsigned int DAT_0064c058; /* 0x64c058 */
@@ -161,7 +161,7 @@ void FUN_003fad14(int param_1,int param_2,float *param_3,unsigned int param_4,in
         iStack_30 = param_2;
         temp_v38 = param_3;
         do {
-          temp_v2 = DAT_0059dbb4;
+          temp_v2 = g_renderCtx;
           pfVar7 = (float *)(*(int *)(param_1 + 0x18) + temp_v5 * 0x28);
           if (param_5 != 1) {
             if ((param_5 != 2 && param_5 != 3) || (*(char *)((int)pfVar7 + 0x25) != '\0')) {
@@ -226,7 +226,7 @@ LAB_003fade8:
                   *(unsigned char *)(temp_v2 + 0x12d0) = 0;
                 }
               }
-              FUN_0016c4b8(DAT_0059dbb4,
+              FUN_0016c4b8(g_renderCtx,
                            *(unsigned int *)
                             (*(int *)(param_1 + 0x14) + (unsigned int)*(unsigned char *)(pfVar7 + 9) * 0x20 + 0x18));
               if (!(*(char *)((int)pfVar7 + 0x25) == '\0' || param_5 == 3)) {

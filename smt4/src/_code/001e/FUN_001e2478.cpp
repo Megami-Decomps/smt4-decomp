@@ -8,8 +8,8 @@ int FUN_0027d7b0(...);
 int FUN_00287aec(void);
 int VectorSignedToFloat(int, int);
 
-extern int DAT_00447060; /* 0x447060 */
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapMainState; /* 0x447060 */
+extern int g_lmapScene; /* 0x447e88 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0027d748(void);
@@ -32,9 +32,9 @@ void FUN_001e2478(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   float temp_v6;
   unsigned int temp_v7;
   
-  temp_v0 = DAT_00447060;
+  temp_v0 = g_lmapMainState;
   if (param_1 != 0) {
-    FUN_0027d7b0(*(unsigned int *)(DAT_00447060 + 0x40),param_1,param_2);
+    FUN_0027d7b0(*(unsigned int *)(g_lmapMainState + 0x40),param_1,param_2);
     temp_v1 = FUN_0027d748();
     temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
     *(unsigned int *)(temp_v0 + 0x4ebc) = temp_v2;
@@ -44,9 +44,9 @@ void FUN_001e2478(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     *(unsigned int *)(temp_v0 + 0x4ec4) = temp_v2;
   }
   else {
-    temp_v2 = *(unsigned int *)(DAT_00447e88 + 0x20);
-    temp_v5 = *(unsigned int *)(DAT_00447e88 + 0x24);
-    *(unsigned int *)(DAT_00447060 + 0x4ebc) = *(unsigned int *)(DAT_00447e88 + 0x1c);
+    temp_v2 = *(unsigned int *)(g_lmapScene + 0x20);
+    temp_v5 = *(unsigned int *)(g_lmapScene + 0x24);
+    *(unsigned int *)(g_lmapMainState + 0x4ebc) = *(unsigned int *)(g_lmapScene + 0x1c);
     *(unsigned int *)(temp_v0 + 0x4ec0) = temp_v2;
     *(unsigned int *)(temp_v0 + 0x4ec4) = temp_v5;
   }
@@ -71,20 +71,20 @@ void FUN_001e2478(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   *(unsigned int *)(temp_v0 + 0x4ee0) = 0x41f00000;
   *(unsigned int *)(temp_v0 + 0x4ee4) = 0;
   *(int *)(temp_v0 + 0x4ee8) = (int)(temp_v3 / 30.0f);
-  temp_v1 = DAT_00447e88;
+  temp_v1 = g_lmapScene;
   temp_v2 = *(unsigned int *)(temp_v0 + 0x4ebc);
   temp_v5 = *(unsigned int *)(temp_v0 + 0x4ec0);
   temp_v7 = *(unsigned int *)(temp_v0 + 0x4ec4);
-  puVar3 = (unsigned int *)(DAT_00447e88 + 0x28);
-  *(unsigned int *)(DAT_00447e88 + 0x1c) = temp_v2;
+  puVar3 = (unsigned int *)(g_lmapScene + 0x28);
+  *(unsigned int *)(g_lmapScene + 0x1c) = temp_v2;
   *(unsigned int *)(temp_v1 + 0x20) = temp_v5;
   *(unsigned int *)(temp_v1 + 0x24) = temp_v7;
   *puVar3 = temp_v2;
   *(unsigned int *)(temp_v1 + 0x2c) = temp_v5;
   *(unsigned int *)(temp_v1 + 0x30) = temp_v7;
-  temp_v0 = DAT_00447060;
-  if (*(int *)(DAT_00447060 + 0xcc) != 5) {
-    *(unsigned int *)(DAT_00447060 + 0xd0) = 0;
+  temp_v0 = g_lmapMainState;
+  if (*(int *)(g_lmapMainState + 0xcc) != 5) {
+    *(unsigned int *)(g_lmapMainState + 0xd0) = 0;
     *(unsigned int *)(temp_v0 + 0xcc) = 5;
     *(unsigned int *)(temp_v0 + 0xd4) = 0;
   }

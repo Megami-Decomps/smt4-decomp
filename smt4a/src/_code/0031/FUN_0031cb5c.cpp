@@ -1,14 +1,12 @@
-#include "romwright_types.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f3b4; /* 0x57f3b4 */
+extern EventEffectGlobalsA DAT_0057f3b4;
 
-
-unsigned char FUN_0031cb5c(void)
-
+bool FUN_0031cb5c(void)
 {
-  return (*(int *)((unsigned char *)&DAT_0057f3b4 + 0x8)) != 0;
+    return DAT_0057f3b4.unk08 != NULL;
 }
 
 } /* extern "C" */

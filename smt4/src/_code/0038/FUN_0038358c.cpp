@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a16b0(int);
+int qcMainSetMode(int);
 int FUN_0026f960(int);
 int FUN_00270028(int);
 int FUN_00275dec(void);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001a16b0. */
+/* Supplied declaration required: qcMainSetMode. */
 /* Supplied declaration required: FUN_0026f960. */
 /* Supplied declaration required: FUN_00270028. */
 /* Supplied declaration required: FUN_00275dec. */
@@ -40,7 +40,7 @@ void FUN_0038358c(int param_1)
     if (temp_v0 != 1) {
       if (((temp_v0 == 2) && (temp_v0 = FUN_002903f0(), temp_v0 != 0)) &&
          (temp_v1 = FUN_00287894(), temp_v1 == 6)) {
-        FUN_001a16b0(1);
+        qcMainSetMode(1);
         FUN_002b63c0();
         FUN_0026f960(*(unsigned short *)(temp_v0 + 0x148));
         FUN_002917b8();

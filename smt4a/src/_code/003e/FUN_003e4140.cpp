@@ -1,25 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e4140` (_code @ 0x3e4140, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only (ip/r2/r3 usage in the loop) */
+/* Copies the two default words of table DAT_00536bcc into `dest`. */
+#include "common.h"
 
 extern "C" {
 
+extern u32 DAT_00536bcc[2];
 
-void FUN_003e4140(int param_1)
-
+void FUN_003e4140(u32 *dest)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v1 = 0;
-  do {
-    temp_v2 = temp_v1;
-    temp_v0 = temp_v1 * 4;
-    temp_v1 = temp_v1 + 1;
-    *(unsigned int *)(param_1 + temp_v0) = *(unsigned int *)(temp_v2 * 4 + 0x536bcc);
-  } while ((int)temp_v1 < 2);
-  return;
+    u32 i = 0;
+
+    do {
+        u8 index = i;
+        u32 *slot = &dest[i];
+
+        i++;
+        *slot = DAT_00536bcc[index];
+    } while ((s32)i < 2);
 }
 
-} /* extern "C" */
+}

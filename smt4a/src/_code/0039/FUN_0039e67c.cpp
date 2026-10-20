@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00236038(int);
+int scrGetArg(int);
 int FUN_003f2638(int, int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -19,8 +19,8 @@ extern unsigned int DAT_00570d84; /* 0x570d84 */
 extern unsigned int DAT_00570d90; /* 0x570d90 */
 extern unsigned int DAT_00570d94; /* 0x570d94 */
 
-extern int FUN_0014aa78(void);
-/* Supplied declaration required: FUN_00236038. */
+extern int btlGetMainState(void);
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_003f2638. */
 
 
@@ -37,9 +37,9 @@ unsigned int FUN_0039e67c(void)
   unsigned int *puVar7;
   int temp_v6;
   
-  temp_v1 = FUN_00236038(0);
-  temp_v0 = FUN_00236038(1);
-  temp_v2 = FUN_0014aa78();
+  temp_v1 = scrGetArg(0);
+  temp_v0 = scrGetArg(1);
+  temp_v2 = btlGetMainState();
   temp_v6 = 4;
   temp_v4 = 0;
   while( 1 ) {

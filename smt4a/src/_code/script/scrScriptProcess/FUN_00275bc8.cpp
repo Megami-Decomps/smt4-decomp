@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001630d4(int, int, int, int, int);
-int FUN_002e6354(...);
+int asdMemoryAlloc(int, int, int, int, int);
+int sysMemClear(...);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -14,12 +14,12 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern int DAT_00588e30; /* 0x588e30 */
+extern int g_scrScriptResources; /* 0x588e30 */
 extern int DAT_00588e34; /* 0x588e34 */
 extern int DAT_00588e38; /* 0x588e38 */
 
-/* Supplied declaration required: FUN_001630d4. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: asdMemoryAlloc. */
+/* Supplied declaration required: sysMemClear. */
 
 
 int FUN_00275bc8(int param_1,unsigned int param_2)
@@ -96,8 +96,8 @@ int FUN_00275bc8(int param_1,unsigned int param_2)
         }
         if (((temp_v11 && temp_v8 != 0) && temp_v0 != 0) && -1 < temp_v4) {
           temp_v5 = 0x100;
-          FUN_001630d4(0x100,0x100,0,0x10c,0);
-          FUN_002e6354();
+          asdMemoryAlloc(0x100,0x100,0,0x10c,0);
+          sysMemClear();
           if (temp_v5 == 0) {
             temp_v5 = 0;
           }
@@ -114,7 +114,7 @@ int FUN_00275bc8(int param_1,unsigned int param_2)
             *(unsigned int *)(temp_v5 + 0x30) = 0;
             *(unsigned int *)(temp_v5 + 0x34) = 0;
             *(unsigned int *)(temp_v5 + 0x38) = 0;
-            FUN_002e6354(temp_v5 + 0x3c,0x70);
+            sysMemClear(temp_v5 + 0x3c,0x70);
             *(int *)(temp_v5 + 0xbc) = temp_v8;
             *(int *)(temp_v5 + 0xac) = param_1;
             *(int *)(temp_v5 + 0xb0) = temp_v6;
@@ -136,7 +136,7 @@ int FUN_00275bc8(int param_1,unsigned int param_2)
             *(unsigned int *)(temp_v5 + 0xd8) = 0;
             if (0 < *(short *)(param_1 + 0x14)) {
               puVar6 = (unsigned int *)0x100;
-              FUN_001630d4(0x100,0x100,0,(int)*(short *)(param_1 + 0x14) << 2,0);
+              asdMemoryAlloc(0x100,0x100,0,(int)*(short *)(param_1 + 0x14) << 2,0);
               *(unsigned int **)(temp_v5 + 0xe8) = puVar6;
               if (0 < *(short *)(param_1 + 0x14)) {
                 temp_v1 = (int)*(short *)(param_1 + 0x14) & 1;
@@ -159,7 +159,7 @@ int FUN_00275bc8(int param_1,unsigned int param_2)
             }
             else {
               puVar6 = (unsigned int *)0x100;
-              FUN_001630d4(0x100,0x100,0,(int)*(short *)(param_1 + 0x16) << 2,0);
+              asdMemoryAlloc(0x100,0x100,0,(int)*(short *)(param_1 + 0x16) << 2,0);
               *(unsigned int **)(temp_v5 + 0xec) = puVar6;
               if (0 < *(short *)(param_1 + 0x16)) {
                 temp_v1 = (int)*(short *)(param_1 + 0x16) & 1;
@@ -190,7 +190,7 @@ int FUN_00275bc8(int param_1,unsigned int param_2)
               *(unsigned int *)(temp_v5 + 0xf0) = 0;
               *(unsigned int *)(temp_v5 + 0xf4) = 0;
             }
-            DAT_00588e30 = DAT_00588e30 + 1;
+            g_scrScriptResources = g_scrScriptResources + 1;
           }
         }
       }

@@ -6,16 +6,16 @@ extern "C" {
 
 int FUN_002a60cc(unsigned int, int, unsigned int);
 int FUN_002ae898(int);
-int FUN_002c415c(int);
-int FUN_002c43b4(unsigned int, int);
+int asdMemFree(int);
+int jobStop(unsigned int, int);
 
-extern unsigned int DAT_00433158; /* 0x433158 */
-extern int DAT_00434210; /* 0x434210 */
+extern unsigned int g_aocSystem; /* 0x433158 */
+extern int g_btlTalkBustUp; /* 0x434210 */
 
 /* Supplied declaration required: FUN_002a60cc. */
 /* Supplied declaration required: FUN_002ae898. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 
 
 void FUN_002523f0(void)
@@ -24,21 +24,21 @@ void FUN_002523f0(void)
 /* irregular: 4 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_00434210;
-  if (DAT_00434210 != 0) {
-    if (-1 < *(int *)(DAT_00434210 + 0x2f8)) {
+  temp_v0 = g_btlTalkBustUp;
+  if (g_btlTalkBustUp != 0) {
+    if (-1 < *(int *)(g_btlTalkBustUp + 0x2f8)) {
       FUN_002ae898(0x18);
-      if (DAT_00434210 != 0) {
-        *(unsigned char *)(DAT_00434210 + 0x2f4) = 0;
+      if (g_btlTalkBustUp != 0) {
+        *(unsigned char *)(g_btlTalkBustUp + 0x2f4) = 0;
       }
-      FUN_002a60cc(DAT_00433158,0x18,*(unsigned int *)(temp_v0 + 0x2f8));
+      FUN_002a60cc(g_aocSystem,0x18,*(unsigned int *)(temp_v0 + 0x2f8));
       *(unsigned int *)(temp_v0 + 0x2f8) = 0xffffffff;
       *(unsigned int *)(temp_v0 + 0x2e8) = 3;
       *(unsigned int *)(temp_v0 + 0x2ec) = 0;
     }
-    FUN_002c43b4(*(unsigned int *)(temp_v0 + 0x2e4),0);
-    FUN_002c415c(temp_v0);
-    DAT_00434210 = 0;
+    jobStop(*(unsigned int *)(temp_v0 + 0x2e4),0);
+    asdMemFree(temp_v0);
+    g_btlTalkBustUp = 0;
   }
   return;
 }

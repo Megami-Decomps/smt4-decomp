@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010063a(...);
+int qsort(...);
 int FUN_0028a888(...);
 int FUN_002a1f60(...);
 int FUN_00493e14(...);
@@ -19,10 +19,10 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_0049cf3c; /* 0x49cf3c */
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 extern int DAT_0057f0c8; /* 0x57f0c8 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_0028a888. */
 /* Supplied declaration required: FUN_002a1f60. */
 extern int FUN_0046e458(unsigned int, short);
@@ -222,7 +222,7 @@ void FUN_004969a8(int param_1)
       temp_v6 = temp_v6 + 1;
     } while ((int)temp_v6 < 0x7df);
   }
-  FUN_0010063a(param_1 + 0x8f84,*(unsigned short *)(param_1 + 0x9f84),4,&LAB_0049cf3c);
+  qsort(param_1 + 0x8f84,*(unsigned short *)(param_1 + 0x9f84),4,&LAB_0049cf3c);
   FUN_004cfeb0(param_1 + 0xf00,10,*(unsigned short *)(param_1 + 0x9f84),0,1,1);
   *(unsigned char *)(param_1 + 0xf0d) = 1;
   FUN_004cff88(param_1 + 0xf00,0);
@@ -237,7 +237,7 @@ void FUN_004969a8(int param_1)
   else {
     *(unsigned char *)(DAT_0057f0c8 + 0x67c) = 1;
     *(unsigned char *)(temp_v1 + 0x5ea) = 1;
-    temp_v2 = FUN_0046e458(DAT_00570280,temp_v0);
+    temp_v2 = FUN_0046e458(g_aocSystem,temp_v0);
     if (temp_v2 == 0) {
       temp_v2 = FUN_00480b08();
     }

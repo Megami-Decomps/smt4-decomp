@@ -7,8 +7,8 @@ extern "C" {
 int FUN_002a4e98(void);
 int FUN_002bd420(int, unsigned int [2], int);
 int FUN_002c2264(unsigned int);
-int FUN_002c415c(void);
-int FUN_002c498c(int, int, int, int);
+int asdMemFree(void);
+int asdMemAlloc(int, int, int, int);
 int SBORROW4(int, int);
 
 typedef struct fn_0014ed58_arg0 fn_0014ed58_arg0;
@@ -34,10 +34,10 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002a4e98. */
 /* Supplied declaration required: FUN_002bd420. */
-extern int FUN_002c1870(int, char *, unsigned int);
+extern int rt_memcmp(int, char *, unsigned int);
 /* Supplied declaration required: FUN_002c2264. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c498c. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMemAlloc. */
 
 
 void FUN_0014ed58(fn_0014ed58_arg0 *param_1,int param_2)
@@ -76,7 +76,7 @@ void FUN_0014ed58(fn_0014ed58_arg0 *param_1,int param_2)
     } while (unaff_r4 < param_1->field_0xa0);
   }
   if (param_1->field_0xa4 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1->field_0xa4 = 0;
   }
   param_1->field_0xa0 = 0;
@@ -91,7 +91,7 @@ void FUN_0014ed58(fn_0014ed58_arg0 *param_1,int param_2)
   if (0 < temp_v3) {
     do {
       temp_v3 = temp_v10;
-      temp_v0 = FUN_002c1870(temp_v10,"ATBC",4);
+      temp_v0 = rt_memcmp(temp_v10,"ATBC",4);
       if (temp_v0 == 0) {
         temp_v5 = *(int *)(temp_v3 + 8);
         temp_v7 = temp_v5 == 0;
@@ -104,7 +104,7 @@ void FUN_0014ed58(fn_0014ed58_arg0 *param_1,int param_2)
           temp_v0 = 0;
           temp_v3 = temp_v3 + *(int *)(temp_v3 + 0x10);
           do {
-            temp_v1 = FUN_002c1870(temp_v3,"EPLSIGN",7);
+            temp_v1 = rt_memcmp(temp_v3,"EPLSIGN",7);
             if (temp_v1 != 0) break;
             FUN_002bd420(temp_v3,temp_v8,0x10);
             unaff_r7 = (unsigned short *)(temp_v3 + 0x10);
@@ -131,14 +131,14 @@ void FUN_0014ed58(fn_0014ed58_arg0 *param_1,int param_2)
   else {
     temp_v8[0] = 1;
     temp_v3 = 0x100;
-    FUN_002c498c(0x100,0x100,0,param_1->field_0xa0 * 0xc);
+    asdMemAlloc(0x100,0x100,0,param_1->field_0xa0 * 0xc);
     param_1->field_0xa4 = temp_v3;
     temp_v3 = 0;
     temp_v4 = 0;
     if (temp_v4 < *piVar11) {
       do {
         temp_v6 = temp_v10;
-        temp_v0 = FUN_002c1870(temp_v10,"ATBC",4);
+        temp_v0 = rt_memcmp(temp_v10,"ATBC",4);
         if (temp_v0 == 0) {
           temp_v5 = *(int *)(temp_v6 + 8);
           temp_v7 = temp_v5 == 0;
@@ -151,7 +151,7 @@ void FUN_0014ed58(fn_0014ed58_arg0 *param_1,int param_2)
             temp_v0 = 0;
             temp_v6 = temp_v6 + *(int *)(temp_v6 + 0x10);
             do {
-              temp_v1 = FUN_002c1870(temp_v6,"EPLSIGN",7);
+              temp_v1 = rt_memcmp(temp_v6,"EPLSIGN",7);
               if (temp_v1 != 0) break;
               FUN_002bd420(temp_v6,temp_v8,0x10);
               unaff_r7 = (unsigned short *)(temp_v6 + 0x10);

@@ -18,7 +18,7 @@ extern romwright_code *DAT_0058950c; /* 0x58950c */
 
 /* Supplied declaration required: FUN_001d1438. */
 extern unsigned int FUN_00439e0c(int, unsigned int, unsigned int);
-extern int aeabi_uidivmod(unsigned int, unsigned int);
+extern int __aeabi_uidivmod(unsigned int, unsigned int);
 /* Supplied declaration required: nn_snd_CTR_DecodeAdpcmData. */
 
 
@@ -41,7 +41,7 @@ unsigned int FUN_00512f1c(int *param_1,int param_2,unsigned int param_3)
   
   temp_v3 = param_1[6];
   param_1[2] = 0;
-  temp_v0 = aeabi_uidivmod(param_3,temp_v3);
+  temp_v0 = __aeabi_uidivmod(param_3,temp_v3);
   temp_v1 = FUN_00439e0c(temp_v0 - 0x26,2,1);
   if (temp_v1 != 0) {
     temp_v6 = temp_v3 != 0;

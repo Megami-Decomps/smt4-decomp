@@ -30,7 +30,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_0019d7d4; /* 0x19d7d4 */
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_00435d18; /* 0x435d18 */
 extern unsigned int DAT_00439a20; /* 0x439a20 */
 extern unsigned int DAT_00439a24; /* 0x439a24 */
@@ -81,11 +81,11 @@ void FUN_0023fbdc(unsigned int *param_1,int param_2)
   puVar9 = (unsigned int *)(param_2 + 0x44a0);
   if ((*(char *)(param_2 + 0x44b7) == '\0') &&
      (((*(unsigned int *)(param_2 + 0xe0) & 0x2000000) != 0 || ((*puVar9 & 2) != 0)))) {
-    if (*(int *)(DAT_004342c8 + 0x24) != 0) {
+    if (*(int *)(g_btlMain + 0x24) != 0) {
       FUN_0024082c();
     }
     else {
-      FUN_0024082c(DAT_004342c8,0x78);
+      FUN_0024082c(g_btlMain,0x78);
     }
     if ((*puVar9 & 2) != 0) {
       FUN_00254f58(param_2);
@@ -107,7 +107,7 @@ void FUN_0023fbdc(unsigned int *param_1,int param_2)
     return;
   }
   if ((param_1[3] == 0) && ((*(unsigned int *)(DAT_00435d18 + 0x3028) & 0x400) != 0)) {
-    *(unsigned int *)(DAT_004342c8 + 0x634) = *(unsigned int *)(DAT_004342c8 + 0x634) | 0x4000;
+    *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x4000;
     FUN_00240614(temp_v3);
     param_1[3] = param_1[3] | 2;
   }
@@ -169,11 +169,11 @@ void FUN_0023fbdc(unsigned int *param_1,int param_2)
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < temp_v7);
     }
-    if (*(int *)(DAT_004342c8 + 0x24) != 0) {
+    if (*(int *)(g_btlMain + 0x24) != 0) {
       FUN_0024082c();
     }
     else {
-      FUN_0024082c(DAT_004342c8,0x78);
+      FUN_0024082c(g_btlMain,0x78);
     }
     if ((*puVar9 & 2) == 0) {
       FUN_00254f58(param_2);

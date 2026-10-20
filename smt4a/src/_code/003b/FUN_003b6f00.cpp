@@ -7,10 +7,10 @@ extern "C" {
 int FUN_0018719c(...);
 int FUN_003ff160(int);
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018719c. */
-extern int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_003ff160. */
 extern int FUN_003ff17c(void);
 extern int FUN_003ff190(short);
@@ -30,9 +30,9 @@ unsigned int FUN_003b6f00(void)
   temp_v0 = FUN_0018719c(0x40f);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_00187180(0x44,0);
-    temp_v0 = FUN_00192798();
-    temp_v2 = FUN_00192748(temp_v1);
+    temp_v1 = dataTableGet(0x44,0);
+    temp_v0 = dataTableGetEntries();
+    temp_v2 = dataTableGetCount(temp_v1);
     temp_v1 = 0;
     temp_v4 = 0;
     do {

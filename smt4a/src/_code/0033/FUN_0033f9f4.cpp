@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b5cd4(void);
-int FUN_002d86e8(unsigned int);
+int mapIfStart(unsigned int);
 int FUN_0033abb4(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern int DAT_00580238; /* 0x580238 */
+extern int g_lmapMainState; /* 0x580238 */
 extern int DAT_005806a4; /* 0x5806a4 */
 extern signed char DAT_005f1614; /* 0x5f1614 */
 extern int DAT_005f1618; /* 0x5f1618 */
@@ -23,7 +23,7 @@ extern int FUN_00162e8c(void);
 extern int FUN_00163fd4(unsigned int);
 extern int FUN_001656a0(unsigned int);
 /* Supplied declaration required: FUN_002b5cd4. */
-/* Supplied declaration required: FUN_002d86e8. */
+/* Supplied declaration required: mapIfStart. */
 /* Supplied declaration required: FUN_0033abb4. */
 extern int FUN_004d0554(void);
 
@@ -50,7 +50,7 @@ void FUN_0033f9f4(void)
   unsigned int temp_v13;
   unsigned int temp_v14;
   
-  temp_v3 = DAT_00580238;
+  temp_v3 = g_lmapMainState;
   temp_v6 = 0;
   temp_v7 = 0;
   temp_v2 = 0;
@@ -135,7 +135,7 @@ void FUN_0033f9f4(void)
       *pcVar7 = '\x02';
       temp_v13 = 0x33fd64;
       *(unsigned char *)(temp_v3 + 0x95) = 1;
-      FUN_002d86e8(temp_v13);
+      mapIfStart(temp_v13);
     }
     else {
       *pcVar7 = temp_v0 - '\x01';
@@ -144,20 +144,20 @@ void FUN_0033f9f4(void)
           if (temp_v0 == '\x03') {
             temp_v13 = 0x33fd64;
             *(unsigned char *)(temp_v3 + 0x95) = 1;
-            FUN_002d86e8(temp_v13);
+            mapIfStart(temp_v13);
           }
         }
         else {
 LAB_0033fda4:
           temp_v13 = 0x33fe80;
           *(unsigned char *)(temp_v3 + 0x95) = 1;
-          FUN_002d86e8(temp_v13);
+          mapIfStart(temp_v13);
         }
       }
       else {
         temp_v13 = 0x33fe54;
         *(unsigned char *)(temp_v3 + 0x95) = 1;
-        FUN_002d86e8(temp_v13);
+        mapIfStart(temp_v13);
       }
     }
   }
@@ -168,7 +168,7 @@ LAB_0033fda4:
       *pbVar8 = 0;
       temp_v13 = 0x33fe54;
       *(unsigned char *)(temp_v3 + 0x95) = 1;
-      FUN_002d86e8(temp_v13);
+      mapIfStart(temp_v13);
     }
     else {
       *pbVar8 = temp_v1 + 1;
@@ -177,13 +177,13 @@ LAB_0033fda4:
         if (temp_v1 == 1) {
           temp_v13 = 0x33fd64;
           *(unsigned char *)(temp_v3 + 0x95) = 1;
-          FUN_002d86e8(temp_v13);
+          mapIfStart(temp_v13);
         }
       }
       else {
         temp_v13 = 0x33fe54;
         *(unsigned char *)(temp_v3 + 0x95) = 1;
-        FUN_002d86e8(temp_v13);
+        mapIfStart(temp_v13);
       }
     }
   }

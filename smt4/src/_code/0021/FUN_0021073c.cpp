@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c57c8(unsigned int, int);
+int asdSequenceRequest(unsigned int, int);
 
 extern int DAT_004e3f68; /* 0x4e3f68 */
 extern unsigned int DAT_004e3f6c; /* 0x4e3f6c */
@@ -12,7 +12,7 @@ extern unsigned int DAT_004e3f70; /* 0x4e3f70 */
 
 extern int FUN_002b8cec(unsigned int);
 extern int FUN_002bfde4(unsigned int);
-/* Supplied declaration required: FUN_002c57c8. */
+/* Supplied declaration required: asdSequenceRequest. */
 
 
 unsigned int FUN_0021073c(void)
@@ -26,7 +26,7 @@ unsigned int FUN_0021073c(void)
   }
   temp_v1 = FUN_002bfde4(0);
   if (temp_v1 != 0) {
-    FUN_002c57c8(*(unsigned int *)(DAT_004e3f68 + DAT_004e3f70 * 8 + 4),0);
+    asdSequenceRequest(*(unsigned int *)(DAT_004e3f68 + DAT_004e3f70 * 8 + 4),0);
     return 0xffffffff;
   }
   temp_v1 = FUN_002b8cec(5);

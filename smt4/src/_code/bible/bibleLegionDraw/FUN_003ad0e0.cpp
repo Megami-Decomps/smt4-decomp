@@ -7,9 +7,9 @@ extern "C" {
 int FUN_002af5c0(...);
 int FUN_002bd954(...);
 int FUN_002c312c(unsigned int *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int FUN_002c4938(unsigned int *, int);
-int FUN_002c498c(int, int, int, int, int);
-int FUN_002c5788(unsigned char *, int, int, int, unsigned char *, int, int);
+int memClear(unsigned int *, int);
+int asdMemAlloc(int, int, int, int, int);
+int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(unsigned int *);
 
 /* stack frame of void: 6 slot(s), 24 byte(s) */
@@ -27,16 +27,16 @@ extern unsigned char LAB_003ad31c; /* 0x3ad31c */
 extern unsigned char DAT_004023c4; /* 0x4023c4 */
 extern unsigned char DAT_004023e8; /* 0x4023e8 */
 extern unsigned char DAT_00402400; /* 0x402400 */
-extern signed char DAT_0043d9e0; /* 0x43d9e0 */
+extern signed char g_countdown; /* 0x43d9e0 */
 extern unsigned int *DAT_0043d9e4; /* 0x43d9e4 */
 
 /* Supplied declaration required: FUN_002af5c0. */
 /* Supplied declaration required: FUN_002bd954. */
 extern short FUN_002c09f4(unsigned int);
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -51,11 +51,11 @@ void FUN_003ad0e0(void)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  if (DAT_0043d9e0 < '\x01') {
+  if (g_countdown < '\x01') {
     temp_v2 = 0x3f800000;
     if (DAT_0043d9e4 == (unsigned int *)0x0) {
       puVar2 = (unsigned int *)0x100;
-      FUN_002c498c(0x100,0x100,0,0x474,1);
+      asdMemAlloc(0x100,0x100,0,0x474,1);
       DAT_0043d9e4 = puVar2;
       puVar2[1] = 0;
       *(unsigned short *)(puVar2 + 2) = 0xffff;
@@ -83,11 +83,11 @@ void FUN_003ad0e0(void)
       temp_v0 = FUN_002c09f4(200);
       *(short *)((int)puVar2 + 0x28a) = temp_v0 + 100;
       *(unsigned char *)((int)puVar2 + 0x28d) = 0;
-      FUN_002c4938(puVar2 + 0xa4,0x1e0);
+      memClear(puVar2 + 0xa4,0x1e0);
     }
     puVar2 = DAT_0043d9e4;
     puVar3 = &LAB_003ad31c;
-    FUN_002c5788(&LAB_003ad31c,2,0,0,&LAB_003ac480,0,0);
+    asdProcessCreateSimple(&LAB_003ad31c,2,0,0,&LAB_003ac480,0,0);
     *puVar2 = (unsigned int)puVar3;
     Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar2 + 8);
     FUN_002c312c(puVar2 + 8,&DAT_004023c4,0x24,&DAT_004023e8,0x18,0,0,0,0,&DAT_00402400,0x70);
@@ -100,7 +100,7 @@ void FUN_003ad0e0(void)
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 2);
   }
-  DAT_0043d9e0 = DAT_0043d9e0 + '\x01';
+  g_countdown = g_countdown + '\x01';
   return;
 }
 

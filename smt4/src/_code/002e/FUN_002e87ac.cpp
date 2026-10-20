@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0025086c(int, unsigned char [12]);
-int FUN_002532f8(unsigned char [128]);
+int dialogSetText(unsigned char [128]);
 int FUN_0027e774(int, int);
 int FUN_002bcfc0(...);
 int FUN_002be624(...);
@@ -16,10 +16,10 @@ extern unsigned char LAB_002e8984; /* 0x2e8984 */
 extern unsigned char LAB_002e89c0; /* 0x2e89c0 */
 extern unsigned char LAB_002e8a00; /* 0x2e8a00 */
 extern unsigned char LAB_002e8a20; /* 0x2e8a20 */
-extern int DAT_00447a78; /* 0x447a78 */
+extern int g_mapIf; /* 0x447a78 */
 
 /* Supplied declaration required: FUN_0025086c. */
-/* Supplied declaration required: FUN_002532f8. */
+/* Supplied declaration required: dialogSetText. */
 /* Supplied declaration required: FUN_0027e774. */
 /* Supplied declaration required: FUN_002bcfc0. */
 /* Supplied declaration required: FUN_002be624. */
@@ -40,7 +40,7 @@ void FUN_002e87ac(unsigned int param_1,unsigned int param_2,int param_3)
   unsigned char temp_v4 [128];
   unsigned char temp_v5 [12];
   
-  temp_v2 = DAT_00447a78;
+  temp_v2 = g_mapIf;
   temp_v0 = FUN_002bfdd4();
   temp_v3 = 0x7a906;
   *(unsigned char *)(temp_v2 + 0x18) = 1;
@@ -70,7 +70,7 @@ void FUN_002e87ac(unsigned int param_1,unsigned int param_2,int param_3)
     FUN_002be624(temp_v4,&LAB_002e8a20,param_2);
     temp_v2 = temp_v3;
   }
-  FUN_002532f8(temp_v4);
+  dialogSetText(temp_v4);
   FUN_0027e774(0,1);
   if ((temp_v2 == 0) && (temp_v2 = temp_v3, param_3 != 0)) {
     if (param_3 == 1) {

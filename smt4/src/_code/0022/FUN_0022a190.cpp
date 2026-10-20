@@ -8,17 +8,17 @@ int FUN_0022a07c(unsigned int *, int);
 int FUN_0022a11c(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
 int FUN_00297468(unsigned char [128], unsigned int *, int);
 int FUN_002be624(...);
-int FUN_002c4938(unsigned char [128], int);
+int memClear(unsigned char [128], int);
 int FUN_00385c58(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
 
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_0022a07c. */
 /* Supplied declaration required: FUN_0022a11c. */
 extern int FUN_0022a2c4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_00385c58. */
 
 
@@ -30,11 +30,11 @@ void FUN_0022a190(unsigned int *param_1,int param_2)
   unsigned char temp_v1 [128];
   unsigned char temp_v2 [128];
   
-  FUN_002c4938(temp_v1,0x80);
+  memClear(temp_v1,0x80);
   FUN_002be624(temp_v1,"battle/event/%s/%s.mbm",param_2 + 0x100);
-  temp_v0 = FUN_0022a2c4(DAT_00433158,*(unsigned int *)(param_2 + 0xc4));
+  temp_v0 = FUN_0022a2c4(g_aocSystem,*(unsigned int *)(param_2 + 0xc4));
   if (temp_v0 != 0) {
-    FUN_00385c58(DAT_00433158,*(unsigned int *)(param_2 + 0xc4),param_1 + 3,temp_v1);
+    FUN_00385c58(g_aocSystem,*(unsigned int *)(param_2 + 0xc4),param_1 + 3,temp_v1);
   }
   else {
     FUN_00297468(temp_v1,param_1 + 3,0);
@@ -42,11 +42,11 @@ void FUN_0022a190(unsigned int *param_1,int param_2)
   *param_1 = 4;
   if (param_1[3] != 0) {
     *param_1 = 5;
-    FUN_002c4938(temp_v2,0x80);
+    memClear(temp_v2,0x80);
     FUN_002be624(temp_v2,"battle/event/%s/%s.bf",param_2 + 0x100);
-    temp_v0 = FUN_0022a2c4(DAT_00433158,*(unsigned int *)(param_2 + 0xc4));
+    temp_v0 = FUN_0022a2c4(g_aocSystem,*(unsigned int *)(param_2 + 0xc4));
     if (temp_v0 != 0) {
-      FUN_0022a11c(DAT_00433158,*(unsigned int *)(param_2 + 0xc4),param_1 + 4,temp_v2);
+      FUN_0022a11c(g_aocSystem,*(unsigned int *)(param_2 + 0xc4),param_1 + 4,temp_v2);
     }
     else {
       FUN_00297468(temp_v2,param_1 + 4,0);

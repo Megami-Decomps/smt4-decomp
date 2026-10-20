@@ -47,9 +47,9 @@ extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002bc01c. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
-extern unsigned int FUN_002c0c74(unsigned int);
-extern unsigned int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 
 
@@ -137,9 +137,9 @@ unsigned int FUN_001a1f8c(void)
             }
             else {
 LAB_001a2150:
-              temp_v7 = FUN_002c0cec(0x38,0);
-              temp_v8 = FUN_002c0cc4();
-              temp_v7 = FUN_002c0c74(temp_v7);
+              temp_v7 = dataTableGet(0x38,0);
+              temp_v8 = dataTableGetEntries();
+              temp_v7 = dataTableGetCount(temp_v7);
               puVar13 = temp_v12;
               temp_v12[0] = (unsigned short)temp_v1;
               FUN_002b46f8(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
@@ -189,9 +189,9 @@ LAB_001a2150:
         temp_v9 = FUN_0029efa8(temp_v9);
         temp_v1 = *(unsigned char *)(temp_v9 + temp_v10 + temp_v0 + 0x758);
         if (temp_v1 < 0x4c) {
-          temp_v7 = FUN_002c0cec(0x38,0);
-          temp_v8 = FUN_002c0cc4();
-          temp_v7 = FUN_002c0c74(temp_v7);
+          temp_v7 = dataTableGet(0x38,0);
+          temp_v8 = dataTableGetEntries();
+          temp_v7 = dataTableGetCount(temp_v7);
           puVar13 = temp_v12;
           temp_v12[0] = (unsigned short)temp_v1;
           FUN_002b46f8(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
@@ -207,9 +207,9 @@ LAB_001a2150:
         puVar13 = (unsigned short *)0x0;
       }
       else {
-        temp_v7 = FUN_002c0cec(0x38,0);
-        temp_v8 = FUN_002c0cc4();
-        temp_v7 = FUN_002c0c74(temp_v7);
+        temp_v7 = dataTableGet(0x38,0);
+        temp_v8 = dataTableGetEntries();
+        temp_v7 = dataTableGetCount(temp_v7);
         puVar13 = temp_v12;
         temp_v12[0] = (unsigned short)temp_v1;
         FUN_002b46f8(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
@@ -279,9 +279,9 @@ LAB_001a2150:
         temp_v9 = FUN_0029efa8(temp_v9);
         temp_v1 = *(unsigned char *)(temp_v9 + temp_v10 + temp_v0 + 0x758);
         if (temp_v1 < 0x4c) {
-          temp_v7 = FUN_002c0cec(0x38,0);
-          temp_v8 = FUN_002c0cc4();
-          temp_v7 = FUN_002c0c74(temp_v7);
+          temp_v7 = dataTableGet(0x38,0);
+          temp_v8 = dataTableGetEntries();
+          temp_v7 = dataTableGetCount(temp_v7);
           puVar13 = temp_v12;
           temp_v12[0] = (unsigned short)temp_v1;
           FUN_002b46f8(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
@@ -298,9 +298,9 @@ LAB_001a2150:
         FUN_0029ee6c(puVar13,0x323232ff);
         break;
       }
-      temp_v7 = FUN_002c0cec(0x38,0);
-      temp_v8 = FUN_002c0cc4();
-      temp_v7 = FUN_002c0c74(temp_v7);
+      temp_v7 = dataTableGet(0x38,0);
+      temp_v8 = dataTableGetEntries();
+      temp_v7 = dataTableGetCount(temp_v7);
       puVar13 = temp_v12;
       temp_v12[0] = (unsigned short)temp_v1;
       FUN_002b46f8(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);

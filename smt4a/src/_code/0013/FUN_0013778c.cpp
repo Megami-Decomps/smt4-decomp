@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0014bdb4(...);
-int FUN_0014e38c(...);
-int FUN_001631d0(...);
+int asdProcessCreateSimple(...);
+int jobStop(...);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -23,8 +23,8 @@ extern char *DAT_005b403c; /* 0x5b403c */
 extern unsigned int DAT_005b4068; /* 0x5b4068 */
 
 /* Supplied declaration required: FUN_0014bdb4. */
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: jobStop. */
 
 
 void FUN_0013778c(void)
@@ -40,7 +40,7 @@ void FUN_0013778c(void)
     *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(temp_v0 + 0xc) | 1;
     DAT_005b4068 = 0;
     pcVar2 = "asdMemMap";
-    FUN_0014e38c("asdMemMap",0x15e,0,0,FUN_0013ca58,&LAB_0013f014,&DAT_005b4068);
+    asdProcessCreateSimple("asdMemMap",0x15e,0,0,FUN_0013ca58,&LAB_0013f014,&DAT_005b4068);
     if (pcVar2 == (char *)0x0) {
       pcVar2 = (char *)0x0;
     }
@@ -51,7 +51,7 @@ void FUN_0013778c(void)
     DAT_005b403c = pcVar2;
     return;
   }
-  FUN_001631d0(DAT_005b403c,0);
+  jobStop(DAT_005b403c,0);
   DAT_005b403c = (char *)0x0;
   return;
 }

@@ -27,7 +27,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-extern unsigned int FUN_002e3390(unsigned int);
+extern unsigned int wstrlen(unsigned int);
 extern int nw_ut_ResDicPatricia_Get(unsigned int *, unsigned int, unsigned int);
 
 
@@ -184,7 +184,7 @@ unsigned int FUN_004498ec(fn_004498ec_arg0 *param_1,int param_2,unsigned int par
         temp_v10 = (int)piVar3 + temp_v4;
       }
       if (!(temp_v10 == 0 || temp_v9 == 0)) {
-        temp_v2 = FUN_002e3390(temp_v9);
+        temp_v2 = wstrlen(temp_v9);
         temp_v4 = nw_ut_ResDicPatricia_Get(&temp_v10,temp_v9,temp_v2);
         if (temp_v4 != 0) {
           temp_v4 = (int)((temp_v4 - temp_v10) - 0x1c) >> 4;

@@ -14,12 +14,12 @@ int FUN_002b8838(...);
 int FUN_002bd81c(...);
 int FUN_002bd82c(...);
 int FUN_002c3940(...);
-int FUN_002c4938(void);
-int FUN_002c498c(int, int, int, int, int);
-int FUN_002c4a08(...);
-int FUN_002c5788(unsigned char *, int, int, int, unsigned char *, int, int);
-int FUN_00309df4(void);
-int FUN_0031b860(void);
+int memClear(void);
+int asdMemAlloc(int, int, int, int, int);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
+int campCecDrawSetCreate(void);
+int campCecDrawPageCreate(void);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -50,7 +50,7 @@ extern int FUN_002fc7a0(...); /* 0x2fc7a0 */
 extern int FUN_002fc8dc(...); /* 0x2fc8dc */
 extern int FUN_003172e0(...); /* 0x3172e0 */
 extern int FUN_00321af0(...); /* 0x321af0 */
-extern unsigned int *DAT_0043dad0; /* 0x43dad0 */
+extern unsigned int *g_campCecEdit; /* 0x43dad0 */
 
 /* Supplied declaration required: FUN_0024aaa0. */
 extern unsigned int FUN_0025463c(void);
@@ -66,14 +66,14 @@ extern unsigned int FUN_002b63ac(void);
 /* Supplied declaration required: FUN_002b8838. */
 /* Supplied declaration required: FUN_002bd81c. */
 /* Supplied declaration required: FUN_002bd82c. */
-extern unsigned int FUN_002bd838(unsigned int);
+extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: FUN_002c3940. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
-/* Supplied declaration required: FUN_00309df4. */
-/* Supplied declaration required: FUN_0031b860. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: campCecDrawSetCreate. */
+/* Supplied declaration required: campCecDrawPageCreate. */
 
 
 void FUN_002d67fc(unsigned char param_1)
@@ -88,21 +88,21 @@ void FUN_002d67fc(unsigned char param_1)
   int temp_v3;
   int temp_v4;
   
-  if (DAT_0043dad0 == (unsigned int *)0x0) {
+  if (g_campCecEdit == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
-    FUN_002c498c(0x100,0x100,0,0x160,1);
-    DAT_0043dad0 = puVar1;
+    asdMemAlloc(0x100,0x100,0,0x160,1);
+    g_campCecEdit = puVar1;
   }
-  puVar1 = DAT_0043dad0;
-  FUN_002c4938();
+  puVar1 = g_campCecEdit;
+  memClear();
   puVar2 = &LAB_002d6c0c;
-  FUN_002c5788(&LAB_002d6c0c,1,0,0,&LAB_001c0efc,0,0);
+  asdProcessCreateSimple(&LAB_002d6c0c,1,0,0,&LAB_001c0efc,0,0);
   *puVar1 = (unsigned int)puVar2;
-  FUN_002c4a08(&LAB_002d6c24,0x65,0,0,&LAB_001ebdb8,0,0,puVar2);
-  FUN_002c4a08(&LAB_002d6c40,0xcc,0,0,&LAB_001ebdb8,0,0,*puVar1);
-  FUN_002c4a08(&LAB_002d6c60,0x7d,0,0,&LAB_001c0e9c,0,0,*puVar1);
-  FUN_002c4a08(&LAB_002d6c78,0xdb,0,0,&LAB_001c0e9c,0,0,*puVar1);
-  FUN_002c4a08(&LAB_002d6c94,0xe6,0,0,FUN_00210e38,0,0,*puVar1);
+  taskCreateDraw(&LAB_002d6c24,0x65,0,0,&LAB_001ebdb8,0,0,puVar2);
+  taskCreateDraw(&LAB_002d6c40,0xcc,0,0,&LAB_001ebdb8,0,0,*puVar1);
+  taskCreateDraw(&LAB_002d6c60,0x7d,0,0,&LAB_001c0e9c,0,0,*puVar1);
+  taskCreateDraw(&LAB_002d6c78,0xdb,0,0,&LAB_001c0e9c,0,0,*puVar1);
+  taskCreateDraw(&LAB_002d6c94,0xe6,0,0,FUN_00210e38,0,0,*puVar1);
   puVar1[0x44] = 0xffffffff;
   puVar1[0x42] = 0xffffffff;
   puVar1[0x43] = 0;
@@ -147,16 +147,16 @@ void FUN_002d67fc(unsigned char param_1)
   puVar1[1] = temp_v0;
   temp_v0 = FUN_0025463c();
   puVar1[2] = temp_v0;
-  FUN_00309df4();
+  campCecDrawSetCreate();
   puVar1[3] = temp_v0;
   temp_v0 = FUN_0026ef04();
-  FUN_0031b860();
+  campCecDrawPageCreate();
   puVar1[4] = temp_v0;
   FUN_0026f204();
   FUN_00297468(&LAB_002d6cd0,puVar1 + 0x29,0);
   FUN_00297468(&LAB_002d6ce4,puVar1 + 0x2a,0);
   FUN_00297468(&LAB_002d6cfc,puVar1 + 0x2b,0);
-  temp_v0 = FUN_002bd838(0);
+  temp_v0 = asdTextCreate(0);
   puVar1[0x2c] = temp_v0;
   FUN_002bd82c(temp_v0,0xff);
   FUN_002bd81c(puVar1[0x2c],0,0x646464ff);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 
 typedef struct fn_0017d184_arg0 fn_0017d184_arg0;
 struct fn_0017d184_arg0 {
@@ -24,7 +24,7 @@ struct fn_0017d184_arg0 {
     undefined4 field_0x34; /* +0x34 */
 };
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_0017d184(fn_0017d184_arg0 *param_1)
@@ -33,7 +33,7 @@ void FUN_0017d184(fn_0017d184_arg0 *param_1)
 /* irregular: 1 native warning(s); review required */
   if ((param_1 != (fn_0017d184_arg0 *)0x0) &&
      ((param_1->field_0x4 != 0 || (param_1->field_0x18 != 0)))) {
-    FUN_002e6354(param_1->field_0x18,param_1->field_0x20 * 0x1c);
+    sysMemClear(param_1->field_0x18,param_1->field_0x20 * 0x1c);
     param_1->field_0xc = 0;
     param_1->field_0x10 = 0;
     param_1->field_0x20 = 0;

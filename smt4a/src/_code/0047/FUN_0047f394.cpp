@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern int FUN_00180008(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: FUN_004fb43c. */
 
 
@@ -23,7 +23,7 @@ unsigned int FUN_0047f394(unsigned int param_1,unsigned int param_2)
   int temp_v0;
   int temp_v1;
   
-  temp_v1 = FUN_00180008(1);
+  temp_v1 = jyoucyuGetTableEntry(1);
   if (temp_v1 == 0) {
     temp_v1 = 0;
     do {

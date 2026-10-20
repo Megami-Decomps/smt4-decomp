@@ -8,7 +8,7 @@ int FUN_001241a8(...);
 int FUN_002b90f8(int, unsigned char [108]);
 int FUN_002b99b8(void);
 int FUN_002ba1e0(...);
-int FUN_002bfe28(unsigned char [108], unsigned int *);
+int mtx44Copy(unsigned char [108], unsigned int *);
 int FUN_002c198c(int);
 int FUN_002c1b64(...);
 int FUN_002c39a4(int);
@@ -30,7 +30,7 @@ extern unsigned int DAT_0043e284; /* 0x43e284 */
 extern int DAT_0043e288; /* 0x43e288 */
 extern int DAT_0043e28c; /* 0x43e28c */
 extern int DAT_0043e290; /* 0x43e290 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int DAT_00476638; /* 0x476638 */
 extern unsigned int DAT_004efd9c; /* 0x4efd9c */
 extern float DAT_004efda0; /* 0x4efda0 */
@@ -54,7 +54,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: FUN_002b90f8. */
 /* Supplied declaration required: FUN_002b99b8. */
 /* Supplied declaration required: FUN_002ba1e0. */
-/* Supplied declaration required: FUN_002bfe28. */
+/* Supplied declaration required: mtx44Copy. */
 extern int FUN_002bfefc(unsigned int *);
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c1b64. */
@@ -180,7 +180,7 @@ void FUN_001137fc(int param_1)
     }
     temp_v4 = 0xff;
   }
-  temp_v3 = DAT_0044ea00;
+  temp_v3 = g_titleScene;
   temp_v0 = FUN_002c5d80(1,0);
   piVar5 = (int *)(temp_v3 + 0x124c);
   temp_v1 = *piVar5;
@@ -191,7 +191,7 @@ void FUN_001137fc(int param_1)
     (**(romwright_code **)(temp_v3 + 0x1268))();
     *(unsigned char *)(temp_v3 + 0x1264) = 0;
   }
-  temp_v3 = DAT_0044ea00;
+  temp_v3 = g_titleScene;
   temp_v0 = FUN_002c5da8(6,7,0);
   piVar5 = (int *)(temp_v3 + 0x12ac);
   temp_v1 = *piVar5;
@@ -202,7 +202,7 @@ void FUN_001137fc(int param_1)
     (**(romwright_code **)(temp_v3 + 0x12c8))();
     *(unsigned char *)(temp_v3 + 0x12c4) = 0;
   }
-  FUN_002c39a4(DAT_0044ea00);
+  FUN_002c39a4(g_titleScene);
   temp_v3 = DAT_0043e278;
   temp_v7 = 0x3f800000;
   FUN_002b99b8();
@@ -216,9 +216,9 @@ void FUN_001137fc(int param_1)
   VectorSignedToFloat(*(unsigned int *)(temp_v3 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(unsigned int *)(temp_v3 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(temp_v3 + 0x40) = 1;
-  FUN_002c1b64(DAT_0044ea00);
+  FUN_002c1b64(g_titleScene);
   FUN_002ba1e0(temp_v4 | 0xffffff00);
-  temp_v3 = DAT_0044ea00;
+  temp_v3 = g_titleScene;
   temp_v0 = FUN_002c5da8(6,1,0);
   piVar5 = (int *)(temp_v3 + 0x12ac);
   temp_v1 = piVar5[*piVar5 + 2];
@@ -230,7 +230,7 @@ void FUN_001137fc(int param_1)
   temp_v4 = DAT_0043e284 | 0xffffff00;
   temp_v3 = FUN_002c1c0c(5,2);
   *(unsigned int *)(temp_v3 + 0x38) = 2;
-  FUN_002c1b64(DAT_0044ea00,temp_v3);
+  FUN_002c1b64(g_titleScene,temp_v3);
   FUN_002ba1e0(temp_v4);
   if (((DAT_00476638 & 1) == 0) && (temp_v3 = FUN_002bfefc(&DAT_00476638), temp_v3 != 0)) {
     DAT_004efd9c = temp_v7;
@@ -250,16 +250,16 @@ void FUN_001137fc(int param_1)
     DAT_004efdd4 = temp_v6;
     DAT_004efdd8 = temp_v7;
   }
-  FUN_002bfe28(temp_v8,&DAT_004efd9c);
-  FUN_002b90f8(DAT_0044ea00,temp_v8);
+  mtx44Copy(temp_v8,&DAT_004efd9c);
+  FUN_002b90f8(g_titleScene,temp_v8);
   temp_v3 = FUN_002c1c0c(5,3);
   *(unsigned int *)(temp_v3 + 0x38) = 2;
-  FUN_002c1b64(DAT_0044ea00,temp_v3);
+  FUN_002c1b64(g_titleScene,temp_v3);
   temp_v4 = DAT_0043e28c | 0xffffff00;
   FUN_002ba1e0(temp_v4,temp_v4,temp_v4,temp_v4,temp_v6,0x40700000,0x40c80000,0x40700000);
-  FUN_002c198c(DAT_0044ea00);
-  temp_v3 = DAT_0044ea00;
-  piVar5 = (int *)(DAT_0044ea00 + 0x12ac);
+  FUN_002c198c(g_titleScene);
+  temp_v3 = g_titleScene;
+  piVar5 = (int *)(g_titleScene + 0x12ac);
   temp_v0 = *piVar5;
   temp_v1 = piVar5[temp_v0 + 2];
   *piVar5 = temp_v0 - 1;
@@ -267,8 +267,8 @@ void FUN_001137fc(int param_1)
     (**(romwright_code **)(temp_v3 + 0x12c8))();
     *(unsigned char *)(temp_v3 + 0x12c4) = 0;
   }
-  temp_v3 = DAT_0044ea00;
-  piVar5 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v3 = g_titleScene;
+  piVar5 = (int *)(g_titleScene + 0x124c);
   temp_v0 = *piVar5;
   temp_v1 = piVar5[temp_v0 + 2];
   *piVar5 = temp_v0 - 1;

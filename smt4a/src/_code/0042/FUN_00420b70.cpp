@@ -5,16 +5,16 @@
 extern "C" {
 
 int FUN_001641c4(void);
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_0019a7f4(int, int);
-int FUN_0019c364(void);
+int scrScriptProcessDestroy(void);
 int FUN_0019de98(int, unsigned int);
 int FUN_001add24(int);
 int FUN_001aea28(unsigned int, unsigned int);
 int FUN_002844e4(void);
 int FUN_002c1648(void);
 int FUN_002c85b0(int);
-int FUN_002e132c(int);
+int asdTMTexTableFreeEntry(int);
 int FUN_00333f6c(void);
 int FUN_0033440c(unsigned int);
 int FUN_003a76a8(int);
@@ -29,16 +29,16 @@ typedef struct {
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_001641c4. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019a7f4. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_001add24. */
 /* Supplied declaration required: FUN_001aea28. */
 /* Supplied declaration required: FUN_002844e4. */
 /* Supplied declaration required: FUN_002c1648. */
 /* Supplied declaration required: FUN_002c85b0. */
-/* Supplied declaration required: FUN_002e132c. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_00333f6c. */
 /* Supplied declaration required: FUN_0033440c. */
 /* Supplied declaration required: FUN_003a76a8. */
@@ -52,36 +52,36 @@ void FUN_00420b70(int param_1)
   int temp_v0;
   
   if (*(int *)(param_1 + 0x1c) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x1c) = 0;
   }
   if (*(int *)(param_1 + 0x20) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x20) = 0;
   }
   if (*(int *)(param_1 + 0x24) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x24) = 0;
   }
   if (*(int *)(param_1 + 0x40) != 0) {
-    FUN_0019c364();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0x40) = 0;
   }
   if (*(int *)(param_1 + 0x38) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x38) = 0;
   }
   if (*(int *)(param_1 + 0x3c) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x3c) = 0;
   }
   FUN_0019a7f4(0x2b,0);
-  FUN_002e132c(0x2b);
+  asdTMTexTableFreeEntry(0x2b);
   FUN_002c1648();
   FUN_001add24(0x3d);
   FUN_002844e4();
   if (*(int *)(param_1 + 0x54) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x54) = 0;
   }
   if (*(int *)(param_1 + 0x58) != 0) {

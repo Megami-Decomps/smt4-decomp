@@ -1,34 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048ba5c` (_code @ 0x48ba5c, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Resets the list's selection state and re-initialises its embedded widget. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0014e220(int, int, int, int, int, int, float);
-int FUN_00184758(int, int, int);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+    u8 unk0000[0xc20];  /* 0x0000 */
+    u8 listData[0x6b0]; /* 0x0c20 */
+    u8 active;          /* 0x12d0 */
+    u8 flag12d1;        /* 0x12d1 */
+    u8 flag12d2;        /* 0x12d2 */
+    u8 unk12d3;         /* 0x12d3 */
+    s32 cursor;         /* 0x12d4 */
+    s32 scroll;         /* 0x12d8 */
+    u8 widget[1];       /* 0x12dc */
+} ListScreen;
 
-/* Supplied declaration required: FUN_0014e220. */
-/* Supplied declaration required: FUN_00184758. */
+void FUN_0014e220(void *widget, s32 a, s32 b, s32 c, void *data, s32 d, f32 scale);
+void FUN_00184758(void *widget, s32 a, s32 b);
 
-
-void FUN_0048ba5c(int param_1)
-
+void FUN_0048ba5c(ListScreen *screen)
 {
-/* irregular: 2 native warning(s); review required */
-  *(unsigned int *)(param_1 + 0x12d4) = 0;
-  *(unsigned int *)(param_1 + 0x12d8) = 0;
-  *(unsigned char *)(param_1 + 0x12d0) = 1;
-  *(unsigned char *)(param_1 + 0x12d1) = 0;
-  *(unsigned char *)(param_1 + 0x12d2) = 0;
-  FUN_0014e220(param_1 + 0x12dc,0x13,0x1121,0x1d,param_1 + 0xc20,0x15,1.0f);
-  FUN_00184758(param_1 + 0x12dc,5,0);
-  return;
+    screen->cursor = 0;
+    screen->scroll = 0;
+    screen->active = 1;
+    screen->flag12d1 = 0;
+    screen->flag12d2 = 0;
+    FUN_0014e220(screen->widget, 0x13, 0x1121, 0x1d, screen->listData, 0x15, 1.0f);
+    FUN_00184758(screen->widget, 5, 0);
 }
 
 } /* extern "C" */

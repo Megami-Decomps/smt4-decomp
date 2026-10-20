@@ -1,28 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001585ec` (_code @ 0x1585ec, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register choice only: retail keeps the cleared value in r1 (built uses r0) */
+/* Releases the object's file handle (tag bit 0 marks a shared handle that needs a flush first) and clears it; returns the object. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001884b0(unsigned int);
-int FUN_00195fc8(void);
+typedef struct FileObject {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 handle;      /* bit 0: needs flush before close */
+} FileObject;
 
-/* Supplied declaration required: FUN_001884b0. */
-/* Supplied declaration required: FUN_00195fc8. */
+extern void FUN_00195fc8(void);
+extern void vcallSlot12IfValid(u32 handle);
 
-
-int FUN_001585ec(int param_1)
-
+FileObject *FUN_001585ec(FileObject *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  if ((*(unsigned int *)(param_1 + 4) & 0xfffffffe) != 0) {
-    if ((*(unsigned int *)(param_1 + 4) & 1) != 0) {
-      FUN_00195fc8();
+    u32 *slot = &obj->handle;
+
+    if ((*slot & ~1) != 0) {
+        if ((*slot & 1) != 0) {
+            FUN_00195fc8();
+        }
+        vcallSlot12IfValid(*slot & ~1);
+        *slot = 0;
     }
-    FUN_001884b0(*(unsigned int *)(param_1 + 4) & 0xfffffffe);
-    *(unsigned int *)(param_1 + 4) = 0;
-  }
-  return param_1;
+    return (FileObject *)((u8 *)slot - 4);
 }
 
-} /* extern "C" */
+}

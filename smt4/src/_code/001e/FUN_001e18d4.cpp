@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int FUN_0021f6b8(int, unsigned int);
+extern int asdModelBankGetModel(int, unsigned int);
 /* Supplied declaration required: FUN_0025ca80. */
 /* Supplied declaration required: FUN_00263630. */
 /* Supplied declaration required: FUN_00263670. */
@@ -48,7 +48,7 @@ void FUN_001e18d4(int param_1)
       return;
     }
     if ((*(int *)(param_1 + 0xc4) == 0) &&
-       (temp_v1 = FUN_0021f6b8((int)(short)*(unsigned int *)(param_1 + 0xcc),0), temp_v1 != 0)) {
+       (temp_v1 = asdModelBankGetModel((int)(short)*(unsigned int *)(param_1 + 0xcc),0), temp_v1 != 0)) {
       FUN_00263630((int)(short)*(unsigned int *)(param_1 + 0xcc),0);
       return;
     }

@@ -7,7 +7,7 @@ extern "C" {
 extern int DAT_0049fb64; /* 0x49fb64 */
 extern unsigned char DAT_0049fb68; /* 0x49fb68 */
 
-extern int FUN_00296cc8(unsigned int);
+extern int scrGetArg(unsigned int);
 
 
 unsigned char FUN_002eef40(void)
@@ -17,7 +17,7 @@ unsigned char FUN_002eef40(void)
   unsigned char temp_v1;
   
   if (DAT_0049fb64 == 0) {
-    temp_v0 = FUN_00296cc8(0);
+    temp_v0 = scrGetArg(0);
     DAT_0049fb68 = temp_v0 == 1;
     DAT_0049fb64 = 1;
     return 0;

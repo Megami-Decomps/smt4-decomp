@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 
 extern unsigned char DAT_004207d8; /* 0x4207d8 */
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapScene; /* 0x447e88 */
 
 extern unsigned int *FUN_002947f4(void);
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 
 
 void FUN_001e39b8(int param_1)
@@ -19,13 +19,13 @@ void FUN_001e39b8(int param_1)
 /* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
   
-  FUN_002c222c();
+  asdOperatorNew();
   puVar1 = (unsigned int *)0x0;
   if (param_1 != 0) {
     puVar1 = (unsigned int *)FUN_002947f4();
     *puVar1 = (unsigned int)&DAT_004207d8;
   }
-  *(unsigned int **)(DAT_00447e88 + 0x194) = puVar1;
+  *(unsigned int **)(g_lmapScene + 0x194) = puVar1;
   return;
 }
 

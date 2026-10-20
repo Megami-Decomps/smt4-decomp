@@ -1,41 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004609d0` (_code @ 0x4609d0, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001b6668(int, int *);
-int FUN_0045f834(int *);
-int nw_ut_internal_LinkListImpl_insert(int, int, int *);
+typedef struct ListNode {
+    /* 0x00 */ struct ListNode *prev;
+    /* 0x04 */ struct ListNode *next;
+} ListNode;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Manager {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u8 activeList[0xC];
+    /* 0x14 */ ListNode *head;
+    /* 0x18 */ ListNode *tail;
+} Manager;
 
-/* Supplied declaration required: FUN_001b6668. */
-/* Supplied declaration required: FUN_0045f834. */
-/* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
+typedef struct Actor Actor;
+typedef struct ActorVtbl {
+    /* 0x00 */ void *unk00[4];
+    /* 0x10 */ void (*onDeactivate)(Actor *self);
+} ActorVtbl;
 
+struct Actor {
+    /* 0x000 */ ActorVtbl *vtbl;
+    /* 0x004 */ u8 unk004[0xF4];
+    /* 0x0F8 */ ListNode node;
+    /* 0x100 */ u8 unk100[0x1C];
+    /* 0x11C */ Manager *manager;
+    /* 0x120 */ u8 active;
+    /* 0x121 */ u8 visible;
+};
 
-void FUN_004609d0(int *param_1)
+/* An end of the intrusive list, passed by value (the list implementation's iterator). */
+typedef struct ListEnd {
+    ListNode **slot;
+} ListEnd;
 
+static __inline ListEnd listEnd(ListNode **slot)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  if ((char)param_1[0x48] != '\0') {
-    *(unsigned char *)(param_1 + 0x48) = 0;
-    *(unsigned char *)((int)param_1 + 0x121) = 0;
-    FUN_0045f834(param_1);
-    temp_v0 = param_1[0x47];
-    FUN_001b6668(temp_v0 + 8,param_1 + 0x3e);
-    (**(romwright_code **)(*param_1 + 0x10))(param_1);
-    nw_ut_internal_LinkListImpl_insert(temp_v0 + 0x14,temp_v0 + 0x18,param_1 + 0x3e);
-    return;
-  }
-  return;
+    ListEnd end;
+
+    end.slot = slot;
+    return end;
+}
+
+int FUN_001b6668(void *list, ListNode *node);
+int FUN_0045f834(Actor *actor);
+int nw_ut_internal_LinkListImpl_insert(ListEnd head, ListEnd tail, ListNode *node);
+
+/* Deactivates the actor: clears its flags, moves its node to the manager's list and notifies it. */
+void FUN_004609d0(Actor *actor)
+{
+    Manager *manager;
+    ListEnd head;
+    ListEnd tail;
+
+    if (actor->active == 0) {
+        return;
+    }
+    actor->active = 0;
+    actor->visible = 0;
+    FUN_0045f834(actor);
+    manager = actor->manager;
+    FUN_001b6668(manager->activeList, &actor->node);
+    actor->vtbl->onDeactivate(actor);
+    head = listEnd(&manager->head);
+    tail = listEnd(&manager->tail);
+    nw_ut_internal_LinkListImpl_insert(head, tail, &actor->node);
 }
 
 } /* extern "C" */

@@ -11,7 +11,7 @@ extern unsigned int DAT_005738ac; /* 0x5738ac */
 extern unsigned int DAT_005738b0; /* 0x5738b0 */
 extern unsigned int DAT_005738b4; /* 0x5738b4 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_00357bc8(int, char *);
 extern int FUN_004c6e10(int);
 
@@ -39,7 +39,7 @@ unsigned int FUN_004d7a60(int *param_1,int param_2,int param_3)
       param_1[8] = -1;
       param_1[1] = 0;
     }
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     pcVar5 = (char *)param_1[6];
     temp_v3 = 0;
     if (temp_v3 < param_1[7]) {

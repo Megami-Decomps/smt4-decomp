@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
-int FUN_0019a5a0(int);
+int jobStop(unsigned int, int);
+int asdMemFree(int);
 int FUN_004aa780(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -18,9 +18,9 @@ extern unsigned int DAT_005737e8; /* 0x5737e8 */
 extern unsigned int DAT_005737ec; /* 0x5737ec */
 extern int DAT_0057a9c8; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_001631d0. */
-extern int FUN_00164a9c(void);
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: jobStop. */
+extern int jobGetWork(void);
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_004aa780. */
 
 
@@ -34,7 +34,7 @@ void FUN_003285dc(void)
   int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   if (DAT_0057a9c8 != 0) {
     FUN_004aa780(DAT_0057a9c8,0);
   }
@@ -70,10 +70,10 @@ void FUN_003285dc(void)
     temp_v3 = ~DAT_005737e8;
     *(unsigned int *)(temp_v0 + 0x45ac) = *(unsigned int *)(temp_v0 + 0x45ac) & ~DAT_005737ec;
     *(unsigned int *)(temp_v0 + 0x45a8) = *(unsigned int *)(temp_v0 + 0x45a8) & temp_v3;
-    FUN_0019a5a0(DAT_005737e0);
+    asdMemFree(DAT_005737e0);
     DAT_005737e0 = 0;
   }
-  FUN_001631d0(*(unsigned int *)(temp_v0 + 0x7c),0);
+  jobStop(*(unsigned int *)(temp_v0 + 0x7c),0);
   return;
 }
 

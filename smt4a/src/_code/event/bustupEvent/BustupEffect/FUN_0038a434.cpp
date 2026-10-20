@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
-int FUN_002bf42c(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
+int bustupCutAnimSetJobParam(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -22,13 +22,13 @@ extern unsigned char LAB_002897ac; /* 0x2897ac */
 extern int FUN_0034da10(...); /* 0x34da10 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
 extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 extern unsigned int FUN_002282c8(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_002bf42c. */
+extern unsigned int scrGetArg(unsigned int);
+/* Supplied declaration required: bustupCutAnimSetJobParam. */
 
 
 unsigned int FUN_0038a434(void)
@@ -42,11 +42,11 @@ unsigned int FUN_0038a434(void)
   char *pcVar5;
   unsigned int in_fpscr;
   
-  temp_v0 = FUN_00236038(0);
+  temp_v0 = scrGetArg(0);
   temp_v1 = FUN_00162ea4();
   if (temp_v1 == 0) {
     puVar3 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0xc,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0xc,1);
     *puVar3 = 0;
     puVar3[1] = 0;
     puVar3[2] = 0;
@@ -56,9 +56,9 @@ unsigned int FUN_0038a434(void)
     puVar3[1] = 0;
     puVar3[2] = temp_v0;
     pcVar5 = "EffectLine";
-    FUN_0014e38c("EffectLine",4,0,0,FUN_00289748,FUN_0034da10,puVar3);
-    FUN_0015155c("EffectLineDraw",0x73,0,0,&LAB_002897ac,0,puVar3,pcVar5);
-    FUN_002bf42c(pcVar5);
+    asdProcessCreateSimple("EffectLine",4,0,0,FUN_00289748,FUN_0034da10,puVar3);
+    taskCreateDraw("EffectLineDraw",0x73,0,0,&LAB_002897ac,0,puVar3,pcVar5);
+    bustupCutAnimSetJobParam(pcVar5);
   }
   return 1;
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c564c(int);
+int jyoucyuGetTableEntry(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 
 
 void FUN_002c9d98(int *param_1)
@@ -31,7 +31,7 @@ void FUN_002c9d98(int *param_1)
     }
     *(unsigned int *)(temp_v0 + 0x18) = 0;
   }
-  FUN_002c564c(0);
+  jyoucyuGetTableEntry(0);
   return;
 }
 

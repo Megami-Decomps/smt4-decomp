@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_002459d8(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c5788(...);
+int memClear(...);
+int asdMemAlloc(...);
+int asdProcessCreateSimple(...);
 int FUN_002c58c8(...);
 int VectorSignedToFloat(...);
 
@@ -23,9 +23,9 @@ extern int FUN_002db92c(...); /* 0x2db92c */
 /* Supplied declaration required: FUN_002459d8. */
 extern int FUN_002bf4f8(unsigned int, unsigned char);
 extern int FUN_002c1d5c(void);
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_002c58c8. */
 
 
@@ -41,8 +41,8 @@ void FUN_0032743c(int param_1)
   unsigned long long temp_v3;
   
   piVar1 = (int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x98,1);
-  FUN_002c4938();
+  asdMemAlloc(0x100,0x100,0,0x98,1);
+  memClear();
   temp_v3 = 0;
   piVar1[8] = 0x3f800000;
   piVar1[9] = 0x3f800000;
@@ -96,7 +96,7 @@ void FUN_0032743c(int param_1)
     FUN_002c58c8(0x32,0);
   }
   piVar1[6] = 0x3e99999a;
-  FUN_002c5788("EVE_2dTex",2,0,0,FUN_001dfc64,FUN_002db92c,piVar1);
+  asdProcessCreateSimple("EVE_2dTex",2,0,0,FUN_001dfc64,FUN_002db92c,piVar1);
   return;
 }
 

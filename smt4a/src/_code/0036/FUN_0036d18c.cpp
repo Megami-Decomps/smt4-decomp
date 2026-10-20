@@ -12,9 +12,9 @@ extern unsigned char LAB_0036d310; /* 0x36d310 */
 extern unsigned char DAT_005e1ebc; /* 0x5e1ebc */
 
 /* Supplied declaration required: FUN_00100388. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 extern int FUN_00330b58(int);
 
 
@@ -31,9 +31,9 @@ unsigned char * FUN_0036d18c(unsigned int param_1)
   unsigned int temp_v5;
   unsigned char temp_v6 [128];
   
-  temp_v0 = FUN_00187180(0x15,0);
-  temp_v1 = FUN_00192798();
-  temp_v2 = FUN_00192748(temp_v0);
+  temp_v0 = dataTableGet(0x15,0);
+  temp_v1 = dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v0);
   temp_v3 = 0;
   if (temp_v2 != 0) {
     temp_v3 = temp_v2 & 1;

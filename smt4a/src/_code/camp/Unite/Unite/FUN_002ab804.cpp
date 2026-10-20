@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_00192748(...);
-int FUN_00192798(...);
+int dataTableGetCount(...);
+int dataTableGetEntries(...);
 
 int FUN_0013c174(...);
 int FUN_0014e188(...);
-int FUN_0014e38c(...);
+int asdProcessCreateSimple(...);
 int FUN_001505ac(...);
-int FUN_0015155c(...);
-int FUN_0016007c(...);
-int FUN_00163060(...);
-int FUN_00167ab4(...);
+int taskCreateDraw(...);
+int asdOperatorNew(...);
+int asdMemoryAllocTracked(...);
+int memAlloc(...);
 int FUN_0016dfc4(...);
 int FUN_00178b04(...);
 int FUN_001846d0(...);
@@ -26,7 +26,7 @@ int FUN_0020214c(...);
 int FUN_0026f608(...);
 int FUN_00275bc8(...);
 int FUN_002e3140(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_002fb0d4(...);
 int FUN_0031416c(...);
 int FUN_003a2ecc(...);
@@ -73,22 +73,22 @@ extern int *DAT_0057f290; /* 0x57f290 */
 
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_0016007c. */
-/* Supplied declaration required: FUN_00163060. */
-extern int FUN_00164a34(void);
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+extern int lmapMainIsRunning(void);
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_0016dfc4. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_00184b90. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_00192748. */
-/* Supplied declaration required: FUN_00192798. */
+/* Supplied declaration required: dataTableGetCount. */
+/* Supplied declaration required: dataTableGetEntries. */
 extern int FUN_001ab854(void);
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_001cd3ec. */
@@ -98,10 +98,10 @@ extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_002e3140. */
 extern int FUN_002e50d4(void);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002fb0d4. */
 /* Supplied declaration required: FUN_0031416c. */
-extern int FUN_003792d4(void);
+extern int lmapSceneGetScript(void);
 /* Supplied declaration required: FUN_003a2ecc. */
 /* Supplied declaration required: FUN_003f86f8. */
 /* Supplied declaration required: FUN_003f9e80. */
@@ -138,19 +138,19 @@ void FUN_002ab804(void)
   
   if (DAT_0057f290 == (int *)0x0) {
     piVar2 = (int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x92c0,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0x92c0,1);
     DAT_0057f290 = piVar2;
   }
   piVar2 = DAT_0057f290;
-  FUN_002e6354();
+  sysMemClear();
   piVar2[0x2428] = -1;
   FUN_003a2ecc(0);
   puVar3 = &LAB_002abc10;
-  FUN_0014e38c(&LAB_002abc10,4,0,0,FUN_001f5294,0,0);
+  asdProcessCreateSimple(&LAB_002abc10,4,0,0,FUN_001f5294,0,0);
   piVar2[0xfe] = (int)puVar3;
-  FUN_0015155c(&LAB_002abc20,0xea,0,0,FUN_0023b8b0,0,0,puVar3);
+  taskCreateDraw(&LAB_002abc20,0xea,0,0,FUN_0023b8b0,0,0,puVar3);
   temp_v1 = 0x1b8;
-  FUN_0016007c();
+  asdOperatorNew();
   if (temp_v1 != 0) {
     FUN_004dc4b4();
   }
@@ -159,10 +159,10 @@ void FUN_002ab804(void)
   piVar2[0x2429] = temp_v1;
   *(unsigned char *)(piVar2 + 0x2499) = 0;
   temp_v1 = 0x100;
-  FUN_00167ab4(0x100,0x100,0,0x1000,0x1000,1);
+  memAlloc(0x100,0x100,0,0x1000,0x1000,1);
   piVar2[0x249d] = temp_v1;
   puVar5 = (unsigned int *)0x18;
-  FUN_0016007c();
+  asdOperatorNew();
   if (puVar5 != (unsigned int *)0x0) {
     *puVar5 = 0;
     puVar5[1] = 0;
@@ -259,8 +259,8 @@ void FUN_002ab804(void)
   piVar2[0x10a] = (int)puVar3;
   FUN_00275bc8();
   piVar2[0x10b] = (int)puVar3;
-  temp_v1 = FUN_003792d4();
-  if ((temp_v1 != 0) || (temp_v1 = FUN_00164a34(), temp_v1 != 0)) {
+  temp_v1 = lmapSceneGetScript();
+  if ((temp_v1 != 0) || (temp_v1 = lmapMainIsRunning(), temp_v1 != 0)) {
     temp_v6 = (int *)0x0;
     temp_v7 = 0;
     FUN_0031416c(0,0,0,0,0,0,0xff,0,0,0xff);
@@ -299,23 +299,23 @@ void FUN_002ab804(void)
   piVar2 = DAT_0057f290;
   *(unsigned short *)(DAT_0057f290 + 0x24af) = 0;
   *(unsigned short *)((int)piVar2 + 0x92be) = 0;
-  temp_v3 = FUN_00187180(0x24,0);
-  FUN_00192798();
-  temp_v1 = FUN_00192748(temp_v3);
+  temp_v3 = dataTableGet(0x24,0);
+  dataTableGetEntries();
+  temp_v1 = dataTableGetCount(temp_v3);
   temp_v5 = 0;
   if ((int)temp_v5 < temp_v1) {
     do {
-      temp_v3 = FUN_00187180(0x24,0);
-      temp_v2 = FUN_00192798();
-      temp_v4 = FUN_00192748(temp_v3);
+      temp_v3 = dataTableGet(0x24,0);
+      temp_v2 = dataTableGetEntries();
+      temp_v4 = dataTableGetCount(temp_v3);
       if ((temp_v5 < temp_v4) && (*(char *)(temp_v2 + temp_v5 * 0x94) == '\x0f')) {
-        temp_v3 = FUN_00187180(0x24,0);
-        temp_v2 = FUN_00192798();
-        temp_v4 = FUN_00192748(temp_v3);
+        temp_v3 = dataTableGet(0x24,0);
+        temp_v2 = dataTableGetEntries();
+        temp_v4 = dataTableGetCount(temp_v3);
         if ((temp_v5 < temp_v4) && (*(short *)(temp_v2 + temp_v5 * 0x94 + 4) != 0)) {
-          temp_v3 = FUN_00187180(0x24,0);
-          temp_v2 = FUN_00192798();
-          temp_v4 = FUN_00192748(temp_v3);
+          temp_v3 = dataTableGet(0x24,0);
+          temp_v2 = dataTableGetEntries();
+          temp_v4 = dataTableGetCount(temp_v3);
           if (temp_v5 < temp_v4) {
             temp_v0 = *(unsigned short *)(temp_v2 + temp_v5 * 0x94 + 4);
           }

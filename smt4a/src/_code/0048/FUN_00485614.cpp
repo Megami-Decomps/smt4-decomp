@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00162790(int, unsigned int, unsigned char *);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(unsigned int, int);
 
 typedef int romwright_code(...);
@@ -19,7 +19,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_0019dc44(unsigned int);
 
 
@@ -60,7 +60,7 @@ void FUN_00485614(unsigned int param_1,unsigned int param_2,unsigned int param_3
     VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(3,temp_v1,&temp_v2);
   }
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

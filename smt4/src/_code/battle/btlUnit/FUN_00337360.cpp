@@ -9,7 +9,7 @@ int FUN_00240530(int, unsigned int, int, unsigned int, int);
 int FUN_0024057c(int, int, int);
 int FUN_00240614(void);
 int FUN_002451c4(int, unsigned int, int, int, int, int);
-int FUN_00293f98(unsigned int, int);
+int aocHandleButtons(unsigned int, int);
 int FUN_002b06c4(void);
 int FUN_003c1964(int);
 
@@ -20,10 +20,10 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_00200001; /* 0x200001 */
-extern unsigned int DAT_0043427c; /* 0x43427c */
-extern int DAT_004342c8; /* 0x4342c8 */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
+extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_00435d18; /* 0x435d18 */
-extern int DAT_00435d90; /* 0x435d90 */
+extern int g_btlMainState; /* 0x435d90 */
 extern unsigned int DAT_00439a24; /* 0x439a24 */
 extern unsigned int DAT_00439a28; /* 0x439a28 */
 extern unsigned int DAT_00439a38; /* 0x439a38 */
@@ -35,8 +35,8 @@ extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 /* Supplied declaration required: FUN_00240614. */
 /* Supplied declaration required: FUN_002451c4. */
 extern unsigned int FUN_0027d9e8(int, int);
-extern unsigned int FUN_0027e928(unsigned int);
-/* Supplied declaration required: FUN_00293f98. */
+extern unsigned int btlUnitGet(unsigned int);
+/* Supplied declaration required: aocHandleButtons. */
 extern unsigned int FUN_00294090(int, unsigned int);
 extern int FUN_00294fe0(unsigned int);
 extern int FUN_0029505c(unsigned int);
@@ -80,7 +80,7 @@ unsigned int FUN_00337360(int param_1,unsigned int param_2)
             return 0;
           }
           *puVar7 = *puVar7 | 1;
-          FUN_00293f98(temp_v3,7);
+          aocHandleButtons(temp_v3,7);
         }
         if ((*puVar7 & 2) == 0) {
           temp_v4 = FUN_00294fe0(temp_v3);
@@ -110,7 +110,7 @@ unsigned int FUN_00337360(int param_1,unsigned int param_2)
           }
         } while ((!temp_v7 && temp_v5 != 3) && (temp_v7 || temp_v5 >= 3));
         temp_v8 = 0;
-        temp_v6 = *(int *)(DAT_00435d90 + 0x1e98) + temp_v5 * 0x114;
+        temp_v6 = *(int *)(g_btlMainState + 0x1e98) + temp_v5 * 0x114;
         *(unsigned int *)(temp_v6 + 0x50) = 0x20483;
         *(short *)(temp_v6 + 0x60) = (short)temp_v4;
         *(unsigned int *)(temp_v6 + 0xc) = 0;
@@ -132,13 +132,13 @@ unsigned int FUN_00337360(int param_1,unsigned int param_2)
         temp_v1 = (short)DAT_00439a38;
         temp_v2 = (short)DAT_00439a28;
         FUN_0024057c(param_1,temp_v6,0);
-        temp_v3 = FUN_0027e928(DAT_0043427c);
+        temp_v3 = btlUnitGet(g_btlScriptUnit);
         FUN_002451c4((int)temp_v1 + (int)temp_v0,temp_v3,temp_v6,0xff,(int)temp_v2,0);
         temp_v3 = 6;
         if ((*(unsigned int *)(temp_v6 + 0x50) & 0x10) != 0) {
           temp_v3 = 7;
         }
-        temp_v8 = FUN_0027e928(DAT_0043427c);
+        temp_v8 = btlUnitGet(g_btlScriptUnit);
         FUN_00240530((int)temp_v1,temp_v8,temp_v6,temp_v3,0xd);
         return 1;
       }
@@ -176,7 +176,7 @@ unsigned int FUN_00337360(int param_1,unsigned int param_2)
       } while (temp_v4 < 0x2a);
       *piVar9 = (int)*(short *)(param_2 + 0x88);
 LAB_00337490:
-      *(unsigned int *)(DAT_004342c8 + 0x634) = *(unsigned int *)(DAT_004342c8 + 0x634) | 0x4000;
+      *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x4000;
       if ((*(unsigned int *)(DAT_00435d18 + 0x3028) & 0x400) != 0) {
         FUN_00240614();
       }

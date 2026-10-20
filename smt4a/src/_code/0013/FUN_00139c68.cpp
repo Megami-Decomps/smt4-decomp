@@ -11,7 +11,7 @@ typedef struct {
 
 extern unsigned char DAT_005b3bf4; /* 0x5b3bf4 */
 
-extern unsigned int FUN_00168188(void);
+extern unsigned int asdMemoryGetDefaultAllocator(void);
 /* Supplied declaration required: FUN_0018d9f0. */
 
 
@@ -22,7 +22,7 @@ void FUN_00139c68(unsigned int param_1)
   unsigned int temp_v0;
   
   (*(unsigned int *)((unsigned char *)&DAT_005b3bf4 + 0x7c)) = param_1;
-  temp_v0 = FUN_00168188();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   FUN_0018d9f0(&(*(unsigned int *)((unsigned char *)&DAT_005b3bf4 + 0x7c)),temp_v0,(*(unsigned int *)((unsigned char *)&DAT_005b3bf4 + 0x7c)));
   return;
 }

@@ -7,11 +7,11 @@ extern "C" {
 int FUN_001656e0(unsigned int, int);
 int FUN_0016572c(unsigned int, int);
 int FUN_00167f24(int);
-int FUN_00236038(int);
+int scrGetArg(int);
 
-extern int DAT_0057f3b0; /* 0x57f3b0 */
+extern int g_eventTex; /* 0x57f3b0 */
 
-extern int FUN_00163e40(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_001656e0. */
 /* Supplied declaration required: FUN_0016572c. */
 extern short FUN_00167888(unsigned int);
@@ -19,7 +19,7 @@ extern short FUN_00167898(unsigned int);
 /* Supplied declaration required: FUN_00167f24. */
 extern unsigned char FUN_00169580(unsigned int);
 extern unsigned char FUN_00169590(unsigned int);
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: scrGetArg. */
 
 
 unsigned int FUN_0034858c(void)
@@ -35,16 +35,16 @@ unsigned int FUN_0034858c(void)
   int temp_v6;
   unsigned char temp_v7;
   
-  temp_v2 = FUN_00236038(0);
-  temp_v4 = FUN_00236038(1);
-  temp_v0 = DAT_0057f3b0;
+  temp_v2 = scrGetArg(0);
+  temp_v4 = scrGetArg(1);
+  temp_v0 = g_eventTex;
   temp_v7 = temp_v4 != 0;
-  if (DAT_0057f3b0 != 0) {
+  if (g_eventTex != 0) {
     temp_v4 = 0;
-    if (0 < *(int *)(DAT_0057f3b0 + 0x44)) {
+    if (0 < *(int *)(g_eventTex + 0x44)) {
       do {
         temp_v6 = temp_v0 + temp_v4 * 4;
-        temp_v5 = FUN_00163e40(*(unsigned int *)(temp_v6 + 4));
+        temp_v5 = jobIsValid(*(unsigned int *)(temp_v6 + 4));
         if (((temp_v5 != 0) && (temp_v3 = FUN_00167888(*(unsigned int *)(temp_v6 + 4)), temp_v3 == temp_v2)) &&
            (FUN_001656e0(*(unsigned int *)(temp_v6 + 4),temp_v7), temp_v7)) {
           temp_v1 = FUN_00169580(*(unsigned int *)(temp_v6 + 4));
@@ -56,7 +56,7 @@ unsigned int FUN_0034858c(void)
     temp_v4 = 0;
     do {
       temp_v6 = temp_v0 + temp_v4 * 4;
-      temp_v5 = FUN_00163e40(*(unsigned int *)(temp_v6 + 0x4c));
+      temp_v5 = jobIsValid(*(unsigned int *)(temp_v6 + 0x4c));
       if (((temp_v5 != 0) && (temp_v3 = FUN_00167898(*(unsigned int *)(temp_v6 + 0x4c)), temp_v3 == temp_v2)) &&
          (FUN_0016572c(*(unsigned int *)(temp_v6 + 0x4c),temp_v7), temp_v7)) {
         temp_v1 = FUN_00169590(*(unsigned int *)(temp_v6 + 0x4c));

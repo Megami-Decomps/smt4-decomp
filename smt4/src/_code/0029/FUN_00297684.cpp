@@ -12,9 +12,9 @@ int FUN_0028c640(unsigned int, int, unsigned char [12]);
 int FUN_0029a014(unsigned int, int);
 int FUN_002a0428(int, unsigned int);
 int FUN_002a5710(unsigned int, int);
-int FUN_002a775c(unsigned int);
+int asdMdlManagerDestroy(unsigned int);
 int FUN_002b2ae8(unsigned int, int, unsigned char [12]);
-int FUN_002c415c(unsigned int);
+int asdMemFree(unsigned int);
 int FUN_002cbad0(unsigned int, int, unsigned char [20]);
 int FUN_003353cc(...);
 
@@ -32,12 +32,12 @@ extern unsigned int FUN_0019df10(void);
 /* Supplied declaration required: FUN_0029a014. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a5710. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 extern int FUN_002adee0(void);
 /* Supplied declaration required: FUN_002b2ae8. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002cbad0. */
-extern unsigned int FUN_00328344(int, unsigned int, unsigned short, unsigned int);
+extern unsigned int asdMdlManagerCreateFromSourceAndNode(int, unsigned int, unsigned short, unsigned int);
 /* Supplied declaration required: FUN_003353cc. */
 
 
@@ -149,9 +149,9 @@ void FUN_00297684(int param_1)
       }
       break;
     case 3:
-      FUN_002a775c(*(unsigned int *)(temp_v3 + 0x18));
+      asdMdlManagerDestroy(*(unsigned int *)(temp_v3 + 0x18));
       *(unsigned int *)(temp_v3 + 0x18) = 0;
-      FUN_002c415c(*(unsigned int *)(temp_v3 + 0x1c));
+      asdMemFree(*(unsigned int *)(temp_v3 + 0x1c));
       *(unsigned int *)(temp_v3 + 0x1c) = 0;
       *puVar9 = 0;
       if (*(char *)(temp_v3 + 0x20) != '\0') {
@@ -162,7 +162,7 @@ void FUN_00297684(int param_1)
       if (*(int *)(temp_v3 + 0x1c) != 0) {
         temp_v2 = FUN_0019df10();
         in_r12 = *(int *)(temp_v3 + 0x1c);
-        temp_v2 = FUN_00328344(in_r12,temp_v2,*(unsigned short *)(temp_v3 + 0x14),*(unsigned int *)(param_1 + 8)
+        temp_v2 = asdMdlManagerCreateFromSourceAndNode(in_r12,temp_v2,*(unsigned short *)(temp_v3 + 0x14),*(unsigned int *)(param_1 + 8)
                             );
         *(unsigned int *)(temp_v3 + 0x18) = temp_v2;
         *puVar9 = 1;

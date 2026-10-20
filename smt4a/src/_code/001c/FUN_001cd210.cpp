@@ -1,24 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001cd210` (_code @ 0x1cd210, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only a `nop` (mov r0,r0) after the FUN_001d13dc call is missing in the built code */
+/* Fills the 3-word result for slot `index` of the table: copies the slot's pair and appends the FUN_001d13dc value; returns 1. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_001d13dc(void);
+typedef struct SlotData {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u32 second;
+    /* 0x08 */ u8 unk08[0x0C];
+} SlotData; /* 0x14 */
 
+typedef struct SlotTable {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u8 *slots;       /* 0x14-byte slots; the pair lives at +4 */
+} SlotTable;
 
-unsigned int FUN_001cd210(int param_1,unsigned int *param_2,int param_3)
+typedef struct SlotResult {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u32 second;
+    /* 0x08 */ u32 value;
+} SlotResult;
 
+extern u32 FUN_001d13dc(u32 *pair);
+
+u32 FUN_001cd210(SlotTable *table, SlotResult *result, s32 index)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  puVar1 = (unsigned int *)(*(int *)(param_1 + 8) + param_3 * 0x14 + 4);
-  *param_2 = *puVar1;
-  param_2[1] = puVar1[1];
-  temp_v0 = FUN_001d13dc();
-  param_2[2] = temp_v0;
-  return 1;
+    u32 *pair = (u32 *)(table->slots + index * 0x14 + 4);
+
+    result->first = pair[0];
+    result->second = pair[1];
+    result->value = FUN_001d13dc(pair);
+    return 1;
 }
 
-} /* extern "C" */
+}

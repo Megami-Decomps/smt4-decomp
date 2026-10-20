@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001a0990(unsigned int *);
 int FUN_001b4a58(unsigned int, int *, int, int, int, int, unsigned int, unsigned int);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 int hasExclusiveAccess(int *);
 int nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue(int, int);
 int nw_ut_internal_LinkListImpl_insert(int, int, unsigned int *);
@@ -24,7 +24,7 @@ extern unsigned int DAT_005c0ad8; /* 0x5c0ad8 */
 extern int FUN_001b1998(void);
 /* Supplied declaration required: FUN_001b4a58. */
 extern unsigned int *FUN_001b95dc(int);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 /* Supplied declaration required: nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue. */
 extern int nw_snd_internal_PoolImpl_AllocImpl(int);
@@ -51,7 +51,7 @@ void FUN_001cc084(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
     puVar6 = (unsigned int *)0x0;
   }
   else {
-    FUN_002e6354(temp_v1,0x58);
+    sysMemClear(temp_v1,0x58);
     puVar6 = (unsigned int *)FUN_001b95dc(temp_v1);
     *puVar6 = (unsigned int)&DAT_0055c284;
     puVar6[0x14] = 0;

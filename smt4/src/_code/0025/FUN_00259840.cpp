@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 extern signed char DAT_00464d48; /* 0x464d48 */
 extern int DAT_00464d58; /* 0x464d58 */
 extern romwright_code *DAT_00464d64; /* 0x464d64 */
@@ -145,7 +145,7 @@ void FUN_00259840(int param_1,float *param_2,int param_3,int param_4)
   iStack_148 = 0;
   piStack_30 = piVar8;
   if (DAT_00464d48 != '\0') {
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v14 = temp_v16 + temp_v14;
   }
   temp_v5 = piVar8[5];
@@ -381,7 +381,7 @@ LAB_002b0a30:
         temp_v17 = *(unsigned int *)
                   (*(int *)(piVar8[5] + 0xc) + *(int *)(*piVar8 + temp_v6 * 0x20 + 0x1c) * 4);
         if (uStack_13c != 0) {
-          FUN_002aa200(DAT_0044ea00,temp_v17,temp_v0);
+          FUN_002aa200(g_titleScene,temp_v17,temp_v0);
           if (uStack_13c == 2) {
             temp_v23 = temp_v23 & 0xffffffff00000000;
             FUN_002aa100(piVar11,temp_v5,temp_v15,temp_v15,temp_v15,temp_v15);
@@ -394,7 +394,7 @@ LAB_002b0a30:
           FUN_002aa100(piVar11,temp_v5,uStack_1ac,uStack_1ac,uStack_1ac,uStack_1ac);
         }
         else {
-          FUN_002aa200(DAT_0044ea00,temp_v17,temp_v0);
+          FUN_002aa200(g_titleScene,temp_v17,temp_v0);
           FUN_002aa100(piVar11,temp_v5,uStack_1ac,uStack_1ac,uStack_1ac,uStack_1ac);
         }
         temp_v22 = (unsigned long long)(unsigned int)((float)piVar8[6] + temp_v16 + temp_v21);
@@ -428,7 +428,7 @@ LAB_002b0dac:
         VectorSignedToFloat((int)*(char *)(temp_v8 + 6),(unsigned char)(temp_v12 >> 0x16) & 3);
         VectorUnsignedToFloat((unsigned int)*(unsigned char *)(temp_v8 + 5),(unsigned char)(temp_v12 >> 0x16) & 3);
         VectorUnsignedToFloat((unsigned int)*(unsigned char *)(temp_v8 + 7),(unsigned char)(temp_v12 >> 0x16) & 3);
-        FUN_002aa200(DAT_0044ea00,
+        FUN_002aa200(g_titleScene,
                      *(unsigned int *)
                       (*(int *)(piVar8[0x29] + 0xc) +
                       *(int *)(*piVar8 + aiStack_130[temp_v5] * 0x20 + 0x1c) * 4),

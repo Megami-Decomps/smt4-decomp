@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002adde8(unsigned int, unsigned int, int);
 
-extern int DAT_0043dfc0; /* 0x43dfc0 */
+extern int g_bustupCutAnim; /* 0x43dfc0 */
 
 /* Supplied declaration required: FUN_002adde8. */
 extern int FUN_002adee0(void);
@@ -20,12 +20,12 @@ unsigned int FUN_002a4e18(int param_1,int param_2)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = DAT_0043dfc0;
-  if (DAT_0043dfc0 == 0) {
+  temp_v0 = g_bustupCutAnim;
+  if (g_bustupCutAnim == 0) {
     temp_v1 = 0;
   }
   else {
-    if ((*(int *)(DAT_0043dfc0 + 0x5e4) == 0) || (temp_v2 = FUN_002adee0(), temp_v2 == 0)) {
+    if ((*(int *)(g_bustupCutAnim + 0x5e4) == 0) || (temp_v2 = FUN_002adee0(), temp_v2 == 0)) {
       return 1;
     }
     temp_v1 = *(unsigned int *)(*(int *)(temp_v0 + 0x5e4) + 8);

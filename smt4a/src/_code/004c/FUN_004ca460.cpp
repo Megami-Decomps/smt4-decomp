@@ -22,7 +22,7 @@ typedef struct {
 
 extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern unsigned short FUN_0017760c(int);
 /* Supplied declaration required: FUN_0019cac4. */
 extern int FUN_001ab854(int);
@@ -58,7 +58,7 @@ void FUN_004ca460(int param_1,int param_2,int param_3,int param_4)
   iStack_34 = param_2;
   temp_v8 = param_3;
   iStack_2c = param_4;
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   if (param_1 != 0) {
     temp_v2 = *(unsigned int *)(temp_v1 + param_2 * 8 + 0x2008) & 0xffff;
     FUN_0019cac4();

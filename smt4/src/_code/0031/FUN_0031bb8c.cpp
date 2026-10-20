@@ -10,7 +10,7 @@ typedef struct {
 } void_stack;
 
 extern int FUN_002b6a54(int, unsigned short);
-extern int FUN_002b6b20(void);
+extern int gameGetOptions(void);
 
 
 unsigned int FUN_0031bb8c(void)
@@ -19,9 +19,9 @@ unsigned int FUN_0031bb8c(void)
   unsigned short temp_v0;
   int temp_v1;
   
-  temp_v1 = FUN_002b6b20();
+  temp_v1 = gameGetOptions();
   temp_v0 = *(unsigned short *)(temp_v1 + 0x606);
-  temp_v1 = FUN_002b6b20();
+  temp_v1 = gameGetOptions();
   temp_v1 = FUN_002b6a54((int)*(short *)(temp_v1 + 0x604),temp_v0);
   switch((*(unsigned int *)(temp_v1 + 8) & 0x3fffff) >> 0x11) {
   case 0:

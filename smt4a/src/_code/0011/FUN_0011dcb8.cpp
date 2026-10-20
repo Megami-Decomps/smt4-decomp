@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_0010b250(unsigned int, int, unsigned int);
 int FUN_002e75fa(unsigned int);
-int FUN_002e7634(unsigned char [32]);
+int strInit(unsigned char [32]);
 int FUN_002ec75c(unsigned char [28]);
 int FUN_002ec890(unsigned char [28]);
-int FUN_002ec9f4(unsigned char [32]);
+int strDestroy(unsigned char [32]);
 int FUN_002ee524(unsigned char [24], unsigned char [32]);
 int FUN_002ee54c(unsigned char [24]);
 int FUN_00302f28(unsigned char [8]);
@@ -30,10 +30,10 @@ typedef struct {
 extern unsigned int FUN_001214f8(int, unsigned char *, unsigned int, unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002e75fa. */
 extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002e7634. */
+/* Supplied declaration required: strInit. */
 /* Supplied declaration required: FUN_002ec75c. */
 /* Supplied declaration required: FUN_002ec890. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ee524. */
 /* Supplied declaration required: FUN_002ee54c. */
 extern int FUN_00301e8c(unsigned int, int, unsigned char *);
@@ -62,16 +62,16 @@ void FUN_0011dcb8(int param_1)
   unsigned char temp_v8 [8];
   
   if (*(char *)(param_1 + 0x90) == '\x02') {
-    FUN_002e7634(temp_v3);
+    strInit(temp_v3);
     temp_v0 = FUN_00301e8c(*(unsigned int *)(*(int *)(*(int *)(param_1 + 0x6c) + 0x20) + 0x14),
                          param_1 + 0xf8,temp_v3);
     if (temp_v0 == 0) {
       FUN_00310e5e(param_1,3);
-      FUN_002ec9f4(temp_v3);
+      strDestroy(temp_v3);
       return;
     }
     FUN_002ec75c(temp_v6);
-    FUN_002e7634(temp_v4);
+    strInit(temp_v4);
     FUN_002ee524(temp_v5,temp_v3);
     temp_v1 = FUN_00310e4e(temp_v6,0x20);
     FUN_00310dc6(temp_v5,temp_v1,0x100);
@@ -90,9 +90,9 @@ void FUN_0011dcb8(int param_1)
     **(unsigned int **)(param_1 + 0x78) = temp_v1;
     FUN_002e75fa(temp_v1);
     FUN_002ee54c(temp_v5);
-    FUN_002ec9f4(temp_v4);
+    strDestroy(temp_v4);
     FUN_002ec890(temp_v6);
-    FUN_002ec9f4(temp_v3);
+    strDestroy(temp_v3);
   }
   FUN_00310e5e(param_1,*(unsigned char *)(param_1 + 0x90));
   return;

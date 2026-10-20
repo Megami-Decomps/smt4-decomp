@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0028c854(void);
+int asdEffectTextureCreate(void);
 int FUN_002c0894(void);
 
 extern unsigned int FUN_0028c814(void);
-/* Supplied declaration required: FUN_0028c854. */
+/* Supplied declaration required: asdEffectTextureCreate. */
 extern int FUN_0028c904(unsigned int);
 /* Supplied declaration required: FUN_002c0894. */
 
@@ -24,7 +24,7 @@ void FUN_002472f0(int param_1,unsigned int param_2)
   }
   temp_v0 = FUN_0028c904(param_2);
   if (temp_v0 != 0) {
-    FUN_0028c854();
+    asdEffectTextureCreate();
   }
   else {
     param_2 = FUN_0028c814();

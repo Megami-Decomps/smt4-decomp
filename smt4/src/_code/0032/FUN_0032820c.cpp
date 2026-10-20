@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0020ffa0(unsigned int, int);
 int FUN_00265b78(int, int);
 
-extern int DAT_00447060; /* 0x447060 */
+extern int g_lmapMainState; /* 0x447060 */
 
 /* Supplied declaration required: FUN_0020ffa0. */
 /* Supplied declaration required: FUN_00265b78. */
@@ -25,7 +25,7 @@ void FUN_0032820c(int param_1)
   int temp_v4;
   int temp_v5;
   
-  temp_v1 = DAT_00447060;
+  temp_v1 = g_lmapMainState;
   temp_v2 = 0;
   temp_v5 = 0;
   do {
@@ -65,16 +65,16 @@ void FUN_0032820c(int param_1)
   if (temp_v2 < *(int *)(*(int *)(temp_v1 + 0xa9c) + 4)) {
     do {
       if (*(char *)(temp_v2 + 0x49f08c) != '\x01') {
-        if ((DAT_00447060 != 0) &&
-           (temp_v5 = DAT_00447060 + temp_v2 * 0x88, *(char *)(temp_v5 + 0xb30) != '\0')) {
+        if ((g_lmapMainState != 0) &&
+           (temp_v5 = g_lmapMainState + temp_v2 * 0x88, *(char *)(temp_v5 + 0xb30) != '\0')) {
           *(unsigned char *)(temp_v5 + 0xb30) = 0;
         }
         FUN_00265b78(temp_v2,0);
       }
       else {
         FUN_0020ffa0(*(unsigned int *)(temp_v1 + 0xa9c),temp_v2);
-        if ((DAT_00447060 != 0) &&
-           (temp_v5 = DAT_00447060 + temp_v2 * 0x88, *(char *)(temp_v5 + 0xb30) == '\0')) {
+        if ((g_lmapMainState != 0) &&
+           (temp_v5 = g_lmapMainState + temp_v2 * 0x88, *(char *)(temp_v5 + 0xb30) == '\0')) {
           *(unsigned char *)(temp_v5 + 0xb30) = 1;
         }
         FUN_00265b78(temp_v2,1);

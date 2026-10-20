@@ -30,7 +30,7 @@ extern unsigned int DAT_00570d7c; /* 0x570d7c */
 extern unsigned int DAT_00570d90; /* 0x570d90 */
 extern unsigned int DAT_00570d94; /* 0x570d94 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_0015688c(void);
 extern int FUN_001ab888(void);
 extern int FUN_00213b5c(void);
@@ -62,7 +62,7 @@ unsigned int FUN_0035f2f4(void)
   int temp_v8;
   char temp_v9 [8];
   
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   temp_v2 = FUN_003e0154();
   temp_v3 = FUN_003e0164();
   FUN_004fb798(0,0,0,*(int *)(temp_v1 + 0x1ed4),0,temp_v2,temp_v3,0xffffffff,2,0,0,9,0,0,1);

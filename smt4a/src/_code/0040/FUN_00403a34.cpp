@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char DAT_0052d13c; /* 0x52d13c */
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 extern char *FUN_0016780c(unsigned int, int, int *);
 extern int FUN_001688c4(unsigned int);
@@ -53,7 +53,7 @@ void FUN_00403a34(int param_1,int param_2)
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 5);
   if (0 < temp_v0) {
-    puVar8 = &DAT_00570280;
+    puVar8 = &g_aocSystem;
   }
   temp_v2 = 0;
   if (temp_v2 < temp_v0) {

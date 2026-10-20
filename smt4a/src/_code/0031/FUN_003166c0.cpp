@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0042e67c(int, unsigned int, unsigned int);
-int FUN_0042e868(unsigned int);
+int asdCecMessageBoxOpen(int, unsigned int, unsigned int);
+int asdCecMessageBoxClose(unsigned int);
 
-extern unsigned char DAT_005b3f94; /* 0x5b3f94 */
+extern unsigned char g_asdCec; /* 0x5b3f94 */
 
-/* Supplied declaration required: FUN_0042e67c. */
-/* Supplied declaration required: FUN_0042e868. */
+/* Supplied declaration required: asdCecMessageBoxOpen. */
+/* Supplied declaration required: asdCecMessageBoxClose. */
 
 
 int FUN_003166c0(void)
@@ -21,14 +21,14 @@ int FUN_003166c0(void)
   int temp_v1;
   
   temp_v1 = 0;
-  temp_v0 = (*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6];
-  FUN_0042e67c(temp_v0,*(*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4)),(*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[1]);
+  temp_v0 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];
+  asdCecMessageBoxOpen(temp_v0,*(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)),(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[1]);
   if (-1 < temp_v0) {
-    temp_v0 = *(int *)((*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6] + 0x210);
+    temp_v0 = *(int *)((*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6] + 0x210);
     if (temp_v0 != 0) {
       temp_v1 = temp_v0;
     }
-    FUN_0042e868((*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6]);
+    asdCecMessageBoxClose((*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6]);
   }
   return temp_v1;
 }

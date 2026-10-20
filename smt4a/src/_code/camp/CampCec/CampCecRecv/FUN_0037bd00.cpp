@@ -4,22 +4,22 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
-int FUN_0019a5a0(...);
-int FUN_0019c364(void);
+int jobStop(unsigned int, int);
+int asdMemFree(...);
+int scrScriptProcessDestroy(void);
 int FUN_001add24(int);
 int FUN_00321744(void);
-int FUN_00333274(void);
+int runWinDestroy(void);
 int FUN_0036c8e8(unsigned int);
 
-extern unsigned int *DAT_0057f128; /* 0x57f128 */
+extern unsigned int *g_campCecRecv; /* 0x57f128 */
 
-/* Supplied declaration required: FUN_001631d0. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: jobStop. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_001add24. */
 /* Supplied declaration required: FUN_00321744. */
-/* Supplied declaration required: FUN_00333274. */
+/* Supplied declaration required: runWinDestroy. */
 /* Supplied declaration required: FUN_0036c8e8. */
 
 
@@ -29,51 +29,51 @@ void FUN_0037bd00(void)
 /* irregular: 7 native warning(s); review required */
   unsigned int *puVar1;
   
-  puVar1 = DAT_0057f128;
-  if (DAT_0057f128[0xf8] != 0) {
-    if (DAT_0057f128[0xd4] != 0) {
-      FUN_0019a5a0();
+  puVar1 = g_campCecRecv;
+  if (g_campCecRecv[0xf8] != 0) {
+    if (g_campCecRecv[0xd4] != 0) {
+      asdMemFree();
     }
     if (puVar1[0xd5] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     if (puVar1[0xd8] != 0) {
-      FUN_0019c364();
+      scrScriptProcessDestroy();
     }
   }
   else {
     FUN_001add24(0x25);
     FUN_00321744();
     if (puVar1[0xd2] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     if (puVar1[0xd3] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     if (puVar1[0xd4] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     if (puVar1[0xd5] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     if (puVar1[0xd6] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     if (puVar1[0xd7] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     if (puVar1[0xd8] != 0) {
-      FUN_0019c364();
+      scrScriptProcessDestroy();
     }
     if (puVar1[0xd9] != 0) {
-      FUN_0019c364();
+      scrScriptProcessDestroy();
     }
     FUN_0036c8e8(puVar1[0x1f6]);
-    FUN_00333274();
+    runWinDestroy();
   }
-  FUN_001631d0(*puVar1,0);
-  FUN_0019a5a0(puVar1);
-  DAT_0057f128 = (unsigned int *)0x0;
+  jobStop(*puVar1,0);
+  asdMemFree(puVar1);
+  g_campCecRecv = (unsigned int *)0x0;
   return;
 }
 

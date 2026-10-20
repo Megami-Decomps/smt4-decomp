@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3390(...);
+int wstrlen(...);
 int nn_boss_TaskOption_TaskOption(char [255], char *, int);
 
 typedef int romwright_code(...);
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp148; /* 0x148: local_148 */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_002e3390. */
+/* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: nn_boss_TaskOption_TaskOption. */
 
 
@@ -35,8 +35,8 @@ void FUN_001bbb1c(int *param_1,unsigned int param_2,unsigned int param_3,char *p
   unsigned char temp_v5;
   
   if (*param_4 != '/') {
-    temp_v0 = FUN_002e3390(param_4);
-    temp_v1 = FUN_002e3390(param_1 + 3);
+    temp_v0 = wstrlen(param_4);
+    temp_v1 = wstrlen(param_1 + 3);
     if ((unsigned int)(temp_v0 + temp_v1) >= 0x100) {
       return;
     }
@@ -61,7 +61,7 @@ void FUN_001bbb1c(int *param_1,unsigned int param_2,unsigned int param_3,char *p
     }
     temp_v0 = temp_v0 + 1;
     *pcVar6 = '\0';
-    temp_v1 = FUN_002e3390(acStack_138);
+    temp_v1 = wstrlen(acStack_138);
     if ((unsigned int)(temp_v1 + temp_v0) >= 0x100) {
       temp_v0 = 0xff - temp_v1;
     }

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002881bc(void);
 int FUN_0028836c(void);
-int FUN_002a0b48(void);
+int statusCameraApply(void);
 int FUN_002c18e4(int);
 int FUN_002c198c(int);
 int FUN_0033e160(unsigned int, int, unsigned int, float *, int, int);
@@ -23,7 +23,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_0043dd90; /* 0x43dd90 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
 #define ROMWRIGHT_SQRT_4_DEFINED
@@ -37,7 +37,7 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_002881bc. */
 /* Supplied declaration required: FUN_0028836c. */
-/* Supplied declaration required: FUN_002a0b48. */
+/* Supplied declaration required: statusCameraApply. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 extern int FUN_002c501c(void);
@@ -66,7 +66,7 @@ unsigned int FUN_0032ae80(void)
   float temp_v12;
   float temp_v13;
   
-  temp_v3 = DAT_0044ea00;
+  temp_v3 = g_titleScene;
   temp_v1 = DAT_0043dd90;
   temp_v2 = FUN_002c5d80(1,0);
   piVar7 = (int *)(temp_v3 + 0x124c);
@@ -106,7 +106,7 @@ unsigned int FUN_0032ae80(void)
     goto LAB_0032b100;
   }
   else if (*(int *)(temp_v1 + 8) <= temp_v3) goto LAB_0032b100;
-  FUN_002a0b48();
+  statusCameraApply();
   temp_v3 = FUN_002c501c();
   temp_v10 = 1.0f;
   temp_v11 = 0.0f;
@@ -135,8 +135,8 @@ unsigned int FUN_0032ae80(void)
   FUN_0033e160(*(unsigned int *)(temp_v1 + 0x80),0,*(unsigned int *)(temp_v1 + 0x7c),&temp_v11,temp_v3 - 0x100
                ,0);
 LAB_0032b100:
-  temp_v1 = DAT_0044ea00;
-  piVar7 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v1 = g_titleScene;
+  piVar7 = (int *)(g_titleScene + 0x124c);
   temp_v3 = *piVar7;
   temp_v2 = piVar7[temp_v3 + 2];
   *piVar7 = temp_v3 - 1;
@@ -144,8 +144,8 @@ LAB_0032b100:
     (**(romwright_code **)(temp_v1 + 0x1268))();
     *(unsigned char *)(temp_v1 + 0x1264) = 0;
   }
-  FUN_002c198c(DAT_0044ea00);
-  FUN_002c18e4(DAT_0044ea00);
+  FUN_002c198c(g_titleScene);
+  FUN_002c18e4(g_titleScene);
   return 0;
 }
 

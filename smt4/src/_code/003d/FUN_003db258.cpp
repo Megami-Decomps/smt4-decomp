@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00297468(...);
 int FUN_002be624(...);
 int FUN_002bf694(...);
-int FUN_002c415c(...);
-int FUN_002c4938(...);
+int asdMemFree(...);
+int memClear(...);
 
 /* stack frame of param_2: 16 slot(s), 64 byte(s) */
 typedef struct {
@@ -35,8 +35,8 @@ extern int FUN_002522e0(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_003db258(int param_1,unsigned int param_2)
@@ -64,9 +64,9 @@ unsigned int FUN_003db258(int param_1,unsigned int param_2)
   
   *(unsigned int *)(param_1 + 0x3028) = *(unsigned int *)(param_1 + 0x3028) & 0xfffcffff;
   *(unsigned char *)(param_1 + 0x3218) = 0xff;
-  FUN_002c4938(param_1 + 0x3220,0x80);
+  memClear(param_1 + 0x3220,0x80);
   if (*(int *)(param_1 + 0x321c) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x321c) = 0;
   }
   *(unsigned char *)(param_1 + 0x32a0) = 0;
@@ -86,7 +86,7 @@ unsigned int FUN_003db258(int param_1,unsigned int param_2)
   temp_v14 = 0;
   temp_v15 = 0;
   temp_v16 = 0;
-  FUN_002c4938(temp_v17,0x80);
+  memClear(temp_v17,0x80);
   FUN_002be624(temp_v17,"battle/effect/%s.eft",param_2);
   FUN_002bf694(&temp_v1,temp_v17);
   temp_v0 = FUN_002522e0((unsigned int *)&temp_v1,0x2f);

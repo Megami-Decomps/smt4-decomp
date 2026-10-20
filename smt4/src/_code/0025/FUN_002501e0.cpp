@@ -1,19 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002501e0` (_code @ 0x2501e0, 0x1c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct Handler {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ void (*run)(u32 arg);
+    /* 0x0C */ u8 unk0C[0x38];
+} Handler;                        /* 0x44 bytes */
 
-void FUN_002501e0(int param_1)
+typedef struct Event {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u16 type;          /* index into the handler table */
+    /* 0x06 */ u16 unk06;
+    /* 0x08 */ u32 arg;
+} Event;
 
+extern Handler g_handlerTable[];
+
+/* Dispatches the event to the handler registered for its type. */
+void FUN_002501e0(Event *event)
 {
-/* irregular: 2 native warning(s); review required */
-                    /* WARNING: Could not recover jumptable at 0x002501f8. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(romwright_code **)((unsigned int)*(unsigned short *)(param_1 + 4) * 0x44 + 0x464118))(*(unsigned int *)(param_1 + 8));
-  return;
+    g_handlerTable[event->type].run(event->arg);
 }
 
 } /* extern "C" */

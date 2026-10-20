@@ -7,14 +7,14 @@ extern "C" {
 int FUN_00297410(int);
 int FUN_0029f848(...);
 int FUN_002a5ed0(int, int);
-int FUN_002bd8e8(int, int);
+int timerStart(int, int);
 int FUN_002bd954(int, int, int, int, int);
-int FUN_002c0c74(...);
-int FUN_002c0cc4(void);
+int dataTableGetCount(...);
+int dataTableGetEntries(void);
 int FUN_002c312c(int, unsigned char *, int, int, int, int, int, int, int, int, int);
-int FUN_002c4938(void);
-int FUN_002c498c(int, int, int, int, int);
-int FUN_002c4c2c(int);
+int memClear(void);
+int asdMemAlloc(int, int, int, int, int);
+int asdTMTexTableLoadSprites(int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -29,22 +29,22 @@ typedef struct {
 } void_stack;
 
 extern unsigned char DAT_00402d04; /* 0x402d04 */
-extern int DAT_0043dd08; /* 0x43dd08 */
+extern int g_playLog; /* 0x43dd08 */
 
 extern int FUN_00290794(unsigned short);
 extern int FUN_002907a8(void);
 /* Supplied declaration required: FUN_00297410. */
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: FUN_002a5ed0. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002c0c74. */
-/* Supplied declaration required: FUN_002c0cc4. */
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+/* Supplied declaration required: dataTableGetEntries. */
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4c2c. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -61,15 +61,15 @@ void FUN_00194ec8(void)
   int temp_v6;
   unsigned short *puVar8;
   
-  if (DAT_0043dd08 == 0) {
+  if (g_playLog == 0) {
     temp_v0 = 0x100;
-    FUN_002c498c(0x100,0x100,0,0x488,1);
-    DAT_0043dd08 = temp_v0;
+    asdMemAlloc(0x100,0x100,0,0x488,1);
+    g_playLog = temp_v0;
   }
-  temp_v0 = DAT_0043dd08;
-  FUN_002c4938();
+  temp_v0 = g_playLog;
+  memClear();
   *(unsigned int *)(temp_v0 + 0x344) = 0;
-  FUN_002c4c2c(0x30);
+  asdTMTexTableLoadSprites(0x30);
   FUN_002a5ed0(0x30,0);
   FUN_00297410(0x37);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(temp_v0);
@@ -78,19 +78,19 @@ void FUN_00194ec8(void)
   do {
     temp_v6 = temp_v0 + temp_v4 * 0x8c;
     FUN_002bd954(temp_v6 + 0x20,0x30,0,temp_v0,1);
-    FUN_002bd8e8(temp_v6 + 0x20,0);
+    timerStart(temp_v6 + 0x20,0);
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 5);
   temp_v6 = 0;
   temp_v5 = 0;
-  temp_v1 = FUN_002c0cec(0x37,0);
-  FUN_002c0cc4();
-  temp_v4 = FUN_002c0c74(temp_v1);
+  temp_v1 = dataTableGet(0x37,0);
+  dataTableGetEntries();
+  temp_v4 = dataTableGetCount(temp_v1);
   if (temp_v4 != 0) {
     do {
-      temp_v1 = FUN_002c0cec(0x37,0);
-      temp_v4 = FUN_002c0cc4();
-      temp_v2 = FUN_002c0c74(temp_v1);
+      temp_v1 = dataTableGet(0x37,0);
+      temp_v4 = dataTableGetEntries();
+      temp_v2 = dataTableGetCount(temp_v1);
       if (temp_v5 >= temp_v2) {
         puVar8 = (unsigned short *)0x0;
 LAB_001950d4:
@@ -127,9 +127,9 @@ LAB_001950d4:
         }
       }
       temp_v5 = temp_v5 + 1;
-      temp_v1 = FUN_002c0cec(0x37,0);
-      FUN_002c0cc4();
-      temp_v2 = FUN_002c0c74(temp_v1);
+      temp_v1 = dataTableGet(0x37,0);
+      dataTableGetEntries();
+      temp_v2 = dataTableGetCount(temp_v1);
     } while (temp_v5 < temp_v2);
   }
   FUN_0029f848(temp_v0 + 0x2dc,temp_v6,5,1,0,1);

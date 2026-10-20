@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00162790(int, unsigned int);
 int FUN_00164b5c(int, int, int, int, int, int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00168594(int, int);
 int FUN_001834a4(int, int);
 int FUN_00183bb0(void);
@@ -21,12 +21,12 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168594. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
@@ -48,9 +48,9 @@ void FUN_004087d8(int param_1,int param_2)
   float temp_v5;
   float temp_v6;
   
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_00183bb0();
-  temp_v2 = DAT_0059dbb4;
+  temp_v2 = g_renderCtx;
   temp_v1 = FUN_001692ac(1,0);
   piVar6 = (int *)(temp_v2 + 0x1258);
   temp_v3 = *piVar6;
@@ -61,11 +61,11 @@ void FUN_004087d8(int param_1,int param_2)
     (**(romwright_code **)(temp_v2 + 0x1274))();
     *(unsigned char *)(temp_v2 + 0x1270) = 0;
   }
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_001834a4(0x2b,0x56);
   temp_v2 = FUN_001834a4(0x2b,0x59);
   temp_v5 = 0.26f;
-  FUN_001879d0(DAT_0059dbb4);
+  FUN_001879d0(g_renderCtx);
   FUN_00164b5c(2,0x2b,7,(int)temp_v5,0,0xf1);
   temp_v6 = 0.0f;
   temp_v0 = **(short **)(temp_v2 + 0xc);
@@ -80,8 +80,8 @@ void FUN_004087d8(int param_1,int param_2)
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(4,0xffffffff);
-  temp_v2 = DAT_0059dbb4;
-  piVar6 = (int *)(DAT_0059dbb4 + 0x1258);
+  temp_v2 = g_renderCtx;
+  piVar6 = (int *)(g_renderCtx + 0x1258);
   temp_v1 = *piVar6;
   temp_v3 = piVar6[temp_v1 + 2];
   *piVar6 = temp_v1 - 1;
@@ -89,7 +89,7 @@ void FUN_004087d8(int param_1,int param_2)
     (**(romwright_code **)(temp_v2 + 0x1274))();
     *(unsigned char *)(temp_v2 + 0x1270) = 0;
   }
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

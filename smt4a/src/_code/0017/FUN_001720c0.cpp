@@ -1,24 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001720c0` (_code @ 0x1720c0, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail branches around the two stores (beq/ldr/stm); built predicates them (ldrne/stmne). */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned char DAT_0055b7e8; /* 0x55b7e8 */
+typedef struct Allocator Allocator;
 
+/* Allocator vtable: slot 2 (0x8) allocates `size` bytes with `alignment`. */
+typedef struct {
+    void *slots[2];
+    void *(*alloc)(Allocator *self, u32 size, u32 alignment);   /* 0x08 */
+} AllocatorVtbl;
 
-void FUN_001720c0(int *param_1)
+struct Allocator {
+    const AllocatorVtbl *vtbl;
+};
 
+/* 8-byte object: vtable pointer and the allocator it came from. */
+typedef struct {
+    const void *vtbl;   /* 0x00 */
+    Allocator *owner;   /* 0x04 */
+} Handle;
+
+extern u8 DAT_0055b7e8;
+
+/* Allocates and initialises a Handle owned by `allocator`; NULL when the allocation fails. */
+Handle *FUN_001720c0(Allocator *allocator)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)(**(romwright_code **)(*param_1 + 8))(param_1,8,4);
-  if (puVar1 != (unsigned int *)0x0) {
-    *puVar1 = (unsigned int)&DAT_0055b7e8;
-    puVar1[1] = (unsigned int)param_1;
-  }
-  return;
+    Handle *handle = (Handle *)allocator->vtbl->alloc(allocator, 8, 4);
+
+    if (handle != NULL) {
+        handle->vtbl = &DAT_0055b7e8;
+        handle->owner = allocator;
+    }
+    return handle;
 }
 
 } /* extern "C" */

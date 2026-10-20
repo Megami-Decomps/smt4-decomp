@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 
 
 unsigned int FUN_00126714(void)
@@ -10,7 +10,7 @@ unsigned int FUN_00126714(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   return *(unsigned int *)(temp_v0 + 0x3c);
 }
 

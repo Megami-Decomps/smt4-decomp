@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(unsigned int, double);
 int FUN_00231494(...);
 int FUN_002314d0(void);
-int FUN_0024c1e4(...);
+int uiGetEntrySize(...);
 int FUN_002c09d0(...);
 int FUN_0039fca8(void);
 int MapNaviTable_GetCategoryCount(void);
@@ -47,7 +47,7 @@ extern unsigned char LAB_00103001; /* 0x103001 */
 /* Supplied declaration required: FUN_002314d0. */
 extern unsigned int *FUN_00248248(int);
 extern int FUN_002482a8(void);
-/* Supplied declaration required: FUN_0024c1e4. */
+/* Supplied declaration required: uiGetEntrySize. */
 extern unsigned short FUN_00276348(unsigned int);
 /* Supplied declaration required: FUN_002c09d0. */
 extern unsigned short FUN_003218e0(unsigned int);
@@ -151,8 +151,8 @@ LAB_0039d774:
                         temp_v3 = *(short *)(pcVar17 + 0x10);
                         temp_v38 = (int)(short)((short)pcVar17[0x12] + temp_v2 / 2);
                         temp_v39 = (int)(short)((short)pcVar17[0x13] + temp_v3 / 2);
-                        FUN_0024c1e4(temp_v30,temp_v4,&temp_v36,&temp_v37);
-                        FUN_0024c1e4(temp_v30,temp_v0,&temp_v40,&temp_v41);
+                        uiGetEntrySize(temp_v30,temp_v4,&temp_v36,&temp_v37);
+                        uiGetEntrySize(temp_v30,temp_v0,&temp_v40,&temp_v41);
                         if (*(short *)(pcVar17 + 8) != 0) {
                           puVar9 = (unsigned int *)(param_1 + temp_v14 * 0x4c + 0xe88);
                           temp_v14 = temp_v14 + 1;
@@ -211,8 +211,8 @@ LAB_0039d774:
   temp_v32 = 0x3c449ba6;
   temp_v27 = 0x40e000003cc49ba6;
   temp_v28 = 0x3c449ba640400000;
-  FUN_0024c1e4(0x13,0x1b67,&temp_v36,&temp_v37);
-  FUN_0024c1e4(0x13,0x1b8f,&temp_v40,&temp_v41);
+  uiGetEntrySize(0x13,0x1b67,&temp_v36,&temp_v37);
+  uiGetEntrySize(0x13,0x1b8f,&temp_v40,&temp_v41);
   temp_v11 = 0;
   temp_v13 = FUN_002482a8();
   temp_v20 = (unsigned int)temp_v32;
@@ -312,8 +312,8 @@ LAB_0039d774:
     } while (temp_v11 < temp_v13);
   }
   temp_v27 = romwright_piece_4_4((int)((unsigned long long)temp_v27 >> 0x20),temp_v20);
-  FUN_0024c1e4(0x13,0x1b67,&temp_v36,&temp_v37);
-  FUN_0024c1e4(0x13,0x1b8f,&temp_v40,&temp_v41);
+  uiGetEntrySize(0x13,0x1b67,&temp_v36,&temp_v37);
+  uiGetEntrySize(0x13,0x1b8f,&temp_v40,&temp_v41);
   temp_v11 = 0;
   temp_v13 = FUN_002482a8();
   if (0 < temp_v13) {

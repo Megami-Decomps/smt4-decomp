@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0016007c(...);
-int FUN_00167ab4(...);
+int asdOperatorNew(...);
+int memAlloc(...);
 int FUN_0016dfc4(...);
 int FUN_00188b60(...);
 int FUN_002e3140(...);
@@ -29,8 +29,8 @@ extern unsigned char LAB_00514ae4; /* 0x514ae4 */
 extern unsigned char LAB_00514b74; /* 0x514b74 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0016007c. */
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_0016dfc4. */
 /* Supplied declaration required: FUN_00188b60. */
 /* Supplied declaration required: FUN_002e3140. */
@@ -55,13 +55,13 @@ void FUN_003f0f58(int param_1)
   FUN_00188b60(param_1 + 0x4d0c);
   if (*(int *)(param_1 + 0x4d00) == 0) {
     temp_v0 = 0x100;
-    FUN_00167ab4(0x100,0x100,0,0x1000,0x1000,1);
+    memAlloc(0x100,0x100,0,0x1000,0x1000,1);
     *(int *)(param_1 + 0x4d00) = temp_v0;
   }
   piVar4 = (int *)(param_1 + 0x4d04);
   if (*piVar4 == 0) {
     puVar2 = (unsigned int *)0x18;
-    FUN_0016007c();
+    asdOperatorNew();
     if (puVar2 != (unsigned int *)0x0) {
       *puVar2 = 0;
       puVar2[1] = 0;

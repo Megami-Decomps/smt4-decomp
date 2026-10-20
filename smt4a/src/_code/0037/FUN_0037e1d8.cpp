@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_00137ee0(int, unsigned int [2], int);
+int asdSequenceRequest(int, unsigned int [2], int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_00137ee0. */
-extern unsigned int FUN_00236038(unsigned int);
+/* Supplied declaration required: asdSequenceRequest. */
+extern unsigned int scrGetArg(unsigned int);
 
 
 unsigned int FUN_0037e1d8(void)
@@ -23,8 +23,8 @@ unsigned int FUN_0037e1d8(void)
   unsigned int temp_v0 [2];
   
   temp_v0[0] = in_r3;
-  temp_v0[0] = FUN_00236038(0);
-  FUN_00137ee0(0xd,temp_v0,4);
+  temp_v0[0] = scrGetArg(0);
+  asdSequenceRequest(0xd,temp_v0,4);
   return 1;
 }
 

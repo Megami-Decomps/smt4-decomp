@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e33f0(...);
+int asdOperatorNewC(...);
 int FUN_002e3f68(unsigned char [4]);
 int FUN_002e5694(int, int, unsigned char *, int);
 int FUN_002e56a8(...);
@@ -23,8 +23,8 @@ typedef struct {
 extern unsigned char LAB_00102155; /* 0x102155 */
 
 extern int FUN_001c53f0(void);
-extern int FUN_002e3390(void);
-/* Supplied declaration required: FUN_002e33f0. */
+extern int wstrlen(void);
+/* Supplied declaration required: asdOperatorNewC. */
 /* Supplied declaration required: FUN_002e3f68. */
 extern unsigned int FUN_002e5684(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002e5694. */
@@ -57,7 +57,7 @@ int * FUN_002e4d84(int *param_1,int param_2,int param_3,int param_4)
   temp_v9 = param_4;
   if (param_3 != 0) {
     temp_v0 = param_3 << 2;
-    FUN_002e33f0();
+    asdOperatorNewC();
   }
   else {
     temp_v0 = 0;
@@ -72,8 +72,8 @@ int * FUN_002e4d84(int *param_1,int param_2,int param_3,int param_4)
   param_1[6] = 0;
   param_1[7] = temp_v9;
   if (temp_v8 != 0) {
-    temp_v0 = FUN_002e3390();
-    FUN_002e33f0(temp_v0 + 1);
+    temp_v0 = wstrlen();
+    asdOperatorNewC(temp_v0 + 1);
     temp_v0 = FUN_001c53f0();
     param_1[6] = temp_v0;
   }

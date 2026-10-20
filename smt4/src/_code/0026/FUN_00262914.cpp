@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c3944. */
 
 
@@ -28,7 +28,7 @@ unsigned int * FUN_00262914(unsigned int param_1,unsigned int *param_2)
   unsigned int unaff_r4;
   unsigned int in_lr;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   temp_v1 = 0x100;
   puVar2 = (unsigned int *)(temp_v0 + 0x8c);
   puVar3 = puVar2;

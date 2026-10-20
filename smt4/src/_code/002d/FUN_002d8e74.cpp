@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00210580(int, unsigned char [128], unsigned char [140], unsigned int, unsigned int);
+int asdSaveReadBlock(int, unsigned char [128], unsigned char [140], unsigned int, unsigned int);
 int FUN_002be624(unsigned char [128], unsigned char *, unsigned int);
 int FUN_002d5e44(int, unsigned char [128]);
 
@@ -18,7 +18,7 @@ extern unsigned char DAT_0043e311; /* 0x43e311 */
 extern int DAT_0043e314; /* 0x43e314 */
 extern unsigned int DAT_0043e31c; /* 0x43e31c */
 
-/* Supplied declaration required: FUN_00210580. */
+/* Supplied declaration required: asdSaveReadBlock. */
 extern int FUN_00214950(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002d5e44. */
@@ -43,7 +43,7 @@ void FUN_002d8e74(unsigned int param_1)
   temp_v0 = 0;
   FUN_002d5e44(0,temp_v4);
   if (temp_v0 != 0) {
-    FUN_00210580(temp_v1,temp_v4,temp_v5,temp_v2,temp_v3);
+    asdSaveReadBlock(temp_v1,temp_v4,temp_v5,temp_v2,temp_v3);
     if (temp_v1 != 0) {
       return;
     }

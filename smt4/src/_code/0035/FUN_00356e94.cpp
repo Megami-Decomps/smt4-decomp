@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002c4938(unsigned int *, int);
+int memClear(unsigned int *, int);
 
 extern unsigned int *FUN_001394c8(void);
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 extern unsigned int *FUN_00356d98(unsigned int *, unsigned int);
 extern unsigned int FUN_00356e38(unsigned int *, unsigned int);
 extern unsigned int *FUN_003572e8(unsigned int, unsigned int);
@@ -28,7 +28,7 @@ unsigned int * FUN_00356e94(void)
   *puVar1 = 0;
   puVar1[3] = 0xf0202;
   puVar1[2] = 0;
-  FUN_002c4938(puVar1 + 4,0x98);
+  memClear(puVar1 + 4,0x98);
   temp_v1 = 0;
   puVar1[5] = 0x823f0203;
   piVar3 = (int *)(puVar1 + 0x2a);

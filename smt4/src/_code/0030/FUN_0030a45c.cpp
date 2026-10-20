@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00296cc8(int);
+int scrGetArg(int);
 int FUN_002bf6fc(unsigned int, unsigned int, int, int, unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -16,9 +16,9 @@ extern unsigned int DAT_0043e068; /* 0x43e068 */
 extern unsigned int DAT_0043e06c; /* 0x43e06c */
 extern unsigned int DAT_0043e070; /* 0x43e070 */
 
-/* Supplied declaration required: FUN_00296cc8. */
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_002bf6fc. */
-extern unsigned int *FUN_002c08f0(void);
+extern unsigned int *jobGetWork(void);
 extern int FUN_002c09d0(unsigned int);
 
 
@@ -31,10 +31,10 @@ unsigned int FUN_0030a45c(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  FUN_00296cc8(0);
-  puVar1 = (unsigned int *)FUN_002c08f0();
+  scrGetArg(0);
+  puVar1 = (unsigned int *)jobGetWork();
   temp_v2 = *puVar1;
-  temp_v0 = FUN_00296cc8(1);
+  temp_v0 = scrGetArg(1);
   FUN_002bf6fc(temp_v2,temp_v0,1,1,0xffffffff);
   temp_v1 = FUN_002c09d0(0x522);
   if (temp_v1 != 0) {

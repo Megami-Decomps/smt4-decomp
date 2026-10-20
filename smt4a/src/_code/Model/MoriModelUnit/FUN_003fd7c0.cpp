@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001630d4(int, int, int, int);
+int asdMemoryAlloc(int, int, int, int);
 int FUN_00178150(int, int, int);
 int FUN_0045ab90(int, int, unsigned int);
 int FUN_0045b384(int, int, int, unsigned int);
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_00178150. */
 /* Supplied declaration required: FUN_0045ab90. */
 /* Supplied declaration required: FUN_0045b384. */
@@ -56,7 +56,7 @@ void FUN_003fd7c0(int param_1,unsigned int param_2,unsigned char param_3,unsigne
           if (temp_v2 == 0) {
             temp_v2 = 0x10000;
             temp_v4 = 1;
-            FUN_001630d4(0x10000,0x100,0,temp_v3 << 2);
+            asdMemoryAlloc(0x10000,0x100,0,temp_v3 << 2);
             *(int *)(param_1 + 0xb0) = temp_v2;
           }
           FUN_0045b498(param_1 + 0xa8,temp_v2,temp_v3);

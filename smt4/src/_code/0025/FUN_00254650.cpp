@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0020ffe8(unsigned int, unsigned int);
-int FUN_00282c90(void);
+int statusCameraSetEye(void);
 int FUN_00293db0(unsigned int, int);
 int FUN_00293e08(unsigned int);
 int VectorSignedToFloat(int, int);
@@ -17,7 +17,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0020ffe8. */
-/* Supplied declaration required: FUN_00282c90. */
+/* Supplied declaration required: statusCameraSetEye. */
 /* Supplied declaration required: FUN_00293db0. */
 /* Supplied declaration required: FUN_00293e08. */
 
@@ -82,7 +82,7 @@ void FUN_00254650(int param_1,unsigned int param_2)
   if (0 < temp_v0) {
     VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   }
-  FUN_00282c90();
+  statusCameraSetEye();
   return;
 }
 

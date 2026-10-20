@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0028dcb0(int);
-int FUN_002939f4(void);
+int scrSetResult(int);
+int btlGetMainState(void);
 
 extern int FUN_002499b4(void);
-/* Supplied declaration required: FUN_0028dcb0. */
-/* Supplied declaration required: FUN_002939f4. */
-extern int FUN_00296cc8(void);
-extern int aeabi_idivmod(int, int);
+/* Supplied declaration required: scrSetResult. */
+/* Supplied declaration required: btlGetMainState. */
+extern int scrGetArg(void);
+extern int __aeabi_idivmod(int, int);
 
 
 unsigned int FUN_0030b1e0(void)
@@ -21,16 +21,16 @@ unsigned int FUN_0030b1e0(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00296cc8();
-  FUN_002939f4();
+  temp_v0 = scrGetArg();
+  btlGetMainState();
   temp_v1 = FUN_002499b4();
   if ((temp_v1 != 0) &&
-     (temp_v1 = aeabi_idivmod(*(short *)(temp_v1 + 0x1b4) * 100,(int)*(short *)(temp_v1 + 0x1b6)),
+     (temp_v1 = __aeabi_idivmod(*(short *)(temp_v1 + 0x1b4) * 100,(int)*(short *)(temp_v1 + 0x1b6)),
      temp_v0 <= temp_v1)) {
-    FUN_0028dcb0(1);
+    scrSetResult(1);
     return 1;
   }
-  FUN_0028dcb0(0);
+  scrSetResult(0);
   return 1;
 }
 

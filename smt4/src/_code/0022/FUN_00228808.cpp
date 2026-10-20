@@ -19,10 +19,10 @@ struct fn_00228808_arg0 {
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0023ea94(void);
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00282924. */
-extern unsigned int *FUN_002939f4(void);
-extern int aeabi_idivmod(int, int);
+extern unsigned int *btlGetMainState(void);
+extern int __aeabi_idivmod(int, int);
 
 
 unsigned int FUN_00228808(fn_00228808_arg0 *param_1,unsigned int param_2,int param_3)
@@ -38,7 +38,7 @@ unsigned int FUN_00228808(fn_00228808_arg0 *param_1,unsigned int param_2,int par
   unsigned int in_fpscr;
   float temp_v5;
   
-  puVar1 = (unsigned int *)FUN_002939f4();
+  puVar1 = (unsigned int *)btlGetMainState();
   if ((puVar1[0x112b] & 1) != 0) {
     return 1;
   }
@@ -57,7 +57,7 @@ LAB_00228864:
     else {
       if ((temp_v3 & 0x20) != 0) goto LAB_00228864;
       if ((temp_v3 & 0x10) == 0) {
-        temp_v1 = FUN_0023eae0(99);
+        temp_v1 = randRange(99);
         if (temp_v1 < temp_v2) {
           return 1;
         }
@@ -70,7 +70,7 @@ LAB_00228864:
         temp_v2 = 0x55;
       }
 LAB_0022886c:
-      temp_v0 = aeabi_idivmod((short)puVar1[0x6d] * 100,(int)*(short *)((int)puVar1 + 0x1b6));
+      temp_v0 = __aeabi_idivmod((short)puVar1[0x6d] * 100,(int)*(short *)((int)puVar1 + 0x1b6));
       temp_v4 = SBORROW4(temp_v0,0x28);
       temp_v1 = temp_v0 - 0x28;
       if (temp_v0 < 0x29) {
@@ -92,7 +92,7 @@ LAB_0022886c:
       temp_v2 = (int)(*(float *)(temp_v1 + 0x18) * temp_v5);
     }
   }
-  temp_v1 = FUN_0023eae0(99);
+  temp_v1 = randRange(99);
   if (temp_v1 < temp_v2) {
     return 1;
   }

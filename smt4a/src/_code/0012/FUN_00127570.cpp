@@ -8,7 +8,7 @@ int FUN_001286a0(int *, unsigned char *);
 int FUN_0030d824(...);
 int FUN_0030db5c(...);
 int FUN_0030dd02(...);
-int aeabi_uidivmod(unsigned int, int);
+int __aeabi_uidivmod(unsigned int, int);
 int rt_memcpy(...);
 
 /* stack frame of param_3: 19 slot(s), 64 byte(s) */
@@ -43,7 +43,7 @@ extern int FUN_00128bdc(int *, unsigned char *);
 /* Supplied declaration required: FUN_0030d824. */
 /* Supplied declaration required: FUN_0030db5c. */
 /* Supplied declaration required: FUN_0030dd02. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -144,7 +144,7 @@ LAB_0012761c:
           *(unsigned int *)(*(int *)(pbVar15 + 0x20) + 0x30) = 0xffffffff;
         }
         if (((*(unsigned int *)(pbVar15 + 8) & 1) != 0) &&
-           (aeabi_uidivmod((temp_v14 & 0xff) * 0x100 + (temp_v14 >> 8),0x1f), temp_v7 == 0)) {
+           (__aeabi_uidivmod((temp_v14 & 0xff) * 0x100 + (temp_v14 >> 8),0x1f), temp_v7 == 0)) {
           if ((temp_v14 & 0xf) != 8) {
             param_3 = (unsigned char *)0x127a50;
             break;

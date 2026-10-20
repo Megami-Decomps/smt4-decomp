@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010063a(unsigned int, unsigned int, int, unsigned char *);
+int qsort(unsigned int, unsigned int, int, unsigned char *);
 int FUN_00312830(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -21,11 +21,11 @@ extern unsigned char LAB_00360378; /* 0x360378 */
 extern unsigned char LAB_00360390; /* 0x360390 */
 extern unsigned char LAB_0038e798; /* 0x38e798 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern int *FUN_0016a0f0(unsigned int);
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern unsigned int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00312830. */
 
 
@@ -37,34 +37,34 @@ void FUN_003b078c(void)
   unsigned int temp_v1;
   int *piVar3;
   
-  temp_v0 = FUN_00187180(5,1);
-  temp_v1 = FUN_00192798();
-  temp_v0 = FUN_00192748(temp_v0);
-  FUN_0010063a(temp_v1,temp_v0,4,&LAB_003370ec);
-  temp_v0 = FUN_00187180(5,2);
-  temp_v1 = FUN_00192798();
-  temp_v0 = FUN_00192748(temp_v0);
-  FUN_0010063a(temp_v1,temp_v0,4,&LAB_0038e798);
-  temp_v0 = FUN_00187180(5,3);
-  temp_v1 = FUN_00192798();
-  temp_v0 = FUN_00192748(temp_v0);
-  FUN_0010063a(temp_v1,temp_v0,4,&LAB_003372a8);
-  temp_v0 = FUN_00187180(5,4);
-  temp_v1 = FUN_00192798();
-  temp_v0 = FUN_00192748(temp_v0);
-  FUN_0010063a(temp_v1,temp_v0,0x1c,&LAB_002b2d30);
-  temp_v0 = FUN_00187180(5,7);
-  temp_v1 = FUN_00192798();
-  temp_v0 = FUN_00192748(temp_v0);
-  FUN_0010063a(temp_v1,temp_v0,4,&LAB_00360378);
-  temp_v0 = FUN_00187180(5,8);
-  temp_v1 = FUN_00192798();
-  temp_v0 = FUN_00192748(temp_v0);
-  FUN_0010063a(temp_v1,temp_v0,0x14,&LAB_00360390);
-  temp_v0 = FUN_00187180(6,1);
-  temp_v1 = FUN_00192798();
-  temp_v0 = FUN_00192748(temp_v0);
-  FUN_0010063a(temp_v1,temp_v0,4,&LAB_0034f3a4);
+  temp_v0 = dataTableGet(5,1);
+  temp_v1 = dataTableGetEntries();
+  temp_v0 = dataTableGetCount(temp_v0);
+  qsort(temp_v1,temp_v0,4,&LAB_003370ec);
+  temp_v0 = dataTableGet(5,2);
+  temp_v1 = dataTableGetEntries();
+  temp_v0 = dataTableGetCount(temp_v0);
+  qsort(temp_v1,temp_v0,4,&LAB_0038e798);
+  temp_v0 = dataTableGet(5,3);
+  temp_v1 = dataTableGetEntries();
+  temp_v0 = dataTableGetCount(temp_v0);
+  qsort(temp_v1,temp_v0,4,&LAB_003372a8);
+  temp_v0 = dataTableGet(5,4);
+  temp_v1 = dataTableGetEntries();
+  temp_v0 = dataTableGetCount(temp_v0);
+  qsort(temp_v1,temp_v0,0x1c,&LAB_002b2d30);
+  temp_v0 = dataTableGet(5,7);
+  temp_v1 = dataTableGetEntries();
+  temp_v0 = dataTableGetCount(temp_v0);
+  qsort(temp_v1,temp_v0,4,&LAB_00360378);
+  temp_v0 = dataTableGet(5,8);
+  temp_v1 = dataTableGetEntries();
+  temp_v0 = dataTableGetCount(temp_v0);
+  qsort(temp_v1,temp_v0,0x14,&LAB_00360390);
+  temp_v0 = dataTableGet(6,1);
+  temp_v1 = dataTableGetEntries();
+  temp_v0 = dataTableGetCount(temp_v0);
+  qsort(temp_v1,temp_v0,4,&LAB_0034f3a4);
   piVar3 = (int *)FUN_0016a0f0(0x1f);
   FUN_00312830(piVar3 + 1,(*piVar3 - 4U) >> 3,8,&LAB_0029092c);
   return;

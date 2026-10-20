@@ -2,12 +2,12 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_003eaa14(void);
 int FUN_004bcb54(unsigned int);
 int FUN_004bd354(unsigned int, int);
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 extern unsigned int FUN_0015688c(void);
 /* Supplied declaration required: FUN_003eaa14. */
 /* Supplied declaration required: FUN_004bcb54. */
@@ -27,7 +27,7 @@ unsigned int FUN_003b1cf4(void)
   if (temp_v1 != 0) {
     FUN_004bcb54(temp_v0);
     FUN_004bd354(temp_v0,1);
-    FUN_0014aa78();
+    btlGetMainState();
     FUN_003eaa14();
   }
   return 1;

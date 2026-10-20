@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022a358(...);
 int FUN_0022a3a8(...);
 int FUN_0025c2ec(unsigned int, int);
-int FUN_0025c318(void);
+int asdListBoxAddItems(void);
 int FUN_0025c58c(unsigned int, int, int);
 int FUN_00262914(unsigned int, unsigned char *);
 
@@ -41,7 +41,7 @@ extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 /* Supplied declaration required: FUN_0022a358. */
 /* Supplied declaration required: FUN_0022a3a8. */
 /* Supplied declaration required: FUN_0025c2ec. */
-/* Supplied declaration required: FUN_0025c318. */
+/* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_0025c58c. */
 /* Supplied declaration required: FUN_00262914. */
 
@@ -57,7 +57,7 @@ void FUN_003c3da4(int param_1,int param_2)
   temp_v0 = *(unsigned int *)(param_2 + 0x5c);
   FUN_0025c58c(temp_v0,0x73,0);
   *(unsigned int *)(param_1 + 0x10) = temp_v0;
-  FUN_0025c318();
+  asdListBoxAddItems();
   FUN_0025c2ec(*(unsigned int *)(param_1 + 0x10),1);
   FUN_00262914(*(unsigned int *)(param_1 + 0x10),&LAB_003c4074);
   FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),0,DAT_00439ce8,0xffffffff,2,0);

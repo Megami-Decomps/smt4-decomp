@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_004e3cf4; /* 0x4e3cf4 */
+extern int g_asdProcess; /* 0x4e3cf4 */
 
 /* Supplied declaration required: FUN_002d7894. */
 
@@ -16,7 +16,7 @@ void FUN_002d7894(int param_1,unsigned int param_2,unsigned int param_3)
   int temp_v0;
   unsigned int temp_v1;
   
-  for (temp_v0 = *(int *)(DAT_004e3cf4 + (param_2 >> 0x14) * 8); temp_v0 != 0;
+  for (temp_v0 = *(int *)(g_asdProcess + (param_2 >> 0x14) * 8); temp_v0 != 0;
       temp_v0 = *(int *)(temp_v0 + 0x4c)) {
     if (*(unsigned int *)(temp_v0 + 0x24) == (param_2 & 0xfffff)) goto LAB_002d78dc;
   }

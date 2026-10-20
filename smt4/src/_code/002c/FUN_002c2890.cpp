@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_0012316c(unsigned int, unsigned int);
 int FUN_001233d4(unsigned int, unsigned int *);
-int FUN_00123508(unsigned char *);
-int FUN_00123520(int, int);
+int asdGfxSetCmdBufferUnk38(unsigned char *);
+int asdGfxSetCmdBufferState(int, int);
 int FUN_00123560(void);
 int FUN_002bef70(unsigned int);
-int FUN_002c2428(void);
+int asdModelResetCommandBuffer(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,11 +22,11 @@ extern int DAT_004c632c; /* 0x4c632c */
 
 /* Supplied declaration required: FUN_0012316c. */
 /* Supplied declaration required: FUN_001233d4. */
-/* Supplied declaration required: FUN_00123508. */
-/* Supplied declaration required: FUN_00123520. */
+/* Supplied declaration required: asdGfxSetCmdBufferUnk38. */
+/* Supplied declaration required: asdGfxSetCmdBufferState. */
 /* Supplied declaration required: FUN_00123560. */
 /* Supplied declaration required: FUN_002bef70. */
-/* Supplied declaration required: FUN_002c2428. */
+/* Supplied declaration required: asdModelResetCommandBuffer. */
 
 
 /* WARNING: Removing unreachable block (ram,0x001233b8) */
@@ -54,14 +54,14 @@ void FUN_002c2890(unsigned int *param_1,int param_2,unsigned int param_3,unsigne
     do {
       FUN_002bef70(param_1[temp_v0]);
       FUN_0012316c(param_1[3],param_1[4]);
-      FUN_00123520(0x200,0x300);
-      FUN_002c2428();
+      asdGfxSetCmdBufferState(0x200,0x300);
+      asdModelResetCommandBuffer();
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < (unsigned int)param_1[2]);
   }
   FUN_002bef70(*param_1);
   FUN_00123560();
-  FUN_00123508(&LAB_001192c4);
+  asdGfxSetCmdBufferUnk38(&LAB_001192c4);
   if (DAT_004c632c != 0) {
     *(unsigned char *)(DAT_004c632c + 0x3c) = 1;
   }

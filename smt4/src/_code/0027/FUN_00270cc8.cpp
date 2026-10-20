@@ -9,8 +9,8 @@ int FUN_002897b0(int);
 int FUN_002897d0(int);
 int FUN_0028dc68(int);
 int FUN_002a03d8(int, int);
-int FUN_002a7218(unsigned int);
-int FUN_002c415c(unsigned int);
+int scrScriptProcessDestroy(unsigned int);
+int asdMemFree(unsigned int);
 
 extern int FUN_0019e0c0(unsigned int);
 extern int FUN_002896bc(void);
@@ -21,10 +21,10 @@ extern int FUN_002897c0(void);
 extern int FUN_002897e0(void);
 /* Supplied declaration required: FUN_0028dc68. */
 /* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 extern int FUN_002c1d5c(void);
 extern int FUN_002c2a04(unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 unsigned int FUN_00270cc8(int *param_1)
@@ -66,11 +66,11 @@ unsigned int FUN_00270cc8(int *param_1)
         FUN_0028975c(*(int *)(temp_v1 + 0x98),1);
       }
       FUN_0028dc68(0);
-      FUN_002a7218(*(unsigned int *)(temp_v1 + 0x94));
+      scrScriptProcessDestroy(*(unsigned int *)(temp_v1 + 0x94));
       *(unsigned int *)(temp_v1 + 0x94) = 0;
-      FUN_002c415c(*(unsigned int *)(temp_v1 + 0x8c));
+      asdMemFree(*(unsigned int *)(temp_v1 + 0x8c));
       *(unsigned int *)(temp_v1 + 0x8c) = 0;
-      FUN_002c415c(*(unsigned int *)(temp_v1 + 0x90));
+      asdMemFree(*(unsigned int *)(temp_v1 + 0x90));
       *(unsigned int *)(temp_v1 + 0x90) = 0;
       return 1;
     }

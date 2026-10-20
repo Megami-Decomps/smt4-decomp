@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0026e70c(void);
-int FUN_0026e754(float *);
+int renderCtxCallB(float *);
 int FUN_002a34e8(float *, float *);
 int FUN_002a3504(float *, float *, float *);
 int FUN_002ae038(...);
@@ -66,7 +66,7 @@ typedef struct {
     unsigned int spA0; /* 0xa0: local_a0 */
 } param_3_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -77,7 +77,7 @@ extern int DAT_0044ea00; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, int);
 /* Supplied declaration required: FUN_0026e70c. */
-/* Supplied declaration required: FUN_0026e754. */
+/* Supplied declaration required: renderCtxCallB. */
 /* Supplied declaration required: FUN_002a34e8. */
 /* Supplied declaration required: FUN_002a3504. */
 /* Supplied declaration required: FUN_002ae038. */
@@ -91,7 +91,7 @@ extern int FUN_002b8660(void);
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf538. */
-extern int *FUN_002c08f0(void);
+extern int *jobGetWork(void);
 /* Supplied declaration required: FUN_002c198c. */
 extern int FUN_002c1d5c(void);
 extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
@@ -145,7 +145,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
   float fStack_40;
   float temp_v34;
   
-  piVar2 = (int *)FUN_002c08f0();
+  piVar2 = (int *)jobGetWork();
   if (piVar2[3] == 0) {
     temp_v12 = 0.0f;
     temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)((float)piVar2[9] == 0.0f) << 0x1e);
@@ -153,7 +153,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
        ((temp_v1 = FUN_002c1d5c(), temp_v1 == 0 || (temp_v1 = FUN_002b8660(), temp_v1 == 0)))) {
       temp_v6 = (float)piVar2[6];
       temp_v11 = *(unsigned long long *)(piVar2 + 8);
-      FUN_002ba12c(DAT_0044ea00);
+      FUN_002ba12c(g_titleScene);
       temp_v1 = (int)temp_v6;
       temp_v10 = (float)((unsigned long long)temp_v11 >> 0x20);
       temp_v6 = (float)temp_v11;
@@ -189,7 +189,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
             temp_v34 = temp_v12;
             FUN_002a3504(&temp_v13,&temp_v13,&temp_v31);
             FUN_002a34e8(&temp_v13,&temp_v33);
-            FUN_0026e754(&temp_v13);
+            renderCtxCallB(&temp_v13);
           }
           FUN_002bf4f8(0x32,0xc);
           if (-1 < piVar2[0x11]) {
@@ -210,7 +210,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
           FUN_002bf288(2,piVar2[0xf],piVar2[0x10] * 1000,
                        piVar2[4] + param_2 + (int)(float)piVar2[7] + temp_v1);
           FUN_002bf538();
-          temp_v7 = DAT_0044ea00;
+          temp_v7 = g_titleScene;
           temp_v8 = FUN_002c5da8(6,1,0);
           piVar6 = (int *)(temp_v7 + 0x12ac);
           temp_v9 = *piVar6;
@@ -252,8 +252,8 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
                                                (unsigned char)(temp_v5 >> 0x16) & 3);
             FUN_002ae9ec(2,0x32,0xb,(int)(temp_v6 - (float)piVar2[0x1d]));
           }
-          temp_v1 = DAT_0044ea00;
-          piVar6 = (int *)(DAT_0044ea00 + 0x12ac);
+          temp_v1 = g_titleScene;
+          piVar6 = (int *)(g_titleScene + 0x12ac);
           temp_v7 = *piVar6;
           temp_v8 = piVar6[temp_v7 + 2];
           *piVar6 = temp_v7 - 1;
@@ -262,7 +262,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
             *(unsigned char *)(temp_v1 + 0x12c4) = 0;
           }
           if (temp_v12 < (float)piVar2[10]) {
-            FUN_002c198c(DAT_0044ea00);
+            FUN_002c198c(g_titleScene);
           }
         }
         else {

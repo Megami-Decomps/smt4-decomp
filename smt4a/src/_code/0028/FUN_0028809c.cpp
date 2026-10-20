@@ -15,14 +15,14 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_5_stack;
 
-extern int FUN_0014aa78(void);
-extern int FUN_001641e8(void);
+extern int btlGetMainState(void);
+extern int btlMainIsRunning(void);
 extern int FUN_0017760c(int);
 extern int FUN_001801a4(void);
 extern int FUN_001ab854(void);
 extern int FUN_0023ad2c(int);
 /* Supplied declaration required: FUN_0023e6d8. */
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 extern int FUN_00291e14(void);
 extern int FUN_002b4dcc(void);
 /* Supplied declaration required: FUN_002b4e7c. */
@@ -50,9 +50,9 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
   temp_v5 = 0;
   temp_v6 = 0;
   if (param_2 < 0) {
-    temp_v2 = FUN_001641e8();
+    temp_v2 = btlMainIsRunning();
     if ((temp_v2 != 0) && (temp_v2 = FUN_00291e14(), temp_v2 != 0)) {
-      temp_v6 = FUN_002919a4();
+      temp_v6 = btlMainGetUnk14();
     }
     else {
       temp_v5 = FUN_001801a4();
@@ -72,7 +72,7 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
   temp_v7 = 1;
   temp_v8 = 0;
   if (temp_v5 != 0) {
-    temp_v2 = FUN_0014aa78();
+    temp_v2 = btlGetMainState();
     if (temp_v2 == 0) {
       temp_v2 = (int)*(short *)(temp_v5 + 0x1c);
     }
@@ -82,7 +82,7 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
     }
   }
   if (temp_v6 != 0) {
-    temp_v8 = FUN_0014aa78();
+    temp_v8 = btlGetMainState();
     if (temp_v8 != 0) {
       temp_v8 = FUN_002b4dcc();
     }

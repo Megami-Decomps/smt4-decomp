@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0010063a(short [2], int, int, unsigned char *);
+int qsort(short [2], int, int, unsigned char *);
 
 extern unsigned char LAB_003d4ea8; /* 0x3d4ea8 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 
 
 void FUN_003e7b5c(int param_1)
@@ -60,7 +60,7 @@ void FUN_003e7b5c(int param_1)
         temp_v0 = temp_v0 + 1;
         temp_v3 = temp_v1;
       } while (temp_v0 < 0x36);
-      FUN_0010063a(asStack_120,temp_v1,0xc,&LAB_003d4ea8);
+      qsort(asStack_120,temp_v1,0xc,&LAB_003d4ea8);
       temp_v5 = '\0';
       temp_v3 = 0;
       do {

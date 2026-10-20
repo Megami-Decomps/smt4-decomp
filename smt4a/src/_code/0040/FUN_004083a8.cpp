@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern unsigned int *DAT_005f1600; /* 0x5f1600 */
 
 extern int FUN_0018719c(unsigned int);
@@ -52,11 +52,11 @@ unsigned char FUN_004083a8(int param_1,unsigned int param_2)
           }
         }
         else if (param_2 == 2) {
-          puVar1 = (unsigned int *)&DAT_005f15fc;
-          if (DAT_005f15fc == 0x17) {
+          puVar1 = (unsigned int *)&g_gameState;
+          if (g_gameState == 0x17) {
             puVar1 = DAT_005f1600;
           }
-          if (DAT_005f15fc == 0x17 && puVar1 == (unsigned int *)0x1) {
+          if (g_gameState == 0x17 && puVar1 == (unsigned int *)0x1) {
             if ((*pbVar3 & 4) != 0) {
               return 1;
             }
@@ -66,11 +66,11 @@ unsigned char FUN_004083a8(int param_1,unsigned int param_2)
         }
       }
       else if (param_2 == 3) {
-        puVar1 = (unsigned int *)&DAT_005f15fc;
-        if (DAT_005f15fc == 0x17) {
+        puVar1 = (unsigned int *)&g_gameState;
+        if (g_gameState == 0x17) {
           puVar1 = DAT_005f1600;
         }
-        if (DAT_005f15fc == 0x17 && puVar1 == (unsigned int *)0x6) {
+        if (g_gameState == 0x17 && puVar1 == (unsigned int *)0x6) {
           if ((*pbVar3 & 8) == 0) {
             return *pbVar3 & 8;
           }

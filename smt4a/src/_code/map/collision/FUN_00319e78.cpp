@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001630d4(int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ extern unsigned int DAT_00580220; /* 0x580220 */
 extern unsigned int DAT_00580224; /* 0x580224 */
 extern unsigned int DAT_00580228; /* 0x580228 */
 
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 void FUN_00319e78(void)
@@ -27,16 +27,16 @@ void FUN_00319e78(void)
   unsigned int temp_v1;
   
   temp_v0 = 0x100;
-  FUN_001630d4(0x100,0x100,0,0x15000,1);
+  asdMemoryAlloc(0x100,0x100,0,0x15000,1);
   temp_v1 = 0x100;
   DAT_0058021c = temp_v0;
-  FUN_001630d4(0x100,0x100,0,0xfc00,1);
+  asdMemoryAlloc(0x100,0x100,0,0xfc00,1);
   temp_v0 = 0x100;
   DAT_00580220 = temp_v1;
-  FUN_001630d4(0x100,0x100,0,0x6900,1);
+  asdMemoryAlloc(0x100,0x100,0,0x6900,1);
   temp_v1 = 0x100;
   DAT_00580224 = temp_v0;
-  FUN_001630d4(0x100,0x100,0,0x1f800,1);
+  asdMemoryAlloc(0x100,0x100,0,0x1f800,1);
   DAT_00580228 = temp_v1;
   return;
 }

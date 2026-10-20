@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int aeabi_uidivmod(int, unsigned int);
+int __aeabi_uidivmod(int, unsigned int);
 
 typedef struct fn_002f9fd4_arg0 fn_002f9fd4_arg0;
 struct fn_002f9fd4_arg0 {
@@ -16,7 +16,7 @@ struct fn_002f9fd4_arg0 {
     int field_0x18; /* +0x18 */
 };
 
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_002f9fd4(fn_002f9fd4_arg0 *param_1,unsigned int *param_2)
@@ -26,7 +26,7 @@ void FUN_002f9fd4(fn_002f9fd4_arg0 *param_1,unsigned int *param_2)
   int temp_v0;
   
   *(unsigned int *)(param_1->field_0x4 + param_1->field_0x10 * 4) = *param_2;
-  aeabi_uidivmod(param_1->field_0x10 + 1,*(unsigned int *)(param_1 + 1));
+  __aeabi_uidivmod(param_1->field_0x10 + 1,*(unsigned int *)(param_1 + 1));
   param_1->field_0x10 = temp_v0;
   param_1->field_0x18 = param_1->field_0x18 + 1;
   return;

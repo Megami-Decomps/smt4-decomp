@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0058104c; /* 0x58104c */
+extern int g_popupState; /* 0x58104c */
 
 
 void FUN_002d8c90(int param_1)
@@ -16,12 +16,12 @@ void FUN_002d8c90(int param_1)
   if ((param_1 == 0xd || param_1 == 0x10) || (param_1 == 0x12 || param_1 == 0x13)) {
     temp_v0 = 0;
     do {
-      temp_v1 = *(int *)(DAT_0058104c + temp_v0 * 4 + 0xb0);
+      temp_v1 = *(int *)(g_popupState + temp_v0 * 4 + 0xb0);
       if (temp_v1 == param_1) {
         return;
       }
       if (temp_v1 == 0) {
-        *(int *)(DAT_0058104c + temp_v0 * 4 + 0xb0) = param_1;
+        *(int *)(g_popupState + temp_v0 * 4 + 0xb0) = param_1;
         return;
       }
       temp_v0 = temp_v0 + 1;

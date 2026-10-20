@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp1C; /* 0x1c: local_1c */
 } param_1_stack;
 
-extern unsigned char DAT_004e1f68; /* 0x4e1f68 */
+extern unsigned char g_asdSound; /* 0x4e1f68 */
 
 extern int FUN_0014d3fc(unsigned char *, unsigned int, unsigned char *);
 extern int FUN_002bf684(unsigned char *);
@@ -23,9 +23,9 @@ unsigned int FUN_002fc250(unsigned int param_1)
   unsigned char temp_v2 [12];
   unsigned int temp_v3;
   
-  temp_v0 = FUN_002bf684(&DAT_004e1f68);
+  temp_v0 = FUN_002bf684(&g_asdSound);
   temp_v1 = 0xffffffff;
-  if ((temp_v0 != 0) && (temp_v0 = FUN_0014d3fc(&DAT_004e1f68,param_1,temp_v2), temp_v0 != 0)) {
+  if ((temp_v0 != 0) && (temp_v0 = FUN_0014d3fc(&g_asdSound,param_1,temp_v2), temp_v0 != 0)) {
     temp_v1 = temp_v3;
   }
   return temp_v1;

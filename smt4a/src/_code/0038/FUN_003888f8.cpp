@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0020ea90(void);
+int shopGetResult(void);
 int FUN_0021bdac(int, int, unsigned int, int, int, unsigned int);
 int FUN_002c76c0(int);
 int FUN_002deb84(void);
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_0020ea90. */
+/* Supplied declaration required: shopGetResult. */
 /* Supplied declaration required: FUN_0021bdac. */
 /* Supplied declaration required: FUN_002c76c0. */
 /* Supplied declaration required: FUN_002deb84. */
@@ -32,12 +32,12 @@ void FUN_003888f8(void)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_0020ea90();
+  temp_v0 = shopGetResult();
   temp_v1 = FUN_002deb84();
   if (temp_v1 == 0) {
     FUN_003c1060();
   }
-  FUN_0020ea90();
+  shopGetResult();
   temp_v2 = FUN_00496674();
   FUN_002c76c0(0);
   temp_v3 = FUN_002deb84();

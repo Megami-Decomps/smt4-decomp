@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001aba54(void);
 
 /* Supplied declaration required: FUN_001aba54. */
-extern int FUN_00213b78(void);
+extern int flagSelectVariant(void);
 
 
 unsigned int FUN_0033896c(void)
@@ -19,7 +19,7 @@ unsigned int FUN_0033896c(void)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_00213b78();
+  temp_v0 = flagSelectVariant();
   temp_v3 = (unsigned int)(temp_v0 == 1);
   if ((temp_v0 != 1) && (temp_v0 == 2)) {
     temp_v3 = 2;

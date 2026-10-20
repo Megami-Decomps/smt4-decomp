@@ -9,10 +9,10 @@ int FUN_002897b0(int);
 int FUN_002897d0(int);
 int FUN_0028dc68(int);
 int FUN_002a03d8(int, int);
-int FUN_002a7218(unsigned int);
-int FUN_002c415c(unsigned int);
+int scrScriptProcessDestroy(unsigned int);
+int asdMemFree(unsigned int);
 
-extern int DAT_00447060; /* 0x447060 */
+extern int g_lmapMainState; /* 0x447060 */
 
 extern int FUN_0019e0c0(unsigned int);
 extern int FUN_002896bc(void);
@@ -23,10 +23,10 @@ extern int FUN_002897c0(void);
 extern int FUN_002897e0(void);
 /* Supplied declaration required: FUN_0028dc68. */
 /* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 extern int FUN_002c1d5c(void);
 extern int FUN_002c2a04(unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 unsigned int FUN_00264548(void)
@@ -37,8 +37,8 @@ unsigned int FUN_00264548(void)
   int temp_v1;
   int *piVar3;
   
-  temp_v1 = DAT_00447060;
-  piVar3 = (int *)(DAT_00447060 + 0x4f00);
+  temp_v1 = g_lmapMainState;
+  piVar3 = (int *)(g_lmapMainState + 0x4f00);
   temp_v0 = *piVar3;
   if (temp_v0 != 0) {
     if (((temp_v0 != 1) && (temp_v0 == 2)) && (temp_v1 = FUN_002896bc(), temp_v1 != 0)) {
@@ -70,11 +70,11 @@ unsigned int FUN_00264548(void)
         FUN_0028975c(*(int *)(temp_v1 + 0x9f0),1);
       }
       FUN_0028dc68(0);
-      FUN_002a7218(*(unsigned int *)(temp_v1 + 0x9ec));
+      scrScriptProcessDestroy(*(unsigned int *)(temp_v1 + 0x9ec));
       *(unsigned int *)(temp_v1 + 0x9ec) = 0;
-      FUN_002c415c(*(unsigned int *)(temp_v1 + 0x9e4));
+      asdMemFree(*(unsigned int *)(temp_v1 + 0x9e4));
       *(unsigned int *)(temp_v1 + 0x9e4) = 0;
-      FUN_002c415c(*(unsigned int *)(temp_v1 + 0x9e8));
+      asdMemFree(*(unsigned int *)(temp_v1 + 0x9e8));
       *(unsigned int *)(temp_v1 + 0x9e8) = 0;
       return 1;
     }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0015155c(...);
+int taskCreateDraw(...);
 int FUN_00184758(...);
 int FUN_0020ad6c(...);
 int FUN_002c52d8(...);
@@ -26,7 +26,7 @@ extern unsigned char LAB_0029865c; /* 0x29865c */
 extern unsigned char LAB_002b548c; /* 0x2b548c */
 extern int DAT_0057a9c8; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_0015155c. */
+/* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_0020ad6c. */
 /* Supplied declaration required: FUN_002c52d8. */
@@ -56,7 +56,7 @@ void FUN_002b53e0(unsigned int *param_1)
   int temp_v0;
   
   puVar1 = &LAB_002b548c;
-  FUN_0015155c(&LAB_002b548c,4,0,0,&LAB_0029865c,FUN_001631b8,param_1,*param_1);
+  taskCreateDraw(&LAB_002b548c,4,0,0,&LAB_0029865c,FUN_001631b8,param_1,*param_1);
   param_1[1] = (unsigned int)puVar1;
   FUN_002c52d8();
   FUN_002ed428(param_1 + 0x6c);

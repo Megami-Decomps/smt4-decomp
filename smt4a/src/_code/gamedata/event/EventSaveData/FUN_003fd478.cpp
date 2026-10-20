@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001630d4(int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 int FUN_001ab940(void);
 int rt_memcpy(void);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_001ab940. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -26,7 +26,7 @@ unsigned int FUN_003fd478(void)
   
   FUN_001ab940();
   temp_v0 = 0x100;
-  FUN_001630d4(0x100,0x100,0,0x44,1);
+  asdMemoryAlloc(0x100,0x100,0,0x44,1);
   rt_memcpy();
   return temp_v0;
 }

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0019a5a0(int);
+int asdMemFree(int);
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 
 
 unsigned int FUN_001add24(unsigned int param_1)
@@ -21,7 +21,7 @@ unsigned int FUN_001add24(unsigned int param_1)
       return 1;
     }
     if (*(char *)(temp_v0 + 0x5e2220) == '\0') {
-      FUN_0019a5a0(*(int *)(temp_v0 + 0x5e2218));
+      asdMemFree(*(int *)(temp_v0 + 0x5e2218));
       *(unsigned int *)(temp_v0 + 0x5e2218) = 0;
       return 1;
     }

@@ -11,7 +11,7 @@ int FUN_002e6e5c(unsigned char [12]);
 int FUN_002ec728(int, unsigned int);
 int FUN_002ec890(...);
 int FUN_002ec8a8(int, unsigned int);
-int FUN_002ec9f4(...);
+int strDestroy(...);
 int FUN_002ecbdc(unsigned int *, unsigned int);
 
 /* stack frame of param_4: 7 slot(s), 28 byte(s) */
@@ -29,12 +29,12 @@ typedef struct {
 /* Supplied declaration required: FUN_00130824. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002e7634(int *);
+extern unsigned int strInit(int *);
 /* Supplied declaration required: FUN_002ec728. */
 extern unsigned int FUN_002ec75c(unsigned char *);
 /* Supplied declaration required: FUN_002ec890. */
 /* Supplied declaration required: FUN_002ec8a8. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ecbdc. */
 extern int FUN_002ece14(unsigned char *, unsigned int);
 
@@ -62,12 +62,12 @@ void FUN_002ec964(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v9 = param_3;
   temp_v10 = param_4;
   FUN_002e6e34(temp_v6,param_1 + 0x3c);
-  temp_v0 = FUN_002e7634(temp_v4);
+  temp_v0 = strInit(temp_v4);
   temp_v2 = temp_v8;
   temp_v1 = FUN_002ece14(temp_v3,temp_v0);
   FUN_00130824(temp_v7,param_1 + 4,temp_v1 - 4);
-  FUN_002ec9f4(temp_v3);
-  FUN_002ec9f4(temp_v4);
+  strDestroy(temp_v3);
+  strDestroy(temp_v4);
   FUN_002ec8a8(temp_v7[0] + 0x14,temp_v9);
   temp_v0 = FUN_002ec75c(temp_v5);
   puVar3 = (unsigned int *)&temp_v2;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 
 
 void FUN_001eb808(void)
@@ -12,7 +12,7 @@ void FUN_001eb808(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   *(unsigned int *)(temp_v0 + 0x4c) = *(unsigned int *)(temp_v0 + 0x34);
   *(unsigned int *)(temp_v0 + 0x50) = *(unsigned int *)(temp_v0 + 0x38);
   *(unsigned int *)(temp_v0 + 0x54) = *(unsigned int *)(temp_v0 + 0x3c);

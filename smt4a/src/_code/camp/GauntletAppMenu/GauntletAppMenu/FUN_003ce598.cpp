@@ -26,7 +26,7 @@ int FUN_00152cf8(int, int, int, int, int);
 int FUN_00163aa4(...);
 int FUN_001641b4(...);
 int FUN_001643b4(int, int);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00203b40(...);
 int FUN_0021b1a8(...);
 int FUN_00228b04(...);
@@ -46,7 +46,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern int DAT_0057f238; /* 0x57f238 */
+extern int g_gauntletAppMenu; /* 0x57f238 */
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00152cf8. */
@@ -55,7 +55,7 @@ extern int DAT_0057f238; /* 0x57f238 */
 /* Supplied declaration required: FUN_001643b4. */
 extern int FUN_00164af0(unsigned int);
 extern int FUN_001656a0(unsigned int);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00169ddc. */
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 extern unsigned int FUN_00186f54(unsigned int);
@@ -115,15 +115,15 @@ unsigned int FUN_003ce598(void)
   unsigned char temp_v9;
   char temp_v10 [12];
   
-  temp_v6 = DAT_0057f238;
-  FUN_00163aa4(DAT_0057f238 + 0x364);
+  temp_v6 = g_gauntletAppMenu;
+  FUN_00163aa4(g_gauntletAppMenu + 0x364);
   FUN_00163aa4(temp_v6 + 0x3f0);
   temp_v8 = 0x100020e;
   switch(*(unsigned int *)(temp_v6 + 8)) {
   case 0:
     temp_v7 = FUN_00163aa4(temp_v6 + 0x2d8);
     if (temp_v7 != 0) {
-      FUN_001681cc(0x19);
+      sysPlaySe(0x19);
       FUN_0021b1a8(temp_v6);
       temp_v7 = FUN_0018719c(0x4b7);
       if (temp_v7 != 0) {
@@ -413,7 +413,7 @@ unsigned int FUN_003ce598(void)
       }
       FUN_002844e4();
       FUN_0034913c();
-      FUN_001681cc(0x19);
+      sysPlaySe(0x19);
     }
     break;
   case 5:
@@ -451,7 +451,7 @@ unsigned int FUN_003ce598(void)
     temp_v7 = FUN_0023b258();
     if (temp_v7 != 0) {
       FUN_0035d8a4();
-      FUN_001681cc(0x19);
+      sysPlaySe(0x19);
       FUN_0021b1a8(temp_v6);
       FUN_003dc0c0(temp_v6,3);
     }

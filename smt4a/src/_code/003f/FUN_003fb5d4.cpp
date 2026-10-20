@@ -8,10 +8,10 @@ int FUN_00100388(...);
 int FUN_00100824(...);
 int FUN_0013c174(...);
 int FUN_001883b0(...);
-int FUN_001884b0(...);
+int vcallSlot12IfValid(...);
 int FUN_00195fc8(...);
-int FUN_0019a5a0(...);
-int FUN_0019a730(...);
+int asdMemFree(...);
+int asdTextureCreate(...);
 int FUN_0019a840(...);
 int FUN_001f4a98(...);
 int FUN_002e3c44(...);
@@ -45,7 +45,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char LAB_003fb978; /* 0x3fb978 */
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00100824. */
@@ -53,11 +53,11 @@ extern int FUN_00100836(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_0013c174. */
 extern int FUN_0014afd0(void *, unsigned int);
 /* Supplied declaration required: FUN_001883b0. */
-/* Supplied declaration required: FUN_001884b0. */
+/* Supplied declaration required: vcallSlot12IfValid. */
 extern int FUN_00191e00(unsigned int, void *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00195fc8. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019a730. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_0019a840. */
 extern int FUN_001a6508(unsigned int, void *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001f4a98. */
@@ -102,27 +102,27 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
   if (param_3 != 0) {
     temp_v3 = 0;
     if ((param_2 & 8) != 0) {
-      temp_v3 = FUN_001a6508(DAT_00570280,param_1->field_0x8,param_1->field_0xc,1);
+      temp_v3 = FUN_001a6508(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v3 != 0) {
-        temp_v3 = FUN_00191e00(DAT_00570280,param_1->field_0x8,param_1->field_0xc,0x20000);
+        temp_v3 = FUN_00191e00(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x20000);
       }
       else {
         temp_v3 = FUN_003598c4(param_1->field_0x8,param_1->field_0xc);
       }
     }
     else if ((param_2 & 0x40) != 0) {
-      temp_v3 = FUN_001a6508(DAT_00570280,param_1->field_0x8,param_1->field_0xc,1);
+      temp_v3 = FUN_001a6508(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v3 != 0) {
-        temp_v3 = FUN_00191e00(DAT_00570280,param_1->field_0x8,param_1->field_0xc,0x30000);
+        temp_v3 = FUN_00191e00(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x30000);
       }
       else {
         temp_v3 = FUN_0035991c(param_1->field_0x8,param_1->field_0xc);
       }
     }
     else if ((param_2 & 1) != 0) {
-      temp_v3 = FUN_001a6508(DAT_00570280,param_1->field_0x8,param_1->field_0xc,1);
+      temp_v3 = FUN_001a6508(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v3 != 0) {
-        temp_v3 = FUN_00191e00(DAT_00570280,param_1->field_0x8,param_1->field_0xc,0x10000);
+        temp_v3 = FUN_00191e00(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x10000);
       }
       else {
         temp_v3 = FUN_0014afd0(param_1->field_0x8,param_1->field_0xc);
@@ -177,12 +177,12 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
           if ((temp_v6[0] & 1) != 0) {
             FUN_00195fc8();
           }
-          FUN_001884b0(temp_v6[0] & 0xfffffffe);
+          vcallSlot12IfValid(temp_v6[0] & 0xfffffffe);
           temp_v6[0] = 0;
         }
         if (-1 < (int)puVar4) {
           temp_v0 = 0;
-          FUN_0019a730();
+          asdTextureCreate();
           puVar9 = temp_v8;
           FUN_0013c174(puVar9,temp_v7,0);
           FUN_001f4a98(temp_v0,puVar9,temp_v7[0]);
@@ -203,7 +203,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
             *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
           }
           FUN_0019a840(temp_v0);
-          FUN_0019a5a0(puVar9);
+          asdMemFree(puVar9);
           param_1->field_0x3d = 1;
           if (temp_v3 < (int)(unsigned int)*(unsigned short *)((int)param_1->field_0x10 + 4)) {
             pvVar2 = param_1->field_0x14;
@@ -218,7 +218,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
       if ((temp_v6[0] & 1) != 0) {
         FUN_00195fc8();
       }
-      FUN_001884b0(temp_v6[0] & 0xfffffffe);
+      vcallSlot12IfValid(temp_v6[0] & 0xfffffffe);
       temp_v6[0] = 0;
     }
   }

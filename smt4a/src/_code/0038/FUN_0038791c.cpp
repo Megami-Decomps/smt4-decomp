@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00153630(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_00164a9c(int);
+int jobGetWork(int);
 int FUN_0019d96c(...);
 int FUN_001ad0fc(void);
 int FUN_001ad1ac(unsigned int *, unsigned int, unsigned int, unsigned int);
@@ -16,7 +16,7 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: FUN_00153630. */
-/* Supplied declaration required: FUN_00164a9c. */
+/* Supplied declaration required: jobGetWork. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0019d96c. */
 /* Supplied declaration required: FUN_001ad0fc. */
@@ -38,7 +38,7 @@ void FUN_0038791c(int param_1,unsigned int param_2,int param_3,unsigned int para
   if ((temp_v0 != 0) && (param_1 == 0)) {
     return;
   }
-  puVar2 = (unsigned int *)FUN_00164a9c(param_1);
+  puVar2 = (unsigned int *)jobGetWork(param_1);
   *(unsigned char *)(puVar2 + 0xc) = 1;
   FUN_001ad0fc();
   puVar2[2] = param_2;
@@ -63,7 +63,7 @@ void FUN_0038791c(int param_1,unsigned int param_2,int param_3,unsigned int para
       return;
     }
     FUN_0019d96c(puVar2,5,0);
-    temp_v0 = FUN_00164a9c(param_1);
+    temp_v0 = jobGetWork(param_1);
     *(unsigned int *)(temp_v0 + 0x78) = 1;
     *(unsigned int *)(temp_v0 + 0x4c) = *(unsigned int *)(temp_v0 + 0x34);
     *(unsigned int *)(temp_v0 + 0x50) = *(unsigned int *)(temp_v0 + 0x38);

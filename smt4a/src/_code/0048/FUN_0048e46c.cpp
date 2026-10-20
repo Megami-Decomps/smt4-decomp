@@ -53,7 +53,7 @@ typedef struct {
 } param_2_stack;
 
 extern int DAT_00587f24; /* 0x587f24 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern unsigned int DAT_00616ee0; /* 0x616ee0 */
 extern unsigned char DAT_00616ee4; /* 0x616ee4 */
@@ -351,8 +351,8 @@ void FUN_0048e46c(int param_1,unsigned int param_2)
   FUN_002e1208(0xb,0x1b66,&temp_v53,&temp_v54);
   FUN_002e1208(0xb,0x1b8e,temp_v59,&temp_v44);
   temp_v46 = 0;
-  if (DAT_005f15fc != 0x1c) {
-    if (DAT_005f15fc == 0x1d) {
+  if (g_gameState != 0x1c) {
+    if (g_gameState == 0x1d) {
       temp_v52[0] = 4;
       temp_v52[1] = 5;
       temp_v52[2] = 6;
@@ -360,7 +360,7 @@ void FUN_0048e46c(int param_1,unsigned int param_2)
       temp_v46 = 4;
       goto LAB_0048eaec;
     }
-    if (DAT_005f15fc == 0x1e) {
+    if (g_gameState == 0x1e) {
       temp_v52[5] = 0xd;
       temp_v52[0] = 8;
       temp_v52[1] = 9;
@@ -370,7 +370,7 @@ void FUN_0048e46c(int param_1,unsigned int param_2)
       temp_v52[4] = 0xc;
       goto LAB_0048eaec;
     }
-    if (DAT_005f15fc != 0x1f) goto LAB_0048eaec;
+    if (g_gameState != 0x1f) goto LAB_0048eaec;
     temp_v52[0] = 0xe;
     temp_v52[1] = 0xf;
     temp_v52[2] = 0x10;
@@ -498,7 +498,7 @@ LAB_0048ee54:
             else if (*(short *)(pcVar20 + 8) != 0) goto LAB_0048f224;
           }
           else if (*(short *)(pcVar20 + 8) != 1) goto LAB_0048f224;
-          if ((temp_v64 != 0x17) || (DAT_005f15fc != 0x17)) goto LAB_0048eeec;
+          if ((temp_v64 != 0x17) || (g_gameState != 0x17)) goto LAB_0048eeec;
           if ((((DAT_005f1600 != 1) && (DAT_005f1600 != 2)) ||
               ((temp_v1 = pcVar20[1], temp_v1 != '}' && temp_v1 != '~' &&
                ((temp_v1 != '\x7f' && temp_v1 != -0x80) && temp_v1 != -0x50)))) &&

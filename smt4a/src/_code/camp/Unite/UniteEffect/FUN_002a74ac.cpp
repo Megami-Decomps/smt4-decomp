@@ -8,7 +8,7 @@ int FUN_00100388(...);
 int FUN_0014e188(...);
 int FUN_0014e220(...);
 int FUN_001505ac(...);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_001846d0(...);
 int FUN_00184758(...);
 int FUN_0019e330(...);
@@ -22,7 +22,7 @@ int FUN_0013c174(...);
 int FUN_00178b04(...);
 int FUN_00184310(void);
 int FUN_001fc348(...);
-int FUN_002f1908(void);
+int uniteCameraDestroy(void);
 int FUN_003d2a00(...);
 int FUN_003f9e80(void);
 int FUN_003fb5d4(unsigned int, int, int);
@@ -61,7 +61,7 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_0014e220. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_001846d0. */
@@ -70,9 +70,9 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 /* Supplied declaration required: FUN_001fc348. */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_002f1908. */
+/* Supplied declaration required: uniteCameraDestroy. */
 extern int FUN_003316b4(int);
-extern unsigned int FUN_00340fa0(void);
+extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: FUN_003d2a00. */
@@ -108,7 +108,7 @@ void FUN_002a74ac(void)
   unsigned char temp_v12 [76];
   
   temp_v0 = DAT_0057f2c4;
-  FUN_002f1908();
+  uniteCameraDestroy();
   temp_v3 = 0;
   if (*(short *)(temp_v0 + 0x1e) != 0) {
     do {
@@ -121,7 +121,7 @@ void FUN_002a74ac(void)
     } while (temp_v3 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x1e));
   }
   *(unsigned int *)(temp_v0 + 0x3c) = *(unsigned int *)(temp_v0 + 0x28);
-  temp_v1 = FUN_00340fa0();
+  temp_v1 = asdVramBGetFreeBytes();
   temp_v5 = 0x100;
   if (temp_v1 < 0x20000) {
     FUN_0040bd04(temp_v0 + 0x38,0x20000,0x20000,0x100);
@@ -271,7 +271,7 @@ void FUN_002a74ac(void)
   temp_v5 = 1;
   FUN_0014e188(temp_v0 + 0x964,0x1a,0,temp_v0 + 0x340);
   FUN_001846d0(temp_v0 + 0x964,2);
-  FUN_001681cc(99);
+  sysPlaySe(99);
   temp_v0 = DAT_0057f2c4;
   *(unsigned int *)(DAT_0057f2c4 + 4) = 1;
   *(unsigned int *)(temp_v0 + 8) = 0;

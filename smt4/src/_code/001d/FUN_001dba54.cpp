@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c4938(...);
+int memClear(...);
 
 typedef struct fn_001dba54_arg0 fn_001dba54_arg0;
 struct fn_001dba54_arg0 {
@@ -17,14 +17,14 @@ struct fn_001dba54_arg0 {
     undefined4 field_0x40; /* +0x40 */
 };
 
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_001dba54(fn_001dba54_arg0 *param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002c4938(param_1,0x48);
+  memClear(param_1,0x48);
   param_1->field_0x3c = 0;
   param_1->field_0x38 = 2;
   param_1->field_0x8 = 0x10000;

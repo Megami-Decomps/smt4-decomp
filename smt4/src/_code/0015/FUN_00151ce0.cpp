@@ -7,8 +7,8 @@ extern "C" {
 int FUN_002a43bc(int, unsigned int, int);
 int FUN_002a6e00(int);
 int FUN_002a6e2c(int, int);
-int FUN_002bd75c(void);
-int FUN_002c415c(int);
+int asdTextureCreate(void);
+int asdMemFree(int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,9 +20,9 @@ extern unsigned char LAB_00151e54; /* 0x151e54 */
 /* Supplied declaration required: FUN_002a43bc. */
 /* Supplied declaration required: FUN_002a6e00. */
 /* Supplied declaration required: FUN_002a6e2c. */
-/* Supplied declaration required: FUN_002bd75c. */
-extern int FUN_002c1870(int, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdTextureCreate. */
+extern int rt_memcmp(int, unsigned char *, unsigned int);
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00151ce0(int param_1,int param_2,int param_3)
@@ -40,14 +40,14 @@ void FUN_00151ce0(int param_1,int param_2,int param_3)
     }
     FUN_002a43bc(param_1,temp_v2,0x80);
   }
-  temp_v0 = FUN_002c1870(param_1,&LAB_00151e54,4);
+  temp_v0 = rt_memcmp(param_1,&LAB_00151e54,4);
   if (temp_v0 == 0) {
     if (*(int *)(param_1 + 0x24) != 0) {
       *(unsigned int *)(param_2 + 8) = 0;
     }
     else {
       temp_v1 = (unsigned int)((*(unsigned int *)(param_2 + 0x10) & 0x10000) != 0);
-      FUN_002bd75c();
+      asdTextureCreate();
       *(unsigned int *)(param_2 + 8) = temp_v1;
       *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(param_1 + 8);
       *(unsigned int *)(*(int *)(param_2 + 8) + 0x14) = *(unsigned int *)(param_1 + 0xc);
@@ -76,7 +76,7 @@ void FUN_00151ce0(int param_1,int param_2,int param_3)
     FUN_002a6e00(param_2);
     return;
   }
-  FUN_002c415c(param_1);
+  asdMemFree(param_1);
   return;
 }
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003283ac(int);
+int scrSetResult(int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -14,8 +14,8 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0018719c(unsigned int);
-extern int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_003283ac. */
+extern int scrGetArg(unsigned int);
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_00330dc8(unsigned int *param_1)
@@ -36,7 +36,7 @@ unsigned int FUN_00330dc8(unsigned int *param_1)
   temp_v4[4] = param_1[4];
   temp_v4[5] = param_1[5];
   temp_v4[6] = param_1[6];
-  temp_v0 = FUN_00236038(0);
+  temp_v0 = scrGetArg(0);
   temp_v2 = 0;
   do {
     if (temp_v0 != temp_v2) {
@@ -52,7 +52,7 @@ unsigned int FUN_00330dc8(unsigned int *param_1)
     }
     temp_v2 = temp_v2 + 1;
     if (temp_v2 >= 7) {
-      FUN_003283ac(temp_v3);
+      scrSetResult(temp_v3);
       return 1;
     }
   } while( 1 );

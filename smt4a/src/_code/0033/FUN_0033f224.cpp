@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_00162e8c(void);
@@ -36,57 +36,57 @@ void FUN_0033f224(unsigned char param_1)
   unsigned int temp_v4;
   
   temp_v0 = FUN_00162e8c();
-  temp_v1 = DAT_00581288;
+  temp_v1 = g_lmapScene;
   if (*(int *)(temp_v0 + 0x109c) == 0) {
     return;
   }
   temp_v2 = *(float *)(temp_v0 + 0x1528);
   temp_v4 = 0;
-  *(unsigned int *)(DAT_00581288 + 0x1d4) = 0;
+  *(unsigned int *)(g_lmapScene + 0x1d4) = 0;
   temp_v3 = VectorSignedToFloat((int)(temp_v2 / *(float *)(temp_v1 + 0x1e4)),(unsigned char)(in_fpscr >> 0x16) & 3)
   ;
   *(unsigned int *)(temp_v1 + 0x1ec) = temp_v3;
   *(unsigned char *)(temp_v1 + 0x224) = 1;
   temp_v0 = FUN_00325340();
-  temp_v1 = DAT_00581288;
+  temp_v1 = g_lmapScene;
   if (temp_v0 != 0) {
-    *(unsigned int *)(DAT_00581288 + 0x1d0) = 10;
+    *(unsigned int *)(g_lmapScene + 0x1d0) = 10;
     *(unsigned char *)(temp_v1 + 0x214) = param_1;
     temp_v1 = FUN_0018719c(0x4c9);
     if ((temp_v1 == 0) || (temp_v1 = FUN_002e5db4(), temp_v1 != 0)) {
-      temp_v1 = DAT_00581288;
-      *(unsigned int *)(DAT_00581288 + 0x228) = 4;
+      temp_v1 = g_lmapScene;
+      *(unsigned int *)(g_lmapScene + 0x228) = 4;
       *(unsigned int *)(temp_v1 + 0x238) = 4;
     }
-    *(unsigned int *)(DAT_00581288 + 0x240) = 0x40000000;
+    *(unsigned int *)(g_lmapScene + 0x240) = 0x40000000;
     temp_v1 = FUN_0018719c(0x4c9);
     if ((temp_v1 != 0) && (temp_v1 = FUN_002e5db4(), temp_v1 == 0)) {
-      temp_v3 = *(unsigned int *)(*(int *)(DAT_00581288 + 0x18c) + 4);
+      temp_v3 = *(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4);
       FUN_003fd7c0(temp_v3,4,2);
-      *(unsigned int *)(DAT_00581288 + 0x238) = 0xd;
+      *(unsigned int *)(g_lmapScene + 0x238) = 0xd;
       FUN_003fd924(temp_v3,0xd,2);
       return;
     }
   }
   else {
-    *(unsigned int *)(DAT_00581288 + 0x1d0) = 2;
+    *(unsigned int *)(g_lmapScene + 0x1d0) = 2;
     *(unsigned char *)(temp_v1 + 0x214) = param_1;
     temp_v1 = FUN_0018719c(0x4c9);
     if ((temp_v1 == 0) || (temp_v1 = FUN_002e5db4(), temp_v1 != 0)) {
-      temp_v1 = DAT_00581288;
-      *(unsigned int *)(DAT_00581288 + 0x228) = 10;
+      temp_v1 = g_lmapScene;
+      *(unsigned int *)(g_lmapScene + 0x228) = 10;
       *(unsigned int *)(temp_v1 + 0x238) = 10;
     }
-    *(unsigned int *)(DAT_00581288 + 0x240) = temp_v4;
+    *(unsigned int *)(g_lmapScene + 0x240) = temp_v4;
     temp_v1 = FUN_0018719c(0x4c9);
     if ((temp_v1 != 0) && (temp_v1 = FUN_002e5db4(), temp_v1 == 0)) {
-      temp_v1 = *(int *)(*(int *)(DAT_00581288 + 0x18c) + 4);
+      temp_v1 = *(int *)(*(int *)(g_lmapScene + 0x18c) + 4);
       *(unsigned int *)(temp_v1 + 0x1fc) = 0x3f800000;
       FUN_003fd7c0(temp_v1,5,2);
       return;
     }
   }
-  FUN_003fd7c0(*(unsigned int *)(*(int *)(DAT_00581288 + 0x18c) + 4),0,2);
+  FUN_003fd7c0(*(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4),0,2);
   return;
 }
 

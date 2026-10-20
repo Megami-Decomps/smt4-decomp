@@ -24,11 +24,11 @@ typedef struct {
     unsigned int sp150; /* 0x150: local_150 */
 } param_1_stack;
 
-extern signed char DAT_00465040; /* 0x465040 */
+extern signed char g_asdLoadFileUseRawPaths; /* 0x465040 */
 
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
-extern int FUN_002b0404(unsigned int);
-extern int FUN_002b045c(unsigned int);
+extern int asdLoadFileIsPatched(unsigned int);
+extern int asdLoadFileHasDevice(unsigned int);
 extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002b90e6. */
 /* Supplied declaration required: FUN_002bb5a4. */
@@ -57,11 +57,11 @@ unsigned int FUN_002cb8d8(unsigned int param_1)
   
   puVar4 = temp_v1;
   FUN_002c3940(temp_v4,0x100);
-  if ((DAT_00465040 != '\0') || (temp_v0 = FUN_002b045c(param_1), temp_v0 != 0)) {
+  if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v0 = asdLoadFileHasDevice(param_1), temp_v0 != 0)) {
     FUN_002be624(temp_v4,param_1);
   }
   else {
-    temp_v0 = FUN_002b0404(param_1);
+    temp_v0 = asdLoadFileIsPatched(param_1);
     if (temp_v0 != 0) {
       FUN_002be624(temp_v4,"patch:/%s",param_1);
     }

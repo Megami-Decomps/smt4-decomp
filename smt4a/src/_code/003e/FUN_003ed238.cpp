@@ -25,8 +25,8 @@ extern float DAT_00573974; /* 0x573974 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 extern unsigned int FUN_001a6f60(int, unsigned int);
 /* Supplied declaration required: FUN_003e7b5c. */
 /* Supplied declaration required: FUN_003e7cc8. */
@@ -98,8 +98,8 @@ void FUN_003ed238(int param_1,unsigned int param_2)
             psVar5 = (short *)0x0;
             if (*(int *)(param_1 + 0x2294) != 0) {
               temp_v2 = FUN_001a6f60(*(int *)(param_1 + 0x2294),0);
-              temp_v9 = FUN_00192798();
-              temp_v3 = FUN_00192748(temp_v2);
+              temp_v9 = dataTableGetEntries();
+              temp_v3 = dataTableGetCount(temp_v2);
               temp_v5 = 0;
               if (temp_v5 < temp_v3) {
                 do {

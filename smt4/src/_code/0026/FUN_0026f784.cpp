@@ -8,7 +8,7 @@ int FUN_00293db0(unsigned int, unsigned int *);
 int FUN_00293e08(unsigned int);
 int FUN_00293e78(unsigned int, int *);
 int FUN_00297684(void);
-int FUN_0029b97c(int);
+int lmapSceneSetUnk134(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00293e78. */
 extern int FUN_00293edc(unsigned int);
 /* Supplied declaration required: FUN_00297684. */
-/* Supplied declaration required: FUN_0029b97c. */
+/* Supplied declaration required: lmapSceneSetUnk134. */
 
 
 unsigned int FUN_0026f784(unsigned int *param_1)
@@ -44,7 +44,7 @@ unsigned int FUN_0026f784(unsigned int *param_1)
       FUN_00293e78(param_1[7],&temp_v2);
       FUN_00293e08(param_1[7]);
       FUN_00293db0(param_1[7],param_1 + 3);
-      FUN_0029b97c(0);
+      lmapSceneSetUnk134(0);
       temp_v1 = 1;
     }
   }

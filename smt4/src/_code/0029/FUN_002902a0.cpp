@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001eea34(void);
+int uiFadeRequestClear(void);
 int FUN_0029eb5c(int, int);
 int FUN_002b8838(int);
-int FUN_002bd8e8(int, int);
+int timerStart(int, int);
 int FUN_002bf810(int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -17,12 +17,12 @@ typedef struct {
 
 extern int DAT_0043dd50; /* 0x43dd50 */
 
-/* Supplied declaration required: FUN_001eea34. */
+/* Supplied declaration required: uiFadeRequestClear. */
 extern unsigned char FUN_00298f88(unsigned int);
 /* Supplied declaration required: FUN_0029eb5c. */
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bf810. */
 
 
@@ -43,7 +43,7 @@ void FUN_002902a0(unsigned int param_1,int param_2)
   temp_v1 = FUN_00298f88(param_1);
   *(unsigned char *)(temp_v0 + 0x5c4) = temp_v1;
   *(unsigned int *)(temp_v0 + 0x5ec) = 0x3e55cfab;
-  FUN_002bd8e8(temp_v0 + 0x408,0);
+  timerStart(temp_v0 + 0x408,0);
   if (param_2 == 0) {
     *(unsigned char *)(temp_v0 + 0x5f0) = 0;
   }
@@ -69,9 +69,9 @@ void FUN_002902a0(unsigned int param_1,int param_2)
         temp_v2 = FUN_0029ee54(temp_v6);
       } while (temp_v4 < temp_v2);
     }
-    FUN_002bd8e8(temp_v0 + 0x34,0);
+    timerStart(temp_v0 + 0x34,0);
   }
-  FUN_001eea34();
+  uiFadeRequestClear();
   temp_v0 = DAT_0043dd50;
   temp_v3 = *(unsigned int *)(DAT_0043dd50 + 4);
   *(unsigned int *)(DAT_0043dd50 + 4) = 0x14;

@@ -6,7 +6,7 @@ int FUN_002e3328(void);
 
 extern unsigned int *DAT_0057f678; /* 0x57f678 */
 
-extern int FUN_00163e40(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002e3328. */
 
 
@@ -17,7 +17,7 @@ unsigned int FUN_00239194(void)
   int temp_v0;
   
   if (DAT_0057f678 != (unsigned int *)0x0) {
-    temp_v0 = FUN_00163e40(*DAT_0057f678);
+    temp_v0 = jobIsValid(*DAT_0057f678);
     if (temp_v0 != 0) {
       return 0;
     }

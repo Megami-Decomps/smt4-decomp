@@ -9,7 +9,7 @@ int FUN_003fd76c(int, int *);
 int FUN_003fd784(int);
 int FUN_003fdb18(int);
 int FUN_003fe86c(int, int, int);
-int FUN_0040aa90(void);
+int moriModelContentCopyBody(void);
 int FUN_0040ace8(unsigned int, int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -27,7 +27,7 @@ extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 /* Supplied declaration required: FUN_003fd784. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_0040aa90. */
+/* Supplied declaration required: moriModelContentCopyBody. */
 extern unsigned int FUN_0040ac08(void);
 /* Supplied declaration required: FUN_0040ace8. */
 
@@ -49,7 +49,7 @@ void FUN_004824fc(int param_1)
     temp_v1 = FUN_0040ac08();
   }
   *(unsigned int *)(param_1 + 0x78) = temp_v1;
-  FUN_0040aa90();
+  moriModelContentCopyBody();
   temp_v0 = *(int *)(*(int *)(param_1 + 0x78) + 4);
   FUN_0040ace8(DAT_0056fcc0,temp_v0);
   *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;

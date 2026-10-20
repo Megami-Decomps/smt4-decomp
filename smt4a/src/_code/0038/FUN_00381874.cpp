@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_001642e4(unsigned char *, int, int, int);
-int FUN_00167ab4(...);
+int memAlloc(...);
 int FUN_001800b8(void);
-int FUN_0019a5a0(unsigned char *);
+int asdMemFree(unsigned char *);
 int FUN_00221f20(void);
 int FUN_00222104(void);
 int FUN_002b3fd8(...);
@@ -33,9 +33,9 @@ extern unsigned int *DAT_006471b4; /* 0x6471b4 */
 /* Supplied declaration required: FUN_001642e4. */
 extern int FUN_00164af0(unsigned int);
 extern int FUN_001656a0(unsigned int);
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_001800b8. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_00221f20. */
 /* Supplied declaration required: FUN_00222104. */
 /* Supplied declaration required: FUN_002b3fd8. */
@@ -207,7 +207,7 @@ unsigned long long FUN_00381874(unsigned int *param_1)
                           puVar5 = puVar4;
                           FUN_00221f20();
                           param_1[0x10] = (unsigned int)puVar5;
-                          FUN_0019a5a0(puVar4);
+                          asdMemFree(puVar4);
                         }
                         *(unsigned short *)(param_1 + 0x11) = 2;
                         param_1[7] = 1;
@@ -244,7 +244,7 @@ unsigned long long FUN_00381874(unsigned int *param_1)
                         }
                         temp_v0 = FUN_0037a7f4(puVar4);
                         param_1[0xe] = temp_v0;
-                        FUN_0019a5a0(puVar4);
+                        asdMemFree(puVar4);
                       }
                       *(unsigned short *)(param_1 + 0x11) = 1;
                       param_1[7] = 1;
@@ -253,7 +253,7 @@ unsigned long long FUN_00381874(unsigned int *param_1)
                   }
                   if (param_1[7] != 0) {
                     puVar3 = (unsigned int *)0x10000;
-                    FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+                    memAlloc(0x10000,0x100,0,0x68,0x10,1);
                     puVar3[1] = 0xb;
                     puVar3[2] = (unsigned int)param_1;
                     puVar1 = puVar3;

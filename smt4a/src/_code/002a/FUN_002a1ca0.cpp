@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_001800b8(void);
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 
 /* Supplied declaration required: FUN_001800b8. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_002a1ca0(int param_1)
@@ -19,7 +19,7 @@ void FUN_002a1ca0(int param_1)
     return;
   }
   if (*(int *)(param_1 + 0xc) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0xc) = 0;
   }
   if (*(int *)(param_1 + 8) != 0) {

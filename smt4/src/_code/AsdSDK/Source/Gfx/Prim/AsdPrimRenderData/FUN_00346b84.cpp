@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0023b9d0(int, unsigned char *, unsigned int, int);
-int FUN_002bf5c0(...);
-int FUN_002c32a0(int, int, int, unsigned int, int, int);
+int asdMemoryAllocAligned(...);
+int memAlloc(int, int, int, unsigned int, int, int);
 
 /* stack frame of param_1: 17 slot(s), 32 byte(s) */
 typedef struct {
@@ -31,8 +31,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0023b9d0. */
 extern unsigned int FUN_002bc11c(unsigned int);
-/* Supplied declaration required: FUN_002bf5c0. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
+/* Supplied declaration required: memAlloc. */
 extern unsigned int FUN_0034711c(int, unsigned int);
 
 
@@ -83,13 +83,13 @@ void FUN_00346b84(int param_1)
   if ((*(unsigned int *)(param_1 + 4) & 0x100) != 0) {
     temp_v0 = FUN_0034711c(param_1,0x13a);
     temp_v1 = 0x10000;
-    FUN_002c32a0(0x10000,0x100,0,temp_v0,0x10,1);
+    memAlloc(0x10000,0x100,0,temp_v0,0x10,1);
     *(unsigned int *)(param_1 + 0x2c) = temp_v1;
   }
   else {
     temp_v0 = FUN_0034711c(param_1,0x137);
     temp_v1 = 0x100;
-    FUN_002c32a0(0x100,0x100,0,temp_v0,0x10,1);
+    memAlloc(0x100,0x100,0,temp_v0,0x10,1);
     *(unsigned int *)(param_1 + 0x2c) = temp_v1;
   }
   temp_v6 = 0;
@@ -160,19 +160,19 @@ void FUN_00346b84(int param_1)
       goto LAB_00346e10;
     }
     temp_v0 = 0x100;
-    FUN_002bf5c0(0x100,0x100,0,*(int *)(param_1 + 0x18) << 1,0x10,1);
+    asdMemoryAllocAligned(0x100,0x100,0,*(int *)(param_1 + 0x18) << 1,0x10,1);
     *(unsigned int *)(param_1 + 0x48) = temp_v0;
   }
   else {
 LAB_00346e10:
     if ((*(unsigned int *)(param_1 + 4) & 0x100) != 0) {
       temp_v0 = 0x10000;
-      FUN_002bf5c0(0x10000,0x100,0,*(int *)(param_1 + 0x18) << 1,0x10,1);
+      asdMemoryAllocAligned(0x10000,0x100,0,*(int *)(param_1 + 0x18) << 1,0x10,1);
       *(unsigned int *)(param_1 + 0x48) = temp_v0;
     }
     else {
       temp_v0 = 0x100;
-      FUN_002bf5c0(0x100,0x100,0,*(int *)(param_1 + 0x18) << 1,0x10,1);
+      asdMemoryAllocAligned(0x100,0x100,0,*(int *)(param_1 + 0x18) << 1,0x10,1);
       *(unsigned int *)(param_1 + 0x48) = temp_v0;
     }
   }

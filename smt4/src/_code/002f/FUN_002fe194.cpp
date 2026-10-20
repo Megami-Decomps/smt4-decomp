@@ -1,33 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fe194` (_code @ 0x2fe194, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Runs the fallback handlers when their checks fail; returns whether FUN_00246708 reported success. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0024679c(void);
-int FUN_002ee56c(int);
+extern s32 FUN_00246708(void);
+extern s32 FUN_002893d8(void);
+extern void FUN_0024679c(void);
+extern void FUN_002ee56c(s32 arg);
 
-extern int FUN_00246708(void);
-/* Supplied declaration required: FUN_0024679c. */
-extern int FUN_002893d8(void);
-/* Supplied declaration required: FUN_002ee56c. */
-
-
-unsigned char FUN_002fe194(void)
-
+u8 FUN_002fe194(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002893d8();
-  if (temp_v0 == 0) {
-    FUN_0024679c();
-  }
-  temp_v0 = FUN_00246708();
-  if (temp_v0 == 0) {
-    FUN_002ee56c(0);
-  }
-  return temp_v0 != 0;
+    s32 ok;
+
+    if (FUN_002893d8() == 0) {
+        FUN_0024679c();
+    }
+    ok = FUN_00246708();
+    if (ok == 0) {
+        FUN_002ee56c(ok);
+    }
+    return ok != 0;
 }
 
-} /* extern "C" */
+}

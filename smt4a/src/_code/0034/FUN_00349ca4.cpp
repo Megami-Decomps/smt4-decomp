@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00280bd0(unsigned char [132], int, int, int, unsigned int, int, int);
 int FUN_002c7388(...);
-int FUN_002e0fe4(int, unsigned char [128], unsigned char [132], unsigned int, unsigned int);
+int asdSaveWriteBlock(int, unsigned char [128], unsigned char [132], unsigned int, unsigned int);
 int FUN_002e342c(unsigned char [128], unsigned char *);
 int FUN_002e6dd0(unsigned char *, int);
 int FUN_0032c8dc(...);
@@ -28,7 +28,7 @@ extern unsigned char DAT_005e2114; /* 0x5e2114 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00280bd0. */
 /* Supplied declaration required: FUN_002c7388. */
-/* Supplied declaration required: FUN_002e0fe4. */
+/* Supplied declaration required: asdSaveWriteBlock. */
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: FUN_002e6dd0. */
 extern int FUN_002ef7f0(unsigned int, unsigned char *);
@@ -69,7 +69,7 @@ void FUN_00349ca4(unsigned int param_1)
   FUN_002e342c(temp_v4,&DAT_005e2114);
   FUN_00280bd0(temp_v5,0x34534444,0x454d4147,0,*(unsigned int *)(DAT_0057f6d0 + 0x18),0,0);
   temp_v2 = temp_v1;
-  FUN_002e0fe4(temp_v1,temp_v4,temp_v5,*(unsigned int *)(DAT_0057f6d0 + 0x14),
+  asdSaveWriteBlock(temp_v1,temp_v4,temp_v5,*(unsigned int *)(DAT_0057f6d0 + 0x14),
                *(unsigned int *)(DAT_0057f6d0 + 0x18));
   if (temp_v2 == 0) {
     temp_v2 = 5;

@@ -1,25 +1,19 @@
-#include "romwright_types.h"
+#include "battle/btlUI.h"
 
 extern "C" {
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+s32 FUN_002062e8(BtlUiObjC *obj);
 
-extern int FUN_002062e8(int);
+extern BtlUiGlobals DAT_00439c88;
 
-
-void FUN_003ae2ec(unsigned int param_1,unsigned short *param_2,unsigned short *param_3)
-
+void FUN_003ae2ec(u32 unused, u16 *outA, u16 *outB)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20));
-  temp_v1 = FUN_002062e8((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0x2460);
-  if (temp_v1 != 0) {
-    *param_2 = *(unsigned short *)(temp_v0 + 0x7e4e);
-    *param_3 = *(unsigned short *)(temp_v0 + 0x7e50);
-  }
-  return;
+    BtlUi *ui = DAT_00439c88.ui;
+
+    if (FUN_002062e8(&ui->objC) != 0) {
+        *outA = ui->unk7E4E;
+        *outB = ui->unk7E50;
+    }
 }
 
 } /* extern "C" */

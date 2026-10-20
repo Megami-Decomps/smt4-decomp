@@ -6,16 +6,16 @@ extern "C" {
 
 int FUN_001006ec(int, int, int);
 int FUN_00157110(void);
-int FUN_001884b0(unsigned int);
+int vcallSlot12IfValid(unsigned int);
 int FUN_00195fc8(void);
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_001006ec. */
 /* Supplied declaration required: FUN_00157110. */
-/* Supplied declaration required: FUN_001884b0. */
+/* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: FUN_00195fc8. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 
 
 int * FUN_00157194(int *param_1)
@@ -27,7 +27,7 @@ int * FUN_00157194(int *param_1)
   
   FUN_00157110();
   if (*param_1 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *param_1 = 0;
     param_1[1] = 0;
     param_1[2] = 0;
@@ -39,7 +39,7 @@ int * FUN_00157194(int *param_1)
       if ((*(unsigned int *)(temp_v1 + 4) & 1) != 0) {
         FUN_00195fc8();
       }
-      FUN_001884b0(*(unsigned int *)(temp_v1 + 4) & 0xfffffffe);
+      vcallSlot12IfValid(*(unsigned int *)(temp_v1 + 4) & 0xfffffffe);
       *(unsigned int *)(temp_v1 + 4) = 0;
       if (param_1[4] != 0) {
         (**(romwright_code **)(*(int *)param_1[4] + 4))();

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -12,9 +12,9 @@ typedef struct {
 } void_stack;
 
 extern int DAT_0057f28c; /* 0x57f28c */
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 
 
 void FUN_00320834(void)
@@ -27,23 +27,23 @@ void FUN_00320834(void)
   temp_v0 = DAT_0057f28c;
   temp_v1 = *(int *)(DAT_0057f28c + 0x918);
   if (*(char *)(DAT_0057f28c + 0x90c) != '\0') {
-    if ((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x460)) != '\0') {
+    if ((*(signed char *)((unsigned char *)&g_gameState + 0x460)) != '\0') {
       if (temp_v1 == 2) {
         if (*(int *)(DAT_0057f28c + 0x910) == 0) {
-          FUN_001681cc(0x10f);
+          sysPlaySe(0x10f);
         }
         if (*(int *)(temp_v0 + 0x910) == 1) {
-          FUN_001681cc(0x110);
+          sysPlaySe(0x110);
           return;
         }
       }
     }
     else if (temp_v1 == 2) {
       if (*(int *)(DAT_0057f28c + 0x910) == 0) {
-        FUN_001681cc(0xd7);
+        sysPlaySe(0xd7);
       }
       if (*(int *)(temp_v0 + 0x910) == 1) {
-        FUN_001681cc(0xd6);
+        sysPlaySe(0xd6);
         return;
       }
     }
@@ -51,21 +51,21 @@ void FUN_00320834(void)
   else {
     if (temp_v1 == 2) {
       if (*(int *)(DAT_0057f28c + 0x910) == 0) {
-        FUN_001681cc(0xd7);
+        sysPlaySe(0xd7);
       }
       if (*(int *)(temp_v0 + 0x910) == 1) {
-        FUN_001681cc(0xd6);
+        sysPlaySe(0xd6);
       }
     }
     if (*(int *)(temp_v0 + 0x918) == 3) {
       if (*(int *)(temp_v0 + 0x910) == 0) {
-        FUN_001681cc(0xd8);
+        sysPlaySe(0xd8);
       }
       if (*(int *)(temp_v0 + 0x910) == 1) {
-        FUN_001681cc(0xd9);
+        sysPlaySe(0xd9);
       }
       if (*(int *)(temp_v0 + 0x910) == 2) {
-        FUN_001681cc(0xda);
+        sysPlaySe(0xda);
         return;
       }
     }

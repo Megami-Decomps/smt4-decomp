@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_003f3e64(int *, int *, int [2]);
-int aeabi_idivmod(int, int);
+int __aeabi_idivmod(int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -15,9 +15,9 @@ typedef struct {
 
 extern int FUN_001801a4(void);
 extern int FUN_001ab854(void);
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 /* Supplied declaration required: FUN_003f3e64. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_003f4b44(int *param_1)
@@ -67,7 +67,7 @@ void FUN_003f4b44(int *param_1)
       }
     }
     else {
-      temp_v1 = FUN_002919a4();
+      temp_v1 = btlMainGetUnk14();
       if (temp_v1 != 0) {
         temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x60);
       }
@@ -88,7 +88,7 @@ void FUN_003f4b44(int *param_1)
       temp_v0 = temp_v0 + 1;
       if (temp_v1 == 0) {
         if ((temp_v3 >= 2) && (temp_v1 = param_1[6], param_1[6] = temp_v1 + 1, temp_v1 + 1 >= 0x18)) {
-          aeabi_idivmod(param_1[7] + 1,temp_v3);
+          __aeabi_idivmod(param_1[7] + 1,temp_v3);
           param_1[7] = temp_v2;
           param_1[6] = 0;
         }

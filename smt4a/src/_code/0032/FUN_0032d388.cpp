@@ -2,16 +2,16 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
-int FUN_0019a5a0(...);
+int jobStop(unsigned int, int);
+int asdMemFree(...);
 int FUN_0019a7f4(int, int);
-int FUN_0019c364(void);
+int scrScriptProcessDestroy(void);
 int FUN_0019ea64(int);
 int FUN_001add24(int);
 int FUN_0021c354(int);
 int FUN_00237680(void);
 int FUN_002c0b5c(unsigned int *);
-int FUN_002e132c(int);
+int asdTMTexTableFreeEntry(int);
 int FUN_002e6dd0(unsigned int *, int);
 int FUN_003192f4(unsigned int *);
 int FUN_00319e58(void);
@@ -27,17 +27,17 @@ typedef struct {
 
 extern unsigned char DAT_0057f110; /* 0x57f110 */
 
-/* Supplied declaration required: FUN_001631d0. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: jobStop. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019a7f4. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019ea64. */
 /* Supplied declaration required: FUN_001add24. */
 /* Supplied declaration required: FUN_0021c354. */
 /* Supplied declaration required: FUN_00237680. */
 extern int FUN_002a469c(void);
 /* Supplied declaration required: FUN_002c0b5c. */
-/* Supplied declaration required: FUN_002e132c. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002e6dd0. */
 /* Supplied declaration required: FUN_003192f4. */
 /* Supplied declaration required: FUN_00319e58. */
@@ -61,16 +61,16 @@ void FUN_0032d388(int param_1)
   FUN_0019ea64(1);
   if (puVar1[0x5a] != 0) {
     if (puVar1[0x39] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     if (puVar1[0x3a] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     if (puVar1[0x3d] != 0) {
-      FUN_0019c364();
+      scrScriptProcessDestroy();
     }
-    FUN_001631d0(*puVar1,0);
-    FUN_0019a5a0(puVar1);
+    jobStop(*puVar1,0);
+    asdMemFree(puVar1);
     (*(unsigned int * *)((unsigned char *)&DAT_0057f110 + 0x4)) = (unsigned int *)0x0;
   }
   else {
@@ -98,21 +98,21 @@ void FUN_0032d388(int param_1)
     FUN_001add24(0x25);
     FUN_00321744();
     if (puVar1[0x39] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     if (puVar1[0x3a] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     FUN_001add24(0x4a);
     if (puVar1[0x3d] != 0) {
-      FUN_0019c364();
+      scrScriptProcessDestroy();
     }
     FUN_0019a7f4(0x2e,0);
-    FUN_002e132c(0x2e);
+    asdTMTexTableFreeEntry(0x2e);
     FUN_003192f4((*(unsigned int * *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0x2c);
     FUN_0039a17c(puVar1[0x5d]);
-    FUN_001631d0(*puVar1,0);
-    FUN_0019a5a0(puVar1);
+    jobStop(*puVar1,0);
+    asdMemFree(puVar1);
     (*(unsigned int * *)((unsigned char *)&DAT_0057f110 + 0x4)) = (unsigned int *)0x0;
     if (param_1 == 0) {
       FUN_003d2d6c(0xf);

@@ -1,22 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a0050` (_code @ 0x1a0050, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Passes the item to the handler's virtual method at slot 3; returns 0xE0E046BC if either pointer is NULL. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+struct Handler;
 
-void FUN_001a0050(int param_1,int *param_2)
+typedef struct HandlerVtbl {
+    /* 0x00 */ void *slots[3];
+    /* 0x0C */ u32 (*method3)(struct Handler *handler, void *item);
+} HandlerVtbl;
 
+typedef struct Handler {
+    /* 0x00 */ HandlerVtbl *vtbl;
+} Handler;
+
+u32 FUN_001a0050(void *item, Handler *handler)
 {
-/* irregular: 2 native warning(s); review required */
-  if (param_1 != 0 && param_2 != (int *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x001a0070. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (**(romwright_code **)(*param_2 + 0xc))(param_2,param_1);
-    return;
-  }
-  return;
+    if (item != NULL && handler != NULL) {
+        return handler->vtbl->method3(handler, item);
+    }
+    return 0xE0E046BC;
 }
 
-} /* extern "C" */
+}

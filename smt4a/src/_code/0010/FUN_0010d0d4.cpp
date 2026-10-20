@@ -1,32 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010d0d4` (_code @ 0x10d0d4, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the copy of `task` used to address the embedded request is made after the first load instead of before it. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0010613a(unsigned int, unsigned int);
+typedef struct Sink Sink;
+typedef struct SinkVtbl {
+    /* 0x00 */ void *unk00[9];
+    /* 0x24 */ void (*submit)(Sink *self, int priority, u32 value);
+} SinkVtbl;
+struct Sink {
+    /* 0x00 */ SinkVtbl *vtbl;
+};
 
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_0010613a. */
-extern unsigned int FUN_002ecf28(void);
+typedef struct Source {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u32 valueA;
+    /* 0x10 */ u32 valueB;
+    /* 0x14 */ u8 unk14[0x10];
+    /* 0x24 */ struct SinkHolder *holder;
+} Source;
 
+typedef struct SinkHolder {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ Sink *sink;
+} SinkHolder;
 
-void FUN_0010d0d4(int param_1)
+typedef struct Target {
+    /* 0x00 */ u8 unk00[0x78];
+    /* 0x78 */ u32 valueA;
+    /* 0x7C */ u32 valueB;
+} Target;
 
+typedef struct Request {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ Target *target;
+    /* 0x08 */ u32 value;
+} Request;
+
+typedef struct Task {
+    /* 0x00 */ u8 unk00[0x78];
+    /* 0x78 */ Source *source;
+    /* 0x7C */ u32 unk7C;
+    /* 0x80 */ Request request;
+} Task;
+
+int FUN_0010613a(u32 arg0, Target *target);
+u32 FUN_002ecf28(void);
+
+/* Copies the source's two values into the target, registers the target, and submits `value` to the source's sink with priority 100. */
+void FUN_0010d0d4(Task *task)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int *piVar2;
-  
-  *(unsigned int *)(*(int *)(param_1 + 0x84) + 0x78) = *(unsigned int *)(*(int *)(param_1 + 0x78) + 0xc)
-  ;
-  *(unsigned int *)(*(int *)(param_1 + 0x84) + 0x7c) =
-       *(unsigned int *)(*(int *)(param_1 + 0x78) + 0x10);
-  temp_v0 = FUN_002ecf28();
-  FUN_0010613a(temp_v0,*(unsigned int *)(param_1 + 0x84));
-  piVar2 = *(int **)(*(int *)(*(int *)(param_1 + 0x78) + 0x24) + 0x14);
-  (**(romwright_code **)(*piVar2 + 0x24))(piVar2,100,*(unsigned int *)(param_1 + 0x88));
-  return;
+    Sink *sink;
+
+    task->request.target->valueA = task->source->valueA;
+    task->request.target->valueB = task->source->valueB;
+    FUN_0010613a(FUN_002ecf28(), task->request.target);
+    sink = task->source->holder->sink;
+    sink->vtbl->submit(sink, 100, task->request.value);
 }
 
 } /* extern "C" */

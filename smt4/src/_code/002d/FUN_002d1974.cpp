@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c4938(int [50], int);
+int memClear(int [50], int);
 
 typedef struct fn_002d1974_arg0 fn_002d1974_arg0;
 struct fn_002d1974_arg0 {
@@ -16,8 +16,8 @@ struct fn_002d1974_arg0 {
     short field_0x62; /* +0x62 */
 };
 
-extern int FUN_002939f4(void);
-/* Supplied declaration required: FUN_002c4938. */
+extern int btlGetMainState(void);
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_002d1974(fn_002d1974_arg0 *param_1,unsigned int param_2)
@@ -36,8 +36,8 @@ unsigned int FUN_002d1974(fn_002d1974_arg0 *param_1,unsigned int param_2)
     return 0;
   }
   if (((unsigned int)param_1->field_0x50 & 0x10) == 0) {
-    temp_v0 = FUN_002939f4();
-    FUN_002c4938(aiStack_e0,200);
+    temp_v0 = btlGetMainState();
+    memClear(aiStack_e0,200);
     temp_v1 = 0;
     temp_v3 = *(int *)(temp_v0 + 0x1e98);
     temp_v0 = 0;

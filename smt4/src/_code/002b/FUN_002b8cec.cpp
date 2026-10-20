@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int aeabi_uidivmod(unsigned int, unsigned int);
+int __aeabi_uidivmod(unsigned int, unsigned int);
 
 extern unsigned int DAT_004650a8; /* 0x4650a8 */
 extern unsigned int DAT_004650ac; /* 0x4650ac */
 extern unsigned int DAT_004650b0; /* 0x4650b0 */
 extern unsigned char DAT_004e3c58; /* 0x4e3c58 */
 
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 unsigned int FUN_002b8cec(unsigned int param_1)
@@ -32,7 +32,7 @@ unsigned int FUN_002b8cec(unsigned int param_1)
       }
     }
     if ((DAT_004650ac < temp_v0) &&
-       (aeabi_uidivmod(temp_v0 - DAT_004650ac,DAT_004650b0), temp_v1 == 0)) {
+       (__aeabi_uidivmod(temp_v0 - DAT_004650ac,DAT_004650b0), temp_v1 == 0)) {
       return 1;
     }
   }

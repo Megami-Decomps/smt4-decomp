@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_00594ad8; /* 0x594ad8 */
+extern unsigned char g_listenerTable; /* 0x594ad8 */
 
 
 unsigned int FUN_001149ac(unsigned int param_1)
@@ -12,16 +12,16 @@ unsigned int FUN_001149ac(unsigned int param_1)
 {
   unsigned int temp_v0;
   
-  if (((*(int * *)((unsigned char *)&DAT_00594ad8 + 0x50)) != (int *)0x0) && (param_1 <= (unsigned int)(*(int * *)((unsigned char *)&DAT_00594ad8 + 0x50))[2])) {
+  if (((*(int * *)((unsigned char *)&g_listenerTable + 0x50)) != (int *)0x0) && (param_1 <= (unsigned int)(*(int * *)((unsigned char *)&g_listenerTable + 0x50))[2])) {
     temp_v0 = 0;
     while( 1 ) {
-      if ((unsigned int)(*(int * *)((unsigned char *)&DAT_00594ad8 + 0x50))[1] <= temp_v0) {
+      if ((unsigned int)(*(int * *)((unsigned char *)&g_listenerTable + 0x50))[1] <= temp_v0) {
         return 0;
       }
-      if (param_1 <= *(unsigned int *)(*(*(int * *)((unsigned char *)&DAT_00594ad8 + 0x50)) + temp_v0 * 0x34 + 8)) break;
+      if (param_1 <= *(unsigned int *)(*(*(int * *)((unsigned char *)&g_listenerTable + 0x50)) + temp_v0 * 0x34 + 8)) break;
       temp_v0 = temp_v0 + 1;
     }
-    return *(unsigned int *)(*(*(int * *)((unsigned char *)&DAT_00594ad8 + 0x50)) + temp_v0 * 0x34 + 8);
+    return *(unsigned int *)(*(*(int * *)((unsigned char *)&g_listenerTable + 0x50)) + temp_v0 * 0x34 + 8);
   }
   return 0;
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003283ac(int);
+int scrSetResult(int);
 
 /* stack frame of void: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -23,12 +23,12 @@ extern unsigned int DAT_005710fc; /* 0x5710fc */
 extern unsigned int DAT_00571108; /* 0x571108 */
 extern unsigned int DAT_0057110c; /* 0x57110c */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern char FUN_0014bef4(unsigned int);
 extern int FUN_001ab854(int);
 extern int FUN_001ab888(void);
-extern unsigned int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_003283ac. */
+extern unsigned int scrGetArg(unsigned int);
+/* Supplied declaration required: scrSetResult. */
 extern int FUN_004bd0d8(int);
 extern int FUN_004bd340(int, unsigned int);
 
@@ -50,7 +50,7 @@ unsigned int FUN_003b1b00(void)
   int temp_v9;
   char temp_v10 [28];
   
-  temp_v2 = FUN_00236038(0);
+  temp_v2 = scrGetArg(0);
   temp_v10[0] = '\0';
   temp_v10[1] = '\0';
   temp_v10[2] = '\0';
@@ -111,7 +111,7 @@ unsigned int FUN_003b1b00(void)
       temp_v0 = '\0';
       temp_v3 = 0;
       do {
-        temp_v6 = FUN_0014aa78();
+        temp_v6 = btlGetMainState();
         puVar7 = (unsigned int *)(*(int *)(temp_v6 + 0x1ffc) + temp_v3 * 0x408);
         temp_v2 = *puVar7;
         temp_v5 = puVar7[1];
@@ -129,7 +129,7 @@ unsigned int FUN_003b1b00(void)
       } while (temp_v3 < 0x6d);
     }
   }
-  FUN_003283ac(temp_v9);
+  scrSetResult(temp_v9);
   return 1;
 }
 

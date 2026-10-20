@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_00292f28(unsigned int);
+extern int padIsButtonDown(unsigned int);
 
 
 int FUN_0029aafc(void)
@@ -12,19 +12,19 @@ int FUN_0029aafc(void)
   int temp_v1;
   
   temp_v1 = 4;
-  temp_v0 = FUN_00292f28(0x77);
+  temp_v0 = padIsButtonDown(0x77);
   if (temp_v0 != 0) {
     temp_v1 = 5;
   }
-  temp_v0 = FUN_00292f28(0x78);
+  temp_v0 = padIsButtonDown(0x78);
   if (temp_v0 != 0) {
     temp_v1 = temp_v1 + 1;
   }
-  temp_v0 = FUN_00292f28(0x79);
+  temp_v0 = padIsButtonDown(0x79);
   if (temp_v0 != 0) {
     temp_v1 = temp_v1 + 1;
   }
-  temp_v0 = FUN_00292f28(0x7a);
+  temp_v0 = padIsButtonDown(0x7a);
   if (temp_v0 != 0) {
     temp_v1 = temp_v1 + 1;
   }

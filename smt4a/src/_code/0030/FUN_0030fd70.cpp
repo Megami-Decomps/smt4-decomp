@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int aeabi_idivmod(int, int);
+int __aeabi_idivmod(int, int);
 
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_0030fd70(int *param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  aeabi_idivmod(param_1[1] - *param_1,0x28);
+  __aeabi_idivmod(param_1[1] - *param_1,0x28);
   return;
 }
 

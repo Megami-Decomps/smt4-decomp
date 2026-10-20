@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
 extern unsigned int DAT_00571170; /* 0x571170 */
@@ -86,7 +86,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
     FUN_004c9160(0xb,param_2[8],0,1);
     FUN_004fd508(temp_v3,param_2,0,param_2[9],1);
     FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
   }
   else if ((temp_v1 & 0x100) != 0) {
     if (((DAT_00571168 | DAT_00571170) & *(unsigned int *)param_2[8]) == 0 &&
@@ -98,7 +98,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
     FUN_004c9160(temp_v4,puVar9,0,1);
     FUN_004fd508(temp_v3,param_2,0,param_2[9],1);
     FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
   }
   else {
     temp_v5 = *(unsigned int *)param_2[8];
@@ -123,7 +123,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
       FUN_004c9160(temp_v4,puVar9,0,1);
       FUN_004fd508(temp_v3,param_2,0,param_2[9],1);
       FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
-      *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
     }
     else if ((temp_v1 & 0x40) != 0) {
       FUN_004e5c10(param_1,param_2);
@@ -140,7 +140,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
       FUN_004c9160(0x26,param_2[8],0,1);
       FUN_004fd508(temp_v3,param_2,0,param_2[9],1);
       FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
-      *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
     }
   }
   if (((DAT_005711a4 | DAT_005711ac) & ((unsigned int *)param_2[8])[1]) != 0 ||

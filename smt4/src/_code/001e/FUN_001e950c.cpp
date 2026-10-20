@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001b433c(void);
+int mapEplUpdateEntriesIfAny(void);
 int FUN_001f9f64(void);
 int MapMain_DrawMinimapIcons(void);
 
 typedef int romwright_code(...);
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_001b433c. */
+/* Supplied declaration required: mapEplUpdateEntriesIfAny. */
 /* Supplied declaration required: FUN_001f9f64. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 /* Supplied declaration required: MapMain_DrawMinimapIcons. */
@@ -27,7 +27,7 @@ unsigned int FUN_001e950c(int *param_1)
   int temp_v3;
   int *piVar5;
   
-  temp_v0 = DAT_0044ea00;
+  temp_v0 = g_titleScene;
   temp_v1 = *(int *)(*param_1 + 0x24);
   if ((((temp_v1 >= 0x15) && (temp_v1 < 0x6e)) && (temp_v1 - 0x54U >= 0xc)) && (temp_v1 != 0x18)) {
     temp_v1 = FUN_002c5d80(5,0);
@@ -42,8 +42,8 @@ unsigned int FUN_001e950c(int *param_1)
     }
     FUN_001f9f64();
     MapMain_DrawMinimapIcons();
-    temp_v0 = DAT_0044ea00;
-    piVar5 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v0 = g_titleScene;
+    piVar5 = (int *)(g_titleScene + 0x124c);
     temp_v1 = *piVar5;
     temp_v2 = piVar5[temp_v1 + 2];
     *piVar5 = temp_v1 - 1;
@@ -51,7 +51,7 @@ unsigned int FUN_001e950c(int *param_1)
       (**(romwright_code **)(temp_v0 + 0x1268))();
       *(unsigned char *)(temp_v0 + 0x1264) = 0;
     }
-    FUN_001b433c();
+    mapEplUpdateEntriesIfAny();
     return 0;
   }
   return 0;

@@ -5,15 +5,15 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_00192748(unsigned int);
+int dataTableGetCount(unsigned int);
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 extern int FUN_0017607c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00184310. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00192748. */
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(void);
 
 
 int FUN_0014bf3c(int param_1,int param_2)
@@ -29,11 +29,11 @@ int FUN_0014bf3c(int param_1,int param_2)
   FUN_00184310();
   if (param_1 != 0) {
     temp_v4 = (unsigned int)*(unsigned char *)(param_1 + 2);
-    temp_v0 = FUN_0017607c(DAT_00570280,temp_v4);
+    temp_v0 = FUN_0017607c(g_aocSystem,temp_v4);
     if (temp_v0 == 0) {
-      temp_v1 = FUN_00187180(1,0);
-      temp_v0 = FUN_00192798();
-      temp_v2 = FUN_00192748(temp_v1);
+      temp_v1 = dataTableGet(1,0);
+      temp_v0 = dataTableGetEntries();
+      temp_v2 = dataTableGetCount(temp_v1);
       if ((temp_v4 < temp_v2) && (temp_v0 = temp_v0 + temp_v4 * 0x30, param_2 != 0)) {
         temp_v0 = temp_v0 + 0x10;
       }
@@ -41,11 +41,11 @@ int FUN_0014bf3c(int param_1,int param_2)
     }
   }
   else {
-    temp_v0 = FUN_0017607c(DAT_00570280,0);
+    temp_v0 = FUN_0017607c(g_aocSystem,0);
     if (temp_v0 == 0) {
-      temp_v1 = FUN_00187180(1,0);
-      temp_v0 = FUN_00192798();
-      temp_v3 = FUN_00192748(temp_v1);
+      temp_v1 = dataTableGet(1,0);
+      temp_v0 = dataTableGetEntries();
+      temp_v3 = dataTableGetCount(temp_v1);
       if ((temp_v3 != 0) && (param_2 != 0)) {
         return temp_v0 + 0x10;
       }

@@ -31,7 +31,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: FUN_001ba1c0. */
 
@@ -48,7 +48,7 @@ void FUN_0047c81c(fn_0047c81c_arg0 *param_1)
   
   if (param_1->field_0x8 != 0) {
     if ((param_1->field_0x8 == 1) &&
-       ((*(unsigned int *)(DAT_00570260 + 0x754) & 4) == 0 && (*(unsigned int *)(DAT_00570260 + 0x754) & 8) == 0)) {
+       ((*(unsigned int *)(g_aocMain + 0x754) & 4) == 0 && (*(unsigned int *)(g_aocMain + 0x754) & 8) == 0)) {
       param_1->field_0x4 = 3;
       param_1->field_0x8 = 0;
       if (param_1->field_0x208 != (int *)0x0) {
@@ -63,7 +63,7 @@ void FUN_0047c81c(fn_0047c81c_arg0 *param_1)
   uStack_18 = *(unsigned int *)&param_1[1].field_0x20;
   uStack_14 = *(unsigned int *)&param_1[1].field_0x24;
   uStack_10 = *(unsigned int *)&param_1[1].field_0x28;
-  FUN_001ba1c0(DAT_00570260,&temp_v0,0x32,0);
+  FUN_001ba1c0(g_aocMain,&temp_v0,0x32,0);
   param_1->field_0x8 = 1;
   return;
 }

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_0020b490(...);
 int FUN_0031a400(...);
 int FUN_004b6390(...);
@@ -26,9 +26,9 @@ extern int FUN_00267bf0(...); /* 0x267bf0 */
 extern unsigned char LAB_00267c70; /* 0x267c70 */
 extern int DAT_00588c44; /* 0x588c44 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 extern unsigned short FUN_00167f08(void);
 /* Supplied declaration required: FUN_0020b490. */
 /* Supplied declaration required: FUN_0031a400. */
@@ -47,16 +47,16 @@ void FUN_002c52e0(int param_1)
   if (DAT_00588c44 == 0) {
     FUN_0031a400();
     temp_v1 = 0x100;
-    FUN_00163060(0x100,0x100,0,0x7f58,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0x7f58,1);
     pcVar3 = "Result CALC";
     DAT_00588c44 = temp_v1;
-    FUN_0014e38c("Result CALC",4,0,0,FUN_00204098,FUN_00267bf0,0);
+    asdProcessCreateSimple("Result CALC",4,0,0,FUN_00204098,FUN_00267bf0,0);
     puVar4 = (unsigned int *)(temp_v1 + 0x7f30);
     *puVar4 = (unsigned int)pcVar3;
-    FUN_0015155c("Result DrawUpLeft",0x85,0,0,&LAB_00229324,0,0,pcVar3);
-    FUN_0015155c("Result DrawUpRight",0xe1,0,0,&LAB_00229324,0,0,*puVar4);
+    taskCreateDraw("Result DrawUpLeft",0x85,0,0,&LAB_00229324,0,0,pcVar3);
+    taskCreateDraw("Result DrawUpRight",0xe1,0,0,&LAB_00229324,0,0,*puVar4);
     pcVar3 = "Result DDRAW";
-    FUN_0015155c("Result DDRAW",0xea,0,0,&LAB_00267c70,0,0,*puVar4);
+    taskCreateDraw("Result DDRAW",0xea,0,0,&LAB_00267c70,0,0,*puVar4);
     *(char **)(temp_v1 + 0x7f38) = pcVar3;
     FUN_004b6390(temp_v1);
     *(char *)(temp_v1 + 0x4398) = (char)param_1;

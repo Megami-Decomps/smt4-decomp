@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00164b5c(int, int, int, int, int, int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(...);
 int FUN_001f3eec(...);
 int VectorSignedToFloat(int, int);
@@ -26,11 +26,11 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001f3eec. */
@@ -66,7 +66,7 @@ void FUN_003dac74(fn_003dac74_arg0 *param_1,int param_2)
       VectorSignedToFloat(temp_v0 - 0x14,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_001f3eec(temp_v0 - 0x14);
     }
-    temp_v0 = DAT_0059dbb4;
+    temp_v0 = g_renderCtx;
     temp_v1 = FUN_00169294(6,1,0);
     piVar5 = (int *)(temp_v0 + 0x12b8);
     temp_v2 = piVar5[*piVar5 + 2];
@@ -75,10 +75,10 @@ void FUN_003dac74(fn_003dac74_arg0 *param_1,int param_2)
       (**(romwright_code **)(temp_v0 + 0x12d4))();
       *(unsigned char *)(temp_v0 + 0x12d0) = 0;
     }
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,0x22,0x12,0,temp_v4,param_2 + 3);
-    FUN_001677c0();
-    temp_v0 = DAT_0059dbb4;
+    efctSetSpeed();
+    temp_v0 = g_renderCtx;
     temp_v1 = FUN_00169294(6,7,0);
     piVar5 = (int *)(temp_v0 + 0x12b8);
     temp_v2 = piVar5[*piVar5 + 2];

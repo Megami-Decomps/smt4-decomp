@@ -7,10 +7,10 @@ extern "C" {
 int FUN_00154080(int ****, unsigned int);
 int FUN_002a5960(...);
 int FUN_002a5dc4(...);
-int FUN_002c2ff0(void);
+int asdMemoryGetDefaultAllocator(void);
 int FUN_002c30c4(...);
-int FUN_002c498c(...);
-int FUN_002c5300(int, int, int, int);
+int asdMemAlloc(...);
+int asdMemoryAlloc(int, int, int, int);
 int nw_gfx_SceneBuilder_CreateObject(int ****, unsigned int, unsigned int);
 int nw_gfx_SceneHelper_ResolveReferenceImpl(unsigned int, unsigned int);
 int nw_gfx_SkeletalModel_SetFullBakedAnimEnabled(int, int);
@@ -44,11 +44,11 @@ typedef struct {
 /* Supplied declaration required: FUN_002a5dc4. */
 extern int FUN_002af294(int **, int);
 extern int FUN_002b4414(int, int ***, int);
-/* Supplied declaration required: FUN_002c2ff0. */
-extern unsigned int FUN_002c300c(void);
+/* Supplied declaration required: asdMemoryGetDefaultAllocator. */
+extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: FUN_002c30c4. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: asdMemoryAlloc. */
 extern int nw_anim_res_ResAnim_IsFullBakedAnim(int ****);
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: nw_gfx_SceneHelper_ResolveReferenceImpl. */
@@ -103,15 +103,15 @@ int * FUN_0031dac4(int *param_1)
   temp_v8 = 1;
   piVar9 = (int *)0x100;
   temp_v11[0] = (int ***)0x1;
-  FUN_002c498c(0x100,0x100,0,0x28);
-  temp_v12 = (int *)FUN_002c2ff0();
+  asdMemAlloc(0x100,0x100,0,0x28);
+  temp_v12 = (int *)asdMemoryGetDefaultAllocator();
   temp_v13 = (unsigned int *)0x0;
   temp_v14 = (unsigned int *)0x0;
   temp_v15 = 0x40000000;
   piVar9[1] = *(int *)(*param_1 + 0x1c);
   temp_v11[0] = (int ***)0x1;
   temp_v1 = 0x100;
-  FUN_002c5300(0x100,0x100,0,piVar9[1] << 2);
+  asdMemoryAlloc(0x100,0x100,0,piVar9[1] << 2);
   *piVar9 = temp_v1;
   temp_v1 = *(int *)(*param_1 + 0x20);
   if (temp_v1 != 0) {
@@ -138,8 +138,8 @@ int * FUN_0031dac4(int *param_1)
       if (*(int *)(temp_v8 + 0xc) != 0) {
         ppppiVar23 = (int ****)(*(int *)(temp_v8 + 0xc) + temp_v8 + 0xc);
       }
-      temp_v2 = FUN_002c2ff0();
-      temp_v3 = FUN_002c300c();
+      temp_v2 = asdMemoryGetDefaultAllocator();
+      temp_v3 = asdMemoryGetAllocatorA();
       temp_v19 = 4;
       temp_v18 = 8;
       temp_v25 = 1;
@@ -220,11 +220,11 @@ int * FUN_0031dac4(int *param_1)
   else {
     temp_v11[0] = (int ***)0x1;
     temp_v1 = 0x100;
-    FUN_002c5300(0x100,0x100,0,piVar9[3] << 2);
+    asdMemoryAlloc(0x100,0x100,0,piVar9[3] << 2);
     piVar9[2] = temp_v1;
     temp_v11[0] = (int ***)0x1;
     temp_v1 = 0x100;
-    FUN_002c498c(0x100,0x100,0,piVar9[3] << 2);
+    asdMemAlloc(0x100,0x100,0,piVar9[3] << 2);
     temp_v8 = 0;
     piVar9[4] = temp_v1;
     if (0 < piVar9[3]) {
@@ -294,7 +294,7 @@ int * FUN_0031dac4(int *param_1)
                 ppppiVar24 = (int ****)0x0;
               }
               else {
-                temp_v6 = FUN_002c2ff0();
+                temp_v6 = asdMemoryGetDefaultAllocator();
                 ppppiVar24 = &temp_v16;
                 temp_v16 = pppiVar6;
                 temp_v19 = romwright_piece_3_1((((unsigned int)(temp_v19) >> 8) & 0xffffffU),1);
@@ -332,11 +332,11 @@ int * FUN_0031dac4(int *param_1)
   else {
     temp_v11[0] = (int ***)0x1;
     temp_v1 = 0x100;
-    FUN_002c5300(0x100,0x100,0,piVar9[6] << 2);
+    asdMemoryAlloc(0x100,0x100,0,piVar9[6] << 2);
     piVar9[5] = temp_v1;
     temp_v11[0] = (int ***)0x1;
     temp_v1 = 0x100;
-    FUN_002c498c(0x100,0x100,0,piVar9[6] << 2);
+    asdMemAlloc(0x100,0x100,0,piVar9[6] << 2);
     temp_v8 = 0;
     piVar9[7] = temp_v1;
     if (0 < piVar9[6]) {
@@ -394,7 +394,7 @@ int * FUN_0031dac4(int *param_1)
                 temp_v19 = romwright_piece_3_1((((unsigned int)(temp_v19) >> 8) & 0xffffffU),1);
                 temp_v16 = (int ***)*piVar16;
                 temp_v18 = temp_v17;
-                piVar16 = (int *)FUN_002c2ff0();
+                piVar16 = (int *)asdMemoryGetDefaultAllocator();
                 piVar14 = (int *)(**(romwright_code **)(*piVar16 + 8))(piVar16,0x74,4);
                 if (piVar14 != (int *)0x0) {
                   FUN_002a5dc4(piVar14,piVar16);

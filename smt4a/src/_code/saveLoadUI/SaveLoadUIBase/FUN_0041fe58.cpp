@@ -9,8 +9,8 @@ int FUN_0014af84(void);
 int FUN_0014e188(...);
 int FUN_0014e220(...);
 int FUN_001505ac(...);
-int FUN_001630d4(...);
-int FUN_001681cc(...);
+int asdMemoryAlloc(...);
+int sysPlaySe(...);
 int FUN_0018719c(...);
 int FUN_0019de98(...);
 int FUN_001a9110(unsigned int, unsigned int);
@@ -18,7 +18,7 @@ int FUN_001acf98(...);
 int FUN_00203b40(...);
 int FUN_002804b0(...);
 int FUN_002a48e0(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_0031d1d8(...);
 int FUN_003f86f0(void);
 int FUN_003f881c(...);
@@ -53,8 +53,8 @@ extern int DAT_00588e28; /* 0x588e28 */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_0014e220. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_001630d4. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: asdMemoryAlloc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0018719c. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_001a9110. */
@@ -64,7 +64,7 @@ extern unsigned int FUN_00228af0(void);
 extern unsigned int FUN_00261458(void);
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_002a48e0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031d1d8. */
 extern unsigned char FUN_00371288(void);
 /* Supplied declaration required: FUN_003f86f0. */
@@ -87,13 +87,13 @@ void FUN_0041fe58(int param_1,int param_2,unsigned char param_3)
   *(char *)(param_1 + 5) = (char)param_2;
   *(unsigned char *)(param_1 + 6) = param_3;
   temp_v1 = 0x10000;
-  FUN_001630d4(0x10000,0x100,0,0x80,1);
+  asdMemoryAlloc(0x10000,0x100,0,0x80,1);
   *(unsigned int *)(param_1 + 0x1c) = temp_v1;
   temp_v1 = 0x10000;
-  FUN_001630d4(0x10000,0x100,0,8,1);
+  asdMemoryAlloc(0x10000,0x100,0,8,1);
   *(unsigned int *)(param_1 + 0x20) = temp_v1;
   temp_v1 = 0x10000;
-  FUN_001630d4(0x10000,0x100,0,0x2a71c,1);
+  asdMemoryAlloc(0x10000,0x100,0,0x2a71c,1);
   *(unsigned int *)(param_1 + 0x24) = temp_v1;
   temp_v1 = FUN_00261458();
   rt_memcpy_w(*(unsigned int *)(param_1 + 0x1c),temp_v1,0x80);
@@ -126,14 +126,14 @@ void FUN_0041fe58(int param_1,int param_2,unsigned char param_3)
   FUN_003f86f0();
   temp_v2 = 0;
   do {
-    FUN_002e6354(param_1 + temp_v2 * 0x80 + 0x6c,0x80);
+    sysMemClear(param_1 + temp_v2 * 0x80 + 0x6c,0x80);
     temp_v3 = param_1 + temp_v2;
     temp_v2 = temp_v2 + 1;
     *(unsigned char *)(temp_v3 + 0x2ec) = 0;
   } while (temp_v2 < 5);
   *(unsigned int *)(param_1 + 0x2f4) = 0;
   temp_v1 = 0x100;
-  FUN_001630d4(0x100,0x100,0,100,1);
+  asdMemoryAlloc(0x100,0x100,0,100,1);
   *(unsigned int *)(param_1 + 0x54) = temp_v1;
   temp_v2 = param_1 + 0x454;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
@@ -149,7 +149,7 @@ void FUN_0041fe58(int param_1,int param_2,unsigned char param_3)
   *(unsigned char *)(param_1 + 0x13) = temp_v0;
   *(unsigned int *)(param_1 + 0x18) = 2;
   *(unsigned int *)(param_1 + 0x300) = 0;
-  FUN_001681cc(0xaa);
+  sysPlaySe(0xaa);
   *(unsigned int *)(param_1 + 0x308) = 0;
   FUN_0041f020(param_1,1);
   temp_v2 = DAT_00588e28;

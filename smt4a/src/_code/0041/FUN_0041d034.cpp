@@ -1,40 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041d034` (_code @ 0x41d034, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001677c0(float);
-int FUN_001835b4(int, int, int, unsigned int, unsigned int, int);
-int FUN_00344cd0(unsigned int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, unsigned int, unsigned int, unsigned int, int, int);
-
-/* stack frame of param_2: 8 slot(s), 32 byte(s) */
+/* Packed request: two ids, a scale at 8 and three more words. */
 typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_2_stack;
+    u32 idA;            /* 0x00 */
+    u32 idB;            /* 0x04 */
+    f32 scale;          /* 0x08 */
+    u32 unk0c;          /* 0x0c */
+    u32 unk10;          /* 0x10 */
+    u32 unk14;          /* 0x14 */
+} Request;
 
-/* Supplied declaration required: FUN_001677c0. */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00344cd0. */
+int efctSetSpeed(f32 scale);
+int FUN_001835b4(int a, int b, int c, u32 idA, u32 idB, int d);
+int FUN_00344cd0(u32 context, u32 idA, u32 idB, int a, int b, int c, int d, int e, int f, int g, int h, u32 w0, u32 w1, u32 w2, int i, int j);
 
-
-void FUN_0041d034(unsigned int *param_1,unsigned int param_2)
-
+/* Submits the request: applies its scale, issues the two FUN_001835b4/FUN_00344cd0 commands, then resets the scale to 1.0. */
+void FUN_0041d034(Request *request, u32 context)
 {
-/* irregular: 3 native warning(s); review required */
-  FUN_001677c0(((float *)param_1)[2]);
-  FUN_001835b4(2,0x2b,0xe,*param_1,param_1[1],2);
-  FUN_00344cd0(param_2,*param_1,param_1[1],0x2b,8,9,10,4,6,5,7,param_1[3],param_1[4],param_1[5],2,0)
-  ;
-  FUN_001677c0(1.0f);
-  return;
+    efctSetSpeed(request->scale);
+    FUN_001835b4(2, 0x2b, 0xe, request->idA, request->idB, 2);
+    FUN_00344cd0(context, request->idA, request->idB, 0x2b, 8, 9, 10, 4, 6, 5, 7, request->unk0c, request->unk10, request->unk14, 2, 0);
+    efctSetSpeed(1.0f);
 }
 
 } /* extern "C" */

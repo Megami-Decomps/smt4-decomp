@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014e188(...);
 int FUN_001505ac(...);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00183f58(int, int, int);
 int FUN_001b4a90(int, int, unsigned int);
 int FUN_00203b40(...);
@@ -35,7 +35,7 @@ extern unsigned char DAT_0057f25c; /* 0x57f25c */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001505ac. */
 extern int FUN_0015688c(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
 extern int FUN_00187068(int);
 /* Supplied declaration required: FUN_001b4a90. */
@@ -111,24 +111,24 @@ LAB_004bd854:
         if (*(int *)(param_1 + *(int *)(param_1 + 0x32c) * 4 + 0x2c4) !=
             *(int *)(param_1 + *(int *)(param_1 + 0x328) * 4 + 0x2c4)) {
           temp_v3 = 0xf0;
-          FUN_001681cc(temp_v3);
+          sysPlaySe(temp_v3);
         }
         else {
-          FUN_001681cc(0x11b);
+          sysPlaySe(0x11b);
         }
       }
       else {
         temp_v3 = 0x118;
-        FUN_001681cc(temp_v3);
+        sysPlaySe(temp_v3);
       }
     }
     else if (*(int *)(param_1 + 0x324) >= 1) {
-      FUN_001681cc(0xf0);
+      sysPlaySe(0xf0);
       FUN_00183f58(5,1,1);
     }
     else {
       temp_v3 = 0x118;
-      FUN_001681cc(temp_v3);
+      sysPlaySe(temp_v3);
     }
     Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x10);
     FUN_001505ac(param_1 + 0x10,&DAT_0052d780,0x60,&DAT_0052d7e0,0x18,0,0,0,0,0,0);
@@ -142,7 +142,7 @@ LAB_004bd854:
   }
   else {
     FUN_00203b40(param_1 + 0x260,temp_v5,temp_v5,1,1,1);
-    FUN_001681cc(0x11f);
+    sysPlaySe(0x11f);
   }
   *(unsigned int *)(param_1 + 8) = 1;
   DAT_0057f25c = FUN_002857b8();

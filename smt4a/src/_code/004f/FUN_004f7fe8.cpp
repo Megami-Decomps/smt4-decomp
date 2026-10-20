@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int FUN_0014aa78(void);
+extern unsigned int btlGetMainState(void);
 extern unsigned int FUN_003ec620(unsigned int, unsigned int);
 
 
@@ -22,7 +22,7 @@ void FUN_004f7fe8(int param_1,int param_2,unsigned int param_3)
         return;
       }
     }
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     temp_v0 = FUN_003ec620(temp_v0,param_3);
     param_1 = param_1 + temp_v1 * 0x3c;
     *(unsigned int *)(param_1 + 0x1398) = param_3;

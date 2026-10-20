@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
+int asdProcessCreateSimple(...);
 
 typedef int romwright_code(...);
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -20,14 +20,14 @@ extern int FUN_002e10f0(...); /* 0x2e10f0 */
 extern romwright_code *DAT_005b4020; /* 0x5b4020 */
 extern unsigned int DAT_00640388; /* 0x640388 */
 
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 
 
 void FUN_002a1c1c(void)
 
 {
 /* irregular: 5 native warning(s); review required */
-  FUN_0014e38c(&LAB_002a1c7c,DAT_00640388,0,0,FUN_002e10f0,0,0);
+  asdProcessCreateSimple(&LAB_002a1c7c,DAT_00640388,0,0,FUN_002e10f0,0,0);
   if (DAT_005b4020 != (romwright_code *)0x0) {
                     /* WARNING: Could not recover jumptable at 0x002a1c68. Too many branches */
                     /* WARNING: Treating indirect jump as call */

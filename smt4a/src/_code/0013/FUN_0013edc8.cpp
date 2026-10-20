@@ -10,7 +10,7 @@ int rt_memcpy_w(...);
 extern unsigned int FUN_0014af98(void);
 extern unsigned long long FUN_00152f44(void);
 /* Supplied declaration required: FUN_001628c0. */
-extern int FUN_0030ef8c(char *, unsigned char *, unsigned int);
+extern int rt_memcmp(char *, unsigned char *, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -48,7 +48,7 @@ unsigned int FUN_0013edc8(char *param_1)
   if (temp_v0 == 0x46) {
     temp_v4 = 0;
     do {
-      temp_v1 = FUN_0030ef8c(param_1,temp_v8 + temp_v4 * 8,7);
+      temp_v1 = rt_memcmp(param_1,temp_v8 + temp_v4 * 8,7);
       if (temp_v1 == 0) {
         temp_v2 = FUN_0014af98();
         FUN_001628c0(param_1,temp_v2,temp_v5,1);

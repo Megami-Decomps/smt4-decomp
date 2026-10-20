@@ -2,15 +2,15 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
-int FUN_0019a5a0(unsigned int *);
-int FUN_002e132c(int);
+int jobStop(unsigned int, int);
+int asdMemFree(unsigned int *);
+int asdTMTexTableFreeEntry(int);
 
 extern unsigned int *DAT_0057f57c; /* 0x57f57c */
 
-/* Supplied declaration required: FUN_001631d0. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_002e132c. */
+/* Supplied declaration required: jobStop. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 
 
 void FUN_002ef750(void)
@@ -21,9 +21,9 @@ void FUN_002ef750(void)
   
   puVar1 = DAT_0057f57c;
   if (DAT_0057f57c != (unsigned int *)0x0) {
-    FUN_002e132c(0x34);
-    FUN_001631d0(*puVar1,0);
-    FUN_0019a5a0(puVar1);
+    asdTMTexTableFreeEntry(0x34);
+    jobStop(*puVar1,0);
+    asdMemFree(puVar1);
     DAT_0057f57c = (unsigned int *)0x0;
   }
   return;

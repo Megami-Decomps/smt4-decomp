@@ -1,44 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f6fcc` (_code @ 0x2f6fcc, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: writeback form only: retail loads flags with `ldr r1,[r0,r1,lsl #3]!` and reuses r0 for the slot address; built adds the unit address separately */
+/* Reports through scrSetResult whether any active, unlocked unit has a clean or type-2 entry in the slot chosen by scrGetArg(0); always returns 1. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+typedef struct Unit {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x1EE];
+    /* 0x1F2 */ u16 slotState[1];   /* top 6 bits: kind, 0 = none */
+    /* 0x1F4 */ u8 unk1F4[0x94];
+} Unit; /* 0x288 */
 
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_002939f4(void);
-extern int FUN_00296cc8(unsigned int);
+typedef struct UnitManager {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ Unit *units;
+} UnitManager;
 
+extern UnitManager *btlGetMainState(void);
+extern void scrSetResult(s32 found);
+extern s32 scrGetArg(u32 index);
 
-unsigned int FUN_002f6fcc(void)
-
+u32 FUN_002f6fcc(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  
-  temp_v1 = FUN_00296cc8(0);
-  temp_v4 = 0;
-  while( 1 ) {
-    temp_v2 = FUN_002939f4();
-    puVar4 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288);
-    temp_v3 = *puVar4;
-    if ((((temp_v3 & 0x10) != 0 && (temp_v3 & 1) != 0) && ((temp_v3 & 0x40) == 0)) &&
-       (temp_v0 = *(unsigned short *)((int)puVar4 + temp_v1 * 2 + 0x1f2),
-       (temp_v0 & 0xfc00) == 0 || temp_v0 >> 10 == 2)) break;
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 0x6d) {
-      FUN_0028dcb0(0);
-      return 1;
+    s32 slot = scrGetArg(0);
+    s32 i;
+
+    for (i = 0; i < 109; i++) {
+        Unit *unit = &btlGetMainState()->units[i];
+
+        if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0) {
+            u16 state = unit->slotState[slot];
+
+            if ((state & 0xFC00) == 0 || (state >> 10) == 2) {
+                scrSetResult(1);
+                return 1;
+            }
+        }
     }
-  }
-  FUN_0028dcb0(1);
-  return 1;
+    scrSetResult(0);
+    return 1;
 }
 
-} /* extern "C" */
+}

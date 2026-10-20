@@ -20,8 +20,8 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } void_stack;
 
-extern int DAT_00432fc8; /* 0x432fc8 */
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern int g_aocMain; /* 0x432fc8 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 #ifndef ROMWRIGHT_PIECE_3_1_DEFINED
 #define ROMWRIGHT_PIECE_3_1_DEFINED
@@ -34,7 +34,7 @@ extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002ba9ac. */
 /* Supplied declaration required: FUN_002baa40. */
 extern unsigned int *FUN_002bad5c(unsigned int *);
-extern unsigned long long FUN_002c08f0(void);
+extern unsigned long long jobGetWork(void);
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
 
@@ -65,7 +65,7 @@ unsigned int FUN_00111004(void)
   unsigned int uStack_24;
   unsigned int temp_v11 [2];
   
-  temp_v5 = FUN_002c08f0();
+  temp_v5 = jobGetWork();
   temp_v2 = (unsigned int)((unsigned long long)temp_v5 >> 0x20);
   puVar1 = (unsigned int *)temp_v5;
   temp_v0 = (unsigned int)(unsigned char)puVar1[0x1143];
@@ -74,10 +74,10 @@ unsigned int FUN_00111004(void)
     temp_v0 = *puVar1;
     temp_v2 = puVar1[1];
   }
-  if (((temp_v4 && temp_v0 == temp_v2) && (temp_v1 = FUN_00121e50(DAT_00433158), temp_v1 != 0)) &&
-     (temp_v1 = FUN_002ad1e0(DAT_00432fc8 + 0x98), temp_v1 != 0)) {
-    *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xfffeffff;
-    FUN_002ba9ac(DAT_00433158);
+  if (((temp_v4 && temp_v0 == temp_v2) && (temp_v1 = FUN_00121e50(g_aocSystem), temp_v1 != 0)) &&
+     (temp_v1 = FUN_002ad1e0(g_aocMain + 0x98), temp_v1 != 0)) {
+    *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
+    FUN_002ba9ac(g_aocSystem);
     temp_v6 = ((unsigned int)((unsigned int)in_stack_ffffffb8 >> 8) & 0xffffffU);
     puVar4 = (unsigned int *)FUN_002bad5c((unsigned int *)&temp_v7);
     puVar4[2] = 0;
@@ -97,7 +97,7 @@ unsigned int FUN_00111004(void)
     uStack_24 = uStack_38;
     uStack_30 = temp_v7;
     uStack_2c = temp_v8;
-    FUN_002ba968(DAT_00432fc8,&temp_v10,0x65,0);
+    FUN_002ba968(g_aocMain,&temp_v10,0x65,0);
   }
   temp_v8 = puVar1[0x1144];
   if (temp_v8 != 0) {

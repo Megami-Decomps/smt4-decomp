@@ -30,11 +30,11 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: FUN_00282924. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 extern int FUN_0029ebac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a8740. */
 /* Supplied declaration required: FUN_002ae164. */
@@ -71,7 +71,7 @@ unsigned int FUN_003be334(int param_1,unsigned int param_2,unsigned int param_3,
   temp_v15 = param_2;
   uStack_2c = param_3;
   iStack_28 = param_4;
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   temp_v1 = temp_v15;
   FUN_002ae164();
   FUN_002b4670();
@@ -109,7 +109,7 @@ unsigned int FUN_003be334(int param_1,unsigned int param_2,unsigned int param_3,
         if (((((*(unsigned int *)(temp_v0 + 0x44a0) & 0x40000) == 0) && (temp_v6)) && (0 < (int)temp_v5)) &&
            (((*(unsigned int *)(temp_v0 + 0x44ac) & 0x40) == 0 &&
             ((*(unsigned int *)(temp_v0 + 0xe0) & 0x20000000) == 0)))) {
-          temp_v3 = FUN_0023eae0(0xf);
+          temp_v3 = randRange(0xf);
           temp_v5 = temp_v5 + temp_v3;
         }
         if (temp_v14 == 0) {

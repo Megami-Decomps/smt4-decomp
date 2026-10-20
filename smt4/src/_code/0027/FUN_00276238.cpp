@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int DAT_0043e128; /* 0x43e128 */
-extern int DAT_00447a78; /* 0x447a78 */
+extern int g_mapIf; /* 0x447a78 */
 extern int *DAT_00447a98; /* 0x447a98 */
 
 
@@ -24,11 +24,11 @@ void FUN_00276238(void)
     *DAT_00447a98 = 0;
     piVar2[1] = 0;
   }
-  temp_v0 = DAT_00447a78;
-  if (*(char *)(DAT_00447a78 + 0x18) == '\0') {
+  temp_v0 = g_mapIf;
+  if (*(char *)(g_mapIf + 0x18) == '\0') {
     return;
   }
-  *(unsigned char *)(DAT_00447a78 + 0x18) = 0;
+  *(unsigned char *)(g_mapIf + 0x18) = 0;
   *(unsigned int *)(temp_v0 + 0x1c) = 0;
   temp_v0 = DAT_0043e128;
   *(unsigned int *)(DAT_0043e128 + 8) = 5;

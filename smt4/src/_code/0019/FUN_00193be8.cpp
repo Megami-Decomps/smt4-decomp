@@ -4,18 +4,18 @@ extern "C" {
 
 int FUN_001a1110(void);
 int FUN_00291050(unsigned char *);
-int FUN_002c4938(int, int);
+int memClear(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
+extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 
 /* Supplied declaration required: FUN_001a1110. */
 /* Supplied declaration required: FUN_00291050. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_00193be8(void)
@@ -25,8 +25,8 @@ void FUN_00193be8(void)
   int temp_v0;
   unsigned char *puVar2;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4));
-  puVar2 = (unsigned char *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x80);
+  temp_v0 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
+  puVar2 = (unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x80);
   FUN_00291050(puVar2);
   *puVar2 = 2;
   puVar2[1] = 2;
@@ -34,7 +34,7 @@ void FUN_00193be8(void)
   puVar2[3] = 1;
   puVar2[4] = 1;
   FUN_001a1110();
-  FUN_002c4938((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)),0x80);
+  memClear((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)),0x80);
   return;
 }
 

@@ -16,7 +16,7 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_00241c58. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
 /* Supplied declaration required: FUN_002ee56c. */
@@ -31,7 +31,7 @@ unsigned int FUN_0017fbe4(void)
   unsigned int uStack_14;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   FUN_002ee56c();
   temp_v1 = 0;
   uStack_14 = 0x3f800000;

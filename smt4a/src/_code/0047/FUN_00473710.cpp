@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_002e3328(void);
 int FUN_004279cc(void);
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002e3328. */
 /* Supplied declaration required: FUN_004279cc. */
 
@@ -23,7 +23,7 @@ void FUN_00473710(int param_1)
     *(unsigned int *)(param_1 + 0x5a8) = 0;
   }
   if (*(int *)(param_1 + 0x5ac) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x5ac) = 0;
   }
   return;

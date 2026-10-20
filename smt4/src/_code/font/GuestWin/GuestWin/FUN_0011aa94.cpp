@@ -29,8 +29,8 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } void_stack;
 
-extern int DAT_0043e110; /* 0x43e110 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_guestWin; /* 0x43e110 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b6758. */
@@ -38,7 +38,7 @@ extern int DAT_0044ea00; /* 0x44ea00 */
 extern int FUN_002b6a54(int, unsigned short);
 extern int FUN_002b6ad0(void);
 extern int FUN_002b6b04(void);
-extern int FUN_002b6b20(void);
+extern int gameGetOptions(void);
 extern int FUN_002b6b38(void);
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bcf4c. */
@@ -75,11 +75,11 @@ unsigned int FUN_0011aa94(void)
   float temp_v9;
   unsigned char temp_v10 [40];
   
-  temp_v4 = DAT_0043e110;
-  if ((((*(int *)(DAT_0043e110 + 8) != 0) && (temp_v1 = FUN_002b6b38(), temp_v1 != 0)) && (temp_v1 != 1))
-     && (temp_v1 = FUN_002b6b20(), *(short *)(temp_v1 + 0x46) != 0)) {
-    FUN_002c39a4(DAT_0044ea00);
-    temp_v3 = DAT_0044ea00;
+  temp_v4 = g_guestWin;
+  if ((((*(int *)(g_guestWin + 8) != 0) && (temp_v1 = FUN_002b6b38(), temp_v1 != 0)) && (temp_v1 != 1))
+     && (temp_v1 = gameGetOptions(), *(short *)(temp_v1 + 0x46) != 0)) {
+    FUN_002c39a4(g_titleScene);
+    temp_v3 = g_titleScene;
     temp_v2 = FUN_002c5d80(1,0);
     piVar10 = (int *)(temp_v3 + 0x124c);
     temp_v7 = *piVar10;
@@ -92,7 +92,7 @@ unsigned int FUN_0011aa94(void)
     }
     temp_v3 = FUN_002beda4(temp_v4 + 0x30);
     temp_v9 = 0.27f;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v4 = FUN_002bed98(temp_v4 + 0x30);
     FUN_002bf538();
     temp_v2 = FUN_002bf4f8(0xe,0xda);
@@ -100,7 +100,7 @@ unsigned int FUN_0011aa94(void)
     if (temp_v7 != 0) {
       temp_v2 = FUN_002bf4f8(0xe,0xdb);
     }
-    temp_v7 = DAT_0044ea00;
+    temp_v7 = g_titleScene;
     temp_v8 = temp_v3 + (int)temp_v9 + (int)*(short *)(temp_v2 + 8);
     temp_v4 = *(short *)(temp_v2 + 10) + temp_v4;
     temp_v3 = FUN_002c5da8(6,1,0);
@@ -112,7 +112,7 @@ unsigned int FUN_0011aa94(void)
       *(unsigned char *)(temp_v7 + 0x12c4) = 0;
     }
     FUN_002bf288(2,0xe,0xc9,temp_v8,temp_v4,0x15);
-    temp_v3 = DAT_0044ea00;
+    temp_v3 = g_titleScene;
     temp_v2 = FUN_002c5da8(6,7,0);
     piVar10 = (int *)(temp_v3 + 0x12ac);
     temp_v7 = piVar10[*piVar10 + 2];
@@ -132,13 +132,13 @@ unsigned int FUN_0011aa94(void)
     temp_v3 = FUN_002bf4f8(0xe,0xd9);
     temp_v2 = FUN_002b6ad0();
     if (temp_v2 != 0) {
-      temp_v1 = FUN_002b6b20();
+      temp_v1 = gameGetOptions();
       temp_v0 = *(unsigned short *)(temp_v1 + 0x606);
-      temp_v1 = FUN_002b6b20();
+      temp_v1 = gameGetOptions();
       temp_v1 = FUN_002b6a54((int)*(short *)(temp_v1 + 0x604),temp_v0);
       FUN_002b6940(*(unsigned short *)(temp_v1 + 0x5a),*(short *)(temp_v3 + 8) + temp_v8,
                    *(short *)(temp_v3 + 10) + temp_v4,0x24);
-      temp_v1 = FUN_002b6b20();
+      temp_v1 = gameGetOptions();
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v1 + 0x604);
       FUN_002bcf4c(temp_v5);
       FUN_002be624(temp_v10,temp_v5);
@@ -155,8 +155,8 @@ unsigned int FUN_0011aa94(void)
     FUN_002be5a4(2,0xff,temp_v10);
     FUN_002bed3c();
     FUN_002bf538();
-    temp_v4 = DAT_0044ea00;
-    piVar10 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v4 = g_titleScene;
+    piVar10 = (int *)(g_titleScene + 0x124c);
     temp_v1 = *piVar10;
     temp_v3 = piVar10[temp_v1 + 2];
     *piVar10 = temp_v1 - 1;

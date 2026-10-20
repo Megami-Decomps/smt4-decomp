@@ -1,27 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030170c` (_code @ 0x30170c, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the block-end pointer is compared from r1 where retail uses r2. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00132b7a(int);
+/* 12-byte pool element; a free element's first word links to the next free one. */
+typedef struct Element {
+    struct Element *next;   /* 0x00 */
+    u8 data[12 - 4];
+} Element;
 
-/* Supplied declaration required: FUN_00132b7a. */
+/* Pool handing out elements from a free list, then from the current block. */
+typedef struct {
+    u8 unk00[4];
+    Element *freeList;      /* 0x04 */
+    Element *cursor;        /* 0x08 next unused element of the current block */
+    Element *blockEnd;      /* 0x0c */
+} ElementPool;
 
+int FUN_00132b7a(ElementPool *pool);
 
-void FUN_0030170c(int param_1)
-
+/* Takes an element from the free list, or from the current block (growing it when full). */
+Element *FUN_0030170c(ElementPool *pool)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(unsigned int **)(param_1 + 4) != (unsigned int *)0x0) {
-    *(unsigned int *)(param_1 + 4) = **(unsigned int **)(param_1 + 4);
-    return;
-  }
-  if (*(int *)(param_1 + 8) == *(int *)(param_1 + 0xc)) {
-    FUN_00132b7a(param_1);
-  }
-  *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 0xc;
-  return;
+    Element *element = pool->freeList;
+
+    if (element != NULL) {
+        pool->freeList = element->next;
+        return element;
+    }
+    if (pool->cursor == pool->blockEnd) {
+        FUN_00132b7a(pool);
+    }
+    element = pool->cursor;
+    pool->cursor = element + 1;
+    return element;
 }
 
 } /* extern "C" */

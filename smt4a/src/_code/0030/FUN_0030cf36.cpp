@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001306e2(int [2], unsigned int, unsigned char *, unsigned int, unsigned int);
-int FUN_002e6354(unsigned char [24], int);
+int sysMemClear(unsigned char [24], int);
 int FUN_00303334(unsigned char [24]);
 int FUN_00303350(unsigned char [24]);
 int FUN_0030ce60(unsigned char *, unsigned char [24]);
@@ -17,7 +17,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_001306e2. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00303334. */
 /* Supplied declaration required: FUN_00303350. */
 /* Supplied declaration required: FUN_0030ce60. */
@@ -33,7 +33,7 @@ int FUN_0030cf36(unsigned int param_1,unsigned int *param_2,unsigned int param_3
   unsigned char temp_v2 [24];
   int temp_v3 [2];
   
-  FUN_002e6354(temp_v2,0x18);
+  sysMemClear(temp_v2,0x18);
   FUN_00303334(temp_v2);
   temp_v0 = *param_2;
   puVar2 = temp_v1;

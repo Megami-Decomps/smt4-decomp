@@ -11,7 +11,7 @@ int FUN_0016ccb4(...);
 int FUN_001b57a8(...);
 int FUN_001d0fcc(...);
 int FUN_00275bc8(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_00441f54(...);
 int FUN_004788dc(...);
 int rt_memcpy_w(...);
@@ -23,8 +23,8 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_00479334; /* 0x479334 */
-extern int DAT_00570260; /* 0x570260 */
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern int g_aocMain; /* 0x570260 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_0014384c. */
@@ -35,7 +35,7 @@ extern unsigned int FUN_0016a0f0(unsigned int);
 extern unsigned int *FUN_001b5acc(unsigned char *);
 /* Supplied declaration required: FUN_001d0fcc. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern int FUN_00441f48(void);
 /* Supplied declaration required: FUN_00441f54. */
 /* Supplied declaration required: FUN_004788dc. */
@@ -63,8 +63,8 @@ void FUN_004791d4(int param_1)
   if (temp_v0 != 0) {
     FUN_00441f54();
   }
-  FUN_001d0fcc(temp_v5,DAT_00570280);
-  FUN_0016ccb4(DAT_00570260 + 0x80);
+  FUN_001d0fcc(temp_v5,g_aocSystem);
+  FUN_0016ccb4(g_aocMain + 0x80);
   temp_v5[0] = 0;
   puVar2 = (unsigned int *)FUN_001b5acc(temp_v6);
   puVar2[2] = 0;
@@ -104,10 +104,10 @@ void FUN_004791d4(int param_1)
     (**(romwright_code **)(**(int **)(param_1 + 0x208) + 4))();
     *(unsigned int *)(param_1 + 0x208) = 0;
   }
-  temp_v0 = DAT_00570260;
-  *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xffffff8f;
+  temp_v0 = g_aocMain;
+  *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
   *(unsigned char *)(temp_v0 + 0xd50) = 2;
-  FUN_002e6354(param_1 + 0x1130,0x80);
+  sysMemClear(param_1 + 0x1130,0x80);
   rt_memcpy_w(param_1 + 0x1130,&LAB_00479334,0x23);
   return;
 }

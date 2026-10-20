@@ -8,7 +8,7 @@ int FUN_001954b0(void);
 int FUN_0026faa4(void);
 int FUN_0027d908(void);
 
-extern unsigned int DAT_0049f91c; /* 0x49f91c */
+extern unsigned int g_gameState; /* 0x49f91c */
 extern unsigned int DAT_0049f920; /* 0x49f920 */
 extern unsigned int DAT_0049f924; /* 0x49f924 */
 extern unsigned char DAT_0049f934; /* 0x49f934 */
@@ -267,7 +267,7 @@ void FUN_00287c34(int param_1)
   unsigned long long temp_v3;
   
   DAT_0049f924 = 0xffffffff;
-  DAT_0049f91c = 0;
+  g_gameState = 0;
   DAT_0049f920 = 3;
   DAT_0049f934 = 0;
   DAT_0049f938 = 0;

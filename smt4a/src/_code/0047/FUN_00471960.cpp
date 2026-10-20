@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00429f38(void);
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
 extern int FUN_001d109c(void);
 /* Supplied declaration required: FUN_00429f38. */
@@ -39,7 +39,7 @@ unsigned int FUN_00471960(int param_1)
     }
   }
   else {
-    *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xfffeffff;
+    *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
   }
   return 1;
 }

@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern int DAT_004652a0; /* 0x4652a0 */
+extern int g_commandBufferCursor; /* 0x4652a0 */
 extern signed char DAT_004c62a1; /* 0x4c62a1 */
 extern signed char DAT_004c62a2; /* 0x4c62a2 */
 extern int DAT_004c632c; /* 0x4c632c */
@@ -38,12 +38,12 @@ void FUN_002adba8(unsigned int param_1,unsigned int param_2,int param_3)
   unsigned char *puVar4;
   
   temp_v1 = DAT_004c632c;
-  temp_v0 = DAT_004652a0;
-  temp_v2 = DAT_004652a0 - *(int *)(DAT_004c632c + 4);
+  temp_v0 = g_commandBufferCursor;
+  temp_v2 = g_commandBufferCursor - *(int *)(DAT_004c632c + 4);
   *(int *)(DAT_004c632c + 0xc) = temp_v2;
   if (param_3 != 0) {
     rt_memcpy_w(temp_v0,param_1,param_2);
-    DAT_004652a0 = DAT_004652a0 + (param_2 & 0xfffffffc);
+    g_commandBufferCursor = g_commandBufferCursor + (param_2 & 0xfffffffc);
   }
   else {
     if (*(int *)(temp_v1 + 0x14) != temp_v2) {

@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_00266be4(void);
+int asd3dSoundActorIsPlaying(void);
 int FUN_002cc08c(int, int);
 int FUN_002cc1c0(int, unsigned char [16]);
 int FUN_002ebc68(int, int);
 int FUN_002fc250(void);
 
-/* Supplied declaration required: FUN_00266be4. */
+/* Supplied declaration required: asd3dSoundActorIsPlaying. */
 extern int FUN_002c1d5c(void);
-extern int FUN_002c564c(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: FUN_002cc08c. */
 /* Supplied declaration required: FUN_002cc1c0. */
 extern int FUN_002ebc34(int);
@@ -38,12 +38,12 @@ int FUN_00291e40(int param_1)
   temp_v3 = -1;
   temp_v5 = -1;
   iStack_28 = param_1;
-  temp_v1 = FUN_002c564c(1);
+  temp_v1 = jyoucyuGetTableEntry(1);
   if ((temp_v1 == 0) && (temp_v1 = FUN_002c1d5c(), temp_v1 == 0)) {
     temp_v1 = 0;
     do {
       temp_v2 = temp_v1;
-      FUN_00266be4();
+      asd3dSoundActorIsPlaying();
       if (temp_v2 == 0) {
         FUN_002cc1c0(temp_v1,temp_v6);
         if (param_1 + 0xfeffff94U < 0x100) {

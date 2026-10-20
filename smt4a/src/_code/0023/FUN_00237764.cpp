@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_003d3508(void);
+int scrPopFloat(void);
 
-/* Supplied declaration required: FUN_003d3508. */
+/* Supplied declaration required: scrPopFloat. */
 
 
 unsigned int FUN_00237764(int param_1)
@@ -15,7 +15,7 @@ unsigned int FUN_00237764(int param_1)
 /* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
   unsigned int in_s0;
   
-  FUN_003d3508();
+  scrPopFloat();
   *(unsigned int *)
    ((unsigned int)*(unsigned short *)(*(int *)(param_1 + 0xbc) + *(int *)(param_1 + 0x18) * 4 + 2) * 4 + 0x618e9c) =
        in_s0;

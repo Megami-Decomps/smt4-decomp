@@ -1,21 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ea6ae` (_code @ 0x2ea6ae, 0xe bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int rt_memcpy(void);
+/* Fixed buffer that remembers how many bytes were stored (length at 0x10). */
+typedef struct {
+    u8 data[0x10];
+    u32 length;         /* 0x10 */
+} Buffer;
 
-/* Supplied declaration required: rt_memcpy. */
+void *rt_memcpy(void *dest, const void *source, u32 length);
 
-
-void FUN_002ea6ae(int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Copies `length` bytes into the buffer and records the length. */
+void FUN_002ea6ae(Buffer *buffer, const void *source, u32 length)
 {
-/* irregular: 1 native warning(s); review required */
-  rt_memcpy();
-  *(unsigned int *)(param_1 + 0x10) = param_3;
-  return;
+    rt_memcpy(buffer, source, length);
+    buffer->length = length;
 }
 
 } /* extern "C" */

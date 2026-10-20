@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001676b0(int, int, int, int);
 int FUN_0035ae58(int, int, int, int, int);
-int aeabi_idivmod(int, int);
+int __aeabi_idivmod(int, int);
 
 typedef struct fn_003f3a90_arg0 fn_003f3a90_arg0;
 struct fn_003f3a90_arg0 {
@@ -34,15 +34,15 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_3_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_001676b0. */
 extern int FUN_001801a4(void);
 extern int FUN_001834a4(unsigned int, unsigned int);
 extern int FUN_001ab854(void);
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 /* Supplied declaration required: FUN_0035ae58. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_003f3a90(fn_003f3a90_arg0 *param_1,int param_2,int param_3)
@@ -84,7 +84,7 @@ void FUN_003f3a90(fn_003f3a90_arg0 *param_1,int param_2,int param_3)
       }
     }
     else {
-      temp_v2 = FUN_002919a4();
+      temp_v2 = btlMainGetUnk14();
       if (temp_v2 != 0) {
         temp_v7 = (unsigned int)*(unsigned short *)(temp_v2 + 0x60);
       }
@@ -122,7 +122,7 @@ void FUN_003f3a90(fn_003f3a90_arg0 *param_1,int param_2,int param_3)
             temp_v2 = 0xd;
             do {
               if ((temp_v7 & (1 << (temp_v3 & 0xff))) != 0) {
-                aeabi_idivmod(param_1->field_0x1c + 1,temp_v8);
+                __aeabi_idivmod(param_1->field_0x1c + 1,temp_v8);
                 temp_v12 = temp_v5 == temp_v10;
                 temp_v9 = temp_v10 + 1;
                 temp_v10 = temp_v10 + 1;
@@ -132,12 +132,12 @@ void FUN_003f3a90(fn_003f3a90_arg0 *param_1,int param_2,int param_3)
                 }
               }
               do {
-                temp_v9 = DAT_0059dbb4;
+                temp_v9 = g_renderCtx;
                 temp_v2 = temp_v2 - 1;
                 temp_v3 = temp_v3 + 1;
                 temp_v6 = temp_v6 + 1;
                 if (temp_v2 == 0) {
-                  piVar8 = (int *)(DAT_0059dbb4 + 0x1318);
+                  piVar8 = (int *)(g_renderCtx + 0x1318);
                   temp_v8 = piVar8[*piVar8 + 2];
                   piVar8[*piVar8 + 2] = 3;
                   if (*(char *)(temp_v9 + 0x1330) != '\0' || temp_v8 != 3) {
@@ -152,8 +152,8 @@ void FUN_003f3a90(fn_003f3a90_arg0 *param_1,int param_2,int param_3)
                                *(short *)(temp_v1 + 10) + param_3,0x7e);
                   FUN_001676b0((int)temp_v0,(int)*(short *)(temp_v1 + 8) + param_2 + temp_v8 + 0xd,
                                *(short *)(temp_v1 + 10) + param_3,0x7e);
-                  temp_v8 = DAT_0059dbb4;
-                  piVar8 = (int *)(DAT_0059dbb4 + 0x1318);
+                  temp_v8 = g_renderCtx;
+                  piVar8 = (int *)(g_renderCtx + 0x1318);
                   temp_v10 = piVar8[*piVar8 + 2];
                   piVar8[*piVar8 + 2] = 0;
                   if (*(char *)(temp_v8 + 0x1330) != '\0' || temp_v10 != 0) {

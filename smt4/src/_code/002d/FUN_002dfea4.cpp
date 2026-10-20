@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a775c(unsigned int);
+int asdMdlManagerDestroy(unsigned int);
 int FUN_002ae898(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -12,9 +12,9 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_00447a78; /* 0x447a78 */
+extern int g_mapIf; /* 0x447a78 */
 
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: FUN_002ae898. */
 
 
@@ -25,9 +25,9 @@ void FUN_002dfea4(void)
   int temp_v0;
   unsigned char *puVar2;
   
-  temp_v0 = DAT_00447a78;
-  puVar2 = (unsigned char *)(DAT_00447a78 + 0xcbd0);
-  FUN_002a775c(*(unsigned int *)(DAT_00447a78 + 0xcbec));
+  temp_v0 = g_mapIf;
+  puVar2 = (unsigned char *)(g_mapIf + 0xcbd0);
+  asdMdlManagerDestroy(*(unsigned int *)(g_mapIf + 0xcbec));
   *(unsigned int *)(temp_v0 + 0xcbec) = 0;
   *puVar2 = 0;
   FUN_002ae898(10,0x25);

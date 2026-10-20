@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_00245a7c(int, unsigned int);
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
 /* Supplied declaration required: FUN_00245a7c. */
-extern unsigned int *FUN_0027e928(unsigned int);
+extern unsigned int *btlUnitGet(unsigned int);
 
 
 void FUN_00338704(int param_1)
@@ -19,7 +19,7 @@ void FUN_00338704(int param_1)
   unsigned int *puVar1;
   unsigned int temp_v0;
   
-  puVar1 = (unsigned int *)FUN_0027e928(DAT_0043427c);
+  puVar1 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
   if ((puVar1 == (unsigned int *)0x0) || (((*puVar1 & 0x80) == 0 && ((*puVar1 & 0x1000) == 0)))) {
     temp_v0 = 2;
     FUN_00245a7c(2,*(unsigned int *)(param_1 + 0x49e0));

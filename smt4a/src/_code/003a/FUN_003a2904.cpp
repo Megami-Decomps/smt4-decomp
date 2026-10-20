@@ -34,7 +34,7 @@ extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
 extern int DAT_00580ca0; /* 0x580ca0 */
 extern int DAT_00580ca4; /* 0x580ca4 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -51,7 +51,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0017efa4. */
 extern int FUN_001a7a20(int, unsigned char *, unsigned int);
-extern unsigned int FUN_002e3390(unsigned char *);
+extern unsigned int wstrlen(unsigned char *);
 /* Supplied declaration required: FUN_00352bc4. */
 /* Supplied declaration required: FUN_0050d8e4. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
@@ -126,11 +126,11 @@ void FUN_003a2904(void)
         DAT_00580ca4 = DAT_00580ca4 + 1;
         temp_v4 = *(int *)(*(int *)(temp_v0 + 0xa8) + 4);
         temp_v0 = *(int *)(temp_v4 + 0x210);
-        temp_v1 = FUN_002e3390(&LAB_003a2e90);
+        temp_v1 = wstrlen(&LAB_003a2e90);
         temp_v0 = FUN_001a7a20(temp_v0 + 0x74,&LAB_003a2e90,temp_v1);
         temp_v5 = *(int *)(temp_v4 + 0x108);
         temp_v2 = *(int *)(temp_v5 + 0xc);
-        temp_v7 = *(float *)(DAT_00581288 + 0x1c);
+        temp_v7 = *(float *)(g_lmapScene + 0x1c);
         FUN_00352bc4();
         FUN_0050d8e4();
         temp_v7 = (temp_v7 + (float)temp_v24) * temp_v19;
@@ -182,13 +182,13 @@ void FUN_003a2904(void)
         temp_v4 = *(int *)(*(int *)(temp_v0 + 0xa8) + 4);
         temp_v0 = *(int *)(temp_v4 + 0x210);
         temp_v7 = temp_v22;
-        temp_v1 = FUN_002e3390(&LAB_003a2c30);
+        temp_v1 = wstrlen(&LAB_003a2c30);
         temp_v0 = FUN_001a7a20(temp_v0 + 0x74,&LAB_003a2c30,temp_v1);
         temp_v5 = *(int *)(temp_v4 + 0x108);
         temp_v2 = *(int *)(temp_v5 + 0xc);
-        temp_v9 = *(float *)(DAT_00581288 + 0x1c);
+        temp_v9 = *(float *)(g_lmapScene + 0x1c);
         FUN_00352bc4();
-        temp_v7 = temp_v7 - *(float *)(DAT_00581288 + 0x20);
+        temp_v7 = temp_v7 - *(float *)(g_lmapScene + 0x20);
         FUN_0050d8e4();
         temp_v7 = temp_v7 * temp_v20;
         if (temp_v7 < temp_v18) {

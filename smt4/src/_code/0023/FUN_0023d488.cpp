@@ -34,7 +34,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0023dc38. */
 extern short FUN_0023dcfc(unsigned int);
 /* Supplied declaration required: FUN_00255158. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 extern int FUN_0033f8ec(unsigned int *, int, int, int);
 extern int FUN_0033fb2c(unsigned int *);
 extern int FUN_0033fc50(void);
@@ -199,7 +199,7 @@ unsigned int FUN_0023d488(unsigned int *param_1,fn_0023d488_arg1 *param_2,int pa
   if (((temp_v6 & 0x20000) != 0) && (temp_v5 = FUN_00255158((int)(short)param_1[2],0x11), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x20000;
   }
-  if (((temp_v6 & 0x80000) != 0) && (temp_v5 = FUN_002939f4(), (*(unsigned int *)(temp_v5 + 0x44a0) & 0x400) == 0)
+  if (((temp_v6 & 0x80000) != 0) && (temp_v5 = btlGetMainState(), (*(unsigned int *)(temp_v5 + 0x44a0) & 0x400) == 0)
      ) {
     temp_v8 = temp_v8 | 0x80000;
   }
@@ -215,7 +215,7 @@ unsigned int FUN_0023d488(unsigned int *param_1,fn_0023d488_arg1 *param_2,int pa
     }
   }
   if (((temp_v6 & 0x800000) != 0) &&
-     ((temp_v5 = FUN_002939f4(), (*(unsigned int *)(temp_v5 + 0x44a0) & 0x40000) != 0 ||
+     ((temp_v5 = btlGetMainState(), (*(unsigned int *)(temp_v5 + 0x44a0) & 0x40000) != 0 ||
       ((*(unsigned int *)(temp_v5 + 0xe0) & 0x40000) == 0)))) {
     temp_v8 = temp_v8 | 0x800000;
   }
@@ -229,7 +229,7 @@ unsigned int FUN_0023d488(unsigned int *param_1,fn_0023d488_arg1 *param_2,int pa
     temp_v8 = temp_v8 | 0x4000000;
   }
   if ((temp_v6 & 0x8000000) != 0) {
-    temp_v5 = FUN_002939f4();
+    temp_v5 = btlGetMainState();
     temp_v2 = *(short *)(temp_v5 + 0x4968);
     if (*(short *)(temp_v5 + 0x4968) < *(short *)(temp_v5 + 0x496a)) {
       temp_v2 = *(short *)(temp_v5 + 0x496a);

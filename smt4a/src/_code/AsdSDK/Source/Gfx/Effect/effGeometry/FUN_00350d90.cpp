@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_00412648(int, int, int, int);
 
@@ -16,7 +16,7 @@ typedef struct {
 
 extern unsigned char DAT_0054baf8; /* 0x54baf8 */
 
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00412648. */
 extern int FUN_00412fd8(void);
@@ -40,7 +40,7 @@ unsigned short * FUN_00350d90(int param_1,short *param_2,int param_3,unsigned sh
   temp_v3 = param_3 * 2 - 2;
   temp_v5 = (param_1 + 1) * param_3;
   puVar5 = (unsigned short *)0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0x58,0x10,1);
+  memAlloc(0x10000,0x100,0,0x58,0x10,1);
   temp_v4 = 0x4c;
   FUN_00178b04(0x4c,&DAT_0054baf8,0x73);
   if (temp_v4 == 0) {

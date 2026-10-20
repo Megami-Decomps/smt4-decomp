@@ -3,13 +3,13 @@
 extern "C" {
 
 int FUN_001641c4(void);
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_001695a0(void);
-int FUN_0019a5a0(unsigned int);
+int asdMemFree(unsigned int);
 int FUN_0019a7f4(int, int);
-int FUN_0019c364(unsigned int);
+int scrScriptProcessDestroy(unsigned int);
 int FUN_001b4a90(int, int, unsigned int);
-int FUN_002e132c(int);
+int asdTMTexTableFreeEntry(int);
 int FUN_0037b450(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -20,13 +20,13 @@ typedef struct {
 extern unsigned short DAT_00588108; /* 0x588108 */
 
 /* Supplied declaration required: FUN_001641c4. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019a7f4. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_001b4a90. */
-/* Supplied declaration required: FUN_002e132c. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_0037b450. */
 
 
@@ -36,7 +36,7 @@ void FUN_004842cc(int param_1)
 /* irregular: 9 native warning(s); review required */
   int temp_v0;
   
-  FUN_001681cc(DAT_00588108);
+  sysPlaySe(DAT_00588108);
   FUN_0037b450();
   if (0 < *(short *)(param_1 + 0x55c)) {
     temp_v0 = 0;
@@ -48,10 +48,10 @@ void FUN_004842cc(int param_1)
     *(unsigned short *)(param_1 + 0x55c) = 0;
   }
   FUN_0019a7f4(0x23,0);
-  FUN_002e132c(0x23);
-  FUN_0019c364(*(unsigned int *)(param_1 + 0x26c));
-  FUN_0019a5a0(*(unsigned int *)(param_1 + 0x268));
-  FUN_0019a5a0(*(unsigned int *)(param_1 + 0x264));
+  asdTMTexTableFreeEntry(0x23);
+  scrScriptProcessDestroy(*(unsigned int *)(param_1 + 0x26c));
+  asdMemFree(*(unsigned int *)(param_1 + 0x268));
+  asdMemFree(*(unsigned int *)(param_1 + 0x264));
   FUN_001695a0();
   return;
 }

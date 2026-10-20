@@ -14,7 +14,7 @@ int FUN_002be624(...);
 
 int FUN_001db56c(void);
 int FUN_00220ffc(void);
-int FUN_00247f80(void);
+int runWinClose(void);
 int FUN_00254600(int);
 int FUN_00259294(int);
 int FUN_0025981c(void);
@@ -56,7 +56,7 @@ extern int DAT_0043daa8; /* 0x43daa8 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001db56c. */
 /* Supplied declaration required: FUN_00220ffc. */
-/* Supplied declaration required: FUN_00247f80. */
+/* Supplied declaration required: runWinClose. */
 extern int FUN_00248a9c(void);
 extern int FUN_0024ea50(unsigned short);
 /* Supplied declaration required: FUN_00254600. */
@@ -156,7 +156,7 @@ unsigned int FUN_002ec588(int param_1)
         FUN_0026b9bc();
         *(unsigned int *)(param_1 + 0xd2c) = 0xc;
       }
-      FUN_00247f80();
+      runWinClose();
       return 2;
     }
     FUN_002e1b20();
@@ -171,7 +171,7 @@ unsigned int FUN_002ec588(int param_1)
       FUN_002ecfe4();
       FUN_002c5758(2);
       FUN_002c5728(2);
-      FUN_00247f80();
+      runWinClose();
       *(unsigned int *)(param_1 + 0xd2c) = 6;
       return temp_v14;
     }
@@ -434,7 +434,7 @@ unsigned int FUN_002ec588(int param_1)
       *(unsigned int *)(param_1 + 0xd2c) = 6;
       temp_v14 = 2;
     }
-    FUN_00247f80();
+    runWinClose();
     return temp_v14;
   case 4:
     temp_v2 = *(int *)(param_1 + 0xcfc);

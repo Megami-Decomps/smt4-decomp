@@ -8,12 +8,12 @@ int FUN_002bfab0(unsigned int, unsigned int);
 int FUN_002bfadc(int, int);
 int FUN_002c39a4(unsigned int);
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002bfab0. */
 /* Supplied declaration required: FUN_002bfadc. */
 extern int FUN_002bff10(unsigned int);
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c39a4. */
 
 
@@ -31,7 +31,7 @@ unsigned int FUN_0010854c(void)
   int *piVar6;
   int *piVar7;
   
-  temp_v1 = FUN_002c08f0();
+  temp_v1 = jobGetWork();
   *(unsigned char *)(temp_v1 + 0xe96) = 0;
   temp_v2 = FUN_002bff10(0);
   if ((((temp_v2 != 0) || (*(char *)(temp_v1 + 0xe8c) == '\0')) || (*(char *)(temp_v1 + 0xe8d) == '\0'))
@@ -39,7 +39,7 @@ unsigned int FUN_0010854c(void)
          (*(char *)(temp_v1 + 0xfd8) != '\0')))) {
     return 0;
   }
-  FUN_002c39a4(DAT_0044ea00);
+  FUN_002c39a4(g_titleScene);
   *(unsigned int *)(*(int *)(temp_v1 + 0xfdc) + 0x14) = 0x200;
   *(unsigned int *)(*piVar7 + 0x18) = 0x200;
   temp_v0 = 0;

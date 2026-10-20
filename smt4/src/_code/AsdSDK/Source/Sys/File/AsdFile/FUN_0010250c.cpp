@@ -15,7 +15,7 @@ int FUN_002c5254(int *, unsigned int, int);
 int FUN_002c526c(void);
 int FUN_002c52dc(int *, int, int);
 int FUN_002c52f8(void);
-int FUN_002c5300(int, int, int, unsigned int);
+int asdMemoryAlloc(int, int, int, unsigned int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -27,8 +27,8 @@ extern unsigned char LAB_00102698; /* 0x102698 */
 extern unsigned int DAT_00465008; /* 0x465008 */
 extern unsigned int DAT_0046500c; /* 0x46500c */
 extern unsigned int DAT_00465010; /* 0x465010 */
-extern unsigned int DAT_00465014; /* 0x465014 */
-extern unsigned int DAT_00465028; /* 0x465028 */
+extern unsigned int g_asdFileMutex; /* 0x465014 */
+extern unsigned int g_asdFileEvent; /* 0x465028 */
 
 /* Supplied declaration required: FUN_0010d0f8. */
 /* Supplied declaration required: FUN_0010f5dc. */
@@ -41,7 +41,7 @@ extern unsigned int DAT_00465028; /* 0x465028 */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_002c52dc. */
 /* Supplied declaration required: FUN_002c52f8. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemoryAlloc. */
 extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
@@ -65,7 +65,7 @@ void FUN_0010250c(void)
   FUN_0010f73c(0x10,0x10,1);
   temp_v1 = 0x100;
   temp_v2 = 1;
-  FUN_002c5300(0x100,0x100,0,temp_v0);
+  asdMemoryAlloc(0x100,0x100,0,temp_v0);
   temp_v2 = 1;
   DAT_00465008 = temp_v1;
   FUN_0010f7e4(0x10,0x10,temp_v1,temp_v0);
@@ -73,7 +73,7 @@ void FUN_0010250c(void)
   FUN_0010f7b8(0x10,0x10,1);
   temp_v1 = 0x100;
   temp_v2 = 1;
-  FUN_002c5300(0x100,0x100,0,temp_v0);
+  asdMemoryAlloc(0x100,0x100,0,temp_v0);
   puVar3 = &LAB_00102698;
   uStack_1c = 1;
   temp_v2 = temp_v0;
@@ -86,16 +86,16 @@ void FUN_0010250c(void)
   FUN_002c52dc(&temp_v2,0,2);
   if (-1 < (int)puVar4) {
     puVar4 = (unsigned int *)0x0;
-    DAT_00465014 = temp_v2;
+    g_asdFileMutex = temp_v2;
   }
   if ((int)puVar4 < 0) {
     FUN_002c526c();
   }
-  FUN_002c5254(&temp_v2,DAT_00465014,1);
+  FUN_002c5254(&temp_v2,g_asdFileMutex,1);
   if ((int)puVar5 < 0) {
     FUN_002c526c();
   }
-  nn_os_LightEvent_Initialize((unsigned int)&DAT_00465028,0);
+  nn_os_LightEvent_Initialize((unsigned int)&g_asdFileEvent,0);
   FUN_0010d0f8();
   FUN_0010f764();
   return;

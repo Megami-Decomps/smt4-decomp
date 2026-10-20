@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00238f4c(int *, int);
 int FUN_0024ee68(int);
 int FUN_002ad66c(unsigned char **, int *);
-int FUN_002c4938(int *, int);
+int memClear(int *, int);
 int FUN_002c567c(int *);
 int nn_cec_CTR_MessageBox_GetMessageBoxNum(int *, int);
 int rt_memcpy(int *, int, int);
@@ -29,7 +29,7 @@ extern signed char DAT_004656d1; /* 0x4656d1 */
 /* Supplied declaration required: FUN_00238f4c. */
 /* Supplied declaration required: FUN_0024ee68. */
 /* Supplied declaration required: FUN_002ad66c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002c567c. */
 extern unsigned int FUN_0035782c(void);
 extern unsigned int nn_cec_CTR_Base64Str2CecTitleId(unsigned char *);
@@ -139,7 +139,7 @@ unsigned int FUN_003580a4(int *param_1,unsigned int param_2,int param_3,int para
             if ((temp_v0 & 0x80000000) == 0) {
               nn_cec_CTR_MessageBox_ReadOutBoxIndex((unsigned int)param_1);
             }
-            FUN_002c4938(param_1 + 0x67,0x60);
+            memClear(param_1 + 0x67,0x60);
             *(unsigned short *)(param_1 + 0x67) = 0x6363;
             param_1[0x68] = param_2;
             *(unsigned char *)((int)param_1 + 0x1a9) = 1;

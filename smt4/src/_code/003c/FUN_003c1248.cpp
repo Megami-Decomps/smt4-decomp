@@ -28,7 +28,7 @@ extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 /* Supplied declaration required: FUN_00255e38. */
 extern int FUN_002561d8(int, int, unsigned int);
 /* Supplied declaration required: FUN_00262f68. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 extern int FUN_0029ebac(int, unsigned int);
 extern int FUN_002a8740(int);
 extern int FUN_002a8764(void);
@@ -58,7 +58,7 @@ void FUN_003c1248(int param_1,int param_2,int param_3,int param_4)
   iStack_30 = param_2;
   temp_v8 = param_3;
   temp_v9 = param_4;
-  temp_v1 = FUN_002939f4();
+  temp_v1 = btlGetMainState();
   if (param_1 != 0) {
     temp_v2 = *(unsigned int *)(temp_v1 + param_2 * 8 + 0x1fd0) & 0xffff;
     FUN_002b06c4();

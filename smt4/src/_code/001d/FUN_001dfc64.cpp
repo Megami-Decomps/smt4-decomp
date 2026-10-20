@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00293f98(...);
+int aocHandleButtons(...);
 int FUN_002ae898(...);
 int FUN_002ae8e4(...);
 int FUN_002b8e84(...);
-int FUN_002c43b4(...);
+int jobStop(...);
 int FUN_002c58c8(...);
 int VectorSignedToFloat(...);
 
@@ -42,7 +42,7 @@ struct fn_001dfc64_arg0 {
     byte field_0x71; /* +0x71 */
 };
 
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_FABS_4_DEFINED
@@ -53,7 +53,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 extern int FUN_00293a04(int, unsigned int);
-/* Supplied declaration required: FUN_00293f98. */
+/* Supplied declaration required: aocHandleButtons. */
 extern unsigned int FUN_00294090(int, unsigned int);
 extern int FUN_00294fe0(unsigned int);
 extern int FUN_0029505c(unsigned int);
@@ -63,9 +63,9 @@ extern int FUN_00296d6c(unsigned int, unsigned int);
 extern int FUN_002ae98c(unsigned int, unsigned int, unsigned int, unsigned int);
 extern int FUN_002b8660(void);
 /* Supplied declaration required: FUN_002b8e84. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 extern int FUN_002c1d5c(void);
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_002c58c8. */
 
 
@@ -84,7 +84,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
   unsigned int temp_v7;
   float temp_v8;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   temp_v1 = *(int *)(temp_v0 + 0xc);
   if (temp_v1 != 0) {
     if (temp_v1 == 1) {
@@ -98,10 +98,10 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
         *(unsigned int *)(temp_v0 + 0x48) = temp_v7;
         return 0;
       }
-      temp_v1 = FUN_002ae98c(DAT_00433158,*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40),
+      temp_v1 = FUN_002ae98c(g_aocSystem,*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40),
                            1);
       if (temp_v1 != 0) {
-        FUN_002ae8e4(DAT_00433158,*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40),
+        FUN_002ae8e4(g_aocSystem,*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40),
                      0x10000);
       }
       else {
@@ -130,7 +130,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
       temp_v8 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 0x16),(unsigned char)(in_fpscr >> 0x16) & 3)
       ;
       *(int *)(temp_v0 + 0x14) = (int)((-143.0f - temp_v6) + temp_v8 + 195.0f);
-      FUN_00293f98(*(int *)(temp_v0 + 0x48),7);
+      aocHandleButtons(*(int *)(temp_v0 + 0x48),7);
       *(unsigned int *)(temp_v0 + 0xc) = 3;
       return 0;
     }
@@ -228,7 +228,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
     *(float *)(temp_v0 + 0x24) = temp_v6;
     *(float *)(temp_v0 + 0x28) = temp_v6;
     if (*(char *)(temp_v0 + 0x30) != '\0') {
-      FUN_002c43b4(param_1,0);
+      jobStop(param_1,0);
     }
   }
   else if ((int)temp_v5 >= 0x3f800001) {

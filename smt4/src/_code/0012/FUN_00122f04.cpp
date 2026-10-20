@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002ba520(unsigned int, int);
 int FUN_002ba608(int);
-int FUN_002c4938(...);
+int memClear(...);
 
 typedef int romwright_code(...);
 extern romwright_code *DAT_0044e330; /* 0x44e330 */
@@ -18,7 +18,7 @@ extern int FUN_00137ab4(unsigned int);
 extern int FUN_00137b7c(unsigned int);
 /* Supplied declaration required: FUN_002ba520. */
 /* Supplied declaration required: FUN_002ba608. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_00122f04(int *param_1)
@@ -34,7 +34,7 @@ unsigned int FUN_00122f04(int *param_1)
   
   temp_v3 = 0xffffffff;
   DAT_004655e8 = param_1;
-  FUN_002c4938(param_1,0x8ac);
+  memClear(param_1,0x8ac);
   temp_v0 = FUN_00137b7c(0);
   *DAT_004655e8 = temp_v0;
   temp_v0 = FUN_00137ab4(0);
@@ -45,7 +45,7 @@ unsigned int FUN_00122f04(int *param_1)
   else {
     puVar3 = (unsigned int *)(*DAT_0044e330)(0x10000,0x100,0,0x9c);
     if (puVar3 != (unsigned int *)0x0) {
-      FUN_002c4938(puVar3,0x9c);
+      memClear(puVar3,0x9c);
       *puVar3 = 0;
     }
   }
@@ -56,7 +56,7 @@ unsigned int FUN_00122f04(int *param_1)
     if (piVar1[1] != 0 && puVar3 != (unsigned int *)0x0) {
       temp_v3 = 0;
       DAT_004655ec = 1;
-      FUN_002c4938(DAT_004655e8[2],0x9c);
+      memClear(DAT_004655e8[2],0x9c);
       return temp_v3;
     }
     FUN_002ba608(temp_v0 + 0x34);
@@ -81,7 +81,7 @@ unsigned int FUN_00122f04(int *param_1)
   if (DAT_004655e8[2] != 0) {
     if (DAT_0044e334 == (romwright_code *)0x0) {
       DAT_004655ec = 1;
-      FUN_002c4938(DAT_004655e8[2],0x9c);
+      memClear(DAT_004655e8[2],0x9c);
       return temp_v3;
     }
     (*DAT_0044e334)(0x10000,0x100,0);
@@ -90,7 +90,7 @@ unsigned int FUN_00122f04(int *param_1)
     (*DAT_0044e334)(0x10000,0x100,0,DAT_004655e8);
   }
   DAT_004655ec = 1;
-  FUN_002c4938(DAT_004655e8[2],0x9c);
+  memClear(DAT_004655e8[2],0x9c);
   return temp_v3;
 }
 

@@ -1,34 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023795c` (_code @ 0x23795c, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* If FUN_002deb84 fails, triggers the fallback (FUN_00285020, then FUN_003d2588 with the current id); returns whether FUN_0023a5d8 succeeds. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00285020(int);
-int FUN_003d2588(int, int);
+extern s32 scrGetArg(u32 arg);
+extern s32 FUN_0023a5d8(void);
+extern s32 FUN_002deb84(void);
+extern void FUN_00285020(s32 arg);
+extern void FUN_003d2588(s32 id, s32 arg);
 
-extern short FUN_00236038(unsigned int);
-extern int FUN_0023a5d8(void);
-/* Supplied declaration required: FUN_00285020. */
-extern int FUN_002deb84(void);
-/* Supplied declaration required: FUN_003d2588. */
-
-
-unsigned char FUN_0023795c(void)
-
+u8 FUN_0023795c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  
-  temp_v1 = FUN_002deb84();
-  if (temp_v1 == 0) {
-    FUN_00285020(1);
-    temp_v0 = FUN_00236038(0);
-    FUN_003d2588((int)temp_v0,0);
-  }
-  temp_v1 = FUN_0023a5d8();
-  return temp_v1 != 0;
+    if (FUN_002deb84() == 0) {
+        FUN_00285020(1);
+        FUN_003d2588((s16)scrGetArg(0), 0);
+    }
+    return FUN_0023a5d8() != 0;
 }
 
-} /* extern "C" */
+}

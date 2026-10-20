@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00137368(void);
+int asdGfxCmdBufferForward8(void);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -12,14 +12,14 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-/* Supplied declaration required: FUN_00137368. */
+/* Supplied declaration required: asdGfxCmdBufferForward8. */
 
 
 void FUN_00374030(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_00137368();
+  asdGfxCmdBufferForward8();
                     /* WARNING: Treating indirect jump as return */
   return;
 }

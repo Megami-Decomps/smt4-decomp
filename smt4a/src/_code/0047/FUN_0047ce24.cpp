@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00167618(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_0016c4b8(...);
 int FUN_0018291c(...);
 int FUN_001879d0(...);
@@ -14,7 +14,7 @@ int FUN_0019b770(...);
 int FUN_0019d880(void);
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
-int FUN_002a1c8c(void);
+int renderCtxCallB(void);
 int FUN_002f5020(...);
 int FUN_00318054(void);
 int FUN_0032cef8(unsigned int);
@@ -55,7 +55,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char LAB_00192824; /* 0x192824 */
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_00630724; /* 0x630724 */
 extern unsigned int DAT_00630728; /* 0x630728 */
 extern unsigned int DAT_0063072c; /* 0x63072c */
@@ -71,7 +71,7 @@ extern unsigned int DAT_00630754; /* 0x630754 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00167618. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern float FUN_00169294(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0018291c. */
@@ -81,15 +81,15 @@ extern float FUN_00169294(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019d880. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b63b0. */
-/* Supplied declaration required: FUN_002a1c8c. */
-extern int FUN_002e12f8(void);
+/* Supplied declaration required: renderCtxCallB. */
+extern int asdSoundGetOption2(void);
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_00318054. */
 extern unsigned int FUN_0032cdb8(void);
-extern int FUN_0032cee8(void);
+extern int asdSoundGetOption0(void);
 /* Supplied declaration required: FUN_0032cef8. */
-extern int FUN_0036be80(void);
-extern int FUN_0036be90(void);
+extern int asdSoundGetOption3(void);
+extern int asdSoundGetOption1(void);
 
 
 int FUN_0047ce24(unsigned int param_1,int param_2,unsigned int *param_3)
@@ -163,7 +163,7 @@ int FUN_0047ce24(unsigned int param_1,int param_2,unsigned int *param_3)
   FUN_002f5020(temp_v19 + 0x10,&LAB_00192824,0x10,4);
   FUN_002f5020(temp_v19,&LAB_00192824,0x10,4);
   temp_v18 = 0;
-  temp_v4 = FUN_002e12f8();
+  temp_v4 = asdSoundGetOption2();
   if (temp_v4 != 0) {
     temp_v5 = param_3[3] + (unsigned int)*(unsigned char *)(param_2 + 0x10);
     if ((int)temp_v5 >= 0x100) {
@@ -208,7 +208,7 @@ int FUN_0047ce24(unsigned int param_1,int param_2,unsigned int *param_3)
     }
     else {
 LAB_0047cf80:
-      temp_v4 = FUN_0036be80();
+      temp_v4 = asdSoundGetOption3();
       temp_v9 = temp_v4 != 0;
       if (temp_v9) {
         temp_v20 = 0;
@@ -255,7 +255,7 @@ LAB_0047cf80:
       if (*(short *)(temp_v8 + 4) == 0) {
         if (((*(unsigned short *)(temp_v8 + 0xc) & 2) != 0) && ((*param_3 & 8) == 0)) {
           temp_v2 = 1;
-          FUN_001677c0();
+          efctSetSpeed();
         }
         if (((*(unsigned short *)(temp_v8 + 0xc) & 4) != 0) && ((*param_3 & 4) == 0)) {
           temp_v19[0x13] = temp_v19[0x13] * temp_v12;
@@ -291,7 +291,7 @@ LAB_0047cf80:
         }
         if (((*(unsigned short *)(temp_v8 + 0xc) & 2) != 0) && ((*param_3 & 8) == 0)) {
           temp_v2 = 1;
-          FUN_001677c0();
+          efctSetSpeed();
         }
         if (((*(unsigned short *)(temp_v8 + 0xc) & 4) != 0) && ((*param_3 & 4) == 0)) {
           temp_v19[0x13] = temp_v19[0x13] * temp_v12;
@@ -357,7 +357,7 @@ LAB_0047cf80:
           temp_v14 = (float)param_3[0xc];
           temp_v1 = 1;
         }
-        temp_v4 = FUN_0032cee8();
+        temp_v4 = asdSoundGetOption0();
         if (temp_v4 != 0) {
           temp_v5 = *param_3 & 0x400000;
           if ((*param_3 & 0x800000) != 0) {
@@ -379,9 +379,9 @@ LAB_0047cf80:
             temp_v12 = (float)VectorSignedToFloat(0x100 - temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v12 = temp_v12 * temp_v13;
           }
-          FUN_001879d0(DAT_0059dbb4);
+          FUN_001879d0(g_renderCtx);
           temp_v15 = temp_v12;
-          temp_v4 = FUN_0036be90();
+          temp_v4 = asdSoundGetOption1();
           if (temp_v4 != 0) {
             temp_v12 = (float)(int)temp_v15;
           }
@@ -401,17 +401,17 @@ LAB_0047cf80:
           temp_v11 = (float)VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
           param_3[1] = (int)(temp_v11 + temp_v15);
         }
-        FUN_0016c4b8(DAT_0059dbb4,0);
+        FUN_0016c4b8(g_renderCtx,0);
         VectorUnsignedToFloat(param_3[6],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorUnsignedToFloat(param_3[5],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(param_3[2],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_00167618(&DAT_00630724,&DAT_00630734,&DAT_00630744,&DAT_00630754);
         if (temp_v1) {
-          FUN_002a1c8c();
+          renderCtxCallB();
         }
         if (temp_v2) {
-          FUN_001677c0();
+          efctSetSpeed();
         }
         if (temp_v3) {
           temp_v17 = temp_v19[0xc];
@@ -447,7 +447,7 @@ LAB_0047cf80:
 LAB_0047d190:
     FUN_0019b770(param_2,param_3,temp_v28,0);
     if (temp_v2) {
-      FUN_001677c0();
+      efctSetSpeed();
     }
     if (temp_v3) {
       temp_v18 = temp_v19[0xc];

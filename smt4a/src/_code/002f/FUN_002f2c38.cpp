@@ -1,33 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f2c38` (_code @ 0x2f2c38, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the register offset 134 for the two id loads is shared (mov r1, r0) where retail materialises it twice (movs r1, #134); the pool pad also differs in disassembly only. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_005949d8; /* 0x5949d8 */
+typedef struct Config {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 strict;
+} Config;
 
-extern int FUN_002eb6ae(int, unsigned int);
-extern unsigned int FUN_002f34ac(int, int);
+typedef struct Globals {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ Config *config;
+} Globals;
 
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x66];
+    /* 0x66 */ u8 kind;
+    /* 0x67 */ u8 unk67[0x1F];
+    /* 0x86 */ u16 id;
+    /* 0x88 */ u8 unk88[0x54];
+    /* 0xDC */ u8 data[4];
+} Entry;
 
-unsigned int FUN_002f2c38(int param_1,int param_2)
+extern Globals DAT_005949d8;
 
+int FUN_002eb6ae(Entry *entry, u32 flags);
+u32 FUN_002f34ac(void *a, void *b);
+
+/* Compares two entries: they must share kind and id; in strict mode both must pass FUN_002eb6ae(flags 0x200), else FUN_002f34ac decides on their data. */
+u32 FUN_002f2c38(Entry *a, Entry *b)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if ((*(char *)(param_1 + 0x66) != *(char *)(param_2 + 0x66)) ||
-     (*(short *)(param_1 + 0x86) != *(short *)(param_2 + 0x86))) {
-    return 0;
-  }
-  if (*(char *)((*(int *)((unsigned char *)&DAT_005949d8 + 0x2c)) + 4) == '\x01') {
-    temp_v0 = FUN_002eb6ae(param_1,0x200);
-    if ((temp_v0 != 0) && (temp_v0 = FUN_002eb6ae(param_2,0x200), temp_v0 != 0)) {
-      return 1;
+    if (a->kind != b->kind || a->id != b->id) {
+        return 0;
     }
-  }
-  temp_v1 = FUN_002f34ac(param_1 + 0xdc,param_2 + 0xdc);
-  return temp_v1;
+    if (DAT_005949d8.config->strict == 1) {
+        if (FUN_002eb6ae(a, 0x200) != 0 && FUN_002eb6ae(b, 0x200) != 0) {
+            return 1;
+        }
+    }
+    return FUN_002f34ac(a->data, b->data);
 }
 
 } /* extern "C" */

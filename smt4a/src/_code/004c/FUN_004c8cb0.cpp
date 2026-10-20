@@ -19,7 +19,7 @@ extern unsigned int DAT_0057390c; /* 0x57390c */
 extern unsigned int DAT_00573910; /* 0x573910 */
 extern unsigned int DAT_00573914; /* 0x573914 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00200a68. */
 /* Supplied declaration required: FUN_003eaf20. */
 
@@ -33,7 +33,7 @@ unsigned int FUN_004c8cb0(unsigned int param_1,int param_2,unsigned int param_3)
   unsigned int temp_v2;
   unsigned char temp_v3;
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   if (((DAT_00573908 & *(unsigned int *)(temp_v0 + 0x45a0)) == 0 &&
        (DAT_0057390c & *(unsigned int *)(temp_v0 + 0x45a4)) == 0) &&
      ((*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00573914) == 0 &&

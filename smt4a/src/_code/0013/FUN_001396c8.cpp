@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001400ac(void);
 int FUN_00146898(void);
-int FUN_001468a8(unsigned int *, int);
+int addressBlockAllocate(unsigned int *, int);
 int FUN_00146910(int);
 int FUN_00146ac0(void);
 int FUN_00146b14(int);
@@ -14,7 +14,7 @@ int FUN_00146bf4(int, unsigned int);
 int FUN_00146c28(void);
 int FUN_00159110(unsigned int *, unsigned int, unsigned int, int);
 int FUN_00188b60(unsigned int *);
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 int FUN_002e6dd4(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -54,7 +54,7 @@ extern unsigned int DAT_006404fc; /* 0x6404fc */
 
 /* Supplied declaration required: FUN_001400ac. */
 /* Supplied declaration required: FUN_00146898. */
-/* Supplied declaration required: FUN_001468a8. */
+/* Supplied declaration required: addressBlockAllocate. */
 /* Supplied declaration required: FUN_00146910. */
 extern int FUN_00146ab0(void);
 /* Supplied declaration required: FUN_00146ac0. */
@@ -63,7 +63,7 @@ extern int FUN_00146ab0(void);
 /* Supplied declaration required: FUN_00146c28. */
 /* Supplied declaration required: FUN_00159110. */
 /* Supplied declaration required: FUN_00188b60. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
 extern void nn_init_InitializeAllocator(unsigned int);
 
@@ -87,7 +87,7 @@ void FUN_001396c8(void)
   FUN_00146c28();
   nn_init_InitializeAllocator(0x100000);
   FUN_001400ac();
-  FUN_002e6354(&DAT_00640414,0x104);
+  sysMemClear(&DAT_00640414,0x104);
   DAT_00640414 = 0;
   DAT_00640418 = 0;
   DAT_0064041c = 0;
@@ -117,7 +117,7 @@ void FUN_001396c8(void)
   DAT_0064049c = &DAT_00558414;
   DAT_005b4070 = &DAT_00640414;
   temp_v2 = FUN_00146898();
-  FUN_001468a8(DAT_005b4070,temp_v2 - 0x200000);
+  addressBlockAllocate(DAT_005b4070,temp_v2 - 0x200000);
   puVar1 = DAT_005b4070;
   DAT_005b4070[5] = DAT_005b4070[2];
   puVar1[6] = puVar1[3];

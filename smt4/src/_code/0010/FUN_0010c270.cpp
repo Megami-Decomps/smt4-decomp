@@ -5,19 +5,19 @@
 extern "C" {
 
 int FUN_002bd430(void);
-int FUN_002c415c(...);
+int asdMemFree(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_004e3154; /* 0x4e3154 */
+extern int g_asdSoundStatus; /* 0x4e3154 */
 extern int DAT_004e3158; /* 0x4e3158 */
 extern unsigned char DAT_004e315c; /* 0x4e315c */
 
 /* Supplied declaration required: FUN_002bd430. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -33,20 +33,20 @@ void FUN_0010c270(int param_1)
     return;
   }
   nn_os_CriticalSection_Enter((unsigned int)&DAT_004e315c);
-  for (temp_v0 = DAT_004e3154; temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x70)) {
+  for (temp_v0 = g_asdSoundStatus; temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x70)) {
     if (temp_v0 == param_1) {
-      temp_v0 = DAT_004e3154;
-      if (DAT_004e3154 != 0) goto LAB_0010c2ac;
+      temp_v0 = g_asdSoundStatus;
+      if (g_asdSoundStatus != 0) goto LAB_0010c2ac;
       break;
     }
   }
   if (*(int *)(param_1 + 0x6c) != 0) {
-    FUN_002c415c();
+    asdMemFree();
   }
   if (*(int *)(param_1 + 0x38) != 0) {
     FUN_002bd430();
   }
-  FUN_002c415c(param_1);
+  asdMemFree(param_1);
   nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);
   return;
   while (temp_v0 = *(int *)(temp_v0 + 0x70), temp_v0 != 0) {
@@ -61,12 +61,12 @@ LAB_0010c2ac:
         }
       }
       else {
-        DAT_004e3154 = *(int *)(param_1 + 0x70);
-        if (DAT_004e3154 != 0) {
-          *(unsigned int *)(DAT_004e3154 + 0x74) = 0;
+        g_asdSoundStatus = *(int *)(param_1 + 0x70);
+        if (g_asdSoundStatus != 0) {
+          *(unsigned int *)(g_asdSoundStatus + 0x74) = 0;
         }
         else {
-          DAT_004e3154 = 0;
+          g_asdSoundStatus = 0;
         }
       }
       break;
@@ -74,12 +74,12 @@ LAB_0010c2ac:
   }
   DAT_004e3158 = DAT_004e3158 - 1;
   if (*(int *)(param_1 + 0x6c) != 0) {
-    FUN_002c415c();
+    asdMemFree();
   }
   if (*(int *)(param_1 + 0x38) != 0) {
     FUN_002bd430();
   }
-  FUN_002c415c(param_1);
+  asdMemFree(param_1);
   nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);
   return;
 }

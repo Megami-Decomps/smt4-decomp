@@ -4,20 +4,20 @@
 
 extern "C" {
 
-int FUN_00141280(unsigned int, int, int);
-int FUN_00141338(unsigned int);
+int asdSoundObjectRegister(unsigned int, int, int);
+int asdSoundObjectFadeOut(unsigned int);
 int FUN_001419ac(unsigned int, unsigned int);
 int FUN_0014375c(void);
 int FUN_001517b4(int, int);
 int FUN_00152bf8(unsigned int);
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_002e6dd0(char *, int);
 
 extern unsigned char DAT_0061978c; /* 0x61978c */
 extern signed char DAT_00619972; /* 0x619972 */
 
-/* Supplied declaration required: FUN_00141280. */
-/* Supplied declaration required: FUN_00141338. */
+/* Supplied declaration required: asdSoundObjectRegister. */
+/* Supplied declaration required: asdSoundObjectFadeOut. */
 /* Supplied declaration required: FUN_001419ac. */
 /* Supplied declaration required: FUN_0014375c. */
 /* Supplied declaration required: FUN_001517b4. */
@@ -25,8 +25,8 @@ extern signed char DAT_00619972; /* 0x619972 */
 extern int FUN_00162ea4(void);
 extern int FUN_00163fd4(unsigned int);
 extern int FUN_001681a4(unsigned int);
-extern int FUN_00180008(unsigned int);
-/* Supplied declaration required: FUN_0019a5a0. */
+extern int jyoucyuGetTableEntry(unsigned int);
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002e6dd0. */
 
 
@@ -44,7 +44,7 @@ void FUN_0013af10(void)
   char *pcVar8;
   unsigned int temp_v5;
   
-  temp_v0 = FUN_00180008(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 != 0) {
     return;
   }
@@ -60,10 +60,10 @@ LAB_0013aff0:
         *(unsigned int *)(pcVar8 + 0x48) = temp_v1;
         FUN_0014375c();
         if (*(int *)(pcVar8 + 0x50) != 3) {
-          FUN_00141280(*(unsigned int *)(pcVar8 + 0x48),pcVar8[0x75],0);
+          asdSoundObjectRegister(*(unsigned int *)(pcVar8 + 0x48),pcVar8[0x75],0);
         }
         else {
-          FUN_00141280(*(unsigned int *)(pcVar8 + 0x48),(unsigned char)pcVar8[0x75] >> 1,0);
+          asdSoundObjectRegister(*(unsigned int *)(pcVar8 + 0x48),(unsigned char)pcVar8[0x75] >> 1,0);
         }
         temp_v4 = (*(unsigned int *)(pcVar8 + 0x68) & 0xfffffffe) | 2;
         goto LAB_0013b178;
@@ -116,7 +116,7 @@ LAB_0013aff0:
         pcVar8[0x71] = '\0';
         pcVar8[0x72] = '\0';
         pcVar8[0x73] = '\0';
-        FUN_00141338(*(unsigned int *)(pcVar8 + 0x48));
+        asdSoundObjectFadeOut(*(unsigned int *)(pcVar8 + 0x48));
         *(unsigned int *)(pcVar8 + 0x68) = (*(unsigned int *)(pcVar8 + 0x68) & 0xfffffff9) | 8;
       }
       else {
@@ -139,7 +139,7 @@ LAB_0013b178:
         temp_v3 = '\0';
       }
       if (*(int *)(pcVar8 + 0x44) != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
       }
       pcVar8[0x44] = '\0';
       pcVar8[0x45] = '\0';
@@ -172,7 +172,7 @@ LAB_0013afc4:
     if ((int)temp_v4 >= 4) goto LAB_0013aff0;
   }
   if (*(int *)(pcVar8 + 0x44) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
   }
   pcVar8[0x44] = '\0';
   pcVar8[0x45] = '\0';

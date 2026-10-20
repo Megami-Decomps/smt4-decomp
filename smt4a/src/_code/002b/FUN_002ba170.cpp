@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b5cb4(void);
 
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 #ifndef ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 #define ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 /* Storage views; not a recovered source structure. */
@@ -51,7 +51,7 @@ void FUN_002ba170(void)
         temp_v0 = *(char *)(temp_v4 + 0xe0);
       }
       if (temp_v8 && temp_v0 != '\0') {
-        temp_v10 = *(unsigned int *)(DAT_00581288 + 0x1c);
+        temp_v10 = *(unsigned int *)(g_lmapScene + 0x1c);
         FUN_002b5cb4();
         *(unsigned int *)(temp_v4 + 0xe8) = temp_v10;
         *(unsigned int *)(temp_v4 + 0xec) = 999;

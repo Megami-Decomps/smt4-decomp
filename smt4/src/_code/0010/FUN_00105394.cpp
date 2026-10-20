@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_0010b580. */
 extern int FUN_002c2950(void);
@@ -31,9 +31,9 @@ void FUN_00105394(void)
   int *piVar8;
   
   temp_v2 = FUN_002c2950();
-  (*(int *)((unsigned char *)&DAT_0049f91c + 0x220)) = (*(int *)((unsigned char *)&DAT_0049f91c + 0x220)) + 1;
-  if ((*(int *)((unsigned char *)&DAT_0049f91c + 0x220)) >= 0x709) {
-    (*(int *)((unsigned char *)&DAT_0049f91c + 0x220)) = 0;
+  (*(int *)((unsigned char *)&g_gameState + 0x220)) = (*(int *)((unsigned char *)&g_gameState + 0x220)) + 1;
+  if ((*(int *)((unsigned char *)&g_gameState + 0x220)) >= 0x709) {
+    (*(int *)((unsigned char *)&g_gameState + 0x220)) = 0;
     temp_v3 = 0x40;
     pcVar4 = (char *)(temp_v2 + 0xbd8);
     do {

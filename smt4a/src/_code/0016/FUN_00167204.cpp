@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00588124; /* 0x588124 */
+extern int g_npcRoom; /* 0x588124 */
 
 
 int FUN_00167204(int param_1)
@@ -12,8 +12,8 @@ int FUN_00167204(int param_1)
 {
   int temp_v0;
   
-  if (DAT_00588124 != 0) {
-    temp_v0 = (int)*(short *)(DAT_00588124 + param_1 * 0x10 + 100);
+  if (g_npcRoom != 0) {
+    temp_v0 = (int)*(short *)(g_npcRoom + param_1 * 0x10 + 100);
   }
   else {
     temp_v0 = 0;

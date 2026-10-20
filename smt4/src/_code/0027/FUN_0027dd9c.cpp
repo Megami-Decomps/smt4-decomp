@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00152bec(void);
-int FUN_002a775c(int);
+int asdMdlManagerDestroy(int);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_00152bec. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 
 
 void FUN_0027dd9c(int param_1)
@@ -36,7 +36,7 @@ void FUN_0027dd9c(int param_1)
       if (-1 < *(int *)(*(int *)(*piVar2 + 8) + 0xc)) {
         FUN_00152bec();
       }
-      FUN_002a775c(*piVar2);
+      asdMdlManagerDestroy(*piVar2);
       *piVar2 = 0;
     }
     temp_v1 = temp_v1 + 1;

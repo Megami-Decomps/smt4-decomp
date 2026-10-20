@@ -19,7 +19,7 @@ typedef struct {
 extern unsigned char DAT_0057f588; /* 0x57f588 */
 
 /* Supplied declaration required: FUN_0021bdac. */
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 extern unsigned int FUN_002ba85c(void);
 /* Supplied declaration required: FUN_002c76c0. */
 /* Supplied declaration required: FUN_002deb84. */
@@ -50,7 +50,7 @@ void scrComm_Message_ShowFromQuestStateWaitLock(void)
     *(unsigned char *)(temp_v0 + 0x31) = 1;
   }
   temp_v3 = FUN_002ba85c();
-  temp_v4 = FUN_00236038(0);
+  temp_v4 = scrGetArg(0);
   temp_v5 = FUN_002deb84();
   FUN_0021bdac(temp_v3,temp_v4,temp_v5,temp_v1,1,0);
   return;

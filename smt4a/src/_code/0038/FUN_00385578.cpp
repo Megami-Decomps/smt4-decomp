@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern int *DAT_00581288; /* 0x581288 */
+extern int *g_lmapScene; /* 0x581288 */
 
 extern int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002d1f40. */
@@ -37,7 +37,7 @@ void FUN_00385578(void)
   unsigned int uStack_18;
   unsigned int uStack_14;
   
-  piVar1 = DAT_00581288;
+  piVar1 = g_lmapScene;
   temp_v1[0] = 0x960;
   temp_v1[1] = 900;
   temp_v1[2] = 0x960;
@@ -50,19 +50,19 @@ void FUN_00385578(void)
   temp_v2[3] = 0x5a;
   uStack_18 = 0x5a;
   uStack_14 = 0x5a;
-  temp_v0 = DAT_00581288[0xa2];
+  temp_v0 = g_lmapScene[0xa2];
   if (temp_v0 != 0) {
     if (temp_v0 != 1) {
       if (temp_v0 != 2) {
         if (temp_v0 == 3) {
-          if ((*DAT_00581288 != 1) && (*DAT_00581288 != 3)) {
+          if ((*g_lmapScene != 1) && (*g_lmapScene != 3)) {
             FUN_0030354c();
-            temp_v0 = DAT_00581288[0xa3];
+            temp_v0 = g_lmapScene[0xa3];
           }
           else {
-            temp_v0 = DAT_00581288[0xa1];
-            piVar2 = DAT_00581288 + 0xa0;
-            DAT_00581288[0xa1] = temp_v0 + 1;
+            temp_v0 = g_lmapScene[0xa1];
+            piVar2 = g_lmapScene + 0xa0;
+            g_lmapScene[0xa1] = temp_v0 + 1;
             if (temp_v0 + 1 < *piVar2) {
               return;
             }
@@ -71,22 +71,22 @@ void FUN_00385578(void)
           if (temp_v0 != 0) {
             FUN_003d2158(temp_v0,0);
           }
-          piVar1 = DAT_00581288;
-          DAT_00581288[0xa1] = 0;
+          piVar1 = g_lmapScene;
+          g_lmapScene[0xa1] = 0;
           piVar1[0xa2] = 0;
           return;
         }
       }
-      else if (((*DAT_00581288 == 1) || (*DAT_00581288 == 3)) &&
-              (temp_v0 = DAT_00581288[0xa1], piVar1 = DAT_00581288 + 0xa0,
-              DAT_00581288[0xa1] = temp_v0 + 1, *piVar1 <= temp_v0 + 1)) {
+      else if (((*g_lmapScene == 1) || (*g_lmapScene == 3)) &&
+              (temp_v0 = g_lmapScene[0xa1], piVar1 = g_lmapScene + 0xa0,
+              g_lmapScene[0xa1] = temp_v0 + 1, *piVar1 <= temp_v0 + 1)) {
         temp_v0 = FUN_00184964(0,5);
         temp_v0 = temp_v2[temp_v0];
-        DAT_00581288[0xa0] = temp_v0;
+        g_lmapScene[0xa0] = temp_v0;
         FUN_002d1f40(temp_v0,0x28,10);
         temp_v0 = FUN_003d2150(0x100009e);
-        piVar1 = DAT_00581288;
-        DAT_00581288[0xa1] = 0;
+        piVar1 = g_lmapScene;
+        g_lmapScene[0xa1] = 0;
         piVar1[0xa2] = 3;
         piVar1[0xa3] = temp_v0;
         return;
@@ -94,9 +94,9 @@ void FUN_00385578(void)
     }
     else {
       temp_v0 = FUN_00184964(0,5);
-      piVar1 = DAT_00581288;
+      piVar1 = g_lmapScene;
       temp_v0 = temp_v1[temp_v0];
-      DAT_00581288[0xa2] = 2;
+      g_lmapScene[0xa2] = 2;
       piVar1[0xa0] = temp_v0;
       piVar1[0xa1] = 0;
     }

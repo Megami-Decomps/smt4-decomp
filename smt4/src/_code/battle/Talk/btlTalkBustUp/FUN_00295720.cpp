@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002c312c(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int memClear(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -31,13 +31,13 @@ extern unsigned char DAT_003ff838; /* 0x3ff838 */
 extern unsigned char DAT_003ff898; /* 0x3ff898 */
 extern unsigned char DAT_003ff9dc; /* 0x3ff9dc */
 extern unsigned char DAT_003ffa6c; /* 0x3ffa6c */
-extern int DAT_00434210; /* 0x434210 */
+extern int g_btlTalkBustUp; /* 0x434210 */
 
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -48,11 +48,11 @@ void FUN_00295720(void)
   int temp_v0;
   unsigned char *puVar2;
   
-  if (DAT_00434210 == 0) {
+  if (g_btlTalkBustUp == 0) {
     temp_v0 = 0x100;
-    FUN_002c498c(0x100,0x100,0,0x30c,1);
-    DAT_00434210 = temp_v0;
-    FUN_002c4938();
+    asdMemAlloc(0x100,0x100,0,0x30c,1);
+    g_btlTalkBustUp = temp_v0;
+    memClear();
     *(unsigned int *)(temp_v0 + 0x2f8) = 0xffffffff;
     *(unsigned int *)(temp_v0 + 0x308) = 0;
     *(unsigned int *)(temp_v0 + 0x2fc) = 0x3f800000;
@@ -61,10 +61,10 @@ void FUN_00295720(void)
     *(unsigned int *)(temp_v0 + 0x2e8) = 0;
     *(unsigned int *)(temp_v0 + 0x2ec) = 0;
     puVar2 = &LAB_002958b4;
-    FUN_002c5788(&LAB_002958b4,2,0,0,FUN_00206528,0,0);
+    asdProcessCreateSimple(&LAB_002958b4,2,0,0,FUN_00206528,0,0);
     *(unsigned char **)(temp_v0 + 0x2e4) = puVar2;
-    FUN_002c4a08(&LAB_002958c4,0x7d,0,0,FUN_0022535c,0,0,puVar2);
-    FUN_002c4a08(&LAB_002958d8,0xdb,0,0,FUN_0022535c,0,0,*(unsigned int *)(temp_v0 + 0x2e4));
+    taskCreateDraw(&LAB_002958c4,0x7d,0,0,FUN_0022535c,0,0,puVar2);
+    taskCreateDraw(&LAB_002958d8,0xdb,0,0,FUN_0022535c,0,0,*(unsigned int *)(temp_v0 + 0x2e4));
     Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(temp_v0);
     FUN_002c312c(temp_v0,&DAT_003ff838,0x60,&DAT_003ff898,0x144,&DAT_003ff9dc,0x90,0,0,&DAT_003ffa6c,
                  0x9bc);

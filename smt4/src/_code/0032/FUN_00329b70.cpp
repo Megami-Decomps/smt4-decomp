@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00241d58(...);
-int FUN_002886e0(void);
+int statusCameraDestroy(void);
 int FUN_0028bf2c(void);
 int FUN_00294e18(...);
 int FUN_00294f64(...);
@@ -15,16 +15,16 @@ int FUN_00258170(...);
 int FUN_00258408(...);
 int FUN_00258618(...);
 int FUN_00282bfc(...);
-int FUN_002954dc(...);
+int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
 int FUN_00295660(...);
 int FUN_0029c3b0(...);
 int FUN_0029c3c0(...);
-int FUN_002a7218(...);
+int scrScriptProcessDestroy(...);
 int FUN_002bd06c(...);
 int FUN_002bee58(...);
 int FUN_002bf694(...);
-int FUN_002c415c(...);
+int asdMemFree(...);
 
 int FUN_00152bec(...);
 int FUN_00210194(...);
@@ -32,13 +32,13 @@ int FUN_00263588(...);
 int FUN_00293a04(unsigned int, int);
 int FUN_00295d28(void);
 int FUN_00296f4c(...);
-int FUN_0029bb3c(...);
+int asdMdlManagerCreateLoaded(...);
 int FUN_0029c2cc(...);
 int FUN_002a03a0(int, int, int);
 int FUN_002a03d8(...);
 int FUN_002a0428(...);
 int FUN_002a043c(...);
-int FUN_002a775c(...);
+int asdMdlManagerDestroy(...);
 int FUN_002b2b5c(void);
 int FUN_002b8838(...);
 int FUN_002b8ee0(int, int);
@@ -46,7 +46,7 @@ int FUN_002bf810(...);
 int FUN_002bf818(...);
 int FUN_002c1658(...);
 int VectorSignedToFloat(...);
-int aeabi_idivmod(unsigned int, double);
+int __aeabi_idivmod(unsigned int, double);
 
 typedef int romwright_code(...);
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -84,19 +84,19 @@ extern int FUN_0019e0c0(unsigned int);
 extern int FUN_002636e4(unsigned int);
 extern unsigned int FUN_00263c1c(unsigned char *);
 /* Supplied declaration required: FUN_00282bfc. */
-/* Supplied declaration required: FUN_002886e0. */
+/* Supplied declaration required: statusCameraDestroy. */
 /* Supplied declaration required: FUN_0028bf2c. */
 /* Supplied declaration required: FUN_00293a04. */
 /* Supplied declaration required: FUN_00294e18. */
 /* Supplied declaration required: FUN_00294f64. */
-/* Supplied declaration required: FUN_002954dc. */
+/* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
 extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_002958f8. */
 /* Supplied declaration required: FUN_00295d28. */
 /* Supplied declaration required: FUN_00296f4c. */
-/* Supplied declaration required: FUN_0029bb3c. */
+/* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: FUN_0029c3b0. */
 /* Supplied declaration required: FUN_0029c3c0. */
@@ -104,8 +104,8 @@ extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a043c. */
-/* Supplied declaration required: FUN_002a7218. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: FUN_002b2b5c. */
 /* Supplied declaration required: FUN_002b8838. */
 extern int FUN_002b89a4(unsigned int);
@@ -118,8 +118,8 @@ extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bf818. */
 /* Supplied declaration required: FUN_002c1658. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 unsigned int FUN_00329b70(void)
@@ -153,7 +153,7 @@ unsigned int FUN_00329b70(void)
   *(int *)(temp_v2 + 0x7c) = *(int *)(temp_v2 + 0x7c) + 2;
   FUN_00293a04(*(unsigned int *)(temp_v2 + 0x80),0);
   temp_v11 = (float)(int)in_s0;
-  aeabi_idivmod(*(unsigned int *)(temp_v2 + 0x7c),temp_v11);
+  __aeabi_idivmod(*(unsigned int *)(temp_v2 + 0x7c),temp_v11);
   *(unsigned int *)(temp_v2 + 0x7c) = temp_v8;
   switch(*(unsigned int *)(temp_v2 + 4)) {
   case 1:
@@ -269,14 +269,14 @@ unsigned int FUN_00329b70(void)
       if (*(short *)(temp_v2 + 0x1e) == 2) {
         if (*(char *)(temp_v2 + 0x20) != '\0') {
           puVar7 = &LAB_0032a054;
-          FUN_0029bb3c(&LAB_0032a054,7);
+          asdMdlManagerCreateLoaded(&LAB_0032a054,7);
           *(unsigned char **)(temp_v2 + 0x88) = puVar7;
           temp_v6 = FUN_00263c1c(&LAB_0032a074);
           *(unsigned int *)(temp_v2 + 0x90) = temp_v6;
         }
         else {
           puVar7 = &LAB_0032a098;
-          FUN_0029bb3c(&LAB_0032a098,7);
+          asdMdlManagerCreateLoaded(&LAB_0032a098,7);
           *(unsigned char **)(temp_v2 + 0x88) = puVar7;
           temp_v6 = FUN_00263c1c(&LAB_0032a0b4);
           *(unsigned int *)(temp_v2 + 0x90) = temp_v6;
@@ -284,14 +284,14 @@ unsigned int FUN_00329b70(void)
       }
       if (*(short *)(temp_v2 + 0x1e) == 3) {
         puVar7 = &LAB_0032a0d4;
-        FUN_0029bb3c(&LAB_0032a0d4,7);
+        asdMdlManagerCreateLoaded(&LAB_0032a0d4,7);
         *(unsigned char **)(temp_v2 + 0x88) = puVar7;
         temp_v6 = FUN_00263c1c(&LAB_0032a0f0);
         *(unsigned int *)(temp_v2 + 0x90) = temp_v6;
       }
       if (*(short *)(temp_v2 + 0x1e) == 4) {
         puVar7 = &LAB_0032a110;
-        FUN_0029bb3c(&LAB_0032a110,7);
+        asdMdlManagerCreateLoaded(&LAB_0032a110,7);
         *(unsigned char **)(temp_v2 + 0x88) = puVar7;
         temp_v6 = FUN_00263c1c(&LAB_0032a12c);
         *(unsigned int *)(temp_v2 + 0x90) = temp_v6;
@@ -302,7 +302,7 @@ unsigned int FUN_00329b70(void)
       FUN_002a0428(*(unsigned int *)(temp_v2 + 0x88),1);
       FUN_002a043c(*(unsigned int *)(temp_v2 + 0x90),0);
       FUN_00152bec(*(unsigned int *)(temp_v2 + 0x84));
-      FUN_002a775c(*(unsigned int *)(temp_v2 + 0x84));
+      asdMdlManagerDestroy(*(unsigned int *)(temp_v2 + 0x84));
       *(unsigned int *)(temp_v2 + 0x84) = 0;
       temp_v7 = DAT_0043dd90;
       if (*(char *)(temp_v2 + 0x20) != '\0') {
@@ -498,7 +498,7 @@ LAB_0032a1a4:
     FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x2a0),0x10);
     FUN_002b8838(0x58);
     FUN_002954f4(*(unsigned short *)(temp_v2 + 0xc),1);
-    FUN_002954dc(1);
+    btlTalkBustUpSetUnk2F4(1);
     temp_v7 = DAT_0043dd90;
     *(unsigned int *)(DAT_0043dd90 + 4) = 6;
     *(unsigned int *)(temp_v7 + 8) = 0;
@@ -518,9 +518,9 @@ LAB_0032a1a4:
   case 7:
     temp_v7 = FUN_002b89a4(0);
     if ((temp_v7 != 0) && (temp_v7 = FUN_002b89a4(1), temp_v7 != 0)) {
-      FUN_002a7218(*(unsigned int *)(temp_v2 + 0x2a0));
-      FUN_002c415c(*(unsigned int *)(temp_v2 + 0x2a4));
-      FUN_002c415c(*(unsigned int *)(temp_v2 + 0x29c));
+      scrScriptProcessDestroy(*(unsigned int *)(temp_v2 + 0x2a0));
+      asdMemFree(*(unsigned int *)(temp_v2 + 0x2a4));
+      asdMemFree(*(unsigned int *)(temp_v2 + 0x29c));
       temp_v7 = 0;
       if (*(short *)(temp_v2 + 0x1e) != 0) {
         do {
@@ -536,12 +536,12 @@ LAB_0032a1a4:
       *(unsigned int *)(temp_v2 + 0x80) = 0;
       FUN_0028bf2c();
       FUN_00152bec(*(unsigned int *)(temp_v2 + 0x88));
-      FUN_002a775c(*(unsigned int *)(temp_v2 + 0x88));
+      asdMdlManagerDestroy(*(unsigned int *)(temp_v2 + 0x88));
       *(unsigned int *)(temp_v2 + 0x88) = 0;
       FUN_0029c2cc(*(unsigned int *)(temp_v2 + 0x90),0);
       FUN_00263588(*(unsigned int *)(temp_v2 + 0x90));
       *(unsigned int *)(temp_v2 + 0x90) = 0;
-      FUN_002886e0();
+      statusCameraDestroy();
       FUN_00294e18(1);
       temp_v7 = DAT_0043dd90;
       *(unsigned int *)(DAT_0043dd90 + 4) = 8;

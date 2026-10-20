@@ -11,13 +11,13 @@ int FUN_002b1fc4(...);
 int FUN_002b2144(...);
 int FUN_002b90f8(...);
 int FUN_002bf538(void);
-int FUN_002bfe28(...);
+int mtx44Copy(...);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX44MultAsm(...);
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 extern unsigned int DAT_00476638; /* 0x476638 */
 extern float DAT_004efd9c; /* 0x4efd9c */
 extern float DAT_004efda0; /* 0x4efda0 */
@@ -48,9 +48,9 @@ extern int FUN_002a6d50(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b1fc4. */
 /* Supplied declaration required: FUN_002b2144. */
 /* Supplied declaration required: FUN_002b90f8. */
-extern unsigned int FUN_002b93b0(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableCallFileB(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf538. */
-/* Supplied declaration required: FUN_002bfe28. */
+/* Supplied declaration required: mtx44Copy. */
 extern int FUN_002bfefc(unsigned int *);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
@@ -125,7 +125,7 @@ void FUN_003881b0(unsigned int param_1,unsigned int param_2,unsigned int param_3
           DAT_004efdd4 = temp_v10;
           DAT_004efdd8 = temp_v7;
         }
-        FUN_002bfe28(temp_v11,&DAT_004efd9c);
+        mtx44Copy(temp_v11,&DAT_004efd9c);
         if (((DAT_00476638 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476638), temp_v0 != 0)) {
           DAT_004efd9c = temp_v7;
           DAT_004efda0 = temp_v10;
@@ -144,7 +144,7 @@ void FUN_003881b0(unsigned int param_1,unsigned int param_2,unsigned int param_3
           DAT_004efdd4 = temp_v10;
           DAT_004efdd8 = temp_v7;
         }
-        FUN_002bfe28(afStack_138,&DAT_004efd9c);
+        mtx44Copy(afStack_138,&DAT_004efd9c);
         temp_v9 = CONCAT44(temp_v7,temp_v7);
         FUN_002bf538();
         temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)((float)param_4[0xc] == temp_v10) << 0x1e);
@@ -309,7 +309,7 @@ void FUN_003881b0(unsigned int param_1,unsigned int param_2,unsigned int param_3
             nn_math_ARMv6_MTX44MultAsm(temp_v11,temp_v11,afStack_138);
           }
         }
-        FUN_002b90f8(DAT_0044ea00,temp_v11);
+        FUN_002b90f8(g_titleScene,temp_v11);
         if ((int)param_4[2] < 0) {
           temp_v0 = FUN_002a6d50(param_1,0x15,param_3);
           if (temp_v0 != 0) {
@@ -318,7 +318,7 @@ void FUN_003881b0(unsigned int param_1,unsigned int param_2,unsigned int param_3
           if (temp_v0 == 0) {
             puVar4 = (unsigned int *)0x0;
           }
-          temp_v2 = FUN_002b93b0(*param_4,param_3);
+          temp_v2 = asdTMTexTableCallFileB(*param_4,param_3);
           FUN_002a6d1c(temp_v12,temp_v3,0,0,(int)*(short *)(param_4 + 0xe));
           FUN_002a8ac4(**(unsigned int **)(*(int *)*puVar4 + 4),temp_v12,temp_v2);
         }
@@ -340,8 +340,8 @@ void FUN_003881b0(unsigned int param_1,unsigned int param_2,unsigned int param_3
         uStack_80 = temp_v8;
         uStack_7c = temp_v8;
         FUN_002b1fc4(&uStack_b8,&uStack_a8,&uStack_98,&uStack_88,0,1);
-        FUN_002c198c(DAT_0044ea00);
-        FUN_002c18e4(DAT_0044ea00);
+        FUN_002c198c(g_titleScene);
+        FUN_002c18e4(g_titleScene);
       }
     }
     return;

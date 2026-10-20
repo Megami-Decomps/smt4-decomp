@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+int scrSetResult(int);
 int SBORROW4(int, int);
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_00296cc8(unsigned int);
+/* Supplied declaration required: scrSetResult. */
+extern int scrGetArg(unsigned int);
 
 
 unsigned int FUN_002dc010(void)
@@ -22,9 +22,9 @@ unsigned int FUN_002dc010(void)
   int temp_v3;
   unsigned char temp_v4;
   
-  temp_v1 = FUN_00296cc8(0);
-  temp_v2 = FUN_00296cc8(1);
-  temp_v3 = FUN_00296cc8(2);
+  temp_v1 = scrGetArg(0);
+  temp_v2 = scrGetArg(1);
+  temp_v3 = scrGetArg(2);
   temp_v4 = SBORROW4(temp_v2,temp_v1);
   temp_v0 = temp_v2 - temp_v1;
   if (temp_v2 <= temp_v1) {
@@ -32,7 +32,7 @@ unsigned int FUN_002dc010(void)
     temp_v0 = temp_v1 - temp_v3;
     temp_v2 = temp_v3;
   }
-  FUN_0028dcb0(temp_v2 == temp_v1 || temp_v0 < 0 != temp_v4);
+  scrSetResult(temp_v2 == temp_v1 || temp_v0 < 0 != temp_v4);
   return 1;
 }
 

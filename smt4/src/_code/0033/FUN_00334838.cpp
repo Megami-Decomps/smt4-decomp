@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023fb84(int);
-int FUN_00293f98(int, int);
+int aocHandleButtons(int, int);
 unsigned int * FUN_00334228(unsigned int *, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0023fb84. */
 extern int FUN_0027d9e8(int, unsigned int);
-/* Supplied declaration required: FUN_00293f98. */
+/* Supplied declaration required: aocHandleButtons. */
 extern int FUN_00294fe0(int);
 extern int FUN_0029505c(int);
 /* Supplied declaration required: FUN_00334228. */
@@ -46,7 +46,7 @@ unsigned int * FUN_00334838(unsigned int *param_1,int param_2)
         }
         else {
           *puVar5 = *puVar5 | 1;
-          FUN_00293f98((int)temp_v1,7);
+          aocHandleButtons((int)temp_v1,7);
         }
       }
       if ((*puVar5 & 2) == 0) {

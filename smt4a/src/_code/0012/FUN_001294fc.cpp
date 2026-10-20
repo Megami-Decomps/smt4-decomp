@@ -10,7 +10,7 @@ int FUN_004325f4(...);
 extern int FUN_0030cbf0(...); /* 0x30cbf0 */
 extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
-extern unsigned int FUN_002e6dac(int);
+extern unsigned int rt_malloc(int);
 extern unsigned int *FUN_002f5010(unsigned int);
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_004325f4. */
@@ -31,7 +31,7 @@ void FUN_001294fc(int param_1)
     *puVar1 = 0xd8;
     FUN_002f5020(puVar1 + 2,FUN_0030cbf0,0xd8,0xffffffff);
   }
-  temp_v0 = FUN_002e6dac((*(unsigned int *)((unsigned char *)&DAT_005949d8 + 0x28)) * 0xd8);
+  temp_v0 = rt_malloc((*(unsigned int *)((unsigned char *)&DAT_005949d8 + 0x28)) * 0xd8);
   *(unsigned int *)(param_1 + 8) = temp_v0;
   for (temp_v2 = 0; temp_v2 < (*(unsigned int *)((unsigned char *)&DAT_005949d8 + 0x28)); temp_v2 = temp_v2 + 1) {
     temp_v1 = *(int *)(param_1 + 8) + temp_v2 * 0xd8;

@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_002990a0(void);
-int FUN_00299138(void);
+int guestWinRequestOpen(void);
 int FUN_00299bc4(...);
 int FUN_00299d84(...);
 int FUN_00299da0(...);
 int FUN_0029ca58(void);
 int FUN_0029e648(...);
-int FUN_002a775c(...);
-int FUN_002bd8e8(...);
+int asdMdlManagerDestroy(...);
+int timerStart(...);
 
 int FUN_00299174(...);
 int FUN_002992bc(...);
@@ -54,7 +54,7 @@ extern unsigned char LAB_00188a40; /* 0x188a40 */
 extern int DAT_0043da90; /* 0x43da90 */
 
 /* Supplied declaration required: FUN_002990a0. */
-/* Supplied declaration required: FUN_00299138. */
+/* Supplied declaration required: guestWinRequestOpen. */
 /* Supplied declaration required: FUN_00299174. */
 extern unsigned int FUN_00299218(int, unsigned int);
 /* Supplied declaration required: FUN_002992bc. */
@@ -70,7 +70,7 @@ extern unsigned int FUN_0029963c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00299da0. */
 extern int FUN_00299fc0(void);
 /* Supplied declaration required: FUN_0029a014. */
-extern unsigned int FUN_0029a034(unsigned char *, unsigned int);
+extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0029a084. */
 /* Supplied declaration required: FUN_0029a0cc. */
 /* Supplied declaration required: FUN_0029a0e8. */
@@ -93,13 +93,13 @@ extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: FUN_0029f5d8. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 extern int FUN_002adee0(int);
 extern short *FUN_002b63ac(void);
 /* Supplied declaration required: FUN_002b8838. */
 extern unsigned char FUN_002b898c(void);
 /* Supplied declaration required: FUN_002bc01c. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
 extern int FUN_002c09d0(unsigned int);
@@ -238,7 +238,7 @@ void FUN_0018854c(unsigned int param_1)
       temp_v2 = 0;
     }
     FUN_0029a084(temp_v2,temp_v8);
-    temp_v2 = FUN_0029a034(&LAB_00188a40,7);
+    temp_v2 = asdMdlManagerCreateSecondList(&LAB_00188a40,7);
     *(unsigned int *)(temp_v5 + 0x25c0) = temp_v2;
     *(int *)(temp_v5 + 0x1c) = *(int *)(temp_v5 + 0x1c) + 1;
     return;
@@ -711,7 +711,7 @@ joined_r0x00188f3c:
       FUN_0029ca58();
       FUN_0029a128(0);
       FUN_00299900(0);
-      FUN_002bd8e8(temp_v5 + 0x6d4,3,0);
+      timerStart(temp_v5 + 0x6d4,3,0);
       *(unsigned int *)(temp_v5 + 0x20) = 6;
       temp_v9 = DAT_0043da90;
       puVar11 = (unsigned int *)(DAT_0043da90 + 0x18);
@@ -719,10 +719,10 @@ joined_r0x00188f3c:
       *puVar11 = 5;
       *(unsigned int *)(temp_v9 + 0x1c) = 0;
       *(unsigned int *)(temp_v9 + 0x14) = 0;
-      FUN_002a775c(*(unsigned int *)(temp_v5 + 0x25c0));
+      asdMdlManagerDestroy(*(unsigned int *)(temp_v5 + 0x25c0));
       *(unsigned int *)(temp_v5 + 0x25c0) = 0;
       FUN_00299174(temp_v11,0);
-      FUN_00299138();
+      guestWinRequestOpen();
       FUN_0029e648(1,0);
       FUN_002990a0();
       return;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0010bb84(void);
-int FUN_002c5300(int, int, int, int);
+int asdMemoryAlloc(int, int, int, int);
 int nw_gfx_SceneBuilder_CreateObject(int *, unsigned int, unsigned int);
 int nw_gfx_res_ResGraphicsFile_Setup(int *, unsigned int, int);
 int nw_gfx_res_ResModel_Setup(int [4], unsigned int, int);
@@ -43,11 +43,11 @@ extern unsigned int *DAT_00472958; /* 0x472958 */
 extern unsigned int *DAT_004dae64; /* 0x4dae64 */
 
 /* Supplied declaration required: FUN_0010bb84. */
-extern unsigned int FUN_002c2ff0(void);
-extern unsigned int FUN_002c300c(void);
+extern unsigned int asdMemoryGetDefaultAllocator(void);
+extern unsigned int asdMemoryGetAllocatorA(void);
 extern unsigned int FUN_002c30c4(unsigned char *);
 extern int FUN_002c3124(unsigned char *, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Setup. */
 /* Supplied declaration required: nw_gfx_res_ResModel_Setup. */
@@ -110,10 +110,10 @@ void FUN_001049ac(void)
   else {
     temp_v15[0] = 0;
   }
-  temp_v0 = FUN_002c300c();
+  temp_v0 = asdMemoryGetAllocatorA();
   nw_gfx_res_ResModel_Setup(temp_v15,temp_v0,DAT_00464b5c);
-  temp_v0 = FUN_002c2ff0();
-  temp_v2 = FUN_002c300c();
+  temp_v0 = asdMemoryGetDefaultAllocator();
+  temp_v2 = asdMemoryGetAllocatorA();
   temp_v7 = 1;
   temp_v8 = 8;
   temp_v9 = 4;
@@ -146,7 +146,7 @@ LAB_00104aec:
   DAT_00464b44 = (int *)0x0;
 LAB_00104b28:
   temp_v5 = FUN_002c3124(&LAB_00104d80,0,1);
-  temp_v0 = FUN_002c2ff0();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   nw_gfx_res_ResGraphicsFile_Setup(&temp_v5,temp_v0,temp_v5);
   temp_v1 = *(int *)(temp_v5 + 0x40);
   if (temp_v1 != 0) {
@@ -202,7 +202,7 @@ LAB_00104bf0:
   temp_v0 = *(unsigned int *)DAT_00464b44[0x59];
   puVar5 = (unsigned int *)0x10000;
   temp_v4 = 1;
-  FUN_002c5300(0x10000,0x100,0,0x18);
+  asdMemoryAlloc(0x10000,0x100,0,0x18);
   if (puVar5 != (unsigned int *)0x0) {
     temp_v2 = *DAT_004dae64;
     puVar5[2] = 2;
@@ -215,7 +215,7 @@ LAB_00104bf0:
   puVar6 = (unsigned int *)0x10000;
   temp_v4 = 1;
   DAT_00472950 = puVar5;
-  FUN_002c5300(0x10000,0x100,0,0xc);
+  asdMemoryAlloc(0x10000,0x100,0,0xc);
   puVar5 = DAT_00472950;
   if (puVar6 != (unsigned int *)0x0) {
     *puVar6 = (unsigned int)&DAT_00420910;
@@ -225,7 +225,7 @@ LAB_00104bf0:
   puVar5 = (unsigned int *)0x10000;
   temp_v4 = 1;
   DAT_00472954 = puVar6;
-  FUN_002c5300(0x10000,0x100,0,0x10);
+  asdMemoryAlloc(0x10000,0x100,0,0x10);
   temp_v0 = DAT_00464bbc;
   if (puVar5 != (unsigned int *)0x0) {
     temp_v2 = *DAT_004dae64;

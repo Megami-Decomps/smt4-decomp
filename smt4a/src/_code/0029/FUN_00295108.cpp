@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0018719c(...);
-int FUN_00192748(unsigned int);
-int FUN_00192798(void);
+int dataTableGetCount(unsigned int);
+int dataTableGetEntries(void);
 int FUN_002d8c90(int);
 int FUN_003fd63c(...);
 
@@ -15,15 +15,15 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern int *DAT_0058104c; /* 0x58104c */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int *g_popupState; /* 0x58104c */
+extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1994; /* 0x5f1994 */
 
 extern int FUN_0014bef4(unsigned int);
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018719c. */
-/* Supplied declaration required: FUN_00192748. */
-/* Supplied declaration required: FUN_00192798. */
+/* Supplied declaration required: dataTableGetCount. */
+/* Supplied declaration required: dataTableGetEntries. */
 extern int FUN_002d8b58(unsigned int);
 /* Supplied declaration required: FUN_002d8c90. */
 /* Supplied declaration required: FUN_003fd63c. */
@@ -42,11 +42,11 @@ void FUN_00295108(int param_1)
   int *piVar7;
   
   temp_v0 = 0;
-  if (*DAT_0058104c != 0) {
+  if (*g_popupState != 0) {
     if (param_1 != 0) {
       return;
     }
-    if (*DAT_0058104c == 0x12) {
+    if (*g_popupState == 0x12) {
       return;
     }
     temp_v1 = FUN_0014bef4(99);
@@ -102,15 +102,15 @@ LAB_002952c0:
     DAT_005f1994 = 0;
   }
 LAB_002952dc:
-  temp_v2 = FUN_00187180(0x43,0);
-  FUN_00192798();
-  temp_v1 = FUN_00192748(temp_v2);
+  temp_v2 = dataTableGet(0x43,0);
+  dataTableGetEntries();
+  temp_v1 = dataTableGetCount(temp_v2);
   temp_v5 = 0;
   if ((int)temp_v5 < temp_v1) {
     do {
-      temp_v2 = FUN_00187180(0x43,0);
-      temp_v3 = FUN_00192798();
-      temp_v4 = FUN_00192748(temp_v2);
+      temp_v2 = dataTableGet(0x43,0);
+      temp_v3 = dataTableGetEntries();
+      temp_v4 = dataTableGetCount(temp_v2);
       if (temp_v5 >= temp_v4) {
         piVar7 = (int *)0x0;
       }
@@ -119,19 +119,19 @@ LAB_002952dc:
       }
       if ((((piVar7[1] == 0x13) && (((short)piVar7[2] == 0 || (temp_v3 = FUN_0018719c(), temp_v3 != 0)))
            ) && ((*(short *)((int)piVar7 + 10) == 0 || (temp_v3 = FUN_0018719c(), temp_v3 == 0)))) &&
-         ((((*piVar7 != 0xad || (DAT_005f15fc == 0x1c)) ||
-           (DAT_005f15fc == 0x1d || DAT_005f15fc == 0x1e)) ||
-          (DAT_005f15fc == 0x1f || DAT_005f15fc == 0x20)))) {
+         ((((*piVar7 != 0xad || (g_gameState == 0x1c)) ||
+           (g_gameState == 0x1d || g_gameState == 0x1e)) ||
+          (g_gameState == 0x1f || g_gameState == 0x20)))) {
         if ((param_1 == 0 && !temp_v0) &&
            (temp_v3 = FUN_0014bef4(99), temp_v3 + 1 <= (int)(short)piVar7[3])) {
           return;
         }
         if (DAT_005f1994 == 0) {
           DAT_005f1994 = 1;
-          DAT_0058104c[6] = *piVar7;
+          g_popupState[6] = *piVar7;
           temp_v1 = FUN_002d8b58(0x13);
-          piVar7 = DAT_0058104c;
-          DAT_0058104c[5] = temp_v1;
+          piVar7 = g_popupState;
+          g_popupState[5] = temp_v1;
           *piVar7 = 0x12;
           piVar7[1] = 0;
           return;

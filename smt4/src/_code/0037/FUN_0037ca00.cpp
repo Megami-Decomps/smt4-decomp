@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a4b0c(int, int);
-int aeabi_uidivmod(...);
+int __aeabi_uidivmod(...);
 int nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam(unsigned short *, unsigned int, unsigned int, unsigned char *);
 int rt_memcpy(int, unsigned char *, int);
 
@@ -32,7 +32,7 @@ extern unsigned char DAT_004eb380; /* 0x4eb380 */
 
 /* Supplied declaration required: FUN_002a4b0c. */
 extern int FUN_0037bbe4(int, unsigned short *, unsigned short *, unsigned int, unsigned int);
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 extern int nw_snd_internal_Util_GetByteBySample(unsigned int, unsigned char);
 /* Supplied declaration required: nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam. */
 /* Supplied declaration required: rt_memcpy. */
@@ -122,7 +122,7 @@ unsigned int FUN_0037ca00(int param_1,int param_2,int param_3,unsigned int param
     temp_v0 = *(int *)(param_1 + 0x54) + temp_v5;
     *(int *)(param_1 + 0x54) = temp_v0;
     temp_v6 = *(int *)(param_1 + 0x18);
-    temp_v0 = aeabi_uidivmod(temp_v0,*(unsigned int *)(temp_v6 + 0x14));
+    temp_v0 = __aeabi_uidivmod(temp_v0,*(unsigned int *)(temp_v6 + 0x14));
     *(int *)(param_1 + 0x34) = temp_v0;
     (**(romwright_code **)(**(int **)(param_1 + 0x14) + 0x40))
               (*(int **)(param_1 + 0x14),
@@ -146,7 +146,7 @@ unsigned int FUN_0037ca00(int param_1,int param_2,int param_3,unsigned int param
       temp_v7 = *(int *)(temp_v6 + 0x20);
       temp_v9 = *(int *)(temp_v6 + 0x1c);
     }
-    aeabi_uidivmod(*(unsigned int *)(param_1 + 0x54),*(unsigned int *)(temp_v6 + 0x14));
+    __aeabi_uidivmod(*(unsigned int *)(param_1 + 0x54),*(unsigned int *)(temp_v6 + 0x14));
     temp_v2 = temp_v3;
     if (*(char *)(param_1 + 0xa90) == '\x03') {
       temp_v2 = (unsigned int)(((unsigned long long)temp_v3 * 0x49249249 + 0x49249249) >> 0x22) * 0xe;
@@ -325,7 +325,7 @@ LAB_0037cf18:
 LAB_0037cea8:
     temp_v17 = temp_v17 + 1;
     temp_v6 = *(int *)(param_1 + 0x18);
-    temp_v0 = aeabi_uidivmod(*(unsigned int *)(param_1 + 0x54),*(unsigned int *)(temp_v6 + 0x14));
+    temp_v0 = __aeabi_uidivmod(*(unsigned int *)(param_1 + 0x54),*(unsigned int *)(temp_v6 + 0x14));
     *(int *)(param_1 + 0x34) = temp_v0;
     (**(romwright_code **)(**(int **)(param_1 + 0x14) + 0x40))
               (*(int **)(param_1 + 0x14),

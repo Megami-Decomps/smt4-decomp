@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_00162790(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_001835b4(...);
 int FUN_00185e84(...);
@@ -29,7 +29,7 @@ extern int DAT_00588fe8; /* 0x588fe8 */
 /* Supplied declaration required: FUN_00100388. */
 extern unsigned int FUN_0014bd84(short);
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -55,7 +55,7 @@ void FUN_002f67c4(int param_1,int param_2,int param_3,int param_4)
   temp_v2 = DAT_00588fe8;
   temp_v5 = 0xffffffff;
   temp_v0 = *(short *)(DAT_00588fe8 + 0x24ac + param_1 * 8);
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_001835b4(2,0x12,0x556,param_2,param_3,param_4);
   FUN_001835b4(2,0x12,0x557,param_2,param_3,param_4);
   FUN_001835b4(2,0x12,0x558,param_2,param_3,param_4);
@@ -97,7 +97,7 @@ void FUN_002f67c4(int param_1,int param_2,int param_3,int param_4)
     temp_v2 = FUN_001834a4(0x12,0x565);
     FUN_00180310(1,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,1,4,param_4 + 7,
                  &LAB_002f6b94,temp_v1);
-    FUN_001677c0();
+    efctSetSpeed();
     return;
   }
   temp_v2 = FUN_001834a4(0x12,0x561);

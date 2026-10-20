@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00250d74(float *);
 int FUN_002b7bca(...);
-int FUN_002c6650(void);
+int asdOperatorNewC(void);
 int SBORROW4(unsigned int, unsigned int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -20,11 +20,11 @@ extern unsigned char DAT_00439ad0; /* 0x439ad0 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00250d74. */
 extern int FUN_00293230(int);
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: FUN_002c6650. */
+/* Supplied declaration required: asdOperatorNewC. */
 
 
 void FUN_0023e52c(int *param_1,int param_2,int param_3,int param_4,int param_5)
@@ -185,7 +185,7 @@ LAB_0023e7e8:
       pfVar5 = (float *)(temp_v6 << 2);
       temp_v9 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = 40.0f / temp_v9;
-      FUN_002c6650();
+      asdOperatorNewC();
       pfVar6 = pfVar5 + -1;
       temp_v11 = temp_v10;
       if ((temp_v6 & 1) != 0) {
@@ -209,7 +209,7 @@ LAB_0023e858:
         temp_v5 = 1;
         if (temp_v6 - 2 >= 2) {
           do {
-            temp_v2 = FUN_0023eae0(((temp_v6 - temp_v5) - 1) & 0xffff);
+            temp_v2 = randRange(((temp_v6 - temp_v5) - 1) & 0xffff);
             temp_v2 = temp_v2 + temp_v5;
             pfVar6 = pfVar5 + temp_v5;
             temp_v11 = pfVar5[temp_v2];

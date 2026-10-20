@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002592b8(unsigned int);
 int FUN_00296ae8(unsigned int, int, unsigned int, int, int, int, unsigned int);
-int FUN_002bd8e8(int, int, int);
+int timerStart(int, int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern int DAT_0043e128; /* 0x43e128 */
 
 /* Supplied declaration required: FUN_002592b8. */
 /* Supplied declaration required: FUN_00296ae8. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 extern int FUN_002beda4(int);
 
 
@@ -43,7 +43,7 @@ void FUN_0027e7b4(int param_1,unsigned int param_2)
     else {
       *(unsigned char *)(temp_v0 + 0x22) = 0;
     }
-    FUN_002bd8e8(temp_v0 + 0xd0,2,0);
+    timerStart(temp_v0 + 0xd0,2,0);
     temp_v1 = FUN_002beda4(temp_v0 + 0xd0);
     *(int *)(temp_v0 + 0x18) = temp_v1;
     *(int *)(temp_v0 + 0x1c) = temp_v1 + *(int *)(temp_v0 + 0x14) + 0x2a;

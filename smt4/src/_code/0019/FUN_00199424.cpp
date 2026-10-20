@@ -10,7 +10,7 @@ int FUN_0029e8b8(...);
 int FUN_0029eb5c(...);
 int FUN_0029f848(...);
 int FUN_002b7bca(...);
-int FUN_002c4938(...);
+int memClear(...);
 int FUN_003bf1e4(void);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -28,7 +28,7 @@ extern int FUN_0023dcb8(void);
 extern int FUN_0028e9a0(unsigned int);
 extern int FUN_0028e9d4(unsigned int);
 /* Supplied declaration required: FUN_0028e9ec. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_0029e8b8. */
 /* Supplied declaration required: FUN_0029eb5c. */
 /* Supplied declaration required: FUN_0029f848. */
@@ -37,7 +37,7 @@ extern int FUN_002a8764(void);
 extern unsigned int FUN_002b63ac(void);
 /* Supplied declaration required: FUN_002b7bca. */
 extern int FUN_002c09d0(unsigned int);
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 extern int FUN_00394d90(unsigned int);
 /* Supplied declaration required: FUN_003bf1e4. */
 
@@ -61,7 +61,7 @@ void FUN_00199424(int param_1)
   *(int *)(param_1 + 0x306c) = temp_v1;
   FUN_0028e9ec(param_1);
   FUN_001b03ec(param_1);
-  temp_v1 = FUN_002939f4();
+  temp_v1 = btlGetMainState();
   temp_v2 = *(int *)(param_1 + 0x305c);
   temp_v5 = param_1 + 0x3218;
   if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x40) != 0) {
@@ -152,17 +152,17 @@ void FUN_00199424(int param_1)
     }
     FUN_0029f848(temp_v5,temp_v4,6,1,0,1);
   }
-  temp_v1 = FUN_002939f4();
+  temp_v1 = btlGetMainState();
   temp_v2 = param_1 + 0x327c;
   if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x40) != 0) {
-    temp_v1 = FUN_002939f4();
+    temp_v1 = btlGetMainState();
     FUN_0029f848(temp_v2,(int)*(short *)(temp_v1 + 0xb4),6,1,1,1);
     FUN_0029eb5c(temp_v2,DAT_00435dec);
   }
   else {
     FUN_0029f848(temp_v2,1,6,1,0,1);
   }
-  FUN_002c4938(param_1 + 0x3480,0x78);
+  memClear(param_1 + 0x3480,0x78);
   temp_v1 = 0;
   temp_v3 = 1;
   do {

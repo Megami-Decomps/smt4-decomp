@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001f4908(...);
 int FUN_0022677c(...);
-int FUN_00236038(...);
+int scrGetArg(...);
 int SBORROW4(int, int);
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
@@ -15,7 +15,7 @@ extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: FUN_001f4908. */
 extern int FUN_00203d74(void);
 /* Supplied declaration required: FUN_0022677c. */
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: scrGetArg. */
 extern int FUN_002deb84(void);
 extern int FUN_003309c8(void);
 
@@ -28,7 +28,7 @@ unsigned int FUN_00314d1c(void)
   int temp_v1;
   unsigned char temp_v2;
   
-  temp_v0 = FUN_00236038();
+  temp_v0 = scrGetArg();
   temp_v1 = FUN_002deb84();
   if (temp_v1 == 0) {
     temp_v1 = FUN_00203d74();
@@ -40,7 +40,7 @@ unsigned int FUN_00314d1c(void)
     if ((temp_v2 && temp_v0 != 4) && temp_v1 < 0 == (temp_v2 && SBORROW4(temp_v0,4))) {
       temp_v0 = 4;
     }
-    temp_v1 = FUN_00236038(0);
+    temp_v1 = scrGetArg(0);
     if (temp_v1 == 0) {
       temp_v1 = FUN_003309c8();
       if (temp_v1 == 0) {
@@ -77,7 +77,7 @@ unsigned int FUN_00314d1c(void)
   }
   temp_v0 = FUN_00162ea4();
   if (temp_v0 != 0) {
-    temp_v0 = FUN_00236038(0);
+    temp_v0 = scrGetArg(0);
     if (temp_v0 != 0) {
       if (temp_v0 == 1) {
         temp_v0 = FUN_003309c8();

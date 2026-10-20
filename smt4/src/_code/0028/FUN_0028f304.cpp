@@ -21,7 +21,7 @@ struct fn_0028f304_arg0 {
     ushort field_0x1ae; /* +0x1ae */
 };
 
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_gameState; /* 0x49f91c */
 
 extern int FUN_00240a6c(void);
 extern unsigned char *FUN_00240cd4(fn_0028f304_arg0 *);
@@ -58,7 +58,7 @@ unsigned char FUN_0028f304(fn_0028f304_arg0 *param_1)
   if (param_1 >= (fn_0028f304_arg0 *)0x15e) {
     FUN_002b63c0();
     if (((param_1 != (fn_0028f304_arg0 *)0x0) && (param_1->field_0x6 == 9)) &&
-       (DAT_0049f91c == 0x18)) {
+       (g_gameState == 0x18)) {
       return 0;
     }
   }

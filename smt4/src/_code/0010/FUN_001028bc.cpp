@@ -10,11 +10,11 @@ int FUN_0010b3c0(...);
 int FUN_0010e5e0(...);
 int FUN_0010ec70(...);
 int FUN_002c49f8(...);
-int FUN_002c4a08(...);
+int taskCreateDraw(...);
 int FUN_002c4a34(...);
-int FUN_002c4c2c(...);
+int asdTMTexTableLoadSprites(...);
 int FUN_002c58c8(...);
-int FUN_002c5914(...);
+int asdTMTexTableLoadTmx(...);
 
 typedef int romwright_code(...);
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -40,11 +40,11 @@ extern romwright_code *pcRam00464d74; /* 0x464d74 */
 /* Supplied declaration required: FUN_0010e5e0. */
 /* Supplied declaration required: FUN_0010ec70. */
 /* Supplied declaration required: FUN_002c49f8. */
-/* Supplied declaration required: FUN_002c4a08. */
+/* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_002c4a34. */
-/* Supplied declaration required: FUN_002c4c2c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c58c8. */
-/* Supplied declaration required: FUN_002c5914. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 
 
 void FUN_001028bc(void)
@@ -54,8 +54,8 @@ void FUN_001028bc(void)
   unsigned int *puVar1;
   int temp_v0;
   
-  FUN_002c5914(5,0);
-  FUN_002c4c2c(0xe);
+  asdTMTexTableLoadTmx(5,0);
+  asdTMTexTableLoadSprites(0xe);
   FUN_002c58c8(5,0);
   temp_v0 = 0;
   do {
@@ -74,7 +74,7 @@ void FUN_001028bc(void)
   FUN_0010aff8();
   FUN_0010a7bc();
   FUN_0010b3c0();
-  FUN_002c4a08(&LAB_001029fc,0xea,0,0,FUN_0010a9c8,0,DAT_0043e18c,*DAT_0043e18c);
+  taskCreateDraw(&LAB_001029fc,0xea,0,0,FUN_0010a9c8,0,DAT_0043e18c,*DAT_0043e18c);
   puVar1 = DAT_0043e18c;
   *(unsigned char *)(DAT_0043e18c + 0x284) = 1;
   *(unsigned char *)(DAT_0043e190 + 0x284) = 0;

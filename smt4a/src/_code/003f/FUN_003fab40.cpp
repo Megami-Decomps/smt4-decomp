@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_002e3328(void);
 int FUN_003f2f1c(void);
 int FUN_00414a24(void);
@@ -22,7 +22,7 @@ struct fn_003fab40_arg0 {
 };
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002e3328. */
 /* Supplied declaration required: FUN_003f2f1c. */
 /* Supplied declaration required: FUN_00414a24. */
@@ -55,7 +55,7 @@ int FUN_003fab40(fn_003fab40_arg0 *param_1)
     param_1->field_0x44 = 0;
   }
   if (param_1->field_0x48 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1->field_0x48 = 0;
   }
   return (int)param_1;

@@ -8,7 +8,7 @@ int FUN_003b5714(void);
 int VectorSignedToFloat(int, int);
 
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_003798f0(void);
@@ -26,9 +26,9 @@ void FUN_0033f188(void)
   
   FUN_003b5714();
   temp_v1 = FUN_003798f0();
-  temp_v0 = DAT_00581288;
+  temp_v0 = g_lmapScene;
   temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(DAT_00581288 + 0x1c) = temp_v2;
+  *(unsigned int *)(g_lmapScene + 0x1c) = temp_v2;
   temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(temp_v0 + 0x20) = temp_v2;
   temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);

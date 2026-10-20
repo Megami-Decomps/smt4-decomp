@@ -8,7 +8,7 @@ int FUN_0023ea20(int, int);
 int FUN_002d582c(int);
 
 /* Supplied declaration required: FUN_0023ea20. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002d582c. */
 
 
@@ -41,7 +41,7 @@ void FUN_0023c24c(int param_1,int param_2,int param_3)
         *puVar2 = *puVar2 & 0xfffffffd;
         *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 1;
         *(unsigned int *)(temp_v0 + 0x1b4) = *(unsigned int *)(temp_v0 + 0x1b4) | 8;
-        temp_v1 = FUN_002939f4();
+        temp_v1 = btlGetMainState();
         temp_v0 = *(int *)(temp_v1 + 0x1e98) + *(int *)(temp_v0 + 0x1ac) * 0x114;
         temp_v2 = *(unsigned int *)(temp_v0 + 0x50);
         if ((temp_v2 & 0x10) != 0) {

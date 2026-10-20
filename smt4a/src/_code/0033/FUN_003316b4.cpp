@@ -4,9 +4,9 @@
 
 extern "C" {
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern char *FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern char *dataTableGetEntries(void);
 
 
 char * FUN_003316b4(int param_1)
@@ -17,9 +17,9 @@ char * FUN_003316b4(int param_1)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00187180(0x25,0);
-  pcVar2 = (char *)FUN_00192798();
-  temp_v1 = FUN_00192748(temp_v0);
+  temp_v0 = dataTableGet(0x25,0);
+  pcVar2 = (char *)dataTableGetEntries();
+  temp_v1 = dataTableGetCount(temp_v0);
   temp_v2 = 0;
   if (temp_v2 < temp_v1) {
     do {

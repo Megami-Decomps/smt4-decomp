@@ -1,29 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011de1c` (_code @ 0x11de1c, 0x1a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ecac4(int);
+typedef struct Object {
+    /* 0x000 */ void *vtbl;
+    /* 0x004 */ u8 unk004[0xF4];
+    /* 0x0F8 */ u8 member[4];    /* sub-object destroyed by strDestroy */
+} Object;
 
-extern unsigned char DAT_0055aa64; /* 0x55aa64 */
+extern u8 DAT_0055aa64;
 
-extern int FUN_002ec9f4(unsigned int *);
-/* Supplied declaration required: FUN_002ecac4. */
-extern int FUN_002fb028(int);
+int strDestroy(void *member);
+int FUN_002ecac4(int ptr);
+int FUN_002fb028(int ptr);
 
-
-void FUN_0011de1c(unsigned int *param_1)
-
+/* Destructor body: installs the vtable, then destroys the embedded sub-object and the bases. */
+void FUN_0011de1c(Object *self)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  *param_1 = (unsigned int)&DAT_0055aa64;
-  temp_v0 = FUN_002ec9f4(param_1 + 0x3e);
-  temp_v0 = FUN_002fb028(temp_v0 - 0x78);
-  FUN_002ecac4(temp_v0 - 0x80);
-  return;
+    int ptr;
+
+    self->vtbl = &DAT_0055aa64;
+    ptr = strDestroy(self->member);
+    ptr = FUN_002fb028(ptr - 0x78);
+    FUN_002ecac4(ptr - 0x80);
 }
 
 } /* extern "C" */

@@ -6,18 +6,18 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_00164b5c(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_0016c410(...);
 int FUN_0016c560(...);
 int FUN_0018291c(...);
 int FUN_001835b4(...);
-int FUN_00187d04(...);
-int FUN_0019a0e8(...);
+int camSetMatrixA(...);
+int mtx44Copy(...);
 int FUN_0019a0fc(...);
 int FUN_001a1c28(...);
 int VectorSignedToFloat(...);
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_005c4c30; /* 0x5c4c30 */
 extern float DAT_0064c084; /* 0x64c084 */
 extern float DAT_0064c088; /* 0x64c088 */
@@ -43,13 +43,13 @@ extern float DAT_0064c0c0; /* 0x64c0c0 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_0018291c. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00187d04. */
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: camSetMatrixA. */
+/* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: FUN_001a1c28. */
 extern int FUN_002eba64(unsigned int *);
@@ -121,7 +121,7 @@ void FUN_001634b4(unsigned int *param_1)
           DAT_0064c0bc = temp_v10;
           DAT_0064c0c0 = temp_v7;
         }
-        FUN_0019a0e8(temp_v11,&DAT_0064c084);
+        mtx44Copy(temp_v11,&DAT_0064c084);
         if (((DAT_005c4c30 & 1) == 0) && (temp_v1 = FUN_002eba64(&DAT_005c4c30), temp_v1 != 0)) {
           DAT_0064c084 = temp_v7;
           DAT_0064c088 = temp_v10;
@@ -140,9 +140,9 @@ void FUN_001634b4(unsigned int *param_1)
           DAT_0064c0bc = temp_v10;
           DAT_0064c0c0 = temp_v7;
         }
-        FUN_0019a0e8(afStack_f0,&DAT_0064c084);
+        mtx44Copy(afStack_f0,&DAT_0064c084);
         temp_v9 = CONCAT44(temp_v7,temp_v7);
-        FUN_001677c0();
+        efctSetSpeed();
         temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)((float)param_1[0xc] == temp_v10) << 0x1e);
         temp_v0 = romwright_subpiece_4_1_0(temp_v5 >> 0x1e,0);
         temp_v6 = (float)param_1[10];
@@ -305,14 +305,14 @@ void FUN_001634b4(unsigned int *param_1)
             FUN_0019a0fc(temp_v11,temp_v11,afStack_f0);
           }
         }
-        FUN_00187d04(DAT_0059dbb4,temp_v11);
+        camSetMatrixA(g_renderCtx,temp_v11);
         if ((int)param_1[2] >= 0) {
           FUN_00164b5c(temp_v3,*param_1,param_1[2],0);
         }
         else {
           FUN_001835b4(temp_v3,*param_1,param_1[1],0,0,(int)*(short *)(param_1 + 0xe));
         }
-        FUN_001677c0();
+        efctSetSpeed();
         uStack_70 = temp_v8;
         uStack_6c = temp_v8;
         uStack_68 = temp_v8;
@@ -330,8 +330,8 @@ void FUN_001634b4(unsigned int *param_1)
         uStack_38 = temp_v8;
         uStack_34 = temp_v8;
         FUN_0018291c(&uStack_70,&uStack_60,&uStack_50,&uStack_40,0,1);
-        FUN_0016c560(DAT_0059dbb4);
-        FUN_0016c410(DAT_0059dbb4);
+        FUN_0016c560(g_renderCtx);
+        FUN_0016c410(g_renderCtx);
       }
     }
     return;

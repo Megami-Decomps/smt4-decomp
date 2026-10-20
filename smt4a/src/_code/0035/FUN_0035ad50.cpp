@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(void);
 int FUN_00239234(unsigned int, unsigned short *);
-int FUN_002e6354(unsigned short *, int);
+int sysMemClear(unsigned short *, int);
 int FUN_004bcd90(unsigned short *);
 int rt_memcpy_w(unsigned short *, unsigned char [24], int);
 
@@ -34,7 +34,7 @@ typedef struct {
 extern unsigned short FUN_0017760c(unsigned short *);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00239234. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -69,7 +69,7 @@ void FUN_0035ad50(unsigned int param_1,unsigned short *param_2)
   
   FUN_00184310();
   FUN_00239234(param_1,&temp_v1);
-  FUN_002e6354(param_2,300);
+  sysMemClear(param_2,300);
   param_2[0x31] = (short)param_1;
   param_2[0x32] = temp_v1;
   *param_2 = temp_v13;

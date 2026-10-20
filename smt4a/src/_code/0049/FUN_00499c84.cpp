@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_001695a0(...);
-int FUN_0019a5a0(...);
-int FUN_0019c364(...);
+int asdMemFree(...);
+int scrScriptProcessDestroy(...);
 int FUN_0019e2dc(...);
 int FUN_0019ea64(...);
 int FUN_00497144(...);
@@ -28,8 +28,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_001695a0. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019e2dc. */
 /* Supplied declaration required: FUN_0019ea64. */
 /* Supplied declaration required: FUN_00497144. */
@@ -44,15 +44,15 @@ void FUN_00499c84(fn_00499c84_arg0 *param_1)
     param_1->field_0xb3c = (void *)0x0;
   }
   if (param_1->field_0x39c != 0) {
-    FUN_0019c364();
+    scrScriptProcessDestroy();
     param_1->field_0x39c = 0;
   }
   if (param_1->field_0x394 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1->field_0x394 = 0;
   }
   if (param_1->field_0x398 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1->field_0x398 = 0;
   }
   FUN_0019e2dc();

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c498c(int, int, int, int, int);
+int asdMemAlloc(int, int, int, int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002c498c. */
+/* Supplied declaration required: asdMemAlloc. */
 
 
 void FUN_0022699c(int param_1,unsigned short param_2,unsigned short param_3,unsigned int param_4)
@@ -21,7 +21,7 @@ void FUN_0022699c(int param_1,unsigned short param_2,unsigned short param_3,unsi
   unsigned short *puVar1;
   
   puVar1 = (unsigned short *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x68,1);
+  asdMemAlloc(0x100,0x100,0,0x68,1);
   *puVar1 = param_2;
   puVar1[1] = param_3;
   *(unsigned char *)(puVar1 + 2) = 0;

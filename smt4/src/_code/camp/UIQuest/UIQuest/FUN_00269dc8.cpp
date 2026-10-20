@@ -5,23 +5,23 @@
 extern "C" {
 
 int FUN_00189c24(...);
-int FUN_001ad9d8(...);
+int uiFadeSetVisible(...);
 int FUN_00254198(...);
 int FUN_00262210(...);
 int FUN_00295eb0(...);
 int FUN_00297060(...);
 int FUN_00297410(...);
 int FUN_002b2650(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int FUN_002beed0(...);
 int FUN_002c312c(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c4c2c(...);
-int FUN_002c5788(...);
+int memClear(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdTMTexTableLoadSprites(...);
+int asdProcessCreateSimple(...);
 int FUN_002c58c8(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
@@ -52,7 +52,7 @@ extern unsigned char DAT_00402ed8; /* 0x402ed8 */
 extern unsigned int *DAT_0043dd50; /* 0x43dd50 */
 
 /* Supplied declaration required: FUN_00189c24. */
-/* Supplied declaration required: FUN_001ad9d8. */
+/* Supplied declaration required: uiFadeSetVisible. */
 /* Supplied declaration required: FUN_00254198. */
 /* Supplied declaration required: FUN_00262210. */
 extern int FUN_002886b0(unsigned short);
@@ -63,16 +63,16 @@ extern int FUN_002886c8(unsigned short);
 extern int FUN_00298f88(unsigned short);
 extern int FUN_00298fa0(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002b2650. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002beed0. */
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c4c2c. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_002c58c8. */
 extern unsigned int FUN_002c5c04(unsigned char *);
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -91,19 +91,19 @@ void FUN_00269dc8(void)
   
   if (DAT_0043dd50 == (unsigned int *)0x0) {
     puVar2 = (unsigned int *)0x100;
-    FUN_002c498c(0x100,0x100,0,0x9fc,1);
+    asdMemAlloc(0x100,0x100,0,0x9fc,1);
     DAT_0043dd50 = puVar2;
   }
   puVar2 = DAT_0043dd50;
-  FUN_002c4938();
+  memClear();
   puVar3 = &LAB_0026a200;
-  FUN_002c5788(&LAB_0026a200,2,0,0,FUN_001956c4,0,0);
+  asdProcessCreateSimple(&LAB_0026a200,2,0,0,FUN_001956c4,0,0);
   *puVar2 = (unsigned int)puVar3;
-  FUN_002c4a08(&LAB_0026a214,0x7d,0,0,FUN_001ad9f0,0,0,puVar3);
-  FUN_002c4a08(&LAB_0026a228,0xdb,0,0,FUN_001ad9f0,0,0,*puVar2);
-  FUN_002c4a08(&LAB_0026a240,0xe6,0,0,&LAB_001ddc7c,0,0,*puVar2);
+  taskCreateDraw(&LAB_0026a214,0x7d,0,0,FUN_001ad9f0,0,0,puVar3);
+  taskCreateDraw(&LAB_0026a228,0xdb,0,0,FUN_001ad9f0,0,0,*puVar2);
+  taskCreateDraw(&LAB_0026a240,0xe6,0,0,&LAB_001ddc7c,0,0,*puVar2);
   puVar2 = DAT_0043dd50;
-  FUN_001ad9d8(0);
+  uiFadeSetVisible(0);
   temp_v1 = FUN_002c5c04(&LAB_0026a250);
   puVar2[0x16b] = temp_v1;
   temp_v1 = FUN_002c5c04(&LAB_0026a26c);
@@ -112,7 +112,7 @@ void FUN_00269dc8(void)
   puVar2[0x16d] = temp_v1;
   *(unsigned short *)((int)puVar2 + 0x982) = 0;
   *(unsigned short *)(puVar2 + 0x261) = 0;
-  FUN_002c4c2c(0x29);
+  asdTMTexTableLoadSprites(0x29);
   FUN_002c58c8(0x29,0);
   FUN_00297410(0x34);
   FUN_00189c24();
@@ -138,11 +138,11 @@ void FUN_00269dc8(void)
   FUN_002c312c(puVar2 + 5,&DAT_00402e00,0x3c,&DAT_00402e3c,0x60,&DAT_00402e9c,0x3c,0,0,&DAT_00402ed8
                ,0x214);
   FUN_002bd954(puVar2 + 0xd,0x29,0,puVar2 + 5,0xc9);
-  FUN_002bd8e8(puVar2 + 0xd,0);
+  timerStart(puVar2 + 0xd,0);
   FUN_002bd954(puVar2 + 0x30,0x29,0,puVar2 + 5,0xc9);
   FUN_002bee58(puVar2 + 0x30,0);
   FUN_002bd954(puVar2 + 0x53,0x29,0,puVar2 + 5,0xc9);
-  FUN_002bd8e8(puVar2 + 0x53,4,0);
+  timerStart(puVar2 + 0x53,4,0);
   FUN_002bd954(puVar2 + 0x76,0x29,0,puVar2 + 5,0xc9);
   FUN_002bd954(puVar2 + 0x99,0x29,0x61,puVar2 + 5,0x68);
   FUN_002bee58(puVar2 + 0x99,2);
@@ -156,10 +156,10 @@ void FUN_00269dc8(void)
   FUN_002b2650(puVar2 + 0xdf,0,0x78);
   puVar6 = puVar2 + 0x102;
   FUN_002bd954(puVar6,0x29,0x5c,puVar2 + 5,0xa1);
-  FUN_002bd8e8(puVar6,0);
+  timerStart(puVar6,0);
   FUN_00262210(puVar6,0x29,0x5a,0x5c);
   FUN_002bd954(puVar2 + 0x125,0x29,0,puVar2 + 5,0xc9);
-  FUN_002bd8e8(puVar2 + 0x125,2,0);
+  timerStart(puVar2 + 0x125,2,0);
   FUN_002bd954(puVar2 + 0x148,0x29,0,puVar2 + 5,0xc9);
   FUN_002bee58(puVar2 + 0x148,5);
   puVar2 = DAT_0043dd50;

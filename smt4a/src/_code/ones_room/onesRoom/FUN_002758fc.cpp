@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_001630d4(...);
-int FUN_001681cc(...);
+int asdProcessCreateSimple(...);
+int asdMemoryAlloc(...);
+int sysPlaySe(...);
 int FUN_0020214c(...);
 int FUN_0022677c(...);
 int FUN_00275bc8(...);
@@ -20,16 +20,16 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int FUN_00235d1c(...); /* 0x235d1c */
+extern int onesRoomTeardown(...); /* 0x235d1c */
 extern unsigned char LAB_00275a40; /* 0x275a40 */
 extern unsigned char LAB_00275a58; /* 0x275a58 */
 extern unsigned char LAB_00275a78; /* 0x275a78 */
 extern unsigned char LAB_002ba790; /* 0x2ba790 */
-extern unsigned int *DAT_00588134; /* 0x588134 */
+extern unsigned int *g_onesRoom; /* 0x588134 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_001630d4. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: asdMemoryAlloc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: FUN_00275bc8. */
@@ -48,8 +48,8 @@ void FUN_002758fc(int param_1)
   int temp_v0;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_001630d4(0x100,0x100,0,0x14,1);
-  DAT_00588134 = puVar1;
+  asdMemoryAlloc(0x100,0x100,0,0x14,1);
+  g_onesRoom = puVar1;
   *puVar1 = 0;
   puVar1[1] = 0;
   puVar1[2] = 0;
@@ -61,7 +61,7 @@ void FUN_002758fc(int param_1)
   FUN_0031a400();
   FUN_00342010();
   FUN_003b61ec();
-  FUN_001681cc(0xa4);
+  sysPlaySe(0xa4);
   puVar2 = &LAB_00275a40;
   FUN_0020214c();
   puVar1[1] = (unsigned int)puVar2;
@@ -79,8 +79,8 @@ void FUN_002758fc(int param_1)
     FUN_0022677c(1,0xff);
   }
   puVar2 = &LAB_00275a78;
-  FUN_0014e38c(&LAB_00275a78,4,0,0,FUN_00235d1c,&LAB_002ba790,DAT_00588134);
-  *DAT_00588134 = (unsigned int)puVar2;
+  asdProcessCreateSimple(&LAB_00275a78,4,0,0,onesRoomTeardown,&LAB_002ba790,g_onesRoom);
+  *g_onesRoom = (unsigned int)puVar2;
   return;
 }
 

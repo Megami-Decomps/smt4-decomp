@@ -8,12 +8,12 @@ int FUN_00145e24(int, unsigned int);
 int FUN_0016c410(int);
 int FUN_0016c560(int);
 int FUN_00182540(void);
-int FUN_00222240(void);
+int requestDispatch(void);
 int FUN_00300100(int);
 int FUN_00409718(int);
 
 typedef int romwright_code(...);
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern signed char DAT_0059dbe0; /* 0x59dbe0 */
 extern int DAT_0059dbf0; /* 0x59dbf0 */
 extern int DAT_0059dc00; /* 0x59dc00 */
@@ -25,7 +25,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_00182540. */
-/* Supplied declaration required: FUN_00222240. */
+/* Supplied declaration required: requestDispatch. */
 /* Supplied declaration required: FUN_00300100. */
 /* Supplied declaration required: FUN_00409718. */
 
@@ -41,8 +41,8 @@ void FUN_00345cd4(void)
   int temp_v4;
   int *piVar6;
   
-  temp_v0 = DAT_0059dbb4;
-  piVar6 = (int *)(DAT_0059dbb4 + 0x11f8);
+  temp_v0 = g_renderCtx;
+  piVar6 = (int *)(g_renderCtx + 0x11f8);
   temp_v2 = *piVar6;
   temp_v3 = piVar6[temp_v2 + 2];
   *piVar6 = temp_v2 + 1;
@@ -51,7 +51,7 @@ void FUN_00345cd4(void)
     (**(romwright_code **)(temp_v0 + 0x1214))();
     *(unsigned char *)(temp_v0 + 0x1210) = 0;
   }
-  temp_v0 = DAT_0059dbb4;
+  temp_v0 = g_renderCtx;
   temp_v2 = FUN_001692ac(1,0);
   piVar6 = (int *)(temp_v0 + 0x1258);
   temp_v3 = *piVar6;
@@ -62,10 +62,10 @@ void FUN_00345cd4(void)
     (**(romwright_code **)(temp_v0 + 0x1274))();
     *(unsigned char *)(temp_v0 + 0x1270) = 0;
   }
-  temp_v0 = DAT_0059dbb4;
-  temp_v3 = *(int *)(DAT_0059dbb4 + 0x12b8);
-  piVar6 = (int *)(DAT_0059dbb4 + 0x12b8);
-  temp_v2 = *(int *)(DAT_0059dbb4 + temp_v3 * 4 + 0x12c0);
+  temp_v0 = g_renderCtx;
+  temp_v3 = *(int *)(g_renderCtx + 0x12b8);
+  piVar6 = (int *)(g_renderCtx + 0x12b8);
+  temp_v2 = *(int *)(g_renderCtx + temp_v3 * 4 + 0x12c0);
   temp_v4 = piVar6[temp_v3 + 2];
   *piVar6 = temp_v3 + 1;
   piVar6[temp_v3 + 3] = temp_v2;
@@ -74,26 +74,26 @@ void FUN_00345cd4(void)
     *(unsigned char *)(temp_v0 + 0x12d0) = 0;
   }
   if (DAT_0059dbe0 != '\0') {
-    FUN_00409718(DAT_0059dbb4);
+    FUN_00409718(g_renderCtx);
   }
   else {
     temp_v1 = FUN_00152f54();
-    FUN_00145e24(DAT_0059dbb4,temp_v1);
+    FUN_00145e24(g_renderCtx,temp_v1);
   }
   FUN_00300100(1);
   if (DAT_0059dc00 != 0) {
-    FUN_00222240();
+    requestDispatch();
   }
   if (DAT_0059dbf0 != 0) {
     FUN_00182540();
   }
   if (DAT_0059dc0c != 0) {
-    FUN_00222240();
+    requestDispatch();
   }
-  FUN_0016c410(DAT_0059dbb4);
-  FUN_0016c560(DAT_0059dbb4);
-  temp_v0 = DAT_0059dbb4;
-  piVar6 = (int *)(DAT_0059dbb4 + 0x11f8);
+  FUN_0016c410(g_renderCtx);
+  FUN_0016c560(g_renderCtx);
+  temp_v0 = g_renderCtx;
+  piVar6 = (int *)(g_renderCtx + 0x11f8);
   temp_v2 = *piVar6;
   temp_v3 = piVar6[temp_v2 + 2];
   *piVar6 = temp_v2 - 1;
@@ -101,8 +101,8 @@ void FUN_00345cd4(void)
     (**(romwright_code **)(temp_v0 + 0x1214))();
     *(unsigned char *)(temp_v0 + 0x1210) = 0;
   }
-  temp_v0 = DAT_0059dbb4;
-  piVar6 = (int *)(DAT_0059dbb4 + 0x1258);
+  temp_v0 = g_renderCtx;
+  piVar6 = (int *)(g_renderCtx + 0x1258);
   temp_v2 = *piVar6;
   temp_v3 = piVar6[temp_v2 + 2];
   *piVar6 = temp_v2 - 1;
@@ -110,8 +110,8 @@ void FUN_00345cd4(void)
     (**(romwright_code **)(temp_v0 + 0x1274))();
     *(unsigned char *)(temp_v0 + 0x1270) = 0;
   }
-  temp_v0 = DAT_0059dbb4;
-  piVar6 = (int *)(DAT_0059dbb4 + 0x12b8);
+  temp_v0 = g_renderCtx;
+  piVar6 = (int *)(g_renderCtx + 0x12b8);
   temp_v2 = *piVar6;
   temp_v3 = piVar6[temp_v2 + 2];
   *piVar6 = temp_v2 - 1;

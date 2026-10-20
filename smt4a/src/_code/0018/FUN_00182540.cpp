@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern float DAT_006472dc; /* 0x6472dc */
 extern float DAT_006472e0; /* 0x6472e0 */
 extern float DAT_006472e4; /* 0x6472e4 */
@@ -87,13 +87,13 @@ void FUN_00182540(float *param_1)
       param_1[0x16] = (float)temp_v10;
       param_1[0x17] = (float)((unsigned long long)temp_v10 >> 0x20);
     }
-    temp_v0 = DAT_0059dbb4;
+    temp_v0 = g_renderCtx;
     temp_v1 = param_1[0x21];
     temp_v5 = param_1[0x23];
     temp_v7 = param_1[0x18] * param_1[0x1d];
-    temp_v3 = *(int *)(DAT_0059dbb4 + 0x12b8);
-    piVar8 = (int *)(DAT_0059dbb4 + 0x12b8);
-    temp_v2 = *(int *)(DAT_0059dbb4 + temp_v3 * 4 + 0x12c0);
+    temp_v3 = *(int *)(g_renderCtx + 0x12b8);
+    piVar8 = (int *)(g_renderCtx + 0x12b8);
+    temp_v2 = *(int *)(g_renderCtx + temp_v3 * 4 + 0x12c0);
     temp_v4 = piVar8[temp_v3 + 2];
     *piVar8 = temp_v3 + 1;
     piVar8[temp_v3 + 3] = temp_v2;
@@ -152,8 +152,8 @@ void FUN_00182540(float *param_1)
       } while (temp_v5 != 0.0f);
     }
     param_1[0x1a] = romwright_fabs_4(param_1[0x1a]);
-    temp_v0 = DAT_0059dbb4;
-    piVar8 = (int *)(DAT_0059dbb4 + 0x12b8);
+    temp_v0 = g_renderCtx;
+    piVar8 = (int *)(g_renderCtx + 0x12b8);
     temp_v2 = *piVar8;
     temp_v3 = piVar8[temp_v2 + 2];
     *piVar8 = temp_v2 - 1;

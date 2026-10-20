@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 int FUN_003bfd84(unsigned char [524], unsigned int);
 int FUN_003cbb60(unsigned int, int);
 int FUN_003fd76c(unsigned int, float *);
@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp3C; /* 0x3c: local_3c */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003bfd84. */
 /* Supplied declaration required: FUN_003cbb60. */
 /* Supplied declaration required: FUN_003fd76c. */
@@ -59,7 +59,7 @@ unsigned int FUN_004f7778(int param_1)
           return 0;
         }
       }
-      FUN_002e6354(param_1 + 0x3618,0x6658);
+      sysMemClear(param_1 + 0x3618,0x6658);
       temp_v1 = 0;
       do {
         temp_v2 = param_1 + temp_v1 * 0x3c;

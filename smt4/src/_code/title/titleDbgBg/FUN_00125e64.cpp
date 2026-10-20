@@ -21,14 +21,14 @@ extern unsigned char LAB_00126024; /* 0x126024 */
 extern unsigned char LAB_00126030; /* 0x126030 */
 extern unsigned char LAB_00126040; /* 0x126040 */
 extern int DAT_0044e2e8; /* 0x44e2e8 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002aed34. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c564c(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
 
@@ -43,7 +43,7 @@ unsigned int FUN_00125e64(void)
   int temp_v4;
   int *piVar6;
   
-  temp_v2 = DAT_0044ea00;
+  temp_v2 = g_titleScene;
   temp_v0 = DAT_0044e2e8;
   if (*(int *)(DAT_0044e2e8 + 8) == 1) {
     temp_v1 = FUN_002c5d80(1,0);
@@ -59,8 +59,8 @@ unsigned int FUN_00125e64(void)
     FUN_002bf538();
     FUN_002bed3c();
     FUN_002bf288(2,0,0,0,0,0xb);
-    temp_v2 = DAT_0044ea00;
-    piVar6 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v2 = g_titleScene;
+    piVar6 = (int *)(g_titleScene + 0x124c);
     temp_v1 = *piVar6;
     temp_v3 = piVar6[temp_v1 + 2];
     *piVar6 = temp_v1 - 1;
@@ -68,7 +68,7 @@ unsigned int FUN_00125e64(void)
       (**(romwright_code **)(temp_v2 + 0x1268))();
       *(unsigned char *)(temp_v2 + 0x1264) = 0;
     }
-    temp_v2 = FUN_002c564c(0);
+    temp_v2 = jyoucyuGetTableEntry(0);
     if (temp_v2 != 0) {
       FUN_002be5a4(3,0xffffffff,&LAB_00126024);
     }

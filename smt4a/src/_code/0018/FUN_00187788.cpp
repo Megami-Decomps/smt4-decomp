@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(char [260], int *);
-int FUN_00187638(int, int *);
+int asdFileAllocBuffer(int, int *);
 int FUN_00187de4(int *);
 int FUN_00192d3c(int *, int, int);
 int FUN_001a70dc(int, char [260]);
@@ -21,12 +21,12 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00100388. */
 extern char FUN_00100790(int);
-/* Supplied declaration required: FUN_00187638. */
+/* Supplied declaration required: asdFileAllocBuffer. */
 /* Supplied declaration required: FUN_00187de4. */
 /* Supplied declaration required: FUN_00192d3c. */
 /* Supplied declaration required: FUN_001a70dc. */
 /* Supplied declaration required: FUN_001a72b0. */
-extern unsigned int FUN_002e3390(char *);
+extern unsigned int wstrlen(char *);
 /* Supplied declaration required: FUN_002e6dd0. */
 
 
@@ -51,9 +51,9 @@ unsigned int FUN_00187788(int param_1,int *param_2)
   }
   FUN_002e6dd0(temp_v9,0x100);
   FUN_00100388(temp_v9,param_2 + 0xb);
-  temp_v1 = FUN_002e3390(temp_v9);
+  temp_v1 = wstrlen(temp_v9);
   FUN_001a72b0(param_1,temp_v9,temp_v1);
-  temp_v2 = FUN_002e3390(temp_v9);
+  temp_v2 = wstrlen(temp_v9);
   if ((int)temp_v2 < 1) {
     temp_v6 = 0;
   }
@@ -89,7 +89,7 @@ unsigned int FUN_00187788(int param_1,int *param_2)
       param_2[6] = temp_v6;
       if (param_2[3] == 0) {
         temp_v4 = param_1;
-        FUN_00187638(param_1,param_2);
+        asdFileAllocBuffer(param_1,param_2);
         param_2[3] = temp_v4;
       }
       temp_v7 = 0;

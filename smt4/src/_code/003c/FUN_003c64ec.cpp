@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022a400(...);
 int FUN_0025c2ec(...);
-int FUN_0025c318(void);
+int asdListBoxAddItems(void);
 int FUN_0025c58c(...);
 int FUN_00262914(...);
 int FUN_003c33c8(...);
@@ -31,9 +31,9 @@ int FUN_0022a444(...);
 int FUN_0022a464(...);
 int FUN_0024ef90(...);
 int FUN_0025628c(...);
-int FUN_002c0cc4(void);
-int FUN_002c0cec(...);
-int FUN_002c43b4(...);
+int dataTableGetEntries(void);
+int dataTableGet(...);
+int jobStop(...);
 int FUN_003bbf3c(void);
 int FUN_003bc670(void);
 int FUN_003c3360(...);
@@ -92,15 +92,15 @@ extern char *FUN_0022a344(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0024ef90. */
 /* Supplied declaration required: FUN_0025628c. */
 /* Supplied declaration required: FUN_0025c2ec. */
-/* Supplied declaration required: FUN_0025c318. */
+/* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_0025c58c. */
 /* Supplied declaration required: FUN_00262914. */
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 extern int FUN_002bfde4(unsigned int);
-extern unsigned int FUN_002c0c74(unsigned int);
-/* Supplied declaration required: FUN_002c0cc4. */
-/* Supplied declaration required: FUN_002c0cec. */
-/* Supplied declaration required: FUN_002c43b4. */
+extern unsigned int dataTableGetCount(unsigned int);
+/* Supplied declaration required: dataTableGetEntries. */
+/* Supplied declaration required: dataTableGet. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_003bbf3c. */
 /* Supplied declaration required: FUN_003bc670. */
 /* Supplied declaration required: FUN_003c3360. */
@@ -232,14 +232,14 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     case 10:
       puVar11 = (unsigned int *)FUN_0022a464(param_1[4]);
       temp_v3 = *puVar11;
-      temp_v5 = FUN_002c0cec(0x1c,2);
-      FUN_002c0cc4();
-      temp_v5 = FUN_002c0c74(temp_v5);
+      temp_v5 = dataTableGet(0x1c,2);
+      dataTableGetEntries();
+      temp_v5 = dataTableGetCount(temp_v5);
       FUN_0022a3a8(param_1[4],10,temp_v3,0,temp_v5,0);
       temp_v3 = temp_v3 & 0xffff;
       if (temp_v3 != 0) {
-        FUN_002c0cec(0x1c,2);
-        temp_v4 = FUN_002c0cc4();
+        dataTableGet(0x1c,2);
+        temp_v4 = dataTableGetEntries();
         psVar2 = (short *)((temp_v4 + temp_v3 * 0x10) - 0x10);
         if (psVar2 == (short *)0x0) {
           DAT_0043438a = 0;
@@ -315,10 +315,10 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     case 0:
       temp_v4 = FUN_002bfde4(0);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002bf244(param_1[4]);
+        temp_v4 = jobIsValid(param_1[4]);
         if (temp_v4 != 0) {
           FUN_0024ef90(param_1[4]);
-          FUN_002c43b4(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v5 = 9;
         *param_1 = temp_v5;
@@ -327,10 +327,10 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     case 1:
       temp_v4 = FUN_002bfde4(0);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002bf244(param_1[4]);
+        temp_v4 = jobIsValid(param_1[4]);
         if (temp_v4 != 0) {
           FUN_0024ef90(param_1[4]);
-          FUN_002c43b4(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         param_1[2] = 1;
         *param_1 = 3;
@@ -339,10 +339,10 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     case 2:
       temp_v4 = FUN_002bfde4(0);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002bf244(param_1[4]);
+        temp_v4 = jobIsValid(param_1[4]);
         if (temp_v4 != 0) {
           FUN_0024ef90(param_1[4]);
-          FUN_002c43b4(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v5 = 7;
         *param_1 = temp_v5;
@@ -351,10 +351,10 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     case 3:
       temp_v4 = FUN_002bfde4(0);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002bf244(param_1[4]);
+        temp_v4 = jobIsValid(param_1[4]);
         if (temp_v4 != 0) {
           FUN_0024ef90(param_1[4]);
-          FUN_002c43b4(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v5 = 0xb;
         *param_1 = temp_v5;
@@ -363,10 +363,10 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     case 4:
       temp_v4 = FUN_002bfde4(0);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002bf244(param_1[4]);
+        temp_v4 = jobIsValid(param_1[4]);
         if (temp_v4 != 0) {
           FUN_0024ef90(param_1[4]);
-          FUN_002c43b4(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v5 = 0xd;
         *param_1 = temp_v5;
@@ -375,10 +375,10 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     case 5:
       temp_v4 = FUN_002bfde4(0);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002bf244(param_1[4]);
+        temp_v4 = jobIsValid(param_1[4]);
         if (temp_v4 != 0) {
           FUN_0024ef90(param_1[4]);
-          FUN_002c43b4(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v5 = 0xf;
         *param_1 = temp_v5;
@@ -387,10 +387,10 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     case 6:
       temp_v4 = FUN_002bfde4(0);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002bf244(param_1[4]);
+        temp_v4 = jobIsValid(param_1[4]);
         if (temp_v4 != 0) {
           FUN_0024ef90(param_1[4]);
-          FUN_002c43b4(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v5 = 0x11;
         *param_1 = temp_v5;
@@ -399,10 +399,10 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     case 7:
       temp_v4 = FUN_002bfde4(0);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002bf244(param_1[4]);
+        temp_v4 = jobIsValid(param_1[4]);
         if (temp_v4 != 0) {
           FUN_0024ef90(param_1[4]);
-          FUN_002c43b4(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v5 = 0x13;
         *param_1 = temp_v5;
@@ -411,10 +411,10 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     case 8:
       temp_v4 = FUN_002bfde4(0);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002bf244(param_1[4]);
+        temp_v4 = jobIsValid(param_1[4]);
         if (temp_v4 != 0) {
           FUN_0024ef90(param_1[4]);
-          FUN_002c43b4(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v5 = 0x15;
         *param_1 = temp_v5;
@@ -423,10 +423,10 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     case 9:
       temp_v4 = FUN_002bfde4(0);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002bf244(param_1[4]);
+        temp_v4 = jobIsValid(param_1[4]);
         if (temp_v4 != 0) {
           FUN_0024ef90(param_1[4]);
-          FUN_002c43b4(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v5 = 0x17;
         *param_1 = temp_v5;
@@ -446,7 +446,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
       temp_v5 = *(unsigned int *)(param_2 + 0x5c);
       FUN_0025c58c(temp_v5,0x73,0);
       param_1[4] = temp_v5;
-      FUN_0025c318();
+      asdListBoxAddItems();
       FUN_0025c2ec(param_1[4],1);
       FUN_00262914(param_1[4],"btl Camera Menu");
     }
@@ -460,10 +460,10 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     }
     temp_v4 = FUN_002bfde4(0);
     if (temp_v4 != 0) {
-      temp_v4 = FUN_002bf244(param_1[4]);
+      temp_v4 = jobIsValid(param_1[4]);
       if (temp_v4 != 0) {
         FUN_0024ef90(param_1[4]);
-        FUN_002c43b4(param_1[4],0);
+        jobStop(param_1[4],0);
       }
       *param_1 = temp_v5;
       return 0;
@@ -472,10 +472,10 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     if (temp_v4 == 0) {
       return 0;
     }
-    temp_v4 = FUN_002bf244(param_1[4]);
+    temp_v4 = jobIsValid(param_1[4]);
     if (temp_v4 != 0) {
       FUN_0024ef90(param_1[4]);
-      FUN_002c43b4(param_1[4],0);
+      jobStop(param_1[4],0);
     }
     temp_v5 = 0x19;
     break;
@@ -507,10 +507,10 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
       if (temp_v4 == 0) {
         return 0;
       }
-      temp_v4 = FUN_002bf244(param_1[4]);
+      temp_v4 = jobIsValid(param_1[4]);
       if (temp_v4 != 0) {
         FUN_0024ef90(param_1[4]);
-        FUN_002c43b4(param_1[4],0);
+        jobStop(param_1[4],0);
       }
       temp_v5 = 3;
       break;
@@ -671,7 +671,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     temp_v5 = *(unsigned int *)(param_2 + 0x5c);
     FUN_0025c58c(temp_v5,0x73,0);
     param_1[4] = temp_v5;
-    FUN_0025c318();
+    asdListBoxAddItems();
     FUN_0025c2ec(param_1[4],1);
     FUN_00262914(param_1[4],"btl Param Menu");
     FUN_0022a3a8(param_1[4],0,0xffffffff,0xffffffff,0x6c,0);
@@ -686,7 +686,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     temp_v5 = *(unsigned int *)(param_2 + 0x5c);
     FUN_0025c58c(temp_v5,0x73,0);
     param_1[4] = temp_v5;
-    FUN_0025c318();
+    asdListBoxAddItems();
     FUN_0025c2ec(param_1[4],1);
     FUN_00262914(param_1[4],"btl Bad Menu");
     FUN_0022a3a8(param_1[4],0,0xffffffff,0xffffffff,0x6c,0);
@@ -713,7 +713,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     temp_v5 = *(unsigned int *)(param_2 + 0x5c);
     FUN_0025c58c(temp_v5,0x73,0);
     param_1[4] = temp_v5;
-    FUN_0025c318();
+    asdListBoxAddItems();
     FUN_0025c2ec(param_1[4],1);
     FUN_00262914(param_1[4],"btl Talk Menu");
     puVar11 = (unsigned int *)(param_2 + 0x44a8);
@@ -748,7 +748,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     temp_v5 = *(unsigned int *)(param_2 + 0x5c);
     FUN_0025c58c(temp_v5,0x73,0);
     param_1[4] = temp_v5;
-    FUN_0025c318();
+    asdListBoxAddItems();
     FUN_0025c2ec(param_1[4],1);
     FUN_00262914(param_1[4],"btl Result Menu");
     FUN_0022a400(param_1[4],0);
@@ -794,7 +794,7 @@ joined_r0x003c7184:
     temp_v5 = *(unsigned int *)(param_2 + 0x5c);
     FUN_0025c58c(temp_v5,0x73,0);
     param_1[4] = temp_v5;
-    FUN_0025c318();
+    asdListBoxAddItems();
     FUN_0025c2ec(param_1[4],1);
     FUN_00262914(param_1[4],"btl Debug Menu");
     temp_v5 = 0;

@@ -27,7 +27,7 @@ typedef struct {
 
 extern unsigned char DAT_00404c48; /* 0x404c48 */
 extern unsigned char DAT_0044cdc8; /* 0x44cdc8 */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00231bb8. */
@@ -60,7 +60,7 @@ void FUN_0039ba2c(int param_1)
   
   FUN_00231bb8(param_1 + 0x164,&temp_v5);
   temp_v0 = FUN_002c5d80(1,0);
-  FUN_002bee04(DAT_0044ea00,3,temp_v0);
+  FUN_002bee04(g_titleScene,3,temp_v0);
   FUN_002bf538();
   FUN_002bed3c();
   temp_v0 = FUN_002beda4();
@@ -76,7 +76,7 @@ void FUN_0039ba2c(int param_1)
   VectorSignedToFloat(temp_v2 + *(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002be5a4(2,(*(unsigned int *)((unsigned char *)&DAT_0044cdc8 + 0xc)),temp_v4);
-  FUN_002bedb0(DAT_0044ea00,3);
+  FUN_002bedb0(g_titleScene,3);
   FUN_002bf538();
   FUN_002bf818(param_1 + 0xa88);
   if ((*(char *)(param_1 + 0xa86) != '\0') && (*(char *)(param_1 + 0xb12) != '\0')) {

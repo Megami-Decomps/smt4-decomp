@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00193038(unsigned char **, int *);
-int FUN_002e6354(int *, int);
+int sysMemClear(int *, int);
 int FUN_0030fc80(int *);
 int FUN_0042d5b4(int);
 int FUN_0042e870(int *, int);
@@ -27,7 +27,7 @@ extern unsigned char DAT_005b448b; /* 0x5b448b */
 extern signed char DAT_005b448c; /* 0x5b448c */
 
 /* Supplied declaration required: FUN_00193038. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0030fc80. */
 /* Supplied declaration required: FUN_0042d5b4. */
 extern unsigned int FUN_0042d6a8(void);
@@ -139,7 +139,7 @@ unsigned int FUN_0042ed58(int *param_1,unsigned int param_2,int param_3,int para
             if ((temp_v0 & 0x80000000) == 0) {
               nn_cec_CTR_MessageBox_ReadOutBoxIndex((unsigned int)param_1);
             }
-            FUN_002e6354(param_1 + 0x67,0x60);
+            sysMemClear(param_1 + 0x67,0x60);
             *(unsigned short *)(param_1 + 0x67) = 0x6363;
             param_1[0x68] = param_2;
             *(unsigned char *)((int)param_1 + 0x1a9) = 1;

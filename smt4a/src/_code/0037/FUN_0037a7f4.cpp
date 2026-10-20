@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0019a730(void);
+int asdTextureCreate(void);
 int FUN_0019a840(int);
 int FUN_00226970(void);
 
-/* Supplied declaration required: FUN_0019a730. */
+/* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_0019a840. */
 /* Supplied declaration required: FUN_00226970. */
 
@@ -20,7 +20,7 @@ int FUN_0037a7f4(void)
   int temp_v0;
   
   temp_v0 = 0;
-  FUN_0019a730();
+  asdTextureCreate();
   *(unsigned int *)(temp_v0 + 0x3c) = 1;
   *(unsigned int *)(temp_v0 + 0x40) = 1;
   FUN_00226970();

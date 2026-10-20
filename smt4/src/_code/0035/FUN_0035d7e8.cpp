@@ -14,7 +14,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00238aac. */
-extern int FUN_002c1870(int, unsigned int, unsigned int);
+extern int rt_memcmp(int, unsigned int, unsigned int);
 extern int FUN_0035c050(int *, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0035c0e8. */
 extern int FUN_0035e090(unsigned int *, int **);
@@ -34,7 +34,7 @@ void FUN_0035d7e8(unsigned int *param_1,unsigned int *param_2,unsigned int param
   temp_v1 = param_4;
   if (piVar3 != (int *)(param_2 + 1)) {
     do {
-      temp_v0 = FUN_002c1870(piVar3[9],param_3,param_2[4]);
+      temp_v0 = rt_memcmp(piVar3[9],param_3,param_2[4]);
       if (temp_v0 != 0) {
         piVar3 = (int *)piVar3[1];
       }

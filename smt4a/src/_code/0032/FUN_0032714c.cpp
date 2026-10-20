@@ -13,8 +13,8 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_00581288; /* 0x581288 */
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern int g_lmapScene; /* 0x581288 */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_003250ac. */
 /* Supplied declaration required: FUN_00352bc4. */
@@ -32,21 +32,21 @@ void FUN_0032714c(void)
   unsigned int in_s1;
   unsigned int in_s2;
   
-  temp_v0 = DAT_00581288;
-  temp_v1 = DAT_00581288 + 0x1d8;
-  *(unsigned int *)(DAT_00581288 + 0x1fc) = in_s0;
+  temp_v0 = g_lmapScene;
+  temp_v1 = g_lmapScene + 0x1d8;
+  *(unsigned int *)(g_lmapScene + 0x1fc) = in_s0;
   *(unsigned int *)(temp_v0 + 0x200) = in_s1;
   *(unsigned int *)(temp_v0 + 0x204) = in_s2;
   FUN_003250ac(temp_v1);
-  temp_v2 = *(unsigned int *)(DAT_00581288 + 0x1f0);
+  temp_v2 = *(unsigned int *)(g_lmapScene + 0x1f0);
   FUN_00352bc4();
-  temp_v0 = DAT_00581288;
-  *(unsigned int *)(DAT_00581288 + 0x218) = temp_v2;
-  temp_v2 = (*(unsigned int *)((unsigned char *)&DAT_005f15fc + 0x3a4));
+  temp_v0 = g_lmapScene;
+  *(unsigned int *)(g_lmapScene + 0x218) = temp_v2;
+  temp_v2 = (*(unsigned int *)((unsigned char *)&g_gameState + 0x3a4));
   *(unsigned int *)(temp_v0 + 0x1d0) = 4;
   *(unsigned int *)(temp_v0 + 0x1e4) = temp_v2;
   FUN_003fdb18(*(unsigned int *)(*(int *)(temp_v0 + 0x180) + 4));
-  FUN_003fdb18(*(unsigned int *)(*(int *)(DAT_00581288 + 0x18c) + 4));
+  FUN_003fdb18(*(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4));
   return;
 }
 

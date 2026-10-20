@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_001641c4(void);
-int FUN_001681cc(void);
+int sysPlaySe(void);
 int FUN_001a9104(unsigned int *, unsigned int *);
 int FUN_001b4a90(...);
 int FUN_00203b40(...);
@@ -19,7 +19,7 @@ int FUN_002cd118(unsigned int *, unsigned int, int, int);
 int FUN_00341f88(void);
 int FUN_0034edc8(void);
 int FUN_003756c8(int);
-int FUN_003d8bc4(int);
+int menuStateStartSelect(int);
 int FUN_0050d794(unsigned int *, unsigned int);
 
 typedef struct fn_004a9a64_arg0 fn_004a9a64_arg0;
@@ -55,10 +55,10 @@ typedef struct {
 extern unsigned char LAB_004a9bd0; /* 0x4a9bd0 */
 extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001641c4. */
 extern int FUN_00167f08(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001a9104. */
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_00203b40. */
@@ -74,7 +74,7 @@ extern unsigned int FUN_002cc9e0(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00341f88. */
 /* Supplied declaration required: FUN_0034edc8. */
 /* Supplied declaration required: FUN_003756c8. */
-/* Supplied declaration required: FUN_003d8bc4. */
+/* Supplied declaration required: menuStateStartSelect. */
 extern int FUN_003e8430(void);
 extern unsigned short FUN_003ea1cc(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0050d794. */
@@ -200,7 +200,7 @@ void FUN_004a9a64(fn_004a9a64_arg0 *param_1,int param_2,unsigned char param_3,un
     *(unsigned char *)(puVar1 + 0x3010) = 1;
     FUN_00227af0(&LAB_004a9bd0);
     FUN_002a3258();
-    FUN_003d8bc4(0);
+    menuStateStartSelect(0);
   }
   puVar5 = (*(unsigned int * *)((unsigned char *)&DAT_0057a9b8 + 0x10));
   if (param_2 == 0 && param_6 == 0) {
@@ -248,20 +248,20 @@ void FUN_004a9a64(fn_004a9a64_arg0 *param_1,int param_2,unsigned char param_3,un
   }
   if (*piVar6 == 0x13 || *piVar6 == 0x16) {
     FUN_00341f88();
-    FUN_001681cc();
+    sysPlaySe();
   }
   temp_v1 = *piVar6;
   if ((temp_v1 == 0x22 || temp_v1 == 0x23) || temp_v1 == 0x24) {
     FUN_00341f88();
-    FUN_001681cc();
+    sysPlaySe();
   }
   temp_v1 = FUN_00167f08();
   if (temp_v1 == 0x3f) {
-    FUN_0014aa78();
+    btlGetMainState();
     temp_v1 = FUN_003e8430();
     if (temp_v1 == 0) {
       FUN_00341f88();
-      FUN_001681cc();
+      sysPlaySe();
     }
   }
   if (*piVar6 == 7) {

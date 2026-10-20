@@ -16,7 +16,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001008a2. */
 extern int *FUN_001861c4(void);
 /* Supplied declaration required: FUN_001bcfb4. */
-extern int FUN_002e3390(unsigned int);
+extern int wstrlen(unsigned int);
 /* Supplied declaration required: FUN_002e342c. */
 
 
@@ -49,7 +49,7 @@ int * FUN_003a496c(void)
   else {
     FUN_001008a2(temp_v3,0x1ad0f0);
   }
-  temp_v2 = FUN_002e3390(*(unsigned int *)(temp_v2 + 8));
+  temp_v2 = wstrlen(*(unsigned int *)(temp_v2 + 8));
   if (temp_v2 == 0) {
     piVar2[2] = 0;
     return piVar2;

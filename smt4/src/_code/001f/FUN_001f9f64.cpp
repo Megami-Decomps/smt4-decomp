@@ -51,7 +51,7 @@ extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
 extern int DAT_004474f4; /* 0x4474f4 */
-extern int DAT_00447600; /* 0x447600 */
+extern int g_mapEnemy; /* 0x447600 */
 extern signed char DAT_0049f93c; /* 0x49f93c */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -139,8 +139,8 @@ void FUN_001f9f64(void)
   float temp_v53;
   unsigned int temp_v54;
   
-  temp_v0 = DAT_00447600;
-  if ((*(int *)(DAT_00447600 + 4) == 8) && (DAT_0049f93c == '\0')) {
+  temp_v0 = g_mapEnemy;
+  if ((*(int *)(g_mapEnemy + 4) == 8) && (DAT_0049f93c == '\0')) {
     temp_v25 = 220.0f;
     temp_v21 = 20.0f;
     temp_v26 = 57.32484f;

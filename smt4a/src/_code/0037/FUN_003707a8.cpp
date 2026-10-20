@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_001631d0(...);
+int jobStop(...);
 int FUN_00167f24(...);
-int FUN_00180008(int);
+int jyoucyuGetTableEntry(int);
 int FUN_00180118(unsigned int);
 int FUN_00184310(...);
 int FUN_00237898(...);
 int FUN_00275bb0(...);
 int FUN_00275fe4(...);
-int FUN_00283480(void);
+int eventTexSetJobParam(void);
 int FUN_002e342c(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_003180c4(...);
 int FUN_0031bca4(...);
 int FUN_0036f298(unsigned int);
@@ -30,22 +30,22 @@ extern int DAT_00588008; /* 0x588008 */
 
 extern int FUN_0014bef4(unsigned int);
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_001631d0. */
-extern int FUN_00163e40(void);
-extern int FUN_00164a9c(unsigned int);
+/* Supplied declaration required: jobStop. */
+extern int jobIsValid(void);
+extern int jobGetWork(unsigned int);
 /* Supplied declaration required: FUN_00167f24. */
 extern int FUN_0016a0f0(unsigned int);
-/* Supplied declaration required: FUN_00180008. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_00236038(unsigned int);
+extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00237898. */
 /* Supplied declaration required: FUN_00275bb0. */
 /* Supplied declaration required: FUN_00275fe4. */
-/* Supplied declaration required: FUN_00283480. */
+/* Supplied declaration required: eventTexSetJobParam. */
 extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_0031bca4. */
 /* Supplied declaration required: FUN_0036f298. */
@@ -71,7 +71,7 @@ unsigned int FUN_003707a8(void)
   
   temp_v1 = FUN_002deb84();
   if (temp_v1 == 0) {
-    FUN_00180008(0);
+    jyoucyuGetTableEntry(0);
     FUN_00275fe4(0);
     FUN_00275fe4(1,0);
     DAT_00588008 = 0;
@@ -79,8 +79,8 @@ unsigned int FUN_003707a8(void)
   temp_v2 = FUN_00275bb0(0);
   switch(temp_v2) {
   case 0:
-    temp_v1 = FUN_00236038(0);
-    temp_v3 = FUN_00236038(1);
+    temp_v1 = scrGetArg(0);
+    temp_v3 = scrGetArg(1);
     temp_v6 = 0;
     temp_v5 = 1;
     do {
@@ -109,7 +109,7 @@ unsigned int FUN_003707a8(void)
   case 1:
     temp_v2 = FUN_00275bb0(1);
     FUN_003afe2c(temp_v2,0,0);
-    FUN_00283480();
+    eventTexSetJobParam();
     FUN_0036f298(temp_v2);
     FUN_00275fe4(2,temp_v2);
     FUN_0031bca4(temp_v2,0,1);
@@ -132,8 +132,8 @@ unsigned int FUN_003707a8(void)
   case 4:
     temp_v0 = FUN_00275bb0(1);
     FUN_00184310(temp_v0);
-    FUN_002e6354(temp_v8,0x80);
-    FUN_002e6354(temp_v9,0x80);
+    sysMemClear(temp_v8,0x80);
+    sysMemClear(temp_v9,0x80);
     temp_v5 = FUN_00275bb0(1);
     temp_v5 = temp_v5 & 0xffff;
     FUN_00180118(temp_v5);
@@ -168,15 +168,15 @@ unsigned int FUN_003707a8(void)
     break;
   case 0xc:
     temp_v2 = FUN_00275bb0(2);
-    temp_v1 = FUN_00163e40();
+    temp_v1 = jobIsValid();
     if (temp_v1 != 0) {
-      temp_v1 = FUN_00164a9c(temp_v2);
+      temp_v1 = jobGetWork(temp_v2);
       if (*(int *)(temp_v1 + 0xc) != 1) {
         *(unsigned int *)(temp_v1 + 0x28) = 0xbe800000;
         *(unsigned char *)(temp_v1 + 0x30) = 1;
       }
       else {
-        FUN_001631d0(temp_v2,0);
+        jobStop(temp_v2,0);
       }
     }
     FUN_00275fe4(0,0xd);

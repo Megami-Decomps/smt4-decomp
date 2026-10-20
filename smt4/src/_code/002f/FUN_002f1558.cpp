@@ -11,7 +11,7 @@ int FUN_002b6db0(...);
 int FUN_002b6dd8(...);
 int FUN_002b9024(void);
 
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_002b06c4(void);
 int FUN_002b6758(...);
 int FUN_002b6940(...);
@@ -45,7 +45,7 @@ extern unsigned char LAB_002f2000; /* 0x2f2000 */
 extern unsigned char LAB_002f2470; /* 0x2f2470 */
 extern unsigned char LAB_002f2478; /* 0x2f2478 */
 extern unsigned char LAB_002f25c0; /* 0x2f25c0 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00244ee0. */
@@ -56,8 +56,8 @@ extern int FUN_0025cc54(void);
 extern short FUN_0028d24c(void);
 extern short FUN_0028d2e8(unsigned int, unsigned int);
 extern unsigned int FUN_0028fb40(int);
-extern int FUN_00292f28(int);
-/* Supplied declaration required: FUN_002939f4. */
+extern int padIsButtonDown(int);
+/* Supplied declaration required: btlGetMainState. */
 extern int FUN_00297ca4(int, unsigned int);
 extern unsigned int FUN_0029a924(int);
 extern unsigned int FUN_0029a9d4(int, unsigned int);
@@ -176,7 +176,7 @@ void FUN_002f1558(int param_1)
           FUN_002bf380(2,0x15,9,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,0xc9);
           if (*(char *)(temp_v13 + 0x5788) != '\0') {
             FUN_002bf538();
-            temp_v8 = DAT_0044ea00;
+            temp_v8 = g_titleScene;
             temp_v7 = FUN_002c5da8(6,1,0);
             piVar16 = (int *)(temp_v8 + 0x12ac);
             temp_v11 = piVar16[*piVar16 + 2];
@@ -187,7 +187,7 @@ void FUN_002f1558(int param_1)
             }
             FUN_002bf288(2,0x15,0x19d,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,
                          0xce);
-            temp_v6 = DAT_0044ea00;
+            temp_v6 = g_titleScene;
             temp_v8 = FUN_002c5da8(6,7,0);
             piVar16 = (int *)(temp_v6 + 0x12ac);
             temp_v7 = piVar16[*piVar16 + 2];
@@ -224,7 +224,7 @@ void FUN_002f1558(int param_1)
                          ,*(short *)(temp_v8 + 10) + temp_v2,0xd3);
             if (*(char *)(temp_v13 + 0x5788) != '\0') {
               FUN_002bf538();
-              temp_v7 = DAT_0044ea00;
+              temp_v7 = g_titleScene;
               temp_v11 = FUN_002c5da8(6,1,0);
               piVar16 = (int *)(temp_v7 + 0x12ac);
               temp_v12 = piVar16[*piVar16 + 2];
@@ -235,7 +235,7 @@ void FUN_002f1558(int param_1)
               }
               FUN_002bf288(2,0x15,0x124,*(short *)(temp_v8 + 8) + temp_v4,*(short *)(temp_v8 + 10) + temp_v2
                            ,0xd8);
-              temp_v8 = DAT_0044ea00;
+              temp_v8 = g_titleScene;
               temp_v7 = FUN_002c5da8(6,7,0);
               piVar16 = (int *)(temp_v8 + 0x12ac);
               temp_v11 = piVar16[*piVar16 + 2];
@@ -256,7 +256,7 @@ void FUN_002f1558(int param_1)
           if (*(char *)(temp_v13 + 0x5788) != '\0') {
             FUN_002bf538();
             temp_v6 = FUN_002bf4f8(0x15,*(unsigned int *)(temp_v13 + 0x5780));
-            temp_v13 = DAT_0044ea00;
+            temp_v13 = g_titleScene;
             temp_v8 = FUN_002c5da8(6,1,0);
             piVar16 = (int *)(temp_v13 + 0x12ac);
             temp_v7 = piVar16[*piVar16 + 2];
@@ -267,7 +267,7 @@ void FUN_002f1558(int param_1)
             }
             FUN_002bf288(2,0x15,0x124,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,
                          0xce);
-            temp_v13 = DAT_0044ea00;
+            temp_v13 = g_titleScene;
             temp_v6 = FUN_002c5da8(6,7,0);
             piVar16 = (int *)(temp_v13 + 0x12ac);
             temp_v8 = piVar16[*piVar16 + 2];
@@ -293,13 +293,13 @@ void FUN_002f1558(int param_1)
     if (temp_v3 == 2) {
       FUN_002bf288(2,0x15,0x11e,temp_v4,temp_v2,0xc3);
       FUN_002bf288(2,0x15,0x11f,temp_v4,temp_v2,0xc3);
-      temp_v3 = FUN_002939f4();
+      temp_v3 = btlGetMainState();
       if ((*(unsigned int *)(temp_v3 + 0x44a8) & 0x40) != 0) {
-        temp_v10 = FUN_002939f4();
+        temp_v10 = btlGetMainState();
         temp_v1 = FUN_0028d2e8(temp_v10,temp_v5);
       }
       else {
-        FUN_002939f4();
+        btlGetMainState();
         temp_v1 = FUN_0028d24c();
       }
       temp_v10 = FUN_002bce00((int)temp_v1);
@@ -357,12 +357,12 @@ void FUN_002f1558(int param_1)
       return;
     }
     FUN_002bf288(2,0x15,0x11e,temp_v4,temp_v2,0xc3);
-    temp_v3 = FUN_002939f4();
+    temp_v3 = btlGetMainState();
     if ((*(unsigned int *)(temp_v3 + 0x44a8) & 0x1000) == 0) {
       temp_v14 = 0;
       temp_v15 = temp_v14;
       do {
-        temp_v3 = FUN_00292f28(temp_v14 + 0x2e);
+        temp_v3 = padIsButtonDown(temp_v14 + 0x2e);
         if (temp_v3 != 0) {
           if (temp_v15 == temp_v5) {
             temp_v10 = FUN_0025cbc0(temp_v14 & 0xff);
@@ -394,7 +394,7 @@ void FUN_002f1558(int param_1)
     temp_v3 = FUN_002a8764();
     temp_v3 = FUN_002a8740((int)*(char *)(*(int *)(param_1 + 0x305c) + temp_v3 + 0x9107));
     if (temp_v5 != 0) {
-      temp_v3 = FUN_002939f4();
+      temp_v3 = btlGetMainState();
       if ((*(unsigned int *)(temp_v3 + 0x44a8) & 0x40) != 0) {
         temp_v6 = (int)(short)temp_v5;
         temp_v9 = FUN_002bce00(temp_v6);
@@ -445,7 +445,7 @@ void FUN_002f1558(int param_1)
         if (temp_v3 == 0) {
           temp_v13 = 1;
         }
-        temp_v3 = FUN_002939f4();
+        temp_v3 = btlGetMainState();
         if ((*(unsigned int *)(temp_v3 + 0x44a8) & 0x40) != 0) {
           temp_v6 = (int)(short)(((short)temp_v5 - (short)temp_v13) + 1);
           temp_v9 = FUN_002bce00(temp_v6);

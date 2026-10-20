@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001641c4(void);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_0019de98(...);
 int FUN_002277d8(void);
 int FUN_00228b04(...);
@@ -53,7 +53,7 @@ extern int DAT_0057f108; /* 0x57f108 */
 /* Supplied declaration required: FUN_001641b4. */
 /* Supplied declaration required: FUN_001641c4. */
 extern unsigned short FUN_00167f08(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_001801a4(void);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 extern int FUN_0018719c(unsigned int);
@@ -329,7 +329,7 @@ void FUN_001ffe84(void)
         FUN_001641b4(0x100021c);
         FUN_002e1b3c(0);
         FUN_0020b660(0x47);
-        FUN_001681cc(0xa0);
+        sysPlaySe(0xa0);
         FUN_003343f0(1);
         return;
       }
@@ -362,7 +362,7 @@ void FUN_001ffe84(void)
         FUN_001641b4(0x100021c);
         FUN_002e1b3c(4);
         FUN_0020b660(0x47);
-        FUN_001681cc(0xa0);
+        sysPlaySe(0xa0);
         FUN_003343f0(1);
         return;
       }

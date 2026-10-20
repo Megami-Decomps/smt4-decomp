@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00270028(...);
 int FUN_0029be5c(...);
-int FUN_002c415c(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
+int asdMemFree(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -19,14 +19,14 @@ typedef struct {
 
 extern int FUN_001fc6b4(...); /* 0x1fc6b4 */
 extern unsigned char LAB_00208098; /* 0x208098 */
-extern int FUN_002d5034(...); /* 0x2d5034 */
-extern unsigned int *DAT_00435d30; /* 0x435d30 */
+extern int btlEncountDestroy(...); /* 0x2d5034 */
+extern unsigned int *g_btlEncount; /* 0x435d30 */
 
 /* Supplied declaration required: FUN_00270028. */
 /* Supplied declaration required: FUN_0029be5c. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
 
 
 void FUN_00207f68(unsigned int *param_1)
@@ -40,15 +40,15 @@ void FUN_00207f68(unsigned int *param_1)
   unsigned int *puVar5;
   
   puVar1 = &LAB_00208098;
-  FUN_002c4a08(&LAB_00208098,2,0,0,FUN_001fc6b4,FUN_002d5034,param_1,*param_1);
+  taskCreateDraw(&LAB_00208098,2,0,0,FUN_001fc6b4,btlEncountDestroy,param_1,*param_1);
   param_1[2] = (unsigned int)puVar1;
   puVar2 = (unsigned int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x14,1);
-  DAT_00435d30 = puVar2;
+  asdMemAlloc(0x100,0x100,0,0x14,1);
+  g_btlEncount = puVar2;
   *puVar2 = 0;
   puVar2[3] = 0;
   if (puVar2[1] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     puVar2[1] = 0;
   }
   temp_v1 = 0x32;

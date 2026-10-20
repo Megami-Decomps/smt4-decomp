@@ -27,9 +27,9 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char DAT_00526308; /* 0x526308 */
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
-extern unsigned int FUN_0014bce0(unsigned int);
+extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001505ac. */
 /* Supplied declaration required: FUN_00151408. */
@@ -88,8 +88,8 @@ void FUN_004788dc(int param_1)
   } while (temp_v1 < 0x18);
   FUN_0015f258(param_1 + 0x11b0);
   *(unsigned char *)(param_1 + 0x15c5) = 0;
-  *(unsigned char *)(DAT_00570260 + 0xb81) = 0;
-  temp_v0 = FUN_0014bce0(0);
+  *(unsigned char *)(g_aocMain + 0xb81) = 0;
+  temp_v0 = spriteHandleCreate(0);
   *(unsigned int *)(param_1 + 0x1eec) = temp_v0;
   FUN_001527d8(temp_v0,0xffffffff);
   FUN_00151408(*(unsigned int *)(param_1 + 0x1eec),0,0x646464ff);

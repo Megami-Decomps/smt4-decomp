@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002a7218(...);
-int FUN_002c415c(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
+int scrScriptProcessDestroy(...);
+int asdMemFree(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -16,15 +16,15 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int FUN_0020ed70(...); /* 0x20ed70 */
+extern int btlAiScriptUpdate(...); /* 0x20ed70 */
 extern unsigned char LAB_0021af30; /* 0x21af30 */
-extern int FUN_002e064c(...); /* 0x2e064c */
-extern int *DAT_00434260; /* 0x434260 */
+extern int btlAiScriptDestroy(...); /* 0x2e064c */
+extern int *g_btlAiScript; /* 0x434260 */
 
-/* Supplied declaration required: FUN_002a7218. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
 
 
 void FUN_0021ae40(unsigned int *param_1)
@@ -35,18 +35,18 @@ void FUN_0021ae40(unsigned int *param_1)
   unsigned char *puVar2;
   
   piVar1 = (int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x90,1);
+  asdMemAlloc(0x100,0x100,0,0x90,1);
   puVar2 = &LAB_0021af30;
-  DAT_00434260 = piVar1;
-  FUN_002c4a08(&LAB_0021af30,2,0,0,FUN_0020ed70,FUN_002e064c,param_1,*param_1);
+  g_btlAiScript = piVar1;
+  taskCreateDraw(&LAB_0021af30,2,0,0,btlAiScriptUpdate,btlAiScriptDestroy,param_1,*param_1);
   param_1[0x12] = (unsigned int)puVar2;
-  piVar1 = DAT_00434260;
-  if (DAT_00434260[1] != 0) {
-    FUN_002a7218();
+  piVar1 = g_btlAiScript;
+  if (g_btlAiScript[1] != 0) {
+    scrScriptProcessDestroy();
     piVar1[1] = 0;
   }
   if (*piVar1 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *piVar1 = 0;
   }
   piVar1[3] = 0;

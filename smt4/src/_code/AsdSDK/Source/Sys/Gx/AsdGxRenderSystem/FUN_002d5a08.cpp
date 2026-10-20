@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_002a66e0(int, int, int);
 int FUN_002bc11c(void);
-int FUN_002bd75c(void);
-int FUN_002bf5c0(...);
-int FUN_002c5300(...);
+int asdTextureCreate(void);
+int asdMemoryAllocAligned(...);
+int asdMemoryAlloc(...);
 
 /* stack frame of param_7: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,9 +17,9 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002a66e0. */
 /* Supplied declaration required: FUN_002bc11c. */
-/* Supplied declaration required: FUN_002bd75c. */
-/* Supplied declaration required: FUN_002bf5c0. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdTextureCreate. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 int * FUN_002d5a08(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6,
@@ -40,11 +40,11 @@ int * FUN_002d5a08(int param_1,int param_2,int param_3,int param_4,int param_5,i
   unsigned char temp_v8;
   
   piVar1 = (int *)0x100;
-  FUN_002c5300(0x100,0x100,0,0x14,1);
+  asdMemoryAlloc(0x100,0x100,0,0x14,1);
   piVar2 = (int *)0x100;
-  FUN_002c5300(0x100,0x100,0,0x30,1);
+  asdMemoryAlloc(0x100,0x100,0,0x30,1);
   temp_v0 = 0;
-  FUN_002bd75c();
+  asdTextureCreate();
   piVar1[3] = temp_v0;
   *(int *)(temp_v0 + 0x14) = param_1;
   *(int *)(piVar1[3] + 0x18) = param_2;
@@ -130,17 +130,17 @@ LAB_002d5b24:
     if (param_3 != 0x20000) {
       if (param_3 == 0x30000) {
         temp_v4 = 0x30000;
-        FUN_002c5300(temp_v4,0x100,0,temp_v2,1);
+        asdMemoryAlloc(temp_v4,0x100,0,temp_v2,1);
       }
     }
     else {
       temp_v4 = 0x20000;
-      FUN_002c5300(temp_v4,0x100,0,temp_v2,1);
+      asdMemoryAlloc(temp_v4,0x100,0,temp_v2,1);
     }
   }
   else {
     temp_v4 = 0x10000;
-    FUN_002bf5c0(0x10000,0x100,0,temp_v2,0x40,1);
+    asdMemoryAllocAligned(0x10000,0x100,0,temp_v2,0x40,1);
   }
   piVar2[2] = temp_v4;
   temp_v2 = FUN_002bc11c();
@@ -193,11 +193,11 @@ LAB_002d5b24:
     else {
       temp_v0 = 0x20000;
     }
-    FUN_002c5300(temp_v0,0x100,0,temp_v2,1);
+    asdMemoryAlloc(temp_v0,0x100,0,temp_v2,1);
   }
   else {
     temp_v0 = 0x10000;
-    FUN_002bf5c0(0x10000,0x100,0,temp_v2,0x40,1);
+    asdMemoryAllocAligned(0x10000,0x100,0,temp_v2,0x40,1);
   }
   piVar2[8] = temp_v0;
   temp_v0 = FUN_002bc11c();

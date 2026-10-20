@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_003283ac(int);
+int scrSetResult(int);
 
 extern int FUN_0014bef4(unsigned int);
 extern int FUN_00187168(void);
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 extern int FUN_003e4a00(void);
 extern int FUN_003e4d68(unsigned int);
 
@@ -39,7 +39,7 @@ unsigned int FUN_003bb194(void)
       temp_v3 = temp_v3 + 1;
     } while ((int)temp_v3 < 0xc);
   }
-  FUN_003283ac(temp_v4);
+  scrSetResult(temp_v4);
   return 1;
 }
 

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0010d2bc(int);
 int FUN_0010dd80(void);
-int FUN_0010e948(int);
+int asdSoundDuckSetup(int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -27,9 +27,9 @@ extern unsigned int DAT_004c582c; /* 0x4c582c */
 
 /* Supplied declaration required: FUN_0010d2bc. */
 /* Supplied declaration required: FUN_0010dd80. */
-/* Supplied declaration required: FUN_0010e948. */
+/* Supplied declaration required: asdSoundDuckSetup. */
 extern int FUN_002c3124(unsigned char *, unsigned int *, unsigned int);
-extern int FUN_002c564c(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 void FUN_00106650(void)
@@ -39,7 +39,7 @@ void FUN_00106650(void)
   int temp_v0;
   unsigned int temp_v1 [2];
   
-  temp_v0 = FUN_002c564c(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
     FUN_0010dd80();
     DAT_004c5819 = 0x60;
@@ -51,7 +51,7 @@ void FUN_00106650(void)
     DAT_004c5824 = 0x1e;
     DAT_004c5828 = 1;
     DAT_004c582c = 0x14;
-    FUN_0010e948(1);
+    asdSoundDuckSetup(1);
     temp_v1[0] = 0;
     if (DAT_004c5814 == 0) {
       DAT_004c5814 = FUN_002c3124(&LAB_001066f4,temp_v1,0);

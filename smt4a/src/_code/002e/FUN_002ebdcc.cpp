@@ -11,7 +11,7 @@ int FUN_001ba514(...);
 int FUN_002292ac(void);
 int FUN_00237898(...);
 int FUN_002e342c(...);
-int FUN_002e3d04(void);
+int asdOperatorNewD(void);
 int FUN_002e6490(...);
 int FUN_003180c4(...);
 int FUN_00359974(...);
@@ -20,7 +20,7 @@ int FUN_00417c24(...);
 int FUN_00480fc0(...);
 int FUN_004d0d70(void);
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_001ad9b4(void);
 int FUN_00275bb0(...);
 int FUN_00275fe4(...);
@@ -28,13 +28,13 @@ int FUN_002852f0(int);
 int FUN_002c52e0(int);
 int FUN_002c76c0(...);
 int FUN_002cd8fc(void);
-int FUN_0031bbe0(int);
-int FUN_003283ac(...);
+int eventTexSetFlag(int);
+int scrSetResult(...);
 int FUN_003315c4(void);
 int FUN_00331714(int *);
 int FUN_00336de4(unsigned int, int);
-int FUN_00341ecc(int);
-int FUN_0035fd38(int);
+int bustupCutAnimSetFlag(int);
+int btlTalkBustUpSetUnk2F4(int);
 int FUN_003deea4(...);
 int FUN_003df168(int *, unsigned int);
 int FUN_003fd63c(...);
@@ -64,16 +64,16 @@ extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_0015f858. */
 extern int FUN_00162880(void);
 extern int FUN_00162e8c(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
 extern int FUN_0016a0f0(unsigned int);
 /* Supplied declaration required: FUN_00180118. */
-extern int FUN_0019a7dc(void);
+extern int gameGetOptions(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(unsigned int);
 /* Supplied declaration required: FUN_001ba514. */
 /* Supplied declaration required: FUN_002292ac. */
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00237898. */
 /* Supplied declaration required: FUN_00275bb0. */
 /* Supplied declaration required: FUN_00275fe4. */
@@ -84,19 +84,19 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002cd8fc. */
 extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e3d04. */
+/* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: FUN_002e6490. */
 /* Supplied declaration required: FUN_003180c4. */
-/* Supplied declaration required: FUN_0031bbe0. */
-extern int FUN_003216b8(void);
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: eventTexSetFlag. */
+extern int btlTalkBustUpExists(void);
+/* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003315c4. */
 /* Supplied declaration required: FUN_00331714. */
 /* Supplied declaration required: FUN_00336de4. */
-/* Supplied declaration required: FUN_00341ecc. */
+/* Supplied declaration required: bustupCutAnimSetFlag. */
 /* Supplied declaration required: FUN_00359974. */
 extern int FUN_0035fcbc(void);
-/* Supplied declaration required: FUN_0035fd38. */
+/* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 extern unsigned int FUN_00375848(void);
 /* Supplied declaration required: FUN_003dea6c. */
 /* Supplied declaration required: FUN_003deea4. */
@@ -143,7 +143,7 @@ unsigned int FUN_002ebdcc(void)
   unsigned int temp_v23;
   unsigned int temp_v24;
   
-  temp_v1 = FUN_00236038(0) & 0xffff;
+  temp_v1 = scrGetArg(0) & 0xffff;
   temp_v2 = FUN_002deb84();
   if (temp_v2 == 0) {
     FUN_00275fe4(0);
@@ -188,7 +188,7 @@ unsigned int FUN_002ebdcc(void)
       } while (temp_v2 < 3);
       return 0;
     }
-    FUN_003283ac(0);
+    scrSetResult(0);
     return 1;
   }
   temp_v2 = FUN_0016a0f0(0x1e);
@@ -199,9 +199,9 @@ unsigned int FUN_002ebdcc(void)
   case 0:
     temp_v2 = FUN_0035fcbc();
     if (temp_v2 == 0) {
-      FUN_0031bbe0(0);
-      FUN_00341ecc(0);
-      temp_v2 = FUN_003216b8();
+      eventTexSetFlag(0);
+      bustupCutAnimSetFlag(0);
+      temp_v2 = btlTalkBustUpExists();
       if (temp_v2 != 0) {
         temp_v3 = FUN_00375848();
         FUN_00275fe4(2,temp_v3);
@@ -209,7 +209,7 @@ unsigned int FUN_002ebdcc(void)
       else {
         FUN_00275fe4(2,0xffffffff);
       }
-      FUN_0035fd38(0);
+      btlTalkBustUpSetUnk2F4(0);
       FUN_00275fe4(3,0);
       FUN_002c76c0(1);
       FUN_002c52e0(1);
@@ -238,20 +238,20 @@ unsigned int FUN_002ebdcc(void)
       FUN_003315c4();
       FUN_002c76c0(0xffffffff);
       FUN_002852f0(0);
-      FUN_001681cc(0x92);
+      sysPlaySe(0x92);
       FUN_00275bb0(3);
-      FUN_0031bbe0(1);
-      FUN_00341ecc(1);
+      eventTexSetFlag(1);
+      bustupCutAnimSetFlag(1);
       temp_v4 = FUN_00275bb0(2);
       if (-1 < (int)temp_v4) {
-        temp_v2 = FUN_003216b8();
+        temp_v2 = btlTalkBustUpExists();
         if (temp_v2 == 0) {
           FUN_002cd8fc();
         }
         if ((temp_v4 != 0) && (temp_v5 = FUN_00375848(), temp_v5 != temp_v4)) {
           FUN_00336de4(temp_v4 & 0xffff,0);
         }
-        FUN_0035fd38(1);
+        btlTalkBustUpSetUnk2F4(1);
       }
       temp_v2 = FUN_004186a4();
       if ((temp_v2 != 0) && (temp_v4 = FUN_004186e0(), temp_v4 == temp_v1)) {
@@ -259,7 +259,7 @@ unsigned int FUN_002ebdcc(void)
       }
       FUN_00417a60(temp_v1);
       FUN_003deea4(0);
-      FUN_003283ac(1);
+      scrSetResult(1);
       return 1;
     }
     break;
@@ -291,7 +291,7 @@ unsigned int FUN_002ebdcc(void)
     }
     else {
       temp_v3 = 8;
-      temp_v6 = FUN_0019a7dc();
+      temp_v6 = gameGetOptions();
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v6 + 0x62);
       FUN_00180118(temp_v1);
       FUN_002e342c(&temp_v13,temp_v1);
@@ -360,7 +360,7 @@ unsigned int FUN_002ebdcc(void)
     temp_v10 = FUN_00275bb0(1);
     FUN_00275fe4(1,temp_v10 + 1);
     if (temp_v2 == 1) {
-      FUN_003283ac(2);
+      scrSetResult(2);
       return 1;
     }
     break;
@@ -388,13 +388,13 @@ unsigned int FUN_002ebdcc(void)
   default:
     FUN_00417a60(temp_v1);
     FUN_003deea4(0);
-    FUN_003283ac(1);
+    scrSetResult(1);
     return 1;
   case 7:
     temp_v6 = FUN_00275bb0(3);
     temp_v7 = FUN_00275bb0(2);
     temp_v10 = temp_v7 << 1;
-    FUN_002e3d04();
+    asdOperatorNewD();
     puVar12 = (unsigned short *)(temp_v10 + temp_v6 * 2);
     FUN_003dea6c(*puVar12,0,1);
     FUN_001695a0();
@@ -412,7 +412,7 @@ unsigned int FUN_002ebdcc(void)
         FUN_002e6490(temp_v10);
         FUN_00417a60(temp_v1);
         FUN_003deea4(0);
-        FUN_003283ac(1);
+        scrSetResult(1);
         return 1;
       }
       FUN_00275fe4(1,0);

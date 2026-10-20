@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001800b8(void);
-int FUN_00387368(void);
+int asdEffectTextureCreate(void);
 
 extern int DAT_0059dbfc; /* 0x59dbfc */
 extern int DAT_0059dc10; /* 0x59dc10 */
@@ -13,7 +13,7 @@ extern int DAT_0059dc10; /* 0x59dc10 */
 /* Supplied declaration required: FUN_001800b8. */
 extern int FUN_002721e4(int);
 extern int FUN_0037a7f4(void);
-/* Supplied declaration required: FUN_00387368. */
+/* Supplied declaration required: asdEffectTextureCreate. */
 
 
 void FUN_0035b9c0(void)
@@ -33,7 +33,7 @@ void FUN_0035b9c0(void)
       if (*(short *)(temp_v0 + 0x1c) != 9) {
         return;
       }
-      FUN_00387368();
+      asdEffectTextureCreate();
     }
     else {
       temp_v1 = FUN_0037a7f4();

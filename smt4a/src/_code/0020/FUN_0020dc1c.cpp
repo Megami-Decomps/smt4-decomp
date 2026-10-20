@@ -20,7 +20,7 @@ int FUN_00480fc0(...);
 int FUN_00481104(...);
 
 int FUN_00163aa4(...);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_001801a4(void);
 int FUN_001834a4(...);
 int FUN_00203b40(int, int, int, int);
@@ -31,7 +31,7 @@ int FUN_002a4860(...);
 int FUN_002a7324(...);
 int FUN_002c8538(int);
 int FUN_002c85b0(int);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 int FUN_0031d1d8(int, unsigned int);
 int FUN_0031f718(...);
 int FUN_003343c0(...);
@@ -72,7 +72,7 @@ extern unsigned int DAT_0057f10c; /* 0x57f10c */
 /* Supplied declaration required: FUN_001641b4. */
 /* Supplied declaration required: FUN_001641c4. */
 extern int FUN_001643a0(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001801a4. */
 /* Supplied declaration required: FUN_001834a4. */
 extern int FUN_0018719c(unsigned int);
@@ -95,7 +95,7 @@ extern int FUN_002c2c4c(int);
 extern int FUN_002c2c68(int);
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031d1d8. */
 /* Supplied declaration required: FUN_0031f718. */
 extern int FUN_00320af8(int, int);
@@ -155,7 +155,7 @@ void FUN_0020dc1c(void)
     *(unsigned int *)(temp_v4 + 0x332c) = 0;
     *(unsigned int *)(temp_v4 + 0x3330) = 0;
     *(unsigned int *)(temp_v4 + 0x3334) = 0;
-    FUN_002e6354(temp_v4 + 0x3354,0xe);
+    sysMemClear(temp_v4 + 0x3354,0xe);
     temp_v5 = 0;
     temp_v2 = 3;
     temp_v6 = 0;
@@ -191,7 +191,7 @@ void FUN_0020dc1c(void)
                 else {
                   temp_v2 = 0x117;
                 }
-                FUN_001681cc(temp_v2);
+                sysPlaySe(temp_v2);
                 FUN_002c85b0(0);
                 FUN_002c8538(1);
                 FUN_00215bd0();
@@ -371,7 +371,7 @@ LAB_0020de28:
     else {
       temp_v2 = 0x117;
     }
-    FUN_001681cc(temp_v2);
+    sysPlaySe(temp_v2);
     return;
   case 3:
     temp_v6 = FUN_002c2c4c(DAT_0057f108 + 0x40);

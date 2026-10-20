@@ -14,8 +14,8 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned int *DAT_004652a0; /* 0x4652a0 */
-extern unsigned int DAT_004652a4; /* 0x4652a4 */
+extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
+extern unsigned int g_commandBufferEnd; /* 0x4652a4 */
 extern signed char DAT_004c62a1; /* 0x4c62a1 */
 extern signed char DAT_004c62a2; /* 0x4c62a2 */
 extern int DAT_004c632c; /* 0x4c632c */
@@ -38,9 +38,9 @@ void FUN_002bdb48(void)
   unsigned char temp_v2;
   
   temp_v0 = DAT_004c632c;
-  temp_v1 = (int)DAT_004652a0 - *(int *)(DAT_004c632c + 4);
+  temp_v1 = (int)g_commandBufferCursor - *(int *)(DAT_004c632c + 4);
   temp_v2 = (temp_v1 & 8) != 0;
-  puVar2 = DAT_004652a0;
+  puVar2 = g_commandBufferCursor;
   if (temp_v2) {
     puVar2 = (unsigned int *)(temp_v1 + 0x18);
   }
@@ -50,26 +50,26 @@ void FUN_002bdb48(void)
   }
   else {
     *(unsigned int *)(temp_v0 + 0xc) = temp_v1 + 0x20;
-    if ((unsigned int)puVar2 < DAT_004652a4) {
-      DAT_004652a0 = puVar2 + 2;
+    if ((unsigned int)puVar2 < g_commandBufferEnd) {
+      g_commandBufferCursor = puVar2 + 2;
       puVar2[1] = 0x8025e;
       *puVar2 = 0;
     }
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    *DAT_004652a0 = 1;
-    DAT_004652a0[1] = 0xf0111;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    *g_commandBufferCursor = 1;
+    g_commandBufferCursor[1] = 0xf0111;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    *DAT_004652a0 = 1;
-    DAT_004652a0[1] = 0xf0110;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    *g_commandBufferCursor = 1;
+    g_commandBufferCursor[1] = 0xf0110;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    *DAT_004652a0 = 0x12345678;
-    DAT_004652a0[1] = 0xf0010;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    *g_commandBufferCursor = 0x12345678;
+    g_commandBufferCursor[1] = 0xf0010;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
   puVar4 = (unsigned char *)(*(int *)(temp_v0 + 0x18) + *(int *)(temp_v0 + 0x20) * 0x1c);
   *puVar4 = 1;

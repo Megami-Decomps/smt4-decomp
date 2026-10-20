@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bfc24(int, int, unsigned int, int);
-int FUN_002c0cec(int, int);
+int dataTableGet(int, int);
 int rt_memcpy_w(unsigned int *, int, int);
 
 /* stack frame of param_2: 8 slot(s), 32 byte(s) */
@@ -20,14 +20,14 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } param_2_stack;
 
-extern char FUN_0023eae0(unsigned int);
-extern int FUN_002b6b20(void);
+extern char randRange(unsigned int);
+extern int gameGetOptions(void);
 extern int FUN_002b6b38(void);
 /* Supplied declaration required: FUN_002bfc24. */
 extern unsigned int FUN_002bfdc4(void);
-extern int FUN_002c0c74(void);
-extern int FUN_002c0cc4(void);
-/* Supplied declaration required: FUN_002c0cec. */
+extern int dataTableGetCount(void);
+extern int dataTableGetEntries(void);
+/* Supplied declaration required: dataTableGet. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -50,11 +50,11 @@ int FUN_00245a7c(int param_1,int param_2)
   int aiStack_80 [18];
   int temp_v11 [6];
   
-  FUN_002c0cec(0x3e,0);
-  temp_v3 = FUN_002c0cc4();
-  FUN_002c0cec(0x3e,0);
-  temp_v4 = FUN_002c0c74();
-  temp_v5 = FUN_002b6b20();
+  dataTableGet(0x3e,0);
+  temp_v3 = dataTableGetEntries();
+  dataTableGet(0x3e,0);
+  temp_v4 = dataTableGetCount();
+  temp_v5 = gameGetOptions();
   temp_v0 = *(unsigned short *)(temp_v5 + 0x604);
   temp_v5 = FUN_002b6b38();
   if (temp_v5 != 2) {
@@ -70,7 +70,7 @@ int FUN_00245a7c(int param_1,int param_2)
     }
   }
   else {
-    temp_v5 = FUN_002b6b20();
+    temp_v5 = gameGetOptions();
     temp_v0 = *(unsigned short *)(temp_v5 + 0x46);
     temp_v5 = 0;
     if (temp_v4 < 1) {
@@ -123,7 +123,7 @@ int FUN_00245a7c(int param_1,int param_2)
         }
         temp_v11[5] = 0;
       }
-      temp_v2 = FUN_0023eae0(temp_v7 & 0xffff);
+      temp_v2 = randRange(temp_v7 & 0xffff);
       temp_v6 = FUN_002bfdc4();
       FUN_002bfc24(0,temp_v11[temp_v2],temp_v6,4);
       return temp_v11[temp_v2];

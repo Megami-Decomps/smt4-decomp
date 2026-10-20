@@ -1,24 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fc088` (_code @ 0x2fc088, 0x1a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Advances the ring buffer's read position by `count` (wrapping at its capacity) and reduces the stored length. */
+#include "common.h"
 
 extern "C" {
 
-int aeabi_uidivmod(int, unsigned int);
+typedef struct RingBuffer {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u32 pos;
+    /* 0x18 */ s32 length;
+    /* 0x1C */ u32 capacity;
+} RingBuffer;
 
-/* Supplied declaration required: aeabi_uidivmod. */
-
-
-void FUN_002fc088(int param_1,int param_2)
-
+void FUN_002fc088(RingBuffer *ring, s32 count)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  aeabi_uidivmod(*(int *)(param_1 + 0x14) + param_2,*(unsigned int *)(param_1 + 0x1c));
-  *(unsigned int *)(param_1 + 0x14) = temp_v0;
-  *(int *)(param_1 + 0x18) = *(int *)(param_1 + 0x18) - param_2;
-  return;
+    ring->pos = (u32)((ring->pos + count) % (ring->capacity));
+    ring->length -= count;
 }
 
-} /* extern "C" */
+}

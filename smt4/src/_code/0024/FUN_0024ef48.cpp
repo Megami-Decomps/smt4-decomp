@@ -3,10 +3,10 @@
 extern "C" {
 
 int FUN_002a72c0(int);
-int FUN_002a775c(void);
+int asdMdlManagerDestroy(void);
 
 /* Supplied declaration required: FUN_002a72c0. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 
 
 void FUN_0024ef48(int param_1)
@@ -23,7 +23,7 @@ void FUN_0024ef48(int param_1)
   do {
     temp_v1 = param_1 + temp_v0 * 4;
     if (*(int *)(temp_v1 + 0x10) != 0) {
-      FUN_002a775c();
+      asdMdlManagerDestroy();
       *(unsigned int *)(temp_v1 + 0x10) = 0;
     }
     temp_v0 = temp_v0 + 1;

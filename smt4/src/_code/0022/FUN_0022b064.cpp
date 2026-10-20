@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int FUN_00292f28(unsigned int);
+extern int padIsButtonDown(unsigned int);
 /* Supplied declaration required: FUN_002b8838. */
 extern int FUN_002c09d0(unsigned int);
 
@@ -29,7 +29,7 @@ void FUN_0022b064(int param_1)
     if (temp_v1 != 0) {
       temp_v1 = FUN_002c09d0(0x40c);
       if (temp_v1 != 0) {
-        temp_v1 = FUN_00292f28(0x76);
+        temp_v1 = padIsButtonDown(0x76);
         temp_v0 = *(short *)(param_1 + 0x3c);
         if (temp_v1 != 0) {
           if (temp_v0 == 4) {

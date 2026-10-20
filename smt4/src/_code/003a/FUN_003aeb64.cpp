@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00255158(int, int);
 int FUN_0027e6f4(int, int);
 int FUN_00282924(unsigned int *, int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_002b7bca(...);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
@@ -24,7 +24,7 @@ extern int FUN_002542ec(int);
 /* Supplied declaration required: FUN_00255158. */
 /* Supplied declaration required: FUN_0027e6f4. */
 /* Supplied declaration required: FUN_00282924. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002b7bca. */
 
 
@@ -59,14 +59,14 @@ int FUN_003aeb64(unsigned int param_1,int param_2)
   do {
     aiStack_8c0[temp_v5 * 2] = -1;
     temp_v8[temp_v5 * 2] = 0xffffffff;
-    temp_v2 = FUN_002939f4();
+    temp_v2 = btlGetMainState();
     piVar9 = (int *)(*(int *)(temp_v2 + 0x1e98) + temp_v5 * 0x114);
     if (piVar9 != (int *)0x0) {
-      puVar4 = (unsigned int *)FUN_002939f4();
+      puVar4 = (unsigned int *)btlGetMainState();
       FUN_00282924(puVar4,(int)*(short *)((int)piVar9 + 0x62));
       if (((puVar4 != (unsigned int *)0x0) && ((*puVar4 & 0x10) != 0)) && (piVar9[0x3c] < 0)) {
         temp_v6 = 0;
-        temp_v2 = FUN_002939f4();
+        temp_v2 = btlGetMainState();
         FUN_0027e6f4(temp_v2,1);
         if ((temp_v2 < 0) && ((char)piVar9[0xf] != '\x02')) {
           temp_v6 = 1;
@@ -109,10 +109,10 @@ int FUN_003aeb64(unsigned int param_1,int param_2)
   temp_v5 = 0;
   temp_v9 = 0;
   do {
-    temp_v6 = FUN_002939f4();
+    temp_v6 = btlGetMainState();
     temp_v6 = *(int *)(temp_v6 + 0x1e98) + temp_v5 * 0x114;
     if (temp_v6 != 0) {
-      puVar4 = (unsigned int *)FUN_002939f4();
+      puVar4 = (unsigned int *)btlGetMainState();
       FUN_00282924(puVar4,(int)*(short *)(temp_v6 + 0x62));
       if ((puVar4 != (unsigned int *)0x0) && (temp_v4 = *puVar4, (temp_v4 & 1) != 0)) {
         puVar10 = (unsigned int *)(temp_v11 + temp_v2 * 0x18);
@@ -160,7 +160,7 @@ int FUN_003aeb64(unsigned int param_1,int param_2)
             puVar10[3] = 0;
           }
           else {
-            temp_v3 = FUN_002939f4();
+            temp_v3 = btlGetMainState();
             FUN_0027e6f4(temp_v3,1);
             if ((temp_v3 < 0) && (*(char *)(temp_v6 + 0x3c) != '\x02')) {
               puVar10[2] = 1;

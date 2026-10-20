@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_00203d04(int);
 
 extern int *DAT_005738e8; /* 0x5738e8 */
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_00203d04. */
 extern int FUN_002619e0(void);
 
@@ -44,7 +44,7 @@ void FUN_004c8b10(void)
       *(unsigned int *)(*(int *)(temp_v0 + 0x874) + 0x878) = *(unsigned int *)(temp_v0 + 0x878);
     }
     piVar2[2] = piVar2[2] - 1;
-    FUN_0019a5a0();
+    asdMemFree();
     temp_v0 = temp_v2;
   }
   return;

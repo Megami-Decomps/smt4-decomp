@@ -22,7 +22,7 @@ typedef struct {
 
 extern unsigned char DAT_0057ffd2; /* 0x57ffd2 */
 extern int DAT_0057ffe4; /* 0x57ffe4 */
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
@@ -66,10 +66,10 @@ unsigned int FUN_0013a9c8(void)
     }
     if (0.0f < temp_v5) {
       temp_v0 = FUN_00153f64(0x21,0);
-      FUN_0016c4b8(DAT_0059dbb4,temp_v0);
+      FUN_0016c4b8(g_renderCtx,temp_v0);
       FUN_001640cc(&temp_v2);
-      FUN_0016c560(DAT_0059dbb4);
-      FUN_0016c410(DAT_0059dbb4);
+      FUN_0016c560(g_renderCtx);
+      FUN_0016c410(g_renderCtx);
     }
     temp_v1 = FUN_00144eec();
     DAT_0057ffe4 = (DAT_0057ffe4 - temp_v1) - 1;

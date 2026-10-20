@@ -14,20 +14,20 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern int DAT_0057f268; /* 0x57f268 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern unsigned int FUN_001ab854(unsigned int);
 extern int FUN_001ab888(void);
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 /* Supplied declaration required: FUN_002a4878. */
 extern int FUN_002a4894(unsigned int);
 /* Supplied declaration required: FUN_002c7bb0. */
 /* Supplied declaration required: FUN_003344b4. */
 extern int FUN_003df57c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_004bcbb4. */
-extern int FUN_004ee568(void);
+extern int btlUnitGet(void);
 
 
 void FUN_0028c2ec(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -48,9 +48,9 @@ void FUN_0028c2ec(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   temp_v8 = param_4;
   temp_v2 = FUN_001ab888();
   temp_v8 = 0;
-  if (((*(short *)(temp_v6 + 0x36) == 0x7d) && (temp_v3 = FUN_0014aa78(), temp_v3 != 0)) &&
-     (DAT_0057113c != 0)) {
-    temp_v3 = FUN_004ee568();
+  if (((*(short *)(temp_v6 + 0x36) == 0x7d) && (temp_v3 = btlGetMainState(), temp_v3 != 0)) &&
+     (g_btlScriptUnit != 0)) {
+    temp_v3 = btlUnitGet();
     if ((*(int *)(temp_v3 + 0x28) != 0) && (*(short *)(*(int *)(temp_v3 + 0x28) + 0x1be) == 8))
     goto LAB_0028c444;
   }
@@ -61,7 +61,7 @@ void FUN_0028c2ec(unsigned int param_1,int param_2,unsigned int param_3,unsigned
       goto LAB_0028c444;
     }
     if ((*(short *)(temp_v6 + 0x38) < 0) && (*(int *)(*(int *)(temp_v6 + 0xa10) + 0x34) == -2)) {
-      temp_v3 = FUN_002919a4();
+      temp_v3 = btlMainGetUnk14();
       if (temp_v3 != 0) {
         temp_v3 = FUN_004bcbb4(temp_v3,*(unsigned short *)(temp_v6 + 0x36));
         *(int *)(*(int *)(temp_v6 + 0xa10) + 0x44) = -temp_v3;

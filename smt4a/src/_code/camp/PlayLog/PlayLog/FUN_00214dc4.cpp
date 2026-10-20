@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_0018408c(...);
@@ -32,20 +32,20 @@ typedef struct {
 extern unsigned char LAB_00215170; /* 0x215170 */
 extern unsigned char LAB_00215178; /* 0x215178 */
 extern unsigned char LAB_00215248; /* 0x215248 */
-extern int DAT_0057f278; /* 0x57f278 */
+extern int g_playLog; /* 0x57f278 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int FUN_001654d8(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0018408c. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 extern int FUN_002a4860(int);
 /* Supplied declaration required: FUN_002c0940. */
 /* Supplied declaration required: FUN_00344cd0. */
@@ -73,14 +73,14 @@ void FUN_00214dc4(void)
   unsigned char temp_v12 [16];
   int temp_v13;
   
-  temp_v0 = DAT_0057f278;
+  temp_v0 = g_playLog;
   temp_v8 = 0;
-  temp_v1 = FUN_00348ed0(DAT_0057f278 + 0x2dc);
+  temp_v1 = FUN_00348ed0(g_playLog + 0x2dc);
   if (0 < temp_v1) {
     temp_v13 = temp_v0 + 0x400;
     do {
       temp_v1 = FUN_001654d8(temp_v0 + temp_v8 * 0x8c + 0x20);
-      FUN_001677c0();
+      efctSetSpeed();
       if (temp_v8 == 0) {
         if (*(char *)(temp_v13 + 0x88) != '\0') {
           FUN_001835b4(2,0x25,0,temp_v1,0,0xb);
@@ -106,9 +106,9 @@ void FUN_00214dc4(void)
       FUN_00164b5c(2,0x25,1,*(short *)(temp_v2 + 8) + temp_v1,(int)*(short *)(temp_v2 + 10),0xb);
       temp_v3 = FUN_002a4860(temp_v0 + 0x2dc);
       temp_v9 = (unsigned int)*(short *)(temp_v0 + (temp_v3 + temp_v8) * 2 + 0x424);
-      temp_v4 = FUN_00187180(0x37,0);
-      temp_v3 = FUN_00192798();
-      temp_v5 = FUN_00192748(temp_v4);
+      temp_v4 = dataTableGet(0x37,0);
+      temp_v3 = dataTableGetEntries();
+      temp_v5 = dataTableGetCount(temp_v4);
       if ((temp_v9 < temp_v5) && (temp_v3 = temp_v3 + temp_v9 * 0x40, temp_v3 != 0)) {
         temp_v6 = FUN_001834a4(0x25,0x13);
         FUN_00100388(temp_v10,&LAB_00215170,temp_v3 + 2);
@@ -151,7 +151,7 @@ void FUN_00214dc4(void)
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_00162790(2,0xffffffff,temp_v10,(int)*(short *)(temp_v2 + 8));
       }
-      FUN_001677c0();
+      efctSetSpeed();
       temp_v8 = temp_v8 + 1;
       temp_v1 = FUN_00348ed0(temp_v0 + 0x2dc);
     } while (temp_v8 < temp_v1);

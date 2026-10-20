@@ -7,14 +7,14 @@ extern "C" {
 int FUN_00248738(...);
 int FUN_00297060(...);
 int FUN_00297410(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int FUN_002c312c(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int memClear(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -33,28 +33,28 @@ extern unsigned char LAB_002e276c; /* 0x2e276c */
 extern unsigned char LAB_002e2798; /* 0x2e2798 */
 extern unsigned char LAB_002e27b0; /* 0x2e27b0 */
 extern unsigned char LAB_003291dc; /* 0x3291dc */
-extern int FUN_0032ae3c(...); /* 0x32ae3c */
-extern int FUN_0032fdf0(...); /* 0x32fdf0 */
+extern int gauntletAppMenuExit(...); /* 0x32ae3c */
+extern int gauntletAppMenuDestroy(...); /* 0x32fdf0 */
 extern unsigned char DAT_004028f0; /* 0x4028f0 */
 extern unsigned char DAT_00402914; /* 0x402914 */
 extern unsigned char DAT_00402944; /* 0x402944 */
-extern unsigned int *DAT_0043dc88; /* 0x43dc88 */
+extern unsigned int *g_gauntletAppMenu; /* 0x43dc88 */
 
 /* Supplied declaration required: FUN_00248738. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_00297410. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 extern int FUN_002c09d0(unsigned int);
-extern unsigned int FUN_002c0c74(unsigned int);
-extern unsigned int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 extern unsigned int FUN_002c5c04(unsigned char *);
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
@@ -70,18 +70,18 @@ unsigned int FUN_002e24c8(void)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  if (DAT_0043dc88 == (unsigned int *)0x0) {
+  if (g_gauntletAppMenu == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
-    FUN_002c498c(0x100,0x100,0,0x534,1);
-    DAT_0043dc88 = puVar1;
+    asdMemAlloc(0x100,0x100,0,0x534,1);
+    g_gauntletAppMenu = puVar1;
   }
-  puVar1 = DAT_0043dc88;
-  FUN_002c4938();
+  puVar1 = g_gauntletAppMenu;
+  memClear();
   puVar2 = &LAB_002e2754;
-  FUN_002c5788(&LAB_002e2754,1,0,0,&LAB_003291dc,FUN_0032fdf0,0);
+  asdProcessCreateSimple(&LAB_002e2754,1,0,0,&LAB_003291dc,gauntletAppMenuDestroy,0);
   *puVar1 = (unsigned int)puVar2;
   puVar3 = &LAB_002e276c;
-  FUN_002c4a08(&LAB_002e276c,0xe6,0,0,FUN_0032ae3c,0,0,puVar2);
+  taskCreateDraw(&LAB_002e276c,0xe6,0,0,gauntletAppMenuExit,0,0,puVar2);
   puVar1[1] = (unsigned int)puVar3;
   temp_v0 = FUN_002c09d0(0x520);
   if (temp_v0 != 0) {
@@ -101,19 +101,19 @@ unsigned int FUN_002e24c8(void)
   }
   FUN_00248738(puVar1,0);
   FUN_00297410(0xd);
-  temp_v1 = FUN_002c0cec(0xd,0);
-  temp_v2 = FUN_002c0cc4();
+  temp_v1 = dataTableGet(0xd,0);
+  temp_v2 = dataTableGetEntries();
   puVar1[0xab] = temp_v2;
-  temp_v1 = FUN_002c0c74(temp_v1);
+  temp_v1 = dataTableGetCount(temp_v1);
   puVar1[0xac] = temp_v1;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0xae);
   FUN_002c312c(puVar1 + 0xae,&DAT_004028f0,0x24,&DAT_00402914,0x30,0,0,0,0,&DAT_00402944,0xc4);
   FUN_002bd954(puVar1 + 0xb6,0x1d,0,puVar1 + 0xae,0xc9);
-  FUN_002bd8e8(puVar1 + 0xb6,0);
+  timerStart(puVar1 + 0xb6,0);
   FUN_002bd954(puVar1 + 0xd9,0x1d,0,puVar1 + 0xae,0xc9);
   FUN_002bee58(puVar1 + 0xd9,0);
   FUN_002bd954(puVar1 + 0xfc,0x1d,0,puVar1 + 0xae,0xc9);
-  FUN_002bd8e8(puVar1 + 0xfc,2,0);
+  timerStart(puVar1 + 0xfc,2,0);
   FUN_002bd954(puVar1 + 0x11f,0x1d,0x59f,puVar1 + 0xae,0xb5);
   *(unsigned short *)((int)puVar1 + 0x4b6) = 2;
   FUN_002bee58(puVar1 + 0x11f,1);

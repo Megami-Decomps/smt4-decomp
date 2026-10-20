@@ -71,7 +71,7 @@ extern unsigned char LAB_002da12c; /* 0x2da12c */
 extern unsigned char LAB_002da760; /* 0x2da760 */
 extern unsigned char LAB_002daba4; /* 0x2daba4 */
 extern unsigned char LAB_002daba8; /* 0x2daba8 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002580d4. */
@@ -342,8 +342,8 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           FUN_002bf288(2,0x24,0x3d,temp_v10,temp_v13,0x7e);
         }
         temp_v13 = FUN_002bf4f8(0x24,0x3c);
-        temp_v4 = DAT_0044ea00;
-        piVar19 = (int *)(DAT_0044ea00 + 0x130c);
+        temp_v4 = g_titleScene;
+        piVar19 = (int *)(g_titleScene + 0x130c);
         temp_v10 = piVar19[*piVar19 + 2];
         piVar19[*piVar19 + 2] = 3;
         if (*(char *)(temp_v4 + 0x1324) != '\0' || temp_v10 != 3) {
@@ -359,8 +359,8 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         temp_v13 = FUN_002beda4(puVar4 + 0x2c);
         FUN_002bf288(2,0x24,0x3e,(int)&param_1->field_0x0 + *(short *)(temp_v3 + 8) + temp_v13,
                      temp_v4 + param_2 + (int)temp_v0,0x83);
-        temp_v4 = DAT_0044ea00;
-        piVar19 = (int *)(DAT_0044ea00 + 0x130c);
+        temp_v4 = g_titleScene;
+        piVar19 = (int *)(g_titleScene + 0x130c);
         temp_v13 = piVar19[*piVar19 + 2];
         piVar19[*piVar19 + 2] = 0;
         if (*(char *)(temp_v4 + 0x1324) != '\0' || temp_v13 != 0) {
@@ -478,7 +478,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             }
           }
           temp_v7 = FUN_002bf4f8(0x24,temp_v13 + 0xe3);
-          temp_v10 = DAT_0044ea00;
+          temp_v10 = g_titleScene;
           temp_v8 = FUN_002c5da8(6,1,0);
           piVar19 = (int *)(temp_v10 + 0x12ac);
           temp_v12 = piVar19[*piVar19 + 2];
@@ -489,7 +489,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           }
           FUN_002bf288(2,0x24,0xd2,(int)&param_1->field_0x0 + (int)*(short *)(temp_v7 + 8),
                        *(short *)(temp_v7 + 10) + param_2,0x65);
-          temp_v10 = DAT_0044ea00;
+          temp_v10 = g_titleScene;
           temp_v8 = FUN_002c5da8(6,7,0);
           piVar19 = (int *)(temp_v10 + 0x12ac);
           temp_v12 = piVar19[*piVar19 + 2];
@@ -511,8 +511,8 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             }
           }
           temp_v8 = FUN_002bf4f8(0x24,0xd2);
-          temp_v10 = DAT_0044ea00;
-          piVar19 = (int *)(DAT_0044ea00 + 0x130c);
+          temp_v10 = g_titleScene;
+          piVar19 = (int *)(g_titleScene + 0x130c);
           temp_v12 = piVar19[*piVar19 + 2];
           piVar19[*piVar19 + 2] = 3;
           if (*(char *)(temp_v10 + 0x1324) != '\0' || temp_v12 != 3) {
@@ -529,8 +529,8 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                        (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v10 + 8),
                        (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v10 + 10) + param_2,0x68,1)
           ;
-          temp_v4 = DAT_0044ea00;
-          piVar19 = (int *)(DAT_0044ea00 + 0x130c);
+          temp_v4 = g_titleScene;
+          piVar19 = (int *)(g_titleScene + 0x130c);
           temp_v10 = piVar19[*piVar19 + 2];
           piVar19[*piVar19 + 2] = 0;
           if (*(char *)(temp_v4 + 0x1324) != '\0' || temp_v10 != 0) {
@@ -603,7 +603,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
       if (temp_v27 != 0) {
         temp_v4 = FUN_0029e908(temp_v22);
         temp_v13 = FUN_002bf4f8(0x24,temp_v4 + 0xe3);
-        temp_v4 = DAT_0044ea00;
+        temp_v4 = g_titleScene;
         temp_v10 = FUN_002c5da8(6,1,0);
         piVar19 = (int *)(temp_v4 + 0x12ac);
         temp_v7 = piVar19[*piVar19 + 2];
@@ -614,7 +614,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         }
         FUN_002bf380(2,0x24,0xd,(int)&param_1->field_0x0 + (int)*(short *)(temp_v13 + 8),
                      *(short *)(temp_v13 + 10) + param_2,0x79);
-        temp_v4 = DAT_0044ea00;
+        temp_v4 = g_titleScene;
         temp_v13 = FUN_002c5da8(6,7,0);
         piVar19 = (int *)(temp_v4 + 0x12ac);
         temp_v10 = piVar19[*piVar19 + 2];

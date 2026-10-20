@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0037bd00(int);
-int aeabi_uidivmod(...);
+int __aeabi_uidivmod(...);
 int rt_memcpy(int, unsigned char [32], int);
 
 typedef int romwright_code(...);
@@ -41,7 +41,7 @@ extern int FUN_0037bab8(int, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0037bd00. */
 extern unsigned int FUN_003e6de8(int);
 extern unsigned int FUN_003e6e30(int);
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 extern int nw_snd_internal_StreamSoundFileLoader_ReadDspAdpcmChannelInfo(int, unsigned char *, unsigned short *, unsigned int);
 extern int nw_snd_internal_StreamSoundFileLoader_ReadStreamInfo(int, unsigned char *);
 extern int nw_snd_internal_StreamSoundFileLoader_ReadStreamTrackInfo(int, unsigned char *, unsigned int);
@@ -186,8 +186,8 @@ unsigned int FUN_0037c2d8(int param_1,int param_2)
         temp_v3 = nw_snd_internal_StreamSoundFile_FileHeader_GetDataBlockOffset();
       }
       temp_v7 = temp_v3 + 8 + temp_v27;
-      temp_v6 = aeabi_uidivmod(temp_v22 - 1,temp_v24);
-      temp_v3 = aeabi_uidivmod(temp_v21,temp_v24);
+      temp_v6 = __aeabi_uidivmod(temp_v22 - 1,temp_v24);
+      temp_v3 = __aeabi_uidivmod(temp_v21,temp_v24);
       (**(romwright_code **)(**(int **)(param_1 + 0x14) + 0x40))(*(int **)(param_1 + 0x14),temp_v7,0);
       *(int *)(param_1 + 0x3c) = temp_v3;
       *(unsigned int *)(param_1 + 0x38) = temp_v6;

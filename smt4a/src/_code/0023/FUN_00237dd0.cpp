@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0016c4b8(...);
-int FUN_00187d04(...);
-int FUN_0019a0e8(unsigned char [72], unsigned int);
+int camSetMatrixA(...);
+int mtx44Copy(unsigned char [72], unsigned int);
 int FUN_0019a0fc(...);
 int FUN_0019e3d0(...);
 int FUN_001a1c28(...);
@@ -48,7 +48,7 @@ typedef struct {
     unsigned int sp1B8; /* 0x1b8: local_1b8 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
 extern float DAT_0064c054; /* 0x64c054 */
 extern float DAT_0064c058; /* 0x64c058 */
@@ -66,9 +66,9 @@ extern float DAT_0064c080; /* 0x64c080 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_00187d04. */
+/* Supplied declaration required: camSetMatrixA. */
 extern unsigned int FUN_0018aeb8(void);
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_001a1c28. */
@@ -134,10 +134,10 @@ void FUN_00237dd0(int param_1)
   if (*(char *)(param_1 + 1000) == '\0') {
     return;
   }
-  FUN_00409718(DAT_0059dbb4);
+  FUN_00409718(g_renderCtx);
   temp_v0 = FUN_0018aeb8();
-  FUN_0019a0e8(temp_v18,temp_v0);
-  temp_v3 = DAT_0059dbb4;
+  mtx44Copy(temp_v18,temp_v0);
+  temp_v3 = g_renderCtx;
   temp_v9 = (*(unsigned char *)(param_1 + 0x130) & 7) >> 1;
   if (temp_v9 != 0) {
     if (temp_v9 != 1) {
@@ -354,8 +354,8 @@ void FUN_00237dd0(int param_1)
     FUN_0043b9f0(temp_v30,&temp_v14);
     FUN_0019a0fc(temp_v18,temp_v18,temp_v30);
   }
-  FUN_00187d04(DAT_0059dbb4,temp_v18);
-  FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(param_1 + 300));
+  camSetMatrixA(g_renderCtx,temp_v18);
+  FUN_0016c4b8(g_renderCtx,*(unsigned int *)(param_1 + 300));
   temp_v14 = temp_v10;
   temp_v15 = temp_v11;
   temp_v16 = temp_v10;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016007c(void);
+int asdOperatorNew(void);
 int FUN_00162e8c(void);
 int FUN_00379958(void);
 int FUN_00482414(int, float *);
@@ -42,7 +42,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_1_stack;
 
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
@@ -53,7 +53,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00162e8c. */
 extern int FUN_0018719c(void);
 extern int FUN_00364444(int);
@@ -120,7 +120,7 @@ void FUN_00482fe8(fn_00482fe8_arg0 *param_1)
           temp_v1 = temp_v1 + 2;
         } while (temp_v1 < 0x20);
         temp_v2 = 0xbc;
-        FUN_0016007c();
+        asdOperatorNew();
         if (temp_v2 != 0) {
           FUN_00482a5c();
         }
@@ -140,9 +140,9 @@ void FUN_00482fe8(fn_00482fe8_arg0 *param_1)
           temp_v13 = (unsigned int)((unsigned long long)temp_v6 >> 0x20);
           temp_v14 = VectorSignedToFloat((int)*(short *)(pcVar2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v7 = (unsigned int)temp_v6;
-          temp_v3 = temp_v10 - *(float *)(DAT_00581288 + 0x1c);
-          temp_v5 = temp_v11 - *(float *)(DAT_00581288 + 0x20);
-          temp_v4 = temp_v12 - *(float *)(DAT_00581288 + 0x24);
+          temp_v3 = temp_v10 - *(float *)(g_lmapScene + 0x1c);
+          temp_v5 = temp_v11 - *(float *)(g_lmapScene + 0x20);
+          temp_v4 = temp_v12 - *(float *)(g_lmapScene + 0x24);
           temp_v8 = temp_v7;
           temp_v9 = temp_v7;
           temp_v15 = temp_v13;

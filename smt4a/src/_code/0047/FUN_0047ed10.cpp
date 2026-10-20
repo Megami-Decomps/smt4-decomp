@@ -25,8 +25,8 @@ extern int DAT_00571508; /* 0x571508 */
 extern char s_ef_e_atk01_00573e68[11]; /* 0x573e68 */
 
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_0014aa78(void);
-extern int FUN_00180008(unsigned int);
+extern int btlGetMainState(void);
+extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: FUN_0030ea58. */
 /* Supplied declaration required: FUN_004fb43c. */
 
@@ -54,7 +54,7 @@ unsigned int FUN_0047ed10(unsigned int param_1,unsigned int param_2,unsigned int
   unsigned int temp_v13;
   
   temp_v5 = (unsigned long long)in_s0;
-  temp_v0 = FUN_00180008(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 != 0) {
     return 0;
   }
@@ -78,7 +78,7 @@ unsigned int FUN_0047ed10(unsigned int param_1,unsigned int param_2,unsigned int
   } while (temp_v0 < 0x1f6);
   pcVar6 = (char *)0x0;
 LAB_0047edd4:
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   switch(param_3) {
   case 2:
   case 5:

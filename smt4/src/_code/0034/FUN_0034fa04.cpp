@@ -20,7 +20,7 @@ extern int FUN_0023a5dc(int);
 /* Supplied declaration required: FUN_002bb150. */
 /* Supplied declaration required: FUN_002c4040. */
 /* Supplied declaration required: FUN_00350e30. */
-extern int aeabi_idivmod(int, int);
+extern int __aeabi_idivmod(int, int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -98,7 +98,7 @@ unsigned int FUN_0034fa04(int param_1,unsigned int param_2,unsigned int param_3,
         }
         piVar4 = *(int **)(param_1 + temp_v2 * 4 + 0x2ec);
         (**(romwright_code **)(*piVar4 + 0x10))(piVar4,&temp_v7);
-        temp_v7 = aeabi_idivmod(temp_v7,temp_v3);
+        temp_v7 = __aeabi_idivmod(temp_v7,temp_v3);
         temp_v7 = temp_v7 * temp_v3;
         temp_v2 = 0;
         if (temp_v2 < temp_v7) {

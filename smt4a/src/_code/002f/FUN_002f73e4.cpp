@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 
 extern void nn_os_CriticalSection_Enter(unsigned int);
 
@@ -12,7 +12,7 @@ extern void nn_os_CriticalSection_Enter(unsigned int);
 void FUN_002f73e4(int param_1)
 
 {
-  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0x3)) == '\0') {
+  if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x3)) == '\0') {
     nn_os_CriticalSection_Enter(param_1 + 4);
   }
   return;

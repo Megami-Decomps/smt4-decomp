@@ -1,28 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ed882` (_code @ 0x2ed882, 0x1e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: frame only: retail spills just r2/r3 with `push {r2,r3,r4,lr}` and passes sp directly; built pushes r0-r3 and copies the message to sp+8 */
+/* Lets FUN_002e7516 inspect the 8-byte message (passed by value), then appends its first 4 bytes to the object's stream; returns 1. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e74c4(unsigned int, int *, int, unsigned int);
-int FUN_002e7516(unsigned int, int *);
+typedef struct Stream {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 sink;
+} Stream;
 
-/* Supplied declaration required: FUN_002e74c4. */
-/* Supplied declaration required: FUN_002e7516. */
+typedef struct Message {
+    /* 0x00 */ s32 word0;
+    /* 0x04 */ u32 word1;
+} Message;
 
+extern void strAssign(u32 sink, Message *data, s32 size, u32 flags);
+extern void FUN_002e7516(u32 value, Message *data);
 
-unsigned int FUN_002ed882(int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
-
+u32 FUN_002ed882(Stream *stream, u32 *value, Message message)
 {
-/* irregular: 2 native warning(s); review required */
-  int uStack_10;
-  unsigned int uStack_c;
-  
-  uStack_10 = param_3;
-  uStack_c = param_4;
-  FUN_002e7516(*param_2,&uStack_10);
-  FUN_002e74c4(*(unsigned int *)(param_1 + 8),&uStack_10,4,0xffffffff);
-  return 1;
+    FUN_002e7516(*value, &message);
+    strAssign(stream->sink, &message, 4, 0xFFFFFFFF);
+    return 1;
 }
 
-} /* extern "C" */
+}

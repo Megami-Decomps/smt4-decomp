@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001db5b8(unsigned int);
+extern int asdModelIdListGet(unsigned int);
 
 
 void FUN_001a9604(int param_1)
@@ -22,7 +22,7 @@ void FUN_001a9604(int param_1)
   unsigned int in_s4;
   unsigned int in_s5;
   
-  temp_v0 = FUN_001db5b8(0);
+  temp_v0 = asdModelIdListGet(0);
   temp_v0 = *(int *)(temp_v0 + 8);
   *(unsigned int *)(temp_v0 + 0xbc) = in_s2;
   *(unsigned int *)(temp_v0 + 0xc0) = 0x3f800000;

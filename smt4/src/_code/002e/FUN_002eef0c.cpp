@@ -1,31 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002eef0c` (_code @ 0x2eef0c, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bf694(unsigned int *, unsigned int);
+typedef struct Globals {
+    /* 0x00 */ u8 unk00[0x54];
+    /* 0x54 */ u32 value;
+    /* 0x58 */ u32 unk58;
+    /* 0x5C */ u8 text[4];
+} Globals;
 
-extern unsigned int DAT_0049f970; /* 0x49f970 */
-extern unsigned int DAT_0049f978; /* 0x49f978 */
+extern Globals g_gameState;
 
-extern unsigned int FUN_002592d8(unsigned int);
-extern unsigned int FUN_00296cc8(void);
-/* Supplied declaration required: FUN_002bf694. */
+int FUN_002bf694(void *dst, u32 arg);
+u32 FUN_002592d8(u32 index);
+u32 scrGetArg(int index);
 
-
-unsigned int FUN_002eef0c(void)
-
+/* Script command: stores script argument 0 in the global value and passes argument 1 (via FUN_002592d8) to FUN_002bf694 for the global text. */
+u32 FUN_002eef0c(int firstArg)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_00296cc8();
-  temp_v1 = FUN_002592d8(1);
-  DAT_0049f970 = temp_v0;
-  FUN_002bf694(&DAT_0049f978,temp_v1);
-  return 1;
+    u32 value = scrGetArg(firstArg);
+    u32 arg = FUN_002592d8(1);
+
+    g_gameState.value = value;
+    FUN_002bf694(g_gameState.text, arg);
+    return 1;
 }
 
 } /* extern "C" */

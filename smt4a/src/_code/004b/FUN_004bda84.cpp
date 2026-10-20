@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_001676b0(int, int, int, int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_0035ae58(int, int, int, int, int);
-int aeabi_idivmod(int, int);
+int __aeabi_idivmod(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_5: 5 slot(s), 20 byte(s) */
@@ -19,13 +19,13 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_5_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_001676b0. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0035ae58. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_004bda84(int param_1,int param_2,int param_3,int param_4,int param_5)
@@ -52,7 +52,7 @@ void FUN_004bda84(int param_1,int param_2,int param_3,int param_4,int param_5)
   temp_v0 = *(unsigned short *)(param_2 + 0x60);
   temp_v7 = 0;
   temp_v9 = 0;
-  FUN_001677c0();
+  efctSetSpeed();
   temp_v3 = 1;
   temp_v6 = 0;
   temp_v10 = 0xd;
@@ -73,7 +73,7 @@ void FUN_004bda84(int param_1,int param_2,int param_3,int param_4,int param_5)
   } while (temp_v10 != 0);
   if (temp_v7 != 1) {
     if (temp_v7 < 2) {
-      FUN_001677c0();
+      efctSetSpeed();
       return;
     }
     if (*(int *)(param_1 + 0x348) >= 0x14) {
@@ -82,7 +82,7 @@ void FUN_004bda84(int param_1,int param_2,int param_3,int param_4,int param_5)
       temp_v10 = 0xd;
       do {
         if (((unsigned int)temp_v0 & (1 << (temp_v3 & 0xff))) != 0) {
-          aeabi_idivmod(*(int *)(param_1 + 0x378) + 1,temp_v7);
+          __aeabi_idivmod(*(int *)(param_1 + 0x378) + 1,temp_v7);
           temp_v11 = temp_v4 == temp_v9;
           temp_v8 = temp_v9 + 1;
           temp_v9 = temp_v9 + 1;
@@ -91,12 +91,12 @@ void FUN_004bda84(int param_1,int param_2,int param_3,int param_4,int param_5)
             temp_v9 = temp_v8;
           }
         }
-        temp_v8 = DAT_0059dbb4;
+        temp_v8 = g_renderCtx;
         temp_v10 = temp_v10 - 1;
         temp_v3 = temp_v3 + 1;
         temp_v6 = temp_v6 + 1;
       } while (temp_v10 != 0);
-      piVar7 = (int *)(DAT_0059dbb4 + 0x1318);
+      piVar7 = (int *)(g_renderCtx + 0x1318);
       temp_v7 = piVar7[*piVar7 + 2];
       piVar7[*piVar7 + 2] = 3;
       if (*(char *)(temp_v8 + 0x1330) != '\0' || temp_v7 != 3) {
@@ -110,20 +110,20 @@ void FUN_004bda84(int param_1,int param_2,int param_3,int param_4,int param_5)
                    *(short *)(temp_v2 + 10) + param_5,0x7e);
       FUN_001676b0((int)temp_v1,(int)*(short *)(temp_v2 + 8) + param_4 + temp_v7 + 0xd,
                    *(short *)(temp_v2 + 10) + param_5,0x7e);
-      temp_v7 = DAT_0059dbb4;
-      piVar7 = (int *)(DAT_0059dbb4 + 0x1318);
+      temp_v7 = g_renderCtx;
+      piVar7 = (int *)(g_renderCtx + 0x1318);
       temp_v9 = piVar7[*piVar7 + 2];
       piVar7[*piVar7 + 2] = 0;
       if (*(char *)(temp_v7 + 0x1330) != '\0' || temp_v9 != 0) {
         (**(romwright_code **)(temp_v7 + 0x1334))();
         *(unsigned char *)(temp_v7 + 0x1330) = 0;
       }
-      FUN_001677c0();
+      efctSetSpeed();
       return;
     }
   }
   FUN_001676b0((int)temp_v5,*(short *)(temp_v2 + 8) + param_4,*(short *)(temp_v2 + 10) + param_5,0x7e);
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

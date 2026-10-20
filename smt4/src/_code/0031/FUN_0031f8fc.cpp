@@ -11,8 +11,8 @@ int FUN_0024b830(int);
 int FUN_002b7064(void);
 int FUN_002b70cc(void);
 int VectorSignedToFloat(...);
-int aeabi_idivmod(int, int);
-int aeabi_uidivmod(void);
+int __aeabi_idivmod(int, int);
+int __aeabi_uidivmod(void);
 
 typedef struct fn_0031f8fc_arg0 fn_0031f8fc_arg0;
 typedef struct fn_0031f8fc_arg0_p40 fn_0031f8fc_arg0_p40;
@@ -74,7 +74,7 @@ typedef struct {
     unsigned int sp10C; /* 0x10c: local_10c */
 } param_1_stack;
 
-extern float DAT_00472520; /* 0x472520 */
+extern float g_polyDefaultColor; /* 0x472520 */
 extern float DAT_00472524; /* 0x472524 */
 extern float DAT_00472528; /* 0x472528 */
 extern float DAT_0047252c; /* 0x47252c */
@@ -104,8 +104,8 @@ extern unsigned int FUN_00246c28(void);
 /* Supplied declaration required: FUN_0024b830. */
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
-/* Supplied declaration required: aeabi_idivmod. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_0031f8fc(fn_0031f8fc_arg0 *param_1)
@@ -249,7 +249,7 @@ void FUN_0031f8fc(fn_0031f8fc_arg0 *param_1)
                 if (temp_v20 < temp_v23) {
                   piVar23[3] = (int)((float)piVar23[3] + (float)piVar23[4]);
                 }
-                DAT_004ea92c = DAT_00472520;
+                DAT_004ea92c = g_polyDefaultColor;
                 DAT_004ea930 = DAT_00472524;
                 DAT_004ea934 = DAT_00472528;
                 DAT_004ea938 = DAT_0047252c;
@@ -257,9 +257,9 @@ void FUN_0031f8fc(fn_0031f8fc_arg0 *param_1)
                 temp_v30 = DAT_00472524 * temp_v27;
                 temp_v31 = DAT_00472528 * temp_v27;
                 temp_v28 = DAT_0047252c * temp_v27;
-                temp_v36 = CONCAT44(temp_v33,DAT_00472520 * temp_v27);
+                temp_v36 = CONCAT44(temp_v33,g_polyDefaultColor * temp_v27);
                 temp_v29 = (float)piVar23[5];
-                DAT_004ea91c = DAT_00472520 * temp_v29;
+                DAT_004ea91c = g_polyDefaultColor * temp_v29;
                 DAT_004ea920 = DAT_00472524 * temp_v29;
                 temp_v32 = DAT_00472528 * temp_v29;
                 temp_v29 = DAT_0047252c * temp_v29;
@@ -322,7 +322,7 @@ void FUN_0031f8fc(fn_0031f8fc_arg0 *param_1)
                     DAT_004ea938 = temp_v33 / temp_v24;
                   }
                 }
-                DAT_004ea92c = DAT_00472520 * DAT_004ea938;
+                DAT_004ea92c = g_polyDefaultColor * DAT_004ea938;
                 DAT_004ea930 = DAT_00472524 * DAT_004ea938;
                 DAT_004ea934 = DAT_00472528 * DAT_004ea938;
                 DAT_004ea938 = DAT_0047252c * DAT_004ea938;
@@ -391,9 +391,9 @@ void FUN_0031f8fc(fn_0031f8fc_arg0 *param_1)
               }
               else {
                 FUN_0024b77c();
-                aeabi_uidivmod();
+                __aeabi_uidivmod();
                 *piVar23 = temp_v17;
-                aeabi_idivmod(temp_v17,temp_v23);
+                __aeabi_idivmod(temp_v17,temp_v23);
                 temp_v33 = (float)VectorSignedToFloat(temp_v18,(unsigned char)(in_fpscr >> 0x16) & 3);
                 piVar23[3] = (int)((float)piVar23[3] + (float)piVar23[4] * temp_v33);
               }

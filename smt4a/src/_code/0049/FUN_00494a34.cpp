@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_0019de98(int, int);
 int FUN_00224880(unsigned int);
 int FUN_00275f44(unsigned int, unsigned int);
@@ -23,7 +23,7 @@ extern unsigned char LAB_00494d34; /* 0x494d34 */
 extern unsigned char LAB_00494d4c; /* 0x494d4c */
 extern unsigned int DAT_005f1990; /* 0x5f1990 */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_001ba3d4(unsigned int);
@@ -89,7 +89,7 @@ LAB_00494cb0:
         param_1[1] = 2;
         param_1[2] = 0;
         FUN_0049a5b4(param_1);
-        FUN_001681cc(0x77);
+        sysPlaySe(0x77);
         FUN_0019de98(0,0x323232ff);
         DAT_005f1990 = 0;
         return;
@@ -107,7 +107,7 @@ LAB_00494cb0:
           FUN_00275f44(param_1[99],temp_v2);
           FUN_00224880(param_1[99]);
           param_1[2] = 1;
-          FUN_001681cc(0xa0);
+          sysPlaySe(0xa0);
           return;
         }
       }
@@ -122,7 +122,7 @@ LAB_00494b40:
         FUN_00275f44(param_1[99],temp_v2);
         FUN_00224880(param_1[99]);
         param_1[2] = 1;
-        FUN_001681cc(0xa0);
+        sysPlaySe(0xa0);
         return;
       }
     }
@@ -145,7 +145,7 @@ LAB_00494bb0:
         }
         FUN_00224880(param_1[99]);
         param_1[2] = 2;
-        FUN_001681cc(0xa0);
+        sysPlaySe(0xa0);
         return;
       }
       temp_v4 = temp_v4 + 1;

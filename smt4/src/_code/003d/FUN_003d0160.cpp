@@ -13,7 +13,7 @@ typedef struct {
 
 extern unsigned char LAB_0032ad24; /* 0x32ad24 */
 
-extern int FUN_0027e928(int *);
+extern int btlUnitGet(int *);
 /* Supplied declaration required: FUN_002b7bca. */
 
 
@@ -49,11 +49,11 @@ void FUN_003d0160(int *param_1,int param_2)
   } while (temp_v2 != 0);
   if (temp_v1 >= param_2) {
     FUN_002b7bca(aiStack_388 + 2,temp_v1,8,&LAB_0032ad24);
-    temp_v0 = FUN_0027e928(param_1);
+    temp_v0 = btlUnitGet(param_1);
     aiStack_388[2] = aiStack_388[param_2 * 2];
   }
   else {
-    temp_v0 = FUN_0027e928(param_1);
+    temp_v0 = btlUnitGet(param_1);
   }
   *(unsigned char *)(aiStack_388[2] + temp_v0 + 0x38) = 1;
   return;

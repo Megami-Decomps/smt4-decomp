@@ -9,11 +9,11 @@ int FUN_002cd878(void);
 int FUN_002d6658(int);
 int FUN_002ef6b8(int, unsigned int);
 
-extern unsigned char DAT_0043e088; /* 0x43e088 */
+extern unsigned char g_eventCommand; /* 0x43e088 */
 
 /* Supplied declaration required: FUN_0028975c. */
-extern int FUN_00296cc8(unsigned int);
-extern int FUN_002bf244(int);
+extern int scrGetArg(unsigned int);
+extern int jobIsValid(int);
 extern unsigned int FUN_002c09d0(void);
 /* Supplied declaration required: FUN_002cd878. */
 /* Supplied declaration required: FUN_002d6658. */
@@ -28,19 +28,19 @@ unsigned char FUN_001ed4e0(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00296cc8(0);
-  if ((*(int *)((unsigned char *)&DAT_0043e088 + 0x8)) == 0) {
+  temp_v0 = scrGetArg(0);
+  if ((*(int *)((unsigned char *)&g_eventCommand + 0x8)) == 0) {
     FUN_002d6658(0);
     FUN_002cd878();
     temp_v1 = temp_v0 + 0x800;
     temp_v2 = FUN_002c09d0();
     FUN_002ef6b8(temp_v0,temp_v2);
-    (*(int *)((unsigned char *)&DAT_0043e088 + 0x8)) = temp_v0;
+    (*(int *)((unsigned char *)&g_eventCommand + 0x8)) = temp_v0;
     FUN_0028975c(temp_v1,1);
   }
-  temp_v0 = FUN_002bf244((*(int *)((unsigned char *)&DAT_0043e088 + 0x8)));
+  temp_v0 = jobIsValid((*(int *)((unsigned char *)&g_eventCommand + 0x8)));
   if (temp_v0 == 0) {
-    (*(int *)((unsigned char *)&DAT_0043e088 + 0x8)) = 0;
+    (*(int *)((unsigned char *)&g_eventCommand + 0x8)) = 0;
   }
   return temp_v0 == 0;
 }

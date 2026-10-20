@@ -17,7 +17,7 @@ typedef struct {
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
 /* Supplied declaration required: FUN_00128cf2. */
-extern unsigned int aeabi_uidivmod(int);
+extern unsigned int __aeabi_uidivmod(int);
 
 
 void FUN_00128e56(int param_1,int *param_2,unsigned int *param_3,unsigned int param_4)
@@ -45,7 +45,7 @@ void FUN_00128e56(int param_1,int *param_2,unsigned int *param_3,unsigned int pa
   uStack_18 = param_4;
   FUN_00128cf2(param_1,param_2,&temp_v4,(temp_v2 - temp_v1) - (unsigned int)!temp_v3);
   if (*(int *)(*(int *)(param_1 + 0x1c) + 0xc) != -1) {
-    temp_v0 = aeabi_uidivmod(*(int *)(*param_2 + 0x10) * 8000);
+    temp_v0 = __aeabi_uidivmod(*(int *)(*param_2 + 0x10) * 8000);
     temp_v1 = *(unsigned int *)(param_1 + 0x20);
     *(unsigned int *)(param_1 + 0x20) = temp_v0 + temp_v1;
     *(unsigned int *)(param_1 + 0x24) = *(int *)(param_1 + 0x24) + (unsigned int)romwright_carry_4(temp_v0,temp_v1);

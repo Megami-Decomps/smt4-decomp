@@ -1,23 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f1528` (_code @ 0x2f1528, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail updates the flag word through r0 and returns a fresh `mov r0,#1`; built uses r1/r2 and returns r2 */
+/* Clears the flag bit selected by scrGetArg in the manager's flag word; always returns 1. */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002939f4(void);
-extern unsigned int FUN_00296cc8(void);
+typedef struct Manager {
+    /* 0x0000 */ u8 unk0000[0x49BC];
+    /* 0x49BC */ u32 flags;
+} Manager;
 
+extern Manager *btlGetMainState(void);
+extern u8 scrGetArg(void);
 
-unsigned int FUN_002f1528(void)
-
+u32 FUN_002f1528(void)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_00296cc8();
-  temp_v1 = FUN_002939f4();
-  *(unsigned int *)(temp_v1 + 0x49bc) = *(unsigned int *)(temp_v1 + 0x49bc) & ~(1 << (temp_v0 & 0xff));
-  return 1;
+    u8 bit = scrGetArg();
+
+    btlGetMainState()->flags &= ~(1 << bit);
+    return 1;
 }
 
-} /* extern "C" */
+}

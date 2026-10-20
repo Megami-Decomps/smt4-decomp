@@ -12,10 +12,10 @@ int FUN_0024b77c(void);
 int FUN_0024b830(...);
 int FUN_002b7064(void);
 int FUN_002b70cc(void);
-int FUN_002c4938(float *, int);
+int memClear(float *, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
-int aeabi_uidivmod(void);
+int __aeabi_uidivmod(void);
 
 typedef struct fn_00305b14_arg0 fn_00305b14_arg0;
 struct fn_00305b14_arg0 {
@@ -95,8 +95,8 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024b830. */
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_00305b14(fn_00305b14_arg0 *param_1)
@@ -181,7 +181,7 @@ void FUN_00305b14(fn_00305b14_arg0 *param_1)
                   *temp_v29 = -1;
                 }
                 else {
-                  FUN_002c4938(pfVar12,temp_v4 * 0xc);
+                  memClear(pfVar12,temp_v4 * 0xc);
                   *temp_v29 = -2;
                 }
                 temp_v13 = (float)VectorUnsignedToFloat
@@ -328,7 +328,7 @@ void FUN_00305b14(fn_00305b14_arg0 *param_1)
               }
             }
             else {
-              FUN_002c4938(pfVar12,temp_v4 * 0xc);
+              memClear(pfVar12,temp_v4 * 0xc);
               if (temp_v31 != 0) {
                 FUN_0024b830(0);
                 temp_v28 = 1.0f;
@@ -374,7 +374,7 @@ void FUN_00305b14(fn_00305b14_arg0 *param_1)
                 }
                 else {
                   FUN_0024b77c();
-                  aeabi_uidivmod();
+                  __aeabi_uidivmod();
                   temp_v13 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
                   *temp_v29 = temp_v8;
                   temp_v29[4] = (int)((float)temp_v29[4] + (float)temp_v29[5] * temp_v13);

@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00113612(unsigned int, unsigned int, unsigned char [32], int);
-int FUN_002e7634(unsigned char [32]);
-int FUN_002ec9f4(unsigned char [32]);
+int strInit(unsigned char [32]);
+int strDestroy(unsigned char [32]);
 int FUN_002ee54c(unsigned char [8]);
 int FUN_002fde5c(unsigned char [8]);
 int FUN_00302fec(...);
@@ -23,9 +23,9 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00113612. */
-/* Supplied declaration required: FUN_002e7634. */
+/* Supplied declaration required: strInit. */
 extern unsigned int FUN_002eb5c0(unsigned int);
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ee54c. */
 /* Supplied declaration required: FUN_002fde5c. */
 /* Supplied declaration required: FUN_00302fec. */
@@ -70,10 +70,10 @@ void FUN_00117044(unsigned int param_1,int param_2,int param_3,unsigned int *par
     FUN_00303028(temp_v2,&temp_v5);
   }
   FUN_00303018(temp_v2,param_4);
-  FUN_002e7634(temp_v4);
+  strInit(temp_v4);
   FUN_00113612(*(unsigned int *)(param_2 + 0x14),temp_v3,temp_v4,param_3 + 0x34);
   FUN_00302fec(temp_v8,temp_v4);
-  FUN_002ec9f4(temp_v4);
+  strDestroy(temp_v4);
   FUN_002ee54c(temp_v2);
   return;
 }

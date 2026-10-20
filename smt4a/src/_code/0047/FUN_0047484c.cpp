@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_2_stack;
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: FUN_00161a10. */
 /* Supplied declaration required: FUN_001b57a8. */
@@ -71,7 +71,7 @@ unsigned char * FUN_0047484c(unsigned char *param_1,int param_2)
   temp_v2 = puVar3[1];
   *puVar2 = *puVar3;
   puVar2[1] = temp_v2;
-  temp_v1 = DAT_00570260;
+  temp_v1 = g_aocMain;
   FUN_00161a10();
   FUN_005001f8(temp_v3,*(unsigned int *)(temp_v1 + 0x5a8),*(unsigned int *)(param_2 + 0x14));
   FUN_005000c4(&temp_v7,temp_v3);

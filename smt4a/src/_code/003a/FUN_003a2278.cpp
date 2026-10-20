@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00183f58(...);
 int FUN_00357a90(void);
 int FUN_00379be8(void);
@@ -16,11 +16,11 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern signed char DAT_005f1891; /* 0x5f1891 */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
 extern int FUN_0018719c(unsigned int);
 extern int FUN_00314c18(void);
@@ -45,7 +45,7 @@ void FUN_003a2278(int param_1)
     DAT_005f1891 = 1;
     FUN_00379be8();
     FUN_003b61ec();
-    FUN_001681cc(0x92);
+    sysPlaySe(0x92);
     return;
   }
   if (DAT_005f1891 != '\0') {
@@ -69,43 +69,43 @@ void FUN_003a2278(int param_1)
     FUN_00357a90();
   }
   else {
-    temp_v0 = DAT_005f15fc;
-    if (DAT_005f15fc == 5) {
+    temp_v0 = g_gameState;
+    if (g_gameState == 5) {
       temp_v0 = DAT_005f1600;
     }
-    if ((!(DAT_005f15fc == 5 && temp_v0 == 0xc)) && (temp_v0 = FUN_0018719c(0x49a), temp_v0 != 0)) {
+    if ((!(g_gameState == 5 && temp_v0 == 0xc)) && (temp_v0 = FUN_0018719c(0x49a), temp_v0 != 0)) {
       temp_v0 = FUN_0018719c(0xc);
       if ((temp_v0 == 0) || (temp_v0 = FUN_0018719c(0x10), temp_v0 != 0)) {
         temp_v0 = FUN_004a0404();
         if (temp_v0 != 0) {
-          if (DAT_005f15fc != 0x65) {
-            FUN_001681cc(0x104);
+          if (g_gameState != 0x65) {
+            sysPlaySe(0x104);
             FUN_00183f58(0,0x13,0x59,1);
             FUN_00183f58(1,0);
           }
           else {
-            FUN_001681cc(0x105);
+            sysPlaySe(0x105);
             FUN_00183f58(0,0x13,0x59,1);
             FUN_00183f58(1,0);
           }
         }
         else {
-          if (DAT_005f15fc < 100) {
+          if (g_gameState < 100) {
             temp_v1 = 0x41;
           }
           else {
             temp_v1 = 0xd2;
           }
-          FUN_001681cc(temp_v1);
+          sysPlaySe(temp_v1);
         }
       }
       else {
-        FUN_001681cc(0xd3);
+        sysPlaySe(0xd3);
       }
     }
     else {
       temp_v1 = 0xd3;
-      FUN_001681cc(temp_v1);
+      sysPlaySe(temp_v1);
     }
   }
   temp_v0 = FUN_0018719c(0xc);

@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0014bef4(unsigned int);
-int FUN_00163060(int, int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_00180118(int);
 int FUN_00184310(...);
-int FUN_0019a5a0(int);
+int asdMemFree(int);
 int FUN_0019cac4(void);
-int FUN_003283ac(...);
+int scrSetResult(...);
 int FUN_004d0bf0(...);
 int SBORROW4(...);
 
@@ -21,15 +21,15 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_0014bef4. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_00180118. */
 extern int FUN_001801a4(void);
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_00184964(int, int);
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019cac4. */
-extern unsigned int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_003283ac. */
+extern unsigned int scrGetArg(unsigned int);
+/* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_004d0bf0. */
 
 
@@ -49,7 +49,7 @@ unsigned int FUN_003b17f0(void)
   unsigned int temp_v8;
   unsigned char temp_v9;
   
-  temp_v1 = FUN_00236038(0) & 0xffff;
+  temp_v1 = scrGetArg(0) & 0xffff;
   FUN_0019cac4();
   temp_v5 = (unsigned int)*(unsigned short *)(temp_v1 + 0x86);
   temp_v8 = temp_v5;
@@ -59,7 +59,7 @@ unsigned int FUN_003b17f0(void)
       (temp_v2 = FUN_001801a4(), *(unsigned short *)(temp_v2 + 0x62) < (*(unsigned short *)(temp_v8 + 2) & 0x7fff))) ||
      (temp_v2 = FUN_004d0bf0(temp_v5), temp_v2 != 0)) {
     temp_v2 = 0x100;
-    FUN_00163060(0x100,0x100,0,0x962,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0x962,1);
     temp_v8 = 0;
     temp_v3 = FUN_001801a4();
     temp_v0 = *(unsigned short *)(temp_v1 + 2) & 0x7fff;
@@ -75,7 +75,7 @@ unsigned int FUN_003b17f0(void)
     temp_v6 = (int)(short)(temp_v0 - (short)temp_v3);
     temp_v3 = FUN_00184964(temp_v6,temp_v7);
     if (temp_v3 < 1) {
-      FUN_003283ac(0xffffffff);
+      scrSetResult(0xffffffff);
     }
     else {
       if (temp_v6 < 1) {
@@ -106,12 +106,12 @@ unsigned int FUN_003b17f0(void)
       if (temp_v8 != 0) {
         FUN_0014bef4((temp_v8 - 1) & 0xffff);
       }
-      FUN_003283ac();
+      scrSetResult();
     }
-    FUN_0019a5a0(temp_v2);
+    asdMemFree(temp_v2);
   }
   else {
-    FUN_003283ac(temp_v5);
+    scrSetResult(temp_v5);
   }
   return 1;
 }

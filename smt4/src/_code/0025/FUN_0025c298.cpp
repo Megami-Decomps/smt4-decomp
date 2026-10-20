@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00119c28(unsigned char [16]);
 
 /* Supplied declaration required: FUN_00119c28. */
-extern int FUN_002c564c(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 void FUN_0025c298(void)
@@ -17,7 +17,7 @@ void FUN_0025c298(void)
   int temp_v0;
   unsigned char temp_v1 [16];
   
-  temp_v0 = FUN_002c564c(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
     FUN_00119c28(temp_v1);
   }

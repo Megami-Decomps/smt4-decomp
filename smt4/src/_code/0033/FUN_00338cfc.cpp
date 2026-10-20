@@ -13,7 +13,7 @@ int VectorUnsignedToFloat(int, int);
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern int FUN_0023ea94(void);
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 extern int FUN_002542ec(int);
 extern int FUN_002973ec(void);
 extern int FUN_002a8764(void);
@@ -66,7 +66,7 @@ void FUN_00338cfc(int param_1,int param_2)
     return;
   }
   if (param_2 != 0) {
-    temp_v7 = FUN_0023eae0(99);
+    temp_v7 = randRange(99);
     if (temp_v7 < 0x46) {
       return;
     }
@@ -162,7 +162,7 @@ LAB_00338da0:
     else if (temp_v6 >= 0x47) {
       temp_v6 = 0x46;
     }
-    temp_v7 = FUN_0023eae0(100);
+    temp_v7 = randRange(100);
     if (temp_v7 <= temp_v6) {
       return;
     }

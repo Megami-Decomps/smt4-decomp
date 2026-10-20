@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_00153630(unsigned int, unsigned int, int, int, int);
-int FUN_00236038(int);
+int scrGetArg(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -11,8 +11,8 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_00153630. */
-extern unsigned int *FUN_00164a9c(void);
-/* Supplied declaration required: FUN_00236038. */
+extern unsigned int *jobGetWork(void);
+/* Supplied declaration required: scrGetArg. */
 
 
 unsigned int FUN_003a6efc(void)
@@ -23,10 +23,10 @@ unsigned int FUN_003a6efc(void)
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  FUN_00236038(0);
-  puVar1 = (unsigned int *)FUN_00164a9c();
+  scrGetArg(0);
+  puVar1 = (unsigned int *)jobGetWork();
   temp_v1 = *puVar1;
-  temp_v0 = FUN_00236038(1);
+  temp_v0 = scrGetArg(1);
   FUN_00153630(temp_v1,temp_v0,1,1,1);
   return 1;
 }

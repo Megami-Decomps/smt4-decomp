@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002eeccc(int, int, unsigned char [20], int);
+int inet_ntop(int, int, unsigned char [20], int);
 int FUN_002eed44(unsigned char [20], unsigned int, unsigned int);
 
-/* Supplied declaration required: FUN_002eeccc. */
+/* Supplied declaration required: inet_ntop. */
 /* Supplied declaration required: FUN_002eed44. */
 
 
@@ -18,7 +18,7 @@ unsigned char FUN_002e97b4(int param_1,unsigned int param_2,unsigned int param_3
   unsigned char temp_v0 [20];
   
   if (param_3 >= 0x20) {
-    FUN_002eeccc(2,param_1 + 8,temp_v0,0x14);
+    inet_ntop(2,param_1 + 8,temp_v0,0x14);
     FUN_002eed44(temp_v0,param_2,param_3);
   }
   return param_3 >= 0x20;

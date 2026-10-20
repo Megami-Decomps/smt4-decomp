@@ -16,7 +16,7 @@ extern int DAT_00447e70; /* 0x447e70 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0024effc(void);
 /* Supplied declaration required: FUN_0025be44. */
-extern unsigned int FUN_0029a034(unsigned char *, unsigned int);
+extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
 extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
@@ -93,7 +93,7 @@ unsigned int FUN_0021e4bc(void)
       *(int *)(temp_v2 + 0x38) = (int)*(short *)(temp_v1 + 4);
       *(unsigned char *)(temp_v2 + 0x40) = 0;
       FUN_002be624(temp_v5,&LAB_0021e74c,(int)*(short *)(temp_v1 + 4));
-      temp_v4 = FUN_0029a034(temp_v5,7);
+      temp_v4 = asdMdlManagerCreateSecondList(temp_v5,7);
       *(unsigned int *)(temp_v2 + 0x3c) = temp_v4;
       *(unsigned short *)(DAT_00447e70 + 8) = 0xc;
     }

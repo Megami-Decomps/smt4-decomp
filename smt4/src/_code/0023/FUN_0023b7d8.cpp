@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023bb00(unsigned int *, unsigned int *, unsigned int);
 int FUN_0023bba0(unsigned int *, unsigned int *);
-int FUN_002af39c(unsigned int);
+int asdModelAdvanceCommandCursor(unsigned int);
 int FUN_002bc7f4(int, unsigned int **);
 int rt_memcpy_w(unsigned int *, unsigned int *, unsigned int);
 
@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0023bb00. */
 /* Supplied declaration required: FUN_0023bba0. */
-/* Supplied declaration required: FUN_002af39c. */
+/* Supplied declaration required: asdModelAdvanceCommandCursor. */
 /* Supplied declaration required: FUN_002bc7f4. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -107,7 +107,7 @@ void FUN_0023b7d8(unsigned int param_1,unsigned int *param_2,unsigned int param_
     temp_v0 = temp_v0 + 1;
   } while ((int)temp_v0 < 0xc);
   temp_v1 = puVar4;
-  FUN_002af39c(((int)puVar4 - (int)puVar1) & 0xfffffffc);
+  asdModelAdvanceCommandCursor(((int)puVar4 - (int)puVar1) & 0xfffffffc);
   return;
 }
 

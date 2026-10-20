@@ -23,7 +23,7 @@ int FUN_0033c0d4(void);
 int FUN_00216e64(...);
 int FUN_0029541c(...);
 int FUN_002954bc(...);
-int FUN_002954dc(...);
+int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
 int FUN_0029bd4c(void);
 int FUN_0029bde4(...);
@@ -73,12 +73,12 @@ int FUN_00295d7c(...);
 int FUN_00295eb0(...);
 int FUN_002b7bca(...);
 int FUN_002b8e84(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bee58(...);
 int FUN_002bf810(...);
 int FUN_002c1658(...);
 int FUN_002c3944(...);
-int FUN_002c4938(...);
+int memClear(...);
 int FUN_0033b7a0(...);
 int FUN_0033b838(...);
 int FUN_003c1b18(...);
@@ -86,7 +86,7 @@ int FUN_003c202c(...);
 int FUN_003c2310(...);
 int rt_memcpy_w(...);
 
-int FUN_001e2650(void);
+int mapDepartAdvanceState(void);
 int FUN_00295f54(...);
 int FUN_002960ec(...);
 int FUN_00296284(int, int);
@@ -108,8 +108,8 @@ int FUN_002b8da0(...);
 int FUN_002b8ee0(...);
 int FUN_002bf4f8(...);
 int FUN_002bf818(...);
-int FUN_00308cb8(void);
-int FUN_0030f4e8(void);
+int mapMainCallIfActive2(void);
+int lmapMainCallIfActive2(void);
 
 /* stack frame of void: 16 slot(s), 62 byte(s) */
 typedef struct {
@@ -142,18 +142,18 @@ extern int DAT_0044dc20; /* 0x44dc20 */
 /* Supplied declaration required: FUN_0019e0c0. */
 /* Supplied declaration required: FUN_001ce0fc. */
 /* Supplied declaration required: FUN_001cea8c. */
-/* Supplied declaration required: FUN_001e2650. */
+/* Supplied declaration required: mapDepartAdvanceState. */
 extern int FUN_00203610(void);
 /* Supplied declaration required: FUN_00204358. */
 /* Supplied declaration required: FUN_00216e64. */
 /* Supplied declaration required: FUN_00295214. */
 /* Supplied declaration required: FUN_00295228. */
-extern int FUN_00295380(unsigned int);
+extern int asdSoundSlotBIsPlaying(unsigned int);
 /* Supplied declaration required: FUN_002953b8. */
 extern int FUN_00295408(void);
 /* Supplied declaration required: FUN_0029541c. */
 /* Supplied declaration required: FUN_002954bc. */
-/* Supplied declaration required: FUN_002954dc. */
+/* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
 extern int FUN_002955fc(void);
 extern int FUN_00295618(void);
@@ -230,19 +230,19 @@ extern int FUN_002a0ce8(void);
 /* Supplied declaration required: FUN_002bc01c. */
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bf818. */
-extern unsigned int FUN_002c0c74(unsigned int);
-extern char *FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern char *dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 extern unsigned int FUN_002c5c04(int *);
 /* Supplied declaration required: FUN_002d9680. */
 extern int FUN_002efe2c(void);
@@ -254,13 +254,13 @@ extern int FUN_002f6564(void);
 extern int FUN_002f6614(void);
 /* Supplied declaration required: FUN_002f6660. */
 /* Supplied declaration required: FUN_002f6728. */
-/* Supplied declaration required: FUN_00308cb8. */
+/* Supplied declaration required: mapMainCallIfActive2. */
 /* Supplied declaration required: FUN_0030aacc. */
 extern int FUN_0030aaf4(void);
 extern int FUN_0030ab14(void);
 /* Supplied declaration required: FUN_0030ab34. */
 /* Supplied declaration required: FUN_0030ab68. */
-/* Supplied declaration required: FUN_0030f4e8. */
+/* Supplied declaration required: lmapMainCallIfActive2. */
 /* Supplied declaration required: FUN_00317e34. */
 extern int FUN_00322e44(void);
 /* Supplied declaration required: FUN_0033b7a0. */
@@ -274,7 +274,7 @@ extern int FUN_003c1c44(unsigned short, unsigned char, int);
 extern int FUN_003c1de8(unsigned char, int);
 /* Supplied declaration required: FUN_003c202c. */
 /* Supplied declaration required: FUN_003c2310. */
-extern int aeabi_idivmod(unsigned int, unsigned int);
+extern int __aeabi_idivmod(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -344,8 +344,8 @@ unsigned int FUN_0018c0ec(void)
   case 0:
     temp_v4 = FUN_00203610();
     if (temp_v4 != 0) {
-      FUN_00308cb8();
-      FUN_0030f4e8();
+      mapMainCallIfActive2();
+      lmapMainCallIfActive2();
       FUN_00296934();
       FUN_00296774(temp_v2,1);
     }
@@ -411,7 +411,7 @@ LAB_0018c354:
       do {
         if (temp_v20 <= *puVar13) {
           temp_v4 = temp_v28 - temp_v17;
-          temp_v27 = aeabi_idivmod(temp_v21,temp_v20);
+          temp_v27 = __aeabi_idivmod(temp_v21,temp_v20);
           temp_v18 = temp_v2 + (temp_v4 + 0x24) * 0x8c;
           FUN_002b8da0(temp_v18 + 0x20,temp_v27 + 0x80c);
           temp_v21 = temp_v21 - temp_v27 * temp_v20;
@@ -503,7 +503,7 @@ LAB_0018c354:
       *(unsigned char *)(temp_v2 + 0xd55c) = 0;
       *(unsigned char *)(temp_v2 + 0xd55d) = 0;
       if (*(char *)(temp_v2 + 0x3560) == '\0') {
-        FUN_001e2650();
+        mapDepartAdvanceState();
       }
     }
     break;
@@ -798,7 +798,7 @@ LAB_0018d058:
             *(int *)(temp_v4 + 0x30) = temp_v17;
           }
           temp_v29 = (unsigned char *)(temp_v2 + 0x3654);
-          FUN_002c4938(temp_v2 + 0x3658,0x8c);
+          memClear(temp_v2 + 0x3658,0x8c);
           *(unsigned int *)(temp_v2 + 0x3c5c) = 0;
           *(unsigned int *)(temp_v2 + 0x3c60) = 0;
           *(unsigned int *)(temp_v2 + 0x3c64) = 0;
@@ -829,7 +829,7 @@ LAB_0018d058:
           temp_v4 = 0;
           do {
             temp_v18 = temp_v2 + temp_v4 * 0x620;
-            FUN_002c4938(temp_v18 + 0x3c78,0x8c);
+            memClear(temp_v18 + 0x3c78,0x8c);
             *(unsigned int *)(temp_v18 + 0x427c) = 0;
             *(unsigned int *)(temp_v18 + 0x4280) = 0;
             *(unsigned int *)(temp_v18 + 0x4284) = 0;
@@ -980,10 +980,10 @@ LAB_0018d058:
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 6);
       FUN_00296774(temp_v2,7);
-      FUN_002bd8e8(temp_v2 + 0x20,1,0);
+      timerStart(temp_v2 + 0x20,1,0);
       temp_v4 = 0;
       do {
-        FUN_002bd8e8(temp_v2 + temp_v4 * 0x8c + 0xac,1,0);
+        timerStart(temp_v2 + temp_v4 * 0x8c + 0xac,1,0);
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 6);
       FUN_0029cc44(1);
@@ -1064,9 +1064,9 @@ LAB_0018d058:
       temp_v16 = (unsigned int)*(unsigned short *)(temp_v4 + 0x46);
       FUN_002b9024();
       temp_v0 = *(char *)(temp_v16 + 0x30);
-      temp_v9 = FUN_002c0cec(0x25,0);
-      pcVar18 = (char *)FUN_002c0cc4();
-      temp_v16 = FUN_002c0c74(temp_v9);
+      temp_v9 = dataTableGet(0x25,0);
+      pcVar18 = (char *)dataTableGetEntries();
+      temp_v16 = dataTableGetCount(temp_v9);
       temp_v20 = 0;
       if (temp_v16 != 0) {
         do {
@@ -1209,7 +1209,7 @@ LAB_0018da7c:
         temp_v8 = FUN_002955fc();
         if (temp_v8 == 0) {
           FUN_002954f4(*(unsigned short *)(temp_v4 + 0x46),1);
-          FUN_002954dc(1);
+          btlTalkBustUpSetUnk2F4(1);
         }
         FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x3574),7);
         piVar20 = (int *)(temp_v2 + 0x3534);
@@ -1272,7 +1272,7 @@ joined_r0x0018edf0:
         temp_v8 = FUN_002955fc();
         if (temp_v8 == 0) {
           FUN_002954f4(*(unsigned short *)(temp_v4 + 0x46),1);
-          FUN_002954dc(1);
+          btlTalkBustUpSetUnk2F4(1);
         }
         FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x3574),5);
         temp_v4 = *piVar20 + 1;
@@ -1440,7 +1440,7 @@ joined_r0x0018edf0:
         temp_v8 = FUN_002955fc();
         if (temp_v8 == 0) {
           FUN_002954f4(*(unsigned short *)(temp_v4 + 0x46),1);
-          FUN_002954dc(1);
+          btlTalkBustUpSetUnk2F4(1);
         }
         FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x3574),5);
         temp_v4 = *piVar17 + 1;
@@ -1623,7 +1623,7 @@ joined_r0x0018edf0:
     piVar17 = (int *)(temp_v2 + 0x3534);
     temp_v8 = *piVar17;
     if (temp_v8 == 10) {
-      temp_v4 = FUN_00295380(*(unsigned int *)(temp_v2 + 0xd048));
+      temp_v4 = asdSoundSlotBIsPlaying(*(unsigned int *)(temp_v2 + 0xd048));
       if (temp_v4 == 0) {
         temp_v4 = *(int *)(temp_v2 + 0x3534) + 1;
         *(int *)(temp_v2 + 0x3534) = temp_v4;
@@ -1655,7 +1655,7 @@ joined_r0x0018edf0:
           temp_v8 = FUN_002955fc();
           if (temp_v8 == 0) {
             FUN_002954f4(*(unsigned short *)(temp_v4 + 0x46),1);
-            FUN_002954dc(1);
+            btlTalkBustUpSetUnk2F4(1);
           }
           FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x3574),8);
           FUN_002f6660(*(unsigned int *)(temp_v2 + 0xd038),*(unsigned int *)(temp_v2 + 0xd03c));
@@ -1701,7 +1701,7 @@ joined_r0x0018edf0:
         }
         break;
       case 3:
-        temp_v4 = FUN_00295380(*(unsigned int *)(temp_v2 + 0xd048));
+        temp_v4 = asdSoundSlotBIsPlaying(*(unsigned int *)(temp_v2 + 0xd048));
         if (temp_v4 == 0) {
           temp_v4 = *(int *)(temp_v2 + 0x3534) + 1;
           *(int *)(temp_v2 + 0x3534) = temp_v4;
@@ -1841,7 +1841,7 @@ joined_r0x0018edf0:
         temp_v8 = FUN_002955fc();
         if (temp_v8 == 0) {
           FUN_002954f4(*(unsigned short *)(temp_v4 + 0x46),1);
-          FUN_002954dc(1);
+          btlTalkBustUpSetUnk2F4(1);
         }
         FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x3574),0xd);
         temp_v4 = *(int *)(temp_v2 + 0x3534) + 1;
@@ -1860,7 +1860,7 @@ joined_r0x0018edf0:
       FUN_0029ede8(0x18,((unsigned int)*(unsigned char *)(temp_v4 + 0x76) -
                         (unsigned int)*(unsigned char *)(temp_v2 + *(int *)(temp_v2 + 0xcf78) * 0x620 + 0x36ce)) * 10,
                    0xffffffff,0);
-      FUN_002bd8e8(temp_v2 + 0x598,0);
+      timerStart(temp_v2 + 0x598,0);
       *piVar17 = *piVar17 + 1;
     case 1:
       FUN_002b8ee0(temp_v2 + 0x598,0);
@@ -1897,7 +1897,7 @@ joined_r0x0018edf0:
         }
         temp_v4 = FUN_00295cec();
         *puVar13 = temp_v4 << 0xc;
-        FUN_002bd8e8(temp_v2 + 0x598,1,0);
+        timerStart(temp_v2 + 0x598,1,0);
         temp_v4 = *(int *)(temp_v2 + 0x3534) + 1;
         *(int *)(temp_v2 + 0x3534) = temp_v4;
       }

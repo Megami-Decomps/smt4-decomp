@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_3_stack;
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_004342d4; /* 0x4342d4 */
 extern unsigned int DAT_004342d8; /* 0x4342d8 */
 extern unsigned int DAT_004342e0; /* 0x4342e0 */
@@ -56,16 +56,16 @@ void FUN_003c5ffc(int param_1,int param_2,unsigned int param_3)
   case 0:
     temp_v0 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10));
     if (temp_v0 != 0) {
-      temp_v2 = *(unsigned int *)(DAT_004342c8 + 0x634) | 0x100;
+      temp_v2 = *(unsigned int *)(g_btlMain + 0x634) | 0x100;
     }
     else {
-      temp_v2 = *(unsigned int *)(DAT_004342c8 + 0x634) & 0xfffffeff;
+      temp_v2 = *(unsigned int *)(g_btlMain + 0x634) & 0xfffffeff;
     }
-    *(unsigned int *)(DAT_004342c8 + 0x634) = temp_v2;
+    *(unsigned int *)(g_btlMain + 0x634) = temp_v2;
     return;
   case 1:
     puVar2 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_004342c8 + 0x560) = *puVar2;
+    *(unsigned int *)(g_btlMain + 0x560) = *puVar2;
     return;
   case 2:
     temp_v0 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10));

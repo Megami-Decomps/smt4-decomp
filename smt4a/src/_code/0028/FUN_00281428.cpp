@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } void_stack;
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -27,7 +27,7 @@ extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 extern int FUN_00162880(void);
 extern int FUN_00162ea4(void);
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_0016c4b8. */
 extern int FUN_0018206c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019e3d0. */
@@ -46,7 +46,7 @@ void FUN_00281428(void)
   float temp_v5;
   float temp_v6;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   if (((*(int *)(temp_v0 + 0x78) != 0) &&
       ((temp_v2 = (in_fpscr & 0xfffffff) | ((unsigned int)(*(float *)(temp_v0 + 0x28) == 0.0f) << 0x1e),
        !romwright_subpiece_4_1_0(temp_v2 >> 0x1e,0) || (*(int *)(temp_v0 + 0x80) != 0)))) &&
@@ -66,7 +66,7 @@ void FUN_00281428(void)
       temp_v1 = VectorFloatToUnsigned(temp_v4 * 255.0f,3);
       temp_v3 = VectorFloatToUnsigned(*(float *)(temp_v0 + 0x28) * 255.0f,3);
       temp_v6 = 255.0f;
-      FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(*(int *)(temp_v0 + 0xc) + 8));
+      FUN_0016c4b8(g_renderCtx,*(unsigned int *)(*(int *)(temp_v0 + 0xc) + 8));
       FUN_0019e3d0(temp_v3 + temp_v1 * 0x1010100);
     }
     temp_v1 = FUN_0018206c(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
@@ -81,7 +81,7 @@ void FUN_00281428(void)
       }
       temp_v1 = VectorFloatToUnsigned(temp_v4 * temp_v6,3);
       temp_v3 = VectorFloatToUnsigned(temp_v5 * temp_v6,3);
-      FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(*(int *)(temp_v0 + 0x80) + 8));
+      FUN_0016c4b8(g_renderCtx,*(unsigned int *)(*(int *)(temp_v0 + 0x80) + 8));
       FUN_0019e3d0(temp_v3 + temp_v1 * 0x1010100);
     }
   }

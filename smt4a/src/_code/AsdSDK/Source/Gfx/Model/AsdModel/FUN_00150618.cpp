@@ -19,14 +19,14 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern signed char DAT_005b3bf4; /* 0x5b3bf4 */
 extern unsigned int DAT_005b3c04; /* 0x5b3c04 */
 extern unsigned int DAT_005b3c14; /* 0x5b3c14 */
 extern unsigned int DAT_005b3c18; /* 0x5b3c18 */
 extern unsigned int DAT_005b3c1c; /* 0x5b3c1c */
-extern unsigned int DAT_005b3c78; /* 0x5b3c78 */
-extern unsigned int DAT_005b3c80; /* 0x5b3c80 */
+extern unsigned int g_asdModelSlotFlags; /* 0x5b3c78 */
+extern unsigned int g_effAsdLightHandle; /* 0x5b3c80 */
 extern int DAT_005b3c88; /* 0x5b3c88 */
 extern unsigned int DAT_005b3c90; /* 0x5b3c90 */
 extern int DAT_005b3cb8; /* 0x5b3cb8 */
@@ -58,19 +58,19 @@ void FUN_00150618(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  if ((DAT_005b3bf4 != '\0') && ((0 < DAT_00636e00 || ((DAT_005b3c78 & 1) != 0)))) {
+  if ((DAT_005b3bf4 != '\0') && ((0 < DAT_00636e00 || ((g_asdModelSlotFlags & 1) != 0)))) {
     temp_v1 = *(unsigned int *)(DAT_005b3cb8 + 4);
-    FUN_0017712c(DAT_005b3cb8,DAT_005b3c80,DAT_005b3c14,DAT_005b3cc0);
+    FUN_0017712c(DAT_005b3cb8,g_effAsdLightHandle,DAT_005b3c14,DAT_005b3cc0);
     if ((DAT_00636e04 != '\0') && (DAT_00636e05 == '\0')) {
       FUN_00197eb0(DAT_005b3c88 + 0x10,DAT_005b3c90);
-      FUN_0018cfe4(DAT_005b3c80,DAT_005b3c88);
+      FUN_0018cfe4(g_effAsdLightHandle,DAT_005b3c88);
     }
     if (DAT_00636e14 == '\0') {
-      FUN_00176800(DAT_005b3cb8,DAT_005b3c80,DAT_005b3cc0);
+      FUN_00176800(DAT_005b3cb8,g_effAsdLightHandle,DAT_005b3cc0);
     }
     if ((DAT_00636e04 != '\0') && (DAT_00636e05 == '\0')) {
       FUN_0018e9d8(DAT_005b3c88,DAT_005b3c90);
-      FUN_0018cfe4(DAT_005b3c80,DAT_005b3c88);
+      FUN_0018cfe4(g_effAsdLightHandle,DAT_005b3c88);
     }
     temp_v0 = FUN_001696f4();
     if (temp_v0 != 1) {
@@ -80,7 +80,7 @@ void FUN_00150618(void)
       FUN_0017721c(DAT_005b3cb8,DAT_005b3c18,DAT_005b3c1c,0);
       nw_gfx_RenderContext_ResetState_2B7478(temp_v1);
     }
-    FUN_001575cc(DAT_0059dbb4);
+    FUN_001575cc(g_renderCtx);
     DAT_005b3c04 = 0;
   }
   return;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001654d8(...);
 int FUN_001654e4(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(...);
 int FUN_0026e8b8(...);
 int FUN_002a4878(...);
@@ -31,11 +31,11 @@ typedef struct {
 } void_stack;
 
 extern int DAT_0057f108; /* 0x57f108 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_001654d8. */
 /* Supplied declaration required: FUN_001654e4. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -100,7 +100,7 @@ void FUN_00217f14(void)
   }
   temp_v2 = FUN_001654d8();
   temp_v3 = FUN_001654e4(temp_v0 + 0x658);
-  FUN_001677c0();
+  efctSetSpeed();
   temp_v1 = temp_v2;
   if (temp_v2 < 0) {
     temp_v1 = -temp_v2;
@@ -108,7 +108,7 @@ void FUN_00217f14(void)
   if (temp_v1 < 0x140) {
     FUN_001835b4(2,0x14,0,temp_v2,temp_v3,0xc9);
     FUN_001835b4(2,0x14,1,temp_v2,temp_v3,0xc9);
-    FUN_001677c0();
+    efctSetSpeed();
     temp_v4 = FUN_002c2c4c(temp_v0 + 0x40);
     temp_v10 = 0;
     if (0 < (int)temp_v4) {
@@ -118,7 +118,7 @@ void FUN_00217f14(void)
         temp_v11 = temp_v0 + temp_v10 * 0x8c + 0x914;
         temp_v1 = FUN_001654d8(temp_v11);
         temp_v2 = FUN_001654e4(temp_v11);
-        FUN_001677c0();
+        efctSetSpeed();
         temp_v5 = FUN_002a4878(temp_v0 + 0x40);
         temp_v13 = temp_v5 == temp_v10;
         if (temp_v13) {
@@ -147,14 +147,14 @@ void FUN_00217f14(void)
           FUN_0032ef5c(temp_v15,&temp_v18,temp_v19,0);
           temp_v7 = FUN_0021a410(temp_v6);
           if (temp_v7 != 0) {
-            FUN_001677c0();
+            efctSetSpeed();
           }
           FUN_001835b4(2,0x14,temp_v18,temp_v9,temp_v12,0xd3);
           FUN_001835b4(2,0x14,temp_v19[0],temp_v9,temp_v12,0xd3);
-          FUN_001677c0();
-          FUN_001677c0();
+          efctSetSpeed();
+          efctSetSpeed();
           FUN_0026e8b8(temp_v3,*(short *)(temp_v11 + 8) + temp_v1,*(short *)(temp_v11 + 10) + temp_v2,0xd8,0);
-          FUN_001677c0();
+          efctSetSpeed();
         }
         temp_v10 = temp_v10 + 1;
       } while ((int)temp_v10 < (int)temp_v4);
@@ -172,7 +172,7 @@ void FUN_00217f14(void)
          (temp_v11 != 0x21 && temp_v11 != 0x22)) {
         temp_v11 = FUN_001654d8(temp_v2);
         temp_v2 = FUN_001654e4(temp_v2);
-        FUN_001677c0();
+        efctSetSpeed();
         temp_v1 = FUN_00284140((int)*(short *)(temp_v0 + temp_v1 * 2 + 0x1b22));
         if (temp_v1 == 2) {
           temp_v7 = 0;
@@ -194,19 +194,19 @@ void FUN_00217f14(void)
         }
         temp_v8 = FUN_002a4878(temp_v0 + 0x40);
         temp_v9 = FUN_001834a4(0x14,temp_v8 + temp_v12 + temp_v9 / 2);
-        FUN_001677c0();
+        efctSetSpeed();
         temp_v7 = temp_v2 + temp_v7;
         temp_v1 = temp_v1 + temp_v11;
         FUN_001835b4(2,0x14,0x3c,*(short *)(temp_v9 + 8) + temp_v1,*(short *)(temp_v9 + 10) + temp_v7,0xd3
                     );
         FUN_001835b4(2,0x14,0x3d,*(short *)(temp_v9 + 8) + temp_v1,*(short *)(temp_v9 + 10) + temp_v7,0xd3
                     );
-        FUN_001677c0();
+        efctSetSpeed();
         FUN_001835b4(2,0x14,0x23,*(short *)(temp_v9 + 8) + temp_v1,*(short *)(temp_v9 + 10) + temp_v7,0xd8
                     );
         if (*(int *)(temp_v0 + 0x1c) == 6) {
-          FUN_001677c0();
-          temp_v0 = DAT_0059dbb4;
+          efctSetSpeed();
+          temp_v0 = g_renderCtx;
           temp_v12 = FUN_00169294(6,1,0);
           piVar13 = (int *)(temp_v0 + 0x12b8);
           temp_v8 = piVar13[*piVar13 + 2];
@@ -217,7 +217,7 @@ void FUN_00217f14(void)
           }
           FUN_001835b4(2,0x14,0x23,*(short *)(temp_v9 + 8) + temp_v1,*(short *)(temp_v9 + 10) + temp_v7,
                        0xdb);
-          temp_v0 = DAT_0059dbb4;
+          temp_v0 = g_renderCtx;
           temp_v12 = FUN_00169294(6,7,0);
           piVar13 = (int *)(temp_v0 + 0x12b8);
           temp_v8 = piVar13[*piVar13 + 2];
@@ -226,16 +226,16 @@ void FUN_00217f14(void)
             (**(romwright_code **)(temp_v0 + 0x12d4))();
             *(unsigned char *)(temp_v0 + 0x12d0) = 0;
           }
-          FUN_001677c0();
+          efctSetSpeed();
         }
         FUN_0032ef5c(temp_v3,&temp_v16,temp_v17,1);
         FUN_001835b4(2,0x14,temp_v16,*(short *)(temp_v9 + 8) + temp_v1,*(short *)(temp_v9 + 10) + temp_v7,
                      0xdd);
         FUN_001835b4(2,0x14,temp_v17[0],*(short *)(temp_v9 + 8) + temp_v11,
                      *(short *)(temp_v9 + 10) + temp_v2,0xdd);
-        FUN_001677c0();
+        efctSetSpeed();
         FUN_0026e8b8(temp_v3,*(short *)(temp_v9 + 8) + temp_v1,*(short *)(temp_v9 + 10) + temp_v7,0xe2,1);
-        FUN_001677c0();
+        efctSetSpeed();
       }
     }
   }

@@ -27,7 +27,7 @@ extern int FUN_002893d8(void);
 /* Supplied declaration required: FUN_0028eeb8. */
 extern int FUN_0029022c(void);
 extern int FUN_002903f0(void);
-extern unsigned int FUN_00296cc8(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 extern int FUN_002b47f4(unsigned int);
 /* Supplied declaration required: FUN_002b63c0. */
 /* Supplied declaration required: FUN_002bff50. */
@@ -43,7 +43,7 @@ unsigned int scrComm_Party_ConfirmSwap(void)
   int temp_v3;
   unsigned int temp_v4;
   
-  temp_v1 = FUN_00296cc8(0);
+  temp_v1 = scrGetArg(0);
   temp_v2 = FUN_002893d8();
   if (temp_v2 == 0) {
     FUN_0028eeb8(temp_v1);

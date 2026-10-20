@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_1_stack;
 
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_0019cac4. */
@@ -96,7 +96,7 @@ LAB_004a5ccc:
                   FUN_00184310();
                   FUN_0019cac4();
                   if ((puVar4 != (unsigned short *)0x0 && puVar9 != (unsigned short *)0x0) &&
-                     (((*(int *)((unsigned char *)&DAT_005f15fc + 0x660)) != 0 ||
+                     (((*(int *)((unsigned char *)&g_gameState + 0x660)) != 0 ||
                       (((puVar9[0xb] & 1) != 0 && (temp_v3 = FUN_0026264c(*puVar4), temp_v3 != 0)))))) {
                     FUN_004a8584(temp_v11,*puVar4,0);
                     temp_v4 = (unsigned int)*puVar4;

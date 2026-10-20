@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_00163aa4(int);
 int FUN_00184518(int, int);
 int FUN_001846d0(...);
@@ -28,7 +28,7 @@ extern int DAT_0057a9c8; /* 0x57a9c8 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 extern unsigned int FUN_00152f54(void);
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: FUN_00184518. */
@@ -154,7 +154,7 @@ LAB_002cc580:
         }
       }
       else {
-        FUN_0014aa78();
+        btlGetMainState();
         temp_v2 = FUN_003e8430();
         if (temp_v2 != 0) {
           if (*(int *)(temp_v5 + 0xb650) >= 0xc) {

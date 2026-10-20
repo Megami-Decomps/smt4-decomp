@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001d25a0(int *, int);
 int FUN_002f5020(unsigned int *, unsigned char *, int, int);
-int FUN_0030cb44(void);
+int asdOperatorNewE(void);
 int FUN_0047402c(int *, int, int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -22,7 +22,7 @@ extern unsigned char LAB_004745f0; /* 0x4745f0 */
 extern int FUN_001d10ac(unsigned int *);
 /* Supplied declaration required: FUN_001d25a0. */
 /* Supplied declaration required: FUN_002f5020. */
-/* Supplied declaration required: FUN_0030cb44. */
+/* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_0047402c. */
 
 
@@ -53,7 +53,7 @@ void FUN_00471adc(int param_1)
   FUN_001d25a0(&temp_v7,0);
   temp_v5 = *(int *)(param_1 + 0x310);
   puVar1 = (unsigned int *)(temp_v5 * 0x50 + 8);
-  FUN_0030cb44();
+  asdOperatorNewE();
   puVar2 = (unsigned int *)0x0;
   if (puVar1 != (unsigned int *)0x0) {
     puVar2 = puVar1 + 2;

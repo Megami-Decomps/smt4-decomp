@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c4938(int, unsigned int);
+int memClear(int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned int DAT_0044e334; /* 0x44e334 */
 
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_0036efa8(int *param_1)
@@ -94,7 +94,7 @@ void FUN_0036efa8(int *param_1)
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < temp_v4);
     }
-    FUN_002c4938(temp_v0,temp_v4 << 2);
+    memClear(temp_v0,temp_v4 << 2);
     puVar7[5] = 0;
     unaff_r9 = unaff_r9 + 1;
     puVar7[4] = puVar7[4] & 0xfffffffe;

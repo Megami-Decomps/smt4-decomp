@@ -69,7 +69,7 @@ extern short DAT_0057a682; /* 0x57a682 */
 extern int DAT_0057a9c8; /* 0x57a9c8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int *FUN_0014aa78(void);
+extern unsigned int *btlGetMainState(void);
 /* Supplied declaration required: FUN_00184964. */
 /* Supplied declaration required: FUN_003e7fa4. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -98,7 +98,7 @@ void FUN_0040cd6c(unsigned int param_1,fn_0040cd6c_arg1 *param_2)
   float temp_v10;
   unsigned int temp_v11;
   
-  puVar3 = (unsigned int *)FUN_0014aa78();
+  puVar3 = (unsigned int *)btlGetMainState();
   puVar4 = puVar3;
   FUN_003f0e20(puVar3,(int)*(short *)((int)param_2->field_0x14 + 0x6a));
   if (puVar4 == (unsigned int *)0x0) {

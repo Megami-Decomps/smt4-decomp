@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0013f1b8(int, int);
+int asdTMTexTableLoadTmx(int, int);
 int FUN_001641c4(void);
 int FUN_0018206c(int, int);
 int FUN_0019a7f4(int, int);
 int FUN_001acf98(int, int);
 int FUN_001f4908(int, int, int);
 int FUN_00284168(int, int, int, int);
-int FUN_002e132c(...);
+int asdTMTexTableFreeEntry(...);
 int FUN_0037ed38(void);
 int FUN_003c58a8(int);
 int FUN_003cbb0c(void);
@@ -21,7 +21,7 @@ int FUN_003d54f8(int, int);
 int FUN_0050d708(unsigned int *);
 
 extern int FUN_0013def0(unsigned int);
-/* Supplied declaration required: FUN_0013f1b8. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_001641c4. */
 extern int FUN_001643a0(void);
 extern int FUN_001656a0(unsigned int);
@@ -31,7 +31,7 @@ extern int FUN_001656a0(unsigned int);
 /* Supplied declaration required: FUN_001f4908. */
 extern int FUN_002009a8(unsigned int);
 /* Supplied declaration required: FUN_00284168. */
-/* Supplied declaration required: FUN_002e132c. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 extern int FUN_00341940(unsigned int);
 /* Supplied declaration required: FUN_0037ed38. */
 /* Supplied declaration required: FUN_003c58a8. */
@@ -70,7 +70,7 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
     *(unsigned char *)((int)param_1 + 0x4b) = 0;
     temp_v0 = FUN_00341940(0x22);
     if (temp_v0 == 0) {
-      FUN_0013f1b8(0x22,0);
+      asdTMTexTableLoadTmx(0x22,0);
       *(unsigned char *)((int)param_1 + 0x4b) = 1;
     }
     temp_v0 = 1;
@@ -180,7 +180,7 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 7);
     if (*(char *)((int)param_1 + 0x4b) != '\0') {
-      FUN_002e132c(0x22);
+      asdTMTexTableFreeEntry(0x22);
       *(unsigned char *)((int)param_1 + 0x4b) = 0;
     }
     FUN_001641c4();

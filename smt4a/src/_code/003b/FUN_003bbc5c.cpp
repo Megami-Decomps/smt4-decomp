@@ -2,10 +2,10 @@
 
 extern "C" {
 
-int FUN_003283ac(int);
+int scrSetResult(int);
 
-/* Supplied declaration required: FUN_003283ac. */
-extern int FUN_004ee568(unsigned int);
+/* Supplied declaration required: scrSetResult. */
+extern int btlUnitGet(unsigned int);
 
 
 unsigned int FUN_003bbc5c(unsigned int *param_1)
@@ -14,12 +14,12 @@ unsigned int FUN_003bbc5c(unsigned int *param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_004ee568(*param_1);
+  temp_v0 = btlUnitGet(*param_1);
   if (*(int *)(*(int *)(temp_v0 + 0x20) + 0xac) > 0) {
-    FUN_003283ac(1);
+    scrSetResult(1);
   }
   else {
-    FUN_003283ac(0 < *(int *)(*(int *)(temp_v0 + 0x20) + 0xb4));
+    scrSetResult(0 < *(int *)(*(int *)(temp_v0 + 0x20) + 0xb4));
   }
   return 1;
 }

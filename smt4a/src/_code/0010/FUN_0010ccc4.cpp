@@ -1,54 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010ccc4` (_code @ 0x10ccc4, 0x2a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the two words of `range` are copied through r2/r3 in retail (r2/r0 here). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e7194(...);
+typedef struct Pair {
+    u32 first;
+    u32 second;
+} Pair;
 
-typedef struct fn_0010ccc4_arg0 fn_0010ccc4_arg0;
-typedef struct fn_0010ccc4_arg1 fn_0010ccc4_arg1;
-struct fn_0010ccc4_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined1 field_0x4; /* +0x4 */
-    unsigned char pad_0x5[0x3];
-    undefined4 field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x4];
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    undefined2 field_0x18; /* +0x18 */
-    undefined2 field_0x1a; /* +0x1a */
-};
-struct fn_0010ccc4_arg1 {
-    unsigned char pad_0x0[0x4];
-    byte field_0x4; /* +0x4 */
-    unsigned char pad_0x5[0x3];
-    undefined4 field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x4];
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    ushort field_0x18; /* +0x18 */
-    ushort field_0x1a; /* +0x1a */
-};
+typedef struct Descriptor {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u8 type;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ Pair range;
+    /* 0x18 */ u16 width;
+    /* 0x1A */ u16 height;
+} Descriptor;
 
-/* Supplied declaration required: FUN_002e7194. */
+int FUN_002e7194(void *dst, void *src);
 
-
-int FUN_0010ccc4(fn_0010ccc4_arg0 *param_1,fn_0010ccc4_arg1 *param_2)
-
+/* Copy-assigns a Descriptor and returns the destination. */
+Descriptor *FUN_0010ccc4(Descriptor *dst, Descriptor *src)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  param_1->field_0x4 = param_2->field_0x4;
-  param_1->field_0x8 = param_2->field_0x8;
-  temp_v0 = param_2->field_0x10;
-  param_1->field_0x14 = param_2->field_0x14;
-  param_1->field_0x10 = temp_v0;
-  param_1->field_0x18 = param_2->field_0x18;
-  param_1->field_0x1a = param_2->field_0x1a;
-  FUN_002e7194(param_1 + 1,param_2 + 1);
-  return (int)param_1;
+    dst->type = src->type;
+    dst->unk08 = src->unk08;
+    dst->range = src->range;
+    dst->width = src->width;
+    dst->height = src->height;
+    FUN_002e7194(dst + 1, src + 1);
+    return dst;
 }
 
 } /* extern "C" */

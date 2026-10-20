@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c415c(void);
-int FUN_002c4938(unsigned char *, int);
+int asdMemFree(void);
+int memClear(unsigned char *, int);
 
 extern int DAT_00433278; /* 0x433278 */
 extern unsigned char DAT_00478000; /* 0x478000 */
 
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_0024dc64(void)
@@ -26,19 +26,19 @@ void FUN_0024dc64(void)
     do {
       temp_v0 = temp_v1 * 0x148;
       if (*(int *)(temp_v0 + 0x47813c) != 0) {
-        FUN_002c415c();
+        asdMemFree();
         *(unsigned int *)(temp_v0 + 0x47813c) = 0;
         *(unsigned int *)(temp_v0 + 0x478028) = 0;
       }
       if (*(int *)(temp_v0 + 0x478024) != 0) {
-        FUN_002c415c();
+        asdMemFree();
         *(unsigned int *)(temp_v0 + 0x478024) = 0;
         *(unsigned int *)(temp_v0 + 0x478020) = 0;
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < DAT_00433278);
   }
-  FUN_002c4938(&DAT_00478000,0x5200);
+  memClear(&DAT_00478000,0x5200);
   DAT_00433278 = 0;
   return;
 }

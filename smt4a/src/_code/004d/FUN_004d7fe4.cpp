@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 
-extern int DAT_00573808; /* 0x573808 */
+extern BtlAuxA *DAT_00573808;
 
-
-void FUN_004d7fe4(unsigned int *param_1)
-
+void FUN_004d7fe4(BtlStep *step)
 {
-  *param_1 = 9;
-  *(unsigned char *)(param_1 + 0xb) = 0;
-  *(unsigned int *)(DAT_00573808 + 0x3050) = 0;
-  return;
+    step->state = 9;
+    step->unk2C = 0;
+    DAT_00573808->unk3050 = 0;
 }
 
 } /* extern "C" */

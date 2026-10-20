@@ -1,25 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00318c5c` (_code @ 0x318c5c, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Returns 0 if the object is in state 0x27, otherwise starts its transition (timerStart) and returns 1. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bd8e8(int, int, int);
+typedef struct Object {
+    /* 0x0000 */ u8 unk0000[0x12B8];
+    /* 0x12B8 */ u8 transition[0x1D90];
+    /* 0x3048 */ s32 state;
+} Object;
 
-/* Supplied declaration required: FUN_002bd8e8. */
+extern void timerStart(void *transition, s32 a, s32 b);
 
-
-unsigned char FUN_00318c5c(int param_1)
-
+u8 FUN_00318c5c(Object *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0x3048) != 0x27;
-  if (temp_v0) {
-    FUN_002bd8e8(param_1 + 0x12b8,9,0);
-  }
-  return temp_v0;
+    if (obj->state != 0x27) {
+        timerStart(obj->transition, 9, 0);
+        return 1;
+    }
+    return 0;
 }
 
-} /* extern "C" */
+}

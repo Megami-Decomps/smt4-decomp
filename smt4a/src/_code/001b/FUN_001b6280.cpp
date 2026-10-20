@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-extern unsigned char DAT_006433d0; /* 0x6433d0 */
+extern unsigned char g_dspsndState; /* 0x6433d0 */
 
 extern unsigned char nn_snd_CTR_Dspsnd_SetChannelMix(unsigned int, unsigned char, unsigned int);
 
@@ -55,7 +55,7 @@ unsigned char FUN_001b6280(unsigned int *param_1)
   temp_v4 = (float)param_1[0x11] * temp_v12;
   temp_v8 = (float)param_1[0x15] * temp_v12;
   temp_v12 = (float)param_1[0x19] * temp_v12;
-  temp_v0 = nn_snd_CTR_Dspsnd_SetChannelMix((unsigned int)&DAT_006433d0,(unsigned char)*param_1,(unsigned int)&temp_v1);
+  temp_v0 = nn_snd_CTR_Dspsnd_SetChannelMix((unsigned int)&g_dspsndState,(unsigned char)*param_1,(unsigned int)&temp_v1);
   return temp_v0;
 }
 

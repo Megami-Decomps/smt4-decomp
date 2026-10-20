@@ -18,10 +18,10 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int *FUN_00164a9c(void);
+extern int *jobGetWork(void);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c560. */
@@ -47,13 +47,13 @@ unsigned int FUN_00289f10(void)
   unsigned long long temp_v7;
   float temp_v8;
   
-  piVar1 = (int *)FUN_00164a9c();
+  piVar1 = (int *)jobGetWork();
   if ((piVar1[1] == 0) && (*(char *)((int)piVar1 + 0x16) != '\0')) {
     if (*(char *)((int)piVar1 + 0x15) == '\0') {
       FUN_00230038(piVar1);
       *(unsigned char *)((int)piVar1 + 0x15) = 1;
     }
-    temp_v1 = DAT_0059dbb4;
+    temp_v1 = g_renderCtx;
     temp_v0 = FUN_001692ac(5,1);
     piVar6 = (int *)(temp_v1 + 0x1258);
     temp_v2 = *piVar6;
@@ -64,7 +64,7 @@ unsigned int FUN_00289f10(void)
       (**(romwright_code **)(temp_v1 + 0x1274))();
       *(unsigned char *)(temp_v1 + 0x1270) = 0;
     }
-    temp_v1 = DAT_0059dbb4;
+    temp_v1 = g_renderCtx;
     temp_v0 = FUN_00387580(6);
     piVar6 = (int *)(temp_v1 + 0x1278);
     temp_v2 = *piVar6;
@@ -107,8 +107,8 @@ unsigned int FUN_00289f10(void)
       FUN_003fba4c(piVar1[0xd],0,(int)(float)piVar1[0x10],piVar1 + 6,
                    temp_v2 + (temp_v0 + (temp_v3 + temp_v1 * 0x100) * 0x100) * 0x100,2);
     }
-    temp_v1 = DAT_0059dbb4;
-    piVar1 = (int *)(DAT_0059dbb4 + 0x1278);
+    temp_v1 = g_renderCtx;
+    piVar1 = (int *)(g_renderCtx + 0x1278);
     temp_v0 = *piVar1;
     temp_v2 = piVar1[temp_v0 + 2];
     *piVar1 = temp_v0 - 1;
@@ -116,8 +116,8 @@ unsigned int FUN_00289f10(void)
       (**(romwright_code **)(temp_v1 + 0x1294))();
       *(unsigned char *)(temp_v1 + 0x1290) = 0;
     }
-    temp_v1 = DAT_0059dbb4;
-    piVar1 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v1 = g_renderCtx;
+    piVar1 = (int *)(g_renderCtx + 0x1258);
     temp_v0 = *piVar1;
     temp_v2 = piVar1[temp_v0 + 2];
     *piVar1 = temp_v0 - 1;
@@ -125,8 +125,8 @@ unsigned int FUN_00289f10(void)
       (**(romwright_code **)(temp_v1 + 0x1274))();
       *(unsigned char *)(temp_v1 + 0x1270) = 0;
     }
-    FUN_0016c560(DAT_0059dbb4);
-    FUN_0016c410(DAT_0059dbb4);
+    FUN_0016c560(g_renderCtx);
+    FUN_0016c410(g_renderCtx);
   }
   return 0;
 }

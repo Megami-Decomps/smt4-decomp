@@ -46,7 +46,7 @@ extern int FUN_0028e9d0(unsigned int);
 /* Supplied declaration required: FUN_002a03d8. */
 extern int FUN_002a60b4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_003a4210. */
 
 
@@ -74,9 +74,9 @@ void FUN_003a0d64(fn_003a0d64_arg0 *param_1)
     temp_v1 = param_1->field_0x164;
   }
   if ((temp_v7 && temp_v1 != 0) && (temp_v1 = FUN_002a60b4(0x2b,0), temp_v1 != 0)) {
-    temp_v1 = FUN_002bf244(param_1->field_0x15d40);
+    temp_v1 = jobIsValid(param_1->field_0x15d40);
     if ((temp_v1 == 0) || (temp_v1 = FUN_00221e00(param_1->field_0x15d40), temp_v1 != 0)) {
-      temp_v1 = FUN_002bf244(param_1->field_0x15d44);
+      temp_v1 = jobIsValid(param_1->field_0x15d44);
       if ((temp_v1 == 0) || (temp_v1 = FUN_00221e00(param_1->field_0x15d44), temp_v1 != 0)) {
         pvVar3 = param_1->field_0x160;
         FUN_00297060(pvVar3,param_1->field_0x164);

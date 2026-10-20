@@ -13,15 +13,15 @@ int FUN_0029e788(...);
 int FUN_0029e874(...);
 int FUN_0029f848(...);
 int FUN_002a8764(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
-int FUN_002c222c(...);
+int asdOperatorNew(...);
 int FUN_002c312c(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int memClear(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int FUN_003c9c94(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
@@ -59,15 +59,15 @@ extern unsigned int *DAT_0043dcf0; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_0029f848. */
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002a8764. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_003c9c94. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
@@ -89,18 +89,18 @@ void FUN_0028b7f8(int param_1)
   
   if (DAT_0043dcf0 == (unsigned int *)0x0) {
     puVar2 = (unsigned int *)0x100;
-    FUN_002c498c(0x100,0x100,0,0x17f8,1);
+    asdMemAlloc(0x100,0x100,0,0x17f8,1);
     DAT_0043dcf0 = puVar2;
   }
   puVar2 = DAT_0043dcf0;
-  FUN_002c4938();
+  memClear();
   temp_v1 = FUN_002a0d0c();
   *(unsigned char *)((int)puVar2 + 0x42) = *(unsigned char *)(temp_v1 + 0x40);
   puVar4 = &LAB_0028bbe4;
-  FUN_002c5788(&LAB_0028bbe4,1,0,0,FUN_001c3fd4,&LAB_00212534,0);
+  asdProcessCreateSimple(&LAB_0028bbe4,1,0,0,FUN_001c3fd4,&LAB_00212534,0);
   *puVar2 = (unsigned int)puVar4;
   puVar5 = &LAB_0028bbf4;
-  FUN_002c4a08(&LAB_0028bbf4,0xe6,0,0,FUN_00212538,0,0,puVar4);
+  taskCreateDraw(&LAB_0028bbf4,0xe6,0,0,FUN_00212538,0,0,puVar4);
   puVar2[2] = (unsigned int)puVar5;
   FUN_00297468(&LAB_0028bc00,puVar2 + 3,1);
   FUN_00297468(&LAB_0028bc14,puVar2 + 4,1);
@@ -113,7 +113,7 @@ void FUN_0028b7f8(int param_1)
     FUN_0029e874(0);
   }
   temp_v1 = 0x180;
-  FUN_002c222c();
+  asdOperatorNew();
   if (temp_v1 != 0) {
     FUN_003c9c94();
   }
@@ -121,7 +121,7 @@ void FUN_0028b7f8(int param_1)
   *(unsigned char *)(temp_v1 + 0x142) = 1;
   FUN_002a8764();
   temp_v1 = 0x54;
-  FUN_002c222c();
+  asdOperatorNew();
   puVar2[0x1b2] = temp_v1;
   *(unsigned char *)(temp_v1 + 0x20) = 0;
   *(unsigned int *)(puVar2[0x1b2] + 0x34) = 0xffffffff;
@@ -129,7 +129,7 @@ void FUN_0028b7f8(int param_1)
   temp_v1 = 0;
   do {
     temp_v2 = 0x54;
-    FUN_002c222c();
+    asdOperatorNew();
     puVar2[temp_v1 + 0x1b3] = temp_v2;
     *(unsigned char *)(temp_v2 + 0x21) = 1;
     temp_v1 = temp_v1 + 1;
@@ -137,7 +137,7 @@ void FUN_0028b7f8(int param_1)
   temp_v1 = 0;
   do {
     temp_v3 = 0x54;
-    FUN_002c222c();
+    asdOperatorNew();
     temp_v2 = temp_v1 + 1;
     puVar2[temp_v1 + 0x1b6] = temp_v3;
     temp_v1 = temp_v2;
@@ -155,22 +155,22 @@ void FUN_0028b7f8(int param_1)
   FUN_002bd954(puVar2 + 0x3d,0x19,0x25,puVar2 + 0x12,0x6a);
   FUN_002bee58(puVar2 + 0x3d,1);
   FUN_002bd954(puVar2 + 0x60,0x19,0,puVar2 + 0x12,0x6a);
-  FUN_002bd8e8(puVar2 + 0x60,4,0);
+  timerStart(puVar2 + 0x60,4,0);
   FUN_002bd954(puVar2 + 0x83,0x19,0,puVar2 + 0x12,0x6a);
   FUN_002bee58(puVar2 + 0x83,2);
   temp_v1 = 0;
   do {
     FUN_002bd954(puVar2 + temp_v1 * 0x23 + 0xa6,0x19,0,puVar2 + 0x12,0x6a);
-    FUN_002bd8e8(puVar2 + temp_v1 * 0x23 + 0xa6,4,0);
+    timerStart(puVar2 + temp_v1 * 0x23 + 0xa6,4,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 4);
   puVar8 = puVar2 + 0x132;
   FUN_002bd954(puVar8,0x19,0,puVar2 + 0x12,0x6a);
   if (*(char *)((int)puVar2 + 0x42) != '\0') {
-    FUN_002bd8e8(puVar8,6,0);
+    timerStart(puVar8,6,0);
   }
   else {
-    FUN_002bd8e8(puVar8,4,0);
+    timerStart(puVar8,4,0);
   }
   FUN_002bd954(puVar2 + 0x155,0x19,1000,puVar2 + 0x12,0xc9);
   FUN_002bee58(puVar2 + 0x155,3);

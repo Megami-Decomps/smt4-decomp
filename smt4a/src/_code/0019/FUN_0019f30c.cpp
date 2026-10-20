@@ -13,7 +13,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 extern int FUN_001a7a20(int, unsigned int, unsigned int);
-extern unsigned int FUN_002e3390(unsigned int);
+extern unsigned int wstrlen(unsigned int);
 
 
 unsigned int FUN_0019f30c(int param_1,unsigned int param_2,float *param_3)
@@ -32,7 +32,7 @@ unsigned int FUN_0019f30c(int param_1,unsigned int param_2,float *param_3)
   float temp_v9;
   
   temp_v0 = *(int *)(param_1 + 0x210);
-  temp_v1 = FUN_002e3390(param_2);
+  temp_v1 = wstrlen(param_2);
   temp_v0 = FUN_001a7a20(temp_v0 + 0x74,param_2,temp_v1);
   if (temp_v0 == 0xffff) {
     return 0;

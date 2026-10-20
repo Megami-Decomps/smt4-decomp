@@ -15,7 +15,7 @@ typedef struct {
 extern unsigned char LAB_00413e24; /* 0x413e24 */
 
 /* Supplied declaration required: FUN_002e32a4. */
-extern unsigned char *FUN_002e6dac(void);
+extern unsigned char *rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 
 
@@ -70,7 +70,7 @@ void FUN_00413af4(int *param_1,int param_2,unsigned int param_3)
       if (puVar10 <= puVar3 + (temp_v2 - (int)puVar13)) {
         puVar10 = puVar3 + (temp_v2 - (int)puVar13);
       }
-      puVar7 = (unsigned char *)FUN_002e6dac();
+      puVar7 = (unsigned char *)rt_malloc();
       puVar11 = puVar7;
       for (puVar3 = (unsigned char *)*param_1; puVar3 != puVar13; puVar3 = puVar3 + 1) {
         if (puVar11 != (unsigned char *)0x0) {

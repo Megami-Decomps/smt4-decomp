@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_002e6dd4(int, int);
 
-extern unsigned int *DAT_0058104c; /* 0x58104c */
+extern unsigned int *g_popupState; /* 0x58104c */
 
 /* Supplied declaration required: FUN_002e6dd4. */
 
@@ -15,15 +15,15 @@ void FUN_00224070(void)
 /* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
   
-  puVar1 = DAT_0058104c;
-  *DAT_0058104c = 0;
+  puVar1 = g_popupState;
+  *g_popupState = 0;
   puVar1[1] = 0;
   puVar1[6] = 0;
   puVar1[8] = 0;
   puVar1[7] = 0;
   FUN_002e6dd4((int)puVar1 + 0x25,0x48);
-  puVar1 = DAT_0058104c;
-  DAT_0058104c[0x2c] = 0;
+  puVar1 = g_popupState;
+  g_popupState[0x2c] = 0;
   puVar1[0x2d] = 0;
   puVar1[0x2e] = 0;
   puVar1[0x2f] = 0;

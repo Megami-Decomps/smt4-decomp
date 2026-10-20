@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_00484ca8(...);
 int FUN_00484cb0(...);
 
@@ -24,9 +24,9 @@ extern unsigned char LAB_00316108; /* 0x316108 */
 extern unsigned char LAB_00316120; /* 0x316120 */
 extern unsigned int *DAT_00588110; /* 0x588110 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_00484ca8. */
 /* Supplied declaration required: FUN_00484cb0. */
 
@@ -39,7 +39,7 @@ void FUN_00275748(unsigned int *param_1)
   char *pcVar2;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x580,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x580,1);
   DAT_00588110 = puVar1;
   if (param_1 != (unsigned int *)0x0) {
     FUN_00484cb0(puVar1 + 4,(int)(char)*param_1);
@@ -48,12 +48,12 @@ void FUN_00275748(unsigned int *param_1)
     FUN_00484ca8(puVar1 + 4);
   }
   pcVar2 = "NameMainProc";
-  FUN_0014e38c("NameMainProc",4,0,0,&LAB_0027daf0,&LAB_00316108,DAT_00588110);
+  asdProcessCreateSimple("NameMainProc",4,0,0,&LAB_0027daf0,&LAB_00316108,DAT_00588110);
   *puVar1 = (unsigned int)pcVar2;
-  FUN_0015155c("NameDrawUp",0x85,1,0,&LAB_002bd338,0,DAT_00588110,pcVar2);
-  FUN_0015155c("NameDrawUp",0xe1,1,0,&LAB_002bd338,0,DAT_00588110,*puVar1);
+  taskCreateDraw("NameDrawUp",0x85,1,0,&LAB_002bd338,0,DAT_00588110,pcVar2);
+  taskCreateDraw("NameDrawUp",0xe1,1,0,&LAB_002bd338,0,DAT_00588110,*puVar1);
   pcVar2 = "NameDrawDown";
-  FUN_0015155c("NameDrawDown",0xea,1,0,&LAB_00316120,0,DAT_00588110,*puVar1);
+  taskCreateDraw("NameDrawDown",0xea,1,0,&LAB_00316120,0,DAT_00588110,*puVar1);
   puVar1[2] = (unsigned int)pcVar2;
   return;
 }

@@ -43,7 +43,7 @@ extern int FUN_00461f64(...); /* 0x461f64 */
 /* Supplied declaration required: FUN_00465c8c. */
 /* Supplied declaration required: FUN_004663e4. */
 /* Supplied declaration required: FUN_00466500. */
-extern char aeabi_idivmod(int);
+extern char __aeabi_idivmod(int);
 /* Supplied declaration required: nw_snd_internal_CurveAdshr_SetHold. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_SetPanCurve. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_SetPanMode. */
@@ -184,7 +184,7 @@ LAB_004621e4:
   }
   else {
     temp_v3 = *(unsigned char *)(temp_v7 + 0x180);
-    temp_v2 = aeabi_idivmod(((unsigned int)*(unsigned char *)(temp_v7 + 0x181) - (unsigned int)temp_v3) *
+    temp_v2 = __aeabi_idivmod(((unsigned int)*(unsigned char *)(temp_v7 + 0x181) - (unsigned int)temp_v3) *
                           (unsigned int)*(unsigned short *)(temp_v7 + 0x184));
     temp_v3 = temp_v2 + temp_v3;
   }

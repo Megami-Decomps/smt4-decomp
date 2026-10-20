@@ -9,9 +9,9 @@ int FUN_0022708c(void);
 int FUN_002276f8(int);
 int FUN_00241d58(int);
 int FUN_0027de24(int);
-int FUN_002a775c(int);
-int FUN_002c415c(void);
-int FUN_002c4938(int, int);
+int asdMdlManagerDestroy(int);
+int asdMemFree(void);
+int memClear(int, int);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_00152bec. */
@@ -19,9 +19,9 @@ typedef int romwright_code(...);
 /* Supplied declaration required: FUN_002276f8. */
 /* Supplied declaration required: FUN_00241d58. */
 /* Supplied declaration required: FUN_0027de24. */
-/* Supplied declaration required: FUN_002a775c. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_003d971c(int param_1)
@@ -52,7 +52,7 @@ void FUN_003d971c(int param_1)
       if (-1 < *(int *)(*(int *)(*piVar2 + 8) + 0xc)) {
         FUN_00152bec();
       }
-      FUN_002a775c(*piVar2);
+      asdMdlManagerDestroy(*piVar2);
       *piVar2 = 0;
     }
     temp_v1 = temp_v1 + 1;
@@ -73,9 +73,9 @@ void FUN_003d971c(int param_1)
   do {
     temp_v0 = param_1 + temp_v1 * 0x8c;
     *(unsigned char *)(temp_v0 + 0x25c0) = 0xff;
-    FUN_002c4938(temp_v0 + 0x25c8,0x80);
+    memClear(temp_v0 + 0x25c8,0x80);
     if (*(int *)(temp_v0 + 0x25c4) != 0) {
-      FUN_002c415c();
+      asdMemFree();
       *(unsigned int *)(temp_v0 + 0x25c4) = 0;
     }
     temp_v1 = temp_v1 + 1;

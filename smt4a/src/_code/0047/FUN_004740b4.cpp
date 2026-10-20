@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00192798(void);
+int dataTableGetEntries(void);
 int FUN_001a6f60(int, int);
 int FUN_002f5020(void);
-int FUN_0030cb44(void);
+int asdOperatorNewE(void);
 
 typedef struct fn_004740b4_arg0 fn_004740b4_arg0;
 struct fn_004740b4_arg0 {
@@ -18,11 +18,11 @@ struct fn_004740b4_arg0 {
     int field_0x4c; /* +0x4c */
 };
 
-extern int FUN_00192748(void);
-/* Supplied declaration required: FUN_00192798. */
+extern int dataTableGetCount(void);
+/* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_001a6f60. */
 /* Supplied declaration required: FUN_002f5020. */
-/* Supplied declaration required: FUN_0030cb44. */
+/* Supplied declaration required: asdOperatorNewE. */
 
 
 void FUN_004740b4(fn_004740b4_arg0 *param_1)
@@ -39,7 +39,7 @@ void FUN_004740b4(fn_004740b4_arg0 *param_1)
   }
   if (temp_v1 && temp_v0 != 0) {
     FUN_001a6f60(temp_v0,0);
-    FUN_00192798();
+    dataTableGetEntries();
   }
   temp_v1 = param_1->field_0x45 != 0;
   temp_v0 = 0;
@@ -48,10 +48,10 @@ void FUN_004740b4(fn_004740b4_arg0 *param_1)
   }
   if (temp_v1 && temp_v0 != 0) {
     FUN_001a6f60(temp_v0,0);
-    temp_v0 = FUN_00192748();
+    temp_v0 = dataTableGetCount();
     if (temp_v0 != 0) {
       temp_v0 = temp_v0 << 4;
-      FUN_0030cb44();
+      asdOperatorNewE();
       if (temp_v0 != 0) {
         FUN_002f5020();
       }

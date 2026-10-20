@@ -4,20 +4,20 @@
 
 extern "C" {
 
-int FUN_0014e38c(unsigned char *, int, int, int, unsigned char *, int, int);
+int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
 int FUN_00151408(...);
-int FUN_0015155c(...);
+int taskCreateDraw(...);
 int FUN_001527d8(...);
-int FUN_00163060(int, int, int, int, int);
-int FUN_001681cc(...);
+int asdMemoryAllocTracked(int, int, int, int, int);
+int sysPlaySe(...);
 int FUN_00182054(void);
 int FUN_001ab854(...);
 int FUN_002804b0(...);
-int FUN_002e6354(void);
+int sysMemClear(void);
 int FUN_002e6dd0(...);
 int FUN_0039a3b4(...);
 int FUN_003a4980(void);
-int FUN_003b5e8c(void);
+int campCecDrawPageCreate(void);
 int rt_memcpy_w(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -54,13 +54,13 @@ extern int FUN_003cc670(...); /* 0x3cc670 */
 extern unsigned int *DAT_0057f118; /* 0x57f118 */
 
 extern int FUN_0014af84(void);
-extern unsigned int FUN_0014bce0(unsigned int);
-/* Supplied declaration required: FUN_0014e38c. */
+extern unsigned int spriteHandleCreate(unsigned int);
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_00151408. */
-/* Supplied declaration required: FUN_0015155c. */
+/* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: sysPlaySe. */
 extern unsigned int FUN_001801a4(void);
 /* Supplied declaration required: FUN_00182054. */
 /* Supplied declaration required: FUN_001ab854. */
@@ -68,12 +68,12 @@ extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_002804b0. */
 extern unsigned int FUN_002bf520(void);
 extern unsigned int FUN_002e264c(unsigned int);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd0. */
 extern unsigned int FUN_003192e0(void);
 /* Supplied declaration required: FUN_0039a3b4. */
 /* Supplied declaration required: FUN_003a4980. */
-/* Supplied declaration required: FUN_003b5e8c. */
+/* Supplied declaration required: campCecDrawPageCreate. */
 extern int FUN_004bd340(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -95,19 +95,19 @@ void FUN_0034280c(unsigned char param_1)
   
   if (DAT_0057f118 == (unsigned int *)0x0) {
     puVar3 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x198,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0x198,1);
     DAT_0057f118 = puVar3;
   }
   puVar3 = DAT_0057f118;
-  FUN_002e6354();
+  sysMemClear();
   puVar4 = &LAB_00342c14;
-  FUN_0014e38c(&LAB_00342c14,3,0,0,&LAB_0025d4a0,0,0);
+  asdProcessCreateSimple(&LAB_00342c14,3,0,0,&LAB_0025d4a0,0,0);
   *puVar3 = (unsigned int)puVar4;
-  FUN_0015155c(&LAB_00342c2c,0x65,0,0,&LAB_002a27e4,0,0,puVar4);
-  FUN_0015155c(&LAB_00342c48,0xcc,0,0,&LAB_002a27e4,0,0,*puVar3);
-  FUN_0015155c(&LAB_00342c68,0x81,0,0,&LAB_0025d44c,0,0,*puVar3);
-  FUN_0015155c(&LAB_00342c80,0xdd,0,0,&LAB_0025d44c,0,0,*puVar3);
-  FUN_0015155c(&LAB_00342c9c,0xea,0,0,FUN_002e1d1c,0,0,*puVar3);
+  taskCreateDraw(&LAB_00342c2c,0x65,0,0,&LAB_002a27e4,0,0,puVar4);
+  taskCreateDraw(&LAB_00342c48,0xcc,0,0,&LAB_002a27e4,0,0,*puVar3);
+  taskCreateDraw(&LAB_00342c68,0x81,0,0,&LAB_0025d44c,0,0,*puVar3);
+  taskCreateDraw(&LAB_00342c80,0xdd,0,0,&LAB_0025d44c,0,0,*puVar3);
+  taskCreateDraw(&LAB_00342c9c,0xea,0,0,FUN_002e1d1c,0,0,*puVar3);
   puVar3[0x3e] = 0xffffffff;
   puVar3[0x3c] = 0xffffffff;
   puVar3[0x3d] = 0;
@@ -186,7 +186,7 @@ void FUN_0034280c(unsigned char param_1)
   *(unsigned int *)((int)puVar3 + 0x182) = puVar7[2];
   *(unsigned short *)((int)puVar3 + 0x186) = *(unsigned short *)(puVar7 + 3);
   temp_v3 = FUN_002e264c(puVar3[2]);
-  FUN_003b5e8c();
+  campCecDrawPageCreate();
   puVar3[3] = temp_v3;
   FUN_003a4980();
   FUN_002804b0(&LAB_00342cdc,puVar3 + 0x14,0);
@@ -198,11 +198,11 @@ void FUN_0034280c(unsigned char param_1)
   if (temp_v4 == 0) {
     FUN_0039a3b4(puVar3[3],(unsigned int)temp_v0);
   }
-  temp_v3 = FUN_0014bce0(0);
+  temp_v3 = spriteHandleCreate(0);
   puVar3[0x17] = temp_v3;
   FUN_001527d8(temp_v3,0xffffffff);
   FUN_00151408(puVar3[0x17],0,0x646464ff);
-  FUN_001681cc(0xb3);
+  sysPlaySe(0xb3);
   temp_v2 = 0;
   do {
     FUN_002e6dd0(puVar3 + temp_v2 * 5 + 4,0x14);

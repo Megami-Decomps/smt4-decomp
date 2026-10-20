@@ -8,13 +8,13 @@ int FUN_00291944(void);
 int FUN_00292c0c(void);
 int FUN_0029a128(int);
 int FUN_002a71fc(int);
-int FUN_002a7218(void);
+int scrScriptProcessDestroy(void);
 int FUN_002a7890(void);
-int FUN_002ae7e8(int);
+int asdTMTexTableFreeEntry(int);
 int FUN_002ae898(int, int);
 int FUN_002bff50(void);
-int FUN_002c415c(void);
-int FUN_002c43b4(undefined4, int);
+int asdMemFree(void);
+int jobStop(undefined4, int);
 
 typedef struct fn_003a3914_arg0 fn_003a3914_arg0;
 struct fn_003a3914_arg0 {
@@ -50,14 +50,14 @@ typedef struct {
 /* Supplied declaration required: FUN_00292c0c. */
 /* Supplied declaration required: FUN_0029a128. */
 /* Supplied declaration required: FUN_002a71fc. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002a7890. */
-/* Supplied declaration required: FUN_002ae7e8. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002ae898. */
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002bff50. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 
 
 void FUN_003a3914(fn_003a3914_arg0 *param_1)
@@ -72,42 +72,42 @@ void FUN_003a3914(fn_003a3914_arg0 *param_1)
     param_1->field_0x85c = 0;
   }
   if (param_1->field_0x378 != 0) {
-    FUN_002a7218();
+    scrScriptProcessDestroy();
     param_1->field_0x378 = 0;
   }
   if (param_1->field_0x370 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1->field_0x370 = 0;
   }
   if (param_1->field_0x374 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1->field_0x374 = 0;
   }
   FUN_002a7890();
-  temp_v0 = FUN_002bf244(param_1->field_0x15d40);
+  temp_v0 = jobIsValid(param_1->field_0x15d40);
   if (temp_v0 != 0) {
-    FUN_002c43b4(param_1->field_0x15d40,0);
+    jobStop(param_1->field_0x15d40,0);
   }
-  temp_v0 = FUN_002bf244(param_1->field_0x15d44);
+  temp_v0 = jobIsValid(param_1->field_0x15d44);
   if (temp_v0 != 0) {
-    FUN_002c43b4(param_1->field_0x15d44,0);
+    jobStop(param_1->field_0x15d44,0);
   }
   FUN_002ae898(0x2b,0);
-  FUN_002ae7e8(0x2b);
+  asdTMTexTableFreeEntry(0x2b);
   if (param_1->field_0x168 != 0) {
-    FUN_002a7218();
+    scrScriptProcessDestroy();
     param_1->field_0x168 = 0;
   }
   if (param_1->field_0x16c != 0) {
-    FUN_002a7218();
+    scrScriptProcessDestroy();
     param_1->field_0x16c = 0;
   }
   if (param_1->field_0x160 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1->field_0x160 = 0;
   }
   if (param_1->field_0x164 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1->field_0x164 = 0;
   }
   if (*(int *)&param_1->field_0x15d24 != 0) {

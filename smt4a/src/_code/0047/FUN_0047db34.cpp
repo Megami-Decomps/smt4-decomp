@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00137ee0(...);
+int asdSequenceRequest(...);
 int FUN_00324bc8(int, int);
 int FUN_00324c48(...);
 int FUN_004731d8(void);
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern unsigned char DAT_005f1b70; /* 0x5f1b70 */
 
-/* Supplied declaration required: FUN_00137ee0. */
+/* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_00324bc8. */
 /* Supplied declaration required: FUN_00324c48. */
 extern char *FUN_004731a4(void);
@@ -43,7 +43,7 @@ unsigned int FUN_0047db34(unsigned int param_1,int param_2,unsigned int param_3,
         temp_v1 = 1;
         if (param_2 != 0) {
           temp_v2 = (unsigned int)(unsigned char)pcVar2[1];
-          FUN_00137ee0(0xe,&temp_v2,4);
+          asdSequenceRequest(0xe,&temp_v2,4);
           DAT_005f1b70 = 0;
         }
         else {
@@ -56,7 +56,7 @@ unsigned int FUN_0047db34(unsigned int param_1,int param_2,unsigned int param_3,
       FUN_00324c48((unsigned char)pcVar2[1] + 100,pcVar2[2],0xffffffff);
       DAT_005f1604 = 0xffffffff;
       if (param_2 != 0) {
-        FUN_00137ee0(8,0);
+        asdSequenceRequest(8,0);
         DAT_005f1b70 = 0;
       }
     }
@@ -65,7 +65,7 @@ unsigned int FUN_0047db34(unsigned int param_1,int param_2,unsigned int param_3,
     temp_v1 = 1;
     FUN_00324c48(pcVar2[1],pcVar2[2],pcVar2[3]);
     if (param_2 != 0) {
-      FUN_00137ee0(6,0);
+      asdSequenceRequest(6,0);
       DAT_005f1b70 = 0;
     }
   }

@@ -37,7 +37,7 @@ extern unsigned int DAT_00464b14; /* 0x464b14 */
 extern unsigned int DAT_00464b18; /* 0x464b18 */
 extern int DAT_00464b1c; /* 0x464b1c */
 extern unsigned int DAT_00464b34; /* 0x464b34 */
-extern unsigned int DAT_00464b74; /* 0x464b74 */
+extern unsigned int g_asdModelSlotFlags; /* 0x464b74 */
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
 extern unsigned int DAT_00464b84; /* 0x464b84 */
 extern unsigned int DAT_00464b8c; /* 0x464b8c */
@@ -118,7 +118,7 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
   temp_v3 = 0;
   do {
     temp_v0 = temp_v3 * 0x18;
-    if ((0 < (&DAT_004dad80)[temp_v3 * 6]) || (((&DAT_00464b74)[temp_v3] & 1) != 0)) {
+    if ((0 < (&DAT_004dad80)[temp_v3 * 6]) || (((&g_asdModelSlotFlags)[temp_v3] & 1) != 0)) {
       if ((&DAT_004dad84)[temp_v0] != '\0') {
         if ((&DAT_004dad85)[temp_v0] == '\0') {
           temp_v1 = (&DAT_00464b84)[temp_v3];

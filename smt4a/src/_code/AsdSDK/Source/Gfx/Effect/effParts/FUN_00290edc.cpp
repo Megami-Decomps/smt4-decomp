@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_00272204(unsigned int *, int, unsigned int, int);
 int rt_memcpy(unsigned int, int, int);
 
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00272204. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -32,7 +32,7 @@ unsigned int * FUN_00290edc(unsigned int *param_1)
   
   temp_v0 = *(unsigned short *)(param_1 + 1);
   puVar3 = (unsigned int *)0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0x2c,0x10,1);
+  memAlloc(0x10000,0x100,0,0x2c,0x10,1);
   puVar3[1] = 0;
   puVar3[2] = 0;
   puVar3[3] = 0;
@@ -64,7 +64,7 @@ unsigned int * FUN_00290edc(unsigned int *param_1)
     }
     if ((temp_v4 != 0 && temp_v3 != 0) && -1 < temp_v1) {
       temp_v2 = 0x10000;
-      FUN_00167ab4(0x10000,0x100,0,temp_v3,0x10,1);
+      memAlloc(0x10000,0x100,0,temp_v3,0x10,1);
       *(unsigned short *)(puVar3 + 3) = temp_v0;
       puVar3[6] = temp_v2;
       puVar3[4] = temp_v2;

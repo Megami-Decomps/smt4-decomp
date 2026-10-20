@@ -2,12 +2,12 @@
 
 extern "C" {
 
-int FUN_0013f1b8(int, int);
+int asdTMTexTableLoadTmx(int, int);
 int FUN_001acf98(int, int);
 
 extern signed char DAT_0057f250; /* 0x57f250 */
 
-/* Supplied declaration required: FUN_0013f1b8. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_001acf98. */
 
 
@@ -18,7 +18,7 @@ void FUN_002a4cac(void)
   int temp_v0;
   
   if (DAT_0057f250 <= 0) {
-    FUN_0013f1b8(7,0);
+    asdTMTexTableLoadTmx(7,0);
     temp_v0 = 0;
     do {
       FUN_001acf98(7,temp_v0);

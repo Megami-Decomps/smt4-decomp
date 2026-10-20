@@ -10,10 +10,10 @@ int VectorSignedToFloat(int, int);
 
 extern unsigned int DAT_00573c70; /* 0x573c70 */
 extern unsigned int DAT_00573c74; /* 0x573c74 */
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_001634b4. */
 extern int FUN_001654d8(int);
 /* Supplied declaration required: FUN_001879d0. */
@@ -29,11 +29,11 @@ void FUN_003a9f7c(int param_1)
   float temp_v2;
   
   if (*(int *)(param_1 + 0x243c) != 0) {
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     if ((*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00573c70) == 0 &&
         (*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00573c74) == 0) {
       temp_v2 = 0.29f;
-      FUN_001879d0(DAT_0059dbb4);
+      FUN_001879d0(g_renderCtx);
       temp_v0 = FUN_001654d8(param_1 + 0x20f0);
       temp_v1 = 0;
       do {

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0013f030(void);
-int FUN_00140074(void);
+int asdGxCommandListFlip(void);
+int asdGxCommandListBindBack(void);
 int FUN_00144f1c(int, unsigned int);
 int FUN_0016117c(void);
 int FUN_00161a10(void);
@@ -24,8 +24,8 @@ extern unsigned char DAT_0063fec4; /* 0x63fec4 */
 extern unsigned char DAT_0063fd88; /* 0x63fd88 */
 extern int DAT_0063ff7c; /* 0x63ff7c */
 
-/* Supplied declaration required: FUN_0013f030. */
-/* Supplied declaration required: FUN_00140074. */
+/* Supplied declaration required: asdGxCommandListFlip. */
+/* Supplied declaration required: asdGxCommandListBindBack. */
 /* Supplied declaration required: FUN_00144f1c. */
 /* Supplied declaration required: FUN_0016117c. */
 /* Supplied declaration required: FUN_00161a10. */
@@ -49,7 +49,7 @@ void FUN_0013a078(unsigned int param_1)
   FUN_0017cfe8(&DAT_0063fec4,(*(int *)((unsigned char *)&DAT_0063fd88 + 0x150)) == 0);
   FUN_00161a10();
   FUN_0016117c();
-  FUN_00140074();
+  asdGxCommandListBindBack();
   temp_v0 = FUN_00188c94();
   temp_v1 = FUN_00188ca4();
   FUN_0018b19c(temp_v1,temp_v0);
@@ -57,7 +57,7 @@ void FUN_0013a078(unsigned int param_1)
   FUN_0017cdb0();
   nngxRunCmdlist();
   (*(int *)((unsigned char *)&DAT_0063fd88 + 0x150)) = 1 - (*(int *)((unsigned char *)&DAT_0063fd88 + 0x150));
-  FUN_0013f030();
+  asdGxCommandListFlip();
   FUN_0017cfe8(&DAT_0063fec4,(*(int *)((unsigned char *)&DAT_0063fd88 + 0x150)));
   if (DAT_0063ff7c == 0) {
     FUN_00144f1c(0,param_1);

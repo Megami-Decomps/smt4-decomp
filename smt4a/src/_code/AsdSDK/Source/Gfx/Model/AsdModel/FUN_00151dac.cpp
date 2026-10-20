@@ -7,11 +7,11 @@ extern "C" {
 int FUN_001575cc(unsigned int);
 int FUN_00177474(unsigned int, unsigned int);
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern signed char DAT_005b3bf4; /* 0x5b3bf4 */
 extern unsigned int DAT_005b3c08; /* 0x5b3c08 */
 extern unsigned int DAT_005b3c1c; /* 0x5b3c1c */
-extern unsigned int DAT_005b3c78; /* 0x5b3c78 */
+extern unsigned int g_asdModelSlotFlags; /* 0x5b3c78 */
 extern unsigned int DAT_005b3cb8; /* 0x5b3cb8 */
 extern int DAT_00636e00; /* 0x636e00 */
 
@@ -26,9 +26,9 @@ void FUN_00151dac(void)
 
 {
 /* irregular: 4 native warning(s); review required */
-  if ((DAT_005b3bf4 != '\0') && ((0 < DAT_00636e00 || ((DAT_005b3c78 & 1) != 0)))) {
+  if ((DAT_005b3bf4 != '\0') && ((0 < DAT_00636e00 || ((g_asdModelSlotFlags & 1) != 0)))) {
     FUN_00177474(DAT_005b3cb8,DAT_005b3c1c);
-    FUN_001575cc(DAT_0059dbb4);
+    FUN_001575cc(g_renderCtx);
     DAT_005b3c08 = 0;
   }
   return;

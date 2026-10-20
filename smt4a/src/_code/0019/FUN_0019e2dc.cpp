@@ -2,13 +2,13 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
-int FUN_0019a5a0(unsigned int *);
+int jobStop(unsigned int, int);
+int asdMemFree(unsigned int *);
 
 extern unsigned int *DAT_0057f578; /* 0x57f578 */
 
-/* Supplied declaration required: FUN_001631d0. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: jobStop. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_0019e2dc(void)
@@ -18,8 +18,8 @@ void FUN_0019e2dc(void)
   unsigned int *puVar1;
   
   puVar1 = DAT_0057f578;
-  FUN_001631d0(*DAT_0057f578,0);
-  FUN_0019a5a0(puVar1);
+  jobStop(*DAT_0057f578,0);
+  asdMemFree(puVar1);
   DAT_0057f578 = (unsigned int *)0x0;
   return;
 }

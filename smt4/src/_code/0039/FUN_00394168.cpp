@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c4938(int, int);
+int memClear(int, int);
 int nn_fnd_DateTime_DateTime_sub_object(unsigned int *, int, int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 extern int FUN_0038c030(int);
 /* Supplied declaration required: nn_fnd_DateTime_DateTime_sub_object. */
 
@@ -33,9 +33,9 @@ int FUN_00394168(int param_1,unsigned int *param_2,unsigned int param_3)
   *param_2 = param_3;
   param_2[1] = param_3;
   temp_v1 = FUN_0038c030(param_1 + 0x9bc);
-  FUN_002c4938(temp_v1 - 0x9bc,0x80);
-  FUN_002c4938(temp_v1 - 0x93c,0x100);
-  FUN_002c4938(temp_v1 - 0x83c,0x800);
+  memClear(temp_v1 - 0x9bc,0x80);
+  memClear(temp_v1 - 0x93c,0x100);
+  memClear(temp_v1 - 0x83c,0x800);
   puVar3 = temp_v3;
   nn_fnd_DateTime_DateTime_sub_object(puVar3,0x7b2,1,1,param_3,param_3,param_3,param_3);
   temp_v2 = puVar3[1];

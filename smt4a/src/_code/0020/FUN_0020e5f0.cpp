@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0016007c(...);
+int asdProcessCreateSimple(...);
+int asdOperatorNew(...);
 
 typedef int romwright_code(...);
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -19,8 +19,8 @@ extern int FUN_002681b0(...); /* 0x2681b0 */
 extern unsigned char LAB_002ef9ec; /* 0x2ef9ec */
 extern unsigned int *DAT_00588e2c; /* 0x588e2c */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: asdOperatorNew. */
 extern int *FUN_00408770(void);
 
 
@@ -34,7 +34,7 @@ void FUN_0020e5f0(void)
   int *piVar4;
   
   puVar1 = (unsigned int *)0x10;
-  FUN_0016007c();
+  asdOperatorNew();
   if (puVar1 != (unsigned int *)0x0) {
     puVar1[2] = 0;
     *(unsigned char *)(puVar1 + 1) = 0;
@@ -44,10 +44,10 @@ void FUN_0020e5f0(void)
   }
   puVar2 = &LAB_0020e698;
   DAT_00588e2c = puVar1;
-  FUN_0014e38c(&LAB_0020e698,4,0,0,FUN_002681b0,&LAB_002ef9ec,0);
+  asdProcessCreateSimple(&LAB_0020e698,4,0,0,FUN_002681b0,&LAB_002ef9ec,0);
   *puVar1 = (unsigned int)puVar2;
   temp_v0 = 0xc;
-  FUN_0016007c();
+  asdOperatorNew();
   piVar4 = (int *)0x0;
   if (temp_v0 != 0) {
     piVar4 = (int *)FUN_00408770();

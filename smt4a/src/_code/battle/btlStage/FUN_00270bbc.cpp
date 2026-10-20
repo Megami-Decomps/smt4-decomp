@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0020214c(void);
 
 extern unsigned char LAB_00270bd4; /* 0x270bd4 */
-extern unsigned char *DAT_0057a4f4; /* 0x57a4f4 */
+extern unsigned char *g_btlStage; /* 0x57a4f4 */
 
 /* Supplied declaration required: FUN_0020214c. */
 
@@ -20,7 +20,7 @@ void FUN_00270bbc(void)
   
   puVar1 = &LAB_00270bd4;
   FUN_0020214c();
-  DAT_0057a4f4 = puVar1;
+  g_btlStage = puVar1;
   return;
 }
 

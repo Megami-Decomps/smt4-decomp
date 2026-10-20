@@ -46,7 +46,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0026242c. */
 /* Supplied declaration required: FUN_00262f68. */
 /* Supplied declaration required: FUN_00269bf0. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 extern int FUN_00295d08(unsigned int);
 extern int FUN_0029ebac(int, unsigned int);
 extern int FUN_002a8740(void);
@@ -102,7 +102,7 @@ int FUN_00232b68(fn_00232b68_arg0 *param_1,fn_00232b68_arg1 *param_2,unsigned in
   pfVar11 = (fn_00232b68_arg0 *)0x1;
   temp_v8 = 0;
   if (temp_v5 != 0) {
-    temp_v9 = FUN_002939f4();
+    temp_v9 = btlGetMainState();
     if (temp_v9 == 0) {
       temp_v9 = (int)*(short *)(temp_v5 + 0x1c);
     }
@@ -112,7 +112,7 @@ int FUN_00232b68(fn_00232b68_arg0 *param_1,fn_00232b68_arg1 *param_2,unsigned in
     }
   }
   if (temp_v6 != 0) {
-    temp_v8 = FUN_002939f4();
+    temp_v8 = btlGetMainState();
     if (temp_v8 == 0) {
       temp_v8 = (int)*(short *)(temp_v6 + 0xe);
     }

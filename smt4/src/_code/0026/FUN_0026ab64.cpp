@@ -26,7 +26,7 @@ extern int FUN_0029ee54(unsigned int);
 extern int FUN_0029efa8(unsigned int);
 extern int FUN_0029efc0(unsigned int);
 /* Supplied declaration required: FUN_002b8e84. */
-extern short aeabi_idivmod(int);
+extern short __aeabi_idivmod(int);
 
 
 unsigned int
@@ -67,7 +67,7 @@ FUN_0026ab64(unsigned int param_1,unsigned int param_2,int param_3,short param_4
         if (temp_v6 || (-1 >= temp_v3 || temp_v1 < temp_v3)) {
           return 1;
         }
-        temp_v0 = aeabi_idivmod(temp_v3 * temp_v2);
+        temp_v0 = __aeabi_idivmod(temp_v3 * temp_v2);
         FUN_0029e8b8(param_1,(int)temp_v0);
         return 1;
       }
@@ -80,7 +80,7 @@ FUN_0026ab64(unsigned int param_1,unsigned int param_2,int param_3,short param_4
       if (temp_v6 || (-1 >= temp_v2 || temp_v3 < temp_v2)) {
         return 1;
       }
-      temp_v0 = aeabi_idivmod(temp_v2 * temp_v1);
+      temp_v0 = __aeabi_idivmod(temp_v2 * temp_v1);
       temp_v1 = FUN_0029efa8(param_1);
       temp_v2 = FUN_0029efc0(param_1);
       if (temp_v2 + temp_v1 != (int)temp_v0 && param_8 != 0) {

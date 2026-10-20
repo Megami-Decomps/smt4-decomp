@@ -16,7 +16,7 @@ extern unsigned int FUN_001068b4(void);
 extern unsigned int FUN_0010c0d0(void);
 extern unsigned int FUN_0010c79c(void);
 extern int *FUN_002e4e86(int *, int *);
-extern unsigned int *FUN_002e6dac(void);
+extern unsigned int *rt_malloc(void);
 extern int FUN_002e760a(unsigned int);
 
 
@@ -43,7 +43,7 @@ unsigned int * FUN_001158c4(unsigned int *param_1)
   temp_v3[0] = 2;
   piVar1 = (int *)FUN_002e4e86(temp_v3,temp_v3 + 1);
   temp_v0 = *piVar1;
-  puVar3 = (unsigned int *)FUN_002e6dac();
+  puVar3 = (unsigned int *)rt_malloc();
   *piVar6 = (int)puVar3;
   for (temp_v1 = temp_v3[0]; temp_v1 != 0; temp_v1 = temp_v1 - 1) {
     if (puVar3 != (unsigned int *)0x0) {

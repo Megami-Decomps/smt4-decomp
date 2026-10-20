@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 
 extern unsigned char DAT_00557e44; /* 0x557e44 */
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 unsigned int * FUN_00420d08(unsigned int *param_1)
@@ -38,7 +38,7 @@ unsigned int * FUN_00420d08(unsigned int *param_1)
   param_1[0x19] = 0;
   temp_v0 = 0;
   do {
-    FUN_002e6354(param_1 + temp_v0 * 0x20 + 0x1b,0x80);
+    sysMemClear(param_1 + temp_v0 * 0x20 + 0x1b,0x80);
     temp_v1 = temp_v0 + 1;
     *(unsigned char *)((int)param_1 + temp_v0 + 0x2ec) = 0;
     temp_v0 = temp_v1;

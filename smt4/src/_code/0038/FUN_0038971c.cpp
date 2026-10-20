@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b06c4(void);
 
-extern unsigned int DAT_00432fc8; /* 0x432fc8 */
+extern unsigned int g_aocMain; /* 0x432fc8 */
 
 extern int FUN_002955fc(void);
 extern int FUN_002a1534(unsigned int);
@@ -27,7 +27,7 @@ unsigned int FUN_0038971c(unsigned int param_1,unsigned int param_2)
   temp_v0 = *(short *)(param_2 + 0x88);
   temp_v1 = FUN_002955fc();
   if (temp_v1 != 0) {
-    temp_v1 = FUN_002a1534(DAT_00432fc8);
+    temp_v1 = FUN_002a1534(g_aocMain);
     if (temp_v1 != 0) {
       return 1;
     }

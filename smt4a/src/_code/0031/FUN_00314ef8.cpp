@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
-int FUN_0019a5a0(int);
+int jobStop(unsigned int, int);
+int asdMemFree(int);
 int FUN_003592dc(unsigned int);
 int FUN_004aa780(int, int);
 
@@ -15,10 +15,10 @@ extern unsigned int DAT_00571638; /* 0x571638 */
 extern unsigned int DAT_0057163c; /* 0x57163c */
 extern int DAT_0057a9c8; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_001631d0. */
-extern int FUN_00163e40(unsigned int);
-extern int FUN_00164a9c(void);
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: jobStop. */
+extern int jobIsValid(unsigned int);
+extern int jobGetWork(void);
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_003592dc. */
 /* Supplied declaration required: FUN_004aa780. */
 
@@ -32,24 +32,24 @@ void FUN_00314ef8(void)
   int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   if (DAT_0057a9c8 != 0) {
     FUN_004aa780(DAT_0057a9c8,0);
   }
   temp_v2 = DAT_00571600;
   if (DAT_00571600 != 0) {
     DAT_005715fa = 0;
-    temp_v1 = FUN_00163e40(*(unsigned int *)(DAT_00571600 + 0x10));
+    temp_v1 = jobIsValid(*(unsigned int *)(DAT_00571600 + 0x10));
     if (temp_v1 != 0) {
       FUN_003592dc(*(unsigned int *)(temp_v2 + 0x10));
-      FUN_001631d0(*(unsigned int *)(temp_v2 + 0x10),0);
+      jobStop(*(unsigned int *)(temp_v2 + 0x10),0);
     }
-    FUN_0019a5a0(DAT_00571600);
+    asdMemFree(DAT_00571600);
     DAT_00571600 = 0;
   }
-  temp_v2 = FUN_00163e40(*(unsigned int *)(temp_v0 + 0x80));
+  temp_v2 = jobIsValid(*(unsigned int *)(temp_v0 + 0x80));
   if (temp_v2 != 0) {
-    FUN_001631d0(*(unsigned int *)(temp_v0 + 0x80),0);
+    jobStop(*(unsigned int *)(temp_v0 + 0x80),0);
   }
   temp_v3 = ~DAT_00571638;
   *(unsigned int *)(temp_v0 + 0x45ac) = *(unsigned int *)(temp_v0 + 0x45ac) & ~DAT_0057163c;

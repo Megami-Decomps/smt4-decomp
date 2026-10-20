@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002bf5c0(int, int, int, unsigned int, int, int);
-int FUN_002c4938(unsigned int *, int);
+int asdMemoryAllocAligned(int, int, int, unsigned int, int, int);
+int memClear(unsigned int *, int);
 int FUN_002c5d5c(unsigned int *, unsigned char *, int, int);
 int nn_gr_CTR_Vertex_LoadArray_DisableAll(unsigned int *);
 
@@ -18,8 +18,8 @@ extern unsigned char LAB_003572d0; /* 0x3572d0 */
 extern unsigned char LAB_003572dc; /* 0x3572dc */
 extern unsigned char DAT_00420730; /* 0x420730 */
 
-/* Supplied declaration required: FUN_002bf5c0. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002c5d5c. */
 /* Supplied declaration required: nn_gr_CTR_Vertex_LoadArray_DisableAll. */
 
@@ -40,7 +40,7 @@ unsigned int * FUN_0023aea4(unsigned int *param_1,unsigned int param_2)
   param_1 = param_1 + 0x150;
   FUN_002c5d5c(param_1,&LAB_003572d0,0x14,0xc);
   param_1[-0x1a8] = 0;
-  FUN_002c4938(param_1 + -0x1a7,0x150);
+  memClear(param_1 + -0x1a7,0x150);
   temp_v3 = 0;
   temp_v1 = 0;
   do {
@@ -59,10 +59,10 @@ unsigned int * FUN_0023aea4(unsigned int *param_1,unsigned int param_2)
   param_1[0x3d] = 0;
   *(unsigned char *)(param_1 + 0x3e) = 0;
   temp_v0 = 0x10000;
-  FUN_002bf5c0(0x10000,0x100,0,param_1[-0x1ab] * 0x90,0x80,1);
+  asdMemoryAllocAligned(0x10000,0x100,0,param_1[-0x1ab] * 0x90,0x80,1);
   param_1[-0x1aa] = temp_v0;
   temp_v0 = 0x10000;
-  FUN_002bf5c0(0x10000,0x100,0,param_1[-0x1ab] * 0xc,0x80,1);
+  asdMemoryAllocAligned(0x10000,0x100,0,param_1[-0x1ab] * 0xc,0x80,1);
   param_1[-0x1a9] = temp_v0;
   return param_1 + -0x1ac;
 }

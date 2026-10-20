@@ -20,7 +20,7 @@ extern int FUN_001f64c0(...); /* 0x1f64c0 */
 extern int FUN_0020713c(...); /* 0x20713c */
 extern int FUN_0020729c(...); /* 0x20729c */
 extern int FUN_0021966c(...); /* 0x21966c */
-extern int DAT_0043dc88; /* 0x43dc88 */
+extern int g_gauntletAppMenu; /* 0x43dc88 */
 
 /* Supplied declaration required: FUN_0027f3dc. */
 extern unsigned int FUN_0029ee54(int);
@@ -38,7 +38,7 @@ void FUN_00241d84(void)
   unsigned char temp_v3;
   unsigned char *pbVar5;
   
-  temp_v0 = DAT_0043dc88;
+  temp_v0 = g_gauntletAppMenu;
   temp_v1 = FUN_002a0d0c();
   pbVar5 = (unsigned char *)(temp_v1 + 0xd);
   temp_v3 = ~(*(unsigned char *)(temp_v1 + 0xd) >> 7) & 1;

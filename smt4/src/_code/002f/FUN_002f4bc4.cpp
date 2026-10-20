@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -39,8 +39,8 @@ unsigned int FUN_002f4bc4(int *param_1)
   
   temp_v5 = *param_1;
   FUN_002bed3c();
-  FUN_002c39a4(DAT_0044ea00);
-  temp_v1 = DAT_0044ea00;
+  FUN_002c39a4(g_titleScene);
+  temp_v1 = g_titleScene;
   temp_v0 = FUN_002c5d80(1,0);
   piVar5 = (int *)(temp_v1 + 0x124c);
   temp_v2 = *piVar5;
@@ -59,8 +59,8 @@ unsigned int FUN_002f4bc4(int *param_1)
   } while (temp_v4 < 0xc);
   FUN_002bed3c();
   FUN_002bf538();
-  temp_v1 = DAT_0044ea00;
-  piVar5 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v1 = g_titleScene;
+  piVar5 = (int *)(g_titleScene + 0x124c);
   temp_v0 = *piVar5;
   temp_v2 = piVar5[temp_v0 + 2];
   *piVar5 = temp_v0 - 1;

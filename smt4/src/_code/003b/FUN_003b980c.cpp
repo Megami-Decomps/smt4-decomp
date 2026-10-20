@@ -9,10 +9,10 @@ int FUN_002917b8(void);
 int FUN_00291944(void);
 int FUN_00291998(void);
 int FUN_00295ba4(int);
-int FUN_002a7218(void);
-int FUN_002ae7e8(int);
+int scrScriptProcessDestroy(void);
+int asdTMTexTableFreeEntry(int);
 int FUN_002b827c(int);
-int FUN_002c415c(void);
+int asdMemFree(void);
 int FUN_003bb9b8(int);
 int FUN_003bbafc(int);
 
@@ -27,10 +27,10 @@ typedef struct {
 /* Supplied declaration required: FUN_00291998. */
 /* Supplied declaration required: FUN_00295ba4. */
 extern int FUN_00295bd0(void);
-/* Supplied declaration required: FUN_002a7218. */
-/* Supplied declaration required: FUN_002ae7e8. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002b827c. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_003bb9b8. */
 /* Supplied declaration required: FUN_003bbafc. */
 
@@ -42,27 +42,27 @@ void FUN_003b980c(int param_1)
   int temp_v0;
   
   if (*(int *)(param_1 + 0xd90) != 0) {
-    FUN_002a7218();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0xd90) = 0;
   }
   if (*(int *)(param_1 + 0xd88) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0xd88) = 0;
   }
   if (*(int *)(param_1 + 0xd8c) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0xd8c) = 0;
   }
   if (*(int *)(param_1 + 0xd84) != 0) {
-    FUN_002a7218();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0xd84) = 0;
   }
   if (*(int *)(param_1 + 0xd7c) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0xd7c) = 0;
   }
   if (*(int *)(param_1 + 0xd80) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0xd80) = 0;
   }
   FUN_003bb9b8(param_1 + 0x9c);
@@ -76,7 +76,7 @@ void FUN_003b980c(int param_1)
   FUN_002917b8();
   FUN_0028727c();
   FUN_00291944();
-  FUN_002ae7e8(0x21);
+  asdTMTexTableFreeEntry(0x21);
   return;
 }
 

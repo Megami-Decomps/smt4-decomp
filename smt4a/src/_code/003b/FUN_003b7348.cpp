@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_00192748(unsigned int);
-int FUN_00192798(void);
+int dataTableGetCount(unsigned int);
+int dataTableGetEntries(void);
 int FUN_00471bc8(int, unsigned int);
 
-extern int DAT_00570280; /* 0x570280 */
+extern int g_aocSystem; /* 0x570280 */
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00192748. */
-/* Supplied declaration required: FUN_00192798. */
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+/* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_00471bc8. */
 
 
@@ -23,12 +23,12 @@ void FUN_003b7348(unsigned int param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = DAT_00570280;
-  FUN_00471bc8(DAT_00570280,param_1);
+  temp_v0 = g_aocSystem;
+  FUN_00471bc8(g_aocSystem,param_1);
   if (temp_v0 == 0) {
-    temp_v1 = FUN_00187180(5,9);
-    FUN_00192798();
-    FUN_00192748(temp_v1);
+    temp_v1 = dataTableGet(5,9);
+    dataTableGetEntries();
+    dataTableGetCount(temp_v1);
   }
   return;
 }

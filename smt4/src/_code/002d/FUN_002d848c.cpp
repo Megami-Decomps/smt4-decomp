@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_00249e54(int, char *);
-int FUN_002c415c(char *);
+int asdMemFree(char *);
 
 /* Supplied declaration required: FUN_00249e54. */
 extern int FUN_0024a6b0(int);
 extern int FUN_0024a808(int);
 extern int FUN_002522e0(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 extern char *FUN_002c5c04(unsigned int);
 
 
@@ -40,7 +40,7 @@ int FUN_002d848c(unsigned int param_1)
     if (temp_v3 && temp_v0 == 'R') {
       temp_v1 = FUN_0024a6b0(temp_v1 + 1);
       FUN_00249e54(temp_v1,pcVar4);
-      FUN_002c415c(pcVar4);
+      asdMemFree(pcVar4);
       return temp_v1;
     }
   }

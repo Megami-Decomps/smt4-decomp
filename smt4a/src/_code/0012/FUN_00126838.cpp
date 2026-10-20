@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0030de32(int);
+int ringBufferRead(int);
 int FUN_0030de7c(...);
 int FUN_0030e196(int *);
 
-/* Supplied declaration required: FUN_0030de32. */
+/* Supplied declaration required: ringBufferRead. */
 /* Supplied declaration required: FUN_0030de7c. */
 /* Supplied declaration required: FUN_0030e196. */
 
@@ -43,7 +43,7 @@ unsigned int FUN_00126838(int *param_1,int param_2)
         }
         FUN_0030de7c(param_1,temp_v3,param_1[0x1b] - temp_v4,param_2 == 4);
         param_1[0x17] = param_1[0x1b];
-        FUN_0030de32(*param_1);
+        ringBufferRead(*param_1);
         if (*(int *)(*param_1 + 0x10) == 0) {
           if (param_2 != 4) {
             return 0;
@@ -72,7 +72,7 @@ unsigned int FUN_00126838(int *param_1,int param_2)
       }
       FUN_0030de7c(param_1,temp_v2,temp_v0 - temp_v3,0);
       param_1[0x17] = param_1[0x1b];
-      FUN_0030de32(*param_1);
+      ringBufferRead(*param_1);
       if (*(int *)(*param_1 + 0x10) == 0) {
         return 0;
       }
@@ -87,7 +87,7 @@ unsigned int FUN_00126838(int *param_1,int param_2)
       }
       FUN_0030de7c(param_1,temp_v2,param_1[0x1b] - temp_v3,0);
       param_1[0x17] = param_1[0x1b];
-      FUN_0030de32(*param_1);
+      ringBufferRead(*param_1);
       if (*(int *)(*param_1 + 0x10) == 0) {
         return 0;
       }

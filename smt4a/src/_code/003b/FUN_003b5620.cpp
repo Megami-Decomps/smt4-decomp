@@ -1,26 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b5620` (_code @ 0x3b5620, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the two argument constants are materialised in the order r1, r0 (retail: r0, r1). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00187180(int, int);
+typedef struct UnkTable {
+    /* 0x000 */ u8 unk000[0x3F4];
+    /* 0x3F4 */ int value;
+} UnkTable;
 
-extern int DAT_00570280; /* 0x570280 */
+extern UnkTable *g_aocSystem;
 
-/* Supplied declaration required: FUN_00187180. */
-extern int FUN_00192748(void);
+int dataTableGetCount(void);
+int dataTableGet(int arg0, int arg1);
 
-
+/* Selects entry (0x23, 2), then returns dataTableGetCount() plus the value at offset 0x3f4 of the global table. */
 int FUN_003b5620(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_00187180(0x23,2);
-  temp_v0 = FUN_00192748();
-  return temp_v0 + *(int *)(DAT_00570280 + 0x3f4);
+    dataTableGet(0x23, 2);
+    return dataTableGetCount() + g_aocSystem->value;
 }
 
 } /* extern "C" */

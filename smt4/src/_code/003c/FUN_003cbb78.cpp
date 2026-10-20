@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00229754(int *, unsigned int *);
 
-extern int DAT_0043427c; /* 0x43427c */
+extern int g_btlScriptUnit; /* 0x43427c */
 extern unsigned int DAT_00434290; /* 0x434290 */
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 
@@ -63,7 +63,7 @@ unsigned int FUN_003cbb78(int *param_1,unsigned int *param_2)
       puVar3 = (unsigned int *)(temp_v1 + 0x44a0);
       if ((*puVar3 & 0x10000000) == 0) {
         *puVar3 = *puVar3 | 0x10000000;
-        *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1f;
+        *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1f;
         return 1;
       }
     }

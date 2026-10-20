@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_003283ac(...);
+int scrSetResult(...);
 
 extern unsigned int DAT_005702a0; /* 0x5702a0 */
 extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-extern int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_003283ac. */
-extern int FUN_004ee568(unsigned int);
+extern int scrGetArg(unsigned int);
+/* Supplied declaration required: scrSetResult. */
+extern int btlUnitGet(unsigned int);
 
 
 unsigned int FUN_0035efe0(void)
@@ -24,17 +24,17 @@ unsigned int FUN_0035efe0(void)
   unsigned int *puVar3;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_004ee568(DAT_0057113c);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = btlUnitGet(g_btlScriptUnit);
   puVar3 = *(unsigned int **)(temp_v1 + 0x20);
   temp_v2 = puVar3[temp_v0 + 0xed];
-  temp_v0 = FUN_004ee568(DAT_0057113c);
+  temp_v0 = btlUnitGet(g_btlScriptUnit);
   if (((DAT_005702a0 & *puVar3) != 0 || (puVar3[1] & DAT_005702a4) != 0) &&
      (*(short *)(*(int *)(temp_v0 + 0x28) + 2) == 0x3b7)) {
-    FUN_003283ac(0);
+    scrSetResult(0);
     return 1;
   }
-  FUN_003283ac(temp_v2);
+  scrSetResult(temp_v2);
   return 1;
 }
 

@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00299370(int);
-int FUN_002c0c74(void);
-int FUN_002c0cc4(unsigned int);
+int dataTableGetCount(void);
+int dataTableGetEntries(unsigned int);
 
 /* Supplied declaration required: FUN_00299370. */
 extern int FUN_002b63ac(void);
-/* Supplied declaration required: FUN_002c0c74. */
-/* Supplied declaration required: FUN_002c0cc4. */
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+/* Supplied declaration required: dataTableGetEntries. */
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 
 
 void FUN_003c1ef4(void)
@@ -33,17 +33,17 @@ void FUN_003c1ef4(void)
   *(unsigned char *)(temp_v2 + 0x76) = 1;
   *(unsigned int *)(temp_v2 + 0x30) = 0;
   *(unsigned short *)(temp_v2 + 0x72) = 0;
-  temp_v3 = FUN_002c0cec(9,0);
-  FUN_002c0c74();
-  pcVar5 = (char *)FUN_002c0cc4(temp_v3);
+  temp_v3 = dataTableGet(9,0);
+  dataTableGetCount();
+  pcVar5 = (char *)dataTableGetEntries(temp_v3);
   *(short *)(temp_v2 + 0x12) = (short)*pcVar5;
   *(short *)(temp_v2 + 0x14) = (short)pcVar5[1];
   *(short *)(temp_v2 + 0x16) = (short)pcVar5[2];
   *(short *)(temp_v2 + 0x18) = (short)pcVar5[3];
   *(short *)(temp_v2 + 0x1a) = (short)pcVar5[4];
-  temp_v3 = FUN_002c0cec(9,0);
-  FUN_002c0c74();
-  temp_v4 = FUN_002c0cc4(temp_v3);
+  temp_v3 = dataTableGet(9,0);
+  dataTableGetCount();
+  temp_v4 = dataTableGetEntries(temp_v3);
   temp_v0 = *(unsigned char *)(temp_v4 + 0xb);
   temp_v1 = *(unsigned char *)(temp_v4 + 0xd);
   temp_v5 = 9999;

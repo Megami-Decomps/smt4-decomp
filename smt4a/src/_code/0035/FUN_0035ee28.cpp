@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
-int FUN_00236038(int);
+int btlGetMainState(void);
+int scrGetArg(int);
 int FUN_00301a08(unsigned int, int [5], int [2]);
-int FUN_003283ac(void);
+int scrSetResult(void);
 int FUN_003eaf20(void);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -16,11 +16,11 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 extern unsigned int FUN_00232388(void);
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_00301a08. */
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003eaf20. */
 
 
@@ -33,23 +33,23 @@ unsigned int FUN_0035ee28(void)
   int temp_v2 [2];
   int temp_v3 [5];
   
-  FUN_00236038(0);
-  FUN_00236038(1);
+  scrGetArg(0);
+  scrGetArg(1);
   temp_v0 = FUN_00232388();
   FUN_00301a08(temp_v0,temp_v3,temp_v2);
   temp_v1 = temp_v3[0];
   if (temp_v3[0] < temp_v2[0] + temp_v3[0]) {
     do {
-      FUN_0014aa78();
+      btlGetMainState();
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < temp_v3[0] + temp_v2[0]);
   }
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   if (*(char *)(temp_v1 + 0x4cd1) != '\0') {
-    FUN_0014aa78();
+    btlGetMainState();
     FUN_003eaf20();
   }
-  FUN_003283ac();
+  scrSetResult();
   return 1;
 }
 

@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002b8e84(int);
-int FUN_002c4938(int, int);
+int memClear(int, int);
 
 extern int FUN_0029ae44(void);
 extern int FUN_002b8cec(unsigned int);
 /* Supplied declaration required: FUN_002b8e84. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_003d1e2c(int *param_1,int param_2)
@@ -34,7 +34,7 @@ unsigned int FUN_003d1e2c(int *param_1,int param_2)
     temp_v0 = temp_v0 + 1;
     temp_v2 = 0xffffffff;
   } while ((int)temp_v0 < 0x6d);
-  FUN_002c4938(param_2 + 0x38,0x6d);
+  memClear(param_2 + 0x38,0x6d);
   temp_v1 = FUN_002b8cec(3);
   temp_v6 = param_2 + 0x38;
   if (((temp_v1 != 0) || (temp_v1 = FUN_002b8cec(0xc), temp_v1 != 0)) ||

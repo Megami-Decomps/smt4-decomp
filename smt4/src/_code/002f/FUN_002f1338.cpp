@@ -17,13 +17,13 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_0027df30. */
-extern unsigned int FUN_0027e928(unsigned int);
-extern int FUN_002939f4(void);
-extern int FUN_00296cc8(unsigned int);
+extern unsigned int btlUnitGet(unsigned int);
+extern int btlGetMainState(void);
+extern int scrGetArg(unsigned int);
 
 
 unsigned int FUN_002f1338(void)
@@ -36,15 +36,15 @@ unsigned int FUN_002f1338(void)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_00296cc8(1);
-  temp_v2 = FUN_00296cc8(2);
-  temp_v3 = FUN_0027e928(DAT_0043427c);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = scrGetArg(2);
+  temp_v3 = btlUnitGet(g_btlScriptUnit);
   temp_v4 = 0;
   if (0 < temp_v2) {
     temp_v4 = 0x3e0;
   }
-  temp_v2 = FUN_002939f4();
+  temp_v2 = btlGetMainState();
   temp_v2 = *(int *)(temp_v2 + 0x1fc0);
   temp_v0 = (*(short *)(temp_v2 + 0x1b6) * temp_v0) / 100;
   if (!((*(unsigned short *)(temp_v2 + 0x1c6) & 8) == 0 || temp_v0 < 2)) {
@@ -60,7 +60,7 @@ unsigned int FUN_002f1338(void)
   else if (temp_v1 == 0) {
     temp_v1 = -1;
   }
-  temp_v2 = FUN_002939f4();
+  temp_v2 = btlGetMainState();
   FUN_0027df30(0,temp_v3,*(unsigned int *)(temp_v2 + 0x1e98),0,temp_v0,temp_v1,0xffffffff,temp_v4,0,0,9,0,0);
   FUN_002505c0(0,temp_v3,0x10001c1,0,0,0,0);
   return 1;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00259b50(...);
+int asdListBoxMarkDirty(...);
 
 typedef struct fn_0022a358_arg0 fn_0022a358_arg0;
 struct fn_0022a358_arg0 {
@@ -30,8 +30,8 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-extern int FUN_00254db0(void);
-/* Supplied declaration required: FUN_00259b50. */
+extern int asdListBoxFindItem(void);
+/* Supplied declaration required: asdListBoxMarkDirty. */
 
 
 void FUN_0022a358(fn_0022a358_arg0 *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4
@@ -42,13 +42,13 @@ void FUN_0022a358(fn_0022a358_arg0 *param_1,unsigned int param_2,unsigned int pa
   int temp_v0;
   unsigned int in_s0;
   
-  temp_v0 = FUN_00254db0();
+  temp_v0 = asdListBoxFindItem();
   if (temp_v0 != 0) {
     *(unsigned int *)(temp_v0 + 0x20c) = in_s0;
     *(unsigned int *)(temp_v0 + 0x210) = param_3;
     *(unsigned char *)(temp_v0 + 4) = 4;
     *(unsigned int *)(temp_v0 + 0x214) = param_4;
-    FUN_00259b50(param_1);
+    asdListBoxMarkDirty(param_1);
     return;
   }
   return;

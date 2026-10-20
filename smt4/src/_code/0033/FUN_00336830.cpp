@@ -9,7 +9,7 @@ int FUN_00254434(unsigned int, int);
 int FUN_00255e38(int, unsigned char [448], int, int, int);
 int FUN_0027dc24(int, int, int);
 int FUN_002b06c4(...);
-int FUN_002c4938(...);
+int memClear(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -17,14 +17,14 @@ typedef struct {
     unsigned int sp2A8; /* 0x2a8: local_2a8 */
 } param_1_stack;
 
-extern unsigned char DAT_00435d90; /* 0x435d90 */
+extern unsigned char g_btlMainState; /* 0x435d90 */
 
 /* Supplied declaration required: FUN_0023ebc8. */
 /* Supplied declaration required: FUN_00254434. */
 /* Supplied declaration required: FUN_00255e38. */
 /* Supplied declaration required: FUN_0027dc24. */
 /* Supplied declaration required: FUN_002b06c4. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_00336830(int param_1)
@@ -50,7 +50,7 @@ void FUN_00336830(int param_1)
     puVar5[1] = 0;
     temp_v2 = temp_v2 + 2;
   } while (temp_v0 < 0x32);
-  FUN_002c4938((unsigned int *)(param_1 + 200),0x74);
+  memClear((unsigned int *)(param_1 + 200),0x74);
   *(unsigned int *)(param_1 + 200) = 0;
   *(unsigned int *)(param_1 + 0xcc) = 0;
   *(unsigned int *)(param_1 + 0xd0) = 0;
@@ -60,7 +60,7 @@ void FUN_00336830(int param_1)
   *(unsigned int *)(param_1 + 0xf8) = 0x3f800000;
   *(unsigned int *)(param_1 + 0xfc) = 0x3f800000;
   FUN_0027dc24(param_1,param_1 + 200,1);
-  if ((int)(*(unsigned int *)((unsigned char *)&DAT_00435d90 + 0x30)) < 1) {
+  if ((int)(*(unsigned int *)((unsigned char *)&g_btlMainState + 0x30)) < 1) {
     temp_v3 = 0;
     do {
       if (*(int *)(param_1 + 200 + temp_v3 * 4) != 0) {
@@ -75,7 +75,7 @@ void FUN_00336830(int param_1)
     } while (temp_v3 < 6);
   }
   else {
-    temp_v3 = (*(unsigned int *)((unsigned char *)&DAT_00435d90 + 0x30));
+    temp_v3 = (*(unsigned int *)((unsigned char *)&g_btlMainState + 0x30));
     FUN_002b06c4(temp_v3);
     FUN_0023ebc8(param_1,temp_v4,temp_v3);
     FUN_00255e38(param_1,temp_v4,1,4,0);
@@ -84,7 +84,7 @@ void FUN_00336830(int param_1)
     FUN_00254434(*(unsigned int *)(param_1 + 0x120),param_1 + 0x124);
   }
   *(unsigned int *)(param_1 + 0x4964) = 0;
-  FUN_002c4938(param_1 + 0x48bc,0xa8);
+  memClear(param_1 + 0x48bc,0xa8);
   return;
 }
 

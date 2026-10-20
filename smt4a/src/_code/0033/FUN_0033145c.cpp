@@ -1,30 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033145c` (_code @ 0x33145c, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001ad9b4(void);
-int FUN_00236038(int);
-int FUN_003283ac(int);
+/* Object with a halfword table at 0xd4. */
+typedef struct {
+    u8 unk00[0xd4];
+    u16 table[1];       /* 0xd4 */
+} Lookup;
 
-/* Supplied declaration required: FUN_001ad9b4. */
-/* Supplied declaration required: FUN_00236038. */
-/* Supplied declaration required: FUN_003283ac. */
+u32 scrGetArg(int index);
+Lookup *FUN_001ad9b4(u16 key);
+int scrSetResult(u32 value);
 
-
-unsigned int FUN_0033145c(void)
-
+/* Looks up entry (index 1) in the table of the object selected by entry 0; always reports success. */
+u32 FUN_0033145c(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  FUN_001ad9b4();
-  FUN_003283ac(*(unsigned short *)(temp_v0 + temp_v1 * 2 + 0xd4));
-  return 1;
+    u16 key = scrGetArg(0);
+    int index = scrGetArg(1);
+    Lookup *lookup = FUN_001ad9b4(key);
+
+    scrSetResult(lookup->table[index]);
+    return 1;
 }
 
 } /* extern "C" */

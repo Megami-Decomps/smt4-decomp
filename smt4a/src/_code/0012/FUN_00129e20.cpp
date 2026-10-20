@@ -15,7 +15,7 @@ extern unsigned char LAB_0030e67d; /* 0x30e67d */
 extern unsigned char DAT_0055aeb0; /* 0x55aeb0 */
 extern unsigned int DAT_00594a00; /* 0x594a00 */
 
-extern unsigned int FUN_002e6dac(int);
+extern unsigned int rt_malloc(int);
 extern unsigned int *FUN_002f5010(unsigned int);
 /* Supplied declaration required: FUN_002f5020. */
 extern unsigned int *FUN_0030cbc0(int, int);
@@ -36,7 +36,7 @@ void FUN_00129e20(int param_1)
     *puVar1 = 0x14;
     FUN_002f5020(puVar1 + 2,&LAB_0030e67d,0x14,0xffffffff);
   }
-  temp_v0 = FUN_002e6dac(DAT_00594a00 * 0x14);
+  temp_v0 = rt_malloc(DAT_00594a00 * 0x14);
   *(unsigned int *)(param_1 + 8) = temp_v0;
   for (temp_v2 = 0; temp_v2 < DAT_00594a00; temp_v2 = temp_v2 + 1) {
     temp_v1 = *(int *)(param_1 + 8) + temp_v2 * 0x14;

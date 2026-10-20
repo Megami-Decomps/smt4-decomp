@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_00573920; /* 0x573920 */
+extern int g_btlMain; /* 0x573920 */
 extern unsigned int DAT_00573978; /* 0x573978 */
 extern unsigned int DAT_0057397c; /* 0x57397c */
 extern unsigned int DAT_00573988; /* 0x573988 */
@@ -27,10 +27,10 @@ int FUN_00272310(unsigned int param_1)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  if (DAT_00573920 != 0) {
+  if (g_btlMain != 0) {
     temp_v0 = 0;
     do {
-      puVar1 = (unsigned int *)(*(int *)(DAT_00573920 + 0x1ffc) + temp_v0 * 0x408);
+      puVar1 = (unsigned int *)(*(int *)(g_btlMain + 0x1ffc) + temp_v0 * 0x408);
       if (puVar1 != (unsigned int *)0x0) {
         temp_v2 = *puVar1;
         temp_v3 = puVar1[1];

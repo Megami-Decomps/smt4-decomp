@@ -4,9 +4,9 @@
 
 extern "C" {
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
-extern int FUN_0027e928(unsigned int);
+extern int btlUnitGet(unsigned int);
 extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
 
@@ -22,7 +22,7 @@ unsigned int FUN_0033fb2c(unsigned int *param_1)
   
   if (param_1 != (unsigned int *)0x0) {
     if ((*param_1 & 2) != 0) {
-      temp_v1 = FUN_0027e928(DAT_0043427c);
+      temp_v1 = btlUnitGet(g_btlScriptUnit);
       if ((*(unsigned int **)(temp_v1 + 0x20) != (unsigned int *)0x0) && ((**(unsigned int **)(temp_v1 + 0x20) & 2) != 0)) {
         temp_v1 = FUN_002a8764();
         temp_v4 = 0;

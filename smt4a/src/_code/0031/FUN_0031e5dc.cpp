@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_002f0c18(int);
 int FUN_0034aae4(void);
 int FUN_003a7c3c(int);
 int FUN_00418130(int);
 
 extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_001681cc. */
-extern unsigned short FUN_00236038(void);
+/* Supplied declaration required: sysPlaySe. */
+extern unsigned short scrGetArg(void);
 extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_002f0c18. */
 /* Supplied declaration required: FUN_0034aae4. */
@@ -28,7 +28,7 @@ unsigned char FUN_0031e5dc(void)
   unsigned short temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00236038();
+  temp_v0 = scrGetArg();
   temp_v1 = FUN_002deb84();
   if (temp_v1 == 0) {
     FUN_00418130(temp_v0);
@@ -42,7 +42,7 @@ unsigned char FUN_0031e5dc(void)
   temp_v1 = FUN_003a7c1c();
   if (temp_v1 != 0) {
     FUN_0034aae4();
-    FUN_001681cc(0x92);
+    sysPlaySe(0x92);
   }
   return temp_v1 != 0;
 }

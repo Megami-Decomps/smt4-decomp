@@ -1,45 +1,32 @@
-#include "romwright_types.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
-int FUN_00137ee0(int, int, int);
-int FUN_00312d6c(void);
-int FUN_00321744(void);
-int FUN_003d2d6c(int);
-int FUN_003fd63c(int, int, int);
+void asdSequenceRequest(s32 a, s32 b, s32 c);
+void FUN_00312d6c(void);
+void FUN_00321744(void);
+void FUN_003d2d6c(s32 arg);
+void FUN_003fd63c(s32 a, s32 b, s32 c);
+s32 FUN_0018719c(u32 id);
 
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
-extern int DAT_005f1c98; /* 0x5f1c98 */
+extern GameStateA g_gameState;
+extern s32 DAT_005f1c98;
 
-/* Supplied declaration required: FUN_00137ee0. */
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_00312d6c. */
-/* Supplied declaration required: FUN_00321744. */
-/* Supplied declaration required: FUN_003d2d6c. */
-/* Supplied declaration required: FUN_003fd63c. */
-
-
-unsigned int FUN_00331060(void)
-
+s32 FUN_00331060(void)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_0018719c(0x593);
-  if (temp_v0 != 0) {
-    FUN_00321744();
-    FUN_003fd63c(0x593,0,1);
-  }
-  temp_v0 = FUN_0018719c(0x11f9);
-  if (temp_v0 != 0) {
-    FUN_003d2d6c(0xf);
-    FUN_00312d6c();
-    FUN_003fd63c(0x11f9,0,1);
-  }
-  if (((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x574)) != '\0') || (DAT_005f1c98 != -1)) {
-    FUN_00137ee0(6,0,0);
-  }
-  return 1;
+    if (FUN_0018719c(0x593) != 0) {
+        FUN_00321744();
+        FUN_003fd63c(0x593, 0, 1);
+    }
+    if (FUN_0018719c(0x11F9) != 0) {
+        FUN_003d2d6c(0xF);
+        FUN_00312d6c();
+        FUN_003fd63c(0x11F9, 0, 1);
+    }
+    if (g_gameState.unk574 != 0 || DAT_005f1c98 != -1) {
+        asdSequenceRequest(6, 0, 0);
+    }
+    return 1;
 }
 
 } /* extern "C" */

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001cd3ec. */
@@ -30,7 +30,7 @@ void FUN_00379258(int param_1)
   if (param_1 != 0) {
     temp_v0 = FUN_0040ac08();
   }
-  *(unsigned int *)(DAT_00581288 + 400) = temp_v0;
+  *(unsigned int *)(g_lmapScene + 400) = temp_v0;
   FUN_001cd3ec();
   return;
 }

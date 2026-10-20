@@ -6,7 +6,7 @@ extern "C" {
 
 int nnnstdMemCpy(int *, int);
 
-extern int *DAT_004652a0; /* 0x4652a0 */
+extern int *g_commandBufferCursor; /* 0x4652a0 */
 extern unsigned char DAT_004e9dc8; /* 0x4e9dc8 */
 
 /* Supplied declaration required: nnnstdMemCpy. */
@@ -23,22 +23,22 @@ void FUN_002a1e08(int param_1,unsigned int param_2)
   if (*(int *)(&DAT_004e9dc8 + param_2 * 4) != param_1) {
     *(int *)(&DAT_004e9dc8 + param_2 * 4) = param_1;
     temp_v1 = 0;
-    piVar3 = DAT_004652a0 + 2;
+    piVar3 = g_commandBufferCursor + 2;
     if (param_2 == 0x17) {
-      *DAT_004652a0 = 0;
-      DAT_004652a0[1] = 0xf00e6;
+      *g_commandBufferCursor = 0;
+      g_commandBufferCursor[1] = 0xf00e6;
     }
     else {
-      *DAT_004652a0 = (param_2 + (param_2 >= 7)) * 0x100;
-      DAT_004652a0[1] = 0xf01c5;
+      *g_commandBufferCursor = (param_2 + (param_2 >= 7)) * 0x100;
+      g_commandBufferCursor[1] = 0xf01c5;
     }
     if (*(int *)(param_1 + 0x10) != 0) {
       temp_v1 = *(int *)(param_1 + 0x10) + param_1 + 0x10;
     }
     temp_v0 = *(unsigned int *)(param_1 + 0xc);
-    DAT_004652a0 = piVar3;
+    g_commandBufferCursor = piVar3;
     nnnstdMemCpy(piVar3,temp_v1);
-    DAT_004652a0 = (int *)((int)DAT_004652a0 + (temp_v0 & 0xfffffffc));
+    g_commandBufferCursor = (int *)((int)g_commandBufferCursor + (temp_v0 & 0xfffffffc));
     return;
   }
   return;

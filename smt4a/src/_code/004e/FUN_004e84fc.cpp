@@ -14,7 +14,7 @@ extern unsigned int DAT_00571194; /* 0x571194 */
 extern int FUN_001633a0(unsigned int);
 /* Supplied declaration required: FUN_004e5b5c. */
 extern int FUN_004e9ae8(int *, int *, int, unsigned int);
-extern int FUN_004ee568(int *);
+extern int btlUnitGet(int *);
 
 
 void FUN_004e84fc(int *param_1)
@@ -80,7 +80,7 @@ void FUN_004e84fc(int *param_1)
     return;
   }
   temp_v1 = FUN_001633a0((temp_v1 - 1U) & 0xffff);
-  temp_v2 = FUN_004ee568(param_1);
+  temp_v2 = btlUnitGet(param_1);
   *(unsigned char *)(aiStack_1d8[temp_v1] + temp_v2 + 0x38) = 1;
   return;
 }

@@ -1,31 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030cbc0` (_code @ 0x30cbc0, 0x16 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0030cbc0_arg1 fn_0030cbc0_arg1;
-struct fn_0030cbc0_arg1 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    byte field_0x8; /* +0x8 */
-    unsigned char pad_0x9[0x3];
-    undefined4 field_0xc; /* +0xc */
-    byte field_0x10; /* +0x10 */
-};
+typedef struct Params {
+    /* 0x00 */ void *vtbl;
+    /* 0x04 */ u32 field04;
+    /* 0x08 */ u8 field08;
+    /* 0x09 */ u8 unk09[3];
+    /* 0x0C */ u32 field0C;
+    /* 0x10 */ u8 field10;
+} Params;
 
-extern unsigned char DAT_005590ec; /* 0x5590ec */
+extern u8 DAT_005590ec;
 
-
-void FUN_0030cbc0(unsigned int *param_1,fn_0030cbc0_arg1 *param_2)
-
+/* Copy constructor: installs the vtable and copies the fields of `src`. */
+void FUN_0030cbc0(Params *dst, const Params *src)
 {
-  *param_1 = (unsigned int)&DAT_005590ec;
-  param_1[1] = param_2->field_0x4;
-  *(unsigned char *)(param_1 + 2) = param_2->field_0x8;
-  param_1[3] = param_2->field_0xc;
-  *(unsigned char *)(param_1 + 4) = param_2->field_0x10;
-  return;
+    dst->vtbl = &DAT_005590ec;
+    dst->field04 = src->field04;
+    dst->field08 = src->field08;
+    dst->field0C = src->field0C;
+    dst->field10 = src->field10;
 }
 
 } /* extern "C" */

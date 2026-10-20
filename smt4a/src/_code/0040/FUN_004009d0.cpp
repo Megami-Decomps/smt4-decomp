@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00573c90; /* 0x573c90 */
 extern unsigned int DAT_00573c94; /* 0x573c94 */
 extern unsigned int DAT_00573c98; /* 0x573c98 */
@@ -25,12 +25,12 @@ extern unsigned int DAT_00573cb8; /* 0x573cb8 */
 extern unsigned int DAT_00573cbc; /* 0x573cbc */
 
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
-extern int FUN_0014aa78(int);
+extern int btlGetMainState(int);
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_001aba54. */
 /* Supplied declaration required: FUN_003ff998. */
 /* Supplied declaration required: FUN_00400564. */
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 unsigned int FUN_004009d0(int param_1,int param_2)
@@ -60,8 +60,8 @@ unsigned int FUN_004009d0(int param_1,int param_2)
   if (temp_v8 && temp_v7 != (temp_v3 & 0x7ff) >> 9) {
     return 2;
   }
-  temp_v4 = FUN_0014aa78(temp_v3 << 0x15);
-  temp_v5 = FUN_004ee568(DAT_0057113c);
+  temp_v4 = btlGetMainState(temp_v3 << 0x15);
+  temp_v5 = btlUnitGet(g_btlScriptUnit);
   temp_v6 = 0;
   if (temp_v5 != 0) {
     temp_v6 = *(int *)(temp_v5 + 0x20);
@@ -156,7 +156,7 @@ unsigned int FUN_004009d0(int param_1,int param_2)
     } while (temp_v6 < 0x36);
   }
   if (temp_v0) {
-    temp_v4 = FUN_004ee568(DAT_0057113c);
+    temp_v4 = btlUnitGet(g_btlScriptUnit);
     temp_v6 = 0;
     if (temp_v4 != 0) {
       temp_v6 = *(int *)(temp_v4 + 0x20);

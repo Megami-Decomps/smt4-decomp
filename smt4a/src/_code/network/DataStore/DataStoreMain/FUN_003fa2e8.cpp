@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00163060(...);
-int FUN_0019a5a0(void);
+int asdMemoryAllocTracked(...);
+int asdMemFree(void);
 int FUN_002e3328(void);
 int FUN_002e6e14(unsigned char *);
 int FUN_00413af4(unsigned char **, int, unsigned int);
@@ -32,8 +32,8 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0014bef4(unsigned int);
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002e3328. */
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00413af4. */
@@ -71,11 +71,11 @@ void FUN_003fa2e8(fn_003fa2e8_arg0 *param_1)
     if (0 < temp_v0) {
       temp_v0 = 0x100;
       temp_v9 = (unsigned char *)0x1;
-      FUN_00163060(0x100,0x100,0,1000);
+      asdMemoryAllocTracked(0x100,0x100,0,1000);
       param_1->field_0x48 = temp_v0;
       temp_v1 = 0x100;
       temp_v9 = (unsigned char *)0x1;
-      FUN_00163060(0x100,0x100,0,100);
+      asdMemoryAllocTracked(0x100,0x100,0,100);
       temp_v0 = 10;
       if ((int)param_1->field_0x4c < 10) {
         temp_v0 = param_1->field_0x4c;
@@ -83,7 +83,7 @@ void FUN_003fa2e8(fn_003fa2e8_arg0 *param_1)
       param_1->field_0x50 = 0;
       temp_v9 = (unsigned char *)0x1;
       puVar3 = (unsigned int *)0x100;
-      FUN_00163060(0x100,0x100,0,param_1->field_0x4c << 2);
+      asdMemoryAllocTracked(0x100,0x100,0,param_1->field_0x4c << 2);
       if (0 < (int)param_1->field_0x4c) {
         temp_v8 = (param_1->field_0x4c & 1) != 0;
         puVar7 = puVar3 + -1;
@@ -101,7 +101,7 @@ void FUN_003fa2e8(fn_003fa2e8_arg0 *param_1)
       }
       temp_v5 = 0x100;
       temp_v9 = (unsigned char *)0x1;
-      FUN_00163060(0x100,0x100,0,temp_v0 << 2);
+      asdMemoryAllocTracked(0x100,0x100,0,temp_v0 << 2);
       temp_v6 = param_1->field_0x4c;
       temp_v7 = 0;
       if (temp_v7 < temp_v0) {
@@ -141,13 +141,13 @@ void FUN_003fa2e8(fn_003fa2e8_arg0 *param_1)
         } while (temp_v6 < temp_v0);
       }
       if (puVar3 != (unsigned int *)0x0) {
-        FUN_0019a5a0();
+        asdMemFree();
       }
       if (temp_v5 != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
       }
       if (temp_v1 != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
       }
       param_1->field_0x50 = temp_v0;
     }

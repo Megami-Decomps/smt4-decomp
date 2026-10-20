@@ -1,38 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00385c58` (_code @ 0x385c58, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00234bb4(unsigned int, unsigned char [132], unsigned int, unsigned int, int, int, int);
-int FUN_002c4938(unsigned char [132], int);
+int memClear(u8 *buffer, int size);
+int FUN_002a6e7c(u32 owner, u32 kind, u32 key, u8 *outBuffer);
+int FUN_00234bb4(u32 context, u8 *buffer, u32 arg0, u32 arg1, int flag0, int flag1, int flag2);
 
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int spA0; /* 0xa0: local_a0 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-} param_4_stack;
+extern u32 g_aocDisplay;
 
-extern unsigned int DAT_00433130; /* 0x433130 */
-
-/* Supplied declaration required: FUN_00234bb4. */
-extern int FUN_002a6e7c(unsigned int, unsigned int, unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_002c4938. */
-
-
-void FUN_00385c58(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Looks up the entry of kind 0x20 for `key`; when found, hands the filled buffer to the post routine. */
+void FUN_00385c58(u32 owner, u32 key, u32 arg1, u32 arg0)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [132];
-  
-  FUN_002c4938(temp_v1,0x80);
-  temp_v0 = FUN_002a6e7c(param_1,0x20,param_2,temp_v1);
-  if (temp_v0 != 0) {
-    FUN_00234bb4(DAT_00433130,temp_v1,param_4,param_3,0,4,0);
-  }
-  return;
+    u8 buffer[128];
+
+    memClear(buffer, 0x80);
+    if (FUN_002a6e7c(owner, 0x20, key, buffer) != 0) {
+        FUN_00234bb4(g_aocDisplay, buffer, arg0, arg1, 0, 4, 0);
+    }
 }
 
 } /* extern "C" */

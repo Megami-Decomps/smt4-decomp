@@ -4,9 +4,9 @@
 
 extern "C" {
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
-extern unsigned int *FUN_0027e928(unsigned int);
+extern unsigned int *btlUnitGet(unsigned int);
 
 
 unsigned int FUN_00293230(void)
@@ -15,7 +15,7 @@ unsigned int FUN_00293230(void)
   unsigned int *puVar1;
   unsigned int temp_v0;
   
-  puVar1 = (unsigned int *)FUN_0027e928(DAT_0043427c);
+  puVar1 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
   temp_v0 = 0;
   if ((puVar1 != (unsigned int *)0x0) && (((*puVar1 & 0x80) != 0 || (temp_v0 = 0, (*puVar1 & 0x1000) != 0))))
   {

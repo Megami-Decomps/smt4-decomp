@@ -4,21 +4,21 @@
 
 extern "C" {
 
-int FUN_002ae43c(void);
+int asdLoadFileAsync(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-/* Supplied declaration required: FUN_002ae43c. */
+/* Supplied declaration required: asdLoadFileAsync. */
 
 
 void FUN_002b6480(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002ae43c();
+  asdLoadFileAsync();
   return;
 }
 

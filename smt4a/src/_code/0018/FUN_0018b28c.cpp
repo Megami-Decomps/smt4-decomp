@@ -33,7 +33,7 @@ extern int FUN_001a26e4(...); /* 0x1a26e4 */
 
 /* Supplied declaration required: FUN_0017fd20. */
 /* Supplied declaration required: FUN_00188b60. */
-extern int FUN_0018b620(void);
+extern int nngxCheckVramBank(void);
 /* Supplied declaration required: FUN_001a089c. */
 /* Supplied declaration required: FUN_001a2420. */
 extern int FUN_001a2a3c(void);
@@ -91,7 +91,7 @@ void FUN_0018b28c(int param_1)
   *(unsigned char *)(param_1 + 0x76) = 0;
   FUN_001a089c(param_1 + 100,0);
   temp_v2 = FUN_001a2a5c();
-  temp_v0 = FUN_0018b620();
+  temp_v0 = nngxCheckVramBank();
   if (temp_v0 == 0) {
     temp_v1 = 1;
   }

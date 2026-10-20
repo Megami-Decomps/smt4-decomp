@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_001527d8(...);
 int FUN_00164b5c(int, int, int, int, int, int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00169a1c(...);
 int FUN_00180310(...);
 int FUN_001835b4(...);
@@ -24,7 +24,7 @@ extern unsigned char LAB_002a263c; /* 0x2a263c */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00169a1c. */
 /* Supplied declaration required: FUN_00180310. */
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -68,7 +68,7 @@ void FUN_002a2210(unsigned int *param_1,int param_2,float *param_3,int param_4,i
     return;
   }
   FUN_00183bb0();
-  FUN_001677c0();
+  efctSetSpeed();
   param_4 = param_4 + (int)param_3[1];
   param_5 = (int)param_3[2] + param_5;
   if (param_6 != 0) {
@@ -198,7 +198,7 @@ LAB_002a26e8:
       FUN_002e1b64(*(unsigned int *)(param_2 + 0x30),*(short *)(temp_v1 + 8) + param_4,
                    *(short *)(temp_v1 + 10) + param_5,0x67);
       FUN_00183bb0();
-      FUN_001677c0();
+      efctSetSpeed();
       return;
     }
   } while( 1 );

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00272204(unsigned int, unsigned char [4], int);
-int FUN_00290e98(unsigned int, unsigned char [252]);
+int taskRunWithObject(unsigned int, unsigned char [252]);
 int FUN_0037cdcc(unsigned int, unsigned int, unsigned char [252]);
 int FUN_003ca0ec(unsigned int, unsigned int);
 
@@ -21,7 +21,7 @@ extern unsigned int DAT_0059dbfc; /* 0x59dbfc */
 extern unsigned int DAT_0059dc04; /* 0x59dc04 */
 
 /* Supplied declaration required: FUN_00272204. */
-/* Supplied declaration required: FUN_00290e98. */
+/* Supplied declaration required: taskRunWithObject. */
 /* Supplied declaration required: FUN_0037cdcc. */
 /* Supplied declaration required: FUN_003ca0ec. */
 
@@ -44,7 +44,7 @@ unsigned char * FUN_003cd7c4(unsigned int param_1,unsigned int param_2)
   else if (temp_v2 == 1) {
     FUN_003ca0ec(DAT_0059dbf4,DAT_0059dc04);
     if (temp_v1 != 8) {
-      FUN_00290e98(DAT_0059dbfc,temp_v0);
+      taskRunWithObject(DAT_0059dbfc,temp_v0);
     }
     else {
       FUN_00272204(DAT_0059dbfc,temp_v3,4);

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 extern unsigned int FUN_0034a1ec(void);
 
 
@@ -18,7 +18,7 @@ void FUN_003d9d74(int param_1)
   unsigned int temp_v1;
   
   temp_v0 = 0x44;
-  FUN_002c222c();
+  asdOperatorNew();
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = FUN_0034a1ec();

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001630d4(int, int, int, unsigned int);
+int asdMemoryAlloc(int, int, int, unsigned int);
 int FUN_0019cbf8(void);
 int FUN_0019d57c(unsigned int *, unsigned int);
 int FUN_001b6d08(int *, int, unsigned int, unsigned int);
@@ -28,10 +28,10 @@ extern unsigned char DAT_005b3bf4; /* 0x5b3bf4 */
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0019cbf8. */
 /* Supplied declaration required: FUN_0019d57c. */
-extern unsigned int FUN_001ad6fc(void);
+extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: FUN_001b6d08. */
 /* Supplied declaration required: FUN_00386548. */
 
@@ -59,7 +59,7 @@ void FUN_0021230c(unsigned int *param_1,unsigned int *param_2,int param_3)
   puVar4 = (unsigned int *)&temp_v2;
   if (param_3 != 1) {
     if (param_3 == 0) {
-      temp_v1 = FUN_001ad6fc();
+      temp_v1 = asdMemoryGetAllocatorA();
       temp_v2 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v2 + 2)),0x101);
       temp_v5 = 0x834;
       temp_v4 = 1;
@@ -75,7 +75,7 @@ void FUN_0021230c(unsigned int *param_1,unsigned int *param_2,int param_3)
   else {
     temp_v0 = *(int *)(*(int *)(param_2[0xb] + 0x220) + 8);
     *(unsigned int *)(temp_v0 + 0x28) = *(unsigned int *)(temp_v0 + 0x28) | 1;
-    temp_v1 = FUN_001ad6fc();
+    temp_v1 = asdMemoryGetAllocatorA();
     temp_v2 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v2 + 2)),0x101);
     temp_v4 = 1;
     temp_v5 = 0;
@@ -98,7 +98,7 @@ void FUN_0021230c(unsigned int *param_1,unsigned int *param_2,int param_3)
   param_1[10] = 1;
   temp_v2 = 1;
   puVar6 = (unsigned int *)0x100;
-  FUN_001630d4(0x100,0x100,0,param_1[10] << 2);
+  asdMemoryAlloc(0x100,0x100,0,param_1[10] << 2);
   param_1[9] = (unsigned int)puVar6;
   *puVar6 = param_1[0xb];
   if (param_3 == 0) {

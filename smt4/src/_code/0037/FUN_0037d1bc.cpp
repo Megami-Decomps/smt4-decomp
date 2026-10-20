@@ -13,7 +13,7 @@ typedef struct {
 
 extern unsigned char DAT_00473540; /* 0x473540 */
 
-extern int aeabi_uidivmod(int, unsigned int);
+extern int __aeabi_uidivmod(int, unsigned int);
 
 
 unsigned int FUN_0037d1bc(int param_1,int param_2,unsigned int *param_3,unsigned int param_4,int param_5)
@@ -75,7 +75,7 @@ unsigned int FUN_0037d1bc(int param_1,int param_2,unsigned int *param_3,unsigned
     temp_v6 = *(int *)(param_1 + 0x54) + param_5;
     *(int *)(param_1 + 0x54) = temp_v6;
     temp_v7 = *(int *)(param_1 + 0x18);
-    temp_v6 = aeabi_uidivmod(temp_v6,*(unsigned int *)(temp_v7 + 0x14));
+    temp_v6 = __aeabi_uidivmod(temp_v6,*(unsigned int *)(temp_v7 + 0x14));
     *(int *)(param_1 + 0x34) = temp_v6;
     temp_v6 = param_5 - temp_v6 * *(int *)(temp_v7 + 0x14);
     (**(romwright_code **)(**(int **)(param_1 + 0x14) + 0x40))(*(int **)(param_1 + 0x14),0);

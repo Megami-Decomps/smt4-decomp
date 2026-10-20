@@ -7,15 +7,15 @@ extern "C" {
 int FUN_002a6264(unsigned int *, int);
 int FUN_002a63d8(unsigned int *, int);
 int FUN_002a65d8(void);
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 int FUN_0031dac4(void);
 int nw_gfx_res_ResGraphicsFile_Setup(unsigned int *, unsigned int, unsigned int);
 
 /* Supplied declaration required: FUN_002a6264. */
 /* Supplied declaration required: FUN_002a63d8. */
 /* Supplied declaration required: FUN_002a65d8. */
-/* Supplied declaration required: FUN_002c222c. */
-extern unsigned int FUN_002c2ff0(void);
+/* Supplied declaration required: asdOperatorNew. */
+extern unsigned int asdMemoryGetDefaultAllocator(void);
 /* Supplied declaration required: FUN_0031dac4. */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Setup. */
 
@@ -29,7 +29,7 @@ void FUN_00316f70(unsigned int param_1,unsigned int param_2)
   unsigned int *puVar3;
   
   puVar1 = (unsigned int *)0x4;
-  FUN_002c222c();
+  asdOperatorNew();
   if (puVar1 != (unsigned int *)0x0) {
     *puVar1 = param_1;
   }
@@ -48,7 +48,7 @@ void FUN_00316f70(unsigned int param_1,unsigned int param_2)
   else if ((param_2 & 0x80) != 0) {
     FUN_002a6264(puVar1,0x2030000);
   }
-  temp_v0 = FUN_002c2ff0();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   nw_gfx_res_ResGraphicsFile_Setup(puVar1,temp_v0,*puVar1);
   puVar3 = puVar1;
   FUN_0031dac4();

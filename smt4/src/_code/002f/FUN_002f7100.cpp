@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+int scrSetResult(int);
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
-extern int FUN_0027e928(unsigned int);
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_00296cc8(void);
+extern int btlUnitGet(unsigned int);
+/* Supplied declaration required: scrSetResult. */
+extern int scrGetArg(void);
 
 
 unsigned int FUN_002f7100(void)
@@ -20,9 +20,9 @@ unsigned int FUN_002f7100(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00296cc8();
-  temp_v1 = FUN_0027e928(DAT_0043427c);
-  FUN_0028dcb0(*(unsigned short *)(*(int *)(temp_v1 + 0x28) + temp_v0 * 2 + 0x126) >> 10 == 1);
+  temp_v0 = scrGetArg();
+  temp_v1 = btlUnitGet(g_btlScriptUnit);
+  scrSetResult(*(unsigned short *)(*(int *)(temp_v1 + 0x28) + temp_v0 * 2 + 0x126) >> 10 == 1);
   return 1;
 }
 

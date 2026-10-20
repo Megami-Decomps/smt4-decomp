@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_002e9afe(int, int *);
 int FUN_004130c0(int, int);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002e9afe. */
 extern int FUN_002f4e86(int);
 /* Supplied declaration required: FUN_004130c0. */
@@ -29,7 +29,7 @@ void FUN_0041488c(int param_1,int param_2)
   unsigned int uStack_10;
   
   if (*(int *)(param_1 + 0x88) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x88) = 0;
   }
   temp_v1 = *(unsigned int *)(param_2 + 0x38);

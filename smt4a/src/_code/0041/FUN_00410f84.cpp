@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_002804b0(unsigned char *, unsigned int *, int);
 int FUN_003e503c(void);
 int FUN_003eaf20(void);
@@ -29,12 +29,12 @@ typedef struct {
 extern unsigned char DAT_00529834; /* 0x529834 */
 extern int DAT_005712f0; /* 0x5712f0 */
 extern unsigned int *DAT_00571508; /* 0x571508 */
-extern unsigned int DAT_0057a4f8; /* 0x57a4f8 */
+extern unsigned int g_btlStageModel; /* 0x57a4f8 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern unsigned int FUN_0015688c(void);
 extern int FUN_00187168(void);
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002804b0. */
 extern int FUN_003e4a00(void);
 extern unsigned int FUN_003e4fdc(unsigned int);
@@ -83,7 +83,7 @@ void FUN_00410f84(unsigned int *param_1)
     return;
   case 3:
     if (param_1[0x61] != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       param_1[0x61] = 0;
     }
     FUN_002804b0(&DAT_00529834,param_1 + 0x61,0);
@@ -119,12 +119,12 @@ void FUN_00410f84(unsigned int *param_1)
           temp_v0 = temp_v4;
         } while (temp_v4 < temp_v1);
       }
-      FUN_00401128(DAT_0057a4f8);
+      FUN_00401128(g_btlStageModel);
       return;
     }
     break;
   case 5:
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     temp_v0 = temp_v1;
     FUN_003eaf20();
     temp_v2 = FUN_003e4fdc(param_1[7] & 0xffff);
@@ -136,7 +136,7 @@ void FUN_00410f84(unsigned int *param_1)
     FUN_003f14a0(temp_v1);
     return;
   case 6:
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     temp_v0 = temp_v1;
     FUN_003eaf20();
     temp_v2 = FUN_0015688c();

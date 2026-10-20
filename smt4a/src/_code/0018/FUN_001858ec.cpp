@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0018003c(void);
-int FUN_001817b8(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+int asdMemoryAllocImpl(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_002e3140(void);
 int FUN_002e6dd4(unsigned int, int);
 int software_interrupt(int);
@@ -19,7 +19,7 @@ extern unsigned char DAT_005b4028; /* 0x5b4028 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0018003c. */
-/* Supplied declaration required: FUN_001817b8. */
+/* Supplied declaration required: asdMemoryAllocImpl. */
 extern unsigned int FUN_001844ac(void);
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002e6dd4. */
@@ -37,7 +37,7 @@ FUN_001858ec(unsigned int param_1,unsigned int param_2,unsigned int param_3,int 
   if (param_5 < 0x80) {
     param_5 = 0x80;
   }
-  FUN_001817b8(param_1,param_2,param_3,(param_4 + param_5 * 2 + 0x3f) & -param_5,param_6);
+  asdMemoryAllocImpl(param_1,param_2,param_3,(param_4 + param_5 * 2 + 0x3f) & -param_5,param_6);
   temp_v0 = FUN_001844ac();
   FUN_002e6dd4(temp_v0,param_4);
   software_interrupt(0x14);

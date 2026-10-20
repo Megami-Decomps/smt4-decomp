@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0030ef8c(int, unsigned int, unsigned int);
+extern int rt_memcmp(int, unsigned int, unsigned int);
 
 
 unsigned int FUN_00501f78(unsigned int param_1,int param_2)
@@ -15,7 +15,7 @@ unsigned int FUN_00501f78(unsigned int param_1,int param_2)
   
   temp_v1 = 0;
   if (param_2 != 0) {
-    temp_v0 = FUN_0030ef8c(param_2,param_1,8);
+    temp_v0 = rt_memcmp(param_2,param_1,8);
     if (temp_v0 == 0) {
       temp_v1 = 1;
     }

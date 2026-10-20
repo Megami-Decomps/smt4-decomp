@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_001ab888(void);
 int FUN_00275bc8(void);
 int FUN_00275f44(...);
@@ -19,7 +19,7 @@ int FUN_0035b084(void);
 int FUN_0037b708(void);
 int FUN_003fd63c(int, int);
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001ab888. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
@@ -115,7 +115,7 @@ unsigned int FUN_002c04a0(int *param_1,int param_2)
           else {
             temp_v1 = FUN_002a4b74();
             if (temp_v1 == 0) {
-              FUN_001681cc(0x3e);
+              sysPlaySe(0x3e);
               temp_v1 = FUN_0035b044();
               temp_v4 = temp_v1 == 3;
               if (temp_v4) {
@@ -177,7 +177,7 @@ LAB_002c0648:
               }
               return 0;
             }
-            FUN_001681cc(0x3e);
+            sysPlaySe(0x3e);
             temp_v1 = FUN_002a2cf0();
             if ((temp_v1 != 0) && (temp_v1 = FUN_00345388(0x20), temp_v1 != 0)) {
               *(unsigned int *)(temp_v3 + 0x38) = 9;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(unsigned int);
+int sysPlaySe(unsigned int);
 int FUN_00183f58(int, int, int, int);
 int FUN_002c7e24(void);
 
@@ -15,7 +15,7 @@ typedef struct {
 
 extern int DAT_0057f268; /* 0x57f268 */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
 extern int FUN_0018719c(unsigned int);
 extern int FUN_0022e714(void);
@@ -91,7 +91,7 @@ void FUN_0023fc38(void)
         temp_v4 = 0x27;
       }
     }
-    FUN_001681cc(temp_v4);
+    sysPlaySe(temp_v4);
   }
   else if (temp_v3 < 0) {
     if (temp_v1) {
@@ -124,7 +124,7 @@ void FUN_0023fc38(void)
     else {
       temp_v4 = 0x25;
     }
-    FUN_001681cc(temp_v4);
+    sysPlaySe(temp_v4);
   }
   else if (temp_v1) {
     if ((*(int *)(temp_v5 + 0x1c) != 0x19) || (temp_v2 = FUN_002f1964(), temp_v2 == 0)) {
@@ -134,7 +134,7 @@ void FUN_0023fc38(void)
       else {
         temp_v4 = 0x24;
       }
-      FUN_001681cc(temp_v4);
+      sysPlaySe(temp_v4);
     }
   }
   else {
@@ -143,20 +143,20 @@ void FUN_0023fc38(void)
       if (*(char *)(temp_v5 + 0x42) != '\0') {
         if (temp_v2 == 0) {
           temp_v4 = 0x22;
-          FUN_001681cc(temp_v4);
+          sysPlaySe(temp_v4);
         }
         else if (temp_v2 == 1) {
           temp_v4 = 0x28;
-          FUN_001681cc(temp_v4);
+          sysPlaySe(temp_v4);
         }
       }
       else if (temp_v2 == 0) {
         temp_v4 = 0x21;
-        FUN_001681cc(temp_v4);
+        sysPlaySe(temp_v4);
       }
       else if (temp_v2 == 1) {
         temp_v4 = 0x27;
-        FUN_001681cc(temp_v4);
+        sysPlaySe(temp_v4);
       }
     }
     else {
@@ -166,7 +166,7 @@ void FUN_0023fc38(void)
       else {
         temp_v4 = 0xc3;
       }
-      FUN_001681cc(temp_v4);
+      sysPlaySe(temp_v4);
     }
     temp_v2 = FUN_0022e714();
     if ((temp_v2 != 0) && (temp_v2 = FUN_00237608(), temp_v2 != 0)) {
@@ -176,7 +176,7 @@ void FUN_0023fc38(void)
       else {
         temp_v4 = 0xce;
       }
-      FUN_001681cc(temp_v4);
+      sysPlaySe(temp_v4);
     }
   }
 LAB_0023fea8:

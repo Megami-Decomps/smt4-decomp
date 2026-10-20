@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0028975c(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c564c(...);
-int FUN_002c5788(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int jyoucyuGetTableEntry(...);
+int asdProcessCreateSimple(...);
 int QcMain_SetFlag(...);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -32,10 +32,10 @@ extern int DAT_0044db94; /* 0x44db94 */
 extern int DAT_0044db98; /* 0x44db98 */
 
 /* Supplied declaration required: FUN_0028975c. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c564c. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: QcMain_SetFlag. */
 
 
@@ -47,9 +47,9 @@ void QcMain_Register(int *param_1,int param_2)
   unsigned char *puVar2;
   unsigned char *puVar3;
   
-  FUN_002c564c(0);
+  jyoucyuGetTableEntry(0);
   puVar1 = (unsigned int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x20,1);
+  asdMemAlloc(0x100,0x100,0,0x20,1);
   DAT_0044db8c = puVar1;
   *(unsigned char *)(puVar1 + 6) = 0;
   puVar1[7] = 0;
@@ -81,15 +81,15 @@ void QcMain_Register(int *param_1,int param_2)
     FUN_0028975c(0x157,1);
   }
   puVar2 = &LAB_001a99dc;
-  FUN_002c5788(&LAB_001a99dc,2,0,0,QuestCenterMainProcUpdate,&LAB_001fe158,DAT_0044db8c);
+  asdProcessCreateSimple(&LAB_001a99dc,2,0,0,QuestCenterMainProcUpdate,&LAB_001fe158,DAT_0044db8c);
   *puVar1 = (unsigned int)puVar2;
   puVar3 = &LAB_001a99f4;
-  FUN_002c4a08(&LAB_001a99f4,0x6f,1,0,&LAB_001fe1d8,0,DAT_0044db8c,puVar2);
+  taskCreateDraw(&LAB_001a99f4,0x6f,1,0,&LAB_001fe1d8,0,DAT_0044db8c,puVar2);
   puVar1[1] = (unsigned int)puVar3;
-  FUN_002c4a08(&LAB_001a99f4,0x7d,1,0,&LAB_001d960c,0,DAT_0044db8c,*puVar1);
-  FUN_002c4a08(&LAB_001a99f4,0xdb,1,0,&LAB_001d960c,0,DAT_0044db8c,*puVar1);
+  taskCreateDraw(&LAB_001a99f4,0x7d,1,0,&LAB_001d960c,0,DAT_0044db8c,*puVar1);
+  taskCreateDraw(&LAB_001a99f4,0xdb,1,0,&LAB_001d960c,0,DAT_0044db8c,*puVar1);
   puVar2 = &LAB_001a9a10;
-  FUN_002c4a08(&LAB_001a9a10,0xe7,1,0,&LAB_001fe19c,0,DAT_0044db8c,*puVar1);
+  taskCreateDraw(&LAB_001a9a10,0xe7,1,0,&LAB_001fe19c,0,DAT_0044db8c,*puVar1);
   puVar1[3] = (unsigned int)puVar2;
   return;
 }

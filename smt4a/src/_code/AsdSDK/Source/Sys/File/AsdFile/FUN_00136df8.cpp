@@ -10,7 +10,7 @@ int FUN_001467e0(int, int, int);
 int FUN_00146808(void);
 int FUN_0014685c(int, int, unsigned int, unsigned int);
 int FUN_0014a930(int *, int, int);
-int FUN_001630d4(int, int, int, unsigned int);
+int asdMemoryAlloc(int, int, int, unsigned int);
 int FUN_0019a364(int *, int, int);
 int FUN_001a089c(unsigned int *, int);
 int FUN_002e3140(void);
@@ -22,8 +22,8 @@ typedef struct {
 
 extern unsigned int DAT_005b3fb8; /* 0x5b3fb8 */
 extern unsigned int DAT_005b3fbc; /* 0x5b3fbc */
-extern int DAT_005b3fc0; /* 0x5b3fc0 */
-extern unsigned int DAT_005b3fd4; /* 0x5b3fd4 */
+extern int g_asdFileMutex; /* 0x5b3fc0 */
+extern unsigned int g_asdFileEvent; /* 0x5b3fd4 */
 
 /* Supplied declaration required: FUN_0014287c. */
 /* Supplied declaration required: FUN_00146720. */
@@ -31,7 +31,7 @@ extern unsigned int DAT_005b3fd4; /* 0x5b3fd4 */
 /* Supplied declaration required: FUN_00146808. */
 /* Supplied declaration required: FUN_0014685c. */
 /* Supplied declaration required: FUN_0014a930. */
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0019a364. */
 /* Supplied declaration required: FUN_001a089c. */
 /* Supplied declaration required: FUN_002e3140. */
@@ -56,12 +56,12 @@ void FUN_00136df8(void)
   FUN_001467e0(0x10,0x10,1);
   temp_v1 = 0x100;
   temp_v2 = 1;
-  FUN_001630d4(0x100,0x100,0,temp_v0);
+  asdMemoryAlloc(0x100,0x100,0,temp_v0);
   temp_v2 = 1;
   DAT_005b3fb8 = temp_v1;
   FUN_0014685c(0x10,0x10,temp_v1,temp_v0);
   temp_v2 = 0;
-  if (DAT_005b3fc0 != 0) {
+  if (g_asdFileMutex != 0) {
     piVar3 = (int *)0xe0a0183b;
   }
   else {
@@ -69,17 +69,17 @@ void FUN_00136df8(void)
     FUN_0014a930(piVar4,0,2);
     if (-1 < (int)piVar3) {
       piVar3 = (int *)0x0;
-      DAT_005b3fc0 = temp_v2;
+      g_asdFileMutex = temp_v2;
     }
   }
   if ((int)piVar3 < 0) {
     FUN_002e3140();
   }
-  FUN_0019a364(piVar4,DAT_005b3fc0,1);
+  FUN_0019a364(piVar4,g_asdFileMutex,1);
   if ((int)piVar4 < 0) {
     FUN_002e3140();
   }
-  FUN_001a089c(&DAT_005b3fd4,0);
+  FUN_001a089c(&g_asdFileEvent,0);
   FUN_0014287c();
   FUN_00146808();
   return;

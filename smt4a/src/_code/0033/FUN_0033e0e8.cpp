@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0058104c; /* 0x58104c */
+extern int g_popupState; /* 0x58104c */
 
 
 unsigned int FUN_0033e0e8(void)
@@ -16,7 +16,7 @@ unsigned int FUN_0033e0e8(void)
   
   temp_v0 = 0;
   while( 1 ) {
-    temp_v1 = DAT_0058104c + temp_v0 * 4;
+    temp_v1 = g_popupState + temp_v0 * 4;
     temp_v2 = *(int *)(temp_v1 + 0xb0) == 0;
     if (temp_v2) {
       temp_v1 = *(int *)(temp_v1 + 0xb4);

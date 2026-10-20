@@ -11,9 +11,9 @@ int FUN_002c1d5c(...);
 int FUN_002c1e30(...);
 int FUN_002c1edc(...);
 int FUN_002c2044(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c5788(...);
+int memClear(...);
+int asdMemAlloc(...);
+int asdProcessCreateSimple(...);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -22,22 +22,22 @@ typedef struct {
 } void_stack;
 
 extern int FUN_00205184(...); /* 0x205184 */
-extern int FUN_002eff7c(...); /* 0x2eff7c */
+extern int event3dOpeningDestroy(...); /* 0x2eff7c */
 extern unsigned char LAB_002f6514; /* 0x2f6514 */
-extern unsigned int *DAT_0043df98; /* 0x43df98 */
+extern unsigned int *g_event3dOpening; /* 0x43df98 */
 
 extern unsigned int FUN_00263c1c(char *);
 /* Supplied declaration required: FUN_00298d50. */
-extern unsigned int FUN_0029a034(char *, unsigned int);
+extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: FUN_002a09b4. */
 /* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: FUN_002c1d5c. */
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
 /* Supplied declaration required: FUN_002c2044. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 
 
 unsigned int FUN_002f6314(void)
@@ -48,11 +48,11 @@ unsigned int FUN_002f6314(void)
   unsigned char *puVar2;
   unsigned int temp_v0;
   
-  if (DAT_0043df98 == (unsigned int *)0x0) {
+  if (g_event3dOpening == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
-    FUN_002c498c(0x100,0x100,0,0x574,1);
-    DAT_0043df98 = puVar1;
-    FUN_002c4938();
+    asdMemAlloc(0x100,0x100,0,0x574,1);
+    g_event3dOpening = puVar1;
+    memClear();
     FUN_002c2044(puVar1 + 1,1);
     puVar1[0x143] = 0;
     puVar1[0x144] = 0;
@@ -73,7 +73,7 @@ unsigned int FUN_002f6314(void)
     FUN_002c1e30(puVar1 + 1,1);
     FUN_00298d50(puVar1 + 1);
     puVar2 = &LAB_002f6514;
-    FUN_002c5788(&LAB_002f6514,2,0,0,FUN_00205184,FUN_002eff7c,puVar1);
+    asdProcessCreateSimple(&LAB_002f6514,2,0,0,FUN_00205184,event3dOpeningDestroy,puVar1);
     *puVar1 = (unsigned int)puVar2;
     FUN_002c1d5c();
     puVar1[0x159] = 1;
@@ -84,11 +84,11 @@ unsigned int FUN_002f6314(void)
     puVar1[0x157] = temp_v0;
     temp_v0 = FUN_00263c1c("event/oc/oc_start.bccam");
     puVar1[0x158] = temp_v0;
-    temp_v0 = FUN_0029a034("event/oc/oc_loop.bam",0x38);
+    temp_v0 = asdMdlManagerCreateSecondList("event/oc/oc_loop.bam",0x38);
     puVar1[0x155] = temp_v0;
     puVar1[0x15c] = 1;
   }
-  return *DAT_0043df98;
+  return *g_event3dOpening;
 }
 
 } /* extern "C" */

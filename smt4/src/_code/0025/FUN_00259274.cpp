@@ -5,14 +5,14 @@
 extern "C" {
 
 extern unsigned char DAT_0043e2aa; /* 0x43e2aa */
-extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
+extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 
 
 void FUN_00259274(unsigned int param_1)
 
 {
   DAT_0043e2aa = 0;
-  (*(unsigned int *)((unsigned char *)&DAT_0043e2a8 + 0x18)) = param_1 | (*(unsigned int *)((unsigned char *)&DAT_0043e2a8 + 0x18));
+  (*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0x18)) = param_1 | (*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0x18));
   return;
 }
 

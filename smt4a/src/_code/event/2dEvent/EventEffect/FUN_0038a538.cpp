@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
-int FUN_0019a5a0(unsigned int *);
+int jobStop(unsigned int, int);
+int asdMemFree(unsigned int *);
 int FUN_0019a7f4(unsigned int, unsigned int);
-int FUN_002e132c(int);
+int asdTMTexTableFreeEntry(int);
 
 extern int DAT_0057f3c4; /* 0x57f3c4 */
 
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 extern int FUN_0018206c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019a7f4. */
-/* Supplied declaration required: FUN_002e132c. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 extern int FUN_00341940(unsigned int);
 
 
@@ -45,13 +45,13 @@ void FUN_0038a538(int param_1)
     else {
       temp_v0 = FUN_00341940(0x35);
       if (temp_v0 != 0) {
-        FUN_002e132c(0x35);
+        asdTMTexTableFreeEntry(0x35);
         DAT_0057f3c4 = 0;
       }
     }
   }
-  FUN_001631d0(*puVar3,0);
-  FUN_0019a5a0(puVar3);
+  jobStop(*puVar3,0);
+  asdMemFree(puVar3);
   *(unsigned int *)(param_1 * 4 + 0x57f3c8) = 0;
   return;
 }

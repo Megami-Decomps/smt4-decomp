@@ -1,41 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003aceb4` (_code @ 0x3aceb4, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002958f8(int, int);
-int FUN_002ae7e8(int);
-int FUN_002ae898(int, int);
+/* Record whose halfword at 8 is an id (negative = none). */
+typedef struct {
+    u8 unk00[8];
+    s16 id;             /* 0x08 */
+} IdRecord;
 
-extern unsigned char DAT_0043d9e0; /* 0x43d9e0 */
-extern int DAT_0043d9e4; /* 0x43d9e4 */
+/* Countdown state: a signed frame counter at +1 and a record pointer at +4. */
+typedef struct {
+    u8 unk00;
+    s8 timer;           /* 0x01 */
+    u8 unk02[2];
+    IdRecord *record;   /* 0x04 */
+} Countdown;
 
-/* Supplied declaration required: FUN_002958f8. */
-/* Supplied declaration required: FUN_002ae7e8. */
-/* Supplied declaration required: FUN_002ae898. */
+extern Countdown g_countdown;
 
+int FUN_002958f8(int id, int arg);
+int asdTMTexTableFreeEntry(int kind);
+int FUN_002ae898(int kind, int index);
 
+/* Ticks the countdown; when it runs out, triggers the record's id and clears kind 0x22. */
 void FUN_003aceb4(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  (*(signed char *)((unsigned char *)&DAT_0043d9e0 + 0x1)) = (*(signed char *)((unsigned char *)&DAT_0043d9e0 + 0x1)) - '\x01';
-  if ((*(signed char *)((unsigned char *)&DAT_0043d9e0 + 0x1)) < '\x01') {
-    if (-1 < *(short *)(DAT_0043d9e4 + 8)) {
-      FUN_002958f8((int)*(short *)(DAT_0043d9e4 + 8),1);
+    int i;
+
+    g_countdown.timer = g_countdown.timer - 1;
+    if (g_countdown.timer <= 0) {
+        if (g_countdown.record->id >= 0) {
+            FUN_002958f8(g_countdown.record->id, 1);
+        }
+        i = 0;
+        do {
+            FUN_002ae898(0x22, i);
+            i++;
+        } while (i < 2);
+        asdTMTexTableFreeEntry(0x22);
+        g_countdown.timer = 0;
     }
-    temp_v0 = 0;
-    do {
-      FUN_002ae898(0x22,temp_v0);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 2);
-    FUN_002ae7e8(0x22);
-    (*(signed char *)((unsigned char *)&DAT_0043d9e0 + 0x1)) = '\0';
-  }
-  return;
 }
 
 } /* extern "C" */

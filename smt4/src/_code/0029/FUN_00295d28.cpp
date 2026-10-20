@@ -15,7 +15,7 @@ extern int DAT_004e316c; /* 0x4e316c */
 extern int DAT_004e3180; /* 0x4e3180 */
 
 /* Supplied declaration required: FUN_002bda30. */
-extern int FUN_002c564c(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 unsigned int FUN_00295d28(unsigned int param_1)
@@ -26,7 +26,7 @@ unsigned int FUN_00295d28(unsigned int param_1)
   unsigned int unaff_r4;
   unsigned int in_lr;
   
-  temp_v0 = FUN_002c564c(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 != 0) {
     return 0;
   }

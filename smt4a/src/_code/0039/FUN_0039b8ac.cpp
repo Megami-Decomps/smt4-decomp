@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
-int FUN_0019a5a0(unsigned int *);
+int jobStop(unsigned int, int);
+int asdMemFree(unsigned int *);
 int FUN_0019a7f4(unsigned int, unsigned int);
-int FUN_002e132c(int);
+int asdTMTexTableFreeEntry(int);
 
 extern unsigned int *DAT_0057f3bc; /* 0x57f3bc */
 extern int DAT_0057f3c4; /* 0x57f3c4 */
@@ -15,11 +15,11 @@ extern unsigned int DAT_0057f430; /* 0x57f430 */
 extern unsigned int DAT_0057f434; /* 0x57f434 */
 extern signed char DAT_0057f438; /* 0x57f438 */
 
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 extern int FUN_0018206c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019a7f4. */
-/* Supplied declaration required: FUN_002e132c. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 extern int FUN_00341940(unsigned int);
 
 
@@ -44,12 +44,12 @@ void FUN_0039b8ac(void)
   else {
     temp_v0 = FUN_00341940(0x35);
     if (temp_v0 != 0) {
-      FUN_002e132c(0x35);
+      asdTMTexTableFreeEntry(0x35);
       DAT_0057f3c4 = 0;
     }
   }
-  FUN_001631d0(*puVar1,0);
-  FUN_0019a5a0(puVar1);
+  jobStop(*puVar1,0);
+  asdMemFree(puVar1);
   DAT_0057f3bc = (unsigned int *)0x0;
   return;
 }

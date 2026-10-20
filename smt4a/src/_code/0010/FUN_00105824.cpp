@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 int FUN_002e6dd4(int, int);
 int FUN_002ea668(int [22]);
 int FUN_002ea6bc(int [22], unsigned char *, int);
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
 /* Supplied declaration required: FUN_002ea668. */
 /* Supplied declaration required: FUN_002ea6bc. */
@@ -45,7 +45,7 @@ void FUN_00105824(int param_1)
     puVar1 = temp_v3;
   }
   temp_v2[0] = param_1 + 0x2c;
-  FUN_002e6354(temp_v2[0],0x41);
+  sysMemClear(temp_v2[0],0x41);
   FUN_002e6dd4(param_1 + 0x6d,0x41);
   rt_memcpy(temp_v2[0],puVar1,temp_v1);
   rt_memcpy(param_1 + 0x6d,puVar1,temp_v1);

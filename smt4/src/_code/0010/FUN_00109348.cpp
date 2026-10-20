@@ -1,43 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00109348` (_code @ 0x109348, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bfab0(unsigned int, unsigned int);
-int FUN_002bfadc(int, unsigned int);
-int FUN_002c39a4(unsigned int);
+typedef struct Unit {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 width;
+    /* 0x18 */ s32 height;
+} Unit;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+typedef struct Overlay {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ u8 shown;
+    /* 0x29 */ u8 unk29;
+    /* 0x2A */ u8 flag;
+    /* 0x2B */ u8 applied;
+} Overlay;
 
-/* Supplied declaration required: FUN_002bfab0. */
-/* Supplied declaration required: FUN_002bfadc. */
-extern int FUN_002c08f0(void);
-/* Supplied declaration required: FUN_002c39a4. */
+typedef struct Context {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ Unit *unit;
+    /* 0x008 */ u8 unk008[0xEF8];
+    /* 0xF00 */ Overlay overlay;
+} Context;
 
+extern u32 g_titleScene;
 
-unsigned int FUN_00109348(void)
+int FUN_002bfab0(Unit *a, Unit *b);
+u8 FUN_002bfadc(int arg, Unit *unit);
+Context *jobGetWork(void);
+int FUN_002c39a4(u32 arg);
 
+/* Script command: if the overlay is shown and not yet applied, resizes the unit through FUN_002bfadc/FUN_002bfab0 (halving its size, the flag takes FUN_002bfadc's result) and marks it applied. */
+u32 FUN_00109348(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  
-  temp_v1 = FUN_002c08f0();
-  if ((*(char *)(temp_v1 + 0xf28) != '\0') && (*(char *)(temp_v1 + 0xf2b) == '\0')) {
-    FUN_002c39a4(DAT_0044ea00);
-    *(unsigned int *)(*(int *)(temp_v1 + 4) + 0x14) = 0x200;
-    *(unsigned int *)(*(int *)(temp_v1 + 4) + 0x18) = 0x200;
-    temp_v0 = 0;
-    FUN_002bfadc(0,*(unsigned int *)(temp_v1 + 4));
-    *(unsigned char *)(temp_v1 + 0xf2a) = temp_v0;
-    FUN_002bfab0(*(unsigned int *)(temp_v1 + 4),*(unsigned int *)(temp_v1 + 4));
-    *(int *)(*(int *)(temp_v1 + 4) + 0x14) = *(int *)(*(int *)(temp_v1 + 4) + 0x14) >> 1;
-    *(int *)(*(int *)(temp_v1 + 4) + 0x18) = *(int *)(*(int *)(temp_v1 + 4) + 0x18) >> 1;
-    *(unsigned char *)(temp_v1 + 0xf2b) = 1;
+    Context *context = jobGetWork();
+    Overlay *overlay = &context->overlay;
+
+    if (overlay->shown == 0) {
+        return 0;
+    }
+    if (overlay->applied != 0) {
+        return 0;
+    }
+    FUN_002c39a4(g_titleScene);
+    context->unit->width = 0x200;
+    context->unit->height = 0x200;
+    context->overlay.flag = FUN_002bfadc(0, context->unit);
+    FUN_002bfab0(context->unit, context->unit);
+    context->unit->width >>= 1;
+    context->unit->height >>= 1;
+    context->overlay.applied = 1;
     return 0;
-  }
-  return 0;
 }
 
 } /* extern "C" */

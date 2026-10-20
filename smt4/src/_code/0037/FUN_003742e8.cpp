@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_3_stack;
 
-extern unsigned int *DAT_004652a0; /* 0x4652a0 */
+extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
 
 /* Supplied declaration required: nw_gfx_internal_FastWordCopyAsm_6. */
 /* Supplied declaration required: nw_gfx_internal_NWCopyVec4Reverse. */
@@ -39,13 +39,13 @@ void FUN_003742e8(int *param_1,unsigned int param_2,int param_3)
   unsigned int temp_v6;
   int temp_v7;
   
-  puVar1 = DAT_004652a0;
-  *DAT_004652a0 = 0x80000015;
+  puVar1 = g_commandBufferCursor;
+  *g_commandBufferCursor = 0x80000015;
   puVar1[1] = 0x804f02c0;
   nw_gfx_internal_NWCopyVec4Reverse(puVar1 + 2,param_3 + 0x20);
-  puVar1 = DAT_004652a0;
-  DAT_004652a0 = DAT_004652a0 + 6;
-  *DAT_004652a0 = 0x80000014;
+  puVar1 = g_commandBufferCursor;
+  g_commandBufferCursor = g_commandBufferCursor + 6;
+  *g_commandBufferCursor = 0x80000014;
   puVar1[7] = 0x804f02c0;
   nw_gfx_internal_NWCopyVec4Reverse(puVar1 + 8,param_3 + 0x10);
   temp_v0 = 0;
@@ -64,10 +64,10 @@ void FUN_003742e8(int *param_1,unsigned int param_2,int param_3)
   else {
     temp_v7 = 0;
   }
-  DAT_004652a0[8] = temp_v0;
-  DAT_004652a0[9] = 0xf01d9;
-  DAT_004652a0[6] = temp_v7;
-  DAT_004652a0[7] = 0x101c2;
+  g_commandBufferCursor[8] = temp_v0;
+  g_commandBufferCursor[9] = 0xf01d9;
+  g_commandBufferCursor[6] = temp_v7;
+  g_commandBufferCursor[7] = 0x101c2;
   if (*param_1 != 0) {
     temp_v6 = *(unsigned int *)(*(int *)(*param_1 + 8) + 200);
     temp_v0 = *(unsigned int *)(param_3 + 0xb4);
@@ -96,9 +96,9 @@ void FUN_003742e8(int *param_1,unsigned int param_2,int param_3)
     temp_v0 = ((temp_v0 & 0xff) << 0x14) | (((temp_v0 & 0xffff) >> 8) << 10) |
             ((temp_v0 & 0xffffff) >> 0x10);
   }
-  DAT_004652a0[10] = temp_v0;
-  DAT_004652a0[0xb] = 0xf01c0;
-  DAT_004652a0 = DAT_004652a0 + 0xc;
+  g_commandBufferCursor[10] = temp_v0;
+  g_commandBufferCursor[0xb] = 0xf01c0;
+  g_commandBufferCursor = g_commandBufferCursor + 0xc;
   temp_v4 = 0;
   if (temp_v4 < (int)temp_v3) {
     do {

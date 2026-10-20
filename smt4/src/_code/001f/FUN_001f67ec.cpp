@@ -13,7 +13,7 @@ int FUN_002c1b64(int, int);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002573c8. */
@@ -41,8 +41,8 @@ void FUN_001f67ec(int param_1)
   temp_v1 = *(unsigned int *)(param_1 + 0xc);
   temp_v0 = *(unsigned char *)(param_1 + 0xf);
   temp_v1 = (temp_v1 << 0x18) | (((temp_v1 >> 8) & 0xff) << 0x10) | (((temp_v1 >> 0x10) & 0xff) << 8);
-  FUN_002c1b64(DAT_0044ea00,0);
-  temp_v5 = DAT_0044ea00;
+  FUN_002c1b64(g_titleScene,0);
+  temp_v5 = g_titleScene;
   temp_v2 = FUN_002c5d80(1,0);
   piVar6 = (int *)(temp_v5 + 0x124c);
   temp_v3 = *piVar6;
@@ -65,8 +65,8 @@ void FUN_001f67ec(int param_1)
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 0x13);
   FUN_0025b750();
-  temp_v5 = DAT_0044ea00;
-  piVar6 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v5 = g_titleScene;
+  piVar6 = (int *)(g_titleScene + 0x124c);
   temp_v2 = *piVar6;
   temp_v3 = piVar6[temp_v2 + 2];
   *piVar6 = temp_v2 - 1;

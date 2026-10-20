@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0018a924(...);
-int FUN_0019a0e8(float [7], float *);
+int mtx44Copy(float [7], float *);
 int nn_math_ARMv6_MTX34CopyAsm(...);
 int nn_math_ARMv6_MTX34MultAsm(...);
 
@@ -81,7 +81,7 @@ extern float DAT_0064c0bc; /* 0x64c0bc */
 extern float DAT_0064c0c0; /* 0x64c0c0 */
 
 /* Supplied declaration required: FUN_0018a924. */
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: mtx44Copy. */
 extern unsigned int FUN_001a1e28(void);
 extern int FUN_002eba64(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
@@ -193,7 +193,7 @@ LAB_001a49b8:
                 DAT_0064c0c0 = temp_v13;
               }
             }
-            FUN_0019a0e8(temp_v19,&DAT_0064c084);
+            mtx44Copy(temp_v19,&DAT_0064c084);
           }
           else {
             temp_v11 = *(float *)(temp_v7 + 0xa4);

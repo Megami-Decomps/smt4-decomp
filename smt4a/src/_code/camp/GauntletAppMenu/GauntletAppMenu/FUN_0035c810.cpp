@@ -5,16 +5,16 @@
 extern "C" {
 
 int FUN_0014e188(...);
-int FUN_0014e38c(...);
+int asdProcessCreateSimple(...);
 int FUN_001505ac(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_001846d0(...);
 int FUN_00184758(...);
 int FUN_00184c00(...);
 int FUN_0020214c(...);
 int FUN_00275bc8(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_003dc0c0(...);
 int FUN_003f86f8(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
@@ -35,28 +35,28 @@ extern unsigned char LAB_0035cac4; /* 0x35cac4 */
 extern unsigned char LAB_0035caf0; /* 0x35caf0 */
 extern unsigned char LAB_0035cb08; /* 0x35cb08 */
 extern int FUN_003ce598(...); /* 0x3ce598 */
-extern int FUN_003d2688(...); /* 0x3d2688 */
-extern int FUN_003d9358(...); /* 0x3d9358 */
+extern int gauntletAppMenuExit(...); /* 0x3d2688 */
+extern int gauntletAppMenuDestroy(...); /* 0x3d9358 */
 extern unsigned char DAT_0052caec; /* 0x52caec */
 extern unsigned char DAT_0052cb28; /* 0x52cb28 */
 extern unsigned char DAT_0052cb88; /* 0x52cb88 */
-extern unsigned int *DAT_0057f238; /* 0x57f238 */
+extern unsigned int *g_gauntletAppMenu; /* 0x57f238 */
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_00184c00. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int FUN_0018719c(unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern unsigned int FUN_00192798(void);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003dc0c0. */
 /* Supplied declaration required: FUN_003f86f8. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -73,18 +73,18 @@ unsigned int FUN_0035c810(void)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  if (DAT_0057f238 == (unsigned int *)0x0) {
+  if (g_gauntletAppMenu == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x538,1);
-    DAT_0057f238 = puVar1;
+    asdMemoryAllocTracked(0x100,0x100,0,0x538,1);
+    g_gauntletAppMenu = puVar1;
   }
-  puVar1 = DAT_0057f238;
-  FUN_002e6354();
+  puVar1 = g_gauntletAppMenu;
+  sysMemClear();
   puVar2 = &LAB_0035caac;
-  FUN_0014e38c(&LAB_0035caac,3,0,0,FUN_003ce598,FUN_003d9358,0);
+  asdProcessCreateSimple(&LAB_0035caac,3,0,0,FUN_003ce598,gauntletAppMenuDestroy,0);
   *puVar1 = (unsigned int)puVar2;
   puVar3 = &LAB_0035cac4;
-  FUN_0015155c(&LAB_0035cac4,0xea,0,0,FUN_003d2688,0,0,puVar2);
+  taskCreateDraw(&LAB_0035cac4,0xea,0,0,gauntletAppMenuExit,0,0,puVar2);
   puVar1[1] = (unsigned int)puVar3;
   temp_v0 = FUN_0018719c(0x520);
   if (temp_v0 != 0) {
@@ -104,10 +104,10 @@ unsigned int FUN_0035c810(void)
   }
   FUN_003dc0c0(puVar1,0);
   FUN_003f86f8(0xd);
-  temp_v1 = FUN_00187180(0xd,0);
-  temp_v2 = FUN_00192798();
+  temp_v1 = dataTableGet(0xd,0);
+  temp_v2 = dataTableGetEntries();
   puVar1[0xab] = temp_v2;
-  temp_v1 = FUN_00192748(temp_v1);
+  temp_v1 = dataTableGetCount(temp_v1);
   puVar1[0xac] = temp_v1;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0xae);
   FUN_001505ac(puVar1 + 0xae,&DAT_0052caec,0x3c,&DAT_0052cb28,0x60,0,0,0,0,&DAT_0052cb88,0x134);

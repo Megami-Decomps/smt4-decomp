@@ -75,7 +75,7 @@ extern unsigned char DAT_00548f38; /* 0x548f38 */
 /* Supplied declaration required: FUN_0045fee8. */
 /* Supplied declaration required: FUN_0045ff50. */
 extern unsigned long long FUN_00460dd8(int, unsigned int, unsigned int);
-extern unsigned int FUN_00507d20(unsigned int, unsigned int);
+extern unsigned int vcallSlot5(unsigned int, unsigned int);
 
 
 unsigned int
@@ -328,7 +328,7 @@ LAB_0045df8c:
         if (temp_v5 != 0) goto LAB_0045e120;
       }
     }
-    temp_v5 = FUN_00507d20(*(unsigned int *)(temp_v39 + 0x110),*(unsigned int *)(temp_v42 + 0x20));
+    temp_v5 = vcallSlot5(*(unsigned int *)(temp_v39 + 0x110),*(unsigned int *)(temp_v42 + 0x20));
     if (temp_v5 == 0) goto LAB_0045e138;
   }
 LAB_0045e120:

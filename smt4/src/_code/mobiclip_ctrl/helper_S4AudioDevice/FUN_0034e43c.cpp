@@ -10,10 +10,10 @@ int FUN_0011cc1c(void);
 int FUN_002bcc54(void);
 int FUN_002bcc60(unsigned int *, int *, unsigned char *, unsigned int [2], unsigned int, int, unsigned int, int);
 int FUN_002bcd44(void);
-int FUN_002c222c(void);
-int FUN_002c32a0(int, int, int, int, int, int);
+int asdOperatorNew(void);
+int memAlloc(int, int, int, int, int, int);
 int FUN_002c38fc(unsigned int *);
-int FUN_002c4938(int, int);
+int memClear(int, int);
 int FUN_002c526c(void);
 int FUN_0035a31c(int, int, int);
 
@@ -49,10 +49,10 @@ extern unsigned int DAT_004c40f8; /* 0x4c40f8 */
 /* Supplied declaration required: FUN_002bcc54. */
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002bcd44. */
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c38fc. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_0035a31c. */
 
@@ -90,15 +90,15 @@ unsigned int FUN_0034e43c(unsigned int *param_1,int param_2,int param_3,int para
       DAT_0044d10c = 0;
       return 0;
     }
-    FUN_002c4938(DAT_0044d100,DAT_0044d10c * 0x70);
+    memClear(DAT_0044d100,DAT_0044d10c * 0x70);
     DAT_0044d110 = 0;
     DAT_0044d114 = 0;
     FUN_002c38fc(&DAT_004c40f8);
     temp_v0 = 0x100;
-    FUN_002c32a0(0x100,0x100,0,0x1000,0x1000,1);
+    memAlloc(0x100,0x100,0,0x1000,0x1000,1);
     puVar2 = (unsigned int *)0x18;
     DAT_0044d104 = temp_v0;
-    FUN_002c222c();
+    asdOperatorNew();
     if (puVar2 != (unsigned int *)0x0) {
       *puVar2 = 0;
       puVar2[1] = 0;

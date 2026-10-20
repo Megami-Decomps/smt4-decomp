@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00162790(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_001879d0(unsigned int);
 int VectorSignedToFloat(int, int);
@@ -17,11 +17,11 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001879d0. */
@@ -42,15 +42,15 @@ void FUN_0049d244(int param_1,int param_2,int param_3)
   
   temp_v4 = 0.25f;
   temp_v5 = 0x3e80000000000000;
-  FUN_001879d0(DAT_0059dbb4);
+  FUN_001879d0(g_renderCtx);
   if (*(char *)(param_1 + 4) == '\b' || *(char *)(param_1 + 4) == '\t') {
-    FUN_001677c0();
+    efctSetSpeed();
     temp_v3 = (float)((unsigned long long)temp_v5 >> 0x20);
-    FUN_001879d0(DAT_0059dbb4);
+    FUN_001879d0(g_renderCtx);
     FUN_001835b4(2,0x33,0x2e,(int)temp_v3,0,0x65);
-    FUN_001677c0();
+    efctSetSpeed();
   }
-  FUN_001677c0();
+  efctSetSpeed();
   temp_v2 = 0;
   do {
     FUN_001835b4(2,0x33,temp_v2,(int)temp_v4 + param_2,param_3,0x65);
@@ -66,10 +66,10 @@ void FUN_0049d244(int param_1,int param_2,int param_3)
     return;
   }
   temp_v4 = temp_v3;
-  FUN_001879d0(DAT_0059dbb4);
+  FUN_001879d0(g_renderCtx);
   FUN_001835b4(2,0x33,3,param_2 + (int)temp_v3,param_3,0x65);
   temp_v2 = FUN_001834a4(0x33,4);
-  FUN_001879d0(DAT_0059dbb4);
+  FUN_001879d0(g_renderCtx);
   temp_v1 = (int)*(short *)(temp_v2 + 8) + (int)temp_v4 + param_2;
   VectorSignedToFloat(0x96,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);

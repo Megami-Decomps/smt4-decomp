@@ -21,7 +21,7 @@ typedef struct {
 
 extern unsigned int FUN_0014bef4(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0019e4d4(unsigned int);
+extern int slotRecordFindById(unsigned int);
 extern int FUN_001ab854(int);
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_0023e32c. */
@@ -67,7 +67,7 @@ unsigned int FUN_004db914(unsigned short *param_1,unsigned short *param_2,unsign
   temp_v9 = temp_v1 + (unsigned int)puVar5[3];
   temp_v2 = FUN_0014bef4(99);
   if (temp_v2 < 5) {
-    temp_v1 = FUN_0019e4d4(0x218);
+    temp_v1 = slotRecordFindById(0x218);
     if (temp_v1 == 0) {
       puVar16 = (unsigned short *)0x218;
       *param_4 = *param_4;

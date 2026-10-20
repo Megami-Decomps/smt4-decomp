@@ -12,13 +12,13 @@ int VectorUnsignedToFloat(unsigned int, int);
 
 extern unsigned int DAT_0057aa98; /* 0x57aa98 */
 extern unsigned int DAT_0057aa9c; /* 0x57aa9c */
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0014e314. */
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_0016c4b8. */
 extern int FUN_003ec620(int, unsigned int);
 
@@ -37,7 +37,7 @@ unsigned int FUN_002987c4(void)
   unsigned char temp_v6;
   unsigned int in_fpscr;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   piVar2 = (int *)(temp_v0 + 0x1edc);
   temp_v3 = *piVar2;
   temp_v4 = temp_v3 + 1;
@@ -47,7 +47,7 @@ unsigned int FUN_002987c4(void)
   }
   if ((DAT_0057aa98 & *(unsigned int *)(temp_v0 + 0x45a8)) != 0 ||
       (DAT_0057aa9c & *(unsigned int *)(temp_v0 + 0x45ac)) != 0) {
-    FUN_0016c4b8(DAT_0059dbb4,0);
+    FUN_0016c4b8(g_renderCtx,0);
     temp_v5 = 0;
     do {
       temp_v3 = 4;

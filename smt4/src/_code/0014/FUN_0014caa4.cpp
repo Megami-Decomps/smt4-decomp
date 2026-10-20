@@ -19,8 +19,8 @@ typedef struct {
 /* Supplied declaration required: FUN_002ac0c4. */
 /* Supplied declaration required: FUN_002ac0f8. */
 extern int FUN_002ac12c(unsigned int);
-extern int FUN_002c0c74(unsigned int);
-extern int FUN_002c0cc4(void);
+extern int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 
 
 int FUN_0014caa4(int param_1,int param_2,int param_3)
@@ -54,14 +54,14 @@ int FUN_0014caa4(int param_1,int param_2,int param_3)
             if (*(char *)(temp_v1 + temp_v6 * 0x40) == '\v') {
               temp_v9 = *(unsigned int *)(*(int *)(temp_v7 + 0x4c) + temp_v6 * 0x10);
               temp_v3 = FUN_002ac068(temp_v9,0);
-              temp_v0 = FUN_002c0cc4();
-              temp_v4 = FUN_002c0c74(temp_v3);
+              temp_v0 = dataTableGetEntries();
+              temp_v4 = dataTableGetCount(temp_v3);
               temp_v5 = 0;
               if (0 < temp_v4) {
                 do {
                   if (temp_v0 + temp_v5 * 0x2c == param_2) {
                     FUN_002ac068(temp_v9,*(unsigned char *)(param_2 + 0x2a));
-                    temp_v8 = FUN_002c0cc4();
+                    temp_v8 = dataTableGetEntries();
                     return (temp_v8 + param_3 * 0x14) - 0x10;
                   }
                   temp_v5 = temp_v5 + 1;

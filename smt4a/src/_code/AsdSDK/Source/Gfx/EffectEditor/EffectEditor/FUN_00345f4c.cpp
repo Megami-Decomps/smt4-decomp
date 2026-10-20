@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00164af0(...);
 int FUN_001656a0(...);
-int FUN_00167ab4(...);
+int memAlloc(...);
 int FUN_00200bcc(unsigned char *);
 int FUN_00202178(...);
 int FUN_0020e9dc(unsigned char *);
@@ -51,7 +51,7 @@ extern float DAT_00635340; /* 0x635340 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_00164af0. */
 /* Supplied declaration required: FUN_001656a0. */
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00200bcc. */
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: FUN_0020e9dc. */
@@ -246,7 +246,7 @@ LAB_00346144:
     temp_v10 = (int)(temp_v15[temp_v5] * temp_v12);
     temp_v6 = temp_v10 + 0xa8;
     temp_v2 = 0x10000;
-    FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+    memAlloc(0x10000,0x100,0,0x68,0x10,1);
     *(unsigned int *)(temp_v2 + 0xc) = 0x74;
     *(int *)(temp_v2 + 0x10) = ((int)(temp_v8 * temp_v12) + 0xa8) - temp_v6;
     *(unsigned int *)(temp_v2 + 0x14) = 0x10;
@@ -258,7 +258,7 @@ LAB_00346144:
     if (temp_v5 == DAT_0059dc34) {
       temp_v10 = temp_v10 + 0xa7;
       temp_v2 = 0x10000;
-      FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+      memAlloc(0x10000,0x100,0,0x68,0x10,1);
       *(int *)(temp_v2 + 8) = temp_v10;
       *(unsigned int *)(temp_v2 + 0x18) = 0xff00ff00;
       *(unsigned int *)(temp_v2 + 4) = 6;
@@ -267,7 +267,7 @@ LAB_00346144:
       *(unsigned int *)(temp_v2 + 0x14) = 0x88;
       FUN_00300124();
       temp_v2 = 0x10000;
-      FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+      memAlloc(0x10000,0x100,0,0x68,0x10,1);
       *(unsigned int *)(temp_v2 + 0x18) = 0xff00ff00;
       *(int *)(temp_v2 + 8) = temp_v6;
       *(unsigned int *)(temp_v2 + 0xc) = 0x70;
@@ -277,7 +277,7 @@ LAB_00346144:
     }
     else {
       temp_v2 = 0x10000;
-      FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+      memAlloc(0x10000,0x100,0,0x68,0x10,1);
       *(unsigned int *)(temp_v2 + 4) = 6;
       *(int *)(temp_v2 + 8) = temp_v6;
       *(unsigned int *)(temp_v2 + 0xc) = 0x70;
@@ -289,7 +289,7 @@ LAB_00346144:
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 3);
   temp_v2 = 0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+  memAlloc(0x10000,0x100,0,0x68,0x10,1);
   *(unsigned int *)(temp_v2 + 4) = 6;
   *(unsigned int *)(temp_v2 + 8) = 0x160;
   *(unsigned int *)(temp_v2 + 0xc) = 0x70;

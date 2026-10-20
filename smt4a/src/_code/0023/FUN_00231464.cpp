@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_0016007c(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdOperatorNew(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -22,9 +22,9 @@ extern unsigned char LAB_00330a58; /* 0x330a58 */
 extern unsigned char LAB_00330a60; /* 0x330a60 */
 extern unsigned int *DAT_0057f678; /* 0x57f678 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdOperatorNew. */
 
 
 void FUN_00231464(void)
@@ -35,7 +35,7 @@ void FUN_00231464(void)
   char *pcVar2;
   
   puVar1 = (unsigned int *)0x3c;
-  FUN_0016007c();
+  asdOperatorNew();
   if (puVar1 == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x0;
   }
@@ -48,11 +48,11 @@ void FUN_00231464(void)
   }
   pcVar2 = "GAME_OVER_BASE PROC";
   DAT_0057f678 = puVar1;
-  FUN_0014e38c("GAME_OVER_BASE PROC",4,0,0,&LAB_002e5ba0,FUN_002e5b68,0);
+  asdProcessCreateSimple("GAME_OVER_BASE PROC",4,0,0,&LAB_002e5ba0,FUN_002e5b68,0);
   *puVar1 = (unsigned int)pcVar2;
-  FUN_0015155c("GAME_OVER UL",0x7e,0,0,&LAB_00330a60,0,0,pcVar2);
-  FUN_0015155c("GAME_OVER UR",0xda,0,0,&LAB_00330a60,0,0,*puVar1);
-  FUN_0015155c("GAME_OVER DD",0xeb,0,0,&LAB_00330a58,0,0,*puVar1);
+  taskCreateDraw("GAME_OVER UL",0x7e,0,0,&LAB_00330a60,0,0,pcVar2);
+  taskCreateDraw("GAME_OVER UR",0xda,0,0,&LAB_00330a60,0,0,*puVar1);
+  taskCreateDraw("GAME_OVER DD",0xeb,0,0,&LAB_00330a58,0,0,*puVar1);
   return;
 }
 

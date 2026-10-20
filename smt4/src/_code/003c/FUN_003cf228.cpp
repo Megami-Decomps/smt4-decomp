@@ -8,7 +8,7 @@ int FUN_00227b14(unsigned int, int, int);
 int FUN_00229b10(int *, unsigned int *);
 int FUN_0022a5d8(int, unsigned int, int);
 int FUN_0022abe0(unsigned int, unsigned short [10]);
-int FUN_0024c614(int *, int, int);
+int btlUnitSetParam(int *, int, int);
 int FUN_002ae164(void);
 int FUN_002b7bca(unsigned short [10], int, int, unsigned char *);
 
@@ -23,15 +23,15 @@ typedef struct {
 
 extern unsigned char LAB_0032c6d8; /* 0x32c6d8 */
 extern unsigned char LAB_00333670; /* 0x333670 */
-extern unsigned char DAT_00434278; /* 0x434278 */
+extern unsigned char g_btlAction; /* 0x434278 */
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00227b14. */
 /* Supplied declaration required: FUN_00229b10. */
 /* Supplied declaration required: FUN_0022a5d8. */
 /* Supplied declaration required: FUN_0022abe0. */
-extern int FUN_0023eae0(unsigned int);
-/* Supplied declaration required: FUN_0024c614. */
+extern int randRange(unsigned int);
+/* Supplied declaration required: btlUnitSetParam. */
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002b7bca. */
 
@@ -46,7 +46,7 @@ unsigned int FUN_003cf228(int *param_1,unsigned int *param_2)
   unsigned char temp_v3;
   unsigned short temp_v4 [10];
   
-  temp_v0 = FUN_0023eae0(1);
+  temp_v0 = randRange(1);
   temp_v2 = 0;
   if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x40000) == 0 && temp_v0 == 1) {
     temp_v4[0] = 0;
@@ -88,17 +88,17 @@ unsigned int FUN_003cf228(int *param_1,unsigned int *param_2)
       FUN_002b7bca(temp_v4,9,2,&LAB_00333670);
       FUN_0022a5d8(10,param_2[8],1);
       FUN_002b7bca(temp_v4,temp_v2,2,&LAB_0032c6d8);
-      temp_v0 = FUN_0023eae0((temp_v2 - 1U) & 0xffff);
+      temp_v0 = randRange((temp_v2 - 1U) & 0xffff);
       *(unsigned short *)(param_2[10] + 0x14c) = 2;
       *(unsigned short *)(param_2[10] + 0x14e) = temp_v4[temp_v0];
       *param_2 = *param_2 | 0x8000;
       temp_v1 = (unsigned int)temp_v4[temp_v0];
       FUN_002ae164();
       if ((*(unsigned int *)(temp_v1 + 0x28) & 0x1ff) >> 5 == 4) {
-        FUN_0024c614(param_1,0xf,0);
+        btlUnitSetParam(param_1,0xf,0);
       }
       else {
-        FUN_0024c614(param_1,2,0);
+        btlUnitSetParam(param_1,2,0);
       }
       FUN_00229b10(param_1,param_2);
       return 1;
@@ -109,7 +109,7 @@ unsigned int FUN_003cf228(int *param_1,unsigned int *param_2)
     FUN_00227b14(DAT_00439ca8,(short)param_2[0xb],0);
   }
   *(unsigned short *)(param_2[10] + 0x14c) = 0xf;
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_00434278 + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x13;
+  *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x13;
   return 1;
 }
 

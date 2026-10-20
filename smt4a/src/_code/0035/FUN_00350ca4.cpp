@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_001800b8(void);
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_002e3328(void);
 int FUN_00412f9c(void);
 int FUN_0041302c(void);
@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_001800b8. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002e3328. */
 /* Supplied declaration required: FUN_00412f9c. */
 /* Supplied declaration required: FUN_0041302c. */
@@ -34,8 +34,8 @@ void FUN_00350ca4(int *param_1)
   if (param_1[5] != 0) {
     FUN_001800b8();
   }
-  FUN_0019a5a0(param_1[1]);
-  FUN_0019a5a0(param_1);
+  asdMemFree(param_1[1]);
+  asdMemFree(param_1);
   return;
 }
 

@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_003283c8(int);
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-extern int FUN_0014aa78(void);
-extern unsigned int FUN_00236038(void);
+extern int btlGetMainState(void);
+extern unsigned int scrGetArg(void);
 /* Supplied declaration required: FUN_003283c8. */
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 unsigned int FUN_003b7f10(void)
@@ -21,10 +21,10 @@ unsigned int FUN_003b7f10(void)
   unsigned int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00236038();
-  temp_v1 = FUN_004ee568(DAT_0057113c);
+  temp_v0 = scrGetArg();
+  temp_v1 = btlUnitGet(g_btlScriptUnit);
   *(unsigned short *)(*(int *)(temp_v1 + 0x28) + 0x1be) = 0xc;
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   *(unsigned int *)(temp_v1 + 0x2008) = temp_v0 | 0x40000;
   *(int *)(temp_v1 + 0x200c) = (int)(temp_v0 | 0x40000) >> 0x1f;
   FUN_003283c8(1);

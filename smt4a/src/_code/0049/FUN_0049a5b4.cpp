@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0010063a(int, int, int, unsigned char *);
-int FUN_002e6354(int, int);
+int qsort(int, int, int, unsigned char *);
+int sysMemClear(int, int);
 int FUN_00480838(unsigned int);
 int FUN_0049cd18(unsigned int *, int, int);
 int FUN_004cfeb0(int, int, int, int);
@@ -28,10 +28,10 @@ extern unsigned char LAB_00494398; /* 0x494398 */
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern unsigned short *FUN_00145f04(unsigned char, unsigned int);
 extern int FUN_001ba3d0(unsigned int);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00480838. */
 extern int FUN_00481100(unsigned int);
 extern unsigned int FUN_0049c848(unsigned int, unsigned int, unsigned int);
@@ -72,7 +72,7 @@ void FUN_0049a5b4(int param_1)
   *(unsigned short *)(param_1 + 0x15ffc) = 0;
   *(unsigned int *)(param_1 + 0x16000) = 0;
   temp_v16 = param_1;
-  FUN_002e6354(temp_v9,0xc000);
+  sysMemClear(temp_v9,0xc000);
   temp_v14 = (unsigned short *)
              FUN_00145f04(*(unsigned char *)(temp_v16 + 0x18),*(unsigned int *)(temp_v16 + 0x1c));
   temp_v8 = 0x3b7;
@@ -135,7 +135,7 @@ LAB_0049a714:
     temp_v3 = temp_v16;
     temp_v8 = temp_v8 + 1;
     if (temp_v8 >= 0x47f) {
-      FUN_0010063a(temp_v9,*(unsigned short *)(temp_v16 + 0x15ffc),6,&LAB_00494398);
+      qsort(temp_v9,*(unsigned short *)(temp_v16 + 0x15ffc),6,&LAB_00494398);
       temp_v12 = 1;
       temp_v9 = temp_v16 + 0x9f88;
       temp_v13 = 1;

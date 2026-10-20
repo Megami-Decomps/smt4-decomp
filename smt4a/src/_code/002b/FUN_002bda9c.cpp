@@ -6,13 +6,13 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_00100388(...);
-int FUN_00164a9c(...);
+int jobGetWork(...);
 int FUN_001656a0(...);
 int FUN_00167618(...);
 int FUN_0016c4b8(...);
 int FUN_00182884(...);
 int FUN_002be8d0(void);
-int FUN_003174bc(...);
+int asdListBoxFindItem(...);
 int FUN_00317af8(float *, float *, int);
 int SBORROW4(unsigned int, int);
 int SUB84(double, int);
@@ -42,7 +42,7 @@ extern unsigned char LAB_002be3a0; /* 0x2be3a0 */
 extern unsigned char LAB_002be3a8; /* 0x2be3a8 */
 extern unsigned char LAB_002be3b0; /* 0x2be3b0 */
 extern unsigned char LAB_002be3c4; /* 0x2be3c4 */
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -60,15 +60,15 @@ extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_00163fd4(unsigned int);
-/* Supplied declaration required: FUN_00164a9c. */
+/* Supplied declaration required: jobGetWork. */
 extern int FUN_00164af0(unsigned int);
 /* Supplied declaration required: FUN_001656a0. */
 /* Supplied declaration required: FUN_00167618. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_00182884. */
 /* Supplied declaration required: FUN_002be8d0. */
-extern int FUN_002e3390(void);
-/* Supplied declaration required: FUN_003174bc. */
+extern int wstrlen(void);
+/* Supplied declaration required: asdListBoxFindItem. */
 /* Supplied declaration required: FUN_00317af8. */
 
 
@@ -115,7 +115,7 @@ unsigned int FUN_002bda9c(unsigned int param_1)
   
   pfVar4 = &temp_v15;
   pfVar6 = &temp_v15;
-  piVar2 = (int *)FUN_00164a9c();
+  piVar2 = (int *)jobGetWork();
   temp_v3 = piVar2[0xd];
   switch(piVar2[0xd]) {
   case 0:
@@ -180,7 +180,7 @@ LAB_002be87c:
       temp_v16 = 1.0f;
       temp_v17 = 1.0f;
       temp_v18 = 1.0f;
-      FUN_0016c4b8(DAT_0059dbb4,0);
+      FUN_0016c4b8(g_renderCtx,0);
       temp_v13 = 0.003921569f;
       temp_v3 = *(unsigned int *)("ჿတ胿肀⃿₀胿" + (unsigned int)*(unsigned char *)(piVar2 + 0xf) * 0x10);
       temp_v15 = (float)VectorUnsignedToFloat(temp_v3 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -225,7 +225,7 @@ LAB_002be87c:
         temp_v16 = temp_v10;
         temp_v17 = temp_v10;
         temp_v18 = temp_v10;
-        FUN_0016c4b8(DAT_0059dbb4,0);
+        FUN_0016c4b8(g_renderCtx,0);
         temp_v1 = piVar2[0x17];
         VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -313,7 +313,7 @@ joined_r0x002bdf80:
             default:
               break;
             case 1:
-              temp_v4 = FUN_002e3390();
+              temp_v4 = wstrlen();
               temp_v12 = (float)VectorUnsignedToFloat
                                         ((temp_v4 + 1) * piVar2[0x16],(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v19 = temp_v19 - temp_v12;
@@ -383,10 +383,10 @@ joined_r0x002bdf80:
             temp_v6 = 100000;
             temp_v12 = 0.01f;
             if (temp_v1 != 0) {
-              temp_v1 = FUN_00164a9c(param_1);
+              temp_v1 = jobGetWork(param_1);
               temp_v4 = *(int *)(temp_v1 + 0x60);
               temp_v1 = *(int *)(temp_v1 + 100);
-              piVar10 = (int *)FUN_00164a9c(param_1);
+              piVar10 = (int *)jobGetWork(param_1);
               piVar10 = (int *)*piVar10;
               for (unique0x100009de = *piVar10; piVar10 != (int *)0x0; unique0x100009e6 = piVar10[6]
                   ) {
@@ -396,7 +396,7 @@ joined_r0x002bdf80:
                 }
                 piVar10 = (int *)piVar10[6];
               }
-              temp_v1 = FUN_003174bc(param_1,temp_v7);
+              temp_v1 = asdListBoxFindItem(param_1,temp_v7);
               temp_v3 = 0;
               if (temp_v1 != 0) {
                 temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 4);
@@ -481,10 +481,10 @@ LAB_002be734:
             else {
               temp_v1 = FUN_00164af0(4);
               if (temp_v1 != 0) {
-                temp_v1 = FUN_00164a9c(param_1);
+                temp_v1 = jobGetWork(param_1);
                 temp_v4 = *(int *)(temp_v1 + 0x60);
                 temp_v1 = *(int *)(temp_v1 + 100);
-                piVar10 = (int *)FUN_00164a9c(param_1);
+                piVar10 = (int *)jobGetWork(param_1);
                 piVar10 = (int *)*piVar10;
                 for (unique0x1000099a = *piVar10; piVar10 != (int *)0x0;
                     unique0x100009a2 = piVar10[6]) {
@@ -494,7 +494,7 @@ LAB_002be734:
                   }
                   piVar10 = (int *)piVar10[6];
                 }
-                temp_v1 = FUN_003174bc(param_1,temp_v7);
+                temp_v1 = asdListBoxFindItem(param_1,temp_v7);
                 temp_v3 = 0;
                 if (temp_v1 != 0) {
                   temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 4);
@@ -565,10 +565,10 @@ LAB_002be734:
                 temp_v1 = FUN_001656a0(0);
                 temp_v3 = 0;
                 if (temp_v1 != 0) {
-                  temp_v1 = FUN_00164a9c(param_1);
+                  temp_v1 = jobGetWork(param_1);
                   temp_v4 = *(int *)(temp_v1 + 0x60);
                   temp_v1 = *(int *)(temp_v1 + 100);
-                  piVar10 = (int *)FUN_00164a9c(param_1);
+                  piVar10 = (int *)jobGetWork(param_1);
                   piVar10 = (int *)*piVar10;
                   for (unique0x1000093a = *piVar10; piVar10 != (int *)0x0;
                       unique0x10000942 = piVar10[6]) {
@@ -578,7 +578,7 @@ LAB_002be734:
                     }
                     piVar10 = (int *)piVar10[6];
                   }
-                  temp_v14 = FUN_003174bc(param_1,temp_v7);
+                  temp_v14 = asdListBoxFindItem(param_1,temp_v7);
                   pcVar9 = (romwright_code *)((unsigned long long)temp_v14 >> 0x20);
                   temp_v3 = (unsigned int)temp_v14;
                   if (temp_v3 != 0) {

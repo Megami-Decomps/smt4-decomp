@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026a55c(void);
+int guestWinRequestClose(void);
 int FUN_0028fc60(void);
 int FUN_00299174(...);
 int FUN_00299218(int, unsigned int);
@@ -17,7 +17,7 @@ int FUN_0029ee6c(int, int);
 int FUN_0029efd8(int, int);
 int FUN_0029f5d8(int, unsigned int, int, int, int, int, char [4], int, int);
 int FUN_002bc01c(void);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002c1658(...);
 
 /* stack frame of param_1: 5 slot(s), 17 byte(s) */
@@ -31,7 +31,7 @@ typedef struct {
 
 extern int DAT_0043da90; /* 0x43da90 */
 
-/* Supplied declaration required: FUN_0026a55c. */
+/* Supplied declaration required: guestWinRequestClose. */
 /* Supplied declaration required: FUN_0028fc60. */
 /* Supplied declaration required: FUN_00299174. */
 /* Supplied declaration required: FUN_00299218. */
@@ -48,7 +48,7 @@ extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_0029f5d8. */
 extern unsigned char FUN_002b898c(void);
 /* Supplied declaration required: FUN_002bc01c. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 
@@ -98,7 +98,7 @@ void FUN_00331158(int param_1)
         FUN_002c1658();
         if (temp_v3 != 0) {
           FUN_00299900(0);
-          FUN_002bd8e8(temp_v0 + 0x6d4,3,0);
+          timerStart(temp_v0 + 0x6d4,3,0);
           *(unsigned int *)(temp_v0 + 0x20) = 6;
           temp_v0 = DAT_0043da90;
           puVar7 = (unsigned int *)(DAT_0043da90 + 0x18);
@@ -150,7 +150,7 @@ void FUN_00331158(int param_1)
         FUN_0028fc60();
         if (temp_v5 != 0) {
           *(unsigned int *)(temp_v0 + 0x2c) = (unsigned int)*(unsigned short *)(temp_v3 + 0x147c);
-          FUN_002bd8e8(temp_v0 + 0x6d4,3,0);
+          timerStart(temp_v0 + 0x6d4,3,0);
           *(unsigned int *)(temp_v0 + 0x20) = 0xb;
           temp_v0 = DAT_0043da90;
           puVar7 = (unsigned int *)(DAT_0043da90 + 0x18);
@@ -159,7 +159,7 @@ void FUN_00331158(int param_1)
           *(unsigned int *)(temp_v0 + 0x1c) = 0;
           *(unsigned int *)(temp_v0 + 0x14) = 0;
           FUN_00299174(temp_v6,1);
-          FUN_0026a55c();
+          guestWinRequestClose();
           FUN_0029cc44(1);
         }
       }

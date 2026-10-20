@@ -15,7 +15,7 @@ typedef struct {
 extern int DAT_004e316c; /* 0x4e316c */
 
 /* Supplied declaration required: FUN_002c1dd8. */
-extern int FUN_002c564c(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 extern int FUN_002e14e4(unsigned int);
 /* Supplied declaration required: nw_snd_SoundHeap_LoadState. */
 
@@ -28,7 +28,7 @@ int FUN_00394a50(void)
   int temp_v1;
   int in_r3;
   
-  temp_v0 = FUN_002c564c(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 != 0) {
     return temp_v0;
   }

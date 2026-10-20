@@ -10,10 +10,10 @@ int FUN_001418fc(int);
 int FUN_0014f0dc(int, int, float *, int);
 int FUN_001523b8(int, int);
 int FUN_00154180(int, int, int, int);
-int FUN_00163060(int, int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_002e6354(void);
+int sysMemClear(void);
 int FUN_0036b824(int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -25,7 +25,7 @@ typedef struct {
 } param_1_stack;
 
 extern int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_0057f294; /* 0x57f294 */
+extern int g_uniteCamera; /* 0x57f294 */
 
 /* Supplied declaration required: FUN_0013c884. */
 /* Supplied declaration required: FUN_00140e38. */
@@ -33,10 +33,10 @@ extern int DAT_0057f294; /* 0x57f294 */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
 /* Supplied declaration required: FUN_00154180. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0036b824. */
 
 
@@ -51,13 +51,13 @@ void FUN_002859d8(unsigned int param_1)
   float temp_v3;
   float temp_v4;
   
-  if (DAT_0057f294 == 0) {
+  if (g_uniteCamera == 0) {
     temp_v0 = 0x100;
-    FUN_00163060(0x100,0x100,0,0x510,1);
-    DAT_0057f294 = temp_v0;
+    asdMemoryAllocTracked(0x100,0x100,0,0x510,1);
+    g_uniteCamera = temp_v0;
   }
-  temp_v0 = DAT_0057f294;
-  FUN_002e6354();
+  temp_v0 = g_uniteCamera;
+  sysMemClear();
   *(unsigned int *)(temp_v0 + 0x50c) = param_1;
   FUN_00154180(0,0,400,0xf0);
   pfVar2 = *(float **)(temp_v0 + 0x50c);

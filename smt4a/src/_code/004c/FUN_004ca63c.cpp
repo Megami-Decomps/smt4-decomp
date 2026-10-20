@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0019cac4(void);
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 int FUN_002e6dd4(int, int);
 int FUN_003edaf0(unsigned int *, int);
 int FUN_003f1138(void);
@@ -41,8 +41,8 @@ extern unsigned int FUN_0015688c(void);
 extern unsigned int FUN_001801a4(void);
 /* Supplied declaration required: FUN_0019cac4. */
 extern unsigned int FUN_001ab854(void);
-extern unsigned int FUN_002919a4(void);
-/* Supplied declaration required: FUN_002e6354. */
+extern unsigned int btlMainGetUnk14(void);
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
 extern unsigned int *FUN_003e83b4(unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_003edaf0. */
@@ -129,15 +129,15 @@ void FUN_004ca63c(unsigned int *param_1,int param_2,int param_3,int param_4,int 
         temp_v1 = FUN_001ab854();
       }
       else {
-        temp_v1 = FUN_002919a4();
+        temp_v1 = btlMainGetUnk14();
       }
       puVar3[0xff] = temp_v1;
     }
     *(short *)(param_1 + 0x800) = (short)param_1[0x800] + 1;
   }
   *(short *)(puVar3 + 2) = (short)param_4;
-  FUN_002e6354(puVar3 + 0x1d,200);
-  FUN_002e6354(puVar3 + 0x4f,0x12);
+  sysMemClear(puVar3 + 0x1d,200);
+  sysMemClear(puVar3 + 0x4f,0x12);
   puVar3[0xe5] = 0;
   puVar3[0xe6] = 0;
   puVar3[0xe7] = 0;

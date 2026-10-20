@@ -8,9 +8,9 @@ int FUN_00103c9c(void);
 int FUN_00223898(unsigned char *, int);
 int FUN_00296f4c(unsigned int, int);
 int FUN_00297060(void);
-int FUN_002a7218(void);
+int scrScriptProcessDestroy(void);
 int FUN_002c40f8(unsigned char *, int *, int, int, int, int);
-int FUN_002c415c(void);
+int asdMemFree(void);
 int FUN_002c526c(void);
 int FUN_002c56dc(int);
 int FUN_002c5728(int);
@@ -35,9 +35,9 @@ extern unsigned int FUN_001c0954(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00223898. */
 /* Supplied declaration required: FUN_00296f4c. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_002c56dc. */
 /* Supplied declaration required: FUN_002c5728. */
@@ -122,19 +122,19 @@ unsigned int FUN_001a1d08(unsigned int param_1,int param_2)
     }
     puVar1 = DAT_0043e314;
     if (*(int *)(DAT_0043e314 + 0x58) != 0) {
-      FUN_002a7218();
+      scrScriptProcessDestroy();
       *(unsigned int *)(puVar1 + 0x58) = 0;
     }
     if (*(int *)(puVar1 + 0x50) != 0) {
-      FUN_002c415c();
+      asdMemFree();
       *(unsigned int *)(puVar1 + 0x50) = 0;
     }
     if (*(int *)(puVar1 + 0x54) != 0) {
-      FUN_002c415c();
+      asdMemFree();
       *(unsigned int *)(puVar1 + 0x54) = 0;
     }
     if (DAT_0043e314 != (unsigned char *)0x0) {
-      FUN_002c415c();
+      asdMemFree();
     }
     DAT_0043e314 = (unsigned char *)0x0;
     return 1;

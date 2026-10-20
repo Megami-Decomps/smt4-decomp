@@ -7,7 +7,7 @@ extern "C" {
 extern unsigned char DAT_005f1748; /* 0x5f1748 */
 extern unsigned char DAT_005f1749; /* 0x5f1749 */
 
-extern int FUN_00236038(unsigned int);
+extern int scrGetArg(unsigned int);
 
 
 unsigned int FUN_003c3dc0(void)
@@ -15,9 +15,9 @@ unsigned int FUN_003c3dc0(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_00236038(0);
+  temp_v0 = scrGetArg(0);
   DAT_005f1748 = temp_v0 != 0;
-  temp_v0 = FUN_00236038(1);
+  temp_v0 = scrGetArg(1);
   DAT_005f1749 = temp_v0 != 0;
   return 1;
 }

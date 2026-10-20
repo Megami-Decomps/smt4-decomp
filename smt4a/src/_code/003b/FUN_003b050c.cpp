@@ -8,7 +8,7 @@ int FUN_003a3638(void);
 int VectorSignedToFloat(unsigned int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_003a3638. */
 
 
@@ -20,8 +20,8 @@ unsigned int FUN_003b050c(void)
   unsigned int temp_v1;
   unsigned int in_fpscr;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
   VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_003a3638();

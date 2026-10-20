@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0013b218(void);
-int FUN_002c1364(char *, unsigned int, unsigned int, int);
+int asdModelForwardChecked(char *, unsigned int, unsigned int, int);
 int FUN_002c1398(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -52,7 +52,7 @@ extern unsigned int *DAT_00471a8c; /* 0x471a8c */
 extern unsigned int DAT_004e6c5c; /* 0x4e6c5c */
 
 /* Supplied declaration required: FUN_0013b218. */
-/* Supplied declaration required: FUN_002c1364. */
+/* Supplied declaration required: asdModelForwardChecked. */
 /* Supplied declaration required: FUN_002c1398. */
 extern unsigned int FUN_002c30c4(void);
 extern unsigned int nn_gxlow_CTR_Gpu_AcquireRight(unsigned int, unsigned int, unsigned char);
@@ -81,7 +81,7 @@ void FUN_001299f8(void)
   }
   temp_v0 = (*(unsigned int *)&s_______00471a73.u1[1]);
   temp_v1 = FUN_002c30c4();
-  FUN_002c1364(s_______00471a73.whole + 0xd,temp_v0,temp_v1,0);
+  asdModelForwardChecked(s_______00471a73.whole + 0xd,temp_v0,temp_v1,0);
   DAT_00471a84 = (*(unsigned int *)0x00471a80);
   nn_gxlow_CTR_Gpu_AcquireRight((unsigned int)&DAT_00471a84,0xffff8001,(unsigned char)DAT_00471a72);
   DAT_00431c40 = 0;

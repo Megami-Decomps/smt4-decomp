@@ -17,7 +17,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
 /* Supplied declaration required: FUN_0023dc38. */
 extern unsigned int FUN_0028d320(void);
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b4670. */
 /* Supplied declaration required: FUN_0033fe6c. */
@@ -46,7 +46,7 @@ unsigned int FUN_0028cfd8(int param_1,unsigned int param_2,unsigned int param_3,
       temp_v0 = FUN_0028d320();
       return temp_v0;
     }
-    temp_v1 = FUN_002939f4();
+    temp_v1 = btlGetMainState();
     if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x2000000) == 0) {
       temp_v6 = 0;
       do {

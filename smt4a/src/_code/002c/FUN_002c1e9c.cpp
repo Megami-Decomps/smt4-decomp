@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0016a0f0(int);
-int FUN_00187180(...);
-int FUN_00192798(void);
+int dataTableGet(...);
+int dataTableGetEntries(void);
 
 /* Supplied declaration required: FUN_0016a0f0. */
-/* Supplied declaration required: FUN_00187180. */
-extern unsigned int FUN_00192748(unsigned int);
-/* Supplied declaration required: FUN_00192798. */
+/* Supplied declaration required: dataTableGet. */
+extern unsigned int dataTableGetCount(unsigned int);
+/* Supplied declaration required: dataTableGetEntries. */
 extern unsigned int FUN_0048168c(void);
 
 
@@ -29,16 +29,16 @@ void FUN_002c1e9c(void)
   
   FUN_0016a0f0(0x19);
   temp_v0 = FUN_0048168c();
-  temp_v1 = FUN_00187180(0x19,0);
-  temp_v2 = FUN_00192798();
-  temp_v3 = FUN_00192748(temp_v1);
+  temp_v1 = dataTableGet(0x19,0);
+  temp_v2 = dataTableGetEntries();
+  temp_v3 = dataTableGetCount(temp_v1);
   temp_v5 = 0;
   if (temp_v5 < temp_v3) {
     do {
       if ((*(char *)(temp_v2 + 0x26) != '\0') && (temp_v4 = 1, temp_v0 >= 2)) {
         do {
-          FUN_00187180(0x19,temp_v4);
-          piVar5 = (int *)FUN_00192798();
+          dataTableGet(0x19,temp_v4);
+          piVar5 = (int *)dataTableGetEntries();
           if (*piVar5 == (int)*(short *)(temp_v2 + 0x20)) {
             *(char *)(temp_v2 + 0x26) = (char)temp_v4;
             break;

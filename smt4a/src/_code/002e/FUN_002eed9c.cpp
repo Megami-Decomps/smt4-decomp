@@ -7,7 +7,7 @@ extern "C" {
 int VectorSignedToFloat(int, int);
 
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_00162e8c(void);
@@ -32,15 +32,15 @@ void FUN_002eed9c(void)
   temp_v5 = 0;
   temp_v6 = temp_v5;
   temp_v2 = FUN_00376f94();
-  temp_v0 = DAT_00581288;
+  temp_v0 = g_lmapScene;
   if (temp_v2 >= 100) {
     temp_v4 = (float)VectorSignedToFloat((int)*(char *)(temp_v1 + 0xe02),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v3 = (float)VectorSignedToFloat((int)*(char *)(temp_v1 + 0xe03),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v1 = temp_v1 + *(char *)(temp_v1 + 0xe03) * 0x78 + *(char *)(temp_v1 + 0xe02) * 8;
-    pfVar4 = (float *)(DAT_00581288 + 0x24);
+    pfVar4 = (float *)(g_lmapScene + 0x24);
     temp_v4 = temp_v4 * 700.0f + 350.0f;
     temp_v3 = temp_v3 * 700.0f + 350.0f;
-    *(float *)(DAT_00581288 + 0x1c) = temp_v4;
+    *(float *)(g_lmapScene + 0x1c) = temp_v4;
     *(unsigned int *)(temp_v0 + 0x20) = temp_v6;
     *(unsigned int *)(temp_v0 + 0x2c) = temp_v6;
     *pfVar4 = temp_v3;

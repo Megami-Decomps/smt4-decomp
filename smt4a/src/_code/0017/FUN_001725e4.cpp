@@ -1,24 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001725e4` (_code @ 0x1725e4, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: if-conversion only: retail branches over the two stores (`beq`), built predicates them (`ldrne`/`stmne`) */
+/* Allocates and initializes an 8-byte object from `heap`, remembering the heap; returns it, or NULL if the allocation failed. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned char DAT_0055ba60; /* 0x55ba60 */
+struct Heap;
 
+typedef struct HeapVtbl {
+    void *unk00;
+    void *unk04;
+    void *(*alloc)(struct Heap *heap, u32 size, u32 align); /* 0x08 */
+} HeapVtbl;
 
-void FUN_001725e4(int *param_1)
+typedef struct Heap {
+    HeapVtbl *vtbl;
+} Heap;
 
+typedef struct HeapObject {
+    /* 0x00 */ const void *vtbl;
+    /* 0x04 */ Heap *heap;
+} HeapObject;
+
+extern u8 DAT_0055ba60;
+
+HeapObject *FUN_001725e4(Heap *heap)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)(**(romwright_code **)(*param_1 + 8))(param_1,8,4);
-  if (puVar1 != (unsigned int *)0x0) {
-    *puVar1 = (unsigned int)&DAT_0055ba60;
-    puVar1[1] = (unsigned int)param_1;
-  }
-  return;
+    HeapObject *obj = (HeapObject *)heap->vtbl->alloc(heap, sizeof(HeapObject), 4);
+
+    if (obj != NULL) {
+        obj->vtbl = &DAT_0055ba60;
+        obj->heap = heap;
+    }
+    return obj;
 }
 
-} /* extern "C" */
+}

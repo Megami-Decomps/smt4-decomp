@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00137ea0(...);
 int FUN_001386e8(...);
 int FUN_00138cf8(...);
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_00224880(...);
 int FUN_002684ac(int);
 int FUN_00275bc8(void);
@@ -32,7 +32,7 @@ extern int DAT_005e2110; /* 0x5e2110 */
 /* Supplied declaration required: FUN_00137ea0. */
 /* Supplied declaration required: FUN_001386e8. */
 /* Supplied declaration required: FUN_00138cf8. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00224880. */
 extern int FUN_00239480(void);
 /* Supplied declaration required: FUN_002684ac. */
@@ -103,7 +103,7 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
     FUN_001386e8(1);
     FUN_00137ea0(1);
     FUN_00138cf8(1);
-    FUN_001681cc(0xe8);
+    sysPlaySe(0xe8);
     if (DAT_0057f6cc == '\0') {
       FUN_0031a400();
       FUN_003b61ec();
@@ -120,7 +120,7 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
     temp_v1 = 5;
     break;
   case 5:
-    FUN_001681cc(0xe9);
+    sysPlaySe(0xe9);
     FUN_00224880(DAT_005e2110);
     FUN_0031ed60(temp_v2,1);
     temp_v1 = 6;
@@ -136,7 +136,7 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
       return 0;
     }
     FUN_0035d7bc(temp_v2);
-    FUN_001681cc(0xe8);
+    sysPlaySe(0xe8);
     if (DAT_0057f6c9 != '\0') {
       FUN_001386e8(1);
       FUN_00137ea0(1);

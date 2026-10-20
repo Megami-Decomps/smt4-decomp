@@ -1,20 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00301bd4` (_code @ 0x301bd4, 0xe bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int aeabi_idivmod(int, int);
+typedef struct Elem {
+    u32 w0;
+    u32 w1;
+    u32 w2;
+} Elem;                         /* 12 bytes */
 
-/* Supplied declaration required: aeabi_idivmod. */
+typedef struct Vector {
+    /* 0x00 */ Elem *begin;
+    /* 0x04 */ Elem *end;
+} Vector;
 
+/* Element divide through the runtime helper (quotient in r0). */
+int __aeabi_idivmod(int numerator, int denominator);
 
-void FUN_00301bd4(int *param_1)
-
+/* Returns the number of elements: the byte distance from begin to end divided by sizeof(Elem) = 12. */
+int FUN_00301bd4(Vector *vec)
 {
-/* irregular: 1 native warning(s); review required */
-  aeabi_idivmod(param_1[1] - *param_1,0xc);
-  return;
+    return __aeabi_idivmod((u8 *)vec->end - (u8 *)vec->begin, sizeof(Elem));
 }
 
 } /* extern "C" */

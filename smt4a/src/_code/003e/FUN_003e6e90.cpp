@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_00275f44(unsigned int, int);
 int FUN_0031a400(void);
 int FUN_00342010(void);
@@ -16,8 +16,8 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0013def0(unsigned int);
-extern int FUN_0014aa78(void);
-/* Supplied declaration required: FUN_001681cc. */
+extern int btlGetMainState(void);
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275f44. */
 /* Supplied declaration required: FUN_0031a400. */
@@ -40,14 +40,14 @@ unsigned int FUN_003e6e90(unsigned int *param_1)
     FUN_0031a400();
     FUN_00342010();
     FUN_003b61ec();
-    FUN_001681cc(0xab);
+    sysPlaySe(0xab);
     FUN_00275f44(param_1[5],0);
     *param_1 = 8;
     temp_v0 = FUN_00224880(param_1[5]);
     if (temp_v0 == 2) {
       FUN_0035b304();
       FUN_0037b450();
-      temp_v0 = FUN_0014aa78();
+      temp_v0 = btlGetMainState();
       if (*(int *)(temp_v0 + 0x4c80) != 1) {
         *param_1 = 9;
         temp_v1 = FUN_003e71a8(param_1);

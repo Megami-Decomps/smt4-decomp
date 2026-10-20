@@ -1,31 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e9930` (_code @ 0x2e9930, 0x2a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the prologue pads the stack alignment with r6 where retail saves r3 (push {r3, r4, r5, lr}). */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_00310478(void);
+/* Sentinel node of the container: parent at 4, left and right at 8 and 0xc, all initially pointing at itself. */
+typedef struct Node {
+    u8 unk00[4];
+    struct Node *parent;    /* 0x04 */
+    struct Node *left;      /* 0x08 */
+    struct Node *right;     /* 0x0c */
+} Node;
 
+/* Ordered container: sentinel at 0x10, count at 0x14, a flag byte at 0x19. */
+typedef struct {
+    u32 unk00;              /* 0x00 */
+    u32 unk04;              /* 0x04 */
+    u32 unk08;              /* 0x08 */
+    u32 unk0c;              /* 0x0c */
+    Node *sentinel;         /* 0x10 */
+    u32 count;              /* 0x14 */
+    u8 unk18;               /* 0x18 */
+    u8 flag;                /* 0x19 */
+} Container;
 
-unsigned int * FUN_002e9930(unsigned int *param_1,unsigned char param_2)
+Node *FUN_00310478(void);
 
+/* Initialises an empty container with its self-linked sentinel node. */
+Container *FUN_002e9930(Container *container, u8 flag)
 {
-  int temp_v0;
-  
-  *param_1 = 0;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  *(unsigned char *)(param_1 + 6) = 0;
-  *(unsigned char *)((int)param_1 + 0x19) = param_2;
-  param_1[3] = 0;
-  param_1[2] = 0;
-  param_1[1] = 0;
-  temp_v0 = FUN_00310478();
-  param_1[4] = temp_v0;
-  *(unsigned int *)(temp_v0 + 4) = 0;
-  *(unsigned int *)(param_1[4] + 8) = param_1[4];
-  *(unsigned int *)(param_1[4] + 0xc) = param_1[4];
-  return param_1;
+    container->unk00 = 0;
+    container->sentinel = NULL;
+    container->count = 0;
+    container->unk18 = 0;
+    container->flag = flag;
+    container->unk0c = 0;
+    container->unk08 = 0;
+    container->unk04 = 0;
+    container->sentinel = FUN_00310478();
+    container->sentinel->parent = NULL;
+    container->sentinel->left = container->sentinel;
+    container->sentinel->right = container->sentinel;
+    return container;
 }
 
 } /* extern "C" */

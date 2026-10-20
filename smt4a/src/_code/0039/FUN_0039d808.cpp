@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_001aba54(void);
-int FUN_003283ac(int);
+int scrSetResult(int);
 
 /* Supplied declaration required: FUN_001aba54. */
-/* Supplied declaration required: FUN_003283ac. */
-extern int FUN_004ee568(unsigned int);
+/* Supplied declaration required: scrSetResult. */
+extern int btlUnitGet(unsigned int);
 
 
 unsigned int FUN_0039d808(unsigned int *param_1)
@@ -21,7 +21,7 @@ unsigned int FUN_0039d808(unsigned int *param_1)
   int temp_v2;
   int temp_v3;
   
-  temp_v0 = FUN_004ee568(*param_1);
+  temp_v0 = btlUnitGet(*param_1);
   temp_v2 = *(int *)(temp_v0 + 0x28);
   temp_v3 = 0;
   temp_v0 = 0;
@@ -32,7 +32,7 @@ unsigned int FUN_0039d808(unsigned int *param_1)
     }
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 8);
-  FUN_003283ac(temp_v3);
+  scrSetResult(temp_v3);
   return 1;
 }
 

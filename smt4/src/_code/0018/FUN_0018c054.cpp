@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00296cc8(int);
+int scrGetArg(int);
 int FUN_002c425c(unsigned int, unsigned int *);
 int FUN_002ebe68(unsigned int *, unsigned int *, int, unsigned int, int, int, int);
 int VectorSignedToFloat(unsigned int, int);
@@ -14,11 +14,11 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned int *DAT_0043ded0; /* 0x43ded0 */
+extern unsigned int *g_eventTex; /* 0x43ded0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00296cc8. */
-extern int FUN_002bf244(void);
+/* Supplied declaration required: scrGetArg. */
+extern int jobIsValid(void);
 /* Supplied declaration required: FUN_002c425c. */
 /* Supplied declaration required: FUN_002ebe68. */
 
@@ -33,14 +33,14 @@ unsigned int FUN_0018c054(void)
   unsigned int in_r3;
   unsigned int in_fpscr;
   
-  FUN_00296cc8(0);
-  temp_v0 = FUN_00296cc8(1);
+  scrGetArg(0);
+  temp_v0 = scrGetArg(1);
   VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  puVar2 = DAT_0043ded0 + 0x18;
-  FUN_002ebe68(puVar2,DAT_0043ded0 + 0x19,0x40c00000,in_r3,0x40000000,0x40800000,0x40c00000);
-  temp_v1 = FUN_002bf244();
+  puVar2 = g_eventTex + 0x18;
+  FUN_002ebe68(puVar2,g_eventTex + 0x19,0x40c00000,in_r3,0x40000000,0x40800000,0x40c00000);
+  temp_v1 = jobIsValid();
   if (temp_v1 != 0) {
-    FUN_002c425c(*DAT_0043ded0,puVar2);
+    FUN_002c425c(*g_eventTex,puVar2);
   }
   return 1;
 }

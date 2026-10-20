@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00111184(void);
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_00111184. */
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 
 
 void FUN_001071a0(void)
@@ -20,11 +20,11 @@ void FUN_001071a0(void)
   int temp_v0;
   
   temp_v0 = 0xd68;
-  FUN_002c222c();
+  asdOperatorNew();
   if (temp_v0 != 0) {
     FUN_00111184();
   }
-  DAT_00432fc8 = temp_v0;
+  g_aocMain = temp_v0;
   return;
 }
 

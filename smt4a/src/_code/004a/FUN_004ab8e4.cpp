@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 int FUN_00371c3c(int, int);
 int FUN_003a7a88(int, int);
 
 extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: FUN_003a7a88. */
 
@@ -28,7 +28,7 @@ void FUN_004ab8e4(void)
   
   temp_v1 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
   puVar5 = (unsigned int *)((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x12fd0);
-  FUN_002e6354(puVar5,0x48);
+  sysMemClear(puVar5,0x48);
   *puVar5 = 0;
   temp_v3 = 0;
   *(unsigned int *)(temp_v1 + 0x12fd4) = 0;

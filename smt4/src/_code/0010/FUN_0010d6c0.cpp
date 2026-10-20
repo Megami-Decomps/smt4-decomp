@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int DAT_004e3cf4; /* 0x4e3cf4 */
+extern int g_asdProcess; /* 0x4e3cf4 */
 extern int DAT_004e3cf8; /* 0x4e3cf8 */
 
 
@@ -45,7 +45,7 @@ LAB_0010d6d0:
       return 0;
     }
     do {
-      for (temp_v4 = *(int *)(DAT_004e3cf4 + temp_v1 * 8); temp_v4 != 0; temp_v4 = *(int *)(temp_v4 + 0x4c)) {
+      for (temp_v4 = *(int *)(g_asdProcess + temp_v1 * 8); temp_v4 != 0; temp_v4 = *(int *)(temp_v4 + 0x4c)) {
         if (((*(unsigned int *)(temp_v4 + 0x24) & 0xfffff) == *(unsigned int *)(puVar2 + 4)) &&
            ((*(unsigned int *)(temp_v4 + 0x1c) & 0x100000) != 0)) goto joined_r0x0010dbb0;
       }
@@ -59,7 +59,7 @@ LAB_0010d6d0:
     temp_v4 = 0;
     if (0 < DAT_004e3cf8) {
       do {
-        for (temp_v1 = *(int *)(DAT_004e3cf4 + temp_v4 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c))
+        for (temp_v1 = *(int *)(g_asdProcess + temp_v4 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c))
         {
           if (((*(unsigned int *)(temp_v1 + 0x24) & 0xfffff) == *(unsigned int *)(puVar2 + 4)) &&
              ((*(unsigned int *)(temp_v1 + 0x1c) & 0x100000) != 0)) goto joined_r0x0010da90;
@@ -73,7 +73,7 @@ LAB_0010d6d0:
     temp_v4 = 0;
     if (0 < DAT_004e3cf8) {
       do {
-        for (temp_v1 = *(int *)(DAT_004e3cf4 + temp_v4 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c))
+        for (temp_v1 = *(int *)(g_asdProcess + temp_v4 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c))
         {
           if (((*(unsigned int *)(temp_v1 + 0x24) & 0xfffff) == *(unsigned int *)(puVar2 + 4)) &&
              ((*(unsigned int *)(temp_v1 + 0x1c) & 0x100000) != 0)) {
@@ -100,7 +100,7 @@ LAB_0010d6d0:
       return 0;
     }
     do {
-      for (temp_v4 = *(int *)(DAT_004e3cf4 + temp_v1 * 8); temp_v4 != 0; temp_v4 = *(int *)(temp_v4 + 0x4c)) {
+      for (temp_v4 = *(int *)(g_asdProcess + temp_v1 * 8); temp_v4 != 0; temp_v4 = *(int *)(temp_v4 + 0x4c)) {
         if (((*(unsigned int *)(temp_v4 + 0x8c) & 0xfffff) == *(unsigned int *)(puVar2 + 4)) &&
            ((*(unsigned int *)(temp_v4 + 0x1c) & 0x100000) != 0)) goto joined_r0x0010dbb0;
       }
@@ -114,7 +114,7 @@ LAB_0010d6d0:
     temp_v4 = 0;
     if (0 < DAT_004e3cf8) {
       do {
-        for (temp_v1 = *(int *)(DAT_004e3cf4 + temp_v4 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c))
+        for (temp_v1 = *(int *)(g_asdProcess + temp_v4 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c))
         {
           if (((*(unsigned int *)(temp_v1 + 0x8c) & 0xfffff) == *(unsigned int *)(puVar2 + 4)) &&
              ((*(unsigned int *)(temp_v1 + 0x1c) & 0x100000) != 0)) goto joined_r0x0010da90;
@@ -128,7 +128,7 @@ LAB_0010d6d0:
     temp_v4 = 0;
     if (0 < DAT_004e3cf8) {
       do {
-        for (temp_v1 = *(int *)(DAT_004e3cf4 + temp_v4 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c))
+        for (temp_v1 = *(int *)(g_asdProcess + temp_v4 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c))
         {
           if (((*(unsigned int *)(temp_v1 + 0x8c) & 0xfffff) == *(unsigned int *)(puVar2 + 4)) &&
              ((*(unsigned int *)(temp_v1 + 0x1c) & 0x100000) != 0)) {
@@ -155,7 +155,7 @@ LAB_0010d6d0:
       return 0;
     }
     do {
-      for (temp_v4 = *(int *)(DAT_004e3cf4 + temp_v1 * 8); temp_v4 != 0; temp_v4 = *(int *)(temp_v4 + 0x4c)) {
+      for (temp_v4 = *(int *)(g_asdProcess + temp_v1 * 8); temp_v4 != 0; temp_v4 = *(int *)(temp_v4 + 0x4c)) {
         if ((*(int *)(temp_v4 + 0x90) == *(int *)(puVar2 + 4)) &&
            ((*(unsigned int *)(temp_v4 + 0x1c) & 0x100000) != 0)) goto joined_r0x0010dbb0;
       }
@@ -169,7 +169,7 @@ LAB_0010d6d0:
     temp_v4 = 0;
     if (0 < DAT_004e3cf8) {
       do {
-        for (temp_v1 = *(int *)(DAT_004e3cf4 + temp_v4 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c))
+        for (temp_v1 = *(int *)(g_asdProcess + temp_v4 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c))
         {
           if ((*(int *)(temp_v1 + 0x90) == *(int *)(puVar2 + 4)) &&
              ((*(unsigned int *)(temp_v1 + 0x1c) & 0x100000) != 0)) goto joined_r0x0010da90;
@@ -183,7 +183,7 @@ LAB_0010d6d0:
     temp_v4 = 0;
     if (0 < DAT_004e3cf8) {
       do {
-        for (temp_v1 = *(int *)(DAT_004e3cf4 + temp_v4 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c))
+        for (temp_v1 = *(int *)(g_asdProcess + temp_v4 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c))
         {
           if (((*(unsigned int *)(temp_v1 + 0x24) & 0xfffff) == *(unsigned int *)(puVar2 + 4)) &&
              ((*(unsigned int *)(temp_v1 + 0x1c) & 0x100000) != 0)) {
@@ -207,7 +207,7 @@ LAB_0010d6d0:
     temp_v4 = 0;
     if (0 < DAT_004e3cf8) {
       do {
-        for (temp_v1 = *(int *)(DAT_004e3cf4 + temp_v4 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c))
+        for (temp_v1 = *(int *)(g_asdProcess + temp_v4 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c))
         {
           if (((*(unsigned int *)(temp_v1 + 0x8c) & 0xfffff) == *(unsigned int *)(puVar2 + 4)) &&
              ((*(unsigned int *)(temp_v1 + 0x1c) & 0x100000) != 0)) {

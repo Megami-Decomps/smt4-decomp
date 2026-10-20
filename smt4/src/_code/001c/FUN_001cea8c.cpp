@@ -30,7 +30,7 @@ int FUN_001c8a7c(int, int, int, int);
 int FUN_0026a704(void);
 int FUN_0026b738(...);
 int FUN_0026b780(...);
-int FUN_002954dc(...);
+int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
 int FUN_00296f4c(...);
 int FUN_0029bd4c(void);
@@ -39,11 +39,11 @@ int FUN_0029ee6c(...);
 int FUN_002a71fc(...);
 int FUN_002b7bca(...);
 int FUN_002b8838(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bee58(...);
 int FUN_002bf818(...);
-int FUN_002eff64(void);
-int FUN_002f6774(...);
+int whisperEffectFinish(void);
+int whisperEffectStart(...);
 
 /* stack frame of param_1: 12 slot(s), 45 byte(s) */
 typedef struct {
@@ -66,7 +66,7 @@ extern unsigned char LAB_002c6e64; /* 0x2c6e64 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_0019e0c0. */
 /* Supplied declaration required: FUN_001c8a7c. */
-extern int FUN_002169b0(void);
+extern int whisperEffectIsIdle(void);
 /* Supplied declaration required: FUN_0026a704. */
 /* Supplied declaration required: FUN_0026a794. */
 /* Supplied declaration required: FUN_0026b738. */
@@ -74,7 +74,7 @@ extern int FUN_002169b0(void);
 /* Supplied declaration required: FUN_0027e774. */
 /* Supplied declaration required: FUN_0027e7b4. */
 /* Supplied declaration required: FUN_0029541c. */
-/* Supplied declaration required: FUN_002954dc. */
+/* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
 extern int FUN_002955fc(void);
 extern int FUN_00295618(void);
@@ -109,13 +109,13 @@ extern unsigned short FUN_002b8584(unsigned int, int);
 extern int FUN_002b898c(void);
 extern int FUN_002b8ee0(int, unsigned int);
 /* Supplied declaration required: FUN_002bc01c. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int FUN_002c09d0(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
-/* Supplied declaration required: FUN_002eff64. */
-/* Supplied declaration required: FUN_002f6774. */
+/* Supplied declaration required: whisperEffectFinish. */
+/* Supplied declaration required: whisperEffectStart. */
 /* Supplied declaration required: FUN_00333de4. */
 /* Supplied declaration required: FUN_00334058. */
 
@@ -384,13 +384,13 @@ void FUN_001cea8c(int param_1)
         }
         else {
           FUN_0029ee6c(0,0x323232ff);
-          FUN_002bd8e8(param_1 + 0xac,1,0);
+          timerStart(param_1 + 0xac,1,0);
           *piVar9 = *piVar9 + 1;
           if (*piVar25 == 3) {
             *(unsigned short *)(param_1 + *(int *)(param_1 + 0xd2c4) * 2 + 0xd134) = 0;
             *(int *)(param_1 + 0xd2c4) = *(int *)(param_1 + 0xd2c4) - 1;
           }
-          FUN_002eff64();
+          whisperEffectFinish();
           FUN_0026a704();
         }
         FUN_002a71fc(1);
@@ -407,7 +407,7 @@ void FUN_001cea8c(int param_1)
       if (temp_v5 == 0) {
         return;
       }
-      temp_v5 = FUN_002169b0();
+      temp_v5 = whisperEffectIsIdle();
     }
     goto joined_r0x001cec14;
   }
@@ -417,7 +417,7 @@ void FUN_001cea8c(int param_1)
   switch(temp_v15) {
   case 0:
     *(unsigned char *)(temp_v5 + 0x4b) = 1;
-    FUN_002bd8e8(param_1 + 0xac,4,0);
+    timerStart(param_1 + 0xac,4,0);
     temp_v11 = *(unsigned int *)(temp_v6 + 0x34);
     temp_v17 = *(unsigned int *)(temp_v6 + 0x38);
     temp_v19 = *(unsigned int *)(temp_v6 + 0x3c);
@@ -442,7 +442,7 @@ void FUN_001cea8c(int param_1)
     }
     FUN_0029bd4c();
     *piVar9 = *piVar9 + 1;
-    FUN_002f6774(*(unsigned short *)(temp_v5 + 0x46));
+    whisperEffectStart(*(unsigned short *)(temp_v5 + 0x46));
     return;
   case 1:
     temp_v15 = FUN_002b8ee0(param_1 + 0xac,0);
@@ -456,7 +456,7 @@ void FUN_001cea8c(int param_1)
     temp_v15 = FUN_002955fc();
     if (temp_v15 == 0) {
       FUN_002954f4(*(unsigned short *)(temp_v5 + 0x46),1);
-      FUN_002954dc(1);
+      btlTalkBustUpSetUnk2F4(1);
     }
     temp_v15 = FUN_002c09d0(0x406);
     if (temp_v15 == 0) {

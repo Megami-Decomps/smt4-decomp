@@ -1,27 +1,22 @@
-#include "romwright_types.h"
+#include "battle/btlUI.h"
 
 extern "C" {
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+s32 FUN_002c09d0(u32 id);
+s32 FUN_002d0058(BtlUiObjC *obj);
 
-extern int FUN_002c09d0(unsigned int);
-extern int FUN_002d0058(int);
+extern BtlUiGlobals DAT_00439c88;
 
-
-unsigned int FUN_003adab8(void)
-
+bool FUN_003adab8(void)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20));
-  if (((((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) != 0) && (temp_v0 = FUN_002c09d0(0x525), temp_v0 == 0)) &&
-      (temp_v0 = FUN_002d0058(temp_v1 + 0x2460), temp_v0 == 0)) &&
-     (((temp_v1 = *(int *)(temp_v1 + 0x7e38), temp_v1 == 0 || (temp_v1 == 1 || temp_v1 == 2)) ||
-      (temp_v1 == 7 || temp_v1 == 9)))) {
-    return 1;
-  }
-  return 0;
+    BtlUi *ui = DAT_00439c88.ui;
+
+    if (ui != NULL && FUN_002c09d0(0x525) == 0 && FUN_002d0058(&ui->objC) == 0) {
+        if (ui->state == 0 || ui->state == 1 || ui->state == 2 || ui->state == 7 || ui->state == 9) {
+            return true;
+        }
+    }
+    return false;
 }
 
 } /* extern "C" */

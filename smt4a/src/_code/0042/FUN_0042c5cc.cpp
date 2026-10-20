@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 
 typedef struct fn_0042c5cc_arg0 fn_0042c5cc_arg0;
 struct fn_0042c5cc_arg0 {
@@ -28,7 +28,7 @@ struct fn_0042c5cc_arg0 {
 
 extern unsigned int *FUN_00188a34(fn_0042c5cc_arg0 *);
 extern unsigned int FUN_001a04e0(unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern unsigned int *FUN_0042c3c4(unsigned int *, unsigned int);
 extern unsigned int *FUN_0042cbd8(unsigned int, unsigned int);
 
@@ -48,7 +48,7 @@ unsigned int * FUN_0042c5cc(fn_0042c5cc_arg0 *param_1)
   *puVar1 = 0;
   puVar1[3] = 0xf0202;
   puVar1[2] = 0;
-  FUN_002e6354(puVar1 + 4,0x98);
+  sysMemClear(puVar1 + 4,0x98);
   temp_v1 = 0;
   puVar1[5] = 0x823f0203;
   piVar3 = (int *)(puVar1 + 0x2a);

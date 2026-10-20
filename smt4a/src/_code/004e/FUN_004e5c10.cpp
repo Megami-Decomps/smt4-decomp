@@ -26,7 +26,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_2_stack;
 
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
 extern unsigned int DAT_00571170; /* 0x571170 */
@@ -137,7 +137,7 @@ LAB_004e5e18:
       FUN_004c9160(9,param_2[8],0,1);
       FUN_004fd508(temp_v3,param_2,0,param_2[9],1);
       FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
-      *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
     }
   }
   if (((DAT_0057116c | DAT_00571174) & ((unsigned int *)param_2[8])[1]) != 0 ||

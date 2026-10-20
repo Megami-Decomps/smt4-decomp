@@ -1,36 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038af8c` (_code @ 0x38af8c, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+/* Effect record: the id handed to FUN_003fd7c0 sits at +4. */
+typedef struct {
+    u8 unk00[4];
+    u32 id;             /* 0x04 */
+} Effect;
+
+/* Global game block: a state word at 0x228 and an optional effect at 0x18c. */
+typedef struct {
+    u8 unk00[0x18c];
+    Effect *effect;     /* 0x18c */
+    u8 unk190[0x98];
+    u32 state;          /* 0x228 */
+} GameBlock;
+
+extern GameBlock *g_lmapScene;
+
 int FUN_00162e8c(void);
-int FUN_003fd7c0(unsigned int, int, int, float);
+int FUN_00162ea4(void);
+int FUN_003fd7c0(u32 id, int a, int b, f32 scale);
 
-extern int DAT_00581288; /* 0x581288 */
-
-/* Supplied declaration required: FUN_00162e8c. */
-extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_003fd7c0. */
-
-
-unsigned int FUN_0038af8c(void)
-
+/* Starts the block's effect (scale 85.0) when its state is set and FUN_00162ea4 accepts; 0 when that check fails. */
+u32 FUN_0038af8c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_00162e8c();
-  if (*(int *)(DAT_00581288 + 0x228) != 0) {
-    temp_v0 = FUN_00162ea4();
-    if (temp_v0 == 0) {
-      return 0;
+    FUN_00162e8c();
+    if (g_lmapScene->state != 0) {
+        if (FUN_00162ea4() == 0) {
+            return 0;
+        }
+        if (g_lmapScene->effect != NULL) {
+            FUN_003fd7c0(g_lmapScene->effect->id, 0, 2, 85.0f);
+        }
     }
-    if (*(int *)(DAT_00581288 + 0x18c) != 0) {
-      FUN_003fd7c0(*(unsigned int *)(*(int *)(DAT_00581288 + 0x18c) + 4),0,2,85.0f);
-    }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

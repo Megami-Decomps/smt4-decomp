@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } void_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 extern int DAT_004c3224; /* 0x4c3224 */
 
 /* Supplied declaration required: FUN_00296dc4. */
@@ -42,7 +42,7 @@ void FUN_0030f730(void)
   char acStack_30 [4];
   unsigned int temp_v6;
   
-  temp_v3 = DAT_0044ea00;
+  temp_v3 = g_titleScene;
   temp_v4[0] = 0xff000000;
   temp_v4[1] = 0xff0000;
   temp_v4[2] = 0xffff0000;
@@ -78,7 +78,7 @@ void FUN_0030f730(void)
       (**(romwright_code **)(temp_v3 + 0x1268))();
       *(unsigned char *)(temp_v3 + 0x1264) = 0;
     }
-    FUN_002c1b64(DAT_0044ea00,0);
+    FUN_002c1b64(g_titleScene,0);
     temp_v3 = 0;
     if (temp_v3 < DAT_004c3224) {
       do {
@@ -86,8 +86,8 @@ void FUN_0030f730(void)
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < DAT_004c3224);
     }
-    temp_v3 = DAT_0044ea00;
-    piVar4 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v3 = g_titleScene;
+    piVar4 = (int *)(g_titleScene + 0x124c);
     temp_v0 = *piVar4;
     temp_v1 = piVar4[temp_v0 + 2];
     *piVar4 = temp_v0 - 1;

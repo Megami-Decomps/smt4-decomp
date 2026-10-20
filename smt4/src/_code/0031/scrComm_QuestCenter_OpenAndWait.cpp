@@ -2,12 +2,12 @@
 
 extern "C" {
 
-int FUN_002c564c(int);
+int jyoucyuGetTableEntry(int);
 int FUN_003840e4(void);
 int QuestCenter_GetActiveEntry(void);
 
 extern int FUN_002893d8(void);
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_003840e4. */
 extern int QuestCenterMode_IsBusy(void);
 /* Supplied declaration required: QuestCenter_GetActiveEntry. */
@@ -21,7 +21,7 @@ unsigned char scrComm_QuestCenter_OpenAndWait(void)
   
   temp_v0 = FUN_002893d8();
   if (temp_v0 == 0) {
-    FUN_002c564c(0);
+    jyoucyuGetTableEntry(0);
     QuestCenter_GetActiveEntry();
     FUN_003840e4();
   }

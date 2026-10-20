@@ -2,23 +2,23 @@
 
 extern "C" {
 
-int FUN_002e6dac(int);
+int rt_malloc(int);
 
 typedef int romwright_code(...);
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 
-/* Supplied declaration required: FUN_002e6dac. */
+/* Supplied declaration required: rt_malloc. */
 
 
 void FUN_001149f0(int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  if ((*(romwright_code * *)((unsigned char *)&DAT_00594958 + 0x6c)) != (romwright_code *)0x0) {
-    (*(*(romwright_code * *)((unsigned char *)&DAT_00594958 + 0x6c)))(param_1);
+  if ((*(romwright_code * *)((unsigned char *)&g_flagBlock + 0x6c)) != (romwright_code *)0x0) {
+    (*(*(romwright_code * *)((unsigned char *)&g_flagBlock + 0x6c)))(param_1);
     return;
   }
-  FUN_002e6dac(param_1);
+  rt_malloc(param_1);
   return;
 }
 

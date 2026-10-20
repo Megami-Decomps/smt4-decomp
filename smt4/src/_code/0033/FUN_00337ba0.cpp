@@ -5,8 +5,8 @@
 extern "C" {
 
 extern unsigned int FUN_002ac068(int, unsigned int);
-extern int FUN_002c0c74(unsigned int);
-extern int FUN_002c0cc4(void);
+extern int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 
 
 short * FUN_00337ba0(int param_1,unsigned int param_2,unsigned int param_3)
@@ -24,8 +24,8 @@ short * FUN_00337ba0(int param_1,unsigned int param_2,unsigned int param_3)
     return (short *)0x0;
   }
   temp_v0 = FUN_002ac068(*(int *)(param_1 + 0x2244),1);
-  temp_v1 = FUN_002c0cc4();
-  temp_v2 = FUN_002c0c74(temp_v0);
+  temp_v1 = dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v0);
   temp_v3 = 0;
   if (temp_v3 < temp_v2) {
     do {

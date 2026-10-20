@@ -13,7 +13,7 @@ int FUN_00514540(...);
 int SUB41(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
-int aeabi_uidivmod(void);
+int __aeabi_uidivmod(void);
 
 /* stack frame of param_1: 30 slot(s), 120 byte(s) */
 typedef struct {
@@ -49,7 +49,7 @@ typedef struct {
     unsigned int sp140; /* 0x140: local_140 */
 } param_1_stack;
 
-extern float DAT_005c1100; /* 0x5c1100 */
+extern float g_polyDefaultColor; /* 0x5c1100 */
 extern float DAT_005c1104; /* 0x5c1104 */
 extern float DAT_005c1108; /* 0x5c1108 */
 extern float DAT_005c110c; /* 0x5c110c */
@@ -81,7 +81,7 @@ extern unsigned int FUN_001acf08(void);
 /* Supplied declaration required: FUN_00221d78. */
 /* Supplied declaration required: FUN_00514500. */
 /* Supplied declaration required: FUN_00514540. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_003bdf58(int param_1)
@@ -330,7 +330,7 @@ void FUN_003bdf58(int param_1)
                     DAT_006472f8 = temp_v22 / temp_v16;
                   }
                 }
-                DAT_006472ec = DAT_005c1100 * DAT_006472f8;
+                DAT_006472ec = g_polyDefaultColor * DAT_006472f8;
                 DAT_006472f0 = DAT_005c1104 * DAT_006472f8;
                 DAT_006472f4 = DAT_005c1108 * DAT_006472f8;
                 DAT_006472f8 = DAT_005c110c * DAT_006472f8;
@@ -398,7 +398,7 @@ void FUN_003bdf58(int param_1)
               temp_v45[6] = (int)temp_v16;
               if (temp_v4) {
                 FUN_00514500(0);
-                aeabi_uidivmod();
+                __aeabi_uidivmod();
                 *temp_v45 = temp_v14;
               }
               else {

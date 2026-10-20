@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_001dbba8(unsigned int);
 int FUN_0026e68c(unsigned int, int);
-int FUN_002c43b4(unsigned int, int);
+int jobStop(unsigned int, int);
 
-extern unsigned int *DAT_0043ded0; /* 0x43ded0 */
+extern unsigned int *g_eventTex; /* 0x43ded0 */
 
 /* Supplied declaration required: FUN_001dbba8. */
 /* Supplied declaration required: FUN_0026e68c. */
-extern int FUN_002bf244(unsigned int);
-/* Supplied declaration required: FUN_002c43b4. */
+extern int jobIsValid(unsigned int);
+/* Supplied declaration required: jobStop. */
 
 
 unsigned int scrComm_Eve2dTex_Shutdown(void)
@@ -23,10 +23,10 @@ unsigned int scrComm_Eve2dTex_Shutdown(void)
   int temp_v0;
   int temp_v1;
   
-  if ((DAT_0043ded0 != (unsigned int *)0x0) && (temp_v0 = FUN_002bf244(*DAT_0043ded0), temp_v0 != 0)) {
+  if ((g_eventTex != (unsigned int *)0x0) && (temp_v0 = jobIsValid(*g_eventTex), temp_v0 != 0)) {
     temp_v0 = 0;
     do {
-      temp_v1 = FUN_002bf244(*(unsigned int *)(temp_v0 * 4 + 0x493790));
+      temp_v1 = jobIsValid(*(unsigned int *)(temp_v0 * 4 + 0x493790));
       if (temp_v1 != 0) {
         FUN_0026e68c(*(unsigned int *)(temp_v0 * 4 + 0x493790),0);
         FUN_001dbba8(*(unsigned int *)(temp_v0 * 4 + 0x493790));
@@ -34,7 +34,7 @@ unsigned int scrComm_Eve2dTex_Shutdown(void)
       *(unsigned int *)(temp_v0 * 4 + 0x493790) = 0;
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 4);
-    FUN_002c43b4(*DAT_0043ded0,0);
+    jobStop(*g_eventTex,0);
   }
   return 1;
 }

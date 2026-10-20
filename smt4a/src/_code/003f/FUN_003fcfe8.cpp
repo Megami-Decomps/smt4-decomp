@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001800b8(void);
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_0019a7f4(int);
 int FUN_001b2d54(unsigned int, int, unsigned int);
 int FUN_00419e38(void);
@@ -34,10 +34,10 @@ struct fn_003fcfe8_arg0 {
     int field_0x44; /* +0x44 */
 };
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_001800b8. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019a7f4. */
 /* Supplied declaration required: FUN_001b2d54. */
 /* Supplied declaration required: FUN_00419e38. */
@@ -58,7 +58,7 @@ void FUN_003fcfe8(fn_003fcfe8_arg0 *param_1)
       if (*(int *)(temp_v1 + 0x18) != 0) {
         if (*(int *)(temp_v1 + 0x1c) >= 0) {
           FUN_0019a7f4(param_1->field_0x8);
-          FUN_001b2d54(DAT_00570280,param_1->field_0x8,*(unsigned int *)(temp_v1 + 0x1c));
+          FUN_001b2d54(g_aocSystem,param_1->field_0x8,*(unsigned int *)(temp_v1 + 0x1c));
         }
         else {
           FUN_001800b8();
@@ -74,9 +74,9 @@ void FUN_003fcfe8(fn_003fcfe8_arg0 *param_1)
       FUN_00471940();
     }
     else {
-      FUN_00471e60(DAT_00570280,param_1->field_0x4);
+      FUN_00471e60(g_aocSystem,param_1->field_0x4);
     }
-    FUN_0019a5a0(param_1->field_0x28);
+    asdMemFree(param_1->field_0x28);
     param_1->field_0x10 = (void *)0x0;
     param_1->field_0x14 = 0;
     param_1->field_0x18 = 0;
@@ -88,15 +88,15 @@ void FUN_003fcfe8(fn_003fcfe8_arg0 *param_1)
     param_1->field_0x3d = 0;
   }
   if (param_1->field_0x2c != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1->field_0x2c = 0;
   }
   if (param_1->field_0x30 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1->field_0x30 = 0;
   }
   if ((param_1->field_0x44 != 0) && (FUN_00419e38(), param_1->field_0x44 != 0)) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1->field_0x44 = 0;
   }
   param_1->field_0x4 = 0;

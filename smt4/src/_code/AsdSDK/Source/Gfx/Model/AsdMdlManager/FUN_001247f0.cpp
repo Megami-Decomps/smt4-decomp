@@ -8,7 +8,7 @@ int FUN_00138c14(void);
 int FUN_00138d0c(unsigned int, unsigned int *, int, unsigned int);
 int FUN_0014ed58(unsigned int *, unsigned int);
 int FUN_002a91f4(int, unsigned int);
-int FUN_002b265c(int *, int, int);
+int asdListAdd(int *, int, int);
 int FUN_002b26d4(int *, int);
 int FUN_002b2770(int);
 int FUN_002b2988(unsigned int, int);
@@ -21,8 +21,8 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern int DAT_004dad60; /* 0x4dad60 */
-extern int DAT_004dad6c; /* 0x4dad6c */
+extern int g_asdMdlList; /* 0x4dad60 */
+extern int g_asdMdlList2; /* 0x4dad6c */
 extern int DAT_004dae28; /* 0x4dae28 */
 
 extern unsigned int FUN_0013840c(unsigned int, int *);
@@ -31,7 +31,7 @@ extern int FUN_00138594(void);
 /* Supplied declaration required: FUN_00138d0c. */
 /* Supplied declaration required: FUN_0014ed58. */
 /* Supplied declaration required: FUN_002a91f4. */
-/* Supplied declaration required: FUN_002b265c. */
+/* Supplied declaration required: asdListAdd. */
 /* Supplied declaration required: FUN_002b26d4. */
 /* Supplied declaration required: FUN_002b2770. */
 /* Supplied declaration required: FUN_002b2988. */
@@ -68,11 +68,11 @@ void FUN_001247f0(void)
   int iStack_3c;
   int iStack_38;
   
-  temp_v4 = DAT_004dad60;
-  if (DAT_004dad60 != 0) {
+  temp_v4 = g_asdMdlList;
+  if (g_asdMdlList != 0) {
     temp_v12 = 1.0f;
     temp_v11 = 0.0f;
-    temp_v7 = DAT_004dad60;
+    temp_v7 = g_asdMdlList;
     do {
       puVar13 = *(unsigned int **)(temp_v7 + 8);
       temp_v7 = *(int *)(temp_v7 + 0x18);
@@ -184,7 +184,7 @@ void FUN_001247f0(void)
           }
         }
       }
-      temp_v4 = DAT_004dad60;
+      temp_v4 = g_asdMdlList;
     } while (temp_v7 != 0);
   }
   while (temp_v4 != 0) {
@@ -196,7 +196,7 @@ void FUN_001247f0(void)
     }
   }
   temp_v4 = 0;
-  temp_v7 = DAT_004dad6c;
+  temp_v7 = g_asdMdlList2;
   do {
     do {
       temp_v6 = temp_v7;
@@ -211,8 +211,8 @@ void FUN_001247f0(void)
     *(unsigned int *)(*(int *)(temp_v5 + 8) + 4) = temp_v2;
     FUN_002a91f4(*(int *)(temp_v5 + 8),*(unsigned int *)(*(int *)(temp_v5 + 8) + 8) & 0xffff);
     FUN_002b2770(temp_v5);
-    FUN_002b26d4(&DAT_004dad6c,temp_v6);
-    FUN_002b265c(&DAT_004dad60,temp_v5,0);
+    FUN_002b26d4(&g_asdMdlList2,temp_v6);
+    asdListAdd(&g_asdMdlList,temp_v5,0);
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < DAT_004dae28);
   return;

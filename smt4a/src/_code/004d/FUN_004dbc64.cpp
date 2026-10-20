@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_002e6354(char [38], int);
+int sysMemClear(char [38], int);
 
 typedef struct fn_004dbc64_arg0 fn_004dbc64_arg0;
 struct fn_004dbc64_arg0 {
@@ -26,12 +26,12 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00184310. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern int FUN_00192748(unsigned int);
-extern unsigned char *FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern int dataTableGetCount(unsigned int);
+extern unsigned char *dataTableGetEntries(void);
 extern int FUN_002a46f8(void);
 extern int FUN_002a4b28(unsigned int);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 int FUN_004dbc64(fn_004dbc64_arg0 *param_1,int param_2)
@@ -59,7 +59,7 @@ int FUN_004dbc64(fn_004dbc64_arg0 *param_1,int param_2)
     pfVar3 = (fn_004dbc64_arg0 *)(unsigned int)param_1->field_0x14c;
   }
   if (!(temp_v1 == '\0' && pfVar3 == (fn_004dbc64_arg0 *)0x0)) {
-    FUN_002e6354(acStack_60,0x44);
+    sysMemClear(acStack_60,0x44);
     if (temp_v1 == '\0') {
       temp_v5 = (unsigned int)param_1->field_0x14e;
     }
@@ -68,9 +68,9 @@ int FUN_004dbc64(fn_004dbc64_arg0 *param_1,int param_2)
       FUN_00184310();
       temp_v5 = (unsigned int)*(unsigned char *)(temp_v5 + 2);
     }
-    temp_v2 = FUN_00187180(5,1);
-    pbVar5 = (unsigned char *)FUN_00192798();
-    temp_v3 = FUN_00192748(temp_v2);
+    temp_v2 = dataTableGet(5,1);
+    pbVar5 = (unsigned char *)dataTableGetEntries();
+    temp_v3 = dataTableGetCount(temp_v2);
     if (temp_v3 != 0) {
       pbVar8 = pbVar5 + 2;
       pbVar9 = pbVar5 + 1;

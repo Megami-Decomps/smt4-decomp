@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_001a9110(unsigned char [8], unsigned int);
 int FUN_00430ec8(unsigned char [8], int);
-int FUN_00430f18(unsigned char [8]);
+int asdCecMessageIdInit(unsigned char [8]);
 
 /* Supplied declaration required: FUN_001a9110. */
 /* Supplied declaration required: FUN_00430ec8. */
-/* Supplied declaration required: FUN_00430f18. */
+/* Supplied declaration required: asdCecMessageIdInit. */
 extern unsigned char nn_cec_CTR_MessageId_IsEmpty(unsigned int);
 
 
@@ -38,7 +38,7 @@ unsigned int nn_cec_CTR_Message_SetMessageBody(int param_1,int param_2,unsigned 
   else {
     temp_v2 = 0xc8e10be9;
     if (((param_3 + 0x70 < 0x19001) && (param_3 != 0)) && (param_3 < 0x18001)) {
-      FUN_00430f18(temp_v7);
+      asdCecMessageIdInit(temp_v7);
       temp_v3 = FUN_00430ec8(temp_v9,param_1 + 0x20);
       FUN_001a9110(temp_v7,temp_v3);
       FUN_00430ec8(temp_v8,param_1 + 0x20);

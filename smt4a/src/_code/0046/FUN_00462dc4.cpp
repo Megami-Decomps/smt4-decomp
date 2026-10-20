@@ -1,31 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00462dc4` (_code @ 0x462dc4, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register/schedule only: retail loads hasRequest into r0 and the constant 1 into r1 (swapped here) */
+/* Marks the object as dirty, releasing its pending request and clearing its busy flag. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001d0b28(unsigned int, int);
+typedef struct Object {
+    /* 0x00 */ u8 unk00[0x0D];
+    /* 0x0D */ u8 busy;
+    /* 0x0E */ u8 unk0E;
+    /* 0x0F */ u8 dirty;
+    /* 0x10 */ u8 unk10[0x40];
+    /* 0x50 */ u8 request[0x52];
+    /* 0xA2 */ u8 hasRequest;
+} Object;
 
-extern unsigned int FUN_001b1f04(void);
-/* Supplied declaration required: FUN_001d0b28. */
+extern u32 FUN_001b1f04(void);
+extern void FUN_001d0b28(u32 owner, void *request);
 
-
-void FUN_00462dc4(int param_1)
-
+void FUN_00462dc4(Object *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  *(unsigned char *)(param_1 + 0xf) = 1;
-  if (*(char *)(param_1 + 0xa2) != '\0') {
-    temp_v0 = FUN_001b1f04();
-    FUN_001d0b28(temp_v0,param_1 + 0x50);
-    *(unsigned char *)(param_1 + 0xa2) = 0;
-  }
-  if (*(char *)(param_1 + 0xd) != '\0') {
-    *(unsigned char *)(param_1 + 0xd) = 0;
-  }
-  return;
+    obj->dirty = 1;
+    if (obj->hasRequest != 0) {
+        FUN_001d0b28(FUN_001b1f04(), obj->request);
+        obj->hasRequest = 0;
+    }
+    if (obj->busy != 0) {
+        obj->busy = 0;
+    }
 }
 
-} /* extern "C" */
+}

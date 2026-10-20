@@ -9,9 +9,9 @@ int VectorUnsignedToFloat(unsigned int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern int FUN_00192748(unsigned int);
-extern unsigned short *FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern int dataTableGetCount(unsigned int);
+extern unsigned short *dataTableGetEntries(void);
 
 
 void FUN_00401798(int param_1,int param_2)
@@ -68,9 +68,9 @@ void FUN_00401798(int param_1,int param_2)
   }
   else {
     temp_v2 = *(unsigned int *)(*(int *)(param_1 + 4) + 4);
-    temp_v3 = FUN_00187180(0x3b,0);
-    puVar5 = (unsigned short *)FUN_00192798();
-    temp_v5 = FUN_00192748(temp_v3);
+    temp_v3 = dataTableGet(0x3b,0);
+    puVar5 = (unsigned short *)dataTableGetEntries();
+    temp_v5 = dataTableGetCount(temp_v3);
     temp_v4 = 0;
     if (temp_v5 < 1) {
       return;

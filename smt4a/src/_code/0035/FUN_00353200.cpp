@@ -26,7 +26,7 @@ typedef struct {
 
 extern int DAT_005806a4; /* 0x5806a4 */
 extern int DAT_005806d4; /* 0x5806d4 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern short DAT_005f187e; /* 0x5f187e */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -81,9 +81,9 @@ unsigned int FUN_00353200(int param_1)
   temp_v8 = 0x40a0000041c80000;
   puVar5 = (unsigned int *)(DAT_005806d4 + 0x3d84);
   do {
-    temp_v15 = *(float *)(DAT_00581288 + 0x24);
-    temp_v13 = *(float *)(DAT_00581288 + 0x1c);
-    temp_v14 = *(float *)(DAT_00581288 + 0x20);
+    temp_v15 = *(float *)(g_lmapScene + 0x24);
+    temp_v13 = *(float *)(g_lmapScene + 0x1c);
+    temp_v14 = *(float *)(g_lmapScene + 0x20);
     temp_v6 = *(float *)(DAT_005806a4 + 0x18);
     temp_v0 = *puVar5;
     if (DAT_005f187e != 0) {
@@ -143,10 +143,10 @@ unsigned int FUN_00353200(int param_1)
     temp_v19 = temp_v13;
     temp_v21 = temp_v13;
     fStack_58 = temp_v14;
-    temp_v18 = *(unsigned int *)(DAT_00581288 + 0x24);
-    temp_v16 = *(unsigned int *)(DAT_00581288 + 0x1c);
+    temp_v18 = *(unsigned int *)(g_lmapScene + 0x24);
+    temp_v16 = *(unsigned int *)(g_lmapScene + 0x1c);
     temp_v20 = temp_v14 + (float)temp_v7;
-    temp_v17 = *(float *)(DAT_00581288 + 0x20) + (float)temp_v7;
+    temp_v17 = *(float *)(g_lmapScene + 0x20) + (float)temp_v7;
     fStack_64 = temp_v15;
     fStack_54 = temp_v15;
     temp_v2 = FUN_0036d984((unsigned int *)&temp_v16,&temp_v19,0);

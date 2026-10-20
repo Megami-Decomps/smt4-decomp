@@ -3,10 +3,10 @@
 extern "C" {
 
 int FUN_002c58c8(int, int);
-int FUN_002c5914(int, int);
+int asdTMTexTableLoadTmx(int, int);
 
 /* Supplied declaration required: FUN_002c58c8. */
-/* Supplied declaration required: FUN_002c5914. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 
 
 void FUN_001dc720(void)
@@ -15,7 +15,7 @@ void FUN_001dc720(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  FUN_002c5914(0x25,0);
+  asdTMTexTableLoadTmx(0x25,0);
   temp_v0 = 0;
   do {
     FUN_002c58c8(0x25,temp_v0);

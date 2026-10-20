@@ -25,12 +25,12 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } param_1_stack;
 
-extern unsigned int DAT_005b3c80; /* 0x5b3c80 */
+extern unsigned int g_effAsdLightHandle; /* 0x5b3c80 */
 extern unsigned int DAT_005b3c88; /* 0x5b3c88 */
 extern int DAT_00636e00; /* 0x636e00 */
 
 /* Supplied declaration required: FUN_0018cfe4. */
-extern unsigned int FUN_001ad6fc(void);
+extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: FUN_001b6d08. */
 extern int FUN_0036bc10(unsigned int);
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
@@ -78,7 +78,7 @@ void FUN_003b8ecc(int param_1)
   if (*(int *)(*(int *)(param_1 + 0x9c) + 8) != 0) {
     do {
       temp_v5 = *(unsigned int *)(temp_v14 + 8);
-      temp_v2 = FUN_001ad6fc();
+      temp_v2 = asdMemoryGetAllocatorA();
       temp_v0 = 0;
       temp_v7 = 1;
       temp_v11 = 0;
@@ -165,7 +165,7 @@ void FUN_003b8ecc(int param_1)
       DAT_00636e00 = DAT_00636e00 + 1;
     } while (temp_v4 < *(unsigned int *)(*(int *)(param_1 + 0x9c) + 8));
   }
-  FUN_0018cfe4(DAT_005b3c80,DAT_005b3c88);
+  FUN_0018cfe4(g_effAsdLightHandle,DAT_005b3c88);
   return;
 }
 

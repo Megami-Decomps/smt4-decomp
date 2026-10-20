@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp98; /* 0x98: local_98 */
 } param_5_stack;
 
-extern unsigned int DAT_00571138; /* 0x571138 */
+extern unsigned int g_btlAction; /* 0x571138 */
 extern unsigned int DAT_00571150; /* 0x571150 */
 extern unsigned int DAT_00571154; /* 0x571154 */
 extern unsigned int *DAT_00571190; /* 0x571190 */
@@ -153,7 +153,7 @@ LAB_004ea470:
       else {
         temp_v4 = param_4 & 1;
         if (temp_v4 != 0) {
-          puVar6 = &DAT_00571138;
+          puVar6 = &g_btlAction;
         }
         temp_v0 = 0;
         if (temp_v4 != 0) {

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern unsigned short FUN_00236038(unsigned int);
+extern unsigned short scrGetArg(unsigned int);
 
 
 unsigned int FUN_0035b130(int param_1)
@@ -12,7 +12,7 @@ unsigned int FUN_0035b130(int param_1)
   int temp_v1;
   
   temp_v1 = *(int *)(param_1 + 8);
-  temp_v0 = FUN_00236038(0);
+  temp_v0 = scrGetArg(0);
   *(unsigned short *)(temp_v1 + 0x164) = temp_v0;
   *(unsigned int *)(temp_v1 + 0x150) = 10;
   *(unsigned char *)(temp_v1 + 0x154) = 3;

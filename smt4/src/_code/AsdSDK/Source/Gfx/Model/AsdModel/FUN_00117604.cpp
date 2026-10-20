@@ -20,13 +20,13 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 extern signed char DAT_00464af0; /* 0x464af0 */
 extern unsigned int DAT_00464b00; /* 0x464b00 */
 extern unsigned int DAT_00464b10; /* 0x464b10 */
 extern unsigned int DAT_00464b14; /* 0x464b14 */
 extern unsigned int DAT_00464b18; /* 0x464b18 */
-extern unsigned int DAT_00464b74; /* 0x464b74 */
+extern unsigned int g_asdModelSlotFlags; /* 0x464b74 */
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
 extern int DAT_00464b84; /* 0x464b84 */
 extern int DAT_00464b8c; /* 0x464b8c */
@@ -63,7 +63,7 @@ void FUN_00117604(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  if ((DAT_00464af0 != '\0') && ((0 < DAT_004dad80 || ((DAT_00464b74 & 1) != 0)))) {
+  if ((DAT_00464af0 != '\0') && ((0 < DAT_004dad80 || ((g_asdModelSlotFlags & 1) != 0)))) {
     temp_v2 = *(unsigned int *)(DAT_00464bb4 + 4);
     FUN_001325c4(DAT_00464bb4,DAT_00464b7c,DAT_00464b10,DAT_00464bbc);
     temp_v0 = DAT_00464b84;
@@ -100,7 +100,7 @@ void FUN_00117604(void)
       FUN_001326b4(DAT_00464bb4,DAT_00464b14,DAT_00464b18,0);
       nw_gfx_RenderContext_ResetState_2B7478(temp_v2);
     }
-    FUN_002c3a14(DAT_0044ea00);
+    FUN_002c3a14(g_titleScene);
     DAT_00464b00 = 0;
   }
   return;

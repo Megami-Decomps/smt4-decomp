@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0010032e(unsigned int *);
-int FUN_001416f8(void);
+int asdFileHashPackClose(void);
 int FUN_001469a8(unsigned int);
 int FUN_001a0380(int);
 int FUN_001a08d8(unsigned int *);
@@ -19,15 +19,15 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned char DAT_005b3fb4; /* 0x5b3fb4 */
+extern unsigned char g_asdFile; /* 0x5b3fb4 */
 extern unsigned int DAT_005b3fc8; /* 0x5b3fc8 */
 extern unsigned int DAT_005b3fcc; /* 0x5b3fcc */
 extern unsigned char DAT_005b3fd0; /* 0x5b3fd0 */
-extern unsigned int DAT_005b3fd4; /* 0x5b3fd4 */
+extern unsigned int g_asdFileEvent; /* 0x5b3fd4 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0010032e. */
-/* Supplied declaration required: FUN_001416f8. */
+/* Supplied declaration required: asdFileHashPackClose. */
 /* Supplied declaration required: FUN_001469a8. */
 /* Supplied declaration required: FUN_001a0380. */
 /* Supplied declaration required: FUN_001a08d8. */
@@ -54,8 +54,8 @@ void FUN_00137f94(void)
       if ((int)DAT_005b3fcc < 0) {
         FUN_002e3140();
       }
-      DAT_005b3fb4 = 1;
-      FUN_001a08d8(&DAT_005b3fd4);
+      g_asdFile = 1;
+      FUN_001a08d8(&g_asdFileEvent);
       FUN_0010032e(&DAT_005b3fcc);
       DAT_005b3fd0 = 1;
       FUN_001a0d08(&DAT_005b3fcc);
@@ -66,7 +66,7 @@ void FUN_00137f94(void)
       FUN_001469a8(DAT_005b3fc8);
     }
   }
-  FUN_001416f8();
+  asdFileHashPackClose();
   FUN_001a0380(0x138060);
   return;
 }

@@ -1,33 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f5a40` (_code @ 0x4f5a40, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Returns the signed value at +0x196 of the owner's current record, or 0 when there is none or the check reports busy. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0014aa78(void);
+typedef struct Record {
+    /* 0x000 */ u8 unk000[0x196];
+    /* 0x196 */ s16 value;
+} Record;
 
-/* Supplied declaration required: FUN_0014aa78. */
-extern int FUN_003e8430(void);
+typedef struct Owner {
+    /* 0x0000 */ u8 unk0000[0x1F54];
+    /* 0x1F54 */ Record *record;
+} Owner;
 
+extern void btlGetMainState(void);
+extern s32 FUN_003e8430(void);
 
-int FUN_004f5a40(int param_1)
-
+s32 FUN_004f5a40(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (*(int *)(param_1 + 0x1f54) != 0) {
-    FUN_0014aa78();
-    temp_v0 = FUN_003e8430();
-    if (temp_v0 == 0) {
-      temp_v0 = (int)*(short *)(*(int *)(param_1 + 0x1f54) + 0x196);
+    s32 result = (s32)owner->record;
+
+    if (result != 0) {
+        btlGetMainState();
+        result = FUN_003e8430();
+        if (result == 0) {
+            result = owner->record->value;
+        } else {
+            result = 0;
+        }
     }
-    else {
-      temp_v0 = 0;
-    }
-  }
-  return temp_v0;
+    return result;
 }
 
-} /* extern "C" */
+}

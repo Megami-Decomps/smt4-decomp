@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 
 
 unsigned int FUN_0038d238(void)
@@ -14,7 +14,7 @@ unsigned int FUN_0038d238(void)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   temp_v1 = *(int *)(temp_v0 + 0x4e58);
   temp_v2 = *(int *)(temp_v0 + 0x4e5c);
   if (temp_v1 != temp_v2) {

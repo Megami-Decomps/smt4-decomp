@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(unsigned char [64], unsigned char *);
 int FUN_00162790(...);
 int FUN_00164b5c(int, int, int, int, int, int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -37,7 +37,7 @@ extern unsigned char LAB_00285f24; /* 0x285f24 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -87,7 +87,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
   if (temp_v0 != 0) {
     temp_v10 = 0;
     temp_v12 = 0;
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_00164b5c(2,0x1a,1,param_1,param_2,0x65);
     FUN_001835b4(2,0x1a,0x8a,param_1,param_2,0x65);
     temp_v1 = FUN_001834a4(0x1a,0x49);
@@ -130,7 +130,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
         if ((temp_v5 != 0) || (temp_v5 = FUN_002a4894(temp_v1), temp_v5 != temp_v9)) {
           temp_v5 = temp_v14 + temp_v9;
           if (*(int *)(temp_v0 + temp_v5 * 4 + 0x927c) < 0) break;
-          FUN_001677c0();
+          efctSetSpeed();
           temp_v6 = FUN_002f3b14(temp_v5);
           temp_v7 = FUN_001834a4(0x1a,temp_v9 + 0xa9);
           if (temp_v15 != 0) {
@@ -204,7 +204,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
           else {
             FUN_0022f770(temp_v0,temp_v5,param_1 + temp_v10,param_2 + temp_v12,0);
           }
-          FUN_001677c0();
+          efctSetSpeed();
         }
         temp_v9 = temp_v9 + 1;
       } while (temp_v9 < temp_v4);
@@ -246,7 +246,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
                     );
       }
     }
-    FUN_001677c0();
+    efctSetSpeed();
   }
   return;
 }

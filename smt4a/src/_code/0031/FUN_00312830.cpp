@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_0010063a(void);
+int qsort(void);
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 
 
 void FUN_00312830(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_0010063a();
+  qsort();
   return;
 }
 

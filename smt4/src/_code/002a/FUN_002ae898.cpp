@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_002c0894(void);
-int FUN_002c415c(void);
+int asdMemFree(void);
 
-extern int FUN_002b93b0(void);
+extern int asdTMTexTableCallFileB(void);
 /* Supplied declaration required: FUN_002c0894. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_002ae898(void)
@@ -18,10 +18,10 @@ void FUN_002ae898(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002b93b0();
+  temp_v0 = asdTMTexTableCallFileB();
   if (temp_v0 != 0) {
     if (*(int *)(temp_v0 + 0xc) != 0) {
-      FUN_002c415c();
+      asdMemFree();
       *(unsigned int *)(temp_v0 + 0xc) = 0;
     }
     if (*(int *)(temp_v0 + 8) != 0) {

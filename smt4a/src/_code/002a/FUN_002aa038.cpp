@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00162790(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00240210(...);
@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00162790. */
 extern int FUN_001654d8(int);
 extern int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 extern int FUN_0022e9b8(void);
@@ -65,7 +65,7 @@ void FUN_002aa038(int param_1,int param_2)
   temp_v2 = FUN_002a4860();
   temp_v3 = FUN_002a4894(temp_v1);
   temp_v4 = FUN_002ab7c4(*(unsigned int *)(temp_v0 + (temp_v3 + temp_v2) * 4 + 0x927c));
-  FUN_001677c0();
+  efctSetSpeed();
   temp_v2 = FUN_002a4894(temp_v1);
   temp_v2 = FUN_001834a4(0x1a,temp_v2 + 0xb6);
   if (*(int *)(temp_v0 + 0x3fc) >= 4) {
@@ -128,13 +128,13 @@ void FUN_002aa038(int param_1,int param_2)
     temp_v1 = (int)*(short *)(temp_v1 + 10) +
             (((int)(temp_v5 + ((unsigned int)(temp_v5 >> 0x1f) >> 0x1e)) >> 2) * temp_v7 >> 0xc);
   }
-  FUN_001677c0();
+  efctSetSpeed();
   param_2 = param_2 + temp_v1;
   temp_v11 = temp_v11 + param_1;
   FUN_001835b4(2,0x1a,0xbe,temp_v11,param_2,0xab);
   FUN_001835b4(2,0x1a,0xbf,temp_v11,param_2,0xab);
   FUN_001835b4(2,0x1a,0xc0,temp_v11,param_2,0xab);
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_001835b4(2,0x1a,0xc1,temp_v11,param_2,0xb5);
   temp_v1 = FUN_002a4894(temp_v0 + 0x560);
   temp_v1 = FUN_00284140((int)*(short *)(temp_v0 + temp_v1 * 2 + 0x44c));
@@ -154,7 +154,7 @@ void FUN_002aa038(int param_1,int param_2)
       FUN_001835b4(2,0x1a,0x285,temp_v11,param_2,0xba);
     }
   }
-  FUN_001677c0();
+  efctSetSpeed();
   if (!((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)) {
     temp_v5 = FUN_001654e4(temp_v0 + 0xb0);
     temp_v7 = FUN_001654d8(temp_v0 + 0xb0);
@@ -165,7 +165,7 @@ void FUN_002aa038(int param_1,int param_2)
     temp_v7 = FUN_001654d8(temp_v0 + 0xb0);
     FUN_001835b4(2,0x1a,0x286,temp_v7 + temp_v11,temp_v5 + param_2,0xbf);
   }
-  FUN_001677c0();
+  efctSetSpeed();
   temp_v5 = FUN_001834a4(0x1a,0xc5);
   FUN_00240210(temp_v0,temp_v4,temp_v12,temp_v2 + temp_v3);
   temp_v4 = temp_v10;
@@ -181,7 +181,7 @@ void FUN_002aa038(int param_1,int param_2)
     temp_v4 = 0xf5ff9fff;
   }
   FUN_00162790(3,temp_v4,temp_v12);
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

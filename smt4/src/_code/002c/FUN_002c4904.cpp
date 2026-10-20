@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c5c14(unsigned int, unsigned int [2], int, int);
+int asdLoadFileSync(unsigned int, unsigned int [2], int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002c5c14. */
+/* Supplied declaration required: asdLoadFileSync. */
 
 
 void FUN_002c4904(unsigned int param_1)
@@ -21,7 +21,7 @@ void FUN_002c4904(unsigned int param_1)
   unsigned int temp_v0 [2];
   
   temp_v0[0] = 0;
-  FUN_002c5c14(param_1,temp_v0,1,0x80);
+  asdLoadFileSync(param_1,temp_v0,1,0x80);
   return;
 }
 

@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00287aec(void);
 
-extern int DAT_00447600; /* 0x447600 */
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_mapEnemy; /* 0x447600 */
+extern int g_lmapScene; /* 0x447e88 */
 
 /* Supplied declaration required: FUN_00287aec. */
 
@@ -25,11 +25,11 @@ unsigned int FUN_00253ba0(int param_1)
   float temp_v6;
   float temp_v7;
   
-  temp_v1 = DAT_00447600;
+  temp_v1 = g_mapEnemy;
   if (*(char *)(param_1 + 0x7d) == '\0') {
     return 0;
   }
-  temp_v5 = *(float *)(DAT_00447e88 + 0x1c);
+  temp_v5 = *(float *)(g_lmapScene + 0x1c);
   FUN_00287aec();
   temp_v7 = 300.0f;
   temp_v2 = 0;
@@ -44,7 +44,7 @@ unsigned int FUN_00253ba0(int param_1)
       temp_v0 = *(char *)(temp_v3 + 0xb1);
     }
     if (temp_v4 && temp_v0 != '\0') {
-      temp_v6 = *(float *)(DAT_00447e88 + 0x1c);
+      temp_v6 = *(float *)(g_lmapScene + 0x1c);
       FUN_00287aec();
       if (*(int *)(temp_v3 + 0xb8) == 2) {
         temp_v6 = temp_v6 + temp_v7;

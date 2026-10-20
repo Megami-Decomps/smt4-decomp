@@ -11,7 +11,7 @@ int FUN_002880a8(int);
 int FUN_002b2144(...);
 int FUN_002b90f8(...);
 int FUN_002ba1e0(...);
-int FUN_002bfe28(unsigned char [72], unsigned int);
+int mtx44Copy(unsigned char [72], unsigned int);
 int FUN_002c1b64(...);
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned char [48], float *);
@@ -48,7 +48,7 @@ typedef struct {
     unsigned int sp1B8; /* 0x1b8: local_1b8 */
 } param_1_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int DAT_00476634; /* 0x476634 */
 extern float DAT_004efd6c; /* 0x4efd6c */
 extern float DAT_004efd70; /* 0x4efd70 */
@@ -72,7 +72,7 @@ extern unsigned int FUN_002a7bc0(void);
 /* Supplied declaration required: FUN_002b2144. */
 /* Supplied declaration required: FUN_002b90f8. */
 /* Supplied declaration required: FUN_002ba1e0. */
-/* Supplied declaration required: FUN_002bfe28. */
+/* Supplied declaration required: mtx44Copy. */
 extern int FUN_002bfefc(unsigned int *);
 /* Supplied declaration required: FUN_002c1b64. */
 extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
@@ -134,10 +134,10 @@ void FUN_001aa6a4(int param_1)
   if (*(char *)(param_1 + 1000) == '\0') {
     return;
   }
-  FUN_002880a8(DAT_0044ea00);
+  FUN_002880a8(g_titleScene);
   temp_v0 = FUN_002a7bc0();
-  FUN_002bfe28(temp_v18,temp_v0);
-  temp_v3 = DAT_0044ea00;
+  mtx44Copy(temp_v18,temp_v0);
+  temp_v3 = g_titleScene;
   temp_v9 = (*(unsigned char *)(param_1 + 0x130) & 7) >> 1;
   if (temp_v9 != 0) {
     if (temp_v9 != 1) {
@@ -354,8 +354,8 @@ void FUN_001aa6a4(int param_1)
     FUN_0028648c(temp_v30,&temp_v14);
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
-  FUN_002b90f8(DAT_0044ea00,temp_v18);
-  FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(param_1 + 300));
+  FUN_002b90f8(g_titleScene,temp_v18);
+  FUN_002c1b64(g_titleScene,*(unsigned int *)(param_1 + 300));
   temp_v14 = temp_v10;
   temp_v15 = temp_v11;
   temp_v16 = temp_v10;

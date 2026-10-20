@@ -40,7 +40,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -66,9 +66,9 @@ void FUN_0039723c(fn_0039723c_arg0 *param_1)
   int temp_v4;
   int *piVar6;
   
-  FUN_002c39a4(DAT_0044ea00);
+  FUN_002c39a4(g_titleScene);
   FUN_002bed3c();
-  temp_v0 = DAT_0044ea00;
+  temp_v0 = g_titleScene;
   temp_v2 = FUN_002c5d80(1,0);
   piVar6 = (int *)(temp_v0 + 0x124c);
   temp_v3 = *piVar6;
@@ -79,10 +79,10 @@ void FUN_0039723c(fn_0039723c_arg0 *param_1)
     (**(romwright_code **)(temp_v0 + 0x1268))();
     *(unsigned char *)(temp_v0 + 0x1264) = 0;
   }
-  FUN_002c1b64(DAT_0044ea00,0);
+  FUN_002c1b64(g_titleScene,0);
   FUN_002bf538();
   FUN_002bf380(2,0x2e,0,*(unsigned int *)&param_1->field_0xac,0,0xb);
-  temp_v0 = DAT_0044ea00;
+  temp_v0 = g_titleScene;
   temp_v2 = FUN_002c5da8(6,1,0);
   piVar6 = (int *)(temp_v0 + 0x12ac);
   temp_v3 = piVar6[*piVar6 + 2];
@@ -98,7 +98,7 @@ void FUN_0039723c(fn_0039723c_arg0 *param_1)
     FUN_002bf288(2,0x2e,0x3d,*(unsigned int *)&param_1->field_0xa4,0,0xb);
     FUN_002bf288(2,0x2e,0x3e,*(unsigned int *)&param_1->field_0xa4,0,0xb);
   }
-  temp_v0 = DAT_0044ea00;
+  temp_v0 = g_titleScene;
   temp_v2 = FUN_002c5da8(6,7,0);
   piVar6 = (int *)(temp_v0 + 0x12ac);
   temp_v3 = piVar6[*piVar6 + 2];
@@ -113,8 +113,8 @@ void FUN_0039723c(fn_0039723c_arg0 *param_1)
   }
   FUN_00397db0(param_1,temp_v1);
   FUN_002bf538();
-  temp_v0 = DAT_0044ea00;
-  piVar6 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v0 = g_titleScene;
+  piVar6 = (int *)(g_titleScene + 0x124c);
   temp_v2 = *piVar6;
   temp_v3 = piVar6[temp_v2 + 2];
   *piVar6 = temp_v2 - 1;
@@ -122,8 +122,8 @@ void FUN_0039723c(fn_0039723c_arg0 *param_1)
     (**(romwright_code **)(temp_v0 + 0x1268))();
     *(unsigned char *)(temp_v0 + 0x1264) = 0;
   }
-  FUN_002c198c(DAT_0044ea00);
-  FUN_002c18e4(DAT_0044ea00);
+  FUN_002c198c(g_titleScene);
+  FUN_002c18e4(g_titleScene);
   return;
 }
 

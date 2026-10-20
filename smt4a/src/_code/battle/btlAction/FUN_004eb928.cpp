@@ -19,7 +19,7 @@ int FUN_004d7a70(...);
 int FUN_004d7fe4(...);
 int FUN_004dcc5c(...);
 int FUN_004dce1c(...);
-int FUN_004de8b8(...);
+int btlUnitSetParam(...);
 int FUN_004e626c(...);
 int FUN_004e7168(...);
 int FUN_004ecd7c(...);
@@ -66,11 +66,11 @@ int func_0x004fb574(...);
 int func_0x004fe7b0(...);
 
 int FUN_001568f8(...);
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_001ab888(void);
 int FUN_001aba54(void);
 int FUN_00222488(unsigned int *);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 int FUN_003756c8(int);
 int FUN_00388758(...);
 int FUN_003e8bb0(...);
@@ -102,7 +102,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_2_stack;
 
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern int DAT_00571140; /* 0x571140 */
 extern unsigned int DAT_00571148; /* 0x571148 */
 extern unsigned int DAT_0057114c; /* 0x57114c */
@@ -150,13 +150,13 @@ extern unsigned int DAT_005715a4; /* 0x5715a4 */
 extern int DAT_005715a8; /* 0x5715a8 */
 extern int DAT_005715ac; /* 0x5715ac */
 extern int DAT_00573808; /* 0x573808 */
-extern int DAT_00573898; /* 0x573898 */
+extern int g_btlEvent; /* 0x573898 */
 extern int DAT_0057a9c8; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_001568f8. */
 extern int FUN_001633a0(unsigned int);
 extern int FUN_00167f08(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00178b04. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_00192550. */
@@ -169,7 +169,7 @@ extern unsigned int FUN_00228ab0(int);
 /* Supplied declaration required: FUN_002a49e4. */
 /* Supplied declaration required: FUN_002c2d5c. */
 /* Supplied declaration required: FUN_002c7bf4. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern int FUN_0034919c(void);
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: FUN_003756c8. */
@@ -214,7 +214,7 @@ extern int FUN_004d84e8(int);
 /* Supplied declaration required: FUN_004dce1c. */
 /* Supplied declaration required: FUN_004dd0c4. */
 /* Supplied declaration required: FUN_004de7a0. */
-/* Supplied declaration required: FUN_004de8b8. */
+/* Supplied declaration required: btlUnitSetParam. */
 /* Supplied declaration required: FUN_004e0114. */
 /* Supplied declaration required: FUN_004e20c0. */
 /* Supplied declaration required: FUN_004e5a40. */
@@ -332,7 +332,7 @@ void FUN_004eb928(int *param_1,unsigned int param_2)
   unsigned int *puStack_2c;
   
   temp_v3 = *param_1;
-  temp_v20 = DAT_0057113c + *(int *)(temp_v3 + 0xa4) * 0x1254;
+  temp_v20 = g_btlScriptUnit + *(int *)(temp_v3 + 0xa4) * 0x1254;
   puVar25 = (unsigned int *)(temp_v20 + 4);
   switch(param_2) {
   case 1:
@@ -367,13 +367,13 @@ void FUN_004eb928(int *param_1,unsigned int param_2)
     break;
   case 2:
     FUN_00222488(puVar25);
-    FUN_002e6354(temp_v20 + 0x3c,0x85);
+    sysMemClear(temp_v20 + 0x3c,0x85);
     FUN_004e8454(param_1);
     temp_v3 = FUN_00167f08();
     temp_v20 = FUN_003e8430(*param_1);
     if (temp_v20 != 0) {
       if (temp_v3 != 0x3f) {
-        FUN_001681cc(0x3f);
+        sysPlaySe(0x3f);
       }
     }
     else if ((temp_v3 != 0xb5) && (temp_v3 != 0xb6)) {
@@ -383,18 +383,18 @@ void FUN_004eb928(int *param_1,unsigned int param_2)
     return;
   case 3:
   case 0xf:
-    FUN_002e6354(temp_v20 + 0x3c,0x85);
+    sysMemClear(temp_v20 + 0x3c,0x85);
     FUN_004e8454(param_1);
     return;
   case 5:
-    FUN_002e6354(temp_v20 + 0x3c,0x85);
+    sysMemClear(temp_v20 + 0x3c,0x85);
     return;
   case 6:
     FUN_004dd0c4(param_1,puVar25);
     return;
   case 8:
     FUN_004aa8c8(DAT_0057a9c8);
-    FUN_002e6354(temp_v20 + 0x3c,0x85);
+    sysMemClear(temp_v20 + 0x3c,0x85);
     FUN_001ab888();
     return;
   case 9:
@@ -1353,7 +1353,7 @@ code_r0x004f054c:
     *(unsigned short *)(*(int *)(temp_v20 + 0x2c) + 0x1be) = 2;
     *(unsigned short *)(*(int *)(temp_v20 + 0x2c) + 0x1c0) =
          *(unsigned short *)(*(int *)(temp_v20 + 0x2c) + 0x1d0);
-    FUN_004de8b8(param_1,2,0,1);
+    btlUnitSetParam(param_1,2,0,1);
     FUN_003eda04(*param_1,*(unsigned int *)(temp_v20 + 0x2c));
     temp_v3 = *param_1;
     FUN_003f20f0();
@@ -1404,24 +1404,24 @@ code_r0x004f054c:
     *(unsigned int *)(*param_1 + 0x4e54) = temp_v4;
     return;
   case 0x1a:
-    temp_v3 = FUN_004d84e8(DAT_00573898);
+    temp_v3 = FUN_004d84e8(g_btlEvent);
     if (temp_v3 == 0) {
       temp_v3 = (int)*(short *)(*(int *)(temp_v20 + 0x24) + 0x6e);
       if (*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be) != 0xb) {
-        temp_v20 = DAT_00573898;
-        FUN_004d7a70(DAT_00573898,3,temp_v3,0);
+        temp_v20 = g_btlEvent;
+        FUN_004d7a70(g_btlEvent,3,temp_v3,0);
         if (temp_v20 == 0) {
           return;
         }
       }
       else {
-        temp_v20 = DAT_00573898;
-        FUN_004d7a70(DAT_00573898,7,temp_v3,0);
+        temp_v20 = g_btlEvent;
+        FUN_004d7a70(g_btlEvent,7,temp_v3,0);
         if (temp_v20 == 0) {
           return;
         }
       }
-      FUN_004d7fe4(DAT_00573898);
+      FUN_004d7fe4(g_btlEvent);
       return;
     }
     break;
@@ -1438,9 +1438,9 @@ code_r0x004f054c:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v3 = FUN_004d84e8(DAT_00573898);
+    temp_v3 = FUN_004d84e8(g_btlEvent);
     if (temp_v3 == 0) {
-      FUN_004d7fe4(DAT_00573898);
+      FUN_004d7fe4(g_btlEvent);
       return;
     }
     break;
@@ -1453,7 +1453,7 @@ code_r0x004f054c:
   case 0x24:
     temp_v3 = FUN_004ea0c0(param_1,puVar25);
     if (temp_v3 != 0) {
-      FUN_004d7fe4(DAT_00573898);
+      FUN_004d7fe4(g_btlEvent);
       return;
     }
     break;

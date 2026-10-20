@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_00297410(int);
 int FUN_002a5ed0(int, int);
-int FUN_002c4c2c(int);
+int asdTMTexTableLoadSprites(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00297410. */
 /* Supplied declaration required: FUN_002a5ed0. */
-/* Supplied declaration required: FUN_002c4c2c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 
 
 void FUN_00201ac8(void)
@@ -22,7 +22,7 @@ void FUN_00201ac8(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  FUN_002c4c2c(0x19);
+  asdTMTexTableLoadSprites(0x19);
   temp_v0 = 0;
   do {
     FUN_002a5ed0(0x19,temp_v0);

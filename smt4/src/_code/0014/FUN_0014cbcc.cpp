@@ -7,9 +7,9 @@ extern "C" {
 int FUN_002a43bc(int, unsigned int, int);
 int FUN_002a4584(int, unsigned char [128], unsigned char [128], int *, unsigned int, int, unsigned int);
 int FUN_002b64a0(...);
-int FUN_002bd75c(void);
+int asdTextureCreate(void);
 int FUN_002bf694(...);
-int FUN_002c415c(int);
+int asdMemFree(int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -20,16 +20,16 @@ typedef struct {
 extern unsigned char LAB_0014ce10; /* 0x14ce10 */
 extern unsigned char LAB_0014ce18; /* 0x14ce18 */
 extern unsigned char LAB_0014ce24; /* 0x14ce24 */
-extern int DAT_00433130; /* 0x433130 */
+extern int g_aocDisplay; /* 0x433130 */
 
 /* Supplied declaration required: FUN_002a43bc. */
 /* Supplied declaration required: FUN_002a4584. */
 /* Supplied declaration required: FUN_002b64a0. */
-/* Supplied declaration required: FUN_002bd75c. */
+/* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_002bf694. */
-extern int FUN_002c1870(int, unsigned char *, unsigned int);
+extern int rt_memcmp(int, unsigned char *, unsigned int);
 extern int FUN_002c30c4(unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 unsigned int FUN_0014cbcc(unsigned int param_1,int *param_2,unsigned int param_3)
@@ -80,20 +80,20 @@ unsigned int FUN_0014cbcc(unsigned int param_1,int *param_2,unsigned int param_3
           temp_v0 = temp_v3 | 2;
         }
       }
-      temp_v2 = DAT_00433130;
-      FUN_002a4584(DAT_00433130,temp_v6,temp_v5,&temp_v4,temp_v0,0x80,param_3);
+      temp_v2 = g_aocDisplay;
+      FUN_002a4584(g_aocDisplay,temp_v6,temp_v5,&temp_v4,temp_v0,0x80,param_3);
       if (temp_v2 != 0) {
         if (*(char *)(param_2[1] + 0xd) != '\0') {
           FUN_002a43bc(temp_v2,temp_v3,0x80);
         }
-        temp_v1 = FUN_002c1870(temp_v2,&LAB_0014ce24,4);
+        temp_v1 = rt_memcmp(temp_v2,&LAB_0014ce24,4);
         if (temp_v1 == 0) {
           if (*(int *)(temp_v2 + 0x24) != 0) {
             param_2[2] = 0;
           }
           else {
             temp_v3 = (unsigned int)((param_2[4] & 0x10000U) != 0);
-            FUN_002bd75c();
+            asdTextureCreate();
             param_2[2] = temp_v3;
             *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v2 + 8);
             *(unsigned int *)(param_2[2] + 0x14) = *(unsigned int *)(temp_v2 + 0xc);
@@ -112,7 +112,7 @@ unsigned int FUN_0014cbcc(unsigned int param_1,int *param_2,unsigned int param_3
           param_2[4] = param_2[4] | 2;
           return 1;
         }
-        FUN_002c415c(temp_v2);
+        asdMemFree(temp_v2);
       }
     }
   }

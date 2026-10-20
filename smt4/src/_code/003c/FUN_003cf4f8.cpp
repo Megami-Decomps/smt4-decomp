@@ -19,9 +19,9 @@ typedef struct {
 } param_3_stack;
 
 extern int FUN_00229914(int *, int, int);
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00247478. */
-extern unsigned int FUN_002939f4(void);
+extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: FUN_002ae164. */
 
 
@@ -51,7 +51,7 @@ void FUN_003cf4f8(int *param_1,int param_2,short *param_3)
   unsigned int temp_v14;
   unsigned int temp_v15;
   
-  temp_v2 = FUN_002939f4();
+  temp_v2 = btlGetMainState();
   FUN_00247478(temp_v9,temp_v2,*(unsigned int *)(param_2 + 0x20));
   psVar5 = asStack_244;
   temp_v4 = 0x85;
@@ -98,7 +98,7 @@ void FUN_003cf4f8(int *param_1,int param_2,short *param_3)
   temp_v5 = 0;
   temp_v7 = temp_v4;
   if (((*(unsigned int *)(*param_1 + 0x44a0) & 0x40000) == 0) && (temp_v7 = temp_v6, temp_v6 < temp_v4)) {
-    temp_v4 = FUN_0023eae0((temp_v4 - temp_v6) & 0xffff);
+    temp_v4 = randRange((temp_v4 - temp_v6) & 0xffff);
     temp_v7 = temp_v6 + temp_v4;
   }
   do {
@@ -128,7 +128,7 @@ void FUN_003cf4f8(int *param_1,int param_2,short *param_3)
       temp_v4 = temp_v5;
     } while (temp_v6 != 0);
     if (temp_v5 != 0) {
-      temp_v4 = FUN_0023eae0((temp_v5 - 1U) & 0xffff);
+      temp_v4 = randRange((temp_v5 - 1U) & 0xffff);
       temp_v1 = asStack_244[temp_v4 * 2];
       asStack_244[temp_v4 * 2 + 1] = asStack_244[temp_v4 * 2 + 1] + 1;
       param_3[1] = 1;

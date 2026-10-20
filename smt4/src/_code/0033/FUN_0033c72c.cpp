@@ -16,7 +16,7 @@ int FUN_002bf288(int, int, int, int, int, int);
 int FUN_002bf538(void);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
-int aeabi_idivmod(...);
+int __aeabi_idivmod(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -28,7 +28,7 @@ typedef struct {
 extern unsigned char LAB_0033cc78; /* 0x33cc78 */
 extern unsigned char DAT_00400498; /* 0x400498 */
 extern char s__B_B_B_B_00434378[17]; /* 0x434378 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -47,7 +47,7 @@ extern int DAT_0044ea00; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf538. */
 extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_0033c72c(int param_1,int param_2,int param_3)
@@ -85,13 +85,13 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
   FUN_002bf538();
   temp_v13 = 0.29f;
   temp_v10 = temp_v13;
-  FUN_002ba12c(DAT_0044ea00);
+  FUN_002ba12c(g_titleScene);
   temp_v9 = (int)temp_v13;
   temp_v13 = temp_v10;
-  FUN_002ba12c(DAT_0044ea00);
+  FUN_002ba12c(g_titleScene);
   temp_v16 = (int)temp_v10;
-  FUN_002ba12c(DAT_0044ea00);
-  temp_v15 = DAT_0044ea00;
+  FUN_002ba12c(g_titleScene);
+  temp_v15 = g_titleScene;
   temp_v14 = romwright_piece_4_4(in_s2,(int)temp_v13);
   temp_v1 = FUN_002c5da8(6,1,0);
   piVar8 = (int *)(temp_v15 + 0x12ac);
@@ -107,8 +107,8 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
   temp_v19 = romwright_piece_4_4(temp_v16,temp_v15);
   temp_v13 = (float)VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002bf288(2,0x14,0x56,(int)((float)temp_v12 + temp_v13),temp_v15,param_2);
-  temp_v15 = DAT_0044ea00;
-  piVar8 = (int *)(DAT_0044ea00 + 0x12ac);
+  temp_v15 = g_titleScene;
+  piVar8 = (int *)(g_titleScene + 0x12ac);
   temp_v2 = *piVar8;
   temp_v1 = piVar8[temp_v2 + 2];
   *piVar8 = temp_v2 - 1;
@@ -135,7 +135,7 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
     temp_v15 = 0;
     do {
       if (*(int *)(param_3 + 0x2c) <= temp_v15) break;
-      aeabi_idivmod(*(int *)(param_3 + 0x30) + temp_v15);
+      __aeabi_idivmod(*(int *)(param_3 + 0x30) + temp_v15);
       temp_v13 = (float)VectorSignedToFloat((int)temp_v14,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v1 = param_1 + temp_v15 * 8;
       FUN_00288790((int)(short)*(unsigned int *)(param_3 + temp_v4 * 4),
@@ -150,7 +150,7 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
     temp_v17 = (unsigned long long)(unsigned int)(*(float *)(param_3 + 0x34) * 3.0f);
     do {
       if (*(int *)(param_3 + 0x2c) + 1 <= temp_v15) break;
-      aeabi_idivmod(*(int *)(param_3 + 0x30) + temp_v15,*(int *)(param_3 + 0x2c));
+      __aeabi_idivmod(*(int *)(param_3 + 0x30) + temp_v15,*(int *)(param_3 + 0x2c));
       FUN_002bf538();
       temp_v1 = param_1 + temp_v15 * 8;
       temp_v13 = (float)VectorSignedToFloat((int)temp_v14,(unsigned char)(in_fpscr >> 0x16) & 3);

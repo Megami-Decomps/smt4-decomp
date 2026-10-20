@@ -13,7 +13,7 @@ extern unsigned int DAT_005715fc; /* 0x5715fc */
 extern int *DAT_00571600; /* 0x571600 */
 
 /* Supplied declaration required: FUN_0014bd84. */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00212234. */
 extern int FUN_003874fc(int);
 extern unsigned int FUN_003e83b4(int, int, unsigned int);
@@ -30,7 +30,7 @@ unsigned int FUN_002ba870(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   piVar1 = DAT_00571600;
   if (DAT_00571600 != (int *)0x0) {
     temp_v1 = *DAT_00571600;

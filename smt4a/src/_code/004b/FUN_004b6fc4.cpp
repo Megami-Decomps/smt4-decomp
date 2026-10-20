@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0013f1b8(int, int);
-int FUN_0016007c(void);
+int asdTMTexTableLoadTmx(int, int);
+int asdOperatorNew(void);
 int FUN_0022677c(int, int);
 int FUN_002804b0(...);
 int FUN_002bf464(void);
@@ -25,9 +25,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0013f1b8. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 extern int FUN_0015a21c(int);
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_002bf464. */
@@ -55,7 +55,7 @@ void FUN_004b6fc4(int param_1)
   FUN_004ba078();
   FUN_004ba1f4(param_1 + 0x9c);
   *(unsigned int *)(param_1 + 0x34) = 0xffffffff;
-  FUN_0013f1b8(0x18,0);
+  asdTMTexTableLoadTmx(0x18,0);
   FUN_0031a400();
   FUN_003b61ec();
   FUN_002bf464();
@@ -88,7 +88,7 @@ void FUN_004b6fc4(int param_1)
   FUN_0022677c(0,0xff);
   FUN_0022677c(1,0xff);
   temp_v0 = 0x7a0;
-  FUN_0016007c();
+  asdOperatorNew();
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = FUN_0015a21c(temp_v0 + 0x4f0);

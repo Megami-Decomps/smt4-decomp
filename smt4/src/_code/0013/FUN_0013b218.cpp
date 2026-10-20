@@ -31,7 +31,7 @@ extern unsigned char LAB_00152604; /* 0x152604 */
 
 extern int FUN_00147dd0(void);
 extern unsigned int FUN_002ad264(void);
-extern int FUN_002b3abc(void);
+extern int nngxCheckVramBank(void);
 /* Supplied declaration required: FUN_002b5820. */
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002c38fc. */
@@ -84,7 +84,7 @@ void FUN_0013b218(int param_1)
   *(unsigned char *)(param_1 + 0x76) = 0;
   nn_os_LightEvent_Initialize(param_1 + 100,0);
   temp_v2 = FUN_002ad264();
-  temp_v0 = FUN_002b3abc();
+  temp_v0 = nngxCheckVramBank();
   if (temp_v0 == 0) {
     temp_v1 = 1;
   }

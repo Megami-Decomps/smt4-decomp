@@ -39,7 +39,7 @@ struct fn_003c0ae0_arg1 {
     uint field_0x90; /* +0x90 */
 };
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_00439ce8; /* 0x439ce8 */
 extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 
@@ -115,11 +115,11 @@ LAB_003c0ba0:
       param_2->field_0xc = 0;
       param_2->field_0x10 = 0;
       param_2->field_0x14 = 0;
-      temp_v3 = DAT_004342c8;
-      in_s0 = *(float *)(DAT_004342c8 + 0x570);
+      temp_v3 = g_btlMain;
+      in_s0 = *(float *)(g_btlMain + 0x570);
       temp_v0 = param_2->field_0x3c;
       temp_v7 = 0.1f;
-      temp_v6 = *(float *)(DAT_004342c8 + 0x5a8) * 0.5f * 0.0055555557f * 3.1415927f;
+      temp_v6 = *(float *)(g_btlMain + 0x5a8) * 0.5f * 0.0055555557f * 3.1415927f;
       FUN_002881bc();
       in_s0 = in_s0 / (120.0f / temp_v6);
       temp_v6 = in_s0;

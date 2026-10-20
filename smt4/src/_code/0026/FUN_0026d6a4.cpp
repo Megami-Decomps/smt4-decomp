@@ -20,7 +20,7 @@ int FUN_0029eb5c(...);
 int FUN_0029efa8(...);
 int FUN_002a0cc8(int);
 int FUN_002bc01c(int);
-int FUN_002bd8e8(int, int, int);
+int timerStart(int, int, int);
 int FUN_002c1658(int, int);
 int SBORROW4(...);
 
@@ -43,7 +43,7 @@ extern int FUN_0029e02c(void);
 /* Supplied declaration required: FUN_0029efa8. */
 /* Supplied declaration required: FUN_002a0cc8. */
 /* Supplied declaration required: FUN_002bc01c. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002c1658. */
 
 
@@ -95,10 +95,10 @@ unsigned int FUN_0026d6a4(int param_1)
   temp_v0 = *(unsigned char *)(temp_v5 + 0x42) ^ 1;
   *(unsigned char *)(temp_v5 + 0x42) = temp_v0;
   if (temp_v0 != 0) {
-    FUN_002bd8e8(temp_v5 + 0x4c8,6,0);
+    timerStart(temp_v5 + 0x4c8,6,0);
   }
   else {
-    FUN_002bd8e8(temp_v5 + 0x4c8,4,0);
+    timerStart(temp_v5 + 0x4c8,4,0);
   }
   FUN_002bc01c(0x100016d);
   if (*(int *)(temp_v5 + 0x1c) != 6) {

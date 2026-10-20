@@ -1,15 +1,12 @@
-#include "romwright_types.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
-
+extern GameStateA g_gameState;
 
 void FUN_00303a48(void)
-
 {
-  (*(unsigned char *)((unsigned char *)&DAT_005f15fc + 0x2c9)) = 1;
-  return;
+    g_gameState.unk2C9 = 1;
 }
 
 } /* extern "C" */

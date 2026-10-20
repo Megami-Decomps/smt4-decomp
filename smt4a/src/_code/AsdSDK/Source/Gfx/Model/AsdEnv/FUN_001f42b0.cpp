@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0019a5a0(...);
-int FUN_002bed94(int);
+int asdMemFree(...);
+int asdModelSlotClearActive(int);
 int FUN_002e3328(unsigned int);
 int FUN_004491fc(unsigned int, unsigned int, int);
 int nw_gfx_res_ResGraphicsFile_Cleanup(unsigned int *[2]);
@@ -19,13 +19,13 @@ typedef struct {
 
 extern unsigned char DAT_00636d20; /* 0x636d20 */
 
-/* Supplied declaration required: FUN_0019a5a0. */
-extern unsigned int FUN_0027242c(int);
-/* Supplied declaration required: FUN_002bed94. */
+/* Supplied declaration required: asdMemFree. */
+extern unsigned int asdModelGetSlotArray3(int);
+/* Supplied declaration required: asdModelSlotClearActive. */
 /* Supplied declaration required: FUN_002e3328. */
-extern int FUN_0034101c(int);
-extern unsigned int FUN_0034102c(int);
-extern int FUN_0036baec(int);
+extern int asdModelGetSlotArray2(int);
+extern unsigned int asdModelGetSlotHandle(int);
+extern int asdModelGetSlotArray1(int);
 /* Supplied declaration required: FUN_004491fc. */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Cleanup. */
 
@@ -49,7 +49,7 @@ void FUN_001f42b0(int param_1)
   int temp_v9;
   
   temp_v9 = param_1;
-  temp_v0 = FUN_0036baec(param_1);
+  temp_v0 = asdModelGetSlotArray1(param_1);
   piVar2 = *(int **)(temp_v0 + 0x18);
   temp_v4 = 1;
   temp_v6 = (*(int *)(temp_v0 + 0x1c) - (int)piVar2) >> 2;
@@ -64,7 +64,7 @@ void FUN_001f42b0(int param_1)
     } while (temp_v4 < temp_v6 + 1);
   }
   *(unsigned int *)(temp_v0 + 0x1c) = *(unsigned int *)(temp_v0 + 0x18);
-  temp_v0 = FUN_0034101c(temp_v9);
+  temp_v0 = asdModelGetSlotArray2(temp_v9);
   temp_v4 = 1;
   piVar2 = *(int **)(temp_v0 + 0x18);
   temp_v6 = (*(int *)(temp_v0 + 0x1c) - (int)piVar2) >> 2;
@@ -79,8 +79,8 @@ void FUN_001f42b0(int param_1)
     } while (temp_v4 < temp_v6 + 1);
   }
   *(unsigned int *)(temp_v0 + 0x1c) = *(unsigned int *)(temp_v0 + 0x18);
-  temp_v1 = FUN_0027242c(temp_v9);
-  temp_v2 = FUN_0034102c(temp_v9);
+  temp_v1 = asdModelGetSlotArray3(temp_v9);
+  temp_v2 = asdModelGetSlotHandle(temp_v9);
   temp_v6 = temp_v9 * 0x40;
   FUN_004491fc(temp_v1,temp_v2,temp_v6 + 0x636d60);
   temp_v8[0] = (unsigned int *)**(unsigned int **)(temp_v9 * 4 + 0x5b3be0);
@@ -96,9 +96,9 @@ void FUN_001f42b0(int param_1)
   }
   *(unsigned int *)(temp_v6 + 0x636d68) = *(unsigned int *)(temp_v6 + 0x636d64);
   FUN_002e3328(*(unsigned int *)(temp_v9 * 4 + 0x5b3be0));
-  FUN_0019a5a0(*(unsigned int *)(temp_v9 * 4 + 0x5b3bd8));
+  asdMemFree(*(unsigned int *)(temp_v9 * 4 + 0x5b3bd8));
   *(unsigned int *)(temp_v9 * 4 + 0x5b3bd8) = 0;
-  FUN_002bed94(temp_v9);
+  asdModelSlotClearActive(temp_v9);
   temp_v6 = 0;
   temp_v0 = temp_v9 * 0x284 + 0x635900;
   temp_v4 = temp_v9 * 0x284 + 0x635e08;
@@ -114,7 +114,7 @@ void FUN_001f42b0(int param_1)
       *temp_v8[0] = 0;
     }
     if (*(int *)(temp_v3 + 0x4c) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     temp_v3 = temp_v0 + temp_v6 * 4;
     puVar9 = *(unsigned int **)(temp_v3 + 0x264);
@@ -132,7 +132,7 @@ void FUN_001f42b0(int param_1)
       *temp_v8[0] = 0;
     }
     if (*(int *)(temp_v3 + 0x4c) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     temp_v3 = temp_v4 + temp_v6 * 4;
     puVar9 = *(unsigned int **)(temp_v3 + 0x264);
@@ -150,7 +150,7 @@ void FUN_001f42b0(int param_1)
       *temp_v8[0] = 0;
     }
     if (*(int *)(temp_v3 + 0x4c) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     temp_v3 = temp_v5 + temp_v6 * 4;
     puVar9 = *(unsigned int **)(temp_v3 + 0x264);
@@ -167,7 +167,7 @@ void FUN_001f42b0(int param_1)
       *(unsigned int *)(temp_v3 + 0x44) = 0;
     }
     if (*(int *)(temp_v3 + 0x4c) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     temp_v3 = temp_v7 + temp_v6 * 4;
     puVar9 = *(unsigned int **)(temp_v3 + 0x264);

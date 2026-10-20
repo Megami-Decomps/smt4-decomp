@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e3268(void);
+int asdOperatorNewB(void);
 int FUN_002e32a4(int);
 
-/* Supplied declaration required: FUN_002e3268. */
+/* Supplied declaration required: asdOperatorNewB. */
 /* Supplied declaration required: FUN_002e32a4. */
 
 
@@ -15,7 +15,7 @@ int FUN_001006c2(int param_1)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_002e3268();
+  asdOperatorNewB();
   if (param_1 == 0) {
     FUN_002e32a4(3);
   }

@@ -9,7 +9,7 @@ int FUN_002671f4(int);
 int FUN_0028c618(unsigned int, int);
 int FUN_0028c640(unsigned int, int, int *);
 int FUN_002a5710(unsigned int);
-int FUN_002a775c(void);
+int asdMdlManagerDestroy(void);
 
 extern int *DAT_00447a48; /* 0x447a48 */
 extern signed char DAT_0049f93e; /* 0x49f93e */
@@ -20,7 +20,7 @@ extern int FUN_0027cda0(void);
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: FUN_0028c640. */
 /* Supplied declaration required: FUN_002a5710. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 
 
 void FUN_00274fac(void)
@@ -103,7 +103,7 @@ void FUN_00274fac(void)
     temp_v0 = 0x17;
     do {
       if (DAT_00447a48[temp_v0 * 10 + 0xd] != 0) {
-        FUN_002a775c();
+        asdMdlManagerDestroy();
         DAT_00447a48[temp_v0 * 10 + 0xd] = 0;
       }
       piVar2 = DAT_00447a48;

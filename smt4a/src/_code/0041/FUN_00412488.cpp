@@ -25,7 +25,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_0015688c(void);
 extern int FUN_001633a0(unsigned int);
 extern int FUN_00187168(void);
@@ -90,7 +90,7 @@ void FUN_00412488(void)
     temp_v5 = FUN_001633a0((temp_v5 - 1U) & 0xffff);
     temp_v4 = *(unsigned short *)((int)&temp_v6 + temp_v5 * 2);
   }
-  temp_v5 = FUN_0014aa78();
+  temp_v5 = btlGetMainState();
   temp_v2 = FUN_0019acdc(temp_v4,1);
   temp_v6 = (unsigned int *)&temp_v13;
   FUN_003f1b3c(temp_v5,temp_v2,3,&temp_v12);

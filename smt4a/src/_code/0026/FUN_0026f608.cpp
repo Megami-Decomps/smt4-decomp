@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0010063a(...);
+int qsort(...);
 int FUN_00184310(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_002e6dd4(...);
 int FUN_0032fea0(...);
 int FUN_003c3f1c(...);
@@ -15,13 +15,13 @@ int FUN_004daf18(...);
 extern int FUN_002b2ca8(...); /* 0x2b2ca8 */
 extern int *DAT_0057f290; /* 0x57f290 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_00229210(int);
 extern int FUN_0026140c(void);
 extern unsigned long long FUN_0026264c(unsigned short);
 extern unsigned long long FUN_002a4b28(unsigned short);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: FUN_003c3f1c. */
@@ -47,10 +47,10 @@ void FUN_0026f608(void)
   
   piVar1 = DAT_0057f290;
   temp_v0 = FUN_0026140c();
-  FUN_002e6354(piVar1 + 0x175,0x962);
+  sysMemClear(piVar1 + 0x175,0x962);
   temp_v1 = (int)piVar1 + 0xf36;
   FUN_002e6dd4(temp_v1,0x82);
-  FUN_002e6354(piVar1 + 0x3ee,0x3ea);
+  sysMemClear(piVar1 + 0x3ee,0x3ea);
   temp_v6 = 0;
   temp_v5 = 0;
   puVar8 = (unsigned short *)0x0;
@@ -87,7 +87,7 @@ void FUN_0026f608(void)
     }
     puVar8 = (unsigned short *)(((int)puVar8 + 1U) & 0xffff);
   } while (puVar8 < (unsigned short *)0x4b1);
-  FUN_0010063a(piVar1 + 0x175,temp_v6,2,FUN_002b2ca8);
+  qsort(piVar1 + 0x175,temp_v6,2,FUN_002b2ca8);
   temp_v1 = 0;
   temp_v4 = 0;
   do {

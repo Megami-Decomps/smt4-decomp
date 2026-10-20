@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0013f1b8(...);
+int asdTMTexTableLoadTmx(...);
 int FUN_0014afd0(...);
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_002e1208(...);
 int VectorSignedToFloat(...);
 
@@ -28,22 +28,22 @@ extern unsigned char LAB_0032b984; /* 0x32b984 */
 extern unsigned char LAB_0032b998; /* 0x32b998 */
 extern unsigned char LAB_00358918; /* 0x358918 */
 extern unsigned char LAB_0036b1ec; /* 0x36b1ec */
-extern int FUN_0037a118(...); /* 0x37a118 */
+extern int staffRollClose(...); /* 0x37a118 */
 extern unsigned char LAB_0037a1a0; /* 0x37a1a0 */
 extern unsigned char LAB_00399408; /* 0x399408 */
-extern int FUN_00399444(...); /* 0x399444 */
+extern int staffRollScrollUpdate(...); /* 0x399444 */
 extern unsigned char LAB_003a43b0; /* 0x3a43b0 */
-extern int FUN_003ae810(...); /* 0x3ae810 */
+extern int staffRollEnterState2(...); /* 0x3ae810 */
 extern unsigned char LAB_003b5e20; /* 0x3b5e20 */
 extern unsigned char LAB_003bfb28; /* 0x3bfb28 */
-extern unsigned int *DAT_0056fcc8; /* 0x56fcc8 */
+extern unsigned int *g_staffRoll; /* 0x56fcc8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0013f1b8. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_0014afd0. */
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_002e1208. */
 
 
@@ -70,13 +70,13 @@ void FUN_0032b688(int param_1)
   
   puVar1 = (unsigned int *)0x10000;
   temp_v9 = (unsigned char *)0x1;
-  FUN_00163060(0x10000,0x100,0,0x764);
+  asdMemoryAllocTracked(0x10000,0x100,0,0x764);
   temp_v6 = 0;
-  DAT_0056fcc8 = puVar1;
+  g_staffRoll = puVar1;
   *(unsigned char *)((int)puVar1 + 5) = 0;
   *(unsigned char *)(puVar1 + 0x4a) = 0;
   puVar1[0x54] = 0;
-  FUN_0013f1b8(0x29,0);
+  asdTMTexTableLoadTmx(0x29,0);
   temp_v1 = 0;
   do {
     FUN_0014afd0(0x29,temp_v1);
@@ -113,10 +113,10 @@ void FUN_0032b688(int param_1)
   puVar1[0x1d6] = 0;
   *(unsigned char *)(puVar1 + 0x1d7) = 0;
   puVar1[0x1d8] = 0xa5;
-  DAT_0056fcc8[0x53] = 0;
+  g_staffRoll[0x53] = 0;
   puVar1[0x4b] = (unsigned int)&LAB_00399408;
-  puVar1[0x4c] = (unsigned int)FUN_003ae810;
-  puVar1[0x4d] = (unsigned int)FUN_00399444;
+  puVar1[0x4c] = (unsigned int)staffRollEnterState2;
+  puVar1[0x4d] = (unsigned int)staffRollScrollUpdate;
   puVar1[0x4e] = (unsigned int)&LAB_003a43b0;
   puVar1[0x4f] = (unsigned int)&LAB_003bfb28;
   puVar1[0x50] = (unsigned int)&LAB_0036b1ec;
@@ -128,26 +128,26 @@ void FUN_0032b688(int param_1)
   }
   *(unsigned char *)((int)puVar1 + 5) = 0;
   temp_v9 = &LAB_0032b00c;
-  temp_v10 = FUN_0037a118;
+  temp_v10 = staffRollClose;
   temp_v11 = 0;
   puVar2 = &LAB_0032b968;
-  FUN_0014e38c(&LAB_0032b968,4,0);
+  asdProcessCreateSimple(&LAB_0032b968,4,0);
   *puVar1 = (unsigned int)puVar2;
   temp_v9 = &LAB_00358918;
   temp_v10 = (romwright_code *)0x0;
   temp_v11 = 0;
   temp_v12 = puVar2;
-  FUN_0015155c(&LAB_0032b978,0x7e,0);
+  taskCreateDraw(&LAB_0032b978,0x7e,0);
   temp_v12 = (unsigned char *)*puVar1;
   temp_v9 = &LAB_00358918;
   temp_v10 = (romwright_code *)0x0;
   temp_v11 = 0;
-  FUN_0015155c(&LAB_0032b984,0xda,0);
+  taskCreateDraw(&LAB_0032b984,0xda,0);
   temp_v12 = (unsigned char *)*puVar1;
   temp_v9 = &LAB_0037a1a0;
   temp_v10 = (romwright_code *)0x0;
   temp_v11 = 0;
-  FUN_0015155c(&LAB_0032b998,0xec,0);
+  taskCreateDraw(&LAB_0032b998,0xec,0);
   return;
 }
 

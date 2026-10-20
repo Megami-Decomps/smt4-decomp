@@ -10,8 +10,8 @@ int FUN_00233410(int);
 int FUN_002b1ad4(int);
 int FUN_002b1c44(int);
 int FUN_002b1e08(int);
-int FUN_002bd8e8(int, int, int, int, unsigned int);
-int aeabi_idivmod(...);
+int timerStart(int, int, int, int, unsigned int);
+int __aeabi_idivmod(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -25,8 +25,8 @@ typedef struct {
 /* Supplied declaration required: FUN_002b1ad4. */
 /* Supplied declaration required: FUN_002b1c44. */
 /* Supplied declaration required: FUN_002b1e08. */
-/* Supplied declaration required: FUN_002bd8e8. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 /* WARNING: Removing unreachable block (ram,0x00233360) */
@@ -97,11 +97,11 @@ int FUN_002332f4(int param_1)
           temp_v4 = *piVar6;
           if (temp_v4 != -1 && temp_v4 != -3) {
             if (temp_v4 != -2) {
-              FUN_002bd8e8(temp_v2,(int)(short)temp_v4,(int)(char)piVar6[1],temp_v3,unaff_r4);
+              timerStart(temp_v2,(int)(short)temp_v4,(int)(char)piVar6[1],temp_v3,unaff_r4);
             }
             else {
               *(unsigned short *)(param_1 + 0x31c) = 0;
-              FUN_002bd8e8(temp_v2,(int)(short)**(unsigned int **)(param_1 + 0x318),
+              timerStart(temp_v2,(int)(short)**(unsigned int **)(param_1 + 0x318),
                            (int)*(char *)(*(unsigned int **)(param_1 + 0x318) + 1),temp_v3,unaff_r4);
             }
           }
@@ -116,15 +116,15 @@ int FUN_002332f4(int param_1)
     }
     else {
       if (*(char *)(param_1 + 0x2f4) != '\0') {
-        temp_v3 = aeabi_idivmod(((int)*psVar7 - (int)psVar7[2]) * 0x1000);
+        temp_v3 = __aeabi_idivmod(((int)*psVar7 - (int)psVar7[2]) * 0x1000);
         *(int *)(param_1 + 0x2ac) = *(int *)(param_1 + 0x2ac) + temp_v3;
-        temp_v3 = aeabi_idivmod(((int)psVar7[1] - (int)psVar7[3]) * 0x1000,psVar7[4]);
+        temp_v3 = __aeabi_idivmod(((int)psVar7[1] - (int)psVar7[3]) * 0x1000,psVar7[4]);
         *(int *)(param_1 + 0x2b0) = *(int *)(param_1 + 0x2b0) + temp_v3;
       }
       else {
-        temp_v3 = aeabi_idivmod(((int)psVar7[2] - (int)*psVar7) * 0x1000);
+        temp_v3 = __aeabi_idivmod(((int)psVar7[2] - (int)*psVar7) * 0x1000);
         *(int *)(param_1 + 0x2ac) = *(int *)(param_1 + 0x2ac) + temp_v3;
-        temp_v3 = aeabi_idivmod(((int)psVar7[3] - (int)psVar7[1]) * 0x1000,psVar7[4]);
+        temp_v3 = __aeabi_idivmod(((int)psVar7[3] - (int)psVar7[1]) * 0x1000,psVar7[4]);
         *(int *)(param_1 + 0x2b0) = *(int *)(param_1 + 0x2b0) + temp_v3;
       }
       *(short *)(param_1 + 0x2f2) = *(short *)(param_1 + 0x2f2) + 1;

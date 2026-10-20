@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int *FUN_002c0cec(unsigned int, unsigned int);
+extern int *dataTableGet(unsigned int, unsigned int);
 
 
 int * FUN_002c0cac(void)
@@ -17,7 +17,7 @@ int * FUN_002c0cac(void)
 {
   int *piVar1;
   
-  piVar1 = (int *)FUN_002c0cec(0x18,0);
+  piVar1 = (int *)dataTableGet(0x18,0);
   if ((piVar1 != (int *)0x0) && (*piVar1 == 0x314c4254)) {
     piVar1 = piVar1 + 4;
   }

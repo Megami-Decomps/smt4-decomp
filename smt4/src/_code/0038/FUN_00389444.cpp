@@ -17,8 +17,8 @@ extern unsigned int FUN_002ac068(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ac0c4. */
 /* Supplied declaration required: FUN_002ac0f8. */
 extern int FUN_002ac12c(unsigned int);
-extern int FUN_002c0c74(void);
-extern int FUN_002c0cc4(unsigned int);
+extern int dataTableGetCount(void);
+extern int dataTableGetEntries(unsigned int);
 
 
 int FUN_00389444(int param_1,unsigned int param_2,int param_3)
@@ -50,9 +50,9 @@ int FUN_00389444(int param_1,unsigned int param_2,int param_3)
           do {
             if (*(char *)(temp_v1 + temp_v4 * 0x40) == '\x06') {
               temp_v3 = FUN_002ac068(*(unsigned int *)(*(int *)(temp_v6 + 0x4c) + temp_v4 * 0x10),param_2);
-              temp_v0 = FUN_002c0c74();
+              temp_v0 = dataTableGetCount();
               if (param_3 <= temp_v0 + temp_v5) {
-                temp_v7 = FUN_002c0cc4(temp_v3);
+                temp_v7 = dataTableGetEntries(temp_v3);
                 return temp_v7 + (param_3 - temp_v5) * 0xd0;
               }
               temp_v5 = temp_v5 + temp_v0 + temp_v5;

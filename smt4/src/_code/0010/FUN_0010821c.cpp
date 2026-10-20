@@ -5,11 +5,11 @@ extern "C" {
 int FUN_00117da4(int);
 int FUN_002c39a4(unsigned int);
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00117da4. */
 extern int FUN_002bff10(unsigned int);
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c39a4. */
 
 
@@ -23,7 +23,7 @@ int FUN_0010821c(void)
   char *pb;
   int temp_v4;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   temp_v4 = FUN_002bff10(0);
   if (((temp_v4 == 0) && (pb = (char *)(temp_v0 + 0xe00), *(char *)(temp_v0 + 0xedc) != '\0')) && (*(char *)(pb + 0xdd) != '\0')) {
     temp_v2 = *(char *)(pb + 0xe6) == '\0';
@@ -35,7 +35,7 @@ int FUN_0010821c(void)
       return temp_v1;
     }
     if (*(char *)(temp_v0 + 0xfd8) == '\0') {
-      FUN_002c39a4(DAT_0044ea00);
+      FUN_002c39a4(g_titleScene);
       FUN_00117da4(0);
       return 0;
     }

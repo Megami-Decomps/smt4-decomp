@@ -9,7 +9,7 @@ int FUN_002e9520(int, int);
 int FUN_002e9598(unsigned int *, int);
 
 typedef int romwright_code(...);
-extern int FUN_002e6dac(int);
+extern int rt_malloc(int);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_002e9520. */
 /* Supplied declaration required: FUN_002e9598. */
@@ -42,7 +42,7 @@ int * FUN_00522bfc(int *param_1,int *param_2)
     if (temp_v6 <= temp_v0) {
       temp_v6 = temp_v0;
     }
-    temp_v2 = FUN_002e6dac(temp_v6 << 3);
+    temp_v2 = rt_malloc(temp_v6 << 3);
     temp_v5 = param_2[1];
     temp_v4 = temp_v2;
     for (temp_v3 = *param_2; temp_v3 != temp_v5; temp_v3 = temp_v3 + 8) {

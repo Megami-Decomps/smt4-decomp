@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_001696f4(void);
@@ -38,8 +38,8 @@ void FUN_003d1fac(void)
   unsigned long long uStack_10;
   
   temp_v0 = FUN_001696f4();
-  if ((temp_v0 == 1) && (*(int *)(DAT_0059dbb4 + 0x52c) != 0)) {
-    if (*(int *)(DAT_0059dbb4 + 0x52c) != 1) {
+  if ((temp_v0 == 1) && (*(int *)(g_renderCtx + 0x52c) != 0)) {
+    if (*(int *)(g_renderCtx + 0x52c) != 1) {
       return;
     }
     temp_v0 = 1;
@@ -48,7 +48,7 @@ void FUN_003d1fac(void)
     temp_v0 = 0;
   }
   if (*(int *)(temp_v0 * 4 + 0x617e80) != 0) {
-    FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(temp_v0 * 0x20 + 0x617ec0));
+    FUN_0016c4b8(g_renderCtx,*(unsigned int *)(temp_v0 * 0x20 + 0x617ec0));
     temp_v0 = *(int *)(temp_v0 * 0x20 + 0x617ec0);
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);

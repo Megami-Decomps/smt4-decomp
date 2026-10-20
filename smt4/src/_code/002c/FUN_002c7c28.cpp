@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_001f7140(void);
+int effEmitterCreate(void);
 int FUN_0024f8a4(int *, int, int);
-int FUN_0024fac4(void);
+int effEmitterCreateSmall(void);
 int FUN_00268fc4(void);
 int FUN_002691d8(unsigned int, int, int *);
 int FUN_00269334(void);
 int FUN_002e7ca4(int, unsigned int);
 
-/* Supplied declaration required: FUN_001f7140. */
+/* Supplied declaration required: effEmitterCreate. */
 /* Supplied declaration required: FUN_0024f8a4. */
-/* Supplied declaration required: FUN_0024fac4. */
+/* Supplied declaration required: effEmitterCreateSmall. */
 /* Supplied declaration required: FUN_00268fc4. */
 /* Supplied declaration required: FUN_002691d8. */
 /* Supplied declaration required: FUN_00269334. */
@@ -32,7 +32,7 @@ int * FUN_002c7c28(int param_1)
   
   piVar3 = *(int **)(*(int *)(param_1 + 0x30) + 0x24);
   piVar1 = piVar3;
-  FUN_0024fac4();
+  effEmitterCreateSmall();
   FUN_0024f8a4(piVar1,**(unsigned short **)(param_1 + 0x30),param_1 + 0xc);
   temp_v1 = (unsigned int)**(unsigned short **)(param_1 + 0x30);
   if (piVar1[0xc] != 0) {
@@ -42,7 +42,7 @@ int * FUN_002c7c28(int param_1)
   piVar1[0xc] = temp_v1;
   if (piVar1[0xb] == 0) {
     temp_v0 = *piVar1;
-    FUN_001f7140();
+    effEmitterCreate();
     piVar1[0xb] = temp_v0;
     *(int *)(temp_v0 + 0x4c) = piVar1[0xc];
   }

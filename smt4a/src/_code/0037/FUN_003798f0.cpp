@@ -4,11 +4,11 @@
 
 extern "C" {
 
-extern int DAT_00570280; /* 0x570280 */
+extern int g_aocSystem; /* 0x570280 */
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 
 
 int FUN_003798f0(unsigned int param_1)
@@ -18,14 +18,14 @@ int FUN_003798f0(unsigned int param_1)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00187180(0x23,1);
-  temp_v1 = FUN_00192798();
-  temp_v2 = FUN_00192748(temp_v0);
+  temp_v0 = dataTableGet(0x23,1);
+  temp_v1 = dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v0);
   if (param_1 < temp_v2) {
     temp_v1 = temp_v1 + param_1 * 0xc;
   }
-  else if (param_1 < *(int *)(DAT_00570280 + 0x3ec) + temp_v2) {
-    temp_v1 = *(int *)(DAT_00570280 + 0x3f0) + (param_1 - temp_v2) * 0xc;
+  else if (param_1 < *(int *)(g_aocSystem + 0x3ec) + temp_v2) {
+    temp_v1 = *(int *)(g_aocSystem + 0x3f0) + (param_1 - temp_v2) * 0xc;
   }
   else {
     temp_v1 = 0;

@@ -1,29 +1,22 @@
-#include "romwright_types.h"
+#include "map/mapMain.h"
 
 extern "C" {
 
-int FUN_0032cb48(int);
+void FUN_0032cb48(s32 arg);
 
-extern int DAT_00581274; /* 0x581274 */
+extern MapMainA *g_mapMain;
 
-/* Supplied declaration required: FUN_0032cb48. */
-
-
-void FUN_003a2ecc(int param_1)
-
+void FUN_003a2ecc(s32 arg)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  
-  temp_v0 = '\0';
-  if (DAT_00581274 != 0) {
-    temp_v0 = *(char *)(DAT_00581274 + 0x40);
-  }
-  if (DAT_00581274 == 0 || temp_v0 == '\0') {
-    return;
-  }
-  FUN_0032cb48(param_1);
-  return;
+    u8 flag = 0;
+
+    if (g_mapMain != NULL) {
+        flag = g_mapMain->unk40;
+    }
+    if (g_mapMain == NULL || flag == 0) {
+        return;
+    }
+    FUN_0032cb48(arg);
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0012736c(int, unsigned int, int, unsigned int, unsigned int, int, unsigned char *, int, int);
 int FUN_00128638(unsigned int, unsigned char *, int);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 
 /* stack frame of param_3: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern unsigned char LAB_0010f064; /* 0x10f064 */
 
 /* Supplied declaration required: FUN_0012736c. */
 /* Supplied declaration required: FUN_00128638. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern int FUN_002e760a(unsigned int);
 
 
@@ -38,7 +38,7 @@ void FUN_0010eff8(int param_1,unsigned int param_2,unsigned int param_3)
   temp_v1 = param_1;
   temp_v0 = FUN_002e760a(0x70);
   if (temp_v0 != 0) {
-    FUN_002e6354(temp_v0,0x70);
+    sysMemClear(temp_v0,0x70);
   }
   *(int *)(param_1 + 0x120) = temp_v0;
   *(unsigned char **)(temp_v0 + 0x20) = &LAB_00103563;

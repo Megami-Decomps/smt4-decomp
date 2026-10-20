@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002034b4(...);
+int uiFadeOpen(...);
 int FUN_002c09f4(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int memClear(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int VectorUnsignedToFloat(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -35,13 +35,13 @@ extern unsigned int *DAT_0043dc24; /* 0x43dc24 */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_002034b4. */
+/* Supplied declaration required: uiFadeOpen. */
 extern int FUN_002c09d0(unsigned int);
 /* Supplied declaration required: FUN_002c09f4. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 
 
 void FUN_002898e4(void)
@@ -68,17 +68,17 @@ void FUN_002898e4(void)
   if (DAT_0043dc20 < '\x01') {
     if (DAT_0043dc24 == (unsigned int *)0x0) {
       puVar3 = (unsigned int *)0x100;
-      FUN_002c498c(0x100,0x100,0,0xe0,1);
+      asdMemAlloc(0x100,0x100,0,0xe0,1);
       DAT_0043dc24 = puVar3;
     }
     puVar3 = DAT_0043dc24;
-    FUN_002c4938();
+    memClear();
     puVar4 = &LAB_00289c44;
-    FUN_002c5788(&LAB_00289c44,2,0,0,FUN_001a0a1c,&LAB_001ecd64,0);
+    asdProcessCreateSimple(&LAB_00289c44,2,0,0,FUN_001a0a1c,&LAB_001ecd64,0);
     *puVar3 = (unsigned int)puVar4;
-    FUN_002c4a08(&LAB_00289c54,0xe5,0,0,FUN_001ecd68,0,0,puVar4);
-    FUN_002c4a08(&LAB_00289c68,0x15f,0,0,&LAB_001ed134,0,0,*puVar3);
-    FUN_002034b4();
+    taskCreateDraw(&LAB_00289c54,0xe5,0,0,FUN_001ecd68,0,0,puVar4);
+    taskCreateDraw(&LAB_00289c68,0x15f,0,0,&LAB_001ed134,0,0,*puVar3);
+    uiFadeOpen();
     puVar3 = DAT_0043dc24;
     temp_v7 = 0.1f;
     temp_v8 = -0.1f;

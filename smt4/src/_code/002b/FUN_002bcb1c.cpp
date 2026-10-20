@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp4; /* 0x4: local_4 */
 } void_stack;
 
-extern int DAT_004e3154; /* 0x4e3154 */
+extern int g_asdSoundStatus; /* 0x4e3154 */
 extern unsigned int DAT_004e3158; /* 0x4e3158 */
 
 
@@ -31,10 +31,10 @@ unsigned int FUN_002bcb1c(void)
       temp_v3 = DAT_004e3158 == temp_v2;
     }
     if (!temp_v3 && (-1 < (int)temp_v2 && (int)temp_v2 <= (int)DAT_004e3158)) {
-      temp_v0 = DAT_004e3154;
+      temp_v0 = g_asdSoundStatus;
       if (0 < (int)temp_v2) {
         if ((temp_v2 & 1) != 0) {
-          temp_v0 = *(int *)(DAT_004e3154 + 0x70);
+          temp_v0 = *(int *)(g_asdSoundStatus + 0x70);
         }
         for (temp_v1 = (int)temp_v2 >> 1; temp_v1 != 0; temp_v1 = temp_v1 - 1) {
           temp_v0 = *(int *)(*(int *)(temp_v0 + 0x70) + 0x70);

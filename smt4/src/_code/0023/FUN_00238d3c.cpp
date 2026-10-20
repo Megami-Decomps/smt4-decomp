@@ -23,13 +23,13 @@ extern signed char DAT_004656cc; /* 0x4656cc */
 extern unsigned int DAT_004e629c; /* 0x4e629c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern int FUN_00239a18(unsigned int);
+extern int resourceDispatch(unsigned int);
 extern int FUN_00239a54(void);
 /* Supplied declaration required: FUN_002bb150. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_00358e78. */
-extern unsigned int FUN_00359078(int *);
+extern unsigned int resourceDispatch2(int *);
 extern int FUN_0035ae94(unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -68,25 +68,25 @@ int FUN_00238d3c(int param_1,int param_2)
     }
     if (param_2 != 0) {
       if (param_1 != 0) {
-        temp_v1 = FUN_00239a18(0xc);
+        temp_v1 = resourceDispatch(0xc);
       }
       else {
-        temp_v1 = FUN_00239a18(0xb);
+        temp_v1 = resourceDispatch(0xb);
       }
     }
     else {
       temp_v5 = 0;
       temp_v6[0] = 0;
-      temp_v2 = FUN_00359078(temp_v6);
+      temp_v2 = resourceDispatch2(temp_v6);
       temp_v0 = 0;
       if ((temp_v2 & 0x80000000) == 0) {
         temp_v0 = temp_v6[0];
       }
       if (param_1 != 0) {
-        temp_v3 = FUN_00239a18(0xc);
+        temp_v3 = resourceDispatch(0xc);
       }
       else {
-        temp_v3 = FUN_00239a18(0xb);
+        temp_v3 = resourceDispatch(0xb);
       }
       while( 1 ) {
         temp_v6[0] = 1000000000;

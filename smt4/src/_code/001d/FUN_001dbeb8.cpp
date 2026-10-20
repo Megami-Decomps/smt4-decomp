@@ -9,16 +9,16 @@ int FUN_0028a368(int);
 int FUN_0028a924(int, int, unsigned int);
 int FUN_002b8838(int);
 int FUN_002d67fc(int);
-int FUN_002f5ba0(void);
+int campCecEditDestroy(void);
 
-extern int FUN_001ffc44(void);
-extern int FUN_00211090(void);
+extern int campCecEditExists(void);
+extern int campCecEditGetFlag125(void);
 /* Supplied declaration required: FUN_0026b9bc. */
 /* Supplied declaration required: FUN_0028a368. */
 /* Supplied declaration required: FUN_0028a924. */
 /* Supplied declaration required: FUN_002b8838. */
 /* Supplied declaration required: FUN_002d67fc. */
-/* Supplied declaration required: FUN_002f5ba0. */
+/* Supplied declaration required: campCecEditDestroy. */
 
 
 unsigned int FUN_001dbeb8(int param_1)
@@ -29,11 +29,11 @@ unsigned int FUN_001dbeb8(int param_1)
   unsigned int temp_v1;
   
   temp_v1 = 0;
-  temp_v0 = FUN_001ffc44();
+  temp_v0 = campCecEditExists();
   if (temp_v0 != 0) {
-    temp_v0 = FUN_00211090();
+    temp_v0 = campCecEditGetFlag125();
     if (temp_v0 != 0) {
-      FUN_002f5ba0();
+      campCecEditDestroy();
       FUN_002b8838(3);
       *(unsigned int *)(param_1 + 0xd2c) = 6;
       *(unsigned int *)(param_1 + 0xd34) = 0;

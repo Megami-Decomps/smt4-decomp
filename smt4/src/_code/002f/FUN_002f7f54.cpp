@@ -21,13 +21,13 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } void_stack;
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_0027df30. */
-extern unsigned int FUN_0027e928(unsigned int);
-extern int FUN_002939f4(void);
-extern int FUN_00296cc8(unsigned int);
+extern unsigned int btlUnitGet(unsigned int);
+extern int btlGetMainState(void);
+extern int scrGetArg(unsigned int);
 
 
 unsigned int FUN_002f7f54(void)
@@ -46,10 +46,10 @@ unsigned int FUN_002f7f54(void)
   int temp_v8;
   unsigned int temp_v9;
   
-  temp_v1 = FUN_00296cc8(0);
-  temp_v2 = FUN_00296cc8(1);
-  temp_v3 = FUN_00296cc8(2);
-  temp_v4 = FUN_0027e928(DAT_0043427c);
+  temp_v1 = scrGetArg(0);
+  temp_v2 = scrGetArg(1);
+  temp_v3 = scrGetArg(2);
+  temp_v4 = btlUnitGet(g_btlScriptUnit);
   temp_v7 = 0;
   temp_v9 = 0;
   if (0 < temp_v3) {
@@ -57,7 +57,7 @@ unsigned int FUN_002f7f54(void)
   }
   temp_v3 = 0;
   do {
-    temp_v5 = FUN_002939f4();
+    temp_v5 = btlGetMainState();
     puVar8 = (unsigned int *)(*(int *)(temp_v5 + 0x1fc0) + temp_v3 * 0x288);
     if ((((*puVar8 & 1) != 0) && ((*puVar8 & 0x40) == 0)) && (-1 < (short)puVar8[2])) {
       temp_v5 = (*(short *)((int)puVar8 + 0x1b6) * temp_v1) / 100;
@@ -74,7 +74,7 @@ unsigned int FUN_002f7f54(void)
       else if (temp_v8 == 0) {
         temp_v8 = -1;
       }
-      temp_v6 = FUN_002939f4();
+      temp_v6 = btlGetMainState();
       temp_v0 = temp_v7 * 5;
       FUN_0027df30(0,temp_v4,*(int *)(temp_v6 + 0x1e98) + (short)puVar8[2] * 0x114,0,temp_v5,temp_v8,
                    0xffffffff,temp_v9,temp_v0,temp_v0,9,0,0);

@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned char DAT_0064c010; /* 0x64c010 */
 
-extern int FUN_002e3390(unsigned int);
+extern int wstrlen(unsigned int);
 /* Supplied declaration required: FUN_002e5780. */
 /* Supplied declaration required: FUN_002e57c8. */
 
@@ -25,7 +25,7 @@ int * FUN_00101e28(int *param_1,unsigned int param_2)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002e3390(param_2);
+  temp_v0 = wstrlen(param_2);
   if (temp_v0 != 0) {
     FUN_002e57c8(param_1,0,*(unsigned int *)(*param_1 - 4),param_2,temp_v0);
     return param_1;

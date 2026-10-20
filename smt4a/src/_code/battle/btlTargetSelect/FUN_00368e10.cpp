@@ -37,7 +37,7 @@ typedef struct {
 } param_9_stack;
 
 extern unsigned char LAB_00369218; /* 0x369218 */
-extern int *DAT_0057a9a8; /* 0x57a9a8 */
+extern int *g_btlTargetSelect; /* 0x57a9a8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -46,7 +46,7 @@ extern int *DAT_0057a9a8; /* 0x57a9a8 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern unsigned int FUN_0014bf3c(fn_00368e10_arg1 *, unsigned int);
 /* Supplied declaration required: FUN_00180118. */
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -83,7 +83,7 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
   unsigned int temp_v7;
   unsigned int temp_v8;
   
-  piVar1 = DAT_0057a9a8;
+  piVar1 = g_btlTargetSelect;
   pfVar3 = param_2;
   puStack_34 = param_1;
   pfStack_30 = param_2;
@@ -182,7 +182,7 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
   temp_v1 = 0xd2;
   *(unsigned int *)(temp_v4 + 0x68) = temp_v6;
   *(unsigned int *)(temp_v4 + 0x6c) = uStack_3c;
-  temp_v2 = FUN_0014aa78();
+  temp_v2 = btlGetMainState();
   if ((temp_v2 != 0) && (*(int *)(temp_v2 + 0xec) == 0x16c)) {
     temp_v1 = 200;
   }

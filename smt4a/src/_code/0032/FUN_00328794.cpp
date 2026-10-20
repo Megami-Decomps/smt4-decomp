@@ -10,7 +10,7 @@ int FUN_0040aad4(int, int);
 int FUN_0040ace8(unsigned int, unsigned int);
 
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_00580238; /* 0x580238 */
+extern int g_lmapMainState; /* 0x580238 */
 
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
@@ -28,8 +28,8 @@ void FUN_00328794(void)
   int temp_v3;
   unsigned int temp_v4;
   
-  temp_v0 = DAT_00580238;
-  if (DAT_00580238 != 0) {
+  temp_v0 = g_lmapMainState;
+  if (g_lmapMainState != 0) {
     temp_v2 = 0;
     do {
       temp_v3 = temp_v0 + temp_v2 * 4;

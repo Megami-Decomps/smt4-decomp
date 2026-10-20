@@ -15,7 +15,7 @@ int FUN_00465ba0(int);
 int FUN_00465bd0(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
-int aeabi_idivmod(...);
+int __aeabi_idivmod(...);
 
 typedef struct fn_00509670_arg0 fn_00509670_arg0;
 struct fn_00509670_arg0 {
@@ -51,7 +51,7 @@ extern int FUN_001c3078(int, unsigned int);
 /* Supplied declaration required: FUN_00462374. */
 /* Supplied declaration required: FUN_00465ba0. */
 /* Supplied declaration required: FUN_00465bd0. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_00509670(fn_00509670_arg0 *param_1,int param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5)
@@ -374,7 +374,7 @@ LAB_0050999c:
       else {
 LAB_005099a4:
         temp_v1 = *pbVar9;
-        temp_v2 = aeabi_idivmod(((unsigned int)pbVar9[1] - (unsigned int)temp_v1) * temp_v5);
+        temp_v2 = __aeabi_idivmod(((unsigned int)pbVar9[1] - (unsigned int)temp_v1) * temp_v5);
         temp_v1 = temp_v2 + temp_v1;
       }
       *pbVar9 = temp_v1;
@@ -422,7 +422,7 @@ LAB_005099a4:
     }
 LAB_00509a60:
     temp_v1 = *pbVar9;
-    temp_v2 = aeabi_idivmod(((int)(char)pbVar9[1] - (int)(char)temp_v1) * temp_v5);
+    temp_v2 = __aeabi_idivmod(((int)(char)pbVar9[1] - (int)(char)temp_v1) * temp_v5);
     temp_v1 = temp_v2 + temp_v1;
     *pbVar9 = temp_v1;
     pbVar9[4] = 0;
@@ -578,7 +578,7 @@ LAB_00509a60:
     if (param_5 == 0) {
       return;
     }
-    temp_v4 = aeabi_idivmod((int)(short)*puVar11,(int)(short)temp_v4);
+    temp_v4 = __aeabi_idivmod((int)(short)*puVar11,(int)(short)temp_v4);
     break;
   case 0x85:
     if ((int)param_5 >= 0) {
@@ -613,7 +613,7 @@ LAB_00509a60:
     break;
   case 0x8b:
     if (param_5 != 0) {
-      aeabi_idivmod((int)(short)*puVar11,param_5);
+      __aeabi_idivmod((int)(short)*puVar11,param_5);
       *puVar11 = temp_v7;
       return;
     }

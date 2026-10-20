@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00187180(int, int);
+int dataTableGet(int, int);
 int FUN_0019de98(int, unsigned int);
 int FUN_001aea28(unsigned int, unsigned int);
 int FUN_0022e774(void);
@@ -21,8 +21,8 @@ typedef struct {
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 extern unsigned char DAT_00588e14; /* 0x588e14 */
 
-/* Supplied declaration required: FUN_00187180. */
-extern int FUN_00192798(void);
+/* Supplied declaration required: dataTableGet. */
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_001aea28. */
 /* Supplied declaration required: FUN_0022e774. */
@@ -63,8 +63,8 @@ void FUN_0041eeec(int param_1)
   }
   else if (*(char *)(param_1 + 0x12) == '\0') {
     temp_v1 = *(char *)(param_1 + 5);
-    FUN_00187180(0x3d,0);
-    temp_v2 = FUN_00192798();
+    dataTableGet(0x3d,0);
+    temp_v2 = dataTableGetEntries();
     FUN_0019de98(temp_v2 + temp_v1 * 0x54 + 0x14,0xf4f4f4ff);
     temp_v0 = *(unsigned char *)(param_1 + 7);
     *(unsigned int *)(param_1 + 8) = 0;

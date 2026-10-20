@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0015a0e0(unsigned char *);
-int FUN_0019a0e8(unsigned char *, unsigned int *);
-int FUN_002e6354(unsigned char *, int);
+int mtx44Copy(unsigned char *, unsigned int *);
+int sysMemClear(unsigned char *, int);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned char *, unsigned int *);
 
 extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
@@ -41,8 +41,8 @@ extern unsigned int DAT_0064c0bc; /* 0x64c0bc */
 extern unsigned int DAT_0064c0c0; /* 0x64c0c0 */
 
 /* Supplied declaration required: FUN_0015a0e0. */
-/* Supplied declaration required: FUN_0019a0e8. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: mtx44Copy. */
+/* Supplied declaration required: sysMemClear. */
 extern int FUN_002eba64(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 
@@ -55,7 +55,7 @@ void FUN_0013c884(unsigned char *param_1,int param_2)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  FUN_002e6354(param_1,0x50c);
+  sysMemClear(param_1,0x50c);
   param_1[1] = 0;
   temp_v1 = 0;
   temp_v2 = 0x3f800000;
@@ -92,7 +92,7 @@ void FUN_0013c884(unsigned char *param_1,int param_2)
     DAT_0064c0bc = temp_v1;
     DAT_0064c0c0 = temp_v2;
   }
-  FUN_0019a0e8(param_1 + 0xa8,&DAT_0064c084);
+  mtx44Copy(param_1 + 0xa8,&DAT_0064c084);
   if (((DAT_005c4c30 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c30), temp_v0 != 0)) {
     DAT_0064c084 = temp_v2;
     DAT_0064c088 = temp_v1;
@@ -111,7 +111,7 @@ void FUN_0013c884(unsigned char *param_1,int param_2)
     DAT_0064c0bc = temp_v1;
     DAT_0064c0c0 = temp_v2;
   }
-  FUN_0019a0e8(param_1 + 0xe8,&DAT_0064c084);
+  mtx44Copy(param_1 + 0xe8,&DAT_0064c084);
   temp_v1 = 0x40a00000;
   *(unsigned int *)(param_1 + 0x498) = 0x40a00000;
   *param_1 = (char)param_2;

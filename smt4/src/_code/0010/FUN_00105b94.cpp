@@ -5,18 +5,18 @@
 extern "C" {
 
 int FUN_0010f144(void);
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0010f144. */
 extern int FUN_002c2218(int);
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 
 
 void FUN_00105b94(void)
@@ -27,7 +27,7 @@ void FUN_00105b94(void)
   int temp_v1;
   
   temp_v0 = 0x139c;
-  FUN_002c222c();
+  asdOperatorNew();
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = FUN_002c2218(temp_v0 + 0x4a0);
@@ -39,7 +39,7 @@ void FUN_00105b94(void)
     *(unsigned int *)(temp_v0 + 0x130) = 0x3f800000;
     *(unsigned int *)(temp_v0 + 0x134) = 0x3f800000;
   }
-  DAT_0044ea00 = temp_v1;
+  g_titleScene = temp_v1;
   FUN_0010f144();
   return;
 }

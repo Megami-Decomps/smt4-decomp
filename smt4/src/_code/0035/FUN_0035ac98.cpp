@@ -19,7 +19,7 @@ typedef struct {
 
 extern unsigned char DAT_004eac44; /* 0x4eac44 */
 
-extern int FUN_00146d08(int, fn_0035ac98_arg0 *);
+extern int nnFndFindNestedRange(int, fn_0035ac98_arg0 *);
 extern int nn_fnd_detail_GetNextListObject(unsigned char *, int);
 
 
@@ -41,7 +41,7 @@ void FUN_0035ac98(fn_0035ac98_arg0 *param_1)
     if (temp_v3 == 0) goto LAB_0035acfc;
   } while ((param_1 < *(fn_0035ac98_arg0 **)(temp_v3 + 0x18)) ||
           (*(fn_0035ac98_arg0 **)(temp_v3 + 0x1c) <= param_1));
-  temp_v0 = FUN_00146d08(temp_v3 + 0xc,param_1);
+  temp_v0 = nnFndFindNestedRange(temp_v3 + 0xc,param_1);
   if (temp_v0 == 0) {
     temp_v0 = temp_v3;
   }

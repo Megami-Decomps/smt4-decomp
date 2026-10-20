@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00267d3c(...);
-int FUN_002bf244(...);
+int jobIsValid(...);
 int FUN_002c424c(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -19,15 +19,15 @@ typedef struct {
 
 extern unsigned char LAB_001b72b8; /* 0x1b72b8 */
 extern unsigned char LAB_001d2830; /* 0x1d2830 */
-extern int FUN_0020f4c0(...); /* 0x20f4c0 */
-extern int *DAT_00439b58; /* 0x439b58 */
+extern int btlTalkDestroy(...); /* 0x20f4c0 */
+extern int *g_btlTalk; /* 0x439b58 */
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00267d3c. */
-/* Supplied declaration required: FUN_002bf244. */
+/* Supplied declaration required: jobIsValid. */
 /* Supplied declaration required: FUN_002c424c. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
 
 
 void FUN_001d2710(unsigned int *param_1,int param_2,int param_3,int param_4)
@@ -38,16 +38,16 @@ void FUN_001d2710(unsigned int *param_1,int param_2,int param_3,int param_4)
   unsigned char *puVar2;
   int *piVar3;
   
-  FUN_002bf244(param_1[8]);
+  jobIsValid(param_1[8]);
   piVar1 = (int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0xcc,1);
+  asdMemAlloc(0x100,0x100,0,0xcc,1);
   puVar2 = &LAB_001d2830;
-  DAT_00439b58 = piVar1;
-  FUN_002c4a08(&LAB_001d2830,2,0,0,&LAB_001b72b8,FUN_0020f4c0,param_1,*param_1);
+  g_btlTalk = piVar1;
+  taskCreateDraw(&LAB_001d2830,2,0,0,&LAB_001b72b8,btlTalkDestroy,param_1,*param_1);
   param_1[8] = (unsigned int)puVar2;
-  piVar1 = DAT_00439b58;
-  piVar3 = DAT_00439b58 + 7;
-  *DAT_00439b58 = (int)param_1;
+  piVar1 = g_btlTalk;
+  piVar3 = g_btlTalk + 7;
+  *g_btlTalk = (int)param_1;
   piVar1[1] = param_2;
   *piVar3 = param_3;
   piVar1[8] = param_4;

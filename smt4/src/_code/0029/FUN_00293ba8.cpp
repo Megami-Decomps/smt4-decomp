@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern unsigned char DAT_0044e140; /* 0x44e140 */
+extern unsigned char g_gameGlobals; /* 0x44e140 */
 
 /* Supplied declaration required: FUN_00292ca0. */
 
@@ -26,13 +26,13 @@ void FUN_00293ba8(void)
   unsigned int temp_v3;
   unsigned char temp_v4;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0044e140 + 0x4));
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x14) = 0;
+  temp_v1 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
+  *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x14) = 0;
   *(unsigned char *)(temp_v1 + 0x1e63) = 1;
-  temp_v2 = (*(int *)((unsigned char *)&DAT_0044e140 + 0x4));
+  temp_v2 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
   temp_v0 = *(char *)(temp_v1 + 0x1e66);
   if (temp_v0 == '\0') {
-    if (*(int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x12e4) == 0) {
+    if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) == 0) {
       FUN_00292ca0(0);
     }
     if (*(int *)(temp_v2 + 0x12e4) == 1) {
@@ -53,7 +53,7 @@ void FUN_00293ba8(void)
     if ((!(temp_v0 == '\b' || temp_v0 == '\t')) &&
        (!((temp_v0 == '\n' || temp_v0 == '\v') || temp_v0 == '\a'))) {
       if (temp_v0 == '\x0e') {
-        if (*(int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x12e4) != 0) {
+        if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) != 0) {
           return;
         }
         FUN_00292ca0(0);
@@ -61,13 +61,13 @@ void FUN_00293ba8(void)
       }
       if (temp_v0 != '\r') {
         if (*(char *)(temp_v1 + 0x1e67) == '\x06') {
-          if (*(int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x12e4) != 0) {
+          if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) != 0) {
             return;
           }
           FUN_00292ca0(1);
           return;
         }
-        if (*(int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x12e4) == 0) {
+        if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) == 0) {
           FUN_00292ca0(0);
         }
         if (*(int *)(temp_v2 + 0x12e4) == 1) {
@@ -84,7 +84,7 @@ void FUN_00293ba8(void)
         }
       }
       else {
-        if (*(int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x12e4) == 0) {
+        if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) == 0) {
           FUN_00292ca0(0);
         }
         if (*(int *)(temp_v2 + 0x12e4) == 1) {
@@ -102,7 +102,7 @@ void FUN_00293ba8(void)
       }
     }
     else {
-      if (*(int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x12e4) == 0) {
+      if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) == 0) {
         FUN_00292ca0(1);
       }
       if (*(int *)(temp_v2 + 0x12e4) == 1) {
@@ -114,7 +114,7 @@ void FUN_00293ba8(void)
     }
   }
   else {
-    if (*(int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x12e4) == 0) {
+    if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) == 0) {
       FUN_00292ca0(0);
     }
     if (*(int *)(temp_v2 + 0x12e4) == 1) {

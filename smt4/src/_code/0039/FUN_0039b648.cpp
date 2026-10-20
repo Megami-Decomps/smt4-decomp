@@ -37,7 +37,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_1_stack;
 
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_00231420. */
 /* Supplied declaration required: FUN_00231434. */
@@ -72,7 +72,7 @@ unsigned int FUN_0039b648(int param_1)
   
   temp_v0 = FUN_002c2950();
   temp_v1 = *(unsigned int *)(param_1 + 0x10);
-  if (((temp_v1 & 0x2000000) != 0) && ((FUN_002319c0(), temp_v1 == 0 || ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x18)) != '\0')))) {
+  if (((temp_v1 & 0x2000000) != 0) && ((FUN_002319c0(), temp_v1 == 0 || ((*(signed char *)((unsigned char *)&g_gameState + 0x18)) != '\0')))) {
     *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfdffffff;
   }
   temp_v12 = temp_v0 + 0xd00;
@@ -86,7 +86,7 @@ unsigned int FUN_0039b648(int param_1)
     FUN_00231434(0x1c,temp_v5 + 0xfb5,temp_v10,temp_v9);
     temp_v2 = temp_v10[0];
     FUN_00231420(temp_v10[0],temp_v9[0],temp_v8,uStack_4c);
-    if ((temp_v2 == 0) || ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x18)) != '\0')) {
+    if ((temp_v2 == 0) || ((*(signed char *)((unsigned char *)&g_gameState + 0x18)) != '\0')) {
       temp_v5 = temp_v5 + 1;
       if (temp_v5 >= 5) {
         return 0;

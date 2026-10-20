@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned short *, int);
+int sysMemClear(unsigned short *, int);
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void nn_cec_CTR_Message_InitializeMessage(unsigned short *param_1)
@@ -27,7 +27,7 @@ void nn_cec_CTR_Message_InitializeMessage(unsigned short *param_1)
     } while (temp_v0 != 0);
   }
   *(unsigned char *)(param_1 + 0x98) = 0;
-  FUN_002e6354(param_1,0x70);
+  sysMemClear(param_1,0x70);
   *param_1 = 0x6060;
   *(unsigned int *)(param_1 + 0x9a) = 0;
   *(unsigned char *)((int)param_1 + 0x131) = 0;

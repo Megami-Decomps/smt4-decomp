@@ -1,0 +1,37 @@
+#include "battle/btlGameOver.h"
+
+extern "C" {
+
+void asdMemFree(void *block);
+void jobStop(u32 job, s32 arg);
+void *jobGetWork(u32 job);
+void scrScriptProcessDestroy(void *process);
+
+extern BtlGameOver *g_btlGameOver;
+
+/* Frees the game-over state and stops the job that owns it. */
+void btlGameOverDestroy(u32 job)
+{
+    BtlGameOverOwner *owner = (BtlGameOverOwner *)jobGetWork(job);
+    BtlGameOver *state = g_btlGameOver;
+
+    if (g_btlGameOver != NULL) {
+        if (state->process != NULL) {
+            scrScriptProcessDestroy(state->process);
+            state->process = NULL;
+        }
+        if (state->dataA != NULL) {
+            asdMemFree(state->dataA);
+            state->dataA = NULL;
+        }
+        if (state->dataB != NULL) {
+            asdMemFree(state->dataB);
+            state->dataB = NULL;
+        }
+        asdMemFree(g_btlGameOver);
+        g_btlGameOver = NULL;
+    }
+    jobStop(owner->job, 0);
+}
+
+} /* extern "C" */

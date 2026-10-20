@@ -10,7 +10,7 @@ int FUN_002c1b64(int, int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 extern float DAT_004724cc; /* 0x4724cc */
 extern float DAT_004724d0; /* 0x4724d0 */
 
@@ -41,7 +41,7 @@ void FUN_002f2ea0(unsigned int param_1,unsigned int param_2,unsigned int param_3
   float temp_v6;
   unsigned long long temp_v7;
   
-  temp_v0 = DAT_0044ea00;
+  temp_v0 = g_titleScene;
   temp_v5 = (float)VectorSignedToFloat(param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v6 = (float)VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v7 = romwright_piece_4_4((int)(temp_v6 + DAT_004724d0),(int)(temp_v5 + DAT_004724cc));
@@ -55,7 +55,7 @@ void FUN_002f2ea0(unsigned int param_1,unsigned int param_2,unsigned int param_3
     (**(romwright_code **)(temp_v0 + 0x1268))();
     *(unsigned char *)(temp_v0 + 0x1264) = 0;
   }
-  FUN_002c1b64(DAT_0044ea00,0);
+  FUN_002c1b64(g_titleScene,0);
   if (param_6 >> 0x18 != 0) {
     VectorSignedToFloat((int)((unsigned long long)temp_v7 >> 0x20),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v2 = (param_6 >> 0x18) |
@@ -76,8 +76,8 @@ void FUN_002f2ea0(unsigned int param_1,unsigned int param_2,unsigned int param_3
     VectorSignedToFloat((int)temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_0021025c(temp_v2,temp_v2);
   }
-  temp_v0 = DAT_0044ea00;
-  piVar6 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v0 = g_titleScene;
+  piVar6 = (int *)(g_titleScene + 0x124c);
   temp_v1 = *piVar6;
   temp_v3 = piVar6[temp_v1 + 2];
   *piVar6 = temp_v1 - 1;

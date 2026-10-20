@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_0022699c(int, int, int, unsigned int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 
 extern int DAT_00434290; /* 0x434290 */
 
 /* Supplied declaration required: FUN_0022699c. */
 extern short FUN_00255158(int, unsigned int);
 extern int FUN_00293230(void);
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 
 
 int FUN_00246080(short param_1,short param_2,unsigned int param_3,int param_4,int param_5)
@@ -34,7 +34,7 @@ int FUN_00246080(short param_1,short param_2,unsigned int param_3,int param_4,in
   *(short *)(temp_v2 + 0x24) = temp_v0 - 1;
   if (param_5 != 4) {
     if (param_5 == 3) {
-      FUN_002939f4();
+      btlGetMainState();
       temp_v1 = FUN_00293230();
       if (temp_v1 == 0) {
         return temp_v2;

@@ -10,7 +10,7 @@ int FUN_0028c640(unsigned int, int, int);
 int FUN_002a5710(unsigned int, unsigned int);
 
 extern int DAT_0044cda0; /* 0x44cda0 */
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_00287098. */
 /* Supplied declaration required: FUN_0028c618. */
@@ -33,7 +33,7 @@ void FUN_001b4b54(void)
     unaff_r4 = *(unsigned int **)(DAT_0044cda0 + 0x2c);
   }
   if (pcVar3 != (char *)0x0 && unaff_r4 != (unsigned int *)0x0) {
-    if ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x22)) != '\0') {
+    if ((*(signed char *)((unsigned char *)&g_gameState + 0x22)) != '\0') {
       if ((*unaff_r4 & 2) == 0) {
         *unaff_r4 = *unaff_r4 | 2;
         *(unsigned char *)(*(int *)(unaff_r4[2] + 0x2c) + 0x1f6) = 0;

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002ae43c(unsigned char [68], int, unsigned int, unsigned char *, int *, int);
+int asdLoadFileAsync(unsigned char [68], int, unsigned int, unsigned char *, int *, int);
 int FUN_002b64a0(...);
 int FUN_002bf694(unsigned char [68], int);
-int FUN_002c4c2c(int);
+int asdTMTexTableLoadSprites(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,12 +18,12 @@ extern unsigned char LAB_00153068; /* 0x153068 */
 extern unsigned char LAB_002a6250; /* 0x2a6250 */
 extern unsigned char LAB_002a6258; /* 0x2a6258 */
 
-/* Supplied declaration required: FUN_002ae43c. */
+/* Supplied declaration required: asdLoadFileAsync. */
 /* Supplied declaration required: FUN_002b64a0. */
-extern int *FUN_002b93b0(unsigned int, unsigned int);
+extern int *asdTMTexTableCallFileB(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf694. */
 extern int FUN_002c30c4(unsigned int);
-/* Supplied declaration required: FUN_002c4c2c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 
 
 /* WARNING: Removing unreachable block (ram,0x002a61ec) */
@@ -41,8 +41,8 @@ int * FUN_002a5eb4(void)
   int temp_v2;
   unsigned char temp_v3 [68];
   
-  FUN_002c4c2c(0x2f);
-  piVar1 = (int *)FUN_002b93b0(0x2f,0);
+  asdTMTexTableLoadSprites(0x2f);
+  piVar1 = (int *)asdTMTexTableCallFileB(0x2f,0);
   temp_v2 = piVar1[1];
   FUN_002bf694(temp_v3,*piVar1 + 0xc);
   pcVar3 = *(char **)(temp_v2 + 8);
@@ -78,7 +78,7 @@ int * FUN_002a5eb4(void)
         temp_v1 = temp_v1 | 2;
       }
     }
-    FUN_002ae43c(temp_v3,0,temp_v1,&LAB_00153068,piVar1,0x80);
+    asdLoadFileAsync(temp_v3,0,temp_v1,&LAB_00153068,piVar1,0x80);
   }
   return piVar1;
 }

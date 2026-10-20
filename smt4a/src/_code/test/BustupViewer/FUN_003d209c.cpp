@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00588ff0; /* 0x588ff0 */
+extern int g_bustupViewer; /* 0x588ff0 */
 
 
 void FUN_003d209c(void)
@@ -13,9 +13,9 @@ void FUN_003d209c(void)
   int temp_v0;
   unsigned int *puVar2;
   
-  temp_v0 = DAT_00588ff0;
-  puVar2 = (unsigned int *)(DAT_00588ff0 + 0x18);
-  *(unsigned int *)(DAT_00588ff0 + 0x14) = 0;
+  temp_v0 = g_bustupViewer;
+  puVar2 = (unsigned int *)(g_bustupViewer + 0x18);
+  *(unsigned int *)(g_bustupViewer + 0x14) = 0;
   *puVar2 = 0;
   *(unsigned int *)(temp_v0 + 0x1c) = 1;
   *(unsigned int *)(temp_v0 + 0x20) = 0;

@@ -8,7 +8,7 @@ int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern float DAT_005f1a30; /* 0x5f1a30 */
 extern float DAT_005f1a34; /* 0x5f1a34 */
 extern float DAT_005f1a38; /* 0x5f1a38 */
@@ -37,9 +37,9 @@ void FUN_003cb49c(void)
   temp_v0 = FUN_003033d4();
   temp_v6 = 90.0f;
   temp_v4 = 0.017453292f;
-  temp_v3 = *(float *)(DAT_00581288 + 0x1c);
-  temp_v5 = *(float *)(DAT_00581288 + 0x24);
-  temp_v7 = *(float *)(DAT_00581288 + 0x20) + *(float *)(DAT_005806a4 + temp_v0 * 4 + 0xcc);
+  temp_v3 = *(float *)(g_lmapScene + 0x1c);
+  temp_v5 = *(float *)(g_lmapScene + 0x24);
+  temp_v7 = *(float *)(g_lmapScene + 0x20) + *(float *)(DAT_005806a4 + temp_v0 * 4 + 0xcc);
   temp_v2 = (*(float *)(DAT_005806a4 + 0x18) - 90.0f) * 0.017453292f;
   FUN_001bc124();
   temp_v3 = temp_v3 + temp_v2 * *(float *)(DAT_005806a4 + temp_v0 * 4 + 0x14c);
@@ -50,12 +50,12 @@ void FUN_003cb49c(void)
   DAT_005f1a3c = temp_v3;
   DAT_005f1a40 = temp_v7;
   FUN_001bc124();
-  temp_v3 = *(float *)(DAT_00581288 + 0x1c) - temp_v2 * *(float *)(DAT_005806a4 + temp_v0 * 4 + 0x18c);
+  temp_v3 = *(float *)(g_lmapScene + 0x1c) - temp_v2 * *(float *)(DAT_005806a4 + temp_v0 * 4 + 0x18c);
   temp_v2 = *(float *)(DAT_005806a4 + 0x18) * temp_v4;
   FUN_001bbf0c();
   temp_v1 = DAT_005806a4 + temp_v0 * 4;
-  temp_v5 = *(float *)(DAT_00581288 + 0x24) - temp_v2 * *(float *)(temp_v1 + 0x18c);
-  temp_v7 = *(float *)(DAT_00581288 + 0x20) + *(float *)(temp_v1 + 0x10c) +
+  temp_v5 = *(float *)(g_lmapScene + 0x24) - temp_v2 * *(float *)(temp_v1 + 0x18c);
+  temp_v7 = *(float *)(g_lmapScene + 0x20) + *(float *)(temp_v1 + 0x10c) +
           *(float *)(DAT_005806a4 + 0x1c);
   temp_v2 = (*(float *)(DAT_005806a4 + 0x18) - temp_v6) * temp_v4;
   FUN_001bc124();

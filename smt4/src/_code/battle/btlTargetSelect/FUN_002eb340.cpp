@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_9_stack;
 
-extern int DAT_00439c60; /* 0x439c60 */
+extern int g_btlTargetSelect; /* 0x439c60 */
 
 /* Supplied declaration required: FUN_002630e0. */
 extern unsigned int FUN_0027db08(unsigned int);
@@ -32,7 +32,7 @@ void FUN_002eb340(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
   unsigned int uStack_28;
   
   if (param_1 < 5) {
-    puVar3 = (unsigned int *)(*(int *)(DAT_00439c60 + 4) + param_1 * 0x10 + 4);
+    puVar3 = (unsigned int *)(*(int *)(g_btlTargetSelect + 4) + param_1 * 0x10 + 4);
     *(unsigned char *)((int)puVar3 + 0xf) = 1;
     temp_v0 = FUN_0029e9cc(param_3);
     *(unsigned char *)(puVar3 + 2) = temp_v0;

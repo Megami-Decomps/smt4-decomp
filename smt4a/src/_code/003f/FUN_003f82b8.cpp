@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00164168(...);
 int FUN_001654d8(int);
 int FUN_001654e4(int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_001879d0(unsigned int);
 int FUN_003f5b14(...);
@@ -22,12 +22,12 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00164168. */
 /* Supplied declaration required: FUN_001654d8. */
 /* Supplied declaration required: FUN_001654e4. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001879d0. */
@@ -58,9 +58,9 @@ void FUN_003f82b8(int param_1)
     FUN_001654d8(param_1 + 0x540);
     FUN_001654e4(param_1 + 0x540);
     temp_v5 = 0.26f;
-    FUN_001879d0(DAT_0059dbb4);
+    FUN_001879d0(g_renderCtx);
     temp_v0 = temp_v0 + (int)temp_v5;
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,0x31,0,temp_v0,temp_v1,0x8d);
     FUN_001835b4(2,0x31,1,temp_v0,temp_v1,0x8d);
     FUN_001835b4(2,0x31,9,temp_v0,temp_v1,0x8d);
@@ -76,7 +76,7 @@ void FUN_003f82b8(int param_1)
   case 10:
   case 0xb:
     temp_v5 = 0.26f;
-    FUN_001879d0(DAT_0059dbb4);
+    FUN_001879d0(g_renderCtx);
     FUN_003f5b14(param_1,temp_v0,temp_v1,0xe2,0xe5);
     temp_v3 = 0;
     do {
@@ -91,7 +91,7 @@ void FUN_003f82b8(int param_1)
     } while (temp_v3 < 8);
     FUN_003f78f8(param_1,temp_v0,temp_v1);
   }
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

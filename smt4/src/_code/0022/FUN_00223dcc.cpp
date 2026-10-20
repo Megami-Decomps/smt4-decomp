@@ -6,22 +6,22 @@ extern "C" {
 
 int FUN_00152bec(int);
 int FUN_00263588(int);
-int FUN_002886e0(void);
+int statusCameraDestroy(void);
 int FUN_00294834(int, int, int, int, int, int);
 int FUN_002958f8(int, int);
 int FUN_0029be5c(int, int);
 int FUN_0029c2cc(int, int);
 int FUN_002a46d8(...);
-int FUN_002a7218(int);
+int scrScriptProcessDestroy(int);
 int FUN_002a72c0(int);
-int FUN_002a775c(int);
+int asdMdlManagerDestroy(int);
 int FUN_002b2368(...);
 int FUN_002c3f5c(...);
 int FUN_002c40f8(int *, int [6], int, int, unsigned int, unsigned int);
-int FUN_002c415c(...);
-int FUN_002c43b4(...);
+int asdMemFree(...);
+int jobStop(...);
 int FUN_002c526c(void);
-int FUN_0030f5bc(...);
+int mapMainCallIfFlag(...);
 int FUN_003c9f28(void);
 int software_interrupt(int);
 
@@ -43,25 +43,25 @@ extern int *DAT_0043dd68; /* 0x43dd68 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_00152bec. */
 /* Supplied declaration required: FUN_00263588. */
-/* Supplied declaration required: FUN_002886e0. */
+/* Supplied declaration required: statusCameraDestroy. */
 extern int FUN_002907a8(void);
 /* Supplied declaration required: FUN_00294834. */
 /* Supplied declaration required: FUN_002958f8. */
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: FUN_0029c2cc. */
-extern int FUN_002a0b34(void);
+extern int lmapSceneGetScript(void);
 /* Supplied declaration required: FUN_002a46d8. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002a72c0. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: FUN_002b2368. */
-extern int FUN_002b879c(void);
+extern int lmapMainIsRunning(void);
 /* Supplied declaration required: FUN_002c3f5c. */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_0030f5bc. */
+/* Supplied declaration required: mapMainCallIfFlag. */
 /* Supplied declaration required: FUN_003c9f28. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
@@ -102,12 +102,12 @@ void FUN_00223dcc(void)
       FUN_002b2368(temp_v0);
     }
     *piVar2 = 0;
-    FUN_002c415c(piVar1[0x257c]);
+    asdMemFree(piVar1[0x257c]);
     piVar1[0x257c] = 0;
     temp_v0 = FUN_002907a8();
     FUN_0029be5c(0x25,temp_v0 - piVar1[0x107]);
-    temp_v0 = FUN_002a0b34();
-    if ((temp_v0 != 0) || (temp_v0 = FUN_002b879c(), temp_v0 != 0)) {
+    temp_v0 = lmapSceneGetScript();
+    if ((temp_v0 != 0) || (temp_v0 = lmapMainIsRunning(), temp_v0 != 0)) {
       temp_v1[3] = 0x96;
       temp_v1[4] = 0x96;
       temp_v1[5] = 0x96;
@@ -123,13 +123,13 @@ void FUN_00223dcc(void)
     FUN_0029c2cc(*piVar2,0);
     FUN_00263588(*piVar2);
     *piVar2 = 0;
-    FUN_002886e0();
+    statusCameraDestroy();
     piVar2 = piVar1 + 0x2572;
     FUN_00152bec(*piVar2);
     piVar4 = piVar1 + 0x2573;
     FUN_00152bec(*piVar4);
-    FUN_002a775c(*piVar2);
-    FUN_002a775c(*piVar4);
+    asdMdlManagerDestroy(*piVar2);
+    asdMdlManagerDestroy(*piVar4);
     *piVar2 = 0;
     temp_v0 = 0;
     *piVar4 = 0;
@@ -139,20 +139,20 @@ void FUN_00223dcc(void)
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 4);
-    FUN_002a7218(piVar1[0x10b]);
-    FUN_002c415c(piVar1[0x10a]);
-    FUN_002c415c(piVar1[0x109]);
+    scrScriptProcessDestroy(piVar1[0x10b]);
+    asdMemFree(piVar1[0x10a]);
+    asdMemFree(piVar1[0x109]);
     if (*piVar1 != 0) {
       FUN_003c9f28();
       FUN_002b2368();
     }
     *piVar1 = 0;
-    FUN_002c43b4(piVar1[0xfe],0);
-    FUN_002c415c(piVar1);
+    jobStop(piVar1[0xfe],0);
+    asdMemFree(piVar1);
     DAT_0043dd68 = (int *)0x0;
     FUN_002a46d8(0x24);
     FUN_002a46d8(0x22);
-    FUN_0030f5bc(1);
+    mapMainCallIfFlag(1);
     return;
   }
   return;

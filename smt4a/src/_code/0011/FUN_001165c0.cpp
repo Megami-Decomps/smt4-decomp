@@ -8,7 +8,7 @@ int FUN_002e6e34(int *, int);
 int FUN_002e6e5c(int *);
 
 typedef int romwright_code(...);
-extern unsigned char DAT_0059935c; /* 0x59935c */
+extern unsigned char g_systemTable; /* 0x59935c */
 
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
@@ -30,9 +30,9 @@ void FUN_001165c0(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_10 = param_4;
   temp_v0 = FUN_002e6e26();
   FUN_002e6e34(&uStack_18,temp_v0 + 0x58);
-  piVar1 = (*(int * *)((unsigned char *)&DAT_0059935c + 0xc));
-  if (((*(int * *)((unsigned char *)&DAT_0059935c + 0xc)) != (int *)0x0) &&
-     (temp_v0 = (**(romwright_code **)(*(*(int * *)((unsigned char *)&DAT_0059935c + 0xc)) + 0x14))((*(int * *)((unsigned char *)&DAT_0059935c + 0xc))), temp_v0 != 0)) {
+  piVar1 = (*(int * *)((unsigned char *)&g_systemTable + 0xc));
+  if (((*(int * *)((unsigned char *)&g_systemTable + 0xc)) != (int *)0x0) &&
+     (temp_v0 = (**(romwright_code **)(*(*(int * *)((unsigned char *)&g_systemTable + 0xc)) + 0x14))((*(int * *)((unsigned char *)&g_systemTable + 0xc))), temp_v0 != 0)) {
     (**(romwright_code **)(*piVar1 + 0x10))(piVar1,param_1);
   }
   FUN_002e6e5c(&uStack_18);

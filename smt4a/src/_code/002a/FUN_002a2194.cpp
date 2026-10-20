@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_00164a9c(void);
+int jobGetWork(void);
 
-/* Supplied declaration required: FUN_00164a9c. */
+/* Supplied declaration required: jobGetWork. */
 
 
 void FUN_002a2194(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_00164a9c();
+  jobGetWork();
   return;
 }
 

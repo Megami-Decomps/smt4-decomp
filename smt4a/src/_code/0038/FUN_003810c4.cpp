@@ -1,33 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003810c4` (_code @ 0x3810c4, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Sets the flag at +0x3F4 of the entry found for id scrGetArg(0) to whether scrGetArg(1) is nonzero; always returns 1. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00236038(int);
-int FUN_003f0e20(int, unsigned int);
+typedef struct Entry {
+    /* 0x000 */ u8 unk000[0x3F4];
+    /* 0x3F4 */ u8 flag;
+} Entry;
 
-extern int FUN_0014aa78(void);
-/* Supplied declaration required: FUN_00236038. */
-/* Supplied declaration required: FUN_003f0e20. */
+extern s32 scrGetArg(s32 index);
+extern void *btlGetMainState(void);
+extern Entry *FUN_003f0e20(void *owner, u32 id);
 
-
-unsigned int FUN_003810c4(void)
-
+u32 FUN_003810c4(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  temp_v2 = FUN_0014aa78();
-  FUN_003f0e20(temp_v2,temp_v0);
-  if (temp_v2 != 0) {
-    *(unsigned char *)(temp_v2 + 0x3f4) = temp_v1 != 0;
-  }
-  return 1;
+    u32 id = scrGetArg(0);
+    s32 enabled = scrGetArg(1);
+    Entry *entry = FUN_003f0e20(btlGetMainState(), id);
+
+    if (entry != NULL) {
+        entry->flag = enabled != 0;
+    }
+    return 1;
 }
 
-} /* extern "C" */
+}

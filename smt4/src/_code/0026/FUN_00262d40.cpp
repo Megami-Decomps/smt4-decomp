@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00282f80(int);
 int FUN_00283f30(unsigned short *, int);
 int FUN_0029f848(int, unsigned int, int, int, int, int);
-int FUN_002c4938(int, int);
+int memClear(int, int);
 
 /* stack frame of void: 5 slot(s), 14 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ extern int DAT_0043da90; /* 0x43da90 */
 /* Supplied declaration required: FUN_0029f848. */
 extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_00262d40(void)
@@ -50,7 +50,7 @@ void FUN_00262d40(void)
   
   temp_v1 = DAT_0043da90;
   temp_v2 = FUN_002a8764();
-  FUN_002c4938(temp_v1 + 0xe3c,0x640);
+  memClear(temp_v1 + 0xe3c,0x640);
   FUN_00283f30(&temp_v10,0);
   temp_v3 = (unsigned int)temp_v10;
   if (temp_v3 != 0) {

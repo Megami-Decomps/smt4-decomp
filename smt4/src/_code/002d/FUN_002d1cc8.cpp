@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00447060; /* 0x447060 */
+extern int g_lmapMainState; /* 0x447060 */
 
 
 int FUN_002d1cc8(void)
@@ -13,8 +13,8 @@ int FUN_002d1cc8(void)
   int temp_v0;
   
   temp_v0 = 0;
-  if (DAT_00447060 != 0) {
-    temp_v0 = (int)*(char *)(DAT_00447060 + 0xb);
+  if (g_lmapMainState != 0) {
+    temp_v0 = (int)*(char *)(g_lmapMainState + 0xb);
   }
   return temp_v0;
 }

@@ -10,16 +10,16 @@ int FUN_002542bc(...);
 int FUN_002542d4(...);
 int FUN_00254e2c(...);
 int FUN_00289234(unsigned int);
-int FUN_002893c0(void);
+int eventTexSetJobParam(void);
 int FUN_00295660(...);
 int FUN_0029c1c8(unsigned int, unsigned int, int);
 int FUN_002b9024(...);
 int FUN_002bd06c(unsigned int);
 int FUN_002bf694(...);
 int FUN_002bff38(...);
-int FUN_002c43b4(...);
-int FUN_002c4938(...);
-int FUN_002c564c(int);
+int jobStop(...);
+int memClear(...);
+int jyoucyuGetTableEntry(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -34,24 +34,24 @@ extern int DAT_0044cfa0; /* 0x44cfa0 */
 /* Supplied declaration required: FUN_002542d4. */
 /* Supplied declaration required: FUN_00254e2c. */
 /* Supplied declaration required: FUN_00289234. */
-/* Supplied declaration required: FUN_002893c0. */
+/* Supplied declaration required: eventTexSetJobParam. */
 extern int FUN_002893d8(void);
 /* Supplied declaration required: FUN_00295660. */
-extern int FUN_00296cc8(unsigned int);
+extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_0029c1c8. */
 extern unsigned int FUN_0029c1fc(void);
 extern int FUN_002b47f4(unsigned int);
 /* Supplied declaration required: FUN_002b9024. */
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
-extern int FUN_002bf244(void);
+extern int jobIsValid(void);
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bff38. */
-extern int FUN_002c08f0(unsigned int);
+extern int jobGetWork(unsigned int);
 extern int FUN_002c09f4(unsigned int);
-/* Supplied declaration required: FUN_002c43b4. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: jobStop. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 
 
 unsigned int scrComm_Npc_SpawnRandomInRange(void)
@@ -71,7 +71,7 @@ unsigned int scrComm_Npc_SpawnRandomInRange(void)
   
   temp_v1 = FUN_002893d8();
   if (temp_v1 == 0) {
-    FUN_002c564c(0);
+    jyoucyuGetTableEntry(0);
     FUN_002542d4(0);
     FUN_002542d4(1,0);
     DAT_0044cfa0 = 0;
@@ -79,8 +79,8 @@ unsigned int scrComm_Npc_SpawnRandomInRange(void)
   temp_v2 = FUN_002542bc(0);
   switch(temp_v2) {
   case 0:
-    temp_v1 = FUN_00296cc8(0);
-    temp_v3 = FUN_00296cc8(1);
+    temp_v1 = scrGetArg(0);
+    temp_v3 = scrGetArg(1);
     temp_v6 = 0;
     temp_v5 = 1;
     do {
@@ -109,7 +109,7 @@ unsigned int scrComm_Npc_SpawnRandomInRange(void)
   case 1:
     temp_v2 = FUN_002542bc(1);
     FUN_00252190(temp_v2,0);
-    FUN_002893c0();
+    eventTexSetJobParam();
     FUN_00289234(temp_v2);
     FUN_002542d4(2,temp_v2);
     FUN_00247bf4(temp_v2,0,1);
@@ -132,8 +132,8 @@ unsigned int scrComm_Npc_SpawnRandomInRange(void)
   case 4:
     temp_v0 = FUN_002542bc(1);
     FUN_002b9024(temp_v0);
-    FUN_002c4938(temp_v8,0x80);
-    FUN_002c4938(temp_v9,0x80);
+    memClear(temp_v8,0x80);
+    memClear(temp_v9,0x80);
     temp_v5 = FUN_002542bc(1);
     temp_v5 = temp_v5 & 0xffff;
     FUN_002bd06c(temp_v5);
@@ -168,15 +168,15 @@ unsigned int scrComm_Npc_SpawnRandomInRange(void)
     break;
   case 0xc:
     temp_v2 = FUN_002542bc(2);
-    temp_v1 = FUN_002bf244();
+    temp_v1 = jobIsValid();
     if (temp_v1 != 0) {
-      temp_v1 = FUN_002c08f0(temp_v2);
+      temp_v1 = jobGetWork(temp_v2);
       if (*(int *)(temp_v1 + 0xc) != 1) {
         *(unsigned int *)(temp_v1 + 0x28) = 0xbe800000;
         *(unsigned char *)(temp_v1 + 0x30) = 1;
       }
       else {
-        FUN_002c43b4(temp_v2,0);
+        jobStop(temp_v2,0);
       }
     }
     FUN_002542d4(0,0xd);

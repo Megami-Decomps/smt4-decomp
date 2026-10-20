@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014f560(int *);
 int FUN_002a42e8(int *, int);
-int aeabi_uidivmod(int, int);
+int __aeabi_uidivmod(int, int);
 int hasExclusiveAccess(int *);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: FUN_0014f560. */
 /* Supplied declaration required: FUN_002a42e8. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -44,7 +44,7 @@ unsigned int nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Dequeue(int *p
     FUN_0014f560(param_1 + 1);
   }
   temp_v2 = *(unsigned int *)(*param_1 + param_1[9] * 4);
-  aeabi_uidivmod(param_1[9] + 1,param_1[8]);
+  __aeabi_uidivmod(param_1[9] + 1,param_1[8]);
   param_1[9] = temp_v1;
   param_1[10] = param_1[10] - 1;
   if (0 < param_1[0xc]) {

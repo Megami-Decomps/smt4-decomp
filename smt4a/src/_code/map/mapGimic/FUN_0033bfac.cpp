@@ -14,7 +14,7 @@ int FUN_003fda08(unsigned int, int, int);
 int FUN_003fe86c(unsigned int, int, int);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
-int FUN_0040aa90(...);
+int moriModelContentCopyBody(...);
 int FUN_0040aad4(int, int);
 int FUN_0040ace8(unsigned int, unsigned int);
 int VectorSignedToFloat(int, int);
@@ -37,7 +37,7 @@ extern int FUN_003a3238(void);
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
-/* Supplied declaration required: FUN_0040aa90. */
+/* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(unsigned int);
 extern unsigned int FUN_0040ac08(void);
@@ -255,7 +255,7 @@ unsigned int FUN_0033bfac(void)
                   temp_v6 = FUN_0040ac08();
                 }
                 *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
-                FUN_0040aa90();
+                moriModelContentCopyBody();
                 *(unsigned char *)(temp_v2 + 0xb4) = 1;
                 temp_v5 = DAT_00580ca0;
                 *(short *)(temp_v5 + 10) = *(short *)(temp_v5 + 10) + 1;
@@ -319,7 +319,7 @@ unsigned int FUN_0033bfac(void)
           *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
           FUN_0040a908();
           FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
-          FUN_0040aa90(*(unsigned int *)(temp_v2 + 0xa8),
+          moriModelContentCopyBody(*(unsigned int *)(temp_v2 + 0xa8),
                        *(unsigned int *)(DAT_00580ca0 + *(int *)(DAT_00580ca0 + 0x30) * 0x3c + 0xa8),0
                       );
           *(unsigned char *)(temp_v2 + 0xb4) = 1;
@@ -353,7 +353,7 @@ unsigned int FUN_0033bfac(void)
         *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
         FUN_0040a908();
         FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
-        FUN_0040aa90(*(unsigned int *)(temp_v2 + 0xa8),
+        moriModelContentCopyBody(*(unsigned int *)(temp_v2 + 0xa8),
                      *(unsigned int *)(DAT_00580ca0 + *(int *)(DAT_00580ca0 + 0x28) * 0x3c + 0xa8),0);
         *(unsigned char *)(temp_v2 + 0xb4) = 1;
         temp_v5 = DAT_00580ca0;
@@ -386,7 +386,7 @@ unsigned int FUN_0033bfac(void)
       *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
       FUN_0040a908();
       FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
-      FUN_0040aa90(*(unsigned int *)(temp_v2 + 0xa8),
+      moriModelContentCopyBody(*(unsigned int *)(temp_v2 + 0xa8),
                    *(unsigned int *)(DAT_00580ca0 + *(int *)(DAT_00580ca0 + 0x20) * 0x3c + 0xa8),0);
       *(unsigned char *)(temp_v2 + 0xb4) = 1;
       temp_v5 = DAT_00580ca0;

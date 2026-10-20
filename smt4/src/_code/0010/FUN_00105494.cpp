@@ -11,7 +11,7 @@ typedef struct {
 
 extern unsigned char DAT_00464af0; /* 0x464af0 */
 
-extern unsigned int FUN_002c2ff0(void);
+extern unsigned int asdMemoryGetDefaultAllocator(void);
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Setup. */
 
 
@@ -22,7 +22,7 @@ void FUN_00105494(unsigned int param_1)
   unsigned int temp_v0;
   
   (*(unsigned int *)((unsigned char *)&DAT_00464af0 + 0x7c)) = param_1;
-  temp_v0 = FUN_002c2ff0();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   nw_gfx_res_ResGraphicsFile_Setup(&(*(unsigned int *)((unsigned char *)&DAT_00464af0 + 0x7c)),temp_v0,(*(unsigned int *)((unsigned char *)&DAT_00464af0 + 0x7c)));
   return;
 }

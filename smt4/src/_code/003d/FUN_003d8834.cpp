@@ -41,7 +41,7 @@ struct fn_003d8834_arg0 {
     float field_0x76c; /* +0x76c */
 };
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_004342f0; /* 0x4342f0 */
 extern unsigned int DAT_00493530; /* 0x493530 */
 extern unsigned int DAT_00493534; /* 0x493534 */
@@ -66,7 +66,7 @@ void FUN_003d8834(fn_003d8834_arg0 *param_1,unsigned int param_2,unsigned int pa
   unsigned int in_s1;
   unsigned int in_s2;
   
-  temp_v0 = DAT_004342c8;
+  temp_v0 = g_btlMain;
   if (DAT_004342f0 < 1) {
     param_1->field_0x5c4 = in_s0;
     param_1->field_0x5c8 = in_s1;
@@ -80,12 +80,12 @@ void FUN_003d8834(fn_003d8834_arg0 *param_1,unsigned int param_2,unsigned int pa
     param_1->field_0x634 = param_1->field_0x634 | 0x2000;
     return;
   }
-  pfVar2 = (float *)(DAT_004342c8 + 0x764);
-  puVar4 = (unsigned int *)(DAT_004342c8 + 0x5c4);
+  pfVar2 = (float *)(g_btlMain + 0x764);
+  puVar4 = (unsigned int *)(g_btlMain + 0x5c4);
   if (DAT_004342f0 != 2) {
     if (DAT_004342f0 == 1) {
-      puVar3 = (unsigned int *)(DAT_004342c8 + 0x6e4);
-      *(unsigned int *)(DAT_004342c8 + 0x6ec) = 0;
+      puVar3 = (unsigned int *)(g_btlMain + 0x6e4);
+      *(unsigned int *)(g_btlMain + 0x6ec) = 0;
       *(unsigned int *)(temp_v0 + 0x6e8) = 0;
       *puVar3 = 0;
       DAT_00493530 = *(unsigned int *)(temp_v0 + 0x6e4);
@@ -106,10 +106,10 @@ void FUN_003d8834(fn_003d8834_arg0 *param_1,unsigned int param_2,unsigned int pa
     }
   }
   else {
-    DAT_00493548 = *(float *)(DAT_004342c8 + 0x68) - *pfVar2;
-    DAT_0049354c = *(float *)(DAT_004342c8 + 0x6c) - *(float *)(DAT_004342c8 + 0x768);
-    DAT_00493550 = *(float *)(DAT_004342c8 + 0x70) - *(float *)(DAT_004342c8 + 0x76c);
-    puVar3 = (unsigned int *)(DAT_004342c8 + 0x6e4);
+    DAT_00493548 = *(float *)(g_btlMain + 0x68) - *pfVar2;
+    DAT_0049354c = *(float *)(g_btlMain + 0x6c) - *(float *)(g_btlMain + 0x768);
+    DAT_00493550 = *(float *)(g_btlMain + 0x70) - *(float *)(g_btlMain + 0x76c);
+    puVar3 = (unsigned int *)(g_btlMain + 0x6e4);
     *puVar4 = in_s0;
     *(unsigned int *)(temp_v0 + 0x5c8) = in_s1;
     *(unsigned int *)(temp_v0 + 0x5cc) = in_s2;

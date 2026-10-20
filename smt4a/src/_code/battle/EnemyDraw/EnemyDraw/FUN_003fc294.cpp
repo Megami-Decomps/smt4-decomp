@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_001630d4(int, int, int, unsigned int, int);
+int asdMemoryAlloc(int, int, int, unsigned int, int);
 int FUN_0017fc94(...);
 int FUN_001aff14(...);
 int FUN_001d3d6c(...);
@@ -73,8 +73,8 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern int FUN_00162858(void);
 extern int FUN_00162880(void);
-/* Supplied declaration required: FUN_001630d4. */
-extern int FUN_00164a34(void);
+/* Supplied declaration required: asdMemoryAlloc. */
+extern int lmapMainIsRunning(void);
 extern int FUN_00167e54(void);
 extern float FUN_00169294(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0017fc94. */
@@ -82,7 +82,7 @@ extern float FUN_00169294(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001d3d6c. */
 extern unsigned int FUN_00228024(unsigned int);
 extern int FUN_002eba64(unsigned int *);
-extern int MapMode_IsBusy(void);
+extern int mapMainIsBusy(void);
 extern int QuestCenterMode_IsBusy(void);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
@@ -166,8 +166,8 @@ void FUN_003fc294(int param_1,int param_2)
     }
   }
   temp_v3 = FUN_00167e54();
-  if (((((temp_v3 != 0) || (temp_v3 = FUN_00164a34(), temp_v3 != 0)) ||
-       (temp_v3 = MapMode_IsBusy(), temp_v3 != 0)) || (temp_v3 = QuestCenterMode_IsBusy(), temp_v3 != 0)) &&
+  if (((((temp_v3 != 0) || (temp_v3 = lmapMainIsRunning(), temp_v3 != 0)) ||
+       (temp_v3 = mapMainIsBusy(), temp_v3 != 0)) || (temp_v3 = QuestCenterMode_IsBusy(), temp_v3 != 0)) &&
      ((temp_v3 = FUN_00162858(), temp_v3 == 0 && (temp_v3 = FUN_00162880(), temp_v3 != 0)))) {
     temp_v21 = romwright_piece_4_4((int)(temp_v21 >> 0x20),0x3fc00000);
   }
@@ -206,18 +206,18 @@ void FUN_003fc294(int param_1,int param_2)
   }
   if (temp_v43 != 0) {
     temp_v4 = 0x100;
-    FUN_001630d4(0x100,0x100,0,temp_v8 * 0x58,1);
+    asdMemoryAlloc(0x100,0x100,0,temp_v8 * 0x58,1);
     *(unsigned int *)(param_1 + 0x2c) = temp_v4;
     temp_v4 = 0x100;
-    FUN_001630d4(0x100,0x100,0,(unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x10) + 0xc) * 0xc,1);
+    asdMemoryAlloc(0x100,0x100,0,(unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x10) + 0xc) * 0xc,1);
     *(unsigned int *)(param_1 + 0x30) = temp_v4;
   }
   else {
     temp_v4 = 0x10000;
-    FUN_001630d4(0x10000,0x100,0,temp_v8 * 0x58,1);
+    asdMemoryAlloc(0x10000,0x100,0,temp_v8 * 0x58,1);
     *(unsigned int *)(param_1 + 0x2c) = temp_v4;
     temp_v4 = 0x10000;
-    FUN_001630d4(0x10000,0x100,0,(unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x10) + 0xc) * 0xc,1);
+    asdMemoryAlloc(0x10000,0x100,0,(unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x10) + 0xc) * 0xc,1);
     *(unsigned int *)(param_1 + 0x30) = temp_v4;
   }
   temp_v3 = *(int *)(param_1 + 0x10);

@@ -1,31 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004626dc` (_code @ 0x4626dc, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Allocates and constructs a node from the pool and links it into the list (its link member lives at +0x1B0); returns the node, or NULL if the pool is exhausted. */
+#include "common.h"
 
 extern "C" {
 
-int nw_ut_internal_LinkListImpl_insert(int, int, int);
+typedef struct Node {
+    /* 0x000 */ u8 unk000[0x1B0];
+    /* 0x1B0 */ u8 link[1];
+} Node;
 
-extern int FUN_00466b00(void);
-extern int nw_snd_internal_PoolImpl_AllocImpl(void);
-/* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
+typedef struct List {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 head[4];
+    /* 0x08 */ u8 end[1];
+} List;
 
+extern void *nw_snd_internal_PoolImpl_AllocImpl(void);
+extern Node *FUN_00466b00(void *memory);
+extern void nw_ut_internal_LinkListImpl_insert(void *list, void *position, void *link);
 
-int FUN_004626dc(int param_1)
-
+Node *FUN_004626dc(List *list)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = nw_snd_internal_PoolImpl_AllocImpl();
-  if (temp_v0 == 0) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = FUN_00466b00();
-  }
-  nw_ut_internal_LinkListImpl_insert(param_1 + 4,param_1 + 8,temp_v0 + 0x1b0);
-  return temp_v0;
+    void *memory = nw_snd_internal_PoolImpl_AllocImpl();
+    Node *node;
+
+    if (memory == NULL) {
+        node = NULL;
+    } else {
+        node = FUN_00466b00(memory);
+    }
+    void *head = list->head;
+    void *end = list->end;
+    void *link = node->link;
+
+    nw_ut_internal_LinkListImpl_insert(head, end, link);
+    return node;
 }
 
-} /* extern "C" */
+}

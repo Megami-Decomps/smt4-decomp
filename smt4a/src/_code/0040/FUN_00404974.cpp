@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0013f1b8(unsigned int, int);
+int asdTMTexTableLoadTmx(unsigned int, int);
 int FUN_001acf98(unsigned int, unsigned int);
 int FUN_00203b40(int, unsigned int, int, int, int, int);
 int FUN_002e08b0(int, int);
@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0013f1b8. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_002e08b0. */
@@ -51,7 +51,7 @@ void FUN_00404974(int param_1)
     *(unsigned char *)(param_1 + 0x24) = 0;
     temp_v0 = FUN_00341940(temp_v1);
     if (temp_v0 == 0) {
-      FUN_0013f1b8(temp_v1,0);
+      asdTMTexTableLoadTmx(temp_v1,0);
       *(unsigned char *)(param_1 + 0x24) = 1;
     }
     FUN_001acf98(temp_v1,temp_v2);

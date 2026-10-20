@@ -20,7 +20,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_00482f14; /* 0x482f14 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f1776; /* 0x5f1776 */
 extern unsigned int DAT_005f1778; /* 0x5f1778 */
 extern unsigned char DAT_005f177c; /* 0x5f177c */
@@ -82,10 +82,10 @@ unsigned int FUN_00482c04(int param_1)
     temp_v6 = *(int *)(temp_v5 + 0x18);
     if ((((temp_v6 != 0) && (temp_v0 = *(unsigned char *)(temp_v6 + 0xc), (temp_v0 & 1) != 0)) && ((temp_v0 & 4) == 0))
        && ((temp_v0 & 0x10) != 0)) {
-      temp_v13 = *(float *)(temp_v6 + 0x2c) - *(float *)(DAT_00581288 + 0x1c);
-      temp_v12 = *(float *)(temp_v6 + 0x30) - *(float *)(DAT_00581288 + 0x20);
-      temp_v10 = *(float *)(temp_v6 + 0x34) - *(float *)(DAT_00581288 + 0x24);
-      if (*(float *)(DAT_00581288 + 0x20) <=
+      temp_v13 = *(float *)(temp_v6 + 0x2c) - *(float *)(g_lmapScene + 0x1c);
+      temp_v12 = *(float *)(temp_v6 + 0x30) - *(float *)(g_lmapScene + 0x20);
+      temp_v10 = *(float *)(temp_v6 + 0x34) - *(float *)(g_lmapScene + 0x24);
+      if (*(float *)(g_lmapScene + 0x20) <=
           *(float *)(temp_v6 + 0x30) + (float)((unsigned long long)temp_v14 >> 0x20)) {
         temp_v11 = (int)romwright_sqrt_4(temp_v13 * temp_v13 + temp_v12 * temp_v12 + temp_v10 * temp_v10);
         temp_v9 = SBORROW4(temp_v11,0x96);

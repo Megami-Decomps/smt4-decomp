@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_00162790(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001801a4(...);
 int FUN_00180310(int, int, int, int);
 int FUN_0018152c(...);
@@ -31,7 +31,7 @@ extern unsigned char LAB_003f5218; /* 0x3f5218 */
 /* Supplied declaration required: FUN_00100388. */
 extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_001801a4. */
 /* Supplied declaration required: FUN_00180310. */
@@ -42,7 +42,7 @@ extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_00184e64. */
 extern unsigned int FUN_0019e130(int);
 extern int FUN_001ab854(void);
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 
 
 void FUN_003f4cc0(int param_1,int param_2,int param_3,int param_4)
@@ -69,9 +69,9 @@ void FUN_003f4cc0(int param_1,int param_2,int param_3,int param_4)
   piVar5 = &temp_v10;
   param_3 = *(int *)(param_1 + 0x2c) + param_3;
   param_4 = *(int *)(param_1 + 0x30) + param_4;
-  FUN_001677c0();
+  efctSetSpeed();
   if (*(char *)(param_1 + 0x22) != '\0') {
-    FUN_001677c0();
+    efctSetSpeed();
     return;
   }
   if (param_2 != 0) {
@@ -79,7 +79,7 @@ void FUN_003f4cc0(int param_1,int param_2,int param_3,int param_4)
       if (param_2 != 2) {
         if (param_2 != 3) {
           if ((param_2 != 4) || (*(char *)(param_1 + 0x20) != '\0')) {
-            FUN_001677c0();
+            efctSetSpeed();
             return;
           }
           temp_v12 = temp_v13;
@@ -88,7 +88,7 @@ void FUN_003f4cc0(int param_1,int param_2,int param_3,int param_4)
               temp_v5 = FUN_001ab854();
             }
             else {
-              temp_v5 = FUN_002919a4();
+              temp_v5 = btlMainGetUnk14();
             }
             if (temp_v5 != 0) {
               temp_v7 = *(unsigned short *)(temp_v5 + 100);
@@ -109,7 +109,7 @@ LAB_003f510c:
               temp_v10 = 3;
               temp_v11 = 0x79;
               FUN_00180310(0,*(short *)(temp_v5 + 8) + param_3,*(short *)(temp_v5 + 10) + param_4,1);
-              FUN_001677c0();
+              efctSetSpeed();
               return;
             }
           }
@@ -127,7 +127,7 @@ LAB_003f510c:
               temp_v5 = FUN_001ab854();
             }
             else {
-              temp_v5 = FUN_002919a4();
+              temp_v5 = btlMainGetUnk14();
             }
             if (temp_v5 != 0) {
               temp_v3 = FUN_00180114(*(unsigned short *)(temp_v5 + 0x62));
@@ -154,7 +154,7 @@ LAB_003f510c:
               }
             }
             else {
-              temp_v4 = FUN_002919a4();
+              temp_v4 = btlMainGetUnk14();
               if (temp_v4 != 0) {
                 temp_v7 = *(unsigned short *)(temp_v4 + 0x60);
               }
@@ -181,7 +181,7 @@ LAB_003f510c:
               temp_v4 = FUN_001ab854();
             }
             else {
-              temp_v4 = FUN_002919a4();
+              temp_v4 = btlMainGetUnk14();
             }
             if (temp_v4 != 0) {
               temp_v5 = (int)*(short *)(temp_v4 + 0x62);
@@ -203,7 +203,7 @@ LAB_003f510c:
                 }
               }
               else {
-                temp_v4 = FUN_002919a4();
+                temp_v4 = btlMainGetUnk14();
                 if (temp_v4 != 0) {
                   temp_v8 = (unsigned int)*(unsigned short *)(temp_v4 + 0x60);
                 }
@@ -232,13 +232,13 @@ LAB_003f510c:
           }
           FUN_00184e64(temp_v3);
           if (*(char *)(param_1 + 0x23) != '\0') {
-            FUN_001677c0();
+            efctSetSpeed();
           }
           temp_v4 = FUN_001834a4(0x11,0x13);
           temp_v10 = 0;
           FUN_0018152c(temp_v5,*(short *)(temp_v4 + 8) + param_3,*(short *)(temp_v4 + 10) + param_4,0x6a);
           if (*(char *)(param_1 + 0x23) != '\0') {
-            FUN_001677c0();
+            efctSetSpeed();
           }
         }
       }
@@ -246,7 +246,7 @@ LAB_003f510c:
     else {
       if (*(char *)(param_1 + 0x20) != '\0') {
         if (*(char *)(param_1 + 0x21) == '\0') {
-          FUN_001677c0();
+          efctSetSpeed();
           return;
         }
         temp_v3 = 0xe;
@@ -276,7 +276,7 @@ LAB_003f510c:
       FUN_001835b4(2,0x11,0,param_3);
     }
   }
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

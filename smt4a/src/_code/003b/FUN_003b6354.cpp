@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(...);
+int efctSetSpeed(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int VectorSignedToFloat(int, int);
 
@@ -19,7 +19,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_001654d8(int);
 extern int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001835b4. */
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
@@ -56,7 +56,7 @@ void FUN_003b6354(int param_1,int param_2,int param_3,int param_4,int param_5,in
     else if (*(int *)(param_1 + 0x3fc) < 1) {
       temp_v0 = 1 - *(int *)(param_1 + 0x3fc);
       VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_001677c0(temp_v0);
+      efctSetSpeed(temp_v0);
     }
   }
   else {
@@ -70,7 +70,7 @@ void FUN_003b6354(int param_1,int param_2,int param_3,int param_4,int param_5,in
           if (param_2 == *(int *)(param_1 + *piVar1 * 4 + 0x8e88)) {
             temp_v0 = 5 - *(int *)(param_1 + 0x3fc);
             VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_001677c0(temp_v0);
+            efctSetSpeed(temp_v0);
           }
         }
       }
@@ -83,7 +83,7 @@ void FUN_003b6354(int param_1,int param_2,int param_3,int param_4,int param_5,in
         if (*(short *)(temp_v1 + 0x8b60) == *(short *)(param_1 + (temp_v0 + temp_v2) * 2 + 0x8b70)) {
           temp_v0 = 5 - *(int *)(param_1 + 0x3fc);
           VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001677c0(temp_v0);
+          efctSetSpeed(temp_v0);
         }
       }
     }
@@ -95,7 +95,7 @@ void FUN_003b6354(int param_1,int param_2,int param_3,int param_4,int param_5,in
         *param_7 = temp_v0 + *param_7;
         temp_v0 = FUN_001654e4(param_1 + 0x2e0);
         *param_8 = temp_v0 + *param_8;
-        FUN_001677c0();
+        efctSetSpeed();
       }
     }
   }

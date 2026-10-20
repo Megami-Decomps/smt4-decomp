@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(unsigned char [132], unsigned char *, int, unsigned int);
 int FUN_001a6f60(int, int);
-int FUN_002e6354(unsigned char [132], int);
+int sysMemClear(unsigned char [132], int);
 int FUN_00471fec(unsigned int, unsigned char [132], int, int, int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -15,13 +15,13 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_004743d8; /* 0x4743d8 */
-extern unsigned int DAT_0057027c; /* 0x57027c */
+extern unsigned int g_aocDisplay; /* 0x57027c */
 
 /* Supplied declaration required: FUN_00100388. */
-extern unsigned int FUN_00192748(void);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGetCount(void);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_001a6f60. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00471fec. */
 
 
@@ -44,7 +44,7 @@ void FUN_004741f0(int param_1,int param_2)
     temp_v3 = 0;
     if (*(char *)(param_1 + 0x45) != '\0') {
       FUN_001a6f60(temp_v0,0);
-      temp_v3 = FUN_00192798();
+      temp_v3 = dataTableGetEntries();
     }
     temp_v4 = *(char *)(param_1 + 0x45) != '\0';
     temp_v0 = 0;
@@ -53,7 +53,7 @@ void FUN_004741f0(int param_1,int param_2)
     }
     if (temp_v4 && temp_v0 != 0) {
       FUN_001a6f60(temp_v0,0);
-      temp_v1 = FUN_00192748();
+      temp_v1 = dataTableGetCount();
       temp_v2 = 0;
       if (temp_v2 < temp_v1) {
         do {
@@ -91,10 +91,10 @@ void FUN_004741f0(int param_1,int param_2)
           case 0x2e:
           case 0x2f:
           case 0x3b:
-            FUN_002e6354(temp_v5,0x80);
+            sysMemClear(temp_v5,0x80);
             FUN_00100388(temp_v5,&LAB_004743d8,param_1 + 0x24,temp_v3 + temp_v2 * 0x40 + 1);
             temp_v0 = *(int *)(param_1 + 0x4c) + temp_v2 * 0x10;
-            FUN_00471fec(DAT_0057027c,temp_v5,temp_v0,1,0x80,temp_v0);
+            FUN_00471fec(g_aocDisplay,temp_v5,temp_v0,1,0x80,temp_v0);
             *(unsigned char *)(*(int *)(param_1 + 0x4c) + temp_v2 * 0x10 + 0xc) = 1;
           }
           temp_v2 = temp_v2 + 1;

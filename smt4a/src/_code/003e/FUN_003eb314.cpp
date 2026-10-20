@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(void);
 int FUN_001f4da0(void);
-int FUN_002e6354(unsigned char *, int);
+int sysMemClear(unsigned char *, int);
 int FUN_002e6dd4(unsigned char *, int);
 int FUN_0050d71c(unsigned char *);
 int VectorSignedToFloat(...);
@@ -22,7 +22,7 @@ int VectorUnsignedToFloat(unsigned int, int);
 /* Supplied declaration required: FUN_001f4da0. */
 extern unsigned int FUN_00261424(void);
 extern int FUN_002626e0(void);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
 /* Supplied declaration required: FUN_0050d71c. */
 
@@ -55,7 +55,7 @@ void FUN_003eb314(int param_1,unsigned char *param_2,unsigned short *param_3)
   *(unsigned short *)(param_2 + 2) = *param_3;
   *(unsigned short *)(param_2 + 4) = 0xffff;
   *(unsigned short *)(param_2 + 6) = 0xffff;
-  FUN_002e6354(param_2 + 0xc,200);
+  sysMemClear(param_2 + 0xc,200);
   *(int *)(param_2 + 0xc) = (int)(short)param_3[0x46];
   param_2[0xd4] = (unsigned char)((unsigned short)param_3[1] >> 0xf);
   temp_v0 = *(char *)(param_3 + 0x51);
@@ -141,7 +141,7 @@ void FUN_003eb314(int param_1,unsigned char *param_2,unsigned short *param_3)
   *(unsigned int *)(param_2 + 0x11c) = temp_v8;
   *(unsigned int *)(param_2 + 0x120) = temp_v9;
   *(unsigned int *)(param_2 + 0x124) = temp_v11;
-  FUN_002e6354(param_2 + 0x17c,0x15);
+  sysMemClear(param_2 + 0x17c,0x15);
   *(unsigned int *)(param_2 + 0x191) = 0;
   *(unsigned int *)(param_2 + 0x195) = 0;
   *(unsigned int *)(param_2 + 0x199) = 0;

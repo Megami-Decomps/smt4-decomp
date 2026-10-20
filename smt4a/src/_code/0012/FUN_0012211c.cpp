@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00135b16. */
 extern int *FUN_002e4e86(unsigned int *, unsigned int *);
-extern int FUN_002e6dac(void);
+extern int rt_malloc(void);
 /* Supplied declaration required: FUN_0030fcf6. */
 extern unsigned int FUN_0030fcfe(unsigned int, int *);
 
@@ -39,7 +39,7 @@ int * FUN_0012211c(int *param_1,unsigned int *param_2,unsigned int param_3,unsig
   temp_v2 = FUN_0030fcf6(param_2);
   piVar1 = (int *)FUN_002e4e86((unsigned int *)&temp_v2,(unsigned int *)&temp_v3);
   temp_v0 = *piVar1;
-  temp_v1 = FUN_002e6dac();
+  temp_v1 = rt_malloc();
   *param_1 = temp_v1;
   FUN_00135b16(*param_2,param_2[1],temp_v1,param_1);
   temp_v1 = FUN_0030fcf6(param_2);

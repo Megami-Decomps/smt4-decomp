@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0010063a(unsigned char *, unsigned int, int, unsigned char *);
+int qsort(unsigned char *, unsigned int, int, unsigned char *);
 int FUN_00184310(void);
 int FUN_001b4a90(int, int, unsigned int);
-int FUN_002e3d04(void);
+int asdOperatorNewD(void);
 int FUN_002e6490(unsigned char *);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -23,12 +23,12 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 extern unsigned int DAT_00571170; /* 0x571170 */
 extern unsigned int DAT_00571174; /* 0x571174 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_001ab854(int);
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_001b4a90. */
-/* Supplied declaration required: FUN_002e3d04. */
+/* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: FUN_002e6490. */
 extern int FUN_004bd340(int, unsigned int);
 
@@ -76,7 +76,7 @@ void FUN_004e980c(int *param_1,int param_2)
   temp_v7 = FUN_001ab888();
   temp_v10 = (unsigned int)*(unsigned char *)(temp_v7 + 0x1ca3);
   pbVar5 = (unsigned char *)(temp_v10 * 6);
-  FUN_002e3d04();
+  asdOperatorNewD();
   temp_v9 = 0;
   if (temp_v10 != 0) {
     pbVar16 = pbVar5;
@@ -114,7 +114,7 @@ void FUN_004e980c(int *param_1,int param_2)
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < (int)temp_v10);
     if (temp_v9 != 0) {
-      FUN_0010063a(pbVar5,temp_v9,6,&LAB_003d2d7c);
+      qsort(pbVar5,temp_v9,6,&LAB_003d2d7c);
       if ((int)temp_v9 >= 4) {
         temp_v9 = 3;
       }

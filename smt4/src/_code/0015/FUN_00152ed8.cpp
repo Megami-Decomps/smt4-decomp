@@ -23,7 +23,7 @@ extern int DAT_00464bb4; /* 0x464bb4 */
 extern unsigned int DAT_00464bbc; /* 0x464bbc */
 
 /* Supplied declaration required: FUN_00153050. */
-extern int FUN_002a31f4(unsigned int);
+extern int asdModelGetSlotArray0(unsigned int);
 /* Supplied declaration required: FUN_002c2968. */
 /* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
 
@@ -45,7 +45,7 @@ void FUN_00152ed8(int param_1)
   int temp_v2;
   int temp_v3;
   
-  temp_v0 = FUN_002a31f4(0);
+  temp_v0 = asdModelGetSlotArray0(0);
   piVar2 = *(int **)(temp_v0 + 0x18);
   piVar6 = *(int **)(temp_v0 + 0x1c);
   param_1 = param_1 + *(int *)(param_1 + 4) * 4;

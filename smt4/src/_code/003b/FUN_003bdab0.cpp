@@ -42,12 +42,12 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: FUN_00282924. */
 /* Supplied declaration required: FUN_00283ebc. */
-extern unsigned int *FUN_002939f4(void);
+extern unsigned int *btlGetMainState(void);
 extern int FUN_0029ebac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a8740. */
 extern unsigned int FUN_002ae108(unsigned int);
@@ -100,7 +100,7 @@ unsigned int FUN_003bdab0(int param_1,unsigned int param_2,int param_3,int param
   temp_v22 = param_2;
   temp_v23 = param_3;
   iStack_28 = param_4;
-  puVar3 = (unsigned int *)FUN_002939f4();
+  puVar3 = (unsigned int *)btlGetMainState();
   temp_v2 = temp_v22;
   FUN_002ae164();
   FUN_002b4670();
@@ -299,7 +299,7 @@ LAB_003be190:
         temp_v12 = (float)(*(unsigned short *)(temp_v2 + 0x36) & 0xffff0fff);
         temp_v3 = VectorUnsignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v13 = romwright_piece_4_4(0x3f800000,temp_v3);
-        puVar6 = (unsigned int *)FUN_002939f4();
+        puVar6 = (unsigned int *)btlGetMainState();
         FUN_00282924(puVar6,param_5);
         if (((*puVar6 & 2) != 0) && (temp_v7 = temp_v1, FUN_002ae164(), temp_v7 != 0)) {
           temp_v3 = FUN_002ae108(temp_v1);
@@ -424,7 +424,7 @@ joined_r0x003bdcc0:
 LAB_003bdce0:
   if (((((puVar3[0x1128] & 0x40000) == 0) && (temp_v9)) && (0 < (int)temp_v6)) &&
      (((puVar3[0x112b] & 0x40) == 0 && ((puVar3[0x38] & 0x20000000) == 0)))) {
-    temp_v4 = FUN_0023eae0(0xf);
+    temp_v4 = randRange(0xf);
     temp_v6 = temp_v6 + temp_v4;
   }
   if (((temp_v21 != 0) && (temp_v7 = temp_v6, temp_v17 != '\0')) &&

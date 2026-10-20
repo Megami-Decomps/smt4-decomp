@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00180008(...);
+int jyoucyuGetTableEntry(...);
 int FUN_00184310(void);
 int FUN_002a4b28(...);
 int FUN_0032fbd0(void);
@@ -30,7 +30,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00180008. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_0018719c(unsigned int);
 extern int FUN_001ab888(void);
@@ -136,7 +136,7 @@ LAB_004a19b4:
     *(unsigned char *)(param_1 + 0x2d) = 1;
     temp_v1 = FUN_004a8454(temp_v2,1);
     *(unsigned char *)(param_1 + 0x94) = temp_v1;
-    FUN_00180008(0);
+    jyoucyuGetTableEntry(0);
   }
   else {
     FUN_004a83f8();
@@ -186,7 +186,7 @@ LAB_004a19b4:
     } while (temp_v2 < 0x4ff);
     temp_v1 = FUN_004a8544(temp_v4,temp_v8);
     *(unsigned char *)(param_1 + 0x94) = temp_v1;
-    FUN_00180008(0);
+    jyoucyuGetTableEntry(0);
   }
   (**(romwright_code **)(**(int **)(param_1 + 0x84c) + 8))(*(int **)(param_1 + 0x84c),param_1 + 0x20);
   puVar4 = (unsigned short *)(*(int *)(param_1 + 0x84c) + 4);
@@ -197,7 +197,7 @@ LAB_004a19b4:
   }
   FUN_004d05c4(param_1 + 0x818,0x14,0x40e,temp_v2);
   *(unsigned char *)(param_1 + 0x828) = 1;
-  FUN_00180008(0);
+  jyoucyuGetTableEntry(0);
   return;
 }
 

@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern int FUN_002e6dac(void);
+extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_002f1352. */
 /* Supplied declaration required: FUN_00307cc0. */
@@ -59,7 +59,7 @@ void FUN_00133162(int *param_1,int param_2,int param_3)
   if (temp_v2 + 0x20 <= temp_v5) {
     temp_v1 = temp_v5;
   }
-  temp_v0 = FUN_002e6dac();
+  temp_v0 = rt_malloc();
   FUN_00307cc0(*param_1,param_2,temp_v0,param_1,piVar7,temp_v3);
   FUN_00307ce2(param_1,((param_2 - *param_1) & 0xfffffff8U) + temp_v0,param_3);
   FUN_00307cc0(param_2,param_1[1],((param_2 - *param_1) & 0xfffffff8U) + temp_v0 + 8,param_1);

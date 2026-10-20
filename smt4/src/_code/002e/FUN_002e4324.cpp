@@ -1,23 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e4324` (_code @ 0x2e4324, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: registers differ (the mask constant 1 is shared with the return value; retail keeps them apart). */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002939f4(void);
-extern unsigned int FUN_00296cc8(void);
+typedef struct Player {
+    /* 0x0000 */ u8 unk0000[0x49BC];
+    /* 0x49BC */ u32 flags;
+} Player;
 
+Player *btlGetMainState(void);
+u32 scrGetArg(int index);
 
-unsigned int FUN_002e4324(void)
-
+/* Script command: sets flag bit (script argument 0) in the current player's flags. */
+u32 FUN_002e4324(int firstArg)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_00296cc8();
-  temp_v1 = FUN_002939f4();
-  *(unsigned int *)(temp_v1 + 0x49bc) = *(unsigned int *)(temp_v1 + 0x49bc) | (1 << (temp_v0 & 0xff));
-  return 1;
+    u32 bit = scrGetArg(firstArg);
+
+    btlGetMainState()->flags |= 1 << (bit & 0xff);
+    return 1;
 }
 
 } /* extern "C" */

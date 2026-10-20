@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_0028dcb0(unsigned int);
+int scrSetResult(unsigned int);
 int FUN_002ae164(void);
 int FUN_002b9024(void);
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
-extern int FUN_0027e928(unsigned int);
-/* Supplied declaration required: FUN_0028dcb0. */
-extern unsigned int FUN_00296cc8(unsigned int);
+extern int btlUnitGet(unsigned int);
+/* Supplied declaration required: scrSetResult. */
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002b9024. */
 
@@ -28,8 +28,8 @@ unsigned int FUN_00311fc4(void)
   unsigned int temp_v4;
   int temp_v5;
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_0027e928(DAT_0043427c);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = btlUnitGet(g_btlScriptUnit);
   temp_v1 = *(int *)(temp_v1 + 0x20);
   if (*(int *)(temp_v1 + 0x278) != 0) {
     temp_v5 = 0;
@@ -38,7 +38,7 @@ unsigned int FUN_00311fc4(void)
       FUN_002ae164();
       if ((temp_v2 != 0) && (temp_v0 == (*(unsigned int *)(temp_v2 + 0x28) & 0x1ffff) >> 0xc)) {
         temp_v4 = 1;
-        FUN_0028dcb0(temp_v4);
+        scrSetResult(temp_v4);
         return 1;
       }
       temp_v5 = temp_v5 + 1;
@@ -51,7 +51,7 @@ unsigned int FUN_00311fc4(void)
       FUN_002ae164();
       if ((temp_v2 != 0) && (temp_v0 == (*(unsigned int *)(temp_v2 + 0x28) & 0x1ffff) >> 0xc)) {
         temp_v4 = 1;
-        FUN_0028dcb0(temp_v4);
+        scrSetResult(temp_v4);
         return 1;
       }
       temp_v5 = temp_v5 + 1;
@@ -66,14 +66,14 @@ unsigned int FUN_00311fc4(void)
       FUN_002ae164();
       if ((temp_v3 != 0) && (temp_v0 == (*(unsigned int *)(temp_v3 + 0x28) & 0x1ffff) >> 0xc)) {
         temp_v4 = 1;
-        FUN_0028dcb0(temp_v4);
+        scrSetResult(temp_v4);
         return 1;
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 8);
   }
   temp_v4 = 0;
-  FUN_0028dcb0(temp_v4);
+  scrSetResult(temp_v4);
   return 1;
 }
 

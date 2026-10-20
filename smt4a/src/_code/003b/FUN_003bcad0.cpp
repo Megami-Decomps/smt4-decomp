@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_003f0e20(int, unsigned int);
 
-extern int FUN_0014aa78(void);
-extern unsigned int FUN_00236038(unsigned int);
+extern int btlGetMainState(void);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_003f0e20. */
 
 
@@ -20,9 +20,9 @@ unsigned int FUN_003bcad0(void)
   int temp_v2;
   int *piVar4;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  temp_v2 = FUN_0014aa78();
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = btlGetMainState();
   FUN_003f0e20(temp_v2,temp_v0);
   if (temp_v2 != 0) {
     piVar4 = (int *)(temp_v2 + 0x3ac);

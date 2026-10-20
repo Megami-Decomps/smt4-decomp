@@ -9,7 +9,7 @@ extern unsigned int DAT_005f19f4; /* 0x5f19f4 */
 extern unsigned int DAT_005f19f8; /* 0x5f19f8 */
 extern unsigned int DAT_005f19fc; /* 0x5f19fc */
 
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 
 
 unsigned int FUN_0038acf8(void)
@@ -18,9 +18,9 @@ unsigned int FUN_0038acf8(void)
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  DAT_005f19fc = FUN_00236038(2);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  DAT_005f19fc = scrGetArg(2);
   DAT_005f19f1 = 1;
   DAT_005f19f4 = temp_v0;
   DAT_005f19f8 = temp_v1;

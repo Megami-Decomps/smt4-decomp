@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern unsigned char DAT_006433d0; /* 0x6433d0 */
+extern unsigned char g_dspsndState; /* 0x6433d0 */
 
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_EnableAuxBus. */
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_SetAuxFrontBypass. */
@@ -39,23 +39,23 @@ void FUN_0018a28c(int param_1,float param_2)
   int temp_v0;
   int temp_v1;
   
-  nn_snd_CTR_Dspsnd_SetMasterVolume((unsigned int)&DAT_006433d0,param_2);
+  nn_snd_CTR_Dspsnd_SetMasterVolume((unsigned int)&g_dspsndState,param_2);
   temp_v0 = 0;
   do {
     temp_v1 = (int)(char)temp_v0;
-    nn_snd_CTR_Dspsnd_SetAuxReturnVolume(&DAT_006433d0,temp_v1);
-    nn_snd_CTR_Dspsnd_EnableAuxBus(&DAT_006433d0,temp_v1);
-    nn_snd_CTR_Dspsnd_SetAuxFrontBypass(&DAT_006433d0,temp_v1,(int)*(char *)(param_1 + temp_v1 + 0x24));
+    nn_snd_CTR_Dspsnd_SetAuxReturnVolume(&g_dspsndState,temp_v1);
+    nn_snd_CTR_Dspsnd_EnableAuxBus(&g_dspsndState,temp_v1);
+    nn_snd_CTR_Dspsnd_SetAuxFrontBypass(&g_dspsndState,temp_v1,(int)*(char *)(param_1 + temp_v1 + 0x24));
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 2);
-  nn_snd_CTR_Dspsnd_SetSoundOutputMode(&DAT_006433d0,*(unsigned char *)(param_1 + 2));
-  nn_snd_CTR_Dspsnd_SetClippingMode(&DAT_006433d0,*(unsigned char *)(param_1 + 1));
-  nn_snd_CTR_Dspsnd_SetSurroundDepth((unsigned int)&DAT_006433d0,*(unsigned short *)(param_1 + 0x28));
-  nn_snd_CTR_Dspsnd_SetSurroundSpeakerPosition(&DAT_006433d0,*(unsigned char *)(param_1 + 0x27));
-  nn_snd_CTR_Dspsnd_SetRearRatio((unsigned int)&DAT_006433d0,*(unsigned short *)(param_1 + 0x2a));
-  nn_snd_CTR_Dspsnd_SetOutputBufferCount((unsigned int)&DAT_006433d0,(unsigned int)*(unsigned short *)(param_1 + 0x32));
+  nn_snd_CTR_Dspsnd_SetSoundOutputMode(&g_dspsndState,*(unsigned char *)(param_1 + 2));
+  nn_snd_CTR_Dspsnd_SetClippingMode(&g_dspsndState,*(unsigned char *)(param_1 + 1));
+  nn_snd_CTR_Dspsnd_SetSurroundDepth((unsigned int)&g_dspsndState,*(unsigned short *)(param_1 + 0x28));
+  nn_snd_CTR_Dspsnd_SetSurroundSpeakerPosition(&g_dspsndState,*(unsigned char *)(param_1 + 0x27));
+  nn_snd_CTR_Dspsnd_SetRearRatio((unsigned int)&g_dspsndState,*(unsigned short *)(param_1 + 0x2a));
+  nn_snd_CTR_Dspsnd_SetOutputBufferCount((unsigned int)&g_dspsndState,(unsigned int)*(unsigned short *)(param_1 + 0x32));
   *(unsigned int *)(param_1 + 0x2c) = 0;
-  nn_snd_CTR_Dspsnd_SetSyncMode(&DAT_006433d0,*(unsigned char *)(param_1 + 3));
+  nn_snd_CTR_Dspsnd_SetSyncMode(&g_dspsndState,*(unsigned char *)(param_1 + 3));
   return;
 }
 

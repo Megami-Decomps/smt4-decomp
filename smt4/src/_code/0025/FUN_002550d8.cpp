@@ -11,7 +11,7 @@ int FUN_00282924(int, unsigned int);
 /* Supplied declaration required: FUN_0023dcfc. */
 /* Supplied declaration required: FUN_00245cc0. */
 /* Supplied declaration required: FUN_00282924. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 
 
 void FUN_002550d8(unsigned int param_1,int param_2,int param_3,int param_4)
@@ -22,7 +22,7 @@ void FUN_002550d8(unsigned int param_1,int param_2,int param_3,int param_4)
   int temp_v1;
   int temp_v2;
   
-  temp_v1 = FUN_002939f4();
+  temp_v1 = btlGetMainState();
   FUN_00282924(temp_v1,param_1);
   if (temp_v1 != 0) {
     temp_v1 = temp_v1 + param_2 * 2;

@@ -4,22 +4,22 @@
 
 extern "C" {
 
-int FUN_002a7218(unsigned int);
+int scrScriptProcessDestroy(unsigned int);
 int FUN_002a780c(unsigned int);
 int FUN_002a87e8(void);
 int FUN_002bee58(unsigned int *, int);
-int FUN_002c415c(unsigned int *);
-int FUN_002c43b4(unsigned int, int);
+int asdMemFree(unsigned int *);
+int jobStop(unsigned int, int);
 
 extern signed char DAT_0043da28; /* 0x43da28 */
 extern unsigned int *DAT_0043da2c; /* 0x43da2c */
 
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002a780c. */
 /* Supplied declaration required: FUN_002a87e8. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 
 
 void FUN_002917b8(void)
@@ -44,9 +44,9 @@ void FUN_002917b8(void)
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 6);
     }
-    FUN_002a7218(puVar1[0x158]);
-    FUN_002c43b4(*puVar1,0);
-    FUN_002c415c(puVar1);
+    scrScriptProcessDestroy(puVar1[0x158]);
+    jobStop(*puVar1,0);
+    asdMemFree(puVar1);
     DAT_0043da2c = (unsigned int *)0x0;
     DAT_0043da28 = '\0';
   }

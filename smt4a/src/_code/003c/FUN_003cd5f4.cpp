@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_00187180(int, int);
-int FUN_00192748(...);
+int dataTableGet(int, int);
+int dataTableGetCount(...);
 int FUN_0046c35c(int, int, int);
 int FUN_0046ea50(int, unsigned int);
 
-extern int DAT_00570280; /* 0x570280 */
+extern int g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_00187180. */
-/* Supplied declaration required: FUN_00192748. */
-extern int FUN_00192798(void);
+/* Supplied declaration required: dataTableGet. */
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0046c35c. */
 /* Supplied declaration required: FUN_0046ea50. */
 
@@ -29,35 +29,35 @@ int FUN_003cd5f4(int param_1)
   unsigned int temp_v4;
   
   temp_v4 = 0;
-  FUN_00187180(0x30,0);
-  temp_v0 = FUN_00192748();
-  temp_v2 = DAT_00570280;
-  FUN_0046c35c(DAT_00570280,0x27,0);
+  dataTableGet(0x30,0);
+  temp_v0 = dataTableGetCount();
+  temp_v2 = g_aocSystem;
+  FUN_0046c35c(g_aocSystem,0x27,0);
   if (0 < temp_v2 + temp_v0) {
     do {
-      temp_v1 = FUN_00187180(0x30,0);
-      temp_v2 = FUN_00192798();
-      temp_v3 = FUN_00192748(temp_v1);
+      temp_v1 = dataTableGet(0x30,0);
+      temp_v2 = dataTableGetEntries();
+      temp_v3 = dataTableGetCount(temp_v1);
       if (temp_v4 < temp_v3) {
         temp_v2 = temp_v2 + temp_v4 * 0x28;
       }
       else {
-        temp_v0 = DAT_00570280;
-        FUN_0046c35c(DAT_00570280,0x27,0);
+        temp_v0 = g_aocSystem;
+        FUN_0046c35c(g_aocSystem,0x27,0);
         temp_v2 = 0;
         if (temp_v4 < temp_v3 + temp_v0) {
-          temp_v2 = DAT_00570280;
-          FUN_0046ea50(DAT_00570280,temp_v4 - temp_v3);
+          temp_v2 = g_aocSystem;
+          FUN_0046ea50(g_aocSystem,temp_v4 - temp_v3);
         }
       }
       if (*(int *)(temp_v2 + 0x20) == param_1) {
         return (int)*(short *)(temp_v2 + 0x24);
       }
       temp_v4 = temp_v4 + 1;
-      FUN_00187180(0x30,0);
-      temp_v0 = FUN_00192748();
-      temp_v2 = DAT_00570280;
-      FUN_0046c35c(DAT_00570280,0x27,0);
+      dataTableGet(0x30,0);
+      temp_v0 = dataTableGetCount();
+      temp_v2 = g_aocSystem;
+      FUN_0046c35c(g_aocSystem,0x27,0);
     } while ((int)temp_v4 < temp_v2 + temp_v0);
   }
   return -1;

@@ -1,27 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fb31c` (_code @ 0x2fb31c, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail loads the pool limit into r2, built into r1 */
+/* Pool allocator: pops a node from the free list, otherwise bump-allocates one 0xC-byte element (growing the pool first when the current block is full). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00133012(int);
+typedef struct Element {
+    u8 data[0xC];
+} Element;
 
-/* Supplied declaration required: FUN_00133012. */
+typedef struct FreeNode {
+    struct FreeNode *next;
+} FreeNode;
 
+typedef struct Pool {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ FreeNode *freeList;
+    /* 0x08 */ Element *cursor;
+    /* 0x0C */ Element *limit;
+} Pool;
 
-void FUN_002fb31c(int param_1)
+extern void FUN_00133012(Pool *pool);
 
+Element *FUN_002fb31c(Pool *pool)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(unsigned int **)(param_1 + 4) != (unsigned int *)0x0) {
-    *(unsigned int *)(param_1 + 4) = **(unsigned int **)(param_1 + 4);
-    return;
-  }
-  if (*(int *)(param_1 + 8) == *(int *)(param_1 + 0xc)) {
-    FUN_00133012(param_1);
-  }
-  *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 0xc;
-  return;
+    FreeNode *node = pool->freeList;
+    Element *element;
+
+    if (node != NULL) {
+        pool->freeList = node->next;
+        return (Element *)node;
+    }
+    if (pool->cursor == pool->limit) {
+        FUN_00133012(pool);
+    }
+    element = pool->cursor;
+    pool->cursor = element + 1;
+    return element;
 }
 
-} /* extern "C" */
+}

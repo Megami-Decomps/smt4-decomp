@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00341e80(int);
+int asdPrimAlloc(int);
 int rt_memcpy(int, int, int);
 
 extern unsigned int FUN_001bc2ec(int);
-/* Supplied declaration required: FUN_00341e80. */
+/* Supplied declaration required: asdPrimAlloc. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -22,7 +22,7 @@ void FUN_00412aec(int param_1,unsigned int *param_2,int param_3,int param_4)
   
   temp_v0 = param_4 << 1;
   temp_v1 = temp_v0;
-  FUN_00341e80(temp_v0);
+  asdPrimAlloc(temp_v0);
   rt_memcpy(temp_v1,*(int *)(param_1 + 0x48) + param_3 * 2,temp_v0);
   temp_v2 = FUN_001bc2ec(temp_v1);
   *param_2 = temp_v2;

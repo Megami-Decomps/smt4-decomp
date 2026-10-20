@@ -1,29 +1,17 @@
-#include "romwright_types.h"
+#include "battle/btlUI.h"
 
 extern "C" {
 
-int FUN_00297f1c(int, unsigned int, unsigned int, unsigned int);
+void FUN_00297f1c(BtlUiObjC *obj, u32 a, s32 b, u32 c);
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
+extern BtlUiGlobals DAT_00439c88;
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
-
-/* Supplied declaration required: FUN_00297f1c. */
-
-
-void FUN_00229c5c(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+void FUN_00229c5c(u32 unused, u32 first, u32 second)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20));
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0x7e38) = 7;
-  FUN_00297f1c(temp_v0 + 0x2460,param_2,0xffffffff,param_3);
-  return;
+    BtlUi *ui = DAT_00439c88.ui;
+
+    ui->state = 7;
+    FUN_00297f1c(&ui->objC, first, -1, second);
 }
 
 } /* extern "C" */

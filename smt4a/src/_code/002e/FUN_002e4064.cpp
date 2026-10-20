@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00101e28(unsigned int, unsigned int);
-int FUN_002e3268(void);
+int asdOperatorNewB(void);
 int FUN_002e4d84(void);
 
 extern int DAT_005c4bf8; /* 0x5c4bf8 */
@@ -14,7 +14,7 @@ extern int DAT_005c4c00; /* 0x5c4c00 */
 
 extern unsigned int FUN_00101e20(int, int);
 /* Supplied declaration required: FUN_00101e28. */
-/* Supplied declaration required: FUN_002e3268. */
+/* Supplied declaration required: asdOperatorNewB. */
 /* Supplied declaration required: FUN_002e4d84. */
 
 
@@ -29,7 +29,7 @@ void FUN_002e4064(void)
   
   if (DAT_005c4c00 == 0) {
     temp_v0 = 0x20;
-    FUN_002e3268();
+    asdOperatorNewB();
     FUN_002e4d84();
     temp_v3 = 0;
     DAT_005c4bf8 = temp_v0;
@@ -39,7 +39,7 @@ void FUN_002e4064(void)
       temp_v3 = temp_v3 + 1;
     }
     temp_v0 = 0x20;
-    FUN_002e3268();
+    asdOperatorNewB();
     FUN_002e4d84();
     DAT_005c4bfc = temp_v0;
     *(unsigned int *)(temp_v0 + 0x10) = 0x3f0;

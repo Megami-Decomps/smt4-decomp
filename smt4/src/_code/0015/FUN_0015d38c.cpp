@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0015e104(unsigned char *);
+int sndAddDroppedFrames(unsigned char *);
 int rt_memcpy_w(int, unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 extern unsigned char DAT_004e6f14; /* 0x4e6f14 */
 extern unsigned char DAT_004e8568; /* 0x4e8568 */
 
-/* Supplied declaration required: FUN_0015e104. */
+/* Supplied declaration required: sndAddDroppedFrames. */
 extern int FUN_002bb274(void);
 extern void nn_snd_CTR_OutputCapture_Write(unsigned int, short *, int);
 extern void nn_snd_CTR_VoiceManager_UpdateStatus(unsigned int, int, unsigned int);
@@ -67,7 +67,7 @@ void FUN_0015d38c(int param_1)
                   (temp_v1,*(short **)(param_1 + (unsigned int)*(unsigned short *)(param_1 + 0x131c) * 4 + 0x1300),
                    0xa0);
       }
-      FUN_0015e104(&DAT_004e6f14);
+      sndAddDroppedFrames(&DAT_004e6f14);
       return;
     }
   }

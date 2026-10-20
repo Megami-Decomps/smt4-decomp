@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0013f1b8(int, int);
+int asdTMTexTableLoadTmx(int, int);
 int FUN_0014384c(int);
-int FUN_00163060(int, int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_002e6dd4(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -18,9 +18,9 @@ extern signed char DAT_00588fd8; /* 0x588fd8 */
 extern int DAT_00588fdc; /* 0x588fdc */
 extern int DAT_00588fe0; /* 0x588fe0 */
 
-/* Supplied declaration required: FUN_0013f1b8. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_0014384c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_002e6dd4. */
 
 
@@ -32,16 +32,16 @@ void FUN_0031f4fc(void)
   
   if (DAT_00588fd8 < '\x01') {
     FUN_0014384c(0xf);
-    FUN_0013f1b8(0x19,0);
+    asdTMTexTableLoadTmx(0x19,0);
     if (DAT_00588fdc == 0) {
       temp_v0 = 0x100;
-      FUN_00163060(0x100,0x100,0,0x277,1);
+      asdMemoryAllocTracked(0x100,0x100,0,0x277,1);
       DAT_00588fdc = temp_v0;
       FUN_002e6dd4();
     }
     if (DAT_00588fe0 == 0) {
       temp_v0 = 0x100;
-      FUN_00163060(0x100,0x100,0,0x9a,1);
+      asdMemoryAllocTracked(0x100,0x100,0,0x9a,1);
       DAT_00588fe0 = temp_v0;
       FUN_002e6dd4();
     }

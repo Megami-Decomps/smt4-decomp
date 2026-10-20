@@ -17,7 +17,7 @@ struct fn_00294fe0_arg0 {
 };
 
 extern int FUN_0023e378(void);
-extern int FUN_002b93b0(void *, unsigned int);
+extern int asdTMTexTableCallFileB(void *, unsigned int);
 /* Supplied declaration required: FUN_0033e8a8. */
 extern int FUN_0033f178(fn_00294fe0_arg0 *);
 /* Supplied declaration required: FUN_0033f22c. */
@@ -33,7 +33,7 @@ unsigned int FUN_00294fe0(fn_00294fe0_arg0 *param_1)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_002b93b0(param_1->field_0x8,param_1->field_0xc);
+  temp_v0 = asdTMTexTableCallFileB(param_1->field_0x8,param_1->field_0xc);
   temp_v1 = FUN_0023e378();
   if (temp_v1 == 0) {
     return 0;

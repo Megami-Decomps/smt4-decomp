@@ -15,7 +15,7 @@ struct fn_002276f8_arg0 {
     undefined1 field_0x3038; /* +0x3038 */
 };
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 
 /* Supplied declaration required: FUN_001ab998. */
 
@@ -30,8 +30,8 @@ void FUN_002276f8(fn_002276f8_arg0 *param_1)
   }
   param_1->field_0x3038 = 0xc;
   param_1->field_0x3028 = param_1->field_0x3028 & 0xfffffffd;
-  if (DAT_004342c8 != 0) {
-    *(unsigned int *)(DAT_004342c8 + 0x634) = *(unsigned int *)(DAT_004342c8 + 0x634) & 0xfbffffff;
+  if (g_btlMain != 0) {
+    *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) & 0xfbffffff;
   }
   return;
 }

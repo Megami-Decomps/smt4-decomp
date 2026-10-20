@@ -12,11 +12,11 @@ int FUN_00254a2c(unsigned int, int);
 int FUN_0028c640(unsigned int, int, unsigned char [12]);
 int FUN_0029a014(unsigned int, int);
 int FUN_002a0428(int, unsigned int);
-int FUN_002a0b48(void);
+int statusCameraApply(void);
 int FUN_002a5710(unsigned int, int);
-int FUN_002a775c(...);
+int asdMdlManagerDestroy(...);
 int FUN_002b2ae8(unsigned int, int, unsigned char [12]);
-int FUN_002c415c(...);
+int asdMemFree(...);
 int FUN_002cbad0(unsigned int, int, unsigned char [24]);
 int FUN_003353cc(...);
 
@@ -29,16 +29,16 @@ extern unsigned int FUN_0019df10(void);
 /* Supplied declaration required: FUN_0028c640. */
 /* Supplied declaration required: FUN_0029a014. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002a0b48. */
+/* Supplied declaration required: statusCameraApply. */
 /* Supplied declaration required: FUN_002a5710. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 extern int FUN_002adee0(void);
 /* Supplied declaration required: FUN_002b2ae8. */
 extern int FUN_002bfde4(unsigned int);
 extern int FUN_002c15fc(unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002cbad0. */
-extern unsigned int FUN_00328344(int, unsigned int, unsigned short, unsigned int);
+extern unsigned int asdMdlManagerCreateFromSourceAndNode(int, unsigned int, unsigned short, unsigned int);
 /* Supplied declaration required: FUN_003353cc. */
 
 
@@ -91,7 +91,7 @@ void FUN_002975ac(int param_1)
     }
     FUN_00254650(param_1,4);
   }
-  FUN_002a0b48();
+  statusCameraApply();
   temp_v0 = *(int *)(param_1 + 0x1c);
   if ((*(int *)(temp_v0 + 4) != 0) && (*(int *)(temp_v0 + 4) == 1)) {
     if (*(int *)(temp_v0 + 8) != 0) {
@@ -180,9 +180,9 @@ void FUN_002975ac(int param_1)
       }
       break;
     case 3:
-      FUN_002a775c(*(unsigned int *)(temp_v4 + 0x18));
+      asdMdlManagerDestroy(*(unsigned int *)(temp_v4 + 0x18));
       *(unsigned int *)(temp_v4 + 0x18) = 0;
-      FUN_002c415c(*(unsigned int *)(temp_v4 + 0x1c));
+      asdMemFree(*(unsigned int *)(temp_v4 + 0x1c));
       *(unsigned int *)(temp_v4 + 0x1c) = 0;
       *puVar10 = 0;
       if (*(char *)(temp_v4 + 0x20) != '\0') {
@@ -193,7 +193,7 @@ void FUN_002975ac(int param_1)
       if (*(int *)(temp_v4 + 0x1c) != 0) {
         temp_v3 = FUN_0019df10();
         in_r12 = *(int *)(temp_v4 + 0x1c);
-        temp_v3 = FUN_00328344(in_r12,temp_v3,*(unsigned short *)(temp_v4 + 0x14),*(unsigned int *)(temp_v0 + 8));
+        temp_v3 = asdMdlManagerCreateFromSourceAndNode(in_r12,temp_v3,*(unsigned short *)(temp_v4 + 0x14),*(unsigned int *)(temp_v0 + 8));
         *(unsigned int *)(temp_v4 + 0x18) = temp_v3;
         *puVar10 = 1;
       }

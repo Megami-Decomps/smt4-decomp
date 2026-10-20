@@ -14,14 +14,14 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern int DAT_00570280; /* 0x570280 */
+extern int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_00148d68. */
 extern int FUN_0014bef4(short);
 /* Supplied declaration required: FUN_00152978. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019cac4. */
 /* Supplied declaration required: FUN_0046fd8c. */
 extern int FUN_004bb80c(void);
@@ -49,11 +49,11 @@ unsigned short FUN_004bc420(unsigned int param_1,unsigned int param_2,int param_
     puVar1 = (unsigned short *)FUN_00152978(param_1,param_2);
     temp_v4 = (unsigned int)*puVar1;
   }
-  temp_v0 = FUN_00187180(2,1);
-  temp_v1 = FUN_00192798();
-  temp_v2 = FUN_00192748(temp_v0);
+  temp_v0 = dataTableGet(2,1);
+  temp_v1 = dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v0);
   temp_v6 = temp_v1;
-  if ((temp_v4 < temp_v2) && (temp_v6 = DAT_00570280, FUN_0046fd8c(DAT_00570280,temp_v4), temp_v6 == 0)) {
+  if ((temp_v4 < temp_v2) && (temp_v6 = g_aocSystem, FUN_0046fd8c(g_aocSystem,temp_v4), temp_v6 == 0)) {
     temp_v6 = temp_v1 + temp_v4 * 0x78;
   }
   temp_v7 = 0;

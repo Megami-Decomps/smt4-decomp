@@ -63,7 +63,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_00244d98. */
 /* Supplied declaration required: FUN_00244db4. */
 extern int FUN_0024530c(int, int);
-extern int FUN_002a31f4(unsigned int);
+extern int asdModelGetSlotArray0(unsigned int);
 /* Supplied declaration required: FUN_002a8638. */
 /* Supplied declaration required: FUN_002a86a4. */
 extern int FUN_002bfefc(unsigned int *);
@@ -179,7 +179,7 @@ void FUN_003416c4(int *param_1,int param_2,int param_3,unsigned int param_4)
       **(int **)(temp_v2 + 0x1c) = temp_v4;
     }
   }
-  temp_v2 = FUN_002a31f4(0);
+  temp_v2 = asdModelGetSlotArray0(0);
   temp_v4 = *(int *)(temp_v2 + 0xc);
   if (((temp_v4 == 0) ||
       ((temp_v4 != temp_v7 && (nw_gfx_SceneNode_IsCircularReference(), temp_v4 == 0)))) &&

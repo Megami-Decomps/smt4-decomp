@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026e754(...);
+int renderCtxCallB(...);
 int FUN_002a34e8(...);
 int FUN_002a3504(...);
 int FUN_002ba12c(...);
@@ -42,10 +42,10 @@ typedef struct {
     unsigned int sp90; /* 0x90: local_90 */
 } param_1_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0026e754. */
+/* Supplied declaration required: renderCtxCallB. */
 /* Supplied declaration required: FUN_002a34e8. */
 /* Supplied declaration required: FUN_002a3504. */
 /* Supplied declaration required: FUN_002ba12c. */
@@ -91,7 +91,7 @@ unsigned int FUN_00335b80(int *param_1)
   unsigned int temp_v22;
   unsigned int temp_v23;
   
-  temp_v1 = DAT_0044ea00;
+  temp_v1 = g_titleScene;
   if ((*param_1 == 8) && (param_1[7] != 0)) {
     temp_v0 = FUN_002c5d80(1,0);
     piVar5 = (int *)(temp_v1 + 0x124c);
@@ -108,11 +108,11 @@ unsigned int FUN_00335b80(int *param_1)
     FUN_002bed3c();
     FUN_002bf4f8(0x2d,3000);
     temp_v4 = 0.35f;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v4 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002bf288(2,0x2d,3000,(int)temp_v4,0,2);
-    temp_v1 = DAT_0044ea00;
-    piVar5 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v1 = g_titleScene;
+    piVar5 = (int *)(g_titleScene + 0x124c);
     temp_v0 = *piVar5;
     temp_v2 = piVar5[temp_v0 + 2];
     *piVar5 = temp_v0 - 1;
@@ -121,7 +121,7 @@ unsigned int FUN_00335b80(int *param_1)
       *(unsigned char *)(temp_v1 + 0x1264) = 0;
     }
     FUN_002bf538();
-    temp_v1 = DAT_0044ea00;
+    temp_v1 = g_titleScene;
     temp_v0 = FUN_002c5da8(6,1,0);
     piVar5 = (int *)(temp_v1 + 0x12ac);
     temp_v2 = *piVar5;
@@ -159,16 +159,16 @@ unsigned int FUN_00335b80(int *param_1)
     temp_v14 = temp_v6;
     FUN_002a3504(temp_v9,temp_v9,&temp_v19);
     FUN_002a34e8(temp_v9,&temp_v21);
-    FUN_0026e754(temp_v9);
+    renderCtxCallB(temp_v9);
     temp_v1 = FUN_002bf4f8(0x2d,2000);
     temp_v8 = 0.3f;
     temp_v4 = temp_v8;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v7 = 0.5f;
     temp_v5 = (float)VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v8 = (float)VectorSignedToFloat(-(int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002bf288(2,0x2d,2000,(int)(temp_v5 + temp_v8 * 0.5f),-(int)*(short *)(temp_v1 + 10),6);
-    FUN_002c198c(DAT_0044ea00);
+    FUN_002c198c(g_titleScene);
     FUN_002bf538();
     FUN_002bf538();
     temp_v9[0] = param_1[0xd];
@@ -189,16 +189,16 @@ unsigned int FUN_00335b80(int *param_1)
     temp_v14 = temp_v6;
     FUN_002a3504(temp_v9,temp_v9,&temp_v19);
     FUN_002a34e8(temp_v9,&temp_v21);
-    FUN_0026e754(temp_v9);
+    renderCtxCallB(temp_v9);
     temp_v1 = FUN_002bf4f8(0x2d,0x7d1);
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v8 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v4 = (float)VectorSignedToFloat(-(int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002bf288(2,0x2d,0x7d1,(int)(temp_v8 + temp_v4 * temp_v7),-(int)*(short *)(temp_v1 + 10),6);
-    FUN_002c198c(DAT_0044ea00);
+    FUN_002c198c(g_titleScene);
     FUN_002bf538();
-    temp_v1 = DAT_0044ea00;
-    piVar5 = (int *)(DAT_0044ea00 + 0x12ac);
+    temp_v1 = g_titleScene;
+    piVar5 = (int *)(g_titleScene + 0x12ac);
     temp_v0 = *piVar5;
     temp_v2 = piVar5[temp_v0 + 2];
     *piVar5 = temp_v0 - 1;
@@ -207,7 +207,7 @@ unsigned int FUN_00335b80(int *param_1)
       *(unsigned char *)(temp_v1 + 0x12c4) = 0;
     }
     FUN_002bf538();
-    temp_v1 = DAT_0044ea00;
+    temp_v1 = g_titleScene;
     temp_v0 = FUN_002c5d80(1,0);
     piVar5 = (int *)(temp_v1 + 0x124c);
     temp_v2 = *piVar5;
@@ -222,11 +222,11 @@ unsigned int FUN_00335b80(int *param_1)
     FUN_002bed3c();
     FUN_002bf4f8(0x2d,1000);
     temp_v4 = 0.28f;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v4 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002bf288(2,0x2d,1000,(int)temp_v4,0,6);
-    temp_v1 = DAT_0044ea00;
-    piVar5 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v1 = g_titleScene;
+    piVar5 = (int *)(g_titleScene + 0x124c);
     temp_v0 = *piVar5;
     temp_v2 = piVar5[temp_v0 + 2];
     *piVar5 = temp_v0 - 1;

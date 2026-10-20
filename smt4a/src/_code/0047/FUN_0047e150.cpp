@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_001ad9b4(void);
 int FUN_00275bc8(int, unsigned int);
 int FUN_00275f44(unsigned int, unsigned int);
@@ -15,10 +15,10 @@ int FUN_0046ed18(unsigned int, unsigned int, unsigned int *, int);
 extern unsigned char LAB_0047e2ec; /* 0x47e2ec */
 extern unsigned char LAB_0047e304; /* 0x47e304 */
 extern unsigned char LAB_0047e320; /* 0x47e320 */
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
@@ -54,10 +54,10 @@ unsigned int FUN_0047e150(unsigned int *param_1)
     }
     FUN_00100388(temp_v3,&LAB_0047e2ec,unaff_r6,unaff_r6);
     FUN_00100388(temp_v4,&LAB_0047e304,unaff_r6);
-    temp_v2 = FUN_0046e08c(DAT_00570280,*(unsigned short *)(temp_v2 + 0xd4),1);
+    temp_v2 = FUN_0046e08c(g_aocSystem,*(unsigned short *)(temp_v2 + 0xd4),1);
     if (temp_v2 != 0) {
-      FUN_0046ed18(DAT_00570280,unaff_r6,param_1 + 3,0);
-      FUN_0046eca4(DAT_00570280,unaff_r6,param_1 + 4,0);
+      FUN_0046ed18(g_aocSystem,unaff_r6,param_1 + 3,0);
+      FUN_0046eca4(g_aocSystem,unaff_r6,param_1 + 4,0);
       *param_1 = 1;
       return 0;
     }
@@ -76,7 +76,7 @@ unsigned int FUN_0047e150(unsigned int *param_1)
     if (temp_v2 == 0) {
       *param_1 = 3;
     }
-    FUN_001681cc(0x92);
+    sysPlaySe(0x92);
     temp_v0 = param_1[3];
     FUN_00275bc8(temp_v0,param_1[4]);
     param_1[5] = temp_v0;

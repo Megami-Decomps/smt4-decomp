@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001a8040(...);
-int FUN_00202940(void);
+int runWinOpen(void);
 int FUN_002579bc(...);
 int FUN_00259294(...);
 int FUN_0026b584(...);
@@ -14,15 +14,15 @@ int FUN_002a03a0(...);
 int FUN_002b8838(...);
 int FUN_002bcc60(...);
 int FUN_002bcd44(void);
-int FUN_002c222c(...);
-int FUN_002c32a0(...);
-int FUN_002c4938(void);
-int FUN_002c498c(int, int, int, int, int);
-int FUN_002c4a08(...);
+int asdOperatorNew(...);
+int memAlloc(...);
+int memClear(void);
+int asdMemAlloc(int, int, int, int, int);
+int taskCreateDraw(...);
 int FUN_002c526c(void);
-int FUN_002c5788(unsigned char *, int, int, int, unsigned char *, int, int);
+int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
 int FUN_002d7330(...);
-int FUN_0032fcc0(void);
+int runWinOpenState(void);
 int FUN_00359f90(void);
 int nn_cfg_CTR_IsRestrictP2pCec(void);
 
@@ -65,7 +65,7 @@ extern unsigned char LAB_003f6ff0; /* 0x3f6ff0 */
 extern unsigned int *DAT_0043daa8; /* 0x43daa8 */
 
 /* Supplied declaration required: FUN_001a8040. */
-/* Supplied declaration required: FUN_00202940. */
+/* Supplied declaration required: runWinOpen. */
 /* Supplied declaration required: FUN_002579bc. */
 /* Supplied declaration required: FUN_00259294. */
 /* Supplied declaration required: FUN_0026b584. */
@@ -74,15 +74,15 @@ extern unsigned int *DAT_0043daa8; /* 0x43daa8 */
 /* Supplied declaration required: FUN_002b8838. */
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002bcd44. */
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c32a0. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_002d7330. */
-/* Supplied declaration required: FUN_0032fcc0. */
+/* Supplied declaration required: runWinOpenState. */
 /* Supplied declaration required: FUN_00359f90. */
 /* Supplied declaration required: nn_cfg_CTR_IsRestrictP2pCec. */
 
@@ -103,16 +103,16 @@ void FUN_001ffc5c(void)
   
   if (DAT_0043daa8 == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
-    FUN_002c498c(0x100,0x100,0,0xd7c,1);
+    asdMemAlloc(0x100,0x100,0,0xd7c,1);
     DAT_0043daa8 = puVar1;
   }
   puVar1 = DAT_0043daa8;
-  FUN_002c4938();
+  memClear();
   puVar2 = &LAB_001fffcc;
-  FUN_002c5788(&LAB_001fffcc,1,0,0,&LAB_0018b20c,0,0);
+  asdProcessCreateSimple(&LAB_001fffcc,1,0,0,&LAB_0018b20c,0,0);
   *puVar1 = (unsigned int)puVar2;
-  FUN_002c4a08(0x1fffe0,0x7d,0,0,FUN_0018b06c,0,0,puVar2);
-  FUN_002c4a08(&LAB_001ffff4,0xdb,0,0,FUN_0018b06c,0,0,*puVar1);
+  taskCreateDraw(0x1fffe0,0x7d,0,0,FUN_0018b06c,0,0,puVar2);
+  taskCreateDraw(&LAB_001ffff4,0xdb,0,0,FUN_0018b06c,0,0,*puVar1);
   puVar1[0x349] = 0xffffffff;
   puVar1[0x34a] = 0;
   puVar1[0x34b] = 0xffffffff;
@@ -161,17 +161,17 @@ void FUN_001ffc5c(void)
     FUN_002d7330(DAT_0043daa8 + 0x28);
     FUN_001a8040(0);
     FUN_002a03a0(0x1000062,0,0x3c);
-    FUN_00202940();
-    FUN_0032fcc0();
+    runWinOpen();
+    runWinOpenState();
     FUN_0026b584(2);
     FUN_00259294(2);
     *(unsigned char *)((int)puVar1 + 0xd65) = 0;
     puVar1[0x35a] = 0;
     temp_v0 = 0x100;
-    FUN_002c32a0(0x100,0x100,0,0x1000,0x1000,1);
+    memAlloc(0x100,0x100,0,0x1000,0x1000,1);
     puVar1[0x35e] = temp_v0;
     puVar4 = (unsigned int *)0x18;
-    FUN_002c222c(0x18,FUN_0018b06c);
+    asdOperatorNew(0x18,FUN_0018b06c);
     if (puVar4 != (unsigned int *)0x0) {
       *puVar4 = 0;
       puVar4[1] = 0;

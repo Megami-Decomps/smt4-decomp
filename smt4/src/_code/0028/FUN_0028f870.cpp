@@ -17,7 +17,7 @@ typedef struct {
 } param_4_stack;
 
 extern int DAT_0043da90; /* 0x43da90 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0029a17c. */
 extern int FUN_0029d644(unsigned int);
@@ -26,7 +26,7 @@ extern int FUN_0029d65c(int);
 extern int FUN_0029efc0(unsigned int);
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 void FUN_0028f870(unsigned int param_1,int param_2,int param_3,int param_4)
@@ -87,17 +87,17 @@ void FUN_0028f870(unsigned int param_1,int param_2,int param_3,int param_4)
     temp_v0 = FUN_002bf4f8(0x1d,0x424);
   }
   temp_v7 = FUN_0029ee54(param_1);
-  temp_v1 = aeabi_idivmod((int)*(short *)(*(int *)(temp_v0 + 0xc) + 2) << 0xc,temp_v7);
+  temp_v1 = __aeabi_idivmod((int)*(short *)(*(int *)(temp_v0 + 0xc) + 2) << 0xc,temp_v7);
   temp_v3 = FUN_0029d644(param_1);
   temp_v1 = temp_v1 * temp_v3 >> 0xc;
   if (temp_v1 < 1) {
     temp_v1 = 1;
   }
   temp_v7 = FUN_0029ee54(param_1);
-  temp_v4 = aeabi_idivmod((int)*(short *)(*(int *)(temp_v0 + 0xc) + 2) << 0xc,temp_v7);
+  temp_v4 = __aeabi_idivmod((int)*(short *)(*(int *)(temp_v0 + 0xc) + 2) << 0xc,temp_v7);
   temp_v5 = FUN_0029efc0(param_1);
-  temp_v3 = DAT_0044ea00;
-  piVar10 = (int *)(DAT_0044ea00 + 0x130c);
+  temp_v3 = g_titleScene;
+  piVar10 = (int *)(g_titleScene + 0x130c);
   temp_v6 = piVar10[*piVar10 + 2];
   piVar10[*piVar10 + 2] = 3;
   if (*(char *)(temp_v3 + 0x1324) != '\0' || temp_v6 != 3) {
@@ -120,8 +120,8 @@ void FUN_0028f870(unsigned int param_1,int param_2,int param_3,int param_4)
     }
   }
   FUN_002bf288(2,0x1d,temp_v7,param_2,param_3,0x74);
-  temp_v2 = DAT_0044ea00;
-  piVar10 = (int *)(DAT_0044ea00 + 0x130c);
+  temp_v2 = g_titleScene;
+  piVar10 = (int *)(g_titleScene + 0x130c);
   temp_v0 = piVar10[*piVar10 + 2];
   piVar10[*piVar10 + 2] = 0;
   if (*(char *)(temp_v2 + 0x1324) != '\0' || temp_v0 != 0) {

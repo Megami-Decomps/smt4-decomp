@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00291ba4(void);
 int VectorSignedToFloat(int, int);
 
-extern int DAT_00447600; /* 0x447600 */
+extern int g_mapEnemy; /* 0x447600 */
 extern unsigned char DAT_0049fb1c; /* 0x49fb1c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -28,7 +28,7 @@ void FUN_001f9188(void)
   unsigned int temp_v6;
   float temp_v7;
   
-  temp_v0 = DAT_00447600;
+  temp_v0 = g_mapEnemy;
   temp_v1 = (int)(*(short *)((unsigned char *)&DAT_0049fb1c + 0x46));
   FUN_00291ba4();
   temp_v3 = 0;

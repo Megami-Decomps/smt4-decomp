@@ -7,18 +7,18 @@ extern "C" {
 int FUN_00296f4c(int, int);
 int FUN_00297060(int, int);
 int FUN_00297468(int *, int *, int);
-int FUN_002a7218(void);
-int FUN_002c415c(void);
+int scrScriptProcessDestroy(void);
+int asdMemFree(void);
 int FUN_00388054(int, int, int *, int *);
 
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 
 extern int FUN_0019e0c0(int);
 /* Supplied declaration required: FUN_00296f4c. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002a7218. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_00388054. */
 
 
@@ -30,9 +30,9 @@ unsigned int FUN_003356c0(int *param_1)
   
   switch(param_1[3]) {
   case 1:
-    if (*(int *)(DAT_00433158 + 0x444) != -1) {
-      FUN_00388054(DAT_00433158,*(int *)(DAT_00433158 + 0x444),param_1,param_1 + 4);
-      *(unsigned int *)(DAT_00433158 + 0x444) = 0xffffffff;
+    if (*(int *)(g_aocSystem + 0x444) != -1) {
+      FUN_00388054(g_aocSystem,*(int *)(g_aocSystem + 0x444),param_1,param_1 + 4);
+      *(unsigned int *)(g_aocSystem + 0x444) = 0xffffffff;
     }
     else {
       FUN_00297468(param_1 + 4,param_1,0);
@@ -61,11 +61,11 @@ unsigned int FUN_003356c0(int *param_1)
     break;
   case 4:
     if (param_1[1] != 0) {
-      FUN_002a7218();
+      scrScriptProcessDestroy();
       param_1[1] = 0;
     }
     if (*param_1 != 0) {
-      FUN_002c415c();
+      asdMemFree();
       *param_1 = 0;
     }
   }

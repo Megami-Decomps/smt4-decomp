@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e6e34(unsigned int *, int);
 int FUN_002e6e5c(unsigned int *);
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -27,7 +27,7 @@ long long FUN_00124504(int param_1,unsigned int param_2,unsigned int param_3,uns
   unsigned int uStack_14;
   unsigned int uStack_10;
   
-  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0x14)) != '\0') {
+  if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x14)) != '\0') {
     uStack_18 = param_2;
     uStack_14 = param_3;
     uStack_10 = param_4;

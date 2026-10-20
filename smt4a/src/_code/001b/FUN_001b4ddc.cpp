@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 
-extern unsigned int DAT_005c1100; /* 0x5c1100 */
+extern unsigned int g_polyDefaultColor; /* 0x5c1100 */
 extern unsigned int DAT_005c1104; /* 0x5c1104 */
 extern unsigned int DAT_005c1108; /* 0x5c1108 */
 extern unsigned int DAT_005c110c; /* 0x5c110c */
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_001b4ddc(unsigned int *param_1)
@@ -23,7 +23,7 @@ void FUN_001b4ddc(unsigned int *param_1)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  FUN_002e6354(param_1,0x80);
+  sysMemClear(param_1,0x80);
   *param_1 = 0;
   param_1[1] = 0;
   param_1[2] = 0;
@@ -48,7 +48,7 @@ void FUN_001b4ddc(unsigned int *param_1)
   temp_v3 = DAT_005c110c;
   temp_v2 = DAT_005c1108;
   temp_v1 = DAT_005c1104;
-  temp_v0 = DAT_005c1100;
+  temp_v0 = g_polyDefaultColor;
   param_1[0x18] = 0x3f800000;
   param_1[0x1d] = 0x3f800000;
   param_1[8] = temp_v0;

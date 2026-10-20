@@ -7,13 +7,13 @@ extern "C" {
 int FUN_00100854(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
 
 extern unsigned char LAB_002b2b24; /* 0x2b2b24 */
-extern signed char DAT_005f1afc; /* 0x5f1afc */
+extern signed char g_lmapMain; /* 0x5f1afc */
 extern unsigned int DAT_005f1b00; /* 0x5f1b00 */
 
 /* Supplied declaration required: FUN_00100854. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern unsigned int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int dataTableGetEntries(void);
 
 
 char * FUN_00285518(unsigned int param_1)
@@ -28,7 +28,7 @@ char * FUN_00285518(unsigned int param_1)
   if (param_1 >= 0x6a) {
     return (char *)0x0;
   }
-  if ((DAT_005f1afc != '\0') && (DAT_005f1b00 == param_1)) {
+  if ((g_lmapMain != '\0') && (DAT_005f1b00 == param_1)) {
     return (char *)0x28568c;
   }
   if (param_1 == 0x55) {
@@ -114,9 +114,9 @@ char * FUN_00285518(unsigned int param_1)
     }
     if (param_1 != 0x67) {
       if (param_1 != 0x68) {
-        temp_v0 = FUN_00187180(0x38,0);
-        temp_v1 = FUN_00192798();
-        temp_v0 = FUN_00192748(temp_v0);
+        temp_v0 = dataTableGet(0x38,0);
+        temp_v1 = dataTableGetEntries();
+        temp_v0 = dataTableGetCount(temp_v0);
         puVar3 = temp_v2;
         temp_v2[0] = (unsigned short)param_1;
         FUN_00100854(puVar3,temp_v1,temp_v0,0x68,&LAB_002b2b24);

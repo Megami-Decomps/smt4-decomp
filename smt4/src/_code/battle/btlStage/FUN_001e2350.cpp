@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0027dc24(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -21,8 +21,8 @@ extern int FUN_0021eda8(...); /* 0x21eda8 */
 extern int DAT_004398d4; /* 0x4398d4 */
 
 /* Supplied declaration required: FUN_0027dc24. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
 
 
 void FUN_001e2350(unsigned int *param_1)
@@ -36,10 +36,10 @@ void FUN_001e2350(unsigned int *param_1)
   unsigned char temp_v3;
   
   puVar1 = &LAB_001e242c;
-  FUN_002c4a08(&LAB_001e242c,2,0,0,FUN_001d3e08,FUN_0021eda8,param_1,*param_1);
+  taskCreateDraw(&LAB_001e242c,2,0,0,FUN_001d3e08,FUN_0021eda8,param_1,*param_1);
   param_1[0xc] = (unsigned int)puVar1;
   temp_v0 = 0x100;
-  FUN_002c498c(0x100,0x100,0,0xc4,1);
+  asdMemAlloc(0x100,0x100,0,0xc4,1);
   DAT_004398d4 = temp_v0;
   *(unsigned int *)(temp_v0 + 0x98) = 0;
   *(unsigned int *)(temp_v0 + 0x94) = 0;

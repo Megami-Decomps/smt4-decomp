@@ -1,41 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a9a30` (_code @ 0x3a9a30, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the clamp compiles to cmp/movlt and a folded [r0, #-2] load; retail uses cmp/movge and an explicit sub of 1 before indexing. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003283ac(int);
+int scrSetResult(int value);
+u32 FUN_003ef960(u32 obj, u32 arg);
+u32 btlGetMainState(void);
+int scrGetArg(u32 index);
+int dataTableGetCount(u32 arg);
+u16 *dataTableGetEntries(void);
 
-extern unsigned int FUN_0014aa78(void);
-extern int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
-extern int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_003283ac. */
-extern unsigned int FUN_003ef960(unsigned int, unsigned int);
-
-
-unsigned int FUN_003a9a30(void)
-
+/* Script command: passes entry (script argument 0, clamped to 1..count) of the u16 table, counted by dataTableGetCount, to scrSetResult. */
+u32 FUN_003a9a30(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_0014aa78();
-  temp_v1 = FUN_003ef960(temp_v1,0xd);
-  temp_v2 = FUN_00192798();
-  temp_v3 = FUN_00192748(temp_v1);
-  if (temp_v0 < 1) {
-    temp_v3 = 1;
-  }
-  else if (temp_v0 <= temp_v3) {
-    temp_v3 = temp_v0;
-  }
-  FUN_003283ac(*(unsigned short *)(temp_v2 + (temp_v3 - 1) * 2));
-  return 1;
+    int requested = scrGetArg(0);
+    u32 field = FUN_003ef960(btlGetMainState(), 0xd);
+    u16 *table = dataTableGetEntries();
+    int count = dataTableGetCount(field);
+    int index;
+
+    if (requested < 1) {
+        index = 1;
+    } else {
+        index = count;
+        if (index >= requested) {
+            index = requested;
+        }
+    }
+    scrSetResult(table[index - 1]);
+    return 1;
 }
 
 } /* extern "C" */

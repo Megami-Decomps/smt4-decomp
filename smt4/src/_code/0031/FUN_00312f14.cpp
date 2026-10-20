@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002451ac(unsigned int, int);
-int FUN_0028dcb0(unsigned int);
-int FUN_00296cc8(int);
+int scrSetResult(unsigned int);
+int scrGetArg(int);
 int FUN_002ad8b4(unsigned short *, int);
-int FUN_002c0c74(unsigned int);
+int dataTableGetCount(unsigned int);
 int SBORROW4(int, int);
 
 /* stack frame of void: 4 slot(s), 8 byte(s) */
@@ -21,14 +21,14 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002451ac. */
-/* Supplied declaration required: FUN_0028dcb0. */
-extern unsigned int FUN_002939f4(void);
-/* Supplied declaration required: FUN_00296cc8. */
+/* Supplied declaration required: scrSetResult. */
+extern unsigned int btlGetMainState(void);
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_002ad8b4. */
 extern int FUN_002c09f4(unsigned int);
-/* Supplied declaration required: FUN_002c0c74. */
-extern int FUN_002c0cc4(void);
-extern int aeabi_idivmod(int, unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(void);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 unsigned int FUN_00312f14(void)
@@ -54,15 +54,15 @@ unsigned int FUN_00312f14(void)
   unsigned short temp_v15;
   unsigned short temp_v16;
   
-  temp_v1 = FUN_00296cc8(0);
-  FUN_00296cc8(1);
-  temp_v2 = FUN_002939f4();
+  temp_v1 = scrGetArg(0);
+  scrGetArg(1);
+  temp_v2 = btlGetMainState();
   temp_v2 = FUN_002451ac(temp_v2,6);
-  temp_v3 = FUN_002c0cc4();
-  FUN_002c0c74(temp_v2);
-  temp_v2 = FUN_002939f4();
+  temp_v3 = dataTableGetEntries();
+  dataTableGetCount(temp_v2);
+  temp_v2 = btlGetMainState();
   FUN_002451ac(temp_v2,7);
-  temp_v4 = FUN_002c0cc4();
+  temp_v4 = dataTableGetEntries();
   FUN_002ad8b4(&temp_v13,temp_v4 + temp_v1 * 8);
   psVar6 = (short *)(temp_v3 + temp_v1 * 8);
   temp_v7 = 0;
@@ -98,25 +98,25 @@ unsigned int FUN_00312f14(void)
     temp_v1 = 0;
   }
   else {
-    temp_v1 = aeabi_idivmod((unsigned int)temp_v13 * 100,temp_v7);
+    temp_v1 = __aeabi_idivmod((unsigned int)temp_v13 * 100,temp_v7);
   }
   if (temp_v14 == 0) {
     temp_v3 = 0;
   }
   else {
-    temp_v3 = aeabi_idivmod((unsigned int)temp_v14 * 100,temp_v7);
+    temp_v3 = __aeabi_idivmod((unsigned int)temp_v14 * 100,temp_v7);
   }
   if (temp_v15 == 0) {
     temp_v4 = 0;
   }
   else {
-    temp_v4 = aeabi_idivmod((unsigned int)temp_v15 * 100,temp_v7);
+    temp_v4 = __aeabi_idivmod((unsigned int)temp_v15 * 100,temp_v7);
   }
   if (temp_v16 == 0) {
     temp_v8 = 0;
   }
   else {
-    temp_v8 = aeabi_idivmod((unsigned int)temp_v16 * 100,temp_v7);
+    temp_v8 = __aeabi_idivmod((unsigned int)temp_v16 * 100,temp_v7);
   }
   temp_v9 = temp_v3 + temp_v1;
   temp_v10 = temp_v4 + temp_v9;
@@ -165,7 +165,7 @@ unsigned int FUN_00312f14(void)
       }
     }
   }
-  FUN_0028dcb0(temp_v2);
+  scrSetResult(temp_v2);
   return 1;
 }
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c5300(int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 
 /* stack frame of void: 5 slot(s), 14 byte(s) */
 typedef struct {
@@ -16,8 +16,8 @@ typedef struct {
 } void_stack;
 
 extern int FUN_0011d9c4(unsigned char *, unsigned int);
-extern unsigned int FUN_002c2ff0(void);
-/* Supplied declaration required: FUN_002c5300. */
+extern unsigned int asdMemoryGetDefaultAllocator(void);
+/* Supplied declaration required: asdMemoryAlloc. */
 extern unsigned int nw_ut_FloatColor_ToPicaU32(int);
 
 
@@ -35,11 +35,11 @@ unsigned int * FUN_002cb80c(void)
   unsigned int uStack_14;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_002c5300(0x100,0x100,0,0xc,1);
+  asdMemoryAlloc(0x100,0x100,0,0xc,1);
   puVar1[1] = 0;
   *puVar1 = 0xffffffff;
   puVar1[2] = 0;
-  temp_v0 = FUN_002c2ff0();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   temp_v2 = 1;
   temp_v3 = 1;
   temp_v4 = 0;

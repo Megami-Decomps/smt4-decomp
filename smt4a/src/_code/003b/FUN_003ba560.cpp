@@ -17,14 +17,14 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned char LAB_001b9f9c; /* 0x1b9f9c */
-extern unsigned int DAT_005b3c80; /* 0x5b3c80 */
+extern unsigned int g_effAsdLightHandle; /* 0x5b3c80 */
 extern unsigned int DAT_005b3c88; /* 0x5b3c88 */
 
 /* Supplied declaration required: FUN_0015d434. */
 /* Supplied declaration required: FUN_0018e9d8. */
 /* Supplied declaration required: FUN_0032c518. */
 /* Supplied declaration required: FUN_0032c5ac. */
-extern unsigned int FUN_0036badc(int);
+extern unsigned int asdModelGetSlotArray0(int);
 /* Supplied declaration required: nw_gfx_SceneTraverser_Begin. */
 
 
@@ -40,7 +40,7 @@ void FUN_003ba560(int param_1,int param_2,unsigned int param_3,unsigned int para
   unsigned int unaff_r6;
   unsigned int in_lr;
   
-  temp_v0 = FUN_0036badc(param_2);
+  temp_v0 = asdModelGetSlotArray0(param_2);
   FUN_0032c518(*(unsigned int *)(param_1 + 8),param_2);
   if (param_2 != 0) {
     if (param_2 != 1) {
@@ -66,7 +66,7 @@ void FUN_003ba560(int param_1,int param_2,unsigned int param_3,unsigned int para
     temp_v1 = 0;
   }
   piVar3 = (int *)(&DAT_005b3c88)[temp_v1];
-  temp_v1 = (&DAT_005b3c80)[temp_v1];
+  temp_v1 = (&g_effAsdLightHandle)[temp_v1];
   (**(romwright_code **)(*piVar3 + 0x10))
             (piVar3,*(unsigned int *)(temp_v1 + 0x10),*(romwright_code **)(*piVar3 + 0x10),param_4,unaff_r4,
              unaff_r5,unaff_r6,in_lr);

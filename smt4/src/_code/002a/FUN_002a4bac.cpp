@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00152bec(void);
 int FUN_00152ed8(int *);
 int FUN_002a72c0(int);
-int FUN_002a775c(int);
-int FUN_002c415c(void);
+int asdMdlManagerDestroy(int);
+int asdMemFree(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -21,8 +21,8 @@ extern int DAT_0044ea5c; /* 0x44ea5c */
 /* Supplied declaration required: FUN_00152bec. */
 /* Supplied declaration required: FUN_00152ed8. */
 /* Supplied declaration required: FUN_002a72c0. */
-/* Supplied declaration required: FUN_002a775c. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_002a4bac(int *param_1)
@@ -36,22 +36,22 @@ void FUN_002a4bac(int *param_1)
   FUN_002a72c0(0);
   if (param_1[7] != 0) {
     FUN_00152bec();
-    FUN_002a775c(param_1[7]);
+    asdMdlManagerDestroy(param_1[7]);
     param_1[7] = 0;
   }
   if (param_1[10] != 0) {
     FUN_00152bec();
-    FUN_002a775c(param_1[10]);
+    asdMdlManagerDestroy(param_1[10]);
     param_1[10] = 0;
   }
   if (param_1[8] != 0) {
     FUN_00152bec();
-    FUN_002a775c(param_1[8]);
+    asdMdlManagerDestroy(param_1[8]);
     param_1[8] = 0;
   }
   if (param_1[9] != 0) {
     FUN_00152bec();
-    FUN_002a775c(param_1[9]);
+    asdMdlManagerDestroy(param_1[9]);
     param_1[9] = 0;
   }
   FUN_00152ed8(param_1);
@@ -80,7 +80,7 @@ void FUN_002a4bac(int *param_1)
     } while (temp_v1 < *param_1);
   }
   if (param_1[6] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1[6] = 0;
   }
   temp_v1 = DAT_0044ea5c;

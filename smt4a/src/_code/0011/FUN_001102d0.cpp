@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002fb084(unsigned int, unsigned int, int, unsigned int, unsigned int, int);
-int aeabi_uidivmod(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+int __aeabi_uidivmod(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_6: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: FUN_002fb084. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_001102d0(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -24,7 +24,7 @@ void FUN_001102d0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  aeabi_uidivmod(param_3,*(unsigned int *)(param_1 + 8),param_3,param_4,param_2,param_3,param_4);
+  __aeabi_uidivmod(param_3,*(unsigned int *)(param_1 + 8),param_3,param_4,param_2,param_3,param_4);
   FUN_002fb084(param_2,param_4,temp_v0 + *(int *)(param_1 + 4),param_5,param_6,2);
   return;
 }

@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } void_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern int DAT_00614d78; /* 0x614d78 */
 
 extern int FUN_001692ac(unsigned int, unsigned int);
@@ -42,7 +42,7 @@ void FUN_003578a0(void)
   char acStack_30 [4];
   unsigned int temp_v6;
   
-  temp_v3 = DAT_0059dbb4;
+  temp_v3 = g_renderCtx;
   temp_v4[0] = 0xff000000;
   temp_v4[1] = 0xff0000;
   temp_v4[2] = 0xffff0000;
@@ -78,7 +78,7 @@ void FUN_003578a0(void)
       (**(romwright_code **)(temp_v3 + 0x1274))();
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
-    FUN_0016c4b8(DAT_0059dbb4,0);
+    FUN_0016c4b8(g_renderCtx,0);
     temp_v3 = 0;
     if (temp_v3 < DAT_00614d78) {
       do {
@@ -86,8 +86,8 @@ void FUN_003578a0(void)
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < DAT_00614d78);
     }
-    temp_v3 = DAT_0059dbb4;
-    piVar4 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v3 = g_renderCtx;
+    piVar4 = (int *)(g_renderCtx + 0x1258);
     temp_v0 = *piVar4;
     temp_v1 = piVar4[temp_v0 + 2];
     *piVar4 = temp_v0 - 1;

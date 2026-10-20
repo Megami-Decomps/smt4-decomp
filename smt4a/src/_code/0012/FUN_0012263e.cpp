@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002fd0a0(...);
+int byteArrayEnsureAt(...);
 
-/* Supplied declaration required: FUN_002fd0a0. */
+/* Supplied declaration required: byteArrayEnsureAt. */
 extern int FUN_0030fba6(int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 
@@ -23,9 +23,9 @@ void FUN_0012263e(int param_1,unsigned char *param_2,unsigned int param_3,unsign
   temp_v1 = FUN_0030fba6(param_1,8,param_3,param_4,param_4);
   if (temp_v1 != 0) {
     temp_v2 = *(int *)(param_1 + 0x10) + 1;
-    pcVar3 = (char *)FUN_002fd0a0(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
+    pcVar3 = (char *)byteArrayEnsureAt(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
     temp_v0 = *pcVar3;
-    pbVar4 = (unsigned char *)FUN_002fd0a0(*(unsigned int *)(param_1 + 8),*(int *)(param_1 + 0xc) + 1);
+    pbVar4 = (unsigned char *)byteArrayEnsureAt(*(unsigned int *)(param_1 + 8),*(int *)(param_1 + 0xc) + 1);
     *param_2 = (temp_v0 << ((8 - temp_v2) & 0xff)) | (*pbVar4 >> (temp_v2 & 0xff));
     *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + 1;
     return;

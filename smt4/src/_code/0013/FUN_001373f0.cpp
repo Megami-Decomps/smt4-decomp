@@ -16,8 +16,8 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern unsigned int *DAT_004652a0; /* 0x4652a0 */
-extern unsigned int DAT_004652a4; /* 0x4652a4 */
+extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
+extern unsigned int g_commandBufferEnd; /* 0x4652a4 */
 extern signed char DAT_004c62a1; /* 0x4c62a1 */
 extern signed char DAT_004c62a2; /* 0x4c62a2 */
 extern unsigned int *DAT_004c632c; /* 0x4c632c */
@@ -54,7 +54,7 @@ void FUN_001373f0(unsigned int param_1,int param_2)
     } while (temp_v2 != param_1 && puVar6 != (unsigned int *)0x0);
   }
   if (DAT_004c632c == puVar6) {
-    puVar6[3] = (int)DAT_004652a0 - puVar6[1];
+    puVar6[3] = (int)g_commandBufferCursor - puVar6[1];
   }
   rt_memcpy_w(puVar6[6] + puVar6[8] * 0x1c,*(int *)(param_2 + 8) + param_2 + 0x10,
               *(int *)(param_2 + 0xc) * 0x1c);
@@ -67,10 +67,10 @@ void FUN_001373f0(unsigned int param_1,int param_2)
           temp_v3 = puVar6[3];
           if ((*(unsigned int *)(pcVar2 + 8) & 8) != (temp_v3 & 8)) {
             if (DAT_004c632c == puVar6) {
-              if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-                *DAT_004652a0 = 0;
-                DAT_004652a0[1] = 0x8025e;
-                DAT_004652a0 = DAT_004652a0 + 2;
+              if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+                *g_commandBufferCursor = 0;
+                g_commandBufferCursor[1] = 0x8025e;
+                g_commandBufferCursor = g_commandBufferCursor + 2;
               }
             }
             else {
@@ -100,7 +100,7 @@ void FUN_001373f0(unsigned int param_1,int param_2)
     FUN_002aa624(puVar6,puVar6[6] + puVar6[8] * 0x1c);
   }
   if (DAT_004c632c == puVar6) {
-    DAT_004652a0 = (unsigned int *)((*(unsigned int *)(param_2 + 8) & 0xfffffffc) + (int)DAT_004652a0);
+    g_commandBufferCursor = (unsigned int *)((*(unsigned int *)(param_2 + 8) & 0xfffffffc) + (int)g_commandBufferCursor);
     if (*(int *)(param_2 + 0xc) != 0) {
       FUN_0013b608();
       puVar6[8] = *(int *)(param_2 + 0xc) + puVar6[8];

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0013f1b8(int, int);
+int asdTMTexTableLoadTmx(int, int);
 int FUN_0014e188(...);
 int FUN_0014e220(...);
 int FUN_001505ac(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int FUN_00184758(...);
 int FUN_00184c00(...);
 int FUN_001a90e0(unsigned char *);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_002e6dd4(unsigned char *, int);
 int FUN_0048738c(unsigned char *);
 int FUN_00493660(unsigned char *, int, int, int);
@@ -35,7 +35,7 @@ extern unsigned char DAT_0053242c; /* 0x53242c */
 extern unsigned int DAT_00587f24; /* 0x587f24 */
 extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 
-/* Supplied declaration required: FUN_0013f1b8. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_0014e220. */
 /* Supplied declaration required: FUN_001505ac. */
@@ -43,7 +43,7 @@ extern int FUN_00162e8c(void);
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_00184c00. */
 /* Supplied declaration required: FUN_001a90e0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
 /* Supplied declaration required: FUN_0048738c. */
 /* Supplied declaration required: FUN_00493660. */
@@ -62,7 +62,7 @@ void FUN_00485e74(unsigned char *param_1)
   
   temp_v1 = FUN_00162e8c();
   FUN_0048738c(param_1);
-  FUN_0013f1b8(0x28,0);
+  asdTMTexTableLoadTmx(0x28,0);
   param_1[0xc] = 0xff;
   *(unsigned int *)(param_1 + 0x14) = 0;
   *param_1 = 0;
@@ -169,7 +169,7 @@ void FUN_00485e74(unsigned char *param_1)
   param_1[0x136a] = 0;
   FUN_0014e220(param_1 + 0x136c,0x13,0x111a,0x1c,param_1 + 0xc20,0x15);
   FUN_00184758(param_1 + 0x136c,5,0);
-  FUN_002e6354(&DAT_00616ee4,0x400);
+  sysMemClear(&DAT_00616ee4,0x400);
   DAT_00587f24 = 0;
   return;
 }

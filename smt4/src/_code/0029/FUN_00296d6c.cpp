@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int aeabi_idivmod(unsigned int, int);
+int __aeabi_idivmod(unsigned int, int);
 
 extern unsigned int DAT_004651c0; /* 0x4651c0 */
 
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 int FUN_00296d6c(int param_1,int param_2)
@@ -24,7 +24,7 @@ int FUN_00296d6c(int param_1,int param_2)
     param_1 = param_2;
   }
   DAT_004651c0 = DAT_004651c0 * 0x41c64e6d + 0x3039;
-  aeabi_idivmod(DAT_004651c0 >> 0x10,(temp_v0 - param_1) + 1);
+  __aeabi_idivmod(DAT_004651c0 >> 0x10,(temp_v0 - param_1) + 1);
   return temp_v1 + param_1;
 }
 

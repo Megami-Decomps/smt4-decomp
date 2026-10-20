@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
+int asdProcessCreateSimple(...);
 int FUN_002830cc(void);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -30,7 +30,7 @@ extern unsigned char *DAT_0057f3a4; /* 0x57f3a4 */
 extern unsigned char *DAT_0057f3a8; /* 0x57f3a8 */
 extern unsigned int DAT_0057f3ac; /* 0x57f3ac */
 
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_002830cc. */
 
 
@@ -42,19 +42,19 @@ unsigned char * FUN_0036ef60(void)
   unsigned char *puVar2;
   
   puVar1 = &LAB_0036f03c;
-  FUN_0014e38c(&LAB_0036f03c,4,0,0,FUN_0031aa60,0,0);
+  asdProcessCreateSimple(&LAB_0036f03c,4,0,0,FUN_0031aa60,0,0);
   puVar2 = &LAB_0036f054;
   DAT_0057f398 = puVar1;
-  FUN_0014e38c(&LAB_0036f054,0x65,0,0,&LAB_00388a40,0,0);
+  asdProcessCreateSimple(&LAB_0036f054,0x65,0,0,&LAB_00388a40,0,0);
   puVar1 = &LAB_0036f068;
   DAT_0057f39c = puVar2;
-  FUN_0014e38c(&LAB_0036f068,0x77,0,0,&LAB_00388a60,0,0);
+  asdProcessCreateSimple(&LAB_0036f068,0x77,0,0,&LAB_00388a60,0,0);
   puVar2 = &LAB_0036f07c;
   DAT_0057f3a4 = puVar1;
-  FUN_0014e38c(&LAB_0036f07c,0xd3,0,0,&LAB_0039aec8,0,0);
+  asdProcessCreateSimple(&LAB_0036f07c,0xd3,0,0,&LAB_0039aec8,0,0);
   puVar1 = &LAB_0036f090;
   DAT_0057f3a8 = puVar2;
-  FUN_0014e38c(&LAB_0036f090,0xea,0,0,&LAB_00388a20,0,0);
+  asdProcessCreateSimple(&LAB_0036f090,0xea,0,0,&LAB_00388a20,0,0);
   DAT_0057f3a0 = puVar1;
   FUN_002830cc();
   DAT_0057f3ac = 0;

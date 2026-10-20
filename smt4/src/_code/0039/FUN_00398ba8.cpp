@@ -26,7 +26,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002ba12c. */
@@ -64,11 +64,11 @@ void FUN_00398ba8(int param_1)
   
   FUN_002bf538();
   temp_v7 = 0.27f;
-  FUN_002ba12c(DAT_0044ea00);
+  FUN_002ba12c(g_titleScene);
   temp_v8 = (int)temp_v7;
-  FUN_002c39a4(DAT_0044ea00);
+  FUN_002c39a4(g_titleScene);
   FUN_002bed3c();
-  temp_v4 = DAT_0044ea00;
+  temp_v4 = g_titleScene;
   temp_v0 = FUN_002c5d80(1,0);
   piVar5 = (int *)(temp_v4 + 0x124c);
   temp_v2 = *piVar5;
@@ -79,9 +79,9 @@ void FUN_00398ba8(int param_1)
     (**(romwright_code **)(temp_v4 + 0x1268))();
     *(unsigned char *)(temp_v4 + 0x1264) = 0;
   }
-  FUN_002c1b64(DAT_0044ea00,0);
+  FUN_002c1b64(g_titleScene,0);
   FUN_002bf288(2,0x2e,0,temp_v8,0,0xb);
-  temp_v4 = DAT_0044ea00;
+  temp_v4 = g_titleScene;
   temp_v0 = FUN_002c5da8(6,1,0);
   piVar5 = (int *)(temp_v4 + 0x12ac);
   temp_v2 = piVar5[*piVar5 + 2];
@@ -92,7 +92,7 @@ void FUN_00398ba8(int param_1)
   }
   FUN_002bf288(2,0x2e,1,temp_v8,0,0xb);
   FUN_002bf288(2,0x2e,2,temp_v8,0,0xb);
-  temp_v4 = DAT_0044ea00;
+  temp_v4 = g_titleScene;
   temp_v0 = FUN_002c5da8(6,7,0);
   piVar5 = (int *)(temp_v4 + 0x12ac);
   temp_v2 = piVar5[*piVar5 + 2];
@@ -143,8 +143,8 @@ void FUN_00398ba8(int param_1)
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 8);
   FUN_002bf538();
-  temp_v4 = DAT_0044ea00;
-  piVar5 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v4 = g_titleScene;
+  piVar5 = (int *)(g_titleScene + 0x124c);
   temp_v0 = *piVar5;
   temp_v2 = piVar5[temp_v0 + 2];
   *piVar5 = temp_v0 - 1;
@@ -152,8 +152,8 @@ void FUN_00398ba8(int param_1)
     (**(romwright_code **)(temp_v4 + 0x1268))();
     *(unsigned char *)(temp_v4 + 0x1264) = 0;
   }
-  FUN_002c198c(DAT_0044ea00);
-  FUN_002c18e4(DAT_0044ea00);
+  FUN_002c198c(g_titleScene);
+  FUN_002c18e4(g_titleScene);
   return;
 }
 

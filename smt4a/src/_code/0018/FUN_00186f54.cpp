@@ -9,9 +9,9 @@ int FUN_00100854(unsigned char [32], unsigned int, unsigned int, int, unsigned c
 extern unsigned char LAB_0019dfd4; /* 0x19dfd4 */
 
 /* Supplied declaration required: FUN_00100854. */
-extern int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(int);
-extern unsigned int FUN_00192798(int);
+extern int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(int);
+extern unsigned int dataTableGetEntries(int);
 
 
 void FUN_00186f54(int param_1)
@@ -25,7 +25,7 @@ void FUN_00186f54(int param_1)
   unsigned char temp_v3 [32];
   unsigned short uStack_30;
   
-  temp_v0 = FUN_00187180(0xb,0);
+  temp_v0 = dataTableGet(0xb,0);
   if (temp_v0 == 0) {
     return;
   }
@@ -43,8 +43,8 @@ void FUN_00186f54(int param_1)
   }
   else {
     if (param_1 != 0) {
-      temp_v1 = FUN_00192798(temp_v0);
-      temp_v2 = FUN_00192748(temp_v0);
+      temp_v1 = dataTableGetEntries(temp_v0);
+      temp_v2 = dataTableGetCount(temp_v0);
       uStack_30 = (unsigned short)param_1;
       FUN_00100854(temp_v3,temp_v1,temp_v2,0x40,&LAB_0019dfd4);
       return;
@@ -54,8 +54,8 @@ void FUN_00186f54(int param_1)
   if (pcVar2 != (char *)0x0) {
     return;
   }
-  temp_v1 = FUN_00192798(temp_v0);
-  temp_v2 = FUN_00192748(temp_v0);
+  temp_v1 = dataTableGetEntries(temp_v0);
+  temp_v2 = dataTableGetCount(temp_v0);
   uStack_30 = (unsigned short)param_1;
   FUN_00100854(temp_v3,temp_v1,temp_v2,0x40,&LAB_0019dfd4);
   return;

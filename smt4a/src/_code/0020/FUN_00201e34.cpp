@@ -9,7 +9,7 @@ extern unsigned char DAT_00588fb4; /* 0x588fb4 */
 extern int FUN_00143b58(int, unsigned char, unsigned int);
 extern int FUN_001448a8(int, unsigned char, unsigned int);
 extern int FUN_00162ea4(void);
-extern int FUN_00180008(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 int FUN_00201e34(int param_1,unsigned int param_2)
@@ -19,7 +19,7 @@ int FUN_00201e34(int param_1,unsigned int param_2)
   int temp_v1;
   
   temp_v1 = -1;
-  temp_v0 = FUN_00180008(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if ((temp_v0 == 0) && (temp_v0 = FUN_00162ea4(), temp_v0 == 0)) {
     if (param_1 + 0xfeffff84U < 0x191) {
       temp_v1 = FUN_001448a8(param_1,DAT_00588fb4,0);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001fc338(...);
+int callGlobalHook(...);
 int FUN_002e6dd4(int *, int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_6: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ extern unsigned char DAT_0053faa0; /* 0x53faa0 */
 extern unsigned char DAT_00541ba0; /* 0x541ba0 */
 extern unsigned char DAT_00543ca0; /* 0x543ca0 */
 
-/* Supplied declaration required: FUN_001fc338. */
+/* Supplied declaration required: callGlobalHook. */
 /* Supplied declaration required: FUN_002e6dd4. */
 
 
@@ -43,7 +43,7 @@ unsigned int FUN_0023c168(int *param_1,unsigned int param_2,unsigned int param_3
     }
     if (temp_v9) {
       FUN_002e6dd4(param_1,0x20,param_3,param_4,param_4);
-      temp_v0 = FUN_001fc338(0x670);
+      temp_v0 = callGlobalHook(0x670);
       *param_1 = temp_v0;
       if (temp_v0 != 0) {
         *(unsigned char **)(temp_v0 + 0x3c) = &DAT_0053faa0;
@@ -62,7 +62,7 @@ unsigned int FUN_0023c168(int *param_1,unsigned int param_2,unsigned int param_3
         param_1[2] = param_4;
         param_1[7] = 1;
         param_1[5] = param_5;
-        temp_v0 = FUN_001fc338(param_4 << 2);
+        temp_v0 = callGlobalHook(param_4 << 2);
         param_1[1] = temp_v0;
         if (temp_v0 != 0) {
           temp_v0 = param_1[6] * (param_3 + (param_3 >> 1) + 1);
@@ -70,7 +70,7 @@ unsigned int FUN_0023c168(int *param_1,unsigned int param_2,unsigned int param_3
           if (param_4 != 0) {
             temp_v1 = param_3 & 1;
             do {
-              puVar3 = (unsigned char *)FUN_001fc338(temp_v0);
+              puVar3 = (unsigned char *)callGlobalHook(temp_v0);
               *(unsigned char **)(param_1[1] + temp_v7 * 4) = puVar3;
               if (puVar3 == (unsigned char *)0x0) {
                 return 0;

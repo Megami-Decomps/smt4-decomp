@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c415c(...);
+int asdMemFree(...);
 int FUN_0033e7c4(...);
 int FUN_0033f2b8(...);
 int FUN_00389f54(...);
@@ -32,9 +32,9 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0033e7c4. */
 /* Supplied declaration required: FUN_0033f2b8. */
 /* Supplied declaration required: FUN_00389f54. */
@@ -46,7 +46,7 @@ void FUN_0033f22c(fn_0033f22c_arg0 *param_1)
 {
 /* irregular: 5 native warning(s); review required */
   if (param_1->field_0x28 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1->field_0x10 = 0;
     param_1->field_0x14 = 0;
     param_1->field_0x18 = 0;
@@ -62,7 +62,7 @@ void FUN_0033f22c(fn_0033f22c_arg0 *param_1)
     FUN_0033f2b8(param_1,-param_1->field_0x4);
     return;
   }
-  FUN_0038a134(DAT_00433158,param_1->field_0x4);
+  FUN_0038a134(g_aocSystem,param_1->field_0x4);
   FUN_0033e7c4(param_1,param_1->field_0x4);
   return;
 }

@@ -7,11 +7,11 @@ extern "C" {
 int FUN_002bfadc(int, unsigned int);
 int FUN_002c39a4(unsigned int);
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002bfadc. */
 extern int FUN_002bff10(void);
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c39a4. */
 
 
@@ -25,7 +25,7 @@ int FUN_001087f4(void)
   unsigned int temp_v3;
   unsigned char temp_v4;
   
-  temp_v1 = FUN_002c08f0();
+  temp_v1 = jobGetWork();
   *(unsigned char *)(temp_v1 + 0xee6) = 0;
   temp_v2 = FUN_002bff10();
   if ((temp_v2 == 0) && (*(char *)(temp_v1 + 0xedc) != '\0')) {
@@ -43,7 +43,7 @@ int FUN_001087f4(void)
       temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 0xf28);
     }
     if (temp_v4 && temp_v3 == 0) {
-      FUN_002c39a4(DAT_0044ea00);
+      FUN_002c39a4(g_titleScene);
       temp_v0 = 0;
       *(unsigned int *)(*(int *)(temp_v1 + 0xf24) + 0x14) = 0x200;
       *(unsigned int *)(*(int *)(temp_v1 + 0xf24) + 0x18) = 0x200;

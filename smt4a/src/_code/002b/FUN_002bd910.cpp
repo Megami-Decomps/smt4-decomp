@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0057f698; /* 0x57f698 */
+extern unsigned char g_gameDataBlocks; /* 0x57f698 */
 
 
 void FUN_002bd910(void)
@@ -13,7 +13,7 @@ void FUN_002bd910(void)
 /* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
   float in_s0;
   
-  *(float *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + 0x5464) = *(float *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + 0x5464) + in_s0;
+  *(float *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x5464) = *(float *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x5464) + in_s0;
   return;
 }
 

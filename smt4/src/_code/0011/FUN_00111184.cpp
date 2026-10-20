@@ -10,8 +10,8 @@ int FUN_001270f8(...);
 int FUN_002ba78c(...);
 int FUN_002ba81c(...);
 int FUN_002baa40(...);
-int FUN_002c4938(...);
-int FUN_002c5788(...);
+int memClear(...);
+int asdProcessCreateSimple(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -37,8 +37,8 @@ extern int FUN_002ba8e4(int);
 extern int FUN_002ba8e8(int);
 /* Supplied declaration required: FUN_002baa40. */
 extern unsigned int *FUN_002bad5c(int);
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
@@ -100,7 +100,7 @@ unsigned int * FUN_00111184(int param_1)
   puVar2[-0x1d1] = 0xe5c;
   puVar2[-0x1d0] = (unsigned int)puVar4 & 0xffff0000;
   FUN_00126fb8(puVar2 + -0x1b7);
-  FUN_002c4938(puVar2 + -0x1d6,0xb);
+  memClear(puVar2 + -0x1d6,0xb);
   FUN_002ba81c(puVar2 + -0x1d6,&LAB_00111388,0xb);
   puVar2[-0x32] = 0;
   puVar2[-0x31] = 0;
@@ -118,7 +118,7 @@ unsigned int * FUN_00111184(int param_1)
   puVar2[-0x25] = 0;
   puVar2[-0x24] = 0;
   puVar2[-0x23] = 0;
-  FUN_002c4938(puVar2 + -0x22,0x80);
+  memClear(puVar2 + -0x22,0x80);
   FUN_00121ee8(puVar2 + -0x1b5,0x8000);
   FUN_001270f8(puVar2 + -0x1b1);
   FUN_002ba78c(puVar2 + 4);
@@ -126,7 +126,7 @@ unsigned int * FUN_00111184(int param_1)
   uStack_1c = 0;
   puVar5 = &LAB_00111398;
   temp_v4 = puVar2 + -0x1d7;
-  FUN_002c5788(&LAB_00111398,2,0);
+  asdProcessCreateSimple(&LAB_00111398,2,0);
   puVar2[0x182] = (unsigned int)puVar5;
   return puVar2 + -0x1d7;
 }

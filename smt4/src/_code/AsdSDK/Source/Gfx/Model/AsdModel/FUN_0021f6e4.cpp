@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002af294(...);
-int FUN_002c2ff0(void);
+int asdMemoryGetDefaultAllocator(void);
 int nw_gfx_SceneBuilder_CreateObject(...);
 int nw_gfx_SceneHelper_ResolveReferenceImpl(int, int);
 int nw_gfx_SceneNode_IsCircularReference(void);
@@ -49,20 +49,20 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } param_2_stack;
 
-extern unsigned char DAT_004d9880; /* 0x4d9880 */
+extern unsigned char g_asdModelBanks; /* 0x4d9880 */
 extern unsigned char DAT_004d9d88; /* 0x4d9d88 */
-extern unsigned char DAT_004daca0; /* 0x4daca0 */
+extern unsigned char g_asdModelIdLists; /* 0x4daca0 */
 extern unsigned char DAT_004dace0; /* 0x4dace0 */
 
 #ifndef ROMWRIGHT_PIECE_3_1_DEFINED
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-extern int FUN_002a4268(fn_0021f6e4_arg1 *);
-extern int FUN_002a4278(fn_0021f6e4_arg1 *);
+extern int asdModelGetSlotArray2(fn_0021f6e4_arg1 *);
+extern int asdModelGetSlotArray1(fn_0021f6e4_arg1 *);
 /* Supplied declaration required: FUN_002af294. */
-/* Supplied declaration required: FUN_002c2ff0. */
-extern unsigned int FUN_002c300c(void);
+/* Supplied declaration required: asdMemoryGetDefaultAllocator. */
+extern unsigned int asdMemoryGetAllocatorA(void);
 extern short FUN_002c30c4(int);
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: nw_gfx_SceneHelper_ResolveReferenceImpl. */
@@ -124,9 +124,9 @@ void FUN_0021f6e4(int *param_1,fn_0021f6e4_arg1 *param_2)
   piVar20 = (int *)0x0;
   temp_v30 = param_1;
   pfStack_28 = param_2;
-  temp_v3 = FUN_002c2ff0();
+  temp_v3 = asdMemoryGetDefaultAllocator();
   nw_gfx_res_ResGraphicsFile_Setup(temp_v30,temp_v3,*temp_v30);
-  temp_v11 = (int *)FUN_002c2ff0();
+  temp_v11 = (int *)asdMemoryGetDefaultAllocator();
   temp_v12 = (int *)0x0;
   temp_v13 = (int *)0x0;
   temp_v14 = 0x40000000;
@@ -148,7 +148,7 @@ void FUN_0021f6e4(int *param_1,fn_0021f6e4_arg1 *param_2)
     temp_v27 = (short *)((int)param_2 * 0x284 + 0x4da798);
     temp_v28 = (short *)((int)param_2 * 0x284 + 0x4da290);
     temp_v29 = (short *)(&DAT_004d9d88 + (int)param_2 * 0x284);
-    psVar22 = (short *)(&DAT_004d9880 + (int)param_2 * 0x284);
+    psVar22 = (short *)(&g_asdModelBanks + (int)param_2 * 0x284);
     do {
       if (*(int *)(temp_v7 + 0xc) != 0) {
         temp_v8 = *(int *)(temp_v7 + 0xc) + temp_v7 + 0xc;
@@ -156,8 +156,8 @@ void FUN_0021f6e4(int *param_1,fn_0021f6e4_arg1 *param_2)
       else {
         temp_v8 = 0;
       }
-      temp_v3 = FUN_002c2ff0();
-      temp_v4 = FUN_002c300c();
+      temp_v3 = asdMemoryGetDefaultAllocator();
+      temp_v4 = asdMemoryGetAllocatorA();
       temp_v16 = 1;
       temp_v18 = 0;
       temp_v19 = 0;
@@ -378,7 +378,7 @@ LAB_0021fb58:
   piVar19 = temp_v12;
   piVar9 = temp_v13;
   if (temp_v7 != temp_v10) {
-    psVar22 = (short *)(&DAT_004daca0 + (int)param_2 * 0x14);
+    psVar22 = (short *)(&g_asdModelIdLists + (int)param_2 * 0x14);
     do {
       if (*(int *)(temp_v7 + 0xc) != 0) {
         temp_v8 = *(int *)(temp_v7 + 0xc) + temp_v7 + 0xc;
@@ -386,8 +386,8 @@ LAB_0021fb58:
       else {
         temp_v8 = 0;
       }
-      temp_v3 = FUN_002c2ff0();
-      temp_v4 = FUN_002c300c();
+      temp_v3 = asdMemoryGetDefaultAllocator();
+      temp_v4 = asdMemoryGetAllocatorA();
       temp_v16 = 1;
       temp_v17 = 8;
       uStack_64 = 4;
@@ -465,8 +465,8 @@ LAB_0021fd6c:
     temp_v12 = piVar3;
     piVar20 = piVar20 + 1;
   }
-  temp_v7 = FUN_002a4278(param_2);
-  temp_v10 = FUN_002a4268(param_2);
+  temp_v7 = asdModelGetSlotArray1(param_2);
+  temp_v10 = asdModelGetSlotArray2(param_2);
   piVar9 = temp_v13;
   piVar19 = temp_v13;
   piVar20 = temp_v12;
@@ -558,8 +558,8 @@ LAB_0021ff80:;
       else {
         temp_v6 = 0;
       }
-      temp_v3 = FUN_002c300c();
-      temp_v4 = FUN_002c2ff0();
+      temp_v3 = asdMemoryGetAllocatorA();
+      temp_v4 = asdMemoryGetDefaultAllocator();
       temp_v21 = romwright_piece_3_1((((unsigned int)(temp_v21) >> 8) & 0xffffffU),1);
       temp_v24 = 0;
       temp_v25 = 0;

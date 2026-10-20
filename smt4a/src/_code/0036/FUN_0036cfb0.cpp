@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_001ab854(...);
-int FUN_00227880(void);
+int cecProcessStart(void);
 int FUN_00237680(void);
 int FUN_00275bc8(void);
 int FUN_00275f44(...);
@@ -30,11 +30,11 @@ struct fn_0036cfb0_arg0 {
     undefined4 field_0x168; /* +0x168 */
 };
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001ab854. */
 extern int FUN_001ab888(void);
 extern int FUN_00224880(int);
-/* Supplied declaration required: FUN_00227880. */
+/* Supplied declaration required: cecProcessStart. */
 /* Supplied declaration required: FUN_00237680. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00275f44. */
@@ -94,8 +94,8 @@ unsigned int FUN_0036cfb0(fn_0036cfb0_arg0 *param_1)
       FUN_00275bc8();
       param_1->field_0xf4 = temp_v0;
       FUN_00275f44();
-      FUN_001681cc(0x3e);
-      FUN_00227880();
+      sysPlaySe(0x3e);
+      cecProcessStart();
       FUN_0035b084();
       FUN_00237680();
       FUN_002a6480(0);

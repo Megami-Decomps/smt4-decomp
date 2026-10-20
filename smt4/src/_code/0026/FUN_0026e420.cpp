@@ -23,9 +23,9 @@ extern int FUN_0023f3f8(void);
 /* Supplied declaration required: FUN_002829d4. */
 /* Supplied declaration required: FUN_0028975c. */
 /* Supplied declaration required: FUN_002b46f8. */
-extern unsigned int FUN_002c0c74(int);
-extern unsigned int FUN_002c0cc4(void);
-extern int FUN_002c0cec(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(int);
+extern unsigned int dataTableGetEntries(void);
+extern int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00334ff8. */
 
 
@@ -54,21 +54,21 @@ unsigned int FUN_0026e420(unsigned int param_1,int param_2,int param_3)
       *pbVar5 = *pbVar5 | temp_v0;
       pbVar5[0x12] = temp_v0 | pbVar5[0x12];
       FUN_00334ff8();
-      temp_v2 = FUN_002c0cec(0xb,0);
+      temp_v2 = dataTableGet(0xb,0);
       if (temp_v2 != 0) {
-        temp_v4 = FUN_002c0cc4();
-        temp_v5 = FUN_002c0c74(temp_v2);
+        temp_v4 = dataTableGetEntries();
+        temp_v5 = dataTableGetCount(temp_v2);
         temp_v7 = (short)param_1;
         FUN_002b46f8(temp_v6,temp_v4,temp_v5,0x40,&LAB_00145c78);
       }
       FUN_00215c5c();
-      temp_v2 = FUN_002c0cec(0xb,0);
+      temp_v2 = dataTableGet(0xb,0);
       if (temp_v2 == 0) {
         puVar8 = (unsigned char *)0x0;
       }
       else {
-        temp_v4 = FUN_002c0cc4();
-        temp_v5 = FUN_002c0c74(temp_v2);
+        temp_v4 = dataTableGetEntries();
+        temp_v5 = dataTableGetCount(temp_v2);
         puVar8 = temp_v6;
         temp_v7 = (short)param_1;
         FUN_002b46f8(puVar8,temp_v4,temp_v5,0x40,&LAB_00145c78);

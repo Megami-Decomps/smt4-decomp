@@ -14,9 +14,9 @@ int FUN_0029e974(...);
 int FUN_002ae164(...);
 int FUN_002b7bca(...);
 int FUN_002b9024(...);
-int FUN_002c415c(...);
-int FUN_002c4938(...);
-int FUN_002c5300(...);
+int asdMemFree(...);
+int memClear(...);
+int asdMemoryAlloc(...);
 int rt_memcpy(...);
 
 /* stack frame of param_4: 21 slot(s), 81 byte(s) */
@@ -60,9 +60,9 @@ extern int FUN_0029903c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -107,7 +107,7 @@ void FUN_0029b130(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v19 = 0;
   temp_v20 = 0;
   temp_v21 = '\0';
-  FUN_002c4938(aiStack_80,0x58);
+  memClear(aiStack_80,0x58);
   temp_v7 = 0;
   if (param_3 != 0) {
     temp_v7 = (*(unsigned int *)(param_3 + 4) & 0x1ffff) >> 2;
@@ -117,13 +117,13 @@ void FUN_0029b130(int param_1,int param_2,int param_3,unsigned short *param_4)
   }
   temp_v9 = param_2 << 1;
   temp_v1 = 0x100;
-  FUN_002c5300(0x100,0x100,0,temp_v9,1);
+  asdMemoryAlloc(0x100,0x100,0,temp_v9,1);
   temp_v2 = 0x100;
   temp_v11 = temp_v1;
-  FUN_002c5300(0x100,0x100,0,temp_v9,1);
+  asdMemoryAlloc(0x100,0x100,0,temp_v9,1);
   temp_v1 = 0x100;
   temp_v13 = temp_v2;
-  FUN_002c5300(0x100,0x100,0,temp_v9,1);
+  asdMemoryAlloc(0x100,0x100,0,temp_v9,1);
   temp_v19 = temp_v1;
   FUN_002b9024();
   temp_v8[0] = 0;
@@ -220,7 +220,7 @@ LAB_0029b3f4:
   FUN_002b7bca(temp_v19,temp_v20,2,FUN_002dcaa8);
   temp_v16 = FUN_00205568(0,temp_v7,param_3,param_4);
   temp_v1 = 0x100;
-  FUN_002c5300(0x100,0x100,0,temp_v16 << 1,1);
+  asdMemoryAlloc(0x100,0x100,0,temp_v16 << 1,1);
   temp_v15 = temp_v1;
   FUN_00205568();
   temp_v1 = 0;
@@ -233,7 +233,7 @@ LAB_0029b3f4:
     } while (temp_v1 < temp_v16);
   }
   temp_v1 = 0x100;
-  FUN_002c5300(0x100,0x100,0,temp_v9,1);
+  asdMemoryAlloc(0x100,0x100,0,temp_v9,1);
   temp_v18 = 0;
   temp_v2 = 0;
   temp_v17 = temp_v1;
@@ -294,23 +294,23 @@ LAB_0029b63c:
   rt_memcpy(param_1,temp_v17,temp_v9);
   temp_v10 = &DAT_004207e8;
   if (temp_v11 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     temp_v11 = 0;
   }
   if (temp_v13 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     temp_v13 = 0;
   }
   if (temp_v15 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     temp_v15 = 0;
   }
   if (temp_v17 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     temp_v17 = 0;
   }
   if (temp_v19 != 0) {
-    FUN_002c415c();
+    asdMemFree();
   }
   return;
 }

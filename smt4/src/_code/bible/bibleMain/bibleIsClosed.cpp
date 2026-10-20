@@ -1,0 +1,45 @@
+/* NON_MATCHING: the inlined poll leaves its result in r0 and returns once through `eor r0, r0, #1`; this version returns the inverted constants from two exits */
+/* The same shutdown poll as biblePollShutdown with the result inverted: returns 0 while the bible
+ * screen is still running, 1 once it is gone. */
+#include "common.h"
+#include "bible/bibleMain.h"
+
+extern "C" {
+
+int asdMemFree(void *ptr);               /* heap free */
+int jobFind(u32 task);                /* nonzero while the task exists */
+
+extern BibleGlobals g_bible;
+
+static __inline u32 bibleIsRunning(void)
+{
+    BibleWork *work = g_bible.work;
+
+    if (work != NULL) {
+        if (jobFind(work->task) != 0 || work->done == 0) {
+            return 1;
+        }
+        work = g_bible.work;
+        if (work != NULL) {
+            work->done = 1;
+            g_bible.mode = -1;
+            if (work->view != NULL) {
+                work->view->vtbl->close(work->view);
+                if (work->view != NULL) {
+                    work->view->vtbl->destroy(work->view);
+                }
+                work->view = NULL;
+            }
+            asdMemFree(g_bible.work);
+            g_bible.work = NULL;
+        }
+    }
+    return 0;
+}
+
+u32 bibleIsClosed(void)
+{
+    return !bibleIsRunning();
+}
+
+} /* extern "C" */

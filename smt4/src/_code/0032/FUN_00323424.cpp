@@ -1,35 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00323424` (_code @ 0x323424, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0028dcb0(int);
-int FUN_002c0c74(unsigned int);
+int scrSetResult(int value);
+u32 FUN_002451ac(u32 obj, u32 arg);
+u32 btlGetMainState(void);
+int scrGetArg(int index);
+u16 *dataTableGetEntries(void);
+int dataTableGetCount(u32 arg);
 
-extern unsigned int FUN_002451ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0028dcb0. */
-extern unsigned int FUN_002939f4(void);
-extern int FUN_00296cc8(unsigned int);
-/* Supplied declaration required: FUN_002c0c74. */
-extern int FUN_002c0cc4(void);
-
-
-unsigned int FUN_00323424(void)
-
+/* Script command: runs dataTableGetCount on the current object's lookup (field 0xf), then passes entry (script argument 0) of the u16 table to scrSetResult. */
+u32 FUN_00323424(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_002939f4();
-  temp_v1 = FUN_002451ac(temp_v1,0xf);
-  temp_v2 = FUN_002c0cc4();
-  FUN_002c0c74(temp_v1);
-  FUN_0028dcb0(*(unsigned short *)(temp_v2 + temp_v0 * 2));
-  return 1;
+    int index = scrGetArg(0);
+    u32 field = FUN_002451ac(btlGetMainState(), 0xf);
+    u16 *table = dataTableGetEntries();
+
+    dataTableGetCount(field);
+    scrSetResult(table[index]);
+    return 1;
 }
 
 } /* extern "C" */

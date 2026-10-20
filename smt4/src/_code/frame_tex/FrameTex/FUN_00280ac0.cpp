@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002bd75c(void);
-int FUN_002c5300(int, int, int, unsigned int, int);
+int asdTextureCreate(void);
+int asdMemoryAlloc(int, int, int, unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,8 +15,8 @@ typedef struct {
 extern int DAT_0043e278; /* 0x43e278 */
 
 extern unsigned int FUN_002bc11c(void);
-/* Supplied declaration required: FUN_002bd75c. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdTextureCreate. */
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 void FUN_00280ac0(int param_1)
@@ -30,7 +30,7 @@ void FUN_00280ac0(int param_1)
   
   temp_v0 = DAT_0043e278;
   temp_v1 = 0;
-  FUN_002bd75c();
+  asdTextureCreate();
   if (*(int *)(temp_v0 + 0xfdc) == 0) {
     if (param_1 != 0) {
       *(unsigned char *)(temp_v0 + 0xfe0) = 0;
@@ -42,7 +42,7 @@ void FUN_00280ac0(int param_1)
       *(unsigned int *)(temp_v1 + 0x1c) = 0x8d62;
       *(unsigned int *)(temp_v1 + 0x20) = 0x1403;
       temp_v2 = 0x30000;
-      FUN_002c5300(0x30000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
+      asdMemoryAlloc(0x30000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
       *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
       temp_v2 = FUN_002bc11c();
       *(unsigned int *)(temp_v1 + 0x30) = temp_v2;
@@ -58,13 +58,13 @@ void FUN_00280ac0(int param_1)
       *(unsigned int *)(temp_v1 + 0x1c) = 0x8d62;
       *(unsigned int *)(temp_v1 + 0x20) = 0x1403;
       temp_v2 = 0x20000;
-      FUN_002c5300(0x20000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
+      asdMemoryAlloc(0x20000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
       *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
       temp_v2 = FUN_002bc11c();
       *(unsigned int *)(temp_v1 + 0x30) = temp_v2;
       temp_v3 = 0;
       *(int *)(temp_v0 + 0xfdc) = temp_v1;
-      FUN_002bd75c();
+      asdTextureCreate();
       *(unsigned int *)(temp_v3 + 0x14) = 0x100;
       *(unsigned int *)(temp_v3 + 0x28) = 0x20000;
       *(unsigned int *)(temp_v3 + 0x10) = 0;
@@ -73,13 +73,13 @@ void FUN_00280ac0(int param_1)
       *(unsigned int *)(temp_v3 + 0x1c) = 0x8d62;
       *(unsigned int *)(temp_v3 + 0x20) = 0x1403;
       temp_v2 = 0x20000;
-      FUN_002c5300(0x20000,0x100,0,*(unsigned int *)(temp_v3 + 0x28),1);
+      asdMemoryAlloc(0x20000,0x100,0,*(unsigned int *)(temp_v3 + 0x28),1);
       *(unsigned int *)(temp_v3 + 0x24) = temp_v2;
       temp_v2 = FUN_002bc11c();
       *(unsigned int *)(temp_v3 + 0x30) = temp_v2;
       temp_v1 = 0;
       *(int *)(temp_v0 + 0xfe4) = temp_v3;
-      FUN_002bd75c();
+      asdTextureCreate();
       *(unsigned int *)(temp_v1 + 0x14) = 0x80;
       *(unsigned int *)(temp_v1 + 0x28) = 0x8000;
       *(unsigned int *)(temp_v1 + 0x10) = 0;
@@ -88,7 +88,7 @@ void FUN_00280ac0(int param_1)
       *(unsigned int *)(temp_v1 + 0x1c) = 0x8d62;
       *(unsigned int *)(temp_v1 + 0x20) = 0x1403;
       temp_v2 = 0x20000;
-      FUN_002c5300(0x20000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
+      asdMemoryAlloc(0x20000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
       *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
       temp_v2 = FUN_002bc11c();
       *(unsigned int *)(temp_v1 + 0x30) = temp_v2;

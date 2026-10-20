@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b9024(void);
 
-extern int DAT_00434210; /* 0x434210 */
+extern int g_btlTalkBustUp; /* 0x434210 */
 
 /* Supplied declaration required: FUN_002b9024. */
 
@@ -18,8 +18,8 @@ unsigned int FUN_002e44a8(int param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = DAT_00434210;
-  if ((DAT_00434210 == 0) ||
+  temp_v0 = g_btlTalkBustUp;
+  if ((g_btlTalkBustUp == 0) ||
      (FUN_002b9024(), (unsigned int)*(unsigned short *)(param_1 + 0x90) != *(unsigned int *)(temp_v0 + 0x2f8))) {
     temp_v1 = 0;
   }

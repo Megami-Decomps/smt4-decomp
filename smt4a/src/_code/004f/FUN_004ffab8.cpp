@@ -1,35 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ffab8` (_code @ 0x4ffab8, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Forwards the string `text` and its length to FUN_001a7a20, using the manager located through the owner's link. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001a7a20(int, unsigned int, unsigned int);
+typedef struct Sub {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 buffer[1];
+} Sub;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct Manager {
+    /* 0x00 */ u8 unk00[0x78];
+    /* 0x78 */ Sub sub;
+} Manager;
 
-/* Supplied declaration required: FUN_001a7a20. */
-extern unsigned int FUN_002e3390(unsigned int);
+typedef struct Link {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ Manager *manager;
+} Link;
 
+typedef struct Owner {
+    /* 0x000 */ u8 unk000[0x0C];
+    /* 0x00C */ u8 unk00C[0x200];
+    /* 0x20C */ Link *link;     /* when non-NULL, the link record starts at +0xC of it */
+} Owner;
 
-void FUN_004ffab8(int param_1,unsigned int param_2)
+extern u32 wstrlen(u32 text);
+extern void FUN_001a7a20(void *buffer, u32 text, u32 length);
 
+void FUN_004ffab8(Owner *owner, u32 text)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 0x20c);
-  if (temp_v0 != 0) {
-    temp_v0 = temp_v0 + 0xc;
-  }
-  temp_v0 = *(int *)(temp_v0 + 0x30);
-  temp_v1 = FUN_002e3390(param_2);
-  FUN_001a7a20(temp_v0 + 0x7c,param_2,temp_v1);
-  return;
+    u8 *link = (u8 *)owner->link;
+    Sub *sub;
+
+    if (link != NULL) {
+        link += 0xC;
+    }
+    sub = &((Link *)link)->manager->sub;
+    FUN_001a7a20(sub->buffer, text, wstrlen(text));
 }
 
-} /* extern "C" */
+}

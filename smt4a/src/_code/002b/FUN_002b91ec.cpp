@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 extern int FUN_00162e8c(void);
 extern int FUN_0018719c(unsigned int);
@@ -20,13 +20,13 @@ void FUN_002b91ec(void)
   temp_v0 = FUN_00162e8c();
   temp_v1 = FUN_0018719c(0x4c9);
   if ((temp_v1 == 0) || (temp_v1 = FUN_002e5db4(), temp_v1 != 0)) {
-    *(unsigned int *)(DAT_00581288 + 0x1d0) = 0xf;
+    *(unsigned int *)(g_lmapScene + 0x1d0) = 0xf;
   }
   else {
-    *(unsigned int *)(DAT_00581288 + 0x1d0) = 0xb;
+    *(unsigned int *)(g_lmapScene + 0x1d0) = 0xb;
   }
-  temp_v1 = DAT_00581288;
-  *(unsigned int *)(DAT_00581288 + 0x228) = 6;
+  temp_v1 = g_lmapScene;
+  *(unsigned int *)(g_lmapScene + 0x228) = 6;
   *(unsigned char *)(temp_v1 + 0x22c) = 1;
   *(unsigned int *)(temp_v1 + 0x240) = 0x40a00000;
   *(unsigned int *)(temp_v1 + 0x1d4) = 0;
@@ -35,9 +35,9 @@ void FUN_002b91ec(void)
   *(unsigned int *)(temp_v0 + 0x10a4) = 0;
   temp_v0 = FUN_0018719c(0x4c9);
   if ((temp_v0 == 0) || (temp_v0 = FUN_002e5db4(), temp_v0 != 0)) {
-    *(unsigned int *)(DAT_00581288 + 0x238) = 6;
+    *(unsigned int *)(g_lmapScene + 0x238) = 6;
   }
-  *(unsigned char *)(DAT_00581288 + 0x23c) = 1;
+  *(unsigned char *)(g_lmapScene + 0x23c) = 1;
   return;
 }
 

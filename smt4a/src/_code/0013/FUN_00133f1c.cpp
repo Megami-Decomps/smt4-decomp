@@ -9,7 +9,7 @@ int FUN_00301d64(...);
 int FUN_00301dc2(int);
 int FUN_00301e56(...);
 int FUN_003079e8(int, int, int, int *);
-int FUN_00307a0a(int *);
+int vecCount28(int *);
 int FUN_00307a18(...);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
@@ -19,15 +19,15 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-extern int FUN_002e6dac(void);
+extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00301d64. */
 /* Supplied declaration required: FUN_00301dc2. */
 /* Supplied declaration required: FUN_00301e56. */
 /* Supplied declaration required: FUN_003079e8. */
-/* Supplied declaration required: FUN_00307a0a. */
+/* Supplied declaration required: vecCount28. */
 /* Supplied declaration required: FUN_00307a18. */
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 void FUN_00133f1c(int *param_1,int param_2,unsigned int param_3)
@@ -43,7 +43,7 @@ void FUN_00133f1c(int *param_1,int param_2,unsigned int param_3)
   int temp_v6;
   
   temp_v0 = FUN_00307a18();
-  temp_v1 = FUN_00307a0a(param_1);
+  temp_v1 = vecCount28(param_1);
   if (temp_v1 < temp_v0) {
     temp_v4 = param_1[1];
     temp_v3 = temp_v4 - 0x1c;
@@ -57,19 +57,19 @@ void FUN_00133f1c(int *param_1,int param_2,unsigned int param_3)
     FUN_00301d64(param_2,param_3);
   }
   else {
-    temp_v1 = FUN_00307a0a(param_1);
+    temp_v1 = vecCount28(param_1);
     temp_v2 = (temp_v1 >> 1) + temp_v1 + (temp_v1 >> 3);
     temp_v0 = temp_v1 + 0x20;
     if (temp_v1 + 0x20 <= temp_v2) {
       temp_v0 = temp_v2;
     }
-    temp_v3 = FUN_002e6dac();
+    temp_v3 = rt_malloc();
     FUN_003079e8(*param_1,param_2,temp_v3,param_1);
-    temp_v4 = aeabi_idivmod(param_2 - *param_1,0x1c);
+    temp_v4 = __aeabi_idivmod(param_2 - *param_1,0x1c);
     FUN_00301e56(param_1,temp_v4 * 0x1c + temp_v3,param_3);
-    temp_v4 = aeabi_idivmod(param_2 - *param_1,0x1c);
+    temp_v4 = __aeabi_idivmod(param_2 - *param_1,0x1c);
     FUN_003079e8(param_2,param_1[1],temp_v4 * 0x1c + temp_v3 + 0x1c,param_1);
-    temp_v4 = FUN_00307a0a(param_1);
+    temp_v4 = vecCount28(param_1);
     temp_v6 = param_1[1];
     for (temp_v5 = *param_1; temp_v5 != temp_v6; temp_v5 = temp_v5 + 0x1c) {
       FUN_00301dc2(temp_v5);

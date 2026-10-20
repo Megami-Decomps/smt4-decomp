@@ -24,7 +24,7 @@ extern unsigned char DAT_00536cd4; /* 0x536cd4 */
 /* Supplied declaration required: FUN_001029f4. */
 /* Supplied declaration required: FUN_00102bbc. */
 /* Supplied declaration required: FUN_00102c28. */
-extern int FUN_002e3390(int);
+extern int wstrlen(int);
 /* Supplied declaration required: FUN_0043bd0c. */
 /* Supplied declaration required: FUN_0043c2f4. */
 
@@ -51,7 +51,7 @@ unsigned int FUN_004285d4(int param_1,unsigned int param_2,int param_3)
   FUN_001029f4(temp_v0,&temp_v4,10);
   if (*temp_v4 == '\0') {
     if (temp_v1 != 0) {
-      temp_v2 = FUN_002e3390(temp_v1);
+      temp_v2 = wstrlen(temp_v1);
       if (temp_v2 == 1) {
         temp_v3 = (unsigned char *)0x536cd0;
       }

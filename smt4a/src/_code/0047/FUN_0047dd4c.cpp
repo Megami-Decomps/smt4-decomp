@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00137ee0(unsigned int, unsigned int *, unsigned int);
+int asdSequenceRequest(unsigned int, unsigned int *, unsigned int);
 int FUN_00324bc8(unsigned int, unsigned int);
 int FUN_003b5050(void);
 int FUN_003d54f8(int, int);
@@ -25,10 +25,10 @@ extern unsigned int DAT_005f1b88; /* 0x5f1b88 */
 extern unsigned int DAT_005f1b8c; /* 0x5f1b8c */
 extern unsigned int DAT_005f1b90; /* 0x5f1b90 */
 
-/* Supplied declaration required: FUN_00137ee0. */
+/* Supplied declaration required: asdSequenceRequest. */
 extern int FUN_002cf854(void);
-extern int FUN_002d1fdc(void);
-extern int FUN_0032482c(void);
+extern int lmapMainGetUnk74(void);
+extern int gameStateIsFlagSetAndLarge(void);
 /* Supplied declaration required: FUN_00324bc8. */
 /* Supplied declaration required: FUN_003b5050. */
 /* Supplied declaration required: FUN_003d54f8. */
@@ -55,7 +55,7 @@ void FUN_0047dd4c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   if (temp_v0 != '\x01') {
     if (temp_v0 != '\x02') {
       if (temp_v0 != '\x03') {
-        temp_v1 = FUN_0032482c();
+        temp_v1 = gameStateIsFlagSetAndLarge();
         if (temp_v1 != 0) {
           temp_v3 = 4;
           temp_v4 = DAT_005f1b74 - 200;
@@ -64,12 +64,12 @@ void FUN_0047dd4c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
         else {
           temp_v1 = FUN_002cf854();
           if (temp_v1 == 0) {
-            temp_v1 = FUN_002d1fdc();
+            temp_v1 = lmapMainGetUnk74();
             if (temp_v1 != 0) {
               temp_v3 = 0;
               puVar5 = (unsigned int *)0x0;
               temp_v2 = 6;
-              FUN_00137ee0(temp_v2,puVar5,temp_v3);
+              asdSequenceRequest(temp_v2,puVar5,temp_v3);
             }
             FUN_003d54f8(0,10);
             FUN_003d54f8(1,10);
@@ -122,7 +122,7 @@ void FUN_0047dd4c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     puVar5 = (unsigned int *)0x0;
     temp_v2 = 6;
   }
-  FUN_00137ee0(temp_v2,puVar5,temp_v3);
+  asdSequenceRequest(temp_v2,puVar5,temp_v3);
   FUN_003d54f8(0,10);
   FUN_003d54f8(1,10);
   FUN_00324bc8(0xffffffff,0xffffffff);

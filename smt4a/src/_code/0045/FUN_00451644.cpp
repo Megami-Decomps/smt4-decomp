@@ -1,32 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00451644` (_code @ 0x451644, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Dispatches the message's payload to the handler registered for its type (0x80000000 or 0x40000000). */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern romwright_code *DAT_0059daf4; /* 0x59daf4 */
+typedef struct Message {
+    /* 0x00 */ u32 type;
+    /* 0x04 */ u32 payload;
+} Message;
 
+typedef void (*MessageHandler)(Message *message, u32 payload);
 
-void FUN_00451644(int *param_1)
+extern MessageHandler DAT_0059daf4[2];
 
+void FUN_00451644(Message **messagePtr)
 {
-  int *p;
-  int temp_v0;
-  
-  p = (int *)*param_1;
-  if (p[1] != 0) {
-    temp_v0 = *p;
-    if (temp_v0 == -0x80000000) {
-      (*DAT_0059daf4)(p,p[1]);
-      return;
+    Message *message = *messagePtr;
+
+    if (message->payload != 0) {
+        switch (message->type) {
+        case 0x80000000:
+            DAT_0059daf4[0](message, message->payload);
+            break;
+        case 0x40000000:
+            DAT_0059daf4[1](message, message->payload);
+            break;
+        }
     }
-    if (temp_v0 == 0x40000000) {
-      (*(*(romwright_code * *)((unsigned char *)&DAT_0059daf4 + 0x4)))(p,p[1]);
-      return;
-    }
-  }
-  return;
 }
 
-} /* extern "C" */
+}

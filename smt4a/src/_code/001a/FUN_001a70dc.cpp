@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_001a72b0(int *, char [256], unsigned int);
-int FUN_002e3390(...);
+int wstrlen(...);
 int FUN_002e59f8(char *, char [256], unsigned int);
 int FUN_002e6dd0(char [256], int);
-int aeabi_uidivmod(int);
+int __aeabi_uidivmod(int);
 
 /* stack frame of param_2: 2 slot(s), 2 byte(s) */
 typedef struct {
@@ -19,10 +19,10 @@ typedef struct {
 extern char FUN_00100790(int);
 extern int FUN_0019a37c(int, char *, unsigned int);
 /* Supplied declaration required: FUN_001a72b0. */
-/* Supplied declaration required: FUN_002e3390. */
+/* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: FUN_002e59f8. */
 /* Supplied declaration required: FUN_002e6dd0. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 int * FUN_001a70dc(int *param_1,char *param_2)
@@ -60,11 +60,11 @@ int * FUN_001a70dc(int *param_1,char *param_2)
       if (((*pcVar1 == 'H' && pcVar4 == (char *)0x0) && (param_2 != (char *)0x0)) &&
          (*param_2 != '\0')) {
         FUN_002e6dd0(temp_v10,0x100);
-        temp_v2 = FUN_002e3390(param_2);
+        temp_v2 = wstrlen(param_2);
         FUN_002e59f8(param_2,temp_v10,temp_v2);
-        temp_v2 = FUN_002e3390(temp_v10);
+        temp_v2 = wstrlen(temp_v10);
         FUN_001a72b0(param_1,temp_v10,temp_v2);
-        temp_v3 = FUN_002e3390(temp_v10);
+        temp_v3 = wstrlen(temp_v10);
         if ((int)temp_v3 < 1) {
           temp_v7 = 0;
         }
@@ -89,7 +89,7 @@ int * FUN_001a70dc(int *param_1,char *param_2)
             pcVar4 = pcVar4 + 1;
             temp_v10[1] = *pcVar4;
           }
-          aeabi_uidivmod(temp_v6);
+          __aeabi_uidivmod(temp_v6);
           temp_v6 = temp_v5;
         }
         puVar7 = (unsigned short *)(param_1[1] + temp_v6 * 4);
@@ -100,7 +100,7 @@ int * FUN_001a70dc(int *param_1,char *param_2)
           do {
             piVar11 = (int *)(param_1[2] + ((unsigned int)temp_v0 + temp_v6) * 0x10);
             temp_v8 = param_1[3] + *piVar11;
-            temp_v4 = FUN_002e3390(temp_v8);
+            temp_v4 = wstrlen(temp_v8);
             if ((temp_v4 == temp_v3) && (temp_v8 = FUN_0019a37c(temp_v8,temp_v10,temp_v3), temp_v8 == 0)) {
               return piVar11;
             }

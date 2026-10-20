@@ -1,23 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00307900` (_code @ 0x307900, 0x1e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: loop shape only: retail enters the loop with `b.n` to the bottom test, built tests first (`cmp; beq`) */
+/* Copies the 12-byte elements in [first, last) one by one through FUN_002e9afe into the output run starting at `out`; returns the end of the output. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e9afe(int, int);
+extern void FUN_002e9afe(u32 allocator, u8 *dest, u8 *src);
 
-/* Supplied declaration required: FUN_002e9afe. */
-
-
-int FUN_00307900(int param_1,int param_2,int param_3)
-
+u8 *FUN_00307900(u8 *first, u8 *last, u8 *out, u32 allocator)
 {
-/* irregular: 1 native warning(s); review required */
-  for (; param_1 != param_2; param_1 = param_1 + 0xc) {
-    FUN_002e9afe(param_3,param_1);
-    param_3 = param_3 + 0xc;
-  }
-  return param_3;
+    while (first != last) {
+        FUN_002e9afe(allocator, out, first);
+        first += 12;
+        out += 12;
+    }
+    return out;
 }
 
-} /* extern "C" */
+}

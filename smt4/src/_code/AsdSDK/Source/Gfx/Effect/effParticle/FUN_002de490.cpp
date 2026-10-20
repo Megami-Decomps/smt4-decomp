@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00248f70(void);
 int FUN_002491b4(void);
 int FUN_002493a4(...);
-int FUN_00249424(void);
+int effTlpCreate(void);
 int FUN_0024fb58(void);
 int FUN_0024fc18(void);
 int FUN_00257108(void);
@@ -15,14 +15,14 @@ int FUN_0025715c(void);
 int FUN_002691d8(unsigned int, unsigned int, unsigned int);
 int FUN_00269334(void);
 int FUN_002694f8(...);
-int FUN_0028c854(void);
+int asdEffectTextureCreate(void);
 int FUN_002a4e98(void);
 int FUN_002c0894(...);
 int FUN_002c2264(...);
 int FUN_002c2318(unsigned int);
-int FUN_002c32a0(...);
+int memAlloc(...);
 int FUN_002c3944(void);
-int FUN_002c415c(...);
+int asdMemFree(...);
 int VectorSignedToFloat(...);
 
 typedef struct fn_002de490_arg0 fn_002de490_arg0;
@@ -47,7 +47,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00248f70. */
 /* Supplied declaration required: FUN_002491b4. */
 /* Supplied declaration required: FUN_002493a4. */
-/* Supplied declaration required: FUN_00249424. */
+/* Supplied declaration required: effTlpCreate. */
 extern int FUN_0024c3c8(unsigned int);
 extern unsigned int *FUN_0024c3d8(fn_002de490_arg0 *);
 extern unsigned int FUN_0024c3f8(void);
@@ -59,14 +59,14 @@ extern unsigned int FUN_0024c3f8(void);
 /* Supplied declaration required: FUN_00269334. */
 /* Supplied declaration required: FUN_002694f8. */
 extern int FUN_0028c814(unsigned int *);
-/* Supplied declaration required: FUN_0028c854. */
+/* Supplied declaration required: asdEffectTextureCreate. */
 /* Supplied declaration required: FUN_002a4e98. */
 /* Supplied declaration required: FUN_002c0894. */
 /* Supplied declaration required: FUN_002c2264. */
 /* Supplied declaration required: FUN_002c2318. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
@@ -93,7 +93,7 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
     temp_v3 = 300;
   }
   puVar3 = (unsigned int *)0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0x5c,0x10,1);
+  memAlloc(0x10000,0x100,0,0x5c,0x10,1);
   FUN_002c3944();
   puVar3[1] = 0xffffffff;
   *puVar3 = temp_v3;
@@ -156,13 +156,13 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < temp_v0);
         }
-        FUN_002c415c(puVar3[0xe]);
+        asdMemFree(puVar3[0xe]);
         puVar3[0xd] = 0;
         puVar3[0xe] = 0;
       }
       if (temp_v0 << 2 != 0) {
         temp_v3 = 0x10000;
-        FUN_002c32a0(0x10000,0x100,0,temp_v0 << 2,0x10,1);
+        memAlloc(0x10000,0x100,0,temp_v0 << 2,0x10,1);
         puVar3[0xe] = temp_v3;
         puVar3[0xd] = temp_v3;
         FUN_0024fc18();
@@ -194,13 +194,13 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < temp_v0);
         }
-        FUN_002c415c(puVar3[0x10]);
+        asdMemFree(puVar3[0x10]);
         puVar3[0xf] = 0;
         puVar3[0x10] = 0;
       }
       if (temp_v0 << 2 != 0) {
         temp_v3 = 0x10000;
-        FUN_002c32a0(0x10000,0x100,0,temp_v0 << 2,0x10,1);
+        memAlloc(0x10000,0x100,0,temp_v0 << 2,0x10,1);
         puVar3[0x10] = temp_v3;
         puVar3[0xf] = temp_v3;
         FUN_002a4e98();
@@ -221,12 +221,12 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
       if (puVar3[0x12] != 0) {
         FUN_00257108();
       }
-      FUN_00249424();
+      effTlpCreate();
       puVar3[0x12] = (unsigned int)puVar4;
       break;
     case 9:
       FUN_002493a4(puVar3,*(unsigned int *)(puVar3[0x13] + 8),9);
-      FUN_0028c854();
+      asdEffectTextureCreate();
       temp_v5 = (float)VectorSignedToFloat(puVar4[5],(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v4 = (float)VectorSignedToFloat(puVar4[6],(unsigned char)(in_fpscr >> 0x16) & 3);
       puVar3[0x15] = (unsigned int)(temp_v5 * 0.5f * 0.0625f);

@@ -9,7 +9,7 @@ int FUN_002849a4(...);
 int FUN_0028527c(int);
 int FUN_0028529c(int, int, int, int, int, int);
 int FUN_002852f0(int);
-int FUN_0029bb3c(unsigned char *, int);
+int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a0428(unsigned int, int);
 int FUN_002be624(unsigned char [64], unsigned char *, int);
 int FUN_002c09f4(...);
@@ -66,12 +66,12 @@ extern unsigned char *puRam004bd108; /* 0x4bd108 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00284838. */
 /* Supplied declaration required: FUN_002849a4. */
-extern unsigned int FUN_0028522c(unsigned int, unsigned int);
+extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0028527c. */
 /* Supplied declaration required: FUN_0028529c. */
 /* Supplied declaration required: FUN_002852f0. */
 extern int FUN_00285574(void);
-/* Supplied declaration required: FUN_0029bb3c. */
+/* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002be624. */
 extern int FUN_002c09d0(unsigned int);
@@ -728,17 +728,17 @@ LAB_001ac248:;
       if (!((temp_v6 == 1 || temp_v6 == 2) || temp_v6 == 3)) {
         puVar22 = temp_v24;
         if (temp_v6 != 4) {
-          FUN_0029bb3c(puVar22,7);
+          asdMdlManagerCreateLoaded(puVar22,7);
           *(unsigned char **)(temp_v7 + 0x4bd0f8) = puVar22;
         }
         else {
-          FUN_0029bb3c(puVar22,7);
+          asdMdlManagerCreateLoaded(puVar22,7);
           puRam004bd108 = puVar22;
         }
       }
       else {
         puVar22 = temp_v24;
-        FUN_0029bb3c(puVar22,0x38);
+        asdMdlManagerCreateLoaded(puVar22,0x38);
         *(unsigned char **)(temp_v7 + 0x4bd0f8) = puVar22;
       }
       FUN_002a0428(*(unsigned int *)(temp_v7 + 0x4bd0f8),1);
@@ -750,7 +750,7 @@ LAB_001ac248:;
             temp_v15 = temp_v15 + 1;
             if ((&DAT_004bd0e0)[temp_v6] <= temp_v15) goto LAB_001aca98;
             if (temp_v15 == 0) break;
-            temp_v9 = FUN_0028522c(*(unsigned int *)(temp_v7 + 0x4bd0f8),1);
+            temp_v9 = asdMdlManagerClone(*(unsigned int *)(temp_v7 + 0x4bd0f8),1);
             *(unsigned int *)(temp_v6 * 0x100 + temp_v15 * 4 + 0x4bd110) = temp_v9;
             FUN_002a0428(temp_v9,1);
           }

@@ -26,7 +26,7 @@ extern unsigned char DAT_005315d8; /* 0x5315d8 */
 extern unsigned char DAT_005315f0; /* 0x5315f0 */
 extern unsigned char DAT_00531608; /* 0x531608 */
 extern unsigned char DAT_00531620; /* 0x531620 */
-extern unsigned int DAT_005f15fc; /* 0x5f15fc */
+extern unsigned int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern float DAT_005f16bc; /* 0x5f16bc */
@@ -120,7 +120,7 @@ void FUN_0029a794(int param_1,int param_2)
   FUN_00352d30(&DAT_005f16c0);
   if (param_2 != 0) {
     *(short *)(temp_v0 + 0x2c) = (short)(int)DAT_005f16bc;
-    *(short *)(temp_v0 + 0x2e) = (short)DAT_005f15fc;
+    *(short *)(temp_v0 + 0x2e) = (short)g_gameState;
     *(short *)(temp_v0 + 0x30) = (short)DAT_005f1600;
     *(unsigned int *)(temp_v0 + 0xe10) = DAT_005f1604;
     *(short *)(temp_v0 + 0x32) = (short)(int)DAT_005f16c0;

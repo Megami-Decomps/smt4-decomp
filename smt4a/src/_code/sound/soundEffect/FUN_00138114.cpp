@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0013ddf0(void);
 int FUN_00147f08(unsigned char *);
 int FUN_0015e068(int, unsigned char *);
-int FUN_001630d4(int, int, int, unsigned int);
+int asdMemoryAlloc(int, int, int, unsigned int);
 int nw_snd_FxDelay_AssignWorkBuffer(unsigned char *, unsigned int, unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern unsigned int DAT_00588fb8; /* 0x588fb8 */
+extern unsigned int g_soundEffectBuffers; /* 0x588fb8 */
 extern unsigned char DAT_006195dc; /* 0x6195dc */
 extern unsigned int DAT_0061963c; /* 0x61963c */
 extern unsigned int DAT_00619640; /* 0x619640 */
@@ -25,8 +25,8 @@ extern unsigned char DAT_00619648; /* 0x619648 */
 /* Supplied declaration required: FUN_0013ddf0. */
 /* Supplied declaration required: FUN_00147f08. */
 /* Supplied declaration required: FUN_0015e068. */
-/* Supplied declaration required: FUN_001630d4. */
-extern int FUN_00180008(unsigned int);
+/* Supplied declaration required: asdMemoryAlloc. */
+extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: nw_snd_FxDelay_AssignWorkBuffer. */
 extern unsigned int nw_snd_FxDelay_GetRequiredMemSize(unsigned char *);
 
@@ -39,7 +39,7 @@ void FUN_00138114(void)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00180008(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
     DAT_0061963c = 0x96;
     DAT_00619640 = 0x3dcccccd;
@@ -48,8 +48,8 @@ void FUN_00138114(void)
     FUN_00147f08(&DAT_006195dc);
     temp_v1 = nw_snd_FxDelay_GetRequiredMemSize(&DAT_006195dc);
     temp_v2 = 0x10000;
-    FUN_001630d4(0x10000,0x100,0,temp_v1);
-    DAT_00588fb8 = temp_v2;
+    asdMemoryAlloc(0x10000,0x100,0,temp_v1);
+    g_soundEffectBuffers = temp_v2;
     nw_snd_FxDelay_AssignWorkBuffer(&DAT_006195dc,temp_v2,temp_v1);
     FUN_0015e068(0,&DAT_006195dc);
   }

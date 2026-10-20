@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_001568f8(...);
 int FUN_003f0e20(int, int);
 int FUN_004102d8(...);
@@ -26,7 +26,7 @@ typedef struct {
 
 extern int DAT_005712f0; /* 0x5712f0 */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
 extern unsigned int FUN_003e8430(void);
 extern int FUN_003eb1cc(void);
@@ -58,7 +58,7 @@ FUN_004fb798(int param_1,unsigned int param_2,int param_3,int param_4,unsigned i
   }
   temp_v1 = (short)param_1 + (short)param_10;
   if (-1 < param_10) {
-    temp_v2 = FUN_0014aa78();
+    temp_v2 = btlGetMainState();
     FUN_003f0e20(temp_v2,(int)*(short *)(param_4 + 0x6a));
     if (((temp_v0) && (temp_v2 != 0)) && (-1 < param_12)) {
       temp_v4 = DAT_005712f0;
@@ -88,7 +88,7 @@ FUN_004fb798(int param_1,unsigned int param_2,int param_3,int param_4,unsigned i
       *(unsigned int *)(temp_v4 + 0x28) = 1;
       *(int *)(temp_v4 + 0x4c) = param_7;
       if (param_15 != 0) {
-        FUN_0014aa78();
+        btlGetMainState();
         temp_v3 = FUN_003e8430();
         if (temp_v3 != 0) {
           FUN_004fb43c(0,0,0x1000263,0,1,0,0);
@@ -107,7 +107,7 @@ LAB_004fba00:
       *(unsigned int *)(temp_v4 + 0x28) = 0;
       *(int *)(temp_v4 + 0x4c) = param_6;
       if (param_15 == 0) goto LAB_004fbabc;
-      FUN_0014aa78();
+      btlGetMainState();
       temp_v3 = FUN_003e8430();
       temp_v3 = temp_v3 & ~param_14;
       if (temp_v3 != 0) {
@@ -126,7 +126,7 @@ LAB_004fba00:
     *(unsigned int *)(temp_v4 + 0x28) = 1;
     *(int *)(temp_v4 + 0x4c) = param_7;
     if (param_15 != 0) {
-      FUN_0014aa78();
+      btlGetMainState();
       temp_v3 = FUN_003e8430();
       if (temp_v3 != 0) {
         FUN_004fb43c(0,0,0x1000263,0,1,0,0);
@@ -142,7 +142,7 @@ LAB_004fbabc:
     temp_v3 = 0;
     temp_v0 = *(short *)(param_4 + 0x6a) < 0x6d;
     if (temp_v0) {
-      temp_v2 = FUN_0014aa78();
+      temp_v2 = btlGetMainState();
       FUN_001568f8(temp_v2,(int)*(short *)(param_4 + 0x6a));
       if (temp_v2 != 0) {
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x110);
@@ -174,7 +174,7 @@ LAB_004fbabc:
     temp_v2 = DAT_005712f0;
     FUN_004102d8(DAT_005712f0,0,0);
     *(unsigned char *)(temp_v2 + 4) = 0x41;
-    FUN_0014aa78();
+    btlGetMainState();
     temp_v4 = FUN_003eb1cc();
     if (temp_v4 == 0) {
       *(unsigned int *)(temp_v2 + 0x28) = 1;

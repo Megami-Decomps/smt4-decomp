@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00109680(int, unsigned char *, int);
+int asdSequenceStart(int, unsigned char *, int);
 int FUN_0010a1a4(int, unsigned char *, int);
 int FUN_0010e584(unsigned char *, unsigned char *);
 int FUN_002c29d8(int, int, int);
@@ -17,7 +17,7 @@ extern unsigned char LAB_00118290; /* 0x118290 */
 extern unsigned char DAT_00446e00; /* 0x446e00 */
 extern unsigned char DAT_00446f2c; /* 0x446f2c */
 
-/* Supplied declaration required: FUN_00109680. */
+/* Supplied declaration required: asdSequenceStart. */
 /* Supplied declaration required: FUN_0010a1a4. */
 /* Supplied declaration required: FUN_0010e584. */
 /* Supplied declaration required: FUN_002c29d8. */
@@ -30,7 +30,7 @@ void FUN_00104ec4(void)
 /* irregular: 4 native warning(s); review required */
   int temp_v0;
   
-  FUN_00109680(1,&DAT_00446e00,0x19);
+  asdSequenceStart(1,&DAT_00446e00,0x19);
   FUN_0010a1a4(0xc9,&DAT_00446f2c,0x14);
   FUN_0010e584(&LAB_00118170,&LAB_00118290);
   temp_v0 = FUN_002c2a04(0);

@@ -32,11 +32,11 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 extern int DAT_004474f4; /* 0x4474f4 */
-extern int DAT_00447e28; /* 0x447e28 */
-extern int DAT_00447e88; /* 0x447e88 */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_mapMain; /* 0x447e28 */
+extern int g_lmapScene; /* 0x447e88 */
+extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 extern unsigned int DAT_0049f924; /* 0x49f924 */
 extern unsigned int DAT_0049f928; /* 0x49f928 */
@@ -106,7 +106,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
   unsigned int in_fpscr;
   unsigned int temp_v6;
   
-  temp_v2 = DAT_00447e28;
+  temp_v2 = g_mapMain;
   if (DAT_0049fb6c != '\0') {
     DAT_0049fb6c = '\0';
     temp_v1 = FUN_002973d8();
@@ -171,12 +171,12 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
   if (DAT_0049f96c != 0) {
     DAT_0049f96c = 0;
     FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17,DAT_0049fa18,DAT_0049fa19);
-    if ((DAT_0049f91c - 0x1fU >= 5) && (DAT_0049f91c - 0x19U >= 6)) {
-      temp_v1 = DAT_0049f91c;
-      if (DAT_0049f91c == 5) {
+    if ((g_gameState - 0x1fU >= 5) && (g_gameState - 0x19U >= 6)) {
+      temp_v1 = g_gameState;
+      if (g_gameState == 5) {
         temp_v1 = DAT_0049f920;
       }
-      if (DAT_0049f91c != 5 || temp_v1 != 6) {
+      if (g_gameState != 5 || temp_v1 != 6) {
         FUN_00275e4c();
         *(unsigned int *)(temp_v2 + 0x38) = DAT_0049f990;
         *(unsigned char *)(temp_v2 + 0xe) = 1;
@@ -218,9 +218,9 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     FUN_0027d7b0(temp_v1,temp_v3,DAT_0049fd1c);
     if (temp_v1 != -1) {
       temp_v3 = FUN_0027d748();
-      temp_v1 = DAT_00447e88;
+      temp_v1 = g_lmapScene;
       temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v3 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(unsigned int *)(DAT_00447e88 + 0x1c) = temp_v6;
+      *(unsigned int *)(g_lmapScene + 0x1c) = temp_v6;
       temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v3 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
       *(unsigned int *)(temp_v1 + 0x20) = temp_v6;
       temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v3 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -263,8 +263,8 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     }
   }
   else {
-    if (*(char *)(DAT_00432fc8 + 0xc0) != '\0') {
-      *(unsigned char *)(DAT_00432fc8 + 0xc0) = 0;
+    if (*(char *)(g_aocMain + 0xc0) != '\0') {
+      *(unsigned char *)(g_aocMain + 0xc0) = 0;
       *(unsigned int *)(temp_v2 + 0x24) = 0x1f;
       *(unsigned int *)(temp_v2 + 0x28) = 0;
       return;

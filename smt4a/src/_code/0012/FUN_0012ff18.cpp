@@ -1,26 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0012ff18` (_code @ 0x12ff18, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail jumps to a bottom test and keeps the node in r0 until the first call; built pre-tests the head into r4. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e6e14(...);
+/* Singly linked node; the word at 8 is a separately allocated payload. */
+typedef struct Node {
+    struct Node *next;  /* 0x00 */
+    u8 unk04[4];
+    void *payload;      /* 0x08 */
+} Node;
 
-/* Supplied declaration required: FUN_002e6e14. */
+typedef struct {
+    Node *head;         /* 0x00 */
+} NodeList;
 
+int FUN_002e6e14(void *block);
 
-void FUN_0012ff18(int *param_1)
-
+/* Frees every node of the list and its payload. */
+void FUN_0012ff18(NodeList *list)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  
-  while (piVar1 = (int *)*param_1, piVar1 != (int *)0x0) {
-    *param_1 = *piVar1;
-    FUN_002e6e14(piVar1[2]);
-    FUN_002e6e14(piVar1);
-  }
-  return;
+    Node *node;
+
+    while ((node = list->head) != NULL) {
+        list->head = node->next;
+        FUN_002e6e14(node->payload);
+        FUN_002e6e14(node);
+    }
 }
 
 } /* extern "C" */

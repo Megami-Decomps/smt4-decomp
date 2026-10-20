@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0010063a(int, int, int, unsigned char *);
-int FUN_002e3d04(void);
-int FUN_002e6354(void);
+int qsort(int, int, int, unsigned char *);
+int asdOperatorNewD(void);
+int sysMemClear(void);
 int FUN_002e6490(int);
 
 /* stack frame of param_5: 2 slot(s), 8 byte(s) */
@@ -19,14 +19,14 @@ extern unsigned char LAB_00221c14; /* 0x221c14 */
 extern unsigned int DAT_00573a50; /* 0x573a50 */
 extern unsigned int DAT_00573a54; /* 0x573a54 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern int FUN_001633a0(unsigned int);
-extern unsigned int FUN_00187180(unsigned int);
+extern unsigned int dataTableGet(unsigned int);
 extern int FUN_0018719c(unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
-/* Supplied declaration required: FUN_002e3d04. */
-/* Supplied declaration required: FUN_002e6354. */
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
+/* Supplied declaration required: asdOperatorNewD. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6490. */
 extern unsigned int FUN_0047f2d8(unsigned int);
 
@@ -54,12 +54,12 @@ void FUN_003f1b3c(int param_1,int param_2,int param_3,unsigned int *param_4,unsi
   if ((param_2 < 1) || (param_2 >= 9)) {
     return;
   }
-  temp_v1 = FUN_00187180(10);
-  temp_v2 = FUN_00192798();
-  temp_v3 = FUN_00192748(temp_v1);
+  temp_v1 = dataTableGet(10);
+  temp_v2 = dataTableGetEntries();
+  temp_v3 = dataTableGetCount(temp_v1);
   temp_v4 = temp_v3 << 2;
-  FUN_002e3d04();
-  FUN_002e6354();
+  asdOperatorNewD();
+  sysMemClear();
   temp_v10 = 0;
   temp_v5 = 0;
   if (temp_v3 != 0) {
@@ -73,10 +73,10 @@ void FUN_003f1b3c(int param_1,int param_2,int param_3,unsigned int *param_4,unsi
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < temp_v3);
     if (temp_v10 != 0) {
-      FUN_0010063a(temp_v4,temp_v10,4,&LAB_00221c14);
+      qsort(temp_v4,temp_v10,4,&LAB_00221c14);
       temp_v2 = temp_v10 << 2;
-      FUN_002e3d04();
-      FUN_002e6354();
+      asdOperatorNewD();
+      sysMemClear();
       temp_v7 = 0;
       if (0 < temp_v10) {
         param_1 = param_1 + 0x4000;

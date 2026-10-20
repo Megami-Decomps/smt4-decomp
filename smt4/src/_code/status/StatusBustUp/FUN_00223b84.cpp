@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_002c3944(void);
-int FUN_002c498c(int, int, int, int, int);
-int FUN_002c4c2c(int);
-int FUN_002c5914(int, int);
+int asdMemAlloc(int, int, int, int, int);
+int asdTMTexTableLoadSprites(int);
+int asdTMTexTableLoadTmx(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,9 +19,9 @@ extern int DAT_0044e15c; /* 0x44e15c */
 extern int DAT_0044e160; /* 0x44e160 */
 
 /* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4c2c. */
-/* Supplied declaration required: FUN_002c5914. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 
 
 void FUN_00223b84(void)
@@ -31,17 +31,17 @@ void FUN_00223b84(void)
   int temp_v0;
   
   if (DAT_0044e158 < '\x01') {
-    FUN_002c4c2c(0x17);
-    FUN_002c5914(0x23,0);
+    asdTMTexTableLoadSprites(0x17);
+    asdTMTexTableLoadTmx(0x23,0);
     if (DAT_0044e15c == 0) {
       temp_v0 = 0x100;
-      FUN_002c498c(0x100,0x100,0,0x266,1);
+      asdMemAlloc(0x100,0x100,0,0x266,1);
       DAT_0044e15c = temp_v0;
       FUN_002c3944();
     }
     if (DAT_0044e160 == 0) {
       temp_v0 = 0x100;
-      FUN_002c498c(0x100,0x100,0,0x81,1);
+      asdMemAlloc(0x100,0x100,0,0x81,1);
       DAT_0044e160 = temp_v0;
       FUN_002c3944();
     }

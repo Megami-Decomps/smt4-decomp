@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_0023b49c(int *, unsigned int, unsigned int);
-int FUN_002bfe28(int *, unsigned int);
-int FUN_002c222c(void);
-int FUN_002c5300(int, int, int, int, int);
+int mtx44Copy(int *, unsigned int);
+int asdOperatorNew(void);
+int asdMemoryAlloc(int, int, int, int, int);
 int FUN_0034791c(int *);
 
 typedef int romwright_code(...);
@@ -22,9 +22,9 @@ extern unsigned char DAT_00420888; /* 0x420888 */
 
 /* Supplied declaration required: FUN_0023b49c. */
 extern unsigned int FUN_002a7bc0(void);
-/* Supplied declaration required: FUN_002bfe28. */
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: mtx44Copy. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0034791c. */
 
 
@@ -43,7 +43,7 @@ int * FUN_002890d4(int param_1,unsigned int param_2,int param_3)
   temp_v2 = 0;
   if (param_3 != 0) {
     piVar1 = (int *)0xc;
-    FUN_002c222c();
+    asdOperatorNew();
     if (piVar1 != (int *)0x0) {
       puVar4 = &DAT_00420888;
       piVar1[2] = temp_v1;
@@ -53,7 +53,7 @@ int * FUN_002890d4(int param_1,unsigned int param_2,int param_3)
   }
   else {
     piVar1 = (int *)0x20;
-    FUN_002c222c();
+    asdOperatorNew();
     if (piVar1 != (int *)0x0) {
       puVar4 = &DAT_00420710;
       piVar1[2] = temp_v2;
@@ -62,7 +62,7 @@ int * FUN_002890d4(int param_1,unsigned int param_2,int param_3)
     }
   }
   piVar2 = (int *)0x64;
-  FUN_002c222c();
+  asdOperatorNew();
   if (piVar2 == (int *)0x0) {
     piVar2 = (int *)0x0;
   }
@@ -79,12 +79,12 @@ int * FUN_002890d4(int param_1,unsigned int param_2,int param_3)
   }
   piVar2[0x18] = param_1;
   temp_v1 = 0x100;
-  FUN_002c5300(0x100,0x100,0,0x50,1);
+  asdMemoryAlloc(0x100,0x100,0,0x50,1);
   piVar2[1] = temp_v1;
   FUN_0034791c(piVar2);
   (**(romwright_code **)(*piVar2 + 0x10))(piVar2);
   temp_v0 = FUN_002a7bc0();
-  FUN_002bfe28(piVar2 + 6,temp_v0);
+  mtx44Copy(piVar2 + 6,temp_v0);
   FUN_0023b49c(piVar2,param_2,*(unsigned int *)(piVar2[0x18] + 0x1c));
   (**(romwright_code **)(*piVar1 + 0x14))
             (piVar1,*(unsigned int *)(param_1 + 0x34),*(unsigned int *)(param_1 + 0x38),

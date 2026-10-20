@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00157558(int);
 int FUN_00164168(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00168770(void);
 int FUN_00168e00(int, int, int, int);
 int FUN_001834a4(...);
@@ -21,14 +21,14 @@ typedef struct {
 } void_stack;
 
 extern int DAT_0057f574; /* 0x57f574 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00164168. */
-extern int FUN_001641e8(void);
+extern int btlMainIsRunning(void);
 extern int FUN_001654d8(int);
 extern int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168770. */
 /* Supplied declaration required: FUN_00168e00. */
 extern int FUN_001692ac(unsigned int, unsigned int);
@@ -65,8 +65,8 @@ char FUN_00155ca8(void)
   if (temp_v10 || temp_v0 == '\0') {
     return temp_v0;
   }
-  FUN_00157558(DAT_0059dbb4);
-  temp_v3 = DAT_0059dbb4;
+  FUN_00157558(g_renderCtx);
+  temp_v3 = g_renderCtx;
   temp_v2 = FUN_001692ac(1,0);
   piVar11 = (int *)(temp_v3 + 0x1258);
   temp_v6 = *piVar11;
@@ -80,11 +80,11 @@ char FUN_00155ca8(void)
   temp_v2 = FUN_001654d8(temp_v1 + 0x54);
   temp_v12 = 0.25f;
   temp_v11 = temp_v12;
-  FUN_001879d0(DAT_0059dbb4);
+  FUN_001879d0(g_renderCtx);
   temp_v2 = temp_v2 + (int)temp_v12;
   temp_v3 = FUN_001654e4(temp_v1 + 0x54);
   temp_v6 = FUN_001654d8(temp_v1 + 0xe0);
-  FUN_001879d0(DAT_0059dbb4);
+  FUN_001879d0(g_renderCtx);
   temp_v6 = temp_v6 + (int)temp_v11;
   if (*(char *)(temp_v1 + 0x32d) != '\0') {
     temp_v2 = FUN_001654d8(temp_v1 + 0x54);
@@ -131,7 +131,7 @@ char FUN_00155ca8(void)
             }
           }
           else {
-            temp_v7 = FUN_001641e8();
+            temp_v7 = btlMainIsRunning();
             if (temp_v7 != 0) {
               temp_v5 = 17000;
             }
@@ -139,21 +139,21 @@ char FUN_00155ca8(void)
         }
       }
     }
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,0x1b,temp_v5,temp_v2 + temp_v6 + 2,0,0x15);
-    FUN_001677c0();
+    efctSetSpeed();
   }
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_001835b4(2,8,0x87,temp_v2,temp_v3,0x15);
   FUN_001835b4(2,8,0x88,temp_v2,temp_v3,0x15);
-  FUN_001677c0();
+  efctSetSpeed();
   if (*(char *)(temp_v1 + 0x31) != '\0') {
     temp_v7 = FUN_001834a4(8,0x87);
-    FUN_001677c0();
-    temp_v6 = DAT_0059dbb4;
+    efctSetSpeed();
+    temp_v6 = g_renderCtx;
     temp_v10 = 0;
-    if (*(int *)(DAT_0059dbb4 + *(int *)(DAT_0059dbb4 + 0x1318) * 4 + 0x1320) == 3) {
-      temp_v9 = DAT_0059dbb4 + 0x1318 + *(int *)(DAT_0059dbb4 + 0x1318) * 4;
+    if (*(int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1318) * 4 + 0x1320) == 3) {
+      temp_v9 = g_renderCtx + 0x1318 + *(int *)(g_renderCtx + 0x1318) * 4;
       temp_v8 = *(int *)(temp_v9 + 8);
       *(unsigned int *)(temp_v9 + 8) = 0;
       if (*(char *)(temp_v6 + 0x1330) != '\0' || temp_v8 != 0) {
@@ -179,9 +179,9 @@ char FUN_00155ca8(void)
                      *(short *)(temp_v6 + 10) + temp_v3,0xc9,6,0);
       }
     }
-    temp_v6 = DAT_0059dbb4;
+    temp_v6 = g_renderCtx;
     if (temp_v10) {
-      piVar11 = (int *)(DAT_0059dbb4 + 0x1318);
+      piVar11 = (int *)(g_renderCtx + 0x1318);
       temp_v7 = piVar11[*piVar11 + 2];
       piVar11[*piVar11 + 2] = 3;
       if (*(char *)(temp_v6 + 0x1330) != '\0' || temp_v7 != 3) {
@@ -190,9 +190,9 @@ char FUN_00155ca8(void)
       }
     }
     FUN_00168770();
-    FUN_001677c0();
+    efctSetSpeed();
   }
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_001835b4(2,8,0x86,temp_v2,temp_v3,0x1f);
   temp_v6 = *(int *)(temp_v1 + 0x20);
   if (temp_v6 != 0) {
@@ -217,9 +217,9 @@ char FUN_00155ca8(void)
   else {
     FUN_001835b4(2,8,0x102,temp_v2,temp_v3,0x1f);
   }
-  FUN_001677c0();
-  temp_v1 = DAT_0059dbb4;
-  piVar11 = (int *)(DAT_0059dbb4 + 0x1258);
+  efctSetSpeed();
+  temp_v1 = g_renderCtx;
+  piVar11 = (int *)(g_renderCtx + 0x1258);
   temp_v3 = *piVar11;
   temp_v2 = piVar11[temp_v3 + 2];
   *piVar11 = temp_v3 - 1;

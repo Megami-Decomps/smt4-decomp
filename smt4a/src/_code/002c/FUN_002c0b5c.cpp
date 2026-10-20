@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_004bb200(unsigned int, int);
 
-extern int DAT_0057f390; /* 0x57f390 */
+extern int g_cecProcess; /* 0x57f390 */
 
 /* Supplied declaration required: FUN_004bb200. */
 
@@ -18,8 +18,8 @@ unsigned int FUN_002c0b5c(int param_1)
   unsigned int temp_v0;
   
   temp_v0 = 0;
-  if (DAT_0057f390 != 0 && param_1 != 0) {
-    temp_v0 = *(unsigned int *)(DAT_0057f390 + 4);
+  if (g_cecProcess != 0 && param_1 != 0) {
+    temp_v0 = *(unsigned int *)(g_cecProcess + 4);
     FUN_004bb200(temp_v0,param_1);
   }
   return temp_v0;

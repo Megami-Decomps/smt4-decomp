@@ -33,7 +33,7 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern unsigned int FUN_001633a0(unsigned int);
 /* Supplied declaration required: FUN_003f0e20. */
 extern int FUN_004c52ec(int);
@@ -61,7 +61,7 @@ unsigned int FUN_004c1114(unsigned int param_1,int param_2)
   unsigned int temp_v14;
   unsigned int temp_v15;
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   temp_v1 = temp_v0;
   FUN_003f0e20(temp_v0,param_1);
   temp_v5 = 0.0f;
@@ -99,7 +99,7 @@ unsigned int FUN_004c1114(unsigned int param_1,int param_2)
     temp_v3 = 0x21;
   }
   temp_v6 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 0x270),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   FUN_003f0e20(temp_v1,param_1);
   temp_v2 = 0;
   if (temp_v1 != 0) {
@@ -163,7 +163,7 @@ unsigned int FUN_004c1114(unsigned int param_1,int param_2)
       }
     }
     else {
-      temp_v1 = FUN_0014aa78();
+      temp_v1 = btlGetMainState();
       FUN_003f0e20(temp_v1,param_1);
       if (temp_v1 != 0) {
         temp_v1 = *(int *)(temp_v1 + temp_v3 * 4 + 0x74);

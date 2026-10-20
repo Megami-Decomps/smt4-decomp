@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002a60cc(unsigned int, unsigned int, unsigned int);
 int FUN_002ae898(unsigned int);
 
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_002a60cc. */
 /* Supplied declaration required: FUN_002ae898. */
@@ -19,7 +19,7 @@ void FUN_002a86e4(int param_1)
 /* irregular: 2 native warning(s); review required */
   if (*(int *)(param_1 + 0x80) != 0) {
     FUN_002ae898(*(unsigned int *)(param_1 + 0x10));
-    FUN_002a60cc(DAT_00433158,*(unsigned int *)(param_1 + 0x10),*(unsigned int *)(param_1 + 0x84));
+    FUN_002a60cc(g_aocSystem,*(unsigned int *)(param_1 + 0x10),*(unsigned int *)(param_1 + 0x84));
     *(unsigned int *)(param_1 + 0x80) = 0;
     *(unsigned int *)(param_1 + 0x84) = 0xffffffff;
   }

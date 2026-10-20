@@ -18,7 +18,7 @@ extern int FUN_001801a4(void);
 extern int FUN_0019c6bc(unsigned int);
 extern int FUN_001ab854(void);
 /* Supplied declaration required: FUN_001aba54. */
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 extern int FUN_0033896c(void);
 
 
@@ -67,7 +67,7 @@ void FUN_0023f788(int param_1)
           temp_v2 = FUN_001ab854();
         }
         else {
-          temp_v2 = FUN_002919a4();
+          temp_v2 = btlMainGetUnk14();
         }
         if (temp_v2 == 0) goto LAB_0023f8c4;
       }

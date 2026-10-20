@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_002bc0e0(void);
-int FUN_002c43b4(unsigned int, int);
+int jobStop(unsigned int, int);
 int FUN_002c58c8(int);
-int FUN_002c5914(int);
+int asdTMTexTableLoadTmx(int);
 
 /* Supplied declaration required: FUN_002bc0e0. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_002c58c8. */
-/* Supplied declaration required: FUN_002c5914. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 
 
 unsigned int FUN_001251dc(unsigned int *param_1)
@@ -25,11 +25,11 @@ unsigned int FUN_001251dc(unsigned int *param_1)
   temp_v0 = param_1[2];
   if (temp_v0 != 0) {
     if ((temp_v0 != 1) && (temp_v0 == 99)) {
-      FUN_002c43b4(*param_1,0);
+      jobStop(*param_1,0);
     }
   }
   else {
-    FUN_002c5914(0);
+    asdTMTexTableLoadTmx(0);
     FUN_002c58c8(0);
     FUN_002bc0e0();
     param_1[2] = param_1[2] + 1;

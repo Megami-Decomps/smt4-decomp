@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0027e928(void);
+extern int btlUnitGet(void);
 
 
 void FUN_00229998(int *param_1)
@@ -36,7 +36,7 @@ void FUN_00229998(int *param_1)
     puVar7 = puVar7 + 0xa2;
     psVar5 = psVar5 + 0x144;
   } while (temp_v3 != 0);
-  temp_v1 = FUN_0027e928();
+  temp_v1 = btlUnitGet();
   *(unsigned char *)(aiStack_1d0[temp_v2] + temp_v1 + 0x38) = 1;
   return;
 }

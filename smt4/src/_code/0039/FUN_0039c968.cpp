@@ -1,32 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039c968` (_code @ 0x39c968, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bd8e8(int, int, int);
-int FUN_002beed0(int, int, int, int, int, int, float);
+typedef struct Dialog {
+    /* 0x000 */ u8 unk000[0x5F8];
+    /* 0x5F8 */ u8 resource[0x48C];
+    /* 0xA84 */ u8 unkA84;
+    /* 0xA85 */ u8 active;
+    /* 0xA86 */ u8 unkA86;
+    /* 0xA87 */ u8 unkA87;
+    /* 0xA88 */ u8 window[1];
+} Dialog;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+int timerStart(void *window, int arg1, int arg2);
+int FUN_002beed0(void *window, int arg1, int arg2, int arg3, void *resource, int arg5, float scale);
 
-/* Supplied declaration required: FUN_002bd8e8. */
-/* Supplied declaration required: FUN_002beed0. */
-
-
-void FUN_0039c968(int param_1)
-
+/* Activates the dialog and opens its window (resource at 0x5F8, scale 1.0). */
+void FUN_0039c968(Dialog *dialog)
 {
-/* irregular: 2 native warning(s); review required */
-  *(unsigned char *)(param_1 + 0xa85) = 1;
-  *(unsigned char *)(param_1 + 0xa84) = 0;
-  *(unsigned char *)(param_1 + 0xa86) = 0;
-  FUN_002beed0(param_1 + 0xa88,0x1c,0x111a,0x1c,param_1 + 0x5f8,0x15,1.0f);
-  FUN_002bd8e8(param_1 + 0xa88,5,0);
-  return;
+    dialog->active = 1;
+    dialog->unkA84 = 0;
+    dialog->unkA86 = 0;
+    FUN_002beed0(dialog->window, 0x1c, 0x111a, 0x1c, dialog->resource, 0x15, 1.0f);
+    timerStart(dialog->window, 5, 0);
 }
 
 } /* extern "C" */

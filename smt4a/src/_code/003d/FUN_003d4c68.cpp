@@ -21,7 +21,7 @@ extern unsigned int DAT_00619540; /* 0x619540 */
 extern unsigned int DAT_00619544; /* 0x619544 */
 extern unsigned int DAT_00619558; /* 0x619558 */
 
-extern int FUN_00180008(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: FUN_003d5520. */
 
 
@@ -31,13 +31,13 @@ void FUN_003d4c68(unsigned int param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_00180008(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
-    temp_v0 = FUN_00180008(1);
+    temp_v0 = jyoucyuGetTableEntry(1);
     if ((temp_v0 == 0) &&
        ((((DAT_00619538 & 2) != 0 && ((DAT_00619538 & 0x20) != 0)) ||
         ((DAT_00619558 & 2) != 0 && (DAT_00619558 & 0x20) != 0)))) {
-      temp_v0 = FUN_00180008(1);
+      temp_v0 = jyoucyuGetTableEntry(1);
       if (temp_v0 == 0) {
         if ((DAT_00619538 & 2) != 0) {
           if ((DAT_00619538 & 0x20) != 0) {
@@ -65,7 +65,7 @@ void FUN_003d4c68(unsigned int param_1)
       }
     }
     else {
-      temp_v0 = FUN_00180008(1);
+      temp_v0 = jyoucyuGetTableEntry(1);
       if (temp_v0 == 0) {
         FUN_003d5520(param_1,0,0x3c);
         return;

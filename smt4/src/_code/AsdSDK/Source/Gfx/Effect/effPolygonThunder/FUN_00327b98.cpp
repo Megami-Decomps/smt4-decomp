@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(unsigned int, double);
 int FUN_0024505c(int, unsigned char *, int, int);
-int FUN_002c32a0(int, int, int, unsigned int, int, int);
+int memAlloc(int, int, int, unsigned int, int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -41,7 +41,7 @@ extern unsigned char DAT_0047372c; /* 0x47372c */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_0024505c. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 
 
 unsigned int * FUN_00327b98(int param_1)
@@ -78,7 +78,7 @@ unsigned int * FUN_00327b98(int param_1)
   temp_v19 = (unsigned int)((unsigned long long)in_d8 >> 0x20);
   temp_v0 = *(unsigned int *)(param_1 + 0x38);
   puVar2 = (unsigned int *)0x10000;
-  FUN_002c32a0(0x10000,0x100,0,temp_v0 * 0xc + 4,0x10,1);
+  memAlloc(0x10000,0x100,0,temp_v0 * 0xc + 4,0x10,1);
   *puVar2 = (unsigned int)(puVar2 + 1);
   temp_v1 = *(unsigned int *)(param_1 + 0x3c);
   if (temp_v1 < 4) {

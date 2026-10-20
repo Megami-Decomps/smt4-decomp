@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00162790(...);
 int FUN_001654e4(...);
-int FUN_001677c0(...);
+int efctSetSpeed(...);
 int FUN_001834a4(...);
 int FUN_0018408c(...);
 int FUN_002f67c4(...);
@@ -30,7 +30,7 @@ extern int DAT_00588fe8; /* 0x588fe8 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_001654e4. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_0018408c. */
 extern int FUN_00284140(int);
@@ -73,7 +73,7 @@ void FUN_00289418(int param_1,int param_2)
       temp_v10 = 0xf5ff9fff;
     }
     FUN_00334c6c(*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,temp_v9);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_00100388(temp_v11,"撂躂蒂＀");
     puVar7 = temp_v11;
     FUN_0018408c(puVar7,3);
@@ -85,7 +85,7 @@ void FUN_00289418(int param_1,int param_2)
     VectorSignedToFloat(param_1 + (int)temp_v0 + ((int)temp_v1 - (int)puVar7) / 2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(3,temp_v10,temp_v11);
-    FUN_001677c0();
+    efctSetSpeed();
   }
   else {
     FUN_00334ad0(param_1,param_2);

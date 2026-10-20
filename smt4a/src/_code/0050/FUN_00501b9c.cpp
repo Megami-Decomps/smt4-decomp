@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int, int);
+int sysMemClear(unsigned int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 unsigned int FUN_00501b9c(int *param_1,unsigned int param_2,unsigned int param_3)
@@ -26,7 +26,7 @@ unsigned int FUN_00501b9c(int *param_1,unsigned int param_2,unsigned int param_3
   int temp_v1;
   
   temp_v1 = 0;
-  FUN_002e6354(param_2,0x60);
+  sysMemClear(param_2,0x60);
   temp_v0 = (**(romwright_code **)(*param_1 + 0x34))(param_1,param_2,0x60,&temp_v1,param_3,2,0x12);
   if (((temp_v0 & 0x3ff) != 0x3f7) && (temp_v1 == 0)) {
     temp_v0 = 0xc8810bef;

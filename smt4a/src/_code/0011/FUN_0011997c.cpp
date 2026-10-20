@@ -22,9 +22,9 @@ extern unsigned char LAB_00119a8c; /* 0x119a8c */
 extern unsigned char DAT_0055a1e4; /* 0x55a1e4 */
 
 extern int FUN_0011076c(int);
-extern int FUN_002e3390(int);
+extern int wstrlen(int);
 /* Supplied declaration required: FUN_002e342c. */
-extern int FUN_002e7634(int);
+extern int strInit(int);
 extern unsigned int FUN_002e784e(int, unsigned char *, unsigned int);
 extern int FUN_002e9300(int, unsigned int);
 extern int FUN_002e9520(unsigned int *, unsigned int);
@@ -64,7 +64,7 @@ int FUN_0011997c(fn_0011997c_arg0 *param_1,unsigned int param_2,unsigned int par
   temp_v0 = FUN_002fafd8(temp_v0 + 0x60,0);
   temp_v0 = FUN_002e9ff4(temp_v0 + 0x78);
   temp_v0 = FUN_002e9ff4(temp_v0 + 0xc);
-  temp_v0 = FUN_002e7634(temp_v0 + 0xc);
+  temp_v0 = strInit(temp_v0 + 0xc);
   *(unsigned int *)(temp_v0 + 0x20) = param_3;
   temp_v0 = FUN_002ea974(temp_v0 + 0x24);
   temp_v0 = FUN_0011076c(temp_v0 + 0x6c);
@@ -81,10 +81,10 @@ int FUN_0011997c(fn_0011997c_arg0 *param_1,unsigned int param_2,unsigned int par
   *(unsigned int *)(temp_v0 - 0x1a8) = 4;
   *(unsigned int *)(temp_v0 - 0x1a4) = 0;
   if (param_6 != 0) {
-    temp_v1 = FUN_002e3390(param_6);
+    temp_v1 = wstrlen(param_6);
     temp_v2 = FUN_002e784e(temp_v1 + 1,&LAB_00119a8c,0);
     *(unsigned int *)(temp_v0 - 0x194) = temp_v2;
-    temp_v1 = FUN_002e3390(param_6);
+    temp_v1 = wstrlen(param_6);
     if (temp_v1 != 0) {
       FUN_002e342c(*(unsigned char **)(temp_v0 - 0x194),param_6);
     }

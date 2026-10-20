@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0029212c(int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_0029c94c(unsigned int);
 int FUN_0029da34(unsigned int, int, int, unsigned int);
 int FUN_0029ee6c(unsigned int, int);
@@ -24,8 +24,8 @@ extern unsigned int FUN_002177a4(unsigned int);
 extern unsigned int FUN_0028d24c(void);
 extern unsigned int FUN_0028d2e8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0029212c. */
-extern int FUN_00292f28(int);
-/* Supplied declaration required: FUN_002939f4. */
+extern int padIsButtonDown(int);
+/* Supplied declaration required: btlGetMainState. */
 extern int FUN_00297ca4(int, unsigned int);
 /* Supplied declaration required: FUN_0029c94c. */
 /* Supplied declaration required: FUN_0029da34. */
@@ -76,7 +76,7 @@ void FUN_00292f4c(int param_1)
         temp_v6[5] = 5;
         temp_v0 = 0;
         do {
-          temp_v1 = FUN_00292f28(temp_v0 + 0x2e);
+          temp_v1 = padIsButtonDown(temp_v0 + 0x2e);
           if (temp_v1 != 0) {
             if (temp_v4 == temp_v3) {
               temp_v2 = FUN_002177a4(temp_v6[temp_v0] & 0xff);
@@ -91,13 +91,13 @@ void FUN_00292f4c(int param_1)
       }
     }
     else {
-      temp_v0 = FUN_002939f4();
+      temp_v0 = btlGetMainState();
       if ((*(unsigned int *)(temp_v0 + 0x44a8) & 0x40) != 0) {
-        temp_v2 = FUN_002939f4();
+        temp_v2 = btlGetMainState();
         temp_v3 = FUN_0028d2e8(temp_v2,temp_v3);
       }
       else {
-        FUN_002939f4();
+        btlGetMainState();
         temp_v3 = FUN_0028d24c();
       }
       if (temp_v3 != 0) {
@@ -115,7 +115,7 @@ void FUN_00292f4c(int param_1)
       FUN_0029da34(*puVar6,2,*(unsigned short *)(temp_v0 + 0x46),temp_v2);
       return;
     }
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     if ((*(unsigned int *)(temp_v0 + 0x44a8) & 0x40) != 0) {
       FUN_0029c94c(temp_v3);
       return;
@@ -153,7 +153,7 @@ void FUN_00292f4c(int param_1)
     else {
       temp_v0 = -1;
     }
-    temp_v1 = FUN_002939f4();
+    temp_v1 = btlGetMainState();
     if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x40) != 0) {
       temp_v3 = temp_v3 + temp_v0 + 1;
     }

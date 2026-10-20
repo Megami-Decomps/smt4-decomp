@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0024dc64(void);
 int FUN_00262a38(void);
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 
 /* Supplied declaration required: FUN_0024dc64. */
 /* Supplied declaration required: FUN_00262a38. */
@@ -20,8 +20,8 @@ void FUN_0022a304(int param_1)
   *(unsigned int *)(param_1 + 0x2f98) = 0;
   FUN_0024dc64();
   FUN_00262a38();
-  if (DAT_004342c8 != 0) {
-    *(unsigned int *)(DAT_004342c8 + 0x634) = *(unsigned int *)(DAT_004342c8 + 0x634) & 0xf7ffffff;
+  if (g_btlMain != 0) {
+    *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) & 0xf7ffffff;
   }
   return;
 }

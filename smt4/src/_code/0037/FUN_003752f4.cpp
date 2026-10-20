@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern unsigned int *DAT_004652a0; /* 0x4652a0 */
+extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
 extern unsigned int DAT_004720e0; /* 0x4720e0 */
 extern unsigned int DAT_004720e4; /* 0x4720e4 */
 extern unsigned int DAT_004720e8; /* 0x4720e8 */
@@ -261,11 +261,11 @@ void FUN_003752f4(unsigned int *param_1,int *param_2)
   }
   temp_v1 = DAT_004720e8;
   temp_v0 = DAT_004720e4;
-  *DAT_004652a0 = DAT_004720e0;
-  DAT_004652a0[1] = 0x802f01d0;
-  DAT_004652a0[2] = temp_v0;
-  DAT_004652a0[3] = temp_v1;
-  DAT_004652a0 = DAT_004652a0 + 4;
+  *g_commandBufferCursor = DAT_004720e0;
+  g_commandBufferCursor[1] = 0x802f01d0;
+  g_commandBufferCursor[2] = temp_v0;
+  g_commandBufferCursor[3] = temp_v1;
+  g_commandBufferCursor = g_commandBufferCursor + 4;
   return;
 }
 

@@ -10,8 +10,8 @@ int FUN_0010edbc(void);
 int FUN_0011a324(int);
 int FUN_002c1d78(int);
 int FUN_002c1dd8(int);
-int FUN_002c4938(unsigned char *, int);
-int FUN_002c564c(int);
+int memClear(unsigned char *, int);
+int jyoucyuGetTableEntry(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -27,8 +27,8 @@ extern unsigned char DAT_004c5404; /* 0x4c5404 */
 /* Supplied declaration required: FUN_0011a324. */
 /* Supplied declaration required: FUN_002c1d78. */
 /* Supplied declaration required: FUN_002c1dd8. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 
 
 void FUN_00105ef8(void)
@@ -37,7 +37,7 @@ void FUN_00105ef8(void)
 /* irregular: 8 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002c564c(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
     FUN_002c1dd8(0);
     FUN_002c1d78(0x6000000);
@@ -49,8 +49,8 @@ void FUN_00105ef8(void)
     FUN_0010e8e8();
     FUN_0010edbc();
     FUN_0011a324((*(unsigned char *)((unsigned char *)&DAT_0044e0b0 + 0x1)));
-    FUN_002c4938(&DAT_004c5404,0x80);
-    FUN_002c564c(1);
+    memClear(&DAT_004c5404,0x80);
+    jyoucyuGetTableEntry(1);
     return;
   }
   return;

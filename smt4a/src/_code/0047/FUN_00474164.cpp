@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(unsigned char [128], unsigned char *, int, unsigned char *);
-int FUN_002e6354(unsigned char [128], int);
+int sysMemClear(unsigned char [128], int);
 int FUN_00471fec(unsigned int, unsigned char [128], int, int, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -15,10 +15,10 @@ typedef struct {
 
 extern unsigned char LAB_004741d4; /* 0x4741d4 */
 extern unsigned char LAB_004741e4; /* 0x4741e4 */
-extern unsigned int DAT_0057027c; /* 0x57027c */
+extern unsigned int g_aocDisplay; /* 0x57027c */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00471fec. */
 
 
@@ -28,14 +28,14 @@ void FUN_00474164(int param_1)
 /* irregular: 3 native warning(s); review required */
   unsigned char temp_v0 [128];
   
-  FUN_002e6354(temp_v0,0x80);
+  sysMemClear(temp_v0,0x80);
   *(unsigned int *)(param_1 + 0x38) = 0;
   *(unsigned int *)(param_1 + 0x3c) = 0;
   *(unsigned int *)(param_1 + 0x40) = 0;
   *(unsigned char *)(param_1 + 0x44) = 0;
   *(unsigned char *)(param_1 + 0x45) = 0;
   FUN_00100388(temp_v0,&LAB_004741e4,param_1 + 0x24,&LAB_004741d4);
-  FUN_00471fec(DAT_0057027c,temp_v0,param_1 + 0x48,1,0x80,param_1 + 0x38);
+  FUN_00471fec(g_aocDisplay,temp_v0,param_1 + 0x48,1,0x80,param_1 + 0x38);
   return;
 }
 

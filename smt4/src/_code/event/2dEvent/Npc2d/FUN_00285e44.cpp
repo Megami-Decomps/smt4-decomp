@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_002459d8(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c5788(...);
+int memClear(...);
+int asdMemAlloc(...);
+int asdProcessCreateSimple(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,9 +20,9 @@ extern int FUN_002db92c(...); /* 0x2db92c */
 /* Supplied declaration required: FUN_002459d8. */
 extern int FUN_00294090(int, unsigned int);
 extern int FUN_002c1d5c(void);
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 
 
 void FUN_00285e44(int param_1,int param_2,int param_3)
@@ -33,8 +33,8 @@ void FUN_00285e44(int param_1,int param_2,int param_3)
   int temp_v0;
   
   piVar1 = (int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x98,1);
-  FUN_002c4938();
+  asdMemAlloc(0x100,0x100,0,0x98,1);
+  memClear();
   piVar1[8] = 0x3f800000;
   piVar1[9] = 0;
   piVar1[10] = 0x3e800000;
@@ -77,7 +77,7 @@ void FUN_00285e44(int param_1,int param_2,int param_3)
   }
   piVar1[0xe] = temp_v0;
   piVar1[6] = 0x3ea8f5c3;
-  FUN_002c5788("EVE_2dTex",2,0,0,FUN_001dfc64,FUN_002db92c,piVar1);
+  asdProcessCreateSimple("EVE_2dTex",2,0,0,FUN_001dfc64,FUN_002db92c,piVar1);
   return;
 }
 

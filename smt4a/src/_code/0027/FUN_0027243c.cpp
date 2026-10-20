@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0015155c(...);
+int taskCreateDraw(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern int FUN_0024b718(...); /* 0x24b718 */
 extern unsigned char LAB_0027248c; /* 0x27248c */
 extern int FUN_002dec74(...); /* 0x2dec74 */
 
-/* Supplied declaration required: FUN_0015155c. */
+/* Supplied declaration required: taskCreateDraw. */
 
 
 void FUN_0027243c(unsigned int *param_1)
@@ -27,7 +27,7 @@ void FUN_0027243c(unsigned int *param_1)
   unsigned char *puVar1;
   
   puVar1 = &LAB_0027248c;
-  FUN_0015155c(&LAB_0027248c,4,0,0,FUN_0024b718,FUN_002dec74,param_1,*param_1);
+  taskCreateDraw(&LAB_0027248c,4,0,0,FUN_0024b718,FUN_002dec74,param_1,*param_1);
   param_1[0x11] = (unsigned int)puVar1;
   return;
 }

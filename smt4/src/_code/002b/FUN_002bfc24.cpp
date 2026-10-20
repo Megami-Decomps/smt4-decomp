@@ -30,7 +30,7 @@ extern signed char DAT_004c581a; /* 0x4c581a */
 /* Supplied declaration required: FUN_002bf694. */
 extern int FUN_002c1d5c(void);
 /* Supplied declaration required: FUN_002c3940. */
-extern int FUN_002c564c(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 unsigned int FUN_002bfc24(unsigned int param_1,unsigned int param_2,int param_3,unsigned char param_4)
@@ -49,7 +49,7 @@ unsigned int FUN_002bfc24(unsigned int param_1,unsigned int param_2,int param_3,
   FUN_002c3940(temp_v2,0x40);
   FUN_002c3940(temp_v3,0x40);
   FUN_002c3940(temp_v4,0x40);
-  temp_v0 = FUN_002c564c(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if ((((temp_v0 != 0) || (temp_v0 = FUN_002c1d5c(), temp_v0 != 0)) || (DAT_004c581a != '\0')) ||
      (param_3 == 0)) {
     return 0xffffffff;

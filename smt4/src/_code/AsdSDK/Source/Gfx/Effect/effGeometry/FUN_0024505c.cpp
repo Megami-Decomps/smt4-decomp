@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002693b4(int, int, int, int);
-int FUN_002c222c(int, int);
-int FUN_002c32a0(int, int, int, int, int, int);
+int asdOperatorNew(int, int);
+int memAlloc(int, int, int, int, int, int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -16,8 +16,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002693b4. */
 extern int FUN_002693e4(void);
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: memAlloc. */
 
 
 unsigned short * FUN_0024505c(int param_1,short *param_2,int param_3,unsigned short param_4)
@@ -38,9 +38,9 @@ unsigned short * FUN_0024505c(int param_1,short *param_2,int param_3,unsigned sh
   temp_v3 = param_3 * 2 - 2;
   temp_v5 = (param_1 + 1) * param_3;
   puVar5 = (unsigned short *)0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0x58,0x10,1);
+  memAlloc(0x10000,0x100,0,0x58,0x10,1);
   temp_v4 = 0x7e8;
-  FUN_002c222c(0x7e8,param_3);
+  asdOperatorNew(0x7e8,param_3);
   if (temp_v4 == 0) {
     temp_v4 = 0;
   }

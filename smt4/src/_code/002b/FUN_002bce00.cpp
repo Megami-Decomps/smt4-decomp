@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00131780(unsigned int, unsigned int);
 
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_00131780. */
 
@@ -15,7 +15,7 @@ void FUN_002bce00(unsigned int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_00131780(DAT_00433158,param_1);
+  FUN_00131780(g_aocSystem,param_1);
   return;
 }
 

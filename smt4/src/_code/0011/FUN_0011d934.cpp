@@ -11,7 +11,7 @@ extern int DAT_00465664; /* 0x465664 */
 extern int DAT_004656b0; /* 0x4656b0 */
 
 /* Supplied declaration required: FUN_002c131c. */
-extern int FUN_002c1364(unsigned int *, int, unsigned int, unsigned int);
+extern int asdModelForwardChecked(unsigned int *, int, unsigned int, unsigned int);
 extern unsigned int FUN_002c30c4(void);
 
 
@@ -31,7 +31,7 @@ int FUN_0011d934(void)
   }
   else {
     temp_v1 = FUN_002c30c4();
-    temp_v0 = FUN_002c1364((unsigned int *)&DAT_004656b0,temp_v0,temp_v1,0);
+    temp_v0 = asdModelForwardChecked((unsigned int *)&DAT_004656b0,temp_v0,temp_v1,0);
   }
   if (temp_v0 < 0) {
     FUN_002c131c(temp_v0,0x11d98c);

@@ -9,7 +9,7 @@ int FUN_002c3530(int, int);
 int FUN_002c35b0(void);
 int FUN_002c3a14(int);
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002bdb44. */
 /* Supplied declaration required: FUN_002c3530. */
@@ -24,8 +24,8 @@ unsigned int FUN_00103ddc(void)
   FUN_002c35b0();
   FUN_002bdb44();
   FUN_002c3530(2,0);
-  *(unsigned int *)(DAT_0044ea00 + 0x528) = 2;
-  FUN_002c3a14(DAT_0044ea00);
+  *(unsigned int *)(g_titleScene + 0x528) = 2;
+  FUN_002c3a14(g_titleScene);
   return 0;
 }
 

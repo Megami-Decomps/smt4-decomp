@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00180008(int);
+int jyoucyuGetTableEntry(int);
 int FUN_005004a8(int *, int, int [2], unsigned int [192], int, int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -14,9 +14,9 @@ typedef struct {
     unsigned int sp330; /* 0x330: local_330 */
 } param_2_stack;
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
-/* Supplied declaration required: FUN_00180008. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 extern int FUN_001a7470(unsigned int *);
 extern int FUN_001a747c(void);
 extern unsigned char *FUN_001d25a0(unsigned int, unsigned int);
@@ -51,7 +51,7 @@ void FUN_0046fb60(unsigned int param_1,int param_2)
     *puVar1 = 100;
     temp_v0 = FUN_001d25ec(puVar1 + 4);
     if (temp_v0 != -0x36bec6eb) {
-      if ((*(unsigned int *)(DAT_00570260 + 0x754) & 0x100) == 0) {
+      if ((*(unsigned int *)(g_aocMain + 0x754) & 0x100) == 0) {
         temp_v1 = 0x96;
       }
       else {
@@ -61,7 +61,7 @@ void FUN_0046fb60(unsigned int param_1,int param_2)
       *puVar1 = 0x6a;
       return;
     }
-    FUN_00180008(0);
+    jyoucyuGetTableEntry(0);
   }
   else {
     *(unsigned int *)(param_2 + 0x310) = 0;

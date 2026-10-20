@@ -51,7 +51,7 @@ typedef struct {
 
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 extern int DAT_00581038; /* 0x581038 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f1614; /* 0x5f1614 */
 extern signed char DAT_005f161c; /* 0x5f161c */
 extern int DAT_005f1638; /* 0x5f1638 */
@@ -249,10 +249,10 @@ unsigned int FUN_002332f4(void)
             }
             temp_v12 = DAT_005f19d8;
             FUN_00384830();
-            if (*(int *)(DAT_00581288 + 0x1d0) == 10) {
+            if (*(int *)(g_lmapScene + 0x1d0) == 10) {
               temp_v4 = FUN_00325340();
               if (temp_v4 != 0) {
-                temp_v9 = *(float *)(DAT_00581288 + 0x1c);
+                temp_v9 = *(float *)(g_lmapScene + 0x1c);
                 FUN_002b5cb4();
                 temp_v10 = DAT_005f19d8;
                 FUN_002b5cb4();
@@ -381,7 +381,7 @@ LAB_00233a04:
         break;
       case 6:
         if (*(short *)(temp_v5 + 0xac) == 2) {
-          *(unsigned char *)(DAT_00581288 + 0x6c) = 0;
+          *(unsigned char *)(g_lmapScene + 0x6c) = 0;
           DAT_005f1614 = 1;
           DAT_005f19eb = 1;
         }

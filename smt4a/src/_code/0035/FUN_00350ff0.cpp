@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00222290(void);
+int effTlpCreate(void);
 int FUN_00222434(void);
 
-/* Supplied declaration required: FUN_00222290. */
+/* Supplied declaration required: effTlpCreate. */
 /* Supplied declaration required: FUN_00222434. */
 
 
@@ -18,7 +18,7 @@ void FUN_00350ff0(int param_1,unsigned int param_2)
   if (*(int *)(param_1 + 0x48) != 0) {
     FUN_00222434();
   }
-  FUN_00222290();
+  effTlpCreate();
   *(unsigned int *)(param_1 + 0x48) = param_2;
   return;
 }

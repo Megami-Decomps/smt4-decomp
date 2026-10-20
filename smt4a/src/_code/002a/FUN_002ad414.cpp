@@ -29,7 +29,7 @@ extern unsigned char LAB_002ada1c; /* 0x2ada1c */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001008a2. */
 /* Supplied declaration required: FUN_0019cac4. */
-extern unsigned int FUN_002e3390(char *);
+extern unsigned int wstrlen(char *);
 extern int FUN_003dfe2c(void);
 extern int FUN_003dfea0(unsigned char);
 /* Supplied declaration required: FUN_004bd274. */
@@ -302,7 +302,7 @@ LAB_002ad990:
   if ((temp_v5 == 0 && temp_v7 == 0) && temp_v6 == 0) {
     FUN_001008a2(param_4,&LAB_002ada1c);
   }
-  temp_v4 = FUN_002e3390(param_4);
+  temp_v4 = wstrlen(param_4);
   if (temp_v4 >= 0x66) {
     param_4[0x66] = '\0';
     param_4[0x67] = '\0';

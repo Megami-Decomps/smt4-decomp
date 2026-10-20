@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001568f8(int, int);
 int FUN_002e342c(unsigned char [132], unsigned int);
 int FUN_002e5924(int);
-int FUN_002e6354(unsigned char [132], int);
+int sysMemClear(unsigned char [132], int);
 int FUN_003e0bb8(unsigned int *, int);
 int FUN_003e1390(unsigned int *, int);
 int FUN_003ed6e8(int);
@@ -26,7 +26,7 @@ typedef struct {
     unsigned int spB8; /* 0xb8: local_b8 */
 } param_2_stack;
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 extern unsigned int DAT_00571508; /* 0x571508 */
 extern unsigned int DAT_00573878; /* 0x573878 */
 extern unsigned int DAT_0057387c; /* 0x57387c */
@@ -39,7 +39,7 @@ extern unsigned int DAT_00573894; /* 0x573894 */
 extern int FUN_00240c34(unsigned char *);
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: FUN_002e5924. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e0bb8. */
 extern int FUN_003e0f94(unsigned int *, int);
 /* Supplied declaration required: FUN_003e1390. */
@@ -70,10 +70,10 @@ void FUN_003e1454(unsigned int *param_1,int param_2)
   unsigned char temp_v6 [132];
   
   temp_v0 = 0;
-  if ((0 < *(int *)(param_2 + 0xf0)) && (temp_v1 = FUN_0046ebf0(DAT_00570280), temp_v1 != 0)) {
+  if ((0 < *(int *)(param_2 + 0xf0)) && (temp_v1 = FUN_0046ebf0(g_aocSystem), temp_v1 != 0)) {
     temp_v0 = 1;
   }
-  FUN_002e6354(temp_v6,0x80);
+  sysMemClear(temp_v6,0x80);
   temp_v2 = FUN_003efa38(param_2);
   FUN_002e342c(temp_v6,temp_v2);
   if ((!temp_v0) && (temp_v1 = FUN_00240c34(temp_v6), temp_v1 == 0)) {

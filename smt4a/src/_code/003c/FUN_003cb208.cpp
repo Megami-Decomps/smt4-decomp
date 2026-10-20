@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(unsigned int *);
+int asdMemFree(unsigned int *);
 int FUN_002ce8d8(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002ce8d8. */
 
 
@@ -33,7 +33,7 @@ void FUN_003cb208(int param_1)
     FUN_002ce8d8(*puVar1);
     puVar1 = puVar1 + 3;
   }
-  FUN_0019a5a0(puVar4);
+  asdMemFree(puVar4);
   return;
 }
 

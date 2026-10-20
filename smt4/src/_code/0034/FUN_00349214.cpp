@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002ba12c. */
@@ -37,7 +37,7 @@ void FUN_00349214(int param_1)
   unsigned long long temp_v6;
   
   temp_v5 = 0.7f;
-  FUN_002ba12c(DAT_0044ea00);
+  FUN_002ba12c(g_titleScene);
   temp_v6 = (unsigned long long)(unsigned int)(int)temp_v5;
   temp_v4 = 0;
   do {

@@ -19,11 +19,11 @@ int FUN_00211d00(void);
 int FUN_00223b84(void);
 int FUN_0026f824(int);
 int FUN_0028d9b0(void);
-int FUN_002c4c2c(int);
+int asdTMTexTableLoadSprites(int);
 int FUN_002c5620(void);
-int FUN_002c57c8(int, int);
+int asdSequenceRequest(int, int);
 int FUN_002c58c8(int, int);
-int FUN_002c5914(int, int);
+int asdTMTexTableLoadTmx(int, int);
 int FUN_002fc1a8(void);
 int FUN_00317e78(void);
 int FUN_00324a20(void);
@@ -49,11 +49,11 @@ extern unsigned char DAT_00446db4; /* 0x446db4 */
 /* Supplied declaration required: FUN_00223b84. */
 /* Supplied declaration required: FUN_0026f824. */
 /* Supplied declaration required: FUN_0028d9b0. */
-/* Supplied declaration required: FUN_002c4c2c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c5620. */
-/* Supplied declaration required: FUN_002c57c8. */
+/* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_002c58c8. */
-/* Supplied declaration required: FUN_002c5914. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_002fc1a8. */
 /* Supplied declaration required: FUN_00317e78. */
 /* Supplied declaration required: FUN_00324a20. */
@@ -120,7 +120,7 @@ unsigned int FUN_001c0404(int *param_1)
         return 0;
       }
       DAT_00446db4 = 1;
-      FUN_002c57c8(0x16,0);
+      asdSequenceRequest(0x16,0);
       return 0xffffffff;
     }
     temp_v0 = 100;
@@ -148,17 +148,17 @@ unsigned int FUN_001c0404(int *param_1)
   case 4:
     FUN_002012f0();
     FUN_0033f784();
-    FUN_002c5914(0xc,0);
-    FUN_002c5914(0x18,0);
-    FUN_002c5914(2,0);
-    FUN_002c5914(3,0);
-    FUN_002c5914(4,0);
-    FUN_002c5914(0x1f,0);
-    FUN_002c5914(0x20,0);
-    FUN_002c5914(0x26,0);
-    FUN_002c4c2c(0x32);
-    FUN_002c4c2c(0x28);
-    FUN_002c5914(0x16,0);
+    asdTMTexTableLoadTmx(0xc,0);
+    asdTMTexTableLoadTmx(0x18,0);
+    asdTMTexTableLoadTmx(2,0);
+    asdTMTexTableLoadTmx(3,0);
+    asdTMTexTableLoadTmx(4,0);
+    asdTMTexTableLoadTmx(0x1f,0);
+    asdTMTexTableLoadTmx(0x20,0);
+    asdTMTexTableLoadTmx(0x26,0);
+    asdTMTexTableLoadSprites(0x32);
+    asdTMTexTableLoadSprites(0x28);
+    asdTMTexTableLoadTmx(0x16,0);
     *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
     break;
   case 5:

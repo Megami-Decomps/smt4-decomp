@@ -33,8 +33,8 @@ typedef struct {
 
 extern int *DAT_005806a4; /* 0x5806a4 */
 extern int DAT_00581280; /* 0x581280 */
-extern int DAT_00581288; /* 0x581288 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_lmapScene; /* 0x581288 */
+extern int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f161f; /* 0x5f161f */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -122,7 +122,7 @@ void FUN_00234b30(void)
           *(unsigned int *)(temp_v5 + 4) = temp_v6 & 0xfffffffc;
         }
         if ((*(char *)(temp_v10 + 0xf40) == '\0') || (*(char *)(temp_v4 + 0xe) != '\0')) {
-          temp_v13 = *(int *)(DAT_00581288 + 0x1c);
+          temp_v13 = *(int *)(g_lmapScene + 0x1c);
           FUN_002b5cb4();
           temp_v10 = *(int *)(temp_v4 + 0x3c);
           if (temp_v10 != 0) {
@@ -165,7 +165,7 @@ void FUN_00234b30(void)
               }
             }
           }
-          if (DAT_005f15fc >= 0x65) {
+          if (g_gameState >= 0x65) {
             temp_v22[0] = (float)((unsigned long long)temp_v16 >> 0x20);
             temp_v23[0] = -1;
             temp_v22[1] = temp_v22[0];
@@ -178,7 +178,7 @@ void FUN_00234b30(void)
               temp_v2 = DAT_00581280 + temp_v11 * 0x3c;
               if (*(char *)(temp_v2 + 0xc) != '\0') {
                 *(unsigned char *)(temp_v2 + 0xd) = 0;
-                temp_v14 = *(float *)(DAT_00581288 + 0x1c);
+                temp_v14 = *(float *)(g_lmapScene + 0x1c);
                 FUN_002b5cb4();
                 if (temp_v10 < 3) {
                   if (temp_v23[0] != -1) {
@@ -271,7 +271,7 @@ void FUN_00234b30(void)
                 if (((!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) &&
                     (in_fpscr = temp_v6 | ((unsigned int)(temp_v17 <= temp_v14) << 0x1d),
                     !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) ||
-                   (*(unsigned char *)(temp_v11 + 0xd) = 0, DAT_005f15fc == 0x19)) {
+                   (*(unsigned char *)(temp_v11 + 0xd) = 0, g_gameState == 0x19)) {
                   *(unsigned char *)(temp_v11 + 0xd) = 1;
                 }
               }

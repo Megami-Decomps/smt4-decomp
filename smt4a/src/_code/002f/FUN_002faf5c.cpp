@@ -1,19 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002faf5c` (_code @ 0x2faf5c, 0x6 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Thunk: calls the object's virtual method at slot 2 with the object and the caller's argument. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+struct Object;
 
-void FUN_002faf5c(int *param_1)
+typedef struct ObjectVtbl {
+    /* 0x00 */ void *slots[2];
+    /* 0x08 */ void (*method2)(struct Object *obj, u32 arg);
+} ObjectVtbl;
 
+typedef struct Object {
+    /* 0x00 */ ObjectVtbl *vtbl;
+} Object;
+
+void FUN_002faf5c(Object *obj, u32 arg)
 {
-/* irregular: 2 native warning(s); review required */
-                    /* WARNING: Could not recover jumptable at 0x002faf60. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(romwright_code **)(*param_1 + 8))();
-  return;
+    obj->vtbl->method2(obj, arg);
 }
 
-} /* extern "C" */
+}

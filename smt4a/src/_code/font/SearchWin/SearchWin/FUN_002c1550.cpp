@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
+int jobStop(unsigned int, int);
 int FUN_001846d0(unsigned int *, int);
-int FUN_0019a5a0(unsigned int *);
+int asdMemFree(unsigned int *);
 int FUN_003d2150(int);
 
 extern unsigned int *DAT_0057f584; /* 0x57f584 */
 
 extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_003d2150. */
 
 
@@ -33,8 +33,8 @@ unsigned int FUN_002c1550(void)
     temp_v0 = FUN_00162ea4();
     puVar2 = DAT_0057f584;
     if (temp_v0 != 0) {
-      FUN_001631d0(*DAT_0057f584,0);
-      FUN_0019a5a0(puVar2);
+      jobStop(*DAT_0057f584,0);
+      asdMemFree(puVar2);
       DAT_0057f584 = (unsigned int *)0x0;
       return 1;
     }
@@ -56,8 +56,8 @@ unsigned int FUN_002c1550(void)
       else if (temp_v0 != 4) {
         return 0;
       }
-      FUN_001631d0(*DAT_0057f584,0);
-      FUN_0019a5a0(puVar2);
+      jobStop(*DAT_0057f584,0);
+      asdMemFree(puVar2);
       temp_v1 = 1;
       DAT_0057f584 = (unsigned int *)0x0;
     }

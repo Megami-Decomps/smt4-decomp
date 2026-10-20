@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c1364(...);
+int asdModelForwardChecked(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 
 extern unsigned int DAT_00473848; /* 0x473848 */
 
-/* Supplied declaration required: FUN_002c1364. */
+/* Supplied declaration required: asdModelForwardChecked. */
 extern int FUN_002c1398(void);
 extern unsigned int FUN_002c30c4(char *);
 
@@ -28,7 +28,7 @@ void nn_cec_CTR_detail_InitializeCecControl(void)
   temp_v0 = FUN_002c1398();
   if (-1 < temp_v0) {
     temp_v1 = FUN_002c30c4("cecd:u");
-    FUN_002c1364(&DAT_00473848,"cecd:u",temp_v1,0);
+    asdModelForwardChecked(&DAT_00473848,"cecd:u",temp_v1,0);
     return;
   }
   return;

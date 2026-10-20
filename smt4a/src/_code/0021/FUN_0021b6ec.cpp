@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0010063a(int *, int, int, unsigned char *);
-int FUN_002e6354(int *, int);
+int qsort(int *, int, int, unsigned char *);
+int sysMemClear(int *, int);
 int FUN_0031f208(int);
 
 extern unsigned char LAB_00221a6c; /* 0x221a6c */
 
-/* Supplied declaration required: FUN_0010063a. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: qsort. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031f208. */
 
 
@@ -28,7 +28,7 @@ void FUN_0021b6ec(int param_1)
   int iStack_d8;
   unsigned char temp_v5 [176];
   
-  FUN_002e6354(&iStack_d8,0xb0);
+  sysMemClear(&iStack_d8,0xb0);
   temp_v4 = 0;
   temp_v0 = 0;
   if (temp_v0 < *(int *)(param_1 + 0x600)) {
@@ -195,7 +195,7 @@ LAB_0021b914:
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < *(int *)(param_1 + 0x600));
   }
-  FUN_0010063a(&iStack_d8,temp_v4,8,&LAB_00221a6c);
+  qsort(&iStack_d8,temp_v4,8,&LAB_00221a6c);
   temp_v0 = 0;
   if (temp_v0 < temp_v4) {
     do {

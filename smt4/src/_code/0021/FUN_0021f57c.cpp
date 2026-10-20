@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00238f44(unsigned int, unsigned int);
+int asdCecMessageBoxClose(unsigned int, unsigned int);
 int FUN_0024ee68(int);
-int FUN_00263308(unsigned int, unsigned int, unsigned int);
+int asdCecMessageBoxOpen(unsigned int, unsigned int, unsigned int);
 int FUN_00357a24(unsigned int, unsigned char [360], int, unsigned int);
 int nn_cec_CTR_Message_Message_sub_object(unsigned char [360]);
 int nn_cec_CTR_Message_NewMessage(unsigned char [360], unsigned int, int, int, int, int, int);
@@ -16,11 +16,11 @@ typedef struct {
     unsigned int sp198; /* 0x198: local_198 */
 } param_5_stack;
 
-extern unsigned char DAT_00464fa8; /* 0x464fa8 */
+extern unsigned char g_asdCec; /* 0x464fa8 */
 
-/* Supplied declaration required: FUN_00238f44. */
+/* Supplied declaration required: asdCecMessageBoxClose. */
 /* Supplied declaration required: FUN_0024ee68. */
-/* Supplied declaration required: FUN_00263308. */
+/* Supplied declaration required: asdCecMessageBoxOpen. */
 extern int FUN_002b5a48(unsigned int);
 /* Supplied declaration required: FUN_00357a24. */
 /* Supplied declaration required: nn_cec_CTR_Message_Message_sub_object. */
@@ -40,19 +40,19 @@ unsigned int FUN_0021f57c(unsigned int param_1,unsigned int param_2,unsigned int
   unsigned char temp_v3 [360];
   
   nn_cec_CTR_Message_Message_sub_object(temp_v3);
-  temp_v0 = (*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4))[6];
-  FUN_00263308(temp_v0,*(*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4)),(*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4))[1]);
+  temp_v0 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];
+  asdCecMessageBoxOpen(temp_v0,*(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)),(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[1]);
   if (-1 < (int)temp_v0) {
     nn_cec_CTR_Message_NewMessage
-              (temp_v3,*(*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4)),0,*(unsigned char *)((*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4)) + 2),
-               *(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4)) + 9),*(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4)) + 10),
-               *(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4)) + 0xb));
+              (temp_v3,*(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)),0,*(unsigned char *)((*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)) + 2),
+               *(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)) + 9),*(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)) + 10),
+               *(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)) + 0xb));
     nn_cec_CTR_Message_SetExHeader((unsigned int)temp_v3,2,param_3,param_2);
     temp_v1 = FUN_002b5a48(param_1);
     nn_cec_CTR_Message_SetExHeader((unsigned int)temp_v3,4,temp_v1 << 1,param_1);
     nn_cec_CTR_Message_SetMessageBody((unsigned int)temp_v3,param_4,param_5);
-    temp_v0 = (*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4))[6];
-    FUN_00357a24(temp_v0,temp_v3,1,(*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4))[3]);
+    temp_v0 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];
+    FUN_00357a24(temp_v0,temp_v3,1,(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[3]);
     temp_v2 = temp_v0 & 0x80000000;
     if ((int)temp_v2 < 0) {
       temp_v2 = 0xe0a1086c;
@@ -68,7 +68,7 @@ unsigned int FUN_0021f57c(unsigned int param_1,unsigned int param_2,unsigned int
         }
       }
     }
-    FUN_00238f44((*(unsigned int * *)((unsigned char *)&DAT_00464fa8 + 0x4))[6],temp_v2);
+    asdCecMessageBoxClose((*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6],temp_v2);
     FUN_0024ee68(0);
   }
   return temp_v0;

@@ -1,29 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013d2dc` (_code @ 0x13d2dc, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0014aa9c(int);
+/* Extension block at 0x1000: two enable bytes at 0x40 and 0x43. */
+typedef struct {
+    u8 unk00[0x40];
+    u8 enableA;         /* 0x40 */
+    u8 unk41[2];
+    u8 enableB;         /* 0x43 */
+} Extension;
 
-/* Supplied declaration required: FUN_0014aa9c. */
-extern int FUN_001546e8(unsigned int);
-extern int FUN_00164a9c(void);
+typedef struct {
+    u8 unk00[0x1c];
+    u8 pending;         /* 0x1c */
+    u8 unk1d[0xfe3];
+    Extension ext;      /* 0x1000 */
+} Context;
 
+Context *jobGetWork(void);
+int FUN_001546e8(int arg);
+int FUN_0014aa9c(int arg);
 
-unsigned char FUN_0013d2dc(void)
-
+/* Fires FUN_0014aa9c when both extension switches are on, FUN_001546e8 is idle and a request is pending; always returns 0. */
+u8 FUN_0013d2dc(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_00164a9c();
-  if ((((*(char *)(temp_v0 + 0x1040) != '\0') && (*(char *)(temp_v0 + 0x1043) != '\0')) &&
-      (temp_v1 = FUN_001546e8(0), temp_v1 == 0)) && (*(char *)(temp_v0 + 0x1c) != '\0')) {
-    FUN_0014aa9c(0);
-  }
-  return 0;
+    Context *context = jobGetWork();
+
+    if (context->ext.enableA == 0) {
+        return 0;
+    }
+    if (context->ext.enableB == 0) {
+        return 0;
+    }
+    if (FUN_001546e8(0) != 0) {
+        return 0;
+    }
+    if (context->pending != 0) {
+        FUN_0014aa9c(0);
+    }
+    return 0;
 }
 
 } /* extern "C" */

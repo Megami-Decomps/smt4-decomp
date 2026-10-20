@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002b265c(unsigned char *, int, int);
-int FUN_002c4938(void);
-int FUN_002c5300(int, int, int, int, int);
+int asdListAdd(unsigned char *, int, int);
+int memClear(void);
+int asdMemoryAlloc(int, int, int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,9 +16,9 @@ typedef struct {
 extern unsigned char DAT_00464af0; /* 0x464af0 */
 extern unsigned char DAT_004dae48; /* 0x4dae48 */
 
-/* Supplied declaration required: FUN_002b265c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdListAdd. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 int FUN_001fe514(void)
@@ -28,8 +28,8 @@ int FUN_001fe514(void)
   int temp_v0;
   
   temp_v0 = 0x100;
-  FUN_002c5300(0x100,0x100,0,0xa8,1);
-  FUN_002c4938();
+  asdMemoryAlloc(0x100,0x100,0,0xa8,1);
+  memClear();
   *(unsigned int *)(temp_v0 + 0xc) = 0xffffffff;
   *(unsigned int *)(temp_v0 + 0x10) = 0xffffffff;
   *(unsigned int *)(temp_v0 + 4) = 0;
@@ -54,7 +54,7 @@ int FUN_001fe514(void)
   *(unsigned int *)(temp_v0 + 0x8c) = 0;
   *(unsigned int *)(temp_v0 + 0x88) = 0;
   *(unsigned int *)(temp_v0 + 0x84) = 0;
-  FUN_002b265c(&DAT_004dae48,temp_v0,0);
+  asdListAdd(&DAT_004dae48,temp_v0,0);
   (*(int *)((unsigned char *)&DAT_00464af0 + 0x3c)) = (*(int *)((unsigned char *)&DAT_00464af0 + 0x3c)) + 1;
   return temp_v0;
 }

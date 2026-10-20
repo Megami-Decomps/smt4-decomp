@@ -1,25 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `QuestCenter_GetActiveEntry` (_code @ 0x289038, 0x1c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Returns the quest center's active entry, or 0 when it is not open. */
+#include "common.h"
+#include "quest_center/qcMain.h"
 
 extern "C" {
 
-extern unsigned char DAT_0044db88; /* 0x44db88 */
+extern QcGlobals g_qcMain;
 
-
-int QuestCenter_GetActiveEntry(void)
-
+s32 QuestCenter_GetActiveEntry(void)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if ((*(int *)((unsigned char *)&DAT_0044db88 + 0x4)) != 0) {
-    temp_v0 = *(int *)((*(int *)((unsigned char *)&DAT_0044db88 + 0x4)) + 0x1c);
-  }
-  if ((*(int *)((unsigned char *)&DAT_0044db88 + 0x4)) == 0 || temp_v0 == 0) {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    QcWork *work = g_qcMain.work;
+
+    if (work != NULL && work->entry != 0) {
+        return work->entry;
+    }
+    return 0;
 }
 
 } /* extern "C" */

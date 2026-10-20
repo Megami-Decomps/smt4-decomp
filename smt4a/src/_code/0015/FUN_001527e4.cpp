@@ -8,9 +8,9 @@ int FUN_001656e0(unsigned int, int);
 int FUN_0016572c(unsigned int, int);
 int FUN_00167f24(int);
 
-extern int DAT_0057f3b0; /* 0x57f3b0 */
+extern int g_eventTex; /* 0x57f3b0 */
 
-extern int FUN_00163e40(unsigned int);
+extern int jobIsValid(unsigned int);
 extern int FUN_00165058(unsigned int);
 /* Supplied declaration required: FUN_001656e0. */
 /* Supplied declaration required: FUN_0016572c. */
@@ -32,17 +32,17 @@ unsigned int FUN_001527e4(int param_1)
   int temp_v4;
   int temp_v5;
   
-  temp_v0 = DAT_0057f3b0;
-  if (DAT_0057f3b0 == 0) {
+  temp_v0 = g_eventTex;
+  if (g_eventTex == 0) {
     temp_v2 = 0;
   }
   else {
     temp_v2 = 0;
     temp_v4 = 0;
-    if (0 < *(int *)(DAT_0057f3b0 + 0x44)) {
+    if (0 < *(int *)(g_eventTex + 0x44)) {
       do {
         temp_v5 = temp_v0 + temp_v4 * 4;
-        temp_v3 = FUN_00163e40(*(unsigned int *)(temp_v5 + 4));
+        temp_v3 = jobIsValid(*(unsigned int *)(temp_v5 + 4));
         if ((temp_v3 != 0) && (temp_v3 = FUN_00165058(*(unsigned int *)(temp_v5 + 4)), temp_v3 != 4)) {
           temp_v3 = FUN_00167888(*(unsigned int *)(temp_v5 + 4));
           if (temp_v3 == param_1) {
@@ -61,7 +61,7 @@ unsigned int FUN_001527e4(int param_1)
     temp_v4 = 0;
     do {
       temp_v5 = temp_v0 + temp_v4 * 4;
-      temp_v3 = FUN_00163e40(*(unsigned int *)(temp_v5 + 0x4c));
+      temp_v3 = jobIsValid(*(unsigned int *)(temp_v5 + 0x4c));
       if (temp_v3 != 0) {
         temp_v3 = FUN_00167898(*(unsigned int *)(temp_v5 + 0x4c));
         if (temp_v3 == param_1) {

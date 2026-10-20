@@ -9,7 +9,7 @@ int FUN_00184758(...);
 int FUN_00184c00(int, int, int);
 int FUN_001aeafc(void);
 int FUN_0020b6d4(...);
-int FUN_0031f5f4(void);
+int statusCameraDestroy(void);
 int FUN_003857b4(int);
 int FUN_003e5504(unsigned int, int *);
 int FUN_003e5c00(void);
@@ -26,14 +26,14 @@ extern int DAT_0056fcc0; /* 0x56fcc0 */
 extern signed char DAT_00588fd2; /* 0x588fd2 */
 extern int DAT_00588fd4; /* 0x588fd4 */
 
-extern int FUN_00164a34(void);
+extern int lmapMainIsRunning(void);
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_00184c00. */
 /* Supplied declaration required: FUN_001aeafc. */
 /* Supplied declaration required: FUN_0020b6d4. */
-/* Supplied declaration required: FUN_0031f5f4. */
-extern int FUN_003792d4(void);
+/* Supplied declaration required: statusCameraDestroy. */
+extern int lmapSceneGetScript(void);
 /* Supplied declaration required: FUN_003857b4. */
 /* Supplied declaration required: FUN_003e5504. */
 /* Supplied declaration required: FUN_003e5c00. */
@@ -56,7 +56,7 @@ void FUN_0022e774(void)
     return;
   }
   if (*(char *)(DAT_00588fd4 + 0x2018) == '\x03' || *(char *)(DAT_00588fd4 + 0x2018) == '\n') {
-    temp_v1 = FUN_003792d4();
+    temp_v1 = lmapSceneGetScript();
     if (temp_v1 != 0) {
       if (*(int *)(temp_v0 + 0x2034) != 0) {
         temp_v4 = *(unsigned int *)(temp_v0 + 0x2038);
@@ -65,13 +65,13 @@ void FUN_0022e774(void)
         FUN_003e5504(*(unsigned int *)(temp_v0 + 0x2034),&temp_v4);
         FUN_003857b4(1);
         if (*(int *)(temp_v0 + 0x2034) != 0) {
-          FUN_0031f5f4();
+          statusCameraDestroy();
         }
       }
     }
     else if (*(int *)(temp_v0 + 0x2034) != 0) {
       FUN_003e5c00();
-      temp_v1 = FUN_00164a34();
+      temp_v1 = lmapMainIsRunning();
       if (temp_v1 != 0) {
         *(unsigned char *)(*(int *)(DAT_0056fcc0 + 0x14) + 0xc4) = *(unsigned char *)(temp_v0 + 0x20e6);
       }
@@ -83,12 +83,12 @@ void FUN_0022e774(void)
         if (*(int **)(temp_v0 + 0x2034) != (int *)0x0) {
           (**(romwright_code **)(**(int **)(temp_v0 + 0x2034) + 4))();
           if (*(int *)(temp_v0 + 0x2034) != 0) {
-            FUN_0031f5f4();
+            statusCameraDestroy();
           }
         }
       }
       else if (*(int *)(temp_v0 + 0x2034) != 0) {
-        FUN_0031f5f4();
+        statusCameraDestroy();
       }
     }
   }

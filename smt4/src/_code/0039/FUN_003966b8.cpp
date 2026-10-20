@@ -32,7 +32,7 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } param_1_stack;
 
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapScene; /* 0x447e88 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
@@ -118,9 +118,9 @@ void FUN_003966b8(int param_1)
               temp_v12 = VectorSignedToFloat((int)*(short *)(pcVar2 + 8),
                                              (unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v14 = (unsigned int)temp_v6;
-              temp_v5 = temp_v7 - *(float *)(DAT_00447e88 + 0x1c);
-              temp_v3 = temp_v8 - *(float *)(DAT_00447e88 + 0x20);
-              temp_v4 = temp_v9 - *(float *)(DAT_00447e88 + 0x24);
+              temp_v5 = temp_v7 - *(float *)(g_lmapScene + 0x1c);
+              temp_v3 = temp_v8 - *(float *)(g_lmapScene + 0x20);
+              temp_v4 = temp_v9 - *(float *)(g_lmapScene + 0x24);
               temp_v13 = temp_v11;
               temp_v15 = temp_v14;
               temp_v16 = temp_v14;
@@ -154,9 +154,9 @@ void FUN_003966b8(int param_1)
           temp_v11 = (unsigned int)((unsigned long long)temp_v6 >> 0x20);
           temp_v12 = VectorSignedToFloat((int)*(short *)(pcVar2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v14 = (unsigned int)temp_v6;
-          temp_v5 = temp_v7 - *(float *)(DAT_00447e88 + 0x1c);
-          temp_v3 = temp_v8 - *(float *)(DAT_00447e88 + 0x20);
-          temp_v4 = temp_v9 - *(float *)(DAT_00447e88 + 0x24);
+          temp_v5 = temp_v7 - *(float *)(g_lmapScene + 0x1c);
+          temp_v3 = temp_v8 - *(float *)(g_lmapScene + 0x20);
+          temp_v4 = temp_v9 - *(float *)(g_lmapScene + 0x24);
           temp_v13 = temp_v11;
           temp_v15 = temp_v14;
           temp_v16 = temp_v14;

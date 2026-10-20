@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016007c(void);
+int asdOperatorNew(void);
 int FUN_001b57a8(unsigned int [4], int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_001b57a8. */
 extern unsigned int *FUN_001b5acc(unsigned int *);
 
@@ -29,7 +29,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
   switch(param_2) {
   case 0:
     puVar1 = (unsigned int *)0x20;
-    FUN_0016007c();
+    asdOperatorNew();
     if (puVar1 != (unsigned int *)0x0) {
       puVar2 = temp_v1;
       *puVar1 = 0x55c68c;
@@ -50,7 +50,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
     break;
   case 1:
     puVar1 = (unsigned int *)0x1c;
-    FUN_0016007c();
+    asdOperatorNew();
     if (puVar1 != (unsigned int *)0x0) {
       puVar2 = temp_v1;
       *puVar1 = 0x55c68c;
@@ -69,7 +69,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
     break;
   case 2:
     puVar1 = (unsigned int *)0x18;
-    FUN_0016007c();
+    asdOperatorNew();
     if (puVar1 != (unsigned int *)0x0) {
       puVar2 = temp_v1;
       *puVar1 = 0x55c68c;
@@ -88,7 +88,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
     break;
   case 3:
     puVar1 = (unsigned int *)0x18;
-    FUN_0016007c();
+    asdOperatorNew();
     if (puVar1 != (unsigned int *)0x0) {
       puVar2 = temp_v1;
       *puVar1 = 0x55c68c;
@@ -107,7 +107,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
     break;
   case 4:
     puVar1 = (unsigned int *)0x18;
-    FUN_0016007c();
+    asdOperatorNew();
     if (puVar1 != (unsigned int *)0x0) {
       puVar2 = temp_v1;
       *puVar1 = 0x55c68c;
@@ -126,7 +126,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
     break;
   case 5:
     puVar1 = (unsigned int *)0x18;
-    FUN_0016007c();
+    asdOperatorNew();
     if (puVar1 != (unsigned int *)0x0) {
       puVar2 = temp_v1;
       *puVar1 = 0x55c68c;
@@ -145,7 +145,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
     break;
   case 6:
     puVar1 = (unsigned int *)0x1c;
-    FUN_0016007c();
+    asdOperatorNew();
     if (puVar1 != (unsigned int *)0x0) {
       puVar2 = temp_v1;
       *puVar1 = 0x55c68c;
@@ -164,7 +164,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
     break;
   case 7:
     puVar1 = (unsigned int *)0x18;
-    FUN_0016007c();
+    asdOperatorNew();
     if (puVar1 != (unsigned int *)0x0) {
       puVar2 = temp_v1;
       *puVar1 = 0x55c68c;

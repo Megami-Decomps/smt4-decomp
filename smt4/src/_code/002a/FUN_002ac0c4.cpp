@@ -1,34 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ac0c4` (_code @ 0x2ac0c4, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ac068(int, int);
-int FUN_002c0c74(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+/* Object with an enable flag at 0x45 and a sub-object pointer at 0x48. */
 typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+    u8 unk00[0x45];
+    u8 enabled;         /* 0x45 */
+    u8 unk46[2];
+    void *sub;          /* 0x48 */
+} Owner;
 
-/* Supplied declaration required: FUN_002ac068. */
-/* Supplied declaration required: FUN_002c0c74. */
+int FUN_002ac068(void *sub, int arg);
+int dataTableGetCount(void);
 
-
-void FUN_002ac0c4(int param_1)
-
+/* Runs the sub-object's FUN_002ac068 and returns dataTableGetCount's result; 0 when there is nothing to run. */
+int FUN_002ac0c4(Owner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  if (*(char *)(param_1 + 0x45) == '\0') {
-    return;
-  }
-  if (*(int *)(param_1 + 0x48) == 0) {
-    return;
-  }
-  FUN_002ac068(*(int *)(param_1 + 0x48),0);
-  FUN_002c0c74();
-  return;
+    if (owner->enabled == 0) {
+        return 0;
+    }
+    if (owner->sub == NULL) {
+        return 0;
+    }
+    FUN_002ac068(owner->sub, 0);
+    return dataTableGetCount();
 }
 
 } /* extern "C" */

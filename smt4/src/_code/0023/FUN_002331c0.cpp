@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 
 void FUN_002331c0(void)
@@ -16,8 +16,8 @@ void FUN_002331c0(void)
   int temp_v2;
   int *piVar4;
   
-  temp_v0 = DAT_0044ea00;
-  piVar4 = (int *)(DAT_0044ea00 + 0x12ac);
+  temp_v0 = g_titleScene;
+  piVar4 = (int *)(g_titleScene + 0x12ac);
   temp_v1 = *piVar4;
   temp_v2 = piVar4[temp_v1 + 2];
   *piVar4 = temp_v1 - 1;

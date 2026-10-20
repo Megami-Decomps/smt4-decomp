@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001038b0(int, int);
+int blockCopyAssign(int, int);
 int FUN_0010ccc4(int, int);
 
-/* Supplied declaration required: FUN_001038b0. */
+/* Supplied declaration required: blockCopyAssign. */
 /* Supplied declaration required: FUN_0010ccc4. */
 
 
@@ -42,7 +42,7 @@ int FUN_004326fc(int param_1,int param_2)
   *(unsigned char *)(param_1 + 0xa1) = *(unsigned char *)(param_2 + 0xa1);
   *(unsigned int *)(param_1 + 0xa4) = *(unsigned int *)(param_2 + 0xa4);
   *(unsigned char *)(param_1 + 0xa8) = *(unsigned char *)(param_2 + 0xa8);
-  FUN_001038b0(param_1 + 0xac,param_2 + 0xac);
+  blockCopyAssign(param_1 + 0xac,param_2 + 0xac);
   return param_1;
 }
 

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001628c0(char *, unsigned int, int, unsigned int);
 int FUN_001633a0(int);
 int FUN_00184310(void);
-int FUN_00187180(int, int);
+int dataTableGet(int, int);
 int FUN_002e6dd0(char *, int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -19,9 +19,9 @@ extern unsigned int FUN_0014af98(void);
 /* Supplied declaration required: FUN_001628c0. */
 /* Supplied declaration required: FUN_001633a0. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00187180. */
-extern int FUN_00192748(void);
-extern int FUN_00192798(void);
+/* Supplied declaration required: dataTableGet. */
+extern int dataTableGetCount(void);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_002e6dd0. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -46,13 +46,13 @@ void FUN_0015f490(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   unsigned char temp_v10 [4];
   char acStack_ac [140];
   
-  FUN_00187180(0x3e,0);
-  temp_v1 = FUN_00192798();
+  dataTableGet(0x3e,0);
+  temp_v1 = dataTableGetEntries();
   if (param_2 >= 11) {
     return;
   }
-  FUN_00187180(0x3e,0);
-  temp_v2 = FUN_00192748();
+  dataTableGet(0x3e,0);
+  temp_v2 = dataTableGetCount();
   temp_v3 = param_1 & 0xffff;
   FUN_00184310();
   if (temp_v3 == 0) {
@@ -154,10 +154,10 @@ LAB_0015f650:
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 10);
   if ((param_2 == 5 || param_2 == 6) && (param_4 != 0)) {
-    FUN_00187180(0x3e,1);
-    temp_v1 = FUN_00192798();
-    FUN_00187180(0x3e,1);
-    temp_v2 = FUN_00192748();
+    dataTableGet(0x3e,1);
+    temp_v1 = dataTableGetEntries();
+    dataTableGet(0x3e,1);
+    temp_v2 = dataTableGetCount();
     temp_v7 = 0;
     if (temp_v7 < temp_v2) {
       do {

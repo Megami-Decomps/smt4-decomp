@@ -82,7 +82,7 @@ typedef struct {
     unsigned int sp218; /* 0x218: local_218 */
 } void_stack;
 
-extern int DAT_00447060; /* 0x447060 */
+extern int g_lmapMainState; /* 0x447060 */
 extern unsigned int DAT_00476630; /* 0x476630 */
 extern float DAT_004efd48; /* 0x4efd48 */
 extern float DAT_004efd4c; /* 0x4efd4c */
@@ -198,9 +198,9 @@ void FUN_00265180(void)
   float temp_v79;
   unsigned int temp_v80;
   
-  temp_v77 = DAT_00447060;
-  if (DAT_00447060 != 0) {
-    if (*(int *)(DAT_00447060 + 0xa9c) != 0) {
+  temp_v77 = g_lmapMainState;
+  if (g_lmapMainState != 0) {
+    if (*(int *)(g_lmapMainState + 0xa9c) != 0) {
       temp_v5 = FUN_002c501c();
       temp_v16 = 0.0f;
       temp_v61[0] = 1.0f;
@@ -397,7 +397,7 @@ void FUN_00265180(void)
             DAT_004efd68 = temp_v14;
           }
           nn_math_ARMv6_MTX33CopyAsm(&temp_v64,&DAT_004efd48);
-          temp_v6 = DAT_00447060 + temp_v5 * 0x88;
+          temp_v6 = g_lmapMainState + temp_v5 * 0x88;
           temp_v64 = *(float *)(temp_v6 + 0xab8);
           temp_v65 = *(float *)(temp_v6 + 0xabc);
           temp_v66 = *(float *)(temp_v6 + 0xac0);

@@ -10,7 +10,7 @@ int FUN_002aa568(...);
 int FUN_002be624(...);
 int FUN_002bf694(...);
 int FUN_002c30c4(...);
-int FUN_002c4938(...);
+int memClear(...);
 
 extern unsigned char LAB_003dba2c; /* 0x3dba2c */
 #ifndef ROMWRIGHT_STORAGE_s__B_B_B_B_B_B_00435d00_25_1_DEFINED
@@ -39,7 +39,7 @@ extern int FUN_002b4414(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002c30c4. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_003db7dc(int param_1)
@@ -94,8 +94,8 @@ unsigned int FUN_003db7dc(int param_1)
           }
           if ((temp_v4 == 0) ||
              (temp_v0 = temp_v4, FUN_002aa568(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[20])), temp_v0 != 0)) {
-            FUN_002c4938(temp_v5,0x80);
-            FUN_002c4938(temp_v6,0x80);
+            memClear(temp_v5,0x80);
+            memClear(temp_v6,0x80);
             FUN_002be624(temp_v6,"battle/effect/%s.eft",temp_v4);
             FUN_002bf694(temp_v5,temp_v6);
             temp_v0 = FUN_002c30c4(temp_v5);

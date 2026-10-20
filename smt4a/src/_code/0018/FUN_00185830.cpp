@@ -40,7 +40,7 @@ struct fn_00185830_arg0 {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_0019d96c. */
 
 
@@ -56,7 +56,7 @@ void FUN_00185830(fn_00185830_arg0 *param_1,int param_2,unsigned int param_3)
   unsigned long long temp_v2;
   
   temp_v2 = romwright_piece_4_4(in_s1,in_s0);
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   if (param_2 != 0) {
     *(unsigned int *)(temp_v0 + 0x6c) = 0;
     *(unsigned int *)(temp_v0 + 0x70) = 0;

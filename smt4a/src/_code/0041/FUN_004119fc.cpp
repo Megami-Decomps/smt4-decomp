@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_0019a5a0(...);
-int FUN_0019c364(...);
+int asdMemFree(...);
+int scrScriptProcessDestroy(...);
 int FUN_00275bc8(...);
 int FUN_00275f44(...);
 int FUN_002804b0(...);
@@ -41,8 +41,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 extern int FUN_00224880(void);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00275f44. */
@@ -77,11 +77,11 @@ void FUN_004119fc(fn_004119fc_arg0 *param_1)
           param_1->field_0x10 = 0;
         }
         if (param_1->field_0x28 != 0) {
-          FUN_0019c364();
+          scrScriptProcessDestroy();
           param_1->field_0x28 = 0;
         }
         if (param_1->field_0x24 != 0) {
-          FUN_0019a5a0();
+          asdMemFree();
           param_1->field_0x24 = 0;
           return;
         }
@@ -103,11 +103,11 @@ void FUN_004119fc(fn_004119fc_arg0 *param_1)
     temp_v0 = param_1->field_0x18;
     if (temp_v0 != 2) {
       if (param_1->field_0x28 != 0) {
-        FUN_0019c364();
+        scrScriptProcessDestroy();
         param_1->field_0x28 = 0;
       }
       if (param_1->field_0x24 != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         param_1->field_0x24 = 0;
       }
       temp_v1 = 0;

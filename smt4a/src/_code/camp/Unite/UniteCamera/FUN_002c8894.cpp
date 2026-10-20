@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_0057f294; /* 0x57f294 */
+extern int g_uniteCamera; /* 0x57f294 */
 
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001bbf0c. */
@@ -36,14 +36,14 @@ void FUN_002c8894(void)
   float temp_v3;
   float temp_v4;
   
-  temp_v0 = DAT_0057f294;
-  if (DAT_0057f294 != 0) {
-    pfVar2 = *(float **)(DAT_0057f294 + 0x50c);
-    piVar3 = (int *)(DAT_0057f294 + 0x50c);
+  temp_v0 = g_uniteCamera;
+  if (g_uniteCamera != 0) {
+    pfVar2 = *(float **)(g_uniteCamera + 0x50c);
+    piVar3 = (int *)(g_uniteCamera + 0x50c);
     temp_v2 = *pfVar2;
     temp_v3 = pfVar2[1];
     temp_v4 = pfVar2[2];
-    temp_v1 = *(float *)(*(int *)(DAT_0057f294 + 0x50c) + 0x3c);
+    temp_v1 = *(float *)(*(int *)(g_uniteCamera + 0x50c) + 0x3c);
     FUN_001bc124();
     temp_v2 = temp_v2 - temp_v1;
     temp_v1 = *(float *)(*piVar3 + 0x38);

@@ -7,7 +7,7 @@ int FUN_0027da30(int, int);
 
 /* Supplied declaration required: FUN_00241d58. */
 /* Supplied declaration required: FUN_0027da30. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 extern int FUN_00336e44(int, int);
 
 
@@ -21,7 +21,7 @@ void FUN_003dc02c(int param_1)
   int temp_v3;
   int temp_v4;
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   temp_v4 = 0x43;
   do {
     temp_v1 = *(int *)(temp_v0 + 0x1e98) + temp_v4 * 0x114;

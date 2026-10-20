@@ -1,30 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f2a70` (_code @ 0x2f2a70, 0x2a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the Thumb literal-pool alignment pad differs in fdiff (retail lists it as code `movs r0, r0`, the build as data `.short 0x0000`); the bytes are the same. */
+/* True when the object is valid and either the global override flag is set or it has the 0x800 property. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0030ed94(void);
+extern u8 DAT_00594978;
 
-extern signed char DAT_00594978; /* 0x594978 */
+s32 FUN_002eb6ae(void *object, u32 property);
+s32 FUN_0030ed94(void *object);
 
-extern int FUN_002eb6ae(int, unsigned int);
-/* Supplied declaration required: FUN_0030ed94. */
-
-
-unsigned int FUN_002f2a70(int param_1)
-
+s32 FUN_002f2a70(void *object)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = param_1;
-  FUN_0030ed94();
-  if ((temp_v0 != 0) && ((DAT_00594978 != '\0' || (temp_v0 = FUN_002eb6ae(param_1,0x800), temp_v0 != 0))))
-  {
-    return 1;
-  }
-  return 0;
+    if (FUN_0030ed94(object) != 0 && (DAT_00594978 != 0 || FUN_002eb6ae(object, 0x800) != 0)) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

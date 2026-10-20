@@ -22,7 +22,7 @@ extern unsigned char DAT_0061a6a4; /* 0x61a6a4 */
 extern int FUN_0016f864(unsigned int);
 extern int FUN_0016f988(unsigned int *, char *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0017094c. */
-extern unsigned int FUN_002e3390(char *);
+extern unsigned int wstrlen(char *);
 
 
 int FUN_00158f64(void)
@@ -39,7 +39,7 @@ int FUN_00158f64(void)
   else {
     temp_v0 = FUN_0016f864(0);
     if (-1 < temp_v0) {
-      temp_v1 = FUN_002e3390("dsp::DSP");
+      temp_v1 = wstrlen("dsp::DSP");
       temp_v0 = FUN_0016f988(&DAT_00589298,"dsp::DSP",temp_v1,0);
       if (-1 < temp_v0) {
         DAT_0058928c = &DAT_00589294;

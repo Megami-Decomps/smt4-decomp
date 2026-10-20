@@ -20,7 +20,7 @@ typedef struct {
 
 extern int FUN_0012d4a2(unsigned int, int *);
 /* Supplied declaration required: FUN_00135ac4. */
-extern int FUN_002e6dac(void);
+extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00307bf4. */
 /* Supplied declaration required: FUN_00307c16. */
@@ -54,7 +54,7 @@ void FUN_00133508(int *param_1,int param_2,unsigned int param_3)
   else {
     temp_v2 = FUN_00307c16(param_1);
     temp_v3 = FUN_0012d4a2(temp_v2,param_1);
-    temp_v4 = FUN_002e6dac();
+    temp_v4 = rt_malloc();
     FUN_00307bf4(*param_1,param_2,temp_v4,param_1);
     FUN_0030ed3c(param_1,((param_2 - *param_1) & 0xffffffe0U) + temp_v4,param_3);
     FUN_00307bf4(param_2,param_1[1],((param_2 - *param_1) & 0xffffffe0U) + temp_v4 + 0x20,param_1);

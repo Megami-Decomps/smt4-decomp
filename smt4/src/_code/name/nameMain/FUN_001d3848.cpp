@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int FUN_003984a4(...);
 int FUN_003984ac(...);
 
@@ -24,9 +24,9 @@ extern unsigned char LAB_0021f2a8; /* 0x21f2a8 */
 extern unsigned char LAB_0021f2c0; /* 0x21f2c0 */
 extern unsigned int *DAT_0044d184; /* 0x44d184 */
 
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_003984a4. */
 /* Supplied declaration required: FUN_003984ac. */
 
@@ -39,7 +39,7 @@ void FUN_001d3848(int *param_1)
   char *pcVar2;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x960,1);
+  asdMemAlloc(0x100,0x100,0,0x960,1);
   DAT_0044d184 = puVar1;
   if (param_1 != (int *)0x0) {
     FUN_003984ac(puVar1 + 4,(int)(char)*param_1);
@@ -48,18 +48,18 @@ void FUN_001d3848(int *param_1)
     FUN_003984a4(puVar1 + 4);
   }
   pcVar2 = "NameMainProc";
-  FUN_002c5788("NameMainProc",2,0,0,&LAB_001d9578,&LAB_0021f2a8,DAT_0044d184);
+  asdProcessCreateSimple("NameMainProc",2,0,0,&LAB_001d9578,&LAB_0021f2a8,DAT_0044d184);
   *puVar1 = (unsigned int)pcVar2;
   if (*param_1 != 1) {
-    FUN_002c4a08("NameDrawUp",0x7a,1,0,&LAB_001fe130,0,DAT_0044d184,pcVar2);
-    FUN_002c4a08("NameDrawUp",0xd8,1,0,&LAB_001fe130,0,DAT_0044d184,*puVar1);
+    taskCreateDraw("NameDrawUp",0x7a,1,0,&LAB_001fe130,0,DAT_0044d184,pcVar2);
+    taskCreateDraw("NameDrawUp",0xd8,1,0,&LAB_001fe130,0,DAT_0044d184,*puVar1);
   }
   else {
-    FUN_002c4a08("NameDrawUp",0x80,1,0,&LAB_001fe130,0,DAT_0044d184,pcVar2);
-    FUN_002c4a08("NameDrawUp",0xde,1,0,&LAB_001fe130,0,DAT_0044d184,*puVar1);
+    taskCreateDraw("NameDrawUp",0x80,1,0,&LAB_001fe130,0,DAT_0044d184,pcVar2);
+    taskCreateDraw("NameDrawUp",0xde,1,0,&LAB_001fe130,0,DAT_0044d184,*puVar1);
   }
   pcVar2 = "NameDrawDown";
-  FUN_002c4a08("NameDrawDown",0xe6,1,0,&LAB_0021f2c0,0,DAT_0044d184,*puVar1);
+  taskCreateDraw("NameDrawDown",0xe6,1,0,&LAB_0021f2c0,0,DAT_0044d184,*puVar1);
   puVar1[2] = (unsigned int)pcVar2;
   return;
 }

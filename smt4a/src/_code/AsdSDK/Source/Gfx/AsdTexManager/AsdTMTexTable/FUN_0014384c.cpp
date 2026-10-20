@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00100388(unsigned int [64], unsigned char *, unsigned int, int, unsigned char *, unsigned char *);
 int FUN_0013c174(unsigned int *, unsigned char [8], int);
-int FUN_0013f1b8(int, int);
-int FUN_00163060(...);
-int FUN_0019a5a0(...);
+int asdTMTexTableLoadTmx(int, int);
+int asdMemoryAllocTracked(...);
+int asdMemFree(...);
 int FUN_002e342c(...);
 int rt_memcpy_w(...);
 
@@ -23,15 +23,15 @@ typedef struct {
 extern unsigned char LAB_00143a94; /* 0x143a94 */
 extern unsigned char LAB_00143a98; /* 0x143a98 */
 extern unsigned char LAB_00143aa4; /* 0x143aa4 */
-extern int DAT_0059dbb8; /* 0x59dbb8 */
+extern int g_texTable; /* 0x59dbb8 */
 extern unsigned int DAT_0059dbbc; /* 0x59dbbc */
 
 extern unsigned char *FUN_00100238(char *, unsigned int);
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_0013c174. */
-/* Supplied declaration required: FUN_0013f1b8. */
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -69,10 +69,10 @@ int FUN_0014384c(int param_1)
   unsigned char temp_v17 [8];
   
   temp_v5 = param_1;
-  FUN_0013f1b8(param_1,0);
+  asdTMTexTableLoadTmx(param_1,0);
   temp_v1 = DAT_0059dbbc;
   temp_v16 = temp_v5;
-  if ((temp_v5 != 0) && (temp_v5 = DAT_0059dbb8 + param_1 * 0x18, *(int *)(temp_v5 + 4) == 0)) {
+  if ((temp_v5 != 0) && (temp_v5 = g_texTable + param_1 * 0x18, *(int *)(temp_v5 + 4) == 0)) {
     FUN_002e342c(&temp_v15,DAT_0059dbbc);
     pcVar9 = &temp_v15;
     while (temp_v15 != '\0') {
@@ -89,10 +89,10 @@ int FUN_0014384c(int param_1)
     FUN_0013c174(puVar3,temp_v17,0);
     if (puVar3 != (unsigned int *)0x0) {
       temp_v1 = 0x100;
-      FUN_00163060(0x100,0x100,0,8,1);
+      asdMemoryAllocTracked(0x100,0x100,0,8,1);
       *(unsigned int *)(temp_v5 + 4) = temp_v1;
       puVar5 = (unsigned int *)0x100;
-      FUN_00163060(0x100,0x100,0,0x40,1);
+      asdMemoryAllocTracked(0x100,0x100,0,0x40,1);
       temp_v4 = 0;
       **(int **)(temp_v5 + 4) = (int)puVar5;
       pbVar10 = (unsigned char *)(puVar3 + 0x10);
@@ -131,7 +131,7 @@ int FUN_0014384c(int param_1)
       if (0 < *(int *)(temp_v6 + 0x20)) {
         do {
           puVar6 = (unsigned int *)0x100;
-          FUN_00163060(0x100,0x100,0,0x14,1);
+          asdMemoryAllocTracked(0x100,0x100,0,0x14,1);
           *puVar6 = (unsigned int)*pbVar10;
           temp_v0 = pbVar10[4];
           puVar6[1] = (unsigned int)temp_v0;
@@ -141,7 +141,7 @@ int FUN_0014384c(int param_1)
           }
           else {
             temp_v2 = 0x100;
-            FUN_00163060(0x100,0x100,0,puVar6[1] * 0x14,1);
+            asdMemoryAllocTracked(0x100,0x100,0,puVar6[1] * 0x14,1);
           }
           puVar6[3] = temp_v2;
           pbVar8 = pbVar10 + 0xc;
@@ -165,7 +165,7 @@ int FUN_0014384c(int param_1)
           puVar12 = puVar6;
         } while (temp_v4 < *(int *)(temp_v6 + 0x20));
       }
-      FUN_0019a5a0(puVar3);
+      asdMemFree(puVar3);
     }
   }
   return temp_v16;

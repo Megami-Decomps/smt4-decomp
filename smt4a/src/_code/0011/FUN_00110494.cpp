@@ -1,19 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00110494` (_code @ 0x110494, 0x6 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct Object Object;
 
-void FUN_00110494(int *param_1)
+/* Virtual table: slot 2 (0x8) is the forwarded method. */
+typedef struct {
+    void *slots[2];
+    void (*method)(Object *self);   /* 0x08 */
+} ObjectVtbl;
 
+struct Object {
+    const ObjectVtbl *vtbl;
+};
+
+/* Virtual thunk: calls slot 2 of the object's vtable on the same object. */
+void FUN_00110494(Object *object)
 {
-/* irregular: 2 native warning(s); review required */
-                    /* WARNING: Could not recover jumptable at 0x00110498. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(romwright_code **)(*param_1 + 8))();
-  return;
+    object->vtbl->method(object);
 }
 
 } /* extern "C" */

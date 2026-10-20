@@ -11,7 +11,7 @@ int FUN_002a5710(...);
 int FUN_002a5960(...);
 int FUN_002a5dc4(...);
 int FUN_002a9834(...);
-int FUN_002c5300(...);
+int asdMemoryAlloc(...);
 
 typedef struct fn_002a91f4_arg0 fn_002a91f4_arg0;
 typedef struct fn_002a91f4_arg0_p2c fn_002a91f4_arg0_p2c;
@@ -113,8 +113,8 @@ typedef struct {
 /* Supplied declaration required: FUN_002a5960. */
 /* Supplied declaration required: FUN_002a5dc4. */
 /* Supplied declaration required: FUN_002a9834. */
-extern int *FUN_002c2ff0(void);
-/* Supplied declaration required: FUN_002c5300. */
+extern int *asdMemoryGetDefaultAllocator(void);
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 void FUN_002a91f4(fn_002a91f4_arg0 *param_1,unsigned int param_2)
@@ -154,7 +154,7 @@ void FUN_002a91f4(fn_002a91f4_arg0 *param_1,unsigned int param_2)
     }
     else {
       temp_v1 = 0x100;
-      FUN_002c5300(0x100,0x100,0,*(int *)&param_1->field_0x34 << 2,1);
+      asdMemoryAlloc(0x100,0x100,0,*(int *)&param_1->field_0x34 << 2,1);
       *(unsigned int *)&param_1->field_0x30 = temp_v1;
       temp_v0 = 0;
       if (temp_v0 < *(int *)&param_1->field_0x34) {
@@ -232,7 +232,7 @@ void FUN_002a91f4(fn_002a91f4_arg0 *param_1,unsigned int param_2)
     }
     else {
       temp_v1 = 0x100;
-      FUN_002c5300(0x100,0x100,0,*(int *)&param_1->field_0x58 << 2,1);
+      asdMemoryAlloc(0x100,0x100,0,*(int *)&param_1->field_0x58 << 2,1);
       temp_v4 = 0;
       *(unsigned int *)&param_1->field_0x54 = temp_v1;
       if (0 < *(int *)&param_1->field_0x58) {
@@ -270,7 +270,7 @@ void FUN_002a91f4(fn_002a91f4_arg0 *param_1,unsigned int param_2)
         iStack_38 = **(int **)&param_1->field_0x54;
         uStack_34 = temp_v1;
         uStack_30 = temp_v1;
-        piVar3 = (int *)FUN_002c2ff0();
+        piVar3 = (int *)asdMemoryGetDefaultAllocator();
         piVar5 = (int *)(**(romwright_code **)(*piVar3 + 8))(piVar3,0x74,4);
         if (piVar5 != (int *)0x0) {
           FUN_002a5dc4(piVar5,piVar3);
@@ -302,7 +302,7 @@ void FUN_002a91f4(fn_002a91f4_arg0 *param_1,unsigned int param_2)
     }
     else {
       temp_v1 = 0x100;
-      FUN_002c5300(0x100,0x100,0,param_1->field_0x68 << 2,1);
+      asdMemoryAlloc(0x100,0x100,0,param_1->field_0x68 << 2,1);
       temp_v4 = 0;
       param_1->field_0x64 = temp_v1;
       if (0 < param_1->field_0x68) {
@@ -339,7 +339,7 @@ void FUN_002a91f4(fn_002a91f4_arg0 *param_1,unsigned int param_2)
         iStack_38 = *(int *)param_1->field_0x64;
         uStack_34 = temp_v1;
         uStack_30 = temp_v1;
-        piVar3 = (int *)FUN_002c2ff0();
+        piVar3 = (int *)asdMemoryGetDefaultAllocator();
         piVar5 = (int *)(**(romwright_code **)(*piVar3 + 8))(piVar3,0x74,4);
         if (piVar5 != (int *)0x0) {
           FUN_002a5dc4(piVar5,piVar3);

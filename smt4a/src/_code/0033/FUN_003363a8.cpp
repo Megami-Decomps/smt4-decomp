@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
-int FUN_001681cc(int);
+int btlGetMainState(void);
+int sysPlaySe(int);
 int FUN_001846d0(int, int);
 int FUN_00184c00(int, int);
 int FUN_0019de98(int, unsigned int);
@@ -21,9 +21,9 @@ typedef struct {
 extern unsigned int DAT_00573ba8; /* 0x573ba8 */
 extern unsigned int DAT_00573bac; /* 0x573bac */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 extern int FUN_00167f08(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_00184c00. */
 /* Supplied declaration required: FUN_0019de98. */
@@ -50,10 +50,10 @@ void FUN_003363a8(int param_1,unsigned int param_2,unsigned char param_3,unsigne
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 6);
     if (*(char *)(param_1 + 0x38b4) == '\0') {
-      FUN_0014aa78();
+      btlGetMainState();
       temp_v0 = FUN_003e8430();
       if ((temp_v0 == 0) &&
-         (temp_v0 = FUN_0014aa78(),
+         (temp_v0 = btlGetMainState(),
          (*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00573ba8) == 0 &&
          (*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00573bac) == 0)) {
         if (*(int *)(param_1 + 0x387c) == 0x17) {
@@ -74,10 +74,10 @@ void FUN_003363a8(int param_1,unsigned int param_2,unsigned char param_3,unsigne
       FUN_0020ad6c(param_1,0x28,1);
       temp_v0 = FUN_00167f08();
       if (temp_v0 != 0x3f) {
-        FUN_0014aa78();
+        btlGetMainState();
         temp_v0 = FUN_003e8430();
         if (temp_v0 != 0) {
-          FUN_001681cc(0x3f);
+          sysPlaySe(0x3f);
           return;
         }
       }

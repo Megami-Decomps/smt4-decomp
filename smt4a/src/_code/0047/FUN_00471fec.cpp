@@ -8,7 +8,7 @@ int FUN_0019a46c(unsigned char [132], unsigned int, int);
 int FUN_001a6c40(unsigned char [4]);
 int FUN_001b9fe4(unsigned int);
 int FUN_001ba0c8(unsigned int, unsigned char [4]);
-int FUN_002e3390(unsigned int);
+int wstrlen(unsigned int);
 
 /* stack frame of param_5: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001a6c40. */
 /* Supplied declaration required: FUN_001b9fe4. */
 /* Supplied declaration required: FUN_001ba0c8. */
-/* Supplied declaration required: FUN_002e3390. */
+/* Supplied declaration required: wstrlen. */
 
 
 void FUN_00471fec(unsigned int param_1,unsigned int param_2,unsigned int *param_3,unsigned int param_4,
@@ -39,7 +39,7 @@ void FUN_00471fec(unsigned int param_1,unsigned int param_2,unsigned int *param_
   unsigned char temp_v5 [132];
   unsigned int temp_v6;
   
-  FUN_002e3390(param_2);
+  wstrlen(param_2);
   FUN_001a6c40(temp_v0);
   FUN_0019a46c(temp_v5,param_2,0x40);
   temp_v4 = (unsigned int)param_5;

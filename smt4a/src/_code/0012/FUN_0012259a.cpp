@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002fd0a0(...);
+int byteArrayEnsureAt(...);
 
-/* Supplied declaration required: FUN_002fd0a0. */
+/* Supplied declaration required: byteArrayEnsureAt. */
 
 
 void FUN_0012259a(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -24,15 +24,15 @@ void FUN_0012259a(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   if (*(int *)(param_1 + 0x10) != 7) {
     temp_v1 = *(int *)(param_1 + 0x10) + 1;
     temp_v3 = 8 - temp_v1;
-    pbVar3 = (unsigned char *)FUN_002fd0a0(temp_v2,*(unsigned int *)(param_1 + 0xc),temp_v2,temp_v3,param_4);
+    pbVar3 = (unsigned char *)byteArrayEnsureAt(temp_v2,*(unsigned int *)(param_1 + 0xc),temp_v2,temp_v3,param_4);
     temp_v0 = *pbVar3;
-    pbVar3 = (unsigned char *)FUN_002fd0a0(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
+    pbVar3 = (unsigned char *)byteArrayEnsureAt(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
     *pbVar3 = temp_v0 | (unsigned char)(param_2 >> (temp_v3 & 0xff));
-    puVar4 = (unsigned char *)FUN_002fd0a0(*(unsigned int *)(param_1 + 8),*(int *)(param_1 + 0xc) + 1);
+    puVar4 = (unsigned char *)byteArrayEnsureAt(*(unsigned int *)(param_1 + 8),*(int *)(param_1 + 0xc) + 1);
     *puVar4 = (char)(param_2 << (temp_v1 & 0xff));
   }
   else {
-    puVar4 = (unsigned char *)FUN_002fd0a0(temp_v2,*(unsigned int *)(param_1 + 0xc),temp_v2,param_4,param_4);
+    puVar4 = (unsigned char *)byteArrayEnsureAt(temp_v2,*(unsigned int *)(param_1 + 0xc),temp_v2,param_4,param_4);
     *puVar4 = (char)param_2;
   }
   *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + 1;

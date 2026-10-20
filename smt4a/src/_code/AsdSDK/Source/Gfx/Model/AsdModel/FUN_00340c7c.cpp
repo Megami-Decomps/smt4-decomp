@@ -49,7 +49,7 @@ extern unsigned int *DAT_00636ee8; /* 0x636ee8 */
 extern unsigned int DAT_00636eec; /* 0x636eec */
 
 /* Supplied declaration required: FUN_0015d8e0. */
-extern unsigned int FUN_00168188(void);
+extern unsigned int asdMemoryGetDefaultAllocator(void);
 /* Supplied declaration required: FUN_0044582c. */
 extern int FUN_00451394(unsigned int *, unsigned int);
 
@@ -87,7 +87,7 @@ void FUN_00340c7c(unsigned int param_1,unsigned int param_2)
   }
   temp_v4 = DAT_005b3bf8 != '\x02';
   DAT_005b3c4c = param_1;
-  temp_v0 = FUN_00168188();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   temp_v8 = 0;
   temp_v12 = 0;
   temp_v5 = DAT_005b3c4c;
@@ -97,10 +97,10 @@ void FUN_00340c7c(unsigned int param_1,unsigned int param_2)
   temp_v6 = temp_v5;
   temp_v10 = temp_v4;
   DAT_005b3c74 = FUN_00451394((unsigned int *)&temp_v5,temp_v0);
-  temp_v0 = FUN_00168188();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   FUN_0015d8e0(&DAT_005b3c74,temp_v0,0);
   temp_v0 = DAT_005b3c74;
-  temp_v1 = FUN_00168188();
+  temp_v1 = asdMemoryGetDefaultAllocator();
   FUN_0044582c(temp_v1,temp_v0);
   temp_v2 = DAT_00636eec & 0x3fffffff;
   if ((int)temp_v2 <= ((int)DAT_00636ee8 - (int)DAT_00636ee4) >> 2) {

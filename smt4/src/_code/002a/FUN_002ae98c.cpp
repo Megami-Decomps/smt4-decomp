@@ -1,36 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ae98c` (_code @ 0x2ae98c, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int DAT_00432fc8; /* 0x432fc8 */
+extern u32 g_aocMain;
 
-extern int FUN_002a6c5c(unsigned int, int, unsigned int);
-extern int FUN_002a6d08(unsigned int);
-extern int FUN_002a6f48(unsigned int);
+int FUN_002a6c5c(u32 arg0, int id, u32 arg2);
+int FUN_002a6d08(u32 arg);
+int FUN_002a6f48(u32 name);
 
-
-unsigned int FUN_002ae98c(unsigned int param_1,unsigned int param_2,unsigned int param_3,int param_4)
-
+/* Resolves `name` to an id and runs FUN_002a6c5c on it; when `checked` is set it first requires FUN_002a6d08(g_aocMain) to succeed. */
+bool FUN_002ae98c(u32 arg0, u32 name, u32 arg2, int checked)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if ((param_4 == 0) || (temp_v0 = FUN_002a6d08(DAT_00432fc8), temp_v1 = 0, temp_v0 != 0)) {
-    temp_v0 = FUN_002a6f48(param_2);
-    if (temp_v0 == -1) {
-      temp_v1 = 0;
+    int id;
+
+    if (checked != 0 && FUN_002a6d08(g_aocMain) == 0) {
+        return false;
     }
-    else {
-      temp_v0 = FUN_002a6c5c(param_1,temp_v0,param_3);
-      temp_v1 = 0;
-      if (temp_v0 != 0) {
-        temp_v1 = 1;
-      }
+    id = FUN_002a6f48(name);
+    if (id == -1) {
+        return false;
     }
-  }
-  return temp_v1;
+    return FUN_002a6c5c(arg0, id, arg2) != 0;
 }
 
 } /* extern "C" */

@@ -12,7 +12,7 @@ int FUN_00514540(...);
 int SUB41(double, int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
-int aeabi_uidivmod(void);
+int __aeabi_uidivmod(void);
 
 typedef struct fn_00390670_arg0 fn_00390670_arg0;
 struct fn_00390670_arg0 {
@@ -53,7 +53,7 @@ typedef struct {
     unsigned int sp138; /* 0x138: local_138 */
 } param_1_stack;
 
-extern float DAT_005c1100; /* 0x5c1100 */
+extern float g_polyDefaultColor; /* 0x5c1100 */
 extern float DAT_005c1104; /* 0x5c1104 */
 extern float DAT_005c1108; /* 0x5c1108 */
 extern float DAT_005c110c; /* 0x5c110c */
@@ -85,7 +85,7 @@ extern unsigned int FUN_00221cb0(void);
 /* Supplied declaration required: FUN_00221d78. */
 /* Supplied declaration required: FUN_00514500. */
 /* Supplied declaration required: FUN_00514540. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_00390670(fn_00390670_arg0 *param_1)
@@ -258,7 +258,7 @@ void FUN_00390670(fn_00390670_arg0 *param_1)
                 }
                 temp_v26 = temp_v39[5] + (temp_v39[1] + temp_v27 * temp_v17 * temp_v33) * temp_v17;
                 DAT_006472e8 = temp_v39[6];
-                DAT_006472dc = DAT_005c1100 * DAT_006472e8;
+                DAT_006472dc = g_polyDefaultColor * DAT_006472e8;
                 DAT_006472e0 = DAT_005c1104 * DAT_006472e8;
                 DAT_006472e4 = DAT_005c1108 * DAT_006472e8;
                 DAT_006472e8 = DAT_005c110c * DAT_006472e8;
@@ -329,7 +329,7 @@ void FUN_00390670(fn_00390670_arg0 *param_1)
                     temp_v17 = temp_v23 / temp_v17;
                   }
                 }
-                DAT_006472ec = DAT_005c1100 * temp_v17;
+                DAT_006472ec = g_polyDefaultColor * temp_v17;
                 DAT_006472f0 = DAT_005c1104 * temp_v17;
                 DAT_006472f4 = DAT_005c1108 * temp_v17;
                 DAT_006472f8 = DAT_005c110c * temp_v17;
@@ -388,7 +388,7 @@ void FUN_00390670(fn_00390670_arg0 *param_1)
               temp_v39[6] = temp_v17;
               if (temp_v4) {
                 FUN_00514500(0);
-                aeabi_uidivmod();
+                __aeabi_uidivmod();
                 *temp_v39 = temp_v13;
               }
               else {

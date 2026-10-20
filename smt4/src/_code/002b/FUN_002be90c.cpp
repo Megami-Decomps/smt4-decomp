@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_12_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int DAT_004d46ac; /* 0x4d46ac */
 extern unsigned int DAT_004d46b0; /* 0x4d46b0 */
 extern unsigned int DAT_004d46b4; /* 0x4d46b4 */
@@ -157,7 +157,7 @@ void FUN_002be90c(int param_1,int param_2,int param_3,int param_4,unsigned int p
     if (param_12 == 0) {
       FUN_002b0750(2,param_5,param_6,param_10,temp_v11,temp_v9,(int)psVar4[1],temp_v12);
     }
-    temp_v1 = DAT_0044ea00;
+    temp_v1 = g_titleScene;
     if (temp_v5 == 0) {
       DAT_004d46ac = 0x3f800000;
       DAT_004d46b0 = 0x3f800000;
@@ -189,7 +189,7 @@ void FUN_002be90c(int param_1,int param_2,int param_3,int param_4,unsigned int p
     }
     FUN_002b0750(2,param_5,param_7,param_10 + temp_v9,(int)param_11,temp_v5,
                  (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),(int)((unsigned long long)param_11 >> 0x20));
-    temp_v1 = DAT_0044ea00;
+    temp_v1 = g_titleScene;
     temp_v0 = FUN_002c5da8(6,7,0);
     piVar7 = (int *)(temp_v1 + 0x12ac);
     temp_v5 = piVar7[*piVar7 + 2];
@@ -232,7 +232,7 @@ void FUN_002be90c(int param_1,int param_2,int param_3,int param_4,unsigned int p
     if (param_12 == 0) {
       FUN_002b0750(2,param_5,param_6,param_10,temp_v11,temp_v7,(int)psVar4[1],temp_v12);
     }
-    temp_v1 = DAT_0044ea00;
+    temp_v1 = g_titleScene;
     if (temp_v5 == 0) {
       DAT_004d46ac = 0x3f800000;
       DAT_004d46b0 = 0x3f800000;
@@ -264,7 +264,7 @@ void FUN_002be90c(int param_1,int param_2,int param_3,int param_4,unsigned int p
     }
     FUN_002b0750(2,param_5,param_8,param_10 + temp_v7,(int)param_11,temp_v5,
                  (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),(int)((unsigned long long)param_11 >> 0x20));
-    temp_v1 = DAT_0044ea00;
+    temp_v1 = g_titleScene;
     temp_v0 = FUN_002c5da8(6,7,0);
     piVar7 = (int *)(temp_v1 + 0x12ac);
     temp_v5 = piVar7[*piVar7 + 2];

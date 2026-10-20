@@ -22,7 +22,7 @@ extern int DAT_0063f500; /* 0x63f500 */
 /* Supplied declaration required: FUN_001448a8. */
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: FUN_001742e4. */
-extern int FUN_00180008(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
 
 
@@ -39,7 +39,7 @@ void FUN_0013a7a0(void)
   do {
     temp_v3 = *(int *)(&DAT_0061955c + temp_v1 * 4);
     if (temp_v3 != 0) {
-      temp_v0 = FUN_00180008(1);
+      temp_v0 = jyoucyuGetTableEntry(1);
       if ((temp_v0 == 0) && (temp_v0 = FUN_00162ea4(), temp_v0 == 0)) {
         if (temp_v3 + 0xfeffff84U < 0x191) {
           FUN_001448a8(temp_v3,DAT_00588fb4,0);

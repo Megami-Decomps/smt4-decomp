@@ -4,24 +4,24 @@
 
 extern "C" {
 
-int FUN_001182ac(unsigned char *);
+int asdFileWait(unsigned char *);
 int FUN_0014e834(unsigned char *, int);
 int FUN_002b0174(unsigned char *);
 int FUN_002b0184(void);
-int FUN_002b01a0(unsigned char [256], int);
+int asdFileQueueRequest(unsigned char [256], int);
 int FUN_002be624(...);
 int FUN_002c3940(unsigned char [256], int);
 
-extern signed char DAT_00465040; /* 0x465040 */
+extern signed char g_asdLoadFileUseRawPaths; /* 0x465040 */
 
-/* Supplied declaration required: FUN_001182ac. */
+/* Supplied declaration required: asdFileWait. */
 extern int FUN_0014e724(unsigned char *);
 /* Supplied declaration required: FUN_0014e834. */
 /* Supplied declaration required: FUN_002b0174. */
 /* Supplied declaration required: FUN_002b0184. */
-/* Supplied declaration required: FUN_002b01a0. */
-extern int FUN_002b0404(unsigned int);
-extern int FUN_002b045c(unsigned int);
+/* Supplied declaration required: asdFileQueueRequest. */
+extern int asdLoadFileIsPatched(unsigned int);
+extern int asdLoadFileHasDevice(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002c3940. */
 
@@ -43,11 +43,11 @@ unsigned int FUN_002c5c04(unsigned int param_1)
   
   puVar2 = temp_v2;
   FUN_002c3940(temp_v2,0x100);
-  if ((DAT_00465040 != '\0') || (temp_v0 = FUN_002b045c(param_1), temp_v0 != 0)) {
+  if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v0 = asdLoadFileHasDevice(param_1), temp_v0 != 0)) {
     FUN_002be624(temp_v2,param_1);
   }
   else {
-    temp_v0 = FUN_002b0404(param_1);
+    temp_v0 = asdLoadFileIsPatched(param_1);
     if (temp_v0 != 0) {
       FUN_002be624(temp_v2,"patch:/%s",param_1);
     }
@@ -55,10 +55,10 @@ unsigned int FUN_002c5c04(unsigned int param_1)
       FUN_002be624(temp_v2,"rom:/%s",param_1);
     }
   }
-  FUN_002b01a0(temp_v2,0);
+  asdFileQueueRequest(temp_v2,0);
   FUN_002b0184();
   FUN_0014e834(puVar2,4);
-  FUN_001182ac(puVar2);
+  asdFileWait(puVar2);
   temp_v0 = FUN_0014e724(puVar2);
   if (temp_v0 == 0) {
     temp_v1 = *(unsigned int *)(puVar2 + 0xc);

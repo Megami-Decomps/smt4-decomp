@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00157558(int);
 int FUN_00162790(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00168594(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
@@ -19,15 +19,15 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } void_stack;
 
-extern int DAT_005806c4; /* 0x5806c4 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_mapDepart; /* 0x5806c4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
 extern int FUN_001654d8(int);
 extern int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168594. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -51,10 +51,10 @@ unsigned int FUN_003581bc(void)
   float temp_v6;
   unsigned char temp_v7 [72];
   
-  temp_v2 = DAT_005806c4;
-  if (*(int *)(DAT_005806c4 + 0x48) == 0xb) {
-    FUN_00157558(DAT_0059dbb4);
-    temp_v1 = DAT_0059dbb4;
+  temp_v2 = g_mapDepart;
+  if (*(int *)(g_mapDepart + 0x48) == 0xb) {
+    FUN_00157558(g_renderCtx);
+    temp_v1 = g_renderCtx;
     temp_v0 = FUN_001692ac(1,0);
     piVar6 = (int *)(temp_v1 + 0x1258);
     temp_v3 = *piVar6;
@@ -66,12 +66,12 @@ unsigned int FUN_003581bc(void)
       *(unsigned char *)(temp_v1 + 0x1270) = 0;
     }
     temp_v6 = 1.0f;
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_00183bb0();
     if (*(int *)(temp_v2 + 0x48) == 0xb) {
       temp_v1 = FUN_001654d8(temp_v2 + 0x148);
       temp_v0 = FUN_001654e4(temp_v2 + 0x148);
-      temp_v2 = DAT_005806c4;
+      temp_v2 = g_mapDepart;
       temp_v3 = FUN_001834a4(0x1d,0xca);
       FUN_001835b4(2,0x1d,0xc2,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v0,0x65);
       FUN_001835b4(2,0x1d,0xc3,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v0,0x6a);
@@ -92,8 +92,8 @@ unsigned int FUN_003581bc(void)
       FUN_00162790(3,0x57d8ffff,temp_v7,temp_v4);
       FUN_00183bb0();
     }
-    temp_v2 = DAT_0059dbb4;
-    piVar6 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v2 = g_renderCtx;
+    piVar6 = (int *)(g_renderCtx + 0x1258);
     temp_v1 = *piVar6;
     temp_v0 = piVar6[temp_v1 + 2];
     *piVar6 = temp_v1 - 1;

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0010d29c(void);
 int FUN_0010d2a6(void);
 int FUN_0011b6c2(int, unsigned int);
-int FUN_0016007c(void);
+int asdOperatorNew(void);
 int FUN_004130c0(void);
 int FUN_00514d48(int, int);
 
@@ -24,7 +24,7 @@ extern unsigned int DAT_005949a0; /* 0x5949a0 */
 /* Supplied declaration required: FUN_0010d2a6. */
 /* Supplied declaration required: FUN_0011b6c2. */
 extern int FUN_0012bc90(unsigned int *);
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 extern int FUN_002e6e26(void);
 extern int FUN_002e9ff4(int);
 /* Supplied declaration required: FUN_004130c0. */
@@ -47,7 +47,7 @@ void FUN_003fa6a4(int param_1)
     return;
   }
   puVar2 = (unsigned int *)0x100;
-  FUN_0016007c();
+  asdOperatorNew();
   temp_v0 = 0;
   if (puVar2 != (unsigned int *)0x0) {
     temp_v3 = *(unsigned int *)(param_1 + 0x38);

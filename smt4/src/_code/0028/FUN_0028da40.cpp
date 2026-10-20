@@ -7,7 +7,7 @@ extern "C" {
 extern int FUN_002a8740(int);
 extern int FUN_002a8764(void);
 extern int FUN_002b63ac(void);
-extern int FUN_002b6b20(void);
+extern int gameGetOptions(void);
 
 
 void FUN_0028da40(int param_1,int param_2,int param_3)
@@ -40,7 +40,7 @@ void FUN_0028da40(int param_1,int param_2,int param_3)
     return;
   }
   if (param_2 == 4) {
-    temp_v0 = FUN_002b6b20();
+    temp_v0 = gameGetOptions();
     *(unsigned short *)(param_1 + 0x38de) = *(unsigned short *)(temp_v0 + 0x2a);
     *(unsigned short *)(param_1 + 0x38fc) = 0xffff;
     return;

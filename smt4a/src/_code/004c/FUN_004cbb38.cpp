@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00184310(...);
 int FUN_0019de98(...);
 int FUN_0020214c(...);
@@ -50,7 +50,7 @@ struct fn_004cbb38_arg0_p2c {
 };
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_001ab854(int);
@@ -159,12 +159,12 @@ LAB_004cbbbc:
         temp_v0 = *(short *)(temp_v5 + 4);
       }
       if (!temp_v6 || temp_v0 == 0) {
-        FUN_001681cc(0x6c);
+        sysPlaySe(0x6c);
         param_1->field_0x8 = 0;
         param_1->field_0x4 = 6;
         return;
       }
-      FUN_001681cc(0x6a);
+      sysPlaySe(0x6a);
       param_1->field_0x8 = 0;
       param_1->field_0x4 = 5;
       return;

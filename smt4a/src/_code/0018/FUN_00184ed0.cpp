@@ -1,29 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00184ed0` (_code @ 0x184ed0, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Returns the owner's current entry, or its fallback entry when the two counters differ (0 when no object). */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f25c; /* 0x57f25c */
+typedef struct {
+    u8 unk000[0x2f4];   /* 0x000 */
+    s32 fallbackEntry;  /* 0x2f4 */
+    u8 unk2f8[0x30];    /* 0x2f8 */
+    s32 counterB;       /* 0x328 */
+    s32 counterA;       /* 0x32c */
+} EntryOwner;
 
+typedef struct {
+    u32 unk00;          /* 0x00 */
+    EntryOwner *owner;  /* 0x04 */
+} EntryGlobals;
 
-int FUN_00184ed0(void)
+extern EntryGlobals DAT_0057f25c;
 
+s32 FUN_00184ed0(void)
 {
-  int temp_v0;
-  int *piVar1;
-  
-  piVar1 = (*(int **)((unsigned char *)&DAT_0057f25c + 0x4));
-  if (piVar1 == 0) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = piVar1[0xcb];
-    if (temp_v0 != piVar1[0xca]) {
-      temp_v0 = piVar1[0xbd];
+    s32 value;
+    EntryOwner *owner = DAT_0057f25c.owner;
+
+    if (owner == NULL) {
+        value = 0;
+    } else {
+        value = (owner->counterA == owner->counterB) ? owner->counterA : owner->fallbackEntry;
     }
-  }
-  return temp_v0;
+    return value;
 }
 
 } /* extern "C" */

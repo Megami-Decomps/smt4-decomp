@@ -115,7 +115,7 @@ typedef struct {
     unsigned int sp1DC; /* 0x1dc: local_1dc */
 } param_1_stack;
 
-extern float DAT_005c1100; /* 0x5c1100 */
+extern float g_polyDefaultColor; /* 0x5c1100 */
 extern float DAT_005c1104; /* 0x5c1104 */
 extern float DAT_005c1108; /* 0x5c1108 */
 extern float DAT_005c110c; /* 0x5c110c */
@@ -390,7 +390,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
               *(unsigned int *)(temp_v2 + 0x74) = temp_v38;
               *(unsigned int *)(temp_v2 + 0x88) = *(unsigned int *)(temp_v2 + 0x88) | 0x800;
               DAT_006472e8 = DAT_005c110c;
-              DAT_006472dc = DAT_005c1100;
+              DAT_006472dc = g_polyDefaultColor;
               DAT_006472e0 = DAT_005c1104;
               DAT_006472e4 = DAT_005c1108;
               temp_v28 = pfVar8[6];

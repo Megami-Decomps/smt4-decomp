@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192798(void);
+int dataTableGetEntries(void);
 int FUN_001a6f60(...);
 
 typedef struct fn_002c1df8_arg0 fn_002c1df8_arg0;
@@ -16,8 +16,8 @@ struct fn_002c1df8_arg0 {
     byte field_0x26; /* +0x26 */
 };
 
-extern unsigned int FUN_00192748(unsigned int);
-/* Supplied declaration required: FUN_00192798. */
+extern unsigned int dataTableGetCount(unsigned int);
+/* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_001a6f60. */
 extern unsigned int FUN_0048168c(void);
 
@@ -36,15 +36,15 @@ void FUN_002c1df8(fn_002c1df8_arg0 *param_1)
   
   temp_v0 = FUN_0048168c();
   temp_v1 = FUN_001a6f60(param_1,0);
-  temp_v2 = FUN_00192798();
-  temp_v3 = FUN_00192748(temp_v1);
+  temp_v2 = dataTableGetEntries();
+  temp_v3 = dataTableGetCount(temp_v1);
   temp_v5 = 0;
   if (temp_v5 < temp_v3) {
     do {
       if ((*(char *)(temp_v2 + 0x26) != '\0') && (temp_v4 = 1, temp_v0 >= 2)) {
         do {
           FUN_001a6f60(param_1,temp_v4);
-          piVar5 = (int *)FUN_00192798();
+          piVar5 = (int *)dataTableGetEntries();
           if (*piVar5 == (int)*(short *)(temp_v2 + 0x20)) {
             *(char *)(temp_v2 + 0x26) = (char)temp_v4;
             break;

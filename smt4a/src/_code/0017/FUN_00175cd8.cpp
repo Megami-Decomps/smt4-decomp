@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned char **, int);
+int sysMemClear(unsigned char **, int);
 
 typedef int romwright_code(...);
 extern int FUN_001913f8(...); /* 0x1913f8 */
@@ -18,14 +18,14 @@ extern unsigned char *DAT_00646620; /* 0x646620 */
 extern unsigned char *DAT_00646624; /* 0x646624 */
 extern romwright_code *DAT_00646628; /* 0x646628 */
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_00175cd8(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_002e6354(&DAT_00646618,0x200);
+  sysMemClear(&DAT_00646618,0x200);
   DAT_00646618 = &LAB_00191498;
   DAT_0064661c = &LAB_00191434;
   DAT_00646620 = &LAB_00191494;

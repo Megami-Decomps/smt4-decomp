@@ -1,61 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fce08` (_code @ 0x3fce08, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads SlotSet.count with ldrh (unsigned) yet compares it signed (ble); built uses ldrsh */
+/* Starts the object once: records the resource's value in its first slot, then runs the start callback. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003fc294(...);
-int FUN_003fcc94(...);
+typedef struct Slot {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u32 value;
+    /* 0x1C */ u32 key;
+} Slot;
 
-typedef struct fn_003fce08_arg0 fn_003fce08_arg0;
-struct fn_003fce08_arg0 {
-    unsigned char pad_0x0[0x8];
-    void *field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    void *field_0x10; /* +0x10 */
-    void *field_0x14; /* +0x14 */
-    unsigned char pad_0x18[0x25];
-    byte field_0x3d; /* +0x3d */
-};
+typedef struct SlotSet {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s16 count;
+} SlotSet;
 
-extern int FUN_001861c4(void *, unsigned int);
-extern int FUN_00341930(void);
-/* Supplied declaration required: FUN_003fc294. */
-extern int FUN_003fcbe0(fn_003fce08_arg0 *);
-/* Supplied declaration required: FUN_003fcc94. */
+typedef struct Resource {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 value;
+} Resource;
 
+typedef struct Starter {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ void *owner;
+    /* 0x0C */ u32 key;
+    /* 0x10 */ SlotSet *slotSet;
+    /* 0x14 */ Slot *slots;
+    /* 0x18 */ u8 unk18[0x25];
+    /* 0x3D */ u8 started;
+} Starter;
 
-unsigned int FUN_003fce08(fn_003fce08_arg0 *param_1,unsigned int param_2)
+extern Resource *FUN_001861c4(void *owner, u32 key);
+extern s32 FUN_00341930(void);
+extern void FUN_003fc294(Starter *starter, u32 arg);
+extern s32 FUN_003fcbe0(Starter *starter);
+extern void FUN_003fcc94(Starter *starter);
 
+s32 FUN_003fce08(Starter *starter, u32 arg)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  void *pvVar3;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = FUN_001861c4(param_1->field_0x8,param_1->field_0xc);
-  temp_v1 = FUN_00341930();
-  if (temp_v1 != 0) {
-    if (param_1->field_0x3d == 0) {
-      temp_v1 = FUN_003fcbe0(param_1);
-      if (temp_v1 != 0) {
-        FUN_003fcc94(param_1);
-      }
-      temp_v3 = *(unsigned int *)(temp_v0 + 8);
-      temp_v2 = param_1->field_0xc;
-      param_1->field_0x3d = 1;
-      if ((int)*(unsigned short *)((int)param_1->field_0x10 + 4) > 0) {
-        pvVar3 = param_1->field_0x14;
-        *(unsigned int *)((int)pvVar3 + 0x18) = temp_v3;
-        *(unsigned int *)((int)pvVar3 + 0x1c) = temp_v2;
-      }
-      FUN_003fc294(param_1,param_2);
+    Resource *resource = FUN_001861c4(starter->owner, starter->key);
+
+    if (FUN_00341930() == 0) {
+        return 0;
+    }
+    if (starter->started == 0) {
+        if (FUN_003fcbe0(starter) != 0) {
+            FUN_003fcc94(starter);
+        }
+        u32 value = resource->value;
+        u32 key = starter->key;
+        starter->started = 1;
+        if (starter->slotSet->count > 0) {
+            Slot *slot = starter->slots;
+            slot->value = value;
+            slot->key = key;
+        }
+        FUN_003fc294(starter, arg);
     }
     return 1;
-  }
-  return 0;
 }
 
-} /* extern "C" */
+}

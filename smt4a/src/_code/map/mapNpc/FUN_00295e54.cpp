@@ -17,7 +17,7 @@ int FUN_003fd784(...);
 int FUN_003fe86c(unsigned int, int, int);
 int FUN_0040a908(int, int);
 int FUN_0040a918(...);
-int FUN_0040aa90(void);
+int moriModelContentCopyBody(void);
 int FUN_0040aad4(int, int);
 int FUN_0040ace8(...);
 int FUN_0046c35c(...);
@@ -26,7 +26,7 @@ int VectorSignedToFloat(...);
 extern unsigned char LAB_00296450; /* 0x296450 */
 extern unsigned char LAB_00296470; /* 0x296470 */
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_00570280; /* 0x570280 */
+extern int g_aocSystem; /* 0x570280 */
 extern int *DAT_00581280; /* 0x581280 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -36,7 +36,7 @@ extern int *DAT_00581280; /* 0x581280 */
 /* Supplied declaration required: FUN_00295d40. */
 /* Supplied declaration required: FUN_00312de8. */
 /* Supplied declaration required: FUN_00327678. */
-extern unsigned int FUN_00340fa0(void);
+extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: FUN_00353cd4. */
 /* Supplied declaration required: FUN_0037976c. */
 /* Supplied declaration required: FUN_00385964. */
@@ -46,7 +46,7 @@ extern int FUN_003b564c(void);
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
-/* Supplied declaration required: FUN_0040aa90. */
+/* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(int);
 extern int FUN_0040ac08(void);
@@ -122,13 +122,13 @@ unsigned int FUN_00295e54(int param_1,int param_2,int param_3)
         psVar11 = (short *)((int)psVar11 + 1)) {
       psVar5 = psVar11;
       FUN_00327678();
-      temp_v3 = DAT_00570280;
-      FUN_0046c35c(DAT_00570280,0x24);
+      temp_v3 = g_aocSystem;
+      FUN_0046c35c(g_aocSystem,0x24);
       piVar12 = DAT_00581280;
       if (temp_v3 != 0) {
         if (*psVar5 != -1) goto LAB_00296008;
-        temp_v3 = DAT_00570280;
-        FUN_0046c35c(DAT_00570280,0x24,0);
+        temp_v3 = g_aocSystem;
+        FUN_0046c35c(g_aocSystem,0x24,0);
         piVar12 = DAT_00581280;
         if (temp_v5 - temp_v3 <= (int)psVar11) {
           *DAT_00581280 = 0;
@@ -214,7 +214,7 @@ LAB_002961a0:
           temp_v5 = FUN_0040ac08();
         }
         piVar12[temp_v3 * 0xf + 0x10] = temp_v5;
-        FUN_0040aa90();
+        moriModelContentCopyBody();
         *(unsigned char *)(piVar12 + temp_v3 * 0xf + 0xe) = 1;
       }
       else {
@@ -242,7 +242,7 @@ LAB_002961f8:
       piVar12[temp_v3 * 0xf + 0x10] = temp_v5;
       FUN_001cd3ec();
       FUN_0040a908(piVar12[temp_v3 * 0xf + 0x10],0x10000);
-      if ((!(param_1 == 3 && param_2 == 9)) && (temp_v8 = FUN_00340fa0(), 0x1f000 >= temp_v8)) {
+      if ((!(param_1 == 3 && param_2 == 9)) && (temp_v8 = asdVramBGetFreeBytes(), 0x1f000 >= temp_v8)) {
         temp_v5 = piVar12[temp_v3 * 0xf + 0x10];
         temp_v9 = 0x30000;
       }

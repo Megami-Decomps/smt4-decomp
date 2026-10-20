@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0015f858(...);
 int FUN_00180118(...);
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_001f4e20(...);
 int FUN_002392b8(...);
 int FUN_002a49e4(...);
@@ -14,7 +14,7 @@ int FUN_002c2cc4(...);
 int FUN_002c2d5c(void);
 int FUN_002e342c(...);
 int FUN_002e5c6c(...);
-int FUN_002e6354(unsigned char [104], int);
+int sysMemClear(unsigned char [104], int);
 int FUN_003180c4(...);
 int FUN_0047f8ac(...);
 
@@ -32,7 +32,7 @@ extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_0015f858. */
 extern int FUN_001632fc(void);
 /* Supplied declaration required: FUN_00180118. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001f4e20. */
 /* Supplied declaration required: FUN_002392b8. */
 extern int FUN_002619e0(void);
@@ -41,7 +41,7 @@ extern int FUN_002619e0(void);
 /* Supplied declaration required: FUN_002c2d5c. */
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: FUN_002e5c6c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_0047f8ac. */
 
@@ -82,7 +82,7 @@ unsigned int FUN_0023173c(unsigned int *param_1)
       *(unsigned int *)(*(int *)(puVar1 + 0x43a) + 0x878) = *(unsigned int *)(puVar1 + 0x43c);
     }
     puVar2[2] = puVar2[2] - 1;
-    FUN_0019a5a0();
+    asdMemFree();
     puVar1 = puVar6;
     puVar2 = DAT_005738e8;
   }
@@ -102,7 +102,7 @@ unsigned int FUN_0023173c(unsigned int *param_1)
       puVar1[0x438] = puVar1[0x438] + 1;
       return 0;
     }
-    FUN_002e6354(temp_v4,0x68);
+    sysMemClear(temp_v4,0x68);
     switch(*puVar1) {
     case 0:
       FUN_002a49e4(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);

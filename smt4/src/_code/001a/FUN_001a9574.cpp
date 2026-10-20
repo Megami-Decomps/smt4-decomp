@@ -1,46 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a9574` (_code @ 0x1a9574, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the table pointer in r6 and the constant 0 in r7 (swapped here) */
+/* Releases every in-use slot of the slot table (freeing its resource), then marks the table empty. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002877d4(unsigned int);
+typedef struct Slot {
+    /* 0x00 */ u8 used;
+    /* 0x01 */ u8 unk01[7];
+    /* 0x08 */ u32 handle;
+    /* 0x0C */ u32 resource;
+    /* 0x10 */ u8 unk10[2];
+    /* 0x12 */ u16 unk12;
+    /* 0x14 */ u8 unk14[0x0C];
+} Slot; /* 0x20 */
 
-extern int DAT_00448c20; /* 0x448c20 */
+typedef struct SlotTable {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ s32 count;
+    /* 0x08 */ u8 active;
+    /* 0x09 */ u8 loaded;
+    /* 0x0A */ u8 unk0A[2];
+    /* 0x0C */ Slot slots[1];
+} SlotTable;
 
-/* Supplied declaration required: FUN_002877d4. */
+extern SlotTable *DAT_00448c20;
 
+extern void FUN_002877d4(u32 handle);
 
 void FUN_001a9574(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  if (*(char *)(DAT_00448c20 + 9) != '\0') {
-    temp_v0 = 0;
-    if (temp_v0 < *(int *)(DAT_00448c20 + 4)) {
-      do {
-        temp_v1 = DAT_00448c20 + temp_v0 * 0x20 + 0xc;
-        if (*(char *)temp_v1 != '\0') {
-          if (*(int *)(temp_v1 + 0xc) != 0) {
-            FUN_002877d4(*(unsigned int *)(temp_v1 + 8));
-            *(unsigned int *)(temp_v1 + 0xc) = 0;
-            *(unsigned short *)(temp_v1 + 0x12) = 0;
-            *(unsigned int *)(temp_v1 + 8) = 0;
-          }
-          *(char *)temp_v1 = '\0';
+    s32 i;
+
+    if (DAT_00448c20->loaded != 0) {
+        for (i = 0; i < DAT_00448c20->count; i++) {
+            Slot *slot = &DAT_00448c20->slots[i];
+
+            if (slot->used != 0) {
+                if (slot->resource != 0) {
+                    FUN_002877d4(slot->handle);
+                    slot->resource = 0;
+                    slot->unk12 = 0;
+                    slot->handle = 0;
+                }
+                slot->used = 0;
+            }
         }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < *(int *)(DAT_00448c20 + 4));
+        DAT_00448c20->count = 0;
+        DAT_00448c20->active = 0;
+        DAT_00448c20->loaded = 0;
     }
-    temp_v0 = DAT_00448c20;
-    *(unsigned int *)(DAT_00448c20 + 4) = 0;
-    *(unsigned char *)(temp_v0 + 8) = 0;
-    *(unsigned char *)(temp_v0 + 9) = 0;
-  }
-  return;
 }
 
-} /* extern "C" */
+}

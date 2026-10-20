@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001c0a44(unsigned int, int);
-int FUN_002c43b4(unsigned int, int);
+int jobStop(unsigned int, int);
 
 typedef int romwright_code(...);
 extern int *DAT_00439ce4; /* 0x439ce4 */
@@ -13,9 +13,9 @@ extern unsigned int DAT_0049356c; /* 0x49356c */
 extern unsigned int DAT_00493570; /* 0x493570 */
 
 /* Supplied declaration required: FUN_001c0a44. */
-extern int FUN_002bf244(unsigned int);
-extern int FUN_002c08f0(void);
-/* Supplied declaration required: FUN_002c43b4. */
+extern int jobIsValid(unsigned int);
+extern int jobGetWork(void);
+/* Supplied declaration required: jobStop. */
 
 
 void FUN_0020f5e8(void)
@@ -26,10 +26,10 @@ void FUN_0020f5e8(void)
   int temp_v1;
   unsigned int *puVar3;
   
-  temp_v0 = FUN_002c08f0();
-  temp_v1 = FUN_002bf244(*(unsigned int *)(temp_v0 + 0x34));
+  temp_v0 = jobGetWork();
+  temp_v1 = jobIsValid(*(unsigned int *)(temp_v0 + 0x34));
   if (temp_v1 != 0) {
-    FUN_002c43b4(*(unsigned int *)(temp_v0 + 0x34),0);
+    jobStop(*(unsigned int *)(temp_v0 + 0x34),0);
   }
   temp_v0 = 0;
   do {

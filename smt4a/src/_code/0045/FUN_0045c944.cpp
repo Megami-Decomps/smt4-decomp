@@ -42,7 +42,7 @@ extern int FUN_001a8d40(unsigned int **, unsigned int);
 /* Supplied declaration required: FUN_00466d2c. */
 /* Supplied declaration required: FUN_00466dac. */
 /* Supplied declaration required: FUN_00466ea4. */
-extern int FUN_00507d20(unsigned int, unsigned int);
+extern int vcallSlot5(unsigned int, unsigned int);
 
 
 unsigned int
@@ -106,19 +106,19 @@ FUN_0045c944(fn_0045c944_arg0 *param_1,int param_2,unsigned int *param_3,unsigne
         FUN_001a5e84(&puStack_70,temp_v2,0);
         temp_v3 = FUN_001a8d40(&puStack_70,*param_4);
         if (temp_v3 == 0) {
-          temp_v1 = FUN_00507d20(param_1->field_0x110,*temp_v11);
+          temp_v1 = vcallSlot5(param_1->field_0x110,*temp_v11);
         }
       }
       else {
-        temp_v1 = FUN_00507d20(param_1->field_0x110,*temp_v11);
+        temp_v1 = vcallSlot5(param_1->field_0x110,*temp_v11);
       }
     }
     else {
-      temp_v1 = FUN_00507d20(param_1->field_0x110,*temp_v11);
+      temp_v1 = vcallSlot5(param_1->field_0x110,*temp_v11);
     }
   }
   else {
-    temp_v1 = FUN_00507d20(param_1->field_0x110,*temp_v11);
+    temp_v1 = vcallSlot5(param_1->field_0x110,*temp_v11);
   }
   temp_v6 = *(unsigned int *)(param_2 + 0xb0);
   iStack_4c = temp_v1;

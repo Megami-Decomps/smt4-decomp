@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern unsigned int DAT_00435e48; /* 0x435e48 */
+extern unsigned int g_randState; /* 0x435e48 */
 
 
 void FUN_00103e60(unsigned int param_1)
 
 {
-  DAT_00435e48 = param_1;
+  g_randState = param_1;
   return;
 }
 

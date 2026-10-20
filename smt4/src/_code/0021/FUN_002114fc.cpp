@@ -8,8 +8,8 @@ int FUN_0026b9bc(void);
 int FUN_0028a368(int);
 int FUN_0028a924(int, int, unsigned int);
 int FUN_002b8838(int);
-int FUN_002f5c08(void);
-int FUN_00310678(void);
+int campCecSettingOpen(void);
+int campCecSettingDestroy(void);
 
 typedef struct fn_002114fc_arg0 fn_002114fc_arg0;
 struct fn_002114fc_arg0 {
@@ -26,10 +26,10 @@ extern unsigned char FUN_002595bc(void);
 /* Supplied declaration required: FUN_0028a368. */
 /* Supplied declaration required: FUN_0028a924. */
 /* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002ccc10(void);
-extern int FUN_002d7460(void);
-/* Supplied declaration required: FUN_002f5c08. */
-/* Supplied declaration required: FUN_00310678. */
+extern int campCecSettingExists(void);
+extern int campCecSettingIsDone(void);
+/* Supplied declaration required: campCecSettingOpen. */
+/* Supplied declaration required: campCecSettingDestroy. */
 
 
 unsigned int FUN_002114fc(fn_002114fc_arg0 *param_1)
@@ -41,11 +41,11 @@ unsigned int FUN_002114fc(fn_002114fc_arg0 *param_1)
   unsigned int temp_v2;
   
   temp_v2 = 0;
-  temp_v1 = FUN_002ccc10();
+  temp_v1 = campCecSettingExists();
   if (temp_v1 != 0) {
-    temp_v1 = FUN_002d7460();
+    temp_v1 = campCecSettingIsDone();
     if (temp_v1 != 0) {
-      FUN_00310678();
+      campCecSettingDestroy();
       FUN_002b8838(3);
       param_1->field_0xd34 = 0;
       param_1->field_0xd2c = 6;
@@ -58,7 +58,7 @@ unsigned int FUN_002114fc(fn_002114fc_arg0 *param_1)
     }
   }
   else {
-    FUN_002f5c08();
+    campCecSettingOpen();
   }
   return temp_v2;
 }

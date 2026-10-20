@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char LAB_0025cc70; /* 0x25cc70 */
 
-extern int FUN_0030ef8c(unsigned int, unsigned char *, unsigned int);
+extern int rt_memcmp(unsigned int, unsigned char *, unsigned int);
 
 
 unsigned char FUN_0025cc50(unsigned int param_1)
@@ -14,7 +14,7 @@ unsigned char FUN_0025cc50(unsigned int param_1)
 {
   int temp_v0;
   
-  temp_v0 = FUN_0030ef8c(param_1,&LAB_0025cc70,4);
+  temp_v0 = rt_memcmp(param_1,&LAB_0025cc70,4);
   return temp_v0 == 0;
 }
 

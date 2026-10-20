@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_003f0e20(int, int);
 int FUN_00420e4c(unsigned int, int);
 int FUN_00421078(unsigned int);
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_00420e4c. */
 /* Supplied declaration required: FUN_00421078. */
@@ -45,7 +45,7 @@ void FUN_004fa64c(int param_1)
   
   temp_v1 = FUN_00421248(*(unsigned int *)(param_1 + 0x33c0));
   if (temp_v1 != 0) {
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     FUN_003f0e20(temp_v1,(int)*(short *)(*(int *)(param_1 + 0x33bc) + 0x6a));
     temp_v2 = 0;
     do {
@@ -53,7 +53,7 @@ void FUN_004fa64c(int param_1)
       if (*(int *)(temp_v1 + 0x170) == *(int *)(temp_v4 + 0x1398)) {
         temp_v1 = param_1 + temp_v2 * 0x3c + 0x1398;
 LAB_004fa6d8:
-        temp_v3 = FUN_0014aa78();
+        temp_v3 = btlGetMainState();
         if (temp_v1 != 0) {
           FUN_00421514(*(unsigned int *)(param_1 + 0x33c0),temp_v1 + 8);
           FUN_00420e4c(*(unsigned int *)(param_1 + 0x33c0),*(int *)(param_1 + 0x33bc) + 0xc);
@@ -68,7 +68,7 @@ LAB_004fa6d8:
       }
       temp_v2 = temp_v2 + 2;
     } while (temp_v2 < 0x32);
-    FUN_0014aa78();
+    btlGetMainState();
 LAB_004fa72c:
     FUN_00421078(*(unsigned int *)(param_1 + 0x33c0));
     *(unsigned char *)(param_1 + 0x33b4) = 8;

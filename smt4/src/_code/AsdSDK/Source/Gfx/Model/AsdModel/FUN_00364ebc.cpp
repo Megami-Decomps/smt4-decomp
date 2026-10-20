@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_3_stack;
 
-extern unsigned int DAT_004652a0; /* 0x4652a0 */
+extern unsigned int g_commandBufferCursor; /* 0x4652a0 */
 extern unsigned char DAT_00472098; /* 0x472098 */
 extern unsigned int DAT_004720a0; /* 0x4720a0 */
 extern unsigned int DAT_004720ec; /* 0x4720ec */
@@ -158,7 +158,7 @@ void FUN_00364ebc(int param_1,int *param_2,float *param_3)
   temp_v11 = (temp_v3 & 0xffff) | (temp_v0 << 0x10);
   temp_v12 = 0xf0068;
   (*(unsigned int *)((unsigned char *)&DAT_00472098 - 0x4)) = temp_v6;
-  nw_gfx_internal_FastWordCopyAsm_8(DAT_004652a0,temp_v7);
+  nw_gfx_internal_FastWordCopyAsm_8(g_commandBufferCursor,temp_v7);
   temp_v5 = param_3[4];
   temp_v4 = param_3[5];
   DAT_004720f4 = 1.0f;

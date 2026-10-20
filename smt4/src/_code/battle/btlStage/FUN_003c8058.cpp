@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_002bcc60(...);
 int FUN_002bcd44(...);
-int FUN_002c222c(...);
-int FUN_002c32a0(...);
+int asdOperatorNew(...);
+int memAlloc(...);
 int FUN_002c38fc(...);
 int FUN_002c40f8(...);
 int FUN_002c526c(...);
@@ -31,8 +31,8 @@ extern unsigned char LAB_003f6ff4; /* 0x3f6ff4 */
 
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002bcd44. */
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c38fc. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
@@ -57,12 +57,12 @@ void FUN_003c8058(int param_1)
   FUN_002c38fc(param_1 + 0xb8);
   if (*(int *)(param_1 + 0xac) == 0) {
     temp_v0 = 0x100;
-    FUN_002c32a0(0x100,0x100,0,0x1000,0x1000,1);
+    memAlloc(0x100,0x100,0,0x1000,0x1000,1);
     *(unsigned int *)(param_1 + 0xac) = temp_v0;
   }
   if (*(int *)(param_1 + 0xb0) == 0) {
     puVar2 = (unsigned int *)0x18;
-    FUN_002c222c();
+    asdOperatorNew();
     if (puVar2 != (unsigned int *)0x0) {
       *puVar2 = 0;
       puVar2[1] = 0;

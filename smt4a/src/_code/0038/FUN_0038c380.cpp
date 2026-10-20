@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
-int FUN_00236038(int);
-int FUN_003283ac(void);
+int btlGetMainState(void);
+int scrGetArg(int);
+int scrSetResult(void);
 int FUN_003eaf20(void);
 
-/* Supplied declaration required: FUN_0014aa78. */
-/* Supplied declaration required: FUN_00236038. */
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: btlGetMainState. */
+/* Supplied declaration required: scrGetArg. */
+/* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003eaf20. */
 
 
@@ -19,10 +19,10 @@ unsigned int FUN_0038c380(void)
 
 {
 /* irregular: 4 native warning(s); review required */
-  FUN_00236038(0);
-  FUN_0014aa78();
+  scrGetArg(0);
+  btlGetMainState();
   FUN_003eaf20();
-  FUN_003283ac();
+  scrSetResult();
   return 1;
 }
 

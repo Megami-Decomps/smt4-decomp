@@ -20,7 +20,7 @@ typedef char romwright_storage_s__a_a_00587f08_9_1_s1_width_check[(sizeof(((unio
 extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 */
 extern int DAT_005f17f4; /* 0x5f17f4 */
 extern unsigned char DAT_005f17fc; /* 0x5f17fc */
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
 extern int FUN_0032530c(void);
 
@@ -36,8 +36,8 @@ void FUN_003b959c(void)
   DAT_005f17f4 = temp_v1 - (*(int *)((*(int *)((unsigned char *)&DAT_00581284 - 0x4)) + 8) +
                          (temp_v0 + *(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0x10) +
                                   *(int *)(DAT_00581284 + 0x10)) / 3);
-  if (DAT_005f17f4 < (*(short *)((unsigned char *)&DAT_005f15fc + 0x2c0))) {
-    DAT_005f17f4 = (int)(*(short *)((unsigned char *)&DAT_005f15fc + 0x2c0));
+  if (DAT_005f17f4 < (*(short *)((unsigned char *)&g_gameState + 0x2c0))) {
+    DAT_005f17f4 = (int)(*(short *)((unsigned char *)&g_gameState + 0x2c0));
   }
   return;
 }

@@ -41,7 +41,7 @@ typedef struct {
 extern unsigned char LAB_001ae390; /* 0x1ae390 */
 extern unsigned char LAB_001ae3a8; /* 0x1ae3a8 */
 extern int DAT_0043dd68; /* 0x43dd68 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_001dddd8. */
 /* Supplied declaration required: FUN_001eef8c. */
@@ -86,8 +86,8 @@ unsigned int FUN_001add9c(void)
   unsigned char temp_v14;
   
   temp_v3 = DAT_0043dd68;
-  FUN_002c39a4(DAT_0044ea00);
-  temp_v5 = DAT_0044ea00;
+  FUN_002c39a4(g_titleScene);
+  temp_v5 = g_titleScene;
   temp_v4 = FUN_002c5d80(1,0);
   piVar14 = (int *)(temp_v5 + 0x124c);
   temp_v11 = *piVar14;
@@ -235,8 +235,8 @@ unsigned int FUN_001add9c(void)
       FUN_002cf814(0x1e0,temp_v10,temp_v9 * -0x33333333);
     }
   }
-  temp_v3 = DAT_0044ea00;
-  piVar14 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v3 = g_titleScene;
+  piVar14 = (int *)(g_titleScene + 0x124c);
   temp_v5 = *piVar14;
   temp_v4 = piVar14[temp_v5 + 2];
   *piVar14 = temp_v5 - 1;
@@ -244,8 +244,8 @@ unsigned int FUN_001add9c(void)
     (**(romwright_code **)(temp_v3 + 0x1268))();
     *(unsigned char *)(temp_v3 + 0x1264) = 0;
   }
-  FUN_002c198c(DAT_0044ea00);
-  FUN_002c18e4(DAT_0044ea00);
+  FUN_002c198c(g_titleScene);
+  FUN_002c18e4(g_titleScene);
   return 0;
 }
 

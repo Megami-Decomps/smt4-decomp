@@ -1,29 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035de60` (_code @ 0x35de60, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instructions identical to retail; the retail object carries 4 bytes of alignment padding ahead of the literal pool. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001aea28(unsigned int, unsigned int);
+typedef struct Child Child;
+typedef struct ChildVtbl {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ void (*release)(Child *self);
+} ChildVtbl;
+struct Child {
+    /* 0x00 */ ChildVtbl *vtbl;
+    /* 0x04 */ u32 handle;
+};
 
-typedef int romwright_code(...);
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+typedef struct Scene {
+    /* 0x0000 */ u8 unk0000[0x920C];
+    /* 0x920C */ Child *child;
+} Scene;
 
-/* Supplied declaration required: FUN_001aea28. */
+extern u32 DAT_0056fcc0;
 
+int FUN_001aea28(u32 arg, u32 handle);
 
-void FUN_0035de60(int param_1)
-
+/* Unregisters the scene's child (FUN_001aea28), releases it through its vtable and clears the pointer. */
+void FUN_0035de60(Scene *scene)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x920c) != 0) {
-    FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(param_1 + 0x920c) + 4));
-    if (*(int **)(param_1 + 0x920c) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(param_1 + 0x920c) + 4))();
-      *(unsigned int *)(param_1 + 0x920c) = 0;
+    if (scene->child != NULL) {
+        FUN_001aea28(DAT_0056fcc0, scene->child->handle);
+        if (scene->child != NULL) {
+            scene->child->vtbl->release(scene->child);
+            scene->child = NULL;
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0025c9dc(unsigned int, unsigned int, unsigned int, int);
-int FUN_002c415c(void);
+int asdMemFree(void);
 
 /* Supplied declaration required: FUN_0025c650. */
 /* Supplied declaration required: FUN_0025c9dc. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_0025c650(int param_1,int param_2,int param_3)
@@ -39,7 +39,7 @@ LAB_0025c654:
     if ((*(unsigned int *)(param_2 + 0x98) & 1) == 0) {
       temp_v3 = *(int *)(param_2 + 0x90);
       if (*(int *)(temp_v3 + 0x28) != 0) {
-        FUN_002c415c();
+        asdMemFree();
         *(unsigned int *)(temp_v3 + 0x20) = 0;
         *(unsigned int *)(temp_v3 + 0x24) = 0;
         *(unsigned int *)(temp_v3 + 0x28) = 0;

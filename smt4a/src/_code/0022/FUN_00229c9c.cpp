@@ -8,8 +8,8 @@ int FUN_00137ea0(int);
 int FUN_001386b4(void);
 int FUN_001386e8(int);
 int FUN_00138cf8(int);
-int FUN_0019a5a0(void);
-int FUN_0019c364(void);
+int asdMemFree(void);
+int scrScriptProcessDestroy(void);
 int FUN_00224880(int);
 int FUN_00275bc8(void);
 int FUN_00275f44(...);
@@ -29,8 +29,8 @@ extern int DAT_005e2110; /* 0x5e2110 */
 /* Supplied declaration required: FUN_001386b4. */
 /* Supplied declaration required: FUN_001386e8. */
 /* Supplied declaration required: FUN_00138cf8. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_00224880. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00275f44. */
@@ -203,11 +203,11 @@ unsigned int FUN_00229c9c(unsigned int param_1,int param_2)
       FUN_001386b4();
     }
     if (DAT_005e2110 != 0) {
-      FUN_0019c364();
+      scrScriptProcessDestroy();
       DAT_005e2110 = 0;
     }
     if (DAT_0057f6d0 != (char *)0x0) {
-      FUN_0019a5a0();
+      asdMemFree();
     }
     DAT_0057f6d0 = (char *)0x0;
     return 1;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int *FUN_002e6dac(int);
+extern unsigned int *rt_malloc(int);
 
 
 unsigned int * FUN_002e786a(unsigned int param_1)
@@ -13,7 +13,7 @@ unsigned int * FUN_002e786a(unsigned int param_1)
   unsigned int *puVar1;
   unsigned int temp_v0;
   
-  puVar1 = (unsigned int *)FUN_002e6dac(param_1 * 2 + 4);
+  puVar1 = (unsigned int *)rt_malloc(param_1 * 2 + 4);
   *puVar1 = param_1;
   for (temp_v0 = 0; temp_v0 < param_1; temp_v0 = temp_v0 + 1) {
   }

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0010063a(unsigned short [10], int, int, unsigned char *);
+int qsort(unsigned short [10], int, int, unsigned char *);
 int FUN_001aba54(void);
 int FUN_004a9308(...);
 int FUN_004c39b0(unsigned int, unsigned short [10]);
 int FUN_004c9160(int, unsigned int, int, int);
-int FUN_004de8b8(int *, int, int, int);
+int btlUnitSetParam(int *, int, int, int);
 int FUN_004eb838(int *, unsigned int *);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
@@ -23,7 +23,7 @@ typedef struct {
 
 extern unsigned char LAB_003d4e98; /* 0x3d4e98 */
 extern unsigned char LAB_003de0ac; /* 0x3de0ac */
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
 extern unsigned int DAT_00571170; /* 0x571170 */
@@ -32,13 +32,13 @@ extern unsigned int DAT_00571260; /* 0x571260 */
 extern unsigned int DAT_00571264; /* 0x571264 */
 extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern int FUN_001633a0(unsigned int);
 /* Supplied declaration required: FUN_001aba54. */
 /* Supplied declaration required: FUN_004a9308. */
 /* Supplied declaration required: FUN_004c39b0. */
 /* Supplied declaration required: FUN_004c9160. */
-/* Supplied declaration required: FUN_004de8b8. */
+/* Supplied declaration required: btlUnitSetParam. */
 /* Supplied declaration required: FUN_004eb838. */
 
 
@@ -90,9 +90,9 @@ unsigned int FUN_004e6018(int *param_1,unsigned int *param_2)
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 9);
     if (temp_v4 != 0) {
-      FUN_0010063a(temp_v6,9,2,&LAB_003de0ac);
+      qsort(temp_v6,9,2,&LAB_003de0ac);
       FUN_004c9160(10,param_2[8],0,1);
-      FUN_0010063a(temp_v6,temp_v4,2,&LAB_003d4e98);
+      qsort(temp_v6,temp_v4,2,&LAB_003d4e98);
       temp_v2 = FUN_001633a0((temp_v4 - 1U) & 0xffff);
       *(unsigned short *)(param_2[10] + 0x1be) = 2;
       *(unsigned short *)(param_2[10] + 0x1c0) = temp_v6[temp_v2];
@@ -100,10 +100,10 @@ unsigned int FUN_004e6018(int *param_1,unsigned int *param_2)
       temp_v3 = (unsigned int)temp_v6[temp_v2];
       FUN_001aba54();
       if ((*(unsigned int *)(temp_v3 + 0x28) & 0x1ff) >> 5 == 4) {
-        FUN_004de8b8(param_1,0xf,0,1);
+        btlUnitSetParam(param_1,0xf,0,1);
       }
       else {
-        FUN_004de8b8(param_1,2,0,1);
+        btlUnitSetParam(param_1,2,0,1);
       }
       FUN_004eb838(param_1,param_2);
       return 1;
@@ -115,7 +115,7 @@ unsigned int FUN_004e6018(int *param_1,unsigned int *param_2)
     FUN_004a9308(DAT_0057a9c8,(short)param_2[0xb],0);
   }
   *(unsigned short *)(param_2[10] + 0x1be) = 0xf;
-  *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x13;
+  *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x13;
   return 1;
 }
 

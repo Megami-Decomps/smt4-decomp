@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_001f4e20(int);
 int FUN_0020214c(void);
 int FUN_00275bc8(int, unsigned char *);
@@ -16,9 +16,9 @@ extern unsigned char LAB_004b7d34; /* 0x4b7d34 */
 extern unsigned char LAB_004b7d44; /* 0x4b7d44 */
 extern unsigned char LAB_004b7d58; /* 0x4b7d58 */
 extern unsigned char LAB_004b7d70; /* 0x4b7d70 */
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001f4e20. */
 /* Supplied declaration required: FUN_0020214c. */
 extern int FUN_00224880(unsigned int);
@@ -47,13 +47,13 @@ void FUN_004b7b74(int param_1)
     FUN_004b7d88(param_1);
     temp_v0 = FUN_004cfe4c(param_1 + 0x9c);
     *(unsigned short *)(param_1 + 0x4c) = temp_v0;
-    if (*(char *)(DAT_00570260 + 0xc1) == '\0') {
+    if (*(char *)(g_aocMain + 0xc1) == '\0') {
       temp_v1 = *(int *)(param_1 + 0x116c);
       if (temp_v1 != 1) {
         if (temp_v1 == 2) {
           *(unsigned int *)(param_1 + 0x28) = 9;
           *(unsigned int *)(param_1 + 0x2c) = 0;
-          FUN_001681cc(0xa0);
+          sysPlaySe(0xa0);
           temp_v3 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x1150),&LAB_004b7d34);
           FUN_00275f44(*(unsigned int *)(param_1 + 0x1158),temp_v3);
           *(unsigned int *)(param_1 + 0x116c) = 0;
@@ -100,7 +100,7 @@ void FUN_004b7b74(int param_1)
       *(unsigned int *)(param_1 + 0x116c) = 0;
       return;
     }
-    *(unsigned char *)(DAT_00570260 + 0xc1) = 0;
+    *(unsigned char *)(g_aocMain + 0xc1) = 0;
     *(unsigned int *)(param_1 + 0x28) = 10;
     *(unsigned int *)(param_1 + 0x2c) = 0;
   }

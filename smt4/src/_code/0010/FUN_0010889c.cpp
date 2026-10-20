@@ -20,7 +20,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0011340c. */
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bf818. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 
 
 unsigned char FUN_0010889c(void)
@@ -34,7 +34,7 @@ unsigned char FUN_0010889c(void)
   float temp_v4;
   char temp_v5 [24];
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   if (*(char *)(temp_v0 + 0xf28) == '\0') {
     return 0;
   }

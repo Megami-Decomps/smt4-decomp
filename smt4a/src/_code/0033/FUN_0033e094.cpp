@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int DAT_0058103c; /* 0x58103c */
+extern int g_mapIf; /* 0x58103c */
 
 
 void FUN_0033e094(void)
@@ -14,10 +14,10 @@ void FUN_0033e094(void)
   int temp_v0;
   unsigned char *puVar2;
   
-  temp_v0 = DAT_0058103c;
-  puVar2 = (unsigned char *)(DAT_0058103c + 0xcbfc);
-  if (*(int **)(DAT_0058103c + 0xcc18) != (int *)0x0) {
-    (**(romwright_code **)(**(int **)(DAT_0058103c + 0xcc18) + 4))();
+  temp_v0 = g_mapIf;
+  puVar2 = (unsigned char *)(g_mapIf + 0xcbfc);
+  if (*(int **)(g_mapIf + 0xcc18) != (int *)0x0) {
+    (**(romwright_code **)(**(int **)(g_mapIf + 0xcc18) + 4))();
     *(unsigned int *)(temp_v0 + 0xcc18) = 0;
   }
   *puVar2 = 0;

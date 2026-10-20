@@ -1,38 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a8dc0` (_code @ 0x3a8dc0, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001aba54(void);
-int FUN_003283ac(...);
+/* Offset of the u16 value array inside a record's value table. */
+#define TABLE_VALUES_OFFSET 0x118
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+typedef struct Skill {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ u32 packed;      /* bits 11..15: the value passed on */
+} Skill;
 
-/* Supplied declaration required: FUN_001aba54. */
-extern int FUN_00236038(void);
-/* Supplied declaration required: FUN_003283ac. */
-extern int FUN_004ee568(unsigned int);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ u8 *table;
+} Record;
 
+extern u32 g_btlScriptUnit;
 
-unsigned int FUN_003a8dc0(void)
+int FUN_001aba54(u32 id);
+int scrSetResult(int value);
+int scrGetArg(void);
+Record *btlUnitGet(u32 id);
 
+/* Script command: looks up entry (script argument 0) of the current record's value table, resolves it through FUN_001aba54 and passes bits 11..15 of its packed word (or 0 if none) to scrSetResult. */
+u32 FUN_003a8dc0(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_00236038();
-  temp_v1 = FUN_004ee568(DAT_0057113c);
-  temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 0x28) + temp_v0 * 2 + 0x118);
-  FUN_001aba54();
-  if (temp_v2 != 0) {
-    FUN_003283ac((*(unsigned int *)(temp_v2 + 0x28) & 0xffff) >> 0xb);
+    int index = scrGetArg();
+    u8 *table = btlUnitGet(g_btlScriptUnit)->table;
+    Skill *skill = (Skill *)FUN_001aba54(*(u16 *)(table + index * 2 + TABLE_VALUES_OFFSET));
+
+    if (skill != NULL) {
+        scrSetResult((skill->packed & 0xffff) >> 11);
+        return 1;
+    }
+    scrSetResult(0);
     return 1;
-  }
-  FUN_003283ac(0);
-  return 1;
 }
 
 } /* extern "C" */

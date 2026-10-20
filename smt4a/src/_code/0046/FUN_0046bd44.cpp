@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00180008(int);
+int jyoucyuGetTableEntry(int);
 int FUN_001b31ac(void);
 int FUN_001b31e0(void);
 int FUN_003fd63c(unsigned int, int);
 int FUN_00480e30(unsigned int, int);
 
-/* Supplied declaration required: FUN_00180008. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 extern int FUN_0018719c(unsigned int);
 extern int FUN_001b315c(unsigned int);
 /* Supplied declaration required: FUN_001b31ac. */
@@ -50,7 +50,7 @@ void FUN_0046bd44(int param_1)
                 temp_v0 = FUN_0018719c(*(unsigned int *)(pcVar5 + 0x3c));
                 if (temp_v0 != 0) break;
                 FUN_003fd63c(*(unsigned int *)(pcVar5 + 0x3c),1);
-                FUN_00180008(0);
+                jyoucyuGetTableEntry(0);
               }
             }
             else {
@@ -58,7 +58,7 @@ void FUN_0046bd44(int param_1)
               temp_v0 = FUN_00481104(temp_v4);
               if (temp_v0 == 0) {
                 FUN_00480e30(temp_v4,1);
-                FUN_00180008(0);
+                jyoucyuGetTableEntry(0);
               }
             }
             temp_v3 = temp_v3 + 1;

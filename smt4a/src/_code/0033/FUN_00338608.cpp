@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int rt_memcpy(unsigned int *, unsigned int, int);
 
 typedef int romwright_code(...);
@@ -13,13 +13,13 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned int DAT_005c1100; /* 0x5c1100 */
+extern unsigned int g_polyDefaultColor; /* 0x5c1100 */
 extern unsigned int DAT_005c1104; /* 0x5c1104 */
 extern unsigned int DAT_005c1108; /* 0x5c1108 */
 extern unsigned int DAT_005c110c; /* 0x5c110c */
-extern unsigned char DAT_005c11a8; /* 0x5c11a8 */
+extern unsigned char g_polyFlashKinds; /* 0x5c11a8 */
 
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 extern unsigned int FUN_002721e4(void);
 extern unsigned int FUN_002b41c4(int);
 /* Supplied declaration required: rt_memcpy. */
@@ -46,7 +46,7 @@ unsigned int * FUN_00338608(int param_1)
   temp_v5 = (unsigned int)*(unsigned short *)(param_1 + 0xc);
   temp_v6 = *(int *)(temp_v5 * 0x1c + 0x5c11c0);
   puVar6 = (unsigned int *)0x10000;
-  FUN_00167ab4(0x10000,0x100,0,temp_v6 + 0x50,0x10,1);
+  memAlloc(0x10000,0x100,0,temp_v6 + 0x50,0x10,1);
   puVar6[0xc] = 0xffffffff;
   puVar6[0x10] = (unsigned int)(puVar6 + 0x14);
   puVar6[0xd] = 0;
@@ -54,7 +54,7 @@ unsigned int * FUN_00338608(int param_1)
   temp_v2 = DAT_005c110c;
   temp_v1 = DAT_005c1108;
   temp_v0 = DAT_005c1104;
-  puVar6[8] = DAT_005c1100;
+  puVar6[8] = g_polyDefaultColor;
   puVar6[9] = temp_v0;
   puVar6[10] = temp_v1;
   puVar6[0xb] = temp_v2;
@@ -71,7 +71,7 @@ unsigned int * FUN_00338608(int param_1)
   rt_memcpy(puVar6 + 0x14,temp_v4,temp_v6);
   temp_v3 = (**(romwright_code **)(temp_v5 * 0x1c + 0x5c11ac))(temp_v4,temp_v3);
   puVar6[0xf] = temp_v3;
-  (**(romwright_code **)(&DAT_005c11a8 + temp_v5 * 0x1c))(puVar6);
+  (**(romwright_code **)(&g_polyFlashKinds + temp_v5 * 0x1c))(puVar6);
   return puVar6;
 }
 

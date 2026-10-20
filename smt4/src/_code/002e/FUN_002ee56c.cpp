@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002522f8(...);
 int FUN_002b6480(...);
-int FUN_002c415c(...);
+int asdMemFree(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ extern unsigned int DAT_0047e504; /* 0x47e504 */
 
 /* Supplied declaration required: FUN_002522f8. */
 /* Supplied declaration required: FUN_002b6480. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_002ee56c(void)
@@ -92,7 +92,7 @@ void FUN_002ee56c(void)
     if (0 < DAT_0047e500) {
       do {
         if (piVar2[0x11] != 0) {
-          FUN_002c415c();
+          asdMemFree();
           piVar2[0x11] = (unsigned int)temp_v2;
         }
         temp_v1 = temp_v1 + 1;

@@ -19,7 +19,7 @@ extern unsigned char DAT_0057f588; /* 0x57f588 */
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_00184b80. */
 extern unsigned int *FUN_001ab888(void);
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 
 
 unsigned int FUN_003bfcd8(void)
@@ -31,7 +31,7 @@ unsigned int FUN_003bfcd8(void)
   unsigned int *puVar3;
   unsigned int temp_v2;
   
-  temp_v1 = FUN_00236038(0);
+  temp_v1 = scrGetArg(0);
   temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
   *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x8e) = 1;
   *(unsigned char *)(temp_v0 + 0x8d) = 1;

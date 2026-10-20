@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_002bee58(int, int);
-int FUN_002c4938(int, int);
+int memClear(int, int);
 int rt_memcpy(int, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 extern int DAT_0043e140; /* 0x43e140 */
 
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -29,7 +29,7 @@ void FUN_0026374c(int param_1)
   *(unsigned int *)(DAT_0043e140 + 8) = 1;
   *(unsigned char *)(temp_v0 + 0x10) = 1;
   FUN_002bee58(temp_v0 + 0x34,0);
-  FUN_002c4938(temp_v0 + 0xc0,0x80);
+  memClear(temp_v0 + 0xc0,0x80);
   temp_v1 = 0;
   do {
     if (*(char *)(param_1 + temp_v1) == '\0') break;

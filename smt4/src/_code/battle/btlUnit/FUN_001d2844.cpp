@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_001c0998(int, int);
-int FUN_002c222c(void);
-int FUN_002c4a08(...);
-int FUN_002c5300(int, int, int, int, int);
+int asdOperatorNew(void);
+int taskCreateDraw(...);
+int asdMemoryAlloc(int, int, int, int, int);
 
 /* stack frame of param_1: 10 slot(s), 31 byte(s) */
 typedef struct {
@@ -40,10 +40,10 @@ extern unsigned int *DAT_00493570; /* 0x493570 */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Supplied declaration required: FUN_001c0998. */
-/* Supplied declaration required: FUN_002c222c. */
-extern unsigned int FUN_002c300c(void);
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdOperatorNew. */
+extern unsigned int asdMemoryGetAllocatorA(void);
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAlloc. */
 extern int FUN_0036752c(unsigned int **, unsigned int);
 
 
@@ -72,13 +72,13 @@ void FUN_001d2844(unsigned int *param_1)
   temp_v5 = (unsigned char *)*param_1;
   puVar1 = &LAB_001d2a60;
   temp_v4 = param_1;
-  FUN_002c4a08(&LAB_001d2a60,2,0,0,FUN_001b7a0c,FUN_0020f5e8);
+  taskCreateDraw(&LAB_001d2a60,2,0,0,FUN_001b7a0c,FUN_0020f5e8);
   param_1[0xd] = (unsigned int)puVar1;
   temp_v4 = param_1;
   temp_v5 = puVar1;
-  FUN_002c4a08(&LAB_001d2a74,0x6f,0,0,FUN_001e4d40,0);
+  taskCreateDraw(&LAB_001d2a74,0x6f,0,0,FUN_001e4d40,0);
   puVar2 = (unsigned int *)0x14;
-  FUN_002c222c();
+  asdOperatorNew();
   if (puVar2 != (unsigned int *)0x0) {
     *puVar2 = (unsigned int)&DAT_004209e0;
     puVar2[1] = (unsigned int)param_1;
@@ -89,7 +89,7 @@ void FUN_001d2844(unsigned int *param_1)
   DAT_00439ce4 = puVar2;
   do {
     puVar2 = (unsigned int *)0x10000;
-    FUN_002c5300(0x10000,0x100,0,0xc,1);
+    asdMemoryAlloc(0x10000,0x100,0,0xc,1);
     DAT_00493570 = puVar2;
     if (puVar2 != (unsigned int *)0x0) {
       puVar2[2] = (unsigned int)DAT_00439ce4;
@@ -97,7 +97,7 @@ void FUN_001d2844(unsigned int *param_1)
     }
     while( 1 ) {
       piVar8 = &DAT_0049356c + temp_v3 * 2;
-      temp_v0 = FUN_002c300c();
+      temp_v0 = asdMemoryGetAllocatorA();
       temp_v4 = (unsigned int *)romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v4 + 2)),0x100);
       temp_v6 = 1;
       temp_v5 = (unsigned char *)0x4;
@@ -133,7 +133,7 @@ void FUN_001d2844(unsigned int *param_1)
       }
       if (temp_v3 == 0) break;
       puVar3 = (unsigned int *)0x10000;
-      FUN_002c5300(0x10000,0x100,0,0xc,1);
+      asdMemoryAlloc(0x10000,0x100,0,0xc,1);
       puVar2 = DAT_00439ce4;
       if (puVar3 != (unsigned int *)0x0) {
         *puVar3 = (unsigned int)temp_v11;

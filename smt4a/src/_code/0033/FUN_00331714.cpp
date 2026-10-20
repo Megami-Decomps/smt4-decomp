@@ -30,7 +30,7 @@ extern int DAT_00588c44; /* 0x588c44 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00164a34(void);
+extern int lmapMainIsRunning(void);
 /* Supplied declaration required: FUN_001801a4. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_00192608. */
@@ -53,7 +53,7 @@ extern int FUN_003e4cb4(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
 /* Supplied declaration required: FUN_00408184. */
 extern int FUN_004bd340(int, unsigned int);
-extern int MapMode_IsBusy(void);
+extern int mapMainIsBusy(void);
 
 
 /* WARNING: Removing unreachable block (ram,0x00331818) */
@@ -95,8 +95,8 @@ void FUN_00331714(int param_1)
   FUN_0020b490(temp_v3,0);
   FUN_002f0c18();
   FUN_002c8778(*(unsigned short *)(param_1 + 0x38));
-  temp_v5 = MapMode_IsBusy();
-  if ((temp_v5 != 0) || (temp_v5 = FUN_00164a34(), temp_v5 != 0)) {
+  temp_v5 = mapMainIsBusy();
+  if ((temp_v5 != 0) || (temp_v5 = lmapMainIsRunning(), temp_v5 != 0)) {
     FUN_00270b00();
     FUN_003d2d6c(0xf);
     FUN_00249a08();

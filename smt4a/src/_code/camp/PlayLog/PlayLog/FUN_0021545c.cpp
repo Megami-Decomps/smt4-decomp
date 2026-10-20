@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern int DAT_0057f278; /* 0x57f278 */
+extern int g_playLog; /* 0x57f278 */
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
@@ -28,9 +28,9 @@ extern int DAT_0057f278; /* 0x57f278 */
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001846d0. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_002007f4. */
 /* Supplied declaration required: FUN_00228b04. */
 extern int FUN_002a4860(int);
@@ -57,8 +57,8 @@ void FUN_0021545c(void)
   unsigned int temp_v8;
   unsigned char temp_v9 [16];
   
-  temp_v0 = DAT_0057f278;
-  switch(*(unsigned int *)(DAT_0057f278 + 0x344)) {
+  temp_v0 = g_playLog;
+  switch(*(unsigned int *)(g_playLog + 0x344)) {
   case 0:
     temp_v7 = 0;
     do {
@@ -81,13 +81,13 @@ void FUN_0021545c(void)
     break;
   case 1:
     temp_v6 = 0;
-    temp_v7 = FUN_002c2c68(DAT_0057f278 + 0x2dc);
+    temp_v7 = FUN_002c2c68(g_playLog + 0x2dc);
     if (0 < temp_v7) {
       do {
         temp_v8 = (unsigned int)*(short *)(temp_v0 + temp_v6 * 2 + 0x424);
-        temp_v2 = FUN_00187180(0x37,0);
-        temp_v7 = FUN_00192798();
-        temp_v3 = FUN_00192748(temp_v2);
+        temp_v2 = dataTableGet(0x37,0);
+        temp_v7 = dataTableGetEntries();
+        temp_v3 = dataTableGetCount(temp_v2);
         if (((temp_v8 < temp_v3) && (psVar5 = (short *)(temp_v7 + temp_v8 * 0x40), psVar5 != (short *)0x0)
             ) && (*psVar5 == 0x2e)) {
           temp_v7 = FUN_002e50d4();
@@ -188,7 +188,7 @@ void FUN_0021545c(void)
     }
     break;
   case 3:
-    FUN_002007f4(DAT_0057f278);
+    FUN_002007f4(g_playLog);
   }
   *(int *)(temp_v0 + 0x340) = *(int *)(temp_v0 + 0x340) + 1;
   return;

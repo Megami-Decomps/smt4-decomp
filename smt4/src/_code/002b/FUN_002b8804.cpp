@@ -4,7 +4,7 @@ extern "C" {
 
 extern unsigned int *DAT_0043e0d0; /* 0x43e0d0 */
 
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 
 
 unsigned char FUN_002b8804(void)
@@ -15,7 +15,7 @@ unsigned char FUN_002b8804(void)
   if (DAT_0043e0d0 == (unsigned int *)0x0) {
     return 0;
   }
-  temp_v0 = FUN_002bf244(*DAT_0043e0d0);
+  temp_v0 = jobIsValid(*DAT_0043e0d0);
   return temp_v0 != 0;
 }
 

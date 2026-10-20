@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char *FUN_002fd0a0(unsigned int, unsigned int);
+extern unsigned char *byteArrayEnsureAt(unsigned int, unsigned int);
 
 
 void FUN_001224f4(int param_1,int param_2)
@@ -18,15 +18,15 @@ void FUN_001224f4(int param_1,int param_2)
   
   if (*(int *)(param_1 + 0x10) != 7) {
     if (param_2 != 0) {
-      pbVar2 = (unsigned char *)FUN_002fd0a0(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
+      pbVar2 = (unsigned char *)byteArrayEnsureAt(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
       temp_v2 = *(unsigned int *)(param_1 + 0x10);
       temp_v0 = *pbVar2;
-      pbVar2 = (unsigned char *)FUN_002fd0a0(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
+      pbVar2 = (unsigned char *)byteArrayEnsureAt(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
       *pbVar2 = temp_v0 | (unsigned char)(1 << (temp_v2 & 0xff));
     }
   }
   else {
-    puVar3 = (unsigned char *)FUN_002fd0a0(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc))
+    puVar3 = (unsigned char *)byteArrayEnsureAt(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc))
     ;
     if (param_2 == 0) {
       temp_v1 = 0;

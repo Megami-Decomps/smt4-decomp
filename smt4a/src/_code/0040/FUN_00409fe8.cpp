@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_0016007c(int, unsigned int);
+int asdOperatorNew(int, unsigned int);
 int FUN_002804b0(unsigned char [64], unsigned int *, int);
 int FUN_003fc1b0(unsigned int *, int);
 int FUN_003fcd20(unsigned int *);
@@ -13,10 +13,10 @@ int FUN_00470b60(unsigned int, int, unsigned int *, unsigned char [64]);
 int FUN_004713ec(unsigned int, int, unsigned int *, unsigned char [64]);
 
 extern unsigned char DAT_00557b10; /* 0x557b10 */
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_003fc1b0. */
 /* Supplied declaration required: FUN_003fcd20. */
@@ -54,7 +54,7 @@ unsigned int * FUN_00409fe8(int param_1,int param_2,int param_3,unsigned int par
     temp_v0 = temp_v0 + 2;
   } while (temp_v0 < 0x10);
   puVar2 = (unsigned int *)0x48;
-  FUN_0016007c(0x48,param_4);
+  asdOperatorNew(0x48,param_4);
   if (puVar2 != (unsigned int *)0x0) {
     *puVar2 = (unsigned int)&DAT_00557b10;
     puVar2[1] = 0;
@@ -88,9 +88,9 @@ unsigned int * FUN_00409fe8(int param_1,int param_2,int param_3,unsigned int par
     puVar2[10] = 0;
     puVar2[2] = 2;
     puVar2[3] = temp_v0;
-    temp_v1 = FUN_004705ec(DAT_00570280,temp_v0,1);
+    temp_v1 = FUN_004705ec(g_aocSystem,temp_v0,1);
     if (temp_v1 != 0) {
-      FUN_00470b60(DAT_00570280,temp_v0,puVar2 + 10,temp_v2);
+      FUN_00470b60(g_aocSystem,temp_v0,puVar2 + 10,temp_v2);
       return puVar2;
     }
   }
@@ -100,9 +100,9 @@ unsigned int * FUN_00409fe8(int param_1,int param_2,int param_3,unsigned int par
     puVar2[10] = 0;
     puVar2[2] = 6;
     puVar2[3] = param_1 - 1;
-    temp_v0 = FUN_00470b18(DAT_00570280,param_1,1);
+    temp_v0 = FUN_00470b18(g_aocSystem,param_1,1);
     if (temp_v0 != 0) {
-      FUN_004713ec(DAT_00570280,param_1,puVar2 + 10,temp_v2);
+      FUN_004713ec(g_aocSystem,param_1,puVar2 + 10,temp_v2);
       return puVar2;
     }
     if (param_3 == 0) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0058069c; /* 0x58069c */
+extern int g_mapDepartWork; /* 0x58069c */
 
 
 void FUN_00244220(void)
@@ -12,8 +12,8 @@ void FUN_00244220(void)
 {
   int temp_v0;
   
-  temp_v0 = DAT_0058069c;
-  *(unsigned short *)(DAT_0058069c + 0x18) = 0;
+  temp_v0 = g_mapDepartWork;
+  *(unsigned short *)(g_mapDepartWork + 0x18) = 0;
   *(unsigned int *)(temp_v0 + 0x24) = 0;
   *(unsigned int *)(temp_v0 + 0x28) = 0;
   *(unsigned int *)(temp_v0 + 0x2c) = 0;

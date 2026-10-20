@@ -9,7 +9,7 @@ typedef struct {
     unsigned int spC; /* 0xc: local_c */
 } param_1_stack;
 
-extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
+extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 
 
 void FUN_0029bde4(int param_1)
@@ -21,7 +21,7 @@ void FUN_0029bde4(int param_1)
   unsigned char *pbVar4;
   unsigned char temp_v3;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4));
+  temp_v0 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
   temp_v2 = 0;
   do {
     temp_v1 = param_1 + temp_v2 * 2;

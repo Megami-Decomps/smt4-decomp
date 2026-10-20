@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_2_stack;
 
-extern int DAT_0043427c; /* 0x43427c */
+extern int g_btlScriptUnit; /* 0x43427c */
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00229a24. */
@@ -60,13 +60,13 @@ unsigned int FUN_003cae6c(int *param_1,unsigned int *param_2)
   if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x40) != 0) {
     if ((*param_2 & 0x80) == 0) {
       *param_2 = *param_2 | 0x880;
-      *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
       return 1;
     }
   }
   else if (((*(unsigned int *)(*param_1 + 0x44a0) & 0x100) != 0) && ((*param_2 & 0x1000) == 0)) {
     *param_2 = *param_2 | 0x1800;
-    *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
     return 1;
   }
   temp_v4 = FUN_003af084(DAT_00439ca8);
@@ -83,17 +83,17 @@ unsigned int FUN_003cae6c(int *param_1,unsigned int *param_2)
   if (temp_v9[0] == '\0') {
     if (*(short *)(temp_v5 + 0x14c) != 10) {
       *param_2 = *param_2 | 0x800;
-      *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
       return 1;
     }
-    *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1b;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1b;
     return 1;
   }
   temp_v3 = *(short *)(temp_v5 + 0x14c);
   if (temp_v3 != 9) {
     if (temp_v3 == 10) {
       if (temp_v7 == 0 && temp_v6 == 0) {
-        *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1b;
+        *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1b;
         return 1;
       }
       goto LAB_003cb044;

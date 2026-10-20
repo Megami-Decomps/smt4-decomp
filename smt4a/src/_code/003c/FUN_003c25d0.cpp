@@ -10,7 +10,7 @@ extern unsigned int DAT_00570da0; /* 0x570da0 */
 extern unsigned int DAT_00570da4; /* 0x570da4 */
 extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_004ab7f4. */
 
 
@@ -22,7 +22,7 @@ unsigned int FUN_003c25d0(void)
   int temp_v1;
   unsigned int *puVar3;
   
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   puVar3 = *(unsigned int **)(temp_v1 + 0x1ffc);
   temp_v0 = ~DAT_00570da0;
   puVar3[1] = puVar3[1] & ~DAT_00570da4;

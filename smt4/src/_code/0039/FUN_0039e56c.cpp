@@ -7,7 +7,7 @@ extern "C" {
 int VectorFloatToUnsigned(unsigned int, int);
 int VectorSignedToFloat(...);
 
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -69,17 +69,17 @@ void FUN_0039e56c(int param_1)
             *(unsigned int *)(temp_v1 + 0x40) = temp_v12;
             *(unsigned int *)(temp_v1 + 0x44) = temp_v10;
             temp_v5 = (unsigned int)*(unsigned char *)(temp_v1 + 4);
-            if (temp_v5 != (*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0x8))) {
+            if (temp_v5 != (*(unsigned int *)((unsigned char *)&g_gameState + 0x8))) {
               if (temp_v5 != 0x8d) {
                 if (temp_v5 != 0x8e) {
                   if (temp_v5 != 0x5c) {
-                    if ((temp_v5 == 0x5d) && ((*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0x8)) == 0x5c)) goto LAB_0039e8a0;
+                    if ((temp_v5 == 0x5d) && ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x5c)) goto LAB_0039e8a0;
                   }
-                  else if ((*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0x8)) == 0x5d) goto LAB_0039e8a0;
+                  else if ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x5d) goto LAB_0039e8a0;
                 }
-                else if ((*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0x8)) == 0x8d) goto LAB_0039e8a0;
+                else if ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x8d) goto LAB_0039e8a0;
               }
-              else if ((*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0x8)) == 0x8e) goto LAB_0039e8a0;
+              else if ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x8e) goto LAB_0039e8a0;
               if (*(short *)(temp_v1 + 0x2c) == 0 || *(short *)(temp_v1 + 0x2c) == 4) {
                 *(unsigned int *)(temp_v1 + 0x48) = 0xffffff99;
               }
@@ -127,17 +127,17 @@ LAB_0039e8a0:
             *(unsigned int *)(temp_v1 + 0x40) = temp_v12;
             *(unsigned int *)(temp_v1 + 0x44) = temp_v10;
             temp_v5 = (unsigned int)*(unsigned char *)(temp_v1 + 4);
-            if (temp_v5 != (*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0x8))) {
+            if (temp_v5 != (*(unsigned int *)((unsigned char *)&g_gameState + 0x8))) {
               if (temp_v5 != 0x8d) {
                 if (temp_v5 != 0x8e) {
                   if (temp_v5 != 0x5c) {
-                    if ((temp_v5 == 0x5d) && ((*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0x8)) == 0x5c)) goto LAB_0039e808;
+                    if ((temp_v5 == 0x5d) && ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x5c)) goto LAB_0039e808;
                   }
-                  else if ((*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0x8)) == 0x5d) goto LAB_0039e808;
+                  else if ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x5d) goto LAB_0039e808;
                 }
-                else if ((*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0x8)) == 0x8d) goto LAB_0039e808;
+                else if ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x8d) goto LAB_0039e808;
               }
-              else if ((*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0x8)) == 0x8e) goto LAB_0039e808;
+              else if ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x8e) goto LAB_0039e808;
               if (*(short *)(temp_v1 + 0x2c) == 0 || *(short *)(temp_v1 + 0x2c) == 4) {
                 *(unsigned int *)(temp_v1 + 0x48) = 0xffffff99;
               }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_003c2df0(...);
 
 typedef int romwright_code(...);
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_00363590. */
 /* Supplied declaration required: FUN_003c2df0. */
 
@@ -109,21 +109,21 @@ LAB_00363768:
         (**(romwright_code **)((unsigned int)*(unsigned short *)(temp_v0 + 4) * 0x44 + 0x5b3284))();
       }
       if (*(int *)(temp_v0 + 0x18) != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         *(unsigned int *)(temp_v0 + 0x10) = 0;
         *(unsigned int *)(temp_v0 + 0x14) = 0;
         *(unsigned int *)(temp_v0 + 0x18) = 0;
       }
       if (*(int *)(temp_v0 + 0x28) != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         *(unsigned int *)(temp_v0 + 0x20) = 0;
         *(unsigned int *)(temp_v0 + 0x24) = 0;
         *(unsigned int *)(temp_v0 + 0x28) = 0;
       }
-      FUN_0019a5a0(temp_v0);
+      asdMemFree(temp_v0);
     }
   }
-  FUN_0019a5a0(param_2);
+  asdMemFree(param_2);
   return;
 }
 

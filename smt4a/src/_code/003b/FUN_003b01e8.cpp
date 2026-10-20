@@ -4,24 +4,24 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
+int jobStop(unsigned int, int);
 int FUN_001641c4(void);
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_0019a7f4(int, int);
 int FUN_00237210(unsigned int);
-int FUN_002e132c(...);
+int asdTMTexTableFreeEntry(...);
 int FUN_002e3328(void);
 int FUN_00471340(unsigned int);
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 extern unsigned int *DAT_0057f244; /* 0x57f244 */
 
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_001641c4. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019a7f4. */
 /* Supplied declaration required: FUN_00237210. */
-/* Supplied declaration required: FUN_002e132c. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002e3328. */
 /* Supplied declaration required: FUN_00471340. */
 
@@ -63,7 +63,7 @@ void FUN_003b01e8(void)
       else {
         temp_v0 = 0xffffffff;
       }
-      FUN_002e132c(temp_v0);
+      asdTMTexTableFreeEntry(temp_v0);
       *(unsigned char *)((int)puVar1 + temp_v3 + 0x18) = 0;
     }
     temp_v3 = temp_v3 + 1;
@@ -73,17 +73,17 @@ void FUN_003b01e8(void)
     FUN_0019a7f4(0x32,temp_v1);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 2);
-  FUN_002e132c(0x32);
+  asdTMTexTableFreeEntry(0x32);
   if (puVar1[2] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     puVar1[2] = 0;
   }
   if (puVar1[3] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     puVar1[3] = 0;
   }
-  FUN_00471340(DAT_00570280);
-  FUN_001631d0(*puVar1,0);
+  FUN_00471340(g_aocSystem);
+  jobStop(*puVar1,0);
   if (DAT_0057f244 != (unsigned int *)0x0) {
     FUN_002e3328();
     DAT_0057f244 = (unsigned int *)0x0;

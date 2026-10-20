@@ -21,7 +21,7 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: FUN_002bd498. */
-extern unsigned int FUN_002c300c(void);
+extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: FUN_002d5a08. */
 extern unsigned int FUN_0036ec8c(unsigned int *, unsigned int);
 
@@ -43,7 +43,7 @@ void FUN_00343e5c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   
   FUN_002d5a08(param_4,param_5,param_2,0x1908,0x8033,0x81a5,param_3);
   *(unsigned int *)(param_1 + 8) = param_4;
-  temp_v0 = FUN_002c300c();
+  temp_v0 = asdMemoryGetAllocatorA();
   temp_v3 = 1;
   uStack_20 = 0x2020000;
   temp_v6 = 0;
@@ -54,7 +54,7 @@ void FUN_00343e5c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v1 = *(unsigned int *)(*(int *)(*(int *)(param_1 + 8) + 0xc) + 0x18);
   temp_v0 = FUN_0036ec8c((unsigned int *)&temp_v1,temp_v0);
   *(unsigned int *)(param_1 + 0xc) = temp_v0;
-  temp_v0 = FUN_002c300c();
+  temp_v0 = asdMemoryGetAllocatorA();
   FUN_002bd498(param_1 + 0xc,temp_v0,0);
   return;
 }

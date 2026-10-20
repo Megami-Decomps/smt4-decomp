@@ -23,10 +23,10 @@ typedef struct {
 extern int FUN_0016242c(...); /* 0x16242c */
 extern int FUN_001f3eec(...); /* 0x1f3eec */
 extern int FUN_001f3f34(...); /* 0x1f3f34 */
-extern int DAT_0057f4c4; /* 0x57f4c4 */
+extern int g_bustupCutAnim; /* 0x57f4c4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00163e40(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00186e2c. */
 /* Supplied declaration required: FUN_002a21a4. */
 /* Supplied declaration required: FUN_002e08c8. */
@@ -52,15 +52,15 @@ void FUN_00318174(int param_1,int param_2,unsigned int param_3)
   unsigned int temp_v5;
   unsigned int temp_v6;
   
-  temp_v0 = DAT_0057f4c4;
-  if (DAT_0057f4c4 == 0) {
+  temp_v0 = g_bustupCutAnim;
+  if (g_bustupCutAnim == 0) {
     return;
   }
-  *(unsigned int *)(DAT_0057f4c4 + 0x5fc) = *(unsigned int *)(DAT_0057f4c4 + 0x5f8);
+  *(unsigned int *)(g_bustupCutAnim + 0x5fc) = *(unsigned int *)(g_bustupCutAnim + 0x5f8);
   temp_v3 = *(unsigned int *)(temp_v0 + 0x604);
   *(int *)(temp_v0 + 0x604) = param_1;
   *(unsigned int *)(temp_v0 + 0x600) = temp_v3;
-  piVar5 = (int *)(DAT_0057f4c4 + 0x608);
+  piVar5 = (int *)(g_bustupCutAnim + 0x608);
   if (param_1 != 200) {
     temp_v1 = *(int *)(temp_v0 + 0x604);
     if (param_1 < 100) {
@@ -151,7 +151,7 @@ void FUN_00318174(int param_1,int param_2,unsigned int param_3)
   temp_v1 = 0;
   do {
     temp_v4 = temp_v0 + temp_v1 * 4;
-    temp_v2 = FUN_00163e40(*(unsigned int *)(temp_v4 + 0x634));
+    temp_v2 = jobIsValid(*(unsigned int *)(temp_v4 + 0x634));
     if (temp_v2 != 0) {
       FUN_002a21a4(*(unsigned int *)(temp_v4 + 0x634));
     }

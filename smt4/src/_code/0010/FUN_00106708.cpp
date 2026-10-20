@@ -6,19 +6,19 @@ extern "C" {
 
 int FUN_0010b864(unsigned int, int, int);
 int FUN_0010b91c(unsigned int);
-int FUN_0010c0f4(unsigned int, unsigned int, int);
+int asdSoundWaveVoiceCreate(unsigned int, unsigned int, int);
 int FUN_0010c270(unsigned int);
 int FUN_0010dd24(void);
 int FUN_002c1658(int, int);
 int FUN_002c3940(char *, int);
-int FUN_002c415c(void);
+int asdMemFree(void);
 
 extern unsigned char DAT_004c5634; /* 0x4c5634 */
 extern signed char DAT_004c581a; /* 0x4c581a */
 
 /* Supplied declaration required: FUN_0010b864. */
 /* Supplied declaration required: FUN_0010b91c. */
-/* Supplied declaration required: FUN_0010c0f4. */
+/* Supplied declaration required: asdSoundWaveVoiceCreate. */
 /* Supplied declaration required: FUN_0010c270. */
 /* Supplied declaration required: FUN_0010dd24. */
 extern int FUN_002c15fc(unsigned int);
@@ -26,8 +26,8 @@ extern int FUN_002c15fc(unsigned int);
 extern int FUN_002c1850(unsigned int);
 extern int FUN_002c1d5c(void);
 /* Supplied declaration required: FUN_002c3940. */
-/* Supplied declaration required: FUN_002c415c. */
-extern int FUN_002c564c(unsigned int);
+/* Supplied declaration required: asdMemFree. */
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 void FUN_00106708(void)
@@ -44,7 +44,7 @@ void FUN_00106708(void)
   char *pcVar8;
   unsigned int temp_v5;
   
-  temp_v0 = FUN_002c564c(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 != 0) {
     return;
   }
@@ -56,7 +56,7 @@ LAB_00106748:
       if ((pcVar8[0x74] & 2U) == 0) {
 LAB_001067e0:
         temp_v1 = *(unsigned int *)(pcVar8 + 0x44);
-        FUN_0010c0f4(temp_v1,*(unsigned int *)(pcVar8 + 0x4c),1);
+        asdSoundWaveVoiceCreate(temp_v1,*(unsigned int *)(pcVar8 + 0x4c),1);
         *(unsigned int *)(pcVar8 + 0x48) = temp_v1;
         FUN_0010dd24();
         if (*(int *)(pcVar8 + 0x50) != 3) {
@@ -66,7 +66,7 @@ LAB_001067e0:
           FUN_0010b864(*(unsigned int *)(pcVar8 + 0x48),(unsigned char)pcVar8[0x75] >> 1,0);
         }
         if (*(int *)(pcVar8 + 0x44) != 0) {
-          FUN_002c415c();
+          asdMemFree();
         }
         pcVar8[0x44] = '\0';
         pcVar8[0x45] = '\0';
@@ -172,7 +172,7 @@ LAB_001067b4:
     if ((int)temp_v4 >= 4) goto LAB_001067e0;
   }
   if (*(int *)(pcVar8 + 0x44) != 0) {
-    FUN_002c415c();
+    asdMemFree();
   }
   pcVar8[0x44] = '\0';
   pcVar8[0x45] = '\0';

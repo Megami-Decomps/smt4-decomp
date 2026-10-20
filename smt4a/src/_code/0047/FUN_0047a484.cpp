@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00157558(int);
 int FUN_00164b5c(int, int, int, int, int, int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_0016c410(...);
 int FUN_0016c560(...);
 int FUN_001835b4(int, int, int, int, int, int);
@@ -31,11 +31,11 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c560. */
@@ -63,10 +63,10 @@ void FUN_0047a484(unsigned int *param_1)
   unsigned int temp_v6;
   
   if ((*param_1 & 0x10000) == 0) {
-    FUN_00157558(DAT_0059dbb4);
+    FUN_00157558(g_renderCtx);
     FUN_00183bb0();
-    FUN_001677c0();
-    temp_v1 = DAT_0059dbb4;
+    efctSetSpeed();
+    temp_v1 = g_renderCtx;
     temp_v0 = FUN_001692ac(1,0);
     piVar7 = (int *)(temp_v1 + 0x1258);
     temp_v4 = *piVar7;
@@ -103,8 +103,8 @@ void FUN_0047a484(unsigned int *param_1)
     }
     FUN_00344cd0(param_1[0xce],0,0,0x2f,0x4b,0x4c,0x4d,0x47,0x49,0x48,0x4a,temp_v1,temp_v0,temp_v4,0x81,0)
     ;
-    temp_v1 = DAT_0059dbb4;
-    piVar7 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v1 = g_renderCtx;
+    piVar7 = (int *)(g_renderCtx + 0x1258);
     temp_v0 = *piVar7;
     temp_v4 = piVar7[temp_v0 + 2];
     *piVar7 = temp_v0 - 1;
@@ -113,9 +113,9 @@ void FUN_0047a484(unsigned int *param_1)
       *(unsigned char *)(temp_v1 + 0x1270) = 0;
     }
     FUN_00183bb0();
-    FUN_001677c0();
-    FUN_0016c560(DAT_0059dbb4);
-    FUN_0016c410(DAT_0059dbb4);
+    efctSetSpeed();
+    FUN_0016c560(g_renderCtx);
+    FUN_0016c410(g_renderCtx);
     return;
   }
   return;

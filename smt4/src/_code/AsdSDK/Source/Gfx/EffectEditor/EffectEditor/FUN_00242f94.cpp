@@ -7,10 +7,10 @@ extern "C" {
 int FUN_0024dd48(int);
 int FUN_0024dd80(int);
 int FUN_0024dd90(int);
-int FUN_002571b8(void);
+int effMenuListAppend(void);
 int FUN_002bd420(...);
 int FUN_002bfde4(...);
-int FUN_002c32a0(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -23,10 +23,10 @@ extern unsigned char DAT_0044eb1c; /* 0x44eb1c */
 /* Supplied declaration required: FUN_0024dd48. */
 /* Supplied declaration required: FUN_0024dd80. */
 /* Supplied declaration required: FUN_0024dd90. */
-/* Supplied declaration required: FUN_002571b8. */
+/* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: FUN_002bd420. */
 /* Supplied declaration required: FUN_002bfde4. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 
 
 unsigned char * FUN_00242f94(unsigned long long *param_1,unsigned int param_2,int param_3)
@@ -48,14 +48,14 @@ unsigned char * FUN_00242f94(unsigned long long *param_1,unsigned int param_2,in
   temp_v1 = 0x43360000;
   temp_v2 = 0x42200000;
   temp_v0 = 0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+  memAlloc(0x10000,0x100,0,0x68,0x10,1);
   *(unsigned int *)(temp_v0 + 8) = temp_v1;
   *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
   *(int *)(temp_v0 + 0x10) = (int)temp_v3;
   *(int *)(temp_v0 + 0x14) = (int)((unsigned long long)temp_v3 >> 0x20);
   *(unsigned int *)(temp_v0 + 4) = 0xc;
   *(unsigned int *)(temp_v0 + 0x18) = param_2;
-  FUN_002571b8();
+  effMenuListAppend();
   temp_v0 = FUN_002bfde4(1);
   if (temp_v0 == 0) {
     FUN_0024dd80(1);

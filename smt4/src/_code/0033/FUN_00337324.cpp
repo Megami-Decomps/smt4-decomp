@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern unsigned int FUN_00292f28(unsigned int);
+extern unsigned int padIsButtonDown(unsigned int);
 
 
 unsigned int FUN_00337324(int param_1)
@@ -15,7 +15,7 @@ unsigned int FUN_00337324(int param_1)
   }
   else {
     if ((*(unsigned int *)(param_1 + 0x44a8) & 0x20000) == 0) {
-      temp_v0 = FUN_00292f28(0x10);
+      temp_v0 = padIsButtonDown(0x10);
       return temp_v0;
     }
     temp_v0 = 1;

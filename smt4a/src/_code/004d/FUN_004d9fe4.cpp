@@ -2,10 +2,10 @@
 
 extern "C" {
 
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 
-extern int FUN_0019a7dc(void);
-/* Supplied declaration required: FUN_002e6354. */
+extern int gameGetOptions(void);
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_004d9fe4(void)
@@ -14,10 +14,10 @@ void FUN_004d9fe4(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_0019a7dc();
+  temp_v0 = gameGetOptions();
   if ((*(unsigned short *)(temp_v0 + 0x130) & 1) == 0) {
     if (*(unsigned short *)(temp_v0 + 0x62) == 0x4b1) {
-      FUN_002e6354(temp_v0,300);
+      sysMemClear(temp_v0,300);
     }
     *(unsigned short *)(temp_v0 + 0x132) = 0;
     *(unsigned short *)(temp_v0 + 0x134) = 0;

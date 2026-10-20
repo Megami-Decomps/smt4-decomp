@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00236038(...);
+int scrGetArg(...);
 int FUN_003d54f8(int, int);
 int SBORROW4(int, int);
 
@@ -12,7 +12,7 @@ int SBORROW4(int, int);
 extern int FUN_00162ea4(void);
 extern int FUN_00163e84(unsigned int);
 extern int FUN_00203d74(void);
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: scrGetArg. */
 extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_003d54f8. */
 
@@ -25,7 +25,7 @@ unsigned int FUN_002deae4(void)
   int temp_v1;
   unsigned char temp_v2;
   
-  temp_v0 = FUN_00236038();
+  temp_v0 = scrGetArg();
   temp_v1 = FUN_002deb84();
   if (temp_v1 != 0) {
     temp_v0 = FUN_00163e84(0);
@@ -44,7 +44,7 @@ unsigned int FUN_002deae4(void)
       temp_v0 = 4;
     }
     temp_v1 = FUN_00162ea4();
-    if ((temp_v1 == 0) && ((temp_v1 = FUN_00236038(0), temp_v1 == 0 || (temp_v1 == 1)))) {
+    if ((temp_v1 == 0) && ((temp_v1 = scrGetArg(0), temp_v1 == 0 || (temp_v1 == 1)))) {
       FUN_003d54f8(0,temp_v0);
       FUN_003d54f8(1,temp_v0);
       return 0;

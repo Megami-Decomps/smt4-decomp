@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e74c4(unsigned char [32], unsigned int, unsigned int, unsigned int);
+int strAssign(unsigned char [32], unsigned int, unsigned int, unsigned int);
 int FUN_002e7614(unsigned char [12], int);
-int FUN_002e7634(unsigned char [32]);
+int strInit(unsigned char [32]);
 int FUN_002ea658(unsigned char [12]);
-int FUN_002ec9f4(...);
+int strDestroy(...);
 int FUN_002f6be2(...);
 int FUN_002f6bf0(...);
 int FUN_002f6bfc(unsigned char [12], unsigned char [32], unsigned char [12]);
@@ -33,11 +33,11 @@ typedef struct {
     unsigned int sp64; /* 0x64: local_64 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e7614. */
-/* Supplied declaration required: FUN_002e7634. */
+/* Supplied declaration required: strInit. */
 /* Supplied declaration required: FUN_002ea658. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 extern unsigned int FUN_002eea7c(unsigned int);
 extern int FUN_002f6bcc(void);
 /* Supplied declaration required: FUN_002f6be2. */
@@ -78,16 +78,16 @@ void FUN_0010cd2c(fn_0010cd2c_arg0 *param_1,unsigned int param_2)
     param_1->field_0xc = temp_v0;
     if (param_1->field_0xa4 != 0) {
       FUN_002ea658(temp_v11);
-      FUN_002e7634(temp_v9);
+      strInit(temp_v9);
       FUN_002e7614(temp_v4,0x10);
       FUN_002f6be2(param_2,temp_v8);
       temp_v1 = FUN_002eea7c(param_2);
-      FUN_002e74c4(temp_v9,temp_v8[0],temp_v1,0xffffffff);
+      strAssign(temp_v9,temp_v8[0],temp_v1,0xffffffff);
       FUN_002f6bf0(temp_v8[0]);
       FUN_002f6bfc(temp_v11,temp_v9,temp_v4);
       FUN_002f6c32(param_1->field_0xa4,temp_v5 + temp_v7,temp_v6);
-      FUN_002ec9f4(temp_v4);
-      FUN_002ec9f4(temp_v9);
+      strDestroy(temp_v4);
+      strDestroy(temp_v9);
     }
   }
   return;

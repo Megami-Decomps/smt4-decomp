@@ -7,10 +7,10 @@ extern "C" {
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int FUN_002c312c(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int memClear(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
@@ -35,10 +35,10 @@ extern unsigned int *DAT_0043e170; /* 0x43e170 */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -51,16 +51,16 @@ void FUN_002cedd8(void)
   
   if (DAT_0043e170 == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
-    FUN_002c498c(0x100,0x100,0,0xe4,1);
+    asdMemAlloc(0x100,0x100,0,0xe4,1);
     DAT_0043e170 = puVar1;
   }
   puVar1 = DAT_0043e170;
-  FUN_002c4938();
+  memClear();
   pcVar2 = "SearchWin Calc";
-  FUN_002c5788("SearchWin Calc",1,0,0,&LAB_001ad180,0,0);
+  asdProcessCreateSimple("SearchWin Calc",1,0,0,&LAB_001ad180,0,0);
   *puVar1 = (unsigned int)pcVar2;
-  FUN_002c4a08("SearchWin DrawUpLeft",0x81,0,0,FUN_001acdd8,0,0,pcVar2);
-  FUN_002c4a08("SearchWin DrawUpRight",0xdf,0,0,FUN_001acdd8,0,0,*puVar1);
+  taskCreateDraw("SearchWin DrawUpLeft",0x81,0,0,FUN_001acdd8,0,0,pcVar2);
+  taskCreateDraw("SearchWin DrawUpRight",0xdf,0,0,FUN_001acdd8,0,0,*puVar1);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 6);
   FUN_002c312c(puVar1 + 6,&DAT_00403b80,0x24,&DAT_00403ba4,0x24,0,0,0,0,&DAT_00403bc8,0x70);
   FUN_002bd954(puVar1 + 0xe,0xe,0x87,puVar1 + 6,1);

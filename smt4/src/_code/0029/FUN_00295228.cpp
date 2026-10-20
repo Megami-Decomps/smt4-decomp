@@ -6,16 +6,16 @@ extern "C" {
 
 int FUN_002b9024(void);
 int FUN_002bfc24(int, int, unsigned int, int);
-int FUN_002c0cec(int, int);
+int dataTableGet(int, int);
 int rt_memcpy_w(unsigned char [4], int, int);
 
-extern char FUN_0023eae0(unsigned int);
+extern char randRange(unsigned int);
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_002bfc24. */
 extern unsigned int FUN_002bfdc4(void);
-extern int FUN_002c0c74(void);
-extern int FUN_002c0cc4(void);
-/* Supplied declaration required: FUN_002c0cec. */
+extern int dataTableGetCount(void);
+extern int dataTableGetEntries(void);
+/* Supplied declaration required: dataTableGet. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -38,11 +38,11 @@ void FUN_00295228(unsigned int param_1,int param_2)
   int aiStack_3c [5];
   int aiStack_28 [4];
   
-  FUN_002c0cec(0x3f,0);
-  temp_v1 = FUN_002c0cc4();
+  dataTableGet(0x3f,0);
+  temp_v1 = dataTableGetEntries();
   if (param_2 < 4) {
-    FUN_002c0cec(0x3f,0);
-    temp_v2 = FUN_002c0c74();
+    dataTableGet(0x3f,0);
+    temp_v2 = dataTableGetCount();
     param_1 = param_1 & 0xffff;
     FUN_002b9024();
     if (param_1 != 0) {
@@ -87,7 +87,7 @@ void FUN_00295228(unsigned int param_1,int param_2)
           piVar5 = piVar5 + 1;
         } while (temp_v1 != 0);
         if (-1 < (int)temp_v5) {
-          temp_v0 = FUN_0023eae0(temp_v5 & 0xffff);
+          temp_v0 = randRange(temp_v5 & 0xffff);
           temp_v1 = piVar8[temp_v0];
           temp_v4 = FUN_002bfdc4();
           FUN_002bfc24(1,temp_v1,temp_v4,4);

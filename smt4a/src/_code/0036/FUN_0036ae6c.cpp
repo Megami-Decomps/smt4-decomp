@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00352d30(unsigned int *);
 
-extern int DAT_00581274; /* 0x581274 */
+extern int g_mapMain; /* 0x581274 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern unsigned int DAT_005f16bc; /* 0x5f16bc */
 extern unsigned int DAT_005f16c0; /* 0x5f16c0 */
@@ -39,7 +39,7 @@ void FUN_0036ae6c(int param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_00581274;
+  temp_v0 = g_mapMain;
   if (*(char *)(param_1 + 0x2c8) != '\0') {
     DAT_005f18c4 = 0;
   }

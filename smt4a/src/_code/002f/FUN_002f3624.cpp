@@ -27,7 +27,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e7232. */
 /* Supplied declaration required: FUN_002e760a. */
-extern int *FUN_002e7634(void);
+extern int *strInit(void);
 /* Supplied declaration required: FUN_002e7658. */
 /* Supplied declaration required: FUN_002e76a0. */
 /* Supplied declaration required: FUN_002eb108. */
@@ -71,7 +71,7 @@ int * FUN_002f3624(int param_1,unsigned int param_2,int param_3)
   else {
     temp_v0 = FUN_002e760a(0x20);
     if (temp_v0 != 0) {
-      piVar2 = (int *)FUN_002e7634();
+      piVar2 = (int *)strInit();
     }
     else {
       piVar2 = (int *)0x0;

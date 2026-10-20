@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_0013f048(void);
-int FUN_00142990(...);
+int asdGxCommandListSetLists(...);
 int FUN_001429b8(...);
-int FUN_001445c4(...);
+int asdGxCommandListSetNewListId(...);
 int FUN_00144c9c(...);
 int FUN_00149840(...);
 int FUN_00149864(unsigned int, int, int, unsigned int);
@@ -87,9 +87,9 @@ extern unsigned char DAT_0063ff88; /* 0x63ff88 */
 extern unsigned char DAT_0063ff89; /* 0x63ff89 */
 
 /* Supplied declaration required: FUN_0013f048. */
-/* Supplied declaration required: FUN_00142990. */
+/* Supplied declaration required: asdGxCommandListSetLists. */
 /* Supplied declaration required: FUN_001429b8. */
-/* Supplied declaration required: FUN_001445c4. */
+/* Supplied declaration required: asdGxCommandListSetNewListId. */
 /* Supplied declaration required: FUN_00144c9c. */
 /* Supplied declaration required: FUN_00149840. */
 /* Supplied declaration required: FUN_00149864. */
@@ -215,9 +215,9 @@ void FUN_00139c90(unsigned int *param_1)
   FUN_00149840(0);
   FUN_00144c9c(0,param_1[6],param_1[7]);
   FUN_001429b8(&DAT_0063fedc,2,param_1[4],param_1[5]);
-  FUN_00142990(&DAT_0063fedc);
+  asdGxCommandListSetLists(&DAT_0063fedc);
   FUN_001429b8(&temp_v3,1,param_1[2],param_1[3]);
-  FUN_001445c4(temp_v3);
+  asdGxCommandListSetNewListId(temp_v3);
   FUN_0017cfe8(&DAT_0063fec4,0);
   DAT_0063fefc = 0x3e800000;
   DAT_0063ff00 = 0x3e800000;

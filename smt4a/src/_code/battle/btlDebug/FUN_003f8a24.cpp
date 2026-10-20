@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00162790(...);
 int FUN_001676b0(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_0018152c(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -18,7 +18,7 @@ int FUN_001879d0(unsigned int);
 int FUN_0019e130(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
-int aeabi_idivmod(...);
+int __aeabi_idivmod(...);
 
 /* stack frame of param_3: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -34,7 +34,7 @@ typedef struct {
 extern unsigned char LAB_003f9308; /* 0x3f9308 */
 extern unsigned char LAB_003f9310; /* 0x3f9310 */
 extern unsigned char DAT_00528004; /* 0x528004 */
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -45,7 +45,7 @@ extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_001676b0. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -54,7 +54,7 @@ extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00184e64. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_0019e130. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_003f8a24(int param_1,int param_2,int param_3)
@@ -94,15 +94,15 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
   unsigned long long temp_v24;
   
   temp_v21 = 2;
-  FUN_001677c0();
+  efctSetSpeed();
   temp_v12 = 0.29f;
   temp_v9 = temp_v12;
-  FUN_001879d0(DAT_0059dbb4);
+  FUN_001879d0(g_renderCtx);
   temp_v8 = (int)temp_v12;
   temp_v12 = temp_v9;
-  FUN_001879d0(DAT_0059dbb4);
+  FUN_001879d0(g_renderCtx);
   temp_v17 = (int)temp_v9;
-  FUN_001879d0(DAT_0059dbb4);
+  FUN_001879d0(g_renderCtx);
   temp_v13 = romwright_piece_4_4(in_s2,(int)temp_v12);
   temp_v16 = (int)in_s1;
   temp_v24 = romwright_piece_4_4(temp_v17,temp_v16);
@@ -131,7 +131,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
     temp_v16 = 0;
     do {
       if (*(int *)(param_3 + 0x38) <= temp_v16) break;
-      aeabi_idivmod(*(int *)(param_3 + 0x3c) + temp_v16);
+      __aeabi_idivmod(*(int *)(param_3 + 0x3c) + temp_v16);
       temp_v12 = (float)VectorSignedToFloat((int)temp_v13,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v17 = param_1 + temp_v16 * 8;
       FUN_001676b0((int)(short)*(unsigned int *)(param_3 + temp_v3 * 4),
@@ -145,8 +145,8 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
     temp_v18 = (unsigned long long)(unsigned int)(*(float *)(param_3 + 0x40) * 3.0f);
     do {
       if (*(int *)(param_3 + 0x38) + 1 <= temp_v16) break;
-      aeabi_idivmod(*(int *)(param_3 + 0x3c) + temp_v16,*(int *)(param_3 + 0x38));
-      FUN_001677c0();
+      __aeabi_idivmod(*(int *)(param_3 + 0x3c) + temp_v16,*(int *)(param_3 + 0x38));
+      efctSetSpeed();
       temp_v17 = param_1 + temp_v16 * 8;
       temp_v12 = (float)VectorSignedToFloat((int)temp_v13,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_001676b0((int)(short)*(unsigned int *)(param_3 + temp_v2 * 4),
@@ -156,7 +156,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
     } while (temp_v16 < 4);
   }
   temp_v12 = (float)((unsigned long long)temp_v13 >> 0x20);
-  FUN_001677c0();
+  efctSetSpeed();
   temp_v13 = 0x437f0000;
   temp_v14 = VectorFloatToUnsigned(temp_v12 * 255.0f,3);
   temp_v0 = (temp_v14 & 0xff) | 0xffffff00;

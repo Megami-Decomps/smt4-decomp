@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002f5020(...);
-int FUN_0030cb44(...);
+int asdOperatorNewE(...);
 int FUN_00429f38(...);
 int FUN_004701d8(...);
 
@@ -26,12 +26,12 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
 extern int FUN_001d109c(void);
 extern int FUN_002e3494(void);
 /* Supplied declaration required: FUN_002f5020. */
-/* Supplied declaration required: FUN_0030cb44. */
+/* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_00429f38. */
 extern int FUN_0046bc7c(fn_004715a8_arg0 *, unsigned int);
 /* Supplied declaration required: FUN_004701d8. */
@@ -57,7 +57,7 @@ void FUN_004715a8(fn_004715a8_arg0 *param_1)
       *(int *)&param_1->field_0x444 = temp_v0;
       if (0 < *(int *)&param_1->field_0x444) {
         temp_v0 = temp_v0 << 4;
-        FUN_0030cb44();
+        asdOperatorNewE();
         if (temp_v0 != 0) {
           FUN_002f5020();
         }
@@ -68,7 +68,7 @@ void FUN_004715a8(fn_004715a8_arg0 *param_1)
     }
   }
   else {
-    *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xfffeffff;
+    *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
   }
   return;
 }

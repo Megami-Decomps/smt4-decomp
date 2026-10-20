@@ -4,25 +4,25 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
+int jobStop(unsigned int, int);
 int FUN_001641c4(void);
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_0019a7f4(int, int);
-int FUN_0019c364(unsigned int);
+int scrScriptProcessDestroy(unsigned int);
 int FUN_001add24(int);
-int FUN_0023b4b4(int);
-int FUN_002e132c(int);
+int uiFadeSetVisible(int);
+int asdTMTexTableFreeEntry(int);
 
 extern unsigned int *DAT_0057f28c; /* 0x57f28c */
 
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_001641c4. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019a7f4. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_001add24. */
-/* Supplied declaration required: FUN_0023b4b4. */
-/* Supplied declaration required: FUN_002e132c. */
+/* Supplied declaration required: uiFadeSetVisible. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 
 
 void FUN_0034aae4(void)
@@ -37,20 +37,20 @@ void FUN_0034aae4(void)
     for (temp_v0 = 0; temp_v0 < (int)(unsigned int)*(unsigned short *)(puVar1 + 0x351); temp_v0 = temp_v0 + 1) {
       FUN_001641c4();
     }
-    FUN_0019c364(puVar1[0x23f]);
-    FUN_0019a5a0(puVar1[0x23e]);
-    FUN_0019a5a0(puVar1[0x23d]);
+    scrScriptProcessDestroy(puVar1[0x23f]);
+    asdMemFree(puVar1[0x23e]);
+    asdMemFree(puVar1[0x23d]);
     if (puVar1[0x240] != 0) {
-      FUN_0019c364(puVar1[0x242]);
-      FUN_0019a5a0(puVar1[0x240]);
-      FUN_0019a5a0(puVar1[0x241]);
+      scrScriptProcessDestroy(puVar1[0x242]);
+      asdMemFree(puVar1[0x240]);
+      asdMemFree(puVar1[0x241]);
     }
     FUN_0019a7f4(0x1e,0);
-    FUN_002e132c(0x1e);
+    asdTMTexTableFreeEntry(0x1e);
     FUN_001add24(0x34);
-    FUN_0023b4b4(1);
-    FUN_001631d0(*puVar1,0);
-    FUN_0019a5a0(puVar1);
+    uiFadeSetVisible(1);
+    jobStop(*puVar1,0);
+    asdMemFree(puVar1);
     DAT_0057f28c = (unsigned int *)0x0;
   }
   return;

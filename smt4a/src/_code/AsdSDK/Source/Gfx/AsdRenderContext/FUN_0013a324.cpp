@@ -13,7 +13,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_0013a390; /* 0x13a390 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00145adc. */
 extern int FUN_0015a21c(int);
@@ -40,7 +40,7 @@ void FUN_0013a324(void)
     *(unsigned int *)(temp_v0 + 0x134) = 0x3f800000;
     *(unsigned int *)(temp_v0 + 0x138) = 0x3f800000;
   }
-  DAT_0059dbb4 = temp_v1;
+  g_renderCtx = temp_v1;
   FUN_00145adc();
   return;
 }

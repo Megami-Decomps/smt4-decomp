@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
 int FUN_003d5830(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -18,11 +18,11 @@ typedef struct {
 
 extern int FUN_001e4a1c(...); /* 0x1e4a1c */
 extern unsigned char LAB_001f7f60; /* 0x1f7f60 */
-extern int FUN_002c9e40(...); /* 0x2c9e40 */
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int scrDestroyActive(...); /* 0x2c9e40 */
+extern int g_btlMain; /* 0x4342c8 */
 
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_003d5830. */
 
 
@@ -34,12 +34,12 @@ void FUN_001f7ecc(unsigned int *param_1)
   int temp_v0;
   
   puVar1 = &LAB_001f7f60;
-  FUN_002c4a08(&LAB_001f7f60,2,0,0,FUN_001e4a1c,FUN_002c9e40,param_1,*param_1);
+  taskCreateDraw(&LAB_001f7f60,2,0,0,FUN_001e4a1c,scrDestroyActive,param_1,*param_1);
   param_1[0x11] = (unsigned int)puVar1;
-  if (DAT_004342c8 == 0) {
+  if (g_btlMain == 0) {
     temp_v0 = 0x100;
-    FUN_002c498c(0x100,0x100,0,0x848,1);
-    DAT_004342c8 = temp_v0;
+    asdMemAlloc(0x100,0x100,0,0x848,1);
+    g_btlMain = temp_v0;
   }
   FUN_003d5830();
   return;

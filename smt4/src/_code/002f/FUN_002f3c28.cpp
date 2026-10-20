@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern int DAT_00447600; /* 0x447600 */
+extern int g_mapEnemy; /* 0x447600 */
 
 /* Supplied declaration required: FUN_00267074. */
 /* Supplied declaration required: FUN_002670cc. */
@@ -39,7 +39,7 @@ void FUN_002f3c28(void)
   int temp_v9;
   unsigned char temp_v10;
   
-  temp_v1 = DAT_00447600;
+  temp_v1 = g_mapEnemy;
   temp_v2 = FUN_002c2950();
   temp_v7 = 0;
   do {

@@ -20,7 +20,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001d23e0. */
 /* Supplied declaration required: FUN_001d25a0. */
-extern int FUN_002e3390(int);
+extern int wstrlen(int);
 /* Supplied declaration required: FUN_0030ea58. */
 
 
@@ -50,7 +50,7 @@ void FUN_001d0ea0(unsigned int param_1,int param_2,int param_3)
     temp_v7 = 0;
     temp_v8 = 0;
     temp_v9 = 0;
-    temp_v1 = FUN_002e3390(param_3);
+    temp_v1 = wstrlen(param_3);
     if (temp_v1 >= 9) {
       temp_v1 = 8;
     }

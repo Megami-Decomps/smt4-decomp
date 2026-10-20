@@ -32,7 +32,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char DAT_005806a0; /* 0x5806a0 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
@@ -84,10 +84,10 @@ void FUN_0030250c(void)
     temp_v0 = FUN_003033d4();
     temp_v1 = *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x18) * 0.017453292f;
     FUN_001bc124();
-    temp_v1 = *(float *)(DAT_00581288 + 0x1c) - temp_v1 * *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + temp_v0 * 4 + 0x18c);
+    temp_v1 = *(float *)(g_lmapScene + 0x1c) - temp_v1 * *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + temp_v0 * 4 + 0x18c);
     FUN_001bbf0c();
     FUN_0029406c(&temp_v2,&temp_v14,&temp_v17);
-    *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x218) = temp_v1 - *(float *)(DAT_00581288 + 0x20);
+    *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x218) = temp_v1 - *(float *)(g_lmapScene + 0x20);
   }
   return;
 }

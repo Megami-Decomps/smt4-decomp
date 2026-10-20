@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002ae7e8(int);
+int asdTMTexTableFreeEntry(int);
 int FUN_002ae898(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_002ae7e8. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002ae898. */
 
 
@@ -19,7 +19,7 @@ void FUN_00310098(void)
 {
 /* irregular: 2 native warning(s); review required */
   FUN_002ae898(0x2f,0);
-  FUN_002ae7e8(0x2f);
+  asdTMTexTableFreeEntry(0x2f);
   return;
 }
 

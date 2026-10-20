@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002e3d04(void);
-int FUN_002e6354(unsigned char *, int);
+int asdOperatorNewD(void);
+int sysMemClear(unsigned char *, int);
 int FUN_002e63a8(unsigned int, unsigned int, unsigned char *);
 
 extern unsigned char DAT_0064be80; /* 0x64be80 */
 
-/* Supplied declaration required: FUN_002e3d04. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: asdOperatorNewD. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e63a8. */
 
 
@@ -32,12 +32,12 @@ unsigned int FUN_002e643c(unsigned int param_1,unsigned int param_2)
     }
     if (temp_v0 >> 1 == 0) {
       puVar2 = (unsigned char *)0x50;
-      FUN_002e3d04();
+      asdOperatorNewD();
       if (puVar2 == (unsigned char *)0x0) {
         return 0;
       }
       *(unsigned int *)(puVar3 + 0x4c) = *(unsigned int *)(puVar3 + 0x4c) | ((unsigned int)puVar2 & 0xfffffffe) | 1;
-      FUN_002e6354(puVar2,0x50);
+      sysMemClear(puVar2,0x50);
       puVar3 = puVar2;
       FUN_002e63a8(param_1,param_2,puVar3);
       return param_1;

@@ -58,7 +58,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: FUN_003a2278. */
@@ -109,13 +109,13 @@ unsigned int FUN_003702b4(void)
   float temp_v32;
   unsigned int temp_v33;
   
-  temp_v1 = FUN_00236038(0);
+  temp_v1 = scrGetArg(0);
   temp_v15 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = FUN_00236038(1);
+  temp_v1 = scrGetArg(1);
   temp_v16 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = FUN_00236038(2);
+  temp_v1 = scrGetArg(2);
   temp_v17 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = FUN_00236038(3);
+  temp_v1 = scrGetArg(3);
   temp_v18 = 0x42200000;
   temp_v14 = 500.0f;
   temp_v4 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);

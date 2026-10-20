@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int, int);
+int sysMemClear(unsigned int, int);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 unsigned int FUN_00501b90(int *param_1,unsigned int param_2,int param_3)
@@ -19,7 +19,7 @@ unsigned int FUN_00501b90(int *param_1,unsigned int param_2,int param_3)
   
   if (param_3 != 0) {
     iStack_14 = 0;
-    FUN_002e6354(param_2,0x60);
+    sysMemClear(param_2,0x60);
     temp_v0 = (**(romwright_code **)(*param_1 + 0x34))(param_1,param_2,0x60,&iStack_14,param_3,2,0x12);
     if (((temp_v0 & 0x3ff) != 0x3f7) && (iStack_14 == 0)) {
       temp_v0 = 0xc8810bef;

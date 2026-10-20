@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00231bb8(int, float *);
-int FUN_0024c1e4(int, unsigned int, int *, int *);
+int uiGetEntrySize(int, unsigned int, int *, int *);
 int FUN_002b0750(...);
 int FUN_002bf538(void);
 int NaviMain_GetPosY(int);
@@ -26,7 +26,7 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_1_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -35,7 +35,7 @@ extern int DAT_0044ea00; /* 0x44ea00 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_00231bb8. */
-/* Supplied declaration required: FUN_0024c1e4. */
+/* Supplied declaration required: uiGetEntrySize. */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: FUN_002bf538. */
 extern int FUN_002c2950(void);
@@ -95,7 +95,7 @@ void FUN_0039af94(int param_1)
     temp_v9 = 0x1b8d;
     temp_v18 = 0x404000003c449ba6;
   }
-  FUN_0024c1e4(0x13,temp_v9,&temp_v25,&temp_v26);
+  uiGetEntrySize(0x13,temp_v9,&temp_v25,&temp_v26);
   temp_v3 = *(unsigned int *)(param_1 + 0x10);
   NaviMain_GetPosY(temp_v27);
   FUN_00231bb8(param_1 + 0x164,&temp_v28);
@@ -170,7 +170,7 @@ void FUN_0039af94(int param_1)
       }
       if (*(char *)(temp_v7 + 0x65) != '\0') {
         FUN_002bf538();
-        temp_v7 = DAT_0044ea00;
+        temp_v7 = g_titleScene;
         temp_v4 = FUN_002c5d80(1,0);
         piVar10 = (int *)(temp_v7 + 0x124c);
         temp_v5 = *piVar10;
@@ -186,8 +186,8 @@ void FUN_0039af94(int param_1)
         temp_v11 = (float)VectorSignedToFloat((int)temp_v19,(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002b0750(9,0x13,temp_v9,(int)(temp_v28 + temp_v11),(int)(temp_v29 + temp_v12),(int)temp_v21,
                      (int)((unsigned long long)temp_v21 >> 0x20),0xb);
-        temp_v7 = DAT_0044ea00;
-        piVar10 = (int *)(DAT_0044ea00 + 0x124c);
+        temp_v7 = g_titleScene;
+        piVar10 = (int *)(g_titleScene + 0x124c);
         temp_v4 = *piVar10;
         temp_v5 = piVar10[temp_v4 + 2];
         *piVar10 = temp_v4 - 1;

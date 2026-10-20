@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int aeabi_idivmod(...);
+int __aeabi_idivmod(...);
 
 extern int FUN_0043bb48(void);
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_00215a24(int param_1,int param_2)
@@ -38,21 +38,21 @@ void FUN_00215a24(int param_1,int param_2)
       temp_v6 = (unsigned long long)(unsigned int)*(float *)(param_1 + 0x124) << 0x20;
       if (*(float *)(param_1 + 0x124) > 0.0f) {
         if (*(float *)(param_1 + 0x120) > 0.0f) {
-          temp_v2 = aeabi_idivmod(0x5a,(int)*(float *)(param_1 + 0x34c));
+          temp_v2 = __aeabi_idivmod(0x5a,(int)*(float *)(param_1 + 0x34c));
           *(unsigned int *)(param_1 + 0xc) = temp_v2;
         }
         else {
-          temp_v2 = aeabi_idivmod(0xffffffa6,(int)*(float *)(param_1 + 0x34c));
+          temp_v2 = __aeabi_idivmod(0xffffffa6,(int)*(float *)(param_1 + 0x34c));
           *(unsigned int *)(param_1 + 0xc) = temp_v2;
         }
       }
       else {
         if (*(float *)(param_1 + 0x120) > 0.0f) {
-          temp_v1 = aeabi_idivmod(0x5a,(int)*(float *)(param_1 + 0x34c));
+          temp_v1 = __aeabi_idivmod(0x5a,(int)*(float *)(param_1 + 0x34c));
           temp_v1 = temp_v1 + 0x5a;
         }
         else {
-          temp_v1 = aeabi_idivmod(0xffffffa6,(int)*(float *)(param_1 + 0x34c));
+          temp_v1 = __aeabi_idivmod(0xffffffa6,(int)*(float *)(param_1 + 0x34c));
           temp_v1 = temp_v1 - 0x5a;
         }
         *(int *)(param_1 + 0xc) = temp_v1;
@@ -68,14 +68,14 @@ void FUN_00215a24(int param_1,int param_2)
           if (temp_v4 <= temp_v5) {
             temp_v3 = 0x5a;
           }
-          temp_v1 = aeabi_idivmod(temp_v3,(int)*(float *)(param_1 + 0x34c));
+          temp_v1 = __aeabi_idivmod(temp_v3,(int)*(float *)(param_1 + 0x34c));
         }
         else if (temp_v4 > temp_v5) {
-          temp_v1 = aeabi_idivmod(0xffffffa6,(int)*(float *)(param_1 + 0x34c));
+          temp_v1 = __aeabi_idivmod(0xffffffa6,(int)*(float *)(param_1 + 0x34c));
           temp_v1 = temp_v1 - 0x5a;
         }
         else {
-          temp_v1 = aeabi_idivmod(0x5a,(int)*(float *)(param_1 + 0x34c));
+          temp_v1 = __aeabi_idivmod(0x5a,(int)*(float *)(param_1 + 0x34c));
           temp_v1 = temp_v1 + 0x5a;
         }
         *(int *)(param_1 + 4) = temp_v1;

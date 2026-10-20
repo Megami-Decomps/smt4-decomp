@@ -23,10 +23,10 @@ typedef struct {
 } void_stack;
 
 extern int *DAT_004474f4; /* 0x4474f4 */
-extern int DAT_00447600; /* 0x447600 */
+extern int g_mapEnemy; /* 0x447600 */
 extern int DAT_00447e58; /* 0x447e58 */
-extern int DAT_00447e88; /* 0x447e88 */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_lmapScene; /* 0x447e88 */
+extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 extern signed char DAT_0049f934; /* 0x49f934 */
 extern signed char DAT_0049f93c; /* 0x49f93c */
@@ -99,7 +99,7 @@ void FUN_001d3018(void)
   unsigned int uStack_54;
   unsigned int uStack_50;
   
-  temp_v2 = DAT_00447600;
+  temp_v2 = g_mapEnemy;
   if (DAT_0049fc80 != 0) {
     return;
   }
@@ -145,11 +145,11 @@ void FUN_001d3018(void)
   }
   if (temp_v9) {
     FUN_0031d49c();
-    temp_v3 = DAT_00447e88;
+    temp_v3 = g_lmapScene;
     temp_v18 = 0.017453292f;
-    temp_v5 = *(unsigned int *)(DAT_00447e88 + 0x2c);
-    temp_v6 = *(unsigned int *)(DAT_00447e88 + 0x30);
-    *(unsigned int *)(temp_v2 + 0x14) = *(unsigned int *)(DAT_00447e88 + 0x28);
+    temp_v5 = *(unsigned int *)(g_lmapScene + 0x2c);
+    temp_v6 = *(unsigned int *)(g_lmapScene + 0x30);
+    *(unsigned int *)(temp_v2 + 0x14) = *(unsigned int *)(g_lmapScene + 0x28);
     *(unsigned int *)(temp_v2 + 0x18) = temp_v5;
     *(unsigned int *)(temp_v2 + 0x1c) = temp_v6;
     *(unsigned int *)(temp_v2 + 0x20) = *(unsigned int *)(temp_v3 + 0x7c);
@@ -167,7 +167,7 @@ void FUN_001d3018(void)
     }
     FUN_00208e4c();
   }
-  temp_v3 = DAT_00447600;
+  temp_v3 = g_mapEnemy;
   temp_v21 = romwright_piece_4_4(0x3f800000,temp_v20);
   temp_v18 = (float)DAT_004474f4[0x18] - (float)DAT_004474f4[0x15];
   temp_v10 = 40.0f;
@@ -179,8 +179,8 @@ void FUN_001d3018(void)
   temp_v11 = DAT_004474f4[0x13];
   FUN_00287be4();
   temp_v22 = (unsigned long long)temp_v11;
-  if (DAT_0049f91c != 0x19) {
-    if ((((DAT_0049f91c == 0x1a) || (DAT_0049f91c == 0x1b)) || (DAT_0049f91c == 0x1c)) &&
+  if (g_gameState != 0x19) {
+    if ((((g_gameState == 0x1a) || (g_gameState == 0x1b)) || (g_gameState == 0x1c)) &&
        (DAT_0049f920 == 1)) {
       temp_v10 = 60.0f;
     }

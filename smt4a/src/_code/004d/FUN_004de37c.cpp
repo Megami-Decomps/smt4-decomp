@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } param_2_stack;
 
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571160; /* 0x571160 */
 extern unsigned int DAT_00571164; /* 0x571164 */
 extern unsigned int DAT_00571218; /* 0x571218 */
@@ -70,14 +70,14 @@ unsigned int FUN_004de37c(int *param_1,unsigned int *param_2)
   if (!((DAT_00571218 & temp_v3) == 0 && (DAT_0057121c & temp_v5) == 0)) {
     if ((*param_2 & 0x80) == 0) {
       *param_2 = *param_2 | 0x880;
-      *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
       return 1;
     }
   }
   else if (((temp_v3 & DAT_00571228) != 0 || (temp_v5 & DAT_0057122c) != 0) &&
           ((*param_2 & 0x1000) == 0)) {
     *param_2 = *param_2 | 0x1800;
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
     return 1;
   }
   temp_v4 = FUN_004aba9c(DAT_0057a9c8);
@@ -94,17 +94,17 @@ unsigned int FUN_004de37c(int *param_1,unsigned int *param_2)
   if (temp_v9[0] == '\0') {
     if (*(short *)(temp_v3 + 0x1be) != 10) {
       *param_2 = *param_2 | 0x800;
-      *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
       return 1;
     }
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
     return 1;
   }
   temp_v2 = *(short *)(temp_v3 + 0x1be);
   if (temp_v2 != 9) {
     if (temp_v2 == 10) {
       if (temp_v7 == 0 && temp_v6 == 0) {
-        *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
+        *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
         return 1;
       }
       goto LAB_004de56c;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(...);
 int FUN_001879d0(unsigned int);
 int FUN_002a1850(float *, int, unsigned int, float *);
@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_3_stack;
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -32,7 +32,7 @@ extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern unsigned int FUN_00152f54(void);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(void);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001879d0. */
@@ -72,7 +72,7 @@ void FUN_0046868c(int param_1,unsigned int param_2,int param_3)
   temp_v7 = 0.31f;
   temp_v5 = (int)**(short **)(temp_v1 + 0xc);
   temp_v0 = (*(short **)(temp_v1 + 0xc))[1];
-  FUN_001879d0(DAT_0059dbb4);
+  FUN_001879d0(g_renderCtx);
   temp_v12 = (unsigned long long)(unsigned int)(int)temp_v7 << 0x20;
   temp_v4 = 0;
   do {
@@ -107,12 +107,12 @@ void FUN_0046868c(int param_1,unsigned int param_2,int param_3)
         temp_v1 = 0;
         do {
           FUN_0039bec8(temp_v1);
-          FUN_001677c0();
+          efctSetSpeed();
           param_3 = temp_v1 + 0x18e;
           FUN_001835b4(2,8,param_3,temp_v3,(int)temp_v12,6);
           temp_v1 = temp_v1 + 1;
         } while (temp_v1 < 3);
-        FUN_001677c0();
+        efctSetSpeed();
       }
     }
     temp_v4 = temp_v4 + 1;

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0019a5a0(...);
-int FUN_0019d4d8(int, int, int, int, unsigned int, int);
+int asdMemFree(...);
+int asdMemoryAllocAligned(int, int, int, int, unsigned int, int);
 int FUN_001aeb40(unsigned char *, unsigned char *);
 int FUN_001aec9c(unsigned char *, unsigned char *);
 int FUN_001aeddc(unsigned char *, unsigned char *);
@@ -16,8 +16,8 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019d4d8. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: FUN_001aeb40. */
 /* Supplied declaration required: FUN_001aec9c. */
 /* Supplied declaration required: FUN_001aeddc. */
@@ -39,20 +39,20 @@ unsigned char * FUN_001ba204(unsigned char *param_1,unsigned int param_2,unsigne
     if ((param_2 & 1) != 0) {
       if ((param_2 & 2) != 0) {
         pbVar2 = (unsigned char *)0x10000;
-        FUN_0019d4d8(0x10000,0x100,0,temp_v0,param_3,0);
+        asdMemoryAllocAligned(0x10000,0x100,0,temp_v0,param_3,0);
       }
       else {
         pbVar2 = (unsigned char *)0x10000;
-        FUN_0019d4d8(0x10000,0x100,0,temp_v0,param_3,1);
+        asdMemoryAllocAligned(0x10000,0x100,0,temp_v0,param_3,1);
       }
     }
     else if ((param_2 & 2) != 0) {
       pbVar2 = (unsigned char *)0x100;
-      FUN_0019d4d8(0x100,0x100,0,temp_v0,param_3,0);
+      asdMemoryAllocAligned(0x100,0x100,0,temp_v0,param_3,0);
     }
     else {
       pbVar2 = (unsigned char *)0x100;
-      FUN_0019d4d8(0x100,0x100,0,temp_v0,param_3,1);
+      asdMemoryAllocAligned(0x100,0x100,0,temp_v0,param_3,1);
     }
     if (temp_v1 != 0x10) {
       if (temp_v1 != 0x20) {
@@ -67,7 +67,7 @@ unsigned char * FUN_001ba204(unsigned char *param_1,unsigned int param_2,unsigne
     else {
       FUN_001aeb40(param_1,pbVar2);
     }
-    FUN_0019a5a0(param_1);
+    asdMemFree(param_1);
   }
   return pbVar2;
 }

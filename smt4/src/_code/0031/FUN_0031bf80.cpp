@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00249c4c(...);
 
-extern int FUN_00244dcc(unsigned int);
+extern int bustupCutAnimFindSlot(unsigned int);
 /* Supplied declaration required: FUN_00249c4c. */
-extern unsigned int FUN_00296cc8(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 
 
 unsigned int FUN_0031bf80(void)
@@ -21,10 +21,10 @@ unsigned int FUN_0031bf80(void)
   int temp_v3;
   unsigned int temp_v4;
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_00296cc8(1);
-  temp_v2 = FUN_00244dcc(temp_v0);
-  temp_v3 = FUN_00244dcc(temp_v1);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = bustupCutAnimFindSlot(temp_v0);
+  temp_v3 = bustupCutAnimFindSlot(temp_v1);
   if (temp_v2 < 0) {
     if (temp_v3 < 0) {
       FUN_00249c4c(temp_v0,2,0);

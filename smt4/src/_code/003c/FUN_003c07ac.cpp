@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_00297468(...);
 int FUN_002be624(...);
-int FUN_002c415c(...);
+int asdMemFree(...);
 
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 unsigned int FUN_003c07ac(int param_1,int param_2)
@@ -30,7 +30,7 @@ unsigned int FUN_003c07ac(int param_1,int param_2)
       return 1;
     }
     if (*(int *)(param_1 + 0x14) != 0) {
-      FUN_002c415c();
+      asdMemFree();
       *(unsigned int *)(param_1 + 0x14) = 0;
     }
     *(int *)(param_1 + 200) = param_2;

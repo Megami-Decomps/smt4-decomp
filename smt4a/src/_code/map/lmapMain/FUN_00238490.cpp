@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0016c4b8(...);
-int FUN_0019a0e8(float *, unsigned int);
+int mtx44Copy(float *, unsigned int);
 int FUN_0019a0fc(...);
 int FUN_0019e3d0(...);
 int FUN_001a1c28(...);
@@ -75,7 +75,7 @@ typedef struct {
     unsigned int sp210; /* 0x210: local_210 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_005c4c28; /* 0x5c4c28 */
 extern unsigned int DAT_005c4c2c; /* 0x5c4c2c */
 extern float DAT_0064c030; /* 0x64c030 */
@@ -106,7 +106,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 extern unsigned int FUN_0018aeb8(void);
 extern int FUN_00199f84(unsigned char *, int);
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_001a1c28. */
@@ -211,8 +211,8 @@ void FUN_00238490(int param_1)
     return;
   }
   temp_v0 = FUN_0018aeb8();
-  FUN_0019a0e8(&temp_v25,temp_v0);
-  temp_v2 = DAT_0059dbb4;
+  mtx44Copy(&temp_v25,temp_v0);
+  temp_v2 = g_renderCtx;
   temp_v11 = (*(unsigned char *)(param_1 + 0x130) & 7) >> 1;
   if (temp_v11 != 0) {
     if (temp_v11 != 1) {
@@ -260,7 +260,7 @@ void FUN_00238490(int param_1)
       *(unsigned char *)(temp_v2 + 0x12d0) = 0;
     }
   }
-  temp_v2 = DAT_0059dbb4;
+  temp_v2 = g_renderCtx;
   if ((*(unsigned char *)(param_1 + 0x130) & 8) != 0) {
     temp_v1 = FUN_001692ac(5,0);
     piVar8 = (int *)(temp_v2 + 0x1258);
@@ -276,7 +276,7 @@ void FUN_00238490(int param_1)
   temp_v16 = 0.0f;
   temp_v15 = 1.0f;
   if ((*(unsigned char *)(param_1 + 0x130) & 0x20) != 0) {
-    temp_v2 = FUN_00199f84(temp_v66,*(int *)(DAT_0059dbb4 + 0x6fc) + 0x38);
+    temp_v2 = FUN_00199f84(temp_v66,*(int *)(g_renderCtx + 0x6fc) + 0x38);
     if (temp_v2 == 0) {
       if (((DAT_005c4c2c & 1) == 0) && (temp_v2 = FUN_002eba64(&DAT_005c4c2c), temp_v2 != 0)) {
         DAT_0064c054 = temp_v15;
@@ -348,7 +348,7 @@ void FUN_00238490(int param_1)
     temp_v11 = temp_v6;
   }
   else if (*(char *)(param_1 + 0x380) != '\0') {
-    temp_v2 = *(int *)(DAT_0059dbb4 + 0x6fc);
+    temp_v2 = *(int *)(g_renderCtx + 0x6fc);
     if (((DAT_005c4c28 & 1) == 0) && (temp_v1 = FUN_002eba64(&DAT_005c4c28), temp_v1 != 0)) {
       DAT_0064c030 = temp_v15;
       DAT_0064c034 = temp_v16;
@@ -502,16 +502,16 @@ void FUN_00238490(int param_1)
     ;
     pfVar4 = pfVar4 + 3;
   } while (temp_v11 < 4);
-  FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(param_1 + 300));
+  FUN_0016c4b8(g_renderCtx,*(unsigned int *)(param_1 + 300));
   temp_v18 = temp_v15;
   temp_v19 = temp_v16;
   temp_v20 = temp_v15;
   temp_v21 = temp_v15;
   FUN_0019e3d0(*(unsigned int *)(param_1 + 0x39c),*(unsigned int *)(param_1 + 0x3b4),
                *(unsigned int *)(param_1 + 0x3cc),*(unsigned int *)(param_1 + 0x3e4));
-  temp_v2 = DAT_0059dbb4;
+  temp_v2 = g_renderCtx;
   if ((*(unsigned char *)(param_1 + 0x130) & 8) != 0) {
-    piVar8 = (int *)(DAT_0059dbb4 + 0x1258);
+    piVar8 = (int *)(g_renderCtx + 0x1258);
     temp_v1 = *piVar8;
     temp_v3 = piVar8[temp_v1 + 2];
     *piVar8 = temp_v1 - 1;

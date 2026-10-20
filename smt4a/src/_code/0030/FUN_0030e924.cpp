@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e33f0(void);
+int asdOperatorNewC(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 extern unsigned char DAT_0055780c; /* 0x55780c */
 extern unsigned char DAT_0055cba4; /* 0x55cba4 */
 
-/* Supplied declaration required: FUN_002e33f0. */
+/* Supplied declaration required: asdOperatorNewC. */
 extern int FUN_0030e914(unsigned int *, unsigned int, unsigned int);
 
 
@@ -49,7 +49,7 @@ LAB_0030e978:
   param_1[8] = temp_v3;
   puVar3 = (unsigned char *)((temp_v3 - temp_v2) + 1);
   param_1[7] = temp_v2;
-  FUN_002e33f0();
+  asdOperatorNewC();
   param_1[0xb] = (unsigned int)puVar3;
   for (; temp_v2 <= temp_v3; temp_v2 = temp_v2 + 1) {
     if ((temp_v2 - 0x61 < 0x1a) && (temp_v1 = FUN_0030e914(param_1,0x10,temp_v2 & 0xff), temp_v1 != 0)) {
@@ -78,7 +78,7 @@ LAB_0030e9fc:
   param_1[10] = temp_v3;
   puVar3 = (unsigned char *)((temp_v3 - temp_v2) + 1);
   param_1[9] = temp_v2;
-  FUN_002e33f0();
+  asdOperatorNewC();
   param_1[0xc] = (unsigned int)puVar3;
   do {
     if (temp_v3 < temp_v2) {

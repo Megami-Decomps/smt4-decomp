@@ -6,16 +6,16 @@ extern "C" {
 
 int FUN_0014afd0(...);
 int FUN_0014bdb4(...);
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_0018719c(...);
-int FUN_00192748(...);
-int FUN_00192798(...);
+int dataTableGetCount(...);
+int dataTableGetEntries(...);
 int FUN_001b4a90(...);
 int FUN_0020214c(...);
 int FUN_00275bc8(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_0031a400(...);
 int FUN_00342010(...);
 int FUN_003423cc(...);
@@ -45,21 +45,21 @@ extern unsigned char LAB_002e6840; /* 0x2e6840 */
 extern unsigned char LAB_002e6858; /* 0x2e6858 */
 extern unsigned char LAB_002e6b54; /* 0x2e6b54 */
 extern unsigned char LAB_002e6b68; /* 0x2e6b68 */
-extern unsigned int *DAT_00588124; /* 0x588124 */
+extern unsigned int *g_npcRoom; /* 0x588124 */
 
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: FUN_0014bdb4. */
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018719c. */
-/* Supplied declaration required: FUN_00192748. */
-/* Supplied declaration required: FUN_00192798. */
+/* Supplied declaration required: dataTableGetCount. */
+/* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031a400. */
 /* Supplied declaration required: FUN_00342010. */
 /* Supplied declaration required: FUN_003423cc. */
@@ -97,27 +97,27 @@ void FUN_002e64a0(unsigned int param_1)
   unsigned short *puVar21;
   short temp_v15 [14];
   
-  if (DAT_00588124 == (unsigned int *)0x0) {
+  if (g_npcRoom == (unsigned int *)0x0) {
     puVar8 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x16c,1);
-    DAT_00588124 = puVar8;
+    asdMemoryAllocTracked(0x100,0x100,0,0x16c,1);
+    g_npcRoom = puVar8;
   }
-  puVar8 = DAT_00588124;
-  FUN_002e6354();
+  puVar8 = g_npcRoom;
+  sysMemClear();
   puVar9 = &LAB_002e6818;
-  FUN_0014e38c(&LAB_002e6818,4,0,0,FUN_00214324,0,0);
+  asdProcessCreateSimple(&LAB_002e6818,4,0,0,FUN_00214324,0,0);
   *puVar8 = (unsigned int)puVar9;
-  FUN_0015155c(&LAB_002e682c,0x7e,0,0,FUN_002394a8,0,0,puVar9);
-  FUN_0015155c(&LAB_002e6840,0xda,0,0,FUN_002394a8,0,0,*puVar8);
-  FUN_0015155c(&LAB_002e6858,0xea,0,0,&LAB_00284dbc,0,0,*puVar8);
+  taskCreateDraw(&LAB_002e682c,0x7e,0,0,FUN_002394a8,0,0,puVar9);
+  taskCreateDraw(&LAB_002e6840,0xda,0,0,FUN_002394a8,0,0,*puVar8);
+  taskCreateDraw(&LAB_002e6858,0xea,0,0,&LAB_00284dbc,0,0,*puVar8);
   FUN_003f86f8(0x1a);
   puVar21 = (unsigned short *)(puVar8 + 0x40);
   *puVar21 = (unsigned short)param_1;
-  puVar6 = DAT_00588124;
-  DAT_00588124[9] = 0;
-  temp_v6 = FUN_00187180(0x35,0);
-  puVar11 = (unsigned short *)FUN_00192798();
-  temp_v7 = FUN_00192748(temp_v6);
+  puVar6 = g_npcRoom;
+  g_npcRoom[9] = 0;
+  temp_v6 = dataTableGet(0x35,0);
+  puVar11 = (unsigned short *)dataTableGetEntries();
+  temp_v7 = dataTableGetCount(temp_v6);
   temp_v8 = 0;
   if (temp_v8 < temp_v7) {
     do {
@@ -129,15 +129,15 @@ void FUN_002e64a0(unsigned int param_1)
       puVar11 = puVar11 + 0x36;
     } while (temp_v8 < temp_v7);
   }
-  puVar6 = DAT_00588124;
+  puVar6 = g_npcRoom;
   temp_v1 = *puVar21;
-  DAT_00588124[10] = 0;
+  g_npcRoom[10] = 0;
   puVar6[0xb] = 0;
   puVar6[0xc] = 0;
   puVar6[0xd] = 0;
-  temp_v6 = FUN_00187180(0x35,1);
-  puVar11 = (unsigned short *)FUN_00192798();
-  temp_v7 = FUN_00192748(temp_v6);
+  temp_v6 = dataTableGet(0x35,1);
+  puVar11 = (unsigned short *)dataTableGetEntries();
+  temp_v7 = dataTableGetCount(temp_v6);
   temp_v8 = 0;
   puVar6[0x3d] = 0;
   if (temp_v7 != 0) {
@@ -269,9 +269,9 @@ LAB_002e6874:
     }
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 8);
-  temp_v6 = FUN_00187180(0x1a,0);
-  temp_v9 = FUN_00192798();
-  FUN_00192748(temp_v6);
+  temp_v6 = dataTableGet(0x1a,0);
+  temp_v9 = dataTableGetEntries();
+  dataTableGetCount(temp_v6);
   *(unsigned short *)((int)puVar8 + 0x102) =
        *(unsigned short *)((temp_v9 + (unsigned int)*(unsigned short *)(puVar8[9] + 0x22) * 2) - 2);
   temp_v1 = *puVar21;

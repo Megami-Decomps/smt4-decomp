@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002be61c(int, unsigned char *);
+int libc_sprintf(int, unsigned char *);
 int FUN_002be624(int, unsigned char *);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -23,9 +23,9 @@ extern unsigned char LAB_00290988; /* 0x290988 */
 extern unsigned char LAB_0029098c; /* 0x29098c */
 extern unsigned char LAB_00290990; /* 0x290990 */
 
-/* Supplied declaration required: FUN_002be61c. */
+/* Supplied declaration required: libc_sprintf. */
 /* Supplied declaration required: FUN_002be624. */
-extern int aeabi_idivmod(int, int);
+extern int __aeabi_idivmod(int, int);
 
 
 void FUN_002907c4(int param_1,int param_2)
@@ -48,7 +48,7 @@ void FUN_002907c4(int param_1,int param_2)
   if (param_2 != 0) {
     do {
       if (unaff_r4 <= param_2) {
-        temp_v0 = aeabi_idivmod(temp_v3,unaff_r4);
+        temp_v0 = __aeabi_idivmod(temp_v3,unaff_r4);
         if (temp_v0 != 0) {
           if (temp_v0 != 1) {
             if (temp_v0 != 2) {
@@ -124,7 +124,7 @@ void FUN_002907c4(int param_1,int param_2)
     } while (0 < unaff_r4);
     return;
   }
-  FUN_002be61c(param_1,&LAB_0029096c);
+  libc_sprintf(param_1,&LAB_0029096c);
   return;
 }
 

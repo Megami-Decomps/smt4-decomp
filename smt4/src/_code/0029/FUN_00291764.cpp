@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002a7218(...);
+int scrScriptProcessDestroy(...);
 int FUN_002a780c(unsigned int);
 int FUN_002a87e8(void);
 int FUN_002bee58(unsigned int *, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_002c415c(...);
-int FUN_002c43b4(unsigned int, int);
+int asdMemFree(...);
+int jobStop(unsigned int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,12 +19,12 @@ typedef struct {
 extern signed char DAT_0043da28; /* 0x43da28 */
 extern unsigned int *DAT_0043da2c; /* 0x43da2c */
 
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002a780c. */
 /* Supplied declaration required: FUN_002a87e8. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 
 
 void FUN_00291764(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -39,15 +39,15 @@ void FUN_00291764(unsigned int *param_1,unsigned int param_2,unsigned int param_
   
   *param_1 = 0;
   if (param_1[3] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1[3] = 0;
   }
   if (param_1[4] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1[4] = 0;
   }
   if (param_1[5] != 0) {
-    FUN_002a7218();
+    scrScriptProcessDestroy();
     param_1[5] = 0;
   }
   puVar1 = DAT_0043da2c;
@@ -65,9 +65,9 @@ void FUN_00291764(unsigned int *param_1,unsigned int param_2,unsigned int param_
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 6);
     }
-    FUN_002a7218(puVar1[0x158]);
-    FUN_002c43b4(*puVar1,0);
-    FUN_002c415c(puVar1);
+    scrScriptProcessDestroy(puVar1[0x158]);
+    jobStop(*puVar1,0);
+    asdMemFree(puVar1);
     DAT_0043da2c = (unsigned int *)0x0;
     DAT_0043da28 = '\0';
   }

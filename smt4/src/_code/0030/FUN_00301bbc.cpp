@@ -13,7 +13,7 @@ int FUN_0024b830(...);
 int FUN_002a2c7c(void);
 int VectorSignedToFloat(double, int);
 int VectorUnsignedToFloat(...);
-int aeabi_uidivmod(void);
+int __aeabi_uidivmod(void);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -80,7 +80,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024b830. */
 extern int FUN_00269a58(void);
 /* Supplied declaration required: FUN_002a2c7c. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_00301bbc(int param_1)
@@ -363,7 +363,7 @@ void FUN_00301bbc(int param_1)
             pfVar8[4] = 0.0f;
             if (temp_v1) {
               FUN_0024b77c(0);
-              aeabi_uidivmod();
+              __aeabi_uidivmod();
               DAT_004ea92c = *pfVar8;
               DAT_004ea930 = pfVar8[1];
               DAT_004ea934 = pfVar8[2];

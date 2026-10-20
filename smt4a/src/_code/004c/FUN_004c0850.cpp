@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_003f0e20(...);
 int FUN_003f21ec(void);
 int FUN_003f24e0(unsigned int *, int);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_005713f0; /* 0x5713f0 */
 extern unsigned int DAT_005713f4; /* 0x5713f4 */
 extern unsigned int DAT_005713f8; /* 0x5713f8 */
@@ -29,7 +29,7 @@ extern unsigned int DAT_0057141c; /* 0x57141c */
 extern unsigned int DAT_00571488; /* 0x571488 */
 extern unsigned int DAT_0057148c; /* 0x57148c */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 extern int FUN_0018719c(unsigned int);
 extern int FUN_001ab854(void);
 /* Supplied declaration required: FUN_003f0e20. */
@@ -39,7 +39,7 @@ extern int FUN_001ab854(void);
 /* Supplied declaration required: FUN_003fd63c. */
 /* Supplied declaration required: FUN_00409d8c. */
 extern unsigned int FUN_004c53fc(unsigned int);
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
@@ -55,7 +55,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  puVar2 = (unsigned int *)FUN_0014aa78();
+  puVar2 = (unsigned int *)btlGetMainState();
   puVar3 = puVar2;
   FUN_003f0e20(puVar2,param_1);
   if (puVar3 == (unsigned int *)0x0) {
@@ -128,7 +128,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
        (((param_3 & 0x80) != 0 || (param_3 & 0x40) != 0) || (param_3 & 0x100) != 0)) {
       *(unsigned short *)(puVar3 + 0x9d) = (unsigned short)puVar3[0x9d] & 0xefff;
     }
-    temp_v1 = FUN_004ee568(DAT_0057113c);
+    temp_v1 = btlUnitGet(g_btlScriptUnit);
     if ((((temp_v1 != 0) && (-1 < *(short *)((int)puVar3 + 0x6e))) &&
         (*(short *)((int)puVar3 + 0x6e) < 4)) &&
        ((((puVar3[1] & DAT_00571414) == 0 && (DAT_00571410 & *puVar3) == 0 && (puVar3[0xff] != 0))
@@ -179,7 +179,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 0x80) != 0) {
     temp_v3 = FUN_004c53fc(0x1b);
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xe0) = temp_v3;
@@ -187,7 +187,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 0x40) != 0) {
     temp_v3 = FUN_004c53fc(0x1c);
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xe4) = temp_v3;
@@ -195,7 +195,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 0x100) != 0) {
     temp_v3 = FUN_004c53fc(0x1d);
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xe8) = temp_v3;
@@ -203,7 +203,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 8) != 0) {
     temp_v3 = FUN_004c53fc(0x1e);
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xec) = temp_v3;
@@ -211,7 +211,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 0x800) != 0) {
     temp_v3 = FUN_004c53fc(0x1f);
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xf0) = temp_v3;
@@ -219,7 +219,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 0x1000) != 0) {
     temp_v3 = FUN_004c53fc(0x20);
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xf4) = temp_v3;
@@ -227,7 +227,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 0x2000) != 0) {
     temp_v3 = FUN_004c53fc(0x21);
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xf8) = temp_v3;
@@ -235,7 +235,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 0x10) != 0) {
     temp_v3 = FUN_004c53fc(0x22);
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xfc) = temp_v3;
@@ -250,7 +250,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
     temp_v4 = temp_v4 | DAT_005713f4;
     *puVar3 = temp_v2 | DAT_005713f0;
     puVar3[1] = temp_v4;
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     temp_v1 = *(int *)(temp_v1 + 0x1ed4) + param_1 * 0x1d0;
     *(unsigned int *)(temp_v1 + 0x50) = *(unsigned int *)(temp_v1 + 0x50) | 0x81;
     if ((puVar2[0x1169] & DAT_0057148c) != 0 || (puVar2[0x1168] & DAT_00571488) != 0) {
@@ -268,7 +268,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
     temp_v4 = temp_v4 | DAT_005713f4;
     *puVar3 = temp_v2 | DAT_005713f0;
     puVar3[1] = temp_v4;
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     temp_v1 = *(int *)(temp_v1 + 0x1ed4) + param_1 * 0x1d0;
     *(unsigned int *)(temp_v1 + 0x50) = *(unsigned int *)(temp_v1 + 0x50) | 0x81;
     if ((puVar2[0x1169] & DAT_0057148c) != 0 || (puVar2[0x1168] & DAT_00571488) != 0) {

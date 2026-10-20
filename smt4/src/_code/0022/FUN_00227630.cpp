@@ -1,33 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00227630` (_code @ 0x227630, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002939f4(void);
+typedef struct Unit {
+    /* 0x000 */ u8 unk000[0x196];
+    /* 0x196 */ s16 value;
+} Unit;
 
-extern int FUN_00293230(void);
-/* Supplied declaration required: FUN_002939f4. */
+typedef struct Owner {
+    /* 0x0000 */ u8 unk0000[0x1CFC];
+    /* 0x1CFC */ Unit *unit;
+} Owner;
 
+int btlGetMainState(void);
+int FUN_00293230(void);
 
-int FUN_00227630(int param_1)
-
+/* Returns the current unit's value, or 0 if there is no unit or FUN_00293230 reports it unavailable. */
+int FUN_00227630(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (*(int *)(param_1 + 0x1cfc) != 0) {
-    FUN_002939f4();
-    temp_v0 = FUN_00293230();
-    if (temp_v0 == 0) {
-      temp_v0 = (int)*(short *)(*(int *)(param_1 + 0x1cfc) + 0x196);
+    if (owner->unit == NULL) {
+        return 0;
     }
-    else {
-      temp_v0 = 0;
+    btlGetMainState();
+    if (FUN_00293230() == 0) {
+        return owner->unit->value;
     }
-  }
-  return temp_v0;
+    return 0;
 }
 
 } /* extern "C" */

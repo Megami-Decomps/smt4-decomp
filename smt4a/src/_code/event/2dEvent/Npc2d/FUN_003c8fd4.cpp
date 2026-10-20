@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0014afd0(...);
-int FUN_0014e38c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int asdMemoryAllocTracked(...);
 int FUN_00283498(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -21,12 +21,12 @@ extern int FUN_0034da3c(...); /* 0x34da3c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0014afd0. */
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 extern int FUN_001834a4(unsigned int, unsigned char);
 /* Supplied declaration required: FUN_00283498. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_003c8fd4(int param_1)
@@ -41,8 +41,8 @@ void FUN_003c8fd4(int param_1)
   unsigned long long temp_v3;
   
   piVar1 = (int *)0x100;
-  FUN_00163060(0x100,0x100,0,0xbc,1);
-  FUN_002e6354();
+  asdMemoryAllocTracked(0x100,0x100,0,0xbc,1);
+  sysMemClear();
   temp_v3 = 0;
   piVar1[8] = 0x3f800000;
   piVar1[9] = 0x3f800000;
@@ -103,7 +103,7 @@ void FUN_003c8fd4(int param_1)
     FUN_0014afd0(0x27,0);
   }
   piVar1[6] = 0x3e851eb8;
-  FUN_0014e38c("EVE_2dTex",4,0,0,FUN_002897cc,FUN_0034da3c,piVar1);
+  asdProcessCreateSimple("EVE_2dTex",4,0,0,FUN_002897cc,FUN_0034da3c,piVar1);
   return;
 }
 

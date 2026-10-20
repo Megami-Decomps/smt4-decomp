@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_002ba12c(unsigned int);
 
-extern unsigned char DAT_0044e140; /* 0x44e140 */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned char g_gameGlobals; /* 0x44e140 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002ba12c. */
 extern unsigned int FUN_002bed98(int);
@@ -23,9 +23,9 @@ void FUN_00288ef0(int *param_1,unsigned int *param_2,int param_3)
   int temp_v2;
   float in_s0;
   
-  temp_v2 = (*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + param_3 * 0x8c;
+  temp_v2 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + param_3 * 0x8c;
   temp_v0 = FUN_002beda4(temp_v2 + 0x44);
-  FUN_002ba12c(DAT_0044ea00);
+  FUN_002ba12c(g_titleScene);
   *param_1 = (int)in_s0 + temp_v0;
   temp_v1 = FUN_002bed98(temp_v2 + 0x44);
   *param_2 = temp_v1;

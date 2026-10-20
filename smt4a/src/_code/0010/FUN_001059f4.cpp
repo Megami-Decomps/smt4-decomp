@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7634(...);
+int strInit(...);
 int FUN_002ec8a8(int, unsigned int);
 
 typedef struct fn_001059f4_arg0 fn_001059f4_arg0;
@@ -18,7 +18,7 @@ struct fn_001059f4_arg0 {
 
 extern unsigned char DAT_005587c4; /* 0x5587c4 */
 
-/* Supplied declaration required: FUN_002e7634. */
+/* Supplied declaration required: strInit. */
 extern unsigned int *FUN_002eb77c(fn_001059f4_arg0 *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002ec8a8. */
 
@@ -37,11 +37,11 @@ int FUN_001059f4(fn_001059f4_arg0 *param_1,unsigned int param_2,unsigned int par
   puVar1[0x10] = param_4;
   puVar1[0xf] = param_3;
   *puVar1 = (unsigned int)&DAT_005587c4;
-  temp_v0 = FUN_002e7634(puVar1 + 0x11);
+  temp_v0 = strInit(puVar1 + 0x11);
   *(unsigned int *)(temp_v0 + 0x28) = param_7;
   *(unsigned int *)(temp_v0 + 0x20) = 0;
   *(unsigned int *)(temp_v0 + 0x24) = param_6;
-  temp_v0 = FUN_002e7634(temp_v0 + 0x2c);
+  temp_v0 = strInit(temp_v0 + 0x2c);
   FUN_002ec8a8(temp_v0 - 0x2c,param_5);
   *(unsigned int *)(temp_v0 + 0x20) = 0;
   FUN_002ec8a8(temp_v0,param_5);

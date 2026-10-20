@@ -2,11 +2,11 @@
 
 extern "C" {
 
-unsigned int FUN_00192748(unsigned int);
+unsigned int dataTableGetCount(unsigned int);
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00192748. */
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(void);
 
 
 unsigned short FUN_00228024(unsigned int param_1)
@@ -18,10 +18,10 @@ unsigned short FUN_00228024(unsigned int param_1)
   int temp_v2;
   unsigned int temp_v5;
   
-  temp_v1 = FUN_00187180(1,3);
-  temp_v2 = FUN_00192798();
+  temp_v1 = dataTableGet(1,3);
+  temp_v2 = dataTableGetEntries();
   
-  for (temp_v5 = 0; temp_v5 < FUN_00192748(temp_v1); temp_v5 = temp_v5 + 1) {
+  for (temp_v5 = 0; temp_v5 < dataTableGetCount(temp_v1); temp_v5 = temp_v5 + 1) {
     if (*(unsigned short *)(temp_v2 + temp_v5 * 4) == param_1) {
       temp_v0 = *(unsigned short *)(temp_v2 + temp_v5 * 4 + 2);
       if (temp_v0 == 0) {

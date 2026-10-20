@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00137ee0(int, int *, int);
-int FUN_00180008(int);
+int asdSequenceRequest(int, int *, int);
+int jyoucyuGetTableEntry(int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -13,9 +13,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-/* Supplied declaration required: FUN_00137ee0. */
-/* Supplied declaration required: FUN_00180008. */
-extern unsigned int FUN_00236038(unsigned int);
+/* Supplied declaration required: asdSequenceRequest. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
+extern unsigned int scrGetArg(unsigned int);
 
 
 unsigned int FUN_0038b1cc(void)
@@ -28,13 +28,13 @@ unsigned int FUN_0038b1cc(void)
   unsigned int uStack_14;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  FUN_00180008(0);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  jyoucyuGetTableEntry(0);
   temp_v3 = 0;
   temp_v2 = temp_v0;
   uStack_14 = temp_v1;
-  FUN_00137ee0(0x10,&temp_v2,0xc);
+  asdSequenceRequest(0x10,&temp_v2,0xc);
   return 1;
 }
 

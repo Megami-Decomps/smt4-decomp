@@ -6,14 +6,14 @@ int FUN_00301830(void);
 int FUN_00303a48(void);
 int FUN_0031cea0(int);
 
-extern int FUN_00164a34(void);
+extern int lmapMainIsRunning(void);
 extern int FUN_00239194(void);
 extern int FUN_002b4cb0(void);
 extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_00301830. */
 /* Supplied declaration required: FUN_00303a48. */
 /* Supplied declaration required: FUN_0031cea0. */
-extern int MapMode_IsBusy(void);
+extern int mapMainIsBusy(void);
 
 
 unsigned int FUN_0039b59c(void)
@@ -26,8 +26,8 @@ unsigned int FUN_0039b59c(void)
   }
   temp_v0 = FUN_00239194();
   if (temp_v0 != 0) {
-    temp_v0 = MapMode_IsBusy();
-    if ((temp_v0 != 0) || (temp_v0 = FUN_00164a34(), temp_v0 != 0)) {
+    temp_v0 = mapMainIsBusy();
+    if ((temp_v0 != 0) || (temp_v0 = lmapMainIsRunning(), temp_v0 != 0)) {
       FUN_00303a48();
     }
     else {

@@ -3,10 +3,10 @@
 extern "C" {
 
 int FUN_001070b4(void);
-int FUN_002eeb5c(int);
+int onlineInstantiationContextClearSlot(int);
 
 /* Supplied declaration required: FUN_001070b4. */
-/* Supplied declaration required: FUN_002eeb5c. */
+/* Supplied declaration required: onlineInstantiationContextClearSlot. */
 
 
 void FUN_00107008(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -17,7 +17,7 @@ void FUN_00107008(int param_1,unsigned int param_2,unsigned int param_3,int para
     FUN_001070b4();
     return;
   }
-  FUN_002eeb5c(param_1 + 4);
+  onlineInstantiationContextClearSlot(param_1 + 4);
   return;
 }
 

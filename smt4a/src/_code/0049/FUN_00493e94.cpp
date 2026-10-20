@@ -1,30 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00493e94` (_code @ 0x493e94, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register copy only: retail copies b to r6 before the first rank call */
+/* Compares two ids: by FUN_001ba3d0 key (descending), then by their FUN_0049c9a0 rank. */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_001ba3d0(unsigned short);
-extern int FUN_0049c9a0(unsigned short *);
+extern s32 FUN_001ba3d0(u16 id);
+extern s32 FUN_0049c9a0(u16 *id);
 
-
-int FUN_00493e94(unsigned short *param_1,unsigned short *param_2)
-
+s32 FUN_00493e94(u16 *a, u16 *b)
 {
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = *param_2;
-  temp_v1 = FUN_001ba3d0(*param_1);
-  temp_v2 = FUN_001ba3d0(temp_v0);
-  temp_v2 = temp_v2 - temp_v1;
-  if (temp_v2 == 0) {
-    temp_v2 = FUN_0049c9a0(param_1);
-    temp_v1 = FUN_0049c9a0(param_2);
-    temp_v2 = temp_v2 - temp_v1;
-  }
-  return temp_v2;
+    u16 idA = *a;
+    u16 idB = *b;
+    s32 keyA = FUN_001ba3d0(idA);
+    s32 keyB = FUN_001ba3d0(idB);
+    s32 diff = keyB - keyA;
+
+    if (diff == 0) {
+        diff = FUN_0049c9a0(a) - FUN_0049c9a0(b);
+    }
+    return diff;
 }
 
-} /* extern "C" */
+}

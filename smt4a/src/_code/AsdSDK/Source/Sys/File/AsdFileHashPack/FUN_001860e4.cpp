@@ -1,25 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001860e4` (_code @ 0x1860e4, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHashPack.h"
 
 extern "C" {
+extern AsdFileHashPack *g_asdFileHashPack; /* the open pack */
 
-int FUN_001a70dc(int, unsigned int);
+s32 FUN_001a70dc(AsdFileHashPack *pack, u32 arg);
 
-extern int DAT_005b3fdc; /* 0x5b3fdc */
-
-/* Supplied declaration required: FUN_001a70dc. */
-
-
-void FUN_001860e4(unsigned int param_1)
-
+/* Forwards to the pack; returns whether it succeeded (0 when no pack is open). */
+u8 FUN_001860e4(u32 arg)
 {
-/* irregular: 1 native warning(s); review required */
-  if (DAT_005b3fdc != 0) {
-    FUN_001a70dc(DAT_005b3fdc,param_1);
-    return;
-  }
-  return;
+    if (g_asdFileHashPack == NULL) {
+        return 0;
+    }
+    return FUN_001a70dc(g_asdFileHashPack, arg) != 0;
 }
 
 } /* extern "C" */

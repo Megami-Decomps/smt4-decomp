@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0015155c(...);
-int FUN_00163060(int, int, int, int, int);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_002747dc(void);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
@@ -26,7 +26,7 @@ extern unsigned char LAB_0029aa38; /* 0x29aa38 */
 extern int FUN_0029d760(...); /* 0x29d760 */
 extern unsigned char LAB_0029d7f8; /* 0x29d7f8 */
 extern int FUN_00315d34(...); /* 0x315d34 */
-extern unsigned int *DAT_0058103c; /* 0x58103c */
+extern unsigned int *g_mapIf; /* 0x58103c */
 extern unsigned int DAT_006087e4; /* 0x6087e4 */
 extern unsigned int DAT_006087e8; /* 0x6087e8 */
 extern unsigned int DAT_006087ec; /* 0x6087ec */
@@ -64,8 +64,8 @@ extern unsigned int DAT_00609468; /* 0x609468 */
 extern unsigned int DAT_0060946c; /* 0x60946c */
 extern unsigned int DAT_00609470; /* 0x609470 */
 
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_002747dc. */
 
 
@@ -79,8 +79,8 @@ void FUN_002019dc(unsigned int param_1,unsigned char param_2)
   unsigned int temp_v0;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0xcd30,1);
-  DAT_0058103c = puVar1;
+  asdMemoryAllocTracked(0x100,0x100,0,0xcd30,1);
+  g_mapIf = puVar1;
   *(unsigned char *)(puVar1 + 5) = 0;
   *(unsigned char *)((int)puVar1 + 0x16) = 0;
   puVar1[6] = 0;
@@ -110,14 +110,14 @@ void FUN_002019dc(unsigned int param_1,unsigned char param_2)
   puVar1[0x334a] = 0;
   puVar1[0x334b] = 0;
   puVar2 = &LAB_00201c9c;
-  FUN_0015155c(&LAB_00201c9c,4,0,0,&LAB_00226538,&LAB_0029aa38,0,param_1);
+  taskCreateDraw(&LAB_00201c9c,4,0,0,&LAB_00226538,&LAB_0029aa38,0,param_1);
   *puVar1 = (unsigned int)puVar2;
   puVar3 = &LAB_00201ca8;
-  FUN_0015155c(&LAB_00201ca8,0x75,0,0,FUN_0029d760,0,0,puVar2);
+  taskCreateDraw(&LAB_00201ca8,0x75,0,0,FUN_0029d760,0,0,puVar2);
   puVar1[1] = (unsigned int)puVar3;
-  FUN_0015155c(&LAB_00201cb4,0x8a,0,0,FUN_00315d34,0,0,*puVar1);
+  taskCreateDraw(&LAB_00201cb4,0x8a,0,0,FUN_00315d34,0,0,*puVar1);
   puVar2 = &LAB_00201cc4;
-  FUN_0015155c(&LAB_00201cc4,0x71,0,0,&LAB_0029d7f8,0,0,*puVar1);
+  taskCreateDraw(&LAB_00201cc4,0x71,0,0,&LAB_0029d7f8,0,0,*puVar1);
   puVar1[2] = (unsigned int)puVar2;
   DAT_006087e4 = 0xc2800000;
   DAT_006087e8 = 0x41800000;

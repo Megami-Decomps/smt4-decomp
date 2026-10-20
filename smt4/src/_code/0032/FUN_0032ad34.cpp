@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0026e768(int *, unsigned char [64]);
 int FUN_002b2144(unsigned char [64]);
-int FUN_002bfe28(unsigned char [64], unsigned int);
+int mtx44Copy(unsigned char [64], unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 int nn_math_ARMv6_MTX44MultAsm(unsigned char [64], unsigned char [64], unsigned char [64]);
 
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0026e768. */
 extern unsigned int FUN_002a7bc0(void);
 /* Supplied declaration required: FUN_002b2144. */
-/* Supplied declaration required: FUN_002bfe28. */
+/* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 
 
@@ -42,7 +42,7 @@ void FUN_0032ad34(unsigned int *param_1,unsigned int *param_2,unsigned int param
   unsigned int uStack_2c;
   
   temp_v0 = FUN_002a7bc0();
-  FUN_002bfe28(temp_v1,temp_v0);
+  mtx44Copy(temp_v1,temp_v0);
   temp_v5 = *param_2;
   temp_v6 = param_2[1];
   temp_v7 = param_2[2];

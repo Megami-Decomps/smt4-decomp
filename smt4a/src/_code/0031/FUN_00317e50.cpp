@@ -14,7 +14,7 @@ int FUN_0042b32c(unsigned char [496]);
 /* Supplied declaration required: FUN_00188444. */
 /* Supplied declaration required: FUN_001886bc. */
 /* Supplied declaration required: FUN_002e0e04. */
-extern int FUN_002e3390(int);
+extern int wstrlen(int);
 /* Supplied declaration required: FUN_0042b32c. */
 
 
@@ -32,7 +32,7 @@ unsigned char * FUN_00317e50(int param_1)
   temp_v0 = param_1;
   FUN_002e0e04(param_1,temp_v1,1);
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002e3390(param_1);
+    temp_v0 = wstrlen(param_1);
     if ((temp_v0 == 0) || (*(char *)((temp_v0 + param_1) - 1) != '/')) {
       FUN_001886bc();
       FUN_00188444(temp_v1);

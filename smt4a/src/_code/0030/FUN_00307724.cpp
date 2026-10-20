@@ -1,23 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00307724` (_code @ 0x307724, 0x22 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the loop is inverted (test duplicated before the body); retail enters it with an unconditional branch to the bottom test. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003116c8(unsigned int, int, int);
+typedef struct Elem {
+    u32 w0;
+    u32 w1;
+} Elem;                         /* 8 bytes */
 
-/* Supplied declaration required: FUN_003116c8. */
+int FUN_003116c8(u32 allocator, Elem *dst, Elem *src);
 
-
-int FUN_00307724(int param_1,int param_2,int param_3,unsigned int param_4)
-
+/* std::uninitialized_copy for 8-byte elements: constructs a copy of each of [first, last) at `dest` through the allocator; returns the end of the copy. */
+Elem *FUN_00307724(Elem *first, Elem *last, Elem *dest, u32 allocator)
 {
-/* irregular: 1 native warning(s); review required */
-  for (; param_1 != param_2; param_1 = param_1 + 8) {
-    FUN_003116c8(param_4,param_3,param_1);
-    param_3 = param_3 + 8;
-  }
-  return param_3;
+    for (; first != last; ++first, ++dest) {
+        FUN_003116c8(allocator, dest, first);
+    }
+    return dest;
 }
 
 } /* extern "C" */

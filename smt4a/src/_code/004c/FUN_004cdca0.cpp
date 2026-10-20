@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0019a5a0(int);
-int FUN_0019c364(int);
+int asdMemFree(int);
+int scrScriptProcessDestroy(int);
 int FUN_0019e2dc(void);
 int FUN_001ad6d8(void);
 int FUN_001aea28(unsigned int, unsigned int);
@@ -19,8 +19,8 @@ int FUN_003ae864(int);
 typedef int romwright_code(...);
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019e2dc. */
 /* Supplied declaration required: FUN_001ad6d8. */
 /* Supplied declaration required: FUN_001aea28. */
@@ -71,15 +71,15 @@ void FUN_004cdca0(int param_1)
   FUN_0037b450();
   FUN_0019e2dc();
   if (*(int *)(param_1 + 0x18) != 0) {
-    FUN_0019c364(*(int *)(param_1 + 0x18));
+    scrScriptProcessDestroy(*(int *)(param_1 + 0x18));
     *(unsigned int *)(param_1 + 0x18) = 0;
   }
   if (*(int *)(param_1 + 0x10) != 0) {
-    FUN_0019a5a0(*(int *)(param_1 + 0x10));
+    asdMemFree(*(int *)(param_1 + 0x10));
     *(unsigned int *)(param_1 + 0x10) = 0;
   }
   if (*(int *)(param_1 + 0x14) != 0) {
-    FUN_0019a5a0(*(int *)(param_1 + 0x14));
+    asdMemFree(*(int *)(param_1 + 0x14));
     *(unsigned int *)(param_1 + 0x14) = 0;
   }
   return;

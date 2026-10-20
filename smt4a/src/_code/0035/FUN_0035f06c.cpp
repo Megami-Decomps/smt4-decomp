@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00236038(int);
+int scrGetArg(int);
 
-extern int FUN_0014aa78(void);
-/* Supplied declaration required: FUN_00236038. */
+extern int btlGetMainState(void);
+/* Supplied declaration required: scrGetArg. */
 
 
 unsigned int FUN_0035f06c(void)
@@ -22,9 +22,9 @@ unsigned int FUN_0035f06c(void)
   unsigned short *puVar6;
   unsigned short *puVar7;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  temp_v2 = FUN_0014aa78();
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = btlGetMainState();
   if (temp_v0 != 0) {
     puVar7 = *(unsigned short **)(temp_v2 + 0x4e58);
     if (*(unsigned short **)(temp_v2 + 0x4e5c) != puVar7) {

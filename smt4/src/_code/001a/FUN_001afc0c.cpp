@@ -22,9 +22,9 @@ int FUN_0029efc0(...);
 int FUN_0029efd8(int, int);
 int FUN_0029f5d8(int, unsigned int, int, int, int, int, char [8], int, int);
 int FUN_002bc01c(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002c1658(...);
-int FUN_002c415c(void);
+int asdMemFree(void);
 int SBORROW4(...);
 
 /* stack frame of void: 4 slot(s), 13 byte(s) */
@@ -64,11 +64,11 @@ extern int FUN_002b63ac(void);
 /* Supplied declaration required: FUN_002b63c0. */
 /* Supplied declaration required: FUN_002b8838. */
 /* Supplied declaration required: FUN_002bc01c. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 extern int FUN_002c09d0(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 extern int FUN_00333aac(unsigned int);
 
 
@@ -108,7 +108,7 @@ void FUN_001afc0c(void)
     temp_v11 = 1;
     FUN_002c1658();
     if (temp_v11 != 0) {
-      FUN_002bd8e8(temp_v1 + 0x34,2,0);
+      timerStart(temp_v1 + 0x34,2,0);
       temp_v11 = DAT_0043dd50;
       temp_v6 = *(unsigned int *)(DAT_0043dd50 + 4);
       *(unsigned int *)(DAT_0043dd50 + 4) = 3;
@@ -136,7 +136,7 @@ void FUN_001afc0c(void)
         temp_v10 = (unsigned int)temp_v8;
         if (*(int *)(temp_v1 + 0x5e0) != 0) {
           if (*(char *)(temp_v1 + 0x5f7) == '\0') {
-            FUN_002c415c();
+            asdMemFree();
           }
           *(unsigned int *)(temp_v1 + 0x5e0) = 0;
         }
@@ -169,7 +169,7 @@ void FUN_001afc0c(void)
         temp_v10 = (unsigned int)temp_v8;
         if (*(int *)(temp_v1 + 0x5e0) != 0) {
           if (*(char *)(temp_v1 + 0x5f7) == '\0') {
-            FUN_002c415c();
+            asdMemFree();
           }
           *(unsigned int *)(temp_v1 + 0x5e0) = 0;
         }
@@ -205,7 +205,7 @@ void FUN_001afc0c(void)
             temp_v9 = *(int *)(temp_v1 + 0x5cc);
           }
           if (temp_v9 != *(int *)(temp_v1 + 0x5c8)) {
-            FUN_002bd8e8(temp_v1 + 0x1d8,3,0);
+            timerStart(temp_v1 + 0x1d8,3,0);
             temp_v9 = DAT_0043dd50;
             temp_v6 = *(unsigned int *)(DAT_0043dd50 + 4);
             *(unsigned int *)(DAT_0043dd50 + 4) = 5;
@@ -224,7 +224,7 @@ void FUN_001afc0c(void)
               *(unsigned int *)(temp_v1 + 0x5cc) = 0;
             }
             if (*(int *)(temp_v1 + 0x5cc) != *(int *)(temp_v1 + 0x5c8)) {
-              FUN_002bd8e8(temp_v1 + 0x1d8,2,0);
+              timerStart(temp_v1 + 0x1d8,2,0);
               temp_v9 = DAT_0043dd50;
               temp_v6 = *(unsigned int *)(DAT_0043dd50 + 4);
               *(unsigned int *)(DAT_0043dd50 + 4) = 5;
@@ -418,7 +418,7 @@ LAB_001b02f8:
                 temp_v9 = 1;
                 FUN_002c1658();
                 if (temp_v9 != 0) {
-                  FUN_002bd8e8(temp_v1 + 0x34,2,0);
+                  timerStart(temp_v1 + 0x34,2,0);
                   temp_v9 = DAT_0043dd50;
                   temp_v6 = *(unsigned int *)(DAT_0043dd50 + 4);
                   *(unsigned int *)(DAT_0043dd50 + 4) = 3;

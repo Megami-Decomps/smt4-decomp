@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002c4938(unsigned short *, int);
+int memClear(unsigned short *, int);
 
 typedef struct fn_003c8428_arg0 fn_003c8428_arg0;
 struct fn_003c8428_arg0 {
@@ -38,8 +38,8 @@ struct fn_003c8428_arg0 {
 
 extern int FUN_002b63ac(void);
 extern int FUN_002b6a54(fn_003c8428_arg0 *, unsigned int);
-extern unsigned short *FUN_002b6b20(void);
-/* Supplied declaration required: FUN_002c4938. */
+extern unsigned short *gameGetOptions(void);
+/* Supplied declaration required: memClear. */
 extern unsigned int FUN_002eea80(fn_003c8428_arg0 *, unsigned char);
 
 
@@ -58,7 +58,7 @@ void FUN_003c8428(fn_003c8428_arg0 *param_1)
   int temp_v7;
   unsigned int temp_v8;
   
-  puVar8 = (unsigned short *)FUN_002b6b20();
+  puVar8 = (unsigned short *)gameGetOptions();
   temp_v8 = 0xffffffff;
   temp_v7 = 0;
   do {
@@ -69,7 +69,7 @@ void FUN_003c8428(fn_003c8428_arg0 *param_1)
     }
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 3);
-  FUN_002c4938(puVar8,0x604);
+  memClear(puVar8,0x604);
   temp_v7 = FUN_002b6a54(param_1,temp_v8);
   puVar8[0x302] = (short)(int)param_1;
   puVar8[0x303] = (short)temp_v8;

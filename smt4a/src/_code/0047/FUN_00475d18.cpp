@@ -1,31 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00475d18` (_code @ 0x475d18, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instructions identical to retail; the retail literal pool carries one extra unreferenced word ahead of the global address. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001b3428(int);
-int FUN_002e3328(unsigned int *);
+typedef struct Manager {
+    /* 0x00 */ u8 unk00[0x88];
+    /* 0x88 */ u8 list[4];
+} Manager;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
+extern Manager *g_aocMain;
 
-extern int DAT_00570260; /* 0x570260 */
+int FUN_002e3328(u32 *slot);
+int FUN_001b3428(void *list);
 
-/* Supplied declaration required: FUN_001b3428. */
-/* Supplied declaration required: FUN_002e3328. */
-
-
-void FUN_00475d18(unsigned int *param_1,unsigned int param_2)
-
+/* Stores `value` in `slot`, then notifies the manager's list and runs FUN_002e3328 on the slot. */
+void FUN_00475d18(u32 *slot, u32 value)
 {
-/* irregular: 2 native warning(s); review required */
-  *param_1 = param_2;
-  FUN_001b3428(DAT_00570260 + 0x88);
-  FUN_002e3328(param_1);
-  return;
+    *slot = value;
+    FUN_001b3428(g_aocMain->list);
+    FUN_002e3328(slot);
 }
 
 } /* extern "C" */

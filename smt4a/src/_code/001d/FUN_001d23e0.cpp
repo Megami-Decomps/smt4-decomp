@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00180008(int);
+int jyoucyuGetTableEntry(int);
 int FUN_001b57a8(...);
 int FUN_001b5acc(int *);
 int FUN_001d25a0(...);
@@ -24,13 +24,13 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_6_stack;
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
 #ifndef ROMWRIGHT_PIECE_3_1_DEFINED
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_00180008. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 extern int FUN_001a0380(int);
 extern int FUN_001af210(int);
 /* Supplied declaration required: FUN_001b57a8. */
@@ -111,13 +111,13 @@ void FUN_001d23e0(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
         temp_v5 = romwright_piece_3_1((((unsigned int)(temp_v5) >> 8) & 0xffffffU),100);
         temp_v6 = temp_v7;
         uStack_68 = uStack_54;
-        FUN_00180008(0);
-        temp_v1 = FUN_001af210(DAT_00570260 + 0x98);
+        jyoucyuGetTableEntry(0);
+        temp_v1 = FUN_001af210(g_aocMain + 0x98);
         temp_v8[0] = temp_v5;
         uStack_44 = uStack_64;
         uStack_40 = uStack_60;
         if (temp_v1 != 0) {
-          *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xfffeffff;
+          *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
           temp_v5 = romwright_piece_3_1((((unsigned int)(temp_v5) >> 8) & 0xffffffU),200);
           temp_v8[0] = temp_v5;
         }

@@ -2,9 +2,9 @@
 
 extern "C" {
 
-extern int FUN_002bf244(void);
-extern int FUN_002c08f0(int);
-extern int FUN_00322ad4(void);
+extern int jobIsValid(void);
+extern int jobGetWork(int);
+extern int eventTexGetCurrentOrInvalid(void);
 
 
 void FUN_002e20b4(void)
@@ -13,9 +13,9 @@ void FUN_002e20b4(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00322ad4();
-  if ((temp_v0 != -1) && (temp_v1 = FUN_002bf244(), temp_v1 != 0)) {
-    temp_v0 = FUN_002c08f0(temp_v0);
+  temp_v0 = eventTexGetCurrentOrInvalid();
+  if ((temp_v0 != -1) && (temp_v1 = jobIsValid(), temp_v1 != 0)) {
+    temp_v0 = jobGetWork(temp_v0);
     *(unsigned char *)(temp_v0 + 0x94) = 0;
   }
   return;

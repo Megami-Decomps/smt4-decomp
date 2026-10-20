@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002bf5c0(int, int, int, int, int, int);
-int FUN_002c5300(int, int, int, int, int);
+int asdMemoryAllocAligned(int, int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,8 +13,8 @@ typedef struct {
 } param_3_stack;
 
 extern int FUN_002bc11c(void);
-/* Supplied declaration required: FUN_002bf5c0. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 void FUN_002bc38c(int param_1,int param_2,int param_3)
@@ -78,17 +78,17 @@ LAB_002bc450:
         if (temp_v1 != 0x20000) {
           if (temp_v1 == 0x30000) {
             temp_v0 = 0x30000;
-            FUN_002c5300(temp_v0,0x100,0,temp_v3,1);
+            asdMemoryAlloc(temp_v0,0x100,0,temp_v3,1);
           }
         }
         else {
           temp_v0 = 0x20000;
-          FUN_002c5300(temp_v0,0x100,0,temp_v3,1);
+          asdMemoryAlloc(temp_v0,0x100,0,temp_v3,1);
         }
       }
       else {
         temp_v0 = 0x10000;
-        FUN_002bf5c0(0x10000,0x100,0,temp_v3,0x40,1);
+        asdMemoryAllocAligned(0x10000,0x100,0,temp_v3,0x40,1);
       }
       piVar4[2] = temp_v0;
       temp_v3 = FUN_002bc11c();

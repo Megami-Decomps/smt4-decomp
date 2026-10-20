@@ -22,12 +22,12 @@ int FUN_00399768(...);
 int FUN_00100388(...);
 int FUN_00164af0(...);
 int FUN_001656a0(...);
-int FUN_00167ab4(int, int, int, unsigned int, int, int);
-int FUN_0019a5a0(...);
+int memAlloc(int, int, int, unsigned int, int, int);
+int asdMemFree(...);
 int FUN_00202178(...);
 int FUN_0020e9dc(...);
 int FUN_00243ce8(...);
-int FUN_002722a8(void);
+int effPartCreate(void);
 int FUN_002e6dd4(void);
 int FUN_00300778(...);
 int FUN_003385e4(...);
@@ -105,8 +105,8 @@ extern unsigned char DAT_00634d20; /* 0x634d20 */
 extern int FUN_00163fd4(unsigned int);
 /* Supplied declaration required: FUN_00164af0. */
 /* Supplied declaration required: FUN_001656a0. */
-/* Supplied declaration required: FUN_00167ab4. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019c0e0. */
 /* Supplied declaration required: FUN_001abbc4. */
 /* Supplied declaration required: FUN_001ac8ec. */
@@ -119,7 +119,7 @@ extern unsigned char *FUN_00200bcc(unsigned char *);
 /* Supplied declaration required: FUN_00222160. */
 /* Supplied declaration required: FUN_00243c24. */
 /* Supplied declaration required: FUN_00243ce8. */
-/* Supplied declaration required: FUN_002722a8. */
+/* Supplied declaration required: effPartCreate. */
 /* Supplied declaration required: FUN_002b30e4. */
 /* Supplied declaration required: FUN_002e6dd4. */
 extern unsigned int FUN_0030061c(int);
@@ -170,7 +170,7 @@ unsigned int FUN_00388aac(void)
     DAT_0059e9b8 = DAT_0059e9b8 & 0xfffffffe;
   }
   if (DAT_0059dbf4 == 0) {
-    FUN_002722a8();
+    effPartCreate();
   }
   temp_v2 = FUN_003385e4();
   temp_v1 = 0;
@@ -286,7 +286,7 @@ LAB_00388d64:
   }
   temp_v8 = temp_v10 + 10;
   temp_v4 = 0x10000;
-  FUN_00167ab4(0x10000,0x100,0,temp_v8 * 0x2c,0x10,1);
+  memAlloc(0x10000,0x100,0,temp_v8 * 0x2c,0x10,1);
   FUN_002e6dd4();
   puVar11 = (unsigned char *)0x80;
   temp_v12 = temp_v4 + temp_v8 * 0x18;
@@ -479,7 +479,7 @@ LAB_00388edc:
     DAT_0059dc14 = DAT_0059dc18;
     DAT_0059dc18 = (unsigned char *)0x0;
   }
-  FUN_0019a5a0(temp_v3);
+  asdMemFree(temp_v3);
   if (DAT_0059dbe7 == '\0') {
     temp_v7 = 0x800001;
   }

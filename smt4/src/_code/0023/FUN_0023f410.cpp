@@ -1,66 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023f410` (_code @ 0x23f410, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the flags word is loaded into r8 instead of r1, and the unk4c store is scheduled before the flags load. */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
+/* One 0x114-byte slot of the table at owner+0x1e98. */
 typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} param_4_stack;
+    u8 unk00[0x48];
+    s32 mode;      /* 0x48 */
+    s32 unk4c;     /* 0x4c */
+    u32 state;     /* 0x50: bit0 active, bit1 busy, bit7 ready */
+    u32 flags;     /* 0x54 */
+    u16 flags58;   /* 0x58 */
+    u8 unk5a[0x114 - 0x5a];
+} Slot;
 
+/* Owner object: only the slot table pointer is used here. */
+typedef struct {
+    u8 unk00[0x1e98];
+    Slot *slots;   /* 0x1e98 */
+} SlotOwner;
 
-void FUN_0023f410(int param_1,int param_2,int param_3,int param_4)
-
+/* Resets every ready slot of group `group` to mode 4; bit 3 of flags follows `keepFlag`. */
+void FUN_0023f410(SlotOwner *owner, int group, int keepFlag, int keepFlag58)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v4 = 0;
-  temp_v2 = 0;
-  if (param_2 == 0) {
-    temp_v2 = 4;
-  }
-  else if (param_2 == 1) {
-    temp_v4 = 4;
-    temp_v2 = 0x32;
-  }
-  else if (param_2 == 2) {
-    temp_v4 = 0x36;
-    temp_v2 = 1;
-  }
-  else if (param_2 == 3) {
-    temp_v4 = 0x43;
-    temp_v2 = 0x2a;
-  }
-  temp_v2 = temp_v2 + temp_v4;
-  if (temp_v2 > (int)temp_v4) {
-    do {
-      temp_v3 = *(int *)(param_1 + 0x1e98) + temp_v4 * 0x114;
-      temp_v0 = *(unsigned int *)(temp_v3 + 0x50);
-      if (((temp_v0 & 1) != 0 && (temp_v0 & 0x80) != 0) && ((temp_v0 & 2) == 0)) {
-        temp_v0 = *(unsigned int *)(temp_v3 + 0x54);
-        temp_v1 = (temp_v0 & 0xfffffff9) | 1;
-        *(unsigned int *)(temp_v3 + 0x54) = temp_v1;
-        *(unsigned int *)(temp_v3 + 0x4c) = 0;
-        if (param_3 != 0) {
-          temp_v1 = temp_v1 | 8;
+    u32 first = 0;
+    int count = 0;
+    u32 end;
+    u32 i;
+
+    if (group == 0) {
+        count = 4;
+    } else if (group == 1) {
+        first = 4;
+        count = 0x32;
+    } else if (group == 2) {
+        first = 0x36;
+        count = 1;
+    } else if (group == 3) {
+        first = 0x43;
+        count = 0x2a;
+    }
+    end = count + first;
+    for (i = first; (int)end > (int)i; i++) {
+        Slot *slot = &owner->slots[i];
+        u32 state = slot->state;
+
+        if ((state & 1) && (state & 0x80) && !(state & 2)) {
+            u32 oldFlags = slot->flags;
+            u32 flags = (oldFlags & ~6) | 1;
+
+            slot->flags = flags;
+            slot->unk4c = 0;
+            if (keepFlag != 0) {
+                flags |= 8;
+            }
+            slot->mode = 4;
+            if (keepFlag != 0) {
+                slot->flags = flags;
+            }
+            if (keepFlag58 == 0) {
+                slot->flags58 |= 0x200;
+            }
         }
-        *(unsigned int *)(temp_v3 + 0x48) = 4;
-        if (param_3 != 0) {
-          *(unsigned int *)(temp_v3 + 0x54) = temp_v1;
-        }
-        if (param_4 == 0) {
-          *(unsigned short *)(temp_v3 + 0x58) = *(unsigned short *)(temp_v3 + 0x58) | 0x200;
-        }
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v2 > (int)temp_v4);
-  }
-  return;
+    }
 }
 
 } /* extern "C" */

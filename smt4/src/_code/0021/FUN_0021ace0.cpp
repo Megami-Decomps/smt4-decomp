@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0024f8a4(unsigned int *, int, int);
-int FUN_0024fac4(void);
+int effEmitterCreateSmall(void);
 int FUN_002691d8(unsigned int, unsigned int, unsigned int *);
 int FUN_00269334(void);
 
 /* Supplied declaration required: FUN_0024f8a4. */
-/* Supplied declaration required: FUN_0024fac4. */
+/* Supplied declaration required: effEmitterCreateSmall. */
 /* Supplied declaration required: FUN_002691d8. */
 /* Supplied declaration required: FUN_00269334. */
 
@@ -25,7 +25,7 @@ unsigned int * FUN_0021ace0(int param_1)
   
   puVar3 = *(unsigned int **)(*(int *)(param_1 + 0x30) + 0x24);
   puVar1 = puVar3;
-  FUN_0024fac4();
+  effEmitterCreateSmall();
   FUN_0024f8a4(puVar1,**(unsigned short **)(param_1 + 0x30),param_1 + 0xc);
   temp_v0 = (unsigned int)**(unsigned short **)(param_1 + 0x30);
   if (puVar1[0xc] != 0) {

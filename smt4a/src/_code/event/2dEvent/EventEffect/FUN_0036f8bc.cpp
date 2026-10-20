@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0013f1b8(...);
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdTMTexTableLoadTmx(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_001acf98(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -27,10 +27,10 @@ extern unsigned int *DAT_0057f3b8; /* 0x57f3b8 */
 extern int DAT_0057f3c4; /* 0x57f3c4 */
 extern unsigned char DAT_0057f3e8; /* 0x57f3e8 */
 
-/* Supplied declaration required: FUN_0013f1b8. */
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 extern int FUN_0018206c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001acf98. */
 extern int FUN_00341940(unsigned int);
@@ -48,7 +48,7 @@ void FUN_0036f8bc(unsigned int param_1)
   
   if (DAT_0057f3b8 == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x20,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0x20,1);
     DAT_0057f3b8 = puVar1;
   }
   puVar1 = DAT_0057f3b8;
@@ -61,10 +61,10 @@ void FUN_0036f8bc(unsigned int param_1)
   puVar1[6] = 0;
   puVar1[7] = 0;
   puVar2 = &LAB_0036fa88;
-  FUN_0014e38c(&LAB_0036fa88,3,0,0,FUN_002a41a0,0,0);
+  asdProcessCreateSimple(&LAB_0036fa88,3,0,0,FUN_002a41a0,0,0);
   *puVar1 = (unsigned int)puVar2;
-  FUN_0015155c(&LAB_0036fa9c,0x85,0,0,&LAB_002a3f54,0,0,puVar2);
-  FUN_0015155c(&LAB_0036fab4,0xe1,0,0,&LAB_002a3f54,0,0,*puVar1);
+  taskCreateDraw(&LAB_0036fa9c,0x85,0,0,&LAB_002a3f54,0,0,puVar2);
+  taskCreateDraw(&LAB_0036fab4,0xe1,0,0,&LAB_002a3f54,0,0,*puVar1);
   puVar1[6] = param_1;
   puVar1[3] = 0;
   puVar1[2] = 0;
@@ -77,7 +77,7 @@ void FUN_0036f8bc(unsigned int param_1)
       DAT_0057f3c4 = DAT_0057f3c4 + 1;
     }
     else {
-      FUN_0013f1b8(0x35,0);
+      asdTMTexTableLoadTmx(0x35,0);
       DAT_0057f3c4 = 0;
     }
     temp_v0 = temp_v2 * 0xc;

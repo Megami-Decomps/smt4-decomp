@@ -14,7 +14,7 @@ typedef struct {
 extern unsigned char DAT_0063e4a0; /* 0x63e4a0 */
 
 /* Supplied declaration required: FUN_001787a8. */
-extern int FUN_00180008(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 unsigned char FUN_0047ec9c(void)
@@ -27,7 +27,7 @@ unsigned char FUN_0047ec9c(void)
   unsigned int unaff_r4;
   unsigned int in_lr;
   
-  temp_v0 = FUN_00180008(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
     puVar1 = &DAT_0063e4a0;
     FUN_001787a8(&DAT_0063e4a0,0x6000001,0xffffffff,in_r3,unaff_r4,in_lr);

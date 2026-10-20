@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00295eb0(...);
 int FUN_002b2650(int, int, int);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int FUN_002beed0(...);
@@ -32,7 +32,7 @@ extern unsigned char DAT_004018b4; /* 0x4018b4 */
 
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_002b2650. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002beed0. */
@@ -65,7 +65,7 @@ void FUN_002069d8(int param_1)
   *(unsigned char *)(param_1 + 0xe8) = 1;
   FUN_002bee58(param_1 + 0xac,1);
   FUN_002bd954(param_1 + 0x1c4,0x14,9,param_1,0xb);
-  FUN_002bd8e8(param_1 + 0x1c4,2,0);
+  timerStart(param_1 + 0x1c4,2,0);
   return;
 }
 

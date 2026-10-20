@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(...);
+int btlGetMainState(...);
 int FUN_001568f8(...);
 int FUN_00192550(void);
 int FUN_001ab854(...);
@@ -45,7 +45,7 @@ extern unsigned int DAT_005714fc; /* 0x5714fc */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
 extern int FUN_001633a0(unsigned int);
 /* Supplied declaration required: FUN_00192550. */
@@ -97,7 +97,7 @@ unsigned int FUN_004c34e0(int param_1,unsigned int param_2,unsigned int param_3,
   temp_v21 = param_2;
   uStack_2c = param_3;
   iStack_28 = param_4;
-  puVar2 = (unsigned int *)FUN_0014aa78();
+  puVar2 = (unsigned int *)btlGetMainState();
   temp_v4 = temp_v21;
   FUN_001aba54();
   FUN_00192550();
@@ -116,7 +116,7 @@ unsigned int FUN_004c34e0(int param_1,unsigned int param_2,unsigned int param_3,
       return 0xffffffff;
     }
     VectorUnsignedToFloat((unsigned int)*(unsigned short *)(temp_v4 + 0x2c),(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v1 = FUN_0014aa78((unsigned int)*(unsigned short *)(temp_v4 + 0x2c));
+    temp_v1 = btlGetMainState((unsigned int)*(unsigned short *)(temp_v4 + 0x2c));
     temp_v3 = temp_v1;
     FUN_003f0e20(temp_v1,param_5);
     if ((((temp_v3 != 0) && (temp_v2 = temp_v1, FUN_003f0e20(temp_v1,param_6), temp_v2 != 0)) &&

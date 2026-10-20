@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_001568f8(...);
 int FUN_001aba54(void);
 int FUN_00243d30(...);
@@ -57,7 +57,7 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
 /* Supplied declaration required: FUN_001aba54. */
 /* Supplied declaration required: FUN_00243d30. */
@@ -137,7 +137,7 @@ int FUN_004c58e0(fn_004c58e0_arg0 *param_1,int param_2,int param_3,unsigned int 
   
   temp_v21 = romwright_piece_4_4(param_5,in_s1);
   temp_v9 = 1.0f;
-  pbVar2 = (unsigned char *)FUN_0014aa78();
+  pbVar2 = (unsigned char *)btlGetMainState();
   pbVar3 = pbVar2;
   FUN_001568f8(pbVar2,param_3);
   pbVar4 = pbVar2;
@@ -180,7 +180,7 @@ int FUN_004c58e0(fn_004c58e0_arg0 *param_1,int param_2,int param_3,unsigned int 
   temp_v23 = CONCAT44(temp_v6,temp_v16);
   FUN_004c3bc0(param_3,param_4);
   temp_v24 = CONCAT44(temp_v9,temp_v6);
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   temp_v4 = temp_v1;
   FUN_003f0e20(temp_v1,param_3);
   if (temp_v4 != 0) {

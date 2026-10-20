@@ -7,8 +7,8 @@ extern "C" {
 int FUN_002522f8(unsigned char [132], int, unsigned char *, unsigned char *, char *);
 int FUN_00257c2c(int, unsigned int, int, int);
 int FUN_002bd540(int);
-int FUN_002bd75c(void);
-int FUN_002c415c(unsigned int);
+int asdTextureCreate(void);
+int asdMemFree(unsigned int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -23,9 +23,9 @@ extern char s_flar02_02_004332a4[10]; /* 0x4332a4 */
 /* Supplied declaration required: FUN_002522f8. */
 /* Supplied declaration required: FUN_00257c2c. */
 /* Supplied declaration required: FUN_002bd540. */
-/* Supplied declaration required: FUN_002bd75c. */
+/* Supplied declaration required: asdTextureCreate. */
 extern unsigned int FUN_002c3124(unsigned char *, unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00317a90(void)
@@ -46,7 +46,7 @@ void FUN_00317a90(void)
     piVar4 = (int *)(temp_v0 + 0x4332a0);
     if ((*(char *)(temp_v0 + 0x4332ea) != '\x01') && (*piVar4 == 0)) {
       temp_v1 = 0;
-      FUN_002bd75c();
+      asdTextureCreate();
       *piVar4 = temp_v1;
       FUN_002522f8(temp_v5,0x80,&LAB_00317b88,&LAB_00317b74,s_flar02_02_004332a4 + temp_v0);
       temp_v2 = FUN_002c3124(temp_v5,(unsigned int *)&temp_v4,0);
@@ -58,7 +58,7 @@ void FUN_00317a90(void)
       *(unsigned int *)(*piVar4 + 0x38) = 0;
       FUN_002bd540(*piVar4);
       *(unsigned char *)(temp_v0 + 0x4332e8) = 1;
-      FUN_002c415c(*(unsigned int *)(temp_v0 + 0x4332e4));
+      asdMemFree(*(unsigned int *)(temp_v0 + 0x4332e4));
       *(unsigned int *)(temp_v0 + 0x4332e4) = 0;
     }
     temp_v3 = temp_v3 + 1;

@@ -3,11 +3,11 @@
 extern "C" {
 
 int FUN_00287728(int);
-int FUN_00296cc8(...);
+int scrGetArg(...);
 int FUN_002a03d8(int, unsigned int);
 
 /* Supplied declaration required: FUN_00287728. */
-/* Supplied declaration required: FUN_00296cc8. */
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_002a03d8. */
 extern int FUN_002c1d5c(void);
 
@@ -20,8 +20,8 @@ unsigned int FUN_002f4a14(void)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_00296cc8();
-  temp_v1 = FUN_00296cc8(0);
+  temp_v0 = scrGetArg();
+  temp_v1 = scrGetArg(0);
   if (temp_v1 == 0 || temp_v1 == 1) {
     temp_v2 = FUN_002c1d5c();
     if (temp_v2 != 0) {

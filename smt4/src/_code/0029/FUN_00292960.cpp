@@ -1,44 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00292960` (_code @ 0x292960, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b46f8(unsigned char [96], unsigned int, unsigned int, int, unsigned char *);
+typedef struct Request {
+    /* 0x00 */ u8 value;
+    /* 0x01 */ u8 unk01[0x5F];
+} Request;
 
-/* stack frame of param_2: 2 slot(s), 5 byte(s) */
-typedef struct {
-    unsigned char sp70; /* 0x70: local_70 */
-    unsigned int sp78; /* 0x78: local_78 */
-} param_2_stack;
+/* Code address of the request's completion callback (a local label in retail). */
+#define REQUEST_CALLBACK ((u8 *)0x0032c6c8)
 
-extern unsigned char LAB_0032c6c8; /* 0x32c6c8 */
+int FUN_002b46f8(Request *request, u32 arg1, u32 arg2, int size, u8 *callback);
+u32 dataTableGetCount(u32 arg);
+u32 dataTableGetEntries(void);
+u32 dataTableGet(u32 arg0, u32 arg1);
 
-/* Supplied declaration required: FUN_002b46f8. */
-extern unsigned int FUN_002c0c74(unsigned int);
-extern unsigned int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
-
-
-void FUN_00292960(unsigned char param_1,int param_2)
-
+/* Builds a request carrying `value` and submits it with its completion callback; the lookup index (0x16, 0 or 1) depends on `flag`. */
+void FUN_00292960(u8 value, int flag)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2 [96];
-  
-  if (param_2 != 0) {
-    temp_v0 = FUN_002c0cec(0x16,0);
-  }
-  else {
-    temp_v0 = FUN_002c0cec(0x16,1);
-  }
-  temp_v1 = FUN_002c0cc4();
-  temp_v0 = FUN_002c0c74(temp_v0);
-  temp_v2[0] = param_1;
-  FUN_002b46f8(temp_v2,temp_v1,temp_v0,0x60,(unsigned char *)0x32c6c8);
-  return;
+    Request request;
+    u32 selected;
+    u32 other;
+
+    if (flag != 0) {
+        selected = dataTableGet(0x16, 0);
+    } else {
+        selected = dataTableGet(0x16, 1);
+    }
+    other = dataTableGetEntries();
+    selected = dataTableGetCount(selected);
+    request.value = value;
+    FUN_002b46f8(&request, other, selected, 0x60, REQUEST_CALLBACK);
 }
 
 } /* extern "C" */

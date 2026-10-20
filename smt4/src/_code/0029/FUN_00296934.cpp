@@ -4,25 +4,25 @@
 
 extern "C" {
 
-int FUN_001ad9d8(int);
+int uiFadeSetVisible(int);
 int FUN_002a46d8(int);
-int FUN_002a7218(unsigned int);
-int FUN_002ae7e8(int);
+int scrScriptProcessDestroy(unsigned int);
+int asdTMTexTableFreeEntry(int);
 int FUN_002ae898(int, int);
 int FUN_002b8cc8(void);
-int FUN_002c415c(...);
-int FUN_002c43b4(unsigned int, int);
+int asdMemFree(...);
+int jobStop(unsigned int, int);
 
 extern unsigned int *DAT_0043dd50; /* 0x43dd50 */
 
-/* Supplied declaration required: FUN_001ad9d8. */
+/* Supplied declaration required: uiFadeSetVisible. */
 /* Supplied declaration required: FUN_002a46d8. */
-/* Supplied declaration required: FUN_002a7218. */
-/* Supplied declaration required: FUN_002ae7e8. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002ae898. */
 /* Supplied declaration required: FUN_002b8cc8. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 
 
 void FUN_00296934(void)
@@ -47,20 +47,20 @@ void FUN_00296934(void)
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < (int)(unsigned int)*(unsigned short *)(pb + 0xf8));
     }
-    FUN_002a7218(puVar4[0x16d]);
-    FUN_002c415c(puVar4[0x16c]);
-    FUN_002c415c(puVar4[0x16b]);
+    scrScriptProcessDestroy(puVar4[0x16d]);
+    asdMemFree(puVar4[0x16c]);
+    asdMemFree(puVar4[0x16b]);
     if (puVar4[0x16e] != 0) {
-      FUN_002a7218(puVar4[0x170]);
-      FUN_002c415c(puVar4[0x16e]);
-      FUN_002c415c(puVar4[0x16f]);
+      scrScriptProcessDestroy(puVar4[0x170]);
+      asdMemFree(puVar4[0x16e]);
+      asdMemFree(puVar4[0x16f]);
     }
     FUN_002ae898(0x29,0);
-    FUN_002ae7e8(0x29);
+    asdTMTexTableFreeEntry(0x29);
     FUN_002a46d8(0x34);
-    FUN_001ad9d8(1);
-    FUN_002c43b4(*puVar1,0);
-    FUN_002c415c(puVar1);
+    uiFadeSetVisible(1);
+    jobStop(*puVar1,0);
+    asdMemFree(puVar1);
     DAT_0043dd50 = (unsigned int *)0x0;
   }
   return;

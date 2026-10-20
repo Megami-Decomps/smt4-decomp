@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_001cd404(...);
 int VectorSignedToFloat(...);
 
@@ -23,9 +23,9 @@ extern int FUN_0032063c(...); /* 0x32063c */
 extern unsigned char LAB_0038b7f0; /* 0x38b7f0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001cd404. */
 
 
@@ -41,7 +41,7 @@ unsigned int FUN_0039b2d0(unsigned int param_1,unsigned int param_2,unsigned int
   unsigned int temp_v2;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x2c,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x2c,1);
   *puVar1 = 0;
   puVar1[1] = 0;
   puVar1[2] = 0;
@@ -54,10 +54,10 @@ unsigned int FUN_0039b2d0(unsigned int param_1,unsigned int param_2,unsigned int
   puVar1[9] = 0;
   puVar1[10] = 0;
   pcVar2 = "EventEplEffect";
-  FUN_0014e38c("EventEplEffect",4,0,0,FUN_003205a4,&LAB_0038b7f0,puVar1);
+  asdProcessCreateSimple("EventEplEffect",4,0,0,FUN_003205a4,&LAB_0038b7f0,puVar1);
   *puVar1 = (unsigned int)pcVar2;
-  FUN_0015155c("EventEplEffect_Draw",0x77,0,0,FUN_0032063c,0,puVar1,pcVar2);
-  FUN_0015155c("EventEplEffect_Draw",0xd3,0,0,FUN_0032063c,0,puVar1,*puVar1);
+  taskCreateDraw("EventEplEffect_Draw",0x77,0,0,FUN_0032063c,0,puVar1,pcVar2);
+  taskCreateDraw("EventEplEffect_Draw",0xd3,0,0,FUN_0032063c,0,puVar1,*puVar1);
   temp_v2 = VectorSignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v0 = VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v1 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);

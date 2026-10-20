@@ -8,7 +8,7 @@ int FUN_0032ff20(int, unsigned char [300]);
 int FUN_0035ad50(int, unsigned char [300]);
 int FUN_004bcd90(int);
 
-extern unsigned char *FUN_0019e4d4(short);
+extern unsigned char *slotRecordFindById(short);
 /* Supplied declaration required: FUN_0032ff20. */
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: FUN_004bcd90. */
@@ -62,7 +62,7 @@ void FUN_004da5c4(unsigned int param_1,unsigned char *param_2,int param_3)
         }
       }
       else {
-        puVar3 = (unsigned char *)FUN_0019e4d4(temp_v1);
+        puVar3 = (unsigned char *)slotRecordFindById(temp_v1);
       }
       temp_v2 = 0;
       do {

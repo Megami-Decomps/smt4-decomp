@@ -1,44 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003354a0` (_code @ 0x3354a0, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the slot index scale (i * 5) is built in r0 instead of r1. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002a775c(unsigned int);
-int FUN_002c415c(unsigned int);
+typedef struct Slot {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 handle;
+    /* 0x0C */ void *buffer;
+    /* 0x10 */ u8 unk10[0x40];
+} Slot;
 
-extern unsigned char DAT_004206f0; /* 0x4206f0 */
+typedef struct SlotSet {
+    /* 0x00 */ void *vtbl;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 handle;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ Slot slots[3];
+} SlotSet;
 
-/* Supplied declaration required: FUN_002a775c. */
-/* Supplied declaration required: FUN_002c415c. */
+extern u8 DAT_004206f0;
 
+int asdMdlManagerDestroy(u32 handle);
+int asdMemFree(void *block);
 
-unsigned int * FUN_003354a0(unsigned int *param_1)
-
+/* Destructor: releases the handle and buffer of each of the three slots, then the set's own handle. */
+SlotSet *FUN_003354a0(SlotSet *set)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int *q;
-  
-  temp_v0 = 0;
-  *param_1 = (unsigned int)&DAT_004206f0;
-  do {
-    q = param_1 + temp_v0 * 0x14 + 4;
-    if (param_1[temp_v0 * 0x14 + 6] != 0) {
-      FUN_002a775c(param_1[temp_v0 * 0x14 + 6]);
-      q[2] = 0;
+    int i;
+
+    set->vtbl = &DAT_004206f0;
+    i = 0;
+    do {
+        Slot *slot = &set->slots[i];
+
+        if (slot->handle != 0) {
+            asdMdlManagerDestroy(slot->handle);
+            slot->handle = 0;
+        }
+        if (slot->buffer != NULL) {
+            asdMemFree(slot->buffer);
+            slot->buffer = NULL;
+        }
+        i++;
+    } while (i < 3);
+    if (set->handle != 0) {
+        asdMdlManagerDestroy(set->handle);
+        set->handle = 0;
     }
-    if (q[3] != 0) {
-      FUN_002c415c(q[3]);
-      q[3] = 0;
-    }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 3);
-  if (param_1[2] != 0) {
-    FUN_002a775c(param_1[2]);
-    param_1[2] = 0;
-  }
-  return param_1;
+    return set;
 }
 
 } /* extern "C" */

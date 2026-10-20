@@ -1,26 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00427e28` (_code @ 0x427e28, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_0043bfd0(void);
+u32 FUN_0043bfd0(void);
 
-
-unsigned int FUN_00427e28(void)
-
+/* nn::Result test: module (bits 10-17) 0x11 with description (bits 0-9) in 100-179 maps to the 0xc961391a code; 0 otherwise. */
+u32 FUN_00427e28(void)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_0043bfd0();
-  if ((((temp_v0 & 0x3fc00) == 0x4400) && ((temp_v0 & 0x3ff) >= 100)) && ((temp_v0 & 0x3ff) < 0xb4)) {
-    temp_v1 = 0xc961391a;
-  }
-  else {
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    u32 result = FUN_0043bfd0();
+    u32 module = (result & 0x3fc00) >> 10;
+    int description;
+
+    if (module == 0x11 && (description = result & 0x3ff, description >= 100) && description <= 179) {
+        return 0xc961391a;
+    }
+    return 0;
 }
 
 } /* extern "C" */

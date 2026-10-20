@@ -6,7 +6,7 @@ extern "C" {
 
 int nw_gfx_internal_FastWordCopyAsm_78(unsigned int, unsigned char *);
 
-extern unsigned int DAT_004652a0; /* 0x4652a0 */
+extern unsigned int g_commandBufferCursor; /* 0x4652a0 */
 extern unsigned char DAT_00471dc8; /* 0x471dc8 */
 extern unsigned int DAT_00471e78; /* 0x471e78 */
 
@@ -21,7 +21,7 @@ unsigned int FUN_0015bd68(int param_1)
   if (param_1 != 0) {
     DAT_00471e78 = 2;
   }
-  nw_gfx_internal_FastWordCopyAsm_78(DAT_004652a0,&DAT_00471dc8);
+  nw_gfx_internal_FastWordCopyAsm_78(g_commandBufferCursor,&DAT_00471dc8);
   return 0x138;
 }
 

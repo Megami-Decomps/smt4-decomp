@@ -1,35 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00207094` (_code @ 0x207094, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Compares two ids: by FUN_0028fb40 key (descending), then by the byte at +0x6F of their FUN_002b4670 records. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b4670(void);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x6F];
+    /* 0x6F */ u8 rank;
+} Record;
 
-extern int FUN_0028fb40(unsigned short);
-/* Supplied declaration required: FUN_002b4670. */
+extern s32 FUN_0028fb40(u16 id);
+extern Record *FUN_002b4670(u32 id);
 
-
-int FUN_00207094(unsigned short *param_1,unsigned short *param_2)
-
+s32 FUN_00207094(u16 *a, u16 *b)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = FUN_0028fb40(*param_1);
-  temp_v1 = FUN_0028fb40(*param_2);
-  temp_v1 = temp_v1 - temp_v0;
-  if (temp_v1 == 0) {
-    temp_v2 = (unsigned int)*param_1;
-    FUN_002b4670();
-    temp_v3 = (unsigned int)*param_2;
-    FUN_002b4670();
-    temp_v1 = (unsigned int)*(unsigned char *)(temp_v2 + 0x6f) - (unsigned int)*(unsigned char *)(temp_v3 + 0x6f);
-  }
-  return temp_v1;
+    s32 keyA = FUN_0028fb40(*a);
+    s32 keyB = FUN_0028fb40(*b);
+    s32 diff = keyB - keyA;
+
+    if (diff == 0) {
+        Record *recordA = FUN_002b4670(*a);
+        Record *recordB = FUN_002b4670(*b);
+
+        diff = recordA->rank - recordB->rank;
+    }
+    return diff;
 }
 
-} /* extern "C" */
+}

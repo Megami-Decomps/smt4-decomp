@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002897f0(...);
 
-int FUN_0025b730(int);
+int asdLoadFileSetUseRawPaths(int);
 int FUN_00282bfc(int, int);
 int FUN_00287728(int);
 int FUN_0028971c(void);
@@ -21,29 +21,29 @@ int FUN_002917b8(void);
 int FUN_00291944(void);
 int FUN_00297060(int, unsigned int);
 int FUN_0029c3b0(int);
-int FUN_002a7218(void);
+int scrScriptProcessDestroy(void);
 int FUN_002b8838(int);
 int FUN_002be624(unsigned char [128], unsigned char *, unsigned int, unsigned int);
 int FUN_002bff50(void);
 int FUN_002c09d0(void);
-int FUN_002c415c(void);
-int FUN_002c43b4(unsigned int, int);
+int asdMemFree(void);
+int jobStop(unsigned int, int);
 int FUN_002cb8d8(void);
 int FUN_002e2028(void);
-int FUN_002f59d0(void);
-int FUN_0031be7c(void);
+int bustupCutAnimStopJob(void);
+int eventCommandStop(void);
 int FUN_0031eb34(void);
 
 extern unsigned char LAB_001e54bc; /* 0x1e54bc */
 extern unsigned char LAB_001e54d4; /* 0x1e54d4 */
-extern int DAT_00432fc8; /* 0x432fc8 */
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocMain; /* 0x432fc8 */
+extern int g_aocSystem; /* 0x433158 */
 extern unsigned int *DAT_0043e0d0; /* 0x43e0d0 */
 
 extern int FUN_0019e0c0(unsigned int);
 extern int FUN_001aba04(void);
-/* Supplied declaration required: FUN_0025b730. */
-extern int FUN_0025b740(void);
+/* Supplied declaration required: asdLoadFileSetUseRawPaths. */
+extern int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: FUN_00287728. */
 /* Supplied declaration required: FUN_0028971c. */
@@ -62,22 +62,22 @@ extern int FUN_00289e54(int, unsigned int, unsigned int);
 extern int FUN_00296f4c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_0029c3b0. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002b8838. */
 extern int FUN_002b8cec(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
 extern int FUN_002bfde4(unsigned int);
 /* Supplied declaration required: FUN_002bff50. */
 /* Supplied declaration required: FUN_002c09d0. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
-extern int FUN_002c564c(unsigned int);
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
+extern int jyoucyuGetTableEntry(unsigned int);
 extern unsigned int FUN_002c5c04(unsigned char *);
 /* Supplied declaration required: FUN_002cb8d8. */
 extern int FUN_002d860c(void);
 /* Supplied declaration required: FUN_002e2028. */
-/* Supplied declaration required: FUN_002f59d0. */
-/* Supplied declaration required: FUN_0031be7c. */
+/* Supplied declaration required: bustupCutAnimStopJob. */
+/* Supplied declaration required: eventCommandStop. */
 /* Supplied declaration required: FUN_0031eb34. */
 
 
@@ -97,7 +97,7 @@ unsigned int FUN_001e4d70(void)
   
   puVar1 = DAT_0043e0d0;
   puVar5 = temp_v5;
-  if ((*(unsigned int *)(DAT_00432fc8 + 0x754) & 4) != 0 || (*(unsigned int *)(DAT_00432fc8 + 0x754) & 8) != 0) {
+  if ((*(unsigned int *)(g_aocMain + 0x754) & 4) != 0 || (*(unsigned int *)(g_aocMain + 0x754) & 8) != 0) {
     return 0;
   }
   temp_v0 = DAT_0043e0d0[2];
@@ -128,20 +128,20 @@ unsigned int FUN_001e4d70(void)
     FUN_002917b8();
     FUN_002bff50();
     FUN_0028971c();
-    FUN_002f59d0();
+    bustupCutAnimStopJob();
     FUN_002e2028();
-    FUN_0031be7c();
+    eventCommandStop();
     FUN_0031eb34();
     if (puVar1[0xc] != 0) {
-      FUN_002a7218();
+      scrScriptProcessDestroy();
       puVar1[0xc] = 0;
     }
     if (puVar1[0xb] != 0) {
-      FUN_002c415c();
+      asdMemFree();
       puVar1[0xb] = 0;
     }
     if (puVar1[0xd] != 0) {
-      FUN_002c415c();
+      asdMemFree();
       puVar1[0xd] = 0;
     }
     puVar1[2] = 1;
@@ -164,8 +164,8 @@ unsigned int FUN_001e4d70(void)
     if (temp_v0 != 99) {
       return 0;
     }
-    FUN_002c43b4(*DAT_0043e0d0,0);
-    *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xffffff8f;
+    jobStop(*DAT_0043e0d0,0);
+    *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
     return 0;
   }
   if (temp_v0 == 0) {
@@ -180,19 +180,19 @@ unsigned int FUN_001e4d70(void)
     if (temp_v0 != 2) {
       return 0;
     }
-    if ((*(char *)(DAT_0043e0d0 + 8) != '\0') && (temp_v0 = FUN_0025b740(), temp_v0 == 0)) {
-      FUN_0025b730(1);
+    if ((*(char *)(DAT_0043e0d0 + 8) != '\0') && (temp_v0 = asdLoadFileGetUseRawPaths(), temp_v0 == 0)) {
+      asdLoadFileSetUseRawPaths(1);
       *(unsigned char *)((int)puVar1 + 0x21) = 1;
     }
     FUN_002be624(temp_v5,&LAB_001e54bc,puVar1[5],puVar1[5]);
     FUN_002be624(temp_v6,&LAB_001e54d4,puVar1[5],puVar1[5]);
-    temp_v0 = FUN_00289e54(DAT_00433158,puVar1[5],0);
+    temp_v0 = FUN_00289e54(g_aocSystem,puVar1[5],0);
     if (temp_v0 != 0) {
-      temp_v0 = DAT_00433158;
-      FUN_00289de4(DAT_00433158,puVar1[5],0);
+      temp_v0 = g_aocSystem;
+      FUN_00289de4(g_aocSystem,puVar1[5],0);
       puVar1[0xb] = temp_v0;
-      temp_v0 = DAT_00433158;
-      FUN_00289d74(DAT_00433158,puVar1[5],0);
+      temp_v0 = g_aocSystem;
+      FUN_00289d74(g_aocSystem,puVar1[5],0);
       puVar1[0xd] = temp_v0;
       if (puVar1[0xb] == 0 || temp_v0 == 0) {
         puVar1[2] = 1;
@@ -217,7 +217,7 @@ unsigned int FUN_001e4d70(void)
     FUN_00289880();
     FUN_002b8838(0x90);
     if (*(char *)((int)puVar1 + 0x21) != '\0') {
-      FUN_0025b730(0);
+      asdLoadFileSetUseRawPaths(0);
       *(unsigned char *)((int)puVar1 + 0x21) = 0;
     }
     if (*(char *)((int)puVar1 + 0x23) != '\0') {
@@ -398,7 +398,7 @@ unsigned int FUN_001e4d70(void)
     }
     break;
   case 3:
-    temp_v0 = FUN_002c564c(2);
+    temp_v0 = jyoucyuGetTableEntry(2);
     if ((temp_v0 == 0) &&
        ((temp_v0 = FUN_002b8cec(4), temp_v0 != 0 || (temp_v0 = FUN_002b8cec(3), temp_v0 != 0)))) {
       *(unsigned char *)(puVar1 + 8) = *(char *)(puVar1 + 8) != '\x01';

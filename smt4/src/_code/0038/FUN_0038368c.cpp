@@ -37,7 +37,7 @@ typedef struct {
 
 extern unsigned char LAB_00383ef4; /* 0x383ef4 */
 extern char s_______ABCD__0044db58[12]; /* 0x44db58 */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -112,21 +112,21 @@ void FUN_0038368c(unsigned int *param_1)
     temp_v10 = VectorFloatToUnsigned(temp_v9 * 255.0f,3);
     temp_v11 = 0.3f;
     temp_v10 = temp_v10 & 0xff;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v12 = 0.31f;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v19 = (int)temp_v12;
     temp_v12 = 0.32f;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v17 = (int)temp_v12;
     temp_v12 = 0.33f;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v16 = (int)temp_v12;
     temp_v12 = 0.34f;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v1 = (int)temp_v12;
     temp_v12 = 0.35f;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v15 = (int)temp_v12;
     temp_v2 = FUN_002beda4(param_1 + 0x11);
     temp_v3 = FUN_002bed98(param_1 + 0x11);

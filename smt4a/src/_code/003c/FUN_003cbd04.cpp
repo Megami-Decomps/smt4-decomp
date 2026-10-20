@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_00162790(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -32,7 +32,7 @@ extern unsigned char LAB_003cc19c; /* 0x3cc19c */
 /* Supplied declaration required: FUN_00100388. */
 extern unsigned int FUN_0014bd84(unsigned short);
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -70,7 +70,7 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
   temp_v8 = param_3;
   iStack_28 = param_4;
   temp_v1 = FUN_002a4860();
-  FUN_001677c0();
+  efctSetSpeed();
   temp_v2 = FUN_001834a4(0x1a,param_2 + 0x185);
   FUN_001835b4(2,0x1a,0x16f,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65);
   FUN_001835b4(2,0x1a,0x170,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65);
@@ -148,7 +148,7 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
                    (int)*(short *)(temp_v0 + 10) + (int)*(short *)(temp_v2 + 10) + param_6,1,4,0x79,
                    &LAB_003cc19c,temp_v6);
     }
-    FUN_001677c0();
+    efctSetSpeed();
   }
   return;
 }

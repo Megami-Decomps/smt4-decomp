@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001631d0(...);
-int FUN_0019a5a0(...);
+int jobStop(...);
+int asdMemFree(...);
 int FUN_001add24(...);
 int FUN_002bf4f4(...);
 int FUN_002e26a4(void);
@@ -64,8 +64,8 @@ int FUN_002e1308(void);
 int FUN_00312d6c(void);
 int FUN_0031fad8(void);
 int FUN_0031fb04(void);
-int FUN_00324ae4(void);
-int FUN_0038a654(void);
+int lmapMainCallIfActive(void);
+int gauntletAppMenuKillTask(void);
 int FUN_003b078c(void);
 int FUN_003d2d6c(...);
 int FUN_003d54f8(...);
@@ -99,8 +99,8 @@ int FUN_003daf0c(...);
 
 int FUN_0020b660(...);
 int FUN_00215bbc(void);
-int FUN_00227e08(void);
-int FUN_00239a94(void);
+int configDestroy(void);
+int playLogDestroy(void);
 int FUN_00284ee4(...);
 int FUN_0028b088(...);
 int FUN_002f7bc4(...);
@@ -114,7 +114,7 @@ int FUN_003dc628(void);
 
 int FUN_00163aa4(...);
 int FUN_001643b4(...);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_001834a4(...);
 int FUN_0019de98(...);
 int FUN_0020d700(void);
@@ -144,7 +144,7 @@ typedef struct {
 
 extern unsigned int *DAT_0057f108; /* 0x57f108 */
 extern unsigned int DAT_00588e2c; /* 0x588e2c */
-extern signed char DAT_005e1eb0; /* 0x5e1eb0 */
+extern signed char g_campState; /* 0x5e1eb0 */
 extern unsigned char DAT_005e1eb1; /* 0x5e1eb1 */
 extern unsigned char DAT_005e1eb2; /* 0x5e1eb2 */
 extern unsigned char DAT_005e1eb3; /* 0x5e1eb3 */
@@ -158,23 +158,23 @@ extern unsigned char DAT_005f19ef; /* 0x5f19ef */
 /* Supplied declaration required: FUN_0014afa8. */
 /* Supplied declaration required: FUN_001517b4. */
 extern int FUN_00162e8c(void);
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 extern int FUN_0016345c(void);
 /* Supplied declaration required: FUN_00163aa4. */
-extern int FUN_00163e40(unsigned int);
+extern int jobIsValid(unsigned int);
 extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: FUN_001641b4. */
 /* Supplied declaration required: FUN_00164288. */
 extern unsigned char FUN_001643a0(void);
 /* Supplied declaration required: FUN_001643b4. */
-extern int FUN_00164a34(void);
+extern int lmapMainIsRunning(void);
 extern unsigned int FUN_00167f08(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_00184c00. */
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_001add24. */
@@ -186,23 +186,23 @@ extern int FUN_0020a2fc(void);
 /* Supplied declaration required: FUN_0020b660. */
 /* Supplied declaration required: FUN_0020d700. */
 /* Supplied declaration required: FUN_0020dc1c. */
-extern int FUN_0020eaa4(void);
-extern int FUN_00212968(void);
+extern int bibleIsClosed(void);
+extern int configIsClosed(void);
 /* Supplied declaration required: FUN_0021545c. */
 /* Supplied declaration required: FUN_00215bbc. */
 /* Supplied declaration required: FUN_00215bd0. */
 /* Supplied declaration required: FUN_0021b274. */
 /* Supplied declaration required: FUN_0021c354. */
 /* Supplied declaration required: FUN_002277d8. */
-/* Supplied declaration required: FUN_00227e08. */
-extern int FUN_002292f0(void);
+/* Supplied declaration required: configDestroy. */
+extern int playLogIsClosed(void);
 extern int FUN_0022a030(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_002309dc. */
 extern int FUN_00237608(void);
 extern int FUN_00237620(void);
 extern int FUN_00239480(void);
-/* Supplied declaration required: FUN_00239a94. */
+/* Supplied declaration required: playLogDestroy. */
 extern int FUN_0023b258(void);
 /* Supplied declaration required: FUN_0023b27c. */
 /* Supplied declaration required: FUN_0023b45c. */
@@ -278,7 +278,7 @@ extern int FUN_0031d864(void);
 extern int FUN_0031f90c(void);
 /* Supplied declaration required: FUN_0031fad8. */
 /* Supplied declaration required: FUN_0031fb04. */
-/* Supplied declaration required: FUN_00324ae4. */
+/* Supplied declaration required: lmapMainCallIfActive. */
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_0032d388. */
 extern int FUN_003309e0(void);
@@ -326,12 +326,12 @@ extern int FUN_0037d9dc(void);
 /* Supplied declaration required: FUN_0037dab0. */
 extern int FUN_0037db9c(void);
 /* Supplied declaration required: FUN_0037e1b0. */
-extern int FUN_003871c0(void);
+extern int titleConfigIsClosed(void);
 extern int FUN_003881d0(void);
 /* Supplied declaration required: FUN_003881e0. */
 /* Supplied declaration required: FUN_0038843c. */
 /* Supplied declaration required: FUN_00388758. */
-/* Supplied declaration required: FUN_0038a654. */
+/* Supplied declaration required: gauntletAppMenuKillTask. */
 extern int FUN_0038b358(void);
 extern int FUN_0038b568(void);
 extern int FUN_0039ba04(void);
@@ -365,7 +365,7 @@ extern int FUN_003f86c8(unsigned int);
 extern int FUN_00418768(unsigned int);
 /* Supplied declaration required: FUN_004188e0. */
 extern int FUN_00481104(unsigned int);
-extern int MapMode_IsBusy(void);
+extern int mapMainIsBusy(void);
 
 
 unsigned int FUN_003d56dc(void)
@@ -616,7 +616,7 @@ unsigned int FUN_003d56dc(void)
               else {
                 temp_v6 = 4;
               }
-              FUN_001681cc(temp_v6);
+              sysPlaySe(temp_v6);
               FUN_00331380(0);
             }
             if (*(char *)(puVar2 + 0x29) == '\x01') {
@@ -628,7 +628,7 @@ unsigned int FUN_003d56dc(void)
               else {
                 temp_v6 = 2;
               }
-              FUN_001681cc(temp_v6);
+              sysPlaySe(temp_v6);
               FUN_00331380(1);
             }
             temp_v0 = *(char *)(puVar2 + 0x29);
@@ -646,7 +646,7 @@ unsigned int FUN_003d56dc(void)
             }
           }
         }
-        FUN_001681cc(temp_v6);
+        sysPlaySe(temp_v6);
       }
     }
     break;
@@ -707,14 +707,14 @@ unsigned int FUN_003d56dc(void)
       temp_v4 = FUN_002c2c68(puVar2 + 0x7b);
       if (temp_v4 >= 1) {
         temp_v5 = 0x34;
-        FUN_001681cc(temp_v5);
+        sysPlaySe(temp_v5);
         FUN_0028b088(temp_v6);
         temp_v4 = puVar2[9];
         FUN_0020b660(temp_v4);
         break;
       }
       temp_v5 = 7;
-      FUN_001681cc(temp_v5);
+      sysPlaySe(temp_v5);
       FUN_0028b088(temp_v6);
       temp_v4 = puVar2[9];
       FUN_0020b660(temp_v4);
@@ -758,7 +758,7 @@ unsigned int FUN_003d56dc(void)
       else {
         temp_v5 = 7;
       }
-      FUN_001681cc(temp_v5);
+      sysPlaySe(temp_v5);
     }
     else {
       FUN_002f7bc4(temp_v6);
@@ -771,10 +771,10 @@ unsigned int FUN_003d56dc(void)
     FUN_00163aa4();
     if (*(char *)((int)puVar2 + 0x76e) == '\0') break;
     if (puVar2[10] == 0x2e) {
-      FUN_00227e08();
+      configDestroy();
     }
     if (puVar2[10] == 0x2f) {
-      FUN_00239a94();
+      playLogDestroy();
       FUN_003423e8(0);
     }
     temp_v4 = puVar2[9];
@@ -893,7 +893,7 @@ unsigned int FUN_003d56dc(void)
           FUN_0026fc00(2,1,0xffffffff,0);
         }
       }
-      FUN_001681cc(0x52);
+      sysPlaySe(0x52);
       temp_v4 = 9;
       FUN_0020b660(temp_v4);
     }
@@ -1356,14 +1356,14 @@ LAB_003d6870:
       }
       FUN_0020b660(3);
       FUN_003d54f8(0,10);
-      temp_v4 = MapMode_IsBusy();
+      temp_v4 = mapMainIsBusy();
       if (temp_v4 != 0) {
         FUN_00312d6c();
       }
       else {
-        temp_v4 = FUN_00164a34();
+        temp_v4 = lmapMainIsRunning();
         if (temp_v4 != 0) {
-          FUN_00324ae4();
+          lmapMainCallIfActive();
         }
         else {
           FUN_0021c354(0x2d);
@@ -1433,7 +1433,7 @@ LAB_003d6870:
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 8);
     FUN_00163aa4(puVar2 + 0x222);
-    if ((*(char *)((int)puVar2 + 0x6e2) != '\0') && (temp_v4 = FUN_0020eaa4(), temp_v4 != 0)) {
+    if ((*(char *)((int)puVar2 + 0x6e2) != '\0') && (temp_v4 = bibleIsClosed(), temp_v4 != 0)) {
       puVar2[9] = 6;
       FUN_0020b660(5);
       FUN_0026f7f0();
@@ -1462,12 +1462,12 @@ LAB_003d6870:
     if (temp_v4 == 4) {
       temp_v4 = FUN_0037d438();
       if (temp_v4 != 0) {
-        FUN_0038a654();
+        gauntletAppMenuKillTask();
         temp_v4 = 0x33;
         FUN_0020b660(temp_v4);
         break;
       }
-      FUN_0038a654();
+      gauntletAppMenuKillTask();
       FUN_002c39dc(1,0,0xffffffff);
       FUN_00284ee4(1);
       puVar12 = DAT_0057f108;
@@ -1536,7 +1536,7 @@ LAB_003d6870:
         FUN_00357ad8();
       }
       if (!((((temp_v4 == 0 && temp_v10 == 0) && temp_v12 == 0) && temp_v11 == 0) && temp_v8 == 0)) {
-        DAT_005e1eb0 = (char)temp_v4;
+        g_campState = (char)temp_v4;
         DAT_005e1eb1 = (unsigned char)temp_v10;
         DAT_005e1eb2 = (unsigned char)temp_v12;
         DAT_005e1eb3 = (unsigned char)temp_v11;
@@ -1562,7 +1562,7 @@ LAB_003d6870:
           *(unsigned char *)((int)puVar12 + 0x32b1) = 1;
         }
       }
-      if (DAT_005e1eb0 == '\0') {
+      if (g_campState == '\0') {
         temp_v4 = FUN_00162e8c();
         *(unsigned short *)(temp_v4 + 0x1e) = DAT_005e1eb6;
       }
@@ -1583,7 +1583,7 @@ LAB_003d6870:
       temp_v6 = FUN_002a4878(puVar12 + 0x10);
       FUN_003da8f4((int)*(char *)(puVar12 + 0x29),temp_v6);
       FUN_0028b088();
-      FUN_001681cc(*(unsigned short *)((int)puVar12 + 0x3a));
+      sysPlaySe(*(unsigned short *)((int)puVar12 + 0x3a));
       if (puVar12[10] == 0x11) {
         FUN_0023b45c(0);
       }
@@ -1613,7 +1613,7 @@ LAB_003d6870:
     break;
   case 0x2e:
     FUN_00202ea4();
-    temp_v4 = FUN_00212968();
+    temp_v4 = configIsClosed();
 joined_r0x003d7c38:
     if (temp_v4 != 0) {
       FUN_0028b088(0);
@@ -1625,7 +1625,7 @@ joined_r0x003d7c38:
     break;
   case 0x2f:
     FUN_0021545c();
-    temp_v4 = FUN_002292f0();
+    temp_v4 = playLogIsClosed();
     goto joined_r0x003d7c38;
   case 0x30:
     FUN_00163aa4();
@@ -1634,7 +1634,7 @@ joined_r0x003d7c38:
       FUN_00163aa4(puVar2 + temp_v4 * 0x23 + 0x245);
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 8);
-    if ((*(char *)((int)puVar2 + 0x6e2) != '\0') && (temp_v4 = FUN_00163e40(puVar2[4]), temp_v4 == 0)) {
+    if ((*(char *)((int)puVar2 + 0x6e2) != '\0') && (temp_v4 = jobIsValid(puVar2[4]), temp_v4 == 0)) {
       puVar2[9] = 6;
       temp_v4 = 5;
       FUN_0020b660(temp_v4);
@@ -1758,7 +1758,7 @@ LAB_003d801c:
         temp_v4 = FUN_002a4b74();
         if (temp_v4 != 0) {
           FUN_0028187c(0x27);
-          FUN_001681cc(0x92);
+          sysPlaySe(0x92);
           temp_v4 = puVar2[0xb] + 1;
           puVar2[0xb] = temp_v4;
           break;
@@ -1996,7 +1996,7 @@ LAB_003d801c:
       else {
         temp_v6 = 0x34;
       }
-      FUN_001681cc(temp_v6);
+      sysPlaySe(temp_v6);
       temp_v4 = puVar2[10];
       FUN_0020b660(temp_v4);
     }
@@ -2155,7 +2155,7 @@ LAB_003d801c:
     }
     break;
   case 0x54:
-    temp_v4 = FUN_003871c0();
+    temp_v4 = titleConfigIsClosed();
     if (temp_v4 != 0) {
       FUN_003a43ec();
       FUN_001add24(0x3a);
@@ -2175,8 +2175,8 @@ LAB_003d801c:
     FUN_0035b304();
     FUN_0037b450();
     FUN_002e26a4();
-    FUN_001631d0(*puVar12,0);
-    FUN_0019a5a0(puVar12);
+    jobStop(*puVar12,0);
+    asdMemFree(puVar12);
     DAT_0057f108 = (unsigned int *)0x0;
     break;
   case 0x56:

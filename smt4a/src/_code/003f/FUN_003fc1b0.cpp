@@ -26,7 +26,7 @@ struct fn_003fc1b0_arg0 {
     undefined1 field_0x3c; /* +0x3c */
 };
 
-extern int *DAT_00570280; /* 0x570280 */
+extern int *g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_0020214c. */
@@ -48,10 +48,10 @@ void FUN_003fc1b0(fn_003fc1b0_arg0 *param_1,int param_2)
   FUN_00100388(aiStack_50,"battle/devil/en%03d.bin",param_2);
   param_1->field_0x8 = 6;
   *(int *)&param_1->field_0xc = param_2 - 1;
-  temp_v1 = FUN_00470b18(DAT_00570280,param_2,1);
+  temp_v1 = FUN_00470b18(g_aocSystem,param_2,1);
   if (temp_v1 != 0) {
-    piVar3 = DAT_00570280;
-    FUN_00470164(DAT_00570280,param_2,aiStack_50);
+    piVar3 = g_aocSystem;
+    FUN_00470164(g_aocSystem,param_2,aiStack_50);
   }
   else {
     FUN_0020214c();

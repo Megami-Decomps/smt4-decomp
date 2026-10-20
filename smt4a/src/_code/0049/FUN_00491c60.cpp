@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern int DAT_005f1c5c; /* 0x5f1c5c */
 
@@ -75,7 +75,7 @@ void FUN_00491c60(int param_1)
                 else {
                   *(unsigned short *)(temp_v1 + 0x17c0) = 0;
                 }
-                if (DAT_005f15fc == 0x17) {
+                if (g_gameState == 0x17) {
                   if (DAT_005f1600 == 2) {
                     temp_v0 = *(char *)(temp_v1 + 0x1790);
                     temp_v6 = temp_v0 != 'z';
@@ -83,7 +83,7 @@ void FUN_00491c60(int param_1)
                       temp_v0 = *(char *)(temp_v1 + 0x1791);
                     }
                     if ((temp_v6 || temp_v0 != '\x02') ||
-                       (*(unsigned short *)(temp_v1 + 0x17c0) = 0, DAT_005f15fc != 0x17))
+                       (*(unsigned short *)(temp_v1 + 0x17c0) = 0, g_gameState != 0x17))
                     goto LAB_00491eb4;
                   }
                   temp_v6 = DAT_005f1600 == 3;
@@ -182,7 +182,7 @@ LAB_00491eb4:
               else {
                 *(unsigned short *)(temp_v5 + 0x7bc8) = 1;
               }
-              if (DAT_005f15fc == 0x17) {
+              if (g_gameState == 0x17) {
                 if (DAT_005f1600 == 2) {
                   temp_v0 = *(char *)(temp_v5 + 0x7b98);
                   temp_v6 = temp_v0 != 'z';
@@ -190,7 +190,7 @@ LAB_00491eb4:
                     temp_v0 = *(char *)(temp_v5 + 0x7b99);
                   }
                   if ((temp_v6 || temp_v0 != '\x02') ||
-                     (*(unsigned short *)(temp_v5 + 0x7bc8) = 0, DAT_005f15fc != 0x17)) goto LAB_00491fc0;
+                     (*(unsigned short *)(temp_v5 + 0x7bc8) = 0, g_gameState != 0x17)) goto LAB_00491fc0;
                 }
                 temp_v6 = DAT_005f1600 == 3;
                 temp_v3 = DAT_005f1600;

@@ -1,44 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036db68` (_code @ 0x36db68, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Arms the menu state: flags it active, records the caller's value and the current tick, then restarts its embedded widget animation. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0014e188(int, int, unsigned int, int, int, float);
-int FUN_001846d0(int, int);
-int FUN_00184b80(int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+    u8 unk00[0x78];    /* 0x000 */
+    u32 param;         /* 0x078 */
+    u32 startTick;     /* 0x07c */
+    u8 unk80[8];       /* 0x080 */
+    u32 lastTick;      /* 0x088 */
+    u8 unk8c;          /* 0x08c */
+    u8 armed;          /* 0x08d */
+    u8 unk8e;          /* 0x08e */
+    u8 active;         /* 0x08f */
+    u8 unk90[0x104];   /* 0x090 */
+    u8 slots[0x96c];   /* 0x194 */
+    u8 widget[1];      /* 0xb00 */
+} MenuState;
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+typedef struct {
+    u8 unk00[8];       /* 0x00 */
+    MenuState *state;  /* 0x08 */
+} MenuGlobals;
 
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184b80. */
-extern unsigned int FUN_001ba3d4(void);
+extern MenuGlobals DAT_0057f588;
 
+u32 FUN_001ba3d4(void);
+void FUN_0014e188(void *widget, s32 a, u32 b, void *slots, s32 c, f32 scale);
+void FUN_001846d0(void *widget, s32 a);
+void FUN_00184b80(void *widget, s32 a);
 
-unsigned int FUN_0036db68(unsigned int param_1)
-
+u32 FUN_0036db68(u32 param)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x8f) = 1;
-  *(unsigned char *)(temp_v0 + 0x8d) = 1;
-  *(unsigned int *)(temp_v0 + 0x78) = param_1;
-  temp_v1 = FUN_001ba3d4();
-  *(unsigned int *)(temp_v0 + 0x7c) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0x88) = temp_v1;
-  FUN_0014e188(temp_v0 + 0xb00,8,0xffffffff,temp_v0 + 0x194,0xb,1.0f);
-  FUN_00184b80(temp_v0 + 0xb00,10);
-  FUN_001846d0(temp_v0 + 0xb00,6);
-  return 1;
+    MenuState *state = DAT_0057f588.state;
+    u32 tick;
+
+    state->active = 1;
+    state->armed = 1;
+    state->param = param;
+    tick = FUN_001ba3d4();
+    state->startTick = tick;
+    state->lastTick = tick;
+    FUN_0014e188(state->widget, 8, 0xffffffff, state->slots, 0xb, 1.0f);
+    FUN_00184b80(state->widget, 10);
+    FUN_001846d0(state->widget, 6);
+    return 1;
 }
 
 } /* extern "C" */

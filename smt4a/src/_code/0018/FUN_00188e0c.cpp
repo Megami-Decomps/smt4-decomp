@@ -1,32 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00188e0c` (_code @ 0x188e0c, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: sign test only: retail extracts the sign bit with `lsrs r0,r0,#31; beq`, built uses `cmp r0,#0; bge` */
+/* Forwards a failed FUN_0016f1d4 result (sign bit set) to FUN_00195fc8. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00195fc8(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern int FUN_0016f1d4(void);
-/* Supplied declaration required: FUN_00195fc8. */
-
+extern s32 FUN_0016f1d4(void);
+extern void FUN_00195fc8(void);
 
 void FUN_00188e0c(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_0016f1d4();
-  if (temp_v0 < 0) {
-    FUN_00195fc8();
-    return;
-  }
-  return;
+    if (FUN_0016f1d4() < 0) {
+        FUN_00195fc8();
+    }
 }
 
-} /* extern "C" */
+}

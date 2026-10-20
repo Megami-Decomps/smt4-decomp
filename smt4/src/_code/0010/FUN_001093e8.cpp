@@ -1,59 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001093e8` (_code @ 0x1093e8, 0xb0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bfab0(unsigned int, unsigned int);
-int FUN_002bfadc(int, unsigned int);
-int FUN_002c39a4(unsigned int);
+typedef struct Unit {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 width;
+    /* 0x18 */ s32 height;
+} Unit;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+typedef struct Overlay {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ u8 shown;
+    /* 0x29 */ u8 unk29;
+    /* 0x2A */ u8 flag;
+    /* 0x2B */ u8 unk2B;
+    /* 0x2C */ u8 applied;
+    /* 0x2D */ u8 pending;      /* set when FUN_002bff10 reports something to do */
+} Overlay;
 
-/* Supplied declaration required: FUN_002bfab0. */
-/* Supplied declaration required: FUN_002bfadc. */
-extern int FUN_002bff10(unsigned int);
-extern int FUN_002c08f0(void);
-/* Supplied declaration required: FUN_002c39a4. */
+typedef struct Context {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ Unit *unit;
+    /* 0x00C */ u8 unk00C[0xEF4];
+    /* 0xF00 */ Overlay overlay;
+} Context;
 
+extern u32 g_titleScene;
 
-unsigned int FUN_001093e8(void)
+int FUN_002bfab0(Unit *a, Unit *b);
+u8 FUN_002bfadc(int arg, Unit *unit);
+int FUN_002bff10(int arg);
+Context *jobGetWork(void);
+int FUN_002c39a4(u32 arg);
 
+/* Script command: if FUN_002bff10 reports work, marks the overlay pending; otherwise, when the overlay is shown, not applied and not pending, resizes the unit (halving it) and marks it applied. Returns 0. */
+u32 FUN_001093e8(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v1 = FUN_002c08f0();
-  temp_v2 = FUN_002bff10(0);
-  if (temp_v2 != 0) {
-    *(unsigned char *)(temp_v1 + 0xf2d) = 1;
-  }
-  else {
-    temp_v3 = temp_v1 + 0xf00;
-    if (*(char *)(temp_v1 + 0xf28) != '\0') {
-      temp_v4 = *(char *)(temp_v1 + 0xf2c) == '\0';
-      if (temp_v4) {
-        temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 0xf2d);
-      }
-      if (temp_v4 && temp_v3 == 0) {
-        FUN_002c39a4(DAT_0044ea00);
-        *(unsigned int *)(*(int *)(temp_v1 + 8) + 0x14) = 0x200;
-        *(unsigned int *)(*(int *)(temp_v1 + 8) + 0x18) = 0x200;
-        temp_v0 = 0;
-        FUN_002bfadc(0,*(unsigned int *)(temp_v1 + 8));
-        *(unsigned char *)(temp_v1 + 0xf2a) = temp_v0;
-        FUN_002bfab0(*(unsigned int *)(temp_v1 + 8),*(unsigned int *)(temp_v1 + 8));
-        *(int *)(*(int *)(temp_v1 + 8) + 0x14) = *(int *)(*(int *)(temp_v1 + 8) + 0x14) >> 1;
-        *(int *)(*(int *)(temp_v1 + 8) + 0x18) = *(int *)(*(int *)(temp_v1 + 8) + 0x18) >> 1;
-        *(unsigned char *)(temp_v1 + 0xf2c) = 1;
-      }
+    Context *context = jobGetWork();
+    Overlay *overlay;
+
+    if (FUN_002bff10(0) != 0) {
+        context->overlay.pending = 1;
+    } else {
+        overlay = &context->overlay;
+        if (context->overlay.shown != 0) {
+            if (overlay->applied == 0 && overlay->pending == 0) {
+                FUN_002c39a4(g_titleScene);
+                context->unit->width = 0x200;
+                context->unit->height = 0x200;
+                context->overlay.flag = FUN_002bfadc(0, context->unit);
+                FUN_002bfab0(context->unit, context->unit);
+                context->unit->width >>= 1;
+                context->unit->height >>= 1;
+                context->overlay.applied = 1;
+            }
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

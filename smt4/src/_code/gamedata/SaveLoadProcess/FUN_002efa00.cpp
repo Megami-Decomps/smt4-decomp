@@ -9,7 +9,7 @@ int FUN_00247af8(int, int, unsigned int, unsigned int, unsigned int);
 int FUN_0026b4cc(void);
 int FUN_002ad8b4(unsigned int, int);
 int FUN_002c09bc(void);
-int FUN_002c5300(int, int, int, unsigned int, int);
+int asdMemoryAlloc(int, int, int, unsigned int, int);
 int rt_memcpy_w(unsigned int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -26,9 +26,9 @@ extern unsigned char DAT_0043e2f3; /* 0x43e2f3 */
 extern unsigned int FUN_0026b5c8(void);
 extern unsigned int FUN_0026b5dc(void);
 /* Supplied declaration required: FUN_002ad8b4. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c09bc. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemoryAlloc. */
 extern int FUN_002cedbc(void);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -41,7 +41,7 @@ unsigned int FUN_002efa00(void)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   temp_v2 = *(int *)(temp_v0 + 4);
   if (temp_v2 != 4) {
     if (temp_v2 != 5) {
@@ -84,7 +84,7 @@ unsigned int FUN_002efa00(void)
   else {
     *(unsigned int *)(temp_v0 + 0xc) = 0x24db0;
     temp_v1 = 0x100;
-    FUN_002c5300(0x100,0x100,0,*(unsigned int *)(temp_v0 + 0xc),1);
+    asdMemoryAlloc(0x100,0x100,0,*(unsigned int *)(temp_v0 + 0xc),1);
     *(unsigned int *)(temp_v0 + 8) = temp_v1;
     FUN_00247af8(3,0,*(unsigned int *)(temp_v0 + 0x10),temp_v1,*(unsigned int *)(temp_v0 + 0xc));
     *(unsigned int *)(temp_v0 + 4) = 5;

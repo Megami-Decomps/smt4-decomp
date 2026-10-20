@@ -13,7 +13,7 @@ typedef struct {
 
 extern int DAT_00435ce8; /* 0x435ce8 */
 
-extern unsigned int FUN_002c08f0(void);
+extern unsigned int jobGetWork(void);
 /* Supplied declaration required: FUN_003d8e24. */
 
 
@@ -23,7 +23,7 @@ void FUN_0020edd8(void)
 /* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   if (DAT_00435ce8 != 0) {
     FUN_003d8e24(DAT_00435ce8,temp_v0);
     return;

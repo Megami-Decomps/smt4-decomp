@@ -9,7 +9,7 @@ int FUN_00223360(...);
 int FUN_00267d3c(...);
 int FUN_00298140(...);
 int FUN_0029b990(...);
-int FUN_002c4a08(...);
+int taskCreateDraw(...);
 int FUN_002ce2e4(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -30,7 +30,7 @@ extern int DAT_00439ca8; /* 0x439ca8 */
 /* Supplied declaration required: FUN_00267d3c. */
 /* Supplied declaration required: FUN_00298140. */
 /* Supplied declaration required: FUN_0029b990. */
-/* Supplied declaration required: FUN_002c4a08. */
+/* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_002ce2e4. */
 
 
@@ -45,7 +45,7 @@ void FUN_001f8290(unsigned int *param_1)
   int temp_v1;
   
   puVar1 = &LAB_001f833c;
-  FUN_002c4a08(&LAB_001f833c,2,0,0,&LAB_001e4bd8,FUN_002c439c,param_1,*param_1);
+  taskCreateDraw(&LAB_001f833c,2,0,0,&LAB_001e4bd8,FUN_002c439c,param_1,*param_1);
   param_1[1] = (unsigned int)puVar1;
   FUN_0029b990();
   FUN_00214568(param_1 + 0x5d);

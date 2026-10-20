@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0019a7dc(void);
-int FUN_002e6354(unsigned short *, int);
+int gameGetOptions(void);
+int sysMemClear(unsigned short *, int);
 
 extern int FUN_0014bef4(short);
 extern int FUN_00168518(unsigned int, unsigned int);
 extern int FUN_001801a4(void);
-/* Supplied declaration required: FUN_0019a7dc. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: gameGetOptions. */
+/* Supplied declaration required: sysMemClear. */
 extern unsigned int FUN_0036fd64(unsigned int, unsigned short);
 
 
@@ -35,7 +35,7 @@ void FUN_004da144(void)
   unsigned int temp_v12;
   unsigned int temp_v13;
   
-  temp_v8 = FUN_0019a7dc();
+  temp_v8 = gameGetOptions();
   temp_v11 = (unsigned short)(*(short *)(temp_v8 + 0x132) != 0);
   if (*(short *)(temp_v8 + 0x134) != 0) {
     temp_v11 = temp_v11 + 1;
@@ -50,7 +50,7 @@ void FUN_004da144(void)
       if (temp_v9 == 0) {
         temp_v7 = *(short *)(temp_v8 + temp_v10 * 2 + 0x132);
         temp_v12 = (unsigned int)temp_v7;
-        puVar12 = (unsigned short *)FUN_0019a7dc();
+        puVar12 = (unsigned short *)gameGetOptions();
         temp_v13 = 0xffffffff;
         temp_v8 = 0;
         break;
@@ -69,7 +69,7 @@ void FUN_004da144(void)
       break;
     }
   }
-  FUN_002e6354(puVar12,300);
+  sysMemClear(puVar12,300);
   temp_v8 = FUN_00168518(temp_v12,temp_v13);
   puVar12[0x96] = temp_v7;
   puVar12[0x97] = (short)temp_v13;

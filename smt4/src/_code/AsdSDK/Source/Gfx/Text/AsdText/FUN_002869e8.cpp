@@ -7,8 +7,8 @@ extern "C" {
 int FUN_001eb584(char *, unsigned char *, int);
 int FUN_00247fc0(...);
 int FUN_002aeaac(...);
-int FUN_002c415c(void);
-int FUN_002c498c(int, int, int, int, int);
+int asdMemFree(void);
+int asdMemAlloc(int, int, int, int, int);
 int FUN_002d609c(unsigned char *, unsigned char *, int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -38,8 +38,8 @@ extern unsigned char DAT_004def28; /* 0x4def28 */
 extern int FUN_002ae424(unsigned int);
 /* Supplied declaration required: FUN_002aeaac. */
 extern int FUN_002b31b4(int *);
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c498c. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: FUN_002d609c. */
 
 
@@ -99,7 +99,7 @@ void FUN_002869e8(int *param_1,unsigned int param_2,int param_3,unsigned int par
   param_1[0x2c] = 0;
   temp_v4 = 0;
   if (*param_1 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *param_1 = 0;
   }
   if (*param_6 != '\0') {
@@ -108,7 +108,7 @@ void FUN_002869e8(int *param_1,unsigned int param_2,int param_3,unsigned int par
     FUN_002d609c(&DAT_004daf08,&DAT_004dcf08,0);
     param_1[1] = (int)puVar2;
     temp_v3 = 0x100;
-    FUN_002c498c(0x100,0x100,0,(int)puVar2 << 5,0);
+    asdMemAlloc(0x100,0x100,0,(int)puVar2 << 5,0);
     *param_1 = temp_v3;
     temp_v5 = (int *)0x0;
     temp_v6 = (int *)0x0;

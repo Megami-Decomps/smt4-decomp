@@ -11,11 +11,11 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_5_stack;
 
-extern int DAT_0043dfc0; /* 0x43dfc0 */
+extern int g_bustupCutAnim; /* 0x43dfc0 */
 
 /* Supplied declaration required: FUN_002aead8. */
 extern int FUN_002b7174(unsigned int);
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 
 
 unsigned int
@@ -29,13 +29,13 @@ FUN_002bf6fc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
   int temp_v3;
   unsigned long long temp_v4;
   
-  temp_v0 = DAT_0043dfc0;
+  temp_v0 = g_bustupCutAnim;
   temp_v4 = (unsigned long long)param_5;
-  if (DAT_0043dfc0 != 0) {
+  if (g_bustupCutAnim != 0) {
     temp_v2 = 1;
     do {
       temp_v3 = temp_v0 + temp_v2 * 4;
-      temp_v1 = FUN_002bf244(*(unsigned int *)(temp_v3 + 0x630));
+      temp_v1 = jobIsValid(*(unsigned int *)(temp_v3 + 0x630));
       if ((temp_v1 != 0) && (temp_v1 = FUN_002b7174(*(unsigned int *)(temp_v3 + 0x630)), temp_v1 == param_1))
       {
         FUN_002aead8(*(unsigned int *)(temp_v0 + temp_v2 * 4 + 0x630),param_2,param_3,param_4,(int)temp_v4);

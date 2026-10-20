@@ -7,9 +7,9 @@ extern "C" {
 int FUN_0027eee0(void);
 int FUN_00287b0c(void);
 
-extern int DAT_00447060; /* 0x447060 */
+extern int g_lmapMainState; /* 0x447060 */
 extern int DAT_004474f4; /* 0x4474f4 */
-extern unsigned int DAT_0049f91c; /* 0x49f91c */
+extern unsigned int g_gameState; /* 0x49f91c */
 extern signed char DAT_0049f934; /* 0x49f934 */
 extern unsigned int *DAT_0049f938; /* 0x49f938 */
 
@@ -37,7 +37,7 @@ void FUN_0026413c(void)
   unsigned int temp_v9;
   
   temp_v2 = DAT_004474f4;
-  temp_v1 = DAT_00447060;
+  temp_v1 = g_lmapMainState;
   temp_v3 = 0;
   temp_v4 = 0;
   temp_v0 = 0;
@@ -45,7 +45,7 @@ void FUN_0026413c(void)
   temp_v9 = 0x43340000;
   temp_v8 = 0x3f800000;
   temp_v6 = 0.0f;
-  *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(DAT_00447060 + 0x50);
+  *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapMainState + 0x50);
   if (*(char *)(temp_v1 + 0x94) != '\0') {
     *(unsigned char *)(temp_v2 + 0xb0) = 0;
     *(unsigned char *)(temp_v2 + 0xb1) = 0;
@@ -58,7 +58,7 @@ void FUN_0026413c(void)
   if (0 < *(short *)(temp_v2 + 0xb2)) {
     *(short *)(temp_v2 + 0xb2) = *(short *)(temp_v2 + 0xb2) - 1;
   }
-  puVar2 = &DAT_0049f91c;
+  puVar2 = &g_gameState;
   if (DAT_0049f934 == '\0') {
     puVar2 = DAT_0049f938;
   }

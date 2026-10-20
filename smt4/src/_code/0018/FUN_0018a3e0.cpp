@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001f8d7c(void);
 int FUN_00210ce0(...);
 int FUN_002990a0(void);
-int FUN_00299138(void);
+int guestWinRequestOpen(void);
 int FUN_0029e328(...);
 int FUN_0029e39c(...);
 int FUN_0029e648(...);
@@ -36,7 +36,7 @@ int FUN_0029f5d8(...);
 int FUN_002a8740(void);
 int FUN_002b8cc8(void);
 int FUN_002bc01c(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002c1658(...);
 
 /* stack frame of void: 4 slot(s), 13 byte(s) */
@@ -58,7 +58,7 @@ extern int FUN_00298848(unsigned int, int);
 /* Supplied declaration required: FUN_00298d0c. */
 /* Supplied declaration required: FUN_00298d28. */
 /* Supplied declaration required: FUN_002990a0. */
-/* Supplied declaration required: FUN_00299138. */
+/* Supplied declaration required: guestWinRequestOpen. */
 /* Supplied declaration required: FUN_00299174. */
 /* Supplied declaration required: FUN_00299218. */
 /* Supplied declaration required: FUN_00299900. */
@@ -73,7 +73,7 @@ extern int FUN_0029d644(int);
 /* Supplied declaration required: FUN_0029defc. */
 extern int FUN_0029dfa8(void);
 /* Supplied declaration required: FUN_0029dfc0. */
-extern int FUN_0029e010(void);
+extern int gameGetFlagByte12e8(void);
 extern int FUN_0029e02c(void);
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: FUN_0029e39c. */
@@ -92,7 +92,7 @@ extern int FUN_002b63ac(void);
 extern unsigned char FUN_002b898c(void);
 /* Supplied declaration required: FUN_002b8cc8. */
 /* Supplied declaration required: FUN_002bc01c. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 
@@ -145,7 +145,7 @@ void FUN_0018a3e0(void)
     FUN_0029ca58();
     FUN_00298d0c(0);
     FUN_00299900(0);
-    FUN_002bd8e8(temp_v6 + 0x6d4,3,0);
+    timerStart(temp_v6 + 0x6d4,3,0);
     *(unsigned int *)(temp_v6 + 0x20) = 6;
     temp_v3 = DAT_0043da90;
     puVar9 = (unsigned int *)(DAT_0043da90 + 0x18);
@@ -208,14 +208,14 @@ void FUN_0018a3e0(void)
           temp_v3 = FUN_0029d644(temp_v6 + 0x1dc);
         } while (temp_v4 < temp_v3);
       }
-      temp_v3 = FUN_0029e010();
+      temp_v3 = gameGetFlagByte12e8();
       if (temp_v3 < 0) {
-        FUN_002bd8e8(temp_v6 + 0x6d4,4,0);
+        timerStart(temp_v6 + 0x6d4,4,0);
       }
       else {
-        temp_v3 = FUN_0029e010();
+        temp_v3 = gameGetFlagByte12e8();
         if (0 < temp_v3) {
-          FUN_002bd8e8(temp_v6 + 0x6d4,3,0);
+          timerStart(temp_v6 + 0x6d4,3,0);
         }
       }
       *(unsigned int *)(temp_v6 + 0x20) = 0x15;
@@ -323,7 +323,7 @@ LAB_0018a948:
             return;
           }
           FUN_00299174(temp_v6 + 0x1dc,1);
-          FUN_002bd8e8(temp_v6 + 0x6d4,3,0);
+          timerStart(temp_v6 + 0x6d4,3,0);
           FUN_0029dfc0(0);
           FUN_00298d0c(0);
           *(unsigned int *)(temp_v6 + 0x20) = 0xf;
@@ -385,7 +385,7 @@ LAB_0018a948:
     FUN_0029ca58();
     FUN_00298d0c(0);
     FUN_00299900(0);
-    FUN_002bd8e8(temp_v6 + 0x6d4,3,0);
+    timerStart(temp_v6 + 0x6d4,3,0);
     *(unsigned int *)(temp_v6 + 0x20) = 6;
     temp_v6 = DAT_0043da90;
     puVar9 = (unsigned int *)(DAT_0043da90 + 0x18);
@@ -393,7 +393,7 @@ LAB_0018a948:
     *puVar9 = 5;
     *(unsigned int *)(temp_v6 + 0x1c) = 0;
     *(unsigned int *)(temp_v6 + 0x14) = 0;
-    FUN_00299138();
+    guestWinRequestOpen();
     FUN_0029e648(1,0);
     FUN_002990a0();
     temp_v5 = 0x100016e;

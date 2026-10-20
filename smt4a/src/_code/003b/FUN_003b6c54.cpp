@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_00164ce0(int, int);
 
-extern int DAT_0057f4c4; /* 0x57f4c4 */
+extern int g_bustupCutAnim; /* 0x57f4c4 */
 
 /* Supplied declaration required: FUN_00164ce0. */
-extern int FUN_00236038(void);
+extern int scrGetArg(void);
 
 
 unsigned int FUN_003b6c54(void)
@@ -19,8 +19,8 @@ unsigned int FUN_003b6c54(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00236038();
-  temp_v1 = *(int *)(DAT_0057f4c4 + 0x634);
+  temp_v0 = scrGetArg();
+  temp_v1 = *(int *)(g_bustupCutAnim + 0x634);
   if (temp_v1 != 0) {
     if (temp_v0 != 0) {
       FUN_00164ce0(temp_v1,1);

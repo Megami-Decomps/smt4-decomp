@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001e1a00(...);
-int FUN_0024c350(...);
+int requestDispatch(...);
 int FUN_0024f880(...);
 int FUN_0024f890(...);
 int FUN_00256a50(...);
@@ -105,7 +105,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 extern unsigned int FUN_001e19dc(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001e1a00. */
 extern int FUN_0021987c(void *);
-/* Supplied declaration required: FUN_0024c350. */
+/* Supplied declaration required: requestDispatch. */
 /* Supplied declaration required: FUN_0024f880. */
 /* Supplied declaration required: FUN_0024f890. */
 /* Supplied declaration required: FUN_00256a50. */
@@ -644,7 +644,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
             FUN_001e1a00(*puVar2,(temp_v13 & 0xff) |
                                  (temp_v7 << 0x18) | ((temp_v17 & 0xff) << 0x10) |
                                  ((temp_v0 & 0xff) << 8));
-            FUN_0024c350(*puVar2);
+            requestDispatch(*puVar2);
           }
           temp_v1 = temp_v1 + 1;
           pfVar8 = pfVar8 + 10;

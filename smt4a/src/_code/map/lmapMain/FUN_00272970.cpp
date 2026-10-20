@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_002442ac(...);
 int FUN_002c23cc(...);
 int FUN_00482ab0(...);
@@ -25,15 +25,15 @@ extern int FUN_002bc62c(...); /* 0x2bc62c */
 extern unsigned char LAB_00315cf4; /* 0x315cf4 */
 extern unsigned char LAB_0033feb4; /* 0x33feb4 */
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern unsigned int *DAT_00580238; /* 0x580238 */
-extern int DAT_00581288; /* 0x581288 */
+extern unsigned int *g_lmapMainState; /* 0x580238 */
+extern int g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f161d; /* 0x5f161d */
 extern unsigned char DAT_005f185b; /* 0x5f185b */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
 extern int FUN_00162e8c(void);
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_002442ac. */
 /* Supplied declaration required: FUN_002c23cc. */
 /* Supplied declaration required: FUN_00482ab0. */
@@ -53,8 +53,8 @@ void FUN_00272970(void)
   int temp_v3;
   
   puVar3 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x9370,1);
-  DAT_00580238 = puVar3;
+  asdMemoryAllocTracked(0x100,0x100,0,0x9370,1);
+  g_lmapMainState = puVar3;
   temp_v1 = FUN_00162e8c();
   FUN_002c23cc(1);
   *(unsigned char *)((int)puVar3 + 9) = 0;
@@ -62,9 +62,9 @@ void FUN_00272970(void)
   *(unsigned char *)((int)puVar3 + 0xb) = 0;
   puVar3[3] = 0;
   puVar3[4] = 0;
-  puVar2 = DAT_00580238;
-  if (DAT_00580238[0x33] != 0) {
-    DAT_00580238[0x33] = 0;
+  puVar2 = g_lmapMainState;
+  if (g_lmapMainState[0x33] != 0) {
+    g_lmapMainState[0x33] = 0;
     puVar2[0x34] = 0;
     puVar2[0x35] = 0;
   }
@@ -74,8 +74,8 @@ void FUN_00272970(void)
   *(unsigned short *)(puVar3 + 0x13) = 0;
   *(unsigned short *)((int)puVar3 + 0x4e) = 0;
   puVar3[0x12] = 1;
-  temp_v3 = DAT_00581288;
-  *(unsigned int *)(DAT_00581288 + 0x1c) = 0xc40a8000;
+  temp_v3 = g_lmapScene;
+  *(unsigned int *)(g_lmapScene + 0x1c) = 0xc40a8000;
   *(unsigned int *)(temp_v3 + 0x20) = 0x3c23d70a;
   *(unsigned int *)(temp_v3 + 0x24) = 0xc5956000;
   *(unsigned int *)(temp_v3 + 0x28) = 0xc40a8000;
@@ -173,10 +173,10 @@ void FUN_00272970(void)
   puVar3[0x13bf] = 0;
   *(unsigned char *)(puVar3 + 2) = 0;
   puVar6 = &LAB_00272d14;
-  FUN_0014e38c(&LAB_00272d14,4,0,0,FUN_00276264,&LAB_00315cf4,0);
+  asdProcessCreateSimple(&LAB_00272d14,4,0,0,FUN_00276264,&LAB_00315cf4,0);
   *puVar3 = (unsigned int)puVar6;
   puVar7 = &LAB_00272d24;
-  FUN_0015155c(&LAB_00272d24,0x72,0,0,FUN_002bc62c,&LAB_0033feb4,0,puVar6);
+  taskCreateDraw(&LAB_00272d24,0x72,0,0,FUN_002bc62c,&LAB_0033feb4,0,puVar6);
   puVar3[1] = (unsigned int)puVar7;
   return;
 }

@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp1C; /* 0x1c: local_1c */
 } param_4_stack;
 
-extern int DAT_004652a0; /* 0x4652a0 */
+extern int g_commandBufferCursor; /* 0x4652a0 */
 
 /* Supplied declaration required: nnnstdMemCpy. */
 /* Supplied declaration required: nw_gfx_internal_FastWordCopyAsm_6. */
@@ -32,7 +32,7 @@ void FUN_00153d68(int param_1,int *param_2,unsigned int param_3,unsigned int par
   
   piVar2 = *(int **)(param_1 + 8);
   temp_v2 = param_2;
-  nw_gfx_internal_FastWordCopyAsm_6(DAT_004652a0,piVar2 + 5,param_3,param_4,param_1);
+  nw_gfx_internal_FastWordCopyAsm_6(g_commandBufferCursor,piVar2 + 5,param_3,param_4,param_1);
   if (-1 < *(int *)(piVar2[2] + 0x10)) {
     nw_gfx_internal_FastWordCopyAsm_6();
   }
@@ -57,8 +57,8 @@ void FUN_00153d68(int param_1,int *param_2,unsigned int param_3,unsigned int par
     }
     if (*(char *)(temp_v0 + 5) != '\0') {
       temp_v1 = *(unsigned int *)(temp_v0 + 0x1c);
-      nnnstdMemCpy(DAT_004652a0,*(unsigned int *)(temp_v0 + 0x18),temp_v1);
-      DAT_004652a0 = DAT_004652a0 + (temp_v1 & 0xfffffffc);
+      nnnstdMemCpy(g_commandBufferCursor,*(unsigned int *)(temp_v0 + 0x18),temp_v1);
+      g_commandBufferCursor = g_commandBufferCursor + (temp_v1 & 0xfffffffc);
     }
   }
   return;

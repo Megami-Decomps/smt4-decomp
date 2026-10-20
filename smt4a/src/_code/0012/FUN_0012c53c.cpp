@@ -57,7 +57,7 @@ extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char 
 /* Supplied declaration required: FUN_0030c6e4. */
 /* Supplied declaration required: FUN_0030c6f0. */
 /* Supplied declaration required: FUN_0030c720. */
-extern int FUN_0030c766(void);
+extern int vectorSize24B(void);
 extern unsigned int FUN_0030c774(void);
 /* Supplied declaration required: FUN_0030c846. */
 /* Supplied declaration required: FUN_0030c9cc. */
@@ -106,7 +106,7 @@ void FUN_0012c53c(int param_1)
     temp_v1 = FUN_0030c774();
     if (*(unsigned int *)(param_1 + 0x3f0) <= temp_v1) {
       temp_v22 = param_1 + 0x110;
-      temp_v0 = FUN_0030c766();
+      temp_v0 = vectorSize24B();
       if (temp_v0 != *(int *)(param_1 + 0x3f4)) {
         FUN_0030d1ac(temp_v15);
         temp_v6 = 0;

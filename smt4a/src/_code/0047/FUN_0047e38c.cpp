@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
-int FUN_0019c364(void);
+int asdMemFree(void);
+int scrScriptProcessDestroy(void);
 
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 
 
 void FUN_0047e38c(unsigned int *param_1)
@@ -18,15 +18,15 @@ void FUN_0047e38c(unsigned int *param_1)
   param_1[1] = 0x10;
   *param_1 = 0;
   if (param_1[3] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1[3] = 0;
   }
   if (param_1[4] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1[4] = 0;
   }
   if (param_1[5] != 0) {
-    FUN_0019c364();
+    scrScriptProcessDestroy();
     param_1[5] = 0;
   }
   return;

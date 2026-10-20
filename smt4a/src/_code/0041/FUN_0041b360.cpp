@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00162790(...);
 int FUN_00164b5c(int, int, unsigned int, int, int, int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_0018152c(...);
 int FUN_001835b4(...);
@@ -39,7 +39,7 @@ extern unsigned char DAT_00533f4c; /* 0x533f4c */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -97,7 +97,7 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
     FUN_0041b060(param_1,&temp_v6,piVar4,param_4,param_5);
     return;
   }
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_00164b5c(2,0x2b,temp_v2,temp_v6,temp_v7,2);
   FUN_001835b4(2,0x2b,0x3b,temp_v6,temp_v7,2);
   FUN_001835b4(2,0x2b,0x3c,temp_v6,temp_v7,2);
@@ -176,7 +176,7 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
                       ((int)**(short **)(temp_v3 + 0xc) - (int)puVar3) / 2,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(2,0xb9d7d7ff,temp_v9,temp_v4);
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_00183bb0();
   return;
 }

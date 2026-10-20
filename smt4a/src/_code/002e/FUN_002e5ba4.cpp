@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_0013f1b8(int, int);
-int FUN_0019a5a0(void);
+int asdTMTexTableLoadTmx(int, int);
+int asdMemFree(void);
 int FUN_0019a7f4(int, int);
-int FUN_0019c364(void);
+int scrScriptProcessDestroy(void);
 int FUN_001acf98(int, int);
 int FUN_00275bc8(int, unsigned int);
 int FUN_00275f44(unsigned int, int);
 int FUN_002804b0(...);
-int FUN_002e132c(int);
+int asdTMTexTableFreeEntry(int);
 int FUN_00342334(int);
 int FUN_004cf370(int);
 
@@ -21,18 +21,18 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0013f1b8. */
-extern int FUN_00163e40(unsigned int);
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
+extern int jobIsValid(unsigned int);
 extern int FUN_0018206c(unsigned int, int);
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019a7f4. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_001acf98. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00275f44. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_002e132c. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_00342334. */
 extern int FUN_00399e04(void);
 extern int FUN_004cf140(int);
@@ -55,7 +55,7 @@ int FUN_002e5ba4(int *param_1)
   }
   temp_v0 = *(int *)(temp_v3 + 0xc);
   if (temp_v0 == 0) {
-    temp_v0 = FUN_00163e40(*(unsigned int *)(temp_v3 + 4));
+    temp_v0 = jobIsValid(*(unsigned int *)(temp_v3 + 4));
     if (temp_v0 != 0) {
       return 0;
     }
@@ -77,7 +77,7 @@ int FUN_002e5ba4(int *param_1)
   case 0:
     FUN_002804b0("battle/gameover/gameover.bf",temp_v3 + 0x18,0);
     FUN_002804b0("battle/gameover/gameover.mbm",temp_v3 + 0x20,0);
-    FUN_0013f1b8(0x22,0);
+    asdTMTexTableLoadTmx(0x22,0);
     temp_v0 = 1;
     do {
       FUN_001acf98(0x22,temp_v0);
@@ -147,17 +147,17 @@ int FUN_002e5ba4(int *param_1)
       FUN_0019a7f4(0x22,temp_v0);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 7);
-    FUN_002e132c(0x22);
+    asdTMTexTableFreeEntry(0x22);
     if (*(int *)(temp_v3 + 0x1c) != 0) {
-      FUN_0019c364();
+      scrScriptProcessDestroy();
       *(unsigned int *)(temp_v3 + 0x1c) = 0;
     }
     if (*(int *)(temp_v3 + 0x18) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v3 + 0x18) = 0;
     }
     if (*(int *)(temp_v3 + 0x20) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v3 + 0x20) = 0;
     }
     *(unsigned int *)(temp_v3 + 0xc) = 3;

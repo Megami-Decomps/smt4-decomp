@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, unsigned int);
 int FUN_0019d880(void);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -17,14 +17,14 @@ typedef struct {
 } param_5_stack;
 
 extern int DAT_0057f108; /* 0x57f108 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -159,8 +159,8 @@ LAB_0026e9d8:
   temp_v7 = (in_fpscr & 0xfffffff) | ((unsigned int)(in_s0 == 0.0f) << 0x1e);
   temp_v5 = (unsigned int)!romwright_subpiece_4_1_0(temp_v7 >> 0x1e,0);
   VectorUnsignedToFloat(temp_v5,(unsigned char)(temp_v7 >> 0x16) & 3);
-  FUN_001677c0();
-  temp_v1 = DAT_0059dbb4;
+  efctSetSpeed();
+  temp_v1 = g_renderCtx;
   temp_v3 = FUN_00169294(6,1,0);
   piVar6 = (int *)(temp_v1 + 0x12b8);
   temp_v4 = piVar6[*piVar6 + 2];
@@ -171,7 +171,7 @@ LAB_0026e9d8:
   }
   FUN_001835b4(2,0x14,0x5d6,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,param_4
               );
-  temp_v1 = DAT_0059dbb4;
+  temp_v1 = g_renderCtx;
   temp_v2 = FUN_00169294(6,7,0);
   piVar6 = (int *)(temp_v1 + 0x12b8);
   temp_v3 = piVar6[*piVar6 + 2];
@@ -181,7 +181,7 @@ LAB_0026e9d8:
     *(unsigned char *)(temp_v1 + 0x12d0) = 0;
   }
   VectorUnsignedToFloat(temp_v5,(unsigned char)(temp_v7 >> 0x16) & 3);
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

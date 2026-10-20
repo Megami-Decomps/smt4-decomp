@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002c57c8(int, int);
+int asdSequenceRequest(int, int);
 
 extern int DAT_0049fd14; /* 0x49fd14 */
 
-/* Supplied declaration required: FUN_002c57c8. */
+/* Supplied declaration required: asdSequenceRequest. */
 
 
 unsigned int FUN_002d8db8(int param_1)
@@ -16,7 +16,7 @@ unsigned int FUN_002d8db8(int param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if ((*(char *)(param_1 + 0x2f8) != '\0') || (DAT_0049fd14 != -1)) {
-    FUN_002c57c8(8,0);
+    asdSequenceRequest(8,0);
   }
   return 1;
 }

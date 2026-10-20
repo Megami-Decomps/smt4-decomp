@@ -16,7 +16,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_0029e320; /* 0x29e320 */
-extern unsigned char DAT_0043dd20; /* 0x43dd20 */
+extern unsigned char g_useCounter; /* 0x43dd20 */
 
 extern int FUN_00220d0c(void);
 extern int FUN_0028d594(void);
@@ -41,7 +41,7 @@ void FUN_0029e1ec(void)
   int temp_v5;
   unsigned char *pbVar7;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0043dd20 + 0x4));
+  temp_v0 = (*(int *)((unsigned char *)&g_useCounter + 0x4));
   temp_v5 = 0;
   do {
     FUN_002af5c0(temp_v0 + temp_v5 * 0x8c + 0x28,0);

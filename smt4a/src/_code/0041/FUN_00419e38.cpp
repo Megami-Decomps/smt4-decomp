@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0019a5a0(...);
-int FUN_002e6354(int, int);
+int asdMemFree(...);
+int sysMemClear(int, int);
 int FUN_0042cb74(...);
 
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0042cb74. */
 
 
@@ -35,7 +35,7 @@ void FUN_00419e38(int param_1)
       if (temp_v5 != 0) {
         temp_v3 = temp_v5 + 0x10;
         *(unsigned int *)(temp_v5 + 0x10) = 0;
-        FUN_002e6354(temp_v5 + 0x14,0x150);
+        sysMemClear(temp_v5 + 0x14,0x150);
         temp_v2 = 0;
         do {
           *(unsigned char *)(temp_v3 + temp_v2 + 0x154) = 0;
@@ -50,14 +50,14 @@ void FUN_00419e38(int param_1)
           *(unsigned int *)(temp_v0 + 0x6b0) = temp_v6;
           temp_v2 = temp_v1;
         } while (temp_v1 < 0xc);
-        FUN_0019a5a0(*(unsigned int *)(temp_v5 + 8));
-        FUN_0019a5a0(*(unsigned int *)(temp_v5 + 0xc));
+        asdMemFree(*(unsigned int *)(temp_v5 + 8));
+        asdMemFree(*(unsigned int *)(temp_v5 + 0xc));
       }
       temp_v5 = *(int *)(*(int *)(param_1 + 4) + temp_v4 * 4);
       if (temp_v5 != 0) {
         puVar5 = (unsigned int *)(temp_v5 + 0x10);
         *puVar5 = 0;
-        FUN_002e6354(temp_v5 + 0x14,0x150);
+        sysMemClear(temp_v5 + 0x14,0x150);
         temp_v2 = 0;
         do {
           *(unsigned char *)((int)puVar5 + temp_v2 + 0x154) = 0;
@@ -71,14 +71,14 @@ void FUN_00419e38(int param_1)
           puVar5[temp_v2 * 5 + 0x1ac] = temp_v6;
           temp_v2 = temp_v1;
         } while (temp_v1 < 0xc);
-        FUN_0019a5a0(*(unsigned int *)(temp_v5 + 8));
-        FUN_0019a5a0(*(unsigned int *)(temp_v5 + 0xc));
+        asdMemFree(*(unsigned int *)(temp_v5 + 8));
+        asdMemFree(*(unsigned int *)(temp_v5 + 0xc));
       }
       temp_v5 = *(int *)(*(int *)(param_1 + 0xc) + temp_v4 * 4);
       if (temp_v5 != 0) {
         puVar5 = (unsigned int *)(temp_v5 + 0x10);
         *puVar5 = 0;
-        FUN_002e6354(temp_v5 + 0x14,0x150);
+        sysMemClear(temp_v5 + 0x14,0x150);
         temp_v2 = 0;
         do {
           *(unsigned char *)((int)puVar5 + temp_v2 + 0x154) = 0;
@@ -92,19 +92,19 @@ void FUN_00419e38(int param_1)
           puVar5[temp_v2 * 5 + 0x1ac] = temp_v6;
           temp_v2 = temp_v1;
         } while (temp_v1 < 0xc);
-        FUN_0019a5a0(*(unsigned int *)(temp_v5 + 8));
-        FUN_0019a5a0(*(unsigned int *)(temp_v5 + 0xc));
+        asdMemFree(*(unsigned int *)(temp_v5 + 8));
+        asdMemFree(*(unsigned int *)(temp_v5 + 0xc));
       }
       if (*(int *)(*(int *)(param_1 + 8) + temp_v4 * 4) != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         *(unsigned int *)(*(int *)(param_1 + 8) + temp_v4 * 4) = 0;
       }
       if (*(int *)(*(int *)(param_1 + 4) + temp_v4 * 4) != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         *(unsigned int *)(*(int *)(param_1 + 4) + temp_v4 * 4) = 0;
       }
       if (*(int *)(*(int *)(param_1 + 0xc) + temp_v4 * 4) != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
         *(unsigned int *)(*(int *)(param_1 + 0xc) + temp_v4 * 4) = 0;
       }
       temp_v4 = temp_v4 + 1;
@@ -112,15 +112,15 @@ void FUN_00419e38(int param_1)
   }
   *(unsigned int *)(param_1 + 0x10) = 0;
   if (*(int *)(param_1 + 8) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 8) = 0;
   }
   if (*(int *)(param_1 + 4) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 4) = 0;
   }
   if (*(int *)(param_1 + 0xc) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0xc) = 0;
   }
   return;

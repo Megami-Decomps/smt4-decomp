@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_0019d880(void);
 int FUN_00281000(...);
@@ -19,7 +19,7 @@ typedef struct {
 extern int DAT_0057f108; /* 0x57f108 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0019d880. */
@@ -40,7 +40,7 @@ void FUN_00227294(int param_1,int param_2,unsigned int param_3)
      (*(char *)(DAT_0057f108 + 0x1b20) != '\0' && *(char *)(DAT_0057f108 + 0x1b20) != '\x04')) {
     FUN_0019d880();
     VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_001835b4(2,0x14,0x5ca,param_1,param_2,0xb);
     FUN_001835b4(2,0x14,0x5cb,param_1,param_2,0xb);
     FUN_001835b4(2,0x14,0x5cc,param_1,param_2,0xb);
@@ -53,7 +53,7 @@ void FUN_00227294(int param_1,int param_2,unsigned int param_3)
                  ((*(short *)(temp_v1 + 8) + param_1) - (int)*(short *)(temp_v0 + 8)) -
                  (*(unsigned short *)(temp_v0 + 6) & 0xffff7fff),
                  (*(short *)(temp_v1 + 10) + param_2) - (int)*(short *)(temp_v0 + 10),0xb,temp_v2);
-    FUN_001677c0();
+    efctSetSpeed();
   }
   return;
 }

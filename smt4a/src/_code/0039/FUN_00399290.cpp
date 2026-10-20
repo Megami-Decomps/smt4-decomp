@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0040619c(int, int);
 
-extern int DAT_00580238; /* 0x580238 */
+extern int g_lmapMainState; /* 0x580238 */
 
 /* Supplied declaration required: FUN_0040619c. */
 
@@ -21,9 +21,9 @@ void FUN_00399290(int param_1,int param_2)
   int temp_v3;
   int temp_v4;
   
-  temp_v4 = DAT_00580238;
-  if (DAT_00580238 != 0) {
-    temp_v3 = DAT_00580238 + param_1 * 0x88;
+  temp_v4 = g_lmapMainState;
+  if (g_lmapMainState != 0) {
+    temp_v3 = g_lmapMainState + param_1 * 0x88;
     temp_v0 = *(char *)(temp_v3 + 0xb79);
     if (param_2 != 0) {
       if (temp_v0 != '\0') {

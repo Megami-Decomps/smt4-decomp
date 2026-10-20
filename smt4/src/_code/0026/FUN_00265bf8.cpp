@@ -16,8 +16,8 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_00447e88; /* 0x447e88 */
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern int g_lmapScene; /* 0x447e88 */
+extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_0025beb8. */
 /* Supplied declaration required: FUN_0028c618. */
@@ -37,7 +37,7 @@ void FUN_00265bf8(int param_1)
   int temp_v1;
   unsigned int temp_v2;
   
-  if ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x22)) != '\0') {
+  if ((*(signed char *)((unsigned char *)&g_gameState + 0x22)) != '\0') {
     puVar1 = *(unsigned int **)(param_1 + 0xbc);
     if ((*puVar1 & 2) == 0) {
       *puVar1 = *puVar1 | 2;
@@ -107,7 +107,7 @@ void FUN_00265bf8(int param_1)
       FUN_002d582c(temp_v0);
     }
   }
-  FUN_0028c640(*(unsigned int *)(*(int *)(param_1 + 0xbc) + 8),0,DAT_00447e88 + 0x1c);
+  FUN_0028c640(*(unsigned int *)(*(int *)(param_1 + 0xbc) + 8),0,g_lmapScene + 0x1c);
   FUN_0025beb8(*(unsigned int *)(*(int *)(param_1 + 0xbc) + 8),0);
   FUN_0029bb14(*(unsigned int *)(*(int *)(param_1 + 0xbc) + 8));
   temp_v1 = FUN_002c09d0(0x16b);
@@ -118,7 +118,7 @@ void FUN_00265bf8(int param_1)
   if (*(unsigned int *)(*(int *)(*(int *)(param_1 + 0xbc) + 8) + 0x38) != temp_v2) {
     FUN_002a5710(*(unsigned int *)(*(int *)(param_1 + 0xbc) + 8),temp_v2);
   }
-  FUN_0028c640(*(unsigned int *)(*(int *)(param_1 + 0xd8) + 8),0,DAT_00447e88 + 0x1c);
+  FUN_0028c640(*(unsigned int *)(*(int *)(param_1 + 0xd8) + 8),0,g_lmapScene + 0x1c);
   FUN_0028c618(*(unsigned int *)(*(int *)(param_1 + 0xd8) + 8),0);
   FUN_0025beb8(*(unsigned int *)(*(int *)(param_1 + 0xd8) + 8),0);
   if (*(char *)(param_1 + 0xe0) != '\0') {

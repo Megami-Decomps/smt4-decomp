@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0013f1b8(...);
+int asdTMTexTableLoadTmx(...);
 int FUN_0014e188(...);
-int FUN_0014e38c(...);
+int asdProcessCreateSimple(...);
 int FUN_001505ac(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
-int FUN_002e6354(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
+int sysMemClear(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
@@ -33,13 +33,13 @@ extern unsigned char DAT_0052fbcc; /* 0x52fbcc */
 extern unsigned char DAT_0052fbe4; /* 0x52fbe4 */
 extern unsigned int *DAT_0057f57c; /* 0x57f57c */
 
-/* Supplied declaration required: FUN_0013f1b8. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -55,23 +55,23 @@ void FUN_00285020(int param_1)
   
   if (DAT_0057f57c == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0xd4,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0xd4,1);
     DAT_0057f57c = puVar1;
   }
   puVar1 = DAT_0057f57c;
-  FUN_002e6354();
+  sysMemClear();
   temp_v0 = 0x80;
   temp_v1 = 0xdc;
   if (param_1 != 0) {
     temp_v0 = 0x85;
     temp_v1 = 0xe1;
   }
-  FUN_0013f1b8(0x34,0);
+  asdTMTexTableLoadTmx(0x34,0);
   puVar2 = &LAB_002851d0;
-  FUN_0014e38c(&LAB_002851d0,3,0,0,FUN_003d0958,0,0);
+  asdProcessCreateSimple(&LAB_002851d0,3,0,0,FUN_003d0958,0,0);
   *puVar1 = (unsigned int)puVar2;
-  FUN_0015155c(&LAB_002851e0,temp_v0,0,0,FUN_003d02bc,0,0,puVar2);
-  FUN_0015155c(&LAB_002851f0,temp_v1,0,0,FUN_003d02bc,0,0,*puVar1);
+  taskCreateDraw(&LAB_002851e0,temp_v0,0,0,FUN_003d02bc,0,0,puVar2);
+  taskCreateDraw(&LAB_002851f0,temp_v1,0,0,FUN_003d02bc,0,0,*puVar1);
   puVar1 = DAT_0057f57c;
   puVar3 = DAT_0057f57c + 10;
   DAT_0057f57c[2] = 0;

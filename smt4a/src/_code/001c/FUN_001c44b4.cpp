@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0018b620(...);
+int nngxCheckVramBank(...);
 
-/* Supplied declaration required: FUN_0018b620. */
+/* Supplied declaration required: nngxCheckVramBank. */
 
 
 unsigned int FUN_001c44b4(int param_1)
@@ -17,7 +17,7 @@ unsigned int FUN_001c44b4(int param_1)
   int temp_v1;
   
   if (param_1 == 0x20000) {
-    temp_v1 = FUN_0018b620();
+    temp_v1 = nngxCheckVramBank();
     if (temp_v1 == 0) {
       temp_v0 = 0x1f000000;
     }
@@ -30,7 +30,7 @@ unsigned int FUN_001c44b4(int param_1)
     temp_v0 = 0;
   }
   else {
-    temp_v1 = FUN_0018b620(0x30000);
+    temp_v1 = nngxCheckVramBank(0x30000);
     if (temp_v1 == 0) {
       temp_v0 = 0x1f300000;
     }

@@ -14,7 +14,7 @@ int FUN_00283d74(int);
 int FUN_002854a8(...);
 int FUN_002c7ad8(void);
 int FUN_002e0798(...);
-int FUN_002e3d04(void);
+int asdOperatorNewD(void);
 int FUN_002f4374(void);
 int FUN_0031f0a8(...);
 int FUN_00363c58(int);
@@ -72,7 +72,7 @@ typedef struct {
     unsigned int spC0; /* 0xc0: local_c0 */
 } param_1_stack;
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 extern int FUN_0014af84(void);
 /* Supplied declaration required: FUN_0018719c. */
@@ -87,7 +87,7 @@ extern int FUN_00213b5c(void);
 extern int FUN_002a4654(void);
 /* Supplied declaration required: FUN_002c7ad8. */
 /* Supplied declaration required: FUN_002e0798. */
-/* Supplied declaration required: FUN_002e3d04. */
+/* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: FUN_002e6490. */
 /* Supplied declaration required: FUN_002f4374. */
 /* Supplied declaration required: FUN_0031f0a8. */
@@ -274,7 +274,7 @@ void FUN_00261a28(int param_1)
   temp_v33 = FUN_0018719c(0x4f6);
   temp_v34 = FUN_0018719c(0x4f7);
   puVar2 = (unsigned int *)0x17;
-  FUN_002e3d04();
+  asdOperatorNewD();
   *puVar2 = 0;
   puVar2[1] = 0;
   puVar2[2] = 0;
@@ -619,7 +619,7 @@ void FUN_00261a28(int param_1)
     FUN_003fd63c(0x466,1);
     FUN_003fd63c(0x410,1);
   }
-  FUN_0046bd44(DAT_00570280);
+  FUN_0046bd44(g_aocSystem);
   rt_memcpy_w(temp_v0 + 0x29478,temp_v1 + 0x29478,0x290);
   temp_v7 = 0;
   do {

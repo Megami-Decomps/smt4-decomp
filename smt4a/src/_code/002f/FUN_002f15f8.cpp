@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_00184758(int, int);
 int FUN_00184c00(int, int, int);
 int FUN_002a4964(int, int);
-int FUN_002a7438(void);
+int uiFadeRequestClear(void);
 int FUN_003d2150(int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -18,12 +18,12 @@ typedef struct {
 
 extern int DAT_0057f28c; /* 0x57f28c */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_00184c00. */
 extern unsigned char FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: FUN_002a7438. */
+/* Supplied declaration required: uiFadeRequestClear. */
 extern int FUN_002c2c68(int);
 /* Supplied declaration required: FUN_003d2150. */
 
@@ -75,13 +75,13 @@ void FUN_002f15f8(unsigned int param_1,int param_2)
     FUN_00184758(temp_v0 + 0x34,0);
     FUN_00184c00(temp_v0 + 0x34,8,0);
   }
-  FUN_002a7438();
+  uiFadeRequestClear();
   temp_v0 = DAT_0057f28c;
   temp_v3 = *(unsigned int *)(DAT_0057f28c + 4);
   *(unsigned int *)(DAT_0057f28c + 4) = 0x14;
   *(unsigned int *)(temp_v0 + 8) = temp_v3;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
-  FUN_001681cc(0x1a);
+  sysPlaySe(0x1a);
   FUN_003d2150(0x10000cb);
   return;
 }

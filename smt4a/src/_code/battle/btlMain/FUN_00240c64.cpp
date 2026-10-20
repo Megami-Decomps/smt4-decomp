@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_0024d9c4(...);
 int rt_memcpy(...);
 int rt_memcpy_w(...);
@@ -33,7 +33,7 @@ extern unsigned char LAB_00298544; /* 0x298544 */
 extern unsigned char LAB_002def6c; /* 0x2def6c */
 extern unsigned char LAB_002df4a8; /* 0x2df4a8 */
 extern unsigned char LAB_002df4b0; /* 0x2df4b0 */
-extern unsigned int *DAT_00573920; /* 0x573920 */
+extern unsigned int *g_btlMain; /* 0x573920 */
 extern unsigned int DAT_00573924; /* 0x573924 */
 extern unsigned int DAT_00573928; /* 0x573928 */
 extern unsigned int DAT_00573b08; /* 0x573b08 */
@@ -41,9 +41,9 @@ extern unsigned int DAT_00573b0c; /* 0x573b0c */
 extern unsigned int DAT_00573b20; /* 0x573b20 */
 extern unsigned int DAT_00573b24; /* 0x573b24 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 extern unsigned int FUN_001ab888(void);
 extern unsigned int FUN_001bce18(void);
 /* Supplied declaration required: FUN_0024d9c4. */
@@ -69,15 +69,15 @@ void FUN_00240c64(unsigned int *param_1,int param_2)
   short sStack_26;
   
   puVar2 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x4e68,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x4e68,1);
   temp_v1 = 0x100;
-  DAT_00573920 = puVar2;
-  FUN_00163060(0x100,0x100,0,0x2d30,1);
+  g_btlMain = puVar2;
+  asdMemoryAllocTracked(0x100,0x100,0,0x2d30,1);
   DAT_00573924 = temp_v1;
   temp_v1 = FUN_001ab888();
   rt_memcpy_w(DAT_00573924,temp_v1,0x2d30);
   temp_v1 = 0x100;
-  FUN_00163060(0x100,0x100,0,0x10b8,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x10b8,1);
   DAT_00573928 = temp_v1;
   temp_v1 = FUN_001bce18();
   rt_memcpy(DAT_00573928,temp_v1,0x10b8);
@@ -124,8 +124,8 @@ void FUN_00240c64(unsigned int *param_1,int param_2)
     }
   }
   else {
-    if (DAT_00573920 != (unsigned int *)0x0) {
-      DAT_00573920[0x23] = 1;
+    if (g_btlMain != (unsigned int *)0x0) {
+      g_btlMain[0x23] = 1;
     }
     temp_v6 = DAT_00573b08 | puVar2[0x116a] | DAT_00573b20;
     puVar2[0x116b] = puVar2[0x116b] | DAT_00573b0c | DAT_00573b24;
@@ -136,13 +136,13 @@ void FUN_00240c64(unsigned int *param_1,int param_2)
   puVar2[0x116a] = temp_v6;
   *(unsigned char *)(puVar2 + 0x21) = 0;
   puVar8 = &LAB_00240fc0;
-  FUN_0014e38c(&LAB_00240fc0,4,0,0,FUN_0024bcd4,&LAB_002def6c,DAT_00573920);
+  asdProcessCreateSimple(&LAB_00240fc0,4,0,0,FUN_0024bcd4,&LAB_002def6c,g_btlMain);
   *puVar2 = (unsigned int)puVar8;
-  FUN_0015155c(&LAB_00240fd0,0x75,0,0,&LAB_0029853c,0,0,puVar8);
-  FUN_0015155c(&LAB_00240fe0,0xea,0,0,&LAB_002df4a8,0,0,*puVar2);
-  FUN_0015155c(&LAB_00240ff0,0x85,0,0,&LAB_00298544,0,0,*puVar2);
-  FUN_0015155c(&LAB_00240ffc,0xe1,0,0,&LAB_00298544,0,0,*puVar2);
-  FUN_0015155c(&LAB_0024100c,0xed,0,0,&LAB_002df4b0,0,0,*puVar2);
+  taskCreateDraw(&LAB_00240fd0,0x75,0,0,&LAB_0029853c,0,0,puVar8);
+  taskCreateDraw(&LAB_00240fe0,0xea,0,0,&LAB_002df4a8,0,0,*puVar2);
+  taskCreateDraw(&LAB_00240ff0,0x85,0,0,&LAB_00298544,0,0,*puVar2);
+  taskCreateDraw(&LAB_00240ffc,0xe1,0,0,&LAB_00298544,0,0,*puVar2);
+  taskCreateDraw(&LAB_0024100c,0xed,0,0,&LAB_002df4b0,0,0,*puVar2);
   return;
 }
 

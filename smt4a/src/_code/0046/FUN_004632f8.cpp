@@ -8,7 +8,7 @@ int FUN_004617d0(int *);
 int FUN_004639e4(int);
 int FUN_00463c28(int, int *);
 int FUN_00508490(void);
-int aeabi_uidivmod(...);
+int __aeabi_uidivmod(...);
 int rt_memcpy(int, unsigned char [32], int);
 
 typedef int romwright_code(...);
@@ -47,7 +47,7 @@ extern int FUN_00461508(int, int *, unsigned char *, unsigned int);
 extern int FUN_00508e00(int *, unsigned char *);
 extern int FUN_00508f8c(int *);
 extern int FUN_00508fac(int *, unsigned char *, unsigned short *, unsigned int);
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 extern unsigned int *nw_snd_internal_StreamSoundFile_InfoBlockBody_GetChannelInfoTable(unsigned int);
 extern int nw_snd_internal_StreamSoundFile_InfoBlockBody_GetStreamSoundInfo(unsigned int);
 /* Supplied declaration required: rt_memcpy. */
@@ -165,9 +165,9 @@ void FUN_004632f8(int param_1,int param_2)
         }
         *(int *)(param_1 + 0x44) = temp_v2;
         temp_v7 = *(int *)(param_1 + 0x18);
-        temp_v4 = aeabi_uidivmod(*(int *)(temp_v7 + 0x10) - 1,*(unsigned int *)(temp_v7 + 0x1c));
+        temp_v4 = __aeabi_uidivmod(*(int *)(temp_v7 + 0x10) - 1,*(unsigned int *)(temp_v7 + 0x1c));
         *(unsigned int *)(param_1 + 0x3c) = temp_v4;
-        temp_v5 = aeabi_uidivmod(*(unsigned int *)(temp_v7 + 0xc),*(unsigned int *)(temp_v7 + 0x1c));
+        temp_v5 = __aeabi_uidivmod(*(unsigned int *)(temp_v7 + 0xc),*(unsigned int *)(temp_v7 + 0x1c));
         *(int *)(param_1 + 0x40) = temp_v5;
         *(unsigned int *)(param_1 + 0x48) = temp_v8 * *(int *)(temp_v7 + 0x20) * temp_v5 + temp_v2;
         *(unsigned int *)(param_1 + 0x4c) = 0;
@@ -187,7 +187,7 @@ void FUN_004632f8(int param_1,int param_2)
         }
         *(unsigned int *)(param_1 + 0x58) = *(unsigned int *)(param_1 + 0x5c);
         temp_v5 = *(int *)(param_1 + 0x18);
-        temp_v2 = aeabi_uidivmod(*(unsigned int *)(param_1 + 0x5c),*(unsigned int *)(temp_v5 + 0x1c));
+        temp_v2 = __aeabi_uidivmod(*(unsigned int *)(param_1 + 0x5c),*(unsigned int *)(temp_v5 + 0x1c));
         *(int *)(param_1 + 0x38) = temp_v2;
         (**(romwright_code **)(**(int **)(param_1 + 0x14) + 0x40))
                   (*(int **)(param_1 + 0x14),

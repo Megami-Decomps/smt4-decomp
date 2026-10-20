@@ -50,7 +50,7 @@ extern int DAT_005949dc; /* 0x5949dc */
 /* Supplied declaration required: FUN_0016cd18. */
 extern int FUN_0016ceb8(unsigned int, unsigned int *, unsigned int, unsigned int, unsigned int);
 extern int FUN_001a0380(unsigned int);
-extern unsigned int FUN_002e6dac(void);
+extern unsigned int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_002e9318. */
 extern int FUN_002e9520(unsigned char *, unsigned int);
@@ -129,7 +129,7 @@ LAB_001069c6:
     temp_v4 = 1;
     temp_v3 = param_4;
     temp_v2 = FUN_0016ceb8(0,(unsigned int *)&temp_v5,0x10602,0x4009b,0);
-    temp_v5 = FUN_002e6dac();
+    temp_v5 = rt_malloc();
     temp_v7 = 0;
     temp_v4 = 1;
     temp_v1 = (*(unsigned int *)&s__V_V_V_0058954c.u1[0]);

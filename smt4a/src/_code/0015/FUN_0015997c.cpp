@@ -12,7 +12,7 @@ extern unsigned int DAT_006430f4; /* 0x6430f4 */
 
 /* Supplied declaration required: FUN_0016f864. */
 extern int FUN_0016f988(unsigned int *, char *, unsigned int, unsigned int);
-extern unsigned int FUN_002e3390(char *);
+extern unsigned int wstrlen(char *);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -27,7 +27,7 @@ int FUN_0015997c(void)
   nn_os_CriticalSection_Enter((unsigned int)&DAT_006430f4);
   if (DAT_005c0ac4 == 0) {
     FUN_0016f864();
-    temp_v0 = FUN_002e3390("ndm:u");
+    temp_v0 = wstrlen("ndm:u");
     temp_v1 = FUN_0016f988(&DAT_005c14c0,"ndm:u",temp_v0,0);
     if (temp_v1 < 0) {
       nn_os_CriticalSection_Leave((unsigned int)&DAT_006430f4);

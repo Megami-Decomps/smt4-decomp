@@ -17,7 +17,7 @@ int FUN_002a0cc8(...);
 int FUN_002b06c4(void);
 int FUN_002b8838(...);
 int FUN_002bc01c(int);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bf818(int);
 int FUN_002c1658(int, int);
 int FUN_002efed8(...);
@@ -48,7 +48,7 @@ extern int FUN_00259e7c(void);
 /* Supplied declaration required: FUN_0029d684. */
 /* Supplied declaration required: FUN_0029d8f4. */
 /* Supplied declaration required: FUN_0029da34. */
-extern int FUN_0029e010(void);
+extern int gameGetFlagByte12e8(void);
 extern int FUN_0029e02c(void);
 extern int FUN_0029e0f8(void);
 extern int FUN_0029e9cc(unsigned short);
@@ -60,7 +60,7 @@ extern int FUN_002b8d54(void);
 extern int FUN_002b8d68(void);
 extern int FUN_002b8ee0(int, unsigned int);
 /* Supplied declaration required: FUN_002bc01c. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bf818. */
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: FUN_002efed8. */
@@ -116,7 +116,7 @@ LAB_002179dc:
   switch(*puVar12) {
   case 1:
     FUN_001990d4(param_1);
-    FUN_002bd8e8(temp_v18,0);
+    timerStart(temp_v18,0);
     temp_v6 = FUN_002b8ee0(param_1 + 0x11a0,0);
     if (temp_v6 != 0) {
       *puVar12 = 2;
@@ -176,7 +176,7 @@ LAB_002179dc:
 joined_r0x00217be4:
       if (temp_v1 == 0) break;
     }
-    FUN_002bd8e8(temp_v18,0);
+    timerStart(temp_v18,0);
     temp_v1 = FUN_0029e0f8();
     if (temp_v1 == 0) break;
     psVar6 = (short *)FUN_0029acb0();
@@ -237,14 +237,14 @@ joined_r0x00217be4:
       FUN_002efed8(1);
       *puVar12 = 3;
       *temp_v19 = 0;
-      temp_v6 = FUN_0029e010();
+      temp_v6 = gameGetFlagByte12e8();
       if (temp_v6 < 0) {
-        FUN_002bd8e8(temp_v18,10,0);
+        timerStart(temp_v18,10,0);
       }
       else {
-        temp_v6 = FUN_0029e010();
+        temp_v6 = gameGetFlagByte12e8();
         if (0 < temp_v6) {
-          FUN_002bd8e8(temp_v18,9,0);
+          timerStart(temp_v18,9,0);
         }
       }
       break;
@@ -354,14 +354,14 @@ LAB_00217e94:
     else {
       FUN_002efed8(0);
       *puVar12 = 2;
-      temp_v6 = FUN_0029e010();
+      temp_v6 = gameGetFlagByte12e8();
       if (temp_v6 < 0) {
-        FUN_002bd8e8(temp_v18,0xb,0);
+        timerStart(temp_v18,0xb,0);
       }
       else {
-        temp_v6 = FUN_0029e010();
+        temp_v6 = gameGetFlagByte12e8();
         if (0 < temp_v6) {
-          FUN_002bd8e8(temp_v18,0xc,0);
+          timerStart(temp_v18,0xc,0);
         }
       }
       FUN_002b8838(0x33);

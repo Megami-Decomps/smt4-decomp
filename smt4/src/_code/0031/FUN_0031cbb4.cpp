@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00282924(unsigned int *, unsigned int);
-int FUN_0028dcb0(int);
+int scrSetResult(int);
 
 /* Supplied declaration required: FUN_00282924. */
-/* Supplied declaration required: FUN_0028dcb0. */
-extern unsigned int *FUN_002939f4(void);
-extern unsigned int FUN_00296cc8(void);
+/* Supplied declaration required: scrSetResult. */
+extern unsigned int *btlGetMainState(void);
+extern unsigned int scrGetArg(void);
 
 
 unsigned int FUN_0031cbb4(void)
@@ -20,14 +20,14 @@ unsigned int FUN_0031cbb4(void)
   unsigned int temp_v0;
   unsigned int *puVar2;
   
-  temp_v0 = FUN_00296cc8();
-  puVar2 = (unsigned int *)FUN_002939f4();
+  temp_v0 = scrGetArg();
+  puVar2 = (unsigned int *)btlGetMainState();
   FUN_00282924(puVar2,temp_v0);
   if (puVar2 != (unsigned int *)0x0) {
-    FUN_0028dcb0((*puVar2 & 0x10000) != 0);
+    scrSetResult((*puVar2 & 0x10000) != 0);
   }
   else {
-    FUN_0028dcb0(0);
+    scrSetResult(0);
   }
   return 1;
 }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00162790(int, unsigned int, unsigned char *);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00182884(int, int);
 int FUN_00183bb0(void);
 
@@ -14,12 +14,12 @@ extern unsigned char LAB_001673c4; /* 0x1673c4 */
 extern unsigned char LAB_001673d0; /* 0x1673d0 */
 extern unsigned char LAB_001673e0; /* 0x1673e0 */
 extern int DAT_00589168; /* 0x589168 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-extern int FUN_00180008(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: FUN_00182884. */
 /* Supplied declaration required: FUN_00183bb0. */
 
@@ -35,7 +35,7 @@ unsigned int FUN_00167234(void)
   int temp_v4;
   int *piVar6;
   
-  temp_v2 = DAT_0059dbb4;
+  temp_v2 = g_renderCtx;
   temp_v0 = DAT_00589168;
   if (*(int *)(DAT_00589168 + 8) == 1) {
     temp_v1 = FUN_001692ac(1,0);
@@ -48,10 +48,10 @@ unsigned int FUN_00167234(void)
       (**(romwright_code **)(temp_v2 + 0x1274))();
       *(unsigned char *)(temp_v2 + 0x1270) = 0;
     }
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_00183bb0();
-    temp_v2 = DAT_0059dbb4;
-    piVar6 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v2 = g_renderCtx;
+    piVar6 = (int *)(g_renderCtx + 0x1258);
     temp_v1 = *piVar6;
     temp_v3 = piVar6[temp_v1 + 2];
     *piVar6 = temp_v1 - 1;
@@ -59,7 +59,7 @@ unsigned int FUN_00167234(void)
       (**(romwright_code **)(temp_v2 + 0x1274))();
       *(unsigned char *)(temp_v2 + 0x1270) = 0;
     }
-    temp_v2 = FUN_00180008(0);
+    temp_v2 = jyoucyuGetTableEntry(0);
     if (temp_v2 != 0) {
       FUN_00162790(3,0xffffffff,&LAB_001673c4);
     }

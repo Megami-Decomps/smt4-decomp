@@ -12,10 +12,10 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 /* Supplied declaration required: FUN_00246bd4. */
-extern int FUN_003135a8(void);
+extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_00340998. */
 
 
@@ -25,9 +25,9 @@ void FUN_0033e174(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_003135a8();
+  temp_v0 = lmapSceneGetUnk0();
   if (temp_v0 == 0x1c) {
-    *(unsigned int *)(DAT_00581288 + 4) = 10;
+    *(unsigned int *)(g_lmapScene + 4) = 10;
     FUN_00340998();
     FUN_00246bd4();
     return;

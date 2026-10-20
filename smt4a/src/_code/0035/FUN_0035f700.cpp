@@ -30,14 +30,14 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } void_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-extern int FUN_0014aa78(void);
-extern int FUN_00163e40(unsigned int);
-extern int FUN_00236038(unsigned int);
+extern int btlGetMainState(void);
+extern int jobIsValid(unsigned int);
+extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_003eaf20. */
 /* Supplied declaration required: FUN_003ee0c0. */
-extern unsigned int FUN_004ee568(unsigned int);
+extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fbc30. */
 /* Supplied declaration required: FUN_004fc094. */
@@ -55,14 +55,14 @@ unsigned int FUN_0035f700(void)
   int temp_v5;
   unsigned char temp_v6;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_0014aa78();
+  temp_v0 = scrGetArg(0);
+  temp_v1 = btlGetMainState();
   temp_v2 = temp_v1;
   FUN_003eaf20();
   temp_v0 = (*(int *)(temp_v2 + 0x25c) * temp_v0) / 100;
-  temp_v3 = FUN_004ee568(DAT_0057113c);
+  temp_v3 = btlUnitGet(g_btlScriptUnit);
   temp_v6 = 0;
-  temp_v4 = FUN_00163e40(*(unsigned int *)(temp_v1 + 0x40));
+  temp_v4 = jobIsValid(*(unsigned int *)(temp_v1 + 0x40));
   temp_v5 = *(int *)(temp_v2 + 600);
   if (temp_v4 != 0) {
     temp_v6 = temp_v5 <= temp_v0;

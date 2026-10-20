@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_002a780c(unsigned int);
-int FUN_002c415c(unsigned int *);
+int asdMemFree(unsigned int *);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -11,7 +11,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002a780c. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00309e9c(unsigned int *param_1)
@@ -21,7 +21,7 @@ void FUN_00309e9c(unsigned int *param_1)
   FUN_002a780c(*param_1);
   FUN_002a780c(param_1[1]);
   FUN_002a780c(param_1[2]);
-  FUN_002c415c(param_1);
+  asdMemFree(param_1);
   return;
 }
 

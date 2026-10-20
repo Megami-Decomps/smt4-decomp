@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002399ec(int);
 int FUN_0024ee68(int);
-int FUN_002c4938(int *, int);
+int memClear(int *, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -24,7 +24,7 @@ extern unsigned int DAT_004e62b4; /* 0x4e62b4 */
 
 /* Supplied declaration required: FUN_002399ec. */
 /* Supplied declaration required: FUN_0024ee68. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 extern unsigned int nn_cec_CTR_MessageBox_WriteBoxInfo(unsigned int, int, unsigned int, unsigned int *);
 extern unsigned int nn_cec_CTR_MessageBox_WriteMessageBoxInfo(unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -70,11 +70,11 @@ void FUN_00238f4c(int *param_1,int param_2)
   param_1[0xf0] = 0;
   param_1[0xf1] = 0;
   param_1[0xf2] = 0;
-  FUN_002c4938(param_1 + 0x87,0x18c);
-  FUN_002c4938(param_1 + 0xf3,0x18c);
+  memClear(param_1 + 0x87,0x18c);
+  memClear(param_1 + 0xf3,0x18c);
   param_1[0x157] = 0;
   param_1[0x158] = 0;
-  FUN_002c4938(param_1 + 0x159,0x318);
+  memClear(param_1 + 0x159,0x318);
   nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62b4);
   if (DAT_004656d3 != '\0') {
     FUN_002399ec(param_1[0xea]);

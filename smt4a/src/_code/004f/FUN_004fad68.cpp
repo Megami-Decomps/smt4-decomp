@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_001aff14(float *, int);
 int FUN_003e7fa4(...);
 int FUN_003e8430(void);
@@ -54,7 +54,7 @@ extern unsigned int DAT_0057381c; /* 0x57381c */
 extern unsigned int DAT_00573820; /* 0x573820 */
 extern unsigned int DAT_00573824; /* 0x573824 */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001aff14. */
 /* Supplied declaration required: FUN_003e7fa4. */
 /* Supplied declaration required: FUN_003e8430. */
@@ -107,15 +107,15 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
   
   switch(param_2) {
   case 0:
-    temp_v3 = FUN_0014aa78();
+    temp_v3 = btlGetMainState();
     FUN_003e7fa4(temp_v3,param_3,0);
     break;
   case 1:
-    temp_v3 = FUN_0014aa78();
+    temp_v3 = btlGetMainState();
     FUN_003ecab8(temp_v3,param_3,0);
     break;
   case 2:
-    puVar2 = (unsigned int *)FUN_0014aa78();
+    puVar2 = (unsigned int *)btlGetMainState();
     FUN_003f0e20(puVar2,param_3);
     if (puVar2 == (unsigned int *)0x0) {
       return;
@@ -128,31 +128,31 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     }
     break;
   case 3:
-    temp_v3 = FUN_0014aa78();
+    temp_v3 = btlGetMainState();
     FUN_003e7fa4(temp_v3,param_4,0);
     break;
   case 4:
-    temp_v3 = FUN_0014aa78();
+    temp_v3 = btlGetMainState();
     FUN_003ecab8(temp_v3,param_4,0);
     break;
   case 5:
-    puVar2 = (unsigned int *)FUN_0014aa78();
+    puVar2 = (unsigned int *)btlGetMainState();
     FUN_003f0e20(puVar2,param_4);
     if (puVar2 == (unsigned int *)0x0) {
       return;
     }
     if ((*puVar2 & DAT_00573810) != 0 || (puVar2[1] & DAT_00573814) != 0) {
-      temp_v1 = FUN_0014aa78();
+      temp_v1 = btlGetMainState();
       if ((DAT_00573818 & *(unsigned int *)(temp_v1 + 0x45a0)) != 0 ||
           (DAT_0057381c & *(unsigned int *)(temp_v1 + 0x45a4)) != 0) {
         return;
       }
-      temp_v1 = FUN_0014aa78();
+      temp_v1 = btlGetMainState();
       if ((*(unsigned int *)(temp_v1 + 0x45a0) & DAT_00573820) != 0 ||
           (DAT_00573824 & *(unsigned int *)(temp_v1 + 0x45a4)) != 0) {
         return;
       }
-      FUN_0014aa78();
+      btlGetMainState();
       FUN_003e8430();
       return;
     }
@@ -199,11 +199,11 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
   case 0xc:
     break;
   case 0xd:
-    temp_v3 = FUN_0014aa78();
+    temp_v3 = btlGetMainState();
     FUN_003e7fa4(temp_v3,param_4,1);
     break;
   case 0xe:
-    temp_v3 = FUN_0014aa78();
+    temp_v3 = btlGetMainState();
     FUN_003ecab8(temp_v3,param_4,1);
     break;
   case 0xf:

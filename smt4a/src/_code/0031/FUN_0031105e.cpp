@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_002fea74(unsigned int, unsigned int);
-int FUN_002feaa8(int);
+int ringAdvance(int);
 
 extern unsigned int *FUN_002fea6a(int);
 /* Supplied declaration required: FUN_002fea74. */
-/* Supplied declaration required: FUN_002feaa8. */
+/* Supplied declaration required: ringAdvance. */
 
 
 void FUN_0031105e(unsigned int param_1,int param_2)
@@ -21,7 +21,7 @@ void FUN_0031105e(unsigned int param_1,int param_2)
   while (*(int *)(param_2 + 0x18) != 0) {
     puVar1 = (unsigned int *)FUN_002fea6a(param_2);
     FUN_002fea74(param_1,*puVar1);
-    FUN_002feaa8(param_2);
+    ringAdvance(param_2);
   }
   return;
 }

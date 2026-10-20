@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 extern short DAT_0049fa94; /* 0x49fa94 */
 extern short DAT_0049fa96; /* 0x49fa96 */
 
@@ -50,7 +50,7 @@ void FUN_003b8580(int param_1)
     DAT_0049fa94 = 0;
   }
   else {
-    temp_v0 = DAT_00433158;
+    temp_v0 = g_aocSystem;
     FUN_002764a8();
     if (temp_v0 != 0) {
       *(unsigned int *)(param_1 + 0x28) = 0xe;

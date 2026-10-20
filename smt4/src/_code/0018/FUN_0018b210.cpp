@@ -3,11 +3,11 @@
 extern "C" {
 
 int FUN_00297684(unsigned int);
-int FUN_002a0b48(void);
+int statusCameraApply(void);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_00297684. */
-/* Supplied declaration required: FUN_002a0b48. */
+/* Supplied declaration required: statusCameraApply. */
 
 
 unsigned int FUN_0018b210(int *param_1)
@@ -31,7 +31,7 @@ unsigned int FUN_0018b210(int *param_1)
   pb = temp_v1 + 0xa0;
   temp_v0 = *(int *)(temp_v1 + 0xd28);
   if ((0 < temp_v0) && (temp_v0 != 0xd && temp_v0 != 0xf)) {
-    FUN_002a0b48();
+    statusCameraApply();
     FUN_00297684(*(unsigned int *)(pb + 0x1c));
   }
   return 0;

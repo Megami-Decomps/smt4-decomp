@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00289234(unsigned int);
-int FUN_002893c0(void);
-int FUN_0028dcb0(unsigned int);
+int eventTexSetJobParam(void);
+int scrSetResult(unsigned int);
 int FUN_002fdff4(void);
 
 /* Supplied declaration required: FUN_00289234. */
-/* Supplied declaration required: FUN_002893c0. */
-/* Supplied declaration required: FUN_0028dcb0. */
-extern unsigned int FUN_00296cc8(void);
+/* Supplied declaration required: eventTexSetJobParam. */
+/* Supplied declaration required: scrSetResult. */
+extern unsigned int scrGetArg(void);
 /* Supplied declaration required: FUN_002fdff4. */
 
 
@@ -22,11 +22,11 @@ unsigned int FUN_001a1030(void)
 /* irregular: 4 native warning(s); review required */
   unsigned int temp_v0;
   
-  temp_v0 = FUN_00296cc8();
+  temp_v0 = scrGetArg();
   FUN_002fdff4();
-  FUN_002893c0();
+  eventTexSetJobParam();
   FUN_00289234(temp_v0);
-  FUN_0028dcb0(temp_v0);
+  scrSetResult(temp_v0);
   return 1;
 }
 

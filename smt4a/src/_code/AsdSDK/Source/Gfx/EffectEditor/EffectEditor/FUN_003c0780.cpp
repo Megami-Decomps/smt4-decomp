@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001656a0(...);
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_001bc460(void);
 int FUN_00200bcc(unsigned char *);
 int FUN_00202178(int);
@@ -77,7 +77,7 @@ extern float DAT_00647354; /* 0x647354 */
 extern float DAT_00647358; /* 0x647358 */
 
 /* Supplied declaration required: FUN_001656a0. */
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_001bc460. */
 /* Supplied declaration required: FUN_00200bcc. */
 /* Supplied declaration required: FUN_00202178. */
@@ -230,7 +230,7 @@ unsigned int FUN_003c0780(int param_1,int param_2)
   temp_v12 = 0x41f00000;
   temp_v13 = 0x42480000;
   temp_v3 = 0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+  memAlloc(0x10000,0x100,0,0x68,0x10,1);
   *(unsigned int *)(temp_v3 + 8) = temp_v27;
   *(float *)&*(unsigned int *)(temp_v3 + 0xc) = uStack_8c;
   *(float *)&*(unsigned int *)(temp_v3 + 0x10) = uStack_88;
@@ -259,7 +259,7 @@ unsigned int FUN_003c0780(int param_1,int param_2)
   FUN_00300124();
   FUN_002b3ed8(&temp_v27,&temp_v25,0xff0000ff,0);
   temp_v3 = 0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+  memAlloc(0x10000,0x100,0,0x68,0x10,1);
   *(unsigned int *)(temp_v3 + 0x18) = 0;
   *(unsigned int *)(temp_v3 + 4) = 9;
   *(unsigned int *)(temp_v3 + 8) = temp_v27;

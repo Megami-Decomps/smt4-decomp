@@ -5,7 +5,7 @@
 extern "C" {
 
 int taskCreate(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_0034a16c(...);
 int rt_memcpy_w(...);
 
@@ -21,7 +21,7 @@ typedef struct {
 extern int FUN_00213330(...); /* 0x213330 */
 
 /* Supplied declaration required: taskCreate. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0034a16c. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -36,7 +36,7 @@ romwright_code * FUN_00238f08(unsigned int param_1,unsigned int param_2,unsigned
   pcVar1 = FUN_00213330;
   taskCreate(FUN_00213330,0,0,0,0,0x304,3,0,0);
   if (pcVar1 != (romwright_code *)0x0) {
-    FUN_002e6354();
+    sysMemClear();
     rt_memcpy_w((unsigned char *)pcVar1 + 0x38,param_2,0x134);
     rt_memcpy_w((unsigned char *)pcVar1 + 0x16c,param_3,0xb0);
     *(unsigned int *)((unsigned char *)pcVar1 + 0x21c) = param_4;

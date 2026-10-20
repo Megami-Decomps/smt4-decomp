@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e14(int);
 int FUN_00307a7a(int, int, int);
-int FUN_00307ac6(int *);
+int vectorCapacity40(int *);
 int FUN_0030fd28(...);
 int FUN_0030fd40(...);
 int FUN_0030fd70(...);
@@ -25,7 +25,7 @@ typedef struct {
 extern int *FUN_002e4e86(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00307a7a. */
-/* Supplied declaration required: FUN_00307ac6. */
+/* Supplied declaration required: vectorCapacity40. */
 /* Supplied declaration required: FUN_0030fd28. */
 /* Supplied declaration required: FUN_0030fd40. */
 extern int *FUN_0030fd62(int *, int, unsigned int);
@@ -52,7 +52,7 @@ unsigned long long FUN_00133cbc(int *param_1,int *param_2,unsigned int param_3,u
     temp_v6 = param_3;
     temp_v7 = param_4;
     temp_v0 = FUN_0030fd70(param_2);
-    temp_v1 = FUN_00307ac6(param_1);
+    temp_v1 = vectorCapacity40(param_1);
     if (temp_v1 < temp_v0) {
       temp_v2 = FUN_0030fd70(param_1);
       temp_v7 = FUN_0030fd7e(temp_v2,param_1);
@@ -63,7 +63,7 @@ unsigned long long FUN_00133cbc(int *param_1,int *param_2,unsigned int param_3,u
       FUN_0030fd40(*param_2,param_2[1],temp_v5,param_1);
       FUN_0030fd28(param_1,*param_1,param_1[1]);
       temp_v4 = *param_1;
-      FUN_00307ac6(param_1);
+      vectorCapacity40(param_1);
       FUN_002e6e14(temp_v4);
       *param_1 = (int)temp_v5;
       temp_v4 = FUN_0030fd70(param_2);

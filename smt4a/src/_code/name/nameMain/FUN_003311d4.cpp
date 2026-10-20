@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
-int FUN_0019a5a0(void);
+int sysPlaySe(int);
+int asdMemFree(void);
 int FUN_00275748(unsigned int *, int);
 int FUN_002c76c0(...);
 int FUN_003180c4(int, unsigned int);
@@ -16,14 +16,14 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern signed char DAT_0058810c; /* 0x58810c */
+extern signed char g_name; /* 0x58810c */
 extern signed char DAT_0058810d; /* 0x58810d */
 extern unsigned int *DAT_00588110; /* 0x588110 */
 
-/* Supplied declaration required: FUN_001681cc. */
-extern int FUN_00184e20(unsigned int);
-/* Supplied declaration required: FUN_0019a5a0. */
-extern unsigned int FUN_00236038(unsigned int);
+/* Supplied declaration required: sysPlaySe. */
+extern int jobFind(unsigned int);
+/* Supplied declaration required: asdMemFree. */
+extern unsigned int scrGetArg(unsigned int);
 extern unsigned int FUN_00261828(void);
 /* Supplied declaration required: FUN_00275748. */
 /* Supplied declaration required: FUN_002c76c0. */
@@ -43,27 +43,27 @@ unsigned int FUN_003311d4(void)
   unsigned int temp_v2;
   
   temp_v2 = in_r3;
-  temp_v2 = FUN_00236038(0);
+  temp_v2 = scrGetArg(0);
   if (temp_v2 == 3) {
     DAT_0058810d = '\x01';
     temp_v2 = 2;
   }
   FUN_002c76c0(1);
-  if (DAT_0058810c == '\0') {
+  if (g_name == '\0') {
     if ((temp_v2 >= 2) && (temp_v2 == 2)) {
       FUN_003fd540();
     }
     FUN_00275748(&temp_v2,4);
-    DAT_0058810c = '\x01';
+    g_name = '\x01';
   }
   puVar1 = DAT_00588110;
   if (DAT_00588110 != (unsigned int *)0x0) {
-    temp_v0 = FUN_00184e20(*DAT_00588110);
+    temp_v0 = jobFind(*DAT_00588110);
     if ((temp_v0 != 0) || (*(char *)(puVar1 + 3) == '\0')) {
       return 0;
     }
     if (DAT_00588110 != (unsigned int *)0x0) {
-      FUN_0019a5a0();
+      asdMemFree();
       DAT_00588110 = (unsigned int *)0x0;
     }
   }
@@ -77,11 +77,11 @@ unsigned int FUN_003311d4(void)
     temp_v1 = FUN_00261828();
     FUN_003180c4(0x33,temp_v1);
   }
-  DAT_0058810c = 0;
+  g_name = 0;
   FUN_002c76c0(0xffffffff);
   if (DAT_0058810d != '\0') {
     DAT_0058810d = '\0';
-    FUN_001681cc(0x92);
+    sysPlaySe(0x92);
   }
   return 1;
 }

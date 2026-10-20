@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_00162758(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_0018349c(...);
 int FUN_00493344(...);
 int FUN_00493408(...);
@@ -39,7 +39,7 @@ extern unsigned char LAB_004983a0; /* 0x4983a0 */
 #endif
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162758. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0018349c. */
 /* Supplied declaration required: FUN_00493344. */
 /* Supplied declaration required: FUN_00493408. */
@@ -89,27 +89,27 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
     temp_v7 = (int)*(short *)(temp_v3 + 8);
     temp_v3 = (int)*(short *)(temp_v3 + 10);
     if (param_3 != 0) {
-      FUN_001677c0();
+      efctSetSpeed();
       FUN_004934ac(param_1 + 0x3a4,0x47,temp_v7,temp_v3,temp_v2);
       FUN_004934ac(param_1 + 0x3a4,0x48,temp_v7,temp_v3,temp_v2);
       FUN_004934ac(param_1 + 0x3a4,0x49,temp_v7,temp_v3,temp_v2);
-      FUN_001677c0();
+      efctSetSpeed();
       FUN_0049368c(param_1 + 0x3a4,0x4a,temp_v7,temp_v3,temp_v2,1);
       if (*(char *)(param_1 + 0xb19) != '\0') {
         FUN_004934ac(param_1 + 0x3a4,0x108,temp_v7,temp_v3,temp_v2);
         FUN_004934ac(param_1 + 0x3a4,0x109,temp_v7,temp_v3,temp_v2);
         FUN_004934ac(param_1 + 0x3a4,0x10a,temp_v7,temp_v3,temp_v2);
-        FUN_001677c0();
+        efctSetSpeed();
         FUN_004934ac(param_1 + 0x3a4,0x10b,temp_v7,temp_v3,temp_v2);
-        FUN_001677c0();
+        efctSetSpeed();
       }
       else {
         FUN_004934ac(param_1 + 0x3a4,0x4b,temp_v7,temp_v3,temp_v2);
         FUN_004934ac(param_1 + 0x3a4,0x4c,temp_v7,temp_v3,temp_v2);
         FUN_004934ac(param_1 + 0x3a4,0x4d,temp_v7,temp_v3,temp_v2);
-        FUN_001677c0();
+        efctSetSpeed();
         FUN_004934ac(param_1 + 0x3a4,0x105,temp_v7,temp_v3,temp_v2);
-        FUN_001677c0();
+        efctSetSpeed();
       }
     }
     temp_v4 = FUN_0049cab8(temp_v1);

@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_002b06c4(void);
 
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 extern int FUN_00295d08(unsigned int);
 /* Supplied declaration required: FUN_002b06c4. */
 extern int FUN_002b63ac(void);
 extern int FUN_002c09d0(unsigned int);
-extern int aeabi_idivmod(int, int);
+extern int __aeabi_idivmod(int, int);
 
 
 /* WARNING: Removing unreachable block (ram,0x003386b8) */
@@ -47,7 +47,7 @@ unsigned int FUN_00338584(int param_1)
         *puVar3 = *puVar3 | 0x10000000;
         if ((*(unsigned short *)((int)puVar3 + 0x1c6) & 0x80) == 0) {
           if ((*(unsigned int *)(param_1 + 0x44a8) & 0x200000) == 0) {
-            temp_v0 = aeabi_idivmod((short)puVar3[0x6d] * 100,(int)*(short *)((int)puVar3 + 0x1b6));
+            temp_v0 = __aeabi_idivmod((short)puVar3[0x6d] * 100,(int)*(short *)((int)puVar3 + 0x1b6));
             if (temp_v0 >= 0x14) {
               return 0;
             }
@@ -56,7 +56,7 @@ unsigned int FUN_00338584(int param_1)
             if (temp_v1 >= 11) {
               temp_v1 = 10;
             }
-            temp_v0 = FUN_0023eae0(99);
+            temp_v0 = randRange(99);
             if ((int)temp_v1 < temp_v0) {
               return 0;
             }

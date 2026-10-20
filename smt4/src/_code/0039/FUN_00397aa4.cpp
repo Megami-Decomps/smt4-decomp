@@ -3,12 +3,12 @@
 extern "C" {
 
 int FUN_002917b8(void);
-int FUN_002a7218(unsigned int);
-int FUN_002ae7e8(int);
+int scrScriptProcessDestroy(unsigned int);
+int asdTMTexTableFreeEntry(int);
 int FUN_002ae898(int, int);
 int FUN_002b8cc8(void);
 int FUN_002bff50(void);
-int FUN_002c415c(unsigned int);
+int asdMemFree(unsigned int);
 int FUN_002c424c(int, int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -17,12 +17,12 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002917b8. */
-/* Supplied declaration required: FUN_002a7218. */
-/* Supplied declaration required: FUN_002ae7e8. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002ae898. */
 /* Supplied declaration required: FUN_002b8cc8. */
 /* Supplied declaration required: FUN_002bff50. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c424c. */
 
 
@@ -43,10 +43,10 @@ void FUN_00397aa4(int param_1)
     *(unsigned short *)(param_1 + 0x93e) = 0;
   }
   FUN_002ae898(0x2e,0);
-  FUN_002ae7e8(0x2e);
-  FUN_002a7218(*(unsigned int *)(param_1 + 0x654));
-  FUN_002c415c(*(unsigned int *)(param_1 + 0x650));
-  FUN_002c415c(*(unsigned int *)(param_1 + 0x64c));
+  asdTMTexTableFreeEntry(0x2e);
+  scrScriptProcessDestroy(*(unsigned int *)(param_1 + 0x654));
+  asdMemFree(*(unsigned int *)(param_1 + 0x650));
+  asdMemFree(*(unsigned int *)(param_1 + 0x64c));
   FUN_002bff50();
   return;
 }

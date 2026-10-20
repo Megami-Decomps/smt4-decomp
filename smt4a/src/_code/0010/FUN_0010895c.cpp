@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e6e34(unsigned char [12], unsigned int);
 int FUN_002e6e5c(...);
 int FUN_002e7232(...);
-int FUN_002e74c4(int *, unsigned int, unsigned int, unsigned int);
+int strAssign(int *, unsigned int, unsigned int, unsigned int);
 int FUN_002e760a(int);
 int FUN_002e7908(...);
 int FUN_002eb108(int *, int, unsigned int, int);
@@ -48,7 +48,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e760a. */
 extern int *FUN_002e7614(int, unsigned int);
 /* Supplied declaration required: FUN_002e7908. */
@@ -137,7 +137,7 @@ LAB_001089c6:
     if (param_5 < temp_v2) {
       temp_v2 = param_5;
     }
-    FUN_002e74c4(piVar6,param_3->field_0xc + param_3->field_0x18 + temp_v5,temp_v2,0xffffffff);
+    strAssign(piVar6,param_3->field_0xc + param_3->field_0x18 + temp_v5,temp_v2,0xffffffff);
     temp_v8[0] = (int *)0x0;
     if ((int)((unsigned int)param_3->field_0x1c << 0x1d) < 0) {
       piVar3 = (int *)FUN_002eb7d0(0x150,0);

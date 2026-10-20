@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_00297ca4(int, int);
 int FUN_00298140(...);
 int FUN_0029ee6c(...);
 int FUN_002af5c0(...);
 
 extern int FUN_00293988(void);
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00297ca4. */
 /* Supplied declaration required: FUN_00298140. */
 extern int FUN_0029ee54(void);
@@ -100,9 +100,9 @@ unsigned int FUN_00190ab0(int param_1)
       }
     }
     else {
-      temp_v0 = FUN_002939f4();
+      temp_v0 = btlGetMainState();
       if ((*(unsigned int *)(temp_v0 + 0x44a8) & 0x40) == 0) {
-        FUN_002939f4();
+        btlGetMainState();
         temp_v0 = FUN_00293988();
         if (temp_v0 == 0) {
           return 0;

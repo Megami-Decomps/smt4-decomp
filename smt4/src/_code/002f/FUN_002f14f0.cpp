@@ -1,27 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f14f0` (_code @ 0x2f14f0, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the flag word and the constant 1 swap registers (retail: flags in r1, 1 in r0). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+typedef struct Player {
+    /* 0x0000 */ u8 unk0000[0x49BC];
+    /* 0x49BC */ u32 flags;
+} Player;
 
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_002939f4(void);
-extern unsigned int FUN_00296cc8(void);
+int scrSetResult(int value);
+Player *btlGetMainState(void);
+u32 scrGetArg(int index);
 
-
-unsigned int FUN_002f14f0(void)
-
+/* Script command: passes to scrSetResult whether flag bit (script argument 0) is set in the current player's flags. */
+u32 FUN_002f14f0(int firstArg)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_00296cc8();
-  temp_v1 = FUN_002939f4();
-  FUN_0028dcb0((*(unsigned int *)(temp_v1 + 0x49bc) & (1 << (temp_v0 & 0xff))) != 0);
-  return 1;
+    u32 bit = scrGetArg(firstArg);
+
+    scrSetResult((btlGetMainState()->flags & (1 << (bit & 0xff))) != 0);
+    return 1;
 }
 
 } /* extern "C" */

@@ -24,7 +24,7 @@ extern unsigned int DAT_0062d2a4; /* 0x62d2a4 */
 extern unsigned int FUN_0016f864(void);
 extern unsigned int FUN_0016f988(unsigned int *, unsigned char *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00188b60. */
-extern unsigned int FUN_002e3390(unsigned char *);
+extern unsigned int wstrlen(unsigned char *);
 extern int FUN_00442280(void);
 extern unsigned int FUN_00442724(unsigned char *);
 /* Supplied declaration required: FUN_00442800. */
@@ -59,7 +59,7 @@ unsigned int FUN_00441f84(void)
     else {
       temp_v2 = FUN_0016f864();
       if (-1 < (int)temp_v2) {
-        temp_v1 = FUN_002e3390(&LAB_004420e4);
+        temp_v1 = wstrlen(&LAB_004420e4);
         temp_v2 = FUN_0016f988(&DAT_005c0a98,&LAB_004420e4,temp_v1,0);
         if (-1 < (int)temp_v2) {
           DAT_00589384 = DAT_00589384 + 1;

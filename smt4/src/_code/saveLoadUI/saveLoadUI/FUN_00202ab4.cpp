@@ -9,17 +9,17 @@ int FUN_00297468(...);
 int FUN_002a5ed0(...);
 int FUN_002ad8b4(...);
 int FUN_002b8838(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002beed0(...);
 int FUN_002c09bc(void);
 int FUN_002c312c(...);
-int FUN_002c4938(...);
-int FUN_002c498c(int, int, int, int, int);
-int FUN_002c4a08(...);
-int FUN_002c4c2c(...);
-int FUN_002c5300(...);
-int FUN_002c5788(unsigned char *, int, int, int, unsigned char *, unsigned char *, int);
+int memClear(...);
+int asdMemAlloc(int, int, int, int, int);
+int taskCreateDraw(...);
+int asdTMTexTableLoadSprites(...);
+int asdMemoryAlloc(...);
+int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 int rt_memcpy_w(...);
 
@@ -49,7 +49,7 @@ extern unsigned char DAT_00405e2c; /* 0x405e2c */
 extern unsigned char DAT_00405e68; /* 0x405e68 */
 extern unsigned char DAT_0044de28; /* 0x44de28 */
 extern unsigned char DAT_0044de29; /* 0x44de29 */
-extern unsigned int *DAT_0044de2c; /* 0x44de2c */
+extern unsigned int *g_saveLoadUI; /* 0x44de2c */
 extern unsigned int DAT_0044de30; /* 0x44de30 */
 extern unsigned int DAT_0044de34; /* 0x44de34 */
 
@@ -57,21 +57,21 @@ extern unsigned int FUN_0026b5c8(void);
 extern unsigned int FUN_0026b5dc(void);
 /* Supplied declaration required: FUN_00297410. */
 /* Supplied declaration required: FUN_00297468. */
-extern unsigned int FUN_0029a034(unsigned char *, unsigned int);
+extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a5ed0. */
 /* Supplied declaration required: FUN_002ad8b4. */
 /* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002beed0. */
 /* Supplied declaration required: FUN_002c09bc. */
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c4c2c. */
-/* Supplied declaration required: FUN_002c5300. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
+/* Supplied declaration required: asdMemoryAlloc. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -88,26 +88,26 @@ void FUN_00202ab4(void)
   DAT_0044de28 = 0;
   DAT_0044de29 = 0;
   puVar1 = (unsigned int *)0x10000;
-  FUN_002c498c(0x10000,0x100,0,0x388,1);
-  DAT_0044de2c = puVar1;
+  asdMemAlloc(0x10000,0x100,0,0x388,1);
+  g_saveLoadUI = puVar1;
   *(unsigned char *)(puVar1 + 1) = 0;
   puVar2 = &LAB_00202ec8;
-  FUN_002c5788(&LAB_00202ec8,2,0,0,&LAB_001c8e28,&LAB_00214a5c,0);
+  asdProcessCreateSimple(&LAB_00202ec8,2,0,0,&LAB_001c8e28,&LAB_00214a5c,0);
   *puVar1 = (unsigned int)puVar2;
-  FUN_002c4a08(&LAB_00202edc,0x7f,0,0,FUN_001ed9a0,0,0,puVar2);
-  FUN_002c4a08(&LAB_00202eec,0xdd,0,0,FUN_001ed9a0,0,0,*puVar1);
-  FUN_002c4a08(&LAB_00202f00,0xe8,0,0,FUN_00214a60,0,0,*puVar1);
+  taskCreateDraw(&LAB_00202edc,0x7f,0,0,FUN_001ed9a0,0,0,puVar2);
+  taskCreateDraw(&LAB_00202eec,0xdd,0,0,FUN_001ed9a0,0,0,*puVar1);
+  taskCreateDraw(&LAB_00202f00,0xe8,0,0,FUN_00214a60,0,0,*puVar1);
   puVar1[2] = 0;
   puVar1[3] = 0;
   DAT_0044de34 = DAT_0044de30;
   temp_v0 = 0x100;
-  FUN_002c5300(0x100,0x100,0,0x80,1);
+  asdMemoryAlloc(0x100,0x100,0,0x80,1);
   puVar1[0xdf] = temp_v0;
   temp_v0 = 0x100;
-  FUN_002c5300(0x100,0x100,0,8,1);
+  asdMemoryAlloc(0x100,0x100,0,8,1);
   puVar1[0xe0] = temp_v0;
   temp_v0 = 0x100;
-  FUN_002c5300(0x100,0x100,0,0x24d28,1);
+  asdMemoryAlloc(0x100,0x100,0,0x24d28,1);
   puVar1[0xe1] = temp_v0;
   temp_v0 = FUN_0026b5dc();
   rt_memcpy_w(puVar1[0xdf],temp_v0,0x80);
@@ -122,10 +122,10 @@ void FUN_00202ab4(void)
   puVar1[0x92] = 0;
   FUN_00297468(&LAB_00202f18,puVar1 + 0x90,0);
   FUN_00297468(&LAB_00202f34,puVar1 + 0x91,0);
-  FUN_002c4c2c(0x36);
+  asdTMTexTableLoadSprites(0x36);
   FUN_002a5ed0(0x36,0);
   FUN_00297410(0x3d);
-  temp_v0 = FUN_0029a034(&LAB_00202f50,7);
+  temp_v0 = asdMdlManagerCreateSecondList(&LAB_00202f50,7);
   puVar1[0xd8] = temp_v0;
   puVar1[0xdd] = 0x3f000000;
   puVar1[6] = DAT_0044de30;
@@ -160,16 +160,16 @@ void FUN_00202ab4(void)
   FUN_002bd954(puVar1 + 0x27,0x36,1,puVar1 + 0x1f,0xc9);
   FUN_002beed0(puVar1 + 0x4a,0x36,0x51,2,puVar1 + 0x1f,2);
   FUN_002beed0(puVar1 + 0x6d,0x36,0x52,2,puVar1 + 0x1f,2);
-  FUN_002bd8e8(puVar1 + 0x27,1,0);
-  FUN_002bd8e8(puVar1 + 0x4a,3,0);
-  FUN_002bd8e8(puVar1 + 0x6d,4,0);
+  timerStart(puVar1 + 0x27,1,0);
+  timerStart(puVar1 + 0x4a,3,0);
+  timerStart(puVar1 + 0x6d,4,0);
   FUN_002b8838(0xa8);
-  FUN_002c4938(puVar1 + 0x93,0x80);
-  FUN_002c4938(puVar1 + 0xb3,0x80);
+  memClear(puVar1 + 0x93,0x80);
+  memClear(puVar1 + 0xb3,0x80);
   *(unsigned char *)(puVar1 + 0xd3) = 0;
   *(unsigned char *)((int)puVar1 + 0x34d) = 0;
   temp_v0 = 0x100;
-  FUN_002c5300(0x100,0x100,0,0x8c,1);
+  asdMemoryAlloc(0x100,0x100,0,0x8c,1);
   puVar1[0xd4] = temp_v0;
   puVar1[6] = DAT_0044de30;
   *(unsigned char *)(puVar1 + 0xde) = 0;

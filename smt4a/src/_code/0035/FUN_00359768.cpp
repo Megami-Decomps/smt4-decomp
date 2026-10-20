@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00151340(void);
 int FUN_0015e2bc(unsigned int, unsigned int, int, int);
 int FUN_00194fb0(unsigned char *, int);
-int FUN_0037b0c0(void);
+int asd3dSoundActorIsPlaying(void);
 int VectorUnsignedToFloat(int, int);
 
 extern unsigned char DAT_0063e1e8; /* 0x63e1e8 */
@@ -20,7 +20,7 @@ extern int DAT_0063f500; /* 0x63f500 */
 /* Supplied declaration required: FUN_0015e2bc. */
 extern int FUN_0015fe30(unsigned char *);
 /* Supplied declaration required: FUN_00194fb0. */
-/* Supplied declaration required: FUN_0037b0c0. */
+/* Supplied declaration required: asd3dSoundActorIsPlaying. */
 
 
 unsigned char FUN_00359768(int param_1,unsigned int param_2,int param_3)
@@ -44,7 +44,7 @@ unsigned char FUN_00359768(int param_1,unsigned int param_2,int param_3)
     temp_v0 = FUN_0015fe30(&DAT_0063e1e8);
     if ((temp_v0 != 0) &&
        (((FUN_00194fb0(&DAT_0063e1e8,param_1), puVar4 != (unsigned char *)0x0 &&
-         (temp_v1 = param_2, FUN_0037b0c0(), temp_v1 == 0)) &&
+         (temp_v1 = param_2, asd3dSoundActorIsPlaying(), temp_v1 == 0)) &&
         (temp_v0 = param_1, FUN_00151340(), temp_v0 != 0)))) {
       temp_v1 = param_2 * 0x88 + 0x63ea78;
       FUN_0015e2bc(temp_v1,param_2 * 4 + 0x63f2f8,param_1,0);

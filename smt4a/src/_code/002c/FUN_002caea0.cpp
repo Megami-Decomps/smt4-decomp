@@ -12,7 +12,7 @@ int FUN_00186e2c(...);
 int FUN_001ac2d4(...);
 int FUN_001f42b0(...);
 int FUN_001f474c(...);
-int FUN_001f4998(...);
+int asdMdlManagerDestroy(...);
 int FUN_00212204(...);
 int FUN_00280c5c(...);
 int FUN_00280d2c(...);
@@ -35,15 +35,15 @@ extern int nw_anim_PlayPolicy_Loop(...); /* 0x1c37f8 */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
 extern int FUN_00162ea4(void);
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00183764. */
 /* Supplied declaration required: FUN_00186e2c. */
 extern int FUN_001ab8c0(void);
 /* Supplied declaration required: FUN_001ac2d4. */
 /* Supplied declaration required: FUN_001f42b0. */
 /* Supplied declaration required: FUN_001f474c. */
-/* Supplied declaration required: FUN_001f4998. */
-extern unsigned int FUN_001f4a48(char *, unsigned int);
+/* Supplied declaration required: asdMdlManagerDestroy. */
+extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: FUN_00212204. */
 /* Supplied declaration required: FUN_00280c5c. */
 /* Supplied declaration required: FUN_00280d2c. */
@@ -72,7 +72,7 @@ unsigned int FUN_002caea0(void)
   unsigned int in_fpscr;
   float in_s0;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   switch(*(unsigned int *)(temp_v0 + 0x568)) {
   case 0:
     temp_v1 = FUN_00162ea4();
@@ -83,7 +83,7 @@ unsigned int FUN_002caea0(void)
       *(unsigned int *)(temp_v0 + 0x560) = temp_v2;
       temp_v2 = FUN_00387350("event/oc/oc_start.bccam");
       *(unsigned int *)(temp_v0 + 0x564) = temp_v2;
-      temp_v2 = FUN_001f4a48("event/oc/oc_loop.bam",0x38);
+      temp_v2 = asdMdlManagerCreateSecondList("event/oc/oc_loop.bam",0x38);
       *(unsigned int *)(temp_v0 + 0x558) = temp_v2;
     }
     break;
@@ -159,7 +159,7 @@ unsigned int FUN_002caea0(void)
       *(unsigned int *)(temp_v0 + 0x564) = 0;
       FUN_001f42b0(0);
       if (*(int *)(temp_v0 + 0x558) != 0) {
-        FUN_001f4998();
+        asdMdlManagerDestroy();
       }
       *(unsigned int *)(temp_v0 + 0x55c) = 0;
       *(unsigned int *)(temp_v0 + 0x558) = 0;

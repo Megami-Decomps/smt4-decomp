@@ -12,7 +12,7 @@ int FUN_0029f848(...);
 int FUN_002b63c0(...);
 int FUN_002b7bca(...);
 int FUN_002c3944(...);
-int FUN_002c4938(...);
+int memClear(...);
 int FUN_0032aa84(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -44,7 +44,7 @@ extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_002b7bca. */
 extern int FUN_002c09d0(unsigned int);
 /* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_0032aa84. */
 
 
@@ -72,7 +72,7 @@ void FUN_00189c24(void)
   temp_v9 = 0;
   temp_v8 = 0;
   temp_v12 = DAT_0043dd50 + 0x6c4;
-  FUN_002c4938(temp_v12,0xc6);
+  memClear(temp_v12,0xc6);
   FUN_002c3944(temp_v2 + 0x78a,500);
   temp_v7 = 0;
   do {

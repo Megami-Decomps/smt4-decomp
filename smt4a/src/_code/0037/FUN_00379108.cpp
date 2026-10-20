@@ -19,7 +19,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern float DAT_0058128c; /* 0x58128c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -42,21 +42,21 @@ void FUN_00379108(void)
   float temp_v5;
   unsigned int temp_v6;
   
-  temp_v2 = DAT_00581288;
-  temp_v1 = *(int *)(DAT_00581288 + 0x250);
+  temp_v2 = g_lmapScene;
+  temp_v1 = *(int *)(g_lmapScene + 0x250);
   if (temp_v1 == 0) {
     temp_v3 = DAT_0058128c + 0.1f;
     DAT_0058128c = temp_v3;
-    *(int *)(DAT_00581288 + 0x24c) = *(int *)(DAT_00581288 + 0x24c) + 1;
+    *(int *)(g_lmapScene + 0x24c) = *(int *)(g_lmapScene + 0x24c) + 1;
     temp_v6 = *(unsigned int *)(temp_v2 + 0x25c);
     temp_v4 = *(unsigned int *)(temp_v2 + 0x254);
     temp_v5 = *(float *)(temp_v2 + 600);
     FUN_001bc124();
     temp_v5 = temp_v5 + temp_v3 * 2.0f;
-    VectorSignedToFloat(*(unsigned int *)(DAT_00581288 + 0x24c),(unsigned char)(in_fpscr >> 0x16) & 3);
+    VectorSignedToFloat(*(unsigned int *)(g_lmapScene + 0x24c),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v0 = 0x3f800000;
     FUN_001f3eec();
-    temp_v2 = *(int *)(*(int *)(DAT_00581288 + 400) + 4);
+    temp_v2 = *(int *)(*(int *)(g_lmapScene + 400) + 4);
     FUN_003fd76c(temp_v2,&temp_v4);
     *(unsigned int *)(temp_v2 + 0x1fc) = temp_v0;
     return;
@@ -65,19 +65,19 @@ void FUN_00379108(void)
     if (temp_v1 != 2) {
       return;
     }
-    if (*(int **)(DAT_00581288 + 400) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(DAT_00581288 + 400) + 4))();
-      *(unsigned int *)(DAT_00581288 + 400) = 0;
+    if (*(int **)(g_lmapScene + 400) != (int *)0x0) {
+      (**(romwright_code **)(**(int **)(g_lmapScene + 400) + 4))();
+      *(unsigned int *)(g_lmapScene + 400) = 0;
     }
     temp_v0 = 3;
   }
   else {
-    if ((*(int *)(DAT_00581288 + 400) != 0) && (*(int *)(*(int *)(DAT_00581288 + 400) + 4) != 0)) {
+    if ((*(int *)(g_lmapScene + 400) != 0) && (*(int *)(*(int *)(g_lmapScene + 400) + 4) != 0)) {
       FUN_001aea28(DAT_0056fcc0);
     }
     temp_v0 = 2;
   }
-  *(unsigned int *)(DAT_00581288 + 0x250) = temp_v0;
+  *(unsigned int *)(g_lmapScene + 0x250) = temp_v0;
   return;
 }
 

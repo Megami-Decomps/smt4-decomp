@@ -6,7 +6,7 @@ extern "C" {
 
 int rt_memcpy_w(int, unsigned int, int);
 
-extern unsigned char DAT_0057f698; /* 0x57f698 */
+extern unsigned char g_gameDataBlocks; /* 0x57f698 */
 
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -17,7 +17,7 @@ unsigned int FUN_0023ac60(int param_1,unsigned int param_2)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + param_1 * 0x50;
+  temp_v0 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + param_1 * 0x50;
   rt_memcpy_w(temp_v0 + 0x5f0c,param_2,0x50);
   *(unsigned char *)(temp_v0 + 0x5f22) = *(unsigned char *)(temp_v0 + 0x5f22) | 1;
   return 1;

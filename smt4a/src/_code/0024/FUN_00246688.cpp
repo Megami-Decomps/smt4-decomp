@@ -1,25 +1,19 @@
-#include "romwright_types.h"
+#include "map/lmapMain.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
-int FUN_00203d04(int);
+void FUN_00203d04(s32 arg);
 
-extern unsigned int *DAT_0058104c; /* 0x58104c */
-
-/* Supplied declaration required: FUN_00203d04. */
-
+extern LmapEventA *g_popupState;
 
 void FUN_00246688(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = DAT_0058104c;
-  *DAT_0058104c = 0;
-  puVar1[1] = 0;
-  FUN_00203d04(1);
-  return;
+    LmapEventA *event = g_popupState;
+
+    event->state = 0;
+    event->unk04 = 0;
+    FUN_00203d04(1);
 }
 
 } /* extern "C" */

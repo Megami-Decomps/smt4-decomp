@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
-int FUN_002e6354(int, int);
+int asdMemFree(void);
+int sysMemClear(int, int);
 
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_004f6e68(int param_1)
@@ -25,30 +25,30 @@ void FUN_004f6e68(int param_1)
   do {
     temp_v1 = param_1 + temp_v2 * 0x8c;
     *(unsigned char *)(temp_v1 + 0x1f5c) = 0xff;
-    FUN_002e6354(temp_v1 + 0x1f64,0x80);
+    sysMemClear(temp_v1 + 0x1f64,0x80);
     if (*(int *)(temp_v1 + 0x1f60) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v1 + 0x1f60) = 0;
     }
     *(unsigned char *)(temp_v1 + 0x1fe4) = 0;
     *(unsigned char *)(temp_v1 + 0x218c) = 0xff;
-    FUN_002e6354(temp_v1 + 0x2194,0x80);
+    sysMemClear(temp_v1 + 0x2194,0x80);
     if (*(int *)(temp_v1 + 0x2190) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v1 + 0x2190) = 0;
     }
     *(unsigned char *)(temp_v1 + 0x2214) = 0;
     *(unsigned char *)(temp_v1 + 0x23bc) = 0xff;
-    FUN_002e6354(temp_v1 + 0x23c4,0x80);
+    sysMemClear(temp_v1 + 0x23c4,0x80);
     if (*(int *)(temp_v1 + 0x23c0) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v1 + 0x23c0) = 0;
     }
     *(unsigned char *)(temp_v1 + 0x2444) = 0;
     *(unsigned char *)(temp_v1 + 0x25ec) = 0xff;
-    FUN_002e6354(temp_v1 + 0x25f4,0x80);
+    sysMemClear(temp_v1 + 0x25f4,0x80);
     if (*(int *)(temp_v1 + 0x25f0) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v1 + 0x25f0) = 0;
     }
     temp_v2 = temp_v2 + 1;
@@ -58,9 +58,9 @@ void FUN_004f6e68(int param_1)
   do {
     temp_v1 = param_1 + temp_v2 * 0x8c;
     *(unsigned char *)(temp_v1 + 0x2e20) = 0xff;
-    FUN_002e6354(temp_v1 + 0x2e28,0x80);
+    sysMemClear(temp_v1 + 0x2e28,0x80);
     if (*(int *)(temp_v1 + 0x2e24) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v1 + 0x2e24) = 0;
     }
     temp_v2 = temp_v2 + 1;
@@ -70,25 +70,25 @@ void FUN_004f6e68(int param_1)
   do {
     temp_v1 = param_1 + temp_v2 * 0x8c;
     *(unsigned char *)(temp_v1 + 0x33e4) = 0xff;
-    FUN_002e6354(temp_v1 + 0x33ec,0x80);
+    sysMemClear(temp_v1 + 0x33ec,0x80);
     if (*(int *)(temp_v1 + 0x33e8) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v1 + 0x33e8) = 0;
     }
     temp_v2 = temp_v2 + 1;
     *(unsigned char *)(temp_v1 + 0x346c) = 0;
   } while (temp_v2 < 3);
   *(unsigned char *)(param_1 + 0x3054) = 0xff;
-  FUN_002e6354(param_1 + 0x305c,0x80);
+  sysMemClear(param_1 + 0x305c,0x80);
   if (*(int *)(param_1 + 0x3058) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x3058) = 0;
   }
   *(unsigned char *)(param_1 + 0x30dc) = 0;
   *(unsigned char *)(param_1 + 0x358c) = 0xff;
-  FUN_002e6354(param_1 + 0x3594,0x80);
+  sysMemClear(param_1 + 0x3594,0x80);
   if (*(int *)(param_1 + 0x3590) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x3590) = 0;
   }
   temp_v2 = 0;
@@ -96,9 +96,9 @@ void FUN_004f6e68(int param_1)
   do {
     temp_v1 = param_1 + temp_v2 * 0x8c;
     *(unsigned char *)(temp_v1 + 0x30e0) = 0xff;
-    FUN_002e6354(temp_v1 + 0x30e8,0x80);
+    sysMemClear(temp_v1 + 0x30e8,0x80);
     if (*(int *)(temp_v1 + 0x30e4) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v1 + 0x30e4) = 0;
     }
     temp_v2 = temp_v2 + 1;
@@ -108,9 +108,9 @@ void FUN_004f6e68(int param_1)
   do {
     temp_v1 = param_1 + temp_v2 * 0x8c;
     *(unsigned char *)(temp_v1 + 0x3284) = 0xff;
-    FUN_002e6354(temp_v1 + 0x328c,0x80);
+    sysMemClear(temp_v1 + 0x328c,0x80);
     if (*(int *)(temp_v1 + 0x3288) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v1 + 0x3288) = 0;
     }
     temp_v2 = temp_v2 + 1;

@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_gameState; /* 0x49f91c */
 extern signed char DAT_0049fb6d; /* 0x49fb6d */
 
 /* Supplied declaration required: FUN_0025a0e0. */
@@ -57,9 +57,9 @@ void FUN_00273840(int param_1)
   else {
     temp_v0 = NaviMain_IsMapOpen();
     if (temp_v0 == 0) {
-      if (DAT_0049f91c != 0x65) {
-        if (DAT_0049f91c < 100) {
-          if (DAT_0049f91c == 0x24) {
+      if (g_gameState != 0x65) {
+        if (g_gameState < 100) {
+          if (g_gameState == 0x24) {
             FUN_002b8838(0xd1);
             return;
           }

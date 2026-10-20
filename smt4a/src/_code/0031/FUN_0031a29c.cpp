@@ -18,7 +18,7 @@ extern int DAT_0057f58c; /* 0x57f58c */
 extern int DAT_0057f590; /* 0x57f590 */
 
 /* Supplied declaration required: FUN_0021bdac. */
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 extern unsigned int FUN_002ba85c(void);
 /* Supplied declaration required: FUN_002c76c0. */
 /* Supplied declaration required: FUN_002deb84. */
@@ -47,7 +47,7 @@ void FUN_0031a29c(void)
     *(unsigned char *)(DAT_0057f58c + 0x19c5) = 0x15;
   }
   temp_v2 = FUN_002ba85c();
-  temp_v3 = FUN_00236038(0);
+  temp_v3 = scrGetArg(0);
   temp_v4 = FUN_002deb84();
   FUN_0021bdac(temp_v2,temp_v3,temp_v4,6,1,0);
   return;

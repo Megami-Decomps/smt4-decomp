@@ -1,53 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b7044` (_code @ 0x3b7044, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Per-frame check: when idle, tries to start from the two queued ids; reports whether the follow-up condition fired (and then plays sound 0x92). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001681cc(int);
-int FUN_00236038(int);
-int FUN_002f0c18(int);
-int FUN_002f1554(int);
-int FUN_0034aae4(void);
-int FUN_00418870(int, unsigned int);
+void sysPlaySe(s32 soundId);
+s32 FUN_00162ea4(void);
+u32 scrGetArg(s32 index);
+s32 FUN_002deb84(void);
+void FUN_002f0c18(s32 value);
+s32 FUN_002f151c(void);
+void FUN_002f1554(u32 id);
+void FUN_0034aae4(void);
+void FUN_00418870(u32 first, u32 second);
 
-extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_001681cc. */
-/* Supplied declaration required: FUN_00236038. */
-extern int FUN_002deb84(void);
-/* Supplied declaration required: FUN_002f0c18. */
-extern int FUN_002f151c(void);
-/* Supplied declaration required: FUN_002f1554. */
-/* Supplied declaration required: FUN_0034aae4. */
-/* Supplied declaration required: FUN_00418870. */
-
-
-unsigned char FUN_003b7044(void)
-
+u8 FUN_003b7044(void)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  temp_v2 = FUN_002deb84();
-  if (temp_v2 == 0) {
-    FUN_00418870(temp_v0,temp_v1);
-    temp_v2 = FUN_00162ea4();
-    if (temp_v2 != 0) {
-      return 1;
+    u16 first = scrGetArg(0);
+    u32 second = scrGetArg(1);
+    s32 result;
+
+    if (FUN_002deb84() == 0) {
+        FUN_00418870(first, second);
+        result = FUN_00162ea4();
+        if (result != 0) {
+            return 1;
+        }
+        FUN_002f0c18(result);
+        FUN_002f1554(first);
     }
-    FUN_002f0c18(0);
-    FUN_002f1554(temp_v0);
-  }
-  temp_v2 = FUN_002f151c();
-  if (temp_v2 != 0) {
-    FUN_0034aae4();
-    FUN_001681cc(0x92);
-  }
-  return temp_v2 != 0;
+    result = FUN_002f151c();
+    if (result != 0) {
+        FUN_0034aae4();
+        sysPlaySe(0x92);
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

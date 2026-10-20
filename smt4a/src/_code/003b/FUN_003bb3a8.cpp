@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_002159f8(unsigned int, unsigned int);
-int FUN_00236038(int);
+int scrGetArg(int);
 
-extern int DAT_00588124; /* 0x588124 */
+extern int g_npcRoom; /* 0x588124 */
 
 extern int FUN_001801b8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002159f8. */
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: scrGetArg. */
 
 
 unsigned int FUN_003bb3a8(void)
@@ -26,9 +26,9 @@ unsigned int FUN_003bb3a8(void)
   unsigned short *puVar6;
   unsigned int temp_v4;
   
-  temp_v1 = FUN_00236038(0);
-  puVar3 = (unsigned short *)FUN_00236038(1);
-  temp_v2 = FUN_00236038(2);
+  temp_v1 = scrGetArg(0);
+  puVar3 = (unsigned short *)scrGetArg(1);
+  temp_v2 = scrGetArg(2);
   temp_v4 = 0;
   temp_v3 = FUN_001801b8(temp_v1,(unsigned int)puVar3 & 0xff);
   if (temp_v3 == 0) {
@@ -36,16 +36,16 @@ unsigned int FUN_003bb3a8(void)
     temp_v4 = 5;
   }
   FUN_002159f8(temp_v1,(unsigned int)puVar3 & 0xff);
-  if (DAT_00588124 != 0) {
+  if (g_npcRoom != 0) {
     temp_v3 = 0;
     do {
-      puVar6 = *(unsigned short **)(DAT_00588124 + temp_v3 * 4 + 0x28);
+      puVar6 = *(unsigned short **)(g_npcRoom + temp_v3 * 4 + 0x28);
       temp_v0 = *puVar6;
       if (temp_v0 == temp_v1) {
         puVar6 = (unsigned short *)(unsigned int)(unsigned char)puVar6[0x29];
       }
       if (temp_v0 == temp_v1 && puVar6 == puVar3) {
-        temp_v3 = DAT_00588124 + temp_v3 * 0xc;
+        temp_v3 = g_npcRoom + temp_v3 * 0xc;
         *(unsigned int *)(temp_v3 + 0x110) = temp_v4;
         *(unsigned int *)(temp_v3 + 0x108) = 0;
         *(unsigned int *)(temp_v3 + 0x10c) = temp_v2;

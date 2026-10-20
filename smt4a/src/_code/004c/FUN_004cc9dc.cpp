@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_00187180(int, int);
+int dataTableGet(int, int);
 
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00187180. */
-extern int FUN_00192798(void);
+/* Supplied declaration required: dataTableGet. */
+extern int dataTableGetEntries(void);
 extern int FUN_00203b1c(void);
 
 
@@ -32,13 +32,13 @@ int FUN_004cc9dc(int param_1,int param_2,unsigned int *param_3)
     if (temp_v3 >= 11) {
       temp_v3 = 10;
     }
-    FUN_00187180(9,2);
-    temp_v0 = FUN_00192798();
+    dataTableGet(9,2);
+    temp_v0 = dataTableGetEntries();
     temp_v4 = (unsigned int)*(unsigned short *)((temp_v0 + temp_v3 * 2) - 2);
   }
   for (temp_v3 = param_2; temp_v0 = FUN_00203b1c(), temp_v3 < temp_v0; temp_v3 = temp_v3 + 1) {
-    FUN_00187180(9,1);
-    temp_v0 = FUN_00192798();
+    dataTableGet(9,1);
+    temp_v0 = dataTableGetEntries();
     temp_v1 = FUN_00203b1c();
     if (temp_v3 >= temp_v1) {
       temp_v2 = 0;

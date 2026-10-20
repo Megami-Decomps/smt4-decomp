@@ -8,7 +8,7 @@ int FUN_00273f5c(void);
 int FUN_00275e18(void);
 int FUN_0027d908(void);
 int FUN_0027d948(void);
-int FUN_002d1b48(void);
+int lmapMainUpdateObj(void);
 
 /* Supplied declaration required: FUN_00273c54. */
 /* Supplied declaration required: FUN_00273d34. */
@@ -16,9 +16,9 @@ int FUN_002d1b48(void);
 /* Supplied declaration required: FUN_00275e18. */
 /* Supplied declaration required: FUN_0027d908. */
 /* Supplied declaration required: FUN_0027d948. */
-extern int FUN_002b879c(void);
-/* Supplied declaration required: FUN_002d1b48. */
-extern int MapMode_IsBusy(void);
+extern int lmapMainIsRunning(void);
+/* Supplied declaration required: lmapMainUpdateObj. */
+extern int mapMainIsBusy(void);
 
 
 unsigned int scrComm_Map_SyncViewFromCamera(void)
@@ -29,7 +29,7 @@ unsigned int scrComm_Map_SyncViewFromCamera(void)
   
   FUN_00273f5c();
   FUN_0027d908();
-  temp_v0 = MapMode_IsBusy();
+  temp_v0 = mapMainIsBusy();
   if (temp_v0 != 0) {
     FUN_0027d948();
     FUN_0027d908();
@@ -38,11 +38,11 @@ unsigned int scrComm_Map_SyncViewFromCamera(void)
     FUN_00275e18();
   }
   else {
-    temp_v0 = FUN_002b879c();
+    temp_v0 = lmapMainIsRunning();
     if (temp_v0 != 0) {
       FUN_0027d948();
       FUN_0027d908();
-      FUN_002d1b48();
+      lmapMainUpdateObj();
     }
   }
   return 1;

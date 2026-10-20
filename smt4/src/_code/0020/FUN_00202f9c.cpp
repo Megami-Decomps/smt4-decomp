@@ -1,92 +1,93 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00202f9c` (_code @ 0x202f9c, 0x118 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the global base pointer is held in r6 (retail: r4); otherwise identical. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002108c0(int, unsigned int);
+typedef struct SceneState {
+    /* 0x000 */ void *context;
+    /* 0x004 */ u8 released;
+    /* 0x005 */ u8 unk005[0x23B];
+    /* 0x240 */ void *buffer240;
+    /* 0x244 */ void *buffer244;
+    /* 0x248 */ void *buffer248;
+    /* 0x24C */ u8 unk24C[0x104];
+    /* 0x350 */ void *buffer350;
+    /* 0x354 */ u8 unk354[0xC];
+    /* 0x360 */ u32 handle360;
+    /* 0x364 */ u8 unk364[0x16];
+    /* 0x37A */ u8 hasExtraTarget;
+    /* 0x37B */ u8 unk37B[1];
+    /* 0x37C */ void *buffer37C;
+    /* 0x380 */ void *buffer380;
+    /* 0x384 */ void *buffer384;
+} SceneState;
+
+typedef struct SceneGlobals {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ SceneState *state;
+} SceneGlobals;
+
+extern SceneGlobals DAT_0044de28;
+
+int FUN_002108c0(int arg0, u32 arg1);
 int FUN_0028971c(void);
 int FUN_00292c0c(void);
-int FUN_00297050(int);
-int FUN_0029a128(int);
-int FUN_0029ee6c(int, int);
-int FUN_002a46d8(int);
-int FUN_002a7218(void);
-int FUN_002a775c(unsigned int);
+int FUN_00297050(int arg);
+int FUN_0029a128(int arg);
+int FUN_0029ee6c(int arg0, int color);
+int FUN_002a46d8(int arg);
+int scrScriptProcessDestroy(void);
+int asdMdlManagerDestroy(u32 handle);
 int FUN_002b8cc8(void);
-int FUN_002c415c(...);
-int FUN_002c43b4(unsigned int, int);
+int asdMemFree(void *block);
+int jobStop(void *context, int arg);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned char DAT_0044de28; /* 0x44de28 */
-
-/* Supplied declaration required: FUN_002108c0. */
-/* Supplied declaration required: FUN_0028971c. */
-/* Supplied declaration required: FUN_00292c0c. */
-/* Supplied declaration required: FUN_00297050. */
-/* Supplied declaration required: FUN_0029a128. */
-/* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002a46d8. */
-/* Supplied declaration required: FUN_002a7218. */
-/* Supplied declaration required: FUN_002a775c. */
-/* Supplied declaration required: FUN_002b8cc8. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
-
-
+/* Tears down the scene state: releases its buffers and handles, then frees the context. */
 void FUN_00202f9c(void)
-
 {
-/* irregular: 12 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  unsigned int temp_v0;
-  
-  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_0044de28 + 0x4));
-  FUN_002a775c((*(unsigned int * *)((unsigned char *)&DAT_0044de28 + 0x4))[0xd8]);
-  puVar1[0xd8] = 0;
-  if (*(char *)((int)puVar1 + 0x37a) != '\0') {
-    FUN_002b8cc8();
-    FUN_002b8cc8();
-  }
-  FUN_0029ee6c(0,0x323232ff);
-  puVar2 = (*(unsigned int * *)((unsigned char *)&DAT_0044de28 + 0x4));
-  temp_v0 = 0;
-  do {
-    FUN_002108c0(0x36,temp_v0);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 10);
-  FUN_002a46d8(0x3d);
-  FUN_0028971c();
-  if (puVar2[0x92] != 0) {
-    FUN_002a7218();
-    puVar2[0x92] = 0;
-  }
-  if (puVar2[0x90] != 0) {
-    FUN_002c415c();
-    puVar2[0x90] = 0;
-  }
-  if (puVar2[0x91] != 0) {
-    FUN_002c415c();
-    puVar2[0x91] = 0;
-  }
-  FUN_0029a128(0);
-  FUN_00292c0c();
-  FUN_00297050(1);
-  *(unsigned char *)(puVar1 + 1) = 1;
-  if (puVar1[0xd4] != 0) {
-    FUN_002c415c();
-    puVar1[0xd4] = 0;
-  }
-  FUN_002c415c(puVar1[0xdf]);
-  FUN_002c415c(puVar1[0xe0]);
-  FUN_002c415c(puVar1[0xe1]);
-  FUN_002c43b4(*puVar1,0);
-  return;
+    SceneState *state = DAT_0044de28.state;
+    SceneState *state2;
+    u32 i;
+
+    asdMdlManagerDestroy(state->handle360);
+    state->handle360 = 0;
+    if (state->hasExtraTarget != 0) {
+        FUN_002b8cc8();
+        FUN_002b8cc8();
+    }
+    FUN_0029ee6c(0, 0x323232ff);
+    state2 = DAT_0044de28.state;
+    i = 0;
+    do {
+        FUN_002108c0(0x36, i);
+        i++;
+    } while (i < 10);
+    FUN_002a46d8(0x3d);
+    FUN_0028971c();
+    if (state2->buffer248 != NULL) {
+        scrScriptProcessDestroy();
+        state2->buffer248 = NULL;
+    }
+    if (state2->buffer240 != NULL) {
+        asdMemFree(state2->buffer240);
+        state2->buffer240 = NULL;
+    }
+    if (state2->buffer244 != NULL) {
+        asdMemFree(state2->buffer244);
+        state2->buffer244 = NULL;
+    }
+    FUN_0029a128(0);
+    FUN_00292c0c();
+    FUN_00297050(1);
+    state->released = 1;
+    if (state->buffer350 != NULL) {
+        asdMemFree(state->buffer350);
+        state->buffer350 = NULL;
+    }
+    asdMemFree(state->buffer37C);
+    asdMemFree(state->buffer380);
+    asdMemFree(state->buffer384);
+    jobStop(state->context, 0);
 }
 
 } /* extern "C" */

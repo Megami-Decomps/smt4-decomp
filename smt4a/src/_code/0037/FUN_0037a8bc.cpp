@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern int DAT_005b3fe4; /* 0x5b3fe4 */
 extern int DAT_005b3fe8; /* 0x5b3fe8 */
 
@@ -33,11 +33,11 @@ void FUN_0037a8bc(int param_1)
   DAT_005b3fe8 = DAT_005b3fe8 + 2;
   if (param_1 != 0) {
     *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4) =
-         *(unsigned int *)(DAT_0059dbb4 + *(int *)(DAT_0059dbb4 + 0x1338) * 4 + 0x1340);
+         *(unsigned int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1338) * 4 + 0x1340);
     *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4 + 4) = 0xf0066;
     DAT_005b3fe8 = DAT_005b3fe8 + 2;
     *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4) =
-         *(unsigned int *)(DAT_0059dbb4 + *(int *)(DAT_0059dbb4 + 0x1358) * 4 + 0x1360);
+         *(unsigned int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1358) * 4 + 0x1360);
     *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4 + 4) = 0xf0067;
     DAT_005b3fe8 = DAT_005b3fe8 + 2;
   }

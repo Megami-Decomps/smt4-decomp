@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_002a1ca0(...);
 int FUN_002e3328(unsigned int *);
 
@@ -14,10 +14,10 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned char DAT_00557bf0; /* 0x557bf0 */
+extern unsigned char g_filter4PolyBaseVtable; /* 0x557bf0 */
 extern unsigned char DAT_00557e14; /* 0x557e14 */
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002a1ca0. */
 /* Supplied declaration required: FUN_002e3328. */
 
@@ -42,16 +42,16 @@ void FUN_0041db20(unsigned int *param_1)
       unaff_r4 = unaff_r4 + 1;
       *(unsigned int *)(param_1[6] + temp_v0) = 0;
     } while (unaff_r4 < 2);
-    FUN_0019a5a0(param_1[6]);
+    asdMemFree(param_1[6]);
     param_1[6] = 0;
   }
-  *param_1 = (unsigned int)&DAT_00557bf0;
+  *param_1 = (unsigned int)&g_filter4PolyBaseVtable;
   if (param_1[2] != 0) {
     FUN_002a1ca0();
     param_1[2] = 0;
   }
   if (param_1[1] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1[1] = 0;
   }
   if ((int *)param_1[5] != (int *)0x0) {

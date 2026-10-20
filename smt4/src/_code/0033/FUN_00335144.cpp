@@ -1,44 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00335144` (_code @ 0x335144, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00152bec(void);
+/* Object whose byte at 0x1f6 is cleared when an entry is deactivated. */
+typedef struct {
+    u8 unk00[0x1f6];
+    u8 active;          /* 0x1f6 */
+} Holder;
 
-/* Supplied declaration required: FUN_00152bec. */
+typedef struct {
+    u8 unk00[0xc];
+    s32 value;          /* 0x0c: negative = nothing to cancel */
+    u8 unk10[0x1c];
+    Holder *holder;     /* 0x2c */
+} Target;
 
+typedef struct {
+    u32 flags;          /* 0x00: bit 1 = deactivated */
+    u8 unk04[4];
+    Target *target;     /* 0x08 */
+} Entry;
 
-void FUN_00335144(int param_1)
+typedef struct {
+    u8 unk00[8];
+    Entry *entry;       /* 0x08 */
+    u8 unk0c[0x44];
+} Slot;
 
+typedef struct {
+    u8 unk00[8];
+    Entry *entry;       /* 0x08 */
+    u8 unk0c[4];
+    Slot slots[3];      /* 0x10 */
+} Owner;
+
+int FUN_00152bec(Entry *entry);
+
+/* Marks the owner's entry and each slot's entry deactivated, clearing the holder flag and cancelling when a target value is set. */
+void FUN_00335144(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  puVar1 = *(unsigned int **)(param_1 + 8);
-  if (puVar1 != (unsigned int *)0x0) {
-    *puVar1 = *puVar1 | 2;
-    *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-    if (-1 < *(int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0xc)) {
-      FUN_00152bec();
+    Entry *entry;
+    int i;
+
+    entry = owner->entry;
+    if (entry != NULL) {
+        entry->flags |= 2;
+        entry->target->holder->active = 0;
+        if (owner->entry->target->value >= 0) {
+            FUN_00152bec(owner->entry);
+        }
     }
-  }
-  temp_v1 = 0;
-  do {
-    temp_v0 = param_1 + temp_v1 * 0x50;
-    puVar1 = *(unsigned int **)(temp_v0 + 0x18);
-    if (puVar1 != (unsigned int *)0x0) {
-      *puVar1 = *puVar1 | 2;
-      *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-      if (-1 < *(int *)(*(int *)(*(int *)(temp_v0 + 0x18) + 8) + 0xc)) {
-        FUN_00152bec();
-      }
+    for (i = 0; i < 3; i++) {
+        Slot *slot = &owner->slots[i];
+
+        entry = slot->entry;
+        if (entry != NULL) {
+            entry->flags |= 2;
+            entry->target->holder->active = 0;
+            if (slot->entry->target->value >= 0) {
+                FUN_00152bec(slot->entry);
+            }
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 3);
-  return;
 }
 
 } /* extern "C" */

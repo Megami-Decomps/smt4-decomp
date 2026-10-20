@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_003ee0c0(void);
 int FUN_004fb43c(...);
 int FUN_004fc094(int, unsigned int, int, int, int, int, unsigned int, unsigned int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
@@ -38,12 +38,12 @@ extern unsigned int DAT_005710e8; /* 0x5710e8 */
 extern unsigned int DAT_005710ec; /* 0x5710ec */
 extern unsigned int DAT_00571108; /* 0x571108 */
 extern unsigned int DAT_0057110c; /* 0x57110c */
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-/* Supplied declaration required: FUN_0014aa78. */
-extern int FUN_00236038(unsigned int);
+/* Supplied declaration required: btlGetMainState. */
+extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_003ee0c0. */
-extern unsigned int FUN_004ee568(unsigned int);
+extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fc094. */
 
@@ -61,12 +61,12 @@ unsigned int FUN_0038dfa4(void)
   int temp_v6;
   unsigned int *puVar8;
   
-  temp_v1 = FUN_00236038(0);
-  temp_v2 = FUN_00236038(1);
-  temp_v3 = FUN_004ee568(DAT_0057113c);
+  temp_v1 = scrGetArg(0);
+  temp_v2 = scrGetArg(1);
+  temp_v3 = btlUnitGet(g_btlScriptUnit);
   temp_v6 = 0;
   do {
-    temp_v4 = FUN_0014aa78();
+    temp_v4 = btlGetMainState();
     puVar8 = (unsigned int *)(*(int *)(temp_v4 + 0x1ffc) + temp_v6 * 0x408);
     if ((((DAT_005710e8 & *puVar8) != 0 || (DAT_005710ec & puVar8[1]) != 0) &&
         ((puVar8[1] & DAT_0057110c) == 0 && (DAT_00571108 & *puVar8) == 0)) &&
@@ -88,9 +88,9 @@ unsigned int FUN_0038dfa4(void)
       if ((int)puVar8[0x96] <= temp_v4) {
         temp_v4 = puVar8[0x96] - 1;
       }
-      FUN_0014aa78();
+      btlGetMainState();
       FUN_003ee0c0();
-      temp_v5 = FUN_0014aa78();
+      temp_v5 = btlGetMainState();
       temp_v0 = temp_v6 << 3;
       FUN_004fc094(0,temp_v3,0,*(int *)(temp_v5 + 0x1ed4) + (short)puVar8[2] * 0x1d0,0,temp_v4,0xffffffff,
                    0xffffffff,puVar8[0x96],puVar8[0x97],0,0,0,0,1,0,temp_v0,temp_v0,temp_v0,temp_v0,1,0,1,1,

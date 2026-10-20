@@ -1,20 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e9538` (_code @ 0x2e9538, 0x12 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Assignment: copies the 0x1c-byte payload (after the 4-byte header) from another object and returns self. */
+#include "common.h"
 
 extern "C" {
 
-int rt_memcpy_w(int, int, int);
+typedef struct {
+    u32 header;       /* 0x00 */
+    u8 payload[0x1c]; /* 0x04 */
+} PayloadBlock;
 
-/* Supplied declaration required: rt_memcpy_w. */
+void rt_memcpy_w(void *dst, const void *src, u32 size);
 
-
-int FUN_002e9538(int param_1,int param_2)
-
+PayloadBlock *FUN_002e9538(PayloadBlock *self, const PayloadBlock *other)
 {
-/* irregular: 1 native warning(s); review required */
-  rt_memcpy_w(param_1 + 4,param_2 + 4,0x1c);
-  return param_1;
+    rt_memcpy_w(self->payload, other->payload, sizeof(self->payload));
+    return self;
 }
 
 } /* extern "C" */

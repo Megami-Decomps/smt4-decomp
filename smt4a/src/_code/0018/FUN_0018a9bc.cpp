@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a0e8(unsigned int, unsigned int *);
+int mtx44Copy(unsigned int, unsigned int *);
 
 extern unsigned int DAT_005c4c30; /* 0x5c4c30 */
 extern unsigned int DAT_0064c084; /* 0x64c084 */
@@ -24,7 +24,7 @@ extern unsigned int DAT_0064c0b8; /* 0x64c0b8 */
 extern unsigned int DAT_0064c0bc; /* 0x64c0bc */
 extern unsigned int DAT_0064c0c0; /* 0x64c0c0 */
 
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: mtx44Copy. */
 extern int FUN_002eba64(unsigned int *);
 
 
@@ -52,7 +52,7 @@ unsigned int FUN_0018a9bc(unsigned int param_1)
     DAT_0064c0bc = 0;
     DAT_0064c0c0 = 0x3f800000;
   }
-  FUN_0019a0e8(param_1,&DAT_0064c084);
+  mtx44Copy(param_1,&DAT_0064c084);
   return param_1;
 }
 

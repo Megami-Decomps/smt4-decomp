@@ -1,61 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00168d38` (_code @ 0x168d38, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Polls the quest center with `param`: once its task has ended and it has finished, tears it
+ * down (returns 0); while it runs, returns 1 if its active entry accepts `param` and is ready. */
+#include "common.h"
+#include "quest_center/qcMain.h"
 
 extern "C" {
 
 int FUN_001919a4(void);
-int FUN_0019a5a0(unsigned int *);
-int FUN_002e3328(unsigned int);
+int asdMemFree(void *ptr);               /* heap free */
+int jobFind(u32 task);                /* nonzero while the task exists */
+int FUN_002e3328(u32 entry);
+extern int FUN_00191848(u32 entry);
+extern int FUN_0019196c(u32 entry, u32 param);
 
-extern unsigned char DAT_00588c2c; /* 0x588c2c */
+extern QcGlobals g_qcMain;
 
-extern int FUN_00184e20(unsigned int);
-extern int FUN_00191848(unsigned int);
-extern int FUN_0019196c(int, unsigned int);
-/* Supplied declaration required: FUN_001919a4. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_002e3328. */
-
-
-unsigned int FUN_00168d38(unsigned int param_1)
-
+u32 FUN_00168d38(u32 param)
 {
-/* irregular: 3 native warning(s); review required */
-  int *piVar1;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  puVar2 = (*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4));
-  if ((*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4)) != (unsigned int *)0x0) {
-    temp_v0 = FUN_00184e20(*(*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4)));
-    puVar3 = (*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4));
-    if ((temp_v0 == 0) && (*(char *)(puVar2 + 6) != '\0')) {
-      if ((*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4)) != (unsigned int *)0x0) {
-        piVar1 = (int *)((*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4)) + 7);
-        *(unsigned char *)((*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4)) + 6) = 1;
-        if (*piVar1 != 0) {
-          FUN_001919a4();
-          FUN_002e3328(puVar3[7]);
-          puVar3[7] = 0;
+    QcWork *work = g_qcMain.work;
+    QcWork *current;
+    u32 accepted;
+
+    if (work != NULL) {
+        int exists = jobFind(work->task);
+
+        current = g_qcMain.work;
+        if (exists == 0 && work->done != 0) {
+            if (g_qcMain.work != NULL) {
+                g_qcMain.work->done = 1;
+                if (current->entry != 0) {
+                    FUN_001919a4();
+                    FUN_002e3328(current->entry);
+                    current->entry = 0;
+                }
+                asdMemFree(g_qcMain.work);
+                g_qcMain.work = NULL;
+            }
+        } else if (g_qcMain.work != NULL) {
+            accepted = 0;
+            if (g_qcMain.work->entry != 0 && FUN_0019196c(g_qcMain.work->entry, param) != 0 &&
+                FUN_00191848(current->entry) != 0) {
+                accepted = 1;
+            }
+            return accepted;
         }
-        FUN_0019a5a0((*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4)));
-        (*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4)) = (unsigned int *)0x0;
-      }
     }
-    else if ((*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4)) != (unsigned int *)0x0) {
-      temp_v1 = 0;
-      if ((((*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4))[7] != 0) &&
-          (temp_v0 = FUN_0019196c((*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4))[7],param_1), temp_v1 = 0, temp_v0 != 0)) &&
-         (temp_v0 = FUN_00191848(puVar3[7]), temp_v1 = 0, temp_v0 != 0)) {
-        temp_v1 = 1;
-      }
-      return temp_v1;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

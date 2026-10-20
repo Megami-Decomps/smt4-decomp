@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002eeccc(int, int *, unsigned char [20], int);
+int inet_ntop(int, int *, unsigned char [20], int);
 int FUN_002eed44(unsigned char [20], unsigned int, unsigned int);
 
-/* Supplied declaration required: FUN_002eeccc. */
+/* Supplied declaration required: inet_ntop. */
 /* Supplied declaration required: FUN_002eed44. */
 
 
@@ -26,7 +26,7 @@ unsigned char FUN_002eeb98(unsigned int param_1,unsigned int param_2,unsigned in
     uStack_18 = param_2;
     uStack_14 = param_3;
     uStack_10 = param_4;
-    FUN_002eeccc(2,&uStack_18,temp_v0,0x14);
+    inet_ntop(2,&uStack_18,temp_v0,0x14);
     FUN_002eed44(temp_v0,param_3,param_4);
   }
   return param_4 >= 0x11;

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00138f14(int *, int *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_001392fc(void);
 int FUN_001393e4(void);
-int FUN_002c4938(void);
+int memClear(void);
 int nn_fs_ipc_FileSystem_OpenFileDirectly(int *, int *, int, int, int, unsigned int *****, int, int, unsigned int, int, int, int);
 
 typedef int romwright_code(...);
@@ -32,7 +32,7 @@ extern unsigned int DAT_0044e660; /* 0x44e660 */
 /* Supplied declaration required: FUN_00138f14. */
 /* Supplied declaration required: FUN_001392fc. */
 /* Supplied declaration required: FUN_001393e4. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: nn_fs_ipc_FileSystem_OpenFileDirectly. */
 
 
@@ -55,7 +55,7 @@ FUN_001271a0(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int
   piVar1 = param_1;
   FUN_001392fc();
   if (piVar1 != (int *)0x0) {
-    FUN_002c4938();
+    memClear();
     FUN_001393e4();
     if (piVar1 != (int *)0x0) {
       temp_v4 = (unsigned int *****)&temp_v4;

@@ -11,20 +11,20 @@ int FUN_0028d6d0(...);
 int FUN_00296f4c(...);
 int FUN_00297060(...);
 int FUN_002b8838(...);
-int FUN_002c5300(...);
-int FUN_002c5788(...);
+int asdMemoryAlloc(...);
+int asdProcessCreateSimple(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int FUN_001a96fc(...); /* 0x1a96fc */
+extern int onesRoomTeardown(...); /* 0x1a96fc */
 extern unsigned char LAB_001d3b3c; /* 0x1d3b3c */
 extern unsigned char LAB_001d3b54; /* 0x1d3b54 */
 extern unsigned char LAB_001d3b74; /* 0x1d3b74 */
 extern unsigned char LAB_001fc560; /* 0x1fc560 */
-extern unsigned int *DAT_0044d1c8; /* 0x44d1c8 */
+extern unsigned int *g_onesRoom; /* 0x44d1c8 */
 
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: FUN_00289880. */
@@ -33,8 +33,8 @@ extern unsigned int *DAT_0044d1c8; /* 0x44d1c8 */
 /* Supplied declaration required: FUN_00296f4c. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002c5300. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdMemoryAlloc. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 extern unsigned int FUN_002c5c04(unsigned char *);
 
 
@@ -48,8 +48,8 @@ void FUN_001d39f8(int param_1)
   unsigned char *puVar4;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_002c5300(0x100,0x100,0,0x14,1);
-  DAT_0044d1c8 = puVar1;
+  asdMemoryAlloc(0x100,0x100,0,0x14,1);
+  g_onesRoom = puVar1;
   *puVar1 = 0;
   puVar1[1] = 0;
   puVar1[2] = 0;
@@ -77,8 +77,8 @@ void FUN_001d39f8(int param_1)
     FUN_00282bfc(1,0xff);
   }
   puVar4 = &LAB_001d3b74;
-  FUN_002c5788(&LAB_001d3b74,2,0,0,FUN_001a96fc,&LAB_001fc560,DAT_0044d1c8);
-  *DAT_0044d1c8 = (unsigned int)puVar4;
+  asdProcessCreateSimple(&LAB_001d3b74,2,0,0,onesRoomTeardown,&LAB_001fc560,g_onesRoom);
+  *g_onesRoom = (unsigned int)puVar4;
   return;
 }
 

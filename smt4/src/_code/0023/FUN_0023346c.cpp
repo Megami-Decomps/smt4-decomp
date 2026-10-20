@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bd954(int, int, int, int, int);
 int FUN_002bee58(int, int);
 int FUN_002c312c(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
@@ -24,7 +24,7 @@ extern unsigned char DAT_004073c8; /* 0x4073c8 */
 extern unsigned char DAT_0040741c; /* 0x40741c */
 extern unsigned char DAT_00407434; /* 0x407434 */
 
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002c312c. */
@@ -50,7 +50,7 @@ void FUN_0023346c(int param_1)
     FUN_002bd954(param_1 + temp_v4 * 0x8c + 0x20,0x1c,1,param_1,0x15);
     switch(temp_v4) {
     case 0:
-      FUN_002bd8e8(param_1 + 0x20,0);
+      timerStart(param_1 + 0x20,0);
       temp_v4 = temp_v4 + 1;
       if (temp_v4 >= 8) {
         return;
@@ -94,7 +94,7 @@ void FUN_0023346c(int param_1)
       }
       continue;
     }
-    FUN_002bd8e8(temp_v2,temp_v3,0);
+    timerStart(temp_v2,temp_v3,0);
     temp_v4 = temp_v4 + 1;
     if (temp_v4 >= 8) {
       return;

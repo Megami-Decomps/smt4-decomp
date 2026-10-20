@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_5_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00224ce0. */
 extern int FUN_002bed98(int);
@@ -55,7 +55,7 @@ void FUN_00218238(int param_1,unsigned int param_2,int param_3,int param_4,int p
     FUN_002bf288(2,0x15,0xde,temp_v4,temp_v1,0x35);
     if (*(int *)(param_1 + 0x3048) == 1) {
       FUN_002bf538();
-      temp_v0 = DAT_0044ea00;
+      temp_v0 = g_titleScene;
       temp_v2 = FUN_002c5da8(6,1,0);
       piVar5 = (int *)(temp_v0 + 0x12ac);
       temp_v3 = piVar5[*piVar5 + 2];
@@ -65,7 +65,7 @@ void FUN_00218238(int param_1,unsigned int param_2,int param_3,int param_4,int p
         *(unsigned char *)(temp_v0 + 0x12c4) = 0;
       }
       FUN_002bf288(2,0x15,0xde,temp_v4,temp_v1,0x36);
-      temp_v0 = DAT_0044ea00;
+      temp_v0 = g_titleScene;
       temp_v2 = FUN_002c5da8(6,7,0);
       piVar5 = (int *)(temp_v0 + 0x12ac);
       temp_v3 = piVar5[*piVar5 + 2];

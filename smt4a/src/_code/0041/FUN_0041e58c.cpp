@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00187180(int);
+int dataTableGet(int);
 int FUN_0041c44c(void);
 
-/* Supplied declaration required: FUN_00187180. */
-extern int FUN_00192798(void);
+/* Supplied declaration required: dataTableGet. */
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0041c44c. */
 
 
@@ -42,8 +42,8 @@ void FUN_0041e58c(int param_1)
   *(unsigned int *)(param_1 + 0x628) = 0;
   *(unsigned int *)(param_1 + 0x62c) = 0;
   temp_v0 = *(char *)(param_1 + 5);
-  FUN_00187180(0x3d);
-  temp_v2 = FUN_00192798();
+  dataTableGet(0x3d);
+  temp_v2 = dataTableGetEntries();
   puVar5 = (unsigned int *)(temp_v2 + temp_v0 * 0x54);
   temp_v2 = 0;
   do {

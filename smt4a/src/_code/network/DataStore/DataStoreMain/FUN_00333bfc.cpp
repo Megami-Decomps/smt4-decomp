@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_00178b04(...);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -23,11 +23,11 @@ extern unsigned char LAB_002e50d0; /* 0x2e50d0 */
 extern unsigned char LAB_00333d6c; /* 0x333d6c */
 extern unsigned char LAB_00333d80; /* 0x333d80 */
 extern unsigned char LAB_00333d98; /* 0x333d98 */
-extern unsigned int *DAT_00588120; /* 0x588120 */
+extern unsigned int *g_dataStore; /* 0x588120 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_00178b04. */
 extern int FUN_002e9ff4(unsigned int *);
 
@@ -42,11 +42,11 @@ unsigned int FUN_00333bfc(void)
   int temp_v1;
   unsigned char *puVar5;
   
-  if (DAT_00588120 == (unsigned int *)0x0) {
+  if (g_dataStore == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x10,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0x10,1);
     puVar2 = (unsigned int *)0x54;
-    DAT_00588120 = puVar1;
+    g_dataStore = puVar1;
     FUN_00178b04(0x54,"c:\\SMT4F\\SMT4F\\sdds4\\program\\network\\DataStore\\DataStoreMain.cpp",
                  0x47f);
     temp_v1 = 0;
@@ -73,16 +73,16 @@ unsigned int FUN_00333bfc(void)
       *(unsigned int *)(temp_v0 + 0x30) = 0;
       *(unsigned int *)(temp_v0 + 0x34) = 0;
     }
-    puVar1 = DAT_00588120;
-    DAT_00588120[3] = temp_v1;
+    puVar1 = g_dataStore;
+    g_dataStore[3] = temp_v1;
     puVar5 = &LAB_00333d6c;
-    FUN_0014e38c(&LAB_00333d6c,2,0,0,FUN_00227ee8,&LAB_002e50d0,puVar1);
-    puVar1 = DAT_00588120;
-    *DAT_00588120 = (unsigned int)puVar5;
-    FUN_0015155c(&LAB_00333d80,3,0,0,FUN_002a38f4,0,puVar1,puVar5);
-    FUN_0015155c(&LAB_00333d98,5,0,0,FUN_002a38c0,0,DAT_00588120,*DAT_00588120);
+    asdProcessCreateSimple(&LAB_00333d6c,2,0,0,FUN_00227ee8,&LAB_002e50d0,puVar1);
+    puVar1 = g_dataStore;
+    *g_dataStore = (unsigned int)puVar5;
+    taskCreateDraw(&LAB_00333d80,3,0,0,FUN_002a38f4,0,puVar1,puVar5);
+    taskCreateDraw(&LAB_00333d98,5,0,0,FUN_002a38c0,0,g_dataStore,*g_dataStore);
   }
-  return *DAT_00588120;
+  return *g_dataStore;
 }
 
 } /* extern "C" */

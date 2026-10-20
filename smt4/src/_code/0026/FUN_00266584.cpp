@@ -27,7 +27,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char DAT_004043b8; /* 0x4043b8 */
-extern int DAT_00447060; /* 0x447060 */
+extern int g_lmapMainState; /* 0x447060 */
 
 /* Supplied declaration required: FUN_00263cb8. */
 /* Supplied declaration required: FUN_0027b65c. */
@@ -47,7 +47,7 @@ void FUN_00266584(unsigned int param_1)
   FUN_00297a00();
   FUN_0027b65c(param_1,0);
   FUN_00284838();
-  temp_v0 = DAT_00447060;
+  temp_v0 = g_lmapMainState;
   temp_v1 = FUN_002c09d0(0x261);
   if ((temp_v1 != 0) && (*(int *)(temp_v0 + 0x40) == 0x65)) {
     temp_v2 = 0;

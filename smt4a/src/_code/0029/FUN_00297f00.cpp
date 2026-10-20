@@ -6,7 +6,7 @@ extern "C" {
 
 int VectorSignedToFloat(unsigned int, int);
 
-extern int DAT_00587f0c; /* 0x587f0c */
+extern int g_mapTrap; /* 0x587f0c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 
@@ -21,11 +21,11 @@ void FUN_00297f00(unsigned int param_1,unsigned int param_2)
   unsigned int temp_v2;
   float temp_v3;
   
-  temp_v0 = DAT_00587f0c;
+  temp_v0 = g_mapTrap;
   temp_v3 = (float)VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v1 = VectorSignedToFloat(param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v2 = VectorSignedToFloat(param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned char *)(DAT_00587f0c + 0x40) = 1;
+  *(unsigned char *)(g_mapTrap + 0x40) = 1;
   *(int *)(temp_v0 + 0x44) = (int)(temp_v3 * 0.5f);
   *(unsigned int *)(temp_v0 + 0x48) = 0;
   *(unsigned int *)(temp_v0 + 0x50) = temp_v1;

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002c0c74(...);
-int FUN_002c0cec(int, int);
+int dataTableGetCount(...);
+int dataTableGet(int, int);
 
-/* Supplied declaration required: FUN_002c0c74. */
-extern int FUN_002c0cc4(void);
-/* Supplied declaration required: FUN_002c0cec. */
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(void);
+/* Supplied declaration required: dataTableGet. */
 
 
 int FUN_00246944(int param_1)
@@ -23,13 +23,13 @@ int FUN_00246944(int param_1)
   unsigned int temp_v4;
   
   temp_v4 = 0;
-  FUN_002c0cec(0x2e,2);
-  temp_v0 = FUN_002c0c74();
+  dataTableGet(0x2e,2);
+  temp_v0 = dataTableGetCount();
   if (0 < temp_v0) {
     do {
-      temp_v1 = FUN_002c0cec(0x2e,2);
-      temp_v2 = FUN_002c0cc4();
-      temp_v3 = FUN_002c0c74(temp_v1);
+      temp_v1 = dataTableGet(0x2e,2);
+      temp_v2 = dataTableGetEntries();
+      temp_v3 = dataTableGetCount(temp_v1);
       temp_v0 = 0;
       if (temp_v4 < temp_v3) {
         temp_v0 = temp_v2 + temp_v4 * 0x2c;
@@ -41,8 +41,8 @@ int FUN_00246944(int param_1)
         return temp_v0;
       }
       temp_v4 = temp_v4 + 1;
-      FUN_002c0cec(0x2e,2);
-      temp_v0 = FUN_002c0c74();
+      dataTableGet(0x2e,2);
+      temp_v0 = dataTableGetCount();
     } while ((int)temp_v4 < temp_v0);
   }
   return 0;

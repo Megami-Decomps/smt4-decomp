@@ -8,7 +8,7 @@ int FUN_0017760c(...);
 int FUN_00184310(void);
 int FUN_001a9110(unsigned char *, unsigned int);
 int FUN_0023e51c(int, unsigned int [2], unsigned int, unsigned int);
-int FUN_002e3d04(void);
+int asdOperatorNewD(void);
 int FUN_002e6490(...);
 int FUN_002e6dd4(void);
 int FUN_0031f0f4(int, int);
@@ -30,13 +30,13 @@ int SBORROW4(int, int);
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_0017760c. */
 /* Supplied declaration required: FUN_00184310. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_001a9110. */
 extern unsigned int FUN_00203b1c(void);
 /* Supplied declaration required: FUN_0023e51c. */
-/* Supplied declaration required: FUN_002e3d04. */
+/* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: FUN_002e6490. */
 /* Supplied declaration required: FUN_002e6dd4. */
 extern int FUN_0031cfd0(unsigned short);
@@ -122,9 +122,9 @@ void FUN_004cd4b8(int param_1,int param_2)
   uStack_5c = FUN_0017760c(param_1);
   temp_v2 = *(short *)(param_1 + 0x10);
   temp_v11 = uStack_60 & 0xff;
-  temp_v7 = FUN_00187180(9,4);
-  temp_v6 = FUN_00192798();
-  temp_v8 = FUN_00192748(temp_v7);
+  temp_v7 = dataTableGet(9,4);
+  temp_v6 = dataTableGetEntries();
+  temp_v8 = dataTableGetCount(temp_v7);
   temp_v12 = 0;
   if (temp_v8 != 0) {
     pbVar11 = (unsigned char *)(temp_v6 + 4);
@@ -139,7 +139,7 @@ void FUN_004cd4b8(int param_1,int param_2)
   }
   temp_v16[0] = 0;
   temp_v6 = (temp_v12 + 1) * 8;
-  FUN_002e3d04();
+  asdOperatorNewD();
   FUN_002e6dd4();
   FUN_0023e51c(temp_v6,temp_v16,uStack_60 & 0xff,(unsigned int)*(unsigned short *)(param_1 + 100) + param_2);
   temp_v11 = 0;

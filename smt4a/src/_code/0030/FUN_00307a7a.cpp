@@ -1,23 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00307a7a` (_code @ 0x307a7a, 0x1e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the loop is inverted (test duplicated before the body); retail enters it with an unconditional branch to the bottom test. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00307aba(int, int);
+typedef struct Elem {
+    u32 w0;
+    u32 w1;
+    u32 w2;
+    u32 w3;
+    u32 w4;
+    u32 w5;
+    u32 w6;
+    u32 w7;
+    u32 w8;
+    u32 w9;
+} Elem;                         /* 40 bytes */
 
-/* Supplied declaration required: FUN_00307aba. */
+int FUN_00307aba(Elem *dst, Elem *src);
 
-
-int FUN_00307a7a(int param_1,int param_2,int param_3)
-
+/* std::uninitialized_copy for 40-byte elements: constructs a copy of each of [first, last) at `dest`; returns the end of the copy. */
+Elem *FUN_00307a7a(Elem *first, Elem *last, Elem *dest)
 {
-/* irregular: 1 native warning(s); review required */
-  for (; param_1 != param_2; param_1 = param_1 + 0x28) {
-    FUN_00307aba(param_3,param_1);
-    param_3 = param_3 + 0x28;
-  }
-  return param_3;
+    for (; first != last; ++first, ++dest) {
+        FUN_00307aba(dest, first);
+    }
+    return dest;
 }
 
 } /* extern "C" */

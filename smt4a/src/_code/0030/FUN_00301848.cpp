@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(unsigned char *, int, int, int, unsigned char *, int, int);
-int FUN_0015155c(...);
-int FUN_0016007c(void);
+int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
+int taskCreateDraw(...);
+int asdOperatorNew(void);
 int FUN_0022677c(int, int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -26,9 +26,9 @@ extern unsigned char LAB_00330954; /* 0x330954 */
 extern unsigned char LAB_00330978; /* 0x330978 */
 extern int DAT_0057f658; /* 0x57f658 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_0022677c. */
 extern int FUN_004cee68(void);
 
@@ -42,7 +42,7 @@ void FUN_00301848(unsigned int *param_1)
   unsigned char *puVar3;
   
   temp_v0 = 0x5a0;
-  FUN_0016007c();
+  asdOperatorNew();
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = FUN_004cee68();
@@ -63,12 +63,12 @@ void FUN_00301848(unsigned int *param_1)
     FUN_0022677c(1,0xff);
   }
   puVar3 = &LAB_0030199c;
-  FUN_0014e38c(&LAB_0030199c,4,0,0,&LAB_002e5900,0,0);
+  asdProcessCreateSimple(&LAB_0030199c,4,0,0,&LAB_002e5900,0,0);
   *(unsigned char **)(temp_v1 + 4) = puVar3;
-  FUN_0015155c(&LAB_003019b0,0x75,0,0,&LAB_00330934,0,0,puVar3);
-  FUN_0015155c(&LAB_003019b0,0x77,0,0,&LAB_00330954,0,0,*(unsigned int *)(temp_v1 + 4));
-  FUN_0015155c(&LAB_003019b0,0xd3,0,0,&LAB_00330978,0,0,*(unsigned int *)(temp_v1 + 4));
-  FUN_0015155c(&LAB_003019c8,0xeb,0,0,&LAB_0033092c,0,0,*(unsigned int *)(temp_v1 + 4));
+  taskCreateDraw(&LAB_003019b0,0x75,0,0,&LAB_00330934,0,0,puVar3);
+  taskCreateDraw(&LAB_003019b0,0x77,0,0,&LAB_00330954,0,0,*(unsigned int *)(temp_v1 + 4));
+  taskCreateDraw(&LAB_003019b0,0xd3,0,0,&LAB_00330978,0,0,*(unsigned int *)(temp_v1 + 4));
+  taskCreateDraw(&LAB_003019c8,0xeb,0,0,&LAB_0033092c,0,0,*(unsigned int *)(temp_v1 + 4));
   return;
 }
 

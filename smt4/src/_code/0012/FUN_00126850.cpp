@@ -10,7 +10,7 @@ int VectorUnsignedToFloat(unsigned int, int);
 int nw_snd_SoundStartable_StartSound(unsigned char *, int, int, int);
 int nw_snd_internal_BasicSound_SetVolume(...);
 
-extern unsigned char DAT_004e1f68; /* 0x4e1f68 */
+extern unsigned char g_asdSound; /* 0x4e1f68 */
 extern unsigned char DAT_004e20ec; /* 0x4e20ec */
 extern int DAT_004e3180; /* 0x4e3180 */
 
@@ -34,7 +34,7 @@ int FUN_00126850(int param_1,unsigned int param_2,unsigned int param_3)
   unsigned int in_fpscr;
   
   temp_v2 = DAT_004e3180;
-  puVar4 = &DAT_004e1f68;
+  puVar4 = &g_asdSound;
   if (DAT_004e3180 == 0) {
     return -1;
   }
@@ -53,16 +53,16 @@ int FUN_00126850(int param_1,unsigned int param_2,unsigned int param_3)
     }
     temp_v1 = 3;
   }
-  puVar5 = &DAT_004e1f68;
-  temp_v0 = FUN_002bf684(&DAT_004e1f68);
+  puVar5 = &g_asdSound;
+  temp_v0 = FUN_002bf684(&g_asdSound);
   if (temp_v0 == 0) {
     return temp_v1;
   }
-  FUN_00141fd0(&DAT_004e1f68,param_1);
+  FUN_00141fd0(&g_asdSound,param_1);
   if (puVar5 == (unsigned char *)0x0) {
     return temp_v1;
   }
-  FUN_00141fd0(&DAT_004e1f68,param_1);
+  FUN_00141fd0(&g_asdSound,param_1);
   if (*(char *)(temp_v2 + 0x3b) != '\0') {
     if (puVar4 == (unsigned char *)0x3) {
       temp_v0 = param_1;

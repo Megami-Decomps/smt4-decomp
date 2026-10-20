@@ -1,48 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002190e4` (_code @ 0x2190e4, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002503d4(...);
-int FUN_00257568(unsigned int *, unsigned int *);
+#define KEY_NONE 99
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+int FUN_002503d4(u32 id);
+int FUN_00257568(u32 *a, u32 *b);
+int FUN_002ae1d8(u32 id);
 
-/* Supplied declaration required: FUN_002503d4. */
-/* Supplied declaration required: FUN_00257568. */
-extern int FUN_002ae1d8(unsigned int);
-
-
-void FUN_002190e4(unsigned int *param_1,unsigned int *param_2)
-
+/* Runs FUN_00257568 on two entries when their category keys (99 when FUN_002ae1d8 flags the id, else FUN_002503d4(id)) are equal. */
+void FUN_002190e4(u32 *a, u32 *b)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_002ae1d8(*param_1);
-  if (temp_v0 != 0) {
-    temp_v0 = 99;
-  }
-  else {
-    temp_v0 = FUN_002503d4(*param_1);
-  }
-  temp_v1 = FUN_002ae1d8(*param_2);
-  if (temp_v1 != 0) {
-    temp_v1 = 99;
-  }
-  else {
-    temp_v1 = FUN_002503d4();
-  }
-  if (temp_v0 != temp_v1) {
-    return;
-  }
-  FUN_00257568(param_1,param_2);
-  return;
+    int keyA = (FUN_002ae1d8(*a) != 0) ? KEY_NONE : FUN_002503d4(*a);
+    int keyB = (FUN_002ae1d8(*b) != 0) ? KEY_NONE : FUN_002503d4(*b);
+
+    int diff = keyA - keyB;
+
+    if (diff != 0) {
+        return;
+    }
+    FUN_00257568(a, b);
 }
 
 } /* extern "C" */

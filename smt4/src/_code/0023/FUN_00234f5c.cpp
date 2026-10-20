@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0028c640(unsigned int, int, unsigned int *);
-int FUN_0029bb3c(unsigned char [128], int);
+int asdMdlManagerCreateLoaded(unsigned char [128], int);
 int FUN_002a0428(void);
 int FUN_002a04f0(int);
 int FUN_002a09b4(unsigned char [128], int);
 int FUN_002be624(...);
-int FUN_002c4938(unsigned int *, int);
+int memClear(unsigned int *, int);
 int FUN_00341340(unsigned int *, unsigned char [128]);
 
 extern unsigned char LAB_00235200; /* 0x235200 */
@@ -22,13 +22,13 @@ extern unsigned char LAB_0023523c; /* 0x23523c */
 
 extern int FUN_00100c4c(int, unsigned char *);
 /* Supplied declaration required: FUN_0028c640. */
-/* Supplied declaration required: FUN_0029bb3c. */
+/* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a04f0. */
 /* Supplied declaration required: FUN_002a09b4. */
 extern unsigned int *FUN_002a86a4(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_00341340. */
 
 
@@ -63,14 +63,14 @@ void FUN_00234f5c(unsigned int *param_1,unsigned int param_2,int param_3)
   param_1[1] = 0;
   param_1[3] = 0;
   *(unsigned char *)((int)param_1 + 0x15) = 0;
-  FUN_002c4938(param_1 + 0x15b,0x80);
+  memClear(param_1 + 0x15b,0x80);
   if (param_3 != 0) {
     FUN_002be624(temp_v9,&LAB_00235200,param_3);
   }
   else {
     FUN_002be624(temp_v9,&LAB_00235200,param_2);
   }
-  FUN_0029bb3c(temp_v9,7);
+  asdMdlManagerCreateLoaded(temp_v9,7);
   param_1[7] = (unsigned int)puVar1;
   FUN_002a0428();
   FUN_002be624(temp_v9,&LAB_00235208,param_2);
@@ -152,11 +152,11 @@ void FUN_00234f5c(unsigned int *param_1,unsigned int param_2,int param_3)
   if (0 < (int)param_1[3]) {
     *(unsigned char *)((int)param_1 + 0x15) = 1;
     FUN_002be624(temp_v9,&LAB_0023522c);
-    FUN_0029bb3c(temp_v9,7);
+    asdMdlManagerCreateLoaded(temp_v9,7);
     param_1[9] = (unsigned int)puVar5;
     FUN_002a0428();
     FUN_002be624(temp_v9,&LAB_0023523c);
-    FUN_0029bb3c(temp_v9,7);
+    asdMdlManagerCreateLoaded(temp_v9,7);
     param_1[8] = (unsigned int)puVar6;
     FUN_002a0428();
     param_1[0x596] = param_1[0x59c];

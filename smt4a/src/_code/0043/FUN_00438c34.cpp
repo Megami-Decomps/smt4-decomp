@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001883b0(unsigned int *, unsigned char [132], int);
-int FUN_001884b0(unsigned int);
+int vcallSlot12IfValid(unsigned int);
 int FUN_00195fc8(void);
 int FUN_002e9768(unsigned char [132], int, unsigned char *, int);
 int FUN_00438e28(unsigned int *, unsigned int *, char [4], unsigned int, unsigned int);
@@ -27,7 +27,7 @@ typedef struct {
 extern unsigned char LAB_00438e04; /* 0x438e04 */
 
 /* Supplied declaration required: FUN_001883b0. */
-/* Supplied declaration required: FUN_001884b0. */
+/* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: FUN_00195fc8. */
 /* Supplied declaration required: FUN_002e9768. */
 /* Supplied declaration required: FUN_00438e28. */
@@ -102,7 +102,7 @@ joined_r0x00438d38:
         if ((temp_v4 & 1) != 0) {
           FUN_00195fc8();
         }
-        FUN_001884b0(temp_v4 & 0xfffffffe);
+        vcallSlot12IfValid(temp_v4 & 0xfffffffe);
         return puVar1;
       }
       *(unsigned char *)((int)param_1 + 0x1b) = temp_v10[temp_v1];
@@ -113,7 +113,7 @@ joined_r0x00438d38:
         if ((temp_v4 & 1) != 0) {
           FUN_00195fc8();
         }
-        FUN_001884b0(temp_v4 & 0xfffffffe);
+        vcallSlot12IfValid(temp_v4 & 0xfffffffe);
         temp_v4 = 0;
       }
       temp_v1 = temp_v1 + 1;

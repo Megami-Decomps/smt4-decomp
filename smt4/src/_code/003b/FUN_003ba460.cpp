@@ -1,37 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ba460` (_code @ 0x3ba460, 0x60 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail's function symbol excludes the string literal armcc emits right after the function; the code itself is identical and fdiff only reports the trailing literal-pool row(s) */
+/* Builds the file path for the current entry and starts loading it, then switches to state 4 (only if the resource is ready). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00296f4c(unsigned int, unsigned int);
-int FUN_002be624(unsigned char [32], unsigned char *, int);
+typedef struct Loader {
+    /* 0x000 */ u8 unk000[0x28];
+    /* 0x028 */ u32 state;
+    /* 0x02C */ u32 stateStep;
+    /* 0x030 */ u8 unk030[0x6C];
+    /* 0x09C */ u8 resource[0xCC0];
+    /* 0xD5C */ s32 pathBase;
+    /* 0xD60 */ u8 unkD60[0x0C];
+    /* 0xD6C */ u32 listener;
+    /* 0xD70 */ u8 unkD70[4];
+    /* 0xD74 */ u32 target;
+} Loader;
 
-extern unsigned char LAB_003ba4c0; /* 0x3ba4c0 */
+extern s32 FUN_0022b14c(void *resource);
+extern void FUN_002be624(u8 *buffer, const char *format, s32 arg);
+extern u32 FUN_00290d74(u32 listener, u8 *buffer);
+extern void FUN_00296f4c(u32 target, u32 handle);
 
-extern int FUN_0022b14c(int);
-extern unsigned int FUN_00290d74(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00296f4c. */
-/* Supplied declaration required: FUN_002be624. */
-
-
-void FUN_003ba460(int param_1)
-
+void FUN_003ba460(Loader *loader)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2 [32];
-  
-  temp_v0 = FUN_0022b14c(param_1 + 0x9c);
-  if (temp_v0 != 0) {
-    FUN_002be624(temp_v2,&LAB_003ba4c0,*(int *)(param_1 + 0xd5c) + 0x20);
-    temp_v1 = FUN_00290d74(*(unsigned int *)(param_1 + 0xd6c),temp_v2);
-    FUN_00296f4c(*(unsigned int *)(param_1 + 0xd74),temp_v1);
-    *(unsigned int *)(param_1 + 0x28) = 4;
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-  }
-  return;
+    u8 path[32];
+
+    if (FUN_0022b14c(loader->resource) != 0) {
+        FUN_002be624(path, "%s", loader->pathBase + 0x20);
+        FUN_00296f4c(loader->target, FUN_00290d74(loader->listener, path));
+        loader->state = 4;
+        loader->stateStep = 0;
+    }
 }
 
-} /* extern "C" */
+}

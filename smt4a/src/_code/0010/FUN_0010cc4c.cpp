@@ -1,43 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010cc4c` (_code @ 0x10cc4c, 0x2a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the Thumb literal-pool alignment pad differs in fdiff (retail lists it as code `movs r0, r0`, the build as data `.short 0x0000`); the bytes are the same. */
+/* Copy constructor: sets the vtable, copies the scalar fields, then copy-constructs the embedded sub-object at 0x1c and returns this. */
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0010cc4c_arg1 fn_0010cc4c_arg1;
-struct fn_0010cc4c_arg1 {
-    unsigned char pad_0x0[0x4];
-    byte field_0x4; /* +0x4 */
-    unsigned char pad_0x5[0x3];
-    undefined4 field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x4];
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    ushort field_0x18; /* +0x18 */
-    ushort field_0x1a; /* +0x1a */
-};
+typedef struct {
+    u32 lo; /* +0 */
+    u32 hi; /* +4 */
+} Pair;
 
-extern unsigned char DAT_00559018; /* 0x559018 */
+typedef struct {
+    u8 bytes[4]; /* 0x00 */
+} SubObject;
 
-extern int FUN_002f6b9c(unsigned int *, fn_0010cc4c_arg1 *);
+typedef struct {
+    const void *vtbl; /* 0x00 */
+    u8 flag;          /* 0x04 */
+    u8 unk05[3];      /* 0x05 */
+    u32 field08;      /* 0x08 */
+    u32 unk0c;        /* 0x0c */
+    Pair range;       /* 0x10 */
+    u16 field18;      /* 0x18 */
+    u16 field1a;      /* 0x1a */
+    SubObject sub;    /* 0x1c */
+} CopyObject;
 
+extern u8 DAT_00559018;
 
-int FUN_0010cc4c(unsigned int *param_1,fn_0010cc4c_arg1 *param_2)
+SubObject *FUN_002f6b9c(SubObject *self, const SubObject *other);
 
+CopyObject *FUN_0010cc4c(CopyObject *self, const CopyObject *other)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  *param_1 = (unsigned int)&DAT_00559018;
-  *(unsigned char *)(param_1 + 1) = param_2->field_0x4;
-  param_1[2] = param_2->field_0x8;
-  temp_v1 = param_2->field_0x10;
-  param_1[5] = param_2->field_0x14;
-  param_1[4] = temp_v1;
-  *(unsigned short *)(param_1 + 6) = param_2->field_0x18;
-  *(unsigned short *)((int)param_1 + 0x1a) = param_2->field_0x1a;
-  temp_v0 = FUN_002f6b9c(param_1 + 7,param_2 + 1);
-  return temp_v0 - 0x1c;
+    self->vtbl = &DAT_00559018;
+    self->flag = other->flag;
+    self->field08 = other->field08;
+    self->range = other->range;
+    self->field18 = other->field18;
+    self->field1a = other->field1a;
+    return (CopyObject *)((u8 *)FUN_002f6b9c(&self->sub, &other->sub) - 0x1c);
 }
 
 } /* extern "C" */

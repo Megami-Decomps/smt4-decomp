@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_001028b8(unsigned char [128], int, unsigned char *);
-int FUN_002e6354(unsigned char [128], int);
+int sysMemClear(unsigned char [128], int);
 
 extern unsigned char LAB_003efa98; /* 0x3efa98 */
 extern unsigned char LAB_003efab8; /* 0x3efab8 */
 
 /* Supplied declaration required: FUN_001028b8. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 unsigned char * FUN_003efa38(int param_1)
@@ -20,7 +20,7 @@ unsigned char * FUN_003efa38(int param_1)
 /* irregular: 2 native warning(s); review required */
   unsigned char temp_v0 [128];
   
-  FUN_002e6354(temp_v0,0x80);
+  sysMemClear(temp_v0,0x80);
   if (*(int *)(param_1 + 0xec) >= 0) {
     FUN_001028b8(temp_v0,0x80,&LAB_003efa98);
   }

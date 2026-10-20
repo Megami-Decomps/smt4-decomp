@@ -10,7 +10,7 @@ int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
 typedef int romwright_code(...);
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -19,7 +19,7 @@ extern int DAT_0059dbb4; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_0014e314. */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 extern unsigned int FUN_00168854(unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
@@ -42,8 +42,8 @@ unsigned int FUN_0035bf60(void)
   float temp_v7;
   unsigned int temp_v8;
   
-  temp_v1 = FUN_00164a9c();
-  temp_v0 = DAT_0059dbb4;
+  temp_v1 = jobGetWork();
+  temp_v0 = g_renderCtx;
   temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(*(float *)(temp_v1 + 8) == 0.0f) << 0x1e);
   if (!romwright_subpiece_4_1_0(temp_v6 >> 0x1e,0)) {
     temp_v3 = *(unsigned int *)(temp_v1 + 4);
@@ -62,14 +62,14 @@ unsigned int FUN_0035bf60(void)
       (**(romwright_code **)(temp_v0 + 0x1274))();
       *(unsigned char *)(temp_v0 + 0x1270) = 0;
     }
-    FUN_0016c4b8(DAT_0059dbb4,0);
-    temp_v2 = FUN_00168854(*(unsigned int *)(DAT_0059dbb4 + 0x52c));
+    FUN_0016c4b8(g_renderCtx,0);
+    temp_v2 = FUN_00168854(*(unsigned int *)(g_renderCtx + 0x52c));
     VectorUnsignedToFloat(temp_v2,(unsigned char)(temp_v6 >> 0x16) & 3);
-    temp_v2 = FUN_00184df8(*(unsigned int *)(DAT_0059dbb4 + 0x52c));
+    temp_v2 = FUN_00184df8(*(unsigned int *)(g_renderCtx + 0x52c));
     VectorUnsignedToFloat(temp_v2,(unsigned char)(temp_v6 >> 0x16) & 3);
     FUN_0014e314((temp_v3 & 0xffffff00) | temp_v8);
-    temp_v0 = DAT_0059dbb4;
-    piVar7 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v0 = g_renderCtx;
+    piVar7 = (int *)(g_renderCtx + 0x1258);
     temp_v1 = *piVar7;
     temp_v4 = piVar7[temp_v1 + 2];
     *piVar7 = temp_v1 - 1;

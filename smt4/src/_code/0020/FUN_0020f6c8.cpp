@@ -51,13 +51,13 @@ extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
 extern int DAT_004474f4; /* 0x4474f4 */
-extern int DAT_00447a78; /* 0x447a78 */
+extern int g_mapIf; /* 0x447a78 */
 extern int DAT_00447a7c; /* 0x447a7c */
 extern int DAT_00447a80; /* 0x447a80 */
 extern float DAT_00447a84; /* 0x447a84 */
-extern int DAT_00447e88; /* 0x447e88 */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_lmapScene; /* 0x447e88 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
+extern int g_gameState; /* 0x49f91c */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -78,7 +78,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: FUN_002c1b64. */
 extern int FUN_002c2950(void);
-extern int FUN_002f35b8(void);
+extern int lmapMainIsAtLeastHalf(void);
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
@@ -141,7 +141,7 @@ void FUN_0020f6c8(void)
   float fStack_48;
   unsigned int temp_v45;
   
-  temp_v1 = DAT_00447a78;
+  temp_v1 = g_mapIf;
   temp_v2 = FUN_002c2950();
   DAT_00447a80 = DAT_00447a80 + 1;
   temp_v4 = 0xffffffff;
@@ -168,14 +168,14 @@ void FUN_0020f6c8(void)
   temp_v18 = 0.017453292f;
   temp_v16 = 100.0f;
   temp_v17 = 0.5f;
-  if (DAT_0049f91c >= 100) {
-    temp_v2 = FUN_002f35b8();
+  if (g_gameState >= 100) {
+    temp_v2 = lmapMainIsAtLeastHalf();
     if (temp_v2 == 0) {
       return;
     }
-    temp_v13 = *(float *)(DAT_00447e88 + 0x1c);
-    temp_v15 = *(float *)(DAT_00447e88 + 0x20);
-    temp_v14 = *(float *)(DAT_00447e88 + 0x24);
+    temp_v13 = *(float *)(g_lmapScene + 0x1c);
+    temp_v15 = *(float *)(g_lmapScene + 0x20);
+    temp_v14 = *(float *)(g_lmapScene + 0x24);
     temp_v17 = *(float *)(DAT_004474f4 + 0x18) * temp_v18;
     FUN_0028250c();
     temp_v13 = temp_v13 + temp_v17 * temp_v16;
@@ -190,9 +190,9 @@ void FUN_0020f6c8(void)
     temp_v18 = temp_v15 + temp_v18 * 25.0f + *(float *)(temp_v1 + 0xccd0);
   }
   else {
-    temp_v13 = *(float *)(DAT_00447e88 + 0x1c);
-    temp_v15 = *(float *)(DAT_00447e88 + 0x20);
-    temp_v14 = *(float *)(DAT_00447e88 + 0x24);
+    temp_v13 = *(float *)(g_lmapScene + 0x1c);
+    temp_v15 = *(float *)(g_lmapScene + 0x20);
+    temp_v14 = *(float *)(g_lmapScene + 0x24);
     if (*(char *)(temp_v2 + 0x1d) != '\x02') {
       temp_v10 = 90.0f;
       temp_v17 = (*(float *)(DAT_004474f4 + 0x18) + 90.0f) * 0.017453292f;
@@ -231,7 +231,7 @@ void FUN_0020f6c8(void)
   temp_v17 = *(float *)(DAT_004474f4 + 0x4c) - temp_v13;
   FUN_00281e34();
   temp_v19 = 0;
-  if (DAT_0049f91c >= 100) {
+  if (g_gameState >= 100) {
     temp_v17 = temp_v17 * 57.32484f * 0.7111111f;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v17) << 0x1d);
     for (temp_v17 = romwright_fabs_4(temp_v17); (int)temp_v17 >= 0x47800000; temp_v17 = temp_v17 - 65536.0f) {
@@ -334,7 +334,7 @@ void FUN_0020f6c8(void)
   temp_v32 = temp_v32 + temp_v13;
   temp_v33 = temp_v33 + temp_v18;
   temp_v34 = temp_v34 + temp_v14;
-  FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x58));
+  FUN_002c1b64(g_titleScene,*(unsigned int *)(DAT_00447a7c + 0x58));
   FUN_002ba1e0(temp_v4);
   return;
 }

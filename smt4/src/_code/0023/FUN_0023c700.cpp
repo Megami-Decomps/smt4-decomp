@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bf694(unsigned char [148], int);
-int FUN_002c4938(unsigned char [148], int);
+int memClear(unsigned char [148], int);
 int FUN_003d98e0(int, int, unsigned int, unsigned int, int, unsigned int, unsigned char [148]);
 
 /* stack frame of param_6: 3 slot(s), 12 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_003d98e0. */
 
 
@@ -33,7 +33,7 @@ int FUN_0023c700(int param_1,unsigned int param_2,unsigned int param_3,int param
   if (param_4 >= 10) {
     return 0;
   }
-  FUN_002c4938(temp_v2,0x80);
+  memClear(temp_v2,0x80);
   switch(param_4) {
   case 0:
     if (param_5 >= 4) {

@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp4; /* 0x4: local_4 */
 } void_stack;
 
-extern int FUN_0027e928(void);
+extern int btlUnitGet(void);
 
 
 int FUN_003d1388(void)
@@ -23,7 +23,7 @@ int FUN_003d1388(void)
   int temp_v2;
   unsigned char temp_v3;
   
-  temp_v0 = FUN_0027e928();
+  temp_v0 = btlUnitGet();
   temp_v1 = 0;
   temp_v2 = 0x85;
   piVar3 = (int *)(temp_v0 + 0x5a8);

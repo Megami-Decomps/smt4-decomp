@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_00447e28; /* 0x447e28 */
+extern int g_mapMain; /* 0x447e28 */
 extern int DAT_0049f944; /* 0x49f944 */
 extern short DAT_0049f948; /* 0x49f948 */
 extern signed char DAT_0049f94a; /* 0x49f94a */
@@ -49,8 +49,8 @@ void FUN_0027d0ec(void)
   unsigned int temp_v3;
   unsigned char temp_v4;
   
-  temp_v2 = DAT_00447e28;
-  temp_v0 = FUN_00328168(*(unsigned int *)(DAT_00447e28 + 0x2c),*(unsigned int *)(DAT_00447e28 + 0x30));
+  temp_v2 = g_mapMain;
+  temp_v0 = FUN_00328168(*(unsigned int *)(g_mapMain + 0x2c),*(unsigned int *)(g_mapMain + 0x30));
   if (temp_v0 != 0) {
     DAT_0049f94a = *(char *)(temp_v0 + 2);
     DAT_0049f948 = (short)DAT_0049f94a;

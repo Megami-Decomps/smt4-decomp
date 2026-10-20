@@ -19,9 +19,9 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } void_stack;
 
-extern int DAT_0057f4c4; /* 0x57f4c4 */
+extern int g_bustupCutAnim; /* 0x57f4c4 */
 
-extern int FUN_00163e40(void);
+extern int jobIsValid(void);
 /* Supplied declaration required: FUN_00185830. */
 /* Supplied declaration required: FUN_00186ce4. */
 /* Supplied declaration required: FUN_00186e2c. */
@@ -48,28 +48,28 @@ unsigned int FUN_00169704(void)
   int iStack_34;
   float temp_v11;
   
-  temp_v0 = DAT_0057f4c4;
-  if (DAT_0057f4c4 == 0) {
+  temp_v0 = g_bustupCutAnim;
+  if (g_bustupCutAnim == 0) {
     return 1;
   }
-  temp_v1 = *(int *)(DAT_0057f4c4 + 0x5f0);
+  temp_v1 = *(int *)(g_bustupCutAnim + 0x5f0);
   if (temp_v1 != 5) {
     if (temp_v1 == 2 || temp_v1 == 3) {
       return 1;
     }
   }
   else {
-    FUN_00186e2c(DAT_0057f4c4 + 0x598,*(unsigned int *)(DAT_0057f4c4 + 0x5ec));
+    FUN_00186e2c(g_bustupCutAnim + 0x598,*(unsigned int *)(g_bustupCutAnim + 0x5ec));
     temp_v1 = 0;
 LAB_0016975c:
     do {
       temp_v6 = temp_v0 + temp_v1 * 4;
       if (*(int *)(temp_v6 + 0x634) != 0) {
-        temp_v2 = FUN_00163e40();
-        temp_v4 = DAT_0057f4c4;
+        temp_v2 = jobIsValid();
+        temp_v4 = g_bustupCutAnim;
         if (temp_v2 != 0) {
-          if (DAT_0057f4c4 != 0) {
-            if ((*(int *)(DAT_0057f4c4 + 0x5e8) != 0) && (temp_v2 = FUN_001ab8c0(), temp_v2 != 0)) {
+          if (g_bustupCutAnim != 0) {
+            if ((*(int *)(g_bustupCutAnim + 0x5e8) != 0) && (temp_v2 = FUN_001ab8c0(), temp_v2 != 0)) {
               temp_v2 = *(int *)(*(int *)(temp_v4 + 0x5e8) + 8);
               FUN_001ad7cc(temp_v2,*(unsigned int *)(temp_v1 * 4 + 0x57f538),&temp_v8);
               if (temp_v1 == 0) {

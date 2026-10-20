@@ -9,10 +9,10 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_3_stack;
 
-extern unsigned int DAT_00465014; /* 0x465014 */
+extern unsigned int g_asdFileMutex; /* 0x465014 */
 extern unsigned int DAT_00465020; /* 0x465020 */
 extern unsigned char DAT_00465024; /* 0x465024 */
-extern unsigned int DAT_00465028; /* 0x465028 */
+extern unsigned int g_asdFileEvent; /* 0x465028 */
 extern unsigned int DAT_0046502c; /* 0x46502c */
 extern unsigned int DAT_00465038; /* 0x465038 */
 extern unsigned int DAT_0046503c; /* 0x46503c */
@@ -27,8 +27,8 @@ void FUN_003ebba0(unsigned int param_1,unsigned int param_2,int param_3)
   DAT_0046503c = 0;
   DAT_00465020 = 0;
   DAT_00465024 = 1;
-  DAT_00465014 = 0;
-  DAT_00465028 = 0;
+  g_asdFileMutex = 0;
+  g_asdFileEvent = 0;
   DAT_0046502c = 0;
   return;
 }

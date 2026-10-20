@@ -15,7 +15,7 @@ struct fn_001225f0_arg0 {
     undefined4 field_0x10; /* +0x10 */
 };
 
-extern unsigned char *FUN_002fd0a0(unsigned char *, unsigned int);
+extern unsigned char *byteArrayEnsureAt(unsigned char *, unsigned int);
 extern int FUN_0030fba6(fn_001225f0_arg0 *, unsigned int);
 
 
@@ -29,7 +29,7 @@ void FUN_001225f0(fn_001225f0_arg0 *param_1,unsigned int param_2)
   temp_v0 = FUN_0030fba6(param_1,1);
   if (temp_v0 != 0) {
     temp_v1 = param_1->field_0x10;
-    pbVar2 = (unsigned char *)FUN_002fd0a0(param_1->field_0x8,*(unsigned int *)&param_1->field_0xc);
+    pbVar2 = (unsigned char *)byteArrayEnsureAt(param_1->field_0x8,*(unsigned int *)&param_1->field_0xc);
     *(unsigned char *)param_2 = ((1 << (temp_v1 & 0xff)) & 0xffU & ~(unsigned int)*pbVar2) == 0;
     if (param_1->field_0x10 == 0) {
       param_1->field_0x10 = 8;

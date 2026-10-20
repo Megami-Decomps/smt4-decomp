@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0028dcb0(...);
+int scrSetResult(...);
 
 extern int DAT_0044dc20; /* 0x44dc20 */
 
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_00296cc8(void);
+/* Supplied declaration required: scrSetResult. */
+extern int scrGetArg(void);
 extern int FUN_002a8740(int);
 
 
@@ -20,7 +20,7 @@ unsigned int FUN_003245bc(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_00296cc8();
+  temp_v0 = scrGetArg();
   if (DAT_0044dc20 != 0) {
     if (temp_v0 != 0) {
       temp_v1 = *(unsigned int *)(DAT_0044dc20 + 0xd03c);
@@ -30,10 +30,10 @@ unsigned int FUN_003245bc(void)
                                          0x3654));
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + *(int *)(DAT_0044dc20 + 0xd038) * 2 + 0x34);
     }
-    FUN_0028dcb0(temp_v1);
+    scrSetResult(temp_v1);
   }
   else {
-    FUN_0028dcb0(0);
+    scrSetResult(0);
   }
   return 1;
 }

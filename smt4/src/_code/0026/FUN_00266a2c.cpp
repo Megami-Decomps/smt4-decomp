@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_00447060; /* 0x447060 */
+extern int g_lmapMainState; /* 0x447060 */
 extern unsigned int DAT_0049f944; /* 0x49f944 */
 extern signed char DAT_0049fa39; /* 0x49fa39 */
 extern signed char DAT_0049fa61; /* 0x49fa61 */
@@ -31,20 +31,20 @@ void FUN_00266a2c(void)
   int temp_v0;
   
   if (((DAT_0049fa61 == '\0') && (DAT_0049fa39 != '\0')) &&
-     (*(char *)(DAT_00447060 + 0x999) == '\0')) {
-    if (*(int *)(DAT_00447060 + 0x40) == 0x66) {
+     (*(char *)(g_lmapMainState + 0x999) == '\0')) {
+    if (*(int *)(g_lmapMainState + 0x40) == 0x66) {
       DAT_0049f944 = 0x1000055;
     }
-    else if (*(int *)(DAT_00447060 + 0x40) == 0x67) {
+    else if (*(int *)(g_lmapMainState + 0x40) == 0x67) {
       DAT_0049f944 = 0x1000056;
     }
-    else if (*(int *)(DAT_00447060 + 0x48) == 5) {
+    else if (*(int *)(g_lmapMainState + 0x48) == 5) {
       DAT_0049f944 = 0x1000054;
     }
     else {
       DAT_0049f944 = 0x1000053;
     }
-    if ((*(int *)(DAT_00447060 + 0x994) != 1 && *(int *)(DAT_00447060 + 0x994) != 2) &&
+    if ((*(int *)(g_lmapMainState + 0x994) != 1 && *(int *)(g_lmapMainState + 0x994) != 2) &&
        (temp_v0 = FUN_002903f0(), temp_v0 != 0)) {
       temp_v0 = FUN_00287894();
       if (temp_v0 == 1) {

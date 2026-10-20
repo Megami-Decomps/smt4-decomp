@@ -11,14 +11,14 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern int DAT_005712f0; /* 0x5712f0 */
 extern unsigned int DAT_00573a58; /* 0x573a58 */
 extern unsigned int DAT_00573a5c; /* 0x573a5c */
 
 /* Supplied declaration required: FUN_004102d8. */
 extern int FUN_004ec93c(unsigned int);
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 void FUN_003f2638(int param_1,int param_2,int param_3,int param_4)
@@ -29,8 +29,8 @@ void FUN_003f2638(int param_1,int param_2,int param_3,int param_4)
   unsigned int unaff_r4;
   unsigned int in_lr;
   
-  if (((((param_4 != 0) || (temp_v0 = FUN_004ee568(DAT_0057113c), temp_v0 == 0)) ||
-       (temp_v0 = FUN_004ec93c(DAT_0057113c), temp_v0 == 0)) ||
+  if (((((param_4 != 0) || (temp_v0 = btlUnitGet(g_btlScriptUnit), temp_v0 == 0)) ||
+       (temp_v0 = FUN_004ec93c(g_btlScriptUnit), temp_v0 == 0)) ||
       ((*(unsigned int *)(param_1 + 0x45a4) & DAT_00573a5c) != 0 ||
        (*(unsigned int *)(param_1 + 0x45a0) & DAT_00573a58) != 0)) && (param_2 != 0 && param_3 != 0)) {
     *(short *)(param_3 + 0x1cc) = (short)param_2;

@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_0016007c(int, int);
+int asdOperatorNew(int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_0022677c(...);
 int FUN_002804b0(...);
-int FUN_002e6354(void);
+int sysMemClear(void);
 int FUN_003fe86c(...);
 int FUN_00407360(...);
 int FUN_00407978(void);
@@ -41,12 +41,12 @@ extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_0015a21c(int);
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00178b04. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_00407360. */
 /* Supplied declaration required: FUN_00407978. */
@@ -190,10 +190,10 @@ LAB_0046a3b0:
     }
   }
   temp_v1 = 0x7a0;
-  FUN_0016007c(0x7a0,param_1);
+  asdOperatorNew(0x7a0,param_1);
   temp_v4 = 0;
   if (temp_v1 != 0) {
-    FUN_002e6354();
+    sysMemClear();
     temp_v4 = FUN_0015a21c(temp_v1 + 0x4f0);
     temp_v4 = temp_v4 - 0x4f0;
   }

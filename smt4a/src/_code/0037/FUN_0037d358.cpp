@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_003283ac(int);
+int scrSetResult(int);
 
 extern int FUN_0014bef4(int);
-extern int FUN_0019a7dc(void);
+extern int gameGetOptions(void);
 extern int FUN_001b34b8(void);
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_0037d358(void)
@@ -25,7 +25,7 @@ unsigned int FUN_0037d358(void)
   temp_v0 = FUN_001b34b8();
   if (temp_v0 == 1) {
     temp_v2 = 1;
-    temp_v0 = FUN_0019a7dc();
+    temp_v0 = gameGetOptions();
     if (*(short *)(temp_v0 + 0x132) != 0) {
       temp_v2 = 2;
     }
@@ -40,7 +40,7 @@ unsigned int FUN_0037d358(void)
     if (temp_v1 != 0) {
       if (temp_v2 == 0) {
         temp_v3 = temp_v1;
-        FUN_003283ac(temp_v3);
+        scrSetResult(temp_v3);
         return 1;
       }
       temp_v2 = temp_v2 - 1;
@@ -49,7 +49,7 @@ unsigned int FUN_0037d358(void)
     if (temp_v1 != 0) {
       if (temp_v2 == 0) {
         temp_v3 = temp_v1;
-        FUN_003283ac(temp_v3);
+        scrSetResult(temp_v3);
         return 1;
       }
       temp_v2 = temp_v2 - 1;
@@ -59,7 +59,7 @@ unsigned int FUN_0037d358(void)
       temp_v3 = temp_v1;
     }
   }
-  FUN_003283ac(temp_v3);
+  scrSetResult(temp_v3);
   return 1;
 }
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 int FUN_00474734(unsigned int *, int);
 int FUN_00476e58(unsigned int *, int, int);
 int FUN_00477d10(unsigned int *, int, int);
@@ -21,11 +21,11 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_1_stack;
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
 extern int FUN_001d10ac(unsigned int *);
 extern int FUN_002e19f8(void);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00474734. */
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: FUN_00477d10. */
@@ -62,7 +62,7 @@ void FUN_004772b0(unsigned int *param_1)
   unsigned int uStack_20;
   
   FUN_0047daf4(&temp_v2);
-  temp_v1 = DAT_00570260;
+  temp_v1 = g_aocMain;
   temp_v0 = param_1[2];
   if (temp_v0 != 4) {
     if ((int)temp_v0 < 4) {
@@ -198,8 +198,8 @@ void FUN_004772b0(unsigned int *param_1)
           (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
           param_1[0x82] = 0;
         }
-        temp_v1 = DAT_00570260;
-        *(unsigned int *)(DAT_00570260 + 0x694) = 0;
+        temp_v1 = g_aocMain;
+        *(unsigned int *)(g_aocMain + 0x694) = 0;
         *(unsigned int *)(temp_v1 + 0x698) = 0;
         *(unsigned int *)(temp_v1 + 0x69c) = 0;
         *(unsigned int *)(temp_v1 + 0x6a0) = 0;
@@ -215,7 +215,7 @@ void FUN_004772b0(unsigned int *param_1)
         *(unsigned int *)(temp_v1 + 0x6c8) = 0;
         *(unsigned int *)(temp_v1 + 0x6cc) = 0;
         *(unsigned int *)(temp_v1 + 0x6d0) = 0;
-        FUN_002e6354(temp_v1 + 0x6d4,0x80);
+        sysMemClear(temp_v1 + 0x6d4,0x80);
         return;
       }
       temp_v1 = FUN_001d10ac(&temp_v2);

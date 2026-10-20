@@ -1,32 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nngxGetVramEndAddr` (_code @ 0x2c3764, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Returns the last address of the VRAM bank starting at `bank` (0x20000 = VRAM-A, 0x30000 = VRAM-B), or 0 for anything else. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b3abc(...);
+extern void nngxCheckVramBank(u32 bank);
 
-/* Supplied declaration required: FUN_002b3abc. */
-
-
-unsigned int nngxGetVramEndAddr(int param_1)
-
+u32 nngxGetVramEndAddr(u32 bank)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  if (param_1 == 0x20000) {
-    FUN_002b3abc();
-    return 0x1f2fffff;
-  }
-  if (param_1 != 0x30000) {
-    temp_v0 = 0;
-  }
-  else {
-    FUN_002b3abc(0x30000);
-    temp_v0 = 0x1f5fffff;
-  }
-  return temp_v0;
+    switch (bank) {
+    case 0x20000:
+        nngxCheckVramBank(bank);
+        return 0x1F2FFFFF;
+    case 0x30000:
+        nngxCheckVramBank(bank);
+        return 0x1F5FFFFF;
+    }
+    return 0;
 }
 
-} /* extern "C" */
+}

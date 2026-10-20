@@ -18,7 +18,7 @@ extern int FUN_001801a4(void);
 extern int FUN_00187168(void);
 extern int FUN_001ab854(int);
 extern int FUN_001ab888(void);
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 extern int FUN_003e8430(unsigned int);
 extern int FUN_003e9b54(unsigned int, int);
 extern int FUN_004bd340(int, unsigned int);
@@ -69,7 +69,7 @@ void FUN_0023f328(int param_1,int param_2,int param_3)
     temp_v7 = param_1 + 0x4000;
     if (*(int *)(param_1 + 0x4bac) != 0) {
       if (*(int *)(param_1 + 0x4bac) == 1) {
-        temp_v4 = FUN_002919a4();
+        temp_v4 = btlMainGetUnk14();
         if (temp_v4 == 0) {
           *(unsigned char *)(temp_v7 + 0x1ed) = 1;
           return;

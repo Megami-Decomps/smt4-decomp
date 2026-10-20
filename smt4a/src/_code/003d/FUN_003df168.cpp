@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192748(...);
+int dataTableGetCount(...);
 int FUN_001abac8(...);
 int FUN_001ad9b4(...);
 int FUN_00203b1c(...);
@@ -21,13 +21,13 @@ struct fn_003df168_arg1 {
     void *field_0xfc; /* +0xfc */
 };
 
-extern int DAT_00570280; /* 0x570280 */
+extern int g_aocSystem; /* 0x570280 */
 
 extern int FUN_0014bef4(short);
 extern int FUN_001801a4(void);
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00192748. */
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_001abac8. */
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_00203b1c. */
@@ -65,10 +65,10 @@ void FUN_003df168(unsigned int *param_1,fn_003df168_arg1 *param_2)
       }
       else if (temp_v0 == 4) {
         temp_v0 = pfVar4->field_0xf2;
-        puVar5 = *(unsigned int **)(DAT_00570280 + 0x390);
+        puVar5 = *(unsigned int **)(g_aocSystem + 0x390);
         if (puVar5 != (unsigned int *)0x0) {
           temp_v7 = 0;
-          if (temp_v7 < *(unsigned int *)(DAT_00570280 + 0x38c)) {
+          if (temp_v7 < *(unsigned int *)(g_aocSystem + 0x38c)) {
             do {
               if (*puVar5 == (unsigned int)temp_v0) {
                 puVar5 = puVar5 + 1;
@@ -76,12 +76,12 @@ void FUN_003df168(unsigned int *param_1,fn_003df168_arg1 *param_2)
               }
               temp_v7 = temp_v7 + 1;
               puVar5 = puVar5 + 0x11;
-            } while (temp_v7 < *(unsigned int *)(DAT_00570280 + 0x38c));
+            } while (temp_v7 < *(unsigned int *)(g_aocSystem + 0x38c));
           }
         }
-        temp_v3 = FUN_00187180(0x1c,1);
-        temp_v6 = FUN_00192798();
-        FUN_00192748(temp_v3);
+        temp_v3 = dataTableGet(0x1c,1);
+        temp_v6 = dataTableGetEntries();
+        dataTableGetCount(temp_v3);
         puVar5 = (unsigned int *)(temp_v6 + (unsigned int)temp_v0 * 0x40);
 LAB_003df23c:
         temp_v8 = 0;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int *DAT_00587f0c; /* 0x587f0c */
+extern unsigned int *g_mapTrap; /* 0x587f0c */
 
 
 void FUN_00224404(void)
@@ -12,8 +12,8 @@ void FUN_00224404(void)
 {
   unsigned int *puVar1;
   
-  puVar1 = DAT_00587f0c;
-  *DAT_00587f0c = 0;
+  puVar1 = g_mapTrap;
+  *g_mapTrap = 0;
   puVar1[1] = 0;
   puVar1[2] = 0;
   *(unsigned char *)(puVar1 + 3) = 0;

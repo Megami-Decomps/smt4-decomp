@@ -2,24 +2,24 @@
 
 extern "C" {
 
-int FUN_00187180(int, int);
-int FUN_00192798(void);
+int dataTableGet(int, int);
+int dataTableGetEntries(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_00187180. */
-/* Supplied declaration required: FUN_00192798. */
+/* Supplied declaration required: dataTableGet. */
+/* Supplied declaration required: dataTableGetEntries. */
 
 
 void FUN_0037e21c(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_00187180(5,0);
-  FUN_00192798();
+  dataTableGet(5,0);
+  dataTableGetEntries();
   return;
 }
 

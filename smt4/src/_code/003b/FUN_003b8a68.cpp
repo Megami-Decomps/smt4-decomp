@@ -6,8 +6,8 @@ int FUN_002305e8(int);
 int FUN_0026374c(int);
 int FUN_0027e774(int, int);
 int FUN_0027e7b4(unsigned int, int);
-int FUN_002a7218(undefined4);
-int FUN_002c415c(undefined4);
+int scrScriptProcessDestroy(undefined4);
+int asdMemFree(undefined4);
 
 typedef struct fn_003b8a68_arg0 fn_003b8a68_arg0;
 struct fn_003b8a68_arg0 {
@@ -36,8 +36,8 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_0026374c. */
 /* Supplied declaration required: FUN_0027e774. */
 /* Supplied declaration required: FUN_0027e7b4. */
-/* Supplied declaration required: FUN_002a7218. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_003b8a68(fn_003b8a68_arg0 *param_1)
@@ -48,11 +48,11 @@ void FUN_003b8a68(fn_003b8a68_arg0 *param_1)
   
   temp_v0 = FUN_0019e0c0(param_1->field_0xda8);
   if (temp_v0 == 2) {
-    FUN_002a7218(param_1->field_0xda8);
+    scrScriptProcessDestroy(param_1->field_0xda8);
     param_1->field_0xda8 = 0;
-    FUN_002c415c(param_1->field_0xda0);
+    asdMemFree(param_1->field_0xda0);
     param_1->field_0xda0 = 0;
-    FUN_002c415c(param_1->field_0xda4);
+    asdMemFree(param_1->field_0xda4);
     param_1->field_0xda4 = 0;
     FUN_0027e774(0,0);
     FUN_0027e7b4(*(unsigned int *)&param_1->field_0xd80,

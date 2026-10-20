@@ -29,7 +29,7 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_1_stack;
 
-extern float DAT_00472520; /* 0x472520 */
+extern float g_polyDefaultColor; /* 0x472520 */
 extern float DAT_00472524; /* 0x472524 */
 extern float *DAT_00472528; /* 0x472528 */
 extern float DAT_0047252c; /* 0x47252c */
@@ -129,13 +129,13 @@ void FUN_00303b04(int param_1)
     temp_v16 = temp_v16 + (romwright_fabs_4(temp_v12) + temp_v14 * temp_v7 * 0.5f) * temp_v7;
     temp_v20 = 6.2831855f / temp_v20;
     temp_v7 = *(float *)(temp_v3 + 0x50) + temp_v16;
-    temp_v17 = DAT_00472520 * temp_v7;
+    temp_v17 = g_polyDefaultColor * temp_v7;
     DAT_004ea928 = *(float *)(temp_v3 + 0x54) + temp_v7;
     temp_v12 = *(float *)(temp_v3 + 0x58) + DAT_004ea928;
     temp_v18 = DAT_00472524 * temp_v7;
     temp_v19 = romwright_u2f((unsigned int)(DAT_00472528)) * temp_v7;
     temp_v7 = DAT_0047252c * temp_v7;
-    temp_v14 = DAT_00472520 * DAT_004ea928;
+    temp_v14 = g_polyDefaultColor * DAT_004ea928;
     temp_v15 = DAT_00472524 * DAT_004ea928;
     DAT_004ea924 = romwright_u2f((unsigned int)(DAT_00472528)) * DAT_004ea928;
     DAT_004ea928 = DAT_0047252c * DAT_004ea928;
@@ -144,7 +144,7 @@ void FUN_00303b04(int param_1)
       pfVar8 = (float *)&DAT_00472550;
     }
     temp_v6 = 0;
-    temp_v13 = DAT_00472520 * temp_v12;
+    temp_v13 = g_polyDefaultColor * temp_v12;
     DAT_004ea930 = DAT_00472524 * temp_v12;
     DAT_004ea934 = romwright_u2f((unsigned int)(DAT_00472528)) * temp_v12;
     temp_v12 = DAT_0047252c * temp_v12;

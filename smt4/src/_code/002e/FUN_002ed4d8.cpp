@@ -18,7 +18,7 @@ extern unsigned int FUN_002865f8(void);
 extern int FUN_0028660c(void);
 /* Supplied declaration required: FUN_002866b4. */
 /* Supplied declaration required: FUN_002893d8. */
-extern unsigned int FUN_00296cc8(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_002b8234. */
 
 
@@ -38,7 +38,7 @@ unsigned int FUN_002ed4d8(int param_1)
     temp_v0 = 5;
   }
   temp_v1 = FUN_002865f8();
-  temp_v2 = FUN_00296cc8(0);
+  temp_v2 = scrGetArg(0);
   temp_v3 = FUN_002893d8();
   FUN_002866b4(temp_v1,temp_v2,temp_v3,temp_v0,0,0);
   temp_v0 = FUN_002893d8();

@@ -7,9 +7,9 @@ extern "C" {
 int FUN_002a6894(...);
 int FUN_00408184(...);
 
-int FUN_0010063a(...);
+int qsort(...);
 int FUN_00184310(void);
-int FUN_0019e4d4(...);
+int slotRecordFindById(...);
 int FUN_001ba514(int);
 int FUN_002a5e7c(...);
 int FUN_0032fea0(...);
@@ -54,11 +54,11 @@ typedef struct {
 extern int FUN_0034f3b4(...); /* 0x34f3b4 */
 extern int *DAT_0057f290; /* 0x57f290 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern int FUN_0014bef4(unsigned int);
 extern unsigned short FUN_0017760c(int);
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_0019e4d4. */
+/* Supplied declaration required: slotRecordFindById. */
 extern int FUN_001ab854(void);
 /* Supplied declaration required: FUN_001ba514. */
 extern int FUN_002a4b28(unsigned int);
@@ -153,7 +153,7 @@ unsigned char FUN_001ff014(int param_1)
     }
   }
   else {
-    temp_v3 = FUN_0019e4d4(temp_v2);
+    temp_v3 = slotRecordFindById(temp_v2);
     rt_memcpy_w(temp_v32,temp_v3,300);
   }
   temp_v5 = (piVar1[param_1 * 2 + 0x4ee] & 0x3fffffffU) >> 0xf;
@@ -164,7 +164,7 @@ unsigned char FUN_001ff014(int param_1)
     }
   }
   else {
-    temp_v3 = FUN_0019e4d4(temp_v5);
+    temp_v3 = slotRecordFindById(temp_v5);
     rt_memcpy_w(temp_v30,temp_v3,300);
   }
   temp_v5 = (piVar1[param_1 * 2 + 0x4ef] & 0x1ffffU) >> 2;
@@ -200,7 +200,7 @@ unsigned char FUN_001ff014(int param_1)
   if (temp_v10 != 0) {
     temp_v35 = (unsigned short)((unsigned int)(piVar1[param_1 * 2 + 0x4ef] << 0xf) >> 0x11);
     FUN_004da6e0(*piVar1,temp_v38,temp_v30,0,temp_v34);
-    temp_v4 = FUN_0019e4d4(temp_v35);
+    temp_v4 = slotRecordFindById(temp_v35);
     *(unsigned int *)(temp_v4 + 0x68) = temp_v36;
     *(unsigned int *)(temp_v4 + 0x6c) = uStack_104;
     *(unsigned int *)(temp_v4 + 0x70) = uStack_100;
@@ -265,8 +265,8 @@ unsigned char FUN_001ff014(int param_1)
         }
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 8);
-      FUN_0010063a(temp_v4 + 0x34,8,2,FUN_0034f3b4);
-      FUN_0010063a(&temp_v14,0x20,2,FUN_0034f3b4);
+      qsort(temp_v4 + 0x34,8,2,FUN_0034f3b4);
+      qsort(&temp_v14,0x20,2,FUN_0034f3b4);
       temp_v7 = FUN_004bd21c(temp_v4);
       temp_v8 = 0;
       if (temp_v8 < temp_v7) {
@@ -292,14 +292,14 @@ unsigned char FUN_001ff014(int param_1)
               *(unsigned short *)(temp_v9 + 0x34) = (unsigned short)temp_v14;
               temp_v14 = temp_v14 & 0xffff0000;
             }
-            FUN_0010063a(&temp_v14,0x20,2,FUN_0034f3b4);
+            qsort(&temp_v14,0x20,2,FUN_0034f3b4);
           }
           temp_v8 = temp_v8 + 1;
         } while (temp_v8 < temp_v7);
       }
     }
     else {
-      FUN_0010063a(&temp_v14,0x20,2,FUN_0034f3b4);
+      qsort(&temp_v14,0x20,2,FUN_0034f3b4);
       temp_v7 = FUN_004bd21c(temp_v4);
       temp_v8 = 0;
       do {
@@ -332,7 +332,7 @@ unsigned char FUN_001ff014(int param_1)
     FUN_004bd17c(temp_v4);
   }
   else {
-    temp_v4 = FUN_0019e4d4(*(unsigned short *)((int)piVar1 + 0x66fe));
+    temp_v4 = slotRecordFindById(*(unsigned short *)((int)piVar1 + 0x66fe));
     temp_v7 = piVar1[0x19c2];
     temp_v8 = piVar1[0x19c3];
     temp_v9 = piVar1[0x19c4];

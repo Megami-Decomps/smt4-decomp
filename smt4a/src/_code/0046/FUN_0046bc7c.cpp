@@ -8,7 +8,7 @@ int FUN_001b31ac(void);
 int FUN_001b31e0(void);
 int FUN_00429f38(void);
 
-extern int DAT_00570260; /* 0x570260 */
+extern int g_aocMain; /* 0x570260 */
 
 extern int FUN_001b315c(char *);
 /* Supplied declaration required: FUN_001b31ac. */
@@ -58,7 +58,7 @@ int FUN_0046bc7c(int param_1,int param_2)
     }
     return temp_v3;
   }
-  *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xfffeffff;
+  *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
   return 0;
 }
 

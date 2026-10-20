@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002314d0(void);
-int FUN_0024c1e4(int, int, int *, int *);
+int uiGetEntrySize(int, int, int *, int *);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -18,7 +18,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern char *FUN_00231494(unsigned char *, int);
 /* Supplied declaration required: FUN_002314d0. */
-/* Supplied declaration required: FUN_0024c1e4. */
+/* Supplied declaration required: uiGetEntrySize. */
 extern int FUN_002c09d0(void);
 
 
@@ -91,7 +91,7 @@ void FUN_002316e8(int param_1,int param_2)
         else {
           temp_v5 = 0x1bc5;
         }
-        FUN_0024c1e4(0x13,temp_v5,&temp_v16,&temp_v17);
+        uiGetEntrySize(0x13,temp_v5,&temp_v16,&temp_v17);
         temp_v0 = *(short *)(pcVar3 + 0x10);
         temp_v4 = temp_v2 + 1;
         temp_v2 = param_1 + temp_v2 * 0x4c;

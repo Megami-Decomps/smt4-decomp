@@ -16,7 +16,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int DAT_0053f614; /* 0x53f614 */
-extern unsigned char DAT_006433d0; /* 0x6433d0 */
+extern unsigned char g_dspsndState; /* 0x6433d0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -48,7 +48,7 @@ void FUN_001c7954(unsigned int *param_1,unsigned int param_2,float param_3)
   if ((param_1[0x1b] & 2) != 0) {
     temp_v6 = (float)VectorSignedToFloat(param_1[8],(unsigned char)(in_fpscr >> 0x16) & 3);
     param_1[10] = (unsigned int)((float)param_1[9] * temp_v6 * 3.055488e-05f);
-    nn_snd_CTR_Dspsnd_SetChannelTimer((unsigned int)&DAT_006433d0,(unsigned char)*param_1,param_3);
+    nn_snd_CTR_Dspsnd_SetChannelTimer((unsigned int)&g_dspsndState,(unsigned char)*param_1,param_3);
     if (*(char *)((int)param_1 + 0xe) == '\0') {
       *(unsigned short *)(param_1 + 0x1b) = (unsigned short)param_1[0x1b] | 0x20;
     }
@@ -56,16 +56,16 @@ void FUN_001c7954(unsigned int *param_1,unsigned int param_2,float param_3)
   }
   if ((param_1[0x1b] & 4) != 0) {
     nn_snd_CTR_Dspsnd_SetChannelIirFilterType
-              (&DAT_006433d0,*param_1 & 0xff,*(unsigned char *)((int)param_1 + 0xf));
+              (&g_dspsndState,*param_1 & 0xff,*(unsigned char *)((int)param_1 + 0xf));
     temp_v4 = 1;
   }
   if ((param_1[0x1b] & 8) != 0) {
     nn_snd_CTR_Dspsnd_SetChannelIIRFilter_Mono
-              ((unsigned int)&DAT_006433d0,(unsigned char)*param_1,(short)param_1[4],*(short *)((int)param_1 + 0x12));
+              ((unsigned int)&g_dspsndState,(unsigned char)*param_1,(short)param_1[4],*(short *)((int)param_1 + 0x12));
   }
   if ((param_1[0x1b] & 0x10) != 0) {
     nn_snd_CTR_Dspsnd_SetChannelIIRFilter_Biquad
-              ((unsigned int)&DAT_006433d0,(unsigned char)*param_1,(short)param_1[5],*(short *)((int)param_1 + 0x16),
+              ((unsigned int)&g_dspsndState,(unsigned char)*param_1,(short)param_1[5],*(short *)((int)param_1 + 0x16),
                (short)param_1[6],*(short *)((int)param_1 + 0x1a),(short)param_1[7]);
   }
   if ((param_1[0x1b] & 0x20) != 0) {
@@ -83,7 +83,7 @@ void FUN_001c7954(unsigned int *param_1,unsigned int param_2,float param_3)
         temp_v3 = 2;
       }
     }
-    nn_snd_CTR_Dspsnd_SetChannelRIM(&DAT_006433d0,*param_1 & 0xff,temp_v2,temp_v3);
+    nn_snd_CTR_Dspsnd_SetChannelRIM(&g_dspsndState,*param_1 & 0xff,temp_v2,temp_v3);
   }
   else if (!temp_v4) {
     *(unsigned short *)(param_1 + 0x1b) = (unsigned short)param_1[0x1b] & 0x8000;

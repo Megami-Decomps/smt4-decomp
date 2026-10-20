@@ -10,10 +10,10 @@ int FUN_0029e054(void);
 int FUN_002a03a0(int, int);
 int FUN_002a03d8(int, int);
 int FUN_002a5ed0(int, int);
-int FUN_002ae7e8(int);
+int asdTMTexTableFreeEntry(int);
 int FUN_002ae898(int, int);
 int FUN_002b8cc8(void);
-int FUN_002c5914(int, int);
+int asdTMTexTableLoadTmx(int, int);
 
 extern int FUN_00287468(unsigned int);
 /* Supplied declaration required: FUN_0029c3b0. */
@@ -23,13 +23,13 @@ extern int FUN_00287468(unsigned int);
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002a5ed0. */
 extern int FUN_002a60b4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002ae7e8. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002ae898. */
 /* Supplied declaration required: FUN_002b8cc8. */
 extern int FUN_002b8d54(void);
 extern int FUN_002bfde4(unsigned int);
 extern int FUN_002c2a04(unsigned int);
-/* Supplied declaration required: FUN_002c5914. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 
 
 unsigned int FUN_0023ed64(unsigned int *param_1)
@@ -55,7 +55,7 @@ unsigned int FUN_0023ed64(unsigned int *param_1)
     param_1[9] = 0x42700000;
     param_1[0xb] = 0x3f800000;
     param_1[0xc] = 0x3f800000;
-    FUN_002c5914(0x2d,0);
+    asdTMTexTableLoadTmx(0x2d,0);
     temp_v1 = 1;
     do {
       FUN_002a5ed0(0x2d,temp_v1);
@@ -144,7 +144,7 @@ unsigned int FUN_0023ed64(unsigned int *param_1)
       FUN_002ae898(0x2d,temp_v1);
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 7);
-    FUN_002ae7e8(0x2d);
+    asdTMTexTableFreeEntry(0x2d);
     FUN_002b8cc8();
     FUN_0029c3b0(0xf);
     *param_1 = 9;

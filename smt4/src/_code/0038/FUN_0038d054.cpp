@@ -24,7 +24,7 @@ extern int FUN_0038cbdc(...); /* 0x38cbdc */
 extern unsigned char LAB_003f6f24; /* 0x3f6f24 */
 extern unsigned char LAB_003f6fc8; /* 0x3f6fc8 */
 extern unsigned char LAB_003f700c; /* 0x3f700c */
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_002348a8. */
 extern int FUN_002a12d8(int);
@@ -58,10 +58,10 @@ void FUN_0038d054(unsigned char *param_1,int param_2)
   temp_v2 = piVar2[1];
   *puVar1 = *piVar2;
   puVar1[1] = temp_v2;
-  temp_v0 = DAT_00432fc8;
+  temp_v0 = g_aocMain;
   if (*(int *)(param_2 + 4) != 0) {
     if (*(int *)(param_2 + 4) == 1) {
-      temp_v0 = DAT_00432fc8 + 0x88;
+      temp_v0 = g_aocMain + 0x88;
       FUN_002348a8();
       if (temp_v0 != 0) {
         temp_v0 = FUN_002a12d8(param_2 + 0xc);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001643b4(int, int);
-int FUN_00192798(void);
+int dataTableGetEntries(void);
 int FUN_00202400(void);
 int FUN_00203b40(int, unsigned int, unsigned int, int, int, int);
 int FUN_0039b984(void);
@@ -20,13 +20,13 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_001643b4. */
 extern int FUN_0018206c(unsigned int, int);
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern int FUN_00192748(unsigned int);
-/* Supplied declaration required: FUN_00192798. */
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern int dataTableGetCount(unsigned int);
+/* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_00202400. */
 /* Supplied declaration required: FUN_00203b40. */
 extern int FUN_00341940(unsigned int);
@@ -54,7 +54,7 @@ void FUN_004036fc(int param_1)
   if (temp_v5) {
     temp_v1 = *(int *)(param_1 + 0xc);
   }
-  if (((!temp_v5 || temp_v1 == 0) || (temp_v1 = FUN_00471960(DAT_00570280), temp_v1 == 0)) ||
+  if (((!temp_v5 || temp_v1 == 0) || (temp_v1 = FUN_00471960(g_aocSystem), temp_v1 == 0)) ||
      (temp_v1 = FUN_00341940(0x32), temp_v1 == 0)) {
     return;
   }
@@ -85,10 +85,10 @@ void FUN_004036fc(int param_1)
     }
     temp_v4 = temp_v4 + 1;
   } while ((int)temp_v4 < 2);
-  temp_v3 = FUN_00187180(0x45,0);
-  FUN_00192798();
-  temp_v1 = FUN_00192748(temp_v3);
-  temp_v2 = FUN_004717e0(DAT_00570280);
+  temp_v3 = dataTableGet(0x45,0);
+  dataTableGetEntries();
+  temp_v1 = dataTableGetCount(temp_v3);
+  temp_v2 = FUN_004717e0(g_aocSystem);
   *(int *)(param_1 + 0x14) = temp_v1 + temp_v2;
   FUN_00403b84(param_1);
   FUN_00203b40(param_1 + 0x90,*(unsigned int *)(param_1 + 0x660),*(unsigned int *)(param_1 + 0xfc),1,1,1

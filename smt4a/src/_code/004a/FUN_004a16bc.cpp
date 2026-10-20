@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(unsigned int);
+int sysPlaySe(unsigned int);
 int FUN_00180118(unsigned int);
 int FUN_00275f44(unsigned int, int);
 int FUN_002e342c(unsigned char [304], unsigned int);
@@ -25,9 +25,9 @@ typedef struct {
 extern unsigned char DAT_0057f0b4; /* 0x57f0b4 */
 
 extern unsigned int FUN_0014bf3c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00180118. */
-extern unsigned int FUN_0019e4d4(unsigned short);
+extern unsigned int slotRecordFindById(unsigned short);
 /* Supplied declaration required: FUN_00275f44. */
 /* Supplied declaration required: FUN_002e342c. */
 extern int FUN_002f036c(void);
@@ -116,11 +116,11 @@ void FUN_004a16bc(int param_1)
       else {
         temp_v5 = 0x4f;
       }
-      FUN_001681cc(temp_v5);
+      sysPlaySe(temp_v5);
       temp_v2 = FUN_004cfe4c(param_1 + 0x20);
       temp_v0 = *(unsigned short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
       if (*(char *)(param_1 + 0x861) == '\x01') {
-        temp_v5 = FUN_0019e4d4(temp_v0);
+        temp_v5 = slotRecordFindById(temp_v0);
         FUN_0032d0c8(0,1,temp_v0,temp_v5);
         return;
       }

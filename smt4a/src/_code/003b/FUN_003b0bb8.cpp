@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003283ac(int);
+int scrSetResult(int);
 
 extern unsigned int DAT_00570288; /* 0x570288 */
 extern unsigned int DAT_0057028c; /* 0x57028c */
@@ -13,9 +13,9 @@ extern unsigned int DAT_005702a4; /* 0x5702a4 */
 extern unsigned int DAT_005702b0; /* 0x5702b0 */
 extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
-extern int FUN_0014aa78(void);
-extern int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_003283ac. */
+extern int btlGetMainState(void);
+extern int scrGetArg(unsigned int);
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_003b0bb8(void)
@@ -29,7 +29,7 @@ unsigned int FUN_003b0bb8(void)
   unsigned int *puVar5;
   int temp_v4;
   
-  temp_v0 = FUN_00236038(0);
+  temp_v0 = scrGetArg(0);
   temp_v4 = 0;
   if (temp_v0 == 0) {
     temp_v4 = 7;
@@ -45,7 +45,7 @@ unsigned int FUN_003b0bb8(void)
   }
   temp_v0 = 0;
   while( 1 ) {
-    temp_v1 = FUN_0014aa78();
+    temp_v1 = btlGetMainState();
     puVar5 = (unsigned int *)(*(int *)(temp_v1 + 0x1ffc) + temp_v0 * 0x408);
     temp_v2 = *puVar5;
     temp_v3 = puVar5[1];
@@ -55,11 +55,11 @@ unsigned int FUN_003b0bb8(void)
        (0x7fffffff < puVar5[temp_v4 + 0x1d])) break;
     temp_v0 = temp_v0 + 1;
     if (temp_v0 >= 0x6d) {
-      FUN_003283ac(0);
+      scrSetResult(0);
       return 1;
     }
   }
-  FUN_003283ac(1);
+  scrSetResult(1);
   return 1;
 }
 

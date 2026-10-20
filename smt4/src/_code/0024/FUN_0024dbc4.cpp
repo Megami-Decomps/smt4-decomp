@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int aeabi_idivmod(int, int);
+extern int __aeabi_idivmod(int, int);
 
 
 int FUN_0024dbc4(int param_1,int param_2,int param_3,int param_4)
@@ -18,8 +18,8 @@ int FUN_0024dbc4(int param_1,int param_2,int param_3,int param_4)
       return param_1;
     }
     if (param_4 < param_3) {
-      temp_v0 = aeabi_idivmod(param_1 * param_4,param_3);
-      temp_v1 = aeabi_idivmod(param_2 * param_4,param_3);
+      temp_v0 = __aeabi_idivmod(param_1 * param_4,param_3);
+      temp_v1 = __aeabi_idivmod(param_2 * param_4,param_3);
       return temp_v1 + (param_1 - temp_v0);
     }
   }

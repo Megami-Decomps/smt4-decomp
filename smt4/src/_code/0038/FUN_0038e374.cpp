@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_1_stack;
 
-extern unsigned int DAT_00432fc8; /* 0x432fc8 */
+extern unsigned int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
@@ -80,7 +80,7 @@ void FUN_0038e374(int param_1)
         *(unsigned int *)(param_1 + 0x208) = 0;
         return;
       }
-      FUN_002341d4(&temp_v5,DAT_00432fc8);
+      FUN_002341d4(&temp_v5,g_aocMain);
       temp_v4 = temp_v5;
       uStack_34 = uStack_2c;
       temp_v0 = FUN_002a12d8((unsigned int *)&temp_v4);

@@ -9,14 +9,14 @@ int FUN_0022a918(unsigned int, unsigned int);
 int FUN_0022aa38(unsigned int *, unsigned int);
 int FUN_0022ab08(int, unsigned int [3]);
 int FUN_0023ea94(void);
-int FUN_0023eae0(int);
+int randRange(int);
 int FUN_00246134(...);
 int FUN_002463e8(...);
 int FUN_00247478(unsigned char [2], unsigned int, unsigned int *);
 int FUN_00282924(unsigned int *, unsigned int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_002ae164(void);
-int FUN_002c4938(...);
+int memClear(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_8: 13 slot(s), 46 byte(s) */
@@ -42,14 +42,14 @@ typedef struct {
 /* Supplied declaration required: FUN_0022aa38. */
 /* Supplied declaration required: FUN_0022ab08. */
 /* Supplied declaration required: FUN_0023ea94. */
-/* Supplied declaration required: FUN_0023eae0. */
+/* Supplied declaration required: randRange. */
 /* Supplied declaration required: FUN_00246134. */
 /* Supplied declaration required: FUN_002463e8. */
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_00282924. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int param_4,unsigned int param_5,
@@ -89,7 +89,7 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
   uStack_30 = param_2;
   temp_v19 = param_3;
   temp_v20 = param_4;
-  temp_v2 = FUN_002939f4();
+  temp_v2 = btlGetMainState();
   *param_8 = 0;
   switch(temp_v19) {
   case 0xb:
@@ -145,11 +145,11 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
       if ((*(unsigned int *)(temp_v2 + 0x44a8) & 0x80) != 0) {
         return;
       }
-      puVar6 = (unsigned int *)FUN_002939f4();
+      puVar6 = (unsigned int *)btlGetMainState();
       FUN_00282924(puVar6,temp_v20);
-      puVar7 = (unsigned int *)FUN_002939f4();
+      puVar7 = (unsigned int *)btlGetMainState();
       FUN_00282924(puVar7,param_5);
-      temp_v5 = FUN_002939f4();
+      temp_v5 = btlGetMainState();
       FUN_00247478(temp_v14,temp_v5,puVar6);
       temp_v1 = temp_v15;
       if ((param_1 < 1) && (temp_v19 != 1)) {
@@ -202,8 +202,8 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
       }
       if (temp_v3 != 0) {
         if (*(char *)(temp_v3 + 0x23) == '\x02') {
-          FUN_002c4938(temp_v10,0x48);
-          FUN_002c4938(temp_v13,0x48);
+          memClear(temp_v10,0x48);
+          memClear(temp_v13,0x48);
           temp_v0 = *(char *)(temp_v3 + 0x2f);
           if (temp_v0 != '\x01') {
             if (!(temp_v0 == '\x13' || temp_v0 == '\x14')) {
@@ -275,7 +275,7 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
             if ((*puVar6 & 0x10) == 0) {
               FUN_0023ea94();
             }
-            FUN_0023eae0(99);
+            randRange(99);
             return;
           }
           return;

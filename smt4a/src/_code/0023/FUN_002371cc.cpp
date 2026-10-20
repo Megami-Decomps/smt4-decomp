@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(int);
+int asdMemFree(int);
 
 typedef struct fn_002371cc_arg0 fn_002371cc_arg0;
 struct fn_002371cc_arg0 {
@@ -14,7 +14,7 @@ struct fn_002371cc_arg0 {
     int field_0x44; /* +0x44 */
 };
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_002371cc(fn_002371cc_arg0 *param_1)
@@ -22,11 +22,11 @@ void FUN_002371cc(fn_002371cc_arg0 *param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if ((param_1->field_0x24 != 0) && ((param_1->field_0x2c & 0x10) == 0)) {
-    FUN_0019a5a0(param_1->field_0x24);
+    asdMemFree(param_1->field_0x24);
     param_1->field_0x24 = 0;
   }
   if (param_1->field_0x44 != 0) {
-    FUN_0019a5a0(param_1->field_0x44);
+    asdMemFree(param_1->field_0x44);
     param_1->field_0x44 = 0;
   }
   return;

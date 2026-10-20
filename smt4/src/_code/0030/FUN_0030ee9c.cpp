@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002694f8(int);
-int FUN_0028c854(void);
+int asdEffectTextureCreate(void);
 int FUN_002c0894(int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -25,7 +25,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002694f8. */
-/* Supplied declaration required: FUN_0028c854. */
+/* Supplied declaration required: asdEffectTextureCreate. */
 /* Supplied declaration required: FUN_002c0894. */
 
 
@@ -37,7 +37,7 @@ void FUN_0030ee9c(fn_0030ee9c_arg0 *param_1,int param_2)
   float temp_v0;
   float temp_v1;
   
-  FUN_0028c854();
+  asdEffectTextureCreate();
   temp_v0 = (float)VectorSignedToFloat(*(unsigned int *)(param_2 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v1 = (float)VectorSignedToFloat(*(unsigned int *)(param_2 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
   param_1->field_0x54 = temp_v0 * 0.5f * 0.0625f;

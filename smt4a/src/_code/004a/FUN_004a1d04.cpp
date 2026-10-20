@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001631d0(int, int);
+int jobStop(int, int);
 int FUN_004a6d5c(int);
 
 typedef int romwright_code(...);
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_004a6d5c. */
 
 
@@ -27,7 +27,7 @@ void FUN_004a1d04(int *param_1)
   }
   FUN_004a6d5c((int)param_1 + 0x96);
   (**(romwright_code **)(*param_1 + 0x28))(param_1);
-  FUN_001631d0(param_1[1],0);
+  jobStop(param_1[1],0);
   return;
 }
 

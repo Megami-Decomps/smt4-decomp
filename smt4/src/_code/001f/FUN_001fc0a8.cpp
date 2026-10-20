@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00287aec(void);
 
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapScene; /* 0x447e88 */
 extern int DAT_0044cd88; /* 0x44cd88 */
 
 /* Supplied declaration required: FUN_00287aec. */
@@ -39,7 +39,7 @@ void FUN_001fc0a8(void)
         temp_v0 = *(char *)(temp_v5 + 0x94);
       }
       if (temp_v8 && temp_v0 != '\0') {
-        temp_v10 = *(unsigned int *)(DAT_00447e88 + 0x1c);
+        temp_v10 = *(unsigned int *)(g_lmapScene + 0x1c);
         FUN_00287aec();
         *(unsigned int *)(temp_v5 + 0x9c) = temp_v10;
         *(unsigned int *)(temp_v5 + 0xa0) = 999;

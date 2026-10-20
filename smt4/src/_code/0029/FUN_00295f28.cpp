@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002c0cec(int, int);
+int dataTableGet(int, int);
 
-extern int FUN_002c0cc4(void);
-/* Supplied declaration required: FUN_002c0cec. */
+extern int dataTableGetEntries(void);
+/* Supplied declaration required: dataTableGet. */
 
 
 unsigned int FUN_00295f28(int param_1)
@@ -17,8 +17,8 @@ unsigned int FUN_00295f28(int param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  FUN_002c0cec(9,1);
-  temp_v0 = FUN_002c0cc4();
+  dataTableGet(9,1);
+  temp_v0 = dataTableGetEntries();
   if (param_1 < 99) {
     temp_v1 = *(unsigned int *)((temp_v0 + param_1 * 4) - 4);
   }

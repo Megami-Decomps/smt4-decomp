@@ -4,20 +4,20 @@
 
 extern "C" {
 
-int FUN_0024bc7c(int, int);
+int bitsetSetBit(int, int);
 int FUN_0029c6b0(int);
 int FUN_0029d770(int, unsigned char [1552]);
 int FUN_0029dc74(int, unsigned char [1552]);
 int FUN_002b9024(void);
-int FUN_002c4938(int, int);
+int memClear(int, int);
 
-/* Supplied declaration required: FUN_0024bc7c. */
+/* Supplied declaration required: bitsetSetBit. */
 /* Supplied declaration required: FUN_0029c6b0. */
 /* Supplied declaration required: FUN_0029d770. */
 /* Supplied declaration required: FUN_0029dc74. */
 extern unsigned char *FUN_002b066c(unsigned short);
 /* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_003c8980(unsigned int param_1,unsigned short *param_2,int param_3)
@@ -50,7 +50,7 @@ void FUN_003c8980(unsigned int param_1,unsigned short *param_2,int param_3)
   *(unsigned int *)(param_3 + 0x80) = 0;
   *(unsigned int *)(param_3 + 0x84) = 0;
   *(unsigned int *)(param_3 + 0x88) = 0;
-  FUN_002c4938(param_3 + 0x8c,0x500);
+  memClear(param_3 + 0x8c,0x500);
   temp_v6 = 0;
   do {
     temp_v1 = param_2[temp_v6 + 1];
@@ -99,7 +99,7 @@ void FUN_003c8980(unsigned int param_1,unsigned short *param_2,int param_3)
   } while (temp_v6 < 0xc);
   temp_v5 = (unsigned int)*param_2;
   FUN_002b9024();
-  FUN_0024bc7c(param_3,*(unsigned short *)(temp_v5 + 0x38));
+  bitsetSetBit(param_3,*(unsigned short *)(temp_v5 + 0x38));
   FUN_0029c6b0(param_3);
   return;
 }

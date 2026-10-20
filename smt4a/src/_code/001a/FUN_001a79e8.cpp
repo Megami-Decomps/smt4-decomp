@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern unsigned int FUN_002e3390(int);
+extern unsigned int wstrlen(int);
 /* Supplied declaration required: FUN_0030ea58. */
 
 
@@ -32,7 +32,7 @@ unsigned int FUN_001a79e8(int param_1,int param_2)
     temp_v1 = temp_v1 + 0xc;
   }
   temp_v1 = *(int *)(temp_v1 + 0x30);
-  temp_v2 = FUN_002e3390(param_2);
+  temp_v2 = wstrlen(param_2);
   puVar7 = *(unsigned int **)(temp_v1 + 0x74);
   puVar6 = puVar7 + (unsigned int)(unsigned short)puVar7[1] * 3;
   if (*(short *)(temp_v1 + 0x70) != 0) {

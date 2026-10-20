@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00250120(void);
+int effMenuNodeCreate(void);
 int FUN_002be624(unsigned char [100], unsigned char *, unsigned char *, unsigned char [50]);
 int FUN_002bf694(unsigned char *, unsigned char [50]);
 int FUN_002e70e0(unsigned int *, unsigned char [50]);
@@ -25,7 +25,7 @@ extern int DAT_0044ea94; /* 0x44ea94 */
 extern unsigned int *DAT_0044eac8; /* 0x44eac8 */
 extern unsigned char DAT_004d8bd0; /* 0x4d8bd0 */
 
-/* Supplied declaration required: FUN_00250120. */
+/* Supplied declaration required: effMenuNodeCreate. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002e70e0. */
@@ -58,7 +58,7 @@ unsigned char * FUN_002e6fa8(void)
   }
   else {
     puVar1 = (unsigned int *)&LAB_002e70c8;
-    FUN_00250120();
+    effMenuNodeCreate();
     DAT_0044eac8 = puVar1;
     *puVar1 = 0xb6;
     puVar1[1] = 100;

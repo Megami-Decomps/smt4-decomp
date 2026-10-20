@@ -7,7 +7,7 @@ extern "C" {
 int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int aeabi_idivmod(int, int);
+extern int __aeabi_idivmod(int, int);
 
 
 unsigned char FUN_0035e6d4(int *param_1)
@@ -33,10 +33,10 @@ unsigned char FUN_0035e6d4(int *param_1)
   temp_v3 = param_1[3];
   temp_v6 = param_1[5];
   temp_v5 = temp_v7 - param_1[0xb];
-  temp_v0 = aeabi_idivmod(temp_v6 - temp_v3,temp_v5);
+  temp_v0 = __aeabi_idivmod(temp_v6 - temp_v3,temp_v5);
   temp_v4 = param_1[6];
   temp_v8 = param_1[4];
-  temp_v1 = aeabi_idivmod(temp_v4 - temp_v8,temp_v5);
+  temp_v1 = __aeabi_idivmod(temp_v4 - temp_v8,temp_v5);
   temp_v10 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v9 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v1 = temp_v1 * temp_v2 + temp_v8;

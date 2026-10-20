@@ -8,7 +8,7 @@ int FUN_00100388(...);
 int FUN_00157558(int);
 int FUN_00162790(...);
 int FUN_0016432c(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00169a1c(...);
 int FUN_0018152c(...);
 int FUN_001835b4(...);
@@ -29,8 +29,8 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } void_stack;
 
-extern int DAT_0057f570; /* 0x57f570 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_guestWin; /* 0x57f570 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
@@ -40,7 +40,7 @@ extern int FUN_001632fc(void);
 /* Supplied declaration required: FUN_0016432c. */
 extern int FUN_001654d8(int);
 extern int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_00168518(int, unsigned short);
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
@@ -54,7 +54,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183788. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_001879d0. */
-extern int FUN_0019a7dc(void);
+extern int gameGetOptions(void);
 extern int FUN_001b34b8(void);
 
 
@@ -76,11 +76,11 @@ unsigned int FUN_00155840(void)
   float temp_v9;
   unsigned char temp_v10 [40];
   
-  temp_v4 = DAT_0057f570;
-  if ((((*(int *)(DAT_0057f570 + 8) != 0) && (temp_v1 = FUN_001b34b8(), temp_v1 != 0)) && (temp_v1 != 1))
-     && (temp_v1 = FUN_0019a7dc(), *(short *)(temp_v1 + 0x62) != 0)) {
-    FUN_00157558(DAT_0059dbb4);
-    temp_v3 = DAT_0059dbb4;
+  temp_v4 = g_guestWin;
+  if ((((*(int *)(g_guestWin + 8) != 0) && (temp_v1 = FUN_001b34b8(), temp_v1 != 0)) && (temp_v1 != 1))
+     && (temp_v1 = gameGetOptions(), *(short *)(temp_v1 + 0x62) != 0)) {
+    FUN_00157558(g_renderCtx);
+    temp_v3 = g_renderCtx;
     temp_v2 = FUN_001692ac(1,0);
     piVar10 = (int *)(temp_v3 + 0x1258);
     temp_v7 = *piVar10;
@@ -93,15 +93,15 @@ unsigned int FUN_00155840(void)
     }
     temp_v3 = FUN_001654d8(temp_v4 + 0x30);
     temp_v9 = 0.25f;
-    FUN_001879d0(DAT_0059dbb4);
+    FUN_001879d0(g_renderCtx);
     temp_v4 = FUN_001654e4(temp_v4 + 0x30);
-    FUN_001677c0();
+    efctSetSpeed();
     temp_v2 = FUN_001834a4(8,0xda);
     temp_v7 = FUN_001632fc();
     if (temp_v7 != 0) {
       temp_v2 = FUN_001834a4(8,0xdb);
     }
-    temp_v7 = DAT_0059dbb4;
+    temp_v7 = g_renderCtx;
     temp_v8 = temp_v3 + (int)temp_v9 + (int)*(short *)(temp_v2 + 8);
     temp_v4 = *(short *)(temp_v2 + 10) + temp_v4;
     temp_v3 = FUN_00169294(6,1,0);
@@ -113,7 +113,7 @@ unsigned int FUN_00155840(void)
       *(unsigned char *)(temp_v7 + 0x12d0) = 0;
     }
     FUN_001835b4(2,8,0xc9,temp_v8,temp_v4,0x15);
-    temp_v3 = DAT_0059dbb4;
+    temp_v3 = g_renderCtx;
     temp_v2 = FUN_00169294(6,7,0);
     piVar10 = (int *)(temp_v3 + 0x12b8);
     temp_v7 = piVar10[*piVar10 + 2];
@@ -133,13 +133,13 @@ unsigned int FUN_00155840(void)
     temp_v3 = FUN_001834a4(8,0xd9);
     temp_v2 = FUN_00177654();
     if (temp_v2 != 0) {
-      temp_v1 = FUN_0019a7dc();
+      temp_v1 = gameGetOptions();
       temp_v0 = *(unsigned short *)(temp_v1 + 0x12e);
-      temp_v1 = FUN_0019a7dc();
+      temp_v1 = gameGetOptions();
       temp_v1 = FUN_00168518((int)*(short *)(temp_v1 + 300),temp_v0);
       FUN_00169a1c(*(unsigned short *)(temp_v1 + 100),*(short *)(temp_v3 + 8) + temp_v8,
                    *(short *)(temp_v3 + 10) + temp_v4,0x24);
-      temp_v1 = FUN_0019a7dc();
+      temp_v1 = gameGetOptions();
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v1 + 300);
       FUN_0016432c(temp_v6);
       FUN_00100388(temp_v10,temp_v6);
@@ -155,9 +155,9 @@ unsigned int FUN_00155840(void)
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(2,0xff,temp_v10);
     FUN_00183bb0();
-    FUN_001677c0();
-    temp_v4 = DAT_0059dbb4;
-    piVar10 = (int *)(DAT_0059dbb4 + 0x1258);
+    efctSetSpeed();
+    temp_v4 = g_renderCtx;
+    piVar10 = (int *)(g_renderCtx + 0x1258);
     temp_v1 = *piVar10;
     temp_v3 = piVar10[temp_v1 + 2];
     *piVar10 = temp_v1 - 1;

@@ -1,16 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035db94` (_code @ 0x35db94, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+typedef struct StateBlock {
+    /* 0x0000 */ u8 unk0000[0x1378];
+    /* 0x1378 */ u32 value;
+} StateBlock;
 
+typedef struct StateHolder {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ StateBlock *block;
+} StateHolder;
 
+extern StateHolder DAT_00588fd0;
+
+/* Returns the low byte, sign-extended, of the word at offset 0x1378 of the global state block. */
 int FUN_0035db94(void)
-
 {
-  return (int)(char)*(unsigned int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1378);
+    return (s8)DAT_00588fd0.block->value;
 }
 
 } /* extern "C" */

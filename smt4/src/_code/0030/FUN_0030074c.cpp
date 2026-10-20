@@ -32,14 +32,14 @@ typedef struct {
     unsigned int sp98; /* 0x98: local_98 */
 } void_stack;
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00250720. */
 /* Supplied declaration required: FUN_002551ac. */
-extern unsigned int FUN_0027e928(unsigned int);
-extern int FUN_002939f4(void);
-extern int FUN_00296cc8(unsigned int);
+extern unsigned int btlUnitGet(unsigned int);
+extern int btlGetMainState(void);
+extern int scrGetArg(unsigned int);
 
 
 unsigned int FUN_0030074c(void)
@@ -55,10 +55,10 @@ unsigned int FUN_0030074c(void)
   unsigned int *puVar7;
   int temp_v6;
   
-  temp_v1 = FUN_00296cc8(0);
-  temp_v2 = FUN_00296cc8(1);
-  temp_v3 = FUN_002939f4();
-  temp_v4 = FUN_0027e928(DAT_0043427c);
+  temp_v1 = scrGetArg(0);
+  temp_v2 = scrGetArg(1);
+  temp_v3 = btlGetMainState();
+  temp_v4 = btlUnitGet(g_btlScriptUnit);
   temp_v5 = 0;
   do {
     puVar7 = (unsigned int *)(*(int *)(temp_v3 + 0x1fc0) + temp_v5 * 0x288);

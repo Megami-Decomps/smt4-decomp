@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a66e0(double, double, int);
-int FUN_002bd75c(void);
+int asdTextureCreate(void);
 int FUN_002c2424(unsigned int, unsigned int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(int, int);
@@ -14,7 +14,7 @@ int VectorSignedToFloat(int, int);
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_002a66e0. */
 extern unsigned int FUN_002bc11c(unsigned int);
-/* Supplied declaration required: FUN_002bd75c. */
+/* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_002c2424. */
 
 
@@ -31,7 +31,7 @@ void FUN_0023a62c(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   float temp_v3;
   
   temp_v0 = 0.0f;
-  FUN_002bd75c();
+  asdTextureCreate();
   param_1[4] = temp_v0;
   *(unsigned int *)((int)temp_v0 + 0x14) = param_2;
   temp_v0 = (float)VectorSignedToFloat((int)((unsigned long long)param_6 >> 0x20),(unsigned char)(in_fpscr >> 0x16) & 3)

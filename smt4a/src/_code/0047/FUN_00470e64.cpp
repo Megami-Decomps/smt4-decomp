@@ -10,9 +10,9 @@ int FUN_001b2ebc(...);
 int FUN_001b31ac(...);
 int FUN_001b31e0(...);
 int FUN_002e3494(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_002f5020(...);
-int FUN_0030cb44(...);
+int asdOperatorNewE(...);
 int FUN_00429f38(...);
 int nnnstdMemCpy(...);
 int rt_memcpy_w(...);
@@ -42,12 +42,12 @@ typedef struct {
     unsigned int sp168; /* 0x168: local_168 */
 } param_1_stack;
 
-extern int DAT_00570260; /* 0x570260 */
-extern unsigned int DAT_0057027c; /* 0x57027c */
+extern int g_aocMain; /* 0x570260 */
+extern unsigned int g_aocDisplay; /* 0x57027c */
 
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_00192748(void);
-extern unsigned int FUN_00192798(unsigned int);
+extern int dataTableGetCount(void);
+extern unsigned int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: FUN_001a6f60. */
 /* Supplied declaration required: FUN_001b2ebc. */
 extern int FUN_001b315c(void);
@@ -55,9 +55,9 @@ extern int FUN_001b315c(void);
 /* Supplied declaration required: FUN_001b31e0. */
 extern int FUN_001d109c(void);
 /* Supplied declaration required: FUN_002e3494. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002f5020. */
-/* Supplied declaration required: FUN_0030cb44. */
+/* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_00429f38. */
 extern int FUN_0046bc7c(fn_00470e64_arg0 *, unsigned int);
 /* Supplied declaration required: nnnstdMemCpy. */
@@ -100,23 +100,23 @@ void FUN_00470e64(fn_00470e64_arg0 *param_1)
   temp_v13 = piVar1;
   FUN_00429f38();
   if (piVar1 == (int *)0x0) {
-    *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xfffeffff;
+    *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
     return;
   }
   temp_v0 = FUN_001d109c();
   if (temp_v0 != 0) {
-    FUN_002e6354(temp_v11,0x80);
+    sysMemClear(temp_v11,0x80);
     temp_v0 = FUN_0046bc7c(param_1,0x37);
     if (0 < temp_v0) {
       temp_v7 = temp_v0 * 0x10;
-      FUN_0030cb44();
+      asdOperatorNewE();
       if (temp_v7 != 0) {
         FUN_002f5020();
       }
       param_1->field_0x454 = temp_v7;
     }
     temp_v12 = param_1->field_0x454;
-    FUN_002e6354(temp_v8,0x80);
+    sysMemClear(temp_v8,0x80);
     temp_v7 = 0;
     temp_v15 = 0;
     if (temp_v15 < param_1->field_0x310) {
@@ -138,8 +138,8 @@ void FUN_00470e64(fn_00470e64_arg0 *param_1)
                 temp_v9 = (unsigned int *)(temp_v12 + temp_v7 * 0x10);
                 rt_memcpy_w(temp_v9,*(int *)(temp_v14 + 0x4c) + temp_v5 * 0x10,0xe);
                 FUN_00100388(temp_v8,"%s/%s",temp_v10,pcVar9 + 1);
-                temp_v4 = DAT_0057027c;
-                FUN_001b2ebc(DAT_0057027c,temp_v8,0,temp_v9 + 2,1,0x80,0);
+                temp_v4 = g_aocDisplay;
+                FUN_001b2ebc(g_aocDisplay,temp_v8,0,temp_v9 + 2,1,0x80,0);
                 temp_v7 = temp_v7 + 1;
                 *temp_v9 = temp_v4;
                 *(unsigned char *)(temp_v9 + 3) = 1;
@@ -158,7 +158,7 @@ LAB_00471070:
         temp_v1 = *(int *)(param_1->field_0x454 + temp_v7 * 0x10);
         if (temp_v1 != 0) {
           FUN_001a6f60(temp_v1,0);
-          temp_v1 = FUN_00192748();
+          temp_v1 = dataTableGetCount();
           *temp_v13 = param_1->field_0x45c + temp_v1;
         }
         temp_v7 = temp_v7 + 1;
@@ -167,7 +167,7 @@ LAB_00471070:
     temp_v7 = 0;
     if (param_1->field_0x45c != 0) {
       temp_v1 = param_1->field_0x45c * 0xc;
-      FUN_0030cb44();
+      asdOperatorNewE();
       temp_v6 = 0;
       param_1->field_0x458 = temp_v1;
       if (0 < temp_v0) {
@@ -176,9 +176,9 @@ LAB_00471070:
           if (temp_v1 != 0) {
             FUN_001a6f60(temp_v1,0);
             temp_v4 = FUN_001a6f60(temp_v1,0);
-            temp_v1 = FUN_00192748();
+            temp_v1 = dataTableGetCount();
             if (temp_v1 != 0) {
-              temp_v4 = FUN_00192798(temp_v4);
+              temp_v4 = dataTableGetEntries(temp_v4);
               nnnstdMemCpy(param_1->field_0x458 + temp_v7 * 0xc,temp_v4,temp_v1 * 0xc);
               temp_v7 = temp_v7 + temp_v1;
             }

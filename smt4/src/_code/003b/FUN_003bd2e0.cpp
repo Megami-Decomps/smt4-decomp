@@ -14,10 +14,10 @@ int FUN_0027da30(unsigned int *, unsigned int);
 int FUN_00282924(...);
 int FUN_00283e48(void);
 int FUN_00283ebc(...);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_002ae164(void);
 int FUN_002b4670(void);
-int FUN_002c4938(...);
+int memClear(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -68,7 +68,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0022ab08. */
 /* Supplied declaration required: FUN_0022abe0. */
 extern int FUN_0023ea94(void);
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00246134. */
 extern unsigned int FUN_002463e8(unsigned int);
 /* Supplied declaration required: FUN_00247478. */
@@ -77,11 +77,11 @@ extern unsigned int FUN_00255de0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00282924. */
 /* Supplied declaration required: FUN_00283e48. */
 /* Supplied declaration required: FUN_00283ebc. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 extern unsigned int FUN_002ae108(unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002b4670. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 extern unsigned int FUN_003bf554(unsigned int);
 
 
@@ -143,7 +143,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
   uStack_30 = param_2;
   iStack_2c = param_3;
   temp_v40 = param_4;
-  temp_v32 = (unsigned int *)FUN_002939f4();
+  temp_v32 = (unsigned int *)btlGetMainState();
   temp_v1 = temp_v39;
   FUN_002ae164();
   temp_v37 = temp_v1;
@@ -178,12 +178,12 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
     }
   }
   temp_v14 = (float)VectorUnsignedToFloat((unsigned int)temp_v26,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = FUN_002939f4();
+  temp_v2 = btlGetMainState();
   FUN_00282924(temp_v2,temp_v3);
-  temp_v3 = FUN_002939f4();
+  temp_v3 = btlGetMainState();
   FUN_00247478(temp_v20,temp_v3,temp_v2);
-  FUN_002c4938(temp_v28,0x48);
-  FUN_002c4938(temp_v31,0x48);
+  memClear(temp_v28,0x48);
+  memClear(temp_v31,0x48);
   temp_v27[0] = 0;
   temp_v27[1] = 0;
   temp_v27[2] = 0;
@@ -310,7 +310,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
             FUN_0022ab08(temp_v28[temp_v13],temp_v38);
             temp_v3 = temp_v40;
             temp_v8 = temp_v39;
-            puVar7 = (unsigned int *)FUN_002939f4();
+            puVar7 = (unsigned int *)btlGetMainState();
             FUN_00282924(puVar7,temp_v3);
             if (((*puVar7 & 2) != 0) && (temp_v6 = temp_v8, FUN_002ae164(), temp_v6 != 0)) {
               temp_v3 = FUN_002ae108(temp_v8);
@@ -328,7 +328,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
             }
             temp_v8 = temp_v27[temp_v13] & 0xffff;
             temp_v16 = CONCAT44(temp_v2,temp_v14 + temp_v11 * (float)temp_v18 * temp_v14);
-            temp_v9 = FUN_002939f4();
+            temp_v9 = btlGetMainState();
             FUN_00282924(temp_v9,param_5);
             if (temp_v9 == 0) {
               temp_v14 = (float)temp_v15;
@@ -387,12 +387,12 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
               }
             }
             if ((((temp_v27[temp_v13] == 1) && (temp_v28[temp_v13] != 6)) && (temp_v28[temp_v13] != 7))
-               && (temp_v4 = FUN_0023eae0(99), (int)(unsigned int)*(unsigned char *)((int)puVar6 + 0x14a) <= temp_v4)) {
+               && (temp_v4 = randRange(99), (int)(unsigned int)*(unsigned char *)((int)puVar6 + 0x14a) <= temp_v4)) {
               temp_v14 = (float)((unsigned long long)temp_v19 >> 0x20);
               temp_v9 = -1;
             }
             if (((*puVar3 & 0x40000) == 0) &&
-               (temp_v4 = FUN_0023eae0(99), (int)temp_v14 + temp_v9 < temp_v4)) {
+               (temp_v4 = randRange(99), (int)temp_v14 + temp_v9 < temp_v4)) {
               temp_v1 = temp_v1 & ~(1 << (temp_v27[temp_v13] & 0xff));
             }
             temp_v13 = temp_v13 + 1;

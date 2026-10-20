@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int DAT_004e3154; /* 0x4e3154 */
+extern int g_asdSoundStatus; /* 0x4e3154 */
 extern unsigned char DAT_004e315c; /* 0x4e315c */
 
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -24,7 +24,7 @@ void FUN_0010b91c(int param_1,int param_2)
   unsigned int temp_v1;
   float temp_v2;
   
-  temp_v0 = DAT_004e3154;
+  temp_v0 = g_asdSoundStatus;
   if (param_1 == 0) {
     return;
   }

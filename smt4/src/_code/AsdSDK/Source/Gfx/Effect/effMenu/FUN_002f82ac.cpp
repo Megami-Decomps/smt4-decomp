@@ -11,8 +11,8 @@ int FUN_00282780(unsigned int, unsigned int, int, int);
 int FUN_0028c814(...);
 int FUN_002be624(...);
 int FUN_002c0894(void);
-int FUN_002c32a0(int, int, int, int, int, int);
-int FUN_002c415c(unsigned int);
+int memAlloc(int, int, int, int, int, int);
+int asdMemFree(unsigned int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -38,9 +38,9 @@ extern int FUN_002b8cec(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
 extern int FUN_002bfde4(unsigned int);
 /* Supplied declaration required: FUN_002c0894. */
-/* Supplied declaration required: FUN_002c32a0. */
-/* Supplied declaration required: FUN_002c415c. */
-extern unsigned int FUN_002c5c14(unsigned char *, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: asdMemFree. */
+extern unsigned int asdLoadFileSync(unsigned char *, unsigned int, unsigned int, unsigned int);
 
 
 unsigned long long FUN_002f82ac(unsigned int *param_1)
@@ -196,7 +196,7 @@ unsigned long long FUN_002f82ac(unsigned int *param_1)
                             FUN_0025715c();
                             param_1[0x10] = 0;
                           }
-                          temp_v1 = FUN_002c5c14(temp_v7,0,1,0x80);
+                          temp_v1 = asdLoadFileSync(temp_v7,0,1,0x80);
                           if (param_1[0x10] != 0) {
                             FUN_0025715c();
                             param_1[0x10] = 0;
@@ -204,7 +204,7 @@ unsigned long long FUN_002f82ac(unsigned int *param_1)
                           temp_v0 = temp_v1;
                           FUN_002491b4();
                           param_1[0x10] = temp_v0;
-                          FUN_002c415c(temp_v1);
+                          asdMemFree(temp_v1);
                         }
                         *(unsigned short *)(param_1 + 0x11) = 2;
                         param_1[7] = 1;
@@ -233,14 +233,14 @@ unsigned long long FUN_002f82ac(unsigned int *param_1)
                           FUN_002c0894();
                           param_1[0xe] = 0;
                         }
-                        temp_v1 = FUN_002c5c14(temp_v7,0,1,0x80);
+                        temp_v1 = asdLoadFileSync(temp_v7,0,1,0x80);
                         if ((param_1[0xe] != 0) && (*(short *)(param_1 + 0x11) == 1)) {
                           FUN_002c0894();
                           param_1[0xe] = 0;
                         }
                         temp_v0 = FUN_0028c814(temp_v1);
                         param_1[0xe] = temp_v0;
-                        FUN_002c415c(temp_v1);
+                        asdMemFree(temp_v1);
                       }
                       *(unsigned short *)(param_1 + 0x11) = 1;
                       param_1[7] = 1;
@@ -249,7 +249,7 @@ unsigned long long FUN_002f82ac(unsigned int *param_1)
                   }
                   if (param_1[7] != 0) {
                     puVar3 = (unsigned int *)0x10000;
-                    FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+                    memAlloc(0x10000,0x100,0,0x68,0x10,1);
                     puVar3[1] = 0xb;
                     puVar3[2] = (unsigned int)param_1;
                     puVar1 = puVar3;

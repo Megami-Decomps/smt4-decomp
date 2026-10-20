@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002c0894(void);
-int FUN_002c415c(void);
+int asdMemFree(void);
 
 typedef struct fn_002108c0_arg0 fn_002108c0_arg0;
 struct fn_002108c0_arg0 {
@@ -19,9 +19,9 @@ struct fn_002108c0_arg0 {
 };
 
 extern int FUN_00126724(void);
-extern int FUN_002b93b0(fn_002108c0_arg0 *, unsigned int);
+extern int asdTMTexTableCallFileB(fn_002108c0_arg0 *, unsigned int);
 /* Supplied declaration required: FUN_002c0894. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 unsigned int FUN_002108c0(fn_002108c0_arg0 *param_1)
@@ -41,11 +41,11 @@ unsigned int FUN_002108c0(fn_002108c0_arg0 *param_1)
     if (temp_v3 < *(int *)(temp_v0 + 4)) {
       do {
         puVar5 = (unsigned int *)(*(int *)(temp_v0 + 0xc) + temp_v3 * 0x14);
-        temp_v1 = FUN_002b93b0(param_1,*puVar5);
+        temp_v1 = asdTMTexTableCallFileB(param_1,*puVar5);
         if (((*(unsigned int *)(temp_v1 + 0x10) & 4) != 0) &&
-           (temp_v1 = FUN_002b93b0(param_1,*puVar5), temp_v1 != 0)) {
+           (temp_v1 = asdTMTexTableCallFileB(param_1,*puVar5), temp_v1 != 0)) {
           if (*(int *)(temp_v1 + 0xc) != 0) {
-            FUN_002c415c();
+            asdMemFree();
             *(unsigned int *)(temp_v1 + 0xc) = 0;
           }
           if (*(int *)(temp_v1 + 8) != 0) {

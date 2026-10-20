@@ -15,7 +15,7 @@ typedef struct {
 
 extern char s_ERROR____005b4499[9]; /* 0x5b4499 */
 
-extern int FUN_0030ef8c(unsigned int, unsigned int *, unsigned int);
+extern int rt_memcmp(unsigned int, unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00430ec8. */
 /* Supplied declaration required: FUN_00430ef0. */
 extern unsigned int nn_cec_CTR_MessageBox_GetMessHeader(unsigned int, int, unsigned int);
@@ -51,7 +51,7 @@ unsigned int FUN_00501928(int param_1,int param_2,unsigned int param_3)
       }
       temp_v3 = temp_v4;
       uStack_2c = uStack_24;
-      temp_v0 = FUN_0030ef8c(param_3,(unsigned int *)&temp_v3,8);
+      temp_v0 = rt_memcmp(param_3,(unsigned int *)&temp_v3,8);
       if (temp_v0 == 0) {
         return temp_v1;
       }

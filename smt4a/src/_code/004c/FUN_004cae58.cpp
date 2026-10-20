@@ -46,7 +46,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern int DAT_00571508; /* 0x571508 */
 
 extern int FUN_0016345c(void);
@@ -63,11 +63,11 @@ extern int FUN_004d8530(unsigned int);
 /* Supplied declaration required: FUN_004d8700. */
 extern int FUN_004d87a0(unsigned int);
 /* Supplied declaration required: FUN_004d888c. */
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004f3fb4. */
 /* Supplied declaration required: FUN_004fd2cc. */
 /* Supplied declaration required: FUN_004fecd4. */
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 void FUN_004cae58(fn_004cae58_arg0 *param_1,int param_2)
@@ -167,7 +167,7 @@ void FUN_004cae58(fn_004cae58_arg0 *param_1,int param_2)
         *(unsigned char *)(DAT_00571508 + 0x6a8) = 1;
         param_1[0x25].field_0x34 = 1;
       }
-      temp_v6 = FUN_004ee568(DAT_0057113c);
+      temp_v6 = btlUnitGet(g_btlScriptUnit);
       temp_v3 = 0;
       if (temp_v6 != 0) {
         temp_v3 = temp_v6;
@@ -234,7 +234,7 @@ LAB_004cb0b4:
     }
     if (*(int *)(temp_v2 + 0x34) != 0) {
       temp_v2 = FUN_003ec668(param_1,(int)*(char *)(temp_v7 + 2),2);
-      temp_v7 = aeabi_idivmod(*(int *)&pfVar3[1].field_0x48 * 100,*(unsigned int *)&pfVar3[1].field_0x4c
+      temp_v7 = __aeabi_idivmod(*(int *)&pfVar3[1].field_0x48 * 100,*(unsigned int *)&pfVar3[1].field_0x4c
                            );
       if ((temp_v7 < 0x14) && (temp_v2 != 0)) {
         FUN_003f2638(param_1,2,param_2,1);

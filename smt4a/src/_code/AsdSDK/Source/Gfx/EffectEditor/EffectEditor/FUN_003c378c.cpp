@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_001656a0(...);
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_00200bcc(unsigned char *);
 int FUN_00202178(int);
 int FUN_0020e9dc(unsigned char *);
@@ -67,7 +67,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Supplied declaration required: FUN_001656a0. */
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00200bcc. */
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: FUN_0020e9dc. */
@@ -237,7 +237,7 @@ unsigned int FUN_003c378c(int param_1,int param_2)
   FUN_002b3ed8(&temp_v14,&temp_v20,0xff00c0c0,0);
   FUN_002b3ed8(&temp_v17,&temp_v20,0xff00c0c0,0);
   temp_v5 = 0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+  memAlloc(0x10000,0x100,0,0x68,0x10,1);
   *(unsigned int *)(temp_v5 + 0x18) = 0;
   *(unsigned int *)(temp_v5 + 4) = 9;
   *(unsigned int *)(temp_v5 + 8) = temp_v20;

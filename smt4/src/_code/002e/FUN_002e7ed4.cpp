@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0025c650(...);
-int FUN_002c415c(...);
+int asdMemFree(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0025c650. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002e7ed4. */
 
 
@@ -109,21 +109,21 @@ LAB_002e80ac:
         (**(romwright_code **)((unsigned int)*(unsigned short *)(temp_v0 + 4) * 0x44 + 0x464120))();
       }
       if (*(int *)(temp_v0 + 0x18) != 0) {
-        FUN_002c415c();
+        asdMemFree();
         *(unsigned int *)(temp_v0 + 0x10) = 0;
         *(unsigned int *)(temp_v0 + 0x14) = 0;
         *(unsigned int *)(temp_v0 + 0x18) = 0;
       }
       if (*(int *)(temp_v0 + 0x28) != 0) {
-        FUN_002c415c();
+        asdMemFree();
         *(unsigned int *)(temp_v0 + 0x20) = 0;
         *(unsigned int *)(temp_v0 + 0x24) = 0;
         *(unsigned int *)(temp_v0 + 0x28) = 0;
       }
-      FUN_002c415c(temp_v0);
+      asdMemFree(temp_v0);
     }
   }
-  FUN_002c415c(param_2);
+  asdMemFree(param_2);
   return;
 }
 

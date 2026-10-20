@@ -1,47 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027341c` (_code @ 0x27341c, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Resets the object to state 11 with the given flag, freeing its three buffers. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0028d6d0(void);
-int FUN_002a7218(void);
-int FUN_002c415c(void);
+typedef struct Object {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 state;
+    /* 0x08 */ u8 flag;
+    /* 0x09 */ u8 unk09[3];
+    /* 0x0C */ void *bufferA;
+    /* 0x10 */ void *bufferB;
+    /* 0x14 */ void *bufferC;
+} Object;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+extern void asdMemFree(void *buffer);
+extern void scrScriptProcessDestroy(void *buffer);
+extern void FUN_0028d6d0(u8 flag);
 
-/* Supplied declaration required: FUN_0028d6d0. */
-/* Supplied declaration required: FUN_002a7218. */
-/* Supplied declaration required: FUN_002c415c. */
-
-
-void FUN_0027341c(unsigned int *param_1,unsigned char param_2)
-
+void FUN_0027341c(Object *obj, u8 flag)
 {
-/* irregular: 3 native warning(s); review required */
-  *(unsigned char *)(param_1 + 2) = param_2;
-  param_1[1] = 0xb;
-  *param_1 = 0;
-  if (param_1[3] != 0) {
-    FUN_002c415c();
-    param_1[3] = 0;
-  }
-  if (param_1[4] != 0) {
-    FUN_002c415c();
-    param_1[4] = 0;
-  }
-  if (param_1[5] != 0) {
-    FUN_002a7218();
-    param_1[5] = 0;
-  }
-  if (*(char *)(param_1 + 2) != '\0') {
-    FUN_0028d6d0();
-    return;
-  }
-  return;
+    obj->flag = flag;
+    obj->state = 11;
+    obj->unk00 = 0;
+    if (obj->bufferA != NULL) {
+        asdMemFree(obj->bufferA);
+        obj->bufferA = NULL;
+    }
+    if (obj->bufferB != NULL) {
+        asdMemFree(obj->bufferB);
+        obj->bufferB = NULL;
+    }
+    if (obj->bufferC != NULL) {
+        scrScriptProcessDestroy(obj->bufferC);
+        obj->bufferC = NULL;
+    }
+    if (obj->flag != 0) {
+        FUN_0028d6d0(obj->flag);
+    }
 }
 
-} /* extern "C" */
+}

@@ -8,7 +8,7 @@ int FUN_0025715c(void);
 int FUN_00269334(unsigned int);
 int FUN_002c2264(unsigned int);
 int FUN_002c2318(unsigned int);
-int FUN_002c415c(...);
+int asdMemFree(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00269334. */
 /* Supplied declaration required: FUN_002c2264. */
 /* Supplied declaration required: FUN_002c2318. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_001f71b4(unsigned int *param_1)
@@ -42,7 +42,7 @@ void FUN_001f71b4(unsigned int *param_1)
     for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0 = temp_v0 + 1) {
       FUN_002c2318(*(unsigned int *)(param_1[0xd] + temp_v0 * 4));
     }
-    FUN_002c415c(param_1[0xe]);
+    asdMemFree(param_1[0xe]);
   }
   if (param_1[0x10] != 0) {
     temp_v0 = 0;
@@ -55,7 +55,7 @@ void FUN_001f71b4(unsigned int *param_1)
     for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0 = temp_v0 + 1) {
       FUN_002c2264(*(unsigned int *)(param_1[0xf] + temp_v0 * 4));
     }
-    FUN_002c415c(param_1[0x10]);
+    asdMemFree(param_1[0x10]);
   }
   if (param_1[0x11] != 0) {
     FUN_0025715c();
@@ -69,7 +69,7 @@ void FUN_001f71b4(unsigned int *param_1)
   if (param_1[0x14] != 0) {
     FUN_002570a8();
   }
-  FUN_002c415c(param_1);
+  asdMemFree(param_1);
   return;
 }
 

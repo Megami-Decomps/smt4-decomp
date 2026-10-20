@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0022699c(int, int, int, unsigned int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 
 extern int DAT_00434290; /* 0x434290 */
 
 /* Supplied declaration required: FUN_0022699c. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 
 
 unsigned int
@@ -21,7 +21,7 @@ FUN_0024b888(short param_1,unsigned int param_2,unsigned short param_3,unsigned 
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  FUN_002939f4();
+  btlGetMainState();
   temp_v0 = DAT_00434290;
   FUN_0022699c(DAT_00434290,(int)param_1,0,param_2);
   *(unsigned char *)(temp_v0 + 4) = 0x23;

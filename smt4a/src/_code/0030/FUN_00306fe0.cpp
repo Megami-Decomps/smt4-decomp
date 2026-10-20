@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern int aeabi_uidivmod(void);
+extern int __aeabi_uidivmod(void);
 
 
 int FUN_00306fe0(unsigned int param_1,int param_2,int param_3)
@@ -28,7 +28,7 @@ int FUN_00306fe0(unsigned int param_1,int param_2,int param_3)
     uStack_10 = param_1;
     iStack_c = param_2;
     temp_v2[0] = param_3;
-    temp_v0 = aeabi_uidivmod();
+    temp_v0 = __aeabi_uidivmod();
     temp_v1[0] = temp_v0 * 1000;
     if (temp_v0 * 1000 < temp_v2[0]) {
       piVar2 = temp_v2;

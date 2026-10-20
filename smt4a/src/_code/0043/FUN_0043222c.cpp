@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -43,12 +43,12 @@ unsigned int FUN_0043222c(int param_1,unsigned int param_2)
   float temp_v7;
   
   temp_v0 = FUN_002ef01c(*(unsigned int *)(param_1 + 4));
-  if ((*(romwright_code * *)((unsigned char *)&DAT_00594958 + 0x15c)) != (romwright_code *)0x0) {
+  if ((*(romwright_code * *)((unsigned char *)&g_flagBlock + 0x15c)) != (romwright_code *)0x0) {
     temp_v1 = FUN_001244fc();
     temp_v2 = FUN_001242e2(param_1 + 0xc4);
                     /* WARNING: Could not recover jumptable at 0x0043227c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    temp_v3 = (*(*(romwright_code * *)((unsigned char *)&DAT_00594958 + 0x15c)))(temp_v2,temp_v1);
+    temp_v3 = (*(*(romwright_code * *)((unsigned char *)&g_flagBlock + 0x15c)))(temp_v2,temp_v1);
     return temp_v3;
   }
   temp_v4 = FUN_001242f0(param_2);

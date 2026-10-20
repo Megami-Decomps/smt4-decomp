@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0028033c(...);
-int FUN_002a1b00(...);
+int asdListBoxCreate(...);
+int asdListBoxAddItem(...);
 int FUN_002e0898(...);
 int FUN_002ea508(...);
 int FUN_00317464(...);
@@ -22,8 +22,8 @@ typedef struct {
 extern unsigned char DAT_00528144; /* 0x528144 */
 extern unsigned int *DAT_00571508; /* 0x571508 */
 
-/* Supplied declaration required: FUN_0028033c. */
-/* Supplied declaration required: FUN_002a1b00. */
+/* Supplied declaration required: asdListBoxCreate. */
+/* Supplied declaration required: asdListBoxAddItem. */
 /* Supplied declaration required: FUN_002e0898. */
 /* Supplied declaration required: FUN_002ea508. */
 /* Supplied declaration required: FUN_00317464. */
@@ -39,7 +39,7 @@ void FUN_004f479c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   unsigned int *puVar1;
   
   *(short *)(param_1 + 0x14) = (short)param_4;
-  FUN_0028033c(param_3,0xf0,0x10,0x20,4);
+  asdListBoxCreate(param_3,0xf0,0x10,0x20,4);
   *(unsigned int *)(param_1 + 0xc) = param_3;
   FUN_0037a854();
   FUN_002e0898(param_3,0xc);
@@ -48,7 +48,7 @@ void FUN_004f479c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     if (param_4 == 2) {
       DAT_00571508[0xd] = 0;
       FUN_002ea508(param_3,"CAMERA EDIT");
-      FUN_002a1b00(param_3,&DAT_00528144);
+      asdListBoxAddItem(param_3,&DAT_00528144);
       FUN_00317464(param_3,0,DAT_00571508[0xd],0,1000,0);
     }
   }
@@ -57,9 +57,9 @@ void FUN_004f479c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     puVar1[1] = 0;
     *puVar1 = 0;
     FUN_002ea508(param_3,"CAMERA EDIT");
-    FUN_002a1b00(param_3,"瞂삍垕쾕墍");
-    FUN_002a1b00(param_3,"碂삍垕쾕墍");
-    FUN_002a1b00(param_3,"禂삍垕쾕墍");
+    asdListBoxAddItem(param_3,"瞂삍垕쾕墍");
+    asdListBoxAddItem(param_3,"碂삍垕쾕墍");
+    asdListBoxAddItem(param_3,"禂삍垕쾕墍");
     FUN_00340edc(param_3,0,0xfffffc18);
     FUN_00340edc(param_3,1,0xfffffc18,1000);
     FUN_00340edc(param_3,2,0xfffffc18,1000);

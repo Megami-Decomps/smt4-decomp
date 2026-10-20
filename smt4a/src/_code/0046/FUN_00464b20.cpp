@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001cc084(unsigned int, int [9], unsigned int, unsigned int, unsigned int, unsigned int, int);
 int FUN_002ffa9c(int, unsigned int, int, int);
-int aeabi_uidivmod(unsigned int);
+int __aeabi_uidivmod(unsigned int);
 int nw_snd_internal_driver_Voice_Pause(int, int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002ffa9c. */
 extern int FUN_0050947c(int);
 extern int FUN_005094c4(unsigned int);
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
 extern int nw_snd_internal_driver_Voice_IsRun(int);
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Pause. */
@@ -127,7 +127,7 @@ LAB_00464d94:
             temp_v3 = (temp_v3 - param_4) + temp_v7;
           }
           else {
-            aeabi_uidivmod(temp_v3 - temp_v7);
+            __aeabi_uidivmod(temp_v3 - temp_v7);
             temp_v3 = temp_v5 + temp_v7;
           }
         }

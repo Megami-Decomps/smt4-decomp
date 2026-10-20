@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192748(void);
+int dataTableGetCount(void);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -27,9 +27,9 @@ typedef struct {
 #define ROMWRIGHT_PIECE_1_3_DEFINED
 #define romwright_piece_1_3(upper, lower) ((unsigned int)(((unsigned int)(unsigned char)(upper) << 24) | ((unsigned int)(lower) & 0xffffffULL)))
 #endif
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00192748. */
-extern int FUN_00192798(unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(unsigned int);
 
 
 void FUN_004cceb8(unsigned int *param_1)
@@ -42,9 +42,9 @@ void FUN_004cceb8(unsigned int *param_1)
   int temp_v3;
   unsigned int temp_v4;
   
-  temp_v2 = FUN_00187180(9,0);
-  FUN_00192748();
-  temp_v3 = FUN_00192798(temp_v2);
+  temp_v2 = dataTableGet(9,0);
+  dataTableGetCount();
+  temp_v3 = dataTableGetEntries(temp_v2);
   temp_v0 = *(unsigned char *)(temp_v3 + 10);
   temp_v1 = *(unsigned char *)(temp_v3 + 9);
   temp_v4 = romwright_piece_1_3(*(unsigned char *)(temp_v3 + 0xd),

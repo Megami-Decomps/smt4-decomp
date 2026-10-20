@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_0031d890(void);
 int FUN_0037b7e4(void);
-int FUN_003a5164(void);
+int campCecRankingDestroy(void);
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0031d890. */
-extern int FUN_0032e48c(void);
-extern int FUN_0034432c(void);
+extern int campCecRankingExists(void);
+extern int campCecRankingIsDone(void);
 /* Supplied declaration required: FUN_0037b7e4. */
-/* Supplied declaration required: FUN_003a5164. */
+/* Supplied declaration required: campCecRankingDestroy. */
 
 
 unsigned int FUN_002e221c(int param_1)
@@ -25,12 +25,12 @@ unsigned int FUN_002e221c(int param_1)
   unsigned int temp_v1;
   
   temp_v1 = 0;
-  temp_v0 = FUN_0032e48c();
+  temp_v0 = campCecRankingExists();
   if (temp_v0 != 0) {
-    temp_v0 = FUN_0034432c();
+    temp_v0 = campCecRankingIsDone();
     if (temp_v0 != 0) {
-      FUN_003a5164();
-      FUN_001681cc(0x10d);
+      campCecRankingDestroy();
+      sysPlaySe(0x10d);
       *(unsigned int *)(param_1 + 0x144) = 1;
       *(unsigned int *)(param_1 + 0x14c) = 0;
       FUN_0031d890();

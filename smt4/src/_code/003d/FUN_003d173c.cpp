@@ -46,7 +46,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
 
-extern unsigned int DAT_004342c8; /* 0x4342c8 */
+extern unsigned int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
 extern unsigned int DAT_004398d4; /* 0x4398d4 */
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
@@ -166,8 +166,8 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
         else {
           FUN_0033911c(*param_1);
           FUN_0033a264(*param_1);
-          FUN_003d6408(DAT_004342c8);
-          FUN_003d5ef4(DAT_004342c8);
+          FUN_003d6408(g_btlMain);
+          FUN_003d5ef4(g_btlMain);
           FUN_00267d3c(DAT_00439ca8);
           FUN_00245228(*param_1,0,10);
           FUN_002505c0(0,param_2,0x100010a,0,0,0,1);
@@ -197,8 +197,8 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
           FUN_00339254(*param_1);
           FUN_0034008c(DAT_004398d4);
           FUN_00227750(0,param_2,1);
-          FUN_003d660c(DAT_004342c8);
-          FUN_0024082c(DAT_004342c8,0);
+          FUN_003d660c(g_btlMain);
+          FUN_0024082c(g_btlMain,0);
           FUN_003dc02c(DAT_00435d18);
           FUN_00339dc0(*param_1);
           FUN_00338fb0(*param_1);

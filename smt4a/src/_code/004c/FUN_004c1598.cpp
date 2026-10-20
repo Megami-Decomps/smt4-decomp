@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_003e8bb0(unsigned char [2], unsigned int, unsigned int);
 int FUN_003f0e20(...);
 int FUN_004c0f74(int, unsigned int);
@@ -22,7 +22,7 @@ typedef struct {
 } param_2_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004c0f74. */
@@ -48,10 +48,10 @@ void FUN_004c1598(unsigned int param_1,unsigned int param_2)
   unsigned short temp_v9;
   short temp_v10;
   
-  temp_v0 = FUN_0014aa78();
-  temp_v1 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
+  temp_v1 = btlGetMainState();
   FUN_003f0e20(temp_v1,param_1);
-  temp_v2 = FUN_0014aa78();
+  temp_v2 = btlGetMainState();
   FUN_003e8bb0(temp_v8,temp_v2,temp_v1);
   if ((int)temp_v10 - 3U >= 8) {
     temp_v3 = param_1;

@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0010095c(int, int, unsigned int, unsigned int, int, unsigned int, unsigned int);
 int FUN_002e3338(int, int, unsigned int, unsigned int);
-int FUN_002e3390(...);
-int FUN_002e33f0(int);
+int wstrlen(...);
+int asdOperatorNewC(int);
 int FUN_002e342c(void);
 int FUN_002e3494(...);
 
@@ -18,8 +18,8 @@ int FUN_002e3494(...);
 extern int FUN_001008a2(void);
 /* Supplied declaration required: FUN_0010095c. */
 /* Supplied declaration required: FUN_002e3338. */
-/* Supplied declaration required: FUN_002e3390. */
-/* Supplied declaration required: FUN_002e33f0. */
+/* Supplied declaration required: wstrlen. */
+/* Supplied declaration required: asdOperatorNewC. */
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: FUN_002e3494. */
 
@@ -48,9 +48,9 @@ unsigned long long FUN_001006f4(int param_1,unsigned int param_2,unsigned int pa
   }
   temp_v1 = temp_v0;
   if (*(int *)(param_1 + 4) != 0) {
-    temp_v1 = FUN_002e3390();
-    temp_v2 = FUN_002e3390(temp_v0);
-    FUN_002e33f0(temp_v1 + temp_v2 + 1);
+    temp_v1 = wstrlen();
+    temp_v2 = wstrlen(temp_v0);
+    asdOperatorNewC(temp_v1 + temp_v2 + 1);
     FUN_002e342c();
     temp_v1 = FUN_001008a2();
     FUN_002e3494(*(unsigned int *)(param_1 + 4));

@@ -1,26 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f3490` (_code @ 0x2f3490, 0x16 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the Thumb literal-pool alignment pad differs in fdiff (retail lists it as code `movs r0, r0`, the build as data `.short 0x0000`); the bytes are the same. */
+/* Destructor: restores the vtable, destroys the member at 0x10 and then the sub-object at 0x4 that holds it; returns this. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e9318(...);
+typedef struct {
+    const void *vtbl; /* 0x00 */
+    u8 unk04[0xc];    /* 0x04 */
+    u8 member[1];     /* 0x10 */
+} MemberOwner;
 
-extern unsigned char DAT_00558b2c; /* 0x558b2c */
+extern u8 DAT_00558b2c;
 
-/* Supplied declaration required: FUN_002e9318. */
+u8 *FUN_002e9318(u8 *self);
 
-
-int FUN_002f3490(unsigned int *param_1)
-
+MemberOwner *FUN_002f3490(MemberOwner *self)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  *param_1 = (unsigned int)&DAT_00558b2c;
-  temp_v0 = FUN_002e9318(param_1 + 4);
-  temp_v0 = FUN_002e9318(temp_v0 - 0xc);
-  return temp_v0 - 4;
+    u8 *subObject;
+
+    self->vtbl = &DAT_00558b2c;
+    subObject = FUN_002e9318(self->member) - 0xc;
+    return (MemberOwner *)(FUN_002e9318(subObject) - 4);
 }
 
 } /* extern "C" */

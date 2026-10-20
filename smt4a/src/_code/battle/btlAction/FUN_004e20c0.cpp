@@ -44,7 +44,7 @@ int FUN_004c45b4(...);
 int FUN_004c571c(...);
 int FUN_004c63f0(void);
 int FUN_004e5f2c(...);
-int FUN_004f5d64(...);
+int btlEffectFindSlotId(...);
 int FUN_004f7a58(...);
 int FUN_004f8f44(...);
 int FUN_004fb43c(...);
@@ -219,7 +219,7 @@ extern unsigned int uRam005712d4; /* 0x5712d4 */
 extern unsigned int DAT_005712e8; /* 0x5712e8 */
 extern unsigned int DAT_005712ec; /* 0x5712ec */
 extern int DAT_00573808; /* 0x573808 */
-extern unsigned int DAT_00573898; /* 0x573898 */
+extern unsigned int g_btlEvent; /* 0x573898 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -284,9 +284,9 @@ extern int FUN_004c6b8c(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_004e62b4. */
 /* Supplied declaration required: FUN_004e699c. */
 extern int FUN_004e83ac(unsigned int *, unsigned int *, int);
-extern int FUN_004ee568(unsigned int *);
+extern int btlUnitGet(unsigned int *);
 extern int FUN_004f5d2c(int);
-/* Supplied declaration required: FUN_004f5d64. */
+/* Supplied declaration required: btlEffectFindSlotId. */
 extern int FUN_004f6478(int);
 /* Supplied declaration required: FUN_004f7a58. */
 extern int FUN_004f7aa4(int, unsigned int);
@@ -1045,7 +1045,7 @@ LAB_004e34b8:
     }
     temp_v5 = FUN_004f9a20(DAT_00573808);
     temp_v24 = temp_v5 + temp_v85 + temp_v12;
-    temp_v26 = FUN_004f5d64(DAT_00573808);
+    temp_v26 = btlEffectFindSlotId(DAT_00573808);
     temp_v5 = FUN_004f9ae4(DAT_00573808,1);
     temp_v25 = (unsigned int *)(temp_v5 + temp_v85 + temp_v12);
     temp_v5 = FUN_004f8054(DAT_00573808);
@@ -1085,7 +1085,7 @@ LAB_004e34b8:
     FUN_004c571c(param_8,2,puVar9,0);
     if (puVar13 == (unsigned int *)0x0) {
       temp_v23 = (unsigned int *)0x3;
-      temp_v5 = FUN_004ee568(param_1);
+      temp_v5 = btlUnitGet(param_1);
       temp_v8 = 0;
       temp_v9 = 0x85;
       do {
@@ -1098,7 +1098,7 @@ LAB_004e34b8:
         temp_v8 = temp_v8 + 1;
       } while (temp_v9 != 0);
       temp_v21 = (unsigned int *)0x2;
-      temp_v5 = FUN_004ee568(param_1);
+      temp_v5 = btlUnitGet(param_1);
       temp_v8 = 0;
       do {
         temp_v9 = temp_v5 + temp_v8 * 8;
@@ -1421,7 +1421,7 @@ LAB_004e4280:
                 FUN_003f2aac(*param_1,param_7,0);
               }
               temp_v5 = param_8;
-              temp_v8 = FUN_004ee568(param_1);
+              temp_v8 = btlUnitGet(param_1);
               temp_v9 = 0;
               goto LAB_004e4538;
             }
@@ -1506,7 +1506,7 @@ LAB_004e45bc:
       }
       temp_v5 = FUN_004f5d2c(DAT_00573808);
       temp_v5 = temp_v5 * param_11;
-      temp_v8 = FUN_004f5d64(DAT_00573808);
+      temp_v8 = btlEffectFindSlotId(DAT_00573808);
       temp_v9 = FUN_004f9ae4(DAT_00573808,1);
       temp_v10 = FUN_004f8054(DAT_00573808);
       temp_v27 = 0;
@@ -1560,7 +1560,7 @@ LAB_004e45bc:
           FUN_004e699c(param_1,param_8,3);
         }
         else {
-          temp_v18 = FUN_004f5d64(DAT_00573808);
+          temp_v18 = btlEffectFindSlotId(DAT_00573808);
           temp_v5 = FUN_004f8054(DAT_00573808);
           temp_v5 = temp_v5 + temp_v48;
           temp_v8 = FUN_004f8054(DAT_00573808);
@@ -1727,7 +1727,7 @@ LAB_004e4cac:
         temp_v79 = (unsigned int *)0x1;
       }
     }
-    temp_v8 = FUN_004f5d64(DAT_00573808);
+    temp_v8 = btlEffectFindSlotId(DAT_00573808);
     temp_v10 = temp_v8 + temp_v5 + temp_v12;
     temp_v8 = FUN_004f9ae4(DAT_00573808,1);
     temp_v9 = FUN_004f8054(DAT_00573808);
@@ -1851,7 +1851,7 @@ LAB_004e4cac:
       }
     }
 LAB_004e5308:
-    temp_v5 = FUN_004d7a60(DAT_00573898,*(int *)(*param_1 + 0x1ed4) + param_8 * 0x1d0,1);
+    temp_v5 = FUN_004d7a60(g_btlEvent,*(int *)(*param_1 + 0x1ed4) + param_8 * 0x1d0,1);
     if (temp_v5 != 0) {
       temp_v6 = *param_1;
       FUN_003f06b4(temp_v6,*(int *)(temp_v6 + 0x1ed4) + param_8 * 0x1d0);
@@ -1859,7 +1859,7 @@ LAB_004e5308:
         temp_v6 = *param_1;
         FUN_003f0254(temp_v6,*(int *)(temp_v6 + 0x1ed4) + param_8 * 0x1d0);
         if (temp_v6 != 0) {
-          FUN_004d7a60(DAT_00573898,*(int *)(*param_1 + 0x1ed4) + param_8 * 0x1d0,0);
+          FUN_004d7a60(g_btlEvent,*(int *)(*param_1 + 0x1ed4) + param_8 * 0x1d0,0);
         }
         else {
           puVar9 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v12 * 0x408);
@@ -1869,7 +1869,7 @@ LAB_004e5308:
         }
       }
       else {
-        FUN_004d7a60(DAT_00573898,*(int *)(*param_1 + 0x1ed4) + param_8 * 0x1d0,0);
+        FUN_004d7a60(g_btlEvent,*(int *)(*param_1 + 0x1ed4) + param_8 * 0x1d0,0);
       }
     }
     else {

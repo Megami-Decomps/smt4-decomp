@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00164a9c(...);
+int jobGetWork(...);
 
 typedef struct fn_003874fc_arg0 fn_003874fc_arg0;
 struct fn_003874fc_arg0 {
@@ -14,7 +14,7 @@ struct fn_003874fc_arg0 {
     undefined4 field_0x64; /* +0x64 */
 };
 
-/* Supplied declaration required: FUN_00164a9c. */
+/* Supplied declaration required: jobGetWork. */
 
 
 unsigned int FUN_003874fc(fn_003874fc_arg0 *param_1)
@@ -25,10 +25,10 @@ unsigned int FUN_003874fc(fn_003874fc_arg0 *param_1)
   int *piVar2;
   int temp_v1;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   temp_v1 = *(int *)(temp_v0 + 0x60);
   temp_v0 = *(int *)(temp_v0 + 100);
-  piVar2 = (int *)FUN_00164a9c(param_1);
+  piVar2 = (int *)jobGetWork(param_1);
   piVar2 = (int *)*piVar2;
   while( 1 ) {
     if (piVar2 == (int *)0x0) {

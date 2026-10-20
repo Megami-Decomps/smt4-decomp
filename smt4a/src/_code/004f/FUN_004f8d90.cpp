@@ -7,13 +7,13 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00178b04(...);
 int FUN_001cd3ec(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001cd3ec. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern unsigned int FUN_0040ac08(void);
 
 
@@ -38,9 +38,9 @@ void FUN_004f8d90(int param_1,int param_2)
     return;
   }
   *(int *)(param_1 + 0x33a0) = param_2;
-  FUN_002e6354(temp_v10,0x80);
+  sysMemClear(temp_v10,0x80);
   FUN_00100388(temp_v10,"battle/dead_effect/dead_effect%02d.bam",param_2);
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   temp_v8 = 0;
   do {
     temp_v9 = temp_v0 + temp_v8 * 0x1c;

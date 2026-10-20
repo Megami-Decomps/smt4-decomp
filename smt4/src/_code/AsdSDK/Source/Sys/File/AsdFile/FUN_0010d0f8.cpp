@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_002bcc60(...);
 int FUN_002bcd44(...);
-int FUN_002c222c(...);
-int FUN_002c32a0(...);
+int asdOperatorNew(...);
+int memAlloc(...);
 int FUN_002c526c(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -21,19 +21,19 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern int FUN_00113e4c(...); /* 0x113e4c */
+extern int asdFileThreadMain(...); /* 0x113e4c */
 extern unsigned char LAB_00123c88; /* 0x123c88 */
 extern unsigned char LAB_00123ca4; /* 0x123ca4 */
 extern unsigned char LAB_00123cb4; /* 0x123cb4 */
-extern unsigned char DAT_00465000; /* 0x465000 */
+extern unsigned char g_asdFile; /* 0x465000 */
 extern unsigned int DAT_00465018; /* 0x465018 */
 extern unsigned int *DAT_0046501c; /* 0x46501c */
 extern unsigned int DAT_00465020; /* 0x465020 */
 
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002bcd44. */
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c526c. */
 
 
@@ -49,12 +49,12 @@ void FUN_0010d0f8(void)
   unsigned char *temp_v4;
   unsigned char temp_v5;
   
-  DAT_00465000 = 0;
+  g_asdFile = 0;
   temp_v0 = 0x100;
-  FUN_002c32a0(0x100,0x100,0,0x1000,0x1000,1);
+  memAlloc(0x100,0x100,0,0x1000,0x1000,1);
   puVar2 = (unsigned int *)0x18;
   DAT_00465018 = temp_v0;
-  FUN_002c222c();
+  asdOperatorNew();
   if (puVar2 != (unsigned int *)0x0) {
     *puVar2 = 0;
     puVar2[1] = 0;
@@ -69,7 +69,7 @@ void FUN_0010d0f8(void)
   puVar2 = &DAT_00465020;
   temp_v3 = &LAB_00123cb4;
   temp_v4 = &LAB_00123ca4;
-  FUN_002bcc60(&DAT_00465020,&temp_v1,FUN_00113e4c,&temp_v5,DAT_0046501c[3] + DAT_0046501c[2],0x12
+  FUN_002bcc60(&DAT_00465020,&temp_v1,asdFileThreadMain,&temp_v5,DAT_0046501c[3] + DAT_0046501c[2],0x12
                ,0xfffffffe,0);
   if (((unsigned int)puVar2 & 0x7e00000) != 0x600000 && (int)puVar2 < 0) {
     FUN_002c526c();

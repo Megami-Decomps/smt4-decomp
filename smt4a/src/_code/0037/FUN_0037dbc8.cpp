@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_0016a0f0(int);
 int FUN_001ad9b4(...);
 int FUN_00275bb0(int);
@@ -12,34 +12,34 @@ int FUN_00275fe4(...);
 int FUN_002852f0(int);
 int FUN_002c76c0(...);
 int FUN_002cd8fc(void);
-int FUN_0031bbe0(int);
-int FUN_003283ac(int);
+int eventTexSetFlag(int);
+int scrSetResult(int);
 int FUN_00336de4(unsigned int, int);
-int FUN_00341ecc(int);
-int FUN_0035fd38(int);
+int bustupCutAnimSetFlag(int);
+int btlTalkBustUpSetUnk2F4(int);
 int FUN_003deea4(int);
 int FUN_003fd63c(...);
 int FUN_00417a60(int);
 int FUN_004da2f8(void);
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0016a0f0. */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(unsigned int);
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00275bb0. */
 /* Supplied declaration required: FUN_00275fe4. */
 /* Supplied declaration required: FUN_002852f0. */
 /* Supplied declaration required: FUN_002c76c0. */
 /* Supplied declaration required: FUN_002cd8fc. */
 extern int FUN_002deb84(void);
-/* Supplied declaration required: FUN_0031bbe0. */
-extern int FUN_003216b8(void);
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: eventTexSetFlag. */
+extern int btlTalkBustUpExists(void);
+/* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_00336de4. */
-/* Supplied declaration required: FUN_00341ecc. */
+/* Supplied declaration required: bustupCutAnimSetFlag. */
 extern int FUN_0035fcbc(void);
-/* Supplied declaration required: FUN_0035fd38. */
+/* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 extern unsigned int FUN_00375848(void);
 /* Supplied declaration required: FUN_003deea4. */
 /* Supplied declaration required: FUN_003fd63c. */
@@ -61,7 +61,7 @@ unsigned int FUN_0037dbc8(void)
   unsigned int temp_v5;
   int temp_v6;
   
-  temp_v1 = FUN_00236038(0);
+  temp_v1 = scrGetArg(0);
   temp_v2 = FUN_002deb84();
   if (temp_v2 != 0) {
     FUN_0016a0f0(0x1e);
@@ -71,20 +71,20 @@ unsigned int FUN_0037dbc8(void)
       if (temp_v2 == 1) {
         FUN_002c76c0(0xffffffff);
         FUN_002852f0(0);
-        FUN_001681cc(0x92);
+        sysPlaySe(0x92);
         FUN_00275bb0(3);
-        FUN_0031bbe0(1);
-        FUN_00341ecc(1);
+        eventTexSetFlag(1);
+        bustupCutAnimSetFlag(1);
         temp_v4 = FUN_00275bb0(2);
         if (-1 < (int)temp_v4) {
-          temp_v2 = FUN_003216b8();
+          temp_v2 = btlTalkBustUpExists();
           if (temp_v2 == 0) {
             FUN_002cd8fc();
           }
           if ((temp_v4 != 0) && (temp_v5 = FUN_00375848(), temp_v5 != temp_v4)) {
             FUN_00336de4(temp_v4 & 0xffff,0);
           }
-          FUN_0035fd38(1);
+          btlTalkBustUpSetUnk2F4(1);
         }
         temp_v2 = FUN_004186a4();
         if ((temp_v2 != 0) && (temp_v4 = FUN_004186e0(), temp_v4 == temp_v1)) {
@@ -93,14 +93,14 @@ unsigned int FUN_0037dbc8(void)
       }
       FUN_00417a60(temp_v1);
       FUN_003deea4(0);
-      FUN_003283ac(1);
+      scrSetResult(1);
       return 1;
     }
     temp_v2 = FUN_0035fcbc();
     if (temp_v2 == 0) {
-      FUN_0031bbe0(0);
-      FUN_00341ecc(0);
-      temp_v2 = FUN_003216b8();
+      eventTexSetFlag(0);
+      bustupCutAnimSetFlag(0);
+      temp_v2 = btlTalkBustUpExists();
       if (temp_v2 != 0) {
         temp_v3 = FUN_00375848();
         FUN_00275fe4(2,temp_v3);
@@ -108,7 +108,7 @@ unsigned int FUN_0037dbc8(void)
       else {
         FUN_00275fe4(2,0xffffffff);
       }
-      FUN_0035fd38(0);
+      btlTalkBustUpSetUnk2F4(0);
       FUN_00275fe4(3,0);
       FUN_002c76c0(1);
       FUN_00275fe4(0,1);
@@ -120,7 +120,7 @@ unsigned int FUN_0037dbc8(void)
     FUN_001ad9b4();
     temp_v2 = FUN_001ada74(temp_v1);
     if (temp_v2 == 0) {
-      FUN_003283ac(0);
+      scrSetResult(0);
       return 1;
     }
     FUN_00275fe4(0);

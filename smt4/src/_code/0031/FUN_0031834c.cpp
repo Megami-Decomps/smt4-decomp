@@ -1,39 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031834c` (_code @ 0x31834c, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Reports through scrSetResult whether the stat slot selected by scrGetArg (0/1/2 -> slot 7/10/11) of the current unit is negative; always returns 1. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+typedef struct Unit {
+    /* 0x00 */ u8 unk00[0x72];
+    /* 0x72 */ s16 stats[1];
+} Unit;
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+typedef struct UnitRef {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ Unit *unit;
+} UnitRef;
 
-extern int FUN_0027e928(unsigned int);
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_00296cc8(void);
+extern u32 g_btlScriptUnit;
 
+extern s32 scrGetArg(void);
+extern UnitRef *btlUnitGet(u32 id);
+extern void scrSetResult(s32 value);
 
-unsigned int FUN_0031834c(void)
-
+u32 FUN_0031834c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_00296cc8();
-  temp_v1 = 0;
-  if (temp_v0 == 0) {
-    temp_v1 = 7;
-  }
-  else if (temp_v0 == 1) {
-    temp_v1 = 10;
-  }
-  else if (temp_v0 == 2) {
-    temp_v1 = 0xb;
-  }
-  temp_v0 = FUN_0027e928(DAT_0043427c);
-  FUN_0028dcb0(0x7fffffff < (unsigned int)(int)*(short *)(*(int *)(temp_v0 + 0x20) + temp_v1 * 2 + 0x72));
-  return 1;
+    s32 which = scrGetArg();
+    s32 slot = 0;
+    UnitRef *ref;
+    if (which == 0) {
+        slot = 7;
+    } else if (which == 1) {
+        slot = 10;
+    } else if (which == 2) {
+        slot = 11;
+    }
+    Unit *unit;
+    s32 value;
+
+    ref = btlUnitGet(g_btlScriptUnit);
+    unit = ref->unit;
+    value = unit->stats[slot];
+    scrSetResult(value <= -1);
+    return 1;
 }
 
-} /* extern "C" */
+}

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001630d4(int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 int FUN_002e6dd4(unsigned short *, int);
 
 /* stack frame of param_9: 3 slot(s), 12 byte(s) */
@@ -18,7 +18,7 @@ extern unsigned int g_taskLists; /* 0x619988 */
 extern unsigned int DAT_0061998c; /* 0x61998c */
 extern unsigned int DAT_00619990; /* 0x619990 */
 
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_002e6dd4. */
 
 
@@ -36,7 +36,7 @@ void taskCreate(unsigned int param_1,unsigned int param_2,unsigned int param_3,u
   
   puVar5 = &g_taskLists + param_7 * 4;
   puVar2 = (unsigned short *)0x100;
-  FUN_001630d4(0x100,0x100,0,param_6 + 0x34,1);
+  asdMemoryAlloc(0x100,0x100,0,param_6 + 0x34,1);
   if (puVar2 != (unsigned short *)0x0) {
     *(char *)((int)puVar2 + 3) = (char)param_7;
     *puVar2 = param_8;

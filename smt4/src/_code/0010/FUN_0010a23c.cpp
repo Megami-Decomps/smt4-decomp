@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00128650(unsigned char *, int, int);
-int FUN_002c4938(unsigned char *, int);
+int memClear(unsigned char *, int);
 int nn_hid_CTR_PadReader_PadReader_sub_object(unsigned char *, unsigned int);
 
 extern unsigned char *DAT_004650a0; /* 0x4650a0 */
@@ -23,7 +23,7 @@ extern unsigned char DAT_004e3c58; /* 0x4e3c58 */
 extern unsigned int FUN_0011c6c0(void);
 /* Supplied declaration required: FUN_00128650. */
 extern int FUN_002bfefc(unsigned int *);
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: nn_hid_CTR_PadReader_PadReader_sub_object. */
 
 
@@ -41,7 +41,7 @@ void FUN_0010a23c(void)
   DAT_004650a0 = &DAT_004e3be8;
   DAT_004e3c00 = 0;
   FUN_00128650(&DAT_004e3be8,0x28,0x91);
-  FUN_002c4938(&DAT_004e3c58,0x7c);
+  memClear(&DAT_004e3c58,0x7c);
   DAT_004e3c48 = 0;
   DAT_004e3c4c = 0;
   DAT_004e3c50 = 0;

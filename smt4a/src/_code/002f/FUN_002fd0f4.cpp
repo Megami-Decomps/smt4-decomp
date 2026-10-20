@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002f8554(void);
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 
 /* Supplied declaration required: FUN_002f8554. */
 
@@ -15,7 +15,7 @@ void FUN_002fd0f4(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0xd)) != '\0') {
+  if ((*(signed char *)((unsigned char *)&g_flagBlock + 0xd)) != '\0') {
     FUN_002f8554();
   }
   return;

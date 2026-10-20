@@ -1,24 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nw_snd_internal_driver_Voice_SetVolume` (_code @ 0x1c1eb4, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Sets the voice volume (clamped to be non-negative), flagging it for update only when it changes. */
+#include "nw/snd/Voice.h"
 
 extern "C" {
 
-
-void nw_snd_internal_driver_Voice_SetVolume(int param_1)
-
+void nw_snd_internal_driver_Voice_SetVolume(nw_snd_internal_driver_Voice *voice, f32 volume)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  float in_s0;
-  
-  if (in_s0 < 0.0f) {
-    in_s0 = 0.0f;
-  }
-  if (*(float *)(param_1 + 0x24) != in_s0) {
-    *(float *)(param_1 + 0x24) = in_s0;
-    *(unsigned short *)(param_1 + 0x20) = *(unsigned short *)(param_1 + 0x20) | 0x40;
-  }
-  return;
+    if (volume < 0.0f) {
+        volume = 0.0f;
+    }
+    if (voice->volume != volume) {
+        voice->volume = volume;
+        voice->updateFlags = voice->updateFlags | VOICE_UPDATE_VOLUME;
+    }
 }
 
 } /* extern "C" */

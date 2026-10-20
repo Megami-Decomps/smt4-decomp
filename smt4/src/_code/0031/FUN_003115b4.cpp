@@ -8,7 +8,7 @@ int FUN_00250798(void);
 int FUN_0028fe0c(unsigned int, int);
 int FUN_0029eb5c(int, int);
 int FUN_002b8838(int);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bf810(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -24,7 +24,7 @@ extern int FUN_00298f88(unsigned int);
 /* Supplied declaration required: FUN_0029eb5c. */
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bf810. */
 
 
@@ -65,8 +65,8 @@ void FUN_003115b4(unsigned int param_1)
   }
   FUN_00250798();
   FUN_0028fe0c(param_1,0);
-  FUN_002bd8e8(temp_v0 + 0x34,0);
-  FUN_002bd8e8(temp_v0 + 0x494,2,0);
+  timerStart(temp_v0 + 0x34,0);
+  timerStart(temp_v0 + 0x494,2,0);
   temp_v0 = DAT_0043dd50;
   *(unsigned int *)(DAT_0043dd50 + 8) = *(unsigned int *)(DAT_0043dd50 + 4);
   *(unsigned int *)(temp_v0 + 4) = 0x17;

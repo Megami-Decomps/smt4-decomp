@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_00137ee0(int, int, int);
-int FUN_00236038(int);
+int asdSequenceRequest(int, int, int);
+int scrGetArg(int);
 int FUN_00324bc8(...);
 int FUN_00376fb8(unsigned int);
 
 extern unsigned char DAT_005f1624; /* 0x5f1624 */
 extern unsigned char DAT_005f1b70; /* 0x5f1b70 */
 
-/* Supplied declaration required: FUN_00137ee0. */
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: asdSequenceRequest. */
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_00324bc8. */
 /* Supplied declaration required: FUN_00376fb8. */
 
@@ -26,9 +26,9 @@ unsigned int FUN_002e5fdc(void)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  temp_v2 = FUN_00236038(2);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = scrGetArg(2);
   if (temp_v0 != 0x18) {
     FUN_00324bc8(temp_v0,temp_v1,temp_v2);
   }
@@ -38,7 +38,7 @@ unsigned int FUN_002e5fdc(void)
     DAT_005f1624 = 1;
   }
   DAT_005f1b70 = 0;
-  FUN_00137ee0(6,0,0);
+  asdSequenceRequest(6,0,0);
   return 1;
 }
 

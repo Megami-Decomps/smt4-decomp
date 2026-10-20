@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017fd84(...);
+int asdMemoryFreeRegion(...);
 int FUN_0017fe8c(...);
 int FUN_0018003c(...);
 int FUN_0018719c(...);
@@ -40,7 +40,7 @@ extern unsigned int DAT_0062d280; /* 0x62d280 */
 extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0017fd84. */
+/* Supplied declaration required: asdMemoryFreeRegion. */
 /* Supplied declaration required: FUN_0017fe8c. */
 /* Supplied declaration required: FUN_0018003c. */
 /* Supplied declaration required: FUN_0018719c. */
@@ -95,13 +95,13 @@ unsigned char * FUN_00239b08(void)
   FUN_0018003c();
   if ((((unsigned int)puVar5 >= DAT_005b4050) && ((unsigned int *)(DAT_005b4060 + (int)DAT_005b4050) >= puVar5)) ||
      (((unsigned int)puVar5 >= DAT_005b4054 && ((unsigned int *)((int)DAT_005b4054 + DAT_005b4064) >= puVar5)))) {
-    FUN_0017fd84(puVar5);
+    asdMemoryFreeRegion(puVar5);
     puVar4 = (unsigned char *)*DAT_005b402c;
     software_interrupt(0x14);
   }
   else {
     FUN_0017fe8c(puVar5);
-    FUN_0017fd84();
+    asdMemoryFreeRegion();
     puVar4 = (unsigned char *)*DAT_005b402c;
     software_interrupt(0x14);
   }

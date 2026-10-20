@@ -1,25 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ff1a8` (_code @ 0x3ff1a8, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char *FUN_002840e0(int);
+#define SLOT_COUNT 100
+#define SLOT_STATE_MASK 0x07
 
+u8 *FUN_002840e0(int slot);
 
+/* Clears the low three state bits of each of the 100 slot flag bytes. */
 void FUN_003ff1a8(void)
-
 {
-  unsigned char *pbVar1;
-  int temp_v0;
-  
-  temp_v0 = 0;
-  do {
-    pbVar1 = (unsigned char *)FUN_002840e0(temp_v0);
-    temp_v0 = temp_v0 + 1;
-    *pbVar1 = *pbVar1 & 0xf8;
-  } while (temp_v0 < 100);
-  return;
+    int slot = 0;
+
+    do {
+        u8 *flags = FUN_002840e0(slot);
+
+        slot++;
+        *flags = *flags & ~SLOT_STATE_MASK;
+    } while (slot < SLOT_COUNT);
 }
 
 } /* extern "C" */

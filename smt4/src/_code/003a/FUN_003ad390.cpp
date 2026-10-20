@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c415c(unsigned int *);
-int FUN_002c43b4(unsigned int, int);
+int asdMemFree(unsigned int *);
+int jobStop(unsigned int, int);
 
-extern signed char DAT_0043d9e0; /* 0x43d9e0 */
+extern signed char g_countdown; /* 0x43d9e0 */
 extern unsigned int *DAT_0043d9e4; /* 0x43d9e4 */
 
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 
 
 void FUN_003ad390(void)
@@ -21,12 +21,12 @@ void FUN_003ad390(void)
   unsigned int *puVar1;
   
   puVar1 = DAT_0043d9e4;
-  DAT_0043d9e0 = DAT_0043d9e0 - '\x01';
-  if (DAT_0043d9e0 < '\x01') {
-    FUN_002c43b4(*DAT_0043d9e4,0);
-    FUN_002c415c(puVar1);
+  g_countdown = g_countdown - '\x01';
+  if (g_countdown < '\x01') {
+    jobStop(*DAT_0043d9e4,0);
+    asdMemFree(puVar1);
     DAT_0043d9e4 = (unsigned int *)0x0;
-    DAT_0043d9e0 = '\0';
+    g_countdown = '\0';
   }
   return;
 }

@@ -53,7 +53,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
@@ -100,17 +100,17 @@ unsigned int FUN_003a70b8(void)
   float temp_v30;
   unsigned int temp_v31;
   
-  temp_v1 = FUN_00236038(0);
+  temp_v1 = scrGetArg(0);
   temp_v14 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = FUN_00236038(1);
+  temp_v1 = scrGetArg(1);
   temp_v15 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = FUN_00236038(2);
+  temp_v1 = scrGetArg(2);
   temp_v16 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = FUN_00236038(3);
+  temp_v1 = scrGetArg(3);
   temp_v17 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = FUN_00236038(4);
+  temp_v1 = scrGetArg(4);
   temp_v13 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = FUN_00236038(5);
+  temp_v1 = scrGetArg(5);
   temp_v1 = VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v18 = 0.0f;
   temp_v19 = 0.0f;

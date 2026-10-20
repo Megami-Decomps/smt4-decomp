@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00183bb0(void);
 int FUN_00184e64(...);
 int FUN_0031d174(...);
@@ -26,7 +26,7 @@ typedef struct {
 
 extern unsigned int DAT_005e1e88; /* 0x5e1e88 */
 
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_00184e64. */
 extern int FUN_002a482c(int);
@@ -121,9 +121,9 @@ void FUN_004a24a8(int param_1)
         FUN_00493518(param_1 + 200,0x5be,0);
       }
     }
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_004a7950(param_1,(int)*(char *)(param_1 + 0x94),temp_v8);
-    FUN_001677c0();
+    efctSetSpeed();
     if (*(int *)(param_1 + 0x28) != 0) {
       temp_v1 = FUN_002a482c(param_1 + 0x20);
       temp_v2 = FUN_004d0040(param_1 + 0x20);
@@ -176,9 +176,9 @@ void FUN_004a24a8(int param_1)
         temp_v4 = FUN_0031d174(param_1 + 0x20);
         FUN_004a2a30(param_1,temp_v4,1,(int)temp_v0);
       }
-      FUN_001677c0();
+      efctSetSpeed();
       FUN_004a77c0(param_1,temp_v8);
-      FUN_001677c0();
+      efctSetSpeed();
       return;
     }
   }

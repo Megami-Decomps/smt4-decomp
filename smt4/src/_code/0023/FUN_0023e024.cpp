@@ -27,7 +27,7 @@ typedef struct {
     unsigned int sp90; /* 0x90: local_90 */
 } param_5_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00191830. */
@@ -72,8 +72,8 @@ void FUN_0023e024(int param_1,int param_2,unsigned int param_3,unsigned int para
       temp_v14 = param_3;
       iStack_30 = param_2;
       iStack_34 = param_1;
-      temp_v3 = DAT_0044ea00;
-      for (; DAT_0044ea00 = temp_v3, (int)temp_v7 <= (int)((unsigned int)temp_v2 + temp_v5); temp_v7 = temp_v7 + 1) {
+      temp_v3 = g_titleScene;
+      for (; g_titleScene = temp_v3, (int)temp_v7 <= (int)((unsigned int)temp_v2 + temp_v5); temp_v7 = temp_v7 + 1) {
         puVar8 = (unsigned int *)(*(int *)(param_1 + 0x18) + temp_v7 * 0x28);
         if (param_5 != 1) {
           if ((param_5 != 2) || (*(char *)((int)puVar8 + 0x25) != '\0')) {
@@ -131,7 +131,7 @@ LAB_0023e0e4:
                 *(unsigned char *)(temp_v3 + 0x12c4) = 0;
               }
             }
-            FUN_002c1b64(DAT_0044ea00,
+            FUN_002c1b64(g_titleScene,
                          *(unsigned int *)
                           (*(int *)(param_1 + 0x14) + (unsigned int)*(unsigned char *)(puVar8 + 9) * 0x20 + 0x18));
             VectorUnsignedToFloat((unsigned int)*(unsigned short *)(puVar8 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -144,7 +144,7 @@ LAB_0023e0e4:
           }
         }
         else if (*(char *)((int)puVar8 + 0x25) == '\0') goto LAB_0023e0e4;
-        temp_v3 = DAT_0044ea00;
+        temp_v3 = g_titleScene;
       }
     }
   }

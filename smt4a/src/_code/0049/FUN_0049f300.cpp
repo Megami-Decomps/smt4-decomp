@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00157558(int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_0016c410(int);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_0049d594(int);
@@ -17,10 +17,10 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c410. */
@@ -40,8 +40,8 @@ unsigned int FUN_0049f300(int param_1)
   int *piVar6;
   
   if (*(char *)(param_1 + 4) != '\0' && *(char *)(param_1 + 4) != '\x02') {
-    FUN_00157558(DAT_0059dbb4);
-    temp_v1 = DAT_0059dbb4;
+    FUN_00157558(g_renderCtx);
+    temp_v1 = g_renderCtx;
     temp_v2 = FUN_001692ac(1,0);
     piVar6 = (int *)(temp_v1 + 0x1258);
     temp_v3 = *piVar6;
@@ -61,9 +61,9 @@ unsigned int FUN_0049f300(int param_1)
         FUN_001835b4(2,0x33,0x7e,0,0,0xc9);
       }
     }
-    FUN_001677c0();
-    temp_v1 = DAT_0059dbb4;
-    piVar6 = (int *)(DAT_0059dbb4 + 0x1258);
+    efctSetSpeed();
+    temp_v1 = g_renderCtx;
+    piVar6 = (int *)(g_renderCtx + 0x1258);
     temp_v2 = *piVar6;
     temp_v3 = piVar6[temp_v2 + 2];
     *piVar6 = temp_v2 - 1;
@@ -71,7 +71,7 @@ unsigned int FUN_0049f300(int param_1)
       (**(romwright_code **)(temp_v1 + 0x1274))();
       *(unsigned char *)(temp_v1 + 0x1270) = 0;
     }
-    temp_v1 = DAT_0059dbb4;
+    temp_v1 = g_renderCtx;
     temp_v2 = FUN_00169294(6,7,0);
     piVar6 = (int *)(temp_v1 + 0x12b8);
     temp_v3 = piVar6[*piVar6 + 2];
@@ -80,7 +80,7 @@ unsigned int FUN_0049f300(int param_1)
       (**(romwright_code **)(temp_v1 + 0x12d4))();
       *(unsigned char *)(temp_v1 + 0x12d0) = 0;
     }
-    FUN_0016c410(DAT_0059dbb4);
+    FUN_0016c410(g_renderCtx);
   }
   return 0;
 }

@@ -10,12 +10,12 @@ int FUN_0029ee6c(...);
 int FUN_0029f848(...);
 int FUN_002ad8b4(...);
 int FUN_002b8838(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002c312c(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
@@ -31,7 +31,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_001eaa18; /* 0x1eaa18 */
-extern int FUN_002caf74(...); /* 0x2caf74 */
+extern int titleConfigDestroy(...); /* 0x2caf74 */
 extern int FUN_002cb054(...); /* 0x2cb054 */
 extern unsigned char LAB_002f4ecc; /* 0x2f4ecc */
 extern unsigned char LAB_002f4ee4; /* 0x2f4ee4 */
@@ -41,7 +41,7 @@ extern unsigned char DAT_00407dd6; /* 0x407dd6 */
 extern unsigned char DAT_0044e0f8; /* 0x44e0f8 */
 extern unsigned char DAT_0044e0f9; /* 0x44e0f9 */
 extern unsigned char DAT_0044e0fa; /* 0x44e0fa */
-extern unsigned int *DAT_0044e2d0; /* 0x44e2d0 */
+extern unsigned int *g_titleConfig; /* 0x44e2d0 */
 
 extern unsigned int FUN_0021f498(unsigned char);
 /* Supplied declaration required: FUN_0027eb88. */
@@ -50,12 +50,12 @@ extern unsigned int FUN_0021f498(unsigned char);
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: FUN_002ad8b4. */
 /* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 extern unsigned int FUN_002cabf8(unsigned char);
 extern unsigned int FUN_002e0b68(unsigned char);
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -70,16 +70,16 @@ void FUN_002f4ce8(void)
   unsigned int temp_v0;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x158,1);
+  asdMemAlloc(0x100,0x100,0,0x158,1);
   puVar2 = &LAB_002f4ecc;
-  DAT_0044e2d0 = puVar1;
-  FUN_002c5788(&LAB_002f4ecc,2,0,0,&LAB_001eaa18,FUN_002caf74,puVar1);
+  g_titleConfig = puVar1;
+  asdProcessCreateSimple(&LAB_002f4ecc,2,0,0,&LAB_001eaa18,titleConfigDestroy,puVar1);
   *puVar1 = (unsigned int)puVar2;
-  FUN_002c4a08(&LAB_002f4ee4,0xe6,0,0,FUN_002cb054,0,0,puVar2);
+  taskCreateDraw(&LAB_002f4ee4,0xe6,0,0,FUN_002cb054,0,0,puVar2);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0xf);
   FUN_002c312c(puVar1 + 0xf,&DAT_00407dd6,0x18,0,0,0,0,0,0,0,0);
   FUN_002bd954(puVar1 + 0x17,0x2f,0,puVar1 + 0xf,0xc9);
-  FUN_002bd8e8(puVar1 + 0x17,0);
+  timerStart(puVar1 + 0x17,0);
   FUN_0029f848(puVar1 + 0x3a,3,3,1,0,1);
   puVar1[2] = 0;
   *(unsigned short *)((int)puVar1 + 0x1a) = 0;

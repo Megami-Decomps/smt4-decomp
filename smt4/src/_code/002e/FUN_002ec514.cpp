@@ -1,50 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ec514` (_code @ 0x2ec514, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Begins a transition: moving is set for target states 2 and 4 (cleared if the current state is 2 with no queued item); on acceptance the state is advanced. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0024eaac(...);
+typedef struct {
+    u8 unk000[0x108];  /* 0x000 */
+    s32 state;         /* 0x108 */
+    u8 unk10c[4];      /* 0x10c */
+    s32 appliedState;  /* 0x110 */
+    s32 targetState;   /* 0x114 */
+    u8 unk118[8];      /* 0x118 */
+    u16 queued;        /* 0x120 */
+    u8 unk122[6];      /* 0x122 */
+    u8 moving;         /* 0x128 */
+} Transition;
 
-typedef struct fn_002ec514_arg0 fn_002ec514_arg0;
-struct fn_002ec514_arg0 {
-    unsigned char pad_0x0[0x108];
-    int field_0x108; /* +0x108 */
-    unsigned char pad_0x10c[0x4];
-    undefined4 field_0x110; /* +0x110 */
-    int field_0x114; /* +0x114 */
-    unsigned char pad_0x118[0x8];
-    unsigned char field_0x120; /* +0x120 */
-    unsigned char pad_0x121[0x7];
-    undefined1 field_0x128; /* +0x128 */
-};
+s32 FUN_0024eaac(Transition *transition, u8 moving);
 
-/* Supplied declaration required: FUN_0024eaac. */
-
-
-unsigned int FUN_002ec514(fn_002ec514_arg0 *param_1)
-
+s32 FUN_002ec514(Transition *transition)
 {
-/* irregular: 1 native warning(s); review required */
-  fn_002ec514_arg0 *pfVar1;
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0;
-  temp_v0 = param_1->field_0x114 == 2 || param_1->field_0x114 == 4;
-  if ((param_1->field_0x108 == 2) && (*(short *)&param_1->field_0x120 == 0)) {
-    temp_v0 = 0;
-  }
-  pfVar1 = param_1;
-  FUN_0024eaac(param_1,temp_v0);
-  if (pfVar1 != (fn_002ec514_arg0 *)0x0) {
-    if (temp_v0 == 0) {
-      param_1->field_0x128 = 0;
+    s32 result = 0;
+    u8 moving = 0;
+
+    if (transition->targetState == 2 || transition->targetState == 4) {
+        moving = 1;
     }
-    temp_v1 = 2;
-    param_1->field_0x110 = param_1->field_0x114;
-  }
-  return temp_v1;
+    if (transition->state == 2 && transition->queued == 0) {
+        moving = 0;
+    }
+    if (FUN_0024eaac(transition, moving) != 0) {
+        if (moving == 0) {
+            transition->moving = 0;
+        }
+        result = 2;
+        transition->appliedState = transition->targetState;
+    }
+    return result;
 }
 
 } /* extern "C" */

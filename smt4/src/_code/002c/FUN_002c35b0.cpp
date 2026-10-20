@@ -7,14 +7,14 @@ extern "C" {
 int FUN_0011a258(unsigned char *, unsigned char *, unsigned int, unsigned int);
 int FUN_002bc644(int, int, int, int);
 int FUN_002c2620(unsigned int);
-int FUN_002c2860(unsigned int);
+int asdGfxSetMode(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned int DAT_004e39e0; /* 0x4e39e0 */
+extern unsigned int g_asdGxPresets; /* 0x4e39e0 */
 extern unsigned int DAT_004e3a0c; /* 0x4e3a0c */
 extern unsigned int DAT_004e3a38; /* 0x4e3a38 */
 extern int DAT_004e3a64; /* 0x4e3a64 */
@@ -29,7 +29,7 @@ extern unsigned char DAT_004e3be0; /* 0x4e3be0 */
 /* Supplied declaration required: FUN_0011a258. */
 /* Supplied declaration required: FUN_002bc644. */
 /* Supplied declaration required: FUN_002c2620. */
-/* Supplied declaration required: FUN_002c2860. */
+/* Supplied declaration required: asdGfxSetMode. */
 
 
 void FUN_002c35b0(int param_1)
@@ -45,7 +45,7 @@ void FUN_002c35b0(int param_1)
   temp_v2 = 0;
   if (param_1 == 0) {
     DAT_004e3b50 = &DAT_004e3a68;
-    DAT_004e3b4c = &DAT_004e39e0;
+    DAT_004e3b4c = &g_asdGxPresets;
   }
   else if (param_1 != 1) {
     if (param_1 == 2) {
@@ -83,7 +83,7 @@ void FUN_002c35b0(int param_1)
   puVar1 = DAT_004e3b4c;
   if (DAT_004e3bd4 == 1) {
     temp_v2 = DAT_004e3b4c[5];
-    FUN_002c2860(*DAT_004e3b4c);
+    asdGfxSetMode(*DAT_004e3b4c);
     FUN_002c2620(puVar1[temp_v2 + 2]);
     return;
   }

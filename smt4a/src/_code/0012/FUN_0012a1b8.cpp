@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0030cb44(unsigned int);
+int asdOperatorNewE(unsigned int);
 
 extern unsigned int DAT_00594a00; /* 0x594a00 */
 
-extern unsigned int FUN_002e6dac(int);
-/* Supplied declaration required: FUN_0030cb44. */
+extern unsigned int rt_malloc(int);
+/* Supplied declaration required: asdOperatorNewE. */
 
 
 void FUN_0012a1b8(int param_1)
@@ -21,9 +21,9 @@ void FUN_0012a1b8(int param_1)
   unsigned int temp_v1;
   
   if (DAT_00594a00 == 0xffffffff) {
-    FUN_0030cb44(0xfffffffc);
+    asdOperatorNewE(0xfffffffc);
   }
-  temp_v0 = FUN_002e6dac(DAT_00594a00 << 2);
+  temp_v0 = rt_malloc(DAT_00594a00 << 2);
   *(unsigned int *)(param_1 + 8) = temp_v0;
   for (temp_v1 = 0; temp_v1 < DAT_00594a00; temp_v1 = temp_v1 + 1) {
     puVar2 = (unsigned int *)(*(int *)(param_1 + 8) + temp_v1 * 4);

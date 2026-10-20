@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int aeabi_uidivmod(unsigned int, int);
+extern unsigned int __aeabi_uidivmod(unsigned int, int);
 
 
 void nw_snd_internal_driver_StreamBufferPool_Initialize
@@ -19,7 +19,7 @@ void nw_snd_internal_driver_StreamBufferPool_Initialize
   param_1[1] = param_3;
   param_1[3] = param_4;
   *param_1 = param_2;
-  temp_v0 = aeabi_uidivmod(param_3,param_4);
+  temp_v0 = __aeabi_uidivmod(param_3,param_4);
   param_1[5] = 0;
   param_1[2] = temp_v0 & 0xffffffe0;
   param_1[4] = 0;

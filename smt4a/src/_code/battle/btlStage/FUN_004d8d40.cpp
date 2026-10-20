@@ -16,8 +16,8 @@ int FUN_004d896c(int, unsigned int, unsigned int);
 int FUN_004d8bf8(int);
 
 extern int DAT_0056fcc0; /* 0x56fcc0 */
-extern unsigned int DAT_0057a4f4; /* 0x57a4f4 */
-extern int DAT_0057a4f8; /* 0x57a4f8 */
+extern unsigned int g_btlStage; /* 0x57a4f4 */
+extern int g_btlStageModel; /* 0x57a4f8 */
 
 /* Supplied declaration required: FUN_002c2358. */
 /* Supplied declaration required: FUN_002c23cc. */
@@ -44,13 +44,13 @@ unsigned int FUN_004d8d40(int param_1,int param_2)
   if (param_2 == 0) {
     return 0;
   }
-  if (DAT_0057a4f8 == 0) {
+  if (g_btlStageModel == 0) {
     return 0;
   }
   switch(*(unsigned int *)(param_1 + 0xa0)) {
   case 1:
     FUN_002c23cc(0);
-    *(unsigned int *)(param_1 + 0xc0) = DAT_0057a4f4;
+    *(unsigned int *)(param_1 + 0xc0) = g_btlStage;
     FUN_00400d80();
     temp_v2 = 2;
     *(unsigned int *)(param_1 + 0xa0) = temp_v2;

@@ -1,47 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fd8e4` (_code @ 0x2fd8e4, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00321a98(int, int);
+typedef struct Table {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 group;
+} Table;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct Entry {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ s32 index;      /* negative = none */
+} Entry;
 
-extern int FUN_001ab854(void);
-/* Supplied declaration required: FUN_00321a98. */
+int FUN_001ab854(void);
+int FUN_00321a98(Entry *a, Entry *b);
 
-
-void FUN_002fd8e4(int param_1,int param_2)
-
+static __inline u16 entryGroup(Entry *entry)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  short temp_v2;
-  
-  if (*(int *)(param_1 + 4) < 0) {
-    temp_v2 = 0;
-  }
-  else {
-    temp_v1 = FUN_001ab854();
-    temp_v2 = *(short *)(temp_v1 + 0x62);
-  }
-  if (*(int *)(param_2 + 4) < 0) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v1 = FUN_001ab854();
-    temp_v0 = *(short *)(temp_v1 + 0x62);
-  }
-  if (temp_v2 != temp_v0) {
-    return;
-  }
-  FUN_00321a98(param_1,param_2);
-  return;
+    if (entry->index < 0) {
+        return 0;
+    }
+    return ((Table *)FUN_001ab854())->group;
+}
+
+/* Runs FUN_00321a98 on two entries when they belong to the same group. */
+void FUN_002fd8e4(Entry *a, Entry *b)
+{
+    u16 groupA = entryGroup(a);
+    u16 groupB = entryGroup(b);
+
+    int diff = groupA - groupB;
+
+    if (diff != 0) {
+        return;
+    }
+    FUN_00321a98(a, b);
 }
 
 } /* extern "C" */

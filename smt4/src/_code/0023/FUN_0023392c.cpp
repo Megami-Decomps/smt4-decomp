@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 extern int FUN_002335f8(int, unsigned int);
 /* Supplied declaration required: FUN_0023360c. */
@@ -74,7 +74,7 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
     return;
   case 2:
     *param_1 = *param_1 | 0x100000;
-    temp_v2 = DAT_00432fc8;
+    temp_v2 = g_aocMain;
     FUN_0023360c(param_1 + 0x90);
     if (param_3 != 0) {
       FUN_002b8838(0xcb);

@@ -15,10 +15,10 @@ typedef struct {
 } void_stack;
 
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_00580238; /* 0x580238 */
+extern int g_lmapMainState; /* 0x580238 */
 extern char s_________005802ec[17]; /* 0x5802ec */
 extern char s______0058047c[11]; /* 0x58047c */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 
 /* Supplied declaration required: FUN_001aea28. */
@@ -41,15 +41,15 @@ void FUN_003c323c(void)
   int temp_v5;
   int temp_v6;
   
-  temp_v1 = DAT_00580238;
-  if (DAT_005f15fc != 0x65) {
+  temp_v1 = g_lmapMainState;
+  if (g_gameState != 0x65) {
 LAB_003c32a4:
     for (temp_v4 = 0; temp_v2 = *(int *)(*(int *)(temp_v1 + 0xae4) + 8), temp_v4 < *(unsigned int *)(temp_v2 + 0x10);
         temp_v4 = temp_v4 + 1) {
       FUN_0040619c(temp_v2,temp_v4);
       FUN_0040ace8(DAT_0056fcc0,temp_v2);
-      if ((DAT_00580238 != 0) &&
-         (temp_v2 = DAT_00580238 + temp_v4 * 0x88, *(char *)(temp_v2 + 0xb78) == '\0')) {
+      if ((g_lmapMainState != 0) &&
+         (temp_v2 = g_lmapMainState + temp_v4 * 0x88, *(char *)(temp_v2 + 0xb78) == '\0')) {
         *(unsigned char *)(temp_v2 + 0xb78) = 1;
       }
       FUN_00399290(temp_v4,1);
@@ -135,22 +135,22 @@ LAB_003c32a4:
   for (temp_v4 = 0; temp_v2 = *(int *)(*(int *)(temp_v1 + 0xae4) + 8), temp_v4 < *(unsigned int *)(temp_v2 + 0x10);
       temp_v4 = temp_v4 + 1) {
     if (*(char *)(temp_v4 + 0x5f0c04) != '\x01') {
-      if ((DAT_00580238 != 0) && (*(char *)(DAT_00580238 + temp_v4 * 0x88 + 0xb78) != '\0')) {
+      if ((g_lmapMainState != 0) && (*(char *)(g_lmapMainState + temp_v4 * 0x88 + 0xb78) != '\0')) {
         FUN_0040619c(temp_v2,temp_v4);
         FUN_001aea28(DAT_0056fcc0,temp_v2);
-        if ((DAT_00580238 != 0) &&
-           (temp_v2 = DAT_00580238 + temp_v4 * 0x88, *(char *)(temp_v2 + 0xb78) != '\0')) {
+        if ((g_lmapMainState != 0) &&
+           (temp_v2 = g_lmapMainState + temp_v4 * 0x88, *(char *)(temp_v2 + 0xb78) != '\0')) {
           *(unsigned char *)(temp_v2 + 0xb78) = 0;
         }
       }
       FUN_00399290(temp_v4,0);
     }
     else {
-      if ((DAT_00580238 == 0) || (*(char *)(DAT_00580238 + temp_v4 * 0x88 + 0xb78) == '\0')) {
+      if ((g_lmapMainState == 0) || (*(char *)(g_lmapMainState + temp_v4 * 0x88 + 0xb78) == '\0')) {
         FUN_0040619c(temp_v2,temp_v4);
         FUN_0040ace8(DAT_0056fcc0,temp_v2);
-        if ((DAT_00580238 != 0) &&
-           (temp_v2 = DAT_00580238 + temp_v4 * 0x88, *(char *)(temp_v2 + 0xb78) == '\0')) {
+        if ((g_lmapMainState != 0) &&
+           (temp_v2 = g_lmapMainState + temp_v4 * 0x88, *(char *)(temp_v2 + 0xb78) == '\0')) {
           *(unsigned char *)(temp_v2 + 0xb78) = 1;
         }
       }

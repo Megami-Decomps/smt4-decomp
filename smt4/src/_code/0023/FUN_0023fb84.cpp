@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0023aea4(void);
-int FUN_00262888(void);
-int FUN_002c222c(void);
+int asdOperatorNewB(void);
+int asdOperatorNew(void);
 int FUN_0035708c(void);
 int nn_gr_CTR_Shader_SearchBindSymbol(unsigned char *, unsigned char *, int);
 
@@ -19,8 +19,8 @@ extern unsigned char DAT_004208cc; /* 0x4208cc */
 extern unsigned char DAT_0047e554; /* 0x47e554 */
 
 /* Supplied declaration required: FUN_0023aea4. */
-/* Supplied declaration required: FUN_00262888. */
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNewB. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_0035708c. */
 extern int func_0x0023b020(int, int, unsigned int);
 extern int func_0x003deaa4(int);
@@ -61,7 +61,7 @@ void FUN_0023fb84(int param_1)
     return;
   }
   puVar1 = (unsigned int *)0x14;
-  FUN_002c222c();
+  asdOperatorNew();
   if (puVar1 != (unsigned int *)0x0) {
     puVar1[1] = 0;
     puVar1[2] = 0;
@@ -107,13 +107,13 @@ void FUN_0023fb84(int param_1)
   temp_v2 = func_0x003deaa4(param_1);
   puVar1[4] = temp_v2;
   temp_v2 = temp_v2 << 2;
-  FUN_00262888();
+  asdOperatorNewB();
   puVar1[2] = temp_v2;
   temp_v2 = puVar1[4] << 2;
-  FUN_00262888();
+  asdOperatorNewB();
   puVar1[1] = temp_v2;
   temp_v2 = puVar1[4] << 2;
-  FUN_00262888();
+  asdOperatorNewB();
   puVar1[3] = temp_v2;
   temp_v2 = 0;
   if (temp_v2 < (int)puVar1[4]) {
@@ -131,7 +131,7 @@ void FUN_0023fb84(int param_1)
       temp_v1 = func_0x0023b020(param_1,temp_v2,5);
       if (temp_v1 != 0) {
         temp_v1 = temp_v3;
-        FUN_002c222c();
+        asdOperatorNew();
         if (temp_v1 != 0) {
           FUN_0023aea4();
         }
@@ -141,7 +141,7 @@ void FUN_0023fb84(int param_1)
       temp_v1 = func_0x0023b020(param_1,temp_v2,4);
       if (temp_v1 != 0) {
         temp_v1 = temp_v3;
-        FUN_002c222c();
+        asdOperatorNew();
         if (temp_v1 != 0) {
           FUN_0023aea4();
         }
@@ -151,7 +151,7 @@ void FUN_0023fb84(int param_1)
       temp_v1 = func_0x0023b020(param_1,temp_v2,6);
       if (temp_v1 != 0) {
         temp_v1 = temp_v3;
-        FUN_002c222c();
+        asdOperatorNew();
         if (temp_v1 != 0) {
           FUN_0023aea4();
         }

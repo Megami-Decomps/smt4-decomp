@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00409cd8(...);
 
-int FUN_0010063a(int [5], int, int, unsigned char *);
-int FUN_0014aa78(void);
+int qsort(int [5], int, int, unsigned char *);
+int btlGetMainState(void);
 int FUN_001568f8(int, int);
 int FUN_003f0e20(unsigned int *, int);
 int FUN_00408184(...);
@@ -43,7 +43,7 @@ typedef struct {
 } param_26_stack;
 
 extern unsigned char LAB_00221a7c; /* 0x221a7c */
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern int DAT_005712f0; /* 0x5712f0 */
 extern int DAT_00573808; /* 0x573808 */
 extern unsigned int DAT_00573c08; /* 0x573c08 */
@@ -56,8 +56,8 @@ extern unsigned char DAT_0057a574; /* 0x57a574 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0010063a. */
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: qsort. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
 extern int FUN_003e8430(unsigned int *);
 extern int FUN_003eb1cc(void);
@@ -71,7 +71,7 @@ extern short FUN_004c3a98(int, unsigned int);
 /* Supplied declaration required: FUN_004c3cb0. */
 /* Supplied declaration required: FUN_004c571c. */
 /* Supplied declaration required: FUN_004c8340. */
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fd0ec. */
 /* Supplied declaration required: FUN_004fd3f0. */
@@ -128,7 +128,7 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
   uStack_30 = param_2;
   temp_v24 = param_3;
   iStack_28 = param_4;
-  puVar5 = (unsigned int *)FUN_0014aa78();
+  puVar5 = (unsigned int *)btlGetMainState();
   temp_v21 = param_1 + param_17;
   temp_v23 = &DAT_0057a574 + param_14 * 0xc;
   temp_v18 = puVar5;
@@ -198,7 +198,7 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
           temp_v3 = temp_v5;
         }
         if (0 < temp_v5) {
-          temp_v4 = FUN_004ee568(DAT_0057113c);
+          temp_v4 = btlUnitGet(g_btlScriptUnit);
           *(unsigned char *)(temp_v4 + 0x59c) = 1;
           temp_v4 = 0;
           if (param_14 == 0) {
@@ -216,7 +216,7 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
             }
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < 0x36);
-          FUN_0010063a(temp_v14,temp_v4,4,&LAB_00221a7c);
+          qsort(temp_v14,temp_v4,4,&LAB_00221a7c);
           temp_v5 = 0;
           temp_v4 = 0;
           do {
@@ -295,10 +295,10 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
                       FUN_004102d8(DAT_005712f0,
                                    (int)(short)((short)*(int *)(temp_v4 + 100) + (short)temp_v21),0);
                       temp_v14[0] = temp_v5;
-                      temp_v5 = FUN_0014aa78();
+                      temp_v5 = btlGetMainState();
                       FUN_001568f8(temp_v5,(int)*(short *)(temp_v4 + 0x6a));
                       temp_v14[4] = temp_v5;
-                      temp_v13 = FUN_0014aa78();
+                      temp_v13 = btlGetMainState();
                       temp_v5 = FUN_003ef9e0(temp_v13,temp_v4);
                       if (temp_v5 < 0) {
                         temp_v5 = 0;
@@ -535,7 +535,7 @@ LAB_004fca64:
       temp_v3 = DAT_005712f0;
       FUN_004102d8(DAT_005712f0,0,0);
       *(unsigned char *)(temp_v3 + 4) = 0x41;
-      FUN_0014aa78();
+      btlGetMainState();
       temp_v4 = FUN_003eb1cc();
       if (temp_v4 == 0) {
         *(unsigned int *)(temp_v3 + 0x28) = 1;
@@ -545,7 +545,7 @@ LAB_004fca64:
       temp_v3 = DAT_005712f0;
       FUN_004102d8(DAT_005712f0,0,0);
       *(unsigned char *)(temp_v3 + 4) = 0x41;
-      FUN_0014aa78();
+      btlGetMainState();
       temp_v4 = FUN_003eb1cc();
       if (temp_v4 == 0) {
         *(unsigned int *)(temp_v3 + 0x28) = 1;

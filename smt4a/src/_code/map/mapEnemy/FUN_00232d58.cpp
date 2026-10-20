@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0015155c(unsigned char *, int, int, int, unsigned char *, unsigned char *, int, unsigned int);
-int FUN_00163060(int, int, int, int, int);
+int taskCreateDraw(unsigned char *, int, int, int, unsigned char *, unsigned char *, int, unsigned int);
+int asdMemoryAllocTracked(int, int, int, int, int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -20,8 +20,8 @@ extern unsigned char LAB_00315d0c; /* 0x315d0c */
 extern unsigned int *DAT_005806d4; /* 0x5806d4 */
 
 extern int FUN_0014bef4(unsigned int);
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 
 
 void FUN_00232d58(unsigned int param_1)
@@ -36,10 +36,10 @@ void FUN_00232d58(unsigned int param_1)
   unsigned int temp_v3;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x4d84,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x4d84,1);
   puVar2 = &LAB_00233134;
   DAT_005806d4 = puVar1;
-  FUN_0015155c(&LAB_00233134,4,0,0,&LAB_0027d754,&LAB_00315d0c,0,param_1);
+  taskCreateDraw(&LAB_00233134,4,0,0,&LAB_0027d754,&LAB_00315d0c,0,param_1);
   *puVar1 = (unsigned int)puVar2;
   puVar1[1] = 0;
   puVar1[2] = 0;

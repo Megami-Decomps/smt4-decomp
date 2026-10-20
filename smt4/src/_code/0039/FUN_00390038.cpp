@@ -8,8 +8,8 @@ int FUN_00126fb8(int);
 int FUN_00297060(int, unsigned int);
 int FUN_002a126c(unsigned char [4], unsigned int);
 int FUN_002baa40(unsigned int *, int);
-int FUN_002c4938(int, int);
-int FUN_002c4c2c(int);
+int memClear(int, int);
+int asdTMTexTableLoadSprites(int);
 int FUN_002c58c8(int, int);
 int FUN_0036196c(void);
 int FUN_0038f738(int);
@@ -22,8 +22,8 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_00390198; /* 0x390198 */
-extern int DAT_00432fc8; /* 0x432fc8 */
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern int g_aocMain; /* 0x432fc8 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_00126fb8. */
 /* Supplied declaration required: FUN_00297060. */
@@ -32,8 +32,8 @@ extern unsigned int FUN_002b47f4(unsigned int);
 /* Supplied declaration required: FUN_002baa40. */
 extern unsigned int *FUN_002bad5c(unsigned char *);
 extern unsigned int FUN_002c3124(char *, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c4c2c. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c58c8. */
 extern int FUN_00361960(void);
 /* Supplied declaration required: FUN_0036196c. */
@@ -61,8 +61,8 @@ void FUN_00390038(int param_1)
   if (temp_v0 != 0) {
     FUN_0036196c();
   }
-  FUN_002a126c(temp_v5,DAT_00433158);
-  FUN_00126fb8(DAT_00432fc8 + 0x80);
+  FUN_002a126c(temp_v5,g_aocSystem);
+  FUN_00126fb8(g_aocMain + 0x80);
   temp_v5[0] = 0;
   puVar2 = (unsigned int *)FUN_002bad5c(temp_v6);
   puVar2[2] = 0;
@@ -81,7 +81,7 @@ void FUN_00390038(int param_1)
   *(unsigned int *)(param_1 + 0x21c) = temp_v3;
   *(unsigned int *)(param_1 + 0x220) = temp_v4;
   FUN_0038f738(param_1);
-  FUN_002c4c2c(0x3a);
+  asdTMTexTableLoadSprites(0x3a);
   temp_v0 = 0;
   do {
     FUN_002c58c8(0x3a,temp_v0);
@@ -101,10 +101,10 @@ void FUN_00390038(int param_1)
     (**(romwright_code **)(**(int **)(param_1 + 0x208) + 4))();
     *(unsigned int *)(param_1 + 0x208) = 0;
   }
-  temp_v0 = DAT_00432fc8;
-  *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xffffff8f;
+  temp_v0 = g_aocMain;
+  *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
   *(unsigned char *)(temp_v0 + 0xd50) = 2;
-  FUN_002c4938(param_1 + 0x1130,0x80);
+  memClear(param_1 + 0x1130,0x80);
   rt_memcpy_w(param_1 + 0x1130,&LAB_00390198,0x23);
   return;
 }

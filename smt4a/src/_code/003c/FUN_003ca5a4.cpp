@@ -28,7 +28,7 @@ typedef struct {
 
 extern unsigned char DAT_00531270; /* 0x531270 */
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_00580238; /* 0x580238 */
+extern int g_lmapMainState; /* 0x580238 */
 extern unsigned char DAT_005f0c54; /* 0x5f0c54 */
 
 extern int FUN_0018719c(void);
@@ -101,27 +101,27 @@ LAB_003ca648:
     } while (temp_v2 < temp_v0);
   }
   rt_memcpy_w(temp_v4,&DAT_00531270,0xa0);
-  temp_v2 = DAT_00580238;
+  temp_v2 = g_lmapMainState;
   rt_memcpy(&DAT_005f0c54,&temp_v5,0x28);
   for (temp_v3 = 0; temp_v0 = *(int *)(*(int *)(temp_v2 + 0x4ef8) + 8), temp_v3 < *(unsigned int *)(temp_v0 + 0x10);
       temp_v3 = temp_v3 + 1) {
     if ((&DAT_005f0c54)[temp_v3] != '\x01') {
-      if ((DAT_00580238 != 0) && (*(char *)(DAT_00580238 + temp_v3 * 0x88 + 0x4f84) != '\0')) {
+      if ((g_lmapMainState != 0) && (*(char *)(g_lmapMainState + temp_v3 * 0x88 + 0x4f84) != '\0')) {
         FUN_0040619c(temp_v0,temp_v3);
         FUN_001aea28(DAT_0056fcc0,temp_v0);
-        if ((DAT_00580238 != 0) &&
-           (temp_v0 = DAT_00580238 + temp_v3 * 0x88, *(char *)(temp_v0 + 0x4f84) != '\0')) {
+        if ((g_lmapMainState != 0) &&
+           (temp_v0 = g_lmapMainState + temp_v3 * 0x88, *(char *)(temp_v0 + 0x4f84) != '\0')) {
           *(unsigned char *)(temp_v0 + 0x4f84) = 0;
         }
       }
       FUN_003b5c54(temp_v3,0);
     }
     else {
-      if ((DAT_00580238 == 0) || (*(char *)(DAT_00580238 + temp_v3 * 0x88 + 0x4f84) == '\0')) {
+      if ((g_lmapMainState == 0) || (*(char *)(g_lmapMainState + temp_v3 * 0x88 + 0x4f84) == '\0')) {
         FUN_0040619c(temp_v0,temp_v3);
         FUN_0040ace8(DAT_0056fcc0,temp_v0);
-        if ((DAT_00580238 != 0) &&
-           (temp_v0 = DAT_00580238 + temp_v3 * 0x88, *(char *)(temp_v0 + 0x4f84) == '\0')) {
+        if ((g_lmapMainState != 0) &&
+           (temp_v0 = g_lmapMainState + temp_v3 * 0x88, *(char *)(temp_v0 + 0x4f84) == '\0')) {
           *(unsigned char *)(temp_v0 + 0x4f84) = 1;
         }
       }

@@ -10,7 +10,7 @@ int FUN_0029eb5c(int, int);
 int FUN_0029f848(...);
 int FUN_002a0c08(int);
 int FUN_002b8838(int);
-int FUN_002bd8e8(int, int, int);
+int timerStart(int, int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern int FUN_00262cb0(unsigned int);
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: FUN_002a0c08. */
 /* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 
 
 void FUN_00311430(unsigned short param_1,unsigned char param_2)
@@ -66,7 +66,7 @@ void FUN_00311430(unsigned short param_1,unsigned char param_2)
   }
   FUN_002a0c08(0xe);
   FUN_002b8838(5);
-  FUN_002bd8e8(temp_v0 + 0x28,1,0);
+  timerStart(temp_v0 + 0x28,1,0);
   temp_v1 = FUN_0026aa78();
   if (temp_v5 >= temp_v1) {
     temp_v5 = FUN_0026aa78();

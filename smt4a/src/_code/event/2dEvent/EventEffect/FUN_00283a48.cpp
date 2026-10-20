@@ -10,7 +10,7 @@ int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 extern int FUN_0018206c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0038a538. */
 
@@ -29,7 +29,7 @@ unsigned int FUN_00283a48(void)
   unsigned int temp_v6;
   float temp_v7;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   temp_v6 = 0;
   if (*(int *)(temp_v0 + 0xc) != 0) {
     if (*(int *)(temp_v0 + 0xc) != 1) {

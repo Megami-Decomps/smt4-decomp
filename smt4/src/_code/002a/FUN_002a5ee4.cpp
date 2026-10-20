@@ -8,7 +8,7 @@ int FUN_0014ed4c(void);
 int FUN_00151b98(unsigned int, unsigned char [132], unsigned char [128], int, unsigned int, unsigned char *, int *, int, int);
 int FUN_002b64a0(...);
 int FUN_002bf694(...);
-int FUN_002c4938(unsigned char [128], int);
+int memClear(unsigned char [128], int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -19,17 +19,17 @@ typedef struct {
 extern unsigned char LAB_00151cd8; /* 0x151cd8 */
 extern unsigned char LAB_002a609c; /* 0x2a609c */
 extern unsigned char LAB_002a60a4; /* 0x2a60a4 */
-extern unsigned int DAT_00433130; /* 0x433130 */
+extern unsigned int g_aocDisplay; /* 0x433130 */
 
 /* Supplied declaration required: FUN_0014ed4c. */
 /* Supplied declaration required: FUN_00151b98. */
 extern int FUN_002a6e7c(unsigned int, int, unsigned int, unsigned char *);
 extern int FUN_002a6f48(unsigned int);
 /* Supplied declaration required: FUN_002b64a0. */
-extern int *FUN_002b93b0(unsigned int, unsigned int);
+extern int *asdTMTexTableCallFileB(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf694. */
 extern int FUN_002c30c4(unsigned int);
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 int * FUN_002a5ee4(unsigned int param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -50,14 +50,14 @@ int * FUN_002a5ee4(unsigned int param_1,unsigned int param_2,unsigned int param_
   if (temp_v0 == -1) {
     return (int *)0x0;
   }
-  FUN_002c4938(temp_v5,0x80);
+  memClear(temp_v5,0x80);
   temp_v0 = FUN_002a6e7c(param_1,temp_v0,param_3,temp_v5);
   if (temp_v0 == 0) {
     return (int *)0x0;
   }
   *(unsigned char *)(temp_v0 + 0xd) = 0;
   *(unsigned int *)(temp_v0 + 8) = 0;
-  piVar2 = (int *)FUN_002b93b0(param_2,param_3);
+  piVar2 = (int *)asdTMTexTableCallFileB(param_2,param_3);
   if (piVar2 == (int *)0x0) {
     return (int *)0x0;
   }
@@ -108,7 +108,7 @@ int * FUN_002a5ee4(unsigned int param_1,unsigned int param_2,unsigned int param_
       temp_v2 = temp_v2 | 2;
     }
   }
-  FUN_00151b98(DAT_00433130,temp_v6,temp_v4,0,temp_v2,&LAB_00151cd8,piVar2,0x80,temp_v0);
+  FUN_00151b98(g_aocDisplay,temp_v6,temp_v4,0,temp_v2,&LAB_00151cd8,piVar2,0x80,temp_v0);
   return piVar2;
 }
 

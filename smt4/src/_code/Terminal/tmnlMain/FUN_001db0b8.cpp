@@ -9,9 +9,9 @@ int FUN_00282bfc(...);
 int FUN_0028975c(...);
 int FUN_0029be5c(...);
 int FUN_002a71fc(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern unsigned char LAB_001fe23c; /* 0x1fe23c */
 extern unsigned char LAB_0021f33c; /* 0x21f33c */
 extern unsigned char LAB_0021f354; /* 0x21f354 */
 extern unsigned char LAB_002e0948; /* 0x2e0948 */
-extern unsigned int *DAT_00432ce0; /* 0x432ce0 */
+extern unsigned int *g_tmnl; /* 0x432ce0 */
 
 /* Supplied declaration required: FUN_00263508. */
 extern int FUN_0026354c(unsigned int);
@@ -38,9 +38,9 @@ extern int FUN_0026354c(unsigned int);
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: FUN_002a71fc. */
 extern int FUN_002c09d0(unsigned int);
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 
 
 void FUN_001db0b8(unsigned int *param_1)
@@ -53,8 +53,8 @@ void FUN_001db0b8(unsigned int *param_1)
   unsigned char *puVar4;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x5e8,1);
-  DAT_00432ce0 = puVar1;
+  asdMemAlloc(0x100,0x100,0,0x5e8,1);
+  g_tmnl = puVar1;
   temp_v0 = FUN_0026354c(10);
   if (temp_v0 == 0) {
     FUN_00263508(10,1);
@@ -111,11 +111,11 @@ void FUN_001db0b8(unsigned int *param_1)
     FUN_00282bfc(0,0xff);
   }
   puVar4 = &LAB_001db330;
-  FUN_002c5788(&LAB_001db330,2,0,0,FUN_001d99c0,&LAB_0021f33c,0);
+  asdProcessCreateSimple(&LAB_001db330,2,0,0,FUN_001d99c0,&LAB_0021f33c,0);
   *puVar1 = (unsigned int)puVar4;
-  FUN_002c4a08(&LAB_001db33c,0x75,0,0,&LAB_001fe23c,0,0,puVar4);
-  FUN_002c4a08(&LAB_001db33c,0xd3,0,0,&LAB_002e0948,0,0,*puVar1);
-  FUN_002c4a08(&LAB_001db34c,0xe7,0,0,&LAB_0021f354,0,0,*puVar1);
+  taskCreateDraw(&LAB_001db33c,0x75,0,0,&LAB_001fe23c,0,0,puVar4);
+  taskCreateDraw(&LAB_001db33c,0xd3,0,0,&LAB_002e0948,0,0,*puVar1);
+  taskCreateDraw(&LAB_001db34c,0xe7,0,0,&LAB_0021f354,0,0,*puVar1);
   return;
 }
 

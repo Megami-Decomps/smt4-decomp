@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_0010063a(...);
+int qsort(...);
 int FUN_00184310(void);
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_00203b40(...);
 int FUN_002a7324(...);
 int FUN_0031f718(...);
 int FUN_003fd63c(...);
 
-int FUN_001630d4(...);
-int FUN_0019e4d4(...);
+int asdMemoryAlloc(...);
+int slotRecordFindById(...);
 int FUN_001bcd48(...);
 int FUN_00239234(int, unsigned short [14]);
-int FUN_002e6354(int *, int);
+int sysMemClear(int *, int);
 int FUN_004da900(int, int);
 int FUN_004da914(int, int);
 int FUN_004daaf4(...);
@@ -75,13 +75,13 @@ extern int *DAT_0057f290; /* 0x57f290 */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern int FUN_0014af84(void);
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 extern int FUN_001801a4(void);
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019e4d4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: slotRecordFindById. */
 extern int FUN_001ab854(int);
 extern int FUN_001ab888(void);
 extern int FUN_001b347c(void);
@@ -92,7 +92,7 @@ extern int FUN_0026140c(void);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_002a7324. */
 extern int FUN_002c277c(void);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031f718. */
 /* Supplied declaration required: FUN_003fd63c. */
 extern int FUN_004bd340(int, unsigned int);
@@ -249,7 +249,7 @@ void FUN_0028625c(int *param_1)
       }
       param_1[0x172] = 0;
       *temp_v30 = 0;
-      FUN_002e6354(temp_v18,16000);
+      sysMemClear(temp_v18,16000);
       param_1[0x173] = 0;
       temp_v15 = *(char *)((int)temp_v25 + 0x13) == '\0';
       temp_v2 = 0;
@@ -282,7 +282,7 @@ void FUN_0028625c(int *param_1)
                 FUN_004dbef8(*param_1,0,temp_v4 + 0x34);
                 param_1[param_1[0x172] * 2 + 0x4ee] =
                      (param_1[param_1[0x172] * 2 + 0x4ee] & 0x3fffffffU) | 0x40000000;
-                temp_v5 = FUN_0019e4d4(temp_v1);
+                temp_v5 = slotRecordFindById(temp_v1);
                 if ((temp_v5 == 0) || (temp_v6 = FUN_004bd340(temp_v5,10), temp_v6 != 0)) {
                   FUN_00239234(temp_v1,temp_v26);
                   if ('\0' < *(char *)((int)temp_v25 + 0x17)) {
@@ -330,7 +330,7 @@ LAB_00286938:
           temp_v2 = FUN_0026140c();
           temp_v16 = 1;
           temp_v12 = 0x100;
-          FUN_001630d4(0x100,0x100,0,0xa00);
+          asdMemoryAlloc(0x100,0x100,0,0xa00);
           temp_v3 = *piVar9;
           temp_v16 = temp_v12;
           FUN_004dbc64(temp_v3,temp_v12);
@@ -361,7 +361,7 @@ LAB_00286938:
               if (((unsigned int)piVar9[0x171] <= (unsigned int)piVar9[0x172]) || ((char)piVar9[0x2424] == '\0'))
               break;
               temp_v24 = (unsigned int)*(unsigned short *)(temp_v16 + temp_v19 * 2);
-              temp_v4 = FUN_0019e4d4(temp_v24);
+              temp_v4 = slotRecordFindById(temp_v24);
               temp_v5 = temp_v19 + 1;
               if (temp_v5 < temp_v3) {
                 temp_v38 = temp_v24 * 5;
@@ -395,7 +395,7 @@ LAB_00286b78:
 LAB_00286b9c:
                     piVar8[0x4ee] = temp_v12;
                     temp_v12 = (unsigned int)*(unsigned short *)(temp_v16 + temp_v5 * 2);
-                    temp_v22 = FUN_0019e4d4(temp_v12);
+                    temp_v22 = slotRecordFindById(temp_v12);
                     if ((temp_v22 == 0) || (temp_v6 = FUN_004bd340(temp_v22,10), temp_v6 != 0)) {
                       temp_v6 = FUN_0014af84();
                       temp_v6 = temp_v6 + temp_v12 * 0x50;
@@ -434,7 +434,7 @@ LAB_00286c80:
               temp_v19 = temp_v19 + 1;
             } while (temp_v19 < temp_v3);
           }
-          FUN_0019a5a0(temp_v16);
+          asdMemFree(temp_v16);
           temp_v2 = param_1[0x174];
           while (temp_v2 < 0x1e) {
             FUN_001bcd48(10000000,0);
@@ -493,7 +493,7 @@ LAB_00286c80:
           temp_v16 = 1;
           temp_v2 = 0;
           piVar8 = (int *)0x100;
-          FUN_001630d4();
+          asdMemoryAlloc();
           piVar18 = (int *)0x0;
           piVar9 = (int *)0x0;
           if (*temp_v32 != 0) {
@@ -528,7 +528,7 @@ LAB_00286c80:
             param_1[temp_v2 * 2 + 0x4ef] = temp_v5;
             temp_v2 = temp_v2 + 1;
           }
-          FUN_0019a5a0(piVar8);
+          asdMemFree(piVar8);
         }
         temp_v12 = param_1[0x172];
         if ((temp_v12 < (unsigned int)param_1[0x171]) && (temp_v12 != 0)) {
@@ -537,7 +537,7 @@ LAB_00286c80:
               temp_v3 = 0;
               temp_v16 = 1;
               piVar8 = (int *)0x100;
-              FUN_001630d4(0x100,0x100,0,param_1[0x172] << 3);
+              asdMemoryAlloc(0x100,0x100,0,param_1[0x172] << 3);
               piVar18 = (int *)0x0;
               piVar9 = (int *)0x0;
               temp_v2 = temp_v9;
@@ -575,16 +575,16 @@ LAB_00286c80:
                 param_1[temp_v2 * 2 + 0x4ef] = temp_v5;
                 temp_v2 = temp_v2 + 1;
               }
-              FUN_0019a5a0(piVar8);
-              FUN_0010063a(temp_v18,param_1[0x172],8,&LAB_0034f784);
+              asdMemFree(piVar8);
+              qsort(temp_v18,param_1[0x172],8,&LAB_0034f784);
             }
             else {
-              FUN_0010063a(temp_v18,temp_v12,8,FUN_00337110);
+              qsort(temp_v18,temp_v12,8,FUN_00337110);
             }
           }
           else {
             FUN_003fd63c(0x461,0);
-            FUN_0010063a(temp_v18,param_1[0x172],8,&LAB_0034f784);
+            qsort(temp_v18,param_1[0x172],8,&LAB_0034f784);
             temp_v12 = 0;
             temp_v13 = 0;
             if (*temp_v32 != 0) {
@@ -703,34 +703,34 @@ LAB_0028727c:
           temp_v14 = ~(*pbVar19 >> 7) & 1;
           if ((*pbVar19 & 0x7f) == 1) {
             if (temp_v14 != 0) {
-              FUN_0010063a(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_002ce824);
+              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_002ce824);
             }
             else {
-              FUN_0010063a(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_003603a0);
+              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_003603a0);
             }
           }
           if ((*pbVar19 & 0x7f) == 2) {
             if (temp_v14 != 0) {
-              FUN_0010063a(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_00270d74);
+              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_00270d74);
             }
             else {
-              FUN_0010063a(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_00321cc0);
+              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_00321cc0);
             }
           }
           if ((*pbVar19 & 0x7f) == 0x31) {
             if (temp_v14 != 0) {
-              FUN_0010063a(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_002fe074);
+              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_002fe074);
             }
             else {
-              FUN_0010063a(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_00375b80);
+              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_00375b80);
             }
           }
           if ((*pbVar19 & 0x7f) == 3) {
             if (temp_v14 != 0) {
-              FUN_0010063a(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_002b2ca8);
+              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_002b2ca8);
             }
             else {
-              FUN_0010063a(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_0034f6fc);
+              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_0034f6fc);
             }
           }
         }

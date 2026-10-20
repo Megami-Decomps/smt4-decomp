@@ -8,7 +8,7 @@ int FUN_0029e974(void);
 int FUN_002b9024(void);
 
 extern int FUN_00245768(unsigned short);
-extern int FUN_00292f28(unsigned int);
+extern int padIsButtonDown(unsigned int);
 /* Supplied declaration required: FUN_0029e974. */
 /* Supplied declaration required: FUN_002b9024. */
 extern int FUN_002c09f4(unsigned int);
@@ -28,7 +28,7 @@ unsigned int FUN_0033b838(int param_1,int param_2,int param_3)
     FUN_002b9024();
     temp_v1 = FUN_00245768(*(unsigned short *)(param_1 + 0x46));
     temp_v3 = temp_v1 / 500 + (*(unsigned int *)(temp_v0 + 0x2c) & 0x7f);
-    temp_v1 = FUN_00292f28(5);
+    temp_v1 = padIsButtonDown(5);
     if (temp_v1 != 0) {
       temp_v3 = temp_v3 + 0x1e;
     }

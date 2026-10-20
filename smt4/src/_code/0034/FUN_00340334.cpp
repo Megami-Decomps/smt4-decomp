@@ -7,7 +7,7 @@ extern "C" {
 int VectorSignedToFloat(unsigned int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_001db5b8(unsigned int);
+extern int asdModelIdListGet(unsigned int);
 
 
 void FUN_00340334(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -44,7 +44,7 @@ void FUN_00340334(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v3 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0x4c),(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v2 = temp_v2 * 0.001f + temp_v6 * 0.001f + 25570.0f;
   temp_v3 = temp_v3 * 0.003921569f;
-  temp_v0 = FUN_001db5b8(0);
+  temp_v0 = asdModelIdListGet(0);
   temp_v0 = *(int *)(temp_v0 + 8);
   *(float *)(temp_v0 + 0xbc) = temp_v3;
   *(unsigned int *)(temp_v0 + 0xc0) = 0x3f800000;

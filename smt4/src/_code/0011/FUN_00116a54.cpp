@@ -35,7 +35,7 @@ typedef struct {
 
 extern int DAT_0043e18c; /* 0x43e18c */
 extern int DAT_0043e190; /* 0x43e190 */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 extern signed char DAT_00493828; /* 0x493828 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -49,7 +49,7 @@ extern int FUN_001264c4(unsigned int);
 extern int FUN_002b753c(unsigned int);
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: FUN_002b7638. */
-extern int FUN_002b93b0(unsigned int, unsigned int);
+extern int asdTMTexTableCallFileB(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b93c8. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bd82c. */
@@ -61,7 +61,7 @@ extern int FUN_002beda4(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
@@ -94,7 +94,7 @@ char FUN_00116a54(void)
   int temp_v18;
   unsigned int temp_v19;
   
-  temp_v4 = FUN_002c08f0();
+  temp_v4 = jobGetWork();
   if (((temp_v4 == DAT_0043e190) && (*(char *)(DAT_0043e190 + 0x7d) != '\0')) &&
      (*(char *)(DAT_0043e190 + 0x7f) != '\0')) {
     FUN_00124d24(1);
@@ -110,9 +110,9 @@ char FUN_00116a54(void)
   if (temp_v11 && temp_v0 == '\0') {
     return temp_v0;
   }
-  temp_v5 = FUN_002b93b0(0xe,0);
-  FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(temp_v5 + 8));
-  FUN_002c39a4(DAT_0044ea00);
+  temp_v5 = asdTMTexTableCallFileB(0xe,0);
+  FUN_002c1b64(g_titleScene,*(unsigned int *)(temp_v5 + 8));
+  FUN_002c39a4(g_titleScene);
   switch(*(unsigned char *)(temp_v4 + 9)) {
   case 0:
   case 1:
@@ -129,16 +129,16 @@ char FUN_00116a54(void)
   case 0x11:
   case 0x12:
     temp_v12 = 0.27f;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v5 = (int)temp_v12;
     if (*(char *)(temp_v4 + 9) == '\a' || *(char *)(temp_v4 + 9) == '\t') {
       FUN_002bf538();
       temp_v6 = FUN_002c5d80(1,0);
-      FUN_002bee04(DAT_0044ea00,3,temp_v6);
+      FUN_002bee04(g_titleScene,3,temp_v6);
       temp_v16 = 0;
       temp_v17 = 6;
       FUN_002bf288(2,0xe,0x106,0);
-      FUN_002bedb0(DAT_0044ea00,3);
+      FUN_002bedb0(g_titleScene,3);
       FUN_002bf538();
     }
     FUN_00126194(temp_v4);
@@ -154,7 +154,7 @@ char FUN_00116a54(void)
         if ((temp_v8 != 0) || ((*(char *)(temp_v4 + 8) == '\x04' && (*(char *)(temp_v4 + 0x5f) != '\0'))))
         {
           temp_v6 = FUN_002c5d80(1,0);
-          FUN_002bee04(DAT_0044ea00,3,temp_v6);
+          FUN_002bee04(g_titleScene,3,temp_v6);
           temp_v8 = FUN_002beda4(temp_v4 + 0x2f4);
           temp_v8 = temp_v8 + temp_v5;
           temp_v9 = FUN_002bed98(temp_v4 + 0x2f4);
@@ -176,13 +176,13 @@ char FUN_00116a54(void)
                 temp_v16 = 0;
                 FUN_002bf288(2,0xe,0x116,temp_v5);
                 temp_v6 = FUN_002c5da8(6,1,0);
-                FUN_002bee04(DAT_0044ea00,6,temp_v6);
+                FUN_002bee04(g_titleScene,6,temp_v6);
                 FUN_002bf538();
                 temp_v17 = 0x15;
                 temp_v16 = 0;
                 FUN_002bf288(2,0xe,0x117,temp_v8);
                 FUN_002bf538();
-                FUN_002bedb0(DAT_0044ea00,6);
+                FUN_002bedb0(g_titleScene,6);
               }
             }
             else {
@@ -204,7 +204,7 @@ char FUN_00116a54(void)
             temp_v17 = 0x15;
             FUN_002bf288(2,0xe,0xde,*(short *)(temp_v10 + 8) + temp_v8);
           }
-          FUN_002bedb0(DAT_0044ea00,3);
+          FUN_002bedb0(g_titleScene,3);
         }
         if ((*(unsigned int *)(temp_v4 + 0xc) & 0x20) != 0) goto LAB_00117048;
       }
@@ -215,25 +215,25 @@ char FUN_00116a54(void)
       temp_v8 = FUN_002beda4(temp_v4 + 0x2f4);
       FUN_002bed98(temp_v4 + 0x2f4);
       temp_v6 = FUN_002c5d80(1,0);
-      FUN_002bee04(DAT_0044ea00,3,temp_v6);
+      FUN_002bee04(g_titleScene,3,temp_v6);
       FUN_002bf538();
       temp_v16 = (int)*(float *)(temp_v4 + 0xa30);
       temp_v17 = 0x1a;
       FUN_002bf288(2,0xe,0x182,temp_v5);
       temp_v6 = FUN_002c5da8(6,1,0);
-      FUN_002bee04(DAT_0044ea00,6,temp_v6);
+      FUN_002bee04(g_titleScene,6,temp_v6);
       FUN_002bf538();
       temp_v16 = (int)*(float *)(temp_v4 + 0xa30);
       temp_v17 = 0x1a;
       FUN_002bf288(2,0xe,0x183,temp_v8 + temp_v5);
-      FUN_002bedb0(DAT_0044ea00,6);
+      FUN_002bedb0(g_titleScene,6);
       FUN_002bf538();
       goto LAB_00117044;
     }
     break;
   case 0xc:
     temp_v6 = FUN_002c5d80(1,0);
-    FUN_002bee04(DAT_0044ea00,3,temp_v6);
+    FUN_002bee04(g_titleScene,3,temp_v6);
     FUN_002bf538();
     FUN_002bed3c();
     temp_v14 = 0x3e8a3d71;
@@ -241,14 +241,14 @@ char FUN_00116a54(void)
     do {
       if (*(char *)(temp_v4 + temp_v5 + 0x37) != '\0') {
         temp_v12 = (float)temp_v14;
-        FUN_002ba12c(DAT_0044ea00);
+        FUN_002ba12c(g_titleScene);
         VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002b93c8(temp_v4 + temp_v5 * 0x8c + 0x498);
       }
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 5);
 LAB_00117044:
-    FUN_002bedb0(DAT_0044ea00,3);
+    FUN_002bedb0(g_titleScene,3);
   default:
 LAB_00117048:
     if (*(char *)(temp_v4 + 8) == '\0') {
@@ -295,7 +295,7 @@ LAB_00117048:
       temp_v8 = 8;
     }
     temp_v6 = FUN_002c5d80(1,0);
-    FUN_002bee04(DAT_0044ea00,3,temp_v6);
+    FUN_002bee04(g_titleScene,3,temp_v6);
     if (*(char *)(temp_v4 + 8) == '\x01' || *(char *)(temp_v4 + 8) == '\x04') {
       temp_v9 = FUN_00125e30();
       if (temp_v9 != 0) {
@@ -307,7 +307,7 @@ LAB_00117048:
         temp_v17 = 0;
         temp_v18 = 0x3f800000;
         temp_v19 = 0x3eccccce;
-        FUN_002c1b64(DAT_0044ea00,0);
+        FUN_002c1b64(g_titleScene,0);
         VectorSignedToFloat((int)*(short *)(temp_v9 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v9 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)(*(short **)(temp_v9 + 0xc))[1],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -353,7 +353,7 @@ LAB_00117048:
         do {
           temp_v10 = FUN_002bf4f8(0xe,temp_v5 + temp_v9);
           temp_v12 = (float)((unsigned long long)temp_v14 >> 0x20);
-          FUN_002ba12c(DAT_0044ea00);
+          FUN_002ba12c(g_titleScene);
           temp_v16 = 6;
           temp_v17 = temp_v9;
           FUN_002b75ec(*(unsigned int *)(temp_v4 + 4),(int)*(short *)(temp_v10 + 8) + (int)temp_v12);
@@ -364,7 +364,7 @@ LAB_00117048:
       if (temp_v5 != 0) {
         temp_v5 = FUN_002bf4f8(0xe,0x42);
         temp_v12 = 0.27f;
-        FUN_002ba12c(DAT_0044ea00);
+        FUN_002ba12c(g_titleScene);
         temp_v13 = (float)VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8) +
                                             (int)**(short **)(temp_v5 + 0xc) / 2,
@@ -379,9 +379,9 @@ LAB_00117048:
     return '\0';
   case 0xc:
     temp_v6 = FUN_002c5d80(1,0);
-    FUN_002bee04(DAT_0044ea00,3,temp_v6);
+    FUN_002bee04(g_titleScene,3,temp_v6);
     temp_v12 = 0.27f;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v18 = FUN_002b753c(*(unsigned int *)(temp_v4 + 4));
     temp_v5 = FUN_002bf4f8(0xe,0x8e);
     temp_v1 = *(short *)(temp_v5 + 8);
@@ -410,7 +410,7 @@ LAB_00117048:
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 5);
   }
-  FUN_002bedb0(DAT_0044ea00,3);
+  FUN_002bedb0(g_titleScene,3);
   return '\0';
 }
 

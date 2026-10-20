@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_005738c8; /* 0x5738c8 */
+extern int g_btlGameOver; /* 0x5738c8 */
 extern unsigned int DAT_005738d0; /* 0x5738d0 */
 extern unsigned int DAT_005738d4; /* 0x5738d4 */
 extern unsigned int DAT_005738d8; /* 0x5738d8 */
@@ -19,7 +19,7 @@ extern unsigned int DAT_005738dc; /* 0x5738dc */
 extern unsigned int DAT_005738e0; /* 0x5738e0 */
 extern unsigned int DAT_005738e4; /* 0x5738e4 */
 
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 extern int FUN_00317408(unsigned int);
 /* Supplied declaration required: FUN_003e6f50. */
 
@@ -32,14 +32,14 @@ int FUN_002dedf0(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00164a9c();
-  temp_v1 = DAT_005738c8;
-  if (DAT_005738c8 == 0) {
+  temp_v0 = jobGetWork();
+  temp_v1 = g_btlGameOver;
+  if (g_btlGameOver == 0) {
     temp_v1 = 0;
   }
   else {
-    temp_v2 = *(int *)(DAT_005738c8 + 8) + 1;
-    *(unsigned int *)(DAT_005738c8 + 8) = temp_v2;
+    temp_v2 = *(int *)(g_btlGameOver + 8) + 1;
+    *(unsigned int *)(g_btlGameOver + 8) = temp_v2;
     if (temp_v2 >= 0x10000) {
       *(unsigned int *)(temp_v1 + 8) = 0xffff;
     }

@@ -12,7 +12,7 @@ int FUN_002a4964(...);
 int FUN_002cb84c(void);
 int FUN_003f5220(...);
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00192550(void);
 int FUN_001ab854(...);
 int FUN_001aba54(void);
@@ -42,8 +42,8 @@ extern int DAT_0057f268; /* 0x57f268 */
 extern unsigned int DAT_0057f270; /* 0x57f270 */
 extern unsigned int DAT_0057f274; /* 0x57f274 */
 
-extern int FUN_0014aa78(void);
-/* Supplied declaration required: FUN_001681cc. */
+extern int btlGetMainState(void);
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_001ab854. */
@@ -414,9 +414,9 @@ LAB_002c4018:
         FUN_00333694(temp_v3,0xffffffff,temp_v5,1);
         if (temp_v3 == 1) {
           *(unsigned char *)(temp_v0 + 0x9c0) = 0;
-          temp_v3 = FUN_0014aa78();
+          temp_v3 = btlGetMainState();
           if ((temp_v3 != 0) &&
-             (temp_v3 = FUN_0014aa78(),
+             (temp_v3 = btlGetMainState(),
              (*(unsigned int *)(temp_v3 + 0x45ac) & DAT_0057f274) != 0 ||
              (*(unsigned int *)(temp_v3 + 0x45a8) & DAT_0057f270) != 0)) {
             *(unsigned char *)(temp_v0 + 0x9c0) = 1;
@@ -519,7 +519,7 @@ LAB_002c4018:
     else {
       temp_v7 = 199;
     }
-    FUN_001681cc(temp_v7);
+    sysPlaySe(temp_v7);
     break;
   case 0xc:
   case 0xd:

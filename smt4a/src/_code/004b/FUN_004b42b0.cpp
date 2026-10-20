@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001676b0(int, int, int, int);
 int FUN_0035ae58(int, int, int, int, int);
-int aeabi_idivmod(int, int);
+int __aeabi_idivmod(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 7 slot(s), 28 byte(s) */
@@ -20,13 +20,13 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_4_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_001676b0. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 extern int FUN_001ab854(int);
 /* Supplied declaration required: FUN_0035ae58. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_004b42b0(int param_1,int param_2,int param_3,int param_4)
@@ -93,7 +93,7 @@ void FUN_004b42b0(int param_1,int param_2,int param_3,int param_4)
             temp_v2 = 0xd;
             do {
               if ((temp_v7 & (1 << (temp_v3 & 0xff))) != 0) {
-                aeabi_idivmod(*piVar12 + 1,temp_v8);
+                __aeabi_idivmod(*piVar12 + 1,temp_v8);
                 temp_v12 = temp_v4 == temp_v10;
                 temp_v9 = temp_v10 + 1;
                 temp_v10 = temp_v10 + 1;
@@ -103,12 +103,12 @@ void FUN_004b42b0(int param_1,int param_2,int param_3,int param_4)
                 }
               }
               do {
-                temp_v9 = DAT_0059dbb4;
+                temp_v9 = g_renderCtx;
                 temp_v2 = temp_v2 - 1;
                 temp_v3 = temp_v3 + 1;
                 temp_v6 = temp_v6 + 1;
                 if (temp_v2 == 0) {
-                  piVar7 = (int *)(DAT_0059dbb4 + 0x1318);
+                  piVar7 = (int *)(g_renderCtx + 0x1318);
                   temp_v10 = piVar7[*piVar7 + 2];
                   piVar7[*piVar7 + 2] = 3;
                   if (*(char *)(temp_v9 + 0x1330) != '\0' || temp_v10 != 3) {
@@ -122,8 +122,8 @@ void FUN_004b42b0(int param_1,int param_2,int param_3,int param_4)
                                *(short *)(temp_v1 + 10) + param_4,0x7e);
                   FUN_001676b0((int)temp_v0,(int)*(short *)(temp_v1 + 8) + param_3 + temp_v10 + 0xd,
                                *(short *)(temp_v1 + 10) + param_4,0x7e);
-                  temp_v10 = DAT_0059dbb4;
-                  piVar7 = (int *)(DAT_0059dbb4 + 0x1318);
+                  temp_v10 = g_renderCtx;
+                  piVar7 = (int *)(g_renderCtx + 0x1318);
                   temp_v1 = piVar7[*piVar7 + 2];
                   piVar7[*piVar7 + 2] = 0;
                   if (*(char *)(temp_v10 + 0x1330) != '\0' || temp_v1 != 0) {
@@ -131,7 +131,7 @@ void FUN_004b42b0(int param_1,int param_2,int param_3,int param_4)
                     *(unsigned char *)(temp_v10 + 0x1330) = 0;
                   }
                   if (*piVar6 >= 0x18) {
-                    aeabi_idivmod(*piVar12 + 1,temp_v8);
+                    __aeabi_idivmod(*piVar12 + 1,temp_v8);
                     *piVar12 = temp_v5;
                     *piVar6 = 0;
                   }

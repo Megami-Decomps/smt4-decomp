@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00178b04(int, unsigned char *, int);
-int FUN_0040aa90(void);
+int moriModelContentCopyBody(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 extern unsigned char LAB_004d876c; /* 0x4d876c */
 
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_0040aa90. */
+/* Supplied declaration required: moriModelContentCopyBody. */
 extern int FUN_0040ac08(void);
 
 
@@ -34,7 +34,7 @@ void FUN_004d8724(int *param_1)
       temp_v1 = FUN_0040ac08();
     }
     *param_1 = temp_v1;
-    FUN_0040aa90();
+    moriModelContentCopyBody();
     return;
   }
   return;

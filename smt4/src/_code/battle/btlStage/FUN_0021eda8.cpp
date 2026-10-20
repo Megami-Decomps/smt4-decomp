@@ -9,8 +9,8 @@ int FUN_002759bc(void);
 int FUN_002b2368(int);
 int FUN_002c3f5c(void);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int FUN_002c415c(...);
-int FUN_002c43b4(unsigned int, int);
+int asdMemFree(...);
+int jobStop(unsigned int, int);
 int FUN_002c526c(void);
 int software_interrupt(int);
 
@@ -26,12 +26,12 @@ extern unsigned char DAT_004398d0; /* 0x4398d0 */
 /* Supplied declaration required: FUN_0024ef48. */
 /* Supplied declaration required: FUN_002759bc. */
 /* Supplied declaration required: FUN_002b2368. */
-extern int FUN_002bf244(unsigned int);
-extern int FUN_002c08f0(void);
+extern int jobIsValid(unsigned int);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c3f5c. */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_002c526c. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
@@ -47,7 +47,7 @@ void FUN_0021eda8(void)
   int uStack_20;
   unsigned char temp_v3 [4];
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   temp_v2 = (*(int *)((unsigned char *)&DAT_004398d0 + 0x4));
   if ((*(int *)((unsigned char *)&DAT_004398d0 + 0x4)) != 0) {
     uStack_20 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_004398d0 + 0x4)) + 0xa4);
@@ -72,7 +72,7 @@ void FUN_0021eda8(void)
       *(unsigned int *)(temp_v2 + 0xb0) = 0;
     }
     if (*(int *)(temp_v2 + 0xac) != 0) {
-      FUN_002c415c();
+      asdMemFree();
       *(unsigned int *)(temp_v2 + 0xac) = 0;
     }
     *(unsigned int *)(temp_v2 + 0xc0) = 0xffffffff;
@@ -82,12 +82,12 @@ void FUN_0021eda8(void)
     FUN_002759bc();
     FUN_0024ef48(temp_v2);
     *(unsigned int *)(temp_v2 + 0x80) = 0;
-    FUN_002c415c((*(int *)((unsigned char *)&DAT_004398d0 + 0x4)));
+    asdMemFree((*(int *)((unsigned char *)&DAT_004398d0 + 0x4)));
     (*(int *)((unsigned char *)&DAT_004398d0 + 0x4)) = 0;
   }
-  temp_v2 = FUN_002bf244(*(unsigned int *)(temp_v0 + 0x30));
+  temp_v2 = jobIsValid(*(unsigned int *)(temp_v0 + 0x30));
   if (temp_v2 != 0) {
-    FUN_002c43b4(*(unsigned int *)(temp_v0 + 0x30),0);
+    jobStop(*(unsigned int *)(temp_v0 + 0x30),0);
     return;
   }
   return;

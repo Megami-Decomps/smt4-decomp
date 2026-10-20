@@ -20,7 +20,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_0043e140; /* 0x43e140 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002ba12c. */
@@ -57,8 +57,8 @@ char FUN_0032a850(void)
     temp_v1 = *(char *)(DAT_0043e140 + 0x10);
   }
   if (temp_v6 && temp_v1 != '\0') {
-    FUN_002c39a4(DAT_0044ea00);
-    temp_v3 = DAT_0044ea00;
+    FUN_002c39a4(g_titleScene);
+    temp_v3 = g_titleScene;
     temp_v2 = FUN_002c5d80(1,0);
     piVar7 = (int *)(temp_v3 + 0x124c);
     temp_v4 = *piVar7;
@@ -71,7 +71,7 @@ char FUN_0032a850(void)
     }
     temp_v3 = FUN_002beda4(temp_v0 + 0x34);
     temp_v7 = 0.27f;
-    FUN_002ba12c(DAT_0044ea00);
+    FUN_002ba12c(g_titleScene);
     temp_v2 = FUN_002bed98(temp_v0 + 0x34);
     FUN_002bf380(2,0xe,0xe,temp_v3 + (int)temp_v7,temp_v2,0x65);
     temp_v4 = FUN_002bf4f8(0xe,0x10b);
@@ -81,8 +81,8 @@ char FUN_0032a850(void)
     FUN_002be5a4(3,0xffffffff,temp_v0 + 0xc0);
     FUN_002bed3c();
     FUN_002bf538();
-    temp_v0 = DAT_0044ea00;
-    piVar7 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v0 = g_titleScene;
+    piVar7 = (int *)(g_titleScene + 0x124c);
     temp_v3 = *piVar7;
     temp_v2 = piVar7[temp_v3 + 2];
     *piVar7 = temp_v3 - 1;

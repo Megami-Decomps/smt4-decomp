@@ -12,7 +12,7 @@ typedef struct {
 extern signed char DAT_005c14a0; /* 0x5c14a0 */
 extern unsigned char DAT_00647604; /* 0x647604 */
 
-extern int FUN_001a144c(int, unsigned int *);
+extern int nnFndFindNestedRange(int, unsigned int *);
 extern int nn_fnd_detail_GetNextListObject(unsigned char *, int);
 extern void nn_fnd_detail_InitList(unsigned int, unsigned short);
 
@@ -44,7 +44,7 @@ void FUN_00189c00(unsigned int *param_1,unsigned int param_2,unsigned int param_
     if (temp_v1 == 0) goto LAB_00189ca4;
   } while ((param_1 < *(unsigned int **)(temp_v1 + 0x18)) || (*(unsigned int **)(temp_v1 + 0x1c) <= param_1)
           );
-  temp_v0 = FUN_001a144c(temp_v1 + 0xc,param_1);
+  temp_v0 = nnFndFindNestedRange(temp_v1 + 0xc,param_1);
   if (temp_v0 == 0) {
     temp_v0 = temp_v1;
   }

@@ -1,14 +1,13 @@
-#include "romwright_types.h"
+#include "map/lmapMain.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
-extern int *DAT_0058104c; /* 0x58104c */
+extern LmapEventA *g_popupState;
 
-
-unsigned char FUN_002b809c(void)
-
+bool FUN_002b809c(void)
 {
-  return *DAT_0058104c != 0;
+    return g_popupState->state != 0;
 }
 
 } /* extern "C" */

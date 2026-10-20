@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ae43c(void);
+int asdLoadFileAsync(void);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -13,14 +13,14 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-/* Supplied declaration required: FUN_002ae43c. */
+/* Supplied declaration required: asdLoadFileAsync. */
 
 
 void FUN_002a1248(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_002ae43c();
+  asdLoadFileAsync();
                     /* WARNING: Treating indirect jump as return */
   return;
 }

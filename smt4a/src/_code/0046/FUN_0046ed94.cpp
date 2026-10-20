@@ -5,12 +5,12 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_0016c410(...);
 int FUN_0016c560(...);
 int FUN_0018291c(...);
-int FUN_00187d04(...);
-int FUN_0019a0e8(...);
+int camSetMatrixA(...);
+int mtx44Copy(...);
 int FUN_0019a0fc(...);
 int FUN_0019b770(...);
 int FUN_001a1c28(...);
@@ -53,7 +53,7 @@ typedef struct {
     unsigned int sp140; /* 0x140: local_140 */
 } param_4_stack;
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_005c4c30; /* 0x5c4c30 */
 extern float DAT_0064c084; /* 0x64c084 */
 extern float DAT_0064c088; /* 0x64c088 */
@@ -78,13 +78,13 @@ extern float DAT_0064c0c0; /* 0x64c0c0 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_0018291c. */
 extern unsigned int FUN_001861c4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00187d04. */
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: camSetMatrixA. */
+/* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: FUN_0019b770. */
 /* Supplied declaration required: FUN_001a1c28. */
@@ -160,7 +160,7 @@ void FUN_0046ed94(unsigned int param_1,unsigned int param_2,unsigned int param_3
         DAT_0064c0bc = temp_v10;
         DAT_0064c0c0 = temp_v7;
       }
-      FUN_0019a0e8(temp_v12,&DAT_0064c084);
+      mtx44Copy(temp_v12,&DAT_0064c084);
       if (((DAT_005c4c30 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c30), temp_v0 != 0)) {
         DAT_0064c084 = temp_v7;
         DAT_0064c088 = temp_v10;
@@ -179,9 +179,9 @@ void FUN_0046ed94(unsigned int param_1,unsigned int param_2,unsigned int param_3
         DAT_0064c0bc = temp_v10;
         DAT_0064c0c0 = temp_v7;
       }
-      FUN_0019a0e8(temp_v11,&DAT_0064c084);
+      mtx44Copy(temp_v11,&DAT_0064c084);
       temp_v9 = CONCAT44(temp_v7,temp_v7);
-      FUN_001677c0();
+      efctSetSpeed();
       temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)((float)param_4[0xc] == temp_v10) << 0x1e);
       temp_v6 = (float)param_4[10];
       puVar4 = (unsigned int *)(unsigned int)!romwright_subpiece_4_1_0(temp_v5 >> 0x1e,0);
@@ -340,7 +340,7 @@ void FUN_0046ed94(unsigned int param_1,unsigned int param_2,unsigned int param_3
           FUN_0019a0fc(temp_v12,temp_v12,temp_v11);
         }
       }
-      FUN_00187d04(DAT_0059dbb4,temp_v12);
+      camSetMatrixA(g_renderCtx,temp_v12);
       if ((int)param_4[2] < 0) {
         temp_v0 = FUN_001b2ca4(param_1,0x15,param_3);
         if (temp_v0 != 0) {
@@ -353,7 +353,7 @@ void FUN_0046ed94(unsigned int param_1,unsigned int param_2,unsigned int param_3
         FUN_001ab8e0(temp_v29,temp_v3,0,0,(int)*(short *)(param_4 + 0xe));
         FUN_0019b770(**(unsigned int **)(*(int *)*puVar4 + 4),temp_v29,temp_v2,0);
       }
-      FUN_001677c0();
+      efctSetSpeed();
       temp_v13 = temp_v8;
       temp_v14 = temp_v8;
       temp_v15 = temp_v8;
@@ -371,8 +371,8 @@ void FUN_0046ed94(unsigned int param_1,unsigned int param_2,unsigned int param_3
       temp_v27 = temp_v8;
       temp_v28 = temp_v8;
       FUN_0018291c(&temp_v13,&temp_v17,&temp_v21,&temp_v25,0,1);
-      FUN_0016c560(DAT_0059dbb4);
-      FUN_0016c410(DAT_0059dbb4);
+      FUN_0016c560(g_renderCtx);
+      FUN_0016c410(g_renderCtx);
     }
   }
   return;

@@ -7,13 +7,13 @@ extern "C" {
 int FUN_00126fb8(int);
 int FUN_0023392c(unsigned int *, unsigned int, int);
 int FUN_00233d78(unsigned int *);
-int FUN_0027e990(unsigned int);
+int aocClearDisplayFlag(unsigned int);
 int FUN_0027eb30(unsigned int *);
 int FUN_002b8cc8(void);
 int FUN_002ba9ac(unsigned int);
 int FUN_002baa40(unsigned int [3], int);
 int FUN_002bf818(unsigned int *);
-int FUN_002c43b4(unsigned int, int);
+int jobStop(unsigned int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -21,21 +21,21 @@ typedef struct {
     unsigned int sp14; /* 0x14: local_14 */
 } param_1_stack;
 
-extern int DAT_00432fc8; /* 0x432fc8 */
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern int g_aocMain; /* 0x432fc8 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_00126fb8. */
 /* Supplied declaration required: FUN_0023392c. */
 /* Supplied declaration required: FUN_00233d78. */
-/* Supplied declaration required: FUN_0027e990. */
+/* Supplied declaration required: aocClearDisplayFlag. */
 /* Supplied declaration required: FUN_0027eb30. */
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002b8cc8. */
 /* Supplied declaration required: FUN_002ba9ac. */
 /* Supplied declaration required: FUN_002baa40. */
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: jobStop. */
 
 
 void FUN_00392e74(unsigned int *param_1)
@@ -50,7 +50,7 @@ void FUN_00392e74(unsigned int *param_1)
   unsigned int temp_v2 [3];
   
   puVar2 = temp_v2;
-  if ((param_1[1] - 4 >= 11) || (temp_v0 = FUN_002ad1e0(DAT_00432fc8 + 0x98), temp_v0 == 0)) {
+  if ((param_1[1] - 4 >= 11) || (temp_v0 = FUN_002ad1e0(g_aocMain + 0x98), temp_v0 == 0)) {
     temp_v0 = 0;
     do {
       FUN_002bf818(param_1 + temp_v0 * 0x23 + 0xdf);
@@ -76,18 +76,18 @@ void FUN_00392e74(unsigned int *param_1)
     (*UNRECOVERED_JUMPTABLE)();
     return;
   }
-  *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xfffeffff;
+  *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
   FUN_0023392c(param_1,0xffffffff,0);
   FUN_0027eb30(param_1 + 0x46c);
   FUN_00233d78(param_1);
-  temp_v0 = FUN_002bf244(param_1[0x5e8]);
+  temp_v0 = jobIsValid(param_1[0x5e8]);
   if (temp_v0 != 0) {
     if (param_1[0x5eb] != 0xffffffff) {
       param_1[0x5eb] = 0xffffffff;
       FUN_002b8cc8();
     }
     *param_1 = *param_1 & 0xffffcfff;
-    FUN_002c43b4(param_1[0x5e8],0);
+    jobStop(param_1[0x5e8],0);
   }
   *(unsigned char *)(param_1 + 0x84) = 1;
   param_1[0x87] = 0;
@@ -95,11 +95,11 @@ void FUN_00392e74(unsigned int *param_1)
   temp_v1 = puVar2[1];
   param_1[0x85] = *puVar2;
   param_1[0x86] = temp_v1;
-  FUN_00126fb8(DAT_00432fc8 + 0x80);
-  *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xfffeffff;
+  FUN_00126fb8(g_aocMain + 0x80);
+  *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
   if (param_1[1] == 10) {
-    FUN_0027e990(DAT_00433158);
-    FUN_002ba9ac(DAT_00433158);
+    aocClearDisplayFlag(g_aocSystem);
+    FUN_002ba9ac(g_aocSystem);
   }
   piVar4 = (int *)param_1[0x82];
   param_1[1] = 0x11;

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 
 
 void FUN_0037b138(unsigned int param_1)
@@ -18,7 +18,7 @@ void FUN_0037b138(unsigned int param_1)
   unsigned int in_fpscr;
   
   VectorUnsignedToFloat(param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

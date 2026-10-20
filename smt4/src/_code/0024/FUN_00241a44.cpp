@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern unsigned char DAT_0043d9e0; /* 0x43d9e0 */
+extern unsigned char g_countdown; /* 0x43d9e0 */
 
 
 unsigned char FUN_00241a44(void)
 
 {
-  if (*(char *)((*(int *)((unsigned char *)&DAT_0043d9e0 + 0x4)) + 0x1c) == '\x05') {
+  if (*(char *)((*(int *)((unsigned char *)&g_countdown + 0x4)) + 0x1c) == '\x05') {
     return 0;
   }
   return 1;

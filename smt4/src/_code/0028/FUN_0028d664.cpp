@@ -8,16 +8,16 @@ int FUN_00262210(...);
 int FUN_002769b4(...);
 int FUN_00295eb0(...);
 int FUN_00297060(...);
-int FUN_002a7218(...);
+int scrScriptProcessDestroy(...);
 int FUN_002bd81c(...);
 int FUN_002bd82c(...);
 int FUN_002bd954(...);
 int FUN_002c312c(...);
-int FUN_002c415c(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int asdMemFree(...);
+int memClear(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -42,17 +42,17 @@ extern unsigned int DAT_0043da34; /* 0x43da34 */
 /* Supplied declaration required: FUN_002769b4. */
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002bd81c. */
 /* Supplied declaration required: FUN_002bd82c. */
-extern unsigned int FUN_002bd838(unsigned int);
+extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -72,31 +72,31 @@ void FUN_0028d664(unsigned int *param_1,unsigned char param_2)
   *(unsigned char *)(param_1 + 2) = param_2;
   *param_1 = 0;
   if (param_1[3] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1[3] = 0;
   }
   if (param_1[4] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1[4] = 0;
   }
   if (param_1[5] != 0) {
-    FUN_002a7218();
+    scrScriptProcessDestroy();
     param_1[5] = 0;
   }
   FUN_002769b4(0xffffffff,0xffffffff);
   if (DAT_0043da28 < '\x01') {
     if (DAT_0043da2c == (unsigned int *)0x0) {
       puVar3 = (unsigned int *)0x100;
-      FUN_002c498c(0x100,0x100,0,0x564,1);
+      asdMemAlloc(0x100,0x100,0,0x564,1);
       DAT_0043da2c = puVar3;
     }
     puVar3 = DAT_0043da2c;
-    FUN_002c4938();
+    memClear();
     puVar4 = &LAB_0028d974;
-    FUN_002c5788(&LAB_0028d974,1,0,0,FUN_001c0c38,&LAB_002109c8,0);
+    asdProcessCreateSimple(&LAB_0028d974,1,0,0,FUN_001c0c38,&LAB_002109c8,0);
     *puVar3 = (unsigned int)puVar4;
     puVar5 = &LAB_0028d988;
-    FUN_002c4a08(&LAB_0028d988,0xe6,0,0,FUN_002109cc,0,0,puVar4);
+    taskCreateDraw(&LAB_0028d988,0xe6,0,0,FUN_002109cc,0,0,puVar4);
     puVar3[2] = (unsigned int)puVar5;
     puVar1 = DAT_0043da2c;
     Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(DAT_0043da2c + 5);
@@ -127,7 +127,7 @@ void FUN_0028d664(unsigned int *param_1,unsigned char param_2)
     *(unsigned char *)((int)puVar1 + 0x4c6) = 1;
     *(unsigned char *)(puVar1 + 0x131) = 1;
     *(unsigned char *)((int)puVar1 + 0x4c7) = 0;
-    temp_v0 = FUN_002bd838(0);
+    temp_v0 = asdTextCreate(0);
     puVar3[0x156] = temp_v0;
     FUN_002bd82c(temp_v0,0x323232ff);
     FUN_002bd81c(puVar3[0x156],0,0x646464ff);

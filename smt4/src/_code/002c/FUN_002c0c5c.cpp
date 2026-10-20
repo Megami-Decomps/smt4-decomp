@@ -17,7 +17,7 @@ typedef struct {
 #define ROMWRIGHT_CARRY_4_DEFINED
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
-extern unsigned long long FUN_002c0cec(unsigned int, unsigned int);
+extern unsigned long long dataTableGet(unsigned int, unsigned int);
 extern unsigned int func_0x0014e6f4(unsigned int, unsigned int, int, unsigned int, unsigned int, unsigned int);
 
 
@@ -38,7 +38,7 @@ long long FUN_002c0c5c(void)
   unsigned char temp_v8;
   unsigned long long temp_v9;
   
-  temp_v9 = FUN_002c0cec(0x18,0);
+  temp_v9 = dataTableGet(0x18,0);
   temp_v2 = (unsigned int)((unsigned long long)temp_v9 >> 0x20);
   puVar1 = (unsigned int *)temp_v9;
   if (((puVar1 == (unsigned int *)0x0) || (temp_v2 = *puVar1, temp_v2 != 0x314c4254)) ||

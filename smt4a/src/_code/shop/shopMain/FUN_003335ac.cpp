@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00137ee0(int, int *, int);
-int FUN_0016007c(void);
-int FUN_00180008(int);
+int asdSequenceRequest(int, int *, int);
+int asdOperatorNew(void);
+int jyoucyuGetTableEntry(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,10 +15,10 @@ typedef struct {
 
 extern char *DAT_00588eec; /* 0x588eec */
 
-/* Supplied declaration required: FUN_00137ee0. */
-/* Supplied declaration required: FUN_0016007c. */
-/* Supplied declaration required: FUN_00180008. */
-extern int FUN_00236038(unsigned int);
+/* Supplied declaration required: asdSequenceRequest. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
+extern int scrGetArg(unsigned int);
 
 
 void FUN_003335ac(void)
@@ -31,9 +31,9 @@ void FUN_003335ac(void)
   int temp_v1;
   
   temp_v1 = in_r3;
-  FUN_00180008(0);
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
+  jyoucyuGetTableEntry(0);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
   if (!(temp_v0 == -1 || temp_v1 == -1)) {
     if (temp_v0 != 0) {
       temp_v1 = temp_v1 + 100;
@@ -42,7 +42,7 @@ void FUN_003335ac(void)
   else {
     if (DAT_00588eec == (char *)0x0) {
       pcVar2 = (char *)0x8;
-      FUN_0016007c();
+      asdOperatorNew();
       DAT_00588eec = pcVar2;
       if (pcVar2 != (char *)0x0) {
         *pcVar2 = '\0';
@@ -57,7 +57,7 @@ void FUN_003335ac(void)
     }
     if (DAT_00588eec == (char *)0x0) {
       pcVar2 = (char *)0x8;
-      FUN_0016007c();
+      asdOperatorNew();
       DAT_00588eec = pcVar2;
       if (pcVar2 != (char *)0x0) {
         *pcVar2 = '\0';
@@ -70,7 +70,7 @@ void FUN_003335ac(void)
     temp_v1 = *(int *)(DAT_00588eec + 4);
     if (DAT_00588eec == (char *)0x0) {
       pcVar2 = (char *)0x8;
-      FUN_0016007c();
+      asdOperatorNew();
       DAT_00588eec = pcVar2;
       if (pcVar2 != (char *)0x0) {
         *pcVar2 = '\0';
@@ -82,7 +82,7 @@ void FUN_003335ac(void)
     }
     *DAT_00588eec = '\0';
   }
-  FUN_00137ee0(10,&temp_v1,4);
+  asdSequenceRequest(10,&temp_v1,4);
   return;
 }
 

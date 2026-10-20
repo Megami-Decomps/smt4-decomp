@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001469a8(void);
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 int FUN_001a0d08(int *);
 int FUN_002e3140(void);
 int FUN_002e3328(int);
@@ -13,7 +13,7 @@ int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001469a8. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001a0d08. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002e3328. */
@@ -48,7 +48,7 @@ void FUN_003f19dc(int param_1)
     *piVar2 = 0;
   }
   if (*(int *)(param_1 + 0x4d00) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(int *)(param_1 + 0x4d00) = 0;
   }
   *(unsigned int *)(param_1 + 0x4d14) = 0xffffffff;

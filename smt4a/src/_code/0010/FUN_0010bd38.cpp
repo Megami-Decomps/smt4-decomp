@@ -9,7 +9,7 @@ int FUN_002e7614(...);
 int FUN_002e7682(...);
 int FUN_002e76a0(...);
 int FUN_002eac34(...);
-int FUN_002ec9f4(unsigned char [32]);
+int strDestroy(unsigned char [32]);
 int FUN_002ed84a(...);
 int FUN_002ed864(...);
 int FUN_002f2c0a(void);
@@ -36,7 +36,7 @@ typedef struct {
 extern int FUN_002e7690(int, int, unsigned int);
 /* Supplied declaration required: FUN_002e76a0. */
 /* Supplied declaration required: FUN_002eac34. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ed84a. */
 /* Supplied declaration required: FUN_002ed864. */
 extern int FUN_002f2b30(int);
@@ -154,14 +154,14 @@ void FUN_0010bd38(unsigned int param_1,int param_2,int param_3)
         temp_v2[0] = (unsigned short)*(unsigned int *)(puVar2 + 0x10);
         temp_v0 = FUN_002ed864(param_3,temp_v2);
         if (temp_v0 == 0) {
-          FUN_002ec9f4(temp_v4);
-          FUN_002ec9f4(temp_v3);
+          strDestroy(temp_v4);
+          strDestroy(temp_v3);
           return;
         }
       }
       FUN_002e76a0(param_3,puVar2);
-      FUN_002ec9f4(temp_v4);
-      FUN_002ec9f4(temp_v3);
+      strDestroy(temp_v4);
+      strDestroy(temp_v3);
     }
     else if ((int)((unsigned int)*(unsigned short *)(param_2 + 0x3c) << 0x18) < 0) {
       temp_v2[0] = 0;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001db640(...);
+int asdModelSlotSetActive(...);
 int FUN_002a4258(...);
 int FUN_002c2968(...);
 int FUN_003946b4(...);
@@ -37,11 +37,11 @@ typedef struct {
 extern unsigned int DAT_00464b84; /* 0x464b84 */
 extern unsigned char DAT_004dace0; /* 0x4dace0 */
 
-extern unsigned int FUN_00152884(fn_002a04f0_arg0 *);
-/* Supplied declaration required: FUN_001db640. */
+extern unsigned int asdModelGetSlotArray3(fn_002a04f0_arg0 *);
+/* Supplied declaration required: asdModelSlotSetActive. */
 /* Supplied declaration required: FUN_002a4258. */
-extern int FUN_002a4268(fn_002a04f0_arg0 *);
-extern int FUN_002a4278(fn_002a04f0_arg0 *);
+extern int asdModelGetSlotArray2(fn_002a04f0_arg0 *);
+extern int asdModelGetSlotArray1(fn_002a04f0_arg0 *);
 extern int FUN_002af294(int, int);
 /* Supplied declaration required: FUN_002c2968. */
 /* Supplied declaration required: FUN_003946b4. */
@@ -62,11 +62,11 @@ void FUN_002a04f0(fn_002a04f0_arg0 *param_1)
   unsigned int temp_v7;
   int temp_v8;
   
-  temp_v0 = FUN_00152884(param_1);
+  temp_v0 = asdModelGetSlotArray3(param_1);
   temp_v1 = FUN_002a4258(param_1);
   temp_v2 = **(unsigned int **)(*(int *)(temp_v1 + 4) + 0x4c);
   temp_v3 = FUN_002a4258(param_1);
-  temp_v4 = FUN_002a4278(param_1);
+  temp_v4 = asdModelGetSlotArray1(param_1);
   temp_v8 = 0;
   do {
     temp_v6 = *(int *)((int)param_1 * 0x284 + temp_v8 * 4 + 0x4d9ae4);
@@ -175,7 +175,7 @@ LAB_002a07a8:
 LAB_002a0868:
     temp_v8 = (int)(short)((short)temp_v8 + 1);
   } while (temp_v8 < 8);
-  temp_v4 = FUN_002a4268(param_1);
+  temp_v4 = asdModelGetSlotArray2(param_1);
   temp_v8 = 0;
   do {
     temp_v6 = *(int *)((int)param_1 * 0x14 + temp_v8 * 4 + 0x4daca4);
@@ -207,7 +207,7 @@ LAB_002a094c:
     temp_v8 = (int)(short)((short)temp_v8 + 1);
     if (temp_v8 >= 4) {
       FUN_002c2968(temp_v3,(&DAT_00464b84)[(int)param_1]);
-      FUN_001db640(param_1);
+      asdModelSlotSetActive(param_1);
       FUN_003946b4(temp_v0,temp_v1,&DAT_004dace0 + (int)param_1 * 0x40,temp_v2);
       return;
     }

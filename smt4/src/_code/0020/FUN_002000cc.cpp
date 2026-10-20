@@ -20,10 +20,10 @@ int FUN_002b8838(int);
 int FUN_002bd2b4(unsigned int, int, int);
 int FUN_002c3940(int, int);
 int FUN_002d67fc(int);
-int FUN_002f5ba0(void);
+int campCecEditDestroy(void);
 
 extern int FUN_0019e0c0(unsigned int);
-extern int FUN_00211090(void);
+extern int campCecEditGetFlag125(void);
 /* Supplied declaration required: FUN_00254600. */
 /* Supplied declaration required: FUN_0025461c. */
 /* Supplied declaration required: FUN_0025463c. */
@@ -46,7 +46,7 @@ extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002c3940. */
 /* Supplied declaration required: FUN_002d67fc. */
 extern int FUN_002e1afc(void);
-/* Supplied declaration required: FUN_002f5ba0. */
+/* Supplied declaration required: campCecEditDestroy. */
 
 
 unsigned int FUN_002000cc(int *param_1,int param_2)
@@ -87,9 +87,9 @@ unsigned int FUN_002000cc(int *param_1,int param_2)
     return 0;
   }
   if (*(char *)(temp_v4 + 0x3e) != '\0') {
-    temp_v3 = FUN_00211090();
+    temp_v3 = campCecEditGetFlag125();
     if (temp_v3 != 0) {
-      FUN_002f5ba0();
+      campCecEditDestroy();
       *(unsigned char *)(temp_v4 + 0x40) = 1;
       return 0;
     }

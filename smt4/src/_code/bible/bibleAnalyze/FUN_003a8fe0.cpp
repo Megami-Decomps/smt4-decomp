@@ -13,10 +13,10 @@ int FUN_00233670(...);
 int FUN_00240cec(int);
 int FUN_00297410(...);
 int FUN_0029dd7c(int);
-int FUN_002c222c(void);
-int FUN_002c498c(int, int, int, int, int);
-int FUN_002c4a08(...);
-int FUN_002c5788(unsigned char *, int, int, int, unsigned char *, unsigned char *, int *);
+int asdOperatorNew(void);
+int asdMemAlloc(int, int, int, int, int);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, int *);
 int FUN_003a8aa0(...);
 int FUN_003aab40(...);
 
@@ -50,10 +50,10 @@ extern int FUN_00233718(int *);
 /* Supplied declaration required: FUN_00240cec. */
 /* Supplied declaration required: FUN_00297410. */
 /* Supplied declaration required: FUN_0029dd7c. */
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_003420f4(int);
 /* Supplied declaration required: FUN_003a8aa0. */
 /* Supplied declaration required: FUN_003aab40. */
@@ -80,21 +80,21 @@ void FUN_003a8fe0(int *param_1)
     FUN_00240cec(0);
   }
   piVar1 = (int *)0x100;
-  FUN_002c498c(0x100,0x100,0,4,1);
+  asdMemAlloc(0x100,0x100,0,4,1);
   DAT_0043d990 = piVar1;
   *piVar1 = (int)param_1;
   puVar2 = &LAB_003a9340;
-  FUN_002c5788(&LAB_003a9340,2,0,0,&LAB_003ac6e8,&LAB_003ac710,piVar1);
+  asdProcessCreateSimple(&LAB_003a9340,2,0,0,&LAB_003ac6e8,&LAB_003ac710,piVar1);
   param_1[1] = (int)puVar2;
   puVar3 = &LAB_003a9358;
-  FUN_002c4a08(&LAB_003a9358,0x6f,1,0,&LAB_003aca2c,0,DAT_0043d990,puVar2);
+  taskCreateDraw(&LAB_003a9358,0x6f,1,0,&LAB_003aca2c,0,DAT_0043d990,puVar2);
   param_1[2] = (int)puVar3;
   puVar2 = &LAB_003a9370;
-  FUN_002c4a08(&LAB_003a9370,0xe6,1,0,&LAB_003acdec,0,DAT_0043d990,param_1[1]);
+  taskCreateDraw(&LAB_003a9370,0xe6,1,0,&LAB_003acdec,0,DAT_0043d990,param_1[1]);
   param_1[3] = (int)puVar2;
   temp_v0 = 0x68;
   if ((char)param_1[0x169] != '\0') {
-    FUN_002c222c();
+    asdOperatorNew();
     puVar5 = (unsigned int *)0x0;
     if (temp_v0 != 0) {
       puVar5 = (unsigned int *)FUN_00233228();
@@ -123,7 +123,7 @@ void FUN_003a8fe0(int *param_1)
     } while (temp_v0 < 0x3c);
   }
   else {
-    FUN_002c222c();
+    asdOperatorNew();
     piVar1 = (int *)0x0;
     if (temp_v0 != 0) {
       piVar1 = (int *)FUN_00233228();

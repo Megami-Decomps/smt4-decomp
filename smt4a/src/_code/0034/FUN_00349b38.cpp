@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_002c7388(unsigned int, unsigned char [128], int);
-int FUN_002e0d38(int, unsigned char [128], unsigned char [140], unsigned int, unsigned int);
+int asdSaveReadBlock(int, unsigned char [128], unsigned char [140], unsigned int, unsigned int);
 int FUN_002e342c(unsigned char [128], unsigned char *);
 int FUN_002e6dd0(unsigned char *, int);
 int FUN_003416a0(int, unsigned char [128]);
@@ -23,7 +23,7 @@ extern unsigned char DAT_005e2114; /* 0x5e2114 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_002c7388. */
-/* Supplied declaration required: FUN_002e0d38. */
+/* Supplied declaration required: asdSaveReadBlock. */
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: FUN_002e6dd0. */
 extern int FUN_002ef7f0(unsigned int, unsigned char *);
@@ -59,7 +59,7 @@ void FUN_00349b38(unsigned int param_1)
   FUN_003416a0(temp_v0,temp_v4);
   if (temp_v0 != 0) {
     temp_v0 = temp_v1;
-    FUN_002e0d38(temp_v1,temp_v4,temp_v5,temp_v2,temp_v3);
+    asdSaveReadBlock(temp_v1,temp_v4,temp_v5,temp_v2,temp_v3);
     if (temp_v0 != 0) {
       return;
     }

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c4938(unsigned int *, int);
+int memClear(unsigned int *, int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(unsigned int, int);
 
 typedef int romwright_code(...);
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int * FUN_00120584(unsigned int *param_1,int *param_2)
@@ -33,7 +33,7 @@ unsigned int * FUN_00120584(unsigned int *param_1,int *param_2)
   
   puVar2 = (unsigned int *)(**(romwright_code **)(*param_2 + 8))(param_2,0x48,4);
   if (puVar2 != (unsigned int *)0x0) {
-    FUN_002c4938(puVar2,0x48);
+    memClear(puVar2,0x48);
   }
   *puVar2 = 0x20000021;
   puVar2[1] = 0x48535854;

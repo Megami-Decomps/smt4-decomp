@@ -27,12 +27,12 @@ typedef struct {
     unsigned int sp558; /* 0x558: local_558 */
 } void_stack;
 
-extern int DAT_00447060; /* 0x447060 */
+extern int g_lmapMainState; /* 0x447060 */
 extern unsigned char DAT_00447088; /* 0x447088 */
 extern char s_________00447128[17]; /* 0x447128 */
 extern char s______004472b8[11]; /* 0x4472b8 */
 extern unsigned int DAT_00476630; /* 0x476630 */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 extern unsigned int DAT_004efd48; /* 0x4efd48 */
 extern unsigned int DAT_004efd4c; /* 0x4efd4c */
@@ -94,16 +94,16 @@ void FUN_002666b0(void)
   float temp_v23;
   unsigned int temp_v24;
   
-  temp_v0 = DAT_00447060;
-  if (DAT_00447060 == 0) {
+  temp_v0 = g_lmapMainState;
+  if (g_lmapMainState == 0) {
     return;
   }
-  temp_v1 = FUN_00316f70(*(unsigned int *)(DAT_00447060 + 0xa98),0x2a);
+  temp_v1 = FUN_00316f70(*(unsigned int *)(g_lmapMainState + 0xa98),0x2a);
   *(unsigned int *)(temp_v0 + 0xa9c) = temp_v1;
   *(unsigned int *)(temp_v0 + 0xa94) = 0;
   *(unsigned int *)(temp_v0 + 0xa98) = 0;
-  temp_v4 = DAT_00447060;
-  if (DAT_0049f91c == 0x65) {
+  temp_v4 = g_lmapMainState;
+  if (g_gameState == 0x65) {
     if (DAT_0049f920 != 1) {
       if (DAT_0049f920 == 2) {
         pcVar3 = (char *)0x4470d8;
@@ -139,11 +139,11 @@ void FUN_002666b0(void)
   else {
 LAB_00266768:
     temp_v3 = 0;
-    if (0 < *(int *)(*(int *)(DAT_00447060 + 0xa9c) + 4)) {
+    if (0 < *(int *)(*(int *)(g_lmapMainState + 0xa9c) + 4)) {
       do {
         FUN_0020ffa0(*(unsigned int *)(temp_v4 + 0xa9c),temp_v3);
-        if ((DAT_00447060 != 0) &&
-           (temp_v2 = DAT_00447060 + temp_v3 * 0x88, *(char *)(temp_v2 + 0xb30) == '\0')) {
+        if ((g_lmapMainState != 0) &&
+           (temp_v2 = g_lmapMainState + temp_v3 * 0x88, *(char *)(temp_v2 + 0xb30) == '\0')) {
           *(unsigned char *)(temp_v2 + 0xb30) = 1;
         }
         FUN_00265b78(temp_v3,1);

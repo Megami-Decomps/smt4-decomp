@@ -10,10 +10,10 @@ int FUN_002c159c(...);
 int FUN_002c1e30(...);
 int FUN_002c1edc(...);
 int FUN_002c2044(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int memClear(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 int FUN_00317a90(...);
 int taskInitLists(...);
 
@@ -31,12 +31,12 @@ typedef struct {
 extern int FUN_0017fbe4(...); /* 0x17fbe4 */
 extern int FUN_001aa2a0(...); /* 0x1aa2a0 */
 extern int FUN_001aa4a8(...); /* 0x1aa4a8 */
-extern int FUN_001dc9d0(...); /* 0x1dc9d0 */
+extern int effectProcessDestroy(...); /* 0x1dc9d0 */
 extern int FUN_001dca5c(...); /* 0x1dca5c */
 extern unsigned char LAB_00221b1c; /* 0x221b1c */
 extern unsigned char LAB_00221b2c; /* 0x221b2c */
 extern unsigned char LAB_00221b44; /* 0x221b44 */
-extern int DAT_00433260; /* 0x433260 */
+extern int g_effectProcessActive; /* 0x433260 */
 
 /* Supplied declaration required: FUN_00200b10. */
 /* Supplied declaration required: FUN_00221ba8. */
@@ -44,10 +44,10 @@ extern int DAT_00433260; /* 0x433260 */
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
 /* Supplied declaration required: FUN_002c2044. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_00317a90. */
 /* Supplied declaration required: taskInitLists. */
 
@@ -64,9 +64,9 @@ unsigned int FUN_002218d4(unsigned char param_1)
   unsigned int temp_v3;
   
   temp_v0 = 0x100;
-  FUN_002c498c(0x100,0x100,0,0x534,1);
-  DAT_00433260 = temp_v0;
-  FUN_002c4938();
+  asdMemAlloc(0x100,0x100,0,0x534,1);
+  g_effectProcessActive = temp_v0;
+  memClear();
   *(unsigned char *)(temp_v0 + 0x530) = param_1;
   taskInitLists();
   FUN_00200b10(0);
@@ -89,19 +89,19 @@ unsigned int FUN_002218d4(unsigned char param_1)
   FUN_002c1edc(temp_v0,(unsigned int *)(temp_v0 + 0x508),(unsigned int *)(temp_v0 + 0x514),&temp_v1);
   FUN_002c1e30(temp_v0,1);
   puVar2 = &LAB_00221b1c;
-  FUN_002c5788(&LAB_00221b1c,2,0,0,FUN_0017fbe4,FUN_001dc9d0,temp_v0);
+  asdProcessCreateSimple(&LAB_00221b1c,2,0,0,FUN_0017fbe4,effectProcessDestroy,temp_v0);
   *(unsigned char **)(temp_v0 + 0x524) = puVar2;
   if (*(char *)(temp_v0 + 0x530) != '\0') {
     puVar3 = &LAB_00221b2c;
-    FUN_002c4a08(&LAB_00221b2c,0x84,0,0,FUN_001aa2a0,0,temp_v0,puVar2);
+    taskCreateDraw(&LAB_00221b2c,0x84,0,0,FUN_001aa2a0,0,temp_v0,puVar2);
     *(unsigned char **)(temp_v0 + 0x52c) = puVar3;
   }
   else {
     puVar3 = &LAB_00221b44;
-    FUN_002c4a08(&LAB_00221b44,0x70,0,0,FUN_001aa4a8,0,temp_v0,puVar2);
+    taskCreateDraw(&LAB_00221b44,0x70,0,0,FUN_001aa4a8,0,temp_v0,puVar2);
     *(unsigned char **)(temp_v0 + 0x528) = puVar3;
     puVar2 = &LAB_00221b2c;
-    FUN_002c4a08(&LAB_00221b2c,0xe8,0,0,FUN_001dca5c,0,temp_v0,*(unsigned int *)(temp_v0 + 0x524));
+    taskCreateDraw(&LAB_00221b2c,0xe8,0,0,FUN_001dca5c,0,temp_v0,*(unsigned int *)(temp_v0 + 0x524));
     *(unsigned char **)(temp_v0 + 0x52c) = puVar2;
   }
   return *(unsigned int *)(temp_v0 + 0x524);

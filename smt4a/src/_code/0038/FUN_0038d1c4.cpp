@@ -1,29 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038d1c4` (_code @ 0x38d1c4, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003283ac(int);
+/* Offset of the u16 value array inside a record's value table. */
+#define TABLE_VALUES_OFFSET 0x118
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ u8 *table;
+} Record;
 
-extern int FUN_00236038(void);
-/* Supplied declaration required: FUN_003283ac. */
-extern int FUN_004ee568(unsigned int);
+extern u32 g_btlScriptUnit;
 
+int scrSetResult(int value);
+int scrGetArg(void);
+Record *btlUnitGet(u32 id);
 
-unsigned int FUN_0038d1c4(void)
-
+/* Script command: passes entry (script argument 0) of the current record's value table to scrSetResult. */
+u32 FUN_0038d1c4(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_00236038();
-  temp_v1 = FUN_004ee568(DAT_0057113c);
-  FUN_003283ac(*(unsigned short *)(*(int *)(temp_v1 + 0x28) + temp_v0 * 2 + 0x118));
-  return 1;
+    int index = scrGetArg();
+    u8 *table = btlUnitGet(g_btlScriptUnit)->table;
+
+    scrSetResult(*(u16 *)(table + index * 2 + TABLE_VALUES_OFFSET));
+    return 1;
 }
 
 } /* extern "C" */

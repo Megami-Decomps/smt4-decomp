@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0037a5d4(void);
 
-extern int FUN_00236038(unsigned int);
+extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_0037a5d4. */
 
 
@@ -16,7 +16,7 @@ unsigned char FUN_003308e0(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_00236038(0);
+  temp_v0 = scrGetArg(0);
   FUN_0037a5d4();
   return temp_v0 != 0;
 }

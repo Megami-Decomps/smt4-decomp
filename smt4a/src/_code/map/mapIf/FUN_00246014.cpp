@@ -19,7 +19,7 @@ typedef struct {
 
 extern unsigned char LAB_002460dc; /* 0x2460dc */
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_0058103c; /* 0x58103c */
+extern int g_mapIf; /* 0x58103c */
 
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_003fd76c. */
@@ -44,9 +44,9 @@ void FUN_00246014(void)
   unsigned int in_s2;
   unsigned int in_s3;
   
-  temp_v0 = DAT_0058103c;
-  puVar4 = (unsigned int *)(DAT_0058103c + 0xcc48);
-  *(unsigned char *)(DAT_0058103c + 0xcc3c) = 1;
+  temp_v0 = g_mapIf;
+  puVar4 = (unsigned int *)(g_mapIf + 0xcc48);
+  *(unsigned char *)(g_mapIf + 0xcc3c) = 1;
   *(unsigned int *)(temp_v0 + 0xcc40) = 0;
   *(unsigned int *)(temp_v0 + 0xcc44) = 0;
   temp_v1 = 0x20;

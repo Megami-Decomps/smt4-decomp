@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00183bb0(void);
 
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00183bb0. */
 
 
@@ -15,9 +15,9 @@ unsigned int FUN_002bd488(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_00183bb0();
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_00183bb0();
   return 0;
 }

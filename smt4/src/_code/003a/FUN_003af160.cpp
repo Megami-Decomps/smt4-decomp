@@ -3,10 +3,10 @@
 extern "C" {
 
 int FUN_002a5ed0(int, int);
-int FUN_002c4c2c(int);
+int asdTMTexTableLoadSprites(int);
 
 /* Supplied declaration required: FUN_002a5ed0. */
-/* Supplied declaration required: FUN_002c4c2c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 
 
 void FUN_003af160(void)
@@ -15,9 +15,9 @@ void FUN_003af160(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  FUN_002c4c2c(8);
-  FUN_002c4c2c(0x14);
-  FUN_002c4c2c(0x15);
+  asdTMTexTableLoadSprites(8);
+  asdTMTexTableLoadSprites(0x14);
+  asdTMTexTableLoadSprites(0x15);
   FUN_002a5ed0(8,10);
   temp_v0 = 0;
   do {

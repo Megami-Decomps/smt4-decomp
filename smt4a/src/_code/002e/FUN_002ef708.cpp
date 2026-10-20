@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002f8554(unsigned int);
 int FUN_0030f46a(void);
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 
 extern unsigned int FUN_002eb56c(void);
 /* Supplied declaration required: FUN_002f8554. */
@@ -25,7 +25,7 @@ void FUN_002ef708(void)
   int temp_v2;
   unsigned int temp_v3;
   
-  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0x15)) != '\0') {
+  if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x15)) != '\0') {
     temp_v0 = FUN_002eb56c();
     temp_v1 = FUN_0030f61c();
     for (temp_v3 = 0; temp_v3 <= temp_v1; temp_v3 = temp_v3 + 1) {

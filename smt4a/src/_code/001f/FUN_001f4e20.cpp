@@ -1,36 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f4e20` (_code @ 0x1f4e20, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Starts the countdown (30 frames) with the given mode byte: marks the object active, resets its two timers and clears the done flag. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184758(int, int);
-int FUN_00184c00(int, int);
+typedef struct Countdown {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ u32 active;
+    /* 0x00C */ u8 unk00C[4];
+    /* 0x010 */ u32 frames;
+    /* 0x014 */ u8 unk014[0x0C];
+    /* 0x020 */ u32 unk20;
+    /* 0x024 */ u8 unk024[0x0C];
+    /* 0x030 */ u8 started;
+    /* 0x031 */ u8 unk031[2];
+    /* 0x033 */ u8 mode;
+    /* 0x034 */ u8 unk034[0x20];
+    /* 0x054 */ u8 timer[0x2D9];
+    /* 0x32D */ u8 done;
+} Countdown;
 
-extern int DAT_0057f574; /* 0x57f574 */
+extern Countdown *DAT_0057f574;
 
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+extern void FUN_00184758(void *timer, s32 a, s32 b);
+extern void FUN_00184c00(void *timer, s32 a, s32 b);
 
-
-void FUN_001f4e20(unsigned char param_1)
-
+void FUN_001f4e20(u8 mode)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = DAT_0057f574;
-  temp_v1 = DAT_0057f574 + 0x54;
-  *(unsigned int *)(DAT_0057f574 + 8) = 1;
-  FUN_00184758(temp_v1,0);
-  FUN_00184c00(temp_v0 + 0x54,0);
-  *(unsigned char *)(temp_v0 + 0x33) = param_1;
-  *(unsigned char *)(temp_v0 + 0x30) = 1;
-  *(unsigned int *)(temp_v0 + 0x20) = 0;
-  *(unsigned int *)(temp_v0 + 0x10) = 0x1e;
-  *(unsigned char *)(temp_v0 + 0x32d) = 0;
-  return;
+    Countdown *countdown = DAT_0057f574;
+
+    countdown->active = 1;
+    FUN_00184758(countdown->timer, 0, 0);
+    FUN_00184c00(countdown->timer, 0, 0);
+    countdown->mode = mode;
+    countdown->started = 1;
+    countdown->unk20 = 0;
+    countdown->frames = 30;
+    countdown->done = 0;
 }
 
-} /* extern "C" */
+}

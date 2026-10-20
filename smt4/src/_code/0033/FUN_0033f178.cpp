@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_002b93b0(unsigned int, unsigned int);
+int asdTMTexTableCallFileB(unsigned int, unsigned int);
 
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 extern int FUN_0023e330(void);
 extern int FUN_0023e378(void);
 extern int FUN_0023e3a4(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00248674(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b93b0. */
+/* Supplied declaration required: asdTMTexTableCallFileB. */
 extern unsigned int FUN_00389700(unsigned int, unsigned int);
 extern unsigned int FUN_00389dc0(unsigned int, unsigned int);
 
@@ -26,7 +26,7 @@ unsigned int FUN_0033f178(int param_1)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  FUN_002b93b0(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
+  asdTMTexTableCallFileB(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
   temp_v0 = FUN_0023e378();
   temp_v3 = 0;
   if (temp_v0 != 0) {
@@ -35,17 +35,17 @@ unsigned int FUN_0033f178(int param_1)
       if (temp_v0 == 0) {
         return 0;
       }
-      temp_v1 = FUN_00389700(DAT_00433158,*(unsigned int *)(param_1 + 4));
-      temp_v2 = FUN_00248674(DAT_00433158,*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc))
+      temp_v1 = FUN_00389700(g_aocSystem,*(unsigned int *)(param_1 + 4));
+      temp_v2 = FUN_00248674(g_aocSystem,*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc))
       ;
     }
     else {
-      temp_v0 = FUN_0023e3a4(DAT_00433158,*(unsigned int *)(param_1 + 4),0);
+      temp_v0 = FUN_0023e3a4(g_aocSystem,*(unsigned int *)(param_1 + 4),0);
       if (temp_v0 == 0) {
         return 0;
       }
-      temp_v1 = FUN_00389dc0(DAT_00433158,*(unsigned int *)(param_1 + 4));
-      temp_v2 = FUN_00248674(DAT_00433158,*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc))
+      temp_v1 = FUN_00389dc0(g_aocSystem,*(unsigned int *)(param_1 + 4));
+      temp_v2 = FUN_00248674(g_aocSystem,*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc))
       ;
     }
     temp_v3 = 0;

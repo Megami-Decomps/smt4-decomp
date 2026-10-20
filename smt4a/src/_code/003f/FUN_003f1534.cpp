@@ -5,14 +5,14 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_0010063a(int *, unsigned int, int, unsigned char *);
+int qsort(int *, unsigned int, int, unsigned char *);
 int FUN_001568f8(int, int);
-int FUN_002e6354(int *, int);
+int sysMemClear(int *, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
 extern unsigned char LAB_00221bf4; /* 0x221bf4 */
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -29,11 +29,11 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_001568f8. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern int FUN_003ec620(int, unsigned int);
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -114,7 +114,7 @@ LAB_003f15c0:
   temp_v18 = CONCAT44(temp_v17,temp_v6 * temp_v8);
   temp_v14 = CONCAT44(temp_v10 * temp_v6 + temp_v6 * 2.5f,temp_v16);
   temp_v6 = (temp_v9 - temp_v8) * temp_v6;
-  FUN_002e6354(aiStack_104 + 1,200);
+  sysMemClear(aiStack_104 + 1,200);
   temp_v2 = 0;
   temp_v3 = 0;
   do {
@@ -127,7 +127,7 @@ LAB_003f15c0:
     }
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0x32);
-  FUN_0010063a(aiStack_104 + 1,temp_v2,4,&LAB_00221bf4);
+  qsort(aiStack_104 + 1,temp_v2,4,&LAB_00221bf4);
   if ((param_3 & 0x10000) != 0) {
     temp_v10 = -23.0f;
     temp_v9 = 23.0f;
@@ -213,7 +213,7 @@ LAB_003f1864:
     }
   }
   else {
-    temp_v3 = FUN_004ee568(DAT_0057113c);
+    temp_v3 = btlUnitGet(g_btlScriptUnit);
     temp_v3 = *(int *)(temp_v3 + 0x24);
     if (temp_v3 == 0) {
       return 0;

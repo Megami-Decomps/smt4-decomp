@@ -15,9 +15,9 @@ typedef struct {
 extern unsigned char LAB_002ce078; /* 0x2ce078 */
 
 /* Supplied declaration required: FUN_00100854. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern unsigned int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int dataTableGetEntries(void);
 
 
 unsigned short * FUN_0031aa04(unsigned short param_1)
@@ -29,9 +29,9 @@ unsigned short * FUN_0031aa04(unsigned short param_1)
   unsigned short *puVar3;
   unsigned short temp_v2 [48];
   
-  temp_v0 = FUN_00187180(0xc,1);
-  temp_v1 = FUN_00192798();
-  temp_v0 = FUN_00192748(temp_v0);
+  temp_v0 = dataTableGet(0xc,1);
+  temp_v1 = dataTableGetEntries();
+  temp_v0 = dataTableGetCount(temp_v0);
   puVar3 = temp_v2;
   temp_v2[0] = param_1;
   FUN_00100854(puVar3,temp_v1,temp_v0,0x60,&LAB_002ce078);

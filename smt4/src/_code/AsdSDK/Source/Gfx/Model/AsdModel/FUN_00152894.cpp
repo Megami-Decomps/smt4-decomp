@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002b0174(int);
 int FUN_002b26d4(unsigned char *, int);
 int FUN_002c2264(unsigned int);
-int FUN_002c415c(...);
+int asdMemFree(...);
 int nw_gfx_res_ResGraphicsFile_Cleanup(int *);
 
 typedef int romwright_code(...);
@@ -26,7 +26,7 @@ extern int FUN_00153228(unsigned char *, unsigned int *);
 /* Supplied declaration required: FUN_002b0174. */
 /* Supplied declaration required: FUN_002b26d4. */
 /* Supplied declaration required: FUN_002c2264. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Cleanup. */
 
 
@@ -54,7 +54,7 @@ void FUN_00152894(unsigned int *param_1,int param_2,unsigned int param_3,int par
     } while (unaff_r5 < (int)param_1[0x26]);
   }
   if (param_1[0x27] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1[0x27] = 0;
   }
   param_1[0x26] = 0;
@@ -71,7 +71,7 @@ void FUN_00152894(unsigned int *param_1,int param_2,unsigned int param_3,int par
     } while (unaff_r5 < (int)*puVar4);
   }
   if (param_1[0x29] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1[0x29] = 0;
   }
   *puVar4 = 0;
@@ -106,15 +106,15 @@ void FUN_00152894(unsigned int *param_1,int param_2,unsigned int param_3,int par
     param_1[0x1c] = 0;
   }
   if (param_1[0xc] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1[0xc] = 0;
   }
   if (param_1[0x15] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1[0x15] = 0;
   }
   if (param_1[0x19] != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1[0x19] = 0;
   }
   temp_v0 = 0;
@@ -145,25 +145,25 @@ void FUN_00152894(unsigned int *param_1,int param_2,unsigned int param_3,int par
     if (temp_v0 != 0) {
       *puVar1 = 0;
       if (*(char *)(puVar1 + 1) == '\0') {
-        FUN_002c415c(puVar1[3]);
+        asdMemFree(puVar1[3]);
       }
       puVar1[2] = 0;
       puVar1[5] = 0;
       FUN_002b26d4(&DAT_004dae3c,temp_v0);
     }
-    FUN_002c415c(puVar1);
+    asdMemFree(puVar1);
     DAT_00464b28 = DAT_00464b28 - 1;
     if (param_2 != 0) {
       FUN_002b0174(param_2);
     }
   }
-  FUN_002c415c(param_1[9]);
+  asdMemFree(param_1[9]);
   param_1[9] = 0;
   temp_v0 = FUN_00153228(&DAT_004dae48,param_1);
   if (temp_v0 != 0) {
     FUN_002b26d4(&DAT_004dae48,temp_v0);
   }
-  FUN_002c415c(param_1);
+  asdMemFree(param_1);
   DAT_00464b2c = DAT_00464b2c - 1;
   return;
 }

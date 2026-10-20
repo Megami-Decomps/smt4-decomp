@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00164034(int *);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001692d4(void);
 int FUN_0016c4b8(unsigned int, int);
 int FUN_001835b4(int, int, int, int, int, int);
@@ -23,11 +23,11 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_1_stack;
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00164034. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001692d4. */
 /* Supplied declaration required: FUN_0016c4b8. */
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -61,10 +61,10 @@ void FUN_003f931c(int param_1)
     temp_v10 = 0;
     temp_v11 = *(float *)(param_1 + 0x414) * 0.25f * (1.0f - *(float *)(param_1 + 0x410) * 0.25f) * 0.7f
     ;
-    FUN_0016c4b8(DAT_0059dbb4,0);
+    FUN_0016c4b8(g_renderCtx,0);
     FUN_00164034(&temp_v8);
     FUN_001692d4();
-    FUN_001677c0();
+    efctSetSpeed();
     temp_v7 = (int)(temp_v6 + (4.0f - *(float *)(param_1 + 0x418)) * 24.5f);
     FUN_001835b4(2,0xc,0x54,0,temp_v7,0x23);
     FUN_001835b4(2,0xc,0x55,0,temp_v7,0x23);

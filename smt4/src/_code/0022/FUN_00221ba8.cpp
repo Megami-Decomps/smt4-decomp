@@ -5,7 +5,7 @@
 extern "C" {
 
 int taskCreate(...);
-int FUN_002c4938(...);
+int memClear(...);
 
 typedef int romwright_code(...);
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -20,7 +20,7 @@ extern int FUN_00200b24(...); /* 0x200b24 */
 extern romwright_code *DAT_00433a58; /* 0x433a58 */
 
 /* Supplied declaration required: taskCreate. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_00221ba8(void)
@@ -32,7 +32,7 @@ void FUN_00221ba8(void)
   pcVar1 = FUN_00200b24;
   taskCreate(FUN_00200b24,0,0,0,0,0x70,3,0,0);
   if (pcVar1 != (romwright_code *)0x0) {
-    FUN_002c4938();
+    memClear();
     DAT_00433a58 = pcVar1;
     ((unsigned char *)pcVar1)[0x6c] = (unsigned char)0x0;
   }

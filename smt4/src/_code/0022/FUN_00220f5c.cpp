@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_002886e0(void);
-int FUN_0029b97c(int);
+int statusCameraDestroy(void);
+int lmapSceneSetUnk134(int);
 int FUN_002a72c0(int);
 
 typedef int romwright_code(...);
@@ -12,9 +12,9 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002886e0. */
-/* Supplied declaration required: FUN_0029b97c. */
-extern int FUN_002a0b34(void);
+/* Supplied declaration required: statusCameraDestroy. */
+/* Supplied declaration required: lmapSceneSetUnk134. */
+extern int lmapSceneGetScript(void);
 /* Supplied declaration required: FUN_002a72c0. */
 
 
@@ -24,10 +24,10 @@ void FUN_00220f5c(int param_1)
 /* irregular: 5 native warning(s); review required */
   int temp_v0;
   
-  FUN_002886e0();
-  temp_v0 = FUN_002a0b34();
+  statusCameraDestroy();
+  temp_v0 = lmapSceneGetScript();
   if (temp_v0 != 0) {
-    FUN_0029b97c(1);
+    lmapSceneSetUnk134(1);
   }
   if (*(char *)(param_1 + 0x2c) != '\0') {
     FUN_002a72c0(0);

@@ -7,10 +7,10 @@ extern "C" {
 int FUN_0022b778(void);
 int FUN_00296f4c(unsigned int, unsigned int);
 int FUN_00297060(int, unsigned int);
-int FUN_002a7218(unsigned int);
+int scrScriptProcessDestroy(unsigned int);
 int FUN_002be624(unsigned char [128], unsigned char *, int, int);
 int FUN_002bff50(void);
-int FUN_002c415c(unsigned int);
+int asdMemFree(unsigned int);
 
 extern unsigned char LAB_003b9a54; /* 0x3b9a54 */
 extern unsigned char LAB_003b9a6c; /* 0x3b9a6c */
@@ -23,10 +23,10 @@ extern int FUN_0019e0c0(unsigned int);
 extern unsigned int FUN_00290d74(int, unsigned char *);
 /* Supplied declaration required: FUN_00296f4c. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bff50. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 extern unsigned int FUN_002c5c04(unsigned char *);
 
 
@@ -44,11 +44,11 @@ void FUN_003b992c(int param_1)
   if (*(int *)(param_1 + 0x2c) != 0) {
     if ((*(int *)(param_1 + 0x2c) == 1) &&
        (temp_v0 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xdbc)), temp_v0 == 2)) {
-      FUN_002a7218(*(unsigned int *)(param_1 + 0xdbc));
+      scrScriptProcessDestroy(*(unsigned int *)(param_1 + 0xdbc));
       *(unsigned int *)(param_1 + 0xdbc) = 0;
-      FUN_002c415c(*(unsigned int *)(param_1 + 0xdb4));
+      asdMemFree(*(unsigned int *)(param_1 + 0xdb4));
       *piVar3 = 0;
-      FUN_002c415c(*(unsigned int *)(param_1 + 0xdb8));
+      asdMemFree(*(unsigned int *)(param_1 + 0xdb8));
       *(unsigned int *)(param_1 + 0xdb8) = 0;
       *(unsigned int *)(param_1 + 0x28) = 5;
       *(unsigned int *)(param_1 + 0x2c) = 0;

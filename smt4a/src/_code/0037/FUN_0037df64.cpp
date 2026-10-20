@@ -1,30 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037df64` (_code @ 0x37df64, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail forms the cursor address in r0 (call argument) and copies it to r4; built computes it in r4 */
+/* Returns 1 if the cursor sub-state's current position is the last one of its range. */
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_00588fe8; /* 0x588fe8 */
+typedef struct Cursor {
+    u8 data[0x50];
+} Cursor;
 
-extern int FUN_002a4894(void);
-extern int FUN_002c2c68(int);
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[0x5EC];
+    /* 0x5EC */ Cursor cursor;
+} Holder;
 
+extern Holder *DAT_00588fe8;
 
-unsigned int FUN_0037df64(void)
+extern s32 FUN_002a4894(Cursor *cursor);
+extern s32 FUN_002c2c68(Cursor *cursor);
 
+u32 FUN_0037df64(void)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  if (DAT_00588fe8 != 0) {
-    temp_v0 = DAT_00588fe8 + 0x5ec;
-    temp_v1 = FUN_002a4894();
-    temp_v0 = FUN_002c2c68(temp_v0);
-    if (temp_v1 == temp_v0 - 1) {
-      return 1;
+    if (DAT_00588fe8 != NULL) {
+        Cursor *cursor = &DAT_00588fe8->cursor;
+        s32 position = FUN_002a4894(cursor);
+        s32 count = FUN_002c2c68(cursor);
+
+        if (position == count - 1) {
+            return 1;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
-} /* extern "C" */
+}

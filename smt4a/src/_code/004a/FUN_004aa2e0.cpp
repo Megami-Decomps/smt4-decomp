@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_001641c4(void);
-int FUN_001681cc(void);
+int sysPlaySe(void);
 int FUN_001a9104(unsigned int *, unsigned int *);
 int FUN_001b4a90(int, int, unsigned int);
 int FUN_00203b40(unsigned int *, int, int, int, int, int);
@@ -49,10 +49,10 @@ typedef struct {
 
 extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001641c4. */
 extern int FUN_00167f08(void);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001a9104. */
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_00203b40. */
@@ -200,20 +200,20 @@ void FUN_004aa2e0(fn_004aa2e0_arg0 *param_1,int param_2)
   }
   if (*piVar6 == 0x13 || *piVar6 == 0x16) {
     FUN_00341f88();
-    FUN_001681cc();
+    sysPlaySe();
   }
   temp_v2 = *piVar6;
   if ((temp_v2 == 0x22 || temp_v2 == 0x23) || temp_v2 == 0x24) {
     FUN_00341f88();
-    FUN_001681cc();
+    sysPlaySe();
   }
   temp_v2 = FUN_00167f08();
   if (temp_v2 == 0x3f) {
-    FUN_0014aa78();
+    btlGetMainState();
     temp_v2 = FUN_003e8430();
     if (temp_v2 == 0) {
       FUN_00341f88();
-      FUN_001681cc();
+      sysPlaySe();
     }
   }
   if (*piVar6 == 7) {

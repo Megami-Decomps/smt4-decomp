@@ -30,7 +30,7 @@ struct fn_0025c13c_arg0 {
     undefined4 field_0xddc; /* +0xddc */
 };
 
-extern unsigned int DAT_0049f91c; /* 0x49f91c */
+extern unsigned int g_gameState; /* 0x49f91c */
 extern unsigned int DAT_0049f920; /* 0x49f920 */
 extern unsigned int DAT_0049f924; /* 0x49f924 */
 extern float DAT_0049f9ac; /* 0x49f9ac */
@@ -72,7 +72,7 @@ void MapDepart_InitState(fn_0025c13c_arg0 *param_1,int param_2)
   FUN_00270f70(&DAT_0049f9b0);
   if (param_2 != 0) {
     *(short *)(temp_v0 + 0x2c) = (short)(int)DAT_0049f9ac;
-    *(short *)(temp_v0 + 0x2e) = (short)DAT_0049f91c;
+    *(short *)(temp_v0 + 0x2e) = (short)g_gameState;
     *(short *)(temp_v0 + 0x30) = (short)DAT_0049f920;
     *(unsigned int *)(temp_v0 + 0xddc) = DAT_0049f924;
     *(short *)(temp_v0 + 0x32) = (short)(int)DAT_0049f9b0;

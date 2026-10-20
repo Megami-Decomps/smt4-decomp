@@ -1,34 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032cf50` (_code @ 0x32cf50, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Per-frame update of a ramp value: while idle it is held at or above its floor; when the pending flag is set it is reset (rate 10, floor 0, value 0). */
+#include "common.h"
 
 extern "C" {
 
-extern float *FUN_00164a9c(void);
+typedef struct {
+    f32 value;       /* 0x00 */
+    f32 rate;        /* 0x04 */
+    f32 floor;       /* 0x08 */
+    u8 unk0c[0x18];  /* 0x0c */
+    u8 reset;        /* 0x24 */
+} Ramp;
 
+Ramp *jobGetWork(void);
 
 void FUN_0032cf50(void)
-
 {
-  float *pfVar1;
-  float temp_v0;
-  
-  pfVar1 = (float *)FUN_00164a9c();
-  if (pfVar1 != (float *)0x0) {
-    if (*(char *)(pfVar1 + 9) == '\0') {
-      temp_v0 = *pfVar1;
-      if (*pfVar1 <= pfVar1[2]) {
-        temp_v0 = pfVar1[2];
-      }
-      *pfVar1 = temp_v0;
-      return;
+    Ramp *ramp = jobGetWork();
+
+    if (ramp != NULL) {
+        if (ramp->reset == 0) {
+            ramp->value = (ramp->value > ramp->floor) ? ramp->value : ramp->floor;
+            return;
+        }
+        ramp->rate = 10.0f;
+        ramp->reset = 0;
+        ramp->floor = 0.0f;
+        ramp->value = 0.0f;
     }
-    pfVar1[1] = 10.0f;
-    *(unsigned char *)(pfVar1 + 9) = 0;
-    pfVar1[2] = 0.0f;
-    *pfVar1 = 0.0f;
-  }
-  return;
 }
 
 } /* extern "C" */

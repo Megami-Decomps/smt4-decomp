@@ -18,7 +18,7 @@ int SBORROW4(int, int);
 int VectorSignedToFloat(int, int);
 
 extern unsigned char LAB_001e3944; /* 0x1e3944 */
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 extern int *DAT_00447e58; /* 0x447e58 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -28,8 +28,8 @@ extern int *DAT_00447e58; /* 0x447e58 */
 /* Supplied declaration required: FUN_0025beb8. */
 /* Supplied declaration required: FUN_0025bed8. */
 /* Supplied declaration required: FUN_00266f30. */
-extern int FUN_0028522c(int, unsigned int);
-extern int FUN_0029a034(unsigned char *, unsigned int);
+extern int asdMdlManagerClone(int, unsigned int);
+extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
 extern int FUN_002adee0(int);
 /* Supplied declaration required: FUN_002be624. */
@@ -115,12 +115,12 @@ unsigned int FUN_001e34fc(int param_1,unsigned int param_2,int param_3)
           psVar8 = (short *)((int)psVar8 + 1)) {
         psVar3 = psVar8;
         FUN_00266f30();
-        temp_v4 = DAT_00433158;
-        FUN_0025bed8(DAT_00433158,0x24);
+        temp_v4 = g_aocSystem;
+        FUN_0025bed8(g_aocSystem,0x24);
         if (temp_v4 != 0) {
           if (*psVar3 != -1) goto LAB_001e36a4;
-          temp_v4 = DAT_00433158;
-          FUN_0025bed8(DAT_00433158,0x24,0);
+          temp_v4 = g_aocSystem;
+          FUN_0025bed8(g_aocSystem,0x24,0);
           if (temp_v3 - temp_v4 <= (int)psVar8) {
             piVar9 = DAT_00447e58;
             *DAT_00447e58 = 0;
@@ -173,10 +173,10 @@ LAB_001e3758:
       *(short *)((int)piVar9 + temp_v4 * 0x38 + 0x12) = (short)*(char *)(temp_v3 + 0x33);
       FUN_002be624(temp_v7,&LAB_001e3944);
       if ((param_1 >= 0x65) && (DAT_00447e58[2] >= 1)) {
-        temp_v3 = FUN_0028522c(DAT_00447e58[0xf],0);
+        temp_v3 = asdMdlManagerClone(DAT_00447e58[0xf],0);
       }
       else {
-        temp_v3 = FUN_0029a034(temp_v7,0x1c0);
+        temp_v3 = asdMdlManagerCreateSecondList(temp_v7,0x1c0);
       }
       piVar9[temp_v4 * 0xe + 0xf] = temp_v3;
       *DAT_00447e58 = *DAT_00447e58 + 1;

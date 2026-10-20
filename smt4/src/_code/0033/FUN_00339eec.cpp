@@ -8,7 +8,7 @@ int FUN_002402c4(...);
 int rt_memcpy_w(...);
 
 /* Supplied declaration required: FUN_002402c4. */
-extern unsigned int FUN_0029a034(unsigned char *, unsigned int);
+extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -21,7 +21,7 @@ void FUN_00339eec(int param_1)
   
   rt_memcpy_w(temp_v1,"battle/army_summon/army_summon.bam",0x100);
   FUN_002402c4(param_1,temp_v1);
-  temp_v0 = FUN_0029a034(temp_v1,0x1c0);
+  temp_v0 = asdMdlManagerCreateSecondList(temp_v1,0x1c0);
   *(unsigned int *)(param_1 + 0x4398) = temp_v0;
   return;
 }

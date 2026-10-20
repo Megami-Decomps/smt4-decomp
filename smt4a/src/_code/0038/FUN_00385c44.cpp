@@ -32,7 +32,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_1_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00573978; /* 0x573978 */
 extern unsigned int DAT_0057397c; /* 0x57397c */
 extern unsigned int DAT_00573980; /* 0x573980 */
@@ -73,7 +73,7 @@ extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
 extern int FUN_0014bef4(unsigned int);
 extern int FUN_0018719c(unsigned int);
-extern unsigned int FUN_00213b78(void);
+extern unsigned int flagSelectVariant(void);
 extern int FUN_00261424(void);
 extern int FUN_002626e0(void);
 extern int FUN_002e2b38(void);
@@ -91,7 +91,7 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_004c3c84. */
 /* Supplied declaration required: FUN_004c571c. */
 extern int FUN_004ec93c(unsigned int);
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fdc9c. */
 
 
@@ -345,11 +345,11 @@ LAB_003861d0:
       }
       temp_v8 = FUN_002e2b38();
       if ((temp_v8 != 0) &&
-         ((temp_v8 = FUN_004ee568(DAT_0057113c), temp_v8 == 0 ||
-          (temp_v8 = FUN_004ec93c(DAT_0057113c), temp_v8 == 0)))) {
+         ((temp_v8 = btlUnitGet(g_btlScriptUnit), temp_v8 == 0 ||
+          (temp_v8 = FUN_004ec93c(g_btlScriptUnit), temp_v8 == 0)))) {
         if (((DAT_005739f4 & param_1[0x1169]) == 0 && (DAT_005739f0 & *puVar15) == 0) &&
            ((*puVar15 & DAT_00573a28) == 0 && (param_1[0x1169] & DAT_00573a2c) == 0)) {
-          temp_v7 = FUN_00213b78();
+          temp_v7 = flagSelectVariant();
           temp_v18 = temp_v7 == 1;
           if (temp_v18) {
             temp_v7 = param_1[0x2b];
@@ -371,8 +371,8 @@ LAB_003861d0:
         }
       }
       param_1[0x1358] = 0;
-      temp_v8 = FUN_004ee568(DAT_0057113c);
-      if ((temp_v8 == 0) || (temp_v8 = FUN_004ec93c(DAT_0057113c), temp_v8 == 0)) {
+      temp_v8 = btlUnitGet(g_btlScriptUnit);
+      if ((temp_v8 == 0) || (temp_v8 = FUN_004ec93c(g_btlScriptUnit), temp_v8 == 0)) {
         temp_v7 = param_1[0x1169];
         temp_v12 = *puVar15;
         if (((DAT_005739f0 & temp_v12) == 0 && (DAT_005739f4 & temp_v7) == 0) &&

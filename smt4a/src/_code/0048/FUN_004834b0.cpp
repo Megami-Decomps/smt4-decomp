@@ -9,7 +9,7 @@ int FUN_00356308(void);
 int FUN_00483304(int, int);
 int VectorSignedToFloat(int, int);
 
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -102,8 +102,8 @@ LAB_00483524:
       return;
     }
     temp_v5 = 0;
-    temp_v11 = (unsigned long long)*(unsigned int *)(DAT_00581288 + 0x1c);
-    temp_v10 = romwright_piece_4_4(*(unsigned int *)(DAT_00581288 + 0x20),*(unsigned int *)(DAT_00581288 + 0x24));
+    temp_v11 = (unsigned long long)*(unsigned int *)(g_lmapScene + 0x1c);
+    temp_v10 = romwright_piece_4_4(*(unsigned int *)(g_lmapScene + 0x20),*(unsigned int *)(g_lmapScene + 0x24));
     temp_v0 = 0;
     if (temp_v6 == 0) {
       return;

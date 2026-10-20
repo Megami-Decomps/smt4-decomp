@@ -2,15 +2,15 @@
 
 extern "C" {
 
-int FUN_00187180(int, int);
+int dataTableGet(int, int);
 int FUN_001add24(int);
 int FUN_00333474(void);
 int FUN_003f86f8(int);
 
-/* Supplied declaration required: FUN_00187180. */
-extern int FUN_00192798(void);
+/* Supplied declaration required: dataTableGet. */
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_001add24. */
-extern int FUN_00236038(unsigned int);
+extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00333474. */
 /* Supplied declaration required: FUN_003f86f8. */
 
@@ -23,12 +23,12 @@ unsigned int FUN_003b8e1c(void)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
   FUN_003f86f8(0x4b);
   for (; temp_v0 <= temp_v1; temp_v0 = temp_v0 + 1) {
-    FUN_00187180(0x4b,0);
-    temp_v2 = FUN_00192798();
+    dataTableGet(0x4b,0);
+    temp_v2 = dataTableGetEntries();
     temp_v2 = temp_v2 + temp_v0 * 100;
     if (temp_v2 != 0) {
       *(unsigned short *)(temp_v2 + 0x34) = *(unsigned short *)(temp_v2 + 0x60);

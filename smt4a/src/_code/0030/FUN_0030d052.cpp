@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00303a3a. */
 /* Supplied declaration required: FUN_0030fce0. */
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 void FUN_0030d052(int *param_1)
@@ -37,7 +37,7 @@ void FUN_0030d052(int *param_1)
       temp_v3 = temp_v3 + 0xc;
     }
     FUN_0030fce0(param_1,temp_v3,param_1[1]);
-    temp_v0 = aeabi_idivmod(temp_v2 - temp_v1,0xc);
+    temp_v0 = __aeabi_idivmod(temp_v2 - temp_v1,0xc);
     param_1[1] = param_1[1] + temp_v0 * -0xc;
   }
   return;

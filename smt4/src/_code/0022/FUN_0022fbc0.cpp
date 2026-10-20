@@ -1,44 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022fbc0` (_code @ 0x22fbc0, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the final `ready` load differs: retail reads the flag with `mov r0,r6; ldrsb r0,[r0,#18]`, built folds it into `ldrb r0,[r4,#2106]` */
+/* Applies the current entry to the sub-state and its handler, refreshes the display and reports whether the sub-state is ready and accepted. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00230954(int, int);
-int FUN_00233344(int, int);
-int FUN_00233410(int);
+struct Handler;
 
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_00230954. */
-/* Supplied declaration required: FUN_00233344. */
-extern int FUN_002333a4(int, unsigned int);
-extern unsigned int FUN_002333f0(int);
-/* Supplied declaration required: FUN_00233410. */
+typedef struct HandlerVtbl {
+    /* 0x00 */ void *slots[3];
+    /* 0x0C */ void (*apply)(struct Handler *handler, void *entry);
+} HandlerVtbl;
 
+typedef struct Handler {
+    /* 0x00 */ HandlerVtbl *vtbl;
+} Handler;
 
-unsigned int FUN_0022fbc0(int param_1)
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x74];
+} Entry; /* 0x74 */
 
+typedef struct SubState {
+    /* 0x00 */ u8 unk00[0x12];
+    /* 0x12 */ s8 ready;
+    /* 0x13 */ u8 unk13[0x15];
+} SubState; /* 0x28 */
+
+typedef struct Screen {
+    /* 0x000 */ u8 unk000[0x3A8];
+    /* 0x3A8 */ u8 display[0x480];
+    /* 0x828 */ SubState subState;
+    /* 0x850 */ u8 unk850[0x0C];
+    /* 0x85C */ Handler *handler;
+    /* 0x860 */ s32 entryIndex;
+    /* 0x864 */ u8 unk864[0x1C];
+    /* 0x880 */ Entry entries[1];
+} Screen;
+
+extern void FUN_00230954(SubState *subState, Entry *entry);
+extern void FUN_00233344(void *display, s32 id);
+extern void FUN_00233410(Entry *entry);
+extern s32 FUN_002333a4(Entry *entry, u32 value);
+extern u32 FUN_002333f0(SubState *subState);
+
+u32 FUN_0022fbc0(Screen *screen)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = param_1 + *(int *)(param_1 + 0x860) * 0x74 + 0x880;
-  FUN_00230954(param_1 + 0x828,temp_v2);
-  (**(romwright_code **)(**(int **)(param_1 + 0x85c) + 0xc))(*(int **)(param_1 + 0x85c),temp_v2);
-  FUN_00233410(temp_v2);
-  FUN_00233344(param_1 + 0x3a8,2);
-  FUN_00233344(param_1 + 0x3a8,3);
-  temp_v1 = 0;
-  if (*(char *)(param_1 + 0x83a) != '\0') {
-    temp_v0 = FUN_002333f0(param_1 + 0x828);
-    temp_v2 = FUN_002333a4(temp_v2,temp_v0);
-    if (temp_v2 != 0) {
-      temp_v1 = 1;
+    Entry *entry = &screen->entries[screen->entryIndex];
+    u32 accepted;
+
+    FUN_00230954(&screen->subState, entry);
+    screen->handler->vtbl->apply(screen->handler, entry);
+    FUN_00233410(entry);
+    FUN_00233344(screen->display, 2);
+    FUN_00233344(screen->display, 3);
+    accepted = 0;
+    if (screen->subState.ready != 0) {
+        if (FUN_002333a4(entry, FUN_002333f0(&screen->subState)) != 0) {
+            accepted = 1;
+        }
     }
-  }
-  return temp_v1;
+    return accepted;
 }
 
-} /* extern "C" */
+}

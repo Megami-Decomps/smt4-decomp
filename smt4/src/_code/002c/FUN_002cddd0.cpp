@@ -14,7 +14,7 @@ extern int FUN_002893d8(void);
 /* Supplied declaration required: FUN_0028dc68. */
 /* Supplied declaration required: FUN_0028dc98. */
 /* Supplied declaration required: FUN_00296934. */
-extern unsigned int FUN_00296cc8(void);
+extern unsigned int scrGetArg(void);
 /* Supplied declaration required: FUN_002b8838. */
 extern int FUN_002fec60(void);
 /* Supplied declaration required: FUN_002fec80. */
@@ -27,7 +27,7 @@ unsigned char FUN_002cddd0(void)
   unsigned short temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00296cc8();
+  temp_v0 = scrGetArg();
   temp_v1 = FUN_002893d8();
   if (temp_v1 == 0) {
     FUN_0028dc98(1);

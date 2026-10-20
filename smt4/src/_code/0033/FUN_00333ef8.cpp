@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_00299370(int);
-int FUN_002c4938(unsigned short *, int);
+int memClear(unsigned short *, int);
 int FUN_003c1b18(unsigned short *, int, int);
 int FUN_003c1ef4(int);
 int strncpy(unsigned short *, unsigned int, int);
@@ -32,7 +32,7 @@ struct fn_00333ef8_arg0 {
 
 /* Supplied declaration required: FUN_00299370. */
 extern unsigned short *FUN_002b63ac(void);
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_003c1b18. */
 /* Supplied declaration required: FUN_003c1ef4. */
 
@@ -44,7 +44,7 @@ void FUN_00333ef8(fn_00333ef8_arg0 *param_1,unsigned int param_2,unsigned short 
   unsigned short *puVar1;
   
   puVar1 = (unsigned short *)FUN_002b63ac();
-  FUN_002c4938(puVar1,0x8c);
+  memClear(puVar1,0x8c);
   *(char *)(puVar1 + 0x3b) = (char)(int)param_1;
   puVar1[0x3a] = 0;
   strncpy(puVar1 + 0x26,param_2,0x12);

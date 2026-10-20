@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0028975c(...);
 int FUN_002c09d0(...);
-int FUN_002c415c(int);
+int asdMemFree(int);
 int FUN_0033f6d8(void);
 int FUN_0033f764(int);
 int rt_memcpy_w(int, unsigned int, int);
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } param_1_stack;
 
-extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
+extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 extern unsigned int DAT_0043e2b0; /* 0x43e2b0 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -30,7 +30,7 @@ extern unsigned int DAT_0043e2b0; /* 0x43e2b0 */
 #endif
 /* Supplied declaration required: FUN_0028975c. */
 /* Supplied declaration required: FUN_002c09d0. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0033f6d8. */
 /* Supplied declaration required: FUN_0033f764. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -56,11 +56,11 @@ void FUN_00285ca4(int param_1)
   int temp_v12;
   char acStack_40 [28];
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4));
-  temp_v5 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x88;
-  puVar7 = (unsigned char *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x24bb1);
+  temp_v1 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
+  temp_v5 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x88;
+  puVar7 = (unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x24bb1);
   temp_v0 = *puVar7;
-  temp_v6 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x8c);
+  temp_v6 = *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x8c);
   temp_v10 = FUN_002c09d0(0x556);
   temp_v11 = FUN_002c09d0(0x557);
   temp_v3 = FUN_002c09d0(0x421);
@@ -94,7 +94,7 @@ void FUN_00285ca4(int param_1)
     }
   }
   else {
-    *(int *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x8c) = (int)temp_v7;
+    *(int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x8c) = (int)temp_v7;
     *puVar7 = temp_v0;
     if (temp_v10 != 0) {
       FUN_0028975c(0x556,1);
@@ -106,7 +106,7 @@ void FUN_00285ca4(int param_1)
       FUN_0028975c(0x421,1);
     }
   }
-  FUN_002c415c(temp_v9);
+  asdMemFree(temp_v9);
   return;
 }
 

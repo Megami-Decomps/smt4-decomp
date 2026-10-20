@@ -30,7 +30,7 @@ typedef struct {
 
 extern int DAT_0057f268; /* 0x57f268 */
 
-extern int FUN_0019e4d4(unsigned int);
+extern int slotRecordFindById(unsigned int);
 extern int FUN_001ab854(int);
 /* Supplied declaration required: FUN_001ab888. */
 extern int FUN_001b347c(void);
@@ -67,7 +67,7 @@ unsigned int FUN_00270498(void)
   temp_v7[0] = 0;
   temp_v7[1] = 0;
   do {
-    temp_v1 = FUN_0019e4d4(*(unsigned int *)(temp_v0 + temp_v3 * 4 + 0xe7c) & 0xffff);
+    temp_v1 = slotRecordFindById(*(unsigned int *)(temp_v0 + temp_v3 * 4 + 0xe7c) & 0xffff);
     temp_v7[temp_v3] = temp_v1;
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 2);

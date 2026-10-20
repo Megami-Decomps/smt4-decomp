@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001634b4(int);
 int FUN_00164168(unsigned int, int, int, int, int, int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00183bb0(void);
 int FUN_001879d0(int);
 int VectorSignedToFloat(int, int);
@@ -17,12 +17,12 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001634b4. */
 /* Supplied declaration required: FUN_00164168. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
@@ -42,7 +42,7 @@ void FUN_00416664(int param_1)
   float temp_v4;
   unsigned long long temp_v5;
   
-  temp_v3 = DAT_0059dbb4;
+  temp_v3 = g_renderCtx;
   temp_v0 = FUN_001692ac(1,0);
   piVar4 = (int *)(temp_v3 + 0x1258);
   temp_v1 = *piVar4;
@@ -53,7 +53,7 @@ void FUN_00416664(int param_1)
     (**(romwright_code **)(temp_v3 + 0x1274))();
     *(unsigned char *)(temp_v3 + 0x1270) = 0;
   }
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_00183bb0();
   temp_v5 = 0x3e8a3d7100000000;
   temp_v3 = 0;
@@ -61,13 +61,13 @@ void FUN_00416664(int param_1)
     temp_v0 = param_1 + temp_v3 * 0xb0;
     if (*(char *)(temp_v0 + 0xa0) != '\0') {
       temp_v4 = (float)((unsigned long long)temp_v5 >> 0x20);
-      FUN_001879d0(DAT_0059dbb4);
+      FUN_001879d0(g_renderCtx);
       VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_001634b4(temp_v0 + 0x14);
     }
     if (*(char *)(temp_v0 + 0xa0) != '\0') {
       temp_v4 = (float)((unsigned long long)temp_v5 >> 0x20);
-      FUN_001879d0(DAT_0059dbb4);
+      FUN_001879d0(g_renderCtx);
       temp_v1 = FUN_001834a4(8,0x8e);
       if ((*(int *)(temp_v0 + 0xa4) == 2) &&
          ((*(unsigned char *)(temp_v0 + 0x9c) & *(unsigned char *)(temp_v0 + 0x9b)) != 0)) {
@@ -78,10 +78,10 @@ void FUN_00416664(int param_1)
                      (int)*(short *)(temp_v0 + 0x2e) + (int)*(short *)(temp_v1 + 10),0x3d,6,0);
       }
     }
-    temp_v0 = DAT_0059dbb4;
+    temp_v0 = g_renderCtx;
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0xc);
-  piVar4 = (int *)(DAT_0059dbb4 + 0x1258);
+  piVar4 = (int *)(g_renderCtx + 0x1258);
   temp_v3 = *piVar4;
   temp_v1 = piVar4[temp_v3 + 2];
   *piVar4 = temp_v3 - 1;

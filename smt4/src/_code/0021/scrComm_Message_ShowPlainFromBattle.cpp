@@ -15,8 +15,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002866b4. */
 extern unsigned int FUN_002893d8(void);
-extern int FUN_002939f4(void);
-extern unsigned int FUN_00296cc8(unsigned int);
+extern int btlGetMainState(void);
+extern unsigned int scrGetArg(unsigned int);
 
 
 void scrComm_Message_ShowPlainFromBattle(void)
@@ -28,9 +28,9 @@ void scrComm_Message_ShowPlainFromBattle(void)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   temp_v1 = *(unsigned int *)(temp_v0 + 0x2234);
-  temp_v2 = FUN_00296cc8(0);
+  temp_v2 = scrGetArg(0);
   temp_v3 = FUN_002893d8();
   FUN_002866b4(temp_v1,temp_v2,temp_v3,7,0,0);
   return;

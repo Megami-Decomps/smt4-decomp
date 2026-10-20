@@ -19,7 +19,7 @@ int FUN_0038b3f8(...);
 int FUN_0038b548(...);
 int FUN_003d2150(...);
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00180118(unsigned int);
 int FUN_00215bd0(void);
 int FUN_00275f44(...);
@@ -35,14 +35,14 @@ int FUN_003216ec(void);
 int FUN_00336de4(...);
 int FUN_00359974(...);
 int FUN_0035fc4c(void);
-int FUN_0035fd38(...);
+int btlTalkBustUpSetUnk2F4(...);
 int FUN_00371c3c(unsigned int, int);
 int FUN_003a7a88(...);
 int FUN_004bcd90(...);
 int rt_memcpy_w(int, int, int);
 
 extern int FUN_001656a0(unsigned int);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00215bd0. */
 extern int FUN_00224880(unsigned int);
@@ -84,7 +84,7 @@ extern int FUN_0034efb0(void);
 /* Supplied declaration required: FUN_00359974. */
 extern int FUN_0035db94(void);
 /* Supplied declaration required: FUN_0035fc4c. */
-/* Supplied declaration required: FUN_0035fd38. */
+/* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_00371c3c. */
 extern int FUN_00388024(void);
 /* Supplied declaration required: FUN_0038b3f8. */
@@ -133,7 +133,7 @@ unsigned int FUN_003193a8(int param_1)
     if (temp_v6 != 2) {
       return 0;
     }
-    FUN_0035fd38(1);
+    btlTalkBustUpSetUnk2F4(1);
     *(int *)(param_1 + 0x3bc) = *(int *)(param_1 + 0x3bc) + 1;
     break;
   case 2:
@@ -313,7 +313,7 @@ unsigned int FUN_003193a8(int param_1)
     else {
       temp_v7 = 0xce;
     }
-    FUN_001681cc(temp_v7);
+    sysPlaySe(temp_v7);
     temp_v6 = *(int *)(param_1 + 0x3bc) + 1;
     *(int *)(param_1 + 0x3bc) = temp_v6;
     break;
@@ -351,7 +351,7 @@ unsigned int FUN_003193a8(int param_1)
         if (temp_v5 != 0) {
           if (temp_v3 == 0) {
             FUN_002e2680(temp_v6 < 0);
-            FUN_001681cc(0xce);
+            sysPlaySe(0xce);
           }
         }
         else {
@@ -383,8 +383,8 @@ unsigned int FUN_003193a8(int param_1)
         *(int *)(param_1 + 0x3b0) = temp_v6;
         *(unsigned int *)(param_1 + 0x3bc) = 0;
         *(unsigned char *)(param_1 + 0x3e6) = 1;
-        FUN_0035fd38(1);
-        FUN_001681cc(0x3e);
+        btlTalkBustUpSetUnk2F4(1);
+        sysPlaySe(0x3e);
         FUN_003343f0(0);
         temp_v8 = 3;
       }

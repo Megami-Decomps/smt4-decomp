@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00159030(void);
 int FUN_00159e58(int);
 int FUN_0015de34(int *, unsigned int, unsigned int);
-int FUN_001630d4(int, int, int, unsigned int, int);
+int asdMemoryAlloc(int, int, int, unsigned int, int);
 int FUN_0016f368(void);
 int FUN_00171424(int);
 int FUN_00195fc8(void);
@@ -52,7 +52,7 @@ extern unsigned char DAT_0063ea3a; /* 0x63ea3a */
 extern unsigned char DAT_0063ea3b; /* 0x63ea3b */
 extern unsigned char DAT_0063f4c4; /* 0x63f4c4 */
 extern unsigned char DAT_0063f4c5; /* 0x63f4c5 */
-extern unsigned int DAT_0063f4c8; /* 0x63f4c8 */
+extern unsigned int g_asdSoundDuck; /* 0x63f4c8 */
 extern unsigned int DAT_0063f4cc; /* 0x63f4cc */
 extern unsigned int DAT_0063f4d0; /* 0x63f4d0 */
 extern unsigned int DAT_0063f4d4; /* 0x63f4d4 */
@@ -61,7 +61,7 @@ extern unsigned int DAT_0063f4dc; /* 0x63f4dc */
 extern unsigned char DAT_0063f4e0; /* 0x63f4e0 */
 extern unsigned char DAT_0063f4e1; /* 0x63f4e1 */
 extern unsigned char DAT_0063f4e2; /* 0x63f4e2 */
-extern unsigned int DAT_0063f4e4; /* 0x63f4e4 */
+extern unsigned int g_asdSoundStatus; /* 0x63f4e4 */
 extern unsigned int DAT_0063f4e8; /* 0x63f4e8 */
 extern unsigned char DAT_0063f4fd; /* 0x63f4fd */
 extern unsigned char DAT_0063f4ff; /* 0x63f4ff */
@@ -73,7 +73,7 @@ extern int FUN_00159d60(void);
 /* Supplied declaration required: FUN_00159e58. */
 /* Supplied declaration required: FUN_0015de34. */
 extern unsigned int FUN_0015e0c8(unsigned int *);
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0016f368. */
 /* Supplied declaration required: FUN_00171424. */
 /* Supplied declaration required: FUN_00195fc8. */
@@ -129,7 +129,7 @@ void FUN_00142b84(int param_1)
   temp_v4 = (unsigned int)(0 < param_1);
   temp_v1 = FUN_0015e0c8((unsigned int *)&temp_v3);
   temp_v2 = 0x10000;
-  FUN_001630d4(0x10000,0x100,0,temp_v1,1);
+  asdMemoryAlloc(0x10000,0x100,0,temp_v1,1);
   DAT_0063e6b4 = temp_v2;
   FUN_0015de34(&temp_v3,temp_v2,temp_v1);
   DAT_0063e774 = 0x40;
@@ -159,7 +159,7 @@ void FUN_00142b84(int param_1)
   DAT_0063f4c4 = 0;
   DAT_0063f4c5 = 0x40;
   DAT_0063f4cc = 0;
-  DAT_0063f4c8 = 0;
+  g_asdSoundDuck = 0;
   DAT_0063f4d4 = 0;
   DAT_0063f4d8 = 0;
   DAT_0063f4d0 = 0;
@@ -169,7 +169,7 @@ void FUN_00142b84(int param_1)
   DAT_0063f4e2 = 0;
   DAT_0063f4fd = 0;
   DAT_0063f4ff = 0;
-  DAT_0063f4e4 = 0;
+  g_asdSoundStatus = 0;
   DAT_0063f4e8 = 0;
   DAT_0063f52c = 0;
   return;

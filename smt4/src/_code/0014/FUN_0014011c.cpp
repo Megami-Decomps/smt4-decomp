@@ -9,8 +9,8 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern int DAT_004652a0; /* 0x4652a0 */
-extern unsigned int DAT_004652a4; /* 0x4652a4 */
+extern int g_commandBufferCursor; /* 0x4652a0 */
+extern unsigned int g_commandBufferEnd; /* 0x4652a4 */
 
 
 int FUN_0014011c(int param_1,int param_2)
@@ -32,7 +32,7 @@ int FUN_0014011c(int param_1,int param_2)
   temp_v5 = *(int *)(param_2 + 0x38);
   temp_v1 = *(int *)(param_1 + 8);
   if (*(int *)(param_1 + 8) == 0) {
-    temp_v1 = DAT_004652a0;
+    temp_v1 = g_commandBufferCursor;
   }
   temp_v3 = 0;
   if (temp_v3 < temp_v5) {
@@ -104,14 +104,14 @@ int FUN_0014011c(int param_1,int param_2)
       return temp_v4;
     }
   }
-  else if (DAT_004652a4 < (unsigned int)(DAT_004652a0 + temp_v4)) {
+  else if (g_commandBufferEnd < (unsigned int)(g_commandBufferCursor + temp_v4)) {
     return temp_v4;
   }
   if (temp_v1 != 0) {
     *(int *)(param_1 + 8) = temp_v4 + temp_v1;
   }
   else {
-    DAT_004652a0 = DAT_004652a0 + temp_v4;
+    g_commandBufferCursor = g_commandBufferCursor + temp_v4;
   }
   return temp_v4;
 }

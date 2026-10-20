@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b06c4(void);
 int FUN_002c424c(...);
-int FUN_002c4938(int, int);
+int memClear(int, int);
 int SBORROW4(int, int);
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
@@ -14,7 +14,7 @@ extern int FUN_0026efec(int);
 extern unsigned int FUN_00294090(int, unsigned int);
 /* Supplied declaration required: FUN_002b06c4. */
 /* Supplied declaration required: FUN_002c424c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_003398e4(int param_1)
@@ -41,7 +41,7 @@ void FUN_003398e4(int param_1)
   } while (temp_v3 != 0);
   FUN_002c424c(aiStack_c0,0xa8,0xffffffff);
   FUN_002c424c(param_1 + 0x43a8,0xa8,0xffffffff);
-  FUN_002c4938(param_1 + 0x357c,0xe10);
+  memClear(param_1 + 0x357c,0xe10);
   if (((*(unsigned int *)(param_1 + 0x44a8) & 0x40) == 0) && (*(int *)(param_1 + 0x2f34) - 1U >= 4)) {
     temp_v5 = 0;
     temp_v3 = temp_v5;

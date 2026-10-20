@@ -32,7 +32,7 @@ extern unsigned char LAB_0029a710; /* 0x29a710 */
 extern unsigned char LAB_0029a914; /* 0x29a914 */
 extern unsigned char LAB_0029a918; /* 0x29a918 */
 extern int DAT_0044e190; /* 0x44e190 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern unsigned int FUN_0028d1f4(int);
@@ -109,8 +109,8 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   }
   FUN_002bf288(2,0x1a,temp_v5,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xc4);
   temp_v11 = FUN_002bf4f8(0x1a,0x420);
-  temp_v2 = DAT_0044ea00;
-  piVar8 = (int *)(DAT_0044ea00 + 0x130c);
+  temp_v2 = g_titleScene;
+  piVar8 = (int *)(g_titleScene + 0x130c);
   temp_v6 = piVar8[*piVar8 + 2];
   piVar8[*piVar8 + 2] = 3;
   if (*(char *)(temp_v2 + 0x1324) != '\0' || temp_v6 != 3) {
@@ -125,8 +125,8 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   temp_v6 = FUN_002beda4(temp_v3 + 0x1cc);
   FUN_002bf288(2,0x1a,0x422,temp_v6 + param_1 + (int)*(short *)(temp_v1 + 8),
                temp_v2 + param_2 + (int)temp_v0,0xc9);
-  temp_v2 = DAT_0044ea00;
-  piVar8 = (int *)(DAT_0044ea00 + 0x130c);
+  temp_v2 = g_titleScene;
+  piVar8 = (int *)(g_titleScene + 0x130c);
   temp_v6 = piVar8[*piVar8 + 2];
   piVar8[*piVar8 + 2] = 0;
   if (*(char *)(temp_v2 + 0x1324) != '\0' || temp_v6 != 0) {

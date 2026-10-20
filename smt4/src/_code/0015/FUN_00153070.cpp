@@ -4,21 +4,21 @@
 
 extern "C" {
 
-int FUN_0014564c(int, unsigned int, int);
+int asdTMSprDecompress(int, unsigned int, int);
 int FUN_002bd540(void);
-int FUN_002bd75c(void);
-int FUN_002c415c(int);
+int asdTextureCreate(void);
+int asdMemFree(int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_0014564c. */
+/* Supplied declaration required: asdTMSprDecompress. */
 /* Supplied declaration required: FUN_002bd540. */
-/* Supplied declaration required: FUN_002bd75c. */
-extern int FUN_002c1870(int, char *, unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdTextureCreate. */
+extern int rt_memcmp(int, char *, unsigned int);
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00153070(int param_1,int param_2,int param_3)
@@ -34,11 +34,11 @@ void FUN_00153070(int param_1,int param_2,int param_3)
     if ((*(unsigned int *)(param_2 + 0x10) & 0x10000) != 0) {
       temp_v2 = 3;
     }
-    FUN_0014564c(param_1,temp_v2,0x80);
+    asdTMSprDecompress(param_1,temp_v2,0x80);
   }
-  temp_v0 = FUN_002c1870(param_1,"STEX",4);
+  temp_v0 = rt_memcmp(param_1,"STEX",4);
   if (temp_v0 != 0) {
-    FUN_002c415c(param_1);
+    asdMemFree(param_1);
     return;
   }
   if (*(int *)(param_1 + 0x24) != 0) {
@@ -46,7 +46,7 @@ void FUN_00153070(int param_1,int param_2,int param_3)
   }
   else {
     temp_v1 = (unsigned int)((*(unsigned int *)(param_2 + 0x10) & 0x10000) != 0);
-    FUN_002bd75c();
+    asdTextureCreate();
     *(unsigned int *)(param_2 + 8) = temp_v1;
     *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(param_1 + 8);
     *(unsigned int *)(*(int *)(param_2 + 8) + 0x14) = *(unsigned int *)(param_1 + 0xc);

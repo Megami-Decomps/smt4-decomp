@@ -13,7 +13,7 @@ extern signed char DAT_005c0b48; /* 0x5c0b48 */
 extern int FUN_0016f864(unsigned int);
 extern int FUN_0016f988(int *, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00195fc8. */
-extern unsigned int FUN_002e3390(unsigned int);
+extern unsigned int wstrlen(unsigned int);
 extern int FUN_0043ab50(void);
 
 
@@ -31,7 +31,7 @@ unsigned int FUN_0043a670(int *param_1,unsigned int param_2)
   if (temp_v0 < 0) {
     FUN_00195fc8();
   }
-  temp_v1 = FUN_002e3390(param_2);
+  temp_v1 = wstrlen(param_2);
   temp_v0 = FUN_0016f988(param_1,param_2,temp_v1,1);
   if (temp_v0 < 0) {
     if (temp_v0 == -0x2fbfe7cc) {

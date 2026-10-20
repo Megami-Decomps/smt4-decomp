@@ -12,7 +12,7 @@ int FUN_004d3c94(...);
 int FUN_00280328(...);
 int FUN_002ea508(...);
 int FUN_00317508(...);
-int FUN_0032c1bc(void);
+int asdListBoxAddItems(void);
 int FUN_0032c450(...);
 int FUN_00340ec8(...);
 int FUN_003ed238(...);
@@ -35,7 +35,7 @@ int FUN_004d5a70(...);
 int FUN_004d5be4(...);
 int FUN_004d5fc0(...);
 
-int FUN_001631d0(...);
+int jobStop(...);
 int FUN_00317450(...);
 int FUN_00317464(...);
 int FUN_0032c430(...);
@@ -110,15 +110,15 @@ extern unsigned int DAT_0057aa24; /* 0x57aa24 */
 extern unsigned int DAT_0057aa28; /* 0x57aa28 */
 extern unsigned int DAT_0057aa2c; /* 0x57aa2c */
 
-/* Supplied declaration required: FUN_001631d0. */
-extern int FUN_00163e40(unsigned int);
+/* Supplied declaration required: jobStop. */
+extern int jobIsValid(unsigned int);
 extern int FUN_001656a0(unsigned int);
 /* Supplied declaration required: FUN_00280328. */
 /* Supplied declaration required: FUN_002ea508. */
 /* Supplied declaration required: FUN_00317450. */
 /* Supplied declaration required: FUN_00317464. */
 /* Supplied declaration required: FUN_00317508. */
-/* Supplied declaration required: FUN_0032c1bc. */
+/* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_0032c430. */
 /* Supplied declaration required: FUN_0032c450. */
 /* Supplied declaration required: FUN_00340ec8. */
@@ -362,10 +362,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     case 0:
       temp_v5 = FUN_001656a0(0);
       if (temp_v5 != 0) {
-        temp_v5 = FUN_00163e40(param_1[4]);
+        temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
           FUN_003592dc(param_1[4]);
-          FUN_001631d0(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         *param_1 = 9;
       }
@@ -373,10 +373,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     case 1:
       temp_v5 = FUN_001656a0(0);
       if (temp_v5 != 0) {
-        temp_v5 = FUN_00163e40(param_1[4]);
+        temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
           FUN_003592dc(param_1[4]);
-          FUN_001631d0(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         param_1[2] = 1;
         *param_1 = 3;
@@ -385,10 +385,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     case 2:
       temp_v5 = FUN_001656a0(0);
       if (temp_v5 != 0) {
-        temp_v5 = FUN_00163e40(param_1[4]);
+        temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
           FUN_003592dc(param_1[4]);
-          FUN_001631d0(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v6 = 7;
         *param_1 = temp_v6;
@@ -397,10 +397,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     case 3:
       temp_v5 = FUN_001656a0(0);
       if (temp_v5 != 0) {
-        temp_v5 = FUN_00163e40(param_1[4]);
+        temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
           FUN_003592dc(param_1[4]);
-          FUN_001631d0(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v6 = 0xb;
         *param_1 = temp_v6;
@@ -409,10 +409,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     case 4:
       temp_v5 = FUN_001656a0(0);
       if (temp_v5 != 0) {
-        temp_v5 = FUN_00163e40(param_1[4]);
+        temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
           FUN_003592dc(param_1[4]);
-          FUN_001631d0(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v6 = 0xd;
         *param_1 = temp_v6;
@@ -421,10 +421,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     case 5:
       temp_v5 = FUN_001656a0(0);
       if (temp_v5 != 0) {
-        temp_v5 = FUN_00163e40(param_1[4]);
+        temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
           FUN_003592dc(param_1[4]);
-          FUN_001631d0(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v6 = 0xf;
         *param_1 = temp_v6;
@@ -433,10 +433,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     case 6:
       temp_v5 = FUN_001656a0(0);
       if (temp_v5 != 0) {
-        temp_v5 = FUN_00163e40(param_1[4]);
+        temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
           FUN_003592dc(param_1[4]);
-          FUN_001631d0(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v6 = 0x11;
         *param_1 = temp_v6;
@@ -445,10 +445,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     case 7:
       temp_v5 = FUN_001656a0(0);
       if (temp_v5 != 0) {
-        temp_v5 = FUN_00163e40(param_1[4]);
+        temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
           FUN_003592dc(param_1[4]);
-          FUN_001631d0(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v6 = 0x13;
         *param_1 = temp_v6;
@@ -457,10 +457,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     case 8:
       temp_v5 = FUN_001656a0(0);
       if (temp_v5 != 0) {
-        temp_v5 = FUN_00163e40(param_1[4]);
+        temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
           FUN_003592dc(param_1[4]);
-          FUN_001631d0(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v6 = 0x15;
         *param_1 = temp_v6;
@@ -469,10 +469,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     case 9:
       temp_v5 = FUN_001656a0(0);
       if (temp_v5 != 0) {
-        temp_v5 = FUN_00163e40(param_1[4]);
+        temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
           FUN_003592dc(param_1[4]);
-          FUN_001631d0(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v6 = 0x17;
         *param_1 = temp_v6;
@@ -481,10 +481,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     case 10:
       temp_v5 = FUN_001656a0(0);
       if (temp_v5 != 0) {
-        temp_v5 = FUN_00163e40(param_1[4]);
+        temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
           FUN_003592dc(param_1[4]);
-          FUN_001631d0(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v6 = 0x19;
         *param_1 = temp_v6;
@@ -493,10 +493,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     case 0xb:
       temp_v5 = FUN_001656a0(0);
       if (temp_v5 != 0) {
-        temp_v5 = FUN_00163e40(param_1[4]);
+        temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
           FUN_003592dc(param_1[4]);
-          FUN_001631d0(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v6 = 0x1b;
         *param_1 = temp_v6;
@@ -505,10 +505,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     case 0xc:
       temp_v5 = FUN_001656a0(0);
       if (temp_v5 != 0) {
-        temp_v5 = FUN_00163e40(param_1[4]);
+        temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
           FUN_003592dc(param_1[4]);
-          FUN_001631d0(param_1[4],0);
+          jobStop(param_1[4],0);
         }
         temp_v6 = 0x1d;
         *param_1 = temp_v6;
@@ -529,15 +529,15 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     break;
   case 3:
     if (param_1[2] == 1) {
-      temp_v5 = FUN_00163e40(param_1[4]);
+      temp_v5 = jobIsValid(param_1[4]);
       if (temp_v5 != 0) {
         FUN_003592dc(param_1[4]);
-        FUN_001631d0(param_1[4],0);
+        jobStop(param_1[4],0);
       }
       temp_v6 = *(unsigned int *)(param_2 + 0x80);
       FUN_00280328(temp_v6,0x75,0);
       param_1[4] = temp_v6;
-      FUN_0032c1bc();
+      asdListBoxAddItems();
       FUN_00317508(param_1[4],1);
       FUN_002ea508(param_1[4],"btl Camera Menu");
     }
@@ -551,10 +551,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     }
     temp_v5 = FUN_001656a0(0);
     if (temp_v5 != 0) {
-      temp_v5 = FUN_00163e40(param_1[4]);
+      temp_v5 = jobIsValid(param_1[4]);
       if (temp_v5 != 0) {
         FUN_003592dc(param_1[4]);
-        FUN_001631d0(param_1[4],0);
+        jobStop(param_1[4],0);
       }
       *param_1 = temp_v6;
       return 0;
@@ -563,10 +563,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     if (temp_v5 == 0) {
       return 0;
     }
-    temp_v5 = FUN_00163e40(param_1[4]);
+    temp_v5 = jobIsValid(param_1[4]);
     if (temp_v5 != 0) {
       FUN_003592dc(param_1[4]);
-      FUN_001631d0(param_1[4],0);
+      jobStop(param_1[4],0);
     }
     temp_v6 = 0x1f;
     break;
@@ -611,10 +611,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       if (temp_v5 == 0) {
         return 0;
       }
-      temp_v5 = FUN_00163e40(param_1[4]);
+      temp_v5 = jobIsValid(param_1[4]);
       if (temp_v5 != 0) {
         FUN_003592dc(param_1[4]);
-        FUN_001631d0(param_1[4],0);
+        jobStop(param_1[4],0);
       }
       temp_v6 = 3;
       break;
@@ -798,15 +798,15 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     temp_v6 = 0x20;
     break;
   case 0xb:
-    temp_v5 = FUN_00163e40(param_1[4]);
+    temp_v5 = jobIsValid(param_1[4]);
     if (temp_v5 != 0) {
       FUN_003592dc(param_1[4]);
-      FUN_001631d0(param_1[4],0);
+      jobStop(param_1[4],0);
     }
     temp_v6 = *(unsigned int *)(param_2 + 0x80);
     FUN_00280328(temp_v6,0x75,0);
     param_1[4] = temp_v6;
-    FUN_0032c1bc();
+    asdListBoxAddItems();
     FUN_00317508(param_1[4],1);
     FUN_002ea508(param_1[4],"btl Param Menu");
     FUN_00317464(param_1[4],0,0xffffffff,0xffffffff,0x6c,0);
@@ -822,15 +822,15 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     temp_v6 = 0x20;
     break;
   case 0xd:
-    temp_v5 = FUN_00163e40(param_1[4]);
+    temp_v5 = jobIsValid(param_1[4]);
     if (temp_v5 != 0) {
       FUN_003592dc(param_1[4]);
-      FUN_001631d0(param_1[4],0);
+      jobStop(param_1[4],0);
     }
     temp_v6 = *(unsigned int *)(param_2 + 0x80);
     FUN_00280328(temp_v6,0x75,0);
     param_1[4] = temp_v6;
-    FUN_0032c1bc();
+    asdListBoxAddItems();
     FUN_00317508(param_1[4],1);
     FUN_002ea508(param_1[4],"btl Bad Menu");
     FUN_00317464(param_1[4],0,0xffffffff,0xffffffff,0x6c,0);
@@ -940,15 +940,15 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     temp_v6 = 0x20;
     break;
   case 0x17:
-    temp_v5 = FUN_00163e40(param_1[4]);
+    temp_v5 = jobIsValid(param_1[4]);
     if (temp_v5 != 0) {
       FUN_003592dc(param_1[4]);
-      FUN_001631d0(param_1[4],0);
+      jobStop(param_1[4],0);
     }
     temp_v6 = *(unsigned int *)(param_2 + 0x80);
     FUN_00280328(temp_v6,0x75,0);
     param_1[4] = temp_v6;
-    FUN_0032c1bc();
+    asdListBoxAddItems();
     FUN_00317508(param_1[4],1);
     FUN_002ea508(param_1[4],"btl Result Menu");
     FUN_0032c450(param_1[4],0,
@@ -998,15 +998,15 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     temp_v6 = 0x20;
     break;
   case 0x19:
-    temp_v5 = FUN_00163e40(param_1[4]);
+    temp_v5 = jobIsValid(param_1[4]);
     if (temp_v5 != 0) {
       FUN_003592dc(param_1[4]);
-      FUN_001631d0(param_1[4],0);
+      jobStop(param_1[4],0);
     }
     temp_v6 = *(unsigned int *)(param_2 + 0x80);
     FUN_00280328(temp_v6,0x75,0);
     param_1[4] = temp_v6;
-    FUN_0032c1bc();
+    asdListBoxAddItems();
     FUN_00317508(param_1[4],1);
     FUN_002ea508(param_1[4],"btl Sake Menu");
     FUN_00340edc(param_1[4],0,0,10);
@@ -1067,15 +1067,15 @@ LAB_004d729c:
     temp_v6 = 0x20;
     break;
   case 0x1d:
-    temp_v5 = FUN_00163e40(param_1[4]);
+    temp_v5 = jobIsValid(param_1[4]);
     if (temp_v5 != 0) {
       FUN_003592dc(param_1[4]);
-      FUN_001631d0(param_1[4],0);
+      jobStop(param_1[4],0);
     }
     temp_v6 = *(unsigned int *)(param_2 + 0x80);
     FUN_00280328(temp_v6,0x75,0);
     param_1[4] = temp_v6;
-    FUN_0032c1bc();
+    asdListBoxAddItems();
     FUN_00317508(param_1[4],1);
     FUN_002ea508(param_1[4],"btl Face Menu");
     FUN_00317464(param_1[4],0,0,0,3,0);
@@ -1091,15 +1091,15 @@ LAB_004d729c:
     temp_v6 = 0x20;
     break;
   case 0x1f:
-    temp_v5 = FUN_00163e40(param_1[4]);
+    temp_v5 = jobIsValid(param_1[4]);
     if (temp_v5 != 0) {
       FUN_003592dc(param_1[4]);
-      FUN_001631d0(param_1[4],0);
+      jobStop(param_1[4],0);
     }
     temp_v6 = *(unsigned int *)(param_2 + 0x80);
     FUN_00280328(temp_v6,0x75,0);
     param_1[4] = temp_v6;
-    FUN_0032c1bc();
+    asdListBoxAddItems();
     FUN_00317508(param_1[4],1);
     FUN_002ea508(param_1[4],"btl Debug Menu");
     *param_1 = 0;

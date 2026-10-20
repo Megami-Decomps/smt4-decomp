@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00187180(int, int);
-int FUN_00192748(...);
+int dataTableGet(int, int);
+int dataTableGetCount(...);
 
-extern int DAT_00570280; /* 0x570280 */
+extern int g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_00187180. */
-/* Supplied declaration required: FUN_00192748. */
-extern int FUN_00192798(void);
+/* Supplied declaration required: dataTableGet. */
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(void);
 
 
 unsigned int FUN_003857d8(int param_1)
@@ -25,22 +25,22 @@ unsigned int FUN_003857d8(int param_1)
   int *piVar5;
   unsigned int temp_v4;
   
-  FUN_00187180(0x23,3);
-  temp_v0 = FUN_00192748();
+  dataTableGet(0x23,3);
+  temp_v0 = dataTableGetCount();
   temp_v4 = 0;
-  temp_v0 = *(int *)(DAT_00570280 + 0x3fc) + temp_v0;
+  temp_v0 = *(int *)(g_aocSystem + 0x3fc) + temp_v0;
   if (0 < temp_v0) {
     do {
-      temp_v1 = FUN_00187180(0x23,3);
-      temp_v2 = FUN_00192798();
-      temp_v3 = FUN_00192748(temp_v1);
+      temp_v1 = dataTableGet(0x23,3);
+      temp_v2 = dataTableGetEntries();
+      temp_v3 = dataTableGetCount(temp_v1);
       if (temp_v4 < temp_v3) {
         piVar5 = (int *)(temp_v2 + temp_v4 * 0x14);
       }
       else {
         piVar5 = (int *)0x0;
-        if (temp_v4 < temp_v3 + *(int *)(DAT_00570280 + 0x3fc)) {
-          piVar5 = (int *)(*(int *)(DAT_00570280 + 0x400) + (temp_v4 - temp_v3) * 0x14);
+        if (temp_v4 < temp_v3 + *(int *)(g_aocSystem + 0x3fc)) {
+          piVar5 = (int *)(*(int *)(g_aocSystem + 0x400) + (temp_v4 - temp_v3) * 0x14);
         }
       }
       if (*piVar5 == -1) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(...);
 
 typedef int romwright_code(...);
@@ -15,11 +15,11 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_001654d8(void);
 extern int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -42,9 +42,9 @@ void FUN_00336574(int param_1,int param_2)
   if ((*(char *)(param_1 + 0x38b9) == '\0') && (*(int *)(param_1 + 0x3890) < 4)) {
     temp_v0 = FUN_001654d8();
     temp_v1 = FUN_001654e4(param_1 + 0x12b8);
-    FUN_001677c0();
+    efctSetSpeed();
     temp_v2 = FUN_001834a4(0xd,*(int *)(param_1 + 0x3890) + 0x5a);
-    temp_v6 = DAT_0059dbb4;
+    temp_v6 = g_renderCtx;
     temp_v3 = FUN_00169294(6,1,0);
     piVar7 = (int *)(temp_v6 + 0x12b8);
     temp_v4 = piVar7[*piVar7 + 2];
@@ -57,7 +57,7 @@ void FUN_00336574(int param_1,int param_2)
     FUN_001835b4(2,0xd,0x57,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x29);
     FUN_001835b4(2,0xd,0x58,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x29);
     FUN_001835b4(2,0xd,0x59,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x29);
-    temp_v6 = DAT_0059dbb4;
+    temp_v6 = g_renderCtx;
     temp_v2 = FUN_00169294(6,7,0);
     piVar7 = (int *)(temp_v6 + 0x12b8);
     temp_v3 = piVar7[*piVar7 + 2];
@@ -66,14 +66,14 @@ void FUN_00336574(int param_1,int param_2)
       (**(romwright_code **)(temp_v6 + 0x12d4))();
       *(unsigned char *)(temp_v6 + 0x12d0) = 0;
     }
-    FUN_001677c0();
-    FUN_001677c0();
+    efctSetSpeed();
+    efctSetSpeed();
     if (param_2 != 0) {
       temp_v6 = 0;
       do {
         if (*(char *)(param_1 + temp_v6 + 0x3c84) != '\0') {
           temp_v3 = FUN_001834a4(0xd,temp_v6 + 0x52);
-          temp_v2 = DAT_0059dbb4;
+          temp_v2 = g_renderCtx;
           temp_v4 = FUN_00169294(6,1,0);
           piVar7 = (int *)(temp_v2 + 0x12b8);
           temp_v5 = piVar7[*piVar7 + 2];
@@ -82,10 +82,10 @@ void FUN_00336574(int param_1,int param_2)
             (**(romwright_code **)(temp_v2 + 0x12d4))();
             *(unsigned char *)(temp_v2 + 0x12d0) = 0;
           }
-          FUN_001677c0();
+          efctSetSpeed();
           FUN_001835b4(2,0xd,0x1cb,*(short *)(temp_v3 + 8) + temp_v0,*(short *)(temp_v3 + 10) + temp_v1,0x2e
                       );
-          FUN_001677c0();
+          efctSetSpeed();
           FUN_001835b4(2,0xd,0x4b,*(short *)(temp_v3 + 8) + temp_v0,*(short *)(temp_v3 + 10) + temp_v1,0x2e)
           ;
           FUN_001835b4(2,0xd,0x4a,*(short *)(temp_v3 + 8) + temp_v0,*(short *)(temp_v3 + 10) + temp_v1,0x2e)
@@ -94,7 +94,7 @@ void FUN_00336574(int param_1,int param_2)
           ;
           FUN_001835b4(2,0xd,0x4d,*(short *)(temp_v3 + 8) + temp_v0,*(short *)(temp_v3 + 10) + temp_v1,0x2e)
           ;
-          temp_v2 = DAT_0059dbb4;
+          temp_v2 = g_renderCtx;
           temp_v3 = FUN_00169294(6,7,0);
           piVar7 = (int *)(temp_v2 + 0x12b8);
           temp_v4 = piVar7[*piVar7 + 2];
@@ -110,7 +110,7 @@ void FUN_00336574(int param_1,int param_2)
     else {
       temp_v6 = FUN_002a4878(param_1 + 0x3bdc);
       temp_v2 = FUN_001834a4(0xd,temp_v6 + 0x52);
-      temp_v6 = DAT_0059dbb4;
+      temp_v6 = g_renderCtx;
       temp_v3 = FUN_00169294(6,1,0);
       piVar7 = (int *)(temp_v6 + 0x12b8);
       temp_v4 = piVar7[*piVar7 + 2];
@@ -119,14 +119,14 @@ void FUN_00336574(int param_1,int param_2)
         (**(romwright_code **)(temp_v6 + 0x12d4))();
         *(unsigned char *)(temp_v6 + 0x12d0) = 0;
       }
-      FUN_001677c0();
+      efctSetSpeed();
       FUN_001835b4(2,0xd,0x1cb,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
-      FUN_001677c0();
+      efctSetSpeed();
       FUN_001835b4(2,0xd,0x4b,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
       FUN_001835b4(2,0xd,0x4a,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
       FUN_001835b4(2,0xd,0x4c,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
       FUN_001835b4(2,0xd,0x4d,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
-      temp_v6 = DAT_0059dbb4;
+      temp_v6 = g_renderCtx;
       temp_v0 = FUN_00169294(6,7,0);
       piVar7 = (int *)(temp_v6 + 0x12b8);
       temp_v1 = piVar7[*piVar7 + 2];
@@ -136,7 +136,7 @@ void FUN_00336574(int param_1,int param_2)
         *(unsigned char *)(temp_v6 + 0x12d0) = 0;
       }
     }
-    FUN_001677c0();
+    efctSetSpeed();
     return;
   }
   return;

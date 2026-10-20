@@ -10,8 +10,8 @@ int FUN_00180118(unsigned int);
 int FUN_0019cac4(void);
 int rt_memcpy(unsigned char [72], int, int);
 
-extern int *DAT_0058104c; /* 0x58104c */
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern int *g_popupState; /* 0x58104c */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_0014bef4(unsigned int);
@@ -38,30 +38,30 @@ void FUN_00246344(void)
   unsigned char temp_v5 [72];
   
   FUN_00152f44();
-  if (((*DAT_0058104c == 0) && (temp_v0 = FUN_0015688c(), temp_v0 != 0)) &&
+  if (((*g_popupState == 0) && (temp_v0 = FUN_0015688c(), temp_v0 != 0)) &&
      ((temp_v1 = FUN_0018719c(0x1a2), temp_v1 == 0 || (temp_v1 = FUN_0014bef4(99), temp_v1 + 1 >= 0x33)))) {
-    temp_v3 = (*(unsigned int *)((unsigned char *)&DAT_005f15fc + 0x308));
-    temp_v2 = (*(unsigned int *)((unsigned char *)&DAT_005f15fc + 0x308));
+    temp_v3 = (*(unsigned int *)((unsigned char *)&g_gameState + 0x308));
+    temp_v2 = (*(unsigned int *)((unsigned char *)&g_gameState + 0x308));
     FUN_0019cac4();
     temp_v4 = *(unsigned short *)(temp_v2 + 2) & 0x7fff;
     temp_v1 = FUN_001801a4();
-    piVar1 = DAT_0058104c;
-    if ((*(unsigned int *)((unsigned char *)&DAT_005f15fc + 0x308)) != 0) {
+    piVar1 = g_popupState;
+    if ((*(unsigned int *)((unsigned char *)&g_gameState + 0x308)) != 0) {
       if (temp_v4 < *(unsigned short *)(temp_v1 + 0x62)) {
         temp_v4 = temp_v4 + 5;
       }
       if (*(unsigned short *)(temp_v1 + 0x62) <= temp_v4) {
-        *DAT_0058104c = 0xc;
+        *g_popupState = 0xc;
         piVar1[1] = 0;
         temp_v1 = FUN_002d8b58(0xe,*(unsigned short *)(temp_v0 + 300));
-        piVar1 = DAT_0058104c;
-        DAT_0058104c[5] = temp_v1;
+        piVar1 = g_popupState;
+        g_popupState[5] = temp_v1;
         piVar1[6] = (unsigned int)*(unsigned short *)(temp_v0 + 300);
         rt_memcpy(temp_v5,temp_v1,0x48);
         temp_v3 = temp_v3 & 0xffff;
         FUN_00180118(temp_v3);
-        FUN_00100388((int)DAT_0058104c + 0x25,temp_v5,temp_v3);
-        DAT_0058104c[5] = (int)DAT_0058104c + 0x25;
+        FUN_00100388((int)g_popupState + 0x25,temp_v5,temp_v3);
+        g_popupState[5] = (int)g_popupState + 0x25;
       }
     }
   }

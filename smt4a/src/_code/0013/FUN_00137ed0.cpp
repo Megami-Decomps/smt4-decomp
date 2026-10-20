@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int DAT_00640370; /* 0x640370 */
+extern int g_asdSequence; /* 0x640370 */
 extern int DAT_00640378; /* 0x640378 */
 extern unsigned int DAT_0064037c; /* 0x64037c */
 extern unsigned int DAT_00640380; /* 0x640380 */
@@ -18,14 +18,14 @@ void FUN_00137ed0(void)
 
 {
 /* irregular: 3 native warning(s); review required */
-  if (*(int *)(DAT_00640370 + 0xc) != 0) {
+  if (*(int *)(g_asdSequence + 0xc) != 0) {
     DAT_0064037c = 1;
     DAT_00640380 = 0;
     DAT_00640384 = 0;
     if (-1 < DAT_00640378) {
                     /* WARNING: Could not recover jumptable at 0x00137f84. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-      (**(romwright_code **)(DAT_00640370 + DAT_00640378 * 0xc + 4))();
+      (**(romwright_code **)(g_asdSequence + DAT_00640378 * 0xc + 4))();
       return;
     }
   }

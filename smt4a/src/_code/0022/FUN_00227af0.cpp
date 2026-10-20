@@ -5,16 +5,16 @@
 extern "C" {
 
 int FUN_001aba54(int);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 int rt_memcpy(int, int, int);
 
-extern int DAT_0057f56c; /* 0x57f56c */
+extern int g_menuState; /* 0x57f56c */
 
 extern int FUN_0019f240(int);
 extern unsigned int FUN_001ab854(void);
 /* Supplied declaration required: FUN_001aba54. */
 extern int FUN_001ba514(unsigned int);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern int FUN_004bd098(unsigned int, int);
 extern int FUN_004c6bd0(int, int);
 /* Supplied declaration required: rt_memcpy. */
@@ -28,10 +28,10 @@ void FUN_00227af0(int param_1)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = DAT_0057f56c;
-  *(unsigned char *)(DAT_0057f56c + 0x10) = 0;
+  temp_v0 = g_menuState;
+  *(unsigned char *)(g_menuState + 0x10) = 0;
   if (param_1 != 0) {
-    FUN_002e6354(temp_v0 + 0x26c,0x3d);
+    sysMemClear(temp_v0 + 0x26c,0x3d);
     temp_v1 = 0;
     do {
       if (*(char *)(param_1 + temp_v1) == '\0') {
@@ -41,8 +41,8 @@ void FUN_00227af0(int param_1)
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 0x3d);
-    temp_v0 = DAT_0057f56c;
-    *(unsigned int *)(DAT_0057f56c + 0x2b4) = 0;
+    temp_v0 = g_menuState;
+    *(unsigned int *)(g_menuState + 0x2b4) = 0;
     if ((*(int *)(temp_v0 + 0x14) == 2) && (*(char *)(temp_v0 + 0x2b8) != '\x01')) {
       if (*(char *)(temp_v0 + 0x11) != '\0') {
         temp_v1 = FUN_0019f240((int)*(short *)(temp_v0 + 0x18));

@@ -8,7 +8,7 @@ int FUN_00100388(...);
 int FUN_0022838c(...);
 int FUN_00284fdc(...);
 int FUN_002a4aa4(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_0031d1fc(...);
 int FUN_00353b00(...);
 int FUN_003df7c4(...);
@@ -39,7 +39,7 @@ extern unsigned int *FUN_001ab888(void);
 extern unsigned int FUN_00261828(void);
 /* Supplied declaration required: FUN_00284fdc. */
 /* Supplied declaration required: FUN_002a4aa4. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031d1fc. */
 /* Supplied declaration required: FUN_00353b00. */
 /* Supplied declaration required: FUN_003df7c4. */
@@ -83,7 +83,7 @@ void FUN_00283d74(int param_1)
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 7);
     psVar2 = (short *)FUN_001801a4();
-    FUN_002e6354(psVar2,100);
+    sysMemClear(psVar2,100);
     psVar2[0x31] = 1;
     psVar2[0x30] = 0;
     strncpy(psVar2 + 0x26,&DAT_005311fc,0x12);

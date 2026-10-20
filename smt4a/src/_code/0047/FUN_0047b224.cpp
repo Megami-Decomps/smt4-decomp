@@ -27,9 +27,9 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_0047b49c; /* 0x47b49c */
-extern int DAT_00570260; /* 0x570260 */
-extern int DAT_0057027c; /* 0x57027c */
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern int g_aocMain; /* 0x570260 */
+extern int g_aocDisplay; /* 0x57027c */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001641b4. */
@@ -74,13 +74,13 @@ void FUN_0047b224(unsigned int *param_1)
   temp_v0 = param_1[2];
   if (temp_v0 == 0) {
     FUN_00169548(0);
-    FUN_001d0fcc(temp_v6,DAT_00570280);
+    FUN_001d0fcc(temp_v6,g_aocSystem);
     *param_1 = *param_1 & 0xffffffef;
-    *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xfffffeff;
-    *(unsigned char *)(DAT_0057027c + 0x450c) = 0;
+    *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffffeff;
+    *(unsigned char *)(g_aocDisplay + 0x450c) = 0;
     FUN_004d097c(param_1 + 0xba);
     FUN_004d06e4(param_1 + 0xad);
-    *(unsigned char *)(DAT_00570260 + 0xd50) = 2;
+    *(unsigned char *)(g_aocMain + 0xd50) = 2;
     temp_v2 = FUN_00357bc8(param_1[0xd4],&LAB_0047b49c);
     FUN_00275f44(param_1[0xd6],temp_v2);
     FUN_00477d10(param_1,0,1);
@@ -105,7 +105,7 @@ void FUN_0047b224(unsigned int *param_1)
       temp_v1 = FUN_002a4b74();
       if (temp_v1 == 0) {
         param_1[2] = 2;
-        FUN_0016ccb4(DAT_00570260 + 0x80);
+        FUN_0016ccb4(g_aocMain + 0x80);
         temp_v6[0] = 0;
         puVar5 = (unsigned int *)FUN_001b5acc(temp_v7);
         puVar5[2] = 0;

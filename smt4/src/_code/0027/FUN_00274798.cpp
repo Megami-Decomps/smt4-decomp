@@ -29,8 +29,8 @@ typedef struct {
 
 extern int *DAT_004474f4; /* 0x4474f4 */
 extern int DAT_00447e58; /* 0x447e58 */
-extern int DAT_00447e88; /* 0x447e88 */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_lmapScene; /* 0x447e88 */
+extern int g_gameState; /* 0x49f91c */
 extern signed char DAT_0049f93e; /* 0x49f93e */
 
 /* Supplied declaration required: FUN_0021e224. */
@@ -108,7 +108,7 @@ void FUN_00274798(void)
         else {
 LAB_002748b4:
           if ((*(char *)(DAT_00447e58 + 0xe3c) == '\0') || (*(char *)(temp_v1 + 0xe) != '\0')) {
-            temp_v11 = *(int *)(DAT_00447e88 + 0x1c);
+            temp_v11 = *(int *)(g_lmapScene + 0x1c);
             FUN_00287aec();
             temp_v8 = *(int *)(temp_v1 + 0x38);
             if (temp_v8 != 0) {
@@ -150,7 +150,7 @@ LAB_002748b4:
                 }
               }
             }
-            if (DAT_0049f91c >= 0x65) {
+            if (g_gameState >= 0x65) {
               temp_v18[0] = (float)((unsigned long long)temp_v13 >> 0x20);
               temp_v19[0] = -1;
               temp_v18[1] = temp_v18[0];
@@ -163,7 +163,7 @@ LAB_002748b4:
                 temp_v2 = DAT_00447e58 + temp_v9 * 0x38;
                 if (*(char *)(temp_v2 + 0xc) != '\0') {
                   *(unsigned char *)(temp_v2 + 0xd) = 0;
-                  temp_v12 = *(float *)(DAT_00447e88 + 0x1c);
+                  temp_v12 = *(float *)(g_lmapScene + 0x1c);
                   FUN_00287aec();
                   if (temp_v8 < 3) {
                     if (temp_v19[0] != -1) {

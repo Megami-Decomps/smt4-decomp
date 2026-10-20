@@ -8,7 +8,7 @@ int FUN_001885e8(int *, int [2], int, int, int, int *, int, int, int *, int, int
 int FUN_0019fc70(int *, int *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_001a007c(void);
 int FUN_001a0164(void);
-int FUN_002e6354(void);
+int sysMemClear(void);
 int software_interrupt(int);
 
 typedef int romwright_code(...);
@@ -39,7 +39,7 @@ extern unsigned int DAT_0062d388; /* 0x62d388 */
 /* Supplied declaration required: FUN_0019fc70. */
 /* Supplied declaration required: FUN_001a007c. */
 /* Supplied declaration required: FUN_001a0164. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern int *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
 
 
@@ -79,7 +79,7 @@ FUN_001c5be4(int *param_1,unsigned int *param_2,unsigned int param_3,unsigned in
   uStack_28 = param_4;
   FUN_001a007c();
   if (param_1 != (int *)0x0) {
-    FUN_002e6354();
+    sysMemClear();
     FUN_001a0164();
     if (param_1 != (int *)0x0) {
       temp_v3[0] = 0;

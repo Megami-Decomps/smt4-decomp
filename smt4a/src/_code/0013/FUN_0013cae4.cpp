@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern unsigned int FUN_0014af98(void);
 extern unsigned int FUN_00152f44(void);
 /* Supplied declaration required: FUN_001566a8. */
@@ -38,7 +38,7 @@ unsigned int FUN_0013cae4(int param_1,unsigned int param_2)
     FUN_001566a8(param_1,param_2,temp_v1,temp_v0,1);
   }
   else {
-    temp_v2 = FUN_0014aa78();
+    temp_v2 = btlGetMainState();
     if ((temp_v2 != 0) && (FUN_001568f8(temp_v2,(int)*(short *)(temp_v2 + 0x2356)), temp_v2 != 0)) {
       FUN_0015f490(*(unsigned short *)(temp_v2 + 2),param_2,1,0);
     }

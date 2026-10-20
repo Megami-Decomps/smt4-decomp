@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001398c0(unsigned int *, int, int, unsigned int);
+int nnResultCheckReport00128d98(unsigned int *, int, int, unsigned int);
 int FUN_001398dc(void);
 int FUN_001398f8(unsigned char **);
 int FUN_0013a5b0(unsigned int *, int *);
@@ -53,7 +53,7 @@ typedef struct {
 extern unsigned char DAT_00420b20; /* 0x420b20 */
 extern unsigned char DAT_00471b5c; /* 0x471b5c */
 
-/* Supplied declaration required: FUN_001398c0. */
+/* Supplied declaration required: nnResultCheckReport00128d98. */
 /* Supplied declaration required: FUN_001398dc. */
 /* Supplied declaration required: FUN_001398f8. */
 /* Supplied declaration required: FUN_0013a5b0. */
@@ -122,7 +122,7 @@ void FUN_00128174(void)
     FUN_001398dc();
     temp_v22 = 0;
     temp_v23 = puVar1;
-    FUN_001398c0(&temp_v16,0x18,temp_v19,uStack_34);
+    nnResultCheckReport00128d98(&temp_v16,0x18,temp_v19,uStack_34);
     temp_v1 = temp_v16 & 0xffff;
     temp_v2 = 0;
     temp_v3 = 0xb;

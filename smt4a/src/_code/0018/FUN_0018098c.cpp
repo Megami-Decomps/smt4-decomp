@@ -42,7 +42,7 @@ typedef struct {
     unsigned int sp1A8; /* 0x1a8: local_1a8 */
 } param_1_stack;
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern signed char DAT_005b3d54; /* 0x5b3d54 */
 extern int DAT_005b3d64; /* 0x5b3d64 */
 extern romwright_code *DAT_005b3d74; /* 0x5b3d74 */
@@ -147,7 +147,7 @@ void FUN_0018098c(int *param_1)
   temp_v33 = 0;
   piStack_30 = param_1;
   if (DAT_005b3d54 != '\0') {
-    FUN_001879d0(DAT_0059dbb4);
+    FUN_001879d0(g_renderCtx);
     in_s0 = in_s2 + in_s0;
   }
   temp_v24 = (unsigned long long)(unsigned int)in_s0;
@@ -396,7 +396,7 @@ LAB_00180bc0:
         temp_v7 = *(unsigned int *)
                  (*(int *)(param_1[5] + 0xc) + *(int *)(*param_1 + temp_v9 * 0x20 + 0x1c) * 4);
         if (temp_v28 != 0) {
-          FUN_0019f764(DAT_0059dbb4,temp_v7,temp_v0);
+          FUN_0019f764(g_renderCtx,temp_v7,temp_v0);
           if (temp_v28 == 2) {
             temp_v25 = temp_v25 & 0xffffffff00000000;
             FUN_0019aee4(piVar10,temp_v6,temp_v16,temp_v16,temp_v16,temp_v16);
@@ -411,7 +411,7 @@ LAB_00180bc0:
           temp_v23 = (unsigned long long)(unsigned int)temp_v14 << 0x20;
         }
         else {
-          FUN_0019f764(DAT_0059dbb4,temp_v7,temp_v0);
+          FUN_0019f764(g_renderCtx,temp_v7,temp_v0);
           FUN_0019aee4(piVar10,temp_v6,temp_v30,temp_v30,temp_v30,temp_v30);
         }
         temp_v22 = (unsigned long long)(unsigned int)((float)param_1[6] + temp_v21 + temp_v19);
@@ -447,7 +447,7 @@ LAB_00180f28:
         VectorSignedToFloat((int)*(char *)(temp_v8 + 6),(unsigned char)(temp_v13 >> 0x16) & 3);
         VectorUnsignedToFloat((unsigned int)*(unsigned char *)(temp_v8 + 5),(unsigned char)(temp_v13 >> 0x16) & 3);
         VectorUnsignedToFloat((unsigned int)*(unsigned char *)(temp_v8 + 7),(unsigned char)(temp_v13 >> 0x16) & 3);
-        FUN_0019f764(DAT_0059dbb4,
+        FUN_0019f764(g_renderCtx,
                      *(unsigned int *)
                       (*(int *)(param_1[0x29] + 0xc) +
                       *(int *)(*param_1 + aiStack_138[temp_v6] * 0x20 + 0x1c) * 4),

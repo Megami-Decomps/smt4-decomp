@@ -10,8 +10,8 @@ int FUN_00352bc4(void);
 int FUN_00384830(void);
 
 extern int DAT_00581038; /* 0x581038 */
-extern int DAT_00581288; /* 0x581288 */
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern int g_lmapScene; /* 0x581288 */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002b5cd4. */
@@ -46,15 +46,15 @@ unsigned int FUN_00325340(void)
         else {
           temp_v0 = 0;
         }
-        temp_v5 = *(float *)(DAT_00581288 + 0x1c);
+        temp_v5 = *(float *)(g_lmapScene + 0x1c);
         FUN_002b5cb4();
-        temp_v6 = (*(float *)((unsigned char *)&DAT_005f15fc + 0x3dc));
+        temp_v6 = (*(float *)((unsigned char *)&g_gameState + 0x3dc));
         FUN_002b5cb4();
         if (temp_v6 < temp_v5) {
           temp_v5 = temp_v6;
         }
         if ((int)temp_v5 < 0x43960000) {
-          temp_v1 = *(int *)(DAT_00581288 + 0x1c);
+          temp_v1 = *(int *)(g_lmapScene + 0x1c);
           FUN_00384830();
           if (temp_v1 < 0x428c0000) {
             if (!temp_v0) {

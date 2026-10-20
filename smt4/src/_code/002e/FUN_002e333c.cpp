@@ -3,12 +3,12 @@
 extern "C" {
 
 int FUN_00152bec(void);
-int FUN_002a775c(int);
+int asdMdlManagerDestroy(int);
 
 extern int DAT_0043dd68; /* 0x43dd68 */
 
 /* Supplied declaration required: FUN_00152bec. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 
 
 void FUN_002e333c(void)
@@ -20,7 +20,7 @@ void FUN_002e333c(void)
   piVar1 = (int *)(DAT_0043dd68 + 0x95cc);
   if (*piVar1 != 0) {
     FUN_00152bec();
-    FUN_002a775c(*piVar1);
+    asdMdlManagerDestroy(*piVar1);
     *piVar1 = 0;
   }
   return;

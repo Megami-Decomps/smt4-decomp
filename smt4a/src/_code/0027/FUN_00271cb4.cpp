@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001800b8(int);
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_001800b8. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00271cb4(int param_1)
@@ -32,9 +32,9 @@ void FUN_00271cb4(int param_1)
     if (*piVar2 != 4) {
       FUN_001800b8(piVar2[2]);
     }
-    FUN_0019a5a0(piVar2);
+    asdMemFree(piVar2);
   }
-  FUN_0019a5a0(param_1);
+  asdMemFree(param_1);
   return;
 }
 

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0023e400(float *, float *, float *);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
-int aeabi_idivmod(undefined4);
+int __aeabi_idivmod(undefined4);
 
 typedef struct fn_00347594_arg0 fn_00347594_arg0;
 struct fn_00347594_arg0 {
@@ -62,7 +62,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0023e400. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 /* WARNING: Removing unreachable block (ram,0x0034781c) */
@@ -114,7 +114,7 @@ void FUN_00347594(fn_00347594_arg0 *param_1)
        *(float *)((int)param_1->field_0x4 + 0x4c) + *(float *)((int)param_1->field_0x60 + 0x24);
   pvVar3 = param_1->field_0x60;
   if (*(int *)((int)pvVar3 + 0x30) != 0) {
-    aeabi_idivmod(param_1->field_0x14[1]);
+    __aeabi_idivmod(param_1->field_0x14[1]);
     if (temp_v2 == 0) {
       temp_v5 = param_1->field_0x58 + *(float *)((int)pvVar3 + 0x28);
       param_1->field_0x58 = temp_v5;

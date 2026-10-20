@@ -27,7 +27,7 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } void_stack;
 
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f199f; /* 0x5f199f */
 
 /* Supplied declaration required: FUN_001bbf0c. */
@@ -61,11 +61,11 @@ void FUN_003136e4(void)
   FUN_001bbf0c();
   FUN_0027376c(0);
   if (DAT_005f199f != '\0') {
-    puVar1 = (unsigned int *)&DAT_005f15fc;
-    if (DAT_005f15fc == 0x26) {
-      puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_005f15fc + 0x4));
+    puVar1 = (unsigned int *)&g_gameState;
+    if (g_gameState == 0x26) {
+      puVar1 = (*(unsigned int * *)((unsigned char *)&g_gameState + 0x4));
     }
-    if (DAT_005f15fc == 0x26 && puVar1 == (unsigned int *)0x3) {
+    if (g_gameState == 0x26 && puVar1 == (unsigned int *)0x3) {
       temp_v0 = 0x3f800000;
       temp_v9 = 0x3e95b0ca;
       temp_v4 = 0;

@@ -19,7 +19,7 @@ extern int FUN_003b92b4(...); /* 0x3b92b4 */
 extern int FUN_003b95a4(...); /* 0x3b95a4 */
 extern int FUN_003b992c(...); /* 0x3b992c */
 extern int FUN_003b9a84(...); /* 0x3b9a84 */
-extern int FUN_003b9b48(...); /* 0x3b9b48 */
+extern int aocBootStep(...); /* 0x3b9b48 */
 extern int FUN_003b9fd8(...); /* 0x3b9fd8 */
 extern int FUN_003ba1d8(...); /* 0x3ba1d8 */
 extern int FUN_003ba2bc(...); /* 0x3ba2bc */
@@ -77,7 +77,7 @@ void FUN_003bb0ac(int param_1)
   *(unsigned int *)(param_1 + 0xe24) = 0;
   *(romwright_code **)(param_1 + 0xe28) = FUN_003ba1d8;
   *(unsigned int *)(param_1 + 0xe2c) = 0;
-  *(romwright_code **)(param_1 + 0xe30) = FUN_003b9b48;
+  *(romwright_code **)(param_1 + 0xe30) = aocBootStep;
   *(unsigned int *)(param_1 + 0xe34) = 0;
   *(romwright_code **)(param_1 + 0xe38) = FUN_003ba38c;
   *(unsigned int *)(param_1 + 0xe3c) = 0;

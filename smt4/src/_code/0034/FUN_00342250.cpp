@@ -8,7 +8,7 @@ int FUN_0023d078(int, int);
 int FUN_0023d158(int, unsigned int);
 int FUN_0023d20c(unsigned char [48], unsigned char [48], float *);
 int FUN_0023d274(int, int);
-int FUN_002af39c(unsigned int);
+int asdModelAdvanceCommandCursor(unsigned int);
 int FUN_002bc7f4(int, int *);
 int FUN_00349d88(int, int, int, unsigned char [48]);
 int FUN_0034dbb4(void);
@@ -69,7 +69,7 @@ extern int FUN_0023d0d4(int, unsigned int);
 extern unsigned int FUN_0023d1ec(int, unsigned int);
 /* Supplied declaration required: FUN_0023d20c. */
 /* Supplied declaration required: FUN_0023d274. */
-/* Supplied declaration required: FUN_002af39c. */
+/* Supplied declaration required: asdModelAdvanceCommandCursor. */
 /* Supplied declaration required: FUN_002bc7f4. */
 /* Supplied declaration required: FUN_00349d88. */
 /* Supplied declaration required: FUN_0034dbb4. */
@@ -244,7 +244,7 @@ void FUN_00342250(int param_1,unsigned int param_2)
     } while (temp_v6 < temp_v1);
   }
   temp_v22 = FUN_00356e90(temp_v22);
-  FUN_002af39c((temp_v22 - temp_v0) & 0xfffffffc);
+  asdModelAdvanceCommandCursor((temp_v22 - temp_v0) & 0xfffffffc);
   nw_gfx_RenderContext_ResetState_364D68(temp_v43,0x44,0);
   return;
 }

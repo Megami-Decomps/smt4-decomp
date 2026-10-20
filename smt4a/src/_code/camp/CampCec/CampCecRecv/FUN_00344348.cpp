@@ -4,22 +4,22 @@
 
 extern "C" {
 
-int FUN_0014e38c(unsigned char *, int, int, int, unsigned char *, int, int);
-int FUN_0015155c(...);
-int FUN_0016007c(...);
-int FUN_00163060(int, int, int, int, int);
-int FUN_00167ab4(...);
-int FUN_001681cc(...);
+int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
+int taskCreateDraw(...);
+int asdOperatorNew(...);
+int asdMemoryAllocTracked(int, int, int, int, int);
+int memAlloc(...);
+int sysPlaySe(...);
 int FUN_0016dfc4(void);
 int FUN_002804b0(...);
-int FUN_002c6fdc(void);
+int runWinOpen(void);
 int FUN_002c76d8(...);
 int FUN_002e3140(void);
-int FUN_002e6354(void);
+int sysMemClear(void);
 int FUN_002fb0d4(...);
 int FUN_0031cf00(void);
-int FUN_0036c700(void);
-int FUN_003d8ecc(void);
+int campCecDrawListCreate(void);
+int runWinOpenState(void);
 int FUN_004310c0(void);
 int nn_cfg_CTR_IsRestrictP2pCec(void);
 
@@ -57,26 +57,26 @@ extern int FUN_003a611c(...); /* 0x3a611c */
 extern unsigned char LAB_00514a64; /* 0x514a64 */
 extern unsigned char LAB_00514b14; /* 0x514b14 */
 extern unsigned char LAB_00514b84; /* 0x514b84 */
-extern unsigned int *DAT_0057f128; /* 0x57f128 */
+extern unsigned int *g_campCecRecv; /* 0x57f128 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_0016007c. */
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_00167ab4. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0016dfc4. */
 extern unsigned int FUN_002684ac(unsigned int);
 /* Supplied declaration required: FUN_002804b0. */
 extern unsigned int FUN_002a2cf0(void);
-/* Supplied declaration required: FUN_002c6fdc. */
+/* Supplied declaration required: runWinOpen. */
 /* Supplied declaration required: FUN_002c76d8. */
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002fb0d4. */
 /* Supplied declaration required: FUN_0031cf00. */
-/* Supplied declaration required: FUN_0036c700. */
-/* Supplied declaration required: FUN_003d8ecc. */
+/* Supplied declaration required: campCecDrawListCreate. */
+/* Supplied declaration required: runWinOpenState. */
 /* Supplied declaration required: FUN_004310c0. */
 extern int FUN_004bd340(unsigned char *, unsigned int);
 /* Supplied declaration required: nn_cfg_CTR_IsRestrictP2pCec. */
@@ -100,18 +100,18 @@ void FUN_00344348(unsigned char param_1)
   unsigned char *temp_v7;
   unsigned int *temp_v8;
   
-  if (DAT_0057f128 == (unsigned int *)0x0) {
+  if (g_campCecRecv == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x808,1);
-    DAT_0057f128 = puVar1;
+    asdMemoryAllocTracked(0x100,0x100,0,0x808,1);
+    g_campCecRecv = puVar1;
   }
-  puVar1 = DAT_0057f128;
-  FUN_002e6354();
+  puVar1 = g_campCecRecv;
+  sysMemClear();
   puVar2 = &LAB_003446dc;
-  FUN_0014e38c(&LAB_003446dc,3,0,0,&LAB_0025d5c4,0,0);
+  asdProcessCreateSimple(&LAB_003446dc,3,0,0,&LAB_0025d5c4,0,0);
   *puVar1 = (unsigned int)puVar2;
-  FUN_0015155c(&LAB_003446f4,0x86,0,0,&LAB_0025d578,0,0,puVar2);
-  FUN_0015155c(&LAB_00344708,0xe2,0,0,&LAB_0025d578,0,0,*puVar1);
+  taskCreateDraw(&LAB_003446f4,0x86,0,0,&LAB_0025d578,0,0,puVar2);
+  taskCreateDraw(&LAB_00344708,0xe2,0,0,&LAB_0025d578,0,0,*puVar1);
   *(unsigned char *)((int)puVar1 + 0x7d5) = param_1;
   *(unsigned char *)(puVar1 + 0xfa) = 0;
   puVar1[0xea] = 0xffffffff;
@@ -173,21 +173,21 @@ void FUN_00344348(unsigned char param_1)
     puVar1[0xeb] = 8;
   }
   else {
-    FUN_001681cc(3);
-    FUN_001681cc(0xbb);
-    FUN_002c6fdc();
-    FUN_003d8ecc();
+    sysPlaySe(3);
+    sysPlaySe(0xbb);
+    runWinOpen();
+    runWinOpenState();
     FUN_002c76d8(2);
     temp_v0 = FUN_002684ac(2);
-    FUN_0036c700();
+    campCecDrawListCreate();
     puVar1[0x1f6] = temp_v0;
     *(unsigned char *)(puVar1 + 0x1fc) = 0;
     puVar1[0x1fd] = 0;
     temp_v0 = 0x100;
-    FUN_00167ab4(0x100,0x100,0,0x1000,0x1000,1);
+    memAlloc(0x100,0x100,0,0x1000,0x1000,1);
     puVar1[0x201] = temp_v0;
     puVar7 = (unsigned int *)0x18;
-    FUN_0016007c(0x18,puVar3);
+    asdOperatorNew(0x18,puVar3);
     if (puVar7 != (unsigned int *)0x0) {
       *puVar7 = 0;
       puVar7[1] = 0;

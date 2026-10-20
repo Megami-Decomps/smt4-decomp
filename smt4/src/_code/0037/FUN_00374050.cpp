@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002ad314(float *, float [9]);
-int FUN_002bfe28(float *, float *);
+int mtx44Copy(float *, float *);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -32,7 +32,7 @@ extern float DAT_004efdd4; /* 0x4efdd4 */
 extern float DAT_004efdd8; /* 0x4efdd8 */
 
 /* Supplied declaration required: FUN_002ad314. */
-/* Supplied declaration required: FUN_002bfe28. */
+/* Supplied declaration required: mtx44Copy. */
 extern int FUN_002bfefc(unsigned int *);
 
 
@@ -75,7 +75,7 @@ float * FUN_00374050(float *param_1,int param_2)
           DAT_004efdd4 = temp_v1;
           DAT_004efdd8 = temp_v2;
         }
-        FUN_002bfe28(param_1,&DAT_004efd9c);
+        mtx44Copy(param_1,&DAT_004efd9c);
       }
       else {
         FUN_002ad314(&temp_v4,temp_v5);

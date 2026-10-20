@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014a930(...);
-int FUN_0014e38c(...);
+int asdProcessCreateSimple(...);
 int FUN_0015f378(...);
 int FUN_002e3140(...);
 int FUN_002f5020(...);
@@ -21,7 +21,7 @@ extern int FUN_0015f0f4(...); /* 0x15f0f4 */
 extern int FUN_001a6c40(...); /* 0x1a6c40 */
 
 /* Supplied declaration required: FUN_0014a930. */
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_0015f378. */
 extern int FUN_0015f434(int);
 /* Supplied declaration required: FUN_002e3140. */
@@ -50,7 +50,7 @@ int FUN_001481e4(int param_1)
   uStack_1c = 0;
   pcVar2 = "Aoc fileload Calc";
   temp_v2 = temp_v0 - 0x4510;
-  FUN_0014e38c("Aoc fileload Calc",4,0);
+  asdProcessCreateSimple("Aoc fileload Calc",4,0);
   *(char **)(temp_v0 + 0x14) = pcVar2;
   temp_v1 = (romwright_code *)0x0;
   if (*(int *)(temp_v0 + 0x10) != 0) {

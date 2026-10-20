@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_0018152c(...);
 int FUN_001835b4(...);
@@ -12,7 +12,7 @@ int FUN_00183788(...);
 int FUN_00183bb0(void);
 int FUN_00184e64(...);
 int FUN_004bda84(...);
-int aeabi_idivmod(...);
+int __aeabi_idivmod(...);
 
 /* stack frame of param_5: 11 slot(s), 44 byte(s) */
 typedef struct {
@@ -31,7 +31,7 @@ typedef struct {
 
 extern unsigned char LAB_004be1bc; /* 0x4be1bc */
 
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -43,7 +43,7 @@ extern unsigned int FUN_0019e130(int);
 extern unsigned int FUN_002b4dcc(int);
 extern int FUN_00319d2c(int, unsigned int);
 /* Supplied declaration required: FUN_004bda84. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_004bde34(int param_1,int param_2,int param_3,int param_4,int param_5)
@@ -65,9 +65,9 @@ void FUN_004bde34(int param_1,int param_2,int param_3,int param_4,int param_5)
   temp_v8 = (int)*(short *)(param_2 + 0x2a);
   temp_v4 = FUN_002b4dcc(param_2);
   temp_v1 = *(unsigned short *)(param_2 + 0x60);
-  FUN_001677c0();
+  efctSetSpeed();
   if ((temp_v1 & 2) != 0) {
-    FUN_001677c0();
+    efctSetSpeed();
   }
   FUN_001835b4(2,0x11,2000,param_4,param_5,0x65);
   FUN_001835b4(2,0x11,2,param_4,param_5,0x65);
@@ -77,7 +77,7 @@ void FUN_004bde34(int param_1,int param_2,int param_3,int param_4,int param_5)
   temp_v5 = FUN_001834a4(0x11,0x9d);
   FUN_00180310(0,*(short *)(temp_v5 + 8) + param_4,*(short *)(temp_v5 + 10) + param_5,1,3,0x79,
                &LAB_004be1bc,temp_v3);
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_001835b4(2,0x11,0x9e,param_4,param_5,0x6f);
   FUN_001835b4(2,0x11,0x77,param_4,param_5,0x79);
   FUN_00183788(temp_v8,temp_v4,0,0,0x11,0x9f,0xa2,0xa0,0xa1,param_4,param_5,0x74,0);
@@ -88,7 +88,7 @@ void FUN_004bde34(int param_1,int param_2,int param_3,int param_4,int param_5)
   if (temp_v6 != 0) {
     FUN_00184e64(0xdc0f14ff);
   }
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_00180310(10,temp_v2 + param_4,temp_v5,1,4,0x79,&LAB_004be1bc,temp_v8);
   FUN_00183bb0();
   temp_v8 = FUN_001834a4(0x11,0xac);
@@ -108,7 +108,7 @@ void FUN_004bde34(int param_1,int param_2,int param_3,int param_4,int param_5)
     temp_v3 = temp_v3 + 1;
   } while ((int)temp_v3 < 0xe);
   FUN_00184e64(temp_v4);
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_0018152c((int)temp_v0,temp_v5,temp_v8,0x9c,0);
   FUN_00183bb0();
   temp_v8 = 0;
@@ -126,13 +126,13 @@ void FUN_004bde34(int param_1,int param_2,int param_3,int param_4,int param_5)
     temp_v8 = *(int *)(temp_v5 + 0x348) + 1;
     *(int *)(temp_v5 + 0x348) = temp_v8;
     if (temp_v8 >= 0x18) {
-      aeabi_idivmod(*(int *)(temp_v5 + 0x378) + 1);
+      __aeabi_idivmod(*(int *)(temp_v5 + 0x378) + 1);
       *(unsigned int *)(temp_v5 + 0x348) = 0;
       *(unsigned int *)(temp_v5 + 0x378) = temp_v7;
     }
   }
   FUN_004bda84(param_1,param_2,param_3,param_4,param_5);
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

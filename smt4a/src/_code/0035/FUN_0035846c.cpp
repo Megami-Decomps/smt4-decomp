@@ -10,8 +10,8 @@ typedef struct {
 } void_stack;
 
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_00581274; /* 0x581274 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_mapMain; /* 0x581274 */
+extern int g_lmapScene; /* 0x581288 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern signed char DAT_005f18c4; /* 0x5f18c4 */
 extern unsigned char DAT_005f1b70; /* 0x5f1b70 */
@@ -37,20 +37,20 @@ void FUN_0035846c(void)
 {
   if (DAT_005f18c4 == '\0') {
     DAT_005f1b70 = 1;
-    DAT_005f1b74 = *(unsigned int *)(DAT_00581274 + 0x30);
-    DAT_005f1b78 = *(unsigned int *)(DAT_00581274 + 0x34);
+    DAT_005f1b74 = *(unsigned int *)(g_mapMain + 0x30);
+    DAT_005f1b78 = *(unsigned int *)(g_mapMain + 0x34);
     DAT_005f1b7c = DAT_005f1604;
-    DAT_005f1b80 = *(unsigned int *)(DAT_00581288 + 0x1c);
-    DAT_005f1b84 = *(unsigned int *)(DAT_00581288 + 0x20);
-    DAT_005f1b88 = *(unsigned int *)(DAT_00581288 + 0x24);
-    DAT_005f1b8c = *(unsigned int *)(DAT_00581288 + 0x4c);
+    DAT_005f1b80 = *(unsigned int *)(g_lmapScene + 0x1c);
+    DAT_005f1b84 = *(unsigned int *)(g_lmapScene + 0x20);
+    DAT_005f1b88 = *(unsigned int *)(g_lmapScene + 0x24);
+    DAT_005f1b8c = *(unsigned int *)(g_lmapScene + 0x4c);
     DAT_005f1b90 = *(unsigned int *)(DAT_005806a4 + 0x18);
-    DAT_005f1b94 = *(unsigned int *)(DAT_00581274 + 0x30);
-    DAT_005f1b98 = *(unsigned int *)(DAT_00581274 + 0x34);
-    DAT_005f1b9c = *(unsigned int *)(DAT_00581288 + 0x1c);
-    DAT_005f1ba0 = *(unsigned int *)(DAT_00581288 + 0x20);
-    DAT_005f1ba4 = *(unsigned int *)(DAT_00581288 + 0x24);
-    DAT_005f1ba8 = *(unsigned int *)(DAT_00581288 + 0x4c);
+    DAT_005f1b94 = *(unsigned int *)(g_mapMain + 0x30);
+    DAT_005f1b98 = *(unsigned int *)(g_mapMain + 0x34);
+    DAT_005f1b9c = *(unsigned int *)(g_lmapScene + 0x1c);
+    DAT_005f1ba0 = *(unsigned int *)(g_lmapScene + 0x20);
+    DAT_005f1ba4 = *(unsigned int *)(g_lmapScene + 0x24);
+    DAT_005f1ba8 = *(unsigned int *)(g_lmapScene + 0x4c);
     DAT_005f1bac = *(unsigned int *)(DAT_005806a4 + 0x18);
     return;
   }

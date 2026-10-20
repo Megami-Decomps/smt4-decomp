@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0024ea50(...);
-int FUN_0028dcb0(...);
+int scrSetResult(...);
 int FUN_002b06c4(void);
 int FUN_002b9024(...);
 int FUN_002bd06c(int);
 int FUN_002c09f4(unsigned int);
-int FUN_002c415c(int);
-int FUN_002c498c(int, int, int, int, int);
+int asdMemFree(int);
+int asdMemAlloc(int, int, int, int, int);
 int SBORROW4(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -21,16 +21,16 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_0024ea50. */
-/* Supplied declaration required: FUN_0028dcb0. */
-extern unsigned int FUN_00296cc8(unsigned int);
+/* Supplied declaration required: scrSetResult. */
+extern unsigned int scrGetArg(unsigned int);
 extern int FUN_00296d6c(int, unsigned int);
 /* Supplied declaration required: FUN_002b06c4. */
 extern int FUN_002b63ac(void);
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002c09f4. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c498c. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMemAlloc. */
 
 
 unsigned int btlTalkCommand_SelectTalkTarget(void)
@@ -49,7 +49,7 @@ unsigned int btlTalkCommand_SelectTalkTarget(void)
   unsigned int temp_v8;
   unsigned char temp_v9;
   
-  temp_v1 = FUN_00296cc8(0) & 0xffff;
+  temp_v1 = scrGetArg(0) & 0xffff;
   FUN_002b06c4();
   temp_v6 = (unsigned int)*(unsigned short *)(temp_v1 + 0x82);
   temp_v8 = temp_v6;
@@ -59,7 +59,7 @@ unsigned int btlTalkCommand_SelectTalkTarget(void)
       (temp_v2 = FUN_002b63ac(), *(unsigned char *)(temp_v2 + 0x76) < *(unsigned char *)(temp_v8 + 2))) ||
      (temp_v2 = FUN_0024ea50(temp_v6), temp_v2 != 0)) {
     temp_v2 = 0x100;
-    FUN_002c498c(0x100,0x100,0,0x962,1);
+    asdMemAlloc(0x100,0x100,0,0x962,1);
     temp_v6 = 0;
     temp_v3 = FUN_002b63ac();
     temp_v8 = (unsigned int)*(unsigned char *)(temp_v1 + 2);
@@ -74,7 +74,7 @@ unsigned int btlTalkCommand_SelectTalkTarget(void)
     temp_v7 = (int)(short)((short)temp_v8 - temp_v0);
     temp_v3 = FUN_00296d6c(temp_v7,temp_v8);
     if (temp_v3 < 1) {
-      FUN_0028dcb0(0xffffffff);
+      scrSetResult(0xffffffff);
     }
     else {
       if (temp_v7 < 1) {
@@ -105,12 +105,12 @@ unsigned int btlTalkCommand_SelectTalkTarget(void)
       if (temp_v6 != 0) {
         FUN_002c09f4((temp_v6 - 1) & 0xffff);
       }
-      FUN_0028dcb0();
+      scrSetResult();
     }
-    FUN_002c415c(temp_v2);
+    asdMemFree(temp_v2);
   }
   else {
-    FUN_0028dcb0(temp_v6);
+    scrSetResult(temp_v6);
   }
   return 1;
 }

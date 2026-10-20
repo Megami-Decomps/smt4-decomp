@@ -5,15 +5,15 @@
 extern "C" {
 
 int FUN_00292960(char *, int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_002a8764(...);
 
 extern int FUN_0023dcb8(void);
 extern int FUN_00292914(int);
 /* Supplied declaration required: FUN_00292960. */
-extern int FUN_00292f28(void);
+extern int padIsButtonDown(void);
 extern int FUN_00293988(void);
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 extern int FUN_0029e908(int);
 extern int FUN_002a8740(int);
 /* Supplied declaration required: FUN_002a8764. */
@@ -49,14 +49,14 @@ unsigned int FUN_00297ca4(int param_1,int param_2)
     }
     if (((((pcVar2 != (char *)0x0) && (pcVar2[1] == '\x01')) &&
          ((*(short *)(pcVar2 + 0x5c) == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 != 0)))) &&
-        ((*(short *)(pcVar2 + 0x5e) == 0 || (temp_v1 = FUN_00292f28(), temp_v1 != 0)))) &&
+        ((*(short *)(pcVar2 + 0x5e) == 0 || (temp_v1 = padIsButtonDown(), temp_v1 != 0)))) &&
        ((pcVar2[0x5b] == '\0' ||
-        (temp_v1 = FUN_002939f4(), (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) == 0)))) {
+        (temp_v1 = btlGetMainState(), (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) == 0)))) {
       if (*pcVar2 != '\x05') {
         if (*pcVar2 == '\x02') {
-          FUN_002939f4();
+          btlGetMainState();
           temp_v1 = FUN_00293988();
-          if ((temp_v1 == 0) || (temp_v1 = FUN_002939f4(), (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) != 0))
+          if ((temp_v1 == 0) || (temp_v1 = btlGetMainState(), (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) != 0))
           goto LAB_00297e6c;
         }
         if (*pcVar2 == '\x03') {

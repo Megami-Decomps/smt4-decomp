@@ -8,7 +8,7 @@ int FUN_001008a2(...);
 int FUN_001ad150(void);
 int FUN_001b3008(unsigned int, unsigned char [132], unsigned char [128], int, unsigned int, unsigned char *, int *, int, int);
 int FUN_002e342c(...);
-int FUN_002e6354(unsigned char [128], int);
+int sysMemClear(unsigned char [128], int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ typedef struct {
 extern unsigned char LAB_001a6720; /* 0x1a6720 */
 extern unsigned char LAB_001a6728; /* 0x1a6728 */
 extern unsigned char LAB_001b32a4; /* 0x1b32a4 */
-extern unsigned int DAT_0057027c; /* 0x57027c */
+extern unsigned int g_aocDisplay; /* 0x57027c */
 
 /* Supplied declaration required: FUN_001008a2. */
 extern int *FUN_001861c4(unsigned int, unsigned int);
@@ -27,9 +27,9 @@ extern int *FUN_001861c4(unsigned int, unsigned int);
 extern int FUN_001b2bd8(unsigned int, int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_001b3008. */
 extern int FUN_001b3214(unsigned int);
-extern int FUN_002e3390(unsigned int);
+extern int wstrlen(unsigned int);
 /* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 int * FUN_001a6568(unsigned int param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -50,7 +50,7 @@ int * FUN_001a6568(unsigned int param_1,unsigned int param_2,unsigned int param_
   if (temp_v0 == -1) {
     return (int *)0x0;
   }
-  FUN_002e6354(temp_v5,0x80);
+  sysMemClear(temp_v5,0x80);
   temp_v0 = FUN_001b2bd8(param_1,temp_v0,param_3,temp_v5);
   if (temp_v0 == 0) {
     return (int *)0x0;
@@ -77,7 +77,7 @@ int * FUN_001a6568(unsigned int param_1,unsigned int param_2,unsigned int param_
   else {
     FUN_001008a2(temp_v4,&LAB_001a6728);
   }
-  temp_v3 = FUN_002e3390(*(unsigned int *)(temp_v3 + 8));
+  temp_v3 = wstrlen(*(unsigned int *)(temp_v3 + 8));
   if (temp_v3 == 0) {
     piVar2[2] = 0;
     return piVar2;
@@ -108,7 +108,7 @@ int * FUN_001a6568(unsigned int param_1,unsigned int param_2,unsigned int param_
       temp_v2 = temp_v2 | 2;
     }
   }
-  FUN_001b3008(DAT_0057027c,temp_v6,temp_v4,0,temp_v2,&LAB_001b32a4,piVar2,0x80,temp_v0);
+  FUN_001b3008(g_aocDisplay,temp_v6,temp_v4,0,temp_v2,&LAB_001b32a4,piVar2,0x80,temp_v0);
   return piVar2;
 }
 

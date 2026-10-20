@@ -43,7 +43,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00573c98; /* 0x573c98 */
 extern unsigned int DAT_00573c9c; /* 0x573c9c */
 extern unsigned int DAT_00573ca0; /* 0x573ca0 */
@@ -51,7 +51,7 @@ extern unsigned int DAT_00573ca4; /* 0x573ca4 */
 extern unsigned int DAT_00573cb0; /* 0x573cb0 */
 extern unsigned int DAT_00573cb4; /* 0x573cb4 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_0017760c(unsigned int);
 /* Supplied declaration required: FUN_003ff22c. */
 /* Supplied declaration required: FUN_003ff524. */
@@ -60,7 +60,7 @@ extern int FUN_003ff888(void);
 extern int FUN_004c3a98(int, unsigned int);
 extern int FUN_004c6b8c(int, int);
 extern int FUN_004c86cc(unsigned int *, unsigned int);
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 /* WARNING: Removing unreachable block (ram,0x003ffdc8) */
@@ -187,7 +187,7 @@ unsigned int FUN_003ff998(unsigned int *param_1,fn_003ff998_arg1 *param_2)
       temp_v12 = temp_v3 & 0x7f;
       temp_v2 = param_2->field_0x20;
       if (param_2->field_0x86 == 6) {
-        temp_v4 = FUN_004ee568(DAT_0057113c);
+        temp_v4 = btlUnitGet(g_btlScriptUnit);
         temp_v5 = 0;
         if (temp_v4 != 0) {
           temp_v5 = *(int *)(temp_v4 + 0x20);
@@ -270,7 +270,7 @@ LAB_003ffb9c:
     }
   }
   if (((temp_v6 & 0x800000) != 0) &&
-     ((temp_v5 = FUN_0014aa78(),
+     ((temp_v5 = btlGetMainState(),
       (*(unsigned int *)(temp_v5 + 0x45a4) & DAT_00573cb4) != 0 ||
       (DAT_00573cb0 & *(unsigned int *)(temp_v5 + 0x45a0)) != 0 || ((*(unsigned int *)(temp_v5 + 0x10c) & 0x40000) == 0)
       ))) {
@@ -286,7 +286,7 @@ LAB_003ffb9c:
     temp_v8 = temp_v8 | 0x4000000;
   }
   if ((temp_v6 & 0x8000000) != 0) {
-    temp_v5 = FUN_0014aa78();
+    temp_v5 = btlGetMainState();
     temp_v2 = *(short *)(temp_v5 + 0x4c70);
     if (*(short *)(temp_v5 + 0x4c70) < *(short *)(temp_v5 + 0x4c72)) {
       temp_v2 = *(short *)(temp_v5 + 0x4c72);

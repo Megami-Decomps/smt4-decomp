@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0022ad84(...);
+int asdCecSetBoxArgs(...);
 int FUN_0022ad9c(...);
 
 extern unsigned char LAB_00112233; /* 0x112233 */
 extern unsigned int DAT_0043ddb8; /* 0x43ddb8 */
 
-/* Supplied declaration required: FUN_0022ad84. */
+/* Supplied declaration required: asdCecSetBoxArgs. */
 /* Supplied declaration required: FUN_0022ad9c. */
 extern unsigned int FUN_00357818(unsigned int);
 
@@ -24,19 +24,19 @@ unsigned char FUN_003bbcf4(void)
   unsigned char temp_v2;
   
   temp_v0 = FUN_00357818(0x910);
-  FUN_0022ad84(temp_v0,0xabababab);
+  asdCecSetBoxArgs(temp_v0,0xabababab);
   temp_v0 = FUN_00357818(0x910);
   temp_v1 = FUN_0022ad9c(temp_v0,0xabababab);
   temp_v2 = temp_v1 != 0;
   temp_v0 = FUN_00357818(0xbd3);
-  FUN_0022ad84(temp_v0,&LAB_00112233);
+  asdCecSetBoxArgs(temp_v0,&LAB_00112233);
   temp_v0 = FUN_00357818(0xbd3);
   temp_v1 = FUN_0022ad9c(temp_v0,&LAB_00112233);
   if (temp_v1 != 0) {
     temp_v2 = 2;
   }
   temp_v0 = FUN_00357818(0xe5c);
-  FUN_0022ad84(temp_v0,DAT_0043ddb8);
+  asdCecSetBoxArgs(temp_v0,DAT_0043ddb8);
   return temp_v2;
 }
 

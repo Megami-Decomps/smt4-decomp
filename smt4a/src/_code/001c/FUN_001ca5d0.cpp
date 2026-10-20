@@ -1,26 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ca5d0` (_code @ 0x1ca5d0, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned char DAT_0055b8d8; /* 0x55b8d8 */
+typedef struct Allocator Allocator;
+typedef struct AllocatorVtbl {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ void *unk04;
+    /* 0x08 */ void *(*alloc)(Allocator *self, int size, int align);
+} AllocatorVtbl;
+struct Allocator {
+    /* 0x00 */ AllocatorVtbl *vtbl;
+};
 
+typedef struct Node {
+    /* 0x00 */ void *vtbl;
+    /* 0x04 */ Allocator *allocator;
+    /* 0x08 */ u8 flag;
+    /* 0x0C */ u32 value;
+} Node;
 
-void FUN_001ca5d0(int *param_1,unsigned int param_2)
+extern u8 DAT_0055b8d8;
 
+/* Allocates a Node from `allocator` and initializes it with its owner and value; returns it (NULL if allocation failed). */
+Node *FUN_001ca5d0(Allocator *allocator, u32 value)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)(**(romwright_code **)(*param_1 + 8))(param_1,0x10,4);
-  if (puVar1 != (unsigned int *)0x0) {
-    puVar1[1] = (unsigned int)param_1;
-    *(unsigned char *)(puVar1 + 2) = 0;
-    *puVar1 = (unsigned int)&DAT_0055b8d8;
-    puVar1[3] = param_2;
-  }
-  return;
+    Node *node = (Node *)allocator->vtbl->alloc(allocator, sizeof(Node), 4);
+
+    if (node != NULL) {
+        node->allocator = allocator;
+        node->flag = 0;
+        node->vtbl = &DAT_0055b8d8;
+        node->value = value;
+    }
+    return node;
 }
 
 } /* extern "C" */

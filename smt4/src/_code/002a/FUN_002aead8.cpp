@@ -37,7 +37,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_5_stack;
 
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_002a4e18. */
 /* Supplied declaration required: FUN_002a5ed0. */
@@ -48,7 +48,7 @@ extern int FUN_002a60b4(unsigned int);
 /* Supplied declaration required: FUN_002ae898. */
 extern int FUN_002ae98c(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002aecd8. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 extern int FUN_002c1d5c(void);
 
 
@@ -77,7 +77,7 @@ void FUN_002aead8(fn_002aead8_arg0 *param_1,int param_2,int param_3,int param_4,
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   if (param_2 < 1) {
     param_2 = 1;
   }
@@ -97,7 +97,7 @@ void FUN_002aead8(fn_002aead8_arg0 *param_1,int param_2,int param_3,int param_4,
     if (*(char *)(temp_v0 + 0x7c) != '\0') {
       if (*(int *)(temp_v0 + 0x84) != -1) {
         FUN_002ae898(*(unsigned int *)(temp_v0 + 0x10));
-        FUN_002a60cc(DAT_00433158,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
+        FUN_002a60cc(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
         *(unsigned int *)(temp_v0 + 0x84) = 0xffffffff;
         *(unsigned int *)(temp_v0 + 0x80) = 0;
       }
@@ -117,7 +117,7 @@ void FUN_002aead8(fn_002aead8_arg0 *param_1,int param_2,int param_3,int param_4,
     if (((*(char *)(temp_v0 + 0x30) == '\0') || (*(float *)(temp_v0 + 0x28) == 0.0f)) &&
        (*(int *)(temp_v0 + 0xc) != 0)) {
       FUN_002ae898(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
-      FUN_002a60cc(DAT_00433158,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
+      FUN_002a60cc(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
       *(unsigned int *)(temp_v0 + 0xc) = 0;
     }
     temp_v1 = FUN_002c1d5c();
@@ -130,10 +130,10 @@ void FUN_002aead8(fn_002aead8_arg0 *param_1,int param_2,int param_3,int param_4,
       *(unsigned int *)(temp_v0 + 0x84) = *(unsigned int *)(temp_v0 + 0x14);
     }
     *(unsigned int *)(temp_v0 + 0x14) = temp_v3;
-    temp_v1 = FUN_002ae98c(DAT_00433158,*(unsigned int *)(temp_v0 + 0x10),temp_v3,1);
+    temp_v1 = FUN_002ae98c(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),temp_v3,1);
     if (temp_v1 != 0) {
-      temp_v2 = DAT_00433158;
-      FUN_002a5ee4(DAT_00433158,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14),0x10000)
+      temp_v2 = g_aocSystem;
+      FUN_002a5ee4(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14),0x10000)
       ;
     }
     else {

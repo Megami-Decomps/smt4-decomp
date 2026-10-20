@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00295660(...);
 int FUN_002be624(...);
-int FUN_002c4938(...);
+int memClear(...);
 
 int FUN_00233404(void);
 int FUN_00233410(unsigned int *);
@@ -43,7 +43,7 @@ extern unsigned char LAB_00390940; /* 0x390940 */
 extern unsigned char LAB_00390950; /* 0x390950 */
 extern unsigned char LAB_0039095c; /* 0x39095c */
 extern unsigned char LAB_0039096c; /* 0x39096c */
-extern unsigned int *DAT_00432fc8; /* 0x432fc8 */
+extern unsigned int *g_aocMain; /* 0x432fc8 */
 
 extern int FUN_0019e0c0(unsigned int);
 extern int FUN_002333a4(unsigned int *, unsigned int);
@@ -72,7 +72,7 @@ extern int FUN_002af600(int);
 /* Supplied declaration required: FUN_002b8244. */
 /* Supplied declaration required: FUN_002bc01c. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 extern int FUN_0039411c(int);
 /* Supplied declaration required: FUN_003c2d84. */
 /* Supplied declaration required: FUN_003c2e44. */
@@ -100,7 +100,7 @@ void FUN_003901bc(unsigned int *param_1)
   unsigned int *temp_v10;
   int temp_v11;
   
-  puVar1 = DAT_00432fc8;
+  puVar1 = g_aocMain;
   temp_v10 = param_1 + 0x70c;
   switch(param_1[2]) {
   case 0:
@@ -122,12 +122,12 @@ void FUN_003901bc(unsigned int *param_1)
       param_1[0x44a] = 0;
       param_1[1099] = 0;
       temp_v2 = FUN_0023360c(param_1 + 0x90);
-      puVar1 = DAT_00432fc8;
-      temp_v4 = FUN_002335f8(DAT_00432fc8,temp_v2);
+      puVar1 = g_aocMain;
+      temp_v4 = FUN_002335f8(g_aocMain,temp_v2);
       if ((temp_v4 != 0) && (temp_v2 = puVar1[0x19e] + temp_v2 * 0x9c8, temp_v2 != 0)) {
         if (*(char *)(temp_v2 + 0x9b3) != '\0') {
-          puVar1 = DAT_00432fc8;
-          FUN_0023478c(DAT_00432fc8,0xffffffff);
+          puVar1 = g_aocMain;
+          FUN_0023478c(g_aocMain,0xffffffff);
           temp_v7 = 3;
           temp_v9 = 0xc;
           temp_v8 = puVar1;
@@ -210,12 +210,12 @@ void FUN_003901bc(unsigned int *param_1)
     temp_v2 = FUN_0023360c(param_1 + 0x90);
     if (temp_v2 != temp_v11) {
       temp_v2 = FUN_0023360c(param_1 + 0x90);
-      puVar3 = DAT_00432fc8;
-      temp_v4 = FUN_002335f8(DAT_00432fc8,temp_v2);
+      puVar3 = g_aocMain;
+      temp_v4 = FUN_002335f8(g_aocMain,temp_v2);
       if ((temp_v4 != 0) && (temp_v2 = puVar3[0x19e] + temp_v2 * 0x9c8, temp_v2 != 0)) {
         if (*(char *)(temp_v2 + 0x9b3) != '\0') {
-          puVar3 = DAT_00432fc8;
-          FUN_0023478c(DAT_00432fc8,0xffffffff);
+          puVar3 = g_aocMain;
+          FUN_0023478c(g_aocMain,0xffffffff);
           temp_v7 = 3;
           temp_v9 = 0xc;
           temp_v8 = puVar3;
@@ -318,7 +318,7 @@ LAB_003906d4:
   case 6:
     temp_v2 = FUN_0023360c(param_1 + 0x90);
     temp_v3 = puVar1[0x19e];
-    FUN_002c4938(&temp_v7,0x80);
+    memClear(&temp_v7,0x80);
     FUN_002be624(&temp_v7,&LAB_0039096c,temp_v3 + temp_v2 * 0x9c8);
     FUN_00295660(0,&temp_v7);
     FUN_002b8244(1);

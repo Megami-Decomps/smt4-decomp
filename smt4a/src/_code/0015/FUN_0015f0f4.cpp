@@ -20,15 +20,15 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } void_stack;
 
-extern int DAT_00570260; /* 0x570260 */
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern int g_aocMain; /* 0x570260 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 #ifndef ROMWRIGHT_PIECE_3_1_DEFINED
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern unsigned long long FUN_00164a9c(void);
+extern unsigned long long jobGetWork(void);
 /* Supplied declaration required: FUN_001760cc. */
 extern int FUN_00176474(unsigned int);
 extern int FUN_001af210(int);
@@ -64,7 +64,7 @@ unsigned int FUN_0015f0f4(void)
   unsigned int uStack_24;
   unsigned int temp_v11 [2];
   
-  temp_v5 = FUN_00164a9c();
+  temp_v5 = jobGetWork();
   temp_v2 = (unsigned int)((unsigned long long)temp_v5 >> 0x20);
   puVar1 = (unsigned int *)temp_v5;
   temp_v0 = (unsigned int)(unsigned char)puVar1[0x1143];
@@ -73,10 +73,10 @@ unsigned int FUN_0015f0f4(void)
     temp_v0 = *puVar1;
     temp_v2 = puVar1[1];
   }
-  if (((temp_v4 && temp_v0 == temp_v2) && (temp_v1 = FUN_00176474(DAT_00570280), temp_v1 != 0)) &&
-     (temp_v1 = FUN_001af210(DAT_00570260 + 0x98), temp_v1 != 0)) {
-    *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xfffeffff;
-    FUN_001760cc(DAT_00570280);
+  if (((temp_v4 && temp_v0 == temp_v2) && (temp_v1 = FUN_00176474(g_aocSystem), temp_v1 != 0)) &&
+     (temp_v1 = FUN_001af210(g_aocMain + 0x98), temp_v1 != 0)) {
+    *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
+    FUN_001760cc(g_aocSystem);
     puVar4 = (unsigned int *)FUN_001b5acc((unsigned int *)&temp_v7);
     puVar4[2] = 0;
     puVar4[3] = 0;
@@ -96,7 +96,7 @@ unsigned int FUN_0015f0f4(void)
     uStack_24 = uStack_38;
     uStack_30 = temp_v7;
     uStack_2c = temp_v8;
-    FUN_001ba1c0(DAT_00570260,&temp_v10,0x65,0);
+    FUN_001ba1c0(g_aocMain,&temp_v10,0x65,0);
   }
   temp_v0 = puVar1[0x1144];
   if (temp_v0 != 0) {

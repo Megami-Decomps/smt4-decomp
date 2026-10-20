@@ -4,12 +4,12 @@
 
 extern "C" {
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 extern int FUN_0017607c(unsigned int, unsigned int);
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 
 
 int FUN_002c1ce4(unsigned int param_1,int param_2)
@@ -19,14 +19,14 @@ int FUN_002c1ce4(unsigned int param_1,int param_2)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_0017607c(DAT_00570280,param_1);
+  temp_v0 = FUN_0017607c(g_aocSystem,param_1);
   if (temp_v0 != 0) {
     temp_v0 = temp_v0 + 2;
   }
   else {
-    temp_v1 = FUN_00187180(1,0);
-    temp_v0 = FUN_00192798();
-    temp_v2 = FUN_00192748(temp_v1);
+    temp_v1 = dataTableGet(1,0);
+    temp_v0 = dataTableGetEntries();
+    temp_v2 = dataTableGetCount(temp_v1);
     if ((param_1 < temp_v2) && (temp_v0 = temp_v0 + param_1 * 0x30, param_2 != 0)) {
       temp_v0 = temp_v0 + 0x10;
     }

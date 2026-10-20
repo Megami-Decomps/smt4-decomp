@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c498c(unsigned int, int, int, unsigned int, unsigned int);
+int asdMemAlloc(unsigned int, int, int, unsigned int, unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002c498c. */
+/* Supplied declaration required: asdMemAlloc. */
 
 
 void FUN_002b73a8(unsigned int param_1,unsigned int param_2)
@@ -39,7 +39,7 @@ void FUN_002b73a8(unsigned int param_1,unsigned int param_2)
     temp_v0 = 0x100;
     temp_v1 = 1;
   }
-  FUN_002c498c(temp_v0,0x100,0,param_1,temp_v1);
+  asdMemAlloc(temp_v0,0x100,0,param_1,temp_v1);
   return;
 }
 

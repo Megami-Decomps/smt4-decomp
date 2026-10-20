@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_0017d184(int);
 int FUN_0017d1e4(int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_0019d4d8(int, int, int, unsigned int, int, int);
+int asdMemoryAllocAligned(int, int, int, unsigned int, int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ extern unsigned int FUN_0016d374(void);
 /* Supplied declaration required: FUN_0017d184. */
 /* Supplied declaration required: FUN_0017d1e4. */
 extern unsigned int FUN_0017daf8(unsigned int);
-/* Supplied declaration required: FUN_0019d4d8. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
 
 
 void FUN_00157d5c(int param_1,unsigned int param_2,unsigned int param_3)
@@ -37,11 +37,11 @@ void FUN_00157d5c(int param_1,unsigned int param_2,unsigned int param_3)
   do {
     temp_v0 = param_1 + temp_v3 * 0x4c;
     temp_v1 = 0x10000;
-    FUN_0019d4d8(0x10000,0x100,0,param_2,0x10,1);
+    asdMemoryAllocAligned(0x10000,0x100,0,param_2,0x10,1);
     *(unsigned int *)(temp_v0 + 0x48) = temp_v1;
     temp_v1 = FUN_0017daf8(param_3);
     temp_v2 = 0x10000;
-    FUN_0019d4d8(0x10000,0x100,0,temp_v1,0x10,1);
+    asdMemoryAllocAligned(0x10000,0x100,0,temp_v1,0x10,1);
     *(unsigned int *)(temp_v0 + 0x4c) = temp_v2;
     FUN_0017d1e4(temp_v0 + 4,param_2,*(unsigned int *)(temp_v0 + 0x48),param_3,temp_v2);
     FUN_0017d184(temp_v0 + 4);

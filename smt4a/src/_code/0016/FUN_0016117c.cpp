@@ -2,13 +2,13 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int, int);
+int sysMemClear(unsigned int, int);
 
 extern int DAT_005b40e0; /* 0x5b40e0 */
 extern int DAT_005b40e4; /* 0x5b40e4 */
 extern unsigned char DAT_0061a470; /* 0x61a470 */
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_0016117c(void)
@@ -24,7 +24,7 @@ void FUN_0016117c(void)
   if (*(int *)(temp_v0 + 4) == 0 && *(int *)(temp_v0 + 0x18) == 0) {
     return;
   }
-  FUN_002e6354(*(unsigned int *)(temp_v0 + 0x18),*(int *)(temp_v0 + 0x20) * 0x1c);
+  sysMemClear(*(unsigned int *)(temp_v0 + 0x18),*(int *)(temp_v0 + 0x20) * 0x1c);
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   *(unsigned int *)(temp_v0 + 0x20) = 0;

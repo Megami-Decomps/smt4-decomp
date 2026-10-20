@@ -11,19 +11,19 @@ int FUN_00297410(...);
 int FUN_002a019c(...);
 int FUN_002bcc60(...);
 int FUN_002bcd44(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
-int FUN_002c222c(...);
+int asdOperatorNew(...);
 int FUN_002c312c(...);
-int FUN_002c32a0(...);
+int memAlloc(...);
 int FUN_002c424c(...);
-int FUN_002c4938(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
+int memClear(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
 int FUN_002c526c(...);
-int FUN_002c5788(...);
-int FUN_0030f5bc(...);
+int asdProcessCreateSimple(...);
+int mapMainCallIfFlag(...);
 int FUN_003c9c94(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
@@ -67,31 +67,31 @@ extern int FUN_002907a8(void);
 /* Supplied declaration required: FUN_00294e18. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_00297410. */
-extern int FUN_0029a034(unsigned char *, unsigned int);
+extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 extern int FUN_0029aef0(void);
 extern int FUN_0029ebac(int, unsigned int);
 /* Supplied declaration required: FUN_002a019c. */
-extern int FUN_002a0b34(void);
+extern int lmapSceneGetScript(void);
 extern int FUN_002a0d0c(void);
 extern int FUN_002a8740(void);
-extern int FUN_002b879c(void);
+extern int lmapMainIsRunning(void);
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002bcd44. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 extern int FUN_002c09d0(unsigned int);
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c424c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_002c5c04(unsigned char *);
-/* Supplied declaration required: FUN_0030f5bc. */
+/* Supplied declaration required: mapMainCallIfFlag. */
 /* Supplied declaration required: FUN_003c9c94. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
@@ -116,19 +116,19 @@ void FUN_001f3044(void)
   
   if (DAT_0043dd68 == (int *)0x0) {
     piVar1 = (int *)0x100;
-    FUN_002c498c(0x100,0x100,0,0x95f8,1);
+    asdMemAlloc(0x100,0x100,0,0x95f8,1);
     DAT_0043dd68 = piVar1;
   }
   piVar1 = DAT_0043dd68;
-  FUN_002c4938();
+  memClear();
   piVar1[0x2518] = -1;
-  FUN_0030f5bc(0);
+  mapMainCallIfFlag(0);
   puVar2 = &LAB_001f3454;
-  FUN_002c5788(&LAB_001f3454,2,0,0,&LAB_0017ff9c,0,0);
+  asdProcessCreateSimple(&LAB_001f3454,2,0,0,&LAB_0017ff9c,0,0);
   piVar1[0xfe] = (int)puVar2;
-  FUN_002c4a08(&LAB_001f3464,0xe6,0,0,FUN_001add9c,0,0,puVar2);
+  taskCreateDraw(&LAB_001f3464,0xe6,0,0,FUN_001add9c,0,0,puVar2);
   temp_v0 = 0x180;
-  FUN_002c222c();
+  asdOperatorNew();
   if (temp_v0 != 0) {
     FUN_003c9c94();
   }
@@ -137,10 +137,10 @@ void FUN_001f3044(void)
   piVar1[0x2519] = temp_v0;
   *(unsigned char *)(piVar1 + 0x2578) = 0;
   temp_v0 = 0x100;
-  FUN_002c32a0(0x100,0x100,0,0x1000,0x1000,1);
+  memAlloc(0x100,0x100,0,0x1000,0x1000,1);
   piVar1[0x257c] = temp_v0;
   puVar4 = (unsigned int *)0x18;
-  FUN_002c222c();
+  asdOperatorNew();
   if (puVar4 != (unsigned int *)0x0) {
     *puVar4 = 0;
     puVar4[1] = 0;
@@ -215,13 +215,13 @@ void FUN_001f3044(void)
   FUN_002bd954(piVar1 + 9,0x24,0,piVar1 + 1,1);
   FUN_002bee58(piVar1 + 9,0);
   FUN_002bd954(piVar1 + 0x2c,0x24,0,piVar1 + 1,1);
-  FUN_002bd8e8(piVar1 + 0x2c,0);
+  timerStart(piVar1 + 0x2c,0);
   FUN_002bd954(piVar1 + 0x4f,0x24,0,piVar1 + 1,1);
   FUN_002bee58(piVar1 + 0x4f,1);
   FUN_002bd954(piVar1 + 0x72,0x24,0,piVar1 + 1,1);
-  FUN_002bd8e8(piVar1 + 0x72,1,0);
+  timerStart(piVar1 + 0x72,1,0);
   FUN_002bd954(piVar1 + 0x95,0x24,0,piVar1 + 1,1);
-  FUN_002bd8e8(piVar1 + 0x95,5,0);
+  timerStart(piVar1 + 0x95,5,0);
   FUN_002bd954(piVar1 + 0xb8,0x24,0,piVar1 + 1,1);
   FUN_002bee58(piVar1 + 0xb8,2);
   FUN_002bd954(piVar1 + 0xdb,0x24,0,piVar1 + 1,1);
@@ -236,8 +236,8 @@ void FUN_001f3044(void)
   piVar1[0x10a] = temp_v0;
   FUN_00297060(temp_v0,piVar1[0x109]);
   piVar1[0x10b] = temp_v0;
-  temp_v0 = FUN_002a0b34();
-  if ((temp_v0 != 0) || (temp_v0 = FUN_002b879c(), temp_v0 != 0)) {
+  temp_v0 = lmapSceneGetScript();
+  if ((temp_v0 != 0) || (temp_v0 = lmapMainIsRunning(), temp_v0 != 0)) {
     temp_v3 = (int *)0x0;
     temp_v4 = 0;
     FUN_00294834(0,0,0,0,0,0,0xff,0,0,0xff);
@@ -245,9 +245,9 @@ void FUN_001f3044(void)
   temp_v0 = FUN_00263c1c(&LAB_001f3694);
   piVar1[0x2574] = temp_v0;
   FUN_00294e18(1);
-  temp_v0 = FUN_0029a034(&LAB_001f36b0,7);
+  temp_v0 = asdMdlManagerCreateSecondList(&LAB_001f36b0,7);
   piVar1[0x2572] = temp_v0;
-  temp_v0 = FUN_0029a034(&LAB_001f36c8,7);
+  temp_v0 = asdMdlManagerCreateSecondList(&LAB_001f36c8,7);
   piVar1[0x2573] = temp_v0;
   piVar1[0x2576] = 0;
   piVar1[0x2577] = 0;

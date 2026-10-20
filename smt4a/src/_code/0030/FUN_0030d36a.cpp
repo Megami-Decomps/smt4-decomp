@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002e9afe. */
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 void FUN_0030d36a(int *param_1)
@@ -37,7 +37,7 @@ void FUN_0030d36a(int *param_1)
     temp_v3 = param_1[1];
     for (; temp_v1 != temp_v3; temp_v1 = temp_v1 + 0xc) {
     }
-    temp_v1 = aeabi_idivmod(temp_v2 - temp_v0,0xc);
+    temp_v1 = __aeabi_idivmod(temp_v2 - temp_v0,0xc);
     param_1[1] = temp_v3 + temp_v1 * -0xc;
   }
   return;

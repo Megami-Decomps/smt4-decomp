@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00295a18(int, int);
-int FUN_002c0cec(...);
+int dataTableGet(...);
 int FUN_00387c78(int, unsigned int);
 
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 extern int DAT_0044cd88; /* 0x44cd88 */
 
 extern int FUN_0028fb40(unsigned short);
@@ -16,9 +16,9 @@ extern int FUN_0028fb40(unsigned short);
 extern int FUN_002b8dc0(unsigned short);
 extern int FUN_002c09d0(void);
 extern int FUN_002c09f4(unsigned int);
-extern unsigned int FUN_002c0c74(unsigned int);
-extern int FUN_002c0cc4(void);
-/* Supplied declaration required: FUN_002c0cec. */
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
+/* Supplied declaration required: dataTableGet. */
 /* Supplied declaration required: FUN_00387c78. */
 
 
@@ -39,17 +39,17 @@ unsigned short FUN_0021e7f4(unsigned int param_1,int param_2)
   unsigned short temp_v8;
   
   *(unsigned char *)(DAT_0044cd88 + 0x14) = 0;
-  temp_v0 = FUN_002c0cec(0x20);
-  temp_v1 = FUN_002c0cc4();
-  temp_v2 = FUN_002c0c74(temp_v0);
+  temp_v0 = dataTableGet(0x20);
+  temp_v1 = dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v0);
   if ((param_1 < temp_v2) && (puVar4 = (unsigned short *)(temp_v1 + param_1 * 4), puVar4 != (unsigned short *)0x0)) {
     temp_v2 = (unsigned int)*puVar4;
-    temp_v1 = DAT_00433158;
-    FUN_00387c78(DAT_00433158,temp_v2);
+    temp_v1 = g_aocSystem;
+    FUN_00387c78(g_aocSystem,temp_v2);
     if (temp_v1 == 0) {
-      temp_v0 = FUN_002c0cec(0x20,1);
-      temp_v1 = FUN_002c0cc4();
-      temp_v5 = FUN_002c0c74(temp_v0);
+      temp_v0 = dataTableGet(0x20,1);
+      temp_v1 = dataTableGetEntries();
+      temp_v5 = dataTableGetCount(temp_v0);
       if (temp_v5 <= temp_v2) {
         return 0;
       }

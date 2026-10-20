@@ -1,14 +1,12 @@
-#include "romwright_types.h"
+#include "battle/btlHelp.h"
 
 extern "C" {
 
-extern int DAT_005738e8; /* 0x5738e8 */
+extern BtlHelpA *DAT_005738e8;
 
-
-unsigned char FUN_004c87e0(void)
-
+bool FUN_004c87e0(void)
 {
-  return *(int *)(DAT_005738e8 + 8) >= 2;
+    return DAT_005738e8->unk08 >= 2;
 }
 
 } /* extern "C" */

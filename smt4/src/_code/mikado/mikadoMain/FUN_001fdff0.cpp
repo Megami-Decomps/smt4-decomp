@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00254dfc(...);
 int FUN_002a7838(void);
 int FUN_002b2368(int);
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 int FUN_003b8158(void);
 int FUN_003ba734(unsigned int, unsigned short [2]);
 int FUN_003bb3fc(unsigned int);
@@ -28,7 +28,7 @@ extern int FUN_00263c34(int);
 extern int FUN_00287314(int);
 /* Supplied declaration required: FUN_002a7838. */
 /* Supplied declaration required: FUN_002b2368. */
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_003b8158. */
 /* Supplied declaration required: FUN_003ba734. */
 /* Supplied declaration required: FUN_003bb3fc. */
@@ -76,7 +76,7 @@ unsigned int FUN_001fdff0(void)
   }
   else {
     puVar3 = (unsigned char *)0xeb0;
-    FUN_002c222c();
+    asdOperatorNew();
     temp_v2 = 0;
     if (puVar3 != (unsigned char *)0x0) {
       *puVar3 = 0;

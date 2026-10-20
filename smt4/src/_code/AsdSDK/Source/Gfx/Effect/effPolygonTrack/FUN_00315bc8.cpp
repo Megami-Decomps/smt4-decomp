@@ -8,10 +8,10 @@ int FUN_0024b77c(void);
 int FUN_0024b830(...);
 int FUN_002b7064(void);
 int FUN_002b70cc(void);
-int FUN_002c4938(float *, int);
+int memClear(float *, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
-int aeabi_uidivmod(void);
+int __aeabi_uidivmod(void);
 
 /* stack frame of param_1: 9 slot(s), 36 byte(s) */
 typedef struct {
@@ -62,8 +62,8 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024b830. */
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_00315bc8(int param_1)
@@ -152,7 +152,7 @@ void FUN_00315bc8(int param_1)
                   temp_v6 = -1;
                 }
                 else {
-                  FUN_002c4938(pfVar12,temp_v5 * 0xc);
+                  memClear(pfVar12,temp_v5 * 0xc);
                   temp_v6 = -2;
                 }
                 *piVar15 = temp_v6;
@@ -284,7 +284,7 @@ void FUN_00315bc8(int param_1)
               }
             }
             else {
-              FUN_002c4938(pfVar12,temp_v5 * 0xc);
+              memClear(pfVar12,temp_v5 * 0xc);
               if (temp_v33 != 0) {
                 FUN_0024b830(0);
                 temp_v19 = ((temp_v30 - *(float *)(temp_v12 + 0xc0)) + temp_v18 * *(float *)(temp_v12 + 0xc0))
@@ -330,7 +330,7 @@ void FUN_00315bc8(int param_1)
                 }
                 else {
                   FUN_0024b77c();
-                  aeabi_uidivmod();
+                  __aeabi_uidivmod();
                   temp_v18 = (float)VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
                   *piVar15 = temp_v9;
                   piVar15[2] = (int)((float)piVar15[2] + (float)piVar15[3] * temp_v18);

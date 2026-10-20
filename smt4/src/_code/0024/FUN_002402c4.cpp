@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002b90e6(...);
 int FUN_002bb5a4(...);
 int FUN_002be624(...);
-int FUN_002c4938(...);
+int memClear(...);
 int FUN_002c52f8(...);
 int FUN_002c618c(...);
 int builtin_strncpy(...);
@@ -28,12 +28,12 @@ extern unsigned char LAB_00240430; /* 0x240430 */
 extern unsigned char LAB_0024043c; /* 0x24043c */
 
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
-extern int FUN_002b0404(unsigned int);
+extern int asdLoadFileIsPatched(unsigned int);
 extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002b90e6. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002c52f8. */
 /* Supplied declaration required: FUN_002c618c. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
@@ -56,8 +56,8 @@ int FUN_002402c4(unsigned int param_1,unsigned int param_2)
   unsigned int temp_v6;
   
   puVar4 = temp_v1;
-  FUN_002c4938(temp_v2,0x100);
-  temp_v0 = FUN_002b0404(param_2);
+  memClear(temp_v2,0x100);
+  temp_v0 = asdLoadFileIsPatched(param_2);
   if (temp_v0 != 0) {
     FUN_002be624(temp_v2,&LAB_00240430,param_2);
   }

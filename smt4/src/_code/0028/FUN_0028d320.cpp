@@ -9,13 +9,13 @@ int FUN_0023d9b8(int, int, int);
 int FUN_002ae164(void);
 int SCARRY4(unsigned int, int);
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
 /* Supplied declaration required: FUN_0023d488. */
 /* Supplied declaration required: FUN_0023d9b8. */
-extern int FUN_0027e928(unsigned int);
-extern int FUN_002939f4(void);
+extern int btlUnitGet(unsigned int);
+extern int btlGetMainState(void);
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002ae164. */
 
@@ -51,7 +51,7 @@ unsigned int FUN_0028d320(int param_1)
       case 10:
         break;
       default:
-        temp_v4 = FUN_002939f4();
+        temp_v4 = btlGetMainState();
         if ((*(unsigned int *)(temp_v4 + 0x44a8) & 0x2000000) == 0) {
           temp_v8 = 0;
           temp_v0 = 0;
@@ -108,7 +108,7 @@ unsigned int FUN_0028d320(int param_1)
             } while (temp_v7 < 0x36);
           }
           if (temp_v1) {
-            temp_v7 = FUN_0027e928(DAT_0043427c);
+            temp_v7 = btlUnitGet(g_btlScriptUnit);
             temp_v4 = 0;
             if (temp_v7 != 0) {
               temp_v4 = *(int *)(temp_v7 + 0x20);

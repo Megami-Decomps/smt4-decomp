@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_002a4860(...);
 int FUN_002a4894(int);
 int FUN_0036edfc(unsigned int, unsigned int);
@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002a4860. */
 /* Supplied declaration required: FUN_002a4894. */
 /* Supplied declaration required: FUN_0036edfc. */
@@ -74,7 +74,7 @@ void FUN_003afa60(int param_1,unsigned int param_2,int param_3,unsigned int para
         temp_v6 = 1;
       }
       FUN_003cbd04(param_1,temp_v5,param_2,(int)(temp_v2 + temp_v5) < temp_v3,param_4,param_5,temp_v6);
-      FUN_001677c0();
+      efctSetSpeed();
     }
     temp_v5 = temp_v5 + 1;
   } while ((int)temp_v5 < 8);

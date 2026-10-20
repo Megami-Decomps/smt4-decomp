@@ -30,7 +30,7 @@ extern romwright_code *pcRam0047299c; /* 0x47299c */
 /* Supplied declaration required: FUN_0023b104. */
 /* Supplied declaration required: FUN_0023b260. */
 /* Supplied declaration required: FUN_0023b3dc. */
-extern unsigned long long aeabi_uidivmod(int, unsigned int);
+extern unsigned long long __aeabi_uidivmod(int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -90,7 +90,7 @@ FUN_00349520(int param_1,int param_2,int param_3,unsigned int param_4,unsigned i
         if (temp_v6 < (int)temp_v11) {
           do {
             temp_v4 = temp_v7 * temp_v11 + temp_v6;
-            temp_v8 = aeabi_uidivmod(temp_v4,temp_v11);
+            temp_v8 = __aeabi_uidivmod(temp_v4,temp_v11);
             temp_v1 = FUN_0023b3dc(temp_v10,iStack_4c);
             if (temp_v17 != 1) {
               temp_v4 = 0;
@@ -109,7 +109,7 @@ FUN_00349520(int param_1,int param_2,int param_3,unsigned int param_4,unsigned i
                         (temp_v1 & 0x3ffffff) << 3);
             }
             temp_v4 = temp_v7 * temp_v11 + temp_v6;
-            temp_v8 = aeabi_uidivmod(temp_v4,temp_v11);
+            temp_v8 = __aeabi_uidivmod(temp_v4,temp_v11);
             temp_v3 = (int)((unsigned long long)temp_v8 >> 0x20);
             temp_v5 = (int)temp_v8;
             temp_v2 = FUN_0023b3dc(temp_v10,iStack_4c);

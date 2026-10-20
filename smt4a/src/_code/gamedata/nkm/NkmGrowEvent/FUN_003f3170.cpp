@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0010063a(...);
-int FUN_001630d4(...);
+int qsort(...);
+int asdMemoryAlloc(...);
 int FUN_00184310(...);
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_003c3f1c(...);
 int FUN_004bcd90(...);
 int FUN_004bd2b4(...);
@@ -40,11 +40,11 @@ typedef struct {
 
 extern unsigned char LAB_003d2d24; /* 0x3d2d24 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern int FUN_0014bef4(unsigned int);
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_003c3f1c. */
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: FUN_004bd2b4. */
@@ -76,7 +76,7 @@ unsigned short FUN_003f3170(fn_003f3170_arg0 *param_1)
   unsigned short temp_v15;
   
   temp_v0 = 0x100;
-  FUN_001630d4(0x100,0x100,0,0x3ea,1);
+  asdMemoryAlloc(0x100,0x100,0,0x3ea,1);
   temp_v1 = (unsigned int)param_1->field_0x62;
   temp_v6 = 0;
   FUN_00184310();
@@ -107,7 +107,7 @@ unsigned short FUN_003f3170(fn_003f3170_arg0 *param_1)
   temp_v13 = *(unsigned short *)(temp_v1 + 0x66);
   temp_v14 = *(unsigned short *)(temp_v1 + 0x6a);
   temp_v15 = *(unsigned short *)(temp_v1 + 0x6e);
-  FUN_0010063a(&temp_v7,0x10,2,&LAB_003d2d24);
+  qsort(&temp_v7,0x10,2,&LAB_003d2d24);
   temp_v5 = 0;
   do {
     temp_v1 = 1;
@@ -143,7 +143,7 @@ LAB_003f32c0:
   }
   FUN_004bcd90(param_1);
   FUN_004bd2b4(param_1);
-  FUN_0019a5a0(temp_v0);
+  asdMemFree(temp_v0);
   return temp_v4;
 }
 

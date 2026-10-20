@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00180118(unsigned int);
 int FUN_0019de98(...);
 int FUN_0022e774(void);
@@ -58,10 +58,10 @@ extern unsigned char LAB_003e3fe4; /* 0x3e3fe4 */
 extern unsigned char LAB_003e3ff8; /* 0x3e3ff8 */
 extern unsigned char LAB_003e400c; /* 0x3e400c */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_0019de98. */
-extern int FUN_0019e4d4(unsigned short);
+extern int slotRecordFindById(unsigned short);
 extern unsigned int *FUN_001ab888(void);
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_0022e774. */
@@ -139,7 +139,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     uStack_3e = (unsigned short)((unsigned int)temp_v3 >> 0x10);
     temp_v0 = FUN_002a4b28();
     FUN_004bd30c(temp_v4,uStack_3e,0);
-    temp_v1 = FUN_0019e4d4(uStack_3e);
+    temp_v1 = slotRecordFindById(uStack_3e);
     FUN_004cd4b8(temp_v1,(int)(short)((short)temp_v7 - *(short *)(temp_v1 + 100)));
     *(unsigned short *)(temp_v1 + 4) = (*(unsigned short *)((unsigned char *)&temp_v7 + 2));
     *(unsigned short *)(temp_v1 + 6) = (unsigned short)temp_v8;
@@ -234,7 +234,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
                  0xffffffff,0);
     FUN_003c1060();
     FUN_003c5fc4(1);
-    FUN_001681cc(0xa4);
+    sysPlaySe(0xa4);
     temp_v0 = FUN_00357bc8(*(unsigned int *)&param_1->field_0x14,&LAB_003e3fd0);
     if (-1 < temp_v0) {
       FUN_00275f44(param_1->field_0x18,temp_v0);

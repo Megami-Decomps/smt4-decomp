@@ -1,14 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023c13c` (_code @ 0x23c13c, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads indexer->index (0x18) before the layout pointer; built loads them in the opposite order. */
+#include "common.h"
 
 extern "C" {
 
+/* Element-size source object. */
+typedef struct {
+    u8 unk00[8];
+    s32 stride;         /* 0x08 */
+} Layout;
 
-int FUN_0023c13c(int *param_1,int param_2)
+typedef struct {
+    Layout *layout;     /* 0x00 */
+    u8 unk04[0x14];
+    s32 index;          /* 0x18 */
+} Indexer;
 
+/* Offset of element `index` plus `base`: index * layout stride + base. */
+s32 FUN_0023c13c(Indexer *indexer, s32 base)
 {
-  return param_1[6] * *(int *)(*param_1 + 8) + param_2;
+    return indexer->index * indexer->layout->stride + base;
 }
 
 } /* extern "C" */

@@ -5,12 +5,12 @@
 extern "C" {
 
 int ARM_common_memcpy4_9(...);
-int FUN_00137ee0(...);
-int FUN_00202d2c(...);
+int asdSequenceRequest(...);
+int configOpen(...);
 int FUN_00202ea4(void);
 int FUN_0020e79c(void);
 int FUN_00215994(...);
-int FUN_00227e08(void);
+int configDestroy(void);
 int FUN_00283d74(...);
 int FUN_002c7150(void);
 int FUN_002f4374(void);
@@ -23,25 +23,25 @@ int FUN_0046bd44(...);
 int FUN_0046e238(...);
 
 int FUN_00100388(...);
-int FUN_001631d0(...);
+int jobStop(...);
 int FUN_001641c4(void);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00168980(...);
 int FUN_00169ddc(...);
-int FUN_00187180(...);
+int dataTableGet(...);
 int FUN_002c2160(...);
 int FUN_002e4b9c(void);
 int FUN_0033099c(void);
 int FUN_0035b304(void);
 int FUN_0037a2e4(void);
 int FUN_0039c244(void);
-int FUN_003c3e30(...);
+int mobiclipProcessSetFlag77(...);
 int FUN_003c4f28(...);
 int FUN_003c5848(void);
 int FUN_003ca7d8(void);
 int FUN_003d2d34(...);
 
-int FUN_0013f1b8(int, int);
+int asdTMTexTableLoadTmx(int, int);
 int FUN_001517b4(...);
 int FUN_0019de98(...);
 int FUN_001acf98(int, int);
@@ -52,7 +52,7 @@ int FUN_0031a400(void);
 int FUN_00342010(void);
 int FUN_00370b8c(...);
 int FUN_0037a2c8(void);
-int FUN_003c107c(...);
+int mobiclipProcessSetFlag78(...);
 int FUN_003d2d6c(...);
 int FUN_003d54f8(...);
 int FUN_003f86f8(int);
@@ -66,7 +66,7 @@ typedef struct {
 
 extern unsigned char LAB_0029ff54; /* 0x29ff54 */
 extern unsigned char LAB_002a0964; /* 0x2a0964 */
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 extern unsigned int *DAT_00589170; /* 0x589170 */
 extern unsigned char DAT_005f1634; /* 0x5f1634 */
 extern unsigned int DAT_005f1bd4; /* 0x5f1bd4 */
@@ -76,50 +76,50 @@ extern int DAT_005f1c98; /* 0x5f1c98 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: ARM_common_memcpy4_9. */
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_00137ee0. */
+/* Supplied declaration required: asdSequenceRequest. */
 extern int FUN_0013def0(unsigned int);
-/* Supplied declaration required: FUN_0013f1b8. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 extern int FUN_0014af84(void);
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001631d0. */
-extern int FUN_00163e40(unsigned int);
+/* Supplied declaration required: jobStop. */
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_001641c4. */
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
 extern int FUN_00164af0(unsigned int);
 extern int FUN_001656a0(unsigned int);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00168980. */
 /* Supplied declaration required: FUN_00169ddc. */
 extern int FUN_0018206c(unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00187180. */
+/* Supplied declaration required: dataTableGet. */
 extern unsigned int FUN_0018719c(unsigned int);
-extern int FUN_00192798(void);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_001f4908. */
 extern int FUN_002009a8(unsigned int);
-/* Supplied declaration required: FUN_00202d2c. */
+/* Supplied declaration required: configOpen. */
 /* Supplied declaration required: FUN_00202ea4. */
 /* Supplied declaration required: FUN_0020e79c. */
 extern int FUN_002121c4(unsigned int);
-extern int FUN_00212968(void);
+extern int configIsClosed(void);
 /* Supplied declaration required: FUN_00215994. */
 /* Supplied declaration required: FUN_0022258c. */
 /* Supplied declaration required: FUN_0022677c. */
-/* Supplied declaration required: FUN_00227e08. */
-extern int FUN_00229998(void);
+/* Supplied declaration required: configDestroy. */
+extern int s4LoadIsActive(void);
 extern int FUN_002802c8(void);
 /* Supplied declaration required: FUN_00283d74. */
 extern int FUN_00284140(int);
 extern int FUN_0028a230(unsigned int *);
 /* Supplied declaration required: FUN_002c2160. */
 /* Supplied declaration required: FUN_002c7150. */
-extern int FUN_002cf8d4(void);
+extern int jyoucyuGetLevel(void);
 extern int FUN_002e07f4(void);
 extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: FUN_002e4b9c. */
-extern int FUN_002e4bf8(void);
+extern int configGetValueBC(void);
 extern int FUN_002ef9f0(void);
 /* Supplied declaration required: FUN_002f4374. */
 /* Supplied declaration required: FUN_0031a400. */
@@ -134,13 +134,13 @@ extern int FUN_0035e6d4(unsigned int *);
 /* Supplied declaration required: FUN_00370b8c. */
 /* Supplied declaration required: FUN_0037a2c8. */
 /* Supplied declaration required: FUN_0037a2e4. */
-extern int FUN_003871c0(void);
+extern int titleConfigIsClosed(void);
 extern int FUN_0038b358(void);
 /* Supplied declaration required: FUN_0039c244. */
 /* Supplied declaration required: FUN_003b5064. */
 /* Supplied declaration required: FUN_003b61ec. */
-/* Supplied declaration required: FUN_003c107c. */
-/* Supplied declaration required: FUN_003c3e30. */
+/* Supplied declaration required: mobiclipProcessSetFlag78. */
+/* Supplied declaration required: mobiclipProcessSetFlag77. */
 /* Supplied declaration required: FUN_003c4f28. */
 /* Supplied declaration required: FUN_003c5848. */
 /* Supplied declaration required: FUN_003c91e8. */
@@ -186,7 +186,7 @@ unsigned int FUN_0029f2fc(void)
   case 0:
   case 1:
     FUN_003f86f8(0x3a);
-    FUN_0013f1b8(0x2a,0);
+    asdTMTexTableLoadTmx(0x2a,0);
     FUN_001acf98(0x2a,0);
     FUN_001acf98(0x2a,1);
     FUN_001acf98(0x2a,2);
@@ -284,7 +284,7 @@ joined_r0x0029f8b8:
       break;
     case 2:
       FUN_0022258c(1);
-      temp_v5 = FUN_002cf8d4();
+      temp_v5 = jyoucyuGetLevel();
       if ((temp_v5 != 0) && (*(char *)(puVar4 + 0x24) == '\0')) {
         *(unsigned char *)(puVar4 + 0x24) = 1;
         temp_v5 = FUN_001834a4(9,0x22);
@@ -388,7 +388,7 @@ LAB_0029f848:
         goto joined_r0x0029f8b8;
       case 2:
         FUN_0022258c(2);
-        temp_v5 = FUN_002cf8d4();
+        temp_v5 = jyoucyuGetLevel();
         if ((temp_v5 == 0) || (*(char *)(puVar4 + 0x24) != '\0')) {
           *(unsigned char *)(puVar4 + 0x24) = 0;
           break;
@@ -467,7 +467,7 @@ LAB_0029f848:
       }
       FUN_0022677c(0,0xff);
       FUN_0022677c(1,0xff);
-      FUN_003c107c(1);
+      mobiclipProcessSetFlag78(1);
     }
 LAB_0029fb00:
     temp_v5 = puVar4[0x1f];
@@ -480,7 +480,7 @@ LAB_0029fb00:
         }
         break;
       }
-      temp_v5 = FUN_00163e40(puVar4[0x22]);
+      temp_v5 = jobIsValid(puVar4[0x22]);
       if (temp_v5 != 0) break;
       temp_v6 = 2;
     }
@@ -492,7 +492,7 @@ LAB_0029fb00:
       temp_v8 = 0x1d;
       FUN_00370b8c(0x1d,temp_v6);
       puVar4[0x22] = temp_v8;
-      FUN_003c3e30(1);
+      mobiclipProcessSetFlag77(1);
       temp_v6 = 1;
     }
     puVar4[0x1f] = temp_v6;
@@ -579,10 +579,10 @@ LAB_0029fb00:
         puVar5[2] = 3;
         puVar5[3] = 3;
       }
-      FUN_001681cc(0xa1);
+      sysPlaySe(0xa1);
       temp_v7 = puVar5[2];
-      FUN_00187180(0x3a,0);
-      temp_v5 = FUN_00192798();
+      dataTableGet(0x3a,0);
+      temp_v5 = dataTableGetEntries();
       FUN_00100388(&temp_v13,temp_v5 + temp_v7 * 100 + 0x14,&LAB_0029ff54);
       FUN_0019de98(&temp_v13,0xf4f4f4ff);
       if (*(char *)(puVar5 + 0xf) != '\0') {
@@ -702,8 +702,8 @@ LAB_0029fb00:
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 5);
     temp_v7 = puVar4[2];
-    FUN_00187180(0x3a,0);
-    temp_v5 = FUN_00192798();
+    dataTableGet(0x3a,0);
+    temp_v5 = dataTableGetEntries();
     FUN_00100388(&temp_v13,temp_v5 + temp_v7 * 100 + 0x14,&LAB_0029ff54);
     FUN_0019de98(&temp_v13,0xf4f4f4ff);
     if (((*(char *)((int)puVar4 + 0x3f) != '\0') || (temp_v5 = FUN_002e1a18(1), temp_v5 != 0)) ||
@@ -748,14 +748,14 @@ LAB_0029fb00:
           puVar5[0x17] = 2;
           FUN_0033099c();
           FUN_002c2160(1);
-          temp_v5 = FUN_0046c458(DAT_00570280,0x558);
+          temp_v5 = FUN_0046c458(g_aocSystem,0x558);
           if (temp_v5 != 0) {
             FUN_003fd63c(0x558,1,1);
           }
           else {
             FUN_003fd63c(0x558,0,1);
           }
-          temp_v5 = FUN_0046c458(DAT_00570280,0x559);
+          temp_v5 = FUN_0046c458(g_aocSystem,0x559);
           if (temp_v5 != 0) {
             FUN_003fd63c(0x559,1,1);
           }
@@ -861,7 +861,7 @@ LAB_0029fb00:
     }
     break;
   case 0x10:
-    temp_v5 = FUN_003871c0();
+    temp_v5 = titleConfigIsClosed();
     if (temp_v5 == 0) break;
     FUN_003ca7d8();
     break;
@@ -876,7 +876,7 @@ LAB_0029fb00:
     temp_v5 = FUN_002e07f4();
     if (temp_v5 != 0) {
       FUN_0035b304();
-      FUN_001631d0(*DAT_00589170,0);
+      jobStop(*DAT_00589170,0);
       FUN_00168980(3);
       temp_v5 = puVar4[2];
       if (temp_v5 != 1) {
@@ -887,9 +887,9 @@ LAB_0029fb00:
         }
         else {
           FUN_00283d74(0);
-          FUN_0046bd44(DAT_00570280);
+          FUN_0046bd44(g_aocSystem);
           FUN_00363c58(0);
-          FUN_0046e238(DAT_00570280);
+          FUN_0046e238(g_aocSystem);
           FUN_00215994(puVar4[0x25]);
           FUN_002f4374();
           FUN_00324c94(0x25,3);
@@ -899,7 +899,7 @@ LAB_0029fb00:
           temp_v13 = 1;
           uStack_a4 = 0xffffffff;
           ARM_common_memcpy4_9(temp_v14,&LAB_002a0964);
-          FUN_00137ee0(4,&temp_v13,0x20);
+          asdSequenceRequest(4,&temp_v13,0x20);
         }
       }
       else {
@@ -938,13 +938,13 @@ LAB_0029fb00:
             temp_v6 = 6;
           }
         }
-        FUN_00137ee0(temp_v6,piVar10,temp_v8);
+        asdSequenceRequest(temp_v6,piVar10,temp_v8);
       }
     }
     break;
   case 0x14:
     if (*(char *)((int)DAT_00589170 + 0x5a) == '\0') {
-      FUN_00202d2c(0);
+      configOpen(0);
       *(unsigned char *)(puVar4 + 0x26) = 1;
       FUN_003b61ec();
       puVar4[0x1f] = 0;
@@ -954,11 +954,11 @@ LAB_0029fb00:
     break;
   case 0x15:
     FUN_00202ea4();
-    temp_v5 = FUN_00212968();
+    temp_v5 = configIsClosed();
     puVar5 = DAT_00589170;
     if (temp_v5 != 0) {
-      temp_v5 = FUN_002e4bf8();
-      FUN_00227e08();
+      temp_v5 = configGetValueBC();
+      configDestroy();
       if (temp_v5 < 0) {
         FUN_003ca7d8();
         if (*(char *)(puVar5 + 0xf) != '\0') {
@@ -989,7 +989,7 @@ LAB_0029fb00:
     puVar4[0x20] = 0;
     break;
   case 0x17:
-    temp_v5 = FUN_00229998();
+    temp_v5 = s4LoadIsActive();
     if (temp_v5 != 0) break;
     FUN_003ca7d8();
   }

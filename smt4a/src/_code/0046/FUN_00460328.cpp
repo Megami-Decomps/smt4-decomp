@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_001884b0(unsigned int);
+int vcallSlot12IfValid(unsigned int);
 int FUN_00195fc8(void);
 
 typedef struct fn_00460328_arg0 fn_00460328_arg0;
@@ -14,7 +14,7 @@ struct fn_00460328_arg0 {
     byte field_0x51; /* +0x51 */
 };
 
-/* Supplied declaration required: FUN_001884b0. */
+/* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: FUN_00195fc8. */
 
 
@@ -37,7 +37,7 @@ void FUN_00460328(fn_00460328_arg0 *param_1)
       if ((*(unsigned int *)((int)pvVar2 + 4) & 1) != 0) {
         FUN_00195fc8();
       }
-      FUN_001884b0(*(unsigned int *)((int)pvVar2 + 4) & 0xfffffffe);
+      vcallSlot12IfValid(*(unsigned int *)((int)pvVar2 + 4) & 0xfffffffe);
       *(unsigned int *)((int)pvVar2 + 4) = 0;
     }
     param_1->field_0x50 = 0;

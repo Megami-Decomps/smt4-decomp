@@ -1,39 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nw_snd_internal_GroupFileReader_ReadGroupItemLocationInfo` (_code @ 0x141b48, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct GroupItemEntry {
+    /* 0x00 */ u32 fileId;
+    /* 0x04 */ u32 size;
+    /* 0x08 */ u32 offset;     /* 0xFFFFFFFF = not stored in the group */
+} GroupItemEntry;
 
-unsigned int
-nw_snd_internal_GroupFileReader_ReadGroupItemLocationInfo
-          (unsigned int *param_1,unsigned int *param_2,unsigned int param_3)
+typedef struct GroupItemTableEntry {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ u32 offset;     /* from the start of the table to the GroupItemEntry */
+} GroupItemTableEntry;
 
+typedef struct GroupItemTable {
+    /* 0x00 */ u32 count;
+    /* 0x04 */ GroupItemTableEntry entries[1];
+} GroupItemTable;
+
+typedef struct GroupFileReader {
+    /* 0x00 */ GroupItemTable *table;
+    /* 0x04 */ u8 *data;       /* base of the item data */
+} GroupFileReader;
+
+typedef struct GroupItemLocationInfo {
+    /* 0x00 */ u32 fileId;
+    /* 0x04 */ u8 *address;
+} GroupItemLocationInfo;
+
+/* Fills `out` with the file id and data address of group item `index`; returns false if the item does not exist. */
+bool nw_snd_internal_GroupFileReader_ReadGroupItemLocationInfo(GroupFileReader *reader, GroupItemLocationInfo *out, u32 index)
 {
-/* irregular: irregular input(s): in_r12 */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  unsigned int in_r12;
-  
-  puVar3 = (unsigned int *)*param_1;
-  if (puVar3 != (unsigned int *)0x0) {
-    in_r12 = *puVar3;
-  }
-  if ((puVar3 != (unsigned int *)0x0 && param_3 < in_r12) &&
-     (puVar2 = (unsigned int *)(puVar3[param_3 * 2 + 2] + (int)puVar3), puVar2 != (unsigned int *)0x0))
-  {
-    *param_2 = *puVar2;
-    if (puVar2[2] == -1) {
-      temp_v0 = 0;
+    GroupItemTable *table = reader->table;
+    GroupItemEntry *item;
+
+    if (table != NULL && index < table->count) {
+        item = (GroupItemEntry *)((u8 *)table + table->entries[index].offset);
+        if (item != NULL) {
+            out->fileId = item->fileId;
+            u8 *base = reader->data;
+            u32 offset = item->offset;
+            out->address = (offset == 0xFFFFFFFF) ? NULL : base + offset;
+            return true;
+        }
     }
-    else {
-      temp_v0 = param_1[1] + puVar2[2];
-    }
-    param_2[1] = temp_v0;
-    return 1;
-  }
-  return 0;
+    return false;
 }
 
 } /* extern "C" */

@@ -14,8 +14,8 @@ extern int DAT_00447a48; /* 0x447a48 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0024ad14. */
-extern unsigned int FUN_0028522c(unsigned int, unsigned int);
-extern unsigned int FUN_0029a034(unsigned char *, unsigned int);
+extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
+extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
 extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
@@ -85,19 +85,19 @@ LAB_0027cf90:
       *(unsigned short *)(temp_v2 + 0x32) = *(unsigned short *)(temp_v1 + 2);
       FUN_002be624(temp_v5,&LAB_0027d0b0);
       if (*(short *)(temp_v2 + 0x32) != 0xe) {
-        temp_v4 = FUN_0029a034(temp_v5,7);
+        temp_v4 = asdMdlManagerCreateSecondList(temp_v5,7);
         *(unsigned int *)(temp_v2 + 0x34) = temp_v4;
       }
       else {
         if (*(char *)(DAT_00447a48 + 0x14) != '\0') {
-          temp_v4 = FUN_0028522c(*(unsigned int *)
+          temp_v4 = asdMdlManagerClone(*(unsigned int *)
                                 (DAT_00447a48 + *(int *)(DAT_00447a48 + 0x18) * 0x28 + 0x34),1);
           *(unsigned int *)(temp_v2 + 0x34) = temp_v4;
           *(unsigned char *)(temp_v2 + 0x40) = 1;
           *(short *)(DAT_00447a48 + 10) = *(short *)(DAT_00447a48 + 10) + 1;
           goto LAB_0027cf90;
         }
-        temp_v4 = FUN_0029a034(temp_v5,0x38);
+        temp_v4 = asdMdlManagerCreateSecondList(temp_v5,0x38);
         *(unsigned int *)(temp_v2 + 0x34) = temp_v4;
       }
       *(unsigned char *)(temp_v2 + 0x40) = 0;

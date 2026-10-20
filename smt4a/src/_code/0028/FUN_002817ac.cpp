@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_0031d890(void);
 int FUN_00344348(int);
 int FUN_0037bd00(void);
 
-/* Supplied declaration required: FUN_001681cc. */
-extern int FUN_002c0468(void);
-extern int FUN_002e23e8(void);
+/* Supplied declaration required: sysPlaySe. */
+extern int campCecRecvExists(void);
+extern int campCecRecvIsDone(void);
 /* Supplied declaration required: FUN_0031d890. */
 /* Supplied declaration required: FUN_00344348. */
 /* Supplied declaration required: FUN_0037bd00. */
@@ -25,12 +25,12 @@ unsigned int FUN_002817ac(int param_1)
   unsigned int temp_v1;
   
   temp_v1 = 0;
-  temp_v0 = FUN_002c0468();
+  temp_v0 = campCecRecvExists();
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002e23e8();
+    temp_v0 = campCecRecvIsDone();
     if (temp_v0 != 0) {
       FUN_0037bd00();
-      FUN_001681cc(0x10d);
+      sysPlaySe(0x10d);
       *(unsigned int *)(param_1 + 0x144) = 1;
       *(unsigned int *)(param_1 + 0x14c) = 0;
       FUN_0031d890();

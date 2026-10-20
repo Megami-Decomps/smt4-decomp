@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_001834a4(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int VectorSignedToFloat(...);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_003f95e0(int param_1)
@@ -72,7 +72,7 @@ void FUN_003f95e0(int param_1)
   temp_v1 = FUN_001834a4(0xc,0x69);
   temp_v3 = VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(param_1 + 0x404) = temp_v3;
-  FUN_002e6354(param_1,0x360);
+  sysMemClear(param_1,0x360);
   *(unsigned int *)(param_1 + 0x364) = 0xffffffff;
   *(unsigned int *)(param_1 + 0x360) = 0;
   *(unsigned int *)(param_1 + 0x368) = 0xffffffff;

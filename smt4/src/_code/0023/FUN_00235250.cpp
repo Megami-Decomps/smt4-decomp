@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002c4938(unsigned int *, int);
+int memClear(unsigned int *, int);
 
-extern unsigned int *FUN_0023d3fc(void);
-/* Supplied declaration required: FUN_002c4938. */
+extern unsigned int *asdSoundGetListener(void);
+/* Supplied declaration required: memClear. */
 
 
 void FUN_00235250(unsigned int *param_1)
@@ -27,51 +27,51 @@ void FUN_00235250(unsigned int *param_1)
   *(unsigned char *)((int)param_1 + 0x15) = 0;
   param_1[6] = 0;
   param_1[7] = 0;
-  FUN_002c4938(param_1 + 0x15b,0x80);
-  FUN_002c4938(param_1 + 0x17b,0xa0);
-  puVar1 = (unsigned int *)FUN_0023d3fc();
+  memClear(param_1 + 0x15b,0x80);
+  memClear(param_1 + 0x17b,0xa0);
+  puVar1 = (unsigned int *)asdSoundGetListener();
   temp_v0 = *puVar1;
   temp_v1 = puVar1[1];
   param_1[0x57d] = puVar1[2];
   param_1[0x57b] = temp_v0;
   param_1[0x57c] = temp_v1;
-  puVar1 = (unsigned int *)FUN_0023d3fc();
+  puVar1 = (unsigned int *)asdSoundGetListener();
   temp_v0 = *puVar1;
   temp_v1 = puVar1[1];
   param_1[0x580] = puVar1[2];
   param_1[0x57e] = temp_v0;
   param_1[0x57f] = temp_v1;
-  puVar1 = (unsigned int *)FUN_0023d3fc();
+  puVar1 = (unsigned int *)asdSoundGetListener();
   temp_v0 = *puVar1;
   temp_v1 = puVar1[1];
   param_1[0x583] = puVar1[2];
   param_1[0x581] = temp_v0;
   param_1[0x582] = temp_v1;
-  puVar1 = (unsigned int *)FUN_0023d3fc();
+  puVar1 = (unsigned int *)asdSoundGetListener();
   temp_v0 = *puVar1;
   temp_v1 = puVar1[1];
   param_1[0x586] = puVar1[2];
   param_1[0x584] = temp_v0;
   param_1[0x585] = temp_v1;
-  puVar1 = (unsigned int *)FUN_0023d3fc();
+  puVar1 = (unsigned int *)asdSoundGetListener();
   temp_v0 = *puVar1;
   temp_v1 = puVar1[1];
   param_1[0x589] = puVar1[2];
   param_1[0x587] = temp_v0;
   param_1[0x588] = temp_v1;
-  puVar1 = (unsigned int *)FUN_0023d3fc();
+  puVar1 = (unsigned int *)asdSoundGetListener();
   temp_v0 = *puVar1;
   temp_v1 = puVar1[1];
   param_1[0x58c] = puVar1[2];
   param_1[0x58a] = temp_v0;
   param_1[0x58b] = temp_v1;
-  puVar1 = (unsigned int *)FUN_0023d3fc();
+  puVar1 = (unsigned int *)asdSoundGetListener();
   temp_v0 = *puVar1;
   temp_v1 = puVar1[1];
   param_1[0x58f] = puVar1[2];
   param_1[0x58d] = temp_v0;
   param_1[0x58e] = temp_v1;
-  puVar1 = (unsigned int *)FUN_0023d3fc();
+  puVar1 = (unsigned int *)asdSoundGetListener();
   temp_v0 = *puVar1;
   temp_v1 = puVar1[1];
   param_1[0x592] = puVar1[2];

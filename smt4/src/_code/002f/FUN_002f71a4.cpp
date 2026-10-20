@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_002499fc(unsigned int, int [6], int *);
-int FUN_0028dcb0(int);
-int FUN_002939f4(void);
-int FUN_00296cc8(int);
+int scrSetResult(int);
+int btlGetMainState(void);
+int scrGetArg(int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -18,10 +18,10 @@ typedef struct {
 extern int FUN_002499b4(void);
 /* Supplied declaration required: FUN_002499fc. */
 extern unsigned int FUN_00249a54(void);
-/* Supplied declaration required: FUN_0028dcb0. */
-/* Supplied declaration required: FUN_002939f4. */
-/* Supplied declaration required: FUN_00296cc8. */
-extern int aeabi_idivmod(int, int);
+/* Supplied declaration required: scrSetResult. */
+/* Supplied declaration required: btlGetMainState. */
+/* Supplied declaration required: scrGetArg. */
+extern int __aeabi_idivmod(int, int);
 
 
 unsigned int FUN_002f71a4(void)
@@ -39,8 +39,8 @@ unsigned int FUN_002f71a4(void)
   int temp_v7;
   int temp_v8 [6];
   
-  temp_v0 = FUN_00296cc8(0);
-  FUN_00296cc8(1);
+  temp_v0 = scrGetArg(0);
+  scrGetArg(1);
   temp_v1 = FUN_00249a54();
   temp_v5 = 0;
   temp_v6 = 0;
@@ -48,7 +48,7 @@ unsigned int FUN_002f71a4(void)
   temp_v4 = temp_v8[0];
   if (temp_v8[0] < temp_v7 + temp_v8[0]) {
     do {
-      temp_v2 = FUN_002939f4();
+      temp_v2 = btlGetMainState();
       puVar4 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288);
       temp_v3 = *puVar4;
       if ((((temp_v3 & 0x10) == 0) && ((temp_v3 & 1) != 0)) && ((temp_v3 & 0x40) == 0)) {
@@ -58,17 +58,17 @@ unsigned int FUN_002f71a4(void)
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < temp_v8[0] + temp_v7);
   }
-  temp_v4 = FUN_002939f4();
+  temp_v4 = btlGetMainState();
   if (*(char *)(temp_v4 + 0x49c5) != '\0') {
-    FUN_002939f4();
+    btlGetMainState();
     temp_v4 = FUN_002499b4();
     if (temp_v4 != 0) {
       temp_v5 = temp_v5 + *(short *)(temp_v4 + 0x1b6);
       temp_v6 = temp_v6 + *(short *)(temp_v4 + 0x1b4);
     }
   }
-  temp_v4 = aeabi_idivmod(temp_v6 * 100,temp_v5);
-  FUN_0028dcb0(temp_v4 <= temp_v0);
+  temp_v4 = __aeabi_idivmod(temp_v6 * 100,temp_v5);
+  scrSetResult(temp_v4 <= temp_v0);
   return 1;
 }
 

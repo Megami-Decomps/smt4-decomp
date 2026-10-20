@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00167eb0(unsigned int);
 
 typedef int romwright_code(...);
-extern int DAT_00640118; /* 0x640118 */
+extern int g_asdProcess; /* 0x640118 */
 extern int DAT_0064011c; /* 0x64011c */
 
 /* Supplied declaration required: FUN_00167eb0. */
@@ -24,7 +24,7 @@ void FUN_0014166c(void)
   temp_v0 = FUN_001696f4();
   if ((temp_v0 == 1) && (temp_v0 = 0, 0 < DAT_0064011c)) {
     do {
-      for (temp_v1 = *(int *)(DAT_00640118 + temp_v0 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c)) {
+      for (temp_v1 = *(int *)(g_asdProcess + temp_v0 * 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x4c)) {
         if (*(char *)(temp_v1 + 0x98) == '\x03') {
           if (*(romwright_code **)(temp_v1 + 100) != (romwright_code *)0x0) {
             (**(romwright_code **)(temp_v1 + 100))(*(unsigned int *)(temp_v1 + 0x28));

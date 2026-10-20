@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int, int);
+int sysMemClear(unsigned int, int);
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_0017d158(int param_1)
@@ -21,7 +21,7 @@ void FUN_0017d158(int param_1)
   *(unsigned int *)(param_1 + 0xa4) = 0;
   param_1 = param_1 + temp_v0 * 0x4c;
   if ((param_1 != -4) && ((*(int *)(param_1 + 8) != 0 || (*(int *)(param_1 + 0x1c) != 0)))) {
-    FUN_002e6354(*(unsigned int *)(param_1 + 0x1c),*(int *)(param_1 + 0x24) * 0x1c);
+    sysMemClear(*(unsigned int *)(param_1 + 0x1c),*(int *)(param_1 + 0x24) * 0x1c);
     *(unsigned int *)(param_1 + 0x10) = 0;
     *(unsigned int *)(param_1 + 0x14) = 0;
     *(unsigned int *)(param_1 + 0x24) = 0;

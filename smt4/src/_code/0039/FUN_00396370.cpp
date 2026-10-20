@@ -19,7 +19,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_003965e4; /* 0x3965e4 */
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapScene; /* 0x447e88 */
 extern unsigned char DAT_0049fa61; /* 0x49fa61 */
 extern unsigned int DAT_0049fa64; /* 0x49fa64 */
 extern unsigned char DAT_0049fa68; /* 0x49fa68 */
@@ -72,9 +72,9 @@ unsigned int FUN_00396370(int param_1)
     temp_v4 = param_1 + temp_v3 * 4;
     temp_v2 = *(int *)(temp_v4 + 0x18);
     if (((temp_v2 != 0) && ((*(unsigned char *)(temp_v2 + 8) & 1) != 0)) && ((*(unsigned char *)(temp_v2 + 8) & 4) == 0)) {
-      temp_v10 = *(float *)(temp_v2 + 0x28) - *(float *)(DAT_00447e88 + 0x1c);
-      temp_v11 = *(float *)(temp_v2 + 0x2c) - *(float *)(DAT_00447e88 + 0x20);
-      temp_v8 = *(float *)(temp_v2 + 0x30) - *(float *)(DAT_00447e88 + 0x24);
+      temp_v10 = *(float *)(temp_v2 + 0x28) - *(float *)(g_lmapScene + 0x1c);
+      temp_v11 = *(float *)(temp_v2 + 0x2c) - *(float *)(g_lmapScene + 0x20);
+      temp_v8 = *(float *)(temp_v2 + 0x30) - *(float *)(g_lmapScene + 0x24);
       temp_v9 = (int)romwright_sqrt_4(temp_v10 * temp_v10 + temp_v11 * temp_v11 + temp_v8 * temp_v8);
       temp_v7 = SBORROW4(temp_v9,0x96);
       temp_v2 = temp_v9 - 0x96;

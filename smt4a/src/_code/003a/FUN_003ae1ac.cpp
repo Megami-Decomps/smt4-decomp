@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00340c7c(int, int);
 
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 
 /* Supplied declaration required: FUN_00340c7c. */
@@ -25,10 +25,10 @@ void FUN_003ae1ac(int *param_1)
   if (*(char *)(temp_v0 + 0x40) != '\0') {
     return;
   }
-  if (DAT_005f15fc != 0x27) {
-    if (DAT_005f15fc != 0x20) {
-      if ((DAT_005f15fc == 0x1c || DAT_005f15fc == 0x1d) ||
-         (DAT_005f15fc == 0x1e || DAT_005f15fc == 0x1f)) {
+  if (g_gameState != 0x27) {
+    if (g_gameState != 0x20) {
+      if ((g_gameState == 0x1c || g_gameState == 0x1d) ||
+         (g_gameState == 0x1e || g_gameState == 0x1f)) {
         *(unsigned int *)(*(int *)(*(int *)(temp_v0 + 0xd0) + 0x14) + 0x20) = 0x99000000;
         FUN_00340c7c(0x100,0x30000);
         *(unsigned char *)(temp_v0 + 0x40) = 1;

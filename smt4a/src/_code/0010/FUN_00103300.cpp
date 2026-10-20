@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e3d04(void);
+int asdOperatorNewD(void);
 int FUN_002e6c60(unsigned int *);
 int FUN_002e6c74(...);
 int FUN_002e6d0c(unsigned int *);
 
-/* Supplied declaration required: FUN_002e3d04. */
+/* Supplied declaration required: asdOperatorNewD. */
 extern int FUN_002e6c50(unsigned int);
 extern unsigned int FUN_002e6c58(unsigned int);
 /* Supplied declaration required: FUN_002e6c60. */
@@ -73,7 +73,7 @@ unsigned int FUN_00103300(unsigned char param_1,unsigned int *param_2,unsigned i
     if (temp_v2 != 0) {
       if ((param_2[3] & 0x3ff) >> 8 != 0) {
         temp_v2 = param_2[7];
-        FUN_002e3d04();
+        asdOperatorNewD();
         param_2[4] = temp_v2;
         if (temp_v2 == 0) goto LAB_001033cc;
         param_2[3] = param_2[3] | 0x800;
@@ -89,7 +89,7 @@ LAB_001033cc:
     }
     else {
       temp_v2 = param_2[7];
-      FUN_002e3d04();
+      asdOperatorNewD();
       param_2[4] = temp_v2;
       if (temp_v2 == 0) goto LAB_001033cc;
       temp_v5 = param_2[3];

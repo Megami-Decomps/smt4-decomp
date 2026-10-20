@@ -24,7 +24,7 @@ struct fn_0033f2b8_arg0 {
     undefined1 field_0x3c; /* +0x3c */
 };
 
-extern int *DAT_00433158; /* 0x433158 */
+extern int *g_aocSystem; /* 0x433158 */
 
 extern int FUN_0023e330(int *, int, unsigned int);
 /* Supplied declaration required: FUN_002be624. */
@@ -45,10 +45,10 @@ void FUN_0033f2b8(fn_0033f2b8_arg0 *param_1,int param_2)
   FUN_002be624(temp_v2,"event/npcgtix/npc%03d.bin",param_2);
   param_1->field_0x8 = 4;
   param_1->field_0xc = param_2;
-  temp_v1 = FUN_0023e330(DAT_00433158,param_2,1);
+  temp_v1 = FUN_0023e330(g_aocSystem,param_2,1);
   if (temp_v1 != 0) {
-    piVar3 = DAT_00433158;
-    FUN_00387a08(DAT_00433158,param_2,temp_v2);
+    piVar3 = g_aocSystem;
+    FUN_00387a08(g_aocSystem,param_2,temp_v2);
   }
   else {
     piVar3 = (int *)FUN_002c5c04(temp_v2);

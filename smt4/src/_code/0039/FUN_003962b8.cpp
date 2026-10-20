@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_00152bec(void);
-int FUN_002a775c(unsigned int);
+int asdMdlManagerDestroy(unsigned int);
 int FUN_002b2368(unsigned int *);
 
 typedef int romwright_code(...);
@@ -15,7 +15,7 @@ typedef struct {
 extern unsigned char DAT_0042231c; /* 0x42231c */
 
 /* Supplied declaration required: FUN_00152bec. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: FUN_002b2368. */
 
 
@@ -30,7 +30,7 @@ void FUN_003962b8(unsigned int *param_1)
   }
   if (param_1[0x1b] != 0) {
     FUN_00152bec();
-    FUN_002a775c(param_1[0x1b]);
+    asdMdlManagerDestroy(param_1[0x1b]);
     param_1[0x1b] = 0;
   }
   FUN_002b2368(param_1);

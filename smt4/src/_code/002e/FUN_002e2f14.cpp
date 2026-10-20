@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002c3f5c(int);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int FUN_002c415c(void);
+int asdMemFree(void);
 int FUN_002c526c(void);
 int software_interrupt(int);
 
@@ -18,7 +18,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002c3f5c. */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c526c. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
@@ -45,7 +45,7 @@ void FUN_002e2f14(int param_1)
   }
   FUN_002c3f5c(param_1 + 0x2c);
   if (*(int *)(param_1 + 0x28) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x28) = 0;
   }
   if (*(int *)(param_1 + 0x4c) != 0) {

@@ -5,16 +5,16 @@
 extern "C" {
 
 int FUN_001469a8(...);
-int FUN_001631d0(int, int);
-int FUN_0019a5a0(...);
-int FUN_0019c364(int);
+int jobStop(int, int);
+int asdMemFree(...);
+int scrScriptProcessDestroy(int);
 int FUN_001a0d08(int *);
 int FUN_001add24(int);
 int FUN_001aea28(unsigned int, unsigned int);
 int FUN_001aeafc(unsigned int);
 int FUN_002e3140(void);
 int FUN_002e3328(...);
-int FUN_002f1908(void);
+int uniteCameraDestroy(void);
 int FUN_0038b3f8(int, int);
 int FUN_003a2ecc(int);
 int FUN_00408184(int, int);
@@ -32,9 +32,9 @@ extern int *DAT_0057f290; /* 0x57f290 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001469a8. */
-/* Supplied declaration required: FUN_001631d0. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: jobStop. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_001a0d08. */
 /* Supplied declaration required: FUN_001add24. */
 /* Supplied declaration required: FUN_001aea28. */
@@ -42,7 +42,7 @@ extern int *DAT_0057f290; /* 0x57f290 */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002e3328. */
 extern int FUN_002e50d4(void);
-/* Supplied declaration required: FUN_002f1908. */
+/* Supplied declaration required: uniteCameraDestroy. */
 /* Supplied declaration required: FUN_0038b3f8. */
 /* Supplied declaration required: FUN_003a2ecc. */
 /* Supplied declaration required: FUN_00408184. */
@@ -80,7 +80,7 @@ void FUN_0031fb04(void)
     FUN_002e3328(temp_v0);
   }
   piVar1[0x249a] = 0;
-  FUN_0019a5a0(piVar1[0x249d]);
+  asdMemFree(piVar1[0x249d]);
   piVar1[0x249d] = 0;
   temp_v0 = FUN_002e50d4();
   FUN_00408184(0x25,temp_v0 - piVar1[0x107]);
@@ -91,7 +91,7 @@ void FUN_0031fb04(void)
     (**(romwright_code **)(*(int *)piVar1[0x2484] + 4))();
     piVar1[0x2484] = 0;
   }
-  FUN_002f1908();
+  uniteCameraDestroy();
   FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(piVar1[0x2482] + 4));
   FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(piVar1[0x2483] + 4));
   if ((int *)piVar1[0x2482] != (int *)0x0) {
@@ -109,16 +109,16 @@ void FUN_0031fb04(void)
     }
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 4);
-  FUN_0019c364(piVar1[0x10b]);
-  FUN_0019a5a0(piVar1[0x10a]);
-  FUN_0019a5a0(piVar1[0x109]);
+  scrScriptProcessDestroy(piVar1[0x10b]);
+  asdMemFree(piVar1[0x10a]);
+  asdMemFree(piVar1[0x109]);
   if (*piVar1 != 0) {
     FUN_004dc6fc();
     FUN_002e3328();
   }
   *piVar1 = 0;
-  FUN_001631d0(piVar1[0xfe],0);
-  FUN_0019a5a0(piVar1);
+  jobStop(piVar1[0xfe],0);
+  asdMemFree(piVar1);
   DAT_0057f290 = (int *)0x0;
   FUN_001add24(0x24);
   FUN_001add24(0x22);

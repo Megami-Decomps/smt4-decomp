@@ -1,34 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028d1f4` (_code @ 0x28d1f4, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only in the percentage multiply (retail: base in r0, percent in r1, constant in r2) */
+/* Returns the entry's explicit value (+0x50), or, when it has a percentage (+0x54), that percentage of the FUN_002a8764 base; 0 for a NULL entry. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ae164(void);
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ s32 value;
+    /* 0x54 */ u8 percent;
+} Entry;
 
-extern int *FUN_002a8764(void);
-/* Supplied declaration required: FUN_002ae164. */
+extern s32 *FUN_002a8764(void);
+extern Entry *FUN_002ae164(u32 id);
 
-
-int FUN_0028d1f4(int param_1)
-
+s32 FUN_0028d1f4(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  
-  temp_v0 = 0;
-  FUN_002ae164();
-  if (param_1 != 0) {
-    if (*(int *)(param_1 + 0x50) != 0) {
-      temp_v0 = *(int *)(param_1 + 0x50);
+    s32 result = 0;
+    Entry *entry = FUN_002ae164(id);
+
+    if (entry != NULL) {
+        if (entry->value != 0) {
+            result = entry->value;
+        }
+        if (entry->percent != 0) {
+            s32 *base = FUN_002a8764();
+
+            result = (entry->percent * *base) / 100;
+        }
     }
-    if (*(char *)(param_1 + 0x54) != '\0') {
-      piVar1 = (int *)FUN_002a8764();
-      temp_v0 = (int)((unsigned int)*(unsigned char *)(param_1 + 0x54) * *piVar1) / 100;
-    }
-  }
-  return temp_v0;
+    return result;
 }
 
-} /* extern "C" */
+}

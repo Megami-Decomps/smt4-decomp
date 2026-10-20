@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001861ac(void);
+extern int asdTMTexTableCallFileC(void);
 
 
 int FUN_001834a4(unsigned int param_1,int param_2)
@@ -12,7 +12,7 @@ int FUN_001834a4(unsigned int param_1,int param_2)
 {
   int temp_v0;
   
-  temp_v0 = FUN_001861ac();
+  temp_v0 = asdTMTexTableCallFileC();
   return **(int **)(temp_v0 + 4) + (param_2 % 1000) * 0x14;
 }
 

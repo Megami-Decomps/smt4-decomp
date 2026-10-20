@@ -13,14 +13,14 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_003eaf20. */
 /* Supplied declaration required: FUN_003f1b3c. */
 extern unsigned int FUN_0047f4cc(unsigned int);
 extern int FUN_004ec93c(unsigned int);
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 void FUN_003edfd4(int param_1)
@@ -32,8 +32,8 @@ void FUN_003edfd4(int param_1)
   int temp_v2;
   unsigned char temp_v3 [8];
   
-  temp_v0 = FUN_004ee568(DAT_0057113c);
-  if ((temp_v0 == 0) || (temp_v0 = FUN_004ec93c(DAT_0057113c), temp_v0 == 0)) {
+  temp_v0 = btlUnitGet(g_btlScriptUnit);
+  if ((temp_v0 == 0) || (temp_v0 = FUN_004ec93c(g_btlScriptUnit), temp_v0 == 0)) {
     temp_v0 = param_1;
     FUN_003eaf20();
     *(unsigned int *)(param_1 + 0x4cec) = 0;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00109824(...);
-int FUN_002e74c4(...);
+int strAssign(...);
 
 typedef struct fn_00109950_arg1 fn_00109950_arg1;
 struct fn_00109950_arg1 {
@@ -25,7 +25,7 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: FUN_00109824. */
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 
 
 int FUN_00109950(int param_1,fn_00109950_arg1 *param_2,unsigned int param_3,int *param_4,
@@ -46,7 +46,7 @@ int FUN_00109950(int param_1,fn_00109950_arg1 *param_2,unsigned int param_3,int 
       return 0;
     }
     temp_v0 = param_2->field_0x10 - 2;
-    FUN_002e74c4(param_2,param_2->field_0xc + param_2->field_0x18 + 2,temp_v0,0);
+    strAssign(param_2,param_2->field_0xc + param_2->field_0x18 + 2,temp_v0,0);
     param_2->field_0x10 = temp_v0;
   }
   do {

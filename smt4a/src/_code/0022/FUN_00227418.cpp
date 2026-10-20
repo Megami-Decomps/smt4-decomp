@@ -20,7 +20,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_0057f108; /* 0x57f108 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
 extern unsigned int FUN_001654d8(void);
@@ -52,8 +52,8 @@ unsigned int FUN_00227418(void)
   int *piVar9;
   
   temp_v1 = DAT_0057f108;
-  FUN_00157558(DAT_0059dbb4);
-  temp_v3 = DAT_0059dbb4;
+  FUN_00157558(g_renderCtx);
+  temp_v3 = g_renderCtx;
   temp_v2 = FUN_001692ac(1,0);
   piVar9 = (int *)(temp_v3 + 0x1258);
   temp_v6 = *piVar9;
@@ -172,8 +172,8 @@ LAB_00227588:
     FUN_00217f14();
   }
 LAB_00227770:
-  temp_v1 = DAT_0059dbb4;
-  piVar9 = (int *)(DAT_0059dbb4 + 0x1258);
+  temp_v1 = g_renderCtx;
+  piVar9 = (int *)(g_renderCtx + 0x1258);
   temp_v3 = *piVar9;
   temp_v2 = piVar9[temp_v3 + 2];
   *piVar9 = temp_v3 - 1;
@@ -181,8 +181,8 @@ LAB_00227770:
     (**(romwright_code **)(temp_v1 + 0x1274))();
     *(unsigned char *)(temp_v1 + 0x1270) = 0;
   }
-  FUN_0016c560(DAT_0059dbb4);
-  FUN_0016c410(DAT_0059dbb4);
+  FUN_0016c560(g_renderCtx);
+  FUN_0016c410(g_renderCtx);
   return 0;
 }
 

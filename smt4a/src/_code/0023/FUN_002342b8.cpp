@@ -4,13 +4,13 @@
 
 extern "C" {
 
-extern int DAT_0058103c; /* 0x58103c */
+extern int g_mapIf; /* 0x58103c */
 
 
 void FUN_002342b8(void)
 
 {
-  *(unsigned int *)(DAT_0058103c + 0x3c) = 2;
+  *(unsigned int *)(g_mapIf + 0x3c) = 2;
   return;
 }
 

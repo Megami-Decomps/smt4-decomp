@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0028dc68(int);
 int FUN_0028dc98(unsigned int);
-int FUN_0028dcb0(unsigned int);
+int scrSetResult(unsigned int);
 int FUN_0028dcf4(int, int);
 int FUN_0028e6d0(...);
 int FUN_002b8244(void);
@@ -29,7 +29,7 @@ extern int DAT_0043e194; /* 0x43e194 */
 
 /* Supplied declaration required: FUN_0028dc68. */
 /* Supplied declaration required: FUN_0028dc98. */
-/* Supplied declaration required: FUN_0028dcb0. */
+/* Supplied declaration required: scrSetResult. */
 extern int FUN_0028dccc(unsigned int);
 /* Supplied declaration required: FUN_0028dcf4. */
 /* Supplied declaration required: FUN_0028e6d0. */
@@ -114,7 +114,7 @@ FUN_002866b4(unsigned int param_1,unsigned int param_2,int param_3,int param_4,i
         temp_v6 = *(char *)(temp_v2 + 8);
       }
       if (temp_v2 == 0 || temp_v6 == '\0') {
-        FUN_0028dcb0(*(unsigned int *)(temp_v5 + 0x18));
+        scrSetResult(*(unsigned int *)(temp_v5 + 0x18));
         FUN_0028dc98(0xffffffff);
         FUN_0028dc68(0);
         return 1;
@@ -122,7 +122,7 @@ FUN_002866b4(unsigned int param_1,unsigned int param_2,int param_3,int param_4,i
       return 0;
     }
     if (temp_v6 == '\x05') {
-      FUN_0028dcb0(*(unsigned int *)(temp_v5 + 0x18));
+      scrSetResult(*(unsigned int *)(temp_v5 + 0x18));
       return 1;
     }
     temp_v2 = FUN_002c1d5c();

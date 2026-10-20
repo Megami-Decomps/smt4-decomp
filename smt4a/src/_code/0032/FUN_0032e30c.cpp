@@ -10,7 +10,7 @@ extern int FUN_0015688c(void);
 extern int FUN_0018719c(unsigned int);
 extern int FUN_001ab888(void);
 extern int FUN_00228ab0(int);
-extern int FUN_002e3390(short *);
+extern int wstrlen(short *);
 /* Supplied declaration required: FUN_002e59f8. */
 extern unsigned char FUN_0031cf94(void);
 /* Supplied declaration required: FUN_0031f0a8. */
@@ -59,7 +59,7 @@ void FUN_0032e30c(short *param_1)
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 3);
-  temp_v2 = FUN_002e3390(param_1 + 7);
+  temp_v2 = wstrlen(param_1 + 7);
   if (temp_v2 == 0) {
     FUN_002e59f8(temp_v1 + 0x50,param_1 + 7,0x12);
   }

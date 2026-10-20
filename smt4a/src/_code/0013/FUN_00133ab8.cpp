@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e32a4(int, unsigned char *, unsigned char *);
 int FUN_002e6e14(void);
 int FUN_00307ad6(int, int, int, int *);
-int FUN_0031155e(int *);
+int vectorSize12B(int *);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -23,12 +23,12 @@ extern unsigned char LAB_00133b44; /* 0x133b44 */
 #endif
 /* Supplied declaration required: FUN_002e32a4. */
 extern int *FUN_002e4e86(unsigned int *, unsigned int *);
-extern int FUN_002e6dac(void);
+extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00307ad6. */
 extern unsigned int FUN_00311532(unsigned int, int *);
-/* Supplied declaration required: FUN_0031155e. */
-extern unsigned int aeabi_idivmod(int, unsigned int);
+/* Supplied declaration required: vectorSize12B. */
+extern unsigned int __aeabi_idivmod(int, unsigned int);
 
 
 unsigned long long FUN_00133ab8(int *param_1,unsigned int param_2)
@@ -52,18 +52,18 @@ unsigned long long FUN_00133ab8(int *param_1,unsigned int param_2)
     temp_v5 = 0x15555555;
     FUN_002e32a4(8,&LAB_00133b44,&LAB_00133b44);
   }
-  temp_v0 = aeabi_idivmod(param_1[2] - *param_1,0xc);
+  temp_v0 = __aeabi_idivmod(param_1[2] - *param_1,0xc);
   if (temp_v0 < temp_v6) {
-    temp_v1 = FUN_0031155e(param_1);
+    temp_v1 = vectorSize12B(param_1);
     temp_v5 = FUN_00311532(temp_v1,param_1);
     piVar3 = (int *)FUN_002e4e86(&temp_v6,(unsigned int *)&temp_v5);
     temp_v2 = *piVar3;
-    temp_v3 = FUN_002e6dac();
+    temp_v3 = rt_malloc();
     FUN_00307ad6(*param_1,param_1[1],temp_v3,param_1);
     for (temp_v4 = *param_1; temp_v4 != param_1[1]; temp_v4 = temp_v4 + 0xc) {
     }
     FUN_002e6e14();
-    temp_v4 = FUN_0031155e(param_1);
+    temp_v4 = vectorSize12B(param_1);
     *param_1 = temp_v3;
     param_1[2] = temp_v3 + temp_v2 * 0xc;
     param_1[1] = temp_v4 * 0xc + temp_v3;

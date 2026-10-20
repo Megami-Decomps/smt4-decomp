@@ -27,7 +27,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 extern int DAT_0049fcfc; /* 0x49fcfc */
 extern signed char DAT_0049fd00; /* 0x49fd00 */
 
@@ -63,8 +63,8 @@ void FUN_0039d0d0(int param_1)
   FUN_00231bb8(param_1 + 0x164,&temp_v7);
   if (DAT_0049fcfc == 0) {
     temp_v1 = FUN_002c5d80(1);
-    FUN_002bee04(DAT_0044ea00,3,temp_v1);
-    FUN_002c1b64(DAT_0044ea00,0);
+    FUN_002bee04(g_titleScene,3,temp_v1);
+    FUN_002c1b64(g_titleScene,0);
     temp_v3 = 0;
     if (temp_v3 < *(int *)(param_1 + 0x121b4)) {
       do {
@@ -84,10 +84,10 @@ void FUN_0039d0d0(int param_1)
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < *(int *)(param_1 + 0x121b4));
     }
-    FUN_002bedb0(DAT_0044ea00,3);
+    FUN_002bedb0(g_titleScene,3);
   }
   temp_v1 = FUN_002c5d80(3,0);
-  FUN_002bee04(DAT_0044ea00,3,temp_v1);
+  FUN_002bee04(g_titleScene,3,temp_v1);
   temp_v3 = 0;
   if (temp_v3 < *(int *)(param_1 + 0x61b0)) {
     do {
@@ -106,11 +106,11 @@ void FUN_0039d0d0(int param_1)
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < *(int *)(param_1 + 0x61b0));
   }
-  FUN_002bedb0(DAT_0044ea00,3);
+  FUN_002bedb0(g_titleScene,3);
   if (DAT_0049fd00 != '\0') {
     temp_v1 = FUN_002c5d80(1,0);
-    FUN_002bee04(DAT_0044ea00,3,temp_v1);
-    FUN_002c1b64(DAT_0044ea00,0);
+    FUN_002bee04(g_titleScene,3,temp_v1);
+    FUN_002c1b64(g_titleScene,0);
     temp_v3 = 0;
     if (temp_v3 < *(int *)(param_1 + 0x121b4)) {
       do {
@@ -145,10 +145,10 @@ void FUN_0039d0d0(int param_1)
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < *(int *)(param_1 + 0x121b4));
     }
-    FUN_002bedb0(DAT_0044ea00,3);
+    FUN_002bedb0(g_titleScene,3);
   }
   temp_v1 = FUN_002c5d80(1,0);
-  FUN_002bee04(DAT_0044ea00,3,temp_v1);
+  FUN_002bee04(g_titleScene,3,temp_v1);
   temp_v3 = 0;
   if (temp_v3 < *(int *)(param_1 + 0x5a88)) {
     do {
@@ -168,7 +168,7 @@ void FUN_0039d0d0(int param_1)
     } while (temp_v3 < *(int *)(param_1 + 0x5a88));
   }
   FUN_002bed3c();
-  FUN_002bedb0(DAT_0044ea00,3);
+  FUN_002bedb0(g_titleScene,3);
   return;
 }
 

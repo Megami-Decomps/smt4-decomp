@@ -29,7 +29,7 @@ extern unsigned char LAB_00369910; /* 0x369910 */
 extern unsigned char LAB_00369918; /* 0x369918 */
 extern unsigned char LAB_00369924; /* 0x369924 */
 extern unsigned char LAB_00369930; /* 0x369930 */
-extern int DAT_00588ff0; /* 0x588ff0 */
+extern int g_bustupViewer; /* 0x588ff0 */
 extern char s__V_V_V_V_V_V_V_V_V_V_005890d4[113]; /* 0x5890d4 */
 extern unsigned char DAT_006199d8; /* 0x6199d8 */
 
@@ -54,7 +54,7 @@ unsigned int FUN_003692c0(void)
   unsigned char temp_v7 [256];
   unsigned char temp_v8 [268];
   
-  temp_v0 = DAT_00588ff0;
+  temp_v0 = g_bustupViewer;
   FUN_002e6dd0(temp_v7,0x100);
   FUN_002e6dd0(temp_v8,0x100);
   temp_v6 = 16.0f;
@@ -107,11 +107,11 @@ unsigned int FUN_003692c0(void)
     case 3:
       switch(temp_v3) {
       case 4:
-        if (*(char *)(*(int *)(DAT_00588ff0 + 0x50) + DAT_00588ff0 + 100) != '\0')
+        if (*(char *)(*(int *)(g_bustupViewer + 0x50) + g_bustupViewer + 100) != '\0')
         goto LAB_0036945c;
         break;
       case 5:
-        if (*(char *)(*(int *)(DAT_00588ff0 + 0x50) + DAT_00588ff0 + 100) == '\0')
+        if (*(char *)(*(int *)(g_bustupViewer + 0x50) + g_bustupViewer + 100) == '\0')
         goto LAB_0036945c;
         break;
       case 6:

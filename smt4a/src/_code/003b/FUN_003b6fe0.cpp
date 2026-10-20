@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00180008(int);
+int jyoucyuGetTableEntry(int);
 int FUN_0046a33c(void);
 int QuestCenter_GetActiveEntry(void);
 
@@ -13,7 +13,7 @@ extern unsigned int DAT_005f19f4; /* 0x5f19f4 */
 extern unsigned int DAT_005f19f8; /* 0x5f19f8 */
 extern unsigned int DAT_005f19fc; /* 0x5f19fc */
 
-/* Supplied declaration required: FUN_00180008. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_0046a33c. */
 extern int QuestCenterMode_IsBusy(void);
@@ -28,7 +28,7 @@ unsigned char FUN_003b6fe0(void)
   
   temp_v0 = FUN_002deb84();
   if (temp_v0 == 0) {
-    FUN_00180008(0);
+    jyoucyuGetTableEntry(0);
     QuestCenter_GetActiveEntry();
     FUN_0046a33c();
     if (DAT_005f19f1 != '\0') {

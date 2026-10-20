@@ -3,8 +3,8 @@
 extern "C" {
 
 int FUN_002917b8(void);
-int FUN_002a7218(void);
-int FUN_002c415c(void);
+int scrScriptProcessDestroy(void);
+int asdMemFree(void);
 
 typedef struct fn_0027348c_arg0 fn_0027348c_arg0;
 struct fn_0027348c_arg0 {
@@ -22,8 +22,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002917b8. */
-/* Supplied declaration required: FUN_002a7218. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_0027348c(fn_0027348c_arg0 *param_1)
@@ -31,15 +31,15 @@ void FUN_0027348c(fn_0027348c_arg0 *param_1)
 {
 /* irregular: 3 native warning(s); review required */
   if (param_1->field_0xc != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1->field_0xc = 0;
   }
   if (param_1->field_0x10 != 0) {
-    FUN_002c415c();
+    asdMemFree();
     param_1->field_0x10 = 0;
   }
   if (param_1->field_0x14 != 0) {
-    FUN_002a7218();
+    scrScriptProcessDestroy();
     param_1->field_0x14 = 0;
   }
   if (param_1->field_0x8 != 0) {

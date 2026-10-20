@@ -8,7 +8,7 @@ extern unsigned int DAT_00571148; /* 0x571148 */
 extern unsigned int DAT_0057114c; /* 0x57114c */
 
 extern int FUN_004e83ac(int *, int, int);
-extern int FUN_004ee568(void);
+extern int btlUnitGet(void);
 
 
 int FUN_004e8300(int *param_1)
@@ -21,7 +21,7 @@ int FUN_004e8300(int *param_1)
   int temp_v3;
   int temp_v4;
   
-  temp_v0 = FUN_004ee568();
+  temp_v0 = btlUnitGet();
   temp_v4 = 0;
   temp_v2 = 0;
   do {

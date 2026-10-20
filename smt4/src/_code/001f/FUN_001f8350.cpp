@@ -8,8 +8,8 @@ int FUN_00287b0c(void);
 int FUN_00287be4(void);
 
 extern int DAT_004474f4; /* 0x4474f4 */
-extern int DAT_00447e88; /* 0x447e88 */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_lmapScene; /* 0x447e88 */
+extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
@@ -42,12 +42,12 @@ void FUN_001f8350(void)
   temp_v10 = -600.0f;
   temp_v9 = 0.0f;
   *(unsigned int *)(DAT_004474f4 + 0x38) = 0xc2c80000;
-  temp_v1 = DAT_00447e88;
+  temp_v1 = g_lmapScene;
   temp_v11 = 70.0f;
-  if (DAT_0049f91c != 0x19) {
-    if (DAT_0049f91c != 0x1a) {
-      if (DAT_0049f91c != 0x1b) {
-        if ((DAT_0049f91c == 0x1c) && (DAT_0049f920 == 1)) {
+  if (g_gameState != 0x19) {
+    if (g_gameState != 0x1a) {
+      if (g_gameState != 0x1b) {
+        if ((g_gameState == 0x1c) && (DAT_0049f920 == 1)) {
           *(unsigned int *)(temp_v0 + 0x38) = 0xc42f0000;
           temp_v5 = *(float *)(temp_v1 + 0x20) + 1400.0f;
           temp_v10 = temp_v9;
@@ -104,8 +104,8 @@ void FUN_001f8350(void)
     }
   }
   else if (DAT_0049f920 == 3) {
-    if ((int)*(float *)(DAT_00447e88 + 0x24) >= 0x453b8001) {
-      temp_v6 = (*(float *)(DAT_00447e88 + 0x24) - 3000.0f) * 0.5f;
+    if ((int)*(float *)(g_lmapScene + 0x24) >= 0x453b8001) {
+      temp_v6 = (*(float *)(g_lmapScene + 0x24) - 3000.0f) * 0.5f;
       temp_v8 = temp_v9;
       if ((0.0f <= temp_v6) && (temp_v8 = temp_v6, (int)temp_v6 >= 0x43480001)) {
         temp_v8 = temp_v7;
@@ -136,7 +136,7 @@ void FUN_001f8350(void)
   FUN_00287be4();
   temp_v7 = *(float *)(DAT_004474f4 + 0x18);
   FUN_00287b0c();
-  temp_v8 = *(float *)(DAT_00447e88 + 0x20);
+  temp_v8 = *(float *)(g_lmapScene + 0x20);
   if (temp_v7 < temp_v9) {
     temp_v7 = -temp_v7;
   }

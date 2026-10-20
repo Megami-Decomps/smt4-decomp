@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0010063a(unsigned short *, unsigned int, int, unsigned char *);
-int FUN_001630d4(int, int, int, unsigned int, int);
+int qsort(unsigned short *, unsigned int, int, unsigned char *);
+int asdMemoryAlloc(int, int, int, unsigned int, int);
 int FUN_00184310(void);
-int FUN_0019a5a0(unsigned short *);
+int asdMemFree(unsigned short *);
 int FUN_001aba54(void);
-int FUN_002e6354(unsigned char [88], int);
+int sysMemClear(unsigned char [88], int);
 int FUN_002e6dd0(...);
 int FUN_0034a290(void);
 int FUN_003c3f1c(void);
@@ -39,12 +39,12 @@ typedef struct {
 
 extern unsigned char LAB_0038e764; /* 0x38e764 */
 
-/* Supplied declaration required: FUN_0010063a. */
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: qsort. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001aba54. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd0. */
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: FUN_003c3f1c. */
@@ -85,7 +85,7 @@ void FUN_0034c340(unsigned short *param_1,unsigned int param_2,int param_3,unsig
   char acStack_dc [176];
   unsigned int temp_v15;
   
-  FUN_002e6354(temp_v13,0x58);
+  sysMemClear(temp_v13,0x58);
   temp_v5 = 0;
   if (param_3 != 0) {
     temp_v5 = (*(unsigned int *)(param_3 + 4) & 0x1ffff) >> 2;
@@ -95,7 +95,7 @@ void FUN_0034c340(unsigned short *param_1,unsigned int param_2,int param_3,unsig
   }
   FUN_00184310();
   puVar7 = (unsigned short *)0x100;
-  FUN_001630d4(0x100,0x100,0,param_2 * 6,1);
+  asdMemoryAlloc(0x100,0x100,0,param_2 * 6,1);
   FUN_002e6dd0();
   FUN_002e6dd0(&uStack_e0,0xb0);
   temp_v11 = 0;
@@ -241,7 +241,7 @@ void FUN_0034c340(unsigned short *param_1,unsigned int param_2,int param_3,unsig
       temp_v11 = temp_v11 + 1;
     } while (temp_v11 < (int)param_2);
   }
-  FUN_0010063a(puVar7,param_2,6,&LAB_0038e764);
+  qsort(puVar7,param_2,6,&LAB_0038e764);
   if (0 < (int)(param_2 - 1)) {
     puVar12 = puVar7 + -3;
     puVar13 = param_1 + -1;
@@ -264,7 +264,7 @@ void FUN_0034c340(unsigned short *param_1,unsigned int param_2,int param_3,unsig
   if (-1 < temp_v11) {
     param_1[temp_v11] = puVar7[temp_v11 * 3];
   }
-  FUN_0019a5a0(puVar7);
+  asdMemFree(puVar7);
   return;
 }
 

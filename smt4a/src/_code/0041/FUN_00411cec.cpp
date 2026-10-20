@@ -19,7 +19,7 @@ extern unsigned int DAT_00573c5c; /* 0x573c5c */
 extern unsigned int DAT_00573c60; /* 0x573c60 */
 extern unsigned int DAT_00573c64; /* 0x573c64 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_001633a0. */
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_004fdb18. */
@@ -40,7 +40,7 @@ void FUN_00411cec(void)
   unsigned int *puVar9;
   int aiStack_38 [5];
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   FUN_001b4a90(aiStack_38,0x10,0xffffffff);
   piVar7 = (int *)(temp_v0 + 0x1ffc);
   temp_v5 = 0;

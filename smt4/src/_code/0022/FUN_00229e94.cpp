@@ -19,9 +19,9 @@ extern unsigned char LAB_002d06dc; /* 0x2d06dc */
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
 /* Supplied declaration required: FUN_002b46f8. */
-extern unsigned int FUN_002c0c74(unsigned int);
-extern unsigned int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 
 
 void FUN_00229e94(unsigned char param_1,int param_2)
@@ -32,9 +32,9 @@ void FUN_00229e94(unsigned char param_1,int param_2)
   unsigned int temp_v1;
   unsigned int temp_v2 [2];
   
-  temp_v0 = FUN_002c0cec(5,3);
-  temp_v1 = FUN_002c0cc4();
-  temp_v0 = FUN_002c0c74(temp_v0);
+  temp_v0 = dataTableGet(5,3);
+  temp_v1 = dataTableGetEntries();
+  temp_v0 = dataTableGetCount(temp_v0);
   temp_v2[0] = romwright_piece_3_1((((unsigned int)(temp_v2[0]) >> 8) & 0xffffffU),param_1);
   temp_v2[0] = (temp_v2[0] & 0xff0000ff) | (param_2 << 8);
   FUN_002b46f8(temp_v2,temp_v1,temp_v0,4,&LAB_002d06dc);

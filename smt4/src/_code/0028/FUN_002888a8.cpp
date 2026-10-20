@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_11_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -114,7 +114,7 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
           FUN_002b0750(2,param_5,param_6,param_9,temp_v10,temp_v1,(int)psVar2[1],temp_v11);
         }
       }
-      temp_v5 = DAT_0044ea00;
+      temp_v5 = g_titleScene;
       if (temp_v4 == 0) {
         FUN_002bed3c();
         return;
@@ -138,7 +138,7 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
         FUN_002b0750(2,param_5,param_7,param_9 + temp_v1,(int)param_10,temp_v4,
                      (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),temp_v10);
       }
-      temp_v1 = DAT_0044ea00;
+      temp_v1 = g_titleScene;
       temp_v0 = FUN_002c5da8(6,7,0);
       piVar6 = (int *)(temp_v1 + 0x12ac);
       temp_v5 = piVar6[*piVar6 + 2];
@@ -167,7 +167,7 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
           FUN_002b0750(2,param_5,param_6,param_9,temp_v10,temp_v7,(int)psVar2[1],temp_v11);
         }
       }
-      temp_v2 = DAT_0044ea00;
+      temp_v2 = g_titleScene;
       if (temp_v1 == 0) {
         FUN_002bed3c();
         return;
@@ -191,7 +191,7 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
         FUN_002b0750(2,param_5,param_8,param_9 + temp_v7,(int)param_10,temp_v1,
                      (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),temp_v10);
       }
-      temp_v1 = DAT_0044ea00;
+      temp_v1 = g_titleScene;
       temp_v0 = FUN_002c5da8(6,7,0);
       piVar6 = (int *)(temp_v1 + 0x12ac);
       temp_v5 = piVar6[*piVar6 + 2];

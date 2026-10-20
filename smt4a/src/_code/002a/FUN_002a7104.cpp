@@ -8,7 +8,7 @@ int FUN_00184310(void);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_002a4914(int, int);
 int FUN_002a4964(...);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 int FUN_003d4104(void);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -23,7 +23,7 @@ extern int DAT_00588fe8; /* 0x588fe8 */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_002a4914. */
 /* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003d4104. */
 
 
@@ -42,7 +42,7 @@ void FUN_002a7104(int param_1)
   temp_v2 = DAT_00588fe8;
   *(unsigned short *)(DAT_00588fe8 + 0x2348) = 0;
   *(unsigned short *)(temp_v2 + 0x234a) = 0;
-  FUN_002e6354(temp_v2 + 0xf48,0x1400);
+  sysMemClear(temp_v2 + 0xf48,0x1400);
   puVar7 = (unsigned short *)0x0;
   do {
     puVar4 = puVar7;

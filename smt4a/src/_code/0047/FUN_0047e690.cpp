@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_0010063a(int, int, int, unsigned char *);
+int qsort(int, int, int, unsigned char *);
 int FUN_001628c0(unsigned char *, unsigned int, int, int);
 int FUN_0018719c(...);
 int FUN_001aba54(void);
-int FUN_002e3d04(void);
-int FUN_002e6354(...);
+int asdOperatorNewD(void);
+int sysMemClear(...);
 int FUN_002e6490(int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -33,18 +33,18 @@ extern unsigned int DAT_00573cd4; /* 0x573cd4 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_0010063a. */
-extern int FUN_0014aa78(void);
+/* Supplied declaration required: qsort. */
+extern int btlGetMainState(void);
 extern unsigned int FUN_0014af98(void);
 /* Supplied declaration required: FUN_001628c0. */
 extern int FUN_001633a0(unsigned int);
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018719c. */
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_001aba54. */
-/* Supplied declaration required: FUN_002e3d04. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: asdOperatorNewD. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6490. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -119,16 +119,16 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
   else if (param_3 != 0) {
     temp_v20 = 2;
   }
-  temp_v0 = FUN_00187180(10,9);
-  temp_v1 = FUN_00192798();
-  temp_v2 = FUN_00192748(temp_v0);
+  temp_v0 = dataTableGet(10,9);
+  temp_v1 = dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v0);
   temp_v6 = temp_v2 << 2;
   temp_v3 = temp_v6;
-  FUN_002e3d04();
+  asdOperatorNewD();
   temp_v4 = temp_v6;
-  FUN_002e3d04();
-  FUN_002e6354(temp_v3,temp_v6);
-  FUN_002e6354(temp_v4,temp_v6);
+  asdOperatorNewD();
+  sysMemClear(temp_v3,temp_v6);
+  sysMemClear(temp_v4,temp_v6);
   temp_v13 = 0;
   temp_v12 = 0;
   temp_v15 = 0;
@@ -176,8 +176,8 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
       temp_v9 = temp_v9 + 1;
     } while (temp_v9 < temp_v2);
     if (temp_v13 + temp_v12 != 0) {
-      FUN_002e3d04();
-      FUN_002e6354();
+      asdOperatorNewD();
+      sysMemClear();
       if (temp_v12 != 0) {
         rt_memcpy_w(temp_v6,temp_v4,temp_v12 << 2);
         temp_v13 = temp_v12;
@@ -185,10 +185,10 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
       else {
         rt_memcpy_w(temp_v6,temp_v3,temp_v13 << 2);
       }
-      FUN_0010063a(temp_v6,temp_v13,4,&LAB_0047e678);
+      qsort(temp_v6,temp_v13,4,&LAB_0047e678);
       temp_v12 = temp_v12 << 2;
-      FUN_002e3d04();
-      FUN_002e6354();
+      asdOperatorNewD();
+      sysMemClear();
       temp_v5 = 0;
       temp_v11 = 1;
       temp_v14 = 0;
@@ -199,7 +199,7 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
           temp_v10 = *(int *)(temp_v6 + temp_v1 * 4);
           if (*(short *)(temp_v10 + 0xc) != 0) {
             if (*(short *)(temp_v10 + 0xc) != 99) {
-              temp_v7 = FUN_0014aa78();
+              temp_v7 = btlGetMainState();
               if ((((DAT_00573cd4 & *(unsigned int *)(temp_v7 + 0x45a4)) == 0 &&
                     (*(unsigned int *)(temp_v7 + 0x45a0) & DAT_00573cd0) == 0) && (temp_v11 != 99)) &&
                  (temp_v11 <= *(short *)(temp_v10 + 0xc))) {
@@ -218,7 +218,7 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
               }
             }
             else {
-              temp_v7 = FUN_0014aa78();
+              temp_v7 = btlGetMainState();
               if (((DAT_00573cd4 & *(unsigned int *)(temp_v7 + 0x45a4)) == 0 &&
                    (*(unsigned int *)(temp_v7 + 0x45a0) & DAT_00573cd0) == 0) &&
                  (temp_v7 = FUN_0018719c(*(unsigned short *)(temp_v10 + 6)), temp_v7 != 0)) {
@@ -248,8 +248,8 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
         } while (temp_v1 < temp_v13);
         if (temp_v5 != 0) {
           temp_v13 = temp_v14 << 2;
-          FUN_002e3d04();
-          FUN_002e6354();
+          asdOperatorNewD();
+          sysMemClear();
           temp_v10 = 0;
           FUN_00100388(temp_v21,&LAB_0047ec84);
           temp_v1 = 0;

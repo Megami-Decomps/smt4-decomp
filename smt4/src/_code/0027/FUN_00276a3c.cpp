@@ -34,7 +34,7 @@ typedef struct {
 } void_stack;
 
 extern int *DAT_004474f4; /* 0x4474f4 */
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapScene; /* 0x447e88 */
 extern unsigned char DAT_0049f3f0; /* 0x49f3f0 */
 extern int DAT_0049fc8c; /* 0x49fc8c */
 extern signed char DAT_0049fce8; /* 0x49fce8 */
@@ -71,7 +71,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
 /* Supplied declaration required: FUN_002c2950. */
-extern short aeabi_idivmod(short, int);
+extern short __aeabi_idivmod(short, int);
 
 
 void FUN_00276a3c(void)
@@ -207,13 +207,13 @@ void FUN_00276a3c(void)
       temp_v4 = (int)(short)temp_v3;
       if (0 < temp_v4) {
         temp_v1 = *(short *)((int)DAT_004474f4 + 0x2aa);
-        temp_v0 = aeabi_idivmod(temp_v1,temp_v4 + 5);
+        temp_v0 = __aeabi_idivmod(temp_v1,temp_v4 + 5);
         *(short *)((int)piVar4 + 0x2aa) = temp_v1 - temp_v0;
         temp_v2 = piVar4[0xab];
-        temp_v1 = aeabi_idivmod((short)temp_v2,temp_v4 + 5);
+        temp_v1 = __aeabi_idivmod((short)temp_v2,temp_v4 + 5);
         *(short *)(piVar4 + 0xab) = (short)temp_v2 - temp_v1;
         temp_v1 = *(short *)((int)piVar4 + 0x2ae);
-        temp_v0 = aeabi_idivmod(temp_v1,temp_v4 + 5);
+        temp_v0 = __aeabi_idivmod(temp_v1,temp_v4 + 5);
         *(short *)((int)piVar4 + 0x2ae) = temp_v1 - temp_v0;
         *(short *)(piVar4 + 0xaa) = (short)temp_v3 - 1;
       }
@@ -250,7 +250,7 @@ void FUN_00276a3c(void)
   }
   temp_v18 = 40.0f;
   if ((char)DAT_004474f4[0x87] != '\0') {
-    temp_v3 = *(int *)(DAT_00447e88 + 0x1c);
+    temp_v3 = *(int *)(g_lmapScene + 0x1c);
     FUN_00287aec();
     if (temp_v3 < 0x43340000) {
       FUN_002c159c(&DAT_0049f3f0);
@@ -278,7 +278,7 @@ void FUN_00276a3c(void)
   }
   if (!(temp_v3 == 6 || temp_v3 == 0xf)) {
     temp_v2 = FUN_002c2950();
-    temp_v3 = DAT_00447e88;
+    temp_v3 = g_lmapScene;
     piVar4 = DAT_004474f4;
     temp_v4 = DAT_004474f4[0x82];
     if (DAT_004474f4[0x82] == -1) {
@@ -304,20 +304,20 @@ void FUN_00276a3c(void)
       }
     }
     temp_v12 = 0.017453292f;
-    DAT_004474f4[0x10] = *(int *)(DAT_00447e88 + 0x1c);
+    DAT_004474f4[0x10] = *(int *)(g_lmapScene + 0x1c);
     piVar4[0x12] = *(int *)(temp_v3 + 0x24);
     temp_v9 = (float)piVar4[6] * 0.017453292f;
     FUN_0028250c();
     piVar4 = DAT_004474f4;
     DAT_004474f4[0xd] =
-         (int)(*(float *)(DAT_00447e88 + 0x1c) - temp_v9 * (float)DAT_004474f4[temp_v4 + 0x62]);
+         (int)(*(float *)(g_lmapScene + 0x1c) - temp_v9 * (float)DAT_004474f4[temp_v4 + 0x62]);
     temp_v9 = (float)piVar4[6] * temp_v12;
     FUN_00282390();
-    temp_v3 = DAT_00447e88;
+    temp_v3 = g_lmapScene;
     piVar4 = DAT_004474f4;
     temp_v14 = 90.0f;
     DAT_004474f4[0xf] =
-         (int)(*(float *)(DAT_00447e88 + 0x24) - temp_v9 * (float)DAT_004474f4[temp_v4 + 0x62]);
+         (int)(*(float *)(g_lmapScene + 0x24) - temp_v9 * (float)DAT_004474f4[temp_v4 + 0x62]);
     piVar4[0x11] = (int)(*(float *)(temp_v3 + 0x20) + (float)piVar4[temp_v4 + 0x32]);
     piVar4[0xe] = (int)(*(float *)(temp_v3 + 0x20) + (float)piVar4[temp_v4 + 0x42]);
     temp_v9 = ((float)piVar4[6] - 90.0f) * temp_v12;
@@ -363,9 +363,9 @@ void FUN_00276a3c(void)
     temp_v11 = (float)piVar4[0xe] + temp_v12 + temp_v10;
     piVar4[0xe] = (int)temp_v11;
     piVar4[0x86] = (int)(temp_v12 + temp_v10);
-    temp_v3 = DAT_00447e88;
+    temp_v3 = g_lmapScene;
     if ((char)piVar4[0xae] == '\0') {
-      temp_v10 = *(float *)(DAT_00447e88 + 0x20) + 5.0f;
+      temp_v10 = *(float *)(g_lmapScene + 0x20) + 5.0f;
       if (temp_v10 < temp_v11) {
         temp_v10 = temp_v11;
       }
@@ -594,7 +594,7 @@ void FUN_00276a3c(void)
       }
     }
     FUN_00298d50(&DAT_0049f3f0);
-    temp_v3 = *(int *)(DAT_00447e88 + 0x1c);
+    temp_v3 = *(int *)(g_lmapScene + 0x1c);
     FUN_00287aec();
     if (temp_v3 < 0x43340000) {
       FUN_002c159c(&DAT_0049f3f0);

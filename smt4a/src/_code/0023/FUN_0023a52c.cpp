@@ -1,24 +1,20 @@
-#include "romwright_types.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
-int FUN_002c5df4(void);
+void FUN_002c5df4(void);
 
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
-extern unsigned char DAT_0060fc08; /* 0x60fc08 */
-
-/* Supplied declaration required: FUN_002c5df4. */
-
+extern GameStateA g_gameState;
+extern struct {
+    u8 unk000[0x394];
+    s8 unk394;
+} DAT_0060fc08;
 
 void FUN_0023a52c(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  if (((*(signed char *)((unsigned char *)&DAT_0060fc08 + 0x394)) != '\0') && ((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x27)) != '\0')) {
-    FUN_002c5df4();
-    return;
-  }
-  return;
+    if (DAT_0060fc08.unk394 != 0 && g_gameState.unk27 != 0) {
+        FUN_002c5df4();
+    }
 }
 
 } /* extern "C" */

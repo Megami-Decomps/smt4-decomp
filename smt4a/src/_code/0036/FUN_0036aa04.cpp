@@ -31,8 +31,8 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern int DAT_00581288; /* 0x581288 */
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern int g_lmapScene; /* 0x581288 */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
 extern int FUN_00162e8c(void);
 /* Supplied declaration required: FUN_003fd76c. */
@@ -58,7 +58,7 @@ void FUN_0036aa04(fn_0036aa04_arg0 *param_1)
   temp_v0 = *(int *)((int)param_1->field_0xd8 + 4);
   temp_v2 = *(int *)((int)param_1->field_0xec + 4);
   temp_v3 = *(int *)((int)param_1->field_0xbc + 4);
-  if ((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x23)) != '\0') {
+  if ((*(signed char *)((unsigned char *)&g_gameState + 0x23)) != '\0') {
     *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) | 3;
     *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
     *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
@@ -93,7 +93,7 @@ void FUN_0036aa04(fn_0036aa04_arg0 *param_1)
       }
       *(unsigned int *)(temp_v2 + 4) = temp_v1;
     }
-    FUN_003fd76c(temp_v3,DAT_00581288 + 0x1c);
+    FUN_003fd76c(temp_v3,g_lmapScene + 0x1c);
     FUN_003fd784(temp_v3);
     temp_v0 = FUN_004ffb58(temp_v3);
     if (temp_v0 != 0) {
@@ -116,9 +116,9 @@ void FUN_0036aa04(fn_0036aa04_arg0 *param_1)
         temp_v1 = *(unsigned int *)(temp_v2 + 4) | 3;
       }
       *(unsigned int *)(temp_v2 + 4) = temp_v1;
-      temp_v4 = *(unsigned int *)(DAT_00581288 + 0x1c);
-      uStack_30 = *(unsigned int *)(DAT_00581288 + 0x24);
-      temp_v5 = *(float *)(DAT_00581288 + 0x20) + 20.0f;
+      temp_v4 = *(unsigned int *)(g_lmapScene + 0x1c);
+      uStack_30 = *(unsigned int *)(g_lmapScene + 0x24);
+      temp_v5 = *(float *)(g_lmapScene + 0x20) + 20.0f;
       FUN_003fd76c(temp_v2,&temp_v4);
       FUN_003fd784(temp_v2);
       piVar5 = (int *)(temp_v0 + 0x15b4);

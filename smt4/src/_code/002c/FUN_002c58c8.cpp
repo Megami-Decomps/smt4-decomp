@@ -8,7 +8,7 @@ int FUN_002b9178(void);
 int FUN_002bd540(void);
 
 /* Supplied declaration required: FUN_002b9178. */
-extern int FUN_002b93b0(void);
+extern int asdTMTexTableCallFileB(void);
 /* Supplied declaration required: FUN_002bd540. */
 
 
@@ -18,7 +18,7 @@ int FUN_002c58c8(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002b93b0();
+  temp_v0 = asdTMTexTableCallFileB();
   if (temp_v0 != 0) {
     FUN_002b9178();
     if (*(int *)(temp_v0 + 8) != 0) {

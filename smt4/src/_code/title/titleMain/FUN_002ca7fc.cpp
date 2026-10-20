@@ -9,7 +9,7 @@ int FUN_002be5a4(...);
 int FUN_002bed3c(void);
 int FUN_002bf380(...);
 int FUN_002bf538(...);
-int FUN_002c0cec(int, int);
+int dataTableGet(int, int);
 int FUN_002c39a4(int);
 int VectorSignedToFloat(...);
 
@@ -22,8 +22,8 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_002cabd8; /* 0x2cabd8 */
-extern int DAT_0044e300; /* 0x44e300 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleMain; /* 0x44e300 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0028f4b4. */
@@ -32,8 +32,8 @@ extern int DAT_0044ea00; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int);
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c0cc4(void);
-/* Supplied declaration required: FUN_002c0cec. */
+extern int dataTableGetEntries(void);
+/* Supplied declaration required: dataTableGet. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
@@ -57,10 +57,10 @@ unsigned int FUN_002ca7fc(void)
   unsigned long long temp_v9;
   unsigned int temp_v10;
   
-  temp_v3 = DAT_0044e300;
-  if (*(char *)(DAT_0044e300 + 0x10) == '\0') {
-    FUN_002c39a4(DAT_0044ea00);
-    temp_v2 = DAT_0044ea00;
+  temp_v3 = g_titleMain;
+  if (*(char *)(g_titleMain + 0x10) == '\0') {
+    FUN_002c39a4(g_titleScene);
+    temp_v2 = g_titleScene;
     temp_v1 = FUN_002c5da8(6,1,0);
     piVar7 = (int *)(temp_v2 + 0x12ac);
     temp_v4 = *piVar7;
@@ -74,8 +74,8 @@ unsigned int FUN_002ca7fc(void)
     FUN_002bf538();
     FUN_002bed3c();
     FUN_002bf380(2,0x11,1,0,0,2);
-    temp_v2 = DAT_0044ea00;
-    piVar7 = (int *)(DAT_0044ea00 + 0x12ac);
+    temp_v2 = g_titleScene;
+    piVar7 = (int *)(g_titleScene + 0x12ac);
     temp_v1 = *piVar7;
     temp_v4 = piVar7[temp_v1 + 2];
     *piVar7 = temp_v1 - 1;
@@ -83,7 +83,7 @@ unsigned int FUN_002ca7fc(void)
       (**(romwright_code **)(temp_v2 + 0x12c8))();
       *(unsigned char *)(temp_v2 + 0x12c4) = 0;
     }
-    temp_v2 = DAT_0044ea00;
+    temp_v2 = g_titleScene;
     temp_v1 = FUN_002c5d80(1,0);
     piVar7 = (int *)(temp_v2 + 0x124c);
     temp_v4 = *piVar7;
@@ -107,8 +107,8 @@ unsigned int FUN_002ca7fc(void)
     temp_v9 = 0x3f000000;
     temp_v1 = 0;
     do {
-      FUN_002c0cec(0x3a,0);
-      temp_v4 = FUN_002c0cc4();
+      dataTableGet(0x3a,0);
+      temp_v4 = dataTableGetEntries();
       temp_v6 = (float)temp_v8;
       temp_v4 = temp_v4 + temp_v1 * 0x56;
       FUN_0028f4b4(temp_v4,4);
@@ -134,10 +134,10 @@ unsigned int FUN_002ca7fc(void)
         VectorSignedToFloat((int)(temp_v7 + temp_v6),(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002be5a4(4,0x72e027ff,temp_v4);
       }
-      temp_v4 = DAT_0044ea00;
+      temp_v4 = g_titleScene;
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 4);
-    piVar7 = (int *)(DAT_0044ea00 + 0x124c);
+    piVar7 = (int *)(g_titleScene + 0x124c);
     temp_v3 = *piVar7;
     temp_v2 = piVar7[temp_v3 + 2];
     *piVar7 = temp_v3 - 1;

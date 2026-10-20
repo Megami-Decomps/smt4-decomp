@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0010063a(...);
-int FUN_002e3d04(...);
+int qsort(...);
+int asdOperatorNewD(...);
 int FUN_002e6490(...);
 int FUN_002e6dd4(...);
 int FUN_003ff160(...);
@@ -18,9 +18,9 @@ typedef struct {
 
 extern int FUN_002b26b0(...); /* 0x2b26b0 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern int FUN_0018719c(void);
-/* Supplied declaration required: FUN_002e3d04. */
+/* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: FUN_002e6490. */
 /* Supplied declaration required: FUN_002e6dd4. */
 /* Supplied declaration required: FUN_003ff160. */
@@ -47,11 +47,11 @@ void FUN_003f5bd8(int param_1,int param_2)
   *(unsigned int *)(param_1 + 0x6b0) = 0;
   *(unsigned char *)(param_1 + 0x40) = 0;
   temp_v1 = param_2 * 0x34;
-  FUN_002e3d04();
+  asdOperatorNewD();
   FUN_002e6dd4();
   rt_memcpy(temp_v1,*(unsigned int *)(param_1 + 0x20),param_2 * 0x34);
   temp_v4 = 0x34;
-  FUN_0010063a(temp_v1,param_2,0x34,FUN_002b26b0);
+  qsort(temp_v1,param_2,0x34,FUN_002b26b0);
   temp_v6 = 0;
   if (param_2 < 1) {
     FUN_002e6490(temp_v1);

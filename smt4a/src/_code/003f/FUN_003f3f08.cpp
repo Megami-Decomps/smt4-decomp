@@ -17,7 +17,7 @@ struct fn_003f3f08_arg0 {
 extern int FUN_001801a4(void);
 extern unsigned int FUN_0019e130(int);
 extern int FUN_001ab854(void);
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 
 
 unsigned int FUN_003f3f08(fn_003f3f08_arg0 *param_1)
@@ -42,7 +42,7 @@ unsigned int FUN_003f3f08(fn_003f3f08_arg0 *param_1)
       }
     }
     else {
-      temp_v0 = FUN_002919a4();
+      temp_v0 = btlMainGetUnk14();
       if (temp_v0 != 0) {
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x60);
       }

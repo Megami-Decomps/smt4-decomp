@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0013f1b8(...);
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdTMTexTableLoadTmx(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_001acf98(...);
 int FUN_002804b0(...);
 
@@ -29,10 +29,10 @@ extern unsigned int *DAT_0057f47c; /* 0x57f47c */
 extern unsigned int DAT_0057f480; /* 0x57f480 */
 extern unsigned int DAT_0057f484; /* 0x57f484 */
 
-/* Supplied declaration required: FUN_0013f1b8. */
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 extern int FUN_0018206c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_002804b0. */
@@ -50,7 +50,7 @@ void FUN_00333784(unsigned int param_1,unsigned int param_2)
   
   if (DAT_0057f47c == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x28,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0x28,1);
     DAT_0057f47c = puVar1;
   }
   puVar1 = DAT_0057f47c;
@@ -65,10 +65,10 @@ void FUN_00333784(unsigned int param_1,unsigned int param_2)
   puVar1[8] = 0;
   puVar1[9] = 0;
   puVar2 = &LAB_00333958;
-  FUN_0014e38c(&LAB_00333958,3,0,0,FUN_0023af68,0,0);
+  asdProcessCreateSimple(&LAB_00333958,3,0,0,FUN_0023af68,0,0);
   *puVar1 = (unsigned int)puVar2;
-  FUN_0015155c(&LAB_0033396c,0x86,0,0,&LAB_0023ad60,0,0,puVar2);
-  FUN_0015155c(&LAB_00333984,0xe2,0,0,&LAB_0023ad60,0,0,*puVar1);
+  taskCreateDraw(&LAB_0033396c,0x86,0,0,&LAB_0023ad60,0,0,puVar2);
+  taskCreateDraw(&LAB_00333984,0xe2,0,0,&LAB_0023ad60,0,0,*puVar1);
   puVar1[6] = 0;
   puVar1[3] = 0;
   *(unsigned char *)(puVar1 + 9) = 0;
@@ -80,7 +80,7 @@ void FUN_00333784(unsigned int param_1,unsigned int param_2)
   do {
     temp_v0 = FUN_00341940((&DAT_0057f480)[temp_v1 * 3]);
     if (temp_v0 == 0) {
-      FUN_0013f1b8((&DAT_0057f480)[temp_v1 * 3],0);
+      asdTMTexTableLoadTmx((&DAT_0057f480)[temp_v1 * 3],0);
       *(unsigned char *)(temp_v1 * 0xc + 0x57f489) = 1;
     }
     temp_v0 = FUN_0018206c((&DAT_0057f480)[temp_v1 * 3],(&DAT_0057f484)[temp_v1 * 3]);

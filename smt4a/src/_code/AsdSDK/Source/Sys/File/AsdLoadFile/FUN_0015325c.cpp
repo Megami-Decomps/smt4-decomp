@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_001655b8(void);
+int asdFileWait(void);
 int FUN_0016a10c(int *, unsigned int);
 int FUN_001ab878(unsigned int *);
 int FUN_001abae0(void);
 int FUN_001add78(int *, unsigned char [268]);
-int FUN_002e6354(unsigned char [256], int);
+int sysMemClear(unsigned char [256], int);
 int FUN_002e6dd0(unsigned char [268], int);
 
 /* stack frame of param_6: 18 slot(s), 69 byte(s) */
@@ -35,17 +35,17 @@ typedef struct {
     unsigned int sp278; /* 0x278: local_278 */
 } param_6_stack;
 
-extern signed char DAT_005b3fe0; /* 0x5b3fe0 */
+extern signed char g_asdLoadFileUseRawPaths; /* 0x5b3fe0 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_001655b8. */
+/* Supplied declaration required: asdFileWait. */
 /* Supplied declaration required: FUN_0016a10c. */
 extern int FUN_0019dbb8(unsigned int);
 /* Supplied declaration required: FUN_001ab878. */
 extern int FUN_001ab8ac(unsigned int *);
 /* Supplied declaration required: FUN_001abae0. */
 /* Supplied declaration required: FUN_001add78. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd0. */
 
 
@@ -83,7 +83,7 @@ FUN_0015325c(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   
   puVar2 = (unsigned int *)&temp_v3;
   FUN_002e6dd0(temp_v22,0x100);
-  if ((DAT_005b3fe0 != '\0') || (temp_v0 = FUN_0019dbb8(param_3), temp_v0 != 0)) {
+  if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v0 = FUN_0019dbb8(param_3), temp_v0 != 0)) {
     FUN_00100388(temp_v22,param_3);
   }
   else {
@@ -101,7 +101,7 @@ FUN_0015325c(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   temp_v9 = 0;
   temp_v10 = 0;
   temp_v11 = 0;
-  FUN_002e6354(temp_v13,0x100);
+  sysMemClear(temp_v13,0x100);
   temp_v14 = 0;
   temp_v15 = 0;
   temp_v16 = 0;
@@ -115,7 +115,7 @@ FUN_0015325c(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   temp_v12 = param_6;
   temp_v18 = param_2;
   FUN_001abae0();
-  FUN_001655b8();
+  asdFileWait();
   if (param_1 != (unsigned int *)0x0) {
     *param_1 = *(unsigned int *)((int)puVar2 + 0x140);
   }

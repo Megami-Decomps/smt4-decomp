@@ -24,13 +24,13 @@ extern unsigned char LAB_00133898; /* 0x133898 */
 #endif
 /* Supplied declaration required: FUN_002e32a4. */
 extern int *FUN_002e4e86(unsigned int *, unsigned int *);
-extern int FUN_002e6dac(void);
+extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00307b44. */
 extern unsigned int FUN_00307b66(unsigned int, int *);
 /* Supplied declaration required: FUN_0030c8c0. */
 /* Supplied declaration required: FUN_0030fda8. */
-extern unsigned int aeabi_idivmod(int, unsigned int);
+extern unsigned int __aeabi_idivmod(int, unsigned int);
 
 
 unsigned long long FUN_00133810(int *param_1,unsigned int param_2)
@@ -54,13 +54,13 @@ unsigned long long FUN_00133810(int *param_1,unsigned int param_2)
     temp_v5 = 0xaaaaaaa;
     FUN_002e32a4(8,&LAB_00133898,&LAB_00133898);
   }
-  temp_v0 = aeabi_idivmod(param_1[2] - *param_1,0x18);
+  temp_v0 = __aeabi_idivmod(param_1[2] - *param_1,0x18);
   if (temp_v0 < temp_v6) {
     temp_v1 = FUN_0030c8c0(param_1);
     temp_v5 = FUN_00307b66(temp_v1,param_1);
     piVar3 = (int *)FUN_002e4e86(&temp_v6,(unsigned int *)&temp_v5);
     temp_v2 = *piVar3;
-    temp_v3 = FUN_002e6dac();
+    temp_v3 = rt_malloc();
     FUN_00307b44(*param_1,param_1[1],temp_v3,param_1);
     FUN_0030fda8(param_1,*param_1,param_1[1]);
     FUN_002e6e14(*param_1);

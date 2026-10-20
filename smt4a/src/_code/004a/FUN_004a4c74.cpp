@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00184310(void);
 int FUN_00184528(int *, int);
 int FUN_00202400(void);
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00184528. */
 /* Supplied declaration required: FUN_00202400. */
@@ -61,12 +61,12 @@ void FUN_004a4c74(int *param_1)
       else {
         temp_v2 = 0x121;
       }
-      FUN_001681cc(temp_v2);
+      sysPlaySe(temp_v2);
       FUN_004a5d5c(param_1);
       return;
     }
   }
-  FUN_001681cc(0x48);
+  sysPlaySe(0x48);
   FUN_004a5d5c(param_1);
   return;
 }

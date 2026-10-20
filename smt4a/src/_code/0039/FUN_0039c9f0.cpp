@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_001834a4(int, int);
 int FUN_00183bb0(void);
@@ -27,7 +27,7 @@ extern unsigned char LAB_0039ccd0; /* 0x39ccd0 */
 extern unsigned char LAB_0039ccd4; /* 0x39ccd4 */
 extern unsigned char LAB_0039ccd8; /* 0x39ccd8 */
 
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00183bb0. */
@@ -91,7 +91,7 @@ void FUN_0039c9f0(int param_1,int param_2,int param_3,int param_4,int param_5,in
                    &LAB_0039ccd0,-param_6);
     }
   }
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_00183bb0();
   return;
 }

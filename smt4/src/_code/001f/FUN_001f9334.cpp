@@ -22,8 +22,8 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-extern int DAT_00447600; /* 0x447600 */
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_mapEnemy; /* 0x447600 */
+extern int g_lmapScene; /* 0x447e88 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
@@ -40,7 +40,7 @@ extern int DAT_00447e88; /* 0x447e88 */
 extern int FUN_002671bc(void);
 /* Supplied declaration required: FUN_00273f5c. */
 extern int FUN_0027d968(void);
-extern unsigned int FUN_0028522c(unsigned int, unsigned int);
+extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00287aec. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002c09d0. */
@@ -79,7 +79,7 @@ unsigned int FUN_001f9334(int param_1)
   int temp_v19;
   unsigned long long temp_v20;
   
-  temp_v3 = DAT_00447600;
+  temp_v3 = g_mapEnemy;
   temp_v11 = 0;
   temp_v5 = FUN_002c2950();
   *(unsigned char *)(temp_v3 + 0x3048) = 0;
@@ -219,7 +219,7 @@ LAB_001f9924:
                       FUN_00256550(*(unsigned int *)(temp_v7 + 0x1a8));
                       temp_v12 = 0;
                       *(int *)(temp_v7 + 0xac) = (int)pcVar9[0xb];
-                      temp_v6 = *(int *)(DAT_00447e88 + 0x1c);
+                      temp_v6 = *(int *)(g_lmapScene + 0x1c);
                       FUN_00287aec();
                       if (temp_v6 < 0x43480000) {
                         temp_v12 = 1;
@@ -242,7 +242,7 @@ LAB_001f9924:
                         temp_v6 = temp_v3 + *(int *)(temp_v7 + 0x1a8) * 8;
                         temp_v15 = *(unsigned int *)(temp_v6 + 0x304c);
                         if (*(char *)(temp_v6 + 0x3051) != '\0') {
-                          temp_v15 = FUN_0028522c(temp_v15,0);
+                          temp_v15 = asdMdlManagerClone(temp_v15,0);
                           *(unsigned int *)(temp_v7 + 0x1ac) = temp_v15;
                           FUN_002a0428(temp_v15,1);
                           *(unsigned char *)(temp_v7 + 0x1b1) = 1;
@@ -276,7 +276,7 @@ LAB_001f9924:
                         *(unsigned int *)(temp_v7 + 0x6c) = 1;
                         temp_v6 = temp_v3 + *(int *)(temp_v7 + 0x1a8) * 8;
                         if (*(char *)(temp_v6 + 0x3051) != '\0') {
-                          temp_v15 = FUN_0028522c(*(unsigned int *)(temp_v6 + 0x304c),0);
+                          temp_v15 = asdMdlManagerClone(*(unsigned int *)(temp_v6 + 0x304c),0);
                           *(unsigned int *)(temp_v7 + 0x1ac) = temp_v15;
                           FUN_002a0428(temp_v15,1);
                           *(unsigned char *)(temp_v7 + 0x1b1) = 1;
@@ -393,7 +393,7 @@ LAB_001f9924:
                 *(int *)(temp_v7 + 0x1a8) = (int)pcVar9[0xe];
                 *(unsigned short *)(temp_v7 + 0x16e) = temp_v1;
                 FUN_00256550(*(unsigned int *)(temp_v7 + 0x1a8));
-                temp_v6 = *(int *)(DAT_00447e88 + 0x1c);
+                temp_v6 = *(int *)(g_lmapScene + 0x1c);
                 FUN_00287aec();
                 *(int *)(temp_v7 + 0xac) = (int)pcVar9[0xb];
                 if ((temp_v6 < 0x43480000) && (pcVar9[10] != '\x03')) {
@@ -414,7 +414,7 @@ LAB_001f9924:
                   temp_v6 = temp_v3 + *(int *)(temp_v7 + 0x1a8) * 8;
                   temp_v15 = *(unsigned int *)(temp_v6 + 0x304c);
                   if (*(char *)(temp_v6 + 0x3051) != '\0') {
-                    temp_v15 = FUN_0028522c(temp_v15,0);
+                    temp_v15 = asdMdlManagerClone(temp_v15,0);
                     *(unsigned int *)(temp_v7 + 0x1ac) = temp_v15;
                     FUN_002a0428(temp_v15,1);
                     *(unsigned char *)(temp_v7 + 0x1b1) = 1;

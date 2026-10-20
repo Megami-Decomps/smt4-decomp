@@ -8,7 +8,7 @@ extern int DAT_005c149c; /* 0x5c149c */
 
 extern int FUN_0016f864(void);
 extern int FUN_0016f988(unsigned int *, char *, unsigned int, unsigned int);
-extern unsigned int FUN_002e3390(char *);
+extern unsigned int wstrlen(char *);
 
 
 int FUN_001466cc(void)
@@ -22,7 +22,7 @@ int FUN_001466cc(void)
     if (temp_v0 < 0) {
       return temp_v0;
     }
-    temp_v1 = FUN_002e3390("am:app");
+    temp_v1 = wstrlen("am:app");
     temp_v0 = FUN_0016f988((unsigned int *)&DAT_005c149c,"am:app",temp_v1,0);
     if (temp_v0 < 0) {
       return temp_v0;

@@ -7,16 +7,16 @@ extern "C" {
 int FUN_00297468(...);
 int FUN_002be624(...);
 int FUN_002bf694(...);
-int FUN_002c415c(...);
-int FUN_002c4938(...);
+int asdMemFree(...);
+int memClear(...);
 
 extern int FUN_0024a808(int);
 extern int FUN_002522e0(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_003dadd8(int param_1)
@@ -33,14 +33,14 @@ unsigned int FUN_003dadd8(int param_1)
   do {
     temp_v1 = param_1 + temp_v2 * 0x8c;
     *(unsigned char *)(temp_v1 + 0x2cdc) = 0xff;
-    FUN_002c4938(temp_v1 + 0x2ce4,0x80);
+    memClear(temp_v1 + 0x2ce4,0x80);
     if (*(int *)(temp_v1 + 0x2ce0) != 0) {
-      FUN_002c415c();
+      asdMemFree();
       *(unsigned int *)(temp_v1 + 0x2ce0) = 0;
     }
     *(unsigned char *)(temp_v1 + 0x2d64) = 0;
-    FUN_002c4938(temp_v3,0x80);
-    FUN_002c4938(temp_v4,0x80);
+    memClear(temp_v3,0x80);
+    memClear(temp_v4,0x80);
     FUN_002be624(temp_v4,"battle/effect/%s.eft","Move_out_c" + temp_v2 * 0x20);
     FUN_002bf694(temp_v3,temp_v4);
     temp_v0 = FUN_002522e0(temp_v3,0x2f);

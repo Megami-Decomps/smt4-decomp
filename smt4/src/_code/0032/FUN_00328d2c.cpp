@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002522f8(unsigned char [128], int, unsigned char *, unsigned char *, char *);
 int FUN_00257c2c(int, unsigned int, int, int);
-int FUN_002bd75c(void);
+int asdTextureCreate(void);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern char s_flar02_02_004332a4[10]; /* 0x4332a4 */
 
 /* Supplied declaration required: FUN_002522f8. */
 /* Supplied declaration required: FUN_00257c2c. */
-/* Supplied declaration required: FUN_002bd75c. */
+/* Supplied declaration required: asdTextureCreate. */
 extern unsigned int FUN_002c3124(unsigned char *, unsigned int *, unsigned int);
 
 
@@ -42,7 +42,7 @@ void FUN_00328d2c(void)
     piVar5 = (int *)(temp_v0 + 0x4332a0);
     if ((*(char *)(temp_v0 + 0x4332ea) != '\x01') && (*piVar5 == 0)) {
       temp_v1 = 0;
-      FUN_002bd75c();
+      asdTextureCreate();
       *piVar5 = temp_v1;
       FUN_002522f8(temp_v5,0x80,&LAB_00328de0,&LAB_00328dcc,s_flar02_02_004332a4 + temp_v0);
       temp_v2 = FUN_002c3124(temp_v5,(unsigned int *)&temp_v4,0);

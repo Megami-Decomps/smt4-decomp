@@ -31,8 +31,8 @@ typedef struct {
 } void_stack;
 
 extern int DAT_004474f4; /* 0x4474f4 */
-extern int DAT_00447e88; /* 0x447e88 */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_lmapScene; /* 0x447e88 */
+extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 
 /* Supplied declaration required: FUN_001e27f8. */
@@ -70,8 +70,8 @@ void FUN_0021b0f0(void)
   unsigned char temp_v21 [28];
   
   *(unsigned int *)(DAT_004474f4 + 0x214) = 0;
-  if (DAT_0049f91c != 0x19) {
-    if ((((DAT_0049f91c == 0x1a) || (DAT_0049f91c == 0x1b)) || (DAT_0049f91c == 0x1c)) &&
+  if (g_gameState != 0x19) {
+    if ((((g_gameState == 0x1a) || (g_gameState == 0x1b)) || (g_gameState == 0x1c)) &&
        (DAT_0049f920 == 1)) {
       return;
     }
@@ -116,10 +116,10 @@ void FUN_0021b0f0(void)
     }
     temp_v2 = *(float *)(DAT_004474f4 + 0x18) * 0.017453292f;
     FUN_0028250c();
-    temp_v2 = *(float *)(DAT_00447e88 + 0x1c) - temp_v2 * *(float *)(DAT_004474f4 + temp_v0 * 4 + 0x188);
+    temp_v2 = *(float *)(g_lmapScene + 0x1c) - temp_v2 * *(float *)(DAT_004474f4 + temp_v0 * 4 + 0x188);
     FUN_00282390();
     FUN_001e27f8(&temp_v6,&temp_v15,&temp_v18);
-    *(float *)(DAT_004474f4 + 0x214) = temp_v2 - *(float *)(DAT_00447e88 + 0x20);
+    *(float *)(DAT_004474f4 + 0x214) = temp_v2 - *(float *)(g_lmapScene + 0x20);
   }
   return;
 }

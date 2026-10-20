@@ -11,7 +11,7 @@ int FUN_001a6508(...);
 int FUN_001a6568(...);
 int FUN_001acf98(...);
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 extern int DAT_00588fdc; /* 0x588fdc */
 extern int DAT_00588fe0; /* 0x588fe0 */
 
@@ -53,9 +53,9 @@ void FUN_00371c3c(unsigned int param_1,int param_2)
           if (temp_v0 < 0x9a) {
             if ((*(char *)(DAT_00588fe0 + temp_v0) < '\x01') &&
                (temp_v2 = FUN_0018206c(0x19,temp_v0), temp_v2 == 0)) {
-              temp_v2 = FUN_001a6508(DAT_00570280,0x19,temp_v0,1);
+              temp_v2 = FUN_001a6508(g_aocSystem,0x19,temp_v0,1);
               if (temp_v2 != 0) {
-                FUN_001a6568(DAT_00570280,0x19,temp_v0,0x10000);
+                FUN_001a6568(g_aocSystem,0x19,temp_v0,0x10000);
               }
               else {
                 FUN_001acf98(0x19,temp_v0);
@@ -79,9 +79,9 @@ void FUN_00371c3c(unsigned int param_1,int param_2)
   }
   if ((*(char *)(DAT_00588fdc + param_1) < '\x01') &&
      (temp_v0 = FUN_0018206c(0xf,param_1), temp_v0 == 0)) {
-    temp_v0 = FUN_001a6508(DAT_00570280,0xf,param_1,1);
+    temp_v0 = FUN_001a6508(g_aocSystem,0xf,param_1,1);
     if (temp_v0 != 0) {
-      FUN_001a6568(DAT_00570280,0xf,param_1,0x10000);
+      FUN_001a6568(g_aocSystem,0xf,param_1,0x10000);
     }
     else {
       FUN_001acf98(0xf,param_1);

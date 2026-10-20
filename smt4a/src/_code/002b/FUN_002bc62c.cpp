@@ -25,8 +25,8 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } void_stack;
 
-extern int DAT_00580238; /* 0x580238 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_lmapMainState; /* 0x580238 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern int DAT_005f1bc8; /* 0x5f1bc8 */
 extern int DAT_005f1bd0; /* 0x5f1bd0 */
 extern int DAT_005f1c00; /* 0x5f1c00 */
@@ -62,15 +62,15 @@ unsigned int FUN_002bc62c(void)
   float temp_v6;
   unsigned int temp_v7;
   
-  temp_v1 = DAT_00580238;
-  if (*(int *)(DAT_00580238 + 0xc) < 0xd) {
+  temp_v1 = g_lmapMainState;
+  if (*(int *)(g_lmapMainState + 0xc) < 0xd) {
     return 0;
   }
-  if (*(int *)(DAT_00580238 + 0xc) >= 0x70) {
+  if (*(int *)(g_lmapMainState + 0xc) >= 0x70) {
     return 0;
   }
-  FUN_004837ac(DAT_00580238 + 0xf4);
-  temp_v3 = DAT_0059dbb4;
+  FUN_004837ac(g_lmapMainState + 0xf4);
+  temp_v3 = g_renderCtx;
   if (DAT_005f1bc8 != 0) {
     temp_v0 = FUN_001692ac(5,1);
     piVar7 = (int *)(temp_v3 + 0x1258);
@@ -82,10 +82,10 @@ unsigned int FUN_002bc62c(void)
       (**(romwright_code **)(temp_v3 + 0x1274))();
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
-    FUN_0016c4b8(DAT_0059dbb4,0);
+    FUN_0016c4b8(g_renderCtx,0);
     FUN_002c0fc4();
-    temp_v3 = DAT_0059dbb4;
-    piVar7 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v3 = g_renderCtx;
+    piVar7 = (int *)(g_renderCtx + 0x1258);
     temp_v0 = *piVar7;
     temp_v4 = piVar7[temp_v0 + 2];
     *piVar7 = temp_v0 - 1;
@@ -94,7 +94,7 @@ unsigned int FUN_002bc62c(void)
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
   }
-  temp_v3 = DAT_0059dbb4;
+  temp_v3 = g_renderCtx;
   if (DAT_005f1c00 != 0) {
     temp_v0 = FUN_001692ac(5,0);
     piVar7 = (int *)(temp_v3 + 0x1258);
@@ -106,10 +106,10 @@ unsigned int FUN_002bc62c(void)
       (**(romwright_code **)(temp_v3 + 0x1274))();
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
-    FUN_0016c4b8(DAT_0059dbb4,0);
+    FUN_0016c4b8(g_renderCtx,0);
     FUN_00377c60();
-    temp_v3 = DAT_0059dbb4;
-    piVar7 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v3 = g_renderCtx;
+    piVar7 = (int *)(g_renderCtx + 0x1258);
     temp_v0 = *piVar7;
     temp_v4 = piVar7[temp_v0 + 2];
     *piVar7 = temp_v0 - 1;
@@ -118,11 +118,11 @@ unsigned int FUN_002bc62c(void)
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
   }
-  temp_v3 = DAT_00580238;
+  temp_v3 = g_lmapMainState;
   if (*(char *)(temp_v1 + 0xb) != '\0') {
-    temp_v0 = *(int *)(DAT_00580238 + 0x38);
+    temp_v0 = *(int *)(g_lmapMainState + 0x38);
     temp_v1 = temp_v0 + 1;
-    *(int *)(DAT_00580238 + 0x38) = temp_v1;
+    *(int *)(g_lmapMainState + 0x38) = temp_v1;
     if (temp_v1 >= 0x1f) {
       temp_v1 = temp_v0 - 0x1d;
       *(int *)(temp_v3 + 0x38) = temp_v1;
@@ -130,7 +130,7 @@ unsigned int FUN_002bc62c(void)
     temp_v6 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = VectorFloatToUnsigned(temp_v6 * 2184.5f,3);
     FUN_001a1ea8(temp_v7 & 0xffff);
-    temp_v1 = DAT_0059dbb4;
+    temp_v1 = g_renderCtx;
     temp_v0 = FUN_001692ac(5,0);
     piVar7 = (int *)(temp_v1 + 0x1258);
     temp_v4 = *piVar7;
@@ -184,8 +184,8 @@ unsigned int FUN_002bc62c(void)
     *(float *)(temp_v3 + 0xe8) = temp_v6;
     temp_v7 = *(unsigned int *)(temp_v3 + 0xe4);
     temp_v2 = FUN_00153f64(8,2);
-    FUN_0016c4b8(DAT_0059dbb4,temp_v2);
-    temp_v1 = DAT_0059dbb4;
+    FUN_0016c4b8(g_renderCtx,temp_v2);
+    temp_v1 = g_renderCtx;
     temp_v3 = FUN_00169294(6,7,0);
     piVar7 = (int *)(temp_v1 + 0x12b8);
     temp_v0 = piVar7[*piVar7 + 2];
@@ -195,8 +195,8 @@ unsigned int FUN_002bc62c(void)
       *(unsigned char *)(temp_v1 + 0x12d0) = 0;
     }
     FUN_0019e3d0(temp_v7 | 0xffffff00);
-    temp_v1 = DAT_0059dbb4;
-    piVar7 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v1 = g_renderCtx;
+    piVar7 = (int *)(g_renderCtx + 0x1258);
     temp_v3 = *piVar7;
     temp_v0 = piVar7[temp_v3 + 2];
     *piVar7 = temp_v3 - 1;

@@ -46,7 +46,7 @@ extern int FUN_002e9af4(void);
 /* Supplied declaration required: FUN_002ea41e. */
 extern int FUN_002f4e86(unsigned int);
 /* Supplied declaration required: FUN_00301a60. */
-extern int FUN_00301ac0(void);
+extern int vectorSize12A(void);
 /* Supplied declaration required: FUN_00301bd4. */
 /* Supplied declaration required: FUN_00301be2. */
 /* Supplied declaration required: FUN_00301c5c. */
@@ -57,7 +57,7 @@ extern int FUN_00301ac0(void);
 /* Supplied declaration required: FUN_00301dc2. */
 extern int FUN_00301df0(int *);
 /* Supplied declaration required: FUN_00301e56. */
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 void FUN_00115fac(int param_1,unsigned int param_2,int *param_3)
@@ -99,7 +99,7 @@ void FUN_00115fac(int param_1,unsigned int param_2,int *param_3)
       return;
     }
     if (*(char *)(param_1 + 0xa0) != '\0') {
-      temp_v0 = FUN_00301ac0();
+      temp_v0 = vectorSize12A();
       if (temp_v0 != 1) {
         temp_v10[0] = -0x7f96ffff;
         piVar4 = temp_v10;
@@ -147,7 +147,7 @@ void FUN_00115fac(int param_1,unsigned int param_2,int *param_3)
         for (; temp_v4 != temp_v0; temp_v4 = temp_v4 + 0x1c) {
           FUN_00301dc2(temp_v4);
         }
-        temp_v0 = aeabi_idivmod(temp_v10[2] - temp_v9,0x1c);
+        temp_v0 = __aeabi_idivmod(temp_v10[2] - temp_v9,0x1c);
         param_3 = (int *)0x1c;
         piVar4[1] = piVar4[1] + temp_v0 * -0x1c;
       }

@@ -12,9 +12,9 @@ extern unsigned int DAT_00570dd0; /* 0x570dd0 */
 extern unsigned int DAT_00570dd4; /* 0x570dd4 */
 extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_00168518(int, unsigned short);
-extern int FUN_0019a7dc(void);
+extern int gameGetOptions(void);
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: FUN_003e87a8. */
 /* Supplied declaration required: FUN_004aa1d0. */
@@ -29,11 +29,11 @@ unsigned int FUN_0038d548(void)
   int temp_v2;
   unsigned int temp_v3;
   
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   FUN_003e87a8();
-  temp_v2 = FUN_0019a7dc();
+  temp_v2 = gameGetOptions();
   temp_v0 = *(unsigned short *)(temp_v2 + 0x12e);
-  temp_v2 = FUN_0019a7dc();
+  temp_v2 = gameGetOptions();
   temp_v2 = FUN_00168518((int)*(short *)(temp_v2 + 300),temp_v0);
   FUN_00371c3c((int)(short)(*(short *)(temp_v2 + 100) + 1),0);
   temp_v3 = DAT_00570dd4 | *(unsigned int *)(temp_v1 + 0x45a4);

@@ -15,7 +15,7 @@ struct fn_00481ba8_arg0 {
     float field_0x20; /* +0x20 */
 };
 
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
 #define ROMWRIGHT_SQRT_4_DEFINED
@@ -39,9 +39,9 @@ void FUN_00481ba8(fn_00481ba8_arg0 *param_1)
   
   pfVar1 = param_1->field_0xc;
   temp_v0 = param_1->field_0x20;
-  temp_v3 = *(float *)(DAT_00581288 + 0x1c) - pfVar1[0xb];
-  temp_v2 = *(float *)(DAT_00581288 + 0x20) - pfVar1[0xc];
-  temp_v1 = *(float *)(DAT_00581288 + 0x24) - pfVar1[0xd];
+  temp_v3 = *(float *)(g_lmapScene + 0x1c) - pfVar1[0xb];
+  temp_v2 = *(float *)(g_lmapScene + 0x20) - pfVar1[0xc];
+  temp_v1 = *(float *)(g_lmapScene + 0x24) - pfVar1[0xd];
   temp_v4 = 1.0f / romwright_sqrt_4(temp_v3 * temp_v3 + temp_v2 * temp_v2 + temp_v1 * temp_v1);
   param_1->field_0x10 = temp_v3 * temp_v4 * temp_v0;
   param_1->field_0x14 = temp_v2 * temp_v4 * temp_v0;

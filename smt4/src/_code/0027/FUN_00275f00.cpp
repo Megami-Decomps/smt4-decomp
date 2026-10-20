@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_002b8838. */
 extern int FUN_002c09d0(unsigned int);
@@ -24,9 +24,9 @@ void FUN_00275f00(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  if (DAT_0049f91c != 0x65) {
-    if (DAT_0049f91c < 100) {
-      if (DAT_0049f91c == 0x24) {
+  if (g_gameState != 0x65) {
+    if (g_gameState < 100) {
+      if (g_gameState == 0x24) {
         FUN_002b8838(0xd1);
         return;
       }

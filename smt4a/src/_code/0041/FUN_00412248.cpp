@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_001a6f60(unsigned int, int);
 int FUN_00203d04(int);
 int FUN_00410628(unsigned int *);
@@ -25,8 +25,8 @@ extern int DAT_00571508; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
 extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_0014aa78. */
-extern unsigned int FUN_00192798(void);
+/* Supplied declaration required: btlGetMainState. */
+extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_001a6f60. */
 /* Supplied declaration required: FUN_00203d04. */
 extern int FUN_002619e0(void);
@@ -93,7 +93,7 @@ void FUN_00412248(unsigned int *param_1)
   case 3:
     if ((param_1[4] == 0) && (param_1[0x61] != 0)) {
       FUN_001a6f60(param_1[0x61],0);
-      temp_v0 = FUN_00192798();
+      temp_v0 = dataTableGetEntries();
       param_1[0x62] = temp_v0;
       temp_v0 = 4;
       param_1[2] = temp_v0;
@@ -127,7 +127,7 @@ void FUN_00412248(unsigned int *param_1)
   case 9:
     temp_v1 = FUN_0040de1c(DAT_005712f0,0);
     if (temp_v1 < 1) {
-      FUN_0014aa78();
+      btlGetMainState();
       temp_v1 = FUN_003ecd94();
       if (temp_v1 != 0) {
         temp_v1 = 0;

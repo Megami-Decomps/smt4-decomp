@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_0010afbc(unsigned int);
+int mobiclipCtrlClosePlayer(unsigned int);
 
-/* Supplied declaration required: FUN_0010afbc. */
+/* Supplied declaration required: mobiclipCtrlClosePlayer. */
 
 
 void FUN_002c5630(int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_0010afbc(*(unsigned int *)(param_1 * 4 + 0x44d0c8) & 0xff);
+  mobiclipCtrlClosePlayer(*(unsigned int *)(param_1 * 4 + 0x44d0c8) & 0xff);
   return;
 }
 

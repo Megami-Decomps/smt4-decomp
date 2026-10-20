@@ -1,46 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cfb68` (_code @ 0x2cfb68, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Frees the context's primary and secondary handles, then runs the shared teardown. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002a60cc(unsigned int, unsigned int, unsigned int);
-int FUN_002ae898(...);
-int FUN_002c415c(int);
+typedef struct Context {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s32 hasPrimary;
+    /* 0x10 */ u32 owner;
+    /* 0x14 */ u32 primary;
+    /* 0x18 */ u8 unk18[0x68];
+    /* 0x80 */ s32 unk80;
+    /* 0x84 */ s32 secondary;   /* -1 when none */
+} Context;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+extern u32 g_aocSystem;
 
-extern unsigned int DAT_00433158; /* 0x433158 */
-
-/* Supplied declaration required: FUN_002a60cc. */
-/* Supplied declaration required: FUN_002ae898. */
-extern int FUN_002c08f0(void);
-/* Supplied declaration required: FUN_002c415c. */
-
+extern Context *jobGetWork(void);
+extern void FUN_002a60cc(u32 table, u32 owner, u32 handle);
+extern void FUN_002ae898(u32 owner, u32 handle);
+extern void asdMemFree(Context *ctx);
 
 void FUN_002cfb68(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002c08f0();
-  if (*(int *)(temp_v0 + 0xc) != 0) {
-    FUN_002ae898(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
-    FUN_002a60cc(DAT_00433158,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
-    *(unsigned int *)(temp_v0 + 0xc) = 0;
-  }
-  if (*(int *)(temp_v0 + 0x84) != -1) {
-    FUN_002ae898(*(unsigned int *)(temp_v0 + 0x10));
-    FUN_002a60cc(DAT_00433158,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
-    *(unsigned int *)(temp_v0 + 0x84) = 0xffffffff;
-    *(unsigned int *)(temp_v0 + 0x80) = 0;
-  }
-  FUN_002c415c(temp_v0);
-  return;
+    Context *ctx = jobGetWork();
+
+    if (ctx->hasPrimary != 0) {
+        FUN_002ae898(ctx->owner, ctx->primary);
+        FUN_002a60cc(g_aocSystem, ctx->owner, ctx->primary);
+        ctx->hasPrimary = 0;
+    }
+    if (ctx->secondary != -1) {
+        FUN_002ae898(ctx->owner, ctx->secondary);
+        FUN_002a60cc(g_aocSystem, ctx->owner, ctx->secondary);
+        ctx->secondary = -1;
+        ctx->unk80 = 0;
+    }
+    asdMemFree(ctx);
 }
 
-} /* extern "C" */
+}

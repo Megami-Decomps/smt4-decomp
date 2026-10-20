@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0014afd0(...);
-int FUN_0014e38c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int asdMemoryAllocTracked(...);
 int FUN_00191e00(...);
-int FUN_00192748(...);
-int FUN_002e6354(...);
+int dataTableGetCount(...);
+int sysMemClear(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,18 +18,18 @@ typedef struct {
 
 extern int FUN_002897cc(...); /* 0x2897cc */
 extern int FUN_0034da3c(...); /* 0x34da3c */
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_0014afd0. */
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_00163060. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+/* Supplied declaration required: asdMemoryAllocTracked. */
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00191e00. */
-/* Supplied declaration required: FUN_00192748. */
-extern int FUN_00192798(void);
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(void);
 extern int FUN_001a6508(unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_00389fe0(int param_1,int param_2,int param_3)
@@ -41,8 +41,8 @@ void FUN_00389fe0(int param_1,int param_2,int param_3)
   int temp_v1;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0xbc,1);
-  FUN_002e6354();
+  asdMemoryAllocTracked(0x100,0x100,0,0xbc,1);
+  sysMemClear();
   puVar1[8] = 0x3f800000;
   puVar1[9] = 0x3f800000;
   puVar1[10] = 0;
@@ -56,9 +56,9 @@ void FUN_00389fe0(int param_1,int param_2,int param_3)
   puVar1[0x1f] = 0;
   puVar1[0x20] = 0;
   puVar1[0x21] = 0;
-  temp_v0 = FUN_00187180(0x1a,0);
-  temp_v1 = FUN_00192798();
-  FUN_00192748(temp_v0);
+  temp_v0 = dataTableGet(0x1a,0);
+  temp_v1 = dataTableGetEntries();
+  dataTableGetCount(temp_v0);
   puVar1[0x11] = (int)*(short *)(temp_v1 + (param_1 - 1) * 2);
   puVar1[4] = param_2 - 0x38;
   puVar1[5] = param_3 - 8;
@@ -68,16 +68,16 @@ void FUN_00389fe0(int param_1,int param_2,int param_3)
   }
   else {
     puVar1[3] = 0;
-    temp_v1 = FUN_001a6508(DAT_00570280,puVar1[0x10],puVar1[0x11],1);
+    temp_v1 = FUN_001a6508(g_aocSystem,puVar1[0x10],puVar1[0x11],1);
     if (temp_v1 != 0) {
-      FUN_00191e00(DAT_00570280,puVar1[0x10],puVar1[0x11],0x10000);
+      FUN_00191e00(g_aocSystem,puVar1[0x10],puVar1[0x11],0x10000);
     }
     else {
       FUN_0014afd0(puVar1[0x10],puVar1[0x11]);
     }
   }
   puVar1[6] = 0x3ea8f5c3;
-  FUN_0014e38c("EVE_2dTex",4,0,0,FUN_002897cc,FUN_0034da3c,puVar1);
+  asdProcessCreateSimple("EVE_2dTex",4,0,0,FUN_002897cc,FUN_0034da3c,puVar1);
   return;
 }
 

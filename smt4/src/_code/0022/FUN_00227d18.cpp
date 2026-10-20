@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00282924(unsigned int *, unsigned int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_00337900(unsigned int, unsigned int *, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00282924. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00337900. */
 
 
@@ -25,14 +25,14 @@ void FUN_00227d18(unsigned int param_1)
   unsigned int *puVar1;
   unsigned int temp_v0;
   
-  puVar1 = (unsigned int *)FUN_002939f4();
+  puVar1 = (unsigned int *)btlGetMainState();
   FUN_00282924(puVar1,param_1);
   if ((*puVar1 & 0x2000) != 0) {
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     FUN_00337900(temp_v0,puVar1,1);
   }
   if ((*puVar1 & 0x4000) != 0) {
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     FUN_00337900(temp_v0,puVar1,2);
     return;
   }

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002c0cc4(...);
+int dataTableGetEntries(...);
 
 extern unsigned int FUN_002c09f4(unsigned int);
-extern unsigned int FUN_002c0c74(unsigned int);
-/* Supplied declaration required: FUN_002c0cc4. */
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+/* Supplied declaration required: dataTableGetEntries. */
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 
 
 unsigned int FUN_00311be4(void)
@@ -27,9 +27,9 @@ unsigned int FUN_00311be4(void)
   unsigned int temp_v6;
   unsigned char temp_v7;
   
-  temp_v1 = FUN_002c0cec(5,7);
-  puVar4 = (unsigned int *)FUN_002c0cc4();
-  temp_v2 = FUN_002c0c74(temp_v1);
+  temp_v1 = dataTableGet(5,7);
+  puVar4 = (unsigned int *)dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v1);
   temp_v6 = 0;
   if (temp_v2 != 0) {
     temp_v7 = (temp_v2 & 1) != 0;
@@ -47,7 +47,7 @@ unsigned int FUN_00311be4(void)
     }
     temp_v6 = temp_v6 + temp_v5;
   }
-  puVar4 = (unsigned int *)FUN_002c0cc4(temp_v1);
+  puVar4 = (unsigned int *)dataTableGetEntries(temp_v1);
   temp_v6 = FUN_002c09f4((temp_v6 - 1) & 0xffff);
   temp_v4 = 0;
   temp_v3 = 0;

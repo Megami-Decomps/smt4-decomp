@@ -27,9 +27,9 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } void_stack;
 
-extern int DAT_00447600; /* 0x447600 */
-extern int DAT_00447e88; /* 0x447e88 */
-extern unsigned int DAT_0049f91c; /* 0x49f91c */
+extern int g_mapEnemy; /* 0x447600 */
+extern int g_lmapScene; /* 0x447e88 */
+extern unsigned int g_gameState; /* 0x49f91c */
 extern unsigned int DAT_0049f920; /* 0x49f920 */
 extern signed char DAT_0049f942; /* 0x49f942 */
 extern unsigned int DAT_0049fadc; /* 0x49fadc */
@@ -74,7 +74,7 @@ extern int FUN_0024f4e8(void);
 extern int FUN_00256550(unsigned int);
 extern int FUN_0025c05c(void);
 extern int *FUN_002760fc(int);
-extern unsigned int FUN_0028522c(unsigned int, unsigned int);
+extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 extern int FUN_00285574(void);
 /* Supplied declaration required: FUN_00287aec. */
 /* Supplied declaration required: FUN_002a0428. */
@@ -88,7 +88,7 @@ extern int FUN_002ef868(void);
 /* Supplied declaration required: FUN_0030f5e0. */
 extern int FUN_003234c8(void);
 extern int FUN_00328168(unsigned int, unsigned int);
-extern unsigned int aeabi_idivmod(void);
+extern unsigned int __aeabi_idivmod(void);
 
 
 void FUN_0021bea0(void)
@@ -121,10 +121,10 @@ void FUN_0021bea0(void)
   char *temp_v16;
   int temp_v17;
   
-  temp_v5 = DAT_00447600;
+  temp_v5 = g_mapEnemy;
   temp_v0 = FUN_002c2950();
   DAT_0049fadc = 0x3c;
-  temp_v1 = FUN_00328168(DAT_0049f91c,DAT_0049f920);
+  temp_v1 = FUN_00328168(g_gameState,DAT_0049f920);
   DAT_0049fb7c = 0x1e;
   DAT_0049fb80 = 3500.0f;
   DAT_0049fb84 = 0x44fa0000;
@@ -223,7 +223,7 @@ LAB_0021c198:
         temp_v11 = VectorSignedToFloat((int)*(short *)(pcVar6 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v9 = VectorSignedToFloat((int)*(short *)(pcVar6 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v10 = VectorSignedToFloat((int)*(short *)(pcVar6 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v8 = *(unsigned int *)(DAT_00447e88 + 0x1c);
+        temp_v8 = *(unsigned int *)(g_lmapScene + 0x1c);
         FUN_00287aec();
         temp_v12 = romwright_piece_4_4(temp_v8,temp_v9);
         temp_v1 = 0;
@@ -300,11 +300,11 @@ LAB_0021c1e4:
           if (((!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) &&
               (((*(int *)(temp_v5 + 0x3038) < DAT_0049fae0 - 5 &&
                 (*(char *)(temp_v5 + 0x3048) == '\0')) &&
-               ((int)romwright_fabs_4(*(float *)(DAT_00447e88 + 0x20) - *(float *)(temp_v2 + 0x58)) < 0x41f00000)))
+               ((int)romwright_fabs_4(*(float *)(g_lmapScene + 0x20) - *(float *)(temp_v2 + 0x58)) < 0x41f00000)))
               ) && (temp_v1 = FUN_002c09f4(100), temp_v1 < DAT_0049fb7c)) {
             temp_v1 = temp_v5 + *(int *)(temp_v2 + 0x1a8) * 8;
             if (*(char *)(temp_v1 + 0x3051) != '\0') {
-              temp_v8 = FUN_0028522c(*(unsigned int *)(temp_v1 + 0x304c),0);
+              temp_v8 = asdMdlManagerClone(*(unsigned int *)(temp_v1 + 0x304c),0);
               *(unsigned int *)(temp_v2 + 0x1ac) = temp_v8;
               FUN_002a0428(temp_v8,1);
               *(unsigned char *)(temp_v2 + 0x1b1) = 1;
@@ -350,7 +350,7 @@ LAB_0021c204:
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x20);
   if (temp_v7) {
-    temp_v3 = aeabi_idivmod();
+    temp_v3 = __aeabi_idivmod();
   }
   temp_v4 = (unsigned int)*(unsigned char *)(temp_v0 + 0x76);
   if ((int)(temp_v3 + 4) >= (int)temp_v4) {

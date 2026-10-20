@@ -7,8 +7,8 @@ extern "C" {
 extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 
 extern int FUN_0018719c(void);
-extern int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 extern unsigned int FUN_001a6f60(unsigned int, unsigned int);
 extern int FUN_00261458(void);
 
@@ -26,8 +26,8 @@ int FUN_00371f3c(void)
   
   if ((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) != 0) {
     temp_v0 = FUN_001a6f60(*(unsigned int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x20cc),0);
-    temp_v1 = FUN_00192798();
-    temp_v2 = FUN_00192748(temp_v0);
+    temp_v1 = dataTableGetEntries();
+    temp_v2 = dataTableGetCount(temp_v0);
     temp_v3 = FUN_00261458();
     temp_v5 = 0;
     temp_v6 = *(unsigned short *)(temp_v3 + 0x66) + 1;

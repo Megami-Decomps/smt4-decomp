@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
+int jobStop(unsigned int, int);
 int FUN_001656a0(int);
 int FUN_00201f30(unsigned int, int, int);
 int FUN_0021c118(...);
@@ -15,7 +15,7 @@ int FUN_003de02c(int);
 
 extern unsigned int *DAT_00588fc8; /* 0x588fc8 */
 
-/* Supplied declaration required: FUN_001631d0. */
+/* Supplied declaration required: jobStop. */
 extern int FUN_00164af0(unsigned int);
 /* Supplied declaration required: FUN_001656a0. */
 /* Supplied declaration required: FUN_00201f30. */
@@ -48,7 +48,7 @@ unsigned int FUN_0029ef78(void)
     if (temp_v0 != 99) {
       return 0;
     }
-    FUN_001631d0(*DAT_00588fc8,0);
+    jobStop(*DAT_00588fc8,0);
     return 0xffffffff;
   }
   temp_v0 = FUN_00164af0(4);

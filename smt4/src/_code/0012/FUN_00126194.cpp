@@ -13,7 +13,7 @@ int FUN_002bf538(void);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b93c8. */
@@ -42,12 +42,12 @@ void FUN_00126194(int param_1)
   
   if (*(char *)(param_1 + 8) != '\0') {
     temp_v2 = FUN_002c5d80(1,0);
-    FUN_002bee04(DAT_0044ea00,3,temp_v2);
+    FUN_002bee04(g_titleScene,3,temp_v2);
     FUN_002bf538();
     FUN_002bed3c();
     temp_v5 = 0.27f;
-    FUN_002ba12c(DAT_0044ea00);
-    temp_v1 = DAT_0044ea00;
+    FUN_002ba12c(g_titleScene);
+    temp_v1 = g_titleScene;
     temp_v6 = (int)temp_v5;
     temp_v0 = *(char *)(param_1 + 9);
     if ((temp_v0 == '\a' || temp_v0 == '\b') || temp_v0 == '\t') {
@@ -61,7 +61,7 @@ void FUN_00126194(int param_1)
       }
       VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_002b93c8(param_1 + 0x40c);
-      temp_v1 = DAT_0044ea00;
+      temp_v1 = g_titleScene;
       temp_v3 = FUN_002c5da8(6,7,0);
       piVar6 = (int *)(temp_v1 + 0x12ac);
       temp_v4 = piVar6[*piVar6 + 2];
@@ -81,7 +81,7 @@ void FUN_00126194(int param_1)
     FUN_002b93c8(param_1 + 0x268);
     VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002b93c8(param_1 + 0x380);
-    FUN_002bedb0(DAT_0044ea00,3);
+    FUN_002bedb0(g_titleScene,3);
   }
   return;
 }

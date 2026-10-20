@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int aeabi_idivmod(int, int);
+int __aeabi_idivmod(int, int);
 
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 short nn_hidlow_ClampStickCross
@@ -65,13 +65,13 @@ short nn_hidlow_ClampStickCross
       }
       do {
         temp_v3 = temp_v2;
-        temp_v2 = aeabi_idivmod(temp_v1,temp_v3);
+        temp_v2 = __aeabi_idivmod(temp_v1,temp_v3);
         temp_v2 = (temp_v2 + temp_v3) >> 1;
       } while (temp_v2 < temp_v3);
     }
-    temp_v0 = aeabi_idivmod(param_3 * param_6 * 0x80,temp_v3);
+    temp_v0 = __aeabi_idivmod(param_3 * param_6 * 0x80,temp_v3);
     param_3 = (int)temp_v0;
-    temp_v0 = aeabi_idivmod(param_4 * param_6 * 0x80,temp_v3);
+    temp_v0 = __aeabi_idivmod(param_4 * param_6 * 0x80,temp_v3);
     param_4 = (int)temp_v0;
   }
   *param_1 = (short)param_3;

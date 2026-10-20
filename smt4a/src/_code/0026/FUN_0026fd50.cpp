@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0010063a(unsigned short *, int, int, unsigned char *);
+int qsort(unsigned short *, int, int, unsigned char *);
 int FUN_00180118(unsigned int);
 int FUN_00184310(void);
 int FUN_001a9110(unsigned short *, unsigned short *);
 int FUN_002e342c(unsigned short *, unsigned int);
-int FUN_002e6354(unsigned short *, int, int, unsigned int *, unsigned int *);
+int sysMemClear(unsigned short *, int, int, unsigned int *, unsigned int *);
 int FUN_004bd294(int, unsigned int);
 int rt_memcpy_w(unsigned short *, int, int);
 
@@ -21,13 +21,13 @@ typedef struct {
 extern unsigned char LAB_003b8e98; /* 0x3b8e98 */
 extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_001a9110. */
 extern unsigned int FUN_002b4dcc(int);
 /* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern unsigned int FUN_003a6f84(int);
 extern int FUN_004bd21c(int);
 /* Supplied declaration required: FUN_004bd294. */
@@ -58,7 +58,7 @@ void FUN_0026fd50(unsigned short *param_1,int param_2,int param_3,unsigned int *
   unsigned short *puVar16;
   
   temp_v1 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
-  FUN_002e6354(param_1,0x640,param_3,param_4,param_4);
+  sysMemClear(param_1,0x640,param_3,param_4,param_4);
   *param_1 = *(unsigned short *)(param_2 + 0x62);
   param_1[1] = *(unsigned short *)(param_2 + 100);
   if (param_3 != 0) {
@@ -214,7 +214,7 @@ void FUN_0026fd50(unsigned short *param_1,int param_2,int param_3,unsigned int *
       *(unsigned int *)(param_1 + (temp_v8 + temp_v6) * 4 + 0x2dc) = 0xffffffff;
     }
   }
-  FUN_0010063a(param_1 + 0x2dc,0xc,8,&LAB_003b8e98);
+  qsort(param_1 + 0x2dc,0xc,8,&LAB_003b8e98);
   puVar16[0xc] = (short)temp_v8;
   if (param_4 != (unsigned int *)0x0) {
     *(unsigned int *)(param_1 + 0x30d) = *param_4;

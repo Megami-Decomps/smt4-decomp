@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(unsigned int *);
+int asdMemFree(unsigned int *);
 int FUN_003fd478(void);
 int FUN_003fd508(unsigned int *);
 int FUN_003fd63c(int, int);
@@ -21,7 +21,7 @@ extern int DAT_0057f69c; /* 0x57f69c */
 extern unsigned int DAT_0057f6a0; /* 0x57f6a0 */
 
 extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_003fd478. */
 /* Supplied declaration required: FUN_003fd508. */
 /* Supplied declaration required: FUN_003fd63c. */
@@ -70,7 +70,7 @@ void FUN_00239b10(int param_1)
       FUN_003fd63c(0x421,1);
     }
   }
-  FUN_0019a5a0(puVar6);
+  asdMemFree(puVar6);
   return;
 }
 

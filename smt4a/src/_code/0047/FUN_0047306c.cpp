@@ -18,9 +18,9 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-extern unsigned int DAT_00570260; /* 0x570260 */
+extern unsigned int g_aocMain; /* 0x570260 */
 
-extern unsigned int FUN_0014bce0(unsigned int);
+extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_00151408. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_00237210. */
@@ -44,16 +44,16 @@ void FUN_0047306c(unsigned int *param_1,unsigned int param_2,unsigned int param_
     FUN_00237210();
     *puVar3 = 0;
   }
-  temp_v0 = FUN_0014bce0(0);
+  temp_v0 = spriteHandleCreate(0);
   param_1[0x107] = temp_v0;
   temp_v1 = FUN_0023b4a4(5);
   FUN_001527d8(*puVar3,temp_v1);
   FUN_00151408(*puVar3,0,0x646464ff);
-  temp_v1 = DAT_00570260;
-  FUN_00473910(DAT_00570260,0xffffffff);
+  temp_v1 = g_aocMain;
+  FUN_00473910(g_aocMain,0xffffffff);
   FUN_002a1f60(*puVar3,3,0xffffffff,0,3,temp_v1,param_2);
-  temp_v1 = DAT_00570260;
-  FUN_00473910(DAT_00570260,param_2);
+  temp_v1 = g_aocMain;
+  FUN_00473910(g_aocMain,param_2);
   FUN_00472f58(param_1,temp_v1,param_3,param_4);
   return;
 }

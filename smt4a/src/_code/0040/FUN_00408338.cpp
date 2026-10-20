@@ -1,41 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00408338` (_code @ 0x408338, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps `bit` in r6 and the save base in r5 (built the other way round) */
+/* Sets or clears flag `bit` (0-63) of `group` in the save data, unless the 0x4F/0x41 conditions block it. */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0018719c(unsigned int);
-extern int FUN_002c2710(void);
+extern s32 FUN_0018719c(s32 id);
+extern u8 *FUN_002c2710(void);
 
-
-void FUN_00408338(int param_1,unsigned int param_2,int param_3)
-
+void FUN_00408338(s32 group, u32 bit, s32 value)
 {
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char *pbVar4;
-  unsigned char temp_v3;
-  
-  temp_v1 = FUN_002c2710();
-  temp_v2 = FUN_0018719c(0x4f);
-  if ((temp_v2 == 0) || (temp_v2 = FUN_0018719c(0x41), temp_v2 != 0)) {
-    if (param_1 > 0xbf) {
-      temp_v1 = temp_v1 + param_1 * 8 + 0x2f0;
+    u8 *base = FUN_002c2710();
+
+    if (FUN_0018719c(0x4F) == 0 || FUN_0018719c(0x41) != 0) {
+        u8 *flags;
+        u8 mask;
+
+        if (group > 0xBF) {
+            flags = base + group * 8 + 0x2F0;
+        } else {
+            flags = base + group * 8 + 0xCF0;
+        }
+        flags += bit >> 3;
+        mask = 1 << (bit & 7);
+        if (value != 0) {
+            *flags |= mask;
+        } else {
+            *flags &= ~mask;
+        }
     }
-    else {
-      temp_v1 = temp_v1 + param_1 * 8 + 0xcf0;
-    }
-    pbVar4 = (unsigned char *)(temp_v1 + (param_2 >> 3));
-    temp_v3 = (unsigned char)(1 << (param_2 & 7));
-    if (param_3 != 0) {
-      *pbVar4 = *pbVar4 | temp_v3;
-    }
-    else {
-      *pbVar4 = *pbVar4 & ~temp_v3;
-    }
-  }
-  return;
 }
 
-} /* extern "C" */
+}

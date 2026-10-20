@@ -6,7 +6,7 @@ extern "C" {
 
 int SBORROW4(int, int);
 
-extern int DAT_00588124; /* 0x588124 */
+extern int g_npcRoom; /* 0x588124 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int FUN_001801b8(unsigned short, unsigned char);
@@ -25,16 +25,16 @@ unsigned int FUN_001691a8(unsigned int *param_1)
   int temp_v4;
   unsigned char temp_v5;
   
-  temp_v1 = DAT_00588124;
-  puVar1 = (unsigned int *)&DAT_00588124;
-  if (DAT_00588124 != 0) {
+  temp_v1 = g_npcRoom;
+  puVar1 = (unsigned int *)&g_npcRoom;
+  if (g_npcRoom != 0) {
     temp_v5 = param_1 == (unsigned int *)0x0;
     if (-1 < (int)param_1) {
-      puVar1 = *(unsigned int **)(DAT_00588124 + 0xf4);
+      puVar1 = *(unsigned int **)(g_npcRoom + 0xf4);
       temp_v5 = puVar1 == param_1;
     }
     if ((!temp_v5 && (-1 < (int)param_1 && (int)param_1 <= (int)puVar1)) && ((int)param_1 < 8)) {
-      puVar2 = *(unsigned short **)(DAT_00588124 + (int)param_1 * 4 + 0x28);
+      puVar2 = *(unsigned short **)(g_npcRoom + (int)param_1 * 4 + 0x28);
       temp_v2 = 0;
       if (puVar2 != (unsigned short *)0x0) {
         temp_v0 = FUN_001801b8(*puVar2,*(unsigned char *)(puVar2 + 0x29));

@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bed3c. */
@@ -46,9 +46,9 @@ void FUN_0019ffbc(int param_1)
   float temp_v4;
   unsigned int temp_v5 [4];
   
-  FUN_002c39a4(DAT_0044ea00);
+  FUN_002c39a4(g_titleScene);
   FUN_002bed3c();
-  temp_v0 = DAT_0044ea00;
+  temp_v0 = g_titleScene;
   temp_v1 = FUN_002c5d80(1,0);
   piVar5 = (int *)(temp_v0 + 0x124c);
   temp_v2 = *piVar5;
@@ -65,13 +65,13 @@ void FUN_0019ffbc(int param_1)
   temp_v5[1] = 6;
   temp_v5[2] = 1;
   temp_v5[3] = 7;
-  FUN_002ba12c(DAT_0044ea00);
+  FUN_002ba12c(g_titleScene);
   FUN_002bf380(2,0x39,temp_v5[(unsigned int)*(unsigned char *)(param_1 + 0x37) * 2],(int)temp_v4,0,0xb);
   temp_v4 = 0.33f;
-  FUN_002ba12c(DAT_0044ea00);
+  FUN_002ba12c(g_titleScene);
   FUN_002bf288(2,0x39,temp_v5[(unsigned int)*(unsigned char *)(param_1 + 0x37) * 2 + 1],(int)temp_v4,0,0xc);
-  temp_v0 = DAT_0044ea00;
-  piVar5 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v0 = g_titleScene;
+  piVar5 = (int *)(g_titleScene + 0x124c);
   temp_v1 = *piVar5;
   temp_v2 = piVar5[temp_v1 + 2];
   *piVar5 = temp_v1 - 1;
@@ -79,8 +79,8 @@ void FUN_0019ffbc(int param_1)
     (**(romwright_code **)(temp_v0 + 0x1268))();
     *(unsigned char *)(temp_v0 + 0x1264) = 0;
   }
-  FUN_002c198c(DAT_0044ea00);
-  FUN_002c18e4(DAT_0044ea00);
+  FUN_002c198c(g_titleScene);
+  FUN_002c18e4(g_titleScene);
   return;
 }
 

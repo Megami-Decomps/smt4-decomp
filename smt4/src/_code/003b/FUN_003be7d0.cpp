@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_002b06c4(void);
 
-extern int FUN_0023eae0(unsigned int);
-extern int FUN_002939f4(void);
+extern int randRange(unsigned int);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002b06c4. */
 
 
@@ -25,7 +25,7 @@ void FUN_003be7d0(unsigned int *param_1)
   unsigned short *puVar8;
   int temp_v7;
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   temp_v5 = temp_v0 + 0x174;
   temp_v1 = (unsigned int)*(unsigned short *)((int)param_1 + 0xce);
   FUN_002b06c4();
@@ -38,7 +38,7 @@ void FUN_003be7d0(unsigned int *param_1)
       temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 2);
     }
     *(unsigned int *)(temp_v0 + 0x1ac) = temp_v3;
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     temp_v6 = 0;
     if (*(char *)(temp_v0 + 0x44b7) != '\0') {
       temp_v7 = 0x32;
@@ -47,7 +47,7 @@ void FUN_003be7d0(unsigned int *param_1)
       temp_v0 = temp_v1 + temp_v6 * 6;
       puVar8 = (unsigned short *)(temp_v0 + 0x58);
       if ((*puVar8 != 0) &&
-         ((temp_v2 = FUN_0023eae0(99), temp_v2 < (int)((unsigned int)*(unsigned short *)(temp_v0 + 0x5a) + temp_v7) ||
+         ((temp_v2 = randRange(99), temp_v2 < (int)((unsigned int)*(unsigned short *)(temp_v0 + 0x5a) + temp_v7) ||
           ((*param_1 & 0x4000000) != 0)))) {
         temp_v3 = (unsigned int)*puVar8;
         temp_v0 = 0;

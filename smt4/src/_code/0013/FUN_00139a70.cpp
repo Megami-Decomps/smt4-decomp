@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001398c0(...);
+int nnResultCheckReport00128d98(...);
 int FUN_001398dc(void);
 int FUN_0013a5b0(unsigned int *, unsigned int *);
 int FUN_002ad66c(unsigned int *, int *);
@@ -51,7 +51,7 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_001398c0. */
+/* Supplied declaration required: nnResultCheckReport00128d98. */
 /* Supplied declaration required: FUN_001398dc. */
 /* Supplied declaration required: FUN_0013a5b0. */
 /* Supplied declaration required: FUN_002ad66c. */
@@ -135,7 +135,7 @@ void FUN_00139a70(fn_00139a70_arg0 *param_1)
       for (; (int)(temp_v0 - (temp_v6 + (temp_v1 < temp_v5))) < 0 ==
              (SBORROW4(temp_v0,temp_v6) != SBORROW4(temp_v0 - temp_v6,(unsigned int)(temp_v1 < temp_v5)));
           temp_v6 = temp_v6 + temp_v9) {
-        FUN_001398c0(&temp_v23,0x18,temp_v5,temp_v6);
+        nnResultCheckReport00128d98(&temp_v23,0x18,temp_v5,temp_v6);
         temp_v3 = temp_v23 & 0xffff;
         temp_v2 = 0;
         temp_v7 = 0xb;
@@ -226,7 +226,7 @@ void FUN_00139a70(fn_00139a70_arg0 *param_1)
     param_1->field_0x6 = 0;
   }
   param_1->field_0x8 = (undefined4)puVar7;
-  FUN_001398c0(&temp_v23,0x18,temp_v1,temp_v0);
+  nnResultCheckReport00128d98(&temp_v23,0x18,temp_v1,temp_v0);
   temp_v1 = temp_v23 & 0xffff;
   temp_v7 = 0;
   temp_v2 = 0xb;

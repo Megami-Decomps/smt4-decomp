@@ -17,7 +17,7 @@ int FUN_0024679c(void);
 int FUN_00249e54(unsigned int, char *);
 int FUN_002505c0(...);
 int FUN_00257e74(unsigned int);
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 int FUN_0034c7a8(unsigned int, float *);
 int FUN_0034c86c(...);
 int FUN_0034c8d0(unsigned int);
@@ -83,10 +83,10 @@ extern unsigned int FUN_0024a6b0(int);
 /* Supplied declaration required: FUN_002a5960. */
 /* Supplied declaration required: FUN_002a5dc4. */
 extern int FUN_002bfefc(unsigned int *);
-/* Supplied declaration required: FUN_002c222c. */
-extern int *FUN_002c2ff0(void);
+/* Supplied declaration required: asdOperatorNew. */
+extern int *asdMemoryGetDefaultAllocator(void);
 extern unsigned int FUN_002c30c4(int *);
-extern int FUN_003283bc(int, unsigned int, unsigned short);
+extern int asdMdlManagerCreateFromSourceB(int, unsigned int, unsigned short);
 /* Supplied declaration required: FUN_0034c7a8. */
 /* Supplied declaration required: FUN_0034c86c. */
 /* Supplied declaration required: FUN_0034c8d0. */
@@ -258,7 +258,7 @@ void FUN_003da0ec(int param_1)
       temp_v22 = *(int *)(param_1 + 0x304c);
       if (temp_v22 != 0) goto code_r0x0034ca74;
       temp_v6 = 0x44;
-      FUN_002c222c();
+      asdOperatorNew();
       temp_v16 = 0;
       if (temp_v6 != 0) {
         temp_v16 = FUN_0034d58c();
@@ -272,7 +272,7 @@ void FUN_003da0ec(int param_1)
     temp_v22 = *(int *)(param_1 + 0x304c);
     if (temp_v22 != 0) goto code_r0x0034ca74;
     temp_v6 = 0x44;
-    FUN_002c222c();
+    asdOperatorNew();
     temp_v16 = 0;
     if (temp_v6 != 0) {
       temp_v16 = FUN_0034d58c();
@@ -338,7 +338,7 @@ code_r0x0034ca74:
   switch(*(unsigned int *)(temp_v22 + 0x2c)) {
   case 1:
     if (*(int *)(temp_v22 + 0x24) != 0) {
-      temp_v6 = FUN_003283bc(*(int *)(temp_v22 + 0x24),*(unsigned int *)(temp_v22 + 0x28),
+      temp_v6 = asdMdlManagerCreateFromSourceB(*(int *)(temp_v22 + 0x24),*(unsigned int *)(temp_v22 + 0x28),
                             *(unsigned short *)(temp_v22 + 0x40));
       temp_v18 = 0x3f80000000000000;
       temp_v7 = 0;
@@ -392,7 +392,7 @@ code_r0x0034ca74:
           piStack_a0 = (int *)(((unsigned int)piVar4 & 0xffffff00) | 1);
           iStack_48 = *(int *)(*(int *)(*(int *)(temp_v6 + 0x24) + temp_v7 * 4) + 0x228);
           temp_v12 = *(unsigned int *)(*(int *)(iStack_48 + 8) + 0x10);
-          piVar5 = (int *)FUN_002c2ff0();
+          piVar5 = (int *)asdMemoryGetDefaultAllocator();
           piVar6 = (int *)(**(romwright_code **)(*piVar5 + 8))(piVar5,0x70,4);
           piVar4 = piVar17;
           if (piVar6 != (int *)0x0) {
@@ -669,7 +669,7 @@ code_r0x0034ca74:
           iStack_9c = romwright_piece_3_1((((unsigned int)(iStack_9c) >> 8) & 0xffffffU),1);
           temp_v21 = temp_v4;
           piStack_a0 = piStack_a4;
-          piVar4 = (int *)FUN_002c2ff0();
+          piVar4 = (int *)asdMemoryGetDefaultAllocator();
           unaff_r4 = (int *)(**(romwright_code **)(*piVar4 + 8))(piVar4,0x74,4);
           if (unaff_r4 == (int *)0x0) {
             unaff_r4 = (int *)0x0;

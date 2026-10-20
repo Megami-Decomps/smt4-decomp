@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+int scrSetResult(int);
 
 extern unsigned int FUN_002451ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0028dcb0. */
-extern unsigned int FUN_002939f4(void);
-extern int FUN_00296cc8(unsigned int);
+/* Supplied declaration required: scrSetResult. */
+extern unsigned int btlGetMainState(void);
+extern int scrGetArg(unsigned int);
 extern int FUN_002c09f4(unsigned int);
-extern int FUN_002c0c74(unsigned int);
-extern int FUN_002c0cc4(unsigned int);
+extern int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(unsigned int);
 
 
 unsigned int FUN_00312c6c(void)
@@ -28,26 +28,26 @@ unsigned int FUN_00312c6c(void)
   unsigned int temp_v6;
   int temp_v7;
   
-  temp_v0 = FUN_00296cc8(0);
+  temp_v0 = scrGetArg(0);
   temp_v6 = 0;
   if (temp_v0 != 1) {
     if (temp_v0 != 2) {
       if (temp_v0 == 3) {
-        temp_v6 = FUN_002939f4();
+        temp_v6 = btlGetMainState();
         temp_v6 = FUN_002451ac(temp_v6,0xc);
       }
     }
     else {
-      temp_v6 = FUN_002939f4();
+      temp_v6 = btlGetMainState();
       temp_v6 = FUN_002451ac(temp_v6,0xb);
     }
   }
   else {
-    temp_v6 = FUN_002939f4();
+    temp_v6 = btlGetMainState();
     temp_v6 = FUN_002451ac(temp_v6,10);
   }
-  temp_v1 = FUN_002c0cc4(temp_v6);
-  temp_v2 = FUN_002c0c74(temp_v6);
+  temp_v1 = dataTableGetEntries(temp_v6);
+  temp_v2 = dataTableGetCount(temp_v6);
   temp_v3 = FUN_002c09f4(99);
   temp_v0 = 0;
   temp_v7 = 0;
@@ -65,7 +65,7 @@ unsigned int FUN_00312c6c(void)
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < temp_v2);
   }
-  FUN_0028dcb0(temp_v7);
+  scrSetResult(temp_v7);
   return 1;
 }
 

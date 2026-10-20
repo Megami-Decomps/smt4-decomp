@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f10cc; /* 0x5f10cc */
 
 /* Supplied declaration required: FUN_001418fc. */
@@ -25,7 +25,7 @@ void FUN_00303564(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = *(int *)(DAT_00581288 + 0x1c);
+  temp_v0 = *(int *)(g_lmapScene + 0x1c);
   FUN_002b5cb4();
   if (temp_v0 < 0x43340000) {
     FUN_001418fc(&DAT_005f10cc);

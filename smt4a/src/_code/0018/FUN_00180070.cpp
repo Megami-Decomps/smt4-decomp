@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_0017fd84(...);
+int asdMemoryFreeRegion(...);
 int FUN_0017fe8c(...);
 int FUN_0018003c(...);
 int FUN_0019a300(...);
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_001a089c(...);
 int FUN_001a1204(...);
 int FUN_001ab838(...);
 int FUN_001af148(...);
 int FUN_001bcd48(...);
 int FUN_00212500(...);
-int FUN_00387368(...);
+int asdEffectTextureCreate(...);
 int software_interrupt(...);
 
 typedef int romwright_code(...);
@@ -42,11 +42,11 @@ extern unsigned int DAT_0062d280; /* 0x62d280 */
 extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0017fd84. */
+/* Supplied declaration required: asdMemoryFreeRegion. */
 /* Supplied declaration required: FUN_0017fe8c. */
 /* Supplied declaration required: FUN_0018003c. */
 /* Supplied declaration required: FUN_0019a300. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001a089c. */
 /* Supplied declaration required: FUN_001a1204. */
 /* Supplied declaration required: FUN_001ab838. */
@@ -55,7 +55,7 @@ extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 /* Supplied declaration required: FUN_00212500. */
 extern int FUN_0025cc50(int *);
 extern int *FUN_0037a7f4(void);
-/* Supplied declaration required: FUN_00387368. */
+/* Supplied declaration required: asdEffectTextureCreate. */
 extern unsigned int nn_err_CTR_FatalErr_Throw(unsigned int, unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -77,7 +77,7 @@ int * FUN_00180070(int param_1,int *param_2)
   
   temp_v0 = FUN_0025cc50(param_2);
   if (temp_v0 != 0) {
-    FUN_00387368();
+    asdEffectTextureCreate();
   }
   else {
     param_2 = (int *)FUN_0037a7f4();
@@ -90,23 +90,23 @@ int * FUN_00180070(int param_1,int *param_2)
     return param_2;
   }
   if ((param_2[9] != 0) && ((param_2[0xb] & 0x10U) == 0)) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_2[9] = 0;
   }
   if (param_2[0x11] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_2[0x11] = 0;
   }
   FUN_0018003c();
   if ((((unsigned int)param_2 >= DAT_005b4050) && ((int *)(DAT_005b4060 + (int)DAT_005b4050) >= param_2)) ||
      (((unsigned int)param_2 >= DAT_005b4054 && ((int *)((int)DAT_005b4054 + DAT_005b4064) >= param_2)))) {
-    FUN_0017fd84(param_2);
+    asdMemoryFreeRegion(param_2);
     piVar5 = (int *)*DAT_005b402c;
     software_interrupt(0x14);
   }
   else {
     FUN_0017fe8c(param_2);
-    FUN_0017fd84();
+    asdMemoryFreeRegion();
     piVar5 = (int *)*DAT_005b402c;
     software_interrupt(0x14);
   }

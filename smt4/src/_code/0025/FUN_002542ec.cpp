@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
+extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 
 
 int FUN_002542ec(int param_1)
@@ -14,9 +14,9 @@ int FUN_002542ec(int param_1)
   int temp_v1;
   
   temp_v0 = 0;
-  temp_v1 = (int)*(char *)(param_1 + (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x8c + 0x9108);
+  temp_v1 = (int)*(char *)(param_1 + (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x8c + 0x9108);
   if (-1 < temp_v1) {
-    temp_v0 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x8c + temp_v1 * 0x604 + 0x90;
+    temp_v0 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x8c + temp_v1 * 0x604 + 0x90;
   }
   return temp_v0;
 }

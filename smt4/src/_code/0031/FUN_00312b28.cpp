@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00295228(unsigned int, int);
 int FUN_002b9024(void);
 
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00295228. */
 /* Supplied declaration required: FUN_002b9024. */
 
@@ -20,7 +20,7 @@ unsigned int FUN_00312b28(void)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   if ((((*(unsigned int *)(temp_v0 + 0x44a0) & 2) == 0) &&
       (temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0xf2), temp_v2 != 0)) &&
      (temp_v1 = temp_v2, FUN_002b9024(), temp_v1 != 0)) {

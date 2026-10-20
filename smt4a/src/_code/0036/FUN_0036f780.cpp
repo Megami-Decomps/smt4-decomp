@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002bf42c(void);
-int FUN_003283ac(int);
+int bustupCutAnimSetJobParam(void);
+int scrSetResult(int);
 int FUN_0039c840(int, int);
 
-extern int FUN_00236038(void);
-/* Supplied declaration required: FUN_002bf42c. */
-/* Supplied declaration required: FUN_003283ac. */
+extern int scrGetArg(void);
+/* Supplied declaration required: bustupCutAnimSetJobParam. */
+/* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_0039c840. */
 
 
@@ -20,15 +20,15 @@ unsigned int FUN_0036f780(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_00236038();
+  temp_v0 = scrGetArg();
   if (temp_v0 >= 0x1ac) {
     temp_v0 = 0;
   }
   FUN_0039c840(temp_v0,0);
   if (temp_v0 != 0) {
-    FUN_002bf42c();
+    bustupCutAnimSetJobParam();
   }
-  FUN_003283ac(temp_v0);
+  scrSetResult(temp_v0);
   return 1;
 }
 

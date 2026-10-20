@@ -10,10 +10,10 @@ extern int FUN_00167e54(void);
 extern int FUN_0018719c(unsigned int);
 extern int FUN_00270a70(void);
 extern int FUN_00284d94(void);
-extern int FUN_00298000(void);
-extern int FUN_00298088(void);
-extern int FUN_00298158(void);
-extern int FUN_002bd8b4(void);
+extern int namePollShutdown(void);
+extern int onesRoomIsRunning(void);
+extern int shopPollShutdown(void);
+extern int titleMainIsRunning(void);
 extern int FUN_002ef9f0(void);
 extern int FUN_00314c18(void);
 extern int QuestCenterMode_IsBusy(void);
@@ -69,10 +69,10 @@ joined_r0x0039a964:
           if (temp_v1 != 0) goto LAB_0039a970;
           temp_v1 = FUN_00314c18();
           if (((((temp_v1 == 0) || (temp_v1 = FUN_00162858(), temp_v1 != 0)) ||
-               (temp_v1 = FUN_00298000(), temp_v1 != 0)) &&
-              ((temp_v1 = FUN_002bd8b4(), temp_v1 == 0 && (temp_v1 = FUN_00284d94(), temp_v1 == 0)))) &&
+               (temp_v1 = namePollShutdown(), temp_v1 != 0)) &&
+              ((temp_v1 = titleMainIsRunning(), temp_v1 == 0 && (temp_v1 = FUN_00284d94(), temp_v1 == 0)))) &&
              ((temp_v1 = QuestCenterMode_IsBusy(), temp_v1 == 0 &&
-              ((temp_v1 = FUN_00298158(), temp_v1 == 0 && (temp_v1 = FUN_00298088(), temp_v1 == 0)))))) {
+              ((temp_v1 = shopPollShutdown(), temp_v1 == 0 && (temp_v1 = onesRoomIsRunning(), temp_v1 == 0)))))) {
             temp_v1 = FUN_00270a70();
             goto joined_r0x0039a964;
           }
@@ -94,7 +94,7 @@ LAB_0039a970:
     else {
       *(unsigned char *)(temp_v2 + 5) = 2;
       *(unsigned int *)(temp_v2 + 8) = 0;
-      temp_v1 = FUN_00298000();
+      temp_v1 = namePollShutdown();
       if (temp_v1 == 0) {
         temp_v3 = 0x3f4ccccd;
       }

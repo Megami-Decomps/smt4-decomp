@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned char DAT_00536bd4; /* 0x536bd4 */
 extern unsigned char DAT_00536bd8; /* 0x536bd8 */
-extern int DAT_00588ff0; /* 0x588ff0 */
+extern int g_bustupViewer; /* 0x588ff0 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00180118. */
@@ -31,8 +31,8 @@ void FUN_0028c258(void)
   unsigned int temp_v2;
   unsigned char temp_v3 [68];
   
-  temp_v0 = DAT_00588ff0;
-  temp_v2 = *(unsigned int *)(DAT_00588ff0 + *(int *)(DAT_00588ff0 + 0x50) * 4 + 0x54);
+  temp_v0 = g_bustupViewer;
+  temp_v2 = *(unsigned int *)(g_bustupViewer + *(int *)(g_bustupViewer + 0x50) * 4 + 0x54);
   temp_v1 = temp_v2;
   FUN_00180118(temp_v1);
   FUN_00100388(temp_v3,&DAT_00536bd4,temp_v1);

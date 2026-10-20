@@ -10,7 +10,7 @@ int FUN_002f670c(int, int);
 extern unsigned char DAT_00558eec; /* 0x558eec */
 
 extern int FUN_002e7168(int, unsigned int);
-extern int FUN_002f6628(unsigned int *);
+extern int mtInit(unsigned int *);
 /* Supplied declaration required: FUN_002f6650. */
 /* Supplied declaration required: FUN_002f670c. */
 
@@ -23,7 +23,7 @@ int FUN_0010c79c(unsigned int *param_1)
   int temp_v1;
   
   *param_1 = (unsigned int)&DAT_00558eec;
-  temp_v0 = FUN_002f6628(param_1 + 1);
+  temp_v0 = mtInit(param_1 + 1);
   temp_v1 = FUN_002e7168(temp_v0 + 0x9cc,1);
   temp_v0 = temp_v1;
   FUN_002f6650();

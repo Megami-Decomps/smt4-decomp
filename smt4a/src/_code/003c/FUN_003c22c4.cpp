@@ -2,19 +2,19 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
-int FUN_003ebeb4(void);
+int btlGetMainState(void);
+int btlMainClearUnk24(void);
 
-/* Supplied declaration required: FUN_0014aa78. */
-/* Supplied declaration required: FUN_003ebeb4. */
+/* Supplied declaration required: btlGetMainState. */
+/* Supplied declaration required: btlMainClearUnk24. */
 
 
 unsigned int FUN_003c22c4(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_0014aa78();
-  FUN_003ebeb4();
+  btlGetMainState();
+  btlMainClearUnk24();
   return 1;
 }
 

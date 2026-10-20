@@ -52,7 +52,7 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_00248738. */
 /* Supplied declaration required: FUN_0026e420. */
 /* Supplied declaration required: FUN_002829d4. */
-extern int FUN_00292f28(unsigned int);
+extern int padIsButtonDown(unsigned int);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_00296f4c. */
 extern int FUN_002973d8(void);
@@ -236,7 +236,7 @@ unsigned int FUN_003291e0(int *param_1)
     *(unsigned int *)(temp_v7 + 0x2a8) = 0;
     if (*(char *)(temp_v7 + 0x2b4) != '\0') {
       temp_v10 = 0x2e;
-      temp_v6 = FUN_00292f28(0x2e);
+      temp_v6 = padIsButtonDown(0x2e);
       if (temp_v6 == 0) {
         temp_v6 = 0x2e;
         FUN_002829d4();
@@ -249,7 +249,7 @@ unsigned int FUN_003291e0(int *param_1)
     else if (*(char *)(temp_v7 + 0x2b5) == '\0') {
       temp_v8 = 1;
       do {
-        temp_v6 = FUN_00292f28(temp_v8);
+        temp_v6 = padIsButtonDown(temp_v8);
         if ((temp_v6 == 0) && (temp_v5 = temp_v8, FUN_002829d4(), temp_v5 == 0)) {
           *(unsigned int *)(temp_v7 + *(int *)(temp_v7 + 0x2a8) * 4 + 0x74) = temp_v8;
           *(int *)(temp_v7 + 0x2a8) = *(int *)(temp_v7 + 0x2a8) + 1;
@@ -259,7 +259,7 @@ unsigned int FUN_003291e0(int *param_1)
     }
     else {
       temp_v10 = 0x18;
-      temp_v6 = FUN_00292f28(0x18);
+      temp_v6 = padIsButtonDown(0x18);
       if (temp_v6 == 0) {
         temp_v6 = 0x18;
         FUN_002829d4();
@@ -408,7 +408,7 @@ unsigned int FUN_003291e0(int *param_1)
             temp_v5 = temp_v8;
             FUN_002ae584();
             if ((temp_v5 != 0) &&
-               ((temp_v6 = FUN_00292f28(temp_v8), temp_v6 != 0 ||
+               ((temp_v6 = padIsButtonDown(temp_v8), temp_v6 != 0 ||
                 (temp_v5 = temp_v8, FUN_002829d4(), temp_v5 != 2)))) {
               *(unsigned int *)(temp_v7 + *(int *)(temp_v7 + 0x2a8) * 4 + 0x74) = temp_v8;
               *(int *)(temp_v7 + 0x2a8) = *(int *)(temp_v7 + 0x2a8) + 1;

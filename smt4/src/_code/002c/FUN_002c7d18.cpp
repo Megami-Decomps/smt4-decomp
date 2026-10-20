@@ -82,7 +82,7 @@ typedef struct {
     unsigned int sp17C; /* 0x17c: local_17c */
 } param_1_stack;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 extern unsigned int DAT_00472550; /* 0x472550 */
 extern float DAT_004ea91c; /* 0x4ea91c */
 extern float DAT_004ea920; /* 0x4ea920 */
@@ -226,7 +226,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
   fStack_88 = temp_v22;
   FUN_002a3504(temp_v30,temp_v30,&temp_v42);
   FUN_002a34e8(temp_v30,&temp_v45);
-  FUN_002b90f8(DAT_0044ea00,temp_v30);
+  FUN_002b90f8(g_titleScene,temp_v30);
   temp_v3 = pfVar4->field_0x8;
   if (param_1->field_0xc == 7) {
     temp_v17 = 255.0f;
@@ -312,7 +312,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
             DAT_004ea974 = temp_v1;
             if ((temp_v0 & 0xff) != 0) {
               FUN_00256cd8(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
-              FUN_002c1b64(DAT_0044ea00,temp_v29);
+              FUN_002c1b64(g_titleScene,temp_v29);
               FUN_002b7064();
               FUN_002b70cc();
               temp_v18 = (unsigned long long)(unsigned int)temp_v12 << 0x20;
@@ -359,7 +359,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
             DAT_004ea938 = temp_v4;
             if ((temp_v0 & 0xff) != 0) {
               FUN_00256cd8(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
-              FUN_002c1b64(DAT_0044ea00,temp_v29);
+              FUN_002c1b64(g_titleScene,temp_v29);
               FUN_002b7064();
               FUN_002b70cc();
               temp_v18 = (unsigned long long)(unsigned int)temp_v19 << 0x20;

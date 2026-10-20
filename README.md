@@ -41,8 +41,8 @@ The hash is of the decompressed program, so any container of the same build work
 
 | Version | Functions | Matched (objdiff) | Proven by relink | Fuzzy |
 |---|---|---|---|---|
-| `smt4` | 9,341 | 1,754 | 1,748 | 45.1% |
-| `smt4a` | 15,106 | 3,081 | 3,075 | 45.8% |
+| `smt4` | 9,341 | 1,901 | 1,895 | 45.2% |
+| `smt4a` | 15,106 | 3,268 | 3,261 | 45.9% |
 
 "Proven" is the number that counts: objdiff ignores some operand differences, relink does not. The
 [project notes](docs/project.md#proof) explain the measurements and the six functions per game that

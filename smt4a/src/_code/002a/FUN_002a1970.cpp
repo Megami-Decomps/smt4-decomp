@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int aeabi_uidivmod(unsigned int, unsigned int);
+int __aeabi_uidivmod(unsigned int, unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_002a1970(int param_1,unsigned int param_2)
@@ -34,7 +34,7 @@ void FUN_002a1970(int param_1,unsigned int param_2)
   do {
     if (puVar2 == (unsigned short *)0x0) {
       temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 2);
-      aeabi_uidivmod(temp_v3,(unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 8) + 0xc) *
+      __aeabi_uidivmod(temp_v3,(unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 8) + 0xc) *
                            (unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 8) + 0xe));
       return;
     }
@@ -79,7 +79,7 @@ void FUN_002a1970(int param_1,unsigned int param_2)
       if (temp_v3 == 0xffff) {
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 2);
       }
-      aeabi_uidivmod(temp_v3,(unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 8) + 0xc) *
+      __aeabi_uidivmod(temp_v3,(unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 8) + 0xc) *
                            (unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 8) + 0xe));
       return;
     }

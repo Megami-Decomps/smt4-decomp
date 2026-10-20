@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00163060(...);
+int asdMemoryAllocTracked(...);
 int FUN_00178b04(...);
 int FUN_00291038(...);
 int FUN_0041a080(...);
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00291038. */
 /* Supplied declaration required: FUN_0041a080. */
@@ -59,7 +59,7 @@ void FUN_0041a0fc(int param_1,unsigned int param_2)
     } while (temp_v2 < *(int *)(temp_v3 + 8));
     if (*piVar8 != 0) {
       temp_v0 = 0x100;
-      FUN_00163060(0x100,0x100,0,*piVar8 << 2,1,unaff_r4,unaff_r5,unaff_r6);
+      asdMemoryAllocTracked(0x100,0x100,0,*piVar8 << 2,1,unaff_r4,unaff_r5,unaff_r6);
       *(unsigned int *)(param_1 + 0x20) = temp_v0;
       temp_v4 = 0;
       temp_v2 = 0;

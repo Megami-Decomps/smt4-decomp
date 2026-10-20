@@ -29,7 +29,7 @@ typedef struct {
 extern int FUN_001801a4(void);
 extern int FUN_001ab854(int);
 extern int FUN_00228ab0(void);
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 extern int FUN_00291e14(void);
 extern int FUN_002b4dcc(int);
 /* Supplied declaration required: FUN_002b4e7c. */
@@ -70,7 +70,7 @@ unsigned int FUN_00400564(int param_1,int param_2,fn_00400564_arg2 *param_3)
   }
   if ((param_1 >= 0) || (temp_v2 = FUN_00291e14(), temp_v2 != 0)) {
     if ((param_1 < 0) && (temp_v2 = FUN_00291e14(), temp_v2 != 0)) {
-      temp_v2 = FUN_002919a4();
+      temp_v2 = btlMainGetUnk14();
     }
     else if (param_2 != 0) {
       temp_v2 = FUN_00228ab0();

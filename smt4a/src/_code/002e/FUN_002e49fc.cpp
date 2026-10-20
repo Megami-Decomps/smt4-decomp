@@ -7,17 +7,17 @@ extern "C" {
 int FUN_0015f858(unsigned int, int);
 int FUN_00180118(unsigned int);
 int FUN_002e342c(unsigned char [132], unsigned int);
-int FUN_002e6354(unsigned char [132], int);
+int sysMemClear(unsigned char [132], int);
 int FUN_003180c4(unsigned int, unsigned char [132]);
 int FUN_00359974(unsigned int, unsigned int, unsigned int, int);
 
 extern unsigned int FUN_0014bd84(unsigned int);
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00180118. */
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 extern unsigned int FUN_002c1ce4(int, unsigned int);
 /* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_00359974. */
 
@@ -31,9 +31,9 @@ unsigned int FUN_002e49fc(void)
   unsigned int temp_v2;
   unsigned char temp_v3 [132];
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  FUN_002e6354(temp_v3,0x80);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  sysMemClear(temp_v3,0x80);
   switch(temp_v0) {
   case 0:
   case 1:

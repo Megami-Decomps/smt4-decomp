@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002abb24(unsigned int, unsigned int);
 int FUN_002abbe8(unsigned int, int);
-int FUN_002c415c(int *);
+int asdMemFree(int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -22,7 +22,7 @@ extern unsigned int DAT_00464ba4; /* 0x464ba4 */
 
 /* Supplied declaration required: FUN_002abb24. */
 /* Supplied declaration required: FUN_002abbe8. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_002d5604(int *param_1)
@@ -49,7 +49,7 @@ void FUN_002d5604(int *param_1)
     (**(romwright_code **)(*(int *)puVar2[1] + 0xc))((int *)puVar2[1],puVar2);
     param_1[1] = 0;
   }
-  FUN_002c415c(param_1);
+  asdMemFree(param_1);
   return;
 }
 

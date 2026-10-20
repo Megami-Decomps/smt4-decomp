@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002939f4(void);
+int btlGetMainState(void);
 
 #ifndef ROMWRIGHT_STORAGE_s__B_B_B_B_B_B_00435d00_25_1_DEFINED
 #define ROMWRIGHT_STORAGE_s__B_B_B_B_B_B_00435d00_25_1_DEFINED
@@ -22,7 +22,7 @@ extern union romwright_storage_s__B_B_B_B_B_B_00435d00_25_1 s__B_B_B_B_B_B_00435
 
 extern int FUN_00227668(int);
 extern int FUN_00293230(void);
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 extern int FUN_002b4414(int, unsigned int, unsigned int);
 extern unsigned int FUN_002c30c4(unsigned int);
 
@@ -37,7 +37,7 @@ int FUN_003dcc48(int param_1)
   int temp_v3;
   int *piVar5;
   
-  FUN_002939f4();
+  btlGetMainState();
   temp_v0 = FUN_00293230();
   if (temp_v0 != 0) {
     temp_v0 = -1;

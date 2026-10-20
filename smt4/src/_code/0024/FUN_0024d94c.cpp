@@ -9,7 +9,7 @@ int FUN_00253f94(void);
 int FUN_0026242c(void);
 int FUN_002b45e8(void);
 int FUN_002bf694(unsigned short *, unsigned int);
-int FUN_002c4938(unsigned short *, int);
+int memClear(unsigned short *, int);
 int rt_memcpy_w(unsigned short *, unsigned short *, int);
 
 /* stack frame of param_2: 8 slot(s), 16 byte(s) */
@@ -32,7 +32,7 @@ extern int FUN_0029aafc(void);
 /* Supplied declaration required: FUN_002b45e8. */
 extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -65,7 +65,7 @@ void FUN_0024d94c(unsigned short *param_1,unsigned short *param_2)
   unsigned short temp_v14;
   unsigned char bStack_29;
   
-  FUN_002c4938(param_1,0x5b0);
+  memClear(param_1,0x5b0);
   temp_v1 = param_2[0x3b];
   *param_1 = 0xffff;
   param_1[1] = (unsigned short)(unsigned char)temp_v1;
@@ -157,7 +157,7 @@ void FUN_0024d94c(unsigned short *param_1,unsigned short *param_2)
   *(unsigned int *)(param_1 + 0x46) = 0;
   *(unsigned int *)(param_1 + 0x48) = 0;
   *(unsigned int *)(param_1 + 0x4a) = 0;
-  FUN_002c4938(param_1 + 0x4c,0x500);
+  memClear(param_1 + 0x4c,0x500);
   return;
 }
 

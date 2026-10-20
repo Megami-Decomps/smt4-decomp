@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00137368(int, int, unsigned int, unsigned int, int, int, unsigned int, unsigned int);
+int asdGfxCmdBufferForward8(int, int, unsigned int, unsigned int, int, int, unsigned int, unsigned int);
 int FUN_002bdb48(void);
 int VectorFloatToUnsigned(double, int);
 
@@ -24,7 +24,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00137368. */
+/* Supplied declaration required: asdGfxCmdBufferForward8. */
 /* Supplied declaration required: FUN_002bdb48. */
 
 
@@ -85,7 +85,7 @@ void FUN_00119750(int *param_1,int *param_2,int param_3,unsigned int param_4,int
   if (param_5 != 0) {
     FUN_002bdb48();
   }
-  FUN_00137368(temp_v4,temp_v5,(temp_v10 << 0x18) | (temp_v9 << 0x10) | (temp_v8 << 8) | temp_v7,temp_v1,temp_v2,
+  asdGfxCmdBufferForward8(temp_v4,temp_v5,(temp_v10 << 0x18) | (temp_v9 << 0x10) | (temp_v8 << 8) | temp_v7,temp_v1,temp_v2,
                temp_v11,temp_v0 | (param_3 << 0x18),temp_v3);
   return;
 }

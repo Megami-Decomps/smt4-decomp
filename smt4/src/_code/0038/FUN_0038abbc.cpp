@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002347b8(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
 
 /* stack frame of param_4: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -19,11 +19,11 @@ typedef struct {
 extern int FUN_0038a1e0(...); /* 0x38a1e0 */
 extern int FUN_0038a478(...); /* 0x38a478 */
 extern int FUN_0038aa80(...); /* 0x38aa80 */
-extern unsigned int DAT_00432fc8; /* 0x432fc8 */
+extern unsigned int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_002347b8. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 
 
 void FUN_0038abbc(unsigned int *param_1,unsigned int param_2,unsigned char param_3,unsigned int param_4)
@@ -37,8 +37,8 @@ void FUN_0038abbc(unsigned int *param_1,unsigned int param_2,unsigned char param
   param_1[3] = param_4;
   param_1[2] = 0;
   *(unsigned char *)(param_1 + 0x105) = param_3;
-  temp_v0 = DAT_00432fc8;
-  FUN_002347b8(DAT_00432fc8,param_2,param_1 + 5);
+  temp_v0 = g_aocMain;
+  FUN_002347b8(g_aocMain,param_2,param_1 + 5);
   param_1[4] = temp_v0;
   temp_v0 = *param_1;
   temp_v1 = temp_v0 & 0xffffffdf;
@@ -47,11 +47,11 @@ void FUN_0038abbc(unsigned int *param_1,unsigned int param_2,unsigned char param
     *param_1 = temp_v1 | 0x10;
     param_1[0x106] = 0;
     pcVar3 = "Aoc board CALC";
-    FUN_002c5788("Aoc board CALC",2,0,0,FUN_0038a1e0,0,param_1);
+    asdProcessCreateSimple("Aoc board CALC",2,0,0,FUN_0038a1e0,0,param_1);
     param_1[1] = (unsigned int)pcVar3;
-    FUN_002c4a08("Aoc board UP L",0x82,1,0,FUN_0038a478,0,param_1,pcVar3);
-    FUN_002c4a08("Aoc board UP R",0xe0,1,0,FUN_0038a478,0,param_1,param_1[1]);
-    FUN_002c4a08("Aoc board DOWN",0x160,1,0,FUN_0038aa80,0,param_1,param_1[1]);
+    taskCreateDraw("Aoc board UP L",0x82,1,0,FUN_0038a478,0,param_1,pcVar3);
+    taskCreateDraw("Aoc board UP R",0xe0,1,0,FUN_0038a478,0,param_1,param_1[1]);
+    taskCreateDraw("Aoc board DOWN",0x160,1,0,FUN_0038aa80,0,param_1,param_1[1]);
   }
   return;
 }

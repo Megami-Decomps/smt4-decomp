@@ -25,7 +25,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00183bb0. */
 extern int FUN_003ec620(int, unsigned int);
 /* Supplied declaration required: FUN_0041a534. */
@@ -52,7 +52,7 @@ unsigned int FUN_002df754(void)
   float temp_v12;
   float temp_v13;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   FUN_00183bb0();
   temp_v7 = 0.0f;
   temp_v10 = 2.0f;

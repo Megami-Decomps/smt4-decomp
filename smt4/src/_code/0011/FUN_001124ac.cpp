@@ -17,7 +17,7 @@ int FUN_002ba51c(...);
 int FUN_002bdb48(void);
 int FUN_002bef70(...);
 int FUN_002bf0dc(void);
-int FUN_002c4938(...);
+int memClear(...);
 int SBORROW4(...);
 
 typedef int romwright_code(...);
@@ -76,9 +76,9 @@ extern unsigned int DAT_0044e338; /* 0x44e338 */
 extern unsigned int DAT_0044e33c; /* 0x44e33c */
 extern int DAT_0044e340; /* 0x44e340 */
 extern int DAT_0044e344; /* 0x44e344 */
-extern int DAT_004652a0; /* 0x4652a0 */
-extern int DAT_004652a4; /* 0x4652a4 */
-extern unsigned int DAT_004c6290; /* 0x4c6290 */
+extern int g_commandBufferCursor; /* 0x4652a0 */
+extern int g_commandBufferEnd; /* 0x4652a4 */
+extern unsigned int g_asdGfxContext; /* 0x4c6290 */
 extern unsigned int DAT_004c6294; /* 0x4c6294 */
 extern unsigned int DAT_004c6298; /* 0x4c6298 */
 extern unsigned int DAT_004c629c; /* 0x4c629c */
@@ -115,7 +115,7 @@ extern unsigned int FUN_00129d98(void);
 /* Supplied declaration required: FUN_002bdb48. */
 /* Supplied declaration required: FUN_002bef70. */
 /* Supplied declaration required: FUN_002bf0dc. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 extern int nngxGetVramEndAddr(unsigned int);
 extern int vldtr_initializeStateValidator(int);
 
@@ -144,8 +144,8 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
   if ((param_1 == (romwright_code *)0x0 || param_2 == (romwright_code *)0x0) || (DAT_004c62a0 != '\0')) {
     return 0;
   }
-  FUN_002c4938(&DAT_004c6290,0x180);
-  DAT_004c6290 = 0xf0;
+  memClear(&g_asdGfxContext,0x180);
+  g_asdGfxContext = 0xf0;
   DAT_004c6294 = 0xf0;
   DAT_004c6298 = 400;
   DAT_004c629c = 0x140;
@@ -193,9 +193,9 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
         puVar1[2] = 0x10000;
         puVar1[6] = temp_v0 + 0x10000;
         puVar1[7] = 0x10;
-        FUN_002c4938(temp_v0 + 0x10000,0x1c0);
-        DAT_004652a0 = puVar1[1];
-        DAT_004652a4 = puVar1[2] + DAT_004652a0;
+        memClear(temp_v0 + 0x10000,0x1c0);
+        g_commandBufferCursor = puVar1[1];
+        g_commandBufferEnd = puVar1[2] + g_commandBufferCursor;
       }
       if (DAT_004c632c != (unsigned int *)0x0) {
         DAT_004c632c[0xb] = 0x300;
@@ -203,7 +203,7 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
       temp_v0 = FUN_002bf0dc();
       if ((temp_v0 == 0) && (temp_v0 = vldtr_initializeStateValidator(temp_v9[0]), -1 < temp_v0)) {
         temp_v3 = 2;
-        DAT_0044e344 = DAT_004652a0 - DAT_004c632c[1];
+        DAT_0044e344 = g_commandBufferCursor - DAT_004c632c[1];
         DAT_004c632c[3] = DAT_0044e344;
         FUN_001299f8();
         temp_v0 = FUN_00129d34();

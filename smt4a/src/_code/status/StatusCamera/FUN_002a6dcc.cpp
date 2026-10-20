@@ -10,8 +10,8 @@ int FUN_001418fc(int);
 int FUN_0014f0dc(int, float *, float *, int *);
 int FUN_001523b8(int, int);
 int FUN_00154180(int, int, int, int);
-int FUN_00163060(int, int, int, int, int);
-int FUN_002e6354(void);
+int asdMemoryAllocTracked(int, int, int, int, int);
+int sysMemClear(void);
 int FUN_0036b824(int);
 
 /* stack frame of param_3: 7 slot(s), 28 byte(s) */
@@ -26,7 +26,7 @@ typedef struct {
 } param_3_stack;
 
 extern int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_00588fe4; /* 0x588fe4 */
+extern int g_statusCamera; /* 0x588fe4 */
 
 /* Supplied declaration required: FUN_0013c884. */
 /* Supplied declaration required: FUN_00140e38. */
@@ -34,8 +34,8 @@ extern int DAT_00588fe4; /* 0x588fe4 */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
 /* Supplied declaration required: FUN_00154180. */
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0036b824. */
 
 
@@ -60,13 +60,13 @@ void FUN_002a6dcc(float *param_1,float *param_2,unsigned int *param_3)
   unsigned int temp_v9;
   unsigned int temp_v10;
   
-  if (DAT_00588fe4 == 0) {
+  if (g_statusCamera == 0) {
     temp_v0 = 0x100;
-    FUN_00163060(0x100,0x100,0,0x540,1);
-    DAT_00588fe4 = temp_v0;
+    asdMemoryAllocTracked(0x100,0x100,0,0x540,1);
+    g_statusCamera = temp_v0;
   }
-  temp_v0 = DAT_00588fe4;
-  FUN_002e6354();
+  temp_v0 = g_statusCamera;
+  sysMemClear();
   *(unsigned int *)(temp_v0 + 0x534) = in_s2;
   *(unsigned int *)(temp_v0 + 0x538) = in_s0;
   *(unsigned int *)(temp_v0 + 0x53c) = in_s1;

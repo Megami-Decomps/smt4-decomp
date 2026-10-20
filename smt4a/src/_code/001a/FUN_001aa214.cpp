@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_001af27c(int);
 int FUN_001af330(int, int);
-int aeabi_uidivmod(unsigned int, unsigned int, int, unsigned int, int);
+int __aeabi_uidivmod(unsigned int, unsigned int, int, unsigned int, int);
 int hasExclusiveAccess(int *);
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: FUN_001af27c. */
 /* Supplied declaration required: FUN_001af330. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -43,7 +43,7 @@ void FUN_001aa214(int param_1)
     nn_os_CriticalSection_Leave(temp_v4);
     FUN_001af27c(param_1 + 0x44);
   }
-  aeabi_uidivmod(*(int *)(param_1 + 0x5c) + temp_v2,*(unsigned int *)(param_1 + 0x58),
+  __aeabi_uidivmod(*(int *)(param_1 + 0x5c) + temp_v2,*(unsigned int *)(param_1 + 0x58),
                  *(int *)(param_1 + 0x5c),temp_v2,temp_v1);
   *(unsigned int *)(*(int *)(param_1 + 0x38) + temp_v3 * 4) = 0;
   *(int *)(param_1 + 0x60) = *(int *)(param_1 + 0x60) + 1;

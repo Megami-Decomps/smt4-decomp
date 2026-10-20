@@ -40,7 +40,7 @@ struct fn_00186ce4_arg0 {
 };
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_0019c720. */
 extern int FUN_0019e378(int, unsigned int);
 /* Supplied declaration required: FUN_001ad0fc. */
@@ -59,7 +59,7 @@ void FUN_00186ce4(fn_00186ce4_arg0 *param_1,unsigned int *param_2,unsigned int *
   unsigned int temp_v4;
   unsigned int temp_v5;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   temp_v4 = VectorSignedToFloat(param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(temp_v0 + 100) = param_4;
   temp_v5 = 0;

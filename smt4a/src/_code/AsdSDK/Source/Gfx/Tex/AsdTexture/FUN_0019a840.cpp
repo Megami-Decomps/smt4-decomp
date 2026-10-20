@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001630d4(int, int, int, unsigned int);
+int asdMemoryAlloc(int, int, int, unsigned int);
 int FUN_00168fbc(unsigned int, unsigned int, int);
 int FUN_0017cdb0(void);
 int FUN_0017cf74(unsigned int, unsigned int, unsigned int);
@@ -18,7 +18,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_00168fbc. */
 /* Supplied declaration required: FUN_0017cdb0. */
 /* Supplied declaration required: FUN_0017cf74. */
@@ -69,13 +69,13 @@ void FUN_0019a840(int param_1)
     if (temp_v1 != 0x20000) {
       if (temp_v1 == 0x30000) {
         temp_v2 = 0x30000;
-        FUN_001630d4(0x30000,0x100,0,temp_v5);
+        asdMemoryAlloc(0x30000,0x100,0,temp_v5);
         *(unsigned int *)(param_1 + 0x44) = temp_v2;
       }
     }
     else {
       temp_v2 = 0x20000;
-      FUN_001630d4(0x20000,0x100,0,temp_v5);
+      asdMemoryAlloc(0x20000,0x100,0,temp_v5);
       *(unsigned int *)(param_1 + 0x44) = temp_v2;
     }
   }
@@ -91,13 +91,13 @@ void FUN_0019a840(int param_1)
     if (temp_v1 != 0x20000) {
       if (temp_v1 == 0x30000) {
         temp_v2 = 0x30000;
-        FUN_001630d4(0x30000,0x100,0,temp_v5);
+        asdMemoryAlloc(0x30000,0x100,0,temp_v5);
         *(unsigned int *)(param_1 + 0x44) = temp_v2;
       }
     }
     else {
       temp_v2 = 0x20000;
-      FUN_001630d4(0x20000,0x100,0,temp_v5);
+      asdMemoryAlloc(0x20000,0x100,0,temp_v5);
       *(unsigned int *)(param_1 + 0x44) = temp_v2;
     }
   }

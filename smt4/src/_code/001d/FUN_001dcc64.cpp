@@ -10,9 +10,9 @@ int FUN_002629f0(int, int);
 int FUN_002c0894(void);
 int FUN_002c15fc(int);
 int FUN_002fcd98(int);
-int FUN_00302494(void);
-int FUN_0030ee6c(int, float *);
-int FUN_0030ee84(void);
+int effMenuListsClear(void);
+int effMenuAddDeltaA(int, float *);
+int effMenuAddDeltaB(void);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -47,9 +47,9 @@ extern int FUN_002bfde4(unsigned int);
 /* Supplied declaration required: FUN_002c0894. */
 /* Supplied declaration required: FUN_002c15fc. */
 /* Supplied declaration required: FUN_002fcd98. */
-/* Supplied declaration required: FUN_00302494. */
-/* Supplied declaration required: FUN_0030ee6c. */
-/* Supplied declaration required: FUN_0030ee84. */
+/* Supplied declaration required: effMenuListsClear. */
+/* Supplied declaration required: effMenuAddDeltaA. */
+/* Supplied declaration required: effMenuAddDeltaB. */
 
 
 unsigned int FUN_001dcc64(void)
@@ -79,11 +79,11 @@ unsigned int FUN_001dcc64(void)
     }
     temp_v4 = temp_v4 * 128.0f;
     temp_v3 = temp_v3 * 128.0f;
-    FUN_0030ee6c(0,pfVar3);
-    FUN_0030ee84();
+    effMenuAddDeltaA(0,pfVar3);
+    effMenuAddDeltaB();
     FUN_00219908();
     DAT_0044eaac = 0;
-    FUN_00302494();
+    effMenuListsClear();
     FUN_002fcd98(0);
     temp_v1 = FUN_002c15fc(0x1c);
     if ((temp_v1 != 0) && (temp_v1 = FUN_002bfde4(0x1b), temp_v1 != 0)) {

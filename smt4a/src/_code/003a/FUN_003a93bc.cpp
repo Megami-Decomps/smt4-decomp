@@ -12,8 +12,8 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int FUN_0014aa78(void);
-extern int FUN_00236038(unsigned int);
+extern int btlGetMainState(void);
+extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_004fd204. */
 
 
@@ -27,9 +27,9 @@ unsigned int FUN_003a93bc(void)
   int temp_v3;
   int temp_v4;
   
-  temp_v0 = FUN_00236038(0);
+  temp_v0 = scrGetArg(0);
   temp_v4 = 0;
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   do {
     temp_v3 = *(int *)(temp_v1 + 0x1ed4) + temp_v4 * 0x1d0;
     temp_v2 = *(unsigned int *)(temp_v3 + 0x50);

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0015155c(...);
-int FUN_00163060(int, int, int, int, int);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_0031a400(void);
 int FUN_004a8ef4(...);
 
@@ -29,8 +29,8 @@ extern unsigned char LAB_00298674; /* 0x298674 */
 extern unsigned char LAB_002df668; /* 0x2df668 */
 extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_0031a400. */
 /* Supplied declaration required: FUN_004a8ef4. */
 
@@ -45,17 +45,17 @@ void FUN_0023244c(unsigned int *param_1)
   FUN_0031a400();
   if ((*(int * *)((unsigned char *)&DAT_0057a9b8 + 0x10)) == (int *)0x0) {
     piVar1 = (int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x13018,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0x13018,1);
     (*(int * *)((unsigned char *)&DAT_0057a9b8 + 0x10)) = piVar1;
   }
   piVar1 = (*(int * *)((unsigned char *)&DAT_0057a9b8 + 0x10));
   puVar2 = &LAB_002325d0;
-  FUN_0015155c(&LAB_002325d0,4,0,0,FUN_002248f8,&LAB_00298670,param_1,*param_1);
+  taskCreateDraw(&LAB_002325d0,4,0,0,FUN_002248f8,&LAB_00298670,param_1,*param_1);
   param_1[0x1e] = (unsigned int)puVar2;
-  FUN_0015155c(&LAB_002325e0,0x7e,0,0,FUN_0024e31c,0,param_1,puVar2);
-  FUN_0015155c(&LAB_002325f4,0xda,0,0,FUN_0024e31c,0,param_1,param_1[0x1e]);
-  FUN_0015155c(&LAB_0023260c,0xeb,0,0,&LAB_00298674,0,param_1,param_1[0x1e]);
-  FUN_0015155c(&LAB_00232620,0xed,0,0,&LAB_002df668,0,param_1,param_1[0x1e]);
+  taskCreateDraw(&LAB_002325e0,0x7e,0,0,FUN_0024e31c,0,param_1,puVar2);
+  taskCreateDraw(&LAB_002325f4,0xda,0,0,FUN_0024e31c,0,param_1,param_1[0x1e]);
+  taskCreateDraw(&LAB_0023260c,0xeb,0,0,&LAB_00298674,0,param_1,param_1[0x1e]);
+  taskCreateDraw(&LAB_00232620,0xed,0,0,&LAB_002df668,0,param_1,param_1[0x1e]);
   FUN_004a8ef4(piVar1,param_1);
   *piVar1 = (int)param_1;
   return;

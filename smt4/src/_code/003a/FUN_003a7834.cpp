@@ -1,50 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a7834` (_code @ 0x3a7834, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the cursor flag is loaded with ldrb [r5, #138]; retail copies the base (mov r0, r5) and uses ldrsb r0, [r0, #138]. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00231240(...);
-int FUN_0029d960(int);
-int FUN_002a0cc8(int);
-int FUN_002b8ee0(int, int);
+typedef struct Cursor {
+    /* 0x00 */ u8 unk00[0x8A];
+    /* 0x8A */ s8 enabled;
+} Cursor;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Pair {
+    s32 first;
+    s32 second;
+} Pair;
 
-extern int FUN_00231184(void);
-/* Supplied declaration required: FUN_00231240. */
-/* Supplied declaration required: FUN_0029d960. */
-/* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: FUN_002b8ee0. */
-extern unsigned int FUN_002bed98(int);
-extern unsigned int FUN_002beda4(int);
+typedef struct Menu {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ Pair state;
+    /* 0x1C */ u8 unk1C[0xAC];
+    /* 0xC8 */ u8 layout[0x34];
+    /* 0xFC */ Cursor cursor;
+} Menu;
 
+int FUN_00231184(void);
+int FUN_00231240(void *layout, u32 a, u32 b);
+int FUN_0029d960(Menu *menu);
+int FUN_002a0cc8(int arg);
+int FUN_002b8ee0(Cursor *cursor, int arg);
+u32 FUN_002bed98(Cursor *cursor);
+u32 FUN_002beda4(Cursor *cursor);
 
-void FUN_003a7834(int param_1)
-
+/* Refreshes the menu layout from its cursor; if the cursor is enabled and FUN_00231184 allows it, switches the menu to state (2, 0) and refreshes again. */
+void FUN_003a7834(Menu *menu)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = param_1 + 0xfc;
-  FUN_002b8ee0(temp_v2,0);
-  temp_v0 = FUN_002bed98(temp_v2);
-  temp_v1 = FUN_002beda4(temp_v2);
-  FUN_00231240(param_1 + 200,temp_v1,temp_v0);
-  if ((*(signed char *)(temp_v2 + 0x8a) != '\0') && (temp_v2 = FUN_00231184(), temp_v2 != 0)) {
-    FUN_002a0cc8(0);
-    *(unsigned int *)(param_1 + 0x14) = 2;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    FUN_00231240(param_1 + 200,0,0);
-    FUN_0029d960(param_1);
-    return;
-  }
-  return;
+    Cursor *cursor = &menu->cursor;
+    u32 width;
+    u32 height;
+
+    FUN_002b8ee0(cursor, 0);
+    width = FUN_002bed98(cursor);
+    height = FUN_002beda4(cursor);
+    FUN_00231240(menu->layout, height, width);
+    if (cursor->enabled != 0 && FUN_00231184() != 0) {
+        FUN_002a0cc8(0);
+        menu->state.first = 2;
+        menu->state.second = 0;
+        FUN_00231240(menu->layout, 0, 0);
+        FUN_0029d960(menu);
+    }
 }
 
 } /* extern "C" */

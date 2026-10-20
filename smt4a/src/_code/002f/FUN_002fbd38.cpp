@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e74c4(unsigned char [32], int *, int, unsigned int);
+int strAssign(unsigned char [32], int *, int, unsigned int);
 int FUN_002e7614(...);
 int FUN_002e9318(unsigned char [8]);
 int FUN_002ea658(unsigned char [16]);
 int FUN_002eb588(int *);
-int FUN_002ec9f4(...);
+int strDestroy(...);
 int FUN_002f6be2(unsigned char [8], int *);
 int FUN_002f6bf0(int);
 int FUN_002f6bfc(unsigned char [16], unsigned char [32], unsigned char [36]);
@@ -27,12 +27,12 @@ typedef struct {
 
 extern unsigned char LAB_002fbdc8; /* 0x2fbdc8 */
 
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e7614. */
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002ea658. */
 /* Supplied declaration required: FUN_002eb588. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002f6be2. */
 /* Supplied declaration required: FUN_002f6bf0. */
 /* Supplied declaration required: FUN_002f6bfc. */
@@ -61,7 +61,7 @@ int FUN_002fbd38(int param_1)
     FUN_002e7614(temp_v0,8);
     FUN_002ea658(temp_v8);
     FUN_002e7614(temp_v1,0x10);
-    FUN_002e74c4(temp_v0,&temp_v5,8,0xffffffff);
+    strAssign(temp_v0,&temp_v5,8,0xffffffff);
     FUN_002f6bfc(temp_v8,temp_v0,temp_v1);
     temp_v2 = 0;
     FUN_002f7b9c(temp_v7,temp_v1);
@@ -70,8 +70,8 @@ int FUN_002fbd38(int param_1)
     FUN_002fbde4(param_1 + 0xf,0x29,&LAB_002fbdc8,temp_v2);
     *(unsigned char *)(param_1 + 0x37) = 0;
     FUN_002f6bf0(temp_v2);
-    FUN_002ec9f4(temp_v1);
-    FUN_002ec9f4(temp_v0);
+    strDestroy(temp_v1);
+    strDestroy(temp_v0);
   }
   return param_1 + 0xf;
 }

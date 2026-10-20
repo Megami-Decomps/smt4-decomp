@@ -66,7 +66,7 @@ extern unsigned char FUN_002a46d8(void);
 /* Supplied declaration required: FUN_002c0b5c. */
 /* Supplied declaration required: FUN_002cd8fc. */
 /* Supplied declaration required: FUN_002e6dd0. */
-extern int FUN_0030ef8c(unsigned char *, int, unsigned int);
+extern int rt_memcmp(unsigned char *, int, unsigned int);
 /* Supplied declaration required: FUN_00319e58. */
 extern unsigned char FUN_0031cee0(void);
 /* Supplied declaration required: FUN_0032e25c. */
@@ -155,7 +155,7 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
         if ((temp_v4 != 0) && (temp_v4 = FUN_00345388(0x20), temp_v4 != 0)) {
           FUN_002c0b10(temp_v6);
           temp_v4 = FUN_002bf520();
-          temp_v4 = FUN_0030ef8c(temp_v9,temp_v4 + 0x50,0x14);
+          temp_v4 = rt_memcmp(temp_v9,temp_v4 + 0x50,0x14);
           if (temp_v4 != 0) {
             temp_v4 = FUN_002bf520();
             if (*(short *)(temp_v4 + 0x60) != 0) {

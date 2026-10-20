@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00288728(void);
 int FUN_002947c0(void);
-int FUN_002c222c(void);
+int asdOperatorNew(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -19,7 +19,7 @@ extern unsigned char DAT_004207d8; /* 0x4207d8 */
 /* Supplied declaration required: FUN_00288728. */
 /* Supplied declaration required: FUN_002947c0. */
 extern unsigned int *FUN_002947f4(void);
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 
 
 void FUN_00339f38(int param_1)
@@ -37,7 +37,7 @@ void FUN_00339f38(int param_1)
     *(unsigned int *)(param_1 + 0x4394) = 0;
   }
   temp_v0 = 0x100;
-  FUN_002c222c();
+  asdOperatorNew();
   puVar2 = (unsigned int *)0x0;
   if (temp_v0 != 0) {
     puVar2 = (unsigned int *)FUN_002947f4();

@@ -39,7 +39,7 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_1_stack;
 
-extern unsigned int DAT_004652a0; /* 0x4652a0 */
+extern unsigned int g_commandBufferCursor; /* 0x4652a0 */
 
 extern unsigned int FUN_002bc11c(void);
 /* Supplied declaration required: nw_gfx_internal_FastWordCopyAsm_14. */
@@ -146,7 +146,7 @@ void FUN_003e3494(fn_003e3494_arg0 *param_1)
     temp_v18 = temp_v3;
     temp_v19 = temp_v5;
     temp_v21 = 0xf011b;
-    nw_gfx_internal_FastWordCopyAsm_16(DAT_004652a0,&temp_v6);
+    nw_gfx_internal_FastWordCopyAsm_16(g_commandBufferCursor,&temp_v6);
   }
   else {
     temp_v6 = 1;
@@ -175,7 +175,7 @@ void FUN_003e3494(fn_003e3494_arg0 *param_1)
     temp_v12 = temp_v1;
     temp_v17 = 0xf006e;
     temp_v19 = 0xf011b;
-    nw_gfx_internal_FastWordCopyAsm_14(DAT_004652a0,&temp_v6);
+    nw_gfx_internal_FastWordCopyAsm_14(g_commandBufferCursor,&temp_v6);
   }
   return;
 }

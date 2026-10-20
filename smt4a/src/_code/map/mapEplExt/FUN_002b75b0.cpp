@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(unsigned char [32], unsigned char *);
 int FUN_0014aa88(void);
-int FUN_00163060(int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int);
 int FUN_001642e4(unsigned char *, unsigned int [2], int, int);
 int FUN_001abbc4(void);
 
@@ -18,11 +18,11 @@ typedef struct {
 extern unsigned char LAB_002b7784; /* 0x2b7784 */
 extern unsigned char LAB_002b77a0; /* 0x2b77a0 */
 extern int DAT_00580c8c; /* 0x580c8c */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_0014aa88. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001642e4. */
 /* Supplied declaration required: FUN_001abbc4. */
 
@@ -41,7 +41,7 @@ void FUN_002b75b0(void)
   if (DAT_00580c8c == 0) {
     temp_v3[0] = 1;
     temp_v0 = 0x100;
-    FUN_00163060(0x100,0x100,0,0x64c);
+    asdMemoryAllocTracked(0x100,0x100,0,0x64c);
     DAT_00580c8c = temp_v0;
     FUN_0014aa88();
     temp_v1 = 0;
@@ -76,7 +76,7 @@ void FUN_002b75b0(void)
       temp_v1 = temp_v2;
     } while (temp_v2 < 0x10);
   }
-  if (DAT_005f15fc == 0x26) {
+  if (g_gameState == 0x26) {
     FUN_00100388(temp_v4,&LAB_002b7784);
     temp_v1 = DAT_00580c8c;
     puVar3 = temp_v4;
@@ -87,7 +87,7 @@ void FUN_002b75b0(void)
       *(unsigned char **)(temp_v1 + 0x68) = puVar3;
     }
   }
-  if ((DAT_005f15fc == 0x2b || DAT_005f15fc == 0x2c) || DAT_005f15fc == 0x2f) {
+  if ((g_gameState == 0x2b || g_gameState == 0x2c) || g_gameState == 0x2f) {
     FUN_00100388(temp_v4,&LAB_002b7784);
     temp_v1 = DAT_00580c8c;
     puVar3 = temp_v4;

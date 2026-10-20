@@ -16,7 +16,7 @@ extern int FUN_0016f7ec(...); /* 0x16f7ec */
 extern signed char DAT_005894e4; /* 0x5894e4 */
 extern signed char DAT_005894e7; /* 0x5894e7 */
 extern unsigned char DAT_00643380; /* 0x643380 */
-extern unsigned char DAT_006433d0; /* 0x6433d0 */
+extern unsigned char g_dspsndState; /* 0x6433d0 */
 extern unsigned char DAT_006449d0; /* 0x6449d0 */
 
 /* Supplied declaration required: FUN_001590c0. */
@@ -39,7 +39,7 @@ unsigned char FUN_00147120(void)
     FUN_00159e24(&DAT_00643380);
     FUN_00159e18(&DAT_006449d0);
     if (DAT_005894e7 == '\0') {
-      nn_snd_CTR_Dspsnd_Finalize((unsigned int)&DAT_006433d0,0);
+      nn_snd_CTR_Dspsnd_Finalize((unsigned int)&g_dspsndState,0);
     }
   }
   return 0;

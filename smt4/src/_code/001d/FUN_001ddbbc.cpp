@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002bd8e8(int, int, int);
+int timerStart(int, int, int);
 
 extern int DAT_0044e190; /* 0x44e190 */
 
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 
 
 void FUN_001ddbbc(void)
@@ -21,7 +21,7 @@ void FUN_001ddbbc(void)
   unsigned int temp_v2;
   
   temp_v0 = DAT_0044e190;
-  FUN_002bd8e8(DAT_0044e190 + 0x28,1,0);
+  timerStart(DAT_0044e190 + 0x28,1,0);
   temp_v1 = DAT_0044e190;
   *(unsigned int *)(DAT_0044e190 + 0x40c) = 0;
   puVar3 = (unsigned int *)(temp_v1 + 0x400);

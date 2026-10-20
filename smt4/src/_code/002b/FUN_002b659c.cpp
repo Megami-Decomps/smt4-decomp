@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 extern int FUN_00138c44(unsigned int);
 extern int FUN_002ae1e8(unsigned int);
@@ -25,7 +25,7 @@ unsigned int FUN_002b659c(int param_1,int param_2,int param_3,int param_4)
   int *piVar7;
   unsigned int temp_v6;
   
-  temp_v0 = *(unsigned int *)(DAT_0044ea00 + 0x528);
+  temp_v0 = *(unsigned int *)(g_titleScene + 0x528);
   temp_v1 = FUN_002ae210();
   temp_v1 = temp_v1 - 1;
   temp_v2 = FUN_002ae1e8(temp_v0);
@@ -41,7 +41,7 @@ unsigned int FUN_002b659c(int param_1,int param_2,int param_3,int param_4)
       temp_v5 = (int)temp_v5 / 2;
     }
   }
-  temp_v2 = DAT_0044ea00;
+  temp_v2 = g_titleScene;
   temp_v3 = (temp_v1 - (param_1 + param_3)) + 1;
   param_1 = temp_v1 - param_1;
   if (temp_v3 < 0) {
@@ -67,7 +67,7 @@ unsigned int FUN_002b659c(int param_1,int param_2,int param_3,int param_4)
   if ((int)temp_v5 < (int)temp_v4) {
     temp_v4 = temp_v5;
   }
-  piVar7 = (int *)(DAT_0044ea00 + 0x132c);
+  piVar7 = (int *)(g_titleScene + 0x132c);
   temp_v4 = temp_v4 | (temp_v3 << 0x10);
   temp_v1 = *piVar7;
   if ((int)temp_v5 < (int)temp_v6) {
@@ -80,9 +80,9 @@ unsigned int FUN_002b659c(int param_1,int param_2,int param_3,int param_4)
     (**(romwright_code **)(temp_v2 + 0x1348))();
     *(unsigned char *)(temp_v2 + 0x1344) = 0;
   }
-  temp_v1 = DAT_0044ea00;
+  temp_v1 = g_titleScene;
   temp_v6 = temp_v6 | (param_1 << 0x10);
-  piVar7 = (int *)(DAT_0044ea00 + 0x134c);
+  piVar7 = (int *)(g_titleScene + 0x134c);
   temp_v2 = *piVar7;
   temp_v5 = piVar7[temp_v2 + 2];
   *piVar7 = temp_v2 + 1;
@@ -91,8 +91,8 @@ unsigned int FUN_002b659c(int param_1,int param_2,int param_3,int param_4)
     (**(romwright_code **)(temp_v1 + 0x1368))();
     *(unsigned char *)(temp_v1 + 0x1364) = 0;
   }
-  temp_v1 = DAT_0044ea00;
-  piVar7 = (int *)(DAT_0044ea00 + 0x130c);
+  temp_v1 = g_titleScene;
+  piVar7 = (int *)(g_titleScene + 0x130c);
   temp_v2 = *piVar7;
   temp_v3 = piVar7[temp_v2 + 2];
   *piVar7 = temp_v2 + 1;

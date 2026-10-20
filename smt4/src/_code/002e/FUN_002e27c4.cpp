@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_00293a04(int, int);
 int FUN_00296d6c(...);
-int aeabi_idivmod(int, double);
+int __aeabi_idivmod(int, double);
 
 /* Supplied declaration required: FUN_00293a04. */
 /* Supplied declaration required: FUN_00296d6c. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_002e27c4(int param_1,int param_2,int param_3,int param_4)
@@ -47,7 +47,7 @@ void FUN_002e27c4(int param_1,int param_2,int param_3,int param_4)
           *(short *)(temp_v3 + 4) = temp_v0;
         }
         if ((int)temp_v4 <= (int)*(short *)(temp_v3 + 4)) {
-          aeabi_idivmod((int)*(short *)(temp_v3 + 4),temp_v4);
+          __aeabi_idivmod((int)*(short *)(temp_v3 + 4),temp_v4);
           *(unsigned short *)(temp_v3 + 4) = temp_v1;
         }
       }

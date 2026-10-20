@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern int DAT_00573920; /* 0x573920 */
+extern int g_btlMain; /* 0x573920 */
 extern unsigned int DAT_005739f0; /* 0x5739f0 */
 extern unsigned int DAT_005739f4; /* 0x5739f4 */
 extern unsigned int DAT_00573a10; /* 0x573a10 */
@@ -125,8 +125,8 @@ void FUN_003f034c(int param_1)
         }
         *piVar9 = temp_v4;
       }
-      if (DAT_00573920 != 0) {
-        *(unsigned int *)(DAT_00573920 + 0x8c) = 0x18;
+      if (g_btlMain != 0) {
+        *(unsigned int *)(g_btlMain + 0x8c) = 0x18;
       }
       FUN_003eafa0(param_1,0);
       FUN_003f22fc(param_1,1);
@@ -155,8 +155,8 @@ void FUN_003f034c(int param_1)
       }
       *piVar9 = temp_v4;
     }
-    if (DAT_00573920 != 0) {
-      *(unsigned int *)(DAT_00573920 + 0x8c) = 0x18;
+    if (g_btlMain != 0) {
+      *(unsigned int *)(g_btlMain + 0x8c) = 0x18;
     }
     FUN_003eafa0(param_1,1);
     FUN_003f22fc(param_1,0);
@@ -175,8 +175,8 @@ void FUN_003f034c(int param_1)
   temp_v0 = ~DAT_00573a74;
   *puVar7 = *puVar7 & ~DAT_00573a10 & ~DAT_00573a70;
   *(unsigned int *)(param_1 + 0x45a4) = *(unsigned int *)(param_1 + 0x45a4) & temp_v3 & temp_v0;
-  if (DAT_00573920 != 0) {
-    *(unsigned int *)(DAT_00573920 + 0x8c) = 0xc;
+  if (g_btlMain != 0) {
+    *(unsigned int *)(g_btlMain + 0x8c) = 0xc;
   }
   return;
 }

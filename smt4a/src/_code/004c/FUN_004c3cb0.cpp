@@ -13,7 +13,7 @@ typedef struct {
     unsigned short sp46; /* 0x46: local_46 */
 } param_3_stack;
 
-extern unsigned int FUN_0014aa78(void);
+extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 
@@ -28,9 +28,9 @@ void FUN_004c3cb0(unsigned int param_1,unsigned int *param_2,int *param_3)
   unsigned short temp_v3;
   short temp_v4;
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   FUN_003f0e20(temp_v0,param_1);
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   FUN_003e8bb0(temp_v2,temp_v1,temp_v0);
   *param_2 = (unsigned int)temp_v3;
   *param_3 = (int)temp_v4;

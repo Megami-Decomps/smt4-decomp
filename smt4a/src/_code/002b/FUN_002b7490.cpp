@@ -1,28 +1,22 @@
-#include "romwright_types.h"
+#include "map/mapEplExt.h"
 
 extern "C" {
 
-int FUN_0019c0e0(void);
+void FUN_0019c0e0(void *object);
 
-extern int DAT_00580c8c; /* 0x580c8c */
-
-/* Supplied declaration required: FUN_0019c0e0. */
-
+extern MapEplExt *DAT_00580c8c;
 
 void FUN_002b7490(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  do {
-    if (*(int *)(DAT_00580c8c + temp_v0 * 100 + 0x68) != 0) {
-      FUN_0019c0e0();
+    MapEplExtEntry *entry;
+    s32 i;
+
+    for (i = 0; i < MAP_EPL_EXT_ENTRIES; i++) {
+        entry = &DAT_00580c8c->entries[i];
+        if (entry->object != NULL) {
+            FUN_0019c0e0(entry->object);
+        }
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x10);
-  return;
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002bcc60(...);
 int FUN_002bcd44(...);
-int FUN_002c32a0(...);
+int memAlloc(...);
 int FUN_002c38fc(...);
 int FUN_002c526c(...);
 
@@ -29,7 +29,7 @@ extern unsigned char LAB_003f6fe8; /* 0x3f6fe8 */
 extern unsigned int FUN_00248a9c(void);
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002bcd44. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c38fc. */
 /* Supplied declaration required: FUN_002c526c. */
 
@@ -53,7 +53,7 @@ void FUN_002e1a00(int param_1)
   *(unsigned int *)(param_1 + 0x78) = 0;
   *(unsigned int *)(param_1 + 0x7c) = 0;
   temp_v0 = 0x100;
-  FUN_002c32a0(0x100,0x100,0,0x1000,0x1000,1);
+  memAlloc(0x100,0x100,0,0x1000,0x1000,1);
   *(unsigned int *)(param_1 + 0x44c) = temp_v0;
   FUN_002bcd44(param_1 + 0x434,temp_v0,0x1000);
   temp_v2 = 4;

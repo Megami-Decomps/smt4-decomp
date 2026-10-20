@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int aeabi_idivmod(int, int);
+int __aeabi_idivmod(int, int);
 
 /* stack frame of param_6: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp34; /* 0x34: local_34 */
 } param_6_stack;
 
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 short nn_hidlow_ClampStickCircle
@@ -47,7 +47,7 @@ short nn_hidlow_ClampStickCircle
     }
     do {
       temp_v2 = temp_v3;
-      temp_v3 = aeabi_idivmod(temp_v0,temp_v2);
+      temp_v3 = __aeabi_idivmod(temp_v0,temp_v2);
       temp_v3 = (temp_v3 + temp_v2) >> 1;
     } while (temp_v3 < temp_v2);
   }
@@ -59,9 +59,9 @@ short nn_hidlow_ClampStickCircle
     temp_v4 = temp_v2 + param_5 * -0x80;
     param_6 = (temp_v2 >> 7) - param_5;
   }
-  temp_v1 = aeabi_idivmod(param_3 * temp_v4,temp_v2);
+  temp_v1 = __aeabi_idivmod(param_3 * temp_v4,temp_v2);
   *param_1 = temp_v1;
-  temp_v1 = aeabi_idivmod(param_4 * temp_v4,temp_v2);
+  temp_v1 = __aeabi_idivmod(param_4 * temp_v4,temp_v2);
   *param_2 = temp_v1;
   return (short)param_6;
 }

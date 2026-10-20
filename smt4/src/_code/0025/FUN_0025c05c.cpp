@@ -7,13 +7,13 @@ extern "C" {
 int FUN_0022ac3c(int, unsigned int);
 int FUN_002b06c4(void);
 
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_0022ac3c. */
 /* Supplied declaration required: FUN_002b06c4. */
-extern unsigned int FUN_002c0c74(unsigned int);
-extern int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int);
 
 
 unsigned int FUN_0025c05c(unsigned int param_1)
@@ -29,11 +29,11 @@ unsigned int FUN_0025c05c(unsigned int param_1)
   int temp_v6;
   unsigned int temp_v7;
   
-  temp_v0 = FUN_002c0cec(2);
-  temp_v1 = FUN_002c0cc4();
+  temp_v0 = dataTableGet(2);
+  temp_v1 = dataTableGetEntries();
   temp_v6 = temp_v1;
-  if (((-1 < (int)param_1) && (temp_v2 = FUN_002c0c74(temp_v0), param_1 < temp_v2)) &&
-     (temp_v6 = DAT_00433158, FUN_0022ac3c(DAT_00433158,param_1), temp_v6 == 0)) {
+  if (((-1 < (int)param_1) && (temp_v2 = dataTableGetCount(temp_v0), param_1 < temp_v2)) &&
+     (temp_v6 = g_aocSystem, FUN_0022ac3c(g_aocSystem,param_1), temp_v6 == 0)) {
     temp_v6 = temp_v1 + param_1 * 0x1c;
   }
   if (temp_v6 == 0) {

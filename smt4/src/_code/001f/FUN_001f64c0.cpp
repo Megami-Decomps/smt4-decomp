@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002ae584(void);
 
-extern unsigned int FUN_00292f28(int);
+extern unsigned int padIsButtonDown(int);
 /* Supplied declaration required: FUN_002ae584. */
 
 
@@ -21,8 +21,8 @@ unsigned int FUN_001f64c0(int *param_1,int *param_2)
   unsigned int temp_v4;
   unsigned char temp_v5;
   
-  temp_v0 = FUN_00292f28(*param_1);
-  temp_v1 = FUN_00292f28(*param_2);
+  temp_v0 = padIsButtonDown(*param_1);
+  temp_v1 = padIsButtonDown(*param_2);
   temp_v4 = (unsigned int)((temp_v0 & ~temp_v1) != 0);
   temp_v5 = (temp_v1 & ~temp_v0) != 0;
   if (temp_v5) {

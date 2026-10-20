@@ -1,31 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027e774` (_code @ 0x27e774, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Starts the countdown (30 frames) with the given mode byte: marks the object active and resets its timer. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bd8e8(int, int);
+typedef struct Countdown {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 active;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ u32 frames;
+    /* 0x14 */ u8 unk14[0x0C];
+    /* 0x20 */ u8 started;
+    /* 0x21 */ u8 unk21[2];
+    /* 0x23 */ u8 mode;
+    /* 0x24 */ u8 unk24[0x20];
+    /* 0x44 */ u8 timer[1];
+} Countdown;
 
-extern int DAT_0043e128; /* 0x43e128 */
+extern Countdown *DAT_0043e128;
 
-/* Supplied declaration required: FUN_002bd8e8. */
+extern void timerStart(void *timer, s32 a, s32 b);
 
-
-void FUN_0027e774(unsigned char param_1)
-
+void FUN_0027e774(u8 mode)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = DAT_0043e128;
-  temp_v1 = DAT_0043e128 + 0x44;
-  *(unsigned int *)(DAT_0043e128 + 8) = 1;
-  FUN_002bd8e8(temp_v1,0);
-  *(unsigned char *)(temp_v0 + 0x23) = param_1;
-  *(unsigned char *)(temp_v0 + 0x20) = 1;
-  *(unsigned int *)(temp_v0 + 0x10) = 0x1e;
-  return;
+    Countdown *countdown = DAT_0043e128;
+
+    countdown->active = 1;
+    timerStart(countdown->timer, 0, 0);
+    countdown->mode = mode;
+    countdown->started = 1;
+    countdown->frames = 30;
 }
 
-} /* extern "C" */
+}

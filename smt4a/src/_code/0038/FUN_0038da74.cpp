@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00236038(int);
+int scrGetArg(int);
 int FUN_003f0e20(unsigned int *, unsigned int);
 int FUN_004c3c84(unsigned int, int, int);
 
@@ -13,8 +13,8 @@ extern unsigned int DAT_0057111c; /* 0x57111c */
 extern unsigned int DAT_00571120; /* 0x571120 */
 extern unsigned int DAT_00571124; /* 0x571124 */
 
-extern unsigned int *FUN_0014aa78(void);
-/* Supplied declaration required: FUN_00236038. */
+extern unsigned int *btlGetMainState(void);
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004c3c84. */
 
@@ -28,9 +28,9 @@ unsigned int FUN_0038da74(void)
   unsigned int *puVar3;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  puVar3 = (unsigned int *)FUN_0014aa78();
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  puVar3 = (unsigned int *)btlGetMainState();
   FUN_003f0e20(puVar3,temp_v0);
   temp_v2 = DAT_00571118;
   if (puVar3 != (unsigned int *)0x0) {

@@ -19,7 +19,7 @@ extern unsigned char LAB_00376968; /* 0x376968 */
 extern int FUN_00376d14(...); /* 0x376d14 */
 extern unsigned int DAT_00464ff8; /* 0x464ff8 */
 extern unsigned int DAT_00464ffc; /* 0x464ffc */
-extern unsigned char DAT_004e1f68; /* 0x4e1f68 */
+extern unsigned char g_asdSound; /* 0x4e1f68 */
 
 /* Supplied declaration required: FUN_002c5d5c. */
 extern int FUN_00377174(int);
@@ -39,7 +39,7 @@ void FUN_003f1cc4(unsigned int param_1,unsigned int param_2,unsigned int *param_
   param_3[1] = param_2;
   DAT_00464ff8 = 0;
   DAT_00464ffc = 0;
-  temp_v0 = FUN_003771e0(&DAT_004e1f68);
+  temp_v0 = FUN_003771e0(&g_asdSound);
   temp_v0 = FUN_00378a54(temp_v0 + 0x184);
   temp_v0 = FUN_003773d4(temp_v0 + 0xc0);
   temp_v0 = temp_v0 + 0x278;

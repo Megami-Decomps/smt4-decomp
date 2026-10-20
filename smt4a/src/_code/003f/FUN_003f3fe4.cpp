@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_00164b5c(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_0018152c(int, int, int, int, int, unsigned int, int, unsigned int);
 int FUN_001835b4(...);
@@ -67,12 +67,12 @@ typedef struct {
 
 extern unsigned char LAB_003f436c; /* 0x3f436c */
 extern unsigned char LAB_003f4738; /* 0x3f4738 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00100388. */
 extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(unsigned short);
 extern int FUN_001801a4(void);
@@ -87,7 +87,7 @@ extern unsigned int FUN_0019e130(int);
 extern int FUN_001ab854(void);
 extern unsigned int FUN_0025e684(int);
 /* Supplied declaration required: FUN_0025e704. */
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 extern int FUN_002b4dcc(int);
 /* Supplied declaration required: FUN_002b4e7c. */
 extern int FUN_00319d2c(int, int);
@@ -136,7 +136,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
       temp_v1 = FUN_001ab854();
     }
     else {
-      temp_v1 = FUN_002919a4();
+      temp_v1 = btlMainGetUnk14();
     }
     if (temp_v1 != 0) {
       temp_v2 = FUN_00180114(*(unsigned short *)(temp_v1 + 0x62));
@@ -169,7 +169,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
     temp_v15 = (int)*(short *)(temp_v1 + 0x1e);
     temp_v17 = FUN_00319d64((int)(short)temp_v6,temp_v10);
   }
-  FUN_001677c0();
+  efctSetSpeed();
   if (param_1->field_0x22 != 0) {
     temp_v0 = param_1->field_0x25;
     temp_v8 = temp_v0 == 0;
@@ -183,7 +183,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
     FUN_001835b4(2,0x11,0x3d,param_2,param_3,0x6a);
     if (param_1->field_0x20 != 0) {
       if (param_1->field_0x21 == 0) {
-        FUN_001677c0();
+        efctSetSpeed();
         return;
       }
       temp_v9 = 0x6f;
@@ -209,7 +209,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
             }
           }
           else {
-            temp_v1 = FUN_002919a4();
+            temp_v1 = btlMainGetUnk14();
             temp_v9 = temp_v11;
             if (temp_v1 != 0) {
               temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x60);
@@ -242,17 +242,17 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
       }
       FUN_00184e64(temp_v9);
       if (param_1->field_0x23 != 0) {
-        FUN_001677c0();
+        efctSetSpeed();
       }
       temp_v1 = FUN_001834a4(0x11,0x51);
       FUN_0018152c(temp_v10,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0x6a,0,
                    temp_v2,temp_v10,temp_v11);
       FUN_00183bb0();
-      FUN_001677c0();
+      efctSetSpeed();
       FUN_001835b4(2,0x11,0x40,param_2,param_3,0x6f);
       if (param_1->field_0x28 != 0) {
         FUN_001835b4(2,0x11,0x95,param_2,param_3,0x79);
-        FUN_001677c0();
+        efctSetSpeed();
         return;
       }
       if (param_1->field_0x23 != 0) {
@@ -263,7 +263,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
         if (param_1->field_0x24 == 0) {
           FUN_001835b4(2,0x11,0x3f,param_2,param_3,0x6f);
           FUN_00184e64(0x292929ff);
-          FUN_001677c0();
+          efctSetSpeed();
           FUN_00100388(temp_v13,&LAB_003f4738,temp_v12);
           if ((int)temp_v12 >= 100) {
             temp_v10 = FUN_001834a4(0x11,0x80);
@@ -276,7 +276,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
                          0x79,temp_v13);
           }
           FUN_00183bb0();
-          FUN_001677c0();
+          efctSetSpeed();
           FUN_00164b5c(2,0x11,2,param_2,param_3,0x6f);
           FUN_00183788(temp_v5,temp_v6,*(unsigned int *)&param_1->field_0x40,0,0x11,0x44,0x47,0x45,0x46,
                        param_2,param_3,0x74,0);
@@ -288,7 +288,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
             FUN_001835b4(2,0x11,0xbb,*(short *)(temp_v10 + 8) + param_2,
                          *(short *)(temp_v10 + 10) + param_3,0x79);
           }
-          temp_v10 = DAT_0059dbb4;
+          temp_v10 = g_renderCtx;
           if (param_1->field_0x48 != 0) {
             temp_v6 = FUN_00169294(6,1,0);
             piVar7 = (int *)(temp_v10 + 0x12b8);
@@ -300,10 +300,10 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
             }
             FUN_003a6404(*(unsigned int *)(param_1 + 1),*(unsigned int *)&param_1[1].field_0x4);
             FUN_00184e64();
-            FUN_001677c0();
+            efctSetSpeed();
             FUN_001835b4(2,0x11,0x7d1,param_2,param_3,0x79);
             FUN_00183bb0();
-            temp_v10 = DAT_0059dbb4;
+            temp_v10 = g_renderCtx;
             temp_v6 = FUN_00169294(6,7,0);
             piVar7 = (int *)(temp_v10 + 0x12b8);
             temp_v5 = piVar7[*piVar7 + 2];
@@ -313,16 +313,16 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
               *(unsigned char *)(temp_v10 + 0x12d0) = 0;
             }
           }
-          FUN_001677c0();
+          efctSetSpeed();
           temp_v10 = FUN_001834a4(0x11,0xb7);
           FUN_003f3d90(param_1,*(short *)(temp_v10 + 8) + param_2,*(short *)(temp_v10 + 10) + param_3,
                        temp_v14);
-          FUN_001677c0();
+          efctSetSpeed();
           return;
         }
         FUN_001835b4(2,0x11,0x4c,param_2,param_3,0x79);
         if (param_1->field_0x29 == 0) {
-          FUN_001677c0();
+          efctSetSpeed();
           return;
         }
         temp_v10 = FUN_001834a4(0x11,0xc5);
@@ -335,10 +335,10 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
   }
   else {
     if (param_1->field_0x20 != 0) {
-      FUN_001677c0();
+      efctSetSpeed();
       return;
     }
-    FUN_001677c0();
+    efctSetSpeed();
     if (param_1->field_0x28 != 0) {
       temp_v2 = 0x94;
       temp_v9 = 0x79;
@@ -365,7 +365,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
           temp_v2 = 0x6ef0ffff;
           FUN_00184e64(temp_v2);
         }
-        FUN_001677c0();
+        efctSetSpeed();
         if (temp_v5 >= 10000) {
           FUN_00100388(temp_v13,&LAB_003f4738,9999);
         }
@@ -390,7 +390,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
           FUN_001835b4(2,0x11,0xbb,*(short *)(temp_v10 + 8) + param_2,
                        *(short *)(temp_v10 + 10) + param_3,0x79);
         }
-        temp_v10 = DAT_0059dbb4;
+        temp_v10 = g_renderCtx;
         if (param_1->field_0x48 != 0) {
           temp_v6 = FUN_00169294(6,1,0);
           piVar7 = (int *)(temp_v10 + 0x12b8);
@@ -402,10 +402,10 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
           }
           FUN_003a6404(*(unsigned int *)(param_1 + 1),*(unsigned int *)&param_1[1].field_0x4);
           FUN_00184e64();
-          FUN_001677c0();
+          efctSetSpeed();
           FUN_001835b4(2,0x11,2000,param_2,param_3,0x79);
           FUN_00183bb0();
-          temp_v10 = DAT_0059dbb4;
+          temp_v10 = g_renderCtx;
           temp_v6 = FUN_00169294(6,7,0);
           piVar7 = (int *)(temp_v10 + 0x12b8);
           temp_v5 = piVar7[*piVar7 + 2];
@@ -415,16 +415,16 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
             *(unsigned char *)(temp_v10 + 0x12d0) = 0;
           }
         }
-        FUN_001677c0();
+        efctSetSpeed();
         temp_v10 = FUN_001834a4(0x11,0xb6);
         FUN_003f3d90(param_1,*(short *)(temp_v10 + 8) + param_2,*(short *)(temp_v10 + 10) + param_3,
                      temp_v14);
-        FUN_001677c0();
+        efctSetSpeed();
         return;
       }
       FUN_001835b4(2,0x11,0xd,param_2,param_3,0x79);
       if (param_1->field_0x29 == 0) {
-        FUN_001677c0();
+        efctSetSpeed();
         return;
       }
       temp_v10 = FUN_001834a4(0x11,0xbc);
@@ -435,7 +435,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
     }
   }
   FUN_001835b4(2,0x11,temp_v2,param_2,param_3,temp_v9);
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

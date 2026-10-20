@@ -11,13 +11,13 @@ int FUN_002b90f8(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf538(void);
-int FUN_002bfe28(...);
+int mtx44Copy(...);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX44MultAsm(...);
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 extern unsigned int DAT_00476638; /* 0x476638 */
 extern float DAT_004efd9c; /* 0x4efd9c */
 extern float DAT_004efda0; /* 0x4efda0 */
@@ -48,7 +48,7 @@ extern float DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf538. */
-/* Supplied declaration required: FUN_002bfe28. */
+/* Supplied declaration required: mtx44Copy. */
 extern int FUN_002bfefc(unsigned int *);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
@@ -121,7 +121,7 @@ void FUN_002b93c8(unsigned int *param_1)
           DAT_004efdd4 = temp_v10;
           DAT_004efdd8 = temp_v7;
         }
-        FUN_002bfe28(temp_v11,&DAT_004efd9c);
+        mtx44Copy(temp_v11,&DAT_004efd9c);
         if (((DAT_00476638 & 1) == 0) && (temp_v1 = FUN_002bfefc(&DAT_00476638), temp_v1 != 0)) {
           DAT_004efd9c = temp_v7;
           DAT_004efda0 = temp_v10;
@@ -140,7 +140,7 @@ void FUN_002b93c8(unsigned int *param_1)
           DAT_004efdd4 = temp_v10;
           DAT_004efdd8 = temp_v7;
         }
-        FUN_002bfe28(afStack_f0,&DAT_004efd9c);
+        mtx44Copy(afStack_f0,&DAT_004efd9c);
         temp_v9 = CONCAT44(temp_v7,temp_v7);
         FUN_002bf538();
         temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)((float)param_1[0xc] == temp_v10) << 0x1e);
@@ -305,7 +305,7 @@ void FUN_002b93c8(unsigned int *param_1)
             nn_math_ARMv6_MTX44MultAsm(temp_v11,temp_v11,afStack_f0);
           }
         }
-        FUN_002b90f8(DAT_0044ea00,temp_v11);
+        FUN_002b90f8(g_titleScene,temp_v11);
         if ((int)param_1[2] >= 0) {
           FUN_002bf380(temp_v3,*param_1,param_1[2],0);
         }
@@ -330,8 +330,8 @@ void FUN_002b93c8(unsigned int *param_1)
         uStack_38 = temp_v8;
         uStack_34 = temp_v8;
         FUN_002b1fc4(&uStack_70,&uStack_60,&uStack_50,&uStack_40,0,1);
-        FUN_002c198c(DAT_0044ea00);
-        FUN_002c18e4(DAT_0044ea00);
+        FUN_002c198c(g_titleScene);
+        FUN_002c18e4(g_titleScene);
       }
     }
     return;

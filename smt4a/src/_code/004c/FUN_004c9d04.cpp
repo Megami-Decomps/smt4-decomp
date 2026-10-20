@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00184310(...);
 int FUN_001b4a90(...);
 int FUN_002e3328(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_003e8704(...);
 int FUN_003e8794(...);
 int FUN_003eacb4(...);
@@ -66,12 +66,12 @@ extern unsigned int DAT_0057aa74; /* 0x57aa74 */
 extern unsigned int DAT_0057aa78; /* 0x57aa78 */
 extern unsigned int DAT_0057aa7c; /* 0x57aa7c */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_002e3328. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e8704. */
 /* Supplied declaration required: FUN_003e8794. */
 /* Supplied declaration required: FUN_003eacb4. */
@@ -111,7 +111,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
   unsigned char temp_v14;
   unsigned char temp_v15;
   
-  temp_v5 = FUN_0014aa78();
+  temp_v5 = btlGetMainState();
   puVar13 = (unsigned int *)(*(int *)(temp_v5 + 0x1ffc) + (int)param_1 * 0x408);
   temp_v6 = *puVar13;
   temp_v7 = puVar13[1];
@@ -349,11 +349,11 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
     if (((temp_v13 == 0 && temp_v9 == 0) && (!temp_v2 && !temp_v3)) && !temp_v15) {
       FUN_001b4a90(puVar13 + 2,100,0xffffffff);
       *(unsigned short *)(puVar13 + 2) = 0;
-      FUN_002e6354(puVar13 + 0x59,0x230);
+      sysMemClear(puVar13 + 0x59,0x230);
     }
     *(unsigned short *)(puVar13 + 0x1b) = 0xffff;
-    FUN_002e6354(puVar13 + 0x1d,100);
-    FUN_002e6354(puVar13 + 0x4f,0x12);
+    sysMemClear(puVar13 + 0x1d,100);
+    sysMemClear(puVar13 + 0x4f,0x12);
     *(char *)((int)puVar13 + 0x23b) = temp_v0;
     puVar13[0x54] = 0;
     puVar13[0xeb] = 0;

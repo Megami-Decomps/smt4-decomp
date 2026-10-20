@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016007c(void);
+int asdOperatorNew(void);
 int FUN_0019e290(void);
 int FUN_002e3328(int);
 int FUN_004b6fc4(void);
@@ -23,7 +23,7 @@ extern int DAT_00588014; /* 0x588014 */
 extern unsigned int DAT_00588018; /* 0x588018 */
 extern unsigned int DAT_0058801c; /* 0x58801c */
 
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_0019e290. */
 /* Supplied declaration required: FUN_002e3328. */
 /* Supplied declaration required: FUN_004b6fc4. */
@@ -76,7 +76,7 @@ unsigned int FUN_002bd1f4(void)
   }
   else {
     puVar3 = (unsigned char *)0x126c;
-    FUN_0016007c();
+    asdOperatorNew();
     temp_v2 = 0;
     if (puVar3 != (unsigned char *)0x0) {
       *puVar3 = 0;

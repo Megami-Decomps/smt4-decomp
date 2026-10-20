@@ -7,7 +7,7 @@ extern "C" {
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 
@@ -25,7 +25,7 @@ void FUN_004cfb64(unsigned int param_1,int param_2,unsigned int param_3,int para
   float temp_v4;
   float temp_v5;
   
-  temp_v0 = DAT_0059dbb4;
+  temp_v0 = g_renderCtx;
   if ((int)(param_1 + param_3) < 0) {
     param_1 = 0;
     param_3 = param_1;
@@ -76,25 +76,25 @@ void FUN_004cfb64(unsigned int param_1,int param_2,unsigned int param_3,int para
   }
   temp_v4 = (float)VectorSignedToFloat(param_1 + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v5 = (float)VectorSignedToFloat(param_2 + param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  piVar5 = (int *)(DAT_0059dbb4 + 0x1318);
+  piVar5 = (int *)(g_renderCtx + 0x1318);
   temp_v2 = piVar5[*piVar5 + 2];
   piVar5[*piVar5 + 2] = 3;
   if (*(char *)(temp_v0 + 0x1330) != '\0' || temp_v2 != 3) {
     (**(romwright_code **)(temp_v0 + 0x1334))();
     *(unsigned char *)(temp_v0 + 0x1330) = 0;
   }
-  temp_v0 = DAT_0059dbb4;
+  temp_v0 = g_renderCtx;
   temp_v1 = (int)(320.0f - temp_v4) | ((int)(240.0f - temp_v5) << 0x10);
-  piVar5 = (int *)(DAT_0059dbb4 + 0x1338);
+  piVar5 = (int *)(g_renderCtx + 0x1338);
   temp_v3 = piVar5[*piVar5 + 2];
   piVar5[*piVar5 + 2] = temp_v1;
   if (*(char *)(temp_v0 + 0x1350) != '\0' || temp_v3 != temp_v1) {
     (**(romwright_code **)(temp_v0 + 0x1354))();
     *(unsigned char *)(temp_v0 + 0x1350) = 0;
   }
-  temp_v0 = DAT_0059dbb4;
+  temp_v0 = g_renderCtx;
   param_3 = param_3 | (param_4 << 0x10);
-  piVar5 = (int *)(DAT_0059dbb4 + 0x1358);
+  piVar5 = (int *)(g_renderCtx + 0x1358);
   temp_v1 = piVar5[*piVar5 + 2];
   piVar5[*piVar5 + 2] = param_3;
   if (*(char *)(temp_v0 + 0x1370) != '\0' || temp_v1 != param_3) {

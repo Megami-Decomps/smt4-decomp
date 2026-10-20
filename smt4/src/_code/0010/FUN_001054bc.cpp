@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0010a544(void);
-int FUN_0010d208(...);
-int FUN_0010e604(...);
+int asdGxCommandListSetLists(...);
+int asdGxCommandListSetNewListId(...);
 int FUN_0010ea10(...);
 int FUN_001124ac(unsigned char *, unsigned char *);
 int FUN_001131f8(...);
@@ -16,7 +16,7 @@ int FUN_002c24dc(...);
 int FUN_002c2534(unsigned int, int, int, unsigned int);
 int FUN_002c2620(unsigned int);
 int FUN_002c2728(unsigned int, unsigned char *);
-int FUN_002c2860(...);
+int asdGfxSetMode(...);
 int FUN_002c2890(...);
 int nngxDisplayEnv(...);
 
@@ -37,7 +37,7 @@ extern unsigned char LAB_0010a6fc; /* 0x10a6fc */
 extern unsigned char LAB_0010a9b4; /* 0x10a9b4 */
 extern unsigned char LAB_0010e7f0; /* 0x10e7f0 */
 extern unsigned char LAB_002c4154; /* 0x2c4154 */
-extern unsigned int DAT_004e39e0; /* 0x4e39e0 */
+extern unsigned int g_asdGxPresets; /* 0x4e39e0 */
 extern unsigned int DAT_004e39e4; /* 0x4e39e4 */
 extern unsigned char DAT_004e39e8; /* 0x4e39e8 */
 extern unsigned int DAT_004e39f8; /* 0x4e39f8 */
@@ -87,8 +87,8 @@ extern unsigned char DAT_004e3be0; /* 0x4e3be0 */
 extern unsigned char DAT_004e3be1; /* 0x4e3be1 */
 
 /* Supplied declaration required: FUN_0010a544. */
-/* Supplied declaration required: FUN_0010d208. */
-/* Supplied declaration required: FUN_0010e604. */
+/* Supplied declaration required: asdGxCommandListSetLists. */
+/* Supplied declaration required: asdGxCommandListSetNewListId. */
 /* Supplied declaration required: FUN_0010ea10. */
 /* Supplied declaration required: FUN_001124ac. */
 /* Supplied declaration required: FUN_001131f8. */
@@ -98,7 +98,7 @@ extern unsigned char DAT_004e3be1; /* 0x4e3be1 */
 /* Supplied declaration required: FUN_002c2534. */
 /* Supplied declaration required: FUN_002c2620. */
 /* Supplied declaration required: FUN_002c2728. */
-/* Supplied declaration required: FUN_002c2860. */
+/* Supplied declaration required: asdGfxSetMode. */
 /* Supplied declaration required: FUN_002c2890. */
 /* Supplied declaration required: nngxDisplayEnv. */
 
@@ -155,12 +155,12 @@ void FUN_001054bc(unsigned int *param_1)
   temp_v11 = 0x10000;
   temp_v10 = 0x10000;
   temp_v9 = 0x10000;
-  DAT_004e39e0 = 0x400;
+  g_asdGxPresets = 0x400;
   DAT_004e39f8 = 0xf0;
   DAT_004e39fc = 400;
   temp_v7 = temp_v4;
   DAT_004e39e4 = temp_v4;
-  FUN_002c2860();
+  asdGfxSetMode();
   FUN_002c2728(DAT_004e39e4,&DAT_004e39e8);
   temp_v2 = 0;
   if (temp_v2 < DAT_004e39e4) {
@@ -179,7 +179,7 @@ void FUN_001054bc(unsigned int *param_1)
   DAT_004e3a50 = 0xf0;
   DAT_004e3a54 = 0x140;
   DAT_004e3a38 = temp_v5[0];
-  FUN_002c2860(temp_v5[0]);
+  asdGfxSetMode(temp_v5[0]);
   FUN_002c2728(DAT_004e3a3c,&DAT_004e3a40);
   temp_v2 = 0;
   if (temp_v2 < DAT_004e3a3c) {
@@ -198,7 +198,7 @@ void FUN_001054bc(unsigned int *param_1)
   DAT_004e3a24 = 0xf0;
   DAT_004e3a28 = 400;
   DAT_004e3a0c = temp_v6;
-  FUN_002c2860(temp_v6);
+  asdGfxSetMode(temp_v6);
   FUN_002c2728(DAT_004e3a10,&DAT_004e3a14);
   temp_v2 = 0;
   if (temp_v2 < DAT_004e3a10) {
@@ -215,9 +215,9 @@ void FUN_001054bc(unsigned int *param_1)
   nngxDisplayEnv(0);
   FUN_0010ea10(0,param_1[6],param_1[7]);
   FUN_002c2890(&DAT_004e3b34,2,param_1[4],param_1[5]);
-  FUN_0010d208(&DAT_004e3b34);
+  asdGxCommandListSetLists(&DAT_004e3b34);
   FUN_002c2890(&temp_v3,1,param_1[2],param_1[3]);
-  FUN_0010e604(temp_v3);
+  asdGxCommandListSetNewListId(temp_v3);
   FUN_002bef68(&DAT_004e3b1c,0);
   DAT_004e3b54 = 0x3e800000;
   DAT_004e3b58 = 0x3e800000;

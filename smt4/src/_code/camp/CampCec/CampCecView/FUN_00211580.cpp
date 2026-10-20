@@ -20,8 +20,8 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern int DAT_0043db10; /* 0x43db10 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_campCecView; /* 0x43db10 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_001eb874. */
 extern unsigned int FUN_0025981c(void);
@@ -52,9 +52,9 @@ unsigned int FUN_00211580(void)
   int temp_v8;
   int temp_v9;
   
-  temp_v1 = DAT_0043db10;
-  FUN_002c39a4(DAT_0044ea00);
-  temp_v8 = DAT_0044ea00;
+  temp_v1 = g_campCecView;
+  FUN_002c39a4(g_titleScene);
+  temp_v8 = g_titleScene;
   temp_v2 = FUN_002c5d80(1,0);
   piVar9 = (int *)(temp_v8 + 0x124c);
   temp_v5 = *piVar9;
@@ -90,8 +90,8 @@ unsigned int FUN_00211580(void)
   FUN_002ec0fc(temp_v1 + 0x104,0,0,temp_v4 & 1,(temp_v4 & 2) >> 1,(temp_v4 & 4) >> 2,
                *(unsigned int *)(temp_v1 + 0x13c),*(unsigned int *)(temp_v1 + 0x140),
                *(unsigned int *)(temp_v1 + 0x148));
-  temp_v1 = DAT_0044ea00;
-  piVar9 = (int *)(DAT_0044ea00 + 0x124c);
+  temp_v1 = g_titleScene;
+  piVar9 = (int *)(g_titleScene + 0x124c);
   temp_v8 = *piVar9;
   temp_v2 = piVar9[temp_v8 + 2];
   *piVar9 = temp_v8 - 1;
@@ -99,7 +99,7 @@ unsigned int FUN_00211580(void)
     (**(romwright_code **)(temp_v1 + 0x1268))();
     *(unsigned char *)(temp_v1 + 0x1264) = 0;
   }
-  FUN_002c198c(DAT_0044ea00);
+  FUN_002c198c(g_titleScene);
   return 0;
 }
 

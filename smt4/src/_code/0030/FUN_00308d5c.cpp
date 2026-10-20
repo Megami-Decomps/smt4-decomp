@@ -26,8 +26,8 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
-extern int DAT_00435d90; /* 0x435d90 */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
+extern int g_btlMainState; /* 0x435d90 */
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00245a7c. */
@@ -40,8 +40,8 @@ extern unsigned int FUN_00245cc0(unsigned int);
 /* Supplied declaration required: FUN_002550d8. */
 /* Supplied declaration required: FUN_00255180. */
 /* Supplied declaration required: FUN_0027de98. */
-extern unsigned int *FUN_0027e928(unsigned int);
-extern int FUN_002c564c(unsigned int);
+extern unsigned int *btlUnitGet(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: FUN_00337c20. */
 /* Supplied declaration required: FUN_0033b100. */
 /* Supplied declaration required: FUN_003ae3cc. */
@@ -68,8 +68,8 @@ void FUN_00308d5c(int param_1)
   temp_v4 = param_1;
   FUN_0027de98();
   if (temp_v4 != 0) {
-    if (DAT_00435d90 != 0) {
-      *(unsigned int *)(DAT_00435d90 + 0x68) = 0xc;
+    if (g_btlMainState != 0) {
+      *(unsigned int *)(g_btlMainState + 0x68) = 0xc;
       return;
     }
     return;
@@ -77,7 +77,7 @@ void FUN_00308d5c(int param_1)
   *(unsigned int *)(param_1 + 0x2314) = 0;
   if (0 < *(int *)(param_1 + 0x16c)) {
     temp_v3 = 8;
-    if (DAT_00435d90 == 0) {
+    if (g_btlMainState == 0) {
       return;
     }
   }
@@ -190,7 +190,7 @@ LAB_00308fb8:
                 temp_v2 = 1;
                 if ((temp_v4 != 0) ||
                    ((temp_v4 = FUN_00245c78(), temp_v4 == 0 && (temp_v4 = FUN_003c85f4(), temp_v4 != 0)))) {
-                  puVar9 = (unsigned int *)FUN_0027e928(DAT_0043427c);
+                  puVar9 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
                   if ((puVar9 == (unsigned int *)0x0) ||
                      (((*puVar9 & 0x80) == 0 && ((*puVar9 & 0x1000) == 0)))) {
                     temp_v2 = 0;
@@ -199,11 +199,11 @@ LAB_00308fb8:
                 }
                 temp_v4 = FUN_00245c78();
                 if ((((temp_v4 != 0) &&
-                     (((puVar9 = (unsigned int *)FUN_0027e928(DAT_0043427c), puVar9 == (unsigned int *)0x0 ||
+                     (((puVar9 = (unsigned int *)btlUnitGet(g_btlScriptUnit), puVar9 == (unsigned int *)0x0 ||
                        (((*puVar9 & 0x80) == 0 && ((*puVar9 & 0x1000) == 0)))) &&
-                      (temp_v4 = FUN_002c564c(1), temp_v4 == 0)))) &&
+                      (temp_v4 = jyoucyuGetTableEntry(1), temp_v4 == 0)))) &&
                     (temp_v4 = FUN_00245c78(), temp_v4 != 0)) &&
-                   ((puVar9 = (unsigned int *)FUN_0027e928(DAT_0043427c), puVar9 == (unsigned int *)0x0 ||
+                   ((puVar9 = (unsigned int *)btlUnitGet(g_btlScriptUnit), puVar9 == (unsigned int *)0x0 ||
                     (((*puVar9 & 0x80) == 0 && ((*puVar9 & 0x1000) == 0)))))) {
                   temp_v4 = 0;
                   do {
@@ -245,8 +245,8 @@ LAB_003092e8:
               temp_v0 = -1;
             }
             *pcVar7 = temp_v0;
-            if (DAT_00435d90 != 0) {
-              *(unsigned int *)(DAT_00435d90 + 0x68) = 0x11;
+            if (g_btlMainState != 0) {
+              *(unsigned int *)(g_btlMainState + 0x68) = 0x11;
             }
             FUN_00337c20(param_1,0);
             FUN_0033b100(param_1,1);
@@ -260,8 +260,8 @@ LAB_003092e8:
               temp_v0 = -1;
             }
             *pcVar7 = temp_v0;
-            if (DAT_00435d90 != 0) {
-              *(unsigned int *)(DAT_00435d90 + 0x68) = 0x11;
+            if (g_btlMainState != 0) {
+              *(unsigned int *)(g_btlMainState + 0x68) = 0x11;
             }
             FUN_00337c20(param_1,1);
             FUN_0033b100(param_1,0);
@@ -278,11 +278,11 @@ LAB_003092e8:
     *puVar8 = *puVar8 & 0xfeffff7f;
     temp_v3 = 0xc;
 joined_r0x003092c8:
-    if (DAT_00435d90 == 0) {
+    if (g_btlMainState == 0) {
       return;
     }
   }
-  *(unsigned int *)(DAT_00435d90 + 0x68) = temp_v3;
+  *(unsigned int *)(g_btlMainState + 0x68) = temp_v3;
   return;
 }
 

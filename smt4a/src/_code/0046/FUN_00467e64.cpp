@@ -7,9 +7,9 @@ extern "C" {
 int FUN_001505ac(unsigned int *, int, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int FUN_0019ea64(int);
 int FUN_001ad9b4(void);
-int FUN_00229314(int);
+int qcMainSetMode(int);
 int FUN_002804b0(unsigned char *, unsigned int *, int);
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 int FUN_002e6dd4(int, int);
 int FUN_0031e198(void);
 int FUN_00417e08(int);
@@ -37,9 +37,9 @@ extern unsigned char DAT_00533470; /* 0x533470 */
 /* Supplied declaration required: FUN_0019ea64. */
 extern int FUN_0019f1a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
-/* Supplied declaration required: FUN_00229314. */
+/* Supplied declaration required: qcMainSetMode. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
 /* Supplied declaration required: FUN_0031e198. */
 /* Supplied declaration required: FUN_00417e08. */
@@ -73,7 +73,7 @@ void FUN_00467e64(unsigned int *param_1)
   param_1[0xaa] = 0;
   param_1[0xab] = 0;
   param_1[0xac] = 0;
-  FUN_002e6354(param_1 + 0xf3,0x640);
+  sysMemClear(param_1 + 0xf3,0x640);
   FUN_002804b0(&LAB_00467fd4,param_1 + 0xa1,0);
   FUN_002804b0(&LAB_00467ff8,param_1 + 0xa2,0);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 7);
@@ -87,7 +87,7 @@ void FUN_00467e64(unsigned int *param_1)
   *(unsigned char *)((int)param_1 + 0x1b) = 0;
   FUN_0031e198();
   FUN_0019ea64(0);
-  FUN_00229314(0);
+  qcMainSetMode(0);
   temp_v2 = 0x15e;
   do {
     temp_v0 = temp_v2;

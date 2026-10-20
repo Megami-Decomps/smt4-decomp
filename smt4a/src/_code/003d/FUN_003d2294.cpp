@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a0e8(float *, unsigned int);
+int mtx44Copy(float *, unsigned int);
 int FUN_0019a0fc(...);
 int FUN_001a1c28(...);
 int VectorSignedToFloat(unsigned int, int);
@@ -27,7 +27,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern unsigned int FUN_0018aeb8(void);
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: FUN_001a1c28. */
 
@@ -70,7 +70,7 @@ void FUN_003d2294(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   temp_v5 = param_1[2];
   temp_v6 = 1.0f;
   temp_v0 = FUN_0018aeb8();
-  FUN_0019a0e8(&temp_v8,temp_v0);
+  mtx44Copy(&temp_v8,temp_v0);
   VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_001a1c28(temp_v20);
   FUN_0019a0fc(&temp_v8,&temp_v8,temp_v20);
@@ -79,7 +79,7 @@ void FUN_003d2294(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   temp_v3 = temp_v16 * temp_v4 + temp_v17 * temp_v7 + temp_v18 * temp_v5 + temp_v19 * temp_v6;
   temp_v4 = fStack_110 * temp_v4 + fStack_10c * temp_v7 + fStack_108 * temp_v5 + fStack_104 * temp_v6;
   temp_v0 = FUN_0018aeb8();
-  FUN_0019a0e8(&temp_v8,temp_v0);
+  mtx44Copy(&temp_v8,temp_v0);
   VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_001a1c28(temp_v21);
   FUN_0019a0fc(&temp_v8,&temp_v8,temp_v21);
@@ -88,7 +88,7 @@ void FUN_003d2294(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   temp_v7 = temp_v16 * temp_v1 + temp_v17 * temp_v2 + temp_v18 * temp_v3 + temp_v19 * temp_v4;
   temp_v1 = fStack_110 * temp_v1 + fStack_10c * temp_v2 + fStack_108 * temp_v3 + fStack_104 * temp_v4;
   temp_v0 = FUN_0018aeb8();
-  FUN_0019a0e8(&temp_v8,temp_v0);
+  mtx44Copy(&temp_v8,temp_v0);
   VectorSignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_001a1c28(temp_v22);
   FUN_0019a0fc(&temp_v8,&temp_v8,temp_v22);

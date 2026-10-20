@@ -6,7 +6,7 @@ extern unsigned char DAT_0044e098; /* 0x44e098 */
 extern unsigned int DAT_004c53c4; /* 0x4c53c4 */
 extern unsigned int DAT_004c53e4; /* 0x4c53e4 */
 
-extern int FUN_002c564c(unsigned int);
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 void FUN_001a8040(unsigned int param_1)
@@ -15,7 +15,7 @@ void FUN_001a8040(unsigned int param_1)
   int temp_v0;
   unsigned int *puVar2;
   
-  temp_v0 = FUN_002c564c(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
     puVar2 = (unsigned int *)0x0;
     if ((*(int *)((unsigned char *)&DAT_0044e098 + 0x4)) == 0) {

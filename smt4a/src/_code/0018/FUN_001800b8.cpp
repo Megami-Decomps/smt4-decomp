@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_001800b8(int *param_1)
@@ -26,14 +26,14 @@ void FUN_001800b8(int *param_1)
     return;
   }
   if ((param_1[9] != 0) && ((param_1[0xb] & 0x10U) == 0)) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1[9] = 0;
   }
   if (param_1[0x11] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1[0x11] = 0;
   }
-  FUN_0019a5a0(param_1);
+  asdMemFree(param_1);
   return;
 }
 

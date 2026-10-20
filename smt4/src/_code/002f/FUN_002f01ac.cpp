@@ -11,11 +11,11 @@ typedef struct {
     unsigned short sp36; /* 0x36: local_36 */
 } void_stack;
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
 /* Supplied declaration required: FUN_00247478. */
-extern int FUN_0027e928(unsigned int);
-extern unsigned int FUN_002939f4(void);
+extern int btlUnitGet(unsigned int);
+extern unsigned int btlGetMainState(void);
 
 
 unsigned int FUN_002f01ac(void)
@@ -29,12 +29,12 @@ unsigned int FUN_002f01ac(void)
   unsigned char temp_v4 [2];
   short temp_v5;
   
-  temp_v0 = FUN_0027e928(DAT_0043427c);
+  temp_v0 = btlUnitGet(g_btlScriptUnit);
   temp_v0 = *(int *)(temp_v0 + 0x28);
   *(unsigned short *)(temp_v0 + 0x14c) = 1;
-  temp_v1 = FUN_0027e928(DAT_0043427c);
+  temp_v1 = btlUnitGet(g_btlScriptUnit);
   temp_v3 = *(unsigned int *)(temp_v1 + 0x20);
-  temp_v2 = FUN_002939f4();
+  temp_v2 = btlGetMainState();
   FUN_00247478(temp_v4,temp_v2,temp_v3);
   if (temp_v5 == 1) {
     *(unsigned short *)(temp_v0 + 0x14e) = 2;

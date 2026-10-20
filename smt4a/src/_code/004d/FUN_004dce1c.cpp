@@ -27,7 +27,7 @@ extern unsigned int DAT_00571288; /* 0x571288 */
 extern unsigned int DAT_0057128c; /* 0x57128c */
 extern int DAT_00571508; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
-extern int DAT_00573898; /* 0x573898 */
+extern int g_btlEvent; /* 0x573898 */
 
 extern int FUN_001633a0(unsigned int);
 extern int FUN_002626e0(void);
@@ -116,14 +116,14 @@ LAB_004dd034:
   }
   FUN_00408184(4,1);
   *(unsigned int *)(*param_1 + 0xa8) = 4;
-  temp_v5 = FUN_004d84e8(DAT_00573898);
+  temp_v5 = FUN_004d84e8(g_btlEvent);
   if (temp_v5 != 0) {
     return;
   }
-  temp_v5 = DAT_00573898;
-  FUN_004d7a70(DAT_00573898,6,0xffffffff,0);
+  temp_v5 = g_btlEvent;
+  FUN_004d7a70(g_btlEvent,6,0xffffffff,0);
   if (temp_v5 != 0) {
-    FUN_004d7fe4(DAT_00573898);
+    FUN_004d7fe4(g_btlEvent);
     return;
   }
   FUN_004fbeac(0,param_2,0,1,0);

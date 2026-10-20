@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002a6d1c. */
 extern int FUN_002a6d50(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a8ac4. */
-extern unsigned int FUN_002b93b0(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableCallFileB(unsigned int, unsigned int);
 
 
 void FUN_00389f74(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -56,7 +56,7 @@ void FUN_00389f74(unsigned int param_1,unsigned int param_2,unsigned int param_3
   if (temp_v0 != 0) {
     puVar4 = *(unsigned int **)(temp_v0 + 4);
   }
-  temp_v1 = FUN_002b93b0(0x17,param_4);
+  temp_v1 = asdTMTexTableCallFileB(0x17,param_4);
   FUN_002a6d1c(temp_v2,temp_v8,param_8,param_9,param_7);
   temp_v2[0] = temp_v2[0] | 0x28000;
   puVar3 = (unsigned short *)(**(int **)(*(int *)*puVar4 + 4) + 0x14);

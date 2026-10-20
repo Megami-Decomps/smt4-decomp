@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00262888(void);
+int asdOperatorNewB(void);
 int FUN_002a1130(int *, int);
 int FUN_002c5d5c(unsigned int *, unsigned char *, int, int);
 int FUN_0038b6d8(int *, int, int);
@@ -19,7 +19,7 @@ typedef struct {
 
 extern unsigned char LAB_0038bc4c; /* 0x38bc4c */
 
-/* Supplied declaration required: FUN_00262888. */
+/* Supplied declaration required: asdOperatorNewB. */
 /* Supplied declaration required: FUN_002a1130. */
 extern int FUN_002a1520(unsigned int *);
 /* Supplied declaration required: FUN_002c5d5c. */
@@ -53,7 +53,7 @@ void FUN_0038a048(int param_1)
   FUN_002a1130(&temp_v7,0);
   temp_v5 = *(int *)(param_1 + 0x310);
   puVar1 = (unsigned int *)(temp_v5 * 0x50 + 8);
-  FUN_00262888();
+  asdOperatorNewB();
   puVar2 = (unsigned int *)0x0;
   if (puVar1 != (unsigned int *)0x0) {
     puVar2 = puVar1 + 2;

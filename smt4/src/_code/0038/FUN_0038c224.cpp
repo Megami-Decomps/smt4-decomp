@@ -10,13 +10,13 @@ int FUN_002344d8(...);
 int FUN_002345a4(...);
 int FUN_00234624(unsigned char [48], unsigned int, unsigned int);
 int FUN_0026281c(...);
-int FUN_00262888(...);
+int asdOperatorNewB(...);
 int FUN_002b4b80(int, int);
 int FUN_002b5a48(...);
 int FUN_002ba81c(...);
 int FUN_002be624(...);
-int FUN_002c4938(...);
-int FUN_002c564c(...);
+int memClear(...);
+int jyoucyuGetTableEntry(...);
 int FUN_002c5d5c(unsigned int *, unsigned char *, int, int);
 int FUN_002c5e80(...);
 int FUN_002c6a10(...);
@@ -65,7 +65,7 @@ typedef struct {
 
 extern unsigned char LAB_0038cbd4; /* 0x38cbd4 */
 extern unsigned char LAB_00394160; /* 0x394160 */
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_00234330. */
 extern unsigned int FUN_0023445c(int);
@@ -76,7 +76,7 @@ extern unsigned int FUN_00234468(int);
 extern int FUN_00234618(unsigned char *);
 /* Supplied declaration required: FUN_00234624. */
 /* Supplied declaration required: FUN_0026281c. */
-/* Supplied declaration required: FUN_00262888. */
+/* Supplied declaration required: asdOperatorNewB. */
 extern int FUN_002a12d8(int);
 extern unsigned char FUN_002a2dec(int);
 extern unsigned char FUN_002a2df8(int);
@@ -84,8 +84,8 @@ extern unsigned char FUN_002a2df8(int);
 /* Supplied declaration required: FUN_002b5a48. */
 /* Supplied declaration required: FUN_002ba81c. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c564c. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_002c5d5c. */
 /* Supplied declaration required: FUN_002c5e80. */
 /* Supplied declaration required: FUN_002c6a10. */
@@ -244,18 +244,18 @@ int FUN_0038c224(int param_1)
   unsigned char temp_v45 [48];
   int temp_v46;
   
-  temp_v8 = DAT_00432fc8;
-  temp_v39 = (int *)(DAT_00432fc8 + 0x67c);
-  if (*(int *)(DAT_00432fc8 + 0x67c) == 0) {
+  temp_v8 = g_aocMain;
+  temp_v39 = (int *)(g_aocMain + 0x67c);
+  if (*(int *)(g_aocMain + 0x67c) == 0) {
     return 0;
   }
   temp_v46 = param_1;
-  if (*(int *)(DAT_00432fc8 + 0x678) != 0) {
-    FUN_002b4b80(*(int *)(DAT_00432fc8 + 0x678),0x394214);
+  if (*(int *)(g_aocMain + 0x678) != 0) {
+    FUN_002b4b80(*(int *)(g_aocMain + 0x678),0x394214);
   }
   temp_v9 = *(int *)(temp_v8 + 0x67c) + 1;
   puVar4 = (unsigned int *)(temp_v9 * 0x9c8 + 8);
-  FUN_00262888();
+  asdOperatorNewB();
   puVar5 = (unsigned int *)0x0;
   if (puVar4 != (unsigned int *)0x0) {
     puVar5 = puVar4 + 2;
@@ -346,7 +346,7 @@ int FUN_0038c224(int param_1)
         if (temp_v3 < 0) {
           return temp_v3;
         }
-        FUN_002c4938(asStack_858,0x800);
+        memClear(asStack_858,0x800);
         temp_v5 = FUN_00234468(temp_v8 + 0x28);
         temp_v6 = FUN_0023445c(temp_v8 + 0x28);
         FUN_00234330(&temp_v29,3,temp_v6,temp_v5);
@@ -453,7 +453,7 @@ int FUN_0038c224(int param_1)
         temp_v7 = FUN_00234474(temp_v17,&temp_v25);
         if (temp_v7 == 0) {
           *(unsigned short *)(temp_v40 + 0xa8) = 0;
-          FUN_002c4938(temp_v44,0x1200);
+          memClear(temp_v44,0x1200);
         }
         else {
           FUN_002c5e80(temp_v7,0,10);
@@ -468,7 +468,7 @@ int FUN_0038c224(int param_1)
             }
           }
           else {
-            FUN_002c4938(temp_v44,0x1200);
+            memClear(temp_v44,0x1200);
           }
         }
         FUN_0038bee4(temp_v16 + 0x9bc,temp_v44);
@@ -523,7 +523,7 @@ int FUN_0038c224(int param_1)
         }
         temp_v3 = FUN_00234618(temp_v17);
         temp_v9 = temp_v3 * 0x18;
-        FUN_00262888(temp_v9,temp_v41);
+        asdOperatorNewB(temp_v9,temp_v41);
         temp_v1 = 1;
         temp_v15 = 0;
         temp_v2 = 1;
@@ -559,9 +559,9 @@ int FUN_0038c224(int param_1)
             (temp_v9 = FUN_00234474(temp_v17,temp_v35), temp_v9 != 0)) &&
            (FUN_002c5e80(temp_v9,0,10), temp_v3 = temp_v16, temp_v9 == 1)) {
           temp_v18 = temp_v18 - 1;
-          FUN_002c4938(temp_v16,0x80);
-          FUN_002c4938(temp_v3 + 0x80,0x100);
-          FUN_002c4938(temp_v3 + 0x180,0x800);
+          memClear(temp_v16,0x80);
+          memClear(temp_v3 + 0x80,0x100);
+          memClear(temp_v3 + 0x180,0x800);
           puVar5 = (unsigned int *)&temp_v20;
           temp_v14 = 0;
           temp_v15 = 0;
@@ -590,7 +590,7 @@ int FUN_0038c224(int param_1)
   *temp_v39 = temp_v9;
   *(int *)(temp_v8 + 0x680) = *(int *)(temp_v8 + 0x680) + 1;
   if (temp_v9 != temp_v3) {
-    FUN_002c564c(0);
+    jyoucyuGetTableEntry(0);
     *(int *)(temp_v8 + 0x67c) = temp_v3;
   }
   return 0;

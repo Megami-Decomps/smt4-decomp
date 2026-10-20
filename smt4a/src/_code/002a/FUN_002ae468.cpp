@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
-int FUN_00270b94(void);
+int asdMemFree(void);
+int btlStageFreeContext(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,8 +24,8 @@ extern int DAT_00573964; /* 0x573964 */
 extern int DAT_00573968; /* 0x573968 */
 extern int DAT_0057396c; /* 0x57396c */
 
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_00270b94. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: btlStageFreeContext. */
 
 
 void FUN_002ae468(void)
@@ -33,48 +33,48 @@ void FUN_002ae468(void)
 {
 /* irregular: 2 native warning(s); review required */
   if (DAT_00573948 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     DAT_00573948 = 0;
   }
   if (DAT_0057394c != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     DAT_0057394c = 0;
   }
   if (DAT_00573950 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     DAT_00573950 = 0;
   }
   if (DAT_00573954 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     DAT_00573954 = 0;
   }
   if (DAT_00573958 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     DAT_00573958 = 0;
   }
   if (DAT_0057395c != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     DAT_0057395c = 0;
   }
   if (DAT_00573960 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     DAT_00573960 = 0;
   }
   if (DAT_00573964 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     DAT_00573964 = 0;
   }
   if (DAT_00573968 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     DAT_00573968 = 0;
   }
   if (DAT_0057396c != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     DAT_0057396c = 0;
   }
-  FUN_00270b94();
+  btlStageFreeContext();
   if (DAT_005710d8 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     DAT_005710d8 = 0;
   }
   return;

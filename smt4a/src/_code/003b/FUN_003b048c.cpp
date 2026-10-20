@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00324b14(unsigned int);
 
-extern int FUN_00236038(void);
+extern int scrGetArg(void);
 /* Supplied declaration required: FUN_00324b14. */
 
 
@@ -17,7 +17,7 @@ unsigned int FUN_003b048c(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_00236038();
+  temp_v0 = scrGetArg();
   if (temp_v0 == 0) {
     temp_v1 = 1;
   }

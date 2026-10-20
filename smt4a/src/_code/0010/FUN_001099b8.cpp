@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0011b7b0(unsigned int, int);
 int FUN_00120960(unsigned int, unsigned int, unsigned int *, unsigned int);
 int FUN_002e7232(...);
-int FUN_002e74c4(...);
+int strAssign(...);
 int FUN_002e75fa(...);
 int FUN_002eb588(unsigned int *);
 int FUN_002eb6b8(unsigned int *);
@@ -77,7 +77,7 @@ extern unsigned int DAT_00594a24; /* 0x594a24 */
 /* Supplied declaration required: FUN_0011b7b0. */
 /* Supplied declaration required: FUN_00120960. */
 /* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e75fa. */
 extern int FUN_002e760a(unsigned int);
 extern int FUN_002e76b6(void);
@@ -364,7 +364,7 @@ LAB_00109b02:
       if (temp_v16 < *(unsigned int *)(piVar4[2] + 0x10)) {
         temp_v8 = *(int *)(piVar3[2] + 0x10) - temp_v16;
         temp_v1 = FUN_002e76b6();
-        FUN_002e74c4(piVar4[2],temp_v1 + temp_v16,temp_v8,0xffffffff);
+        strAssign(piVar4[2],temp_v1 + temp_v16,temp_v8,0xffffffff);
         piVar5 = piVar4;
         piVar4 = piVar3;
       }
@@ -398,7 +398,7 @@ LAB_00109dda:
     }
     if (*(char *)(temp_v20 + 0x18) != '\0') {
       temp_v7[0] = (short)*(unsigned int *)(piVar3[2] + 0x10) - 2;
-      FUN_002e74c4(piVar3[2],temp_v7,2,0);
+      strAssign(piVar3[2],temp_v7,2,0);
     }
     if (piVar9 != (int *)0x0) {
       FUN_002f2b24(piVar3,piVar9);

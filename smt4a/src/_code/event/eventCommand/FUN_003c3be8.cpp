@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00163060(int, int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_00275b10(int);
 int FUN_0031ba34(int, int, int, int);
-int FUN_003283ac(int);
+int scrSetResult(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,11 +15,11 @@ typedef struct {
 } void_stack;
 
 extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_00163060. */
-extern unsigned int FUN_00236038(unsigned int);
+/* Supplied declaration required: asdMemoryAllocTracked. */
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00275b10. */
 /* Supplied declaration required: FUN_0031ba34. */
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_003c3be8(void)
@@ -30,7 +30,7 @@ unsigned int FUN_003c3be8(void)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_00236038(0);
+  temp_v0 = scrGetArg(0);
   FUN_00275b10(1);
   FUN_00275b10(2);
   FUN_00275b10(3);
@@ -38,11 +38,11 @@ unsigned int FUN_003c3be8(void)
   temp_v1 = FUN_00162ea4();
   if (temp_v1 == 0) {
     temp_v2 = 0x100;
-    FUN_00163060(0x100,0x100,0,8,1);
+    asdMemoryAllocTracked(0x100,0x100,0,8,1);
     FUN_0031ba34(temp_v0,temp_v2,0,1);
     *(unsigned int *)(temp_v2 + 4) = temp_v0;
   }
-  FUN_003283ac(temp_v2);
+  scrSetResult(temp_v2);
   return 1;
 }
 

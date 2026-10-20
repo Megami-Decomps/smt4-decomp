@@ -13,8 +13,8 @@ int FUN_002b9024(void);
 int FUN_002c58c8(int, unsigned int);
 int FUN_0032c3fc(int);
 
-extern unsigned int DAT_00433158; /* 0x433158 */
-extern int DAT_00434210; /* 0x434210 */
+extern unsigned int g_aocSystem; /* 0x433158 */
+extern int g_btlTalkBustUp; /* 0x434210 */
 
 /* Supplied declaration required: FUN_00199808. */
 /* Supplied declaration required: FUN_002a5ed0. */
@@ -35,8 +35,8 @@ void FUN_002954f4(int param_1,int param_2)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = DAT_00434210;
-  if (DAT_00434210 != 0) {
+  temp_v0 = g_btlTalkBustUp;
+  if (g_btlTalkBustUp != 0) {
     temp_v1 = param_1;
     FUN_002b06c4();
     *(unsigned int *)(temp_v0 + 0x2f0) = (unsigned int)*(unsigned char *)(temp_v1 + 0xa2);
@@ -46,9 +46,9 @@ void FUN_002954f4(int param_1,int param_2)
     *(unsigned int *)(temp_v0 + 0x2f8) = temp_v2;
     *(int *)(temp_v0 + 0x308) = param_1;
     if (param_2 == 0) {
-      temp_v1 = FUN_002ae98c(DAT_00433158,0x18,temp_v2,1);
+      temp_v1 = FUN_002ae98c(g_aocSystem,0x18,temp_v2,1);
       if (temp_v1 != 0) {
-        FUN_002ae8e4(DAT_00433158,0x18,*(unsigned int *)(temp_v0 + 0x2f8),0x10000);
+        FUN_002ae8e4(g_aocSystem,0x18,*(unsigned int *)(temp_v0 + 0x2f8),0x10000);
       }
       else {
         FUN_002c58c8(0x18,*(unsigned int *)(temp_v0 + 0x2f8));
@@ -59,9 +59,9 @@ void FUN_002954f4(int param_1,int param_2)
       *(unsigned int *)(temp_v0 + 0x2ec) = 0;
       return;
     }
-    temp_v1 = FUN_002ae98c(DAT_00433158,0x18,temp_v2,1);
+    temp_v1 = FUN_002ae98c(g_aocSystem,0x18,temp_v2,1);
     if (temp_v1 != 0) {
-      FUN_002a5ee4(DAT_00433158,0x18,*(unsigned int *)(temp_v0 + 0x2f8),0x10000);
+      FUN_002a5ee4(g_aocSystem,0x18,*(unsigned int *)(temp_v0 + 0x2f8),0x10000);
     }
     else {
       FUN_002a5ed0(0x18,*(unsigned int *)(temp_v0 + 0x2f8));

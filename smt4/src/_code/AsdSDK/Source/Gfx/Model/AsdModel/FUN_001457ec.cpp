@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002a4e98(void);
 int FUN_002bd420(int, unsigned int [2], int);
-int FUN_002c498c(int, int, int, int);
+int asdMemAlloc(int, int, int, int);
 int SBORROW4(int, int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -19,8 +19,8 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002a4e98. */
 /* Supplied declaration required: FUN_002bd420. */
-extern int FUN_002c1870(int, char *, unsigned int);
-/* Supplied declaration required: FUN_002c498c. */
+extern int rt_memcmp(int, char *, unsigned int);
+/* Supplied declaration required: asdMemAlloc. */
 
 
 void FUN_001457ec(int param_1,int param_2)
@@ -50,7 +50,7 @@ void FUN_001457ec(int param_1,int param_2)
   piVar12 = (int *)(param_1 + 0x94);
   iStack_2c = param_1;
   temp_v11 = param_2;
-  temp_v0 = FUN_002c1870(param_2,"ATBC",4);
+  temp_v0 = rt_memcmp(param_2,"ATBC",4);
   if (temp_v0 == 0) {
     temp_v4 = *(int *)(param_2 + 8);
   }
@@ -62,7 +62,7 @@ void FUN_001457ec(int param_1,int param_2)
   if (0 < temp_v4) {
     do {
       temp_v0 = temp_v11;
-      temp_v4 = FUN_002c1870(temp_v11,"ATBC",4);
+      temp_v4 = rt_memcmp(temp_v11,"ATBC",4);
       if (temp_v4 == 0) {
         temp_v6 = *(int *)(temp_v0 + 8);
         temp_v8 = temp_v6 == 0;
@@ -75,7 +75,7 @@ void FUN_001457ec(int param_1,int param_2)
           temp_v4 = 0;
           temp_v0 = temp_v0 + *(int *)(temp_v0 + 0x10);
           do {
-            temp_v1 = FUN_002c1870(temp_v0,"EPLSIGN",7);
+            temp_v1 = rt_memcmp(temp_v0,"EPLSIGN",7);
             if (temp_v1 != 0) break;
             FUN_002bd420(temp_v0,temp_v9,0x10);
             unaff_r7 = (unsigned short *)(temp_v0 + 0x10);
@@ -102,14 +102,14 @@ void FUN_001457ec(int param_1,int param_2)
   else {
     temp_v9[0] = 1;
     temp_v2 = 0x100;
-    FUN_002c498c(0x100,0x100,0,*(int *)(param_1 + 0x98) * 0xc);
+    asdMemAlloc(0x100,0x100,0,*(int *)(param_1 + 0x98) * 0xc);
     *(unsigned int *)(param_1 + 0x9c) = temp_v2;
     temp_v0 = 0;
     temp_v4 = 0;
     if (temp_v4 < *piVar12) {
       do {
         temp_v5 = temp_v11;
-        temp_v7 = FUN_002c1870(temp_v11,"ATBC",4);
+        temp_v7 = rt_memcmp(temp_v11,"ATBC",4);
         if (temp_v7 == 0) {
           temp_v6 = *(int *)(temp_v5 + 8);
           temp_v8 = temp_v6 == 0;
@@ -122,7 +122,7 @@ void FUN_001457ec(int param_1,int param_2)
             temp_v7 = 0;
             temp_v5 = temp_v5 + *(int *)(temp_v5 + 0x10);
             do {
-              temp_v1 = FUN_002c1870(temp_v5,"EPLSIGN",7);
+              temp_v1 = rt_memcmp(temp_v5,"EPLSIGN",7);
               if (temp_v1 != 0) break;
               FUN_002bd420(temp_v5,temp_v9,0x10);
               unaff_r7 = (unsigned short *)(temp_v5 + 0x10);

@@ -1,21 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00434ce0` (_code @ 0x434ce0, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: store order only: retail keeps `str r0,[r0]` (head) right after the first zero store; the scheduler moves it next to the tail store here */
+/* Resets the list header to empty: both ends point at the header itself and all counters are zero. */
+#include "common.h"
 
 extern "C" {
 
+typedef struct ListHeader {
+    /* 0x00 */ struct ListHeader *head;
+    /* 0x04 */ struct ListHeader *tail;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u32 unk18;
+} ListHeader;
 
-void FUN_00434ce0(int param_1)
-
+void FUN_00434ce0(ListHeader *list)
 {
-  *(unsigned int *)(param_1 + 8) = 0;
-  *(int *)param_1 = param_1;
-  *(unsigned int *)(param_1 + 0xc) = 0;
-  *(unsigned int *)(param_1 + 0x10) = 0;
-  *(unsigned int *)(param_1 + 0x14) = 0;
-  *(unsigned int *)(param_1 + 0x18) = 0;
-  *(int *)(param_1 + 4) = param_1;
-  return;
+    list->unk08 = 0;
+    list->head = list;
+    list->unk0C = 0;
+    list->unk10 = 0;
+    list->unk14 = 0;
+    list->unk18 = 0;
+    list->tail = list;
 }
 
-} /* extern "C" */
+}

@@ -6,13 +6,13 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_001ff474(void);
-int FUN_00254db0(...);
+int asdListBoxFindItem(...);
 int FUN_0027f958(float *, float *, int);
 int FUN_002aed34(...);
 int FUN_002b76d0(...);
 int FUN_002be624(...);
 int FUN_002bfde4(...);
-int FUN_002c08f0(...);
+int jobGetWork(...);
 int FUN_002c1b64(...);
 int SBORROW4(unsigned int, int);
 int SUB84(double, int);
@@ -42,7 +42,7 @@ extern unsigned char LAB_001fef44; /* 0x1fef44 */
 extern unsigned char LAB_001fef4c; /* 0x1fef4c */
 extern unsigned char LAB_001fef54; /* 0x1fef54 */
 extern unsigned char LAB_001fef68; /* 0x1fef68 */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -59,14 +59,14 @@ extern unsigned int DAT_0044ea00; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001ff474. */
-/* Supplied declaration required: FUN_00254db0. */
+/* Supplied declaration required: asdListBoxFindItem. */
 /* Supplied declaration required: FUN_0027f958. */
 /* Supplied declaration required: FUN_002aed34. */
 /* Supplied declaration required: FUN_002b76d0. */
 extern int FUN_002b8cec(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bfde4. */
-/* Supplied declaration required: FUN_002c08f0. */
+/* Supplied declaration required: jobGetWork. */
 extern int FUN_002c15fc(unsigned int);
 /* Supplied declaration required: FUN_002c1b64. */
 extern int FUN_002c30c4(void);
@@ -115,7 +115,7 @@ unsigned int FUN_001fe640(unsigned int param_1)
   
   pfVar4 = &temp_v15;
   pfVar6 = &temp_v15;
-  piVar2 = (int *)FUN_002c08f0();
+  piVar2 = (int *)jobGetWork();
   temp_v3 = piVar2[0xd];
   switch(piVar2[0xd]) {
   case 0:
@@ -180,7 +180,7 @@ LAB_001ff420:
       temp_v16 = 1.0f;
       temp_v17 = 1.0f;
       temp_v18 = 1.0f;
-      FUN_002c1b64(DAT_0044ea00,0);
+      FUN_002c1b64(g_titleScene,0);
       temp_v13 = 0.003921569f;
       temp_v3 = *(unsigned int *)((unsigned int)*(unsigned char *)(piVar2 + 0xf) * 0x10 + 0x409cf0);
       temp_v15 = (float)VectorUnsignedToFloat(temp_v3 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -225,7 +225,7 @@ LAB_001ff420:
         temp_v16 = temp_v10;
         temp_v17 = temp_v10;
         temp_v18 = temp_v10;
-        FUN_002c1b64(DAT_0044ea00,0);
+        FUN_002c1b64(g_titleScene,0);
         temp_v1 = piVar2[0x17];
         VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -383,10 +383,10 @@ joined_r0x001feb24:
             temp_v6 = 100000;
             temp_v12 = 0.01f;
             if (temp_v1 != 0) {
-              temp_v1 = FUN_002c08f0(param_1);
+              temp_v1 = jobGetWork(param_1);
               temp_v4 = *(int *)(temp_v1 + 0x60);
               temp_v1 = *(int *)(temp_v1 + 100);
-              piVar10 = (int *)FUN_002c08f0(param_1);
+              piVar10 = (int *)jobGetWork(param_1);
               piVar10 = (int *)*piVar10;
               for (unique0x100009b6 = *piVar10; piVar10 != (int *)0x0; unique0x100009be = piVar10[6]
                   ) {
@@ -396,7 +396,7 @@ joined_r0x001feb24:
                 }
                 piVar10 = (int *)piVar10[6];
               }
-              temp_v1 = FUN_00254db0(param_1,temp_v7);
+              temp_v1 = asdListBoxFindItem(param_1,temp_v7);
               temp_v3 = 0;
               if (temp_v1 != 0) {
                 temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 4);
@@ -481,10 +481,10 @@ LAB_001ff2d8:
             else {
               temp_v1 = FUN_002b8cec(4);
               if (temp_v1 != 0) {
-                temp_v1 = FUN_002c08f0(param_1);
+                temp_v1 = jobGetWork(param_1);
                 temp_v4 = *(int *)(temp_v1 + 0x60);
                 temp_v1 = *(int *)(temp_v1 + 100);
-                piVar10 = (int *)FUN_002c08f0(param_1);
+                piVar10 = (int *)jobGetWork(param_1);
                 piVar10 = (int *)*piVar10;
                 for (unique0x10000972 = *piVar10; piVar10 != (int *)0x0;
                     unique0x1000097a = piVar10[6]) {
@@ -494,7 +494,7 @@ LAB_001ff2d8:
                   }
                   piVar10 = (int *)piVar10[6];
                 }
-                temp_v1 = FUN_00254db0(param_1,temp_v7);
+                temp_v1 = asdListBoxFindItem(param_1,temp_v7);
                 temp_v3 = 0;
                 if (temp_v1 != 0) {
                   temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 4);
@@ -565,10 +565,10 @@ LAB_001ff2d8:
                 temp_v1 = FUN_002bfde4(0);
                 temp_v3 = 0;
                 if (temp_v1 != 0) {
-                  temp_v1 = FUN_002c08f0(param_1);
+                  temp_v1 = jobGetWork(param_1);
                   temp_v4 = *(int *)(temp_v1 + 0x60);
                   temp_v1 = *(int *)(temp_v1 + 100);
-                  piVar10 = (int *)FUN_002c08f0(param_1);
+                  piVar10 = (int *)jobGetWork(param_1);
                   piVar10 = (int *)*piVar10;
                   for (unique0x10000912 = *piVar10; piVar10 != (int *)0x0;
                       unique0x1000091a = piVar10[6]) {
@@ -578,7 +578,7 @@ LAB_001ff2d8:
                     }
                     piVar10 = (int *)piVar10[6];
                   }
-                  temp_v14 = FUN_00254db0(param_1,temp_v7);
+                  temp_v14 = asdListBoxFindItem(param_1,temp_v7);
                   pcVar9 = (romwright_code *)((unsigned long long)temp_v14 >> 0x20);
                   temp_v3 = (unsigned int)temp_v14;
                   if (temp_v3 != 0) {

@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_00163060(int, int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned int *DAT_00580c88; /* 0x580c88 */
+extern unsigned int *g_mapEpl; /* 0x580c88 */
 
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 
 
 void FUN_0020ec4c(void)
@@ -25,8 +25,8 @@ void FUN_0020ec4c(void)
   int temp_v1;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x188,1);
-  DAT_00580c88 = puVar1;
+  asdMemoryAllocTracked(0x100,0x100,0,0x188,1);
+  g_mapEpl = puVar1;
   *puVar1 = 0;
   puVar1[1] = 0;
   temp_v0 = 0;

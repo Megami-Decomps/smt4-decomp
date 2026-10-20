@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c5914(int, int);
+int asdTMTexTableLoadTmx(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ extern unsigned char LAB_00192590; /* 0x192590 */
 extern unsigned int DAT_00448c5c; /* 0x448c5c */
 extern unsigned int DAT_00448c70; /* 0x448c70 */
 
-/* Supplied declaration required: FUN_002c5914. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 extern unsigned int FUN_002c5c04(unsigned char *);
 
 
@@ -25,7 +25,7 @@ void FUN_00192564(void)
 /* irregular: 1 native warning(s); review required */
   DAT_00448c5c = FUN_002c5c04(&LAB_00192590);
   DAT_00448c70 = 0;
-  FUN_002c5914(0x38,0);
+  asdTMTexTableLoadTmx(0x38,0);
   return;
 }
 

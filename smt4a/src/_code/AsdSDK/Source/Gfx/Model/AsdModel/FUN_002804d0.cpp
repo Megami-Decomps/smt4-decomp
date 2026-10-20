@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001801e4(unsigned char *, int);
 int FUN_001836b0(unsigned int);
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_001ab878(int);
 int nw_gfx_res_ResGraphicsFile_Cleanup(int *);
 
@@ -24,7 +24,7 @@ extern unsigned char DAT_00636ec8; /* 0x636ec8 */
 
 /* Supplied declaration required: FUN_001801e4. */
 /* Supplied declaration required: FUN_001836b0. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001ab878. */
 extern int FUN_0037a86c(unsigned char *, unsigned int *);
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Cleanup. */
@@ -54,7 +54,7 @@ void FUN_002804d0(unsigned int *param_1,int param_2,unsigned int param_3,int par
     } while (unaff_r5 < (int)param_1[0x26]);
   }
   if (param_1[0x27] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1[0x27] = 0;
   }
   param_1[0x26] = 0;
@@ -71,7 +71,7 @@ void FUN_002804d0(unsigned int *param_1,int param_2,unsigned int param_3,int par
     } while (unaff_r5 < (int)*puVar4);
   }
   if (param_1[0x29] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1[0x29] = 0;
   }
   *puVar4 = 0;
@@ -106,15 +106,15 @@ void FUN_002804d0(unsigned int *param_1,int param_2,unsigned int param_3,int par
     param_1[0x1c] = 0;
   }
   if (param_1[0xc] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1[0xc] = 0;
   }
   if (param_1[0x15] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1[0x15] = 0;
   }
   if (param_1[0x19] != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1[0x19] = 0;
   }
   temp_v0 = 0;
@@ -145,25 +145,25 @@ void FUN_002804d0(unsigned int *param_1,int param_2,unsigned int param_3,int par
     if (temp_v0 != 0) {
       *puVar1 = 0;
       if (*(char *)(puVar1 + 1) == '\0') {
-        FUN_0019a5a0(puVar1[3]);
+        asdMemFree(puVar1[3]);
       }
       puVar1[2] = 0;
       puVar1[5] = 0;
       FUN_001801e4(&DAT_00636ebc,temp_v0);
     }
-    FUN_0019a5a0(puVar1);
+    asdMemFree(puVar1);
     DAT_005b3c2c = DAT_005b3c2c - 1;
     if (param_2 != 0) {
       FUN_001ab878(param_2);
     }
   }
-  FUN_0019a5a0(param_1[9]);
+  asdMemFree(param_1[9]);
   param_1[9] = 0;
   temp_v0 = FUN_0037a86c(&DAT_00636ec8,param_1);
   if (temp_v0 != 0) {
     FUN_001801e4(&DAT_00636ec8,temp_v0);
   }
-  FUN_0019a5a0(param_1);
+  asdMemFree(param_1);
   DAT_005b3c30 = DAT_005b3c30 - 1;
   return;
 }

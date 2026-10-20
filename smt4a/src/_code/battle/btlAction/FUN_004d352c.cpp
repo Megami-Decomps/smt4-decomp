@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
+int jobStop(unsigned int, int);
 int FUN_00280328(unsigned int, int, int);
 int FUN_002ea508(unsigned int, unsigned char *);
 int FUN_00317464(...);
 int FUN_00317508(unsigned int, int);
-int FUN_0032c1bc(void);
+int asdListBoxAddItems(void);
 int FUN_00340edc(...);
 int FUN_003592dc(unsigned int);
 
@@ -22,13 +22,13 @@ typedef struct {
 extern unsigned char LAB_004d37b0; /* 0x4d37b0 */
 extern unsigned int DAT_00571140; /* 0x571140 */
 
-/* Supplied declaration required: FUN_001631d0. */
-extern int FUN_00163e40(unsigned int);
+/* Supplied declaration required: jobStop. */
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00280328. */
 /* Supplied declaration required: FUN_002ea508. */
 /* Supplied declaration required: FUN_00317464. */
 /* Supplied declaration required: FUN_00317508. */
-/* Supplied declaration required: FUN_0032c1bc. */
+/* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_00340edc. */
 /* Supplied declaration required: FUN_003592dc. */
 extern int FUN_003eccd0(int);
@@ -43,15 +43,15 @@ void FUN_004d352c(int param_1,int param_2)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_00163e40(*(unsigned int *)(param_1 + 0x10));
+  temp_v0 = jobIsValid(*(unsigned int *)(param_1 + 0x10));
   if (temp_v0 != 0) {
     FUN_003592dc(*(unsigned int *)(param_1 + 0x10));
-    FUN_001631d0(*(unsigned int *)(param_1 + 0x10),0);
+    jobStop(*(unsigned int *)(param_1 + 0x10),0);
   }
   temp_v1 = *(unsigned int *)(param_2 + 0x80);
   FUN_00280328(temp_v1,0x75,0);
   *(unsigned int *)(param_1 + 0x10) = temp_v1;
-  FUN_0032c1bc();
+  asdListBoxAddItems();
   FUN_00317508(*(unsigned int *)(param_1 + 0x10),1);
   FUN_002ea508(*(unsigned int *)(param_1 + 0x10),&LAB_004d37b0);
   temp_v0 = FUN_003eccd0(param_2);

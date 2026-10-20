@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002c0944(...);
 int FUN_002c1b64(unsigned int, int);
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 extern int FUN_002bfde4(unsigned int);
 /* Supplied declaration required: FUN_002c0944. */
@@ -26,7 +26,7 @@ unsigned int FUN_003d8e24(int param_1)
      ) {
     *(unsigned int *)(param_1 + 8) = 0;
   }
-  FUN_002c1b64(DAT_0044ea00,0);
+  FUN_002c1b64(g_titleScene,0);
   if (*(int *)(param_1 + 8) != 1) {
     if (*(int *)(param_1 + 8) != 2) {
       return 0;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_002e3390(short *);
+extern int wstrlen(short *);
 
 
 unsigned int FUN_0035a978(short *param_1)
@@ -12,7 +12,7 @@ unsigned int FUN_0035a978(short *param_1)
   int temp_v1;
   
   if (param_1 != (short *)0x0) {
-    temp_v1 = FUN_002e3390(param_1 + 7);
+    temp_v1 = wstrlen(param_1 + 7);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = *param_1;

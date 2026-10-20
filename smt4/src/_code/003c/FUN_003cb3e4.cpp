@@ -32,7 +32,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
 
-extern unsigned char DAT_00434278; /* 0x434278 */
+extern unsigned char g_btlAction; /* 0x434278 */
 extern unsigned int DAT_00434290; /* 0x434290 */
 
 /* Supplied declaration required: FUN_00229754. */
@@ -40,7 +40,7 @@ extern int FUN_002298a0(void);
 /* Supplied declaration required: FUN_00229914. */
 /* Supplied declaration required: FUN_00229a3c. */
 /* Supplied declaration required: FUN_0022a5d8. */
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_0023f4e4. */
 extern unsigned int FUN_00245cc0(unsigned int);
 /* Supplied declaration required: FUN_00246454. */
@@ -126,7 +126,7 @@ unsigned int FUN_003cb3e4(int *param_1,unsigned int *param_2)
   FUN_00250720(*param_1);
   if ((*param_2 & 0x2000) != 0) {
     *param_2 = *param_2 & 0xffffdfff;
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_00434278 + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x14;
+    *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x14;
     return 1;
   }
   temp_v9 = 1;
@@ -250,7 +250,7 @@ LAB_003cb60c:
             temp_v2 = (int)((int)*(short *)(param_2[10] + 0xea) +
                          ((unsigned int)((int)*(short *)(param_2[10] + 0xea) >> 0x1f) >> 0x1d)) >> 3;
             if (temp_v2 >= 101) {
-              temp_v2 = FUN_0023eae0(0xf);
+              temp_v2 = randRange(0xf);
               temp_v2 = temp_v2 + 100;
             }
             piVar6 = param_1;
@@ -290,7 +290,7 @@ LAB_003cb60c:
     if (!((temp_v5 == 0 || temp_v4 == 0) || temp_v2 < 0)) {
       temp_v2 = FUN_003c85c8();
       if (temp_v2 == 0) {
-        *(unsigned char *)((*(int *)((unsigned char *)&DAT_00434278 + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1e;
+        *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1e;
         return 1;
       }
       temp_v11 = 0xc;
@@ -306,7 +306,7 @@ LAB_003cb60c:
       FUN_003d03f8(param_1,param_2,temp_v2,0x19,temp_v3 + temp_v0 * 0x114);
       temp_v2 = FUN_003c8880();
       if (temp_v2 == 0) {
-        *(unsigned char *)((*(int *)((unsigned char *)&DAT_00434278 + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1e;
+        *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1e;
         return 1;
       }
       temp_v11 = 0xffffffff;
@@ -320,7 +320,7 @@ LAB_003cbb20:
       return 1;
     }
   }
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_00434278 + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1e;
+  *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1e;
   return 1;
 }
 

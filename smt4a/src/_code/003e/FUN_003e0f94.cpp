@@ -24,7 +24,7 @@ extern unsigned int DAT_00573858; /* 0x573858 */
 extern unsigned int DAT_0057385c; /* 0x57385c */
 extern unsigned int DAT_00573880; /* 0x573880 */
 extern unsigned int DAT_00573884; /* 0x573884 */
-extern int DAT_00573898; /* 0x573898 */
+extern int g_btlEvent; /* 0x573898 */
 
 /* Supplied declaration required: FUN_004d7a70. */
 
@@ -36,8 +36,8 @@ unsigned int FUN_003e0f94(unsigned int param_1,fn_003e0f94_arg1 *param_2)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = DAT_00573898;
-  FUN_004d7a70(DAT_00573898,0xb,0xffffffff,1);
+  temp_v0 = g_btlEvent;
+  FUN_004d7a70(g_btlEvent,0xb,0xffffffff,1);
   if (temp_v0 != 0) {
     temp_v1 = 5;
   }

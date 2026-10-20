@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00152cf8(int, int, int, int, int);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_0019ea64(int);
 int FUN_00215bbc(void);
 int FUN_00281720(...);
@@ -24,7 +24,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00152cf8. */
 extern int FUN_00164af0(unsigned int);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0019ea64. */
@@ -95,7 +95,7 @@ unsigned int FUN_00318e84(int param_1)
       else {
         temp_v2 = 0x9e;
       }
-      FUN_001681cc(temp_v2);
+      sysPlaySe(temp_v2);
       *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
       temp_v0 = FUN_0018719c(0x49b);
       if (temp_v0 == 0) {
@@ -122,7 +122,7 @@ unsigned int FUN_00318e84(int param_1)
       else {
         temp_v2 = 0x9e;
       }
-      FUN_001681cc(temp_v2);
+      sysPlaySe(temp_v2);
       *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
       temp_v0 = FUN_0018719c(0x49c);
       if (temp_v0 == 0) {
@@ -147,7 +147,7 @@ unsigned int FUN_00318e84(int param_1)
       else {
         temp_v2 = 0x97;
       }
-      FUN_001681cc(temp_v2);
+      sysPlaySe(temp_v2);
       *(unsigned int *)(param_1 + 0xec) = 0xe;
       *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
       temp_v2 = 3;
@@ -172,7 +172,7 @@ unsigned int FUN_00318e84(int param_1)
       *(unsigned int *)(param_1 + 0xf8) = 2;
       temp_v0 = FUN_0018719c(0x49e);
       if (temp_v0 == 0) {
-        FUN_001681cc(0x92);
+        sysPlaySe(0x92);
       }
       temp_v2 = 3;
       break;
@@ -189,7 +189,7 @@ unsigned int FUN_00318e84(int param_1)
       else {
         temp_v2 = 0x9e;
       }
-      FUN_001681cc(temp_v2);
+      sysPlaySe(temp_v2);
       *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
       temp_v0 = FUN_0018719c(0x49f);
       if (temp_v0 == 0) {
@@ -221,7 +221,7 @@ unsigned int FUN_00318e84(int param_1)
       else {
         temp_v2 = 0xe4;
       }
-      FUN_001681cc(temp_v2);
+      sysPlaySe(temp_v2);
       *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
       *(unsigned int *)(param_1 + 0xf8) = 5;
       *(unsigned int *)(param_1 + 0xfc) = 2;
@@ -245,7 +245,7 @@ unsigned int FUN_00318e84(int param_1)
       else {
         temp_v2 = 0x9e;
       }
-      FUN_001681cc(temp_v2);
+      sysPlaySe(temp_v2);
       *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
       temp_v0 = FUN_0018719c(0x4a1);
       if (temp_v0 == 0) {

@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_00580238; /* 0x580238 */
+extern int g_lmapMainState; /* 0x580238 */
 
 /* Supplied declaration required: FUN_004839b4. */
 /* Supplied declaration required: FUN_00483abc. */
@@ -26,9 +26,9 @@ void FUN_00338ba4(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_00580238;
-  if (DAT_00580238 != 0) {
-    FUN_00483acc(DAT_00580238 + 0xf4);
+  temp_v0 = g_lmapMainState;
+  if (g_lmapMainState != 0) {
+    FUN_00483acc(g_lmapMainState + 0xf4);
     FUN_00483abc(temp_v0 + 0xf4,*(int *)(temp_v0 + 0x40) - 100,*(unsigned int *)(temp_v0 + 0x48));
     FUN_004839b4(temp_v0 + 0xf4);
     return;

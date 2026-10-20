@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned int FUN_0019e4d4(short);
+extern unsigned int slotRecordFindById(short);
 extern int FUN_002a482c(int);
 extern int FUN_002a4b28(short);
 /* Supplied declaration required: FUN_0032d0c8. */
@@ -69,7 +69,7 @@ void FUN_004a2064(int param_1)
             FUN_0032d0c8(0,1,temp_v5 & 0xffff,temp_v8);
           }
           else {
-            temp_v2 = FUN_0019e4d4(temp_v1);
+            temp_v2 = slotRecordFindById(temp_v1);
             FUN_0032d0c8(0,1,temp_v1,temp_v2);
           }
         }

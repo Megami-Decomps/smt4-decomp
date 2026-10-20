@@ -10,14 +10,14 @@ int FUN_002b8838(...);
 int FUN_00258170(...);
 int FUN_00258408(...);
 int FUN_00258618(int);
-int FUN_002886e0(void);
+int statusCameraDestroy(void);
 int FUN_002942c4(...);
 int FUN_00294e18(int);
 int FUN_00297060(...);
-int FUN_0029bb3c(unsigned char *, int);
+int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a9fdc(...);
 int FUN_002b9024(void);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002be624(...);
 int FUN_002bee58(...);
@@ -59,17 +59,17 @@ extern int DAT_0043dd90; /* 0x43dd90 */
 /* Supplied declaration required: FUN_00258408. */
 /* Supplied declaration required: FUN_00258618. */
 extern unsigned int FUN_00263c1c(unsigned char *);
-/* Supplied declaration required: FUN_002886e0. */
+/* Supplied declaration required: statusCameraDestroy. */
 extern unsigned int FUN_00294090(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002942c4. */
 /* Supplied declaration required: FUN_00294e18. */
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_0029bb3c. */
+/* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a9fdc. */
 /* Supplied declaration required: FUN_002b8838. */
 /* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bee58. */
@@ -77,7 +77,7 @@ extern unsigned int FUN_00294090(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002c312c. */
 extern unsigned int FUN_002c5c04(unsigned char *);
 extern int FUN_002cdecc(int);
-extern unsigned int FUN_002d5738(void);
+extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: FUN_0033dcec. */
 /* Supplied declaration required: FUN_00343e5c. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -97,7 +97,7 @@ void FUN_001eea88(void)
   unsigned char temp_v6 [76];
   
   temp_v0 = DAT_0043dd90;
-  FUN_002886e0();
+  statusCameraDestroy();
   FUN_00294e18(2);
   temp_v4 = 0;
   if (*(short *)(temp_v0 + 0x1e) != 0) {
@@ -111,7 +111,7 @@ void FUN_001eea88(void)
     } while (temp_v4 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x1e));
   }
   *(unsigned int *)(temp_v0 + 0x3c) = *(unsigned int *)(temp_v0 + 0x28);
-  temp_v1 = FUN_002d5738();
+  temp_v1 = asdVramBGetFreeBytes();
   if (temp_v1 < 0x20000) {
     FUN_00343e5c(temp_v0 + 0x38,0x20000,0x20000,0x100,0x100);
   }
@@ -127,14 +127,14 @@ void FUN_001eea88(void)
   if (*(short *)(temp_v0 + 0x1e) == 2) {
     if (*(char *)(temp_v0 + 0x20) != '\0') {
       puVar4 = &LAB_001eee78;
-      FUN_0029bb3c(&LAB_001eee78,7);
+      asdMdlManagerCreateLoaded(&LAB_001eee78,7);
       *(unsigned char **)(temp_v0 + 0x84) = puVar4;
       temp_v2 = FUN_00263c1c(&LAB_001eee94);
       *(unsigned int *)(temp_v0 + 0x8c) = temp_v2;
     }
     else {
       puVar4 = &LAB_001eeeb0;
-      FUN_0029bb3c(&LAB_001eeeb0,7);
+      asdMdlManagerCreateLoaded(&LAB_001eeeb0,7);
       *(unsigned char **)(temp_v0 + 0x84) = puVar4;
       temp_v2 = FUN_00263c1c(&LAB_001eeec8);
       *(unsigned int *)(temp_v0 + 0x8c) = temp_v2;
@@ -144,7 +144,7 @@ void FUN_001eea88(void)
   }
   if (*(short *)(temp_v0 + 0x1e) == 3) {
     puVar4 = &LAB_001eeef0;
-    FUN_0029bb3c(&LAB_001eeef0,7);
+    asdMdlManagerCreateLoaded(&LAB_001eeef0,7);
     *(unsigned char **)(temp_v0 + 0x84) = puVar4;
     temp_v2 = FUN_00263c1c(&LAB_001eef08);
     *(unsigned int *)(temp_v0 + 0x8c) = temp_v2;
@@ -153,7 +153,7 @@ void FUN_001eea88(void)
   }
   if (*(short *)(temp_v0 + 0x1e) == 4) {
     puVar4 = &LAB_001eef24;
-    FUN_0029bb3c(&LAB_001eef24,7);
+    asdMdlManagerCreateLoaded(&LAB_001eef24,7);
     *(unsigned char **)(temp_v0 + 0x84) = puVar4;
     temp_v2 = FUN_00263c1c(&LAB_001eef3c);
     *(unsigned int *)(temp_v0 + 0x8c) = temp_v2;
@@ -185,7 +185,7 @@ void FUN_001eea88(void)
   do {
     temp_v5 = temp_v0 + temp_v4 * 0x8c;
     FUN_002bd954(temp_v5 + 0x2c8,0x24,0,temp_v0 + 0x2a8,1);
-    FUN_002bd8e8(temp_v5 + 0x2c8,0);
+    timerStart(temp_v5 + 0x2c8,0);
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 6);
   temp_v4 = 6;

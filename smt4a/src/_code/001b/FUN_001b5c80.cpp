@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-extern unsigned char DAT_006433d0; /* 0x6433d0 */
+extern unsigned char g_dspsndState; /* 0x6433d0 */
 
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -29,10 +29,10 @@ void FUN_001b5c80(int param_1,int param_2,int param_3,unsigned int param_4)
   *(int *)(temp_v0 + 0x14) = param_3;
   *(unsigned int *)(temp_v0 + 0x1c) = param_4;
   if (param_3 != 0) {
-    nn_snd_CTR_Dspsnd_EnableAuxBus(&DAT_006433d0,param_2,1);
+    nn_snd_CTR_Dspsnd_EnableAuxBus(&g_dspsndState,param_2,1);
   }
   else {
-    nn_snd_CTR_Dspsnd_EnableAuxBus(&DAT_006433d0,param_2,(int)*(char *)(param_1 + param_2 + 0x30));
+    nn_snd_CTR_Dspsnd_EnableAuxBus(&g_dspsndState,param_2,(int)*(char *)(param_1 + param_2 + 0x30));
   }
   nn_os_CriticalSection_Leave(param_1 + 0x34);
   return;

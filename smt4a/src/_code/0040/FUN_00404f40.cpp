@@ -6,15 +6,15 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_00162790(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001801a4(void);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_00184e64(int);
-int FUN_002e6354(unsigned char [128], int);
+int sysMemClear(unsigned char [128], int);
 int FUN_0030ea58(...);
 int FUN_0039b984(void);
-int FUN_00403d48(...);
+int efctPlayVariantSet(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_7: 3 slot(s), 12 byte(s) */
@@ -30,17 +30,17 @@ extern unsigned char LAB_00405258; /* 0x405258 */
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001801a4. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_00184e64. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0030ea58. */
 /* Supplied declaration required: FUN_0039b984. */
 extern unsigned int FUN_004038e0(unsigned int, unsigned short);
-/* Supplied declaration required: FUN_00403d48. */
+/* Supplied declaration required: efctPlayVariantSet. */
 
 
 void FUN_00404f40(unsigned int param_1,unsigned int param_2,int param_3,int param_4,unsigned int param_5,
@@ -59,8 +59,8 @@ void FUN_00404f40(unsigned int param_1,unsigned int param_2,int param_3,int para
   param_2 = param_2 & 0xffff;
   FUN_0039b984();
   if (param_2 != 0) {
-    FUN_002e6354(temp_v4,0x80);
-    FUN_001677c0();
+    sysMemClear(temp_v4,0x80);
+    efctSetSpeed();
     temp_v5 = FUN_004038e0(param_1,*(unsigned short *)(param_2 + 4));
     switch(*(unsigned short *)(param_2 + 4)) {
     default:
@@ -106,17 +106,17 @@ void FUN_00404f40(unsigned int param_1,unsigned int param_2,int param_3,int para
     VectorSignedToFloat(temp_v0 + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(3,param_7,temp_v4);
     temp_v2 = FUN_001834a4(0x32,0x99);
-    FUN_00403d48(param_1,*(short *)(temp_v2 + 8) + param_3,*(short *)(temp_v2 + 10) + param_4,0x79,
+    efctPlayVariantSet(param_1,*(short *)(temp_v2 + 8) + param_3,*(short *)(temp_v2 + 10) + param_4,0x79,
                  param_5,param_6);
     if (*(short *)(param_2 + 6) != 0) {
-      FUN_001677c0();
+      efctSetSpeed();
       temp_v2 = FUN_001834a4(0x32,0x9a);
       param_3 = *(short *)(temp_v2 + 8) + param_3;
       param_4 = *(short *)(temp_v2 + 10) + param_4;
       FUN_001835b4(2,0x32,0x9c,param_3,param_4,0x79);
       FUN_001835b4(2,0x32,0x9d,param_3,param_4,0x7a);
     }
-    FUN_001677c0();
+    efctSetSpeed();
   }
   return;
 }

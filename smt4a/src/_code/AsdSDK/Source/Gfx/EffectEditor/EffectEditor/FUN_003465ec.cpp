@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(int, double);
 int FUN_00164af0(...);
 int FUN_001656a0(...);
-int FUN_00167ab4(...);
+int memAlloc(...);
 int FUN_00200bcc(...);
 int FUN_00202178(...);
 int FUN_0020e9dc(...);
@@ -73,7 +73,7 @@ extern float DAT_00635340; /* 0x635340 */
 extern int FUN_00163fd4(unsigned int);
 /* Supplied declaration required: FUN_00164af0. */
 /* Supplied declaration required: FUN_001656a0. */
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00200bcc. */
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: FUN_0020e9dc. */
@@ -601,7 +601,7 @@ LAB_00346d7c:
       temp_v11 = (int)(temp_v17[(int)(puVar10 + 1) + 4] * temp_v15);
       temp_v6 = temp_v11 + 0xa8;
       temp_v4 = 0x10000;
-      FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+      memAlloc(0x10000,0x100,0,0x68,0x10,1);
       *(int *)(temp_v4 + 8) = temp_v6;
       *(unsigned int *)(temp_v4 + 0xc) = 0x10;
       *(unsigned int *)(temp_v4 + 4) = 4;
@@ -616,7 +616,7 @@ LAB_00346d7c:
       }
       if (!(puVar10 == DAT_0059dc30 && puVar2 == (unsigned char *)0x0)) {
         temp_v4 = 0x10000;
-        FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+        memAlloc(0x10000,0x100,0,0x68,0x10,1);
         *(unsigned int *)(temp_v4 + 4) = 6;
         *(int *)(temp_v4 + 8) = temp_v6;
         *(unsigned int *)(temp_v4 + 0xc) = 0xc;
@@ -627,7 +627,7 @@ LAB_00346d7c:
       else {
         temp_v11 = temp_v11 + 0xa7;
         temp_v4 = 0x10000;
-        FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+        memAlloc(0x10000,0x100,0,0x68,0x10,1);
         *(unsigned int *)(temp_v4 + 0x18) = 0xff00ff00;
         *(int *)(temp_v4 + 8) = temp_v11;
         *(unsigned int *)(temp_v4 + 4) = 6;
@@ -636,7 +636,7 @@ LAB_00346d7c:
         *(unsigned int *)(temp_v4 + 0x14) = 0x24;
         FUN_00300124();
         temp_v4 = 0x10000;
-        FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+        memAlloc(0x10000,0x100,0,0x68,0x10,1);
         *(unsigned int *)(temp_v4 + 0x18) = 0xff00ff00;
         *(int *)(temp_v4 + 8) = temp_v6;
         *(unsigned int *)(temp_v4 + 4) = 6;
@@ -650,7 +650,7 @@ LAB_00346d7c:
   }
   if ((puVar13 != DAT_0059dc30) || (DAT_0059dc38 != (unsigned char *)0x0)) {
     temp_v4 = 0x10000;
-    FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+    memAlloc(0x10000,0x100,0,0x68,0x10,1);
     *(unsigned int *)(temp_v4 + 4) = 6;
     *(unsigned int *)(temp_v4 + 8) = 0x160;
     *(unsigned int *)(temp_v4 + 0xc) = 0xc;
@@ -660,7 +660,7 @@ LAB_00346d7c:
   }
   else {
     temp_v4 = 0x10000;
-    FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+    memAlloc(0x10000,0x100,0,0x68,0x10,1);
     *(unsigned int *)(temp_v4 + 8) = 0x161;
     *(unsigned int *)(temp_v4 + 4) = 6;
     *(unsigned int *)(temp_v4 + 0xc) = 0xc;
@@ -669,7 +669,7 @@ LAB_00346d7c:
     *(unsigned int *)(temp_v4 + 0x18) = 0xff00ff00;
     FUN_00300124();
     temp_v4 = 0x10000;
-    FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+    memAlloc(0x10000,0x100,0,0x68,0x10,1);
     *(unsigned int *)(temp_v4 + 4) = 6;
     *(unsigned int *)(temp_v4 + 8) = 0x160;
     *(unsigned int *)(temp_v4 + 0xc) = 0xc;
@@ -695,7 +695,7 @@ LAB_00346d7c:
     temp_v10 = temp_v17[temp_v5 + 1];
     temp_v6 = temp_v11 + 0xa8;
     temp_v4 = 0x10000;
-    FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+    memAlloc(0x10000,0x100,0,0x68,0x10,1);
     *(unsigned int *)(temp_v4 + 4) = 4;
     *(int *)(temp_v4 + 8) = temp_v6;
     *(unsigned int *)(temp_v4 + 0xc) = 0x2c;
@@ -712,7 +712,7 @@ LAB_00346d7c:
     }
     if (!(temp_v5 == DAT_0059dc34 && puVar13 == (unsigned char *)0x1)) {
       temp_v4 = 0x10000;
-      FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+      memAlloc(0x10000,0x100,0,0x68,0x10,1);
       *(unsigned int *)(temp_v4 + 4) = 6;
       *(int *)(temp_v4 + 8) = temp_v6;
       *(unsigned int *)(temp_v4 + 0xc) = 0x28;
@@ -723,7 +723,7 @@ LAB_00346d7c:
     else {
       temp_v11 = temp_v11 + 0xa7;
       temp_v4 = 0x10000;
-      FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+      memAlloc(0x10000,0x100,0,0x68,0x10,1);
       *(int *)(temp_v4 + 8) = temp_v11;
       *(unsigned int *)(temp_v4 + 0x18) = 0xff00ff00;
       *(unsigned int *)(temp_v4 + 0x14) = 0x40;
@@ -732,7 +732,7 @@ LAB_00346d7c:
       *(unsigned int *)(temp_v4 + 0xc) = 0x28;
       FUN_00300124();
       temp_v4 = 0x10000;
-      FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+      memAlloc(0x10000,0x100,0,0x68,0x10,1);
       *(int *)(temp_v4 + 8) = temp_v6;
       *(unsigned int *)(temp_v4 + 0x18) = 0xff00ff00;
       *(unsigned int *)(temp_v4 + 0x14) = 0x40;
@@ -744,7 +744,7 @@ LAB_00346d7c:
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 3);
   temp_v4 = 0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0x68,0x10,1);
+  memAlloc(0x10000,0x100,0,0x68,0x10,1);
   *(unsigned int *)(temp_v4 + 4) = 6;
   *(unsigned int *)(temp_v4 + 8) = 0x160;
   *(unsigned int *)(temp_v4 + 0xc) = 0x28;

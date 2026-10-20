@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002a775c(void);
+int asdMdlManagerDestroy(void);
 
 extern int DAT_00447e10; /* 0x447e10 */
 
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 
 
 void FUN_0021e074(void)
@@ -26,7 +26,7 @@ void FUN_0021e074(void)
     if (*(char *)(temp_v3 + 0x1114) != '\0') {
       *(char *)(temp_v3 + 0x1114) = '\0';
       if (*(int *)(temp_v3 + 0x1134) != 0) {
-        FUN_002a775c();
+        asdMdlManagerDestroy();
         *(unsigned int *)(temp_v3 + 0x1134) = 0;
       }
     }
@@ -38,7 +38,7 @@ void FUN_0021e074(void)
     if (*(char *)(temp_v3 + 0x12a0) != '\0') {
       *(char *)(temp_v3 + 0x12a0) = '\0';
       if (*(int *)(temp_v3 + 0x12c0) != 0) {
-        FUN_002a775c();
+        asdMdlManagerDestroy();
         *(unsigned int *)(temp_v3 + 0x12c0) = 0;
       }
     }

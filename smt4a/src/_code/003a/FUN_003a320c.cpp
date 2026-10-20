@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00187180(int, int);
+int dataTableGet(int, int);
 
-extern int DAT_00570280; /* 0x570280 */
+extern int g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_00187180. */
-extern int FUN_00192748(void);
+/* Supplied declaration required: dataTableGet. */
+extern int dataTableGetCount(void);
 
 
 int FUN_003a320c(void)
@@ -18,9 +18,9 @@ int FUN_003a320c(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  FUN_00187180(0x23,5);
-  temp_v0 = FUN_00192748();
-  return temp_v0 + *(int *)(DAT_00570280 + 0x40c);
+  dataTableGet(0x23,5);
+  temp_v0 = dataTableGetCount();
+  return temp_v0 + *(int *)(g_aocSystem + 0x40c);
 }
 
 } /* extern "C" */

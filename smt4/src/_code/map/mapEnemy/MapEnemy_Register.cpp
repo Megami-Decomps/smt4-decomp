@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002c498c(int, int, int, int, int);
-int FUN_002c4a08(unsigned char *, int, int, int, unsigned char *, unsigned char *, int, unsigned int);
+int asdMemAlloc(int, int, int, int, int);
+int taskCreateDraw(unsigned char *, int, int, int, unsigned char *, unsigned char *, int, unsigned int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -17,11 +17,11 @@ typedef struct {
 extern unsigned char LAB_001a8c44; /* 0x1a8c44 */
 extern unsigned char LAB_001d9294; /* 0x1d9294 */
 extern unsigned char LAB_0021eee8; /* 0x21eee8 */
-extern unsigned int *DAT_00447600; /* 0x447600 */
+extern unsigned int *g_mapEnemy; /* 0x447600 */
 
 extern int FUN_002c09f4(unsigned int);
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
 
 
 void MapEnemy_Register(unsigned int param_1)
@@ -36,10 +36,10 @@ void MapEnemy_Register(unsigned int param_1)
   unsigned int temp_v3;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x30f4,1);
+  asdMemAlloc(0x100,0x100,0,0x30f4,1);
   puVar2 = &LAB_001a8c44;
-  DAT_00447600 = puVar1;
-  FUN_002c4a08(&LAB_001a8c44,2,0,0,&LAB_001d9294,&LAB_0021eee8,0,param_1);
+  g_mapEnemy = puVar1;
+  taskCreateDraw(&LAB_001a8c44,2,0,0,&LAB_001d9294,&LAB_0021eee8,0,param_1);
   *puVar1 = (unsigned int)puVar2;
   puVar1[1] = 0;
   puVar1[2] = 0;

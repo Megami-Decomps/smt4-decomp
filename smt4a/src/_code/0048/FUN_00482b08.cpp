@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0016007c(void);
+int asdOperatorNew(void);
 int FUN_00481b3c(void);
 int FUN_00482610(unsigned int, unsigned int);
 int FUN_00482a5c(void);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00481b3c. */
 /* Supplied declaration required: FUN_00482610. */
 /* Supplied declaration required: FUN_00482a5c. */
@@ -39,7 +39,7 @@ unsigned int FUN_00482b08(int param_1,int param_2,unsigned int param_3)
   if (param_2 != 0) {
     if (param_2 == 1) {
       temp_v0 = 0xbc;
-      FUN_0016007c();
+      asdOperatorNew();
       if (temp_v0 != 0) {
         FUN_00482a5c();
       }
@@ -51,7 +51,7 @@ unsigned int FUN_00482b08(int param_1,int param_2,unsigned int param_3)
       return 0;
     }
     temp_v0 = 0xa4;
-    FUN_0016007c();
+    asdOperatorNew();
     if (temp_v0 != 0) {
       FUN_00481b3c();
     }

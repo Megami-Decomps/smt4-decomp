@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00187180(int, int);
+int dataTableGet(int, int);
 
 extern unsigned char LAB_0035ab3c; /* 0x35ab3c */
 
 extern int FUN_0014af84(void);
-/* Supplied declaration required: FUN_00187180. */
-extern int FUN_00192748(void);
-extern int FUN_00192798(void);
+/* Supplied declaration required: dataTableGet. */
+extern int dataTableGetCount(void);
+extern int dataTableGetEntries(void);
 
 
 unsigned char * FUN_0035aa90(int param_1)
@@ -24,14 +24,14 @@ unsigned char * FUN_0035aa90(int param_1)
   unsigned char *puVar4;
   int temp_v3;
   
-  FUN_00187180(0x4a,0);
-  temp_v0 = FUN_00192748();
+  dataTableGet(0x4a,0);
+  temp_v0 = dataTableGetCount();
   temp_v3 = 0;
   temp_v2 = 0;
   if (temp_v2 < temp_v0) {
     do {
-      FUN_00187180(0x4a,0);
-      temp_v1 = FUN_00192798();
+      dataTableGet(0x4a,0);
+      temp_v1 = dataTableGetEntries();
       puVar4 = (unsigned char *)(temp_v1 + temp_v2 * 0x2c);
       if ((puVar4 != (unsigned char *)0x0) &&
          (temp_v1 = FUN_0014af84(),

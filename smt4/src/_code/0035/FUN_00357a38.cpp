@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002399ec(int *);
-int FUN_002634f4(unsigned char [8]);
+int asdCecMessageIdInit(unsigned char [8]);
 int FUN_002ad66c(int *, int **);
 int FUN_002ad8b4(...);
 int FUN_002c567c(int **);
@@ -41,7 +41,7 @@ extern unsigned int DAT_004e62a8; /* 0x4e62a8 */
 extern unsigned int FUN_002393a4(unsigned int *, unsigned int *);
 extern int *FUN_002399bc(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002399ec. */
-/* Supplied declaration required: FUN_002634f4. */
+/* Supplied declaration required: asdCecMessageIdInit. */
 /* Supplied declaration required: FUN_002ad66c. */
 /* Supplied declaration required: FUN_002ad8b4. */
 /* Supplied declaration required: FUN_002c567c. */
@@ -111,7 +111,7 @@ int * FUN_00357a38(int *param_1,int param_2,int param_3,unsigned int param_4,int
   temp_v25 = param_4;
   nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62a8);
   temp_v8 = 0;
-  FUN_002634f4(temp_v12);
+  asdCecMessageIdInit(temp_v12);
   temp_v16 = 0;
   temp_v15 = 0;
   if ((*(char *)((int)param_1 + 9) == '\0') && (piVar3 = param_1, FUN_003588fc(), (int)piVar3 < 0))

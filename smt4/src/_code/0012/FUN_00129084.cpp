@@ -8,7 +8,7 @@ extern unsigned char DAT_0044e7c0; /* 0x44e7c0 */
 extern unsigned char DAT_0044e7c1; /* 0x44e7c1 */
 extern unsigned char DAT_0044e7c2; /* 0x44e7c2 */
 extern unsigned char DAT_0044e7c8; /* 0x44e7c8 */
-extern unsigned char DAT_004e6f64; /* 0x4e6f64 */
+extern unsigned char g_dspsndState; /* 0x4e6f64 */
 
 extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 extern void nn_snd_CTR_Dspsnd_Finalize(unsigned int, unsigned char);
@@ -20,7 +20,7 @@ void FUN_00129084(void)
   if ((DAT_0044e7c0 & ~DAT_0044e7c1) != 0) {
     nn_os_LightEvent_Initialize((unsigned int)&DAT_0044e7c8,1);
     DAT_0044e7c2 = 1;
-    nn_snd_CTR_Dspsnd_Finalize((unsigned int)&DAT_004e6f64,1);
+    nn_snd_CTR_Dspsnd_Finalize((unsigned int)&g_dspsndState,1);
     DAT_0044e7c1 = 1;
   }
   return;

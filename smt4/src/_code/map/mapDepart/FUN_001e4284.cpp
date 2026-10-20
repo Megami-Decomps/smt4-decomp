@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_2_stack;
 
-extern int DAT_00448c58; /* 0x448c58 */
+extern int g_mapTable; /* 0x448c58 */
 extern int DAT_00448c5c; /* 0x448c5c */
 extern int DAT_00448c64; /* 0x448c64 */
 extern unsigned int DAT_00448c68; /* 0x448c68 */
@@ -87,7 +87,7 @@ void FUN_001e4284(int param_1,int param_2)
     DAT_00448c84 = 0;
   }
   DAT_0049fcac = DAT_00448c84;
-  psVar2 = (short *)(DAT_00448c58 + DAT_00448c84 * 0x30);
+  psVar2 = (short *)(g_mapTable + DAT_00448c84 * 0x30);
   DAT_0049fcb4 = (int)*psVar2;
   DAT_0049fcb8 = (int)psVar2[1];
   DAT_0049fcbc = (int)psVar2[2];

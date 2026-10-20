@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002ec9f4(unsigned char [36]);
+int strDestroy(unsigned char [36]);
 int FUN_002ece14(unsigned char [36]);
 
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ece14. */
 extern int FUN_002fdef8(int, unsigned char *);
 extern int FUN_002fdfa6(int, unsigned char *, unsigned int);
@@ -26,10 +26,10 @@ unsigned char FUN_00301e8c(int param_1,unsigned int param_2,unsigned int param_3
   if (temp_v0 != 0) {
     temp_v0 = FUN_002fdfa6(param_1 + 4,temp_v2,param_3);
     temp_v1 = temp_v0 == 0;
-    FUN_002ec9f4(temp_v2);
+    strDestroy(temp_v2);
   }
   else {
-    FUN_002ec9f4(temp_v2);
+    strDestroy(temp_v2);
     temp_v1 = 0;
   }
   return temp_v1;

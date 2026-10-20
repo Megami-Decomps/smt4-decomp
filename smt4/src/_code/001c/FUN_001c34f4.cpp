@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_002c43b4(unsigned int, int);
+int jobStop(unsigned int, int);
 
-extern unsigned int FUN_00296cc8(void);
-extern int FUN_002bf244(void);
-/* Supplied declaration required: FUN_002c43b4. */
+extern unsigned int scrGetArg(void);
+extern int jobIsValid(void);
+/* Supplied declaration required: jobStop. */
 
 
 unsigned int FUN_001c34f4(void)
@@ -16,10 +16,10 @@ unsigned int FUN_001c34f4(void)
   unsigned int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00296cc8();
-  temp_v1 = FUN_002bf244();
+  temp_v0 = scrGetArg();
+  temp_v1 = jobIsValid();
   if (temp_v1 != 0) {
-    FUN_002c43b4(temp_v0,0);
+    jobStop(temp_v0,0);
   }
   return 1;
 }

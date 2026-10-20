@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_00162758(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001801a4(...);
 int FUN_0018349c(...);
 int FUN_0047fc38(void);
@@ -39,7 +39,7 @@ extern unsigned char LAB_0049627c; /* 0x49627c */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162758. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001801a4. */
 /* Supplied declaration required: FUN_0018349c. */
 extern unsigned int FUN_001ba3d0(unsigned int);
@@ -105,27 +105,27 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v16 = (int)*(short *)(temp_v7 + 8);
   temp_v7 = (int)*(short *)(temp_v7 + 10);
   if (param_3 != 0) {
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_004934ac(param_1 + 0x3a4,0x47,temp_v16,temp_v7,temp_v14);
     FUN_004934ac(param_1 + 0x3a4,0x48,temp_v16,temp_v7,temp_v14);
     FUN_004934ac(param_1 + 0x3a4,0x49,temp_v16,temp_v7,temp_v14);
-    FUN_001677c0();
+    efctSetSpeed();
     FUN_0049368c(param_1 + 0x3a4,0x4a,temp_v16,temp_v7,temp_v14,1);
     if (*(char *)(param_1 + 0xb19) != '\0') {
       FUN_004934ac(param_1 + 0x3a4,0x108,temp_v16,temp_v7,temp_v14);
       FUN_004934ac(param_1 + 0x3a4,0x109,temp_v16,temp_v7,temp_v14);
       FUN_004934ac(param_1 + 0x3a4,0x10a,temp_v16,temp_v7,temp_v14);
-      FUN_001677c0();
+      efctSetSpeed();
       FUN_004934ac(param_1 + 0x3a4,0x10b,temp_v16,temp_v7,temp_v14);
-      FUN_001677c0();
+      efctSetSpeed();
     }
     else {
       FUN_004934ac(param_1 + 0x3a4,0x4b,temp_v16,temp_v7,temp_v14);
       FUN_004934ac(param_1 + 0x3a4,0x4c,temp_v16,temp_v7,temp_v14);
       FUN_004934ac(param_1 + 0x3a4,0x4d,temp_v16,temp_v7,temp_v14);
-      FUN_001677c0();
+      efctSetSpeed();
       FUN_004934ac(param_1 + 0x3a4,0x105,temp_v16,temp_v7,temp_v14);
-      FUN_001677c0();
+      efctSetSpeed();
     }
     temp_v8 = FUN_0018349c(param_1 + 0x3a4,0xac);
   }

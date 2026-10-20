@@ -18,7 +18,7 @@ extern int DAT_00464b8c; /* 0x464b8c */
 extern int DAT_004dad80; /* 0x4dad80 */
 
 /* Supplied declaration required: FUN_0019df1c. */
-extern unsigned int *FUN_0025bc18(unsigned int, unsigned int, unsigned int);
+extern unsigned int *asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002abb24. */
 
 
@@ -43,7 +43,7 @@ void FUN_002a0400(int param_1,unsigned int param_2,unsigned int param_3)
   unsigned int *puVar1;
   unsigned int temp_v0;
   
-  puVar1 = (unsigned int *)FUN_0025bc18(param_2,param_3,7);
+  puVar1 = (unsigned int *)asdMdlManagerCreateFromSource(param_2,param_3,7);
   *(unsigned int **)(param_1 + 0x28) = puVar1;
   *puVar1 = *puVar1 & 0xffdfffff;
   temp_v0 = puVar1[2];

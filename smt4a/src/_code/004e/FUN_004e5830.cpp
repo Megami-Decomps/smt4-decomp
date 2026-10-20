@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3d04(void);
+int asdOperatorNewD(void);
 int FUN_002e6490(int);
 int FUN_003f0e20(int, int);
 int FUN_004c60c0(unsigned int, int);
@@ -31,7 +31,7 @@ extern unsigned int DAT_005712e0; /* 0x5712e0 */
 extern unsigned int DAT_005712e4; /* 0x5712e4 */
 
 extern int FUN_001633a0(unsigned int);
-/* Supplied declaration required: FUN_002e3d04. */
+/* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: FUN_002e6490. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004c60c0. */
@@ -63,7 +63,7 @@ void FUN_004e5830(int *param_1,unsigned int param_2,unsigned int param_3)
   temp_v1 = 1;
   temp_v2 = 0x10;
   piVar9 = param_1;
-  FUN_002e3d04();
+  asdOperatorNewD();
   temp_v6 = 0;
   do {
     puVar7 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v5 * 0x408);

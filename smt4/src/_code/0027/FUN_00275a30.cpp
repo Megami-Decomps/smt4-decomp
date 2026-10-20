@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_004474d8; /* 0x4474d8 */
+extern int g_mapDepartWork; /* 0x4474d8 */
 
 /* Supplied declaration required: FUN_0028c668. */
 /* Supplied declaration required: FUN_0029bb14. */
@@ -26,43 +26,43 @@ void FUN_00275a30(void)
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  puVar1 = *(unsigned int **)(DAT_004474d8 + 0xc);
+  puVar1 = *(unsigned int **)(g_mapDepartWork + 0xc);
   if (puVar1 != (unsigned int *)0x0) {
     temp_v1 = *puVar1;
-    if (*(char *)(DAT_004474d8 + 10) != '\0') {
+    if (*(char *)(g_mapDepartWork + 10) != '\0') {
       if ((temp_v1 & 2) != 0) {
         *puVar1 = temp_v1 & 0xfffffffd;
         *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 1;
-        FUN_0029bb14(*(unsigned int *)(*(int *)(DAT_004474d8 + 0xc) + 8));
-        temp_v0 = *(unsigned int *)(*(int *)(DAT_004474d8 + 0xc) + 8);
+        FUN_0029bb14(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8));
+        temp_v0 = *(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8);
         FUN_0028c668(temp_v0);
       }
     }
     else if ((temp_v1 & 2) == 0) {
       *puVar1 = temp_v1 | 2;
       *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-      FUN_0029bb14(*(unsigned int *)(*(int *)(DAT_004474d8 + 0xc) + 8));
-      temp_v0 = *(unsigned int *)(*(int *)(DAT_004474d8 + 0xc) + 8);
+      FUN_0029bb14(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8));
+      temp_v0 = *(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8);
       FUN_0028c668(temp_v0);
     }
   }
-  puVar1 = *(unsigned int **)(DAT_004474d8 + 0x10);
+  puVar1 = *(unsigned int **)(g_mapDepartWork + 0x10);
   if (puVar1 != (unsigned int *)0x0) {
     temp_v1 = *puVar1;
-    if (*(char *)(DAT_004474d8 + 10) != '\0') {
+    if (*(char *)(g_mapDepartWork + 10) != '\0') {
       if ((temp_v1 & 2) != 0) {
         *puVar1 = temp_v1 & 0xfffffffd;
         *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 1;
-        FUN_0029bb14(*(unsigned int *)(*(int *)(DAT_004474d8 + 0x10) + 8));
-        FUN_0028c668(*(unsigned int *)(*(int *)(DAT_004474d8 + 0x10) + 8));
+        FUN_0029bb14(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8));
+        FUN_0028c668(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8));
         return;
       }
     }
     else if ((temp_v1 & 2) == 0) {
       *puVar1 = temp_v1 | 2;
       *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-      FUN_0029bb14(*(unsigned int *)(*(int *)(DAT_004474d8 + 0x10) + 8));
-      FUN_0028c668(*(unsigned int *)(*(int *)(DAT_004474d8 + 0x10) + 8));
+      FUN_0029bb14(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8));
+      FUN_0028c668(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8));
       return;
     }
   }

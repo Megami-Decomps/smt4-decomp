@@ -41,8 +41,8 @@ typedef struct {
     unsigned char sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern int DAT_00570260; /* 0x570260 */
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern int g_aocMain; /* 0x570260 */
+extern unsigned char g_gameState; /* 0x5f15fc */
 extern int DAT_005f1c98; /* 0x5f1c98 */
 extern unsigned int DAT_005f1c9c; /* 0x5f1c9c */
 extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
@@ -80,9 +80,9 @@ void FUN_004b8f18(fn_004b8f18_arg0 *param_1)
     if (param_1->field_0x2c != 1) {
       return;
     }
-    temp_v0 = FUN_0047e150(DAT_00570260 + 0xa8);
+    temp_v0 = FUN_0047e150(g_aocMain + 0xa8);
     if (temp_v0 != 0) {
-      FUN_0037b3fc(DAT_00570260 + 0xa8);
+      FUN_0037b3fc(g_aocMain + 0xa8);
       if (DAT_005f1c98 >= 0) {
         temp_v5 = 0;
         temp_v6 = 0;
@@ -105,7 +105,7 @@ void FUN_004b8f18(fn_004b8f18_arg0 *param_1)
         param_1->field_0x2c = 0;
         param_1->field_0x28 = 5;
       }
-      else if ((*(int *)((unsigned char *)&DAT_005f15fc + 0x5c)) != 0) {
+      else if ((*(int *)((unsigned char *)&g_gameState + 0x5c)) != 0) {
         temp_v5 = 0;
         temp_v6 = 0;
         temp_v7 = 0;
@@ -133,8 +133,8 @@ void FUN_004b8f18(fn_004b8f18_arg0 *param_1)
         return;
       }
     }
-    temp_v1 = *(unsigned int *)(DAT_00570260 + 0x754);
-    *(unsigned int *)(DAT_00570260 + 0x754) = temp_v1 & 0xffffff8f;
+    temp_v1 = *(unsigned int *)(g_aocMain + 0x754);
+    *(unsigned int *)(g_aocMain + 0x754) = temp_v1 & 0xffffff8f;
     if ((temp_v1 & 0x10) != 0) {
       param_1->field_0x28 = 0xf;
       param_1->field_0x2c = 0;
@@ -143,7 +143,7 @@ void FUN_004b8f18(fn_004b8f18_arg0 *param_1)
   }
   else {
     FUN_00261a14(0);
-    FUN_00341fa4(DAT_00570260 + 0xa8,1);
+    FUN_00341fa4(g_aocMain + 0xa8,1);
     param_1->field_0x2c = 1;
   }
   return;

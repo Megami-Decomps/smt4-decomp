@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_0016a0f0(...);
 int FUN_00203b40(int, unsigned int, int, int, int, int);
 int FUN_002a1f60(...);
@@ -16,10 +16,10 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 extern int DAT_00588fe8; /* 0x588fe8 */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern unsigned int FUN_001688c4(unsigned int);
 /* Supplied declaration required: FUN_0016a0f0. */
 /* Supplied declaration required: FUN_00203b40. */
@@ -45,11 +45,11 @@ void FUN_00333de0(int param_1)
     temp_v1 = FUN_002c7e3c();
     if (temp_v1 == 0xe || temp_v1 == 7) {
       temp_v2 = 0x33;
-      FUN_001681cc(temp_v2);
+      sysPlaySe(temp_v2);
     }
     else if ((!(temp_v1 == 9 || temp_v1 == 10)) && (!(temp_v1 == 0xc || temp_v1 == 8))) {
       if ((temp_v1 != 2 && temp_v1 != 4) && temp_v1 != 0x11) {
-        FUN_001681cc(0x2d);
+        sysPlaySe(0x2d);
       }
       else {
         temp_v1 = FUN_003c1644();
@@ -59,17 +59,17 @@ void FUN_00333de0(int param_1)
         else {
           temp_v2 = 0xfa;
         }
-        FUN_001681cc(temp_v2);
+        sysPlaySe(temp_v2);
       }
     }
     else {
       temp_v2 = 0x62;
-      FUN_001681cc(temp_v2);
+      sysPlaySe(temp_v2);
     }
   }
   *(short *)(temp_v0 + 0x598) = (short)param_1;
   if ((param_1 >= 0) && (temp_v1 = FUN_0031f6fc(), temp_v1 != 0)) {
-    temp_v1 = FUN_0046fca8(DAT_00570280,param_1);
+    temp_v1 = FUN_0046fca8(g_aocSystem,param_1);
     if (temp_v1 == 0) {
       temp_v1 = FUN_0016a0f0();
     }

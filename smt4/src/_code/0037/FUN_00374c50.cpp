@@ -69,7 +69,7 @@ typedef struct {
     unsigned int sp158; /* 0x158: local_158 */
 } param_3_stack;
 
-extern unsigned int *DAT_004652a0; /* 0x4652a0 */
+extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
 extern unsigned int DAT_00476634; /* 0x476634 */
 extern unsigned int DAT_004efd6c; /* 0x4efd6c */
 extern unsigned int DAT_004efd70; /* 0x4efd70 */
@@ -181,8 +181,8 @@ void FUN_00374c50(int param_1,int param_2,int param_3)
   temp_v45[2] = 0x2100;
   temp_v45[3] = 0x2200;
   temp_v45[4] = 0x100;
-  *DAT_004652a0 = temp_v45[*(unsigned int *)(param_3 + 0x1c) & 0xff] | 0x1000;
-  DAT_004652a0[1] = 0xa0080;
+  *g_commandBufferCursor = temp_v45[*(unsigned int *)(param_3 + 0x1c) & 0xff] | 0x1000;
+  g_commandBufferCursor[1] = 0xa0080;
   temp_v44[0] = 0.0f;
   temp_v44[1] = 0.0f;
   temp_v44[2] = 0.0f;
@@ -194,7 +194,7 @@ void FUN_00374c50(int param_1,int param_2,int param_3)
   else {
     temp_v2 = *(unsigned int *)(param_2 + 0x14) & 0xffffd9ff;
   }
-  DAT_004652a0 = DAT_004652a0 + 2;
+  g_commandBufferCursor = g_commandBufferCursor + 2;
   *(unsigned int *)(param_2 + 0x14) = temp_v0;
   *(unsigned int *)(param_2 + 0x14) = temp_v2 & 0xfffff7ff;
   if (temp_v4 >= 3) {
@@ -402,7 +402,7 @@ void FUN_00374c50(int param_1,int param_2,int param_3)
           nn_math_ARMv6_MTX34MultAsm(&temp_v11,&temp_v11,temp_v5 + 0x148);
           temp_v21 = 1.4013e-45f;
         }
-        puVar1 = DAT_004652a0;
+        puVar1 = g_commandBufferCursor;
         temp_v5 = 3;
         if (temp_v3 == 2) {
           temp_v5 = 2;
@@ -412,50 +412,50 @@ void FUN_00374c50(int param_1,int param_2,int param_3)
           if (temp_v5 != 2) {
             if (temp_v5 != 3) {
               if (temp_v5 == 4) {
-                *DAT_004652a0 = temp_v0;
+                *g_commandBufferCursor = temp_v0;
                 puVar1[1] = 0xf02c0;
                 FUN_002a18ac(puVar1 + 2,&temp_v11,0xff02c1);
-                DAT_004652a0 = DAT_004652a0 + 0x14;
+                g_commandBufferCursor = g_commandBufferCursor + 0x14;
               }
             }
             else {
-              *DAT_004652a0 = temp_v0;
+              *g_commandBufferCursor = temp_v0;
               puVar1[1] = 0xf02c0;
               FUN_002a1828(puVar1 + 2,&temp_v11,0xbf02c1);
-              DAT_004652a0 = DAT_004652a0 + 0x10;
+              g_commandBufferCursor = g_commandBufferCursor + 0x10;
             }
           }
           else {
-            puVar4 = DAT_004652a0 + 2;
-            *DAT_004652a0 = temp_v0;
+            puVar4 = g_commandBufferCursor + 2;
+            *g_commandBufferCursor = temp_v0;
             puVar1[1] = 0x808f02c0;
             nw_gfx_internal_NWCopyMtx24Reverse(puVar4,&temp_v11);
-            DAT_004652a0 = DAT_004652a0 + 10;
+            g_commandBufferCursor = g_commandBufferCursor + 10;
           }
         }
         else {
-          puVar4 = DAT_004652a0 + 2;
-          *DAT_004652a0 = temp_v0;
+          puVar4 = g_commandBufferCursor + 2;
+          *g_commandBufferCursor = temp_v0;
           puVar1[1] = 0x804f02c0;
           nw_gfx_internal_NWCopyVec4Reverse(puVar4,&temp_v11);
-          DAT_004652a0 = DAT_004652a0 + 6;
+          g_commandBufferCursor = g_commandBufferCursor + 6;
         }
       }
-      puVar1 = DAT_004652a0;
+      puVar1 = g_commandBufferCursor;
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < temp_v4);
     if (temp_v21 != 0.0f) {
-      *DAT_004652a0 = 0x80000013;
+      *g_commandBufferCursor = 0x80000013;
       puVar1[1] = 0x804f02c0;
       nw_gfx_internal_NWCopyVec4Reverse(puVar1 + 2,&temp_v28);
-      DAT_004652a0 = DAT_004652a0 + 6;
+      g_commandBufferCursor = g_commandBufferCursor + 6;
     }
   }
-  puVar1 = DAT_004652a0;
-  *DAT_004652a0 = 0x8000000a;
+  puVar1 = g_commandBufferCursor;
+  *g_commandBufferCursor = 0x8000000a;
   puVar1[1] = 0x804f02c0;
   nw_gfx_internal_NWCopyVec3Reverse(puVar1 + 2,temp_v44);
-  DAT_004652a0 = DAT_004652a0 + 6;
+  g_commandBufferCursor = g_commandBufferCursor + 6;
   return;
 }
 

@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00100388(unsigned char [32], unsigned char *, unsigned int);
-int FUN_00236038(int);
+int scrGetArg(int);
 
 extern unsigned char LAB_00368c74; /* 0x368c74 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: scrGetArg. */
 
 
 unsigned int FUN_00368c24(void)
@@ -20,11 +20,11 @@ unsigned int FUN_00368c24(void)
   unsigned int temp_v0;
   unsigned char temp_v1 [32];
   
-  temp_v0 = FUN_00236038(0);
-  FUN_00236038(1);
-  FUN_00236038(2);
-  FUN_00236038(3);
-  FUN_00236038(4);
+  temp_v0 = scrGetArg(0);
+  scrGetArg(1);
+  scrGetArg(2);
+  scrGetArg(3);
+  scrGetArg(4);
   FUN_00100388(temp_v1,&LAB_00368c74,temp_v0);
   return 1;
 }

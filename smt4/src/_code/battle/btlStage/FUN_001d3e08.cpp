@@ -13,7 +13,7 @@ typedef struct {
 
 extern unsigned char DAT_004398d0; /* 0x4398d0 */
 
-extern unsigned int FUN_002c08f0(void);
+extern unsigned int jobGetWork(void);
 /* Supplied declaration required: FUN_003c81c8. */
 
 
@@ -23,7 +23,7 @@ void FUN_001d3e08(void)
 /* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   if ((*(int *)((unsigned char *)&DAT_004398d0 + 0x4)) != 0) {
     FUN_003c81c8((*(int *)((unsigned char *)&DAT_004398d0 + 0x4)),temp_v0);
     return;

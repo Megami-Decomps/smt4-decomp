@@ -2,16 +2,16 @@
 
 extern "C" {
 
-int FUN_00180008(int);
+int jyoucyuGetTableEntry(int);
 
-/* Supplied declaration required: FUN_00180008. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 
 
 void FUN_0047f664(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_00180008(1);
+  jyoucyuGetTableEntry(1);
   return;
 }
 

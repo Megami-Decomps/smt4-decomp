@@ -2,16 +2,16 @@
 
 extern "C" {
 
-int FUN_0030fee0(void);
+int streamWriterPatchSizePrefix(void);
 
-/* Supplied declaration required: FUN_0030fee0. */
+/* Supplied declaration required: streamWriterPatchSizePrefix. */
 
 
 unsigned int FUN_002ee9ce(int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_0030fee0();
+  streamWriterPatchSizePrefix();
   return *(unsigned int *)(param_1 + 8);
 }
 

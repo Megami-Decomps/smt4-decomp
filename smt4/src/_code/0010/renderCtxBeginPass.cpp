@@ -1,0 +1,34 @@
+#include "title/titleMain.h"
+
+extern "C" {
+
+void FUN_002bdb44(void);
+void FUN_002c3530(s32 a, s32 b);
+void FUN_002c35b0(s32 arg);
+void FUN_002c39a4(TitleScene *scene);
+void FUN_002c3a14(TitleScene *scene);
+s32 FUN_002c5210(void);
+
+extern TitleScene *g_titleScene;
+extern struct {
+    u8 unk00;
+    s8 unk01;
+} DAT_00446db0;
+
+u32 renderCtxBeginPass(void)
+{
+    if (FUN_002c5210() == 1 && DAT_00446db0.unk01 != 0) {
+        TitleScene *scene;
+
+        FUN_002c35b0(1);
+        scene = g_titleScene;
+        scene->unk528 = 1;
+        FUN_002bdb44();
+        FUN_002c3530(1, 0);
+        FUN_002c3a14(g_titleScene);
+        FUN_002c39a4(g_titleScene);
+    }
+    return 0;
+}
+
+} /* extern "C" */

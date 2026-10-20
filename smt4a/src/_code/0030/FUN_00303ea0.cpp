@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned char *, int);
+int sysMemClear(unsigned char *, int);
 int FUN_00356308(void);
 
 extern int DAT_005806d8; /* 0x5806d8 */
-extern unsigned int DAT_005f15fc; /* 0x5f15fc */
+extern unsigned int g_gameState; /* 0x5f15fc */
 extern unsigned char DAT_005f2c20; /* 0x5f2c20 */
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00356308. */
 extern int FUN_003a3038(void);
 
@@ -29,10 +29,10 @@ void FUN_00303ea0(void)
   temp_v0 = 0;
   FUN_00356308();
   if (temp_v0 != 0) {
-    FUN_002e6354(&DAT_005f2c20,0x400);
+    sysMemClear(&DAT_005f2c20,0x400);
     temp_v0 = FUN_003a3038();
     if (0 < temp_v0) {
-      unaff_r6 = (int *)&DAT_005f15fc;
+      unaff_r6 = (int *)&g_gameState;
       unaff_r8 = &DAT_005f2c20;
     }
     pcVar3 = (char *)0x0;

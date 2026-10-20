@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0058103c; /* 0x58103c */
+extern int g_mapIf; /* 0x58103c */
 
 
 void FUN_00378a1c(void)
@@ -15,7 +15,7 @@ void FUN_00378a1c(void)
   int temp_v2;
   int temp_v3;
   
-  temp_v0 = DAT_0058103c;
+  temp_v0 = g_mapIf;
   temp_v1 = 0;
   do {
     temp_v3 = temp_v0 + temp_v1 * 0x194;

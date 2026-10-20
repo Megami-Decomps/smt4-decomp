@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_002b2f08(void);
 int FUN_0036bc10(int);
 
@@ -15,7 +15,7 @@ typedef struct {
 
 extern int DAT_00636e00; /* 0x636e00 */
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002b2f08. */
 /* Supplied declaration required: FUN_0036bc10. */
 
@@ -98,12 +98,12 @@ void FUN_003627bc(int param_1)
     }
   }
   if (*(int *)(param_1 + 0xa4) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
   }
   if (*(int *)(param_1 + 0x54) != 0) {
     *(unsigned int *)(param_1 + 0x54) = 0;
   }
-  FUN_0019a5a0(param_1);
+  asdMemFree(param_1);
   return;
 }
 

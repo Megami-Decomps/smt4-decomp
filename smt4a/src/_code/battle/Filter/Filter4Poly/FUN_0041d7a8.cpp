@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001630d4(int, int, int, int, int);
-int FUN_0019a0e8(int, unsigned int);
+int asdMemoryAlloc(int, int, int, int, int);
+int mtx44Copy(int, unsigned int);
 int FUN_001acf98(int, unsigned int);
 int FUN_003a4958(int, unsigned int);
 int FUN_003a496c(int, unsigned int);
@@ -17,9 +17,9 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 extern unsigned int FUN_0018aeb8(void);
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_003a4958. */
 /* Supplied declaration required: FUN_003a496c. */
@@ -36,10 +36,10 @@ void FUN_0041d7a8(int *param_1,int param_2,unsigned int param_3)
   
   param_1[7] = param_2;
   temp_v0 = 0x100;
-  FUN_001630d4(0x100,0x100,0,0xa0,1);
+  asdMemoryAlloc(0x100,0x100,0,0xa0,1);
   param_1[1] = temp_v0;
   temp_v0 = 0x100;
-  FUN_001630d4(0x100,0x100,0,0x88,1);
+  asdMemoryAlloc(0x100,0x100,0,0x88,1);
   temp_v2 = 0;
   param_1[6] = temp_v0;
   do {
@@ -66,7 +66,7 @@ void FUN_0041d7a8(int *param_1,int param_2,unsigned int param_3)
   do {
     temp_v2 = param_1[6];
     temp_v1 = FUN_0018aeb8();
-    FUN_0019a0e8(temp_v2 + temp_v0 * 0x44,temp_v1);
+    mtx44Copy(temp_v2 + temp_v0 * 0x44,temp_v1);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 2);
   return;

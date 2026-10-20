@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0019cac4(void);
-int FUN_003fc0b8(unsigned int, int);
+int aocHandleButtons(unsigned int, int);
 int FUN_003fce8c(unsigned int, int);
 int FUN_004cae0c(int, int, int);
 int FUN_004cb90c(int);
@@ -21,10 +21,10 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern int DAT_00571508; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
-extern int DAT_00573920; /* 0x573920 */
+extern int g_btlMain; /* 0x573920 */
 extern unsigned int DAT_00573978; /* 0x573978 */
 extern unsigned int DAT_0057397c; /* 0x57397c */
 extern unsigned int DAT_005739b8; /* 0x5739b8 */
@@ -38,14 +38,14 @@ extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
 /* Supplied declaration required: FUN_0019cac4. */
 extern unsigned int FUN_003ec620(int, unsigned int);
-/* Supplied declaration required: FUN_003fc0b8. */
+/* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003fce8c. */
 extern int FUN_003fcf5c(unsigned int);
 extern unsigned int FUN_00409fe8(int, unsigned int);
 /* Supplied declaration required: FUN_004cae0c. */
 /* Supplied declaration required: FUN_004cb90c. */
-extern unsigned int FUN_004ee568(unsigned int);
+extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004f9450. */
 /* Supplied declaration required: FUN_004fd204. */
 /* Supplied declaration required: FUN_004fe764. */
@@ -90,7 +90,7 @@ unsigned int FUN_003ea2b0(int param_1,unsigned int param_2)
             return 0;
           }
           *(unsigned int *)(param_1 + 0x201c) = *(unsigned int *)(param_1 + 0x201c) | 1;
-          FUN_003fc0b8(temp_v4,7);
+          aocHandleButtons(temp_v4,7);
         }
         if ((*(unsigned int *)(param_1 + 0x201c) & 2) == 0) {
           temp_v6 = FUN_003fce08(temp_v4,1);
@@ -127,7 +127,7 @@ unsigned int FUN_003ea2b0(int param_1,unsigned int param_2)
           }
         } while ((!temp_v9 && temp_v7 != 3) && (temp_v9 || temp_v7 >= 3));
         temp_v11 = 0;
-        temp_v8 = *(int *)(DAT_00573920 + 0x1ed4) + temp_v7 * 0x1d0;
+        temp_v8 = *(int *)(g_btlMain + 0x1ed4) + temp_v7 * 0x1d0;
         *(unsigned int *)(temp_v8 + 0x50) = 0x20483;
         *(short *)(temp_v8 + 0x68) = (short)temp_v6;
         *(unsigned int *)(temp_v8 + 0xc) = 0;
@@ -149,13 +149,13 @@ unsigned int FUN_003ea2b0(int param_1,unsigned int param_2)
         temp_v1 = (short)DAT_0057a64c;
         temp_v2 = (short)DAT_0057a63c;
         FUN_004cae0c(param_1,temp_v8,0);
-        temp_v4 = FUN_004ee568(DAT_0057113c);
+        temp_v4 = btlUnitGet(g_btlScriptUnit);
         FUN_004fd204((int)temp_v1 + (int)temp_v0,temp_v4,temp_v8,0xff,(int)temp_v2,0);
         temp_v4 = 6;
         if ((*(unsigned int *)(temp_v8 + 0x50) & 0x10) != 0) {
           temp_v4 = 7;
         }
-        temp_v11 = FUN_004ee568(DAT_0057113c);
+        temp_v11 = btlUnitGet(g_btlScriptUnit);
         FUN_004fe764((int)temp_v1,temp_v11,temp_v8,temp_v4,0xd);
         return 1;
       }

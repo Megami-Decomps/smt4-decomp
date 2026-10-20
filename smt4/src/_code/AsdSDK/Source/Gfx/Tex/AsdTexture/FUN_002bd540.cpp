@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002a666c(unsigned int, unsigned int, unsigned int);
 int FUN_002a66e0(unsigned int, unsigned int, int);
 int FUN_002bf0d8(void);
-int FUN_002c5300(int, int, int, unsigned int);
+int asdMemoryAlloc(int, int, int, unsigned int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(int, int);
 
@@ -24,7 +24,7 @@ extern unsigned int FUN_002bc11c(unsigned int);
 /* Supplied declaration required: FUN_002bf0d8. */
 extern int FUN_002c3984(void);
 extern unsigned int FUN_002c3994(void);
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 void FUN_002bd540(int param_1)
@@ -69,13 +69,13 @@ void FUN_002bd540(int param_1)
     if (temp_v1 != 0x20000) {
       if (temp_v1 == 0x30000) {
         temp_v2 = 0x30000;
-        FUN_002c5300(0x30000,0x100,0,temp_v5);
+        asdMemoryAlloc(0x30000,0x100,0,temp_v5);
         *(unsigned int *)(param_1 + 0x44) = temp_v2;
       }
     }
     else {
       temp_v2 = 0x20000;
-      FUN_002c5300(0x20000,0x100,0,temp_v5);
+      asdMemoryAlloc(0x20000,0x100,0,temp_v5);
       *(unsigned int *)(param_1 + 0x44) = temp_v2;
     }
   }
@@ -91,13 +91,13 @@ void FUN_002bd540(int param_1)
     if (temp_v1 != 0x20000) {
       if (temp_v1 == 0x30000) {
         temp_v2 = 0x30000;
-        FUN_002c5300(0x30000,0x100,0,temp_v5);
+        asdMemoryAlloc(0x30000,0x100,0,temp_v5);
         *(unsigned int *)(param_1 + 0x44) = temp_v2;
       }
     }
     else {
       temp_v2 = 0x20000;
-      FUN_002c5300(0x20000,0x100,0,temp_v5);
+      asdMemoryAlloc(0x20000,0x100,0,temp_v5);
       *(unsigned int *)(param_1 + 0x44) = temp_v2;
     }
   }

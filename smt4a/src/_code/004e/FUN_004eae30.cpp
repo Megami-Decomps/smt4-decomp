@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_00368cac(...);
 int FUN_00368d74(...);
 int FUN_00368e10(...);
@@ -34,11 +34,11 @@ typedef struct {
     unsigned int spA0; /* 0xa0: local_a0 */
 } param_4_stack;
 
-extern int DAT_00571138; /* 0x571138 */
+extern int g_btlAction; /* 0x571138 */
 extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00368cac. */
 /* Supplied declaration required: FUN_00368d74. */
 /* Supplied declaration required: FUN_00368e10. */
@@ -50,7 +50,7 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 /* Supplied declaration required: FUN_004c3ac0. */
 /* Supplied declaration required: FUN_004c3cb0. */
 /* Supplied declaration required: FUN_004c8340. */
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
@@ -88,17 +88,17 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
     return;
   }
   if (param_3 != -1) {
-    if (DAT_00571138 == param_3) {
+    if (g_btlAction == param_3) {
       return;
     }
     temp_v0 = *(int *)(*param_1 + 0x1ed4);
-    DAT_00571138 = param_3;
+    g_btlAction = param_3;
     FUN_003e7fa4(*param_1,param_3,0);
     temp_v1 = *param_1;
     FUN_003f0e20(temp_v1,(int)*(short *)(temp_v0 + param_3 * 0x1d0 + 0x6a));
-    temp_v0 = aeabi_idivmod(*(int *)(temp_v1 + 600) * 100,*(unsigned int *)(temp_v1 + 0x25c));
+    temp_v0 = __aeabi_idivmod(*(int *)(temp_v1 + 600) * 100,*(unsigned int *)(temp_v1 + 0x25c));
     temp_v11[2] = (unsigned int)(temp_v0 < 0x14);
-    temp_v2 = FUN_0014aa78();
+    temp_v2 = btlGetMainState();
     FUN_003e8bb0(temp_v13,temp_v2,*(unsigned int *)(param_4 + 0x20));
     switch(*(unsigned short *)(*(int *)(param_4 + 0x28) + 0x1be)) {
     case 7:
@@ -111,7 +111,7 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
       break;
     default:
       temp_v4 = 0;
-      temp_v0 = FUN_0014aa78();
+      temp_v0 = btlGetMainState();
       FUN_003f0e20(temp_v0,param_3);
       if (temp_v0 != 0) {
         temp_v9 = 0;
@@ -211,10 +211,10 @@ LAB_004eafdc:
       uStack_6c = in_s1;
       uStack_68 = in_s2;
       temp_v5 = *(int *)(*param_1 + 0x1ffc) + temp_v11[temp_v0 + 1] * 0x408 + 0x164;
-      temp_v4 = aeabi_idivmod(*(int *)(temp_v5 + 0xf4) * 100,*(unsigned int *)(temp_v5 + 0xf8));
+      temp_v4 = __aeabi_idivmod(*(int *)(temp_v5 + 0xf4) * 100,*(unsigned int *)(temp_v5 + 0xf8));
       temp_v1 = temp_v9;
       temp_v15 = (unsigned int)(temp_v4 < 0x14);
-      temp_v2 = FUN_0014aa78();
+      temp_v2 = btlGetMainState();
       FUN_003e8bb0(&temp_v16,temp_v2,*(unsigned int *)(param_4 + 0x20));
       switch(*(unsigned short *)(*(int *)(param_4 + 0x28) + 0x1be)) {
       case 7:
@@ -227,7 +227,7 @@ LAB_004eafdc:
         break;
       default:
         temp_v7 = 0;
-        temp_v4 = FUN_0014aa78();
+        temp_v4 = btlGetMainState();
         FUN_003f0e20(temp_v4,temp_v1);
         if (temp_v4 != 0) {
           temp_v10 = 0;

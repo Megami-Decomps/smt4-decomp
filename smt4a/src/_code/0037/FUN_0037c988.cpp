@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_001835b4(...);
 int FUN_003b6354(...);
 int FUN_003c33e8(...);
@@ -24,9 +24,9 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } param_6_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -101,8 +101,8 @@ void FUN_0037c988(int param_1,unsigned int param_2,int param_3,int param_4,unsig
         temp_v3 = FUN_002a4894(temp_v8);
         if (*(short *)(param_1 + temp_v5 * 2 + 0x8b60) ==
             *(short *)(param_1 + (temp_v3 + temp_v2) * 2 + 0x8b70)) {
-          FUN_001677c0();
-          temp_v2 = DAT_0059dbb4;
+          efctSetSpeed();
+          temp_v2 = g_renderCtx;
           temp_v3 = FUN_00169294(6,1,0);
           piVar7 = (int *)(temp_v2 + 0x12b8);
           temp_v4 = piVar7[*piVar7 + 2];
@@ -113,7 +113,7 @@ void FUN_0037c988(int param_1,unsigned int param_2,int param_3,int param_4,unsig
           }
           FUN_001835b4(2,0x1a,0x173,*(short *)(temp_v1 + 8) + temp_v6,
                        *(short *)(temp_v1 + 10) + temp_v7,0x65);
-          temp_v1 = DAT_0059dbb4;
+          temp_v1 = g_renderCtx;
           temp_v2 = FUN_00169294(6,7,0);
           piVar7 = (int *)(temp_v1 + 0x12b8);
           temp_v3 = piVar7[*piVar7 + 2];
@@ -124,7 +124,7 @@ void FUN_0037c988(int param_1,unsigned int param_2,int param_3,int param_4,unsig
           }
         }
       }
-      FUN_001677c0();
+      efctSetSpeed();
     }
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 8);

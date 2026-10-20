@@ -8,7 +8,7 @@ int FUN_002e6e26(void);
 int FUN_002e6e34(unsigned char [16], int);
 int FUN_002e6e5c(unsigned char [16]);
 int FUN_002e78d0(unsigned int, int, int);
-int FUN_002ec9f4(unsigned char [32]);
+int strDestroy(unsigned char [32]);
 int FUN_002ece14(unsigned char [32], unsigned int);
 
 /* stack frame of param_7: 3 slot(s), 12 byte(s) */
@@ -25,7 +25,7 @@ extern int FUN_001059f4(int, unsigned int, unsigned int, unsigned int, unsigned 
 extern int FUN_002e760a(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ece14. */
 
 
@@ -63,7 +63,7 @@ FUN_00111482(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
     *(unsigned int *)(temp_v0 + 0x90) = param_6;
     temp_v2 = FUN_002e6e26();
     FUN_002e78d0(temp_v2,temp_v0,0);
-    FUN_002ec9f4(temp_v3);
+    strDestroy(temp_v3);
     FUN_002e6e5c(temp_v4);
     temp_v2 = 1;
   }

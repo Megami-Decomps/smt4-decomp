@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00163aa4(int);
 int FUN_00167458(int, int);
-int FUN_001681cc(unsigned int);
+int sysPlaySe(unsigned int);
 int FUN_00183f58(unsigned int, unsigned int, unsigned int, int);
 int FUN_001a90e0(int);
 int FUN_0031879c(void);
@@ -16,7 +16,7 @@ extern unsigned char DAT_0057f0d8; /* 0x57f0d8 */
 
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: FUN_00167458. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
 /* Supplied declaration required: FUN_001a90e0. */
 /* Supplied declaration required: FUN_0031879c. */
@@ -91,7 +91,7 @@ unsigned int FUN_0025ccc0(void)
       FUN_0031879c();
     }
   }
-  if ((-1 < (int)(*(unsigned int *)((unsigned char *)&DAT_0057f0d8 - 0x4))) && (FUN_001681cc((*(unsigned int *)((unsigned char *)&DAT_0057f0d8 - 0x4)) & 0xffff), (int)(*(unsigned int *)((unsigned char *)&DAT_0057f0d8 - 0x4)) < 0)) {
+  if ((-1 < (int)(*(unsigned int *)((unsigned char *)&DAT_0057f0d8 - 0x4))) && (sysPlaySe((*(unsigned int *)((unsigned char *)&DAT_0057f0d8 - 0x4)) & 0xffff), (int)(*(unsigned int *)((unsigned char *)&DAT_0057f0d8 - 0x4)) < 0)) {
     temp_v4 = 0;
     do {
       temp_v3 = *(unsigned int *)(temp_v4 * 4 + 0x57f0d8);

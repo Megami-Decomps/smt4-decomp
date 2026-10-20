@@ -10,7 +10,7 @@ int FUN_00297060(int, unsigned int);
 int FUN_002b2368(int);
 int FUN_002c3f5c(...);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int FUN_002c415c(unsigned int);
+int asdMemFree(unsigned int);
 int FUN_002c526c(void);
 int FUN_002c5728(int);
 int FUN_002c5758(int);
@@ -31,7 +31,7 @@ extern int DAT_0043daa8; /* 0x43daa8 */
 /* Supplied declaration required: FUN_002b2368. */
 /* Supplied declaration required: FUN_002c3f5c. */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_002c5728. */
 /* Supplied declaration required: FUN_002c5758. */
@@ -74,7 +74,7 @@ unsigned int FUN_002113c0(int param_1)
         FUN_002b2368(temp_v0);
       }
       *(unsigned int *)(param_1 + 0xd6c) = 0;
-      FUN_002c415c(*(unsigned int *)(param_1 + 0xd78));
+      asdMemFree(*(unsigned int *)(param_1 + 0xd78));
       *(unsigned int *)(param_1 + 0xd78) = 0;
       FUN_002c5758(2);
       FUN_002c5728(2);

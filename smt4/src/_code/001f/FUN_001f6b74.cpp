@@ -129,7 +129,7 @@ typedef struct {
     unsigned int sp1F8; /* 0x1f8: local_1f8 */
 } param_1_stack;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00257320. */
@@ -236,7 +236,7 @@ void FUN_001f6b74(fn_001f6b74_arg0 *param_1)
   float temp_v70;
   float temp_v71 [9];
   
-  FUN_002c198c(DAT_0044ea00);
+  FUN_002c198c(g_titleScene);
   temp_v7 = param_1->field_0x4;
   if (param_1->field_0x60 < param_1->field_0x4) {
     temp_v7 = param_1->field_0x60;
@@ -263,12 +263,12 @@ void FUN_001f6b74(fn_001f6b74_arg0 *param_1)
     temp_v33 = (unsigned int *)&param_1->field_0x40;
     iStack_134 = 0;
   }
-  FUN_002c1b64(DAT_0044ea00,*(unsigned int *)&param_1[1].field_0x8);
+  FUN_002c1b64(g_titleScene,*(unsigned int *)&param_1[1].field_0x8);
   VectorUnsignedToFloat((unsigned int)param_1->field_0x67,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorUnsignedToFloat((unsigned int)param_1->field_0x66,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorUnsignedToFloat((unsigned int)param_1->field_0x65,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorUnsignedToFloat((unsigned int)param_1->field_0x64,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00343810(DAT_0044ea00,(unsigned int)param_1->field_0x66,(unsigned int)param_1->field_0x65,
+  FUN_00343810(g_titleScene,(unsigned int)param_1->field_0x66,(unsigned int)param_1->field_0x65,
                (unsigned int)param_1->field_0x64);
   temp_v67 = (fn_001f6b74_arg0 *)0x0;
   pfVar3 = param_1->field_0x18;
@@ -391,8 +391,8 @@ void FUN_001f6b74(fn_001f6b74_arg0 *param_1)
       temp_v33 = (unsigned int *)((int)temp_v33 + iStack_134);
     } while (temp_v10 < temp_v7);
   }
-  FUN_002c18e4(DAT_0044ea00);
-  FUN_002c198c(DAT_0044ea00);
+  FUN_002c18e4(g_titleScene);
+  FUN_002c198c(g_titleScene);
   return;
 }
 

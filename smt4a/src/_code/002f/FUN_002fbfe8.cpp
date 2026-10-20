@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int aeabi_uidivmod(unsigned int, int);
+int __aeabi_uidivmod(unsigned int, int);
 int rt_memcpy(...);
 
 typedef struct fn_002fbfe8_arg0 fn_002fbfe8_arg0;
@@ -18,7 +18,7 @@ struct fn_002fbfe8_arg0 {
     int field_0x1c; /* +0x1c */
 };
 
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -40,7 +40,7 @@ void FUN_002fbfe8(fn_002fbfe8_arg0 *param_1,int param_2,unsigned int param_3,uns
   else {
     rt_memcpy(temp_v0,param_2,temp_v2,param_4,param_4);
     param_1->field_0x18 = param_1->field_0x18 + temp_v2;
-    aeabi_uidivmod(param_1->field_0x10 + temp_v2,param_1->field_0x1c);
+    __aeabi_uidivmod(param_1->field_0x10 + temp_v2,param_1->field_0x1c);
     temp_v0 = param_3 - temp_v2;
     param_1->field_0x10 = temp_v1;
     if (temp_v0 != 0) {

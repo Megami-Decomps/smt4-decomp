@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001630d4(void);
-int FUN_0019a0e8(int, unsigned int *);
-int FUN_0030cb44(void);
+int asdMemoryAlloc(void);
+int mtx44Copy(int, unsigned int *);
+int asdOperatorNewE(void);
 int FUN_00409e20(int, unsigned int, unsigned int);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(unsigned int, int);
@@ -54,10 +54,10 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001630d4. */
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: asdMemoryAlloc. */
+/* Supplied declaration required: mtx44Copy. */
 extern int FUN_002eba64(unsigned int *);
-/* Supplied declaration required: FUN_0030cb44. */
+/* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_00409e20. */
 
 
@@ -95,10 +95,10 @@ void FUN_00415cd8(int param_1,int param_2,unsigned int param_3)
   *(int *)(param_1 + 0x60) = param_2;
   FUN_00409e20(param_1,param_3,*(unsigned int *)(param_2 + 0x2c));
   temp_v0 = 0x100;
-  FUN_001630d4();
+  asdMemoryAlloc();
   *(unsigned int *)(param_1 + 4) = temp_v0;
   temp_v1 = (**(int **)(param_1 + 0x60) + 1) * 0xc;
-  FUN_0030cb44();
+  asdOperatorNewE();
   *(int *)(param_1 + 100) = temp_v1;
   temp_v19 = 0.0f;
   temp_v10 = (float)VectorSignedToFloat(**(unsigned int **)(param_1 + 0x60),(unsigned char)(in_fpscr >> 0x16) & 3
@@ -197,7 +197,7 @@ void FUN_00415cd8(int param_1,int param_2,unsigned int param_3)
     DAT_0064c0bc = temp_v19;
     DAT_0064c0c0 = temp_v0;
   }
-  FUN_0019a0e8(param_1 + 0x18,&DAT_0064c084);
+  mtx44Copy(param_1 + 0x18,&DAT_0064c084);
   return;
 }
 

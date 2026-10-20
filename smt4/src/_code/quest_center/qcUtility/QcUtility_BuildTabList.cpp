@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002c415c(int);
-int FUN_002c5300(int, int, int, int, int);
+int asdMemFree(int);
+int asdMemoryAlloc(int, int, int, int, int);
 int QcUtility_GetQuestTableChunkCount(int, int);
 int SBORROW4(int, int);
 
@@ -23,8 +23,8 @@ typedef struct {
 extern int FUN_002355c0(int, unsigned char, unsigned int);
 extern int FUN_002c09d0(void);
 extern int FUN_002c09f4(unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMemoryAlloc. */
 extern int QcActive_GetField20(void);
 extern int QcActive_GetField22(void);
 extern int QcActive_GetField24(void);
@@ -71,7 +71,7 @@ QcUtility_BuildTabList
   temp_v3 = param_3;
   QcUtility_GetQuestTableChunkCount(param_3,*param_1);
   temp_v6 = 0x100;
-  FUN_002c5300(0x100,0x100,0,temp_v3 << 3,1);
+  asdMemoryAlloc(0x100,0x100,0,temp_v3 << 3,1);
   temp_v11 = 0;
   temp_v7 = 0;
   temp_v4 = FUN_002355c0(param_3,*param_1,0);
@@ -152,7 +152,7 @@ LAB_003817d8:
           temp_v13 = 1;
           temp_v4 = temp_v4 + 1;
           if (temp_v4 >= 0x14) {
-            FUN_002c415c(temp_v6);
+            asdMemFree(temp_v6);
             return temp_v13;
           }
           continue;
@@ -190,7 +190,7 @@ LAB_0038189c:
     }
     temp_v4 = temp_v4 + 1;
     if (temp_v4 >= 0x14) {
-      FUN_002c415c(temp_v6);
+      asdMemFree(temp_v6);
       return temp_v13;
     }
   } while( 1 );

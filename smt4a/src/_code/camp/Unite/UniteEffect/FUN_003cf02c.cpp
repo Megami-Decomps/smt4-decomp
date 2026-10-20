@@ -4,20 +4,20 @@
 
 extern "C" {
 
-int FUN_0019a5a0(...);
-int FUN_0019c364(...);
+int asdMemFree(...);
+int scrScriptProcessDestroy(...);
 int FUN_001f4908(...);
 int FUN_003180c4(...);
 int FUN_00336de4(...);
 int FUN_0035fc4c(void);
-int FUN_0035fd38(...);
+int btlTalkBustUpSetUnk2F4(...);
 int FUN_0038b3f8(...);
 int FUN_003d2d6c(...);
 int FUN_0040223c(...);
 int FUN_0040a244(...);
 
 int FUN_001517b4(...);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00180118(...);
 int FUN_001846d0(...);
 int FUN_001aea28(...);
@@ -25,7 +25,7 @@ int FUN_001fc348(...);
 int FUN_0022677c(...);
 int FUN_00275f44(...);
 int FUN_002e342c(...);
-int FUN_002f1908(void);
+int uniteCameraDestroy(void);
 int FUN_003d2158(...);
 int FUN_003d2a00(...);
 int FUN_0040c190(...);
@@ -51,7 +51,7 @@ int FUN_0040ab7c(...);
 int FUN_0040ace8(...);
 int FUN_004ff364(unsigned int, int);
 int VectorSignedToFloat(...);
-int aeabi_idivmod(unsigned int, double);
+int __aeabi_idivmod(unsigned int, double);
 
 typedef int romwright_code(...);
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -84,13 +84,13 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00163aa4. */
 extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: FUN_00167458. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00180118. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019eb14. */
 /* Supplied declaration required: FUN_001aea28. */
 /* Supplied declaration required: FUN_001f4908. */
@@ -102,11 +102,11 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_002859d8. */
 /* Supplied declaration required: FUN_002c8894. */
 /* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002f1908. */
+/* Supplied declaration required: uniteCameraDestroy. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_00336de4. */
 /* Supplied declaration required: FUN_0035fc4c. */
-/* Supplied declaration required: FUN_0035fd38. */
+/* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_0038b3f8. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d2158. */
@@ -129,7 +129,7 @@ extern unsigned int FUN_0040ac08(void);
 /* Supplied declaration required: FUN_004ff364. */
 /* Supplied declaration required: FUN_004ff920. */
 extern int FUN_004ffba8(unsigned int);
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 unsigned int FUN_003cf02c(void)
@@ -168,7 +168,7 @@ unsigned int FUN_003cf02c(void)
   *(int *)(temp_v2 + 0x88) = *(int *)(temp_v2 + 0x88) + 2;
   FUN_004ff364(*(unsigned int *)(temp_v2 + 0x8c),0);
   temp_v16 = (float)(int)temp_v16;
-  aeabi_idivmod(*(unsigned int *)(temp_v2 + 0x88),temp_v16);
+  __aeabi_idivmod(*(unsigned int *)(temp_v2 + 0x88),temp_v16);
   *(unsigned int *)(temp_v2 + 0x88) = temp_v7;
   temp_v15 = 0x42652ee000000000;
   switch(*(unsigned int *)(temp_v2 + 4)) {
@@ -380,7 +380,7 @@ unsigned int FUN_003cf02c(void)
         (**(romwright_code **)(**(int **)(temp_v2 + 0x98) + 4))();
         *(unsigned int *)(temp_v2 + 0x98) = 0;
       }
-      FUN_002f1908();
+      uniteCameraDestroy();
       temp_v6 = *(int *)(*(int *)(temp_v2 + 0x94) + 4);
       FUN_0040ace8(DAT_0056fcc0,temp_v6);
       FUN_003fe86c(temp_v6,0,2);
@@ -420,7 +420,7 @@ unsigned int FUN_003cf02c(void)
       temp_v6 = DAT_0057f2c4;
       if (*(char *)(temp_v2 + 0x20) != '\0') {
         FUN_00275f44(*(unsigned int *)(temp_v2 + 0x338),0x11);
-        FUN_001681cc(0x5a);
+        sysPlaySe(0x5a);
         temp_v6 = DAT_0057f2c4;
         *(unsigned int *)(DAT_0057f2c4 + 4) = 4;
         *(unsigned int *)(temp_v6 + 8) = 0;
@@ -631,9 +631,9 @@ LAB_003cf9bc:
     FUN_002e342c(temp_v17,temp_v5);
     FUN_003180c4(0x10,temp_v17);
     FUN_00275f44(*(unsigned int *)(temp_v2 + 0x338),0x10);
-    FUN_001681cc(0x5a);
+    sysPlaySe(0x5a);
     FUN_00336de4(*(unsigned short *)(temp_v2 + 0xc),1);
-    FUN_0035fd38(1);
+    btlTalkBustUpSetUnk2F4(1);
     temp_v6 = DAT_0057f2c4;
     *(unsigned int *)(DAT_0057f2c4 + 4) = 6;
     *(unsigned int *)(temp_v6 + 8) = 0;
@@ -653,9 +653,9 @@ LAB_003cf9bc:
   case 7:
     temp_v6 = FUN_00163e84(0);
     if ((temp_v6 != 0) && (temp_v6 = FUN_00163e84(1), temp_v6 != 0)) {
-      FUN_0019c364(*(unsigned int *)(temp_v2 + 0x338));
-      FUN_0019a5a0(*(unsigned int *)(temp_v2 + 0x33c));
-      FUN_0019a5a0(*(unsigned int *)(temp_v2 + 0x334));
+      scrScriptProcessDestroy(*(unsigned int *)(temp_v2 + 0x338));
+      asdMemFree(*(unsigned int *)(temp_v2 + 0x33c));
+      asdMemFree(*(unsigned int *)(temp_v2 + 0x334));
       temp_v6 = 0;
       if (*(short *)(temp_v2 + 0x1e) != 0) {
         do {
@@ -679,7 +679,7 @@ LAB_003cf9bc:
         (**(romwright_code **)(**(int **)(temp_v2 + 0x9c) + 4))();
         *(unsigned int *)(temp_v2 + 0x9c) = 0;
       }
-      FUN_002f1908();
+      uniteCameraDestroy();
       temp_v6 = DAT_0057f2c4;
       *(unsigned int *)(DAT_0057f2c4 + 4) = 8;
       *(unsigned int *)(temp_v6 + 8) = 0;

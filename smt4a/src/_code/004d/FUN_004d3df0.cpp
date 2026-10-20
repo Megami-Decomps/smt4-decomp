@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_00317464(...);
 int FUN_0031f0f4(...);
 int FUN_0032c450(...);
@@ -25,7 +25,7 @@ extern unsigned int DAT_0057162c; /* 0x57162c */
 extern unsigned int DAT_00571630; /* 0x571630 */
 extern unsigned int DAT_00571634; /* 0x571634 */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 extern unsigned int *FUN_00317450(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00317464. */
 extern unsigned int FUN_0031cfd0(unsigned short);
@@ -63,7 +63,7 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
   case 0:
     puVar6 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10),temp_v0);
     *(unsigned int *)(param_1 + 0x1c) = *puVar6;
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     puVar2 = (unsigned int *)FUN_003e83b4(temp_v0,*(unsigned int *)(param_1 + 0x1c),1);
     if (puVar2 != (unsigned int *)0x0) {
       FUN_00317464(*(unsigned int *)(param_1 + 0x10),1,puVar2[0x96],1,9999,0);
@@ -90,7 +90,7 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
       FUN_00317464(temp_v3,0xc,temp_v0,0,100,0);
       if ((-1 < (short)puVar2[2]) &&
          ((*puVar2 & DAT_00571618) != 0 || (puVar2[1] & DAT_0057161c) != 0)) {
-        FUN_0014aa78();
+        btlGetMainState();
         FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0xd,0xffffffce,0x32);
         FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0xe,0xffffffce,0x32);
       }
@@ -230,7 +230,7 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
   case 0xd:
     if (((puVar2 != (unsigned int *)0x0) && (-1 < (short)puVar2[2])) &&
        ((puVar2[1] & DAT_0057161c) != 0 || (*puVar2 & DAT_00571618) != 0)) {
-      temp_v2 = FUN_0014aa78();
+      temp_v2 = btlGetMainState();
       temp_v1 = puVar2[2];
       temp_v2 = *(int *)(temp_v2 + 0x1ed4);
       puVar6 = (unsigned int *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10),temp_v0);
@@ -241,7 +241,7 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
   case 0xe:
     if (((puVar2 != (unsigned int *)0x0) && (-1 < (short)puVar2[2])) &&
        ((DAT_0057161c & puVar2[1]) != 0 || (*puVar2 & DAT_00571618) != 0)) {
-      temp_v2 = FUN_0014aa78();
+      temp_v2 = btlGetMainState();
       temp_v1 = puVar2[2];
       temp_v2 = *(int *)(temp_v2 + 0x1ed4);
       puVar6 = (unsigned int *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10),temp_v0);

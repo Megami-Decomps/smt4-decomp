@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp4; /* 0x4: local_4 */
 } void_stack;
 
-extern int DAT_0058103c; /* 0x58103c */
+extern int g_mapIf; /* 0x58103c */
 
 
 void FUN_002747dc(void)
@@ -19,7 +19,7 @@ void FUN_002747dc(void)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = DAT_0058103c;
+  temp_v0 = g_mapIf;
   temp_v1 = 0;
   do {
     temp_v2 = temp_v1 + 1;

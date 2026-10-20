@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -32,7 +32,7 @@ unsigned int FUN_002e0564(int param_1)
   
   temp_v1 = *(int *)(param_1 + 4);
   *(unsigned char *)(temp_v1 + 4) = 1;
-  temp_v0 = DAT_0059dbb4;
+  temp_v0 = g_renderCtx;
   if (*(char *)(temp_v1 + 0x10) != '\0') {
     return 0;
   }
@@ -60,8 +60,8 @@ unsigned int FUN_002e0564(int param_1)
         *(unsigned char *)(temp_v0 + 0x1270) = 0;
       }
       FUN_001835b4(2,0x2a,7000,0,0,0xb);
-      temp_v0 = DAT_0059dbb4;
-      piVar5 = (int *)(DAT_0059dbb4 + 0x1258);
+      temp_v0 = g_renderCtx;
+      piVar5 = (int *)(g_renderCtx + 0x1258);
       temp_v1 = *piVar5;
       temp_v2 = piVar5[temp_v1 + 2];
       *piVar5 = temp_v1 - 1;
@@ -81,8 +81,8 @@ unsigned int FUN_002e0564(int param_1)
         *(unsigned char *)(temp_v0 + 0x1270) = 0;
       }
       FUN_001835b4(2,0x2a,6000,0,0,0xb);
-      temp_v0 = DAT_0059dbb4;
-      piVar5 = (int *)(DAT_0059dbb4 + 0x1258);
+      temp_v0 = g_renderCtx;
+      piVar5 = (int *)(g_renderCtx + 0x1258);
       temp_v1 = *piVar5;
       temp_v2 = piVar5[temp_v1 + 2];
       *piVar5 = temp_v1 - 1;

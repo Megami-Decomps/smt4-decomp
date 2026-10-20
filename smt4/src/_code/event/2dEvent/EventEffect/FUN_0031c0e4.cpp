@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002ae7e8(unsigned int);
+int asdTMTexTableFreeEntry(unsigned int);
 int FUN_002ae898(unsigned int, unsigned int);
-int FUN_002c415c(unsigned int *);
-int FUN_002c43b4(unsigned int, int);
+int asdMemFree(unsigned int *);
+int jobStop(unsigned int, int);
 
 extern unsigned int *DAT_0043dee8; /* 0x43dee8 */
 extern unsigned int DAT_0043df00; /* 0x43df00 */
@@ -15,10 +15,10 @@ extern unsigned int DAT_0043df04; /* 0x43df04 */
 
 extern int FUN_0024bb10(unsigned int);
 extern int FUN_002a60b4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002ae7e8. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002ae898. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 
 
 void FUN_0031c0e4(void)
@@ -46,14 +46,14 @@ void FUN_0031c0e4(void)
     if (*(char *)(temp_v1 * 0xc + 0x43df09) != '\0') {
       temp_v0 = FUN_0024bb10((&DAT_0043df00)[temp_v1 * 3]);
       if (temp_v0 != 0) {
-        FUN_002ae7e8((&DAT_0043df00)[temp_v1 * 3]);
+        asdTMTexTableFreeEntry((&DAT_0043df00)[temp_v1 * 3]);
       }
       *(unsigned char *)(temp_v1 * 0xc + 0x43df09) = 0;
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 2);
-  FUN_002c43b4(*puVar1,0);
-  FUN_002c415c(puVar1);
+  jobStop(*puVar1,0);
+  asdMemFree(puVar1);
   DAT_0043dee8 = (unsigned int *)0x0;
   return;
 }

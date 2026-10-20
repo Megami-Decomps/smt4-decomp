@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_001641c4(void);
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_001b4a90(int, int, unsigned int);
 int FUN_00275f44(unsigned int, int);
 int FUN_003491e8(void);
 
 /* Supplied declaration required: FUN_001641c4. */
 extern unsigned short FUN_001643b4(unsigned int, int);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_00275f44. */
 /* Supplied declaration required: FUN_003491e8. */
@@ -57,7 +57,7 @@ void FUN_004853fc(int param_1,int param_2)
       *(short *)(param_1 + 0x55c) = *(short *)(param_1 + 0x55c) + 1;
     } while (temp_v3 < 4);
     if (temp_v1 != '\x04' && temp_v1 != '\x05') {
-      FUN_001681cc(*(unsigned short *)(param_1 + 0x55e));
+      sysPlaySe(*(unsigned short *)(param_1 + 0x55e));
     }
     FUN_00275f44(*(unsigned int *)(param_1 + 0x26c),0);
   }

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e7634(unsigned char [32]);
+int strInit(unsigned char [32]);
 int FUN_002e9afe(unsigned int, unsigned int);
 int FUN_002ea41e(unsigned char [32], int);
-int FUN_002ec9f4(unsigned char [32]);
+int strDestroy(unsigned char [32]);
 int FUN_00301e66(unsigned int, int);
 int FUN_00310d9c(...);
 
@@ -19,11 +19,11 @@ typedef struct {
 
 extern signed char DAT_00594967; /* 0x594967 */
 
-/* Supplied declaration required: FUN_002e7634. */
+/* Supplied declaration required: strInit. */
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
 /* Supplied declaration required: FUN_002e9afe. */
 /* Supplied declaration required: FUN_002ea41e. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_00301e66. */
 extern int FUN_00301e8c(unsigned int, int, unsigned char *);
 /* Supplied declaration required: FUN_00310d9c. */
@@ -44,7 +44,7 @@ void FUN_0011de3c(int param_1)
   
   if ((*(char *)(param_1 + 0x88) == '\x02') || (DAT_00594967 != '\0')) {
     FUN_00301e66(*(unsigned int *)(*(int *)(*(int *)(param_1 + 0x6c) + 0x20) + 0x14),param_1 + 0xd8);
-    FUN_002e7634(temp_v3);
+    strInit(temp_v3);
     temp_v0 = FUN_00301e8c(*(unsigned int *)(*(int *)(*(int *)(param_1 + 0x6c) + 0x20) + 0x14),
                          param_1 + 0x178,temp_v3);
     if (temp_v0 != 0) {
@@ -61,7 +61,7 @@ void FUN_0011de3c(int param_1)
       temp_v2 = 2;
     }
     FUN_00310d9c(param_1,temp_v2,temp_v1);
-    FUN_002ec9f4(temp_v3);
+    strDestroy(temp_v3);
   }
   else {
     FUN_002ea41e(temp_v3,param_1 + 0x78);

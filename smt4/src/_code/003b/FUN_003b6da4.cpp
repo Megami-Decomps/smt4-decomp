@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00288790(int, int, int, int);
 int FUN_0029a17c(int, int, int, int, int);
-int aeabi_idivmod(int, int);
+int __aeabi_idivmod(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 8 slot(s), 32 byte(s) */
@@ -21,13 +21,13 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_4_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00288790. */
 /* Supplied declaration required: FUN_0029a17c. */
 extern int FUN_002a8740(int);
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_003b6da4(int param_1,int param_2,int param_3,int param_4)
@@ -106,7 +106,7 @@ void FUN_003b6da4(int param_1,int param_2,int param_3,int param_4)
     do {
       temp_v11 = temp_v12;
       if ((temp_v9 & (1 << (temp_v4 & 0xff))) != 0) {
-        aeabi_idivmod(*piVar12 + 1,temp_v10);
+        __aeabi_idivmod(*piVar12 + 1,temp_v10);
         temp_v11 = temp_v12 + 1;
         if (temp_v5 == temp_v12) {
           temp_v1 = temp_v0 + 1;
@@ -115,19 +115,19 @@ void FUN_003b6da4(int param_1,int param_2,int param_3,int param_4)
       }
       temp_v12 = temp_v11;
       if ((temp_v9 & (1 << ((temp_v4 + 1) & 0xff))) != 0) {
-        aeabi_idivmod(*piVar12 + 1,temp_v10);
+        __aeabi_idivmod(*piVar12 + 1,temp_v10);
         temp_v12 = temp_v11 + 1;
         if (temp_v6 == temp_v11) {
           temp_v1 = temp_v0 + 2;
           temp_v12 = temp_v11 + 1;
         }
       }
-      temp_v11 = DAT_0044ea00;
+      temp_v11 = g_titleScene;
       temp_v3 = temp_v3 - 1;
       temp_v4 = temp_v4 + 2;
       temp_v0 = temp_v0 + 2;
     } while (temp_v3 != 0);
-    piVar8 = (int *)(DAT_0044ea00 + 0x130c);
+    piVar8 = (int *)(g_titleScene + 0x130c);
     temp_v12 = piVar8[*piVar8 + 2];
     piVar8[*piVar8 + 2] = 3;
     if (*(char *)(temp_v11 + 0x1324) != '\0' || temp_v12 != 3) {
@@ -141,8 +141,8 @@ void FUN_003b6da4(int param_1,int param_2,int param_3,int param_4)
                  *(short *)(temp_v2 + 10) + param_4,0x7e);
     FUN_00288790((int)temp_v1,(int)*(short *)(temp_v2 + 8) + param_3 + temp_v12 + 0xd,
                  *(short *)(temp_v2 + 10) + param_4,0x7e);
-    temp_v12 = DAT_0044ea00;
-    piVar8 = (int *)(DAT_0044ea00 + 0x130c);
+    temp_v12 = g_titleScene;
+    piVar8 = (int *)(g_titleScene + 0x130c);
     temp_v2 = piVar8[*piVar8 + 2];
     piVar8[*piVar8 + 2] = 0;
     if (*(char *)(temp_v12 + 0x1324) != '\0' || temp_v2 != 0) {
@@ -150,7 +150,7 @@ void FUN_003b6da4(int param_1,int param_2,int param_3,int param_4)
       *(unsigned char *)(temp_v12 + 0x1324) = 0;
     }
     if (*piVar13 >= 0x18) {
-      aeabi_idivmod(*piVar12 + 1,temp_v10);
+      __aeabi_idivmod(*piVar12 + 1,temp_v10);
       *piVar12 = temp_v7;
       *piVar13 = 0;
     }

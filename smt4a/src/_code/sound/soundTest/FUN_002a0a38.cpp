@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -23,9 +23,9 @@ extern unsigned char LAB_0032affc; /* 0x32affc */
 extern unsigned char LAB_0037a114; /* 0x37a114 */
 extern unsigned int *DAT_00588fc8; /* 0x588fc8 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 
 
 void FUN_002a0a38(void)
@@ -36,16 +36,16 @@ void FUN_002a0a38(void)
   unsigned char *puVar2;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x14,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x14,1);
   DAT_00588fc8 = puVar1;
   puVar1[2] = 0;
   puVar1[3] = 0;
   puVar1[4] = 0;
   *(unsigned char *)(puVar1 + 1) = 0;
   puVar2 = &LAB_002a0b28;
-  FUN_0014e38c(&LAB_002a0b28,4,0,0,FUN_0029ef78,&LAB_0032afe4,0);
+  asdProcessCreateSimple(&LAB_002a0b28,4,0,0,FUN_0029ef78,&LAB_0032afe4,0);
   *puVar1 = (unsigned int)puVar2;
-  FUN_0015155c(&LAB_002a0b38,0xea,0,0,&LAB_0032affc,&LAB_0037a114,0,puVar2);
+  taskCreateDraw(&LAB_002a0b38,0xea,0,0,&LAB_0032affc,&LAB_0037a114,0,puVar2);
   return;
 }
 

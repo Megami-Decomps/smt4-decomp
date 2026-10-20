@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00162808(unsigned int, int);
 int SBORROW4(int, int);
-int aeabi_idivmod(int, int);
+int __aeabi_idivmod(int, int);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -18,11 +18,11 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-extern int DAT_00588124; /* 0x588124 */
+extern int g_npcRoom; /* 0x588124 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00162808. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_00168bec(unsigned int param_1)
@@ -47,7 +47,7 @@ void FUN_00168bec(unsigned int param_1)
   unsigned int uStack_3c;
   int temp_v11 [7];
   
-  if ((DAT_00588124 == 0) || (param_1 >= 3)) {
+  if ((g_npcRoom == 0) || (param_1 >= 3)) {
     return;
   }
   temp_v9 = 2;
@@ -79,11 +79,11 @@ void FUN_00168bec(unsigned int param_1)
     do {
       temp_v1 = temp_v2 + 1;
       if ((int)temp_v1 >= 4) {
-        temp_v4 = param_1 * -3 + *(int *)(DAT_00588124 + 0x168);
+        temp_v4 = param_1 * -3 + *(int *)(g_npcRoom + 0x168);
         if (temp_v4 < 0) {
           temp_v4 = 0;
         }
-        aeabi_idivmod(temp_v4,temp_v11[3]);
+        __aeabi_idivmod(temp_v4,temp_v11[3]);
         temp_v0 = temp_v9;
         temp_v4 = temp_v3;
         if (temp_v11[0] <= temp_v3) {

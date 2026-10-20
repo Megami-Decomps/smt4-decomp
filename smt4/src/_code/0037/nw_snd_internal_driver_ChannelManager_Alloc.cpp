@@ -1,31 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nw_snd_internal_driver_ChannelManager_Alloc` (_code @ 0x37e05c, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nw_ut_internal_LinkListImpl_insert(int, int, int);
+typedef struct LinkNode {
+    /* 0x00 */ struct LinkNode *prev;
+    /* 0x04 */ struct LinkNode *next;
+} LinkNode;
 
-extern int FUN_00380138(void);
-extern int nw_snd_internal_PoolImpl_AllocImpl(void);
-/* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
+typedef struct Channel {
+    /* 0x000 */ u8 unk000[0x13C];
+    /* 0x13C */ LinkNode link;
+} Channel;
 
+typedef struct ChannelManager {
+    /* 0x00 */ u8 pool[4];
+    /* 0x04 */ LinkNode *head;
+    /* 0x08 */ LinkNode *tail;
+} ChannelManager;
 
-int nw_snd_internal_driver_ChannelManager_Alloc(int param_1)
+/* An end of the intrusive list, passed by value (the list implementation's iterator). */
+typedef struct ListEnd {
+    LinkNode **slot;
+} ListEnd;
 
+static __inline ListEnd listEnd(LinkNode **slot)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = nw_snd_internal_PoolImpl_AllocImpl();
-  if (temp_v0 == 0) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = FUN_00380138();
-  }
-  nw_ut_internal_LinkListImpl_insert(param_1 + 4,param_1 + 8,temp_v0 + 0x13c);
-  return temp_v0;
+    ListEnd end;
+
+    end.slot = slot;
+    return end;
+}
+
+int nw_ut_internal_LinkListImpl_insert(ListEnd head, ListEnd tail, LinkNode *node);
+void *nw_snd_internal_PoolImpl_AllocImpl(ChannelManager *manager);
+Channel *FUN_00380138(void *memory);
+
+/* Allocates a Channel from the pool, constructs it and appends it to the active list; returns it (NULL if the pool is empty). */
+Channel *nw_snd_internal_driver_ChannelManager_Alloc(ChannelManager *manager)
+{
+    void *memory = nw_snd_internal_PoolImpl_AllocImpl(manager);
+    Channel *channel = (memory != NULL) ? FUN_00380138(memory) : NULL;
+    ListEnd head = listEnd(&manager->head);
+    ListEnd tail = listEnd(&manager->tail);
+
+    nw_ut_internal_LinkListImpl_insert(head, tail, &channel->link);
+    return channel;
 }
 
 } /* extern "C" */

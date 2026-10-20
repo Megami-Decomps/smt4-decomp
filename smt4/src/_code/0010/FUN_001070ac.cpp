@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00121ee8(...);
-int FUN_002c222c(...);
+int asdOperatorNew(...);
 int FUN_002c526c(...);
 int FUN_002c52dc(...);
-int FUN_002c5788(...);
+int asdProcessCreateSimple(...);
 int FUN_002c5d5c(...);
 
 typedef int romwright_code(...);
@@ -20,14 +20,14 @@ typedef struct {
 
 extern int FUN_00111004(...); /* 0x111004 */
 extern int FUN_002a301c(...); /* 0x2a301c */
-extern int DAT_00433130; /* 0x433130 */
+extern int g_aocDisplay; /* 0x433130 */
 
 /* Supplied declaration required: FUN_00121ee8. */
 extern int FUN_00121fa0(int);
-/* Supplied declaration required: FUN_002c222c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_002c52dc. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_002c5d5c. */
 
 
@@ -44,10 +44,10 @@ void FUN_001070ac(void)
   int temp_v3;
   
   ppcVar4 = &temp_v2;
-  temp_v0 = DAT_00433130;
-  if (DAT_00433130 == 0) {
+  temp_v0 = g_aocDisplay;
+  if (g_aocDisplay == 0) {
     temp_v0 = 0x4528;
-    FUN_002c222c();
+    asdOperatorNew();
     if (temp_v0 == 0) {
       temp_v0 = 0;
     }
@@ -63,7 +63,7 @@ void FUN_001070ac(void)
       uStack_1c = 0;
       pcVar3 = "Aoc fileload Calc";
       temp_v3 = temp_v0;
-      FUN_002c5788("Aoc fileload Calc",2,0);
+      asdProcessCreateSimple("Aoc fileload Calc",2,0);
       *(char **)(temp_v1 + 0x14) = pcVar3;
       temp_v2 = (romwright_code *)0x0;
       FUN_002c52dc(&temp_v2,1,1);
@@ -76,7 +76,7 @@ void FUN_001070ac(void)
       }
     }
   }
-  DAT_00433130 = temp_v0;
+  g_aocDisplay = temp_v0;
   return;
 }
 

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0035777c(void);
 
-extern unsigned int FUN_002ebb88(void);
+extern unsigned int asdMemoryGetAllocatorC(void);
 /* Supplied declaration required: FUN_0035777c. */
 
 
@@ -16,7 +16,7 @@ unsigned char FUN_001db548(void)
 /* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   
-  temp_v0 = FUN_002ebb88();
+  temp_v0 = asdMemoryGetAllocatorC();
   FUN_0035777c();
   return (temp_v0 & 0x80000000) == 0;
 }

@@ -1,15 +1,12 @@
-#include "romwright_types.h"
+#include "map/mapGimic.h"
 
 extern "C" {
 
-extern int DAT_00580ca0; /* 0x580ca0 */
-
+extern MapGimic *DAT_00580ca0;
 
 void FUN_00294940(void)
-
 {
-  *(unsigned int *)(DAT_00580ca0 + 0x88) = 1;
-  return;
+    DAT_00580ca0->unk88 = 1;
 }
 
 } /* extern "C" */

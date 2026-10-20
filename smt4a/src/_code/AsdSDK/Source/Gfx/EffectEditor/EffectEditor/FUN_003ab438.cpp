@@ -12,7 +12,7 @@ int FUN_00514540(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
-int aeabi_uidivmod(void);
+int __aeabi_uidivmod(void);
 
 typedef struct fn_003ab438_arg0 fn_003ab438_arg0;
 typedef struct fn_003ab438_arg0_p40 fn_003ab438_arg0_p40;
@@ -80,7 +80,7 @@ typedef struct {
     unsigned int spF0; /* 0xf0: local_f0 */
 } param_1_stack;
 
-extern float DAT_005c1100; /* 0x5c1100 */
+extern float g_polyDefaultColor; /* 0x5c1100 */
 extern float DAT_005c1104; /* 0x5c1104 */
 extern float DAT_005c1108; /* 0x5c1108 */
 extern float DAT_005c110c; /* 0x5c110c */
@@ -119,7 +119,7 @@ extern unsigned int FUN_001acf08(void);
 /* Supplied declaration required: FUN_00221d78. */
 /* Supplied declaration required: FUN_00514500. */
 /* Supplied declaration required: FUN_00514540. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_003ab438(fn_003ab438_arg0 *param_1)
@@ -332,7 +332,7 @@ void FUN_003ab438(fn_003ab438_arg0 *param_1)
                   }
                 }
                 temp_v18 = (float)VectorSignedToFloat(temp_v13,(unsigned char)(in_fpscr >> 0x16) & 3);
-                DAT_006472ec = DAT_005c1100 * DAT_006472f8;
+                DAT_006472ec = g_polyDefaultColor * DAT_006472f8;
                 temp_v18 = (float)(int)(temp_v18 + temp_v15);
                 DAT_006472f0 = DAT_005c1104 * DAT_006472f8;
                 DAT_006472f4 = DAT_005c1108 * DAT_006472f8;
@@ -416,7 +416,7 @@ void FUN_003ab438(fn_003ab438_arg0 *param_1)
               }
               else {
                 FUN_00514500();
-                aeabi_uidivmod();
+                __aeabi_uidivmod();
                 temp_v13 = (float)VectorUnsignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v18 = (float)(int)temp_v13;
                 pfVar17[3] = pfVar17[3] + pfVar17[4] * temp_v13;

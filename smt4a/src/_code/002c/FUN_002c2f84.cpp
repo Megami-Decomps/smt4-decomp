@@ -9,7 +9,7 @@ extern unsigned char DAT_005f185a; /* 0x5f185a */
 extern unsigned char DAT_005f185d; /* 0x5f185d */
 extern unsigned char DAT_005f187c; /* 0x5f187c */
 
-extern int FUN_00236038(void);
+extern int scrGetArg(void);
 
 
 unsigned int FUN_002c2f84(void)
@@ -17,7 +17,7 @@ unsigned int FUN_002c2f84(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_00236038();
+  temp_v0 = scrGetArg();
   DAT_005f185d = temp_v0 == 0;
   DAT_005f187c = 0;
   DAT_005f185a = DAT_005f185d;

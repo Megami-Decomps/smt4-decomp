@@ -7,12 +7,12 @@ extern "C" {
 int FUN_002b7160(unsigned int, int);
 int FUN_002bff38(int);
 
-extern int DAT_0043dfc0; /* 0x43dfc0 */
+extern int g_bustupCutAnim; /* 0x43dfc0 */
 
 extern unsigned char FUN_00126520(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b7160. */
 extern int FUN_002b7174(unsigned int);
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002bff38. */
 
 
@@ -27,8 +27,8 @@ unsigned int FUN_0011921c(int param_1)
   int temp_v4;
   int temp_v5;
   
-  temp_v0 = DAT_0043dfc0;
-  if (DAT_0043dfc0 == 0) {
+  temp_v0 = g_bustupCutAnim;
+  if (g_bustupCutAnim == 0) {
     temp_v2 = 0;
   }
   else {
@@ -36,7 +36,7 @@ unsigned int FUN_0011921c(int param_1)
     temp_v4 = 1;
     do {
       temp_v5 = temp_v0 + temp_v4 * 4;
-      temp_v3 = FUN_002bf244(*(unsigned int *)(temp_v5 + 0x630));
+      temp_v3 = jobIsValid(*(unsigned int *)(temp_v5 + 0x630));
       if (temp_v3 != 0) {
         temp_v3 = FUN_002b7174(*(unsigned int *)(temp_v5 + 0x630));
         if (temp_v3 == param_1) {

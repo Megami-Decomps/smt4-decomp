@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp4C; /* 0x4c: local_4c */
 } param_4_stack;
 
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern unsigned int FUN_0014bef4(unsigned int);
@@ -156,7 +156,7 @@ LAB_0035e194:
   }
   temp_v2 = *(short *)(param_2 + 0x30);
   if (temp_v2 == 0x79f) {
-    if (DAT_005f15fc == 0x18) {
+    if (g_gameState == 0x18) {
       temp_v10 = 0;
     }
     else {

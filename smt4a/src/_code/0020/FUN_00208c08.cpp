@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00167458(...);
 int FUN_00340a94(...);
 int FUN_004ff364(...);
-int aeabi_uidivmod(...);
+int __aeabi_uidivmod(...);
 
 int FUN_001517b4(...);
 int FUN_001641b4(...);
@@ -15,18 +15,18 @@ int FUN_00169ddc(...);
 int FUN_001846d0(...);
 int FUN_00184758(...);
 int FUN_0021af2c(void);
-int FUN_002efdc0(void);
+int statusCameraApply(void);
 int FUN_003a7a88(...);
 int FUN_003e5504(...);
 int FUN_003e5558(...);
 int FUN_003e5858(...);
 int FUN_003e5c68(...);
-int FUN_003fc0b8(...);
+int aocHandleButtons(...);
 int FUN_0040ae70(...);
 int VectorSignedToFloat(...);
 
 int FUN_00100388(int, unsigned int);
-int FUN_0016007c(void);
+int asdOperatorNew(void);
 int FUN_00163aa4(...);
 int FUN_0019cac4(void);
 int FUN_0020b6d4(...);
@@ -70,19 +70,19 @@ extern int DAT_00588fd4; /* 0x588fd4 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00163aa4. */
 extern int FUN_00163fd4(unsigned int);
 /* Supplied declaration required: FUN_001641b4. */
-extern int FUN_00164a34(void);
+extern int lmapMainIsRunning(void);
 extern unsigned int FUN_001654d8(int);
 extern int FUN_001656a0(unsigned int);
 /* Supplied declaration required: FUN_00167458. */
 /* Supplied declaration required: FUN_00169ddc. */
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_00184758. */
-extern unsigned int FUN_00192748(unsigned int);
-extern unsigned int FUN_00192798(void);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019cac4. */
 extern unsigned int FUN_0019e130(unsigned int);
 extern unsigned int FUN_001a6f60(int, unsigned int);
@@ -95,7 +95,7 @@ extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_002adc20. */
 extern int FUN_002c7ca0(void);
 extern int FUN_002c7cb4(void);
-/* Supplied declaration required: FUN_002efdc0. */
+/* Supplied declaration required: statusCameraApply. */
 extern int FUN_002effbc(void);
 extern unsigned int FUN_002f72dc(int);
 /* Supplied declaration required: FUN_0031416c. */
@@ -104,7 +104,7 @@ extern int FUN_0031f664(void);
 extern int FUN_00334044(void);
 /* Supplied declaration required: FUN_00340a94. */
 /* Supplied declaration required: FUN_00371c3c. */
-extern int FUN_003792d4(void);
+extern int lmapSceneGetScript(void);
 extern int FUN_0037df48(void);
 /* Supplied declaration required: FUN_003857b4. */
 /* Supplied declaration required: FUN_0038b3f8. */
@@ -119,7 +119,7 @@ extern int FUN_003e5ae8(unsigned int);
 /* Supplied declaration required: FUN_003e5b9c. */
 /* Supplied declaration required: FUN_003e5c68. */
 extern unsigned int FUN_003e5d10(void);
-/* Supplied declaration required: FUN_003fc0b8. */
+/* Supplied declaration required: aocHandleButtons. */
 /* Supplied declaration required: FUN_003fce08. */
 extern int FUN_003fcf5c(unsigned int);
 extern unsigned int FUN_00409fe8(int, unsigned int);
@@ -131,7 +131,7 @@ extern int FUN_0040af60(int);
 /* Supplied declaration required: FUN_0040b730. */
 /* Supplied declaration required: FUN_0040ba38. */
 /* Supplied declaration required: FUN_004ff364. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 unsigned int FUN_00208c08(void)
@@ -295,8 +295,8 @@ unsigned int FUN_00208c08(void)
       FUN_002a6fb8(0);
       *(unsigned char *)(temp_v2 + 0x2058) = 0;
       FUN_00240170();
-      temp_v3 = FUN_003792d4();
-      if ((temp_v3 != 0) || (temp_v3 = FUN_00164a34(), temp_v3 != 0)) {
+      temp_v3 = lmapSceneGetScript();
+      if ((temp_v3 != 0) || (temp_v3 = lmapMainIsRunning(), temp_v3 != 0)) {
         temp_v15[4] = 4.2039e-44f;
         temp_v15[5] = 2.10195e-43f;
         temp_v15[6] = 2.10195e-43f;
@@ -312,7 +312,7 @@ unsigned int FUN_00208c08(void)
       *(unsigned int *)(temp_v2 + 0x2038) = 0x3f99999a;
       *(unsigned int *)(temp_v2 + 0x203c) = 0x40a9999a;
       *(unsigned int *)(temp_v2 + 0x2040) = 0x3f000000;
-      temp_v3 = FUN_003792d4();
+      temp_v3 = lmapSceneGetScript();
       *(int *)(temp_v2 + 0x2034) = temp_v3;
       *(unsigned short *)(temp_v2 + 0x138e) = 0xffff;
       if (temp_v3 != 0) {
@@ -322,7 +322,7 @@ unsigned int FUN_00208c08(void)
       }
       else {
         temp_v3 = 0x130;
-        FUN_0016007c();
+        asdOperatorNew();
         puVar6 = (unsigned int *)0x0;
         if (temp_v3 != 0) {
           puVar6 = (unsigned int *)FUN_003e5d10();
@@ -331,7 +331,7 @@ unsigned int FUN_00208c08(void)
         *(unsigned int **)(temp_v2 + 0x2034) = puVar6;
         DAT_00588fd2 = 1;
         FUN_0040ba38();
-        temp_v7 = FUN_00164a34();
+        temp_v7 = lmapMainIsRunning();
         temp_v3 = DAT_0056fcc0;
         if (temp_v7 != 0) {
           temp_v0 = *(char *)(*(int *)(DAT_0056fcc0 + 0x14) + 0xc4);
@@ -373,7 +373,7 @@ unsigned int FUN_00208c08(void)
     if (temp_v3 != 0) {
       *(unsigned char *)(temp_v2 + 0x2030) = 0;
       *(unsigned char *)(temp_v2 + 0x2031) = 1;
-      FUN_003fc0b8(*(unsigned int *)(temp_v2 + 0x2028),7);
+      aocHandleButtons(*(unsigned int *)(temp_v2 + 0x2028),7);
       temp_v4 = 7;
       FUN_0020b6d4(temp_v4);
     }
@@ -402,7 +402,7 @@ unsigned int FUN_00208c08(void)
       }
     }
     else {
-      temp_v3 = FUN_00164a34();
+      temp_v3 = lmapMainIsRunning();
       if (((temp_v3 == 0) && (temp_v3 = FUN_0040af60(DAT_0056fcc0), temp_v3 != 0)) &&
          (*(int *)(DAT_0056fcc0 + 4) == 0)) {
         FUN_0040ae70(DAT_0056fcc0,1);
@@ -448,9 +448,9 @@ LAB_002093e4:
               if (temp_v5 == 0 || temp_v3 == 0) break;
               if (*(int *)(DAT_00588fd4 + 0x20c0) == 0) {
                 temp_v4 = FUN_001a6f60(temp_v5,0);
-                temp_v6 = FUN_00192798();
+                temp_v6 = dataTableGetEntries();
                 *(unsigned int *)(temp_v7 + 0x20c0) = temp_v6;
-                temp_v4 = FUN_00192748(temp_v4);
+                temp_v4 = dataTableGetCount(temp_v4);
                 *(unsigned int *)(temp_v7 + 0x20c4) = temp_v4;
               }
             }
@@ -545,7 +545,7 @@ LAB_002097e0:
               }
             }
             FUN_003e5c68(*(unsigned int *)(temp_v2 + 0x2034),temp_v2 + 0x2044);
-            FUN_002efdc0();
+            statusCameraApply();
             FUN_003e5858(*(unsigned int *)(temp_v2 + 0x2034));
             temp_v4 = FUN_001654d8(temp_v2 + 0x418);
             temp_v12 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -811,7 +811,7 @@ LAB_00209dc4:
     if ((0 < *(short *)(temp_v2 + 0x138e)) && (*(int *)(temp_v2 + 0x2028) != 0)) {
       *(int *)(temp_v2 + 0x202c) = *(int *)(temp_v2 + 0x202c) + 2;
       FUN_004ff364(*(int *)(temp_v2 + 0x2028),0);
-      aeabi_uidivmod(*(unsigned int *)(temp_v2 + 0x202c),(int)temp_v12);
+      __aeabi_uidivmod(*(unsigned int *)(temp_v2 + 0x202c),(int)temp_v12);
       *(unsigned int *)(temp_v2 + 0x202c) = temp_v10;
     }
     FUN_00163aa4(temp_v2 + 0x648);

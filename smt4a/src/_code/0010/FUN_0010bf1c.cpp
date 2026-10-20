@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e74bc(unsigned int);
-int FUN_002e74c4(int, unsigned int, unsigned int, unsigned int);
+int strAssign(int, unsigned int, unsigned int, unsigned int);
 int FUN_002e7908(unsigned char [8], unsigned int *);
 int FUN_002eac34(...);
 int FUN_002eea8a(...);
@@ -28,7 +28,7 @@ typedef struct {
 #endif
 extern int FUN_00121206(int, unsigned char);
 /* Supplied declaration required: FUN_002e74bc. */
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e7908. */
 /* Supplied declaration required: FUN_002eac34. */
 extern int FUN_002ed420(int, int, unsigned int);
@@ -133,7 +133,7 @@ unsigned int FUN_0010bf1c(unsigned int param_1,int param_2,int param_3,unsigned 
           return 0;
         }
         temp_v1 = *(int *)(param_3 + 0xd8);
-        FUN_002e74c4(temp_v1,*(int *)(temp_v0 + 0xc) + *(int *)(temp_v0 + 0x18) + temp_v2,
+        strAssign(temp_v1,*(int *)(temp_v0 + 0xc) + *(int *)(temp_v0 + 0x18) + temp_v2,
                      *(unsigned int *)(temp_v0 + 0x10) - temp_v2,0xffffffff);
         if ((temp_v1 != 0) && (temp_v9 = 1, *(int *)(*(int *)(param_3 + 0xd8) + 0x10) != 0)) {
           temp_v1 = FUN_002eac34(temp_v11);

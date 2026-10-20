@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003f0e20(int, unsigned int);
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_003f0e20. */
 
 
@@ -16,7 +16,7 @@ void FUN_004c3c84(unsigned int param_1,int param_2,unsigned int param_3)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   FUN_003f0e20(temp_v0,param_1);
   if (temp_v0 != 0) {
     *(unsigned int *)(temp_v0 + param_2 * 4 + 0x74) = param_3;

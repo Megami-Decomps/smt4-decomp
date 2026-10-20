@@ -1,29 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nw_snd_internal_FrameHeap_FrameHeap_sub_object_3802B0` (_code @ 0x466cc4, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the cleared handle is written from r1 in retail, from r0 here. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0018c988(int);
-int nw_snd_internal_FrameHeap_ClearSection(int *);
-int nw_ut_FrameHeap_Free(int, int);
+/* nw::snd::internal::FrameHeap: only the heap handle is touched here. */
+typedef struct {
+    void *heap;      /* 0x00 */
+} FrameHeap;
 
-/* Supplied declaration required: FUN_0018c988. */
-/* Supplied declaration required: nw_snd_internal_FrameHeap_ClearSection. */
-/* Supplied declaration required: nw_ut_FrameHeap_Free. */
+void FUN_0018c988(void *heap);
+void nw_snd_internal_FrameHeap_ClearSection(FrameHeap *self);
+void nw_ut_FrameHeap_Free(void *heap, int mode);
 
-
-int * nw_snd_internal_FrameHeap_FrameHeap_sub_object_3802B0(int *param_1)
-
+/* Releases the heap handle, if any, and returns `self`. */
+FrameHeap *nw_snd_internal_FrameHeap_FrameHeap_sub_object_3802B0(FrameHeap *self)
 {
-/* irregular: 3 native warning(s); review required */
-  if (*param_1 != 0) {
-    nw_snd_internal_FrameHeap_ClearSection(param_1);
-    nw_ut_FrameHeap_Free(*param_1,3);
-    FUN_0018c988(*param_1);
-    *param_1 = 0;
-  }
-  return param_1;
+    if (self->heap != NULL) {
+        nw_snd_internal_FrameHeap_ClearSection(self);
+        nw_ut_FrameHeap_Free(self->heap, 3);
+        FUN_0018c988(self->heap);
+        self->heap = NULL;
+    }
+    return self;
 }
 
 } /* extern "C" */

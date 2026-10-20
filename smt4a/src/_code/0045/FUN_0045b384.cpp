@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3390(void);
+int wstrlen(void);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
 } param_3_stack;
 
 extern int FUN_001a7a20(int, unsigned int);
-/* Supplied declaration required: FUN_002e3390. */
+/* Supplied declaration required: wstrlen. */
 
 
 unsigned int FUN_0045b384(int *param_1,int param_2,int param_3)
@@ -40,7 +40,7 @@ unsigned int FUN_0045b384(int *param_1,int param_2,int param_3)
           temp_v4 = *(int *)(param_3 + 0x30);
           temp_v6 = 0;
           temp_v2 = *(unsigned int *)(*(int *)(param_2 + 0x18) + temp_v5 * 4);
-          FUN_002e3390();
+          wstrlen();
           temp_v4 = FUN_001a7a20(temp_v4 + 0x28,temp_v2);
           if (temp_v4 != 0xffff) {
             temp_v6 = *(int *)(*(int *)(*(int *)(param_3 + 0x30) + 0x24) + temp_v4 * 4);

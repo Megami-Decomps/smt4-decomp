@@ -18,14 +18,14 @@ int FUN_002c560c(...);
 int FUN_002c5620(...);
 
 int FUN_00102438(...);
-int FUN_00102f54(...);
+int asdProcessUpdate(...);
 int FUN_00103c9c(...);
 int FUN_00103d48(...);
 int FUN_00103e60(...);
-int FUN_00104008(...);
+int asdPrimSwapBuffers(...);
 int FUN_0010402c(...);
 int FUN_001041e8(...);
-int FUN_00104e54(...);
+int asdSoundShutdown(...);
 int FUN_001052d8(...);
 int FUN_00105394(...);
 int FUN_001058a4(...);
@@ -41,7 +41,7 @@ int FUN_00107598(...);
 int FUN_0010b5e8(...);
 int FUN_00123934(...);
 int FUN_002c5630(...);
-int FUN_002c565c(...);
+int asdProcessSetGroupEnabled(...);
 int FUN_002c567c(...);
 int FUN_002c56dc(...);
 int VectorSignedToFloat(...);
@@ -49,7 +49,7 @@ int software_interrupt(...);
 
 int FUN_001028bc(...);
 int FUN_00102a10(...);
-int FUN_00102d60(...);
+int gameDataAllocBlocks(...);
 int FUN_00102e34(...);
 int FUN_001036fc(...);
 int FUN_00103f74(...);
@@ -72,25 +72,25 @@ int FUN_001070ac(...);
 int FUN_001071a0(...);
 int FUN_002c5728(...);
 int FUN_002c5758(...);
-int FUN_002c5788(...);
-int FUN_002c57c8(...);
+int asdProcessCreateSimple(...);
+int asdSequenceRequest(...);
 int FUN_002c587c(...);
 int FUN_002c58c8(...);
-int FUN_002c5914(...);
+int asdTMTexTableLoadTmx(...);
 
 int FUN_0010250c(...);
 int FUN_00102b10(...);
-int FUN_00102ef0(...);
-int FUN_001037dc(...);
-int FUN_00103b10(...);
+int asdProcessInit(...);
+int asdMemoryInit(...);
+int asdNgcInit(...);
 int FUN_00103c84(...);
 int FUN_00103cec(...);
 int FUN_00103fec(...);
 int FUN_0010421c(...);
 int FUN_001042dc(...);
-int FUN_0010430c(...);
+int asdPrimInit(...);
 int FUN_001049ac(...);
-int FUN_001050dc(...);
+int asdTMTexTableLoadList(...);
 int FUN_00105254(...);
 int FUN_00105494(...);
 int FUN_001054bc(...);
@@ -99,14 +99,14 @@ int FUN_00105b94(...);
 int FUN_00105e10(...);
 int FUN_00105e28(...);
 int FUN_00105e38(...);
-int FUN_00105e88(...);
+int asdMemorySetUseAllocatorA(...);
 int FUN_00106c28(...);
 int FUN_00106d40(...);
 int FUN_00106e10(...);
 int FUN_00107734(...);
 int FUN_0010dc00(...);
-int FUN_002c5ba0(...);
-int FUN_002c5c14(...);
+int asdGxCommandListCreate(...);
+int asdLoadFileSync(...);
 int FUN_002c5d5c(...);
 
 typedef int romwright_code(...);
@@ -173,13 +173,13 @@ extern int FUN_00103650(...); /* 0x103650 */
 extern unsigned char LAB_001036c4; /* 0x1036c4 */
 extern unsigned char LAB_001036e0; /* 0x1036e0 */
 extern unsigned char LAB_00103bd4; /* 0x103bd4 */
-extern int FUN_00103c1c(...); /* 0x103c1c */
+extern int renderCtxBeginPass(...); /* 0x103c1c */
 extern int FUN_00103d8c(...); /* 0x103d8c */
 extern unsigned char LAB_00103dd8; /* 0x103dd8 */
 extern unsigned char LAB_00103e18; /* 0x103e18 */
 extern unsigned char LAB_00103e34; /* 0x103e34 */
-extern int FUN_0010618c(...); /* 0x10618c */
-extern int FUN_001061bc(...); /* 0x1061bc */
+extern int renderCtxApplyCurrentA(...); /* 0x10618c */
+extern int renderCtxApplyCurrentB(...); /* 0x1061bc */
 extern int FUN_001061ec(...); /* 0x1061ec */
 extern unsigned char LAB_001071c8; /* 0x1071c8 */
 extern unsigned char DAT_00446db0; /* 0x446db0 */
@@ -251,9 +251,9 @@ typedef char romwright_storage_uRam00446dd8_8_8_s8_width_check[(sizeof(((union r
 typedef char romwright_storage_uRam00446dd8_8_8_f8_width_check[(sizeof(((union romwright_storage_uRam00446dd8_8_8 *)0)->f8[0]) == 8) ? 1 : -1];
 #endif
 extern union romwright_storage_uRam00446dd8_8_8 uRam00446dd8; /* 0x446dd8 */
-extern unsigned char DAT_0044d048; /* 0x44d048 */
+extern unsigned char g_mobiclipProcess; /* 0x44d048 */
 extern unsigned int DAT_0044e368; /* 0x44e368 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 #ifndef ROMWRIGHT_ZEXT_4_8_DEFINED
 #define ROMWRIGHT_ZEXT_4_8_DEFINED
@@ -274,19 +274,19 @@ extern int DAT_0044ea00; /* 0x44ea00 */
 /* Supplied declaration required: FUN_001028bc. */
 /* Supplied declaration required: FUN_00102a10. */
 /* Supplied declaration required: FUN_00102b10. */
-/* Supplied declaration required: FUN_00102d60. */
+/* Supplied declaration required: gameDataAllocBlocks. */
 /* Supplied declaration required: FUN_00102e34. */
-/* Supplied declaration required: FUN_00102ef0. */
-/* Supplied declaration required: FUN_00102f54. */
+/* Supplied declaration required: asdProcessInit. */
+/* Supplied declaration required: asdProcessUpdate. */
 extern unsigned long long FUN_001034c0(void);
 /* Supplied declaration required: FUN_00103504. */
-extern unsigned int FUN_00103644(void);
+extern unsigned int asdModelGetStatic40(void);
 /* Supplied declaration required: FUN_001036fc. */
 extern int FUN_001037b4(void);
-extern unsigned int FUN_001037c4(void);
-extern unsigned int FUN_001037d0(void);
-/* Supplied declaration required: FUN_001037dc. */
-/* Supplied declaration required: FUN_00103b10. */
+extern unsigned int asdModelGetStringConst(void);
+extern unsigned int asdModelGetStatic3C(void);
+/* Supplied declaration required: asdMemoryInit. */
+/* Supplied declaration required: asdNgcInit. */
 /* Supplied declaration required: FUN_00103c84. */
 /* Supplied declaration required: FUN_00103c9c. */
 /* Supplied declaration required: FUN_00103cd0. */
@@ -300,7 +300,7 @@ extern int FUN_00103ec8(void);
 /* Supplied declaration required: FUN_00103f74. */
 /* Supplied declaration required: FUN_00103f90. */
 /* Supplied declaration required: FUN_00103fec. */
-/* Supplied declaration required: FUN_00104008. */
+/* Supplied declaration required: asdPrimSwapBuffers. */
 /* Supplied declaration required: FUN_0010402c. */
 /* Supplied declaration required: FUN_00104074. */
 extern int FUN_001041c8(void);
@@ -308,18 +308,18 @@ extern int FUN_001041d8(void);
 /* Supplied declaration required: FUN_001041e8. */
 /* Supplied declaration required: FUN_0010421c. */
 /* Supplied declaration required: FUN_001042b8. */
-extern unsigned int FUN_001042d0(void);
+extern unsigned int asdModelGetStatic50(void);
 /* Supplied declaration required: FUN_001042dc. */
-/* Supplied declaration required: FUN_0010430c. */
+/* Supplied declaration required: asdPrimInit. */
 /* Supplied declaration required: FUN_001043c8. */
 /* Supplied declaration required: FUN_001049ac. */
 extern int FUN_00104e0c(void);
 /* Supplied declaration required: FUN_00104e28. */
 /* Supplied declaration required: FUN_00104e44. */
-/* Supplied declaration required: FUN_00104e54. */
+/* Supplied declaration required: asdSoundShutdown. */
 /* Supplied declaration required: FUN_00104ec4. */
 extern int FUN_001050cc(void);
-/* Supplied declaration required: FUN_001050dc. */
+/* Supplied declaration required: asdTMTexTableLoadList. */
 extern unsigned long long FUN_001051f0(void);
 /* Supplied declaration required: FUN_00105254. */
 /* Supplied declaration required: FUN_001052d8. */
@@ -334,14 +334,14 @@ extern unsigned long long FUN_00105478(void);
 /* Supplied declaration required: FUN_00105b94. */
 /* Supplied declaration required: FUN_00105c08. */
 /* Supplied declaration required: FUN_00105c78. */
-extern unsigned int FUN_00105ca0(void);
+extern unsigned int asdModelGetStatic54(void);
 /* Supplied declaration required: FUN_00105cac. */
 /* Supplied declaration required: FUN_00105e00. */
 /* Supplied declaration required: FUN_00105e10. */
 /* Supplied declaration required: FUN_00105e28. */
 /* Supplied declaration required: FUN_00105e38. */
 /* Supplied declaration required: FUN_00105e50. */
-/* Supplied declaration required: FUN_00105e88. */
+/* Supplied declaration required: asdMemorySetUseAllocatorA. */
 /* Supplied declaration required: FUN_00105e98. */
 /* Supplied declaration required: FUN_00105ef8. */
 /* Supplied declaration required: FUN_00105f98. */
@@ -375,21 +375,21 @@ extern unsigned long long FUN_002c5434(unsigned int);
 /* Supplied declaration required: FUN_002c560c. */
 /* Supplied declaration required: FUN_002c5620. */
 /* Supplied declaration required: FUN_002c5630. */
-extern unsigned long long FUN_002c564c(unsigned int);
-/* Supplied declaration required: FUN_002c565c. */
+extern unsigned long long jyoucyuGetTableEntry(unsigned int);
+/* Supplied declaration required: asdProcessSetGroupEnabled. */
 /* Supplied declaration required: FUN_002c567c. */
 /* Supplied declaration required: FUN_002c56dc. */
 /* Supplied declaration required: FUN_002c5728. */
 /* Supplied declaration required: FUN_002c5758. */
-/* Supplied declaration required: FUN_002c5788. */
-/* Supplied declaration required: FUN_002c57c8. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_002c587c. */
 /* Supplied declaration required: FUN_002c58c8. */
-/* Supplied declaration required: FUN_002c5914. */
-/* Supplied declaration required: FUN_002c5ba0. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
+/* Supplied declaration required: asdGxCommandListCreate. */
 extern int FUN_002c5be8(void);
-extern unsigned int FUN_002c5bf8(void);
-/* Supplied declaration required: FUN_002c5c14. */
+extern unsigned int asdModelGetStatic38(void);
+/* Supplied declaration required: asdLoadFileSync. */
 /* Supplied declaration required: FUN_002c5d5c. */
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 extern unsigned int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
@@ -465,8 +465,8 @@ void FUN_00101308(void)
   ppcVar5 = &temp_v26;
   nn_cfg_CTR_Initialize();
   FUN_00107734(0,0x12345678);
-  FUN_001037dc(0x100000);
-  FUN_00105e88(1);
+  asdMemoryInit(0x100000);
+  asdMemorySetUseAllocatorA(1);
   FUN_0010250c();
   FUN_0010dc00();
   FUN_00106e10();
@@ -477,7 +477,7 @@ void FUN_00101308(void)
   if (temp_v2 == 0) {
     FUN_00103c84();
   }
-  FUN_00103b10();
+  asdNgcInit();
   temp_v34 = 0;
   temp_v36 = 0;
   temp_v37 = 0;
@@ -493,11 +493,11 @@ void FUN_00101308(void)
   FUN_001054bc(&temp_v32);
   FUN_00105e38(1);
   FUN_00105b94();
-  temp_v2 = DAT_0044ea00;
-  *(unsigned int *)(DAT_0044ea00 + 0x136c) = 0;
+  temp_v2 = g_titleScene;
+  *(unsigned int *)(g_titleScene + 0x136c) = 0;
   temp_v3 = FUN_002c5da8(6,7,0);
   *(unsigned int *)(temp_v2 + 0x1384) = temp_v3;
-  temp_v2 = DAT_0044ea00;
+  temp_v2 = g_titleScene;
   temp_v3 = FUN_002c5d80(5,1);
   *(unsigned int *)(temp_v2 + 0x1378) = temp_v3;
   FUN_001042dc();
@@ -522,23 +522,23 @@ void FUN_00101308(void)
   temp_v47 = 4;
   temp_v45 = 8;
   FUN_00105254(&temp_v40,0);
-  FUN_002c5c14(&LAB_001017b4,0,1,0x80);
+  asdLoadFileSync(&LAB_001017b4,0,1,0x80);
   FUN_00105494();
   FUN_00105e28(1);
-  puVar6 = (unsigned int *)FUN_001037d0();
+  puVar6 = (unsigned int *)asdModelGetStatic3C();
   *puVar6 = 0x40400000;
-  puVar6 = (unsigned int *)FUN_00103644();
+  puVar6 = (unsigned int *)asdModelGetStatic40();
   *puVar6 = 0x469c4000;
-  puVar6 = (unsigned int *)FUN_001037c4();
+  puVar6 = (unsigned int *)asdModelGetStringConst();
   *puVar6 = 0x41400000;
-  puVar6 = (unsigned int *)FUN_001042d0();
+  puVar6 = (unsigned int *)asdModelGetStatic50();
   temp_v22 = 0.5f;
   *puVar6 = 0x3f000000;
-  puVar6 = (unsigned int *)FUN_00105ca0();
+  puVar6 = (unsigned int *)asdModelGetStatic54();
   *puVar6 = 0x3ecccccd;
   FUN_001049ac(0x100,0x30000);
   FUN_0010421c();
-  puVar6 = (unsigned int *)FUN_002c5bf8();
+  puVar6 = (unsigned int *)asdModelGetStatic38();
   *puVar6 = 0x447a0000;
   temp_v2 = FUN_00104e0c();
   pfVar8 = (float *)0x0;
@@ -553,7 +553,7 @@ void FUN_00101308(void)
       temp_v17 = (float)puVar7[6];
       temp_v21 = (float)puVar7[3];
       temp_v19 = (float)puVar7[5];
-      pfVar8 = (float *)FUN_002c5bf8();
+      pfVar8 = (float *)asdModelGetStatic38();
       temp_v18 = *pfVar8;
       temp_v20 = temp_v17 + temp_v18 * temp_v22;
       temp_v17 = temp_v17 - temp_v18 * temp_v22;
@@ -566,15 +566,15 @@ void FUN_00101308(void)
       puVar7[6] = (unsigned int)((temp_v20 + temp_v17) * temp_v22);
     }
   }
-  FUN_002c5ba0();
+  asdGxCommandListCreate();
   DAT_00446db8 = pfVar8;
-  FUN_002c5ba0();
+  asdGxCommandListCreate();
   DAT_00446dbc = pfVar8;
   FUN_00102b10();
-  FUN_0010430c(0x100000);
-  FUN_00102ef0(0x163);
+  asdPrimInit(0x100000);
+  asdProcessInit(0x163);
   FUN_00103fec();
-  FUN_001050dc(&LAB_001017ec);
+  asdTMTexTableLoadList(&LAB_001017ec);
   FUN_00103cec();
   FUN_00102a10();
   FUN_001028bc();
@@ -585,9 +585,9 @@ void FUN_00101308(void)
   FUN_00104e28(7);
   FUN_00103f74(2);
   FUN_00106ba8();
-  FUN_002c5914(0x2c,0);
+  asdTMTexTableLoadTmx(0x2c,0);
   FUN_002c58c8(0x2c,0);
-  FUN_00102d60();
+  gameDataAllocBlocks();
   FUN_00104e44(0);
   FUN_00105e50(1);
   FUN_00106080();
@@ -597,105 +597,105 @@ void FUN_00101308(void)
   FUN_00105c78();
   FUN_002c587c();
   FUN_00104ec4();
-  FUN_002c57c8(0x18,0);
+  asdSequenceRequest(0x18,0);
   temp_v26 = (romwright_code *)&LAB_00103bd4;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101804,0x65,0);
+  asdProcessCreateSimple(&LAB_00101804,0x65,0);
   temp_v26 = FUN_00103d8c;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101818,0x66,0);
+  asdProcessCreateSimple(&LAB_00101818,0x66,0);
   temp_v26 = FUN_00103650;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101830,0x69,0);
+  asdProcessCreateSimple(&LAB_00101830,0x69,0);
   temp_v26 = FUN_00102738;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101c14,0x6e,0);
-  temp_v26 = FUN_0010618c;
+  asdProcessCreateSimple(&LAB_00101c14,0x6e,0);
+  temp_v26 = renderCtxApplyCurrentA;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101c24,0x75,0);
+  asdProcessCreateSimple(&LAB_00101c24,0x75,0);
   temp_v26 = (romwright_code *)&LAB_001036e0;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101c34,0x72,0);
+  asdProcessCreateSimple(&LAB_00101c34,0x72,0);
   temp_v26 = FUN_001026a8;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101c48,0x74,0);
+  asdProcessCreateSimple(&LAB_00101c48,0x74,0);
   temp_v26 = FUN_00102798;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101c14,0x83,0);
+  asdProcessCreateSimple(&LAB_00101c14,0x83,0);
   temp_v26 = FUN_001026ec;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101c5c,0xcb,0);
-  temp_v26 = FUN_00103c1c;
+  asdProcessCreateSimple(&LAB_00101c5c,0xcb,0);
+  temp_v26 = renderCtxBeginPass;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101c6c,0xcc,0);
+  asdProcessCreateSimple(&LAB_00101c6c,0xcc,0);
   temp_v26 = FUN_00102884;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101c80,0xcd,0);
+  asdProcessCreateSimple(&LAB_00101c80,0xcd,0);
   temp_v26 = FUN_001027d4;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101c90,0xd2,0);
-  temp_v26 = FUN_001061bc;
+  asdProcessCreateSimple(&LAB_00101c90,0xd2,0);
+  temp_v26 = renderCtxApplyCurrentB;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101ca0,0xd3,0);
+  asdProcessCreateSimple(&LAB_00101ca0,0xd3,0);
   temp_v26 = FUN_00102834;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101cb0,0xe1,0);
+  asdProcessCreateSimple(&LAB_00101cb0,0xe1,0);
   temp_v26 = (romwright_code *)&LAB_00103e18;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101cc0,0x7a,0);
+  asdProcessCreateSimple(&LAB_00101cc0,0x7a,0);
   temp_v27 = 0;
   temp_v26 = (romwright_code *)&LAB_00103e34;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101cd8,0xd8,0);
+  asdProcessCreateSimple(&LAB_00101cd8,0xd8,0);
   temp_v26 = (romwright_code *)&LAB_00103e18;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101cec,0x76,0);
+  asdProcessCreateSimple(&LAB_00101cec,0x76,0);
   temp_v27 = 0;
   temp_v26 = (romwright_code *)&LAB_00103e34;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101d00,0xd4,0);
+  asdProcessCreateSimple(&LAB_00101d00,0xd4,0);
   temp_v26 = (romwright_code *)&LAB_00103dd8;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101d18,0xe2,0);
+  asdProcessCreateSimple(&LAB_00101d18,0xe2,0);
   temp_v26 = (romwright_code *)&LAB_001036c4;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101d30,0xe4,0);
+  asdProcessCreateSimple(&LAB_00101d30,0xe4,0);
   temp_v26 = FUN_001061ec;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101d48,0x162,0);
+  asdProcessCreateSimple(&LAB_00101d48,0x162,0);
   temp_v26 = (romwright_code *)&LAB_00102d4c;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101d58,0x85,0);
+  asdProcessCreateSimple(&LAB_00101d58,0x85,0);
   temp_v26 = (romwright_code *)&LAB_00102d38;
   temp_v27 = 0;
   temp_v28 = 0;
-  FUN_002c5788(&LAB_00101d6c,0x160,0);
+  asdProcessCreateSimple(&LAB_00101d6c,0x160,0);
   FUN_00105cac(3);
   FUN_00104074(0x67,0x68,0xe3,0);
   FUN_001043c8(1);
   FUN_00102e34(0);
   temp_v22 = 0.25f;
-  FUN_00106a18(DAT_0044ea00);
+  FUN_00106a18(g_titleScene);
   FUN_002c5758(7);
   FUN_002c5728(7);
   FUN_002c56dc(1);
@@ -717,19 +717,19 @@ LAB_00101b80:
         temp_v2 = nngxIsStereoVisionAllowed();
         if (temp_v2 != 0) {
           DAT_00446db1 = '\x01';
-          FUN_002c565c(0xcc,1);
-          FUN_002c565c(0xd8,1);
-          FUN_002c565c(0xdb,1);
-          FUN_002c565c(0xde,1);
-          FUN_002c565c(0xdf,1);
+          asdProcessSetGroupEnabled(0xcc,1);
+          asdProcessSetGroupEnabled(0xd8,1);
+          asdProcessSetGroupEnabled(0xdb,1);
+          asdProcessSetGroupEnabled(0xde,1);
+          asdProcessSetGroupEnabled(0xdf,1);
         }
         else {
           DAT_00446db1 = '\0';
-          FUN_002c565c(0xcc,0);
-          FUN_002c565c(0xd8,0);
-          FUN_002c565c(0xdb,0);
-          FUN_002c565c(0xde,0);
-          FUN_002c565c(0xdf,0);
+          asdProcessSetGroupEnabled(0xcc,0);
+          asdProcessSetGroupEnabled(0xd8,0);
+          asdProcessSetGroupEnabled(0xdb,0);
+          asdProcessSetGroupEnabled(0xde,0);
+          asdProcessSetGroupEnabled(0xdf,0);
         }
         FUN_00105e98(0,temp_v2 == 0);
         temp_v2 = 0;
@@ -754,23 +754,23 @@ LAB_00101b80:
             FUN_00105394();
           }
         }
-        FUN_00102f54(0);
+        asdProcessUpdate(0);
         temp_v24 = romwright_piece_4_4(temp_v5,(unsigned int)DAT_00446db3);
         temp_v23 = uRam00446dd0.whole;
         if (DAT_00446db3 == 0) {
-          temp_v4 = (unsigned int)DAT_0044d048;
+          temp_v4 = (unsigned int)g_mobiclipProcess;
           if (temp_v4 == 0) {
             FUN_0010633c();
             FUN_00105f98();
             temp_v4 = FUN_00106708();
           }
-          FUN_00104008(temp_v4);
+          asdPrimSwapBuffers(temp_v4);
           FUN_001058a4(iRam00446dcc >= 2);
-          temp_v24 = FUN_002c564c(1);
+          temp_v24 = jyoucyuGetTableEntry(1);
           temp_v4 = (unsigned int)temp_v24;
           temp_v15 = temp_v4 == 0;
           if (temp_v15) {
-            temp_v4 = (unsigned int)DAT_0044d048;
+            temp_v4 = (unsigned int)g_mobiclipProcess;
           }
           temp_v24 = romwright_piece_4_4((int)((unsigned long long)temp_v24 >> 0x20),temp_v4);
           temp_v23 = uRam00446dd0.whole;
@@ -811,7 +811,7 @@ LAB_00101b80:
                                             (unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v22 = (float)(int)((temp_v17 * temp_v16) / temp_v22);
         DAT_00446dc8 = temp_v22;
-        if (DAT_0044d048 == 0) {
+        if (g_mobiclipProcess == 0) {
           if ((int)temp_v22 < 100) {
             FUN_001052d8();
           }
@@ -823,7 +823,7 @@ LAB_00101b80:
           temp_v2 = FUN_00103e50();
           if (temp_v2 != 0) {
             FUN_00123934();
-            if (DAT_0044d048 != 0) {
+            if (g_mobiclipProcess != 0) {
               FUN_002c5630(3);
             }
             FUN_00107598();
@@ -839,7 +839,7 @@ LAB_00101b80:
             if (temp_v2 != 0) {
               FUN_001041e8();
             }
-            FUN_00104e54();
+            asdSoundShutdown();
             FUN_00103504();
             FUN_00103c84();
           }
@@ -847,14 +847,14 @@ LAB_00101b80:
         temp_v24 = FUN_00103e70();
         temp_v3 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
         if ((int)temp_v24 == 2) {
-          if (DAT_0044d048 != 0) {
+          if (g_mobiclipProcess != 0) {
             FUN_002c5630(2);
           }
           FUN_00103cd0();
           FUN_002c5620();
           FUN_001042b8();
           temp_v3 = temp_v7;
-          if (DAT_0044d048 != 0) {
+          if (g_mobiclipProcess != 0) {
             FUN_002c560c(2);
             temp_v3 = temp_v8;
           }
@@ -871,7 +871,7 @@ LAB_00101b80:
             temp_v3 = temp_v9;
           }
           else {
-            if (DAT_0044d048 != 0) {
+            if (g_mobiclipProcess != 0) {
               FUN_002c5630(0);
             }
             FUN_00123934();
@@ -882,7 +882,7 @@ LAB_00101b80:
               temp_v24 = FUN_002c55b4();
               temp_v3 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
               if ((int)temp_v24 != 0) {
-                if (DAT_0044d048 != 0) {
+                if (g_mobiclipProcess != 0) {
                   FUN_002c5630(3);
                   nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
                   temp_v3 = temp_v10;
@@ -891,7 +891,7 @@ LAB_00101b80:
               }
             }
             else {
-              if (DAT_0044d048 != 0) {
+              if (g_mobiclipProcess != 0) {
                 FUN_002c5630(3);
                 nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
                 temp_v3 = temp_v10;
@@ -900,7 +900,7 @@ LAB_00101b80:
             }
             temp_v23 = romwright_piece_4_4(temp_v3,(unsigned int)DAT_00446db3);
             if (DAT_00446db3 != 0) goto LAB_00101b80;
-            if (DAT_0044d048 != 0) {
+            if (g_mobiclipProcess != 0) {
               FUN_002c560c(0);
             }
             FUN_002c5620();
@@ -920,7 +920,7 @@ LAB_00101b80:
     temp_v23 = temp_v25 & 0xffffffff00000000;
   } while ((int)temp_v25 == 0);
   FUN_002c55d4(1);
-  if (DAT_0044d048 != 0) {
+  if (g_mobiclipProcess != 0) {
     FUN_002c5630(1);
   }
   FUN_00123934();
@@ -930,7 +930,7 @@ LAB_00101b80:
   if (temp_v2 == 0) {
     temp_v2 = FUN_002c55b4();
     if (temp_v2 != 0) {
-      if (DAT_0044d048 != 0) {
+      if (g_mobiclipProcess != 0) {
         FUN_002c5630(3);
         nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
       }
@@ -938,13 +938,13 @@ LAB_00101b80:
     }
   }
   else {
-    if (DAT_0044d048 != 0) {
+    if (g_mobiclipProcess != 0) {
       FUN_002c5630(3);
       nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
     }
     DAT_00446db3 = 1;
   }
-  if ((DAT_00446db3 == 0) && (DAT_0044d048 != 0)) {
+  if ((DAT_00446db3 == 0) && (g_mobiclipProcess != 0)) {
     FUN_002c560c(1);
   }
   temp_v23 = FUN_002c5434(1);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00163060(...);
+int asdMemoryAllocTracked(...);
 int FUN_00178b04(...);
 int FUN_00291038(void);
 int FUN_003fd7c0(int, int, int);
@@ -26,10 +26,10 @@ extern int DAT_0057f290; /* 0x57f290 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00291038. */
-extern unsigned int FUN_00340fa0(void);
+extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
 /* Supplied declaration required: FUN_003fe86c. */
@@ -77,7 +77,7 @@ void FUN_0035deb0(void)
     return;
   }
   temp_v5 = 0x20000;
-  temp_v0 = FUN_00340fa0();
+  temp_v0 = asdVramBGetFreeBytes();
   if (temp_v0 >= 0x20001) {
     temp_v5 = 0x30000;
   }
@@ -135,7 +135,7 @@ void FUN_0035deb0(void)
     } while (temp_v1 < *(int *)(temp_v4 + 8));
     if (*piVar10 != 0) {
       temp_v5 = 0x100;
-      FUN_00163060(0x100,0x100,0,*piVar10 << 2,1,(int)temp_v8,(int)((unsigned long long)temp_v8 >> 0x20),
+      asdMemoryAllocTracked(0x100,0x100,0,*piVar10 << 2,1,(int)temp_v8,(int)((unsigned long long)temp_v8 >> 0x20),
                    unaff_r6,unaff_r7,unaff_r8);
       *(unsigned int *)(temp_v3 + 0x20) = temp_v5;
       temp_v6 = 0;

@@ -22,7 +22,7 @@ extern unsigned int FUN_002865f8(void);
 /* Supplied declaration required: FUN_002866b4. */
 /* Supplied declaration required: FUN_002893d8. */
 /* Supplied declaration required: FUN_0028dc98. */
-extern unsigned int FUN_00296cc8(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 extern unsigned char FUN_003821b8(void);
 /* Supplied declaration required: QuestCenter_GetActiveEntry. */
 
@@ -50,7 +50,7 @@ void scrComm_Message_ShowFromQuestStateWaitLock(void)
     *(unsigned char *)(temp_v0 + 0x31) = 1;
   }
   temp_v3 = FUN_002865f8();
-  temp_v4 = FUN_00296cc8(0);
+  temp_v4 = scrGetArg(0);
   temp_v5 = FUN_002893d8();
   FUN_002866b4(temp_v3,temp_v4,temp_v5,temp_v1,1,0);
   return;

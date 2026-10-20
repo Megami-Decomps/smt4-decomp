@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_00297468(...);
 int FUN_002a5ed0(...);
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c5788(...);
-int FUN_002c5914(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int asdProcessCreateSimple(...);
+int asdTMTexTableLoadTmx(...);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -33,10 +33,10 @@ extern int FUN_0024bb10(unsigned int);
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_002a5ed0. */
 extern int FUN_002a60b4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c5788. */
-/* Supplied declaration required: FUN_002c5914. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 
 
 void FUN_002cf150(unsigned int param_1,unsigned int param_2)
@@ -50,7 +50,7 @@ void FUN_002cf150(unsigned int param_1,unsigned int param_2)
   
   if (DAT_0043df28 == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
-    FUN_002c498c(0x100,0x100,0,0x28,1);
+    asdMemAlloc(0x100,0x100,0,0x28,1);
     DAT_0043df28 = puVar1;
   }
   puVar1 = DAT_0043df28;
@@ -65,10 +65,10 @@ void FUN_002cf150(unsigned int param_1,unsigned int param_2)
   puVar1[8] = 0;
   puVar1[9] = 0;
   puVar2 = &LAB_002cf320;
-  FUN_002c5788(&LAB_002cf320,1,0,0,FUN_001ad6fc,0,0);
+  asdProcessCreateSimple(&LAB_002cf320,1,0,0,FUN_001ad6fc,0,0);
   *puVar1 = (unsigned int)puVar2;
-  FUN_002c4a08(&LAB_002cf334,0x81,0,0,&LAB_001ad4f4,0,0,puVar2);
-  FUN_002c4a08(&LAB_002cf34c,0xdf,0,0,&LAB_001ad4f4,0,0,*puVar1);
+  taskCreateDraw(&LAB_002cf334,0x81,0,0,&LAB_001ad4f4,0,0,puVar2);
+  taskCreateDraw(&LAB_002cf34c,0xdf,0,0,&LAB_001ad4f4,0,0,*puVar1);
   puVar1[6] = 0;
   puVar1[3] = 0;
   *(unsigned char *)(puVar1 + 9) = 0;
@@ -80,7 +80,7 @@ void FUN_002cf150(unsigned int param_1,unsigned int param_2)
   do {
     temp_v0 = FUN_0024bb10((&DAT_0043df40)[temp_v1 * 3]);
     if (temp_v0 == 0) {
-      FUN_002c5914((&DAT_0043df40)[temp_v1 * 3],0);
+      asdTMTexTableLoadTmx((&DAT_0043df40)[temp_v1 * 3],0);
       *(unsigned char *)(temp_v1 * 0xc + 0x43df49) = 1;
     }
     temp_v0 = FUN_002a60b4((&DAT_0043df40)[temp_v1 * 3],(&DAT_0043df44)[temp_v1 * 3]);

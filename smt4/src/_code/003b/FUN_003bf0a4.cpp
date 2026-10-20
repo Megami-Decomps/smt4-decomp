@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_002533f4(unsigned int, unsigned int, int);
 
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_002533f4. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 
 
 unsigned int FUN_003bf0a4(void)
@@ -20,7 +20,7 @@ unsigned int FUN_003bf0a4(void)
   unsigned int temp_v2;
   int temp_v3;
   
-  temp_v1 = FUN_002939f4();
+  temp_v1 = btlGetMainState();
   if ((*(unsigned int *)(temp_v1 + 0x44ac) & 0x20) != 0) {
     if (*(unsigned int *)(temp_v1 + 0x2f30) < 0xd) {
       return 1;
@@ -48,7 +48,7 @@ unsigned int FUN_003bf0a4(void)
     if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x20000000) == 0 && temp_v0 == 0) {
       return 0;
     }
-    temp_v3 = FUN_0023eae0(99);
+    temp_v3 = randRange(99);
     if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x20000000) != 0) {
       temp_v3 = -1;
     }

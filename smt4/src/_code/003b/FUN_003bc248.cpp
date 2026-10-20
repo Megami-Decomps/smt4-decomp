@@ -5,19 +5,19 @@
 extern "C" {
 
 int FUN_002aa568(unsigned char *, unsigned int *);
-int FUN_002c4938(unsigned int *, int);
+int memClear(unsigned int *, int);
 int FUN_0038959c(unsigned int *, unsigned int);
 int VectorUnsignedToFloat(unsigned int, int);
 
 extern unsigned char LAB_003bc65c; /* 0x3bc65c */
-extern unsigned int *DAT_00433158; /* 0x433158 */
+extern unsigned int *g_aocSystem; /* 0x433158 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002aa568. */
-extern unsigned int FUN_002c0c74(unsigned int);
-extern unsigned int *FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c4938. */
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int *dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_0038959c. */
 
 
@@ -41,14 +41,14 @@ void FUN_003bc248(unsigned int *param_1,unsigned int param_2,unsigned char param
   unsigned int in_fpscr;
   float temp_v10;
   
-  temp_v2 = FUN_002c0cec(3,0);
-  puVar4 = (unsigned int *)FUN_002c0cc4();
+  temp_v2 = dataTableGet(3,0);
+  puVar4 = (unsigned int *)dataTableGetEntries();
   puVar6 = puVar4;
-  if (((-1 < (int)param_2) && (temp_v3 = FUN_002c0c74(temp_v2), param_2 < temp_v3)) &&
-     (puVar6 = DAT_00433158, FUN_0038959c(DAT_00433158,param_2), puVar6 == (unsigned int *)0x0)) {
+  if (((-1 < (int)param_2) && (temp_v3 = dataTableGetCount(temp_v2), param_2 < temp_v3)) &&
+     (puVar6 = g_aocSystem, FUN_0038959c(g_aocSystem,param_2), puVar6 == (unsigned int *)0x0)) {
     puVar6 = puVar4 + param_2 * 0x18;
   }
-  FUN_002c4938(param_1,0x74);
+  memClear(param_1,0x74);
   *param_1 = 0;
   param_1[1] = 0;
   param_1[2] = 0;

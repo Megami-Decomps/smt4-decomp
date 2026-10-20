@@ -10,10 +10,10 @@ int FUN_003ae620(unsigned int);
 
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002942c4. */
 extern int FUN_002b6a54(int, unsigned short);
-extern int FUN_002b6b20(void);
+extern int gameGetOptions(void);
 /* Supplied declaration required: FUN_00336a84. */
 /* Supplied declaration required: FUN_003ae620. */
 
@@ -26,11 +26,11 @@ unsigned int scrComm_BattleUI_RefreshLabel(void)
   int temp_v1;
   int temp_v2;
   
-  temp_v1 = FUN_002939f4();
+  temp_v1 = btlGetMainState();
   FUN_00336a84();
-  temp_v2 = FUN_002b6b20();
+  temp_v2 = gameGetOptions();
   temp_v0 = *(unsigned short *)(temp_v2 + 0x606);
-  temp_v2 = FUN_002b6b20();
+  temp_v2 = gameGetOptions();
   temp_v2 = FUN_002b6a54((int)*(short *)(temp_v2 + 0x604),temp_v0);
   FUN_002942c4((int)(short)(*(short *)(temp_v2 + 0x5a) + 1),0);
   *(unsigned int *)(temp_v1 + 0x44a0) = *(unsigned int *)(temp_v1 + 0x44a0) | 0x2000000;

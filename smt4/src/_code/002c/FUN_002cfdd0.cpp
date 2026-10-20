@@ -13,8 +13,8 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_0024b888. */
-extern int FUN_002939f4(void);
-extern int FUN_00296cc8(unsigned int);
+extern int btlGetMainState(void);
+extern int scrGetArg(unsigned int);
 extern int FUN_002a8764(void);
 
 
@@ -29,8 +29,8 @@ unsigned int FUN_002cfdd0(void)
   unsigned int temp_v4;
   int temp_v5;
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_002939f4();
+  temp_v0 = scrGetArg(0);
+  temp_v1 = btlGetMainState();
   if ((temp_v0 >= 0x6d) && (*(short *)(temp_v1 + 0x1fc4) < 4)) {
     temp_v5 = 0;
     do {

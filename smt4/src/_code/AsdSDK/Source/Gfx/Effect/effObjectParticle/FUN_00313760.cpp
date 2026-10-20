@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_002691d8(unsigned int, unsigned int, unsigned int);
 int FUN_00269334(void);
-int FUN_002c32a0(int, int, int, unsigned int, int, int);
-int FUN_002c415c(void);
+int memAlloc(int, int, int, unsigned int, int, int);
+int asdMemFree(void);
 int FUN_003024d0(unsigned int *, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -17,8 +17,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002691d8. */
 /* Supplied declaration required: FUN_00269334. */
-/* Supplied declaration required: FUN_002c32a0. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_003024d0. */
 
 
@@ -37,11 +37,11 @@ void FUN_00313760(unsigned int *param_1,unsigned int param_2,unsigned int param_
   FUN_002691d8(param_2,*param_1,param_3);
   param_1[0x27] = param_2;
   if (param_1[0x29] != 0) {
-    FUN_002c415c();
+    asdMemFree();
   }
   temp_v2 = *(unsigned int *)(param_1[0x27] + 8);
   temp_v0 = 0x10000;
-  FUN_002c32a0(0x10000,0x100,0,temp_v2 * 0x1c,0x10,1);
+  memAlloc(0x10000,0x100,0,temp_v2 * 0x1c,0x10,1);
   param_1[0x29] = temp_v0;
   temp_v1 = 0;
   param_1[0x28] = temp_v0;

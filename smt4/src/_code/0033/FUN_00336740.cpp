@@ -1,40 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00336740` (_code @ 0x336740, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail uses r1 (not r0) as the temp for flags |= 0x1000000 */
+/* Returns the context's current value, or -1 when it has nothing pending; prepares it first if needed. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00254ec8(int);
+typedef struct Context {
+    /* 0x0000 */ u8 unk0000[0x1FC8];
+    /* 0x1FC8 */ s16 value;
+    /* 0x1FCA */ u8 unk1FCA[0x24D6];
+    /* 0x44A0 */ u32 flags;
+    /* 0x44A4 */ u8 unk44A4[4];
+    /* 0x44A8 */ u32 flags2;
+    /* 0x44AC */ u8 unk44AC[0x454];
+    /* 0x4900 */ u8 unk4900[0x6C];
+    /* 0x496C */ u16 pendingA;
+    /* 0x496E */ u16 pendingB;
+} Context;
 
-/* Supplied declaration required: FUN_00254ec8. */
+extern void FUN_00254ec8(Context *ctx);
 
-
-int FUN_00336740(int param_1)
-
+s32 FUN_00336740(Context *ctx)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned char temp_v2;
-  
-  puVar3 = (unsigned int *)(param_1 + 0x44a0);
-  if (((*(unsigned int *)(param_1 + 0x44a8) & 0x10) == 0) && ((*puVar3 & 0x1000000) == 0)) {
-    FUN_00254ec8(param_1);
-    *puVar3 = *puVar3 | 0x1000000;
-  }
-  temp_v0 = (int)*(short *)(param_1 + 0x1fc8);
-  if ((*puVar3 & 0x1004) == 0) {
-    temp_v1 = param_1 + 0x4900;
-    temp_v2 = *(short *)(param_1 + 0x496c) == 0;
-    if (temp_v2) {
-      temp_v1 = (unsigned int)*(unsigned short *)(param_1 + 0x496e);
+    u32 *flags = &ctx->flags;
+    s32 value;
+
+    if ((ctx->flags2 & 0x10) == 0 && (*flags & 0x1000000) == 0) {
+        FUN_00254ec8(ctx);
+        *flags |= 0x1000000;
     }
-    if (temp_v2 && temp_v1 == 0) {
-      temp_v0 = -1;
+    value = ctx->value;
+    if ((*flags & 0x1004) == 0) {
+        if (ctx->pendingA == 0 && ctx->pendingB == 0) {
+            value = -1;
+        }
     }
-  }
-  return temp_v0;
+    return value;
 }
 
-} /* extern "C" */
+}

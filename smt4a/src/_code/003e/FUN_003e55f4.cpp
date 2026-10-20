@@ -1,38 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e55f4` (_code @ 0x3e55f4, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Marks the linked child of each of the four entries as touched (flags |= 3) and notifies it. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001aea28(unsigned int);
+typedef struct Child {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 flags;
+} Child;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+typedef struct Entry {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ Child *child;
+} Entry;
 
-/* Supplied declaration required: FUN_001aea28. */
+typedef struct Slot {
+    /* 0x00 */ Entry *entry;
+    /* 0x04 */ u8 unk04[0x58];
+} Slot; /* 0x5C */
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Entry *primary;
+    /* 0x0C */ u8 unk0C[0x18];
+    /* 0x24 */ Slot slots[3];
+} Holder;
 
-void FUN_003e55f4(int param_1)
+extern u32 DAT_0056fcc0;
 
+extern void FUN_001aea28(u32 arg, Child *child);
+
+void FUN_003e55f4(Holder *holder)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = *(int *)(*(int *)(param_1 + 8) + 4);
-  if (temp_v0 != 0) {
-    *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
-    FUN_001aea28(DAT_0056fcc0);
-  }
-  temp_v0 = 0;
-  do {
-    temp_v1 = *(int *)(*(int *)(param_1 + temp_v0 * 0x5c + 0x24) + 4);
-    if (temp_v1 != 0) {
-      *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 3;
-      FUN_001aea28(DAT_0056fcc0);
+    Child *child;
+    s32 i;
+
+    child = holder->primary->child;
+    if (child != NULL) {
+        child->flags |= 3;
+        FUN_001aea28(DAT_0056fcc0, child);
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 3);
-  return;
+    for (i = 0; i < 3; i++) {
+        child = holder->slots[i].entry->child;
+        if (child != NULL) {
+            child->flags |= 3;
+            FUN_001aea28(DAT_0056fcc0, child);
+        }
+    }
 }
 
-} /* extern "C" */
+}

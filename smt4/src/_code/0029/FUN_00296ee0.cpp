@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00232698(void);
 int FUN_002b8838(int);
-int FUN_002c4938(int, int);
+int memClear(int, int);
 
 typedef struct fn_00296ee0_arg0 fn_00296ee0_arg0;
 struct fn_00296ee0_arg0 {
@@ -30,7 +30,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00232698. */
 extern fn_00296ee0_arg0 *FUN_00296e90(void);
 /* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 int FUN_00296ee0(fn_00296ee0_arg0 *param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -76,7 +76,7 @@ int FUN_00296ee0(fn_00296ee0_arg0 *param_1,int param_2,unsigned int param_3,unsi
   *(unsigned int *)(temp_v2 + 0x34) = 0;
   *(unsigned int *)(temp_v2 + 0x18) = temp_v4;
   *(unsigned int *)(temp_v2 + 0x38) = 0;
-  FUN_002c4938(temp_v2 + 0x3c,0x70);
+  memClear(temp_v2 + 0x3c,0x70);
   *(unsigned int *)(temp_v2 + 200) = 0;
   *(unsigned int *)(temp_v2 + 0xcc) = 0;
   *(unsigned int *)(temp_v2 + 0xd0) = 0;

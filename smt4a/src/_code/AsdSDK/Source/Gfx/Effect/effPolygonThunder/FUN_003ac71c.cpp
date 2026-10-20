@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, unsigned int, int, int);
+int memAlloc(int, int, int, unsigned int, int, int);
 int FUN_002e6dd4(void);
 int FUN_00350d90(int, unsigned char *, int, int);
 int VectorFloatToUnsigned(double, int);
@@ -36,7 +36,7 @@ extern unsigned char DAT_005c1eec; /* 0x5c1eec */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002e6dd4. */
 /* Supplied declaration required: FUN_00350d90. */
 
@@ -73,7 +73,7 @@ int * FUN_003ac71c(int param_1)
   
   temp_v0 = *(unsigned int *)(param_1 + 0x38);
   piVar2 = (int *)0x10000;
-  FUN_00167ab4(0x10000,0x100,0,temp_v0 * 0x30 + 0x10,0x10,1);
+  memAlloc(0x10000,0x100,0,temp_v0 * 0x30 + 0x10,0x10,1);
   FUN_002e6dd4();
   *piVar2 = (int)(piVar2 + 4);
   piVar2[3] = (int)piVar2;

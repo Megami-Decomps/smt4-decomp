@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_001695a0(...);
 int FUN_002cd8fc(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_003f86f8(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -27,12 +27,12 @@ extern int FUN_003d26cc(...); /* 0x3d26cc */
 extern int FUN_003da030(...); /* 0x3da030 */
 extern unsigned int *DAT_0057f2c4; /* 0x57f2c4 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: FUN_002cd8fc. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003f86f8. */
 
 
@@ -45,16 +45,16 @@ void FUN_0035dc10(void)
   
   if (DAT_0057f2c4 == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x9f0,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0x9f0,1);
     DAT_0057f2c4 = puVar1;
   }
   puVar1 = DAT_0057f2c4;
-  FUN_002e6354();
+  sysMemClear();
   puVar2 = &LAB_0035dd40;
-  FUN_0014e38c(&LAB_0035dd40,4,0,0,FUN_003cf02c,0,0);
+  asdProcessCreateSimple(&LAB_0035dd40,4,0,0,FUN_003cf02c,0,0);
   *puVar1 = (unsigned int)puVar2;
-  FUN_0015155c(&LAB_0035dd50,0xeb,0,0,FUN_003da030,0,0,puVar2);
-  FUN_0015155c(&LAB_0035dd50,0x71,0,0,FUN_003d26cc,0,0,*puVar1);
+  taskCreateDraw(&LAB_0035dd50,0xeb,0,0,FUN_003da030,0,0,puVar2);
+  taskCreateDraw(&LAB_0035dd50,0x71,0,0,FUN_003d26cc,0,0,*puVar1);
   FUN_002cd8fc();
   FUN_001695a0();
   FUN_003f86f8(0x25);

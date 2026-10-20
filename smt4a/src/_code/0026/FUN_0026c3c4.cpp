@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019e4d4(...);
+int slotRecordFindById(...);
 int FUN_002f01e0(int, unsigned int);
 int FUN_0035da20(unsigned int *, int);
 int rt_memcpy(int, unsigned int, unsigned int);
@@ -20,7 +20,7 @@ typedef struct {
 
 extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 
-/* Supplied declaration required: FUN_0019e4d4. */
+/* Supplied declaration required: slotRecordFindById. */
 /* Supplied declaration required: FUN_002f01e0. */
 /* Supplied declaration required: FUN_0035da20. */
 extern unsigned int FUN_003dfd5c(void);
@@ -50,7 +50,7 @@ void FUN_0026c3c4(unsigned int param_1)
     temp_v4 = FUN_003dfd5c();
   }
   else if ((0 < *(short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1390)) && (*(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2017) != '\a')) {
-    FUN_0019e4d4(*(unsigned short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1390));
+    slotRecordFindById(*(unsigned short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1390));
     temp_v4 = FUN_004bd21c();
   }
   temp_v1 = temp_v3 + 0x13e0;
@@ -62,10 +62,10 @@ void FUN_0026c3c4(unsigned int param_1)
   temp_v8 = 0;
   if ((*(short *)(temp_v3 + 0x1390) >= 1) &&
      (!(*(char *)(temp_v3 + 0x2017) == '\a' || *(char *)(temp_v3 + 0x2017) == '\x10'))) {
-    temp_v2 = FUN_0019e4d4(*(unsigned short *)(temp_v3 + 0x1390));
+    temp_v2 = slotRecordFindById(*(unsigned short *)(temp_v3 + 0x1390));
     temp_v0 = *(char *)(temp_v3 + 0x2017);
     if ((temp_v0 == '\x02' || temp_v0 == '\x11') || temp_v0 == '\x03') {
-      temp_v2 = FUN_0019e4d4();
+      temp_v2 = slotRecordFindById();
     }
     temp_v0 = '\0';
     if (temp_v2 != 0) {

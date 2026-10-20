@@ -5,23 +5,23 @@
 extern "C" {
 
 int FUN_00153cd0(int, unsigned int, unsigned int, unsigned int);
-int FUN_00163060(int, int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_001afdc4(void);
-int FUN_002e6354(int, int);
+int sysMemClear(int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern int DAT_0063f4e4; /* 0x63f4e4 */
+extern int g_asdSoundStatus; /* 0x63f4e4 */
 extern int DAT_0063f4e8; /* 0x63f4e8 */
 extern unsigned char DAT_0063f4f0; /* 0x63f4f0 */
 
 /* Supplied declaration required: FUN_00153cd0. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001afdc4. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -36,13 +36,13 @@ int FUN_001419ac(unsigned int param_1,unsigned int param_2,unsigned int param_3)
   
   nn_os_CriticalSection_Enter((unsigned int)&DAT_0063f4f0);
   temp_v0 = 0x100;
-  FUN_00163060(0x100,0x100,0,0xfc,1);
-  temp_v1 = DAT_0063f4e4;
+  asdMemoryAllocTracked(0x100,0x100,0,0xfc,1);
+  temp_v1 = g_asdSoundStatus;
   if (temp_v0 != 0) {
     for (; temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0xd8)) {
       if (temp_v1 == temp_v0) {
-        temp_v1 = DAT_0063f4e4;
-        if (DAT_0063f4e4 == 0) break;
+        temp_v1 = g_asdSoundStatus;
+        if (g_asdSoundStatus == 0) break;
         while (temp_v1 != temp_v0) {
           temp_v1 = *(int *)(temp_v1 + 0xd8);
           if (temp_v1 == 0) {
@@ -62,13 +62,13 @@ int FUN_001419ac(unsigned int param_1,unsigned int param_2,unsigned int param_3)
           DAT_0063f4e8 = DAT_0063f4e8 - 1;
           break;
         }
-        DAT_0063f4e4 = *(int *)(temp_v0 + 0xd8);
-        if (DAT_0063f4e4 != 0) {
-          *(unsigned int *)(DAT_0063f4e4 + 0xdc) = 0;
+        g_asdSoundStatus = *(int *)(temp_v0 + 0xd8);
+        if (g_asdSoundStatus != 0) {
+          *(unsigned int *)(g_asdSoundStatus + 0xdc) = 0;
           DAT_0063f4e8 = DAT_0063f4e8 - 1;
           break;
         }
-        DAT_0063f4e4 = 0;
+        g_asdSoundStatus = 0;
         DAT_0063f4e8 = DAT_0063f4e8 - 1;
         break;
       }
@@ -83,7 +83,7 @@ LAB_00141a6c:
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < *(int *)(temp_v0 + 0xec));
     }
-    FUN_002e6354(temp_v0,0xfc);
+    sysMemClear(temp_v0,0xfc);
   }
   FUN_00153cd0(temp_v0,param_1,param_2,param_3);
   nn_os_CriticalSection_Leave((unsigned int)&DAT_0063f4f0);

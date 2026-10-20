@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 
 extern unsigned int *DAT_005b4400; /* 0x5b4400 */
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_0017e050(unsigned int param_1)
@@ -37,8 +37,8 @@ void FUN_0017e050(unsigned int param_1)
   }
   if ((param_1 & 0x40) != 0) {
     *puVar1 = *puVar1 | 0x2004038;
-    FUN_002e6354(puVar1 + 0x43,0x84);
-    FUN_002e6354(puVar1 + 100,0x84);
+    sysMemClear(puVar1 + 0x43,0x84);
+    sysMemClear(puVar1 + 100,0x84);
   }
   if ((param_1 & 0x80) != 0) {
     *puVar1 = *puVar1 | 0x1c00;

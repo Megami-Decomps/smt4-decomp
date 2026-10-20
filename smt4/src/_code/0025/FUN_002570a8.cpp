@@ -9,7 +9,7 @@ int FUN_00253ce4(void);
 int FUN_00253d24(unsigned int);
 int FUN_002b2368(void);
 int FUN_002c0894(void);
-int FUN_002c415c(unsigned short *);
+int asdMemFree(unsigned short *);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00253d24. */
 /* Supplied declaration required: FUN_002b2368. */
 /* Supplied declaration required: FUN_002c0894. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_002570a8(unsigned short *param_1)
@@ -49,7 +49,7 @@ void FUN_002570a8(unsigned short *param_1)
   if (*(int *)(param_1 + 2) != 0) {
     FUN_002c0894();
   }
-  FUN_002c415c(param_1);
+  asdMemFree(param_1);
   return;
 }
 

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00154690(void);
+int asdModelPushCommandBlock(void);
 int nnnstdMemCpy(...);
 
-extern int DAT_004652a0; /* 0x4652a0 */
+extern int g_commandBufferCursor; /* 0x4652a0 */
 
-/* Supplied declaration required: FUN_00154690. */
+/* Supplied declaration required: asdModelPushCommandBlock. */
 /* Supplied declaration required: nnnstdMemCpy. */
 
 
@@ -21,14 +21,14 @@ void FUN_00150ab4(int param_1,int param_2)
   unsigned int temp_v1;
   
   if (*(char *)(param_1 + 0x12) != '\0') {
-    FUN_00154690();
+    asdModelPushCommandBlock();
     *(unsigned char *)(param_1 + 0x12) = 0;
   }
   temp_v0 = *(unsigned int *)(param_2 + 100);
-  nnnstdMemCpy(DAT_004652a0,*(unsigned int *)(param_2 + 0x60));
-  DAT_004652a0 = DAT_004652a0 + (temp_v0 & 0xfffffffc);
-  nnnstdMemCpy(DAT_004652a0,param_2 + 0x30,0x30);
-  DAT_004652a0 = DAT_004652a0 + 0x30;
+  nnnstdMemCpy(g_commandBufferCursor,*(unsigned int *)(param_2 + 0x60));
+  g_commandBufferCursor = g_commandBufferCursor + (temp_v0 & 0xfffffffc);
+  nnnstdMemCpy(g_commandBufferCursor,param_2 + 0x30,0x30);
+  g_commandBufferCursor = g_commandBufferCursor + 0x30;
   temp_v0 = *(unsigned int *)(param_2 + 0x2c);
   temp_v1 = *(unsigned int *)(*(int *)(param_1 + 8) + 0x14);
   if ((temp_v0 & 1) != 0) {

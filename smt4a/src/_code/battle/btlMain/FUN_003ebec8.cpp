@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_00163060(...);
-int FUN_001630d4(...);
-int FUN_00187180(...);
-int FUN_00192798(void);
-int FUN_0019a5a0(...);
+int asdMemoryAllocTracked(...);
+int asdMemoryAlloc(...);
+int dataTableGet(...);
+int dataTableGetEntries(void);
+int asdMemFree(...);
 int FUN_001ab854(...);
 int FUN_001ab888(void);
 int FUN_001b4a90(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_00480e30(...);
 int FUN_004bd30c(...);
 int FUN_004bd400(...);
@@ -32,18 +32,18 @@ extern int DAT_00573934; /* 0x573934 */
 extern int DAT_00573938; /* 0x573938 */
 extern int DAT_0057393c; /* 0x57393c */
 
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: asdMemoryAlloc. */
 extern unsigned int FUN_00187010(unsigned short);
-/* Supplied declaration required: FUN_00187180. */
-extern int FUN_00192748(unsigned int);
-/* Supplied declaration required: FUN_00192798. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: dataTableGet. */
+extern int dataTableGetCount(unsigned int);
+/* Supplied declaration required: dataTableGetEntries. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001ab854. */
 /* Supplied declaration required: FUN_001ab888. */
 /* Supplied declaration required: FUN_001b4a90. */
 extern unsigned int FUN_001bce18(void);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00480e30. */
 extern unsigned char FUN_004bca20(void);
@@ -76,9 +76,9 @@ void FUN_003ebec8(int param_1)
   if (temp_v8 < 1) {
     return;
   }
-  temp_v3 = FUN_00187180(0x4e,0);
-  temp_v4 = FUN_00192798();
-  temp_v5 = FUN_00192748(temp_v3);
+  temp_v3 = dataTableGet(0x4e,0);
+  temp_v4 = dataTableGetEntries();
+  temp_v5 = dataTableGetCount(temp_v3);
   if (temp_v5 - 1 < temp_v8) {
     return;
   }
@@ -87,21 +87,21 @@ void FUN_003ebec8(int param_1)
   temp_v10 = DAT_0057392c != 0;
   if (!temp_v10) {
     temp_v8 = 0x10000;
-    FUN_001630d4(0x10000,0x100,0,0x2d30,0);
+    asdMemoryAlloc(0x10000,0x100,0,0x2d30,0);
     DAT_0057392c = temp_v8;
   }
   temp_v8 = 0x100;
-  FUN_00163060(0x100,0x100,0,0x2d30,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x2d30,1);
   temp_v3 = FUN_001ab888();
   rt_memcpy_w(temp_v8,temp_v3,0x2d30);
   if (DAT_00573938 == 0) {
     temp_v5 = 0x100;
-    FUN_00163060(0x100,0x100,0,0x2d30,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0x2d30,1);
     DAT_00573938 = temp_v5;
     rt_memcpy_w();
   }
   temp_v5 = FUN_001ab888();
-  FUN_002e6354(temp_v5 + 0x68,0x1c20);
+  sysMemClear(temp_v5 + 0x68,0x1c20);
   FUN_001b4a90(temp_v5 + 0x1c88,0x18,0xffffffff);
   *(unsigned short *)(temp_v5 + 0x1ca0) = 0xffff;
   *(unsigned char *)(temp_v5 + 0x1ca2) = 0xff;
@@ -122,7 +122,7 @@ void FUN_003ebec8(int param_1)
   }
   else {
     temp_v5 = 0x10000;
-    FUN_001630d4(0x10000,0x100,0,300,0);
+    asdMemoryAlloc(0x10000,0x100,0,300,0);
     temp_v10 = 0;
     DAT_00573934 = temp_v5;
     FUN_004bd30c(0,(int)*psVar11);
@@ -130,7 +130,7 @@ void FUN_003ebec8(int param_1)
     rt_memcpy_w(DAT_00573934,temp_v3,300);
   }
   temp_v5 = FUN_001ab888();
-  FUN_002e6354(temp_v5 + 0x68,0x1c20);
+  sysMemClear(temp_v5 + 0x68,0x1c20);
   FUN_001b4a90(temp_v5 + 0x1c88,0x18,0xffffffff);
   *(unsigned short *)(temp_v5 + 0x1ca0) = 0xffff;
   *(unsigned char *)(temp_v5 + 0x1ca2) = 0xff;
@@ -205,24 +205,24 @@ void FUN_003ebec8(int param_1)
   temp_v3 = FUN_001ab888();
   rt_memcpy_w(temp_v3,temp_v8,0x2d30);
   if (temp_v8 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
   }
-  temp_v3 = FUN_00187180(0x4e,*(int *)(temp_v4 - 4) + 1);
-  psVar11 = (short *)FUN_00192798();
-  temp_v8 = FUN_00192748(temp_v3);
+  temp_v3 = dataTableGet(0x4e,*(int *)(temp_v4 - 4) + 1);
+  psVar11 = (short *)dataTableGetEntries();
+  temp_v8 = dataTableGetCount(temp_v3);
   if (DAT_00573930 == 0) {
     temp_v4 = 0x10000;
-    FUN_001630d4(0x10000,0x100,0,0x10b8,0);
+    asdMemoryAlloc(0x10000,0x100,0,0x10b8,0);
     temp_v10 = 0;
     DAT_00573930 = temp_v4;
   }
   temp_v4 = 0x100;
-  FUN_00163060(0x100,0x100,0,0x10b8,1);
+  asdMemoryAllocTracked(0x100,0x100,0,0x10b8,1);
   temp_v3 = FUN_001bce18();
   rt_memcpy(temp_v4,temp_v3,0x10b8);
   if (DAT_0057393c == 0) {
     temp_v5 = 0x100;
-    FUN_00163060(0x100,0x100,0,0x10b8,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0x10b8,1);
     DAT_0057393c = temp_v5;
     rt_memcpy();
   }
@@ -240,11 +240,11 @@ void FUN_003ebec8(int param_1)
   temp_v3 = FUN_001bce18();
   rt_memcpy(temp_v3,temp_v4,0x10b8);
   if (temp_v4 != 0) {
-    FUN_0019a5a0(temp_v4);
+    asdMemFree(temp_v4);
   }
   if (*(int *)(param_1 + 0x4e48) == 0) {
     temp_v8 = 0x100;
-    FUN_00163060(0x100,0x100,0,0x34a0,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0x34a0,1);
     *(int *)(param_1 + 0x4e48) = temp_v8;
   }
   return;

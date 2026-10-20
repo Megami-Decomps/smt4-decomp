@@ -10,7 +10,7 @@ int FUN_00157558(int);
 int FUN_001575cc(int);
 int FUN_0017dd80(void);
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_0014192c. */
 /* Supplied declaration required: FUN_00144ab4. */
@@ -24,11 +24,11 @@ unsigned int FUN_001385f0(void)
 {
 /* irregular: 5 native warning(s); review required */
   FUN_00144ab4();
-  *(unsigned int *)(DAT_0059dbb4 + 0x52c) = 0;
+  *(unsigned int *)(g_renderCtx + 0x52c) = 0;
   FUN_0017dd80();
   FUN_0014192c(0);
-  FUN_001575cc(DAT_0059dbb4);
-  FUN_00157558(DAT_0059dbb4);
+  FUN_001575cc(g_renderCtx);
+  FUN_00157558(g_renderCtx);
   return 0;
 }
 

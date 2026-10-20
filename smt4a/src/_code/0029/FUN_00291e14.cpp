@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00573920; /* 0x573920 */
+extern int g_btlMain; /* 0x573920 */
 extern unsigned int DAT_00573ae8; /* 0x573ae8 */
 extern unsigned int DAT_00573aec; /* 0x573aec */
 
@@ -15,10 +15,10 @@ unsigned int FUN_00291e14(void)
   unsigned int temp_v0;
   
   temp_v0 = 0;
-  if ((DAT_00573920 != 0) &&
+  if ((g_btlMain != 0) &&
      (temp_v0 = 0,
-     (*(unsigned int *)(DAT_00573920 + 0x45a0) & DAT_00573ae8) != 0 ||
-     (DAT_00573aec & *(unsigned int *)(DAT_00573920 + 0x45a4)) != 0)) {
+     (*(unsigned int *)(g_btlMain + 0x45a0) & DAT_00573ae8) != 0 ||
+     (DAT_00573aec & *(unsigned int *)(g_btlMain + 0x45a4)) != 0)) {
     temp_v0 = 1;
   }
   return temp_v0;

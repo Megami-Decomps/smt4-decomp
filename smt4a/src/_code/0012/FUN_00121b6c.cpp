@@ -5,7 +5,7 @@ extern "C" {
 int FUN_00121c68(int);
 int FUN_002f6c32(unsigned int, unsigned char *, int);
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 extern unsigned char DAT_00594e7c; /* 0x594e7c */
 
 /* Supplied declaration required: FUN_00121c68. */
@@ -21,11 +21,11 @@ void FUN_00121b6c(int param_1)
   
   FUN_002f6c32(*(unsigned int *)(param_1 + 0x31c),&DAT_00594e7c,0x10);
   FUN_00121c68(param_1);
-  if (*(signed char *)(&DAT_00594958 + 0x19) != '\0') {
+  if (*(signed char *)(&g_flagBlock + 0x19) != '\0') {
     temp_v0 = FUN_002eac34(10);
     *(unsigned int *)(temp_v0 + 0xa4) = *(unsigned int *)(param_1 + 0x31c);
   }
-  if (*(signed char *)(&DAT_00594958 + 0x1a) != '\0') {
+  if (*(signed char *)(&g_flagBlock + 0x1a) != '\0') {
     temp_v0 = FUN_002eac34(9);
     if (*(int *)(temp_v0 + 0xa4) == 0) {
       temp_v0 = FUN_002eac34(9);

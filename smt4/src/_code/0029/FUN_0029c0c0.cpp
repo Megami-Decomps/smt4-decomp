@@ -11,7 +11,7 @@ int VectorUnsignedToFloat(unsigned int, int);
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int FUN_00292f28(unsigned int);
+extern int padIsButtonDown(unsigned int);
 /* Supplied declaration required: FUN_002b06c4. */
 /* Supplied declaration required: FUN_002b9024. */
 extern int FUN_003bc96c(int, int);
@@ -57,19 +57,19 @@ unsigned int FUN_0029c0c0(unsigned int param_1,int param_2)
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0x200);
   temp_v7 = (float)temp_v8 / temp_v7 + temp_v6;
-  temp_v3 = FUN_00292f28(0x21);
+  temp_v3 = padIsButtonDown(0x21);
   if (temp_v3 != 0) {
     temp_v6 = 1.2f;
   }
-  temp_v3 = FUN_00292f28(0x22);
+  temp_v3 = padIsButtonDown(0x22);
   if (temp_v3 != 0) {
     temp_v6 = 1.5f;
   }
-  temp_v3 = FUN_00292f28(0x23);
+  temp_v3 = padIsButtonDown(0x23);
   if (temp_v3 != 0) {
     temp_v6 = 2.0f;
   }
-  temp_v3 = FUN_00292f28(0x24);
+  temp_v3 = padIsButtonDown(0x24);
   if (temp_v3 != 0) {
     temp_v6 = 3.0f;
   }

@@ -28,10 +28,10 @@ int FUN_003f1114(...);
 int FUN_004f9450(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
-int aeabi_idivmod(...);
+int __aeabi_idivmod(...);
 
 int FUN_00167458(...);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_001834a4(...);
 int FUN_00192550(...);
 int FUN_0019de98(...);
@@ -58,7 +58,7 @@ int FUN_0020ad6c(...);
 int FUN_0023b27c(void);
 int FUN_002686b8(void);
 int FUN_00270104(...);
-int FUN_002919a4(void);
+int btlMainGetUnk14(void);
 int FUN_002a4860(...);
 int FUN_002a4894(...);
 int FUN_002a4914(...);
@@ -67,7 +67,7 @@ int FUN_0031f27c(...);
 int FUN_0035d8a4(void);
 int FUN_004009d0(...);
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_00163aa4(...);
 int FUN_001801a4(void);
 int FUN_001846d0(...);
@@ -135,7 +135,7 @@ extern unsigned short DAT_005e1568; /* 0x5e1568 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001517b4. */
 extern int FUN_0015688c(void);
 /* Supplied declaration required: FUN_0015f490. */
@@ -146,7 +146,7 @@ extern int FUN_00165070(void);
 extern short FUN_001654d8(void);
 extern short FUN_001654e4(int *);
 /* Supplied declaration required: FUN_00167458. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001801a4. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001846d0. */
@@ -177,7 +177,7 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_00270104. */
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_0028c620. */
-/* Supplied declaration required: FUN_002919a4. */
+/* Supplied declaration required: btlMainGetUnk14. */
 extern int FUN_00291e14(void);
 /* Supplied declaration required: FUN_002a4860. */
 /* Supplied declaration required: FUN_002a4878. */
@@ -239,7 +239,7 @@ extern int FUN_004c87e0(void);
 /* Supplied declaration required: FUN_004c8e30. */
 /* Supplied declaration required: FUN_004f9450. */
 /* Supplied declaration required: FUN_004fb43c. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_0021d13c(int param_1)
@@ -298,7 +298,7 @@ void FUN_0021d13c(int param_1)
   temp_v36 = (int *)0x0;
   temp_v30[0] = '\0';
   temp_v31[0] = '\0';
-  temp_v4 = FUN_0014aa78();
+  temp_v4 = btlGetMainState();
   temp_v34 = (int *)(param_1 + 0x3a4c);
   piVar16 = (int *)(param_1 + 0x3890);
   if (!((*(unsigned int *)(temp_v4 + 0x45ac) & DAT_00573bcc) == 0 &&
@@ -407,7 +407,7 @@ LAB_0021d1f4:
     }
     DAT_00573b88 = 0;
   }
-  temp_v4 = FUN_0014aa78();
+  temp_v4 = btlGetMainState();
   if (!((*(unsigned int *)(temp_v4 + 0x45ac) & DAT_00573bd4) == 0 &&
        (DAT_00573bd0 & *(unsigned int *)(temp_v4 + 0x45a8)) == 0)) {
     if (DAT_00573b89 == '\0') {
@@ -792,21 +792,21 @@ LAB_0021e058:
               }
             }
             else {
-              temp_v7 = FUN_0014aa78();
+              temp_v7 = btlGetMainState();
               if (!((*(unsigned int *)(temp_v7 + 0x45a8) & DAT_00573bc8) == 0 &&
                    (*(unsigned int *)(temp_v7 + 0x45ac) & DAT_00573bcc) == 0)) {
-                temp_v10 = FUN_0014aa78();
+                temp_v10 = btlGetMainState();
                 temp_v10 = FUN_003ef9b8(temp_v10,temp_v4);
                 *(unsigned int *)(param_1 + 0x389c) = temp_v10;
                 DAT_00573b90 = temp_v4;
               }
               else {
-                FUN_0014aa78();
+                btlGetMainState();
                 *(unsigned int *)(param_1 + 0x389c) = 0;
               }
               temp_v9 = *(int *)(param_1 + 0x389c);
               FUN_001aba54();
-              temp_v4 = FUN_0014aa78();
+              temp_v4 = btlGetMainState();
               if ((*(unsigned int *)(temp_v4 + 0x45a8) & DAT_00573bc8) == 0 &&
                   (*(unsigned int *)(temp_v4 + 0x45ac) & DAT_00573bcc) == 0) {
                 piVar16 = (int *)FUN_001ab888();
@@ -874,7 +874,7 @@ LAB_0021e5b0:
                 }
               }
               else {
-                temp_v10 = FUN_002919a4();
+                temp_v10 = btlMainGetUnk14();
                 temp_v4 = FUN_004bd340(temp_v10,1);
                 temp_v7 = 0;
                 if (temp_v4 != 0) {
@@ -897,7 +897,7 @@ LAB_0021e5b0:
                 } while (temp_v7 < 3);
               }
               FUN_0020ad6c(param_1,0x16,1);
-              FUN_001681cc(0x3a);
+              sysPlaySe(0x3a);
             }
             else {
               FUN_0020ad6c(param_1,0x14,1);
@@ -906,7 +906,7 @@ LAB_0021e5b0:
           else {
             if (*(short *)(param_1 + *piVar16 * 2 + 0x4210) != -1) {
               if (temp_v4 != 0) {
-                temp_v7 = FUN_0014aa78();
+                temp_v7 = btlGetMainState();
                 if (!((*(unsigned int *)(temp_v7 + 0x45a8) & DAT_00573bc8) == 0 &&
                      (*(unsigned int *)(temp_v7 + 0x45ac) & DAT_00573bcc) == 0)) {
                   DAT_00573b8c = temp_v4 - 1;
@@ -923,7 +923,7 @@ LAB_0021e5b0:
                   temp_v4 = FUN_001ab854();
                 }
                 else {
-                  temp_v4 = FUN_002919a4();
+                  temp_v4 = btlMainGetUnk14();
                 }
                 temp_v11 = *(short *)(param_1 + *piVar16 * 2 + 0x4210);
                 if ((temp_v11 == -2) || (-1 < temp_v11)) {
@@ -986,7 +986,7 @@ LAB_0021e5b0:
                 else {
                   temp_v9 = 1;
                 }
-                temp_v7 = FUN_0014aa78();
+                temp_v7 = btlGetMainState();
                 if (!((*(unsigned int *)(temp_v7 + 0x45a8) & DAT_00573bc8) == 0 &&
                      (*(unsigned int *)(temp_v7 + 0x45ac) & DAT_00573bcc) == 0)) {
                   DAT_00573b8c = temp_v4 - temp_v9;
@@ -1093,7 +1093,7 @@ LAB_0021e950:
               if (temp_v4 == 1) {
                 if (*(short *)(param_1 + *piVar16 * 2 + 0x4210) != -1) {
                   if (temp_v5 != 0) {
-                    temp_v4 = FUN_0014aa78();
+                    temp_v4 = btlGetMainState();
                     if ((DAT_00573bcc & *(unsigned int *)(temp_v4 + 0x45ac)) == 0 &&
                         (DAT_00573bc8 & *(unsigned int *)(temp_v4 + 0x45a8)) == 0) {
                       temp_v5 = (unsigned int)*(unsigned short *)(param_1 + *piVar16 * 0x10 + temp_v5 * 2 + 0x3c42);
@@ -1106,7 +1106,7 @@ LAB_0021e950:
                       temp_v4 = FUN_001ab854();
                     }
                     else {
-                      temp_v4 = FUN_002919a4();
+                      temp_v4 = btlMainGetUnk14();
                     }
                     temp_v7 = FUN_004bcbb4(temp_v4,temp_v5);
                     *(int *)(param_1 + *piVar16 * 4 + 0x3c98) = -temp_v7;
@@ -1146,7 +1146,7 @@ LAB_0021e950:
                   else {
                     temp_v7 = 1;
                   }
-                  temp_v4 = FUN_0014aa78();
+                  temp_v4 = btlGetMainState();
                   if (!((*(unsigned int *)(temp_v4 + 0x45a8) & DAT_00573bc8) == 0 &&
                        (*(unsigned int *)(temp_v4 + 0x45ac) & DAT_00573bcc) == 0)) {
                     temp_v5 = (temp_v5 - temp_v7) + 1;
@@ -1524,7 +1524,7 @@ LAB_0021f338:
     temp_v4 = FUN_00163aa4(param_1 + 0x11a0);
     if (temp_v4 != 0) {
       FUN_0020ad6c(param_1,0x13,0);
-      FUN_001681cc(0x3a);
+      sysPlaySe(0x3a);
     }
     break;
   case 0x13:
@@ -1743,7 +1743,7 @@ LAB_0021fbdc:
     }
     break;
   case 0x22:
-    temp_v4 = FUN_0014aa78();
+    temp_v4 = btlGetMainState();
     if ((temp_v4 != 0) && (*(short *)(temp_v4 + 0x2000) < 4)) {
       temp_v36 = (int *)0xffffffff;
       piVar16 = (int *)0x0;
@@ -2148,7 +2148,7 @@ joined_r0x0022027c:
 LAB_002209d8:
       if (*(int *)(param_1 + 0x4bac) != 0) {
         if (*(int *)(param_1 + 0x4bac) != 1) goto LAB_00220930;
-        temp_v4 = FUN_002919a4();
+        temp_v4 = btlMainGetUnk14();
         if ((temp_v4 != 0) && (temp_v4 = FUN_004bd340(temp_v4,4), temp_v4 != 0)) {
           *(unsigned short *)(param_1 + 0x4b2c) = 5;
         }
@@ -2231,7 +2231,7 @@ LAB_00220a34:
             }
           }
           else {
-            temp_v9 = FUN_002919a4();
+            temp_v9 = btlMainGetUnk14();
             if ((temp_v9 == 0) || ((*(unsigned short *)(temp_v9 + 0x60) & 2) != 0)) {
               *(unsigned char *)(temp_v7 + 0x41e8) = 1;
               temp_v9 = FUN_003e9b54(*temp_v37,temp_v4);
@@ -2405,7 +2405,7 @@ LAB_00220b54:
       }
       if (*temp_v27 == 0xf) {
         if (*(char *)(temp_v7 + 0x4b0a) == '\0') goto LAB_0022129c;
-        temp_v10 = FUN_0014aa78();
+        temp_v10 = btlGetMainState();
         FUN_003eeb4c(temp_v10,(int)(short)temp_v4);
       }
       if (*temp_v27 >= 0x25) {
@@ -2455,7 +2455,7 @@ LAB_0022129c:
       }
     }
     else {
-      temp_v9 = FUN_002919a4();
+      temp_v9 = btlMainGetUnk14();
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v9 + 0x60);
     }
   }
@@ -2479,7 +2479,7 @@ LAB_0022129c:
           *piVar16 = temp_v9 + 1;
           if (temp_v9 + 1 >= 0x18) {
             temp_v33 = (int *)(temp_v35[2] + 0x3e30);
-            aeabi_idivmod(*temp_v33 + 1,temp_v7);
+            __aeabi_idivmod(*temp_v33 + 1,temp_v7);
             *temp_v33 = temp_v14;
             *piVar16 = 0;
           }

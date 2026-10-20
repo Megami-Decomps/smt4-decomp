@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned char [4], int);
+int sysMemClear(unsigned char [4], int);
 int FUN_003341b0(unsigned int);
-int aeabi_idivmod(int, int);
+int __aeabi_idivmod(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,9 +21,9 @@ extern int FUN_001ab854(int);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
 extern int FUN_002c2c68(int);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003341b0. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_003d386c(int param_1)
@@ -51,7 +51,7 @@ void FUN_003d386c(int param_1)
   if (temp_v2 < temp_v1) {
     temp_v1 = FUN_002c2c68(temp_v0 + 0x1ec);
   }
-  FUN_002e6354(temp_v10,100);
+  sysMemClear(temp_v10,100);
   temp_v2 = 0;
   if (temp_v2 < temp_v1) {
     do {
@@ -110,7 +110,7 @@ LAB_003d395c:
         temp_v5 = *(int *)(temp_v9 + 0x3180) + 1;
         *(int *)(temp_v9 + 0x3180) = temp_v5;
         if (temp_v5 >= 0x18) {
-          aeabi_idivmod(*(int *)(temp_v9 + 0x31e4) + 1,temp_v8);
+          __aeabi_idivmod(*(int *)(temp_v9 + 0x31e4) + 1,temp_v8);
           *(unsigned int *)(temp_v9 + 0x3180) = 0;
           *(unsigned int *)(temp_v9 + 0x31e4) = temp_v6;
         }

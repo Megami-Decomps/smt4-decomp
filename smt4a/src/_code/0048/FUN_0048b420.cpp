@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0049277c. */
@@ -43,7 +43,7 @@ void FUN_0048b420(int param_1,int param_2)
   float fStack_10;
   float temp_v6;
   
-  temp_v0 = DAT_0059dbb4;
+  temp_v0 = g_renderCtx;
   if (param_2 != 0) {
     FUN_0049277c(0x13,0xfa4,&temp_v5,&temp_v3,&temp_v4,&uStack_18);
     FUN_0049359c(param_1 + 0x4d0,&fStack_10);
@@ -54,7 +54,7 @@ void FUN_0048b420(int param_1,int param_2)
     FUN_004cfb64(temp_v5,temp_v3,temp_v4,uStack_18);
   }
   else {
-    piVar3 = (int *)(DAT_0059dbb4 + 0x1318);
+    piVar3 = (int *)(g_renderCtx + 0x1318);
     temp_v1 = piVar3[*piVar3 + 2];
     piVar3[*piVar3 + 2] = 0;
     if (*(char *)(temp_v0 + 0x1330) != '\0' || temp_v1 != 0) {

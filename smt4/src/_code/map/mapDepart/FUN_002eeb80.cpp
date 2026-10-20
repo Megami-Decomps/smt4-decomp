@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b4c74(void);
+int mikadoSetCameraFlag80(void);
 int FUN_00215a54(int);
 int FUN_00273f90(void);
 int FUN_00273fc0(void);
@@ -40,20 +40,20 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern int DAT_004474d8; /* 0x4474d8 */
+extern int g_mapDepartWork; /* 0x4474d8 */
 extern signed char DAT_00447518; /* 0x447518 */
 extern signed char DAT_00447519; /* 0x447519 */
 extern signed char DAT_0044751a; /* 0x44751a */
 extern int DAT_0044751c; /* 0x44751c */
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapScene; /* 0x447e88 */
 extern unsigned int DAT_0049f920; /* 0x49f920 */
 extern int DAT_0049f930; /* 0x49f930 */
 extern unsigned char DAT_0049f93e; /* 0x49f93e */
 extern signed char DAT_0049f93f; /* 0x49f93f */
 extern unsigned char DAT_0049fb48; /* 0x49fb48 */
 
-/* Supplied declaration required: FUN_001b4c74. */
-extern int FUN_0020eae8(void);
+/* Supplied declaration required: mikadoSetCameraFlag80. */
+extern int mikadoIsCameraNotState7(void);
 /* Supplied declaration required: FUN_00215a54. */
 /* Supplied declaration required: FUN_00273f90. */
 /* Supplied declaration required: FUN_00273fc0. */
@@ -93,13 +93,13 @@ unsigned int FUN_002eeb80(void)
     DAT_0044751a = '\x01';
     FUN_00215a54(1);
   }
-  temp_v0 = DAT_00447e88;
+  temp_v0 = g_lmapScene;
   if (DAT_0049f930 == 3) {
     if (DAT_00447518 == '\0') {
-      FUN_001b4c74();
+      mikadoSetCameraFlag80();
       DAT_00447518 = '\x01';
     }
-    temp_v0 = FUN_0020eae8();
+    temp_v0 = mikadoIsCameraNotState7();
     if (temp_v0 == 0) {
       return 0;
     }
@@ -136,7 +136,7 @@ unsigned int FUN_002eeb80(void)
     }
     if (DAT_0044751c == 0xb) {
       DAT_0049f93e = 1;
-      *(unsigned char *)(DAT_004474d8 + 10) = 0;
+      *(unsigned char *)(g_mapDepartWork + 10) = 0;
       FUN_00275a30();
       FUN_0027dba4();
     }
@@ -145,9 +145,9 @@ unsigned int FUN_002eeb80(void)
     }
   }
   else {
-    puVar3 = (unsigned int *)(DAT_00447e88 + 0x20);
-    temp_v1 = *(unsigned int *)(DAT_00447e88 + 0x24);
-    *(unsigned int *)(DAT_00447e88 + 0x28) = *(unsigned int *)(DAT_00447e88 + 0x1c);
+    puVar3 = (unsigned int *)(g_lmapScene + 0x20);
+    temp_v1 = *(unsigned int *)(g_lmapScene + 0x24);
+    *(unsigned int *)(g_lmapScene + 0x28) = *(unsigned int *)(g_lmapScene + 0x1c);
     *(unsigned int *)(temp_v0 + 0x2c) = *puVar3;
     *(unsigned int *)(temp_v0 + 0x30) = temp_v1;
     DAT_0044751c = DAT_0044751c + 1;
@@ -177,9 +177,9 @@ unsigned int FUN_002eeb80(void)
       FUN_0027522c();
       FUN_00274fac();
       FUN_00274798();
-      *(unsigned char *)(DAT_004474d8 + 10) = 1;
+      *(unsigned char *)(g_mapDepartWork + 10) = 1;
       FUN_00275a30();
-      FUN_0029ae60(*(unsigned int *)(DAT_00447e88 + 0x194));
+      FUN_0029ae60(*(unsigned int *)(g_lmapScene + 0x194));
       FUN_00273fc0();
       FUN_00273f90();
       DAT_00447519 = 1;

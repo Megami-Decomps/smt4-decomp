@@ -30,7 +30,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char DAT_00532760; /* 0x532760 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f1614; /* 0x5f1614 */
 extern signed char DAT_005f161d; /* 0x5f161d */
 extern signed char DAT_005f1a5c; /* 0x5f1a5c */
@@ -44,7 +44,7 @@ extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_002392b8. */
 /* Supplied declaration required: FUN_002c2d5c. */
 /* Supplied declaration required: FUN_002d22c0. */
-extern int FUN_003135a8(void);
+extern int lmapSceneGetUnk0(void);
 extern int FUN_0033ded8(void);
 /* Supplied declaration required: FUN_00357a48. */
 extern int FUN_003847e8(void);
@@ -151,8 +151,8 @@ unsigned int FUN_00489480(int param_1)
       }
     }
     else {
-      temp_v1 = FUN_003135a8();
-      if ((temp_v1 != 1) && (DAT_005f15fc < 100)) {
+      temp_v1 = lmapSceneGetUnk0();
+      if ((temp_v1 != 1) && (g_gameState < 100)) {
         if ((((DAT_005f1a5c == '\0') && (DAT_005f161d != '\0')) &&
             (temp_v1 = FUN_0033ded8(), temp_v1 == 0)) && (*(char *)(param_1 + 0x65) != '\0')) {
           FUN_002392b8(&DAT_00532760);

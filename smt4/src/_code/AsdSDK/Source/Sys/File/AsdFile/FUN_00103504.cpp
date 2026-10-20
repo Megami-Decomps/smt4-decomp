@@ -22,11 +22,11 @@ typedef struct {
 
 extern unsigned char LAB_00103634; /* 0x103634 */
 extern unsigned char LAB_0010363c; /* 0x10363c */
-extern unsigned char DAT_00465000; /* 0x465000 */
+extern unsigned char g_asdFile; /* 0x465000 */
 extern unsigned int DAT_0046501c; /* 0x46501c */
 extern int DAT_00465020; /* 0x465020 */
 extern unsigned char DAT_00465024; /* 0x465024 */
-extern unsigned int DAT_00465028; /* 0x465028 */
+extern unsigned int g_asdFileEvent; /* 0x465028 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002c3dfc. */
@@ -61,8 +61,8 @@ void FUN_00103504(void)
       if (DAT_00465020 < 0) {
         FUN_002c526c();
       }
-      DAT_00465000 = 1;
-      FUN_002c4040(&DAT_00465028);
+      g_asdFile = 1;
+      FUN_002c4040(&g_asdFileEvent);
       iStack_18 = DAT_00465020;
       puVar1 = temp_v1;
       FUN_002c40f8(puVar1,&iStack_18,1,0,0xffffffff,0xffffffff);

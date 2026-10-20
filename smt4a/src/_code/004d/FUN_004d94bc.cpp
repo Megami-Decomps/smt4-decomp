@@ -1,33 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d94bc` (_code @ 0x4d94bc, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the zero stored to pool->spare is built in r0 instead of r1. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct Pool Pool;
+typedef struct PoolVtbl {
+    /* 0x00 */ void *unk00[3];
+    /* 0x0C */ u32 (*getSize)(Pool *self, int block);
+    /* 0x10 */ void *unk10[2];
+    /* 0x18 */ int (*alloc)(Pool *self, u32 size);
+    /* 0x1C */ void (*release)(Pool *self, int block);
+} PoolVtbl;
 
-int FUN_004d94bc(int *param_1,unsigned int param_2)
+struct Pool {
+    /* 0x00 */ PoolVtbl *vtbl;
+    /* 0x04 */ u32 totalSize;  /* sum of the sizes of all allocations */
+    /* 0x08 */ u32 peakSize;   /* largest totalSize seen */
+    /* 0x0C */ u32 allocCount;
+    /* 0x10 */ int spare;      /* cached block freed to make room when an allocation fails */
+};
 
+/* Allocates `size` bytes; on failure frees the spare block and retries, then updates the usage statistics. */
+int FUN_004d94bc(Pool *pool, u32 size)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = (**(romwright_code **)(*param_1 + 0x18))(param_1,param_2);
-  if (temp_v0 == 0) {
-    if (param_1[4] != 0) {
-      (**(romwright_code **)(*param_1 + 0x1c))(param_1,param_1[4]);
-      param_1[4] = 0;
+    int block = pool->vtbl->alloc(pool, size);
+
+    if (block == 0) {
+        if (pool->spare != 0) {
+            pool->vtbl->release(pool, pool->spare);
+            pool->spare = 0;
+        }
+        block = pool->vtbl->alloc(pool, size);
     }
-    temp_v0 = (**(romwright_code **)(*param_1 + 0x18))(param_1,param_2);
-  }
-  param_1[3] = param_1[3] + 1;
-  temp_v1 = (**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v0);
-  temp_v2 = temp_v1 + param_1[1];
-  param_1[1] = temp_v2;
-  if (!(temp_v2 > (unsigned int)param_1[2])) { temp_v2 = (unsigned int)param_1[2]; }
-  param_1[2] = temp_v2;
-  return temp_v0;
+    pool->allocCount++;
+    pool->totalSize += pool->vtbl->getSize(pool, block);
+    if (pool->totalSize > pool->peakSize) {
+        pool->peakSize = pool->totalSize;
+    }
+    return block;
 }
 
 } /* extern "C" */

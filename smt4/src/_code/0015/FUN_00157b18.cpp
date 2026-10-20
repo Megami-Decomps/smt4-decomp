@@ -27,7 +27,7 @@ extern unsigned char LAB_0015c7dc; /* 0x15c7dc */
 /* Supplied declaration required: FUN_002a1f84. */
 /* Supplied declaration required: FUN_002aa278. */
 extern int FUN_002baf30(void);
-extern unsigned int aeabi_uidivmod(unsigned int);
+extern unsigned int __aeabi_uidivmod(unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Free. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Free. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -89,7 +89,7 @@ unsigned int FUN_00157b18(int *param_1,int param_2,unsigned int param_3,int para
       } while (temp_v7 < (unsigned int)param_1[0x35]);
     }
     if ((unsigned int)param_1[0x25] < 0x2001) {
-      temp_v7 = aeabi_uidivmod(*(unsigned int *)(param_1[0x19] + 8));
+      temp_v7 = __aeabi_uidivmod(*(unsigned int *)(param_1[0x19] + 8));
       param_1[0x1a] = temp_v7;
       if (temp_v7 >= 4) {
         if (temp_v7 >= 0x21) {

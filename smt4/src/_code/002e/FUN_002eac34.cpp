@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 
 
@@ -30,7 +30,7 @@ unsigned int FUN_002eac34(unsigned int param_1)
   case 6:
     break;
   case 7:
-    if ((DAT_0049f91c != 0x1a) && ((DAT_0049f91c != 5 || (DAT_0049f920 != 6)))) {
+    if ((g_gameState != 0x1a) && ((g_gameState != 5 || (DAT_0049f920 != 6)))) {
       return 0x10;
     }
     return 0x11;
@@ -99,16 +99,16 @@ unsigned int FUN_002eac34(unsigned int param_1)
   case 0x3c:
     return 0x27;
   }
-  if ((((DAT_0049f91c != 0x19 && DAT_0049f91c != 0x1a) &&
-       (DAT_0049f91c != 0x1b && DAT_0049f91c != 0x1c)) &&
-      (DAT_0049f91c != 0x1d && DAT_0049f91c != 0x1e)) &&
-     ((DAT_0049f91c != 0x1f && DAT_0049f91c != 0x20 &&
-      ((DAT_0049f91c != 0x21 && DAT_0049f91c != 0x22) && DAT_0049f91c != 0x23)))) {
-    temp_v0 = DAT_0049f91c;
-    if (DAT_0049f91c == 5) {
+  if ((((g_gameState != 0x19 && g_gameState != 0x1a) &&
+       (g_gameState != 0x1b && g_gameState != 0x1c)) &&
+      (g_gameState != 0x1d && g_gameState != 0x1e)) &&
+     ((g_gameState != 0x1f && g_gameState != 0x20 &&
+      ((g_gameState != 0x21 && g_gameState != 0x22) && g_gameState != 0x23)))) {
+    temp_v0 = g_gameState;
+    if (g_gameState == 5) {
       temp_v0 = DAT_0049f920;
     }
-    if (DAT_0049f91c != 5 || temp_v0 != 6) {
+    if (g_gameState != 5 || temp_v0 != 6) {
       return 0xe;
     }
   }

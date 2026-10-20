@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002abb24(unsigned int, unsigned int);
 int FUN_002b2368(int);
 int FUN_002b74cc(unsigned int **, unsigned int **, unsigned int **);
-int FUN_002c415c(...);
+int asdMemFree(...);
 int nw_gfx_res_ResGraphicsFile_Cleanup(int [2]);
 
 typedef int romwright_code(...);
@@ -23,7 +23,7 @@ extern unsigned int DAT_00464b84; /* 0x464b84 */
 /* Supplied declaration required: FUN_002abb24. */
 /* Supplied declaration required: FUN_002b2368. */
 /* Supplied declaration required: FUN_002b74cc. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Cleanup. */
 
 
@@ -74,7 +74,7 @@ void FUN_00263e50(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
     } while (temp_v0 < param_1[1]);
   }
   if (param_1[2] != 0) {
-    FUN_002c415c();
+    asdMemFree();
   }
   if (param_1[4] != 0) {
     temp_v0 = 0;
@@ -90,10 +90,10 @@ void FUN_00263e50(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < param_1[3]);
     }
-    FUN_002c415c(param_1[4]);
+    asdMemFree(param_1[4]);
   }
   if (param_1[5] != 0) {
-    FUN_002c415c();
+    asdMemFree();
   }
   if (param_1[7] != 0) {
     temp_v0 = 0;
@@ -109,7 +109,7 @@ void FUN_00263e50(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < param_1[6]);
     }
-    FUN_002c415c(param_1[7]);
+    asdMemFree(param_1[7]);
   }
   temp_v0 = 0;
   if (temp_v0 < param_1[1]) {
@@ -124,14 +124,14 @@ void FUN_00263e50(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < param_1[1]);
   }
-  FUN_002c415c(*param_1);
+  asdMemFree(*param_1);
   temp_v1[0] = *(int *)param_1[8];
   if (temp_v1[0] != 0) {
     nw_gfx_res_ResGraphicsFile_Cleanup(temp_v1);
   }
   FUN_002b2368(param_1[8]);
-  FUN_002c415c(param_1[9]);
-  FUN_002c415c(param_1);
+  asdMemFree(param_1[9]);
+  asdMemFree(param_1);
   FUN_002abb24(DAT_00464b7c,DAT_00464b84);
   return;
 }

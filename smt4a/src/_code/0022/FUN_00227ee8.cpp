@@ -9,7 +9,7 @@ int FUN_003fa010(int *);
 int FUN_003fa83c(void);
 int FUN_00442554(int *);
 
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_003e4070. */
 /* Supplied declaration required: FUN_003fa010. */
 /* Supplied declaration required: FUN_003fa83c. */
@@ -24,7 +24,7 @@ unsigned int FUN_00227ee8(void)
   int *piVar2;
   int *piVar3;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   if (temp_v0 == 0) {
     return 0;
   }

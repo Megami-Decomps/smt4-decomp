@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_002bd8e8(int, int, int);
+int timerStart(int, int, int);
 
 extern int DAT_0043e128; /* 0x43e128 */
 
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 
 
 void FUN_00295ba4(void)
@@ -18,7 +18,7 @@ void FUN_00295ba4(void)
   temp_v0 = DAT_0043e128;
   *(unsigned int *)(DAT_0043e128 + 8) = 5;
   *(unsigned int *)(temp_v0 + 0x10) = 0x1e;
-  FUN_002bd8e8(temp_v0 + 0x44,1,0);
+  timerStart(temp_v0 + 0x44,1,0);
   return;
 }
 

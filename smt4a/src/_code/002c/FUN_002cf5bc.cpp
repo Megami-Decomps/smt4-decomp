@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_00573920; /* 0x573920 */
+extern int g_btlMain; /* 0x573920 */
 extern unsigned int DAT_00573978; /* 0x573978 */
 extern unsigned int DAT_0057397c; /* 0x57397c */
 extern unsigned int DAT_005739a0; /* 0x5739a0 */
@@ -23,10 +23,10 @@ int FUN_002cf5bc(void)
   int temp_v0;
   int temp_v1;
   
-  if (DAT_00573920 == 0) {
+  if (g_btlMain == 0) {
     return 0;
   }
-  puVar1 = *(unsigned int **)(DAT_00573920 + 0x1ffc);
+  puVar1 = *(unsigned int **)(g_btlMain + 0x1ffc);
   if (puVar1 == (unsigned int *)0x0) {
     return 0;
   }

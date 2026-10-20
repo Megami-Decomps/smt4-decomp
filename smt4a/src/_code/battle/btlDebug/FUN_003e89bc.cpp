@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010063a(int [50], int, int, unsigned char *);
+int qsort(int [50], int, int, unsigned char *);
 int FUN_004cae0c(int, int, int, int, int);
 int FUN_004f1c5c(int, int);
 int FUN_004f9450(unsigned int);
@@ -30,7 +30,7 @@ extern unsigned int DAT_0057a644; /* 0x57a644 */
 extern unsigned int DAT_0057a648; /* 0x57a648 */
 extern unsigned int DAT_0057a64c; /* 0x57a64c */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_004cae0c. */
 /* Supplied declaration required: FUN_004f1c5c. */
 /* Supplied declaration required: FUN_004f9450. */
@@ -75,7 +75,7 @@ void FUN_003e89bc(int param_1)
     }
     temp_v6 = temp_v4;
   } while (temp_v4 < 0x36);
-  FUN_0010063a(aiStack_f8,temp_v9,4,&LAB_00221b34);
+  qsort(aiStack_f8,temp_v9,4,&LAB_00221b34);
   temp_v3 = 0;
   temp_v10 = 0;
   temp_v6 = 0;

@@ -18,9 +18,9 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_00325978; /* 0x325978 */
-extern int DAT_0058103c; /* 0x58103c */
-extern int DAT_00581288; /* 0x581288 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_mapIf; /* 0x58103c */
+extern int g_lmapScene; /* 0x581288 */
+extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern signed char DAT_005f1614; /* 0x5f1614 */
 extern unsigned int DAT_005f1638; /* 0x5f1638 */
@@ -75,18 +75,18 @@ void FUN_003254a0(void)
   unsigned char temp_v9;
   float temp_v10;
   
-  temp_v2 = DAT_0058103c;
+  temp_v2 = g_mapIf;
   if (DAT_005f185e != '\0') {
     temp_v4 = FUN_001632fc();
     if (temp_v4 == 0) {
-      temp_v9 = DAT_005f15fc >= 100;
+      temp_v9 = g_gameState >= 100;
       if (!temp_v9) {
-        temp_v4 = FUN_003e5414(*(unsigned int *)(DAT_00581288 + 0x1a8));
+        temp_v4 = FUN_003e5414(*(unsigned int *)(g_lmapScene + 0x1a8));
         if ((temp_v4 == 0) ||
-           (temp_v4 = FUN_003e5414(*(unsigned int *)(DAT_00581288 + 0x1a8)), temp_v4 == 1)) {
+           (temp_v4 = FUN_003e5414(*(unsigned int *)(g_lmapScene + 0x1a8)), temp_v4 == 1)) {
           temp_v9 = 1;
         }
-        if (((DAT_005f15fc < 100) && (DAT_005f15fc == DAT_005f1860)) &&
+        if (((g_gameState < 100) && (g_gameState == DAT_005f1860)) &&
            (DAT_005f1600 == DAT_005f1864)) {
           temp_v9 = 0;
         }
@@ -100,7 +100,7 @@ void FUN_003254a0(void)
         temp_v4 = FUN_004bc944(DAT_005f1860,DAT_005f1864);
         if (temp_v4 != 0) {
           temp_v4 = DAT_005f1860;
-          if (DAT_005f15fc >= 100) {
+          if (g_gameState >= 100) {
             temp_v5 = DAT_005f1638;
             if (DAT_005f1638 != 0x41) {
               temp_v5 = (unsigned int)DAT_005f187c;
@@ -131,14 +131,14 @@ LAB_00325644:
             if ((temp_v6 == 0) && (temp_v6 = FUN_00384ca8(temp_v7), temp_v6 == 0)) goto LAB_003256bc;
           }
           FUN_002392b8(temp_v4);
-          FUN_00261918(DAT_005f15fc,DAT_005f1600,1);
+          FUN_00261918(g_gameState,DAT_005f1600,1);
           FUN_002c2d5c(0xffffffff);
           DAT_005f185f = '\x01';
         }
         else {
 LAB_003256bc:
           FUN_002392b8(&LAB_00325978);
-          FUN_00261918(DAT_005f15fc,DAT_005f1600,1);
+          FUN_00261918(g_gameState,DAT_005f1600,1);
           FUN_002c2d5c(0xffffffff);
           DAT_005f185f = '\x01';
         }

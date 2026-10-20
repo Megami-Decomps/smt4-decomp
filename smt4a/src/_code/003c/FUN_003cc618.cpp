@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_003283ac(int);
+int scrSetResult(int);
 
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_003cc618(unsigned int param_1,int param_2)
@@ -17,10 +17,10 @@ unsigned int FUN_003cc618(unsigned int param_1,int param_2)
   
   temp_v0 = *(int *)(param_2 + 4);
   if (temp_v0 != 0) {
-    FUN_003283ac(*(unsigned short *)(temp_v0 + *(int *)(temp_v0 + 0x74c0) * 0x150 + 0x4564));
+    scrSetResult(*(unsigned short *)(temp_v0 + *(int *)(temp_v0 + 0x74c0) * 0x150 + 0x4564));
   }
   else if (*(int *)(param_2 + 8) != 0) {
-    FUN_003283ac(*(unsigned short *)(*(int *)(param_2 + 8) + 0x38));
+    scrSetResult(*(unsigned short *)(*(int *)(param_2 + 8) + 0x38));
   }
   return 1;
 }

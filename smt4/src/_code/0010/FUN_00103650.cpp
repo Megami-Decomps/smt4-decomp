@@ -11,7 +11,7 @@ int FUN_002c501c(void);
 
 extern signed char DAT_00446db0; /* 0x446db0 */
 extern signed char DAT_00446db1; /* 0x446db1 */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0010d230. */
 /* Supplied declaration required: FUN_002c3a14. */
@@ -30,11 +30,11 @@ unsigned int FUN_00103650(void)
   if (((DAT_00446db0 == '\0') && (temp_v0 = FUN_002c5210(), temp_v0 == 1)) && (DAT_00446db1 != '\0')) {
     FUN_0010d230(0);
   }
-  FUN_002c3a14(DAT_0044ea00);
+  FUN_002c3a14(g_titleScene);
   temp_v0 = FUN_002c501c();
   if (temp_v0 != 0) {
     temp_v1 = FUN_002c501c();
-    FUN_002c4f8c(DAT_0044ea00,temp_v1);
+    FUN_002c4f8c(g_titleScene,temp_v1);
   }
   return 0;
 }

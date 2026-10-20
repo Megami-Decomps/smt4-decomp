@@ -17,7 +17,7 @@ struct fn_002595e0_arg0 {
     byte field_0x37; /* +0x37 */
 };
 
-extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
+extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 
 /* Supplied declaration required: FUN_00262f68. */
 extern unsigned int FUN_0026e61c(unsigned int, unsigned int);
@@ -36,11 +36,11 @@ void FUN_002595e0(fn_002595e0_arg0 *param_1)
   unsigned int *puVar6;
   unsigned int temp_v5;
   
-  temp_v3 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4));
-  puVar6 = (unsigned int *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x24ba4);
-  temp_v4 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x8c;
-  temp_v5 = (unsigned int)*(short *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x24bac);
-  *(unsigned short *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x24bac) = param_1->field_0x34;
+  temp_v3 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
+  puVar6 = (unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x24ba4);
+  temp_v4 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x8c;
+  temp_v5 = (unsigned int)*(short *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x24bac);
+  *(unsigned short *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x24bac) = param_1->field_0x34;
   *(unsigned char *)(temp_v3 + 0x24bae) = param_1->field_0x37;
   *puVar6 = param_1->field_0x24;
   *(unsigned int *)(temp_v3 + 0x24ba8) = param_1->field_0x30;
@@ -48,9 +48,9 @@ void FUN_002595e0(fn_002595e0_arg0 *param_1)
     temp_v3 = 0;
     do {
       temp_v0 = (int)*(char *)(temp_v4 + temp_v3 + 0x90f0);
-      if ((-1 < temp_v0) && (temp_v0 = FUN_0029ebac((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + temp_v0 * 0x604 + 0x11c,2), temp_v0 != 0)
+      if ((-1 < temp_v0) && (temp_v0 = FUN_0029ebac((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + temp_v0 * 0x604 + 0x11c,2), temp_v0 != 0)
          ) {
-        FUN_00262f68((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + *(char *)(temp_v4 + temp_v3 + 0x90f0) * 0x604 + 0x11c,4);
+        FUN_00262f68((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + *(char *)(temp_v4 + temp_v3 + 0x90f0) * 0x604 + 0x11c,4);
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x18);
@@ -66,7 +66,7 @@ LAB_0025967c:
       do {
         temp_v2 = (int)*(char *)(temp_v4 + temp_v0 + 0x90f0);
         if (-1 < temp_v2) {
-          temp_v2 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x8c + temp_v2 * 0x604;
+          temp_v2 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x8c + temp_v2 * 0x604;
           temp_v1 = temp_v2 + 0x90;
           if ((unsigned int)*(unsigned short *)(temp_v2 + 0xd6) == (int)*(short *)(temp_v3 + 0x24bac)) {
             temp_v1 = FUN_0026e61c(temp_v1,2);
@@ -75,7 +75,7 @@ LAB_0025967c:
             temp_v1 = (unsigned int)*(short *)(temp_v3 + 0x24bac);
           }
           if ((temp_v5 != 0 && temp_v1 != temp_v5) &&
-             (temp_v2 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x8c + *(char *)(temp_v4 + temp_v0 + 0x90f0) * 0x604,
+             (temp_v2 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x8c + *(char *)(temp_v4 + temp_v0 + 0x90f0) * 0x604,
              *(unsigned short *)(temp_v2 + 0xd6) == temp_v5)) {
             FUN_00262f68(temp_v2 + 0x90,4);
           }

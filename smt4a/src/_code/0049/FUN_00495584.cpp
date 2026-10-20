@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00163aa4(unsigned int *);
 int FUN_00184528(unsigned int *, int);
 int FUN_0019de98(int, int);
-int FUN_003792d4(void);
+int lmapSceneGetScript(void);
 int FUN_003e5858(void);
 int FUN_004935b0(unsigned int *, unsigned int, unsigned int);
 
@@ -21,7 +21,7 @@ extern unsigned int FUN_001654d8(unsigned int *);
 extern unsigned int FUN_001654e4(unsigned int *);
 /* Supplied declaration required: FUN_00184528. */
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_003792d4. */
+/* Supplied declaration required: lmapSceneGetScript. */
 /* Supplied declaration required: FUN_003e5858. */
 extern int FUN_003e5ae8(void);
 /* Supplied declaration required: FUN_004935b0. */
@@ -37,9 +37,9 @@ void FUN_00495584(unsigned int *param_1)
   unsigned int temp_v3;
   unsigned int *puVar5;
   
-  temp_v0 = FUN_003792d4();
+  temp_v0 = lmapSceneGetScript();
   if (temp_v0 != 0) {
-    FUN_003792d4();
+    lmapSceneGetScript();
     FUN_003e5858();
   }
   temp_v1 = param_1[2];
@@ -64,7 +64,7 @@ void FUN_00495584(unsigned int *param_1)
       return;
     }
     *param_1 = *param_1 & 0xfffff1ff;
-    temp_v0 = FUN_003792d4();
+    temp_v0 = lmapSceneGetScript();
     if (temp_v0 == 0) {
       param_1[4] = param_1[1];
       param_1[1] = 0x14;
@@ -73,7 +73,7 @@ void FUN_00495584(unsigned int *param_1)
     }
     param_1[2] = 2;
   }
-  FUN_003792d4();
+  lmapSceneGetScript();
   temp_v0 = FUN_003e5ae8();
   if (temp_v0 == 0) {
     return;

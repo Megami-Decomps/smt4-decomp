@@ -7,7 +7,7 @@ extern "C" {
 extern int FUN_00233344(unsigned int *, unsigned int);
 extern unsigned int FUN_002aa024(unsigned int, unsigned int);
 extern int FUN_002b8ee0(unsigned int *, unsigned int);
-extern unsigned int *FUN_002c08f0(void);
+extern unsigned int *jobGetWork(void);
 
 
 unsigned int FUN_00391000(void)
@@ -18,7 +18,7 @@ unsigned int FUN_00391000(void)
   int temp_v1;
   unsigned int *puVar4;
   
-  puVar1 = (unsigned int *)FUN_002c08f0();
+  puVar1 = (unsigned int *)jobGetWork();
   puVar4 = puVar1 + 0x5e9;
   temp_v0 = *puVar4;
   if (temp_v0 != 0) {

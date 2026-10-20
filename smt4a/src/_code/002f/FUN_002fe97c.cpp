@@ -1,24 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fe97c` (_code @ 0x2fe97c, 0x1a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies `node` to r4 before the branch and reads r4 for the payload argument; built reads r1 */
+/* Pushes `node` onto the front of the list, constructing its payload first when `construct` is set. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00124a4e(int);
+typedef struct Node {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ struct Node *next;
+    /* 0x10 */ u8 payload[1];
+} Node;
 
-/* Supplied declaration required: FUN_00124a4e. */
+typedef struct NodeList {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ Node *head;
+} NodeList;
 
+extern void FUN_00124a4e(void *payload);
 
-void FUN_002fe97c(int param_1,int param_2,int param_3)
-
+void FUN_002fe97c(NodeList *list, Node *node, s32 construct)
 {
-/* irregular: 1 native warning(s); review required */
-  *(unsigned int *)(param_2 + 0xc) = *(unsigned int *)(param_1 + 4);
-  if (param_3 != 0) {
-    FUN_00124a4e(param_2 + 0x10);
-  }
-  *(int *)(param_1 + 4) = param_2;
-  return;
+    node->next = list->head;
+    if (construct != 0) {
+        FUN_00124a4e(node->payload);
+    }
+    list->head = node;
 }
 
-} /* extern "C" */
+}

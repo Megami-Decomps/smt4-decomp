@@ -20,7 +20,7 @@ extern unsigned char DAT_004c64a4; /* 0x4c64a4 */
 extern unsigned char DAT_004c64c4; /* 0x4c64c4 */
 
 /* Supplied declaration required: FUN_0012a294. */
-extern int FUN_002c1364(unsigned int *, char *, unsigned int, unsigned int);
+extern int asdModelForwardChecked(unsigned int *, char *, unsigned int, unsigned int);
 extern int FUN_002c1398(unsigned int);
 extern unsigned int FUN_002c30c4(char *);
 
@@ -40,7 +40,7 @@ int FUN_0011be58(void)
     temp_v0 = FUN_002c1398(0);
     if (-1 < temp_v0) {
       temp_v1 = FUN_002c30c4("dsp::DSP");
-      temp_v0 = FUN_002c1364(&DAT_0044e46c,"dsp::DSP",temp_v1,0);
+      temp_v0 = asdModelForwardChecked(&DAT_0044e46c,"dsp::DSP",temp_v1,0);
       if (-1 < temp_v0) {
         DAT_0044e460 = &DAT_0044e468;
         DAT_0044e468 = DAT_0044e46c;

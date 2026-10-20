@@ -10,7 +10,7 @@ int FUN_002b4670(void);
 int FUN_0033fe6c(int, int, int);
 
 /* Supplied declaration required: FUN_0023d9b8. */
-extern int FUN_002939f4(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002b4670. */
 /* Supplied declaration required: FUN_0033fe6c. */
@@ -33,7 +33,7 @@ unsigned int FUN_0025043c(int param_1,int param_2)
   }
   temp_v0 = (unsigned int)*(unsigned short *)(param_2 + 0x62);
   if (temp_v0 == 0) {
-    temp_v1 = FUN_002939f4();
+    temp_v1 = btlGetMainState();
     if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x2000000) != 0) {
       return 0;
     }
@@ -60,7 +60,7 @@ unsigned int FUN_0025043c(int param_1,int param_2)
   case 10:
     break;
   default:
-    temp_v1 = FUN_002939f4();
+    temp_v1 = btlGetMainState();
     if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x2000000) == 0) {
       if (*(char *)(temp_v0 + 0x23) != '\x03') {
         switch((*(unsigned int *)(temp_v0 + 0x28) & 0x1ff) >> 5) {

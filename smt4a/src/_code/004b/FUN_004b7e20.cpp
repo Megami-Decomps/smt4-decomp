@@ -8,7 +8,7 @@ int FUN_002a49e4(...);
 int FUN_004b726c(...);
 
 int FUN_00100388(unsigned char [32], unsigned char *, int);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_0019de98(int, unsigned int);
 int FUN_0019ea64(...);
 int FUN_001f4e20(...);
@@ -33,7 +33,7 @@ extern int DAT_0058800c; /* 0x58800c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0019ea64. */
 /* Supplied declaration required: FUN_001f4e20. */
@@ -107,7 +107,7 @@ void FUN_004b7e20(int param_1)
                 if (*(char *)(param_1 + 0xa88) == '\0') {
                   *(unsigned char *)(param_1 + 0xa88) = 1;
                 }
-                FUN_001681cc(0x92);
+                sysPlaySe(0x92);
                 FUN_0019de98(0,0xf4f4f4ff);
                 temp_v2 = 0x1e;
               }
@@ -176,7 +176,7 @@ void FUN_004b7e20(int param_1)
       FUN_00100388(temp_v4,&LAB_004b8200,*(int *)(param_1 + 0x111c) + 0x6c);
       temp_v1 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x1128),temp_v4);
       FUN_0019ea64(0);
-      FUN_001681cc(0x92);
+      sysPlaySe(0x92);
       FUN_00275f44(*(unsigned int *)(param_1 + 0x1130),temp_v1);
       *(unsigned char *)(param_1 + 0xa88) = 1;
       temp_v2 = *(int *)(param_1 + 0x2c) + 1;

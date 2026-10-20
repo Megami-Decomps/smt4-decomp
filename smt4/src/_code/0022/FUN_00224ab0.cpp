@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0024d434(unsigned int, int, int);
 int FUN_0027da30(unsigned int, int);
 int FUN_0027dab0(unsigned int, int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
 #define ROMWRIGHT_SQRT_4_DEFINED
@@ -20,7 +20,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024d434. */
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: FUN_0027dab0. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 extern int FUN_002c501c(void);
 
 
@@ -43,12 +43,12 @@ unsigned char FUN_00224ab0(float *param_1,int param_2,int param_3)
   float temp_v9;
   
   if ((param_2 != 0) && ((param_3 < 0 || (param_3 == 1 || param_3 == 4)))) {
-    temp_v1 = FUN_002939f4();
+    temp_v1 = btlGetMainState();
     temp_v1 = *(int *)(temp_v1 + 0x1e98) + param_2 * 0x114;
     if (temp_v1 != 0) {
-      temp_v2 = FUN_002939f4();
+      temp_v2 = btlGetMainState();
       FUN_0027dab0(temp_v2,temp_v1);
-      temp_v2 = FUN_002939f4();
+      temp_v2 = btlGetMainState();
       FUN_0027da30(temp_v2,param_2);
       temp_v3 = *(unsigned int *)(temp_v1 + 0x50);
       temp_v4 = (temp_v3 & 0x10) != 0;
@@ -63,7 +63,7 @@ unsigned char FUN_00224ab0(float *param_1,int param_2,int param_3)
         temp_v9 = *(float *)(temp_v1 + 4);
         temp_v8 = *(float *)(temp_v1 + 8);
         temp_v7 = *(float *)(temp_v1 + 0xc);
-        temp_v2 = FUN_002939f4();
+        temp_v2 = btlGetMainState();
         FUN_0024d434(temp_v2,param_2,0);
         temp_v0 = 1;
         *param_1 = (romwright_sqrt_4((temp_v9 - in_s0) * (temp_v9 - in_s0) + (temp_v8 - in_s1) * (temp_v8 - in_s1) +

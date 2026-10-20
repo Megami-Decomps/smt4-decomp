@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_002c41f0(void);
+int asdProcessEnd(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_004e3cf4; /* 0x4e3cf4 */
+extern int g_asdProcess; /* 0x4e3cf4 */
 
-extern int FUN_002c08f0(void);
-/* Supplied declaration required: FUN_002c41f0. */
+extern int jobGetWork(void);
+/* Supplied declaration required: asdProcessEnd. */
 
 
 unsigned int FUN_002c439c(void)
@@ -26,12 +26,12 @@ unsigned int FUN_002c439c(void)
   unsigned int temp_v2;
   int temp_v3;
   
-  temp_v1 = FUN_002c08f0();
+  temp_v1 = jobGetWork();
   temp_v2 = *(unsigned int *)(temp_v1 + 4);
   if (temp_v2 == 0) {
     return 0;
   }
-  for (temp_v1 = *(int *)(DAT_004e3cf4 + (temp_v2 >> 0x14) * 8); temp_v1 != 0;
+  for (temp_v1 = *(int *)(g_asdProcess + (temp_v2 >> 0x14) * 8); temp_v1 != 0;
       temp_v1 = *(int *)(temp_v1 + 0x4c)) {
     if (*(unsigned int *)(temp_v1 + 0x24) == (temp_v2 & 0xfffff)) goto LAB_002c43fc;
   }
@@ -48,7 +48,7 @@ LAB_002c43fc:
     while (temp_v0 != 0) {
       temp_v3 = *(int *)(temp_v0 + 0x5c);
       *(unsigned short *)(temp_v0 + 0x36) = *(unsigned short *)(temp_v1 + 0x36);
-      FUN_002c41f0();
+      asdProcessEnd();
       temp_v0 = temp_v3;
     }
     switch(*(unsigned char *)(temp_v1 + 0x98)) {
@@ -65,7 +65,7 @@ LAB_002c43fc:
     while (temp_v0 != 0) {
       temp_v3 = *(int *)(temp_v0 + 0x5c);
       *(unsigned short *)(temp_v0 + 0x36) = *(unsigned short *)(temp_v1 + 0x36);
-      FUN_002c41f0();
+      asdProcessEnd();
       temp_v0 = temp_v3;
     }
   }

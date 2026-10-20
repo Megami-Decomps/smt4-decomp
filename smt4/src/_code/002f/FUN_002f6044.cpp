@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0028dcb0(...);
+int scrSetResult(...);
 
 extern int FUN_002471d8(void);
-/* Supplied declaration required: FUN_0028dcb0. */
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_002f6044(void)
@@ -23,12 +23,12 @@ unsigned int FUN_002f6044(void)
   }
   else {
     if (temp_v0 != 5) {
-      FUN_0028dcb0(0);
+      scrSetResult(0);
       return 1;
     }
     temp_v1 = 2;
   }
-  FUN_0028dcb0(temp_v1);
+  scrSetResult(temp_v1);
   return 1;
 }
 

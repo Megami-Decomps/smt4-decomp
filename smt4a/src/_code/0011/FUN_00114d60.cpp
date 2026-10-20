@@ -23,7 +23,7 @@ extern unsigned char LAB_00114dec; /* 0x114dec */
 extern unsigned char LAB_00114dfc; /* 0x114dfc */
 extern unsigned char DAT_00537f3c; /* 0x537f3c */
 
-extern int FUN_002e3390(int);
+extern int wstrlen(int);
 /* Supplied declaration required: FUN_002e9300. */
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002ea2e8. */
@@ -59,7 +59,7 @@ void FUN_00114d60(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   FUN_002f32f8(temp_v0,&DAT_00537f3c);
   FUN_002e9300(temp_v5,temp_v4);
   FUN_002f6be2(temp_v5,&temp_v2);
-  temp_v1 = FUN_002e3390(temp_v2);
+  temp_v1 = wstrlen(temp_v2);
   FUN_002fbd0a(param_1,*(unsigned int *)(param_1 + 4),temp_v2,temp_v1 + temp_v2);
   FUN_002f6bf0(temp_v2);
   FUN_002e9318(temp_v5);

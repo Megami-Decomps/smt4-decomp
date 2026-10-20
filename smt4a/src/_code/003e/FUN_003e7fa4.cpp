@@ -18,8 +18,8 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019cac4. */
 extern unsigned int FUN_001a6f60(int, unsigned int);
 /* Supplied declaration required: FUN_00348ee8. */
@@ -51,8 +51,8 @@ void FUN_003e7fa4(int param_1,int param_2,int param_3)
     temp_v0 = *(unsigned short *)(temp_v5 + 2);
     if (*(int *)(param_1 + 0x2294) != 0) {
       temp_v1 = FUN_001a6f60(*(int *)(param_1 + 0x2294),0);
-      temp_v5 = FUN_00192798();
-      temp_v2 = FUN_00192748(temp_v1);
+      temp_v5 = dataTableGetEntries();
+      temp_v2 = dataTableGetCount(temp_v1);
       temp_v3 = 0;
       if (temp_v3 < temp_v2) {
         do {

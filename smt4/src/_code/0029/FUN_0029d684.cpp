@@ -6,18 +6,18 @@ extern "C" {
 
 int FUN_00258a24(int);
 int FUN_00293ba8(void);
-int FUN_002bd8e8(int, int, int);
+int timerStart(int, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern unsigned char DAT_0044e140; /* 0x44e140 */
+extern unsigned char g_gameGlobals; /* 0x44e140 */
 
 /* Supplied declaration required: FUN_00258a24. */
 /* Supplied declaration required: FUN_00293ba8. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 
 
 void FUN_0029d684(int param_1)
@@ -28,12 +28,12 @@ void FUN_0029d684(int param_1)
   int temp_v1;
   int temp_v2;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0044e140 + 0x4));
-  if (*(int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x12dc) == 2 || *(int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x12dc) == 3) {
+  temp_v1 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
+  if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12dc) == 2 || *(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12dc) == 3) {
     return;
   }
   if (param_1 != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e60) = 0;
+    *(unsigned char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e60) = 0;
     temp_v2 = *(int *)(temp_v1 + 0x12dc);
     if ((temp_v2 == 4 || temp_v2 == 5) || temp_v2 == 6) {
       *(unsigned int *)(temp_v1 + 0x12e0) = 4;
@@ -42,12 +42,12 @@ void FUN_0029d684(int param_1)
       *(unsigned int *)(temp_v1 + 0x12dc) = 4;
       *(unsigned int *)(temp_v1 + 0x12e0) = 8;
     }
-    FUN_002bd8e8(temp_v1 + 0x7ec,4,0);
+    timerStart(temp_v1 + 0x7ec,4,0);
   }
   else {
-    temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e66);
+    temp_v0 = *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e66);
     if (((temp_v0 == '\b') || (temp_v0 == '\t' || temp_v0 == '\n')) || (temp_v0 == '\v' || temp_v0 == '\a')) {
-      *(unsigned int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x12e8) = 1;
+      *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e8) = 1;
       FUN_00293ba8();
     }
   }

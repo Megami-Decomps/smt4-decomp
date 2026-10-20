@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 
 void FUN_0029a17c(int param_1,int param_2,unsigned int param_3,int param_4,int param_5)
@@ -17,7 +17,7 @@ void FUN_0029a17c(int param_1,int param_2,unsigned int param_3,int param_4,int p
   unsigned int temp_v3;
   int *piVar5;
   
-  temp_v0 = DAT_0044ea00;
+  temp_v0 = g_titleScene;
   temp_v2 = 0x140;
   if (param_5 == 0) {
     temp_v2 = 400;
@@ -39,16 +39,16 @@ void FUN_0029a17c(int param_1,int param_2,unsigned int param_3,int param_4,int p
     param_2 = 0;
   }
   temp_v1 = temp_v1 | (param_2 << 0x10);
-  piVar5 = (int *)(DAT_0044ea00 + 0x132c);
+  piVar5 = (int *)(g_titleScene + 0x132c);
   temp_v3 = piVar5[*piVar5 + 2];
   piVar5[*piVar5 + 2] = temp_v1;
   if (*(char *)(temp_v0 + 0x1344) != '\0' || temp_v3 != temp_v1) {
     (**(romwright_code **)(temp_v0 + 0x1348))();
     *(unsigned char *)(temp_v0 + 0x1344) = 0;
   }
-  temp_v0 = DAT_0044ea00;
+  temp_v0 = g_titleScene;
   param_3 = param_3 | (param_4 << 0x10);
-  piVar5 = (int *)(DAT_0044ea00 + 0x134c);
+  piVar5 = (int *)(g_titleScene + 0x134c);
   temp_v1 = piVar5[*piVar5 + 2];
   piVar5[*piVar5 + 2] = param_3;
   if (*(char *)(temp_v0 + 0x1364) != '\0' || temp_v1 != param_3) {

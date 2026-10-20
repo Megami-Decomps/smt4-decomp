@@ -5,17 +5,17 @@
 extern "C" {
 
 int FUN_001b4a90(...);
-int FUN_003283ac(void);
+int scrSetResult(void);
 
-extern int DAT_0057a7b8; /* 0x57a7b8 */
+extern int g_btlTalk; /* 0x57a7b8 */
 
 extern int FUN_0014bef4(unsigned int);
 extern int FUN_0018719c(void);
-extern int FUN_00192748(void);
-extern int FUN_00192798(unsigned int);
+extern int dataTableGetCount(void);
+extern int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: FUN_001b4a90. */
-extern unsigned int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_003283ac. */
+extern unsigned int scrGetArg(unsigned int);
+/* Supplied declaration required: scrSetResult. */
 extern unsigned int FUN_004c97b4(int);
 
 
@@ -38,10 +38,10 @@ unsigned int FUN_003b2008(void)
   int aiStack_228 [129];
   
   piVar10 = aiStack_428;
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_004c97b4(DAT_0057a7b8);
-  temp_v2 = FUN_00192748();
-  temp_v3 = FUN_00192798(temp_v1);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = FUN_004c97b4(g_btlTalk);
+  temp_v2 = dataTableGetCount();
+  temp_v3 = dataTableGetEntries(temp_v1);
   FUN_001b4a90(aiStack_428,0x200,0xffffffff);
   temp_v7 = 0;
   temp_v5 = 0;
@@ -74,7 +74,7 @@ unsigned int FUN_003b2008(void)
   temp_v5 = 0x80;
   do {
     temp_v3 = *piVar10;
-    if ((temp_v3 != -1) && (*(int *)(DAT_0057a7b8 + temp_v3 * 4 + 0x34) == -1)) {
+    if ((temp_v3 != -1) && (*(int *)(g_btlTalk + temp_v3 * 4 + 0x34) == -1)) {
       aiStack_228[temp_v2] = temp_v3;
       temp_v2 = temp_v2 + 1;
     }
@@ -85,8 +85,8 @@ unsigned int FUN_003b2008(void)
     temp_v2 = 1;
   }
   temp_v5 = FUN_0014bef4((temp_v2 - 1U) & 0xffff);
-  *(unsigned int *)(DAT_0057a7b8 + aiStack_228[temp_v5] * 4 + 0x34) = 0xffffffff;
-  FUN_003283ac();
+  *(unsigned int *)(g_btlTalk + aiStack_228[temp_v5] * 4 + 0x34) = 0xffffffff;
+  scrSetResult();
   return 1;
 }
 

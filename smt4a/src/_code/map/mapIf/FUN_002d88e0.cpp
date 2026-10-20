@@ -18,7 +18,7 @@ int FUN_0040ace8(unsigned int, unsigned int);
 extern unsigned char LAB_002d89f4; /* 0x2d89f4 */
 extern unsigned char LAB_002d8a10; /* 0x2d8a10 */
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_0058103c; /* 0x58103c */
+extern int g_mapIf; /* 0x58103c */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_0014afd0. */
@@ -46,8 +46,8 @@ void FUN_002d88e0(void)
   unsigned int in_s3;
   unsigned char temp_v3 [136];
   
-  temp_v0 = DAT_0058103c;
-  *(unsigned char *)(DAT_0058103c + 0xcbdc) = 1;
+  temp_v0 = g_mapIf;
+  *(unsigned char *)(g_mapIf + 0xcbdc) = 1;
   *(unsigned int *)(temp_v0 + 0xcbe0) = 0;
   *(unsigned int *)(temp_v0 + 0xcbe4) = 0;
   *(unsigned int *)(temp_v0 + 0xcbe8) = in_s0;

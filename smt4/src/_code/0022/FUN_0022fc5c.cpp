@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0024bda8(...);
 int FUN_002907c4(...);
 int FUN_002b45e8(void);
-int FUN_002c4938(...);
+int memClear(...);
 
 int FUN_00230234(void);
 int FUN_002302d8(...);
@@ -71,7 +71,7 @@ extern unsigned int FUN_002ae3c4(unsigned int);
 extern unsigned int FUN_002b8dc0(unsigned int);
 extern unsigned int FUN_002bce00(void);
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 extern unsigned int FUN_00394fd0(void);
 
 
@@ -414,7 +414,7 @@ void FUN_0022fc5c(int param_1)
       FUN_00295660(temp_v4 + 0x24,&uStack_128);
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 5);
-    FUN_002c4938(acStack_c8,0x5c);
+    memClear(acStack_c8,0x5c);
     temp_v4 = 0;
     acStack_64[0] = '\0';
     acStack_64[1] = '\0';

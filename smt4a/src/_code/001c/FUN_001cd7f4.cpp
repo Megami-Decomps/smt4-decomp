@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001d1794(unsigned char *);
+int sndAddDroppedFrames(unsigned char *);
 int rt_memcpy_w(int, unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ extern unsigned char DAT_00643380; /* 0x643380 */
 extern unsigned char DAT_006449d0; /* 0x6449d0 */
 
 extern int FUN_001c6e20(void);
-/* Supplied declaration required: FUN_001d1794. */
+/* Supplied declaration required: sndAddDroppedFrames. */
 extern void nn_snd_CTR_OutputCapture_Write(unsigned int, short *, int);
 extern void nn_snd_CTR_VoiceManager_UpdateStatus(unsigned int, int, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
@@ -67,7 +67,7 @@ void FUN_001cd7f4(int param_1)
                   (temp_v1,*(short **)(param_1 + (unsigned int)*(unsigned short *)(param_1 + 0x131c) * 4 + 0x1300),
                    0xa0);
       }
-      FUN_001d1794(&DAT_00643380);
+      sndAddDroppedFrames(&DAT_00643380);
       return;
     }
   }

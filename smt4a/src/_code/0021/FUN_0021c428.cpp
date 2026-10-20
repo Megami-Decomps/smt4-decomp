@@ -1,26 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021c428` (_code @ 0x21c428, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only: retail materializes the zero result (mov r4,#0) before loading *entries */
+/* Returns 1 if the first object in the list exists and jobFind accepts its first word, otherwise 0. */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_00184e20(unsigned int);
+typedef struct Entry {
+    /* 0x00 */ u32 id;
+} Entry;
 
+extern s32 jobFind(u32 id);
 
-unsigned int FUN_0021c428(int *param_1)
-
+u32 FUN_0021c428(Entry **entries)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (((unsigned int *)*param_1 == (unsigned int *)0x0) ||
-     (temp_v0 = FUN_00184e20(*(unsigned int *)*param_1), temp_v0 == 0)) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    u32 result = 0;
+
+    if (*entries != NULL) {
+        if (jobFind((*entries)->id) != 0) {
+            return 1;
+        }
+    }
+    return result;
 }
 
-} /* extern "C" */
+}

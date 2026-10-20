@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int *DAT_0058104c; /* 0x58104c */
+extern int *g_popupState; /* 0x58104c */
 extern int DAT_005f1908; /* 0x5f1908 */
 
 extern int FUN_002d8b58(unsigned int);
@@ -16,14 +16,14 @@ void FUN_00274d9c(void)
   int *piVar1;
   int temp_v0;
   
-  piVar1 = DAT_0058104c;
+  piVar1 = g_popupState;
   if (DAT_005f1908 >= 18000) {
-    if (*DAT_0058104c == 0) {
-      DAT_0058104c[6] = 0xad;
+    if (*g_popupState == 0) {
+      g_popupState[6] = 0xad;
       *piVar1 = 0xb;
       piVar1[1] = 0;
       temp_v0 = FUN_002d8b58(2);
-      DAT_0058104c[5] = temp_v0;
+      g_popupState[5] = temp_v0;
       DAT_005f1908 = 0;
     }
   }

@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0016c4b8. */
@@ -26,7 +26,7 @@ void FUN_0042227c(int param_1)
 /* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
   unsigned int in_fpscr;
   
-  FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(param_1 + 0x10));
+  FUN_0016c4b8(g_renderCtx,*(unsigned int *)(param_1 + 0x10));
   VectorSignedToFloat(*(unsigned int *)(*(int *)(param_1 + 0x10) + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3)
   ;
   VectorSignedToFloat(*(unsigned int *)(*(int *)(param_1 + 0x10) + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3)

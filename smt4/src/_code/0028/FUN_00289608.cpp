@@ -1,61 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00289608` (_code @ 0x289608, 0xb4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: built hoists the load of bufferA above the first stores; retail keeps the stores first. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0028d6d0(void);
-int FUN_002a03d8(int, int);
-int FUN_002a7218(void);
-int FUN_002c415c(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
+/* Task state: state word, phase, a flag byte and three owned resources. */
 typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+    u32 unk00;          /* 0x00 */
+    u32 phase;          /* 0x04 */
+    u8 flag;            /* 0x08 */
+    u8 unk09[3];
+    void *bufferA;      /* 0x0c */
+    void *bufferB;      /* 0x10 */
+    void *resource;     /* 0x14 */
+} Task;
 
-/* Supplied declaration required: FUN_0028d6d0. */
-/* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002a7218. */
-extern int FUN_002c2a04(unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
+int FUN_0028d6d0(void);
+int FUN_002a03d8(int index, int value);
+int scrScriptProcessDestroy(void *resource);
+int FUN_002c2a04(int index);
+int asdMemFree(void *buffer);
 
-
-void FUN_00289608(unsigned int *param_1,unsigned char param_2)
-
+/* Resets the task: frees its buffers and resource, then sets phase 12 and updates indices 0/1 whose state is 3. */
+void FUN_00289608(Task *task, u8 flag)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  *(unsigned char *)(param_1 + 2) = param_2;
-  param_1[1] = 0xb;
-  *param_1 = 0;
-  if (param_1[3] != 0) {
-    FUN_002c415c();
-    param_1[3] = 0;
-  }
-  if (param_1[4] != 0) {
-    FUN_002c415c();
-    param_1[4] = 0;
-  }
-  if (param_1[5] != 0) {
-    FUN_002a7218();
-    param_1[5] = 0;
-  }
-  if (*(char *)(param_1 + 2) != '\0') {
-    FUN_0028d6d0();
-  }
-  param_1[1] = 0xc;
-  temp_v0 = FUN_002c2a04(0);
-  if (temp_v0 == 3) {
-    FUN_002a03d8(0,5);
-  }
-  temp_v0 = FUN_002c2a04(1);
-  if (temp_v0 == 3) {
-    FUN_002a03d8(1,5);
-    return;
-  }
-  return;
+    task->flag = flag;
+    task->phase = 11;
+    task->unk00 = 0;
+    if (task->bufferA != NULL) {
+        asdMemFree(task->bufferA);
+        task->bufferA = NULL;
+    }
+    if (task->bufferB != NULL) {
+        asdMemFree(task->bufferB);
+        task->bufferB = NULL;
+    }
+    if (task->resource != NULL) {
+        scrScriptProcessDestroy(task->resource);
+        task->resource = NULL;
+    }
+    if (task->flag != 0) {
+        FUN_0028d6d0();
+    }
+    task->phase = 12;
+    if (FUN_002c2a04(0) == 3) {
+        FUN_002a03d8(0, 5);
+    }
+    if (FUN_002c2a04(1) == 3) {
+        FUN_002a03d8(1, 5);
+    }
 }
 
 } /* extern "C" */

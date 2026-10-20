@@ -13,7 +13,7 @@ extern unsigned int DAT_0057117c; /* 0x57117c */
 extern unsigned int DAT_00571190; /* 0x571190 */
 extern unsigned int DAT_00571194; /* 0x571194 */
 
-extern int FUN_004ee568(void);
+extern int btlUnitGet(void);
 
 
 void FUN_004e9f74(int *param_1,int param_2,int param_3)
@@ -33,7 +33,7 @@ void FUN_004e9f74(int *param_1,int param_2,int param_3)
   unsigned int *puVar12;
   unsigned int *puVar13;
   
-  temp_v7 = FUN_004ee568();
+  temp_v7 = btlUnitGet();
   temp_v6 = DAT_00571194;
   temp_v5 = DAT_00571190;
   temp_v4 = DAT_0057117c;

@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002be624(...);
-int FUN_002c4938(...);
+int memClear(...);
 
-extern int FUN_002939f4(void);
-extern unsigned int FUN_0029a034(unsigned char *, unsigned int);
+extern int btlGetMainState(void);
+extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_003dbee4(int param_1,unsigned int param_2)
@@ -31,9 +31,9 @@ void FUN_003dbee4(int param_1,unsigned int param_2)
   unsigned char temp_v10 [128];
   
   *(unsigned int *)(param_1 + 0x302c) = param_2;
-  FUN_002c4938(temp_v10,0x80);
+  memClear(temp_v10,0x80);
   FUN_002be624(temp_v10,"battle/dead_effect/dead_effect%02d.bam",param_2);
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   temp_v8 = 0;
   do {
     temp_v9 = temp_v0 + temp_v8 * 0x1c;
@@ -57,7 +57,7 @@ void FUN_003dbee4(int param_1,unsigned int param_2)
       do {
         temp_v1 = param_1 + temp_v7 * 0x28;
         if ((*(unsigned int *)(temp_v1 + 0x1b4) & 2) == 0 && (*(unsigned int *)(temp_v1 + 0x1b4) & 4) == 0) {
-          temp_v2 = FUN_0029a034(temp_v10,7);
+          temp_v2 = asdMdlManagerCreateSecondList(temp_v10,7);
           *(unsigned int *)(temp_v1 + 400) = temp_v2;
           *(int *)(temp_v1 + 0x194) = *(int *)(temp_v9 + 0x2318);
           *(unsigned int *)(temp_v1 + 0x198) = *(unsigned int *)(temp_v9 + 0x231c);

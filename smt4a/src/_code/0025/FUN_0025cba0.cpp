@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_5_stack;
 
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_00630724; /* 0x630724 */
 extern unsigned int DAT_00630734; /* 0x630734 */
 extern unsigned int DAT_00630744; /* 0x630744 */
@@ -47,7 +47,7 @@ void FUN_0025cba0(unsigned int param_1,unsigned int param_2,unsigned int param_3
     puVar3 = &DAT_00630744;
     puVar4 = &DAT_00630754;
   }
-  FUN_0016c4b8(DAT_0059dbb4,0,param_3,param_4,param_1,param_2,param_3,param_4);
+  FUN_0016c4b8(g_renderCtx,0,param_3,param_4,param_1,param_2,param_3,param_4);
   VectorSignedToFloat(0x100 - param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0026dafc(unsigned int);
-int FUN_002c4938(unsigned char [4], int);
-int aeabi_idivmod(int, int);
+int memClear(unsigned char [4], int);
+int __aeabi_idivmod(int, int);
 
 extern int DAT_0043da90; /* 0x43da90 */
 
@@ -17,8 +17,8 @@ extern int FUN_0029efc0(int);
 extern int FUN_002a8740(int);
 extern unsigned int FUN_002b05d0(int);
 extern int FUN_002b63ac(void);
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_00298940(void)
@@ -46,7 +46,7 @@ void FUN_00298940(void)
   if (temp_v3 < temp_v2) {
     temp_v2 = FUN_0029ee54(temp_v1 + 0x1dc);
   }
-  FUN_002c4938(temp_v10,100);
+  memClear(temp_v10,100);
   temp_v3 = 0;
   if (temp_v3 < temp_v2) {
     do {
@@ -86,7 +86,7 @@ void FUN_00298940(void)
         *piVar9 = temp_v8 + 1;
         if (temp_v8 + 1 >= 0x18) {
           piVar11 = (int *)(temp_v9 + 0x24f8);
-          aeabi_idivmod(*piVar11 + 1,temp_v4);
+          __aeabi_idivmod(*piVar11 + 1,temp_v4);
           *piVar11 = temp_v7;
           *piVar9 = 0;
         }

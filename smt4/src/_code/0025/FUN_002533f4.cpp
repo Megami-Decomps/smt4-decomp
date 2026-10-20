@@ -8,7 +8,7 @@ int FUN_0022ac3c(int, unsigned int);
 int FUN_002b06c4(void);
 int FUN_002ba764(...);
 int FUN_002c0a9c(unsigned int, unsigned int, int);
-int FUN_002c0cec(...);
+int dataTableGet(...);
 int FUN_00389168(int, unsigned int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -17,16 +17,16 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_0022ac3c. */
 /* Supplied declaration required: FUN_002b06c4. */
 /* Supplied declaration required: FUN_002ba764. */
 extern int FUN_002c09f4(short);
 /* Supplied declaration required: FUN_002c0a9c. */
-extern unsigned int FUN_002c0c74(unsigned int);
-extern int FUN_002c0cc4(void);
-/* Supplied declaration required: FUN_002c0cec. */
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
+/* Supplied declaration required: dataTableGet. */
 /* Supplied declaration required: FUN_00389168. */
 
 
@@ -52,11 +52,11 @@ unsigned short FUN_002533f4(unsigned int param_1,unsigned int param_2,int param_
     puVar1 = (unsigned short *)FUN_002ba764(param_1,param_2);
     temp_v4 = (unsigned int)*puVar1;
   }
-  temp_v0 = FUN_002c0cec(2,1);
-  temp_v1 = FUN_002c0cc4();
-  temp_v2 = FUN_002c0c74(temp_v0);
+  temp_v0 = dataTableGet(2,1);
+  temp_v1 = dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v0);
   temp_v6 = temp_v1;
-  if ((temp_v4 < temp_v2) && (temp_v6 = DAT_00433158, FUN_00389168(DAT_00433158,temp_v4), temp_v6 == 0)) {
+  if ((temp_v4 < temp_v2) && (temp_v6 = g_aocSystem, FUN_00389168(g_aocSystem,temp_v4), temp_v6 == 0)) {
     temp_v6 = temp_v1 + temp_v4 * 0x3c;
   }
   temp_v7 = 0;
@@ -66,11 +66,11 @@ unsigned short FUN_002533f4(unsigned int param_1,unsigned int param_2,int param_
     temp_v4 = (unsigned int)*puVar1;
     if (temp_v4 != 0) {
       if (param_3 != 0) {
-        temp_v0 = FUN_002c0cec(2);
-        temp_v3 = FUN_002c0cc4();
-        temp_v2 = FUN_002c0c74(temp_v0);
+        temp_v0 = dataTableGet(2);
+        temp_v3 = dataTableGetEntries();
+        temp_v2 = dataTableGetCount(temp_v0);
         temp_v5 = temp_v3;
-        if ((temp_v4 < temp_v2) && (temp_v5 = DAT_00433158, FUN_0022ac3c(DAT_00433158,temp_v4), temp_v5 == 0))
+        if ((temp_v4 < temp_v2) && (temp_v5 = g_aocSystem, FUN_0022ac3c(g_aocSystem,temp_v4), temp_v5 == 0))
         {
           temp_v5 = temp_v3 + temp_v4 * 0x1c;
         }

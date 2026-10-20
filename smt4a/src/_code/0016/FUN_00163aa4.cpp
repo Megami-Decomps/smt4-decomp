@@ -17,7 +17,7 @@ int VectorUnsignedToFloat(unsigned int, int);
 /* Supplied declaration required: FUN_00181948. */
 /* Supplied declaration required: FUN_00182348. */
 /* Supplied declaration required: FUN_00184758. */
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 int FUN_00163aa4(int param_1)
@@ -106,15 +106,15 @@ int FUN_00163aa4(int param_1)
       temp_v7 = (float)VectorUnsignedToFloat((unsigned int)(unsigned short)psVar7[4],(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v6 = VectorFloatToUnsigned(temp_v7 / in_s0,3) & 0xffff;
       if (*(char *)(param_1 + 0x54) != '\0') {
-        temp_v2 = aeabi_idivmod(((int)*psVar7 - (int)psVar7[2]) * 0x1000,temp_v6);
+        temp_v2 = __aeabi_idivmod(((int)*psVar7 - (int)psVar7[2]) * 0x1000,temp_v6);
         *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + temp_v2;
-        temp_v2 = aeabi_idivmod(((int)psVar7[1] - (int)psVar7[3]) * 0x1000,temp_v6);
+        temp_v2 = __aeabi_idivmod(((int)psVar7[1] - (int)psVar7[3]) * 0x1000,temp_v6);
         *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + temp_v2;
       }
       else {
-        temp_v2 = aeabi_idivmod(((int)psVar7[2] - (int)*psVar7) * 0x1000,temp_v6);
+        temp_v2 = __aeabi_idivmod(((int)psVar7[2] - (int)*psVar7) * 0x1000,temp_v6);
         *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + temp_v2;
-        temp_v2 = aeabi_idivmod(((int)psVar7[3] - (int)psVar7[1]) * 0x1000,temp_v6);
+        temp_v2 = __aeabi_idivmod(((int)psVar7[3] - (int)psVar7[1]) * 0x1000,temp_v6);
         *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + temp_v2;
       }
       temp_v5 = *(char *)(param_1 + 0x54) != '\0';

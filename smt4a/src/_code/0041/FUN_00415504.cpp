@@ -36,7 +36,7 @@ typedef struct {
     unsigned int sp98; /* 0x98: local_98 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
@@ -100,7 +100,7 @@ void FUN_00415504(int param_1)
   temp_v12 = 0x3f800000;
   temp_v14 = *(float *)(*(int *)(param_1 + 0x60) + 0xc) * *(float *)(*(int *)(param_1 + 0x14) + 8);
   temp_v13 = 0x3f800000;
-  FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(*(int *)(param_1 + 8) + 8));
+  FUN_0016c4b8(g_renderCtx,*(unsigned int *)(*(int *)(param_1 + 8) + 8));
   FUN_00409e78(param_1,&temp_v19,param_1 + 0x18);
   temp_v0 = 0;
   if (temp_v0 < **(int **)(param_1 + 0x60) + 1) {
@@ -134,8 +134,8 @@ void FUN_00415504(int param_1)
       pfVar6 = pfVar6 + 3;
     } while (temp_v5 < temp_v0 + 1U);
   }
-  temp_v0 = DAT_0059dbb4;
-  piVar10 = (int *)(DAT_0059dbb4 + 0x12b8);
+  temp_v0 = g_renderCtx;
+  piVar10 = (int *)(g_renderCtx + 0x12b8);
   temp_v1 = *(int *)(*(int *)(param_1 + 0x60) + 0x28);
   temp_v2 = *piVar10;
   temp_v3 = piVar10[temp_v2 + 2];
@@ -145,7 +145,7 @@ void FUN_00415504(int param_1)
     (**(romwright_code **)(temp_v0 + 0x12d4))();
     *(unsigned char *)(temp_v0 + 0x12d0) = 0;
   }
-  temp_v0 = DAT_0059dbb4;
+  temp_v0 = g_renderCtx;
   temp_v1 = FUN_001692ac(1,0);
   piVar10 = (int *)(temp_v0 + 0x1258);
   temp_v2 = *piVar10;
@@ -167,8 +167,8 @@ void FUN_00415504(int param_1)
   }
   FUN_00317c3c(&temp_v11);
   FUN_002371b0();
-  temp_v0 = DAT_0059dbb4;
-  piVar10 = (int *)(DAT_0059dbb4 + 0x1258);
+  temp_v0 = g_renderCtx;
+  piVar10 = (int *)(g_renderCtx + 0x1258);
   temp_v1 = *piVar10;
   temp_v2 = piVar10[temp_v1 + 2];
   *piVar10 = temp_v1 - 1;
@@ -176,8 +176,8 @@ void FUN_00415504(int param_1)
     (**(romwright_code **)(temp_v0 + 0x1274))();
     *(unsigned char *)(temp_v0 + 0x1270) = 0;
   }
-  temp_v0 = DAT_0059dbb4;
-  piVar10 = (int *)(DAT_0059dbb4 + 0x12b8);
+  temp_v0 = g_renderCtx;
+  piVar10 = (int *)(g_renderCtx + 0x12b8);
   temp_v1 = *piVar10;
   temp_v2 = piVar10[temp_v1 + 2];
   *piVar10 = temp_v1 - 1;

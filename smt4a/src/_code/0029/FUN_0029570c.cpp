@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002b5cb4(void);
 
 extern int DAT_00581270; /* 0x581270 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern signed char DAT_005f161f; /* 0x5f161f */
 extern int DAT_005f1844; /* 0x5f1844 */
 
@@ -69,7 +69,7 @@ joined_r0x00295908:
                   }
                 }
                 else {
-                  temp_v9 = *(float *)(DAT_00581288 + 0x1c);
+                  temp_v9 = *(float *)(g_lmapScene + 0x1c);
                   FUN_002b5cb4();
                   if (0x4395ffff >= (int)temp_v9) {
                     temp_v2 = *(int *)(temp_v5 + 0x54);

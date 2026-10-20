@@ -11,7 +11,7 @@ int FUN_00514500(void);
 int FUN_00514540(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
-int aeabi_uidivmod(void);
+int __aeabi_uidivmod(void);
 
 typedef struct fn_003b257c_arg0 fn_003b257c_arg0;
 struct fn_003b257c_arg0 {
@@ -51,7 +51,7 @@ typedef struct {
     unsigned int sp130; /* 0x130: local_130 */
 } param_1_stack;
 
-extern float DAT_005c1100; /* 0x5c1100 */
+extern float g_polyDefaultColor; /* 0x5c1100 */
 extern float DAT_005c1104; /* 0x5c1104 */
 extern float DAT_005c1108; /* 0x5c1108 */
 extern float DAT_005c110c; /* 0x5c110c */
@@ -80,7 +80,7 @@ extern unsigned int FUN_001acf08(void);
 /* Supplied declaration required: FUN_00221d78. */
 /* Supplied declaration required: FUN_00514500. */
 /* Supplied declaration required: FUN_00514540. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_003b257c(fn_003b257c_arg0 *param_1)
@@ -214,7 +214,7 @@ void FUN_003b257c(fn_003b257c_arg0 *param_1)
                 temp_v34 = temp_v40[5];
                 temp_v35 = temp_v40[6] + temp_v40[7] * temp_v19;
                 temp_v21 = temp_v40[8];
-                temp_v28 = DAT_005c1100 * temp_v21;
+                temp_v28 = g_polyDefaultColor * temp_v21;
                 DAT_006472e0 = DAT_005c1104 * temp_v21;
                 DAT_006472e4 = DAT_005c1108 * temp_v21;
                 temp_v36 = (temp_v40[1] + temp_v18 * temp_v19 * 0.5f) * temp_v19 -
@@ -280,7 +280,7 @@ void FUN_003b257c(fn_003b257c_arg0 *param_1)
                   }
                 }
                 temp_v9 = 1;
-                DAT_006472ec = DAT_005c1100 * temp_v19;
+                DAT_006472ec = g_polyDefaultColor * temp_v19;
                 DAT_006472f0 = DAT_005c1104 * temp_v19;
                 DAT_006472f4 = DAT_005c1108 * temp_v19;
                 DAT_006472f8 = DAT_005c110c * temp_v19;
@@ -355,7 +355,7 @@ void FUN_003b257c(fn_003b257c_arg0 *param_1)
               }
               else {
                 FUN_00514500();
-                aeabi_uidivmod();
+                __aeabi_uidivmod();
                 *temp_v40 = temp_v11;
               }
               temp_v41 = temp_v41 - 1;

@@ -1,39 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033c164` (_code @ 0x33c164, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b46f8(unsigned char [12], unsigned int, unsigned int, int, unsigned char *);
+u32 dataTableGetCount(u32 value);
+u32 dataTableGetEntries(void);
+u32 dataTableGet(u32 first, u32 second);
+int FUN_002b46f8(u8 *args, u32 first, u32 second, int count, u8 *table);
 
-/* stack frame of param_1: 2 slot(s), 5 byte(s) */
-typedef struct {
-    unsigned char sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern unsigned char LAB_002dcb50; /* 0x2dcb50 */
-
-/* Supplied declaration required: FUN_002b46f8. */
-extern unsigned int FUN_002c0c74(unsigned int);
-extern unsigned int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
-
-
-void FUN_0033c164(unsigned char param_1)
-
+/* Packs `value` into a 12-byte argument block and submits it with the data at 0x2dcb50. */
+void FUN_0033c164(u8 value)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2 [12];
-  
-  temp_v0 = FUN_002c0cec(0x14,0);
-  temp_v1 = FUN_002c0cc4();
-  temp_v0 = FUN_002c0c74(temp_v0);
-  temp_v2[0] = param_1;
-  FUN_002b46f8(temp_v2,temp_v1,temp_v0,6,&LAB_002dcb50);
-  return;
+    u32 first;
+    u32 second;
+    u8 args[12];
+
+    first = dataTableGet(0x14, 0);
+    second = dataTableGetEntries();
+    first = dataTableGetCount(first);
+    args[0] = value;
+    FUN_002b46f8(args, second, first, 6, (u8 *)0x2dcb50);
 }
 
 } /* extern "C" */

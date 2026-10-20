@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00300900(int, int);
 int FUN_00300934(...);
-int FUN_00303610(int, int);
+int readerReadU16(int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 extern int FUN_002ee9da(int);
 /* Supplied declaration required: FUN_00300900. */
 /* Supplied declaration required: FUN_00300934. */
-/* Supplied declaration required: FUN_00303610. */
+/* Supplied declaration required: readerReadU16. */
 
 
 void FUN_001201d8(int param_1,int param_2)
@@ -37,8 +37,8 @@ void FUN_001201d8(int param_1,int param_2)
       (((((FUN_00300934(param_1,param_2 + 8), *(char *)(param_1 + 4) == '\0' &&
           (FUN_00300934(param_1,param_2 + 0xc), *(char *)(param_1 + 4) == '\0')) &&
          (FUN_00300934(param_1,param_2 + 0x10), *(char *)(param_1 + 4) == '\0')) &&
-        ((FUN_00303610(param_1,param_2 + 0x14), *(char *)(param_1 + 4) == '\0' &&
-         (FUN_00303610(param_1,param_2 + 0x16), *(char *)(param_1 + 4) == '\0')))) &&
+        ((readerReadU16(param_1,param_2 + 0x14), *(char *)(param_1 + 4) == '\0' &&
+         (readerReadU16(param_1,param_2 + 0x16), *(char *)(param_1 + 4) == '\0')))) &&
        ((temp_v0 == '\0' &&
         ((*(unsigned int *)(param_1 + 0xc) > (unsigned int)(temp_v1 + temp_v2) ||
          (temp_v1 = FUN_002ee9da(param_1), temp_v1 == 0)))))))))) {

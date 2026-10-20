@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_00187180(int, int);
-int FUN_00192748(...);
+int dataTableGet(int, int);
+int dataTableGetCount(...);
 
-extern int DAT_00570280; /* 0x570280 */
+extern int g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_00187180. */
+/* Supplied declaration required: dataTableGet. */
 extern int FUN_0018719c(void);
-/* Supplied declaration required: FUN_00192748. */
-extern int FUN_00192798(void);
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(void);
 
 
 char * FUN_003cdd3c(int param_1,int param_2)
@@ -26,20 +26,20 @@ char * FUN_003cdd3c(int param_1,int param_2)
   char *pcVar5;
   
   temp_v3 = 0;
-  FUN_00187180(0x23,8);
-  temp_v0 = FUN_00192748();
-  if (0 < temp_v0 + *(int *)(DAT_00570280 + 0x424)) {
+  dataTableGet(0x23,8);
+  temp_v0 = dataTableGetCount();
+  if (0 < temp_v0 + *(int *)(g_aocSystem + 0x424)) {
     do {
-      temp_v1 = FUN_00187180(0x23,8);
-      temp_v0 = FUN_00192798();
-      temp_v2 = FUN_00192748(temp_v1);
+      temp_v1 = dataTableGet(0x23,8);
+      temp_v0 = dataTableGetEntries();
+      temp_v2 = dataTableGetCount(temp_v1);
       if (temp_v3 < temp_v2) {
         pcVar5 = (char *)(temp_v0 + temp_v3 * 0x18);
       }
       else {
         pcVar5 = (char *)0x0;
-        if (temp_v3 < temp_v2 + *(int *)(DAT_00570280 + 0x424)) {
-          pcVar5 = (char *)(*(int *)(DAT_00570280 + 0x428) + (temp_v3 - temp_v2) * 0x18);
+        if (temp_v3 < temp_v2 + *(int *)(g_aocSystem + 0x424)) {
+          pcVar5 = (char *)(*(int *)(g_aocSystem + 0x428) + (temp_v3 - temp_v2) * 0x18);
         }
       }
       if (*pcVar5 == -1) {
@@ -51,9 +51,9 @@ char * FUN_003cdd3c(int param_1,int param_2)
         return pcVar5;
       }
       temp_v3 = temp_v3 + 1;
-      FUN_00187180(0x23,8);
-      temp_v0 = FUN_00192748();
-    } while ((int)temp_v3 < temp_v0 + *(int *)(DAT_00570280 + 0x424));
+      dataTableGet(0x23,8);
+      temp_v0 = dataTableGetCount();
+    } while ((int)temp_v3 < temp_v0 + *(int *)(g_aocSystem + 0x424));
   }
   return (char *)0x0;
 }

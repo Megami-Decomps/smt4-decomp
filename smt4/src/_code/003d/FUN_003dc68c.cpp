@@ -10,7 +10,7 @@ int FUN_002aa568(...);
 int FUN_002be624(...);
 int FUN_002bf694(...);
 int FUN_002c30c4(...);
-int FUN_002c4938(...);
+int memClear(...);
 
 extern unsigned char LAB_003dc914; /* 0x3dc914 */
 #ifndef ROMWRIGHT_STORAGE_s__B_B_B_B_B_B_00435d00_25_1_DEFINED
@@ -28,7 +28,7 @@ typedef char romwright_storage_s__B_B_B_B_B_B_00435d00_25_1_s1_width_check[(size
 extern union romwright_storage_s__B_B_B_B_B_B_00435d00_25_1 s__B_B_B_B_B_B_00435d00; /* 0x435d00 */
 extern unsigned int DAT_00435d04; /* 0x435d04 */
 extern unsigned int DAT_00435d08; /* 0x435d08 */
-extern unsigned char DAT_00435d00; /* 0x435d00 */
+extern unsigned char g_btlEffect; /* 0x435d00 */
 extern unsigned int DAT_00435d10; /* 0x435d10 */
 
 /* Supplied declaration required: FUN_002276f8. */
@@ -41,7 +41,7 @@ extern int FUN_002b4414(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002c30c4. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_003dc68c(int param_1)
@@ -73,8 +73,8 @@ unsigned int FUN_003dc68c(int param_1)
               (temp_v0 = temp_v4, FUN_002aa568(temp_v4,DAT_00435d08), temp_v0 != 0)))))) &&
            ((temp_v4 == 0 || (temp_v0 = temp_v4, FUN_002aa568(temp_v4,DAT_00435d10), temp_v0 != 0)))) {
           if (temp_v4 != 0) {
-            temp_v1 = FUN_002c30c4((*(unsigned int *)((unsigned char *)&DAT_00435d00 + 0xc)));
-            temp_v0 = FUN_002b4414(temp_v4,(*(unsigned int *)((unsigned char *)&DAT_00435d00 + 0xc)),temp_v1);
+            temp_v1 = FUN_002c30c4((*(unsigned int *)((unsigned char *)&g_btlEffect + 0xc)));
+            temp_v0 = FUN_002b4414(temp_v4,(*(unsigned int *)((unsigned char *)&g_btlEffect + 0xc)),temp_v1);
             if (temp_v0 == 0) goto LAB_003dc8f8;
           }
           if (temp_v4 != 0) {
@@ -99,8 +99,8 @@ unsigned int FUN_003dc68c(int param_1)
           }
           if ((temp_v4 == 0) ||
              (temp_v0 = temp_v4, FUN_002aa568(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[20])), temp_v0 != 0)) {
-            FUN_002c4938(temp_v5,0x80);
-            FUN_002c4938(temp_v6,0x80);
+            memClear(temp_v5,0x80);
+            memClear(temp_v6,0x80);
             FUN_002be624(temp_v6,"battle/effect/%s.eft",temp_v4);
             FUN_002bf694(temp_v5,temp_v6);
             temp_v0 = FUN_002c30c4(temp_v5);

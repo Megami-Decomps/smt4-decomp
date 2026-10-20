@@ -7,13 +7,13 @@ extern "C" {
 int FUN_00246454(int, unsigned int, int);
 int FUN_00282924(int, unsigned int);
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
 /* Supplied declaration required: FUN_00246454. */
-extern unsigned int FUN_0027e928(unsigned int);
+extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_00282924. */
-extern int FUN_002939f4(void);
-extern unsigned int FUN_00296cc8(unsigned int);
+extern int btlGetMainState(void);
+extern unsigned int scrGetArg(unsigned int);
 
 
 unsigned int FUN_0030034c(void)
@@ -25,9 +25,9 @@ unsigned int FUN_0030034c(void)
   unsigned int temp_v2;
   int temp_v3;
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_002939f4();
-  temp_v2 = FUN_0027e928(DAT_0043427c);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = btlGetMainState();
+  temp_v2 = btlUnitGet(g_btlScriptUnit);
   temp_v3 = temp_v1;
   FUN_00282924(temp_v1,temp_v0);
   FUN_00246454(0,temp_v2,temp_v3);

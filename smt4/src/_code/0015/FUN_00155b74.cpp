@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002c415c(int);
+int asdMemFree(int);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00155b74(int *param_1)
@@ -54,7 +54,7 @@ void FUN_00155b74(int *param_1)
     if (*(romwright_code **)(temp_v0 + 0x10) != (romwright_code *)0x0) {
       (**(romwright_code **)(temp_v0 + 0x10))(*(unsigned int *)(temp_v0 + 8));
     }
-    FUN_002c415c(temp_v0);
+    asdMemFree(temp_v0);
     temp_v0 = temp_v1;
   }
   return;

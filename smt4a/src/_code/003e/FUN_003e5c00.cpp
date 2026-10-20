@@ -1,33 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e5c00` (_code @ 0x3e5c00, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct Resource Resource;
+typedef struct ResourceVtbl {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ void (*release)(Resource *self);
+} ResourceVtbl;
+struct Resource {
+    /* 0x00 */ ResourceVtbl *vtbl;
+};
 
-void FUN_003e5c00(int param_1)
+typedef struct Slot {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Resource *resource;
+    /* 0x0C */ u8 unk0C[0x50];
+} Slot;                          /* 0x5C bytes */
 
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Resource *extra;
+    /* 0x0C */ u8 unk0C[0x10];
+    /* 0x1C */ Slot slots[3];
+} Owner;
+
+/* Releases the resource of each of the three slots and the owner's extra resource, clearing the pointers. */
+void FUN_003e5c00(Owner *owner)
 {
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  do {
-    temp_v0 = param_1 + temp_v1 * 0x5c;
-    piVar2 = *(int **)(temp_v0 + 0x24);
-    if (piVar2 != (int *)0x0) {
-      (**(romwright_code **)(*piVar2 + 4))();
-      *(unsigned int *)(temp_v0 + 0x24) = 0;
+    int i = 0;
+
+    do {
+        Slot *slot = &owner->slots[i];
+
+        if (slot->resource != NULL) {
+            slot->resource->vtbl->release(slot->resource);
+            slot->resource = NULL;
+        }
+        i++;
+    } while (i < 3);
+    if (owner->extra != NULL) {
+        owner->extra->vtbl->release(owner->extra);
+        owner->extra = NULL;
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 3);
-  if (*(int **)(param_1 + 8) != (int *)0x0) {
-    (**(romwright_code **)(**(int **)(param_1 + 8) + 4))();
-    *(unsigned int *)(param_1 + 8) = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00285584. */
 /* Supplied declaration required: FUN_002ae9ec. */
@@ -34,7 +34,7 @@ unsigned int FUN_001aba48(int *param_1)
   
   temp_v3 = *param_1;
   temp_v6 = 0.33f;
-  FUN_002ba12c(DAT_0044ea00);
+  FUN_002ba12c(g_titleScene);
   FUN_002ae9ec(2,2,(unsigned int)*(unsigned short *)(temp_v3 + 0x102) * 1000,(int)temp_v6 - 0x38,0xfffffff8,1);
   temp_v4 = 0;
   if (temp_v4 < *(int *)(temp_v3 + 0xe4)) {

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00157558(...);
 int FUN_00164b5c(...);
-int FUN_001677c0(...);
+int efctSetSpeed(...);
 int FUN_0016c410(...);
 int FUN_0016c4b8(...);
 int FUN_0016c560(...);
@@ -40,11 +40,11 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c4b8. */
@@ -65,9 +65,9 @@ void FUN_00483b78(fn_00483b78_arg0 *param_1)
   int temp_v4;
   int *piVar6;
   
-  FUN_00157558(DAT_0059dbb4);
+  FUN_00157558(g_renderCtx);
   FUN_00183bb0();
-  temp_v0 = DAT_0059dbb4;
+  temp_v0 = g_renderCtx;
   temp_v2 = FUN_001692ac(1,0);
   piVar6 = (int *)(temp_v0 + 0x1258);
   temp_v3 = *piVar6;
@@ -78,8 +78,8 @@ void FUN_00483b78(fn_00483b78_arg0 *param_1)
     (**(romwright_code **)(temp_v0 + 0x1274))();
     *(unsigned char *)(temp_v0 + 0x1270) = 0;
   }
-  FUN_0016c4b8(DAT_0059dbb4,0);
-  FUN_001677c0();
+  FUN_0016c4b8(g_renderCtx,0);
+  efctSetSpeed();
   FUN_00164b5c(2,0x23,0,*(unsigned int *)&param_1->field_0xac,0,0xb);
   FUN_001835b4(2,0x23,0x3d,*(unsigned int *)&param_1->field_0xa4,0,0xb);
   FUN_001835b4(2,0x23,0x3e,*(unsigned int *)&param_1->field_0xa4,0,0xb);
@@ -88,9 +88,9 @@ void FUN_00483b78(fn_00483b78_arg0 *param_1)
     temp_v1 = temp_v1 + '\x04';
   }
   FUN_004845ac(param_1,temp_v1);
-  FUN_001677c0();
-  temp_v0 = DAT_0059dbb4;
-  piVar6 = (int *)(DAT_0059dbb4 + 0x1258);
+  efctSetSpeed();
+  temp_v0 = g_renderCtx;
+  piVar6 = (int *)(g_renderCtx + 0x1258);
   temp_v2 = *piVar6;
   temp_v3 = piVar6[temp_v2 + 2];
   *piVar6 = temp_v2 - 1;
@@ -98,8 +98,8 @@ void FUN_00483b78(fn_00483b78_arg0 *param_1)
     (**(romwright_code **)(temp_v0 + 0x1274))();
     *(unsigned char *)(temp_v0 + 0x1270) = 0;
   }
-  FUN_0016c560(DAT_0059dbb4);
-  FUN_0016c410(DAT_0059dbb4);
+  FUN_0016c560(g_renderCtx);
+  FUN_0016c410(g_renderCtx);
   return;
 }
 

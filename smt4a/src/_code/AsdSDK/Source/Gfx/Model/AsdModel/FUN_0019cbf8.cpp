@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001630d4(...);
+int asdMemoryAlloc(...);
 int FUN_001ac2d4(...);
 int FUN_001ac524(...);
 int FUN_001ad8c4(...);
@@ -131,8 +131,8 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001630d4. */
-extern int *FUN_00168188(void);
+/* Supplied declaration required: asdMemoryAlloc. */
+extern int *asdMemoryGetDefaultAllocator(void);
 /* Supplied declaration required: FUN_001ac2d4. */
 /* Supplied declaration required: FUN_001ac524. */
 /* Supplied declaration required: FUN_001ad8c4. */
@@ -174,7 +174,7 @@ void FUN_0019cbf8(fn_0019cbf8_arg0 *param_1)
     }
     else {
       pvVar2 = (void *)0x100;
-      FUN_001630d4(0x100,0x100,0,param_1->field_0x34 << 2,1);
+      asdMemoryAlloc(0x100,0x100,0,param_1->field_0x34 << 2,1);
       param_1->field_0x30 = pvVar2;
       temp_v0 = 0;
       if (temp_v0 < param_1->field_0x34) {
@@ -252,7 +252,7 @@ void FUN_0019cbf8(fn_0019cbf8_arg0 *param_1)
     }
     else {
       puVar5 = (unsigned int *)0x100;
-      FUN_001630d4(0x100,0x100,0,param_1->field_0x58 << 2,1);
+      asdMemoryAlloc(0x100,0x100,0,param_1->field_0x58 << 2,1);
       temp_v4 = 0;
       param_1->field_0x54 = puVar5;
       if (0 < param_1->field_0x58) {
@@ -289,7 +289,7 @@ void FUN_0019cbf8(fn_0019cbf8_arg0 *param_1)
         temp_v6 = *param_1->field_0x54;
         temp_v7 = temp_v1;
         temp_v8 = temp_v1;
-        piVar3 = (int *)FUN_00168188();
+        piVar3 = (int *)asdMemoryGetDefaultAllocator();
         piVar7 = (int *)(**(romwright_code **)(*piVar3 + 8))(piVar3,0x74,4);
         if (piVar7 != (int *)0x0) {
           FUN_001b12a4(piVar7,piVar3);
@@ -321,7 +321,7 @@ void FUN_0019cbf8(fn_0019cbf8_arg0 *param_1)
     }
     else {
       puVar5 = (unsigned int *)0x100;
-      FUN_001630d4(0x100,0x100,0,param_1->field_0x68 << 2,1);
+      asdMemoryAlloc(0x100,0x100,0,param_1->field_0x68 << 2,1);
       temp_v4 = 0;
       param_1->field_0x64 = puVar5;
       if (0 < param_1->field_0x68) {
@@ -358,7 +358,7 @@ void FUN_0019cbf8(fn_0019cbf8_arg0 *param_1)
         temp_v6 = *param_1->field_0x64;
         temp_v7 = temp_v1;
         temp_v8 = temp_v1;
-        piVar3 = (int *)FUN_00168188();
+        piVar3 = (int *)asdMemoryGetDefaultAllocator();
         piVar7 = (int *)(**(romwright_code **)(*piVar3 + 8))(piVar3,0x74,4);
         if (piVar7 != (int *)0x0) {
           FUN_001b12a4(piVar7,piVar3);

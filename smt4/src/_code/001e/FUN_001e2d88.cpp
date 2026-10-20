@@ -8,7 +8,7 @@ int FUN_00287aec(void);
 int FUN_00291e40(int);
 
 extern int DAT_00447e10; /* 0x447e10 */
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapScene; /* 0x447e88 */
 extern signed char DAT_0049f934; /* 0x49f934 */
 extern signed char DAT_0049f93e; /* 0x49f93e */
 extern int DAT_0049fb30; /* 0x49fb30 */
@@ -72,7 +72,7 @@ joined_r0x001e2fa8:
                   }
                 }
                 else {
-                  temp_v9 = *(float *)(DAT_00447e88 + 0x1c);
+                  temp_v9 = *(float *)(g_lmapScene + 0x1c);
                   FUN_00287aec();
                   if (0x4395ffff >= (int)temp_v9) {
                     temp_v2 = *(int *)(temp_v5 + 0x54);

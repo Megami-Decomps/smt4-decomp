@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_003283ac(int);
+int scrSetResult(int);
 
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 
 extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_003b9a48(int param_1)
@@ -23,10 +23,10 @@ unsigned int FUN_003b9a48(int param_1)
   temp_v0 = *(int *)(param_1 + 0x578);
   temp_v1 = FUN_0018719c(0x594);
   temp_v2 = temp_v1 == 0 && temp_v0 - 200U < 100;
-  if (DAT_005f15fc == 0x1a) {
+  if (g_gameState == 0x1a) {
     temp_v2 = 2;
   }
-  FUN_003283ac(temp_v2);
+  scrSetResult(temp_v2);
   return 1;
 }
 

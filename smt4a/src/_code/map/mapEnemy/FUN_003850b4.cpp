@@ -10,7 +10,7 @@ int SBORROW4(int, int);
 int VectorSignedToFloat(int, int);
 
 extern int DAT_005806d4; /* 0x5806d4 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern signed char DAT_005f18bf; /* 0x5f18bf */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
@@ -40,10 +40,10 @@ unsigned int FUN_003850b4(void)
     temp_v4 = temp_v1 + temp_v3 * 0x188;
     if ((*(char *)(temp_v4 + 0x34) != '\0') &&
        (temp_v2 = *(int *)(temp_v4 + 0xb8), (temp_v2 == 6 || temp_v2 == 7) || temp_v2 == 0xf)) {
-      temp_v2 = *(int *)(DAT_00581288 + 0x1c);
+      temp_v2 = *(int *)(g_lmapScene + 0x1c);
       FUN_002b5cb4();
       if (temp_v2 < 0x447a0001) {
-        temp_v6 = *(int *)(DAT_00581288 + 0x1c);
+        temp_v6 = *(int *)(g_lmapScene + 0x1c);
         FUN_00384830();
         temp_v5 = SBORROW4(temp_v2,0x43960000);
         temp_v0 = temp_v2 - 0x43960000;
@@ -52,7 +52,7 @@ unsigned int FUN_003850b4(void)
           temp_v0 = temp_v6 - 0x42f00000;
         }
         if ((temp_v0 < 0 == temp_v5) &&
-           (temp_v2 = FUN_0036d984(DAT_00581288 + 0x1c,temp_v4 + 0x54,0), temp_v2 == -1)) {
+           (temp_v2 = FUN_0036d984(g_lmapScene + 0x1c,temp_v4 + 0x54,0), temp_v2 == -1)) {
           *(unsigned int *)(temp_v4 + 0xb8) = 0x1e;
           *(unsigned int *)(temp_v4 + 0xe8) = *(unsigned int *)(DAT_005f18bf * 0x1c + 0x580b9c);
           temp_v7 = VectorSignedToFloat((int)*(short *)(*(int *)(temp_v4 + 0x1b0) * 0x10 + 0x58220a),

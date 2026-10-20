@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_003e8bb0(unsigned char [68], unsigned int, int);
 int FUN_003f0e20(...);
 
@@ -13,12 +13,12 @@ typedef struct {
     unsigned short sp5E; /* 0x5e: local_5e */
 } param_1_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
-extern unsigned int *FUN_004ee568(unsigned int);
+extern unsigned int *btlUnitGet(unsigned int);
 
 
 void FUN_004bf6e0(int param_1)
@@ -35,58 +35,58 @@ void FUN_004bf6e0(int param_1)
   unsigned char temp_v5 [68];
   
   temp_v2 = (int)in_s0;
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   FUN_003f0e20(temp_v0,(int)in_s0);
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   FUN_003f0e20(temp_v1,temp_v2);
   temp_v3 = temp_v2;
   switch(param_1) {
   case 7:
   case 8:
     if ((*(unsigned short *)(temp_v1 + 0x274) & 0x10) != 0) {
-      temp_v0 = FUN_0014aa78();
+      temp_v0 = btlGetMainState();
       FUN_003f0e20(temp_v0,temp_v2);
     }
     break;
   case 9:
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     FUN_003f0e20(temp_v0,temp_v2);
     break;
   case 10:
     break;
   case 0xb:
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     FUN_003f0e20(temp_v0,temp_v2);
   }
-  puVar3 = (unsigned int *)FUN_004ee568(DAT_0057113c);
+  puVar3 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
   if ((*puVar3 & 0x200) == 0) {
     if (param_1 != 8) {
       if (param_1 == 7) {
         temp_v2 = temp_v3;
-        temp_v0 = FUN_0014aa78();
+        temp_v0 = btlGetMainState();
         FUN_003f0e20(temp_v0,temp_v3);
-        temp_v0 = FUN_0014aa78();
+        temp_v0 = btlGetMainState();
         FUN_003f0e20(temp_v0,temp_v2);
       }
     }
     else {
       temp_v4 = temp_v3;
-      temp_v0 = FUN_0014aa78();
+      temp_v0 = btlGetMainState();
       FUN_003f0e20(temp_v0,temp_v3);
       temp_v2 = temp_v4;
-      temp_v0 = FUN_0014aa78();
+      temp_v0 = btlGetMainState();
       FUN_003f0e20(temp_v0,temp_v4);
       temp_v3 = temp_v2;
-      temp_v0 = FUN_0014aa78();
+      temp_v0 = btlGetMainState();
       FUN_003f0e20(temp_v0,temp_v2);
-      temp_v2 = FUN_0014aa78();
+      temp_v2 = btlGetMainState();
       FUN_003f0e20(temp_v2,temp_v3);
       temp_v3 = 0;
       if (temp_v2 != 0) {
         temp_v3 = *(int *)(temp_v2 + 0x11c);
       }
       if ((temp_v2 != 0 && temp_v3 != 0) && -1 < temp_v3) {
-        temp_v0 = FUN_0014aa78();
+        temp_v0 = btlGetMainState();
         FUN_003e8bb0(temp_v5,temp_v0,temp_v1);
       }
     }

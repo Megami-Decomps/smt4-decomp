@@ -11,7 +11,7 @@ int FUN_00282924(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0023cd08. */
 /* Supplied declaration required: FUN_0024d434. */
 /* Supplied declaration required: FUN_00282924. */
-extern unsigned int FUN_002939f4(void);
+extern unsigned int btlGetMainState(void);
 
 
 void FUN_003dd680(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -22,27 +22,27 @@ void FUN_003dd680(unsigned int param_1,unsigned int param_2,unsigned int param_3
   
   switch(param_2) {
   case 0:
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     FUN_0023cd08(temp_v0,param_3,0);
     break;
   case 1:
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     FUN_0024d434(temp_v0,param_3,0);
     break;
   case 2:
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     FUN_00282924(temp_v0,param_3);
     break;
   case 3:
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     FUN_0023cd08(temp_v0,param_4,0);
     break;
   case 4:
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     FUN_0024d434(temp_v0,param_4,0);
     break;
   case 5:
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     FUN_00282924(temp_v0,param_4);
     break;
   case 6:
@@ -54,7 +54,7 @@ void FUN_003dd680(unsigned int param_1,unsigned int param_2,unsigned int param_3
   case 0xc:
     break;
   case 0xd:
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     FUN_0023cd08(temp_v0,param_4,1);
   }
   return;

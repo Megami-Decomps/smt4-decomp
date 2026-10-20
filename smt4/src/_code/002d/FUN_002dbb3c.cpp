@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+int scrSetResult(int);
 
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_002939f4(void);
-extern unsigned int *FUN_00296cc8(unsigned int);
+/* Supplied declaration required: scrSetResult. */
+extern int btlGetMainState(void);
+extern unsigned int *scrGetArg(unsigned int);
 
 
 unsigned int FUN_002dbb3c(void)
@@ -22,10 +22,10 @@ unsigned int FUN_002dbb3c(void)
   int temp_v2;
   unsigned char temp_v3;
   
-  puVar1 = (unsigned int *)FUN_00296cc8(0);
+  puVar1 = (unsigned int *)scrGetArg(0);
   temp_v2 = 0;
   do {
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     puVar3 = (unsigned int *)(*(int *)(temp_v0 + 0x1fc0) + temp_v2 * 0x288);
     temp_v1 = *puVar3;
     if ((temp_v1 & 0x10) != 0 && (temp_v1 & 1) != 0) {
@@ -34,13 +34,13 @@ unsigned int FUN_002dbb3c(void)
         puVar3 = (unsigned int *)(unsigned int)*(unsigned short *)((int)puVar3 + 0xce);
       }
       if (temp_v3 && puVar3 == puVar1) {
-        FUN_0028dcb0(1);
+        scrSetResult(1);
         return 1;
       }
     }
     temp_v2 = temp_v2 + 1;
     if (temp_v2 >= 0x6d) {
-      FUN_0028dcb0(0);
+      scrSetResult(0);
       return 1;
     }
   } while( 1 );

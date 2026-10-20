@@ -36,7 +36,7 @@ typedef struct {
 } param_1_stack;
 
 extern float DAT_0044cdc8; /* 0x44cdc8 */
-extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -92,11 +92,11 @@ unsigned int FUN_0039b370(int param_1)
   temp_v2 = param_1 + 0x162;
   if ((*(unsigned int *)(param_1 + 0x10) & 0x20000) != 0) {
     temp_v0 = FUN_002bffd8((unsigned int *)&temp_v12,&temp_v11);
-    if ((temp_v0 == 0) || ((*(unsigned char *)((unsigned char *)&DAT_0049f91c + 0x18)) != 0)) {
+    if ((temp_v0 == 0) || ((*(unsigned char *)((unsigned char *)&g_gameState + 0x18)) != 0)) {
       temp_v1 = FUN_003c2e14((unsigned int *)&temp_v12,&temp_v11);
       temp_v3 = temp_v1 == 0;
       if (temp_v3) {
-        temp_v1 = (unsigned int)(*(unsigned char *)((unsigned char *)&DAT_0049f91c + 0x18));
+        temp_v1 = (unsigned int)(*(unsigned char *)((unsigned char *)&g_gameState + 0x18));
       }
       if (!temp_v3 || temp_v1 != 0) {
         *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffdffff;
@@ -150,7 +150,7 @@ unsigned int FUN_0039b370(int param_1)
     temp_v9 = (unsigned int *)&uStack_28;
     FUN_00231434(0x1c,0xfa4,&temp_v11,&temp_v12);
     FUN_00231420(temp_v11,temp_v12,uStack_28,temp_v13[0]);
-    if ((temp_v11 != 0) && ((*(unsigned char *)((unsigned char *)&DAT_0049f91c + 0x18)) == 0)) {
+    if ((temp_v11 != 0) && ((*(unsigned char *)((unsigned char *)&g_gameState + 0x18)) == 0)) {
       FUN_003c2e0c(&temp_v9,&temp_v10);
       temp_v5 = VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
       *(unsigned int *)(param_1 + 0x2c) = temp_v5;

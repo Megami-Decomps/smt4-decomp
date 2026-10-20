@@ -42,7 +42,7 @@ extern unsigned int DAT_005b3cac; /* 0x5b3cac */
 extern unsigned int DAT_005b3cb0; /* 0x5b3cb0 */
 extern unsigned int DAT_005b3cb4; /* 0x5b3cb4 */
 
-extern unsigned int FUN_00168188(void);
+extern unsigned int asdMemoryGetDefaultAllocator(void);
 /* Supplied declaration required: FUN_0018e9d8. */
 extern unsigned int nw_gfx_TransformNode_DynamicBuilder_Create(unsigned char *, unsigned int);
 
@@ -88,7 +88,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v0 = param_1[1];
   }
   if (!(temp_v2 && temp_v0 == 0)) {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v8 = 1;
     temp_v9 = 1;
     temp_v12 = 1;
@@ -99,7 +99,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     DAT_005b3c88 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
   else {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v9 = 1;
     temp_v12 = 1;
     temp_v10 = 4;
@@ -113,7 +113,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v0 = param_1[3];
   }
   if (!(temp_v2 && temp_v0 == 0)) {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v8 = 1;
     temp_v9 = 1;
     temp_v12 = 1;
@@ -124,7 +124,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     DAT_005b3c90 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
   else {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v9 = 1;
     temp_v12 = 1;
     temp_v10 = 4;
@@ -133,7 +133,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     DAT_005b3c90 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
   FUN_0018e9d8(DAT_005b3c88,DAT_005b3c90);
-  temp_v1 = FUN_00168188();
+  temp_v1 = asdMemoryGetDefaultAllocator();
   temp_v5 = 1;
   temp_v7 = 1;
   temp_v6 = 4;
@@ -147,7 +147,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v0 = param_1[5];
   }
   if (!(temp_v2 && temp_v0 == 0)) {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v8 = 1;
     temp_v9 = 1;
     temp_v12 = 1;
@@ -158,7 +158,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     DAT_005b3ca0 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
   else {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v9 = 1;
     temp_v12 = 1;
     temp_v10 = 4;
@@ -173,7 +173,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v0 = param_1[7];
   }
   if (!(temp_v2 && temp_v0 == 0)) {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v8 = 1;
     temp_v9 = 1;
     temp_v12 = 1;
@@ -184,7 +184,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     DAT_005b3ca8 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
   else {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v9 = 1;
     temp_v12 = 1;
     temp_v10 = 4;
@@ -199,7 +199,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v0 = param_1[9];
   }
   if (!(temp_v2 && temp_v0 == 0)) {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v8 = 1;
     temp_v9 = 1;
     temp_v12 = 1;
@@ -210,7 +210,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     DAT_005b3cb0 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
   else {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v9 = 1;
     temp_v12 = 1;
     temp_v10 = 4;
@@ -225,7 +225,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v0 = param_2[1];
   }
   if (!(temp_v2 && temp_v0 == 0)) {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v8 = 1;
     temp_v9 = 1;
     temp_v12 = 1;
@@ -236,7 +236,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     DAT_005b3c8c = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
   else {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v9 = 1;
     temp_v12 = 1;
     temp_v10 = 4;
@@ -250,7 +250,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v0 = param_2[3];
   }
   if (!(temp_v2 && temp_v0 == 0)) {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v8 = 1;
     temp_v9 = 1;
     temp_v12 = 1;
@@ -261,7 +261,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     DAT_005b3c94 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
   else {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v9 = 1;
     temp_v12 = 1;
     temp_v10 = 4;
@@ -270,7 +270,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     DAT_005b3c94 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
   FUN_0018e9d8(DAT_005b3c8c,DAT_005b3c94);
-  temp_v1 = FUN_00168188();
+  temp_v1 = asdMemoryGetDefaultAllocator();
   temp_v5 = 1;
   temp_v7 = 1;
   temp_v6 = 4;
@@ -284,7 +284,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v0 = param_2[5];
   }
   if (!(temp_v2 && temp_v0 == 0)) {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v8 = 1;
     temp_v9 = 1;
     temp_v12 = 1;
@@ -295,7 +295,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     DAT_005b3ca4 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
   else {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v9 = 1;
     temp_v12 = 1;
     temp_v10 = 4;
@@ -310,7 +310,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v0 = param_2[7];
   }
   if (!(temp_v2 && temp_v0 == 0)) {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v8 = 1;
     temp_v9 = 1;
     temp_v12 = 1;
@@ -321,7 +321,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     DAT_005b3cac = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
   else {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v8 = 1;
     temp_v9 = 1;
     temp_v12 = 1;
@@ -336,7 +336,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v0 = param_2[9];
   }
   if (!(temp_v2 && temp_v0 == 0)) {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v8 = 1;
     temp_v9 = 1;
     temp_v12 = 1;
@@ -347,7 +347,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     DAT_005b3cb4 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
   else {
-    temp_v1 = FUN_00168188();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v9 = 1;
     temp_v12 = 1;
     temp_v10 = 4;

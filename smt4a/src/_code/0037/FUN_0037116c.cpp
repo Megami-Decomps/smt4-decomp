@@ -22,7 +22,7 @@ extern unsigned char DAT_0057f6be; /* 0x57f6be */
 extern unsigned short DAT_0057f6c2; /* 0x57f6c2 */
 extern int DAT_0057f6c4; /* 0x57f6c4 */
 
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 extern int FUN_00213cfc(void);
 /* Supplied declaration required: FUN_00229fc0. */
 /* Supplied declaration required: FUN_00268250. */
@@ -43,7 +43,7 @@ unsigned int FUN_0037116c(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   temp_v1 = *(int *)(temp_v0 + 4);
   if (temp_v1 != 0xc) {
     if (temp_v1 != 0xd) {

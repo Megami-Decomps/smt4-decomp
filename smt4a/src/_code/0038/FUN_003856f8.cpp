@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
 extern int FUN_0018719c(unsigned int);
 extern int FUN_002e5db4(void);
@@ -24,15 +24,15 @@ void FUN_003856f8(unsigned int param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  if (*(int *)(DAT_00581288 + 0x18c) == 0) {
+  if (*(int *)(g_lmapScene + 0x18c) == 0) {
     return;
   }
   temp_v0 = FUN_0018719c(0x4c9);
   if ((temp_v0 != 0) && (temp_v0 = FUN_002e5db4(), temp_v0 == 0)) {
-    FUN_003fd7c0(*(unsigned int *)(*(int *)(DAT_00581288 + 0x18c) + 4),3,2);
+    FUN_003fd7c0(*(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4),3,2);
     return;
   }
-  FUN_003fd7c0(*(unsigned int *)(*(int *)(DAT_00581288 + 0x18c) + 4),param_1,2);
+  FUN_003fd7c0(*(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4),param_1,2);
   return;
 }
 

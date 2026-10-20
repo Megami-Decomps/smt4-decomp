@@ -7,7 +7,7 @@ extern "C" {
 extern unsigned int DAT_00570db8; /* 0x570db8 */
 extern unsigned int DAT_00570dbc; /* 0x570dbc */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 
 
 unsigned int FUN_003c2264(void)
@@ -16,7 +16,7 @@ unsigned int FUN_003c2264(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   temp_v1 = DAT_00570db8 | *(unsigned int *)(temp_v0 + 0x45a0);
   *(unsigned int *)(temp_v0 + 0x45a4) = *(unsigned int *)(temp_v0 + 0x45a4) | DAT_00570dbc;
   *(unsigned int *)(temp_v0 + 0x45a0) = temp_v1;

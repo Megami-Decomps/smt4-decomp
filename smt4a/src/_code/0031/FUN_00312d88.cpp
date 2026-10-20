@@ -1,19 +1,14 @@
-#include "romwright_types.h"
+#include "map/mapMain.h"
 
 extern "C" {
 
-extern int DAT_00581274; /* 0x581274 */
+s32 FUN_00224880(u32 job);
 
-extern int FUN_00224880(unsigned int);
+extern MapMainA *g_mapMain;
 
-
-unsigned char FUN_00312d88(void)
-
+bool FUN_00312d88(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_00224880(*(unsigned int *)(DAT_00581274 + 0x58));
-  return temp_v0 == 2;
+    return FUN_00224880(g_mapMain->job) == 2;
 }
 
 } /* extern "C" */

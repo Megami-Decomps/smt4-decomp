@@ -10,7 +10,7 @@ int FUN_00239234(int, unsigned short *);
 int FUN_002854d8(int, int);
 int FUN_002a6894(unsigned short *);
 int FUN_002c7a5c(int, int);
-int FUN_002e6354(unsigned short *, int);
+int sysMemClear(unsigned short *, int);
 int FUN_0031f190(int, int);
 int FUN_004bcd90(unsigned short *);
 int VectorSignedToFloat(int, int);
@@ -54,7 +54,7 @@ extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_002854d8. */
 /* Supplied declaration required: FUN_002a6894. */
 /* Supplied declaration required: FUN_002c7a5c. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031f190. */
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -99,7 +99,7 @@ void FUN_002305d0(unsigned short *param_1,unsigned char param_2,unsigned short p
   unsigned int temp_v29;
   unsigned char temp_v30 [24];
   
-  FUN_002e6354(param_1,300);
+  sysMemClear(param_1,300);
   param_1[0x31] = param_3;
   *(unsigned char *)(param_1 + 0x33) = param_2;
   if (param_4 != 3) {

@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_00163060(...);
+int asdMemoryAllocTracked(...);
 int FUN_001bce30(...);
 int FUN_001bce84(...);
 int FUN_001bceb8(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 
 /* stack frame of param_6: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,15 +17,15 @@ typedef struct {
 } param_6_stack;
 
 extern int FUN_001bcd8c(...); /* 0x1bcd8c */
-extern signed char DAT_005b3fe0; /* 0x5b3fe0 */
+extern signed char g_asdLoadFileUseRawPaths; /* 0x5b3fe0 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 extern int FUN_0019dbb8(unsigned int);
 /* Supplied declaration required: FUN_001bce30. */
 /* Supplied declaration required: FUN_001bce84. */
 /* Supplied declaration required: FUN_001bceb8. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_001bcfb4(unsigned int param_1,unsigned int *param_2,int param_3,int param_4,int param_5,
@@ -38,15 +38,15 @@ void FUN_001bcfb4(unsigned int param_1,unsigned int *param_2,int param_3,int par
   unsigned char *puVar3;
   unsigned char temp_v1 [268];
   
-  FUN_002e6354(temp_v1,0x100);
-  if ((DAT_005b3fe0 != '\0') || (temp_v0 = FUN_0019dbb8(param_1), temp_v0 != 0)) {
+  sysMemClear(temp_v1,0x100);
+  if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v0 = FUN_0019dbb8(param_1), temp_v0 != 0)) {
     FUN_00100388(temp_v1,param_1);
   }
   else {
     FUN_00100388(temp_v1,"rom:/%s",param_1);
   }
   piVar2 = (int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x18,0);
+  asdMemoryAllocTracked(0x100,0x100,0,0x18,0);
   piVar2[5] = (int)param_2;
   piVar2[1] = param_4;
   piVar2[2] = param_5;

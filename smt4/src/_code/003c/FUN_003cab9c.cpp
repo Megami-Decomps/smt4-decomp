@@ -11,7 +11,7 @@ int FUN_003da010(int);
 int FUN_003dc504(void);
 int FUN_003dcaac(int, unsigned int);
 
-extern int DAT_0043427c; /* 0x43427c */
+extern int g_btlScriptUnit; /* 0x43427c */
 extern int DAT_00435d18; /* 0x435d18 */
 
 /* Supplied declaration required: FUN_0022a8c8. */
@@ -105,7 +105,7 @@ LAB_003cac08:
         else {
           if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x100) == 0) {
             temp_v2 = 0xe;
-            temp_v1 = DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c;
+            temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
             break;
           }
           temp_v0 = *param_2 | 0x1000;
@@ -114,11 +114,11 @@ LAB_003cac08:
       }
     }
     temp_v2 = 0xe;
-    temp_v1 = DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c;
+    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
     break;
   case 4:
     temp_v2 = 0x14;
-    temp_v1 = DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c;
+    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
     break;
   case 5:
   case 6:
@@ -126,20 +126,20 @@ LAB_003cac08:
   case 0x10:
   case 0x11:
     temp_v2 = 0x13;
-    temp_v1 = DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c;
+    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
     break;
   case 7:
     temp_v2 = 0xf;
-    temp_v1 = DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c;
+    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
     break;
   case 0xd:
-    *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 8;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 8;
     if ((*(unsigned short *)(param_2[10] + 0xfa) & 0x10) != 0) {
       FUN_0022a8c8(*param_1,(int)*(short *)(param_2[9] + 0x62),0);
     }
     return 1;
   case 0xe:
-    *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x16;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x16;
     if ((*(unsigned short *)(param_2[10] + 0xfa) & 0x10) != 0) {
       FUN_0022a8c8(*param_1,(int)*(short *)(param_2[9] + 0x62),0);
     }

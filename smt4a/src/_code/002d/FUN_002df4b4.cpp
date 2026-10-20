@@ -10,7 +10,7 @@ int FUN_0016c4b8(int, int);
 int FUN_002371b0(void);
 
 typedef int romwright_code(...);
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_0014e314. */
 /* Supplied declaration required: FUN_00157558. */
@@ -30,7 +30,7 @@ unsigned int FUN_002df4b4(int *param_1)
   int *piVar5;
   unsigned int temp_v4;
   
-  temp_v0 = DAT_0059dbb4;
+  temp_v0 = g_renderCtx;
   temp_v4 = *(unsigned int *)(*param_1 + 0x4d1c);
   temp_v1 = FUN_001692ac(1,0);
   piVar5 = (int *)(temp_v0 + 0x1258);
@@ -42,12 +42,12 @@ unsigned int FUN_002df4b4(int *param_1)
     (**(romwright_code **)(temp_v0 + 0x1274))();
     *(unsigned char *)(temp_v0 + 0x1270) = 0;
   }
-  FUN_00157558(DAT_0059dbb4);
-  FUN_0016c4b8(DAT_0059dbb4,0);
+  FUN_00157558(g_renderCtx);
+  FUN_0016c4b8(g_renderCtx,0);
   FUN_0014e314(temp_v4);
   FUN_002371b0();
-  temp_v0 = DAT_0059dbb4;
-  piVar5 = (int *)(DAT_0059dbb4 + 0x1258);
+  temp_v0 = g_renderCtx;
+  piVar5 = (int *)(g_renderCtx + 0x1258);
   temp_v1 = *piVar5;
   temp_v2 = piVar5[temp_v1 + 2];
   *piVar5 = temp_v1 - 1;

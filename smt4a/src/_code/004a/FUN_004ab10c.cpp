@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0010063a(...);
-int FUN_0014aa78(void);
+int qsort(...);
+int btlGetMainState(void);
 int FUN_003eebf4(int, int);
 int FUN_003f0e20(unsigned int *, int);
 int FUN_004c3a98(int, int);
@@ -28,10 +28,10 @@ extern unsigned int DAT_0057a9e4; /* 0x57a9e4 */
 extern unsigned int DAT_0057a9e8; /* 0x57a9e8 */
 extern unsigned int DAT_0057a9ec; /* 0x57a9ec */
 
-/* Supplied declaration required: FUN_0010063a. */
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: qsort. */
+/* Supplied declaration required: btlGetMainState. */
 extern int FUN_00228ab0(int);
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 extern int FUN_00291e14(void);
 /* Supplied declaration required: FUN_003eebf4. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -70,16 +70,16 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
   do {
     aiStack_8c0[temp_v6 * 2] = -1;
     temp_v9[temp_v6 * 2] = 0xffffffff;
-    temp_v2 = FUN_0014aa78();
+    temp_v2 = btlGetMainState();
     piVar10 = (int *)(*(int *)(temp_v2 + 0x1ed4) + temp_v6 * 0x1d0);
     if (piVar10 != (int *)0x0) {
-      puVar4 = (unsigned int *)FUN_0014aa78();
+      puVar4 = (unsigned int *)btlGetMainState();
       FUN_003f0e20(puVar4,(int)*(short *)((int)piVar10 + 0x6a));
       if (((puVar4 != (unsigned int *)0x0) &&
           ((puVar4[1] & DAT_0057a9ec) != 0 || (*puVar4 & DAT_0057a9e8) != 0)) && (piVar10[0x41] < 0)
          ) {
         temp_v7 = 0;
-        temp_v2 = FUN_0014aa78();
+        temp_v2 = btlGetMainState();
         FUN_003eebf4(temp_v2,1);
         if ((temp_v2 < 0) && ((char)piVar10[0xf] != '\x02')) {
           temp_v7 = 1;
@@ -113,19 +113,19 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 0x6d);
   if (temp_v11[0] >= 2) {
-    FUN_0010063a(aiStack_8c0,temp_v11[0],8,&LAB_002f8dfc);
+    qsort(aiStack_8c0,temp_v11[0],8,&LAB_002f8dfc);
   }
   if (temp_v11[1] >= 2) {
-    FUN_0010063a(temp_v9,temp_v11[1],8,&LAB_002f8dfc);
+    qsort(temp_v9,temp_v11[1],8,&LAB_002f8dfc);
   }
   temp_v2 = 0;
   temp_v6 = 0;
   temp_v10 = 0;
   do {
-    temp_v7 = FUN_0014aa78();
+    temp_v7 = btlGetMainState();
     temp_v7 = *(int *)(temp_v7 + 0x1ed4) + temp_v6 * 0x1d0;
     if (temp_v7 != 0) {
-      puVar4 = (unsigned int *)FUN_0014aa78();
+      puVar4 = (unsigned int *)btlGetMainState();
       FUN_003f0e20(puVar4,(int)*(short *)(temp_v7 + 0x6a));
       if (puVar4 != (unsigned int *)0x0) {
         temp_v4 = *puVar4;
@@ -152,7 +152,7 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
               temp_v4 = temp_v4 + 1;
             } while ((int)temp_v4 < 4);
             temp_v3 = FUN_00291e14();
-            if (((temp_v3 != 0) && (temp_v3 = FUN_002919a4(), temp_v3 != 0)) &&
+            if (((temp_v3 != 0) && (temp_v3 = btlMainGetUnk14(), temp_v3 != 0)) &&
                ((unsigned int)*(unsigned short *)(temp_v3 + 0x62) == *puVar11)) {
               temp_v4 = 0;
               puVar11[3] = temp_v4;
@@ -183,7 +183,7 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
               puVar11[3] = temp_v4;
             }
             else {
-              temp_v3 = FUN_0014aa78();
+              temp_v3 = btlGetMainState();
               FUN_003eebf4(temp_v3,1);
               if ((temp_v3 < 0) && (*(char *)(temp_v7 + 0x3c) != '\x02')) {
                 puVar11[2] = 1;

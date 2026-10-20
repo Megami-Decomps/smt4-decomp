@@ -2,9 +2,9 @@
 
 extern "C" {
 
-int FUN_002c415c(void);
+int asdMemFree(void);
 
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 int FUN_003c9f28(int param_1)
@@ -16,7 +16,7 @@ int FUN_003c9f28(int param_1)
   temp_v0 = 0;
   do {
     if (*(int *)(param_1 + temp_v0 * 4 + 0x38) != 0) {
-      FUN_002c415c();
+      asdMemFree();
     }
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0x38);

@@ -4,36 +4,36 @@
 
 extern "C" {
 
-int FUN_00282c90(void);
+int statusCameraSetEye(void);
 int FUN_00294d6c(void);
-int FUN_002a0b48(void);
+int statusCameraApply(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern unsigned char DAT_0044e140; /* 0x44e140 */
+extern unsigned char g_gameGlobals; /* 0x44e140 */
 
-/* Supplied declaration required: FUN_00282c90. */
+/* Supplied declaration required: statusCameraSetEye. */
 /* Supplied declaration required: FUN_00294d6c. */
-/* Supplied declaration required: FUN_002a0b48. */
+/* Supplied declaration required: statusCameraApply. */
 
 
 void FUN_002996d8(int param_1)
 
 {
 /* irregular: 3 native warning(s); review required */
-  if (*(char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e67) != '\x03' && *(char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e67) != '\t') {
+  if (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e67) != '\x03' && *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e67) != '\t') {
     return;
   }
   if (param_1 != 0) {
     FUN_00294d6c();
   }
   else {
-    FUN_00282c90();
+    statusCameraSetEye();
   }
-  FUN_002a0b48();
+  statusCameraApply();
   return;
 }
 

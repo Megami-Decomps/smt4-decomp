@@ -15,8 +15,8 @@ extern int DAT_0043e18c; /* 0x43e18c */
 
 /* Supplied declaration required: FUN_002866b4. */
 extern unsigned int FUN_002893d8(void);
-extern int FUN_002939f4(void);
-extern unsigned int FUN_00296cc8(unsigned int);
+extern int btlGetMainState(void);
+extern unsigned int scrGetArg(unsigned int);
 
 
 void scrComm_Message_ShowConfirmFromBattle(void)
@@ -29,9 +29,9 @@ void scrComm_Message_ShowConfirmFromBattle(void)
   unsigned int temp_v3;
   unsigned int unaff_r4;
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   temp_v1 = *(unsigned int *)(temp_v0 + 0x2234);
-  temp_v2 = FUN_00296cc8(0);
+  temp_v2 = scrGetArg(0);
   temp_v3 = FUN_002893d8();
   if (DAT_0043e18c != 0) {
     *(unsigned char *)(DAT_0043e18c + 0xa11) = 0x14;

@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002b2368(unsigned int *);
-int FUN_002c415c(unsigned int);
-int FUN_002c4938(unsigned int *, int);
+int asdMemFree(unsigned int);
+int memClear(unsigned int *, int);
 int nn_gr_CTR_Vertex_LoadArray_DisableAll(unsigned int *);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -17,8 +17,8 @@ typedef struct {
 extern unsigned char DAT_00420730; /* 0x420730 */
 
 /* Supplied declaration required: FUN_002b2368. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: nn_gr_CTR_Vertex_LoadArray_DisableAll. */
 
 
@@ -33,7 +33,7 @@ void FUN_00341f88(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_00420730;
   param_1[4] = 0;
-  FUN_002c4938(param_1 + 5,0x150);
+  memClear(param_1 + 5,0x150);
   temp_v3 = 0;
   temp_v0 = 0;
   do {
@@ -48,8 +48,8 @@ void FUN_00341f88(unsigned int *param_1)
     param_1[temp_v0 * 5 + 0x1b0] = temp_v2;
     temp_v0 = temp_v1;
   } while (temp_v1 < 0xc);
-  FUN_002c415c(param_1[2]);
-  FUN_002c415c(param_1[3]);
+  asdMemFree(param_1[2]);
+  asdMemFree(param_1[3]);
   FUN_002b2368(param_1);
   return;
 }

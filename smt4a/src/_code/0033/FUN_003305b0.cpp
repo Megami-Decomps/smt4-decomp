@@ -14,7 +14,7 @@ typedef struct {
 
 extern short DAT_005e2058; /* 0x5e2058 */
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_0021bdac. */
 extern unsigned int FUN_002deb84(void);
 
@@ -30,7 +30,7 @@ int FUN_003305b0(void)
   int temp_v4;
   
   temp_v0 = FUN_002deb84();
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   temp_v4 = 1;
   temp_v3 = 0;
   if (temp_v3 < DAT_005e2058) {

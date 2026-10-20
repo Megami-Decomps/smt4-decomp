@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned char LAB_00167224; /* 0x167224 */
 extern unsigned char LAB_00169230; /* 0x169230 */
 extern unsigned char LAB_0019e30c; /* 0x19e30c */
-extern unsigned char *DAT_00570280; /* 0x570280 */
+extern unsigned char *g_aocSystem; /* 0x570280 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
@@ -30,11 +30,11 @@ extern unsigned char *DAT_00570280; /* 0x570280 */
 /* Supplied declaration required: FUN_00100854. */
 /* Supplied declaration required: FUN_001762d4. */
 /* Supplied declaration required: FUN_001763a4. */
-extern int FUN_00187180(unsigned int, unsigned int);
+extern int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_00192608. */
-extern unsigned int FUN_00192748(int);
-extern unsigned int FUN_00192798(void);
+extern unsigned int dataTableGetCount(int);
+extern unsigned int dataTableGetEntries(void);
 extern int FUN_0019c06c(void);
 /* Supplied declaration required: FUN_001a6858. */
 
@@ -62,18 +62,18 @@ void FUN_0015f858(unsigned char *param_1)
       temp_v0 = *(unsigned char *)(temp_v1 + 8);
     }
     temp_v6 = romwright_subpiece_4_2_0(param_1,0);
-    puVar3 = DAT_00570280;
+    puVar3 = g_aocSystem;
     temp_v7 = temp_v6;
     switch(temp_v0) {
     case 0:
-      if ((*(int *)(DAT_00570280 + 0x3a0) == 0) ||
-         (FUN_001a6858(DAT_00570280,param_1), puVar3 == (unsigned char *)0x0)) {
-        temp_v1 = FUN_00187180(8,0);
+      if ((*(int *)(g_aocSystem + 0x3a0) == 0) ||
+         (FUN_001a6858(g_aocSystem,param_1), puVar3 == (unsigned char *)0x0)) {
+        temp_v1 = dataTableGet(8,0);
         if (temp_v1 == 0) {
           return;
         }
-        temp_v2 = FUN_00192798();
-        temp_v3 = FUN_00192748(temp_v1);
+        temp_v2 = dataTableGetEntries();
+        temp_v3 = dataTableGetCount(temp_v1);
         puVar3 = temp_v5;
         FUN_00100854(puVar3,temp_v2,temp_v3,0x28,&LAB_0019e30c);
       }
@@ -94,27 +94,27 @@ void FUN_0015f858(unsigned char *param_1)
       puVar3 = param_1;
       break;
     case 9:
-      if ((*(int *)(DAT_00570280 + 0x3c4) == 0) ||
-         (FUN_001762d4(DAT_00570280,param_1), puVar3 == (unsigned char *)0x0)) {
-        temp_v1 = FUN_00187180(8,3);
+      if ((*(int *)(g_aocSystem + 0x3c4) == 0) ||
+         (FUN_001762d4(g_aocSystem,param_1), puVar3 == (unsigned char *)0x0)) {
+        temp_v1 = dataTableGet(8,3);
         if (temp_v1 == 0) {
           return;
         }
-        temp_v2 = FUN_00192798();
-        temp_v3 = FUN_00192748(temp_v1);
+        temp_v2 = dataTableGetEntries();
+        temp_v3 = dataTableGetCount(temp_v1);
         puVar3 = temp_v4;
         FUN_00100854(puVar3,temp_v2,temp_v3,0x3c,&LAB_00167224);
       }
       break;
     case 10:
-      if ((*(int *)(DAT_00570280 + 0x3d0) == 0) ||
-         (FUN_001763a4(DAT_00570280,param_1), puVar3 == (unsigned char *)0x0)) {
-        temp_v1 = FUN_00187180(8,4);
+      if ((*(int *)(g_aocSystem + 0x3d0) == 0) ||
+         (FUN_001763a4(g_aocSystem,param_1), puVar3 == (unsigned char *)0x0)) {
+        temp_v1 = dataTableGet(8,4);
         if (temp_v1 == 0) {
           return;
         }
-        temp_v2 = FUN_00192798();
-        temp_v3 = FUN_00192748(temp_v1);
+        temp_v2 = dataTableGetEntries();
+        temp_v3 = dataTableGetCount(temp_v1);
         puVar3 = temp_v5;
         FUN_00100854(puVar3,temp_v2,temp_v3,0x30,&LAB_00169230);
       }

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_0020214c(...);
 int FUN_003d209c(...);
 
@@ -24,12 +24,12 @@ extern int FUN_003150f4(...); /* 0x3150f4 */
 extern unsigned char LAB_003692a8; /* 0x3692a8 */
 extern int FUN_003692c0(...); /* 0x3692c0 */
 extern unsigned char LAB_003a3b84; /* 0x3a3b84 */
-extern unsigned int *DAT_00588ff0; /* 0x588ff0 */
+extern unsigned int *g_bustupViewer; /* 0x588ff0 */
 
-extern unsigned int FUN_0014bce0(unsigned int);
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+extern unsigned int spriteHandleCreate(unsigned int);
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_003d209c. */
 
@@ -43,8 +43,8 @@ void FUN_002e14a4(void)
   unsigned int temp_v0;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0xa4,1);
-  DAT_00588ff0 = puVar1;
+  asdMemoryAllocTracked(0x100,0x100,0,0xa4,1);
+  g_bustupViewer = puVar1;
   puVar1[2] = 0;
   puVar1[3] = 0;
   puVar1[4] = 0;
@@ -58,13 +58,13 @@ void FUN_002e14a4(void)
   puVar2 = &LAB_002e15c8;
   FUN_0020214c();
   puVar1[0x26] = (unsigned int)puVar2;
-  temp_v0 = FUN_0014bce0(0);
+  temp_v0 = spriteHandleCreate(0);
   puVar1[0x28] = temp_v0;
   *(unsigned char *)(puVar1 + 1) = 0;
   puVar2 = &LAB_002e15e8;
-  FUN_0014e38c(&LAB_002e15e8,4,0,0,FUN_003150f4,&LAB_003692a8,0);
+  asdProcessCreateSimple(&LAB_002e15e8,4,0,0,FUN_003150f4,&LAB_003692a8,0);
   *puVar1 = (unsigned int)puVar2;
-  FUN_0015155c(&LAB_002e1600,0xea,0,0,FUN_003692c0,&LAB_003a3b84,0,puVar2);
+  taskCreateDraw(&LAB_002e1600,0xea,0,0,FUN_003692c0,&LAB_003a3b84,0,puVar2);
   return;
 }
 

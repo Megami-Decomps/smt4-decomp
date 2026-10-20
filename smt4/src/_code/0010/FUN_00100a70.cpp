@@ -20,7 +20,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00155afc. */
 /* Supplied declaration required: FUN_002c6614. */
-extern unsigned long long aeabi_idivmod(int, unsigned int);
+extern unsigned long long __aeabi_idivmod(int, unsigned int);
 
 
 void FUN_00100a70(int *param_1,int param_2,int param_3)
@@ -62,7 +62,7 @@ void FUN_00100a70(int *param_1,int param_2,int param_3)
   temp_v16 = param_1;
   iStack_1c = param_2;
   iStack_18 = param_3;
-  temp_v9 = aeabi_idivmod(param_2 + 0x1b9b,0x37);
+  temp_v9 = __aeabi_idivmod(param_2 + 0x1b9b,0x37);
   temp_v6 = (int)temp_v9 - 0x80;
   temp_v5 = (int)((unsigned long long)temp_v9 >> 0x20) - 0x1b;
   temp_v8 = (int)temp_v5 < 0;

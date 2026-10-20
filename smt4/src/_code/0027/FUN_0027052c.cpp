@@ -14,7 +14,7 @@ int FUN_00287a78(void);
 int FUN_0028975c(int, int);
 int FUN_00295a18(int, int);
 int FUN_0029be5c(int, int);
-int FUN_002a775c(void);
+int asdMdlManagerDestroy(void);
 int FUN_002b8e84(int);
 int FUN_002bf694(unsigned char *, int);
 int FUN_002bf810(int);
@@ -38,9 +38,9 @@ typedef struct {
 } void_stack;
 
 extern int DAT_004474f4; /* 0x4474f4 */
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapScene; /* 0x447e88 */
 extern int DAT_0044cd88; /* 0x44cd88 */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern int g_gameState; /* 0x49f91c */
 extern signed char DAT_0049f934; /* 0x49f934 */
 extern unsigned int DAT_0049f9a0; /* 0x49f9a0 */
 extern unsigned int DAT_0049f9a4; /* 0x49f9a4 */
@@ -58,10 +58,10 @@ extern int DAT_0049fc84; /* 0x49fc84 */
 /* Supplied declaration required: FUN_00152bec. */
 /* Supplied declaration required: FUN_001fc0a8. */
 extern int FUN_0021e7f4(int, unsigned int);
-extern int FUN_0027eba0(void);
+extern int mapDepartIsRunning(void);
 /* Supplied declaration required: FUN_0027ee24. */
 extern int FUN_0027ee9c(void);
-extern unsigned int FUN_0027eecc(void);
+extern unsigned int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_0027eee0. */
 extern int FUN_0027ef00(void);
 /* Supplied declaration required: FUN_00282390. */
@@ -70,7 +70,7 @@ extern int FUN_0027ef00(void);
 /* Supplied declaration required: FUN_0028975c. */
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: FUN_0029be5c. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: FUN_002b8e84. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bf810. */
@@ -125,7 +125,7 @@ unsigned int FUN_0027052c(void)
     if (*(char *)(temp_v6 + 0x58) != '\0') {
       switch(*(unsigned int *)(temp_v6 + 0x5c)) {
       case 1:
-        temp_v11 = *(float *)(DAT_00447e88 + 0x20) - *(float *)(temp_v6 + 0x68);
+        temp_v11 = *(float *)(g_lmapScene + 0x20) - *(float *)(temp_v6 + 0x68);
         if (((unsigned int)temp_v11 < 0xc2c80001) && ((int)temp_v11 < 0x42c80001)) {
           if (*(short *)(DAT_0044cd88 + 4) < 100) {
             temp_v0 = *(short *)(temp_v6 + 0x7c);
@@ -148,8 +148,8 @@ joined_r0x002706c8:
             if (temp_v3 == 0) break;
           }
           temp_v17[0] = 0;
-          if (DAT_0049f91c < 100) {
-            temp_v2 = FUN_0027eecc();
+          if (g_gameState < 100) {
+            temp_v2 = lmapSceneGetUnk0();
             temp_v10 = temp_v2 == 1;
             if (temp_v10) {
               temp_v2 = (unsigned int)DAT_0049fab0;
@@ -214,8 +214,8 @@ joined_r0x002706c8:
                       temp_v14 = temp_v14 + temp_v11 * temp_v13;
                       temp_v11 = *(float *)(temp_v6 + 0x70) * (float)((unsigned long long)temp_v12 >> 0x20);
                       FUN_00282390();
-                      temp_v3 = DAT_00447e88;
-                      *(float *)(DAT_00447e88 + 0x28) = temp_v14;
+                      temp_v3 = g_lmapScene;
+                      *(float *)(g_lmapScene + 0x28) = temp_v14;
                       *(unsigned int *)(temp_v3 + 0x2c) = temp_v8;
                       *(float *)(temp_v3 + 0x30) = temp_v15 + temp_v11 * temp_v13;
                       goto LAB_002709b8;
@@ -238,10 +238,10 @@ LAB_002709b8:
                     DAT_0049fa60 = 1;
                   }
                   temp_v18 = temp_v16;
-                  if (DAT_0049f91c >= 100) {
-                    temp_v19 = *(unsigned int *)(DAT_00447e88 + 0x1c);
-                    temp_v20 = *(unsigned int *)(DAT_00447e88 + 0x20);
-                    temp_v21 = *(unsigned int *)(DAT_00447e88 + 0x24);
+                  if (g_gameState >= 100) {
+                    temp_v19 = *(unsigned int *)(g_lmapScene + 0x1c);
+                    temp_v20 = *(unsigned int *)(g_lmapScene + 0x20);
+                    temp_v21 = *(unsigned int *)(g_lmapScene + 0x24);
                     temp_v22 = *(unsigned int *)(temp_v6 + 0x70);
                   }
                   MapDepart_Init(temp_v17,0x20);
@@ -306,7 +306,7 @@ LAB_002709b8:
           }
         }
         temp_v8 = 1;
-        if ((*(int *)(temp_v6 + 0x60) >= 0x29) && (temp_v3 = FUN_0027eba0(), temp_v3 == 0)) {
+        if ((*(int *)(temp_v6 + 0x60) >= 0x29) && (temp_v3 = mapDepartIsRunning(), temp_v3 == 0)) {
           if (DAT_0049fa58 != 0) {
             *(unsigned int *)(temp_v6 + 0x5c) = 1;
           }
@@ -347,7 +347,7 @@ LAB_002709b8:
         break;
       case 5:
         if (*(int *)(temp_v6 + 0x88) != 0) {
-          FUN_002a775c();
+          asdMdlManagerDestroy();
           *(unsigned int *)(temp_v6 + 0x88) = 0;
         }
         temp_v4 = 0;

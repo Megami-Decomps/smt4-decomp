@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00163060(int, int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_002e342c(unsigned short *, unsigned int);
 int rt_memcpy_w(unsigned short *, int, int);
 
@@ -21,8 +21,8 @@ extern unsigned int DAT_0057390c; /* 0x57390c */
 extern unsigned int DAT_00573910; /* 0x573910 */
 extern unsigned int DAT_00573914; /* 0x573914 */
 
-extern int FUN_0014aa78(void);
-/* Supplied declaration required: FUN_00163060. */
+extern int btlGetMainState(void);
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -36,14 +36,14 @@ unsigned short * FUN_004c9538(unsigned int param_1,int param_2,unsigned int para
   unsigned short *puVar3;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   if ((((*(unsigned int *)(temp_v0 + 0x45a4) & DAT_0057390c) == 0 &&
         (*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00573908) == 0) &&
       ((*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00573910) == 0 &&
        (*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00573914) == 0)) && (param_2 != 0)) {
     temp_v1 = *(unsigned int *)(temp_v0 + 0x2268);
     puVar3 = (unsigned short *)0x100;
-    FUN_00163060(0x100,0x100,0,0x880,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0x880,1);
     *puVar3 = 7;
     puVar3[1] = 0;
     puVar3[2] = 0;

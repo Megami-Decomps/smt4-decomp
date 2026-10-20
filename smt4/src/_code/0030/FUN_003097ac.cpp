@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 extern int DAT_004729e0; /* 0x4729e0 */
 extern int DAT_004729e4; /* 0x4729e4 */
 
@@ -40,11 +40,11 @@ void FUN_003097ac(unsigned int param_1)
   temp_v2 = FUN_002ae1e8();
   FUN_002b703c();
   temp_v0 = DAT_004729e0;
-  if (*(int *)(DAT_0044ea00 + *(int *)(DAT_0044ea00 + 0x130c) * 4 + 0x1314) == 0) {
+  if (*(int *)(g_titleScene + *(int *)(g_titleScene + 0x130c) * 4 + 0x1314) == 0) {
     temp_v1 = 0;
   }
   else {
-    temp_v3 = *(unsigned int *)(DAT_0044ea00 + *(int *)(DAT_0044ea00 + 0x132c) * 4 + 0x1334);
+    temp_v3 = *(unsigned int *)(g_titleScene + *(int *)(g_titleScene + 0x132c) * 4 + 0x1334);
     temp_v4 = ((temp_v3 >> 0x10) + (param_1 >> 0x10)) - 1;
     if ((int)temp_v4 < 0) {
       temp_v4 = 0;

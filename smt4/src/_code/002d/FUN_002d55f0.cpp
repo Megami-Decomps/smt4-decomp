@@ -1,20 +1,13 @@
-#include "romwright_types.h"
+#include "AsdSDK/Source/Net/Cec/AsdCec.h"
 
 extern "C" {
+extern AsdCecGlobals g_asdCec;
 
-int FUN_002ad8b4(unsigned int, unsigned int);
+void FUN_002ad8b4(u32 arg, void *work);
 
-extern unsigned char DAT_00464fa8; /* 0x464fa8 */
-
-/* Supplied declaration required: FUN_002ad8b4. */
-
-
-void FUN_002d55f0(unsigned int param_1)
-
+void FUN_002d55f0(u32 arg)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002ad8b4(param_1,*(unsigned int *)((*(int *)((unsigned char *)&DAT_00464fa8 + 0x4)) + 0xc));
-  return;
+    FUN_002ad8b4(arg, g_asdCec.cec->work);
 }
 
 } /* extern "C" */

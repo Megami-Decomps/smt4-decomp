@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+int scrSetResult(int);
 
 extern unsigned int FUN_002451ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0028dcb0. */
-extern unsigned int FUN_002939f4(void);
-extern unsigned int FUN_00296cc8(unsigned int);
+/* Supplied declaration required: scrSetResult. */
+extern unsigned int btlGetMainState(void);
+extern unsigned int scrGetArg(unsigned int);
 extern int FUN_002c09f4(unsigned int);
-extern unsigned int FUN_002c0c74(unsigned int);
-extern unsigned short *FUN_002c0cc4(void);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned short *dataTableGetEntries(void);
 
 
 unsigned int FUN_00312e78(void)
@@ -28,11 +28,11 @@ unsigned int FUN_00312e78(void)
   unsigned short *puVar7;
   unsigned short temp_v4 [12];
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_002939f4();
+  temp_v0 = scrGetArg(0);
+  temp_v1 = btlGetMainState();
   temp_v1 = FUN_002451ac(temp_v1,8);
-  puVar3 = (unsigned short *)FUN_002c0cc4();
-  temp_v2 = FUN_002c0c74(temp_v1);
+  puVar3 = (unsigned short *)dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v1);
   temp_v2 = temp_v2 >> 1;
   temp_v3 = 0;
   if (temp_v2 != 0) {
@@ -49,7 +49,7 @@ unsigned int FUN_00312e78(void)
     } while (temp_v2 != 0);
   }
   temp_v3 = FUN_002c09f4((temp_v3 - 1U) & 0xffff);
-  FUN_0028dcb0(temp_v4[temp_v3]);
+  scrSetResult(temp_v4[temp_v3]);
   return 1;
 }
 

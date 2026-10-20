@@ -10,7 +10,7 @@ int FUN_002cedd8(...);
 
 extern int DAT_0043e170; /* 0x43e170 */
 
-extern int FUN_00296cc8(unsigned int);
+extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf810. */
 extern int FUN_002c1d5c(void);
@@ -26,7 +26,7 @@ unsigned int scrComm_SearchWin_Start(void)
   
   if ((DAT_0043e170 == 0) && (temp_v0 = FUN_002c1d5c(), temp_v0 == 0)) {
     FUN_002cedd8();
-    temp_v1 = FUN_00296cc8(0);
+    temp_v1 = scrGetArg(0);
     temp_v0 = DAT_0043e170;
     if (temp_v1 != 0) {
       if (temp_v1 != 1) {

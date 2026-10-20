@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00244e1c(int, int, int, int);
-int FUN_0028dcb0(int);
-int FUN_002c498c(int, int, int, int, int);
+int scrSetResult(int);
+int asdMemAlloc(int, int, int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,10 +14,10 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_00244e1c. */
-/* Supplied declaration required: FUN_0028dcb0. */
-extern unsigned int FUN_00296cc8(unsigned int);
+/* Supplied declaration required: scrSetResult. */
+extern unsigned int scrGetArg(unsigned int);
 extern int FUN_002c1d5c(void);
-/* Supplied declaration required: FUN_002c498c. */
+/* Supplied declaration required: asdMemAlloc. */
 
 
 unsigned int eventCommand_31BEBC(void)
@@ -28,16 +28,16 @@ unsigned int eventCommand_31BEBC(void)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_00296cc8(0);
+  temp_v0 = scrGetArg(0);
   temp_v2 = 0;
   temp_v1 = FUN_002c1d5c();
   if (temp_v1 == 0) {
     temp_v2 = 0x100;
-    FUN_002c498c(0x100,0x100,0,8,1);
+    asdMemAlloc(0x100,0x100,0,8,1);
     FUN_00244e1c(temp_v0,temp_v2,0,1);
     *(unsigned int *)(temp_v2 + 4) = temp_v0;
   }
-  FUN_0028dcb0(temp_v2);
+  scrSetResult(temp_v2);
   return 1;
 }
 

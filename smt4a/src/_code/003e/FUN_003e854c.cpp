@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0019cac4(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_0039587c(unsigned int, int);
 int FUN_003e9fe4(int, int, int);
 int FUN_003eb314(int, unsigned char [676], int);
@@ -17,10 +17,10 @@ typedef struct {
     unsigned int sp428; /* 0x428: local_428 */
 } param_1_stack;
 
-extern unsigned char DAT_00573920; /* 0x573920 */
+extern unsigned char g_btlMain; /* 0x573920 */
 
 /* Supplied declaration required: FUN_0019cac4. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0039587c. */
 /* Supplied declaration required: FUN_003e9fe4. */
 /* Supplied declaration required: FUN_003eb314. */
@@ -50,7 +50,7 @@ void FUN_003e854c(int param_1)
     *puVar5 = 0;
     puVar5[1] = 0;
   } while (temp_v0 < 0x32);
-  FUN_002e6354((unsigned int *)(param_1 + 0xf4),0x84);
+  sysMemClear((unsigned int *)(param_1 + 0xf4),0x84);
   *(unsigned int *)(param_1 + 0xf4) = 0;
   *(unsigned int *)(param_1 + 0xf8) = 0;
   *(unsigned int *)(param_1 + 0xfc) = 0;
@@ -60,7 +60,7 @@ void FUN_003e854c(int param_1)
   *(unsigned int *)(param_1 + 0x124) = 0x3f800000;
   *(unsigned int *)(param_1 + 0x128) = 0x3f800000;
   FUN_003e9fe4(param_1,param_1 + 0xf4,1);
-  if ((int)(*(unsigned int *)((unsigned char *)&DAT_00573920 + 0x50)) < 1) {
+  if ((int)(*(unsigned int *)((unsigned char *)&g_btlMain + 0x50)) < 1) {
     temp_v3 = 0;
     do {
       if (*(int *)(param_1 + 0xf4 + temp_v3 * 4) != 0) {
@@ -75,7 +75,7 @@ void FUN_003e854c(int param_1)
     } while (temp_v3 < 6);
   }
   else {
-    temp_v3 = (*(unsigned int *)((unsigned char *)&DAT_00573920 + 0x50));
+    temp_v3 = (*(unsigned int *)((unsigned char *)&g_btlMain + 0x50));
     FUN_0019cac4(temp_v3);
     FUN_003eb314(param_1,temp_v4,temp_v3);
     FUN_004ca63c(param_1,temp_v4,1,4,0);
@@ -84,7 +84,7 @@ void FUN_003e854c(int param_1)
     FUN_0039587c(*(unsigned int *)(param_1 + 0x15c),param_1 + 0x160);
   }
   *(unsigned int *)(param_1 + 0x4c6c) = 0;
-  FUN_002e6354(param_1 + 0x4bc4,0xa8);
+  sysMemClear(param_1 + 0x4bc4,0xa8);
   return;
 }
 

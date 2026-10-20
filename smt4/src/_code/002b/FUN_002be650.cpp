@@ -24,7 +24,7 @@ extern unsigned char LAB_00125e54; /* 0x125e54 */
 extern unsigned char LAB_001264b4; /* 0x1264b4 */
 extern unsigned char LAB_0012654c; /* 0x12654c */
 extern unsigned char LAB_00138944; /* 0x138944 */
-extern unsigned char *DAT_00433158; /* 0x433158 */
+extern unsigned char *g_aocSystem; /* 0x433158 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
@@ -38,9 +38,9 @@ extern unsigned char *DAT_00433158; /* 0x433158 */
 /* Supplied declaration required: FUN_002b4670. */
 /* Supplied declaration required: FUN_002b46f8. */
 extern int FUN_002b4748(void);
-extern unsigned int FUN_002c0c74(int);
-extern unsigned int FUN_002c0cc4(void);
-extern int FUN_002c0cec(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(int);
+extern unsigned int dataTableGetEntries(void);
+extern int dataTableGet(unsigned int, unsigned int);
 
 
 unsigned char * FUN_002be650(unsigned char *param_1,int param_2)
@@ -67,18 +67,18 @@ unsigned char * FUN_002be650(unsigned char *param_1,int param_2)
     temp_v0 = *(unsigned char *)(temp_v1 + 8);
   }
   temp_v6 = romwright_subpiece_4_2_0(param_1,0);
-  puVar3 = DAT_00433158;
+  puVar3 = g_aocSystem;
   switch(temp_v0) {
   case 0:
     temp_v8 = temp_v6;
-    if ((*(int *)(DAT_00433158 + 0x3a0) == 0) ||
-       (FUN_0014162c(DAT_00433158,param_1), puVar3 == (unsigned char *)0x0)) {
-      temp_v1 = FUN_002c0cec(8,0);
+    if ((*(int *)(g_aocSystem + 0x3a0) == 0) ||
+       (FUN_0014162c(g_aocSystem,param_1), puVar3 == (unsigned char *)0x0)) {
+      temp_v1 = dataTableGet(8,0);
       if (temp_v1 == 0) {
         return (unsigned char *)0x0;
       }
-      temp_v2 = FUN_002c0cc4();
-      temp_v3 = FUN_002c0c74(temp_v1);
+      temp_v2 = dataTableGetEntries();
+      temp_v3 = dataTableGetCount(temp_v1);
       puVar3 = temp_v5;
       FUN_002b46f8(puVar3,temp_v2,temp_v3,0x58,&LAB_00138944);
     }
@@ -116,41 +116,41 @@ unsigned char * FUN_002be650(unsigned char *param_1,int param_2)
     }
     return puVar3 + 0x20;
   case 9:
-    if ((*(int *)(DAT_00433158 + 0x3c4) == 0) ||
-       (FUN_001317c8(DAT_00433158,param_1), puVar3 == (unsigned char *)0x0)) {
-      temp_v1 = FUN_002c0cec(8,3);
+    if ((*(int *)(g_aocSystem + 0x3c4) == 0) ||
+       (FUN_001317c8(g_aocSystem,param_1), puVar3 == (unsigned char *)0x0)) {
+      temp_v1 = dataTableGet(8,3);
       if (temp_v1 == 0) {
         return (unsigned char *)0x0;
       }
-      temp_v2 = FUN_002c0cc4();
-      temp_v3 = FUN_002c0c74(temp_v1);
+      temp_v2 = dataTableGetEntries();
+      temp_v3 = dataTableGetCount(temp_v1);
       puVar3 = temp_v4;
       FUN_002b46f8(puVar3,temp_v2,temp_v3,0x3c,&LAB_00125e54);
     }
     break;
   case 10:
     temp_v7 = temp_v6;
-    if ((*(int *)(DAT_00433158 + 0x3d0) == 0) ||
-       (FUN_00131898(DAT_00433158,param_1), puVar3 == (unsigned char *)0x0)) {
-      temp_v1 = FUN_002c0cec(8,4);
+    if ((*(int *)(g_aocSystem + 0x3d0) == 0) ||
+       (FUN_00131898(g_aocSystem,param_1), puVar3 == (unsigned char *)0x0)) {
+      temp_v1 = dataTableGet(8,4);
       if (temp_v1 == 0) {
         return (unsigned char *)0x0;
       }
-      temp_v2 = FUN_002c0cc4();
-      temp_v3 = FUN_002c0c74(temp_v1);
+      temp_v2 = dataTableGetEntries();
+      temp_v3 = dataTableGetCount(temp_v1);
       puVar3 = temp_v5;
       FUN_002b46f8(puVar3,temp_v2,temp_v3,0x30,&LAB_0012654c);
     }
     break;
   case 0xb:
-    if ((*(int *)(DAT_00433158 + 0x3dc) == 0) ||
-       (FUN_002b4504(DAT_00433158,param_1), puVar3 == (unsigned char *)0x0)) {
-      temp_v1 = FUN_002c0cec(8,5);
+    if ((*(int *)(g_aocSystem + 0x3dc) == 0) ||
+       (FUN_002b4504(g_aocSystem,param_1), puVar3 == (unsigned char *)0x0)) {
+      temp_v1 = dataTableGet(8,5);
       if (temp_v1 == 0) {
         return (unsigned char *)0x0;
       }
-      temp_v2 = FUN_002c0cc4();
-      temp_v3 = FUN_002c0c74(temp_v1);
+      temp_v2 = dataTableGetEntries();
+      temp_v3 = dataTableGetCount(temp_v1);
       puVar3 = temp_v4;
       FUN_002b46f8(puVar3,temp_v2,temp_v3,0x2c,&LAB_001264b4);
     }

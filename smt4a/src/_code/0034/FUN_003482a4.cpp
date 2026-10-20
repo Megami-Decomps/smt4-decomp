@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_0017ffa8(int, int, int, unsigned int, unsigned int, unsigned int);
 int FUN_0019d880(void);
 
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0017ffa8. */
 /* Supplied declaration required: FUN_0019d880. */
 
@@ -27,10 +27,10 @@ void FUN_003482a4(unsigned int param_1,unsigned int param_2,unsigned int param_3
   
   FUN_0019d880();
   if (in_s0 < 0x3f800000) {
-    FUN_001677c0();
+    efctSetSpeed();
   }
   FUN_0017ffa8(2,0xb,9,param_1,param_2,param_3);
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

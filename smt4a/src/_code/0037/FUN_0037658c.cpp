@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001b4ddc(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_003007a0(...);
 int rt_memcpy_w(...);
 
@@ -25,7 +25,7 @@ struct fn_0037658c_arg0 {
 };
 
 /* Supplied declaration required: FUN_001b4ddc. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003007a0. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -39,7 +39,7 @@ int FUN_0037658c(fn_0037658c_arg0 *param_1,int param_2)
   pfVar1 = param_1;
   FUN_003007a0();
   rt_memcpy_w();
-  FUN_002e6354(pfVar1,0x90);
+  sysMemClear(pfVar1,0x90);
   pfVar1->field_0x84 = 1;
   *(unsigned char *)&pfVar1->field_0x88 = 8;
   *(unsigned char *)((int)&pfVar1->field_0x88 + 1) = 0;

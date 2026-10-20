@@ -1,24 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003aeb0c` (_code @ 0x3aeb0c, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002d0298(int);
+/* Pool object: the field at 0x7e38 is cleared once FUN_002d0298 accepts it. */
+typedef struct {
+    u8 unk00[8];
+    u8 header[0x7e30];  /* 0x08 */
+    u32 field7e38;      /* 0x7e38 */
+} Pool;
 
+/* Owner holding the pool at 0x20. */
+typedef struct {
+    u8 unk00[0x20];
+    Pool *pool;         /* 0x20 */
+} PoolOwner;
 
-void FUN_003aeb0c(int param_1)
+int FUN_002d0298(u8 *header);
 
+/* Clears the pool's field at 0x7e38 when FUN_002d0298 succeeds; returns its result. */
+int FUN_003aeb0c(PoolOwner *owner)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = *(int *)(param_1 + 0x20);
-  temp_v0 = FUN_002d0298(temp_v1 + 8);
-  if (temp_v0 != 0) {
-    *(unsigned int *)(temp_v1 + 0x7e38) = 0;
-  }
-  return;
+    Pool *pool = owner->pool;
+    int result = FUN_002d0298(pool->header);
+
+    if (result != 0) {
+        pool->field7e38 = 0;
+    }
+    return result;
 }
 
 } /* extern "C" */

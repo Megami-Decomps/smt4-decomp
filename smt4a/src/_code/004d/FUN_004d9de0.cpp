@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0019a7dc(void);
+extern int gameGetOptions(void);
 
 
 unsigned int FUN_004d9de0(void)
@@ -15,7 +15,7 @@ unsigned int FUN_004d9de0(void)
   unsigned char temp_v2;
   unsigned char temp_v3;
   
-  temp_v1 = FUN_0019a7dc();
+  temp_v1 = gameGetOptions();
   if ((*(unsigned short *)(temp_v1 + 0x130) & 1) != 0) {
     temp_v0 = *(short *)(temp_v1 + 0x132);
     temp_v2 = temp_v0 == 0;

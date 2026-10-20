@@ -9,7 +9,7 @@ int FUN_003c323c(void);
 int FUN_0040619c(unsigned int, int);
 int FUN_0040a908(void);
 int FUN_0040a918(int, int);
-int FUN_0040a96c(int);
+int moriModelContentCreateBinding(int);
 int FUN_0040a9a0(int, unsigned int);
 int FUN_0040ab9c(unsigned int, unsigned int);
 int FUN_00416168(unsigned int, unsigned int);
@@ -34,7 +34,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_00379fe4; /* 0x379fe4 */
-extern int DAT_00580238; /* 0x580238 */
+extern int g_lmapMainState; /* 0x580238 */
 extern unsigned int DAT_005c4c28; /* 0x5c4c28 */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern unsigned int DAT_0064c030; /* 0x64c030 */
@@ -55,7 +55,7 @@ extern int FUN_003fdadc(void);
 /* Supplied declaration required: FUN_0040619c. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
-/* Supplied declaration required: FUN_0040a96c. */
+/* Supplied declaration required: moriModelContentCreateBinding. */
 /* Supplied declaration required: FUN_0040a9a0. */
 /* Supplied declaration required: FUN_0040ab9c. */
 extern unsigned int FUN_0040ac08(void);
@@ -104,9 +104,9 @@ void FUN_00379d58(void)
   float temp_v24;
   unsigned int temp_v25;
   
-  temp_v0 = DAT_00580238;
-  if (DAT_00580238 != 0) {
-    temp_v5 = *(unsigned int *)(DAT_00580238 + 0xadc);
+  temp_v0 = g_lmapMainState;
+  if (g_lmapMainState != 0) {
+    temp_v5 = *(unsigned int *)(g_lmapMainState + 0xadc);
     temp_v1 = 0x20;
     FUN_00178b04(0x20,&LAB_00379fe4,0x25a0);
     temp_v2 = 0;
@@ -120,7 +120,7 @@ void FUN_00379d58(void)
     FUN_0040a9a0(*piVar6,temp_v5);
     FUN_0040ab9c(*(unsigned int *)(temp_v0 + 0xae0),*(unsigned int *)(*piVar6 + 0xc));
     FUN_00416168(*(unsigned int *)(*piVar6 + 0xc),*(unsigned int *)(*(int *)(temp_v0 + 0xae0) + 0xc));
-    FUN_0040a96c(*piVar6);
+    moriModelContentCreateBinding(*piVar6);
     *(unsigned int *)(temp_v0 + 0xad8) = 0;
     *(unsigned int *)(temp_v0 + 0xadc) = 0;
     FUN_003c323c();

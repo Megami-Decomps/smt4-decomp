@@ -27,7 +27,7 @@ extern unsigned int DAT_0057aa84; /* 0x57aa84 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_001f3e80. */
 /* Supplied declaration required: FUN_003f0e20. */
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 unsigned int FUN_00421968(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -50,7 +50,7 @@ unsigned int FUN_00421968(int param_1,int param_2,unsigned int param_3,unsigned 
   temp_v2 = puVar1[0x7b5] + param_2 * 0x1d0;
   FUN_003f0e20(puVar1,(int)*(short *)(temp_v2 + 0x6a),param_2 * 0x1d,param_4,param_4);
   if ((*(unsigned int *)(temp_v2 + 0x50) & 8) != 0) {
-    temp_v2 = aeabi_idivmod(puVar1[0x96] * 100,puVar1[0x97]);
+    temp_v2 = __aeabi_idivmod(puVar1[0x96] * 100,puVar1[0x97]);
     temp_v1 = *(unsigned int *)(*(int *)(param_1 + 4) + 0x1edc);
     if (temp_v2 < 0x14) {
       temp_v2 = FUN_001f3e80(0,0xff,0x1e,temp_v1,0);

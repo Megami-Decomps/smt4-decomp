@@ -13,8 +13,8 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern int FUN_00292f28(int);
-extern int FUN_002939f4(void);
+extern int padIsButtonDown(int);
+extern int btlGetMainState(void);
 extern unsigned int FUN_00297ca4(int, unsigned int);
 /* Supplied declaration required: FUN_0029efa8. */
 /* Supplied declaration required: FUN_0029efc0. */
@@ -39,7 +39,7 @@ void FUN_0028cb40(int param_1,unsigned short *param_2,short *param_3)
   unsigned int temp_v10 [6];
   
   temp_v8 = 0;
-  temp_v3 = FUN_002939f4();
+  temp_v3 = btlGetMainState();
   if ((*(unsigned int *)(temp_v3 + 0x44a0) & 0x200) != 0) {
     *param_2 = 7;
     *param_3 = 7;
@@ -96,7 +96,7 @@ void FUN_0028cb40(int param_1,unsigned short *param_2,short *param_3)
     break;
   case 3:
     *param_2 = 7;
-    temp_v3 = FUN_002939f4();
+    temp_v3 = btlGetMainState();
     if ((*(unsigned int *)(temp_v3 + 0x44a8) & 0x1000) == 0) {
       temp_v10[5] = 5;
       temp_v10[0] = 0;
@@ -106,7 +106,7 @@ void FUN_0028cb40(int param_1,unsigned short *param_2,short *param_3)
       temp_v10[4] = 4;
       temp_v3 = 0;
       do {
-        temp_v6 = FUN_00292f28(temp_v3 + 0x2e);
+        temp_v6 = padIsButtonDown(temp_v3 + 0x2e);
         if (temp_v6 != 0) {
           temp_v6 = FUN_0029efc0(param_1 + 0x3344);
           temp_v7 = FUN_0029efa8(param_1 + 0x3344);

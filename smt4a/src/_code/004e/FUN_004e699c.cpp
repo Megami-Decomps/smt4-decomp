@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_004ee568(void);
+extern int btlUnitGet(void);
 
 
 void FUN_004e699c(unsigned int param_1,int param_2,int param_3)
@@ -17,7 +17,7 @@ void FUN_004e699c(unsigned int param_1,int param_2,int param_3)
   int temp_v4;
   unsigned char temp_v5;
   
-  temp_v0 = FUN_004ee568();
+  temp_v0 = btlUnitGet();
   temp_v1 = 0;
   temp_v2 = 0x85;
   do {

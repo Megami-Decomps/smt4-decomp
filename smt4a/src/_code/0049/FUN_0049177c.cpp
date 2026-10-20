@@ -36,7 +36,7 @@ extern int FUN_003ade20(int);
 extern int FUN_004083a8(unsigned char, unsigned char);
 extern float *FUN_00492b84(int);
 extern int FUN_00492bc0(void);
-extern float *FUN_00492be8(int);
+extern float *lmapSceneGetObj(int);
 extern int FUN_00492c5c(int);
 /* Supplied declaration required: FUN_0049359c. */
 
@@ -70,7 +70,7 @@ void FUN_0049177c(int param_1)
   FUN_00162e8c();
   temp_v2 = param_1 + 0x4cc;
   temp_v3 = FUN_00492bc0();
-  pfVar5 = (float *)FUN_00492be8(temp_v2);
+  pfVar5 = (float *)lmapSceneGetObj(temp_v2);
   temp_v14 = *pfVar5;
   temp_v11 = pfVar5[2];
   pfVar5 = (float *)FUN_00492b84(temp_v2);

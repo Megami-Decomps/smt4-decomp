@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0016e2a8(void);
 int FUN_0016e7c0(...);
 int FUN_00188444(void);
-int FUN_001884b0(unsigned int);
+int vcallSlot12IfValid(unsigned int);
 int FUN_001886bc(void);
 int FUN_00188e44(...);
 int FUN_00195fc8(void);
@@ -18,7 +18,7 @@ extern unsigned char DAT_005c0adc; /* 0x5c0adc */
 /* Supplied declaration required: FUN_0016e2a8. */
 /* Supplied declaration required: FUN_0016e7c0. */
 /* Supplied declaration required: FUN_00188444. */
-/* Supplied declaration required: FUN_001884b0. */
+/* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: FUN_001886bc. */
 /* Supplied declaration required: FUN_00188e44. */
 /* Supplied declaration required: FUN_00195fc8. */
@@ -41,7 +41,7 @@ unsigned int FUN_00189388(int *param_1,int *param_2,unsigned int param_3,unsigne
       if ((param_1[2] & 1U) != 0) {
         FUN_00195fc8();
       }
-      FUN_001884b0(param_1[2] & 0xfffffffe);
+      vcallSlot12IfValid(param_1[2] & 0xfffffffe);
       param_1[2] = 0;
     }
     if (temp_v1 < 0) {
@@ -53,7 +53,7 @@ unsigned int FUN_00189388(int *param_1,int *param_2,unsigned int param_3,unsigne
       if ((param_1[2] & 1U) != 0) {
         FUN_00195fc8();
       }
-      FUN_001884b0(param_1[2] & 0xfffffffe);
+      vcallSlot12IfValid(param_1[2] & 0xfffffffe);
       param_1[2] = 0;
     }
     temp_v2 = (*(unsigned int *)((unsigned char *)&DAT_005c0adc + 0x4));
@@ -73,7 +73,7 @@ unsigned int FUN_00189388(int *param_1,int *param_2,unsigned int param_3,unsigne
         if ((param_1[2] & 1U) != 0) {
           FUN_00195fc8();
         }
-        FUN_001884b0(param_1[2] & 0xfffffffe);
+        vcallSlot12IfValid(param_1[2] & 0xfffffffe);
         param_1[2] = 0;
       }
       if (temp_v1 < 0) {

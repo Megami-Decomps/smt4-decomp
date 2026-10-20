@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_0030ea58(int, unsigned char *);
 
 extern unsigned char LAB_004f8260; /* 0x4f8260 */
 
-/* Supplied declaration required: FUN_0014aa78. */
-extern int FUN_002e3390(int);
+/* Supplied declaration required: btlGetMainState. */
+extern int wstrlen(int);
 /* Supplied declaration required: FUN_0030ea58. */
 extern int FUN_003e8430(void);
 
@@ -25,11 +25,11 @@ int FUN_004f80e4(int param_1)
   unsigned char temp_v2;
   
   if ((*(int *)(param_1 + 0x1f54) != 0) && (piVar3 = (int *)(param_1 + 0x1f58), *piVar3 != 0)) {
-    FUN_0014aa78();
+    btlGetMainState();
     temp_v0 = FUN_003e8430();
     if (temp_v0 == 0) {
       temp_v0 = 0;
-      temp_v1 = FUN_002e3390(*piVar3);
+      temp_v1 = wstrlen(*piVar3);
       if (temp_v1 != 0) {
         temp_v1 = *piVar3;
         FUN_0030ea58(temp_v1,&LAB_004f8260);
@@ -38,7 +38,7 @@ int FUN_004f80e4(int param_1)
           temp_v0 = temp_v1;
         }
       }
-      temp_v1 = FUN_002e3390(*piVar3 + 0x16);
+      temp_v1 = wstrlen(*piVar3 + 0x16);
       if (temp_v1 != 0) {
         temp_v1 = *piVar3 + 0x16;
         FUN_0030ea58(temp_v1,&LAB_004f8260);
@@ -53,7 +53,7 @@ int FUN_004f80e4(int param_1)
           }
         }
       }
-      temp_v1 = FUN_002e3390(*piVar3 + 0x2c);
+      temp_v1 = wstrlen(*piVar3 + 0x2c);
       if (temp_v1 != 0) {
         temp_v1 = *piVar3 + 0x2c;
         FUN_0030ea58(temp_v1,&LAB_004f8260);
@@ -68,7 +68,7 @@ int FUN_004f80e4(int param_1)
           }
         }
       }
-      temp_v1 = FUN_002e3390(*piVar3 + 0x42);
+      temp_v1 = wstrlen(*piVar3 + 0x42);
       if (temp_v1 != 0) {
         temp_v1 = *piVar3 + 0x42;
         FUN_0030ea58(temp_v1,&LAB_004f8260);

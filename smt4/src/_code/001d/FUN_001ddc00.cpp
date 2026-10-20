@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0044e140; /* 0x44e140 */
+extern unsigned char g_gameGlobals; /* 0x44e140 */
 
 
 int FUN_001ddc00(void)
@@ -13,8 +13,8 @@ int FUN_001ddc00(void)
   int temp_v0;
   
   temp_v0 = 0;
-  if ((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) != 0) {
-    temp_v0 = (int)*(char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e64);
+  if ((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) != 0) {
+    temp_v0 = (int)*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e64);
   }
   return temp_v0;
 }

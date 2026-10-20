@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a0e8(float *, float *);
+int mtx44Copy(float *, float *);
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* stack frame of param_5: 21 slot(s), 84 byte(s) */
@@ -51,7 +51,7 @@ extern unsigned int DAT_0064c0bc; /* 0x64c0bc */
 extern float DAT_0064c0c0; /* 0x64c0c0 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: mtx44Copy. */
 extern int FUN_002eba64(unsigned int *);
 
 
@@ -170,7 +170,7 @@ void FUN_004ff4e0(int param_1,float *param_2,int param_3,int param_4,unsigned in
     DAT_0064c0ac = temp_v12;
     DAT_0064c0c0 = temp_v12;
   }
-  FUN_0019a0e8(&temp_v14,&DAT_0064c084);
+  mtx44Copy(&temp_v14,&DAT_0064c084);
   temp_v29 = param_2;
   for (; (int)temp_v27 <= temp_v28; temp_v27 = temp_v27 + 1) {
     pfVar1 = (float *)(*(int *)(temp_v32 + 0x2c) + temp_v27 * 0x58);

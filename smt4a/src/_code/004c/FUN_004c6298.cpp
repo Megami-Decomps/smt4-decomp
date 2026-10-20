@@ -13,7 +13,7 @@ extern unsigned int uRam005714c0; /* 0x5714c0 */
 extern unsigned int uRam005714c4; /* 0x5714c4 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_001633a0(unsigned int);
 extern int FUN_001ab854(void);
 extern int FUN_001ab888(void);
@@ -36,7 +36,7 @@ unsigned int FUN_004c6298(void)
   int temp_v8;
   unsigned char temp_v9;
   
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   if (*(int *)(temp_v1 + 0xf0) < 0) {
     temp_v8 = 0;
     temp_v1 = FUN_001ab888();
@@ -60,7 +60,7 @@ unsigned int FUN_004c6298(void)
             else {
               temp_v3 = 99;
             }
-            temp_v4 = FUN_0014aa78();
+            temp_v4 = btlGetMainState();
             if ((uRam005714c4 & *(unsigned int *)(temp_v4 + 0x45ac)) != 0 ||
                 (*(unsigned int *)(temp_v4 + 0x45a8) & uRam005714c0) != 0) {
               temp_v3 = 100;
@@ -73,7 +73,7 @@ unsigned int FUN_004c6298(void)
               temp_v4 = temp_v8 - 1;
             }
             if (temp_v4 < 0 != temp_v9) {
-              temp_v4 = FUN_0014aa78();
+              temp_v4 = btlGetMainState();
               temp_v3 = temp_v8 * 4;
               temp_v8 = temp_v8 + 1;
               *(unsigned int *)(temp_v4 + temp_v3 + 0x194) = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
@@ -84,7 +84,7 @@ unsigned int FUN_004c6298(void)
       } while (temp_v7 < (int)(unsigned int)*(unsigned char *)(temp_v1 + 0x1ca3));
       if (0 < temp_v8) {
         FUN_003fd63c(0x11d6,1);
-        temp_v1 = FUN_0014aa78();
+        temp_v1 = btlGetMainState();
         temp_v6 = *(unsigned int *)(temp_v1 + 0x45a4) | DAT_00571494;
         *(unsigned int *)(temp_v1 + 0x45a0) = *(unsigned int *)(temp_v1 + 0x45a0) | DAT_00571490;
         *(unsigned int *)(temp_v1 + 0x45a4) = temp_v6;

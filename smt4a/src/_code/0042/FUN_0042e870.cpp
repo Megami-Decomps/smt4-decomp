@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(int *, int);
+int sysMemClear(int *, int);
 int FUN_0042d5b4(int);
 int FUN_00430e58(int);
 
@@ -22,7 +22,7 @@ extern signed char DAT_005b448f; /* 0x5b448f */
 extern unsigned int DAT_006426c0; /* 0x6426c0 */
 extern unsigned int DAT_006426cc; /* 0x6426cc */
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0042d5b4. */
 /* Supplied declaration required: FUN_00430e58. */
 extern unsigned int nn_cec_CTR_MessageBox_WriteBoxInfo(unsigned int, int, unsigned int, unsigned int *);
@@ -70,11 +70,11 @@ void FUN_0042e870(int *param_1,int param_2)
   param_1[0xf0] = 0;
   param_1[0xf1] = 0;
   param_1[0xf2] = 0;
-  FUN_002e6354(param_1 + 0x87,0x18c);
-  FUN_002e6354(param_1 + 0xf3,0x18c);
+  sysMemClear(param_1 + 0x87,0x18c);
+  sysMemClear(param_1 + 0xf3,0x18c);
   param_1[0x157] = 0;
   param_1[0x158] = 0;
-  FUN_002e6354(param_1 + 0x159,0x318);
+  sysMemClear(param_1 + 0x159,0x318);
   nn_os_CriticalSection_Enter((unsigned int)&DAT_006426cc);
   if (DAT_005b448e != '\0') {
     FUN_00430e58(param_1[0xea]);

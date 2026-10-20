@@ -2,9 +2,9 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
-int FUN_0019a5a0(void);
-int FUN_0019c364(void);
+int sysPlaySe(int);
+int asdMemFree(void);
+int scrScriptProcessDestroy(void);
 int FUN_001add24(int);
 int FUN_0023b45c(int);
 int FUN_002bf4f4(int);
@@ -22,9 +22,9 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001681cc. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: sysPlaySe. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_001add24. */
 /* Supplied declaration required: FUN_0023b45c. */
 /* Supplied declaration required: FUN_002bf4f4. */
@@ -51,30 +51,30 @@ void FUN_00417674(int param_1)
   FUN_0033449c(0);
   FUN_00333f6c();
   FUN_002bf4f4(0);
-  FUN_001681cc(*(unsigned short *)(param_1 + 0x42));
+  sysPlaySe(*(unsigned short *)(param_1 + 0x42));
   FUN_0037b450();
   if (*(int *)(param_1 + 0x1c) != 0) {
-    FUN_0019c364();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0x1c) = 0;
   }
   if (*(int *)(param_1 + 0x18) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x18) = 0;
   }
   if (*(int *)(param_1 + 0x20) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x20) = 0;
   }
   if (*(int *)(param_1 + 0x28) != 0) {
-    FUN_0019c364();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0x28) = 0;
   }
   if (*(int *)(param_1 + 0x24) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x24) = 0;
   }
   if (*(int *)(param_1 + 0x2c) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x2c) = 0;
   }
   FUN_001add24(0x25);

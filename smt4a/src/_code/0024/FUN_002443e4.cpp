@@ -52,7 +52,7 @@ extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
 extern int DAT_005806a4; /* 0x5806a4 */
 extern unsigned int *DAT_005806cc; /* 0x5806cc */
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -129,7 +129,7 @@ void FUN_002443e4(void)
   float temp_v43;
   float temp_v44;
   
-  FUN_0016c4b8(DAT_0059dbb4,*DAT_005806cc);
+  FUN_0016c4b8(g_renderCtx,*DAT_005806cc);
   temp_v1 = 0;
   temp_v17 = 57.32484f;
   temp_v18 = 0x3f360b61;

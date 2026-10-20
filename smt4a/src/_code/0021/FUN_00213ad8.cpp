@@ -1,29 +1,22 @@
-#include "romwright_types.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
-int FUN_0019a5a0(unsigned int *);
+void jobStop(u32 job, s32 arg);
+void asdMemFree(void *block);
 
-extern unsigned char DAT_0057f3b4; /* 0x57f3b4 */
+extern EventEffectGlobalsA DAT_0057f3b4;
 
-/* Supplied declaration required: FUN_001631d0. */
-/* Supplied declaration required: FUN_0019a5a0. */
-
-
+/* Stops the effect's job and frees it. */
 void FUN_00213ad8(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_0057f3b4 + 0xc));
-  if ((*(unsigned int * *)((unsigned char *)&DAT_0057f3b4 + 0xc)) != (unsigned int *)0x0) {
-    FUN_001631d0(*(*(unsigned int * *)((unsigned char *)&DAT_0057f3b4 + 0xc)),0);
-    FUN_0019a5a0(puVar1);
-    (*(unsigned int * *)((unsigned char *)&DAT_0057f3b4 + 0xc)) = (unsigned int *)0x0;
-  }
-  return;
+    EventEffectA *effect = DAT_0057f3b4.effect;
+
+    if (DAT_0057f3b4.effect != NULL) {
+        jobStop(DAT_0057f3b4.effect->job, 0);
+        asdMemFree(effect);
+        DAT_0057f3b4.effect = NULL;
+    }
 }
 
 } /* extern "C" */

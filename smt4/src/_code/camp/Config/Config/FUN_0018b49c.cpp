@@ -23,8 +23,8 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_0018b754; /* 0x18b754 */
-extern int DAT_0043dc58; /* 0x43dc58 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_config; /* 0x43dc58 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00196fe8. */
@@ -36,9 +36,9 @@ extern int DAT_0044ea00; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 extern int FUN_002c09d0(unsigned int);
-extern unsigned int FUN_002c0c74(unsigned int);
-extern int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
 
 
@@ -64,13 +64,13 @@ void FUN_0018b49c(int param_1,int param_2)
   int temp_v13;
   unsigned int temp_v14;
   
-  temp_v2 = DAT_0043dc58;
-  FUN_0029efc0(DAT_0043dc58);
+  temp_v2 = g_config;
+  FUN_0029efc0(g_config);
   FUN_0029efa8(temp_v2);
   FUN_002bf380(2,0x2f,0,param_1,param_2,0xb);
   temp_v14 = 0xe09800ff;
   temp_v3 = FUN_002bf4f8(0x2f,0x20);
-  temp_v5 = DAT_0044ea00;
+  temp_v5 = g_titleScene;
   temp_v13 = *(short *)(temp_v3 + 8) + param_1;
   temp_v11 = *(short *)(temp_v3 + 10) + param_2;
   temp_v4 = FUN_002c5da8(6,1,0);
@@ -82,7 +82,7 @@ void FUN_0018b49c(int param_1,int param_2)
     *(unsigned char *)(temp_v5 + 0x12c4) = 0;
   }
   FUN_002bf288(2,0x2f,0xc,temp_v13,temp_v11,0xb);
-  temp_v5 = DAT_0044ea00;
+  temp_v5 = g_titleScene;
   temp_v4 = FUN_002c5da8(6,7,0);
   piVar11 = (int *)(temp_v5 + 0x12ac);
   temp_v8 = piVar11[*piVar11 + 2];
@@ -109,9 +109,9 @@ void FUN_0018b49c(int param_1,int param_2)
       }
     }
   }
-  temp_v6 = FUN_002c0cec(0x36,0);
-  temp_v5 = FUN_002c0cc4();
-  temp_v7 = FUN_002c0c74(temp_v6);
+  temp_v6 = dataTableGet(0x36,0);
+  temp_v5 = dataTableGetEntries();
+  temp_v7 = dataTableGetCount(temp_v6);
   if ((temp_v10 < temp_v7) && (temp_v5 = temp_v5 + temp_v10 * 0x80, temp_v5 != 0)) {
     temp_v4 = FUN_002bf4f8(0x2f,0x1a);
     FUN_002be624(temp_v12,&LAB_0018b754,temp_v5);

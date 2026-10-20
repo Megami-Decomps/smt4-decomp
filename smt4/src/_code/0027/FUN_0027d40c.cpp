@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00447a78; /* 0x447a78 */
+extern int g_mapIf; /* 0x447a78 */
 
 extern int FUN_00248e8c(void);
 extern int FUN_002c2950(void);
@@ -29,8 +29,8 @@ void FUN_0027d40c(int param_1)
     temp_v1 = temp_v1 + ((int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1b)) >> 5) * 4;
     *(unsigned int *)(temp_v1 + 0x7d4) = *(unsigned int *)(temp_v1 + 0x7d4) | (1 << ((temp_v0 % 0x20) & 0xffU));
   }
-  temp_v0 = DAT_00447a78;
-  if (DAT_00447a78 == 0) {
+  temp_v0 = g_mapIf;
+  if (g_mapIf == 0) {
     return;
   }
   temp_v1 = 0;

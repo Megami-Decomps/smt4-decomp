@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0040aa90(void);
+int moriModelContentCopyBody(void);
 int FUN_0040ace8(...);
 
 int FUN_0014bef4(...);
@@ -41,8 +41,8 @@ typedef struct {
 extern unsigned char LAB_00304cd0; /* 0x304cd0 */
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 extern int DAT_005806d4; /* 0x5806d4 */
-extern int DAT_00581288; /* 0x581288 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_lmapScene; /* 0x581288 */
+extern int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern signed char DAT_005f1623; /* 0x5f1623 */
 extern unsigned int DAT_005f17f0; /* 0x5f17f0 */
@@ -108,7 +108,7 @@ extern int FUN_003c311c(void);
 /* Supplied declaration required: FUN_003c3154. */
 /* Supplied declaration required: FUN_003c4d34. */
 extern int FUN_003cb88c(int, unsigned int);
-/* Supplied declaration required: FUN_0040aa90. */
+/* Supplied declaration required: moriModelContentCopyBody. */
 extern unsigned int FUN_0040ac08(void);
 /* Supplied declaration required: FUN_0040ace8. */
 extern int FUN_004bb510(unsigned int);
@@ -116,7 +116,7 @@ extern int FUN_004bb870(unsigned int);
 /* Supplied declaration required: FUN_004bc420. */
 extern int FUN_004bc5a4(unsigned int);
 extern int FUN_004bc850(void);
-extern unsigned int aeabi_idivmod(void);
+extern unsigned int __aeabi_idivmod(void);
 
 
 void FUN_00303f48(void)
@@ -154,7 +154,7 @@ void FUN_00303f48(void)
   temp_v6 = DAT_005806d4;
   temp_v0 = FUN_00162e8c();
   DAT_005f17f0 = 0x3c;
-  temp_v1 = FUN_003cb88c(DAT_005f15fc,DAT_005f1600);
+  temp_v1 = FUN_003cb88c(g_gameState,DAT_005f1600);
   DAT_005f18a0 = 0x1e;
   DAT_005f18a4 = 3500.0f;
   DAT_005f18a8 = 0x44fa0000;
@@ -166,7 +166,7 @@ void FUN_00303f48(void)
   DAT_005f18bc = 4;
   DAT_005f18be = 4;
   DAT_005f18bf = 0;
-  if (DAT_005f15fc == 0x18) {
+  if (g_gameState == 0x18) {
     DAT_005f18bf = 3;
   }
   if (temp_v1 != 0) {
@@ -428,7 +428,7 @@ LAB_003044d0:
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 0x28);
     if (temp_v8) {
-      temp_v3 = aeabi_idivmod();
+      temp_v3 = __aeabi_idivmod();
     }
     temp_v5 = (unsigned int)*(unsigned short *)(temp_v0 + 0x62);
     if ((int)(temp_v3 + 4) >= (int)temp_v5) {
@@ -496,7 +496,7 @@ LAB_0030444c:
     temp_v10 = VectorSignedToFloat((int)*(short *)(pcVar7 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v11 = VectorSignedToFloat((int)*(short *)(pcVar7 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v12 = VectorSignedToFloat((int)*(short *)(pcVar7 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v9 = *(unsigned int *)(DAT_00581288 + 0x1c);
+    temp_v9 = *(unsigned int *)(g_lmapScene + 0x1c);
     FUN_002b5cb4();
     temp_v13 = romwright_piece_4_4(temp_v9,temp_v11);
     temp_v0 = 0;
@@ -627,7 +627,7 @@ LAB_00304874:
     in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(DAT_005f18a4 <= temp_v14) << 0x1d);
     if ((((!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) && (*piVar15 < DAT_005f17f4 - 5)) &&
         (*(char *)(temp_v6 + 0x3d88) == '\0')) &&
-       (((int)romwright_fabs_4(*(float *)(DAT_00581288 + 0x20) - *(float *)(temp_v2 + 0x58)) < 0x41f00000 &&
+       (((int)romwright_fabs_4(*(float *)(g_lmapScene + 0x20) - *(float *)(temp_v2 + 0x58)) < 0x41f00000 &&
         (temp_v0 = FUN_0014bef4(100), temp_v0 < DAT_005f18a0)))) {
       temp_v0 = temp_v6 + *(int *)(temp_v2 + 0x1b0) * 8;
       if (*(char *)(temp_v0 + 0x3d91) != '\0') {
@@ -638,7 +638,7 @@ LAB_00304874:
           temp_v9 = FUN_0040ac08();
         }
         *(unsigned int *)(temp_v2 + 0x1b4) = temp_v9;
-        FUN_0040aa90();
+        moriModelContentCopyBody();
         FUN_0040ace8(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v2 + 0x1b4) + 4));
         *(unsigned char *)(temp_v2 + 0x1b9) = 1;
       }

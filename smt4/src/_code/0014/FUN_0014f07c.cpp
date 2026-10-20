@@ -18,7 +18,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_00154080. */
-extern unsigned int FUN_002c2ff0(void);
+extern unsigned int asdMemoryGetDefaultAllocator(void);
 extern int nw_anim_res_ResAnim_IsFullBakedAnim(int *);
 /* Supplied declaration required: nw_gfx_SkeletalModel_SetFullBakedAnimEnabled. */
 
@@ -70,7 +70,7 @@ int * FUN_0014f07c(int param_1,int param_2,unsigned int param_3)
     piVar6 = (int *)0x0;
   }
   else {
-    temp_v1 = FUN_002c2ff0();
+    temp_v1 = asdMemoryGetDefaultAllocator();
     temp_v6 = temp_v0;
     temp_v9 = 1;
     temp_v7 = temp_v5;

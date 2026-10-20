@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0013f1b8(int, int);
+int asdTMTexTableLoadTmx(int, int);
 int FUN_00151408(unsigned int, int, int);
 int FUN_001527d8(unsigned int, unsigned int);
 int FUN_001acf98(int, int);
@@ -19,8 +19,8 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0013f1b8. */
-extern unsigned int FUN_0014bce0(unsigned int);
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
+extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_00151408. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_001acf98. */
@@ -53,12 +53,12 @@ void FUN_003f5598(int param_1)
   FUN_002804b0("event/PartnerTopic/PartnerTopicCommon.bf",param_1 + 0x30,0);
   FUN_001b4a90(param_1 + 0x6b4,0x14,0xffffffff);
   FUN_001b4a90(param_1 + 0x6c8,0x10,0xffffffff);
-  FUN_0013f1b8(0x31,0);
+  asdTMTexTableLoadTmx(0x31,0);
   do {
     FUN_001acf98(0x31,temp_v1);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 2);
-  temp_v0 = FUN_0014bce0(0);
+  temp_v0 = spriteHandleCreate(0);
   *(unsigned int *)(param_1 + 0x5d8) = temp_v0;
   FUN_001527d8(temp_v0,0xffffffff);
   FUN_00151408(*(unsigned int *)(param_1 + 0x5d8),0,0x646464ff);

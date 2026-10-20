@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 
 typedef int romwright_code(...);
 extern romwright_code *DAT_0058918c; /* 0x58918c */
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 unsigned int * FUN_0017e5fc(unsigned int param_1)
@@ -27,7 +27,7 @@ unsigned int * FUN_0017e5fc(unsigned int param_1)
   else {
     puVar4 = (unsigned int *)(*DAT_0058918c)(0x10000,0x100,0,0x1cc);
     if (puVar4 != (unsigned int *)0x0) {
-      FUN_002e6354(puVar4,0x1cc);
+      sysMemClear(puVar4,0x1cc);
       puVar4[1] = 0x2600;
       puVar4[2] = 0x2901;
       *puVar4 = 0x2600;

@@ -3,12 +3,12 @@
 extern "C" {
 
 int FUN_0019e52c(int);
-int FUN_003283ac(void);
+int scrSetResult(void);
 
 /* Supplied declaration required: FUN_0019e52c. */
 extern int FUN_002a4878(int);
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 extern int FUN_003e4d68(unsigned int);
 
 
@@ -31,7 +31,7 @@ unsigned int FUN_003cd700(int param_1)
   }
   temp_v2 = FUN_003e4d68(*(unsigned int *)(temp_v2 + temp_v0 * 4 + 0x2c4) & 0xffff);
   FUN_0019e52c(*(unsigned short *)(temp_v2 + 300));
-  FUN_003283ac();
+  scrSetResult();
   return 1;
 }
 

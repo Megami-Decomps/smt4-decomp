@@ -52,7 +52,7 @@ extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
 extern int DAT_005806a4; /* 0x5806a4 */
 extern int DAT_005806d4; /* 0x5806d4 */
-extern unsigned int DAT_005f15fc; /* 0x5f15fc */
+extern unsigned int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f161c; /* 0x5f161c */
 extern unsigned char DAT_005f161d; /* 0x5f161d */
 
@@ -144,7 +144,7 @@ void FUN_002b6f30(void)
   
   temp_v0 = DAT_005806d4;
   if (*(int *)(DAT_005806d4 + 4) == 8) {
-    puVar2 = &DAT_005f15fc;
+    puVar2 = &g_gameState;
     if (DAT_005f161c == '\0') {
       puVar2 = (unsigned int *)(unsigned int)DAT_005f161d;
     }

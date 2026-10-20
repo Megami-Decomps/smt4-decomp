@@ -14,8 +14,8 @@ int FUN_0015e420(...);
 int FUN_0015e8d0(unsigned char *, unsigned int, unsigned int);
 int FUN_0015ea28(unsigned char *, unsigned char *);
 int FUN_0015fea8(unsigned char *, unsigned char *, int);
-int FUN_001630d4(...);
-int FUN_0019d4d8(...);
+int asdMemoryAlloc(...);
+int asdMemoryAllocAligned(...);
 int FUN_002e342c(unsigned char *, unsigned int);
 int nw_snd_Sound3DManager_GetRequiredMemSize(...);
 int nw_snd_SoundArchivePlayer_GetRequiredStreamBufferSize(unsigned char *, unsigned char *);
@@ -58,7 +58,7 @@ extern unsigned int DAT_0063f4bc; /* 0x63f4bc */
 extern unsigned int DAT_0063f4c0; /* 0x63f4c0 */
 extern signed char DAT_0063f4c4; /* 0x63f4c4 */
 extern unsigned char DAT_0063f52c; /* 0x63f52c */
-extern unsigned int DAT_0064c014; /* 0x64c014 */
+extern unsigned int g_asdSoundListener; /* 0x64c014 */
 extern unsigned int DAT_0064c018; /* 0x64c018 */
 extern unsigned int DAT_0064c01c; /* 0x64c01c */
 
@@ -77,11 +77,11 @@ extern unsigned int DAT_0064c01c; /* 0x64c01c */
 /* Supplied declaration required: FUN_0015ea28. */
 extern int FUN_0015fe30(unsigned char *);
 /* Supplied declaration required: FUN_0015fea8. */
-/* Supplied declaration required: FUN_001630d4. */
-/* Supplied declaration required: FUN_0019d4d8. */
+/* Supplied declaration required: asdMemoryAlloc. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: FUN_002e342c. */
 extern int FUN_002eba64(unsigned int *);
-extern int FUN_0030ef8c(unsigned char *, unsigned char *, unsigned int);
+extern int rt_memcmp(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: nw_snd_Sound3DManager_GetRequiredMemSize. */
 /* Supplied declaration required: nw_snd_SoundArchivePlayer_GetRequiredStreamBufferSize. */
 extern unsigned int nw_snd_SoundDataManager_GetRequiredMemSize(unsigned char *, unsigned char *);
@@ -105,7 +105,7 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
   unsigned int uStack_34;
   
   FUN_002e342c(&DAT_0063e6cc,param_1);
-  temp_v0 = FUN_0030ef8c(&DAT_0063e6cc,&LAB_0013e318,4);
+  temp_v0 = rt_memcmp(&DAT_0063e6cc,&LAB_0013e318,4);
   if (temp_v0 != 0) {
     DAT_0063f52c = 1;
   }
@@ -117,13 +117,13 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
   temp_v1 = nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(&DAT_0063e324);
   temp_v2 = 0x10000;
   temp_v5 = (unsigned char *)0x1;
-  FUN_001630d4(0x10000,0x100,0,temp_v1);
+  asdMemoryAlloc(0x10000,0x100,0,temp_v1);
   DAT_0063e6b8 = temp_v2;
   FUN_0015e8d0(&DAT_0063e1e8,temp_v2,temp_v1);
   temp_v1 = nw_snd_SoundDataManager_GetRequiredMemSize(&DAT_0063e494,&DAT_0063e1e8);
   temp_v2 = 0x10000;
   temp_v5 = (unsigned char *)0x1;
-  FUN_001630d4(0x10000,0x100,0,temp_v1);
+  asdMemoryAlloc(0x10000,0x100,0,temp_v1);
   DAT_0063e6bc = temp_v2;
   FUN_0015e314(&DAT_0063e494,&DAT_0063e1e8,temp_v2,temp_v1);
   puVar4 = &DAT_0063e37c;
@@ -131,7 +131,7 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
   temp_v1 = 0x10000;
   temp_v6 = 1;
   temp_v5 = (unsigned char *)0x20;
-  FUN_0019d4d8(0x10000,0x100,0,puVar4);
+  asdMemoryAllocAligned(0x10000,0x100,0,puVar4);
   DAT_0063e6c0 = temp_v1;
   if (param_3 == (unsigned char *)0x0) {
     param_3 = &DAT_0063e37c;
@@ -140,7 +140,7 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
   temp_v1 = 0x10000;
   temp_v6 = 1;
   temp_v5 = (unsigned char *)0x20;
-  FUN_0019d4d8(0x10000,0x100,0,param_3);
+  asdMemoryAllocAligned(0x10000,0x100,0,param_3);
   uStack_34 = 0;
   temp_v5 = puVar4;
   temp_v6 = temp_v1;
@@ -153,7 +153,7 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
     nw_snd_Sound3DManager_GetRequiredMemSize(&DAT_0063ea3c,&DAT_0063e1e8);
     temp_v1 = 0x10000;
     temp_v5 = (unsigned char *)0x1;
-    FUN_001630d4(0x10000,0x100,0,puVar4);
+    asdMemoryAlloc(0x10000,0x100,0,puVar4);
     DAT_0063f4c0 = temp_v1;
     FUN_0015e1ec(&DAT_0063ea3c,&DAT_0063e1e8,temp_v1,puVar4);
     temp_v1 = 0;
@@ -183,14 +183,14 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
       FUN_0015e158(temp_v3 * 0x88 + 0x63ea78,&DAT_0063e37c,&DAT_0063ea3c);
       if ((DAT_0063f4c4 != '\0') && (temp_v3 < 0x10)) {
         if (((DAT_005c4c20 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c20), temp_v0 != 0)) {
-          DAT_0064c014 = (unsigned int)temp_v4;
-          DAT_0064c018 = DAT_0064c014;
-          DAT_0064c01c = DAT_0064c014;
+          g_asdSoundListener = (unsigned int)temp_v4;
+          DAT_0064c018 = g_asdSoundListener;
+          DAT_0064c01c = g_asdSoundListener;
         }
         temp_v2 = DAT_0064c01c;
         temp_v1 = DAT_0064c018;
         temp_v0 = temp_v3 * 0xc;
-        *(unsigned int *)(temp_v0 + 0x63f338) = DAT_0064c014;
+        *(unsigned int *)(temp_v0 + 0x63f338) = g_asdSoundListener;
         *(unsigned int *)(temp_v0 + 0x63f33c) = temp_v1;
         *(unsigned int *)(temp_v0 + 0x63f340) = temp_v2;
         FUN_0015e198(temp_v3 * 0x88 + 0x63ea78,temp_v0 + 0x63f338);

@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_001742e4(int, unsigned int);
-int FUN_0037b0c0(void);
+int asd3dSoundActorIsPlaying(void);
 
 extern unsigned int DAT_0063f4bc; /* 0x63f4bc */
 extern signed char DAT_0063f4c4; /* 0x63f4c4 */
 
 /* Supplied declaration required: FUN_001742e4. */
-/* Supplied declaration required: FUN_0037b0c0. */
+/* Supplied declaration required: asd3dSoundActorIsPlaying. */
 
 
 void FUN_0036be10(unsigned int param_1,unsigned int param_2)
@@ -21,7 +21,7 @@ void FUN_0036be10(unsigned int param_1,unsigned int param_2)
   unsigned int temp_v0;
   int temp_v1;
   
-  if (((DAT_0063f4c4 != '\0') && (param_1 < 0x10)) && (temp_v0 = param_1, FUN_0037b0c0(), temp_v0 != 0))
+  if (((DAT_0063f4c4 != '\0') && (param_1 < 0x10)) && (temp_v0 = param_1, asd3dSoundActorIsPlaying(), temp_v0 != 0))
   {
     temp_v1 = *(int *)(param_1 * 4 + 0x63f2f8);
     if (temp_v1 != 0) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0043dd20; /* 0x43dd20 */
+extern unsigned char g_useCounter; /* 0x43dd20 */
 
 
 void FUN_002cf384(void)
@@ -12,8 +12,8 @@ void FUN_002cf384(void)
 {
   int temp_v0;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0043dd20 + 0x4));
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043dd20 + 0x4)) + 0x74c) = 0;
+  temp_v0 = (*(int *)((unsigned char *)&g_useCounter + 0x4));
+  *(unsigned char *)((*(int *)((unsigned char *)&g_useCounter + 0x4)) + 0x74c) = 0;
   *(unsigned int *)(temp_v0 + 0x744) = 2;
   *(unsigned char *)(temp_v0 + 0x74d) = *(char *)(temp_v0 + 0x74d) == '\0';
   return;

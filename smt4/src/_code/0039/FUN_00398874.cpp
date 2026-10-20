@@ -8,13 +8,13 @@ int FUN_00232698(int);
 int FUN_00232848(void);
 int FUN_00296ee0(int, int);
 int FUN_002b8838(unsigned int);
-int FUN_002bd8e8(int, int);
+int timerStart(int, int);
 
 /* Supplied declaration required: FUN_00232698. */
 /* Supplied declaration required: FUN_00232848. */
 /* Supplied declaration required: FUN_00296ee0. */
 /* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 extern unsigned int FUN_002beda4(int);
 extern int FUN_002bf818(void);
 
@@ -46,7 +46,7 @@ void FUN_00398874(int param_1)
     }
     FUN_002b8838(temp_v1);
     FUN_00296ee0(param_1,0xb);
-    FUN_002bd8e8(param_1 + 0x708,0);
+    timerStart(param_1 + 0x708,0);
   }
   temp_v1 = FUN_002beda4(param_1 + 0x708);
   *(unsigned int *)(param_1 + 0xa4) = temp_v1;

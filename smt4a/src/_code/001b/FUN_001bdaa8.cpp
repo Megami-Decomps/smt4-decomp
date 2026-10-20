@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-extern unsigned char DAT_006433d0; /* 0x6433d0 */
+extern unsigned char g_dspsndState; /* 0x6433d0 */
 
 extern int FUN_001afd94(void);
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_SetDspReverbEffect. */
@@ -58,7 +58,7 @@ void FUN_001bdaa8(int param_1,int param_2,unsigned short *param_3)
     *(unsigned int *)(temp_v0 + 0x3c) = *(unsigned int *)(param_3 + 10);
     *(unsigned int *)(temp_v0 + 0x40) = *(unsigned int *)(param_3 + 0xc);
   }
-  nn_snd_CTR_Dspsnd_SetDspReverbEffect(&DAT_006433d0);
+  nn_snd_CTR_Dspsnd_SetDspReverbEffect(&g_dspsndState);
   return;
 }
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00168770(void);
 int FUN_00168e00(...);
 int FUN_001835b4(...);
@@ -22,10 +22,10 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168770. */
 /* Supplied declaration required: FUN_00168e00. */
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -55,8 +55,8 @@ void FUN_003f61b4(int param_1,int param_2,int param_3)
   
   param_1 = param_1 + 0xbc;
   temp_v8 = 0.26f;
-  FUN_001879d0(DAT_0059dbb4);
-  FUN_001677c0();
+  FUN_001879d0(g_renderCtx);
+  efctSetSpeed();
   param_2 = param_2 + (int)temp_v8;
   FUN_001835b4(2,0x31,0x74,param_2,param_3,0xc9);
   FUN_001835b4(2,0x31,0x73,param_2,param_3,0xc9);
@@ -90,10 +90,10 @@ void FUN_003f61b4(int param_1,int param_2,int param_3)
       temp_v7 = temp_v3 - temp_v2;
     }
   }
-  temp_v3 = DAT_0059dbb4;
+  temp_v3 = g_renderCtx;
   temp_v0 = 0;
-  if (*(int *)(DAT_0059dbb4 + *(int *)(DAT_0059dbb4 + 0x1318) * 4 + 0x1320) == 3) {
-    temp_v6 = DAT_0059dbb4 + 0x1318 + *(int *)(DAT_0059dbb4 + 0x1318) * 4;
+  if (*(int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1318) * 4 + 0x1320) == 3) {
+    temp_v6 = g_renderCtx + 0x1318 + *(int *)(g_renderCtx + 0x1318) * 4;
     temp_v5 = *(int *)(temp_v6 + 8);
     *(unsigned int *)(temp_v6 + 8) = 0;
     if (*(char *)(temp_v3 + 0x1330) != '\0' || temp_v5 != 0) {
@@ -105,9 +105,9 @@ void FUN_003f61b4(int param_1,int param_2,int param_3)
   FUN_00168e00(*(short *)(temp_v1 + 8) + param_2,(int)*(short *)(temp_v1 + 10) + param_3 + temp_v7,
                (int)**(short **)(temp_v1 + 0xc),temp_v2);
   FUN_001835b4(2,0x31,0x75,param_2,param_3,0xce);
-  temp_v1 = DAT_0059dbb4;
+  temp_v1 = g_renderCtx;
   if (temp_v0) {
-    piVar8 = (int *)(DAT_0059dbb4 + 0x1318);
+    piVar8 = (int *)(g_renderCtx + 0x1318);
     temp_v2 = piVar8[*piVar8 + 2];
     piVar8[*piVar8 + 2] = 3;
     if (*(char *)(temp_v1 + 0x1330) != '\0' || temp_v2 != 3) {
@@ -116,7 +116,7 @@ void FUN_003f61b4(int param_1,int param_2,int param_3)
     }
   }
   FUN_00168770();
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0010032e(unsigned int *);
-int FUN_00163060(int, int, int, int);
+int asdMemoryAllocTracked(int, int, int, int);
 int FUN_0019a364(unsigned int *, unsigned int, int);
 int FUN_002e3140(void);
 int FUN_002e59f8(unsigned int, int, int);
-int FUN_002e6354(void);
+int sysMemClear(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,14 +17,14 @@ typedef struct {
 } param_4_stack;
 
 extern int DAT_005b3fbc; /* 0x5b3fbc */
-extern unsigned int DAT_005b3fc0; /* 0x5b3fc0 */
+extern unsigned int g_asdFileMutex; /* 0x5b3fc0 */
 
 /* Supplied declaration required: FUN_0010032e. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_0019a364. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002e59f8. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 int FUN_001abae0(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -39,11 +39,11 @@ int FUN_001abae0(unsigned int param_1,unsigned int param_2,unsigned int param_3,
   
   puVar4 = (unsigned int *)&temp_v3;
   temp_v3 = param_4;
-  FUN_0010032e(&DAT_005b3fc0);
+  FUN_0010032e(&g_asdFileMutex);
   temp_v3 = 1;
   temp_v1 = 0x100;
-  FUN_00163060(0x100,0x100,0,0x154);
-  FUN_002e6354();
+  asdMemoryAllocTracked(0x100,0x100,0,0x154);
+  sysMemClear();
   temp_v0 = DAT_005b3fbc;
   temp_v2 = temp_v1;
   if (DAT_005b3fbc != 0) {
@@ -57,7 +57,7 @@ int FUN_001abae0(unsigned int param_1,unsigned int param_2,unsigned int param_3,
   }
   DAT_005b3fbc = temp_v2;
   FUN_002e59f8(param_1,temp_v1,0x14c);
-  FUN_0019a364(puVar4,DAT_005b3fc0,1);
+  FUN_0019a364(puVar4,g_asdFileMutex,1);
   if ((int)puVar4 < 0) {
     FUN_002e3140();
   }

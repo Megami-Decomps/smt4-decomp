@@ -1,23 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004015e8` (_code @ 0x4015e8, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_004ffba8(unsigned int);
+/* Link to a record whose word at +4 is checked by FUN_004ffba8. */
+typedef struct {
+    u8 unk00[4];
+    u32 key;            /* 0x04 */
+} Record;
 
+typedef struct {
+    u8 unk00[0x1c];
+    Record *record;     /* 0x1c */
+} Owner;
 
-unsigned int FUN_004015e8(int param_1)
+int FUN_004ffba8(u32 key);
 
+/* True when the owner has no record, or the record's key passes FUN_004ffba8. */
+u32 FUN_004015e8(Owner *owner)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if ((*(int *)(param_1 + 0x1c) == 0) ||
-     (temp_v0 = FUN_004ffba8(*(unsigned int *)(*(int *)(param_1 + 0x1c) + 4)), temp_v1 = 0, temp_v0 != 0)) {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    if (owner->record == NULL) {
+        return 1;
+    }
+    if (FUN_004ffba8(owner->record->key) == 0) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

@@ -95,13 +95,16 @@ def command(compiler, unit, source, obj):
     if "thumb" in unit:  # ARM: compile each function in the mode it was decoded in
         modes = COMPILER.get("modes", {"arm": "-marm", "thumb": "-mthumb"})
         mode = [modes["thumb"] if unit["thumb"] else modes["arm"]]
+    # A unit may carry its own "cflags" in config/project.json: code the original build compiled
+    # differently (e.g. -Ospace, which calls __aeabi_idivmod where -Otime multiplies). Needs evidence.
+    cflags = unit.get("cflags", COMPILER["cflags"])
     if FAMILY == "armcc":
         system = Path(compiler).resolve().parent.parent / "include"
         includes = ["-J", str(system)] if system.is_dir() else []
         return (
             launcher()
             + [compiler, "-c"]
-            + COMPILER["cflags"]
+            + cflags
             + mode
             + includes
             + ["-I", str(ROOT / "include"), "-I", str(SHARED_INCLUDE), "-o", str(obj), str(source)]

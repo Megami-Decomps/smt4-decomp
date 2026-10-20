@@ -14,7 +14,7 @@ int FUN_003af1c4(...);
 int FUN_003da0bc(...);
 int nw_snd_SoundHeap_LoadState(...);
 
-int FUN_0019db48(unsigned int *);
+int btlAiScriptCall(unsigned int *);
 int FUN_001d2710(...);
 int FUN_00227ab4(...);
 int FUN_00227b14(int *, int, int, int);
@@ -30,7 +30,7 @@ int FUN_0027e3f8(...);
 int FUN_00292dd0(int);
 int FUN_002a8764(void);
 int FUN_002b8838(...);
-int FUN_002c4938(int, int);
+int memClear(int, int);
 int FUN_0033a780(...);
 int FUN_003ae8ec(int *);
 int FUN_003ca32c(...);
@@ -48,14 +48,14 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int DAT_0043427c; /* 0x43427c */
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlScriptUnit; /* 0x43427c */
+extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_00435d18; /* 0x435d18 */
-extern unsigned int *DAT_00435d48; /* 0x435d48 */
+extern unsigned int *g_btlEvent; /* 0x435d48 */
 extern int *DAT_00439ca8; /* 0x439ca8 */
 extern int DAT_004e316c; /* 0x4e316c */
 
-/* Supplied declaration required: FUN_0019db48. */
+/* Supplied declaration required: btlAiScriptCall. */
 /* Supplied declaration required: FUN_001d2710. */
 /* Supplied declaration required: FUN_00227218. */
 /* Supplied declaration required: FUN_002276f8. */
@@ -82,8 +82,8 @@ extern int *FUN_00293230(int);
 /* Supplied declaration required: FUN_002b8838. */
 extern int FUN_002b898c(void);
 /* Supplied declaration required: FUN_002c1dd8. */
-/* Supplied declaration required: FUN_002c4938. */
-extern int *FUN_002c564c(unsigned int);
+/* Supplied declaration required: memClear. */
+extern int *jyoucyuGetTableEntry(unsigned int);
 extern int FUN_002e14e4(unsigned int);
 /* Supplied declaration required: FUN_0033a780. */
 /* Supplied declaration required: FUN_003ae8ec. */
@@ -120,7 +120,7 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
   
   piVar11 = (int *)*param_1;
   piVar2 = (int *)piVar11[0x21];
-  temp_v2 = DAT_0043427c + (int)piVar2 * 0xf1c;
+  temp_v2 = g_btlScriptUnit + (int)piVar2 * 0xf1c;
   puVar8 = (unsigned int *)(temp_v2 + 4);
   switch(param_2) {
   case 1:
@@ -148,8 +148,8 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
     *(unsigned short *)(*(int *)(temp_v2 + 0x2c) + 0x14e) = 0;
     break;
   case 2:
-    FUN_0019db48(puVar8);
-    FUN_002c4938(temp_v2 + 0x3c,0x85);
+    btlAiScriptCall(puVar8);
+    memClear(temp_v2 + 0x3c,0x85);
     FUN_00229098(param_1);
     temp_v2 = FUN_002b898c();
     piVar2 = (int *)FUN_00293230(*param_1);
@@ -168,7 +168,7 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
     break;
   case 3:
   case 0x11:
-    FUN_002c4938(temp_v2 + 0x3c,0x85);
+    memClear(temp_v2 + 0x3c,0x85);
     FUN_00229098(param_1);
     return param_1;
   case 5:
@@ -176,7 +176,7 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
     return param_1;
   case 7:
     FUN_003ae8ec(DAT_00439ca8);
-    FUN_002c4938(temp_v2 + 0x3c,0x85);
+    memClear(temp_v2 + 0x3c,0x85);
     piVar2 = (int *)FUN_002a8764();
     return piVar2;
   case 8:
@@ -215,7 +215,7 @@ LAB_003d243c:
     return piVar11;
   case 0xd:
     FUN_0033a780(piVar11);
-    FUN_003d647c(DAT_004342c8);
+    FUN_003d647c(g_btlMain);
     *(unsigned int *)(temp_v2 + 0x10) = 0;
     FUN_00256898(0,0);
     piVar2 = (int *)0xed;
@@ -292,26 +292,26 @@ LAB_003d243c:
     FUN_003ca4b0(param_1,puVar8);
     return param_1;
   case 0x18:
-    piVar2 = (int *)FUN_0027e3b8(DAT_00435d48);
+    piVar2 = (int *)FUN_0027e3b8(g_btlEvent);
     if (piVar2 == (int *)0x0) {
       temp_v4 = (int)*(short *)(*(int *)(temp_v2 + 0x24) + 0x6e);
       if (*(short *)(*(int *)(temp_v2 + 0x2c) + 0x14c) != 0xb) {
-        puVar4 = DAT_00435d48;
-        FUN_0027e3f8(DAT_00435d48,3,temp_v4,0);
+        puVar4 = g_btlEvent;
+        FUN_0027e3f8(g_btlEvent,3,temp_v4,0);
         if (puVar4 == (unsigned int *)0x0) {
           return (int *)0x0;
         }
       }
       else {
-        puVar4 = DAT_00435d48;
-        FUN_0027e3f8(DAT_00435d48,7,temp_v4,0);
+        puVar4 = g_btlEvent;
+        FUN_0027e3f8(g_btlEvent,7,temp_v4,0);
         if (puVar4 == (unsigned int *)0x0) {
           return (int *)0x0;
         }
       }
 code_r0x0027e38c:
-      puVar4 = DAT_00435d48;
-      *DAT_00435d48 = 9;
+      puVar4 = g_btlEvent;
+      *g_btlEvent = 9;
       *(unsigned char *)(puVar4 + 0xb) = 0;
       piVar2 = (int *)(DAT_00435d18 + 0x2f98);
       *piVar2 = 0;
@@ -321,7 +321,7 @@ code_r0x0027e38c:
   case 0x1c:
     FUN_002569ac(param_1,piVar2);
     FUN_00227ab4(param_1,puVar8);
-    piVar2 = (int *)FUN_0027e3b8(DAT_00435d48);
+    piVar2 = (int *)FUN_0027e3b8(g_btlEvent);
     if (piVar2 == (int *)0x0) goto code_r0x0027e38c;
     break;
   case 0x1f:
@@ -345,16 +345,16 @@ code_r0x0027e38c:
         return piVar2;
       }
     }
-    piVar2 = (int *)FUN_0027e3b8(DAT_00435d48);
+    piVar2 = (int *)FUN_0027e3b8(g_btlEvent);
     if (piVar2 == (int *)0x0) {
-      puVar4 = DAT_00435d48;
-      FUN_0027e3f8(DAT_00435d48,4,(int)*(short *)(*(int *)(temp_v2 + 0x24) + 0x6e),0);
+      puVar4 = g_btlEvent;
+      FUN_0027e3f8(g_btlEvent,4,(int)*(short *)(*(int *)(temp_v2 + 0x24) + 0x6e),0);
       piVar2 = (int *)0x0;
       if (puVar4 != (unsigned int *)0x0) goto code_r0x0027e38c;
     }
     break;
   case 0x23:
-    temp_v4 = DAT_0043427c;
+    temp_v4 = g_btlScriptUnit;
     if ((**(unsigned int **)(temp_v2 + 0x24) & 0x10) == 0) {
       FUN_003af1c4(DAT_00439ca8);
     }
@@ -364,9 +364,9 @@ code_r0x0027e38c:
     FUN_0022a304();
     FUN_0027de24(DAT_00435d18);
     FUN_0027dd9c(DAT_00435d18);
-    *(unsigned int *)(DAT_004342c8 + 0x634) = *(unsigned int *)(DAT_004342c8 + 0x634) & 0xffffbfff;
+    *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) & 0xffffbfff;
     FUN_00227218();
-    piVar2 = (int *)FUN_002c564c(1);
+    piVar2 = (int *)jyoucyuGetTableEntry(1);
     if (piVar2 == (int *)0x0) {
       FUN_002c1dd8(2);
       temp_v2 = FUN_002e14e4(2);

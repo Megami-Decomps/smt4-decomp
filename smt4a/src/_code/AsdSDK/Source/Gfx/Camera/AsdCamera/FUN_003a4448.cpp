@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001630d4(int, int, int, int, int);
-int FUN_00168188(void);
+int asdMemoryAlloc(int, int, int, int, int);
+int asdMemoryGetDefaultAllocator(void);
 int FUN_001b0e10(int *, unsigned int, unsigned int);
 int FUN_001b0e44(int *, int *, unsigned int, unsigned int, int);
 int FUN_001b12a4(int *, int *);
@@ -33,9 +33,9 @@ typedef struct {
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_001630d4. */
-/* Supplied declaration required: FUN_00168188. */
-extern unsigned int FUN_001ad6fc(void);
+/* Supplied declaration required: asdMemoryAlloc. */
+/* Supplied declaration required: asdMemoryGetDefaultAllocator. */
+extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: FUN_001b0e10. */
 /* Supplied declaration required: FUN_001b0e44. */
 /* Supplied declaration required: FUN_001b12a4. */
@@ -73,7 +73,7 @@ int FUN_003a4448(int param_1)
   unsigned char temp_v20;
   
   temp_v0 = 0x100;
-  FUN_001630d4(0x100,0x100,0,0x18,1);
+  asdMemoryAlloc(0x100,0x100,0,0x18,1);
   temp_v5 = *(int *)(param_1 + 0x48);
   temp_v1 = param_1 + 0x48;
   if (temp_v5 != 0) {
@@ -98,8 +98,8 @@ int FUN_003a4448(int param_1)
     else {
       temp_v6 = 0;
     }
-    temp_v2 = FUN_00168188();
-    temp_v3 = FUN_001ad6fc();
+    temp_v2 = asdMemoryGetDefaultAllocator();
+    temp_v3 = asdMemoryGetAllocatorA();
     temp_v12 = 1;
     temp_v13 = 8;
     temp_v14 = 4;
@@ -161,7 +161,7 @@ LAB_003a459c:
           temp_v15 = 0x40;
           temp_v14 = (unsigned int)temp_v10;
           temp_v16 = romwright_piece_3_1((((unsigned int)(temp_v16) >> 8) & 0xffffffU),1);
-          piVar5 = (int *)FUN_00168188();
+          piVar5 = (int *)asdMemoryGetDefaultAllocator();
           piVar6 = (int *)(**(romwright_code **)(*piVar5 + 8))(piVar5,0x74,4);
           piVar11 = (int *)0x0;
           if (piVar6 != (int *)0x0) {

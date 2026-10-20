@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
 } param_1_stack;
 
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_001546e8(unsigned int);
 /* Supplied declaration required: FUN_00155050. */
@@ -236,7 +236,7 @@ LAB_0015783c:
   temp_v7 = *(unsigned int *)(param_1 + 0x52c);
   temp_v1 = FUN_00169d8c(temp_v7);
   temp_v3 = FUN_00169db4(temp_v7);
-  temp_v7 = *(unsigned int *)(DAT_0059dbb4 + 0x52c);
+  temp_v7 = *(unsigned int *)(g_renderCtx + 0x52c);
   temp_v5 = FUN_00169d8c();
   temp_v5 = temp_v5 - 1;
   temp_v6 = FUN_00169db4(temp_v7);
@@ -251,7 +251,7 @@ LAB_0015783c:
       temp_v4 = (int)temp_v4 / 2;
     }
   }
-  temp_v6 = DAT_0059dbb4;
+  temp_v6 = g_renderCtx;
   temp_v1 = (temp_v5 - temp_v1) + 1;
   if (temp_v1 < 0) {
     temp_v1 = 0;
@@ -280,7 +280,7 @@ LAB_0015783c:
   if ((int)temp_v4 < (int)temp_v9) {
     temp_v9 = temp_v4;
   }
-  piVar12 = (int *)(DAT_0059dbb4 + 0x1338);
+  piVar12 = (int *)(g_renderCtx + 0x1338);
   temp_v2 = temp_v2 | (temp_v1 << 0x10);
   temp_v4 = piVar12[*piVar12 + 2];
   piVar12[*piVar12 + 2] = temp_v2;
@@ -288,17 +288,17 @@ LAB_0015783c:
     (**(romwright_code **)(temp_v6 + 0x1354))();
     *(unsigned char *)(temp_v6 + 0x1350) = 0;
   }
-  temp_v3 = DAT_0059dbb4;
+  temp_v3 = g_renderCtx;
   temp_v9 = temp_v9 | (temp_v8 << 0x10);
-  piVar12 = (int *)(DAT_0059dbb4 + 0x1358);
+  piVar12 = (int *)(g_renderCtx + 0x1358);
   temp_v4 = piVar12[*piVar12 + 2];
   piVar12[*piVar12 + 2] = temp_v9;
   if (*(char *)(temp_v3 + 0x1370) != '\0' || temp_v4 != temp_v9) {
     (**(romwright_code **)(temp_v3 + 0x1374))();
     *(unsigned char *)(temp_v3 + 0x1370) = 0;
   }
-  temp_v3 = DAT_0059dbb4;
-  piVar12 = (int *)(DAT_0059dbb4 + 0x1318);
+  temp_v3 = g_renderCtx;
+  piVar12 = (int *)(g_renderCtx + 0x1318);
   temp_v5 = piVar12[*piVar12 + 2];
   piVar12[*piVar12 + 2] = 3;
   if (*(char *)(temp_v3 + 0x1330) != '\0' || temp_v5 != 3) {

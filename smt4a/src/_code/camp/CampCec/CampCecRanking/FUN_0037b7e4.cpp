@@ -6,16 +6,16 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_0014e188(...);
-int FUN_0014e38c(...);
+int asdProcessCreateSimple(...);
 int FUN_001505ac(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_001654f8(...);
 int FUN_00180118(...);
 int FUN_001acf98(...);
 int FUN_0023723c(...);
 int FUN_002804b0(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_002e6dd0(...);
 int FUN_00319aec(...);
 int FUN_003fd63c(...);
@@ -47,23 +47,23 @@ extern unsigned char DAT_0052c050; /* 0x52c050 */
 extern unsigned char DAT_0052c104; /* 0x52c104 */
 extern unsigned char DAT_0052c254; /* 0x52c254 */
 extern unsigned char DAT_0052c284; /* 0x52c284 */
-extern unsigned int *DAT_0057f11c; /* 0x57f11c */
+extern unsigned int *g_campCecRanking; /* 0x57f11c */
 
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_0014af84(void);
-extern unsigned int FUN_0014bce0(unsigned int);
+extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001654f8. */
 /* Supplied declaration required: FUN_00180118. */
 extern int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_0023723c. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd0. */
 /* Supplied declaration required: FUN_00319aec. */
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
@@ -92,26 +92,26 @@ void FUN_0037b7e4(void)
   unsigned char *temp_v10;
   unsigned int temp_v11;
   
-  if (DAT_0057f11c == (unsigned int *)0x0) {
+  if (g_campCecRanking == (unsigned int *)0x0) {
     puVar2 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x274,1);
-    DAT_0057f11c = puVar2;
+    asdMemoryAllocTracked(0x100,0x100,0,0x274,1);
+    g_campCecRanking = puVar2;
   }
-  puVar2 = DAT_0057f11c;
-  FUN_002e6354();
+  puVar2 = g_campCecRanking;
+  sysMemClear();
   puVar3 = &LAB_0037bbe4;
   temp_v7 = 0;
-  FUN_0014e38c(&LAB_0037bbe4,3,0,0,&LAB_002c0240,0);
+  asdProcessCreateSimple(&LAB_0037bbe4,3,0,0,&LAB_002c0240,0);
   *puVar2 = (unsigned int)puVar3;
   temp_v7 = 0;
   temp_v8 = puVar3;
-  FUN_0015155c(&LAB_0037bbfc,0x7e,0,0,FUN_002bfd94,0);
+  taskCreateDraw(&LAB_0037bbfc,0x7e,0,0,FUN_002bfd94,0);
   temp_v8 = (unsigned char *)*puVar2;
   temp_v7 = 0;
-  FUN_0015155c(&LAB_0037bc18,0xda,0,0,FUN_002bfd94,0);
+  taskCreateDraw(&LAB_0037bc18,0xda,0,0,FUN_002bfd94,0);
   temp_v8 = (unsigned char *)*puVar2;
   temp_v7 = 0;
-  FUN_0015155c(&LAB_0037bc38,0xea,0,0,FUN_00343e5c,0);
+  taskCreateDraw(&LAB_0037bc38,0xea,0,0,FUN_00343e5c,0);
   puVar2[1] = 0;
   FUN_001acf98(0x2e,1);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar2 + 0x26);
@@ -124,22 +124,22 @@ void FUN_0037b7e4(void)
   FUN_0014e188(puVar2 + 3,0x2e,1000,puVar2 + 0x26,0x65);
   temp_v5 = 0;
   do {
-    temp_v1 = FUN_0014bce0(0);
+    temp_v1 = spriteHandleCreate(0);
     temp_v4 = temp_v5 + 1;
     puVar2[temp_v5 + 0x82] = temp_v1;
     temp_v5 = temp_v4;
   } while (temp_v4 < 0x14);
   temp_v5 = 0;
   do {
-    temp_v1 = FUN_0014bce0(0);
+    temp_v1 = spriteHandleCreate(0);
     temp_v4 = temp_v5 + 1;
     puVar2[temp_v5 + 0x96] = temp_v1;
     temp_v5 = temp_v4;
   } while (temp_v4 < 7);
   FUN_002804b0(&LAB_0037bc58,puVar2 + 0x2e,0);
   FUN_002804b0(&LAB_0037bc6c,puVar2 + 0x2f,0);
-  puVar2 = DAT_0057f11c;
-  if (DAT_0057f11c != (unsigned int *)0x0) {
+  puVar2 = g_campCecRanking;
+  if (g_campCecRanking != (unsigned int *)0x0) {
     temp_v4 = FUN_0014af84();
     FUN_002e6dd0(puVar2 + 0x31,0xf0);
     FUN_002e6dd0(puVar2 + 0x6d,0x54);
@@ -168,8 +168,8 @@ void FUN_0037b7e4(void)
       puVar5 = puVar5 + 2;
     } while (temp_v3 != 0);
   }
-  puVar2 = DAT_0057f11c;
-  if (DAT_0057f11c != (unsigned int *)0x0) {
+  puVar2 = g_campCecRanking;
+  if (g_campCecRanking != (unsigned int *)0x0) {
     FUN_002e6dd0(&temp_v7,0x80);
     temp_v5 = 0;
     do {

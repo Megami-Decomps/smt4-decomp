@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002c0c74(...);
-int FUN_002c0cec(int, int);
+int dataTableGetCount(...);
+int dataTableGet(int, int);
 
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 
 extern int FUN_00298dc8(unsigned int);
 extern int FUN_002c09d0(void);
-/* Supplied declaration required: FUN_002c0c74. */
-extern int FUN_002c0cc4(void);
-/* Supplied declaration required: FUN_002c0cec. */
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(void);
+/* Supplied declaration required: dataTableGet. */
 
 
 int * FUN_00328b1c(int param_1)
@@ -27,20 +27,20 @@ int * FUN_00328b1c(int param_1)
   int *piVar5;
   
   temp_v3 = 0;
-  FUN_002c0cec(0x23,6);
-  temp_v0 = FUN_002c0c74();
-  if (0 < temp_v0 + *(int *)(DAT_00433158 + 0x414)) {
+  dataTableGet(0x23,6);
+  temp_v0 = dataTableGetCount();
+  if (0 < temp_v0 + *(int *)(g_aocSystem + 0x414)) {
     do {
-      temp_v1 = FUN_002c0cec(0x23,6);
-      temp_v0 = FUN_002c0cc4();
-      temp_v2 = FUN_002c0c74(temp_v1);
+      temp_v1 = dataTableGet(0x23,6);
+      temp_v0 = dataTableGetEntries();
+      temp_v2 = dataTableGetCount(temp_v1);
       if (temp_v3 < temp_v2) {
         piVar5 = (int *)(temp_v0 + temp_v3 * 0xc);
       }
       else {
         piVar5 = (int *)0x0;
-        if (temp_v3 < *(int *)(DAT_00433158 + 0x414) + temp_v2) {
-          piVar5 = (int *)(*(int *)(DAT_00433158 + 0x418) + (temp_v3 - temp_v2) * 0xc);
+        if (temp_v3 < *(int *)(g_aocSystem + 0x414) + temp_v2) {
+          piVar5 = (int *)(*(int *)(g_aocSystem + 0x418) + (temp_v3 - temp_v2) * 0xc);
         }
       }
       if ((((*piVar5 == param_1) &&
@@ -50,9 +50,9 @@ int * FUN_00328b1c(int param_1)
         return piVar5;
       }
       temp_v3 = temp_v3 + 1;
-      FUN_002c0cec(0x23,6);
-      temp_v0 = FUN_002c0c74();
-    } while ((int)temp_v3 < temp_v0 + *(int *)(DAT_00433158 + 0x414));
+      dataTableGet(0x23,6);
+      temp_v0 = dataTableGetCount();
+    } while ((int)temp_v3 < temp_v0 + *(int *)(g_aocSystem + 0x414));
   }
   return (int *)0x0;
 }

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019a46c(unsigned int *, int, int);
 int FUN_001b57a8(...);
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 int FUN_00427a10(unsigned int, unsigned char *);
 int FUN_00427e68(int, int);
 int rt_memcpy_w(unsigned char *, int, int);
@@ -48,7 +48,7 @@ extern int FUN_0015a75c(void);
 extern unsigned int FUN_0016ccfc(void);
 /* Supplied declaration required: FUN_0019a46c. */
 /* Supplied declaration required: FUN_001b57a8. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00427a10. */
 extern int FUN_00427e28(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00427e68. */
@@ -79,7 +79,7 @@ void FUN_00429048(unsigned int param_1,int *param_2,int param_3)
         FUN_0019a46c(&DAT_0061b078,param_3,0xf);
       }
       else {
-        FUN_002e6354(&DAT_0061b078,0xf);
+        sysMemClear(&DAT_0061b078,0xf);
       }
       temp_v1 = FUN_00427e28(temp_v4,&DAT_0061b000,0);
       if (-1 < temp_v1) {

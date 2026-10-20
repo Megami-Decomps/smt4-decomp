@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_0030ea58(int, unsigned int);
 
 extern unsigned int DAT_00573800; /* 0x573800 */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_0030ea58. */
 extern int FUN_003e8430(void);
 extern int FUN_004f59b0(int);
@@ -24,7 +24,7 @@ int FUN_004f9a20(int param_1)
   int temp_v2;
   int *piVar4;
   
-  FUN_0014aa78();
+  btlGetMainState();
   temp_v0 = FUN_003e8430();
   if (temp_v0 != 0) {
     temp_v0 = -1;

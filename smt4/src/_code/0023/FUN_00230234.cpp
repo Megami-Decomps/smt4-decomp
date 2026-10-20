@@ -29,7 +29,7 @@ struct fn_00230234_arg0 {
 /* Supplied declaration required: FUN_002305e8. */
 /* Supplied declaration required: FUN_0028c040. */
 /* Supplied declaration required: FUN_00292ca0. */
-extern int FUN_0029a034(char *, unsigned int);
+extern int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: FUN_0029a0cc. */
 /* Supplied declaration required: FUN_0029a0e8. */
 /* Supplied declaration required: FUN_0029a128. */
@@ -61,7 +61,7 @@ void FUN_00230234(fn_00230234_arg0 *param_1)
   FUN_00230558(1);
   FUN_002305e8(0);
   if (param_1->field_0x15d48 == 0) {
-    temp_v1 = FUN_0029a034("player/pl_dammy.bam",7);
+    temp_v1 = asdMdlManagerCreateSecondList("player/pl_dammy.bam",7);
     param_1->field_0x15d48 = temp_v1;
   }
   param_1->field_0x15d28 = 0;

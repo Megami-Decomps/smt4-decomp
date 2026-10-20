@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00220fb0(int *, int, int);
+int logFormatBuffer(int *, int, int);
 int FUN_002327e0(int, int *);
 int FUN_0026a704(void);
 int FUN_00295660(int, int *);
@@ -19,7 +19,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0019e0c0(unsigned int);
-/* Supplied declaration required: FUN_00220fb0. */
+/* Supplied declaration required: logFormatBuffer. */
 /* Supplied declaration required: FUN_002327e0. */
 /* Supplied declaration required: FUN_0026a704. */
 /* Supplied declaration required: FUN_00295660. */
@@ -98,7 +98,7 @@ void FUN_00397b40(int param_1)
 LAB_00397cf4:
         temp_v1 = temp_v1 + 1;
         if (temp_v1 >= 9) {
-          FUN_00220fb0(&uStack_30,param_1 + 0x94e,1);
+          logFormatBuffer(&uStack_30,param_1 + 0x94e,1);
           temp_v1 = FUN_00309fcc((unsigned int *)&uStack_30,param_1 + 0x94e);
           if ((*piVar3 == 0) && (temp_v1 < 6)) {
             FUN_0026a704();

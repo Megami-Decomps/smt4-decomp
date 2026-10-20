@@ -13,7 +13,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_001293a4. */
-extern unsigned int FUN_001321e0(int *);
+extern unsigned int vectorSize48(int *);
 /* Supplied declaration required: FUN_002ee9c0. */
 
 
@@ -26,7 +26,7 @@ void FUN_00128fae(unsigned int param_1,int *param_2,unsigned int param_3,unsigne
   int temp_v2;
   
   temp_v2 = param_4;
-  temp_v2 = FUN_001321e0(param_2);
+  temp_v2 = vectorSize48(param_2);
   FUN_002ee9c0(param_1,&temp_v2);
   temp_v1 = param_2[1];
   for (temp_v0 = *param_2; temp_v0 != temp_v1; temp_v0 = temp_v0 + 0x30) {

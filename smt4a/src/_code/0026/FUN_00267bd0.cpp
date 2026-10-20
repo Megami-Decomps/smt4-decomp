@@ -1,24 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00267bd0` (_code @ 0x267bd0, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Returns the signed byte at +0x10 of the global state, or 0 when its field at +8 is clear. */
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f578; /* 0x57f578 */
+typedef struct State {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 active;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ s8 value;
+} State;
 
+extern State *DAT_0057f578;
 
-int FUN_00267bd0(void)
-
+s32 FUN_00267bd0(void)
 {
-  int temp_v0;
-  
-  if (*(int *)(DAT_0057f578 + 8) != 0) {
-    temp_v0 = (int)*(char *)(DAT_0057f578 + 0x10);
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    s32 value;
+
+    if (DAT_0057f578->active != 0) {
+        value = DAT_0057f578->value;
+    } else {
+        value = 0;
+    }
+    return value;
 }
 
-} /* extern "C" */
+}

@@ -22,7 +22,7 @@ int FUN_002451c4(...);
 int FUN_002505c0(...);
 int FUN_00254f58(...);
 int FUN_0027da30(...);
-int FUN_002c415c(...);
+int asdMemFree(...);
 int FUN_00338458(...);
 int FUN_00339e38(...);
 int FUN_0033a01c(...);
@@ -39,7 +39,7 @@ int FUN_00270028(...);
 int FUN_0027e3f8(...);
 int FUN_0027e6f4(...);
 int FUN_002881bc(...);
-int FUN_00293f98(...);
+int aocHandleButtons(...);
 int FUN_00297468(...);
 int FUN_002b06c4(...);
 int FUN_002b7bca(...);
@@ -47,7 +47,7 @@ int FUN_002be624(...);
 int FUN_002bf694(...);
 int FUN_002c29d8(...);
 int FUN_002c424c(...);
-int FUN_002c4938(...);
+int memClear(...);
 int FUN_002fe394(...);
 int FUN_0030a728(...);
 int FUN_00334838(...);
@@ -66,10 +66,10 @@ typedef struct {
 extern unsigned char LAB_001921c8; /* 0x1921c8 */
 extern unsigned char LAB_0019d7d4; /* 0x19d7d4 */
 extern unsigned int DAT_00434290; /* 0x434290 */
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_00435d18; /* 0x435d18 */
-extern unsigned int *DAT_00435d30; /* 0x435d30 */
-extern int DAT_00435d48; /* 0x435d48 */
+extern unsigned int *g_btlEncount; /* 0x435d30 */
+extern int g_btlEvent; /* 0x435d48 */
 extern unsigned int DAT_00439a20; /* 0x439a20 */
 extern unsigned int DAT_00439a24; /* 0x439a24 */
 extern unsigned int DAT_00439a28; /* 0x439a28 */
@@ -118,7 +118,7 @@ extern int FUN_0027e6bc(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_0027e6f4. */
 /* Supplied declaration required: FUN_002881bc. */
 extern int FUN_002896bc(void);
-/* Supplied declaration required: FUN_00293f98. */
+/* Supplied declaration required: aocHandleButtons. */
 extern unsigned int FUN_00294090(unsigned int, unsigned int);
 extern int FUN_00294fe0(int);
 extern int FUN_0029505c(int);
@@ -127,12 +127,12 @@ extern int FUN_0029505c(int);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf694. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c29d8. */
 extern int FUN_002c2a04(unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c424c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002fe394. */
 /* Supplied declaration required: FUN_0030a728. */
 /* Supplied declaration required: FUN_00334838. */
@@ -218,19 +218,19 @@ unsigned int * FUN_001fc6b4(void)
   unsigned int *puStack_2c;
   int iStack_28;
   
-  temp_v11 = FUN_002c08f0();
-  puVar19 = DAT_00435d30;
-  if (DAT_00435d30 == (unsigned int *)0x0) {
+  temp_v11 = jobGetWork();
+  puVar19 = g_btlEncount;
+  if (g_btlEncount == (unsigned int *)0x0) {
     return (unsigned int *)0x0;
   }
-  switch(*DAT_00435d30) {
+  switch(*g_btlEncount) {
   case 0:
-    temp_v15 = FUN_0027e3b8(DAT_00435d48);
+    temp_v15 = FUN_0027e3b8(g_btlEvent);
     if (temp_v15 != 0) {
       return (unsigned int *)0x0;
     }
-    temp_v15 = DAT_00435d48;
-    FUN_0027e3f8(DAT_00435d48,9,0xffffffff,0);
+    temp_v15 = g_btlEvent;
+    FUN_0027e3f8(g_btlEvent,9,0xffffffff,0);
     if (temp_v15 != 0) {
       puVar20 = (unsigned int *)(temp_v11 + 0x44a0);
       if ((*puVar20 & 0x40000000) == 0) {
@@ -241,13 +241,13 @@ unsigned int * FUN_001fc6b4(void)
           FUN_002c29d8(1,10,0xff);
         }
       }
-      func_0x0027e38c(DAT_00435d48);
+      func_0x0027e38c(g_btlEvent);
     }
     *puVar19 = 1;
-    temp_v15 = FUN_0027e3b8(DAT_00435d48);
+    temp_v15 = FUN_0027e3b8(g_btlEvent);
     goto joined_r0x00334ae4;
   case 1:
-    temp_v15 = FUN_0027e3b8(DAT_00435d48);
+    temp_v15 = FUN_0027e3b8(g_btlEvent);
 joined_r0x00334ae4:
     if (temp_v15 != 0) {
       return (unsigned int *)0x0;
@@ -260,7 +260,7 @@ FUN_00334140:
       *(unsigned int *)(temp_v11 + 0x44a0) = *(unsigned int *)(temp_v11 + 0x44a0) | 0x4000000;
       temp_v20 = (unsigned int)*(unsigned short *)(*(int *)(temp_v11 + 0x1fc0) + temp_v15 * 0x288 + 0xce);
       FUN_002b06c4();
-      FUN_002c4938(temp_v28,0x80);
+      memClear(temp_v28,0x80);
       FUN_002be624(temp_v28,"battle/arngmt/%02d_%02d.earg",*(unsigned char *)(temp_v20 + 0x9e),
                    *(unsigned char *)(temp_v20 + 0x9f));
       FUN_00297468(temp_v28,(int *)(temp_v11 + 0x1e88),0);
@@ -305,7 +305,7 @@ FUN_002408ac:
     if (*(int *)(temp_v11 + 0x1e88) == 0) {
       return (unsigned int *)0x0;
     }
-    *DAT_00435d30 = 4;
+    *g_btlEncount = 4;
     goto code_r0x00240990;
   case 4:
 code_r0x00240990:
@@ -336,7 +336,7 @@ code_r0x00240990:
   case 5:
     temp_v15 = 0;
     temp_v10 = 1;
-    if (0 < (int)DAT_00435d30[2]) {
+    if (0 < (int)g_btlEncount[2]) {
       do {
         temp_v12 = temp_v11 + temp_v15 * 8;
         temp_v16 = FUN_0027d9e8(temp_v11,*(unsigned int *)(temp_v12 + 0x1fe8));
@@ -348,7 +348,7 @@ code_r0x00240990:
           }
           else {
             *puVar20 = *puVar20 | 1;
-            FUN_00293f98(temp_v16,7);
+            aocHandleButtons(temp_v16,7);
           }
         }
         if ((*puVar20 & 2) == 0) {
@@ -580,16 +580,16 @@ LAB_003343b0:
     *puVar19 = 10;
     break;
   case 9:
-    *DAT_00435d30 = 10;
+    *g_btlEncount = 10;
     break;
   case 10:
     break;
   case 0xb:
-    FUN_002c4938(temp_v27,0x80);
+    memClear(temp_v27,0x80);
     temp_v14 = FUN_00240448(temp_v11);
     FUN_002bf694(temp_v27,temp_v14);
     if (puVar19[1] != 0) {
-      FUN_002c415c();
+      asdMemFree();
       puVar19[1] = 0;
     }
     FUN_00297468(temp_v27,puVar19 + 1,0);
@@ -597,7 +597,7 @@ LAB_003343b0:
     FUN_0023fffc(puVar19,temp_v11);
     return puVar19;
   case 0xc:
-    temp_v15 = DAT_00435d30[1];
+    temp_v15 = g_btlEncount[1];
     if (temp_v15 == 0) {
       return (unsigned int *)0x0;
     }
@@ -628,7 +628,7 @@ LAB_003343b0:
     }
     FUN_0033a01c(temp_v11);
     FUN_00339e38(temp_v11);
-    FUN_003d6ffc(DAT_004342c8);
+    FUN_003d6ffc(g_btlMain);
     if ((*(char *)(temp_v11 + 0x44b7) == '\0') &&
        (((*(unsigned int *)(temp_v11 + 0xe0) & 0x2000000) != 0 || ((*puVar20 & 2) != 0)))) {
       temp_v15 = 4;
@@ -695,7 +695,7 @@ code_r0x0023fbdc:
     if ((*(char *)(temp_v11 + 0x44b7) != '\0') ||
        (((*(unsigned int *)(temp_v11 + 0xe0) & 0x2000000) == 0 && ((*puVar20 & 2) == 0)))) {
       if ((puVar19[3] == 0) && ((*(unsigned int *)(DAT_00435d18 + 0x3028) & 0x400) != 0)) {
-        *(unsigned int *)(DAT_004342c8 + 0x634) = *(unsigned int *)(DAT_004342c8 + 0x634) | 0x4000;
+        *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x4000;
         FUN_00240614(temp_v15);
         puVar19[3] = puVar19[3] | 2;
       }
@@ -769,11 +769,11 @@ code_r0x0023fbdc:
               temp_v15 = temp_v15 + 1;
             } while (temp_v15 < temp_v16);
           }
-          if (*(int *)(DAT_004342c8 + 0x24) != 0) {
+          if (*(int *)(g_btlMain + 0x24) != 0) {
             FUN_0024082c();
           }
           else {
-            FUN_0024082c(DAT_004342c8,0x78);
+            FUN_0024082c(g_btlMain,0x78);
           }
           if ((*puVar20 & 2) == 0) {
             FUN_00254f58(temp_v11);
@@ -787,11 +787,11 @@ code_r0x0023fbdc:
       }
       return puVar15;
     }
-    if (*(int *)(DAT_004342c8 + 0x24) != 0) {
+    if (*(int *)(g_btlMain + 0x24) != 0) {
       FUN_0024082c();
     }
     else {
-      FUN_0024082c(DAT_004342c8,0x78);
+      FUN_0024082c(g_btlMain,0x78);
     }
     if ((*puVar20 & 2) != 0) {
       FUN_00254f58(temp_v11);
@@ -836,7 +836,7 @@ code_r0x00240678:
         } while (temp_v16 < 0x36);
       }
       puVar19[3] = puVar19[3] | 4;
-      temp_v15 = FUN_00256940(DAT_004342c8,temp_v11,1);
+      temp_v15 = FUN_00256940(g_btlMain,temp_v11,1);
       if (temp_v15 != 0) {
         temp_v19 = *(short *)(temp_v11 + 0x1fc8);
         temp_v14 = 0xffffffff;
@@ -852,7 +852,7 @@ code_r0x00240678:
         else if (temp_v19 == 3) {
           temp_v14 = 4;
         }
-        *(unsigned int *)(DAT_004342c8 + 0x760) = temp_v14;
+        *(unsigned int *)(g_btlMain + 0x760) = temp_v14;
       }
       *puVar19 = 0x10;
       puVar19[4] = 1;
@@ -861,41 +861,41 @@ code_r0x00240678:
   case 0xf:
     goto code_r0x00240678;
   case 0x10:
-    temp_v15 = DAT_00435d30[4];
-    DAT_00435d30[4] = temp_v15 + 1U;
+    temp_v15 = g_btlEncount[4];
+    g_btlEncount[4] = temp_v15 + 1U;
     if ((temp_v15 + 1U >= 0x1f) && (temp_v15 = FUN_0027e6bc(DAT_00434290,puVar19), temp_v15 < 1)) {
       temp_v15 = FUN_002404e8(DAT_00435d18);
       if (temp_v15 == 0) {
         return (unsigned int *)0x0;
       }
-      temp_v15 = DAT_004342c8;
+      temp_v15 = g_btlMain;
       FUN_0022724c();
       if (temp_v15 == 0) {
         return (unsigned int *)0x0;
       }
-      if ((*(unsigned int *)(DAT_004342c8 + 0x634) & 0x80000) != 0) {
+      if ((*(unsigned int *)(g_btlMain + 0x634) & 0x80000) != 0) {
         return (unsigned int *)0x0;
       }
       FUN_0023f4e4(temp_v11);
-      *(unsigned int *)(DAT_004342c8 + 0x634) = *(unsigned int *)(DAT_004342c8 + 0x634) & 0xffffbfff;
+      *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) & 0xffffbfff;
       FUN_00227218();
       return (unsigned int *)0xffffffff;
     }
   default:
     return (unsigned int *)0x0;
   }
-  FUN_002c4938(temp_v24,0x80);
+  memClear(temp_v24,0x80);
   temp_v14 = FUN_00240448(temp_v11);
   FUN_002bf694(temp_v24,temp_v14);
   temp_v15 = temp_v11;
   FUN_002402c4(temp_v11,temp_v24);
   if (temp_v15 != 0) {
     *puVar19 = 0xb;
-    FUN_002c4938(temp_v26,0x80);
+    memClear(temp_v26,0x80);
     temp_v14 = FUN_00240448(temp_v11);
     FUN_002bf694(temp_v26,temp_v14);
     if (puVar19[1] != 0) {
-      FUN_002c415c();
+      asdMemFree();
       puVar19[1] = 0;
     }
     FUN_00297468(temp_v26,puVar19 + 1,0);
@@ -914,7 +914,7 @@ code_r0x00240678:
     FUN_0033a144(temp_v11);
     FUN_00338424(temp_v11);
     FUN_00339de0(temp_v11);
-    FUN_003d6ffc(DAT_004342c8);
+    FUN_003d6ffc(g_btlMain);
     if ((*(char *)(temp_v11 + 0x44b7) == '\0') &&
        (((*(unsigned int *)(temp_v11 + 0xe0) & 0x2000000) != 0 || ((*puVar20 & 2) != 0)))) {
       temp_v15 = 4;

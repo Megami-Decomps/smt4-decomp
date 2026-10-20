@@ -51,12 +51,12 @@ typedef struct {
 } param_5_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_0014aa78(void);
-extern int FUN_001641e8(void);
+extern int btlGetMainState(void);
+extern int btlMainIsRunning(void);
 /* Supplied declaration required: FUN_0017760c. */
 extern int FUN_001801a4(void);
 extern int FUN_001ab854(void);
-extern int FUN_002919a4(void);
+extern int btlMainGetUnk14(void);
 extern int FUN_00291e14(void);
 /* Supplied declaration required: FUN_002b4dcc. */
 /* Supplied declaration required: FUN_002b4e7c. */
@@ -109,9 +109,9 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
   iStack_2c = param_3;
   puStack_28 = param_4;
   if ((int)param_1 < 0) {
-    temp_v3 = FUN_001641e8();
+    temp_v3 = btlMainIsRunning();
     if ((temp_v3 != 0) && (temp_v3 = FUN_00291e14(), temp_v3 != 0)) {
-      temp_v7 = FUN_002919a4();
+      temp_v7 = btlMainGetUnk14();
     }
     else {
       temp_v6 = FUN_001801a4();
@@ -140,7 +140,7 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
         temp_v3 = 0;
       }
       else {
-        temp_v3 = FUN_0014aa78();
+        temp_v3 = btlGetMainState();
         if (temp_v3 == 0) {
           temp_v3 = (int)*(short *)(temp_v6 + 0x1c);
         }
@@ -153,7 +153,7 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
         temp_v4 = 0;
       }
       else {
-        temp_v4 = FUN_0014aa78();
+        temp_v4 = btlGetMainState();
         if (temp_v4 != 0) {
           temp_v4 = FUN_002b4dcc();
         }
@@ -251,7 +251,7 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
         temp_v3 = 0;
       }
       else {
-        temp_v3 = FUN_0014aa78();
+        temp_v3 = btlGetMainState();
         if (temp_v3 == 0) {
           temp_v3 = (int)*(short *)(temp_v6 + 0x1c);
         }
@@ -264,7 +264,7 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
         temp_v4 = 0;
       }
       else {
-        temp_v4 = FUN_0014aa78();
+        temp_v4 = btlGetMainState();
         if (temp_v4 != 0) {
           temp_v4 = FUN_002b4dcc();
         }
@@ -470,7 +470,7 @@ LAB_00287fec:
       temp_v2 = 0;
     }
     else {
-      temp_v3 = FUN_0014aa78();
+      temp_v3 = btlGetMainState();
       if (temp_v3 == 0) {
         temp_v2 = *(short *)(temp_v6 + 0x1c);
       }
@@ -484,7 +484,7 @@ LAB_00287fec:
       temp_v1 = 0;
     }
     else {
-      temp_v3 = FUN_0014aa78();
+      temp_v3 = btlGetMainState();
       if (temp_v3 != 0) {
         temp_v1 = FUN_002b4dcc();
       }

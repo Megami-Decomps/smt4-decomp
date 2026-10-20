@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002b9024(void);
 int FUN_0033b748(void);
 
-extern int FUN_00292f28(unsigned int);
+extern int padIsButtonDown(unsigned int);
 /* Supplied declaration required: FUN_002b9024. */
 extern int FUN_002c09f4(unsigned int);
 /* Supplied declaration required: FUN_0033b748. */
@@ -28,7 +28,7 @@ unsigned short FUN_0033b8f4(int param_1)
   FUN_0033b748();
   temp_v1 = FUN_002c09f4(0xb);
   temp_v2 = FUN_002c09f4(0xd);
-  temp_v3 = FUN_00292f28(6);
+  temp_v3 = padIsButtonDown(6);
   if (temp_v3 != 0) {
     if (temp_v2 >= 2) {
       return *(unsigned short *)(temp_v0 + temp_v1 * 2 + 2);

@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_0013c174(unsigned char *, unsigned int [2], int);
-int FUN_00142b14(int);
+int asdSoundSetHasStream(int);
 int FUN_00143800(void);
-int FUN_00144bd4(int);
+int asdSoundDuckSetup(int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -27,10 +27,10 @@ extern unsigned int DAT_00619980; /* 0x619980 */
 extern unsigned int DAT_00619984; /* 0x619984 */
 
 /* Supplied declaration required: FUN_0013c174. */
-/* Supplied declaration required: FUN_00142b14. */
+/* Supplied declaration required: asdSoundSetHasStream. */
 /* Supplied declaration required: FUN_00143800. */
-/* Supplied declaration required: FUN_00144bd4. */
-extern int FUN_00180008(unsigned int);
+/* Supplied declaration required: asdSoundDuckSetup. */
+extern int jyoucyuGetTableEntry(unsigned int);
 
 
 void FUN_0013ae58(void)
@@ -41,19 +41,19 @@ void FUN_0013ae58(void)
   unsigned char *puVar2;
   unsigned int temp_v1 [2];
   
-  temp_v0 = FUN_00180008(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
     FUN_00143800();
     DAT_00619971 = 0x60;
     DAT_00619970 = DAT_00619970 | 3;
     DAT_00619972 = 0;
-    FUN_00142b14(1);
+    asdSoundSetHasStream(1);
     DAT_00619974 = 0x3f19999a;
     DAT_00619978 = 5;
     DAT_0061997c = 0x1e;
     DAT_00619980 = 1;
     DAT_00619984 = 0x14;
-    FUN_00144bd4(1);
+    asdSoundDuckSetup(1);
     temp_v1[0] = 0;
     if (DAT_0061996c == (unsigned char *)0x0) {
       puVar2 = &LAB_0013aefc;

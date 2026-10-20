@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c4938(int, int, unsigned int, unsigned int, unsigned int);
+int memClear(int, int, unsigned int, unsigned int, unsigned int);
 int rt_memcpy(int, int, int);
 int rt_memcpy_w(int, int, int);
 
@@ -42,7 +42,7 @@ extern unsigned int DAT_004e5284; /* 0x4e5284 */
 extern unsigned int DAT_004e5288; /* 0x4e5288 */
 extern unsigned int DAT_004e528c; /* 0x4e528c */
 
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -62,7 +62,7 @@ unsigned int FUN_00122224(int param_1,unsigned int param_2,unsigned int param_3,
   unsigned int temp_v5;
   
   DAT_004652b4 = param_1;
-  FUN_002c4938(param_1,0x1774,param_3,param_4,param_4);
+  memClear(param_1,0x1774,param_3,param_4,param_4);
   temp_v5 = 0;
   DAT_004652b0 = 1;
   DAT_004652b8 = 0xffffffff;

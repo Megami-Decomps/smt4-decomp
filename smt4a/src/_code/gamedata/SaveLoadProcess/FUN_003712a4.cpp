@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0014af84(void);
-int FUN_001630d4(int, int, int, unsigned int, int);
-int FUN_0019a5a0(unsigned int);
+int asdMemoryAlloc(int, int, int, unsigned int, int);
+int asdMemFree(unsigned int);
 int FUN_001a9110(unsigned int, int);
 int FUN_00268250(...);
 int FUN_002c9104(void);
@@ -24,17 +24,17 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 extern unsigned char DAT_0057f6bc; /* 0x57f6bc */
 extern unsigned char DAT_0057f6bf; /* 0x57f6bf */
 extern unsigned short DAT_0057f6c2; /* 0x57f6c2 */
 extern int DAT_0057f6c4; /* 0x57f6c4 */
 
 /* Supplied declaration required: FUN_0014af84. */
-/* Supplied declaration required: FUN_001630d4. */
-extern int FUN_00164a9c(void);
+/* Supplied declaration required: asdMemoryAlloc. */
+extern int jobGetWork(void);
 extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001a9110. */
 extern int FUN_001ab854(int);
 extern int FUN_001ab888(void);
@@ -80,12 +80,12 @@ unsigned int FUN_003712a4(void)
   int temp_v14;
   unsigned int temp_v15;
   
-  temp_v1 = FUN_00164a9c();
+  temp_v1 = jobGetWork();
   switch(*(unsigned int *)(temp_v1 + 4)) {
   case 6:
     *(unsigned int *)(temp_v1 + 0xc) = 0x2a7a4;
     temp_v6 = 0x10000;
-    FUN_001630d4(0x10000,0x100,0,*(unsigned int *)(temp_v1 + 0xc),1);
+    asdMemoryAlloc(0x10000,0x100,0,*(unsigned int *)(temp_v1 + 0xc),1);
     *(unsigned int *)(temp_v1 + 8) = temp_v6;
     FUN_00268250();
     temp_v6 = 7;
@@ -157,7 +157,7 @@ unsigned int FUN_003712a4(void)
 LAB_0037156c:
         if (*(char *)(temp_v1 + 0x18) == '\0') {
           FUN_00388068();
-          FUN_0046e238(DAT_00570280);
+          FUN_0046e238(g_aocSystem);
         }
       }
       temp_v0 = (char)*(unsigned int *)(temp_v1 + 0x10);
@@ -170,7 +170,7 @@ LAB_0037156c:
         *(char *)(temp_v4 + 3) = temp_v10;
         FUN_002c9104();
         if (*(char *)(temp_v1 + 0x18) == '\0') {
-          FUN_0019a5a0(*(unsigned int *)(temp_v1 + 8));
+          asdMemFree(*(unsigned int *)(temp_v1 + 8));
           *(unsigned int *)(temp_v1 + 4) = 8;
           *(unsigned int *)(temp_v1 + 8) = 0;
           return 0;
@@ -185,7 +185,7 @@ LAB_0037156c:
   case 8:
     *(unsigned int *)(temp_v1 + 0xc) = 0x20;
     temp_v6 = 0x10000;
-    FUN_001630d4(0x10000,0x100,0,*(unsigned int *)(temp_v1 + 0xc),1);
+    asdMemoryAlloc(0x10000,0x100,0,*(unsigned int *)(temp_v1 + 0xc),1);
     *(unsigned int *)(temp_v1 + 8) = temp_v6;
     if (*(char *)(temp_v1 + 0x18) == '\0') {
       FUN_00268250(3,0,0x62,temp_v6,*(unsigned int *)(temp_v1 + 0xc));

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c4938(int, int);
+int memClear(int, int);
 int FUN_002c5d5c(int, unsigned char *, int, int);
 int nn_gr_CTR_Vertex_LoadArray_DisableAll(unsigned int);
 
 extern unsigned char LAB_003572d0; /* 0x3572d0 */
 extern unsigned char LAB_003572dc; /* 0x3572dc */
 
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002c5d5c. */
 /* Supplied declaration required: nn_gr_CTR_Vertex_LoadArray_DisableAll. */
 
@@ -33,7 +33,7 @@ void FUN_002693e4(int param_1)
   FUN_002c5d5c(param_1,&LAB_003572d0,0x14,0xc);
   temp_v3 = param_1 - 0x6a0;
   *(unsigned int *)(param_1 - 0x6a0) = 0;
-  FUN_002c4938(param_1 - 0x69c,0x150);
+  memClear(param_1 - 0x69c,0x150);
   temp_v5 = 0;
   temp_v1 = 0;
   do {

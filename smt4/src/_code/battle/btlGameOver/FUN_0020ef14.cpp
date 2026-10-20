@@ -23,7 +23,7 @@ int FUN_00282820(...);
 int FUN_0028975c(...);
 int FUN_002917b8(...);
 int FUN_00291944(...);
-int FUN_002939f4(...);
+int btlGetMainState(...);
 int FUN_00297468(...);
 int FUN_0029c3b0(...);
 int FUN_0029c3c0(...);
@@ -31,10 +31,10 @@ int FUN_0029e054(...);
 int FUN_002a03a0(...);
 int FUN_002a03d8(...);
 int FUN_002a5ed0(...);
-int FUN_002ae7e8(...);
+int asdTMTexTableFreeEntry(...);
 int FUN_002ae898(...);
 int FUN_002b8cc8(...);
-int FUN_002c5914(...);
+int asdTMTexTableLoadTmx(...);
 int FUN_002ef6b8(...);
 int FUN_0033a780(...);
 int FUN_003db258(...);
@@ -44,9 +44,9 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_00435d18; /* 0x435d18 */
-extern unsigned int *DAT_00435d60; /* 0x435d60 */
+extern unsigned int *g_btlGameOver; /* 0x435d60 */
 extern int DAT_00439a70; /* 0x439a70 */
 extern int DAT_00439a74; /* 0x439a74 */
 extern unsigned int DAT_00439a78; /* 0x439a78 */
@@ -77,7 +77,7 @@ extern int FUN_00287468(unsigned int);
 /* Supplied declaration required: FUN_0028d6d0. */
 /* Supplied declaration required: FUN_002917b8. */
 /* Supplied declaration required: FUN_00291944. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00296f4c. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_00297468. */
@@ -88,18 +88,18 @@ extern int FUN_00287468(unsigned int);
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002a5ed0. */
 extern int FUN_002a60b4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002ae7e8. */
+/* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002ae898. */
 /* Supplied declaration required: FUN_002b8838. */
 /* Supplied declaration required: FUN_002b8cc8. */
 extern int FUN_002b8d54(void);
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 extern int FUN_002bfde4(unsigned int);
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 extern int FUN_002c09bc(void);
 extern unsigned int FUN_002c09d0(void);
 extern int FUN_002c2a04(unsigned int);
-/* Supplied declaration required: FUN_002c5914. */
+/* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_002ef6b8. */
 /* Supplied declaration required: FUN_0033a780. */
 /* Supplied declaration required: FUN_003db258. */
@@ -126,13 +126,13 @@ int FUN_0020ef14(void)
   unsigned long long in_d9;
   unsigned long long temp_v10;
   
-  temp_v1 = FUN_002c08f0();
-  puVar2 = DAT_00435d60;
-  if (DAT_00435d60 == (unsigned int *)0x0) {
+  temp_v1 = jobGetWork();
+  puVar2 = g_btlGameOver;
+  if (g_btlGameOver == (unsigned int *)0x0) {
     return 0;
   }
-  temp_v3 = DAT_00435d60[2];
-  DAT_00435d60[2] = temp_v3 + 1U;
+  temp_v3 = g_btlGameOver[2];
+  g_btlGameOver[2] = temp_v3 + 1U;
   if (temp_v3 + 1U >= 0x10000) {
     puVar2[2] = 0xffff;
   }
@@ -227,7 +227,7 @@ FUN_003357c0:
   case 4:
     break;
   case 5:
-    temp_v1 = FUN_002bf244(puVar2[6]);
+    temp_v1 = jobIsValid(puVar2[6]);
     if (temp_v1 != 0) {
       return 0;
     }
@@ -243,7 +243,7 @@ FUN_003357c0:
     else {
       FUN_00291944();
       FUN_002917b8();
-      temp_v1 = FUN_002939f4();
+      temp_v1 = btlGetMainState();
       if (((puVar2[1] & 1) == 0) && (*(int *)(temp_v1 + 0x4978) != 1)) {
         *puVar2 = 8;
         temp_v1 = FUN_0023ed64(puVar2);
@@ -266,7 +266,7 @@ FUN_003357c0:
       puVar2[9] = 0x42700000;
       puVar2[0xb] = 0x3f800000;
       puVar2[0xc] = 0x3f800000;
-      FUN_002c5914(0x2d,0,0,temp_v4,in_d8,in_d9,unaff_r4);
+      asdTMTexTableLoadTmx(0x2d,0,0,temp_v4,in_d8,in_d9,unaff_r4);
       temp_v1 = 1;
       do {
         FUN_002a5ed0(0x2d,temp_v1);
@@ -355,7 +355,7 @@ FUN_003357c0:
         FUN_002ae898(0x2d,temp_v1);
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 7);
-      FUN_002ae7e8(0x2d);
+      asdTMTexTableFreeEntry(0x2d);
       FUN_002b8cc8();
       FUN_0029c3b0(0xf);
       *puVar2 = 9;
@@ -377,13 +377,13 @@ FUN_003357c0:
   if ((temp_v1 != 3) || (temp_v1 = FUN_002c2a04(1), temp_v1 != 3)) {
     return 0;
   }
-  temp_v9 = FUN_002939f4();
+  temp_v9 = btlGetMainState();
   FUN_0033a780();
   FUN_002523f0();
   FUN_00219840(temp_v9);
   FUN_00207434(temp_v9);
   FUN_001e1874(temp_v9);
-  if (DAT_004342c8 != 0) {
+  if (g_btlMain != 0) {
     FUN_00227218();
   }
   if ((puVar2[1] & 1) == 0) {
@@ -393,7 +393,7 @@ FUN_003357c0:
     puVar2[6] = temp_v2;
     FUN_0028975c(0x817,1);
     *puVar2 = 5;
-    temp_v1 = FUN_002bf244(puVar2[6]);
+    temp_v1 = jobIsValid(puVar2[6]);
     if (temp_v1 != 0) {
       return 0;
     }
@@ -419,7 +419,7 @@ FUN_0023f074:
     else {
       FUN_00291944();
       FUN_002917b8();
-      temp_v1 = FUN_002939f4();
+      temp_v1 = btlGetMainState();
       if (((puVar2[1] & 1) == 0) && (*(int *)(temp_v1 + 0x4978) != 1)) {
         *puVar2 = 8;
         temp_v1 = FUN_0023ed64(puVar2);

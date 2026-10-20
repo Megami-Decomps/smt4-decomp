@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0013dd78(unsigned int);
-int FUN_00167ab4(int, int, int, unsigned int, int, int);
-int FUN_0019a5a0(unsigned int);
+int memAlloc(int, int, int, unsigned int, int, int);
+int asdMemFree(unsigned int);
 int FUN_00222180(void);
 int FUN_00243c24(void);
 
@@ -16,8 +16,8 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0013dd78. */
-/* Supplied declaration required: FUN_00167ab4. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_00222180. */
 /* Supplied declaration required: FUN_00243c24. */
 
@@ -45,13 +45,13 @@ void FUN_0030015c(unsigned int *param_1,unsigned int param_2)
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < unaff_r6);
     }
-    FUN_0019a5a0(param_1[0xe]);
+    asdMemFree(param_1[0xe]);
     param_1[0xd] = 0;
     param_1[0xe] = 0;
   }
   if (unaff_r6 << 2 != 0) {
     temp_v0 = 0x10000;
-    FUN_00167ab4(0x10000,0x100,0,unaff_r6 << 2,0x10,1);
+    memAlloc(0x10000,0x100,0,unaff_r6 << 2,0x10,1);
     param_1[0xe] = temp_v0;
     param_1[0xd] = temp_v0;
     FUN_00243c24();

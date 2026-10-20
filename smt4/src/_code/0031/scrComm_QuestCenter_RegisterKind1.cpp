@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c564c(int);
+int jyoucyuGetTableEntry(int);
 int QcMain_Register(int *, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -13,8 +13,8 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned int FUN_00296cc8(unsigned int);
-/* Supplied declaration required: FUN_002c564c. */
+extern unsigned int scrGetArg(unsigned int);
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: QcMain_Register. */
 
 
@@ -28,9 +28,9 @@ unsigned int scrComm_QuestCenter_RegisterKind1(void)
   unsigned int uStack_14;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_00296cc8(1);
-  FUN_002c564c(0);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  jyoucyuGetTableEntry(0);
   temp_v3 = 1;
   temp_v2 = temp_v0;
   uStack_14 = temp_v1;

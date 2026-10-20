@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010063a(...);
+int qsort(...);
 int FUN_001aba54(void);
 int FUN_004c39b0(unsigned int, unsigned short [10]);
 int FUN_004e6fb0(...);
@@ -31,7 +31,7 @@ extern unsigned int DAT_00571154; /* 0x571154 */
 extern unsigned int DAT_00571190; /* 0x571190 */
 extern unsigned int DAT_00571194; /* 0x571194 */
 
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_001aba54. */
 extern int FUN_0026264c(unsigned short);
 extern int FUN_002626e0(void);
@@ -72,7 +72,7 @@ void FUN_004e8668(int *param_1,int param_2)
     puVar2 = puVar2 + 0x102;
     temp_v2 = temp_v2 + 1;
   } while (temp_v4 != 0);
-  FUN_0010063a(aiStack_1ec,temp_v3,4,&LAB_00241988);
+  qsort(aiStack_1ec,temp_v3,4,&LAB_00241988);
   piVar3 = param_1;
   FUN_004ea200(param_1,param_2,aiStack_1ec,temp_v3,1);
   if (piVar3 == (int *)0x0) {
@@ -89,10 +89,10 @@ void FUN_004e8668(int *param_1,int param_2)
     FUN_004c39b0(*(unsigned int *)(param_2 + 0x20),temp_v5);
     if (!((**(unsigned int **)(param_2 + 0x20) & DAT_00571150) == 0 &&
          ((*(unsigned int **)(param_2 + 0x20))[1] & DAT_00571154) == 0)) {
-      FUN_0010063a(temp_v5,9,2,FUN_002fe144);
+      qsort(temp_v5,9,2,FUN_002fe144);
     }
     else {
-      FUN_0010063a(temp_v5,9,2,FUN_00290af8);
+      qsort(temp_v5,9,2,FUN_00290af8);
     }
     temp_v2 = 0;
     do {

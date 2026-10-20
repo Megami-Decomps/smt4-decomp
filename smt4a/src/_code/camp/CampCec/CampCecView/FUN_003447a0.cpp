@@ -4,22 +4,22 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
-int FUN_001681cc(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
+int sysPlaySe(...);
 int FUN_00182054(...);
 int FUN_002804b0(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_002e6dd0(...);
 int FUN_00319aec(...);
 int FUN_00330a80(...);
 int FUN_0036d4b0(...);
 int FUN_0037b5e0(...);
-int FUN_0039a0cc(...);
+int campCecDrawSetCreate(...);
 int FUN_0039a3b4(...);
 int FUN_003a4980(...);
-int FUN_003b5e8c(...);
+int campCecDrawPageCreate(...);
 
 /* stack frame of void: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -41,15 +41,15 @@ extern unsigned char LAB_00344b5c; /* 0x344b5c */
 extern unsigned char LAB_00344b74; /* 0x344b74 */
 extern unsigned char LAB_00344b90; /* 0x344b90 */
 extern unsigned char LAB_00344ba8; /* 0x344ba8 */
-extern unsigned int *DAT_0057f130; /* 0x57f130 */
+extern unsigned int *g_campCecView; /* 0x57f130 */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00182054. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd0. */
 extern unsigned int FUN_003192e0(void);
 /* Supplied declaration required: FUN_00319aec. */
@@ -57,10 +57,10 @@ extern unsigned int FUN_003192e0(void);
 extern int FUN_0035a978(void);
 /* Supplied declaration required: FUN_0036d4b0. */
 /* Supplied declaration required: FUN_0037b5e0. */
-/* Supplied declaration required: FUN_0039a0cc. */
+/* Supplied declaration required: campCecDrawSetCreate. */
 /* Supplied declaration required: FUN_0039a3b4. */
 /* Supplied declaration required: FUN_003a4980. */
-/* Supplied declaration required: FUN_003b5e8c. */
+/* Supplied declaration required: campCecDrawPageCreate. */
 
 
 void FUN_003447a0(void)
@@ -77,21 +77,21 @@ void FUN_003447a0(void)
   int temp_v4;
   int temp_v5;
   
-  if (DAT_0057f130 == (unsigned int *)0x0) {
+  if (g_campCecView == (unsigned int *)0x0) {
     puVar3 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,0x14c,1);
-    DAT_0057f130 = puVar3;
+    asdMemoryAllocTracked(0x100,0x100,0,0x14c,1);
+    g_campCecView = puVar3;
   }
-  puVar3 = DAT_0057f130;
-  FUN_002e6354();
+  puVar3 = g_campCecView;
+  sysMemClear();
   puVar4 = &LAB_00344b08;
-  FUN_0014e38c(&LAB_00344b08,3,0,0,FUN_0025d6a0,0,0);
+  asdProcessCreateSimple(&LAB_00344b08,3,0,0,FUN_0025d6a0,0,0);
   *puVar3 = (unsigned int)puVar4;
-  FUN_0015155c(&LAB_00344b20,0x65,0,0,&LAB_002a2c78,0,0,puVar4);
-  FUN_0015155c(&LAB_00344b3c,0xcc,0,0,&LAB_002a2c78,0,0,*puVar3);
-  FUN_0015155c(&LAB_00344b5c,0x86,0,0,&LAB_0025d62c,0,0,*puVar3);
-  FUN_0015155c(&LAB_00344b74,0xe2,0,0,&LAB_0025d62c,0,0,*puVar3);
-  FUN_0015155c(&LAB_00344b90,0xea,0,0,FUN_002e241c,0,0,*puVar3);
+  taskCreateDraw(&LAB_00344b20,0x65,0,0,&LAB_002a2c78,0,0,puVar4);
+  taskCreateDraw(&LAB_00344b3c,0xcc,0,0,&LAB_002a2c78,0,0,*puVar3);
+  taskCreateDraw(&LAB_00344b5c,0x86,0,0,&LAB_0025d62c,0,0,*puVar3);
+  taskCreateDraw(&LAB_00344b74,0xe2,0,0,&LAB_0025d62c,0,0,*puVar3);
+  taskCreateDraw(&LAB_00344b90,0xea,0,0,FUN_002e241c,0,0,*puVar3);
   puVar3[0x45] = 0;
   puVar3[0x46] = 0;
   puVar3[0x47] = 0;
@@ -126,14 +126,14 @@ void FUN_003447a0(void)
   *(unsigned short *)(temp_v1 + 0x34) = *(unsigned short *)(temp_v1 + 0x60);
   temp_v4 = 0;
   do {
-    FUN_0039a0cc();
+    campCecDrawSetCreate();
     temp_v5 = temp_v4 + 1;
     puVar3[temp_v4 + 0x41] = temp_v1;
     temp_v4 = temp_v5;
   } while (temp_v5 < 3);
-  FUN_003b5e8c();
+  campCecDrawPageCreate();
   puVar3[0x44] = temp_v1;
-  puVar2 = DAT_0057f130;
+  puVar2 = g_campCecView;
   temp_v4 = 0;
   do {
     temp_v1 = FUN_00330a80(puVar2[0x46] + temp_v4);
@@ -166,7 +166,7 @@ void FUN_003447a0(void)
     puVar3[temp_v4 * 5 + 0x29] = 0x14a;
     temp_v4 = temp_v1;
   } while (temp_v1 < 5);
-  FUN_001681cc(0xb4);
+  sysPlaySe(0xb4);
   FUN_00319aec(0);
   return;
 }

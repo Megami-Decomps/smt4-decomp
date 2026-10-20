@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002e6354(...);
+int sysMemClear(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -11,15 +11,15 @@ typedef struct {
 
 extern unsigned char DAT_00635370; /* 0x635370 */
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_0013a11c(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002e6354(&DAT_00635370,0x200);
-  FUN_002e6354(0x635570,0x200);
+  sysMemClear(&DAT_00635370,0x200);
+  sysMemClear(0x635570,0x200);
   return;
 }
 

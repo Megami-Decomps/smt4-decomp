@@ -27,7 +27,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char DAT_003ff12c; /* 0x3ff12c */
-extern int DAT_00432fc8; /* 0x432fc8 */
+extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_0023346c. */
 /* Supplied declaration required: FUN_00295eb0. */
@@ -35,7 +35,7 @@ extern int DAT_00432fc8; /* 0x432fc8 */
 /* Supplied declaration required: FUN_002ba78c. */
 /* Supplied declaration required: FUN_002bd81c. */
 /* Supplied declaration required: FUN_002bd82c. */
-extern unsigned int FUN_002bd838(unsigned int);
+extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002c312c. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -88,8 +88,8 @@ void FUN_0038f738(int param_1)
   } while (temp_v1 < 0x18);
   FUN_002ba78c(param_1 + 0x11b0);
   *(unsigned char *)(param_1 + 0x15c5) = 0;
-  *(unsigned char *)(DAT_00432fc8 + 0xb81) = 0;
-  temp_v0 = FUN_002bd838(0);
+  *(unsigned char *)(g_aocMain + 0xb81) = 0;
+  temp_v0 = asdTextCreate(0);
   *(unsigned int *)(param_1 + 0x1c30) = temp_v0;
   FUN_002bd82c(temp_v0,0x320202ff);
   FUN_002bd81c(*(unsigned int *)(param_1 + 0x1c30),0,0x646464ff);

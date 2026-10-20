@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0014af84(void);
-int FUN_001630d4(int, int, int, unsigned int, int);
-int FUN_0019a5a0(...);
+int asdMemoryAlloc(int, int, int, unsigned int, int);
+int asdMemFree(...);
 int FUN_001a9110(...);
 int FUN_00239294(void);
 int FUN_00268250(...);
@@ -28,9 +28,9 @@ extern int DAT_0057f6c4; /* 0x57f6c4 */
 extern int DAT_00588e2c; /* 0x588e2c */
 
 /* Supplied declaration required: FUN_0014af84. */
-/* Supplied declaration required: FUN_001630d4. */
-extern int FUN_00164a9c(void);
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemoryAlloc. */
+extern int jobGetWork(void);
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001a9110. */
 extern unsigned int FUN_00228af0(void);
 extern int FUN_00229c9c(void);
@@ -60,12 +60,12 @@ unsigned int FUN_00371750(void)
   int temp_v6;
   unsigned short *puVar8;
   
-  temp_v1 = FUN_00164a9c();
+  temp_v1 = jobGetWork();
   switch(*(unsigned int *)(temp_v1 + 4)) {
   case 0:
     *(unsigned int *)(temp_v1 + 0xc) = 0x20;
     temp_v3 = 0x10000;
-    FUN_001630d4(0x10000,0x100,0,*(unsigned int *)(temp_v1 + 0xc),1);
+    asdMemoryAlloc(0x10000,0x100,0,*(unsigned int *)(temp_v1 + 0xc),1);
     *(unsigned int *)(temp_v1 + 8) = temp_v3;
     FUN_00358dbc();
     temp_v4 = *(int *)(temp_v1 + 0x10) - 1;
@@ -110,12 +110,12 @@ unsigned int FUN_00371750(void)
     if (temp_v4 == 1) {
       temp_v4 = FUN_003332d8();
       if (temp_v4 == 0) {
-        FUN_0019a5a0(*(unsigned int *)(temp_v1 + 8));
+        asdMemFree(*(unsigned int *)(temp_v1 + 8));
         *(unsigned int *)(temp_v1 + 4) = 2;
         *(unsigned int *)(temp_v1 + 8) = 0;
         return 0;
       }
-      FUN_0019a5a0(*(unsigned int *)(temp_v1 + 8));
+      asdMemFree(*(unsigned int *)(temp_v1 + 8));
       *(unsigned int *)(temp_v1 + 4) = 5;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return 0;
@@ -124,7 +124,7 @@ unsigned int FUN_00371750(void)
   case 2:
     *(unsigned int *)(temp_v1 + 0xc) = 0x2a7a4;
     temp_v3 = 0x10000;
-    FUN_001630d4(0x10000,0x100,0,*(unsigned int *)(temp_v1 + 0xc),1);
+    asdMemoryAlloc(0x10000,0x100,0,*(unsigned int *)(temp_v1 + 0xc),1);
     *(unsigned int *)(temp_v1 + 8) = temp_v3;
     FUN_00358dbc();
     temp_v0 = (char)*(unsigned int *)(temp_v1 + 0x10);
@@ -154,12 +154,12 @@ unsigned int FUN_00371750(void)
     if (temp_v4 == 1) {
       temp_v4 = FUN_003332d8();
       if (temp_v4 == 0) {
-        FUN_0019a5a0(*(unsigned int *)(temp_v1 + 8));
+        asdMemFree(*(unsigned int *)(temp_v1 + 8));
         *(unsigned int *)(temp_v1 + 4) = 4;
         *(unsigned int *)(temp_v1 + 8) = 0;
         return 0;
       }
-      FUN_0019a5a0(*(unsigned int *)(temp_v1 + 8));
+      asdMemFree(*(unsigned int *)(temp_v1 + 8));
       *(unsigned int *)(temp_v1 + 4) = 5;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return 0;

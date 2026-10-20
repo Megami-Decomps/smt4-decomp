@@ -7,8 +7,8 @@ extern "C" {
 int FUN_002aa6ac(...);
 int VectorFloatToUnsigned(double, int);
 
-extern unsigned int *DAT_004652a0; /* 0x4652a0 */
-extern unsigned int DAT_004652a4; /* 0x4652a4 */
+extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
+extern unsigned int g_commandBufferEnd; /* 0x4652a4 */
 extern int DAT_004655c0; /* 0x4655c0 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -669,10 +669,10 @@ LAB_001438b8:
   *(unsigned int *)(temp_v1 + 0x784) = (*(unsigned int *)(temp_v1 + 0x784) & 0xc0000000) | (temp_v0 >> 3);
   *puVar9 = *puVar9 | 1;
   FUN_002aa6ac(0x81,10,temp_v1 + 0x774);
-  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
-    *DAT_004652a0 = *(unsigned int *)(temp_v1 + 0x7a8);
-    DAT_004652a0[1] = 0xf008e;
-    DAT_004652a0 = DAT_004652a0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    *g_commandBufferCursor = *(unsigned int *)(temp_v1 + 0x7a8);
+    g_commandBufferCursor[1] = 0xf008e;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
   return 0;
 }

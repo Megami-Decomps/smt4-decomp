@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_00255180(unsigned int, int, int);
 int FUN_00282924(unsigned int *, unsigned int);
-int FUN_00296cc8(int);
+int scrGetArg(int);
 
 /* Supplied declaration required: FUN_00255180. */
 /* Supplied declaration required: FUN_00282924. */
-extern unsigned int *FUN_002939f4(void);
-/* Supplied declaration required: FUN_00296cc8. */
+extern unsigned int *btlGetMainState(void);
+/* Supplied declaration required: scrGetArg. */
 
 
 unsigned int FUN_00300224(void)
@@ -22,9 +22,9 @@ unsigned int FUN_00300224(void)
   int temp_v1;
   unsigned int *puVar3;
   
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_00296cc8(1);
-  puVar3 = (unsigned int *)FUN_002939f4();
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  puVar3 = (unsigned int *)btlGetMainState();
   FUN_00282924(puVar3,temp_v0);
   if (puVar3 != (unsigned int *)0x0) {
     if (temp_v1 != 1) {

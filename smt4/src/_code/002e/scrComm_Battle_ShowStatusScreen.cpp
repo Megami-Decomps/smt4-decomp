@@ -33,7 +33,7 @@ extern int FUN_0028cad4(void);
 /* Supplied declaration required: FUN_00292c0c. */
 extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_00295a18. */
-extern unsigned int FUN_00296cc8(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_0029ca58. */
 /* Supplied declaration required: FUN_0029e874. */
 /* Supplied declaration required: FUN_002bd8d4. */
@@ -49,7 +49,7 @@ unsigned int scrComm_Battle_ShowStatusScreen(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00296cc8(0);
+  temp_v0 = scrGetArg(0);
   temp_v1 = FUN_002893d8();
   if (temp_v1 == 0) {
     FUN_002542d4(0);

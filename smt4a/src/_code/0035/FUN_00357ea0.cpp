@@ -8,7 +8,7 @@ int FUN_00163aa4(int *);
 int FUN_0040898c(int);
 
 /* Supplied declaration required: FUN_00163aa4. */
-extern int *FUN_00164a9c(void);
+extern int *jobGetWork(void);
 /* Supplied declaration required: FUN_0040898c. */
 
 
@@ -21,7 +21,7 @@ unsigned int FUN_00357ea0(void)
   int temp_v1;
   float temp_v2;
   
-  piVar2 = (int *)FUN_00164a9c();
+  piVar2 = (int *)jobGetWork();
   temp_v2 = 1.0f;
   FUN_00163aa4(piVar2 + 0xb);
   temp_v1 = piVar2[0xc];

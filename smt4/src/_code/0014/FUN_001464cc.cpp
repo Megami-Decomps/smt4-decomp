@@ -1,31 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001464cc` (_code @ 0x1464cc, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the first read of the dirty flag uses the shared base (add r4, r0, #4096) instead of a literal register offset (ldr r1, =0x11dc; ldrb r1, [r1, r0]). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b634c(unsigned int, int);
+typedef struct Light {
+    /* 0x0000 */ u8 unk0000[0x52C];
+    /* 0x052C */ u32 target;
+    /* 0x0530 */ u8 unk0530[0xC9C];
+    /* 0x11CC */ u8 params[0xC];
+    /* 0x11D8 */ f32 intensity;
+    /* 0x11DC */ u8 dirty;
+} Light;
 
-/* Supplied declaration required: FUN_002b634c. */
+int FUN_002b634c(u32 target, void *params);
 
-
-void FUN_001464cc(int param_1)
-
+/* Sets the light's intensity; when it changed (or was marked dirty) pushes the parameters to the target. Clears the dirty flag. */
+void FUN_001464cc(Light *light, f32 intensity)
 {
-/* irregular: irregular input(s): in_s0; 2 native warning(s); review required */
-  unsigned char temp_v0;
-  float in_s0;
-  
-  temp_v0 = 0;
-  if (*(char *)(param_1 + 0x11dc) == '\0') {
-    temp_v0 = *(float *)(param_1 + 0x11d8) == in_s0;
-  }
-  if (!temp_v0) {
-    *(float *)(param_1 + 0x11d8) = in_s0;
-    FUN_002b634c(*(unsigned int *)(param_1 + 0x52c),param_1 + 0x11cc);
-  }
-  *(unsigned char *)(param_1 + 0x11dc) = 0;
-  return;
+    bool unchanged = false;
+
+    if (light->dirty == 0) {
+        unchanged = light->intensity == intensity;
+    }
+    if (!unchanged) {
+        light->intensity = intensity;
+        FUN_002b634c(light->target, light->params);
+    }
+    light->dirty = 0;
 }
 
 } /* extern "C" */

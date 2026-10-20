@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00236038(int);
+int scrGetArg(int);
 int FUN_0039bf58(void);
 
 extern signed char DAT_0057f254; /* 0x57f254 */
 extern int DAT_0057f258; /* 0x57f258 */
 
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_0039bf58. */
 
 
@@ -22,7 +22,7 @@ unsigned char FUN_003b9a98(void)
   
   if (DAT_0057f254 == '\0') {
     DAT_0057f254 = '\x01';
-    FUN_00236038(0);
+    scrGetArg(0);
     FUN_0039bf58();
   }
   temp_v0 = *(char *)(DAT_0057f258 + 0x5d4) == '\0';

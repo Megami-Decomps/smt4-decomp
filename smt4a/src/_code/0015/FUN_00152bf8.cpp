@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(int);
+int asdMemFree(int);
 int FUN_001afdc4(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -12,11 +12,11 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_0063f4e4; /* 0x63f4e4 */
+extern int g_asdSoundStatus; /* 0x63f4e4 */
 extern int DAT_0063f4e8; /* 0x63f4e8 */
 extern unsigned char DAT_0063f4f0; /* 0x63f4f0 */
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001afdc4. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -33,10 +33,10 @@ void FUN_00152bf8(int param_1)
     return;
   }
   nn_os_CriticalSection_Enter((unsigned int)&DAT_0063f4f0);
-  for (temp_v0 = DAT_0063f4e4; temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0xd8)) {
+  for (temp_v0 = g_asdSoundStatus; temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0xd8)) {
     if (temp_v0 == param_1) {
-      temp_v0 = DAT_0063f4e4;
-      if (DAT_0063f4e4 != 0) goto LAB_00152c40;
+      temp_v0 = g_asdSoundStatus;
+      if (g_asdSoundStatus != 0) goto LAB_00152c40;
       break;
     }
   }
@@ -53,12 +53,12 @@ LAB_00152c40:
         }
       }
       else {
-        DAT_0063f4e4 = *(int *)(param_1 + 0xd8);
-        if (DAT_0063f4e4 != 0) {
-          *(unsigned int *)(DAT_0063f4e4 + 0xdc) = 0;
+        g_asdSoundStatus = *(int *)(param_1 + 0xd8);
+        if (g_asdSoundStatus != 0) {
+          *(unsigned int *)(g_asdSoundStatus + 0xdc) = 0;
         }
         else {
-          DAT_0063f4e4 = 0;
+          g_asdSoundStatus = 0;
         }
       }
       break;
@@ -75,7 +75,7 @@ LAB_00152c74:
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < *(int *)(param_1 + 0xec));
   }
-  FUN_0019a5a0(param_1);
+  asdMemFree(param_1);
   nn_os_CriticalSection_Leave((unsigned int)&DAT_0063f4f0);
   return;
 }

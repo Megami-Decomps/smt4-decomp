@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-extern unsigned int FUN_002e3390(void);
+extern unsigned int wstrlen(void);
 /* Supplied declaration required: nw_gfx_Model_GetAnimTargetObject. */
 extern int nw_ut_ResDicPatricia_Get(int *, unsigned int, unsigned int);
 
@@ -88,7 +88,7 @@ void nw_gfx_Model_BindVisibilityAnim(int param_1,int param_2)
             }
             temp_v11 = &temp_v9;
             if (!(temp_v9 == 0 || temp_v10 == 0)) {
-              temp_v1 = FUN_002e3390();
+              temp_v1 = wstrlen();
               temp_v3 = nw_ut_ResDicPatricia_Get(temp_v11,temp_v10,temp_v1);
               if (temp_v3 != 0) {
                 temp_v3 = ((temp_v3 - temp_v9) - 0x1c) >> 4;

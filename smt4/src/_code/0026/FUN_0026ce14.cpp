@@ -8,7 +8,7 @@ int FUN_00293268(int);
 int FUN_002932d8(int);
 int FUN_002937e0(void);
 int FUN_002c1658(int, int);
-int aeabi_idivmod(unsigned int, unsigned int);
+int __aeabi_idivmod(unsigned int, unsigned int);
 
 extern int DAT_0043dcf0; /* 0x43dcf0 */
 
@@ -20,7 +20,7 @@ extern unsigned int FUN_0029e958(int);
 extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_002c1658. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 unsigned int FUN_0026ce14(int param_1,int param_2)
@@ -41,13 +41,13 @@ unsigned int FUN_0026ce14(int param_1,int param_2)
   }
   temp_v6 = 3;
   temp_v0 = FUN_0029e958(param_1);
-  aeabi_idivmod(*(unsigned int *)(param_1 + 0x50),temp_v0);
+  __aeabi_idivmod(*(unsigned int *)(param_1 + 0x50),temp_v0);
   if (temp_v4 != 0) {
     temp_v1 = FUN_0029efa8(param_1);
     temp_v2 = FUN_0029ee54(param_1);
     if (temp_v1 == temp_v2 - 1) {
       temp_v0 = FUN_0029e958(param_1);
-      aeabi_idivmod(*(unsigned int *)(param_1 + 0x50),temp_v0);
+      __aeabi_idivmod(*(unsigned int *)(param_1 + 0x50),temp_v0);
       temp_v6 = temp_v5 - 1;
     }
   }

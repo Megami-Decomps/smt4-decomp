@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e6e26(void);
 int FUN_0030f69c(unsigned int, unsigned int, int);
 
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002e6e26. */
 /* Supplied declaration required: FUN_0030f69c. */
 
@@ -19,7 +19,7 @@ unsigned int FUN_002a38f4(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   if ((temp_v0 != 0) && (temp_v0 = FUN_002e6e26(), temp_v0 != 0)) {
     temp_v1 = FUN_002e6e26();
     FUN_0030f69c(temp_v1,0xffffffff,0);

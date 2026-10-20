@@ -9,7 +9,7 @@ int FUN_00289058(int, int);
 int FUN_002bc01c(int);
 int FUN_002d56c4(int, int, int);
 int FUN_002d56f0(void);
-int aeabi_idivmod(...);
+int __aeabi_idivmod(...);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ extern int FUN_002bfde4(unsigned char);
 extern int FUN_002c15fc(void);
 /* Supplied declaration required: FUN_002d56c4. */
 /* Supplied declaration required: FUN_002d56f0. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 unsigned char FUN_0029efd8(int param_1,int param_2)
@@ -73,7 +73,7 @@ unsigned char FUN_0029efd8(int param_1,int param_2)
     temp_v6 = *(int *)(param_1 + 0x24);
     temp_v7 = *(int *)(param_1 + 0x20);
     temp_v8 = *(int *)(param_1 + 0x38);
-    temp_v9 = aeabi_idivmod(*(unsigned int *)(param_1 + 0x50),temp_v8);
+    temp_v9 = __aeabi_idivmod(*(unsigned int *)(param_1 + 0x50),temp_v8);
     if (temp_v9 <= temp_v7) {
       FUN_00289058(param_1,temp_v9);
     }
@@ -93,7 +93,7 @@ unsigned char FUN_0029efd8(int param_1,int param_2)
     FUN_002d56f0();
     temp_v4 = *(int *)(param_1 + 0x48);
     temp_v9 = *(int *)(param_1 + 0x50);
-    aeabi_idivmod(temp_v9,temp_v8);
+    __aeabi_idivmod(temp_v9,temp_v8);
     if ((temp_v14 != 0) && (temp_v9 <= (temp_v6 + temp_v7) * temp_v8 + temp_v4)) {
       if ((temp_v4 == temp_v5 + 1) &&
          (((temp_v4 = FUN_002bfde4(*(unsigned char *)(param_1 + 0x2c)), temp_v4 != 0 ||

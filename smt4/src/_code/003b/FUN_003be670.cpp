@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022abe0(int, unsigned short [16]);
 int FUN_00282924(...);
 int FUN_00283e48(void);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int VectorUnsignedToFloat(int, int);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0022abe0. */
 /* Supplied declaration required: FUN_00282924. */
 /* Supplied declaration required: FUN_00283e48. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 
 
 void FUN_003be670(unsigned int param_1,unsigned int param_2)
@@ -37,10 +37,10 @@ void FUN_003be670(unsigned int param_1,unsigned int param_2)
   unsigned int in_fpscr;
   unsigned short temp_v3 [16];
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   FUN_00282924(temp_v0,param_1);
   if (temp_v0 != 0) {
-    puVar2 = (unsigned int *)FUN_002939f4();
+    puVar2 = (unsigned int *)btlGetMainState();
     FUN_00282924(puVar2,param_2);
     if ((puVar2 != (unsigned int *)0x0) && ((*puVar2 & 0x100) != 0)) {
       temp_v3[0] = 0;

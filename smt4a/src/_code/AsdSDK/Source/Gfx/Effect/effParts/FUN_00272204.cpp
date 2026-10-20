@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
-int FUN_0019a5a0(void);
+int memAlloc(int, int, int, int, int, int);
+int asdMemFree(void);
 int rt_memcpy(void);
 
 typedef struct fn_00272204_arg0 fn_00272204_arg0;
@@ -34,8 +34,8 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_00167ab4. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -47,7 +47,7 @@ void FUN_00272204(fn_00272204_arg0 *param_1,fn_00272204_arg1 *param_2,int param_
   int temp_v0;
   
   if (param_1->field_0x28 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     param_1->field_0x20 = 0;
     param_1->field_0x24 = 0;
     param_1->field_0x28 = 0;
@@ -58,7 +58,7 @@ void FUN_00272204(fn_00272204_arg0 *param_1,fn_00272204_arg1 *param_2,int param_
   }
   if ((param_2 != (fn_00272204_arg1 *)0x0 && param_3 != 0) && -1 < temp_v0) {
     temp_v0 = 0x10000;
-    FUN_00167ab4(0x10000,0x100,0,param_3,0x10,1);
+    memAlloc(0x10000,0x100,0,param_3,0x10,1);
     param_1->field_0x1c = param_4;
     param_1->field_0x28 = temp_v0;
     param_1->field_0x20 = temp_v0;

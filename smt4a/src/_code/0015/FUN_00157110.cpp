@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00157110(int param_1)
@@ -22,7 +22,7 @@ void FUN_00157110(int param_1)
   if (*(int **)(param_1 + 0x1c) != piVar4) {
     do {
       if (*piVar4 != 0) {
-        FUN_0019a5a0();
+        asdMemFree();
       }
       piVar4 = piVar4 + 1;
     } while (*(int **)(param_1 + 0x1c) != piVar4);

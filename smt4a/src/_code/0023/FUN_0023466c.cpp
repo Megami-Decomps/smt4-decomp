@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00192748(unsigned int);
-int FUN_00192798(void);
+int dataTableGetCount(unsigned int);
+int dataTableGetEntries(void);
 int FUN_003fd63c(int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -13,12 +13,12 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern unsigned int *DAT_0058104c; /* 0x58104c */
+extern unsigned int *g_popupState; /* 0x58104c */
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int FUN_0018719c(void);
-/* Supplied declaration required: FUN_00192748. */
-/* Supplied declaration required: FUN_00192798. */
+/* Supplied declaration required: dataTableGetCount. */
+/* Supplied declaration required: dataTableGetEntries. */
 extern int FUN_00365bc4(int);
 /* Supplied declaration required: FUN_003fd63c. */
 
@@ -36,15 +36,15 @@ void FUN_0023466c(int param_1,int param_2)
   int *piVar7;
   unsigned char temp_v5;
   
-  temp_v0 = FUN_00187180(0x43,0);
-  FUN_00192798();
-  temp_v1 = FUN_00192748(temp_v0);
+  temp_v0 = dataTableGet(0x43,0);
+  dataTableGetEntries();
+  temp_v1 = dataTableGetCount(temp_v0);
   temp_v4 = 0;
   if ((int)temp_v4 < temp_v1) {
     do {
-      temp_v0 = FUN_00187180(0x43,0);
-      temp_v2 = FUN_00192798();
-      temp_v3 = FUN_00192748(temp_v0);
+      temp_v0 = dataTableGet(0x43,0);
+      temp_v2 = dataTableGetEntries();
+      temp_v3 = dataTableGetCount(temp_v0);
       piVar7 = (int *)0x0;
       if (temp_v4 < temp_v3) {
         piVar7 = (int *)(temp_v2 + temp_v4 * 0x20);
@@ -59,8 +59,8 @@ void FUN_0023466c(int param_1,int param_2)
           ((*(short *)((int)piVar7 + 10) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 == 0)))) &&
          ((short)piVar7[3] == param_2)) {
         temp_v1 = FUN_00365bc4((int)(short)piVar7[4]);
-        puVar1 = DAT_0058104c;
-        DAT_0058104c[1] = 0;
+        puVar1 = g_popupState;
+        g_popupState[1] = 0;
         *puVar1 = 9;
         temp_v2 = *piVar7;
         puVar1[5] = temp_v1 + 0x24;

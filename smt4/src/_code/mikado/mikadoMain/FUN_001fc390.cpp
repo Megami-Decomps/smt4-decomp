@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002c498c(...);
-int FUN_002c4a08(...);
-int FUN_002c564c(...);
-int FUN_002c5788(...);
+int asdMemAlloc(...);
+int taskCreateDraw(...);
+int jyoucyuGetTableEntry(...);
+int asdProcessCreateSimple(...);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -22,15 +22,15 @@ extern unsigned char LAB_001fc4c0; /* 0x1fc4c0 */
 extern int FUN_001fdff0(...); /* 0x1fdff0 */
 extern unsigned char LAB_002d54dc; /* 0x2d54dc */
 extern unsigned char LAB_002d5534; /* 0x2d5534 */
-extern unsigned char DAT_0044cfd0; /* 0x44cfd0 */
+extern unsigned char g_mikado; /* 0x44cfd0 */
 extern unsigned int *DAT_0044cfd4; /* 0x44cfd4 */
 extern int DAT_0044cfd8; /* 0x44cfd8 */
 extern int DAT_0044cfdc; /* 0x44cfdc */
 
-/* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: FUN_002c4a08. */
-/* Supplied declaration required: FUN_002c564c. */
-/* Supplied declaration required: FUN_002c5788. */
+/* Supplied declaration required: asdMemAlloc. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 
 
 void FUN_001fc390(short *param_1,int param_2)
@@ -40,22 +40,22 @@ void FUN_001fc390(short *param_1,int param_2)
   unsigned int *puVar1;
   unsigned char *puVar2;
   
-  FUN_002c564c(0);
+  jyoucyuGetTableEntry(0);
   puVar1 = (unsigned int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0xc,1);
+  asdMemAlloc(0x100,0x100,0,0xc,1);
   DAT_0044cfd4 = puVar1;
   *(unsigned char *)(puVar1 + 1) = 0;
   puVar1[2] = 0;
-  DAT_0044cfd0 = 0;
+  g_mikado = 0;
   *(unsigned char *)((int)puVar1 + 5) = 0;
   if ((param_1 != (short *)0x0) && (param_2 == 4)) {
     DAT_0044cfd8 = (int)*param_1;
     DAT_0044cfdc = (int)param_1[1];
   }
   puVar2 = &LAB_001fc4ac;
-  FUN_002c5788(&LAB_001fc4ac,2,0,0,FUN_001fdff0,&LAB_002d54dc,puVar1);
+  asdProcessCreateSimple(&LAB_001fc4ac,2,0,0,FUN_001fdff0,&LAB_002d54dc,puVar1);
   *puVar1 = (unsigned int)puVar2;
-  FUN_002c4a08(&LAB_001fc4c0,0xe7,1,0,&LAB_002d5534,0,DAT_0044cfd4,puVar2);
+  taskCreateDraw(&LAB_001fc4c0,0xe7,1,0,&LAB_002d5534,0,DAT_0044cfd4,puVar2);
   return;
 }
 

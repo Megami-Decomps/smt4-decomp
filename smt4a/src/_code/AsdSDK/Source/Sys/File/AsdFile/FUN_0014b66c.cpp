@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_001a0990(...);
 int FUN_001bcd48(...);
 
@@ -14,7 +14,7 @@ int FUN_00178b04(int, unsigned char *, int);
 int FUN_001858ec(...);
 int FUN_00187788(int, int *);
 int FUN_001883b0(char *, int *, unsigned int);
-int FUN_001884b0(...);
+int vcallSlot12IfValid(...);
 int FUN_00195fc8(void);
 int FUN_0019a364(...);
 int FUN_001af148(unsigned int *);
@@ -34,10 +34,10 @@ typedef struct {
 
 extern unsigned char LAB_0014bab8; /* 0x14bab8 */
 extern unsigned char LAB_002dc6c0; /* 0x2dc6c0 */
-extern signed char DAT_005b3fb4; /* 0x5b3fb4 */
+extern signed char g_asdFile; /* 0x5b3fb4 */
 extern int *DAT_005b3fbc; /* 0x5b3fbc */
-extern int DAT_005b3fc0; /* 0x5b3fc0 */
-extern unsigned int DAT_005b3fd4; /* 0x5b3fd4 */
+extern int g_asdFileMutex; /* 0x5b3fc0 */
+extern unsigned int g_asdFileEvent; /* 0x5b3fd4 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0010032e. */
@@ -46,13 +46,13 @@ extern int FUN_00100836(int *, unsigned int, unsigned int *);
 extern int FUN_00167f74(int *);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001858ec. */
-extern int FUN_001860cc(void);
+extern int asdFileHashPackIsOpen(void);
 /* Supplied declaration required: FUN_00187788. */
 /* Supplied declaration required: FUN_001883b0. */
-/* Supplied declaration required: FUN_001884b0. */
+/* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: FUN_00195fc8. */
 /* Supplied declaration required: FUN_0019a364. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001a0990. */
 /* Supplied declaration required: FUN_001af148. */
 /* Supplied declaration required: FUN_001bcd48. */
@@ -82,39 +82,39 @@ void FUN_0014b66c(void)
   unsigned int temp_v8;
   
   do {
-    FUN_001af148(&DAT_005b3fd4);
-    if (DAT_005b3fb4 != '\0') {
+    FUN_001af148(&g_asdFileEvent);
+    if (g_asdFile != '\0') {
       return;
     }
-    FUN_0010032e(&DAT_005b3fc0);
+    FUN_0010032e(&g_asdFileMutex);
     piVar8 = DAT_005b3fbc;
     piVar4 = &temp_v3;
-    FUN_0019a364(&temp_v3,DAT_005b3fc0,1);
+    FUN_0019a364(&temp_v3,g_asdFileMutex,1);
     while( 1 ) {
       if ((int)piVar4 < 0) {
         FUN_002e3140();
       }
       if (piVar8 == (int *)0x0) break;
-      if (DAT_005b3fb4 != '\0') {
+      if (g_asdFile != '\0') {
         return;
       }
       if (!(*piVar8 == 4 || *piVar8 == 5)) {
         if (piVar8[0x4e] != 0) {
           software_interrupt(0x24);
-          if (DAT_005b3fc0 < 0) {
+          if (g_asdFileMutex < 0) {
             FUN_002e3140();
           }
           (*(romwright_code *)piVar8[0x4e])(piVar8 + 0xb);
           piVar8[0x4e] = 0;
           piVar4 = &temp_v3;
-          FUN_0019a364(&temp_v3,DAT_005b3fc0,1);
+          FUN_0019a364(&temp_v3,g_asdFileMutex,1);
           if ((int)piVar4 < 0) {
             FUN_002e3140();
           }
         }
         temp_v0 = piVar8[0x4f];
         if (((temp_v0 == 0) || (FUN_00187788(temp_v0,piVar8), temp_v0 == 0)) &&
-           ((temp_v0 = FUN_001860cc(), temp_v0 == 0 || (temp_v0 = FUN_00167f74(piVar8), temp_v0 == 0)))) {
+           ((temp_v0 = asdFileHashPackIsOpen(), temp_v0 == 0 || (temp_v0 = FUN_00167f74(piVar8), temp_v0 == 0)))) {
           switch(*piVar8) {
           case 0:
             pcVar2 = (char *)0x18;
@@ -239,7 +239,7 @@ void FUN_0014b66c(void)
                 if ((*(unsigned int *)(temp_v0 + 4) & 1) != 0) {
                   FUN_00195fc8();
                 }
-                FUN_001884b0(*(unsigned int *)(temp_v0 + 4) & 0xfffffffe);
+                vcallSlot12IfValid(*(unsigned int *)(temp_v0 + 4) & 0xfffffffe);
                 *(unsigned int *)(temp_v0 + 4) = 0;
               }
               if ((int *)piVar8[0x4b] != (int *)0x0) {
@@ -262,19 +262,19 @@ void FUN_0014b66c(void)
         }
         if ((piVar8[0x50] < 0) && (piVar8[0x51] != 0)) {
           software_interrupt(0x24);
-          if (DAT_005b3fc0 < 0) {
+          if (g_asdFileMutex < 0) {
             FUN_002e3140();
           }
           (*(romwright_code *)piVar8[0x51])(piVar8[0x52],piVar8);
           piVar4 = &temp_v3;
-          FUN_0019a364(&temp_v3,DAT_005b3fc0,1);
+          FUN_0019a364(&temp_v3,g_asdFileMutex,1);
           if ((int)piVar4 < 0) {
             FUN_002e3140();
           }
         }
         if ((*piVar8 == 4 || *piVar8 == 5) && (piVar8[0x4c] != 0)) {
           software_interrupt(0x24);
-          if (DAT_005b3fc0 < 0) {
+          if (g_asdFileMutex < 0) {
             FUN_002e3140();
           }
           piVar4 = (int *)piVar8[0x4d];
@@ -283,39 +283,39 @@ void FUN_0014b66c(void)
           }
           (*(romwright_code *)piVar8[0x4c])(piVar4);
           piVar4 = &temp_v3;
-          FUN_0019a364(&temp_v3,DAT_005b3fc0,1);
+          FUN_0019a364(&temp_v3,g_asdFileMutex,1);
           if ((int)piVar4 < 0) {
             FUN_002e3140();
           }
         }
         software_interrupt(0x24);
-        if (DAT_005b3fc0 < 0) {
+        if (g_asdFileMutex < 0) {
           FUN_002e3140();
         }
         piVar8 = (int *)piVar8[0x53];
         piVar4 = &temp_v3;
-        FUN_0019a364(&temp_v3,DAT_005b3fc0,1);
+        FUN_0019a364(&temp_v3,g_asdFileMutex,1);
       }
       else {
         software_interrupt(0x24);
-        if (DAT_005b3fc0 < 0) {
+        if (g_asdFileMutex < 0) {
           FUN_002e3140();
         }
         temp_v0 = piVar8[1];
         piVar8[1] = temp_v0 - piVar8[2];
         if (0 < temp_v0 - piVar8[2]) {
           piVar4 = &temp_v3;
-          FUN_0019a364(&temp_v3,DAT_005b3fc0,1);
+          FUN_0019a364(&temp_v3,g_asdFileMutex,1);
           if ((int)piVar4 < 0) {
             FUN_002e3140();
           }
           software_interrupt(0x24);
-          if (DAT_005b3fc0 < 0) {
+          if (g_asdFileMutex < 0) {
             FUN_002e3140();
           }
           piVar8 = (int *)piVar8[0x53];
           piVar4 = &temp_v3;
-          FUN_0019a364(&temp_v3,DAT_005b3fc0,1);
+          FUN_0019a364(&temp_v3,g_asdFileMutex,1);
           continue;
         }
         temp_v0 = piVar8[0x54];
@@ -333,19 +333,19 @@ void FUN_0014b66c(void)
           }
         }
         if ((piVar8[4] == 0) && (piVar8[3] != 0)) {
-          FUN_0019a5a0();
+          asdMemFree();
         }
         piVar8[3] = 0;
-        FUN_0019a5a0(piVar8);
+        asdMemFree(piVar8);
         piVar4 = &temp_v3;
-        FUN_0019a364(&temp_v3,DAT_005b3fc0,1);
+        FUN_0019a364(&temp_v3,g_asdFileMutex,1);
         piVar8 = piVar7;
       }
     }
-    if (DAT_005b3fb4 != '\0') {
+    if (g_asdFile != '\0') {
       return;
     }
-    FUN_001a0990(&DAT_005b3fd4);
+    FUN_001a0990(&g_asdFileEvent);
     FUN_001bcd48(&LAB_002dc6c0,0);
   } while( 1 );
 }

@@ -7,8 +7,8 @@ extern "C" {
 extern unsigned int DAT_00570dc0; /* 0x570dc0 */
 extern unsigned int DAT_00570dc4; /* 0x570dc4 */
 
-extern int FUN_0014aa78(void);
-extern int FUN_00236038(void);
+extern int btlGetMainState(void);
+extern int scrGetArg(void);
 
 
 unsigned int FUN_003b8520(void)
@@ -18,8 +18,8 @@ unsigned int FUN_003b8520(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00236038();
-  temp_v1 = FUN_0014aa78();
+  temp_v0 = scrGetArg();
+  temp_v1 = btlGetMainState();
   if (temp_v0 >= 1) {
     temp_v2 = DAT_00570dc0 | *(unsigned int *)(temp_v1 + 0x45a0);
     *(unsigned int *)(temp_v1 + 0x45a4) = DAT_00570dc4 | *(unsigned int *)(temp_v1 + 0x45a4);

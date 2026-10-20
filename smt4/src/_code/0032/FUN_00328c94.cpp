@@ -1,30 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00328c94` (_code @ 0x328c94, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instructions identical to retail; the retail literal pool carries one extra unreferenced word ahead of 0xcf78. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+typedef struct PartyEntry {
+    /* 0x000 */ s8 id;
+    /* 0x001 */ u8 unk001[0x61F];
+} PartyEntry;
 
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_00295408(void);
-extern int FUN_002a8740(int);
+typedef struct Party {
+    /* 0x0000 */ u8 unk0000[0x3654];
+    /* 0x3654 */ PartyEntry entries[25];
+    /* 0xCF74 */ u8 unkCF74[4];
+    /* 0xCF78 */ int current;      /* index of the current entry */
+} Party;
 
+int scrSetResult(int value);
+int FUN_00295408(void);
+u16 *FUN_002a8740(int id);
 
-unsigned int FUN_00328c94(int *param_1)
-
+/* Script command: looks up a value for the current party entry (from FUN_002a8740's table at FUN_00295408()) and passes it to scrSetResult. */
+u32 FUN_00328c94(Party **partyPtr)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = *param_1;
-  if (temp_v0 != 0) {
-    temp_v0 = FUN_002a8740((int)*(char *)(temp_v0 + *(int *)(temp_v0 + 0xcf78) * 0x620 + 0x3654));
-    temp_v1 = FUN_00295408();
-    FUN_0028dcb0(*(unsigned short *)(temp_v0 + temp_v1 * 2 + 0x34));
-  }
-  return 1;
+    Party *party = *partyPtr;
+
+    if (party != NULL) {
+        PartyEntry *entry = &party->entries[party->current];
+        u8 *table = (u8 *)FUN_002a8740(entry->id);
+        int index = FUN_00295408();
+
+        scrSetResult(*(u16 *)(table + index * 2 + 0x34));
+    }
+    return 1;
 }
 
 } /* extern "C" */

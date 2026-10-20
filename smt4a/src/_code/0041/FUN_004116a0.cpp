@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
-int FUN_0019c364(void);
+int asdMemFree(void);
+int scrScriptProcessDestroy(void);
 int FUN_002a49e4(unsigned int, unsigned int);
 int FUN_002c2cc4(int, int, int, int);
 int FUN_002c2d5c(int);
@@ -36,13 +36,13 @@ extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_0015688c(void);
 extern int FUN_001633a0(unsigned int);
 extern int FUN_00187168(void);
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002a49e4. */
 /* Supplied declaration required: FUN_002c2cc4. */
 /* Supplied declaration required: FUN_002c2d5c. */
@@ -75,11 +75,11 @@ void FUN_004116a0(int param_1)
   int temp_v13;
   
   if (*(int *)(param_1 + 0x28) != 0) {
-    FUN_0019c364();
+    scrScriptProcessDestroy();
     *(unsigned int *)(param_1 + 0x28) = 0;
   }
   if (*(int *)(param_1 + 0x24) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x24) = 0;
   }
   FUN_004f85c8(DAT_00573808,1);
@@ -120,7 +120,7 @@ void FUN_004116a0(int param_1)
     temp_v5 = FUN_001633a0((temp_v5 - 1U) & 0xffff);
     temp_v3 = *(unsigned short *)((int)&temp_v6 + temp_v5 * 2);
   }
-  temp_v5 = FUN_0014aa78();
+  temp_v5 = btlGetMainState();
   temp_v2 = FUN_0019acdc(temp_v3,1);
   temp_v6 = (unsigned int *)&temp_v13;
   FUN_003f1b3c(temp_v5,temp_v2,2,&temp_v12);

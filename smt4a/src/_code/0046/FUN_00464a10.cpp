@@ -1,31 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00464a10` (_code @ 0x464a10, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mov r2, #0xb00 is emitted after the two pointer arguments instead of before them. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001915c4(int, int, int);
-int FUN_002e5700(int, unsigned char *, int, int);
-int FUN_004637fc(void);
+typedef struct Object {
+    /* 0x00 */ u8 unk00[0x64];
+    /* 0x64 */ u8 member[0x2C];  /* embedded sub-object */
+    /* 0x90 */ u8 bufferA[4];
+    /* 0x94 */ u8 bufferB[0xB00];
+} Object;
 
+int FUN_001914b8(void *member);
+typedef struct BufRef {
+    u8 *ptr;
+} BufRef;
 
-extern int FUN_001914b8(int);
-/* Supplied declaration required: FUN_001915c4. */
-/* Supplied declaration required: FUN_002e5700. */
-/* Supplied declaration required: FUN_004637fc. */
+int FUN_001915c4(BufRef first, BufRef second, int size);
+int FUN_002e5700(void *dst, u8 *src, int size, int align);
+int FUN_004637fc(Object *self);
 
-
-int FUN_00464a10(int param_1)
-
+/* Destructor body: runs the base destructor, clears the buffers, then destroys the embedded sub-object and returns the object pointer. */
+int FUN_00464a10(Object *self)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_004637fc();
-  FUN_001915c4(param_1 + 0x90,param_1 + 0x94,0xb00);
-  FUN_002e5700(param_1 + 0x94,(unsigned char *)0x1914b4,0x58,0x20);
-  temp_v0 = FUN_001914b8(param_1 + 100);
-  return temp_v0 - 100;
+    BufRef first;
+    BufRef second;
+
+    FUN_004637fc(self);
+    first.ptr = self->bufferA;
+    second.ptr = self->bufferB;
+    FUN_001915c4(first, second, 0xb00);
+    FUN_002e5700(self->bufferB, (u8 *)0x1914b4, 0x58, 0x20);
+    return FUN_001914b8(self->member) - 100;
 }
 
 } /* extern "C" */

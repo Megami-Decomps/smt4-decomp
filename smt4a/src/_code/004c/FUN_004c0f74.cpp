@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014aa78(void);
+int btlGetMainState(void);
 int FUN_001aba54(void);
 int FUN_0034a290(void);
 int FUN_003e8bb0(unsigned char [2], unsigned int, unsigned int *);
@@ -27,7 +27,7 @@ typedef struct {
 extern unsigned int DAT_00571408; /* 0x571408 */
 extern unsigned int DAT_0057140c; /* 0x57140c */
 
-/* Supplied declaration required: FUN_0014aa78. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001aba54. */
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: FUN_003e8bb0. */
@@ -52,7 +52,7 @@ unsigned int FUN_004c0f74(unsigned int *param_1,unsigned int param_2)
   short temp_v8;
   char temp_v9;
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   FUN_003e8bb0(temp_v6,temp_v0,param_1);
   temp_v1 = (int)temp_v8;
   if (temp_v1 != 0) {
@@ -103,7 +103,7 @@ unsigned int FUN_004c0f74(unsigned int *param_1,unsigned int param_2)
        (temp_v1 = FUN_004bd098(param_1[0xff],(int)temp_v8), temp_v1 < 0)))) ||
      (FUN_004c3ac0(temp_v7,temp_v5), param_2 != temp_v5[0])) {
     temp_v2 = param_1[2];
-    temp_v4 = FUN_0014aa78();
+    temp_v4 = btlGetMainState();
     FUN_003f0e20(temp_v4,(int)(short)temp_v2);
     temp_v1 = 0;
     if (temp_v4 != 0) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f3b0; /* 0x57f3b0 */
+extern int g_eventTex; /* 0x57f3b0 */
 
 
 unsigned int FUN_003afde8(void)
@@ -16,7 +16,7 @@ unsigned int FUN_003afde8(void)
   
   temp_v0 = 0;
   while( 1 ) {
-    temp_v1 = DAT_0057f3b0 + temp_v0 * 4;
+    temp_v1 = g_eventTex + temp_v0 * 4;
     temp_v2 = *(int *)(temp_v1 + 0x4c) == 0;
     if (!temp_v2) {
       temp_v1 = *(int *)(temp_v1 + 0x50);

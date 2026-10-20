@@ -19,7 +19,7 @@ int FUN_0029ede8(int, int, unsigned int, int);
 int FUN_0029ee6c(...);
 int FUN_002b45e8(void);
 int FUN_002be624(...);
-int FUN_002c0c74(...);
+int dataTableGetCount(...);
 int SBORROW4(...);
 int rt_memcpy(...);
 
@@ -59,9 +59,9 @@ extern unsigned char *FUN_002b066c(unsigned int);
 /* Supplied declaration required: FUN_002b45e8. */
 extern unsigned short *FUN_002b63ac(void);
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c0c74. */
-extern int FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -167,9 +167,9 @@ void FUN_0026c868(void)
     }
     if ((int)temp_v4 < 0) {
       if (*(char *)(temp_v2 + 0x66c) == '\f' || *(char *)(temp_v2 + 0x66c) == '\r') {
-        temp_v5 = FUN_002c0cec(0x39,0);
-        temp_v6 = FUN_002c0cc4();
-        temp_v4 = FUN_002c0c74(temp_v5);
+        temp_v5 = dataTableGet(0x39,0);
+        temp_v6 = dataTableGetEntries();
+        temp_v4 = dataTableGetCount(temp_v5);
         if (temp_v4 >= 7) {
           temp_v6 = temp_v6 + 0x1f9;
         }
@@ -179,9 +179,9 @@ void FUN_0026c868(void)
         FUN_0029ee6c(temp_v6,0x323232ff);
       }
       if (*(char *)(temp_v2 + 0x66c) == '\x0e') {
-        temp_v5 = FUN_002c0cec(0x39,0);
-        temp_v6 = FUN_002c0cc4();
-        temp_v4 = FUN_002c0c74(temp_v5);
+        temp_v5 = dataTableGet(0x39,0);
+        temp_v6 = dataTableGetEntries();
+        temp_v4 = dataTableGetCount(temp_v5);
         if (temp_v4 >= 8) {
           temp_v6 = temp_v6 + 0x24d;
         }
@@ -191,9 +191,9 @@ void FUN_0026c868(void)
         FUN_0029ee6c(temp_v6,0x323232ff);
       }
       if (*(char *)(temp_v2 + 0x66c) == '\x04') {
-        temp_v5 = FUN_002c0cec(0x39,0);
-        temp_v6 = FUN_002c0cc4();
-        temp_v4 = FUN_002c0c74(temp_v5);
+        temp_v5 = dataTableGet(0x39,0);
+        temp_v6 = dataTableGetEntries();
+        temp_v4 = dataTableGetCount(temp_v5);
         if (temp_v4 >= 3) {
           temp_v6 = temp_v6 + 0xa9;
         }
@@ -203,9 +203,9 @@ void FUN_0026c868(void)
         FUN_0029ee6c(temp_v6,0x323232ff);
       }
       if (*(char *)(temp_v2 + 0x66c) == '\x0f') {
-        temp_v5 = FUN_002c0cec(0x39,0);
-        temp_v6 = FUN_002c0cc4();
-        temp_v4 = FUN_002c0c74(temp_v5);
+        temp_v5 = dataTableGet(0x39,0);
+        temp_v6 = dataTableGetEntries();
+        temp_v4 = dataTableGetCount(temp_v5);
         if (temp_v4 >= 9) {
           temp_v6 = temp_v6 + 0x2a1;
         }
@@ -215,9 +215,9 @@ void FUN_0026c868(void)
         FUN_0029ee6c(temp_v6,0x323232ff);
       }
       if (*(char *)(temp_v2 + 0x66c) == '\x02') {
-        temp_v5 = FUN_002c0cec(0x39,0);
-        temp_v3 = FUN_002c0cc4();
-        temp_v6 = FUN_002c0c74(temp_v5);
+        temp_v5 = dataTableGet(0x39,0);
+        temp_v3 = dataTableGetEntries();
+        temp_v6 = dataTableGetCount(temp_v5);
         if (temp_v6 != 0) {
           temp_v3 = temp_v3 + 1;
         }
@@ -227,9 +227,9 @@ void FUN_0026c868(void)
         FUN_0029ee6c(temp_v3,0x323232ff);
       }
       if (*(char *)(temp_v2 + 0x66c) == '\x03') {
-        temp_v5 = FUN_002c0cec(0x39,0);
-        temp_v6 = FUN_002c0cc4();
-        temp_v4 = FUN_002c0c74(temp_v5);
+        temp_v5 = dataTableGet(0x39,0);
+        temp_v6 = dataTableGetEntries();
+        temp_v4 = dataTableGetCount(temp_v5);
         temp_v2 = DAT_0043da2c;
         if (temp_v4 >= 2) {
           temp_v6 = temp_v6 + 0x55;
@@ -323,9 +323,9 @@ void FUN_0026c868(void)
     return;
   case 10:
     if (*(int *)(DAT_0043dcf0 + 0xb3c) == 0) {
-      temp_v5 = FUN_002c0cec(0x39,0);
-      temp_v6 = FUN_002c0cc4();
-      temp_v4 = FUN_002c0c74(temp_v5);
+      temp_v5 = dataTableGet(0x39,0);
+      temp_v6 = dataTableGetEntries();
+      temp_v4 = dataTableGetCount(temp_v5);
       if (temp_v4 < 4) {
         return;
       }
@@ -339,18 +339,18 @@ void FUN_0026c868(void)
     if (*(int *)(DAT_0043dcf0 + 0xb3c) != 1) {
       return;
     }
-    temp_v5 = FUN_002c0cec(0x39,0);
-    temp_v6 = FUN_002c0cc4();
-    temp_v4 = FUN_002c0c74(temp_v5);
+    temp_v5 = dataTableGet(0x39,0);
+    temp_v6 = dataTableGetEntries();
+    temp_v4 = dataTableGetCount(temp_v5);
     if (temp_v4 < 5) {
       return;
     }
     temp_v6 = temp_v6 + 0x150;
     break;
   case 0xb:
-    temp_v5 = FUN_002c0cec(0x39,0);
-    temp_v6 = FUN_002c0cc4();
-    temp_v4 = FUN_002c0c74(temp_v5);
+    temp_v5 = dataTableGet(0x39,0);
+    temp_v6 = dataTableGetEntries();
+    temp_v4 = dataTableGetCount(temp_v5);
     if (temp_v4 < 6) {
       return;
     }

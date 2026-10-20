@@ -1,33 +1,25 @@
-#include "romwright_types.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
-int FUN_00137ee0(int, int, int);
-int FUN_00236038(...);
-int FUN_00324bc8(int, int, int);
-int FUN_00376fb8(unsigned int);
+void FUN_00324bc8(s32 a, s32 b, s32 c);
+void FUN_00376fb8(u32 value);
+u32 scrGetArg(...);
+void asdSequenceRequest(s32 a, s32 b, s32 c);
 
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern GameStateA g_gameState;
 
-/* Supplied declaration required: FUN_00137ee0. */
-/* Supplied declaration required: FUN_00236038. */
-/* Supplied declaration required: FUN_00324bc8. */
-/* Supplied declaration required: FUN_00376fb8. */
-
-
-unsigned int FUN_0037019c(void)
-
+/* Script command: passes the script's first argument to FUN_00376fb8, then runs FUN_00324bc8 and asdSequenceRequest. */
+s32 FUN_0037019c(void)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_00236038();
-  FUN_00236038(1);
-  FUN_00376fb8(temp_v0);
-  FUN_00324bc8(0x18,1,0);
-  (*(unsigned char *)((unsigned char *)&DAT_005f15fc + 0x574)) = 0;
-  FUN_00137ee0(6,0,0);
-  return 1;
+    u32 value = scrGetArg();
+
+    scrGetArg(1);
+    FUN_00376fb8(value);
+    FUN_00324bc8(0x18, 1, 0);
+    g_gameState.unk574 = 0;
+    asdSequenceRequest(6, 0, 0);
+    return 1;
 }
 
 } /* extern "C" */

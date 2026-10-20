@@ -1,0 +1,39 @@
+#include "common.h"
+
+extern "C" {
+
+/* Record with an id halfword at 0x62. */
+typedef struct {
+    u8 unk00[0x62];
+    u16 id;             /* 0x62 */
+} Record;
+
+/* Block with a table of signed record indices at 0x1c88. */
+typedef struct {
+    u8 unk00[0x1c88];
+    s8 slots[1];        /* 0x1c88 */
+} SlotBlock;
+
+Record *FUN_001ab854(int index);
+SlotBlock *FUN_001ab888(void);
+int FUN_001b347c(void);
+
+/* Finds the record with `id` among the block's slots; NULL when none matches. */
+Record *slotRecordFindById(u32 id)
+{
+    int i = 0;
+
+    if (i < FUN_001b347c()) {
+        do {
+            Record *record = FUN_001ab854(FUN_001ab888()->slots[i]);
+
+            if (record->id == id) {
+                return record;
+            }
+            i++;
+        } while (i < FUN_001b347c());
+    }
+    return NULL;
+}
+
+} /* extern "C" */

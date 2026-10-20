@@ -8,7 +8,7 @@ int FUN_00178b04(...);
 int FUN_003ca5a4(...);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
-int FUN_0040a96c(...);
+int moriModelContentCreateBinding(...);
 int FUN_0040a9a0(...);
 int FUN_0040ab9c(...);
 int FUN_00416168(...);
@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_003ca5a4. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
-/* Supplied declaration required: FUN_0040a96c. */
+/* Supplied declaration required: moriModelContentCreateBinding. */
 /* Supplied declaration required: FUN_0040a9a0. */
 /* Supplied declaration required: FUN_0040ab9c. */
 extern int FUN_0040ac08(void);
@@ -55,7 +55,7 @@ void FUN_003a3b8c(int *param_1)
     FUN_0040a9a0(*piVar3,temp_v3);
     FUN_0040ab9c(*(int *)(temp_v2 + 0x4efc),*(unsigned int *)(*piVar3 + 0xc));
     FUN_00416168(*(unsigned int *)(*piVar3 + 0xc),*(unsigned int *)(*(int *)(temp_v2 + 0x4efc) + 0xc));
-    FUN_0040a96c(*piVar3);
+    moriModelContentCreateBinding(*piVar3);
     *(unsigned int *)(temp_v2 + 0x4ef4) = 0;
     FUN_003ca5a4();
     return;

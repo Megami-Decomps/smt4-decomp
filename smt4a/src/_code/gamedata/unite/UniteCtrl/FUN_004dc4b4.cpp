@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0010063a(int, int, int, unsigned char *);
-int FUN_00163060(int, int, int, unsigned int, int);
+int qsort(int, int, int, unsigned char *);
+int asdMemoryAllocTracked(int, int, int, unsigned int, int);
 int FUN_00184310(void);
-int FUN_00192798(void);
-int FUN_002e6354(...);
+int dataTableGetEntries(void);
+int sysMemClear(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,13 +17,13 @@ typedef struct {
 
 extern unsigned char LAB_002fe050; /* 0x2fe050 */
 
-/* Supplied declaration required: FUN_0010063a. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: qsort. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_00184310. */
-extern unsigned int FUN_00187180(unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-/* Supplied declaration required: FUN_00192798. */
-/* Supplied declaration required: FUN_002e6354. */
+extern unsigned int dataTableGet(unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+/* Supplied declaration required: dataTableGetEntries. */
+/* Supplied declaration required: sysMemClear. */
 
 
 unsigned char * FUN_004dc4b4(unsigned char *param_1)
@@ -41,11 +41,11 @@ unsigned char * FUN_004dc4b4(unsigned char *param_1)
   int temp_v6;
   unsigned char temp_v7 [72];
   
-  temp_v0 = FUN_00187180(0);
-  FUN_00192798();
-  temp_v1 = FUN_00192748(temp_v0);
-  FUN_002e6354(temp_v7,0x44);
-  FUN_002e6354(param_1,0x41);
+  temp_v0 = dataTableGet(0);
+  dataTableGetEntries();
+  temp_v1 = dataTableGetCount(temp_v0);
+  sysMemClear(temp_v7,0x44);
+  sysMemClear(param_1,0x41);
   temp_v4 = 0;
   if (temp_v4 < temp_v1) {
     do {
@@ -63,7 +63,7 @@ unsigned char * FUN_004dc4b4(unsigned char *param_1)
     *(unsigned int *)(param_1 + temp_v5 * 4 + 0x44) = 0;
     if (param_1[temp_v5] != '\0') {
       temp_v0 = 0x100;
-      FUN_00163060(0x100,0x100,0,(unsigned int)(unsigned char)param_1[temp_v5] << 2,1);
+      asdMemoryAllocTracked(0x100,0x100,0,(unsigned int)(unsigned char)param_1[temp_v5] << 2,1);
       *(unsigned int *)(param_1 + temp_v5 * 4 + 0x44) = temp_v0;
     }
     temp_v5 = temp_v5 + 1;
@@ -90,7 +90,7 @@ unsigned char * FUN_004dc4b4(unsigned char *param_1)
   puVar8 = param_1;
   do {
     if (*(int *)(param_1 + temp_v5 * 4 + 0x44) != 0) {
-      FUN_0010063a(*(int *)(param_1 + temp_v5 * 4 + 0x44),*puVar8,4,&LAB_002fe050);
+      qsort(*(int *)(param_1 + temp_v5 * 4 + 0x44),*puVar8,4,&LAB_002fe050);
     }
     temp_v6 = temp_v6 - 1;
     puVar8 = puVar8 + 1;

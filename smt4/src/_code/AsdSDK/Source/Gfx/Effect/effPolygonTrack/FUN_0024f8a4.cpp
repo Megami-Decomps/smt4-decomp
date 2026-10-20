@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_002469ec(unsigned int, unsigned int, unsigned char *, int, int);
 int FUN_0024ad88(unsigned int);
-int FUN_002c32a0(int, int, int, unsigned int, int, int);
-int FUN_002c415c(unsigned int);
-int FUN_002c4938(void);
+int memAlloc(int, int, int, unsigned int, int, int);
+int asdMemFree(unsigned int);
+int memClear(void);
 int FUN_002d1480(unsigned int, int, int, int, unsigned char *, int);
 int FUN_00305400(...);
 int VectorUnsignedToFloat(...);
@@ -29,9 +29,9 @@ extern unsigned char DAT_004737ce; /* 0x4737ce */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002469ec. */
 /* Supplied declaration required: FUN_0024ad88. */
-/* Supplied declaration required: FUN_002c32a0. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002d1480. */
 /* Supplied declaration required: FUN_00305400. */
 
@@ -69,13 +69,13 @@ void FUN_0024f8a4(unsigned int *param_1,unsigned int param_2,unsigned int *param
     if (temp_v0 != 0) {
       FUN_0024ad88(*(unsigned int *)(temp_v0 + 0x10));
       FUN_0024ad88(*(unsigned int *)(temp_v0 + 0x14));
-      FUN_002c415c(temp_v0);
+      asdMemFree(temp_v0);
     }
     temp_v1 = *param_3;
     temp_v3 = *param_1 & 0xffff;
     temp_v2 = 0x10000;
-    FUN_002c32a0(0x10000,0x100,0,temp_v3 * 2 + 0x1c,0x10,1);
-    FUN_002c4938();
+    memAlloc(0x10000,0x100,0,temp_v3 * 2 + 0x1c,0x10,1);
+    memClear();
     *(unsigned int *)(temp_v2 + 0x18) = temp_v2 + 0x1c;
     temp_v0 = temp_v3;
     FUN_002469ec(temp_v3,temp_v1 & 0xffff,&DAT_004736f0,3,0x48);

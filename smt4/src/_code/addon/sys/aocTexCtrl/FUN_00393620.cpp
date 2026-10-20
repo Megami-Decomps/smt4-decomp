@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c498c(...);
+int asdMemAlloc(...);
 int rt_memcpy_w(unsigned int, unsigned char *, unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002c498c. */
+/* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -43,10 +43,10 @@ void FUN_00393620(int param_1,int *param_2)
   if (*(int *)(param_1 + 4) == 0) {
     puVar7 = (unsigned int *)*param_2;
     temp_v1 = 0x100;
-    FUN_002c498c(0x100,0x100,0,8,1);
+    asdMemAlloc(0x100,0x100,0,8,1);
     *(unsigned int *)(param_1 + 4) = temp_v1;
     puVar3 = (unsigned int *)0x100;
-    FUN_002c498c(0x100,0x100,0,0x40,1);
+    asdMemAlloc(0x100,0x100,0,0x40,1);
     temp_v4 = 0;
     **(int **)(param_1 + 4) = (int)puVar3;
     temp_v1 = puVar7[1];
@@ -85,7 +85,7 @@ void FUN_00393620(int param_1,int *param_2)
     if (0 < *(int *)(temp_v5 + 0x20)) {
       do {
         puVar4 = (unsigned int *)0x100;
-        FUN_002c498c(0x100,0x100,0,0x14,1);
+        asdMemAlloc(0x100,0x100,0,0x14,1);
         *puVar4 = (unsigned int)*pbVar8;
         temp_v0 = pbVar8[4];
         puVar4[1] = (unsigned int)temp_v0;
@@ -95,7 +95,7 @@ void FUN_00393620(int param_1,int *param_2)
         }
         else {
           temp_v2 = 0x100;
-          FUN_002c498c(0x100,0x100,0,puVar4[1] * 0x14,1);
+          asdMemAlloc(0x100,0x100,0,puVar4[1] * 0x14,1);
         }
         puVar4[3] = temp_v2;
         pbVar6 = pbVar8 + 0xc;

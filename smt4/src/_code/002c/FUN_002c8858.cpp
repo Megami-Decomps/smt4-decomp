@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_00447a78; /* 0x447a78 */
+extern int g_mapIf; /* 0x447a78 */
 extern unsigned char DAT_0049f934; /* 0x49f934 */
 extern int DAT_0049f954; /* 0x49f954 */
 extern unsigned int DAT_0049f9a0; /* 0x49f9a0 */
@@ -42,15 +42,15 @@ void FUN_002c8858(void)
   int temp_v5;
   unsigned char temp_v6;
   
-  temp_v1 = DAT_00447a78;
-  temp_v3 = (unsigned int)*(char *)(DAT_00447a78 + 0xcc71);
-  temp_v5 = DAT_00447a78 + 0xcc70;
+  temp_v1 = g_mapIf;
+  temp_v3 = (unsigned int)*(char *)(g_mapIf + 0xcc71);
+  temp_v5 = g_mapIf + 0xcc70;
   if (DAT_0049fb49 != '\0') {
     temp_v6 = temp_v3 == 0;
     if (temp_v6) {
       temp_v3 = (unsigned int)DAT_0049f934;
     }
-    if ((temp_v6 && temp_v3 == 0) && (*(char *)(DAT_00447a78 + 0xcce0) == '\0')) {
+    if ((temp_v6 && temp_v3 == 0) && (*(char *)(g_mapIf + 0xcce0) == '\0')) {
       FUN_00291e40(0x10001ff);
     }
     *(unsigned char *)(temp_v1 + 0xcc71) = 1;
@@ -102,7 +102,7 @@ void FUN_002c8858(void)
     }
   }
   else if (temp_v3 != 0) {
-    *(unsigned char *)(DAT_00447a78 + 0xcc71) = 0;
+    *(unsigned char *)(g_mapIf + 0xcc71) = 0;
     *(unsigned char *)(temp_v1 + 0xcc72) = 1;
   }
   FUN_002531bc(temp_v5);

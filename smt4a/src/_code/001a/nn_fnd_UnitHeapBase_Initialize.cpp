@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int aeabi_uidivmod(int, int);
+extern int __aeabi_uidivmod(int, int);
 
 
 void nn_fnd_UnitHeapBase_Initialize
@@ -19,13 +19,13 @@ void nn_fnd_UnitHeapBase_Initialize
   unsigned int *puVar6;
   
   *(unsigned int *)(param_1 + 0x14) = param_6;
-  temp_v0 = aeabi_uidivmod((param_2 + param_5) - 1,param_5);
+  temp_v0 = __aeabi_uidivmod((param_2 + param_5) - 1,param_5);
   temp_v0 = temp_v0 * param_5;
   *(int *)(param_1 + 0x18) = temp_v0;
-  temp_v1 = aeabi_uidivmod((param_3 + param_5) - 1,param_5);
+  temp_v1 = __aeabi_uidivmod((param_3 + param_5) - 1,param_5);
   puVar6 = (unsigned int *)(temp_v1 * param_5);
   *(unsigned int **)(param_1 + 0x1c) = puVar6;
-  temp_v1 = aeabi_uidivmod((param_3 + param_4) - (int)puVar6,temp_v0);
+  temp_v1 = __aeabi_uidivmod((param_3 + param_4) - (int)puVar6,temp_v0);
   puVar3 = (unsigned int *)0x0;
   *(int *)(param_1 + 0x20) = temp_v1 * temp_v0;
   puVar5 = (unsigned int *)((int)puVar6 + (temp_v1 * temp_v0 - temp_v0));

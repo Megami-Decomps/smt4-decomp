@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 
 
 void FUN_0014e220(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -16,7 +16,7 @@ void FUN_0014e220(unsigned int *param_1,unsigned int param_2,unsigned int param_
 /* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
   unsigned int in_s0;
   
-  FUN_002e6354(param_1,0x8c);
+  sysMemClear(param_1,0x8c);
   *param_1 = param_2;
   param_1[1] = param_3;
   param_1[2] = param_4;

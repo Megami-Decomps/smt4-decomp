@@ -7,10 +7,10 @@ extern "C" {
 int FUN_004eb928(void);
 int FUN_004ec120(int *, int);
 
-extern unsigned char DAT_00571138; /* 0x571138 */
+extern unsigned char g_btlAction; /* 0x571138 */
 
-extern int FUN_00163e40(unsigned int);
-extern int FUN_00164a9c(void);
+extern int jobIsValid(unsigned int);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_004eb928. */
 /* Supplied declaration required: FUN_004ec120. */
 
@@ -31,17 +31,17 @@ unsigned int FUN_00298354(void)
   unsigned char temp_v7;
   unsigned int *puVar11;
   
-  temp_v3 = FUN_00164a9c();
-  piVar3 = (*(int * *)((unsigned char *)&DAT_00571138 + 0x4));
+  temp_v3 = jobGetWork();
+  piVar3 = (*(int * *)((unsigned char *)&g_btlAction + 0x4));
   temp_v3 = *(int *)(temp_v3 + 0xa4);
   temp_v1 = 1;
-  puVar11 = (unsigned int *)((*(int * *)((unsigned char *)&DAT_00571138 + 0x4)) + temp_v3 * 0x495 + 1);
-  temp_v4 = *(int *)(*(*(int * *)((unsigned char *)&DAT_00571138 + 0x4)) + 0xa4) - 1;
+  puVar11 = (unsigned int *)((*(int * *)((unsigned char *)&g_btlAction + 0x4)) + temp_v3 * 0x495 + 1);
+  temp_v4 = *(int *)(*(*(int * *)((unsigned char *)&g_btlAction + 0x4)) + 0xa4) - 1;
   if (temp_v4 < 0) {
     temp_v4 = 0xb;
   }
-  temp_v4 = FUN_00163e40(*(unsigned int *)(*(*(int * *)((unsigned char *)&DAT_00571138 + 0x4)) + temp_v4 * 4 + 0xc));
-  piVar8 = (*(int * *)((unsigned char *)&DAT_00571138 + 0x4));
+  temp_v4 = jobIsValid(*(unsigned int *)(*(*(int * *)((unsigned char *)&g_btlAction + 0x4)) + temp_v4 * 4 + 0xc));
+  piVar8 = (*(int * *)((unsigned char *)&g_btlAction + 0x4));
   if (temp_v4 == 0) {
     temp_v7 = 0xff;
   }
@@ -64,8 +64,8 @@ unsigned int FUN_00298354(void)
         temp_v5 = 0xffffffff;
       }
       else {
-        temp_v4 = *(int *)(*(*(int * *)((unsigned char *)&DAT_00571138 + 0x4)) + 0xa4);
-        *(unsigned char *)((*(int * *)((unsigned char *)&DAT_00571138 + 0x4)) + temp_v4 * 0x495 + 2) =
+        temp_v4 = *(int *)(*(*(int * *)((unsigned char *)&g_btlAction + 0x4)) + 0xa4);
+        *(unsigned char *)((*(int * *)((unsigned char *)&g_btlAction + 0x4)) + temp_v4 * 0x495 + 2) =
              *(unsigned char *)((int)piVar3 + temp_v3 * 0x1254 + 9);
         *(unsigned short *)((int)piVar8 + temp_v4 * 0x1254 + 10) = 0;
         *(unsigned char *)((int)piVar8 + temp_v4 * 0x1254 + 9) = 0;
@@ -76,7 +76,7 @@ unsigned int FUN_00298354(void)
       }
       return temp_v5;
     }
-    FUN_004ec120((*(int * *)((unsigned char *)&DAT_00571138 + 0x4)),(int)(char)piVar3[temp_v3 * 0x495 + 2]);
+    FUN_004ec120((*(int * *)((unsigned char *)&g_btlAction + 0x4)),(int)(char)piVar3[temp_v3 * 0x495 + 2]);
     if (piVar8 != (int *)0x0) {
       *puVar11 = *puVar11 | 2;
     }

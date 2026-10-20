@@ -12,7 +12,7 @@ int FUN_002bf810(...);
 int FUN_00338bd4(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
-int aeabi_idivmod(...);
+int __aeabi_idivmod(...);
 
 int FUN_001990d4(...);
 int FUN_00199424(...);
@@ -30,7 +30,7 @@ int FUN_0029ee6c(...);
 int FUN_002af5c0(...);
 int FUN_002b4670(...);
 int FUN_002b8ee0(...);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_00338c38(void);
 
 int FUN_00190ab0(...);
@@ -52,8 +52,8 @@ int FUN_002bee58(...);
 int FUN_002bf4f8(...);
 
 int FUN_00292dd0(...);
-int FUN_00292f28(...);
-int FUN_002939f4(void);
+int padIsButtonDown(...);
+int btlGetMainState(void);
 int FUN_00297b94(...);
 int FUN_00297ca4(...);
 int FUN_00298140(...);
@@ -122,9 +122,9 @@ extern int FUN_0028e9d4(unsigned int);
 /* Supplied declaration required: FUN_0028e9ec. */
 /* Supplied declaration required: FUN_00292c0c. */
 /* Supplied declaration required: FUN_00292dd0. */
-/* Supplied declaration required: FUN_00292f28. */
+/* Supplied declaration required: padIsButtonDown. */
 /* Supplied declaration required: FUN_00292f4c. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002942c4. */
 extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_002958f8. */
@@ -168,7 +168,7 @@ extern int FUN_002b8d54(void);
 extern int FUN_002b8d68(void);
 /* Supplied declaration required: FUN_002b8ee0. */
 /* Supplied declaration required: FUN_002bc01c. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 extern short FUN_002bed98(int);
 extern short FUN_002beda4(int);
 /* Supplied declaration required: FUN_002bee58. */
@@ -179,7 +179,7 @@ extern int FUN_002c09d0(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: FUN_00338bd4. */
 /* Supplied declaration required: FUN_00338c38. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_0019a4f4(int param_1,unsigned int param_2,unsigned int param_3)
@@ -239,7 +239,7 @@ void FUN_0019a4f4(int param_1,unsigned int param_2,unsigned int param_3)
   temp_v17 = 0;
   temp_v36[0] = '\0';
   temp_v37[0] = '\0';
-  temp_v5 = FUN_002939f4();
+  temp_v5 = btlGetMainState();
   temp_v33 = (char *)(param_1 + 0x3218);
   if ((*(unsigned int *)(temp_v5 + 0x44a8) & 0x40) != 0) {
     if (DAT_00435de0 == '\0') {
@@ -340,7 +340,7 @@ LAB_0019a5e0:
     }
     DAT_00435de0 = 0;
   }
-  temp_v5 = FUN_002939f4();
+  temp_v5 = btlGetMainState();
   temp_v34 = param_1 + 0x3344;
   if ((*(unsigned int *)(temp_v5 + 0x44a8) & 0x1000) != 0) {
     if (DAT_00435de1 == '\0') {
@@ -355,7 +355,7 @@ LAB_0019a5e0:
     temp_v7 = 0;
     temp_v5 = temp_v7;
     do {
-      temp_v16 = FUN_00292f28(temp_v7 + 0x2e);
+      temp_v16 = padIsButtonDown(temp_v7 + 0x2e);
       if (temp_v16 != 0) {
         temp_v5 = temp_v5 + 1;
       }
@@ -469,7 +469,7 @@ joined_r0x0019aa34:
         FUN_002bc01c(temp_v9);
         break;
       }
-      temp_v5 = FUN_00292f28(0x7f);
+      temp_v5 = padIsButtonDown(0x7f);
       if (temp_v5 == 0) break;
       temp_v5 = 10;
       FUN_002c1658(10,1);
@@ -586,7 +586,7 @@ LAB_0019aebc:
       if (temp_v17 == 1) {
         if (*(int *)(param_1 + 0x305c) != 0) {
           if (temp_v5 != 0) {
-            temp_v17 = FUN_002939f4();
+            temp_v17 = btlGetMainState();
             if ((*(unsigned int *)(temp_v17 + 0x44a8) & 0x40) != 0) {
               DAT_00435de8 = temp_v5 - 1;
               *(int *)(param_1 + 0x3068) = temp_v5;
@@ -661,7 +661,7 @@ LAB_0019aebc:
             else {
               temp_v7 = 1;
             }
-            temp_v17 = FUN_002939f4();
+            temp_v17 = btlGetMainState();
             if ((*(unsigned int *)(temp_v17 + 0x44a8) & 0x40) != 0) {
               DAT_00435de8 = temp_v5 - temp_v7;
               *(int *)(param_1 + 0x3068) = DAT_00435de8 + 1;
@@ -710,21 +710,21 @@ LAB_0019aebc:
       }
       temp_v17 = FUN_00297ca4(param_1,1);
       if (temp_v17 == 2) {
-        temp_v17 = FUN_002939f4();
+        temp_v17 = btlGetMainState();
         if ((*(unsigned int *)(temp_v17 + 0x44a8) & 0x40) != 0) {
-          temp_v9 = FUN_002939f4();
+          temp_v9 = btlGetMainState();
           temp_v9 = FUN_0028d2e8(temp_v9,temp_v5);
           *(unsigned int *)(param_1 + 0x3068) = temp_v9;
           temp_v6 = *(unsigned int *)(param_1 + 0x3068);
           DAT_00435dec = temp_v5;
         }
         else {
-          FUN_002939f4();
+          btlGetMainState();
           temp_v6 = FUN_0028d24c();
           *(unsigned int *)(param_1 + 0x3068) = temp_v6;
         }
         FUN_002ae164();
-        temp_v5 = FUN_002939f4();
+        temp_v5 = btlGetMainState();
         if ((*(unsigned int *)(temp_v5 + 0x44a8) & 0x40) == 0) {
           piVar14 = (int *)FUN_002a8764();
           temp_v5 = *piVar14;
@@ -802,7 +802,7 @@ LAB_0019b2b0:
       temp_v5 = 9;
       FUN_002c1658(9,1);
       if (temp_v5 == 0) {
-        temp_v5 = FUN_00292f28(0x7f);
+        temp_v5 = padIsButtonDown(0x7f);
         if (temp_v5 != 0) {
           temp_v5 = 10;
           FUN_002c1658(10,1);
@@ -855,7 +855,7 @@ LAB_0019b58c:
         if (temp_v5 != 1) break;
         if (*(int *)(param_1 + 0x305c) != 0) {
           if (temp_v6 != 0) {
-            temp_v5 = FUN_002939f4();
+            temp_v5 = btlGetMainState();
             if ((*(unsigned int *)(temp_v5 + 0x44a8) & 0x40) == 0) {
               temp_v6 = (unsigned int)*(unsigned short *)
                              (param_1 + *(int *)(param_1 + 0x305c) * 0x10 + temp_v6 * 2 + 0x341a);
@@ -912,7 +912,7 @@ LAB_0019b58c:
         else {
           temp_v17 = 1;
         }
-        temp_v5 = FUN_002939f4();
+        temp_v5 = btlGetMainState();
         if ((*(unsigned int *)(temp_v5 + 0x44a8) & 0x40) != 0) {
           temp_v6 = (temp_v6 - temp_v17) + 1;
         }
@@ -1054,7 +1054,7 @@ LAB_0019b924:
         FUN_002bc01c(0x100016d);
         break;
       }
-      temp_v5 = FUN_00292f28(0x7f);
+      temp_v5 = padIsButtonDown(0x7f);
       if (temp_v5 != 0) {
         temp_v5 = 10;
         FUN_002c1658(10,1);
@@ -1145,7 +1145,7 @@ LAB_0019bce0:
         FUN_002bc01c(temp_v9);
         break;
       }
-      temp_v5 = FUN_00292f28(0x7f);
+      temp_v5 = padIsButtonDown(0x7f);
       if (temp_v5 != 0) {
         temp_v5 = 10;
         FUN_002c1658(10,1);
@@ -1343,7 +1343,7 @@ joined_r0x0019c3c8:
     FUN_00298140(param_1,0x20,1);
     break;
   case 0x22:
-    temp_v5 = FUN_002939f4();
+    temp_v5 = btlGetMainState();
     if ((temp_v5 != 0) && (*(short *)(temp_v5 + 0x1fc4) < 4)) {
       temp_v10 = 0;
       temp_v6 = 0xffffffff;
@@ -1619,7 +1619,7 @@ LAB_0019c9b8:
     temp_v5 = FUN_00295618();
     if (temp_v5 != 0) {
       FUN_00292c0c();
-      FUN_002bd8e8(param_1 + 0x12b8,0);
+      timerStart(param_1 + 0x12b8,0);
       FUN_00298140(param_1,1);
     }
     break;
@@ -1873,7 +1873,7 @@ LAB_0019d3e4:
           }
           if (*piVar14 == 0x14) {
             if (*(char *)(temp_v43 + 0x4a) == '\0') goto LAB_0019d5d8;
-            temp_v9 = FUN_002939f4();
+            temp_v9 = btlGetMainState();
             FUN_00338bd4(temp_v9,(int)(short)temp_v5);
           }
           if (*piVar14 >= 0x2a) {
@@ -1943,7 +1943,7 @@ LAB_0019d5d8:
       temp_v17 = *piVar14;
       *piVar14 = temp_v17 + 1;
       if (temp_v17 + 1 >= 0x18) {
-        aeabi_idivmod(*(int *)(temp_v16 + 0x351c) + 1);
+        __aeabi_idivmod(*(int *)(temp_v16 + 0x351c) + 1);
         *(int *)(temp_v16 + 0x351c) = temp_v12;
         *piVar14 = 0;
       }

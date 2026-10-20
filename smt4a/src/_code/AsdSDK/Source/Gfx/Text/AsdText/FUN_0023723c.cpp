@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_00100348(int, int, unsigned int, unsigned char *);
-int FUN_00163060(int, int, int, int, int);
-int FUN_0019a5a0(int);
-int FUN_002e3390(...);
+int asdMemoryAllocTracked(int, int, int, int, int);
+int asdMemFree(int);
+int wstrlen(...);
 int FUN_0036bea0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int);
 
 /* stack frame of param_6: 3 slot(s), 12 byte(s) */
@@ -18,9 +18,9 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: FUN_00100348. */
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_002e3390. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: FUN_0036bea0. */
 
 
@@ -35,11 +35,11 @@ void FUN_0023723c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned char uStack00000008;
   
   temp_v0 = 0x100;
-  FUN_00163060(0x100,0x100,0,0x1000,0);
-  FUN_002e3390(param_6);
+  asdMemoryAllocTracked(0x100,0x100,0,0x1000,0);
+  wstrlen(param_6);
   FUN_00100348(temp_v0,0x1000,param_6,&uStack00000008);
   *(unsigned char *)(temp_v0 + 0xfff) = 0;
-  temp_v1 = FUN_002e3390(temp_v0);
+  temp_v1 = wstrlen(temp_v0);
   if (temp_v1 >= 0xffd) {
     *(unsigned char *)(temp_v0 + 0xffc) = 0xff;
     *(unsigned char *)(temp_v0 + 0xffd) = 0xff;
@@ -54,7 +54,7 @@ void FUN_0023723c(unsigned int param_1,unsigned int param_2,unsigned int param_3
     *(unsigned char *)(temp_v2 + 3) = 0;
   }
   FUN_0036bea0(param_1,param_2,param_3,param_4,param_5,temp_v0);
-  FUN_0019a5a0(temp_v0);
+  asdMemFree(temp_v0);
   return;
 }
 

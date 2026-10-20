@@ -19,8 +19,8 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_00570260; /* 0x570260 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_aocMain; /* 0x570260 */
+extern int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1610; /* 0x5f1610 */
 extern unsigned char DAT_005f1634; /* 0x5f1634 */
 extern signed char DAT_005f1b70; /* 0x5f1b70 */
@@ -86,7 +86,7 @@ void FUN_004b96a0(int param_1)
         *(unsigned int *)(param_1 + 0x116c) = 2;
       }
     }
-    else if ((*(char *)(DAT_00570260 + 0xc1) == '\0') && (temp_v1 = FUN_001b4aa0(), temp_v1 != 6)) {
+    else if ((*(char *)(g_aocMain + 0xc1) == '\0') && (temp_v1 = FUN_001b4aa0(), temp_v1 != 6)) {
       temp_v1 = FUN_001b4aa0();
       if (temp_v1 != 1) {
         temp_v1 = FUN_001b4aa0();
@@ -113,7 +113,7 @@ void FUN_004b96a0(int param_1)
       FUN_00215978(0);
     }
   }
-  DAT_005f15fc = temp_v3 + 200;
+  g_gameState = temp_v3 + 200;
   DAT_005f1634 = 0;
   DAT_005f1610 = 3;
   DAT_005f1b70 = 0;

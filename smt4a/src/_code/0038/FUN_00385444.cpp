@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_00581274; /* 0x581274 */
+extern int g_mapMain; /* 0x581274 */
 
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0020f12c. */
@@ -41,8 +41,8 @@ void FUN_00385444(void)
   unsigned int temp_v5;
   unsigned char temp_v6;
   
-  temp_v0 = DAT_00581274;
-  if (DAT_00581274 == 0) {
+  temp_v0 = g_mapMain;
+  if (g_mapMain == 0) {
     return;
   }
   FUN_00227a70();

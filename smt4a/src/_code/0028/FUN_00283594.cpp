@@ -1,33 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00283594` (_code @ 0x283594, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00236038(...);
-int FUN_00283480(void);
-int FUN_003283ac(unsigned int);
-int FUN_003a6dec(unsigned int, unsigned int);
+u32 scrGetArg(...); /* takes an optional index: the first call passes none */
+u32 FUN_003a6dec(u32 first, u32 second);
+void eventTexSetJobParam(void);
+void scrSetResult(u32 result);
 
-/* Supplied declaration required: FUN_00236038. */
-/* Supplied declaration required: FUN_00283480. */
-/* Supplied declaration required: FUN_003283ac. */
-/* Supplied declaration required: FUN_003a6dec. */
-
-
-unsigned int FUN_00283594(void)
-
+/* Combines entries 0 and 1, refreshes, and applies the combined result; always reports success. */
+u32 FUN_00283594(void)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_00236038();
-  temp_v1 = FUN_00236038(1);
-  FUN_003a6dec(temp_v0,temp_v1);
-  FUN_00283480();
-  FUN_003283ac(temp_v0);
-  return 1;
+    u32 first = scrGetArg();
+    u32 second = scrGetArg(1);
+    u32 result = FUN_003a6dec(first, second);
+
+    eventTexSetJobParam();
+    scrSetResult(result);
+    return 1;
 }
 
 } /* extern "C" */

@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0025bed8(int, int, int);
-int FUN_002c0cec(int, int);
+int dataTableGet(int, int);
 
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_0025bed8. */
-extern int FUN_002c0c74(void);
-/* Supplied declaration required: FUN_002c0cec. */
+extern int dataTableGetCount(void);
+/* Supplied declaration required: dataTableGet. */
 
 
 int FUN_002671bc(void)
@@ -21,10 +21,10 @@ int FUN_002671bc(void)
   int temp_v0;
   int temp_v1;
   
-  FUN_002c0cec(0x32,0);
-  temp_v0 = FUN_002c0c74();
-  temp_v1 = DAT_00433158;
-  FUN_0025bed8(DAT_00433158,0x28,0);
+  dataTableGet(0x32,0);
+  temp_v0 = dataTableGetCount();
+  temp_v1 = g_aocSystem;
+  FUN_0025bed8(g_aocSystem,0x28,0);
   return temp_v1 + temp_v0;
 }
 

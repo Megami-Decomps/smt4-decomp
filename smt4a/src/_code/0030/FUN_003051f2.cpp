@@ -1,54 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003051f2` (_code @ 0x3051f2, 0xa6 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the final size check loads size/pos into swapped registers (pos in r1, start + size in r0). */
+/* NON_MATCHING: the final size check loads size/pos into swapped registers (pos in r1, start + size in r0). */
+#include "shard/Reader.h"
 
 extern "C" {
 
-int FUN_002fbc1a(int, int);
-int FUN_00300900(int, int);
-int FUN_00300934(...);
-int FUN_003072ae(int, int);
-int FUN_00307316(int, int);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 flag;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u32 field08;
+    /* 0x0C */ u8 field0C[8];
+    /* 0x14 */ u8 field14[12];
+    /* 0x20 */ u8 field20[12];
+    /* 0x2C */ u8 field2C[12];
+} Record;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
+int FUN_002ee9da(Reader *reader);
+int FUN_002fbc1a(Reader *reader, void *out);
+int FUN_00300900(Reader *reader, void *out);
+int FUN_00300934(Reader *reader, void *out);
+int FUN_003072ae(Reader *reader, void *out);
+int FUN_00307316(Reader *reader, void *out);
 
-extern int FUN_002ee9da(int);
-/* Supplied declaration required: FUN_002fbc1a. */
-/* Supplied declaration required: FUN_00300900. */
-/* Supplied declaration required: FUN_00300934. */
-/* Supplied declaration required: FUN_003072ae. */
-/* Supplied declaration required: FUN_00307316. */
-
-
-void FUN_003051f2(int param_1,int param_2)
-
+/* Reads a record from `reader`; on success checks that it consumed exactly the declared size and marks the reader finished. */
+void FUN_003051f2(Reader *reader, Record *record)
 {
-/* irregular: 5 native warning(s); review required */
-  signed char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  *(unsigned char *)(param_2 + 4) = 0;
-  temp_v0 = *(char *)(param_1 + 0x3b);
-  temp_v2 = 0;
-  if (((temp_v0 != '\0') ||
-      ((FUN_00300900(param_1,param_2 + 4), *(char *)(param_1 + 4) == '\0' &&
-       (FUN_00300934(param_1,&temp_v2), *(char *)(param_1 + 4) == '\0')))) &&
-     ((temp_v1 = *(int *)(param_1 + 0xc), *(char *)(param_1 + 4) == '\0' &&
-      (((((FUN_00300934(param_1,param_2 + 8), *(char *)(param_1 + 4) == '\0' &&
-          (FUN_002fbc1a(param_1,param_2 + 0xc), *(char *)(param_1 + 4) == '\0')) &&
-         (FUN_003072ae(param_1,param_2 + 0x14), *(char *)(param_1 + 4) == '\0')) &&
-        ((FUN_003072ae(param_1,param_2 + 0x20), *(char *)(param_1 + 4) == '\0' &&
-         (FUN_00307316(param_1,param_2 + 0x2c), *(char *)(param_1 + 4) == '\0')))) &&
-       ((temp_v0 == '\0' &&
-        (((unsigned int)(temp_v1 + temp_v2) < *(unsigned int *)(param_1 + 0xc) ||
-         (temp_v1 = FUN_002ee9da(param_1), temp_v1 == 0)))))))))) {
-    *(unsigned char *)(param_1 + 4) = 1;
-  }
-  return;
+    s32 size;
+    u32 start;
+    s8 headerless;
+
+    record->flag = 0;
+    headerless = reader->headerless;
+    size = 0;
+    if (headerless == 0) {
+        FUN_00300900(reader, &record->flag);
+        if (reader->error != 0) {
+            return;
+        }
+        FUN_00300934(reader, &size);
+        if (reader->error != 0) {
+            return;
+        }
+    }
+    start = reader->pos;
+    if (reader->error != 0) {
+        return;
+    }
+    FUN_00300934(reader, &record->field08);
+    if (reader->error != 0) {
+        return;
+    }
+    FUN_002fbc1a(reader, record->field0C);
+    if (reader->error != 0) {
+        return;
+    }
+    FUN_003072ae(reader, record->field14);
+    if (reader->error != 0) {
+        return;
+    }
+    FUN_003072ae(reader, record->field20);
+    if (reader->error != 0) {
+        return;
+    }
+    FUN_00307316(reader, record->field2C);
+    if (reader->error != 0) {
+        return;
+    }
+    if (headerless != 0) {
+        return;
+    }
+    if (reader->pos > start + size || FUN_002ee9da(reader) == 0) {
+        reader->error = 1;
+    }
 }
 
 } /* extern "C" */

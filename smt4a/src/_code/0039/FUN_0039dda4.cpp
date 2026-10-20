@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00236038(int);
+int scrGetArg(int);
 int FUN_004fb43c(int, unsigned int, int, int, int, int, int);
 int FUN_004fcffc(int, unsigned int, int, int);
 int FUN_004fdb18(int, unsigned int, int, int, int);
@@ -16,11 +16,11 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-extern int FUN_0014aa78(void);
-/* Supplied declaration required: FUN_00236038. */
-extern unsigned int FUN_004ee568(unsigned int);
+extern int btlGetMainState(void);
+/* Supplied declaration required: scrGetArg. */
+extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fcffc. */
 /* Supplied declaration required: FUN_004fdb18. */
@@ -35,12 +35,12 @@ unsigned int FUN_0039dda4(void)
   int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  temp_v2 = FUN_00236038(2);
-  temp_v3 = FUN_004ee568(DAT_0057113c);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = scrGetArg(2);
+  temp_v3 = btlUnitGet(g_btlScriptUnit);
   if (temp_v2 != 0) {
-    temp_v2 = FUN_0014aa78();
+    temp_v2 = btlGetMainState();
     FUN_004fdb18(0,temp_v3,*(int *)(temp_v2 + 0x1ed4) + temp_v0 * 0x1d0,1 << (temp_v1 & 0xff),1);
     if (temp_v1 != 4) {
       FUN_004fb43c(0,temp_v3,0x100025f,0,0,0,0);
@@ -50,7 +50,7 @@ unsigned int FUN_0039dda4(void)
     }
   }
   else {
-    temp_v2 = FUN_0014aa78();
+    temp_v2 = btlGetMainState();
     FUN_004fcffc(0,temp_v3,*(int *)(temp_v2 + 0x1ed4) + temp_v0 * 0x1d0,1 << (temp_v1 & 0xff));
   }
   return 1;

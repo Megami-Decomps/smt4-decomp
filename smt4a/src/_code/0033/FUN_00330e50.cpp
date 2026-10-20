@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003283ac(int);
+int scrSetResult(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -12,8 +12,8 @@ typedef struct {
 } void_stack;
 
 extern int FUN_0018719c(unsigned int);
-extern int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_003283ac. */
+extern int scrGetArg(unsigned int);
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_00330e50(void)
@@ -33,7 +33,7 @@ unsigned int FUN_00330e50(void)
   temp_v4[2] = in_r12[2];
   temp_v4[3] = in_r12[3];
   temp_v4[4] = in_r12[4];
-  temp_v0 = FUN_00236038(0);
+  temp_v0 = scrGetArg(0);
   temp_v2 = 0;
   do {
     if ((temp_v0 != temp_v2) && (temp_v1 = FUN_0018719c(temp_v4[temp_v2]), temp_v1 != 0)) {
@@ -41,7 +41,7 @@ unsigned int FUN_00330e50(void)
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 5);
-  FUN_003283ac(temp_v3);
+  scrSetResult(temp_v3);
   return 1;
 }
 

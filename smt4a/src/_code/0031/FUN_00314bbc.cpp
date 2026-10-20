@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00587f0c; /* 0x587f0c */
+extern int g_mapTrap; /* 0x587f0c */
 
 
 void FUN_00314bbc(int param_1,unsigned int param_2)
@@ -12,9 +12,9 @@ void FUN_00314bbc(int param_1,unsigned int param_2)
 {
   int temp_v0;
   
-  temp_v0 = DAT_00587f0c;
+  temp_v0 = g_mapTrap;
   if (param_1 != 0) {
-    *(int *)(DAT_00587f0c + 0x38) = param_1;
+    *(int *)(g_mapTrap + 0x38) = param_1;
     *(unsigned int *)(temp_v0 + 0x3c) = param_2;
   }
   return;

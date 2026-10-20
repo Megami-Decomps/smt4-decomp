@@ -28,7 +28,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_0057f2c4; /* 0x57f2c4 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
 #define ROMWRIGHT_SQRT_4_DEFINED
@@ -77,7 +77,7 @@ unsigned int FUN_003d26cc(void)
   float temp_v17;
   float temp_v18;
   
-  temp_v3 = DAT_0059dbb4;
+  temp_v3 = g_renderCtx;
   temp_v1 = DAT_0057f2c4;
   temp_v2 = FUN_001692ac(1,0);
   piVar7 = (int *)(temp_v3 + 0x1258);
@@ -151,8 +151,8 @@ unsigned int FUN_003d26cc(void)
   FUN_003fba4c(*(unsigned int *)(temp_v1 + 0x8c),0,*(unsigned int *)(temp_v1 + 0x88),&temp_v13,temp_v3 - 0x100
                ,0);
 LAB_003d2950:
-  temp_v1 = DAT_0059dbb4;
-  piVar7 = (int *)(DAT_0059dbb4 + 0x1258);
+  temp_v1 = g_renderCtx;
+  piVar7 = (int *)(g_renderCtx + 0x1258);
   temp_v3 = *piVar7;
   temp_v2 = piVar7[temp_v3 + 2];
   *piVar7 = temp_v3 - 1;
@@ -160,8 +160,8 @@ LAB_003d2950:
     (**(romwright_code **)(temp_v1 + 0x1274))();
     *(unsigned char *)(temp_v1 + 0x1270) = 0;
   }
-  FUN_0016c560(DAT_0059dbb4);
-  FUN_0016c410(DAT_0059dbb4);
+  FUN_0016c560(g_renderCtx);
+  FUN_0016c410(g_renderCtx);
   return 0;
 }
 

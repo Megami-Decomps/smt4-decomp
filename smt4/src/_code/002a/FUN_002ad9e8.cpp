@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00138f14(int *, int *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_001392fc(void);
 int FUN_001393e4(void);
-int FUN_002c4938(void);
+int memClear(void);
 int nn_fs_ipc_FileSystem_OpenFileDirectly(int *, int [2], int, int, int, int *, int, int, int *, int, int, int);
 int software_interrupt(int);
 
@@ -39,7 +39,7 @@ extern unsigned int DAT_004d4358; /* 0x4d4358 */
 /* Supplied declaration required: FUN_00138f14. */
 /* Supplied declaration required: FUN_001392fc. */
 /* Supplied declaration required: FUN_001393e4. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 extern int *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
 /* Supplied declaration required: nn_fs_ipc_FileSystem_OpenFileDirectly. */
 
@@ -80,7 +80,7 @@ FUN_002ad9e8(int *param_1,unsigned int *param_2,unsigned int param_3,unsigned in
   uStack_28 = param_4;
   FUN_001392fc();
   if (param_1 != (int *)0x0) {
-    FUN_002c4938();
+    memClear();
     FUN_001393e4();
     if (param_1 != (int *)0x0) {
       temp_v3[0] = 0;

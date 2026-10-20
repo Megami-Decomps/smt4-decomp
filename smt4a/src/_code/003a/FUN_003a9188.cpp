@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002c2658(void);
-int FUN_003283ac(void);
+int scrSetResult(void);
 
 /* Supplied declaration required: FUN_002c2658. */
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_003a9188(void)
@@ -16,7 +16,7 @@ unsigned int FUN_003a9188(void)
 {
 /* irregular: 2 native warning(s); review required */
   FUN_002c2658();
-  FUN_003283ac();
+  scrSetResult();
   return 1;
 }
 

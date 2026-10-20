@@ -45,7 +45,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_3_stack;
 
-extern int FUN_00292f28(unsigned int);
+extern int padIsButtonDown(unsigned int);
 /* Supplied declaration required: FUN_0029e974. */
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_002c09f4. */
@@ -112,7 +112,7 @@ short FUN_0033be90(unsigned int *param_1,int param_2,fn_0033be90_arg2 *param_3)
   else if (temp_v2 >= 2) {
     temp_v2 = (temp_v2 - 2) & 0xff;
   }
-  temp_v4 = FUN_00292f28(5);
+  temp_v4 = padIsButtonDown(5);
   if (temp_v4 != 0) {
     temp_v2 = (temp_v2 + 1) & 0xff;
   }

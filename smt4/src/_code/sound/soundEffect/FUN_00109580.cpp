@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00120dc4(int, unsigned char *);
-int FUN_002c5300(int, int, int, unsigned char *);
+int asdMemoryAlloc(int, int, int, unsigned char *);
 int nw_snd_FxReverb_AssignWorkBuffer(unsigned char *, unsigned int, unsigned char *);
 int nw_snd_FxReverb_GetRequiredMemSize(unsigned char *);
 int nw_snd_FxReverb_SetParam(unsigned char *);
@@ -32,8 +32,8 @@ extern unsigned int DAT_004c562c; /* 0x4c562c */
 extern unsigned int DAT_004c5630; /* 0x4c5630 */
 
 /* Supplied declaration required: FUN_00120dc4. */
-/* Supplied declaration required: FUN_002c5300. */
-extern int FUN_002c564c(unsigned int);
+/* Supplied declaration required: asdMemoryAlloc. */
+extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: nw_snd_FxReverb_AssignWorkBuffer. */
 /* Supplied declaration required: nw_snd_FxReverb_GetRequiredMemSize. */
 /* Supplied declaration required: nw_snd_FxReverb_SetParam. */
@@ -47,7 +47,7 @@ void FUN_00109580(void)
   unsigned char *puVar2;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_002c564c(1);
+  temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
     DAT_004c5604 = 0x5a;
     DAT_004c5608 = 0x4b0;
@@ -66,7 +66,7 @@ void FUN_00109580(void)
     puVar2 = &DAT_004c54f4;
     nw_snd_FxReverb_GetRequiredMemSize(&DAT_004c54f4);
     temp_v1 = 0x10000;
-    FUN_002c5300(0x10000,0x100,0,puVar2);
+    asdMemoryAlloc(0x10000,0x100,0,puVar2);
     DAT_0044e0e4 = temp_v1;
     nw_snd_FxReverb_AssignWorkBuffer(&DAT_004c54f4,temp_v1,puVar2);
     FUN_00120dc4(1,&DAT_004c54f4);

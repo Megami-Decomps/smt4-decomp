@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00573920; /* 0x573920 */
+extern int g_btlMain; /* 0x573920 */
 extern unsigned int DAT_00573978; /* 0x573978 */
 extern unsigned int DAT_0057397c; /* 0x57397c */
 extern unsigned int DAT_00573988; /* 0x573988 */
@@ -25,7 +25,7 @@ unsigned int FUN_002b4dcc(unsigned int param_1)
   int temp_v4;
   unsigned int *puVar6;
   
-  temp_v0 = DAT_00573920;
+  temp_v0 = g_btlMain;
   temp_v1 = FUN_0017760c();
   temp_v2 = temp_v1;
   if (temp_v0 != 0) {

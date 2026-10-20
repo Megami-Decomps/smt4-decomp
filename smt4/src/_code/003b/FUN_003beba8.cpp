@@ -12,7 +12,7 @@ int FUN_00247478(unsigned char [2], unsigned char *, unsigned char *);
 int FUN_0027da30(unsigned char *, unsigned int);
 int FUN_00282924(...);
 int FUN_00283ebc(int, unsigned int, int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_002ae164(void);
 int FUN_003be670(unsigned int, unsigned int);
 int VectorSignedToFloat(...);
@@ -43,7 +43,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: FUN_00282924. */
 /* Supplied declaration required: FUN_00283ebc. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 extern unsigned int FUN_002ae108(int);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_003be670. */
@@ -96,7 +96,7 @@ int FUN_003beba8(int param_1,int param_2,unsigned int param_3,unsigned int param
   
   temp_v12 = 0.0f;
   temp_v6 = 1.0f;
-  pbVar1 = (unsigned char *)FUN_002939f4();
+  pbVar1 = (unsigned char *)btlGetMainState();
   pbVar2 = pbVar1;
   FUN_0027da30(pbVar1,param_3);
   pbVar3 = pbVar1;
@@ -125,7 +125,7 @@ int FUN_003beba8(int param_1,int param_2,unsigned int param_3,unsigned int param
   temp_v13 = temp_v15;
   temp_v16[0] = 0;
   FUN_0022ab08(uStack_76,temp_v16);
-  puVar5 = (unsigned int *)FUN_002939f4();
+  puVar5 = (unsigned int *)btlGetMainState();
   FUN_00282924(puVar5,param_3);
   temp_v2 = 0;
   if (((*puVar5 & 2) != 0) && (temp_v0 = param_1, FUN_002ae164(), temp_v0 != 0)) {

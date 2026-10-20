@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001a91ec(int, int, unsigned int);
-int FUN_002e6354(unsigned int, int);
+int sysMemClear(unsigned int, int);
 int func_0x001a9124(...);
 
 typedef int romwright_code(...);
@@ -30,7 +30,7 @@ extern unsigned int DAT_005b4420; /* 0x5b4420 */
 extern unsigned int DAT_005b4424; /* 0x5b4424 */
 
 /* Supplied declaration required: FUN_001a91ec. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: func_0x001a9124. */
 
 
@@ -274,7 +274,7 @@ void FUN_0017909c(unsigned int *param_1)
   else {
     temp_v4 = (*DAT_0058918c)(0x10000,0x100,0,0x4000);
   }
-  FUN_002e6354(temp_v4,0x4000);
+  sysMemClear(temp_v4,0x4000);
   if ((unsigned int)DAT_005b40e0 < DAT_005b40e4) {
     DAT_005b40e0[1] = 0xf02cb;
     *DAT_005b40e0 = 0;

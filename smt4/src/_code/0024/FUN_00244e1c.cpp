@@ -5,7 +5,7 @@
 extern "C" {
 
 int taskCreate(...);
-int FUN_002c4938(...);
+int memClear(...);
 int FUN_002fdd9c(...);
 
 typedef int romwright_code(...);
@@ -24,7 +24,7 @@ extern int FUN_00200c9c(...); /* 0x200c9c */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: taskCreate. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002fdd9c. */
 
 
@@ -42,7 +42,7 @@ romwright_code * FUN_00244e1c(unsigned int param_1,unsigned int *param_2,unsigne
   pcVar1 = FUN_00200c9c;
   taskCreate(FUN_00200c9c,0,0,0,0,0x168,3,0,0);
   if (pcVar1 != (romwright_code *)0x0) {
-    FUN_002c4938();
+    memClear();
     temp_v0 = param_1;
     FUN_002fdd9c();
     *(unsigned int *)((unsigned char *)pcVar1 + 8) = temp_v0;

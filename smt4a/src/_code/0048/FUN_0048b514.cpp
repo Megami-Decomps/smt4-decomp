@@ -8,14 +8,14 @@ int FUN_00162790(...);
 int FUN_00163aa4(...);
 int FUN_00164b5c(int, int, int, unsigned int, int, int);
 int FUN_001654d8(...);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_0016c69c(...);
 int FUN_0016c6f0(unsigned int, int, unsigned int);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int VectorSignedToFloat(...);
-int aeabi_idivmod(int, unsigned int);
+int __aeabi_idivmod(int, unsigned int);
 int rt_memcpy_w(...);
 
 typedef struct fn_0048b514_arg0 fn_0048b514_arg0;
@@ -40,21 +40,21 @@ typedef struct {
 extern unsigned char LAB_0048b834; /* 0x48b834 */
 extern unsigned int DAT_00587f14; /* 0x587f14 */
 extern unsigned int DAT_00587f18; /* 0x587f18 */
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: FUN_001654d8. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c69c. */
 /* Supplied declaration required: FUN_0016c6f0. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -76,13 +76,13 @@ void FUN_0048b514(fn_0048b514_arg0 *param_1)
   fn_0048b514_arg0 *temp_v9;
   
   temp_v0 = FUN_001692ac(1,0);
-  FUN_0016c6f0(DAT_0059dbb4,3,temp_v0);
-  FUN_001677c0();
+  FUN_0016c6f0(g_renderCtx,3,temp_v0);
+  efctSetSpeed();
   FUN_00183bb0();
   temp_v9 = param_1 + 1;
   temp_v0 = FUN_001654d8();
   FUN_00164b5c(2,0x13,0x1d,temp_v0,0,0xd3);
-  aeabi_idivmod(param_1->field_0x12d4 + 1,DAT_00587f14);
+  __aeabi_idivmod(param_1->field_0x12d4 + 1,DAT_00587f14);
   param_1->field_0x12d4 = temp_v4;
   temp_v1 = param_1->field_0x12d8;
   temp_v5 = 0;
@@ -123,8 +123,8 @@ void FUN_0048b514(fn_0048b514_arg0 *param_1)
   VectorSignedToFloat((temp_v2 - 0x14) + (int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(4,DAT_00587f18,temp_v8);
-  FUN_0016c69c(DAT_0059dbb4,3);
-  FUN_001677c0();
+  FUN_0016c69c(g_renderCtx,3);
+  efctSetSpeed();
   FUN_00163aa4(temp_v9);
   if ((param_1->field_0x12d1 != '\0') && (temp_v9->field_0x8a != '\0')) {
     param_1->field_0x12d2 = 1;

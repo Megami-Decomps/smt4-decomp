@@ -11,7 +11,7 @@ int FUN_00318100(void);
 int FUN_0048168c(void);
 
 extern unsigned int FUN_0016a0f0(unsigned int);
-extern int FUN_00192798(void);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_001a6f60. */
 /* Supplied declaration required: FUN_002bf384. */
 /* Supplied declaration required: FUN_0030ea58. */
@@ -51,7 +51,7 @@ int FUN_00335660(int param_1,int param_2,int param_3)
           temp_v3 = 0;
         }
         FUN_001a6f60(temp_v1,temp_v3);
-        temp_v4 = FUN_00192798();
+        temp_v4 = dataTableGetEntries();
         temp_v2 = (unsigned int)(param_1 != 0);
         if (param_3 != 0) {
           temp_v2 = 1 - temp_v2;
@@ -68,7 +68,7 @@ int FUN_00335660(int param_1,int param_2,int param_3)
   FUN_002bf384(temp_v1,0);
   FUN_0048168c();
   FUN_001a6f60(temp_v1,0);
-  temp_v4 = FUN_00192798();
+  temp_v4 = dataTableGetEntries();
   temp_v2 = (unsigned int)(param_1 != 0);
   if (param_3 != 0) {
     temp_v2 = 1 - temp_v2;

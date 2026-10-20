@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00163060(...);
-int FUN_00167ab4(...);
-int FUN_0017fd84(...);
+int asdMemoryAllocTracked(...);
+int memAlloc(...);
+int asdMemoryFreeRegion(...);
 int FUN_0017fe8c(...);
 int FUN_0018003c(...);
 int FUN_0019a300(...);
-int FUN_0019a5a0(...);
+int asdMemFree(...);
 int FUN_001a089c(...);
 int FUN_001a1204(...);
 int FUN_001ab838(...);
@@ -38,13 +38,13 @@ extern unsigned int DAT_0062d280; /* 0x62d280 */
 extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_00163060. */
-/* Supplied declaration required: FUN_00167ab4. */
-/* Supplied declaration required: FUN_0017fd84. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: asdMemoryFreeRegion. */
 /* Supplied declaration required: FUN_0017fe8c. */
 /* Supplied declaration required: FUN_0018003c. */
 /* Supplied declaration required: FUN_0019a300. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001a089c. */
 /* Supplied declaration required: FUN_001a1204. */
 /* Supplied declaration required: FUN_001ab838. */
@@ -94,7 +94,7 @@ unsigned char * FUN_00226970(unsigned char *param_1,int param_2,unsigned int par
     unaff_r9 = 4;
     *(unsigned int *)(param_1 + 0x28) = temp_v8 * temp_v9 * 4;
     puStack_38 = (unsigned int *)0x100;
-    FUN_00163060(0x100,0x100,0,*(unsigned int *)(param_1 + 0x28),1);
+    asdMemoryAllocTracked(0x100,0x100,0,*(unsigned int *)(param_1 + 0x28),1);
   }
   temp_v0 = *(unsigned char *)(param_2 + 0x16);
   param_2 = param_2 + 0x40;
@@ -150,7 +150,7 @@ unsigned char * FUN_00226970(unsigned char *param_1,int param_2,unsigned int par
   else {
 LAB_00226aa8:
     temp_v4 = 0x100;
-    FUN_00163060(0x100,0x100,0,0x400,1);
+    asdMemoryAllocTracked(0x100,0x100,0,0x400,1);
     temp_v10 = 0;
     do {
       temp_v2 = *(unsigned int *)(param_2 +
@@ -195,7 +195,7 @@ LAB_00226aa8:
         temp_v10 = (temp_v10 + 1) & 0xffff;
       } while (temp_v10 < temp_v9);
     }
-    FUN_0019a5a0(temp_v4);
+    asdMemFree(temp_v4);
   }
 code_r0x0019a5a0:
   *(unsigned int *)(param_1 + 8) = param_4;
@@ -205,20 +205,20 @@ code_r0x0019a5a0:
   *(unsigned int *)(param_1 + 0x14) = temp_v8;
   *(unsigned int *)(param_1 + 0x18) = temp_v9;
   temp_v3 = 0x10000;
-  FUN_00167ab4(0x10000,0x100,0,*(unsigned int *)(param_1 + 0x28),0x80,1);
+  memAlloc(0x10000,0x100,0,*(unsigned int *)(param_1 + 0x28),0x80,1);
   *(unsigned int *)(param_1 + 0x24) = temp_v3;
   FUN_00418fe0(*(unsigned int *)(param_1 + 0x14),*(unsigned int *)(param_1 + 0x18),puStack_38,temp_v3);
   FUN_0018003c();
   if ((((unsigned int)puStack_38 >= DAT_005b4050) && ((unsigned int *)(DAT_005b4060 + (int)DAT_005b4050) >= puStack_38))
      || (((unsigned int)puStack_38 >= DAT_005b4054 && ((unsigned int *)((int)DAT_005b4054 + DAT_005b4064) >= puStack_38)))
      ) {
-    FUN_0017fd84(puStack_38);
+    asdMemoryFreeRegion(puStack_38);
     puVar6 = (unsigned char *)*DAT_005b402c;
     software_interrupt(0x14);
   }
   else {
     FUN_0017fe8c(puStack_38);
-    FUN_0017fd84();
+    asdMemoryFreeRegion();
     puVar6 = (unsigned char *)*DAT_005b402c;
     software_interrupt(0x14);
   }

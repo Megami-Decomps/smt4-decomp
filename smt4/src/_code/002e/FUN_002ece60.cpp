@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a07e4(void);
+int cecProcessStart(void);
 int FUN_001aa030(void);
 int FUN_00254600(int);
 int FUN_0025461c(void);
@@ -31,7 +31,7 @@ struct fn_002ece60_arg0 {
 };
 
 extern int FUN_0019e0c0(int);
-/* Supplied declaration required: FUN_001a07e4. */
+/* Supplied declaration required: cecProcessStart. */
 /* Supplied declaration required: FUN_001aa030. */
 /* Supplied declaration required: FUN_00254600. */
 /* Supplied declaration required: FUN_0025461c. */
@@ -95,7 +95,7 @@ unsigned int FUN_002ece60(fn_002ece60_arg0 *param_1)
       param_1->field_0xd04 = temp_v0;
       FUN_00296f4c();
       FUN_002b8838(0x3c);
-      FUN_001a07e4();
+      cecProcessStart();
       FUN_0025461c();
       FUN_001aa030();
       FUN_00254600(0);

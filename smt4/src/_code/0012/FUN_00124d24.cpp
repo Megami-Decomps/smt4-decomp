@@ -20,7 +20,7 @@ typedef struct {
 } param_1_stack;
 
 extern int DAT_0043e190; /* 0x43e190 */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002ba12c. */
@@ -60,7 +60,7 @@ void FUN_00124d24(int param_1)
       temp_v1 = temp_v1 + temp_v2;
     }
     temp_v3 = FUN_002c5d80(1,0);
-    FUN_002bee04(DAT_0044ea00,3,temp_v3);
+    FUN_002bee04(g_titleScene,3,temp_v3);
     FUN_002bf538();
     FUN_002bed3c();
     temp_v5 = 0.27f;
@@ -68,7 +68,7 @@ void FUN_00124d24(int param_1)
       temp_v4 = temp_v5;
       temp_v2 = FUN_002bf4f8(0xe,0x94);
       temp_v5 = temp_v4;
-      FUN_002ba12c(DAT_0044ea00);
+      FUN_002ba12c(g_titleScene);
       temp_v0 = temp_v0 + (int)temp_v4;
     }
     else {
@@ -93,7 +93,7 @@ void FUN_00124d24(int param_1)
       temp_v1 = DAT_0043e190 + 0x754;
       temp_v3 = FUN_002beda4();
       temp_v1 = FUN_002bed98(temp_v1);
-      FUN_002ba12c(DAT_0044ea00);
+      FUN_002ba12c(g_titleScene);
       temp_v4 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = FUN_002bf4f8(0xe,0x100);
       FUN_002bf380(2,0xe,0x16,(int)*(short *)(temp_v2 + 8) + (int)(temp_v5 + temp_v4),
@@ -103,7 +103,7 @@ void FUN_00124d24(int param_1)
     }
     FUN_002bf538();
     FUN_002bed3c();
-    FUN_002bedb0(DAT_0044ea00,3);
+    FUN_002bedb0(g_titleScene,3);
   }
   return;
 }

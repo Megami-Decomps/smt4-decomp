@@ -8,12 +8,12 @@ int FUN_002a6480(...);
 int FUN_0037b5e0(void);
 
 int FUN_0014384c(...);
-int FUN_0014e38c(unsigned char *, int, int, int);
-int FUN_0015155c(unsigned char *, int, int);
-int FUN_00163060(int, int, int, int);
+int asdProcessCreateSimple(unsigned char *, int, int, int);
+int taskCreateDraw(unsigned char *, int, int);
+int asdMemoryAllocTracked(int, int, int, int);
 int FUN_0019ea64(int);
 int FUN_001acf98(...);
-int FUN_00227880(void);
+int cecProcessStart(void);
 int FUN_002316c8(int);
 int FUN_002804b0(...);
 int FUN_002a4664(...);
@@ -21,7 +21,7 @@ int FUN_002a469c(void);
 int FUN_002a4aa4(void);
 int FUN_002c0b10(...);
 int FUN_002c0b5c(...);
-int FUN_002e6354(void);
+int sysMemClear(void);
 int FUN_002e6dd0(...);
 int FUN_00319e58(void);
 int FUN_0031f0a8(...);
@@ -31,7 +31,7 @@ int FUN_00343cc8(...);
 int FUN_00343d04(unsigned int *);
 int FUN_0035a074(...);
 int FUN_00387edc(...);
-int FUN_0039a0cc(void);
+int campCecDrawSetCreate(void);
 int FUN_003d2d34(int, int, int);
 int FUN_003f881c(...);
 int FUN_004310c0(void);
@@ -76,15 +76,15 @@ extern unsigned int *DAT_0057f114; /* 0x57f114 */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Supplied declaration required: FUN_0014384c. */
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0019ea64. */
 extern int FUN_001ab854(void);
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_001acf98. */
-/* Supplied declaration required: FUN_00227880. */
+/* Supplied declaration required: cecProcessStart. */
 /* Supplied declaration required: FUN_002316c8. */
 extern unsigned char FUN_002391e0(void);
 /* Supplied declaration required: FUN_002804b0. */
@@ -98,10 +98,10 @@ extern unsigned char FUN_002a46d8(void);
 /* Supplied declaration required: FUN_002a6480. */
 /* Supplied declaration required: FUN_002c0b10. */
 /* Supplied declaration required: FUN_002c0b5c. */
-extern int FUN_002e3390(int);
-/* Supplied declaration required: FUN_002e6354. */
+extern int wstrlen(int);
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd0. */
-extern int FUN_0030ef8c(unsigned char *, unsigned int *, unsigned int);
+extern int rt_memcmp(unsigned char *, unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00319e58. */
 extern unsigned char FUN_0031cee0(void);
 /* Supplied declaration required: FUN_0031f0a8. */
@@ -114,7 +114,7 @@ extern int FUN_00345388(unsigned int);
 /* Supplied declaration required: FUN_0035a074. */
 /* Supplied declaration required: FUN_0037b5e0. */
 /* Supplied declaration required: FUN_00387edc. */
-/* Supplied declaration required: FUN_0039a0cc. */
+/* Supplied declaration required: campCecDrawSetCreate. */
 /* Supplied declaration required: FUN_003d2d34. */
 /* Supplied declaration required: FUN_003f881c. */
 extern int FUN_003fd63c(unsigned int, unsigned int, unsigned int);
@@ -150,32 +150,32 @@ void FUN_002bf534(int param_1)
   if (DAT_0057f114 == (unsigned int *)0x0) {
     puVar4 = (unsigned int *)0x100;
     temp_v9 = (romwright_code *)0x1;
-    FUN_00163060(0x100,0x100,0,0x1a8);
+    asdMemoryAllocTracked(0x100,0x100,0,0x1a8);
     DAT_0057f114 = puVar4;
   }
   puVar4 = DAT_0057f114;
-  FUN_002e6354();
+  sysMemClear();
   temp_v9 = FUN_002021cc;
   temp_v10 = 0;
   puVar5 = &LAB_002bf948;
   temp_v11 = 0;
-  FUN_0014e38c(&LAB_002bf948,3,0,0);
+  asdProcessCreateSimple(&LAB_002bf948,3,0,0);
   *puVar4 = (unsigned int)puVar5;
   temp_v10 = 0;
   temp_v9 = (romwright_code *)&LAB_002021c4;
   temp_v11 = 0;
   temp_v12 = puVar5;
-  FUN_0015155c(&LAB_002bf95c,0x81,0);
+  taskCreateDraw(&LAB_002bf95c,0x81,0);
   temp_v12 = (unsigned char *)*puVar4;
   temp_v10 = 0;
   temp_v9 = (romwright_code *)&LAB_002021c4;
   temp_v11 = 0;
-  FUN_0015155c(&LAB_002bf970,0xdd,0);
+  taskCreateDraw(&LAB_002bf970,0xdd,0);
   temp_v12 = (unsigned char *)*puVar4;
   temp_v9 = FUN_0025cf44;
   temp_v10 = 0;
   temp_v11 = 0;
-  FUN_0015155c(&LAB_002bf988,0xea,0);
+  taskCreateDraw(&LAB_002bf988,0xea,0);
   puVar4[0x4f] = 0xffffffff;
   puVar4[0x50] = 0;
   puVar4[0x51] = 0xffffffff;
@@ -218,7 +218,7 @@ void FUN_002bf534(int param_1)
     puVar4[0x50] = 10;
     return;
   }
-  FUN_00227880();
+  cecProcessStart();
   temp_v1 = FUN_002a2cf0();
   *(unsigned char *)(puVar4 + 0x5b) = temp_v1;
   FUN_0019ea64(0);
@@ -261,7 +261,7 @@ void FUN_002bf534(int param_1)
   puVar2 = DAT_0057f114;
   psVar11 = (short *)(DAT_0057f114 + 0x10);
   if (psVar11 != (short *)0x0) {
-    temp_v2 = FUN_002e3390((int)DAT_0057f114 + 0x4e);
+    temp_v2 = wstrlen((int)DAT_0057f114 + 0x4e);
     temp_v0 = 0;
     if (temp_v2 != 0) {
       temp_v0 = *psVar11;
@@ -321,7 +321,7 @@ LAB_002bfc18:
       }
       if ((*(char *)(puVar4 + 0x5b) != '\0') && (temp_v2 = FUN_00345388(0x20), temp_v2 != 0)) {
         FUN_002c0b10(&temp_v9);
-        temp_v2 = FUN_0030ef8c(temp_v14,DAT_0057f114 + 0x24,0x14);
+        temp_v2 = rt_memcmp(temp_v14,DAT_0057f114 + 0x24,0x14);
         if (temp_v2 != 0) {
           FUN_00319e58();
           FUN_002c0b5c(DAT_0057f114 + 0x10);
@@ -331,7 +331,7 @@ LAB_002bfc18:
       if (temp_v2 == 0) {
         temp_v2 = FUN_002e6dd0(DAT_0057f114 + 0x24,0x14);
       }
-      FUN_0039a0cc();
+      campCecDrawSetCreate();
       puVar4[0x5d] = temp_v2;
       FUN_0037b5e0();
       temp_v2 = 0;

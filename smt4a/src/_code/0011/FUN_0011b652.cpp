@@ -1,23 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011b652` (_code @ 0x11b652, 0x22 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the callee-saved register assignment differs (parameters are saved in r4..r7 in the reverse order of retail). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00118180(int, unsigned int, int, unsigned int);
-int FUN_0030745c(int, int, int, unsigned int, unsigned int);
+typedef struct Source {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ u8 extra[4];
+} Source;
 
-/* Supplied declaration required: FUN_00118180. */
-/* Supplied declaration required: FUN_0030745c. */
+typedef struct Target {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u8 inner[4];
+} Target;
 
+int FUN_00118180(void *inner, u32 value, Source *source, u32 arg);
+int FUN_0030745c(Target *target, void *extra, Source *source, u32 arg);
 
-void FUN_0011b652(int param_1,unsigned int param_2,int param_3,unsigned int param_4)
-
+/* Copies `source` into the target through FUN_0030745c (with its extra block), then into the target's inner object. */
+void FUN_0011b652(Target *target, u32 value, Source *source, u32 arg)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_0030745c(param_1,param_3 + 0x30,param_3,param_4,param_4);
-  FUN_00118180(param_1 + 0x18,param_2,param_3,param_4);
-  return;
+    FUN_0030745c(target, source->extra, source, arg);
+    FUN_00118180(target->inner, value, source, arg);
 }
 
 } /* extern "C" */

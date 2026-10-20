@@ -32,7 +32,7 @@ typedef struct {
     unsigned int sp98; /* 0x98: local_98 */
 } param_4_stack;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 extern int DAT_00464a70; /* 0x464a70 */
 extern unsigned int *DAT_00464a74; /* 0x464a74 */
 
@@ -48,7 +48,7 @@ extern unsigned int *DAT_00464a74; /* 0x464a74 */
 /* Supplied declaration required: FUN_002aa200. */
 /* Supplied declaration required: FUN_002aea44. */
 /* Supplied declaration required: FUN_002aea50. */
-extern int aeabi_uidivmod(unsigned int, int);
+extern int __aeabi_uidivmod(unsigned int, int);
 
 
 void FUN_002b2b88(unsigned int param_1,unsigned int *param_2,int param_3,int param_4)
@@ -120,7 +120,7 @@ void FUN_002b2b88(unsigned int param_1,unsigned int *param_2,int param_3,int par
   piVar13 = *(int **)(temp_v6 + 8);
   temp_v2 = temp_v7;
   FUN_002aea50(&temp_v20,piVar13,0x30);
-  FUN_001464cc(DAT_0044ea00);
+  FUN_001464cc(g_titleScene);
   temp_v20 = param_3;
   temp_v14 = (unsigned long long)temp_v7 << 0x20;
   temp_v13 = (unsigned long long)temp_v2;
@@ -228,9 +228,9 @@ LAB_002b2f7c:
           }
           temp_v7 = (unsigned int)*(unsigned short *)(temp_v3 + 2);
 LAB_002b2f98:
-          temp_v3 = aeabi_uidivmod(temp_v7,(unsigned int)*(unsigned short *)(*(int *)(temp_v3 + 8) + 0xc) *
+          temp_v3 = __aeabi_uidivmod(temp_v7,(unsigned int)*(unsigned short *)(*(int *)(temp_v3 + 8) + 0xc) *
                                         (unsigned int)*(unsigned short *)(*(int *)(temp_v3 + 8) + 0xe));
-          FUN_002aa200(DAT_0044ea00,*(unsigned int *)(*(int *)(temp_v6 + 0xc) + temp_v3 * 4),
+          FUN_002aa200(g_titleScene,*(unsigned int *)(*(int *)(temp_v6 + 0xc) + temp_v3 * 4),
                        *(unsigned char *)(temp_v6 + 0x24));
           VectorUnsignedToFloat((unsigned int)temp_v30,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorUnsignedToFloat((unsigned int)temp_v28,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -292,7 +292,7 @@ LAB_002b2f98:
       temp_v13 = (unsigned long long)(unsigned int)temp_v10;
     } while (param_4 >= temp_v20 - param_3);
   }
-  FUN_001464cc(DAT_0044ea00);
+  FUN_001464cc(g_titleScene);
   return;
 }
 

@@ -8,7 +8,7 @@ int FUN_00256fec(void);
 int FUN_00257108(void);
 int FUN_0025715c(void);
 int FUN_00268fc4(void);
-int FUN_002f32dc(void);
+int effPolyTexCreate(void);
 int rt_memcpy_w(int, int, int);
 
 extern unsigned int FUN_00256fdc(unsigned int);
@@ -16,7 +16,7 @@ extern unsigned int FUN_00256fdc(unsigned int);
 /* Supplied declaration required: FUN_00257108. */
 /* Supplied declaration required: FUN_0025715c. */
 /* Supplied declaration required: FUN_00268fc4. */
-/* Supplied declaration required: FUN_002f32dc. */
+/* Supplied declaration required: effPolyTexCreate. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -28,7 +28,7 @@ int FUN_001f72d4(int param_1)
   unsigned int temp_v1;
   
   temp_v0 = 0;
-  FUN_002f32dc();
+  effPolyTexCreate();
   temp_v1 = *(unsigned int *)(param_1 + 200);
   FUN_00268fc4();
   *(unsigned int *)(temp_v0 + 200) = temp_v1;

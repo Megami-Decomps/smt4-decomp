@@ -35,7 +35,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern int DAT_00433158; /* 0x433158 */
+extern int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_002a5ed0. */
 /* Supplied declaration required: FUN_002a5ee4. */
@@ -57,7 +57,7 @@ void FUN_002aeb38(fn_002aeb38_arg0 *param_1,int param_2,int param_3)
     if (param_1->field_0x7c != 0) {
       if (param_1->field_0x84 != -1) {
         FUN_002ae898(param_1->field_0x10);
-        FUN_002a60cc(DAT_00433158,param_1->field_0x10,param_1->field_0x84);
+        FUN_002a60cc(g_aocSystem,param_1->field_0x10,param_1->field_0x84);
         param_1->field_0x84 = -1;
         param_1->field_0x80 = 0;
       }
@@ -73,7 +73,7 @@ void FUN_002aeb38(fn_002aeb38_arg0 *param_1,int param_2,int param_3)
       if (((param_1->field_0x30 == 0) || (param_1->field_0x28 == 0.0f)) && (param_1->field_0xc != 0))
       {
         FUN_002ae898(param_1->field_0x10,param_1->field_0x14);
-        FUN_002a60cc(DAT_00433158,param_1->field_0x10,param_1->field_0x14);
+        FUN_002a60cc(g_aocSystem,param_1->field_0x10,param_1->field_0x14);
         param_1->field_0xc = 0;
       }
       temp_v0 = FUN_002c1d5c();
@@ -86,10 +86,10 @@ void FUN_002aeb38(fn_002aeb38_arg0 *param_1,int param_2,int param_3)
           param_1->field_0x84 = param_1->field_0x14;
         }
         param_1->field_0x14 = param_2;
-        temp_v0 = FUN_002ae98c(DAT_00433158,param_1->field_0x10,param_2,1);
+        temp_v0 = FUN_002ae98c(g_aocSystem,param_1->field_0x10,param_2,1);
         if (temp_v0 != 0) {
-          temp_v0 = DAT_00433158;
-          FUN_002a5ee4(DAT_00433158,param_1->field_0x10,param_1->field_0x14,0x10000);
+          temp_v0 = g_aocSystem;
+          FUN_002a5ee4(g_aocSystem,param_1->field_0x10,param_1->field_0x14,0x10000);
         }
         else {
           temp_v0 = param_1->field_0x10;

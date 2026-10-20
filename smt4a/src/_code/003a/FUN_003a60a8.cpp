@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_0035b394(void);
+int dataStoreShutdown(void);
 
 typedef struct fn_003a60a8_arg0 fn_003a60a8_arg0;
 struct fn_003a60a8_arg0 {
@@ -16,9 +16,9 @@ struct fn_003a60a8_arg0 {
     byte field_0x7d5; /* +0x7d5 */
 };
 
-/* Supplied declaration required: FUN_0035b394. */
+/* Supplied declaration required: dataStoreShutdown. */
 extern unsigned int FUN_00388024(void);
-extern int FUN_003a68dc(void);
+extern int dataStoreIsFinished(void);
 
 
 unsigned int FUN_003a60a8(fn_003a60a8_arg0 *param_1)
@@ -36,9 +36,9 @@ unsigned int FUN_003a60a8(fn_003a60a8_arg0 *param_1)
     param_1->field_0x3b0 = temp_v2;
     return 3;
   }
-  temp_v0 = FUN_003a68dc();
+  temp_v0 = dataStoreIsFinished();
   if (temp_v0 != 0) {
-    FUN_0035b394();
+    dataStoreShutdown();
     param_1->field_0x3dc = param_1->field_0x3dc & 0xffffffdf;
     *(unsigned int *)&param_1->field_0x3bc = 0;
     temp_v1 = FUN_00388024();

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_004e6f64; /* 0x4e6f64 */
+extern unsigned char g_dspsndState; /* 0x4e6f64 */
 
 extern unsigned char *FUN_00129010(unsigned int);
 extern int FUN_0013ac6c(unsigned int, unsigned int);
@@ -22,7 +22,7 @@ FUN_001294e0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   
   pbVar2 = (unsigned char *)FUN_00129010(param_2);
   if ((*pbVar2 == 2) && (temp_v1 = FUN_0013ac6c(param_2,param_5), temp_v1 != 0)) {
-    nn_snd_CTR_Dspsnd_SetChannelAdpcmParam((unsigned int)&DAT_004e6f64,(unsigned char)*param_1,temp_v1);
+    nn_snd_CTR_Dspsnd_SetChannelAdpcmParam((unsigned int)&g_dspsndState,(unsigned char)*param_1,temp_v1);
   }
   temp_v0 = *(unsigned short *)((int)param_1 + 0x1e);
   *(unsigned short *)((int)param_1 + 0x1e) = (temp_v0 & 0xfffc) | 1;

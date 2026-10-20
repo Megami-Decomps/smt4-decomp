@@ -17,9 +17,9 @@ typedef struct {
 
 extern int DAT_0057f28c; /* 0x57f28c */
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_002a4860(void);
@@ -132,9 +132,9 @@ LAB_003d48cc:
     temp_v8 = 0;
   }
 LAB_003d493c:
-  temp_v6 = FUN_00187180(0x34,0);
-  temp_v4 = FUN_00192798();
-  temp_v7 = FUN_00192748(temp_v6);
+  temp_v6 = dataTableGet(0x34,0);
+  temp_v4 = dataTableGetEntries();
+  temp_v7 = dataTableGetCount(temp_v6);
   if (temp_v8 < temp_v7) {
     temp_v4 = temp_v4 + temp_v8 * 0x60 + 1;
   }

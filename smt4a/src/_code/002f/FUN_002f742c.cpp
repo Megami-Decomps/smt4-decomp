@@ -1,19 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f742c` (_code @ 0x2f742c, 0x1a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Returns 1 if the global flag byte is clear and the object's mode is not 0x40000000, else 0. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+typedef struct Object {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ s32 mode;
+} Object;
 
+typedef struct Globals {
+    /* 0x00 */ u8 unk00[3];
+    /* 0x03 */ s8 locked;
+} Globals;
 
-unsigned int FUN_002f742c(int param_1)
+extern Globals g_flagBlock;
 
+u32 FUN_002f742c(Object *obj)
 {
-  if (((*(signed char *)((unsigned char *)&DAT_00594958 + 0x3)) == '\0') && (*(int *)(param_1 + 0x28) != 0x40000000)) {
-    return 1;
-  }
-  return 0;
+    if (g_flagBlock.locked == 0 && obj->mode != 0x40000000) {
+        return 1;
+    }
+    return 0;
 }
 
-} /* extern "C" */
+}

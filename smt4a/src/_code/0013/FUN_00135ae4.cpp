@@ -1,24 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00135ae4` (_code @ 0x135ae4, 0x1e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the loop is inverted (test duplicated before the body); retail enters it with an unconditional branch to the bottom test. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e9598(int, int);
+typedef struct Elem {
+    u32 a;
+    u32 b;
+} Elem;                         /* 8 bytes */
 
-/* Supplied declaration required: FUN_002e9598. */
+int FUN_002e9598(Elem *dst, Elem *src);
 
-
-int FUN_00135ae4(int param_1,int param_2,int param_3)
-
+/* std::copy_backward for 8-byte elements: copies [first, last) so that it ends at `destEnd`; returns the new start of the copy. */
+Elem *FUN_00135ae4(Elem *first, Elem *last, Elem *destEnd)
 {
-/* irregular: 1 native warning(s); review required */
-  while (param_1 != param_2) {
-    param_2 = param_2 - 8;
-    param_3 = param_3 - 8;
-    FUN_002e9598(param_3,param_2);
-  }
-  return param_3;
+    while (first != last) {
+        last--;
+        destEnd--;
+        FUN_002e9598(destEnd, last);
+    }
+    return destEnd;
 }
 
 } /* extern "C" */

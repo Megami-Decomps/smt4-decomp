@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e74c4(unsigned int, int, unsigned int, unsigned int);
+int strAssign(unsigned int, int, unsigned int, unsigned int);
 int FUN_002e7614(unsigned char [12], unsigned int);
-int FUN_002ec9f4(unsigned char [12]);
+int strDestroy(unsigned char [12]);
 int FUN_002fd03a(int *, unsigned char [12]);
 
 typedef int romwright_code(...);
@@ -17,9 +17,9 @@ typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e7614. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002fd03a. */
 
 
@@ -50,8 +50,8 @@ unsigned int FUN_00111378(int *param_1,unsigned int param_2)
     if (*(unsigned char *)(param_1 + 2) < temp_v3) {
       FUN_002fd03a(param_1,temp_v4);
     }
-    FUN_002e74c4(param_2,temp_v5 + temp_v7,temp_v6,0xffffffff);
-    FUN_002ec9f4(temp_v4);
+    strAssign(param_2,temp_v5 + temp_v7,temp_v6,0xffffffff);
+    strDestroy(temp_v4);
     temp_v2 = 1;
   }
   return temp_v2;

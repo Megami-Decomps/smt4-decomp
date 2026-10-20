@@ -10,8 +10,8 @@ int FUN_002b968c(int *);
 int FUN_002cf8e4(void);
 int FUN_00385264(int);
 
-extern int DAT_0058103c; /* 0x58103c */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_mapIf; /* 0x58103c */
+extern int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f161f; /* 0x5f161f */
 
 /* Supplied declaration required: FUN_002342d0. */
@@ -28,10 +28,10 @@ unsigned int FUN_0029d760(void)
   int temp_v0;
   int *piVar2;
   
-  temp_v0 = DAT_0058103c;
+  temp_v0 = g_mapIf;
   if (DAT_005f161f == '\0') {
-    FUN_002b968c(&DAT_0058103c);
-    if (DAT_005f15fc < 100) {
+    FUN_002b968c(&g_mapIf);
+    if (g_gameState < 100) {
       FUN_002b6cb0();
       FUN_002cf8e4();
     }

@@ -5,9 +5,9 @@ extern "C" {
 int FUN_00148d68(int, int, int);
 
 /* Supplied declaration required: FUN_00148d68. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 
 
 void FUN_0013bae0(void)
@@ -20,9 +20,9 @@ void FUN_0013bae0(void)
   unsigned char *puVar4;
   int temp_v3;
   
-  temp_v0 = FUN_00187180(2,3);
-  temp_v1 = FUN_00192798();
-  temp_v2 = FUN_00192748(temp_v0);
+  temp_v0 = dataTableGet(2,3);
+  temp_v1 = dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v0);
   temp_v3 = 0;
   if (temp_v3 < temp_v2) {
     do {

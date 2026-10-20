@@ -18,7 +18,7 @@ int FUN_00282924(int, int);
 int FUN_0029be5c(...);
 int FUN_002ae164(void);
 int FUN_002bf80c(...);
-int FUN_002c4938(int *, int);
+int memClear(int *, int);
 int FUN_003af06c(unsigned int, unsigned int *, unsigned int, unsigned int);
 int FUN_003d06e4(int *, unsigned int *);
 int FUN_003d0fcc(int *, int);
@@ -36,7 +36,7 @@ typedef struct {
     unsigned int spE0; /* 0xe0: local_e0 */
 } param_2_stack;
 
-extern int DAT_0043427c; /* 0x43427c */
+extern int g_btlScriptUnit; /* 0x43427c */
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 
@@ -57,7 +57,7 @@ extern int FUN_0029e02c(void);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002bf80c. */
 extern int FUN_002bfde4(unsigned int);
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 extern int FUN_003ae608(unsigned int, unsigned int);
 extern unsigned int FUN_003af054(unsigned int);
 /* Supplied declaration required: FUN_003af06c. */
@@ -99,14 +99,14 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
   if ((temp_v0 & 0x40) != 0) {
     if ((*param_2 & 0x80) == 0) {
       *param_2 = *param_2 | 0x880;
-      *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
       FUN_002296dc(DAT_00439ca8);
       return 1;
     }
   }
   else if (((temp_v0 & 0x100) != 0) && ((*param_2 & 0x1000) == 0)) {
     *param_2 = *param_2 | 0x1800;
-    *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
     FUN_002296dc(DAT_00439ca8);
     return 1;
   }
@@ -202,7 +202,7 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
       }
     }
     else {
-      FUN_002c4938(&temp_v11,0x88);
+      memClear(&temp_v11,0x88);
       temp_v0 = 0;
       temp_v3 = 0;
       temp_v1 = 0;
@@ -363,7 +363,7 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
         } while (temp_v1 != 0);
         *param_2 = *param_2 | 0x800;
         temp_v9 = 1;
-        *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
+        *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
         FUN_00229118(param_1,0,0xffffffff);
       }
     }

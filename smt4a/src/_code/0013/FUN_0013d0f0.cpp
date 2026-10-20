@@ -11,7 +11,7 @@ int FUN_00163aa4(...);
 /* Supplied declaration required: FUN_0014aa9c. */
 /* Supplied declaration required: FUN_001536e4. */
 /* Supplied declaration required: FUN_00163aa4. */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 
 
 unsigned char FUN_0013d0f0(void)
@@ -24,7 +24,7 @@ unsigned char FUN_0013d0f0(void)
   float temp_v3;
   float temp_v4;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   if (((*(char *)(temp_v0 + 0x1040) != '\0') && (*(char *)(temp_v0 + 0x1043) != '\0')) &&
      (*(char *)(temp_v0 + 0x1c) != '\0')) {
     if (*(char *)(temp_v0 + 0x24) != '\0') {

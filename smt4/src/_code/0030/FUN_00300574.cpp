@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002505c0(...);
 int FUN_00250720(void);
 int FUN_002551ac(int, unsigned int, int, int, int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 
 /* stack frame of void: 21 slot(s), 84 byte(s) */
 typedef struct {
@@ -34,14 +34,14 @@ typedef struct {
     unsigned int sp90; /* 0x90: local_90 */
 } void_stack;
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00250720. */
 /* Supplied declaration required: FUN_002551ac. */
-extern unsigned int FUN_0027e928(unsigned int);
-/* Supplied declaration required: FUN_002939f4. */
-extern int FUN_00296cc8(unsigned int);
+extern unsigned int btlUnitGet(unsigned int);
+/* Supplied declaration required: btlGetMainState. */
+extern int scrGetArg(unsigned int);
 
 
 unsigned int FUN_00300574(void)
@@ -57,12 +57,12 @@ unsigned int FUN_00300574(void)
   int temp_v6;
   unsigned int *puVar8;
   
-  temp_v1 = FUN_00296cc8(0);
-  temp_v2 = FUN_00296cc8(1);
-  temp_v3 = FUN_0027e928(DAT_0043427c);
+  temp_v1 = scrGetArg(0);
+  temp_v2 = scrGetArg(1);
+  temp_v3 = btlUnitGet(g_btlScriptUnit);
   temp_v6 = 0;
   do {
-    temp_v4 = FUN_002939f4();
+    temp_v4 = btlGetMainState();
     puVar8 = (unsigned int *)(*(int *)(temp_v4 + 0x1fc0) + temp_v6 * 0x288);
     if ((((*puVar8 & 1) != 0) && ((*puVar8 & 0x40) == 0)) && (-1 < (short)puVar8[2])) {
       if (temp_v2 != 0) {
@@ -82,9 +82,9 @@ unsigned int FUN_00300574(void)
       if ((short)puVar8[0x6d] <= temp_v4) {
         temp_v4 = (short)puVar8[0x6d] - 1;
       }
-      FUN_002939f4();
+      btlGetMainState();
       FUN_00250720();
-      temp_v5 = FUN_002939f4();
+      temp_v5 = btlGetMainState();
       temp_v0 = temp_v6 << 3;
       FUN_002551ac(0,temp_v3,*(int *)(temp_v5 + 0x1e98) + (short)puVar8[2] * 0x114,0,temp_v4,0xffffffff,
                    0xffffffff,(int)(short)puVar8[0x6d],(int)*(short *)((int)puVar8 + 0x1b6),0,0,0,0,

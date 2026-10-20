@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_001631d0(unsigned int, int);
-int FUN_0019a5a0(unsigned int *);
-int FUN_003344cc(void);
+int jobStop(unsigned int, int);
+int asdMemFree(unsigned int *);
+int uiFadeClose(void);
 
 extern signed char DAT_0057f208; /* 0x57f208 */
 extern signed char DAT_0057f20a; /* 0x57f20a */
 extern unsigned int *DAT_0057f20c; /* 0x57f20c */
 extern unsigned int *DAT_0057f214; /* 0x57f214 */
 
-/* Supplied declaration required: FUN_001631d0. */
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_003344cc. */
+/* Supplied declaration required: jobStop. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: uiFadeClose. */
 
 
 void FUN_0035b304(void)
@@ -27,16 +27,16 @@ void FUN_0035b304(void)
   puVar1 = DAT_0057f20c;
   DAT_0057f208 = DAT_0057f208 - '\x01';
   if (DAT_0057f208 < '\x01') {
-    FUN_001631d0(*DAT_0057f20c,0);
-    FUN_0019a5a0(puVar1);
+    jobStop(*DAT_0057f20c,0);
+    asdMemFree(puVar1);
     DAT_0057f20c = (unsigned int *)0x0;
     DAT_0057f208 = '\0';
-    FUN_003344cc();
+    uiFadeClose();
     puVar1 = DAT_0057f214;
     if ((DAT_0057f214 != (unsigned int *)0x0) &&
        (DAT_0057f20a = DAT_0057f20a - '\x01', DAT_0057f20a < '\x01')) {
-      FUN_001631d0(*DAT_0057f214,0);
-      FUN_0019a5a0(puVar1);
+      jobStop(*DAT_0057f214,0);
+      asdMemFree(puVar1);
       DAT_0057f214 = (unsigned int *)0x0;
       DAT_0057f20a = '\0';
     }

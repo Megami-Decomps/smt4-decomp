@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c32a0(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: memAlloc. */
 
 
 void FUN_0030ed8c(unsigned int *param_1)
@@ -22,7 +22,7 @@ void FUN_0030ed8c(unsigned int *param_1)
   unsigned int temp_v0;
   
   puVar1 = (unsigned int *)0x10000;
-  FUN_002c32a0(0x10000,0x100,0,0x4c,0x10,1);
+  memAlloc(0x10000,0x100,0,0x4c,0x10,1);
   *puVar1 = 8;
   puVar1[2] = 0;
   puVar1[1] = 8;

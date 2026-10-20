@@ -1,41 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00312c10` (_code @ 0x312c10, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the clamp compiles to cmp/movlt and a folded [r0, #-2] load; retail uses cmp/movge and an explicit sub of 1 before indexing. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+int scrSetResult(int value);
+u32 FUN_002451ac(u32 obj, u32 arg);
+u32 btlGetMainState(void);
+int scrGetArg(u32 index);
+int dataTableGetCount(u32 arg);
+u16 *dataTableGetEntries(void);
 
-extern unsigned int FUN_002451ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0028dcb0. */
-extern unsigned int FUN_002939f4(void);
-extern int FUN_00296cc8(unsigned int);
-extern int FUN_002c0c74(unsigned int);
-extern int FUN_002c0cc4(void);
-
-
-unsigned int FUN_00312c10(void)
-
+/* Script command: passes entry (script argument 0, clamped to 1..count) of the u16 table, counted by dataTableGetCount, to scrSetResult. */
+u32 FUN_00312c10(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = FUN_00296cc8(0);
-  temp_v1 = FUN_002939f4();
-  temp_v1 = FUN_002451ac(temp_v1,0xd);
-  temp_v2 = FUN_002c0cc4();
-  temp_v3 = FUN_002c0c74(temp_v1);
-  if (temp_v0 < 1) {
-    temp_v3 = 1;
-  }
-  else if (temp_v0 <= temp_v3) {
-    temp_v3 = temp_v0;
-  }
-  FUN_0028dcb0(*(unsigned short *)(temp_v2 + (temp_v3 - 1) * 2));
-  return 1;
+    int requested = scrGetArg(0);
+    u32 field = FUN_002451ac(btlGetMainState(), 0xd);
+    u16 *table = dataTableGetEntries();
+    int count = dataTableGetCount(field);
+    int index;
+
+    if (requested < 1) {
+        index = 1;
+    } else {
+        index = count;
+        if (index >= requested) {
+            index = requested;
+        }
+    }
+    scrSetResult(table[index - 1]);
+    return 1;
 }
 
 } /* extern "C" */

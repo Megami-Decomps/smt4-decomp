@@ -7,14 +7,14 @@ extern "C" {
 int FUN_002b1ad4(int);
 int FUN_002b1c44(int);
 int FUN_002b1e08(int);
-int FUN_002bd8e8(int, int, int);
-int aeabi_idivmod(...);
+int timerStart(int, int, int);
+int __aeabi_idivmod(...);
 
 /* Supplied declaration required: FUN_002b1ad4. */
 /* Supplied declaration required: FUN_002b1c44. */
 /* Supplied declaration required: FUN_002b1e08. */
-/* Supplied declaration required: FUN_002bd8e8. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 int FUN_002bf818(int param_1)
@@ -74,11 +74,11 @@ int FUN_002bf818(int param_1)
           temp_v2 = *piVar4;
           if (temp_v2 != -1 && temp_v2 != -3) {
             if (temp_v2 != -2) {
-              FUN_002bd8e8(param_1,(int)(short)temp_v2,(int)(char)piVar4[1]);
+              timerStart(param_1,(int)(short)temp_v2,(int)(char)piVar4[1]);
             }
             else {
               *(unsigned short *)(param_1 + 0x7c) = 0;
-              FUN_002bd8e8(param_1,(int)(short)**(unsigned int **)(param_1 + 0x78),
+              timerStart(param_1,(int)(short)**(unsigned int **)(param_1 + 0x78),
                            (int)*(char *)(*(unsigned int **)(param_1 + 0x78) + 1));
             }
           }
@@ -93,15 +93,15 @@ int FUN_002bf818(int param_1)
     }
     else {
       if (*(char *)(param_1 + 0x54) != '\0') {
-        temp_v2 = aeabi_idivmod(((int)*psVar5 - (int)psVar5[2]) * 0x1000);
+        temp_v2 = __aeabi_idivmod(((int)*psVar5 - (int)psVar5[2]) * 0x1000);
         *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + temp_v2;
-        temp_v2 = aeabi_idivmod(((int)psVar5[1] - (int)psVar5[3]) * 0x1000,psVar5[4]);
+        temp_v2 = __aeabi_idivmod(((int)psVar5[1] - (int)psVar5[3]) * 0x1000,psVar5[4]);
         *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + temp_v2;
       }
       else {
-        temp_v2 = aeabi_idivmod(((int)psVar5[2] - (int)*psVar5) * 0x1000);
+        temp_v2 = __aeabi_idivmod(((int)psVar5[2] - (int)*psVar5) * 0x1000);
         *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + temp_v2;
-        temp_v2 = aeabi_idivmod(((int)psVar5[3] - (int)psVar5[1]) * 0x1000,psVar5[4]);
+        temp_v2 = __aeabi_idivmod(((int)psVar5[3] - (int)psVar5[1]) * 0x1000,psVar5[4]);
         *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + temp_v2;
       }
       *(short *)(param_1 + 0x52) = *(short *)(param_1 + 0x52) + 1;

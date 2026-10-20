@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e34(int *, int *);
 int FUN_002e6e5c(int *);
-int FUN_002f9ff8(void);
+int ringPop(void);
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -14,7 +14,7 @@ int FUN_002f9ff8(void);
 #endif
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002f9ff8. */
+/* Supplied declaration required: ringPop. */
 
 
 unsigned long long FUN_0010ef7a(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -35,7 +35,7 @@ unsigned long long FUN_0010ef7a(int *param_1,unsigned int param_2,unsigned int p
   temp_v0 = *param_1;
   if (*(int *)(temp_v0 + 0x18) != 0) {
     temp_v1 = *(int *)(*(int *)(temp_v0 + 4) + *(int *)(temp_v0 + 0x14) * 4);
-    FUN_002f9ff8();
+    ringPop();
     *(unsigned int *)(temp_v1 + 0x10) = 0;
     *(unsigned int *)(temp_v1 + 0x18) = 0;
   }

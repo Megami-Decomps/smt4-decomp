@@ -1,46 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e1874` (_code @ 0x1e1874, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the global base address is loaded after the first call instead of before it. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00287188(int);
+typedef struct Workspace {
+    /* 0x0000 */ u8 unk0000[0x2460];
+    /* 0x2460 */ u8 buffer[0x59C0];
+    /* 0x7E20 */ u32 handle;
+} Workspace;
+
+typedef struct WorkspaceHolder {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ Workspace *workspace;
+} WorkspaceHolder;
+
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[0x54];
+    /* 0x54 */ void *context;
+} Owner;
+
+extern WorkspaceHolder DAT_00439c88;
+
+int FUN_00287188(void *buffer);
 int FUN_00291944(void);
-int FUN_002b2368(unsigned int);
-int FUN_002c415c(void);
-int FUN_002c43b4(unsigned int, int);
+int FUN_002b2368(u32 handle);
+int asdMemFree(void *block);
+int jobStop(void *context, int arg);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned char DAT_00439c88; /* 0x439c88 */
-
-/* Supplied declaration required: FUN_00287188. */
-/* Supplied declaration required: FUN_00291944. */
-/* Supplied declaration required: FUN_002b2368. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
-
-
-void FUN_001e1874(int param_1)
-
+/* Tears down the global workspace: releases its buffer and handle, frees it, then frees the owner's context. */
+void FUN_001e1874(Owner *owner)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_00291944();
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20));
-  FUN_00287188((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0x2460);
-  FUN_002b2368(*(unsigned int *)(temp_v0 + 0x7e20));
-  *(unsigned int *)(temp_v0 + 0x7e20) = 0;
-  if ((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) != 0) {
-    FUN_002c415c();
-    (*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) = 0;
-  }
-  FUN_002c43b4(*(unsigned int *)(param_1 + 0x54),0);
-  return;
+    Workspace *workspace;
+
+    FUN_00291944();
+    workspace = DAT_00439c88.workspace;
+    FUN_00287188(workspace->buffer);
+    FUN_002b2368(workspace->handle);
+    workspace->handle = 0;
+    if (DAT_00439c88.workspace != NULL) {
+        asdMemFree(DAT_00439c88.workspace);
+        DAT_00439c88.workspace = NULL;
+    }
+    jobStop(owner->context, 0);
 }
 
 } /* extern "C" */

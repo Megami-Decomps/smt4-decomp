@@ -10,7 +10,7 @@ extern int DAT_00471b10; /* 0x471b10 */
 extern unsigned int DAT_00472ad8; /* 0x472ad8 */
 extern unsigned int DAT_004e6cd0; /* 0x4e6cd0 */
 
-extern int FUN_002c1364(unsigned int *, char *, unsigned int, unsigned int);
+extern int asdModelForwardChecked(unsigned int *, char *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c1398. */
 extern unsigned int FUN_002c30c4(char *);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -28,7 +28,7 @@ int FUN_0011c834(void)
   if (DAT_00471b10 == 0) {
     FUN_002c1398();
     temp_v0 = FUN_002c30c4("ndm:u");
-    temp_v1 = FUN_002c1364(&DAT_00472ad8,"ndm:u",temp_v0,0);
+    temp_v1 = asdModelForwardChecked(&DAT_00472ad8,"ndm:u",temp_v0,0);
     if (temp_v1 < 0) {
       nn_os_CriticalSection_Leave((unsigned int)&DAT_004e6cd0);
       return temp_v1;

@@ -21,7 +21,7 @@ int FUN_0049cd18(...);
 int FUN_004d00a4(...);
 
 int FUN_001641c4(void);
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00184528(unsigned int *, int);
 int FUN_002c2c80(...);
 int FUN_00342348(...);
@@ -52,7 +52,7 @@ extern unsigned char LAB_0049bd0c; /* 0x49bd0c */
 /* Supplied declaration required: FUN_001641c4. */
 extern unsigned int FUN_001654d8(unsigned int *);
 extern unsigned int FUN_001654e4(unsigned int *);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern unsigned short *FUN_001801a4(void);
 /* Supplied declaration required: FUN_00184528. */
 extern unsigned int FUN_00192718(unsigned short);
@@ -132,7 +132,7 @@ void FUN_0049b00c(unsigned int *param_1)
     FUN_00184528(param_1 + 0xf3,7);
     FUN_00493660(param_1 + 0xee,0x140,0,0x20);
     param_1[2] = 1;
-    FUN_001681cc(0x87);
+    sysPlaySe(0x87);
     param_1[0x5812] = 0xffffffff;
     temp_v6 = FUN_004cfe4c(param_1 + param_1[0x2d0] * 0x1d + 0x2d8);
     param_1[0x5812] = temp_v6;
@@ -345,7 +345,7 @@ void FUN_0049b00c(unsigned int *param_1)
     temp_v5 = FUN_002a4b74();
     if (temp_v5 == 0) {
       param_1[2] = 7;
-      FUN_001681cc(0x78);
+      sysPlaySe(0x78);
       break;
     }
     temp_v5 = FUN_0023b3f8();
@@ -354,7 +354,7 @@ void FUN_0049b00c(unsigned int *param_1)
     }
     FUN_00493a7c(param_1 + 0x2d2);
     param_1[2] = 2;
-    FUN_001681cc(0x87);
+    sysPlaySe(0x87);
     temp_v6 = param_1[0x2d0];
     if (temp_v6 == 8) {
       FUN_003a76a8(0);

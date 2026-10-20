@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0019a5a0(unsigned int);
+int asdMemFree(unsigned int);
 int FUN_002371cc(void);
 
 extern unsigned char DAT_0055c724; /* 0x55c724 */
 
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002371cc. */
 
 
@@ -20,7 +20,7 @@ unsigned int * FUN_00474b34(unsigned int *param_1)
   *param_1 = (unsigned int)&DAT_0055c724;
   if (param_1[2] != 0) {
     FUN_002371cc();
-    FUN_0019a5a0(param_1[2]);
+    asdMemFree(param_1[2]);
     param_1[2] = 0;
   }
   return param_1;

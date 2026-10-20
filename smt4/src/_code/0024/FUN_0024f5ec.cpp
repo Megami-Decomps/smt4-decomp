@@ -9,7 +9,7 @@ int FUN_002571e8(unsigned int);
 int FUN_002c18e4(int);
 int FUN_002c198c(int);
 int FUN_002c1b64(int, unsigned int);
-int FUN_00343298(int, int *);
+int camSetMatrixB(int, int *);
 int FUN_00343778(int, unsigned int);
 int FUN_00346f2c(unsigned int);
 int FUN_00347198(unsigned int);
@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_2_stack;
 
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0023b724. */
 /* Supplied declaration required: FUN_002571e8. */
@@ -32,7 +32,7 @@ extern int DAT_0044ea00; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c1b64. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00343298. */
+/* Supplied declaration required: camSetMatrixB. */
 /* Supplied declaration required: FUN_00343778. */
 /* Supplied declaration required: FUN_00346f2c. */
 /* Supplied declaration required: FUN_00347198. */
@@ -64,7 +64,7 @@ void FUN_0024f5ec(unsigned int *param_1,unsigned int param_2)
   unsigned int uStack_20;
   unsigned int temp_v8;
   
-  FUN_002c1b64(DAT_0044ea00,param_1[5]);
+  FUN_002c1b64(g_titleScene,param_1[5]);
   temp_v4 = param_1[6];
   uStack_54 = param_1[7];
   uStack_50 = param_1[8];
@@ -81,9 +81,9 @@ void FUN_0024f5ec(unsigned int *param_1,unsigned int param_2)
   temp_v6 = 0;
   temp_v7 = 0;
   temp_v8 = 0x3f800000;
-  FUN_00343298(DAT_0044ea00,&temp_v4);
+  camSetMatrixB(g_titleScene,&temp_v4);
   FUN_002571e8(param_2);
-  temp_v3 = DAT_0044ea00;
+  temp_v3 = g_titleScene;
   if ((*(unsigned short *)((int)param_1 + 0x12) & 0x100) != 0) {
     temp_v0 = FUN_002c5d80(5,0);
     piVar4 = (int *)(temp_v3 + 0x124c);
@@ -116,15 +116,15 @@ void FUN_0024f5ec(unsigned int *param_1,unsigned int param_2)
   temp_v3 = 0;
   if (temp_v3 < *(short *)(param_1 + 2)) {
     do {
-      FUN_00343778(DAT_0044ea00,param_1[1] + temp_v3 * 0x10);
+      FUN_00343778(g_titleScene,param_1[1] + temp_v3 * 0x10);
       FUN_0023b724(*param_1,0,(int)*(short *)(param_1 + 3) * temp_v3 * 3,*(short *)(param_1 + 3) * 3);
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < *(short *)(param_1 + 2));
   }
-  FUN_002c18e4(DAT_0044ea00);
-  FUN_002c198c(DAT_0044ea00);
-  temp_v3 = DAT_0044ea00;
-  piVar4 = (int *)(DAT_0044ea00 + 0x124c);
+  FUN_002c18e4(g_titleScene);
+  FUN_002c198c(g_titleScene);
+  temp_v3 = g_titleScene;
+  piVar4 = (int *)(g_titleScene + 0x124c);
   temp_v0 = *piVar4;
   temp_v1 = piVar4[temp_v0 + 2];
   *piVar4 = temp_v0 - 1;

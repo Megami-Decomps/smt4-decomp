@@ -11,9 +11,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00318544. */
-extern int FUN_003ae988(unsigned int);
+extern int bustupCutAnimFindSlot(unsigned int);
 
 
 unsigned int FUN_003b6b40(void)
@@ -26,10 +26,10 @@ unsigned int FUN_003b6b40(void)
   int temp_v3;
   unsigned int temp_v4;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  temp_v2 = FUN_003ae988(temp_v0);
-  temp_v3 = FUN_003ae988(temp_v1);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
+  temp_v2 = bustupCutAnimFindSlot(temp_v0);
+  temp_v3 = bustupCutAnimFindSlot(temp_v1);
   if (temp_v2 < 0) {
     if (temp_v3 < 0) {
       FUN_00318544(temp_v0,2,0,0,0);

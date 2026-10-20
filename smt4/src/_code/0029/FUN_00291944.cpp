@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002c415c(unsigned int *);
-int FUN_002c43b4(unsigned int, int);
-int FUN_002cf6ec(void);
+int asdMemFree(unsigned int *);
+int jobStop(unsigned int, int);
+int uiFadeClose(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,9 +16,9 @@ typedef struct {
 extern signed char DAT_0043dc20; /* 0x43dc20 */
 extern unsigned int *DAT_0043dc24; /* 0x43dc24 */
 
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
-/* Supplied declaration required: FUN_002cf6ec. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
+/* Supplied declaration required: uiFadeClose. */
 
 
 void FUN_00291944(void)
@@ -30,11 +30,11 @@ void FUN_00291944(void)
   puVar1 = DAT_0043dc24;
   DAT_0043dc20 = DAT_0043dc20 - '\x01';
   if (DAT_0043dc20 < '\x01') {
-    FUN_002c43b4(*DAT_0043dc24,0);
-    FUN_002c415c(puVar1);
+    jobStop(*DAT_0043dc24,0);
+    asdMemFree(puVar1);
     DAT_0043dc24 = (unsigned int *)0x0;
     DAT_0043dc20 = 0;
-    FUN_002cf6ec();
+    uiFadeClose();
     return;
   }
   return;

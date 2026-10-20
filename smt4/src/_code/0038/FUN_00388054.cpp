@@ -1,38 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00388054` (_code @ 0x388054, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Starts a 0x1d request for `id` and, if accepted, hands the request buffer to the dispatcher. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00234bb4(unsigned int, unsigned char [132], unsigned int, unsigned int, int, int, int);
-int FUN_002c4938(unsigned char [132], int);
+typedef struct Request {
+    u64 unk00;      /* 0x00 (8-byte aligned) */
+    u8 unk08[120];  /* 0x08 */
+} Request;
 
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int spA0; /* 0xa0: local_a0 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-} param_4_stack;
+extern void memClear(void *buffer, s32 size);
+extern s32 FUN_002a6e7c(u32 a, s32 kind, u32 id, Request *req);
+extern void FUN_00234bb4(u32 a, Request *req, u32 b, u32 c, s32 d, s32 e, s32 f);
+extern u32 g_aocDisplay;
 
-extern unsigned int DAT_00433130; /* 0x433130 */
-
-/* Supplied declaration required: FUN_00234bb4. */
-extern int FUN_002a6e7c(unsigned int, unsigned int, unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_002c4938. */
-
-
-void FUN_00388054(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+void FUN_00388054(u32 a, u32 id, u32 c, u32 b)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [132];
-  
-  FUN_002c4938(temp_v1,0x80);
-  temp_v0 = FUN_002a6e7c(param_1,0x1d,param_2,temp_v1);
-  if (temp_v0 != 0) {
-    FUN_00234bb4(DAT_00433130,temp_v1,param_4,param_3,0,4,0);
-  }
-  return;
+    Request req;
+
+    memClear(&req, 0x80);
+    if (FUN_002a6e7c(a, 0x1d, id, &req) != 0) {
+        FUN_00234bb4(g_aocDisplay, &req, b, c, 0, 4, 0);
+    }
 }
 
-} /* extern "C" */
+}

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00100824(int *);
 int FUN_001883b0(unsigned int *, unsigned short [264], int);
-int FUN_001884b0(unsigned int);
+int vcallSlot12IfValid(unsigned int);
 int FUN_00195fc8(void);
 int FUN_002e3c44(unsigned short *, unsigned char *, int, int *);
 int FUN_002e6dd0(unsigned char [256], int);
@@ -24,15 +24,15 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_1_stack;
 
-extern signed char DAT_005b3fe0; /* 0x5b3fe0 */
+extern signed char g_asdLoadFileUseRawPaths; /* 0x5b3fe0 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00100824. */
 extern int FUN_00100836(unsigned char *, unsigned int, unsigned int *);
-extern int FUN_001860cc(void);
+extern int asdFileHashPackIsOpen(void);
 extern int FUN_001860e4(unsigned char *);
 /* Supplied declaration required: FUN_001883b0. */
-/* Supplied declaration required: FUN_001884b0. */
+/* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: FUN_00195fc8. */
 extern int FUN_0019dbb8(unsigned int);
 /* Supplied declaration required: FUN_002e3c44. */
@@ -58,14 +58,14 @@ unsigned int FUN_00167f94(unsigned int param_1)
   
   puVar5 = temp_v2;
   FUN_002e6dd0(temp_v3,0x100);
-  if ((DAT_005b3fe0 != '\0') || (temp_v1 = FUN_0019dbb8(param_1), temp_v1 != 0)) {
+  if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v1 = FUN_0019dbb8(param_1), temp_v1 != 0)) {
     FUN_00100388(temp_v3,param_1);
   }
   else {
     FUN_00100388(temp_v3,"rom:/%s",param_1);
   }
   temp_v0 = 0;
-  temp_v1 = FUN_001860cc();
+  temp_v1 = asdFileHashPackIsOpen();
   if ((temp_v1 != 0) && (temp_v1 = FUN_001860e4(temp_v3), temp_v1 != 0)) {
     temp_v0 = 1;
   }
@@ -99,7 +99,7 @@ unsigned int FUN_00167f94(unsigned int param_1)
     if ((temp_v5[0] & 1) != 0) {
       FUN_00195fc8();
     }
-    FUN_001884b0(temp_v5[0] & 0xfffffffe);
+    vcallSlot12IfValid(temp_v5[0] & 0xfffffffe);
     temp_v5[0] = 0;
   }
   if (((int)puVar4 < 0) && (!temp_v0)) {
@@ -107,7 +107,7 @@ unsigned int FUN_00167f94(unsigned int param_1)
       if ((temp_v5[0] & 1) != 0) {
         FUN_00195fc8();
       }
-      FUN_001884b0(temp_v5[0] & 0xfffffffe);
+      vcallSlot12IfValid(temp_v5[0] & 0xfffffffe);
     }
     return 0;
   }
@@ -115,7 +115,7 @@ unsigned int FUN_00167f94(unsigned int param_1)
     if ((temp_v5[0] & 1) != 0) {
       FUN_00195fc8();
     }
-    FUN_001884b0(temp_v5[0] & 0xfffffffe);
+    vcallSlot12IfValid(temp_v5[0] & 0xfffffffe);
   }
   return 1;
 }

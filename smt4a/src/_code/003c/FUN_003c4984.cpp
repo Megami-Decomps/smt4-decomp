@@ -9,7 +9,7 @@ int FUN_00100388(int, unsigned char *, int);
 extern unsigned char LAB_003c49e4; /* 0x3c49e4 */
 
 /* Supplied declaration required: FUN_00100388. */
-extern unsigned int FUN_002e3390(int);
+extern unsigned int wstrlen(int);
 
 
 unsigned int FUN_003c4984(int param_1,int param_2)
@@ -20,7 +20,7 @@ unsigned int FUN_003c4984(int param_1,int param_2)
   unsigned int temp_v1;
   
   FUN_00100388(param_2,&LAB_003c49e4,*(int *)(param_1 + 0x30) + 0xc);
-  temp_v0 = FUN_002e3390(param_2);
+  temp_v0 = wstrlen(param_2);
   for (temp_v1 = 0; (temp_v1 < temp_v0 && (*(char *)(param_2 + temp_v1) != '.')); temp_v1 = temp_v1 + 1) {
   }
   if (temp_v0 != temp_v1) {

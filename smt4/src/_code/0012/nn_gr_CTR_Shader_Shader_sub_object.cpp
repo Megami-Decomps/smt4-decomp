@@ -2,9 +2,9 @@
 
 extern "C" {
 
-int FUN_002c4938(unsigned int *, int);
+int memClear(unsigned int *, int);
 
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int * nn_gr_CTR_Shader_Shader_sub_object(unsigned int *param_1)
@@ -20,7 +20,7 @@ unsigned int * nn_gr_CTR_Shader_Shader_sub_object(unsigned int *param_1)
   param_1[0xa7] = 0;
   param_1[0xa8] = 0;
   param_1[0xd9] = 0;
-  FUN_002c4938(param_1 + 0x4a1a,0x80);
+  memClear(param_1 + 0x4a1a,0x80);
   return param_1;
 }
 

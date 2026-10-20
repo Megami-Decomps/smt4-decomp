@@ -1,40 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018c740` (_code @ 0x18c740, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: temporaries after the FUN_002e6dd4 call land in r0/r1 where retail uses r1/r2. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001cd24c(int);
-int FUN_002e6354(unsigned int *, int);
-int FUN_002e6dd4(int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+/* Record being initialised: two zeroed words and halves, a 0xed8-byte table, flags, a 0x89-byte buffer and a sub-object. */
 typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+    u32 unk00;          /* 0x000 */
+    u32 unk04;          /* 0x004 */
+    u16 unk08;          /* 0x008 */
+    u16 unk0a;          /* 0x00a */
+    u8 table[0xed8];    /* 0x00c */
+    u8 enabled;         /* 0xee4 */
+    u8 unkEE5;          /* 0xee5 */
+    u8 unkEE6;          /* 0xee6 */
+    u8 buffer[0x89];    /* 0xee7 */
+    u32 index;          /* 0xf70 */
+    u16 unkF74;         /* 0xf74 */
+    u8 sub[1];          /* 0xf76 */
+} Record;
 
-/* Supplied declaration required: FUN_001cd24c. */
-/* Supplied declaration required: FUN_002e6354. */
-/* Supplied declaration required: FUN_002e6dd4. */
+int FUN_001cd24c(u8 *sub);
+int FUN_002e6dd4(u8 *buffer, int size);
+int sysMemClear(u8 *buffer, int size);
 
-
-void FUN_0018c740(unsigned int *param_1)
-
+/* Resets the record to its initial state: tables cleared, index = -1. */
+void FUN_0018c740(Record *record)
 {
-/* irregular: 3 native warning(s); review required */
-  *param_1 = 0;
-  param_1[1] = 0;
-  *(unsigned short *)(param_1 + 2) = 0;
-  *(unsigned short *)((int)param_1 + 10) = 0;
-  FUN_002e6354(param_1 + 3,0xed8);
-  *(unsigned char *)(param_1 + 0x3b9) = 1;
-  *(unsigned char *)((int)param_1 + 0xee5) = 0;
-  *(unsigned char *)((int)param_1 + 0xee6) = 0;
-  FUN_002e6dd4((int)param_1 + 0xee7,0x89);
-  param_1[0x3dc] = 0xffffffff;
-  *(unsigned short *)(param_1 + 0x3dd) = 0;
-  FUN_001cd24c((int)param_1 + 0xf76);
-  return;
+    record->unk00 = 0;
+    record->unk04 = 0;
+    record->unk08 = 0;
+    record->unk0a = 0;
+    sysMemClear(record->table, 0xed8);
+    record->enabled = 1;
+    record->unkEE5 = 0;
+    record->unkEE6 = 0;
+    FUN_002e6dd4(record->buffer, 0x89);
+    record->index = -1;
+    record->unkF74 = 0;
+    FUN_001cd24c(record->sub);
 }
 
 } /* extern "C" */

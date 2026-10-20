@@ -37,7 +37,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern unsigned int DAT_00570280; /* 0x570280 */
+extern unsigned int g_aocSystem; /* 0x570280 */
 
 extern int FUN_00162ea4(void);
 extern int FUN_0018206c(unsigned int);
@@ -60,7 +60,7 @@ void FUN_0019c720(fn_0019c720_arg0 *param_1,int param_2,int param_3)
     if (param_1->field_0x7c != 0) {
       if (param_1->field_0x84 != -1) {
         FUN_0019a7f4(*(unsigned int *)&param_1->field_0x10);
-        FUN_001b2d54(DAT_00570280,*(unsigned int *)&param_1->field_0x10,param_1->field_0x84);
+        FUN_001b2d54(g_aocSystem,*(unsigned int *)&param_1->field_0x10,param_1->field_0x84);
         param_1->field_0x84 = -1;
         param_1->field_0x80 = 0;
       }
@@ -77,7 +77,7 @@ void FUN_0019c720(fn_0019c720_arg0 *param_1,int param_2,int param_3)
       if (((param_1->field_0x30 == '\0') || (*(float *)&param_1->field_0x28 == 0.0f)) &&
          (*(int *)&param_1->field_0xc != 0)) {
         FUN_0019a7f4(*(unsigned int *)&param_1->field_0x10,param_1->field_0x14);
-        FUN_001b2d54(DAT_00570280,*(unsigned int *)&param_1->field_0x10,param_1->field_0x14);
+        FUN_001b2d54(g_aocSystem,*(unsigned int *)&param_1->field_0x10,param_1->field_0x14);
         *(unsigned int *)&param_1->field_0xc = 0;
       }
       temp_v0 = FUN_00162ea4();
@@ -90,10 +90,10 @@ void FUN_0019c720(fn_0019c720_arg0 *param_1,int param_2,int param_3)
           param_1->field_0x84 = param_1->field_0x14;
         }
         param_1->field_0x14 = param_2;
-        temp_v0 = FUN_001a6508(DAT_00570280,*(unsigned int *)&param_1->field_0x10,param_2,1);
+        temp_v0 = FUN_001a6508(g_aocSystem,*(unsigned int *)&param_1->field_0x10,param_2,1);
         if (temp_v0 != 0) {
-          temp_v1 = DAT_00570280;
-          FUN_001a6568(DAT_00570280,*(unsigned int *)&param_1->field_0x10,param_1->field_0x14,0x10000)
+          temp_v1 = g_aocSystem;
+          FUN_001a6568(g_aocSystem,*(unsigned int *)&param_1->field_0x10,param_1->field_0x14,0x10000)
           ;
         }
         else {

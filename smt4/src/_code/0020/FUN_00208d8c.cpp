@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0019fc50(int, unsigned int, int, int);
 int FUN_002bd540(int);
-int FUN_002bd75c(void);
-int FUN_002c415c(unsigned int);
+int asdTextureCreate(void);
+int asdMemFree(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,9 +19,9 @@ extern int *DAT_004475d0; /* 0x4475d0 */
 
 /* Supplied declaration required: FUN_0019fc50. */
 /* Supplied declaration required: FUN_002bd540. */
-/* Supplied declaration required: FUN_002bd75c. */
+/* Supplied declaration required: asdTextureCreate. */
 extern unsigned int FUN_002c3124(unsigned char *, unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00208d8c(void)
@@ -37,11 +37,11 @@ void FUN_00208d8c(void)
   
   temp_v0 = 0;
   temp_v3 = in_r3;
-  FUN_002bd75c();
+  asdTextureCreate();
   *DAT_004475d0 = temp_v0;
   temp_v1 = FUN_002c3124(&LAB_00208e38,(unsigned int *)&temp_v3,0);
   FUN_0019fc50(temp_v0,temp_v1,temp_v3,0x10000);
-  FUN_002c415c(temp_v1);
+  asdMemFree(temp_v1);
   FUN_002bd540(temp_v0);
   piVar1 = DAT_004475d0;
   *(unsigned int *)(*DAT_004475d0 + 0x3c) = 1;

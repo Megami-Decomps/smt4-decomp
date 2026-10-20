@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00147370(unsigned int);
 int FUN_002bd430(void);
-int FUN_002c415c(...);
+int asdMemFree(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-extern unsigned int DAT_004e3154; /* 0x4e3154 */
+extern unsigned int g_asdSoundStatus; /* 0x4e3154 */
 extern unsigned int DAT_004e3158; /* 0x4e3158 */
 extern unsigned char DAT_004e315c; /* 0x4e315c */
 extern signed char DAT_004e3169; /* 0x4e3169 */
@@ -24,7 +24,7 @@ extern signed char DAT_004e316a; /* 0x4e316a */
 extern int FUN_001329d4(unsigned int);
 /* Supplied declaration required: FUN_00147370. */
 /* Supplied declaration required: FUN_002bd430. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
@@ -52,10 +52,10 @@ LAB_001198d8:
         param_3 = DAT_004e3158;
       }
       if (!temp_v4 && (-1 < (int)temp_v2 && (int)temp_v2 <= (int)param_3)) {
-        temp_v3 = DAT_004e3154;
+        temp_v3 = g_asdSoundStatus;
         if (0 < (int)temp_v2) {
           if ((temp_v2 & 1) != 0) {
-            temp_v3 = *(unsigned int *)(DAT_004e3154 + 0x70);
+            temp_v3 = *(unsigned int *)(g_asdSoundStatus + 0x70);
           }
           for (temp_v0 = (int)temp_v2 >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
             temp_v3 = *(unsigned int *)(*(int *)(temp_v3 + 0x70) + 0x70);
@@ -74,11 +74,11 @@ LAB_001198d8:
               goto LAB_00119b2c;
             }
             nn_os_CriticalSection_Enter((unsigned int)&DAT_004e315c);
-            for (temp_v1 = DAT_004e3154; param_3 = DAT_004e3154, temp_v1 != 0;
+            for (temp_v1 = g_asdSoundStatus; param_3 = g_asdSoundStatus, temp_v1 != 0;
                 temp_v1 = *(unsigned int *)(temp_v1 + 0x70)) {
               if (temp_v1 == temp_v3) {
-                temp_v1 = DAT_004e3154;
-                if (DAT_004e3154 != 0) goto LAB_00119ac4;
+                temp_v1 = g_asdSoundStatus;
+                if (g_asdSoundStatus != 0) goto LAB_00119ac4;
                 break;
               }
             }
@@ -150,12 +150,12 @@ LAB_00119ac4:
         }
       }
       else {
-        DAT_004e3154 = *(unsigned int *)(temp_v3 + 0x70);
-        if (DAT_004e3154 != 0) {
-          *(unsigned int *)(DAT_004e3154 + 0x74) = 0;
+        g_asdSoundStatus = *(unsigned int *)(temp_v3 + 0x70);
+        if (g_asdSoundStatus != 0) {
+          *(unsigned int *)(g_asdSoundStatus + 0x74) = 0;
         }
         else {
-          DAT_004e3154 = 0;
+          g_asdSoundStatus = 0;
         }
       }
       goto LAB_00119aec;
@@ -166,12 +166,12 @@ LAB_00119aec:
   DAT_004e3158 = DAT_004e3158 - 1;
 LAB_00119af8:
   if (*(int *)(temp_v3 + 0x6c) != 0) {
-    FUN_002c415c();
+    asdMemFree();
   }
   if (*(int *)(temp_v3 + 0x38) != 0) {
     FUN_002bd430();
   }
-  FUN_002c415c(temp_v3);
+  asdMemFree(temp_v3);
   nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);
   temp_v2 = temp_v2 - 1;
 LAB_00119b2c:

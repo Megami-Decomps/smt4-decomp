@@ -22,13 +22,13 @@ typedef struct {
     unsigned int sp448; /* 0x448: local_448 */
 } void_stack;
 
-extern unsigned int DAT_00570260; /* 0x570260 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern unsigned int g_aocMain; /* 0x570260 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00164b5c. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
@@ -61,11 +61,11 @@ unsigned int FUN_00478ac4(void)
   unsigned int temp_v14 [5];
   unsigned int temp_v15;
   
-  temp_v3 = FUN_00164a9c();
-  temp_v2 = DAT_00570260;
+  temp_v3 = jobGetWork();
+  temp_v2 = g_aocMain;
   temp_v11 = *(unsigned int *)(temp_v3 + 0x1798);
-  FUN_00157558(DAT_0059dbb4);
-  temp_v6 = DAT_0059dbb4;
+  FUN_00157558(g_renderCtx);
+  temp_v6 = g_renderCtx;
   temp_v4 = FUN_001692ac(1,0);
   piVar11 = (int *)(temp_v6 + 0x1258);
   temp_v8 = *piVar11;
@@ -120,12 +120,12 @@ unsigned int FUN_00478ac4(void)
           FUN_001835b4(2,8,0x154,temp_v9,temp_v7,0x81);
         }
       }
-      temp_v9 = DAT_0059dbb4;
+      temp_v9 = g_renderCtx;
       temp_v8 = temp_v8 + 1;
     } while (temp_v8 < 3);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 3);
-  piVar11 = (int *)(DAT_0059dbb4 + 0x1258);
+  piVar11 = (int *)(g_renderCtx + 0x1258);
   temp_v6 = *piVar11;
   temp_v3 = piVar11[temp_v6 + 2];
   *piVar11 = temp_v6 - 1;

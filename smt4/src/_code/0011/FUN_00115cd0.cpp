@@ -8,9 +8,9 @@ int FUN_002b7928(...);
 int FUN_002b7bca(...);
 int FUN_002b7c54(...);
 int FUN_002c3944(void);
-int FUN_002c415c(void);
-int FUN_002c4938(...);
-int FUN_002c5300(...);
+int asdMemFree(void);
+int memClear(...);
+int asdMemoryAlloc(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -48,9 +48,9 @@ extern int FUN_002b8cec(unsigned int);
 extern int FUN_002bfde4(unsigned int);
 extern int FUN_002c15fc(unsigned int);
 /* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 unsigned int FUN_00115cd0(int param_1,int param_2,int param_3)
@@ -88,7 +88,7 @@ unsigned int FUN_00115cd0(int param_1,int param_2,int param_3)
   DAT_00465128[0xc] = param_2;
   piVar16[10] = param_1;
   piVar16[0xb] = param_3;
-  FUN_002c4938(&temp_v18,0x1414);
+  memClear(&temp_v18,0x1414);
   if ((param_1 == 0 && param_2 == 0) || param_3 == 0) {
     return 0;
   }
@@ -231,11 +231,11 @@ LAB_00115f7c:
   } while (temp_v9 < 0x20);
   temp_v9 = (int)((unsigned long long)temp_v17 >> 0x20);
   temp_v0 = 0x100;
-  FUN_002c5300(0x100,0x100,0,DAT_00465128[6] * 4 + 4,1);
+  asdMemoryAlloc(0x100,0x100,0,DAT_00465128[6] * 4 + 4,1);
   temp_v20 = temp_v0;
-  FUN_002c4938(temp_v0,DAT_00465128[6] * 4 + 4);
+  memClear(temp_v0,DAT_00465128[6] * 4 + 4);
   temp_v0 = 0x100;
-  FUN_002c5300(0x100,0x100,0,0x400);
+  asdMemoryAlloc(0x100,0x100,0,0x400);
   temp_v21 = temp_v0;
   FUN_002c3944();
   temp_v8 = temp_v20;
@@ -410,11 +410,11 @@ LAB_001165f0:
             FUN_002b7928(temp_v14,temp_v1,&LAB_00116960,*(unsigned int *)(temp_v6 - 0xc));
           }
           if (temp_v20 != 0) {
-            FUN_002c415c();
+            asdMemFree();
             temp_v20 = 0;
           }
           if (temp_v21 != 0) {
-            FUN_002c415c();
+            asdMemFree();
           }
           return 0;
         }

@@ -21,7 +21,7 @@ int FUN_00299d84(...);
 int FUN_0029a014(unsigned int, int);
 int FUN_0029ca58(void);
 int FUN_002a0428(int, int);
-int FUN_002a775c(void);
+int asdMdlManagerDestroy(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -55,7 +55,7 @@ extern int FUN_00299fc0(void);
 /* Supplied declaration required: FUN_0029ca58. */
 extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 extern int FUN_002adee0(void);
 extern int FUN_002c09d0(unsigned int);
 
@@ -218,7 +218,7 @@ void FUN_003a18a0(int param_1)
     *piVar4 = 3;
     FUN_00230558(0);
     if (*piVar3 != 0) {
-      FUN_002a775c();
+      asdMdlManagerDestroy();
       *piVar3 = 0;
     }
   }

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003fe86c(int, int, int);
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_003fe86c. */
 
 
@@ -38,7 +38,7 @@ void FUN_004f7628(int param_1,int param_2,int param_3)
         *(int *)(temp_v4 + 0x1fc) = (int)temp_v6;
         *(unsigned int *)(temp_v4 + 4) = *(unsigned int *)(temp_v4 + 4) & 0xfffffffc;
         *(unsigned int *)(temp_v0 + 0x1b4) = *(unsigned int *)(temp_v0 + 0x1b4) | 8;
-        temp_v1 = FUN_0014aa78();
+        temp_v1 = btlGetMainState();
         temp_v0 = *(int *)(temp_v1 + 0x1ed4) + *(int *)(temp_v0 + 0x1ac) * 0x1d0;
         temp_v2 = *(unsigned int *)(temp_v0 + 0x50);
         if ((temp_v2 & 0x10) != 0) {

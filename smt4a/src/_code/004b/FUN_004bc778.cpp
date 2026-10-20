@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(unsigned int *, int);
+int sysMemClear(unsigned int *, int);
 int FUN_004bb9c0(unsigned int *, int *);
 
 typedef struct fn_004bc778_arg2 fn_004bc778_arg2;
@@ -33,7 +33,7 @@ typedef struct {
 #define romwright_piece_1_1(upper, lower) ((unsigned short)(((unsigned short)(unsigned char)(upper) << 8) | (unsigned char)(lower)))
 #endif
 extern int FUN_0015fa74(fn_004bc778_arg2 *, unsigned int);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern unsigned int *FUN_004bb80c(unsigned int);
 /* Supplied declaration required: FUN_004bb9c0. */
 
@@ -57,7 +57,7 @@ void FUN_004bc778(unsigned int *param_1,unsigned int param_2,fn_004bc778_arg2 *p
   unsigned int temp_v5;
   unsigned int uStack_24;
   
-  FUN_002e6354(param_1,0x84);
+  sysMemClear(param_1,0x84);
   *param_1 = 0;
   param_1[1] = 0;
   param_1[2] = 0;

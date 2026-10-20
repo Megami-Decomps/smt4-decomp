@@ -8,7 +8,7 @@ int FUN_003f0e20(int, unsigned int);
 int FUN_004c52ec(...);
 int FUN_004c53fc(...);
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004c52ec. */
 /* Supplied declaration required: FUN_004c53fc. */
@@ -21,7 +21,7 @@ void FUN_004c571c(unsigned int param_1,int param_2,int param_3,int param_4)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   FUN_003f0e20(temp_v0,param_1);
   if (temp_v0 != 0) {
     temp_v0 = temp_v0 + param_2 * 4;

@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0030ea58(unsigned int, unsigned int);
-int FUN_003283ac(void);
+int scrSetResult(void);
 
 extern unsigned int FUN_0015687c(void);
 extern unsigned int FUN_002360dc(void);
 /* Supplied declaration required: FUN_0030ea58. */
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_0037d740(void)
@@ -23,7 +23,7 @@ unsigned int FUN_0037d740(void)
   temp_v0 = FUN_002360dc();
   temp_v1 = FUN_0015687c();
   FUN_0030ea58(temp_v1,temp_v0);
-  FUN_003283ac();
+  scrSetResult();
   return 1;
 }
 

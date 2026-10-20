@@ -9,7 +9,7 @@ int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
 int nw_snd_internal_BasicSound_SetVolume(...);
 
-extern float DAT_004e3138; /* 0x4e3138 */
+extern float g_asdSoundDuck; /* 0x4e3138 */
 extern unsigned int DAT_004e313c; /* 0x4e313c */
 extern unsigned int DAT_004e3140; /* 0x4e3140 */
 extern int DAT_004e3144; /* 0x4e3144 */
@@ -93,7 +93,7 @@ void FUN_0010dfb8(void)
             temp_v2 = (unsigned int)*(unsigned char *)(temp_v1 + 0x39);
           }
           temp_v5 = (float)VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v2 = VectorFloatToUnsigned((float)((unsigned long long)temp_v6 >> 0x20) + temp_v5 * DAT_004e3138,3) & 0xff;
+          temp_v2 = VectorFloatToUnsigned((float)((unsigned long long)temp_v6 >> 0x20) + temp_v5 * g_asdSoundDuck,3) & 0xff;
           if (temp_v0 < 2) {
             if (temp_v2 >= 0x80) {
               temp_v2 = 0x7f;
@@ -126,7 +126,7 @@ void FUN_0010dfb8(void)
             }
             temp_v5 = (float)VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v2 = VectorFloatToUnsigned
-                              ((float)((unsigned long long)temp_v6 >> 0x20) + temp_v5 * DAT_004e3138,3) & 0xff;
+                              ((float)((unsigned long long)temp_v6 >> 0x20) + temp_v5 * g_asdSoundDuck,3) & 0xff;
             if (temp_v0 < 2) {
               if (temp_v2 >= 0x80) {
                 temp_v2 = 0x7f;

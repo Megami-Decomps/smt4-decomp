@@ -142,7 +142,7 @@ extern int nw_snd_internal_driver_SequenceTrack_ChannelCallbackFunc(...); /* 0x3
 /* Supplied declaration required: FUN_002a1f84. */
 /* Supplied declaration required: FUN_00379c18. */
 /* Supplied declaration required: FUN_00379c90. */
-extern char aeabi_idivmod(int);
+extern char __aeabi_idivmod(int);
 /* Supplied declaration required: nw_snd_internal_CurveAdshr_SetHold. */
 /* Supplied declaration required: nw_snd_internal_driver_Channel_Release. */
 /* Supplied declaration required: nw_snd_internal_driver_Channel_SetSweepParam. */
@@ -285,7 +285,7 @@ LAB_0037dbb0:
   }
   else {
     temp_v3 = pfVar9->field_0x110;
-    temp_v2 = aeabi_idivmod(((unsigned int)pfVar9->field_0x111 - (unsigned int)temp_v3) * (unsigned int)pfVar9->field_0x114);
+    temp_v2 = __aeabi_idivmod(((unsigned int)pfVar9->field_0x111 - (unsigned int)temp_v3) * (unsigned int)pfVar9->field_0x114);
     temp_v3 = temp_v2 + temp_v3;
   }
   pfVar9->field_0x110 = temp_v3;

@@ -10,7 +10,7 @@ int FUN_00241d44(...);
 int FUN_0025b750(void);
 int FUN_002a3504(float *, float *, int *);
 int FUN_002b011c(void);
-int FUN_002bfe28(float *, unsigned int *);
+int mtx44Copy(float *, unsigned int *);
 int FUN_002c1b64(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -75,7 +75,7 @@ extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
 extern float DAT_00433d98; /* 0x433d98 */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int DAT_00476638; /* 0x476638 */
 extern unsigned int DAT_004efd9c; /* 0x4efd9c */
 extern unsigned int DAT_004efda0; /* 0x4efda0 */
@@ -113,7 +113,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0025b750. */
 /* Supplied declaration required: FUN_002a3504. */
 /* Supplied declaration required: FUN_002b011c. */
-/* Supplied declaration required: FUN_002bfe28. */
+/* Supplied declaration required: mtx44Copy. */
 extern int FUN_002bfefc(unsigned int *);
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
@@ -302,14 +302,14 @@ void FUN_0033e160(fn_0033e160_arg0 *param_1,int param_2,int param_3,unsigned int
       DAT_004efdd4 = temp_v8;
       DAT_004efdd8 = DAT_004efd9c;
     }
-    FUN_002bfe28(&temp_v20,&DAT_004efd9c);
+    mtx44Copy(&temp_v20,&DAT_004efd9c);
     FUN_002a3504(&temp_v20,&temp_v20,&temp_v50);
     FUN_0023e400(&temp_v20,&temp_v20,temp_v53);
     nn_math_ARMv6_MTX44MultAsm(&temp_v20,&temp_v20,&temp_v32);
-    FUN_002c1b64(DAT_0044ea00,*(unsigned int *)((int)param_1->field_0x14 + 0x18));
-    temp_v5 = DAT_0044ea00;
+    FUN_002c1b64(g_titleScene,*(unsigned int *)((int)param_1->field_0x14 + 0x18));
+    temp_v5 = g_titleScene;
     temp_v6 = unaff_r6 * 0x58 + 0x54;
-    piVar9 = (int *)(DAT_0044ea00 + 0x12ac);
+    piVar9 = (int *)(g_titleScene + 0x12ac);
     temp_v0 = *(int *)(param_1->field_0x2c + temp_v6);
     temp_v4 = piVar9[*piVar9 + 2];
     piVar9[*piVar9 + 2] = temp_v0;
@@ -318,11 +318,11 @@ void FUN_0033e160(fn_0033e160_arg0 *param_1,int param_2,int param_3,unsigned int
       *(unsigned char *)(temp_v5 + 0x12c4) = 0;
     }
     temp_v5 = *(int *)(param_1->field_0x2c + temp_v6);
-    for (; temp_v0 = DAT_0044ea00, (int)unaff_r6 <= unaff_r9; unaff_r6 = unaff_r6 + 1) {
+    for (; temp_v0 = g_titleScene, (int)unaff_r6 <= unaff_r9; unaff_r6 = unaff_r6 + 1) {
       temp_v6 = unaff_r6 * 0x58 + 0x54;
       temp_v4 = *(int *)(param_1->field_0x2c + temp_v6);
       if (temp_v4 != temp_v5) {
-        piVar9 = (int *)(DAT_0044ea00 + 0x12ac);
+        piVar9 = (int *)(g_titleScene + 0x12ac);
         temp_v5 = piVar9[*piVar9 + 2];
         piVar9[*piVar9 + 2] = temp_v4;
         if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v5 != temp_v4) {

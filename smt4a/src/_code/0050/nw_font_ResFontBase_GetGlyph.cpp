@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int aeabi_uidivmod(...);
+int __aeabi_uidivmod(...);
 int nw_font_ResFontBase_FindGlyphIndex(unsigned int, unsigned int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 /* Supplied declaration required: nw_font_ResFontBase_FindGlyphIndex. */
 
 
@@ -45,7 +45,7 @@ void nw_font_ResFontBase_GetGlyph(unsigned int param_1,int *param_2,unsigned int
     temp_v4 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 8) + 2);
   }
   pbVar11 = *(unsigned char **)(*(int *)(param_1 + 8) + 8);
-  temp_v5 = aeabi_uidivmod(temp_v4,(unsigned int)*(unsigned short *)(pbVar11 + 0xc) * (unsigned int)*(unsigned short *)(pbVar11 + 0xe));
+  temp_v5 = __aeabi_uidivmod(temp_v4,(unsigned int)*(unsigned short *)(pbVar11 + 0xc) * (unsigned int)*(unsigned short *)(pbVar11 + 0xe));
   *param_2 = *(int *)(pbVar11 + 4) * temp_v5 + *(int *)(pbVar11 + 0x14);
   temp_v9 = *(unsigned int *)(param_1 + 8);
   puVar7 = *(unsigned short **)(temp_v9 + 0xc);
@@ -61,9 +61,9 @@ LAB_0050cb7c:
       }
       param_2[5] = temp_v6;
       temp_v2 = *(unsigned short *)(pbVar11 + 0xc);
-      aeabi_uidivmod(temp_v4,(unsigned int)temp_v2 * (unsigned int)*(unsigned short *)(pbVar11 + 0xe),temp_v5,temp_v9,unaff_r4,
+      __aeabi_uidivmod(temp_v4,(unsigned int)temp_v2 * (unsigned int)*(unsigned short *)(pbVar11 + 0xe),temp_v5,temp_v9,unaff_r4,
                      unaff_r5,unaff_r6);
-      temp_v3 = aeabi_uidivmod(temp_v8,(unsigned int)temp_v2);
+      temp_v3 = __aeabi_uidivmod(temp_v8,(unsigned int)temp_v2);
       temp_v0 = pbVar11[1];
       temp_v1 = *pbVar11;
       *(unsigned char *)((int)param_2 + 7) = temp_v0;

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002a775c(unsigned int);
+int asdMdlManagerDestroy(unsigned int);
 
-extern int DAT_00447a78; /* 0x447a78 */
+extern int g_mapIf; /* 0x447a78 */
 
-/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: asdMdlManagerDestroy. */
 
 
 void FUN_002480c8(void)
@@ -18,9 +18,9 @@ void FUN_002480c8(void)
   int temp_v0;
   unsigned char *puVar2;
   
-  temp_v0 = DAT_00447a78;
-  puVar2 = (unsigned char *)(DAT_00447a78 + 0xcc30);
-  FUN_002a775c(*(unsigned int *)(DAT_00447a78 + 0xcc4c));
+  temp_v0 = g_mapIf;
+  puVar2 = (unsigned char *)(g_mapIf + 0xcc30);
+  asdMdlManagerDestroy(*(unsigned int *)(g_mapIf + 0xcc4c));
   *(unsigned int *)(temp_v0 + 0xcc4c) = 0;
   *puVar2 = 0;
   return;

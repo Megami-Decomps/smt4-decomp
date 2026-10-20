@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001245c4(unsigned int *);
+int asdMemoryFreeRegion(unsigned int *);
 int FUN_002a8554(...);
-int FUN_002c32a0(int, int, int, unsigned int, int, int);
-int FUN_002c415c(int);
-int FUN_002c498c(...);
+int memAlloc(int, int, int, unsigned int, int, int);
+int asdMemFree(int);
+int asdMemAlloc(...);
 int FUN_00349804(unsigned int, unsigned int, unsigned int *, unsigned int);
 int hasExclusiveAccess(int *);
 
@@ -20,12 +20,12 @@ extern int DAT_00465158; /* 0x465158 */
 extern unsigned int DAT_00471b58; /* 0x471b58 */
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Supplied declaration required: FUN_001245c4. */
+/* Supplied declaration required: asdMemoryFreeRegion. */
 extern unsigned int *FUN_001246cc(unsigned int *);
 /* Supplied declaration required: FUN_002a8554. */
-/* Supplied declaration required: FUN_002c32a0. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c498c. */
+/* Supplied declaration required: memAlloc. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: FUN_00349804. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 
@@ -66,7 +66,7 @@ void FUN_0019fc50(int param_1,int param_2,unsigned int param_3,unsigned int para
     unaff_r9 = 4;
     *(unsigned int *)(param_1 + 0x28) = temp_v9 * temp_v10 * 4;
     puStack_38 = (unsigned int *)0x100;
-    FUN_002c498c(0x100,0x100,0,*(unsigned int *)(param_1 + 0x28),1);
+    asdMemAlloc(0x100,0x100,0,*(unsigned int *)(param_1 + 0x28),1);
   }
   temp_v0 = *(unsigned char *)(param_2 + 0x16);
   param_2 = param_2 + 0x40;
@@ -122,7 +122,7 @@ void FUN_0019fc50(int param_1,int param_2,unsigned int param_3,unsigned int para
   else {
 LAB_0019fd88:
     temp_v5 = 0x100;
-    FUN_002c498c(0x100,0x100,0,0x400,1);
+    asdMemAlloc(0x100,0x100,0,0x400,1);
     temp_v11 = 0;
     do {
       temp_v2 = *(unsigned int *)(param_2 +
@@ -167,7 +167,7 @@ LAB_0019fd88:
         temp_v11 = (temp_v11 + 1) & 0xffff;
       } while (temp_v11 < temp_v10);
     }
-    FUN_002c415c(temp_v5);
+    asdMemFree(temp_v5);
   }
 LAB_0019fea0:
   *(unsigned int *)(param_1 + 8) = param_4;
@@ -177,7 +177,7 @@ LAB_0019fea0:
   *(unsigned int *)(param_1 + 0x14) = temp_v9;
   *(unsigned int *)(param_1 + 0x18) = temp_v10;
   temp_v3 = 0x10000;
-  FUN_002c32a0(0x10000,0x100,0,*(unsigned int *)(param_1 + 0x28),0x80,1);
+  memAlloc(0x10000,0x100,0,*(unsigned int *)(param_1 + 0x28),0x80,1);
   *(unsigned int *)(param_1 + 0x24) = temp_v3;
   FUN_00349804(*(unsigned int *)(param_1 + 0x14),*(unsigned int *)(param_1 + 0x18),puStack_38,temp_v3);
   nn_os_CriticalSection_Enter((unsigned int)DAT_00465124);
@@ -185,7 +185,7 @@ LAB_0019fea0:
      (((unsigned int)puStack_38 < DAT_00465148 || ((unsigned int *)((int)DAT_00465148 + DAT_00465158) < puStack_38)))) {
     puStack_38 = (unsigned int *)FUN_001246cc(puStack_38);
   }
-  FUN_001245c4(puStack_38);
+  asdMemoryFreeRegion(puStack_38);
   piVar3 = DAT_00465124;
   temp_v5 = DAT_00465124[2];
   DAT_00465124[2] = temp_v5 - 1;

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0010063a(...);
-int FUN_002e3d04(void);
+int qsort(...);
+int asdOperatorNewD(void);
 int FUN_002e6490(float *);
 int SBORROW4(unsigned int, unsigned int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -20,9 +20,9 @@ extern unsigned char DAT_0057a6e4; /* 0x57a6e4 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern int FUN_001633a0(unsigned int);
-/* Supplied declaration required: FUN_002e3d04. */
+/* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: FUN_002e6490. */
 extern int FUN_003e8430(int);
 
@@ -108,12 +108,12 @@ void FUN_004e638c(int *param_1,int param_2,int param_3,int param_4,int param_5)
   if (!(param_3 == 1 || param_3 == 2)) {
     if (param_3 != 3) {
       if (param_3 == 5) {
-        FUN_0010063a(temp_v12,temp_v6,4,&LAB_002419a0);
+        qsort(temp_v12,temp_v6,4,&LAB_002419a0);
         goto LAB_004e6648;
       }
     }
     else {
-      FUN_0010063a(temp_v12,temp_v6);
+      qsort(temp_v12,temp_v6);
     }
 LAB_004e6584:
     temp_v0 = temp_v6 / 3;
@@ -147,7 +147,7 @@ LAB_004e6584:
     }
   }
   else {
-    FUN_0010063a(temp_v12,temp_v6);
+    qsort(temp_v12,temp_v6);
     temp_v9 = (*(float *)((unsigned char *)&(*(float *)((unsigned char *)&DAT_0057a6e4 - 0x4)) + 0x4));
     temp_v11 = (*(float *)((unsigned char *)&DAT_0057a6e4 - 0x4));
     if (param_3 != 5) {
@@ -185,7 +185,7 @@ LAB_004e6648:
       pfVar5 = (float *)(temp_v6 << 2);
       temp_v9 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = 40.0f / temp_v9;
-      FUN_002e3d04();
+      asdOperatorNewD();
       pfVar6 = pfVar5 + -1;
       temp_v11 = temp_v10;
       if ((temp_v6 & 1) != 0) {

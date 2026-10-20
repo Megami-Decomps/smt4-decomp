@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00182540(unsigned int);
 
 typedef int romwright_code(...);
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
@@ -26,7 +26,7 @@ unsigned int FUN_003a3c44(int *param_1)
   int temp_v3;
   int temp_v4;
   
-  temp_v3 = DAT_0059dbb4;
+  temp_v3 = g_renderCtx;
   temp_v4 = *param_1;
   if (*(int *)(temp_v4 + 8) - 1U < 0xe) {
     temp_v0 = FUN_00387580(6);
@@ -39,7 +39,7 @@ unsigned int FUN_003a3c44(int *param_1)
       (**(romwright_code **)(temp_v3 + 0x1294))();
       *(unsigned char *)(temp_v3 + 0x1290) = 0;
     }
-    temp_v3 = DAT_0059dbb4;
+    temp_v3 = g_renderCtx;
     temp_v0 = FUN_001692ac(1,0);
     piVar4 = (int *)(temp_v3 + 0x1258);
     temp_v1 = *piVar4;
@@ -50,7 +50,7 @@ unsigned int FUN_003a3c44(int *param_1)
       (**(romwright_code **)(temp_v3 + 0x1274))();
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
-    temp_v3 = DAT_0059dbb4;
+    temp_v3 = g_renderCtx;
     temp_v0 = FUN_00169294(6,1,0);
     piVar4 = (int *)(temp_v3 + 0x12b8);
     temp_v1 = *piVar4;
@@ -67,10 +67,10 @@ unsigned int FUN_003a3c44(int *param_1)
       if (*(char *)(temp_v0 + 0x56c) != '\0') {
         FUN_00182540(*(unsigned int *)(temp_v0 + 0x568));
       }
-      temp_v0 = DAT_0059dbb4;
+      temp_v0 = g_renderCtx;
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 4);
-    piVar4 = (int *)(DAT_0059dbb4 + 0x12b8);
+    piVar4 = (int *)(g_renderCtx + 0x12b8);
     temp_v3 = *piVar4;
     temp_v4 = piVar4[temp_v3 + 2];
     *piVar4 = temp_v3 - 1;
@@ -78,8 +78,8 @@ unsigned int FUN_003a3c44(int *param_1)
       (**(romwright_code **)(temp_v0 + 0x12d4))();
       *(unsigned char *)(temp_v0 + 0x12d0) = 0;
     }
-    temp_v3 = DAT_0059dbb4;
-    piVar4 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v3 = g_renderCtx;
+    piVar4 = (int *)(g_renderCtx + 0x1258);
     temp_v4 = *piVar4;
     temp_v0 = piVar4[temp_v4 + 2];
     *piVar4 = temp_v4 - 1;
@@ -87,8 +87,8 @@ unsigned int FUN_003a3c44(int *param_1)
       (**(romwright_code **)(temp_v3 + 0x1274))();
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
-    temp_v3 = DAT_0059dbb4;
-    piVar4 = (int *)(DAT_0059dbb4 + 0x1278);
+    temp_v3 = g_renderCtx;
+    piVar4 = (int *)(g_renderCtx + 0x1278);
     temp_v4 = *piVar4;
     temp_v0 = piVar4[temp_v4 + 2];
     *piVar4 = temp_v4 - 1;

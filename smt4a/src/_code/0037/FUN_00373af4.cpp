@@ -2,8 +2,8 @@
 
 extern "C" {
 
-extern int FUN_0014aa78(void);
-extern unsigned int FUN_00236038(unsigned int);
+extern int btlGetMainState(void);
+extern unsigned int scrGetArg(unsigned int);
 
 
 unsigned int FUN_00373af4(void)
@@ -13,10 +13,10 @@ unsigned int FUN_00373af4(void)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
+  temp_v0 = scrGetArg(0);
+  temp_v1 = scrGetArg(1);
   if (temp_v0 < 0x10) {
-    temp_v2 = FUN_0014aa78();
+    temp_v2 = btlGetMainState();
     *(unsigned int *)(temp_v2 + temp_v0 * 4 + 0x4c88) = temp_v1;
   }
   return 1;

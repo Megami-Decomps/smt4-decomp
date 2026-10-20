@@ -4,13 +4,13 @@
 
 extern "C" {
 
-extern int DAT_0044ea28; /* 0x44ea28 */
+extern int g_texTable; /* 0x44ea28 */
 
 
 unsigned char FUN_0024bb10(int param_1)
 
 {
-  return *(int *)(DAT_0044ea28 + param_1 * 0x18) != 0;
+  return *(int *)(g_texTable + param_1 * 0x18) != 0;
 }
 
 } /* extern "C" */

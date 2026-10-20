@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002c4938(int, int);
+int memClear(int, int);
 
 typedef int romwright_code(...);
 extern romwright_code *DAT_0044e330; /* 0x44e330 */
 extern romwright_code *DAT_0044e334; /* 0x44e334 */
-extern int DAT_004652a0; /* 0x4652a0 */
-extern int DAT_004652a4; /* 0x4652a4 */
+extern int g_commandBufferCursor; /* 0x4652a0 */
+extern int g_commandBufferEnd; /* 0x4652a4 */
 extern unsigned int *DAT_004c632c; /* 0x4c632c */
 
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_0012316c(int param_1,int param_2)
@@ -49,9 +49,9 @@ void FUN_0012316c(int param_1,int param_2)
     puVar1[0xc] = 0;
     puVar1[6] = temp_v0 + param_1;
     puVar1[7] = param_2;
-    FUN_002c4938(temp_v0 + param_1,param_2 * 0x1c);
-    DAT_004652a0 = puVar1[1];
-    DAT_004652a4 = DAT_004652a0 + puVar1[2];
+    memClear(temp_v0 + param_1,param_2 * 0x1c);
+    g_commandBufferCursor = puVar1[1];
+    g_commandBufferEnd = g_commandBufferCursor + puVar1[2];
   }
   return;
 }

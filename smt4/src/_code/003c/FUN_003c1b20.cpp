@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0026e630(int);
 int FUN_00299370(int);
-int FUN_002c0c74(void);
+int dataTableGetCount(void);
 int FUN_003c219c(int, int *, int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -17,9 +17,9 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0026e630. */
 /* Supplied declaration required: FUN_00299370. */
-/* Supplied declaration required: FUN_002c0c74. */
-extern int FUN_002c0cc4(unsigned int);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+/* Supplied declaration required: dataTableGetCount. */
+extern int dataTableGetEntries(unsigned int);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003c219c. */
 
 
@@ -35,9 +35,9 @@ void FUN_003c1b20(int param_1,int param_2,int param_3)
   unsigned int temp_v4;
   unsigned int uStack_24;
   
-  temp_v0 = FUN_002c0cec(9,0);
-  FUN_002c0c74();
-  temp_v1 = FUN_002c0cc4(temp_v0);
+  temp_v0 = dataTableGet(9,0);
+  dataTableGetCount();
+  temp_v1 = dataTableGetEntries(temp_v0);
   temp_v3 = *(unsigned int *)(temp_v1 + 5);
   temp_v4 = (unsigned int)*(unsigned char *)(temp_v1 + 0xb) | ((unsigned int)*(unsigned char *)(temp_v1 + 0xc) << 0x10) |
              ((unsigned int)*(unsigned char *)(temp_v1 + 0xd) << 0x18);

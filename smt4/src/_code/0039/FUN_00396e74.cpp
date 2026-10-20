@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0029bb3c(unsigned char *, int);
+int asdMdlManagerCreateLoaded(unsigned char *, int);
 
 extern unsigned char LAB_00396ed4; /* 0x396ed4 */
 extern unsigned char LAB_00396eec; /* 0x396eec */
 
-/* Supplied declaration required: FUN_0029bb3c. */
+/* Supplied declaration required: asdMdlManagerCreateLoaded. */
 
 
 void FUN_00396e74(int param_1)
@@ -19,12 +19,12 @@ void FUN_00396e74(int param_1)
   unsigned int *puVar1;
   
   puVar1 = (unsigned int *)&LAB_00396ed4;
-  FUN_0029bb3c(&LAB_00396ed4,0x1c0);
+  asdMdlManagerCreateLoaded(&LAB_00396ed4,0x1c0);
   *(unsigned int **)(param_1 + 0x98) = puVar1;
   *puVar1 = *puVar1 | 2;
   *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
   puVar1 = (unsigned int *)&LAB_00396eec;
-  FUN_0029bb3c(&LAB_00396eec,0x1c0);
+  asdMdlManagerCreateLoaded(&LAB_00396eec,0x1c0);
   *(unsigned int **)(param_1 + 0x9c) = puVar1;
   *puVar1 = *puVar1 | 2;
   *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;

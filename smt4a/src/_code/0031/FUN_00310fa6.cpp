@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e74c4(unsigned int, int, int, unsigned int);
+int strAssign(unsigned int, int, int, unsigned int);
 int FUN_002ee9ce(int);
 int FUN_002ee9da(int, int);
 
@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 extern int FUN_002e7328(int, int);
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 extern int FUN_002e76b6(void);
 extern int FUN_002ed28c(int, int *);
 /* Supplied declaration required: FUN_002ee9ce. */
@@ -35,7 +35,7 @@ unsigned int FUN_00310fa6(int param_1,unsigned int param_2)
   if ((temp_v0 != 0) && (temp_v0 = FUN_002e7328(param_1,temp_v2), temp_v1 = 0, temp_v0 != 0)) {
     FUN_002ee9ce(param_1);
     temp_v0 = FUN_002e76b6();
-    FUN_002e74c4(param_2,temp_v0 + *(int *)(param_1 + 0xc),temp_v2,0xffffffff);
+    strAssign(param_2,temp_v0 + *(int *)(param_1 + 0xc),temp_v2,0xffffffff);
     FUN_002ee9da(param_1,*(int *)(param_1 + 0xc) + temp_v2);
     temp_v1 = 1;
   }

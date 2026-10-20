@@ -1,58 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002adce8` (_code @ 0x2adce8, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001641c4(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
+/* Game block with a 5-entry id table at 0x1b34 followed by a list of ids at 0x1b3e (-1 = empty). */
 typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
+    u8 unk00[0x1b34];
+    s16 head[5];        /* 0x1b34 */
+    s16 list[1];        /* 0x1b3e */
+} GameBlock;
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern GameBlock *DAT_0057f108;
 
-/* Supplied declaration required: FUN_001641c4. */
-extern int FUN_00348ed0(unsigned int);
+int FUN_001641c4(void);
+int FUN_00348ed0(u32 group);
 
-
-void FUN_002adce8(unsigned int param_1,int param_2)
-
+/* Clears the id table and every used list slot for `group`; with `keep` clear it also runs two trailing FUN_001641c4 calls. */
+void FUN_002adce8(u32 group, int keep)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = DAT_0057f108;
-  FUN_001641c4();
-  FUN_001641c4();
-  FUN_001641c4();
-  *(unsigned short *)(temp_v0 + 0x1b34) = 0xffff;
-  *(unsigned short *)(temp_v0 + 0x1b36) = 0xffff;
-  *(unsigned short *)(temp_v0 + 0x1b38) = 0xffff;
-  *(unsigned short *)(temp_v0 + 0x1b3a) = 0xffff;
-  *(unsigned short *)(temp_v0 + 0x1b3c) = 0xffff;
-  temp_v2 = 0;
-  temp_v1 = FUN_00348ed0(param_1);
-  if (0 < temp_v1) {
-    do {
-      temp_v1 = temp_v0 + temp_v2 * 2;
-      if (-1 < *(short *)(temp_v1 + 0x1b3e)) {
+    GameBlock *block = DAT_0057f108;
+    int i;
+
+    FUN_001641c4();
+    FUN_001641c4();
+    FUN_001641c4();
+    block->head[0] = -1;
+    block->head[1] = -1;
+    block->head[2] = -1;
+    block->head[3] = -1;
+    block->head[4] = -1;
+    i = 0;
+    if (FUN_00348ed0(group) > 0) {
+        do {
+            if (block->list[i] >= 0) {
+                FUN_001641c4();
+                block->list[i] = -1;
+            }
+            i++;
+        } while (FUN_00348ed0(group) > i);
+    }
+    if (keep == 0) {
         FUN_001641c4();
-        *(unsigned short *)(temp_v1 + 0x1b3e) = 0xffff;
-      }
-      temp_v2 = temp_v2 + 1;
-      temp_v1 = FUN_00348ed0(param_1);
-    } while (temp_v2 < temp_v1);
-  }
-  if (param_2 == 0) {
-    FUN_001641c4();
-    FUN_001641c4();
-    return;
-  }
-  return;
+        FUN_001641c4();
+    }
 }
 
 } /* extern "C" */

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00296cc8(int);
+int scrGetArg(int);
 int FUN_002a880c(unsigned int, int, int);
 
 extern int FUN_002893d8(void);
-/* Supplied declaration required: FUN_00296cc8. */
+/* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_002a880c. */
-extern unsigned int FUN_002c08f0(void);
+extern unsigned int jobGetWork(void);
 
 
 unsigned int FUN_00328774(void)
@@ -21,7 +21,7 @@ unsigned int FUN_00328774(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00296cc8(1);
+  temp_v0 = scrGetArg(1);
   temp_v1 = FUN_002893d8();
   if (temp_v1 != 0) {
     temp_v1 = FUN_002893d8();
@@ -30,8 +30,8 @@ unsigned int FUN_00328774(void)
     }
   }
   else {
-    FUN_00296cc8(0);
-    temp_v2 = FUN_002c08f0();
+    scrGetArg(0);
+    temp_v2 = jobGetWork();
     FUN_002a880c(temp_v2,8,temp_v0);
   }
   return 0;

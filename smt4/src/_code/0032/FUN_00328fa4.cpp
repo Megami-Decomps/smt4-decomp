@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002bd540(int);
-int FUN_002c415c(unsigned int);
+int asdMemFree(unsigned int);
 
 /* Supplied declaration required: FUN_002bd540. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_00328fa4(void)
@@ -37,7 +37,7 @@ void FUN_00328fa4(void)
       *(unsigned int *)(*piVar3 + 0x38) = 0;
       FUN_002bd540(*piVar3);
       *(unsigned char *)(temp_v0 + 0x4332e8) = 1;
-      FUN_002c415c(*(unsigned int *)(temp_v0 + 0x4332e4));
+      asdMemFree(*(unsigned int *)(temp_v0 + 0x4332e4));
       *(unsigned int *)(temp_v0 + 0x4332e4) = 0;
     }
     temp_v2 = temp_v2 + 1;

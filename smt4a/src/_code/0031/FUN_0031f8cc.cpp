@@ -1,27 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031f8cc` (_code @ 0x31f8cc, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail forms the cursor address in r0 and copies it to r5 */
+/* Returns the table value for the current position (FUN_002a4860 + FUN_002a4894 of the cursor sub-state). */
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f28c; /* 0x57f28c */
+typedef struct Cursor {
+    u8 data[0x12A];
+} Cursor; /* 0x9AC .. 0xAD6 */
 
-extern int FUN_002a4860(void);
-extern int FUN_002a4894(int);
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[0x9AC];
+    /* 0x9AC */ Cursor cursor;
+    /* 0xAD6 */ u16 values[1];
+} Holder;
 
+extern Holder *DAT_0057f28c;
 
-unsigned short FUN_0031f8cc(void)
+extern s32 FUN_002a4860(Cursor *cursor);
+extern s32 FUN_002a4894(Cursor *cursor);
 
+u16 FUN_0031f8cc(void)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = DAT_0057f28c;
-  temp_v1 = DAT_0057f28c + 0x9ac;
-  temp_v2 = FUN_002a4860();
-  temp_v1 = FUN_002a4894(temp_v1);
-  return *(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0xad6);
+    Holder *holder = DAT_0057f28c;
+    Cursor *cursor = &holder->cursor;
+    s32 base = FUN_002a4860(cursor);
+    s32 offset = FUN_002a4894(cursor);
+
+    return holder->values[offset + base];
 }
 
-} /* extern "C" */
+}

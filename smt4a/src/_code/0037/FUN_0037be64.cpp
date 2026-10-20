@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0017760c(...);
 int FUN_00184310(void);
-int FUN_0019e4d4(...);
+int slotRecordFindById(...);
 int FUN_00239234(...);
 int FUN_002e59f8(int, unsigned int [11], int);
 int FUN_002e6dd0(int, int);
@@ -30,11 +30,11 @@ extern int FUN_0014af84(void);
 extern int FUN_0014bef4(unsigned int);
 /* Supplied declaration required: FUN_0017760c. */
 /* Supplied declaration required: FUN_00184310. */
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 extern unsigned int FUN_0019acdc(short, unsigned int);
-/* Supplied declaration required: FUN_0019e4d4. */
+/* Supplied declaration required: slotRecordFindById. */
 extern unsigned int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_00239234. */
 /* Supplied declaration required: FUN_002e59f8. */
@@ -137,9 +137,9 @@ LAB_0037c020:;
     temp_v8 = temp_v8 + 1;
     *(unsigned short *)(temp_v10 + 0x28312) = temp_v3 | (unsigned short)(temp_v13 << 10);
   } while (temp_v9 != 0);
-  temp_v11 = FUN_00187180(10,0);
-  temp_v18 = FUN_00192798();
-  temp_v7 = FUN_00192748(temp_v11);
+  temp_v11 = dataTableGet(10,0);
+  temp_v18 = dataTableGetEntries();
+  temp_v7 = dataTableGetCount(temp_v11);
   temp_v14 = 0;
   if (temp_v7 != 0) {
     do {
@@ -225,7 +225,7 @@ LAB_0037c2b0:
   } while (temp_v9 != 0);
   temp_v13 = 0;
   do {
-    if ((((temp_v16[temp_v13] & 0xffff) != 0) && (temp_v8 = FUN_0019e4d4(), temp_v8 != 0)) &&
+    if ((((temp_v16[temp_v13] & 0xffff) != 0) && (temp_v8 = slotRecordFindById(), temp_v8 != 0)) &&
        (temp_v9 = FUN_0017760c(), temp_v9 < *(short *)(temp_v8 + 0x2a))) {
       temp_v11 = FUN_0017760c(temp_v8);
       FUN_004bd354(temp_v8,temp_v11);
@@ -235,7 +235,7 @@ LAB_0037c2b0:
   temp_v13 = 0;
   do {
     temp_v7 = *(unsigned int *)(temp_v6 + temp_v13 * 4 + 0x28310) & 0xffff;
-    if ((temp_v7 != 0) && (temp_v8 = FUN_0019e4d4(temp_v7), temp_v8 != 0)) {
+    if ((temp_v7 != 0) && (temp_v8 = slotRecordFindById(temp_v7), temp_v8 != 0)) {
       temp_v9 = 0;
       do {
         if (((temp_v16[temp_v9] & 0xffff) != 0) && ((temp_v16[temp_v9] & 0xffff) == temp_v7))

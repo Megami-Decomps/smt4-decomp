@@ -9,7 +9,7 @@ int FUN_0037fb78(int, int);
 int FUN_003e7204(unsigned int, unsigned int);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
-int aeabi_idivmod(...);
+int __aeabi_idivmod(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ typedef struct {
 #endif
 /* Supplied declaration required: FUN_0037fb78. */
 /* Supplied declaration required: FUN_003e7204. */
-/* Supplied declaration required: aeabi_idivmod. */
+/* Supplied declaration required: __aeabi_idivmod. */
 
 
 void FUN_0023592c(int param_1)
@@ -72,7 +72,7 @@ void FUN_0023592c(int param_1)
     }
     else {
       temp_v0 = *(unsigned char *)(param_1 + 0x6c);
-      temp_v2 = aeabi_idivmod(((unsigned int)*(unsigned char *)(param_1 + 0x6d) - (unsigned int)temp_v0) *
+      temp_v2 = __aeabi_idivmod(((unsigned int)*(unsigned char *)(param_1 + 0x6d) - (unsigned int)temp_v0) *
                             (int)*(short *)(param_1 + 0x70));
       temp_v3 = (temp_v2 + (unsigned int)temp_v0) & 0xff;
     }
@@ -90,7 +90,7 @@ void FUN_0023592c(int param_1)
              temp_v13 * 4.881899e-07f * temp_v13 * 4.881899e-07f;
     if (temp_v4 < *(short *)(param_1 + 0x80)) {
       temp_v8 = *(char *)(param_1 + 0x7e);
-      temp_v1 = aeabi_idivmod(((int)*(char *)(param_1 + 0x7f) - (int)temp_v8) * temp_v2);
+      temp_v1 = __aeabi_idivmod(((int)*(char *)(param_1 + 0x7f) - (int)temp_v8) * temp_v2);
       temp_v2 = (int)(char)(temp_v1 + temp_v8);
     }
     temp_v14 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -105,7 +105,7 @@ void FUN_0023592c(int param_1)
                       temp_v14 * 0.0078125f * temp_v15);
     if (temp_v4 < *(short *)(param_1 + 0x74)) {
       temp_v8 = *(char *)(param_1 + 0x72);
-      temp_v1 = aeabi_idivmod(((int)*(char *)(param_1 + 0x73) - (int)temp_v8) * temp_v2);
+      temp_v1 = __aeabi_idivmod(((int)*(char *)(param_1 + 0x73) - (int)temp_v8) * temp_v2);
       temp_v2 = (int)(char)(temp_v1 + temp_v8);
     }
     temp_v18 = 0.015873017f;
@@ -131,7 +131,7 @@ void FUN_0023592c(int param_1)
                              temp_v14 * *(float *)(param_1 + 0x18) * *(float *)(temp_v7 + 0x60));
     if (temp_v4 < *(short *)(param_1 + 0x7a)) {
       temp_v8 = *(char *)(param_1 + 0x78);
-      temp_v1 = aeabi_idivmod(((int)*(char *)(param_1 + 0x79) - (int)temp_v8) * temp_v2);
+      temp_v1 = __aeabi_idivmod(((int)*(char *)(param_1 + 0x79) - (int)temp_v8) * temp_v2);
       temp_v2 = (int)(char)(temp_v1 + temp_v8);
     }
     temp_v13 = 2.0f;

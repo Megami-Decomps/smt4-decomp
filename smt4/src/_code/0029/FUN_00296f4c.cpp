@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002c4938(int, int);
+int memClear(int, int);
 
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_00296f4c(int param_1,int param_2)
@@ -31,7 +31,7 @@ unsigned int FUN_00296f4c(int param_1,int param_2)
     *(unsigned int *)(param_1 + 0x34) = 0;
     *(unsigned int *)(param_1 + 0x18) = temp_v2;
     *(unsigned int *)(param_1 + 0x38) = 0;
-    FUN_002c4938(param_1 + 0x3c,0x70);
+    memClear(param_1 + 0x3c,0x70);
     *(int *)(param_1 + 200) = param_2;
     *(unsigned int *)(param_1 + 0xcc) = 0;
     *(unsigned int *)(param_1 + 0xd0) = 0;

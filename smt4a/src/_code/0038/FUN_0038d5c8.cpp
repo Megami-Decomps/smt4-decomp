@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0019cac4(void);
-int FUN_003283ac(int);
+int scrSetResult(int);
 int FUN_003e8bb0(unsigned char [2], int, int);
 int FUN_004c3ac0(int, int [3]);
 int FUN_004c58e0(int, int, int, int);
@@ -27,10 +27,10 @@ extern unsigned int DAT_00570d90; /* 0x570d90 */
 extern unsigned int DAT_00570d94; /* 0x570d94 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_0019cac4. */
-extern unsigned int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_003283ac. */
+extern unsigned int scrGetArg(unsigned int);
+/* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_004c3ac0. */
 /* Supplied declaration required: FUN_004c58e0. */
@@ -56,9 +56,9 @@ unsigned int FUN_0038d5c8(void)
   short temp_v11;
   char temp_v12;
   
-  temp_v2 = FUN_00236038(0);
+  temp_v2 = scrGetArg(0);
   temp_v7 = 9999;
-  temp_v8[0] = FUN_0014aa78();
+  temp_v8[0] = btlGetMainState();
   temp_v3 = temp_v2 & 0xffff;
   FUN_0019cac4();
   if (temp_v3 != 0) {
@@ -98,7 +98,7 @@ unsigned int FUN_0038d5c8(void)
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 0x36);
   }
-  FUN_003283ac(temp_v7);
+  scrSetResult(temp_v7);
   return 1;
 }
 

@@ -31,7 +31,7 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_2_stack;
 
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
 extern unsigned int DAT_00571170; /* 0x571170 */
@@ -84,7 +84,7 @@ void FUN_004dd800(int *param_1,unsigned int *param_2)
     FUN_004c9160(0x29,param_2[8],0,1);
     FUN_004fd508(temp_v5,param_2,0,param_2[9],1);
     FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
-    temp_v1 = DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254;
+    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254;
 LAB_004ddb40:
     *(unsigned char *)(temp_v1 + 9) = 0x1d;
   }
@@ -104,7 +104,7 @@ LAB_004ddb40:
           FUN_004c9160(0x29,param_2[8],0,1);
           FUN_004fd508(temp_v5,param_2,0,param_2[9],1);
           FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
-          temp_v1 = DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254;
+          temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254;
           goto LAB_004ddb40;
         }
         goto LAB_004ddb48;

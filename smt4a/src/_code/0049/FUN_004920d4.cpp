@@ -38,8 +38,8 @@ extern unsigned char DAT_005324b8; /* 0x5324b8 */
 extern unsigned char DAT_00532500; /* 0x532500 */
 extern unsigned char DAT_00532548; /* 0x532548 */
 extern unsigned char DAT_00532590; /* 0x532590 */
-extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
-extern unsigned int DAT_005f15fc; /* 0x5f15fc */
+extern unsigned int g_renderCtx; /* 0x59dbb4 */
+extern unsigned int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1604; /* 0x5f1604 */
 extern signed char DAT_005f1622; /* 0x5f1622 */
 extern signed char DAT_005f1a5e; /* 0x5f1a5e */
@@ -62,7 +62,7 @@ extern int FUN_004083a8(int);
 /* Supplied declaration required: FUN_0048b260. */
 /* Supplied declaration required: FUN_0048b514. */
 extern int FUN_0048e40c(int);
-extern unsigned int FUN_00492be8(void);
+extern unsigned int lmapSceneGetObj(void);
 extern int FUN_00492c34(int);
 /* Supplied declaration required: FUN_00492c5c. */
 extern int FUN_00492c70(int);
@@ -135,7 +135,7 @@ void FUN_004920d4(int param_1)
     rt_memcpy_w(temp_v22,&DAT_00532548,0x48);
     rt_memcpy_w(temp_v24,&DAT_00532590,0x48);
     temp_v3 = temp_v33 + 0x4cc;
-    pfVar5 = (float *)FUN_00492be8();
+    pfVar5 = (float *)lmapSceneGetObj();
     temp_v15 = *pfVar5;
     temp_v17 = pfVar5[2];
     temp_v4 = FUN_00492c34(temp_v3);
@@ -306,7 +306,7 @@ LAB_004925c8:
   temp_v3 = FUN_0048e40c(temp_v33);
   if (((temp_v3 != 0) && (*(int *)(temp_v33 + 4) != 0)) &&
      (FUN_0049359c(temp_v33 + 0x4d0,temp_v20), (unsigned int)temp_v20[0] < 0xc39f8001)) {
-    FUN_00157558(DAT_0059dbb4);
+    FUN_00157558(g_renderCtx);
     FUN_00183bb0();
     if (*(char *)(temp_v33 + 0xc) != '\0') {
       FUN_00486444();
@@ -317,13 +317,13 @@ LAB_004925c8:
     if ((DAT_005f1a5e != '\0') && (temp_v3 = FUN_00384cf4(), temp_v3 == 0)) {
       FUN_0048b260(temp_v33);
     }
-    FUN_0016c560(DAT_0059dbb4);
-    FUN_0016c410(DAT_0059dbb4);
+    FUN_0016c560(g_renderCtx);
+    FUN_0016c410(g_renderCtx);
     if ((*(char *)(temp_v33 + 0x12d0) != '\0') && (*(char *)(temp_v33 + 0x12d2) == '\0')) {
       FUN_0048b514(temp_v33);
     }
     if (((*(char *)(temp_v33 + 0x1369) != '\0') && (*(char *)(temp_v33 + 0x1368) == '\0')) ||
-       (temp_v3 = FUN_003847e8(DAT_005f15fc), temp_v3 == 3)) {
+       (temp_v3 = FUN_003847e8(g_gameState), temp_v3 == 3)) {
       FUN_0048a1b8(temp_v33);
       return;
     }

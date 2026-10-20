@@ -16,9 +16,9 @@ typedef struct {
 
 extern int DAT_0057f268; /* 0x57f268 */
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0023f900. */
 /* Supplied declaration required: FUN_00342348. */
@@ -69,9 +69,9 @@ void FUN_0020d934(void)
   case 10:
   case 0x12:
     if (*(int *)(DAT_0057f268 + 0xe84) == 0) {
-      temp_v2 = FUN_00187180(0x39,0);
-      temp_v0 = FUN_00192798();
-      temp_v1 = FUN_00192748(temp_v2);
+      temp_v2 = dataTableGet(0x39,0);
+      temp_v0 = dataTableGetEntries();
+      temp_v1 = dataTableGetCount(temp_v2);
       if (temp_v1 < 4) {
         return;
       }
@@ -87,63 +87,63 @@ void FUN_0020d934(void)
     }
     temp_v1 = *(unsigned int *)(DAT_0057f268 + 0x1074);
     if ((temp_v1 & 8) != 0) {
-      temp_v2 = FUN_00187180(0x39,0);
-      temp_v0 = FUN_00192798();
-      temp_v1 = FUN_00192748(temp_v2);
+      temp_v2 = dataTableGet(0x39,0);
+      temp_v0 = dataTableGetEntries();
+      temp_v1 = dataTableGetCount(temp_v2);
       if (temp_v1 < 0xf) {
         return;
       }
       temp_v0 = temp_v0 + 0x508;
     }
     else if ((temp_v1 & 0x40) != 0) {
-      temp_v2 = FUN_00187180(0x39,0);
-      temp_v0 = FUN_00192798();
-      temp_v1 = FUN_00192748(temp_v2);
+      temp_v2 = dataTableGet(0x39,0);
+      temp_v0 = dataTableGetEntries();
+      temp_v1 = dataTableGetCount(temp_v2);
       if (temp_v1 < 0xc) {
         return;
       }
       temp_v0 = temp_v0 + 0x3f4;
     }
     else if ((temp_v1 & 2) != 0) {
-      temp_v2 = FUN_00187180(0x39,0);
-      temp_v0 = FUN_00192798();
-      temp_v1 = FUN_00192748(temp_v2);
+      temp_v2 = dataTableGet(0x39,0);
+      temp_v0 = dataTableGetEntries();
+      temp_v1 = dataTableGetCount(temp_v2);
       if (temp_v1 < 0xd) {
         return;
       }
       temp_v0 = temp_v0 + 0x450;
     }
     else if ((temp_v1 & 4) != 0) {
-      temp_v2 = FUN_00187180(0x39,0);
-      temp_v0 = FUN_00192798();
-      temp_v1 = FUN_00192748(temp_v2);
+      temp_v2 = dataTableGet(0x39,0);
+      temp_v0 = dataTableGetEntries();
+      temp_v1 = dataTableGetCount(temp_v2);
       if (temp_v1 < 0xe) {
         return;
       }
       temp_v0 = temp_v0 + 0x4ac;
     }
     else if ((temp_v1 & 0x20) != 0) {
-      temp_v2 = FUN_00187180(0x39,0);
-      temp_v0 = FUN_00192798();
-      temp_v1 = FUN_00192748(temp_v2);
+      temp_v2 = dataTableGet(0x39,0);
+      temp_v0 = dataTableGetEntries();
+      temp_v1 = dataTableGetCount(temp_v2);
       if (temp_v1 < 0x10) {
         return;
       }
       temp_v0 = temp_v0 + 0x564;
     }
     else if ((temp_v1 & 0x80) != 0) {
-      temp_v2 = FUN_00187180(0x39,0);
-      temp_v0 = FUN_00192798();
-      temp_v1 = FUN_00192748(temp_v2);
+      temp_v2 = dataTableGet(0x39,0);
+      temp_v0 = dataTableGetEntries();
+      temp_v1 = dataTableGetCount(temp_v2);
       if (temp_v1 < 0x11) {
         return;
       }
       temp_v0 = temp_v0 + 0x5c0;
     }
     else {
-      temp_v2 = FUN_00187180(0x39,0);
-      temp_v0 = FUN_00192798();
-      temp_v1 = FUN_00192748(temp_v2);
+      temp_v2 = dataTableGet(0x39,0);
+      temp_v0 = dataTableGetEntries();
+      temp_v1 = dataTableGetCount(temp_v2);
       if (temp_v1 < 5) {
         return;
       }
@@ -151,9 +151,9 @@ void FUN_0020d934(void)
     }
     break;
   case 0xb:
-    temp_v2 = FUN_00187180(0x39,0);
-    temp_v0 = FUN_00192798();
-    temp_v1 = FUN_00192748(temp_v2);
+    temp_v2 = dataTableGet(0x39,0);
+    temp_v0 = dataTableGetEntries();
+    temp_v1 = dataTableGetCount(temp_v2);
     if (temp_v1 < 6) {
       return;
     }

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_003283ac(unsigned int);
+int scrSetResult(unsigned int);
 
 extern unsigned short *FUN_001801a4(void);
-extern unsigned short *FUN_00236038(void);
-/* Supplied declaration required: FUN_003283ac. */
+extern unsigned short *scrGetArg(void);
+/* Supplied declaration required: scrSetResult. */
 
 
 unsigned int FUN_002c2000(void)
@@ -21,7 +21,7 @@ unsigned int FUN_002c2000(void)
   unsigned short *puVar4;
   unsigned char temp_v1;
   
-  puVar1 = (unsigned short *)FUN_00236038();
+  puVar1 = (unsigned short *)scrGetArg();
   puVar2 = (unsigned short *)FUN_001801a4();
   puVar4 = (unsigned short *)(unsigned int)*puVar2;
   temp_v0 = 0;
@@ -45,13 +45,13 @@ unsigned int FUN_002c2000(void)
         puVar2 = (unsigned short *)(unsigned int)puVar2[2];
       }
       if ((temp_v1 && puVar4 != puVar1) && puVar2 != puVar1) {
-        FUN_003283ac(temp_v0);
+        scrSetResult(temp_v0);
         return 1;
       }
     }
   }
   temp_v0 = 1;
-  FUN_003283ac(temp_v0);
+  scrSetResult(temp_v0);
   return 1;
 }
 

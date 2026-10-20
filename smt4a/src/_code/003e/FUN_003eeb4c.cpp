@@ -11,9 +11,9 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fe764. */
 
 
@@ -26,7 +26,7 @@ void FUN_003eeb4c(int param_1,int param_2)
   int temp_v2;
   unsigned char temp_v3;
   
-  temp_v1 = FUN_004ee568(DAT_0057113c);
+  temp_v1 = btlUnitGet(g_btlScriptUnit);
   temp_v2 = temp_v1 + 0x500;
   temp_v0 = *(short *)(temp_v1 + 0x5b0);
   temp_v3 = temp_v0 < 0;

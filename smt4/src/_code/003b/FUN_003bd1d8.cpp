@@ -9,7 +9,7 @@ int FUN_0022ab08(int, unsigned int *);
 int FUN_00246134(unsigned int, int, int, unsigned int);
 int FUN_00247478(unsigned char [2], unsigned int, unsigned int);
 int FUN_00282924(...);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_003bd9e8(unsigned int, int);
 int VectorSignedToFloat(int, int);
 
@@ -26,7 +26,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00246134. */
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_00282924. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_003bd9e8. */
 
 
@@ -45,10 +45,10 @@ void FUN_003bd1d8(unsigned int param_1,unsigned int param_2)
   unsigned short temp_v7;
   short temp_v8;
   
-  temp_v0 = FUN_002939f4();
-  temp_v1 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
+  temp_v1 = btlGetMainState();
   FUN_00282924(temp_v1,param_1);
-  temp_v2 = FUN_002939f4();
+  temp_v2 = btlGetMainState();
   FUN_00247478(temp_v6,temp_v2,temp_v1);
   if ((int)temp_v8 - 3U >= 8) {
     FUN_00246134(param_2,temp_v7,(int)temp_v8,0xffffffff);

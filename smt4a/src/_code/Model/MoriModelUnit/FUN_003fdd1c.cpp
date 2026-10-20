@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_001630d4(...);
+int asdMemoryAlloc(...);
 int FUN_0018eb44(void);
-int FUN_0019d4d8(...);
+int asdMemoryAllocAligned(...);
 int FUN_001c3bb8(...);
 int FUN_005072d4(unsigned int, int *, unsigned int [2]);
 int FUN_005074e8(...);
@@ -63,9 +63,9 @@ extern unsigned char LAB_003fe288; /* 0x3fe288 */
 extern unsigned char LAB_003fe290; /* 0x3fe290 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0018eb44. */
-/* Supplied declaration required: FUN_0019d4d8. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: FUN_001c3bb8. */
 /* Supplied declaration required: FUN_005072d4. */
 /* Supplied declaration required: FUN_005074e8. */
@@ -145,10 +145,10 @@ void FUN_003fdd1c(int param_1,unsigned int param_2)
   temp_v30 = 0;
   FUN_005072d4(*(unsigned int *)(param_1 + 0x210),&temp_v7,temp_v35);
   temp_v0 = 0x100;
-  FUN_0019d4d8(0x100,0x100,0,temp_v10 + temp_v11 + temp_v7 + temp_v9 + temp_v12,4,1);
+  asdMemoryAllocAligned(0x100,0x100,0,temp_v10 + temp_v11 + temp_v7 + temp_v9 + temp_v12,4,1);
   *(unsigned int *)(param_1 + 0x260) = temp_v0;
   temp_v0 = 0x10000;
-  FUN_0019d4d8(0x10000,0x100,0,temp_v8,4,1);
+  asdMemoryAllocAligned(0x10000,0x100,0,temp_v8,4,1);
   *(unsigned int *)(param_1 + 0x264) = temp_v0;
   temp_v2 = *(int *)(param_1 + 0x1b0);
   if (temp_v2 != 0) {
@@ -197,7 +197,7 @@ void FUN_003fdd1c(int param_1,unsigned int param_2)
   FUN_0018eb44();
   temp_v4 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x210) + 0x38) * 0x58;
   temp_v0 = 0x100;
-  FUN_001630d4(0x100,0x100,0,temp_v4,1);
+  asdMemoryAlloc(0x100,0x100,0,temp_v4,1);
   temp_v3 = 0;
   temp_v4 = temp_v4 / 0x58;
   *(unsigned int *)(param_1 + 0x254) = temp_v0;

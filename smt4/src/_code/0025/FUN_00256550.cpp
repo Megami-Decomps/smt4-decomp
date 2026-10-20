@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_0029bb3c(unsigned char [36], int);
+int asdMdlManagerCreateLoaded(unsigned char [36], int);
 int FUN_002a0428(void);
 int FUN_002be624(unsigned char [36], unsigned char *, int);
 
 extern unsigned char LAB_00256628; /* 0x256628 */
-extern int DAT_00447600; /* 0x447600 */
+extern int g_mapEnemy; /* 0x447600 */
 extern short DAT_0049fb9a; /* 0x49fb9a */
 
-/* Supplied declaration required: FUN_0029bb3c. */
+/* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002be624. */
 
@@ -32,21 +32,21 @@ void FUN_00256550(int param_1)
   
   puVar2 = temp_v5;
   temp_v3 = 0;
-  temp_v1 = DAT_00447600 + param_1 * 8;
+  temp_v1 = g_mapEnemy + param_1 * 8;
   if (*(int *)(temp_v1 + 0x304c) == 0) {
     temp_v2 = 0;
     temp_v4 = 0x15;
     do {
       temp_v0 = temp_v2 * 8;
       temp_v2 = temp_v2 + 1;
-      if (*(int *)(DAT_00447600 + temp_v0 + 0x304c) != 0) {
+      if (*(int *)(g_mapEnemy + temp_v0 + 0x304c) != 0) {
         temp_v3 = temp_v3 + 1;
       }
       temp_v4 = temp_v4 - 1;
     } while (temp_v4 != 0);
     if (temp_v3 < DAT_0049fb9a) {
       FUN_002be624(temp_v5,&LAB_00256628,(int)*(short *)(param_1 * 0x10 + 0x448ca8));
-      FUN_0029bb3c(temp_v5,0x1c0);
+      asdMdlManagerCreateLoaded(temp_v5,0x1c0);
       *(unsigned char **)(temp_v1 + 0x304c) = puVar2;
       FUN_002a0428();
       puVar3 = *(unsigned int **)(temp_v1 + 0x304c);

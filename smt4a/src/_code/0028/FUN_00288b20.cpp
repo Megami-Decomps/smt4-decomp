@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00162790(...);
 int FUN_00164b5c(int, int, int, int, int, int);
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -44,12 +44,12 @@ extern int DAT_00588fe8; /* 0x588fe8 */
 extern unsigned int FUN_0014bd84(int);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00185e84. */
-extern int FUN_0019e4d4(void);
+extern int slotRecordFindById(void);
 /* Supplied declaration required: FUN_001aba54. */
 extern int FUN_002a4894(void);
 extern unsigned int FUN_002a6a24(int);
@@ -101,9 +101,9 @@ void FUN_00288b20(int param_1,int param_2,int param_3,int param_4,unsigned int p
   temp_v12 = temp_v0 + 0x5ec;
   temp_v2 = FUN_002a4894();
   temp_v10 = 0;
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_00164b5c(2,0x12,8,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xbf);
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_001835b4(2,0x12,0x41f,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xc4);
   temp_v3 = *(int *)(temp_v0 + 0x530);
   temp_v8 = temp_v3 != 0;
@@ -139,10 +139,10 @@ LAB_00288c34:
   FUN_001835b4(2,0x12,temp_v7,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xc4);
   FUN_001835b4(2,0x12,temp_v15,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xc4
               );
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_001835b4(2,0x12,temp_v14,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xc4
               );
-  FUN_001677c0();
+  efctSetSpeed();
   temp_v5 = 0x57d8ffff;
   if ((param_8 != 1) && (temp_v5 = temp_v6, param_8 == 2)) {
     temp_v5 = 0xdc0f14ff;
@@ -188,7 +188,7 @@ LAB_00288c34:
   if ((-1 < *(short *)(temp_v0 + 0x598)) && (temp_v3 = FUN_002c7e3c(), temp_v3 != 4)) {
     temp_v3 = FUN_002c7e3c();
     if (temp_v3 != 5) {
-      temp_v3 = FUN_0019e4d4();
+      temp_v3 = slotRecordFindById();
       if (temp_v3 != 0) {
         rt_memcpy_w(temp_v11,temp_v3,300);
       }
@@ -264,7 +264,7 @@ LAB_00288c34:
                    &LAB_00289298,temp_v10);
     }
   }
-  FUN_001677c0();
+  efctSetSpeed();
   return;
 }
 

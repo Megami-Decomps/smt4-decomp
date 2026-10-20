@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_001ab854(...);
 int FUN_00281720(unsigned int, int);
 int FUN_002e2680(int);
@@ -33,7 +33,7 @@ struct fn_00387d38_arg0 {
     undefined1 field_0x154; /* +0x154 */
 };
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001ab854. */
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_00281720. */
@@ -97,7 +97,7 @@ LAB_00387d78:
               *(short *)(temp_v2 + 0x62) == *(short *)((int)param_1->field_0x8 + 0x60))) {
           FUN_003c1060();
           param_1->field_0xec = 5;
-          FUN_001681cc(0xe4);
+          sysPlaySe(0xe4);
           param_1->field_0xf8 = 2;
           return 3;
         }
@@ -108,13 +108,13 @@ LAB_00387d78:
         param_1->field_0xec = 4;
       }
     }
-    FUN_001681cc(0xe4);
+    sysPlaySe(0xe4);
     param_1->field_0xf8 = 2;
     return 3;
   }
   FUN_003c1060();
   param_1->field_0xec = 5;
-  FUN_001681cc(0xe4);
+  sysPlaySe(0xe4);
   param_1->field_0xf8 = 2;
   return 3;
 }

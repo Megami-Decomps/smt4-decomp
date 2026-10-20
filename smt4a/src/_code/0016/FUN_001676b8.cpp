@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_0017ffa8(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_0019d880(void);
 
@@ -21,7 +21,7 @@ extern float DAT_00630760; /* 0x630760 */
 extern unsigned char DAT_00630775; /* 0x630775 */
 extern float DAT_0063077c; /* 0x63077c */
 
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0017ffa8. */
 /* Supplied declaration required: FUN_0019d880. */
 
@@ -75,7 +75,7 @@ void FUN_001676b8(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v1 = in_s0;
   FUN_0019d880();
   if ((int)temp_v1 < 0x3f800000) {
-    FUN_001677c0();
+    efctSetSpeed();
   }
   FUN_0017ffa8(2,0xb,temp_v0,param_2,param_3,param_4);
   if ((int)in_s0 >= 0x3f800001) {

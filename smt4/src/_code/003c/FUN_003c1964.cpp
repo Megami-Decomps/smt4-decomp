@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002881bc(unsigned int);
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 
 /* Supplied declaration required: FUN_002881bc. */
 
@@ -15,7 +15,7 @@ void FUN_003c1964(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002881bc(*(unsigned int *)(DAT_004342c8 + 0x570));
+  FUN_002881bc(*(unsigned int *)(g_btlMain + 0x570));
   return;
 }
 

@@ -11,15 +11,15 @@ int FUN_002a1200(...);
 int FUN_002a1248(...);
 int FUN_002a126c(...);
 int FUN_002a12d8(...);
-int FUN_002ae43c(...);
+int asdLoadFileAsync(...);
 int FUN_002b90e6(...);
 int FUN_002ba968(...);
 int FUN_002baa40(...);
 int FUN_002bb5a4(...);
-int FUN_002bf5c0(...);
-int FUN_002c415c(...);
+int asdMemoryAllocAligned(...);
+int asdMemFree(...);
 int FUN_002c52f8(...);
-int FUN_002c564c(...);
+int jyoucyuGetTableEntry(...);
 int FUN_002c618c(...);
 int builtin_strncpy(...);
 
@@ -49,8 +49,8 @@ typedef struct {
     unsigned int sp2C0; /* 0x2c0: local_2c0 */
 } param_2_stack;
 
-extern int DAT_00432fc8; /* 0x432fc8 */
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern int g_aocMain; /* 0x432fc8 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
 #ifndef ROMWRIGHT_PIECE_3_1_DEFINED
@@ -67,18 +67,18 @@ extern unsigned int DAT_00433158; /* 0x433158 */
 extern int FUN_002a1520(unsigned int *);
 extern int FUN_002a1534(int);
 extern int FUN_002ad1e0(int);
-/* Supplied declaration required: FUN_002ae43c. */
+/* Supplied declaration required: asdLoadFileAsync. */
 extern int FUN_002b90c8(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002b90e6. */
 /* Supplied declaration required: FUN_002ba968. */
 /* Supplied declaration required: FUN_002baa40. */
 extern unsigned int FUN_002bad5c(char *);
 /* Supplied declaration required: FUN_002bb5a4. */
-/* Supplied declaration required: FUN_002bf5c0. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c52f8. */
-/* Supplied declaration required: FUN_002c564c. */
-extern unsigned int FUN_002c5c14(int, int, unsigned int, unsigned int);
+/* Supplied declaration required: jyoucyuGetTableEntry. */
+extern unsigned int asdLoadFileSync(int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c618c. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 extern unsigned int nn_fs_detail_FileBase_TryGetSize(unsigned int, long long *);
@@ -179,7 +179,7 @@ void FUN_0015c81c(int param_1,int param_2)
         if (*(int *)(param_2 + 0x1c) != 0) {
           temp_v7 = *(unsigned int *)(param_2 + 0x20);
           temp_v8 = *(unsigned int *)(param_2 + 0x2c);
-          FUN_002ae43c(param_2 + 0x70,*(unsigned int *)(param_2 + 0x18),
+          asdLoadFileAsync(param_2 + 0x70,*(unsigned int *)(param_2 + 0x18),
                        *(unsigned int *)(param_2 + 0x28));
         }
         else {
@@ -189,7 +189,7 @@ void FUN_0015c81c(int param_1,int param_2)
         *(unsigned char *)(param_2 + 8) = 2;
         return;
       }
-      temp_v4 = FUN_002c5c14(param_2 + 0x70,param_2 + 0x24,*(unsigned int *)(param_2 + 0x28),
+      temp_v4 = asdLoadFileSync(param_2 + 0x70,param_2 + 0x24,*(unsigned int *)(param_2 + 0x28),
                             *(unsigned int *)(param_2 + 0x2c));
       *(unsigned int *)(param_2 + 0x14) = temp_v4;
       *(unsigned char *)(param_2 + 8) = 3;
@@ -197,15 +197,15 @@ void FUN_0015c81c(int param_1,int param_2)
     }
   }
   else {
-    temp_v2 = FUN_002a1534(DAT_00432fc8);
+    temp_v2 = FUN_002a1534(g_aocMain);
     if (temp_v2 != 0) {
-      temp_v2 = FUN_002ad1e0(DAT_00432fc8 + 0x98);
+      temp_v2 = FUN_002ad1e0(g_aocMain + 0x98);
       if (temp_v2 != 0) {
-        *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xfffeffff;
+        *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
         temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),200);
       }
       else {
-        FUN_0015dc2c(&temp_v23,DAT_00433158,param_2 + 0x30);
+        FUN_0015dc2c(&temp_v23,g_aocSystem,param_2 + 0x30);
         temp_v15 = temp_v23;
         temp_v16[0] = acStack_54[0];
         temp_v16[1] = acStack_54[1];
@@ -285,14 +285,14 @@ void FUN_0015c81c(int param_1,int param_2)
                       temp_v7 = *(unsigned int *)(param_2 + 0x2c);
                       temp_v8 = 1;
                       temp_v4 = 0x100;
-                      FUN_002bf5c0(0x100,0x100,0,*(unsigned int *)(param_2 + 0x24));
+                      asdMemoryAllocAligned(0x100,0x100,0,*(unsigned int *)(param_2 + 0x24));
                       *(unsigned int *)(param_2 + 0x14) = temp_v4;
                     }
                     else {
                       temp_v7 = *(unsigned int *)(param_2 + 0x2c);
                       temp_v8 = 0;
                       temp_v4 = 0x10000;
-                      FUN_002bf5c0(0x10000,0x100,0,*(unsigned int *)(param_2 + 0x24));
+                      asdMemoryAllocAligned(0x10000,0x100,0,*(unsigned int *)(param_2 + 0x24));
                       *(unsigned int *)(param_2 + 0x14) = temp_v4;
                     }
                   }
@@ -300,7 +300,7 @@ void FUN_0015c81c(int param_1,int param_2)
                     temp_v7 = *(unsigned int *)(param_2 + 0x2c);
                     temp_v8 = 1;
                     temp_v4 = 0x10000;
-                    FUN_002bf5c0(0x10000,0x100,0,*(unsigned int *)(param_2 + 0x24));
+                    asdMemoryAllocAligned(0x10000,0x100,0,*(unsigned int *)(param_2 + 0x24));
                     *(unsigned int *)(param_2 + 0x14) = temp_v4;
                   }
                 }
@@ -308,7 +308,7 @@ void FUN_0015c81c(int param_1,int param_2)
                   temp_v7 = *(unsigned int *)(param_2 + 0x2c);
                   temp_v8 = 0;
                   temp_v4 = 0x100;
-                  FUN_002bf5c0(0x100,0x100,0,*(unsigned int *)(param_2 + 0x24));
+                  asdMemoryAllocAligned(0x100,0x100,0,*(unsigned int *)(param_2 + 0x24));
                   *(unsigned int *)(param_2 + 0x14) = temp_v4;
                 }
               }
@@ -371,7 +371,7 @@ LAB_0015cdc8:
                   nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v10 & 0xfffffffe);
                   return;
                 }
-                FUN_002a126c(&temp_v18,DAT_00433158);
+                FUN_002a126c(&temp_v18,g_aocSystem);
                 temp_v15 = temp_v18;
                 temp_v16[0] = acStack_288[0];
                 temp_v16[1] = acStack_288[1];
@@ -394,11 +394,11 @@ LAB_0015cdc8:
           }
         }
       }
-      FUN_002c564c(0);
-      FUN_002a126c(&temp_v19,DAT_00433158);
-      *(unsigned int *)(DAT_00432fc8 + 0x754) = (*(unsigned int *)(DAT_00432fc8 + 0x754) & 0xfffeffff) | 0x10;
+      jyoucyuGetTableEntry(0);
+      FUN_002a126c(&temp_v19,g_aocSystem);
+      *(unsigned int *)(g_aocMain + 0x754) = (*(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff) | 0x10;
       if (*(int *)(param_2 + 0x14) != 0) {
-        FUN_002c415c();
+        asdMemFree();
         *(unsigned int *)(param_2 + 0x14) = 0;
       }
       temp_v6 = 0;
@@ -407,15 +407,15 @@ LAB_0015cdc8:
       }
       temp_v2 = FUN_002a12d8(temp_v16);
       if (temp_v2 == -0x36bec76f) {
-        FUN_002c564c(0);
+        jyoucyuGetTableEntry(0);
         return;
       }
-      temp_v2 = FUN_002ad1e0(DAT_00432fc8 + 0x98);
+      temp_v2 = FUN_002ad1e0(g_aocMain + 0x98);
       if (temp_v2 != 0) {
-        *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xfffeffff;
+        *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
       }
       else if ((char)temp_v15 != -0x38) goto LAB_0015cfcc;
-      FUN_002c564c(0);
+      jyoucyuGetTableEntry(0);
       *(unsigned char *)(param_2 + 8) = 1;
       temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),200);
       temp_v8 = temp_v15;
@@ -426,7 +426,7 @@ LAB_0015cdc8:
       temp_v10 = uStack_298;
       temp_v11 = temp_v17;
       temp_v12 = uStack_290;
-      FUN_002ba968(DAT_00432fc8,&temp_v8);
+      FUN_002ba968(g_aocMain,&temp_v8);
       temp_v6 = 1;
 LAB_0015cfcc:
       temp_v19 = temp_v15;
@@ -437,14 +437,14 @@ LAB_0015cfcc:
       uStack_74 = uStack_298;
       uStack_70 = temp_v17;
       uStack_6c = uStack_290;
-      temp_v2 = DAT_00432fc8;
-      FUN_0015dd58(DAT_00432fc8,&temp_v19,(*(unsigned int *)temp_v16),uStack_298);
+      temp_v2 = g_aocMain;
+      FUN_0015dd58(g_aocMain,&temp_v19,(*(unsigned int *)temp_v16),uStack_298);
       if (temp_v2 != 0) {
         temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),100);
         *(unsigned char *)(param_2 + 8) = 1;
       }
       else if (!temp_v6) {
-        FUN_002c564c();
+        jyoucyuGetTableEntry();
       }
       pcVar4 = temp_v16;
       FUN_002a1200();
@@ -452,7 +452,7 @@ LAB_0015cfcc:
         pcVar4 = temp_v16;
         FUN_002a116c();
         if (pcVar4 == (char *)0x0) {
-          FUN_002c564c(0);
+          jyoucyuGetTableEntry(0);
           temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),100);
           *(unsigned char *)(param_2 + 8) = 1;
           FUN_002a12d8(temp_v16);
@@ -489,14 +489,14 @@ LAB_0015cfcc:
     }
     if ((*(unsigned int *)(param_2 + 4) & 2) != 0) {
       *(unsigned char *)(param_2 + 8) = 1;
-      temp_v5 = *(unsigned int *)(DAT_00432fc8 + 0x754) | 0x20;
-      *(unsigned int *)(DAT_00432fc8 + 0x754) = temp_v5;
+      temp_v5 = *(unsigned int *)(g_aocMain + 0x754) | 0x20;
+      *(unsigned int *)(g_aocMain + 0x754) = temp_v5;
       return;
     }
   }
   *(unsigned char *)(param_2 + 8) = 3;
-  temp_v5 = *(unsigned int *)(DAT_00432fc8 + 0x754) | 0x40;
-  *(unsigned int *)(DAT_00432fc8 + 0x754) = temp_v5;
+  temp_v5 = *(unsigned int *)(g_aocMain + 0x754) | 0x40;
+  *(unsigned int *)(g_aocMain + 0x754) = temp_v5;
   return;
 }
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 
 
 int FUN_00232388(int param_1)
@@ -13,7 +13,7 @@ int FUN_00232388(int param_1)
   int temp_v0;
   
   if (param_1 - 1U < 4) {
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     *(unsigned char *)(temp_v0 + 0x4cd1) = 0;
     return param_1;
   }
@@ -21,21 +21,21 @@ int FUN_00232388(int param_1)
     if (param_1 != 0) {
       return 1;
     }
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     *(unsigned char *)(temp_v0 + 0x4cd1) = 1;
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     temp_v0 = *(int *)(temp_v0 + 0x4ccc);
   }
   else {
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     *(unsigned char *)(temp_v0 + 0x4cd1) = 0;
-    temp_v0 = FUN_0014aa78();
+    temp_v0 = btlGetMainState();
     temp_v0 = *(int *)(temp_v0 + 0x4ccc);
   }
   if (temp_v0 == 0xff) {
     return 1;
   }
-  temp_v0 = FUN_0014aa78();
+  temp_v0 = btlGetMainState();
   return *(int *)(temp_v0 + 0x4ccc);
 }
 

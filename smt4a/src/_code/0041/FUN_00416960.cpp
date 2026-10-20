@@ -22,8 +22,8 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_3_stack;
 
-extern int FUN_0014aa78(void);
-extern int FUN_0014bce0(unsigned int);
+extern int btlGetMainState(void);
+extern int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014bf2c. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_00151408. */
@@ -87,10 +87,10 @@ void FUN_00416960(int param_1,int param_2,unsigned int param_3)
   temp_v3 = (float)puVar4[3];
   puVar4[3] = temp_v3 + in_s1;
   FUN_00184c40(puVar4 + 5,(int)(short)(int)(float)puVar4[2],(int)(short)(int)(temp_v3 + in_s1));
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   temp_v2 = puVar4[0x2a];
   if (temp_v2 == 0) {
-    temp_v2 = FUN_0014bce0(0);
+    temp_v2 = spriteHandleCreate(0);
     puVar4[0x2a] = temp_v2;
   }
   FUN_001527d8(temp_v2,0x320202ff);

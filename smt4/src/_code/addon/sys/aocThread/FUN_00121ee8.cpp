@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002bcd44(void);
-int FUN_002c222c(int, unsigned int);
-int FUN_002c32a0(int, int, int, unsigned int, int, int);
+int asdOperatorNew(int, unsigned int);
+int memAlloc(int, int, int, unsigned int, int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -15,8 +15,8 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002bcd44. */
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c32a0. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: memAlloc. */
 
 
 void FUN_00121ee8(int param_1,unsigned int param_2)
@@ -27,10 +27,10 @@ void FUN_00121ee8(int param_1,unsigned int param_2)
   unsigned int *puVar2;
   
   temp_v0 = 0x100;
-  FUN_002c32a0(0x100,0x100,0,param_2,0x1000,1);
+  memAlloc(0x100,0x100,0,param_2,0x1000,1);
   *(unsigned int *)(param_1 + 8) = temp_v0;
   puVar2 = (unsigned int *)0x18;
-  FUN_002c222c(0x18,param_2);
+  asdOperatorNew(0x18,param_2);
   if (puVar2 != (unsigned int *)0x0) {
     *puVar2 = 0;
     puVar2[1] = 0;

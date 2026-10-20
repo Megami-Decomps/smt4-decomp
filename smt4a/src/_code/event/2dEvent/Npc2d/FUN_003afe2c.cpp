@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int asdMemoryAllocTracked(...);
 int FUN_0019cac4(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,11 +17,11 @@ typedef struct {
 extern int FUN_002897cc(...); /* 0x2897cc */
 extern int FUN_0034da3c(...); /* 0x34da3c */
 
-/* Supplied declaration required: FUN_0014e38c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_0019cac4. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern unsigned int FUN_00409fe8(unsigned int, unsigned int);
 
 
@@ -35,8 +35,8 @@ void FUN_003afe2c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned int in_s0;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0xbc,1);
-  FUN_002e6354();
+  asdMemoryAllocTracked(0x100,0x100,0,0xbc,1);
+  sysMemClear();
   puVar1[8] = 0x3f800000;
   puVar1[9] = 0;
   puVar1[10] = 0x3e800000;
@@ -86,7 +86,7 @@ void FUN_003afe2c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   }
   puVar1[0xf] = temp_v0;
   puVar1[6] = 0x3ea8f5c3;
-  FUN_0014e38c("EVE_2dTex",4,0,0,FUN_002897cc,FUN_0034da3c,puVar1);
+  asdProcessCreateSimple("EVE_2dTex",4,0,0,FUN_002897cc,FUN_0034da3c,puVar1);
   return;
 }
 

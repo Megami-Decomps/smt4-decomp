@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 
 /* Supplied declaration required: FUN_001e1874. */
 /* Supplied declaration required: FUN_00207434. */
@@ -27,8 +27,8 @@ extern int DAT_004342c8; /* 0x4342c8 */
 extern int FUN_0023f074(unsigned int *);
 /* Supplied declaration required: FUN_002523f0. */
 /* Supplied declaration required: FUN_0028975c. */
-extern unsigned int FUN_002939f4(void);
-extern int FUN_002bf244(unsigned int);
+extern unsigned int btlGetMainState(void);
+extern int jobIsValid(unsigned int);
 extern unsigned int FUN_002c09d0(void);
 extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: FUN_002ef6b8. */
@@ -50,13 +50,13 @@ int FUN_0023f194(unsigned int *param_1)
   if (param_1[3] != 0 && temp_v0 != 0) {
     temp_v0 = FUN_002c2a04(0);
     if ((temp_v0 == 3) && (temp_v0 = FUN_002c2a04(1), temp_v0 == 3)) {
-      temp_v1 = FUN_002939f4();
+      temp_v1 = btlGetMainState();
       FUN_0033a780();
       FUN_002523f0();
       FUN_00219840(temp_v1);
       FUN_00207434(temp_v1);
       FUN_001e1874(temp_v1);
-      if (DAT_004342c8 != 0) {
+      if (g_btlMain != 0) {
         FUN_00227218();
       }
       if ((param_1[1] & 1) != 0) {
@@ -70,7 +70,7 @@ int FUN_0023f194(unsigned int *param_1)
       param_1[6] = temp_v2;
       FUN_0028975c(0x817,1);
       *param_1 = 5;
-      temp_v0 = FUN_002bf244(param_1[6]);
+      temp_v0 = jobIsValid(param_1[6]);
       if (temp_v0 == 0) {
         *param_1 = 6;
         temp_v0 = FUN_0023f074(param_1);

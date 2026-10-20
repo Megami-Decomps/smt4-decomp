@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00210194(int);
 int FUN_0029bb14(void);
-int FUN_0029bb3c(unsigned char *, int);
+int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a0428(void);
 int FUN_002b2b5c(unsigned int);
 
@@ -20,7 +20,7 @@ extern int DAT_0043dd68; /* 0x43dd68 */
 
 /* Supplied declaration required: FUN_00210194. */
 /* Supplied declaration required: FUN_0029bb14. */
-/* Supplied declaration required: FUN_0029bb3c. */
+/* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002b2b5c. */
 
@@ -39,7 +39,7 @@ void FUN_0026c57c(void)
   piVar4 = (int *)(temp_v0 + 0x95cc);
   if (*piVar4 == 0) {
     puVar2 = &LAB_0026c61c;
-    FUN_0029bb3c(&LAB_0026c61c,7);
+    asdMdlManagerCreateLoaded(&LAB_0026c61c,7);
     *piVar4 = (int)puVar2;
     FUN_002a0428();
     puVar3 = (unsigned int *)*piVar4;

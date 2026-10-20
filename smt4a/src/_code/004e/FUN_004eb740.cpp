@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 
 extern int FUN_0014af84(void);
 /* Supplied declaration required: FUN_003e77cc. */
@@ -29,12 +29,12 @@ void FUN_004eb740(int *param_1)
   unsigned int in_s16;
   
   if (*(int *)(*param_1 + 0xa8) == 8) {
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x26;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x26;
     return;
   }
   temp_v0 = FUN_004ea0c0(param_1);
   if (temp_v0 != 0) {
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x24;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x24;
     return;
   }
   temp_v0 = FUN_003edca0(*param_1);
@@ -46,7 +46,7 @@ void FUN_004eb740(int *param_1)
     temp_v0 = FUN_0014af84();
     *(unsigned char *)(temp_v0 + 0x27e3e) = 0;
   }
-  *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x26;
+  *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x26;
   return;
 }
 

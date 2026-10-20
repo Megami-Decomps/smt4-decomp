@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_001568f8(...);
-int FUN_0028033c(...);
-int FUN_002a1b00(...);
+int asdListBoxCreate(...);
+int asdListBoxAddItem(...);
 int FUN_002e0898(...);
 int FUN_002ea508(...);
 int FUN_00317464(...);
@@ -23,8 +23,8 @@ typedef struct {
 extern unsigned char DAT_005281bc; /* 0x5281bc */
 
 /* Supplied declaration required: FUN_001568f8. */
-/* Supplied declaration required: FUN_0028033c. */
-/* Supplied declaration required: FUN_002a1b00. */
+/* Supplied declaration required: asdListBoxCreate. */
+/* Supplied declaration required: asdListBoxAddItem. */
 /* Supplied declaration required: FUN_002e0898. */
 /* Supplied declaration required: FUN_002ea508. */
 /* Supplied declaration required: FUN_00317464. */
@@ -37,15 +37,15 @@ void FUN_004f4648(int param_1,int param_2,unsigned int param_3)
 
 {
 /* irregular: 9 native warning(s); review required */
-  FUN_0028033c(param_3,0xf0,0x10,0x20,4);
+  asdListBoxCreate(param_3,0xf0,0x10,0x20,4);
   *(unsigned int *)(param_1 + 0xc) = param_3;
   FUN_0037a854();
   FUN_002e0898(param_3,0xc);
   FUN_002ea508(param_3,"ENEMY EDIT");
-  FUN_002a1b00(param_3,"窔疒ꮈ芖");
-  FUN_002a1b00(param_3,"瞂窔疒쪈疒쾕墍");
-  FUN_002a1b00(param_3,"碂窔疒쪈疒쾕墍");
-  FUN_002a1b00(param_3,&DAT_005281bc);
+  asdListBoxAddItem(param_3,"窔疒ꮈ芖");
+  asdListBoxAddItem(param_3,"瞂窔疒쪈疒쾕墍");
+  asdListBoxAddItem(param_3,"碂窔疒쪈疒쾕墍");
+  asdListBoxAddItem(param_3,&DAT_005281bc);
   FUN_001568f8();
   FUN_00317464(param_3,0,*(unsigned short *)(param_2 + 2),1,999,0);
   FUN_00340edc(param_3,1,0xfffffc18);

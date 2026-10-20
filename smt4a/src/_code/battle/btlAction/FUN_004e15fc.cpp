@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001568f8(...);
 
 int FUN_001aba54(int);
-int FUN_002e6354(int *, int);
+int sysMemClear(int *, int);
 int FUN_003e8bb0(unsigned char [28], int, unsigned int);
 int FUN_003f0e20(int, int);
 int FUN_0047fa50(...);
@@ -32,7 +32,7 @@ typedef struct {
     unsigned int spE8; /* 0xe8: local_e8 */
 } param_2_stack;
 
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571148; /* 0x571148 */
 extern unsigned int DAT_0057114c; /* 0x57114c */
 extern unsigned int DAT_00571178; /* 0x571178 */
@@ -50,7 +50,7 @@ extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 extern int FUN_001656a0(unsigned int);
 /* Supplied declaration required: FUN_001aba54. */
 extern int FUN_002a7410(void);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_0047fa50. */
@@ -105,7 +105,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
   if (!((temp_v4 & DAT_0057121c) == 0 && (temp_v1 & DAT_00571218) == 0)) {
     if ((*param_2 & 0x80) == 0) {
       *param_2 = *param_2 | 0x880;
-      *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
       FUN_004abde4(DAT_0057a9c8);
       return 1;
     }
@@ -113,7 +113,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
   else if (((DAT_00571228 & temp_v1) != 0 || (DAT_0057122c & temp_v4) != 0) &&
           ((*param_2 & 0x1000) == 0)) {
     *param_2 = *param_2 | 0x1800;
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
     FUN_004abde4(DAT_0057a9c8);
     return 1;
   }
@@ -216,7 +216,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
       }
     }
     else {
-      FUN_002e6354(&temp_v15,0x88);
+      sysMemClear(&temp_v15,0x88);
       temp_v1 = 0;
       temp_v4 = 0;
       temp_v3 = 0;
@@ -351,7 +351,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
         } while (temp_v3 != 0);
         *param_2 = *param_2 | 0x800;
         temp_v13 = 1;
-        *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
+        *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
         FUN_004eae30(param_1,0,0xffffffff);
       }
     }

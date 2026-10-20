@@ -6,7 +6,7 @@ extern "C" {
 
 int taskCreate(...);
 int FUN_00291340(...);
-int FUN_002c4938(...);
+int memClear(...);
 int VectorSignedToFloat(...);
 int rt_memcpy_w(...);
 
@@ -24,7 +24,7 @@ extern int FUN_001c2c70(...); /* 0x1c2c70 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: taskCreate. */
 /* Supplied declaration required: FUN_00291340. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -41,7 +41,7 @@ romwright_code * FUN_001ed268(unsigned int param_1,int param_2,unsigned int para
   pcVar1 = FUN_001c2c70;
   taskCreate(FUN_001c2c70,0,0,0,0,0x330,3,0,0);
   if (pcVar1 != (romwright_code *)0x0) {
-    FUN_002c4938();
+    memClear();
     rt_memcpy_w((unsigned char *)pcVar1 + 100,param_2,0x134);
     temp_v0 = *(unsigned int *)(param_2 + 0x124);
     temp_v1 = *(unsigned int *)(param_2 + 0x128);

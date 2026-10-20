@@ -23,7 +23,7 @@ extern unsigned int DAT_00573c48; /* 0x573c48 */
 extern unsigned int DAT_00573c4c; /* 0x573c4c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_003e8430(int);
 /* Supplied declaration required: FUN_004102d8. */
 /* Supplied declaration required: FUN_004fb43c. */
@@ -49,10 +49,10 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
   
   temp_v4 = 0;
   temp_v3 = 0;
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   temp_v5 = (unsigned int)((DAT_00573c40 & *(unsigned int *)(temp_v1 + 0x45a0)) != 0 ||
                 (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_00573c44) != 0);
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   temp_v6 = (int)*(short *)(temp_v1 + 0x4c70);
   temp_v7 = (int)*(short *)(temp_v1 + 0x4c72);
   temp_v0 = temp_v7 <= temp_v6;

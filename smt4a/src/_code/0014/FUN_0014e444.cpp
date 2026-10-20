@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0010063a(...);
-int FUN_001630d4(...);
+int qsort(...);
+int asdMemoryAlloc(...);
 int FUN_001653a0(...);
 int FUN_001655fc(...);
-int FUN_0019a5a0(void);
-int FUN_002e6354(...);
+int asdMemFree(void);
+int sysMemClear(...);
 int FUN_002e6dd4(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -41,15 +41,15 @@ extern int DAT_005b4040; /* 0x5b4040 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0010063a. */
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: qsort. */
+/* Supplied declaration required: asdMemoryAlloc. */
 extern int FUN_00163fd4(unsigned int);
 extern int FUN_00164af0(unsigned int);
 /* Supplied declaration required: FUN_001653a0. */
 /* Supplied declaration required: FUN_001655fc. */
 extern int FUN_001656a0(unsigned int);
-/* Supplied declaration required: FUN_0019a5a0. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
 
 
@@ -88,7 +88,7 @@ unsigned int FUN_0014e444(int param_1,int param_2,int param_3)
   DAT_005b4030[0xc] = param_2;
   piVar16[10] = param_1;
   piVar16[0xb] = param_3;
-  FUN_002e6354(&temp_v18,0x1414);
+  sysMemClear(&temp_v18,0x1414);
   if ((param_1 == 0 && param_2 == 0) || param_3 == 0) {
     return 0;
   }
@@ -231,11 +231,11 @@ LAB_0014e6f0:
   } while (temp_v9 < 0x20);
   temp_v9 = (int)((unsigned long long)temp_v17 >> 0x20);
   temp_v0 = 0x100;
-  FUN_001630d4(0x100,0x100,0,DAT_005b4030[6] * 4 + 4,1);
+  asdMemoryAlloc(0x100,0x100,0,DAT_005b4030[6] * 4 + 4,1);
   temp_v20 = temp_v0;
-  FUN_002e6354(temp_v0,DAT_005b4030[6] * 4 + 4);
+  sysMemClear(temp_v0,DAT_005b4030[6] * 4 + 4);
   temp_v0 = 0x100;
-  FUN_001630d4(0x100,0x100,0,0x400);
+  asdMemoryAlloc(0x100,0x100,0,0x400);
   temp_v21 = temp_v0;
   FUN_002e6dd4();
   temp_v8 = temp_v20;
@@ -249,7 +249,7 @@ LAB_0014e6f0:
         if (temp_v0 >= 0x2001) {
           temp_v0 = 0x2000;
         }
-        FUN_0010063a(temp_v20,temp_v0,4);
+        qsort(temp_v20,temp_v0,4);
         if ((unsigned int)DAT_005b4030[6] >= 0x2000) {
           temp_v0 = 0x1fff - DAT_005b4030[4];
         }
@@ -410,11 +410,11 @@ LAB_0014ed64:
             FUN_001655fc(temp_v14,temp_v1,&LAB_0014f0d4,*(unsigned int *)(temp_v6 - 0x14));
           }
           if (temp_v20 != 0) {
-            FUN_0019a5a0();
+            asdMemFree();
             temp_v20 = 0;
           }
           if (temp_v21 != 0) {
-            FUN_0019a5a0();
+            asdMemFree();
           }
           return 0;
         }

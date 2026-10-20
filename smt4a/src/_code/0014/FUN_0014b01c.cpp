@@ -9,8 +9,8 @@ int FUN_00157558(int);
 int FUN_0016242c(...);
 int FUN_0016c4b8(...);
 int FUN_0016c560(int);
-int FUN_00187d04(int, unsigned char [108]);
-int FUN_0019a0e8(unsigned char [108], unsigned int *);
+int camSetMatrixA(int, unsigned char [108]);
+int mtx44Copy(unsigned char [108], unsigned int *);
 int FUN_0019e3d0(...);
 int FUN_001a9698(void);
 int VectorSignedToFloat(...);
@@ -31,7 +31,7 @@ extern unsigned int DAT_0057f668; /* 0x57f668 */
 extern int DAT_0057f66c; /* 0x57f66c */
 extern int DAT_0057f670; /* 0x57f670 */
 extern int DAT_0057f674; /* 0x57f674 */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_005c4c30; /* 0x5c4c30 */
 extern unsigned int DAT_0064c084; /* 0x64c084 */
 extern float DAT_0064c088; /* 0x64c088 */
@@ -58,8 +58,8 @@ extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0016c560. */
-/* Supplied declaration required: FUN_00187d04. */
-/* Supplied declaration required: FUN_0019a0e8. */
+/* Supplied declaration required: camSetMatrixA. */
+/* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_001a9698. */
 extern int FUN_002eba64(unsigned int *);
@@ -181,7 +181,7 @@ void FUN_0014b01c(int param_1)
     }
     temp_v4 = 0xff;
   }
-  temp_v3 = DAT_0059dbb4;
+  temp_v3 = g_renderCtx;
   temp_v0 = FUN_001692ac(1,0);
   piVar5 = (int *)(temp_v3 + 0x1258);
   temp_v1 = *piVar5;
@@ -192,7 +192,7 @@ void FUN_0014b01c(int param_1)
     (**(romwright_code **)(temp_v3 + 0x1274))();
     *(unsigned char *)(temp_v3 + 0x1270) = 0;
   }
-  temp_v3 = DAT_0059dbb4;
+  temp_v3 = g_renderCtx;
   temp_v0 = FUN_00169294(6,7,0);
   piVar5 = (int *)(temp_v3 + 0x12b8);
   temp_v1 = *piVar5;
@@ -203,7 +203,7 @@ void FUN_0014b01c(int param_1)
     (**(romwright_code **)(temp_v3 + 0x12d4))();
     *(unsigned char *)(temp_v3 + 0x12d0) = 0;
   }
-  FUN_00157558(DAT_0059dbb4);
+  FUN_00157558(g_renderCtx);
   temp_v3 = DAT_0057f65c;
   temp_v7 = 0x3f800000;
   FUN_001a9698();
@@ -217,9 +217,9 @@ void FUN_0014b01c(int param_1)
   VectorSignedToFloat(*(unsigned int *)(temp_v3 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(unsigned int *)(temp_v3 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(temp_v3 + 0x40) = 1;
-  FUN_0016c4b8(DAT_0059dbb4);
+  FUN_0016c4b8(g_renderCtx);
   FUN_0019e3d0(temp_v4 | 0xffffff00);
-  temp_v3 = DAT_0059dbb4;
+  temp_v3 = g_renderCtx;
   temp_v0 = FUN_00169294(6,1,0);
   piVar5 = (int *)(temp_v3 + 0x12b8);
   temp_v1 = piVar5[*piVar5 + 2];
@@ -231,7 +231,7 @@ void FUN_0014b01c(int param_1)
   temp_v4 = DAT_0057f668 | 0xffffff00;
   temp_v3 = FUN_00153f64(3,2);
   *(unsigned int *)(temp_v3 + 0x38) = 2;
-  FUN_0016c4b8(DAT_0059dbb4,temp_v3);
+  FUN_0016c4b8(g_renderCtx,temp_v3);
   FUN_0019e3d0(temp_v4);
   if (((DAT_005c4c30 & 1) == 0) && (temp_v3 = FUN_002eba64(&DAT_005c4c30), temp_v3 != 0)) {
     DAT_0064c084 = temp_v7;
@@ -251,16 +251,16 @@ void FUN_0014b01c(int param_1)
     DAT_0064c0bc = temp_v6;
     DAT_0064c0c0 = temp_v7;
   }
-  FUN_0019a0e8(temp_v8,&DAT_0064c084);
-  FUN_00187d04(DAT_0059dbb4,temp_v8);
+  mtx44Copy(temp_v8,&DAT_0064c084);
+  camSetMatrixA(g_renderCtx,temp_v8);
   temp_v3 = FUN_00153f64(3);
   *(unsigned int *)(temp_v3 + 0x38) = 2;
-  FUN_0016c4b8(DAT_0059dbb4,temp_v3);
+  FUN_0016c4b8(g_renderCtx,temp_v3);
   temp_v4 = DAT_0057f670 | 0xffffff00;
   FUN_0019e3d0(temp_v4,temp_v4,temp_v4,temp_v4,temp_v6,0x40700000,0x40c80000,0x40700000);
-  FUN_0016c560(DAT_0059dbb4);
-  temp_v3 = DAT_0059dbb4;
-  piVar5 = (int *)(DAT_0059dbb4 + 0x12b8);
+  FUN_0016c560(g_renderCtx);
+  temp_v3 = g_renderCtx;
+  piVar5 = (int *)(g_renderCtx + 0x12b8);
   temp_v0 = *piVar5;
   temp_v1 = piVar5[temp_v0 + 2];
   *piVar5 = temp_v0 - 1;
@@ -268,8 +268,8 @@ void FUN_0014b01c(int param_1)
     (**(romwright_code **)(temp_v3 + 0x12d4))();
     *(unsigned char *)(temp_v3 + 0x12d0) = 0;
   }
-  temp_v3 = DAT_0059dbb4;
-  piVar5 = (int *)(DAT_0059dbb4 + 0x1258);
+  temp_v3 = g_renderCtx;
+  piVar5 = (int *)(g_renderCtx + 0x1258);
   temp_v0 = *piVar5;
   temp_v1 = piVar5[temp_v0 + 2];
   *piVar5 = temp_v0 - 1;

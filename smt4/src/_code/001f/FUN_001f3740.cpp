@@ -31,7 +31,7 @@ static float romwright_u2f(unsigned int value)
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: FUN_00296d6c. */
-extern float *FUN_002c08f0(void);
+extern float *jobGetWork(void);
 
 
 unsigned int FUN_001f3740(void)
@@ -60,7 +60,7 @@ unsigned int FUN_001f3740(void)
   unsigned long long temp_v16;
   float temp_v17;
   
-  pfVar3 = (float *)FUN_002c08f0();
+  pfVar3 = (float *)jobGetWork();
   temp_v13 = *pfVar3;
   temp_v12 = pfVar3[2];
   temp_v15 = 0x3f800000;

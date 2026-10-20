@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-extern unsigned char DAT_004e6f64; /* 0x4e6f64 */
+extern unsigned char g_dspsndState; /* 0x4e6f64 */
 
 extern int FUN_002b5954(void);
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_SetDspDelayEffect. */
@@ -46,7 +46,7 @@ void FUN_00156260(int param_1,int param_2,unsigned short *param_3)
   if ((*param_3 & 2) != 0) {
     *(unsigned int *)(temp_v0 + 8) = *(unsigned int *)(param_3 + 4);
   }
-  nn_snd_CTR_Dspsnd_SetDspDelayEffect(&DAT_004e6f64);
+  nn_snd_CTR_Dspsnd_SetDspDelayEffect(&g_dspsndState);
   return;
 }
 

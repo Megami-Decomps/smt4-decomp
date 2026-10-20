@@ -1,20 +1,14 @@
-#include "romwright_types.h"
+#include "battle/btlUI.h"
 
 extern "C" {
 
-int FUN_002af5c0(int, int, int);
+void FUN_002af5c0(BtlUiObjD *obj, s32 a, s32 b);
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
-
-/* Supplied declaration required: FUN_002af5c0. */
-
+extern BtlUiGlobals DAT_00439c88;
 
 void FUN_003ae2b0(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002af5c0((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0x7ec0,0xe,0);
-  return;
+    FUN_002af5c0(&DAT_00439c88.ui->objD, 0xE, 0);
 }
 
 } /* extern "C" */

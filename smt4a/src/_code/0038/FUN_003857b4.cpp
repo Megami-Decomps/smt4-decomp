@@ -1,15 +1,12 @@
-#include "romwright_types.h"
+#include "map/lmapMain.h"
 
 extern "C" {
 
-extern int DAT_00581288; /* 0x581288 */
+extern LmapScene *g_lmapScene;
 
-
-void FUN_003857b4(unsigned char param_1)
-
+void FUN_003857b4(u8 value)
 {
-  *(unsigned char *)(DAT_00581288 + 0x134) = param_1;
-  return;
+    g_lmapScene->unk134 = value;
 }
 
 } /* extern "C" */

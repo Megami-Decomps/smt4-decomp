@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00167ab4(...);
+int memAlloc(...);
 int FUN_0016dfc4(...);
 int FUN_00178b04(...);
 int FUN_002e3140(...);
@@ -25,12 +25,12 @@ extern unsigned char LAB_0010031d; /* 0x10031d */
 extern unsigned char LAB_00100327; /* 0x100327 */
 extern unsigned char LAB_0010032d; /* 0x10032d */
 extern int FUN_0014b66c(...); /* 0x14b66c */
-extern unsigned char DAT_005b3fb4; /* 0x5b3fb4 */
+extern unsigned char g_asdFile; /* 0x5b3fb4 */
 extern unsigned int DAT_005b3fc4; /* 0x5b3fc4 */
 extern unsigned int *DAT_005b3fc8; /* 0x5b3fc8 */
 extern unsigned int DAT_005b3fcc; /* 0x5b3fcc */
 
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_0016dfc4. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_002e3140. */
@@ -49,9 +49,9 @@ void FUN_0014287c(void)
   unsigned char *temp_v4;
   unsigned char temp_v5 [4];
   
-  DAT_005b3fb4 = 0;
+  g_asdFile = 0;
   temp_v0 = 0x100;
-  FUN_00167ab4(0x100,0x100,0,0x1000,0x1000,1);
+  memAlloc(0x100,0x100,0,0x1000,0x1000,1);
   puVar2 = (unsigned int *)0x18;
   DAT_005b3fc4 = temp_v0;
   FUN_00178b04(0x18,"c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\File\\AsdFile.cpp",0x3bd);

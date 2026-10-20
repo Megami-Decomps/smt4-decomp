@@ -34,8 +34,8 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_00580238; /* 0x580238 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapMainState; /* 0x580238 */
+extern int g_lmapScene; /* 0x581288 */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern unsigned char DAT_005f161f; /* 0x5f161f */
 
@@ -81,16 +81,16 @@ void FUN_00338bf0(unsigned int param_1,unsigned int param_2)
   unsigned int temp_v6;
   unsigned int temp_v7;
   
-  temp_v1 = DAT_00580238;
-  FUN_003b5714(*(unsigned int *)(DAT_00580238 + 0x40),param_1,param_2);
+  temp_v1 = g_lmapMainState;
+  FUN_003b5714(*(unsigned int *)(g_lmapMainState + 0x40),param_1,param_2);
   pcVar1 = (char *)FUN_003798f0();
   FUN_00324bc8((int)*pcVar1,(int)pcVar1[1],pcVar1[2]);
   *(unsigned int *)(temp_v1 + 0x48) = param_1;
-  temp_v3 = DAT_00581288;
-  puVar5 = (unsigned int *)(DAT_00581288 + 0x1c);
+  temp_v3 = g_lmapScene;
+  puVar5 = (unsigned int *)(g_lmapScene + 0x1c);
   temp_v6 = VectorSignedToFloat((int)*(short *)(pcVar1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
   DAT_005f1600 = param_1;
-  *(unsigned int *)(DAT_00581288 + 0x1c) = temp_v6;
+  *(unsigned int *)(g_lmapScene + 0x1c) = temp_v6;
   temp_v6 = VectorSignedToFloat((int)*(short *)(pcVar1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(temp_v3 + 0x20) = temp_v6;
   temp_v7 = VectorSignedToFloat((int)*(short *)(pcVar1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -131,8 +131,8 @@ void FUN_00338bf0(unsigned int param_1,unsigned int param_2)
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 0x20);
   FUN_00328794();
-  temp_v3 = DAT_00580238;
-  if (*(int *)(DAT_00580238 + 0x40) != 100) {
+  temp_v3 = g_lmapMainState;
+  if (*(int *)(g_lmapMainState + 0x40) != 100) {
     FUN_003699e4();
   }
   temp_v1 = 0;

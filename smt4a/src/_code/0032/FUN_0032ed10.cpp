@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00187180(int, int);
+int dataTableGet(int, int);
 int FUN_00409d00(void);
 
 extern int FUN_0014af84(void);
-/* Supplied declaration required: FUN_00187180. */
+/* Supplied declaration required: dataTableGet. */
 extern int FUN_0018719c(void);
-extern int FUN_00192748(void);
-extern int FUN_00192798(void);
+extern int dataTableGetCount(void);
+extern int dataTableGetEntries(void);
 extern unsigned int FUN_003dfd44(void);
 extern unsigned int FUN_003dfe88(void);
 extern unsigned int FUN_0040816c(unsigned int);
@@ -37,8 +37,8 @@ void FUN_0032ed10(void)
   int temp_v10;
   
   FUN_00409d00();
-  FUN_00187180(0x4a,0);
-  temp_v5 = FUN_00192748();
+  dataTableGet(0x4a,0);
+  temp_v5 = dataTableGetCount();
   temp_v10 = 0;
   if (temp_v10 < temp_v5) {
     do {
@@ -46,8 +46,8 @@ void FUN_0032ed10(void)
       temp_v6 = FUN_0014af84();
       temp_v1 = 1 << ((temp_v10 % 8) & 0xffU);
       if ((*(unsigned char *)(temp_v6 + temp_v0 + 0x282ec) & temp_v1) == 0) {
-        FUN_00187180(0x4a,0);
-        temp_v6 = FUN_00192798();
+        dataTableGet(0x4a,0);
+        temp_v6 = dataTableGetEntries();
         temp_v6 = temp_v6 + temp_v10 * 0x2c;
         if (temp_v6 != 0) {
           temp_v3 = 1;

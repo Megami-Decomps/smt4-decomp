@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_00237650(void);
 int FUN_00275bc8(void *, unsigned int);
 int FUN_00275f44(int, int);
@@ -26,7 +26,7 @@ struct fn_002e2284_arg0 {
 
 extern unsigned char DAT_0057f110; /* 0x57f110 */
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_0018206c(unsigned int, unsigned int);
 extern int FUN_0018719c(unsigned int);
 extern int FUN_002009a8(unsigned int);
@@ -66,7 +66,7 @@ unsigned int FUN_002e2284(fn_002e2284_arg0 *param_1)
       temp_v0 = FUN_0018719c(0x4aa);
       if (temp_v0 != 0) {
         param_1->field_0x144 = 1;
-        FUN_001681cc(0x10d);
+        sysPlaySe(0x10d);
       }
       else {
         param_1->field_0x144 = 0xd;

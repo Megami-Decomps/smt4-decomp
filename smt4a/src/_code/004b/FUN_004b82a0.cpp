@@ -5,7 +5,7 @@
 extern "C" {
 
 int ARM_common_memcpy4_9(unsigned int *, unsigned char *);
-int FUN_00137ee0(...);
+int asdSequenceRequest(...);
 int FUN_001ad9b4(void);
 int FUN_00237418(void);
 int FUN_00270b00(void);
@@ -32,7 +32,7 @@ extern int DAT_005f1c98; /* 0x5f1c98 */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Supplied declaration required: ARM_common_memcpy4_9. */
-/* Supplied declaration required: FUN_00137ee0. */
+/* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001bd118(void);
 /* Supplied declaration required: FUN_00237418. */
@@ -68,18 +68,18 @@ void FUN_004b82a0(int param_1)
   temp_v1 = *(unsigned int *)(param_1 + 0x20);
   if ((temp_v1 & 0x1000000) != 0) {
     temp_v5[0] = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x111c) + 0x54);
-    FUN_00137ee0(10,temp_v5,4);
+    asdSequenceRequest(10,temp_v5,4);
   }
   else if ((temp_v1 & 0x2000000) != 0) {
     temp_v4 = 4;
     temp_v5[0] = *(unsigned short *)(*(int *)(param_1 + 0x111c) + 0x54) + 100;
     temp_v2 = 10;
     puVar5 = temp_v5;
-    FUN_00137ee0(temp_v2,puVar5,temp_v4);
+    asdSequenceRequest(temp_v2,puVar5,temp_v4);
   }
   else if ((temp_v1 & 0x8000000) != 0) {
     temp_v5[0] = romwright_piece_2_2((((unsigned int)(temp_v5[0]) >> 16) & 0xffffU),*(unsigned short *)(*(int *)(param_1 + 0x111c) + 0x54));
-    FUN_00137ee0(0x12,temp_v5,2);
+    asdSequenceRequest(0x12,temp_v5,2);
     FUN_003d54f8(0,10);
     FUN_003d54f8(1,10);
   }
@@ -90,7 +90,7 @@ void FUN_004b82a0(int param_1)
     temp_v4 = 0xc;
     temp_v2 = 0x10;
     puVar5 = temp_v5;
-    FUN_00137ee0(temp_v2,puVar5,temp_v4);
+    asdSequenceRequest(temp_v2,puVar5,temp_v4);
   }
   else {
     if ((temp_v1 & 0x200000) != 0) {
@@ -171,7 +171,7 @@ void FUN_004b82a0(int param_1)
       temp_v4 = 0x20;
       temp_v2 = 4;
     }
-    FUN_00137ee0(temp_v2,puVar5,temp_v4);
+    asdSequenceRequest(temp_v2,puVar5,temp_v4);
   }
 LAB_004b8550:
   if ((*(unsigned int *)(param_1 + 0x20) & 0x40) != 0) {

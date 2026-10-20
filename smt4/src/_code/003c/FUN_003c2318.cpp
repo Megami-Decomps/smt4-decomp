@@ -55,7 +55,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_0024571c. */
 extern int FUN_00245768(unsigned short);
-extern int FUN_00292f28(unsigned int);
+extern int padIsButtonDown(unsigned int);
 /* Supplied declaration required: FUN_0029c6b0. */
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_003c219c. */
@@ -122,7 +122,7 @@ void FUN_003c2318(fn_003c2318_arg0 *param_1,int param_2)
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 5);
-    temp_v3 = FUN_00292f28(7);
+    temp_v3 = padIsButtonDown(7);
     temp_v6 = temp_v3 != 0;
     temp_v3 = 0;
     temp_v1 = 0;
@@ -134,7 +134,7 @@ void FUN_003c2318(fn_003c2318_arg0 *param_1,int param_2)
       *(short *)&param_1->field_0x4 = (short)temp_v1 + 1;
       *(short *)&param_1->field_0x20 = *(short *)&param_1->field_0x20 + 1;
     }
-    temp_v3 = FUN_00292f28(8);
+    temp_v3 = padIsButtonDown(8);
     temp_v6 = temp_v3 != 0;
     temp_v3 = 0;
     temp_v1 = 0;
@@ -146,7 +146,7 @@ void FUN_003c2318(fn_003c2318_arg0 *param_1,int param_2)
       *(short *)&param_1->field_0xa = (short)temp_v1 + 1;
       *(short *)&param_1->field_0x26 = *(short *)&param_1->field_0x26 + 1;
     }
-    temp_v3 = FUN_00292f28(9);
+    temp_v3 = padIsButtonDown(9);
     temp_v6 = temp_v3 != 0;
     temp_v3 = 0;
     temp_v1 = 0;
@@ -158,7 +158,7 @@ void FUN_003c2318(fn_003c2318_arg0 *param_1,int param_2)
       *(short *)&param_1->field_0xc = (short)temp_v1 + 1;
       *(short *)&param_1->field_0x28 = *(short *)&param_1->field_0x28 + 1;
     }
-    temp_v3 = FUN_00292f28(10);
+    temp_v3 = padIsButtonDown(10);
     temp_v6 = temp_v3 != 0;
     temp_v3 = 0;
     temp_v1 = 0;
@@ -170,7 +170,7 @@ void FUN_003c2318(fn_003c2318_arg0 *param_1,int param_2)
       *(short *)&param_1->field_0x8 = (short)temp_v1 + 1;
       *(short *)&param_1->field_0x24 = *(short *)&param_1->field_0x24 + 1;
     }
-    temp_v3 = FUN_00292f28(0xb);
+    temp_v3 = padIsButtonDown(0xb);
     temp_v6 = temp_v3 != 0;
     temp_v3 = 0;
     temp_v1 = 0;

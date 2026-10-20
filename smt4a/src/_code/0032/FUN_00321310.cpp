@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_0020ad6c(...);
 int FUN_00341f88(...);
 
@@ -34,7 +34,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0020ad6c. */
 /* Supplied declaration required: FUN_00341f88. */
 
@@ -44,7 +44,7 @@ void FUN_00321310(fn_00321310_arg0 *param_1)
 {
 /* irregular: 3 native warning(s); review required */
   FUN_00341f88();
-  FUN_001681cc();
+  sysPlaySe();
   FUN_0020ad6c(param_1,param_1->field_0x3880,1);
   return;
 }

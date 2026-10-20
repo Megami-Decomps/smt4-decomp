@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001630d4(int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 int FUN_0045aee0(int, unsigned int, int);
 int FUN_0045af14(int, unsigned int, int);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001630d4. */
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0045aee0. */
 /* Supplied declaration required: FUN_0045af14. */
 
@@ -66,7 +66,7 @@ void FUN_003fe3e8(int param_1)
       *(int *)(temp_v1 + 0x40) = temp_v6;
       if (0 < temp_v6) {
         temp_v2 = 0x10000;
-        FUN_001630d4(0x10000,0x100,0,temp_v6 << 1,1);
+        asdMemoryAlloc(0x10000,0x100,0,temp_v6 << 1,1);
         *(unsigned int *)(temp_v1 + 0x34) = temp_v2;
         FUN_0045aee0(temp_v1 + 0x38,temp_v2,temp_v6);
       }
@@ -80,7 +80,7 @@ void FUN_003fe3e8(int param_1)
     }
     else {
       temp_v3 = 0x10000;
-      FUN_001630d4(0x10000,0x100,0,temp_v0,1);
+      asdMemoryAlloc(0x10000,0x100,0,temp_v0,1);
       *(unsigned int *)(param_1 + 0x10) = temp_v3;
       FUN_0045af14(param_1 + 8,temp_v3,temp_v6 * 3);
     }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001400a0(void);
+int asdFileWakeWorker(void);
 int FUN_0014a7e4(unsigned int);
 int FUN_0014a878(int);
 int FUN_0015a244(void);
@@ -15,7 +15,7 @@ extern int DAT_0063ff50; /* 0x63ff50 */
 extern int DAT_0063ff54; /* 0x63ff54 */
 extern signed char DAT_0063ff58; /* 0x63ff58 */
 
-/* Supplied declaration required: FUN_001400a0. */
+/* Supplied declaration required: asdFileWakeWorker. */
 /* Supplied declaration required: FUN_0014a7e4. */
 /* Supplied declaration required: FUN_0014a878. */
 /* Supplied declaration required: FUN_0015a244. */
@@ -38,7 +38,7 @@ void FUN_00139ab0(void)
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < temp_v0);
   }
-  FUN_001400a0();
+  asdFileWakeWorker();
   FUN_0014a878(0x402);
   temp_v0 = DAT_0063ff54;
   DAT_0063ff44 = 0;

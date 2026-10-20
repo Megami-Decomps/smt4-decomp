@@ -11,7 +11,7 @@ int FUN_001aba54(void);
 int FUN_0020d164(...);
 int FUN_00230c1c(...);
 int FUN_002c0940(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_003180c4(...);
 int FUN_00359974(...);
 int FUN_0048026c(...);
@@ -66,7 +66,7 @@ extern unsigned int FUN_0019271c(int);
 /* Supplied declaration required: FUN_00230c1c. */
 /* Supplied declaration required: FUN_002c0940. */
 extern int FUN_002e5c2c(void);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_0048026c. */
@@ -105,7 +105,7 @@ void FUN_0028a888(int param_1)
   char acStack_50 [24];
   unsigned char temp_v18 [20];
   
-  FUN_002e6354(temp_v12,0x80);
+  sysMemClear(temp_v12,0x80);
   temp_v3 = FUN_0019271c(param_1);
   switch(temp_v3) {
   default:
@@ -237,7 +237,7 @@ void FUN_0028a888(int param_1)
       FUN_003180c4(temp_v4 + 0x24,temp_v12);
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 5);
-    FUN_002e6354(acStack_a4,0x6c);
+    sysMemClear(acStack_a4,0x6c);
     temp_v4 = 0;
     temp_v10[0] = '\0';
     temp_v10[1] = '\0';

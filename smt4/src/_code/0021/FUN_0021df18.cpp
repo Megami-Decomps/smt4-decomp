@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00287aec(void);
 
 extern int DAT_00447a48; /* 0x447a48 */
-extern int DAT_00447e88; /* 0x447e88 */
+extern int g_lmapScene; /* 0x447e88 */
 
 /* Supplied declaration required: FUN_00287aec. */
 
@@ -28,7 +28,7 @@ void FUN_0021df18(void)
   do {
     temp_v0 = DAT_00447a48 + temp_v1 * 0x28;
     if ((*(char *)(temp_v0 + 0x1c) != '\0') && (*(short *)(temp_v0 + 0x32) == 0xf)) {
-      temp_v4 = *(float *)(DAT_00447e88 + 0x1c);
+      temp_v4 = *(float *)(g_lmapScene + 0x1c);
       FUN_00287aec();
       if ((int)temp_v4 < temp_v3) {
         temp_v2 = temp_v1;

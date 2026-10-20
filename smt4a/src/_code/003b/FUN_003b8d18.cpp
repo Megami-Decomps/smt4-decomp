@@ -5,22 +5,22 @@
 extern "C" {
 
 int FUN_0019cac4(void);
-int FUN_002e6354(unsigned int [129], int);
-int FUN_003283ac(unsigned int);
+int sysMemClear(unsigned int [129], int);
+int scrSetResult(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp218; /* 0x218: local_218 */
 } void_stack;
 
-extern unsigned int FUN_0014aa78(void);
+extern unsigned int btlGetMainState(void);
 extern int FUN_0014bef4(unsigned int);
-extern int FUN_00192748(unsigned int);
-extern unsigned short *FUN_00192798(void);
+extern int dataTableGetCount(unsigned int);
+extern unsigned short *dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019cac4. */
-extern unsigned int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_002e6354. */
-/* Supplied declaration required: FUN_003283ac. */
+extern unsigned int scrGetArg(unsigned int);
+/* Supplied declaration required: sysMemClear. */
+/* Supplied declaration required: scrSetResult. */
 extern unsigned int FUN_003ef960(unsigned int, unsigned int);
 
 
@@ -37,9 +37,9 @@ unsigned int FUN_003b8d18(void)
   unsigned int temp_v5;
   unsigned int temp_v6 [129];
   
-  temp_v0 = FUN_00236038(0) & 0xffff;
+  temp_v0 = scrGetArg(0) & 0xffff;
   FUN_0019cac4();
-  FUN_002e6354(temp_v6,0x200);
+  sysMemClear(temp_v6,0x200);
   temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x60);
   if (temp_v3 != 0x7b6 && temp_v3 != 0) {
     temp_v6[0] = temp_v3;
@@ -57,10 +57,10 @@ unsigned int FUN_003b8d18(void)
     temp_v0 = temp_v3 + 1;
     temp_v6[temp_v3] = temp_v4;
   }
-  temp_v1 = FUN_0014aa78();
+  temp_v1 = btlGetMainState();
   temp_v1 = FUN_003ef960(temp_v1,0x10);
-  puVar3 = (unsigned short *)FUN_00192798();
-  temp_v2 = FUN_00192748(temp_v1);
+  puVar3 = (unsigned short *)dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v1);
   if (0 < temp_v2) {
     do {
       if (*puVar3 != 0) {
@@ -72,7 +72,7 @@ unsigned int FUN_003b8d18(void)
     } while (temp_v2 != 0);
   }
   temp_v2 = FUN_0014bef4((temp_v0 - 1) & 0xffff);
-  FUN_003283ac(temp_v6[temp_v2]);
+  scrSetResult(temp_v6[temp_v2]);
   return 1;
 }
 

@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp1C; /* 0x1c: local_1c */
 } param_3_stack;
 
-extern unsigned char DAT_004e39e0; /* 0x4e39e0 */
+extern unsigned char g_asdGxPresets; /* 0x4e39e0 */
 
 
 void FUN_002bc560(unsigned int *param_1,int param_2,int param_3)
@@ -52,7 +52,7 @@ void FUN_002bc560(unsigned int *param_1,int param_2,int param_3)
     temp_v0 = 2;
     temp_v3 = temp_v0;
   }
-  *param_1 = (*(unsigned int *)((unsigned char *)&DAT_004e39e0 + 0x1f8));
+  *param_1 = (*(unsigned int *)((unsigned char *)&g_asdGxPresets + 0x1f8));
   param_1[1] = temp_v2 * temp_v1 * 0xf0;
   param_1[5] = param_3;
   param_1[6] = 0x88f0;

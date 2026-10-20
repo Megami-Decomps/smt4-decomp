@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00140e00(void);
 
 extern unsigned char DAT_0057f699; /* 0x57f699 */
-extern unsigned char DAT_0057f698; /* 0x57f698 */
+extern unsigned char g_gameDataBlocks; /* 0x57f698 */
 
 /* Supplied declaration required: FUN_00140e00. */
 
@@ -16,8 +16,8 @@ void FUN_00137ea0(unsigned int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  (*(unsigned int *)((unsigned char *)&DAT_0057f698 + 0x18)) = (*(unsigned int *)((unsigned char *)&DAT_0057f698 + 0x18)) & ~param_1;
-  if ((*(unsigned int *)((unsigned char *)&DAT_0057f698 + 0x18)) != 0) {
+  (*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0x18)) = (*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0x18)) & ~param_1;
+  if ((*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0x18)) != 0) {
     DAT_0057f699 = 0;
     FUN_00140e00();
     return;

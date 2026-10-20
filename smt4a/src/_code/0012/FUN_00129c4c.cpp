@@ -23,7 +23,7 @@ extern unsigned char DAT_005590ec; /* 0x5590ec */
 extern unsigned char DAT_0055adf4; /* 0x55adf4 */
 extern unsigned int DAT_00594a00; /* 0x594a00 */
 
-extern int FUN_002e6dac(int);
+extern int rt_malloc(int);
 extern unsigned int *FUN_002f5010(unsigned int);
 /* Supplied declaration required: FUN_002f5020. */
 
@@ -42,7 +42,7 @@ void FUN_00129c4c(fn_00129c4c_arg0 *param_1)
     *puVar1 = 0x14;
     FUN_002f5020(puVar1 + 2,&LAB_0030e6e1,0x14,0xffffffff);
   }
-  temp_v0 = FUN_002e6dac(DAT_00594a00 * 0x14);
+  temp_v0 = rt_malloc(DAT_00594a00 * 0x14);
   param_1->field_0x8 = temp_v0;
   for (temp_v1 = 0; temp_v1 < DAT_00594a00; temp_v1 = temp_v1 + 1) {
     puVar1 = (unsigned int *)(param_1->field_0x8 + temp_v1 * 0x14);

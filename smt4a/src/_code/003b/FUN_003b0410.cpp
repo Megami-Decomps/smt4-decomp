@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00313648(unsigned int);
 
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 
-extern int FUN_00236038(void);
+extern int scrGetArg(void);
 /* Supplied declaration required: FUN_00313648. */
 
 
@@ -20,13 +20,13 @@ unsigned int FUN_003b0410(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v1 = FUN_00236038();
-  temp_v0 = DAT_00581288;
+  temp_v1 = scrGetArg();
+  temp_v0 = g_lmapScene;
   if (temp_v1 == 0) {
     temp_v2 = 0x1d;
   }
   else {
-    *(unsigned int *)(DAT_00581288 + 0x54) = 0;
+    *(unsigned int *)(g_lmapScene + 0x54) = 0;
     *(unsigned int *)(temp_v0 + 0x58) = 0;
     temp_v2 = 0x2c;
   }

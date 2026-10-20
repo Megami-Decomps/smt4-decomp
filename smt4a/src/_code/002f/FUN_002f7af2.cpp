@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e74c4(unsigned int, unsigned char [20], int, unsigned int);
+int strAssign(unsigned int, unsigned char [20], int, unsigned int);
 int FUN_002ea668(unsigned char [88]);
 int FUN_002ec68a(unsigned int, int *, int *, int, unsigned char [88]);
 
@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002ea668. */
 /* Supplied declaration required: FUN_002ec68a. */
 
@@ -42,7 +42,7 @@ unsigned int FUN_002f7af2(unsigned int param_1,fn_002f7af2_arg1 *param_2,unsigne
   temp_v2 = param_2->field_0xc + param_2->field_0x18;
   temp_v3 = param_2->field_0x10;
   FUN_002ec68a(param_1,&temp_v2,&temp_v3,1,temp_v0);
-  FUN_002e74c4(param_3,temp_v1,0x10,0xffffffff);
+  strAssign(param_3,temp_v1,0x10,0xffffffff);
   return 1;
 }
 

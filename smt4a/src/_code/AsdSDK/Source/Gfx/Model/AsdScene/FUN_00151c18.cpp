@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001630d4(int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 
 /* stack frame of void: 5 slot(s), 14 byte(s) */
 typedef struct {
@@ -15,8 +15,8 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-/* Supplied declaration required: FUN_001630d4. */
-extern unsigned int FUN_00168188(void);
+/* Supplied declaration required: asdMemoryAlloc. */
+extern unsigned int asdMemoryGetDefaultAllocator(void);
 extern int FUN_00171acc(unsigned char *, unsigned int);
 
 
@@ -34,11 +34,11 @@ unsigned int * FUN_00151c18(void)
   unsigned int uStack_14;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_001630d4(0x100,0x100,0,0xc,1);
+  asdMemoryAlloc(0x100,0x100,0,0xc,1);
   puVar1[1] = 0;
   *puVar1 = 0xffffffff;
   puVar1[2] = 0;
-  temp_v0 = FUN_00168188();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   temp_v2 = 1;
   temp_v3 = 1;
   temp_v4 = 0;

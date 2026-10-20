@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_002c1b64(unsigned int, unsigned int);
 
-extern int DAT_00447a78; /* 0x447a78 */
+extern int g_mapIf; /* 0x447a78 */
 extern int DAT_00447a7c; /* 0x447a7c */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002c1b64. */
 
@@ -17,8 +17,8 @@ void FUN_0020d8ec(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  if (DAT_00447a78 != 0) {
-    FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x5c));
+  if (g_mapIf != 0) {
+    FUN_002c1b64(g_titleScene,*(unsigned int *)(DAT_00447a7c + 0x5c));
     return;
   }
   return;

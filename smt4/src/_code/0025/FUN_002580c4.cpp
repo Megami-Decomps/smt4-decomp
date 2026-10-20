@@ -1,21 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002580c4` (_code @ 0x2580c4, 0xc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Thunk: forwards its argument to entry 1 of the driver function table. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned char DAT_0044e978; /* 0x44e978 */
+typedef void (*DriverFunc)(u32 arg);
 
+extern DriverFunc DAT_0044e978[2];
 
-void FUN_002580c4(void)
-
+void FUN_002580c4(u32 arg)
 {
-/* irregular: 2 native warning(s); review required */
-                    /* WARNING: Could not recover jumptable at 0x002580cc. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (*(*(romwright_code * *)((unsigned char *)&DAT_0044e978 + 0x4)))();
-  return;
+    DAT_0044e978[1](arg);
 }
 
-} /* extern "C" */
+}

@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int FUN_00229f30(unsigned short);
-extern int FUN_002b6b20(void);
+extern int gameGetOptions(void);
 extern int FUN_002b6b38(void);
 
 
@@ -22,7 +22,7 @@ unsigned int FUN_00245c78(void)
     if (temp_v0 != 2) {
       return 0;
     }
-    temp_v0 = FUN_002b6b20();
+    temp_v0 = gameGetOptions();
     temp_v0 = FUN_00229f30(*(unsigned short *)(temp_v0 + 0x46));
     if (*(char *)(temp_v0 + 3) != '\0') {
       return 0;

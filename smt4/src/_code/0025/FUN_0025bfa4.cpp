@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
+extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 
 /* Supplied declaration required: FUN_002c567c. */
 extern int FUN_003e0c80(unsigned int *);
@@ -38,7 +38,7 @@ int FUN_0025bfa4(void)
   int temp_v6;
   unsigned int uStack_14;
   
-  if (*(int *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0xc)) + 4) == 0) {
+  if (*(int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0xc)) + 4) == 0) {
     temp_v0 = -1;
   }
   else {
@@ -53,8 +53,8 @@ int FUN_0025bfa4(void)
     temp_v2 = FUN_003e0ce8((unsigned int *)&temp_v6);
     temp_v3 = FUN_003e0d54((unsigned int *)&temp_v6);
     temp_v4 = temp_v3 + (temp_v2 + (temp_v1 + temp_v0 * 0x18) * 0x3c) * 0x3c;
-    if (temp_v4 >= *(unsigned int *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0xc)) + 4)) {
-      temp_v0 = temp_v4 - *(unsigned int *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0xc)) + 4);
+    if (temp_v4 >= *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0xc)) + 4)) {
+      temp_v0 = temp_v4 - *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0xc)) + 4);
     }
     else {
       temp_v0 = 0;

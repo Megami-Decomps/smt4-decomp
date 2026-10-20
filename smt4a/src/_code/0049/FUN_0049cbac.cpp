@@ -7,7 +7,7 @@ extern "C" {
 extern int FUN_001774d8(unsigned int);
 extern int FUN_001ba3d4(unsigned int);
 extern unsigned int FUN_004d05b4(void);
-extern int aeabi_idivmod(unsigned int, unsigned int);
+extern int __aeabi_idivmod(unsigned int, unsigned int);
 
 
 int FUN_0049cbac(unsigned int param_1,unsigned int param_2)
@@ -19,7 +19,7 @@ int FUN_0049cbac(unsigned int param_1,unsigned int param_2)
   int temp_v3;
   
   temp_v0 = FUN_004d05b4();
-  temp_v1 = aeabi_idivmod(temp_v0,param_2);
+  temp_v1 = __aeabi_idivmod(temp_v0,param_2);
   if (temp_v1 < 0) {
     temp_v1 = 0;
   }

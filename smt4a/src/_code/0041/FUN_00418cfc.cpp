@@ -39,7 +39,7 @@ extern union romwright_storage_s__A_A_A_A_A_A_A_A_A_005c143c_37_1 s__A_A_A_A_A_A
 /* Supplied declaration required: FUN_00418c3c. */
 /* Supplied declaration required: FUN_004191f0. */
 /* Supplied declaration required: FUN_0041936c. */
-extern unsigned long long aeabi_uidivmod(int, unsigned int);
+extern unsigned long long __aeabi_uidivmod(int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -100,7 +100,7 @@ FUN_00418cfc(int param_1,int param_2,int param_3,unsigned int param_4,unsigned i
         if (temp_v6 < (int)temp_v11) {
           do {
             temp_v4 = temp_v7 * temp_v11 + temp_v6;
-            temp_v8 = aeabi_uidivmod(temp_v4,temp_v11);
+            temp_v8 = __aeabi_uidivmod(temp_v4,temp_v11);
             temp_v1 = FUN_00418c3c(temp_v10,iStack_4c);
             if (temp_v17 != 1) {
               temp_v4 = 0;
@@ -119,7 +119,7 @@ FUN_00418cfc(int param_1,int param_2,int param_3,unsigned int param_4,unsigned i
                         (temp_v1 & 0x3ffffff) << 3);
             }
             temp_v4 = temp_v7 * temp_v11 + temp_v6;
-            temp_v8 = aeabi_uidivmod(temp_v4,temp_v11);
+            temp_v8 = __aeabi_uidivmod(temp_v4,temp_v11);
             temp_v3 = (int)((unsigned long long)temp_v8 >> 0x20);
             temp_v5 = (int)temp_v8;
             temp_v2 = FUN_00418c3c(temp_v10,iStack_4c);

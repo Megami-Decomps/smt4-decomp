@@ -9,8 +9,8 @@ int FUN_00184c00(int, int, int);
 int FUN_00203d04(int);
 
 extern int DAT_0057f574; /* 0x57f574 */
-extern int DAT_0058103c; /* 0x58103c */
-extern int *DAT_0058104c; /* 0x58104c */
+extern int g_mapIf; /* 0x58103c */
+extern int *g_popupState; /* 0x58104c */
 extern signed char DAT_005f185e; /* 0x5f185e */
 
 /* Supplied declaration required: FUN_00184758. */
@@ -28,12 +28,12 @@ void FUN_0020ef68(void)
   int *piVar2;
   int temp_v1;
   
-  piVar2 = DAT_0058104c;
-  if (*DAT_0058104c != 0) {
-    *DAT_0058104c = 0;
+  piVar2 = g_popupState;
+  if (*g_popupState != 0) {
+    *g_popupState = 0;
     piVar2[1] = 0;
   }
-  temp_v0 = DAT_0058103c;
+  temp_v0 = g_mapIf;
   if (DAT_005f185e != '\0') {
     DAT_005f185e = '\0';
     FUN_00203d04(1);

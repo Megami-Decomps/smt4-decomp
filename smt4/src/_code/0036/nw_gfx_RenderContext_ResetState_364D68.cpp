@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00149b04(void);
+int asdModelClearTable(void);
 int FUN_00149b2c(int);
 int nw_gfx_RenderContext_MaterialHash_ResetMaterialHash(int, unsigned int);
 
-/* Supplied declaration required: FUN_00149b04. */
+/* Supplied declaration required: asdModelClearTable. */
 /* Supplied declaration required: FUN_00149b2c. */
 /* Supplied declaration required: nw_gfx_RenderContext_MaterialHash_ResetMaterialHash. */
 
@@ -46,7 +46,7 @@ void nw_gfx_RenderContext_ResetState_364D68(int param_1,unsigned int param_2,uns
     *(unsigned char *)(param_1 + 0x13) = 1;
   }
   if ((~param_2 & 0x80) == 0) {
-    FUN_00149b04();
+    asdModelClearTable();
   }
   if ((~param_2 & 0x100) == 0) {
     nw_gfx_RenderContext_MaterialHash_ResetMaterialHash(param_1 + 0x100,param_3);

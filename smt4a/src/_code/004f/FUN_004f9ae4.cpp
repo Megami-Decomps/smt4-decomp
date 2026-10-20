@@ -1,38 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f9ae4` (_code @ 0x4f9ae4, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0014aa78(...);
+/* Entry whose signed index sits at 400 (negative = invalid). */
+typedef struct {
+    u8 unk00[400];
+    s16 index;          /* 0x190 */
+} Entry;
 
-/* Supplied declaration required: FUN_0014aa78. */
-extern int FUN_003e8430(void);
+typedef struct {
+    u8 unk00[0x1f54];
+    Entry *entry;       /* 0x1f54 */
+} Owner;
 
+int btlGetMainState(void);
+int FUN_003e8430(void);
 
-int FUN_004f9ae4(int param_1,int param_2)
-
+/* Returns the owner's entry index, 0 when FUN_003e8430 reports in the first check, or -1 when there is no usable entry. */
+int FUN_004f9ae4(Owner *owner, int strict)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0x1f54);
-  if ((temp_v0 != 0) && (-1 < *(short *)(temp_v0 + 400))) {
-    FUN_0014aa78();
-    temp_v0 = FUN_003e8430();
-    if (temp_v0 != 0) {
-      return 0;
-    }
-    if (param_2 != 0) {
-      FUN_0014aa78(0);
-      temp_v0 = FUN_003e8430();
-      if (temp_v0 != 0) {
+    if (owner->entry == NULL || owner->entry->index < 0) {
         return -1;
-      }
     }
-    return (int)*(short *)(*(int *)(param_1 + 0x1f54) + 400);
-  }
-  return -1;
+    btlGetMainState();
+    if (FUN_003e8430() != 0) {
+        return 0;
+    }
+    if (strict != 0) {
+        btlGetMainState();
+        if (FUN_003e8430() != 0) {
+            return -1;
+        }
+    }
+    return owner->entry->index;
 }
 
 } /* extern "C" */

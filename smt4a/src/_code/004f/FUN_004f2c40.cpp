@@ -127,7 +127,7 @@ extern unsigned int FUN_00184964(unsigned int, unsigned int);
 extern float *FUN_00208bfc(void);
 extern int FUN_0022a00c(float *);
 /* Supplied declaration required: FUN_00280070. */
-extern int FUN_00283214(void);
+extern int effectProcessIsActive(void);
 /* Supplied declaration required: FUN_002e5104. */
 /* Supplied declaration required: FUN_002e512c. */
 /* Supplied declaration required: FUN_0031b91c. */
@@ -630,7 +630,7 @@ LAB_004f33d8:
     temp_v9 = romwright_piece_4_4(temp_v12,temp_v11);
     temp_v6 = CONCAT44(temp_v0,param_1[0x170] + param_1[0x206] + param_1[0x1c5] + param_1[3]);
     FUN_00280070(param_1 + 0x1b,0);
-    temp_v3 = FUN_00283214();
+    temp_v3 = effectProcessIsActive();
     if (temp_v3 != 0) {
       FUN_002e5104(&temp_v14);
       FUN_002e512c(&temp_v17);

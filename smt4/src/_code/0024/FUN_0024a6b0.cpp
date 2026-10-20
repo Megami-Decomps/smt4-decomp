@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002522f8(int, int, unsigned char *, unsigned int);
-int FUN_002c4938(unsigned char *, int);
+int memClear(unsigned char *, int);
 
 extern unsigned char LAB_0024a804; /* 0x24a804 */
 extern unsigned int DAT_00433278; /* 0x433278 */
@@ -13,7 +13,7 @@ extern unsigned char DAT_00478000; /* 0x478000 */
 
 extern unsigned char *FUN_002522e0(int, unsigned int);
 /* Supplied declaration required: FUN_002522f8. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 unsigned int FUN_0024a6b0(unsigned int param_1)
@@ -24,7 +24,7 @@ unsigned int FUN_0024a6b0(unsigned int param_1)
   unsigned char temp_v0;
   int temp_v1;
   
-  FUN_002c4938(&DAT_00478000 + DAT_00433278 * 0x148,0x148);
+  memClear(&DAT_00478000 + DAT_00433278 * 0x148,0x148);
   temp_v1 = DAT_00433278 * 0x148 + 0x478001;
   FUN_002522f8(temp_v1,0x1f,&LAB_0024a804,param_1);
   puVar1 = (unsigned char *)FUN_002522e0(temp_v1,0x2e);

@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_002a5960(int *, int *, unsigned int, unsigned int, int);
 int FUN_002a5dc4(int *, int *);
-int FUN_002c2ff0(void);
-int FUN_002c5300(int, int, int, int, int);
+int asdMemoryGetDefaultAllocator(void);
+int asdMemoryAlloc(int, int, int, int, int);
 int nw_gfx_SceneBuilder_CreateObject(int *, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
@@ -36,9 +36,9 @@ typedef struct {
 extern int FUN_0024530c(int *, unsigned int);
 /* Supplied declaration required: FUN_002a5960. */
 /* Supplied declaration required: FUN_002a5dc4. */
-/* Supplied declaration required: FUN_002c2ff0. */
-extern unsigned int FUN_002c300c(void);
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemoryGetDefaultAllocator. */
+extern unsigned int asdMemoryGetAllocatorA(void);
+/* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 
 
@@ -73,7 +73,7 @@ int FUN_003100f4(int param_1)
   unsigned char temp_v20;
   
   temp_v0 = 0x100;
-  FUN_002c5300(0x100,0x100,0,0x18,1);
+  asdMemoryAlloc(0x100,0x100,0,0x18,1);
   temp_v5 = *(int *)(param_1 + 0x48);
   temp_v1 = param_1 + 0x48;
   if (temp_v5 != 0) {
@@ -98,8 +98,8 @@ int FUN_003100f4(int param_1)
     else {
       temp_v6 = 0;
     }
-    temp_v2 = FUN_002c2ff0();
-    temp_v3 = FUN_002c300c();
+    temp_v2 = asdMemoryGetDefaultAllocator();
+    temp_v3 = asdMemoryGetAllocatorA();
     temp_v12 = 1;
     temp_v13 = 8;
     temp_v14 = 4;
@@ -161,7 +161,7 @@ LAB_00310248:
           temp_v15 = 0x40;
           temp_v14 = (unsigned int)temp_v10;
           temp_v16 = romwright_piece_3_1((((unsigned int)(temp_v16) >> 8) & 0xffffffU),1);
-          piVar5 = (int *)FUN_002c2ff0();
+          piVar5 = (int *)asdMemoryGetDefaultAllocator();
           piVar6 = (int *)(**(romwright_code **)(*piVar5 + 8))(piVar5,0x74,4);
           piVar11 = (int *)0x0;
           if (piVar6 != (int *)0x0) {

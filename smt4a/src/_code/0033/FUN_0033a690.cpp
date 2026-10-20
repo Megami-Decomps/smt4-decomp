@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00352a14(void);
 
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 
 extern int FUN_0018719c(unsigned int);
@@ -53,7 +53,7 @@ void FUN_0033a690(int param_1,int param_2)
   temp_v8 = 0x435c0000;
   temp_v9 = 0x42200000;
   temp_v5 = 0x432a0000;
-  if (DAT_005f15fc == 1) {
+  if (g_gameState == 1) {
     if (DAT_005f1600 != 1) {
       return;
     }
@@ -76,7 +76,7 @@ void FUN_0033a690(int param_1,int param_2)
       *(unsigned int *)(temp_v0 + 0xd8) = temp_v11;
     }
   }
-  if (DAT_005f15fc == 4) {
+  if (g_gameState == 4) {
     if (DAT_005f1600 != 2) {
       return;
     }
@@ -100,7 +100,7 @@ void FUN_0033a690(int param_1,int param_2)
     }
   }
   temp_v0 = DAT_005806a4;
-  if (DAT_005f15fc == 0x19) {
+  if (g_gameState == 0x19) {
     if (DAT_005f1600 == 1) {
       *(unsigned int *)(DAT_005806a4 + 0xd4) = temp_v5;
       *(unsigned int *)(temp_v0 + 0x114) = 0x43520000;
@@ -117,7 +117,7 @@ void FUN_0033a690(int param_1,int param_2)
       *(unsigned int *)(temp_v0 + 0x15c) = temp_v9;
       *(unsigned int *)(temp_v0 + 0x19c) = temp_v3;
       *(unsigned int *)(temp_v0 + 0x1dc) = 0x42960000;
-      if (DAT_005f15fc != 0x19) goto LAB_0033a890;
+      if (g_gameState != 0x19) goto LAB_0033a890;
     }
     temp_v0 = DAT_005806a4;
     if (DAT_005f1600 != 2) {
@@ -141,8 +141,8 @@ void FUN_0033a690(int param_1,int param_2)
   }
 LAB_0033a890:
   temp_v0 = DAT_005806a4;
-  if ((DAT_005f15fc == 0x1c || DAT_005f15fc == 0x1d) ||
-     ((DAT_005f15fc == 0x1e || DAT_005f15fc == 0x1f) || DAT_005f15fc == 0x20)) {
+  if ((g_gameState == 0x1c || g_gameState == 0x1d) ||
+     ((g_gameState == 0x1e || g_gameState == 0x1f) || g_gameState == 0x20)) {
     *(unsigned int *)(DAT_005806a4 + 0xd4) = temp_v5;
     *(unsigned int *)(temp_v0 + 0x114) = temp_v7;
     *(unsigned int *)(temp_v0 + 0x154) = temp_v2;

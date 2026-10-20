@@ -46,7 +46,7 @@ typedef struct {
     unsigned int spA8; /* 0xa8: local_a8 */
 } param_2_stack;
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 
 #ifndef ROMWRIGHT_PIECE_3_1_DEFINED
 #define ROMWRIGHT_PIECE_3_1_DEFINED
@@ -128,7 +128,7 @@ void FUN_00107d94(int *param_1,int param_2)
   if ((*(char *)(param_1[1] + 4) != '\n') && (*(char *)(param_1[1] + 4) != '\x02')) {
     if ((((temp_v1 & 0x2010) == 0) && (temp_v24 == 2)) &&
        ((temp_v5 = FUN_002eb6ae(param_2,0x800), temp_v5 == 0 &&
-        (temp_v5 = FUN_002f0400(0x554,(*(unsigned int *)((unsigned char *)&DAT_00594958 + 0x7c))), temp_v5 == 0)))) {
+        (temp_v5 = FUN_002f0400(0x554,(*(unsigned int *)((unsigned char *)&g_flagBlock + 0x7c))), temp_v5 == 0)))) {
       return;
     }
   }

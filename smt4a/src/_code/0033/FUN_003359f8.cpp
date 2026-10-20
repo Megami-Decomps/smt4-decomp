@@ -12,9 +12,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int FUN_0014aa78(void);
+extern int btlGetMainState(void);
 extern int FUN_001ab888(void);
-extern int FUN_00236038(unsigned int);
+extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_004fcf0c. */
 
 
@@ -29,8 +29,8 @@ unsigned int FUN_003359f8(void)
   unsigned int temp_v4;
   int temp_v5;
   
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_0014aa78();
+  temp_v0 = scrGetArg(0);
+  temp_v1 = btlGetMainState();
   if ((temp_v0 >= 0x6d) && (*(short *)(temp_v1 + 0x2000) < 4)) {
     temp_v5 = 0;
     do {

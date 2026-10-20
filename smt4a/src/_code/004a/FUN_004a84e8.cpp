@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0010063a(short *, int, int, unsigned int);
+int qsort(short *, int, int, unsigned int);
 int SBORROW4(int, int);
 int rt_memcpy_w(unsigned int [34], unsigned char *, int);
 
 extern unsigned char DAT_0052b5d4; /* 0x52b5d4 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -36,7 +36,7 @@ void FUN_004a84e8(short *param_1,int param_2)
   if ((temp_v1 != param_2 && unaff_r6 != 1) && temp_v0 < 0 == temp_v2) {
     *(char *)(param_1 + 0x5002) = (char)param_2;
     rt_memcpy_w(temp_v3,&DAT_0052b5d4,0x88);
-    FUN_0010063a(param_1 + 2,unaff_r6,0x20,temp_v3[param_2]);
+    qsort(param_1 + 2,unaff_r6,0x20,temp_v3[param_2]);
   }
   return;
 }

@@ -19,7 +19,7 @@ int FUN_00388424(int, int);
 int FUN_003b67d4(unsigned int);
 int FUN_003b67e8(void);
 int FUN_003c0d90(void);
-int FUN_003d8bc4(int);
+int menuStateStartSelect(int);
 
 /* stack frame of param_6: 1 slot(s), 1 byte(s) */
 typedef struct {
@@ -31,7 +31,7 @@ extern unsigned char LAB_004aa71c; /* 0x4aa71c */
 extern unsigned char LAB_004aa724; /* 0x4aa724 */
 extern unsigned char LAB_004aa734; /* 0x4aa734 */
 extern unsigned char LAB_004aa744; /* 0x4aa744 */
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int *DAT_0057a9c8; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_00100388. */
@@ -39,7 +39,7 @@ extern unsigned int FUN_0014bd84(unsigned short);
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00168518. */
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0019a7dc(void);
+extern int gameGetOptions(void);
 extern int FUN_001ba3d4(unsigned short);
 /* Supplied declaration required: FUN_00227af0. */
 /* Supplied declaration required: FUN_0022fcb8. */
@@ -54,11 +54,11 @@ extern int FUN_002a4894(unsigned int *);
 /* Supplied declaration required: FUN_003b67d4. */
 /* Supplied declaration required: FUN_003b67e8. */
 /* Supplied declaration required: FUN_003c0d90. */
-/* Supplied declaration required: FUN_003d8bc4. */
+/* Supplied declaration required: menuStateStartSelect. */
 extern int FUN_003e0044(unsigned int);
 extern int FUN_003e8430(unsigned int);
 extern int FUN_003f2448(unsigned int);
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int param_4,unsigned int param_5,
@@ -104,9 +104,9 @@ void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int para
       }
     }
     else if (param_6 != 0) {
-      temp_v4 = FUN_0019a7dc();
+      temp_v4 = gameGetOptions();
       temp_v0 = *(unsigned short *)(temp_v4 + 0x12e);
-      temp_v4 = FUN_0019a7dc();
+      temp_v4 = gameGetOptions();
       FUN_00168518((int)*(short *)(temp_v4 + 300),temp_v0);
       temp_v5 = (short)(int)temp_v7;
       FUN_00100388(temp_v7,&LAB_004aa70c);
@@ -131,7 +131,7 @@ void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int para
     }
     else {
       if ((param_6 == 0) &&
-         (temp_v4 = FUN_004ee568(DAT_0057113c),
+         (temp_v4 = btlUnitGet(g_btlScriptUnit),
          (*(unsigned short *)(*(int *)(temp_v4 + 0x28) + 0x110) & 0x10) != 0)) {
         temp_v6 = 1;
       }
@@ -167,7 +167,7 @@ void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int para
     FUN_002a3258();
   }
   FUN_00227af0(temp_v7);
-  FUN_003d8bc4(0);
+  menuStateStartSelect(0);
   return;
 }
 

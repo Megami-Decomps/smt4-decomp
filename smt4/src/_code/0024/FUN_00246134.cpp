@@ -8,7 +8,7 @@ int FUN_0022ab08(unsigned int, int *);
 int FUN_0022abe0(void);
 int FUN_00282924(...);
 int FUN_00283e48(void);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 
 /* stack frame of param_4: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0022abe0. */
 /* Supplied declaration required: FUN_00282924. */
 /* Supplied declaration required: FUN_00283e48. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 
 
 unsigned int FUN_00246134(unsigned int param_1,unsigned int param_2,int param_3,int param_4)
@@ -52,10 +52,10 @@ unsigned int FUN_00246134(unsigned int param_1,unsigned int param_2,int param_3,
   case 9:
     return 100;
   }
-  temp_v2 = FUN_002939f4();
+  temp_v2 = btlGetMainState();
   FUN_00282924(temp_v2,param_1);
   if (param_2 == 6 || param_2 == 7) {
-    temp_v3 = FUN_002939f4();
+    temp_v3 = btlGetMainState();
     FUN_00282924(temp_v3,param_1);
     temp_v1 = 0;
     if (temp_v3 != 0) {
@@ -64,7 +64,7 @@ unsigned int FUN_00246134(unsigned int param_1,unsigned int param_2,int param_3,
     if ((temp_v3 != 0 && temp_v1 != 0) && -1 < temp_v1) {
       temp_v6 = 0x10000;
     }
-    temp_v3 = FUN_002939f4();
+    temp_v3 = btlGetMainState();
     FUN_00282924(temp_v3,param_1);
     temp_v1 = 0;
     if (temp_v3 != 0) {
@@ -77,7 +77,7 @@ unsigned int FUN_00246134(unsigned int param_1,unsigned int param_2,int param_3,
   if (param_2 != 0x11) {
     if (param_3 != 0) {
       if ((param_3 == 1) && ((-1 >= param_4 || (param_4 != 0x11)))) {
-        temp_v3 = FUN_002939f4();
+        temp_v3 = btlGetMainState();
         FUN_00282924(temp_v3,param_1);
         temp_v1 = 0;
         if (temp_v3 != 0) {
@@ -89,7 +89,7 @@ unsigned int FUN_00246134(unsigned int param_1,unsigned int param_2,int param_3,
       }
     }
     else {
-      temp_v3 = FUN_002939f4();
+      temp_v3 = btlGetMainState();
       FUN_00282924(temp_v3,param_1);
       if ((temp_v3 != 0) && (*(short *)(temp_v3 + 0x96) >= 1)) {
         temp_v6 = temp_v6 | 0x20000;
@@ -116,7 +116,7 @@ unsigned int FUN_00246134(unsigned int param_1,unsigned int param_2,int param_3,
   if (temp_v0 >> 10 == 5) {
     temp_v6 = temp_v6 | 0x80000;
   }
-  temp_v4 = FUN_002939f4();
+  temp_v4 = btlGetMainState();
   FUN_00282924(temp_v4,param_1);
   temp_v10[0] = 0;
   temp_v10[1] = 0;

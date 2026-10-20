@@ -18,7 +18,7 @@ extern unsigned int DAT_005b3c14; /* 0x5b3c14 */
 extern unsigned int DAT_005b3c20; /* 0x5b3c20 */
 extern unsigned int DAT_005b3c24; /* 0x5b3c24 */
 extern unsigned int DAT_005b3c28; /* 0x5b3c28 */
-extern unsigned int DAT_005b3c80; /* 0x5b3c80 */
+extern unsigned int g_effAsdLightHandle; /* 0x5b3c80 */
 extern unsigned int DAT_005b3c84; /* 0x5b3c84 */
 extern unsigned int DAT_005b3c88; /* 0x5b3c88 */
 extern unsigned int DAT_005b3c8c; /* 0x5b3c8c */
@@ -31,7 +31,7 @@ extern unsigned int DAT_005b3cc4; /* 0x5b3cc4 */
 /* Supplied declaration required: FUN_001767a4. */
 /* Supplied declaration required: FUN_0018e9d8. */
 /* Supplied declaration required: FUN_003594f8. */
-extern int FUN_0036badc(int);
+extern int asdModelGetSlotArray0(int);
 
 
 void FUN_00359370(int param_1,int param_2)
@@ -48,7 +48,7 @@ void FUN_00359370(int param_1,int param_2)
   int *piVar8;
   int temp_v4;
   
-  temp_v0 = FUN_0036badc(param_2);
+  temp_v0 = asdModelGetSlotArray0(param_2);
   temp_v3 = *(int *)(param_1 + 0xc);
   piVar4 = *(int **)(temp_v0 + 0x18);
   piVar8 = *(int **)(temp_v0 + 0x1c);
@@ -109,7 +109,7 @@ void FUN_00359370(int param_1,int param_2)
     FUN_0018e9d8(DAT_005b3ca0);
     **(unsigned int **)(temp_v1 + 0xac) = DAT_005b3c14;
     DAT_005b3cc0 = 0;
-    FUN_001767a4(DAT_005b3c80,DAT_005b3c88);
+    FUN_001767a4(g_effAsdLightHandle,DAT_005b3c88);
     return;
   }
   if (param_2 != 1) {

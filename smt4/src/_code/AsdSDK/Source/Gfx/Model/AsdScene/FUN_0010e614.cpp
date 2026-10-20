@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0011877c(void);
 int FUN_00118d50(void);
-int FUN_002c5300(int, int, int, int, int);
+int asdMemoryAlloc(int, int, int, int, int);
 
 /* stack frame of void: 6 slot(s), 18 byte(s) */
 typedef struct {
@@ -36,8 +36,8 @@ extern union romwright_storage_s__M_F_00464c00_9_1 s__M_F_00464c00; /* 0x464c00 
 /* Supplied declaration required: FUN_00118d50. */
 extern int FUN_0011d9c4(unsigned char *, unsigned int);
 extern int FUN_00120000(unsigned char *, unsigned int);
-extern unsigned int FUN_002c2ff0(void);
-/* Supplied declaration required: FUN_002c5300. */
+extern unsigned int asdMemoryGetDefaultAllocator(void);
+/* Supplied declaration required: asdMemoryAlloc. */
 extern unsigned int nw_ut_FloatColor_ToPicaU32(int);
 
 
@@ -71,11 +71,11 @@ void FUN_0010e614(void)
   temp_v9 = 0x3f000000;
   do {
     puVar1 = (unsigned int *)0x100;
-    FUN_002c5300(0x100,0x100,0,0xc,1);
+    asdMemoryAlloc(0x100,0x100,0,0xc,1);
     puVar1[1] = 0;
     puVar1[2] = 0;
     *puVar1 = 0xffffffff;
-    temp_v0 = FUN_002c2ff0();
+    temp_v0 = asdMemoryGetDefaultAllocator();
     temp_v10 = 1;
     temp_v11 = 1;
     temp_v14 = 1;
@@ -93,11 +93,11 @@ void FUN_0010e614(void)
     *(unsigned int *)(puVar1[2] + 200) = temp_v0;
     *(unsigned int **)((*(unsigned int *)&s__M_F_00464c00.u1[0]) + temp_v3 * 4) = puVar1;
     puVar1 = (unsigned int *)0x100;
-    FUN_002c5300(0x100,0x100,0,0xc,1);
+    asdMemoryAlloc(0x100,0x100,0,0xc,1);
     puVar1[1] = 0;
     puVar1[2] = 0;
     *puVar1 = 0xffffffff;
-    temp_v0 = FUN_002c2ff0();
+    temp_v0 = asdMemoryGetDefaultAllocator();
     temp_v10 = 1;
     temp_v11 = 1;
     temp_v14 = 1;

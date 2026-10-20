@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(int *, unsigned char *, int, unsigned int);
-int FUN_0010063a(int, unsigned int, int, unsigned char *);
+int qsort(int, unsigned int, int, unsigned char *);
 int FUN_0018719c(...);
 int FUN_003fe388(...);
 int FUN_0046bc1c(void);
@@ -43,7 +43,7 @@ extern unsigned char LAB_00469ce4; /* 0x469ce4 */
 extern unsigned char LAB_00469d00; /* 0x469d00 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_0010063a. */
+/* Supplied declaration required: qsort. */
 extern unsigned int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018719c. */
 extern int FUN_003f86c0(int);
@@ -120,7 +120,7 @@ LAB_00469530:
       FUN_0046bc1c();
     } while (temp_v11 < temp_v6);
   }
-  FUN_0010063a(param_1 + 0xa70,*(unsigned int *)(param_1 + 0xab8),8,&LAB_00467de8);
+  qsort(param_1 + 0xa70,*(unsigned int *)(param_1 + 0xab8),8,&LAB_00467de8);
   if (*(char *)(param_1 + 0x18) != '\x01') {
     if ((*(char *)(param_1 + 0x18) == '\0') && (temp_v5 = FUN_0018719c(0x4d6), temp_v5 != 0)) {
       temp_v14 = 0;

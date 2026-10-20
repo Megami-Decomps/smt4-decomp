@@ -19,7 +19,7 @@ extern unsigned char DAT_005894e7; /* 0x5894e7 */
 extern unsigned char DAT_005894e8; /* 0x5894e8 */
 extern unsigned char DAT_005894e9; /* 0x5894e9 */
 extern unsigned char DAT_00643380; /* 0x643380 */
-extern unsigned char DAT_006433d0; /* 0x6433d0 */
+extern unsigned char g_dspsndState; /* 0x6433d0 */
 extern unsigned char DAT_006449d0; /* 0x6449d0 */
 extern unsigned char uRam1ff810c0; /* 0x1ff810c0 */
 
@@ -42,8 +42,8 @@ void FUN_00159d60(void)
   unsigned int temp_v1;
   
   if ((DAT_005894e4 == '\0') && (temp_v0 = FUN_0016f864(0), -1 < temp_v0)) {
-    puVar2 = &DAT_006433d0;
-    FUN_0016f574(&DAT_006433d0,0);
+    puVar2 = &g_dspsndState;
+    FUN_0016f574(&g_dspsndState,0);
     if (-1 < (int)puVar2) {
       DAT_005894e8 = uRam1ff810c0;
       FUN_001a167c(&DAT_00643380);

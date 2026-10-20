@@ -31,7 +31,7 @@ extern int FUN_001c2484(void);
 extern int FUN_001cc570(int *, int *);
 /* Supplied declaration required: FUN_001d0984. */
 /* Supplied declaration required: FUN_002ffa9c. */
-extern unsigned int aeabi_uidivmod(unsigned int);
+extern unsigned int __aeabi_uidivmod(unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Alloc. */
 /* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Free. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Free. */
@@ -130,7 +130,7 @@ LAB_001c28e0:
           return 1;
         }
         if ((unsigned int)param_1[0x2a] < 0x2001) {
-          temp_v1 = aeabi_uidivmod(*(unsigned int *)(param_1[0x19] + 8));
+          temp_v1 = __aeabi_uidivmod(*(unsigned int *)(param_1[0x19] + 8));
           param_1[0x1a] = temp_v1;
           if (temp_v1 >= 4) {
             if (temp_v1 >= 0x21) {

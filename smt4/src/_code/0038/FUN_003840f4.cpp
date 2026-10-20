@@ -12,13 +12,13 @@ int FUN_00282bfc(...);
 int FUN_00287528(int);
 int FUN_00287704(...);
 int FUN_00297468(unsigned char [64], int, int);
-int FUN_0029bb3c(unsigned char *, int);
+int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_0029be5c(...);
 int FUN_002a0428(void);
 int FUN_002a09b4(unsigned char [144], int);
 int FUN_002be624(...);
-int FUN_002c222c(void);
-int FUN_002c4938(void);
+int asdOperatorNew(void);
+int memClear(void);
 int FUN_002d582c(...);
 int FUN_002e1230(unsigned int, int);
 int FUN_00381ac0(void);
@@ -45,14 +45,14 @@ extern int FUN_00235414(unsigned char);
 /* Supplied declaration required: FUN_00287528. */
 /* Supplied declaration required: FUN_00287704. */
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_0029bb3c. */
+/* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a09b4. */
 /* Supplied declaration required: FUN_002be624. */
 extern int FUN_002c2218(int);
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002d582c. */
 /* Supplied declaration required: FUN_002e1230. */
 extern int FUN_00381914(void);
@@ -127,7 +127,7 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
     FUN_002be624(temp_v8,&LAB_00384418,
                  *(unsigned int *)(temp_v4 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),temp_v1 + 1);
     puVar2 = temp_v8;
-    FUN_0029bb3c(puVar2,7);
+    asdMdlManagerCreateLoaded(puVar2,7);
     temp_v3 = param_1 + temp_v1 * 4;
     puVar5 = (unsigned int *)(temp_v3 + 0xd10);
     *(unsigned char **)(temp_v3 + 0xd10) = puVar2;
@@ -138,7 +138,7 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
     FUN_002be624(temp_v8,&LAB_00384428,
                  *(unsigned int *)(temp_v4 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),temp_v1 + 1);
     puVar2 = temp_v8;
-    FUN_0029bb3c(puVar2,7);
+    asdMdlManagerCreateLoaded(puVar2,7);
     piVar7 = (int *)(temp_v3 + 0xd28);
     *(unsigned char **)(temp_v3 + 0xd28) = puVar2;
     FUN_002a0428();
@@ -155,7 +155,7 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
     FUN_002be624(temp_v8,&LAB_00384440,
                  *(unsigned int *)(temp_v4 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4));
     puVar2 = temp_v8;
-    FUN_0029bb3c(puVar2,7);
+    asdMdlManagerCreateLoaded(puVar2,7);
     *(unsigned char **)(param_1 + 0xfb8) = puVar2;
     FUN_002a0428();
     FUN_002be624(temp_v8,&LAB_00384448,
@@ -163,10 +163,10 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
     FUN_002a09b4(temp_v8,0);
   }
   temp_v2 = 0x17f0;
-  FUN_002c222c();
+  asdOperatorNew();
   temp_v3 = 0;
   if (temp_v2 != 0) {
-    FUN_002c4938();
+    memClear();
     temp_v3 = FUN_002c2218(temp_v2 + 0x4cc);
     temp_v3 = temp_v3 - 0x4cc;
   }

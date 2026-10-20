@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0020209c(void);
 
-extern int FUN_00164a9c(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_0020209c. */
 
 
@@ -16,7 +16,7 @@ void FUN_003592dc(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   FUN_0020209c();
   *(unsigned int *)(temp_v0 + 0x70) = 0;
   *(unsigned int *)(temp_v0 + 0x6c) = 0;

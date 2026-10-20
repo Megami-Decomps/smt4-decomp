@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_003e9cec(...);
 int FUN_004ca63c(...);
 int rt_memcpy(...);
@@ -31,7 +31,7 @@ extern unsigned int DAT_00573aec; /* 0x573aec */
 extern unsigned int FUN_001ab888(void);
 extern unsigned int FUN_001bce18(void);
 extern unsigned int FUN_00228ab0(int);
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e9cec. */
 /* Supplied declaration required: FUN_004ca63c. */
 /* Supplied declaration required: rt_memcpy. */
@@ -99,7 +99,7 @@ void FUN_003ee138(int param_1)
     if ((*(unsigned int *)(temp_v4 + 0x3498) & 1) == 0) {
       temp_v4 = 0;
 LAB_003ee410:
-      FUN_002e6354(*piVar9 + temp_v4 * 0x408,0x408);
+      sysMemClear(*piVar9 + temp_v4 * 0x408,0x408);
       puVar15 = (unsigned int *)(*piVar9 + temp_v4 * 0x408);
       *puVar15 = 0;
       puVar15[1] = 0;
@@ -136,7 +136,7 @@ LAB_003ee510:
       temp_v5 = temp_v5 + 1;
       if (temp_v6 == 0) {
         *(unsigned short *)(*piVar9 + temp_v4 * 0x408 + 0x16c) = 0xffff;
-        FUN_002e6354(*piVar12 + temp_v4 * 0x1d0,0x1d0);
+        sysMemClear(*piVar12 + temp_v4 * 0x1d0,0x1d0);
         *(unsigned short *)(*piVar12 + temp_v4 * 0x1d0 + 0x6a) = temp_v10;
         *(unsigned short *)(*piVar12 + temp_v4 * 0x1d0 + 0x68) = 0xffff;
         temp_v5 = temp_v4 * 0x1d0;

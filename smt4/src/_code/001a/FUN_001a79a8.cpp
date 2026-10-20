@@ -15,7 +15,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-extern int FUN_001d1c74(void);
+extern int btlMainIsRunning(void);
 /* Supplied declaration required: FUN_002881bc. */
 /* Supplied declaration required: FUN_0028836c. */
 extern int FUN_002c501c(void);
@@ -113,7 +113,7 @@ void FUN_001a79a8(int param_1)
     temp_v14 = temp_v7 * temp_v4 * temp_v9 + (temp_v6 * temp_v6 + temp_v7 * temp_v7 * temp_v13) * temp_v10 +
              (temp_v6 * temp_v7 * temp_v13 - temp_v7 * temp_v6) * temp_v5;
     temp_v6 = -temp_v13 * temp_v9 + temp_v7 * temp_v4 * temp_v10 + temp_v6 * temp_v4 * temp_v5;
-    temp_v1 = FUN_001d1c74();
+    temp_v1 = btlMainIsRunning();
     if (temp_v1 != 0) {
       *(float *)(param_1 + 0x1c) = temp_v10;
     }

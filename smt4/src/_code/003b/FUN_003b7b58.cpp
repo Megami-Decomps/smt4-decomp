@@ -12,11 +12,11 @@ int FUN_00297468(...);
 int FUN_0029a128(...);
 int FUN_0029e874(...);
 int FUN_002a5ed0(int, int);
-int FUN_002bd8e8(...);
+int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int FUN_002c312c(...);
-int FUN_002c4938(int, int);
+int memClear(int, int);
 int FUN_002eb76c(...);
 int FUN_0033c5bc(int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
@@ -44,11 +44,11 @@ extern unsigned char DAT_00405a4c; /* 0x405a4c */
 /* Supplied declaration required: FUN_002a5ed0. */
 extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002eb76c. */
 /* Supplied declaration required: FUN_0033c5bc. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -86,7 +86,7 @@ void FUN_003b7b58(int param_1)
   FUN_00297468("battle/Result.bf",(unsigned int *)(param_1 + 0x3564),0);
   FUN_00297468("battle/ResultMsg.mbm",(unsigned int *)(param_1 + 0x356c),0);
   FUN_00297468("battle/DevilLvUp.bf",(unsigned int *)(param_1 + 0x3570),0);
-  FUN_002c4938(param_1 + 0x35b4,100);
+  memClear(param_1 + 0x35b4,100);
   *(unsigned int *)(param_1 + 0x3618) = 0;
   *(unsigned int *)(param_1 + 0x361c) = 0;
   *(unsigned int *)(param_1 + 0x3620) = 0;
@@ -121,22 +121,22 @@ void FUN_003b7b58(int param_1)
   FUN_002c312c(param_1,&DAT_004058d4,0x48,&DAT_0040591c,0xa8,&DAT_004059c4,0x6c,&DAT_00405a30,0x1c,
                &DAT_00405a4c,0x32c);
   FUN_002bd954(param_1 + 0x20,0x28,0,param_1,1);
-  FUN_002bd8e8(param_1 + 0x20,0);
+  timerStart(param_1 + 0x20,0);
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c;
     FUN_002bd954(temp_v2 + 0xac,0x28,0,param_1,1);
-    FUN_002bd8e8(temp_v2 + 0xac,4,0);
+    timerStart(temp_v2 + 0xac,4,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);
   FUN_002bd954(param_1 + 0x3f4,0x28,0,param_1,1);
   FUN_002bee58(param_1 + 0x3f4,4);
   FUN_002bd954(param_1 + 0x480,0x28,0,param_1,1);
-  FUN_002bd8e8(param_1 + 0x480,2,0);
+  timerStart(param_1 + 0x480,2,0);
   FUN_002bd954(param_1 + 0x50c,0x28,0,param_1,1);
-  FUN_002bd8e8(param_1 + 0x50c,0);
+  timerStart(param_1 + 0x50c,0);
   FUN_002bd954(param_1 + 0x598,0x28,0,param_1,1);
-  FUN_002bd8e8(param_1 + 0x598,0);
+  timerStart(param_1 + 0x598,0);
   FUN_002bd954(param_1 + 0x624,0x28,1000,param_1,0x65);
   FUN_002eb76c(param_1 + 0x624,0);
   FUN_002bd954(param_1 + 0x6b0,0x28,1000,param_1,0x65);

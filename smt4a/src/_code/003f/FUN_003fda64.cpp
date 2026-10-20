@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int FUN_001a7a20(int, unsigned int, unsigned int);
-extern unsigned int FUN_002e3390(unsigned int);
+extern unsigned int wstrlen(unsigned int);
 
 
 unsigned char FUN_003fda64(int param_1,unsigned int param_2,unsigned int *param_3)
@@ -22,7 +22,7 @@ unsigned char FUN_003fda64(int param_1,unsigned int param_2,unsigned int *param_
   unsigned int temp_v7;
   
   temp_v0 = *(int *)(param_1 + 0x210);
-  temp_v1 = FUN_002e3390(param_2);
+  temp_v1 = wstrlen(param_2);
   temp_v0 = FUN_001a7a20(temp_v0 + 0x74,param_2,temp_v1);
   if (temp_v0 != 0xffff) {
     puVar3 = (unsigned int *)(*(int *)(*(int *)(param_1 + 0x108) + 0x14) + temp_v0 * 0x30);

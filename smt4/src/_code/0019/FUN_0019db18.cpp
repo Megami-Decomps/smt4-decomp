@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0028c6b8(void);
-int FUN_002c415c(unsigned int);
+int asdMemFree(unsigned int);
 
 /* Supplied declaration required: FUN_0028c6b8. */
-/* Supplied declaration required: FUN_002c415c. */
-extern unsigned int FUN_002c5c14(unsigned int, unsigned int *, unsigned int, unsigned int);
+/* Supplied declaration required: asdMemFree. */
+extern unsigned int asdLoadFileSync(unsigned int, unsigned int *, unsigned int, unsigned int);
 
 
 unsigned int FUN_0019db18(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -21,10 +21,10 @@ unsigned int FUN_0019db18(unsigned int param_1,unsigned int param_2,unsigned int
   int uStack_10;
   
   uStack_10 = param_4;
-  temp_v0 = FUN_002c5c14(param_1,(unsigned int *)&uStack_10,1,0x80);
+  temp_v0 = asdLoadFileSync(param_1,(unsigned int *)&uStack_10,1,0x80);
   temp_v1 = temp_v0;
   FUN_0028c6b8();
-  FUN_002c415c(temp_v0);
+  asdMemFree(temp_v0);
   return temp_v1;
 }
 

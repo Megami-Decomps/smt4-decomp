@@ -1,15 +1,12 @@
-#include "romwright_types.h"
+#include "battle/btlUI.h"
 
 extern "C" {
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+extern BtlUiGlobals DAT_00439c88;
 
-
-void FUN_0025c2d0(unsigned int param_1,unsigned char param_2)
-
+void FUN_0025c2d0(u32 unused, u8 value)
 {
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0x54dc) = param_2;
-  return;
+    DAT_00439c88.ui->unk54DC = value;
 }
 
 } /* extern "C" */

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001631d0(...);
-int FUN_003fc0b8(...);
+int jobStop(...);
+int aocHandleButtons(...);
 int FUN_004ff364(...);
 
 typedef struct fn_00289d8c_arg0 fn_00289d8c_arg0;
@@ -25,9 +25,9 @@ struct fn_00289d8c_arg0 {
 };
 
 extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_001631d0. */
-extern int FUN_00164a9c(void);
-/* Supplied declaration required: FUN_003fc0b8. */
+/* Supplied declaration required: jobStop. */
+extern int jobGetWork(void);
+/* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(unsigned int, unsigned int);
 extern int FUN_003fcf5c(unsigned int);
 extern unsigned int FUN_00409fe8(int, unsigned int);
@@ -43,7 +43,7 @@ unsigned int FUN_00289d8c(fn_00289d8c_arg0 *param_1)
   unsigned int temp_v2;
   float temp_v3;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   temp_v1 = *(int *)(temp_v0 + 4);
   if (temp_v1 != 0) {
     if (temp_v1 != 1) {
@@ -62,7 +62,7 @@ unsigned int FUN_00289d8c(fn_00289d8c_arg0 *param_1)
         if (temp_v1 == 0) {
           return 0;
         }
-        FUN_003fc0b8(*(unsigned int *)(temp_v0 + 0x34),7);
+        aocHandleButtons(*(unsigned int *)(temp_v0 + 0x34),7);
         temp_v2 = 3;
       }
       *(unsigned int *)(temp_v0 + 4) = temp_v2;
@@ -92,7 +92,7 @@ unsigned int FUN_00289d8c(fn_00289d8c_arg0 *param_1)
         *(unsigned int *)(temp_v0 + 0xc) = 0;
         *(unsigned int *)(temp_v0 + 0x10) = 0;
         if (*(char *)(temp_v0 + 0x14) != '\0') {
-          FUN_001631d0(param_1,0);
+          jobStop(param_1,0);
         }
       }
       else if ((int)temp_v3 >= 0x3f800001) {

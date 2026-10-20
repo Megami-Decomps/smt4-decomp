@@ -21,7 +21,7 @@ struct fn_002fd078_arg1 {
     int field_0x18; /* +0x18 */
 };
 
-extern int FUN_0030ef8c(int, int);
+extern int rt_memcmp(int, int);
 
 
 unsigned int FUN_002fd078(fn_002fd078_arg0 *param_1,fn_002fd078_arg1 *param_2)
@@ -30,7 +30,7 @@ unsigned int FUN_002fd078(fn_002fd078_arg0 *param_1,fn_002fd078_arg1 *param_2)
   int temp_v0;
   
   if ((param_1->field_0x10 == param_2->field_0x10) &&
-     (temp_v0 = FUN_0030ef8c(param_2->field_0xc + param_2->field_0x18,
+     (temp_v0 = rt_memcmp(param_2->field_0xc + param_2->field_0x18,
                            param_1->field_0xc + param_1->field_0x18), temp_v0 == 0)) {
     return 1;
   }

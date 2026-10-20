@@ -63,7 +63,7 @@ extern int DAT_00439ca8; /* 0x439ca8 */
 /* Supplied declaration required: FUN_0023cd08. */
 /* Supplied declaration required: FUN_00282924. */
 /* Supplied declaration required: FUN_0028a0d0. */
-extern unsigned int *FUN_002939f4(void);
+extern unsigned int *btlGetMainState(void);
 /* Supplied declaration required: FUN_00296d6c. */
 /* Supplied declaration required: FUN_003adb34. */
 
@@ -87,7 +87,7 @@ void FUN_00344158(unsigned int param_1,fn_00344158_arg1 *param_2)
   float temp_v9;
   unsigned int temp_v10;
   
-  puVar3 = (unsigned int *)FUN_002939f4();
+  puVar3 = (unsigned int *)btlGetMainState();
   puVar4 = puVar3;
   FUN_00282924(puVar3,(int)*(short *)((int)param_2->field_0x14 + 0x62));
   if (puVar4 == (unsigned int *)0x0) {

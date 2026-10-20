@@ -20,7 +20,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_0021b6e8; /* 0x21b6e8 */
-extern int DAT_00589154; /* 0x589154 */
+extern int g_s4Load; /* 0x589154 */
 
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
 /* Supplied declaration required: FUN_002a1f60. */
@@ -42,7 +42,7 @@ void FUN_0021b4e0(int param_1)
   unsigned char temp_v5 [512];
   char temp_v6 [40];
   
-  temp_v1 = DAT_00589154;
+  temp_v1 = g_s4Load;
   FUN_002e6dd0(temp_v5,0x200);
   if ((temp_v1 != 0) && (-1 < param_1)) {
     if (param_1 == 0) {

@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-extern int DAT_0063f4e4; /* 0x63f4e4 */
+extern int g_asdSoundStatus; /* 0x63f4e4 */
 extern unsigned int DAT_0063f4e8; /* 0x63f4e8 */
 extern int DAT_0063f4ec; /* 0x63f4ec */
 extern unsigned char DAT_0063f4f0; /* 0x63f4f0 */
@@ -52,10 +52,10 @@ void FUN_00154320(unsigned int param_1,unsigned int param_2,unsigned int param_3
           param_3 = DAT_0063f4e8;
         }
         if (!temp_v4 && (-1 < (int)temp_v3 && (int)temp_v3 <= (int)param_3)) {
-          temp_v2 = DAT_0063f4e4;
+          temp_v2 = g_asdSoundStatus;
           if (0 < (int)temp_v3) {
             if ((temp_v3 & 1) != 0) {
-              temp_v2 = *(int *)(DAT_0063f4e4 + 0xd8);
+              temp_v2 = *(int *)(g_asdSoundStatus + 0xd8);
             }
             for (temp_v0 = (int)temp_v3 >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
               temp_v2 = *(int *)(*(int *)(temp_v2 + 0xd8) + 0xd8);

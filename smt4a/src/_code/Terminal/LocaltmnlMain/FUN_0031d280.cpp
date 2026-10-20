@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_0019ea64(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -25,11 +25,11 @@ extern unsigned char LAB_00357f9c; /* 0x357f9c */
 extern unsigned char LAB_0037a050; /* 0x37a050 */
 extern unsigned char LAB_0037a068; /* 0x37a068 */
 extern unsigned char LAB_003a3c40; /* 0x3a3c40 */
-extern unsigned int *DAT_0056fccc; /* 0x56fccc */
+extern unsigned int *g_localTmnl; /* 0x56fccc */
 
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_0019ea64. */
 
 
@@ -41,8 +41,8 @@ void FUN_0031d280(unsigned int *param_1)
   unsigned char *puVar2;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x598,1);
-  DAT_0056fccc = puVar1;
+  asdMemoryAllocTracked(0x100,0x100,0,0x598,1);
+  g_localTmnl = puVar1;
   *(unsigned char *)((int)puVar1 + 5) = 1;
   puVar1[2] = 0;
   puVar1[3] = 0;
@@ -77,11 +77,11 @@ void FUN_0031d280(unsigned int *param_1)
     puVar1[3] = 0;
   }
   puVar2 = &LAB_0031d444;
-  FUN_0014e38c(&LAB_0031d444,4,0,0,FUN_00328838,&LAB_0037a050,0);
+  asdProcessCreateSimple(&LAB_0031d444,4,0,0,FUN_00328838,&LAB_0037a050,0);
   *puVar1 = (unsigned int)puVar2;
-  FUN_0015155c(&LAB_0031d454,0x77,0,0,&LAB_00357f9c,0,0,puVar2);
-  FUN_0015155c(&LAB_0031d454,0xd3,0,0,&LAB_003a3c40,0,0,*puVar1);
-  FUN_0015155c(&LAB_0031d468,0xeb,0,0,&LAB_0037a068,0,0,*puVar1);
+  taskCreateDraw(&LAB_0031d454,0x77,0,0,&LAB_00357f9c,0,0,puVar2);
+  taskCreateDraw(&LAB_0031d454,0xd3,0,0,&LAB_003a3c40,0,0,*puVar1);
+  taskCreateDraw(&LAB_0031d468,0xeb,0,0,&LAB_0037a068,0,0,*puVar1);
   return;
 }
 

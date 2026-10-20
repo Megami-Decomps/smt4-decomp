@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00180008(int);
+int jyoucyuGetTableEntry(int);
 int FUN_00480a54(void);
 
 /* stack frame of void: 12 slot(s), 48 byte(s) */
@@ -23,13 +23,13 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } void_stack;
 
-extern int DAT_005806c4; /* 0x5806c4 */
+extern int g_mapDepart; /* 0x5806c4 */
 extern unsigned char DAT_005f1d74; /* 0x5f1d74 */
 extern unsigned char DAT_005f1db4; /* 0x5f1db4 */
 extern int DAT_005f1dc4; /* 0x5f1dc4 */
 extern short DAT_005f1e18; /* 0x5f1e18 */
 
-/* Supplied declaration required: FUN_00180008. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00480a54. */
 
 
@@ -55,7 +55,7 @@ void FUN_003ca244(void)
   unsigned int temp_v10;
   unsigned int temp_v11;
   
-  temp_v4 = DAT_005806c4;
+  temp_v4 = g_mapDepart;
   temp_v7[0] = 0;
   temp_v7[1] = 0;
   temp_v7[2] = 0;
@@ -135,7 +135,7 @@ void FUN_003ca244(void)
   temp_v4 = 0;
   if (temp_v4 < DAT_005f1e18) {
     do {
-      FUN_00180008(0);
+      jyoucyuGetTableEntry(0);
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < DAT_005f1e18);
   }

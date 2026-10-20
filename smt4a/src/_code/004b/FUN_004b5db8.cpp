@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_0018152c(...);
 int FUN_001834a4(...);
@@ -29,7 +29,7 @@ extern int DAT_00588c50; /* 0x588c50 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -168,7 +168,7 @@ LAB_004b5ef4:
     if (param_8 != 0) {
       if (param_9 < 8) {
         VectorSignedToFloat(param_9,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_001677c0();
+        efctSetSpeed();
       }
       FUN_001835b4(2,0x1d,0x61,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,0x88
                   );

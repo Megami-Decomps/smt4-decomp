@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002efd90(void);
+int statusCameraSetEye(void);
 int VectorSignedToFloat(int, int);
 
 extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002efd90. */
+/* Supplied declaration required: statusCameraSetEye. */
 
 
 void FUN_00240170(void)
@@ -38,7 +38,7 @@ void FUN_00240170(void)
       VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     }
   }
-  FUN_002efd90();
+  statusCameraSetEye();
   return;
 }
 

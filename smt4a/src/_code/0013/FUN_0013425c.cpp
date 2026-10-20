@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e14(int);
 int FUN_002e9afe(...);
-int FUN_00301ac0(int *);
+int vectorSize12A(int *);
 int FUN_00307940(int, int, int, int *);
 int FUN_00307974(...);
 int FUN_0030d358(...);
@@ -17,15 +17,15 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern int FUN_002e6dac(void);
+extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_002e9afe. */
-/* Supplied declaration required: FUN_00301ac0. */
+/* Supplied declaration required: vectorSize12A. */
 /* Supplied declaration required: FUN_00307940. */
 extern int FUN_00307962(unsigned int, int *);
 /* Supplied declaration required: FUN_00307974. */
 /* Supplied declaration required: FUN_0030d358. */
-extern int aeabi_idivmod(int, unsigned int);
+extern int __aeabi_idivmod(int, unsigned int);
 
 
 void FUN_0013425c(int *param_1,int param_2,unsigned int param_3)
@@ -42,7 +42,7 @@ void FUN_0013425c(int *param_1,int param_2,unsigned int param_3)
   int temp_v7;
   
   temp_v0 = FUN_00307974();
-  temp_v1 = FUN_00301ac0(param_1);
+  temp_v1 = vectorSize12A(param_1);
   if (temp_v1 < temp_v0) {
     temp_v6 = param_1[1];
     temp_v5 = temp_v6 - 0xc;
@@ -56,15 +56,15 @@ void FUN_0013425c(int *param_1,int param_2,unsigned int param_3)
     FUN_002e9afe(param_2,param_3);
   }
   else {
-    temp_v2 = FUN_00301ac0(param_1);
+    temp_v2 = vectorSize12A(param_1);
     temp_v6 = FUN_00307962(temp_v2,param_1);
-    temp_v3 = FUN_002e6dac();
+    temp_v3 = rt_malloc();
     FUN_00307940(*param_1,param_2,temp_v3,param_1);
-    temp_v5 = aeabi_idivmod(param_2 - *param_1,0xc);
+    temp_v5 = __aeabi_idivmod(param_2 - *param_1,0xc);
     FUN_0030d358(param_1,temp_v5 * 0xc + temp_v3,param_3);
-    temp_v5 = aeabi_idivmod(param_2 - *param_1,0xc);
+    temp_v5 = __aeabi_idivmod(param_2 - *param_1,0xc);
     FUN_00307940(param_2,param_1[1],temp_v5 * 0xc + temp_v3 + 0xc,param_1);
-    temp_v4 = FUN_00301ac0(param_1);
+    temp_v4 = vectorSize12A(param_1);
     temp_v7 = *param_1;
     for (temp_v5 = temp_v7; temp_v5 != param_1[1]; temp_v5 = temp_v5 + 0xc) {
     }

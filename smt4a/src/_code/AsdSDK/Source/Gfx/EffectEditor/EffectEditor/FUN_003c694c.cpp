@@ -15,7 +15,7 @@ int FUN_00514540(int);
 int FUN_005147a0(float *);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
-int aeabi_uidivmod(void);
+int __aeabi_uidivmod(void);
 
 /* stack frame of param_1: 28 slot(s), 112 byte(s) */
 typedef struct {
@@ -49,7 +49,7 @@ typedef struct {
     unsigned int sp148; /* 0x148: local_148 */
 } param_1_stack;
 
-extern float DAT_005c1100; /* 0x5c1100 */
+extern float g_polyDefaultColor; /* 0x5c1100 */
 extern float DAT_005c1104; /* 0x5c1104 */
 extern float DAT_005c1108; /* 0x5c1108 */
 extern float DAT_005c110c; /* 0x5c110c */
@@ -92,7 +92,7 @@ extern int FUN_001acf08(void);
 /* Supplied declaration required: FUN_00514500. */
 /* Supplied declaration required: FUN_00514540. */
 /* Supplied declaration required: FUN_005147a0. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 void FUN_003c694c(int param_1)
@@ -171,15 +171,15 @@ void FUN_003c694c(int param_1)
     temp_v51 = *(int *)(temp_v5 + 0x40);
     temp_v37 = *(int *)(temp_v5 + 0x38);
     FUN_00221ee0(&temp_v32);
-    DAT_006472fc = DAT_005c1100;
+    DAT_006472fc = g_polyDefaultColor;
     DAT_00647300 = DAT_005c1104;
     DAT_00647304 = DAT_005c1108;
     DAT_00647308 = DAT_005c110c;
     temp_v8 = *(float *)(temp_v5 + 0x7c);
-    temp_v30 = CONCAT44(DAT_005c1100 * temp_v8,DAT_005c1104 * temp_v8);
+    temp_v30 = CONCAT44(g_polyDefaultColor * temp_v8,DAT_005c1104 * temp_v8);
     temp_v28 = CONCAT44(DAT_005c1108 * temp_v8,DAT_005c110c * temp_v8);
     temp_v8 = *(float *)(temp_v5 + 0x7c) + *(float *)(temp_v5 + 0x80);
-    temp_v19 = DAT_005c1100 * temp_v8;
+    temp_v19 = g_polyDefaultColor * temp_v8;
     temp_v9 = DAT_005c110c * temp_v8;
     temp_v48 = -temp_v19;
     temp_v26 = CONCAT44(DAT_005c1104 * temp_v8,DAT_005c1108 * temp_v8);
@@ -575,7 +575,7 @@ void FUN_003c694c(int param_1)
             temp_v49[1] = -1;
             if (0 < temp_v51) {
               FUN_00514500(0);
-              aeabi_uidivmod();
+              __aeabi_uidivmod();
               temp_v49[1] = temp_v49[1] - temp_v4;
             }
           }

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00187180(int, int);
+int dataTableGet(int, int);
 
 extern int FUN_0014bef4(unsigned int);
-/* Supplied declaration required: FUN_00187180. */
-extern short FUN_00192748(void);
-extern int FUN_00192798(void);
+/* Supplied declaration required: dataTableGet. */
+extern short dataTableGetCount(void);
+extern int dataTableGetEntries(void);
 
 
 int FUN_003e8244(unsigned int param_1,int param_2)
@@ -22,11 +22,11 @@ int FUN_003e8244(unsigned int param_1,int param_2)
   int temp_v3;
   int temp_v4;
   
-  FUN_00187180(0x4d,0);
-  temp_v1 = FUN_00192798();
+  dataTableGet(0x4d,0);
+  temp_v1 = dataTableGetEntries();
   temp_v4 = 0;
-  FUN_00187180(0x4d,0);
-  temp_v0 = FUN_00192748();
+  dataTableGet(0x4d,0);
+  temp_v0 = dataTableGetCount();
   if (param_2 < temp_v0) {
     temp_v3 = 0;
     temp_v2 = 0;

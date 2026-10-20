@@ -2,12 +2,12 @@
 
 extern "C" {
 
-int FUN_002c415c(int);
+int asdMemFree(int);
 
 typedef int romwright_code(...);
-extern int DAT_0043de68; /* 0x43de68 */
+extern int g_cecProcess; /* 0x43de68 */
 
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_001aa030(void)
@@ -16,13 +16,13 @@ void FUN_001aa030(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_0043de68;
-  if (*(int **)(DAT_0043de68 + 4) != (int *)0x0) {
-    (**(romwright_code **)(**(int **)(DAT_0043de68 + 4) + 4))(*(int **)(DAT_0043de68 + 4));
+  temp_v0 = g_cecProcess;
+  if (*(int **)(g_cecProcess + 4) != (int *)0x0) {
+    (**(romwright_code **)(**(int **)(g_cecProcess + 4) + 4))(*(int **)(g_cecProcess + 4));
   }
   *(unsigned int *)(temp_v0 + 4) = 0;
-  FUN_002c415c(temp_v0);
-  DAT_0043de68 = 0;
+  asdMemFree(temp_v0);
+  g_cecProcess = 0;
   return;
 }
 

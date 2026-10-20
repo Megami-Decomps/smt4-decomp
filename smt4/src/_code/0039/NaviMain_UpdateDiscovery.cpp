@@ -33,8 +33,8 @@ extern unsigned char DAT_00404b70; /* 0x404b70 */
 extern unsigned char DAT_00404bb8; /* 0x404bb8 */
 extern unsigned char DAT_00404c00; /* 0x404c00 */
 extern int DAT_0044cdd8; /* 0x44cdd8 */
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
-extern int DAT_0049f91c; /* 0x49f91c */
+extern unsigned int g_titleScene; /* 0x44ea00 */
+extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 extern unsigned int DAT_0049f924; /* 0x49f924 */
 extern signed char DAT_0049f941; /* 0x49f941 */
@@ -48,9 +48,9 @@ extern signed char DAT_0049f941; /* 0x49f941 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_00231bb8. */
 /* Supplied declaration required: FUN_00231dec. */
-extern unsigned int FUN_00232658(void);
+extern unsigned int lmapSceneGetObj(void);
 extern int FUN_00288f78(int);
-extern int FUN_00292f28(unsigned int);
+extern int padIsButtonDown(unsigned int);
 extern int FUN_002b8694(void);
 /* Supplied declaration required: FUN_002bed3c. */
 extern int FUN_002c09d0(unsigned int);
@@ -120,7 +120,7 @@ void NaviMain_UpdateDiscovery(int param_1)
     rt_memcpy_w(temp_v24,&DAT_00404b70,0x48);
     rt_memcpy_w(temp_v25,&DAT_00404bb8,0x48);
     rt_memcpy_w(temp_v26,&DAT_00404c00,0x48);
-    puVar6 = (unsigned int *)FUN_00232658();
+    puVar6 = (unsigned int *)lmapSceneGetObj();
     temp_v16 = romwright_piece_4_4(puVar6[2],*puVar6);
     temp_v4 = NaviMain_GetPosY(param_1 + 0x162);
     NaviMain_GetCurrentMap(param_1 + 0x162);
@@ -298,16 +298,16 @@ LAB_0039f450:
   }
   temp_v4 = FUN_002c09d0(0x400);
   if (temp_v4 != 0) {
-    temp_v6 = FUN_00292f28(0x76);
+    temp_v6 = padIsButtonDown(0x76);
     temp_v4 = 0;
     if (temp_v6 != 0) {
       temp_v4 = *(int *)(param_1 + 4);
     }
     if ((temp_v6 != 0 && temp_v4 != 0) &&
        (FUN_00231bb8(param_1 + 0x164,temp_v22), (unsigned int)temp_v22[0] < 0xc39f8001)) {
-      FUN_002c39a4(DAT_0044ea00);
+      FUN_002c39a4(g_titleScene);
       FUN_002bed3c();
-      if ((DAT_0049f91c != 0x13) ||
+      if ((g_gameState != 0x13) ||
          ((DAT_0049f920 != 6 && (!(DAT_0049f920 == 7 || DAT_0049f920 == 8))))) {
         if (*(char *)(param_1 + 0xc) != '\0') {
           FUN_003996c8();
@@ -321,14 +321,14 @@ LAB_0039f450:
         FUN_00231dec(param_1);
         DAT_0044cdd8 = DAT_0044cdd8 + 1;
       }
-      FUN_002c198c(DAT_0044ea00);
-      FUN_002c18e4(DAT_0044ea00);
+      FUN_002c198c(g_titleScene);
+      FUN_002c18e4(g_titleScene);
       if ((*(char *)(param_1 + 0x9ec) != '\0') && (*(char *)(param_1 + 0x9ee) == '\0')) {
         FUN_0039bd04(param_1);
       }
       if ((((*(char *)(param_1 + 0xa85) != '\0') && (*(char *)(param_1 + 0xa84) == '\0')) ||
-          ((DAT_0049f91c == 0x13 && ((DAT_0049f920 == 6 || DAT_0049f920 == 7) || DAT_0049f920 == 8))
-          )) || (temp_v4 = FUN_00288f78(DAT_0049f91c), temp_v4 == 3)) {
+          ((g_gameState == 0x13 && ((DAT_0049f920 == 6 || DAT_0049f920 == 7) || DAT_0049f920 == 8))
+          )) || (temp_v4 = FUN_00288f78(g_gameState), temp_v4 == 3)) {
         FUN_0039ba2c(param_1);
         return;
       }

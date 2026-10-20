@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_001681cc(int);
+int sysPlaySe(int);
 int FUN_002c2160(int);
 
-extern unsigned char DAT_0058916c; /* 0x58916c */
+extern unsigned char g_titleMain; /* 0x58916c */
 
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_002c2160. */
 
 
@@ -21,10 +21,10 @@ void FUN_003ca7d8(void)
   int temp_v0;
   unsigned short temp_v1;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0058916c + 0x4));
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0058916c + 0x4)) + 0x40) = 0;
+  temp_v0 = (*(int *)((unsigned char *)&g_titleMain + 0x4));
+  *(unsigned int *)((*(int *)((unsigned char *)&g_titleMain + 0x4)) + 0x40) = 0;
   *(unsigned int *)(temp_v0 + 0x44) = 0;
-  FUN_001681cc(0xa1);
+  sysPlaySe(0xa1);
   temp_v1 = FUN_001643b4(9,0x27);
   *(unsigned short *)(temp_v0 + 0x50) = temp_v1;
   temp_v1 = FUN_001643b4(9,0x28);

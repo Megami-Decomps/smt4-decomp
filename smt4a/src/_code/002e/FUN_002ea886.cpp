@@ -1,25 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ea886` (_code @ 0x2ea886, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the virtual-call target is loaded into r2 where retail reuses the dead r5. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern int FUN_002eafbe(int);
+typedef struct Entry {
+    u8 unk00[0x24];
+    u8 kind;        /* 0x24 */
+    u8 unk25[0x17];
+    u16 flags;      /* 0x3c: low nibble is the entry type */
+} Entry;
 
+/* Polymorphic handler: Process is the fifth virtual slot. */
+class Handler {
+public:
+    virtual void Slot0();
+    virtual void Slot1();
+    virtual void Slot2();
+    virtual void Slot3();
+    virtual u32 Process(Entry *entry);
+};
 
-unsigned int FUN_002ea886(int param_1,int param_2)
+/* Owner object: the handler pointer lives at 0xf0. */
+typedef struct {
+    u8 unk00[0xf0];
+    Handler *handler;   /* 0xf0 */
+} Owner;
 
+int FUN_002eafbe(Entry *entry);
+
+/* Returns 4 for a type-1 entry rejected by FUN_002eafbe, otherwise lets the handler process it. */
+u32 FUN_002ea886(Owner *owner, Entry *entry)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if ((((*(unsigned short *)(param_2 + 0x3c) & 0xf) == 1) && (*(char *)(param_2 + 0x24) == '\x01')) &&
-     (temp_v0 = FUN_002eafbe(param_2), temp_v0 == 0)) {
-    return 4;
-  }
-  temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 0xf0) + 0x10))(*(int **)(param_1 + 0xf0),param_2);
-  return temp_v1;
+    if ((entry->flags & 0xf) == 1 && entry->kind == 1 && FUN_002eafbe(entry) == 0) {
+        return 4;
+    }
+    return owner->handler->Process(entry);
 }
 
 } /* extern "C" */

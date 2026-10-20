@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001884b0(...);
+int vcallSlot12IfValid(...);
 int FUN_0019059c(...);
 int FUN_001913e4(...);
 int FUN_00195fc8(...);
@@ -26,7 +26,7 @@ extern unsigned char DAT_0055bda8; /* 0x55bda8 */
 extern unsigned char DAT_0055bdc8; /* 0x55bdc8 */
 extern unsigned char DAT_0055c0fc; /* 0x55c0fc */
 
-/* Supplied declaration required: FUN_001884b0. */
+/* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: FUN_0019059c. */
 /* Supplied declaration required: FUN_001913e4. */
 /* Supplied declaration required: FUN_00195fc8. */
@@ -65,7 +65,7 @@ void FUN_003f2cb8(int param_1)
     if ((*(unsigned int *)(temp_v0 - 0x74) & 1) != 0) {
       FUN_00195fc8();
     }
-    FUN_001884b0(*(unsigned int *)(temp_v0 - 0x74) & 0xfffffffe);
+    vcallSlot12IfValid(*(unsigned int *)(temp_v0 - 0x74) & 0xfffffffe);
     *(unsigned int *)(temp_v0 - 0x74) = 0;
   }
   *puVar2 = (unsigned int)&DAT_0055bd6c;

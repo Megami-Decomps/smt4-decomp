@@ -32,7 +32,7 @@ typedef struct {
     unsigned short sp50; /* 0x50: local_50 */
 } param_1_stack;
 
-extern unsigned char DAT_006433d0; /* 0x6433d0 */
+extern unsigned char g_dspsndState; /* 0x6433d0 */
 
 extern int FUN_001afd94(void);
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_SetDspDelayEffect. */
@@ -73,11 +73,11 @@ void nn_snd_CTR_DspFxManager_Initialize(unsigned char *param_1)
     temp_v4 = 0;
     temp_v3 = 1;
     *(unsigned short *)(temp_v0 + temp_v1 * 0x14 + 2) = 0;
-    nn_snd_CTR_Dspsnd_SetDspDelayEffect(&DAT_006433d0,temp_v1,&temp_v3);
+    nn_snd_CTR_Dspsnd_SetDspDelayEffect(&g_dspsndState,temp_v1,&temp_v3);
     temp_v4 = 0;
     temp_v3 = 1;
     *(unsigned short *)(temp_v0 + temp_v1 * 0x34 + 0x2a) = 0;
-    nn_snd_CTR_Dspsnd_SetDspReverbEffect(&DAT_006433d0,temp_v1,&temp_v3);
+    nn_snd_CTR_Dspsnd_SetDspReverbEffect(&g_dspsndState,temp_v1,&temp_v3);
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 2);
   return;

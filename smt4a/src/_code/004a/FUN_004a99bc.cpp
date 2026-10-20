@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(unsigned char [64], unsigned char *, unsigned int);
 int FUN_00227af0(unsigned char [64]);
 int FUN_002a3274(int);
-int FUN_003d8bc4(int);
+int menuStateStartSelect(int);
 
 /* stack frame of param_3: 1 slot(s), 1 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ extern int DAT_0057a9c8; /* 0x57a9c8 */
 extern unsigned int FUN_00186f54(unsigned short);
 /* Supplied declaration required: FUN_00227af0. */
 /* Supplied declaration required: FUN_002a3274. */
-/* Supplied declaration required: FUN_003d8bc4. */
+/* Supplied declaration required: menuStateStartSelect. */
 
 
 void FUN_004a99bc(unsigned int param_1,short param_2,unsigned int param_3)
@@ -43,7 +43,7 @@ void FUN_004a99bc(unsigned int param_1,short param_2,unsigned int param_3)
   FUN_00100388(temp_v2,&LAB_004a9a34,temp_v1);
   FUN_002a3274((int)param_2);
   FUN_00227af0(temp_v2);
-  FUN_003d8bc4(0);
+  menuStateStartSelect(0);
   return;
 }
 

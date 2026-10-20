@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
+extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 
 extern unsigned int FUN_0026aa78(void);
 
@@ -20,7 +20,7 @@ int FUN_00212088(void)
   int temp_v4;
   int temp_v5;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4));
+  temp_v1 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
   temp_v5 = 0;
   temp_v2 = FUN_0026aa78();
   if (0 < (int)(temp_v2 - 1)) {

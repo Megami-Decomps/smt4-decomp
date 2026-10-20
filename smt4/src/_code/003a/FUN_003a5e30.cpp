@@ -14,8 +14,8 @@ int FUN_0028d9b0(void);
 int FUN_0029be5c(...);
 int FUN_002a03a0(...);
 int FUN_002a03d8(...);
-int FUN_002c222c(void);
-int FUN_002c4c2c(int);
+int asdOperatorNew(void);
+int asdTMTexTableLoadSprites(int);
 int FUN_002c58c8(int, int);
 int FUN_002c5d5c(...);
 int FUN_00343aac(int, int);
@@ -43,8 +43,8 @@ extern int FUN_00287468(unsigned int);
 /* Supplied declaration required: FUN_002a03a0. */
 /* Supplied declaration required: FUN_002a03d8. */
 extern short *FUN_002c0a2c(unsigned char, unsigned int);
-/* Supplied declaration required: FUN_002c222c. */
-/* Supplied declaration required: FUN_002c4c2c. */
+/* Supplied declaration required: asdOperatorNew. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c58c8. */
 /* Supplied declaration required: FUN_002c5d5c. */
 /* Supplied declaration required: FUN_00343aac. */
@@ -101,7 +101,7 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
   FUN_0023266c(temp_v1 - 0x9928,0x140,0,0x2b);
   FUN_0023266c(temp_v1 - 0x9914,0x140,0,0x2b);
   temp_v2 = 0x68;
-  FUN_002c222c();
+  asdOperatorNew();
   puVar4 = (unsigned int *)0x0;
   if (temp_v2 != 0) {
     puVar4 = (unsigned int *)FUN_00233228();
@@ -118,7 +118,7 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
     *(unsigned int *)(temp_v1 - 0x9ca0) = 0;
     FUN_0028d9b0();
     FUN_0028d6d0();
-    FUN_002c4c2c(0x2b);
+    asdTMTexTableLoadSprites(0x2b);
     FUN_002c58c8(0x2b,0);
     *(unsigned int *)(temp_v1 - 0x992c) = 0x83;
     puVar4 = puVar7;

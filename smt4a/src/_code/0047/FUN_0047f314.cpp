@@ -15,7 +15,7 @@ typedef struct {
 extern unsigned int DAT_00573cc0; /* 0x573cc0 */
 extern unsigned int DAT_00573cc4; /* 0x573cc4 */
 
-extern unsigned int *FUN_0014aa78(void);
+extern unsigned int *btlGetMainState(void);
 /* Supplied declaration required: FUN_0015f490. */
 /* Supplied declaration required: FUN_003f0e20. */
 
@@ -26,7 +26,7 @@ void FUN_0047f314(unsigned int param_1)
 /* irregular: 2 native warning(s); review required */
   unsigned int *puVar1;
   
-  puVar1 = (unsigned int *)FUN_0014aa78();
+  puVar1 = (unsigned int *)btlGetMainState();
   FUN_003f0e20(puVar1,param_1);
   if (((puVar1 != (unsigned int *)0x0) && ((puVar1[1] & DAT_00573cc4) != 0 || (*puVar1 & DAT_00573cc0) != 0)
       ) && (*(short *)((int)puVar1 + 0x166) != 0)) {

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-extern int FUN_004ee568(unsigned int);
+extern int btlUnitGet(unsigned int);
 
 
 unsigned int FUN_003ece6c(void)
@@ -15,7 +15,7 @@ unsigned int FUN_003ece6c(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_004ee568(DAT_0057113c);
+  temp_v0 = btlUnitGet(g_btlScriptUnit);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     if (*(char *)(temp_v0 + 4) == '\x06') {

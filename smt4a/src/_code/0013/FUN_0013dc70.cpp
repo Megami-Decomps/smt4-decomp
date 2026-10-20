@@ -7,8 +7,8 @@ extern "C" {
 int FUN_0014a960(int);
 
 /* Supplied declaration required: FUN_0014a960. */
-extern int FUN_00164a9c(void);
-extern int aeabi_idivmod(int);
+extern int jobGetWork(void);
+extern int __aeabi_idivmod(int);
 
 
 unsigned char FUN_0013dc70(void)
@@ -19,7 +19,7 @@ unsigned char FUN_0013dc70(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00164a9c();
+  temp_v0 = jobGetWork();
   if ((*(char *)(temp_v0 + 0x144e) != '\0') && (*(char *)(temp_v0 + 0x1450) != '\0')) {
     temp_v1 = *(int *)(temp_v0 + 0x1484) + 1;
     *(int *)(temp_v0 + 0x1484) = temp_v1;
@@ -27,7 +27,7 @@ unsigned char FUN_0013dc70(void)
       *(unsigned char *)(temp_v0 + 0x144e) = 0;
     }
     else {
-      temp_v1 = aeabi_idivmod(temp_v1 * 0xff);
+      temp_v1 = __aeabi_idivmod(temp_v1 * 0xff);
       temp_v2 = 0xff - temp_v1;
       if ((int)temp_v2 >= 0x100) {
         temp_v2 = 0xff;

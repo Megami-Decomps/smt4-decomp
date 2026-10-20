@@ -1,37 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003216ec` (_code @ 0x3216ec, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: argument setup order only: retail computes `slot->sub` (add r0) before loading the constant 1 into r1; built loads r1 first */
+/* Releases every in-use slot of the manager and clears its active flag. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001846d0(int, int);
+typedef struct Slot {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u8 sub[0x48];
+    /* 0x68 */ s32 inUse;
+    /* 0x6C */ u8 unk6C[0x20];
+} Slot; /* 0x8C */
 
-extern int DAT_005710dc; /* 0x5710dc */
+typedef struct SlotManager {
+    /* 0x000 */ Slot slots[5];
+    /* 0x2BC */ u8 unk2BC[0x39];
+    /* 0x2F5 */ u8 active;
+} SlotManager;
 
-/* Supplied declaration required: FUN_001846d0. */
+extern SlotManager *g_btlTalkBustUp;
 
+extern void FUN_001846d0(void *sub, s32 arg);
 
 void FUN_003216ec(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = DAT_005710dc;
-  if (DAT_005710dc != 0) {
-    temp_v2 = 0;
-    do {
-      temp_v1 = temp_v0 + temp_v2 * 0x8c;
-      if (*(int *)(temp_v1 + 0x68) != 0) {
-        FUN_001846d0(temp_v1 + 0x20,1);
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 5);
-    *(unsigned char *)(temp_v0 + 0x2f5) = 0;
-  }
-  return;
+    SlotManager *manager = g_btlTalkBustUp;
+    s32 i;
+
+    if (manager != NULL) {
+        for (i = 0; i < 5; i++) {
+            Slot *slot = &manager->slots[i];
+
+            if (slot->inUse != 0) {
+                FUN_001846d0(slot->sub, 1);
+            }
+        }
+        manager->active = 0;
+    }
 }
 
-} /* extern "C" */
+}

@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002c498c(int, int, int, int, int);
+int asdMemAlloc(int, int, int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned int *DAT_00447a10; /* 0x447a10 */
+extern unsigned int *g_mapEpl; /* 0x447a10 */
 
-/* Supplied declaration required: FUN_002c498c. */
+/* Supplied declaration required: asdMemAlloc. */
 
 
 void MapEpl_InitState(void)
@@ -25,8 +25,8 @@ void MapEpl_InitState(void)
   int temp_v1;
   
   puVar1 = (unsigned int *)0x100;
-  FUN_002c498c(0x100,0x100,0,0x188,1);
-  DAT_00447a10 = puVar1;
+  asdMemAlloc(0x100,0x100,0,0x188,1);
+  g_mapEpl = puVar1;
   *puVar1 = 0;
   puVar1[1] = 0;
   temp_v0 = 0;

@@ -16,13 +16,13 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } void_stack;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 extern int FUN_002a60b4(unsigned int, unsigned int);
 extern int FUN_002b8660(void);
 /* Supplied declaration required: FUN_002ba1e0. */
-extern int FUN_002c08f0(void);
+extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c1b64. */
 extern int FUN_002c1d5c(void);
 
@@ -38,7 +38,7 @@ void FUN_001dbc5c(void)
   float temp_v4;
   float temp_v5;
   
-  temp_v0 = FUN_002c08f0();
+  temp_v0 = jobGetWork();
   if (((*(int *)(temp_v0 + 0x78) != 0) &&
       ((*(float *)(temp_v0 + 0x28) != 0.0f || (*(int *)(temp_v0 + 0x80) != 0)))) &&
      ((temp_v1 = FUN_002c1d5c(), temp_v1 == 0 || (temp_v1 = FUN_002b8660(), temp_v1 == 0)))) {
@@ -54,7 +54,7 @@ void FUN_001dbc5c(void)
       temp_v1 = VectorFloatToUnsigned(temp_v3 * 255.0f,3);
       temp_v2 = VectorFloatToUnsigned(*(float *)(temp_v0 + 0x28) * 255.0f,3);
       temp_v5 = 255.0f;
-      FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(*(int *)(temp_v0 + 0xc) + 8));
+      FUN_002c1b64(g_titleScene,*(unsigned int *)(*(int *)(temp_v0 + 0xc) + 8));
       FUN_002ba1e0(temp_v2 + temp_v1 * 0x1010100);
     }
     temp_v1 = FUN_002a60b4(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
@@ -69,7 +69,7 @@ void FUN_001dbc5c(void)
       }
       temp_v1 = VectorFloatToUnsigned(temp_v3 * temp_v5,3);
       temp_v2 = VectorFloatToUnsigned(temp_v4 * temp_v5,3);
-      FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(*(int *)(temp_v0 + 0x80) + 8));
+      FUN_002c1b64(g_titleScene,*(unsigned int *)(*(int *)(temp_v0 + 0x80) + 8));
       FUN_002ba1e0(temp_v2 + temp_v1 * 0x1010100);
     }
   }

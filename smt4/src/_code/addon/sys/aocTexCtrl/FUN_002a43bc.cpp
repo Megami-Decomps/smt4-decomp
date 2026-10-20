@@ -7,8 +7,8 @@ extern "C" {
 int FUN_0014f16c(unsigned char *, unsigned char *);
 int FUN_0014f2c8(unsigned char *, unsigned char *);
 int FUN_0014f408(unsigned char *, unsigned char *);
-int FUN_002bf5c0(int, int, int, int, unsigned int, int);
-int FUN_002c415c(...);
+int asdMemoryAllocAligned(int, int, int, int, unsigned int, int);
+int asdMemFree(...);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -20,8 +20,8 @@ typedef struct {
 /* Supplied declaration required: FUN_0014f2c8. */
 /* Supplied declaration required: FUN_0014f408. */
 extern int FUN_0014f4f8(unsigned char *);
-/* Supplied declaration required: FUN_002bf5c0. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemoryAllocAligned. */
+/* Supplied declaration required: asdMemFree. */
 
 
 unsigned char * FUN_002a43bc(unsigned char *param_1,unsigned int param_2,unsigned int param_3)
@@ -39,20 +39,20 @@ unsigned char * FUN_002a43bc(unsigned char *param_1,unsigned int param_2,unsigne
     if ((param_2 & 1) != 0) {
       if ((param_2 & 2) != 0) {
         pbVar2 = (unsigned char *)0x10000;
-        FUN_002bf5c0(0x10000,0x100,0,temp_v0,param_3,0);
+        asdMemoryAllocAligned(0x10000,0x100,0,temp_v0,param_3,0);
       }
       else {
         pbVar2 = (unsigned char *)0x10000;
-        FUN_002bf5c0(0x10000,0x100,0,temp_v0,param_3,1);
+        asdMemoryAllocAligned(0x10000,0x100,0,temp_v0,param_3,1);
       }
     }
     else if ((param_2 & 2) != 0) {
       pbVar2 = (unsigned char *)0x100;
-      FUN_002bf5c0(0x100,0x100,0,temp_v0,param_3,0);
+      asdMemoryAllocAligned(0x100,0x100,0,temp_v0,param_3,0);
     }
     else {
       pbVar2 = (unsigned char *)0x100;
-      FUN_002bf5c0(0x100,0x100,0,temp_v0,param_3,1);
+      asdMemoryAllocAligned(0x100,0x100,0,temp_v0,param_3,1);
     }
     if (temp_v1 != 0x10) {
       if (temp_v1 != 0x20) {
@@ -67,7 +67,7 @@ unsigned char * FUN_002a43bc(unsigned char *param_1,unsigned int param_2,unsigne
     else {
       FUN_0014f16c(param_1,pbVar2);
     }
-    FUN_002c415c(param_1);
+    asdMemFree(param_1);
   }
   return pbVar2;
 }

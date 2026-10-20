@@ -19,7 +19,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_003a11ec; /* 0x3a11ec */
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00230aec. */
 /* Supplied declaration required: FUN_00230cc0. */
@@ -71,7 +71,7 @@ void FUN_003a0f88(int param_1)
   }
   FUN_00231bcc(param_1 + 0x394,0xc2,temp_v8,temp_v2,temp_v10,1);
   FUN_00231bcc(param_1 + 0x394,0xc3,temp_v8,temp_v2,temp_v10,1);
-  temp_v4 = DAT_0044ea00;
+  temp_v4 = g_titleScene;
   temp_v3 = FUN_002c5da8(6,1,0);
   piVar10 = (int *)(temp_v4 + 0x12ac);
   temp_v6 = *piVar10;
@@ -88,8 +88,8 @@ void FUN_003a0f88(int param_1)
   if (*(char *)(param_1 + 0x879) != '\0') {
     FUN_00231bcc(param_1 + 0x394,0xc5,temp_v8,temp_v2,temp_v5 + 7,1);
   }
-  temp_v5 = DAT_0044ea00;
-  piVar10 = (int *)(DAT_0044ea00 + 0x12ac);
+  temp_v5 = g_titleScene;
+  piVar10 = (int *)(g_titleScene + 0x12ac);
   temp_v4 = *piVar10;
   temp_v3 = piVar10[temp_v4 + 2];
   *piVar10 = temp_v4 - 1;

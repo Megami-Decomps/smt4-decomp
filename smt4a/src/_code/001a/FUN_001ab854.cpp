@@ -4,13 +4,13 @@
 
 extern "C" {
 
-extern unsigned char DAT_0057f698; /* 0x57f698 */
+extern unsigned char g_gameDataBlocks; /* 0x57f698 */
 
 
 int FUN_001ab854(int param_1)
 
 {
-  return (*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + param_1 * 300 + 0xf4;
+  return (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + param_1 * 300 + 0xf4;
 }
 
 } /* extern "C" */

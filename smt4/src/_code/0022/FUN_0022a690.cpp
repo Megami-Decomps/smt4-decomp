@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_00282924(unsigned int, int);
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
+extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
-extern unsigned int *FUN_0027e928(unsigned int);
+extern unsigned int *btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_00282924. */
-extern unsigned int FUN_002939f4(void);
+extern unsigned int btlGetMainState(void);
 
 
 void FUN_0022a690(int param_1)
@@ -24,9 +24,9 @@ void FUN_0022a690(int param_1)
   int temp_v2;
   
   temp_v2 = (int)in_s0;
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   FUN_00282924(temp_v0,(int)in_s0);
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   FUN_00282924(temp_v0,temp_v2);
   switch(param_1) {
   case 7:
@@ -34,7 +34,7 @@ void FUN_0022a690(int param_1)
     break;
   case 9:
     temp_v1 = temp_v2;
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     FUN_00282924(temp_v0,temp_v2);
     temp_v2 = temp_v1;
     break;
@@ -42,29 +42,29 @@ void FUN_0022a690(int param_1)
     break;
   case 0xb:
     temp_v1 = temp_v2;
-    temp_v0 = FUN_002939f4();
+    temp_v0 = btlGetMainState();
     FUN_00282924(temp_v0,temp_v2);
     temp_v2 = temp_v1;
   }
-  puVar2 = (unsigned int *)FUN_0027e928(DAT_0043427c);
+  puVar2 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
   if ((*puVar2 & 0x200) == 0) {
     if (param_1 != 8) {
       if (param_1 == 7) {
         temp_v1 = temp_v2;
-        temp_v0 = FUN_002939f4();
+        temp_v0 = btlGetMainState();
         FUN_00282924(temp_v0,temp_v2);
-        temp_v0 = FUN_002939f4();
+        temp_v0 = btlGetMainState();
         FUN_00282924(temp_v0,temp_v1);
       }
     }
     else {
       temp_v1 = temp_v2;
-      temp_v0 = FUN_002939f4();
+      temp_v0 = btlGetMainState();
       FUN_00282924(temp_v0,temp_v2);
       temp_v2 = temp_v1;
-      temp_v0 = FUN_002939f4();
+      temp_v0 = btlGetMainState();
       FUN_00282924(temp_v0,temp_v1);
-      temp_v0 = FUN_002939f4();
+      temp_v0 = btlGetMainState();
       FUN_00282924(temp_v0,temp_v2);
     }
   }

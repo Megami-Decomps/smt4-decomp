@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
+int asdMemFree(void);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 
 
 void FUN_003fe718(int param_1)
@@ -24,22 +24,22 @@ void FUN_003fe718(int param_1)
     *(unsigned int *)(param_1 + 0x25c) = 0;
   }
   if (*(int *)(param_1 + 0xc4) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0xc4) = 0;
   }
   if (*(int *)(param_1 + 0xe0) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0xe0) = 0;
   }
   if (*(int *)(param_1 + 0xb0) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0xb0) = 0;
   }
   if (*(int *)(param_1 + 0x94) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x94) = 0;
     if (*(int *)(param_1 + 0xb0) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(param_1 + 0xb0) = 0;
     }
   }
@@ -47,32 +47,32 @@ void FUN_003fe718(int param_1)
   do {
     temp_v0 = param_1 + temp_v1 * 0x30;
     if (*(int *)(temp_v0 + 0x34) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v0 + 0x34) = 0;
     }
     if (*(int *)(temp_v0 + 0x50) != 0) {
-      FUN_0019a5a0();
+      asdMemFree();
       *(unsigned int *)(temp_v0 + 0x50) = 0;
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 2);
   if (*(int *)(param_1 + 0x10) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x10) = 0;
   }
   if (*(int *)(param_1 + 0x264) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x264) = 0;
   }
   if (*(int *)(param_1 + 0x260) != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0x260) = 0;
   }
   temp_v1 = *(int *)(param_1 + 0x254);
   *(unsigned int *)(param_1 + 0x254) = 0;
   *(unsigned int *)(param_1 + 600) = 0;
   if (temp_v1 != 0) {
-    FUN_0019a5a0();
+    asdMemFree();
   }
   piVar2 = *(int **)(param_1 + 4);
   temp_v2 = ((unsigned int)piVar2 & 8) != 0;

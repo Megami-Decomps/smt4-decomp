@@ -13,7 +13,7 @@ typedef struct {
 
 extern unsigned char LAB_0020ec10; /* 0x20ec10 */
 
-extern unsigned int FUN_00296cc8(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
 
 
@@ -24,7 +24,7 @@ unsigned int FUN_0020ebe4(void)
   unsigned int temp_v0;
   unsigned char temp_v1 [40];
   
-  temp_v0 = FUN_00296cc8(0);
+  temp_v0 = scrGetArg(0);
   FUN_002be624(temp_v1,&LAB_0020ec10,temp_v0);
                     /* WARNING: Treating indirect jump as return */
   return 1;

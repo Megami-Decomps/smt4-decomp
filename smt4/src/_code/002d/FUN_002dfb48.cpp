@@ -19,8 +19,8 @@ typedef struct {
     unsigned int sp7C; /* 0x7c: local_7c */
 } param_1_stack;
 
-extern unsigned char DAT_00447e88; /* 0x447e88 */
-extern int DAT_00447600; /* 0x447600 */
+extern unsigned char g_lmapScene; /* 0x447e88 */
+extern int g_mapEnemy; /* 0x447600 */
 extern unsigned char DAT_0049fb1c; /* 0x49fb1c */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -64,7 +64,7 @@ unsigned int FUN_002dfb48(int param_1)
   float temp_v20;
   unsigned int uStack_64;
   
-  temp_v0 = DAT_00447600;
+  temp_v0 = g_mapEnemy;
   temp_v4 = 0;
   temp_v13 = 250.0f;
   temp_v14 = 560.0f;
@@ -73,10 +73,10 @@ unsigned int FUN_002dfb48(int param_1)
   temp_v11 = 0x44610000;
   temp_v10 = 0x3c8efa35420c0000;
   do {
-    temp_v11 = romwright_piece_4_4(*(unsigned int *)((*(int *)((unsigned char *)&(*(int *)((unsigned char *)&DAT_00447e88 - 0x994)) + 0x994)) + 0x20),(int)temp_v11);
-    temp_v8 = romwright_piece_4_4(*(unsigned int *)((*(int *)((unsigned char *)&(*(int *)((unsigned char *)&DAT_00447e88 - 0x994)) + 0x994)) + 0x24),*(unsigned int *)((*(int *)((unsigned char *)&(*(int *)((unsigned char *)&DAT_00447e88 - 0x994)) + 0x994)) + 0x1c));
+    temp_v11 = romwright_piece_4_4(*(unsigned int *)((*(int *)((unsigned char *)&(*(int *)((unsigned char *)&g_lmapScene - 0x994)) + 0x994)) + 0x20),(int)temp_v11);
+    temp_v8 = romwright_piece_4_4(*(unsigned int *)((*(int *)((unsigned char *)&(*(int *)((unsigned char *)&g_lmapScene - 0x994)) + 0x994)) + 0x24),*(unsigned int *)((*(int *)((unsigned char *)&(*(int *)((unsigned char *)&g_lmapScene - 0x994)) + 0x994)) + 0x1c));
     temp_v1 = *(unsigned int *)(temp_v0 + 0x3044);
-    temp_v7 = *(float *)((*(int *)((unsigned char *)&DAT_00447e88 - 0x994)) + 0x18);
+    temp_v7 = *(float *)((*(int *)((unsigned char *)&g_lmapScene - 0x994)) + 0x18);
     if ((*(short *)((unsigned char *)&DAT_0049fb1c + 0x44)) != 0) {
       if (0 < (int)temp_v1) {
         temp_v5 = (float)VectorSignedToFloat((int)(temp_v1 + 1) / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -133,9 +133,9 @@ unsigned int FUN_002dfb48(int param_1)
     temp_v9 = temp_v9 + temp_v6 * temp_v5;
     temp_v17 = (float)((unsigned long long)temp_v11 >> 0x20) + (float)temp_v10;
     *(int *)(temp_v0 + 0x3044) = *(int *)(temp_v0 + 0x3044) + 1;
-    temp_v19 = *(unsigned int *)((*(int *)((unsigned char *)&(*(int *)((unsigned char *)&DAT_00447e88 - 0x994)) + 0x994)) + 0x1c);
-    uStack_64 = *(unsigned int *)((*(int *)((unsigned char *)&(*(int *)((unsigned char *)&DAT_00447e88 - 0x994)) + 0x994)) + 0x24);
-    temp_v20 = *(float *)((*(int *)((unsigned char *)&(*(int *)((unsigned char *)&DAT_00447e88 - 0x994)) + 0x994)) + 0x20) + (float)temp_v10;
+    temp_v19 = *(unsigned int *)((*(int *)((unsigned char *)&(*(int *)((unsigned char *)&g_lmapScene - 0x994)) + 0x994)) + 0x1c);
+    uStack_64 = *(unsigned int *)((*(int *)((unsigned char *)&(*(int *)((unsigned char *)&g_lmapScene - 0x994)) + 0x994)) + 0x24);
+    temp_v20 = *(float *)((*(int *)((unsigned char *)&(*(int *)((unsigned char *)&g_lmapScene - 0x994)) + 0x994)) + 0x20) + (float)temp_v10;
     temp_v16 = temp_v7;
     temp_v18 = temp_v9;
     temp_v3 = FUN_0025b4b0((unsigned int *)&temp_v19,&temp_v16,0);

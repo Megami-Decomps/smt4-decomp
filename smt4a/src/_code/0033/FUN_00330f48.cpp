@@ -1,37 +1,27 @@
-#include "romwright_types.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
-int FUN_00324bc8(unsigned int, unsigned int, unsigned int);
-int FUN_003fd63c(int, int, int);
+void FUN_00324bc8(u32 a, u32 b, u32 c);
+void FUN_003fd63c(s32 a, s32 b, s32 c);
+s32 FUN_0018719c(u32 id);
+u32 scrGetArg(s32 index);
 
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern GameStateA g_gameState;
 
-extern int FUN_0018719c(unsigned int);
-extern unsigned int FUN_00236038(unsigned int);
-/* Supplied declaration required: FUN_00324bc8. */
-/* Supplied declaration required: FUN_003fd63c. */
-
-
-unsigned int FUN_00330f48(void)
-
+/* Script command: clears effect 0x11F9 when it is set, then runs FUN_00324bc8 on the first three arguments. */
+s32 FUN_00330f48(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = FUN_00236038(0);
-  temp_v1 = FUN_00236038(1);
-  temp_v2 = FUN_00236038(2);
-  temp_v3 = FUN_0018719c(0x11f9);
-  if (temp_v3 != 0) {
-    FUN_003fd63c(0x11f9,0,1);
-  }
-  FUN_00324bc8(temp_v0,temp_v1,temp_v2);
-  (*(unsigned char *)((unsigned char *)&DAT_005f15fc + 0x574)) = 0;
-  return 1;
+    u32 a = scrGetArg(0);
+    u32 b = scrGetArg(1);
+    u32 c = scrGetArg(2);
+
+    if (FUN_0018719c(0x11F9) != 0) {
+        FUN_003fd63c(0x11F9, 0, 1);
+    }
+    FUN_00324bc8(a, b, c);
+    g_gameState.unk574 = 0;
+    return 1;
 }
 
 } /* extern "C" */

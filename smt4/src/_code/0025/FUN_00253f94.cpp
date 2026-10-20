@@ -1,49 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00253f94` (_code @ 0x253f94, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only in the final base*level multiply (retail: base in r1, constant in r2) */
+/* Returns base * level / 100 (at least 1) for the unit, where base is the low 10 bits of its flags word. */
+#include "common.h"
 
 extern "C" {
 
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
+typedef struct Unit {
+    /* 0x00 */ u8 unk00[0x54];
+    /* 0x54 */ u32 base : 10;   /* low 10 bits of the packed word */
+    /*      */ u32 unk54Hi : 22;
+    /* 0x58 */ u8 unk58[6];
+    /* 0x5E */ u16 level;
+} Unit;
 
-
-unsigned long long FUN_00253f94(int param_1,unsigned int param_2)
-
+u32 FUN_00253f94(Unit *unit)
 {
-  unsigned long long temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = romwright_piece_4_4(param_1,param_2);
-  if (param_1 != 0) {
-    temp_v2 = *(unsigned int *)(param_1 + 0x54);
-    temp_v3 = (temp_v2 & 0x3ff) != 0;
-    if (temp_v3) {
-      temp_v1 = (unsigned int)*(unsigned short *)(param_1 + 0x5e);
+    u32 level;
+    s32 scaled;
+
+    if (unit == NULL) {
+        return 0;
     }
-    else {
-      temp_v1 = 0;
+    level = (unit->base != 0) ? unit->level : 0;
+    if (level == 0) {
+        return level;
     }
-    temp_v0 = romwright_piece_4_4(temp_v1,temp_v2);
-    if (temp_v3 && temp_v1 != 0) {
-      temp_v3 = temp_v1 == 100;
-      if (temp_v3) {
-        temp_v1 = temp_v2 & 0x3ff;
-      }
-      temp_v0 = romwright_piece_4_4(temp_v1,temp_v2);
-      if (!temp_v3) {
-        temp_v0 = (unsigned long long)((temp_v2 & 0x3ff) * temp_v1) * 0x28f5c29;
-        if ((int)(temp_v0 >> 32) <= 0) {
-          temp_v0 = romwright_piece_4_4(1,(int)temp_v0);
-        }
-      }
+    if (level == 100) {
+        return unit->base;
     }
-  }
-  return romwright_piece_4_4((int)temp_v0,(int)(temp_v0 >> 0x20));
+    scaled = (s32)(((u64)(unit->base * level) * 0x028F5C29) >> 32);
+    if (scaled <= 0) {
+        scaled = 1;
+    }
+    return scaled;
 }
 
-} /* extern "C" */
+}

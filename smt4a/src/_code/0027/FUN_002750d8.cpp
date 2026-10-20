@@ -23,7 +23,7 @@ typedef struct {
 } param_2_stack;
 
 extern int DAT_00581280; /* 0x581280 */
-extern int DAT_00581288; /* 0x581288 */
+extern int g_lmapScene; /* 0x581288 */
 extern float DAT_005f170c; /* 0x5f170c */
 extern float DAT_005f1710; /* 0x5f1710 */
 extern unsigned int DAT_005f1714; /* 0x5f1714 */
@@ -217,12 +217,12 @@ void FUN_002750d8(int param_1,int param_2)
         temp_v4 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(temp_v2 >> 0x16) & 3);
         temp_v4 = temp_v4 * (float)((unsigned long long)temp_v12 >> 0x20);
         FUN_001bc124();
-        DAT_005f1718 = *(float *)(DAT_00581288 + 0x1c) + temp_v4 * (float)temp_v12;
-        DAT_005f171c = *(float *)(DAT_00581288 + 0x1c) + temp_v10;
+        DAT_005f1718 = *(float *)(g_lmapScene + 0x1c) + temp_v4 * (float)temp_v12;
+        DAT_005f171c = *(float *)(g_lmapScene + 0x1c) + temp_v10;
         temp_v4 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(temp_v2 >> 0x16) & 3);
         temp_v4 = temp_v4 * (float)((unsigned long long)temp_v12 >> 0x20);
         FUN_001bbf0c();
-        DAT_005f1720 = *(float *)(DAT_00581288 + 0x1c) + temp_v4 * (float)temp_v12;
+        DAT_005f1720 = *(float *)(g_lmapScene + 0x1c) + temp_v4 * (float)temp_v12;
       }
     }
   }

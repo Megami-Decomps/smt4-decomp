@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00137ee0(...);
-int FUN_0016007c(void);
+int asdSequenceRequest(...);
+int asdOperatorNew(void);
 int FUN_001919a4(void);
 int FUN_0021c118(int, int);
 int FUN_002bf464(void);
@@ -44,18 +44,18 @@ extern unsigned int DAT_005f1a50; /* 0x5f1a50 */
 extern unsigned char DAT_005f1b70; /* 0x5f1b70 */
 extern int DAT_005f1b74; /* 0x5f1b74 */
 
-/* Supplied declaration required: FUN_00137ee0. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdSequenceRequest. */
+/* Supplied declaration required: asdOperatorNew. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_001919a4. */
 extern int FUN_002009a8(unsigned int);
 /* Supplied declaration required: FUN_0021c118. */
 /* Supplied declaration required: FUN_002bf464. */
-extern int FUN_002d1fdc(void);
+extern int lmapMainGetUnk74(void);
 /* Supplied declaration required: FUN_002e3328. */
 /* Supplied declaration required: FUN_00318d6c. */
 /* Supplied declaration required: FUN_0031a400. */
-extern int FUN_0032482c(void);
+extern int gameStateIsFlagSetAndLarge(void);
 /* Supplied declaration required: FUN_00324bc8. */
 /* Supplied declaration required: FUN_00342010. */
 /* Supplied declaration required: FUN_0035b304. */
@@ -124,7 +124,7 @@ unsigned int FUN_00236110(void)
       FUN_003b61ec();
     }
     puVar2 = (unsigned int *)0xe70;
-    FUN_0016007c();
+    asdOperatorNew();
     temp_v2 = 0;
     if (puVar2 != (unsigned int *)0x0) {
       *puVar2 = 0;
@@ -153,9 +153,9 @@ unsigned int FUN_00236110(void)
     break;
   case 3:
     temp_v2 = *(int *)(DAT_00588c30 + 0x1c);
-    if ((((temp_v2 == 0) || (FUN_0046b9c0(), temp_v2 == 0)) && (temp_v2 = FUN_002d1fdc(), temp_v2 != 0)) &&
+    if ((((temp_v2 == 0) || (FUN_0046b9c0(), temp_v2 == 0)) && (temp_v2 = lmapMainGetUnk74(), temp_v2 != 0)) &&
        (DAT_00588c3c == 0)) {
-      temp_v2 = FUN_0032482c();
+      temp_v2 = gameStateIsFlagSetAndLarge();
       if (temp_v2 != 0) {
         temp_v4 = 4;
         temp_v5 = DAT_005f1b74 - 200;
@@ -173,7 +173,7 @@ unsigned int FUN_00236110(void)
         piVar6 = (int *)0x0;
         temp_v3 = 6;
       }
-      FUN_00137ee0(temp_v3,piVar6,temp_v4);
+      asdSequenceRequest(temp_v3,piVar6,temp_v4);
     }
     if (DAT_005f19f1 != '\0') {
       DAT_005f19f1 = '\0';
@@ -181,7 +181,7 @@ unsigned int FUN_00236110(void)
       DAT_005f1a00 = 1;
       FUN_00324bc8(DAT_005f19f4,DAT_005f19f8,DAT_005f19fc);
       DAT_005f1a50 = 2;
-      FUN_00137ee0(6,0);
+      asdSequenceRequest(6,0);
     }
     *(unsigned char *)(temp_v0 + 0x19) = 4;
     *(unsigned char *)(temp_v0 + 0x18) = 1;

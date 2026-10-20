@@ -1,35 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003eac84` (_code @ 0x3eac84, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct Primary Primary;
+typedef struct PrimaryVtbl {
+    /* 0x00 */ void *unk00[4];
+    /* 0x10 */ void (*onMissingFile)(Primary *self, u32 id);
+} PrimaryVtbl;
 
-extern int nw_snd_internal_SoundArchiveLoader_GetFileAddressFromSoundArchive(int, unsigned int);
+typedef struct FileSource FileSource;
+typedef struct FileSourceVtbl {
+    /* 0x00 */ void *unk00[2];
+    /* 0x08 */ int (*getFile)(FileSource *self, u32 id);
+} FileSourceVtbl;
+struct FileSource {
+    /* 0x00 */ FileSourceVtbl *vtbl;
+};
 
+/* The SoundArchiveLoader part, a secondary base of Primary at +0xC. */
+typedef struct Loader {
+    /* 0x000 */ u8 unk000[0x210];
+    /* 0x210 */ FileSource *source;
+} Loader;
 
-void FUN_003eac84(int param_1,unsigned int param_2)
+struct Primary {
+    /* 0x00 */ PrimaryVtbl *vtbl;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ Loader loader;
+};
 
+int nw_snd_internal_SoundArchiveLoader_GetFileAddressFromSoundArchive(Loader *loader, u32 id);
+
+/* Looks the file up in the optional source, then in the sound archive; if neither has it, reports it through the owning object's virtual handler. */
+void FUN_003eac84(Loader *loader, u32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  
-  piVar1 = *(int **)(param_1 + 0x210);
-  if (((piVar1 == (int *)0x0) || (temp_v0 = (**(romwright_code **)(*piVar1 + 8))(piVar1,param_2), temp_v0 == 0))
-     && (temp_v0 = nw_snd_internal_SoundArchiveLoader_GetFileAddressFromSoundArchive(param_1,param_2),
-        temp_v0 == 0)) {
-                    /* WARNING: Could not recover jumptable at 0x003eace0. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (**(romwright_code **)(*(int *)(param_1 - 0xc) + 0x10))((int *)(param_1 - 0xc),param_2);
-    return;
-  }
-  return;
+    Primary *primary = (Primary *)((u8 *)loader - 0xc);
+    FileSource *source = primary->loader.source;
+
+    if (source == NULL || source->vtbl->getFile(source, id) == 0) {
+        if (nw_snd_internal_SoundArchiveLoader_GetFileAddressFromSoundArchive(&primary->loader, id) == 0) {
+            primary->vtbl->onMissingFile(primary, id);
+        }
+    }
 }
 
 } /* extern "C" */

@@ -1,14 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00508f8c` (_code @ 0x508f8c, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+/* Object whose word at 8 is a version/limit value. */
+typedef struct {
+    u8 unk00[8];
+    u32 value;          /* 0x08 */
+} Versioned;
 
-unsigned char FUN_00508f8c(int *param_1)
-
+/* True when the object's value is at most 0x02010000. */
+u8 FUN_00508f8c(Versioned **object)
 {
-  return *(unsigned int *)(*param_1 + 8) < 0x2010001;
+    Versioned *versioned = *object;
+
+    return versioned->value <= 0x2010000;
 }
 
 } /* extern "C" */

@@ -21,8 +21,8 @@ typedef struct {
     unsigned int spB8; /* 0xb8: local_b8 */
 } void_stack;
 
-extern int DAT_0058103c; /* 0x58103c */
-extern int DAT_0059dbb4; /* 0x59dbb4 */
+extern int g_mapIf; /* 0x58103c */
+extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0014e314. */
@@ -58,10 +58,10 @@ unsigned int FUN_00315d34(void)
   unsigned long long temp_v10;
   unsigned char temp_v11 [144];
   
-  temp_v2 = DAT_0059dbb4;
+  temp_v2 = g_renderCtx;
   temp_v8 = 0;
-  if (*(int *)(DAT_0058103c + 0x3c) != 0) {
-    temp_v6 = *(unsigned int *)(DAT_0058103c + 0x40);
+  if (*(int *)(g_mapIf + 0x3c) != 0) {
+    temp_v6 = *(unsigned int *)(g_mapIf + 0x40);
     temp_v1 = FUN_001692ac(5,1);
     piVar7 = (int *)(temp_v2 + 0x1258);
     temp_v3 = *piVar7;
@@ -72,12 +72,12 @@ unsigned int FUN_00315d34(void)
       (**(romwright_code **)(temp_v2 + 0x1274))();
       *(unsigned char *)(temp_v2 + 0x1270) = 0;
     }
-    FUN_00157558(DAT_0059dbb4);
-    FUN_0016c4b8(DAT_0059dbb4,0);
+    FUN_00157558(g_renderCtx);
+    FUN_0016c4b8(g_renderCtx,0);
     FUN_0014e314(temp_v6);
     FUN_002371b0();
-    temp_v2 = DAT_0059dbb4;
-    piVar7 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v2 = g_renderCtx;
+    piVar7 = (int *)(g_renderCtx + 0x1258);
     temp_v1 = *piVar7;
     temp_v3 = piVar7[temp_v1 + 2];
     *piVar7 = temp_v1 - 1;
@@ -86,7 +86,7 @@ unsigned int FUN_00315d34(void)
       *(unsigned char *)(temp_v2 + 0x1270) = 0;
     }
   }
-  temp_v1 = DAT_0058103c;
+  temp_v1 = g_mapIf;
   temp_v10 = FUN_001834a4(8,0x10b);
   temp_v2 = (int)((unsigned long long)temp_v10 >> 0x20);
   temp_v8 = temp_v8 & 0xffffffff;
@@ -160,7 +160,7 @@ unsigned int FUN_00315d34(void)
   }
   temp_v2 = (int)*(short *)(temp_v1 + 0xccec);
   if ((temp_v2 == 0x18) || (FUN_00379664(temp_v2,(int)*(short *)(temp_v1 + 0xccee)), temp_v2 != 0)) {
-    temp_v2 = DAT_0059dbb4;
+    temp_v2 = g_renderCtx;
     temp_v3 = FUN_001692ac(1,0);
     piVar7 = (int *)(temp_v2 + 0x1258);
     temp_v4 = *piVar7;
@@ -182,8 +182,8 @@ unsigned int FUN_00315d34(void)
     VectorSignedToFloat((int)*(short *)((int)temp_v10 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)((int)temp_v10 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(3,0xffffffff,temp_v11);
-    temp_v2 = DAT_0059dbb4;
-    piVar7 = (int *)(DAT_0059dbb4 + 0x1258);
+    temp_v2 = g_renderCtx;
+    piVar7 = (int *)(g_renderCtx + 0x1258);
     temp_v1 = *piVar7;
     temp_v3 = piVar7[temp_v1 + 2];
     *piVar7 = temp_v1 - 1;

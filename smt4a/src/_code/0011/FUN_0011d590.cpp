@@ -14,7 +14,7 @@ extern unsigned char DAT_0055a9c8; /* 0x55a9c8 */
 extern unsigned char DAT_0055ad6c; /* 0x55ad6c */
 
 extern int *FUN_002e4e86(int *, unsigned int *);
-extern unsigned int *FUN_002e6dac(void);
+extern unsigned int *rt_malloc(void);
 extern unsigned int FUN_00310f8c(unsigned int, int *);
 
 
@@ -42,7 +42,7 @@ void FUN_0011d590(unsigned int *param_1,unsigned int param_2,unsigned int param_
   temp_v3 = FUN_00310f8c(0,piVar5);
   piVar1 = (int *)FUN_002e4e86(&temp_v2,(unsigned int *)&temp_v3);
   temp_v0 = *piVar1;
-  puVar3 = (unsigned int *)FUN_002e6dac();
+  puVar3 = (unsigned int *)rt_malloc();
   *piVar5 = (int)puVar3;
   for (temp_v1 = temp_v2; temp_v1 != 0; temp_v1 = temp_v1 - 1) {
     if (puVar3 != (unsigned int *)0x0) {

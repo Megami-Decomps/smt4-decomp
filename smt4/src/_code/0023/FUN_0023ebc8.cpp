@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002b9024(void);
-int FUN_002c4938(unsigned char *, int);
+int memClear(unsigned char *, int);
 
 /* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_0023ebc8(unsigned int param_1,unsigned char *param_2,unsigned short *param_3)
@@ -26,7 +26,7 @@ void FUN_0023ebc8(unsigned int param_1,unsigned char *param_2,unsigned short *pa
   *(unsigned short *)(param_2 + 2) = *param_3;
   *(unsigned short *)(param_2 + 4) = 0xffff;
   *(unsigned short *)(param_2 + 6) = 0xffff;
-  FUN_002c4938(param_2 + 0xc,200);
+  memClear(param_2 + 0xc,200);
   *(int *)(param_2 + 0xc) = (int)(short)param_3[0x44];
   param_2[0xd4] = *(unsigned char *)((int)param_3 + 3) & 1;
   temp_v0 = *(char *)(param_3 + 0x4f);

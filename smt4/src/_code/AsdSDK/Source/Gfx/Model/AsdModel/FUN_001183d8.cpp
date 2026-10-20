@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern unsigned int DAT_0044ea00; /* 0x44ea00 */
+extern unsigned int g_titleScene; /* 0x44ea00 */
 extern signed char DAT_00464af0; /* 0x464af0 */
 extern unsigned int DAT_00464b08; /* 0x464b08 */
 extern unsigned int DAT_00464b1c; /* 0x464b1c */
@@ -88,7 +88,7 @@ void FUN_001183d8(void)
     }
     FUN_0013231c(DAT_00464bb8,DAT_00464b1c,2,0);
     nw_gfx_RenderContext_ResetState_2B7478(temp_v2);
-    FUN_002c3a14(DAT_0044ea00);
+    FUN_002c3a14(g_titleScene);
     DAT_00464b08 = 0;
   }
   return;

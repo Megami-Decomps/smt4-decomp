@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002ac0c4(void);
 int FUN_002ac0f8(void);
 
-extern unsigned int DAT_00432fc8; /* 0x432fc8 */
+extern unsigned int g_aocMain; /* 0x432fc8 */
 
 extern int FUN_002a6d08(unsigned int);
 /* Supplied declaration required: FUN_002ac0c4. */
@@ -28,7 +28,7 @@ unsigned int FUN_00289e54(int param_1,int param_2,int param_3)
   unsigned int temp_v5;
   unsigned char temp_v6;
   
-  if ((param_3 != 0) && (temp_v1 = FUN_002a6d08(DAT_00432fc8), temp_v1 == 0)) {
+  if ((param_3 != 0) && (temp_v1 = FUN_002a6d08(g_aocMain), temp_v1 == 0)) {
     return 0;
   }
   temp_v1 = 0;

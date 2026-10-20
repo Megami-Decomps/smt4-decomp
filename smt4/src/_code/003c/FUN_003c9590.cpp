@@ -40,9 +40,9 @@ typedef struct {
 extern int FUN_00229e84(void);
 extern int FUN_0029ea68(unsigned int);
 /* Supplied declaration required: FUN_002b9024. */
-extern int FUN_002c0c74(unsigned int);
-extern unsigned char *FUN_002c0cc4(void);
-extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
+extern int dataTableGetCount(unsigned int);
+extern unsigned char *dataTableGetEntries(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
 
 
 int FUN_003c9590(fn_003c9590_arg0 *param_1,int param_2)
@@ -133,9 +133,9 @@ int FUN_003c9590(fn_003c9590_arg0 *param_1,int param_2)
       FUN_002b9024();
       temp_v5 = (unsigned int)*(unsigned char *)(temp_v5 + 2);
     }
-    temp_v2 = FUN_002c0cec(5,1);
-    pbVar5 = (unsigned char *)FUN_002c0cc4();
-    temp_v3 = FUN_002c0c74(temp_v2);
+    temp_v2 = dataTableGet(5,1);
+    pbVar5 = (unsigned char *)dataTableGetEntries();
+    temp_v3 = dataTableGetCount(temp_v2);
     if (temp_v3 != 0) {
       pbVar8 = pbVar5 + 2;
       pbVar9 = pbVar5 + 1;

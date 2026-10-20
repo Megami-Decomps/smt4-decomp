@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00152f68(unsigned int, int);
-int FUN_00153f74(unsigned int);
+int asdGxCommandListEnd(unsigned int, int);
+int asdGxCommandListBegin(unsigned int);
 int FUN_00167eb0(...);
-int FUN_001869ec(unsigned int *);
+int asdGxCommandListStartRecord(unsigned int *);
 int FUN_00186a64(void);
 int FUN_0018c8c8(...);
 int FUN_0018cf00(...);
@@ -29,7 +29,7 @@ typedef struct {
     unsigned int sp140; /* 0x140: local_140 */
 } param_4_stack;
 
-extern unsigned int DAT_005b3c80; /* 0x5b3c80 */
+extern unsigned int g_effAsdLightHandle; /* 0x5b3c80 */
 extern unsigned int DAT_005b3c88; /* 0x5b3c88 */
 extern unsigned int DAT_005b3c90; /* 0x5b3c90 */
 extern unsigned int DAT_005b3c98; /* 0x5b3c98 */
@@ -42,10 +42,10 @@ extern unsigned int DAT_00636e08; /* 0x636e08 */
 extern unsigned int *DAT_00636e10; /* 0x636e10 */
 extern unsigned char DAT_00636e14; /* 0x636e14 */
 
-/* Supplied declaration required: FUN_00152f68. */
-/* Supplied declaration required: FUN_00153f74. */
+/* Supplied declaration required: asdGxCommandListEnd. */
+/* Supplied declaration required: asdGxCommandListBegin. */
 /* Supplied declaration required: FUN_00167eb0. */
-/* Supplied declaration required: FUN_001869ec. */
+/* Supplied declaration required: asdGxCommandListStartRecord. */
 /* Supplied declaration required: FUN_00186a64. */
 /* Supplied declaration required: FUN_0018c8c8. */
 /* Supplied declaration required: FUN_0018cf00. */
@@ -93,19 +93,19 @@ void FUN_00176e84(int param_1,unsigned int param_2,int param_3,int param_4)
   if (((&DAT_00636e04)[temp_v0] != '\0') && ((&DAT_00636e05)[temp_v0] == '\0')) {
     FUN_00197eb0((&DAT_005b3c88)[temp_v2] + 0x10,(&DAT_005b3c90)[temp_v2]);
     piVar9 = (int *)(&DAT_005b3c88)[temp_v2];
-    temp_v3 = (&DAT_005b3c80)[temp_v2];
+    temp_v3 = (&g_effAsdLightHandle)[temp_v2];
     nw_gfx_SceneTraverser_Begin(*(unsigned int *)(temp_v3 + 8),*(unsigned int *)(temp_v3 + 4));
     (**(romwright_code **)(*piVar9 + 0x10))(piVar9,*(unsigned int *)(temp_v3 + 8));
     FUN_0018d01c(*(unsigned int *)(temp_v3 + 8));
-    FUN_00153f74((&DAT_00636e08)[temp_v2 * 6]);
+    asdGxCommandListBegin((&DAT_00636e08)[temp_v2 * 6]);
     FUN_00199d58(temp_v6,*(unsigned int *)(*(int *)(param_1 + 0x14) + 0xc),
                  *(unsigned int *)(*(int *)(param_1 + 0x14) + 0x10),temp_v4,
                  *(unsigned int *)(param_1 + 0x18));
-    FUN_00152f68((&DAT_00636e08)[temp_v2 * 6],0);
+    asdGxCommandListEnd((&DAT_00636e08)[temp_v2 * 6],0);
     FUN_0018e9d8((&DAT_005b3c88)[temp_v2],(&DAT_005b3c90)[temp_v2]);
     FUN_00197eb0((&DAT_005b3c88)[temp_v2] + 0x10,(&DAT_005b3c98)[temp_v2]);
     piVar9 = (int *)(&DAT_005b3c88)[temp_v2];
-    temp_v3 = (&DAT_005b3c80)[temp_v2];
+    temp_v3 = (&g_effAsdLightHandle)[temp_v2];
     nw_gfx_SceneTraverser_Begin(*(unsigned int *)(temp_v3 + 8),*(unsigned int *)(temp_v3 + 4));
     (**(romwright_code **)(*piVar9 + 0x10))(piVar9,*(unsigned int *)(temp_v3 + 8));
     FUN_0018d01c(*(unsigned int *)(temp_v3 + 8));
@@ -116,7 +116,7 @@ void FUN_00176e84(int param_1,unsigned int param_2,int param_3,int param_4)
       FUN_0018cf00(temp_v4,temp_v7,0);
     }
     else {
-      FUN_001869ec(DAT_00636e10);
+      asdGxCommandListStartRecord(DAT_00636e10);
     }
     puVar5 = DAT_005b40e0;
     if (temp_v8 != 0) {

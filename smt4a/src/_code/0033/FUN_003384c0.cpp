@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
-int FUN_001f4998(void);
+int memAlloc(int, int, int, int, int, int);
+int asdMdlManagerDestroy(void);
 int FUN_002e6dd4(void);
 int FUN_003aa57c(unsigned int *, int, int);
 int FUN_003b8ecc(unsigned int *);
@@ -16,9 +16,9 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00167ab4. */
-extern unsigned int FUN_001f4948(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001f4998. */
+/* Supplied declaration required: memAlloc. */
+extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
+/* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: FUN_002e6dd4. */
 /* Supplied declaration required: FUN_003aa57c. */
 /* Supplied declaration required: FUN_003b8ecc. */
@@ -44,7 +44,7 @@ unsigned int * FUN_003384c0(int param_1)
     temp_v2 = 100;
   }
   puVar1 = (unsigned int *)0x10000;
-  FUN_00167ab4(0x10000,0x100,0,0xa8,0x10,1);
+  memAlloc(0x10000,0x100,0,0xa8,0x10,1);
   FUN_002e6dd4();
   puVar1[1] = 0xffffffff;
   *puVar1 = temp_v2;
@@ -54,9 +54,9 @@ unsigned int * FUN_003384c0(int param_1)
   if (*(int *)(puVar1[0x27] + 8) != 0) {
     if (*(short *)(param_1 + 0xc) == 3) {
       if (puVar1[0x15] != 0) {
-        FUN_001f4998();
+        asdMdlManagerDestroy();
       }
-      temp_v2 = FUN_001f4948(*(unsigned int *)(param_1 + 0x54),0);
+      temp_v2 = asdMdlManagerClone(*(unsigned int *)(param_1 + 0x54),0);
       puVar1[0x15] = temp_v2;
       *(unsigned int *)(*(int *)(*(int *)(*(int *)(*(int *)(temp_v2 + 8) + 0x2c) + 0x220) + 8) + 0x28) =
            1;

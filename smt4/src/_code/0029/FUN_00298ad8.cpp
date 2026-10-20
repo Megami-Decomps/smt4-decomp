@@ -20,7 +20,7 @@ extern int DAT_0043da90; /* 0x43da90 */
 
 /* Supplied declaration required: FUN_002117a8. */
 extern int FUN_00292844(unsigned int);
-extern int FUN_00292f28(void);
+extern int padIsButtonDown(void);
 /* Supplied declaration required: FUN_0029e8b8. */
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: FUN_002c09d0. */
@@ -65,7 +65,7 @@ void FUN_00298ad8(void)
       temp_v5 = FUN_003106c0(temp_v7);
       if ((((temp_v5 != 0) && ((unsigned int)*(unsigned char *)(temp_v5 + 1) == (int)*(char *)(temp_v2 + 0x98))) &&
           ((*(short *)(temp_v5 + 0x56) == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 != 0)))) &&
-         (((((*(short *)(temp_v5 + 0x58) == 0 || (temp_v6 = FUN_00292f28(), temp_v6 != 0)) &&
+         (((((*(short *)(temp_v5 + 0x58) == 0 || (temp_v6 = padIsButtonDown(), temp_v6 != 0)) &&
             (temp_v3 = temp_v3 + 1, (unsigned char)(temp_v1 & ~temp_v0))) &&
            ((*(short *)(temp_v5 + 0x5a) == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 == 0)))) &&
           (((*(short *)(temp_v5 + 0x5c) == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 == 0)) &&

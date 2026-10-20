@@ -15,7 +15,7 @@ int FUN_0038813c(unsigned int, int, unsigned int *, int);
 extern unsigned char LAB_00273b38; /* 0x273b38 */
 extern unsigned char LAB_00273b50; /* 0x273b50 */
 extern unsigned char LAB_00273b6c; /* 0x273b6c */
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 
 extern int FUN_0019e0c0(unsigned int);
 extern int FUN_00289e54(unsigned int, unsigned short, unsigned int);
@@ -51,10 +51,10 @@ unsigned int FUN_0027398c(unsigned int *param_1)
     }
     FUN_002be624(temp_v4,&LAB_00273b38,temp_v0,temp_v0);
     FUN_002be624(temp_v5,&LAB_00273b50,temp_v0);
-    temp_v3 = FUN_00289e54(DAT_00433158,*(unsigned short *)(temp_v3 + 0x148),1);
+    temp_v3 = FUN_00289e54(g_aocSystem,*(unsigned short *)(temp_v3 + 0x148),1);
     if (temp_v3 != 0) {
-      FUN_0038813c(DAT_00433158,temp_v0,param_1 + 3,0);
-      FUN_003880c8(DAT_00433158,temp_v0,param_1 + 4,0);
+      FUN_0038813c(g_aocSystem,temp_v0,param_1 + 3,0);
+      FUN_003880c8(g_aocSystem,temp_v0,param_1 + 4,0);
       *param_1 = 1;
       return 0;
     }

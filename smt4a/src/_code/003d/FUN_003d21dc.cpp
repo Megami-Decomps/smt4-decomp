@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_005f15fc; /* 0x5f15fc */
+extern unsigned char g_gameState; /* 0x5f15fc */
 
 extern int FUN_00376f94(void);
 
@@ -15,7 +15,7 @@ unsigned char FUN_003d21dc(void)
   int temp_v0;
   
   temp_v0 = FUN_00376f94();
-  return (*(signed char *)((unsigned char *)&DAT_005f15fc + 0x27)) != '\0' && temp_v0 >= 101;
+  return (*(signed char *)((unsigned char *)&g_gameState + 0x27)) != '\0' && temp_v0 >= 101;
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00244fb0(unsigned int, int, unsigned int, unsigned int, int);
-int FUN_00296cc8(int);
+int scrGetArg(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,8 +14,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00244fb0. */
 extern int FUN_0024502c(unsigned int, unsigned int);
-extern unsigned int FUN_002939f4(void);
-/* Supplied declaration required: FUN_00296cc8. */
+extern unsigned int btlGetMainState(void);
+/* Supplied declaration required: scrGetArg. */
 extern int FUN_0033b390(unsigned int, unsigned int);
 
 
@@ -29,10 +29,10 @@ unsigned char FUN_0031850c(void)
   unsigned int temp_v3;
   int temp_v4;
   
-  temp_v1 = FUN_00296cc8(0);
-  temp_v2 = FUN_00296cc8(1);
-  temp_v0 = FUN_00296cc8(2);
-  temp_v3 = FUN_002939f4();
+  temp_v1 = scrGetArg(0);
+  temp_v2 = scrGetArg(1);
+  temp_v0 = scrGetArg(2);
+  temp_v3 = btlGetMainState();
   temp_v4 = FUN_0033b390(temp_v3,0);
   if (temp_v4 != 0) {
     temp_v4 = FUN_0024502c(temp_v3,0);

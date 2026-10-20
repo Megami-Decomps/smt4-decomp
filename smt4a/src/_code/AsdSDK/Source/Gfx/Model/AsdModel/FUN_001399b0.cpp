@@ -18,7 +18,7 @@ extern unsigned int DAT_005b3c10; /* 0x5b3c10 */
 extern int DAT_005b3c14; /* 0x5b3c14 */
 extern int DAT_005b3c20; /* 0x5b3c20 */
 extern int DAT_005b3c38; /* 0x5b3c38 */
-extern unsigned int DAT_005b3c80; /* 0x5b3c80 */
+extern unsigned int g_effAsdLightHandle; /* 0x5b3c80 */
 extern unsigned int DAT_005b3c84; /* 0x5b3c84 */
 extern unsigned int DAT_005b3c88; /* 0x5b3c88 */
 extern int DAT_005b3ca0; /* 0x5b3ca0 */
@@ -34,7 +34,7 @@ extern unsigned char DAT_00636ec8; /* 0x636ec8 */
 /* Supplied declaration required: FUN_001445d4. */
 /* Supplied declaration required: FUN_0014850c. */
 /* Supplied declaration required: FUN_0014aa88. */
-extern unsigned int FUN_00168188(void);
+extern unsigned int asdMemoryGetDefaultAllocator(void);
 /* Supplied declaration required: FUN_00176538. */
 /* Supplied declaration required: FUN_001767a4. */
 /* Supplied declaration required: FUN_0018e9d8. */
@@ -52,17 +52,17 @@ void FUN_001399b0(unsigned int param_1,unsigned int param_2)
   FUN_0014aa88(&DAT_00636ebc);
   FUN_0014aa88(&DAT_00636ec8);
   DAT_005b3c10 = 0;
-  temp_v0 = FUN_00168188();
+  temp_v0 = asdMemoryGetDefaultAllocator();
   FUN_0014850c(temp_v0,&DAT_00636e30);
-  DAT_005b3c80 = temp_v0;
-  temp_v0 = FUN_00168188();
+  g_effAsdLightHandle = temp_v0;
+  temp_v0 = asdMemoryGetDefaultAllocator();
   FUN_0014850c(temp_v0,&DAT_00636e6c);
   DAT_005b3c84 = temp_v0;
   FUN_0013d42c(param_1,param_2);
   temp_v3 = 0;
   do {
-    FUN_001767a4((&DAT_005b3c80)[temp_v3],(&DAT_005b3c88)[temp_v3]);
-    FUN_00176538((&DAT_005b3c80)[temp_v3]);
+    FUN_001767a4((&g_effAsdLightHandle)[temp_v3],(&DAT_005b3c88)[temp_v3]);
+    FUN_00176538((&g_effAsdLightHandle)[temp_v3]);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 2);
   FUN_001445d4();

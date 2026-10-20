@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0014e38c(...);
-int FUN_0015155c(...);
-int FUN_00163060(...);
+int asdProcessCreateSimple(...);
+int taskCreateDraw(...);
+int asdMemoryAllocTracked(...);
 int FUN_0019cac4(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -25,12 +25,12 @@ extern int FUN_0034dab0(...); /* 0x34dab0 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_0014e38c. */
-/* Supplied declaration required: FUN_0015155c. */
+/* Supplied declaration required: asdProcessCreateSimple. */
+/* Supplied declaration required: taskCreateDraw. */
 extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_00163060. */
+/* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_0019cac4. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 extern unsigned int FUN_00409fe8(unsigned int, unsigned int);
 
 
@@ -51,8 +51,8 @@ char * FUN_003affe8(unsigned int param_1)
   
   temp_v4 = romwright_piece_4_4(in_s1,in_s0);
   puVar1 = (unsigned int *)0x100;
-  FUN_00163060(0x100,0x100,0,0x48,1);
-  FUN_002e6354();
+  asdMemoryAllocTracked(0x100,0x100,0,0x48,1);
+  sysMemClear();
   temp_v5 = 0.0f;
   puVar1[2] = 0x3f800000;
   puVar1[3] = 0;
@@ -101,8 +101,8 @@ char * FUN_003affe8(unsigned int param_1)
   *(unsigned char *)((int)puVar1 + 0x16) = 1;
   *(unsigned char *)((int)puVar1 + 0x15) = 0;
   pcVar5 = "EVE_BtlTex";
-  FUN_0014e38c("EVE_BtlTex",4,0,0,FUN_00289d8c,FUN_0034dab0,puVar1);
-  FUN_0015155c("EVE_BtlTexDraw",0x71,0,0,FUN_00289f10,0,puVar1,pcVar5);
+  asdProcessCreateSimple("EVE_BtlTex",4,0,0,FUN_00289d8c,FUN_0034dab0,puVar1);
+  taskCreateDraw("EVE_BtlTexDraw",0x71,0,0,FUN_00289f10,0,puVar1,pcVar5);
   return pcVar5;
 }
 

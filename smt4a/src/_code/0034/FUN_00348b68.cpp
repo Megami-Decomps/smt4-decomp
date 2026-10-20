@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0013c1ec(unsigned int);
 int FUN_002bf09c(void);
-int FUN_003283ac(unsigned int);
+int scrSetResult(unsigned int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(unsigned int, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -16,10 +16,10 @@ int VectorUnsignedToFloat(unsigned int, int);
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_0013c1ec. */
 extern unsigned int FUN_00145868(void);
-extern unsigned int FUN_00236038(unsigned int);
+extern unsigned int scrGetArg(unsigned int);
 extern int FUN_002360dc(unsigned int);
 /* Supplied declaration required: FUN_002bf09c. */
-/* Supplied declaration required: FUN_003283ac. */
+/* Supplied declaration required: scrSetResult. */
 extern unsigned int FUN_003d2150(void);
 
 
@@ -35,7 +35,7 @@ void FUN_00348b68(void)
   unsigned int temp_v4;
   float temp_v5;
   
-  temp_v0 = FUN_00236038(1);
+  temp_v0 = scrGetArg(1);
   temp_v1 = FUN_00145868();
   temp_v3 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v5 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -46,7 +46,7 @@ void FUN_00348b68(void)
   if (-1 < temp_v2) {
     temp_v0 = FUN_003d2150();
     FUN_0013c1ec(temp_v1);
-    FUN_003283ac(temp_v0);
+    scrSetResult(temp_v0);
   }
   return;
 }

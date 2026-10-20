@@ -1,22 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020341c` (_code @ 0x20341c, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
+/* 0x34-byte item record; bit 1 of the halfword at 0x2e is the flag being set. */
+typedef struct {
+    u8 unk00[0x2e];
+    u16 flags;          /* 0x2e */
+    u8 unk30[4];
+} Item;
 
+typedef struct {
+    u8 unk00[0xc1f8];
+    Item items[0x501];  /* 0xc1f8 */
+} GameData;
 
-unsigned char FUN_0020341c(unsigned int param_1,short param_2)
+typedef struct {
+    u8 unk00[4];
+    GameData *data;     /* 0x04 */
+} GameGlobals;
 
+extern GameGlobals g_gameDataBlocks;
+
+/* Stores `value` into flag bit 1 of item `index`; returns whether the index was valid. */
+u8 FUN_0020341c(u32 index, s16 value)
 {
-  int temp_v0;
-  
-  if (param_1 < 0x501) {
-    temp_v0 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + param_1 * 0x34;
-    *(unsigned short *)(temp_v0 + 0xc226) = (*(unsigned short *)(temp_v0 + 0xc226) & 0xfffd) | (param_2 << 1);
-  }
-  return param_1 < 0x501;
+    if (index <= 0x500) {
+        GameData *data = g_gameDataBlocks.data;
+        Item *item = &data->items[index];
+
+        item->flags = (item->flags & ~2) | (value << 1);
+    }
+    return index <= 0x500;
 }
 
 } /* extern "C" */

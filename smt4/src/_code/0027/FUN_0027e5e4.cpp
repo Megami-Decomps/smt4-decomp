@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0027da30(int, int);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 
 typedef struct fn_0027e5e4_arg0 fn_0027e5e4_arg0;
 struct fn_0027e5e4_arg0 {
@@ -21,7 +21,7 @@ struct fn_0027e5e4_arg0 {
 };
 
 /* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 
 
 void FUN_0027e5e4(fn_0027e5e4_arg0 *param_1)
@@ -33,11 +33,11 @@ void FUN_0027e5e4(fn_0027e5e4_arg0 *param_1)
   unsigned int *puVar3;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_002939f4();
+  temp_v0 = btlGetMainState();
   FUN_0027da30(temp_v0,(int)param_1->field_0x62);
   if (temp_v0 != 0) {
     if ((*(unsigned short *)(temp_v0 + 0xfa) & 0x180) != 0) {
-      FUN_002939f4();
+      btlGetMainState();
       param_1->field_0x48 = 3;
       param_1->field_0x4c = 0;
       param_1->field_0xa0 = 0;
@@ -47,13 +47,13 @@ void FUN_0027e5e4(fn_0027e5e4_arg0 *param_1)
       param_1->field_0x4c = 0;
       param_1->field_0xa0 = 0;
       if (-1 < param_1->field_0x60) {
-        temp_v1 = FUN_002939f4();
+        temp_v1 = btlGetMainState();
         puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + param_1->field_0x60 * 0x288);
         *puVar3 = *puVar3 & 0xfff7ffff;
       }
     }
     if (-1 < param_1->field_0x60) {
-      temp_v1 = FUN_002939f4();
+      temp_v1 = btlGetMainState();
       puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + param_1->field_0x60 * 0x288);
       if (puVar3 != (unsigned int *)0x0) {
         if ((*(unsigned short *)(temp_v0 + 0xfa) & 1000) == 0) {

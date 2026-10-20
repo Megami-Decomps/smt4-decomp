@@ -34,7 +34,7 @@ extern unsigned char LAB_004a77a0; /* 0x4a77a0 */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: FUN_002e2afc. */
-extern int *FUN_003180ac(unsigned int);
+extern int *asdTMTexTableGetEntry(unsigned int);
 /* Supplied declaration required: FUN_0031a400. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_00342010. */
@@ -57,11 +57,11 @@ void FUN_004a76a8(int param_1)
     FUN_002bf464();
     FUN_00342010();
   }
-  piVar2 = (int *)FUN_003180ac(7);
+  piVar2 = (int *)asdTMTexTableGetEntry(7);
   if (*piVar2 == 0) {
     *(unsigned char *)(param_1 + 0x1d) = 1;
   }
-  piVar2 = (int *)FUN_003180ac(0x14);
+  piVar2 = (int *)asdTMTexTableGetEntry(0x14);
   if (*piVar2 == 0) {
     FUN_0014384c(0x14);
     temp_v0 = 0;

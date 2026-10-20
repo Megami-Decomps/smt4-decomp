@@ -19,9 +19,9 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001643b4. */
 extern int FUN_0018206c(unsigned int, int);
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern unsigned int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00275bc8. */
 extern int FUN_00341940(unsigned int);
@@ -57,10 +57,10 @@ void FUN_003f5904(int param_1)
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 2);
-  temp_v3 = FUN_00187180(0x44,0);
-  temp_v4 = FUN_00192798();
+  temp_v3 = dataTableGet(0x44,0);
+  temp_v4 = dataTableGetEntries();
   *(unsigned int *)(param_1 + 0x20) = temp_v4;
-  temp_v3 = FUN_00192748(temp_v3);
+  temp_v3 = dataTableGetCount(temp_v3);
   *(unsigned int *)(param_1 + 0x38) = temp_v3;
   temp_v1 = *(int *)(param_1 + 0x30);
   FUN_00275bc8(temp_v1,*(unsigned int *)(param_1 + 0x2c));

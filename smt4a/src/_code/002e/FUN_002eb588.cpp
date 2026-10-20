@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char g_flagBlock; /* 0x594958 */
 extern unsigned int DAT_00594b30; /* 0x594b30 */
 extern unsigned int DAT_00594b34; /* 0x594b34 */
 
@@ -30,7 +30,7 @@ void FUN_002eb588(unsigned int *param_1,unsigned int param_2,unsigned int param_
   
   temp_v0 = param_3;
   temp_v1 = param_4;
-  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0xa)) != '\0') {
+  if ((*(signed char *)((unsigned char *)&g_flagBlock + 0xa)) != '\0') {
     FUN_002ebadc(&temp_v0,0);
   }
   else {

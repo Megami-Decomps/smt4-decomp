@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00102b6c(unsigned char [96], unsigned char [52], int);
-int FUN_001884b0(void);
+int vcallSlot12IfValid(void);
 int FUN_0042b17c(int *, unsigned int, unsigned int, int *, int);
 int FUN_00430f98(void);
 int FUN_0043c2f4(unsigned char [52], int, unsigned char *);
@@ -28,7 +28,7 @@ extern unsigned char LAB_004275a8; /* 0x4275a8 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_00102b6c. */
-/* Supplied declaration required: FUN_001884b0. */
+/* Supplied declaration required: vcallSlot12IfValid. */
 extern int FUN_002e783c(void);
 /* Supplied declaration required: FUN_0042b17c. */
 /* Supplied declaration required: FUN_00430f98. */
@@ -90,7 +90,7 @@ int * FUN_00427360(unsigned int *param_1)
                                     (&iStack_bc,temp_v12,romwright_piece_4_4(4,&temp_v9),temp_v1,temp_v5);
           if ((int)piVar4 < 0) {
             if (temp_v12 != 0) {
-              FUN_001884b0();
+              vcallSlot12IfValid();
             }
             return piVar4;
           }
@@ -120,7 +120,7 @@ joined_r0x00427528:
       if (temp_v12 == 0) {
         return (int *)0x0;
       }
-      FUN_001884b0();
+      vcallSlot12IfValid();
       return piVar4;
     }
   }
@@ -129,7 +129,7 @@ joined_r0x00427598:
     piVar4 = (int *)0xd901388b;
   }
   if (temp_v12 != 0) {
-    FUN_001884b0();
+    vcallSlot12IfValid();
   }
   return piVar4;
 LAB_00427580:

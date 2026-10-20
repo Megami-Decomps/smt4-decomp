@@ -9,8 +9,8 @@ int FUN_0029c6b0(...);
 int FUN_0029e974(...);
 int FUN_002b7bca(...);
 int FUN_002b9024(...);
-int FUN_002c415c(...);
-int FUN_002c5300(...);
+int asdMemFree(...);
+int asdMemoryAlloc(...);
 
 typedef struct fn_0033b960_arg0 fn_0033b960_arg0;
 struct fn_0033b960_arg0 {
@@ -45,8 +45,8 @@ extern unsigned char LAB_0032b33c; /* 0x32b33c */
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_002b9024. */
 extern int FUN_002c09f4(unsigned int);
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c5300. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: asdMemoryAlloc. */
 
 
 unsigned short FUN_0033b960(fn_0033b960_arg0 *param_1)
@@ -74,7 +74,7 @@ unsigned short FUN_0033b960(fn_0033b960_arg0 *param_1)
   unsigned short temp_v15;
   
   temp_v0 = 0x100;
-  FUN_002c5300(0x100,0x100,0,0x3ea,1);
+  asdMemoryAlloc(0x100,0x100,0,0x3ea,1);
   temp_v1 = (unsigned int)param_1->field_0x46;
   temp_v6 = 0;
   FUN_002b9024();
@@ -141,7 +141,7 @@ LAB_0033bab0:
   }
   FUN_0029c6b0(param_1);
   FUN_002954bc(param_1);
-  FUN_002c415c(temp_v0);
+  asdMemFree(temp_v0);
   return temp_v4;
 }
 

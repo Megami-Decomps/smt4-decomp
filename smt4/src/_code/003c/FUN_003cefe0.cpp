@@ -10,7 +10,7 @@ int FUN_00246134(unsigned int, int, int, unsigned int);
 int FUN_00246e24(unsigned int, unsigned int, int, int, int);
 int FUN_00250d74(int);
 int FUN_00282924(int, int);
-int FUN_002c6650(void);
+int asdOperatorNewC(void);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -22,12 +22,12 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0022a5d8. */
 /* Supplied declaration required: FUN_0022a918. */
-extern int FUN_0023eae0(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00246134. */
 /* Supplied declaration required: FUN_00246e24. */
 /* Supplied declaration required: FUN_00250d74. */
 /* Supplied declaration required: FUN_00282924. */
-/* Supplied declaration required: FUN_002c6650. */
+/* Supplied declaration required: asdOperatorNewC. */
 
 
 void FUN_003cefe0(int *param_1,unsigned int param_2,unsigned int param_3)
@@ -51,7 +51,7 @@ void FUN_003cefe0(int *param_1,unsigned int param_2,unsigned int param_3)
   temp_v6 = 0;
   temp_v2 = 1;
   temp_v3 = 0x10;
-  FUN_002c6650();
+  asdOperatorNewC();
   temp_v7 = 0;
   do {
     puVar8 = (unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v6 * 0x288);
@@ -75,9 +75,9 @@ void FUN_003cefe0(int *param_1,unsigned int param_2,unsigned int param_3)
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 4);
   if (((!temp_v1 && !temp_v2) && (temp_v7 != 0)) &&
-     ((temp_v6 = FUN_0023eae0(99), temp_v6 < 0xf || ((*(unsigned int *)(*param_1 + 0x44a8) & 0x1000000) != 0))))
+     ((temp_v6 = randRange(99), temp_v6 < 0xf || ((*(unsigned int *)(*param_1 + 0x44a8) & 0x1000000) != 0))))
   {
-    temp_v6 = FUN_0023eae0((temp_v7 - 1U) & 0xffff);
+    temp_v6 = randRange((temp_v7 - 1U) & 0xffff);
     temp_v7 = *(int *)(*param_1 + 0x1e98) + *(int *)(temp_v3 + temp_v6 * 4) * 0x114;
     FUN_00246e24(param_3,param_2,temp_v7,0x200,1);
     temp_v6 = *param_1;

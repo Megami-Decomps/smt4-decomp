@@ -2,14 +2,14 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_0018719c(unsigned int);
 
 
@@ -28,14 +28,14 @@ void FUN_002f7bc4(int param_1)
     else {
       temp_v1 = 0xe;
     }
-    FUN_001681cc(temp_v1);
+    sysPlaySe(temp_v1);
   }
   if (param_1 == 0x14 || param_1 == 0x49) {
-    FUN_001681cc(0xf);
+    sysPlaySe(0xf);
     return;
   }
   if (param_1 == 0x15 || param_1 == 0x4a) {
-    FUN_001681cc(0x10);
+    sysPlaySe(0x10);
     return;
   }
   if (param_1 == 0x16 || param_1 == 0x4b) {
@@ -46,20 +46,20 @@ void FUN_002f7bc4(int param_1)
     else {
       temp_v1 = 0x11;
     }
-    FUN_001681cc(temp_v1);
+    sysPlaySe(temp_v1);
   }
   if (param_1 == 0x17 || param_1 == 0x4c) {
-    FUN_001681cc(0x12);
+    sysPlaySe(0x12);
     return;
   }
   if (param_1 == 0x18 || param_1 == 0x4d) {
-    FUN_001681cc(0x13);
+    sysPlaySe(0x13);
     return;
   }
   if (param_1 != 0x19 && param_1 != 0x4e) {
     return;
   }
-  FUN_001681cc(0x14);
+  sysPlaySe(0x14);
   return;
 }
 

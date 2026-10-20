@@ -8,8 +8,8 @@ int FUN_00100388(unsigned char *, unsigned char *);
 int FUN_00152f44(void);
 
 extern unsigned char DAT_00531ac8; /* 0x531ac8 */
-extern unsigned int *DAT_0058104c; /* 0x58104c */
-extern int DAT_005f15fc; /* 0x5f15fc */
+extern unsigned int *g_popupState; /* 0x58104c */
+extern int g_gameState; /* 0x5f15fc */
 extern unsigned char DAT_0060a198; /* 0x60a198 */
 
 /* Supplied declaration required: FUN_00100388. */
@@ -58,12 +58,12 @@ void FUN_00353b00(int param_1)
     }
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 0x8d);
-  if ((((param_1 == 0) && (temp_v1)) && (DAT_005f15fc != 0x24)) &&
+  if ((((param_1 == 0) && (temp_v1)) && (g_gameState != 0x24)) &&
      (temp_v4 = FUN_0018719c(0x408), temp_v4 != 0)) {
     FUN_00100388(&DAT_0060a198,&DAT_00531ac8);
-    puVar4 = DAT_0058104c;
-    puVar7 = DAT_0058104c + 1;
-    *DAT_0058104c = 0x18;
+    puVar4 = g_popupState;
+    puVar7 = g_popupState + 1;
+    *g_popupState = 0x18;
     *puVar7 = 0;
     puVar4[5] = (unsigned int)&DAT_0060a198;
   }

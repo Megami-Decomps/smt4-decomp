@@ -12,7 +12,7 @@ int FUN_003fe86c(...);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
 int FUN_0040aa6c(void);
-int FUN_0040aa90(...);
+int moriModelContentCopyBody(...);
 int FUN_0040aad4(...);
 int FUN_0040ab7c(...);
 int FUN_0040ac08(void);
@@ -67,7 +67,7 @@ extern unsigned int FUN_003857c8(int);
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: FUN_0040aa6c. */
-/* Supplied declaration required: FUN_0040aa90. */
+/* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
 /* Supplied declaration required: FUN_0040ac08. */
@@ -229,7 +229,7 @@ void FUN_002c553c(void)
       temp_v7 = FUN_0040ac08();
     }
     DAT_006105d8 = temp_v7;
-    FUN_0040aa90();
+    moriModelContentCopyBody();
     temp_v6 = *(unsigned int *)(DAT_006105d8 + 4);
     FUN_003fe86c(temp_v6,0,2);
     FUN_0040ace8(DAT_0056fcc0,temp_v6);
@@ -343,7 +343,7 @@ void FUN_002c553c(void)
             temp_v11 = temp_v9 * 4 + temp_v7 * 0x100;
             *(unsigned int *)(&DAT_0060fc08 + temp_v11 + 0x3cc) = temp_v6;
             FUN_0040ab7c();
-            FUN_0040aa90(*(unsigned int *)(&DAT_0060fc08 + temp_v11 + 0x3cc),
+            moriModelContentCopyBody(*(unsigned int *)(&DAT_0060fc08 + temp_v11 + 0x3cc),
                          *(unsigned int *)(temp_v3 + 0x60ffbc),0);
             temp_v6 = *(unsigned int *)(*(int *)(&DAT_0060fc08 + temp_v11 + 0x3cc) + 4);
             FUN_003fe86c(temp_v6,0,2);

@@ -21,7 +21,7 @@ extern unsigned char LAB_0010fa5d; /* 0x10fa5d */
 extern unsigned char LAB_0010fd90; /* 0x10fd90 */
 extern unsigned char LAB_001100a9; /* 0x1100a9 */
 
-extern int FUN_0011356c(int, unsigned int, int);
+extern int serviceDispatch(int, unsigned int, int);
 extern int FUN_002e760a(unsigned int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
 extern int FUN_002e9af4(void);
@@ -53,7 +53,7 @@ void FUN_0010fcfc(int param_1)
       temp_v1 = FUN_002ea3c0(temp_v0,&LAB_001100a9,0,&LAB_0010fd90);
     }
     FUN_002f7cba(param_1,param_1 + 0xd0,temp_v1);
-    temp_v0 = FUN_0011356c(param_1 + 0xd0,*(unsigned int *)(param_1 + 0x78),param_1 + 0xac);
+    temp_v0 = serviceDispatch(param_1 + 0xd0,*(unsigned int *)(param_1 + 0x78),param_1 + 0xac);
     if (temp_v0 != 0) {
       if (*(char *)(param_1 + 0xe0) != '\x01') {
         temp_v1 = FUN_002ea3c0(temp_v4,&LAB_0010fa5d,0,&LAB_0010fd90);

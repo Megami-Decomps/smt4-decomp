@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_00100380(unsigned int, int, int);
+int libc_sprintf(unsigned int, int, int);
 
-/* Supplied declaration required: FUN_00100380. */
+/* Supplied declaration required: libc_sprintf. */
 
 
 void FUN_003762a8(int param_1,unsigned int param_2)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_00100380(param_2,0x3762bc,param_1 + 0x21);
+  libc_sprintf(param_2,0x3762bc,param_1 + 0x21);
   return;
 }
 

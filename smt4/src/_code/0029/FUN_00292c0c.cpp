@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00294f64(void);
 int FUN_002958f8(int, int);
-int FUN_002c415c(unsigned int *);
-int FUN_002c43b4(unsigned int, int);
+int asdMemFree(unsigned int *);
+int jobStop(unsigned int, int);
 int FUN_002f6590(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -15,13 +15,13 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern signed char DAT_0044e140; /* 0x44e140 */
+extern signed char g_gameGlobals; /* 0x44e140 */
 extern unsigned int *DAT_0044e144; /* 0x44e144 */
 
 /* Supplied declaration required: FUN_00294f64. */
 /* Supplied declaration required: FUN_002958f8. */
-/* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: FUN_002c43b4. */
+/* Supplied declaration required: asdMemFree. */
+/* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_002f6590. */
 
 
@@ -32,8 +32,8 @@ void FUN_00292c0c(void)
   unsigned int *puVar1;
   
   puVar1 = DAT_0044e144;
-  DAT_0044e140 = DAT_0044e140 - '\x01';
-  if ('\0' < DAT_0044e140) {
+  g_gameGlobals = g_gameGlobals - '\x01';
+  if ('\0' < g_gameGlobals) {
     return;
   }
   if (*(short *)(DAT_0044e144 + 0x4bf) != 0) {
@@ -43,10 +43,10 @@ void FUN_00292c0c(void)
     FUN_00294f64();
     puVar1[0x79d] = 0;
   }
-  FUN_002c43b4(*puVar1,0);
-  FUN_002c415c(puVar1);
+  jobStop(*puVar1,0);
+  asdMemFree(puVar1);
   DAT_0044e144 = (unsigned int *)0x0;
-  DAT_0044e140 = 0;
+  g_gameGlobals = 0;
   FUN_002f6590();
   return;
 }

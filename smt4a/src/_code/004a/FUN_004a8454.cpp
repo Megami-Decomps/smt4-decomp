@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char aeabi_idivmod(int);
+extern unsigned char __aeabi_idivmod(int);
 
 
 unsigned char FUN_004a8454(int param_1)
@@ -18,7 +18,7 @@ unsigned char FUN_004a8454(int param_1)
     temp_v1 = 0;
   }
   else {
-    temp_v1 = aeabi_idivmod(temp_v0 * 100);
+    temp_v1 = __aeabi_idivmod(temp_v0 * 100);
     if (temp_v1 == 0) {
       return 0 < temp_v0;
     }

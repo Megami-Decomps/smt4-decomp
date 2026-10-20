@@ -9,8 +9,8 @@ int FUN_002e6dd4(int, int);
 int FUN_0030dce8(...);
 int FUN_0030dd02(...);
 int FUN_0030dd7e(int *, int, int);
-int FUN_0030de32(int *);
-int aeabi_uidivmod(unsigned int, int);
+int ringBufferRead(int *);
+int __aeabi_uidivmod(unsigned int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -26,8 +26,8 @@ extern int FUN_0030db5c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0030dce8. */
 /* Supplied declaration required: FUN_0030dd02. */
 /* Supplied declaration required: FUN_0030dd7e. */
-/* Supplied declaration required: FUN_0030de32. */
-/* Supplied declaration required: aeabi_uidivmod. */
+/* Supplied declaration required: ringBufferRead. */
+/* Supplied declaration required: __aeabi_uidivmod. */
 
 
 unsigned int FUN_00126d1c(int *param_1,int param_2)
@@ -89,7 +89,7 @@ LAB_00126f96:
     if (piVar13[0x1b] != 0) {
       temp_v12 = temp_v12 | 0x20;
     }
-    aeabi_uidivmod(temp_v12,0x1f);
+    __aeabi_uidivmod(temp_v12,0x1f);
     piVar13[1] = 0x71;
     FUN_0030dce8(piVar13,(0x1f - temp_v7) + temp_v12);
     if (piVar13[0x1b] != 0) {
@@ -204,7 +204,7 @@ LAB_00126fa2:
             FUN_0030dd02(temp_v1,piVar13[2] + temp_v12,temp_v2 - temp_v12);
             param_1[0xc] = temp_v1;
           }
-          FUN_0030de32(param_1);
+          ringBufferRead(param_1);
           temp_v2 = piVar13[5];
           temp_v12 = temp_v2;
           if (temp_v2 == piVar13[3]) break;
@@ -241,7 +241,7 @@ LAB_00127042:
             FUN_0030dd02(temp_v1,piVar13[2] + temp_v12,temp_v2 - temp_v12);
             param_1[0xc] = temp_v1;
           }
-          FUN_0030de32(param_1);
+          ringBufferRead(param_1);
           temp_v12 = piVar13[5];
           if (temp_v12 == piVar13[3]) {
             temp_v0 = 1;
@@ -284,7 +284,7 @@ LAB_001270d0:
             FUN_0030dd02(temp_v1,piVar13[2] + temp_v12,temp_v2 - temp_v12);
             param_1[0xc] = temp_v1;
           }
-          FUN_0030de32(param_1);
+          ringBufferRead(param_1);
           temp_v12 = piVar13[5];
           if (temp_v12 == piVar13[3]) {
             temp_v0 = 1;
@@ -318,7 +318,7 @@ LAB_0012715a:
     }
     if (*(int *)(piVar13[7] + 0x2c) != 0) {
       if ((unsigned int)piVar13[3] < piVar13[5] + 2U) {
-        FUN_0030de32(param_1);
+        ringBufferRead(param_1);
       }
       temp_v1 = piVar13[5];
       if ((unsigned int)piVar13[3] >= temp_v1 + 2U) {
@@ -376,7 +376,7 @@ LAB_0012715a:
   }
 LAB_001271b2:
   if (piVar13[5] != 0) {
-    FUN_0030de32(param_1);
+    ringBufferRead(param_1);
     if (param_1[4] == 0) {
       piVar13[10] = -1;
       return 0;
@@ -434,7 +434,7 @@ LAB_00127200:
       else {
         FUN_00126ba0(piVar13);
       }
-      FUN_0030de32(param_1);
+      ringBufferRead(param_1);
       if (param_1[4] == 0) {
         piVar13[10] = -1;
         return 0;
@@ -481,7 +481,7 @@ LAB_001272b2:
           piVar13[5] = temp_v5 + 1;
           *(char *)(piVar13[2] + temp_v5) = (char)((unsigned int)temp_v1 >> 0x18);
         }
-        FUN_0030de32(param_1);
+        ringBufferRead(param_1);
         if (0 < piVar13[6]) {
           piVar13[6] = -piVar13[6];
         }

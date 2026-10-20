@@ -32,7 +32,7 @@ extern int DAT_004dad80; /* 0x4dad80 */
 extern int FUN_00252394(unsigned int);
 /* Supplied declaration required: FUN_002abb24. */
 /* Supplied declaration required: FUN_002b3acc. */
-extern unsigned int FUN_002c300c(void);
+extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
 
 
@@ -78,7 +78,7 @@ void FUN_0031ce4c(int param_1)
   if (*(int *)(*(int *)(param_1 + 0x9c) + 8) != 0) {
     do {
       temp_v5 = *(unsigned int *)(temp_v14 + 8);
-      temp_v2 = FUN_002c300c();
+      temp_v2 = asdMemoryGetAllocatorA();
       temp_v7 = 1;
       temp_v11 = 0;
       temp_v12 = 0;

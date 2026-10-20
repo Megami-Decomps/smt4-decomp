@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0028dcb0(int);
+int scrSetResult(int);
 
-/* Supplied declaration required: FUN_0028dcb0. */
-extern int FUN_002939f4(void);
-extern int FUN_00296cc8(unsigned int);
-extern int aeabi_idivmod(int, int);
+/* Supplied declaration required: scrSetResult. */
+extern int btlGetMainState(void);
+extern int scrGetArg(unsigned int);
+extern int __aeabi_idivmod(int, int);
 
 
 unsigned int FUN_002f056c(void)
@@ -24,12 +24,12 @@ unsigned int FUN_002f056c(void)
   int temp_v4;
   int temp_v5;
   
-  temp_v0 = FUN_00296cc8(0);
+  temp_v0 = scrGetArg(0);
   temp_v4 = 0;
   temp_v5 = 0;
   temp_v3 = 0;
   do {
-    temp_v1 = FUN_002939f4();
+    temp_v1 = btlGetMainState();
     puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + temp_v3 * 0x288);
     temp_v2 = *puVar3;
     if (((temp_v2 & 0x10) != 0 && (temp_v2 & 1) != 0) && ((temp_v2 & 0x40) == 0)) {
@@ -38,8 +38,8 @@ unsigned int FUN_002f056c(void)
     }
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0x6d);
-  temp_v3 = aeabi_idivmod(temp_v4,temp_v5);
-  FUN_0028dcb0(temp_v0 <= temp_v3);
+  temp_v3 = __aeabi_idivmod(temp_v4,temp_v5);
+  scrSetResult(temp_v0 <= temp_v3);
   return 1;
 }
 

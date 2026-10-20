@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00167ab4(int, int, int, int, int, int);
+int memAlloc(int, int, int, int, int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_00212500(void);
 int FUN_002b3324(unsigned int, unsigned int, int);
@@ -22,7 +22,7 @@ extern unsigned int DAT_005c1fb8; /* 0x5c1fb8 */
 extern unsigned int DAT_005c1fbc; /* 0x5c1fbc */
 extern unsigned int DAT_005c1fc0; /* 0x5c1fc0 */
 
-/* Supplied declaration required: FUN_00167ab4. */
+/* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00212500. */
 /* Supplied declaration required: FUN_002b3324. */
@@ -50,7 +50,7 @@ unsigned short * FUN_00271d28(unsigned short *param_1)
     temp_v6 = *(unsigned int *)(*(int *)(param_1 + 6) + 0x14);
     temp_v7 = *(unsigned int *)(*(int *)(param_1 + 6) + 4) & 0xffff;
     puVar4 = (unsigned short *)0x10000;
-    FUN_00167ab4(0x10000,0x100,0,0x58,0x10,1);
+    memAlloc(0x10000,0x100,0,0x58,0x10,1);
     *puVar4 = 0x300;
     puVar4[1] = 0;
     FUN_002b3324(temp_v7,temp_v6,0);
@@ -73,7 +73,7 @@ unsigned short * FUN_00271d28(unsigned short *param_1)
   else {
     temp_v8 = *(unsigned int *)(*(int *)(param_1 + 4) + 0xc);
     puVar4 = (unsigned short *)0x10000;
-    FUN_00167ab4(0x10000,0x100,0,0x58,0x10,1);
+    memAlloc(0x10000,0x100,0,0x58,0x10,1);
     temp_v3 = 0x4c;
     FUN_00178b04(0x4c,&DAT_0054baf8,0x73);
     temp_v4 = 0;

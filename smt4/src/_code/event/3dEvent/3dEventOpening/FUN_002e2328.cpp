@@ -4,10 +4,10 @@
 
 extern "C" {
 
-extern unsigned int *DAT_0043df98; /* 0x43df98 */
+extern unsigned int *g_event3dOpening; /* 0x43df98 */
 
 extern int FUN_002893d8(void);
-extern int FUN_002bf244(unsigned int);
+extern int jobIsValid(unsigned int);
 
 
 unsigned int FUN_002e2328(void)
@@ -18,13 +18,13 @@ unsigned int FUN_002e2328(void)
   
   temp_v0 = FUN_002893d8();
   if (temp_v0 != 0) {
-    if (DAT_0043df98 == (unsigned int *)0x0) {
+    if (g_event3dOpening == (unsigned int *)0x0) {
       return 1;
     }
   }
-  else if ((DAT_0043df98 != (unsigned int *)0x0) &&
-          (temp_v0 = FUN_002bf244(*DAT_0043df98), puVar1 = DAT_0043df98, temp_v0 != 0)) {
-    DAT_0043df98[0x159] = 4;
+  else if ((g_event3dOpening != (unsigned int *)0x0) &&
+          (temp_v0 = jobIsValid(*g_event3dOpening), puVar1 = g_event3dOpening, temp_v0 != 0)) {
+    g_event3dOpening[0x159] = 4;
     puVar1[0x15a] = 0;
   }
   return 0;

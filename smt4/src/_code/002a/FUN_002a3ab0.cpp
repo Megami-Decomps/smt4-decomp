@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } param_2_stack;
 
-extern unsigned char DAT_00464110; /* 0x464110 */
+extern unsigned char g_handlerTable; /* 0x464110 */
 extern unsigned char DAT_004ea81c; /* 0x4ea81c */
 extern float DAT_004ea91c; /* 0x4ea91c */
 extern float DAT_004ea920; /* 0x4ea920 */
@@ -128,7 +128,7 @@ void FUN_002a3ab0(float *param_1,float *param_2)
   temp_v23 = DAT_004ea974;
   temp_v24 = DAT_004ea978;
   if (temp_v9) {
-    puVar9 = &DAT_00464110;
+    puVar9 = &g_handlerTable;
   }
   while (temp_v9) {
     DAT_004ea920 = (float)temp_v17;

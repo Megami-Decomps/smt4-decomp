@@ -10,7 +10,7 @@ int FUN_00288154(int, unsigned char [2]);
 int FUN_0029bde4(unsigned short *);
 int FUN_0029c6b0(unsigned short *);
 int FUN_002b9024(void);
-int FUN_002c4938(unsigned short *, int);
+int memClear(unsigned short *, int);
 
 /* stack frame of param_4: 24 slot(s), 51 byte(s) */
 typedef struct {
@@ -47,7 +47,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0029c6b0. */
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 
 
 void FUN_001a7dbc(unsigned short *param_1,unsigned char param_2,unsigned short param_3,int param_4)
@@ -82,7 +82,7 @@ void FUN_001a7dbc(unsigned short *param_1,unsigned char param_2,unsigned short p
   unsigned short temp_v25;
   unsigned int temp_v26;
   
-  FUN_002c4938(param_1,0x604);
+  memClear(param_1,0x604);
   param_1[0x23] = param_3;
   *(unsigned char *)(param_1 + 0x25) = param_2;
   if (param_4 != 3) {

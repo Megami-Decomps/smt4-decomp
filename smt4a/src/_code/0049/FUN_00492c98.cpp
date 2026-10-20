@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int efctSetSpeed(void);
 int FUN_0018291c(int *, int *, int *, int *, int, int);
 int FUN_00183bb0(void);
 int FUN_00185dd4(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int);
@@ -29,7 +29,7 @@ typedef struct {
 
 extern unsigned char LAB_00192824; /* 0x192824 */
 
-/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0018291c. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
@@ -127,12 +127,12 @@ void FUN_00492c98(unsigned int param_1,unsigned int param_2,unsigned int param_3
     uStack_40 = uStack_b0;
     uStack_3c = uStack_ac;
     FUN_0018291c(&temp_v9,&temp_v8,&temp_v7,&temp_v6,0,0);
-    FUN_001677c0();
+    efctSetSpeed();
   }
   temp_v2 = (unsigned int)((unsigned long long)param_6 >> 0x20);
   uStack_b4 = param_7;
   FUN_002e129c(param_1,param_2,param_3,param_4,param_5,(int)param_6);
-  FUN_001677c0();
+  efctSetSpeed();
   FUN_00183bb0();
   return;
 }

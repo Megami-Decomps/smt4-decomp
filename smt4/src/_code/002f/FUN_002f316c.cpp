@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0025c870(...);
 int FUN_002a3d58(...);
-int FUN_002c4938(...);
+int memClear(...);
 int rt_memcpy_w(...);
 
 typedef struct fn_002f316c_arg0 fn_002f316c_arg0;
@@ -26,7 +26,7 @@ struct fn_002f316c_arg0 {
 
 /* Supplied declaration required: FUN_0025c870. */
 /* Supplied declaration required: FUN_002a3d58. */
-/* Supplied declaration required: FUN_002c4938. */
+/* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -39,7 +39,7 @@ int FUN_002f316c(fn_002f316c_arg0 *param_1,int param_2)
   pfVar1 = param_1;
   FUN_0025c870();
   rt_memcpy_w();
-  FUN_002c4938(pfVar1,0x90);
+  memClear(pfVar1,0x90);
   pfVar1->field_0x84 = 1;
   *(unsigned char *)&pfVar1->field_0x88 = 8;
   *(unsigned char *)((int)&pfVar1->field_0x88 + 1) = 0;

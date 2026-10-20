@@ -9,7 +9,7 @@ int FUN_002759bc(void);
 int FUN_002b2368(int);
 int FUN_002c3f5c(void);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
-int FUN_002c415c(void);
+int asdMemFree(void);
 int FUN_002c526c(void);
 int software_interrupt(int);
 
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002b2368. */
 /* Supplied declaration required: FUN_002c3f5c. */
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c526c. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
@@ -60,7 +60,7 @@ void FUN_003c7f20(int param_1)
     *(unsigned int *)(param_1 + 0xb0) = 0;
   }
   if (*(int *)(param_1 + 0xac) != 0) {
-    FUN_002c415c();
+    asdMemFree();
     *(unsigned int *)(param_1 + 0xac) = 0;
   }
   *(unsigned int *)(param_1 + 0xc0) = 0xffffffff;

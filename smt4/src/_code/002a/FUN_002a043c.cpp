@@ -18,7 +18,7 @@ extern unsigned char LAB_00155650; /* 0x155650 */
 
 /* Supplied declaration required: FUN_00244d98. */
 /* Supplied declaration required: FUN_00244db4. */
-extern unsigned int FUN_002a31f4(int);
+extern unsigned int asdModelGetSlotArray0(int);
 /* Supplied declaration required: FUN_002cbaf8. */
 /* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
 
@@ -30,7 +30,7 @@ void FUN_002a043c(int param_1,int param_2)
   unsigned int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_002a31f4(param_2);
+  temp_v0 = asdModelGetSlotArray0(param_2);
   FUN_002cbaf8(*(unsigned int *)(param_1 + 8),param_2);
   if (param_2 == 0) {
     nw_gfx_SceneNode_AttachChild(temp_v0,*(unsigned int *)(param_1 + 0xc));

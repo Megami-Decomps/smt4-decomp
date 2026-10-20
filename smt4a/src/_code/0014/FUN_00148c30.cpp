@@ -6,9 +6,9 @@ extern "C" {
 
 extern char s_____2_00588fa4[11]; /* 0x588fa4 */
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern unsigned int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern unsigned int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 
 
 int FUN_00148c30(unsigned int param_1,unsigned int param_2,int param_3)
@@ -26,9 +26,9 @@ int FUN_00148c30(unsigned int param_1,unsigned int param_2,int param_3)
   unsigned char temp_v8;
   unsigned char temp_v9;
   
-  temp_v0 = FUN_00187180(0x18,0);
-  temp_v1 = FUN_00192798();
-  temp_v2 = FUN_00192748(temp_v0);
+  temp_v0 = dataTableGet(0x18,0);
+  temp_v1 = dataTableGetEntries();
+  temp_v2 = dataTableGetCount(temp_v0);
   if (param_1 == 0) {
     pcVar4 = s_____2_00588fa4;
   }

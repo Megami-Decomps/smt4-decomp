@@ -2,9 +2,9 @@
 
 extern "C" {
 
-int FUN_0028dcb0(unsigned int);
+int scrSetResult(unsigned int);
 
-/* Supplied declaration required: FUN_0028dcb0. */
+/* Supplied declaration required: scrSetResult. */
 extern unsigned int *FUN_002a8764(void);
 
 
@@ -15,7 +15,7 @@ unsigned int FUN_002e4158(void)
   unsigned int *puVar1;
   
   puVar1 = (unsigned int *)FUN_002a8764();
-  FUN_0028dcb0(*puVar1);
+  scrSetResult(*puVar1);
   return 1;
 }
 

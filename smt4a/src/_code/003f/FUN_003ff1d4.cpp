@@ -1,20 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ff1d4` (_code @ 0x3ff1d4, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Stores `value` (0/1) into bit 1 of the global flag byte. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char *FUN_002840e0(void);
+extern u8 *FUN_002840e0(void);
 
-
-void FUN_003ff1d4(unsigned int param_1,char param_2)
-
+void FUN_003ff1d4(u32 unused, s8 value)
 {
-  unsigned char *pbVar1;
-  
-  pbVar1 = (unsigned char *)FUN_002840e0();
-  *pbVar1 = (*pbVar1 & 0xfd) | (param_2 << 1);
-  return;
+    u8 *flags = FUN_002840e0();
+
+    *flags = (*flags & ~2) | (value << 1);
 }
 
-} /* extern "C" */
+}

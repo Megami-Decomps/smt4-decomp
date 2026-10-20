@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(void);
+int sysPlaySe(void);
 int FUN_0023ac54(int, unsigned short *);
 int FUN_003343f0(int);
 int FUN_00341f88(void);
@@ -35,7 +35,7 @@ typedef struct {
     unsigned short sp78; /* 0x78: local_78 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 extern int FUN_00224880(unsigned int);
 extern int FUN_00239234(unsigned short, unsigned short *);
 /* Supplied declaration required: FUN_0023ac54. */
@@ -121,7 +121,7 @@ void FUN_004a2f8c(int param_1)
       FUN_004a1958(param_1);
     }
     FUN_00341f88();
-    FUN_001681cc();
+    sysPlaySe();
     FUN_003343f0(0);
     if (*(short *)(param_1 + 0x864) < 1) {
       FUN_004a1d54(param_1);

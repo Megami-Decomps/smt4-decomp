@@ -1,32 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037e12c` (_code @ 0x37e12c, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Copies the packed 2D vector from the state block into the slot and, when `copy` is set, also latches it as the previous vector. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0026fd50(int, int, int, unsigned int);
+typedef struct Item {
+    /* 0x000 */ u8 unk000[0x12C];
+    /* 0x12C */ u16 count;
+} Item;
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+typedef struct State {
+    /* 0x0000 */ u8 unk0000[0x19D0];
+    /* 0x19D0 */ u8 slot[8];
+    /* 0x19D8 */ u32 prevX;
+    /* 0x19DC */ u32 prevY;
+    /* 0x19E0 */ u32 curX;
+    /* 0x19E4 */ u32 curY;
+} State;
 
-extern int FUN_00187168(int);
-/* Supplied declaration required: FUN_0026fd50. */
+typedef struct StateHolder {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ State *state;
+} StateHolder;
 
+extern StateHolder DAT_00588fd0;
 
-void FUN_0037e12c(int param_1,int param_2,unsigned int param_3)
+extern s32 FUN_00187168(Item *item);
+extern void FUN_0026fd50(void *slot, Item *item, u32 count, u32 arg);
 
+void FUN_0037e12c(Item *item, s32 latch, u32 arg)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
-  temp_v1 = FUN_00187168(param_1);
-  if ((temp_v1 != 0) &&
-     (FUN_0026fd50(temp_v0 + 0x19d0,param_1,*(unsigned short *)(param_1 + 300),param_3), param_2 != 0)) {
-    *(unsigned int *)(temp_v0 + 0x19d8) = *(unsigned int *)(temp_v0 + 0x19e0);
-    *(unsigned int *)(temp_v0 + 0x19dc) = *(unsigned int *)(temp_v0 + 0x19e4);
-  }
-  return;
+    State *state = DAT_00588fd0.state;
+
+    if (FUN_00187168(item) != 0) {
+        FUN_0026fd50(state->slot, item, item->count, arg);
+        if (latch != 0) {
+            state->prevX = state->curX;
+            state->prevY = state->curY;
+        }
+    }
 }
 
-} /* extern "C" */
+}

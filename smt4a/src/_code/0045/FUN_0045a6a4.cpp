@@ -10,7 +10,7 @@ int FUN_0016d1f4(unsigned int [4]);
 int FUN_00177cdc(...);
 int FUN_00192de4(...);
 int FUN_001b14dc(...);
-int FUN_002e6354(unsigned char *, int);
+int sysMemClear(unsigned char *, int);
 int FUN_002f5020(...);
 int FUN_0045b170(unsigned int *, unsigned int *, int, int);
 int FUN_00500cac(...);
@@ -45,7 +45,7 @@ extern int FUN_0045b510(...); /* 0x45b510 */
 extern unsigned char *FUN_001a04e0(unsigned char *, unsigned int);
 extern unsigned int FUN_001a1e28(void);
 /* Supplied declaration required: FUN_001b14dc. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002f5020. */
 extern int FUN_0042c4cc(unsigned char *);
 extern unsigned char *FUN_0042cbd8(unsigned int, unsigned int);
@@ -184,7 +184,7 @@ void FUN_0045a6a4(int *param_1,unsigned int *param_2,int *param_3)
         puVar12[2] = 0;
         puVar12[3] = 0;
         puVar12[4] = 0;
-        FUN_002e6354(puVar12 + 8,0x210);
+        sysMemClear(puVar12 + 8,0x210);
       }
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < (unsigned int)param_1[3]);

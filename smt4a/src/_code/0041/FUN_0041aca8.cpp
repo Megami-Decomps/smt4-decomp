@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016007c(void);
+int asdOperatorNew(void);
 int FUN_001aff14(float *, int);
 int FUN_0025cb1c(void);
 
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_001aff14. */
 /* Supplied declaration required: FUN_0025cb1c. */
 extern int FUN_0041bd84(void);
@@ -50,7 +50,7 @@ int FUN_0041aca8(int param_1)
   float temp_v16;
   
   temp_v0 = 0xb4;
-  FUN_0016007c();
+  asdOperatorNew();
   if (temp_v0 == 0) {
     temp_v0 = 0;
   }

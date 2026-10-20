@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int DAT_0044ea00; /* 0x44ea00 */
+extern int g_titleScene; /* 0x44ea00 */
 
 extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
 
@@ -18,7 +18,7 @@ void FUN_002571e8(unsigned int param_1)
   int temp_v2;
   int *piVar4;
   
-  temp_v0 = DAT_0044ea00;
+  temp_v0 = g_titleScene;
   switch(param_1) {
   case 0:
   case 1:

@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_001481e4(void);
-int FUN_0016007c(void);
+int asdOperatorNew(void);
 
-extern int DAT_0057027c; /* 0x57027c */
+extern int g_aocDisplay; /* 0x57027c */
 
 /* Supplied declaration required: FUN_001481e4. */
-/* Supplied declaration required: FUN_0016007c. */
+/* Supplied declaration required: asdOperatorNew. */
 
 
 void FUN_0013ba3c(void)
@@ -19,15 +19,15 @@ void FUN_0013ba3c(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_0057027c;
-  if (DAT_0057027c == 0) {
+  temp_v0 = g_aocDisplay;
+  if (g_aocDisplay == 0) {
     temp_v0 = 0x4528;
-    FUN_0016007c();
+    asdOperatorNew();
     if (temp_v0 != 0) {
       FUN_001481e4();
     }
   }
-  DAT_0057027c = temp_v0;
+  g_aocDisplay = temp_v0;
   return;
 }
 

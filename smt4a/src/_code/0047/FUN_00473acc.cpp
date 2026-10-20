@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00161a10(void);
-int FUN_00180008(int);
+int jyoucyuGetTableEntry(int);
 int FUN_001b576c(int *, int, unsigned int);
 int FUN_001b5acc(int *);
 int FUN_00428a58(int *, int, int, int);
@@ -18,7 +18,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00161a10. */
-/* Supplied declaration required: FUN_00180008. */
+/* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_001b576c. */
 /* Supplied declaration required: FUN_001b5acc. */
 extern int FUN_001d25ec(int *);
@@ -58,7 +58,7 @@ void FUN_00473acc(int *param_1,int param_2)
       return;
     }
   }
-  FUN_00180008(0);
+  jyoucyuGetTableEntry(0);
   *param_1 = temp_v2;
   param_1[1] = iStack_1c;
   return;

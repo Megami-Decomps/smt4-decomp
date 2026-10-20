@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_001767a4(...);
-int FUN_00280828(...);
-int FUN_0034102c(...);
+int asdModelSlotSetActive(...);
+int asdModelGetSlotHandle(...);
 int FUN_0047e610(...);
 int nw_gfx_SceneNode_IsCircularReference(...);
 
@@ -38,11 +38,11 @@ extern unsigned int DAT_005b3c88; /* 0x5b3c88 */
 
 /* Supplied declaration required: FUN_001767a4. */
 extern int FUN_001aa528(int, int);
-extern unsigned int FUN_0027242c(fn_003d502c_arg0 *);
-/* Supplied declaration required: FUN_00280828. */
-extern int FUN_0034101c(fn_003d502c_arg0 *);
-/* Supplied declaration required: FUN_0034102c. */
-extern int FUN_0036baec(fn_003d502c_arg0 *);
+extern unsigned int asdModelGetSlotArray3(fn_003d502c_arg0 *);
+/* Supplied declaration required: asdModelSlotSetActive. */
+extern int asdModelGetSlotArray2(fn_003d502c_arg0 *);
+/* Supplied declaration required: asdModelGetSlotHandle. */
+extern int asdModelGetSlotArray1(fn_003d502c_arg0 *);
 /* Supplied declaration required: FUN_0047e610. */
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
 
@@ -61,12 +61,12 @@ void FUN_003d502c(fn_003d502c_arg0 *param_1)
   unsigned int temp_v7;
   int temp_v8;
   
-  temp_v0 = FUN_0027242c(param_1);
-  FUN_0034102c(param_1);
-  temp_v1 = FUN_0034102c(param_1);
+  temp_v0 = asdModelGetSlotArray3(param_1);
+  asdModelGetSlotHandle(param_1);
+  temp_v1 = asdModelGetSlotHandle(param_1);
   temp_v2 = **(unsigned int **)(*(int *)(temp_v1 + 4) + 0x4c);
-  temp_v3 = FUN_0034102c(param_1);
-  temp_v4 = FUN_0036baec(param_1);
+  temp_v3 = asdModelGetSlotHandle(param_1);
+  temp_v4 = asdModelGetSlotArray1(param_1);
   temp_v8 = 0;
   do {
     temp_v6 = *(int *)((int)param_1 * 0x284 + temp_v8 * 4 + 0x635b64);
@@ -175,7 +175,7 @@ LAB_003d52ec:
 LAB_003d53ac:
     temp_v8 = (int)(short)((short)temp_v8 + 1);
   } while (temp_v8 < 8);
-  temp_v4 = FUN_0034101c(param_1);
+  temp_v4 = asdModelGetSlotArray2(param_1);
   temp_v8 = 0;
   do {
     temp_v6 = *(int *)((int)param_1 * 0x14 + temp_v8 * 4 + 0x636d24);
@@ -207,7 +207,7 @@ LAB_003d5490:
     temp_v8 = (int)(short)((short)temp_v8 + 1);
     if (temp_v8 >= 4) {
       FUN_001767a4(temp_v3,(&DAT_005b3c88)[(int)param_1]);
-      FUN_00280828(param_1);
+      asdModelSlotSetActive(param_1);
       FUN_0047e610(temp_v0,temp_v1,(int)param_1 * 0x40 + 0x636d60,temp_v2);
       return;
     }

@@ -1,38 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035ab40` (_code @ 0x35ab40, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002613f0(int);
+/* Slot table entry: four halfwords, the first is the owner id. */
+typedef struct {
+    u16 id;     /* 0x00 */
+    u16 unk02;  /* 0x02 */
+    u16 unk04;  /* 0x04 */
+    u16 unk06;  /* 0x06 */
+} Slot;
 
-/* Supplied declaration required: FUN_002613f0. */
+/* Object whose id sits at 0x62. */
+typedef struct {
+    u8 unk00[0x62];
+    u16 id;     /* 0x62 */
+} Owner;
 
+Slot *FUN_002613f0(int index);
 
-void FUN_0035ab40(int param_1)
-
+/* Clears the first of the 24 slots owned by `owner`. */
+void FUN_0035ab40(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  short *psVar2;
-  unsigned short *puVar3;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  temp_v0 = *(short *)(param_1 + 0x62);
-  do {
-    psVar2 = (short *)FUN_002613f0(temp_v1);
-    if (*psVar2 == temp_v0) {
-      puVar3 = (unsigned short *)FUN_002613f0(temp_v1);
-      *puVar3 = 0;
-      puVar3[1] = 0;
-      puVar3[2] = 0;
-      puVar3[3] = 0;
-      return;
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x18);
-  return;
+    int i = 0;
+    u16 id = owner->id;
+
+    do {
+        if (FUN_002613f0(i)->id == id) {
+            Slot *slot = FUN_002613f0(i);
+
+            slot->id = 0;
+            slot->unk02 = 0;
+            slot->unk04 = 0;
+            slot->unk06 = 0;
+            return;
+        }
+        i++;
+    } while (i < 24);
 }
 
 } /* extern "C" */

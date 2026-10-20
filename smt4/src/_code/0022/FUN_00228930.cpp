@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0027e928(void);
+extern int btlUnitGet(void);
 
 
 void FUN_00228930(unsigned int param_1,unsigned int param_2,unsigned int param_3)
@@ -14,7 +14,7 @@ void FUN_00228930(unsigned int param_1,unsigned int param_2,unsigned int param_3
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_0027e928();
+  temp_v0 = btlUnitGet();
   temp_v1 = 0;
   while ((temp_v2 = temp_v0 + temp_v1 * 8, -1 < *(int *)(temp_v2 + 0x5a8) || (*(int *)(temp_v2 + 0x5ac) != 0))
         ) {

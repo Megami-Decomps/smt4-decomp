@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
 
 /* Supplied declaration required: FUN_00227ab4. */
@@ -140,7 +140,7 @@ void FUN_003d3944(int *param_1,int param_2,unsigned int param_3,unsigned int par
   }
   FUN_003cc944(param_1,param_2,0);
   FUN_0027dd9c(DAT_00435d18);
-  *(unsigned int *)(DAT_004342c8 + 0x634) = (*(unsigned int *)(DAT_004342c8 + 0x634) & 0xfeffffff) | 0x4000;
+  *(unsigned int *)(g_btlMain + 0x634) = (*(unsigned int *)(g_btlMain + 0x634) & 0xfeffffff) | 0x4000;
   switch(*(unsigned short *)(*(int *)(param_2 + 0x28) + 0x14c)) {
   default:
     return;

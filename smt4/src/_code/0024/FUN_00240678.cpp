@@ -5,7 +5,7 @@
 extern "C" {
 
 extern unsigned int DAT_00434290; /* 0x434290 */
-extern int DAT_004342c8; /* 0x4342c8 */
+extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 
@@ -51,7 +51,7 @@ unsigned int FUN_00240678(unsigned int *param_1,int param_2)
       } while (temp_v3 < 0x36);
     }
     param_1[3] = param_1[3] | 4;
-    temp_v1 = FUN_00256940(DAT_004342c8,param_2,1);
+    temp_v1 = FUN_00256940(g_btlMain,param_2,1);
     if (temp_v1 != 0) {
       temp_v0 = *(short *)(param_2 + 0x1fc8);
       temp_v2 = 0xffffffff;
@@ -67,7 +67,7 @@ unsigned int FUN_00240678(unsigned int *param_1,int param_2)
       else if (temp_v0 == 3) {
         temp_v2 = 4;
       }
-      *(unsigned int *)(DAT_004342c8 + 0x760) = temp_v2;
+      *(unsigned int *)(g_btlMain + 0x760) = temp_v2;
     }
     *param_1 = 0x10;
     param_1[4] = 1;

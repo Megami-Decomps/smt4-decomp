@@ -1,45 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Battle_SetStagePosition` (_code @ 0x2f1128, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the two position words are stored with stm through r1 (retail: through r0, with mov r1, r4 ahead of it). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0027e760(int);
-int FUN_003c7c84(int, int);
-int FUN_003c7f20(int, int);
+typedef struct BattleUnit {
+    /* 0x000 */ u8 unk000[0x13C];
+    /* 0x13C */ u32 stageX;
+    /* 0x140 */ u32 stageY;
+} BattleUnit;
 
-extern int DAT_004398d4; /* 0x4398d4 */
+typedef struct BattleManager {
+    /* 0x00 */ u8 unk00[0x80];
+    /* 0x80 */ int phase;
+} BattleManager;
 
-/* Supplied declaration required: FUN_0027e760. */
-extern int FUN_002893d8(void);
-extern int FUN_002939f4(void);
-extern unsigned int FUN_00296cc8(unsigned int);
-/* Supplied declaration required: FUN_003c7c84. */
-/* Supplied declaration required: FUN_003c7f20. */
+extern BattleManager *DAT_004398d4;
 
+int FUN_0027e760(BattleManager *battle);
+BattleUnit *btlGetMainState(void);
+int FUN_002893d8(void);
+u32 scrGetArg(int index);
+int FUN_003c7c84(BattleManager *battle, BattleUnit *unit);
+int FUN_003c7f20(BattleManager *battle, BattleUnit *unit);
 
-unsigned char scrComm_Battle_SetStagePosition(void)
-
+/* Script command: moves a battle unit to the stage position given by script arguments 0 and 1 (returns whether phase 4 is active while one is busy). */
+bool scrComm_Battle_SetStagePosition(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = FUN_002939f4();
-  temp_v1 = FUN_00296cc8(0);
-  temp_v2 = FUN_00296cc8(1);
-  temp_v3 = FUN_002893d8();
-  if (temp_v3 == 0) {
-    FUN_003c7f20(DAT_004398d4,temp_v0);
-    *(unsigned int *)(temp_v0 + 0x13c) = temp_v1;
-    *(unsigned int *)(temp_v0 + 0x140) = temp_v2;
-    FUN_003c7c84(DAT_004398d4,temp_v0);
+    BattleUnit *unit = btlGetMainState();
+    u32 x = scrGetArg(0);
+    u32 y = scrGetArg(1);
+
+    if (FUN_002893d8() != 0) {
+        return DAT_004398d4->phase == 4;
+    }
+    FUN_003c7f20(DAT_004398d4, unit);
+    unit->stageX = x;
+    unit->stageY = y;
+    FUN_003c7c84(DAT_004398d4, unit);
     FUN_0027e760(DAT_004398d4);
-    return 0;
-  }
-  return *(int *)(DAT_004398d4 + 0x80) == 4;
+    return false;
 }
 
 } /* extern "C" */

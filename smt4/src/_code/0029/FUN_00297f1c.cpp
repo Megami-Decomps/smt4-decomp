@@ -8,7 +8,7 @@ int FUN_0028cf30(...);
 int FUN_0028e9ec(int);
 int FUN_00292dd0(void);
 int FUN_00292f4c(void);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_00297b94(...);
 int FUN_00298140(...);
 int FUN_002992bc(int, int);
@@ -31,7 +31,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00292dd0. */
 /* Supplied declaration required: FUN_00292f4c. */
 extern int FUN_00293230(void);
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00297b94. */
 extern unsigned int FUN_00297ca4(int, unsigned int);
 /* Supplied declaration required: FUN_00298140. */
@@ -122,9 +122,9 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
     FUN_00298140(param_1,0x10,1);
     return;
   }
-  FUN_002939f4();
+  btlGetMainState();
   temp_v4 = FUN_00293230();
-  if ((temp_v4 == 0) && (temp_v4 = FUN_002939f4(), (*(unsigned int *)(temp_v4 + 0x44a0) & 0x200) == 0)) {
+  if ((temp_v4 == 0) && (temp_v4 = btlGetMainState(), (*(unsigned int *)(temp_v4 + 0x44a0) & 0x200) == 0)) {
     if (param_3 != -1) {
       if (param_3 == 0xb) {
         FUN_00298140(param_1,*(unsigned int *)(param_1 + 0x304c),1);
@@ -151,7 +151,7 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
             }
             temp_v4 = FUN_002b898c();
             if (temp_v4 == 0x3d) {
-              FUN_002939f4();
+              btlGetMainState();
               temp_v4 = FUN_00293230();
               if (temp_v4 == 0) {
                 FUN_002a0cb0();
@@ -273,9 +273,9 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
       return;
     }
     if (temp_v4 != 0x11) {
-      FUN_002939f4();
+      btlGetMainState();
       temp_v4 = FUN_00293230();
-      if ((temp_v4 == 0) && (temp_v4 = FUN_002939f4(), (*(unsigned int *)(temp_v4 + 0x44a0) & 0x200) == 0)) {
+      if ((temp_v4 == 0) && (temp_v4 = btlGetMainState(), (*(unsigned int *)(temp_v4 + 0x44a0) & 0x200) == 0)) {
         FUN_002cfed0(param_1,param_2,1,param_4);
         return;
       }

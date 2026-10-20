@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6dd4(int, int);
 
-extern int FUN_00103510(void);
+extern int memAllocSized(void);
 /* Supplied declaration required: FUN_002e6dd4. */
 
 
@@ -17,7 +17,7 @@ int FUN_00103530(int param_1,int param_2)
   int temp_v0;
   
   if ((param_1 != 0) && (param_2 != 0)) {
-    temp_v0 = FUN_00103510();
+    temp_v0 = memAllocSized();
     if (temp_v0 != 0) {
       FUN_002e6dd4(temp_v0,param_2 * param_1);
     }

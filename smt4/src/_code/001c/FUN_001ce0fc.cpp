@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern unsigned char DAT_0044e140; /* 0x44e140 */
+extern unsigned char g_gameGlobals; /* 0x44e140 */
 
 /* Supplied declaration required: FUN_00215b5c. */
 /* Supplied declaration required: FUN_0026a978. */
@@ -45,13 +45,13 @@ void FUN_001ce0fc(unsigned int param_1)
   unsigned int temp_v7;
   unsigned int temp_v8;
   
-  temp_v3 = (*(int *)((unsigned char *)&DAT_0044e140 + 0x4));
+  temp_v3 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
   temp_v4 = 8;
-  psVar6 = (short *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1300);
+  psVar6 = (short *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1300);
   if (*psVar6 < 0) {
     temp_v4 = FUN_0029aafc();
   }
-  else if ((0 < *psVar6) && (*(char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e66) != '\x06')) {
+  else if ((0 < *psVar6) && (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e66) != '\x06')) {
     FUN_002b066c(*psVar6);
     temp_v4 = FUN_0029c8f4();
   }

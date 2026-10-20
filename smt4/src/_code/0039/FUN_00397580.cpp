@@ -15,7 +15,7 @@ int FUN_002992bc(int, int);
 int FUN_0029e11c(int);
 int FUN_0029efd8(int, int);
 int FUN_002bc01c(int);
-int FUN_002bd8e8(int, int, int);
+int timerStart(int, int, int);
 int FUN_002bf818(int);
 int FUN_003983dc(...);
 int FUN_00398fa8(void);
@@ -39,7 +39,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0029e11c. */
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: FUN_002bc01c. */
-/* Supplied declaration required: FUN_002bd8e8. */
+/* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bf818. */
 /* Supplied declaration required: FUN_003983dc. */
 /* Supplied declaration required: FUN_00398fa8. */
@@ -115,7 +115,7 @@ void FUN_00397580(int param_1)
       if (*(char *)(param_1 + 0x29) != '\0') {
         *(unsigned char *)(param_1 + 0x21) = 2;
         FUN_00296ee0(param_1,10);
-        FUN_002bd8e8(param_1 + 0x708,1,0);
+        timerStart(param_1 + 0x708,1,0);
         return;
       }
       temp_v7 = 0;

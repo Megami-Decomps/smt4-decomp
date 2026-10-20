@@ -22,7 +22,7 @@ extern unsigned char LAB_0045b50c; /* 0x45b50c */
 extern int FUN_00442c5c(unsigned short *);
 /* Supplied declaration required: FUN_0045b4d0. */
 /* Supplied declaration required: FUN_0050769c. */
-extern unsigned int aeabi_uidivmod(int, int);
+extern unsigned int __aeabi_uidivmod(int, int);
 
 
 void FUN_005078e4(int *param_1,unsigned int param_2,int *param_3,int param_4,int param_5,int *param_6)
@@ -104,7 +104,7 @@ void FUN_005078e4(int *param_1,unsigned int param_2,int *param_3,int param_4,int
   temp_v6 = 0;
   temp_v7 = temp_v1 + temp_v2 * 0x158;
   for (; temp_v1 != temp_v7; temp_v1 = temp_v1 + 0x158) {
-    temp_v2 = aeabi_uidivmod(param_6[9],param_6[8]);
+    temp_v2 = __aeabi_uidivmod(param_6[9],param_6[8]);
     temp_v5 = 0;
     if (temp_v2 != 0) {
       temp_v5 = (param_5 + 0xfU) & 0xfffffff0;

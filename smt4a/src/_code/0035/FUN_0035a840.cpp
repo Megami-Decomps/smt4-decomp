@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00137ea0(int);
 int FUN_001386e8(int);
 int FUN_001469a8(...);
-int FUN_0019a5a0(unsigned int);
+int asdMemFree(unsigned int);
 int FUN_001a0d08(void);
 int FUN_002684ac(int);
 int FUN_00275bc8(int, unsigned int);
@@ -22,7 +22,7 @@ int software_interrupt(int);
 /* Supplied declaration required: FUN_00137ea0. */
 /* Supplied declaration required: FUN_001386e8. */
 /* Supplied declaration required: FUN_001469a8. */
-/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001a0d08. */
 /* Supplied declaration required: FUN_002684ac. */
 /* Supplied declaration required: FUN_00275bc8. */
@@ -60,7 +60,7 @@ unsigned int FUN_0035a840(int param_1)
       FUN_002e3328(temp_v1);
     }
     *(unsigned int *)(param_1 + 0x7f8) = 0;
-    FUN_0019a5a0(*(unsigned int *)(param_1 + 0x804));
+    asdMemFree(*(unsigned int *)(param_1 + 0x804));
     *(unsigned int *)(param_1 + 0x804) = 0;
     FUN_001386e8(2);
     FUN_00137ea0(2);

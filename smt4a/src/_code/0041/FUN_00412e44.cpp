@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_001bc2ec(...);
-int FUN_002e6354(...);
+int sysMemClear(...);
 int FUN_002f5020(...);
-int FUN_00341e80(...);
+int asdPrimAlloc(...);
 int FUN_00412678(...);
 int FUN_00412b3c(...);
 int FUN_00412c54(...);
@@ -35,9 +35,9 @@ extern unsigned char LAB_0042cb68; /* 0x42cb68 */
 extern unsigned char LAB_0042cbb0; /* 0x42cbb0 */
 
 /* Supplied declaration required: FUN_001bc2ec. */
-/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002f5020. */
-/* Supplied declaration required: FUN_00341e80. */
+/* Supplied declaration required: asdPrimAlloc. */
 /* Supplied declaration required: FUN_00412678. */
 /* Supplied declaration required: FUN_00412b3c. */
 /* Supplied declaration required: FUN_00412c54. */
@@ -68,7 +68,7 @@ void FUN_00412e44(fn_00412e44_arg0 *param_1)
     puVar1 = puVar1 + 0x540;
     FUN_002f5020(puVar1,&LAB_0042cb68,0x14,0xc);
     *(unsigned int *)(puVar1 + -0x6a0) = 0;
-    FUN_002e6354(puVar1 + -0x69c,0x150);
+    sysMemClear(puVar1 + -0x69c,0x150);
     temp_v5 = 0;
     temp_v0 = 0;
     do {
@@ -97,7 +97,7 @@ void FUN_00412e44(fn_00412e44_arg0 *param_1)
       FUN_00412c54(param_1,temp_v6);
       temp_v3 = param_1->field_0x18;
       temp_v2 = temp_v3 << 1;
-      FUN_00341e80(temp_v2);
+      asdPrimAlloc(temp_v2);
       rt_memcpy();
       temp_v8 = FUN_001bc2ec(temp_v2);
       temp_v9 = temp_v3;

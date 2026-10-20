@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184758(...);
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_00183e58(void);
 int FUN_00317af8(...);
 int FUN_00357a48(void);
@@ -55,7 +55,7 @@ typedef struct {
 } param_1_stack;
 
 extern float DAT_00587f10; /* 0x587f10 */
-extern unsigned int DAT_005f15fc; /* 0x5f15fc */
+extern unsigned int g_gameState; /* 0x5f15fc */
 extern unsigned char DAT_005f1614; /* 0x5f1614 */
 extern signed char DAT_005f161d; /* 0x5f161d */
 extern signed char DAT_005f1a5c; /* 0x5f1a5c */
@@ -75,7 +75,7 @@ static float romwright_fabs_4(float value)
 #endif
 extern int FUN_00162e8c(void);
 extern int FUN_00167c0c(unsigned int **, int *);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183e58. */
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_00317af8. */
@@ -351,7 +351,7 @@ unsigned int FUN_00488ce8(int param_1)
               FUN_00183e58();
               temp_v7 = 0x10a;
             }
-            FUN_001681cc(temp_v7);
+            sysPlaySe(temp_v7);
           }
           else {
             temp_v1 = FUN_004d0554();
@@ -386,7 +386,7 @@ unsigned int FUN_00488ce8(int param_1)
               puVar6 = (unsigned int *)NaviMain_GetCurrentMap(temp_v14);
               temp_v4 = puVar10 == puVar6;
               if (temp_v4) {
-                puVar6 = &DAT_005f15fc;
+                puVar6 = &g_gameState;
               }
               temp_v1 = 0;
               if (temp_v4) {

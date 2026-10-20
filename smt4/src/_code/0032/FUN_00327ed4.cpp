@@ -1,42 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00327ed4` (_code @ 0x327ed4, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the first field with a write-back (ldr r7, [r0, #48]!) and the second at [r0, #4]; here both use plain offsets from the owner. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002570a8(unsigned int);
-int FUN_002c415c(unsigned int *);
+typedef struct Entry {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+} Entry;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+typedef struct EntryBlock {
+    /* 0x00 */ Entry *entries;
+} EntryBlock;
 
-/* Supplied declaration required: FUN_002570a8. */
-/* Supplied declaration required: FUN_002c415c. */
+typedef struct Info {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ u32 count;
+} Info;
 
+typedef struct Resources {
+    /* 0x00 */ EntryBlock *block;
+    /* 0x04 */ Info *info;
+} Resources;
 
-void FUN_00327ed4(int param_1)
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ Resources resources;
+} Owner;
 
+int FUN_002570a8(u32 id);
+int asdMemFree(void *block);
+
+/* Releases every entry of the owner's entry block (count from its info) and frees the block. */
+void FUN_00327ed4(Owner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar4;
-  unsigned int **pp;
-  
-  temp_v0 = 0;
-  pp = (unsigned int **)(param_1 + 0x30);
-  puVar4 = pp[0];
-  puVar1 = (unsigned int *)*puVar4;
-  temp_v1 = *(unsigned int *)((int)pp[1] + 0x38);
-  for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0++) {
-    FUN_002570a8(*puVar1);
-    puVar1 = puVar1 + 3;
-  }
-  FUN_002c415c(puVar4);
-  return;
+    Resources *resources = &owner->resources;
+    EntryBlock *block = resources->block;
+    Entry *entry = block->entries;
+    u32 count = resources->info->count;
+    u32 i;
+
+    for (i = 0; i < count; i++) {
+        FUN_002570a8(entry->id);
+        entry++;
+    }
+    asdMemFree(block);
 }
 
 } /* extern "C" */

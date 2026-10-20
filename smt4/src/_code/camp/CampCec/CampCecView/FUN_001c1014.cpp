@@ -31,7 +31,7 @@ typedef struct {
     unsigned int spB8; /* 0xb8: local_b8 */
 } void_stack;
 
-extern int DAT_0043db10; /* 0x43db10 */
+extern int g_campCecView; /* 0x43db10 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
@@ -87,9 +87,9 @@ unsigned int FUN_001c1014(void)
   unsigned long long temp_v16;
   int temp_v17 [37];
   
-  temp_v0 = DAT_0043db10;
+  temp_v0 = g_campCecView;
   temp_v16 = 0x3f800000;
-  temp_v1 = *(int *)(DAT_0043db10 + 0x144);
+  temp_v1 = *(int *)(g_campCecView + 0x144);
   if (temp_v1 != 0) {
     if (temp_v1 != 1) {
       if (temp_v1 != 2) {
@@ -134,7 +134,7 @@ unsigned int FUN_001c1014(void)
     }
   }
   else {
-    temp_v1 = *(int *)(DAT_0043db10 + 8);
+    temp_v1 = *(int *)(g_campCecView + 8);
     FUN_0026f784();
     if ((temp_v1 != 0) && (*(int *)(temp_v0 + 0x160) != 0)) {
       temp_v1 = (int)*(short *)(*(int *)(temp_v0 + 0x138) + 0x88);
@@ -333,7 +333,7 @@ LAB_001c1220:
         *(unsigned char *)(temp_v1 + 0x20) = *(unsigned char *)(temp_v1 + 0x20) & 0xef;
       }
     }
-    temp_v1 = DAT_0043db10;
+    temp_v1 = g_campCecView;
     temp_v7 = 0;
     do {
       temp_v8 = FUN_0026efec(*(int *)(temp_v1 + 0x140) + temp_v7);
@@ -546,7 +546,7 @@ LAB_001c1220:
           *(unsigned char *)(temp_v1 + 0x20) = *(unsigned char *)(temp_v1 + 0x20) & 0xef;
         }
       }
-      temp_v1 = DAT_0043db10;
+      temp_v1 = g_campCecView;
       temp_v7 = 0;
       do {
         temp_v8 = FUN_0026efec(*(int *)(temp_v1 + 0x140) + temp_v7);
@@ -580,7 +580,7 @@ LAB_001c1220:
     *(unsigned int *)(temp_v0 + 0x144) = 2;
   }
   FUN_002ebfbc(temp_v0 + 0x118);
-  temp_v1 = DAT_0043db10;
+  temp_v1 = g_campCecView;
   if (*(int *)(temp_v0 + 0x144) == 1 && temp_v8 == 0) {
     temp_v8 = *(int *)(temp_v0 + 0x14c);
     temp_v3 = *(int *)(temp_v0 + 0x13c);
@@ -593,8 +593,8 @@ LAB_001c1220:
       temp_v7 = temp_v8 - 2;
     }
     if (!((temp_v10 || temp_v8 == 2) || temp_v7 < 0 != temp_v11)) {
-      FUN_0026f204(*(unsigned int *)(DAT_0043db10 + 0x138),*(unsigned int *)(DAT_0043db10 + 0xc),
-                   *(unsigned int *)(DAT_0043db10 + 0x160));
+      FUN_0026f204(*(unsigned int *)(g_campCecView + 0x138),*(unsigned int *)(g_campCecView + 0xc),
+                   *(unsigned int *)(g_campCecView + 0x160));
       FUN_0030a84c(*(unsigned int *)(temp_v1 + 0xc),temp_v17);
       temp_v7 = *(int *)(temp_v1 + 8);
       FUN_0026f784();

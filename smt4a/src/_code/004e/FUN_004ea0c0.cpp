@@ -12,7 +12,7 @@ extern unsigned int DAT_00571170; /* 0x571170 */
 extern unsigned int DAT_00571174; /* 0x571174 */
 extern unsigned int DAT_00571178; /* 0x571178 */
 extern unsigned int DAT_0057117c; /* 0x57117c */
-extern int DAT_00573898; /* 0x573898 */
+extern int g_btlEvent; /* 0x573898 */
 
 extern int FUN_003eb1cc(int);
 /* Supplied declaration required: FUN_004d7a70. */
@@ -43,14 +43,14 @@ unsigned int FUN_004ea0c0(int *param_1,unsigned int *param_2)
       return 0;
     }
   }
-  temp_v0 = FUN_004d84e8(DAT_00573898);
+  temp_v0 = FUN_004d84e8(g_btlEvent);
   if (((temp_v0 == 0) && (temp_v0 = FUN_003eb1cc(*param_1), temp_v0 == 0)) &&
-     ((temp_v0 = DAT_00573898, FUN_004d7a70(DAT_00573898,4,(int)*(short *)(param_2[8] + 0x6e),0),
+     ((temp_v0 = g_btlEvent, FUN_004d7a70(g_btlEvent,4,(int)*(short *)(param_2[8] + 0x6e),0),
       temp_v0 != 0 ||
       ((((temp_v0 = FUN_003eb1cc(*param_1), temp_v0 == 0 && (*(int *)(*param_1 + 0x4d6c) < 1)) &&
         (puVar3 = (unsigned int *)param_2[8],
         (*puVar3 & DAT_00571170) != 0 || (puVar3[1] & DAT_00571174) != 0)) &&
-       (temp_v0 = DAT_00573898, FUN_004d7a70(DAT_00573898,10,(int)*(short *)((int)puVar3 + 0x6e),0),
+       (temp_v0 = g_btlEvent, FUN_004d7a70(g_btlEvent,10,(int)*(short *)((int)puVar3 + 0x6e),0),
        temp_v0 != 0)))))) {
     return 1;
   }

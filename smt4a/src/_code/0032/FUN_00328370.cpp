@@ -2,10 +2,10 @@
 
 extern "C" {
 
-int FUN_00236038(...);
+int scrGetArg(...);
 
 extern int FUN_00203d74(void);
-/* Supplied declaration required: FUN_00236038. */
+/* Supplied declaration required: scrGetArg. */
 extern int FUN_002deb84(void);
 
 
@@ -16,10 +16,10 @@ unsigned int FUN_00328370(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00236038();
+  temp_v0 = scrGetArg();
   if (0 < temp_v0) {
     temp_v0 = FUN_002deb84();
-    temp_v1 = FUN_00236038(0);
+    temp_v1 = scrGetArg(0);
     if ((temp_v0 < temp_v1) && (temp_v0 = FUN_00203d74(), temp_v0 == 0)) {
       return 0;
     }

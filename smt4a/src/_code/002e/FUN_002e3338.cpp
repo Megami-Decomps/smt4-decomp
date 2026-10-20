@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100df4(void);
-int FUN_002e33f0(void);
+int asdOperatorNewC(void);
 int FUN_002e3494(unsigned char *);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00100df4. */
-/* Supplied declaration required: FUN_002e33f0. */
+/* Supplied declaration required: asdOperatorNewC. */
 /* Supplied declaration required: FUN_002e3494. */
 
 
@@ -32,7 +32,7 @@ unsigned char * FUN_002e3338(unsigned char *param_1,unsigned char *param_2)
   if (param_1 != (unsigned char *)0x0) goto LAB_002e3358;
   while( 1 ) {
     param_1 = puVar2;
-    FUN_002e33f0();
+    asdOperatorNewC();
 LAB_002e3358:
     puVar1 = param_1;
     FUN_00100df4();

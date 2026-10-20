@@ -54,8 +54,8 @@ extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_0015688c. */
 extern int FUN_001801a4(void);
 /* Supplied declaration required: FUN_00187168. */
-extern int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 extern unsigned int FUN_001a6f60(int, unsigned int);
 extern int FUN_001ab854(int);
 extern unsigned int *FUN_001ab888(void);
@@ -110,8 +110,8 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
     if (*(int *)&param_1->field_0x2274 != 0) {
       temp_v2 = FUN_001a6f60(*(int *)&param_1->field_0x2274,0);
     }
-    temp_v3 = FUN_00192798();
-    temp_v4 = FUN_00192748(temp_v2);
+    temp_v3 = dataTableGetEntries();
+    temp_v4 = dataTableGetCount(temp_v2);
     if (param_2 <= temp_v4 - 1U) {
       puVar10 = (unsigned short *)(temp_v3 + param_2 * 0x84);
       puVar6 = (unsigned int *)FUN_001ab888();

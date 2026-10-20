@@ -8,7 +8,7 @@ extern int DAT_0043e18c; /* 0x43e18c */
 extern int DAT_0043e190; /* 0x43e190 */
 extern int DAT_0043e194; /* 0x43e194 */
 
-extern unsigned int FUN_00296cc8(void);
+extern unsigned int scrGetArg(void);
 
 
 unsigned int FUN_002cd7d4(void)
@@ -16,7 +16,7 @@ unsigned int FUN_002cd7d4(void)
 {
   unsigned int temp_v0;
   
-  temp_v0 = FUN_00296cc8();
+  temp_v0 = scrGetArg();
   *(unsigned int *)(DAT_0043e18c + 0xa38) = temp_v0;
   *(unsigned int *)(DAT_0043e190 + 0xa38) = temp_v0;
   *(unsigned int *)(DAT_0043e194 + 0xa38) = temp_v0;

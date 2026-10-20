@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_0058103c; /* 0x58103c */
+extern int g_mapIf; /* 0x58103c */
 
 /* Supplied declaration required: FUN_0019a7f4. */
 
@@ -24,10 +24,10 @@ void FUN_00353a88(void)
   int temp_v0;
   unsigned char *puVar2;
   
-  temp_v0 = DAT_0058103c;
-  puVar2 = (unsigned char *)(DAT_0058103c + 0xcbdc);
-  if (*(int **)(DAT_0058103c + 0xcbf8) != (int *)0x0) {
-    (**(romwright_code **)(**(int **)(DAT_0058103c + 0xcbf8) + 4))();
+  temp_v0 = g_mapIf;
+  puVar2 = (unsigned char *)(g_mapIf + 0xcbdc);
+  if (*(int **)(g_mapIf + 0xcbf8) != (int *)0x0) {
+    (**(romwright_code **)(**(int **)(g_mapIf + 0xcbf8) + 4))();
     *(unsigned int *)(temp_v0 + 0xcbf8) = 0;
   }
   *puVar2 = 0;

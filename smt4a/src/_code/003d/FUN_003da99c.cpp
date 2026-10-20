@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023e51c(unsigned short *, int *, int, int);
-int FUN_002e3d04(void);
+int asdOperatorNewD(void);
 int FUN_002e6490(unsigned short *);
 int FUN_002e6dd4(void);
 
@@ -24,11 +24,11 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-extern unsigned int FUN_00187180(unsigned int, unsigned int);
-extern int FUN_00192748(unsigned int);
-extern int FUN_00192798(void);
+extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern int dataTableGetCount(unsigned int);
+extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0023e51c. */
-/* Supplied declaration required: FUN_002e3d04. */
+/* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: FUN_002e6490. */
 /* Supplied declaration required: FUN_002e6dd4. */
 
@@ -53,9 +53,9 @@ unsigned int FUN_003da99c(int param_1,fn_003da99c_arg1 *param_2,unsigned int par
   
   temp_v0 = param_2->field_0x10;
   temp_v8 = param_4;
-  temp_v2 = FUN_00187180(9,4);
-  temp_v3 = FUN_00192798();
-  temp_v4 = FUN_00192748(temp_v2);
+  temp_v2 = dataTableGet(9,4);
+  temp_v3 = dataTableGetEntries();
+  temp_v4 = dataTableGetCount(temp_v2);
   temp_v7 = 0;
   if (temp_v4 != 0) {
     pbVar8 = (unsigned char *)(temp_v3 + 4);
@@ -70,7 +70,7 @@ unsigned int FUN_003da99c(int param_1,fn_003da99c_arg1 *param_2,unsigned int par
   }
   puVar6 = (unsigned short *)((temp_v7 + 1) * 8);
   temp_v8 = 0;
-  FUN_002e3d04();
+  asdOperatorNewD();
   FUN_002e6dd4();
   FUN_0023e51c(puVar6,&temp_v8,temp_v0,param_1);
   temp_v5 = 0;

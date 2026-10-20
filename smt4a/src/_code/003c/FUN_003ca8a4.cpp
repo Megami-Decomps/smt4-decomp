@@ -1,33 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ca8a4` (_code @ 0x3ca8a4, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Starts the intro animation: resets the object's state bytes and queues animation 0x13 on its player, playing at normal speed; returns 1. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0014e188(int, int, unsigned int, int, int);
+typedef struct Scene {
+    /* 0x000 */ u8 unk000[400];
+    /* 0x190 */ u8 mode;
+    /* 0x191 */ u8 step;
+    /* 0x192 */ u8 flag;
+    /* 0x193 */ u8 unk193;
+    /* 0x194 */ u8 animData[0x168C];
+    /* 0x1820 */ u8 player[1];
+} Scene;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+typedef struct SceneHolder {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Scene *scene;
+} SceneHolder;
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern SceneHolder DAT_0057f588;
 
-/* Supplied declaration required: FUN_0014e188. */
+extern void FUN_0014e188(void *player, s32 animId, s32 loops, void *data, s32 count, f32 speed);
 
-
-unsigned int FUN_003ca8a4(void)
-
+u32 FUN_003ca8a4(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 400) = 2;
-  *(unsigned char *)(temp_v0 + 0x191) = 0;
-  *(unsigned char *)(temp_v0 + 0x192) = 0;
-  FUN_0014e188(temp_v0 + 0x1820,0x13,0xffffffff,temp_v0 + 0x194,0xb);
-  return 1;
+    Scene *scene = DAT_0057f588.scene;
+
+    scene->mode = 2;
+    scene->step = 0;
+    scene->flag = 0;
+    FUN_0014e188(scene->player, 0x13, -1, scene->animData, 11, 1.0f);
+    return 1;
 }
 
-} /* extern "C" */
+}

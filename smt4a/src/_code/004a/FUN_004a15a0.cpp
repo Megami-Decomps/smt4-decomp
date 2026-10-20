@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001681cc(...);
+int sysPlaySe(...);
 int FUN_0032cfe0(int);
 int FUN_003343f0(int);
 int FUN_004935b0(...);
@@ -13,7 +13,7 @@ int FUN_004d05c4(int, int, int, int);
 typedef int romwright_code(...);
 extern unsigned int FUN_001654d8(int);
 extern unsigned int FUN_001654e4(int);
-/* Supplied declaration required: FUN_001681cc. */
+/* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0032cfe0. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_004935b0. */
@@ -44,10 +44,10 @@ void FUN_004a15a0(int param_1)
       else {
         temp_v1 = 0x4f;
       }
-      FUN_001681cc(temp_v1);
+      sysPlaySe(temp_v1);
     }
     else {
-      FUN_001681cc(0x2f);
+      sysPlaySe(0x2f);
     }
     FUN_0032cfe0(param_1);
     FUN_003343f0(0);

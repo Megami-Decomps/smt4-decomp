@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_00292dd0(void);
-int FUN_00292f28(int);
+int padIsButtonDown(int);
 int FUN_00292f4c(void);
-int FUN_002939f4(void);
+int btlGetMainState(void);
 int FUN_00297b94(int, unsigned int, unsigned int);
 int FUN_0029e908(int);
 int FUN_0029e958(...);
@@ -26,10 +26,10 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_00292dd0. */
-/* Supplied declaration required: FUN_00292f28. */
+/* Supplied declaration required: padIsButtonDown. */
 /* Supplied declaration required: FUN_00292f4c. */
 extern int FUN_00293230(void);
-/* Supplied declaration required: FUN_002939f4. */
+/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00297b94. */
 extern unsigned int FUN_00297ca4(int, unsigned int);
 extern int FUN_0029d644(unsigned int);
@@ -73,7 +73,7 @@ void FUN_00298140(int param_1,int param_2,int param_3)
   }
   temp_v1 = FUN_002b898c();
   if (temp_v1 == 0x3d) {
-    FUN_002939f4();
+    btlGetMainState();
     temp_v1 = FUN_00293230();
     if (temp_v1 == 0) {
       FUN_002a0cb0();
@@ -102,7 +102,7 @@ void FUN_00298140(int param_1,int param_2,int param_3)
     }
   }
   else {
-    FUN_00292f28(0x10);
+    padIsButtonDown(0x10);
     FUN_002b8838();
   }
   if (param_3 != 0) {

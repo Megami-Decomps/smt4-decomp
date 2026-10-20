@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e7634(...);
+int strInit(...);
 int FUN_002eb588(int *);
 int FUN_002ec890(unsigned char [28]);
 int FUN_002ec934(unsigned char [28], int, unsigned int);
-int FUN_002ec9f4(...);
+int strDestroy(...);
 int FUN_002ee524(unsigned char [24], unsigned char [40]);
 int FUN_002ee54c(unsigned char [24]);
 int FUN_002f7ac4(unsigned int, unsigned char [28]);
@@ -27,11 +27,11 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002e7634. */
+/* Supplied declaration required: strInit. */
 /* Supplied declaration required: FUN_002eb588. */
 /* Supplied declaration required: FUN_002ec890. */
 /* Supplied declaration required: FUN_002ec934. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ee524. */
 /* Supplied declaration required: FUN_002ee54c. */
 extern unsigned int FUN_002f7a28(void);
@@ -69,20 +69,20 @@ int FUN_0011c864(int param_1)
     (**(romwright_code **)(*piVar3 + 4))(piVar3);
   }
   *(unsigned int *)(param_1 + 4) = temp_v1;
-  FUN_002e7634(temp_v6);
+  strInit(temp_v6);
   FUN_002ee524(temp_v11,temp_v6);
   FUN_002eb588(&temp_v9);
   temp_v8 = temp_v10;
   temp_v7 = temp_v9;
   FUN_00311248(temp_v11,&temp_v7,8,1);
-  FUN_002e7634(temp_v2);
+  strInit(temp_v2);
   (**(romwright_code **)(**(int **)(param_1 + 4) + 8))(*(int **)(param_1 + 4),temp_v6,temp_v2);
   FUN_002ec934(temp_v12,temp_v3 + temp_v5,temp_v4);
   FUN_002f7ac4(*(unsigned int *)(param_1 + 4),temp_v12);
   FUN_002ec890(temp_v12);
-  FUN_002ec9f4(temp_v2);
+  strDestroy(temp_v2);
   FUN_002ee54c(temp_v11);
-  FUN_002ec9f4(temp_v6);
+  strDestroy(temp_v6);
   return param_1;
 }
 

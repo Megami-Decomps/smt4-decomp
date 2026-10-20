@@ -31,7 +31,7 @@ typedef struct {
 
 extern unsigned char LAB_004e8190; /* 0x4e8190 */
 extern unsigned char LAB_004e81a0; /* 0x4e81a0 */
-extern int DAT_0057113c; /* 0x57113c */
+extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
 extern unsigned int DAT_005712f0; /* 0x5712f0 */
@@ -77,7 +77,7 @@ unsigned int FUN_004e7e08(int *param_1,fn_004e7e08_arg1 *param_2)
     if ((temp_v6 != temp_v7) || (temp_v4 != temp_v5 || (temp_v2 != temp_v3 || temp_v0 != temp_v1))) {
       FUN_004c8284((int)*(short *)((int)param_2->field_0x24 + 0x6a),3,1,0);
     }
-    *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
+    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
     return 1;
   }
   temp_v0 = param_2->field_0x8;
@@ -99,7 +99,7 @@ unsigned int FUN_004e7e08(int *param_1,fn_004e7e08_arg1 *param_2)
       if (0 < temp_v0) {
         return 0;
       }
-      *(unsigned char *)(DAT_0057113c + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
+      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
       return 1;
     }
     if (!((DAT_0057116c & *(unsigned int *)((int)param_2->field_0x20 + 4)) == 0 &&

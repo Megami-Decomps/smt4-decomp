@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_0026e324(unsigned int);
 int FUN_002ad8b4(unsigned int, unsigned int);
-int FUN_002c415c(...);
+int asdMemFree(...);
 int FUN_002c587c(void);
 int FUN_002e0bc4(void);
 int rt_memcpy_w(...);
 
-extern unsigned int DAT_00433158; /* 0x433158 */
+extern unsigned int g_aocSystem; /* 0x433158 */
 extern int DAT_0044de38; /* 0x44de38 */
 extern unsigned int DAT_0044de3c; /* 0x44de3c */
 extern unsigned int DAT_0044de40; /* 0x44de40 */
@@ -21,7 +21,7 @@ extern unsigned int FUN_0026b5dc(void);
 /* Supplied declaration required: FUN_0026e324. */
 /* Supplied declaration required: FUN_002ad8b4. */
 extern unsigned int FUN_002c09bc(void);
-/* Supplied declaration required: FUN_002c415c. */
+/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c587c. */
 /* Supplied declaration required: FUN_002e0bc4. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -42,10 +42,10 @@ void FUN_0026ff54(void)
     rt_memcpy_w(temp_v0,DAT_0044de40,0x24d28);
     FUN_002e0bc4();
     FUN_002c587c();
-    FUN_0026e324(DAT_00433158);
-    FUN_002c415c(DAT_0044de38);
-    FUN_002c415c(DAT_0044de3c);
-    FUN_002c415c(DAT_0044de40);
+    FUN_0026e324(g_aocSystem);
+    asdMemFree(DAT_0044de38);
+    asdMemFree(DAT_0044de3c);
+    asdMemFree(DAT_0044de40);
     DAT_0044de38 = 0;
     DAT_0044de3c = 0;
     DAT_0044de40 = 0;

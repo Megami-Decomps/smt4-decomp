@@ -27,7 +27,7 @@ struct fn_0046e2d0_arg0 {
     undefined4 field_0x468; /* +0x468 */
 };
 
-extern int DAT_0057027c; /* 0x57027c */
+extern int g_aocDisplay; /* 0x57027c */
 
 /* Supplied declaration required: FUN_001b57a8. */
 
@@ -47,7 +47,7 @@ void FUN_0046e2d0(fn_0046e2d0_arg0 *param_1)
   param_1->field_0x350 = 0;
   param_1->field_0x464 = 0;
   param_1->field_0x468 = 0;
-  *(unsigned char *)(DAT_0057027c + 0x450c) = 1;
+  *(unsigned char *)(g_aocDisplay + 0x450c) = 1;
   param_1->field_0x31c = 1;
   param_1->field_0x328 = 0;
   FUN_001b57a8();

@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0011c848(...);
-int FUN_002e74c4(...);
+int strAssign(...);
 int FUN_002e7516(...);
 int FUN_002e7614(...);
 int FUN_002eb164(...);
-int FUN_002ec9f4(...);
+int strDestroy(...);
 int FUN_002f5b58(...);
 int FUN_002f5bcc(...);
 
@@ -54,11 +54,11 @@ extern unsigned char DAT_00558500; /* 0x558500 */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Supplied declaration required: FUN_0011c848. */
-/* Supplied declaration required: FUN_002e74c4. */
+/* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e7516. */
 /* Supplied declaration required: FUN_002e7614. */
 /* Supplied declaration required: FUN_002eb164. */
-/* Supplied declaration required: FUN_002ec9f4. */
+/* Supplied declaration required: strDestroy. */
 extern unsigned int FUN_002ecaee(int);
 /* Supplied declaration required: FUN_002f5b58. */
 /* Supplied declaration required: FUN_002f5bcc. */
@@ -100,11 +100,11 @@ void FUN_002f5a04(unsigned int param_1,fn_002f5a04_arg1 *param_2,int param_3,int
         temp_v3 = *(int *)(param_4 + 0x10);
         temp_v1 = *(int *)(param_4 + 0xc);
         temp_v2 = FUN_002ecaee(param_4);
-        FUN_002e74c4(temp_v9,temp_v2,temp_v3 - temp_v1,0xffffffff);
-        FUN_002e74c4(temp_v9,temp_v7,2,0xffffffff);
-        FUN_002e74c4(temp_v9,temp_v8,1,0xffffffff);
+        strAssign(temp_v9,temp_v2,temp_v3 - temp_v1,0xffffffff);
+        strAssign(temp_v9,temp_v7,2,0xffffffff);
+        strAssign(temp_v9,temp_v8,1,0xffffffff);
         FUN_002f5b58(param_2,param_5,temp_v12 + temp_v14,temp_v13,0);
-        FUN_002ec9f4(temp_v9);
+        strDestroy(temp_v9);
         pfVar6 = param_2;
         FUN_002e7516(pfVar6,param_7);
         return;

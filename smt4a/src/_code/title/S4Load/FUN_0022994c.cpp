@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00589154; /* 0x589154 */
+extern int g_s4Load; /* 0x589154 */
 
 
 unsigned int FUN_0022994c(void)
@@ -14,8 +14,8 @@ unsigned int FUN_0022994c(void)
   unsigned int temp_v1;
   
   temp_v1 = 0;
-  if (DAT_00589154 != 0) {
-    temp_v0 = *(unsigned int *)(DAT_00589154 + 8);
+  if (g_s4Load != 0) {
+    temp_v0 = *(unsigned int *)(g_s4Load + 8);
     if (temp_v0 == 2) {
       return 0;
     }
