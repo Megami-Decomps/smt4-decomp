@@ -1,39 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e0df8` (_code @ 0x2e0df8, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdCecMessageBoxClose(unsigned int);
-int asdCecMessageBoxOpen(int, unsigned int, unsigned int);
-int FUN_00358664(unsigned int, int);
+extern void FUN_002e0dfc(void);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern unsigned char g_asdCec; /* 0x464fa8 */
-
-/* Supplied declaration required: asdCecMessageBoxClose. */
-/* Supplied declaration required: asdCecMessageBoxOpen. */
-/* Supplied declaration required: FUN_00358664. */
-
-
+/* Runs the CEC message box maintenance step (FUN_002e0dfc). */
 void FUN_002e0df8(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];
-  asdCecMessageBoxOpen(temp_v0,*(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)),(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[1]);
-  if (-1 < temp_v0) {
-    FUN_00358664((*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6],1);
-    asdCecMessageBoxClose((*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6]);
-    return;
-  }
-  return;
+    FUN_002e0dfc();
 }
 
 } /* extern "C" */

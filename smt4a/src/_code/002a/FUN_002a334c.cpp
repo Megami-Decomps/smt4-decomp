@@ -1,86 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a334c` (_code @ 0x2a334c, 0x120 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the 11 jump-table words differ in fdiff (retail: absolute addresses, build: __switch$$-relative relocs to the same labels), and retail keeps the argument copy in r0 for the compares (build compares r4 and moves it just before the call). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
-int scrGetArg(...);
-int FUN_00282a08(void);
-int FUN_002c76c0(int);
+s32 scrGetArg(...);  /* index in r0; the first argument is read without one */
+void FUN_00282a08(s32 type, s32 kind);
+void FUN_002a33f0(void);
 
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern unsigned char g_messageMain; /* 0x57f588 */
-
-/* Supplied declaration required: FUN_0021bdac. */
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_00282a08. */
-extern unsigned int FUN_002ba85c(void);
-/* Supplied declaration required: FUN_002c76c0. */
-extern unsigned int scrGetCommandFrame(void);
-
-
+/* Script command: accepts only argument 1 == 13 and one of a fixed set of argument 0 values; any
+ * other call goes to FUN_00282a08, the rest to FUN_002a33f0 (the function that follows). */
 void FUN_002a334c(void)
-
 {
-/* irregular: 1 goto(s); 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = scrGetArg(1);
-  if (temp_v1 != 0xd) {
-    FUN_00282a08();
-    return;
-  }
-  if (temp_v0 != 0xb) {
-    if (temp_v0 < 0xc) {
-      switch(temp_v0) {
-      default:
-        FUN_00282a08();
+    s32 type = scrGetArg();
+    s32 kind = scrGetArg(1);
+
+    if (kind != 13) {
+        FUN_00282a08(type, kind);
         return;
-      case 1:
-      case 2:
-      case 3:
-      case 6:
-      case 7:
-      case 8:
-      case 10:
-        goto LAB_002a33e8;
-      }
     }
-    if (temp_v0 != 0x28) {
-      if (temp_v0 < 0x29) {
-        if (!((temp_v0 == 0xf || temp_v0 == 0x12) || temp_v0 == 0x19)) {
-          FUN_00282a08();
-          return;
-        }
-      }
-      else if (!((temp_v0 == 0x2a || temp_v0 == 0x47) || temp_v0 == 0x49)) {
-        FUN_00282a08();
+    switch (type) {
+    case 1:
+    case 2:
+    case 3:
+    case 6:
+    case 7:
+    case 8:
+    case 10:
+    case 11:
+    case 15:
+    case 18:
+    case 25:
+    case 40:
+    case 42:
+    case 71:
+    case 73:
+        break;
+    default:
+        FUN_00282a08(type, kind);
         return;
-      }
     }
-  }
-LAB_002a33e8:
-  FUN_002c76c0(0);
-  if ((*(int *)((unsigned char *)&g_messageMain + 0x4)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0x19c5) = 0x15;
-  }
-  temp_v2 = FUN_002ba85c();
-  temp_v3 = scrGetArg(0);
-  temp_v4 = scrGetCommandFrame();
-  FUN_0021bdac(temp_v2,temp_v3,temp_v4,6,1,0);
-  return;
+    FUN_002a33f0();
 }
 
 } /* extern "C" */

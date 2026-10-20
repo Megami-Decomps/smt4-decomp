@@ -1,59 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bc95c` (_code @ 0x4bc95c, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the constant 1 in r2 across the flag set and the tail call (one instruction more), so the final branch is not the branch-to-next armlink turns into a nop. */
+#include "common.h"
 
 extern "C" {
 
-int gameFlagsGetBlock(void);
-int dataTable2ECount(void);
-int gameFlagSetValue(int, int);
+/* A data table 2E entry: the id it answers to and the game flag it sets. */
+typedef struct Table2EEntry {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ s16 id;               /* -1 ends the table */
+    /* 0x22 */ s16 gameFlag;         /* 0: none */
+} Table2EEntry;
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
+s32 dataTable2ECount(void);
+Table2EEntry *dataTable2EGetEntry(s32 index);
+s32 gameFlagIsSet(s32 flag);
+void gameFlagSetValue(s32 flag, s32 value);
+void gameFlagsGetBlock(void);
+void FUN_004bca00(s32 id, u32 arg1, bool enabled);
 
-extern int FUN_00152978(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: gameFlagsGetBlock. */
-extern int gameFlagIsSet(void);
-extern int dataTable2EGetEntry(int);
-/* Supplied declaration required: dataTable2ECount. */
-/* Supplied declaration required: gameFlagSetValue. */
-
-
-void FUN_004bc95c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Sets the game flag data table 2E ties to `id` (if it is not set yet), then forwards to
+ * FUN_004bca00 with the enabled flag set (the function that follows). */
+void FUN_004bc95c(s32 id, u32 arg1)
 {
-/* irregular: irregular input(s): in_lr; 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int unaff_r4;
-  int temp_v2;
-  unsigned int in_lr;
-  
-  temp_v2 = 0;
-  temp_v0 = param_1;
-  dataTable2ECount();
-  if (0 < temp_v0) {
-    while( 1 ) {
-      temp_v0 = dataTable2EGetEntry(temp_v2);
-      temp_v1 = (int)*(short *)(temp_v0 + 0x20);
-      if (temp_v1 == -1) break;
-      if (temp_v1 == param_1) {
-        if ((*(short *)(temp_v0 + 0x22) != 0) && (temp_v2 = gameFlagIsSet(), temp_v2 == 0)) {
-          gameFlagSetValue((int)*(short *)(temp_v0 + 0x22),1);
+    s32 index = 0;
+
+    if (dataTable2ECount() > 0) {
+        for (;;) {
+            Table2EEntry *entry = dataTable2EGetEntry(index);
+
+            if (entry->id == -1) {
+                break;
+            }
+            if (entry->id == id) {
+                if (entry->gameFlag != 0 && gameFlagIsSet(entry->gameFlag) == 0) {
+                    gameFlagSetValue(entry->gameFlag, 1);
+                }
+                break;
+            }
+            index++;
+            if (dataTable2ECount() <= index) {
+                break;
+            }
         }
-        break;
-      }
-      temp_v2 = temp_v2 + 1;
-      dataTable2ECount();
-      if (temp_v1 <= temp_v2) break;
     }
-  }
-  gameFlagsGetBlock();
-  temp_v0 = FUN_00152978(param_1,param_2,1,param_4,unaff_r4,in_lr);
-  *(unsigned char *)(temp_v0 + 3) = (*(unsigned char *)(temp_v0 + 3) & 0xbf) | 0x40;
-  return;
+    gameFlagsGetBlock();
+    FUN_004bca00(id, arg1, true);
 }
 
 } /* extern "C" */

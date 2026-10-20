@@ -1,49 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e7284` (_code @ 0x2e7284, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001835b4(int, int, int, int, int, unsigned int);
-int VectorSignedToFloat(unsigned int, int);
+/* A rectangle as position and extent (x, y, width, height). */
+struct DigitArea {
+    f32 x;
+    f32 y;
+    f32 width;
+    f32 height;
+};
 
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_5_stack;
+void FUN_002e72c8(s32 x, s32 y, u32 color, const s8 *digits);
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001835b4. */
-
-
-void FUN_002e7284(float *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 char *param_5)
-
+/* Draw a digit string at an offset from the area's far corner. */
+void FUN_002e7284(const DigitArea *area, s32 offsetX, s32 offsetY, u32 color, const s8 *digits)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  char temp_v0;
-  unsigned int in_fpscr;
-  float temp_v1;
-  float temp_v2;
-  int temp_v3;
-  float temp_v4;
-  float temp_v5;
-  
-  temp_v4 = param_1[1];
-  temp_v5 = param_1[3];
-  temp_v1 = (float)VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = (float)VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v3 = (int)(*param_1 + param_1[2] + temp_v1);
-  temp_v0 = *param_5;
-  while (temp_v0 != '\0') {
-    if (*param_5 != 0x20) {
-      FUN_001835b4(2,7,*param_5 - 0x30,temp_v3,(int)(temp_v4 + temp_v5 + temp_v2),param_4);
-    }
-    param_5 = param_5 + 1;
-    temp_v3 = temp_v3 + 7;
-    temp_v0 = *param_5;
-  }
-  return;
+    s32 x = (s32)(area->x + area->width + offsetX);
+    s32 y = (s32)(area->y + area->height + offsetY);
+
+    FUN_002e72c8(x, y, color, digits);
 }
 
 } /* extern "C" */

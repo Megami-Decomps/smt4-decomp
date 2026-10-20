@@ -84,6 +84,14 @@ def load_game(game: str) -> dict:
     if not proof["match"]:
         sys.exit(f"{game}: the last relink did not match retail; nothing can be credited")
     proven = set(proof["proven"])
+    # Only first-party code counts: tools/scope.py lists the SDK, NintendoWare, NEX, Mobiclip and
+    # runtime functions (by address) in config/third_party.txt.
+    listed = ROOT / game / "config" / "third_party.txt"
+    third = {int(line.split()[0], 16) for line in listed.read_text(encoding="utf-8").splitlines()
+             if line and not line.startswith("#")} if listed.exists() else set()
+    project = json.loads((ROOT / game / "config" / "project.json").read_text(encoding="utf-8"))
+    address = {u["function"]: int(u["address"], 16) for u in project["units"]}
+    excluded = 0
     functions = []
     for unit in report["units"]:
         source = unit["metadata"]["source_path"]
@@ -94,6 +102,9 @@ def load_game(game: str) -> dict:
         draft = head.startswith("/* NON_MATCHING:") and "romwright" not in head.split("*/")[0]
         for function in unit.get("functions", []):
             name = function["name"]
+            if address.get(name) in third:
+                excluded += 1
+                continue
             registered = name in proven
             readable = registered and not name.startswith("FUN_") and not PLACEHOLDER.search(COMMENT.sub("", text))
             functions.append({
@@ -102,7 +113,7 @@ def load_game(game: str) -> dict:
                 "folder": folder,
                 "state": "readable" if readable else "registered" if registered else "draft" if draft else "todo",
             })
-    return {"functions": functions, "proven": proven}
+    return {"functions": functions, "proven": proven, "third_party": excluded}
 
 
 def totals(functions: list[dict]) -> dict:
@@ -303,6 +314,9 @@ def game_page(game: str, data: dict, history: list[dict], twins: dict, repo: str
          f'hand-written but not yet matching, of {number(unregistered)} unregistered; credited as none'),
         ("Twins", number(twins["both"]), meter(twins["both"], twins["pairs"]),
          f'of {number(twins["pairs"])} functions shared with the other game are registered in both'),
+        ("Not counted", number(data["third_party"]), "",
+         "third-party functions (Nintendo SDK, NintendoWare, NEX, Mobiclip, ARM runtime) listed in "
+         "config/third_party.txt: they relink like the rest but are not Atlus's code"),
     ]
     status_html = "".join(f'<div class="stat"><p class="tab">{label}</p><p class="figure">{figure}</p>{bar}'
                           f'<p class="note">{note}</p></div>' for label, figure, bar, note in status)
@@ -371,7 +385,7 @@ def index_page(games: dict, repo: str | None, commit: str, date: str) -> str:
             f'<a class="half theme-{info["theme"]}" href="{game}/">{logo(game)}'
             f'<p class="figure">{number(t["matched_functions"])}<span> / {number(t["total_functions"])}</span></p>'
             f'{meter(t["matched_functions"], t["total_functions"])}'
-            f'<p>functions registered: {percent(t["matched_functions"], t["total_functions"]):.2f}% of the game, '
+            f'<p>functions registered: {percent(t["matched_functions"], t["total_functions"]):.2f}% of the first-party code, '
             f'{percent(t["matched_code"], t["total_code"]):.2f}% of its code bytes, '
             f'{number(t["readable_functions"])} readable.</p>'
             f'<p class="go">Open the compendium</p></a>')

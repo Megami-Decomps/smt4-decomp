@@ -19,6 +19,7 @@ tools/shared.py       pairs the functions both games share and compares their pr
 tools/fdiff.py        compiles one function and diffs its disassembly and relocations against retail
 tools/names.py        names a function or global in every file at once and records the evidence
 tools/units.py        splits a unit the analysis merged from two functions (symbols, project, objdiff, source)
+tools/scope.py        lists the third-party functions progress does not count (config/third_party.txt)
 tools/progress_site.py  renders both games' proven progress as a static site (build/site/)
 ```
 
@@ -83,6 +84,16 @@ in the compiler's form (`bl` with a relocation; the linker chose `blx`), and mar
 that code addresses pc-relatively as data. relink links with `--no-warn-mismatch` because retail mixes
 units built for different CPUs (`--cpu=5TE` runtime code next to MPCore code), and accepts a compiled
 function longer than retail's when the extra bytes are a literal the image holds right after it.
+
+## What counts
+
+Progress counts first-party code only: Atlus's engine (AsdSDK) and the game. Nintendo's SDK,
+NintendoWare, the online library (NEX), the Mobiclip video library and the ARM runtime are linked into
+the same `.code`; they still relink byte-identically with everything else, but they are not counted.
+`python -B tools/scope.py` lists them in `config/third_party.txt` from evidence: third-party names
+(mostly from matching Nintendo's SDK code), functions reached only from third-party code, and unnamed
+functions linked between third-party ones. Anything uncertain stays counted. Run it again after
+naming passes.
 
 ## Progress site
 

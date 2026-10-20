@@ -1,89 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a3474` (_code @ 0x2a3474, 0x11c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the call arguments into r0/r1 before the compare; the switch's jump table cannot be compared byte for byte */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
-int scrGetArg(...);
-int FUN_002378b8(void);
-int eventTexRequestStopAll(void);
-int bustupCutAnimRequestStopSlots(int);
+s32 scrGetArg(...);
+void FUN_002378b8(s32 command, s32 target);
+void FUN_002a3518(s32 command, s32 target);
 
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned char g_messageMain; /* 0x57f588 */
-
-/* Supplied declaration required: FUN_0021bdac. */
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_002378b8. */
-extern unsigned int FUN_002ba85c(void);
-/* Supplied declaration required: eventTexRequestStopAll. */
-extern unsigned int scrGetCommandFrame(void);
-/* Supplied declaration required: bustupCutAnimRequestStopSlots. */
-
-
+/* A script command with argument 1 == 13 stops the event textures and bust-up slots for these
+ * argument 0 values; every other call is handled elsewhere. */
 void FUN_002a3474(void)
-
 {
-/* irregular: 1 goto(s); 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = scrGetArg(1);
-  if (temp_v1 != 0xd) {
-    FUN_002378b8();
-    return;
-  }
-  if (temp_v0 != 0xb) {
-    if (temp_v0 < 0xc) {
-      switch(temp_v0) {
-      default:
-        FUN_002378b8();
-        return;
-      case 1:
-      case 2:
-      case 3:
-      case 6:
-      case 7:
-      case 8:
-      case 10:
-        goto LAB_002a3510;
-      }
-    }
-    if (temp_v0 != 0x28) {
-      if (temp_v0 < 0x29) {
-        if (!((temp_v0 == 0xf || temp_v0 == 0x12) || temp_v0 == 0x19)) {
-          FUN_002378b8();
-          return;
+    s32 command = scrGetArg();
+    s32 target = scrGetArg(1);
+
+    if (target == 13) {
+        switch (command) {
+        case 1:
+        case 2:
+        case 3:
+        case 6:
+        case 7:
+        case 8:
+        case 10:
+        case 11:
+        case 15:
+        case 18:
+        case 25:
+        case 40:
+        case 42:
+        case 71:
+        case 73:
+            FUN_002a3518(command, target);
+            return;
         }
-      }
-      else if (!((temp_v0 == 0x2a || temp_v0 == 0x47) || temp_v0 == 0x49)) {
-        FUN_002378b8();
-        return;
-      }
     }
-  }
-LAB_002a3510:
-  bustupCutAnimRequestStopSlots(temp_v0);
-  eventTexRequestStopAll();
-  if ((*(int *)((unsigned char *)&g_messageMain + 0x4)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0x19c5) = 0x15;
-  }
-  temp_v2 = FUN_002ba85c();
-  temp_v3 = scrGetArg(0);
-  temp_v4 = scrGetCommandFrame();
-  FUN_0021bdac(temp_v2,temp_v3,temp_v4,6,0,0);
-  return;
+    FUN_002378b8(command, target);
 }
 
 } /* extern "C" */

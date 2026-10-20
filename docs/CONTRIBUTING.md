@@ -8,6 +8,8 @@ original source**. Both games are one build tree, so most work lands twice: fix 
 
 1. Pick a function. `build/report.json` (after `python -B build.py report`) scores every function;
    `python -B tools/shared.py --list ported` lists functions matched in one game and not its twin.
+   Only first-party code counts: skip the functions in `config/third_party.txt` (Nintendo's SDK,
+   NintendoWare, NEX, Mobiclip, the ARM runtime).
 2. `python -B tools/fdiff.py <game> <function>` compiles that one source and diffs its disassembly
    and relocations against retail. Edit, rerun, until it prints `IDENTICAL`.
 3. Make it readable (below), rerunning `fdiff` after each step.

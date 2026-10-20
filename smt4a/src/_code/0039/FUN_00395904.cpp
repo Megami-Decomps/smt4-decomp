@@ -1,14 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00395904` (_code @ 0x395904, 0x26e8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: draft split of the romwright decompilation of the merged unit (the state machine and the camera update that follows it): the decompiler's temporaries are not yet named. */
+#include "common.h"
 
 extern "C" {
 
 int FUN_00330108(float *, float *, float *);
 int FUN_00376c64(void);
-int VectorFloatToUnsigned(...);
-int VectorUnsignedToFloat(...);
-int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
 
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
@@ -24,44 +20,9 @@ int FUN_0033982c(void);
 int FUN_0033a374(void);
 int FUN_00352568(void);
 
-/* stack frame of void: 22 slot(s), 88 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-    unsigned int sp8C; /* 0x8c: local_8c */
-    unsigned int sp90; /* 0x90: local_90 */
-    unsigned int sp94; /* 0x94: local_94 */
-    unsigned int sp98; /* 0x98: local_98 */
-    unsigned int sp9C; /* 0x9c: local_9c */
-    unsigned int spA0; /* 0xa0: local_a0 */
-    unsigned int spA4; /* 0xa4: local_a4 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-    unsigned int spAC; /* 0xac: local_ac */
-    unsigned int spB0; /* 0xb0: local_b0 */
-    unsigned int spB4; /* 0xb4: local_b4 */
-    unsigned int spB8; /* 0xb8: local_b8 */
-} void_stack;
-
-extern unsigned int DAT_00536d14; /* 0x536d14 */
-extern unsigned int DAT_00536d18; /* 0x536d18 */
-extern unsigned int DAT_00536d1c; /* 0x536d1c */
-extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern int g_handleRegistry; /* 0x56fcc0 */
 extern int *DAT_005806a4; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
-extern float DAT_005f15d8; /* 0x5f15d8 */
-extern float DAT_005f15dc; /* 0x5f15dc */
-extern float DAT_005f15e0; /* 0x5f15e0 */
 extern int g_gameState; /* 0x5f15fc */
-extern int DAT_005f1600; /* 0x5f1600 */
 extern float DAT_005f16b0; /* 0x5f16b0 */
 extern float DAT_005f16b4; /* 0x5f16b4 */
 extern float DAT_005f16b8; /* 0x5f16b8 */
@@ -79,10 +40,6 @@ extern int DAT_005f1714; /* 0x5f1714 */
 extern int DAT_005f1718; /* 0x5f1718 */
 extern int DAT_005f171c; /* 0x5f171c */
 extern int DAT_005f1720; /* 0x5f1720 */
-extern float DAT_005f1a04; /* 0x5f1a04 */
-extern float DAT_005f1a0c; /* 0x5f1a0c */
-extern float DAT_005f1a10; /* 0x5f1a10 */
-extern float DAT_005f1a14; /* 0x5f1a14 */
 extern float DAT_005f1a18; /* 0x5f1a18 */
 extern float DAT_005f1a1c; /* 0x5f1a1c */
 extern int DAT_005f1a20; /* 0x5f1a20 */
@@ -99,46 +56,14 @@ extern int DAT_005f1a48; /* 0x5f1a48 */
 extern unsigned char DAT_005f1a4c; /* 0x5f1a4c */
 extern signed char DAT_005f1a4d; /* 0x5f1a4d */
 
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
-{
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_00272e64. */
-/* Supplied declaration required: FUN_002b56e0. */
-/* Supplied declaration required: FUN_002b5cd4. */
-/* Supplied declaration required: FUN_002d1780. */
-/* Supplied declaration required: FUN_002d1e44. */
-/* Supplied declaration required: FUN_0030250c. */
-/* Supplied declaration required: FUN_003026d8. */
-/* Supplied declaration required: FUN_003033d4. */
-/* Supplied declaration required: FUN_00330108. */
-/* Supplied declaration required: FUN_0033982c. */
-/* Supplied declaration required: FUN_0033a374. */
-/* Supplied declaration required: FUN_00352568. */
-/* Supplied declaration required: FUN_00376c64. */
-extern float *asdModelGetStatic38(void);
-/* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
-
-/* WARNING: Removing unreachable block (ram,0x00397c1c) */
-/* WARNING: Removing unreachable block (ram,0x00397c3c) */
-
+int FUN_00397aa4(void);
 void FUN_00395904(void)
-
 {
-/* irregular: 1 goto(s); irregular input(s): in_d10, in_d11, in_d8, in_d9, in_fpscr; 28 native warning(s); review required */
   unsigned int temp_v0;
   unsigned char temp_v1;
   int temp_v2;
@@ -150,31 +75,19 @@ void FUN_00395904(void)
   int temp_v5;
   int temp_v6;
   int temp_v7;
-  unsigned char temp_v8;
   int temp_v9;
   int *piVar11;
   int temp_v10;
   unsigned int in_fpscr;
   float temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14;
   float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  float temp_v18;
-  float temp_v19;
   float temp_v20;
   float temp_v21;
-  unsigned long long in_d8;
   float temp_v22;
   float temp_v23;
-  unsigned long long in_d9;
   float temp_v24;
   float temp_v25;
-  unsigned long long in_d10;
   float temp_v26;
-  unsigned long long in_d11;
   float temp_v27;
   float temp_v28;
   float temp_v29;
@@ -187,41 +100,19 @@ void FUN_00395904(void)
   float temp_v36;
   float temp_v37;
   float temp_v38;
-  float temp_v39;
-  unsigned int temp_v40;
-  float temp_v41;
-  float temp_v42;
-  float fStack_78;
-  unsigned int temp_v43;
   unsigned int temp_v44;
   int temp_v45;
   unsigned int temp_v46;
   float temp_v47;
   float fStack_40;
   float fStack_3c;
-  unsigned int uStack_34;
-  unsigned int uStack_30;
-  unsigned int uStack_2c;
-  unsigned int uStack_28;
-  unsigned int uStack_24;
-  unsigned int uStack_20;
-  unsigned int uStack_1c;
-  unsigned int uStack_18;
-  
+
   temp_v4 = DAT_005f1714;
   temp_v3 = DAT_005f1710;
   temp_v2 = DAT_005f16f8;
   temp_v10 = DAT_005f16f4;
   temp_v9 = g_lmapScene;
   piVar6 = DAT_005806a4;
-  uStack_34 = (unsigned int)in_d8;
-  uStack_30 = (unsigned int)((unsigned long long)in_d8 >> 0x20);
-  uStack_2c = (unsigned int)in_d9;
-  uStack_28 = (unsigned int)((unsigned long long)in_d9 >> 0x20);
-  uStack_24 = (unsigned int)in_d10;
-  uStack_20 = (unsigned int)((unsigned long long)in_d10 >> 0x20);
-  uStack_1c = (unsigned int)in_d11;
-  uStack_18 = (unsigned int)((unsigned long long)in_d11 >> 0x20);
   switch(*DAT_005806a4) {
   case 0:
     FUN_0033982c();
@@ -1602,155 +1493,7 @@ joined_r0x00397538:
       piVar6[3] = 0;
     }
   }
-  uStack_1c = uStack_20;
-  uStack_20 = uStack_24;
-  uStack_24 = uStack_28;
-  uStack_28 = uStack_2c;
-  uStack_2c = uStack_30;
-  uStack_30 = uStack_34;
-  temp_v25 = 0.0f;
-  temp_v26 = 1.0f;
-  temp_v21 = 1100.0f;
-  temp_v22 = *(float *)(g_lmapScene + 0x1c);
-  temp_v24 = *(float *)(g_lmapScene + 0x20);
-  temp_v23 = *(float *)(g_lmapScene + 0x24);
-  pfVar8 = (float *)asdModelGetStatic38();
-  *pfVar8 = temp_v21;
-  if ((*DAT_005806a4 == 0xc) && (DAT_005806a4[1] >= 100)) {
-    temp_v11 = (*(float *)(g_lmapScene + 0x4c) + 180.0f) * 0.7111111f;
-    temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v25 <= temp_v11) << 0x1d);
-    for (temp_v11 = romwright_fabs_4(temp_v11); temp_v20 = temp_v25, (int)temp_v11 >= 0x47800000; temp_v11 = temp_v11 - 65536.0f)
-    {
-    }
-    for (; (int)temp_v20 >= 0x47800000; temp_v20 = temp_v20 - 65536.0f) {
-    }
-    temp_v12 = VectorFloatToUnsigned(0x4338e38f,3);
-    temp_v13 = VectorFloatToUnsigned(temp_v11,3);
-    temp_v14 = VectorFloatToUnsigned(temp_v20,3);
-    temp_v8 = temp_v12;
-    temp_v16 = (float)VectorUnsignedToFloat(temp_v12 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v12 = temp_v13 & 0xff;
-    temp_v17 = (float)VectorUnsignedToFloat(temp_v13 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v13 = temp_v14 & 0xff;
-    temp_v15 = (float)VectorUnsignedToFloat(temp_v14 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v18 = (float)(&DAT_00536d14)[temp_v8 * 4] +
-             (184.8889f - temp_v16) * (float)(&DAT_00536d1c)[temp_v8 * 4];
-    temp_v19 = (float)(&DAT_00536d18)[temp_v8 * 4] +
-             (184.8889f - temp_v16) * (float)(&DAT_00536d20)[temp_v8 * 4];
-    temp_v41 = (float)(&DAT_00536d14)[temp_v12 * 4] +
-               (temp_v11 - temp_v17) * (float)(&DAT_00536d1c)[temp_v12 * 4];
-    temp_v16 = (float)(&DAT_00536d14)[temp_v13 * 4] +
-             (temp_v20 - temp_v15) * (float)(&DAT_00536d1c)[temp_v13 * 4];
-    temp_v20 = (float)(&DAT_00536d18)[temp_v13 * 4] +
-             (temp_v20 - temp_v15) * (float)(&DAT_00536d20)[temp_v13 * 4];
-    temp_v42 = (float)(&DAT_00536d18)[temp_v12 * 4] +
-               (temp_v11 - temp_v17) * (float)(&DAT_00536d20)[temp_v12 * 4];
-    if (!romwright_subpiece_4_1_0(temp_v0 >> 0x1d,0)) {
-      temp_v41 = -temp_v41;
-    }
-    temp_v33 = temp_v20 * temp_v42;
-    temp_v37 = temp_v16 * temp_v42;
-    fStack_78 = temp_v19 * temp_v42;
-    temp_v42 = temp_v18 * temp_v42;
-    temp_v34 = temp_v18 * temp_v20 * temp_v41 - temp_v19 * temp_v16;
-    temp_v39 = temp_v19 * temp_v16 * temp_v41 - temp_v18 * temp_v20;
-    temp_v35 = temp_v18 * temp_v16 + temp_v19 * temp_v20 * temp_v41;
-    temp_v38 = temp_v19 * temp_v20 + temp_v18 * temp_v16 * temp_v41;
-  }
-  else {
-    temp_v20 = romwright_fabs_4(DAT_005f15dc * 0.7111111f);
-    temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v25 <= DAT_005f15e0 * 0.7111111f) << 0x1d);
-    temp_v15 = romwright_fabs_4(DAT_005f15e0 * 0.7111111f);
-    for (temp_v11 = romwright_fabs_4(DAT_005f15d8 * 0.7111111f); (int)temp_v11 >= 0x47800000; temp_v11 = temp_v11 - 65536.0f
-        ) {
-    }
-    for (; (int)temp_v20 >= 0x47800000; temp_v20 = temp_v20 - 65536.0f) {
-    }
-    for (; (int)temp_v15 >= 0x47800000; temp_v15 = temp_v15 - 65536.0f) {
-    }
-    temp_v12 = VectorFloatToUnsigned(temp_v11,3);
-    temp_v13 = VectorFloatToUnsigned(temp_v20,3);
-    temp_v14 = VectorFloatToUnsigned(temp_v15,3);
-    temp_v8 = temp_v12;
-    temp_v18 = (float)VectorUnsignedToFloat(temp_v12 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v12 = temp_v13 & 0xff;
-    temp_v17 = (float)VectorUnsignedToFloat(temp_v13 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v13 = temp_v14 & 0xff;
-    temp_v16 = (float)VectorUnsignedToFloat(temp_v14 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v19 = (float)(&DAT_00536d14)[temp_v8 * 4] +
-             (temp_v11 - temp_v18) * (float)(&DAT_00536d1c)[temp_v8 * 4];
-    temp_v11 = (float)(&DAT_00536d18)[temp_v8 * 4] +
-             (temp_v11 - temp_v18) * (float)(&DAT_00536d20)[temp_v8 * 4];
-    if (DAT_005f15d8 * 0.7111111f < temp_v25) {
-      temp_v19 = -temp_v19;
-    }
-    temp_v41 = (float)(&DAT_00536d14)[temp_v12 * 4] +
-               (temp_v20 - temp_v17) * (float)(&DAT_00536d1c)[temp_v12 * 4];
-    fStack_78 = (float)(&DAT_00536d18)[temp_v12 * 4] +
-                (temp_v20 - temp_v17) * (float)(&DAT_00536d20)[temp_v12 * 4];
-    temp_v20 = (float)(&DAT_00536d14)[temp_v13 * 4] +
-             (temp_v15 - temp_v16) * (float)(&DAT_00536d1c)[temp_v13 * 4];
-    temp_v15 = (float)(&DAT_00536d18)[temp_v13 * 4] +
-             (temp_v15 - temp_v16) * (float)(&DAT_00536d20)[temp_v13 * 4];
-    if (DAT_005f15dc * 0.7111111f < temp_v25) {
-      temp_v41 = -temp_v41;
-    }
-    if (!romwright_subpiece_4_1_0(temp_v0 >> 0x1d,0)) {
-      temp_v20 = -temp_v20;
-    }
-    temp_v33 = temp_v15 * fStack_78;
-    temp_v37 = temp_v20 * fStack_78;
-    temp_v42 = temp_v19 * fStack_78;
-    fStack_78 = temp_v11 * fStack_78;
-    temp_v34 = temp_v19 * temp_v15 * temp_v41 - temp_v11 * temp_v20;
-    temp_v39 = temp_v11 * temp_v20 * temp_v41 - temp_v19 * temp_v15;
-    temp_v35 = temp_v19 * temp_v20 + temp_v11 * temp_v15 * temp_v41;
-    temp_v38 = temp_v11 * temp_v15 + temp_v19 * temp_v20 * temp_v41;
-  }
-  temp_v41 = -temp_v41;
-  temp_v36 = 0.0f;
-  temp_v40 = 0;
-  temp_v43 = 0;
-  temp_v29 = temp_v25;
-  temp_v30 = temp_v25;
-  temp_v31 = temp_v26;
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v29,&temp_v33);
-  temp_v29 = temp_v29 * temp_v21;
-  temp_v30 = temp_v30 * temp_v21;
-  temp_v31 = temp_v31 * temp_v21;
-  temp_v25 = 0.017453292f;
-  temp_v21 = (float)DAT_005806a4[6] * 0.017453292f;
-  FUN_001bc124();
-  temp_v20 = 290.0f;
-  temp_v22 = temp_v22 + temp_v21 * 290.0f;
-  temp_v25 = (float)DAT_005806a4[6] * temp_v25;
-  FUN_001bbf0c();
-  temp_v24 = temp_v24 + DAT_005f1a04;
-  temp_v9 = *(int *)(g_handleRegistry + 0x14);
-  temp_v21 = *(float *)(g_lmapScene + 0x24);
-  temp_v11 = *(float *)(g_lmapScene + 0x1c);
-  temp_v26 = *(float *)(g_lmapScene + 0x20);
-  *(float *)(temp_v9 + 0xb8) = temp_v22;
-  *(float *)(temp_v9 + 0xbc) = temp_v24;
-  *(float *)(temp_v9 + 0xc0) = temp_v23 + temp_v25 * temp_v20;
-  temp_v26 = temp_v26 + temp_v30;
-  if (g_gameState != 0x27) {
-    if ((g_gameState == 0x20) && (DAT_005f1600 == 1)) {
-      temp_v24 = 160.0f;
-      temp_v26 = temp_v26 - temp_v24;
-    }
-  }
-  else if ((!(DAT_005f1600 != 8 && DAT_005f1600 != 9)) ||
-          (!((DAT_005f1600 != 10 && DAT_005f1600 != 0xb) && DAT_005f1600 != 6))) {
-    temp_v24 = 120.0f;
-    temp_v26 = temp_v26 - temp_v24;
-  }
-  temp_v24 = temp_v21 + temp_v31 + DAT_005f1a14;
-  temp_v26 = temp_v26 + DAT_005f1a10;
-  *(float *)(temp_v9 + 0xac) = temp_v11 + temp_v29 + DAT_005f1a0c;
-  *(float *)(temp_v9 + 0xb0) = temp_v26;
-  *(float *)(temp_v9 + 0xb4) = temp_v24;
-  return;
+  FUN_00397aa4();
 }
 
 } /* extern "C" */

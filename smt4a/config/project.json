@@ -18797,9 +18797,19 @@
       "function": "FUN_001396c8",
       "module": "_code",
       "object": "build/obj/_code/0013/FUN_001396c8.o",
-      "size": 340,
+      "size": 16,
       "source": "src/_code/0013/FUN_001396c8.cpp",
       "target": "orig/target/_code/0013/FUN_001396c8.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1396d8",
+      "function": "FUN_001396d8",
+      "module": "_code",
+      "object": "build/obj/_code/0013/FUN_001396d8.o",
+      "size": 324,
+      "source": "src/_code/0013/FUN_001396d8.cpp",
+      "target": "orig/target/_code/0013/FUN_001396d8.o",
       "thumb": false
     },
     {
@@ -21319,9 +21329,19 @@
       "function": "FUN_00146ec8",
       "module": "_code",
       "object": "build/obj/_code/0014/FUN_00146ec8.o",
-      "size": 68,
+      "size": 4,
       "source": "src/_code/0014/FUN_00146ec8.cpp",
       "target": "orig/target/_code/0014/FUN_00146ec8.o",
+      "thumb": false
+    },
+    {
+      "address": "0x146ecc",
+      "function": "FUN_00146ecc",
+      "module": "_code",
+      "object": "build/obj/_code/0014/FUN_00146ecc.o",
+      "size": 64,
+      "source": "src/_code/0014/FUN_00146ecc.cpp",
+      "target": "orig/target/_code/0014/FUN_00146ecc.o",
       "thumb": false
     },
     {
@@ -24101,9 +24121,19 @@
       "function": "FUN_0015a5c0",
       "module": "_code",
       "object": "build/obj/_code/0015/FUN_0015a5c0.o",
-      "size": 396,
+      "size": 60,
       "source": "src/_code/0015/FUN_0015a5c0.cpp",
       "target": "orig/target/_code/0015/FUN_0015a5c0.o",
+      "thumb": false
+    },
+    {
+      "address": "0x15a5fc",
+      "function": "FUN_0015a5fc",
+      "module": "_code",
+      "object": "build/obj/_code/0015/FUN_0015a5fc.o",
+      "size": 336,
+      "source": "src/_code/0015/FUN_0015a5fc.cpp",
+      "target": "orig/target/_code/0015/FUN_0015a5fc.o",
       "thumb": false
     },
     {
@@ -25183,9 +25213,19 @@
       "function": "FUN_00161a10",
       "module": "_code",
       "object": "build/obj/_code/0016/FUN_00161a10.o",
-      "size": 156,
+      "size": 4,
       "source": "src/_code/0016/FUN_00161a10.cpp",
       "target": "orig/target/_code/0016/FUN_00161a10.o",
+      "thumb": false
+    },
+    {
+      "address": "0x161a14",
+      "function": "FUN_00161a14",
+      "module": "_code",
+      "object": "build/obj/_code/0016/FUN_00161a14.o",
+      "size": 152,
+      "source": "src/_code/0016/FUN_00161a14.cpp",
+      "target": "orig/target/_code/0016/FUN_00161a14.o",
       "thumb": false
     },
     {
@@ -27625,9 +27665,19 @@
       "function": "FUN_0016f198",
       "module": "_code",
       "object": "build/obj/_code/0016/FUN_0016f198.o",
-      "size": 52,
+      "size": 4,
       "source": "src/_code/0016/FUN_0016f198.cpp",
       "target": "orig/target/_code/0016/FUN_0016f198.o",
+      "thumb": false
+    },
+    {
+      "address": "0x16f19c",
+      "function": "FUN_0016f19c",
+      "module": "_code",
+      "object": "build/obj/_code/0016/FUN_0016f19c.o",
+      "size": 48,
+      "source": "src/_code/0016/FUN_0016f19c.cpp",
+      "target": "orig/target/_code/0016/FUN_0016f19c.o",
       "thumb": false
     },
     {
@@ -27855,9 +27905,19 @@
       "function": "FUN_00170050",
       "module": "_code",
       "object": "build/obj/_code/0017/FUN_00170050.o",
-      "size": 240,
+      "size": 4,
       "source": "src/_code/0017/FUN_00170050.cpp",
       "target": "orig/target/_code/0017/FUN_00170050.o",
+      "thumb": false
+    },
+    {
+      "address": "0x170054",
+      "function": "FUN_00170054",
+      "module": "_code",
+      "object": "build/obj/_code/0017/FUN_00170054.o",
+      "size": 236,
+      "source": "src/_code/0017/FUN_00170054.cpp",
+      "target": "orig/target/_code/0017/FUN_00170054.o",
       "thumb": false
     },
     {
@@ -27955,9 +28015,19 @@
       "function": "FUN_001702f8",
       "module": "_code",
       "object": "build/obj/_code/0017/FUN_001702f8.o",
-      "size": 72,
+      "size": 4,
       "source": "src/_code/0017/FUN_001702f8.cpp",
       "target": "orig/target/_code/0017/FUN_001702f8.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1702fc",
+      "function": "FUN_001702fc",
+      "module": "_code",
+      "object": "build/obj/_code/0017/FUN_001702fc.o",
+      "size": 68,
+      "source": "src/_code/0017/FUN_001702fc.cpp",
+      "target": "orig/target/_code/0017/FUN_001702fc.o",
       "thumb": false
     },
     {
@@ -28575,9 +28645,19 @@
       "function": "FUN_00173818",
       "module": "_code",
       "object": "build/obj/_code/0017/FUN_00173818.o",
-      "size": 416,
+      "size": 140,
       "source": "src/_code/0017/FUN_00173818.cpp",
       "target": "orig/target/_code/0017/FUN_00173818.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1738a4",
+      "function": "FUN_001738a4",
+      "module": "_code",
+      "object": "build/obj/_code/0017/FUN_001738a4.o",
+      "size": 276,
+      "source": "src/_code/0017/FUN_001738a4.cpp",
+      "target": "orig/target/_code/0017/FUN_001738a4.o",
       "thumb": false
     },
     {
@@ -29465,9 +29545,19 @@
       "function": "FUN_001787a8",
       "module": "_code",
       "object": "build/obj/_code/0017/FUN_001787a8.o",
-      "size": 684,
+      "size": 272,
       "source": "src/_code/0017/FUN_001787a8.cpp",
       "target": "orig/target/_code/0017/FUN_001787a8.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1788b8",
+      "function": "FUN_001788b8",
+      "module": "_code",
+      "object": "build/obj/_code/0017/FUN_001788b8.o",
+      "size": 412,
+      "source": "src/_code/0017/FUN_001788b8.cpp",
+      "target": "orig/target/_code/0017/FUN_001788b8.o",
       "thumb": false
     },
     {
@@ -30257,9 +30347,19 @@
       "function": "FUN_0018098c",
       "module": "_code",
       "object": "build/obj/_code/0018/FUN_0018098c.o",
-      "size": 2968,
+      "size": 12,
       "source": "src/_code/0018/FUN_0018098c.cpp",
       "target": "orig/target/_code/0018/FUN_0018098c.o",
+      "thumb": false
+    },
+    {
+      "address": "0x180998",
+      "function": "FUN_00180998",
+      "module": "_code",
+      "object": "build/obj/_code/0018/FUN_00180998.o",
+      "size": 2956,
+      "source": "src/_code/0018/FUN_00180998.cpp",
+      "target": "orig/target/_code/0018/FUN_00180998.o",
       "thumb": false
     },
     {
@@ -31467,9 +31567,19 @@
       "function": "nn_os_SharedMemoryBlock_AttachAndMap",
       "module": "_code",
       "object": "build/obj/_code/0018/nn_os_SharedMemoryBlock_AttachAndMap.o",
-      "size": 156,
+      "size": 40,
       "source": "src/_code/0018/nn_os_SharedMemoryBlock_AttachAndMap.cpp",
       "target": "orig/target/_code/0018/nn_os_SharedMemoryBlock_AttachAndMap.o",
+      "thumb": false
+    },
+    {
+      "address": "0x188ba4",
+      "function": "FUN_00188ba4",
+      "module": "_code",
+      "object": "build/obj/_code/0018/FUN_00188ba4.o",
+      "size": 116,
+      "source": "src/_code/0018/FUN_00188ba4.cpp",
+      "target": "orig/target/_code/0018/FUN_00188ba4.o",
       "thumb": false
     },
     {
@@ -31617,9 +31727,19 @@
       "function": "FUN_00189738",
       "module": "_code",
       "object": "build/obj/_code/0018/FUN_00189738.o",
-      "size": 72,
+      "size": 4,
       "source": "src/_code/0018/FUN_00189738.cpp",
       "target": "orig/target/_code/0018/FUN_00189738.o",
+      "thumb": false
+    },
+    {
+      "address": "0x18973c",
+      "function": "FUN_0018973c",
+      "module": "_code",
+      "object": "build/obj/_code/0018/FUN_0018973c.o",
+      "size": 68,
+      "source": "src/_code/0018/FUN_0018973c.cpp",
+      "target": "orig/target/_code/0018/FUN_0018973c.o",
       "thumb": false
     },
     {
@@ -31817,9 +31937,19 @@
       "function": "nn_snd_CTR_DspFxManager_Initialize",
       "module": "_code",
       "object": "build/obj/_code/0018/nn_snd_CTR_DspFxManager_Initialize.o",
-      "size": 428,
+      "size": 68,
       "source": "src/_code/0018/nn_snd_CTR_DspFxManager_Initialize.cpp",
       "target": "orig/target/_code/0018/nn_snd_CTR_DspFxManager_Initialize.o",
+      "thumb": false
+    },
+    {
+      "address": "0x189e74",
+      "function": "FUN_00189e74",
+      "module": "_code",
+      "object": "build/obj/_code/0018/FUN_00189e74.o",
+      "size": 360,
+      "source": "src/_code/0018/FUN_00189e74.cpp",
+      "target": "orig/target/_code/0018/FUN_00189e74.o",
       "thumb": false
     },
     {
@@ -34128,9 +34258,19 @@
       "function": "FUN_00194f94",
       "module": "_code",
       "object": "build/obj/_code/0019/FUN_00194f94.o",
-      "size": 28,
+      "size": 8,
       "source": "src/_code/0019/FUN_00194f94.cpp",
       "target": "orig/target/_code/0019/FUN_00194f94.o",
+      "thumb": false
+    },
+    {
+      "address": "0x194f9c",
+      "function": "FUN_00194f9c",
+      "module": "_code",
+      "object": "build/obj/_code/0019/FUN_00194f9c.o",
+      "size": 20,
+      "source": "src/_code/0019/FUN_00194f9c.cpp",
+      "target": "orig/target/_code/0019/FUN_00194f9c.o",
       "thumb": false
     },
     {
@@ -35859,9 +35999,19 @@
       "function": "nn_os_LightEvent_ClearSignal",
       "module": "_code",
       "object": "build/obj/_code/001a/nn_os_LightEvent_ClearSignal.o",
-      "size": 180,
+      "size": 100,
       "source": "src/_code/001a/nn_os_LightEvent_ClearSignal.cpp",
       "target": "orig/target/_code/001a/nn_os_LightEvent_ClearSignal.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1a09f4",
+      "function": "FUN_001a09f4",
+      "module": "_code",
+      "object": "build/obj/_code/001a/FUN_001a09f4.o",
+      "size": 80,
+      "source": "src/_code/001a/FUN_001a09f4.cpp",
+      "target": "orig/target/_code/001a/FUN_001a09f4.o",
       "thumb": false
     },
     {
@@ -36439,9 +36589,19 @@
       "function": "FUN_001a1f5c",
       "module": "_code",
       "object": "build/obj/_code/001a/FUN_001a1f5c.o",
-      "size": 76,
+      "size": 4,
       "source": "src/_code/001a/FUN_001a1f5c.cpp",
       "target": "orig/target/_code/001a/FUN_001a1f5c.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1a1f60",
+      "function": "FUN_001a1f60",
+      "module": "_code",
+      "object": "build/obj/_code/001a/FUN_001a1f60.o",
+      "size": 72,
+      "source": "src/_code/001a/FUN_001a1f60.cpp",
+      "target": "orig/target/_code/001a/FUN_001a1f60.o",
       "thumb": false
     },
     {
@@ -36499,9 +36659,19 @@
       "function": "FUN_001a2500",
       "module": "_code",
       "object": "build/obj/_code/001a/FUN_001a2500.o",
-      "size": 204,
+      "size": 4,
       "source": "src/_code/001a/FUN_001a2500.cpp",
       "target": "orig/target/_code/001a/FUN_001a2500.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1a2504",
+      "function": "FUN_001a2504",
+      "module": "_code",
+      "object": "build/obj/_code/001a/FUN_001a2504.o",
+      "size": 200,
+      "source": "src/_code/001a/FUN_001a2504.cpp",
+      "target": "orig/target/_code/001a/FUN_001a2504.o",
       "thumb": false
     },
     {
@@ -37230,9 +37400,19 @@
       "function": "nw_snd_internal_driver_SoundThread_SoundThreadFunc",
       "module": "_code",
       "object": "build/obj/_code/001a/nw_snd_internal_driver_SoundThread_SoundThreadFunc.o",
-      "size": 476,
+      "size": 124,
       "source": "src/_code/001a/nw_snd_internal_driver_SoundThread_SoundThreadFunc.cpp",
       "target": "orig/target/_code/001a/nw_snd_internal_driver_SoundThread_SoundThreadFunc.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1a5fb8",
+      "function": "FUN_001a5fb8",
+      "module": "_code",
+      "object": "build/obj/_code/001a/FUN_001a5fb8.o",
+      "size": 352,
+      "source": "src/_code/001a/FUN_001a5fb8.cpp",
+      "target": "orig/target/_code/001a/FUN_001a5fb8.o",
       "thumb": false
     },
     {
@@ -38170,9 +38350,19 @@
       "function": "FUN_001aa60c",
       "module": "_code",
       "object": "build/obj/_code/001a/FUN_001aa60c.o",
-      "size": 2004,
+      "size": 4,
       "source": "src/_code/001a/FUN_001aa60c.cpp",
       "target": "orig/target/_code/001a/FUN_001aa60c.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1aa610",
+      "function": "FUN_001aa610",
+      "module": "_code",
+      "object": "build/obj/_code/001a/FUN_001aa610.o",
+      "size": 2000,
+      "source": "src/_code/001a/FUN_001aa610.cpp",
+      "target": "orig/target/_code/001a/FUN_001aa610.o",
       "thumb": false
     },
     {
@@ -38554,9 +38744,20 @@
       "function": "FUN_001ad22c",
       "module": "_code",
       "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001ad22c.o",
-      "size": 792,
+      "size": 120,
       "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001ad22c.cpp",
       "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001ad22c.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1ad2a4",
+      "file": "AsdSDK/Source/Gfx/Model/AsdModel",
+      "function": "FUN_001ad2a4",
+      "module": "_code",
+      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001ad2a4.o",
+      "size": 672,
+      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001ad2a4.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001ad2a4.o",
       "thumb": false
     },
     {
@@ -40004,9 +40205,19 @@
       "function": "FUN_001b3da8",
       "module": "_code",
       "object": "build/obj/_code/001b/FUN_001b3da8.o",
-      "size": 248,
+      "size": 8,
       "source": "src/_code/001b/FUN_001b3da8.cpp",
       "target": "orig/target/_code/001b/FUN_001b3da8.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1b3db0",
+      "function": "FUN_001b3db0",
+      "module": "_code",
+      "object": "build/obj/_code/001b/FUN_001b3db0.o",
+      "size": 240,
+      "source": "src/_code/001b/FUN_001b3db0.cpp",
+      "target": "orig/target/_code/001b/FUN_001b3db0.o",
       "thumb": false
     },
     {
@@ -41557,9 +41768,19 @@
       "function": "FUN_001bd354",
       "module": "_code",
       "object": "build/obj/_code/001b/FUN_001bd354.o",
-      "size": 224,
+      "size": 40,
       "source": "src/_code/001b/FUN_001bd354.cpp",
       "target": "orig/target/_code/001b/FUN_001bd354.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1bd37c",
+      "function": "FUN_001bd37c",
+      "module": "_code",
+      "object": "build/obj/_code/001b/FUN_001bd37c.o",
+      "size": 184,
+      "source": "src/_code/001b/FUN_001bd37c.cpp",
+      "target": "orig/target/_code/001b/FUN_001bd37c.o",
       "thumb": false
     },
     {
@@ -41617,9 +41838,19 @@
       "function": "FUN_001bd5b8",
       "module": "_code",
       "object": "build/obj/_code/001b/FUN_001bd5b8.o",
-      "size": 60,
+      "size": 4,
       "source": "src/_code/001b/FUN_001bd5b8.cpp",
       "target": "orig/target/_code/001b/FUN_001bd5b8.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1bd5bc",
+      "function": "FUN_001bd5bc",
+      "module": "_code",
+      "object": "build/obj/_code/001b/FUN_001bd5bc.o",
+      "size": 56,
+      "source": "src/_code/001b/FUN_001bd5bc.cpp",
+      "target": "orig/target/_code/001b/FUN_001bd5bc.o",
       "thumb": false
     },
     {
@@ -41647,9 +41878,19 @@
       "function": "FUN_001bd870",
       "module": "_code",
       "object": "build/obj/_code/001b/FUN_001bd870.o",
-      "size": 408,
+      "size": 24,
       "source": "src/_code/001b/FUN_001bd870.cpp",
       "target": "orig/target/_code/001b/FUN_001bd870.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1bd888",
+      "function": "FUN_001bd888",
+      "module": "_code",
+      "object": "build/obj/_code/001b/FUN_001bd888.o",
+      "size": 384,
+      "source": "src/_code/001b/FUN_001bd888.cpp",
+      "target": "orig/target/_code/001b/FUN_001bd888.o",
       "thumb": false
     },
     {
@@ -44291,9 +44532,19 @@
       "function": "FUN_001cf450",
       "module": "_code",
       "object": "build/obj/_code/001c/FUN_001cf450.o",
-      "size": 336,
+      "size": 20,
       "source": "src/_code/001c/FUN_001cf450.cpp",
       "target": "orig/target/_code/001c/FUN_001cf450.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1cf464",
+      "function": "FUN_001cf464",
+      "module": "_code",
+      "object": "build/obj/_code/001c/FUN_001cf464.o",
+      "size": 316,
+      "source": "src/_code/001c/FUN_001cf464.cpp",
+      "target": "orig/target/_code/001c/FUN_001cf464.o",
       "thumb": false
     },
     {
@@ -44341,9 +44592,19 @@
       "function": "FUN_001d0754",
       "module": "_code",
       "object": "build/obj/_code/001d/FUN_001d0754.o",
-      "size": 140,
+      "size": 52,
       "source": "src/_code/001d/FUN_001d0754.cpp",
       "target": "orig/target/_code/001d/FUN_001d0754.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1d0788",
+      "function": "FUN_001d0788",
+      "module": "_code",
+      "object": "build/obj/_code/001d/FUN_001d0788.o",
+      "size": 88,
+      "source": "src/_code/001d/FUN_001d0788.cpp",
+      "target": "orig/target/_code/001d/FUN_001d0788.o",
       "thumb": false
     },
     {
@@ -45061,9 +45322,19 @@
       "function": "nn_snd_CTR_VoiceManager_UpdateStatus",
       "module": "_code",
       "object": "build/obj/_code/001d/nn_snd_CTR_VoiceManager_UpdateStatus.o",
-      "size": 360,
+      "size": 28,
       "source": "src/_code/001d/nn_snd_CTR_VoiceManager_UpdateStatus.cpp",
       "target": "orig/target/_code/001d/nn_snd_CTR_VoiceManager_UpdateStatus.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1d3008",
+      "function": "FUN_001d3008",
+      "module": "_code",
+      "object": "build/obj/_code/001d/FUN_001d3008.o",
+      "size": 332,
+      "source": "src/_code/001d/FUN_001d3008.cpp",
+      "target": "orig/target/_code/001d/FUN_001d3008.o",
       "thumb": false
     },
     {
@@ -53508,9 +53779,19 @@
       "function": "FUN_00280c5c",
       "module": "_code",
       "object": "build/obj/_code/0028/FUN_00280c5c.o",
-      "size": 188,
+      "size": 20,
       "source": "src/_code/0028/FUN_00280c5c.cpp",
       "target": "orig/target/_code/0028/FUN_00280c5c.o",
+      "thumb": false
+    },
+    {
+      "address": "0x280c70",
+      "function": "FUN_00280c70",
+      "module": "_code",
+      "object": "build/obj/_code/0028/FUN_00280c70.o",
+      "size": 168,
+      "source": "src/_code/0028/FUN_00280c70.cpp",
+      "target": "orig/target/_code/0028/FUN_00280c70.o",
       "thumb": false
     },
     {
@@ -56027,9 +56308,19 @@
       "function": "FUN_002a2d14",
       "module": "_code",
       "object": "build/obj/_code/002a/FUN_002a2d14.o",
-      "size": 384,
+      "size": 20,
       "source": "src/_code/002a/FUN_002a2d14.cpp",
       "target": "orig/target/_code/002a/FUN_002a2d14.o",
+      "thumb": false
+    },
+    {
+      "address": "0x2a2d28",
+      "function": "FUN_002a2d28",
+      "module": "_code",
+      "object": "build/obj/_code/002a/FUN_002a2d28.o",
+      "size": 364,
+      "source": "src/_code/002a/FUN_002a2d28.cpp",
+      "target": "orig/target/_code/002a/FUN_002a2d28.o",
       "thumb": false
     },
     {
@@ -56088,9 +56379,19 @@
       "function": "FUN_002a334c",
       "module": "_code",
       "object": "build/obj/_code/002a/FUN_002a334c.o",
-      "size": 288,
+      "size": 164,
       "source": "src/_code/002a/FUN_002a334c.cpp",
       "target": "orig/target/_code/002a/FUN_002a334c.o",
+      "thumb": false
+    },
+    {
+      "address": "0x2a33f0",
+      "function": "FUN_002a33f0",
+      "module": "_code",
+      "object": "build/obj/_code/002a/FUN_002a33f0.o",
+      "size": 124,
+      "source": "src/_code/002a/FUN_002a33f0.cpp",
+      "target": "orig/target/_code/002a/FUN_002a33f0.o",
       "thumb": false
     },
     {
@@ -56098,9 +56399,19 @@
       "function": "FUN_002a3474",
       "module": "_code",
       "object": "build/obj/_code/002a/FUN_002a3474.o",
-      "size": 284,
+      "size": 164,
       "source": "src/_code/002a/FUN_002a3474.cpp",
       "target": "orig/target/_code/002a/FUN_002a3474.o",
+      "thumb": false
+    },
+    {
+      "address": "0x2a3518",
+      "function": "FUN_002a3518",
+      "module": "_code",
+      "object": "build/obj/_code/002a/FUN_002a3518.o",
+      "size": 120,
+      "source": "src/_code/002a/FUN_002a3518.cpp",
+      "target": "orig/target/_code/002a/FUN_002a3518.o",
       "thumb": false
     },
     {
@@ -57628,9 +57939,19 @@
       "function": "FUN_002b4358",
       "module": "_code",
       "object": "build/obj/_code/002b/FUN_002b4358.o",
-      "size": 2264,
+      "size": 36,
       "source": "src/_code/002b/FUN_002b4358.cpp",
       "target": "orig/target/_code/002b/FUN_002b4358.o",
+      "thumb": false
+    },
+    {
+      "address": "0x2b437c",
+      "function": "FUN_002b437c",
+      "module": "_code",
+      "object": "build/obj/_code/002b/FUN_002b437c.o",
+      "size": 2228,
+      "source": "src/_code/002b/FUN_002b437c.cpp",
+      "target": "orig/target/_code/002b/FUN_002b437c.o",
       "thumb": false
     },
     {
@@ -62562,9 +62883,19 @@
       "function": "FUN_002e4810",
       "module": "_code",
       "object": "build/obj/_code/002e/FUN_002e4810.o",
-      "size": 92,
+      "size": 24,
       "source": "src/_code/002e/FUN_002e4810.cpp",
       "target": "orig/target/_code/002e/FUN_002e4810.o",
+      "thumb": false
+    },
+    {
+      "address": "0x2e4828",
+      "function": "FUN_002e4828",
+      "module": "_code",
+      "object": "build/obj/_code/002e/FUN_002e4828.o",
+      "size": 68,
+      "source": "src/_code/002e/FUN_002e4828.cpp",
+      "target": "orig/target/_code/002e/FUN_002e4828.o",
       "thumb": false
     },
     {
@@ -63616,9 +63947,19 @@
       "function": "FUN_002e7284",
       "module": "_code",
       "object": "build/obj/_code/002e/FUN_002e7284.o",
-      "size": 164,
+      "size": 68,
       "source": "src/_code/002e/FUN_002e7284.cpp",
       "target": "orig/target/_code/002e/FUN_002e7284.o",
+      "thumb": false
+    },
+    {
+      "address": "0x2e72c8",
+      "function": "FUN_002e72c8",
+      "module": "_code",
+      "object": "build/obj/_code/002e/FUN_002e72c8.o",
+      "size": 96,
+      "source": "src/_code/002e/FUN_002e72c8.cpp",
+      "target": "orig/target/_code/002e/FUN_002e72c8.o",
       "thumb": false
     },
     {
@@ -91247,9 +91588,19 @@
       "function": "FUN_003516c0",
       "module": "_code",
       "object": "build/obj/_code/0035/FUN_003516c0.o",
-      "size": 2560,
+      "size": 36,
       "source": "src/_code/0035/FUN_003516c0.cpp",
       "target": "orig/target/_code/0035/FUN_003516c0.o",
+      "thumb": false
+    },
+    {
+      "address": "0x3516e4",
+      "function": "FUN_003516e4",
+      "module": "_code",
+      "object": "build/obj/_code/0035/FUN_003516e4.o",
+      "size": 2524,
+      "source": "src/_code/0035/FUN_003516e4.cpp",
+      "target": "orig/target/_code/0035/FUN_003516e4.o",
       "thumb": false
     },
     {
@@ -92036,9 +92387,19 @@
       "function": "FUN_00358f70",
       "module": "_code",
       "object": "build/obj/_code/0035/FUN_00358f70.o",
-      "size": 72,
+      "size": 4,
       "source": "src/_code/0035/FUN_00358f70.cpp",
       "target": "orig/target/_code/0035/FUN_00358f70.o",
+      "thumb": false
+    },
+    {
+      "address": "0x358f74",
+      "function": "FUN_00358f74",
+      "module": "_code",
+      "object": "build/obj/_code/0035/FUN_00358f74.o",
+      "size": 68,
+      "source": "src/_code/0035/FUN_00358f74.cpp",
+      "target": "orig/target/_code/0035/FUN_00358f74.o",
       "thumb": false
     },
     {
@@ -92046,9 +92407,19 @@
       "function": "FUN_00358fbc",
       "module": "_code",
       "object": "build/obj/_code/0035/FUN_00358fbc.o",
-      "size": 72,
+      "size": 4,
       "source": "src/_code/0035/FUN_00358fbc.cpp",
       "target": "orig/target/_code/0035/FUN_00358fbc.o",
+      "thumb": false
+    },
+    {
+      "address": "0x358fc0",
+      "function": "FUN_00358fc0",
+      "module": "_code",
+      "object": "build/obj/_code/0035/FUN_00358fc0.o",
+      "size": 68,
+      "source": "src/_code/0035/FUN_00358fc0.cpp",
+      "target": "orig/target/_code/0035/FUN_00358fc0.o",
       "thumb": false
     },
     {
@@ -92086,9 +92457,19 @@
       "function": "FUN_00359370",
       "module": "_code",
       "object": "build/obj/_code/0035/FUN_00359370.o",
-      "size": 388,
+      "size": 228,
       "source": "src/_code/0035/FUN_00359370.cpp",
       "target": "orig/target/_code/0035/FUN_00359370.o",
+      "thumb": false
+    },
+    {
+      "address": "0x359454",
+      "function": "FUN_00359454",
+      "module": "_code",
+      "object": "build/obj/_code/0035/FUN_00359454.o",
+      "size": 160,
+      "source": "src/_code/0035/FUN_00359454.cpp",
+      "target": "orig/target/_code/0035/FUN_00359454.o",
       "thumb": false
     },
     {
@@ -93276,9 +93657,19 @@
       "function": "FUN_0035e458",
       "module": "_code",
       "object": "build/obj/_code/0035/FUN_0035e458.o",
-      "size": 224,
+      "size": 8,
       "source": "src/_code/0035/FUN_0035e458.cpp",
       "target": "orig/target/_code/0035/FUN_0035e458.o",
+      "thumb": false
+    },
+    {
+      "address": "0x35e460",
+      "function": "FUN_0035e460",
+      "module": "_code",
+      "object": "build/obj/_code/0035/FUN_0035e460.o",
+      "size": 216,
+      "source": "src/_code/0035/FUN_0035e460.cpp",
+      "target": "orig/target/_code/0035/FUN_0035e460.o",
       "thumb": false
     },
     {
@@ -94560,9 +94951,19 @@
       "function": "FUN_0036b6cc",
       "module": "_code",
       "object": "build/obj/_code/0036/FUN_0036b6cc.o",
-      "size": 324,
+      "size": 12,
       "source": "src/_code/0036/FUN_0036b6cc.cpp",
       "target": "orig/target/_code/0036/FUN_0036b6cc.o",
+      "thumb": false
+    },
+    {
+      "address": "0x36b6d8",
+      "function": "FUN_0036b6d8",
+      "module": "_code",
+      "object": "build/obj/_code/0036/FUN_0036b6d8.o",
+      "size": 312,
+      "source": "src/_code/0036/FUN_0036b6d8.cpp",
+      "target": "orig/target/_code/0036/FUN_0036b6d8.o",
       "thumb": false
     },
     {
@@ -101079,9 +101480,19 @@
       "function": "FUN_00395904",
       "module": "_code",
       "object": "build/obj/_code/0039/FUN_00395904.o",
-      "size": 9960,
+      "size": 8608,
       "source": "src/_code/0039/FUN_00395904.cpp",
       "target": "orig/target/_code/0039/FUN_00395904.o",
+      "thumb": false
+    },
+    {
+      "address": "0x397aa4",
+      "function": "FUN_00397aa4",
+      "module": "_code",
+      "object": "build/obj/_code/0039/FUN_00397aa4.o",
+      "size": 1352,
+      "source": "src/_code/0039/FUN_00397aa4.cpp",
+      "target": "orig/target/_code/0039/FUN_00397aa4.o",
       "thumb": false
     },
     {
@@ -101614,9 +102025,19 @@
       "function": "scrComm_Message_ShowFromQuestStateWaitLock",
       "module": "_code",
       "object": "build/obj/_code/0039/scrComm_Message_ShowFromQuestStateWaitLock.o",
-      "size": 156,
+      "size": 24,
       "source": "src/_code/0039/scrComm_Message_ShowFromQuestStateWaitLock.cpp",
       "target": "orig/target/_code/0039/scrComm_Message_ShowFromQuestStateWaitLock.o",
+      "thumb": false
+    },
+    {
+      "address": "0x39a6a4",
+      "function": "FUN_0039a6a4",
+      "module": "_code",
+      "object": "build/obj/_code/0039/FUN_0039a6a4.o",
+      "size": 132,
+      "source": "src/_code/0039/FUN_0039a6a4.cpp",
+      "target": "orig/target/_code/0039/FUN_0039a6a4.o",
       "thumb": false
     },
     {
@@ -116276,9 +116697,19 @@
       "function": "FUN_00406834",
       "module": "_code",
       "object": "build/obj/_code/0040/FUN_00406834.o",
-      "size": 376,
+      "size": 8,
       "source": "src/_code/0040/FUN_00406834.cpp",
       "target": "orig/target/_code/0040/FUN_00406834.o",
+      "thumb": false
+    },
+    {
+      "address": "0x40683c",
+      "function": "FUN_0040683c",
+      "module": "_code",
+      "object": "build/obj/_code/0040/FUN_0040683c.o",
+      "size": 368,
+      "source": "src/_code/0040/FUN_0040683c.cpp",
+      "target": "orig/target/_code/0040/FUN_0040683c.o",
       "thumb": false
     },
     {
@@ -118778,9 +119209,20 @@
       "function": "FUN_0041a0fc",
       "module": "_code",
       "object": "build/obj/_code/Model/MoriModelEffect/FUN_0041a0fc.o",
-      "size": 368,
+      "size": 40,
       "source": "src/_code/Model/MoriModelEffect/FUN_0041a0fc.cpp",
       "target": "orig/target/_code/Model/MoriModelEffect/FUN_0041a0fc.o",
+      "thumb": false
+    },
+    {
+      "address": "0x41a124",
+      "file": "Model/MoriModelEffect",
+      "function": "FUN_0041a124",
+      "module": "_code",
+      "object": "build/obj/_code/Model/MoriModelEffect/FUN_0041a124.o",
+      "size": 328,
+      "source": "src/_code/Model/MoriModelEffect/FUN_0041a124.cpp",
+      "target": "orig/target/_code/Model/MoriModelEffect/FUN_0041a124.o",
       "thumb": false
     },
     {
@@ -120329,9 +120771,19 @@
       "function": "FUN_00425448",
       "module": "_code",
       "object": "build/obj/_code/0042/FUN_00425448.o",
-      "size": 452,
+      "size": 244,
       "source": "src/_code/0042/FUN_00425448.cpp",
       "target": "orig/target/_code/0042/FUN_00425448.o",
+      "thumb": false
+    },
+    {
+      "address": "0x42553c",
+      "function": "FUN_0042553c",
+      "module": "_code",
+      "object": "build/obj/_code/0042/FUN_0042553c.o",
+      "size": 208,
+      "source": "src/_code/0042/FUN_0042553c.cpp",
+      "target": "orig/target/_code/0042/FUN_0042553c.o",
       "thumb": false
     },
     {
@@ -120761,9 +121213,19 @@
       "function": "FUN_004268ec",
       "module": "_code",
       "object": "build/obj/_code/0042/FUN_004268ec.o",
-      "size": 76,
+      "size": 4,
       "source": "src/_code/0042/FUN_004268ec.cpp",
       "target": "orig/target/_code/0042/FUN_004268ec.o",
+      "thumb": false
+    },
+    {
+      "address": "0x4268f0",
+      "function": "FUN_004268f0",
+      "module": "_code",
+      "object": "build/obj/_code/0042/FUN_004268f0.o",
+      "size": 72,
+      "source": "src/_code/0042/FUN_004268f0.cpp",
+      "target": "orig/target/_code/0042/FUN_004268f0.o",
       "thumb": false
     },
     {
@@ -120781,9 +121243,19 @@
       "function": "FUN_004269b0",
       "module": "_code",
       "object": "build/obj/_code/0042/FUN_004269b0.o",
-      "size": 100,
+      "size": 4,
       "source": "src/_code/0042/FUN_004269b0.cpp",
       "target": "orig/target/_code/0042/FUN_004269b0.o",
+      "thumb": false
+    },
+    {
+      "address": "0x4269b4",
+      "function": "FUN_004269b4",
+      "module": "_code",
+      "object": "build/obj/_code/0042/FUN_004269b4.o",
+      "size": 96,
+      "source": "src/_code/0042/FUN_004269b4.cpp",
+      "target": "orig/target/_code/0042/FUN_004269b4.o",
       "thumb": false
     },
     {
@@ -120801,9 +121273,19 @@
       "function": "FUN_00426a80",
       "module": "_code",
       "object": "build/obj/_code/0042/FUN_00426a80.o",
-      "size": 60,
+      "size": 4,
       "source": "src/_code/0042/FUN_00426a80.cpp",
       "target": "orig/target/_code/0042/FUN_00426a80.o",
+      "thumb": false
+    },
+    {
+      "address": "0x426a84",
+      "function": "FUN_00426a84",
+      "module": "_code",
+      "object": "build/obj/_code/0042/FUN_00426a84.o",
+      "size": 56,
+      "source": "src/_code/0042/FUN_00426a84.cpp",
+      "target": "orig/target/_code/0042/FUN_00426a84.o",
       "thumb": false
     },
     {
@@ -122291,9 +122773,19 @@
       "function": "FUN_0042c8f8",
       "module": "_code",
       "object": "build/obj/_code/0042/FUN_0042c8f8.o",
-      "size": 624,
+      "size": 264,
       "source": "src/_code/0042/FUN_0042c8f8.cpp",
       "target": "orig/target/_code/0042/FUN_0042c8f8.o",
+      "thumb": false
+    },
+    {
+      "address": "0x42ca00",
+      "function": "FUN_0042ca00",
+      "module": "_code",
+      "object": "build/obj/_code/0042/FUN_0042ca00.o",
+      "size": 360,
+      "source": "src/_code/0042/FUN_0042ca00.cpp",
+      "target": "orig/target/_code/0042/FUN_0042ca00.o",
       "thumb": false
     },
     {
@@ -122501,9 +122993,19 @@
       "function": "FUN_0042d368",
       "module": "_code",
       "object": "build/obj/_code/0042/FUN_0042d368.o",
-      "size": 108,
+      "size": 16,
       "source": "src/_code/0042/FUN_0042d368.cpp",
       "target": "orig/target/_code/0042/FUN_0042d368.o",
+      "thumb": false
+    },
+    {
+      "address": "0x42d378",
+      "function": "FUN_0042d378",
+      "module": "_code",
+      "object": "build/obj/_code/0042/FUN_0042d378.o",
+      "size": 92,
+      "source": "src/_code/0042/FUN_0042d378.cpp",
+      "target": "orig/target/_code/0042/FUN_0042d378.o",
       "thumb": false
     },
     {
@@ -123481,9 +123983,19 @@
       "function": "FUN_004311e8",
       "module": "_code",
       "object": "build/obj/_code/0043/FUN_004311e8.o",
-      "size": 64,
+      "size": 4,
       "source": "src/_code/0043/FUN_004311e8.cpp",
       "target": "orig/target/_code/0043/FUN_004311e8.o",
+      "thumb": false
+    },
+    {
+      "address": "0x4311ec",
+      "function": "FUN_004311ec",
+      "module": "_code",
+      "object": "build/obj/_code/0043/FUN_004311ec.o",
+      "size": 60,
+      "source": "src/_code/0043/FUN_004311ec.cpp",
+      "target": "orig/target/_code/0043/FUN_004311ec.o",
       "thumb": false
     },
     {
@@ -123671,9 +124183,19 @@
       "function": "FUN_00431e8c",
       "module": "_code",
       "object": "build/obj/_code/0043/FUN_00431e8c.o",
-      "size": 116,
+      "size": 4,
       "source": "src/_code/0043/FUN_00431e8c.cpp",
       "target": "orig/target/_code/0043/FUN_00431e8c.o",
+      "thumb": false
+    },
+    {
+      "address": "0x431e90",
+      "function": "FUN_00431e90",
+      "module": "_code",
+      "object": "build/obj/_code/0043/FUN_00431e90.o",
+      "size": 112,
+      "source": "src/_code/0043/FUN_00431e90.cpp",
+      "target": "orig/target/_code/0043/FUN_00431e90.o",
       "thumb": false
     },
     {
@@ -123731,9 +124253,19 @@
       "function": "FUN_00432040",
       "module": "_code",
       "object": "build/obj/_code/0043/FUN_00432040.o",
-      "size": 60,
+      "size": 4,
       "source": "src/_code/0043/FUN_00432040.cpp",
       "target": "orig/target/_code/0043/FUN_00432040.o",
+      "thumb": false
+    },
+    {
+      "address": "0x432044",
+      "function": "FUN_00432044",
+      "module": "_code",
+      "object": "build/obj/_code/0043/FUN_00432044.o",
+      "size": 56,
+      "source": "src/_code/0043/FUN_00432044.cpp",
+      "target": "orig/target/_code/0043/FUN_00432044.o",
       "thumb": false
     },
     {
@@ -123741,9 +124273,19 @@
       "function": "FUN_00432084",
       "module": "_code",
       "object": "build/obj/_code/0043/FUN_00432084.o",
-      "size": 56,
+      "size": 4,
       "source": "src/_code/0043/FUN_00432084.cpp",
       "target": "orig/target/_code/0043/FUN_00432084.o",
+      "thumb": false
+    },
+    {
+      "address": "0x432088",
+      "function": "FUN_00432088",
+      "module": "_code",
+      "object": "build/obj/_code/0043/FUN_00432088.o",
+      "size": 52,
+      "source": "src/_code/0043/FUN_00432088.cpp",
+      "target": "orig/target/_code/0043/FUN_00432088.o",
       "thumb": false
     },
     {
@@ -123782,9 +124324,20 @@
       "function": "FUN_004321a0",
       "module": "_code",
       "object": "build/obj/_code/network/Common/CTRNetInit/FUN_004321a0.o",
-      "size": 104,
+      "size": 4,
       "source": "src/_code/network/Common/CTRNetInit/FUN_004321a0.cpp",
       "target": "orig/target/_code/network/Common/CTRNetInit/FUN_004321a0.o",
+      "thumb": false
+    },
+    {
+      "address": "0x4321a4",
+      "file": "network/Common/CTRNetInit",
+      "function": "FUN_004321a4",
+      "module": "_code",
+      "object": "build/obj/_code/network/Common/CTRNetInit/FUN_004321a4.o",
+      "size": 100,
+      "source": "src/_code/network/Common/CTRNetInit/FUN_004321a4.cpp",
+      "target": "orig/target/_code/network/Common/CTRNetInit/FUN_004321a4.o",
       "thumb": false
     },
     {
@@ -123873,9 +124426,20 @@
       "function": "FUN_00432998",
       "module": "_code",
       "object": "build/obj/_code/network/Common/CTRNetInit/FUN_00432998.o",
-      "size": 236,
+      "size": 4,
       "source": "src/_code/network/Common/CTRNetInit/FUN_00432998.cpp",
       "target": "orig/target/_code/network/Common/CTRNetInit/FUN_00432998.o",
+      "thumb": false
+    },
+    {
+      "address": "0x43299c",
+      "file": "network/Common/CTRNetInit",
+      "function": "FUN_0043299c",
+      "module": "_code",
+      "object": "build/obj/_code/network/Common/CTRNetInit/FUN_0043299c.o",
+      "size": 232,
+      "source": "src/_code/network/Common/CTRNetInit/FUN_0043299c.cpp",
+      "target": "orig/target/_code/network/Common/CTRNetInit/FUN_0043299c.o",
       "thumb": false
     },
     {
@@ -124755,9 +125319,19 @@
       "function": "FUN_00439a04",
       "module": "_code",
       "object": "build/obj/_code/0043/FUN_00439a04.o",
-      "size": 104,
+      "size": 36,
       "source": "src/_code/0043/FUN_00439a04.cpp",
       "target": "orig/target/_code/0043/FUN_00439a04.o",
+      "thumb": false
+    },
+    {
+      "address": "0x439a28",
+      "function": "FUN_00439a28",
+      "module": "_code",
+      "object": "build/obj/_code/0043/FUN_00439a28.o",
+      "size": 68,
+      "source": "src/_code/0043/FUN_00439a28.cpp",
+      "target": "orig/target/_code/0043/FUN_00439a28.o",
       "thumb": false
     },
     {
@@ -124785,9 +125359,19 @@
       "function": "FUN_00439be4",
       "module": "_code",
       "object": "build/obj/_code/0043/FUN_00439be4.o",
-      "size": 100,
+      "size": 4,
       "source": "src/_code/0043/FUN_00439be4.cpp",
       "target": "orig/target/_code/0043/FUN_00439be4.o",
+      "thumb": false
+    },
+    {
+      "address": "0x439be8",
+      "function": "FUN_00439be8",
+      "module": "_code",
+      "object": "build/obj/_code/0043/FUN_00439be8.o",
+      "size": 96,
+      "source": "src/_code/0043/FUN_00439be8.cpp",
+      "target": "orig/target/_code/0043/FUN_00439be8.o",
       "thumb": false
     },
     {
@@ -124795,9 +125379,19 @@
       "function": "FUN_00439c50",
       "module": "_code",
       "object": "build/obj/_code/0043/FUN_00439c50.o",
-      "size": 104,
+      "size": 36,
       "source": "src/_code/0043/FUN_00439c50.cpp",
       "target": "orig/target/_code/0043/FUN_00439c50.o",
+      "thumb": false
+    },
+    {
+      "address": "0x439c74",
+      "function": "FUN_00439c74",
+      "module": "_code",
+      "object": "build/obj/_code/0043/FUN_00439c74.o",
+      "size": 68,
+      "source": "src/_code/0043/FUN_00439c74.cpp",
+      "target": "orig/target/_code/0043/FUN_00439c74.o",
       "thumb": false
     },
     {
@@ -125786,9 +126380,19 @@
       "function": "FUN_0043bff8",
       "module": "_code",
       "object": "build/obj/_code/0043/FUN_0043bff8.o",
-      "size": 76,
+      "size": 4,
       "source": "src/_code/0043/FUN_0043bff8.cpp",
       "target": "orig/target/_code/0043/FUN_0043bff8.o",
+      "thumb": false
+    },
+    {
+      "address": "0x43bffc",
+      "function": "FUN_0043bffc",
+      "module": "_code",
+      "object": "build/obj/_code/0043/FUN_0043bffc.o",
+      "size": 72,
+      "source": "src/_code/0043/FUN_0043bffc.cpp",
+      "target": "orig/target/_code/0043/FUN_0043bffc.o",
       "thumb": false
     },
     {
@@ -131743,9 +132347,19 @@
       "function": "FUN_00467080",
       "module": "_code",
       "object": "build/obj/_code/0046/FUN_00467080.o",
-      "size": 196,
+      "size": 36,
       "source": "src/_code/0046/FUN_00467080.cpp",
       "target": "orig/target/_code/0046/FUN_00467080.o",
+      "thumb": false
+    },
+    {
+      "address": "0x4670a4",
+      "function": "FUN_004670a4",
+      "module": "_code",
+      "object": "build/obj/_code/0046/FUN_004670a4.o",
+      "size": 160,
+      "source": "src/_code/0046/FUN_004670a4.cpp",
+      "target": "orig/target/_code/0046/FUN_004670a4.o",
       "thumb": false
     },
     {
@@ -138001,9 +138615,19 @@
       "function": "FUN_0049e3f8",
       "module": "_code",
       "object": "build/obj/_code/0049/FUN_0049e3f8.o",
-      "size": 1616,
+      "size": 1004,
       "source": "src/_code/0049/FUN_0049e3f8.cpp",
       "target": "orig/target/_code/0049/FUN_0049e3f8.o",
+      "thumb": false
+    },
+    {
+      "address": "0x49e7e4",
+      "function": "FUN_0049e7e4",
+      "module": "_code",
+      "object": "build/obj/_code/0049/FUN_0049e7e4.o",
+      "size": 612,
+      "source": "src/_code/0049/FUN_0049e7e4.cpp",
+      "target": "orig/target/_code/0049/FUN_0049e7e4.o",
       "thumb": false
     },
     {
@@ -140986,9 +141610,19 @@
       "function": "FUN_004ba890",
       "module": "_code",
       "object": "build/obj/_code/004b/FUN_004ba890.o",
-      "size": 488,
+      "size": 92,
       "source": "src/_code/004b/FUN_004ba890.cpp",
       "target": "orig/target/_code/004b/FUN_004ba890.o",
+      "thumb": false
+    },
+    {
+      "address": "0x4ba8ec",
+      "function": "FUN_004ba8ec",
+      "module": "_code",
+      "object": "build/obj/_code/004b/FUN_004ba8ec.o",
+      "size": 396,
+      "source": "src/_code/004b/FUN_004ba8ec.cpp",
+      "target": "orig/target/_code/004b/FUN_004ba8ec.o",
       "thumb": false
     },
     {
@@ -141476,9 +142110,19 @@
       "function": "FUN_004bc95c",
       "module": "_code",
       "object": "build/obj/_code/004b/FUN_004bc95c.o",
-      "size": 196,
+      "size": 164,
       "source": "src/_code/004b/FUN_004bc95c.cpp",
       "target": "orig/target/_code/004b/FUN_004bc95c.o",
+      "thumb": false
+    },
+    {
+      "address": "0x4bca00",
+      "function": "FUN_004bca00",
+      "module": "_code",
+      "object": "build/obj/_code/004b/FUN_004bca00.o",
+      "size": 32,
+      "source": "src/_code/004b/FUN_004bca00.cpp",
+      "target": "orig/target/_code/004b/FUN_004bca00.o",
       "thumb": false
     },
     {
@@ -149439,9 +150083,19 @@
       "function": "FUN_005057b4",
       "module": "_code",
       "object": "build/obj/_code/0050/FUN_005057b4.o",
-      "size": 408,
+      "size": 8,
       "source": "src/_code/0050/FUN_005057b4.cpp",
       "target": "orig/target/_code/0050/FUN_005057b4.o",
+      "thumb": false
+    },
+    {
+      "address": "0x5057bc",
+      "function": "FUN_005057bc",
+      "module": "_code",
+      "object": "build/obj/_code/0050/FUN_005057bc.o",
+      "size": 400,
+      "source": "src/_code/0050/FUN_005057bc.cpp",
+      "target": "orig/target/_code/0050/FUN_005057bc.o",
       "thumb": false
     },
     {
@@ -150679,9 +151333,19 @@
       "function": "nw_font_ResFontBase_GetGlyph",
       "module": "_code",
       "object": "build/obj/_code/0050/nw_font_ResFontBase_GetGlyph.o",
-      "size": 336,
+      "size": 56,
       "source": "src/_code/0050/nw_font_ResFontBase_GetGlyph.cpp",
       "target": "orig/target/_code/0050/nw_font_ResFontBase_GetGlyph.o",
+      "thumb": false
+    },
+    {
+      "address": "0x50caf0",
+      "function": "FUN_0050caf0",
+      "module": "_code",
+      "object": "build/obj/_code/0050/FUN_0050caf0.o",
+      "size": 280,
+      "source": "src/_code/0050/FUN_0050caf0.cpp",
+      "target": "orig/target/_code/0050/FUN_0050caf0.o",
       "thumb": false
     },
     {

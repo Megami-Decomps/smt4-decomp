@@ -1,65 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nn_os_SimpleLock_Lock` (_code @ 0x1465e0, 0xdc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the fast path loop compiles with the slow-path call placed before the return and different registers (retail: lock copied to r2, call as the last statement). */
+#include "common.h"
 
 extern "C" {
 
-int ClearExclusiveLocal(void);
-int FUN_002a8554(unsigned int, int *, int, int, int, int);
-int hasExclusiveAccess(int *);
+void FUN_00146610(s32 *lock);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned int DAT_00471b58; /* 0x471b58 */
-
-/* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: ClearExclusiveLocal (CALLOTHER). */
-/* Supplied declaration required: FUN_002a8554. */
-
-
-void nn_os_SimpleLock_Lock(int *param_1)
-
+/* Takes a free lock (count > 0, stored negated while held); otherwise waits in FUN_00146610, the
+ * function that follows. */
+void nn_os_SimpleLock_Lock(s32 *lock)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  
-  while (0 < *param_1) {
-    temp_v0 = (unsigned char)hasExclusiveAccess(param_1);
-    if (temp_v0) {
-      *param_1 = -*param_1;
-      return;
-    }
-  }
-  ClearExclusiveLocal();
-  do {
-    while (-1 < *param_1) {
-      ClearExclusiveLocal();
-      while (0 < *param_1) {
-        temp_v0 = (unsigned char)hasExclusiveAccess(param_1);
-        if (temp_v0) {
-          *param_1 = -*param_1;
-          return;
+    for (;;) {
+        s32 count = __ldrex(lock);
+
+        if (count <= 0) {
+            break;
         }
-      }
-      ClearExclusiveLocal();
+        if (__strex(-count, lock) == 0) {
+            return;
+        }
     }
-    temp_v0 = (unsigned char)hasExclusiveAccess(param_1);
-  } while (!temp_v0);
-  *param_1 = *param_1 - 1;
-  do {
-    FUN_002a8554(DAT_00471b58,param_1,1,0,0,0);
-    while (0 < *param_1) {
-      temp_v0 = (unsigned char)hasExclusiveAccess(param_1);
-      if (temp_v0) {
-        *param_1 = 1 - *param_1;
-        return;
-      }
-    }
-    ClearExclusiveLocal();
-  } while( 1 );
+    __clrex();
+    FUN_00146610(lock);
 }
 
 } /* extern "C" */

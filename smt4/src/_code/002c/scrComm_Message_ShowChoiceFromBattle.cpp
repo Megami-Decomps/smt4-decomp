@@ -1,44 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Message_ShowChoiceFromBattle` (_code @ 0x2cd804, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002866b4(unsigned int, unsigned int, unsigned int, int, int, int);
+typedef struct BtlMainState {
+    /* 0x0000 */ u8 unk0000[0x2234];
+    /* 0x2234 */ u32 messageWindow; /* the window the battle's choice is shown in */
+} BtlMainState;
 
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+extern BtlMainState *btlGetMainState(void);
+extern void FUN_002cd81c(u32 messageWindow);
 
-extern unsigned char g_messageMain; /* 0x43e188 */
-
-/* Supplied declaration required: FUN_002866b4. */
-extern unsigned int scrGetCommandFrame(void);
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
-
-
+/* Script command: shows a choice from the battle's message window (FUN_002cd81c). */
 void scrComm_Message_ShowChoiceFromBattle(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = btlGetMainState();
-  temp_v1 = *(unsigned int *)(temp_v0 + 0x2234);
-  temp_v2 = scrGetArg(0);
-  temp_v3 = scrGetCommandFrame();
-  if ((*(int *)((unsigned char *)&g_messageMain + 0x4)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0xa11) = 0x14;
-  }
-  FUN_002866b4(temp_v1,temp_v2,temp_v3,0xb,0,0);
-  return;
+    FUN_002cd81c(btlGetMainState()->messageWindow);
 }
 
 } /* extern "C" */
