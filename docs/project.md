@@ -10,13 +10,15 @@ smt4/, smt4a/     one project per game: config/, include/, src/, objdiff.json, b
   src/_code/<file>/        functions placed in their original source file's folder (AsdSDK/..., battle/...)
   src/_code/<shard>/       everything else, by address
   build.py                 compiles every function, runs objdiff, rebuilds the retail target objects
-  tools/relink.py          links the whole .code from the compiled objects and compares it with retail
+  tools/relink.py          links the whole .code from the compiled objects and compares it with retail;
+                           --matched writes build/relink/proof.json, what the progress site credits
 include/              headers both games share: structs and accessors, by original source file
 docs/                 the contribution guide and these notes
 tools/assign_tus.py   places functions in source files from assert paths and file-local data
 tools/shared.py       pairs the functions both games share and compares their progress
 tools/fdiff.py        compiles one function and diffs its disassembly and relocations against retail
 tools/names.py        names a function or global in every file at once and records the evidence
+tools/progress_site.py  renders both games' proven progress as a static site (build/site/)
 ```
 
 Every function is its own `.cpp`, compiled by armcc 4.1 (`--cpp --no_rtti -O3 -Otime`). The games are
@@ -72,3 +74,12 @@ retail `.code` and the result is byte-identical; relink lists every function it 
 and why. Six functions per game that objdiff scores 100% stay retail bytes:
 `nw_gfx_internal_NWCopyVec4Reverse`, `NWCopyMtx24Reverse` and their copies load with `vldmia r1!`, a
 writeback armcc emits only when the pointer is used afterwards, so they were hand-written assembly.
+
+## Progress site
+
+`python -B tools/progress_site.py` renders `build/site/`: a page per game in that game's own look,
+with the share of functions registered (proven by relink), how many are readable, the drafts, the
+history, each original source tree, and a searchable compendium of every function. It reads
+`<game>/build/report.json` and the `build/relink/proof.json` that `tools/relink.py --matched` writes,
+and refuses a proof whose link did not match. The history starts from the "Proven:" counts in this
+repository's commit messages; `--history DIR` continues a published site's instead.
