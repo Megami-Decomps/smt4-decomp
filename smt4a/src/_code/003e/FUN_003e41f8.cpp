@@ -1,32 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e41f8` (_code @ 0x3e41f8, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the shift amount in r3 and the constant 1 in r2; built uses r2 and r1. */
+#include "common.h"
 
 extern "C" {
 
-extern int gameDataBlockGetArea28350(void);
+typedef struct FlagArea {
+    /* 0x00 */ u8 unk00[0x12];
+    /* 0x12 */ u8 bits[1];
+} FlagArea;
 
+extern FlagArea *gameDataBlockGetArea28350(void);
 
-void FUN_003e41f8(unsigned int param_1,int param_2)
-
+/* Sets or clears flag bit `id` in the area's bit array. */
+void FUN_003e41f8(u32 id, s32 set)
 {
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned char *pbVar3;
-  unsigned char temp_v2;
-  
-  temp_v1 = gameDataBlockGetArea28350();
-  temp_v2 = (unsigned char)(1 << (param_1 & 7));
-  pbVar3 = (unsigned char *)(temp_v1 + (param_1 >> 3) + 0x12);
-  temp_v0 = *pbVar3;
-  if (param_2 != 0) {
-    temp_v2 = temp_v2 | temp_v0;
-  }
-  else {
-    temp_v2 = temp_v0 & ~temp_v2;
-  }
-  *pbVar3 = temp_v2;
-  return;
+    FlagArea *area = gameDataBlockGetArea28350();
+    u32 mask = 1 << (id & 7);
+    u8 *byte = &area->bits[id >> 3];
+
+    if (set != 0) {
+        *byte |= mask;
+    } else {
+        *byte &= ~mask;
+    }
 }
 
 } /* extern "C" */

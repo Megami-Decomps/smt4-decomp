@@ -1,92 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0012630c` (_code @ 0x12630c, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ae8e4(unsigned int, unsigned int, unsigned int, int);
-int FUN_002c58c8(unsigned int, unsigned int);
+typedef struct TrackId {
+    /* 0x0 */ u32 group;
+    /* 0x4 */ u32 track;
+} TrackId;
 
-typedef struct fn_0012630c_arg0 fn_0012630c_arg0;
-struct fn_0012630c_arg0 {
-    unsigned char pad_0x0[0xc];
-    undefined4 field_0xc; /* +0xc */
-    unsigned char pad_0x10[0x8];
-    undefined4 field_0x18; /* +0x18 */
-    unsigned char pad_0x1c[0x18];
-    undefined4 field_0x34; /* +0x34 */
-    undefined4 field_0x38; /* +0x38 */
-    unsigned char pad_0x3c[0x4];
-    undefined4 field_0x40; /* +0x40 */
-    undefined4 field_0x44; /* +0x44 */
-    undefined4 field_0x48; /* +0x48 */
-    undefined4 field_0x4c; /* +0x4c */
-    unsigned char pad_0x50[0x4];
-    ushort *field_0x54; /* +0x54 */
-};
+typedef struct AocJob {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s32 muted;
+    /* 0x10 */ u8 unk10[0x1C];
+    /* 0x2C */ f32 volume;
+    /* 0x30 */ u8 unk30[4];
+    /* 0x34 */ s32 pending;
+    /* 0x38 */ u8 unk38[4];
+    /* 0x3C */ TrackId current;
+    /* 0x44 */ s32 previous;
+    /* 0x48 */ s32 locked;
+    /* 0x4C */ u8 unk4C[8];
+    /* 0x54 */ void *table;
+} AocJob;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
+extern u32 g_aocSystem;
 
-extern unsigned int g_aocSystem; /* 0x433158 */
+AocJob *jobGetWork(void);
+u16 *FUN_002aecd8(void *table, u32 index);
+s32 FUN_002c1d5c(void);
+s32 FUN_002ae98c(u32 system, TrackId track, s32 arg);
+int FUN_002ae8e4(u32 system, TrackId track, s32 arg);
+int FUN_002c58c8(TrackId track);
 
-/* Supplied declaration required: FUN_002ae8e4. */
-extern int FUN_002ae98c(unsigned int, unsigned int, unsigned int, unsigned int);
-extern unsigned short *FUN_002aecd8(int, unsigned int);
-extern int jobGetWork(void);
-extern int FUN_002c1d5c(void);
-/* Supplied declaration required: FUN_002c58c8. */
-
-
-void FUN_0012630c(fn_0012630c_arg0 *param_1,unsigned int param_2,int param_3)
-
+/* Switches the job to the track the table lists for `index`; `queue` marks the change as pending. */
+void FUN_0012630c(void *unused, u32 index, s32 queue)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned short *puVar2;
-  int temp_v1;
-  
-  temp_v0 = jobGetWork();
-  if ((*(int *)(temp_v0 + 0x54) != 0) && (*(int *)(temp_v0 + 0x48) == 0)) {
-    if (param_3 == 0) {
-      *(unsigned int *)(temp_v0 + 0x34) = 0;
+    AocJob *job = jobGetWork();
+    u16 *entry;
+
+    if (job->table == NULL || job->locked != 0) {
+        return;
     }
-    else if (*(int *)(temp_v0 + 0x34) == 1) {
-      return;
+    if (queue == 0) {
+        job->pending = 0;
+    } else if (job->pending == 1) {
+        return;
     }
-    puVar2 = (unsigned short *)FUN_002aecd8(*(int *)(temp_v0 + 0x54),param_2);
-    if (*(unsigned int *)(temp_v0 + 0x40) != (unsigned int)*puVar2) {
-      if (param_3 != 0) {
-        *(unsigned int *)(temp_v0 + 0x34) = 1;
-      }
-      *(unsigned int *)(temp_v0 + 0x44) = *(unsigned int *)(temp_v0 + 0x40);
-      *(unsigned int *)(temp_v0 + 0x40) = (unsigned int)*puVar2;
-      if (*(int *)(temp_v0 + 0xc) == 1) {
-        *(unsigned int *)(temp_v0 + 0x44) = 0xffffffff;
-      }
-      else {
-        temp_v1 = FUN_002c1d5c();
-        if (temp_v1 == 0) {
-          *(unsigned int *)(temp_v0 + 0xc) = 0;
-          *(unsigned int *)(temp_v0 + 0x2c) = 0x3f800000;
-          temp_v1 = FUN_002ae98c(g_aocSystem,*(unsigned int *)(temp_v0 + 0x3c),
-                               *(unsigned int *)(temp_v0 + 0x40),1);
-          if (temp_v1 != 0) {
-            FUN_002ae8e4(g_aocSystem,*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40),
-                         0x10000);
-            return;
-          }
-          FUN_002c58c8(*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40));
-          return;
-        }
-        *(unsigned int *)(temp_v0 + 0xc) = 1;
-        *(unsigned int *)(temp_v0 + 0x44) = 0xffffffff;
-      }
+    entry = FUN_002aecd8(job->table, index);
+    if (job->current.track == *entry) {
+        return;
     }
-  }
-  return;
+    if (queue != 0) {
+        job->pending = 1;
+    }
+    job->previous = job->current.track;
+    job->current.track = *entry;
+    if (job->muted == 1) {
+        job->previous = -1;
+        return;
+    }
+    if (FUN_002c1d5c() != 0) {
+        job->muted = 1;
+        job->previous = -1;
+        return;
+    }
+    job->muted = 0;
+    job->volume = 1.0f;
+    if (FUN_002ae98c(g_aocSystem, job->current, 1) != 0) {
+        FUN_002ae8e4(g_aocSystem, job->current, 0x10000);
+        return;
+    }
+    FUN_002c58c8(job->current);
 }
 
 } /* extern "C" */

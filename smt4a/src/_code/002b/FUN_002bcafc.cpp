@@ -10,7 +10,7 @@ int FUN_00249ac4(unsigned int, unsigned int);
 int bgmReleaseStopped(void);
 int FUN_002b9520(void);
 int FUN_00376f94(void);
-int FUN_00398328(int, unsigned int);
+int slotFindByPair(int, unsigned int);
 int FUN_003d4c68(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -32,9 +32,9 @@ extern signed char DAT_005f1a00; /* 0x5f1a00 */
 /* Supplied declaration required: bgmReleaseStopped. */
 extern int FUN_002b950c(void);
 /* Supplied declaration required: FUN_002b9520. */
-extern int FUN_00324c78(void);
+extern int gameFlagsValueGet(void);
 /* Supplied declaration required: FUN_00376f94. */
-/* Supplied declaration required: FUN_00398328. */
+/* Supplied declaration required: slotFindByPair. */
 extern int FUN_003cb88c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003d4c68. */
 
@@ -72,10 +72,10 @@ void FUN_002bcafc(void)
     FUN_00249ac4(*(unsigned int *)(temp_v2 + 0x30),*(unsigned int *)(temp_v2 + 0x34));
   }
   if (*(int *)(temp_v2 + 0x30) != 0x18) {
-    temp_v0 = FUN_00324c78();
+    temp_v0 = gameFlagsValueGet();
     if (temp_v0 == 1) {
       temp_v0 = *(int *)(temp_v2 + 0x30);
-      FUN_00398328(temp_v0,*(unsigned int *)(temp_v2 + 0x34));
+      slotFindByPair(temp_v0,*(unsigned int *)(temp_v2 + 0x34));
       temp_v0 = *(int *)(temp_v0 * 0x5c + 0x582378);
       if (temp_v0 != 0) {
         DAT_005f1628 = temp_v0;
@@ -98,7 +98,7 @@ void FUN_002bcafc(void)
   else {
     temp_v3 = 1;
   }
-  FUN_00398328(temp_v0,temp_v3);
+  slotFindByPair(temp_v0,temp_v3);
   temp_v0 = temp_v0 * 0x5c;
   DAT_005f1628 = *(int *)(temp_v0 + 0x58236c);
   if (((*(int *)(temp_v0 + 0x582374) != 0) &&

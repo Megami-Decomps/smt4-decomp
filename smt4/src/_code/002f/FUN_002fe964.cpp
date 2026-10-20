@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0025a0e0(void);
+int commonBgReset(void);
 int FUN_002757a8(void);
 int FUN_00275bc8(void);
 int FUN_00289880(void);
@@ -12,7 +12,7 @@ int buttonHelpSetPreset(int);
 
 extern unsigned char g_gameState; /* 0x49f91c */
 
-/* Supplied declaration required: FUN_0025a0e0. */
+/* Supplied declaration required: commonBgReset. */
 /* Supplied declaration required: FUN_002757a8. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00289880. */
@@ -37,7 +37,7 @@ unsigned int FUN_002fe964(void)
   }
   else if ((*(signed char *)((unsigned char *)&g_gameState + 0x251)) != '\0') {
     (*(signed char *)((unsigned char *)&g_gameState + 0x251)) = '\0';
-    FUN_0025a0e0();
+    commonBgReset();
     FUN_002757a8();
   }
   return 1;

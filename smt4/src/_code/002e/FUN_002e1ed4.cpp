@@ -13,7 +13,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00257510. */
-extern unsigned int FUN_002ae2c0(int);
+extern unsigned int categoryIdFromIndex(int);
 /* Supplied declaration required: FUN_002ae9ec. */
 
 
@@ -25,7 +25,7 @@ void FUN_002e1ed4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   
   FUN_00257510();
   if (param_1 != 0) {
-    temp_v0 = FUN_002ae2c0((int)*(short *)(param_1 + 0x22));
+    temp_v0 = categoryIdFromIndex((int)*(short *)(param_1 + 0x22));
     FUN_002ae9ec(2,0x13,temp_v0,param_2,param_3,param_4);
   }
   return;

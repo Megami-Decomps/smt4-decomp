@@ -1,42 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f6f44` (_code @ 0x2f6f44, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+typedef struct BattleUnit {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x1EE];
+    /* 0x1F2 */ u16 slots[8];  /* indexed by script argument; bits 10+ hold a state */
+    /* 0x202 */ u8 unk202[0x86];
+} BattleUnit;
 
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-extern int scrGetArg(unsigned int);
+typedef struct BattleState {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ BattleUnit *units;
+} BattleState;
 
+s32 scrSetResult(s32 value);
+BattleState *btlGetMainState(void);
+s32 scrGetArg(u32 index);
 
-unsigned int FUN_002f6f44(void)
-
+/* Script command: sets the result to 1 when some live, non-excluded unit has state 1 in slot `arg0`. */
+u32 FUN_002f6f44(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v3 = 0;
-  while( 1 ) {
-    temp_v1 = btlGetMainState();
-    puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + temp_v3 * 0x288);
-    temp_v2 = *puVar3;
-    if ((((temp_v2 & 0x10) != 0 && (temp_v2 & 1) != 0) && ((temp_v2 & 0x40) == 0)) &&
-       (*(unsigned short *)((int)puVar3 + temp_v0 * 2 + 0x1f2) >> 10 == 1)) break;
-    temp_v3 = temp_v3 + 1;
-    if (temp_v3 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
+    s32 slot = scrGetArg(0);
+    s32 i;
+
+    for (i = 0; i < 109; i++) {
+        BattleUnit *unit = &btlGetMainState()->units[i];
+
+        if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0 && unit->slots[slot] >> 10 == 1) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-  }
-  scrSetResult(1);
-  return 1;
+    scrSetResult(0);
+    return 1;
 }
 
 } /* extern "C" */

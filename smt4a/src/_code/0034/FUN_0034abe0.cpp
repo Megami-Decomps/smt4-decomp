@@ -25,7 +25,7 @@ int FUN_002a4b28(...);
 int FUN_00344cd0(...);
 int FUN_0035ae58(...);
 int FUN_0035d8f0(...);
-int FUN_0035dd74(void);
+int contentEntryFindById(void);
 int VectorSignedToFloat(...);
 
 typedef struct fn_0034abe0_arg0 fn_0034abe0_arg0;
@@ -107,7 +107,7 @@ extern int FUN_00348eb4(unsigned int *);
 extern int FUN_00348ed0(unsigned int *);
 /* Supplied declaration required: FUN_0035ae58. */
 /* Supplied declaration required: FUN_0035d8f0. */
-/* Supplied declaration required: FUN_0035dd74. */
+/* Supplied declaration required: contentEntryFindById. */
 extern int FUN_004db07c(unsigned int, unsigned int, unsigned char *);
 
 
@@ -220,7 +220,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
           if (*(short *)(puVar19 + 0x1e) != 0) {
             do {
               temp_v3 = (unsigned int)*(unsigned short *)((int)puVar2 + temp_v8 * 2 + 0x8f7c);
-              FUN_0035dd74();
+              contentEntryFindById();
               if (*(short *)(temp_v3 + 0x1a) == *(short *)((int)puVar2 + temp_v2 * 2 + 0x62a0)) {
                 temp_v12 = (unsigned int)*(unsigned short *)((int)puVar2 + temp_v8 * 2 + 0x8f7c);
                 break;
@@ -412,7 +412,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
           if (*(short *)(puVar2 + 0x23de) != 0) {
             do {
               temp_v3 = (unsigned int)*(unsigned short *)((int)puVar2 + temp_v8 * 2 + 0x8f7c);
-              FUN_0035dd74();
+              contentEntryFindById();
               if (*(short *)(temp_v3 + 0x1a) == *(short *)((int)puVar2 + temp_v2 * 2 + 0x62a0)) {
                 temp_v12 = (unsigned int)*(unsigned short *)((int)puVar2 + temp_v8 * 2 + 0x8f7c);
                 break;
@@ -528,7 +528,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
     if (*(short *)(puVar2 + 0x23de) != 0) {
       do {
         temp_v3 = (unsigned int)*(unsigned short *)((int)puVar2 + temp_v8 * 2 + 0x8f7c);
-        FUN_0035dd74();
+        contentEntryFindById();
         if (*(short *)(temp_v3 + 0x1a) == *(short *)((int)puVar2 + (temp_v9 + temp_v2) * 2 + 0x62a0)) {
           temp_v12 = (unsigned int)*(unsigned short *)((int)puVar2 + temp_v8 * 2 + 0x8f7c);
           break;

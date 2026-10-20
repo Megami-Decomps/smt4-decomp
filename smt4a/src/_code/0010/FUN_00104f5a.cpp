@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], unsigned int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002eb390(int *, int, int *);
 int FUN_002eb3f2(int, int *);
 int FUN_002eb422(int *);
@@ -19,7 +19,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002eb390. */
 /* Supplied declaration required: FUN_002eb3f2. */
@@ -54,12 +54,12 @@ unsigned int FUN_00104f5a(int param_1,int param_2,int param_3)
     if (*(int *)(temp_v3 + 0x14) == param_3) {
       temp_v5 = temp_v3;
       FUN_002eb3f2(param_1 + 0xac,&temp_v5);
-      FUN_002e6e5c(temp_v2);
+      _ZN9Obj55b28cD1Ev(temp_v2);
       return 1;
     }
     FUN_002eb422(&temp_v3);
   }
-  FUN_002e6e5c(temp_v2);
+  _ZN9Obj55b28cD1Ev(temp_v2);
   return 0;
 }
 

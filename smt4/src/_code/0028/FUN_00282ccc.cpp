@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0029e908(...);
+int objectPartRunUnlessLocked(...);
 
 extern int g_partyPanel; /* 0x43dcf0 */
 
-/* Supplied declaration required: FUN_0029e908. */
+/* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int FUN_0029efa8(int);
 extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
@@ -50,23 +50,23 @@ int FUN_00282ccc(unsigned int param_1,unsigned int param_2,int param_3)
       temp_v1 = FUN_0029efa8(temp_v3);
       if (0 < temp_v1) {
         if (*(char *)(temp_v0 + 0x42) != '\0') {
-          temp_v1 = FUN_0029e908();
+          temp_v1 = objectPartRunUnlessLocked();
           temp_v3 = FUN_0029efa8(temp_v3);
           temp_v1 = temp_v1 + temp_v3 * 4;
         }
         else {
           temp_v2 = FUN_0029efa8(temp_v3);
           temp_v4 = *(int *)(temp_v0 + 0x2c);
-          temp_v1 = FUN_0029e908(temp_v3);
+          temp_v1 = objectPartRunUnlessLocked(temp_v3);
           temp_v1 = temp_v1 + temp_v2 * 4 + temp_v4 * 0xc;
         }
         temp_v1 = temp_v1 - 4;
         goto LAB_00282e44;
       }
-      temp_v0 = FUN_0029e908(temp_v3);
+      temp_v0 = objectPartRunUnlessLocked(temp_v3);
     }
     else {
-      temp_v0 = FUN_0029e908(g_partyPanel + 0x8dc);
+      temp_v0 = objectPartRunUnlessLocked(g_partyPanel + 0x8dc);
     }
     if (temp_v0 == 0) {
       return -1;
@@ -77,14 +77,14 @@ int FUN_00282ccc(unsigned int param_1,unsigned int param_2,int param_3)
   else {
     if (*(char *)(g_partyPanel + 0x42) != '\0') {
       temp_v3 = g_partyPanel + 0x9a4;
-      temp_v1 = FUN_0029e908();
+      temp_v1 = objectPartRunUnlessLocked();
       temp_v3 = FUN_0029efa8(temp_v3);
       temp_v1 = temp_v1 + temp_v3 * 4;
     }
     else {
       temp_v3 = FUN_0029efa8(g_partyPanel + 0x940);
       temp_v2 = *(int *)(temp_v0 + 0x2c);
-      temp_v1 = FUN_0029e908(temp_v0 + 0x940);
+      temp_v1 = objectPartRunUnlessLocked(temp_v0 + 0x940);
       temp_v1 = temp_v1 + temp_v3 * 4 + temp_v2 * 0xc;
     }
 LAB_00282e44:

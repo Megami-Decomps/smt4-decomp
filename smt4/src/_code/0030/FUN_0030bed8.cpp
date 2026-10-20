@@ -1,38 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030bed8` (_code @ 0x30bed8, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable08Sub2GetRecord(void);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x58];
+    /* 0x58 */ u8 low : 4;
+    /* 0x58 */ u8 high : 4;
+    /* 0x59 */ u8 unk59[0x3F];
+    /* 0x98 */ u16 order;
+} Record;
 
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
+Record *dataTable08Sub2GetRecord(u32 id);
 
-
-int FUN_0030bed8(unsigned short *param_1,unsigned short *param_2)
-
+/* Compares two record ids by the high then low nibble of byte 0x58 (ascending), then by order (descending). */
+s32 FUN_0030bed8(u16 *a, u16 *b)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (unsigned int)*param_1;
-  dataTable08Sub2GetRecord();
-  temp_v1 = (unsigned int)*param_2;
-  dataTable08Sub2GetRecord();
-  temp_v2 = (unsigned int)(*(unsigned char *)(temp_v0 + 0x58) >> 4) - (unsigned int)(*(unsigned char *)(temp_v1 + 0x58) >> 4);
-  if (temp_v2 == 0) {
-    temp_v2 = (*(unsigned char *)(temp_v0 + 0x58) & 0xf) - (*(unsigned char *)(temp_v1 + 0x58) & 0xf);
-    if (temp_v2 == 0) {
-      temp_v0 = (unsigned int)*param_1;
-      dataTable08Sub2GetRecord();
-      temp_v1 = (unsigned int)*param_2;
-      dataTable08Sub2GetRecord();
-      temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x98) - (unsigned int)*(unsigned short *)(temp_v0 + 0x98);
+    Record *recordA = dataTable08Sub2GetRecord(*a);
+    Record *recordB = dataTable08Sub2GetRecord(*b);
+    s32 diff = recordA->high - recordB->high;
+
+    if (diff == 0) {
+        diff = recordA->low - recordB->low;
+        if (diff == 0) {
+            recordA = dataTable08Sub2GetRecord(*a);
+            recordB = dataTable08Sub2GetRecord(*b);
+            diff = recordB->order - recordA->order;
+        }
     }
-  }
-  return temp_v2;
+    return diff;
 }
 
 } /* extern "C" */

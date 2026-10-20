@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0010cd2c(unsigned int, unsigned int *);
 int onlineStringDestroy(int *);
-int constructObj0055affc(int *);
+int _ZN9Obj55aff4C1Ev(int *);
 int FUN_002f42be(int *, unsigned char *, unsigned char *, int);
 
 extern unsigned char LAB_0010b144; /* 0x10b144 */
@@ -16,7 +16,7 @@ extern unsigned char DAT_00630430; /* 0x630430 */
 /* Supplied declaration required: FUN_0010cd2c. */
 extern unsigned int *onlineStringConstruct(unsigned int *, unsigned char *);
 /* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: constructObj0055affc. */
+/* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 extern unsigned int FUN_002eac34(unsigned char);
 /* Supplied declaration required: FUN_002f42be. */
 
@@ -33,7 +33,7 @@ void FUN_0010b0f4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   uStack_18 = param_3;
   uStack_14 = param_4;
   if ((*(int *)((unsigned char *)&g_systemTable + 0x10)) != 0) {
-    constructObj0055affc(&uStack_18);
+    _ZN9Obj55aff4C1Ev(&uStack_18);
     FUN_002f42be(&uStack_18,&LAB_0010b144,&DAT_00630430,(*(int *)((unsigned char *)&g_systemTable + 0x10)));
     temp_v0 = FUN_002eac34(*(unsigned char *)(param_1 + 0x24));
     puVar2 = (unsigned int *)&uStack_18;

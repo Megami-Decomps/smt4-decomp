@@ -1,20 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00268450` (_code @ 0x268450, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+typedef struct Section {
+    /* 0x0000 */ u8 unk0000[0x15D4];
+    /* 0x15D4 */ s32 value;
+} Section;
 
+typedef struct Table {
+    /* 0x0000 */ u8 unk0000[0x3E74];
+    /* 0x3E74 */ u8 area[1];
+} Table;
 
-void FUN_00268450(int param_1)
+typedef struct GameDataBlocksView {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ Table *table;
+} GameDataBlocksView;
 
+extern GameDataBlocksView g_gameDataBlocks;
+
+static __inline Section *gameDataSection(void)
 {
-  if (param_1 >= 100) {
-    param_1 = 99;
-  }
-  *(int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x5448) = param_1;
-  return;
+    return (Section *)g_gameDataBlocks.table->area;
+}
+
+/* Stores the value at 0x5448 of the game data table, capped at 99. */
+void FUN_00268450(s32 value)
+{
+    Section *section = gameDataSection();
+
+    if (value > 99) {
+        value = 99;
+    }
+    section->value = value;
 }
 
 } /* extern "C" */

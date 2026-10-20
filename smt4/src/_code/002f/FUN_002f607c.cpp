@@ -1,66 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f607c` (_code @ 0x2f607c, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: tail layout only: retail ends the third choice with `mov r6, r1; b <shared scrSetResult tail>`; built duplicates the scrSetResult/return sequence for it. */
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+typedef struct GameOptions {
+    /* 0x000 */ u8 unk000[0x60A];
+    /* 0x60A */ u16 choiceA;
+    /* 0x60C */ u16 choiceB;
+    /* 0x60E */ u16 choiceC;
+} GameOptions;
 
-/* Supplied declaration required: scrSetResult. */
-extern int gameGetOptions(void);
-extern int FUN_002b6b38(void);
-extern int randNextInRange(int);
+s32 scrSetResult(s32 value);
+GameOptions *gameGetOptions(void);
+s32 FUN_002b6b38(void);
+s32 randNextInRange(u16 range);
 
-
-unsigned int FUN_002f607c(void)
-
+/* Script command: with FUN_002b6b38() == 1, picks one of the options' non-zero choices at random; the result defaults to 2. */
+u32 FUN_002f607c(void)
 {
-/* irregular: 2 unstructured edge(s); 1 native warning(s); review required */
-  int temp_v0;
-  short temp_v1;
-  int temp_v2;
-  short temp_v3;
-  
-  temp_v3 = 2;
-  temp_v0 = FUN_002b6b38();
-  if (temp_v0 == 1) {
-    temp_v2 = 1;
-    temp_v0 = gameGetOptions();
-    if (*(short *)(temp_v0 + 0x60a) != 0) {
-      temp_v2 = 2;
+    u16 result = 2;
+
+    if (FUN_002b6b38() == 1) {
+        s32 count = 1;
+        GameOptions *options = gameGetOptions();
+        s32 pick;
+
+        if (options->choiceA != 0) {
+            count = 2;
+        }
+        if (options->choiceB != 0) {
+            count++;
+        }
+        if (options->choiceC != 0) {
+            count++;
+        }
+        pick = randNextInRange(count);
+        if (options->choiceA != 0) {
+            if (pick == 0) {
+                result = options->choiceA;
+                scrSetResult(result);
+                return 1;
+            }
+            pick--;
+        }
+        if (options->choiceB != 0) {
+            if (pick == 0) {
+                result = options->choiceB;
+                scrSetResult(result);
+                return 1;
+            }
+            pick--;
+        }
+        if (options->choiceC != 0) {
+            if (pick == 0) {
+                result = options->choiceC;
+                scrSetResult(result);
+                return 1;
+            }
+        }
     }
-    if (*(short *)(temp_v0 + 0x60c) != 0) {
-      temp_v2 = temp_v2 + 1;
-    }
-    if (*(short *)(temp_v0 + 0x60e) != 0) {
-      temp_v2 = temp_v2 + 1;
-    }
-    temp_v2 = randNextInRange(temp_v2);
-    temp_v1 = *(short *)(temp_v0 + 0x60a);
-    if (temp_v1 != 0) {
-      if (temp_v2 == 0) {
-        temp_v3 = temp_v1;
-        scrSetResult(temp_v3);
-        return 1;
-      }
-      temp_v2 = temp_v2 - 1;
-    }
-    temp_v1 = *(short *)(temp_v0 + 0x60c);
-    if (temp_v1 != 0) {
-      if (temp_v2 == 0) {
-        temp_v3 = temp_v1;
-        scrSetResult(temp_v3);
-        return 1;
-      }
-      temp_v2 = temp_v2 - 1;
-    }
-    temp_v1 = *(short *)(temp_v0 + 0x60e);
-    if ((temp_v1 != 0) && (temp_v2 == 0)) {
-      temp_v3 = temp_v1;
-    }
-  }
-  scrSetResult(temp_v3);
-  return 1;
+    scrSetResult(result);
+    return 1;
 }
 
 } /* extern "C" */

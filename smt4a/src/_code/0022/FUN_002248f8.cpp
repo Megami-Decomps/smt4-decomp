@@ -11,7 +11,7 @@ int asdOperatorDelete(...);
 int FUN_00318c3c(...);
 
 int randRange(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_00184748(...);
 int uiSpriteSetImageKeyframe(...);
 int FUN_002b132c(...);
@@ -44,7 +44,7 @@ int FUN_002ccde8(int, unsigned int *, unsigned int *);
 int FUN_00336de4(int, int);
 int FUN_003493dc(...);
 int FUN_0035d0e4(void);
-int FUN_0035fc4c(void);
+int btlTalkBustUpReleaseContent(void);
 int btlTalkBustUpSetUnk2F4(int);
 int FUN_0039ebcc(void);
 int FUN_003b2178(...);
@@ -61,7 +61,7 @@ int FUN_002c85b0(int);
 int FUN_002cc36c(int);
 int FUN_002cdd18(int);
 int sysMemClear(unsigned int *, int);
-int FUN_00336da0(int);
+int uiWorkEndState1(int);
 int FUN_0034efe0(void);
 int owner2DCInitSub(int);
 int menu32State387CIs7(...);
@@ -101,7 +101,7 @@ extern unsigned int DAT_0057a9fc; /* 0x57a9fc */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int jobGetWork(void);
 extern int padButtonRepeat(unsigned int);
 extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
@@ -142,16 +142,16 @@ extern int FUN_002fc0a4(int);
 /* Supplied declaration required: FUN_00321338. */
 extern int menu32ModeIsNot2(int);
 /* Supplied declaration required: FUN_00321500. */
-extern unsigned int FUN_00331368(void);
+extern unsigned int partyPanelValueGet(void);
 /* Supplied declaration required: FUN_00333f6c. */
 /* Supplied declaration required: FUN_003343f0. */
 extern int menu32State387CIs6(int);
 /* Supplied declaration required: FUN_00336aec. */
 extern int menu32ModeIsNot4(int);
-/* Supplied declaration required: FUN_00336da0. */
+/* Supplied declaration required: uiWorkEndState1. */
 /* Supplied declaration required: FUN_00336de4. */
-extern int FUN_003493ac(void);
-extern unsigned int FUN_003493c4(void);
+extern int partyPanelGetFlag(void);
+extern unsigned int partyPanelGetState(void);
 /* Supplied declaration required: FUN_003493dc. */
 extern int FUN_0034ed68(int);
 /* Supplied declaration required: FUN_0034efe0. */
@@ -161,7 +161,7 @@ extern int FUN_0034ed68(int);
 extern int menu32State387CIs2(void);
 extern int FUN_0035fa18(int, int, int);
 /* Supplied declaration required: menu32State387CIs7. */
-/* Supplied declaration required: FUN_0035fc4c. */
+/* Supplied declaration required: btlTalkBustUpReleaseContent. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: menu32EnterState27. */
 extern int menu32State387CNotIn22To25(void);
@@ -404,7 +404,7 @@ unsigned int FUN_002248f8(void)
         temp_v9 = temp_v10 + 0x24bc;
         FUN_00280030();
         if (temp_v9 != 0) {
-          FUN_00336da0(temp_v10 + 8);
+          uiWorkEndState1(temp_v10 + 8);
           owner2DCInitSub(temp_v10 + 0x24bc);
         }
       }
@@ -421,7 +421,7 @@ unsigned int FUN_002248f8(void)
           temp_v9 = temp_v10 + 0x24bc;
           FUN_00280030();
           if (temp_v9 != 0) {
-            FUN_00336da0(temp_v10 + 8);
+            uiWorkEndState1(temp_v10 + 8);
             owner2DCInitSub(temp_v10 + 0x24bc);
           }
         }
@@ -437,7 +437,7 @@ unsigned int FUN_002248f8(void)
             temp_v9 = temp_v10 + 0x24bc;
             FUN_00280030();
             if (temp_v9 != 0) {
-              FUN_00336da0(temp_v10 + 8);
+              uiWorkEndState1(temp_v10 + 8);
               owner2DCInitSub(temp_v10 + 0x24bc);
             }
           }
@@ -461,7 +461,7 @@ unsigned int FUN_002248f8(void)
       }
       else {
         g_btlUi = 0;
-        FUN_0035fc4c();
+        btlTalkBustUpReleaseContent();
         FUN_00336de4(*puVar8,1);
         btlTalkBustUpSetUnk2F4(1);
       }
@@ -567,7 +567,7 @@ LAB_00225054:
         FUN_00184748(temp_v4 + 0x24bc);
       }
     }
-    FUN_001641b4(0x100020f);
+    eventQueueAddUniqueIfValid(0x100020f);
     break;
   case 0xe:
     FUN_002f9418();
@@ -615,10 +615,10 @@ LAB_00225054:
         }
         else {
           *(unsigned char *)(temp_v0 + 0x74b1) = 1;
-          temp_v10 = FUN_003493ac();
+          temp_v10 = partyPanelGetFlag();
           if (temp_v10 == 0xb) {
-            temp_v7 = FUN_003493c4();
-            temp_v6 = FUN_00331368();
+            temp_v7 = partyPanelGetState();
+            temp_v6 = partyPanelValueGet();
             pairQueueAppend(temp_v4,temp_v6,temp_v7);
           }
         }

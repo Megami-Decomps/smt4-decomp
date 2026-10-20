@@ -1,20 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00468858` (_code @ 0x468858, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc adds a branch to the next instruction after the conditional move; retail falls through */
+#include "common.h"
 
 extern "C" {
 
+typedef struct ModeInfo {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ s32 type;
+} ModeInfo;
 
-unsigned int FUN_00468858(int param_1)
+typedef struct ModeOwner {
+    /* 0x000 */ u8 unk000[0xAD8];
+    /* 0xAD8 */ ModeInfo *info;
+} ModeOwner;
 
+/* Returns 4 when the owner's info is of type 6, else 5. */
+u32 FUN_00468858(ModeOwner *owner)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 5;
-  if ((*(int *)(param_1 + 0xad8) != 0) && (*(int *)(*(int *)(param_1 + 0xad8) + 4) == 6)) {
-    temp_v0 = 4;
-  }
-  return temp_v0;
+    ModeInfo *info = owner->info;
+    u32 result = 5;
+
+    if (info != NULL && info->type == 6) {
+        result = 4;
+    }
+    return result;
 }
 
 } /* extern "C" */

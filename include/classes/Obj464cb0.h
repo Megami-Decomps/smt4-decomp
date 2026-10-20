@@ -10,15 +10,15 @@
  * exist and the constructor is still C-form. */
 class Obj464cb0 {
 public:
-    virtual void post010040() = 0;  /* +0x00: FUN_0030975c */
+    virtual void post010040() = 0;  /* +0x00: _ZN9Obj464cb010post010040Ev */
     virtual void post0f0105() = 0;  /* +0x04 */
-    virtual void vfunc08() = 0;
-    virtual void vfunc0c() = 0;
-    virtual void vfunc10() = 0;
-    virtual void vfunc14() = 0;
-    virtual void vfunc18() = 0;
+    virtual void post0f0106() = 0;  /* +0x08 */
+    virtual void post0f0107Header() = 0;  /* +0x0C: FUN_0030968c */
+    virtual void post0f0104() = 0;  /* +0x10 */
+    virtual void post0f0107() = 0;  /* +0x14: _ZN9Obj464cb010post0f0107Ev */
+    virtual void post0f0101() = 0;  /* +0x18: _ZN9Obj464cb010post0f0101Ev */
     virtual void post0f0103() = 0;  /* +0x1C */
-    virtual void vfunc20() = 0;
+    virtual void post0100e0() = 0;  /* +0x20: _ZN9Obj464cb010post0100e0Ev */
     virtual void vfunc24() = 0;
     virtual void vfunc28() = 0;
     virtual void vfunc2c() = 0;

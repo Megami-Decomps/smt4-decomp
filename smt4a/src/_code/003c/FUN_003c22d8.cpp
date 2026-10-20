@@ -1,33 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c22d8` (_code @ 0x3c22d8, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrGetArg(int);
-int FUN_003f0e20(int, unsigned int);
+typedef struct BtlUnit {
+    /* 0x000 */ u8 unk000[0x3B0];
+    /* 0x3B0 */ s32 value;
+} BtlUnit;
 
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_003f0e20. */
+extern s32 scrGetArg(s32 index);
+extern void *btlGetMainState(void);
+extern BtlUnit *FUN_003f0e20(void *state, s32 unit);
 
-
-unsigned int FUN_003c22d8(void)
-
+/* Script command: adds the second argument to field 0x3B0 of the unit named by the first. */
+s32 FUN_003c22d8(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = btlGetMainState();
-  FUN_003f0e20(temp_v2,temp_v0);
-  if (temp_v2 != 0) {
-    *(int *)(temp_v2 + 0x3b0) = *(int *)(temp_v2 + 0x3b0) + temp_v1;
-  }
-  return 1;
+    s32 unitId = scrGetArg(0);
+    s32 amount = scrGetArg(1);
+    BtlUnit *unit = FUN_003f0e20(btlGetMainState(), unitId);
+
+    if (unit != NULL) {
+        unit->value += amount;
+    }
+    return 1;
 }
 
 } /* extern "C" */

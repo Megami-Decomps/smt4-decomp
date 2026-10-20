@@ -1,77 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00239b10` (_code @ 0x239b10, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation (retail keeps the save block in sl and recomputes the 0x21e14 float address instead of holding it) */
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(unsigned int *);
-int FUN_003fd478(void);
-int partyCopyRecord100(unsigned int *);
-int gameFlagSetValue(int, int);
-int rt_memcpy_w(int, unsigned int, int);
+/* The game data region of the save block (0x2a71c bytes). */
+typedef struct GameData {
+    /* 0x00000 */ u8 unk00[4];
+    /* 0x00004 */ f32 unk04;
+    /* 0x00008 */ u8 unk08[0x21d8c - 8];
+    /* 0x21d8c */ f32 unk21d8c;
+    /* 0x21d90 */ u8 unk21d90[0x27e3d - 0x21d90];
+    /* 0x27e3d */ u8 unk27e3d;
+} GameData;
 
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
+typedef struct SaveBlock {
+    /* 0x00 */ u8 unk00[0x88];
+    /* 0x88 */ GameData gameData;
+} SaveBlock;
 
-extern int DAT_0057f69c; /* 0x57f69c */
-extern unsigned int DAT_0057f6a0; /* 0x57f6a0 */
+typedef struct GameDataBlocks {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ SaveBlock *saveBlock;
+    /* 0x08 */ void *workBlock;
+} GameDataBlocks;
+extern GameDataBlocks g_gameDataBlocks;
 
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_003fd478. */
-/* Supplied declaration required: partyCopyRecord100. */
-/* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: rt_memcpy_w. */
+void asdMemFree(void *p);
+void *FUN_003fd478(void);
+void partyCopyRecord100(void *record);
+s32 gameFlagIsSet(u32 id);
+void gameFlagSetValue(u32 id, s32 value, s32 arg2);
+void rt_memcpy_w(void *dst, void *src, u32 size);
 
-
-void FUN_00239b10(int param_1)
-
+/* Copies the work block over the save data's game data, keeping the party record and the
+ * values at 0x8c, 0x21e14 and 0x27ec5; when keep is 1, those and flags 0x556/0x557/0x421 are restored. */
+void FUN_00239b10(s32 keep)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int *puVar6;
-  int temp_v5;
-  unsigned char *puVar8;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  
-  temp_v1 = DAT_0057f69c;
-  temp_v5 = DAT_0057f69c + 0x88;
-  puVar8 = (unsigned char *)(DAT_0057f69c + 0x27ec5);
-  temp_v0 = *puVar8;
-  temp_v6 = *(unsigned int *)(DAT_0057f69c + 0x8c);
-  temp_v2 = gameFlagIsSet(0x556);
-  temp_v3 = gameFlagIsSet(0x557);
-  temp_v4 = gameFlagIsSet(0x421);
-  puVar6 = (unsigned int *)(temp_v1 + 0x21e14);
-  temp_v7 = *puVar6;
-  FUN_003fd478();
-  rt_memcpy_w(temp_v5,DAT_0057f6a0,0x2a71c);
-  *(unsigned int *)(temp_v1 + 0x21e14) = temp_v7;
-  partyCopyRecord100(puVar6);
-  if (param_1 == 1) {
-    *(unsigned int *)(DAT_0057f69c + 0x8c) = temp_v6;
-    *puVar8 = temp_v0;
-    if (temp_v2 != 0) {
-      gameFlagSetValue(0x556,1);
+    SaveBlock *block = g_gameDataBlocks.saveBlock;
+    GameData *data = &block->gameData;
+    u8 saved27e3d = data->unk27e3d;
+    f32 saved04 = data->unk04;
+    s32 flag556 = gameFlagIsSet(0x556);
+    s32 flag557 = gameFlagIsSet(0x557);
+    s32 flag421 = gameFlagIsSet(0x421);
+    f32 saved21e14 = data->unk21d8c;
+    void *record = FUN_003fd478();
+
+    rt_memcpy_w(data, g_gameDataBlocks.workBlock, 0x2a71c);
+    data->unk21d8c = saved21e14;
+    partyCopyRecord100(record);
+    if (keep == 1) {
+        g_gameDataBlocks.saveBlock->gameData.unk04 = saved04;
+        data->unk27e3d = saved27e3d;
+        if (flag556 != 0) {
+            gameFlagSetValue(0x556, 1, 1);
+        }
+        if (flag557 != 0) {
+            gameFlagSetValue(0x557, 1, 1);
+        }
+        if (flag421 != 0) {
+            gameFlagSetValue(0x421, 1, 1);
+        }
     }
-    if (temp_v3 != 0) {
-      gameFlagSetValue(0x557,1);
-    }
-    if (temp_v4 != 0) {
-      gameFlagSetValue(0x421,1);
-    }
-  }
-  asdMemFree(puVar6);
-  return;
+    asdMemFree(record);
 }
 
 } /* extern "C" */

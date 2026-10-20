@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00155050(int, int, int, int);
+int modelCmdAppendPacked(int, int, int, int);
 int FUN_00158b2c(...);
 int FUN_00158b88(unsigned char [24]);
 int FUN_00158bf8(unsigned char [24]);
@@ -27,7 +27,7 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_001546e8(unsigned int);
-/* Supplied declaration required: FUN_00155050. */
+/* Supplied declaration required: modelCmdAppendPacked. */
 /* Supplied declaration required: FUN_00158b2c. */
 /* Supplied declaration required: FUN_00158b88. */
 /* Supplied declaration required: FUN_00158bf8. */
@@ -113,11 +113,11 @@ unsigned int FUN_001575cc(int param_1)
       temp_v11 = *(char *)(param_1 + 0x11ec) == '\0';
     }
     if (!temp_v11) {
-      FUN_00155050(0,0,0,0);
+      modelCmdAppendPacked(0,0,0,0);
     }
   }
   else {
-    FUN_00155050(0,0,0,0);
+    modelCmdAppendPacked(0,0,0,0);
   }
   temp_v4 = (unsigned int)*(unsigned char *)(param_1 + 0x5b4);
   temp_v10 = temp_v4 == 0;

@@ -1,33 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030ab68` (_code @ 0x30ab68, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0026ae68(void);
+typedef struct StatusDown {
+    /* 0x0000 */ u8 unk0000[0x400];
+    /* 0x0400 */ u32 state;
+    /* 0x0404 */ u32 prevState;
+    /* 0x0408 */ u8 unk0408[4];
+    /* 0x040C */ u32 step;
+    /* 0x0410 */ u8 unk0410[0x1F81];
+    /* 0x2391 */ u8 flag;
+} StatusDown;
 
-extern int g_statusDown; /* 0x44e190 */
+extern StatusDown *g_statusDown; /* 0x44e190 */
 
-/* Supplied declaration required: FUN_0026ae68. */
+extern int FUN_0026ae68(void);
 
-
+/* Switches the status screen to state 6, remembering the previous state, and clears its flag after the refresh. */
 void FUN_0030ab68(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  
-  temp_v0 = g_statusDown;
-  puVar3 = (unsigned int *)(g_statusDown + 0x400);
-  *(unsigned int *)(g_statusDown + 0x40c) = 0;
-  temp_v1 = *(unsigned int *)(temp_v0 + 0x400);
-  *puVar3 = 6;
-  *(unsigned int *)(temp_v0 + 0x404) = temp_v1;
-  FUN_0026ae68();
-  *(unsigned char *)(temp_v0 + 0x2391) = 0;
-  return;
+    StatusDown *status = g_statusDown;
+    u32 previous;
+
+    status->step = 0;
+    previous = status->state;
+    status->state = 6;
+    status->prevState = previous;
+    FUN_0026ae68();
+    status->flag = 0;
 }
 
 } /* extern "C" */

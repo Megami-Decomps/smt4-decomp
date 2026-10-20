@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00199024(void);
+int uiQuestStartSelected(void);
 int uiFadeRequestHalf(void);
 int FUN_0028fe0c(...);
 int FUN_0028ffb8(...);
@@ -16,11 +16,11 @@ int FUN_0029e17c(void);
 int FUN_0029efa8(...);
 int FUN_0029efc0(...);
 int dataTable1bOr1cGetRecord(void);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_002bee58(...);
 int FUN_002bf810(...);
 int FUN_002c1658(...);
-int FUN_0032aa84(...);
+int uiQuestSortListByEntryKind(...);
 int FUN_003944d4(...);
 int FUN_003c8374(void);
 int SBORROW4(...);
@@ -31,7 +31,7 @@ int FUN_00290404(void);
 int FUN_002905d0(void);
 int scrScriptProcessStartEntry(...);
 int FUN_00297060(unsigned int, unsigned int);
-int FUN_002a0cb0(void);
+int buttonHelpGetMode(void);
 int asdMemFreeSlot(unsigned int);
 int FUN_002b8584(int, int);
 int buttonHelpSetPreset(...);
@@ -47,7 +47,7 @@ extern int g_uiQuest; /* 0x43dd50 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00199024. */
+/* Supplied declaration required: uiQuestStartSelected. */
 extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_001afc0c. */
 /* Supplied declaration required: uiFadeRequestHalf. */
@@ -71,13 +71,13 @@ extern int useCounterIsFinished(void);
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_0029efa8. */
 /* Supplied declaration required: FUN_0029efc0. */
-/* Supplied declaration required: FUN_002a0cb0. */
+/* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: FUN_002b8584. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002b8ee0. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bee58. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
@@ -88,7 +88,7 @@ extern int randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: asdMemFree. */
 extern unsigned int FUN_002c5c04(unsigned char *);
-/* Supplied declaration required: FUN_0032aa84. */
+/* Supplied declaration required: uiQuestSortListByEntryKind. */
 /* Supplied declaration required: FUN_003944d4. */
 /* Supplied declaration required: FUN_003c8374. */
 
@@ -277,7 +277,7 @@ unsigned int FUN_001956c4(void)
       *(unsigned int *)(temp_v11 + 8) = temp_v7;
       *(unsigned int *)(temp_v11 + 0x10) = 0;
       if (*(char *)(temp_v1 + 0x5f2) != '\0') {
-        FUN_002a0cb0();
+        buttonHelpGetMode();
         buttonHelpSetPreset();
       }
     }
@@ -405,7 +405,7 @@ unsigned int FUN_001956c4(void)
     dataTable1bOr1cGetRecord();
     if (*(char *)(temp_v4 + 6) != '\x06') {
       if (*(char *)(temp_v4 + 6) != '\t') {
-        FUN_00199024();
+        uiQuestStartSelected();
         *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
         return 0;
       }
@@ -615,7 +615,7 @@ unsigned int FUN_001956c4(void)
     FUN_0029efa8(temp_v1 + 0x660);
     temp_v11 = FUN_002973d8();
     if (temp_v11 == 0) {
-      FUN_00199024();
+      uiQuestStartSelected();
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
@@ -642,7 +642,7 @@ joined_r0x0019627c:
     FUN_0029efa8(temp_v1 + 0x660);
     temp_v11 = FUN_002973d8();
     if (temp_v11 == 0) {
-      FUN_00199024();
+      uiQuestStartSelected();
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
@@ -761,7 +761,7 @@ joined_r0x0019627c:
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_002a0cb0();
+    buttonHelpGetMode();
     buttonHelpSetPreset();
     temp_v7 = 0;
     break;
@@ -859,7 +859,7 @@ joined_r0x0019627c:
         if (*(char *)(temp_v4 + 6) != '\x06') {
           if (*(char *)(temp_v4 + 6) != '\t') {
             FUN_002bf810(0x100025c);
-            FUN_00199024();
+            uiQuestStartSelected();
           }
           else {
             temp_v7 = 9;
@@ -1002,7 +1002,7 @@ joined_r0x0019627c:
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_002a0cb0();
+    buttonHelpGetMode();
     buttonHelpSetPreset();
     temp_v7 = 0;
     break;
@@ -1092,7 +1092,7 @@ joined_r0x0019627c:
         temp_v7 = 0x100016d;
       }
     }
-    FUN_002bc01c(temp_v7);
+    eventQueueAddUniqueIfValid(temp_v7);
     *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
     return 0;
   case 0x1e:
@@ -1100,7 +1100,7 @@ joined_r0x0019627c:
     if (temp_v5 == 0) {
       temp_v5 = FUN_0029e130();
       if (temp_v5 != 0x4b) {
-        FUN_0032aa84((int)*(char *)(temp_v1 + 0x5c4));
+        uiQuestSortListByEntryKind((int)*(char *)(temp_v1 + 0x5c4));
         if (*(char *)(temp_v1 + 0x5c4) != '\0') {
           temp_v5 = temp_v1 + 0x6c4;
         }

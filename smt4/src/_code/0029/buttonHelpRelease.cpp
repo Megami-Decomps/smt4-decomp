@@ -1,56 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `buttonHelpRelease` (_code @ 0x2917b8, 0xa4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrScriptProcessDestroy(unsigned int);
-int asdMemFreeSlot(unsigned int);
-int FUN_002a87e8(void);
-int FUN_002bee58(unsigned int *, int);
-int asdMemFree(unsigned int *);
-int jobStop(unsigned int, int);
+typedef struct HelpButton {
+    u8 data[0x8C]; /* 0x00 */
+} HelpButton;
 
-extern signed char g_buttonHelp; /* 0x43da28 */
-extern unsigned int *DAT_0043da2c; /* 0x43da2c */
+typedef struct HelpSlot {
+    /* 0x0 */ u8 kind; /* 0 = unused */
+    /* 0x1 */ u8 unk1[3];
+} HelpSlot;
 
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: asdMemFreeSlot. */
-/* Supplied declaration required: FUN_002a87e8. */
-/* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: jobStop. */
+typedef struct HelpBlock {
+    /* 0x000 */ u32 job;
+    /* 0x004 */ u8 unk004[0xC];
+    /* 0x010 */ s32 state;
+    /* 0x014 */ u8 unk014[0x20];
+    /* 0x034 */ HelpButton buttons[6];
+    /* 0x37C */ u8 unk37C[0x118];
+    /* 0x494 */ HelpSlot slots[6];
+    /* 0x4AC */ u8 unk4AC[0xAC];
+    /* 0x558 */ u32 slotHeap;
+    /* 0x55C */ u8 unk55C[4];
+    /* 0x560 */ u32 process;
+} HelpBlock;
 
+typedef struct HelpHolder {
+    /* 0x0 */ s8 users;            /* reference count of the button help */
+    /* 0x1 */ u8 unk1[3];
+    /* 0x4 */ HelpBlock *block;
+} HelpHolder;
 
+extern HelpHolder g_buttonHelp;
+
+extern void asdMemFreeSlot(u32 slot);
+extern void FUN_002bee58(HelpButton *button, s32 flag);
+extern void FUN_002a87e8(void);
+extern void scrScriptProcessDestroy(u32 process);
+extern void jobStop(u32 job, s32 arg);
+extern void asdMemFree(void *block);
+
+/* Drops a reference to the button help; on the last one releases its buttons, script process and job and frees the block. */
 void buttonHelpRelease(void)
-
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = DAT_0043da2c;
-  g_buttonHelp = g_buttonHelp - '\x01';
-  if (g_buttonHelp < '\x01') {
-    asdMemFreeSlot(DAT_0043da2c[0x156]);
-    puVar1[0x156] = 0;
-    if (puVar1[4] != 3) {
-      temp_v0 = 0;
-      do {
-        FUN_002bee58(puVar1 + temp_v0 * 0x23 + 0xd,1);
-        if (*(char *)(puVar1 + temp_v0 + 0x125) != '\0') {
-          FUN_002a87e8();
+    HelpBlock *block;
+    s32 i;
+
+    g_buttonHelp.users--;
+    if (g_buttonHelp.users <= 0) {
+        block = g_buttonHelp.block;
+        asdMemFreeSlot(block->slotHeap);
+        block->slotHeap = 0;
+        if (block->state != 3) {
+            for (i = 0; i < 6; i++) {
+                FUN_002bee58(&block->buttons[i], 1);
+                if (block->slots[i].kind != 0) {
+                    FUN_002a87e8();
+                }
+            }
         }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < 6);
+        scrScriptProcessDestroy(block->process);
+        jobStop(block->job, 0);
+        asdMemFree(block);
+        g_buttonHelp.block = NULL;
+        g_buttonHelp.users = 0;
     }
-    scrScriptProcessDestroy(puVar1[0x158]);
-    jobStop(*puVar1,0);
-    asdMemFree(puVar1);
-    DAT_0043da2c = (unsigned int *)0x0;
-    g_buttonHelp = '\0';
-  }
-  return;
 }
 
 } /* extern "C" */

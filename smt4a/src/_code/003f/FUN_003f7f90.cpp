@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00157558(int);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(int);
-int FUN_0016c560(int);
+int skinObjectUpdateMatrices(int);
 int FUN_001835b4(int, int, int, unsigned int, unsigned int, int);
 int FUN_003f66dc(int, unsigned int, unsigned int);
 
@@ -27,7 +27,7 @@ extern unsigned int vec2GetYInt(int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_003f66dc. */
 
@@ -94,7 +94,7 @@ unsigned int FUN_003f7f90(int param_1)
       (**(romwright_code **)(temp_v0 + 0x12d4))();
       *(unsigned char *)(temp_v0 + 0x12d0) = 0;
     }
-    FUN_0016c560(g_renderCtx);
+    skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
   }
   return 0;

@@ -31,7 +31,7 @@ extern signed char DAT_004656d1; /* 0x4656d1 */
 /* Supplied declaration required: FUN_002ad66c. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002c567c. */
-extern unsigned int FUN_0035782c(void);
+extern unsigned int moduleStartOnce(void);
 extern unsigned int nn_cec_CTR_Base64Str2CecTitleId(unsigned char *);
 /* Supplied declaration required: nn_cec_CTR_MessageBox_GetMessageBoxNum. */
 extern unsigned int nn_cec_CTR_MessageBox_ReadOutBoxIndex(unsigned int);
@@ -71,7 +71,7 @@ unsigned int FUN_003580a4(int *param_1,unsigned int param_2,int param_3,int para
   uStack_30 = param_2;
   temp_v9 = param_3;
   temp_v10 = param_4;
-  temp_v0 = FUN_0035782c();
+  temp_v0 = moduleStartOnce();
   if (param_2 == 0) {
     temp_v0 = 0xc8810bea;
   }

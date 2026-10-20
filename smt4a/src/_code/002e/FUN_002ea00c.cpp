@@ -6,7 +6,7 @@ extern "C" {
 
 int asdOperatorDeleteArray(...);
 int FUN_002e6e34(int *, int);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int _ZN9Obj55859c12freeResourceEv(unsigned int *);
 int FUN_002e9e1e(int *);
 int FUN_002e9f00(unsigned int *, int);
@@ -18,7 +18,7 @@ extern unsigned char DAT_005585a4; /* 0x5585a4 */
 /* Supplied declaration required: asdOperatorDeleteArray. */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: _ZN9Obj55859c12freeResourceEv. */
 /* Supplied declaration required: FUN_002e9e1e. */
 /* Supplied declaration required: FUN_002e9f00. */
@@ -51,7 +51,7 @@ void FUN_002ea00c(unsigned int *param_1,unsigned int param_2,unsigned int param_
     if (param_1[0x11] != 0) {
       _ZN9Obj55859c12freeResourceEv(param_1);
     }
-    FUN_002e6e5c(&uStack_20);
+    _ZN9Obj55b28cD1Ev(&uStack_20);
   }
   if ((int *)param_1[0x14] != (int *)0x0) {
     (**(romwright_code **)(*(int *)param_1[0x14] + 4))();

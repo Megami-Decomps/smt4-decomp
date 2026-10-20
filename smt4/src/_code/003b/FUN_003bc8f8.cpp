@@ -1,54 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bc8f8` (_code @ 0x3bc8f8, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation of the five edge updates (retail loads them into ip, r2, lr, r3, r4; here r2, r3, lr, ip, r4). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0029c6b0(void);
+typedef struct Window {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u16 edge[5];
+    /* 0x00E */ u8 unk00e[0x5F3];
+    /* 0x601 */ u8 mode;
+} Window;
 
-typedef struct fn_003bc8f8_arg0 fn_003bc8f8_arg0;
-struct fn_003bc8f8_arg0 {
-    unsigned char pad_0x0[0x4];
-    ushort field_0x4; /* +0x4 */
-    ushort field_0x6; /* +0x6 */
-    ushort field_0x8; /* +0x8 */
-    ushort field_0xa; /* +0xa */
-    ushort field_0xc; /* +0xc */
-    unsigned char pad_0xe[0x5f3];
-    char field_0x601; /* +0x601 */
-};
+extern int FUN_0029c6b0(Window *window);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_0029c6b0. */
-
-
-void FUN_003bc8f8(fn_003bc8f8_arg0 *param_1,char param_2)
-
+/* Sets the window's mode and widens its five edge values by the mode's step (mode 1-3 steps 1-3). */
+void FUN_003bc8f8(Window *window, u32 modeArg)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  
-  temp_v0 = (unsigned short)(param_2 == '\x01');
-  param_1->field_0x601 = param_2;
-  if (param_2 != '\x01') {
-    if (param_2 == '\x02') {
-      temp_v0 = 2;
+    u8 mode = modeArg;
+    u16 step = 0;
+    s32 i;
+
+    window->mode = mode;
+    if (mode == 1) {
+        step = 1;
+    } else if (mode == 2) {
+        step = 2;
+    } else if (mode == 3) {
+        step = 3;
     }
-    else if (param_2 == '\x03') {
-      temp_v0 = 3;
+    for (i = 0; i < 5; i++) {
+        window->edge[i] += step;
     }
-  }
-  param_1->field_0x4 = param_1->field_0x4 + temp_v0;
-  param_1->field_0x6 = param_1->field_0x6 + temp_v0;
-  param_1->field_0x8 = param_1->field_0x8 + temp_v0;
-  param_1->field_0xa = param_1->field_0xa + temp_v0;
-  param_1->field_0xc = temp_v0 + param_1->field_0xc;
-  FUN_0029c6b0();
-  return;
+    FUN_0029c6b0(window);
 }
 
-} /* extern "C" */
+}

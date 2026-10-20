@@ -19,7 +19,7 @@ struct fn_003de75c_arg0 {
 extern int g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: gameFlagIsSet. */
-extern int FUN_0019f1a4(fn_003de75c_arg0 *, unsigned int);
+extern int gameFlagEntryGetBit(fn_003de75c_arg0 *, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_003df390(void);
 
@@ -38,7 +38,7 @@ unsigned int FUN_003de75c(fn_003de75c_arg0 *param_1)
   if (temp_v1 != 0) {
     pfVar3 = param_1;
     FUN_001ad9b4();
-    temp_v1 = FUN_0019f1a4(param_1,3);
+    temp_v1 = gameFlagEntryGetBit(param_1,3);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = pfVar3->field_0x6;

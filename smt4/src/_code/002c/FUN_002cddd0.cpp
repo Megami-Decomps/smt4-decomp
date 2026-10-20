@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_00269dc8(void);
-int FUN_0028dc68(int a);
+int messageSlotSet(int a);
 int FUN_0028dc98(...);
 int FUN_00296934(void);
 int buttonHelpSetPreset(int a);
@@ -28,7 +28,7 @@ u8 FUN_002cddd0(void)
         FUN_00296934();
         buttonHelpSetPreset(0x90);
         FUN_0028dc98(0xffffffff);
-        FUN_0028dc68(0);
+        messageSlotSet(0);
     }
     return done != 0;
 }

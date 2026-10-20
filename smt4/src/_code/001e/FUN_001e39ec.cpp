@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0025b754(void);
 int FUN_0025ba8c(...);
 int FUN_0025bab8(...);
-int FUN_0025bae4(...);
+int colorSetAndCachePica(...);
 int FUN_0025bb10(...);
 int FUN_00282390(void);
 int FUN_0028250c(void);
@@ -71,7 +71,7 @@ extern float DAT_004bdba8; /* 0x4bdba8 */
 /* Supplied declaration required: FUN_0025b754. */
 /* Supplied declaration required: FUN_0025ba8c. */
 /* Supplied declaration required: FUN_0025bab8. */
-/* Supplied declaration required: FUN_0025bae4. */
+/* Supplied declaration required: colorSetAndCachePica. */
 /* Supplied declaration required: FUN_0025bb10. */
 extern unsigned int FUN_0025bb34(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00282390. */
@@ -440,7 +440,7 @@ void FUN_001e39ec(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v13 = temp_v45;
   temp_v12 = FUN_0025bb34(1,&LAB_001e4248,0);
   temp_v40 = FUN_0025bb10(temp_v12,0);
-  FUN_0025bae4(&temp_v40);
+  colorSetAndCachePica(&temp_v40);
   FUN_0025bab8(&temp_v40);
   FUN_0025ba8c(&temp_v40);
   *(float *)(temp_v40 + 0x10c) = temp_v38;
@@ -448,12 +448,12 @@ void FUN_001e39ec(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   *(float *)(temp_v40 + 0x114) = temp_v14;
   temp_v13 = FUN_0025bb34(1,&LAB_001e4258,0);
   temp_v41 = FUN_0025bb10(temp_v13,0);
-  FUN_0025bae4(&temp_v41);
+  colorSetAndCachePica(&temp_v41);
   FUN_0025bab8(&temp_v41);
   FUN_0025ba8c(&temp_v41);
   temp_v13 = FUN_0025bb34(1,&LAB_001e4268,0);
   temp_v42 = FUN_0025bb10(temp_v13,0);
-  FUN_0025bae4(&temp_v42);
+  colorSetAndCachePica(&temp_v42);
   FUN_0025bab8(&temp_v42);
   FUN_0025ba8c(&temp_v42);
   FUN_0025b754();

@@ -55,10 +55,10 @@ int FUN_0036b824(...);
 int soundChannelRequestIfEnabled(...);
 int FUN_003d54f8(...);
 int FUN_003e542c(...);
-int FUN_003e5478(...);
+int controllerTargetNodeStart(...);
 int linkHolderApplyFirst(...);
 int FUN_003e54b8(...);
-int FUN_003e5728(...);
+int linkedTargetSetFloat(...);
 int linkHolderSetFlag(...);
 
 int FUN_0013c174(...);
@@ -181,17 +181,17 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: FUN_003e4740. */
 extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: FUN_003e542c. */
-/* Supplied declaration required: FUN_003e5478. */
+/* Supplied declaration required: controllerTargetNodeStart. */
 /* Supplied declaration required: linkHolderApplyFirst. */
 /* Supplied declaration required: FUN_003e54b8. */
 extern int linkHolderCheckFirst(unsigned int);
-/* Supplied declaration required: FUN_003e5728. */
+/* Supplied declaration required: linkedTargetSetFloat. */
 /* Supplied declaration required: FUN_003e5858. */
 extern int fourPtrsAllNull(unsigned int);
 /* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: linkHolderClearFlag. */
 /* Supplied declaration required: FUN_003e5c00. */
-extern unsigned int *FUN_003e5d10(void);
+extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: FUN_003f9c0c. */
 /* Supplied declaration required: FUN_003f9c6c. */
 /* Supplied declaration required: FUN_003f9e80. */
@@ -297,7 +297,7 @@ unsigned int FUN_00328838(void)
     asdOperatorNew();
     puVar4 = (unsigned int *)0x0;
     if (temp_v6 != 0) {
-      puVar4 = (unsigned int *)FUN_003e5d10();
+      puVar4 = (unsigned int *)_ZN9Obj557ae8C1Ev();
       *puVar4 = (unsigned int)&DAT_00557c60;
     }
     *(unsigned int **)(temp_v4 + 0x28) = puVar4;
@@ -427,8 +427,8 @@ unsigned int FUN_00328838(void)
   case 2:
     temp_v4 = fourPtrsAllNull(*(unsigned int *)(temp_v0 + 0x28));
     if (temp_v4 == 0) break;
-    FUN_003e5478(*(unsigned int *)(temp_v0 + 0x28),0);
-    FUN_003e5728(*(unsigned int *)(temp_v0 + 0x28));
+    controllerTargetNodeStart(*(unsigned int *)(temp_v0 + 0x28),0);
+    linkedTargetSetFloat(*(unsigned int *)(temp_v0 + 0x28));
     puVar5 = &LAB_003290c4;
     FUN_0020214c();
     *(unsigned char **)(temp_v0 + 0x18) = puVar5;
@@ -486,7 +486,7 @@ unsigned int FUN_00328838(void)
     if ((temp_v4 != 0x13) || (FUN_003e542c(*(unsigned int *)(temp_v0 + 0x28)), in_s0 < 0x41a00000)) break;
     FUN_003e54b8(*(unsigned int *)(temp_v0 + 0x28));
     temp_v3 = *(unsigned int *)(temp_v0 + 0x28);
-    FUN_003e5728(temp_v3);
+    linkedTargetSetFloat(temp_v3);
     break;
   case 5:
     temp_v4 = linkHolderCheckFirst(*(unsigned int *)(temp_v0 + 0x28));
@@ -584,7 +584,7 @@ unsigned int FUN_00328838(void)
       FUN_003e4740(temp_v0,2);
       *(unsigned char *)(temp_v0 + 0x550) = 1;
       *(unsigned int *)(temp_v0 + 0x554) = 0x88;
-      FUN_003e5478(*(unsigned int *)(temp_v0 + 0x28),0x1a);
+      controllerTargetNodeStart(*(unsigned int *)(temp_v0 + 0x28),0x1a);
       FUN_003d54f8(0,10);
       FUN_003d54f8(1,10);
     }
@@ -592,7 +592,7 @@ unsigned int FUN_00328838(void)
       FUN_003e4740(temp_v0,1);
       *(unsigned char *)(temp_v0 + 0x550) = 1;
       *(unsigned int *)(temp_v0 + 0x554) = 0;
-      FUN_003e5478(*(unsigned int *)(temp_v0 + 0x28),0x1a);
+      controllerTargetNodeStart(*(unsigned int *)(temp_v0 + 0x28),0x1a);
       FUN_003d54f8(0,0x14);
       FUN_003d54f8(1,0x14);
     }
@@ -657,9 +657,9 @@ unsigned int FUN_00328838(void)
     *(unsigned char *)(temp_v0 + 0x584) = 0;
     *(unsigned char *)(temp_v0 + 0x590) = 0;
     FUN_003e4740(temp_v0,0);
-    FUN_003e5478(*(unsigned int *)(temp_v0 + 0x28),0x13);
+    controllerTargetNodeStart(*(unsigned int *)(temp_v0 + 0x28),0x13);
     temp_v3 = *(unsigned int *)(temp_v0 + 0x28);
-    FUN_003e5728(temp_v3);
+    linkedTargetSetFloat(temp_v3);
     break;
   case 0xf:
     temp_v4 = FUN_002802c8();
@@ -776,8 +776,8 @@ unsigned int FUN_00328838(void)
     }
     if (*(int *)(temp_v0 + 0x554) == 0x55) {
       linkHolderClearFlag(*(unsigned int *)(temp_v0 + 0x28));
-      FUN_003e5478(*(unsigned int *)(temp_v0 + 0x28),0x1a);
-      FUN_003e5728(*(unsigned int *)(temp_v0 + 0x28));
+      controllerTargetNodeStart(*(unsigned int *)(temp_v0 + 0x28),0x1a);
+      linkedTargetSetFloat(*(unsigned int *)(temp_v0 + 0x28));
     }
     if ((*(int *)(temp_v0 + 0x554) >= 0x88) &&
        (temp_v4 = linkHolderCheckFirst(*(unsigned int *)(temp_v0 + 0x28)), temp_v4 != 0)) {

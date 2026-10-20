@@ -16,7 +16,7 @@ int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int FUN_002beed0(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -67,7 +67,7 @@ extern int FUN_00298fa0(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002beed0. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -135,7 +135,7 @@ void FUN_00269dc8(void)
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 400);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar2 + 5);
-  FUN_002c312c(puVar2 + 5,&DAT_00402e00,0x3c,&DAT_00402e3c,0x60,&DAT_00402e9c,0x3c,0,0,&DAT_00402ed8
+  paramsInit(puVar2 + 5,&DAT_00402e00,0x3c,&DAT_00402e3c,0x60,&DAT_00402e9c,0x3c,0,0,&DAT_00402ed8
                ,0x214);
   FUN_002bd954(puVar2 + 0xd,0x29,0,puVar2 + 5,0xc9);
   timerStart(puVar2 + 0xd,0);

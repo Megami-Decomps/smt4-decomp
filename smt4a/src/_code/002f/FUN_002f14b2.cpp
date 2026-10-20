@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(...);
-int FUN_002e6e5c(unsigned int *);
+int _ZN9Obj55b28cD1Ev(unsigned int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 extern int *FUN_001117d4(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 
 
@@ -49,7 +49,7 @@ void FUN_002f14b2(int param_1,unsigned int param_2,int param_3)
     (**(romwright_code **)(**(int **)(param_1 + 0x70) + 8))
               (*(int **)(param_1 + 0x70),param_1,param_2,*(unsigned char *)(param_3 + 0x84));
   }
-  FUN_002e6e5c(puVar3);
+  _ZN9Obj55b28cD1Ev(puVar3);
   return;
 }
 

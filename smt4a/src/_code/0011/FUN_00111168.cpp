@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12], int *);
+int _ZN9Obj55b28cD1Ev(unsigned char [12], int *);
 int FUN_002e7908(int *, unsigned int *);
 int FUN_002fc056(unsigned int, unsigned int);
 int ringBufferConsume(unsigned int, int);
@@ -20,7 +20,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e7908. */
 extern int *wordRefMin(unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_002fc056. */
@@ -59,7 +59,7 @@ void FUN_00111168(int *param_1,int param_2,unsigned int param_3,int *param_4)
       temp_v7[1] = temp_v1;
       temp_v7[2] = temp_v2;
       piVar1 = temp_v7 + 3;
-      FUN_002e6e5c(temp_v3,piVar1);
+      _ZN9Obj55b28cD1Ev(temp_v3,piVar1);
       return;
     }
     temp_v5 = *(unsigned int *)(*(int *)(param_2 + 0x109c) + 0x18);
@@ -84,7 +84,7 @@ void FUN_00111168(int *param_1,int param_2,unsigned int param_3,int *param_4)
   }
   FUN_002e7908(temp_v7,puVar2);
   piVar1 = temp_v0;
-  FUN_002e6e5c(temp_v3,piVar1);
+  _ZN9Obj55b28cD1Ev(temp_v3,piVar1);
   return;
 }
 

@@ -1,53 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `dataTable0aSub0GetValueById` (_code @ 0x37d9fc, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
+/* One entry of data table 0x0a sub-table 0. */
+typedef struct DataTable0aEntry {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u16 unk02;
+    /* 0x04 */ u16 unk04;
+    /* 0x06 */ u16 value;
+} DataTable0aEntry;
 
+extern void *dataTableGet(u32 table, u32 index);
+extern u32 dataTableGetCount(void *table);
+extern DataTable0aEntry *dataTableGetEntries(void);
 
-unsigned short dataTable0aSub0GetValueById(unsigned int param_1)
-
+/* Returns the value of the entry with the given id, or 0 when there is none. */
+u16 dataTable0aSub0GetValueById(u32 id)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned short *puVar6;
-  
-  temp_v0 = dataTableGet(10,0);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  temp_v3 = 0;
-  if (temp_v2 != 0) {
-    temp_v3 = temp_v2 & 1;
-    temp_v4 = 0;
-    if (temp_v3 != 0) {
-      do {
-        if (*(unsigned short *)(temp_v1 + temp_v4 * 8) == param_1) {
-          return *(unsigned short *)(temp_v1 + temp_v4 * 8 + 6);
+    void *table = dataTableGet(10, 0);
+    DataTable0aEntry *entries = dataTableGetEntries();
+    u32 count = dataTableGetCount(table);
+    s32 i;
+
+    for (i = 0; i < count; i++) {
+        if (entries[i].id == id) {
+            return entries[i].value;
         }
-        temp_v4 = temp_v4 + 1;
-      } while ((int)temp_v4 < (int)temp_v3);
     }
-  }
-  while( 1 ) {
-    temp_v4 = temp_v3;
-    if (temp_v2 <= temp_v4) {
-      return 0;
-    }
-    puVar6 = (unsigned short *)(temp_v1 + temp_v4 * 8);
-    if (*puVar6 == param_1) break;
-    if (puVar6[4] == param_1) {
-      return *(unsigned short *)(temp_v1 + temp_v4 * 8 + 0xe);
-    }
-    temp_v3 = temp_v4 + 2;
-  }
-  return *(unsigned short *)(temp_v1 + temp_v4 * 8 + 6);
+    return 0;
 }
 
 } /* extern "C" */

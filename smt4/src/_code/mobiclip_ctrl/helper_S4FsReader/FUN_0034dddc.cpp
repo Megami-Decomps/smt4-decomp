@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b5820(...);
 int FUN_002bcc60(...);
-int FUN_002bcd44(...);
+int resultReportIfFailed(...);
 int asdOperatorNew(...);
 int memAlloc(...);
 int nn_os_CriticalSection_Initialize(...);
@@ -34,7 +34,7 @@ extern unsigned int *DAT_0044d134; /* 0x44d134 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002b5820. */
 /* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002bcd44. */
+/* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
@@ -107,7 +107,7 @@ unsigned int FUN_0034dddc(unsigned int *param_1,int *param_2,unsigned int *param
     *(unsigned char *)(puVar4 + 4) = 0;
   }
   DAT_0044d134 = puVar4;
-  FUN_002bcd44();
+  resultReportIfFailed();
   temp_v3 = 4;
   puStack_24 = &LAB_003f6ed4;
   puVar4 = param_1 + 0xc;

@@ -1,39 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031f36c` (_code @ 0x31f36c, 0x60 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int btlMainFindEntryByListedId(int, unsigned int);
+typedef struct BattleEntry {
+    /* 0x000 */ u8 unk000[0x258];
+    /* 0x258 */ u32 history[6];
+    /* 0x270 */ s32 cursor;  /* next history slot */
+} BattleEntry;
 
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
+void *btlGetMainState(void);
+BattleEntry *btlMainFindEntryByListedId(void *state, u32 id);
+u32 scrGetArg(u32 index);
 
-
-unsigned int FUN_0031f36c(void)
-
+/* Script command: records argument 1 in the history ring of the battle entry with listed id argument 0. */
+u32 FUN_0031f36c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = btlGetMainState();
-  btlMainFindEntryByListedId(temp_v2,temp_v0);
-  if (temp_v2 != 0) {
-    piVar4 = (int *)(temp_v2 + 0x270);
-    *(unsigned int *)(temp_v2 + *(int *)(temp_v2 + 0x270) * 4 + 600) = temp_v1;
-    temp_v2 = *piVar4;
-    *piVar4 = temp_v2 + 1;
-    if (temp_v2 + 1 >= 6) {
-      *piVar4 = 0;
+    u32 id = scrGetArg(0);
+    u32 value = scrGetArg(1);
+    BattleEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
+    s32 *cursor;
+
+    if (entry != NULL) {
+        cursor = &entry->cursor;
+        entry->history[*cursor] = value;
+        *cursor = *cursor + 1;
+        if (*cursor > 5) {
+            *cursor = 0;
+        }
     }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

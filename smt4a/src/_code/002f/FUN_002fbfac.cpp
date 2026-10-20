@@ -1,30 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fbfac` (_code @ 0x2fbfac, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail loads the count into r1 and the ready byte into r2 (keeping r0), built reuses r0 and r1. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00647630; /* 0x647630 */
+typedef struct Request {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 count;
+} Request;
 
-extern unsigned int FUN_0043b21c(unsigned int);
+typedef struct Service {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s8 ready;
+    /* 0x05 */ u8 unk05[0x27];
+    /* 0x2C */ u8 object[1];
+} Service;
 
+extern Service DAT_00647630;
 
-unsigned int FUN_002fbfac(int param_1)
+u32 FUN_0043b21c(u8 *object);
 
+/* Returns an error code for an empty request or an unready service, else the service object's result. */
+u32 FUN_002fbfac(Request *request)
 {
-  unsigned int temp_v0;
-  
-  if (*(int *)(param_1 + 4) < 1) {
-    temp_v0 = 0xd8a0a064;
-  }
-  else {
-    if ((*(signed char *)((unsigned char *)&DAT_00647630 + 0x4)) != '\0') {
-      temp_v0 = FUN_0043b21c(0x64765c);
-      return temp_v0;
+    if (request->count <= 0) {
+        return 0xD8A0A064;
     }
-    temp_v0 = 0xd8a0a3f8;
-  }
-  return temp_v0;
+    if (DAT_00647630.ready == 0) {
+        return 0xD8A0A3F8;
+    }
+    return FUN_0043b21c(DAT_00647630.object);
 }
 
 } /* extern "C" */

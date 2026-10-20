@@ -32,7 +32,7 @@ extern unsigned short *dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 extern int gameGetSlotRecord(int);
 extern int gameGetSlotTable(void);
-extern int FUN_00239234(unsigned short, unsigned char *);
+extern int gameDataCopySaveEntry(unsigned short, unsigned char *);
 
 
 unsigned int FUN_0023e32c(unsigned short *param_1,unsigned short *param_2,unsigned short *param_3,unsigned int param_4)
@@ -105,10 +105,10 @@ unsigned int FUN_0023e32c(unsigned short *param_1,unsigned short *param_2,unsign
           temp_v0 = puVar6[0x1e];
           if ((temp_v0 & 1) != 0) {
             if ((temp_v0 & 0xfffe) != 0) {
-              temp_v2 = FUN_00239234(temp_v0 >> 1,temp_v6);
+              temp_v2 = gameDataCopySaveEntry(temp_v0 >> 1,temp_v6);
             }
             else {
-              temp_v2 = FUN_00239234(*puVar6,temp_v6);
+              temp_v2 = gameDataCopySaveEntry(*puVar6,temp_v6);
             }
             if ((temp_v2 == 0) || ((temp_v7 & 0xfc) == 0)) goto LAB_0023e4d0;
           }

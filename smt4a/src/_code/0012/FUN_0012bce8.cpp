@@ -12,9 +12,9 @@ int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(...);
 int FUN_0030c800(...);
 int FUN_0030c846(int *, unsigned int, unsigned int, unsigned int);
-int FUN_0030c854(unsigned int *, unsigned int);
+int wordListAt(unsigned int *, unsigned int);
 int FUN_0030c884(unsigned char [8], int);
-int FUN_0030c890(int, unsigned int);
+int recordListAt(int, unsigned int);
 int FUN_0030cac0(unsigned char [8]);
 int FUN_0030d0ac(unsigned char [8]);
 
@@ -50,9 +50,9 @@ extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char 
 /* Supplied declaration required: FUN_002f7cba. */
 /* Supplied declaration required: FUN_0030c800. */
 /* Supplied declaration required: FUN_0030c846. */
-/* Supplied declaration required: FUN_0030c854. */
+/* Supplied declaration required: wordListAt. */
 /* Supplied declaration required: FUN_0030c884. */
-/* Supplied declaration required: FUN_0030c890. */
+/* Supplied declaration required: recordListAt. */
 extern int FUN_0030c8c0(void);
 extern unsigned int vectorCount4_0030c8ce(void);
 /* Supplied declaration required: FUN_0030cac0. */
@@ -105,7 +105,7 @@ void FUN_0012bce8(int param_1)
         piVar9 = (int *)(param_1 + 0x400);
         for (temp_v0 = *(int *)(param_1 + 0x3fc); *piVar9 != temp_v0; temp_v0 = temp_v0 + 0x18) {
           temp_v2 = temp_v19;
-          FUN_0030c890(temp_v19,*(unsigned int *)(param_1 + 0x3f4));
+          recordListAt(temp_v19,*(unsigned int *)(param_1 + 0x3f4));
           if (*(int *)(temp_v2 + 0x10) == *(int *)(temp_v0 + 8)) {
             FUN_0030c884(temp_v11,temp_v0);
             temp_v7 = 1;
@@ -114,7 +114,7 @@ void FUN_0012bce8(int param_1)
         if (temp_v7 != 0) {
           piVar10 = *(int **)(param_1 + 0x3ec);
           temp_v0 = temp_v19;
-          FUN_0030c890(temp_v19,*(unsigned int *)(param_1 + 0x3f4));
+          recordListAt(temp_v19,*(unsigned int *)(param_1 + 0x3f4));
           temp_v10 = *(unsigned int *)(temp_v0 + 0xc);
           temp_v9 = *(unsigned int *)(temp_v0 + 8);
           temp_v8 = (unsigned int)temp_v16;
@@ -126,7 +126,7 @@ void FUN_0012bce8(int param_1)
         }
         else {
           temp_v0 = temp_v19;
-          FUN_0030c890(temp_v19,*(unsigned int *)(param_1 + 0x3f4));
+          recordListAt(temp_v19,*(unsigned int *)(param_1 + 0x3f4));
           piVar9 = (int *)(param_1 + 0x280);
           FUN_0030c846(piVar9,temp_v4,*(unsigned int *)(temp_v0 + 8),*(unsigned int *)(temp_v0 + 0xc));
           temp_v8 = *(unsigned int *)(param_1 + 0x294);
@@ -152,7 +152,7 @@ void FUN_0012bce8(int param_1)
           temp_v0 = 0;
           if (puVar4 != (unsigned int *)0x0) {
             puVar5 = temp_v20;
-            FUN_0030c854(temp_v20,*(unsigned int *)(param_1 + 0x3f0));
+            wordListAt(temp_v20,*(unsigned int *)(param_1 + 0x3f0));
             puVar4[1] = *puVar5;
             puVar4[2] = temp_v7;
             *puVar4 = (unsigned int)&DAT_0055aec4;
@@ -162,7 +162,7 @@ void FUN_0012bce8(int param_1)
           piVar9[3] = temp_v0;
           FUN_0030cac0(temp_v17);
           temp_v0 = temp_v19;
-          FUN_0030c890(temp_v19,*(unsigned int *)(param_1 + 0x3f4));
+          recordListAt(temp_v19,*(unsigned int *)(param_1 + 0x3f4));
           temp_v18 = *(unsigned int *)(temp_v0 + 0x10);
           piVar10 = (int *)(*(int *)(param_1 + 0x6c) + ((int)DAT_00589568 >> 1));
           pcVar7 = DAT_00589564;

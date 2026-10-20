@@ -55,7 +55,7 @@ extern int FUN_00162880(void);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0019ea64. */
 extern int idIsAtLeast350(unsigned int);
-extern int FUN_0019f1a4(unsigned int, unsigned int);
+extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(unsigned int);
 /* Supplied declaration required: FUN_001ba514. */
@@ -116,7 +116,7 @@ void FUN_004688c8(unsigned int *param_1)
       temp_v1 = temp_v4;
       FUN_001ad9b4();
       if (((temp_v1 != 0) && (*(char *)(temp_v1 + 6) == '\0')) &&
-         (temp_v2 = FUN_0019f1a4(temp_v4,1), temp_v2 != 0)) {
+         (temp_v2 = gameFlagEntryGetBit(temp_v4,1), temp_v2 != 0)) {
         temp_v0 = *(short *)(temp_v1 + 0x124);
         temp_v2 = idIsAtLeast350(temp_v4);
         if ((temp_v2 == 0) && (temp_v0 != 0)) {

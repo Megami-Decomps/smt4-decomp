@@ -8,7 +8,7 @@ int FUN_0026b9bc(void);
 int FUN_002a03d8(...);
 
 int FUN_002595e0(...);
-int FUN_00259784(...);
+int cecProcessForward(...);
 int FUN_002597c0(void);
 int FUN_00262f78(void);
 int FUN_0026e61c(...);
@@ -51,9 +51,9 @@ extern int g_campCec; /* 0x43daa8 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_002595e0. */
-/* Supplied declaration required: FUN_00259784. */
+/* Supplied declaration required: cecProcessForward. */
 /* Supplied declaration required: FUN_002597c0. */
-extern unsigned int FUN_002597e0(void);
+extern unsigned int gameDataBlocksGetFlagByteA(void);
 extern unsigned int FUN_00259800(void);
 extern unsigned int FUN_0025981c(void);
 extern int FUN_00262f38(void);
@@ -346,10 +346,10 @@ LAB_001ec410:
         *(unsigned char *)(param_1 + 0xd64) = 1;
       }
       temp_v5 = FUN_00259800();
-      temp_v8 = FUN_002597e0();
+      temp_v8 = gameDataBlocksGetFlagByteA();
       FUN_002bd2b4(g_campCec + 0x48,(int)*(short *)(temp_v7 + 0x46),temp_v8,temp_v5);
       FUN_002597c0();
-      FUN_00259784(g_campCec + 0x48);
+      cecProcessForward(g_campCec + 0x48);
       FUN_002595e0(g_campCec + 0x48);
     }
     else {

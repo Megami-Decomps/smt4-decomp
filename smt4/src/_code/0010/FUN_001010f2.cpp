@@ -17,7 +17,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_001010d4(char, int);
+extern int digitValueInBase(char, int);
 extern long long rt_lmul(int, int, unsigned int, unsigned int);
 extern unsigned int *__aeabi_errno_addr(void);
 
@@ -64,7 +64,7 @@ unsigned long long FUN_001010f2(char *param_1,unsigned int *param_2,int param_3)
   temp_v2 = 0;
   temp_v7 = 0;
   while( 1 ) {
-    temp_v4 = FUN_001010d4(temp_v3,param_3);
+    temp_v4 = digitValueInBase(temp_v3,param_3);
     if (temp_v4 < 0) break;
     temp_v0 = 1;
     temp_v7 = param_3 * temp_v7 + temp_v4;

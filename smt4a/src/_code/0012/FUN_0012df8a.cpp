@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0030bfc8(char **, int, int, char *, unsigned int);
-int FUN_0030c0d8(...);
+int onlineSockAddrLessWithPort(...);
 
 /* stack frame of param_3: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ typedef struct {
 
 extern int wordRefsEqual_002ead28(char **, char **);
 /* Supplied declaration required: FUN_0030bfc8. */
-/* Supplied declaration required: FUN_0030c0d8. */
+/* Supplied declaration required: onlineSockAddrLessWithPort. */
 
 
 void FUN_0012df8a(unsigned int *param_1,int param_2,unsigned int param_3)
@@ -41,7 +41,7 @@ void FUN_0012df8a(unsigned int *param_1,int param_2,unsigned int param_3)
   pcVar4 = *(char **)(temp_v5 + 4);
   while (pcVar4 != (char *)0x0) {
     temp_v5 = pcVar4;
-    temp_v1 = FUN_0030c0d8(temp_v2,param_3,pcVar4 + 0x10);
+    temp_v1 = onlineSockAddrLessWithPort(temp_v2,param_3,pcVar4 + 0x10);
     if (temp_v1 != 0) {
       pcVar4 = *(char **)(pcVar4 + 8);
     }
@@ -82,7 +82,7 @@ void FUN_0012df8a(unsigned int *param_1,int param_2,unsigned int param_3)
         }
       }
     }
-    temp_v1 = FUN_0030c0d8(temp_v2,temp_v4 + 0x10,param_3);
+    temp_v1 = onlineSockAddrLessWithPort(temp_v2,temp_v4 + 0x10,param_3);
     if (temp_v1 == 0) {
       temp_v0 = 0;
       temp_v6 = temp_v4;

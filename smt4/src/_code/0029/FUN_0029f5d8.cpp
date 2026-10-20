@@ -32,7 +32,7 @@ extern int FUN_0028cfbc(unsigned int);
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern int FUN_0029d644(unsigned int);
 /* Supplied declaration required: FUN_0029d65c. */
-extern int FUN_0029e908(unsigned int);
+extern int objectPartRunUnlessLocked(unsigned int);
 extern int FUN_0029e93c(unsigned int);
 extern int FUN_0029efa8(unsigned int);
 extern int FUN_0029efc0(unsigned int);
@@ -80,7 +80,7 @@ FUN_0029f5d8(unsigned int param_1,fn_0029f5d8_arg1 *param_2,int param_3,unsigned
   }
 LAB_0029f684:
   temp_v2 = FUN_0029e93c(param_1);
-  temp_v7 = FUN_0029e908(param_1);
+  temp_v7 = objectPartRunUnlessLocked(param_1);
   temp_v6 = FUN_0029efc0(param_1);
   temp_v3 = FUN_0029efa8(param_1);
   if (temp_v4 >= 0) {
@@ -101,7 +101,7 @@ LAB_0029f684:
   }
   if (param_9 != 0) {
     temp_v4 = FUN_0029e93c(param_1);
-    temp_v5 = FUN_0029e908(param_1);
+    temp_v5 = objectPartRunUnlessLocked(param_1);
     if (temp_v5 + temp_v4 == temp_v2 + temp_v7) {
       temp_v4 = FUN_0029efc0(param_1);
       temp_v2 = FUN_0029efa8(param_1);

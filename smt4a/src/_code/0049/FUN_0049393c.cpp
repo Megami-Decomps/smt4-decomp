@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_00192550(void);
 int FUN_00192608(void);
-int FUN_00192690(void);
+int contentEntryFindById2(void);
 
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_00192608. */
-/* Supplied declaration required: FUN_00192690. */
+/* Supplied declaration required: contentEntryFindById2. */
 extern unsigned int FUN_00192718(unsigned int);
 extern int FUN_0049c9a0(unsigned short *);
 
@@ -31,7 +31,7 @@ int FUN_0049393c(unsigned short *param_1,unsigned short *param_2)
   temp_v0 = FUN_00192718(temp_v4);
   switch(temp_v0) {
   case 0:
-    FUN_00192690();
+    contentEntryFindById2();
     temp_v3 = (unsigned int)*(unsigned char *)(temp_v4 + 0x25);
     break;
   case 1:
@@ -54,7 +54,7 @@ int FUN_0049393c(unsigned short *param_1,unsigned short *param_2)
   temp_v0 = FUN_00192718(temp_v4);
   switch(temp_v0) {
   case 0:
-    FUN_00192690();
+    contentEntryFindById2();
     temp_v5 = (unsigned int)*(unsigned char *)(temp_v4 + 0x25);
     break;
   case 1:

@@ -9,7 +9,7 @@ int software_interrupt(int);
 
 typedef int romwright_code(...);
 extern int FUN_00110000(...); /* 0x110000 */
-extern unsigned int DAT_005c14bc; /* 0x5c14bc */
+extern unsigned int _ZTV9Obj5c14bc; /* 0x5c14bc */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -25,8 +25,8 @@ unsigned int FUN_0016f0e4(void)
   temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
   *(romwright_code **)(temp_v1 + 0x80) = FUN_00110000;
   software_interrupt(0x32);
-  temp_v0 = DAT_005c14bc;
-  if ((DAT_005c14bc & 0x80000000) == 0) {
+  temp_v0 = _ZTV9Obj5c14bc;
+  if ((_ZTV9Obj5c14bc & 0x80000000) == 0) {
     temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
   }
   return temp_v0;

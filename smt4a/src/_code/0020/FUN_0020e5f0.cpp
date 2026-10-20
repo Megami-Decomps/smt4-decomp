@@ -15,7 +15,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_0020e698; /* 0x20e698 */
-extern int FUN_002681b0(...); /* 0x2681b0 */
+extern int runnerShutdown(...); /* 0x2681b0 */
 extern unsigned char LAB_002ef9ec; /* 0x2ef9ec */
 extern unsigned int *DAT_00588e2c; /* 0x588e2c */
 
@@ -44,7 +44,7 @@ void FUN_0020e5f0(void)
   }
   puVar2 = &LAB_0020e698;
   DAT_00588e2c = puVar1;
-  asdProcessCreateSimple(&LAB_0020e698,4,0,0,FUN_002681b0,&LAB_002ef9ec,0);
+  asdProcessCreateSimple(&LAB_0020e698,4,0,0,runnerShutdown,&LAB_002ef9ec,0);
   *puVar1 = (unsigned int)puVar2;
   temp_v0 = 0xc;
   asdOperatorNew();

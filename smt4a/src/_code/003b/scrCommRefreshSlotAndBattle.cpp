@@ -5,13 +5,13 @@ extern "C" {
 extern void *saveSlotFindSelected(void);
 extern void FUN_004bcb54(void *slot);
 extern void *btlGetMainState(void);
-extern void FUN_003eaa14(void *state);
+extern void saveSlotApplySelected(void *state);
 
 /* Script command: refreshes the current slot and the battle state. */
 u32 scrCommRefreshSlotAndBattle(void)
 {
     FUN_004bcb54(saveSlotFindSelected());
-    FUN_003eaa14(btlGetMainState());
+    saveSlotApplySelected(btlGetMainState());
     return 1;
 }
 

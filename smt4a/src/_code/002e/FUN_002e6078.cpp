@@ -13,7 +13,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int *__aeabi_errno_addr(void);
-extern int FUN_002e49dc(char, int);
+extern int digitValueInBase(char, int);
 
 
 unsigned int FUN_002e6078(char *param_1,unsigned int *param_2,int param_3)
@@ -56,7 +56,7 @@ unsigned int FUN_002e6078(char *param_1,unsigned int *param_2,int param_3)
   }
   temp_v5 = 0;
   temp_v6 = 0;
-  while (temp_v4 = FUN_002e49dc(temp_v2,param_3), -1 < temp_v4) {
+  while (temp_v4 = digitValueInBase(temp_v2,param_3), -1 < temp_v4) {
     temp_v0 = 1;
     temp_v3 = param_3 * temp_v6 + temp_v4;
     temp_v6 = temp_v3 & 0xffff;

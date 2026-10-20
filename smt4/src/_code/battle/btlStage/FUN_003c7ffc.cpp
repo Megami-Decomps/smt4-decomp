@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned int DAT_004398d0; /* 0x4398d0 */
+extern unsigned int g_btlStage; /* 0x4398d0 */
 
 /* Supplied declaration required: FUN_003400f0. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -23,7 +23,7 @@ void FUN_003c7ffc(int param_1)
 {
 /* irregular: 1 native warning(s); review required */
   nn_os_CriticalSection_Enter(param_1 + 0xb8);
-  *(unsigned int *)(param_1 + 0xa0) = DAT_004398d0;
+  *(unsigned int *)(param_1 + 0xa0) = g_btlStage;
   FUN_003400f0();
   *(unsigned short *)(param_1 + 0xb4) = 1;
   nn_os_CriticalSection_Leave(param_1 + 0xb8);

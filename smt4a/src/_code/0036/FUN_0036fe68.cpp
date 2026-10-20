@@ -19,7 +19,7 @@ int FUN_002c2358(void);
 int FUN_002c23cc(int);
 int FUN_002c2610(void);
 int FUN_002c3398(int);
-int FUN_002efc0c(int);
+int debugOverlaySetShown(int);
 int FUN_0031416c(int, int, int, int, int, int, int, int, int, int, int, int);
 int objectE0ResetFlags1040(void);
 int FUN_0033a988(void);
@@ -69,7 +69,7 @@ extern int FUN_00162858(void);
 /* Supplied declaration required: FUN_002c2610. */
 /* Supplied declaration required: FUN_002c3398. */
 extern int mikadoIsCameraNotState7(void);
-/* Supplied declaration required: FUN_002efc0c. */
+/* Supplied declaration required: debugOverlaySetShown. */
 /* Supplied declaration required: FUN_0031416c. */
 /* Supplied declaration required: objectE0ResetFlags1040. */
 /* Supplied declaration required: FUN_0033a988. */
@@ -91,7 +91,7 @@ unsigned int FUN_0036fe68(void)
   
   if ((DAT_005f1620 != '\0') && (DAT_005806b6 == '\0')) {
     DAT_005806b6 = '\x01';
-    FUN_002efc0c(1);
+    debugOverlaySetShown(1);
   }
   temp_v0 = g_lmapScene;
   if (DAT_005f1610 == 3) {
@@ -105,7 +105,7 @@ unsigned int FUN_0036fe68(void)
     }
     DAT_005806b4 = 0;
     if (DAT_005806b6 != '\0') {
-      FUN_002efc0c(0);
+      debugOverlaySetShown(0);
       DAT_005806b6 = '\0';
     }
     return 1;
@@ -121,7 +121,7 @@ unsigned int FUN_0036fe68(void)
     DAT_005806b5 = '\0';
     DAT_005806b4 = 0;
     if (DAT_005806b6 != '\0') {
-      FUN_002efc0c(0);
+      debugOverlaySetShown(0);
       DAT_005806b6 = '\0';
     }
     return 1;

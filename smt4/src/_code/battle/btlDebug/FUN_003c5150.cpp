@@ -11,7 +11,7 @@ int asdListBoxAddItems(void);
 int FUN_0025c58c(unsigned int, int, int);
 int FUN_00262914(unsigned int, unsigned char *);
 int dataTableGetEntries(void);
-int FUN_003bbf3c(void);
+int dataTable22GetCount(void);
 int dataTable03Sub0GetCount(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -34,7 +34,7 @@ extern unsigned int DAT_00435dd8; /* 0x435dd8 */
 extern unsigned int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003bbf3c. */
+/* Supplied declaration required: dataTable22GetCount. */
 /* Supplied declaration required: dataTable03Sub0GetCount. */
 
 
@@ -59,7 +59,7 @@ void FUN_003c5150(int param_1,int param_2)
     asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),1,(int)(char)DAT_00434388);
   }
   else {
-    FUN_003bbf3c();
+    dataTable22GetCount();
     asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0,DAT_0043438c,0,temp_v1 - 1,0);
     asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),1,(int)(char)DAT_00434388);
   }

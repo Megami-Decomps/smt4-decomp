@@ -1,33 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034c8e8` (_code @ 0x34c8e8, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the two flag-bit clears at 0x36 are merged into one `bic r2, r3, #3`; retail keeps them as `bic r3, r3, #1` then `and r2, r3, #253`. */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0026140c(void);
+typedef struct Member {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ s16 id0;
+    /* 0x22 */ s16 id1;
+    /* 0x24 */ u16 unk24;
+    /* 0x26 */ u16 unk26;
+    /* 0x28 */ u16 unk28;
+    /* 0x2A */ u16 unk2A;
+    /* 0x2C */ u16 unk2C;
+    /* 0x2E */ s16 id2;
+    /* 0x30 */ u8 unk30[3];
+    /* 0x33 */ u8 unk33;
+    /* 0x34 */ u8 unk34;
+    /* 0x35 */ s8 unk35;
+    /* 0x36 */ u8 flagA : 1;
+    /*      */ u8 flagB : 1;
+    /*      */ u8 flagsRest : 6;
+    /* 0x37 */ u8 unk37;
+    /* 0x38 */ u8 unk38[0xB];
+    /* 0x43 */ u8 unk43;
+} Member;
 
+Member *FUN_0026140c(void);
 
+/* Resets the member's ids to -1 and its counters and flags to 0. */
 void FUN_0034c8e8(void)
-
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_0026140c();
-  *(unsigned short *)(temp_v0 + 0x20) = 0xffff;
-  *(unsigned short *)(temp_v0 + 0x22) = 0xffff;
-  *(unsigned short *)(temp_v0 + 0x24) = 0;
-  *(unsigned short *)(temp_v0 + 0x26) = 0;
-  *(unsigned short *)(temp_v0 + 0x28) = 0;
-  *(unsigned char *)(temp_v0 + 0x43) = 0;
-  *(unsigned short *)(temp_v0 + 0x2a) = 0;
-  *(unsigned short *)(temp_v0 + 0x2c) = 0;
-  *(unsigned short *)(temp_v0 + 0x2e) = 0xffff;
-  *(unsigned char *)(temp_v0 + 0x33) = 0;
-  *(unsigned char *)(temp_v0 + 0x34) = 0;
-  *(unsigned char *)(temp_v0 + 0x35) = 0xff;
-  *(unsigned char *)(temp_v0 + 0x37) = 0;
-  *(unsigned char *)(temp_v0 + 0x36) = *(unsigned char *)(temp_v0 + 0x36) & 0xfc;
-  return;
+    Member *member = FUN_0026140c();
+
+    member->id0 = -1;
+    member->id1 = -1;
+    member->unk24 = 0;
+    member->unk26 = 0;
+    member->unk28 = 0;
+    member->unk43 = 0;
+    member->unk2A = 0;
+    member->unk2C = 0;
+    member->id2 = -1;
+    member->unk33 = 0;
+    member->unk34 = 0;
+    member->unk35 = -1;
+    member->flagA = 0;
+    member->flagB = 0;
+    member->unk37 = 0;
 }
 
 } /* extern "C" */

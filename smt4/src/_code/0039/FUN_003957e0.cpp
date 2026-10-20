@@ -1,23 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003957e0` (_code @ 0x3957e0, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int randNextInRange(unsigned int);
+typedef struct Timer {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ s32 delay;
+} Timer;
 
+typedef struct Actor {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ Timer timer;
+} Actor;
 
-void FUN_003957e0(int param_1)
+typedef struct ActorState {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ Actor *actor;
+    /* 0x10 */ u8 unk10[0xC];
+    /* 0x1C */ u32 phase;
+} ActorState;
 
+s32 randNextInRange(u32 range);
+
+/* Gives the actor's timer a random delay of 150..449 and resets the phase. */
+void FUN_003957e0(ActorState *state)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 0xc);
-  temp_v1 = randNextInRange(300);
-  *(int *)(temp_v0 + 0x58) = temp_v1 + 0x96;
-  *(unsigned int *)(param_1 + 0x1c) = 0;
-  return;
+    Timer *timer = &state->actor->timer;
+
+    timer->delay = randNextInRange(300) + 150;
+    state->phase = 0;
 }
 
 } /* extern "C" */

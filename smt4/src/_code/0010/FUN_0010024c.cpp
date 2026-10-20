@@ -1,23 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010024c` (_code @ 0x10024c, 0x16 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: built with --cpu=5TE -Ospace; only the register allocation differs (retail keeps the truncated character in r2 and loads each byte into r1, built does the opposite). */
+#include "common.h"
 
 extern "C" {
 
-
-char * FUN_0010024c(int param_1,char param_2)
-
+/* Returns the first occurrence of `c` in the string (the terminator counts), or NULL. */
+char *FUN_0010024c(const char *s, int c)
 {
-  char *pcVar1;
-  
-  pcVar1 = (char *)(param_1 - 1);
-  do {
-    pcVar1 = pcVar1 + 1;
-    if (param_2 == *pcVar1) {
-      return pcVar1;
-    }
-  } while (*pcVar1 != '\0');
-  return (char *)0x0;
+    u8 ch = (u8)c;
+
+    s--;
+    do {
+        s++;
+        if (*(const u8 *)s == ch) {
+            return (char *)s;
+        }
+    } while (*s != '\0');
+    return NULL;
 }
 
 } /* extern "C" */

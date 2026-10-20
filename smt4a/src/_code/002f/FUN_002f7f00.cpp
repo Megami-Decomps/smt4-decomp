@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00115560(int, unsigned int);
 int FUN_002e6e34(int *, int);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 
 extern unsigned char g_listenerTable; /* 0x594ad8 */
 
@@ -16,7 +16,7 @@ extern unsigned char g_listenerTable; /* 0x594ad8 */
 #endif
 /* Supplied declaration required: FUN_00115560. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 
 
 unsigned long long FUN_002f7f00(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -38,7 +38,7 @@ unsigned long long FUN_002f7f00(int param_1,unsigned int param_2,unsigned int pa
          (*(char *)(temp_v0 + 0x34) != '\x02'))) {
     temp_v1 = temp_v1 + 1;
     if (temp_v1 >= 8) {
-      FUN_002e6e5c(&uStack_18);
+      _ZN9Obj55b28cD1Ev(&uStack_18);
       temp_v0 = 0;
       if ((*(int *)((unsigned char *)&g_listenerTable + 0x48)) != 0) {
         FUN_00115560(param_1,param_2);
@@ -47,7 +47,7 @@ unsigned long long FUN_002f7f00(int param_1,unsigned int param_2,unsigned int pa
       return romwright_piece_4_4(uStack_18,temp_v0);
     }
   }
-  FUN_002e6e5c(&uStack_18);
+  _ZN9Obj55b28cD1Ev(&uStack_18);
   return romwright_piece_4_4(uStack_18,1);
 }
 

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014e188(...);
-int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
+int paramsInit(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
@@ -26,7 +26,7 @@ extern unsigned char DAT_0052d194; /* 0x52d194 */
 extern unsigned char DAT_0052d200; /* 0x52d200 */
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -38,7 +38,7 @@ void FUN_003f84e8(int param_1)
 {
 /* irregular: 6 native warning(s); review required */
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x14c);
-  FUN_001505ac(param_1 + 0x14c,&DAT_0052d140,0x54,&DAT_0052d194,0x6c,0,0,0,0,&DAT_0052d200,0x16c);
+  paramsInit(param_1 + 0x14c,&DAT_0052d140,0x54,&DAT_0052d194,0x6c,0,0,0,0,&DAT_0052d200,0x16c);
   FUN_0014e188(param_1 + 0x16c,0x31,0,param_1 + 0x14c,0xc9);
   uiSpriteSetKeyframe(param_1 + 0x16c,1,0);
   uiSpriteSetImageKeyframe(param_1 + 0x16c,0);

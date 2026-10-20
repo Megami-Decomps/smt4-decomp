@@ -52,7 +52,7 @@ extern unsigned int FUN_002a4b60(void);
 /* Supplied declaration required: FUN_002a4b74. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_0031d62c(void);
+extern int messageWindowIsState1(void);
 /* Supplied declaration required: FUN_003423cc. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: FUN_0035d058. */
@@ -144,7 +144,7 @@ void FUN_0046b18c(unsigned int *param_1)
   case 1:
     temp_v3 = FUN_00224880(*(unsigned int *)param_1[0xad]);
     if (temp_v3 != 2) {
-      temp_v3 = FUN_0031d62c();
+      temp_v3 = messageWindowIsState1();
       if (temp_v3 != 0) {
         temp_v2 = FUN_002a4b60();
         param_1[0x2b5] = temp_v2;

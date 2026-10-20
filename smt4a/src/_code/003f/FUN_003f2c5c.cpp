@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001a0d08(int *);
 int registerObj8Holder(int);
-int FUN_00439020(unsigned int *);
+int ngwordStateReset(unsigned int *);
 int software_interrupt(int);
 
 extern unsigned char DAT_0055b378; /* 0x55b378 */
@@ -14,7 +14,7 @@ extern unsigned char DAT_0055b378; /* 0x55b378 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001a0d08. */
 /* Supplied declaration required: registerObj8Holder. */
-/* Supplied declaration required: FUN_00439020. */
+/* Supplied declaration required: ngwordStateReset. */
 
 
 int FUN_003f2c5c(int param_1)
@@ -30,7 +30,7 @@ int FUN_003f2c5c(int param_1)
     *piVar1 = 0;
   }
   *(unsigned char **)(param_1 + 8) = &DAT_0055b378;
-  FUN_00439020((unsigned int *)(param_1 + 8));
+  ngwordStateReset((unsigned int *)(param_1 + 8));
   registerObj8Holder(param_1 + 0xc);
   return param_1;
 }

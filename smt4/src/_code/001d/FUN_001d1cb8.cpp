@@ -1,39 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d1cb8` (_code @ 0x1d1cb8, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int devilGetRecord(void);
+typedef struct DevilRecord {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 grade;
+    /* 0x03 */ u8 race;
+} DevilRecord;
 
-/* Supplied declaration required: devilGetRecord. */
+typedef struct DevilSlot {
+    /* 0x0 */ u16 id;
+    /* 0x2 */ u16 present;
+} DevilSlot;
 
+extern DevilRecord *devilGetRecord(u16 id);
 
-unsigned int FUN_001d1cb8(unsigned short *param_1,unsigned short *param_2)
-
+/* Comparison of two demon slots: empty slots last, then by race (descending), grade and id. */
+s32 FUN_001d1cb8(DevilSlot *a, DevilSlot *b)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned short *puVar2;
-  unsigned short *puVar3;
-  
-  if (param_1[1] == 0) {
-    return (unsigned int)(param_2[1] != 0);
-  }
-  if (param_2[1] == 0) {
-    temp_v0 = 0xffffffff;
-  }
-  else {
-    puVar2 = (unsigned short *)(unsigned int)*param_1;
-    devilGetRecord();
-    puVar3 = (unsigned short *)(unsigned int)*param_2;
-    devilGetRecord();
-    temp_v0 = (unsigned int)*(unsigned char *)((int)puVar3 + 3) - (unsigned int)*(unsigned char *)((int)puVar2 + 3);
-    if ((temp_v0 == 0) && (temp_v0 = (unsigned int)(unsigned char)puVar2[1] - (unsigned int)(unsigned char)puVar3[1], temp_v0 == 0)) {
-      temp_v0 = (unsigned int)*puVar2 - (unsigned int)*puVar3;
+    DevilRecord *recordA;
+    DevilRecord *recordB;
+    s32 diff;
+
+    if (a->present == 0) {
+        if (b->present == 0) {
+            return 0;
+        }
+        return 1;
     }
-  }
-  return temp_v0;
+    if (b->present == 0) {
+        return -1;
+    }
+    recordA = devilGetRecord(a->id);
+    recordB = devilGetRecord(b->id);
+    diff = recordB->race - recordA->race;
+    if (diff == 0) {
+        diff = recordA->grade - recordB->grade;
+        if (diff == 0) {
+            diff = recordA->id - recordB->id;
+        }
+    }
+    return diff;
 }
 
-} /* extern "C" */
+}

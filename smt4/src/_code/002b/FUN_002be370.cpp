@@ -5,7 +5,7 @@
 extern "C" {
 
 int dataTable08Sub0GetRecord(void);
-int FUN_002ae2c0(...);
+int categoryIdFromIndex(...);
 int FUN_002ae9ec(...);
 int dataTable08Sub1GetRecord(void);
 int gameGetPlayerData(void);
@@ -18,7 +18,7 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: dataTable08Sub0GetRecord. */
-/* Supplied declaration required: FUN_002ae2c0. */
+/* Supplied declaration required: categoryIdFromIndex. */
 extern unsigned int FUN_002ae3c4(void);
 /* Supplied declaration required: FUN_002ae9ec. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
@@ -47,7 +47,7 @@ void FUN_002be370(unsigned int param_1,unsigned int param_2,unsigned int param_3
       temp_v4 = 0x3ff;
     }
     else {
-      temp_v4 = FUN_002ae2c0();
+      temp_v4 = categoryIdFromIndex();
     }
   default:
     FUN_002ae9ec(2,0x13,temp_v4,param_2,param_3,param_4);
@@ -57,7 +57,7 @@ void FUN_002be370(unsigned int param_1,unsigned int param_2,unsigned int param_3
     return;
   case 1:
     dataTable08Sub1GetRecord();
-    temp_v4 = FUN_002ae2c0(*(unsigned char *)(param_1 + 0x6c));
+    temp_v4 = categoryIdFromIndex(*(unsigned char *)(param_1 + 0x6c));
     FUN_002ae9ec(2,0x13,temp_v4,param_2,param_3,param_4);
     if (temp_v1) {
       FUN_002bf288(2,0x13,0x417,param_2,param_3,param_4 + 1);

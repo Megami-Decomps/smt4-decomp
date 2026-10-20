@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_0029c3c0(int, int, unsigned int);
-int FUN_0029e054(int, int, int, int);
+int ifTouchRegionAdd(int, int, int, int);
 int ifTouchRegionRemove(void);
 int eventQueueAddUnique(int);
 
 extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_0029c3c0. */
 extern int FUN_0029d65c(int);
-/* Supplied declaration required: FUN_0029e054. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
@@ -51,7 +51,7 @@ unsigned int FUN_00221310(void)
       *(unsigned int *)(temp_v0 + 8) = 0;
       temp_v2 = FUN_002bf4f8(0x2d,0x11);
       temp_v3 = (int)(short)(*(short *)(temp_v2 + 8) - 0x10);
-      FUN_0029e054(temp_v3,(int)(short)(*(short *)(temp_v2 + 10) - 0x10),
+      ifTouchRegionAdd(temp_v3,(int)(short)(*(short *)(temp_v2 + 10) - 0x10),
                    (int)(short)((*(short **)(temp_v2 + 0xc))[1] + 0x20),
                    (int)(short)(**(short **)(temp_v2 + 0xc) + 0x20));
       *(short *)(temp_v0 + 0x14) = (short)temp_v3;

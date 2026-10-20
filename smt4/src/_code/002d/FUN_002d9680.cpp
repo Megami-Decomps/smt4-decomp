@@ -1,26 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d9680` (_code @ 0x2d9680, 0x20 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the previous state with a pre-indexed `ldr r2,[r0,#1024]!` and stores state/previous together with `stm r0,{r1,r2}`; the build emits two separate stores and keeps the constants in the other registers. */
+#include "common.h"
 
 extern "C" {
 
-extern int g_statusDown; /* 0x44e190 */
+typedef struct StatusDown {
+    /* 0x000 */ u8 unk000[0x400];
+    /* 0x400 */ u32 state;
+    /* 0x404 */ u32 prevState;
+    /* 0x408 */ u8 unk408[4];
+    /* 0x40C */ u32 step;
+} StatusDown;
 
+extern StatusDown *g_statusDown; /* 0x44e190 */
 
+/* Switches the status screen to state 3, remembering the previous state and restarting the step counter. */
 void FUN_002d9680(void)
-
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  
-  temp_v0 = g_statusDown;
-  *(unsigned int *)(g_statusDown + 0x40c) = 0;
-  puVar2 = (unsigned int *)(temp_v0 + 0x400);
-  temp_v1 = *puVar2;
-  *puVar2 = 3;
-  *(unsigned int *)(temp_v0 + 0x404) = temp_v1;
-  return;
+    StatusDown *status = g_statusDown;
+    u32 previous;
+
+    status->step = 0;
+    previous = status->state;
+    status->state = 3;
+    status->prevState = previous;
 }
 
 } /* extern "C" */

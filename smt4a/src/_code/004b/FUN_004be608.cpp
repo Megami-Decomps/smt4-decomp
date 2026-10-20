@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001517b4(int, int);
 int FUN_00163aa4(int);
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int sysPlaySe(...);
 int scrScriptProcessDestroy(void);
 int dialogClose(int);
@@ -26,7 +26,7 @@ extern signed char DAT_0057f25c; /* 0x57f25c */
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: dialogClose. */
@@ -158,7 +158,7 @@ unsigned int FUN_004be608(int param_1)
     FUN_001517b4(0,1);
     if (temp_v0 != 0) {
       dialogClose(1);
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
       *(unsigned int *)(param_1 + 8) = 10;
       *(unsigned int *)(param_1 + 0xc) = 6;
       temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x31c),"SetMainPartner2");

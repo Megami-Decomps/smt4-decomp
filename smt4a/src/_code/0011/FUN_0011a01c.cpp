@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [16], int);
-int FUN_002e6e5c(unsigned char [16]);
+int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_00305644(unsigned int *, int);
 int FUN_00306d50(unsigned int *[2], int, unsigned int *[2]);
@@ -22,7 +22,7 @@ extern unsigned char LAB_0011a0cc; /* 0x11a0cc */
 
 extern unsigned int pendingValueTake(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern int FUN_002eb5f4(void);
@@ -59,7 +59,7 @@ void FUN_0011a01c(int param_1)
         temp_v8 = *(unsigned int *)(temp_v0 + 0x98);
         temp_v1 = wordRefsDiffer_002ee774(&temp_v5,(unsigned int *)&temp_v8);
         if (temp_v1 == 0) {
-          FUN_002e6e5c(temp_v7);
+          _ZN9Obj55b28cD1Ev(temp_v7);
           goto LAB_0011a09a;
         }
         temp_v1 = FUN_002ee978(temp_v5 + 2);

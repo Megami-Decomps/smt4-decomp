@@ -9,7 +9,7 @@ int FUN_0010aef6(int, unsigned int);
 int FUN_002eb164(unsigned char [8], int);
 int constructObj00559344(...);
 int arrayElementAddress_002eee88(...);
-int FUN_002eefc4(...);
+int onlineEntryApply(...);
 int FUN_002ef8f8(...);
 int FUN_002efcb8(...);
 int FUN_002efcc4(int, unsigned int, int);
@@ -34,7 +34,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002eb164. */
 /* Supplied declaration required: constructObj00559344. */
 /* Supplied declaration required: arrayElementAddress_002eee88. */
-/* Supplied declaration required: FUN_002eefc4. */
+/* Supplied declaration required: onlineEntryApply. */
 extern unsigned int FUN_002ef00c(unsigned char *, unsigned int);
 extern int FUN_002ef01c(unsigned int);
 /* Supplied declaration required: FUN_002ef8f8. */
@@ -127,7 +127,7 @@ void FUN_002f07c2(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     } while (temp_v4 < 2);
     puVar7 = (unsigned int *)arrayElementAddress_002eee88(temp_v2,temp_v16);
     FUN_002efdb4(*puVar7);
-    FUN_002eefc4(param_1,temp_v16);
+    onlineEntryApply(param_1,temp_v16);
   }
   else {
     *(int *)(param_1 + 0x2f0) = *(int *)(param_1 + 0x2f0) + 1;

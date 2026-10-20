@@ -9,8 +9,8 @@ int FUN_001835b4(int, int, int, unsigned int, unsigned int, int);
 
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001835b4. */
-extern int FUN_003493ac(void);
-extern int FUN_0035d0a4(int);
+extern int partyPanelGetFlag(void);
+extern int partyPanelGetMember(int);
 
 
 void FUN_003f3d90(unsigned int param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -21,13 +21,13 @@ void FUN_003f3d90(unsigned int param_1,unsigned int param_2,unsigned int param_3
   int temp_v1;
   
   if (param_4 != 0) {
-    temp_v0 = FUN_003493ac();
+    temp_v0 = partyPanelGetFlag();
     if ((temp_v0 == 1 || temp_v0 == 4) || ((temp_v0 == 0xc || temp_v0 == 0xf) || temp_v0 == 0x11)) {
       efctSetSpeed();
       FUN_001835b4(2,0x11,0xb5,param_2,param_3,0xc9);
       temp_v0 = 0;
       do {
-        temp_v1 = FUN_0035d0a4(temp_v0 + 0xd);
+        temp_v1 = partyPanelGetMember(temp_v0 + 0xd);
         if (temp_v1 != 0) {
           efctSetSpeed();
         }

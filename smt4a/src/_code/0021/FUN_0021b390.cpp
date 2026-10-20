@@ -30,7 +30,7 @@ extern char s__U_U_U_U_U_U_U_U_U_U_0057f298[45]; /* 0x57f298 */
 /* Supplied declaration required: FUN_00100388. */
 extern unsigned int FUN_0014bd84(unsigned int);
 extern unsigned int FUN_00180114(unsigned int);
-extern unsigned int FUN_002c1ce4(unsigned int, unsigned int);
+extern unsigned int contentEntryDataGet(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -87,7 +87,7 @@ void FUN_0021b390(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     FUN_00100388(param_4,&LAB_0021b4d4,puVar2);
     return;
   }
-  temp_v0 = FUN_002c1ce4(param_3,0);
+  temp_v0 = contentEntryDataGet(param_3,0);
   libc_sprintf(param_4,&LAB_0021b4d4,temp_v0);
   return;
 }

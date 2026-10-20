@@ -12,7 +12,7 @@ int FUN_00202178(int);
 int effEditorNodeChainApply(unsigned char *);
 int FUN_002b3ed8(unsigned int *, float *, unsigned int, int);
 int FUN_002f8794(void);
-int FUN_00300124(void);
+int effMenuListAppend(void);
 int FUN_0038b810(void);
 int FUN_00390038(int);
 
@@ -84,7 +84,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: FUN_002b3ed8. */
 /* Supplied declaration required: FUN_002f8794. */
-/* Supplied declaration required: FUN_00300124. */
+/* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: FUN_0038b810. */
 /* Supplied declaration required: FUN_00390038. */
 
@@ -256,7 +256,7 @@ unsigned int FUN_003c0780(int param_1,int param_2)
   *(unsigned int *)(temp_v3 + 4) = 10;
   *(unsigned int *)(temp_v3 + 0x20) = 0xff00c0c0;
   *(unsigned int *)(temp_v3 + 100) = 0;
-  FUN_00300124();
+  effMenuListAppend();
   FUN_002b3ed8(&temp_v27,&temp_v25,0xff0000ff,0);
   temp_v3 = 0x10000;
   memAlloc(0x10000,0x100,0,0x68,0x10,1);
@@ -266,7 +266,7 @@ unsigned int FUN_003c0780(int param_1,int param_2)
   *(float *)&*(unsigned int *)(temp_v3 + 0xc) = uStack_8c;
   *(float *)&*(unsigned int *)(temp_v3 + 0x10) = uStack_88;
   *(float *)&*(unsigned int *)(temp_v3 + 0x14) = temp_v28;
-  FUN_00300124();
+  effMenuListAppend();
   DAT_00647340 = temp_v22;
   DAT_0064733c = temp_v21;
   DAT_00647338 = temp_v20;

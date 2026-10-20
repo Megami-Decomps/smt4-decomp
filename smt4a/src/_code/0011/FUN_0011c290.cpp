@@ -12,7 +12,7 @@ int FUN_001165c0(int);
 int FUN_0011c0bc(int);
 int FUN_00123306(...);
 int FUN_002e6e34(char **, int);
-int FUN_002e6e5c(char **);
+int _ZN9Obj55b28cD1Ev(char **);
 int FUN_002ea2e8(unsigned char [4]);
 int FUN_002ea3a8(...);
 int wideBufferAppend(...);
@@ -55,7 +55,7 @@ extern unsigned char LAB_0011c4a0; /* 0x11c4a0 */
 /* Supplied declaration required: FUN_00123306. */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
 extern unsigned int FUN_002ee818(unsigned int, unsigned short);
@@ -112,7 +112,7 @@ void FUN_0011c290(int *param_1,int param_2,int param_3,int param_4)
     temp_v0 = FUN_002e6e26();
     FUN_002e6e34(&temp_v5,temp_v0 + 0x58);
     (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v8[0],temp_v9,param_3);
-    FUN_002e6e5c(&temp_v5);
+    _ZN9Obj55b28cD1Ev(&temp_v5);
   }
   else {
     temp_v12 = param_1 + 0xb;

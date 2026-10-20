@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0015e068(int, unsigned char *);
+int queueRequesterNode(int, unsigned char *);
 int asdMemoryAlloc(int, int, int, unsigned char *);
 int nw_snd_FxReverb_AssignWorkBuffer(unsigned char *, unsigned int, unsigned char *);
 int nw_snd_FxReverb_GetRequiredMemSize(unsigned char *);
@@ -31,7 +31,7 @@ extern unsigned int DAT_00619780; /* 0x619780 */
 extern unsigned int DAT_00619784; /* 0x619784 */
 extern unsigned int DAT_00619788; /* 0x619788 */
 
-/* Supplied declaration required: FUN_0015e068. */
+/* Supplied declaration required: queueRequesterNode. */
 /* Supplied declaration required: asdMemoryAlloc. */
 extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: nw_snd_FxReverb_AssignWorkBuffer. */
@@ -69,7 +69,7 @@ void FUN_0013ddf0(void)
     asdMemoryAlloc(0x10000,0x100,0,puVar2);
     DAT_00588fbc = temp_v1;
     nw_snd_FxReverb_AssignWorkBuffer(&DAT_0061964c,temp_v1,puVar2);
-    FUN_0015e068(1,&DAT_0061964c);
+    queueRequesterNode(1,&DAT_0061964c);
     return;
   }
   return;

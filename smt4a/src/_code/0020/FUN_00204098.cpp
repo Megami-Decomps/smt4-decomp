@@ -16,7 +16,7 @@ int FUN_0037dfb0(...);
 int FUN_0037e078(void);
 int FUN_00387ac4(...);
 int stateHolderEnterState7(void);
-int FUN_0039c410(...);
+int statusDownEnterState11(...);
 int FUN_003b0744(void);
 int FUN_003c16e0(...);
 int FUN_003e40b8(...);
@@ -71,7 +71,7 @@ int FUN_0037e12c(...);
 int soundChannelStopAll(...);
 
 int qsort(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int uiSpriteSetKeyframe(...);
 int dialogClose(...);
 int FUN_0021b968(...);
@@ -106,7 +106,7 @@ int FUN_00387240(...);
 int FUN_003d2150(...);
 int FUN_003d2158(...);
 int gameFlagSetValue(...);
-int FUN_004bb904(...);
+int itemResetOverLimitStates(...);
 int FUN_004cc6d4(...);
 int FUN_004ccbf0(...);
 int FUN_004ccc7c(...);
@@ -179,7 +179,7 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: saveSlotFindSelected. */
 /* Supplied declaration required: FUN_0015f490. */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_0016432c. */
 /* Supplied declaration required: FUN_00167458. */
 /* Supplied declaration required: sysPlaySe. */
@@ -290,13 +290,13 @@ extern int FUN_0038b568(void);
 /* Supplied declaration required: stateHolderEnterState7. */
 extern int stateHolderStateIs0x12(void);
 extern int stateHolderStateIs0xD(void);
-/* Supplied declaration required: FUN_0039c410. */
+/* Supplied declaration required: statusDownEnterState11. */
 /* Supplied declaration required: FUN_0039c448. */
 /* Supplied declaration required: lmapMainCallIfActive2. */
 /* Supplied declaration required: FUN_003a62e8. */
 extern int FUN_003a7b74(void);
 /* Supplied declaration required: FUN_003b0744. */
-extern int FUN_003c16b8(void);
+extern int statusDownGetCursorPosition(void);
 /* Supplied declaration required: FUN_003c16e0. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d2158. */
@@ -318,7 +318,7 @@ extern unsigned int FUN_003f3654(int);
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: FUN_004a0ef8. */
 extern int FUN_004b6b1c(int);
-/* Supplied declaration required: FUN_004bb904. */
+/* Supplied declaration required: itemResetOverLimitStates. */
 extern int FUN_004bca68(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: getUnlockedSlotCount. */
@@ -986,7 +986,7 @@ LAB_0020524c:
             *(unsigned int *)(temp_v6 + 0x75c4) = *(unsigned int *)(temp_v6 + 0x7558);
             *(unsigned short *)(temp_v6 + 0x448e) = 0;
             *(unsigned char *)(temp_v6 + 0x7892) = 1;
-            FUN_004bb904(temp_v13);
+            itemResetOverLimitStates(temp_v13);
           }
           temp_v13 = FUN_00203b1c();
           if (temp_v13 <= *(unsigned short *)(temp_v7 + 0x62)) {
@@ -1296,7 +1296,7 @@ LAB_00205528:
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 8);
       FUN_00388758(1);
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
     }
     break;
   case 8:
@@ -1766,7 +1766,7 @@ joined_r0x002075ac:
           *(int *)(temp_v6 + 0x436c) = *(int *)(temp_v6 + 0x436c) + 1;
         }
       }
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
       break;
     case 5:
       temp_v7 = FUN_0023b3d0();
@@ -2011,10 +2011,10 @@ joined_r0x002075ac:
           temp_v7 = 0;
           FUN_001517b4(0,1);
           if ((temp_v7 != 0) || (temp_v7 = FUN_00371e38(), temp_v7 != 0)) {
-            temp_v7 = FUN_003c16b8();
+            temp_v7 = statusDownGetCursorPosition();
             if ((temp_v7 != *(int *)(temp_v6 + 0x75c8)) && (temp_v7 = FUN_0037df64(), temp_v7 == 0)) {
               temp_v11 = 0x100020f;
-              FUN_001641b4(temp_v11);
+              eventQueueAddUniqueIfValid(temp_v11);
             }
             else {
               FUN_00333dc8(1);
@@ -2062,7 +2062,7 @@ joined_r0x002073c8:
       case 5:
         temp_v7 = FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
         if (temp_v7 == 2) {
-          FUN_0039c410(1);
+          statusDownEnterState11(1);
           eventQueueAddUnique(0x100021a);
           temp_v7 = *(int *)(temp_v6 + 0x436c) + 1;
           *(int *)(temp_v6 + 0x436c) = temp_v7;
@@ -2114,7 +2114,7 @@ joined_r0x002073c8:
             FUN_00333dc8(1);
             scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43ac),0xb);
             FUN_0015f490(*(unsigned short *)(temp_v7 + 0x62),1,1,0);
-            FUN_0039c410(0);
+            statusDownEnterState11(0);
             temp_v7 = *(int *)(temp_v6 + 0x436c) + 1;
             *(int *)(temp_v6 + 0x436c) = temp_v7;
           }
@@ -2707,7 +2707,7 @@ LAB_00207d0c:
           *(short *)(temp_v13 + temp_v29 * 2 + 0x34) = (short)temp_v26;
           temp_v41 = temp_v30;
           temp_v44 = temp_v16;
-          temp_v16 = FUN_003c16b8();
+          temp_v16 = statusDownGetCursorPosition();
           FUN_002f01e0(temp_v13 + 0x34,8);
           FUN_003c16e0(temp_v16 - 1);
         }
@@ -2736,7 +2736,7 @@ LAB_00207d0c:
         *(int *)(temp_v6 + 0x436c) = *(int *)(temp_v6 + 0x436c) + 1;
       }
       temp_v11 = 0x100020e;
-      FUN_001641b4(temp_v11);
+      eventQueueAddUniqueIfValid(temp_v11);
       break;
     case 5:
       temp_v7 = FUN_0023b3d0();

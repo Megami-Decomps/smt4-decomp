@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [16], int);
-int FUN_002e6e5c(unsigned char [16]);
+int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int sharedRefRelease(void);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 extern unsigned int FUN_002f71b0(int, unsigned int, unsigned int);
 
@@ -38,7 +38,7 @@ unsigned int FUN_002e7a20(int param_1,unsigned int param_2,unsigned int param_3)
   FUN_002e6e34(temp_v2,temp_v0 + 0x58);
   if (*(int *)(param_1 + 0x9c) != 0) {
     if (*(char *)(*(int *)(param_1 + 0x9c) + 0x22) != '\x05') {
-      FUN_002e6e5c(temp_v2);
+      _ZN9Obj55b28cD1Ev(temp_v2);
       temp_v1 = 0;
       return temp_v1;
     }
@@ -47,7 +47,7 @@ unsigned int FUN_002e7a20(int param_1,unsigned int param_2,unsigned int param_3)
   }
   if (*(int *)(param_1 + 0x94) != 0) {
     if (*(char *)(*(int *)(param_1 + 0x94) + 0x22) != '\x05') {
-      FUN_002e6e5c(temp_v2);
+      _ZN9Obj55b28cD1Ev(temp_v2);
       temp_v1 = 0;
       return temp_v1;
     }
@@ -55,7 +55,7 @@ unsigned int FUN_002e7a20(int param_1,unsigned int param_2,unsigned int param_3)
     *(unsigned int *)(param_1 + 0x94) = 0;
   }
   temp_v1 = FUN_002f71b0(param_1,param_2,temp_v3);
-  FUN_002e6e5c(temp_v2);
+  _ZN9Obj55b28cD1Ev(temp_v2);
   return temp_v1;
 }
 

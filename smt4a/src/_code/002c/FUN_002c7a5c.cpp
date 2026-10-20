@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation of the index*5 scaling (r2 here, in place in r0 in retail). */
 #include "common.h"
 
 extern "C" {

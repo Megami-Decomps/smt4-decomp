@@ -9,7 +9,7 @@ int FUN_00227a70(void);
 int FUN_002a2e98(...);
 int FUN_00353d74(void);
 int FUN_00378000(void);
-int FUN_00378924(void);
+int hakaiEntriesNotify(void);
 int FUN_00385a10(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -25,7 +25,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002a2e98. */
 /* Supplied declaration required: FUN_00353d74. */
 /* Supplied declaration required: FUN_00378000. */
-/* Supplied declaration required: FUN_00378924. */
+/* Supplied declaration required: hakaiEntriesNotify. */
 /* Supplied declaration required: FUN_00385a10. */
 
 
@@ -53,7 +53,7 @@ void FUN_00385444(void)
 LAB_003854c8:
       FUN_002a2e98(*(unsigned int *)(temp_v0 + 0x30),*(unsigned int *)(temp_v0 + 0x34),
                    *(unsigned int *)(temp_v0 + 0x30),99);
-      FUN_00378924();
+      hakaiEntriesNotify();
       FUN_00385a10();
       FUN_00353d74();
       FUN_00378000();
@@ -86,7 +86,7 @@ LAB_00385484:
     temp_v4 = temp_v2;
   }
   FUN_002a2e98(temp_v2,temp_v3,temp_v4,temp_v5);
-  FUN_00378924();
+  hakaiEntriesNotify();
   FUN_00385a10();
   FUN_00353d74();
   FUN_00378000();

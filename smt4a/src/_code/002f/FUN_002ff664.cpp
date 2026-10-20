@@ -1,57 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ff664` (_code @ 0x2ff664, 0x66 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the pool-growth call keeps `mov r1,r4` duplicated in both capacity arms (movs r0,#0 / ldr r0,[r0,#4]) and the compare is `cmp cursor,end`; the build merges the arms and swaps the compare operands. */
+#include "common.h"
 
 extern "C" {
 
-int rt_malloc(int);
+typedef struct PoolBlock {
+    /* 0x00 */ struct PoolBlock *next;     /* previous block */
+    /* 0x04 */ u32 capacity;               /* elements in the block */
+    /* 0x08 */ u8 *elements;
+} PoolBlock;
 
-extern int vectorGrowCapacity_0012d298(unsigned int, int *, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: rt_malloc. */
+typedef struct ElementPool {
+    /* 0x00 */ PoolBlock *blocks;          /* newest block first */
+    /* 0x04 */ u8 *freeList;               /* erased elements, linked through +0xC */
+    /* 0x08 */ u8 *cursor;                 /* next never-used element of the newest block */
+    /* 0x0C */ u8 *end;                    /* end of the newest block */
+} ElementPool;
 
+extern void *rt_malloc(u32 size);
+extern u32 vectorGrowCapacity_0012d298(u32 capacity, ElementPool *pool);
 
-void FUN_002ff664(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Takes an element (24 bytes) from the pool, growing it by a new block when exhausted, and clears its header fields. */
+u8 *FUN_002ff664(ElementPool *pool)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  int *piVar4;
-  int temp_v2;
-  
-  puVar1 = (unsigned char *)param_1[1];
-  if (puVar1 != (unsigned char *)0x0) {
-    param_1[1] = *(int *)(puVar1 + 0xc);
-  }
-  else {
-    puVar1 = (unsigned char *)param_1[2];
-    if (puVar1 == (unsigned char *)param_1[3]) {
-      if (*param_1 != 0) {
-        temp_v0 = *(unsigned int *)(*param_1 + 4);
-      }
-      else {
-        temp_v0 = 0;
-      }
-      temp_v1 = vectorGrowCapacity_0012d298(temp_v0,param_1,param_3,param_4,param_4);
-      piVar4 = (int *)rt_malloc(0xc);
-      temp_v2 = rt_malloc(temp_v1 * 0x18);
-      piVar4[2] = temp_v2;
-      temp_v2 = *param_1;
-      piVar4[1] = temp_v1;
-      *piVar4 = temp_v2;
-      *param_1 = (int)piVar4;
-      puVar1 = (unsigned char *)piVar4[2];
-      param_1[3] = (int)(puVar1 + temp_v1 * 0x18);
-      param_1[2] = (int)puVar1;
+    u8 *element = pool->freeList;
+    u32 capacity;
+    PoolBlock *block;
+
+    if (element != NULL) {
+        pool->freeList = *(u8 **)(element + 0xC);
+    } else {
+        element = pool->cursor;
+        if (element == pool->end) {
+            if (pool->blocks != NULL) {
+                capacity = pool->blocks->capacity;
+            } else {
+                capacity = 0;
+            }
+            capacity = vectorGrowCapacity_0012d298(capacity, pool);
+            block = (PoolBlock *)rt_malloc(sizeof(PoolBlock));
+            block->elements = (u8 *)rt_malloc(capacity * 24);
+            block->next = pool->blocks;
+            block->capacity = capacity;
+            pool->blocks = block;
+            element = block->elements;
+            pool->end = element + capacity * 24;
+            pool->cursor = element;
+        }
+        pool->cursor = element + 24;
     }
-    param_1[2] = (int)(puVar1 + 0x18);
-  }
-  *(unsigned int *)(puVar1 + 4) = 0;
-  *(unsigned int *)(puVar1 + 8) = 0;
-  *(unsigned int *)(puVar1 + 0xc) = 0;
-  *puVar1 = 0;
-  return;
+    *(u32 *)(element + 4) = 0;
+    *(u32 *)(element + 8) = 0;
+    *(u32 *)(element + 0xC) = 0;
+    *element = 0;
+    return element;
 }
 
 } /* extern "C" */

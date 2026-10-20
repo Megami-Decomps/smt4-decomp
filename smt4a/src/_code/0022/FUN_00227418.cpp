@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00157558(int);
 int renderCtxResetColorScale(...);
-int FUN_0016c560(...);
+int skinObjectUpdateMatrices(...);
 int FUN_0021775c(unsigned int, unsigned int);
 int FUN_00217f14(void);
 int FUN_00288538(int);
@@ -27,13 +27,13 @@ extern unsigned int vec2GetXInt(void);
 extern unsigned int vec2GetYInt(int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_0021775c. */
 /* Supplied declaration required: FUN_00217f14. */
 /* Supplied declaration required: FUN_00288538. */
 extern unsigned int FUN_002a4878(int);
 /* Supplied declaration required: FUN_002aa56c. */
-extern int FUN_002ab7ac(void);
+extern int uniteGetState(void);
 /* Supplied declaration required: FUN_003da8f4. */
 
 
@@ -127,7 +127,7 @@ LAB_002276bc:
       case 0x20:
       case 0x21:
       case 0x22:
-        temp_v3 = FUN_002ab7ac();
+        temp_v3 = uniteGetState();
         if (temp_v3 != 3) {
           temp_v0 = *(char *)(temp_v1 + 0x6e2);
           goto joined_r0x00227700;
@@ -181,7 +181,7 @@ LAB_00227770:
     (**(romwright_code **)(temp_v1 + 0x1274))();
     *(unsigned char *)(temp_v1 + 0x1270) = 0;
   }
-  FUN_0016c560(g_renderCtx);
+  skinObjectUpdateMatrices(g_renderCtx);
   renderCtxResetColorScale(g_renderCtx);
   return 0;
 }

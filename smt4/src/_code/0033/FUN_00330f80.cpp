@@ -13,7 +13,7 @@ typedef struct {
 } param_4_stack;
 
 extern int FUN_0023dcb8(void);
-extern int FUN_00292914(int);
+extern int idOwnerHasActiveObject(int);
 /* Supplied declaration required: FUN_00292960. */
 extern int flagBitIsSet(void);
 extern int FUN_00293988(void);
@@ -62,7 +62,7 @@ char FUN_00330f80(int param_1,int param_2,unsigned int param_3,unsigned int para
         if (*pcVar2 == '\x03') {
           if (*(int *)(param_1 + 0x305c) == 0) goto LAB_00331118;
           if (temp_v3 == 0) goto LAB_00331140;
-          temp_v3 = FUN_00292914(temp_v3);
+          temp_v3 = idOwnerHasActiveObject(temp_v3);
           if (temp_v3 == 0) goto LAB_00331128;
         }
         if ((*pcVar2 != '\x06' && *pcVar2 != '\b') && (*(int *)(param_1 + 0x305c) == 0)) {

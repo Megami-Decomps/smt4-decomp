@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int FUN_00228b04(int, int);
 int FUN_002a4860(int);
 
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_002a4860. */
 extern int FUN_002a4894(int);
@@ -33,7 +33,7 @@ void FUN_003f6f68(int param_1,int param_2)
       FUN_002a4860(param_1 + 0xbc);
       temp_v1 = FUN_002a4894(param_1 + 0xbc);
       if ((temp_v1 != param_2 - 1) && (temp_v1 = FUN_002a4894(param_1 + 0xbc), temp_v1 != 0)) {
-        FUN_001641b4(0x100020d);
+        eventQueueAddUniqueIfValid(0x100020d);
       }
       temp_v1 = FUN_002a4860(param_1 + 0xbc);
       while ((temp_v1 == temp_v0 &&

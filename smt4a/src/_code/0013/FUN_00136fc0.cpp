@@ -1,40 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00136fc0` (_code @ 0x136fc0, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00145e24(unsigned int, unsigned int);
-int FUN_00152f54(void);
-int asdGxCommandListBegin(unsigned int);
+typedef struct TitleDraw {
+    /* 0x00 */ s8 hidden;
+    /* 0x01 */ s8 enabled;
+    /* 0x02 */ u8 unk02[6];
+    /* 0x08 */ u32 commandList;
+} TitleDraw;
 
-extern signed char DAT_0057ffd0; /* 0x57ffd0 */
-extern signed char DAT_0057ffd1; /* 0x57ffd1 */
-extern unsigned int DAT_0057ffd8; /* 0x57ffd8 */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
+extern TitleDraw g_titleFlags;
+extern u32 g_renderCtx;
 
-/* Supplied declaration required: FUN_00145e24. */
-/* Supplied declaration required: FUN_00152f54. */
-/* Supplied declaration required: asdGxCommandListBegin. */
-extern int FUN_001696f4(void);
+extern s32 FUN_00152f54(void);
+extern void FUN_00145e24(u32 scene, u32 arg);
+extern s32 FUN_001696f4(void);
+extern void asdGxCommandListBegin(u32 commandList);
 
-
-unsigned int FUN_00136fc0(void)
-
+/* Per-frame title step: forwards FUN_00152f54's value to the scene and begins the draw command list when enabled; returns 0. */
+u32 FUN_00136fc0(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_00152f54();
-  if (temp_v0 != 0) {
-    temp_v1 = FUN_00152f54();
-    FUN_00145e24(g_renderCtx,temp_v1);
-  }
-  if (((DAT_0057ffd0 == '\0') && (DAT_0057ffd1 != '\0')) && (temp_v0 = FUN_001696f4(), temp_v0 == 1)) {
-    asdGxCommandListBegin(DAT_0057ffd8);
-  }
-  return 0;
+    if (FUN_00152f54() != 0) {
+        FUN_00145e24(g_renderCtx, FUN_00152f54());
+    }
+    if (g_titleFlags.hidden == 0 && g_titleFlags.enabled != 0 && FUN_001696f4() == 1) {
+        asdGxCommandListBegin(g_titleFlags.commandList);
+    }
+    return 0;
 }
 
 } /* extern "C" */

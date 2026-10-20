@@ -48,12 +48,12 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002392b8. */
 /* Supplied declaration required: FUN_00244bb4. */
 /* Supplied declaration required: FUN_00261918. */
-extern int FUN_002b7af0(void);
+extern int dataTableEntryNameById(void);
 extern int popupIsActive(void);
 /* Supplied declaration required: FUN_002c2d5c. */
 /* Supplied declaration required: FUN_0033def0. */
-extern int FUN_00377028(unsigned int);
-extern int FUN_00384ca8(int);
+extern int dataTable23FindIndexByValue(unsigned int);
+extern int gameFlagIsSetByBlockAt14f8(int);
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int linkHolderCallFirst(unsigned int);
 extern int FUN_004bc944(int, int);
@@ -106,7 +106,7 @@ void FUN_003254a0(void)
               temp_v5 = (unsigned int)DAT_005f187c;
             }
             if (!(DAT_005f1638 == 0x41 || temp_v5 == 1)) {
-              temp_v4 = FUN_002b7af0();
+              temp_v4 = dataTableEntryNameById();
             }
             else {
               FUN_00244bb4(DAT_005f1860,DAT_005f1864);
@@ -124,11 +124,11 @@ void FUN_003254a0(void)
           }
           else {
 LAB_00325644:
-            temp_v6 = FUN_00377028(DAT_005f163c);
-            temp_v7 = FUN_00377028(DAT_005f1640);
+            temp_v6 = dataTable23FindIndexByValue(DAT_005f163c);
+            temp_v7 = dataTable23FindIndexByValue(DAT_005f1640);
             if (temp_v6 == 0 && temp_v7 == 0) goto LAB_003256e4;
-            temp_v6 = FUN_00384ca8(temp_v6);
-            if ((temp_v6 == 0) && (temp_v6 = FUN_00384ca8(temp_v7), temp_v6 == 0)) goto LAB_003256bc;
+            temp_v6 = gameFlagIsSetByBlockAt14f8(temp_v6);
+            if ((temp_v6 == 0) && (temp_v6 = gameFlagIsSetByBlockAt14f8(temp_v7), temp_v6 == 0)) goto LAB_003256bc;
           }
           FUN_002392b8(temp_v4);
           FUN_00261918(g_gameState,DAT_005f1600,1);

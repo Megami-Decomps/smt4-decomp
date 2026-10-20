@@ -26,7 +26,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00190c24. */
 extern int FUN_0019472c(unsigned int, unsigned int, unsigned int *);
-extern int FUN_001947dc(unsigned int, unsigned int, unsigned int *);
+extern int soundGroupUpdate(unsigned int, unsigned int, unsigned int *);
 /* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
 extern unsigned int FUN_001a8e14(unsigned int, unsigned int);
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadImpl. */
@@ -54,7 +54,7 @@ nw_snd_internal_SoundArchiveLoader_LoadSoundGroup
   temp_v4 = 0xffffffff;
   temp_v5 = 0xffffffff;
   uStack_48 = 0;
-  temp_v0 = FUN_001947dc(*(unsigned int *)(param_1 + 4),param_2,&temp_v4);
+  temp_v0 = soundGroupUpdate(*(unsigned int *)(param_1 + 4),param_2,&temp_v4);
   if (temp_v0 == 0) {
     return 0;
   }

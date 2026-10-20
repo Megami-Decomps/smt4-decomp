@@ -1,25 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025d57c` (_code @ 0x25d57c, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the 0.0f constant (vldr s0) before the load of holder->timer; built loads it after */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0025cfe4(unsigned int, int);
+typedef struct Timer0025d57c {
+    /* 0x000 */ u8 unk000[0x3ac];
+    /* 0x3ac */ s32 state;
+    /* 0x3b0 */ u8 unk3b0[0x428];
+    /* 0x7d8 */ u32 handle;
+    /* 0x7dc */ f32 time;
+} Timer0025d57c;
 
-/* Supplied declaration required: FUN_0025cfe4. */
+typedef struct Holder0025d57c {
+    /* 0x00 */ Timer0025d57c *timer;
+} Holder0025d57c;
 
+void FUN_0025cfe4(u32 handle, f32 *time);
 
-unsigned int FUN_0025d57c(int *param_1)
-
+/* While the timer is running (time above zero) in state 5, hands it to FUN_0025cfe4. Always returns 0. */
+u32 FUN_0025d57c(Holder0025d57c *holder)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *param_1;
-  if ((0.0f < *(float *)(temp_v0 + 0x7dc)) && (*(int *)(temp_v0 + 0x3ac) == 5)) {
-    FUN_0025cfe4(*(unsigned int *)(temp_v0 + 0x7d8),temp_v0 + 0x7dc);
-  }
-  return 0;
+    Timer0025d57c *timer = holder->timer;
+
+    if (timer->time > 0.0f && timer->state == 5) {
+        FUN_0025cfe4(timer->handle, &timer->time);
+    }
+    return 0;
 }
 
 } /* extern "C" */

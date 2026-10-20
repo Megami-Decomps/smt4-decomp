@@ -1,24 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f1486` (_code @ 0x2f1486, 0x1a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the loop compare's operand order differs (retail `cmp r1, r2` with the cursor first; built `cmp r2, r1`). */
+#include "common.h"
 
 extern "C" {
 
-int asdOperatorDeleteArray(void);
+typedef struct PtrVector {
+    /* 0x00 */ int **begin;
+    /* 0x04 */ int **end;
+} PtrVector;
 
-/* Supplied declaration required: asdOperatorDeleteArray. */
+void asdOperatorDeleteArray(void *block);
 
-
-int * FUN_002f1486(int *param_1)
-
+/* Destroys the vector's elements (trivial, so only the walk remains) and frees its storage; returns the vector. */
+PtrVector *FUN_002f1486(PtrVector *vec)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  for (temp_v0 = *param_1; temp_v0 != param_1[1]; temp_v0 = temp_v0 + 4) {
-  }
-  asdOperatorDeleteArray();
-  return param_1;
+    int **begin = vec->begin;
+    int **it;
+
+    for (it = begin; vec->end != it; it++) {
+    }
+    asdOperatorDeleteArray(begin);
+    return vec;
 }
 
 } /* extern "C" */

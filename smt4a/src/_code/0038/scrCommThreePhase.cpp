@@ -6,7 +6,7 @@ extern s32 scrGetCommandFrame(void);
 extern void FUN_002c76c0(s32 value);
 extern void FUN_0035c6ac(void);
 extern void FUN_002e5924(s32 value);
-extern void FUN_002852f0(s32 value);
+extern void messageSlotSet(s32 value);
 extern void eventQueueAddUnique(u32 value);
 
 /* Script command: steps through a three-phase sequence on the frame counter; returns 1 once finished. */
@@ -24,7 +24,7 @@ u8 scrCommThreePhase(void)
         step = scrGetCommandFrame();
         if (step >= 3) {
             FUN_002c76c0(-1);
-            FUN_002852f0(0);
+            messageSlotSet(0);
         }
         return step >= 3;
     }

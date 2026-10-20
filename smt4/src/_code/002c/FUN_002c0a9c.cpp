@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002ba698(unsigned int, unsigned int);
+extern int aocEntryFind(unsigned int, unsigned int);
 extern short *FUN_002ba764(unsigned int, unsigned int);
 extern unsigned int randNextInRange(unsigned int);
 extern int FUN_002c0a84(void);
@@ -39,7 +39,7 @@ unsigned int FUN_002c0a9c(unsigned int param_1,unsigned int param_2,int param_3)
     return 0;
   }
   *(unsigned char *)((int)psVar6 + 3) = temp_v1 & 0xe0;
-  temp_v5 = FUN_002ba698(param_1,param_2);
+  temp_v5 = aocEntryFind(param_1,param_2);
   temp_v9 = *(short *)(temp_v5 + 0xe);
   temp_v6 = temp_v5 + temp_v4 * 6;
   psVar12 = (short *)(temp_v6 + 0x10);

@@ -45,7 +45,7 @@ extern int FUN_001247d0(unsigned int);
 /* Supplied declaration required: FUN_00124d24. */
 extern int FUN_00125e30(void);
 /* Supplied declaration required: FUN_00126194. */
-extern int FUN_001264c4(unsigned int);
+extern int entryListCurrentIsUsable(unsigned int);
 extern int FUN_002b753c(unsigned int);
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: FUN_002b7638. */
@@ -150,7 +150,7 @@ char FUN_00116a54(void)
         temp_v7 = (unsigned int)*(unsigned char *)(temp_v4 + 8);
       }
       if (temp_v4 != 0 && temp_v7 != 0) {
-        temp_v8 = FUN_001264c4(*(unsigned int *)(temp_v4 + 4));
+        temp_v8 = entryListCurrentIsUsable(*(unsigned int *)(temp_v4 + 4));
         if ((temp_v8 != 0) || ((*(char *)(temp_v4 + 8) == '\x04' && (*(char *)(temp_v4 + 0x5f) != '\0'))))
         {
           temp_v6 = FUN_002c5d80(1,0);

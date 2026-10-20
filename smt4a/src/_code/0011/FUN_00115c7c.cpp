@@ -10,7 +10,7 @@ int FUN_002ffa20(int, int);
 extern unsigned char DAT_00559bc8; /* 0x559bc8 */
 extern unsigned char DAT_0055a7f8; /* 0x55a7f8 */
 
-extern int constructObj0055affc(unsigned int *);
+extern int _ZN9Obj55aff4C1Ev(unsigned int *);
 /* Supplied declaration required: FUN_002f17e4. */
 /* Supplied declaration required: FUN_002ffa20. */
 
@@ -23,7 +23,7 @@ void FUN_00115c7c(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_0055a7f8;
   *(unsigned char *)(param_1 + 1) = 0;
-  temp_v0 = constructObj0055affc(param_1 + 2);
+  temp_v0 = _ZN9Obj55aff4C1Ev(param_1 + 2);
   temp_v0 = temp_v0 + 8;
   FUN_002ffa20(temp_v0,0);
   temp_v0 = temp_v0 + 0x10;

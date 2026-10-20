@@ -1,28 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f7ea8` (_code @ 0x4f7ea8, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable04FindById(unsigned int);
-int FUN_00335660(...);
+typedef struct Owner {
+    /* 0x0000 */ u8 unk0000[0x1F54];
+    /* 0x1F54 */ u32 first;
+    /* 0x1F58 */ u32 second;
+} Owner;
 
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_00335660. */
+extern void *dataTable04FindById(u32 id);
+extern u32 FUN_00335660(u32 a, void *record, s32 flag);
 
-
-void FUN_004f7ea8(int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Stores the results of FUN_00335660 for the id's record with and without the flag at 0x1f54 and 0x1f58. */
+void FUN_004f7ea8(Owner *owner, u32 id, u32 a, s32 flag)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  dataTable04FindById(param_2);
-  temp_v0 = FUN_00335660(param_3,param_2);
-  *(unsigned int *)(param_1 + 0x1f54) = temp_v0;
-  temp_v0 = FUN_00335660(param_3,param_2,0);
-  *(unsigned int *)(param_1 + 0x1f58) = temp_v0;
-  return;
+    void *record = dataTable04FindById(id);
+
+    owner->first = FUN_00335660(a, record, flag != 0);
+    owner->second = FUN_00335660(a, record, 0);
 }
 
 } /* extern "C" */

@@ -14,7 +14,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
-int FUN_0025c848(...);
+int fadeObjectResetIfActive(...);
 int FUN_00344cd0(...);
 int VectorSignedToFloat(...);
 
@@ -53,7 +53,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern unsigned int FUN_00186f54(unsigned int);
-/* Supplied declaration required: FUN_0025c848. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 extern int FUN_00284140(int);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
@@ -279,7 +279,7 @@ void FUN_003db56c(int param_1)
       (**(romwright_code **)(temp_v0 + 0x12d4))();
       *(unsigned char *)(temp_v0 + 0x12d0) = 0;
     }
-    FUN_0025c848(param_1 + 0x47c);
+    fadeObjectResetIfActive(param_1 + 0x47c);
     temp_v0 = g_renderCtx;
     temp_v1 = packNibblesAndByte(6,7,0);
     piVar6 = (int *)(temp_v0 + 0x12b8);

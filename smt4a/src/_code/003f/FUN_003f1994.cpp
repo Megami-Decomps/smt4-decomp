@@ -1,23 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f1994` (_code @ 0x3f1994, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002804b0(int, int, int);
+typedef struct BossAppearOwner {
+    /* 0x0000 */ u8 unk0000[0x2290];
+    /* 0x2290 */ void *data;
+} BossAppearOwner;
 
-/* Supplied declaration required: FUN_002804b0. */
+int FUN_002804b0(const char *path, void **slot, s32 arg);
 
-
-void FUN_003f1994(int param_1)
-
+/* Passes battle/NewBossAppear.tbb and the owner's data slot to FUN_002804b0 unless the slot is already set. */
+void FUN_003f1994(BossAppearOwner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x2290) == 0) {
-    FUN_002804b0(0x3f19c0,param_1 + 0x2290,0);
-    return;
-  }
-  return;
+    if (owner->data == NULL) {
+        FUN_002804b0("battle/NewBossAppear.tbb", &owner->data, 0);
+    }
 }
 
 } /* extern "C" */

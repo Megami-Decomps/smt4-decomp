@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0017760c(...);
 int FUN_00184310(...);
 int wordPairCopy(...);
-int FUN_0023e51c(...);
+int aocCollectLevelEntries(...);
 int asdOperatorNewD(...);
 int asdOperatorDeleteC(...);
 int rt_memclr(...);
@@ -71,7 +71,7 @@ extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: wordPairCopy. */
 extern unsigned int FUN_00203b1c(void);
-/* Supplied declaration required: FUN_0023e51c. */
+/* Supplied declaration required: aocCollectLevelEntries. */
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: asdOperatorDeleteC. */
 /* Supplied declaration required: rt_memclr. */
@@ -175,7 +175,7 @@ void FUN_004cd4c0(fn_004cd4c0_arg0 *param_1,int param_2)
   temp_v6 = (temp_v12 + 1) * 8;
   asdOperatorNewD();
   rt_memclr();
-  FUN_0023e51c(temp_v6,temp_v23,temp_v17 & 0xff,(unsigned int)param_1->field_0x64 + param_2);
+  aocCollectLevelEntries(temp_v6,temp_v23,temp_v17 & 0xff,(unsigned int)param_1->field_0x64 + param_2);
   temp_v11 = 0;
   do {
     if (temp_v12 + 1U <= temp_v11) break;

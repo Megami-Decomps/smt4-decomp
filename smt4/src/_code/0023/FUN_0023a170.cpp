@@ -1,24 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023a170` (_code @ 0x23a170, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail does not shrink-wrap the NULL case (`ldreq r0, =err; push; beq` to the shared pop); built returns it directly with `bxeq lr` before the push. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+struct Object0023a170;
 
-unsigned int FUN_0023a170(int *param_1)
+typedef struct Object0023a170Vtbl {
+    /* 0x00 */ void *slots[12];
+    /* 0x30 */ void (*run)(struct Object0023a170 *self);
+} Object0023a170Vtbl;
 
+typedef struct Object0023a170 {
+    /* 0x0 */ const Object0023a170Vtbl *vtbl;
+} Object0023a170;
+
+/* Calls the object's virtual function at 0x30; returns 0, or the failure result 0xC8804465 for a NULL object. */
+u32 FUN_0023a170(Object0023a170 *object)
 {
-  unsigned int temp_v0;
-  
-  if (param_1 == (int *)0x0) {
-    temp_v0 = 0xc8804465;
-  }
-  else {
-    (**(romwright_code **)(*param_1 + 0x30))();
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    if (object == NULL) {
+        return 0xC8804465;
+    }
+    object->vtbl->run(object);
+    return 0;
 }
 
 } /* extern "C" */

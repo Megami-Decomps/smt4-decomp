@@ -6,7 +6,7 @@ extern "C" {
 
 int asdGxIndexBufferCreate(...);
 int asdProcessCreateSimple(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int sysMemClear(...);
@@ -74,7 +74,7 @@ extern unsigned int *g_frameTex; /* 0x57f65c */
 
 /* Supplied declaration required: asdGxIndexBufferCreate. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: sysMemClear. */
@@ -113,7 +113,7 @@ void FUN_00138e14(void)
   puVar2[6] = 0;
   *(unsigned char *)(puVar2 + 7) = 0;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar2 + 0xd);
-  FUN_001505ac(puVar2 + 0xd,&DAT_00530cfc,0x18,&DAT_00530d14,0x24,&DAT_00530d38,0xc,0,0,
+  paramsInit(puVar2 + 0xd,&DAT_00530cfc,0x18,&DAT_00530d14,0x24,&DAT_00530d38,0xc,0,0,
                &DAT_00530d44,0x70);
   puVar2[0xb] = 0x3e800000;
   puVar2[10] = 0x3e800000;

@@ -10,9 +10,9 @@ void FUN_0023474c(Obj4223ac *obj, s32 a, s32 b, s32 c, u32 d);
 
 /* Reads three entries of table 0x2b (ids 0xfa-0xfc, or 0xfd-0xff for type 9) and hands each to one
  * of the object's setters. */
-void Obj4223ac::vfunc08(Obj4223acParam *param)
+void Obj4223ac::vfunc08(void *param)
 {
-    s32 type = param->type;
+    s32 type = ((Obj4223acParam *)param)->type;
     s32 a;
     s32 b;
     s32 c;

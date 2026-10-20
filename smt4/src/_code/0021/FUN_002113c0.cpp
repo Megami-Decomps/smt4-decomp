@@ -12,7 +12,7 @@ int FUN_002c3f5c(...);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
 int asdMemFree(unsigned int);
 int FUN_002c526c(void);
-int FUN_002c5728(int);
+int gameDataFlagsClearAndRefresh(int);
 int FUN_002c5758(int);
 int FUN_002e181c(int);
 int software_interrupt(int);
@@ -33,7 +33,7 @@ extern int g_campCec; /* 0x43daa8 */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_002c5728. */
+/* Supplied declaration required: gameDataFlagsClearAndRefresh. */
 /* Supplied declaration required: FUN_002c5758. */
 /* Supplied declaration required: FUN_002e181c. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
@@ -77,7 +77,7 @@ unsigned int FUN_002113c0(int param_1)
       asdMemFree(*(unsigned int *)(param_1 + 0xd78));
       *(unsigned int *)(param_1 + 0xd78) = 0;
       FUN_002c5758(2);
-      FUN_002c5728(2);
+      gameDataFlagsClearAndRefresh(2);
       FUN_002e181c(g_campCec + 0xa0);
       linkHolderApplyFlag(g_campCec + 0xa0,0);
       temp_v0 = *(int *)(param_1 + 0xcf4);

@@ -1,36 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030afb4` (_code @ 0x30afb4, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Built with -Ospace (see flags_W4Match4b.txt). */
+#include "common.h"
 
 extern "C" {
 
+typedef struct MapNode MapNode;
 
-void FUN_0030afb4(int *param_1)
+struct MapNode {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ MapNode *parent;
+    /* 0x08 */ MapNode *left;
+    /* 0x0C */ MapNode *right;
+};
 
+typedef struct MapIterator {
+    /* 0x0 */ MapNode *node;
+} MapIterator;
+
+/* Advances the iterator to the in-order successor in the red-black tree. */
+void FUN_0030afb4(MapIterator *it)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = *param_1;
-  temp_v1 = *(int *)(temp_v0 + 0xc);
-  if (temp_v1 != 0) {
-    *param_1 = temp_v1;
-    while (temp_v1 = *(int *)(temp_v1 + 8), temp_v1 != 0) {
-      *param_1 = temp_v1;
+    MapNode *parent;
+
+    if (it->node->right != NULL) {
+        it->node = it->node->right;
+        while (it->node->left != NULL) {
+            it->node = it->node->left;
+        }
+    } else {
+        parent = it->node->parent;
+        while (it->node == parent->right) {
+            it->node = parent;
+            parent = parent->parent;
+        }
+        if (it->node->right != parent) {
+            it->node = parent;
+        }
     }
-  }
-  else {
-    while( 1 ) {
-      temp_v0 = *(int *)(temp_v0 + 4);
-      if (*param_1 != *(int *)(temp_v0 + 0xc)) break;
-      *param_1 = temp_v0;
-    }
-    if (*(int *)(*param_1 + 0xc) != temp_v0) {
-      *param_1 = temp_v0;
-      return;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

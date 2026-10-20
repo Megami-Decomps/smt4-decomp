@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00256dbc(...);
-int FUN_00256f88(...);
+int entryListSetPhase(...);
 int FUN_002573c8(...);
 int FUN_0025b750(void);
 int FUN_00263028(...);
@@ -49,7 +49,7 @@ extern unsigned int *DAT_004ea7f4; /* 0x4ea7f4 */
 #endif
 extern unsigned int FUN_0024ac4c(unsigned int);
 /* Supplied declaration required: FUN_00256dbc. */
-/* Supplied declaration required: FUN_00256f88. */
+/* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: FUN_002573c8. */
 /* Supplied declaration required: FUN_0025b750. */
 /* Supplied declaration required: FUN_00263028. */
@@ -283,7 +283,7 @@ joined_r0x0030e620:
         }
       }
       else {
-        FUN_00256f88(puVar11[0x10],*(unsigned short *)((int)puVar11 + 0x46));
+        entryListSetPhase(puVar11[0x10],*(unsigned short *)((int)puVar11 + 0x46));
         FUN_00256dbc(puVar11[0x10],&temp_v15);
         *(short *)((int)puVar11 + 0x46) = *(short *)((int)puVar11 + 0x46) + 1;
         temp_v7 = temp_v20;

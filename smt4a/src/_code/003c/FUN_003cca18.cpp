@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001517b4(...);
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int FUN_0019de98(int, unsigned int);
 int FUN_0020b908(int, int);
 int FUN_00228b04(int, int);
@@ -23,7 +23,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0020b908. */
 /* Supplied declaration required: FUN_00228b04. */
@@ -88,13 +88,13 @@ unsigned int FUN_003cca18(int param_1,unsigned int param_2,unsigned int *param_3
       }
       unitRecordBuild((*(unsigned int *)(param_1 + temp_v2 * 8 + 0x13bc) & 0x1ffff) >> 2,&temp_v3);
       FUN_0020b908(0x10,0);
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
     }
     else {
       temp_v1 = 1;
       FUN_001517b4();
       if (temp_v1 != 0) {
-        FUN_001641b4(0x100020f);
+        eventQueueAddUniqueIfValid(0x100020f);
         *(unsigned char *)(param_1 + 0x8e8a) = 1;
         temp_v1 = FUN_002a4860();
         temp_v0 = FUN_002a4894(param_1 + 0x8e14);

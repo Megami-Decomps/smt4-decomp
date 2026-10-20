@@ -1,31 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrGetArg` (_code @ 0x236038, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W4_W4Match2_ScrStack.h"
 
 extern "C" {
 
-extern int DAT_00588e5c; /* 0x588e5c */
+extern s32 DAT_0061889c[0x180]; /* script integer variables */
+extern f32 DAT_00618e9c[0x180]; /* script float variables */
 
-
-int scrGetArg(int param_1)
-
+/* Returns the script's argument `index` (0 = most recently pushed) as an int, converting float
+ * values and resolving variable references. */
+s32 scrGetArg(s32 index)
 {
-  int temp_v0;
-  
-  temp_v0 = (*(int *)(DAT_00588e5c + 0x1c) - param_1) - 1;
-  switch(*(unsigned char *)(DAT_00588e5c + temp_v0 + 0x20)) {
-  case 0:
-  case 4:
-    return *(int *)(DAT_00588e5c + temp_v0 * 4 + 0x3c);
-  case 1:
-    return (int)*(float *)(DAT_00588e5c + temp_v0 * 4 + 0x3c);
-  case 2:
-    return *(int *)(*(int *)(DAT_00588e5c + temp_v0 * 4 + 0x3c) * 4 + 0x61889c);
-  case 3:
-    return (int)*(float *)(*(int *)(DAT_00588e5c + temp_v0 * 4 + 0x3c) * 4 + 0x618e9c);
-  default:
-    return 0;
-  }
+    ScriptStack *stack = g_scrContext.stack;
+    s32 slot = stack->count - index - 1;
+
+    switch (stack->types[slot]) {
+    case SCR_VALUE_INT:
+    case SCR_VALUE_RAW:
+        return stack->values[slot].i;
+    case SCR_VALUE_FLOAT:
+        return (s32)stack->values[slot].f;
+    case SCR_VALUE_INT_VAR:
+        return DAT_0061889c[stack->values[slot].i];
+    case SCR_VALUE_FLOAT_VAR:
+        return (s32)DAT_00618e9c[stack->values[slot].i];
+    default:
+        return 0;
+    }
 }
 
 } /* extern "C" */

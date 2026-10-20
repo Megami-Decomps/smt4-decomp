@@ -17,7 +17,7 @@ int FUN_002a03d8(...);
 int asdOperatorNew(void);
 int asdTMTexTableLoadSprites(int);
 int FUN_002c58c8(int, int);
-int FUN_002c5d5c(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int FUN_00343aac(int, int);
 int FUN_00343b08(...);
 int FUN_00343c0c(...);
@@ -46,7 +46,7 @@ extern short *FUN_002c0a2c(unsigned char, unsigned int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c58c8. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_00343aac. */
 /* Supplied declaration required: FUN_00343b08. */
 /* Supplied declaration required: FUN_00343c0c. */
@@ -72,9 +72,9 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
   temp_v1 = FUN_0022e480(temp_v1 + 0x14);
   *(unsigned char **)(temp_v1 + 0x494) = &DAT_00422590;
   temp_v1 = temp_v1 + 0x4ec;
-  FUN_002c5d5c(temp_v1,FUN_00287314,0x74,9);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v1,FUN_00287314,0x74,9);
   temp_v1 = temp_v1 + 0x414;
-  FUN_002c5d5c(temp_v1,&LAB_003a0104,0x1002,9);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_003a0104,0x1002,9);
   temp_v1 = FUN_00287314(temp_v1 + 0x9014);
   puVar7 = (unsigned int *)(temp_v1 - 0x9ca8);
   FUN_003a4518(puVar7);

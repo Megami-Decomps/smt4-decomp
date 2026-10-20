@@ -12,7 +12,7 @@ typedef struct {
 } param_1_stack;
 
 extern int idIsAtLeast350(unsigned short);
-extern int FUN_0019f1a4(unsigned short, unsigned int);
+extern int gameFlagEntryGetBit(unsigned short, unsigned int);
 extern int gameFlagBlockGet(void);
 extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: partyEntryGetBit5. */
@@ -27,7 +27,7 @@ void FUN_00417d08(int param_1)
   int temp_v1;
   
   if (*(char *)(param_1 + 0x90c) != '\0') {
-    temp_v1 = FUN_0019f1a4(*(unsigned short *)(param_1 + 0xcce),0);
+    temp_v1 = gameFlagEntryGetBit(*(unsigned short *)(param_1 + 0xcce),0);
     if (temp_v1 == 0) {
       return;
     }
@@ -61,7 +61,7 @@ void FUN_00417d08(int param_1)
       *(unsigned char *)(temp_v1 + 0x2a0) = *(unsigned char *)(temp_v1 + 0x2a0) & 0x9f;
       return;
     }
-    temp_v1 = FUN_0019f1a4(*(unsigned short *)(param_1 + 0xcce),0);
+    temp_v1 = gameFlagEntryGetBit(*(unsigned short *)(param_1 + 0xcce),0);
     if (temp_v1 == 0) {
       return;
     }

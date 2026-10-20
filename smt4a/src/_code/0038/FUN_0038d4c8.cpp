@@ -1,39 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038d4c8` (_code @ 0x38d4c8, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrGetArg(...);
-int FUN_004f61b0(int, int, int);
+typedef struct Obj33C8 {
+    /* 0x0000 */ u8 unk0000[0x339C];
+    /* 0x339C */ u32 flags;
+} Obj33C8;
 
-extern int DAT_00573808; /* 0x573808 */
+extern Obj33C8 *DAT_00573808;
 
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_004f61b0. */
-extern int obj33C8IsEnabled(int);
+extern s32 scrGetArg(...);
+extern s32 obj33C8IsEnabled(Obj33C8 *object);
+extern void btlUnitSlotBind(Obj33C8 *object, s16 first, u16 second);
 
-
-unsigned int FUN_0038d4c8(void)
-
+/* Script command: while flag 0x4000 is clear starts btlUnitSlotBind with arguments 0 and 1; once set returns 1 when the object is enabled. */
+u32 FUN_0038d4c8(void)
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = scrGetArg(1);
-  if ((*(unsigned int *)(DAT_00573808 + 0x339c) & 0x4000) != 0) {
-    temp_v2 = obj33C8IsEnabled(DAT_00573808);
-    if (temp_v2 != 0) {
-      return 1;
+    s32 first = scrGetArg();
+    s32 second = scrGetArg(1);
+
+    if ((DAT_00573808->flags & 0x4000) != 0) {
+        if (obj33C8IsEnabled(DAT_00573808) != 0) {
+            return 1;
+        }
+    } else {
+        btlUnitSlotBind(DAT_00573808, first, second);
     }
-  }
-  else {
-    FUN_004f61b0(DAT_00573808,(int)temp_v0,temp_v1);
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

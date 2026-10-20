@@ -1,23 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040a76c` (_code @ 0x40a76c, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Built with --cpu=5TE (see flags_W4Match4b.txt). */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char *gameDataBlocksGetHalf280C4(void);
+typedef struct Half {
+    /* 0x00 */ u8 flags;
+    /* 0x01 */ u8 mode;
+} Half;
 
+Half *gameDataBlocksGetHalf280C4(void);
 
-void FUN_0040a76c(unsigned int param_1,unsigned char param_2)
-
+/* Sets the block's mode byte and sets flag 4 unless flag 2 is already set. */
+void FUN_0040a76c(u32 unused, u8 mode)
 {
-  unsigned char *pbVar1;
-  
-  pbVar1 = (unsigned char *)gameDataBlocksGetHalf280C4();
-  pbVar1[1] = param_2;
-  if ((*pbVar1 & 2) == 0) {
-    *pbVar1 = *pbVar1 | 4;
-  }
-  return;
+    Half *half = gameDataBlocksGetHalf280C4();
+
+    half->mode = mode;
+    if ((half->flags & 2) == 0) {
+        half->flags |= 4;
+    }
 }
 
 } /* extern "C" */

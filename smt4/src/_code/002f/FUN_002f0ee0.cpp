@@ -1,70 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f0ee0` (_code @ 0x2f0ee0, 0x110 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002499fc(unsigned int, int *, int *);
-int scrSetResult(int);
-int btlGetMainState(void);
-int scrGetArg(int);
+typedef struct BtlEntry {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x1EE];
+    /* 0x1F2 */ u16 values[1];  /* indexed by script argument; bits 10+ hold a state */
+    /* 0x1F4 */ u8 unk1F4[0x94];
+} BtlEntry; /* 0x288 */
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+typedef struct BtlSub4900 {
+    /* 0x00 */ u8 unk00[0xC5];
+    /* 0xC5 */ u8 flag;
+} BtlSub4900;
 
-extern int btlMainFindActiveEntry(void);
-/* Supplied declaration required: FUN_002499fc. */
-extern unsigned int FUN_00249a54(void);
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: scrGetArg. */
+typedef struct BtlMainState {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ BtlEntry *entries;
+    /* 0x1FC4 */ u8 unk1FC4[0x293C];
+    /* 0x4900 */ BtlSub4900 sub4900;
+} BtlMainState;
 
+extern s32 scrGetArg(s32 index);
+extern void scrSetResult(s32 value);
+extern BtlMainState *btlGetMainState(void);
+extern BtlEntry *btlMainFindActiveEntry(void);
+extern u32 FUN_00249a54(void);
+extern void FUN_002499fc(u32 group, s32 *first, s32 *count);
 
-unsigned int FUN_002f0ee0(void)
-
+/* Script command: sets the result to 1 when a live entry (or the active one) has state 2 in the argument's slot. */
+s32 FUN_002f0ee0(void)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v0 = scrGetArg(0);
-  scrGetArg(1);
-  temp_v1 = FUN_00249a54();
-  FUN_002499fc(temp_v1,&temp_v5,&temp_v6);
-  temp_v4 = temp_v5;
-  if (temp_v5 < temp_v6 + temp_v5) {
-    do {
-      temp_v2 = btlGetMainState();
-      puVar4 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288);
-      temp_v3 = *puVar4;
-      if (((((temp_v3 & 0x10) == 0) && ((temp_v3 & 1) != 0)) && ((temp_v3 & 0x40) == 0)) &&
-         (*(unsigned short *)((int)puVar4 + temp_v0 * 2 + 0x1f2) >> 10 == 2)) {
-        scrSetResult(1);
-        return 1;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < temp_v5 + temp_v6);
-  }
-  temp_v4 = btlGetMainState() + 0x4900;
-  if (*(char *)(temp_v4 + 0xc5) != '\0') {
-    btlGetMainState();
-    temp_v4 = btlMainFindActiveEntry();
-    if ((temp_v4 != 0) && (*(unsigned short *)(temp_v4 + temp_v0 * 2 + 0x1f2) >> 10 == 2)) {
-      scrSetResult(1);
-      return 1;
+    s32 slot = scrGetArg(0);
+    s32 first;
+    s32 count;
+
+    scrGetArg(1);
+    FUN_002499fc(FUN_00249a54(), &first, &count);
+    for (s32 i = first; i < first + count; i++) {
+        BtlEntry *entry = &btlGetMainState()->entries[i];
+        if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 && (entry->flags & 0x40) == 0
+            && entry->values[slot] >> 10 == 2) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-  }
-  scrSetResult(0);
-  return 1;
+    BtlSub4900 *sub = &btlGetMainState()->sub4900;
+
+    if (sub->flag != 0) {
+        btlGetMainState();
+        BtlEntry *entry = btlMainFindActiveEntry();
+        if (entry != NULL && entry->values[slot] >> 10 == 2) {
+            scrSetResult(1);
+            return 1;
+        }
+    }
+    scrSetResult(0);
+    return 1;
 }
 
 } /* extern "C" */

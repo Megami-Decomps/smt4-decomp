@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_001f9334(int);
 int dataTable2fSub0GetCount(void);
-int FUN_0024f520(void);
+int dataTable29Sub0GetEntryWithAoc(void);
 int FUN_002533f4(int, int, int);
 int FUN_00287aec(void);
 int FUN_002a0428(unsigned int, int);
 int dataTable00FindById(void);
 int gameFlagIsSet(...);
 int randNextInRange(int);
-int FUN_0030f5e0(void);
+int contentEntryGetB(void);
 int SBORROW4(...);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -69,7 +69,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_001f9334. */
 /* Supplied declaration required: dataTable2fSub0GetCount. */
 extern int FUN_0024f4e8(void);
-/* Supplied declaration required: FUN_0024f520. */
+/* Supplied declaration required: dataTable29Sub0GetEntryWithAoc. */
 /* Supplied declaration required: FUN_002533f4. */
 extern int FUN_00256550(unsigned int);
 extern int FUN_0025c05c(void);
@@ -85,7 +85,7 @@ extern int gameGetPlayerData(void);
 extern int gameGetMapBlock(void);
 extern char *FUN_002ced4c(void);
 extern int FUN_002ef868(void);
-/* Supplied declaration required: FUN_0030f5e0. */
+/* Supplied declaration required: contentEntryGetB. */
 extern int FUN_003234c8(void);
 extern int FUN_00328168(unsigned int, unsigned int);
 extern unsigned int __aeabi_idivmod(void);
@@ -192,7 +192,7 @@ void FUN_0021bea0(void)
   else {
     temp_v17 = FUN_0024f4e8();
     temp_v16 = (char *)0x0;
-    FUN_0024f520();
+    dataTable29Sub0GetEntryWithAoc();
     temp_v15 = *(int *)(temp_v5 + 0xc);
     temp_v0 = *(int *)(temp_v5 + 0x10);
   }
@@ -201,7 +201,7 @@ void FUN_0021bea0(void)
   if (0 < temp_v1) {
     do {
       psVar5 = psVar12;
-      FUN_0030f5e0();
+      contentEntryGetB();
       if ((((*psVar5 != -1) && ((int)*psVar5 == *(int *)(temp_v5 + 0xc))) &&
           ((int)psVar5[1] == *(int *)(temp_v5 + 0x10))) &&
          (((psVar5[2] == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)) &&
@@ -326,7 +326,7 @@ LAB_0021c1e4:
       }
       else {
         pcVar6 = pcVar13;
-        FUN_0024f520();
+        dataTable29Sub0GetEntryWithAoc();
         temp_v16 = pcVar6;
         if (((*pcVar6 != -1) && ((int)*pcVar6 == *(int *)(temp_v5 + 0xc))) &&
            ((int)pcVar6[1] == *(int *)(temp_v5 + 0x10))) goto LAB_0021c198;

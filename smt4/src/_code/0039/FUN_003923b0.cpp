@@ -15,7 +15,7 @@ int FUN_00234124(...);
 int FUN_0027eafc(...);
 int scrScriptProcessStartEntry(...);
 int ifTouchRegionRemove(...);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 int jobStop(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
@@ -54,7 +54,7 @@ extern int FUN_002973d8(void);
 extern int FUN_0029d65c(int);
 extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -248,7 +248,7 @@ void FUN_003923b0(unsigned int *param_1)
     if ((temp_v1 != 0) ||
        ((((*param_1 & 0x2000) != 0 && (*puVar2 != 0xffffffff)) &&
         (temp_v1 = FUN_0029d65c((int)(short)*puVar2), temp_v1 == 6)))) {
-      FUN_002bc01c(0x100016d);
+      eventQueueAddUniqueIfValid(0x100016d);
       if ((*param_1 & 0x1000) != 0) {
         *puVar7 = 2;
         *param_1 = *param_1 & 0xffffdfff;
@@ -262,7 +262,7 @@ void FUN_003923b0(unsigned int *param_1)
     }
     temp_v1 = FUN_0026ee68(0xb);
     if (temp_v1 != 0) {
-      FUN_002bc01c(0x100016d);
+      eventQueueAddUniqueIfValid(0x100016d);
       if ((*param_1 & 0x1000) != 0) {
         *puVar7 = 2;
         *param_1 = *param_1 & 0xffffdfff;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001517b4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int scrScriptProcessStartEntry(...);
 int FUN_0034913c(...);
@@ -39,7 +39,7 @@ extern unsigned char LAB_004ced30; /* 0x4ced30 */
 extern unsigned char LAB_004ced40; /* 0x4ced40 */
 
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: sysPlaySe. */
 extern int FUN_00224880(unsigned int);
 extern int FUN_00239414(void);
@@ -73,7 +73,7 @@ void FUN_004ceb9c(fn_004ceb9c_arg0 *param_1)
     if (temp_v0 != 0) {
       return;
     }
-    FUN_001641b4(0x100020f);
+    eventQueueAddUniqueIfValid(0x100020f);
     FUN_0034913c();
     param_1->field_0x598 = 0xb;
     temp_v0 = tableGroupFindEntryIndex(param_1->field_0x10,&LAB_004ced30);

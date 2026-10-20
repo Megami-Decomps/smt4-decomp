@@ -1,32 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a288c` (_code @ 0x3a288c, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads g_mapGimic before computing the index*0x18; built computes the index first */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003fd924(unsigned int, unsigned int, int);
+typedef struct GimicObject {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u32 handle;
+} GimicObject;
 
-extern int g_mapGimic; /* 0x580ca0 */
+typedef struct Gimic {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ s16 id;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ GimicObject *object;
+    /* 0x0C */ u8 unk0C[0xC];
+} Gimic; /* 0x18 */
 
-/* Supplied declaration required: FUN_003fd924. */
+typedef struct MapGimic {
+    /* 0x000 */ u8 unk000[0x8C4];
+    /* 0x8C4 */ Gimic gimics[10];
+} MapGimic;
 
+extern MapGimic *g_mapGimic;
+extern void FUN_003fd924(u32 handle, u32 arg, s32 mode, f32 a, f32 b);
 
-void FUN_003a288c(int param_1,unsigned int param_2)
-
+/* Calls FUN_003fd924 (mode 2, scale 1.0) on every active map gimic whose id is `id`. */
+void FUN_003a288c(s32 id, u32 arg)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  do {
-    temp_v0 = g_mapGimic + temp_v1 * 0x18;
-    if ((*(char *)(temp_v0 + 0x8c4) != '\0') && (*(short *)(temp_v0 + 0x8c8) == param_1)) {
-      FUN_003fd924(*(unsigned int *)(*(int *)(temp_v0 + 0x8cc) + 4),param_2,2);
+    s32 i;
+
+    for (i = 0; i < 10; i++) {
+        Gimic *gimic = &g_mapGimic->gimics[i];
+
+        if (gimic->active != 0 && gimic->id == id) {
+            FUN_003fd924(gimic->object->handle, arg, 2, 1.0f, 1.0f);
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 10);
-  return;
 }
 
 } /* extern "C" */

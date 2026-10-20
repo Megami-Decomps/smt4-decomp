@@ -14,7 +14,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern float FUN_00282c30(unsigned int, unsigned int);
 extern unsigned int FUN_00295e24(unsigned short, int, int);
-extern unsigned int FUN_00295f28(int);
+extern unsigned int dataTable9EntryOrZero(int);
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 extern int gameGetPlayerData(void);
@@ -42,7 +42,7 @@ void FUN_00296474(int param_1)
   temp_v1 = gameGetSlotTable();
   temp_v2 = FUN_002bf4f8(0x28,0x14);
   temp_v3 = gameGetPlayerData();
-  temp_v4 = FUN_00295f28((unsigned int)*(unsigned char *)(temp_v3 + 0x76) + (int)*(short *)(param_1 + 0xd49a));
+  temp_v4 = dataTable9EntryOrZero((unsigned int)*(unsigned char *)(temp_v3 + 0x76) + (int)*(short *)(param_1 + 0xd49a));
   if (*(char *)(param_1 + 0xd4fe) != '\0') {
     temp_v0 = **(unsigned short **)(temp_v2 + 0xc);
   }

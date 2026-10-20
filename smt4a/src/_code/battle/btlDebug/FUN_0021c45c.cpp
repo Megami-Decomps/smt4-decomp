@@ -7,7 +7,7 @@ extern "C" {
 int qsort(...);
 int FUN_0014e188(...);
 int FUN_0014e220(...);
-int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
+int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
 int FUN_00184310(void);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
@@ -42,7 +42,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_0021d124; /* 0x21d124 */
-extern int FUN_002fde98(...); /* 0x2fde98 */
+extern int dataTableCompareIdsByOrder(...); /* 0x2fde98 */
 extern unsigned char DAT_005288c8; /* 0x5288c8 */
 extern unsigned char DAT_005289dc; /* 0x5289dc */
 extern unsigned char DAT_00528c34; /* 0x528c34 */
@@ -52,7 +52,7 @@ extern unsigned int DAT_005e1560; /* 0x5e1560 */
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_0014e220. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -120,7 +120,7 @@ void FUN_0021c45c(int param_1,int param_2)
   *(unsigned char *)(param_1 + 0x3db0) = 0;
   dataSet16LoadAndSort();
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1);
-  FUN_001505ac(param_1,&DAT_005288c8,0x114,&DAT_005289dc,600,&DAT_00528c34,0xd8,0,0,&DAT_00528d0c,
+  paramsInit(param_1,&DAT_005288c8,0x114,&DAT_005289dc,600,&DAT_00528c34,0xd8,0,0,&DAT_00528d0c,
                0x9f4);
   temp_v8 = (unsigned long long)temp_v7;
   temp_v1 = param_1 + 0x9f8;
@@ -353,7 +353,7 @@ void FUN_0021c45c(int param_1,int param_2)
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 0x7df);
   FUN_00203b40(param_1 + 0x3b14,temp_v1,6,1,0,1);
-  qsort(param_1 + 0x3ca8,temp_v1,2,FUN_002fde98);
+  qsort(param_1 + 0x3ca8,temp_v1,2,dataTableCompareIdsByOrder);
   FUN_00203b40(param_1 + 0x3bdc,4,1,4,1,1);
   temp_v5 = 0;
   temp_v1 = 0;

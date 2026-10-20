@@ -7,15 +7,15 @@ extern "C" {
 int FUN_00111378(unsigned char *, unsigned int);
 int FUN_002ec70c(unsigned char [176]);
 int FUN_002ecd54(unsigned char [560]);
-int FUN_002f31cc(unsigned char [560]);
+int _ZN9Obj558c00D1Ev(unsigned char [560]);
 int FUN_002f7a28(unsigned char [176]);
 
-extern int FUN_0010a01c(unsigned char *, unsigned int, unsigned int);
+extern int _ZN9Obj558c007vfunc08EiP14Obj558c00Range(unsigned char *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00111378. */
 /* Supplied declaration required: FUN_002ec70c. */
 extern int FUN_002ecb04(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002ecd54. */
-/* Supplied declaration required: FUN_002f31cc. */
+/* Supplied declaration required: _ZN9Obj558c00D1Ev. */
 /* Supplied declaration required: FUN_002f7a28. */
 extern int FUN_002f7ac4(unsigned char *, unsigned int);
 
@@ -34,16 +34,16 @@ FUN_00113612(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
   FUN_002f7a28(temp_v2);
   temp_v0 = FUN_002f7ac4(temp_v2,param_4);
   if (((temp_v0 == 0) || (temp_v0 = FUN_002ecb04(temp_v1,param_4), temp_v0 == 0)) ||
-     (temp_v0 = FUN_0010a01c(temp_v1,param_2,param_3), temp_v0 != 0)) {
+     (temp_v0 = _ZN9Obj558c007vfunc08EiP14Obj558c00Range(temp_v1,param_2,param_3), temp_v0 != 0)) {
     FUN_002ec70c(temp_v2);
-    FUN_002f31cc(temp_v1);
+    _ZN9Obj558c00D1Ev(temp_v1);
     puVar2 = (unsigned char *)0x0;
   }
   else {
     puVar2 = temp_v2;
     FUN_00111378(puVar2,param_3);
     FUN_002ec70c(temp_v2);
-    FUN_002f31cc(temp_v1);
+    _ZN9Obj558c00D1Ev(temp_v1);
   }
   return puVar2;
 }

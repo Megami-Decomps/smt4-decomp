@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0011a3cc(int, int, int, int);
+int modelCmdAppendPacked(int, int, int, int);
 int FUN_00126d14(unsigned int);
 int FUN_002af390(unsigned int, unsigned char *);
 int FUN_002b612c(unsigned char [24]);
@@ -18,7 +18,7 @@ int nn_gr_CTR_Combiner_Stage_SetupPrevious(...);
 int nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0(unsigned char [24]);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_0011a3cc. */
+/* Supplied declaration required: modelCmdAppendPacked. */
 /* Supplied declaration required: FUN_00126d14. */
 /* Supplied declaration required: FUN_002af390. */
 /* Supplied declaration required: FUN_002b612c. */
@@ -96,11 +96,11 @@ void FUN_002c3a14(int param_1)
       temp_v7 = *(char *)(param_1 + 0x11e0) == '\0';
     }
     if (!temp_v7) {
-      FUN_0011a3cc(0,0,0,0);
+      modelCmdAppendPacked(0,0,0,0);
     }
   }
   else {
-    FUN_0011a3cc(0,0,0,0);
+    modelCmdAppendPacked(0,0,0,0);
   }
   if ((*(char *)(param_1 + 0x5b0) == '\0') && (*(int *)(param_1 + 0x530) == 0x3f800000)) {
     temp_v6 = 0;

@@ -1,31 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e5810` (_code @ 0x3e5810, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int ptrListRemoveClearOwner(unsigned int);
+typedef struct HandleBody {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u32 flags;
+} HandleBody;
 
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+typedef struct Handle {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ HandleBody *body;
+} Handle;
 
-/* Supplied declaration required: ptrListRemoveClearOwner. */
+typedef struct Entry {
+    /* 0x00 */ u32 state;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ Handle *handle;
+    /* 0x0C */ u8 unk0C[0x50];
+} Entry; /* 0x5C */
 
+typedef struct EntryList {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ Entry entries[1];
+} EntryList;
 
-void FUN_003e5810(int param_1,int param_2)
+extern u32 g_handleRegistry;
 
+extern void ptrListRemoveClearOwner(u32 registry, HandleBody *body);
+
+/* Marks entry `index` as released (state 2), flags its handle body and unregisters the body. */
+void FUN_003e5810(EntryList *list, s32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  param_1 = param_1 + param_2 * 0x5c;
-  temp_v0 = *(int *)(*(int *)(param_1 + 0x24) + 4);
-  if (temp_v0 != 0) {
-    *(unsigned int *)(param_1 + 0x1c) = 2;
-    *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
-    ptrListRemoveClearOwner(g_handleRegistry);
-    return;
-  }
-  return;
+    Entry *entry = &list->entries[index];
+    HandleBody *body = entry->handle->body;
+
+    if (body != NULL) {
+        entry->state = 2;
+        body->flags |= 3;
+        ptrListRemoveClearOwner(g_handleRegistry, body);
+    }
 }
 
 } /* extern "C" */

@@ -1,24 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029ea68` (_code @ 0x29ea68, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail splits the 0xC1F8 item-array offset into two immediate adds and loads the halfword at +0x2E; armcc folds it into a literal-pool register offset. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
+typedef struct Item {
+    /* 0x00 */ u8 unk00[0x2E];
+    /* 0x2E */ u16 flags;        /* bit 1: item flag */
+    /* 0x30 */ u8 unk30[4];
+} Item; /* 0x34 bytes */
 
+typedef struct DataBlocks {
+    /* 0x0000 */ u8 unk0000[0xC1F8];
+    /* 0xC1F8 */ Item items[1];
+} DataBlocks;
 
-unsigned int FUN_0029ea68(unsigned int param_1)
+typedef struct DataBlocksHolder {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ DataBlocks *blocks;
+} DataBlocksHolder;
 
+extern DataBlocksHolder g_gameDataBlocks;
+
+/* Returns item `index`'s flag bit 1 (0 for indices above 0x500). */
+u32 FUN_0029ea68(u32 index)
 {
-  unsigned int temp_v0;
-  
-  if (param_1 >= 0x501) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = (*(unsigned short *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + param_1 * 0x34 + 0xc226) & 2) >> 1;
-  }
-  return temp_v0;
+    u32 result;
+
+    if (index > 0x500) {
+        result = 0;
+    } else {
+        Item *item = &g_gameDataBlocks.blocks->items[index];
+        result = (item->flags & 2) >> 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

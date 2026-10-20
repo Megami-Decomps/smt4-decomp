@@ -5,7 +5,7 @@
 extern "C" {
 
 int memAlloc(...);
-int FUN_0016dfc4(...);
+int resultReportIfFailed(...);
 int nn_os_CriticalSection_Initialize(...);
 int FUN_002e3140(...);
 int FUN_002fb0d4(...);
@@ -27,7 +27,7 @@ extern unsigned char LAB_00514afc; /* 0x514afc */
 extern unsigned char LAB_00514b7c; /* 0x514b7c */
 
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_0016dfc4. */
+/* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002fb0d4. */
@@ -55,7 +55,7 @@ void FUN_0035af44(int param_1)
   temp_v0 = 0x100;
   memAlloc(0x100,0x100,0,0x1000,0x1000,1);
   *(unsigned int *)(param_1 + 0xd54) = temp_v0;
-  FUN_0016dfc4(param_1 + 0xd3c,temp_v0,0x1000);
+  resultReportIfFailed(param_1 + 0xd3c,temp_v0,0x1000);
   temp_v2 = 4;
   temp_v3 = &LAB_00514a44;
   temp_v4 = &LAB_00514b7c;

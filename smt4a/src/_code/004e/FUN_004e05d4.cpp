@@ -15,7 +15,7 @@ int FUN_003f0e20(...);
 int FUN_003f1b3c(int, unsigned int, unsigned int, unsigned int *, int *);
 int FUN_0047f4cc(int);
 int FUN_004aa878(void);
-int FUN_004c3c84(...);
+int btlSlotSetStoreValue(...);
 int FUN_004c571c(...);
 int FUN_004c9160(...);
 int FUN_004cab9c(void);
@@ -80,7 +80,7 @@ extern int chainCountIdUnflagged(unsigned int);
 /* Supplied declaration required: FUN_0047f4cc. */
 /* Supplied declaration required: FUN_004aa878. */
 extern int FUN_004c3a98(int, unsigned int);
-/* Supplied declaration required: FUN_004c3c84. */
+/* Supplied declaration required: btlSlotSetStoreValue. */
 extern unsigned int FUN_004c53fc(unsigned int);
 /* Supplied declaration required: FUN_004c571c. */
 extern int FUN_004c8a9c(void);
@@ -313,7 +313,7 @@ LAB_004e0ac0:
       }
       else {
         temp_v5 = FUN_004c53fc(0x1b);
-        FUN_004c3c84(temp_v2,0x1b,temp_v5);
+        btlSlotSetStoreValue(temp_v2,0x1b,temp_v5);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x40) != 0) {
         if (((*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0 &&
@@ -324,7 +324,7 @@ LAB_004e0ac0:
       }
       else {
         temp_v5 = FUN_004c53fc(0x1c);
-        FUN_004c3c84(temp_v2,0x1c,temp_v5);
+        btlSlotSetStoreValue(temp_v2,0x1c,temp_v5);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x100) != 0) {
         if (((DAT_00571260 & *(unsigned int *)(*param_1 + 0x45a0)) == 0 &&
@@ -335,7 +335,7 @@ LAB_004e0ac0:
       }
       else {
         temp_v5 = FUN_004c53fc(0x1d);
-        FUN_004c3c84(temp_v2,0x1d,temp_v5);
+        btlSlotSetStoreValue(temp_v2,0x1d,temp_v5);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 8) != 0) {
         if (((*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0 &&
@@ -346,7 +346,7 @@ LAB_004e0ac0:
       }
       else {
         temp_v5 = FUN_004c53fc(0x1e);
-        FUN_004c3c84(temp_v2,0x1e,temp_v5);
+        btlSlotSetStoreValue(temp_v2,0x1e,temp_v5);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x800) != 0) {
         if (((*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0 &&
@@ -357,11 +357,11 @@ LAB_004e0ac0:
       }
       else {
         temp_v5 = FUN_004c53fc(0x1f);
-        FUN_004c3c84(temp_v2,0x1f,temp_v5);
+        btlSlotSetStoreValue(temp_v2,0x1f,temp_v5);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x1000) == 0) {
         temp_v5 = FUN_004c53fc(0x20);
-        FUN_004c3c84(temp_v2,0x20,temp_v5);
+        btlSlotSetStoreValue(temp_v2,0x20,temp_v5);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x2000) != 0) {
         if (((*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0 &&
@@ -372,7 +372,7 @@ LAB_004e0ac0:
       }
       else {
         temp_v5 = FUN_004c53fc(0x21);
-        FUN_004c3c84(temp_v2,0x21,temp_v5);
+        btlSlotSetStoreValue(temp_v2,0x21,temp_v5);
       }
     }
   }

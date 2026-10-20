@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0023e4d8(...);
+int unitStateClearEventBits(...);
 int SCARRY4(unsigned int, int);
 
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
-/* Supplied declaration required: FUN_0023e4d8. */
+/* Supplied declaration required: unitStateClearEventBits. */
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 extern int gameGetPlayerData(void);
@@ -31,7 +31,7 @@ void FUN_0033a670(int param_1)
     if ((((puVar6 != (unsigned int *)0x0) && (temp_v1 = *puVar6, (temp_v1 & 1) != 0)) && ((temp_v1 & 0x40) == 0))
        && ((temp_v1 & 0x10) == 0)) {
       if (puVar6[0x9e] != 0) {
-        FUN_0023e4d8(puVar6[0x9e] + 0x72);
+        unitStateClearEventBits(puVar6[0x9e] + 0x72);
         temp_v1 = puVar6[0x9e];
         temp_v0 = *(unsigned short *)(temp_v1 + 0x72);
         if ((temp_v0 & 2) != 0) {
@@ -39,7 +39,7 @@ void FUN_0033a670(int param_1)
         }
       }
       else if (puVar6[0x9f] != 0) {
-        FUN_0023e4d8(puVar6[0x9f] + 0x44);
+        unitStateClearEventBits(puVar6[0x9f] + 0x44);
         temp_v1 = puVar6[0x9f];
         temp_v0 = *(unsigned short *)(temp_v1 + 0x44);
         if ((temp_v0 & 2) != 0) {
@@ -47,7 +47,7 @@ void FUN_0033a670(int param_1)
         }
       }
       else if (puVar6[0xa0] != 0) {
-        FUN_0023e4d8(puVar6[0xa0] + 0x44);
+        unitStateClearEventBits(puVar6[0xa0] + 0x44);
       }
     }
     temp_v3 = temp_v3 + 1;
@@ -61,7 +61,7 @@ LAB_0033a748:
       temp_v2 = gameGetPlayerData();
       temp_v2 = temp_v2 + 0x72;
       do {
-        FUN_0023e4d8(temp_v2);
+        unitStateClearEventBits(temp_v2);
         do {
           temp_v4 = temp_v4 + 1;
           if ((int)(unsigned int)*(unsigned char *)(temp_v3 + 0x910b) <= temp_v4) {

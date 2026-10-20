@@ -8,7 +8,7 @@ int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_00168770(void);
 int FUN_00168e00(int, int, int, int);
-int FUN_0016c560(...);
+int skinObjectUpdateMatrices(...);
 int FUN_001834a4(int, int);
 int FUN_001834e4(...);
 int FUN_001835b4(...);
@@ -86,7 +86,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00168770. */
 /* Supplied declaration required: FUN_00168e00. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001834e4. */
@@ -290,7 +290,7 @@ void FUN_002609d8(fn_002609d8_arg0 *param_1,int param_2,int param_3)
             *(unsigned char *)(temp_v3 + 0x12d0) = 0;
           }
           if (temp_v15 < *(float *)(temp_v2 + 0x28)) {
-            FUN_0016c560(g_renderCtx);
+            skinObjectUpdateMatrices(g_renderCtx);
           }
         }
         else {

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_0014e188(...);
 int FUN_0014e220(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int sysPlaySe(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
@@ -60,7 +60,7 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_0014e220. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00184310. */
@@ -243,7 +243,7 @@ void FUN_002a74ac(void)
   temp_v8 = 0;
   temp_v9 = 0;
   temp_v5 = 0x30;
-  FUN_001505ac(temp_v0 + 0x340,&DAT_0052f360,0x24);
+  paramsInit(temp_v0 + 0x340,&DAT_0052f360,0x24);
   temp_v3 = 0;
   do {
     temp_v4 = temp_v0 + temp_v3 * 0x8c;

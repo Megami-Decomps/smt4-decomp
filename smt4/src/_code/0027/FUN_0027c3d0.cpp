@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0025beb8(unsigned int, int);
+int nodeSetScale(unsigned int, int);
 int FUN_0027ee24(void);
 int FUN_002a0428(unsigned int, int);
 int VectorSignedToFloat(int, int);
@@ -31,7 +31,7 @@ extern unsigned int DAT_0049fc08; /* 0x49fc08 */
 extern int FUN_00248dfc(void);
 extern int FUN_00253154(int);
 extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0025beb8. */
+/* Supplied declaration required: nodeSetScale. */
 /* Supplied declaration required: FUN_0027ee24. */
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
@@ -227,7 +227,7 @@ LAB_0027c7c0:
       *(unsigned char *)(temp_v7 + 0xa0c) = 1;
       *(unsigned int *)(temp_v7 + 0xa10) = 0;
       FUN_002a0428(temp_v3,1);
-      FUN_0025beb8(*(unsigned int *)(*(int *)(temp_v7 + 0xa08) + 8),0);
+      nodeSetScale(*(unsigned int *)(*(int *)(temp_v7 + 0xa08) + 8),0);
       puVar5 = *(unsigned int **)(temp_v7 + 0xa08);
       temp_v2 = temp_v2 + 1;
       *puVar5 = *puVar5 | 2;
@@ -312,7 +312,7 @@ LAB_0027c7c0:
                 *(unsigned int *)(temp_v4 + 0x90) = 0;
                 FUN_002a0428(temp_v3,1);
                 if (*(short *)(DAT_0044cd88 + 4) >= 100) {
-                  FUN_0025beb8(*(unsigned int *)(*(int *)(temp_v4 + 0x88) + 8),0);
+                  nodeSetScale(*(unsigned int *)(*(int *)(temp_v4 + 0x88) + 8),0);
                 }
               }
               else {
@@ -323,7 +323,7 @@ LAB_0027c7c0:
                 *(int *)(temp_v4 + 0x90) = (int)temp_v5;
                 FUN_002a0428(*(unsigned int *)(temp_v2 + temp_v5 * 8 + 0x1c),1);
                 if (*(short *)(DAT_0044cd88 + 4) >= 100) {
-                  FUN_0025beb8(*(unsigned int *)
+                  nodeSetScale(*(unsigned int *)
                                 (*(int *)(DAT_0044cd88 + *(int *)(temp_v4 + 0x90) * 8 + 0x1c) + 8),0);
                 }
               }

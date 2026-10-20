@@ -1,20 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00157520` (_code @ 0x157520, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001006ec(int, int, int);
+typedef struct Elem48 {
+    u32 words[12];
+} Elem48;                         /* 0x30 bytes */
 
-/* Supplied declaration required: FUN_001006ec. */
+typedef struct Vector48 {
+    /* 0x00 */ Elem48 *begin;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ Elem48 *end;
+} Vector48;
 
+extern int FUN_001006ec(Elem48 *first, int count, int arg);
 
-int * FUN_00157520(int *param_1)
-
+/* Runs FUN_001006ec over all elements of the vector and returns the vector. */
+Vector48 *FUN_00157520(Vector48 *vec)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001006ec(*param_1,(param_1[2] - *param_1) / 0x30,0);
-  return param_1;
+    Elem48 *first = vec->begin;
+
+    FUN_001006ec(first, vec->end - first, 0);
+    return vec;
 }
 
 } /* extern "C" */

@@ -9,7 +9,7 @@ int FUN_001f7d50(...);
 int FUN_001f7fac(...);
 int FUN_001f8290(...);
 int FUN_0021af44(...);
-int FUN_00223b28(...);
+int gameDataEntrySetLevel(...);
 int FUN_00254e2c(...);
 int FUN_002903f0(void);
 int FUN_00295660(...);
@@ -33,12 +33,12 @@ int FUN_003c0294(void);
 int FUN_003d9be4(...);
 
 int FUN_001d2628(...);
-int FUN_001e2240(...);
+int btlEventTaskStart(...);
 int FUN_001f8158(...);
 int FUN_00207f68(...);
 int FUN_0021ae40(...);
 int FUN_00254e4c(...);
-int FUN_00254ec8(...);
+int pickerAdvance(...);
 int FUN_00254f58(...);
 int FUN_002550d8(...);
 int FUN_00255158(...);
@@ -60,7 +60,7 @@ int FUN_003c7c84(...);
 int FUN_003c7f20(...);
 
 int FUN_001a84d8(...);
-int FUN_001d25c8(...);
+int btlAutoCalcTaskCreate(...);
 int FUN_001d2844(...);
 int FUN_001e204c(...);
 int FUN_001e2350(...);
@@ -116,12 +116,12 @@ extern int g_mapDepartWork; /* 0x4474d8 */
 extern int DAT_0049fb9c; /* 0x49fb9c */
 
 /* Supplied declaration required: FUN_001a84d8. */
-/* Supplied declaration required: FUN_001d25c8. */
+/* Supplied declaration required: btlAutoCalcTaskCreate. */
 /* Supplied declaration required: FUN_001d2628. */
 /* Supplied declaration required: FUN_001d2844. */
 /* Supplied declaration required: FUN_001ddafc. */
 /* Supplied declaration required: FUN_001e204c. */
-/* Supplied declaration required: FUN_001e2240. */
+/* Supplied declaration required: btlEventTaskStart. */
 /* Supplied declaration required: FUN_001e2350. */
 /* Supplied declaration required: FUN_001f7d50. */
 /* Supplied declaration required: FUN_001f7ecc. */
@@ -131,11 +131,11 @@ extern int DAT_0049fb9c; /* 0x49fb9c */
 /* Supplied declaration required: FUN_00207f68. */
 /* Supplied declaration required: FUN_0021ae40. */
 /* Supplied declaration required: FUN_0021af44. */
-extern int FUN_002228f4(short);
-/* Supplied declaration required: FUN_00223b28. */
+extern int gameDataEntryGetLevel(short);
+/* Supplied declaration required: gameDataEntrySetLevel. */
 /* Supplied declaration required: FUN_00254e2c. */
 /* Supplied declaration required: FUN_00254e4c. */
-/* Supplied declaration required: FUN_00254ec8. */
+/* Supplied declaration required: pickerAdvance. */
 /* Supplied declaration required: FUN_00254f58. */
 /* Supplied declaration required: FUN_002550d8. */
 /* Supplied declaration required: FUN_00255158. */
@@ -340,7 +340,7 @@ void FUN_001fc6e8(unsigned int param_1)
     }
     FUN_002f34cc(temp_v4);
     FUN_001f7ecc(temp_v4);
-    FUN_001d25c8(temp_v4);
+    btlAutoCalcTaskCreate(temp_v4);
     temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + 0x54));
     if (temp_v3 == 0) {
       FUN_001a84d8(temp_v4);
@@ -416,7 +416,7 @@ void FUN_001fc6e8(unsigned int param_1)
     FUN_00336830(temp_v4);
     temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + 0x50));
     if (temp_v3 == 0) {
-      FUN_001e2240(temp_v4);
+      btlEventTaskStart(temp_v4);
     }
     FUN_00207f68(temp_v4);
     return;
@@ -605,7 +605,7 @@ void FUN_001fc6e8(unsigned int param_1)
           temp_v12 = temp_v12 - 1;
           temp_v3 = temp_v3 + 1;
         } while (temp_v12 != 0);
-        FUN_00254ec8(temp_v4);
+        pickerAdvance(temp_v4);
         FUN_00254e4c(g_btlUiBlock);
       }
       temp_v7 = *(short *)(temp_v4 + *(short *)(temp_v4 + 0x2f1e) * 2 + 0x2f06);
@@ -786,8 +786,8 @@ LAB_001fd348:
       temp_v12 = temp_v4 + temp_v3 * 4;
       psVar18 = (short *)(temp_v12 + 0x445c);
       if ((0 < *psVar18) && (*(short *)(temp_v12 + 0x445e) != 0)) {
-        temp_v5 = FUN_002228f4(*psVar18);
-        FUN_00223b28(*psVar18,temp_v5 + (unsigned int)*(unsigned short *)(temp_v12 + 0x445e));
+        temp_v5 = gameDataEntryGetLevel(*psVar18);
+        gameDataEntrySetLevel(*psVar18,temp_v5 + (unsigned int)*(unsigned short *)(temp_v12 + 0x445e));
         FUN_00348c10(*psVar18,*(unsigned short *)(temp_v12 + 0x445e));
         FUN_001ddafc(*psVar18,1);
       }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00148d68(unsigned int, unsigned int, int);
-int FUN_00152978(...);
+int gameDataGetTableEntry(...);
 int dataTable00FindById(void);
 int FUN_0046fd8c(int, unsigned int);
 
@@ -18,7 +18,7 @@ extern int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_00148d68. */
 extern int randRange(short);
-/* Supplied declaration required: FUN_00152978. */
+/* Supplied declaration required: gameDataGetTableEntry. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -42,11 +42,11 @@ unsigned short FUN_004bc420(unsigned int param_1,unsigned int param_2,int param_
   short *psVar9;
   short temp_v7;
   
-  puVar1 = (unsigned short *)FUN_00152978(param_1);
+  puVar1 = (unsigned short *)gameDataGetTableEntry(param_1);
   temp_v4 = (unsigned int)*puVar1;
   if (temp_v4 == 0) {
     FUN_00148d68(param_1,param_2,1);
-    puVar1 = (unsigned short *)FUN_00152978(param_1,param_2);
+    puVar1 = (unsigned short *)gameDataGetTableEntry(param_1,param_2);
     temp_v4 = (unsigned int)*puVar1;
   }
   temp_v0 = dataTableGet(2,1);

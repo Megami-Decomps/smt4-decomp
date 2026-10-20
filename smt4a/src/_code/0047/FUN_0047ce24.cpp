@@ -16,7 +16,7 @@ int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int renderCtxCallB(void);
 int FUN_002f5020(...);
-int FUN_00318054(void);
+int renderStatePop(void);
 int FUN_0032cef8(unsigned int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -84,7 +84,7 @@ extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxCallB. */
 extern int asdSoundGetOption2(void);
 /* Supplied declaration required: FUN_002f5020. */
-/* Supplied declaration required: FUN_00318054. */
+/* Supplied declaration required: renderStatePop. */
 extern unsigned int flagsAt6CGet(void);
 extern int asdSoundGetOption0(void);
 /* Supplied declaration required: FUN_0032cef8. */
@@ -433,12 +433,12 @@ LAB_0047cf80:
           FUN_0018291c(&temp_v26,&temp_v25,temp_v19 + 0x20,&temp_v17,temp_v21,0);
         }
         if (temp_v9) {
-          FUN_00318054();
+          renderStatePop();
         }
         return 1;
       }
       if (temp_v9) {
-        FUN_00318054();
+        renderStatePop();
       }
     }
     param_2 = 0;
@@ -469,7 +469,7 @@ LAB_0047d190:
       FUN_0018291c(&temp_v23,&temp_v22,temp_v19 + 0x20,&temp_v18,temp_v21,0);
     }
     if (temp_v9) {
-      FUN_00318054();
+      renderStatePop();
     }
   }
   return param_2;

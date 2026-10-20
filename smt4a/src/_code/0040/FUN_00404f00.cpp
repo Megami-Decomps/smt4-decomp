@@ -1,36 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00404f00` (_code @ 0x404f00, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the 999 default in r2 and the first value in r1; built uses r1 for the constant and r2 for the first value. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0039b984(void);
+u16 *FUN_0039b984(u32 id);
 
-/* Supplied declaration required: FUN_0039b984. */
-
-
-int FUN_00404f00(unsigned short *param_1,unsigned short *param_2)
-
+/* Compares two ids by their entries' value (999 when missing), higher first. */
+s32 FUN_00404f00(u16 *a, u16 *b)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned short *puVar2;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  puVar1 = (unsigned short *)(unsigned int)*param_1;
-  FUN_0039b984();
-  puVar2 = (unsigned short *)(unsigned int)*param_2;
-  FUN_0039b984();
-  temp_v1 = 999;
-  temp_v0 = temp_v1;
-  if (puVar1 != (unsigned short *)0x0) {
-    temp_v0 = (unsigned int)*puVar1;
-  }
-  if (puVar2 != (unsigned short *)0x0) {
-    temp_v1 = (unsigned int)*puVar2;
-  }
-  return temp_v1 - temp_v0;
+    u16 *entryA = FUN_0039b984(*a);
+    u16 *entryB = FUN_0039b984(*b);
+    s32 valueA = entryA != NULL ? *entryA : 999;
+    s32 valueB = entryB != NULL ? *entryB : 999;
+
+    return valueB - valueA;
 }
 
 } /* extern "C" */

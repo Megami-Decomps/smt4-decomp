@@ -6,7 +6,7 @@ extern "C" {
 
 int cecProcessStart(void);
 int FUN_002005a0(int *);
-int FUN_00259784(int);
+int cecProcessForward(int);
 int FUN_002597c0(void);
 int FUN_00262f78(void);
 int btlTalkBustUpCreate(void);
@@ -51,9 +51,9 @@ extern int g_campCec; /* 0x43daa8 */
 /* Supplied declaration required: FUN_002005a0. */
 extern int gameDataBlockTestFlag(unsigned int);
 extern int FUN_002595bc(void);
-/* Supplied declaration required: FUN_00259784. */
+/* Supplied declaration required: cecProcessForward. */
 /* Supplied declaration required: FUN_002597c0. */
-extern unsigned int FUN_002597e0(void);
+extern unsigned int gameDataBlocksGetFlagByteA(void);
 extern unsigned int FUN_00259800(void);
 /* Supplied declaration required: FUN_00262f78. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
@@ -105,7 +105,7 @@ void FUN_001ec6e0(fn_001ec6e0_arg0 *param_1)
       asdTMTexTableLoadSprites(0x39);
       asdTMTexTableLoadEntryAsync(0x39,0);
       temp_v4 = FUN_00259800();
-      temp_v3 = FUN_002597e0();
+      temp_v3 = gameDataBlocksGetFlagByteA();
       temp_v0 = FUN_00262f78();
       FUN_002bd2b4(g_campCec + 0x48,temp_v0,temp_v3,temp_v4);
       temp_v1 = FUN_00262f78();
@@ -120,14 +120,14 @@ void FUN_001ec6e0(fn_001ec6e0_arg0 *param_1)
         if (temp_v1 != 0) {
           if (*(short *)(g_campCec + 0x90) != 0) {
             FUN_002597c0();
-            FUN_00259784(g_campCec + 0x48);
+            cecProcessForward(g_campCec + 0x48);
           }
           else {
             temp_v7 = FUN_00259800();
-            temp_v0 = FUN_002597e0();
+            temp_v0 = gameDataBlocksGetFlagByteA();
             FUN_002bd2b4(g_campCec + 0x48,0,temp_v0,temp_v7);
             FUN_002597c0();
-            FUN_00259784(g_campCec + 0x48);
+            cecProcessForward(g_campCec + 0x48);
             rt_aeabi_memclr(g_campCec + 0x80,0x14);
           }
         }

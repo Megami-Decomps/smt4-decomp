@@ -20,9 +20,9 @@ int FUN_00184310(...);
 int drawSetColorFromRGBA8(...);
 int slotRecordFindById(...);
 int FUN_0020caec(...);
-int FUN_00239234(...);
+int gameDataCopySaveEntry(...);
 int FUN_0026c4f0(...);
-int FUN_0035dd74(...);
+int contentEntryFindById(...);
 int VectorSignedToFloat(...);
 
 typedef struct fn_002f197c_arg0 fn_002f197c_arg0;
@@ -92,13 +92,13 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0020caec. */
 extern unsigned int *FUN_0022e9b8(void);
-/* Supplied declaration required: FUN_00239234. */
+/* Supplied declaration required: gameDataCopySaveEntry. */
 /* Supplied declaration required: FUN_0026c4f0. */
 extern char FUN_00284140(int);
 extern int FUN_002a4860(unsigned int *);
 extern int FUN_002a4894(unsigned int *);
 extern unsigned int computeCountLimit(void);
-/* Supplied declaration required: FUN_0035dd74. */
+/* Supplied declaration required: contentEntryFindById. */
 extern int FUN_004db07c(unsigned int, unsigned short, unsigned char *);
 
 
@@ -149,7 +149,7 @@ void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
   if (*(short *)(puVar2 + 0x23de) != 0) {
     do {
       temp_v1 = (unsigned int)*(unsigned short *)((int)puVar2 + temp_v7 * 2 + 0x8f7c);
-      FUN_0035dd74();
+      contentEntryFindById();
       temp_v2 = FUN_002a4860(puVar8);
       temp_v3 = FUN_002a4894(puVar8);
       if (*(short *)((int)puVar2 + (temp_v2 + temp_v3) * 2 + 0x62a0) == *(short *)(temp_v1 + 0x1a)) {
@@ -380,7 +380,7 @@ LAB_002f2034:
         temp_v9 = *(unsigned short *)(temp_v2 + 100);
       }
       else {
-        FUN_00239234(*psVar10,temp_v13);
+        gameDataCopySaveEntry(*psVar10,temp_v13);
         temp_v9 = temp_v13[0];
       }
       temp_v2 = *(short *)(temp_v7 + 10) + param_2;

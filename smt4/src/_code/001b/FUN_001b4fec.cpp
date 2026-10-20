@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0027e974(void);
-int FUN_0028727c(void);
+int buttonHelpTexturesUnref(void);
 int FUN_002898e4(void);
 int buttonHelpCreate(void);
 int FUN_0028d9b0(void);
@@ -30,7 +30,7 @@ typedef struct {
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
 /* Supplied declaration required: FUN_0027e974. */
-/* Supplied declaration required: FUN_0028727c. */
+/* Supplied declaration required: buttonHelpTexturesUnref. */
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
@@ -85,7 +85,7 @@ unsigned int FUN_001b4fec(int *param_1,unsigned int param_2,unsigned int param_3
           *(unsigned int *)(temp_v3 + 0x1c) = 0;
         }
         buttonHelpRelease();
-        FUN_0028727c();
+        buttonHelpTexturesUnref();
         uiFadeRelease();
       }
     }

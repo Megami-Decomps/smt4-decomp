@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_00241f2c(...);
 int FUN_00241f98(...);
-int FUN_002829d4(void);
+int questEntryCheck(void);
 int FUN_00290994(...);
 int FUN_0029a17c(...);
-int FUN_0029a268(...);
+int fadeObjectResetIfActive(...);
 int FUN_002b6b8c(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
@@ -42,12 +42,12 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00241f2c. */
 /* Supplied declaration required: FUN_00241f98. */
-/* Supplied declaration required: FUN_002829d4. */
+/* Supplied declaration required: questEntryCheck. */
 /* Supplied declaration required: FUN_00290994. */
 extern int flagBitIsSet(unsigned int);
 extern unsigned int FUN_00295cec(void);
 /* Supplied declaration required: FUN_0029a17c. */
-/* Supplied declaration required: FUN_0029a268. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 extern int FUN_0029d644(int);
 extern int FUN_0029d65c(int);
 extern int FUN_0029efa8(int);
@@ -128,7 +128,7 @@ void FUN_0033149c(int param_1)
           FUN_002bf288(2,0x1d,0x58d,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,
                        0x6a);
           temp_v5 = temp_v10;
-          FUN_002829d4();
+          questEntryCheck();
           if (temp_v5 != 0) {
             if (temp_v5 != 1) {
               if (temp_v5 == 2) {
@@ -228,7 +228,7 @@ void FUN_0033149c(int param_1)
     }
     else {
       temp_v5 = temp_v10;
-      FUN_002829d4();
+      questEntryCheck();
       if (temp_v5 != 0) {
         if (temp_v5 != 1) {
           if (temp_v5 == 2) {
@@ -280,7 +280,7 @@ void FUN_0033149c(int param_1)
       (**(romwright_code **)(temp_v0 + 0x12c8))();
       *(unsigned char *)(temp_v0 + 0x12c4) = 0;
     }
-    FUN_0029a268(param_1 + 0x47c);
+    fadeObjectResetIfActive(param_1 + 0x47c);
     temp_v0 = g_titleScene;
     temp_v1 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v0 + 0x12ac);

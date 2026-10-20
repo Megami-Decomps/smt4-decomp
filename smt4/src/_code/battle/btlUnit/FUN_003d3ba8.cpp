@@ -43,7 +43,7 @@ int FUN_00282820(...);
 int btlMainFindEntryByListedId(...);
 int FUN_0029cc44(int);
 int FUN_002ae164(void);
-int FUN_00394750(...);
+int jyoucyuRowApply(...);
 int FUN_00394a80(...);
 int FUN_003ccaac(unsigned int *, unsigned int *, unsigned int, unsigned int, int, unsigned int, int, int, int, unsigned int, int, int *);
 int FUN_003cf4f8(unsigned int *, unsigned int *, short [266]);
@@ -156,9 +156,9 @@ extern unsigned int FUN_0029a9d4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_0033b33c. */
-/* Supplied declaration required: FUN_00394750. */
+/* Supplied declaration required: jyoucyuRowApply. */
 /* Supplied declaration required: FUN_00394a80. */
-extern int FUN_003bcc18(unsigned int);
+extern int slotTableValueReducedByRecord(unsigned int);
 /* Supplied declaration required: FUN_003ccaac. */
 /* Supplied declaration required: FUN_003cf4f8. */
 /* Supplied declaration required: FUN_003d13d4. */
@@ -392,7 +392,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
     case 0xd:
       temp_v5 = (int)*psVar12;
       temp_v3 = FUN_00227668(DAT_00435d18);
-      temp_v4 = FUN_003bcc18(temp_v12);
+      temp_v4 = slotTableValueReducedByRecord(temp_v12);
       FUN_003dda20(temp_v3,param_2,-temp_v4);
       FUN_002296f4(param_1,param_2,temp_v5,temp_v3,10,0x14);
       if (temp_v4 != 0) {
@@ -575,7 +575,7 @@ LAB_003d444c:
   }
   if ((*param_2 & 0x1080) == 0) {
     if (temp_v28 == 2 || temp_v28 == 3) {
-      FUN_00394750(temp_v27 & 0xffff);
+      jyoucyuRowApply(temp_v27 & 0xffff);
       FUN_00394a80(temp_v27 & 0xffff,param_2,0);
       if ((*param_2 & 0x1080) != 0) {
         temp_v20 = 1;

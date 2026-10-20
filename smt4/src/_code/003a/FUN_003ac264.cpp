@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_003aae38(...); /* 0x3aae38 */
-extern int FUN_003ab0b4(...); /* 0x3ab0b4 */
+extern int itemMenuTakeSelected(...); /* 0x3aae38 */
+extern int bibleScreenStartScript(...); /* 0x3ab0b4 */
 extern int FUN_003ab128(...); /* 0x3ab128 */
 extern int FUN_003ab348(...); /* 0x3ab348 */
 extern int FUN_003ab3dc(...); /* 0x3ab3dc */
@@ -44,7 +44,7 @@ void FUN_003ac264(void)
   } while (temp_v1 != 0);
   puVar1[0x296e] = 0x3abad4;
   puVar1[0x296f] = 0;
-  puVar1[0x2970] = (unsigned int)FUN_003ab0b4;
+  puVar1[0x2970] = (unsigned int)bibleScreenStartScript;
   puVar1[0x2971] = 0;
   puVar1[0x2972] = (unsigned int)FUN_003ab348;
   puVar1[0x2973] = 0;
@@ -54,9 +54,9 @@ void FUN_003ac264(void)
   puVar1[0x2977] = 0;
   puVar1[0x2978] = (unsigned int)FUN_003ab9a4;
   puVar1[0x2979] = 0;
-  puVar1[0x297a] = (unsigned int)FUN_003aae38;
+  puVar1[0x297a] = (unsigned int)itemMenuTakeSelected;
   puVar1[0x297b] = 0;
-  puVar1[0x297c] = (unsigned int)FUN_003aae38;
+  puVar1[0x297c] = (unsigned int)itemMenuTakeSelected;
   puVar1[0x297d] = 0;
   puVar1[0x297e] = (unsigned int)FUN_003ab7a0;
   puVar1[0x297f] = 0;

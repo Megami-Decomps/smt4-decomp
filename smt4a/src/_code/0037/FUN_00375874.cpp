@@ -1,48 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00375874` (_code @ 0x375874, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail compares the two ranks with `subs r0, r0, r6` followed by a linker NOP (a removed hook call) before the `bne`; built emits `cmp r0, r6` and no NOP. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003811ec(unsigned int *, unsigned int *);
-int FUN_0039a598(...);
+s32 idIsAbove400(u32 id);
+s32 FUN_0039a598(u32 id);
+void FUN_003811ec(u32 *a, u32 *b);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern int idIsAbove400(unsigned int);
-/* Supplied declaration required: FUN_003811ec. */
-/* Supplied declaration required: FUN_0039a598. */
-
-
-void FUN_00375874(unsigned int *param_1,unsigned int *param_2)
-
+/* Calls FUN_003811ec on two ids when their ranks are equal (ids above 400 rank 99, others by FUN_0039a598). */
+void FUN_00375874(u32 *a, u32 *b)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = idIsAbove400(*param_1);
-  if (temp_v0 != 0) {
-    temp_v0 = 99;
-  }
-  else {
-    temp_v0 = FUN_0039a598(*param_1);
-  }
-  temp_v1 = idIsAbove400(*param_2);
-  if (temp_v1 != 0) {
-    temp_v1 = 99;
-  }
-  else {
-    temp_v1 = FUN_0039a598();
-  }
-  if (temp_v1 != temp_v0) {
-    return;
-  }
-  FUN_003811ec(param_1,param_2);
-  return;
+    s32 rankA;
+    s32 rankB;
+
+    if (idIsAbove400(*a) != 0) {
+        rankA = 99;
+    } else {
+        rankA = FUN_0039a598(*a);
+    }
+    if (idIsAbove400(*b) != 0) {
+        rankB = 99;
+    } else {
+        rankB = FUN_0039a598(*b);
+    }
+    if (rankB != rankA) {
+        return;
+    }
+    FUN_003811ec(a, b);
 }
 
 } /* extern "C" */

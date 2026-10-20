@@ -1,34 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00336aec` (_code @ 0x336aec, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps tracker+index in r5 and the constant 1 in r6, built the other way round */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_5_stack;
+typedef struct Tracker {
+    /* 0x0000 */ u8 unk0000[0x40D8];
+    /* 0x40D8 */ u8 enabled[0xC];
+    /* 0x40E4 */ s32 totalA[5];
+    /* 0x40F8 */ s32 totalB[5];
+    /* 0x410C */ s32 unk410C[5];
+    /* 0x4120 */ u8 value[5];
+    /* 0x4125 */ u8 mode[5];
+} Tracker;
 
-
-void FUN_00336aec(int param_1,int param_2,int param_3,unsigned char param_4,int param_5)
-
+/* Enables slot `index` with the given value and mode, and adds `amount` to the total its mode selects (0 or 1). */
+void FUN_00336aec(Tracker *tracker, s32 amount, s32 index, u8 value, s32 mode)
 {
-  int temp_v0;
-  
-  temp_v0 = param_1 + param_3;
-  param_1 = param_1 + param_3 * 4;
-  *(unsigned char *)(temp_v0 + 0x40d8) = 1;
-  *(char *)(temp_v0 + 0x4125) = (char)param_5;
-  *(unsigned char *)(temp_v0 + 0x4120) = param_4;
-  *(unsigned int *)(param_1 + 0x410c) = 0;
-  if (param_5 != 0) {
-    if (param_5 == 1) {
-      *(int *)(param_1 + 0x40f8) = param_2 + *(int *)(param_1 + 0x40f8);
+    tracker->enabled[index] = 1;
+    tracker->mode[index] = mode;
+    tracker->value[index] = value;
+    tracker->unk410C[index] = 0;
+    if (mode == 0) {
+        tracker->totalA[index] += amount;
+    } else if (mode == 1) {
+        tracker->totalB[index] += amount;
     }
-    return;
-  }
-  *(int *)(param_1 + 0x40e4) = param_2 + *(int *)(param_1 + 0x40e4);
-  return;
 }
 
 } /* extern "C" */

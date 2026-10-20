@@ -16,7 +16,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 /* Supplied declaration required: gameFlagsGetBlock. */
 extern int FUN_001ba570(void);
 extern int FUN_001bd118(unsigned short);
-extern int FUN_003de830(unsigned short);
+extern int recordIsAvailable(unsigned short);
 extern int FUN_003df004(unsigned short, int, int *);
 extern int partyEntryFlagsBit1(unsigned short);
 extern int partyEntryBitsBit1(unsigned short);
@@ -46,7 +46,7 @@ int FUN_002b9324(void)
         temp_v1 = FUN_001bd118(temp_v0);
         if (temp_v1 != 1) {
           if (((temp_v1 == 0) && (temp_v1 = partyEntryBitsBit1(temp_v0), temp_v1 != 0)) &&
-             (temp_v1 = FUN_003de830(temp_v0), temp_v1 != 0)) {
+             (temp_v1 = recordIsAvailable(temp_v0), temp_v1 != 0)) {
             temp_v1 = 0;
             temp_v3 = temp_v1;
             do {

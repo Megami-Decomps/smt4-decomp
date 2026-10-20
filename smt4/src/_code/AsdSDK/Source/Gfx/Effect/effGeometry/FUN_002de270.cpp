@@ -1,4 +1,3 @@
-/* NON_MATCHING: the 16-byte default-color copy is split into a 3-word ldm plus a single ldr/str where retail uses one 4-word ldm/stm. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -40,7 +39,9 @@ GeomObject *FUN_002de270(GeomState *state, u32 flags)
     object->unk02 = 0;
     object->state = FUN_001f6998(state, flags, 0);
     if (flags & 0x80000) {
-        object->state->color = DAT_00473808;
+        GeomState *geom = object->state;
+
+        geom->color = DAT_00473808;
     }
     object->state->unk60 = 0;
     return object;

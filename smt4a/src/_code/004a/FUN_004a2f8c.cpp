@@ -37,7 +37,7 @@ typedef struct {
 
 /* Supplied declaration required: sysPlaySe. */
 extern int FUN_00224880(unsigned int);
-extern int FUN_00239234(unsigned short, unsigned short *);
+extern int gameDataCopySaveEntry(unsigned short, unsigned short *);
 /* Supplied declaration required: FUN_0023ac54. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003343f0. */
@@ -89,7 +89,7 @@ void FUN_004a2f8c(int param_1)
         do {
           temp_v0 = *(unsigned short *)(param_1 + temp_v1 * 0x20 + 0x868);
           puVar3 = (unsigned short *)FUN_004a86dc(temp_v0);
-          temp_v2 = FUN_00239234(temp_v0,&temp_v3);
+          temp_v2 = gameDataCopySaveEntry(temp_v0,&temp_v3);
           if (temp_v2 != 0) {
             temp_v3 = puVar3[0x32];
             temp_v19 = *(unsigned int *)(puVar3 + 0x18);

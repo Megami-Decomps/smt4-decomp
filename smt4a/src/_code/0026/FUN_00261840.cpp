@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0032c49c(int, int);
+int scrollListSetSelection(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0032c49c. */
+/* Supplied declaration required: scrollListSetSelection. */
 extern unsigned long long __aeabi_idivmod(int, int);
 
 
@@ -31,8 +31,8 @@ void FUN_00261840(int param_1)
      temp_v2 = *(int *)(param_1 + 0x38), temp_v3 = *(int *)(param_1 + 0x48),
      temp_v4 = *(int *)(param_1 + 0x50), temp_v5 = __aeabi_idivmod(temp_v4 - 1,temp_v2),
      temp_v4 <= (temp_v0 + temp_v1) * temp_v2 + temp_v3)) {
-    FUN_0032c49c(param_1,(int)temp_v5);
-    FUN_0032c49c(param_1 + 0x28,(int)((unsigned long long)temp_v5 >> 0x20));
+    scrollListSetSelection(param_1,(int)temp_v5);
+    scrollListSetSelection(param_1 + 0x28,(int)((unsigned long long)temp_v5 >> 0x20));
     return;
   }
   return;

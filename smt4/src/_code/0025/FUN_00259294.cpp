@@ -1,25 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00259294` (_code @ 0x259294, 0x20 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002c411c(int);
+typedef struct GameDataFlags {
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ u8 clear;
+    /* 0x02 */ u8 unk02[0x12];
+    /* 0x14 */ u32 flags;
+} GameDataFlags;
 
-extern unsigned char DAT_0043e2a9; /* 0x43e2a9 */
-extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
+extern GameDataFlags g_gameDataBlocks;
 
-/* Supplied declaration required: FUN_002c411c. */
+s32 FUN_002c411c(s32 arg);
 
-
-void FUN_00259294(unsigned int param_1)
-
+/* Clears the byte at +1 of the game data table and ORs `flags` into its flag word. */
+void FUN_00259294(u32 flags)
 {
-/* irregular: 1 native warning(s); review required */
-  DAT_0043e2a9 = 0;
-  (*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0x14)) = param_1 | (*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0x14));
-  FUN_002c411c(0);
-  return;
+    g_gameDataBlocks.clear = 0;
+    g_gameDataBlocks.flags |= flags;
+    FUN_002c411c(0);
 }
 
-} /* extern "C" */
+}

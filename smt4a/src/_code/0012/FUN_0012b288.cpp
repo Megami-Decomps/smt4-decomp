@@ -14,7 +14,7 @@ extern int FUN_00114614(int);
 /* Supplied declaration required: FUN_002ecac4. */
 extern int FUN_002fb028(int);
 extern int FUN_0030ca92(unsigned int *);
-extern int FUN_00432d8c(int);
+extern int _ZN9Obj55a328D1Ev(int);
 
 
 void FUN_0012b288(unsigned int *param_1)
@@ -30,7 +30,7 @@ void FUN_0012b288(unsigned int *param_1)
   }
   temp_v0 = FUN_0030ca92(param_1 + 0x62);
   temp_v0 = FUN_00114614(temp_v0 - 0x38);
-  temp_v0 = FUN_00432d8c(temp_v0 - 0x40);
+  temp_v0 = _ZN9Obj55a328D1Ev(temp_v0 - 0x40);
   temp_v0 = FUN_002fb028(temp_v0 - 0x78);
   FUN_002ecac4(temp_v0 - 0x98);
   return;

@@ -1,64 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fee78` (_code @ 0x2fee78, 0xc0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
-int scrGetArg(int);
+typedef struct BtlEntry {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x6E];
+    /* 0x072 */ s16 params[16];     /* indexed by the selected kind (7, 10 or 11) */
+    /* 0x092 */ u8 unk092[0x3C];
+    /* 0x0CE */ u16 id;
+    /* 0x0D0 */ u8 unk0D0[0x1B8];
+} BtlEntry; /* 0x288 */
 
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
+typedef struct BtlMainState {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ BtlEntry *entries;
+} BtlMainState;
 
+extern s32 scrGetArg(s32 index);
+extern void scrSetResult(s32 value);
+extern BtlMainState *btlGetMainState(void);
 
-unsigned int FUN_002fee78(void)
-
+/* Script command: result is 1 when a live entry with the given id has the compared parameter
+ * (kind 0, 1 or 2 selects it) equal to the third argument. */
+s32 FUN_002fee78(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v5 = 0;
-  if (temp_v1 == 0) {
-    temp_v5 = 7;
-  }
-  else if (temp_v1 == 1) {
-    temp_v5 = 10;
-  }
-  else if (temp_v1 == 2) {
-    temp_v5 = 0xb;
-  }
-  temp_v1 = scrGetArg(2);
-  temp_v4 = 0;
-  do {
-    temp_v2 = btlGetMainState();
-    puVar4 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288);
-    temp_v3 = *puVar4;
-    if ((temp_v3 & 0x10) != 0 && (temp_v3 & 1) != 0) {
-      temp_v6 = (temp_v3 & 0x40) == 0;
-      if (temp_v6) {
-        temp_v3 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
-      }
-      if ((temp_v6 && temp_v3 == temp_v0) && (*(short *)((int)puVar4 + temp_v5 * 2 + 0x72) == temp_v1)) {
-        scrSetResult(1);
-        return 1;
-      }
+    s32 id = scrGetArg(0);
+    s32 kind = scrGetArg(1);
+    s32 index = 0;
+    s32 value;
+    s32 i;
+
+    if (kind == 0) {
+        index = 7;
+    } else if (kind == 1) {
+        index = 10;
+    } else if (kind == 2) {
+        index = 11;
     }
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
+    value = scrGetArg(2);
+    for (i = 0; i < 0x6d; i++) {
+        BtlEntry *entry = &btlGetMainState()->entries[i];
+
+        if ((entry->flags & 0x10) != 0 && (entry->flags & 1) != 0 && (entry->flags & 0x40) == 0
+            && entry->id == id && entry->params[index] == value) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-  } while( 1 );
+    scrSetResult(0);
+    return 1;
 }
 
 } /* extern "C" */

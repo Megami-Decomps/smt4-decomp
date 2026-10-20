@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00221640(void);
-int FUN_0026aae8(...);
+int dataTable0cLookupById(...);
 int FUN_00288e68(void);
 int FUN_0029212c(...);
 int FUN_0029bd4c(void);
@@ -21,7 +21,7 @@ int FUN_0029e17c(void);
 int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
-int FUN_0029e908(...);
+int objectPartRunUnlessLocked(...);
 int FUN_0029ee6c(...);
 int FUN_002a0cc8(...);
 int FUN_002b7bca(...);
@@ -43,7 +43,7 @@ int FUN_0029efd8(...);
 int FUN_0029f5d8(...);
 int FUN_0029f848(...);
 int buttonHelpSetPreset(...);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 int timerStart(...);
 int FUN_002bee58(...);
 int FUN_002bf818(...);
@@ -62,15 +62,15 @@ extern unsigned char LAB_001cc740; /* 0x1cc740 */
 extern unsigned char LAB_001cca08; /* 0x1cca08 */
 extern unsigned char LAB_001cca0c; /* 0x1cca0c */
 extern int FUN_001f61c4(...); /* 0x1f61c4 */
-extern int FUN_001f625c(...); /* 0x1f625c */
+extern int entryRefCompareByKey(...); /* 0x1f625c */
 extern int FUN_00206d4c(...); /* 0x206d4c */
 extern int FUN_002dc9d4(...); /* 0x2dc9d4 */
 extern int recordCompareByKey(...); /* 0x2dca6c */
-extern int FUN_002e45a8(...); /* 0x2e45a8 */
+extern int devilIdCompareRankOrderId(...); /* 0x2e45a8 */
 extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: FUN_00221640. */
-/* Supplied declaration required: FUN_0026aae8. */
+/* Supplied declaration required: dataTable0cLookupById. */
 extern int FUN_0026ab40(void);
 /* Supplied declaration required: FUN_0026ab64. */
 /* Supplied declaration required: FUN_0026adb4. */
@@ -98,7 +98,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
-/* Supplied declaration required: FUN_0029e908. */
+/* Supplied declaration required: objectPartRunUnlessLocked. */
 extern short FUN_0029e93c(int);
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_0029eb5c. */
@@ -116,7 +116,7 @@ extern int FUN_002a0d0c(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int FUN_002b8ee0(int, unsigned int);
 /* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int FUN_002bc088(void);
 extern unsigned int FUN_002bce30(unsigned int, unsigned int);
 extern unsigned int FUN_002bd068(unsigned int);
@@ -370,7 +370,7 @@ LAB_001cabe4:
           temp_v15 = flaggedEntryGetValueA(temp_v8);
         }
         if (temp_v15 != temp_v6) {
-          FUN_002bc01c(0x100016c);
+          eventQueueAddUniqueIfValid(0x100016c);
         }
         break;
       }
@@ -434,7 +434,7 @@ LAB_001cabe4:
         *(unsigned char *)(temp_v2 + 0x410) = 1;
         temp_v6 = flaggedEntryGetValueA(temp_v15);
         if (temp_v6 == temp_v8) break;
-        FUN_002bc01c(0x100016c);
+        eventQueueAddUniqueIfValid(0x100016c);
       }
       else {
         temp_v6 = 0;
@@ -591,7 +591,7 @@ LAB_001cb104:
         temp_v6 = flaggedEntryGetValueA(temp_v15);
         if (temp_v6 != temp_v8) {
           temp_v7 = 0x100016c;
-          FUN_002bc01c(temp_v7);
+          eventQueueAddUniqueIfValid(temp_v7);
         }
       }
     }
@@ -756,7 +756,7 @@ LAB_001cb104:
         *(unsigned int *)(temp_v6 + 0x404) = temp_v7;
         FUN_002a0cc8(1);
         temp_v7 = 0x100016d;
-        FUN_002bc01c(temp_v7);
+        eventQueueAddUniqueIfValid(temp_v7);
         break;
       }
       temp_v7 = FUN_002bf4f8(0x1a,0x406);
@@ -803,7 +803,7 @@ LAB_001cb104:
         temp_v15 = FUN_002a0d0c();
         if ((*(unsigned char *)(temp_v15 + 0x15) & 0x7f) == 1) {
           if ((char)*(unsigned char *)(temp_v15 + 0x15) < '\0') {
-            FUN_002b7bca(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,FUN_002e45a8);
+            FUN_002b7bca(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,devilIdCompareRankOrderId);
           }
           else {
             FUN_002b7bca(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,FUN_00206d4c);
@@ -824,7 +824,7 @@ LAB_001cb104:
             FUN_002b7bca(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,recordCompareByKey);
           }
           else {
-            FUN_002b7bca(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,FUN_001f625c);
+            FUN_002b7bca(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,entryRefCompareByKey);
           }
         }
         *(unsigned char *)(temp_v2 + 0x410) = 1;
@@ -837,12 +837,12 @@ LAB_001cb104:
       temp_v9 = temp_v2 + 0x223c;
       temp_v6 = FUN_0029efc0();
       temp_v15 = FUN_0029efa8(temp_v9);
-      temp_v8 = FUN_0029e908(temp_v9);
+      temp_v8 = objectPartRunUnlessLocked(temp_v9);
       temp_v10 = FUN_002bf4f8(0x1a,0x406);
       temp_v7 = *(unsigned int *)(temp_v10 + 8);
       temp_v12 = **(unsigned int **)(temp_v10 + 0xc);
       if (((*(char *)(temp_v2 + 0x411) == '\0') && (temp_v10 = FUN_00288498(), temp_v10 != 0)) &&
-         ((temp_v10 = FUN_0029e908(temp_v9), temp_v10 == 0 || (*(short *)(temp_v2 + 0x2232) == 0)))) {
+         ((temp_v10 = objectPartRunUnlessLocked(temp_v9), temp_v10 == 0 || (*(short *)(temp_v2 + 0x2232) == 0)))) {
         temp_v10 = 4;
         FUN_002c1658(4,0);
         if (temp_v10 == 0) goto LAB_001cbaf4;
@@ -851,7 +851,7 @@ LAB_001cb104:
 LAB_001cbaf4:
         if (*(int *)(temp_v2 + 0x428) != 6) {
           if (((*(char *)(temp_v2 + 0x411) == '\0') && (temp_v10 = FUN_00288498(), temp_v10 != 0)) &&
-             ((temp_v10 = FUN_0029e908(temp_v9), temp_v10 == 3 ||
+             ((temp_v10 = objectPartRunUnlessLocked(temp_v9), temp_v10 == 3 ||
               ((int)*(short *)(temp_v2 + 0x2232) == temp_v8 + (temp_v6 + temp_v15) * 4 + 1 ||
                *(short *)(temp_v2 + 0x2232) == 0)))) {
             temp_v6 = 3;
@@ -878,7 +878,7 @@ LAB_001cbbac:
                 *(unsigned int *)(temp_v6 + 0x404) = temp_v7;
                 FUN_002a0cc8(1);
                 temp_v7 = 0x100016d;
-                FUN_002bc01c(temp_v7);
+                eventQueueAddUniqueIfValid(temp_v7);
                 break;
               }
               if ((-1 < *(int *)(temp_v2 + 0x414)) && (0 < *(short *)(temp_v2 + 0x2232))) {
@@ -888,13 +888,13 @@ LAB_001cbbac:
                   temp_v6 = *(int *)(temp_v2 + 0x424);
                 }
                 if (temp_v17 && temp_v6 == 0) {
-                  temp_v6 = FUN_0029e908(temp_v9);
+                  temp_v6 = objectPartRunUnlessLocked(temp_v9);
                   temp_v15 = FUN_0029efa8(temp_v9);
                   flaggedEntrySetValueA(temp_v9,(int)(*(int *)(temp_v2 + 0x414) +
                                            ((unsigned int)(*(int *)(temp_v2 + 0x414) >> 0x1f) >> 0x1e)) >> 2);
                   flaggedEntrySetValueB(temp_v9,*(int *)(temp_v2 + 0x414) % 4);
                   if (*(int *)(temp_v2 + 0x414) != temp_v6 + temp_v15 * 4) {
-                    FUN_002bc01c(0x100016c);
+                    eventQueueAddUniqueIfValid(0x100016c);
                   }
                   *(unsigned char *)(temp_v2 + 0x410) = 1;
                   break;
@@ -907,7 +907,7 @@ LAB_001cbbac:
                 temp_v5 = FUN_0029efa8(temp_v9);
                 *(short *)(temp_v2 + 0x2236) = temp_v5 + temp_v4;
                 temp_v4 = FUN_0029e93c(temp_v9);
-                temp_v5 = FUN_0029e908(temp_v9);
+                temp_v5 = objectPartRunUnlessLocked(temp_v9);
                 *(short *)(temp_v2 + 0x2234) = temp_v5 + temp_v4;
                 *(unsigned char *)(temp_v2 + 0x410) = 1;
               }
@@ -926,7 +926,7 @@ LAB_001cbbac:
           temp_v5 = FUN_0029efa8(temp_v9);
           *(short *)(temp_v2 + 0x2236) = temp_v5 + temp_v4;
           temp_v4 = FUN_0029e93c(temp_v9);
-          temp_v5 = FUN_0029e908(temp_v9);
+          temp_v5 = objectPartRunUnlessLocked(temp_v9);
           *(short *)(temp_v2 + 0x2234) = temp_v5 + temp_v4;
           break;
         }
@@ -936,7 +936,7 @@ LAB_001cbbac:
       temp_v5 = FUN_0029efa8(temp_v9);
       *(short *)(temp_v2 + 0x2236) = temp_v5 + temp_v4;
       temp_v4 = FUN_0029e93c(temp_v9);
-      temp_v5 = FUN_0029e908(temp_v9);
+      temp_v5 = objectPartRunUnlessLocked(temp_v9);
       *(short *)(temp_v2 + 0x2234) = temp_v5 + temp_v4;
     }
     break;
@@ -1010,7 +1010,7 @@ LAB_001cbbac:
         temp_v6 = FUN_0029efc0(temp_v6);
         if (temp_v6 != temp_v15) {
           temp_v7 = 0x100016c;
-          FUN_002bc01c(temp_v7);
+          eventQueueAddUniqueIfValid(temp_v7);
         }
       }
       else {
@@ -1020,7 +1020,7 @@ LAB_001cbbac:
           FUN_0029efc0(temp_v6);
           temp_v8 = FUN_0029efa8(temp_v6);
           if ((temp_v8 != 7) && (temp_v8 = FUN_0029efa8(temp_v6), temp_v8 != 0)) {
-            FUN_002bc01c(0x100016c);
+            eventQueueAddUniqueIfValid(0x100016c);
           }
           temp_v8 = FUN_0029efc0(temp_v6);
           while ((temp_v8 == temp_v15 &&
@@ -1318,7 +1318,7 @@ LAB_001cc6b4:
     }
   }
   if (*(int *)(temp_v2 + 0x400) == 0x13) {
-    temp_v6 = FUN_0029e908();
+    temp_v6 = objectPartRunUnlessLocked();
     temp_v15 = FUN_0029efc0(temp_v2 + 0x223c);
     temp_v8 = FUN_0029efa8(temp_v2 + 0x223c);
     temp_v6 = temp_v2 + (temp_v6 + (temp_v8 + temp_v15) * 4) * 4;
@@ -1330,7 +1330,7 @@ LAB_001cc6b4:
       temp_v14 = (unsigned int)*(unsigned short *)(temp_v6 + 0xe30);
       temp_v11 = temp_v14;
       devilGetRecord(temp_v14,temp_v4);
-      FUN_0026aae8(*(unsigned short *)(temp_v11 + 0x38));
+      dataTable0cLookupById(*(unsigned short *)(temp_v11 + 0x38));
       temp_v7 = FUN_002bd068(temp_v14);
       temp_v12 = FUN_002bce30(temp_v14,0);
       FUN_002be624(temp_v18,&LAB_001cca0c,temp_v12,temp_v7);

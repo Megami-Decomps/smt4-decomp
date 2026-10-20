@@ -53,7 +53,7 @@ extern int FUN_00480960(unsigned int);
 extern unsigned int FUN_0049c760(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0049c7a0. */
 extern unsigned int FUN_0049cad0(unsigned short *);
-extern int FUN_0049cbac(unsigned short, unsigned int);
+extern int btlRollClamped(unsigned short, unsigned int);
 
 
 void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
@@ -181,7 +181,7 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
     }
     if (param_2 != 0 && temp_v8 != 8) {
       temp_v11 = FUN_0049cad0(param_4);
-      temp_v8 = FUN_0049cbac(*param_4,temp_v11);
+      temp_v8 = btlRollClamped(*param_4,temp_v11);
       if (temp_v8 == 0) {
         temp_v15 = 0x787878ff;
         goto LAB_00495f20;
@@ -202,7 +202,7 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
     temp_v15 = -1;
     if (param_2 != 0 && temp_v8 != 8) {
       temp_v11 = FUN_0049cad0(param_4);
-      temp_v8 = FUN_0049cbac(*param_4,temp_v11);
+      temp_v8 = btlRollClamped(*param_4,temp_v11);
       if (temp_v8 == 0) {
         temp_v15 = -0x64646401;
         goto LAB_00495f20;

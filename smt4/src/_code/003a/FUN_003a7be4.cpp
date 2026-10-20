@@ -12,7 +12,7 @@ int FUN_0026c57c(void);
 int FUN_0029ca58(void);
 int FUN_0029cc44(int);
 int FUN_0029ee6c(int, int);
-int FUN_002a0cb0(void);
+int buttonHelpGetMode(void);
 int FUN_002a0cc8(int);
 int buttonHelpSetPreset(void);
 
@@ -48,7 +48,7 @@ extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_0029ca58. */
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002a0cb0. */
+/* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: FUN_002a0cc8. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern unsigned short *FUN_003ad6e0(unsigned short);
@@ -119,7 +119,7 @@ void FUN_003a7be4(int param_1)
       }
       FUN_0022d434(param_1);
     }
-    FUN_002a0cb0();
+    buttonHelpGetMode();
     buttonHelpSetPreset();
     FUN_002a0cc8(0);
     if (*(short *)(param_1 + 0x5a8) < 1) {

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00114504(void);
 int FUN_002ea704(void);
 int onlineTimeGetNow(int *);
-int FUN_002f3490(...);
+int _ZN9Obj558b24D1Ev(...);
 int FUN_002fa434(...);
 int FUN_00300048(void);
 
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eb5f4(void);
 extern unsigned long long FUN_002ecfe4(int);
-/* Supplied declaration required: FUN_002f3490. */
+/* Supplied declaration required: _ZN9Obj558b24D1Ev. */
 /* Supplied declaration required: FUN_002fa434. */
 extern int FUN_002fdb0c(unsigned char *);
 /* Supplied declaration required: FUN_00300048. */
@@ -80,7 +80,7 @@ void FUN_001148a8(int param_1)
       temp_v2 = FUN_002ea704();
       FUN_002fa434(temp_v6,temp_v2);
       temp_v1 = FUN_002fdb0c(temp_v6);
-      FUN_002f3490(temp_v6);
+      _ZN9Obj558b24D1Ev(temp_v6);
       if (temp_v1 != 2) {
         temp_v1 = FUN_002eb5f4();
         *(unsigned char *)(*(int *)(temp_v1 + 0xd0) + 0x11a) = 1;
@@ -111,7 +111,7 @@ void FUN_001148a8(int param_1)
     *(unsigned char *)(*(int *)(temp_v1 + 0xd0) + 0x11a) = 1;
   }
   FUN_00114504();
-  FUN_002f3490(temp_v4);
+  _ZN9Obj558b24D1Ev(temp_v4);
   return;
 }
 

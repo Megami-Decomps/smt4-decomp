@@ -1,48 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00365898` (_code @ 0x365898, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00152f44(void);
-int FUN_00246450(...);
+typedef struct MapIf {
+    /* 0x00 */ u8 unk00[0x1D];
+    /* 0x1D */ u8 active;
+    /* 0x1E */ u8 unk1e[2];
+    /* 0x20 */ u32 arg;
+} MapIf;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
+extern MapIf *g_mapIf; /* 0x58103c */
 
-extern int g_mapIf; /* 0x58103c */
+extern int FUN_00152f44(void);
+extern int FUN_00246450(u32 kind, u32 a, u32 b);
 
-/* Supplied declaration required: FUN_00152f44. */
-/* Supplied declaration required: FUN_00246450. */
-
-
-void FUN_00365898(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Handles a map interface command: marks the interface active and starts the request the command needs. */
+void FUN_00365898(u32 command, u32 a, u32 b)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_mapIf;
-  FUN_00152f44();
-  *(unsigned char *)(temp_v0 + 0x1d) = 1;
-  *(unsigned int *)(temp_v0 + 0x20) = 0;
-  switch(param_1) {
-  default:
-    return;
-  case 7:
-    FUN_00246450(5,0,param_3);
-    return;
-  case 8:
-  case 9:
-  case 0xb:
-    FUN_00246450(6,param_2,param_3);
-    return;
-  case 10:
-    *(unsigned char *)(temp_v0 + 0x1d) = 0;
-    return;
-  }
+    MapIf *mapIf = g_mapIf;
+
+    FUN_00152f44();
+    mapIf->active = 1;
+    mapIf->arg = 0;
+    switch (command) {
+    case 6:
+        break;
+    case 7:
+        FUN_00246450(5, 0, b);
+        break;
+    case 10:
+        mapIf->active = 0;
+        break;
+    case 8:
+    case 9:
+    case 11:
+        FUN_00246450(6, a, b);
+        break;
+    }
 }
 
-} /* extern "C" */
+}

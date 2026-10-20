@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_0031094e(unsigned char [8], int, int *);
 int FUN_00310bd4(int, int *);
 
@@ -18,7 +18,7 @@ typedef struct {
 
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_0031094e. */
 /* Supplied declaration required: FUN_00310bd4. */
 extern int iterNotEqual2(int *, unsigned int *);
@@ -51,10 +51,10 @@ unsigned char FUN_0011e7da(int param_1,unsigned int param_2)
   if (temp_v0 != 0) {
     temp_v5 = temp_v3;
     FUN_0031094e(temp_v6,temp_v1,&temp_v5);
-    FUN_002e6e5c(temp_v2);
+    _ZN9Obj55b28cD1Ev(temp_v2);
   }
   else {
-    FUN_002e6e5c(temp_v2);
+    _ZN9Obj55b28cD1Ev(temp_v2);
   }
   return temp_v0 != 0;
 }

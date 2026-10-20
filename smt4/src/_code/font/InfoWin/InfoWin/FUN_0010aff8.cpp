@@ -8,7 +8,7 @@ int FUN_002bd81c(...);
 int FUN_002bd82c(...);
 int timerStart(...);
 int FUN_002bd954(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int memClear(void);
 int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
@@ -39,7 +39,7 @@ extern unsigned int *g_infoWin; /* 0x43e128 */
 extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -69,7 +69,7 @@ void FUN_0010aff8(void)
   taskCreateDraw(&LAB_0010b200,0xdf,0,0,FUN_0011aef0,0,0,*puVar1);
   puVar1 = g_infoWin;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_infoWin + 9);
-  FUN_002c312c(puVar1 + 9,&DAT_00403a04,0x24,0,0,0,0,0,0,0,0);
+  paramsInit(puVar1 + 9,&DAT_00403a04,0x24,0,0,0,0,0,0,0,0);
   FUN_002bd954(puVar1 + 0x11,0xe,0x87,puVar1 + 9,1);
   timerStart(puVar1 + 0x11,0);
   FUN_002bd954(puVar1 + 0x34,0xe,0x87,puVar1 + 9,1);

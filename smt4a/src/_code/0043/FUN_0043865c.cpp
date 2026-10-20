@@ -1,34 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0043865c` (_code @ 0x43865c, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies the current node to ip (mov ip, r3) and loads its value into r3 afterwards; the build loads the value into ip directly (one instruction fewer). */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_3_stack;
+typedef struct ListNode {
+    /* 0x00 */ struct ListNode *prev;
+    /* 0x04 */ struct ListNode *next;
+    /* 0x08 */ s32 value;
+} ListNode;
 
-
-void FUN_0043865c(int *param_1,int param_2,int *param_3)
-
+/* Searches the circular list `head` for the node whose value equals *key; *found ends on that node, or on `head` when there is none. */
+void FUN_0043865c(ListNode **found, ListNode *head, s32 *key)
 {
-  int temp_v0;
-  
-  *param_1 = 0;
-  temp_v0 = *(int *)(param_2 + 4);
-  *param_1 = temp_v0;
-  if (temp_v0 == param_2) {
-    return;
-  }
-  do {
-    if (*(int *)(temp_v0 + 8) == *param_3) {
-      return;
+    ListNode *node;
+
+    *found = NULL;
+    node = head->next;
+    *found = node;
+    while (node != head) {
+        if (node->value == *key) {
+            return;
+        }
+        node = node->next;
+        *found = node;
     }
-    temp_v0 = *(int *)(temp_v0 + 4);
-    *param_1 = temp_v0;
-  } while (temp_v0 != param_2);
-  return;
 }
 
 } /* extern "C" */

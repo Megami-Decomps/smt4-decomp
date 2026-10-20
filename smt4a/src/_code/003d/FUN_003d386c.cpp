@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysMemClear(unsigned char [4], int);
-int FUN_003341b0(unsigned int);
+int mapBlockSetRequest(unsigned int);
 int __aeabi_idivmod(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -16,13 +16,13 @@ typedef struct {
 extern int g_camp; /* 0x57f108 */
 
 extern int gameGetPlayerData(void);
-extern unsigned int FUN_0019e130(int);
+extern unsigned int markerKindGetColor(int);
 extern int gameGetSlotRecord(int);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
 extern int FUN_002c2c68(int);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003341b0. */
+/* Supplied declaration required: mapBlockSetRequest. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -88,7 +88,7 @@ LAB_003d3940:
           while( 1 ) {
             if ((temp_v7 & (1 << (temp_v3 & 0xff))) != 0) {
               if (*(int *)(temp_v5 + 0x31e4) == temp_v8) {
-                temp_v4 = FUN_0019e130((int)(short)temp_v3);
+                temp_v4 = markerKindGetColor((int)(short)temp_v3);
                 *(unsigned int *)(temp_v5 + 0x3248) = temp_v4;
                 break;
               }
@@ -126,7 +126,7 @@ LAB_003d395c:
     temp_v1 = FUN_002a4894(temp_v0 + 0x1ec);
     temp_v1 = temp_v1 + temp_v2;
   }
-  FUN_003341b0(*(unsigned int *)(temp_v0 + *(int *)(temp_v0 + temp_v1 * 8 + 0x1b74) * 4 + 0x3248));
+  mapBlockSetRequest(*(unsigned int *)(temp_v0 + *(int *)(temp_v0 + temp_v1 * 8 + 0x1b74) * 4 + 0x3248));
   return;
 }
 

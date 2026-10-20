@@ -1,31 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a86dc` (_code @ 0x4a86dc, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int gameGetSlotTable(void);
+typedef struct SlotEntry {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 id;
+    /* 0x64 */ u8 unk64[0xC8];
+} SlotEntry;
 
+typedef struct SlotTable {
+    /* 0x0000 */ u8 unk0000[0x68];
+    /* 0x0068 */ SlotEntry entries[22];
+    /* 0x1A30 */ u8 unk1a30[0x258];
+    /* 0x1C88 */ s8 order[0x1B];  /* entry index per position, negative when empty */
+    /* 0x1CA3 */ u8 count;
+} SlotTable;
 
-int FUN_004a86dc(unsigned int param_1)
+SlotTable *gameGetSlotTable(void);
 
+/* Finds the entry with the given id among the table's ordered entries; NULL when absent. */
+SlotEntry *FUN_004a86dc(u32 id)
 {
-  int temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  
-  temp_v0 = gameGetSlotTable();
-  temp_v1 = 0;
-  if (temp_v1 < *(unsigned char *)(temp_v0 + 0x1ca3)) {
-    do {
-      temp_v2 = (int)*(char *)(temp_v0 + temp_v1 + 0x1c88);
-      if ((-1 < temp_v2) && (temp_v2 = temp_v0 + temp_v2 * 300, *(unsigned short *)(temp_v2 + 0xca) == param_1)) {
-        return temp_v2 + 0x68;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(unsigned char *)(temp_v0 + 0x1ca3));
-  }
-  return 0;
+    SlotTable *table = gameGetSlotTable();
+    u16 i;
+
+    for (i = 0; i < table->count; i++) {
+        s32 index = table->order[i];
+
+        if (index >= 0) {
+            SlotEntry *entry = &table->entries[index];
+
+            if (entry->id == id) {
+                return entry;
+            }
+        }
+    }
+    return NULL;
 }
 
 } /* extern "C" */

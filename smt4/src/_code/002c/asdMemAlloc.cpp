@@ -1,37 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdMemAlloc` (_code @ 0x2c498c, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int rt_memclr(void);
-int asdMemoryAlloc(int, unsigned int, unsigned int, unsigned int, unsigned int);
+extern void nn_os_CriticalSection_Enter(u32 section);
+extern void nn_os_CriticalSection_Leave(u32 section);
 
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_5_stack;
+extern void *asdMemoryAlloc(int heap, u32 a, u32 b, u32 size, u32 c);
+extern void rt_memclr(void *dst, u32 size);
 
-extern unsigned char DAT_00465120; /* 0x465120 */
+typedef struct AsdMemGlobals {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 lock;
+} AsdMemGlobals;
 
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: asdMemoryAlloc. */
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
+extern AsdMemGlobals DAT_00465120; /* 0x465120: allocator state, proposed g_asdMem */
 
-
-int asdMemAlloc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                unsigned int param_5)
-
+/* Allocates a block under the memory lock and zero-fills it. */
+void *asdMemAlloc(int heap, u32 a, u32 b, u32 size, u32 c)
 {
-/* irregular: 2 native warning(s); review required */
-  nn_os_CriticalSection_Enter((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
-  asdMemoryAlloc(param_1,param_2,param_3,param_4,param_5);
-  if (param_1 != 0) {
-    rt_memclr();
-  }
-  nn_os_CriticalSection_Leave((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
-  return param_1;
+    void *block;
+
+    nn_os_CriticalSection_Enter(DAT_00465120.lock);
+    block = asdMemoryAlloc(heap, a, b, size, c);
+    if (block != NULL) {
+        rt_memclr(block, size);
+    }
+    nn_os_CriticalSection_Leave(DAT_00465120.lock);
+    return block;
 }
 
 } /* extern "C" */

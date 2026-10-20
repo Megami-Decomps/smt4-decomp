@@ -1,36 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00421b30` (_code @ 0x421b30, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001568f8(int, int);
-int FUN_003ec620(unsigned int, unsigned int);
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x6A];
+    /* 0x6A */ s16 id;
+    /* 0x6C */ u8 unk6c[4];
+} Entry; /* 0x70 */
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_3_stack;
+typedef struct Object {
+    /* 0x0000 */ u8 unk0000[0xC];
+    /* 0x000C */ u32 slots[1];
+} Object;
 
-/* Supplied declaration required: FUN_001568f8. */
-/* Supplied declaration required: FUN_003ec620. */
-extern int FUN_003ef9e0(int, int);
+typedef struct ObjectBlock {
+    /* 0x0000 */ u8 unk0000[0x1ED4];
+    /* 0x1ED4 */ Entry *entries;
+} ObjectBlock;
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ ObjectBlock *block;
+} Holder;
 
-void FUN_00421b30(int param_1,int param_2,int param_3)
+extern s32 FUN_003ef9e0(ObjectBlock *block, Entry *entry);
+extern Object *FUN_001568f8(ObjectBlock *block, s32 id);
+extern void FUN_003ec620(ObjectBlock *block, u32 value);
 
+void FUN_00421b30(Holder *holder, s32 row, s32 column)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = *(int *)(*(int *)(param_1 + 4) + 0x1ed4) + (param_2 * 0x20 - param_3) * 0x10;
-  temp_v0 = FUN_003ef9e0(*(int *)(param_1 + 4),temp_v2);
-  temp_v1 = *(int *)(param_1 + 4);
-  FUN_001568f8(temp_v1,(int)*(short *)(temp_v2 + 0x6a));
-  FUN_003ec620(*(unsigned int *)(param_1 + 4),*(unsigned int *)(temp_v1 + temp_v0 * 4 + 0xc));
-  return;
+    Entry *entry = (Entry *)((u8 *)holder->block->entries + (row * 0x20 - column) * 0x10);
+    s32 slot = FUN_003ef9e0(holder->block, entry);
+    Object *object = FUN_001568f8(holder->block, entry->id);
+
+    FUN_003ec620(holder->block, object->slots[slot]);
 }
 
 } /* extern "C" */

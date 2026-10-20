@@ -1,4 +1,3 @@
-/* NON_MATCHING: store order only: retail keeps `str r0,[r0]` (head) right after the first zero store; the scheduler moves it next to the tail store here */
 /* Resets the list header to empty: both ends point at the header itself and all counters are zero. */
 #include "common.h"
 

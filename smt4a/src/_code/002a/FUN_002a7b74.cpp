@@ -1,32 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a7b74` (_code @ 0x2a7b74, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Unite {
+    /* 0x000 */ u8 unk000[0x430];
+    /* 0x430 */ u8 active;
+    /* 0x431 */ u8 unk431[0x57];
+    /* 0x488 */ s32 selection;
+} Unite;
+
+extern Unite *g_unite;
+
+s32 FUN_0026272c(void);
 int obj04Finish(void);
 
-extern int g_unite; /* 0x57f290 */
-
-extern int FUN_0026272c(void);
-/* Supplied declaration required: obj04Finish. */
-
-
+/* Finishes the unite screen's object if it is active and FUN_0026272c reports 0, then clears the selection. */
 void FUN_002a7b74(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if (g_unite != 0) {
-    if ((*(char *)(g_unite + 0x430) != '\0') && (temp_v0 = FUN_0026272c(), temp_v0 == 0)) {
-      obj04Finish();
+    Unite *unite = g_unite;
+
+    if (unite != NULL) {
+        if (unite->active != 0 && FUN_0026272c() == 0) {
+            obj04Finish();
+        }
+        unite = g_unite;
+        if (unite != NULL) {
+            unite->selection = -1;
+        }
     }
-    if (g_unite != 0) {
-      *(unsigned int *)(g_unite + 0x488) = 0xffffffff;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

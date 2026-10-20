@@ -9,7 +9,7 @@ PolyGeom *FUN_002b3b58(u32 count, int w, int h, u8 *table, int tableSize);
 void *FUN_002b41c4(PolyTexDesc *desc);
 u32 *FUN_002721e4(PolyTexDesc *desc);
 void rt_memcpy(void *dst, const void *src, int size);
-void FUN_00381830(PolyGeom *geom, u32 *resource);
+void textureSlotReplace(PolyGeom *geom, u32 *resource);
 void *FUN_00221f20(u32 *resource);
 u32 FUN_0037a834(int id);
 void refCountIncrement(u32 texture);
@@ -45,7 +45,7 @@ PolyTexPivotObject *effPolyTexPivotCreate(PolyTexDesc *desc)
             switch (desc->resourceType) {
             case 1:
             case 9:
-                FUN_00381830(obj->geom, resource);
+                textureSlotReplace(obj->geom, resource);
                 break;
             case 2:
                 obj->resource2 = FUN_00221f20(resource);

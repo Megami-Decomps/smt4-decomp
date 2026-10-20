@@ -15,7 +15,7 @@ int FUN_00273358(...);
 int FUN_00276238(void);
 int gameFlagSetValue(int, int);
 int FUN_002897f0(int, unsigned char *);
-int FUN_0028dc68(int);
+int messageSlotSet(int);
 int FUN_00291e40(int);
 int scrScriptProcessStartEntry(...);
 int FUN_00297060(...);
@@ -74,7 +74,7 @@ extern int FUN_002762e0(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_002897f0. */
-/* Supplied declaration required: FUN_0028dc68. */
+/* Supplied declaration required: messageSlotSet. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00291e40. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -176,7 +176,7 @@ unsigned int FUN_001e553c(void)
         if (*(int *)(temp_v2 + 100) != 0) {
           gameFlagSetValue(*(int *)(temp_v2 + 100),1);
         }
-        FUN_0028dc68(0);
+        messageSlotSet(0);
         scrScriptProcessDestroy(*(unsigned int *)(temp_v2 + 0x60));
         asdMemFree(*(unsigned int *)(temp_v2 + 0x58));
         asdMemFree(*(unsigned int *)(temp_v2 + 0x5c));

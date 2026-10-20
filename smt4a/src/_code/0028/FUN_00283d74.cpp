@@ -9,7 +9,7 @@ int FUN_0022838c(...);
 int FUN_00284fdc(...);
 int FUN_002a4aa4(...);
 int sysMemClear(...);
-int FUN_0031d1fc(...);
+int gameDataBlocksClearSlots(...);
 int FUN_00353b00(...);
 int FUN_003df7c4(...);
 int FUN_003e45bc(...);
@@ -40,7 +40,7 @@ extern unsigned int gameDataGetPlayerName(void);
 /* Supplied declaration required: FUN_00284fdc. */
 /* Supplied declaration required: FUN_002a4aa4. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0031d1fc. */
+/* Supplied declaration required: gameDataBlocksClearSlots. */
 /* Supplied declaration required: FUN_00353b00. */
 /* Supplied declaration required: FUN_003df7c4. */
 /* Supplied declaration required: FUN_003e45bc. */
@@ -100,7 +100,7 @@ void FUN_00283d74(int param_1)
     psVar2[0x15] = psVar2[0xe];
     psVar2[0x16] = psVar2[0xf];
     FUN_00284fdc();
-    FUN_0031d1fc();
+    gameDataBlocksClearSlots();
     temp_v0 = gameDataGetPlayerName();
     FUN_00100388(temp_v0,"沂覂讂膂蒂辂㴀먀ഀꄃᤁ鄂锂＂ÿ");
     flagValueAdd(0x33f,1);

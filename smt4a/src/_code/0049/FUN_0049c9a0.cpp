@@ -1,65 +1,81 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049c9a0` (_code @ 0x49c9a0, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00192550(void);
-int FUN_00192608(void);
-int FUN_00480838(void);
-int FUN_00480d20(void);
+typedef struct RecordA {
+    /* 0x00 */ u8 unk00[0x43];
+    /* 0x43 */ u8 value;
+} RecordA;
 
-/* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_00192608. */
-extern unsigned int FUN_0019271c(unsigned int);
-/* Supplied declaration required: FUN_00480838. */
-/* Supplied declaration required: FUN_00480d20. */
+typedef struct RecordB {
+    /* 0x00 */ u8 unk00[0x70];
+    /* 0x70 */ u16 value;
+} RecordB;
 
+typedef struct RecordC {
+    /* 0x00 */ u8 unk00[0x26];
+    /* 0x26 */ u16 value;
+} RecordC;
 
-unsigned short FUN_0049c9a0(unsigned short *param_1)
+typedef struct RecordD {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ u16 value;
+} RecordD;
 
+extern u32 FUN_0019271c(u32 id);
+extern RecordA *FUN_00192550(u32 id);
+extern RecordB *FUN_00192608(u32 id);
+extern RecordC *aocRecordLookup83(u32 id);
+extern RecordD *aocRecordLookup84(u32 id);
+
+/* Looks the id up in the table its kind selects and returns that record's value; 0 if none. */
+u16 FUN_0049c9a0(const u16 *idPtr)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v1 = 0;
-  temp_v2 = (unsigned int)*param_1;
-  temp_v0 = FUN_0019271c(temp_v2);
-  switch(temp_v0) {
-  case 1:
-  case 0xc:
-    FUN_00192550();
-    if (temp_v2 != 0) {
-      temp_v1 = (unsigned short)*(unsigned char *)(temp_v2 + 0x43);
+    u16 value = 0;
+    u32 id = *idPtr;
+
+    switch (FUN_0019271c(id)) {
+    case 1:
+    case 12: {
+        RecordA *record = FUN_00192550(id);
+
+        if (record != NULL) {
+            value = record->value;
+        }
+        break;
     }
-    break;
-  case 2:
-  case 3:
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-  case 8:
-    FUN_00192608();
-    if (temp_v2 != 0) {
-      temp_v1 = *(unsigned short *)(temp_v2 + 0x70);
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8: {
+        RecordB *record = FUN_00192608(id);
+
+        if (record != NULL) {
+            value = record->value;
+        }
+        break;
     }
-    break;
-  case 9:
-    FUN_00480838();
-    if (temp_v2 != 0) {
-      temp_v1 = *(unsigned short *)(temp_v2 + 0x26);
+    case 9: {
+        RecordC *record = aocRecordLookup83(id);
+
+        if (record != NULL) {
+            value = record->value;
+        }
+        break;
     }
-    break;
-  case 10:
-    FUN_00480d20();
-    if (temp_v2 != 0) {
-      temp_v1 = *(unsigned short *)(temp_v2 + 0x28);
+    case 10: {
+        RecordD *record = aocRecordLookup84(id);
+
+        if (record != NULL) {
+            value = record->value;
+        }
+        break;
     }
-  }
-  return temp_v1;
+    }
+    return value;
 }
 
 } /* extern "C" */

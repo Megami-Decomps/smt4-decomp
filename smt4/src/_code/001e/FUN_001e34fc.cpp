@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001e33e4(void);
 int FUN_0021e16c(void);
-int FUN_0025beb8(unsigned int, int);
+int nodeSetScale(unsigned int, int);
 int FUN_0025bed8(...);
 int FUN_00266f30(void);
 int FUN_002a0428(int, int);
@@ -25,7 +25,7 @@ extern int *DAT_00447e58; /* 0x447e58 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001e33e4. */
 /* Supplied declaration required: FUN_0021e16c. */
-/* Supplied declaration required: FUN_0025beb8. */
+/* Supplied declaration required: nodeSetScale. */
 /* Supplied declaration required: FUN_0025bed8. */
 /* Supplied declaration required: FUN_00266f30. */
 extern int asdMdlManagerClone(int, unsigned int);
@@ -79,7 +79,7 @@ unsigned int FUN_001e34fc(int param_1,unsigned int param_2,int param_3)
           FUN_00266f30();
           FUN_002fb4a4();
           if (*(char *)(temp_v3 + 0x33) == '\x13') {
-            FUN_0025beb8(*(unsigned int *)(piVar9[temp_v4 * 0xe + 0xf] + 8),0);
+            nodeSetScale(*(unsigned int *)(piVar9[temp_v4 * 0xe + 0xf] + 8),0);
           }
           *(unsigned char *)piVar10 = 1;
           temp_v0 = *(short *)(temp_v3 + 0x28);

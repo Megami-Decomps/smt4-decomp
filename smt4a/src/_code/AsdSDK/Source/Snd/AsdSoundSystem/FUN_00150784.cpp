@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern unsigned char DAT_0063e1e8; /* 0x63e1e8 */
+extern unsigned char g_asdSoundSystem; /* 0x63e1e8 */
 extern unsigned char DAT_0063e37c; /* 0x63e37c */
 extern unsigned char DAT_0063e494; /* 0x63e494 */
 extern int DAT_0063e6b8; /* 0x63e6b8 */
@@ -64,7 +64,7 @@ void FUN_00150784(void)
   int temp_v3;
   int *piVar6;
   
-  temp_v0 = nw_snd_SoundArchive_IsAvailable(&DAT_0063e1e8);
+  temp_v0 = nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem);
   temp_v3 = DAT_0063f500;
   if (temp_v0 != 0) {
     if (DAT_0063f500 != 0) {
@@ -140,7 +140,7 @@ void FUN_00150784(void)
     DAT_0063e6cc = 0;
     FUN_00173c1c(&DAT_0063e494);
     FUN_00173c7c(&DAT_0063e37c);
-    FUN_0018feac(&DAT_0063e1e8);
+    FUN_0018feac(&g_asdSoundSystem);
     if (DAT_0063e6b8 != 0) {
       asdMemFree();
     }

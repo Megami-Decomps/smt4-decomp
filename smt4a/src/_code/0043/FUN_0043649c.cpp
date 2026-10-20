@@ -1,42 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0043649c` (_code @ 0x43649c, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction scheduling only: retail loads the key into r2, forms `mov r1, sp` before `add r0, r0, #8` and stores the key last; built loads into r1, adds first and sets r1 after the store. */
+#include "common.h"
 
 extern "C" {
 
-int variantSetPlain(int, int *);
-int FUN_00515618(int *, int);
+typedef struct ListNode ListNode;
 
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
+struct ListNode {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ ListNode *next;
+};
 
-/* Supplied declaration required: variantSetPlain. */
-/* Supplied declaration required: FUN_00515618. */
+typedef struct ListIter {
+    /* 0x0 */ ListNode *node;
+} ListIter;
 
+typedef struct Variant Variant;
 
-unsigned int FUN_0043649c(int *param_1,unsigned int *param_2,unsigned int *param_3,int *param_4)
+typedef struct Slot {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ u8 variant[1];
+} Slot;
 
+s32 FUN_00515618(Slot **slot, u8 *owner);
+s32 variantSetPlain(u8 *variant, u32 *value);
+
+/* Adds the key to the owner's next free slot and advances the iterator; returns 2 when no slot can be made, else 0. */
+u32 FUN_0043649c(ListIter *iter, u32 *outKey, u32 *key, u8 **owner)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  FUN_00515618(&temp_v2,*param_4 + 8);
-  if (temp_v2 == 0) {
-    temp_v0 = 2;
-  }
-  else {
-    temp_v1 = *param_3;
-    variantSetPlain(temp_v2 + 8,&temp_v1);
-    *param_2 = *param_3;
-    *param_1 = *(int *)(*param_1 + 4);
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    u32 value;
+    Slot *slot;
+
+    FUN_00515618(&slot, *owner + 8);
+    if (slot == NULL) {
+        return 2;
+    }
+    value = *key;
+    variantSetPlain(slot->variant, &value);
+    *outKey = *key;
+    iter->node = iter->node->next;
+    return 0;
 }
 
 } /* extern "C" */

@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_00294450(unsigned int, unsigned int);
-int FUN_002947c0(unsigned int, int);
+int playerModelListCreate(unsigned int, int);
 int FUN_00343c58(unsigned int, unsigned int, unsigned int);
 
 extern int g_lmapScene; /* 0x447e88 */
 
 /* Supplied declaration required: FUN_00294450. */
-/* Supplied declaration required: FUN_002947c0. */
+/* Supplied declaration required: playerModelListCreate. */
 /* Supplied declaration required: FUN_00343c58. */
 
 
@@ -21,7 +21,7 @@ void FUN_001b491c(void)
 /* irregular: 3 native warning(s); review required */
   unsigned int temp_v0;
   
-  FUN_002947c0(*(unsigned int *)(g_lmapScene + 0x194),0x1c0);
+  playerModelListCreate(*(unsigned int *)(g_lmapScene + 0x194),0x1c0);
   temp_v0 = 0;
   if (*(char *)(g_lmapScene + 0x198) == '\0') {
     do {

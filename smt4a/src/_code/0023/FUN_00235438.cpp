@@ -12,7 +12,7 @@ int FUN_00295108(...);
 int FUN_002c7b8c(...);
 int rt_aeabi_memclr(unsigned short [300], int);
 int FUN_00365898(...);
-int FUN_00365920(...);
+int mapIfStartTransition(...);
 int FUN_003deea4(...);
 int FUN_003df43c(...);
 int FUN_00417b70(...);
@@ -42,7 +42,7 @@ extern signed char DAT_005f1aca; /* 0x5f1aca */
 
 extern int gameFlagsGetBlock(void);
 extern int gameGetPlayerData(void);
-extern int FUN_0019f1a4(unsigned int, unsigned int);
+extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_001ada74. */
 extern int FUN_001bd100(unsigned int);
@@ -54,9 +54,9 @@ extern int FUN_002c2758(unsigned short);
 /* Supplied declaration required: FUN_002c7b8c. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_00365898. */
-/* Supplied declaration required: FUN_00365920. */
+/* Supplied declaration required: mapIfStartTransition. */
 extern int dataTable2FType1GetEntry(int);
-extern int FUN_003de830(unsigned int);
+extern int recordIsAvailable(unsigned int);
 extern int FUN_003de92c(unsigned short);
 extern int FUN_003dedf0(unsigned int);
 /* Supplied declaration required: FUN_003deea4. */
@@ -141,7 +141,7 @@ int FUN_00235438(void)
             if (temp_v17 == 5 || temp_v17 == 6) goto LAB_002359c4;
             temp_v3 = partyEntryBitsBit1(temp_v10);
             if (temp_v3 != 0) {
-              temp_v3 = FUN_003de830(temp_v10);
+              temp_v3 = recordIsAvailable(temp_v10);
               if (temp_v3 != 0) {
                 temp_v9 = 0;
                 temp_v3 = 0;
@@ -199,11 +199,11 @@ int FUN_00235438(void)
                         temp_v7 = temp_v22 & 0xffff;
                         temp_v6 = 3;
                       }
-                      FUN_00365920(temp_v6,temp_v7,temp_v11);
+                      mapIfStartTransition(temp_v6,temp_v7,temp_v11);
                     }
                     else {
                       temp_v6 = 0;
-                      FUN_00365920(temp_v6,temp_v1,0);
+                      mapIfStartTransition(temp_v6,temp_v1,0);
                       temp_v17 = 2;
                     }
                   }
@@ -211,11 +211,11 @@ int FUN_00235438(void)
                     temp_v11 = temp_v23 & 0xffff;
                     temp_v7 = temp_v22 & 0xffff;
                     temp_v6 = 5;
-                    FUN_00365920(temp_v6,temp_v7,temp_v11);
+                    mapIfStartTransition(temp_v6,temp_v7,temp_v11);
                   }
                   else {
                     temp_v6 = 4;
-                    FUN_00365920(temp_v6,temp_v1,0);
+                    mapIfStartTransition(temp_v6,temp_v1,0);
                     temp_v17 = 2;
                   }
                 }
@@ -316,7 +316,7 @@ LAB_002358f0:
           }
           temp_v2 = gameGetPlayerData();
           temp_v1 = *(unsigned short *)(temp_v2 + 0x62);
-          temp_v2 = FUN_0019f1a4(temp_v10,0);
+          temp_v2 = gameFlagEntryGetBit(temp_v10,0);
           if ((temp_v2 == 0) && (temp_v7 = temp_v10, FUN_001ad9b4(), temp_v7 != 0)) {
             temp_v7 = (unsigned int)*(short *)(temp_v7 + 0x120);
             temp_v12 = temp_v7 == temp_v1;

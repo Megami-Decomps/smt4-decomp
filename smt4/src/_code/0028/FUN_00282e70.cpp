@@ -6,7 +6,7 @@ extern "C" {
 
 extern int g_partyPanel; /* 0x43dcf0 */
 
-extern int FUN_0029e908(int);
+extern int objectPartRunUnlessLocked(int);
 extern int FUN_0029efa8(void);
 
 
@@ -42,7 +42,7 @@ unsigned int FUN_00282e70(unsigned int param_1,unsigned int param_2,int param_3)
       if (temp_v0 != 0) {
         return 0;
       }
-      temp_v1 = FUN_0029e908(temp_v1);
+      temp_v1 = objectPartRunUnlessLocked(temp_v1);
     }
     else {
       temp_v1 = g_partyPanel + 0xa08;
@@ -50,7 +50,7 @@ unsigned int FUN_00282e70(unsigned int param_1,unsigned int param_2,int param_3)
       if (temp_v0 != 0) {
         return 0;
       }
-      temp_v1 = FUN_0029e908(temp_v1);
+      temp_v1 = objectPartRunUnlessLocked(temp_v1);
     }
   }
   else {
@@ -59,7 +59,7 @@ unsigned int FUN_00282e70(unsigned int param_1,unsigned int param_2,int param_3)
     if (temp_v0 != 0) {
       return 0;
     }
-    temp_v1 = FUN_0029e908(temp_v1);
+    temp_v1 = objectPartRunUnlessLocked(temp_v1);
   }
   if (temp_v1 == 0) {
     return 1;

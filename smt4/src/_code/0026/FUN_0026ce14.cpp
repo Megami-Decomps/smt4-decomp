@@ -15,7 +15,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_00293268. */
 /* Supplied declaration required: FUN_002932d8. */
 /* Supplied declaration required: FUN_002937e0. */
-extern int FUN_0029e908(int);
+extern int objectPartRunUnlessLocked(int);
 extern unsigned int FUN_0029e958(int);
 extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
@@ -57,7 +57,7 @@ unsigned int FUN_0026ce14(int param_1,int param_2)
   if (*(int *)(temp_v3 + 0x30) < 2) {
     return 0;
   }
-  if ((param_2 != 0) || (temp_v3 = FUN_0029e908(param_1), temp_v3 == 0)) {
+  if ((param_2 != 0) || (temp_v3 = objectPartRunUnlessLocked(param_1), temp_v3 == 0)) {
     temp_v3 = 4;
     FUN_002c1658(4,1);
     if (temp_v3 != 0) {
@@ -69,7 +69,7 @@ unsigned int FUN_0026ce14(int param_1,int param_2)
   }
   else {
 LAB_0026cf00:
-    temp_v3 = FUN_0029e908(param_1);
+    temp_v3 = objectPartRunUnlessLocked(param_1);
     if (temp_v3 != temp_v6) {
       return 0;
     }

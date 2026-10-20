@@ -26,7 +26,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-extern unsigned char FUN_0022e0b0(int);
+extern unsigned char gaugePercent(int);
 /* Supplied declaration required: FUN_0022e0fc. */
 /* Supplied declaration required: FUN_0022e158. */
 /* Supplied declaration required: FUN_0022e2fc. */
@@ -116,7 +116,7 @@ void FUN_003aaeb0(int param_1)
   (**(romwright_code **)(**(int **)(param_1 + 0x590) + 8))(*(int **)(param_1 + 0x590),param_1 + 0x20);
   puVar7 = (unsigned short *)(*(int *)(param_1 + 0x590) + 4);
   *puVar7 = *puVar7 | 0x1000;
-  temp_v1 = FUN_0022e0b0(temp_v2);
+  temp_v1 = gaugePercent(temp_v2);
   *(unsigned char *)(param_1 + 0x94) = temp_v1;
   jyoucyuGetTableEntry(0);
   jyoucyuGetTableEntry(0);

@@ -11,7 +11,7 @@ int timerStart(int, int);
 int FUN_002bd954(int, int, int, int, int);
 int dataTableGetCount(...);
 int dataTableGetEntries(void);
-int FUN_002c312c(int, unsigned char *, int, int, int, int, int, int, int, int, int);
+int paramsInit(int, unsigned char *, int, int, int, int, int, int, int, int, int);
 int memClear(void);
 int asdMemAlloc(int, int, int, int, int);
 int asdTMTexTableLoadSprites(int);
@@ -41,7 +41,7 @@ extern int FUN_002907a8(void);
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
@@ -73,7 +73,7 @@ void FUN_00194ec8(void)
   asdTMTexTableLoadEntryAsync(0x30,0);
   fileSlotLoad(0x37);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(temp_v0);
-  FUN_002c312c(temp_v0,&DAT_00402d04,0x18,0,0,0,0,0,0,0,0);
+  paramsInit(temp_v0,&DAT_00402d04,0x18,0,0,0,0,0,0,0,0);
   temp_v4 = 0;
   do {
     temp_v6 = temp_v0 + temp_v4 * 0x8c;

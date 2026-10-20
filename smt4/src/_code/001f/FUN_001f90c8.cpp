@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0025663c(void);
+int dataTable29GetEntryWithAoc(void);
 int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0025663c. */
+/* Supplied declaration required: dataTable29GetEntryWithAoc. */
 
 
 void FUN_001f90c8(int param_1,int *param_2)
@@ -25,7 +25,7 @@ void FUN_001f90c8(int param_1,int *param_2)
   unsigned int temp_v6;
   
   temp_v4 = *param_2;
-  FUN_0025663c();
+  dataTable29GetEntryWithAoc();
   temp_v1 = 0;
   do {
     temp_v0 = temp_v4 + temp_v1 * 0x180;

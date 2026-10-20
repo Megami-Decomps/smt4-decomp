@@ -1,53 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023fae0` (_code @ 0x23fae0, 0xa4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_2_stack;
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 flags;
+    /* 0x54 */ u32 flags2;
+    /* 0x58 */ u8 unk58[0x114 - 0x58];
+} Entry; /* 0x114 */
 
+typedef struct EntryOwner {
+    /* 0x0000 */ u8 unk0000[0x1E98];
+    /* 0x1E98 */ Entry *entries;
+} EntryOwner;
 
-unsigned int FUN_0023fae0(int param_1,int param_2)
-
+/* Returns 0 if any entry of the given group (0-3, each a range of the table) is in the state
+ * flags & 0x81 == 0x81 with neither flag 2 nor flags2 bit 4 set; 1 otherwise. */
+u32 FUN_0023fae0(EntryOwner *owner, s32 group)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v1 = 0;
-  temp_v2 = 0;
-  if (param_2 == 0) {
-    temp_v2 = 4;
-  }
-  else if (param_2 == 1) {
-    temp_v1 = 4;
-    temp_v2 = 0x32;
-  }
-  else if (param_2 == 2) {
-    temp_v1 = 0x36;
-    temp_v2 = 1;
-  }
-  else if (param_2 == 3) {
-    temp_v1 = 0x43;
-    temp_v2 = 0x2a;
-  }
-  temp_v2 = temp_v2 + temp_v1;
-  if (temp_v2 > (int)temp_v1) {
-    do {
-      temp_v3 = *(int *)(param_1 + 0x1e98) + temp_v1 * 0x114;
-      temp_v0 = *(unsigned int *)(temp_v3 + 0x50);
-      if ((((temp_v0 & 1) != 0 && (temp_v0 & 0x80) != 0) && ((temp_v0 & 2) == 0)) &&
-         ((*(unsigned int *)(temp_v3 + 0x54) & 4) == 0)) {
-        return 0;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while ((int)temp_v1 < temp_v2);
-  }
-  return 1;
+    s32 first = 0;
+    s32 count = 0;
+    s32 i;
+
+    if (group == 0) {
+        count = 4;
+    } else if (group == 1) {
+        first = 4;
+        count = 0x32;
+    } else if (group == 2) {
+        first = 0x36;
+        count = 1;
+    } else if (group == 3) {
+        first = 0x43;
+        count = 0x2a;
+    }
+    for (i = first; i < first + count; i++) {
+        Entry *entry = &owner->entries[i];
+
+        if ((entry->flags & 1) != 0 && (entry->flags & 0x80) != 0 && (entry->flags & 2) == 0 && (entry->flags2 & 4) == 0) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 } /* extern "C" */

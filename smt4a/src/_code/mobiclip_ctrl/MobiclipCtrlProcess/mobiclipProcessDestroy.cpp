@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0013a618(int arg);
+int asdGxPresetRequest(int arg);
 int asdMemFree(void *ptr);               /* heap free */
 int FUN_001ad6d8(void);
 int asdOperatorDeleteB(u32 movie);
@@ -21,7 +21,7 @@ void mobiclipProcessDestroy(u32 arg)
     work = jobGetWork(arg);
     if (work->unk79 != 0) {
         work->unk79 = 0;
-        FUN_0013a618(1);
+        asdGxPresetRequest(1);
     }
     if (work->movie != 0) {
         asdOperatorDeleteB(work->movie);

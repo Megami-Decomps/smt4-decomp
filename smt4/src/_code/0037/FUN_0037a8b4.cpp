@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00235c70(int, int);
 int FUN_002af3b4(int, int, unsigned int, int, int);
-int FUN_002c5d5c(unsigned char [32], unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned char [32], unsigned char *, int, int);
 int FUN_0037b61c(int, unsigned int, unsigned int);
 int FUN_0037be24(...);
 
@@ -22,7 +22,7 @@ extern unsigned char LAB_0014c240; /* 0x14c240 */
 
 /* Supplied declaration required: FUN_00235c70. */
 /* Supplied declaration required: FUN_002af3b4. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_0037b61c. */
 /* Supplied declaration required: FUN_0037be24. */
 
@@ -56,7 +56,7 @@ void FUN_0037a8b4(int param_1)
     FUN_00235c70(temp_v0,temp_v3);
     *(int *)(param_1 + 0x38) = temp_v0;
   }
-  FUN_002c5d5c(temp_v5,&LAB_0014c240,8,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v5,&LAB_0014c240,8,4);
   temp_v4 = 0;
   puVar11 = (unsigned int *)&temp_v6;
   temp_v6 = 0;

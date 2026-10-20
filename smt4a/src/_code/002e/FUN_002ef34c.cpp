@@ -15,7 +15,7 @@ int FUN_002eb17c(...);
 int FUN_002eb188(...);
 int onlineTimeGetNow(int *);
 int FUN_002eee90(int, int, int, int);
-int FUN_002eefc4(int, int);
+int onlineEntryApply(int, int);
 int FUN_002ef00c(...);
 
 /* stack frame of param_3: 7 slot(s), 26 byte(s) */
@@ -46,7 +46,7 @@ extern int FUN_002eb6ae(int, unsigned int);
 extern int FUN_002eed8c(int);
 extern int *arrayElementAddress_002eee88(int, unsigned char);
 /* Supplied declaration required: FUN_002eee90. */
-/* Supplied declaration required: FUN_002eefc4. */
+/* Supplied declaration required: onlineEntryApply. */
 /* Supplied declaration required: FUN_002ef00c. */
 extern int FUN_002ef01c(unsigned int);
 
@@ -117,7 +117,7 @@ void FUN_002ef34c(unsigned int param_1,int param_2,int param_3)
       }
     }
     FUN_002eee90(temp_v2,param_3,*(unsigned char *)(*(int *)(param_2 + 4) + 4),1);
-    FUN_002eefc4(param_2,*(unsigned char *)(param_3 + 0x84));
+    onlineEntryApply(param_2,*(unsigned char *)(param_3 + 0x84));
   }
   else {
     *(int *)(param_2 + 0x294) = *(int *)(param_2 + 0x294) + 1;

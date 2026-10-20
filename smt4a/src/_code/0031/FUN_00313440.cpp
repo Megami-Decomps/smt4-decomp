@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0018a924(unsigned char [4], unsigned char [36]);
 int FUN_003534b0(int, int, unsigned char *, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
-int FUN_003980ec(void);
+int saveSlotInfoSet(void);
 
 /* stack frame of void: 15 slot(s), 60 byte(s) */
 typedef struct {
@@ -32,7 +32,7 @@ extern int g_mapObj; /* 0x581284 */
 
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: FUN_003534b0. */
-/* Supplied declaration required: FUN_003980ec. */
+/* Supplied declaration required: saveSlotInfoSet. */
 
 
 void FUN_00313440(void)
@@ -55,7 +55,7 @@ void FUN_00313440(void)
       FUN_003534b0(0,0,&LAB_00313588,0x1e,0xc,*(int *)(temp_v1 + 0x58) + 0x1000,0,0,0,0,0,0,0,0,1,0,0,
                    0,0);
       if (*(char *)(temp_v1 + 0x40) != '\0') {
-        FUN_003980ec();
+        saveSlotInfoSet();
       }
     }
     temp_v2 = temp_v2 + 1;

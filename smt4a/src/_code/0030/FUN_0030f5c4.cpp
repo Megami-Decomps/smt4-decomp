@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(int *, unsigned char *);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int FUN_002eb56c(void);
 int FUN_002ecef0(void);
 int FUN_002ecf40(void);
@@ -16,7 +16,7 @@ extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002eb56c. */
 /* Supplied declaration required: FUN_002ecef0. */
 /* Supplied declaration required: FUN_002ecf40. */
@@ -44,12 +44,12 @@ void FUN_0030f5c4(unsigned int param_1,unsigned int param_2,unsigned int param_3
   if ((((temp_v0 != 0) && (temp_v0 = FUN_002e6e26(), temp_v0 != 0)) &&
       (temp_v1 = FUN_0030f78c(), temp_v1 == 0)) && (temp_v1 = FUN_0030f78c(temp_v0), temp_v1 == 0)) {
     FUN_002ecef0();
-    FUN_002e6e5c(&uStack_18);
+    _ZN9Obj55b28cD1Ev(&uStack_18);
     FUN_0030f69c(temp_v0,param_1,0);
     FUN_002ecf40();
     return;
   }
-  FUN_002e6e5c(&uStack_18);
+  _ZN9Obj55b28cD1Ev(&uStack_18);
   return;
 }
 

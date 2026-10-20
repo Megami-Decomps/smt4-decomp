@@ -1,68 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e6dc8` (_code @ 0x3e6dc8, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the early exits share one return path and the constant 1 is kept in r5 across the calls; retail returns r0 as left by the failed test (two exits) and rebuilds the constant 1 before the last store */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00275bc8(int, unsigned int);
-int scrScriptProcessStartEntry(unsigned int, int);
-int FUN_00290ba4(unsigned int);
-int objectJobStop(unsigned int);
-int holderStopJob2(unsigned int);
-int btlTalkBustUpDestroy(void);
-int FUN_003d9164(void);
-int FUN_003f14a0(void);
+typedef struct ScriptProcess {
+    /* 0x000 */ u8 unk000[0x108];
+    /* 0x108 */ u32 unk108;
+} ScriptProcess;
 
-extern int g_btlCamera; /* 0x571508 */
+typedef struct TalkEvent {
+    /* 0x00 */ u32 state;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ s32 running;
+    /* 0x10 */ u32 owner;
+    /* 0x14 */ ScriptProcess *process;
+    /* 0x18 */ u32 script;
+} TalkEvent;
 
-extern int FUN_0013def0(unsigned int);
-extern unsigned int btlGetMainState(void);
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00290ba4. */
-/* Supplied declaration required: objectJobStop. */
-/* Supplied declaration required: holderStopJob2. */
-/* Supplied declaration required: btlTalkBustUpDestroy. */
-/* Supplied declaration required: FUN_003d9164. */
-/* Supplied declaration required: FUN_003f14a0. */
+extern s32 g_btlCamera;
 
+extern s32 FUN_0013def0(s32 arg);
+extern u32 btlGetMainState(void);
+extern void FUN_003f14a0(void);
+extern void btlTalkBustUpDestroy(void);
+extern void holderStopJob2(u32 state);
+extern void objectJobStop(u32 state);
+extern void FUN_00290ba4(u32 state);
+extern void FUN_003d9164(void);
+extern ScriptProcess *FUN_00275bc8(u32 owner, u32 script);
+extern void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 
-int FUN_003e6dc8(unsigned int *param_1)
-
+/* Starts the talk event's script process once both FUN_0013def0 checks report 3, after shutting
+ * down the battle state. Always returns 0. */
+s32 FUN_003e6dc8(TalkEvent *event)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = 0;
-  if (param_1[4] != 0) {
-    temp_v0 = param_1[6];
-  }
-  if (param_1[4] != 0 && temp_v0 != 0) {
-    temp_v0 = FUN_0013def0(0);
-    if ((temp_v0 == 3) && (temp_v0 = FUN_0013def0(1), temp_v0 == 3)) {
-      temp_v1 = btlGetMainState();
-      FUN_003f14a0();
-      btlTalkBustUpDestroy();
-      holderStopJob2(temp_v1);
-      objectJobStop(temp_v1);
-      FUN_00290ba4(temp_v1);
-      if (g_btlCamera != 0) {
-        FUN_003d9164();
-      }
-      param_1[3] = 0;
-      *param_1 = 6;
-      temp_v0 = param_1[4];
-      FUN_00275bc8(temp_v0,param_1[6]);
-      param_1[5] = temp_v0;
-      *(unsigned int *)(temp_v0 + 0x108) = 1;
-      scrScriptProcessStartEntry(param_1[5],0);
-      scrScriptProcessStartEntry(param_1[5],4);
-      param_1[3] = 1;
+    if (event->owner != 0 && event->script != 0) {
+        if (FUN_0013def0(0) == 3 && FUN_0013def0(1) == 3) {
+            u32 state = btlGetMainState();
+
+            FUN_003f14a0();
+            btlTalkBustUpDestroy();
+            holderStopJob2(state);
+            objectJobStop(state);
+            FUN_00290ba4(state);
+            if (g_btlCamera != 0) {
+                FUN_003d9164();
+            }
+            event->state = 6;
+            event->running = 0;
+            event->process = FUN_00275bc8(event->owner, event->script);
+            event->process->unk108 = 1;
+            scrScriptProcessStartEntry(event->process, 0);
+            scrScriptProcessStartEntry(event->process, 4);
+            event->running = 1;
+        }
     }
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    return 0;
 }
 
 } /* extern "C" */

@@ -21,7 +21,7 @@ extern int FUN_003832fc(...); /* 0x3832fc */
 extern int FUN_0038358c(...); /* 0x38358c */
 extern int FUN_003846e8(...); /* 0x3846e8 */
 extern int FUN_00384800(...); /* 0x384800 */
-extern int FUN_003849d0(...); /* 0x3849d0 */
+extern int qcEndSceneStep(...); /* 0x3849d0 */
 extern int FUN_00384be8(...); /* 0x384be8 */
 extern int FUN_00385448(...); /* 0x385448 */
 
@@ -72,7 +72,7 @@ void FUN_003852c8(int param_1)
   *(unsigned int *)(param_1 + 0x62c) = 0;
   *(romwright_code **)(param_1 + 0x630) = FUN_003832d0;
   *(unsigned int *)(param_1 + 0x634) = 0;
-  *(romwright_code **)(param_1 + 0x640) = FUN_003849d0;
+  *(romwright_code **)(param_1 + 0x640) = qcEndSceneStep;
   *(unsigned int *)(param_1 + 0x644) = 0;
   *(unsigned int *)(param_1 + 0x648) = 0x383570;
   *(unsigned int *)(param_1 + 0x64c) = 0;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(int *, unsigned char *);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int sharedRefRelease(void);
 
 typedef int romwright_code(...);
@@ -14,7 +14,7 @@ extern int *DAT_00594abc; /* 0x594abc */
 extern unsigned char DAT_00630344; /* 0x630344 */
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 
 
@@ -43,7 +43,7 @@ void FUN_0010d35c(unsigned int param_1,unsigned int param_2,unsigned int param_3
       DAT_00594abc = (int *)0x0;
     }
   }
-  FUN_002e6e5c(&uStack_20);
+  _ZN9Obj55b28cD1Ev(&uStack_20);
   return;
 }
 

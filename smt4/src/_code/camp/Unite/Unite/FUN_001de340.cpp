@@ -65,10 +65,10 @@ extern int FUN_002073e4(...); /* 0x2073e4 */
 extern int FUN_00219720(...); /* 0x219720 */
 extern int FUN_002c6e90(...); /* 0x2c6e90 */
 extern int FUN_002d0544(...); /* 0x2d0544 */
-extern int FUN_002dcf14(...); /* 0x2dcf14 */
+extern int devilCompareByEntryValue(...); /* 0x2dcf14 */
 extern unsigned char LAB_002dcf9c; /* 0x2dcf9c */
-extern int FUN_002e4b30(...); /* 0x2e4b30 */
-extern int FUN_002f28c4(...); /* 0x2f28c4 */
+extern int devilCompareByRankGradeId(...); /* 0x2e4b30 */
+extern int devilCompare(...); /* 0x2f28c4 */
 extern int *g_unite; /* 0x43dd68 */
 
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
@@ -719,7 +719,7 @@ LAB_001df3cc:
               FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,FUN_002073e4);
             }
             else {
-              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,FUN_002e4b30);
+              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareByRankGradeId);
             }
           }
           if ((*pbVar20 & 0x7f) == 2) {
@@ -735,7 +735,7 @@ LAB_001df3cc:
               FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,FUN_00219720);
             }
             else {
-              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,FUN_002f28c4);
+              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompare);
             }
           }
           if ((*pbVar20 & 0x7f) == 3) {
@@ -743,7 +743,7 @@ LAB_001df3cc:
               FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,FUN_001f6524);
             }
             else {
-              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,FUN_002dcf14);
+              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareByEntryValue);
             }
           }
         }

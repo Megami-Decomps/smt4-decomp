@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(void);
 int FUN_0032fea0(unsigned int *, int, int);
-int FUN_0035dd74(void);
+int contentEntryFindById(void);
 int dataTable5Count(void);
 
 /* stack frame of param_2: 9 slot(s), 34 byte(s) */
@@ -27,10 +27,10 @@ extern int gameFlagIsSet(void);
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 extern int gameSlotTableFindFree(void);
-extern int FUN_00239234(unsigned short, unsigned char *);
+extern int gameDataCopySaveEntry(unsigned short, unsigned char *);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_0032fea0. */
-/* Supplied declaration required: FUN_0035dd74. */
+/* Supplied declaration required: contentEntryFindById. */
 /* Supplied declaration required: dataTable5Count. */
 
 
@@ -72,7 +72,7 @@ unsigned int FUN_004db450(unsigned int param_1,int param_2)
   if (temp_v3 != 0) {
     do {
       temp_v5 = temp_v8;
-      FUN_0035dd74();
+      contentEntryFindById();
       if (temp_v5 != 0) {
         puVar4 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v5 + 0x1a);
         FUN_00184310();
@@ -80,10 +80,10 @@ unsigned int FUN_004db450(unsigned int param_1,int param_2)
           temp_v0 = puVar4[0x1e];
           if ((temp_v0 & 1) != 0) {
             if ((temp_v0 & 0xfffe) != 0) {
-              temp_v3 = FUN_00239234(temp_v0 >> 1,temp_v15);
+              temp_v3 = gameDataCopySaveEntry(temp_v0 >> 1,temp_v15);
             }
             else {
-              temp_v3 = FUN_00239234(*puVar4,temp_v15);
+              temp_v3 = gameDataCopySaveEntry(*puVar4,temp_v15);
             }
             if ((temp_v3 == 0) || ((temp_v16 & 0xfc) == 0)) goto LAB_004db62c;
           }

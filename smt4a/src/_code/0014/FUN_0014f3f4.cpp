@@ -70,7 +70,7 @@ extern int FUN_001671e0(void);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001678a8. */
 /* Supplied declaration required: FUN_00168594. */
-extern int FUN_0016887c(unsigned int);
+extern int entryListCurrentIsUsable(unsigned int);
 extern int FUN_001688c4(unsigned int);
 extern int FUN_00169240(unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -286,7 +286,7 @@ char FUN_0014f3f4(void)
         temp_v9 = (unsigned int)*(unsigned char *)(temp_v5 + 8);
       }
       if (temp_v5 != 0 && temp_v9 != 0) {
-        temp_v8 = FUN_0016887c(*(unsigned int *)(temp_v5 + 4));
+        temp_v8 = entryListCurrentIsUsable(*(unsigned int *)(temp_v5 + 4));
         if ((temp_v8 != 0) || ((*(char *)(temp_v5 + 8) == '\x04' && (*(char *)(temp_v5 + 0x6d) != '\0'))))
         {
           temp_v7 = FUN_001692ac(1,0);

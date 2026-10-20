@@ -1,32 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001946d4` (_code @ 0x1946d4, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+/* An object with a vtable whose slot 7 answers a query; `enabled` (byte at 4) says whether to ask. */
+class SoundQuery {
+public:
+    virtual void unk00();
+    virtual void unk04();
+    virtual void unk08();
+    virtual void unk0c();
+    virtual void unk10();
+    virtual void unk14();
+    virtual void unk18();
+    virtual u32 query(u32 a, u32 b);
+
+    u8 enabled;
+};
+
+typedef struct SoundHolder {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 archive;
+    /* 0x08 */ SoundQuery *queryObject;
+} SoundHolder;
+
+static u32 askIfEnabled(SoundQuery *object, u32 a, u32 b)
+{
+    if (object->enabled == 0) {
+        return 0;
+    }
+    return object->query(a, b);
+}
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned int nw_snd_internal_SoundArchiveFileReader_ReadBankInfo(unsigned int);
+u32 nw_snd_internal_SoundArchiveFileReader_ReadBankInfo(u32 archive);
 
-
-unsigned int FUN_001946d4(int param_1,unsigned int param_2,unsigned int param_3)
-
+/* The bank info for the holder's archive, OR-ed with the query object's answer when it is enabled. */
+u32 FUN_001946d4(SoundHolder *holder, u32 a, u32 b)
 {
-  unsigned int temp_v0;
-  int *piVar2;
-  unsigned int temp_v1;
-  
-  temp_v0 = nw_snd_internal_SoundArchiveFileReader_ReadBankInfo(*(unsigned int *)(param_1 + 4));
-  piVar2 = *(int **)(param_1 + 8);
-  if (piVar2 != (int *)0x0) {
-    if ((char)piVar2[1] == '\0') {
-      temp_v1 = 0;
+    u32 info = nw_snd_internal_SoundArchiveFileReader_ReadBankInfo(holder->archive);
+    SoundQuery *object = holder->queryObject;
+
+    if (object != NULL) {
+        info |= askIfEnabled(object, a, b);
     }
-    else {
-      temp_v1 = (**(romwright_code **)(*piVar2 + 0x1c))(piVar2,param_2,param_3);
-    }
-    temp_v0 = temp_v0 | temp_v1;
-  }
-  return temp_v0;
+    return info;
 }
 
 } /* extern "C" */

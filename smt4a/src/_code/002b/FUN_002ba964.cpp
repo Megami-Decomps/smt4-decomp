@@ -66,7 +66,7 @@ int FUN_00239404(...);
 int FUN_002e5924(...);
 int FUN_0038a7dc(...);
 int FUN_0039ba24(unsigned int [4], int, unsigned int);
-int FUN_003e2038(unsigned int *, int);
+int aocLoaderUpdateRecords(unsigned int *, int);
 int FUN_003e8b78(int);
 int FUN_003eaa9c(...);
 int FUN_003eba0c(...);
@@ -82,7 +82,7 @@ int FUN_003fce8c(...);
 int FUN_004d7a70(...);
 int FUN_004d7fe4(...);
 int isEntryUsable(...);
-int FUN_004f1a54(...);
+int btlCameraObjectCreate(...);
 int FUN_0050dda4(void);
 int rt_memcpy_w(...);
 
@@ -170,8 +170,8 @@ extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_003e0f94. */
 /* Supplied declaration required: FUN_003e1068. */
 extern unsigned int *FUN_003e12a8(unsigned int *, int);
-extern unsigned int *FUN_003e1390(unsigned int *, int);
-/* Supplied declaration required: FUN_003e2038. */
+extern unsigned int *contentRequestStart(unsigned int *, int);
+/* Supplied declaration required: aocLoaderUpdateRecords. */
 /* Supplied declaration required: FUN_003e21c8. */
 /* Supplied declaration required: FUN_003e2840. */
 /* Supplied declaration required: FUN_003e8b78. */
@@ -193,7 +193,7 @@ extern int FUN_003ece50(int);
 /* Supplied declaration required: FUN_003edbd0. */
 /* Supplied declaration required: FUN_003eebf4. */
 extern int FUN_003ef9e0(int, int);
-extern unsigned int FUN_003efa38(int);
+extern unsigned int btlPosArrangeGetFileName(int);
 extern int FUN_003efad8(int, unsigned int);
 /* Supplied declaration required: FUN_003efb68. */
 /* Supplied declaration required: FUN_003f0b28. */
@@ -219,7 +219,7 @@ extern unsigned int FUN_00409fe8(unsigned int, unsigned int);
 extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 extern int FUN_0046ebf0(unsigned int);
 /* Supplied declaration required: aocQueueType39. */
-extern int FUN_004706a8(unsigned int, unsigned short);
+extern int aocReadyAndAccepts(unsigned int, unsigned short);
 /* Supplied declaration required: aocQueueType38. */
 /* Supplied declaration required: FUN_0047f444. */
 extern int FUN_004a96d4(unsigned int);
@@ -230,7 +230,7 @@ extern int FUN_004a96d4(unsigned int);
 /* Supplied declaration required: FUN_004d7a70. */
 /* Supplied declaration required: FUN_004d7fe4. */
 /* Supplied declaration required: isEntryUsable. */
-/* Supplied declaration required: FUN_004f1a54. */
+/* Supplied declaration required: btlCameraObjectCreate. */
 /* Supplied declaration required: FUN_004f1c5c. */
 extern int FUN_004f2294(int);
 extern int FUN_004f2708(int, int, unsigned int);
@@ -512,7 +512,7 @@ code_r0x003e12a8:
     puVar26[4] = 0;
     puVar26[2] = temp_v25;
     puVar26[3] = 0;
-    FUN_003e2038(puVar26,temp_v15);
+    aocLoaderUpdateRecords(puVar26,temp_v15);
     return puVar26;
   case 0xb:
     temp_v21 = 0;
@@ -772,7 +772,7 @@ LAB_003e0a8c:
     if (temp_v21 == 0) {
       return (unsigned int *)0x0;
     }
-    FUN_004f1a54(g_btlCamera);
+    btlCameraObjectCreate(g_btlCamera);
     *puVar26 = 0xf;
     puVar26[4] = 0;
     puVar26[3] = 0;
@@ -819,7 +819,7 @@ LAB_003e0a8c:
     goto FUN_003e1454;
   case 0x15:
     sysMemClear(temp_v37,0x80);
-    temp_v18 = FUN_003efa38(temp_v15);
+    temp_v18 = btlPosArrangeGetFileName(temp_v15);
     libc_strcpy(temp_v37,temp_v18);
     if (puVar26[1] != 0) {
       asdMemFree();
@@ -1479,7 +1479,7 @@ FUN_003e03b0:
     sysMemClear(temp_v36,0x80);
     FUN_00100388(temp_v36,&LAB_003e04ec,*(unsigned char *)(puVar17 + 0x51),
                  *(unsigned char *)((int)puVar17 + 0xa3));
-    temp_v21 = FUN_004706a8(g_aocSystem,*puVar17);
+    temp_v21 = aocReadyAndAccepts(g_aocSystem,*puVar17);
     piVar31 = (int *)(temp_v15 + 0x1ec4);
     if (temp_v21 != 0) {
       aocQueueType38(g_aocSystem,*puVar17,piVar31,temp_v36);
@@ -1561,7 +1561,7 @@ FUN_003e025c:
       temp_v21 = FUN_004f2294(g_btlCamera);
       puVar27 = (unsigned int *)0x0;
       if (temp_v21 != 0) {
-        FUN_004f1a54(g_btlCamera);
+        btlCameraObjectCreate(g_btlCamera);
         *puVar26 = 0xf;
         puVar26[4] = 0;
         puVar26[3] = 0;
@@ -1599,7 +1599,7 @@ FUN_003e1454:
     temp_v9 = 1;
   }
   sysMemClear(temp_v35,0x80);
-  temp_v18 = FUN_003efa38(temp_v15);
+  temp_v18 = btlPosArrangeGetFileName(temp_v15);
   libc_strcpy(temp_v35,temp_v18);
   if ((!temp_v9) && (temp_v21 = FUN_00240c34(temp_v35), temp_v21 == 0)) {
     FUN_003edbd0(temp_v15);
@@ -1653,7 +1653,7 @@ FUN_003e1454:
   puVar26[4] = 0;
   *puVar26 = 0x15;
   puVar26[3] = 0;
-  puVar26 = (unsigned int *)FUN_003e1390(puVar26,temp_v15);
+  puVar26 = (unsigned int *)contentRequestStart(puVar26,temp_v15);
   return puVar26;
 }
 

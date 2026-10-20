@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0034f438(...);
+int _ZN9Obj420a2cC1Ev(...);
 int FUN_00351878(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -134,7 +134,7 @@ extern unsigned int DAT_004c40ec; /* 0x4c40ec */
 extern unsigned int DAT_004c40f0; /* 0x4c40f0 */
 extern unsigned int DAT_004c40f4; /* 0x4c40f4 */
 
-/* Supplied declaration required: FUN_0034f438. */
+/* Supplied declaration required: _ZN9Obj420a2cC1Ev. */
 /* Supplied declaration required: FUN_00351878. */
 
 
@@ -207,7 +207,7 @@ void FUN_003eff64(unsigned int param_1,unsigned int param_2,int param_3)
   DAT_0044d024 = 0;
   DAT_0044d030 = "\xf8e84杻4\xf8004歷4";
   DAT_0044d034 = 0;
-  FUN_0034f438(&DAT_004c3a50,"\xf8e84杻4\xf8004歷4",0x100000);
+  _ZN9Obj420a2cC1Ev(&DAT_004c3a50,"\xf8e84杻4\xf8004歷4",0x100000);
   DAT_004c3afc = 0;
   DAT_004c3af8 = "\xf6cc4\xf6e84\xf5344\xf4884";
   DAT_004c3b00 = 0;

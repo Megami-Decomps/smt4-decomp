@@ -1,34 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00306ce4` (_code @ 0x306ce4, 0x2a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads the exhausted flag with `movs r3, #59; ldrsb r2, [r3, r4]` (signed byte); armcc emits `ldrb`. */
+#include "common.h"
 
 extern "C" {
 
-int streamExtractU8(int, int);
-int streamReadWord(int, int *);
+typedef struct Stream {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s8 failed;
+    /* 0x05 */ u8 unk05[0x36];
+    /* 0x3B */ s8 exhausted;
+} Stream;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+extern void streamExtractU8(Stream *stream, u8 *out);
+extern void streamReadWord(Stream *stream, s32 *out);
 
-/* Supplied declaration required: streamExtractU8. */
-/* Supplied declaration required: streamReadWord. */
-
-
-void FUN_00306ce4(int param_1,int param_2)
-
+/* Reads a byte into `out` and, if the stream hasn't failed, a word that is discarded. */
+void FUN_00306ce4(Stream *stream, u8 *out)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  *(unsigned char *)(param_2 + 4) = 0;
-  temp_v0 = 0;
-  if ((*(char *)(param_1 + 0x3b) == '\0') &&
-     (streamExtractU8(param_1,param_2 + 4), *(char *)(param_1 + 4) == '\0')) {
-    streamReadWord(param_1,&temp_v0);
-  }
-  return;
+    s32 word;
+
+    out[4] = 0;
+    word = 0;
+    if (stream->exhausted == 0) {
+        streamExtractU8(stream, out + 4);
+        if (stream->failed == 0) {
+            streamReadWord(stream, &word);
+        }
+    }
 }
 
-} /* extern "C" */
+}

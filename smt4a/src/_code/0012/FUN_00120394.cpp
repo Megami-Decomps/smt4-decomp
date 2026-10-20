@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int destroyObj00559ef4(unsigned char **);
+int _ZN9Obj559eecD1Ev(unsigned char **);
 int FUN_00303d3a(unsigned int, int);
 int FUN_00304e82(void);
 int FUN_00310c3c(unsigned int, unsigned char **);
@@ -23,8 +23,8 @@ extern unsigned char DAT_00559524; /* 0x559524 */
 extern unsigned char DAT_00559ef4; /* 0x559ef4 */
 
 extern unsigned int FUN_002e7908(unsigned char **, unsigned int *);
-extern int constructObj0055affc(unsigned char *);
-/* Supplied declaration required: destroyObj00559ef4. */
+extern int _ZN9Obj55aff4C1Ev(unsigned char *);
+/* Supplied declaration required: _ZN9Obj559eecD1Ev. */
 /* Supplied declaration required: FUN_00303d3a. */
 /* Supplied declaration required: FUN_00304e82. */
 /* Supplied declaration required: FUN_00310c3c. */
@@ -61,7 +61,7 @@ void FUN_00120394(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
   else {
     temp_v3 = &DAT_00559ef4;
     temp_v4 = 0;
-    temp_v2 = constructObj0055affc(temp_v6);
+    temp_v2 = _ZN9Obj55aff4C1Ev(temp_v6);
     *(unsigned int *)(temp_v2 - 0x10) = 0;
     *(unsigned int *)(temp_v2 - 0xc) = 0;
     *(unsigned int *)(temp_v2 - 8) = 0;
@@ -73,7 +73,7 @@ void FUN_00120394(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
       (**(romwright_code **)(*param_1 + 0x5c))(param_1,&temp_v3);
       FUN_00303d3a(param_3,0x8001);
     }
-    destroyObj00559ef4(&temp_v3);
+    _ZN9Obj559eecD1Ev(&temp_v3);
     *temp_v7 = 1;
   }
   return;

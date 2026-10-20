@@ -1,31 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00291730` (_code @ 0x291730, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the node into r1 (before computing &obj->node in r4); built loads it into r0 after the add */
+#include "common.h"
 
 extern "C" {
 
-int asdTMTexTableFreeEntry(int);
-int asdTMTexTableReleaseNode(int);
+typedef struct Object00291730 {
+    /* 0x000 */ u8 unk000[0xb7c];
+    /* 0xb7c */ void *node;
+} Object00291730;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+void asdTMTexTableFreeEntry(s32 id);
+void asdTMTexTableReleaseNode(s32 id);
 
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-
-
-void FUN_00291730(int param_1)
-
+/* Releases the object's texture-table node (if it holds one), then frees table entry 0x33. */
+void FUN_00291730(Object00291730 *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  if (*(int *)(param_1 + 0xb7c) != 0) {
-    asdTMTexTableReleaseNode(0x33);
-    *(unsigned int *)(param_1 + 0xb7c) = 0;
-  }
-  asdTMTexTableFreeEntry(0x33);
-  return;
+    void **node = &obj->node;
+
+    if (*node != NULL) {
+        asdTMTexTableReleaseNode(0x33);
+        *node = NULL;
+    }
+    asdTMTexTableFreeEntry(0x33);
 }
 
 } /* extern "C" */

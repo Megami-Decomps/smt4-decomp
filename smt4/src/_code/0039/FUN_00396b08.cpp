@@ -8,7 +8,7 @@ int FUN_0023296c(int *, int *);
 int FUN_00232980(int *, int *);
 int FUN_00232994(int *, int *);
 int FUN_002329a8(int *, unsigned int);
-int FUN_0024f520(void);
+int dataTable29Sub0GetEntryWithAoc(void);
 int FUN_002533f4(int, unsigned int, int);
 int VectorSignedToFloat(int, int);
 
@@ -38,13 +38,13 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 extern int FUN_001e2954(int);
-extern int FUN_001fa498(int);
+extern int dataTable00RankOfPicked(int);
 /* Supplied declaration required: FUN_0023296c. */
 /* Supplied declaration required: FUN_00232980. */
 /* Supplied declaration required: FUN_00232994. */
 /* Supplied declaration required: FUN_002329a8. */
 extern int *FUN_00232a6c(int, unsigned int);
-/* Supplied declaration required: FUN_0024f520. */
+/* Supplied declaration required: dataTable29Sub0GetEntryWithAoc. */
 /* Supplied declaration required: FUN_002533f4. */
 extern int gameFlagIsSet(unsigned int);
 extern int randNextInRange(unsigned int);
@@ -123,7 +123,7 @@ LAB_00396b7c:
       }
       do {
         temp_v2 = (unsigned int)temp_v22[temp_v1];
-        FUN_0024f520();
+        dataTable29Sub0GetEntryWithAoc();
         temp_v8 = (float)VectorSignedToFloat((int)*(short *)(temp_v2 + 2),(unsigned char)(in_fpscr >> 0x16) & 3)
         ;
         temp_v7 = (float)VectorSignedToFloat((int)*(short *)(temp_v2 + 4),(unsigned char)(in_fpscr >> 0x16) & 3)
@@ -161,7 +161,7 @@ LAB_00396b7c:
     temp_v5 = (unsigned int)*puVar4;
   }
   temp_v6 = temp_v5;
-  FUN_0024f520();
+  dataTable29Sub0GetEntryWithAoc();
   temp_v19 = VectorSignedToFloat((int)*(short *)(temp_v6 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v20 = VectorSignedToFloat((int)*(short *)(temp_v6 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v21 = VectorSignedToFloat((int)*(short *)(temp_v6 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -183,7 +183,7 @@ LAB_00396b7c:
     piVar5[8] = temp_v5;
     temp_v4 = FUN_001e2954(temp_v1);
     piVar5[0x18] = temp_v4;
-    temp_v1 = FUN_001fa498(temp_v1);
+    temp_v1 = dataTable00RankOfPicked(temp_v1);
     piVar5[0x19] = temp_v1;
     temp_v1 = gameFlagIsSet(0x529);
     if ((temp_v1 != 0) && (param_2 == 1)) {

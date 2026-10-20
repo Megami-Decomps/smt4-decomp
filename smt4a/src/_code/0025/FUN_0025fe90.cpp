@@ -1,39 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025fe90` (_code @ 0x25fe90, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the constant 7 for the last call's fourth argument in r4 across the earlier calls (mov r4, #7 first); built passes it with mov r3, #7 */
+#include "shard/S1MessageMain.h"
 
 extern "C" {
 
-int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
+typedef struct MessageOwner {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ MessageWindow *window;
+} MessageOwner;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+extern u32 scrGetArg(s32 index);
+extern u32 FUN_002ba85c(void);
+extern u32 scrGetCommandFrame(void);
+extern void FUN_0021bdac(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
 
-/* Supplied declaration required: FUN_0021bdac. */
-extern unsigned int scrGetArg(unsigned int);
-extern unsigned int FUN_002ba85c(void);
-extern unsigned int scrGetCommandFrame(void);
-
-
-void FUN_0025fe90(int param_1)
-
+void FUN_0025fe90(MessageOwner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  if (*(int *)(param_1 + 4) != 0) {
-    *(unsigned char *)(*(int *)(param_1 + 4) + 0x19c5) = 0x15;
-  }
-  temp_v0 = FUN_002ba85c();
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetCommandFrame();
-  FUN_0021bdac(temp_v0,temp_v1,temp_v2,7,0,0);
-  return;
+    u32 first;
+    u32 second;
+    u32 third;
+
+    if (owner->window != NULL) {
+        owner->window->mode = 0x15;
+    }
+    first = FUN_002ba85c();
+    second = scrGetArg(0);
+    third = scrGetCommandFrame();
+    FUN_0021bdac(first, second, third, 7, 0, 0);
 }
 
 } /* extern "C" */

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192564(void);
+int mapFilterLoad(void);
 int mapIfLoadWidgets(void);
 int FUN_00287c34(int);
 int asdTMTexTableLoadSprites(int);
@@ -62,7 +62,7 @@ extern unsigned int DAT_0049fc08; /* 0x49fc08 */
 extern unsigned int DAT_0049fc0c; /* 0x49fc0c */
 extern unsigned char DAT_0049fc10; /* 0x49fc10 */
 
-/* Supplied declaration required: FUN_00192564. */
+/* Supplied declaration required: mapFilterLoad. */
 /* Supplied declaration required: mapIfLoadWidgets. */
 /* Supplied declaration required: FUN_00287c34. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
@@ -79,7 +79,7 @@ void FUN_001a8748(void)
   int temp_v0;
   
   FUN_00287c34(0);
-  FUN_00192564();
+  mapFilterLoad();
   mapIfLoadWidgets();
   FUN_002f58e0();
   asdTMTexTableLoadSprites(0x1c);

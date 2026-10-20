@@ -1,59 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010a450` (_code @ 0x10a450, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int surfaceCopy(unsigned int, unsigned int);
-int FUN_002bfadc(int, unsigned int);
-int FUN_002c39a4(unsigned int);
+typedef struct Surface {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 width;
+    /* 0x18 */ s32 height;
+} Surface;
 
-extern unsigned int g_titleScene; /* 0x44ea00 */
+typedef struct TitleState {
+    /* 0x00 */ u8 unk00[0x60];
+    /* 0x60 */ u8 active;
+    /* 0x61 */ u8 unk61;
+    /* 0x62 */ u8 unk62;
+    /* 0x63 */ u8 unk63;
+    /* 0x64 */ u8 captured;   /* the surface has been copied */
+    /* 0x65 */ u8 unk65;
+    /* 0x66 */ u8 unk66[0x33];
+    /* 0x99 */ u8 unk99;
+} TitleState;
 
-/* Supplied declaration required: surfaceCopy. */
-/* Supplied declaration required: FUN_002bfadc. */
-extern int FUN_002bff10(unsigned int);
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002c39a4. */
+typedef struct TitleWork {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ Surface *surface;
+    /* 0x00C */ u8 unk00C[0xEF4];
+    /* 0xF00 */ TitleState state;
+} TitleWork;
 
+extern u32 g_titleScene;
 
-unsigned int FUN_0010a450(void)
+extern TitleWork *jobGetWork(void);
+extern s32 FUN_002bff10(s32 arg);
+extern void FUN_002c39a4(u32 scene);
+extern u8 FUN_002bfadc(s32 arg, Surface *surface);
+extern void surfaceCopy(Surface *dst, Surface *src);
 
+/* Title screen step: captures the screen surface (at half size) once the title is active. */
+s32 FUN_0010a450(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v1 = jobGetWork();
-  temp_v2 = FUN_002bff10(0);
-  if (temp_v2 != 0) {
-    *(unsigned char *)(temp_v1 + 0xf65) = 1;
-  }
-  else {
-    temp_v3 = temp_v1 + 0xf00;
-    if ((*(char *)(temp_v1 + 0xf60) != '\0') && (*(char *)(temp_v1 + 0xf64) == '\0')) {
-      temp_v4 = *(char *)(temp_v1 + 0xf65) == '\0';
-      if (temp_v4) {
-        temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 0xf99);
-      }
-      if (temp_v4 && temp_v3 == 0) {
-        FUN_002c39a4(g_titleScene);
-        *(unsigned int *)(*(int *)(temp_v1 + 8) + 0x14) = 0x200;
-        *(unsigned int *)(*(int *)(temp_v1 + 8) + 0x18) = 0x200;
-        temp_v0 = 0;
-        FUN_002bfadc(0,*(unsigned int *)(temp_v1 + 8));
-        *(unsigned char *)(temp_v1 + 0xf62) = temp_v0;
-        surfaceCopy(*(unsigned int *)(temp_v1 + 8),*(unsigned int *)(temp_v1 + 8));
-        *(int *)(*(int *)(temp_v1 + 8) + 0x14) = *(int *)(*(int *)(temp_v1 + 8) + 0x14) >> 1;
-        *(int *)(*(int *)(temp_v1 + 8) + 0x18) = *(int *)(*(int *)(temp_v1 + 8) + 0x18) >> 1;
-        *(unsigned char *)(temp_v1 + 0xf64) = 1;
-      }
+    TitleWork *work = jobGetWork();
+
+    if (FUN_002bff10(0) != 0) {
+        work->state.unk65 = 1;
+    } else {
+        TitleState *state = &work->state;
+
+        if (work->state.active != 0 && state->captured == 0 && state->unk65 == 0 && state->unk99 == 0) {
+            FUN_002c39a4(g_titleScene);
+            work->surface->width = 0x200;
+            work->surface->height = 0x200;
+            work->state.unk62 = FUN_002bfadc(0, work->surface);
+            surfaceCopy(work->surface, work->surface);
+            work->surface->width >>= 1;
+            work->surface->height >>= 1;
+            work->state.captured = 1;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

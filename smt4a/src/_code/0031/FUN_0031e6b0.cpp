@@ -1,17 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031e6b0` (_code @ 0x31e6b0, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Built with -Ospace (see flags_W4Match4b.txt). */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+typedef struct Inner {
+    /* 0x000 */ u8 unk000[0x1F0];
+    /* 0x1F0 */ f32 value;
+} Inner;
 
+typedef struct Table {
+    /* 0x0000 */ u8 unk0000[0x5274];
+    /* 0x5274 */ Inner inner;
+} Table;
 
+typedef struct GameDataBlocksView {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ Table *table;
+} GameDataBlocksView;
+
+extern GameDataBlocksView g_gameDataBlocks;
+
+/* Resets the float at 0x5464 of the game data table to 0. */
 void FUN_0031e6b0(void)
-
 {
-  *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x5464) = 0;
-  return;
+    Inner *inner = &g_gameDataBlocks.table->inner;
+    f32 zero = 0.0f;
+
+    inner->value = zero;
 }
 
 } /* extern "C" */

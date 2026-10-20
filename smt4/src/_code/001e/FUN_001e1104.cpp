@@ -1,53 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e1104` (_code @ 0x1e1104, 0x118 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only: retail stores the style word before the active byte (str [600]; strb [606]); built swaps the two stores */
+#include "common.h"
 
 extern "C" {
 
-int pairSetSecondResetFirst(int, int);
-int pairSetFirstResetSecond(...);
-int timerStart(...);
-int FUN_002bee58(int, int);
+typedef struct Anim { u8 unk[0x8C]; } Anim;      /* animation objects, known through their setter functions */
 
-/* Supplied declaration required: pairSetSecondResetFirst. */
-/* Supplied declaration required: pairSetFirstResetSecond. */
-/* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bee58. */
+typedef struct Panel {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ Anim animA;
+    /* 0x0AC */ Anim animB;
+    /* 0x138 */ Anim animC;
+    /* 0x1C4 */ Anim timer;
+    /* 0x250 */ s32 phase;
+    /* 0x254 */ s32 step;
+    /* 0x258 */ s32 style;
+    /* 0x25C */ u8 flagA;
+    /* 0x25D */ u8 flagB;
+    /* 0x25E */ u8 active;
+} Panel;
 
+extern void pairSetFirstResetSecond(void *anim, s32 value);
+extern void pairSetSecondResetFirst(void *anim, s32 value);
+extern void FUN_002bee58(void *anim, s32 value);
+extern void timerStart(void *timer, s32 a, s32 b);
 
-void FUN_001e1104(int param_1,int param_2,unsigned char param_3,unsigned char param_4)
-
+/* Starts the panel's animations for style 0 or 1 and resets its phase. */
+void FUN_001e1104(Panel *panel, s32 style, u8 flagB, u8 flagA)
 {
-/* irregular: 4 native warning(s); review required */
-  *(int *)(param_1 + 600) = param_2;
-  *(unsigned char *)(param_1 + 0x25e) = 1;
-  *(unsigned char *)(param_1 + 0x25c) = param_4;
-  *(unsigned char *)(param_1 + 0x25d) = param_3;
-  if (param_2 != 0) {
-    if (param_2 == 1) {
-      pairSetFirstResetSecond(param_1 + 0x20,0x2a);
-      FUN_002bee58(param_1 + 0x20,0);
-      pairSetSecondResetFirst(param_1 + 0x138,3);
-      FUN_002bee58(param_1 + 0x138,2);
-      pairSetSecondResetFirst(param_1 + 0xac,1);
-      FUN_002bee58(param_1 + 0xac,1);
-      pairSetFirstResetSecond(param_1 + 0x1c4,10);
-      timerStart(param_1 + 0x1c4,2,0);
+    panel->style = style;
+    panel->active = 1;
+    panel->flagA = flagA;
+    panel->flagB = flagB;
+    if (style == 0) {
+    pairSetFirstResetSecond(&panel->animA, 41);
+    FUN_002bee58(&panel->animA, 0);
+    pairSetSecondResetFirst(&panel->animC, 2);
+    FUN_002bee58(&panel->animC, 2);
+    pairSetSecondResetFirst(&panel->animB, 0);
+    FUN_002bee58(&panel->animB, 1);
+    pairSetFirstResetSecond(&panel->timer, 9);
+    timerStart(&panel->timer, 2, 0);
+    } else if (style == 1) {
+    pairSetFirstResetSecond(&panel->animA, 42);
+    FUN_002bee58(&panel->animA, 0);
+    pairSetSecondResetFirst(&panel->animC, 3);
+    FUN_002bee58(&panel->animC, 2);
+    pairSetSecondResetFirst(&panel->animB, 1);
+    FUN_002bee58(&panel->animB, 1);
+    pairSetFirstResetSecond(&panel->timer, 10);
+    timerStart(&panel->timer, 2, 0);
     }
-  }
-  else {
-    pairSetFirstResetSecond(param_1 + 0x20,0x29);
-    FUN_002bee58(param_1 + 0x20,0);
-    pairSetSecondResetFirst(param_1 + 0x138,2);
-    FUN_002bee58(param_1 + 0x138,2);
-    pairSetSecondResetFirst(param_1 + 0xac,0);
-    FUN_002bee58(param_1 + 0xac,1);
-    pairSetFirstResetSecond(param_1 + 0x1c4,9);
-    timerStart(param_1 + 0x1c4,2,0);
-  }
-  *(unsigned int *)(param_1 + 0x250) = 0;
-  *(unsigned int *)(param_1 + 0x254) = 2;
-  return;
+    panel->phase = 0;
+    panel->step = 2;
 }
 
 } /* extern "C" */

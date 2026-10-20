@@ -42,7 +42,7 @@ extern unsigned int DAT_005e1554; /* 0x5e1554 */
 extern unsigned int DAT_005e155c; /* 0x5e155c */
 
 extern unsigned int *asdListBoxGetIntValuePtr(unsigned int, unsigned int);
-extern int FUN_0032c430(unsigned int);
+extern int listBoxItemHasOwner(unsigned int);
 extern unsigned int *asdListBoxGetFloatValuePtr(unsigned int);
 
 
@@ -57,7 +57,7 @@ void FUN_004d5be4(int param_1,int param_2,unsigned int param_3)
   
   switch(param_3) {
   case 0:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     if (temp_v0 != 0) {
       temp_v2 = *(unsigned int *)(g_btlCamera + 0x64c) | 0x100;
     }
@@ -71,7 +71,7 @@ void FUN_004d5be4(int param_1,int param_2,unsigned int param_3)
     *(unsigned int *)(g_btlCamera + 0x578) = *puVar3;
     return;
   case 2:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     puVar2 = (unsigned int *)(param_2 + 0x45a8);
     if (temp_v0 != 0) {
       temp_v2 = DAT_0057171c | *(unsigned int *)(param_2 + 0x45ac);

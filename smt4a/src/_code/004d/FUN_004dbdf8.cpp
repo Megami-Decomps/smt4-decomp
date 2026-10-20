@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_0035dd74(void);
+int contentEntryFindById(void);
 int dataTable5Count(void);
 
 /* stack frame of void: 1 slot(s), 2 byte(s) */
@@ -16,9 +16,9 @@ typedef struct {
 /* Supplied declaration required: FUN_00184310. */
 extern int gameFlagIsSet(void);
 extern int gameGetSlotTable(void);
-extern int FUN_00239234(unsigned short, unsigned char *);
+extern int gameDataCopySaveEntry(unsigned short, unsigned char *);
 extern int FUN_002a4b28(unsigned short);
-/* Supplied declaration required: FUN_0035dd74. */
+/* Supplied declaration required: contentEntryFindById. */
 /* Supplied declaration required: dataTable5Count. */
 
 
@@ -42,7 +42,7 @@ short FUN_004dbdf8(void)
   if (temp_v2 != 0) {
     do {
       temp_v3 = temp_v4;
-      FUN_0035dd74();
+      contentEntryFindById();
       if (temp_v3 != 0) {
         puVar4 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v3 + 0x1a);
         FUN_00184310();
@@ -50,10 +50,10 @@ short FUN_004dbdf8(void)
           temp_v0 = puVar4[0x1e];
           if ((temp_v0 & 1) != 0) {
             if ((temp_v0 & 0xfffe) != 0) {
-              temp_v2 = FUN_00239234(temp_v0 >> 1,temp_v5);
+              temp_v2 = gameDataCopySaveEntry(temp_v0 >> 1,temp_v5);
             }
             else {
-              temp_v2 = FUN_00239234(*puVar4,temp_v5);
+              temp_v2 = gameDataCopySaveEntry(*puVar4,temp_v5);
             }
             if ((temp_v2 != 0) && ((temp_v6 & 0xfc) != 0)) {
               if (((puVar4[5] & 1) != 0) &&

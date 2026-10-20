@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(...);
-int FUN_002e6e5c(...);
+int _ZN9Obj55b28cD1Ev(...);
 int onlineStringAssign(...);
 int onlineStringSetFromRaw(...);
 int FUN_002ea3d0(...);
@@ -26,7 +26,7 @@ extern unsigned char DAT_0062d704; /* 0x62d704 */
 extern int libc_strncmp(unsigned char *, unsigned char *, unsigned int);
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineStringAssign. */
 /* Supplied declaration required: onlineStringSetFromRaw. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
@@ -79,7 +79,7 @@ void FUN_0011ae64(unsigned int param_1,int param_2,unsigned int param_3,int para
     temp_v2[0] = 1;
   }
   FUN_002f12d0(temp_v7,puVar3);
-  FUN_002e6e5c(temp_v4);
+  _ZN9Obj55b28cD1Ev(temp_v4);
   return;
 }
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023e434(int, int *, int *);
+int slotPlacementGetPosition(int, int *, int *);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0023e434. */
+/* Supplied declaration required: slotPlacementGetPosition. */
 
 
 void FUN_0029378c(int param_1,unsigned int param_2)
@@ -25,7 +25,7 @@ void FUN_0029378c(int param_1,unsigned int param_2)
   *(unsigned int *)(param_1 + 0x3c) = param_2;
   temp_v0 = 0;
   temp_v1 = 0;
-  FUN_0023e434(param_1,&temp_v0,&temp_v1);
+  slotPlacementGetPosition(param_1,&temp_v0,&temp_v1);
   *(unsigned int *)(param_1 + 0x2c) = temp_v0;
   *(unsigned int *)(param_1 + 0x30) = temp_v1;
   return;

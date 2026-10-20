@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023e434(int *, int *, int [2]);
+int slotPlacementGetPosition(int *, int *, int [2]);
 int __aeabi_idivmod(int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0023e434. */
+/* Supplied declaration required: slotPlacementGetPosition. */
 extern int gameGetUnitRecord(void);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -43,7 +43,7 @@ void FUN_0033c468(int *param_1)
       if (param_1[1] >= 8) {
         temp_v6 = 0;
         temp_v7[0] = 0;
-        FUN_0023e434(param_1,&temp_v6,temp_v7);
+        slotPlacementGetPosition(param_1,&temp_v6,temp_v7);
         param_1[0xb] = temp_v6;
         param_1[0xc] = temp_v7[0];
         *param_1 = 0;

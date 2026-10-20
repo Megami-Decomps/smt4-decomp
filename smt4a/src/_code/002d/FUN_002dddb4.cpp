@@ -1,93 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002dddb4` (_code @ 0x2dddb4, 0xe4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: in the two slot loops retail computes the slot index offset in r1 and loads the owner pointer into r0, built the other way round */
+#include "common.h"
 
 extern "C" {
 
-int ptrListRemoveClearOwner(unsigned int);
+typedef struct Handle {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u32 key;
+} Handle;
 
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-#ifndef ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
-#define ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_s__a_a_00587f08_9_1 {
-    char whole[9];
-    unsigned char u1[9];
-    signed char s1[9];
-};
-typedef char romwright_storage_s__a_a_00587f08_9_1_size_check[(sizeof(union romwright_storage_s__a_a_00587f08_9_1) == 9) ? 1 : -1];
-typedef char romwright_storage_s__a_a_00587f08_9_1_u1_width_check[(sizeof(((union romwright_storage_s__a_a_00587f08_9_1 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s__a_a_00587f08_9_1_s1_width_check[(sizeof(((union romwright_storage_s__a_a_00587f08_9_1 *)0)->s1[0]) == 1) ? 1 : -1];
-#endif
-extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 */
+typedef struct Slot {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[0x2B];
+    /* 0x2C */ u8 registeredB;
+    /* 0x2D */ u8 unk2D[3];
+    /* 0x30 */ Handle *handle;
+    /* 0x34 */ u8 registeredA;
+    /* 0x35 */ u8 unk35[3];
+    /* 0x38 */ u8 unk38[0x20];
+} Slot; /* 0x58 */
 
-/* Supplied declaration required: ptrListRemoveClearOwner. */
+typedef struct Extra {
+    /* 0x0 */ Handle *handle;
+    /* 0x4 */ u32 unk4;
+} Extra;
 
+/* 17 extra handles (8 bytes apart) are interleaved with the slot table, which starts at 0xA4: the
+ * last extra's second word overlaps the first slot, so the two are separate views. */
+typedef struct SlotTable {
+    /* 0x00 */ u8 unk00[0x84];
+    /* 0x84 */ Slot slots[35];      /* 32 regular slots followed by 3 special ones */
+} SlotTable;
 
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[0x20];
+    union {
+        /* 0x20 */ Extra extras[17];
+        /* 0x20 */ SlotTable table;
+    } u;
+} Owner;
+
+extern Owner *DAT_00587f08;
+extern u32 g_handleRegistry;
+
+extern void ptrListRemoveClearOwner(u32 registry, u32 key);
+
+/* Removes every live slot's and extra's handle from the handle registry. */
 void FUN_002dddb4(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v4 = 0;
-  do {
-    temp_v0 = (*(unsigned int *)&s__a_a_00587f08.u1[0]) + temp_v4 * 0x58;
-    temp_v5 = *(char *)(temp_v0 + 0xba4) != '\0';
-    temp_v1 = 0;
-    if (temp_v5) {
-      temp_v1 = (unsigned int)*(unsigned char *)(temp_v0 + 0xbd8);
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        Slot *slot = &DAT_00587f08->u.table.slots[32 + i];
+
+        if (slot->active != 0 && slot->registeredA != 0) {
+            if (slot->handle != NULL && slot->handle->key != 0) {
+                ptrListRemoveClearOwner(g_handleRegistry, slot->handle->key);
+            }
+        }
     }
-    if (temp_v5 && temp_v1 != 0) {
-      temp_v0 = *(int *)(temp_v0 + 0xbd4);
-      if (temp_v0 != 0) {
-        temp_v1 = *(unsigned int *)(temp_v0 + 4);
-      }
-      if (temp_v0 != 0 && temp_v1 != 0) {
-        ptrListRemoveClearOwner(g_handleRegistry);
-      }
+    for (i = 0; i < 32; i++) {
+        Slot *slot = &DAT_00587f08->u.table.slots[i];
+
+        if (slot->active != 0 && slot->registeredB != 0 && slot->registeredA != 0) {
+            if (slot->handle != NULL && slot->handle->key != 0) {
+                ptrListRemoveClearOwner(g_handleRegistry, slot->handle->key);
+            }
+        }
     }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 3);
-  temp_v4 = 0;
-  do {
-    temp_v0 = (*(unsigned int *)&s__a_a_00587f08.u1[0]) + temp_v4 * 0x58;
-    pcVar2 = (char *)(temp_v0 + 0xa4);
-    temp_v1 = 0;
-    if (*pcVar2 != '\0') {
-      temp_v1 = (unsigned int)*(unsigned char *)(temp_v0 + 0xd0);
+    for (i = 0; i < 17; i++) {
+        Extra *extra = &DAT_00587f08->u.extras[i];
+
+        if (extra->handle != NULL && extra->handle->key != 0) {
+            ptrListRemoveClearOwner(g_handleRegistry, extra->handle->key);
+        }
     }
-    if (*pcVar2 != '\0' && temp_v1 != 0) {
-      temp_v1 = (unsigned int)*(unsigned char *)(temp_v0 + 0xd8);
-      if (temp_v1 != 0) {
-        pcVar2 = *(char **)(temp_v0 + 0xd4);
-      }
-      if ((temp_v1 != 0 && pcVar2 != (char *)0x0) && (temp_v1 = 0, *(int *)(pcVar2 + 4) != 0)) {
-        ptrListRemoveClearOwner(g_handleRegistry);
-        temp_v1 = temp_v2;
-      }
-    }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 0x20);
-  temp_v4 = 0;
-  do {
-    temp_v0 = *(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + temp_v4 * 8 + 0x20);
-    if (temp_v0 != 0) {
-      temp_v1 = *(unsigned int *)(temp_v0 + 4);
-    }
-    if (temp_v0 != 0 && temp_v1 != 0) {
-      ptrListRemoveClearOwner(g_handleRegistry);
-      temp_v1 = temp_v3;
-    }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 0x11);
-  return;
 }
 
 } /* extern "C" */

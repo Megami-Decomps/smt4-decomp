@@ -1,26 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034f558` (_code @ 0x34f558, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00192608(void);
+struct Record0034f558 {
+    /* 0x00 */ u8 unk00[0x70];
+    /* 0x70 */ u16 key;
+};
 
-/* Supplied declaration required: FUN_00192608. */
+struct Entry0034f558 {
+    /* 0x00 */ u16 id;
+};
 
+Record0034f558 *FUN_00192608(u32 id);
 
-int FUN_0034f558(unsigned short *param_1,unsigned short *param_2)
-
+/* Comparator: the difference of the keys (+0x70) of the records the two entries' ids refer to. */
+s32 FUN_0034f558(Entry0034f558 *a, Entry0034f558 *b)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = (unsigned int)*param_1;
-  FUN_00192608();
-  temp_v1 = (unsigned int)*param_2;
-  FUN_00192608();
-  return (unsigned int)*(unsigned short *)(temp_v0 + 0x70) - (unsigned int)*(unsigned short *)(temp_v1 + 0x70);
+    Record0034f558 *first = FUN_00192608(a->id);
+    Record0034f558 *second = FUN_00192608(b->id);
+
+    return first->key - second->key;
 }
 
-} /* extern "C" */
+}

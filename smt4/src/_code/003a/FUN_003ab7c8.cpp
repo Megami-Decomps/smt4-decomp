@@ -1,40 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ab7c8` (_code @ 0x3ab7c8, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the placement's flag byte with ldrsb (via mov r0, r5); built uses ldrb */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00231240(int, unsigned int, unsigned int);
-int FUN_002bf818(int);
+/* The sub-object at 0x188 of the entity: its position (passed to the vec2 accessors) and a flag at 0x8a. */
+typedef struct Placement {
+    /* 0x00 */ u8 unk00[0x8a];
+    /* 0x8a */ s8 active;
+} Placement;
 
-/* Supplied declaration required: FUN_00231240. */
-extern int FUN_00241a44(void);
-extern int FUN_0026b564(void);
-extern int FUN_00295618(void);
-extern unsigned int vec2GetYInt(int);
-extern unsigned int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf818. */
+typedef struct Entity003ab7c8 {
+    /* 0x000 */ u8 unk000[0x14];
+    /* 0x014 */ s32 state;
+    /* 0x018 */ s32 stateArg;
+    /* 0x01c */ u8 unk01c[0xac];
+    /* 0x0c8 */ u8 target[0xc0];
+    /* 0x188 */ Placement placement;
+} Entity003ab7c8;
 
+void FUN_002bf818(Placement *placement);
+u32 vec2GetYInt(Placement *placement);
+u32 vec2GetXInt(Placement *placement);
+void FUN_00231240(u8 *target, u32 x, u32 y);
+s32 FUN_0026b564(void);
+s32 FUN_00241a44(void);
+s32 FUN_00295618(void);
 
-void FUN_003ab7c8(int param_1)
-
+/* Syncs the entity's target to its placement and, when the placement is active and all three gates hold, switches to state 11. */
+void FUN_003ab7c8(Entity003ab7c8 *entity)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = param_1 + 0x188;
-  FUN_002bf818(temp_v2);
-  temp_v0 = vec2GetYInt(temp_v2);
-  temp_v1 = vec2GetXInt(temp_v2);
-  FUN_00231240(param_1 + 200,temp_v1,temp_v0);
-  if ((((*(char *)(param_1 + 0x212) != '\0') && (temp_v2 = FUN_0026b564(), temp_v2 != 0)) &&
-      (temp_v2 = FUN_00241a44(), temp_v2 != 0)) && (temp_v2 = FUN_00295618(), temp_v2 != 0)) {
-    *(unsigned int *)(param_1 + 0x14) = 0xb;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-  }
-  return;
+    Placement *placement = &entity->placement;
+    u32 y;
+    u32 x;
+
+    FUN_002bf818(placement);
+    y = vec2GetYInt(placement);
+    x = vec2GetXInt(placement);
+    FUN_00231240(entity->target, x, y);
+    if (placement->active != 0 && FUN_0026b564() != 0 && FUN_00241a44() != 0 && FUN_00295618() != 0) {
+        entity->state = 11;
+        entity->stateArg = 0;
+    }
 }
 
 } /* extern "C" */

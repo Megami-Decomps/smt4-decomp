@@ -16,11 +16,11 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_001f61c4(...); /* 0x1f61c4 */
-extern int FUN_001f625c(...); /* 0x1f625c */
+extern int entryRefCompareByKey(...); /* 0x1f625c */
 extern int FUN_00206d4c(...); /* 0x206d4c */
 extern int FUN_002dc9d4(...); /* 0x2dc9d4 */
 extern int recordCompareByKey(...); /* 0x2dca6c */
-extern int FUN_002e45a8(...); /* 0x2e45a8 */
+extern int devilIdCompareRankOrderId(...); /* 0x2e45a8 */
 extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: FUN_0029f848. */
@@ -73,7 +73,7 @@ void FUN_001ee690(int param_1)
   temp_v4 = FUN_002a0d0c();
   if ((*(unsigned char *)(temp_v4 + 0x15) & 0x7f) == 1) {
     if ((char)*(unsigned char *)(temp_v4 + 0x15) < '\0') {
-      FUN_002b7bca(temp_v3 + 0x5c8,(int)*(short *)(temp_v3 + 0xdc8),4,FUN_002e45a8);
+      FUN_002b7bca(temp_v3 + 0x5c8,(int)*(short *)(temp_v3 + 0xdc8),4,devilIdCompareRankOrderId);
     }
     else {
       FUN_002b7bca(temp_v3 + 0x5c8,(int)*(short *)(temp_v3 + 0xdc8),4,FUN_00206d4c);
@@ -94,7 +94,7 @@ void FUN_001ee690(int param_1)
       FUN_002b7bca(temp_v3 + 0x5c8,(int)*(short *)(temp_v3 + 0xdc8),4,recordCompareByKey);
     }
     else {
-      FUN_002b7bca(temp_v3 + 0x5c8,(int)*(short *)(temp_v3 + 0xdc8),4,FUN_001f625c);
+      FUN_002b7bca(temp_v3 + 0x5c8,(int)*(short *)(temp_v3 + 0xdc8),4,entryRefCompareByKey);
     }
   }
   *(unsigned char *)(temp_v2 + 0x410) = 1;

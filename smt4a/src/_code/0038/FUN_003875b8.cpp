@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp1C; /* 0x1c: local_1c */
 } param_1_stack;
 
-extern unsigned char DAT_0063e1e8; /* 0x63e1e8 */
+extern unsigned char g_asdSoundSystem; /* 0x63e1e8 */
 
 extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
 extern int FUN_00178400(unsigned char *, unsigned int, unsigned char *);
@@ -23,9 +23,9 @@ unsigned int FUN_003875b8(unsigned int param_1)
   unsigned char temp_v2 [12];
   unsigned int temp_v3;
   
-  temp_v0 = nw_snd_SoundArchive_IsAvailable(&DAT_0063e1e8);
+  temp_v0 = nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem);
   temp_v1 = 0xffffffff;
-  if ((temp_v0 != 0) && (temp_v0 = FUN_00178400(&DAT_0063e1e8,param_1,temp_v2), temp_v0 != 0)) {
+  if ((temp_v0 != 0) && (temp_v0 = FUN_00178400(&g_asdSoundSystem,param_1,temp_v2), temp_v0 != 0)) {
     temp_v1 = temp_v3;
   }
   return temp_v1;

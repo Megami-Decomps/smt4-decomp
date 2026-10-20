@@ -12,7 +12,7 @@ int FUN_0018a924(...);
 int FUN_001bc124(void);
 int FUN_002b5cb4(void);
 int FUN_002b5cd4(void);
-int FUN_002d2288(...);
+int gameFlagIsSetByBlock(...);
 int FUN_002d23f0(...);
 int FUN_00329dd4(...);
 int FUN_0032a904(...);
@@ -75,7 +75,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int FUN_0029d6f0(void);
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002b5cd4. */
-/* Supplied declaration required: FUN_002d2288. */
+/* Supplied declaration required: gameFlagIsSetByBlock. */
 /* Supplied declaration required: FUN_002d23f0. */
 /* Supplied declaration required: FUN_00329dd4. */
 /* Supplied declaration required: FUN_0032a904. */
@@ -320,7 +320,7 @@ LAB_0029ad50:
       switch(*(unsigned int *)(temp_v9 + 0x1e0)) {
       case 0:
         *(unsigned short *)(temp_v9 + 0x1e8) = 0;
-        if ((*(int *)(temp_v9 + 0x200) != -1) && (temp_v14 = FUN_002d2288(), temp_v14 == 0)) {
+        if ((*(int *)(temp_v9 + 0x200) != -1) && (temp_v14 = gameFlagIsSetByBlock(), temp_v14 == 0)) {
           if (*(int *)(temp_v9 + 0x1f8) != 99) {
             *(unsigned int *)(temp_v9 + 0x1e0) = 1;
           }
@@ -452,7 +452,7 @@ LAB_0029ad50:
         *(unsigned int *)(temp_v9 + 0x1e0) = temp_v10;
         break;
       case 1:
-        temp_v14 = FUN_002d2288(*(unsigned int *)(temp_v9 + 0x200));
+        temp_v14 = gameFlagIsSetByBlock(*(unsigned int *)(temp_v9 + 0x200));
         if (temp_v14 != 0) {
           temp_v10 = 2;
           *(unsigned short *)(temp_v9 + 0x1e8) = 0;
@@ -584,7 +584,7 @@ LAB_0029ad50:
         }
         break;
       case 5:
-        temp_v14 = FUN_002d2288(*(unsigned int *)(temp_v9 + 0x200));
+        temp_v14 = gameFlagIsSetByBlock(*(unsigned int *)(temp_v9 + 0x200));
         if (temp_v14 != 0) {
           temp_v10 = 6;
           *(unsigned short *)(temp_v9 + 0x1e8) = 0;

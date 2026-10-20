@@ -1,14 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00304d10` (_code @ 0x304d10, 0xa bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct IndexTable {
+    /* 0x00 */ u8 unk00[0x60];
+    /* 0x60 */ u32 *entries;
+} IndexTable;
 
-unsigned int FUN_00304d10(int param_1,int param_2)
-
+/* Entry `index` of the table's entry array. */
+u32 FUN_00304d10(IndexTable *table, int index)
 {
-  return *(unsigned int *)(*(int *)(param_1 + 0x60) + param_2 * 4);
+    u32 *entry = &table->entries[index];
+
+    return *entry;
 }
 
 } /* extern "C" */

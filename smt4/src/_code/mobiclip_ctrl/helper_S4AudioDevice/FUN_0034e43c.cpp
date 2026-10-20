@@ -9,7 +9,7 @@ int FUN_0011bf24(void);
 int FUN_0011cc1c(void);
 int FUN_002bcc54(void);
 int FUN_002bcc60(unsigned int *, int *, unsigned char *, unsigned int [2], unsigned int, int, unsigned int, int);
-int FUN_002bcd44(void);
+int resultReportIfFailed(void);
 int asdOperatorNew(void);
 int memAlloc(int, int, int, int, int, int);
 int nn_os_CriticalSection_Initialize(unsigned int *);
@@ -48,7 +48,7 @@ extern unsigned int DAT_004c40f8; /* 0x4c40f8 */
 /* Supplied declaration required: FUN_0011cc1c. */
 /* Supplied declaration required: FUN_002bcc54. */
 /* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002bcd44. */
+/* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
@@ -107,7 +107,7 @@ unsigned int FUN_0034e43c(unsigned int *param_1,int param_2,int param_3,int para
       *(unsigned char *)(puVar2 + 4) = 0;
     }
     DAT_0044d108 = puVar2;
-    FUN_002bcd44();
+    resultReportIfFailed();
     temp_v1[0] = 0;
     temp_v2 = 4;
     temp_v3 = &LAB_00123c88;

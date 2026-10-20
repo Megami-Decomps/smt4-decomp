@@ -1,32 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00416610` (_code @ 0x416610, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int uiSpriteSetImageKeyframe(int, int, int);
+typedef struct Slot {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u8 unk08[0xC];
+    /* 0x14 */ u8 sprite[0x8C];
+    /* 0xA0 */ u8 active;
+    /* 0xA1 */ u8 unkA1[3];
+    /* 0xA4 */ u32 state;
+    /* 0xA8 */ u8 unkA8[8];
+} Slot; /* 0xB0 */
 
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
+typedef struct SlotList {
+    /* 0x000 */ Slot slots[12];
+} SlotList;
 
+extern void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, s32 arg);
 
-void FUN_00416610(int param_1)
-
+/* Puts every active slot into state 3 and shows its keyframe 5. */
+void FUN_00416610(SlotList *list)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  do {
-    temp_v0 = param_1 + temp_v1 * 0xb0;
-    if (*(char *)(temp_v0 + 0xa0) != '\0') {
-      *(unsigned int *)(temp_v0 + 4) = 0;
-      *(unsigned int *)(temp_v0 + 0xa4) = 3;
-      uiSpriteSetImageKeyframe(temp_v0 + 0x14,5,0);
+    s32 i;
+
+    for (i = 0; i < 12; i++) {
+        Slot *slot = &list->slots[i];
+
+        if (slot->active != 0) {
+            slot->state = 3;
+            slot->unk04 = 0;
+            uiSpriteSetImageKeyframe(slot->sprite, 5, 0);
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0xc);
-  return;
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00215c5c(void);
-int FUN_002829d4(void);
+int questEntryCheck(void);
 int gameFlagSetValue(...);
 int libc_bsearch(...);
 int FUN_00334ff8(void);
@@ -20,7 +20,7 @@ extern unsigned char LAB_00145c78; /* 0x145c78 */
 
 /* Supplied declaration required: FUN_00215c5c. */
 extern int gameDataGetFlagBits(void);
-/* Supplied declaration required: FUN_002829d4. */
+/* Supplied declaration required: questEntryCheck. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: libc_bsearch. */
 extern unsigned int dataTableGetCount(int);
@@ -47,7 +47,7 @@ unsigned int FUN_0026e420(unsigned int param_1,int param_2,int param_3)
   temp_v1 = gameDataGetFlagBits();
   temp_v2 = gameDataGetFlagBits();
   if ((((unsigned int)*(unsigned char *)(temp_v2 + (param_1 >> 3)) & (1 << (param_1 & 7))) == 0) &&
-     ((param_2 != 0 || (temp_v3 = param_1, FUN_002829d4(), temp_v3 == 0)))) {
+     ((param_2 != 0 || (temp_v3 = param_1, questEntryCheck(), temp_v3 == 0)))) {
     if (param_3 == 0) {
       pbVar5 = (unsigned char *)(((int)(param_1 + ((unsigned int)((int)param_1 >> 0x1f) >> 0x1d)) >> 3) + temp_v1);
       temp_v0 = (unsigned char)(1 << (((int)param_1 % 8) & 0xffU));

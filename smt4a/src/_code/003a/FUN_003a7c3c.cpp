@@ -10,7 +10,7 @@ int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_002a4964(int, int);
 int FUN_003d2150(int);
 int FUN_003d498c(unsigned int, int);
-int FUN_003dc530(void);
+int uiQuestSpritesCreate(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern int FUN_001bd100(unsigned int);
 extern int FUN_002c2c68(int);
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d498c. */
-/* Supplied declaration required: FUN_003dc530. */
+/* Supplied declaration required: uiQuestSpritesCreate. */
 
 
 void FUN_003a7c3c(unsigned int param_1)
@@ -70,7 +70,7 @@ void FUN_003a7c3c(unsigned int param_1)
       temp_v2 = FUN_002c2c68(temp_v4);
     } while (temp_v3 < temp_v2);
   }
-  FUN_003dc530();
+  uiQuestSpritesCreate();
   FUN_003d498c(param_1,0);
   uiSpriteSetKeyframe(temp_v0 + 0x34,0);
   uiSpriteSetKeyframe(temp_v0 + 0x494,2,0);

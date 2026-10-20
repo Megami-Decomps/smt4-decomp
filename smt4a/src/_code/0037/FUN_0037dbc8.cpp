@@ -9,7 +9,7 @@ int dataTableValueOrZero(int);
 int FUN_001ad9b4(...);
 int scrWorkGetValue(int);
 int scrWorkSetValue(...);
-int FUN_002852f0(int);
+int messageSlotSet(int);
 int FUN_002c76c0(...);
 int btlTalkBustUpCreate(void);
 int eventTexSetFlag(int);
@@ -29,7 +29,7 @@ extern int FUN_001ada74(unsigned int);
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
-/* Supplied declaration required: FUN_002852f0. */
+/* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: FUN_002c76c0. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 extern int scrGetCommandFrame(void);
@@ -40,7 +40,7 @@ extern int btlTalkBustUpExists(void);
 /* Supplied declaration required: bustupCutAnimSetFlag. */
 extern int FUN_0035fcbc(void);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-extern unsigned int FUN_00375848(void);
+extern unsigned int btlTalkBustUpGetId(void);
 /* Supplied declaration required: FUN_003deea4. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00417a60. */
@@ -70,7 +70,7 @@ unsigned int FUN_0037dbc8(void)
     if (temp_v2 != 0) {
       if (temp_v2 == 1) {
         FUN_002c76c0(0xffffffff);
-        FUN_002852f0(0);
+        messageSlotSet(0);
         sysPlaySe(0x92);
         scrWorkGetValue(3);
         eventTexSetFlag(1);
@@ -81,7 +81,7 @@ unsigned int FUN_0037dbc8(void)
           if (temp_v2 == 0) {
             btlTalkBustUpCreate();
           }
-          if ((temp_v4 != 0) && (temp_v5 = FUN_00375848(), temp_v5 != temp_v4)) {
+          if ((temp_v4 != 0) && (temp_v5 = btlTalkBustUpGetId(), temp_v5 != temp_v4)) {
             FUN_00336de4(temp_v4 & 0xffff,0);
           }
           btlTalkBustUpSetUnk2F4(1);
@@ -102,7 +102,7 @@ unsigned int FUN_0037dbc8(void)
       bustupCutAnimSetFlag(0);
       temp_v2 = btlTalkBustUpExists();
       if (temp_v2 != 0) {
-        temp_v3 = FUN_00375848();
+        temp_v3 = btlTalkBustUpGetId();
         scrWorkSetValue(2,temp_v3);
       }
       else {

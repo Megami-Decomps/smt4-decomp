@@ -147,7 +147,7 @@ extern int FUN_00229914(int *, unsigned int *, int);
 /* Supplied declaration required: FUN_0023c154. */
 /* Supplied declaration required: FUN_0023c638. */
 extern int FUN_0023c684(unsigned int);
-extern int FUN_0023dcbc(void);
+extern int questCurrentIsFlagged(void);
 extern int FUN_0023dcfc(void);
 /* Supplied declaration required: FUN_00240530. */
 extern int FUN_00245cc0(void);
@@ -1206,7 +1206,7 @@ LAB_003ce96c:
       puVar11 = (unsigned int *)*param_1;
       btlMainFindEntryByListedId(puVar11,param_8);
       if ((((*(unsigned short *)((int)puVar11 + 0x1c6) & 0x1c0) == 0) &&
-          (((*puVar11 & 2) == 0 || (temp_v5 = FUN_0023dcbc(), temp_v5 == 0)))) &&
+          (((*puVar11 & 2) == 0 || (temp_v5 = questCurrentIsFlagged(), temp_v5 == 0)))) &&
          (temp_v5 = param_8, FUN_003bd124(), temp_v5 != 0)) {
         temp_v7 = *(int *)(*param_1 + 0x1e98);
         FUN_0023c154(*param_1,4,(int)*(short *)(temp_v7 + param_8 * 0x114 + 0x60),

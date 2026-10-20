@@ -6,7 +6,7 @@ extern "C" {
 
 int soundChannelStopAll(int);
 int FUN_0029c3c0(int, int, int);
-int FUN_0029e054(void);
+int ifTouchRegionAdd(void);
 int soundChannelRequestIfEnabled(int, int);
 int FUN_002a03d8(int, int);
 int asdTMTexTableLoadEntryAsync(int, int);
@@ -18,7 +18,7 @@ int asdTMTexTableLoadTmx(int, int);
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_0029c3c0. */
-/* Supplied declaration required: FUN_0029e054. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
@@ -64,7 +64,7 @@ unsigned int FUN_0023ed64(unsigned int *param_1)
     } while (temp_v1 < 7);
     temp_v0 = 0;
     param_1[0xf] = 0;
-    FUN_0029e054();
+    ifTouchRegionAdd();
     param_1[0xf] = temp_v0;
     temp_v1 = bgmGetStateById(0x1000051);
     if (temp_v1 != 1) {

@@ -1,35 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003383a4` (_code @ 0x3383a4, 0x60 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int dataTableFileGetTable(int, unsigned int);
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x1C];
+} Entry; /* 0x1C */
 
+typedef struct Owner {
+    /* 0x0000 */ u8 unk0000[0x2244];
+    /* 0x2244 */ void *file;
+} Owner;
 
-int FUN_003383a4(int param_1,int param_2)
+extern void *dataTableFileGetTable(void *file, s32 index);
+extern Entry *dataTableGetEntries(void *table);
+extern s32 dataTableGetCount(void *table);
 
+/* The table entry for ids 15-21 (index id - 15) when it is within the table; otherwise the
+ * table's first entry. NULL when the owner has no data file. */
+Entry *FUN_003383a4(Owner *owner, u32 id)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v1 = 0;
-  if (*(int *)(param_1 + 0x2244) != 0) {
-    temp_v0 = dataTableFileGetTable(*(int *)(param_1 + 0x2244),0);
-    temp_v1 = dataTableGetEntries();
-    if (param_2 - 0xfU < 7) {
-      temp_v3 = (int)(short)(param_2 - 0xfU);
-      temp_v2 = dataTableGetCount(temp_v0);
-      if (temp_v3 <= temp_v2 - 1) {
-        temp_v1 = temp_v1 + temp_v3 * 0x1c;
-      }
+    void *table;
+    Entry *entries;
+    s16 index;
+
+    if (owner->file == NULL) {
+        return NULL;
     }
-  }
-  return temp_v1;
+    table = dataTableFileGetTable(owner->file, 0);
+    entries = dataTableGetEntries(table);
+    if (id - 15 < 7) {
+        index = id - 15;
+        s32 last = dataTableGetCount(table) - 1;
+
+        if (index <= last) {
+            return &entries[index];
+        }
+    }
+    return entries;
 }
 
 } /* extern "C" */

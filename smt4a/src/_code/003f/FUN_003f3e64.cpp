@@ -1,44 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f3e64` (_code @ 0x3f3e64, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: branch layout only at the end: retail shares one `str` after the first branch arm and jumps to it from the second (bgt 88); built emits the second arm's store after it */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_001834a4(unsigned int, int);
+typedef struct Position {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+} Position;
 
+typedef struct Slot {
+    /* 0x00 */ u8 unk00[0x22];
+    /* 0x22 */ u8 override;
+    /* 0x23 */ u8 unk23[0x15];
+    /* 0x38 */ s32 index;
+    /* 0x3C */ s32 shifted;
+} Slot;
 
-void FUN_003f3e64(int param_1,int *param_2,int *param_3)
+extern Position *FUN_001834a4(u32 table, s32 index);
 
+/* Looks up the slot's screen position; slots 16 and up use the table's second page and are moved
+ * by 400 horizontally (the left-shifted layout moves slots 4-15 the other way). */
+void FUN_003f3e64(Slot *slot, s32 *x, s32 *y)
 {
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0x38);
-  if (*(char *)(param_1 + 0x22) != '\0') {
-    temp_v0 = FUN_001834a4(0x11,temp_v0 + 0x57);
-    *param_2 = (int)*(short *)(temp_v0 + 8);
-    *param_3 = (int)*(short *)(temp_v0 + 10);
-    return;
-  }
-  if (temp_v0 >= 0x10) {
-    temp_v0 = temp_v0 - 0xc;
-  }
-  temp_v0 = FUN_001834a4(0x11,temp_v0 + 0x2d);
-  *param_2 = (int)*(short *)(temp_v0 + 8);
-  *param_3 = (int)*(short *)(temp_v0 + 10);
-  if (*(int *)(param_1 + 0x3c) != 0) {
-    if (*(int *)(param_1 + 0x38) - 4U >= 0xc) {
-      return;
+    s32 index = slot->index;
+    Position *position;
+    s32 shifted;
+
+    if (slot->override != 0) {
+        position = FUN_001834a4(0x11, index + 0x57);
+        *x = position->x;
+        *y = position->y;
+        return;
     }
-    temp_v0 = *param_2 - 400;
-  }
-  else {
-    if (*(int *)(param_1 + 0x38) < 0x10) {
-      return;
+    if (index > 15) {
+        index -= 12;
     }
-    temp_v0 = *param_2 + 400;
-  }
-  *param_2 = temp_v0;
-  return;
+    position = FUN_001834a4(0x11, index + 0x2d);
+    *x = position->x;
+    *y = position->y;
+    if (slot->shifted != 0) {
+        if ((u32)(slot->index - 4) > 11) {
+            return;
+        }
+        shifted = *x - 400;
+        *x = shifted;
+    } else if (slot->index > 15) {
+        shifted = *x + 400;
+        *x = shifted;
+    }
 }
 
 } /* extern "C" */

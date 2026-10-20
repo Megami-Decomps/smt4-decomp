@@ -33,7 +33,7 @@ extern int DAT_0044dc3c; /* 0x44dc3c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: gameGetUnitRecord. */
-extern int FUN_002b05d0(int);
+extern int categoryGetColor(int);
 /* Supplied declaration required: FUN_002b0750. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002b6758. */
@@ -106,7 +106,7 @@ void FUN_003b65a4(int param_1,unsigned int param_2,int param_3,int param_4,int p
     do {
       if (((unsigned int)temp_v0 & (1 << (temp_v4 & 0xff))) != 0) {
         if (temp_v3 == temp_v5) {
-          temp_v6 = FUN_002b05d0((int)(short)temp_v4);
+          temp_v6 = categoryGetColor((int)(short)temp_v4);
           break;
         }
         temp_v3 = temp_v3 + 1;

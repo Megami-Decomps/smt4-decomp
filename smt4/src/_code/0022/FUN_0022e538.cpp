@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0029e054(int, int, int, int);
+int ifTouchRegionAdd(int, int, int, int);
 int FUN_002bf4f8(int, int);
 
 typedef struct fn_0022e538_arg0 fn_0022e538_arg0;
@@ -16,7 +16,7 @@ struct fn_0022e538_arg0 {
     short field_0x14; /* +0x14 */
 };
 
-/* Supplied declaration required: FUN_0029e054. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: FUN_002bf4f8. */
 
 
@@ -53,11 +53,11 @@ void FUN_0022e538(fn_0022e538_arg0 *param_1)
   temp_v6 = *(unsigned short *)(temp_v4 + 4) & 0xffff7fff;
   temp_v5 = *(unsigned short *)(temp_v4 + 6) & 0xffff7fff;
   temp_v4 = (int)(short)((temp_v1 + temp_v9) - (short)((int)temp_v7 >> 1));
-  FUN_0029e054(temp_v4,(int)(short)((temp_v0 + temp_v10) - (short)((int)temp_v8 >> 1)),
+  ifTouchRegionAdd(temp_v4,(int)(short)((temp_v0 + temp_v10) - (short)((int)temp_v8 >> 1)),
                (int)(short)(temp_v7 << 1),(int)(short)(temp_v8 << 1));
   param_1->field_0x12 = (short)temp_v4;
   temp_v4 = (int)(short)((temp_v9 + temp_v2) - (short)((int)temp_v6 >> 1));
-  FUN_0029e054(temp_v4,(int)(short)((temp_v3 + temp_v10) - (short)((int)temp_v5 >> 1)),
+  ifTouchRegionAdd(temp_v4,(int)(short)((temp_v3 + temp_v10) - (short)((int)temp_v5 >> 1)),
                (int)(short)(temp_v6 << 1),(int)(short)(temp_v5 << 1));
   param_1->field_0x14 = (short)temp_v4;
   return;

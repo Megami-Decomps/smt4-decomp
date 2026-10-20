@@ -1,42 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038b21c` (_code @ 0x38b21c, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002c7b8c(int, int);
-int gameFlagSetValue(int, int);
+typedef struct FlagRecord {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u16 flags[3];
+} FlagRecord;
 
-extern unsigned short scrGetArg(unsigned int);
-extern int FUN_002c2758(unsigned short);
-/* Supplied declaration required: FUN_002c7b8c. */
-extern int FUN_003de92c(unsigned short);
-/* Supplied declaration required: gameFlagSetValue. */
+u32 scrGetArg(u32 index);
+s32 FUN_002c2758(u16 id);
+FlagRecord *FUN_003de92c(u16 id);
+s32 FUN_002c7b8c(u16 id, s32 state);
+s32 gameFlagSetValue(u32 flag, s32 value, s32 arg);
 
-
-unsigned int FUN_0038b21c(void)
-
+/* Script command: for an id in state 1 that has a record, sets state 2 and raises the record's flags. */
+u32 FUN_0038b21c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v1 = scrGetArg(0);
-  temp_v2 = FUN_002c2758(temp_v1);
-  if ((temp_v2 == 1) && (temp_v2 = FUN_003de92c(temp_v1), temp_v2 != 0)) {
-    FUN_002c7b8c(temp_v1,2);
-    temp_v3 = 0;
-    do {
-      temp_v0 = *(short *)(temp_v2 + temp_v3 * 2 + 4);
-      if (temp_v0 != 0) {
-        gameFlagSetValue(temp_v0,1);
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 3);
-  }
-  return 1;
+    u16 id = scrGetArg(0);
+    FlagRecord *record;
+    s32 i;
+
+    if (FUN_002c2758(id) == 1) {
+        record = FUN_003de92c(id);
+        if (record != NULL) {
+            FUN_002c7b8c(id, 2);
+            for (i = 0; i < 3; i++) {
+                u16 flag = record->flags[i];
+
+                if (flag != 0) {
+                    gameFlagSetValue(flag, 1, 1);
+                }
+            }
+        }
+    }
+    return 1;
 }
 
 } /* extern "C" */

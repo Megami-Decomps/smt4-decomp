@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a9f98(unsigned char *, unsigned int);
+int recordTableFindById(unsigned char *, unsigned int);
 int FUN_002ae164(void);
 int libc_bsearch(unsigned char *, unsigned int, unsigned int, int, unsigned char *);
 
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char LAB_00145a98; /* 0x145a98 */
 extern unsigned char *g_aocSystem; /* 0x433158 */
 
-/* Supplied declaration required: FUN_002a9f98. */
+/* Supplied declaration required: recordTableFindById. */
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: libc_bsearch. */
 extern unsigned int dataTableGetCount(unsigned int);
@@ -39,7 +39,7 @@ unsigned int FUN_001386f8(unsigned int param_1)
   
   if (param_1 >= 0x191) {
     puVar1 = g_aocSystem;
-    FUN_002a9f98(g_aocSystem,param_1);
+    recordTableFindById(g_aocSystem,param_1);
     if (puVar1 == (unsigned char *)0x0) {
       temp_v0 = dataTableGet(4,1);
       temp_v1 = dataTableGetEntries();

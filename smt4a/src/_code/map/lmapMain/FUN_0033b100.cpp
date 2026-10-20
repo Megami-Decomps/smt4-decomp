@@ -11,7 +11,7 @@ int FUN_0032714c(void);
 int FUN_00352bc4(void);
 int FUN_00367fac(void);
 int FUN_00368374(...);
-int FUN_00379310(int);
+int lmapSceneMarkerStart(int);
 int FUN_00379344(int);
 int FUN_00384830(void);
 int FUN_003856f8(int);
@@ -55,7 +55,7 @@ extern int FUN_00367f98(void);
 /* Supplied declaration required: FUN_00367fac. */
 /* Supplied declaration required: FUN_00368374. */
 extern int FUN_0036d984(int, unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_00379310. */
+/* Supplied declaration required: lmapSceneMarkerStart. */
 /* Supplied declaration required: FUN_00379344. */
 /* Supplied declaration required: FUN_00384830. */
 /* Supplied declaration required: FUN_003856f8. */
@@ -160,7 +160,7 @@ unsigned int FUN_0033b100(int param_1)
           FUN_00379344(5);
           FUN_00385798(5);
           FUN_003856f8(1);
-          FUN_00379310(2);
+          lmapSceneMarkerStart(2);
           return 0;
         }
         if (((*(int *)(param_1 + 0x17c) == 0) || (*(int *)(param_1 + 0x17c) >= 11)) ||
@@ -169,7 +169,7 @@ unsigned int FUN_0033b100(int param_1)
           FUN_00379344(5);
           FUN_00385798(5);
           FUN_003856f8(1);
-          FUN_00379310(2);
+          lmapSceneMarkerStart(2);
           return 0;
         }
         if (DAT_005f17c4 != 0) {

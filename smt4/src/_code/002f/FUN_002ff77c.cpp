@@ -1,119 +1,95 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ff77c` (_code @ 0x2ff77c, 0x1e8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: loop entry: retail loads the span's count into r0 and first into r6 (ldr, ldr, add); here first is loaded, copied to r6, then added to count. */
+#include "common.h"
+#include "shard/W4_Match6_BtlEntry.h"
 
 extern "C" {
 
-int FUN_002499fc(unsigned int, int [4], int [2]);
-int scrSetResult(int);
-int btlGetMainState(void);
-int scrGetArg(int);
-int FUN_002ae164(void);
-int devilGetRecord(void);
+typedef struct ItemRecord {
+    /* 0x00 */ u8 unk00[0x23];
+    /* 0x23 */ u8 kind;
+} ItemRecord;
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
+typedef struct DevilRecord {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ u16 items[8];
+} DevilRecord;
 
+typedef struct EntrySpan {
+    s32 count;
+    s32 unk4;
+    s32 first;
+    s32 unkC[3];
+} EntrySpan;
+
+#define ITEM_KIND_3 3
+
+extern BtlMainState *btlGetMainState(void);
+extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
+extern u32 FUN_00249a54(void);
+extern int FUN_002499fc(u32 handle, s32 *first, s32 *count);
+extern ItemRecord *FUN_002ae164(u16 id);
+extern DevilRecord *devilGetRecord(u16 id);
 extern int FUN_001d2ac8(void);
-extern int btlMainFindActiveEntry(void);
-/* Supplied declaration required: FUN_002499fc. */
-extern unsigned int FUN_00249a54(void);
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: devilGetRecord. */
+extern u32 scrGetArg(u32 index);
+extern int scrSetResult(s32 value);
 
-
-unsigned int FUN_002ff77c(void)
-
+/* Script command: 1 if the entry with the given id (in the range, or the active one) carries an item of kind 3. */
+u32 FUN_002ff77c(void)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int *puVar6;
-  int temp_v5;
-  unsigned char temp_v6;
-  int temp_v7 [2];
-  int temp_v8 [4];
-  
-  temp_v0 = scrGetArg(0);
-  scrGetArg(1);
-  temp_v1 = FUN_00249a54();
-  FUN_002499fc(temp_v1,temp_v8,temp_v7);
-  temp_v5 = temp_v8[0];
-  if (temp_v8[0] < temp_v7[0] + temp_v8[0]) {
-    do {
-      temp_v2 = btlGetMainState();
-      puVar6 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v5 * 0x288);
-      temp_v3 = *puVar6;
-      if (((temp_v3 & 0x10) == 0) && ((temp_v3 & 1) != 0)) {
-        temp_v6 = (temp_v3 & 0x40) == 0;
-        if (temp_v6) {
-          temp_v3 = (unsigned int)*(unsigned short *)((int)puVar6 + 0xce);
+    u32 id = scrGetArg(0);
+    EntrySpan span;
+    s32 i;
+    s32 j;
+    BtlEntry *entry;
+    ItemRecord *item;
+
+    scrGetArg(1);
+    FUN_002499fc(FUN_00249a54(), &span.first, &span.count);
+    for (i = span.first; i < span.first + span.count; i++) {
+        entry = &btlGetMainState()->entries[i];
+
+        if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) == 0 && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&
+            (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->id == id) {
+            if (entry->equipA != NULL) {
+                for (j = 0; j < 8; j++) {
+                    item = FUN_002ae164(entry->equipA->items[j]);
+                    if (item != NULL && item->kind == ITEM_KIND_3) {
+                        scrSetResult(1);
+                        return 1;
+                    }
+                }
+            }
+            if (entry->equipB != NULL) {
+                for (j = 0; j < 8; j++) {
+                    item = FUN_002ae164(entry->equipB->items[j]);
+                    if (item != NULL && item->kind == ITEM_KIND_3) {
+                        scrSetResult(1);
+                        return 1;
+                    }
+                }
+            }
+            if (entry->devil != NULL) {
+                DevilRecord *devil = devilGetRecord(entry->id);
+
+                for (j = 0; j < 8; j++) {
+                    item = FUN_002ae164(devil->items[j]);
+                    if (item != NULL && item->kind == ITEM_KIND_3) {
+                        scrSetResult(1);
+                        return 1;
+                    }
+                }
+            }
         }
-        if (temp_v6 && temp_v3 == temp_v0) {
-          if (puVar6[0x9e] != 0) {
-            temp_v2 = 0;
-            do {
-              temp_v3 = (unsigned int)*(unsigned short *)(puVar6[0x9e] + temp_v2 * 2 + 0x34);
-              FUN_002ae164();
-              if ((temp_v3 != 0) && (*(char *)(temp_v3 + 0x23) == '\x03')) {
-                scrSetResult(1);
-                return 1;
-              }
-              temp_v2 = temp_v2 + 1;
-            } while (temp_v2 < 8);
-          }
-          if (puVar6[0x9f] != 0) {
-            temp_v2 = 0;
-            do {
-              temp_v3 = (unsigned int)*(unsigned short *)(puVar6[0x9f] + temp_v2 * 2 + 0x34);
-              FUN_002ae164();
-              if ((temp_v3 != 0) && (*(char *)(temp_v3 + 0x23) == '\x03')) {
-                scrSetResult(1);
-                return 1;
-              }
-              temp_v2 = temp_v2 + 1;
-            } while (temp_v2 < 8);
-          }
-          if (puVar6[0xa1] != 0) {
-            temp_v3 = (unsigned int)*(unsigned short *)((int)puVar6 + 0xce);
-            devilGetRecord();
-            temp_v2 = 0;
-            do {
-              temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + temp_v2 * 2 + 0x3c);
-              FUN_002ae164();
-              if ((temp_v4 != 0) && (*(char *)(temp_v4 + 0x23) == '\x03')) {
-                scrSetResult(1);
-                return 1;
-              }
-              temp_v2 = temp_v2 + 1;
-            } while (temp_v2 < 8);
-          }
-        }
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < temp_v8[0] + temp_v7[0]);
-  }
-  temp_v5 = btlGetMainState();
-  if (*(char *)(temp_v5 + 0x49c5) != '\0') {
-    btlGetMainState();
-    temp_v5 = btlMainFindActiveEntry();
-    if (((temp_v5 != 0) && (*(unsigned short *)(temp_v5 + 0xce) == temp_v0)) &&
-       (temp_v5 = FUN_001d2ac8(), temp_v5 != 0)) {
-      scrSetResult(1);
-      return 1;
     }
-  }
-  scrSetResult(0);
-  return 1;
+    if (btlGetMainState()->hasActiveEntry != 0) {
+        entry = btlMainFindActiveEntry(btlGetMainState());
+        if (entry != NULL && entry->id == id && FUN_001d2ac8() != 0) {
+            scrSetResult(1);
+            return 1;
+        }
+    }
+    scrSetResult(0);
+    return 1;
 }
 
-} /* extern "C" */
+}

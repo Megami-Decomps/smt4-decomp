@@ -1,39 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039d808` (_code @ 0x39d808, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable04FindById(void);
-int scrSetResult(int);
+typedef struct UnitData {
+    /* 0x000 */ u8 unk000[0x118];
+    /* 0x118 */ u16 skillIds[8];
+} UnitData;
 
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: scrSetResult. */
-extern int btlUnitGet(unsigned int);
+typedef struct BattleUnit {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ UnitData *data;
+} BattleUnit;
 
+void *dataTable04FindById(u32 id);
+s32 scrSetResult(s32 value);
+BattleUnit *btlUnitGet(u32 id);
 
-unsigned int FUN_0039d808(unsigned int *param_1)
-
+/* Script command: counts the unit's skill slots that hold an id found in data table 4. */
+u32 FUN_0039d808(u32 *args)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = btlUnitGet(*param_1);
-  temp_v2 = *(int *)(temp_v0 + 0x28);
-  temp_v3 = 0;
-  temp_v0 = 0;
-  do {
-    temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + temp_v0 * 2 + 0x118);
-    if ((temp_v1 != 0) && (dataTable04FindById(), temp_v1 != 0)) {
-      temp_v3 = temp_v3 + 1;
+    UnitData *data = btlUnitGet(args[0])->data;
+    s32 count = 0;
+    s32 i;
+
+    for (i = 0; i < 8; i++) {
+        u32 id = data->skillIds[i];
+
+        if (id != 0 && dataTable04FindById(id) != NULL) {
+            count++;
+        }
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 8);
-  scrSetResult(temp_v3);
-  return 1;
+    scrSetResult(count);
+    return 1;
 }
 
 } /* extern "C" */

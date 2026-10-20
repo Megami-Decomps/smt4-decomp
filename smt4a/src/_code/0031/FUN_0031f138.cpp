@@ -1,34 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031f138` (_code @ 0x31f138, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x36];
+    /* 0x36 */ u16 bits;  /* bits 2-7: 6-bit value */
+    /* 0x38 */ u8 unk38[0x18];
+} Entry;
 
+typedef struct Block {
+    /* 0x0000 */ u8 unk0000[0x5F0C];
+    /* 0x5F0C */ Entry entries[0x501];
+} Block;
 
-unsigned int FUN_0031f138(unsigned int param_1,unsigned int param_2)
+typedef struct GameDataBlocksView {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ Block *block;
+} GameDataBlocksView;
 
+extern GameDataBlocksView g_gameDataBlocks;
+
+/* Stores a 6-bit value (saturating above 63) in bits 2-7 of entry `index`; returns 0 for an index past the table. */
+u32 FUN_0031f138(u32 index, s32 value)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned short temp_v2;
-  
-  if (param_1 >= 0x501) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v1 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + param_1 * 0x50;
-    if ((int)param_2 >= 0x40) {
-      temp_v2 = *(unsigned short *)(temp_v1 + 0x5f42) | 0xfc;
+    u8 *row;
+    Entry *entry;
+
+    if (index > 0x500) {
+        return 0;
     }
-    else {
-      temp_v2 = (unsigned short)((param_2 & 0x3f) << 2) | (*(unsigned short *)(temp_v1 + 0x5f42) & 0xff03);
+    row = (u8 *)g_gameDataBlocks.block + index * sizeof(Entry);
+    entry = (Entry *)(row + 0x5F0C);
+    if (value > 63) {
+        entry->bits |= 0xFC;
+    } else {
+        entry->bits = (entry->bits & ~0xFC) | ((value << 2) & 0xFC);
     }
-    *(unsigned short *)(temp_v1 + 0x5f42) = temp_v2;
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    return 1;
 }
 
 } /* extern "C" */

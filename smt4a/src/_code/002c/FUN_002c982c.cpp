@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019e130(int);
+int markerKindGetColor(int);
 int FUN_0024101c(int, short *);
 int FUN_002a7324(int);
 int FUN_00334214(unsigned char [42], int, int, int);
@@ -21,7 +21,7 @@ typedef struct {
     unsigned short sp12E; /* 0x12e: local_12e */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0019e130. */
+/* Supplied declaration required: markerKindGetColor. */
 /* Supplied declaration required: FUN_0024101c. */
 /* Supplied declaration required: FUN_002a7324. */
 extern short *FUN_002c7e24(void);
@@ -66,7 +66,7 @@ void FUN_002c982c(int param_1)
             do {
               if (((unsigned int)*(unsigned short *)(temp_v0 + 0x485e) & (1 << (temp_v2 & 0xff))) != 0) {
                 if (*piVar6 == temp_v3) {
-                  FUN_0019e130((int)(short)temp_v2);
+                  markerKindGetColor((int)(short)temp_v2);
                   FUN_003b076c();
                   FUN_0037e09c(1);
                   if (*(short *)(temp_v0 + 0x485e) != psVar2[0xe]) {
@@ -93,7 +93,7 @@ void FUN_002c982c(int param_1)
         }
         else {
 LAB_002c998c:
-          FUN_0019e130(0);
+          markerKindGetColor(0);
           FUN_003b076c();
           if (*(short *)(temp_v0 + 0x485e) != psVar2[0xe]) {
             FUN_0036d318(*puVar4,temp_v5);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c5d5c(unsigned int [4], unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned int [4], unsigned char *, int, int);
 int rt_memcpy_w(int [21], unsigned char *, int);
 
 /* stack frame of param_6: 9 slot(s), 36 byte(s) */
@@ -42,7 +42,7 @@ extern unsigned char DAT_004d46ec; /* 0x4d46ec */
 extern unsigned char DAT_004d46fd; /* 0x4d46fd */
 extern unsigned int DAT_004d4704; /* 0x4d4704 */
 
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -67,7 +67,7 @@ void FUN_002b1fc4(unsigned int *param_1,unsigned int *param_2,unsigned int *para
   unsigned int temp_v7;
   int aiStack_70 [21];
   
-  FUN_002c5d5c(temp_v1,&LAB_00141adc,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_00141adc,0x10,4);
   rt_memcpy_w(aiStack_70,&DAT_004091d0,0x50);
   if (param_6 != 0) {
     temp_v1[0] = *param_1;

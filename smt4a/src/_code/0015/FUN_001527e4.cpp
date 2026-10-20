@@ -1,83 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001527e4` (_code @ 0x1527e4, 0x12c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001656e0(unsigned int, int);
-int FUN_0016572c(unsigned int, int);
-int FUN_00167f24(int);
+typedef struct EventTex {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 jobsA[16];
+    /* 0x44 */ s32 countA;
+    /* 0x48 */ u8 unk48[4];
+    /* 0x4C */ u32 jobsB[16];
+} EventTex;
 
-extern int g_eventTex; /* 0x57f3b0 */
+extern EventTex *g_eventTex;
 
-extern int jobIsValid(unsigned int);
-extern int jobGetStatus(unsigned int);
-/* Supplied declaration required: FUN_001656e0. */
-/* Supplied declaration required: FUN_0016572c. */
-extern int eventTexJobGetId(unsigned int);
-extern int FUN_00167898(unsigned int);
-/* Supplied declaration required: FUN_00167f24. */
-extern unsigned char FUN_00169580(unsigned int);
-extern unsigned char FUN_00169590(unsigned int);
+extern s32 jobIsValid(u32 job);
+extern s32 jobGetStatus(u32 job);
+extern s32 eventTexJobGetId(u32 job);
+extern void FUN_001656e0(u32 job, s32 selected);
+extern u32 FUN_00169580(u32 job);
+extern s32 FUN_00167898(u32 job);
+extern void FUN_0016572c(u32 job, s32 selected);
+extern u32 FUN_00169590(u32 job);
+extern void FUN_00167f24(u32 arg);
 
-
-unsigned int FUN_001527e4(int param_1)
-
+/* Selects the event-texture jobs whose id is `id` and deselects the others; 1 if any matched. */
+s32 FUN_001527e4(s32 id)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  temp_v0 = g_eventTex;
-  if (g_eventTex == 0) {
-    temp_v2 = 0;
-  }
-  else {
-    temp_v2 = 0;
-    temp_v4 = 0;
-    if (0 < *(int *)(g_eventTex + 0x44)) {
-      do {
-        temp_v5 = temp_v0 + temp_v4 * 4;
-        temp_v3 = jobIsValid(*(unsigned int *)(temp_v5 + 4));
-        if ((temp_v3 != 0) && (temp_v3 = jobGetStatus(*(unsigned int *)(temp_v5 + 4)), temp_v3 != 4)) {
-          temp_v3 = eventTexJobGetId(*(unsigned int *)(temp_v5 + 4));
-          if (temp_v3 == param_1) {
-            FUN_001656e0(*(unsigned int *)(temp_v5 + 4),1);
-            temp_v1 = FUN_00169580(*(unsigned int *)(temp_v5 + 4));
-            FUN_00167f24(temp_v1);
-            temp_v2 = 1;
-          }
-          else {
-            FUN_001656e0(*(unsigned int *)(temp_v5 + 4),0);
-          }
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < *(int *)(temp_v0 + 0x44));
+    EventTex *eventTex = g_eventTex;
+    s32 found;
+    s32 i;
+
+    if (eventTex == NULL) {
+        return 0;
     }
-    temp_v4 = 0;
-    do {
-      temp_v5 = temp_v0 + temp_v4 * 4;
-      temp_v3 = jobIsValid(*(unsigned int *)(temp_v5 + 0x4c));
-      if (temp_v3 != 0) {
-        temp_v3 = FUN_00167898(*(unsigned int *)(temp_v5 + 0x4c));
-        if (temp_v3 == param_1) {
-          FUN_0016572c(*(unsigned int *)(temp_v5 + 0x4c),1);
-          temp_v1 = FUN_00169590(*(unsigned int *)(temp_v5 + 0x4c));
-          FUN_00167f24(temp_v1);
-          temp_v2 = 1;
+    found = 0;
+    for (i = 0; i < eventTex->countA; i++) {
+        if (jobIsValid(eventTex->jobsA[i]) != 0 && jobGetStatus(eventTex->jobsA[i]) != 4) {
+            if (eventTexJobGetId(eventTex->jobsA[i]) == id) {
+                FUN_001656e0(eventTex->jobsA[i], 1);
+                FUN_00167f24(FUN_00169580(eventTex->jobsA[i]) & 0xFF);
+                found = 1;
+            } else {
+                FUN_001656e0(eventTex->jobsA[i], 0);
+            }
         }
-        else {
-          FUN_0016572c(*(unsigned int *)(temp_v5 + 0x4c),0);
+    }
+    for (i = 0; i < 16; i++) {
+        if (jobIsValid(eventTex->jobsB[i]) != 0) {
+            if (FUN_00167898(eventTex->jobsB[i]) == id) {
+                FUN_0016572c(eventTex->jobsB[i], 1);
+                FUN_00167f24(FUN_00169590(eventTex->jobsB[i]) & 0xFF);
+                found = 1;
+            } else {
+                FUN_0016572c(eventTex->jobsB[i], 0);
+            }
         }
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 0x10);
-  }
-  return temp_v2;
+    }
+    return found;
 }
 
 } /* extern "C" */

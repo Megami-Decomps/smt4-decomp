@@ -10,7 +10,7 @@ int FUN_0024f880(...);
 int FUN_0024f890(...);
 int FUN_00256a50(...);
 int FUN_00256dbc(...);
-int FUN_00256f88(...);
+int entryListSetPhase(...);
 int FUN_002571e8(...);
 int FUN_00257374(...);
 int refCountIncrement(void);
@@ -110,7 +110,7 @@ extern int FUN_0021987c(void *);
 /* Supplied declaration required: FUN_0024f890. */
 /* Supplied declaration required: FUN_00256a50. */
 /* Supplied declaration required: FUN_00256dbc. */
-/* Supplied declaration required: FUN_00256f88. */
+/* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: FUN_002571e8. */
 /* Supplied declaration required: FUN_00257374. */
 /* Supplied declaration required: refCountIncrement. */
@@ -440,7 +440,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
         temp_v31 = DAT_004ea964;
         do {
           if (-1 < (int)pfVar8[4]) {
-            FUN_00256f88(temp_v2);
+            entryListSetPhase(temp_v2);
             FUN_00256dbc(temp_v2,temp_v50);
             temp_v46 = (unsigned int *)&DAT_004ea91c;
             DAT_004ea978 = temp_v39;
@@ -536,7 +536,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
         temp_v18 = 255.0f;
         do {
           if (-1 < (int)pfVar8[4]) {
-            FUN_00256f88(temp_v2);
+            entryListSetPhase(temp_v2);
             FUN_00256dbc(temp_v2,temp_v50);
             *temp_v33 = temp_v54;
             temp_v33[1] = temp_v55;

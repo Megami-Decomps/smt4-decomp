@@ -6,7 +6,7 @@ extern "C" {
 
 int renderCtxResetColorScale(int);
 int FUN_0016c4b8(int, unsigned int);
-int FUN_0016c560(int);
+int skinObjectUpdateMatrices(int);
 int FUN_002b358c(unsigned int);
 int FUN_002ff8e8(unsigned int);
 int camSetMatrixB(int, int *);
@@ -30,7 +30,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_002b358c. */
 /* Supplied declaration required: FUN_002ff8e8. */
 /* Supplied declaration required: camSetMatrixB. */
@@ -133,7 +133,7 @@ void FUN_002b3c9c(unsigned short *param_1,unsigned int param_2)
     }
     FUN_00412e44(*(unsigned int *)(param_1 + 4));
     renderCtxResetColorScale(g_renderCtx);
-    FUN_0016c560(g_renderCtx);
+    skinObjectUpdateMatrices(g_renderCtx);
     temp_v0 = g_renderCtx;
     piVar5 = (int *)(g_renderCtx + 0x1258);
     temp_v1 = *piVar5;

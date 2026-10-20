@@ -8,7 +8,7 @@ int sysPlaySe(int);
 int sub68OwnerCall6(void);
 int sub68OwnerCall8(void);
 int FUN_003b61ec(void);
-int FUN_003c5848(void);
+int commonBgReset(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: sub68OwnerCall6. */
 /* Supplied declaration required: sub68OwnerCall8. */
 /* Supplied declaration required: FUN_003b61ec. */
-/* Supplied declaration required: FUN_003c5848. */
+/* Supplied declaration required: commonBgReset. */
 
 
 void FUN_003bf3f0(int param_1)
@@ -41,7 +41,7 @@ void FUN_003bf3f0(int param_1)
   (*(unsigned char *)((unsigned char *)&g_gameState + 0x295)) = 0;
   temp_v0 = gameFlagIsSet(0x49a);
   if (temp_v0 != 0) {
-    FUN_003c5848();
+    commonBgReset();
   }
   else {
     FUN_003b61ec();

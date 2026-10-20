@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00157558(int);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
-int FUN_0016c560(...);
+int skinObjectUpdateMatrices(...);
 int FUN_001835b4(...);
 int FUN_001879d0(...);
 int FUN_002e129c(...);
@@ -29,7 +29,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001879d0. */
@@ -162,7 +162,7 @@ unsigned int FUN_0036b21c(void)
     (**(romwright_code **)(temp_v2 + 0x1274))();
     *(unsigned char *)(temp_v2 + 0x1270) = 0;
   }
-  FUN_0016c560(g_renderCtx);
+  skinObjectUpdateMatrices(g_renderCtx);
   renderCtxResetColorScale(g_renderCtx);
   return 0;
 }

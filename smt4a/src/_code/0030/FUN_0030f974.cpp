@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(...);
+int _ZN9Obj55b28cD1Ev(...);
 int onlineJobSetStateReady(int *);
 int FUN_002e78d0(int, int *, int);
 int onlineTimeGetNow(unsigned int *);
@@ -30,7 +30,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineJobSetStateReady. */
 /* Supplied declaration required: FUN_002e78d0. */
 /* Supplied declaration required: onlineTimeGetNow. */
@@ -121,9 +121,9 @@ unsigned int FUN_0030f974(int param_1)
       listIteratorNext4(&temp_v7);
     }
   }
-  FUN_002e6e5c(temp_v10);
-  FUN_002e6e5c(temp_v9);
-  FUN_002e6e5c(temp_v8);
+  _ZN9Obj55b28cD1Ev(temp_v10);
+  _ZN9Obj55b28cD1Ev(temp_v9);
+  _ZN9Obj55b28cD1Ev(temp_v8);
   return temp_v2;
 }
 

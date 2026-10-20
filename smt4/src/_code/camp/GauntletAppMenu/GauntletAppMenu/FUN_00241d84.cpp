@@ -19,7 +19,7 @@ extern int FUN_001b1974(...); /* 0x1b1974 */
 extern int FUN_001f64c0(...); /* 0x1f64c0 */
 extern int FUN_0020713c(...); /* 0x20713c */
 extern int FUN_0020729c(...); /* 0x20729c */
-extern int FUN_0021966c(...); /* 0x21966c */
+extern int entryRefCompareByKindLevelOrder(...); /* 0x21966c */
 extern int g_gauntletAppMenu; /* 0x43dc88 */
 
 /* Supplied declaration required: FUN_0027f3dc. */
@@ -59,7 +59,7 @@ void FUN_00241d84(void)
     }
     else {
       temp_v2 = FUN_0029ee54(temp_v0 + 0x10);
-      FUN_002b7bca(temp_v0 + 0x74,temp_v2,4,FUN_0021966c);
+      FUN_002b7bca(temp_v0 + 0x74,temp_v2,4,entryRefCompareByKindLevelOrder);
     }
   }
   if ((*pbVar5 & 0x7f) == 0x16) {

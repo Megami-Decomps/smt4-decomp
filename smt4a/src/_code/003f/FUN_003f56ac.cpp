@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001517b4(...);
 int FUN_00163aa4(int);
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(...);
 int FUN_002a48e0(int);
@@ -20,7 +20,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int FUN_002a4860(int);
@@ -45,7 +45,7 @@ void FUN_003f56ac(int param_1)
   if (temp_v0 != 0) {
     temp_v0 = FUN_002a4860(param_1 + 0xbc);
     if (temp_v0 == 0) goto LAB_003f57a4;
-    FUN_001641b4(0x100020d);
+    eventQueueAddUniqueIfValid(0x100020d);
     *(int *)(param_1 + 0x50) = *(int *)(param_1 + 0x50) - 1;
     FUN_002a48e0(param_1 + 0xbc);
   }
@@ -57,7 +57,7 @@ void FUN_003f56ac(int param_1)
     if ((temp_v0 != temp_v1 - 7) &&
        ((temp_v0 = flaggedEntryGetValueA(param_1 + 0xbc), temp_v0 != 0 ||
         (temp_v0 = FUN_002c2c68(param_1 + 0xbc), temp_v0 >= 7)))) {
-      FUN_001641b4(0x100020d);
+      eventQueueAddUniqueIfValid(0x100020d);
       *(int *)(param_1 + 0x50) = *(int *)(param_1 + 0x50) + 1;
       FUN_002a48e0(param_1 + 0xbc);
     }
@@ -67,7 +67,7 @@ LAB_003f57a4:
     temp_v0 = 8;
     FUN_001517b4(8,1);
     if (temp_v0 != 0) {
-      FUN_001641b4(0x1000210);
+      eventQueueAddUniqueIfValid(0x1000210);
       uiSpriteSetKeyframe(param_1 + 0x284,3,0);
       uiSpriteSetImageKeyframe(param_1 + 0x284,1,0);
       *(unsigned char *)(param_1 + 0x5e4) = 1;
@@ -76,7 +76,7 @@ LAB_003f57a4:
     temp_v0 = 7;
     FUN_001517b4(7,1);
     if (temp_v0 != 0) {
-      FUN_001641b4(0x1000210);
+      eventQueueAddUniqueIfValid(0x1000210);
       uiSpriteSetKeyframe(param_1 + 0x284,2,0);
       uiSpriteSetImageKeyframe(param_1 + 0x284,1,0);
       *(unsigned char *)(param_1 + 0x5e5) = 1;
@@ -86,7 +86,7 @@ LAB_003f57a4:
   temp_v0 = 1;
   FUN_001517b4();
   if (temp_v0 != 0) {
-    FUN_001641b4(0x100020f);
+    eventQueueAddUniqueIfValid(0x100020f);
     uiSpriteSetKeyframe(param_1 + 0x1f8,2,0);
     uiSpriteSetImageKeyframe(param_1 + 0x1f8,1,0);
     uiSpriteSetKeyframe(param_1 + 0x540,1,0);

@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_00357488(int);
-int FUN_0035f198(unsigned int *);
+int registerObj8Holder(int);
+int ngwordStateReset(unsigned int *);
 int software_interrupt(int);
 
 extern unsigned char DAT_00420fac; /* 0x420fac */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_00357488. */
-/* Supplied declaration required: FUN_0035f198. */
+/* Supplied declaration required: registerObj8Holder. */
+/* Supplied declaration required: ngwordStateReset. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
@@ -29,8 +29,8 @@ int FUN_0033b618(int param_1)
     *piVar1 = 0;
   }
   *(unsigned char **)(param_1 + 8) = &DAT_00420fac;
-  FUN_0035f198((unsigned int *)(param_1 + 8));
-  FUN_00357488(param_1 + 0xc);
+  ngwordStateReset((unsigned int *)(param_1 + 8));
+  registerObj8Holder(param_1 + 0xc);
   return param_1;
 }
 

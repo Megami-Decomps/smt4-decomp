@@ -1,37 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028e934` (_code @ 0x28e934, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int g_aocSystem; /* 0x433158 */
+/* One 0x28-byte table entry: two 16-byte halves, selected by the caller. */
+typedef struct TableEntry {
+    /* 0x00 */ u8 half[2][0x10];
+    /* 0x20 */ u8 unk20[8];
+} TableEntry;
 
-extern int entryListFindById(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
+typedef struct FoundEntry {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u8 data[1];
+} FoundEntry;
 
+extern void *g_aocSystem;
 
-int FUN_0028e934(unsigned int param_1,int param_2)
+extern FoundEntry *entryListFindById(void *system, u32 id);
+extern void *dataTableGet(s32 table, s32 section);
+extern TableEntry *dataTableGetEntries(void *section);
+extern u32 dataTableGetCount(void *section);
 
+/* The data of the entry for `id`: the AOC system's own, else the table's entry (second half if
+ * `second`; the table's first entry when `id` is out of range). */
+void *FUN_0028e934(u32 id, s32 second)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = entryListFindById(g_aocSystem,param_1);
-  if (temp_v0 != 0) {
-    temp_v0 = temp_v0 + 2;
-  }
-  else {
-    temp_v1 = dataTableGet(1,0);
-    temp_v0 = dataTableGetEntries();
-    temp_v2 = dataTableGetCount(temp_v1);
-    if ((param_1 < temp_v2) && (temp_v0 = temp_v0 + param_1 * 0x28, param_2 != 0)) {
-      temp_v0 = temp_v0 + 0x10;
+    FoundEntry *found = entryListFindById(g_aocSystem, id);
+    void *section;
+    TableEntry *entries;
+
+    if (found != NULL) {
+        return found->data;
     }
-  }
-  return temp_v0;
+    section = dataTableGet(1, 0);
+    entries = dataTableGetEntries(section);
+    if (dataTableGetCount(section) <= id) {
+        return entries;
+    }
+    if (second != 0) {
+        return entries[id].half[1];
+    }
+    return entries[id].half[0];
 }
 
 } /* extern "C" */

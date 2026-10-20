@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002579bc. */
 /* Supplied declaration required: FUN_00257a50. */
-extern int FUN_00262f14(void);
+extern int partyPanelIsActive(void);
 /* Supplied declaration required: FUN_0029da34. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 
@@ -46,7 +46,7 @@ void FUN_00241b44(int *param_1)
     buttonHelpSetPreset(0x4f);
     return;
   }
-  temp_v0 = FUN_00262f14();
+  temp_v0 = partyPanelIsActive();
   if (temp_v0 == 0) {
     if (*(char *)(temp_v1 + 0x98) != '\x01') {
       buttonHelpSetPreset(3);

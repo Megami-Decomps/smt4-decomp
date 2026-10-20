@@ -9,7 +9,7 @@ int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_00202400(void);
 int FUN_002ae320(void);
 int FUN_003d498c(unsigned int, int);
-int FUN_003dc530(void);
+int uiQuestSpritesCreate(void);
 int FUN_003defe0(void);
 
 extern int g_uiQuest; /* 0x57f28c */
@@ -23,7 +23,7 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002ae320. */
 extern int FUN_002f7730(int, unsigned int);
 /* Supplied declaration required: FUN_003d498c. */
-/* Supplied declaration required: FUN_003dc530. */
+/* Supplied declaration required: uiQuestSpritesCreate. */
 /* Supplied declaration required: FUN_003defe0. */
 extern int partyEntryBitsBit4(unsigned int);
 
@@ -42,7 +42,7 @@ void FUN_00334560(void)
   
   temp_v5 = g_uiQuest;
   *(unsigned char *)(g_uiQuest + 0x90c) = 1;
-  FUN_003dc530();
+  uiQuestSpritesCreate();
   temp_v1 = FUN_002a4860();
   temp_v2 = FUN_002a4894(temp_v5 + 0x948);
   temp_v0 = *(unsigned short *)(temp_v5 + (temp_v2 + temp_v1) * 2 + 0xa10);

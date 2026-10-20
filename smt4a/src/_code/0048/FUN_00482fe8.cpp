@@ -56,7 +56,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: gameFlagsGetBlock. */
 extern int gameFlagIsSet(void);
-extern int FUN_00364444(int);
+extern int gameFlagIsSetByBlockAt156c(int);
 /* Supplied declaration required: FUN_00379958. */
 extern int FUN_003b99d4(void);
 extern int FUN_003ded68(unsigned short);
@@ -106,7 +106,7 @@ void FUN_00482fe8(fn_00482fe8_arg0 *param_1)
       if (((((((*pcVar2 != -1) && ('c' < *pcVar2)) &&
              (temp_v1 = FUN_003ded68(*(unsigned short *)(pcVar2 + 0x12)), temp_v1 != 0)) &&
             (((int)*pcVar2 == param_1->field_0x4 && ((int)pcVar2[1] == param_1->field_0x8)))) &&
-           ((temp_v1 = FUN_00364444((int)(short)(int)pcVar5), temp_v1 == 0 &&
+           ((temp_v1 = gameFlagIsSetByBlockAt156c((int)(short)(int)pcVar5), temp_v1 == 0 &&
             ((*(short *)(pcVar2 + 0x14) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))))) &&
           ((*(short *)(pcVar2 + 0x16) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)))) &&
          (param_1->field_0x10 < 0x10)) {

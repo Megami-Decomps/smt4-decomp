@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0025a0e0(void);
+int commonBgReset(void);
 int FUN_00275f00(void);
 int FUN_00289880(void);
 
@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned char g_gameState; /* 0x49f91c */
 
-/* Supplied declaration required: FUN_0025a0e0. */
+/* Supplied declaration required: commonBgReset. */
 /* Supplied declaration required: FUN_00275f00. */
 /* Supplied declaration required: FUN_00289880. */
 extern int gameFlagIsSet(unsigned int);
@@ -31,7 +31,7 @@ void FUN_0039bbd4(void)
     (*(signed char *)((unsigned char *)&g_gameState + 0x251)) = '\0';
     temp_v0 = gameFlagIsSet(0x16);
     if (temp_v0 != 0) {
-      FUN_0025a0e0();
+      commonBgReset();
     }
     else {
       FUN_00289880();

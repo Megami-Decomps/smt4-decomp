@@ -1,38 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020147c` (_code @ 0x20147c, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction scheduling only: retail hoists `mov r1, #10` above the conditional color select and loads 1.0f before `mov r2, #1`. */
+#include "event/eventCommand.h"
 
 extern "C" {
 
-int FUN_00259324(unsigned int, int, int);
+void FUN_00259324(u32 a, u32 b, s32 c, f32 d);
+s32 scrGetCommandFrame(void);
+u32 scrGetArg(s32 index);
 
-extern int g_eventCommand; /* 0x43e088 */
+extern EventCommandGlobals g_eventCommand;
 
-/* Supplied declaration required: FUN_00259324. */
-extern int scrGetCommandFrame(void);
-extern int scrGetArg(unsigned int);
-
-
-unsigned char FUN_0020147c(void)
-
+/* True once the command's two counters agree; while scrGetCommandFrame reports zero it starts
+ * FUN_00259324 with 0xFF (argument 0 is zero) or -1, 10 and 1.0, and returns false. */
+bool FUN_0020147c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = scrGetCommandFrame();
-  if (temp_v0 == 0) {
-    temp_v0 = scrGetArg(0);
-    if (temp_v0 == 0) {
-      temp_v1 = 0xff;
+    if (scrGetCommandFrame() == 0) {
+        FUN_00259324(scrGetArg(0) == 0 ? 0xFF : 0xFFFFFFFF, 10, 1, 1.0f);
+        return false;
     }
-    else {
-      temp_v1 = 0xffffffff;
-    }
-    FUN_00259324(temp_v1,10,1);
-    return 0;
-  }
-  return *(int *)(g_eventCommand + 0x10) == *(int *)(g_eventCommand + 0x14);
+    return g_eventCommand.command->unk10 == g_eventCommand.command->unk14;
 }
 
 } /* extern "C" */

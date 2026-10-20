@@ -1,64 +1,85 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e7418` (_code @ 0x4e7418, 0x10c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction scheduling of the final record address only (retail loads the g_btlAction record base before the camera flag update, the build loads the constant 0x495 and the stored 0x1D earlier). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_004ab734(unsigned int);
-int FUN_004e0114(int *, int, int, int, int, int);
-int FUN_004fbd98(int, int, unsigned int, int);
-int FUN_004fde5c(int, int, int, int, int, int);
+typedef struct BtlActor {
+    /* 0x0000 */ u8 unk0000[0xA4];
+    /* 0x00A4 */ s32 slot;
+    /* 0x00A8 */ s32 uiState;
+    /* 0x00AC */ u8 unk00AC[0x1F56];
+    /* 0x2002 */ s16 memberCount;
+} BtlActor;
 
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
+typedef struct BtlActorRef {
+    /* 0x00 */ BtlActor *actor;
+} BtlActorRef;
 
-extern unsigned char g_btlAction; /* 0x571138 */
-extern int g_btlCamera; /* 0x571508 */
-extern unsigned int g_btlEvent; /* 0x573898 */
-extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
+typedef struct BtlSkill {
+    /* 0x00 */ u8 unk00[0x6A];
+    /* 0x6A */ s16 animation;
+    /* 0x6C */ u32 hitFlags;
+} BtlSkill;
 
-/* Supplied declaration required: FUN_004ab734. */
-extern int isEntryUsable(unsigned int);
-/* Supplied declaration required: FUN_004e0114. */
-/* Supplied declaration required: FUN_004fbd98. */
-/* Supplied declaration required: FUN_004fde5c. */
+typedef struct BtlCommand {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u32 target;
+    /* 0x24 */ BtlSkill *skill;
+} BtlCommand;
 
+typedef struct BtlActionRecord {
+    /* 0x00 */ u8 unk00[9];
+    /* 0x09 */ u8 state;
+} BtlActionRecord;
 
-unsigned int FUN_004e7418(int *param_1,int param_2)
+typedef struct BtlActionGlobals {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 *data;        /* per-actor records (BtlActionRecord), 0x495 words each */
+} BtlActionGlobals;
 
+typedef struct BtlCameraBlock {
+    /* 0x000 */ u8 unk000[0x64C];
+    /* 0x64C */ u32 flags;
+} BtlCameraBlock;
+
+extern BtlActionGlobals g_btlAction;  /* 0x571138 */
+extern BtlCameraBlock *g_btlCamera;   /* 0x571508 */
+extern u32 g_btlEvent;                /* 0x573898 */
+extern u32 g_btlUiBlock;              /* 0x57a9c8 */
+
+extern int isEntryUsable(u32 event);
+extern int FUN_004ab734(u32 block);
+extern int FUN_004e0114(BtlActorRef *ref, BtlCommand *cmd, int animation, int a, int b, int c);
+extern int FUN_004fbd98(int a, BtlCommand *cmd, u32 target, int b);
+extern int FUN_004fde5c(int a, BtlCommand *cmd, BtlSkill *skill, int b, int c, int d);
+
+/* Runs the actor's skill start: picks the UI state, plays the skill animation and marks the actor's record as state 0x1D. */
+u32 FUN_004e7418(BtlActorRef *ref, BtlCommand *cmd)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = isEntryUsable(g_btlEvent);
-  if (temp_v0 != 0) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v0 = *param_1;
-    if (*(int *)(temp_v0 + 0xa8) != 0xd) {
-      if (*(short *)(temp_v0 + 0x2002) - 1 < 1) {
-        *(unsigned int *)(temp_v0 + 0xa8) = 1;
-      }
-      else {
-        *(unsigned int *)(temp_v0 + 0xa8) = 0;
-        FUN_004ab734(g_btlUiBlock);
-      }
+    BtlActor *actor;
+    BtlActionRecord *record;
+
+    if (isEntryUsable(g_btlEvent) != 0) {
+        return 0;
     }
-    if ((*(unsigned int *)(*(int *)(param_2 + 0x24) + 0x6c) & 0xff) != 0) {
-      FUN_004fde5c(0,param_2,*(int *)(param_2 + 0x24),0,0,0);
+    actor = ref->actor;
+    if (actor->uiState != 13) {
+        if (actor->memberCount - 1 <= 0) {
+            actor->uiState = 1;
+        } else {
+            actor->uiState = 0;
+            FUN_004ab734(g_btlUiBlock);
+        }
     }
-    FUN_004fbd98(0x1e,param_2,*(unsigned int *)(param_2 + 0x20),1);
-    FUN_004e0114(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x6a),0,0x1e,0x1e);
-    *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xfdffffff;
-    *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    if ((cmd->skill->hitFlags & 0xFF) != 0) {
+        FUN_004fde5c(0, cmd, cmd->skill, 0, 0, 0);
+    }
+    FUN_004fbd98(0x1E, cmd, cmd->target, 1);
+    FUN_004e0114(ref, cmd, cmd->skill->animation, 0, 0x1E, 0x1E);
+    g_btlCamera->flags &= ~0x2000000;
+    record = (BtlActionRecord *)(ref->actor->slot * 0x495 + g_btlAction.data);
+    record->state = 0x1D;
+    return 1;
 }
 
 } /* extern "C" */

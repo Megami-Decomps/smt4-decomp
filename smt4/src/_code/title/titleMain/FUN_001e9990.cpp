@@ -31,7 +31,7 @@ int FUN_0030a9d8(void);
 
 int FUN_00210194(...);
 int FUN_00211bd0(void);
-int FUN_0025a0e0(void);
+int commonBgReset(void);
 int FUN_002898e4(void);
 int buttonHelpCreate(void);
 int fileSlotLoad(int);
@@ -42,7 +42,7 @@ int FUN_0029ee6c(...);
 int soundChannelRequestIfEnabled(int, int, int);
 int FUN_002a03d8(...);
 int FUN_002a0428(...);
-int FUN_002a043c(...);
+int modelSlotAttachChild(...);
 int FUN_002a09b4(...);
 int FUN_002a5eb4(void);
 int FUN_002a8638(...);
@@ -99,7 +99,7 @@ extern int DAT_0049fd14; /* 0x49fd14 */
 extern int FUN_00215a14(void);
 extern int effIsFinished(unsigned int);
 extern int FUN_0025a084(void);
-/* Supplied declaration required: FUN_0025a0e0. */
+/* Supplied declaration required: commonBgReset. */
 extern unsigned int FUN_00263c1c(unsigned char *);
 /* Supplied declaration required: FUN_0026e324. */
 extern int FUN_0026ee68(unsigned int);
@@ -128,7 +128,7 @@ extern int FUN_0029d65c(int);
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002a043c. */
+/* Supplied declaration required: modelSlotAttachChild. */
 /* Supplied declaration required: FUN_002a09b4. */
 /* Supplied declaration required: FUN_002a5eb4. */
 /* Supplied declaration required: asdModelSlotRelease. */
@@ -153,7 +153,7 @@ extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: jobStop. */
 extern unsigned int FUN_002c501c(void);
 /* Supplied declaration required: asdSequenceRequest. */
-extern int FUN_002d5748(unsigned int);
+extern int gaugeTaskIsIdle(unsigned int);
 /* Supplied declaration required: FUN_002f4ce8. */
 extern int titleConfigIsClosed(void);
 /* Supplied declaration required: FUN_0030a9d8. */
@@ -250,7 +250,7 @@ unsigned int FUN_001e9990(void)
     temp_v4 = dataTableGetEntries();
     FUN_0029ee6c(temp_v4 + temp_v2 * 0x56 + 0x16,0x323232ff);
     if (*(char *)(puVar13 + 0x18) != '\0') {
-      FUN_0025a0e0();
+      commonBgReset();
     }
     else {
       FUN_00211bd0();
@@ -290,7 +290,7 @@ unsigned int FUN_001e9990(void)
     break;
   case 4:
     *(unsigned char *)((int)g_titleMain + 0x86) = 0;
-    FUN_002a043c(puVar13[0x22],0);
+    modelSlotAttachChild(puVar13[0x22],0);
     temp_v6 = FUN_002c501c();
     temp_v10 = (unsigned int *)&temp_v12;
     FUN_002a8638(*(unsigned int *)(puVar13[0x22] + 8),&temp_v13,temp_v14,&temp_v11);
@@ -421,7 +421,7 @@ unsigned int FUN_001e9990(void)
       FUN_00210194(temp_v6);
     }
     temp_v4 = effIsFinished(*(unsigned int *)(puVar3[0x23] + 8));
-    if (((temp_v4 != 0) && (temp_v4 = FUN_002d5748(*(unsigned int *)(puVar3[0x23] + 8)), temp_v4 != 0)) &&
+    if (((temp_v4 != 0) && (temp_v4 = gaugeTaskIsIdle(*(unsigned int *)(puVar3[0x23] + 8)), temp_v4 != 0)) &&
        (*(char *)(puVar3 + 0x25) == '\0')) {
       puVar10 = (unsigned int *)puVar3[0x23];
       if ((*puVar10 & 4) == 0) {
@@ -568,7 +568,7 @@ LAB_001ea4cc:
       *(unsigned char *)(puVar13 + 0x21) = 1;
       FUN_002a09b4("title/title_top.bcenv",0);
       *(unsigned char *)((int)puVar13 + 0x85) = 1;
-      FUN_002a043c(puVar13[0x22],0);
+      modelSlotAttachChild(puVar13[0x22],0);
       *(unsigned char *)((int)puVar13 + 0x96) = 1;
       puVar13[0x27] = 5;
     }

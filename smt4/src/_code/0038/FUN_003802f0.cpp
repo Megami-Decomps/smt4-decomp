@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00379450(void);
+int _ZN9Obj421aa44initEv(void);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0x190];
@@ -18,7 +18,7 @@ typedef struct Obj {
 
 void FUN_003802f0(Obj *obj)
 {
-    FUN_00379450();
+    _ZN9Obj421aa44initEv();
     obj->unk190 = 0;
     obj->unk45C = 0;
     obj->unk45D = 1;

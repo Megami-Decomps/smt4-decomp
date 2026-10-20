@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int taskCreateDraw(...);
 int asdOperatorNew(...);
 int asdMemoryAllocTracked(...);
@@ -22,7 +22,7 @@ int FUN_002c8538(...);
 int sysMemClear(...);
 int FUN_0031d890(...);
 int FUN_003d1d6c(...);
-int FUN_003f3d54(...);
+int slotPlacementSetSlot(...);
 int FUN_004dc4b4(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
@@ -52,7 +52,7 @@ extern unsigned int *g_partyPanel; /* 0x57f268 */
 
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
@@ -69,7 +69,7 @@ extern int FUN_0026140c(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031d890. */
 /* Supplied declaration required: FUN_003d1d6c. */
-/* Supplied declaration required: FUN_003f3d54. */
+/* Supplied declaration required: slotPlacementSetSlot. */
 /* Supplied declaration required: FUN_004dc4b4. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
@@ -129,7 +129,7 @@ void FUN_003493dc(int param_1)
   puVar2[0x284] = temp_v1;
   *(unsigned char *)(temp_v1 + 0x20) = 0;
   *(unsigned int *)(puVar2[0x284] + 0x34) = 0xffffffff;
-  FUN_003f3d54(puVar2[0x284],0);
+  slotPlacementSetSlot(puVar2[0x284],0);
   temp_v1 = 0;
   do {
     temp_v2 = 0x54;
@@ -152,7 +152,7 @@ void FUN_003493dc(int param_1)
   *(unsigned short *)((int)g_partyPanel + 0x36) = 0;
   *(unsigned short *)(puVar2 + 0xe) = 0xffff;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar8);
-  FUN_001505ac(puVar2 + 0x12,&DAT_0052d888,0xb4,&DAT_0052d93c,0xa8,&DAT_0052d9e4,0x18,0,0,
+  paramsInit(puVar2 + 0x12,&DAT_0052d888,0xb4,&DAT_0052d93c,0xa8,&DAT_0052d9e4,0x18,0,0,
                &DAT_0052d9fc,0x39c);
   FUN_0014e188(puVar2 + 0x1a,0x11,0x24,puVar2 + 0x12,0x6a);
   uiSpriteSelectAnim(puVar2 + 0x1a,0);

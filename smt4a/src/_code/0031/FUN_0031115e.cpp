@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(int *, unsigned char *);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int ringAdvance(unsigned char *);
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -13,7 +13,7 @@ int ringAdvance(unsigned char *);
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int *FUN_002fea6a(unsigned char *);
 /* Supplied declaration required: ringAdvance. */
 
@@ -42,14 +42,14 @@ unsigned long long FUN_0031115e(unsigned char *param_1,unsigned int param_2,unsi
       temp_v0 = 0;
       *param_1 = temp_v0 ^ 1;
       param_1[1] = *(int *)(param_1 + 0x1c) == *(int *)(param_1 + 0x20);
-      FUN_002e6e5c(&uStack_18);
+      _ZN9Obj55b28cD1Ev(&uStack_18);
       return romwright_piece_4_4(uStack_18,temp_v1);
     }
   }
   temp_v0 = 1;
   *param_1 = temp_v0 ^ 1;
   param_1[1] = *(int *)(param_1 + 0x1c) == *(int *)(param_1 + 0x20);
-  FUN_002e6e5c(&uStack_18);
+  _ZN9Obj55b28cD1Ev(&uStack_18);
   return romwright_piece_4_4(uStack_18,temp_v1);
 }
 

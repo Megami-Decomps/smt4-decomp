@@ -7,9 +7,9 @@ extern "C" {
 int asdMdlManagerMarkDestroy(void);
 int FUN_0023f2e4(...);
 int FUN_0023f3bc(unsigned int, int, unsigned char [20]);
-int FUN_00254a2c(unsigned int, int);
+int animPlayerSetLoopPolicy(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, unsigned char [12]);
-int FUN_0029a014(unsigned int, int);
+int nodeSetTranslation3f(unsigned int, int);
 int FUN_002a0428(int, unsigned int);
 int FUN_002a5710(unsigned int, int);
 int asdMdlManagerDestroy(unsigned int);
@@ -27,9 +27,9 @@ typedef struct {
 extern unsigned int FUN_0019df10(void);
 /* Supplied declaration required: FUN_0023f2e4. */
 /* Supplied declaration required: FUN_0023f3bc. */
-/* Supplied declaration required: FUN_00254a2c. */
+/* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: FUN_0029a014. */
+/* Supplied declaration required: nodeSetTranslation3f. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a5710. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
@@ -68,8 +68,8 @@ void FUN_00297684(int param_1)
         if (*(int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0xc) < 0) {
           FUN_002a0428(*(int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
         }
-        FUN_0029a014(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0);
-        FUN_00254a2c(*(unsigned int *)(*(int *)(param_1 + 8) + 8),1);
+        nodeSetTranslation3f(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0);
+        animPlayerSetLoopPolicy(*(unsigned int *)(*(int *)(param_1 + 8) + 8),1);
         FUN_002a5710(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0);
         temp_v0 = *(int *)(*(int *)(*(int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0x2c) + 0x220) + 8)
         ;

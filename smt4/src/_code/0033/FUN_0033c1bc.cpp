@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00288790(int, int, int, int);
+int messageKindForward(int, int, int, int);
 int FUN_0029a17c(int, int, int, int, int);
 int __aeabi_idivmod(int, int);
 
@@ -37,7 +37,7 @@ typedef struct {
 
 extern int g_titleScene; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_00288790. */
+/* Supplied declaration required: messageKindForward. */
 /* Supplied declaration required: FUN_0029a17c. */
 extern int gameGetUnitRecord(void);
 extern int gameGetPlayerData(void);
@@ -108,12 +108,12 @@ void FUN_0033c1bc(fn_0033c1bc_arg0 *param_1,int param_2,int param_3)
     temp_v1 = temp_v1 + 2;
   } while (temp_v4 != 0);
   if (temp_v11 == 1) {
-    FUN_00288790((int)temp_v9,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x7e);
+    messageKindForward((int)temp_v9,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x7e);
     return;
   }
   if (temp_v11 >= 2) {
     if (param_1->field_0x18 < 0x14) {
-      FUN_00288790((int)temp_v9,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x7e)
+      messageKindForward((int)temp_v9,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x7e)
       ;
       return;
     }
@@ -155,9 +155,9 @@ void FUN_0033c1bc(fn_0033c1bc_arg0 *param_1,int param_2,int param_3)
                  *(int *)&param_1->field_0x30 + (int)*(short *)(temp_v3 + 10),
                  (int)**(short **)(temp_v3 + 0xc),(int)(*(short **)(temp_v3 + 0xc))[1],1);
     temp_v11 = (param_1->field_0x18 - 0x14) * -3;
-    FUN_00288790((int)temp_v9,(int)*(short *)(temp_v3 + 8) + temp_v11 + param_2,
+    messageKindForward((int)temp_v9,(int)*(short *)(temp_v3 + 8) + temp_v11 + param_2,
                  *(short *)(temp_v3 + 10) + param_3,0x7e);
-    FUN_00288790((int)temp_v2,(int)*(short *)(temp_v3 + 8) + param_2 + temp_v11 + 0xd,
+    messageKindForward((int)temp_v2,(int)*(short *)(temp_v3 + 8) + param_2 + temp_v11 + 0xd,
                  *(short *)(temp_v3 + 10) + param_3,0x7e);
     temp_v11 = g_titleScene;
     piVar10 = (int *)(g_titleScene + 0x130c);

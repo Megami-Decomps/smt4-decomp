@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002829d4(void);
+int questEntryCheck(void);
 int FUN_002be624(unsigned char *, unsigned char *);
 int FUN_002bfc24(int, int, unsigned int, unsigned int);
 
@@ -18,7 +18,7 @@ extern unsigned int *g_mapIfTimer; /* 0x447a98 */
 extern int g_gameState; /* 0x49f91c */
 extern unsigned char DAT_004b7608; /* 0x4b7608 */
 
-/* Supplied declaration required: FUN_002829d4. */
+/* Supplied declaration required: questEntryCheck. */
 extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bfc24. */
@@ -58,7 +58,7 @@ void FUN_002dfefc(int param_1)
       }
       else {
         temp_v4 = temp_v7;
-        FUN_002829d4();
+        questEntryCheck();
         if (temp_v4 != 2) {
           temp_v3 = gameGetMapBlock();
           temp_v0 = 1;

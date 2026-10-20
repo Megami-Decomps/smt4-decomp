@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00199808(int);
+int panelSetupButtons(int);
 int FUN_002a60cc(...);
 int asdTMTexTableReleaseNode(int);
 int FUN_002bee58(int, int);
@@ -17,7 +17,7 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 extern int g_btlTalkBustUp; /* 0x434210 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00199808. */
+/* Supplied declaration required: panelSetupButtons. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a60cc. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
@@ -202,7 +202,7 @@ unsigned int FUN_00206528(void)
       temp_v1 = g_btlTalkBustUp;
       if (*(char *)(temp_v0 + 0xaa) != '\0') {
         if (*(short *)(temp_v0 + 0x7c) != 10) {
-          FUN_00199808(temp_v0);
+          panelSetupButtons(temp_v0);
           *(unsigned char *)(temp_v0 + 0x2f5) = 1;
         }
         else if (g_btlTalkBustUp != 0) {

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0032c49c(int, int);
+int scrollListSetSelection(int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0032c49c. */
+/* Supplied declaration required: scrollListSetSelection. */
 
 
 void FUN_002a4914(int param_1,int param_2)
@@ -24,7 +24,7 @@ void FUN_002a4914(int param_1,int param_2)
   if (*(int *)(param_1 + 0x48) + *(int *)(param_1 + 0x4c) != param_2) {
     *(unsigned char *)(param_1 + 0x61) = 1;
   }
-  FUN_0032c49c(param_1 + 0x28,param_2);
+  scrollListSetSelection(param_1 + 0x28,param_2);
   return;
 }
 

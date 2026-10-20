@@ -24,10 +24,10 @@ int FUN_002b8b4c(...);
 int ifTouchRegionRemove(void);
 int pairSetFirstResetSecond(...);
 int msgBoxFlagsClear(...);
-int FUN_002b8dc0(unsigned int);
+int recordPackedValue(unsigned int);
 int eventQueueAddUnique(int);
 int FUN_002b8ee0(...);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_002bf818(...);
 int FUN_002c1658(...);
 int objFlagsSetBits(unsigned int, int);
@@ -79,10 +79,10 @@ extern int FUN_002b8d68(void);
 extern int msgBoxFlagsTestAny(unsigned int, unsigned int);
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: msgBoxFlagsClear. */
-/* Supplied declaration required: FUN_002b8dc0. */
+/* Supplied declaration required: recordPackedValue. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_002b8ee0. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_002bc02c. */
 extern int FUN_002bc088(void);
 /* Supplied declaration required: FUN_002bf818. */
@@ -215,9 +215,9 @@ unsigned int FUN_00114474(void)
               }
               *(unsigned int *)(temp_v3 + 0x74) = 0;
               *(int *)(temp_v3 + 0x6c) = temp_v6;
-              temp_v6 = FUN_002b8dc0(*(unsigned int *)(temp_v3 + 0x68));
+              temp_v6 = recordPackedValue(*(unsigned int *)(temp_v3 + 0x68));
               if (temp_v6 < *(int *)(temp_v3 + 0x6c)) {
-                temp_v14 = FUN_002b8dc0(*(unsigned int *)(temp_v3 + 0x68));
+                temp_v14 = recordPackedValue(*(unsigned int *)(temp_v3 + 0x68));
                 *(unsigned int *)(temp_v3 + 0x6c) = temp_v14;
               }
             }
@@ -324,7 +324,7 @@ LAB_001149c8:
           DAT_0049382a = '\0';
         }
         else {
-          FUN_002bc01c(0x100016c);
+          eventQueueAddUniqueIfValid(0x100016c);
         }
         if (temp_v3 != 0) {
           temp_v7 = *(char *)(temp_v3 + 8);
@@ -365,7 +365,7 @@ LAB_001149c8:
                 ((temp_v8 <= *(short *)(temp_v3 + temp_v9 * 2 + 0x54) &&
                  (temp_v8 = temp_v8 - *(short *)(temp_v3 + 0x56), *(int *)(temp_v3 + 0x18) = temp_v8,
                  temp_v8 != temp_v6)))) {
-          FUN_002bc01c(0x100016c);
+          eventQueueAddUniqueIfValid(0x100016c);
         }
         temp_v4 = padIsButtonRepeat(5);
         if (temp_v4 == 0) {
@@ -383,7 +383,7 @@ LAB_001149c8:
                   if ((temp_v4 == 0 && !temp_v10) || (0 < *(int *)(temp_v3 + 0x60))) goto LAB_00114d48;
                   *(unsigned char *)(temp_v3 + 0x30) = 0;
                   *(unsigned char *)(temp_v3 + 0x31) = 0;
-                  FUN_002bc01c(0x100016d);
+                  eventQueueAddUniqueIfValid(0x100016d);
                   temp_v4 = 0;
                   if (temp_v4 < temp_v9) {
                     do {
@@ -419,7 +419,7 @@ LAB_00114d48:
                       }
                       *(unsigned char *)(temp_v3 + 0x30) = 0;
                       *(unsigned char *)(temp_v3 + 0x31) = 0;
-                      FUN_002bc01c(0x100016e);
+                      eventQueueAddUniqueIfValid(0x100016e);
                       temp_v4 = 0;
                       if (temp_v4 < temp_v9) {
                         do {
@@ -447,25 +447,25 @@ LAB_00114d48:
               }
               else {
                 *(int *)(temp_v3 + 0x18) = *(int *)(temp_v3 + 0x18) + 1;
-                FUN_002bc01c(0x100016c);
+                eventQueueAddUniqueIfValid(0x100016c);
                 *(unsigned int *)(temp_v3 + 0x60) = 0;
               }
             }
             else {
               *(int *)(temp_v3 + 0x18) = *(int *)(temp_v3 + 0x18) - 1;
-              FUN_002bc01c(0x100016c);
+              eventQueueAddUniqueIfValid(0x100016c);
               *(unsigned int *)(temp_v3 + 0x60) = 0;
             }
           }
           else {
             *(int *)(temp_v3 + 0x18) = *(int *)(temp_v3 + 0x18) + 1;
-            FUN_002bc01c(0x100016c);
+            eventQueueAddUniqueIfValid(0x100016c);
             *(unsigned int *)(temp_v3 + 0x60) = 0;
           }
         }
         else {
           *(int *)(temp_v3 + 0x18) = *(int *)(temp_v3 + 0x18) - 1;
-          FUN_002bc01c(0x100016c);
+          eventQueueAddUniqueIfValid(0x100016c);
           *(unsigned int *)(temp_v3 + 0x60) = 0;
         }
         temp_v4 = *(int *)(temp_v3 + 0x18);
@@ -497,7 +497,7 @@ LAB_00114ea4:
         }
         *(unsigned char *)(temp_v3 + 0x30) = 0;
         *(unsigned char *)(temp_v3 + 0x31) = 0;
-        FUN_002bc01c(0x100016d);
+        eventQueueAddUniqueIfValid(0x100016d);
         temp_v6 = 0;
         if (temp_v6 < temp_v9) {
           do {
@@ -623,7 +623,7 @@ LAB_001151a8:
           temp_v1 = FUN_002b898c();
           *(unsigned char *)(temp_v3 + 0xa12) = temp_v1;
           if (*(char *)(temp_v3 + 9) == '\v') {
-            FUN_002bc01c(0x1000183);
+            eventQueueAddUniqueIfValid(0x1000183);
           }
           goto LAB_001151d8;
         }

@@ -14,7 +14,7 @@ int effEditorNodeChainApply(...);
 int FUN_00243ce8(...);
 int FUN_002b3fd8(int, int, int, int);
 int FUN_002cf28c(...);
-int FUN_00300124(void);
+int effMenuListAppend(void);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_3: 13 slot(s), 52 byte(s) */
@@ -80,7 +80,7 @@ extern int FUN_00163fd4(unsigned int);
 /* Supplied declaration required: FUN_00243ce8. */
 /* Supplied declaration required: FUN_002b3fd8. */
 /* Supplied declaration required: FUN_002cf28c. */
-/* Supplied declaration required: FUN_00300124. */
+/* Supplied declaration required: effMenuListAppend. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -609,7 +609,7 @@ LAB_00346d7c:
       *(unsigned int *)(temp_v4 + 0x14) = 0x10;
       *(unsigned int *)(temp_v4 + 0x18) = (unsigned int)temp_v10 | 0xff000000;
       *(unsigned int *)(temp_v4 + 0x1c) = (unsigned int)temp_v12 | 0xff000000;
-      FUN_00300124();
+      effMenuListAppend();
       puVar2 = &g_effectEditor;
       if (puVar10 == DAT_0059dc30) {
         puVar2 = DAT_0059dc38;
@@ -634,7 +634,7 @@ LAB_00346d7c:
         *(unsigned int *)(temp_v4 + 0xc) = 0xc;
         *(int *)(temp_v4 + 0x10) = temp_v11;
         *(unsigned int *)(temp_v4 + 0x14) = 0x24;
-        FUN_00300124();
+        effMenuListAppend();
         temp_v4 = 0x10000;
         memAlloc(0x10000,0x100,0,0x68,0x10,1);
         *(unsigned int *)(temp_v4 + 0x18) = 0xff00ff00;
@@ -644,7 +644,7 @@ LAB_00346d7c:
         *(int *)(temp_v4 + 0x10) = temp_v6;
         *(unsigned int *)(temp_v4 + 0x14) = 0x24;
       }
-      FUN_00300124();
+      effMenuListAppend();
       puVar10 = puVar10 + 1;
     } while (puVar10 < puVar13);
   }
@@ -667,7 +667,7 @@ LAB_00346d7c:
     *(unsigned int *)(temp_v4 + 0x10) = 0x161;
     *(unsigned int *)(temp_v4 + 0x14) = 0x24;
     *(unsigned int *)(temp_v4 + 0x18) = 0xff00ff00;
-    FUN_00300124();
+    effMenuListAppend();
     temp_v4 = 0x10000;
     memAlloc(0x10000,0x100,0,0x68,0x10,1);
     *(unsigned int *)(temp_v4 + 4) = 6;
@@ -677,7 +677,7 @@ LAB_00346d7c:
     *(unsigned int *)(temp_v4 + 0x14) = 0x24;
     *(unsigned int *)(temp_v4 + 0x18) = 0xff00ff00;
   }
-  FUN_00300124();
+  effMenuListAppend();
   temp_v18[0] = (float)((unsigned long long)temp_v16 >> 0x20);
   temp_v17[1] = *temp_v20;
   temp_v18[1] = temp_v20[2];
@@ -705,7 +705,7 @@ LAB_00346d7c:
          (unsigned int)temp_v12 | ((int)temp_v12 << 0x10) | ((int)temp_v12 << 8) | 0xff000000U;
     *(unsigned int *)(temp_v4 + 0x1c) =
          (unsigned int)temp_v10 | ((int)temp_v10 << 0x10) | ((int)temp_v10 << 8) | 0xff000000U;
-    FUN_00300124();
+    effMenuListAppend();
     puVar13 = &g_effectEditor;
     if (temp_v5 == DAT_0059dc34) {
       puVar13 = DAT_0059dc38;
@@ -730,7 +730,7 @@ LAB_00346d7c:
       *(unsigned int *)(temp_v4 + 4) = 6;
       *(int *)(temp_v4 + 0x10) = temp_v11;
       *(unsigned int *)(temp_v4 + 0xc) = 0x28;
-      FUN_00300124();
+      effMenuListAppend();
       temp_v4 = 0x10000;
       memAlloc(0x10000,0x100,0,0x68,0x10,1);
       *(int *)(temp_v4 + 8) = temp_v6;
@@ -740,7 +740,7 @@ LAB_00346d7c:
       *(unsigned int *)(temp_v4 + 4) = 6;
       *(unsigned int *)(temp_v4 + 0xc) = 0x28;
     }
-    FUN_00300124();
+    effMenuListAppend();
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 3);
   temp_v4 = 0x10000;
@@ -751,7 +751,7 @@ LAB_00346d7c:
   *(unsigned int *)(temp_v4 + 0x10) = 0x160;
   *(unsigned int *)(temp_v4 + 0x14) = 0x40;
   *(unsigned int *)(temp_v4 + 0x18) = 0xffffffff;
-  FUN_00300124();
+  effMenuListAppend();
   FUN_00243ce8(0xa4,0x44,8,&LAB_00347650,temp_v21);
   temp_v4 = padButtonIsPressed(1);
   if (temp_v4 == 0) {

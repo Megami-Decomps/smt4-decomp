@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002ecf70(int *, int, int *);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002ecf70. */
 extern int wordRefsEqual_002ecfd2(int *, unsigned int *);
 
@@ -44,12 +44,12 @@ unsigned int FUN_00106098(int param_1,unsigned int param_2)
   temp_v5 = *(unsigned int *)(param_1 + 0x38);
   temp_v0 = wordRefsEqual_002ecfd2(&temp_v3,(unsigned int *)&temp_v5);
   if (temp_v0 != 0) {
-    FUN_002e6e5c(temp_v2);
+    _ZN9Obj55b28cD1Ev(temp_v2);
     temp_v1 = 0;
   }
   else {
     temp_v1 = *(unsigned int *)(temp_v3 + 0x14);
-    FUN_002e6e5c(temp_v2);
+    _ZN9Obj55b28cD1Ev(temp_v2);
   }
   return temp_v1;
 }

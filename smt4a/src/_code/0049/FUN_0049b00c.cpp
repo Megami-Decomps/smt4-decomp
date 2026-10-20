@@ -93,7 +93,7 @@ extern int FUN_00498408(unsigned int *, unsigned short);
 /* Supplied declaration required: FUN_00498ff0. */
 extern unsigned int FUN_0049c760(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_0049cad0. */
-extern unsigned int FUN_0049cbac(unsigned short, unsigned int);
+extern unsigned int btlRollClamped(unsigned short, unsigned int);
 extern int FUN_0049cc10(int);
 /* Supplied declaration required: FUN_0049cd18. */
 /* Supplied declaration required: FUN_004cf8dc. */
@@ -241,7 +241,7 @@ void FUN_0049b00c(unsigned int *param_1)
       puVar5 = (unsigned short *)((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
       if (*puVar9 != 8) {
         temp_v4 = FUN_0049cad0(puVar5);
-        temp_v6 = FUN_0049cbac(*puVar5,temp_v4);
+        temp_v6 = btlRollClamped(*puVar5,temp_v4);
       }
       else {
         temp_v6 = FUN_001ba3d0(*puVar5);

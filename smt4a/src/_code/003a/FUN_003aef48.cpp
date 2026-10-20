@@ -8,7 +8,7 @@ int FUN_00152cf8(...);
 int FUN_00167c14(...);
 int sysPlaySe(...);
 int FUN_001834a4(...);
-int FUN_002844e4(void);
+int msgWindowReset(void);
 int FUN_002e2680(...);
 int FUN_0032ef0c(...);
 int FUN_00344bc8(...);
@@ -38,7 +38,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_00167c14. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_002844e4. */
+/* Supplied declaration required: msgWindowReset. */
 extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: FUN_002e2680. */
 extern unsigned int overlayGetStatusScene(void);
@@ -459,7 +459,7 @@ unsigned int FUN_003aef48(int param_1)
       if (temp_v6 != 0 || temp_v1 != 0) goto LAB_003af720;
       temp_v1 = padButtonIsPressed(1);
       if ((temp_v1 != 0) || (temp_v1 = FUN_002e1a18(2), temp_v1 != 0)) {
-        FUN_002844e4();
+        msgWindowReset();
         temp_v1 = *(int *)(param_1 + 0x14c);
         *(unsigned char *)(param_1 + 0x114) = 1;
         *(unsigned char *)(param_1 + 0x12d) = 0;

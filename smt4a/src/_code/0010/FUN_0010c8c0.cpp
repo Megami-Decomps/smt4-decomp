@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [16], int);
-int FUN_002e6e5c(unsigned char [16]);
+int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int FUN_002ee4d2(int);
 
 typedef int romwright_code(...);
@@ -16,7 +16,7 @@ typedef struct {
 
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002ee4d2. */
 
 
@@ -43,7 +43,7 @@ void FUN_0010c8c0(int param_1,unsigned int *param_2)
     uStack_20 = param_2[2];
     (*pcVar2)(temp_v0,&temp_v1,temp_v0 + 0x98);
   }
-  FUN_002e6e5c(temp_v2);
+  _ZN9Obj55b28cD1Ev(temp_v2);
   return;
 }
 

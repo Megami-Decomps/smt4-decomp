@@ -17,7 +17,7 @@ int FUN_002ba81c(...);
 int FUN_002be624(...);
 int memClear(...);
 int jyoucyuGetTableEntry(...);
-int FUN_002c5d5c(unsigned int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int FUN_002c5e80(...);
 int asdOperatorDelete(...);
 int FUN_00352764(...);
@@ -86,7 +86,7 @@ extern unsigned char objGetFlagBit1(int);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_002c5e80. */
 /* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_00352764. */
@@ -261,7 +261,7 @@ int FUN_0038c224(int param_1)
     puVar5 = puVar4 + 2;
     *puVar4 = 0x9c8;
     puVar4[1] = temp_v9;
-    FUN_002c5d5c(puVar5,&LAB_00394160,0x9c8,temp_v9);
+    __aeabi_vec_ctor_nocookie_nodtor(puVar5,&LAB_00394160,0x9c8,temp_v9);
   }
   *(unsigned int **)(temp_v8 + 0x678) = puVar5;
   temp_v18 = 0;

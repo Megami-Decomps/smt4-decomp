@@ -1,28 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f0400` (_code @ 0x2f0400, 0x1a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0012350c(int, unsigned int, unsigned int);
+typedef struct ListenerTable {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ void *listener;
+} ListenerTable;
 
-extern unsigned char g_listenerTable; /* 0x594ad8 */
+extern ListenerTable g_listenerTable;
 
-/* Supplied declaration required: FUN_0012350c. */
+s32 FUN_0012350c(void *listener, u32 arg0, u32 arg1);
 
-
-int FUN_002f0400(unsigned int param_1,unsigned int param_2)
-
+/* Forwards the arguments to the registered listener; returns 1 when there is none. */
+s32 FUN_002f0400(u32 arg0, u32 arg1)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if ((*(int *)((unsigned char *)&g_listenerTable + 0x50)) != 0) {
-    temp_v0 = (*(int *)((unsigned char *)&g_listenerTable + 0x50));
-    FUN_0012350c((*(int *)((unsigned char *)&g_listenerTable + 0x50)),param_1,param_2);
-    return temp_v0;
-  }
-  return 1;
+    void *listener = g_listenerTable.listener;
+
+    if (listener == NULL) {
+        return 1;
+    }
+    return FUN_0012350c(listener, arg0, arg1);
 }
 
 } /* extern "C" */

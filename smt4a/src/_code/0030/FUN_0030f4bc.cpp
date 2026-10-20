@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001208a0(int);
 int FUN_002e6e34(...);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineJobSetStateReady(int);
 int sharedRefAddRef(int);
 int listIteratorNext4(int *);
@@ -24,7 +24,7 @@ extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 
 /* Supplied declaration required: FUN_001208a0. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineJobSetStateReady. */
 /* Supplied declaration required: sharedRefAddRef. */
 extern int wordRefsDiffer_0030f88a(int *, int);
@@ -67,9 +67,9 @@ void FUN_0030f4bc(int param_1,unsigned int param_2)
     FUN_002e6e34(temp_v4,param_1 + 0x58);
     FUN_002e6e34(temp_v5,puVar3);
     FUN_0030f8a2(param_1,temp_v0,temp_v7);
-    FUN_002e6e5c(temp_v5);
-    FUN_002e6e5c(temp_v4);
-    FUN_002e6e5c(temp_v3);
+    _ZN9Obj55b28cD1Ev(temp_v5);
+    _ZN9Obj55b28cD1Ev(temp_v4);
+    _ZN9Obj55b28cD1Ev(temp_v3);
     FUN_001208a0(temp_v0);
     listIteratorNext4(&temp_v2);
   }

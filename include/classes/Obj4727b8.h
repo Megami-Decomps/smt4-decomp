@@ -6,7 +6,8 @@
 /* 16-byte entry; the first word is the id handed to the per-entry release function. */
 struct Obj4727b8Entry {
     /* 0x00 */ u32 id;
-    /* 0x04 */ u32 unk04[3];
+    /* 0x04 */ u32 mask;       /* randomizeMasks sets it */
+    /* 0x08 */ u32 unk08[2];
 };
 
 /* The entry table: a pointer to the first entry at offset 0. */
@@ -32,7 +33,7 @@ struct Obj4727b8Ref {
  * are still C-form. */
 class Obj4727b8 {
 public:
-    virtual void vfunc00() = 0;
+    virtual void randomizeMasks() = 0;   /* +0x00: _ZN9Obj4727b814randomizeMasksEv */
     virtual void vfunc04() = 0;
     virtual void releaseEntries() = 0;   /* +0x08 */
     virtual void vfunc0c() = 0;

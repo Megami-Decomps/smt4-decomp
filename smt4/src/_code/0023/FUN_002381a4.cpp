@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002381a4. */
 /* Supplied declaration required: FUN_002387f8. */
 /* Supplied declaration required: FUN_00238a50. */
-extern int *FUN_0035caf4(int *, unsigned int);
+extern int *idListCheck(int *, unsigned int);
 extern int FUN_0035e7ac(unsigned int, unsigned char **);
 extern int FUN_0035e7ec(unsigned int, unsigned char **);
 
@@ -83,15 +83,15 @@ int * FUN_002381a4(int *param_1,unsigned int param_2)
         temp_v8 = (unsigned int)*(unsigned short *)(temp_v4 + 10);
         *param_1 = temp_v7;
         if (*(char *)(temp_v7 + 8) != '\x05') {
-          piVar6 = (int *)FUN_0035caf4(param_1,param_2);
+          piVar6 = (int *)idListCheck(param_1,param_2);
         }
         else {
           temp_v4 = *(int *)(temp_v7 + 4);
           *param_1 = temp_v4;
           if (*(char *)(temp_v4 + 8) != '\0') {
-            piVar6 = (int *)FUN_0035caf4(param_1,param_2);
+            piVar6 = (int *)idListCheck(param_1,param_2);
             if (piVar6 == (int *)0x0) {
-              piVar6 = (int *)FUN_0035caf4(param_1,param_2);
+              piVar6 = (int *)idListCheck(param_1,param_2);
             }
           }
           else {

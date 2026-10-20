@@ -1,49 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017d184` (_code @ 0x17d184, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail does not shrink-wrap: it pushes first, tests the pointer with `movs r4, r0; beq` and keeps both field tests as a branch pair; built returns early with `cmp; bxeq lr` before the push. */
+#include "common.h"
 
 extern "C" {
 
-int sysMemClear(int, int);
+typedef struct Buffer {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 unk04;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ void *data;
+    /* 0x1C */ u8 unk1C[4];
+    /* 0x20 */ s32 count;
+    /* 0x24 */ u32 unk24;
+    /* 0x28 */ u32 unk28;
+    /* 0x2C */ u8 unk2C[4];
+    /* 0x30 */ u32 unk30;
+    /* 0x34 */ u32 unk34;
+} Buffer;                    /* the data array has 0x1C-byte elements */
 
-typedef struct fn_0017d184_arg0 fn_0017d184_arg0;
-struct fn_0017d184_arg0 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    unsigned char pad_0x8[0x4];
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    int field_0x18; /* +0x18 */
-    unsigned char pad_0x1c[0x4];
-    int field_0x20; /* +0x20 */
-    undefined4 field_0x24; /* +0x24 */
-    undefined4 field_0x28; /* +0x28 */
-    unsigned char pad_0x2c[0x4];
-    undefined4 field_0x30; /* +0x30 */
-    undefined4 field_0x34; /* +0x34 */
-};
+int sysMemClear(void *block, s32 size);
 
-/* Supplied declaration required: sysMemClear. */
-
-
-void FUN_0017d184(fn_0017d184_arg0 *param_1)
-
+/* Clears the buffer's element array and resets its bookkeeping, if it has any contents. */
+void FUN_0017d184(Buffer *buffer)
 {
-/* irregular: 1 native warning(s); review required */
-  if ((param_1 != (fn_0017d184_arg0 *)0x0) &&
-     ((param_1->field_0x4 != 0 || (param_1->field_0x18 != 0)))) {
-    sysMemClear(param_1->field_0x18,param_1->field_0x20 * 0x1c);
-    param_1->field_0xc = 0;
-    param_1->field_0x10 = 0;
-    param_1->field_0x20 = 0;
-    param_1->field_0x28 = 0;
-    param_1->field_0x14 = 0;
-    param_1->field_0x24 = 0;
-    param_1->field_0x34 = 0;
-    param_1->field_0x30 = 0;
-  }
-  return;
+    if (buffer != NULL) {
+        if (buffer->unk04 != 0 || buffer->data != NULL) {
+            sysMemClear(buffer->data, buffer->count * 0x1C);
+            buffer->unk0C = 0;
+            buffer->unk10 = 0;
+            buffer->count = 0;
+            buffer->unk28 = 0;
+            buffer->unk14 = 0;
+            buffer->unk24 = 0;
+            buffer->unk34 = 0;
+            buffer->unk30 = 0;
+        }
+    }
 }
 
 } /* extern "C" */

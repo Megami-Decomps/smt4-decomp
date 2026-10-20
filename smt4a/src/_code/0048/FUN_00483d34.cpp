@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00163aa4(int);
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int FUN_00224880(unsigned int);
 int FUN_00228b04(int, int);
 int flaggedEntryGetValueB(int);
@@ -23,7 +23,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_00224880. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: flaggedEntryGetValueB. */
@@ -182,7 +182,7 @@ void FUN_00483d34(int param_1)
     *(unsigned int *)(param_1 + 0x14) = temp_v9;
     return;
   }
-  FUN_001641b4(0x100020d);
+  eventQueueAddUniqueIfValid(0x100020d);
   temp_v9 = flaggedEntryGetValueB(param_1 + 0x198);
   *(unsigned int *)(param_1 + 0x10) = temp_v9;
   temp_v9 = flaggedEntryGetValueA(param_1 + 0x198);

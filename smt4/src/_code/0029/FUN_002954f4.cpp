@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00199808(int);
+int panelSetupButtons(int);
 int asdTMTexTableLoadEntryAsync(int, unsigned int);
 int FUN_002a5ee4(unsigned int, int, unsigned int, int);
 int FUN_002ae8e4(unsigned int, int, unsigned int, int);
@@ -16,7 +16,7 @@ int FUN_0032c3fc(int);
 extern unsigned int g_aocSystem; /* 0x433158 */
 extern int g_btlTalkBustUp; /* 0x434210 */
 
-/* Supplied declaration required: FUN_00199808. */
+/* Supplied declaration required: panelSetupButtons. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: FUN_002a5ee4. */
 /* Supplied declaration required: FUN_002ae8e4. */
@@ -54,7 +54,7 @@ void FUN_002954f4(int param_1,int param_2)
         FUN_002c58c8(0x18,*(unsigned int *)(temp_v0 + 0x2f8));
       }
       FUN_0032c3fc(temp_v0);
-      FUN_00199808(temp_v0);
+      panelSetupButtons(temp_v0);
       *(unsigned int *)(temp_v0 + 0x2e8) = 2;
       *(unsigned int *)(temp_v0 + 0x2ec) = 0;
       return;

@@ -22,10 +22,10 @@ typedef struct {
 extern int FUN_002984d4(...); /* 0x2984d4 */
 extern unsigned char LAB_002b5238; /* 0x2b5238 */
 extern unsigned char LAB_002b524c; /* 0x2b524c */
-extern int FUN_002decb4(...); /* 0x2decb4 */
+extern int btlEditorUpdate(...); /* 0x2decb4 */
 extern int FUN_003285dc(...); /* 0x3285dc */
 extern int g_btlCamera; /* 0x571508 */
-extern unsigned int *DAT_005737e0; /* 0x5737e0 */
+extern unsigned int *g_btlEditor; /* 0x5737e0 */
 extern unsigned int DAT_005737e8; /* 0x5737e8 */
 extern unsigned int DAT_005737ec; /* 0x5737ec */
 extern int g_btlUiBlock; /* 0x57a9c8 */
@@ -50,10 +50,10 @@ void FUN_002b50e4(unsigned int *param_1)
   puVar1 = &LAB_002b5238;
   taskCreateDraw(&LAB_002b5238,4,0,0,FUN_002984d4,FUN_003285dc,param_1,*param_1);
   param_1[0x1f] = (unsigned int)puVar1;
-  taskCreateDraw(&LAB_002b524c,0x75,0,0,FUN_002decb4,0,param_1,puVar1);
+  taskCreateDraw(&LAB_002b524c,0x75,0,0,btlEditorUpdate,0,param_1,puVar1);
   puVar2 = (unsigned int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x18,1);
-  DAT_005737e0 = puVar2;
+  g_btlEditor = puVar2;
   *puVar2 = 0;
   puVar2[1] = (unsigned int)*(unsigned char *)((int)param_1 + 0x1ed9);
   *(unsigned short *)(puVar2 + 4) = 0xffff;

@@ -8,7 +8,7 @@ int FUN_002b2d74(unsigned int, unsigned int, int);
 int objectBufferFree(void);
 int FUN_0038439c(void);
 int FUN_003a1ef4(void);
-int FUN_003a1f88(unsigned int *, int);
+int effHolderSetParams(unsigned int *, int);
 
 typedef struct fn_003a20e4_arg0 fn_003a20e4_arg0;
 struct fn_003a20e4_arg0 {
@@ -25,7 +25,7 @@ extern int FUN_002721e4(fn_003a20e4_arg0 *);
 extern int FUN_002b41c4(void);
 /* Supplied declaration required: FUN_0038439c. */
 /* Supplied declaration required: FUN_003a1ef4. */
-/* Supplied declaration required: FUN_003a1f88. */
+/* Supplied declaration required: effHolderSetParams. */
 
 
 unsigned int * FUN_003a20e4(fn_003a20e4_arg0 *param_1)
@@ -48,7 +48,7 @@ unsigned int * FUN_003a20e4(fn_003a20e4_arg0 *param_1)
   puVar2[0xc] = temp_v1;
   temp_v0 = FUN_002721e4(param_1);
   if (temp_v0 != 0) {
-    FUN_003a1f88(puVar2,param_1->field_0x1c);
+    effHolderSetParams(puVar2,param_1->field_0x1c);
   }
   return puVar2;
 }

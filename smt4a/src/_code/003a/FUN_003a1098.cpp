@@ -12,7 +12,7 @@ int asdMemFree(void);
 int FUN_002371b0(void);
 int FUN_0025cab8(void);
 int FUN_00290c28(...);
-int FUN_00290e04(...);
+int entryListSetPhase(...);
 int FUN_002a1850(...);
 int FUN_00317c50(...);
 int FUN_003222fc(...);
@@ -58,7 +58,7 @@ extern unsigned int FUN_001c5b4c(unsigned int);
 /* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: FUN_0025cab8. */
 /* Supplied declaration required: FUN_00290c28. */
-/* Supplied declaration required: FUN_00290e04. */
+/* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: FUN_002a1850. */
 /* Supplied declaration required: FUN_00317c50. */
 /* Supplied declaration required: FUN_003222fc. */
@@ -283,7 +283,7 @@ joined_r0x003a122c:
         }
       }
       else {
-        FUN_00290e04(puVar11[0x10],*(unsigned short *)((int)puVar11 + 0x46));
+        entryListSetPhase(puVar11[0x10],*(unsigned short *)((int)puVar11 + 0x46));
         FUN_00290c28(puVar11[0x10],&temp_v15);
         *(short *)((int)puVar11 + 0x46) = *(short *)((int)puVar11 + 0x46) + 1;
         temp_v7 = temp_v20;

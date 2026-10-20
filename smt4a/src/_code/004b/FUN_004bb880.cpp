@@ -1,46 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bb880` (_code @ 0x4bb880, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail clears the second byte of each entry with a read-modify-write (`ldrb; bic r1, r1, #255; strb`, a bitfield-style store) and forms the second offset with `orr`; armcc emits two plain byte stores. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00148d68(int, int, int);
+typedef struct SaveEntry {
+    /* 0 */ u8 first;
+    /* 1 */ u8 second : 8;
+    /* 2 */ u8 unk2[2];
+} SaveEntry;
 
-/* Supplied declaration required: FUN_00148d68. */
-extern int gameDataBlocksGetSaveData(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
+typedef struct SaveData {
+    /* 0x00000 */ u8 unk00000[0x2158E];
+    /* 0x2158E */ SaveEntry entries[1];
+} SaveData;
 
+extern SaveData *gameDataBlocksGetSaveData(void);
+extern u32 dataTableGet(u32 table, u32 index);
+extern s32 dataTableGetCount(u32 table);
+extern u8 *dataTableGetEntries(void);
+extern s32 FUN_00148d68(u32 a, u32 b, s32 c);
 
+/* Clears the first and second byte of every save entry of the table and applies each (a, b) pair. */
 void FUN_004bb880(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char *puVar6;
-  int temp_v5;
-  
-  temp_v0 = dataTableGet(2,3);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  temp_v3 = gameDataBlocksGetSaveData();
-  temp_v5 = 0;
-  if (temp_v5 < temp_v2) {
-    do {
-      temp_v4 = temp_v3 + temp_v5 * 4;
-      *(unsigned char *)(temp_v4 + 0x2158e) = 0;
-      *(unsigned char *)(temp_v4 + 0x2158f) = 0;
-      puVar6 = (unsigned char *)(temp_v1 + temp_v5 * 2);
-      FUN_00148d68(*puVar6,puVar6[1],1);
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < temp_v2);
-  }
-  return;
+    u32 table = dataTableGet(2, 3);
+    u8 *pairs = dataTableGetEntries();
+    s32 count = dataTableGetCount(table);
+    SaveData *save = gameDataBlocksGetSaveData();
+    s32 i;
+
+    for (i = 0; i < count; i++) {
+        save->entries[i].first = 0;
+        save->entries[i].second = 0;
+        FUN_00148d68(pairs[i * 2], pairs[i * 2 + 1], 1);
+    }
 }
 
-} /* extern "C" */
+}

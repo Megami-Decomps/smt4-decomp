@@ -1,34 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00163fd4` (_code @ 0x163fd4, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tests the two mode flag bits separately (tst #1, tsteq #2); this build merges them into one tst #3 */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int DAT_005b4008; /* 0x5b4008 */
-extern unsigned int DAT_0063ffd0; /* 0x63ffd0 */
-extern unsigned int DAT_0063fff0; /* 0x63fff0 */
+typedef struct Slot {
+    /* 0x0 */ u32 blocked;
+    /* 0x4 */ u32 mask;
+} Slot;
 
+typedef struct Mode {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ u32 flags;
+} Mode;
 
-unsigned char FUN_00163fd4(unsigned int param_1)
+extern Slot DAT_0053d740[31];
+extern Mode DAT_005b4000;
+extern u32 DAT_0063fff0;
+extern u32 DAT_0063ffd0;
 
+/* Returns whether slot `index` (< 31) is not blocked and its mask hits the active bit word (chosen by the mode flags 1|2). */
+u32 FUN_00163fd4(u32 index)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  if ((param_1 < 0x1f) && (*(int *)(param_1 * 8 + 0x53d740) == 0)) {
-    if (!((DAT_005b4008 & 1) == 0 && (DAT_005b4008 & 2) == 0)) {
-      puVar1 = &DAT_0063fff0;
+    Slot *slot;
+    u32 *source;
+    u32 bits;
+
+    if (index >= 31) {
+        return 0;
     }
-    else {
-      puVar1 = &DAT_0063ffd0;
+    slot = &DAT_0053d740[index];
+    if (slot->blocked != 0) {
+        return 0;
     }
-    temp_v0 = 0;
-    if (puVar1 != (unsigned int *)0x0) {
-      temp_v0 = *puVar1;
+    if (!((DAT_005b4000.flags & 1) == 0 && (DAT_005b4000.flags & 2) == 0)) {
+        source = &DAT_0063fff0;
+    } else {
+        source = &DAT_0063ffd0;
     }
-    return (temp_v0 & *(unsigned int *)(param_1 * 8 + 0x53d744)) != 0;
-  }
-  return 0;
+    bits = source != NULL ? *source : 0;
+    return (bits & slot->mask) != 0;
 }
 
 } /* extern "C" */

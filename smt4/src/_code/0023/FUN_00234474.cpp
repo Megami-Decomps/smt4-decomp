@@ -1,29 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00234474` (_code @ 0x234474, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the index in r5 and the table in r4; built swaps them. */
+#include "common.h"
 
 extern "C" {
 
-extern int libc_strncmp(unsigned int, unsigned int, unsigned int);
+typedef struct NamedEntry {
+    /* 0x0 */ const char *name;
+    /* 0x4 */ u32 value;
+} NamedEntry;
 
+typedef struct NamedTable {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ NamedEntry *entries;
+    /* 0x1C */ u32 count;
+} NamedTable;
 
-unsigned int FUN_00234474(int *param_1,unsigned int param_2)
+typedef struct NamedHolder {
+    /* 0x0 */ NamedTable *table;
+} NamedHolder;
 
+s32 libc_strncmp(const char *a, const char *b, u32 length);
+
+/* Returns the value of the entry whose name matches `name` (first 64 characters), or 0. */
+u32 FUN_00234474(NamedHolder *holder, const char *name)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v1 = *param_1;
-  temp_v3 = *(unsigned int *)(temp_v1 + 0x1c);
-  for (temp_v2 = 0; temp_v2 < temp_v3; temp_v2 = temp_v2 + 1) {
-    temp_v0 = libc_strncmp(*(unsigned int *)(*(int *)(temp_v1 + 0x18) + temp_v2 * 8),param_2,0x40);
-    if (temp_v0 == 0) {
-      return *(unsigned int *)(*(int *)(temp_v1 + 0x18) + temp_v2 * 8 + 4);
+    NamedTable *table = holder->table;
+    u32 count = table->count;
+    u32 i;
+
+    for (i = 0; i < count; i++) {
+        if (libc_strncmp(table->entries[i].name, name, 0x40) == 0) {
+            return table->entries[i].value;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

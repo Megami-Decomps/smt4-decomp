@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int FUN_00169548(int);
 int FUN_00224880(unsigned int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
@@ -27,7 +27,7 @@ extern unsigned char LAB_004791a8; /* 0x4791a8 */
 extern unsigned char LAB_004791c4; /* 0x4791c4 */
 extern int g_aocMain; /* 0x570260 */
 
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_00169548. */
 extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_00224880. */
@@ -151,7 +151,7 @@ void FUN_00478edc(unsigned int *param_1)
       FUN_00224880(param_1[0xd6]);
       temp_v1 = FUN_002e1a18(0x10);
       if (temp_v1 != 0) {
-        FUN_001641b4(0x100020e);
+        eventQueueAddUniqueIfValid(0x100020e);
         obj04Finish();
         temp_v0 = 5;
         param_1[2] = temp_v0;

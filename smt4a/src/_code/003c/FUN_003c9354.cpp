@@ -11,7 +11,7 @@ int FUN_002c8550(...);
 int FUN_0037e1b0(...);
 
 int FUN_001517b4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_0019de98(...);
 int FUN_0020b908(...);
 int FUN_00228b04(int, int);
@@ -43,7 +43,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
@@ -224,18 +224,18 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       } while (temp_v4 < 8);
       FUN_002a7b74();
       FUN_0023c08c(0xe);
-      FUN_001641b4(0x100020f);
+      eventQueueAddUniqueIfValid(0x100020f);
       return temp_v15;
     }
     temp_v5 = temp_v16;
     FUN_0032fea0(temp_v16,8,*(unsigned short *)(param_1 + temp_v4 * 2 + 0x8b70));
     if (temp_v5 != 0) {
       FUN_0020b908(0x11,0);
-      FUN_001641b4(0x100020f);
+      eventQueueAddUniqueIfValid(0x100020f);
       return temp_v15;
     }
     if (temp_v4 < *(int *)(param_1 + 0x8e80)) {
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
       *(unsigned char *)(param_1 + 0x8e8a) = 0;
       temp_v4 = FUN_002a4860();
       temp_v5 = FUN_002a4894(param_1 + 0x8db0);
@@ -252,7 +252,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
     FUN_001517b4(9,1);
     piVar11 = (int *)(param_1 + 0x8e7c);
     if (temp_v4 != 0) {
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
       temp_v17 = param_1 + 0x67cc;
       temp_v4 = 0;
       do {
@@ -372,7 +372,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       FUN_0020b908(0x12,0);
     }
   }
-  FUN_001641b4(0x100020f);
+  eventQueueAddUniqueIfValid(0x100020f);
   return temp_v15;
 }
 

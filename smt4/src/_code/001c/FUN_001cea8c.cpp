@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026a794(void);
+int contentEntryFlagTest(void);
 int dialogOpen(...);
 int FUN_0027e7b4(...);
 int FUN_0029541c(...);
@@ -19,7 +19,7 @@ int FUN_0029efd8(...);
 int FUN_0029f5d8(...);
 int FUN_0029f848(...);
 int soundChannelRequestIfEnabled(...);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_002c1658(...);
 int FUN_00333de4(...);
 int FUN_00334058(...);
@@ -27,7 +27,7 @@ int SBORROW4(...);
 
 int FUN_0019e0c0(...);
 int FUN_001c8a7c(int, int, int, int);
-int FUN_0026a704(void);
+int buttonHelpResetSlots(void);
 int FUN_0026b738(...);
 int FUN_0026b780(...);
 int btlTalkBustUpSetUnk2F4(...);
@@ -67,8 +67,8 @@ extern unsigned char LAB_002c6e64; /* 0x2c6e64 */
 /* Supplied declaration required: FUN_0019e0c0. */
 /* Supplied declaration required: FUN_001c8a7c. */
 extern int whisperEffectIsIdle(void);
-/* Supplied declaration required: FUN_0026a704. */
-/* Supplied declaration required: FUN_0026a794. */
+/* Supplied declaration required: buttonHelpResetSlots. */
+/* Supplied declaration required: contentEntryFlagTest. */
 /* Supplied declaration required: FUN_0026b738. */
 /* Supplied declaration required: FUN_0026b780. */
 /* Supplied declaration required: dialogOpen. */
@@ -108,7 +108,7 @@ extern unsigned short FUN_002b8584(unsigned int, int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_002b898c(void);
 extern int FUN_002b8ee0(int, unsigned int);
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf818. */
@@ -391,7 +391,7 @@ void FUN_001cea8c(int param_1)
             *(int *)(param_1 + 0xd2c4) = *(int *)(param_1 + 0xd2c4) - 1;
           }
           whisperEffectFinish();
-          FUN_0026a704();
+          buttonHelpResetSlots();
         }
         FUN_002a71fc(1);
         return;
@@ -693,7 +693,7 @@ LAB_001cfdfc:
       if (!(temp_v15 == 0 && temp_v25[0] == '\0')) {
         do {
           temp_v13 = (unsigned int)*(unsigned short *)(temp_v5 + temp_v10 * 2 + 0x34);
-          if ((temp_v13 != 0) && (FUN_0026a794(), temp_v13 != 0)) {
+          if ((temp_v13 != 0) && (contentEntryFlagTest(), temp_v13 != 0)) {
             temp_v4 = temp_v4 + 1;
           }
           temp_v10 = temp_v10 + 1;
@@ -703,7 +703,7 @@ LAB_001cfdfc:
         }
         temp_v5 = temp_v5 + temp_v6 * 2;
         temp_v13 = (unsigned int)*(unsigned short *)(temp_v5 + 0x34);
-        FUN_0026a794();
+        contentEntryFlagTest();
         if (temp_v13 == 0) {
           return;
         }
@@ -752,7 +752,7 @@ LAB_001cfdfc:
         FUN_002c1658(10,1);
         if (temp_v4 != 0) {
 LAB_001cf28c:
-          FUN_002bc01c(0x100016e);
+          eventQueueAddUniqueIfValid(0x100016e);
           FUN_00296e90();
           buttonHelpSetPreset(0x9a);
           *piVar25 = *piVar9;
@@ -776,12 +776,12 @@ LAB_001cf28c:
         *piVar9 = 5;
         temp_v11 = 0x100016e;
       }
-      FUN_002bc01c(temp_v11);
+      eventQueueAddUniqueIfValid(temp_v11);
       return;
     }
     temp_v4 = FUN_0029efa8(temp_v10);
     if (temp_v4 != temp_v6) {
-      FUN_002bc01c(0x100016c);
+      eventQueueAddUniqueIfValid(0x100016c);
     }
     temp_v4 = FUN_0029efa8(temp_v10);
     FUN_0029c94c(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));
@@ -808,7 +808,7 @@ LAB_001cf28c:
     if ((temp_v4 != 0) || (temp_v4 = temp_v9, FUN_0029efd8(temp_v9,0), temp_v4 != 0)) {
       temp_v4 = FUN_0029efa8(temp_v9);
       if (temp_v4 != temp_v6) {
-        FUN_002bc01c(0x100016c);
+        eventQueueAddUniqueIfValid(0x100016c);
       }
       temp_v4 = FUN_0029efa8(temp_v9);
       FUN_0029c94c(*(unsigned short *)(param_1 + temp_v4 * 2 + 0xd114));
@@ -820,7 +820,7 @@ LAB_001cf28c:
         *piVar27 = 0;
         *piVar9 = *piVar9 + 1;
         temp_v11 = 0x100016d;
-        FUN_002bc01c(temp_v11);
+        eventQueueAddUniqueIfValid(temp_v11);
       }
       else {
         temp_v4 = 10;
@@ -837,7 +837,7 @@ LAB_001cf28c:
             *(unsigned short *)(param_1 + temp_v4 * 2 + 0xd134) = 0;
             *piVar9 = 2;
             temp_v11 = 0x100016e;
-            FUN_002bc01c(temp_v11);
+            eventQueueAddUniqueIfValid(temp_v11);
           }
         }
       }

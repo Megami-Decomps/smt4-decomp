@@ -1,39 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002211b0` (_code @ 0x2211b0, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only: retail materialises the constant 8 (`mov r4, #8`) before loading the command's state pointer; built loads the pointer first. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002866b4(unsigned int, unsigned int, unsigned int, int, int, int);
+typedef struct MessageState {
+    /* 0x000 */ u8 unk000[0xA11];
+    /* 0xA11 */ u8 mode;
+} MessageState;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+typedef struct MessageCommand {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ MessageState *state;
+} MessageCommand;
 
-extern unsigned int FUN_002865f8(void);
-/* Supplied declaration required: FUN_002866b4. */
-extern unsigned int scrGetCommandFrame(void);
-extern unsigned int scrGetArg(unsigned int);
+u32 FUN_002865f8(void);
+u32 scrGetArg(u32 index);
+u32 scrGetCommandFrame(void);
+s32 FUN_002866b4(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
 
-
-void FUN_002211b0(int param_1)
-
+static void showMessage(MessageCommand *command, s32 state, s32 mode)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  if (*(int *)(param_1 + 4) != 0) {
-    *(unsigned char *)(*(int *)(param_1 + 4) + 0xa11) = 0x14;
-  }
-  temp_v0 = FUN_002865f8();
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetCommandFrame();
-  FUN_002866b4(temp_v0,temp_v1,temp_v2,8,0,0);
-  return;
+    u32 a;
+    u32 b;
+    u32 c;
+
+    if (command->state != NULL) {
+        command->state->mode = state;
+    }
+    a = FUN_002865f8();
+    b = scrGetArg(0);
+    c = scrGetCommandFrame();
+
+    FUN_002866b4(a, b, c, mode, 0, 0);
+}
+
+/* Script command: puts the message state in mode 0x14 and starts FUN_002866b4 with the first argument. */
+void FUN_002211b0(MessageCommand *command)
+{
+    showMessage(command, 0x14, 8);
 }
 
 } /* extern "C" */

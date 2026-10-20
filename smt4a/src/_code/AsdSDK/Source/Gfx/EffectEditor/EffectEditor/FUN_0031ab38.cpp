@@ -13,7 +13,7 @@ int effEditorNodeChainApply(int);
 int FUN_00243ce8(...);
 int FUN_002b3fd8(int, int, int, int);
 int FUN_002cf28c(...);
-int FUN_00300124(void);
+int effMenuListAppend(void);
 int VectorUnsignedToFloat(int, int);
 
 /* stack frame of param_4: 14 slot(s), 56 byte(s) */
@@ -78,7 +78,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_00243ce8. */
 /* Supplied declaration required: FUN_002b3fd8. */
 /* Supplied declaration required: FUN_002cf28c. */
-/* Supplied declaration required: FUN_00300124. */
+/* Supplied declaration required: effMenuListAppend. */
 
 
 unsigned char * FUN_0031ab38(unsigned int *param_1,int param_2,int param_3,int param_4)
@@ -427,7 +427,7 @@ LAB_0031ad90:
   *(unsigned int *)(temp_v11 + 0x18) = 0x80808080;
   *(unsigned int *)(temp_v11 + 0x10) = 0xa8;
   *(unsigned int *)(temp_v11 + 0x14) = 0x6a;
-  FUN_00300124();
+  effMenuListAppend();
   temp_v29 = 0x138;
   temp_v11 = 0x10000;
   memAlloc(0x10000,0x100,0,0x68,0x10,1);
@@ -437,7 +437,7 @@ LAB_0031ad90:
   *(unsigned int *)(temp_v11 + 0xc) = 0x3d;
   *(unsigned int *)(temp_v11 + 0x10) = temp_v29;
   *(unsigned int *)(temp_v11 + 0x14) = 0x3d;
-  FUN_00300124();
+  effMenuListAppend();
   FUN_002cf28c(0xa8,0x10,0x90,0x5a,0,0xff000000);
   if (temp_v13 != 0) {
     temp_v20 = 144.0f;
@@ -458,7 +458,7 @@ LAB_0031ad90:
       *(int *)(temp_v11 + 0x10) = temp_v16;
       *(int *)(temp_v11 + 0x14) = temp_v9;
       *(unsigned int *)(temp_v11 + 0x18) = 0xffffffff;
-      FUN_00300124();
+      effMenuListAppend();
       if ((temp_v10 != temp_v1) || (DAT_0059dc48 != 0)) {
         temp_v11 = 0x10000;
         memAlloc(0x10000,0x100,0,0x68,0x10,1);
@@ -466,7 +466,7 @@ LAB_0031ad90:
         *(int *)(temp_v11 + 8) = temp_v14;
         *(int *)(temp_v11 + 0xc) = temp_v15;
         *(unsigned int *)(temp_v11 + 0x10) = 0xff00ffff;
-        FUN_00300124();
+        effMenuListAppend();
       }
       else {
         temp_v11 = 0x10000;
@@ -475,7 +475,7 @@ LAB_0031ad90:
         *(int *)(temp_v11 + 8) = temp_v14;
         *(int *)(temp_v11 + 0xc) = temp_v15;
         *(unsigned int *)(temp_v11 + 0x10) = 0xff00ff00;
-        FUN_00300124();
+        effMenuListAppend();
       }
       temp_v10 = temp_v10 + 1;
     } while (temp_v10 < temp_v13);
@@ -487,7 +487,7 @@ LAB_0031ad90:
     *(unsigned int *)(temp_v11 + 4) = 3;
     *(int *)(temp_v11 + 8) = temp_v16;
     *(int *)(temp_v11 + 0xc) = temp_v9;
-    FUN_00300124();
+    effMenuListAppend();
   }
   else {
     temp_v11 = 0x10000;
@@ -496,7 +496,7 @@ LAB_0031ad90:
     *(unsigned int *)(temp_v11 + 4) = 3;
     *(int *)(temp_v11 + 8) = temp_v16;
     *(int *)(temp_v11 + 0xc) = temp_v9;
-    FUN_00300124();
+    effMenuListAppend();
   }
   FUN_00243ce8(0xa4,0x6e,8,&LAB_0031b530,temp_v30);
   temp_v16 = padButtonIsPressed(1);

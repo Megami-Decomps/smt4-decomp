@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0016e1a8(unsigned char **, unsigned char [4]);
-int FUN_00188374(unsigned char **, int);
+int fileHandleClose(unsigned char **, int);
 int FUN_00188fbc(unsigned char [4]);
 
 /* stack frame of param_2: 8 slot(s), 30 byte(s) */
@@ -23,7 +23,7 @@ typedef struct {
 extern unsigned char DAT_00558024; /* 0x558024 */
 
 /* Supplied declaration required: FUN_0016e1a8. */
-/* Supplied declaration required: FUN_00188374. */
+/* Supplied declaration required: fileHandleClose. */
 /* Supplied declaration required: FUN_00188fbc. */
 extern int FUN_00189388(unsigned char **, unsigned char *);
 
@@ -54,17 +54,17 @@ unsigned int FUN_00188d08(short *param_1,unsigned int param_2)
   FUN_00188fbc(temp_v8);
   if (temp_v9 < param_2) {
     FUN_0016e1a8(&temp_v1,temp_v8);
-    FUN_00188374(&temp_v1,0);
+    fileHandleClose(&temp_v1,0);
     return 0xc8a11465;
   }
   temp_v9 = temp_v9 - (short)param_2;
   FUN_0016e1a8(&temp_v1,temp_v8);
   *param_1 = temp_v9;
   if (temp_v0 != 0) {
-    FUN_00188374(&temp_v1,0);
+    fileHandleClose(&temp_v1,0);
     return 0x11464;
   }
-  FUN_00188374(&temp_v1,0);
+  fileHandleClose(&temp_v1,0);
   return 0;
 }
 

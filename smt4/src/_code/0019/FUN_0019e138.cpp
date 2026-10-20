@@ -25,14 +25,14 @@ int FUN_002a0cc8(...);
 int asdTMTexTableLoadEntryAsync(...);
 int asdTMTexTableReleaseNode(...);
 int uiSpriteSetImageKeyframe(...);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_002bf4f8(...);
 int randNextInRange(...);
 int FUN_00337a0c(...);
 int VectorSignedToFloat(...);
 
 int FUN_001ed64c(int, unsigned int, int);
-int FUN_002017f4(void);
+int messageMainApplyClose(void);
 int FUN_002251d4(...);
 int FUN_0028a368(...);
 int FUN_0028a924(...);
@@ -62,7 +62,7 @@ int FUN_0028bfe4(int);
 int FUN_0028c028(...);
 int FUN_0028c040(void);
 int btlGetMainState(void);
-int FUN_0029a128(int);
+int gameGlobalsSetSelected(int);
 int FUN_002bee58(int, int);
 int FUN_002bf818(...);
 int FUN_002dc55c(void);
@@ -97,7 +97,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_001f4f14. */
 /* Supplied declaration required: FUN_001f53d0. */
 /* Supplied declaration required: FUN_001f5e9c. */
-/* Supplied declaration required: FUN_002017f4. */
+/* Supplied declaration required: messageMainApplyClose. */
 /* Supplied declaration required: FUN_00205cc8. */
 /* Supplied declaration required: FUN_00206b80. */
 /* Supplied declaration required: FUN_0021799c. */
@@ -137,7 +137,7 @@ extern int FUN_00293230(void);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
 extern int FUN_00295618(void);
-/* Supplied declaration required: FUN_0029a128. */
+/* Supplied declaration required: gameGlobalsSetSelected. */
 /* Supplied declaration required: FUN_002a0cc8. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
@@ -149,7 +149,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: FUN_002b70cc. */
 extern int padIsButtonRepeat(unsigned int);
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf818. */
@@ -356,7 +356,7 @@ unsigned int FUN_0019e138(void)
       temp_v11 = FUN_002d0080(temp_v12);
       if (temp_v11 != 0) {
         FUN_0028c040();
-        FUN_0029a128(4);
+        gameGlobalsSetSelected(4);
         *(unsigned int *)(temp_v0 + 0x7e38) = 10;
         temp_v8 = g_btlUiBlock;
         temp_v12 = playSceneIsFadeInDone(g_btlUiBlock + 8);
@@ -418,7 +418,7 @@ unsigned int FUN_0019e138(void)
       temp_v4 = FUN_002254cc();
       if (temp_v4 != 0) {
         btlTalkBustUpReleaseAllSlots();
-        FUN_002017f4();
+        messageMainApplyClose();
       }
     }
     break;
@@ -516,7 +516,7 @@ LAB_0019e7b8:
         playSceneTimerSubStart(temp_v8 + 0x2200);
       }
     }
-    FUN_002bc01c(0x100016e);
+    eventQueueAddUniqueIfValid(0x100016e);
     break;
   case 10:
     FUN_0021799c();

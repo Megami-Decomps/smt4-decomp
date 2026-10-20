@@ -1,20 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f3614` (_code @ 0x2f3614, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the shift constant 1 in r1 (materialised after the word load, shifted by r2) and the index temporaries in r1/r2; the build allocates the constant first. */
+#include "common.h"
 
 extern "C" {
 
-extern int gameGetMapBlock(void);
+typedef struct FlagArea {
+    /* 0x00 */ u8 unk00[0xC98];
+    /* 0xC98 */ u32 bits[1];
+} FlagArea;
 
+extern FlagArea *gameGetMapBlock(void);
 
-unsigned char FUN_002f3614(int param_1)
-
+/* Whether bit `bit` of the map block's flag array is set. */
+u8 FUN_002f3614(int bit)
 {
-  int temp_v0;
-  
-  temp_v0 = gameGetMapBlock();
-  return (*(unsigned int *)(temp_v0 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4 + 0xc98) &
-         (1 << ((param_1 % 0x20) & 0xffU))) != 0;
+    FlagArea *area = gameGetMapBlock();
+
+    return (area->bits[bit / 32] & (1 << (bit % 32))) != 0;
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0010b348(unsigned int);
 int asdOperatorDeleteArray(...);
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefRelease(void);
 int onlineUrlDestroy(void);
 int FUN_002eb7c0(int);
@@ -26,7 +26,7 @@ extern unsigned char DAT_0055a38c; /* 0x55a38c */
 /* Supplied declaration required: asdOperatorDeleteArray. */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 extern int FUN_002ea00c(unsigned int *);
 /* Supplied declaration required: onlineUrlDestroy. */
@@ -68,7 +68,7 @@ void FUN_0011a9d0(unsigned int *param_1)
     (**(romwright_code **)(*piVar2 + 4))();
     param_1[0x30] = 0;
   }
-  FUN_002e6e5c(temp_v1);
+  _ZN9Obj55b28cD1Ev(temp_v1);
   param_1 = param_1 + 0x8d;
   onlineUrlDestroy();
   param_1 = param_1 + -0x1d;

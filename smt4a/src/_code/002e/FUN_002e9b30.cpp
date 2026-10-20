@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefRelease(int *);
 int onlineCallStateIsDone(int);
 int vectorCopyHeader(...);
@@ -24,7 +24,7 @@ typedef struct {
 
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
 /* Supplied declaration required: onlineCallStateIsDone. */
@@ -77,7 +77,7 @@ void FUN_002e9b30(int *param_1,int param_2,unsigned int *param_3,int param_4)
   if (param_4 != 0) {
     vectorCopyHeader(temp_v2,temp_v9);
   }
-  FUN_002e6e5c(temp_v6);
+  _ZN9Obj55b28cD1Ev(temp_v6);
   temp_v0 = onlineCallStateIsDone(param_2);
   if (temp_v0 != 0) {
     temp_v2 = *(int **)param_1[9];

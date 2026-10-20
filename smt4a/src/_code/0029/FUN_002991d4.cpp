@@ -25,7 +25,7 @@ int FUN_0034913c(void);
 int FUN_003539b4(...);
 int FUN_00359974(...);
 int FUN_0035b164(...);
-int FUN_00364530(...);
+int gameFlagsBitSet(...);
 int FUN_003689d0(void);
 int FUN_00377158(...);
 int FUN_00388758(...);
@@ -46,10 +46,10 @@ int FUN_0020ef68(void);
 int FUN_00246128(void);
 int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
-int FUN_002852f0(int);
+int messageSlotSet(int);
 int FUN_00295108(...);
 int FUN_002b5e08(int, int *, unsigned char *, unsigned int *);
-int FUN_00303504(...);
+int blockResetAxis(...);
 int FUN_00313648(...);
 int FUN_0033ab1c(int, int);
 int FUN_003774e8(int, unsigned char *, unsigned char *, unsigned int *);
@@ -136,7 +136,7 @@ extern int FUN_00224880(unsigned int);
 extern int FUN_0026272c(void);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002852f0. */
+/* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: FUN_00295108. */
 extern int FUN_002a4b60(void);
 extern int FUN_002a4b74(void);
@@ -146,7 +146,7 @@ extern int popupIsActive(void);
 /* Supplied declaration required: FUN_002e5c2c. */
 extern int FUN_002e5db4(void);
 extern int FUN_002ffa9c(int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00303504. */
+/* Supplied declaration required: blockResetAxis. */
 /* Supplied declaration required: FUN_00312714. */
 /* Supplied declaration required: FUN_00312d88. */
 /* Supplied declaration required: FUN_00312db0. */
@@ -159,7 +159,7 @@ extern int FUN_002ffa9c(int, unsigned int, unsigned int, unsigned int);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_0035b164. */
-/* Supplied declaration required: FUN_00364530. */
+/* Supplied declaration required: gameFlagsBitSet. */
 /* Supplied declaration required: FUN_003689d0. */
 /* Supplied declaration required: FUN_00377158. */
 /* Supplied declaration required: FUN_003774e8. */
@@ -290,7 +290,7 @@ unsigned int FUN_002991d4(void)
         if (*(int *)(temp_v4 + 0x10c) != 0) {
           gameFlagSetValue(*(int *)(temp_v4 + 0x10c),1);
         }
-        FUN_002852f0(0);
+        messageSlotSet(0);
         scrScriptProcessDestroy(*(unsigned int *)(temp_v4 + 0x108));
         asdMemFree(*(unsigned int *)(temp_v4 + 0x100));
         asdMemFree(*(unsigned int *)(temp_v4 + 0x104));
@@ -493,7 +493,7 @@ unsigned int FUN_002991d4(void)
     }
     if (*(int *)(temp_v4 + 0x4c) == 7) {
       if ((*(int *)(temp_v4 + 0xc) == 0) && (*(int *)(DAT_005806a4 + 0xb0) == 0)) {
-        FUN_00303504(0xb);
+        blockResetAxis(0xb);
         goto LAB_00299da8;
       }
     }
@@ -704,7 +704,7 @@ LAB_0029a094:
           scrCommResetPanel();
         }
         *(unsigned char *)(temp_v4 + 0xac) = 0;
-        FUN_00303504(0xffffffff);
+        blockResetAxis(0xffffffff);
         *(unsigned char *)(temp_v4 + 0x50) = 0;
         *(unsigned char *)(temp_v4 + 0x61) = 0;
         *(unsigned char *)(temp_v4 + 0x70) = 0;
@@ -811,7 +811,7 @@ LAB_0029a094:
       FUN_0034913c();
       temp_v11 = FUN_002a4b60();
       if (temp_v11 == 0) {
-        FUN_00364530((int)(short)*(unsigned int *)(temp_v4 + 0xb4),1);
+        gameFlagsBitSet((int)(short)*(unsigned int *)(temp_v4 + 0xb4),1);
         FUN_00312db0(&LAB_0029986c);
         temp_v12 = 0xb;
         *(unsigned int *)(temp_v4 + 0x48) = temp_v12;
@@ -953,7 +953,7 @@ LAB_0029a094:
     }
     if (*(int *)(temp_v4 + 0x4c) == 7) {
       if ((*(int *)(temp_v4 + 0xc) == 0) && (*(int *)(DAT_005806a4 + 0xb0) == 0)) {
-        FUN_00303504(0xb);
+        blockResetAxis(0xb);
         goto LAB_002993c0;
       }
     }
@@ -998,7 +998,7 @@ LAB_002993c0:
       FUN_00388758(1);
       FUN_004a0ef8(*(unsigned int *)(temp_v4 + 0x44));
       *(unsigned char *)(temp_v4 + 0xac) = 0;
-      FUN_00303504(0xffffffff);
+      blockResetAxis(0xffffffff);
       *(unsigned char *)(temp_v4 + 0x50) = 0;
       *(unsigned char *)(temp_v4 + 0x61) = 0;
       *(unsigned char *)(temp_v4 + 0x70) = 0;
@@ -1015,7 +1015,7 @@ LAB_002993c0:
     break;
   case 0x10:
     if (*(int *)(DAT_005806a4 + 0xb0) == 0) {
-      FUN_00303504(0xb);
+      blockResetAxis(0xb);
     }
     FUN_001681c4();
     puVar15 = &LAB_0029a5c4;
@@ -1050,7 +1050,7 @@ LAB_002993c0:
       *(unsigned int *)(temp_v4 + 0x104) = 0;
       temp_v11 = FUN_002a4b74();
       if (temp_v11 != 0) {
-        FUN_00303504(0xffffffff);
+        blockResetAxis(0xffffffff);
       }
       else {
         mapPlaceSet(0x18,1,0);

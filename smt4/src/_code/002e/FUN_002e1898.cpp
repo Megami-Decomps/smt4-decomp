@@ -13,7 +13,7 @@ extern int g_campCec; /* 0x43daa8 */
 
 extern unsigned int FUN_002228d4(void);
 extern int gameDataBlockTestFlag(unsigned int);
-extern int FUN_00262f14(void);
+extern int partyPanelIsActive(void);
 extern int FUN_0026efec(int);
 /* Supplied declaration required: FUN_002990a0. */
 /* Supplied declaration required: FUN_0029e648. */
@@ -77,7 +77,7 @@ LAB_002e191c:
   temp_v6 = 2;
 LAB_002e1920:
   if (*(char *)(param_1 + 0xd61) == '\0') {
-    temp_v0 = FUN_00262f14();
+    temp_v0 = partyPanelIsActive();
     if (temp_v0 == 0) {
       temp_v3 = 3;
     }

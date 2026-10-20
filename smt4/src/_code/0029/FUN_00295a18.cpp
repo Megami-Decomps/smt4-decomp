@@ -8,7 +8,7 @@ int FUN_00348e88(unsigned int);
 
 extern int FUN_00282be4(void);
 extern int *FUN_002b4748(unsigned int);
-extern unsigned int FUN_002b8dc0(unsigned int);
+extern unsigned int recordPackedValue(unsigned int);
 /* Supplied declaration required: FUN_00348e88. */
 
 
@@ -73,7 +73,7 @@ void FUN_00295a18(unsigned int param_1,int param_2)
     temp_v2 = param_1 - *piVar1;
     if (*(char *)((int)piVar1 + 9) != '\0') {
       if (*(char *)((int)piVar1 + 9) == '\x01') {
-        temp_v1 = FUN_002b8dc0(param_1);
+        temp_v1 = recordPackedValue(param_1);
         puVar5 = (unsigned short *)(temp_v0 + temp_v2 * 2);
         if ((unsigned int)*puVar5 + param_2 >= temp_v1) {
           *puVar5 = (unsigned short)temp_v1;

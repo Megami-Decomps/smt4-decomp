@@ -1,39 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00132aec` (_code @ 0x132aec, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the new node in r1 and loads the value into r2 (built keeps the node in r0) */
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_00132aec_arg0 fn_00132aec_arg0;
-struct fn_00132aec_arg0 {
-    undefined4 field_0x0; /* +0x0 */
-    undefined4 field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x4];
-    void *field_0x10; /* +0x10 */
-    int field_0x14; /* +0x14 */
-};
+/* Doubly linked list node (a circular list with a sentinel); `value` is the payload. */
+typedef struct ListNode {
+    /* 0x00 */ struct ListNode *next;
+    /* 0x04 */ struct ListNode *prev;
+    /* 0x08 */ u32 value;
+} ListNode;
 
-extern unsigned int *poolAllocElement12(fn_00132aec_arg0 *, unsigned int);
+typedef struct ListObject {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ ListNode *sentinel;
+    /* 0x14 */ s32 count;
+} ListObject;
 
+ListNode *poolAllocElement12(ListObject *list, u32 arg);
 
-void FUN_00132aec(fn_00132aec_arg0 *param_1,int *param_2)
-
+/* Inserts a node holding *value before the sentinel (at the tail) and counts it. */
+void FUN_00132aec(ListObject *list, const u32 *value)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  void *pvVar3;
-  
-  pvVar3 = param_1->field_0x10;
-  puVar1 = (unsigned int *)poolAllocElement12(param_1,0);
-  temp_v0 = *param_2;
-  *puVar1 = (unsigned int)pvVar3;
-  puVar1[2] = temp_v0;
-  puVar1[1] = *(unsigned int *)((int)pvVar3 + 4);
-  **(unsigned int **)((int)pvVar3 + 4) = (unsigned int)puVar1;
-  *(unsigned int **)((int)pvVar3 + 4) = puVar1;
-  param_1->field_0x14 = param_1->field_0x14 + 1;
-  return;
+    ListNode *sentinel = list->sentinel;
+    ListNode *node = poolAllocElement12(list, 0);
+
+    node->next = sentinel;
+    node->value = *value;
+    node->prev = sentinel->prev;
+    sentinel->prev->next = node;
+    sentinel->prev = node;
+    list->count++;
 }
 
 } /* extern "C" */

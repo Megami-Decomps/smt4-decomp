@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(...);
-int FUN_002e6e5c(...);
+int _ZN9Obj55b28cD1Ev(...);
 int FUN_002f2978(unsigned int, unsigned int, unsigned int, unsigned int *, unsigned int *);
 int FUN_002f2e3c(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int *, int);
 int FUN_002f5020(unsigned char [4], unsigned char *, int);
@@ -26,7 +26,7 @@ extern unsigned char LAB_00106e41; /* 0x106e41 */
 extern unsigned char g_listenerTable; /* 0x594ad8 */
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002f2978. */
 /* Supplied declaration required: FUN_002f2e3c. */
 /* Supplied declaration required: FUN_002f5020. */
@@ -80,7 +80,7 @@ unsigned int FUN_00115560(int param_1,unsigned int param_2)
     }
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 8);
-  FUN_002e6e5c(temp_v8);
+  _ZN9Obj55b28cD1Ev(temp_v8);
   if ((temp_v5 != 0) &&
      (temp_v2 = (**(romwright_code **)(*(*(int * *)((unsigned char *)&g_listenerTable + 0x48)) + 0x10))((*(int * *)((unsigned char *)&g_listenerTable + 0x48)),temp_v6,temp_v5,temp_v13),
      temp_v2 != 0)) {
@@ -112,7 +112,7 @@ unsigned int FUN_00115560(int param_1,unsigned int param_2)
       }
 LAB_001156a2:;
     }
-    FUN_002e6e5c(temp_v12);
+    _ZN9Obj55b28cD1Ev(temp_v12);
     temp_v1 = 1;
   }
   else {

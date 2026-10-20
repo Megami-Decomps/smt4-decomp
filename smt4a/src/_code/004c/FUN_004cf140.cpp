@@ -6,7 +6,7 @@ extern "C" {
 
 int ifTouchRegionRemove(void);
 int FUN_001f4908(int, int, int);
-int FUN_00284168(int, int, int, int);
+int ifTouchRegionAdd(int, int, int, int);
 int FUN_0037ed38(void);
 int ref208SetPair1C(int);
 int FUN_003cbb0c(void);
@@ -20,7 +20,7 @@ extern int FUN_001643a0(void);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_001f4908. */
 extern int bgmGetStateById(unsigned int);
-/* Supplied declaration required: FUN_00284168. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: FUN_0037ed38. */
 /* Supplied declaration required: ref208SetPair1C. */
 extern int ref208HasObj(void);
@@ -43,7 +43,7 @@ unsigned int FUN_004cf140(int param_1)
     *(unsigned int *)(param_1 + 0x34) = 300;
     temp_v0 = 0;
     *(unsigned int *)(param_1 + 0x2c) = 0;
-    FUN_00284168(0,0,0x140,0xf0);
+    ifTouchRegionAdd(0,0,0x140,0xf0);
     *(unsigned int *)(param_1 + 0x2c) = temp_v0;
     *(unsigned char *)(param_1 + 0x24) = 0;
     temp_v1 = ref208HasObj();

@@ -13,7 +13,7 @@ int FUN_00297b94(...);
 int playSceneSetState(...);
 int flaggedEntrySetValueB(int, int);
 int FUN_0029f848(int, int, int, int, int, int);
-int FUN_002a0cb0(void);
+int buttonHelpGetMode(void);
 int FUN_002b8584(...);
 int buttonHelpSetPreset(void);
 int ifTouchRegionRemove(void);
@@ -40,7 +40,7 @@ extern int FUN_0029d644(unsigned int);
 extern unsigned int FUN_0029e958(int);
 extern int FUN_0029ee54(unsigned int);
 /* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: FUN_002a0cb0. */
+/* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: FUN_002b8584. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_002b898c(void);
@@ -141,12 +141,12 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
               FUN_0029f848(param_1 + 0x33a8,4,1,4,1,1);
             }
             if (*(int *)(param_1 + 0x3048) == 0x13 || *(int *)(param_1 + 0x3048) == 0x16) {
-              FUN_002a0cb0();
+              buttonHelpGetMode();
               buttonHelpSetPreset();
             }
             temp_v4 = *(int *)(param_1 + 0x3048);
             if ((temp_v4 == 0x22 || temp_v4 == 0x23) || temp_v4 == 0x24) {
-              FUN_002a0cb0();
+              buttonHelpGetMode();
               buttonHelpSetPreset();
             }
             temp_v4 = FUN_002b898c();
@@ -154,7 +154,7 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
               btlGetMainState();
               temp_v4 = FUN_00293230();
               if (temp_v4 == 0) {
-                FUN_002a0cb0();
+                buttonHelpGetMode();
                 buttonHelpSetPreset();
               }
             }

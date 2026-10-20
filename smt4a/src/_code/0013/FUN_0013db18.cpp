@@ -1,42 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013db18` (_code @ 0x13db18, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: exit layout only: retail returns 0 through `movne r0,#0; bne` for the already-copied case and reuses the zero enabled flag in r0 for the disabled case, with `mov r0,#0` before the final store; the build branches to a shared `mov r0,#0` exit. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00154edc(int, unsigned int);
-int surfaceCopy(unsigned int, unsigned int);
-int FUN_00157558(unsigned int);
+typedef struct Surface {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 width;
+    /* 0x18 */ s32 height;
+} Surface;
 
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
+typedef struct RenderBackdrop {
+    /* 0x00 */ u8 unk00[0x40];
+    /* 0x40 */ u8 enabled;
+    /* 0x41 */ u8 unk41;
+    /* 0x42 */ u8 fresh;
+    /* 0x43 */ u8 copied;
+} RenderBackdrop;
 
-/* Supplied declaration required: FUN_00154edc. */
-/* Supplied declaration required: surfaceCopy. */
-/* Supplied declaration required: FUN_00157558. */
-extern int jobGetWork(void);
+typedef struct RenderWork {
+    /* 0x0000 */ u8 unk0000[4];
+    /* 0x0004 */ Surface *surface;
+    /* 0x0008 */ u8 unk0008[0xFF8];
+    /* 0x1000 */ RenderBackdrop backdrop;
+} RenderWork;
 
+extern u32 g_renderCtx; /* 0x59dbb4 */
 
-unsigned char FUN_0013db18(void)
+extern RenderWork *jobGetWork(void);
+extern int surfaceCopy(Surface *dst, Surface *src);
+extern int FUN_00154edc(int arg, Surface *surface);
+extern int FUN_00157558(u32 ctx);
 
+/* Renders the scene into the backdrop surface once, then halves the surface size to mark it copied. */
+u32 FUN_0013db18(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  
-  temp_v1 = jobGetWork();
-  if ((*(char *)(temp_v1 + 0x1040) != '\0') && (*(char *)(temp_v1 + 0x1043) == '\0')) {
-    FUN_00157558(g_renderCtx);
-    *(unsigned int *)(*(int *)(temp_v1 + 4) + 0x14) = 0x200;
-    *(unsigned int *)(*(int *)(temp_v1 + 4) + 0x18) = 0x200;
-    temp_v0 = 0;
-    FUN_00154edc(0,*(unsigned int *)(temp_v1 + 4));
-    *(unsigned char *)(temp_v1 + 0x1042) = temp_v0;
-    surfaceCopy(*(unsigned int *)(temp_v1 + 4),*(unsigned int *)(temp_v1 + 4));
-    *(int *)(*(int *)(temp_v1 + 4) + 0x14) = *(int *)(*(int *)(temp_v1 + 4) + 0x14) >> 1;
-    *(int *)(*(int *)(temp_v1 + 4) + 0x18) = *(int *)(*(int *)(temp_v1 + 4) + 0x18) >> 1;
-    *(unsigned char *)(temp_v1 + 0x1043) = 1;
-  }
-  return 0;
+    RenderWork *work = jobGetWork();
+
+    if (work->backdrop.enabled != 0) {
+        if (work->backdrop.copied != 0) {
+            return 0;
+        }
+        FUN_00157558(g_renderCtx);
+        work->surface->width = 0x200;
+        work->surface->height = 0x200;
+        work->backdrop.fresh = FUN_00154edc(0, work->surface);
+        surfaceCopy(work->surface, work->surface);
+        work->surface->width >>= 1;
+        work->surface->height >>= 1;
+        work->backdrop.copied = 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

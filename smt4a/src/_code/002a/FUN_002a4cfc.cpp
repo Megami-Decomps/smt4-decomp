@@ -20,7 +20,7 @@ int FUN_0028187c(...);
 int FUN_00284ee4(...);
 int bibleOpenMode1(...);
 int FUN_002a4708(void);
-int FUN_002abff8(...);
+int uniteSetMode(...);
 int FUN_002c39dc(...);
 int FUN_002e2404(...);
 int FUN_0032fbd0(void);
@@ -101,7 +101,7 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a5cf4. */
 /* Supplied declaration required: FUN_002a7b74. */
 extern int FUN_002ab790(void);
-/* Supplied declaration required: FUN_002abff8. */
+/* Supplied declaration required: uniteSetMode. */
 /* Supplied declaration required: bibleOpenMode2. */
 extern int FUN_002c2c68(int);
 /* Supplied declaration required: FUN_002c39dc. */
@@ -385,7 +385,7 @@ void FUN_002a4cfc(void)
     temp_v3 = FUN_002c90b0();
     if (temp_v3 != 0) {
       FUN_0026fc00(2,3,0xffffffff,0);
-      FUN_002abff8(0);
+      uniteSetMode(0);
       FUN_0020b660(0x20);
       FUN_0026f0c4();
       return;
@@ -393,7 +393,7 @@ void FUN_002a4cfc(void)
     break;
   case 0x2d:
     FUN_0026fc00(2,3,0xffffffff,0);
-    FUN_002abff8(2);
+    uniteSetMode(2);
     FUN_0020b660(0x20);
     FUN_0026f0c4();
     return;
@@ -438,7 +438,7 @@ void FUN_002a4cfc(void)
     temp_v2 = FUN_002c90b0();
     if (temp_v2 != 0) {
       FUN_0026fc00(2,3,0xffffffff,0);
-      FUN_002abff8(4);
+      uniteSetMode(4);
       FUN_0020b660(0x20);
       FUN_0026f0c4();
       *(unsigned char *)(temp_v3 + 0x317a) = 1;
@@ -449,7 +449,7 @@ void FUN_002a4cfc(void)
     temp_v3 = FUN_002c90b0();
     if (temp_v3 != 0) {
       FUN_0026fc00(2,3,0xffffffff,0);
-      FUN_002abff8(5);
+      uniteSetMode(5);
       FUN_0026f0c4();
       FUN_0035de50();
       FUN_00388758(1);
@@ -573,7 +573,7 @@ void FUN_002a4cfc(void)
     temp_v3 = FUN_002c90b0();
     if (temp_v3 != 0) {
       FUN_0026fc00(2,3,0xffffffff,0);
-      FUN_002abff8(1);
+      uniteSetMode(1);
       FUN_0020b660(0x20);
       FUN_0026f0c4();
       return;

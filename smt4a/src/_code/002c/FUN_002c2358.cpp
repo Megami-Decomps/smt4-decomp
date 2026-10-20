@@ -1,41 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c2358` (_code @ 0x2c2358, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: the zero is built directly in r6; retail builds it in r0, copies it to r6 and stores the flag byte from r0. */
+#include "common.h"
 
 extern "C" {
 
-int asdTextureRelease(void);
+typedef struct FrameTex {
+    /* 0x0000 */ u8 unk0000[0xFA4];
+    /* 0x0FA4 */ u8 loaded;
+    /* 0x0FA5 */ u8 unk0FA5[0x4EB];
+    /* 0x1490 */ void *texA;
+    /* 0x1494 */ u8 unk1494[4];
+    /* 0x1498 */ void *texC;
+    /* 0x149C */ void *texB;
+} FrameTex;
 
-extern int g_frameTex; /* 0x57f65c */
+extern FrameTex *g_frameTex;
 
-/* Supplied declaration required: asdTextureRelease. */
+int asdTextureRelease(void *texture);
 
-
+/* Releases the frame textures (A, B, C) and clears the loaded flag. */
 void FUN_002c2358(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  
-  temp_v0 = g_frameTex;
-  piVar2 = (int *)(g_frameTex + 0x1490);
-  *(unsigned char *)(g_frameTex + 0xfa4) = 0;
-  if (*piVar2 != 0) {
-    asdTextureRelease();
-    *piVar2 = 0;
-  }
-  piVar2 = (int *)(temp_v0 + 0x149c);
-  if (*piVar2 != 0) {
-    asdTextureRelease();
-    *piVar2 = 0;
-  }
-  piVar2 = (int *)(temp_v0 + 0x1498);
-  if (*piVar2 != 0) {
-    asdTextureRelease();
-    *piVar2 = 0;
-  }
-  return;
+    FrameTex *tex = g_frameTex;
+
+    tex->loaded = 0;
+    if (tex->texA != NULL) {
+        asdTextureRelease(tex->texA);
+        tex->texA = NULL;
+    }
+    if (tex->texB != NULL) {
+        asdTextureRelease(tex->texB);
+        tex->texB = NULL;
+    }
+    if (tex->texC != NULL) {
+        asdTextureRelease(tex->texC);
+        tex->texC = NULL;
+    }
 }
 
 } /* extern "C" */

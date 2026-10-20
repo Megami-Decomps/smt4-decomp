@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002ad314(float *, float [2], int);
-int FUN_002c5d5c(unsigned char *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned char *, unsigned char *, int, int);
 int hasExclusiveAccess(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -98,7 +98,7 @@ extern unsigned int DAT_004ef984; /* 0x4ef984 */
 #endif
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: FUN_002ad314. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_003ee9bc(void)
@@ -148,7 +148,7 @@ void FUN_003ee9bc(void)
   DAT_004ef882 = 0;
   DAT_004ef884 = 0;
   DAT_004ef886 = 0;
-  FUN_002c5d5c(&DAT_004ef888,&LAB_00361934,0x18,8);
+  __aeabi_vec_ctor_nocookie_nodtor(&DAT_004ef888,&LAB_00361934,0x18,8);
   DAT_004ef964 = 0;
   DAT_004ef968 = 0;
   DAT_004ef96c = 0;

@@ -6,7 +6,7 @@ extern "C" {
 
 int addressBlockInit(unsigned char *, unsigned int);
 int nn_os_CriticalSection_Initialize(unsigned int);
-int FUN_002c3918(unsigned int *, unsigned int, unsigned int, int, unsigned int);
+int heapOwnerCreate(unsigned int *, unsigned int, unsigned int, int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ extern int DAT_004d45f4; /* 0x4d45f4 */
 
 /* Supplied declaration required: addressBlockInit. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: FUN_002c3918. */
+/* Supplied declaration required: heapOwnerCreate. */
 
 
 void nn_init_InitializeAllocator(unsigned int param_1)
@@ -57,7 +57,7 @@ void nn_init_InitializeAllocator(unsigned int param_1)
     *(unsigned int *)(temp_v0 + 0x60) = 0;
     *(unsigned int *)(temp_v0 + 100) = 0xffffffff;
     *puVar3 = (unsigned int)&DAT_00420f30;
-    FUN_002c3918(puVar3,temp_v0 + 0x68,(temp_v1 + param_1) - (temp_v0 + 0x68),0,unaff_r4);
+    heapOwnerCreate(puVar3,temp_v0 + 0x68,(temp_v1 + param_1) - (temp_v0 + 0x68),0,unaff_r4);
     nn_os_CriticalSection_Initialize(temp_v0 + 0x5c);
   }
   puRam0044e688 = puVar3;

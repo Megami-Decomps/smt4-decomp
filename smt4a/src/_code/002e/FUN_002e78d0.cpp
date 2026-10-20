@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_002e6e34(int *, int);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int FUN_0030f3ee(...);
 
 extern unsigned char g_flagBlock; /* 0x594958 */
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_0030f3ee. */
 
 
@@ -29,7 +29,7 @@ void FUN_002e78d0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x14)) != '\0') {
     FUN_002e6e34(&uStack_20,param_1 + 0xb8);
     FUN_0030f3ee(param_1,param_2,param_3);
-    FUN_002e6e5c(&uStack_20);
+    _ZN9Obj55b28cD1Ev(&uStack_20);
     return;
   }
   FUN_0030f3ee(param_1);

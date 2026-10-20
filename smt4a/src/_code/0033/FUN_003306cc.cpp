@@ -1,34 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003306cc` (_code @ 0x3306cc, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
+typedef struct JobRef {
+    /* 0x0 */ u32 job;
+} JobRef;
 
-extern int DAT_0057f20c; /* 0x57f20c */
-extern unsigned char g_commonBg; /* 0x57f208 */
+typedef struct Fade {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 unk08;
+    /* 0x0C */ s32 unk0C;
+    /* 0x10 */ f32 unk10;
+    /* 0x14 */ s32 unk14;
+} Fade;
 
-/* Supplied declaration required: jobStop. */
-extern int jobIsValid(unsigned int);
+typedef struct CommonBgView {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ Fade *fade;
+    /* 0x8 */ JobRef *jobRef;
+} CommonBgView;
 
+extern CommonBgView g_commonBg;
 
+s32 jobIsValid(u32 job);
+s32 jobStop(u32 job, s32 arg);
+
+/* Stops the background job if it is still running and resets the fade state. */
 void FUN_003306cc(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = DAT_0057f20c;
-  if (((*(unsigned int * *)((unsigned char *)&g_commonBg + 0x8)) != (unsigned int *)0x0) && (temp_v1 = jobIsValid(*(*(unsigned int * *)((unsigned char *)&g_commonBg + 0x8))), temp_v1 != 0)) {
-    jobStop(*(*(unsigned int * *)((unsigned char *)&g_commonBg + 0x8)),0);
-  }
-  *(unsigned int *)(temp_v0 + 8) = 0;
-  *(unsigned int *)(temp_v0 + 0xc) = 1;
-  *(unsigned int *)(temp_v0 + 0x10) = 0;
-  *(unsigned int *)(temp_v0 + 0x14) = 0;
-  return;
+    Fade *fade = g_commonBg.fade;
+
+    if (g_commonBg.jobRef != NULL && jobIsValid(g_commonBg.jobRef->job) != 0) {
+        jobStop(g_commonBg.jobRef->job, 0);
+    }
+    fade->unk08 = 0;
+    fade->unk0C = 1;
+    fade->unk10 = 0.0f;
+    fade->unk14 = 0;
 }
 
 } /* extern "C" */

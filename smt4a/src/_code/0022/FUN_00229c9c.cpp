@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00137ea0(int);
 int FUN_001386b4(void);
 int FUN_001386e8(int);
-int FUN_00138cf8(int);
+int gameDataBlocksMaskClearBits(int);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_00224880(int);
@@ -28,7 +28,7 @@ extern int DAT_005e2110; /* 0x5e2110 */
 /* Supplied declaration required: FUN_00137ea0. */
 /* Supplied declaration required: FUN_001386b4. */
 /* Supplied declaration required: FUN_001386e8. */
-/* Supplied declaration required: FUN_00138cf8. */
+/* Supplied declaration required: gameDataBlocksMaskClearBits. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_00224880. */
@@ -183,7 +183,7 @@ unsigned int FUN_00229c9c(unsigned int param_1,int param_2)
       if (DAT_0057f6d8 != -1) {
         FUN_001386e8(1);
         FUN_00137ea0(1);
-        FUN_00138cf8(1);
+        gameDataBlocksMaskClearBits(1);
         pcVar2[0xc] = '\n';
         pcVar2[0xd] = '\0';
         pcVar2[0xe] = '\0';

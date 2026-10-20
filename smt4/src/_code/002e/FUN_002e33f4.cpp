@@ -10,7 +10,7 @@ int FUN_0026e630(void);
 int FUN_00283e48(void);
 int FUN_00283f30(unsigned short [8], int);
 int FUN_00295c60(int, int);
-int FUN_00295f28(int);
+int dataTable9EntryOrZero(int);
 int FUN_00334018(int);
 
 typedef struct fn_002e33f4_arg0 fn_002e33f4_arg0;
@@ -51,7 +51,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00295c60. */
 extern int FUN_00295cec(void);
 extern int FUN_00295d08(unsigned int);
-/* Supplied declaration required: FUN_00295f28. */
+/* Supplied declaration required: dataTable9EntryOrZero. */
 extern int flagWordTestBit(int, unsigned int);
 extern int gameGetUnitRecord(void);
 extern int gameGetPlayerData(void);
@@ -136,18 +136,18 @@ unsigned int FUN_002e33f4(fn_002e33f4_arg0 *param_1,fn_002e33f4_arg1 *param_2,in
 LAB_002e354c:
   if ((param_2->field_0x74 != 0) &&
      (((temp_v4 != 0 &&
-       (temp_v1 = FUN_00295f28(*(unsigned char *)(temp_v4 + 0x76)), temp_v1 != *(int *)(temp_v4 + 0x30))) ||
+       (temp_v1 = dataTable9EntryOrZero(*(unsigned char *)(temp_v4 + 0x76)), temp_v1 != *(int *)(temp_v4 + 0x30))) ||
       ((temp_v3 != 0 &&
        (temp_v1 = FUN_00295c60(*(unsigned short *)(temp_v3 + 0x46),*(unsigned char *)(temp_v3 + 0x48)),
        temp_v1 != *(int *)(temp_v3 + 0x30))))))) {
     if (param_4 == 0) {
       if (temp_v4 != 0) {
-        temp_v3 = FUN_00295f28(*(unsigned char *)(temp_v4 + 0x76));
+        temp_v3 = dataTable9EntryOrZero(*(unsigned char *)(temp_v4 + 0x76));
         *(int *)(temp_v4 + 0x30) =
              (int)((unsigned int)param_2->field_0x74 * temp_v3) / 100 + *(int *)(temp_v4 + 0x30);
-        temp_v2 = FUN_00295f28(*(unsigned char *)(temp_v4 + 0x76));
+        temp_v2 = dataTable9EntryOrZero(*(unsigned char *)(temp_v4 + 0x76));
         if (temp_v2 < *(unsigned int *)(temp_v4 + 0x30)) {
-          temp_v5 = FUN_00295f28(*(unsigned char *)(temp_v4 + 0x76));
+          temp_v5 = dataTable9EntryOrZero(*(unsigned char *)(temp_v4 + 0x76));
           *(unsigned int *)(temp_v4 + 0x30) = temp_v5;
         }
       }

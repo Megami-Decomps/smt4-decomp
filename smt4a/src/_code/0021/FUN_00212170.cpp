@@ -6,7 +6,7 @@ void FUN_00168980(void);
 void campCommonBgRelease(void);
 void campButtonHelpRelease(void);
 void texOwner1480Free(u32 *member);
-void FUN_00493154(void);
+void texSetRelease(void);
 void asdMemFree(void *memory);
 s32 jobStop(u32 job, s32 flag);
 
@@ -21,7 +21,7 @@ extern Scene *g_naviMain;
 void FUN_00212170(void)
 {
     FUN_00168980();
-    FUN_00493154();
+    texSetRelease();
     campCommonBgRelease();
     campButtonHelpRelease();
     if (g_naviMain != NULL) {

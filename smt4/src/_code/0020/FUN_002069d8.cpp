@@ -10,7 +10,7 @@ int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int FUN_002beed0(...);
-int FUN_002c312c(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
+int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
 
 /* stack frame of param_1: 8 slot(s), 32 byte(s) */
@@ -36,7 +36,7 @@ extern unsigned char DAT_004018b4; /* 0x4018b4 */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002beed0. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -47,7 +47,7 @@ void FUN_002069d8(int param_1)
   *(unsigned int *)(param_1 + 0x254) = 0;
   *(unsigned int *)(param_1 + 0x250) = 0;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
-  FUN_002c312c(param_1,&DAT_00401824,0x30,&DAT_00401854,0x30,&DAT_00401884,0x30,0,0,&DAT_004018b4,
+  paramsInit(param_1,&DAT_00401824,0x30,&DAT_00401854,0x30,&DAT_00401884,0x30,0,0,&DAT_004018b4,
                0x118);
   FUN_002bd954(param_1 + 0x20,0x14,0x29,param_1,0x33);
   *(unsigned short *)(param_1 + 0x5a) = 2;

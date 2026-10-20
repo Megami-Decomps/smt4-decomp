@@ -7,7 +7,7 @@ extern "C" {
 int gameGetSlotRecord(void);
 int gameGetSlotTable(void);
 int FUN_001ad9b4(void);
-int FUN_001b4bd4(void);
+int bitArrayCountSet1to500(void);
 
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
@@ -15,7 +15,7 @@ int FUN_001b4bd4(void);
 extern int gameSlotTableFindFree(void);
 extern int FUN_001b34b8(void);
 extern int FUN_001b4aa0(void);
-/* Supplied declaration required: FUN_001b4bd4. */
+/* Supplied declaration required: bitArrayCountSet1to500. */
 extern unsigned int gameCountersGetWord(unsigned short);
 extern int FUN_001b5660(int);
 extern unsigned int FUN_001ba3d4(unsigned short);
@@ -116,7 +116,7 @@ void FUN_001ada74(int param_1)
                   if (-1 < *(char *)(temp_v8 + 0x1c88 + temp_v5)) {
                     temp_v6 = gameGetSlotRecord();
                     temp_v7 = temp_v6 + 0x68;
-                    FUN_001b4bd4();
+                    bitArrayCountSet1to500();
                     if (*(unsigned int *)(temp_v10 + 0x104) <= temp_v7) goto LAB_001add08;
                   }
                   temp_v5 = temp_v5 + 1;

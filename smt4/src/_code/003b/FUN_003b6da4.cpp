@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00288790(int, int, int, int);
+int messageKindForward(int, int, int, int);
 int FUN_0029a17c(int, int, int, int, int);
 int __aeabi_idivmod(int, int);
 
@@ -23,7 +23,7 @@ typedef struct {
 
 extern int g_titleScene; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_00288790. */
+/* Supplied declaration required: messageKindForward. */
 /* Supplied declaration required: FUN_0029a17c. */
 extern int gameGetUnitRecord(int);
 extern int FUN_002bf4f8(unsigned int, unsigned int);
@@ -88,7 +88,7 @@ void FUN_003b6da4(int param_1,int param_2,int param_3,int param_4)
     temp_v0 = temp_v0 + 2;
   } while (temp_v3 != 0);
   if (temp_v10 == 1) {
-    FUN_00288790((int)temp_v8,*(short *)(temp_v2 + 8) + param_3,*(short *)(temp_v2 + 10) + param_4,0x7e);
+    messageKindForward((int)temp_v8,*(short *)(temp_v2 + 8) + param_3,*(short *)(temp_v2 + 10) + param_4,0x7e);
     return;
   }
   if (temp_v10 >= 2) {
@@ -96,7 +96,7 @@ void FUN_003b6da4(int param_1,int param_2,int param_3,int param_4)
     temp_v3 = *piVar13;
     *piVar13 = temp_v3 + 1;
     if (temp_v3 + 1 < 0x14) {
-      FUN_00288790((int)temp_v8,*(short *)(temp_v2 + 8) + param_3,*(short *)(temp_v2 + 10) + param_4,0x7e)
+      messageKindForward((int)temp_v8,*(short *)(temp_v2 + 8) + param_3,*(short *)(temp_v2 + 10) + param_4,0x7e)
       ;
       return;
     }
@@ -137,9 +137,9 @@ void FUN_003b6da4(int param_1,int param_2,int param_3,int param_4)
     FUN_0029a17c(*(short *)(temp_v2 + 8) + param_3,*(short *)(temp_v2 + 10) + param_4,
                  (int)**(short **)(temp_v2 + 0xc),(int)(*(short **)(temp_v2 + 0xc))[1],1);
     temp_v12 = (*piVar13 - 0x14) * -3;
-    FUN_00288790((int)temp_v8,(int)*(short *)(temp_v2 + 8) + temp_v12 + param_3,
+    messageKindForward((int)temp_v8,(int)*(short *)(temp_v2 + 8) + temp_v12 + param_3,
                  *(short *)(temp_v2 + 10) + param_4,0x7e);
-    FUN_00288790((int)temp_v1,(int)*(short *)(temp_v2 + 8) + param_3 + temp_v12 + 0xd,
+    messageKindForward((int)temp_v1,(int)*(short *)(temp_v2 + 8) + param_3 + temp_v12 + 0xd,
                  *(short *)(temp_v2 + 10) + param_4,0x7e);
     temp_v12 = g_titleScene;
     piVar8 = (int *)(g_titleScene + 0x130c);

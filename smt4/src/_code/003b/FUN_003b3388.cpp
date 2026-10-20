@@ -12,7 +12,7 @@ int FUN_002be650(...);
 int vec2GetXInt(...);
 int FUN_002bf538(...);
 
-int FUN_00288790(...);
+int messageKindForward(...);
 int FUN_00288844(...);
 int gameGetUnitRecord(...);
 int FUN_002b6dd8(...);
@@ -62,13 +62,13 @@ extern int g_titleScene; /* 0x44ea00 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0025b6e8(int);
-/* Supplied declaration required: FUN_00288790. */
+/* Supplied declaration required: messageKindForward. */
 /* Supplied declaration required: FUN_00288844. */
 extern int FUN_00295c60(unsigned short, int);
-extern int FUN_00295f28(int);
+extern int dataTable9EntryOrZero(int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetSlotTable(void);
-extern int FUN_002b05d0(int);
+extern int categoryGetColor(int);
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: FUN_002b2650. */
 extern int gameGetPlayerData(void);
@@ -258,7 +258,7 @@ LAB_003b35ac:
       do {
         if (((unsigned int)temp_v1 & (1 << (temp_v13 & 0xff))) != 0) {
           if (temp_v7 == temp_v8) {
-            temp_v5 = FUN_002b05d0((int)(short)temp_v13);
+            temp_v5 = categoryGetColor((int)(short)temp_v13);
             break;
           }
           temp_v7 = temp_v7 + 1;
@@ -304,7 +304,7 @@ LAB_003b35ac:
           FUN_00288844(*(short *)(temp_v8 + 8) + temp_v5,
                        (int)*(short *)(temp_v8 + 10) + temp_v21 + param_3,0x24);
           temp_v8 = FUN_002bf4f8(0x28,temp_v12 * 2 + 0x11d);
-          FUN_00288790((int)(short)temp_v13,*(short *)(temp_v8 + 8) + temp_v5,
+          messageKindForward((int)(short)temp_v13,*(short *)(temp_v8 + 8) + temp_v5,
                        (int)*(short *)(temp_v8 + 10) + temp_v21 + param_3,0x24);
           temp_v12 = (temp_v12 + 1) & 0xffff;
           if (temp_v12 >= 6) break;
@@ -442,7 +442,7 @@ LAB_003b35ac:
           temp_v5 = 0;
         }
         else {
-          temp_v5 = FUN_00295f28((unsigned int)*(unsigned char *)(temp_v5 + 0x76) + (int)*(short *)(param_1 + 0xd49a));
+          temp_v5 = dataTable9EntryOrZero((unsigned int)*(unsigned char *)(temp_v5 + 0x76) + (int)*(short *)(param_1 + 0xd49a));
           temp_v5 = temp_v5 - ((*(unsigned int *)(param_1 + 0xd3a0) >> 0xc) |
                           (*(int *)(param_1 + 0xd3a4) << 0x14));
         }

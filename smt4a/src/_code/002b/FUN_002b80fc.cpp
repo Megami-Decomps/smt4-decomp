@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00234044(...);
 int FUN_002b5cb4(void);
 int libc_strcpy(int, int);
-int FUN_00327678(void);
+int dataTable2aGetEntryWithAoc(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ extern int DAT_00581280; /* 0x581280 */
 /* Supplied declaration required: FUN_00234044. */
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_00327678. */
+/* Supplied declaration required: dataTable2aGetEntryWithAoc. */
 
 
 void FUN_002b80fc(void)
@@ -40,7 +40,7 @@ void FUN_002b80fc(void)
       FUN_002b5cb4();
       if (temp_v2 < 0x43480000) {
         temp_v0 = (int)*(short *)(DAT_00581280 + temp_v1 * 0x3c + 0x14);
-        FUN_00327678();
+        dataTable2aGetEntryWithAoc();
         temp_v2 = DAT_00581280;
         *(unsigned char *)(DAT_00581280 + 0xf0c) = 1;
         *(int *)(temp_v2 + 0xf10) = temp_v1;

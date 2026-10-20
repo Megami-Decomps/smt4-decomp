@@ -1,16 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030c62c` (_code @ 0x30c62c, 0xe bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Node {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ struct Node *next;
+    /* 0x10 */ struct Node *prev;
+} Node;
 
-void FUN_0030c62c(unsigned int param_1,int *param_2,int *param_3)
-
+/* Links two nodes through their iterators: the first one's next becomes the second, whose prev becomes the first. */
+void FUN_0030c62c(u32 unused, Node **first, Node **second)
 {
-  *(int *)(*param_2 + 0xc) = *param_3;
-  *(int *)(*param_3 + 0x10) = *param_2;
-  return;
+    Node *node = *first;
+
+    node->next = *second;
+
+    node = *second;
+    node->prev = *first;
 }
 
 } /* extern "C" */

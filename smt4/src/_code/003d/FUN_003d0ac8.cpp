@@ -16,7 +16,7 @@ typedef struct {
 extern int FUN_00227c30(int, int);
 extern int FUN_00229914(int *, unsigned int, int, int, int);
 /* Supplied declaration required: FUN_0023c154. */
-extern int FUN_0023dcbc(void);
+extern int questCurrentIsFlagged(void);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003bee64. */
 
@@ -36,7 +36,7 @@ unsigned int FUN_003d0ac8(int *param_1,unsigned int param_2,int param_3,int para
   if (temp_v0 == 0) {
     puVar2 = (unsigned int *)*param_1;
     btlMainFindEntryByListedId(puVar2,param_3);
-    if (((*puVar2 & 2) == 0) || (temp_v0 = FUN_0023dcbc(), temp_v0 == 0)) {
+    if (((*puVar2 & 2) == 0) || (temp_v0 = questCurrentIsFlagged(), temp_v0 == 0)) {
       temp_v4 = 0;
       temp_v0 = 0;
       do {

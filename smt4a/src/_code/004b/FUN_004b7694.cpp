@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0033a988(void);
 int linkSlotSetFlag1C(unsigned int, unsigned int);
 int linkSlotSetFlag20(unsigned int, int);
-int FUN_0040792c(void);
+int listSelectItem(void);
 int FUN_00407eb0(unsigned int, int, int);
 int FUN_004b8ba0(int);
 int FUN_004b9ff4(int, int);
@@ -27,7 +27,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0033a988. */
 /* Supplied declaration required: linkSlotSetFlag1C. */
 /* Supplied declaration required: linkSlotSetFlag20. */
-/* Supplied declaration required: FUN_0040792c. */
+/* Supplied declaration required: listSelectItem. */
 /* Supplied declaration required: FUN_00407eb0. */
 /* Supplied declaration required: FUN_004b8ba0. */
 /* Supplied declaration required: FUN_004b9ff4. */
@@ -111,7 +111,7 @@ void FUN_004b7694(int param_1)
         FUN_00407eb0(*(unsigned int *)(param_1 + 0x1218),temp_v8,0);
       }
       if (-1 < *(char *)(temp_v5 + 0x2b)) {
-        FUN_0040792c();
+        listSelectItem();
       }
     }
   }

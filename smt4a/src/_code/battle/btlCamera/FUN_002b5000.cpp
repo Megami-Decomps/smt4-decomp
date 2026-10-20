@@ -18,7 +18,7 @@ typedef struct {
 
 extern int FUN_002984a0(...); /* 0x2984a0 */
 extern unsigned char LAB_002b5094; /* 0x2b5094 */
-extern int FUN_0032850c(...); /* 0x32850c */
+extern int btlCameraDestroy(...); /* 0x32850c */
 extern int g_btlCamera; /* 0x571508 */
 
 /* Supplied declaration required: taskCreateDraw. */
@@ -34,7 +34,7 @@ void FUN_002b5000(unsigned int *param_1)
   int temp_v0;
   
   puVar1 = &LAB_002b5094;
-  taskCreateDraw(&LAB_002b5094,4,0,0,FUN_002984a0,FUN_0032850c,param_1,*param_1);
+  taskCreateDraw(&LAB_002b5094,4,0,0,FUN_002984a0,btlCameraDestroy,param_1,*param_1);
   param_1[0x1a] = (unsigned int)puVar1;
   if (g_btlCamera == 0) {
     temp_v0 = 0x100;

@@ -6,7 +6,7 @@ extern "C" {
 
 int asdOperatorDeleteArray(int);
 int FUN_002e6e34(int *, int *);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int ringPop(int);
 
 typedef int romwright_code(...);
@@ -16,8 +16,8 @@ typedef int romwright_code(...);
 #endif
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002f2910(int);
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
+extern int ptrVectorFree(int);
 extern int FUN_002f5966(int *);
 /* Supplied declaration required: ringPop. */
 
@@ -46,11 +46,11 @@ unsigned long long FUN_002f8da8(int *param_1,unsigned int param_2,unsigned int p
     ringPop(*param_1);
   }
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002f2910(temp_v0 + 4);
+    temp_v0 = ptrVectorFree(temp_v0 + 4);
     asdOperatorDeleteArray(temp_v0 - 4);
   }
   *param_1 = 0;
-  FUN_002e6e5c(&uStack_18);
+  _ZN9Obj55b28cD1Ev(&uStack_18);
   temp_v0 = FUN_002f5966(param_1 + 1);
   return romwright_piece_4_4(uStack_18,temp_v0 - 4);
 }

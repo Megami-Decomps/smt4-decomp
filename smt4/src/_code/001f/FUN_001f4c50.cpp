@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001d1c34(void);
+int btlStageFogTableLoad(void);
 int FUN_002c5c04(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -32,7 +32,7 @@ extern unsigned int DAT_00435db4; /* 0x435db4 */
 extern unsigned int DAT_00435db8; /* 0x435db8 */
 extern unsigned int DAT_00435dbc; /* 0x435dbc */
 
-/* Supplied declaration required: FUN_001d1c34. */
+/* Supplied declaration required: btlStageFogTableLoad. */
 /* Supplied declaration required: FUN_002c5c04. */
 
 
@@ -49,7 +49,7 @@ void FUN_001f4c50(void)
   DAT_00435db4 = FUN_002c5c04(&LAB_001f4d88);
   DAT_00435db8 = FUN_002c5c04(&LAB_001f4da0);
   DAT_00435dbc = FUN_002c5c04(&LAB_001f4dc0);
-  FUN_001d1c34();
+  btlStageFogTableLoad();
   DAT_004341f8 = FUN_002c5c04(0x206248);
   return;
 }

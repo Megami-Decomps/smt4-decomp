@@ -6,16 +6,16 @@ extern "C" {
 
 int FUN_0028c040(void);
 int buttonHelpCreate(void);
-int FUN_00292ca0(...);
+int statusDownSwitchTab(...);
 int FUN_002942c4(...);
 int FUN_00297468(...);
-int FUN_0029a128(...);
+int gameGlobalsSetSelected(...);
 int FUN_0029e874(...);
 int asdTMTexTableLoadEntryAsync(int, int);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int memClear(int, int);
 int FUN_002eb76c(...);
 int FUN_0033c5bc(int);
@@ -36,10 +36,10 @@ extern unsigned char DAT_00405a4c; /* 0x405a4c */
 
 /* Supplied declaration required: FUN_0028c040. */
 /* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: FUN_00292ca0. */
+/* Supplied declaration required: statusDownSwitchTab. */
 /* Supplied declaration required: FUN_002942c4. */
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_0029a128. */
+/* Supplied declaration required: gameGlobalsSetSelected. */
 /* Supplied declaration required: FUN_0029e874. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 extern int gameGetUnitRecord(void);
@@ -47,7 +47,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002eb76c. */
 /* Supplied declaration required: FUN_0033c5bc. */
@@ -118,7 +118,7 @@ void FUN_003b7b58(int param_1)
   *(unsigned char *)(param_1 + 0xd641) = 0;
   *(unsigned char *)(param_1 + 0xd642) = 0;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1);
-  FUN_002c312c(param_1,&DAT_004058d4,0x48,&DAT_0040591c,0xa8,&DAT_004059c4,0x6c,&DAT_00405a30,0x1c,
+  paramsInit(param_1,&DAT_004058d4,0x48,&DAT_0040591c,0xa8,&DAT_004059c4,0x6c,&DAT_00405a30,0x1c,
                &DAT_00405a4c,0x32c);
   FUN_002bd954(param_1 + 0x20,0x28,0,param_1,1);
   timerStart(param_1 + 0x20,0);
@@ -192,8 +192,8 @@ void FUN_003b7b58(int param_1)
   *(unsigned int *)(param_1 + 0x3558) = 0;
   *(unsigned int *)(param_1 + 0x355c) = 0;
   FUN_0028c040();
-  FUN_0029a128(0);
-  FUN_00292ca0(0);
+  gameGlobalsSetSelected(0);
+  statusDownSwitchTab(0);
   FUN_0029e874(0);
   buttonHelpCreate();
   return;

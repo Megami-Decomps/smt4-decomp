@@ -5,7 +5,7 @@ extern "C" {
 extern const u8 DAT_0055a520[];  /* vtable */
 void sharedRefRelease(void *buffer);
 u8 *FUN_0011c110(u8 *member);
-void FUN_00306c8c(u8 *member);
+void _ZN9Obj55a218D1Ev(u8 *member);
 
 typedef struct Object55a520 {
     /* 0x00 */ const void *vtbl;
@@ -22,7 +22,7 @@ void destroyObj0055a520(Object55a520 *self)
     self->vtbl = DAT_0055a520;
     sharedRefRelease(self->buffer);
     member = FUN_0011c110(self->member58);
-    FUN_00306c8c(member - 0x58);
+    _ZN9Obj55a218D1Ev(member - 0x58);
 }
 
 } /* extern "C" */

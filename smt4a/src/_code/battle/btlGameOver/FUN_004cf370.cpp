@@ -11,7 +11,7 @@ int holderStopJob2(...);
 int btlTalkBustUpDestroy(...);
 int FUN_003d9164(...);
 int FUN_003f14a0(...);
-int FUN_004ab854(...);
+int btlUiPanelStart(...);
 int FUN_004f6d34(...);
 int FUN_004f7b84(...);
 int FUN_004fdcd8(...);
@@ -57,7 +57,7 @@ extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: btlTalkBustUpDestroy. */
 /* Supplied declaration required: FUN_003d9164. */
 /* Supplied declaration required: FUN_003f14a0. */
-/* Supplied declaration required: FUN_004ab854. */
+/* Supplied declaration required: btlUiPanelStart. */
 /* Supplied declaration required: FUN_004f6d34. */
 /* Supplied declaration required: FUN_004f7b84. */
 /* Supplied declaration required: FUN_004fdcd8. */
@@ -100,7 +100,7 @@ unsigned int FUN_004cf370(fn_004cf370_arg0 *param_1)
   }
   if (param_1->field_0x14 == DAT_0057a684) {
     FUN_004fdcd8(0,0,0,0,7,0,0xb,0);
-    FUN_004ab854(g_btlUiBlock);
+    btlUiPanelStart(g_btlUiBlock);
   }
   if (param_1->field_0x14 == DAT_0057a698) {
     FUN_004fddf4(0,0,DAT_0057a69c,0x10,0,DAT_0057a6a0,0,2,0xffffffff);

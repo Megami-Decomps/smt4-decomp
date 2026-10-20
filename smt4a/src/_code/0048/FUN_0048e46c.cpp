@@ -69,7 +69,7 @@ extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_002e1208. */
 /* Supplied declaration required: FUN_00356470. */
-extern int FUN_003657f0(unsigned int);
+extern int conditionalTableFindIndex(unsigned int);
 extern unsigned int *dataTable23Sub0GetEntry(int);
 extern int FUN_003a3270(void);
 extern unsigned short FUN_003ae4d0(unsigned int);
@@ -707,7 +707,7 @@ LAB_0048f224:
         temp_v57 = (int)(short)(int)(temp_v18 - temp_v28);
         temp_v5 = FUN_003ae4d0(*puVar12);
         *(unsigned short *)(temp_v12 + 0x17ba) = temp_v5;
-        temp_v7 = FUN_003657f0(*puVar12);
+        temp_v7 = conditionalTableFindIndex(*puVar12);
         if (temp_v7 != -2) {
           temp_v17 = FUN_003cd5f4(*puVar12);
           *(unsigned int *)(temp_v12 + 0x17e8) = temp_v17;

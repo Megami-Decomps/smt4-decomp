@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026aae8(unsigned int);
+int dataTable0cLookupById(unsigned int);
 int FUN_00295660(...);
 int FUN_0029ede8(...);
 int dataTable1bOr1cGetRecord(void);
@@ -13,7 +13,7 @@ int FUN_002bd158(unsigned char [128], unsigned char [132]);
 int FUN_002be650(unsigned int, int);
 int libc_strcpy(...);
 
-/* Supplied declaration required: FUN_0026aae8. */
+/* Supplied declaration required: dataTable0cLookupById. */
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
@@ -77,7 +77,7 @@ void FUN_0028ed3c(int param_1,int param_2,int param_3)
         break;
       case 5:
         temp_v0 = (unsigned int)*(unsigned short *)(temp_v2 + 0x16e);
-        FUN_0026aae8(temp_v0);
+        dataTable0cLookupById(temp_v0);
         FUN_00295660(temp_v3 + 0x29,temp_v0);
         break;
       case 6:

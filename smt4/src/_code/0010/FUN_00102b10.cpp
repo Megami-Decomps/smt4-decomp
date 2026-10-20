@@ -31,7 +31,7 @@ extern unsigned char LAB_00102cbc; /* 0x102cbc */
 extern unsigned char LAB_00102cd4; /* 0x102cd4 */
 extern unsigned char LAB_00102cec; /* 0x102cec */
 extern int FUN_00108074(...); /* 0x108074 */
-extern int FUN_00108310(...); /* 0x108310 */
+extern int scrCommQueueRequest(...); /* 0x108310 */
 extern int FUN_0010930c(...); /* 0x10930c */
 extern int FUN_00109b08(...); /* 0x109b08 */
 extern unsigned char LAB_0010a2f8; /* 0x10a2f8 */
@@ -95,7 +95,7 @@ void FUN_00102b10(void)
   FUN_0010d6a4(&LAB_0010a2f8,FUN_0010c83c);
   FUN_0010a694(0xf87a,1,0);
   FUN_0010a694(0xf87b,4,0);
-  FUN_0010afac(FUN_00108310);
+  FUN_0010afac(scrCommQueueRequest);
   FUN_0010a770(FUN_00109b08);
   FUN_0010baa0(0xf87a,1,FUN_00108074);
   FUN_0010baa0(0xf87b,4,FUN_0010930c);

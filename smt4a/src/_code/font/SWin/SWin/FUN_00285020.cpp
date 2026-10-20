@@ -7,7 +7,7 @@ extern "C" {
 int asdTMTexTableLoadTmx(...);
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int sysMemClear(...);
@@ -36,7 +36,7 @@ extern unsigned int *g_sWin; /* 0x57f57c */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: sysMemClear. */
@@ -83,7 +83,7 @@ void FUN_00285020(int param_1)
   puVar1[8] = 0;
   puVar1[9] = 0;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar3);
-  FUN_001505ac(puVar1 + 10,0,0,&DAT_0052fbcc,0x18,&DAT_0052fbe4,0x18,0,0,0,0);
+  paramsInit(puVar1 + 10,0,0,&DAT_0052fbcc,0x18,&DAT_0052fbe4,0x18,0,0,0,0);
   FUN_0014e188(puVar1 + 0x12,0x34,0,puVar1 + 10,0x15);
   return;
 }

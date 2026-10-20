@@ -35,7 +35,7 @@ extern unsigned int g_btlMain; /* 0x4342c8 */
 /* Supplied declaration required: FUN_0023fbdc. */
 /* Supplied declaration required: FUN_0023fffc. */
 /* Supplied declaration required: FUN_002402c4. */
-extern unsigned int FUN_00240448(int);
+extern unsigned int btlPosArrangeGetFilePath(int);
 extern int FUN_002405c8(int, unsigned short);
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00254f58. */
@@ -69,13 +69,13 @@ void FUN_0023f500(unsigned int *param_1,int param_2)
   unsigned char temp_v5 [128];
   
   memClear(temp_v4,0x80);
-  temp_v0 = FUN_00240448(param_2);
+  temp_v0 = btlPosArrangeGetFilePath(param_2);
   libc_strcpy(temp_v4,temp_v0);
   temp_v2 = FUN_002402c4(param_2,temp_v4);
   if (temp_v2 != 0) {
     *param_1 = 0xb;
     memClear(temp_v5,0x80);
-    temp_v0 = FUN_00240448(param_2);
+    temp_v0 = btlPosArrangeGetFilePath(param_2);
     libc_strcpy(temp_v5,temp_v0);
     if (param_1[1] != 0) {
       asdMemFree();

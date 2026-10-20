@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019e0c0(...);
 int FUN_00223898(int, int);
-int FUN_00259274(int);
+int gameDataFlagsSet(int);
 int FUN_00259294(int);
 int gameDataBlocksAddFlags(int);
 int FUN_00289880(void);
@@ -17,8 +17,8 @@ int FUN_00297060(void);
 int buttonHelpSetPreset(int);
 int FUN_002c40f8(unsigned char *, int *, int, int, int, int);
 int FUN_002c526c(void);
-int FUN_002c56dc(...);
-int FUN_002c5728(...);
+int gameDataFlagsClear(...);
+int gameDataFlagsClearAndRefresh(...);
 int FUN_002c5758(...);
 int FUN_002e2f14(int);
 
@@ -36,7 +36,7 @@ extern int DAT_0043e314; /* 0x43e314 */
 /* Supplied declaration required: FUN_0019e0c0. */
 extern int FUN_002103dc(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00223898. */
-/* Supplied declaration required: FUN_00259274. */
+/* Supplied declaration required: gameDataFlagsSet. */
 /* Supplied declaration required: FUN_00259294. */
 /* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_00289880. */
@@ -48,8 +48,8 @@ extern int FUN_0029ee2c(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_002c56dc. */
-/* Supplied declaration required: FUN_002c5728. */
+/* Supplied declaration required: gameDataFlagsClear. */
+/* Supplied declaration required: gameDataFlagsClearAndRefresh. */
 /* Supplied declaration required: FUN_002c5758. */
 /* Supplied declaration required: FUN_002e2f14. */
 
@@ -109,8 +109,8 @@ unsigned int FUN_001edcf0(unsigned int param_1,int param_2)
     return 0;
   case 4:
     FUN_002c5758(1);
-    FUN_002c5728(1);
-    FUN_002c56dc(1);
+    gameDataFlagsClearAndRefresh(1);
+    gameDataFlagsClear(1);
     buttonHelpSetPreset(0xe6);
     if (DAT_0043e313 == '\0') {
       FUN_002898e4();
@@ -123,7 +123,7 @@ unsigned int FUN_001edcf0(unsigned int param_1,int param_2)
     }
     gameDataBlocksAddFlags(1);
     FUN_00259294(1);
-    FUN_00259274(1);
+    gameDataFlagsSet(1);
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),1);
     temp_v1 = 5;
     break;
@@ -154,8 +154,8 @@ unsigned int FUN_001edcf0(unsigned int param_1,int param_2)
     buttonHelpSetPreset(0xe6);
     if (DAT_0043e311 != '\0') {
       FUN_002c5758(1);
-      FUN_002c5728(1);
-      FUN_002c56dc(1);
+      gameDataFlagsClearAndRefresh(1);
+      gameDataFlagsClear(1);
       FUN_00296e90();
       DAT_0043e312 = 0;
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),2);
@@ -163,8 +163,8 @@ unsigned int FUN_001edcf0(unsigned int param_1,int param_2)
     }
     else {
       FUN_002c5758(1);
-      FUN_002c5728(1);
-      FUN_002c56dc(1);
+      gameDataFlagsClearAndRefresh(1);
+      gameDataFlagsClear(1);
       FUN_00296e90();
       DAT_0043e312 = 0;
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),5);
@@ -180,8 +180,8 @@ unsigned int FUN_001edcf0(unsigned int param_1,int param_2)
     return 1;
   case 9:
     FUN_002c5758(1);
-    FUN_002c5728(1);
-    FUN_002c56dc(1);
+    gameDataFlagsClearAndRefresh(1);
+    gameDataFlagsClear(1);
     temp_v2 = FUN_0019e0c0(*(unsigned int *)(temp_v2 + 0x58));
     if (temp_v2 != 2) {
       return 0;

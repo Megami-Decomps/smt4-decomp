@@ -1,0 +1,29 @@
+/* A set of data entries (each listing rows that name data-table files) searched by the FUN_003893xx / FUN_00387860 family. */
+#ifndef SHARD_W4_MATCH6_DATASET_H
+#define SHARD_W4_MATCH6_DATASET_H
+
+#include "common.h"
+
+typedef struct DataFileRef {
+    /* 0x00 */ u32 file;
+    /* 0x04 */ u8 unk04[0xC];
+} DataFileRef; /* 0x10 bytes */
+
+typedef struct DataEntry {
+    /* 0x00 */ u8 unk00[0x4C];
+    /* 0x4C */ DataFileRef *files;  /* one per row */
+} DataEntry; /* 0x50 bytes */
+
+typedef struct DataRow {
+    /* 0x00 */ u8 type;             /* which kind of data table the row's file holds */
+    /* 0x01 */ u8 unk01[0x3F];
+} DataRow; /* 0x40 bytes */
+
+typedef struct DataSet {
+    /* 0x000 */ u8 unk000[0x310];
+    /* 0x310 */ s32 entryCount;
+    /* 0x314 */ u8 unk314[4];
+    /* 0x318 */ DataEntry *entries;
+} DataSet;
+
+#endif

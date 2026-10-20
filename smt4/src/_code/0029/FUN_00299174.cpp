@@ -1,58 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00299174` (_code @ 0x299174, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct CampScreen {
+    /* 0x000 */ u8 unk000[0xE02];
+    /* 0xE02 */ s16 regionIds[5];
+    /* 0xE0C */ s16 slotRegions[1];     /* one touch-region id per slot; -1 when unused */
+} CampScreen;
+
+extern CampScreen *g_camp;
+
 int ifTouchRegionRemove(void);
+s32 FUN_0029d644(u32 arg);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern int g_camp; /* 0x43da90 */
-
-extern int FUN_0029d644(unsigned int);
-/* Supplied declaration required: ifTouchRegionRemove. */
-
-
-void FUN_00299174(unsigned int param_1,int param_2)
-
+/* Removes the camp screen's touch regions: the fixed ones, each used slot's, and (when `keepExtra` is 0) two more. */
+void FUN_00299174(u32 arg, s32 keepExtra)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = g_camp;
-  ifTouchRegionRemove();
-  ifTouchRegionRemove();
-  ifTouchRegionRemove();
-  *(unsigned short *)(temp_v0 + 0xe02) = 0xffff;
-  *(unsigned short *)(temp_v0 + 0xe04) = 0xffff;
-  *(unsigned short *)(temp_v0 + 0xe06) = 0xffff;
-  *(unsigned short *)(temp_v0 + 0xe08) = 0xffff;
-  *(unsigned short *)(temp_v0 + 0xe0a) = 0xffff;
-  temp_v2 = 0;
-  temp_v1 = FUN_0029d644(param_1);
-  if (0 < temp_v1) {
-    do {
-      temp_v1 = temp_v0 + temp_v2 * 2;
-      if (-1 < *(short *)(temp_v1 + 0xe0c)) {
+    CampScreen *camp = g_camp;
+    s32 i;
+
+    ifTouchRegionRemove();
+    ifTouchRegionRemove();
+    ifTouchRegionRemove();
+    camp->regionIds[0] = -1;
+    camp->regionIds[1] = -1;
+    camp->regionIds[2] = -1;
+    camp->regionIds[3] = -1;
+    camp->regionIds[4] = -1;
+    for (i = 0; i < FUN_0029d644(arg); i++) {
+        if (camp->slotRegions[i] >= 0) {
+            ifTouchRegionRemove();
+            camp->slotRegions[i] = -1;
+        }
+    }
+    if (keepExtra == 0) {
         ifTouchRegionRemove();
-        *(unsigned short *)(temp_v1 + 0xe0c) = 0xffff;
-      }
-      temp_v2 = temp_v2 + 1;
-      temp_v1 = FUN_0029d644(param_1);
-    } while (temp_v2 < temp_v1);
-  }
-  if (param_2 == 0) {
-    ifTouchRegionRemove();
-    ifTouchRegionRemove();
-    return;
-  }
-  return;
+        ifTouchRegionRemove();
+    }
 }
 
 } /* extern "C" */

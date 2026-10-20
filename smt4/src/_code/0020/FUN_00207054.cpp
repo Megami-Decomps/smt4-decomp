@@ -1,31 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00207054` (_code @ 0x207054, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable08Sub2GetRecord(void);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u16 order;
+    /* 0x52 */ u8 unk52[0xF];
+    /* 0x61 */ s8 rank;
+} Record;
 
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
+Record *dataTable08Sub2GetRecord(u32 id);
 
-
-int FUN_00207054(unsigned short *param_1,unsigned short *param_2)
-
+/* Compares two record ids by rank (higher first), then by order. */
+s32 FUN_00207054(u16 *a, u16 *b)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (unsigned int)*param_1;
-  dataTable08Sub2GetRecord();
-  temp_v1 = (unsigned int)*param_2;
-  dataTable08Sub2GetRecord();
-  temp_v2 = (int)*(char *)(temp_v1 + 0x61) - (int)*(char *)(temp_v0 + 0x61);
-  if (temp_v2 == 0) {
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x50) - (unsigned int)*(unsigned short *)(temp_v1 + 0x50);
-  }
-  return temp_v2;
+    Record *recordA = dataTable08Sub2GetRecord(*a);
+    Record *recordB = dataTable08Sub2GetRecord(*b);
+    s32 diff = recordB->rank - recordA->rank;
+
+    if (diff == 0) {
+        diff = recordA->order - recordB->order;
+    }
+    return diff;
 }
 
 } /* extern "C" */

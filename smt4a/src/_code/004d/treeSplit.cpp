@@ -1,31 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `treeSplit` (_code @ 0x4d9108, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc keeps the left/right pointer copies in VFP registers (vldr/vstr); retail uses ARM registers for them and VFP only for the parent copy. */
+#include "common.h"
 
 extern "C" {
 
+/* A node of the tree: an AA-tree style node with a parent link. */
+typedef struct TreeNode {
+    /* 0x00 */ struct TreeNode *left;
+    /* 0x04 */ struct TreeNode *right;
+    /* 0x08 */ struct TreeNode *parent;
+    /* 0x0C */ u8 level;
+} TreeNode;
 
-void treeSplit(int *param_1)
-
+/* Split step of the tree: when the right-right grandchild has the same level, rotates the right child up and raises its level. */
+void treeSplit(TreeNode **link)
 {
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = *param_1;
-  piVar1 = *(int **)(temp_v0 + 4);
-  if (*(char *)(piVar1[1] + 0xc) == *(char *)(temp_v0 + 0xc)) {
-    temp_v1 = *(int *)(temp_v0 + 8);
-    *(int *)(temp_v0 + 4) = *piVar1;
-    *piVar1 = *param_1;
-    *param_1 = (int)piVar1;
-    temp_v0 = *piVar1;
-    piVar1[2] = temp_v1;
-    *(int *)(temp_v0 + 8) = *param_1;
-    *(int *)(*(int *)(temp_v0 + 4) + 8) = temp_v0;
-    *(char *)(*param_1 + 0xc) = *(char *)(*param_1 + 0xc) + '\x01';
-  }
-  return;
+    TreeNode *node = *link;
+    TreeNode *right = node->right;
+
+    if (right->right->level == node->level) {
+        TreeNode *parent = node->parent;
+
+        node->right = right->left;
+        right->left = *link;
+        *link = right;
+        node = right->left;
+        right->parent = parent;
+        node->parent = *link;
+        node->right->parent = node;
+        (*link)->level++;
+    }
 }
 
 } /* extern "C" */

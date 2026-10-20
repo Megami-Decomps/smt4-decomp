@@ -1,52 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00350cf4` (_code @ 0x350cf4, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int memAlloc(int, int, int, int, int, int);
-int FUN_002b3324(int, unsigned int, int);
+extern const char DAT_0054baf8[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effGeometry.cpp": __FILE__ */
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
+typedef struct Color4 {
+    u32 r, g, b, a;
+} Color4;
 
-extern unsigned int DAT_005c1fb4; /* 0x5c1fb4 */
-extern unsigned int DAT_005c1fb8; /* 0x5c1fb8 */
-extern unsigned int DAT_005c1fbc; /* 0x5c1fbc */
-extern unsigned int DAT_005c1fc0; /* 0x5c1fc0 */
+typedef struct GeomState {
+    u8 unk00[0x40];
+    Color4 color;    /* 0x40 */
+    u8 unk50[0x10];
+    u32 unk60;       /* 0x60 */
+} GeomState;
 
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_002b3324. */
+typedef struct GeomObject {
+    u16 kind;         /* 0x00 */
+    u16 unk02;        /* 0x02 */
+    u8 unk04[8];
+    GeomState *state; /* 0x0c */
+} GeomObject;
 
+extern Color4 DAT_005c1fb4;
 
-unsigned short * FUN_00350cf4(int param_1,unsigned int param_2)
+extern void *memAlloc(int, int, int, int size, int align, int);
+extern GeomState *FUN_002b3324(GeomState *state, u32 flags, int arg);
 
+/* Creates a geometry object around `state`; flag 0x80000 gives it the default color. */
+GeomObject *FUN_00350cf4(GeomState *state, u32 flags)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned short *puVar4;
-  
-  puVar4 = (unsigned short *)0x10000;
-  memAlloc(0x10000,0x100,0,0x58,0x10,1);
-  *puVar4 = 0x300;
-  puVar4[1] = 0;
-  FUN_002b3324(param_1,param_2,0);
-  *(int *)(puVar4 + 6) = param_1;
-  temp_v2 = DAT_005c1fc0;
-  temp_v1 = DAT_005c1fbc;
-  temp_v0 = DAT_005c1fb8;
-  if ((param_2 & 0x80000) != 0) {
-    *(unsigned int *)(param_1 + 0x40) = DAT_005c1fb4;
-    *(unsigned int *)(param_1 + 0x44) = temp_v0;
-    *(unsigned int *)(param_1 + 0x48) = temp_v1;
-    *(unsigned int *)(param_1 + 0x4c) = temp_v2;
-  }
-  *(unsigned int *)(*(int *)(puVar4 + 6) + 0x60) = 0;
-  return puVar4;
+    GeomObject *object;
+
+    asdDebugTrace(DAT_0054baf8, 221);
+    object = (GeomObject *)memAlloc(0x10000, 0x100, 0, 0x58, 0x10, 1);
+    object->kind = 0x300;
+    object->unk02 = 0;
+    object->state = FUN_002b3324(state, flags, 0);
+    if (flags & 0x80000) {
+        GeomState *geom = object->state;
+
+        geom->color = DAT_005c1fb4;
+    }
+    object->state->unk60 = 0;
+    return object;
 }
 
 } /* extern "C" */

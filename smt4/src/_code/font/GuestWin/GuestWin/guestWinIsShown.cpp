@@ -10,7 +10,12 @@ extern GuestWinWork *g_guestWin;
 
 u32 guestWinIsShown(void)
 {
-    return gameGetOptions()->guestWinEnabled != 0 && g_guestWin->state != 0;
+    u32 shown = (u16)gameGetOptions()->guestWinEnabled;
+
+    if (shown != 0) {
+        shown = g_guestWin->state != 0;
+    }
+    return shown;
 }
 
 } /* extern "C" */

@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_0011b6e2(unsigned int *);
 int FUN_001a0eb0(void);
-int destroyObj00558c98(int);
+int _ZN9Obj558c90D1Ev(int);
 
 extern unsigned char DAT_0055a5d0; /* 0x55a5d0 */
 extern unsigned char DAT_0055a6d8; /* 0x55a6d8 */
 
 /* Supplied declaration required: FUN_0011b6e2. */
 /* Supplied declaration required: FUN_001a0eb0. */
-/* Supplied declaration required: destroyObj00558c98. */
+/* Supplied declaration required: _ZN9Obj558c90D1Ev. */
 extern int FUN_003054b8(unsigned int *);
 
 
@@ -30,7 +30,7 @@ void FUN_0011b77c(unsigned int *param_1)
   }
   FUN_001a0eb0();
   temp_v0 = FUN_003054b8(param_1 + 6);
-  destroyObj00558c98(temp_v0 - 0x18);
+  _ZN9Obj558c90D1Ev(temp_v0 - 0x18);
   return;
 }
 

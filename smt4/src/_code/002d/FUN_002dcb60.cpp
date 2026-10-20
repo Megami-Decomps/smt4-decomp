@@ -1,110 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002dcb60` (_code @ 0x2dcb60, 0x180 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation/branch layout only: the kind-rank switch tables match; retail keeps the two records in r4/r6 with a null test that falls straight into the dispatch (ldrbne), built saves both arguments (r5/r6) and clears the result early (mov r4, #0). */
+#include "common.h"
 
 extern "C" {
 
-int dataTable1bOr1cGetRecord(void);
+typedef struct Record {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u16 order;
+    /* 0x6 */ u8 kind;
+} Record;
 
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+Record *dataTable1bOr1cGetRecord(u32 id);
 
-
-int FUN_002dcb60(unsigned short *param_1,unsigned short *param_2)
-
+/* Orders record kinds: 6, 0, 4, 5, 2, 3, 7, 8, 9 rank 1 to 9; any other kind ranks 0. */
+static s32 kindRank(u8 kind)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = (unsigned int)*param_1;
-  dataTable1bOr1cGetRecord();
-  temp_v1 = (unsigned int)*param_2;
-  dataTable1bOr1cGetRecord();
-  if (temp_v0 == 0) {
-    return 0;
-  }
-  temp_v2 = 0;
-  if (temp_v1 != 0) {
-    switch(*(unsigned char *)(temp_v1 + 6)) {
-    case 0:
-      temp_v2 = 2;
-      break;
-    default:
-      temp_v2 = 0;
-      break;
-    case 2:
-      temp_v2 = 5;
-      break;
-    case 3:
-      temp_v2 = 6;
-      break;
-    case 4:
-      temp_v2 = 3;
-      break;
-    case 5:
-      temp_v2 = 4;
-      break;
+    s32 rank;
+
+    switch (kind) {
     case 6:
-      temp_v2 = 1;
-      break;
-    case 7:
-      temp_v2 = 7;
-      break;
-    case 8:
-      temp_v2 = 8;
-      break;
-    case 9:
-      temp_v2 = 9;
-    }
-    switch(*(unsigned char *)(temp_v0 + 6)) {
+        rank = 1;
+        break;
     case 0:
-      temp_v3 = 2;
-      break;
-    default:
-      temp_v3 = 0;
-      break;
-    case 2:
-      temp_v3 = 5;
-      break;
-    case 3:
-      temp_v3 = 6;
-      break;
+        rank = 2;
+        break;
     case 4:
-      temp_v3 = 3;
-      break;
+        rank = 3;
+        break;
     case 5:
-      temp_v3 = 4;
-      break;
-    case 6:
-      temp_v3 = 1;
-      break;
+        rank = 4;
+        break;
+    case 2:
+        rank = 5;
+        break;
+    case 3:
+        rank = 6;
+        break;
     case 7:
-      temp_v3 = 7;
-      break;
+        rank = 7;
+        break;
     case 8:
-      temp_v3 = 8;
-      break;
+        rank = 8;
+        break;
     case 9:
-      temp_v3 = 9;
+        rank = 9;
+        break;
+    default:
+        rank = 0;
+        break;
     }
-    temp_v2 = temp_v2 - temp_v3;
-    if (temp_v2 == 0) {
-      temp_v0 = (unsigned int)*param_1;
-      dataTable1bOr1cGetRecord();
-      temp_v1 = (unsigned int)*param_2;
-      dataTable1bOr1cGetRecord();
-      if (temp_v0 == 0) {
+    return rank;
+}
+
+/* Compares two record ids by kind rank (higher first), then by order (higher first). */
+s32 FUN_002dcb60(u16 *a, u16 *b)
+{
+    Record *recordA = dataTable1bOr1cGetRecord(*a);
+    Record *recordB = dataTable1bOr1cGetRecord(*b);
+    s32 diff;
+
+    if (recordA == NULL) {
         return 0;
-      }
-      temp_v2 = 0;
-      if (temp_v1 != 0) {
-        temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 4) - (unsigned int)*(unsigned short *)(temp_v0 + 4);
-      }
     }
-  }
-  return temp_v2;
+    diff = 0;
+    if (recordB != NULL) {
+        diff = kindRank(recordB->kind) - kindRank(recordA->kind);
+        if (diff == 0) {
+            recordA = dataTable1bOr1cGetRecord(*a);
+            recordB = dataTable1bOr1cGetRecord(*b);
+            if (recordA == NULL) {
+                return 0;
+            }
+            diff = 0;
+            if (recordB != NULL) {
+                diff = recordB->order - recordA->order;
+            }
+        }
+    }
+    return diff;
 }
 
 } /* extern "C" */

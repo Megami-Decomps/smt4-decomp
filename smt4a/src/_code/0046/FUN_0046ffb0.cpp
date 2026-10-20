@@ -1,69 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0046ffb0` (_code @ 0x46ffb0, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "shard/W4_Match6_DataSet.h"
 
 extern "C" {
 
-int FUN_001b31ac(void);
-int FUN_001b31e0(void);
+/* One record of a data table. */
+typedef struct DataRecord {
+    /* 0x0 */ u8 unk0[0x20];
+} DataRecord;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
+extern u32 dataTableFileGetTable(u32 file, u32 arg);
+extern int FUN_001b315c(DataEntry *entry);
+extern DataRow *FUN_001b31ac(DataEntry *entry);
+extern u32 FUN_001b31e0(DataEntry *entry);
+extern int dataTableGetCount(u32 table);
+extern DataRecord *dataTableGetEntries(u32 table);
 
-extern int dataTableGetCount(void);
-extern int dataTableGetEntries(unsigned int);
-extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
-extern int FUN_001b315c(unsigned int);
-/* Supplied declaration required: FUN_001b31ac. */
-/* Supplied declaration required: FUN_001b31e0. */
+#define DATA_ROW_TABLE '%'
 
-
-int FUN_0046ffb0(int param_1,int param_2)
-
+/* Returns the record `index` of the data tables the set's entries list, counting across tables. */
+DataRecord *FUN_0046ffb0(DataSet *set, s32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  
-  temp_v5 = 0;
-  temp_v7 = 0;
-  if (temp_v7 < *(int *)(param_1 + 0x310)) {
-    do {
-      temp_v6 = *(int *)(param_1 + 0x318) + temp_v7 * 0x50;
-      temp_v0 = FUN_001b315c(temp_v6);
-      if (temp_v0 != 0) {
-        temp_v1 = temp_v6;
-        FUN_001b31ac();
-        temp_v2 = temp_v6;
-        FUN_001b31e0();
-        temp_v4 = 0;
-        if (temp_v4 < temp_v2) {
-          do {
-            if (*(char *)(temp_v1 + temp_v4 * 0x40) == '%') {
-              temp_v3 = dataTableFileGetTable(*(unsigned int *)(*(int *)(temp_v6 + 0x4c) + temp_v4 * 0x10),0);
-              temp_v0 = dataTableGetCount();
-              if (param_2 <= temp_v0 + temp_v5) {
-                temp_v7 = dataTableGetEntries(temp_v3);
-                return temp_v7 + (param_2 - temp_v5) * 0x20;
-              }
-              temp_v5 = temp_v5 + temp_v0 + temp_v5;
+    s32 skipped = 0;
+    s32 i;
+    u32 j;
+
+    for (i = 0; i < set->entryCount; i++) {
+        DataEntry *entry = &set->entries[i];
+
+        if (FUN_001b315c(entry) != 0) {
+            DataRow *rows = FUN_001b31ac(entry);
+            u32 rowCount = FUN_001b31e0(entry);
+
+            for (j = 0; j < rowCount; j++) {
+                if (rows[j].type == DATA_ROW_TABLE) {
+                    u32 table = dataTableFileGetTable(entry->files[j].file, 0);
+                    s32 total = dataTableGetCount(table) + skipped;
+
+                    if (total >= index) {
+                        return dataTableGetEntries(table) + (index - skipped);
+                    }
+                    skipped += total;
+                }
             }
-            temp_v4 = temp_v4 + 1;
-          } while (temp_v4 < temp_v2);
         }
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < *(int *)(param_1 + 0x310));
-  }
-  return 0;
+    }
+    return NULL;
 }
 
-} /* extern "C" */
+}

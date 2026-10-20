@@ -1,47 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a2f54` (_code @ 0x3a2f54, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the s16 at 0x14 with ldrsh into r1 for the zero test; this build uses ldrh into r0 */
+#include "common.h"
 
 extern "C" {
 
-int gameFlagsSet(...);
-int gameFlagSetValue(int, int);
+typedef struct GameState {
+    /* 0x00 */ u8 unk00[0xDC];
+    /* 0xDC */ u8 enabled;
+} GameState;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+typedef struct FlagBlock {
+    /* 0x00 */ u8 unk00[0x2A];
+    /* 0x2A */ s16 entryId;
+} FlagBlock;
 
-extern unsigned char g_gameState; /* 0x5f15fc */
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s16 hasValue;
+    /* 0x16 */ u8 unk16[6];
+    /* 0x1C */ s32 flagId;
+} Entry;
 
-extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: gameFlagsSet. */
-extern int dataTable2FType1GetEntry(int);
-/* Supplied declaration required: gameFlagSetValue. */
+extern GameState g_gameState;
 
+extern FlagBlock *gameFlagsGetBlock(void);
+extern Entry *dataTable2FType1GetEntry(s32 id);
+extern void gameFlagSetValue(s32 id, s32 value, s32 arg2);
+extern void gameFlagsSet(...);
 
+/* When enabled, applies the current data table 0x2f entry: sets its flag, then gameFlagsSet for its id (with 0xff when it has no value). */
 void FUN_003a2f54(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = gameFlagsGetBlock();
-  if ((*(signed char *)((unsigned char *)&g_gameState + 0xdc)) == '\0') {
-    return;
-  }
-  temp_v1 = (int)*(short *)(temp_v0 + 0x2a);
-  temp_v0 = dataTable2FType1GetEntry(temp_v1);
-  if (*(int *)(temp_v0 + 0x1c) != 0) {
-    gameFlagSetValue(*(int *)(temp_v0 + 0x1c),1);
-  }
-  if (*(short *)(temp_v0 + 0x14) != 0) {
-    gameFlagsSet(temp_v1);
-    return;
-  }
-  gameFlagsSet(temp_v1,0xff);
-  return;
+    FlagBlock *block = gameFlagsGetBlock();
+    s32 id;
+    Entry *entry;
+
+    if (g_gameState.enabled == 0) {
+        return;
+    }
+    id = block->entryId;
+    entry = dataTable2FType1GetEntry(id);
+    if (entry->flagId != 0) {
+        gameFlagSetValue(entry->flagId, 1, 1);
+    }
+    if (entry->hasValue != 0) {
+        gameFlagsSet(id);
+        return;
+    }
+    gameFlagsSet(id, 0xFF);
 }
 
 } /* extern "C" */

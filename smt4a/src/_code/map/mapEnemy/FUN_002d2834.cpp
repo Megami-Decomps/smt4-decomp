@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00272e0c(...);
 int FUN_00292200(void);
-int FUN_002bd910(void);
+int gameDataBlocksAddFloat(void);
 int FUN_002d1f40(...);
 int byte76Set(...);
 int FUN_00352ff8(void);
@@ -14,7 +14,7 @@ int FUN_00353200(void);
 
 int dataTable00FindById(void);
 int ptrListRemoveClearOwner(...);
-int FUN_00201e1c(...);
+int vec4Forward(...);
 int FUN_002b5cd4(void);
 int FUN_00303a5c(void);
 int FUN_00303e88(void);
@@ -121,7 +121,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_00201e1c. */
+/* Supplied declaration required: vec4Forward. */
 /* Supplied declaration required: FUN_0020eb44. */
 extern unsigned int FUN_00261424(void);
 /* Supplied declaration required: FUN_00272e0c. */
@@ -129,7 +129,7 @@ extern unsigned int FUN_00261424(void);
 /* Supplied declaration required: FUN_00292200. */
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002b5cd4. */
-/* Supplied declaration required: FUN_002bd910. */
+/* Supplied declaration required: gameDataBlocksAddFloat. */
 /* Supplied declaration required: FUN_002d1f40. */
 extern int FUN_002d7c88(unsigned int);
 /* Supplied declaration required: FUN_00303a5c. */
@@ -1511,7 +1511,7 @@ LAB_002d5218:
               }
               temp_v3 = *(int *)(temp_v10 + 0xbc);
               if (temp_v3 < 0x1e) {
-                FUN_00201e1c(*(unsigned int *)(temp_v10 + 0x1a0));
+                vec4Forward(*(unsigned int *)(temp_v10 + 0x1a0));
               }
               break;
             }
@@ -2154,7 +2154,7 @@ LAB_002d62e4:
           }
           temp_v3 = *(int *)(temp_v10 + 0xbc);
           if (temp_v3 < 0x1e) {
-            FUN_00201e1c(*(unsigned int *)(temp_v10 + 0x1a0));
+            vec4Forward(*(unsigned int *)(temp_v10 + 0x1a0));
           }
         }
         break;
@@ -2363,7 +2363,7 @@ LAB_002d68ec:
               }
               temp_v3 = *(int *)(temp_v10 + 0xbc);
               if (temp_v3 < 0x1e) {
-                FUN_00201e1c(*(unsigned int *)(temp_v10 + 0x1a0));
+                vec4Forward(*(unsigned int *)(temp_v10 + 0x1a0));
               }
               break;
             }
@@ -2460,7 +2460,7 @@ LAB_002d68ec:
                   *(short *)(temp_v10 + 0x16c) = temp_v1 + 5;
                 }
                 if (*(int *)(temp_v10 + 0xbc) < 0x1e) {
-                  FUN_00201e1c(*(unsigned int *)(temp_v10 + 0x1a0));
+                  vec4Forward(*(unsigned int *)(temp_v10 + 0x1a0));
                 }
                 break;
               }
@@ -3172,7 +3172,7 @@ LAB_002d4c0c:
         temp_v3 = *(int *)(temp_v10 + 0xbc);
 joined_r0x002d4cd0:
         if (temp_v3 >= 0x1e) break;
-        FUN_00201e1c(*(unsigned int *)(temp_v10 + 0x1a0));
+        vec4Forward(*(unsigned int *)(temp_v10 + 0x1a0));
         break;
       case 0x1f:
         *(int *)(temp_v10 + 0xbc) = *(int *)(temp_v10 + 0xbc) + 1;
@@ -3195,7 +3195,7 @@ joined_r0x002d4cd0:
           *(unsigned int *)(temp_v10 + 0xb8) = 0xb;
           *(unsigned int *)(temp_v10 + 0xbc) = 0;
         }
-        FUN_002bd910();
+        gameDataBlocksAddFloat();
       }
     }
 LAB_002d7c04:

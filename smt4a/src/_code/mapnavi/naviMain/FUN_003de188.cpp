@@ -10,7 +10,7 @@ int asdMemoryAllocTracked(...);
 int campCommonBgAcquire(...);
 int campButtonHelpAcquire(...);
 int FUN_003b61ec(...);
-int FUN_003c5848(...);
+int commonBgReset(...);
 int FUN_00485e74(...);
 int FUN_00490484(...);
 int FUN_004930e4(...);
@@ -27,7 +27,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_00235cc4; /* 0x235cc4 */
-extern int FUN_00235ce0(...); /* 0x235ce0 */
+extern int naviMenuStartIfIdle(...); /* 0x235ce0 */
 extern unsigned char LAB_002ba728; /* 0x2ba728 */
 extern int FUN_002ba754(...); /* 0x2ba754 */
 extern unsigned char LAB_003de3f4; /* 0x3de3f4 */
@@ -44,7 +44,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_003b61ec. */
-/* Supplied declaration required: FUN_003c5848. */
+/* Supplied declaration required: commonBgReset. */
 /* Supplied declaration required: FUN_00485e74. */
 /* Supplied declaration required: FUN_00490484. */
 /* Supplied declaration required: FUN_004930e4. */
@@ -83,7 +83,7 @@ void FUN_003de188(unsigned int param_1,unsigned int param_2)
   campCommonBgAcquire();
   temp_v1 = gameFlagIsSet(0x49a);
   if (temp_v1 != 0) {
-    FUN_003c5848();
+    commonBgReset();
   }
   else {
     FUN_003b61ec();
@@ -95,7 +95,7 @@ void FUN_003de188(unsigned int param_1,unsigned int param_2)
   campButtonHelpAcquire();
   FUN_004930e4(param_2);
   puVar4 = &LAB_003de3f4;
-  asdProcessCreateSimple(&LAB_003de3f4,4,0,0,FUN_00235ce0,&LAB_00235cc4,puVar1);
+  asdProcessCreateSimple(&LAB_003de3f4,4,0,0,naviMenuStartIfIdle,&LAB_00235cc4,puVar1);
   *puVar1 = (unsigned int)puVar4;
   puVar5 = &LAB_003de404;
   taskCreateDraw(&LAB_003de404,0xe8,1,0,FUN_002ba754,0,puVar1,puVar4);

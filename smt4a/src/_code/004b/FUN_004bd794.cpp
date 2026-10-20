@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014e188(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int sysPlaySe(...);
 int FUN_00183f58(int, int, int);
 int __aeabi_memset4(int, int, unsigned int);
@@ -33,7 +33,7 @@ extern unsigned char DAT_0052d7e0; /* 0x52d7e0 */
 extern unsigned char DAT_0057f25c; /* 0x57f25c */
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
@@ -131,7 +131,7 @@ LAB_004bd854:
       sysPlaySe(temp_v3);
     }
     Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x10);
-    FUN_001505ac(param_1 + 0x10,&DAT_0052d780,0x60,&DAT_0052d7e0,0x18,0,0,0,0,0,0);
+    paramsInit(param_1 + 0x10,&DAT_0052d780,0x60,&DAT_0052d7e0,0x18,0,0,0,0,0,0);
     temp_v0 = 0;
     do {
       FUN_0014e188(param_1 + temp_v0 * 0x8c + 0x30,0x11,0,param_1 + 0x10,0x6a);

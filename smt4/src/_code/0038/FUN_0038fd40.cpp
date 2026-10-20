@@ -14,7 +14,7 @@ int FUN_002340e4(unsigned int *);
 int FUN_00296e90(void);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002b8244(int);
-int FUN_002bc01c(int);
+int eventQueueAddUniqueIfValid(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -45,7 +45,7 @@ extern int FUN_00290e78(void);
 extern int sys43e188GetState(void);
 extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_002b8244. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 
 
 void FUN_0038fd40(unsigned int *param_1)
@@ -151,7 +151,7 @@ void FUN_0038fd40(unsigned int *param_1)
       FUN_0019e0c0(param_1[0xd6]);
       temp_v1 = FUN_0026ee68(0x10);
       if (temp_v1 != 0) {
-        FUN_002bc01c(0x100016d);
+        eventQueueAddUniqueIfValid(0x100016d);
         FUN_00296e90();
         temp_v0 = 5;
         param_1[2] = temp_v0;

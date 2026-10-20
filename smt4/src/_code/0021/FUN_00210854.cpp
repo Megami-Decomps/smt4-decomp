@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00144fa8(unsigned int, unsigned int, unsigned int *);
+int texTableRecordCall(unsigned int, unsigned int, unsigned int *);
 
 /* stack frame of param_8: 7 slot(s), 24 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_8_stack;
 
-/* Supplied declaration required: FUN_00144fa8. */
+/* Supplied declaration required: texTableRecordCall. */
 
 
 void FUN_00210854(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -44,7 +44,7 @@ void FUN_00210854(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v5 = 1;
   temp_v6 = 1;
   uStack_44 = param_4;
-  FUN_00144fa8(param_2,param_3,&temp_v0);
+  texTableRecordCall(param_2,param_3,&temp_v0);
   return;
 }
 

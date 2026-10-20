@@ -50,7 +50,7 @@ int __aeabi_memset4(...);
 int memClear(...);
 int FUN_002fe394(...);
 int FUN_0030a728(...);
-int FUN_00334838(...);
+int aocLoaderUpdateRecords(...);
 int FUN_00336da8(...);
 int FUN_00337f98(...);
 int FUN_00338318(...);
@@ -94,7 +94,7 @@ extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 /* Supplied declaration required: FUN_0023fbdc. */
 /* Supplied declaration required: FUN_0023fffc. */
 /* Supplied declaration required: FUN_002402c4. */
-extern unsigned int FUN_00240448(int);
+extern unsigned int btlPosArrangeGetFilePath(int);
 extern int FUN_002404e8(int);
 /* Supplied declaration required: FUN_00240520. */
 /* Supplied declaration required: FUN_00240530. */
@@ -135,7 +135,7 @@ extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002fe394. */
 /* Supplied declaration required: FUN_0030a728. */
-/* Supplied declaration required: FUN_00334838. */
+/* Supplied declaration required: aocLoaderUpdateRecords. */
 /* Supplied declaration required: FUN_00336da8. */
 /* Supplied declaration required: FUN_00337f98. */
 /* Supplied declaration required: FUN_00338318. */
@@ -331,7 +331,7 @@ code_r0x00240990:
     }
     *puVar19 = 5;
     puVar19[2] = temp_v16;
-    FUN_00334838(puVar19,temp_v11);
+    aocLoaderUpdateRecords(puVar19,temp_v11);
     return puVar19;
   case 5:
     temp_v15 = 0;
@@ -586,7 +586,7 @@ LAB_003343b0:
     break;
   case 0xb:
     memClear(temp_v27,0x80);
-    temp_v14 = FUN_00240448(temp_v11);
+    temp_v14 = btlPosArrangeGetFilePath(temp_v11);
     libc_strcpy(temp_v27,temp_v14);
     if (puVar19[1] != 0) {
       asdMemFree();
@@ -885,14 +885,14 @@ code_r0x00240678:
     return (unsigned int *)0x0;
   }
   memClear(temp_v24,0x80);
-  temp_v14 = FUN_00240448(temp_v11);
+  temp_v14 = btlPosArrangeGetFilePath(temp_v11);
   libc_strcpy(temp_v24,temp_v14);
   temp_v15 = temp_v11;
   FUN_002402c4(temp_v11,temp_v24);
   if (temp_v15 != 0) {
     *puVar19 = 0xb;
     memClear(temp_v26,0x80);
-    temp_v14 = FUN_00240448(temp_v11);
+    temp_v14 = btlPosArrangeGetFilePath(temp_v11);
     libc_strcpy(temp_v26,temp_v14);
     if (puVar19[1] != 0) {
       asdMemFree();

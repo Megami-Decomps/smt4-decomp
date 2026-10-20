@@ -17,7 +17,7 @@ typedef struct Context {
     /* 0x496E */ u16 pendingB;
 } Context;
 
-extern void FUN_00254ec8(Context *ctx);
+extern void pickerAdvance(Context *ctx);
 
 s32 FUN_00336740(Context *ctx)
 {
@@ -25,7 +25,7 @@ s32 FUN_00336740(Context *ctx)
     s32 value;
 
     if ((ctx->flags2 & 0x10) == 0 && (*flags & 0x1000000) == 0) {
-        FUN_00254ec8(ctx);
+        pickerAdvance(ctx);
         *flags |= 0x1000000;
     }
     value = ctx->value;

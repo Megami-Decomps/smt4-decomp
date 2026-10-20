@@ -14,7 +14,7 @@ int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_00233e10(int, unsigned int);
 int FUN_00246014(void);
-int FUN_002d8af4(void);
+int mapIfOverlayRelease(void);
 int FUN_002dae68(void);
 int FUN_002e364c(int);
 int FUN_00303460(int);
@@ -54,7 +54,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_002342b8. */
 /* Supplied declaration required: FUN_00246014. */
 extern int mapIfHasSelection(void);
-/* Supplied declaration required: FUN_002d8af4. */
+/* Supplied declaration required: mapIfOverlayRelease. */
 /* Supplied declaration required: FUN_002dae68. */
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
@@ -258,7 +258,7 @@ void FUN_00366e24(void)
           return;
         }
         if (temp_v1 == 0x5b) {
-          FUN_002d8af4();
+          mapIfOverlayRelease();
           temp_v2 = g_lmapScene;
           *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
           *(unsigned int *)(temp_v2 + 8) = 0;
@@ -299,7 +299,7 @@ void FUN_00366e24(void)
       FUN_002342b8();
     }
     if ((*(int *)(g_lmapScene + 8) >= 0x1f) && (temp_v2 = mapIfHasSelection(), temp_v2 == 0)) {
-      FUN_002d8af4();
+      mapIfOverlayRelease();
       temp_v2 = DAT_005806a4;
       *(float *)(DAT_005806a4 + 0x18) = *(float *)(g_lmapScene + 0x50) + temp_v4;
       *(unsigned int *)(temp_v2 + 0xb0) = 0;

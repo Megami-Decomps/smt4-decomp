@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0022e3f8(void);
+int aocRecordLookup84(void);
 int dataTable08Sub2GetRecord(void);
 int dataTable08Sub1GetRecord(void);
 
-/* Supplied declaration required: FUN_0022e3f8. */
+/* Supplied declaration required: aocRecordLookup84. */
 extern unsigned int FUN_002ae3c4(unsigned int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
@@ -58,7 +58,7 @@ int FUN_00246570(unsigned short *param_1)
     }
     break;
   case 10:
-    FUN_0022e3f8();
+    aocRecordLookup84();
     if (temp_v2 != 0) {
       temp_v1 = *(int *)(temp_v2 + 0x2c);
       if ((param_1[1] & 2) != 0) {

@@ -1,33 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002123dc` (_code @ 0x2123dc, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail loads the flags into r2 and clears the state through r1; built swaps r1/r2. */
+#include "common.h"
 
 extern "C" {
 
-int msgBoxFlagsClearBit7(unsigned int);
+typedef struct MessageBox {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 id;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0C */ u32 flags;
+    /* 0x10 */ u8 unk10[0x73];
+    /* 0x83 */ s8 state;
+} MessageBox;
 
-extern unsigned char g_messageMain; /* 0x43e188 */
+typedef struct MessageMainView {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ MessageBox *box;
+} MessageMainView;
 
-/* Supplied declaration required: msgBoxFlagsClearBit7. */
+extern MessageMainView g_messageMain;
 
+s32 msgBoxFlagsClearBit7(u32 id);
 
+/* Returns a message box in state 2 to state 0, clearing its bit 7 unless flag 0x20 is set. */
 void FUN_002123dc(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x4));
-  if (((*(int *)((unsigned char *)&g_messageMain + 0x4)) != 0) && (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0x83) == '\x02')) {
-    puVar1 = (unsigned int *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0xc);
-    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0x83) = 0;
-    if ((*puVar1 & 0x20) == 0) {
-      msgBoxFlagsClearBit7(*(unsigned int *)(temp_v0 + 4));
-      return;
+    MessageBox *box = g_messageMain.box;
+
+    if (box != NULL && box->state == 2) {
+        u32 flags = box->flags;
+
+        box->state = 0;
+        if ((flags & 0x20) == 0) {
+            msgBoxFlagsClearBit7(box->id);
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

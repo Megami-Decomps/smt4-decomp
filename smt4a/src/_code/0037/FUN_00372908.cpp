@@ -1,27 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00372908` (_code @ 0x372908, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the unit's work pointer is loaded into r0 (retail: r1) and the +0x100 base is added before the return constant. */
+#include "shard/W4_W4Match6b_BtlUnitWork.h"
 
 extern "C" {
 
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
+extern s32 g_btlScriptUnit;
+extern u16 scrGetArg(void);
+extern BtlUnit *btlUnitGet(s32 id);
 
-extern unsigned short scrGetArg(void);
-extern int btlUnitGet(unsigned int);
-
-
-unsigned int FUN_00372908(void)
-
+/* Script command: queues command 8 with the argument on the scripted unit. */
+u32 FUN_00372908(void)
 {
-  unsigned short temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
-  temp_v1 = *(int *)(temp_v1 + 0x28);
-  *(unsigned short *)(temp_v1 + 0x1be) = 8;
-  *(unsigned short *)(temp_v1 + 0x1c0) = temp_v0;
-  return 1;
+    u16 arg = scrGetArg();
+    BtlUnitWork *work = btlUnitGet(g_btlScriptUnit)->work;
+
+    work->command = 8;
+    work->commandArg = arg;
+    return 1;
 }
 
-} /* extern "C" */
+}

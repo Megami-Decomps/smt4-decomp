@@ -1,30 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d2004` (_code @ 0x3d2004, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the type byte is loaded with the registers of the offset the other way round (retail [slot, types], built [types, slot]) */
+#include "shard/W4_W4Match2_ScrStack.h"
 
 extern "C" {
 
+extern s32 DAT_0061889c[0x180]; /* script integer variables */
+extern f32 DAT_00618e9c[0x180]; /* script float variables */
 
-int FUN_003d2004(int param_1)
-
+/* Pops the top value of the script stack and returns it as an int, converting float values and
+ * resolving variable references. */
+s32 FUN_003d2004(ScriptStack *stack)
 {
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0x1c) - 1;
-  *(int *)(param_1 + 0x1c) = temp_v0;
-  switch(*(unsigned char *)(temp_v0 + param_1 + 0x20)) {
-  case 0:
-  case 4:
-    return *(int *)(param_1 + temp_v0 * 4 + 0x3c);
-  case 1:
-    return (int)*(float *)(param_1 + temp_v0 * 4 + 0x3c);
-  case 2:
-    return *(int *)(*(int *)(param_1 + temp_v0 * 4 + 0x3c) * 4 + 0x61889c);
-  case 3:
-    return (int)*(float *)(*(int *)(param_1 + temp_v0 * 4 + 0x3c) * 4 + 0x618e9c);
-  default:
-    return 0;
-  }
+    s32 slot = --stack->count;
+    u8 *types = stack->types;
+
+    switch (types[slot]) {
+    case SCR_VALUE_INT:
+    case SCR_VALUE_RAW:
+        return stack->values[slot].i;
+    case SCR_VALUE_FLOAT:
+        return (s32)stack->values[slot].f;
+    case SCR_VALUE_INT_VAR:
+        return DAT_0061889c[stack->values[slot].i];
+    case SCR_VALUE_FLOAT_VAR:
+        return (s32)DAT_00618e9c[stack->values[slot].i];
+    default:
+        return 0;
+    }
 }
 
 } /* extern "C" */

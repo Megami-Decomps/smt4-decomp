@@ -8,7 +8,7 @@ int fileOwnerCloseA(void);
 int fileOwnerCloseB(void);
 int fileOwnerCloseC(unsigned char **);
 int fileOwnerCloseD(void);
-int FUN_002bb688(unsigned char **, int);
+int fileHandleClose(unsigned char **, int);
 
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -30,7 +30,7 @@ extern int FUN_001ffaf0(void);
 /* Supplied declaration required: fileOwnerCloseC. */
 /* Supplied declaration required: fileOwnerCloseD. */
 extern int FUN_0024ab94(unsigned char **, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bb688. */
+/* Supplied declaration required: fileHandleClose. */
 extern int FUN_002cbfe8(unsigned char **);
 
 
@@ -74,7 +74,7 @@ unsigned int FUN_002d5e44(int param_1,unsigned int param_2)
     temp_v0 = FUN_0024ab94(&temp_v1,param_2,2);
   }
   if (temp_v0 < 0) {
-    FUN_002bb688(&temp_v1,0);
+    fileHandleClose(&temp_v1,0);
     return 0;
   }
   if (param_1 != 0) {
@@ -95,7 +95,7 @@ unsigned int FUN_002d5e44(int param_1,unsigned int param_2)
   else {
     fileOwnerCloseC(&temp_v1);
   }
-  FUN_002bb688(&temp_v1,0);
+  fileHandleClose(&temp_v1,0);
   return 1;
 }
 

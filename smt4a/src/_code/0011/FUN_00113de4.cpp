@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int listIteratorNext3(int [2]);
 int FUN_002fea02(int *, int, int *);
 
@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned char g_flagBlock; /* 0x594958 */
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: listIteratorNext3. */
 extern int wordRefsDiffer_002fe9f2(int *, int *);
 /* Supplied declaration required: FUN_002fea02. */
@@ -61,7 +61,7 @@ void FUN_00113de4(int param_1,int param_2)
         temp_v2 = temp_v5;
       }
     }
-    FUN_002e6e5c(temp_v3);
+    _ZN9Obj55b28cD1Ev(temp_v3);
   }
   return;
 }

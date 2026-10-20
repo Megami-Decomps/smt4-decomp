@@ -15,7 +15,7 @@ struct fn_003f3f08_arg0 {
 };
 
 extern int gameGetPlayerData(void);
-extern unsigned int FUN_0019e130(int);
+extern unsigned int markerKindGetColor(int);
 extern int gameGetSlotRecord(void);
 extern int btlMainGetUnk14(void);
 
@@ -57,7 +57,7 @@ unsigned int FUN_003f3f08(fn_003f3f08_arg0 *param_1)
   while( 1 ) {
     if ((temp_v3 & (1 << (temp_v1 & 0xff))) != 0) {
       if (param_1->field_0x1c == temp_v0) {
-        temp_v2 = FUN_0019e130((int)(short)temp_v1);
+        temp_v2 = markerKindGetColor((int)(short)temp_v1);
         return temp_v2;
       }
       temp_v0 = temp_v0 + 1;

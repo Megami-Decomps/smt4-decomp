@@ -5,7 +5,7 @@
 extern "C" {
 
 int renderCtxResetColorScale(u32 handle);
-int FUN_0016c560(u32 handle);
+int skinObjectUpdateMatrices(u32 handle);
 int FUN_0016c4b8(u32 handle, int arg);
 int FUN_003db56c(GauntletAppMenuWork *menu);
 
@@ -18,7 +18,7 @@ u32 gauntletAppMenuExit(void)
 
     FUN_0016c4b8(g_renderCtx, 0);
     FUN_003db56c(menu);
-    FUN_0016c560(g_renderCtx);
+    skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     return 0;
 }

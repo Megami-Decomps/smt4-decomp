@@ -1,53 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cd9e8` (_code @ 0x3cd9e8, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the best key in r1, the entry key in r2, the entry pointer in r3 and the count in ip; the build rotates r1-r3/ip. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
+typedef struct PairEntry {
+    /* 0x00 */ s16 key;
+    /* 0x02 */ s16 value;
+} PairEntry;
 
+extern u32 dataTableGet(u32 table, u32 index);
+extern u32 dataTableGetCount(u32 table);
+extern PairEntry *dataTableGetEntries(void);
 
-int FUN_003cd9e8(int param_1)
-
+/* Looks `key` up in table 6/2; without an exact match returns the value of the entry with the largest key (or, for a negative key, the smallest). */
+int FUN_003cd9e8(int key)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  short *psVar7;
-  int temp_v6;
-  
-  temp_v0 = dataTableGet(6,2);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  temp_v4 = 0;
-  temp_v6 = 0;
-  temp_v3 = 0;
-  if (temp_v3 < temp_v2) {
-    do {
-      psVar7 = (short *)(temp_v1 + temp_v3 * 4);
-      temp_v5 = (int)*psVar7;
-      if (temp_v5 == param_1) {
-        return (int)*(short *)(temp_v1 + temp_v3 * 4 + 2);
-      }
-      if (param_1 < 0) {
-        if (temp_v5 < temp_v4) {
-          temp_v6 = (int)psVar7[1];
-          temp_v4 = temp_v5;
+    u32 table;
+    PairEntry *entries;
+    u32 count;
+    int bestKey;
+    int bestValue;
+    u32 i;
+
+    table = dataTableGet(6, 2);
+    entries = dataTableGetEntries();
+    count = dataTableGetCount(table);
+    bestKey = 0;
+    bestValue = 0;
+    for (i = 0; i < count; i++) {
+        PairEntry *entry = &entries[i];
+
+        if (entry->key == key) {
+            return entries[i].value;
         }
-      }
-      else if (temp_v4 < temp_v5) {
-        temp_v6 = (int)psVar7[1];
-        temp_v4 = temp_v5;
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < temp_v2);
-  }
-  return temp_v6;
+        if (key < 0) {
+            if (entry->key < bestKey) {
+                bestValue = entry->value;
+                bestKey = entry->key;
+            }
+        } else if (bestKey < entry->key) {
+            bestValue = entry->value;
+            bestKey = entry->key;
+        }
+    }
+    return bestValue;
 }
 
 } /* extern "C" */

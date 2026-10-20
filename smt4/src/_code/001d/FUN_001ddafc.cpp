@@ -1,22 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ddafc` (_code @ 0x1ddafc, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
+typedef struct Slot {
+    /* 0x00 */ u8 unk00[0x16];
+    /* 0x16 */ u8 bit0 : 1;
+    /*      */ u8 flag : 1;         /* set by FUN_001ddafc */
+    /*      */ u8 bits2to7 : 6;
+    /* 0x17 */ u8 unk17[0x1D];
+} Slot;                              /* 0x34 */
 
+typedef struct SlotTable {
+    /* 0x0000 */ u8 unk0000[0xC1F8];
+    /* 0xC1F8 */ Slot slots[0x501];
+} SlotTable;
 
-unsigned char FUN_001ddafc(unsigned int param_1,char param_2)
+typedef struct GameDataBlocksView {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ SlotTable *table;
+} GameDataBlocksView;
 
+extern GameDataBlocksView g_gameDataBlocks;
+
+/* Sets or clears the flag bit of slot `index`; returns 0 if the index is out of range. */
+u8 FUN_001ddafc(u32 index, bool value)
 {
-  int temp_v0;
-  
-  if (param_1 < 0x501) {
-    temp_v0 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + param_1 * 0x34;
-    *(unsigned char *)(temp_v0 + 0xc20e) = (*(unsigned char *)(temp_v0 + 0xc20e) & 0xfd) | (param_2 << 1);
-  }
-  return param_1 < 0x501;
+    if (index > 0x500) {
+        return 0;
+    }
+    u8 *row = (u8 *)g_gameDataBlocks.table + index * sizeof(Slot);
+    Slot *slot = (Slot *)(row + 0xC1F8);
+
+    slot->flag = value;
+    return 1;
 }
 
 } /* extern "C" */

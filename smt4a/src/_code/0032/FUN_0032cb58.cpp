@@ -10,7 +10,7 @@ int nw_snd_SoundArchive_GetSoundType(unsigned char *, int);
 int asd3dSoundActorIsPlaying(void);
 int VectorUnsignedToFloat(unsigned int, int);
 
-extern unsigned char DAT_0063e1e8; /* 0x63e1e8 */
+extern unsigned char g_asdSoundSystem; /* 0x63e1e8 */
 extern unsigned int DAT_0063f4bc; /* 0x63f4bc */
 extern signed char DAT_0063f4c4; /* 0x63f4c4 */
 extern unsigned char DAT_0063f4c5; /* 0x63f4c5 */
@@ -41,10 +41,10 @@ unsigned char FUN_0032cb58(int param_1,unsigned int param_2)
     temp_v0 = *(int *)(DAT_0063f500 + 0x10);
   }
   if ((DAT_0063f4c4 != '\0' && temp_v0 != 0) && (param_2 < 0x10)) {
-    puVar4 = &DAT_0063e1e8;
-    temp_v0 = nw_snd_SoundArchive_IsAvailable(&DAT_0063e1e8);
+    puVar4 = &g_asdSoundSystem;
+    temp_v0 = nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem);
     if ((temp_v0 != 0) &&
-       (((nw_snd_SoundArchive_GetSoundType(&DAT_0063e1e8,param_1), puVar4 != (unsigned char *)0x0 &&
+       (((nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem,param_1), puVar4 != (unsigned char *)0x0 &&
          (temp_v1 = param_2, asd3dSoundActorIsPlaying(), temp_v1 == 0)) &&
         (temp_v0 = param_1, FUN_00151340(), temp_v0 != 0)))) {
       temp_v1 = param_2 * 0x88 + 0x63ea78;

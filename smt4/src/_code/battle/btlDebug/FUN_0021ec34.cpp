@@ -1,55 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021ec34` (_code @ 0x21ec34, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: the final flag clear reuses r5 (the job owner) here; retail forms the address in r1 and the value in r2 */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0024ef90(unsigned int);
-int FUN_0025c2d0(int, int);
-int asdMemFree(int);
-int jobStop(unsigned int, int);
+typedef struct JobOwner {
+    /* 0x0000 */ u8 unk0000[0x5C];
+    /* 0x005C */ u32 job;
+    /* 0x0060 */ u8 unk0060[0x4448];
+    /* 0x44A8 */ u32 flags;
+} JobOwner;
 
-extern unsigned short DAT_0043438a; /* 0x43438a */
-extern int DAT_00434390; /* 0x434390 */
-extern int g_btlUiBlock; /* 0x439ca8 */
+typedef struct Popup {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 job;
+} Popup;
 
-/* Supplied declaration required: FUN_0024ef90. */
-/* Supplied declaration required: FUN_0025c2d0. */
-extern int jobIsValid(unsigned int);
-extern int jobGetWork(void);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: jobStop. */
+typedef struct PopupState {
+    /* 0x0 */ u8 unk0[2];
+    /* 0x2 */ u16 active;
+    /* 0x4 */ u8 unk4[4];
+    /* 0x8 */ Popup *popup;
+} PopupState;
 
+extern void *g_btlUiBlock;
+extern PopupState DAT_00434388;
 
+extern JobOwner *jobGetWork(void);
+extern s32 jobIsValid(u32 job);
+extern void jobStop(u32 job, s32 arg);
+extern void asdMemFree(void *block);
+extern void FUN_0024ef90(u32 job);
+extern void FUN_0025c2d0(void *block, s32 arg);
+
+/* Shuts down the battle UI block and the popup job, then clears the owner's flag 0. */
 void FUN_0021ec34(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = jobGetWork();
-  if (g_btlUiBlock != 0) {
-    FUN_0025c2d0(g_btlUiBlock,0);
-  }
-  temp_v2 = DAT_00434390;
-  if (DAT_00434390 != 0) {
-    DAT_0043438a = 0;
-    temp_v1 = jobIsValid(*(unsigned int *)(DAT_00434390 + 0x10));
-    if (temp_v1 != 0) {
-      FUN_0024ef90(*(unsigned int *)(temp_v2 + 0x10));
-      jobStop(*(unsigned int *)(temp_v2 + 0x10),0);
+    JobOwner *owner = jobGetWork();
+
+    if (g_btlUiBlock != NULL) {
+        FUN_0025c2d0(g_btlUiBlock, 0);
     }
-    asdMemFree(DAT_00434390);
-    DAT_00434390 = 0;
-  }
-  temp_v2 = jobIsValid(*(unsigned int *)(temp_v0 + 0x5c));
-  if (temp_v2 != 0) {
-    jobStop(*(unsigned int *)(temp_v0 + 0x5c),0);
-  }
-  *(unsigned int *)(temp_v0 + 0x44a8) = *(unsigned int *)(temp_v0 + 0x44a8) & 0xfffffffe;
-  return;
+    if (DAT_00434388.popup != NULL) {
+        Popup *popup = DAT_00434388.popup;
+
+        DAT_00434388.active = 0;
+        if (jobIsValid(popup->job) != 0) {
+            FUN_0024ef90(popup->job);
+            jobStop(popup->job, 0);
+        }
+        asdMemFree(DAT_00434388.popup);
+        DAT_00434388.popup = NULL;
+    }
+    if (jobIsValid(owner->job) != 0) {
+        jobStop(owner->job, 0);
+    }
+    owner->flags &= ~1;
 }
 
 } /* extern "C" */

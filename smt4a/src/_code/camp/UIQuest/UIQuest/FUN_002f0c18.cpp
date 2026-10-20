@@ -9,7 +9,7 @@ int FUN_0014afd0(...);
 int FUN_0014e188(...);
 int FUN_0014e220(...);
 int asdProcessCreateSimple(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int uiSpriteSelectAnim(...);
@@ -59,14 +59,14 @@ extern unsigned int *g_uiQuest; /* 0x57f28c */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_0014e220. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_00184c40. */
-extern int FUN_0019f1a4(unsigned short, unsigned int);
+extern int gameFlagEntryGetBit(unsigned short, unsigned int);
 extern int gameFlagBlockGet(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001bd100(unsigned short);
@@ -142,7 +142,7 @@ void FUN_002f0c18(void)
   FUN_001ff724();
   temp_v0 = 0;
   do {
-    temp_v2 = FUN_0019f1a4(temp_v0,2);
+    temp_v2 = gameFlagEntryGetBit(temp_v0,2);
     if (((temp_v2 != 0) && (temp_v2 = FUN_001bd100(temp_v0), temp_v2 != 0)) &&
        ((temp_v2 = partyEntryGetBit5(temp_v0), temp_v2 != 0 || (temp_v2 = partyEntryGetBit6(temp_v0), temp_v2 != 0)))) {
       FUN_00417de8(temp_v0);
@@ -151,7 +151,7 @@ void FUN_002f0c18(void)
   } while (temp_v0 < 400);
   temp_v0 = 0;
   do {
-    temp_v2 = FUN_0019f1a4(temp_v0,2);
+    temp_v2 = gameFlagEntryGetBit(temp_v0,2);
     if (((temp_v2 != 0) && (temp_v2 = FUN_001bd100(temp_v0), temp_v2 == 0)) &&
        ((temp_v2 = partyEntryGetBit5(temp_v0), temp_v2 != 0 || (temp_v2 = partyEntryGetBit6(temp_v0), temp_v2 != 0)))) {
       FUN_00417de8(temp_v0);
@@ -159,7 +159,7 @@ void FUN_002f0c18(void)
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 400);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar2 + 5);
-  FUN_001505ac(puVar2 + 5,&DAT_0052e8ec,0x90,&DAT_0052e97c,300,&DAT_0052eaa8,0x9c,0,0,&DAT_0052eb44,
+  paramsInit(puVar2 + 5,&DAT_0052e8ec,0x90,&DAT_0052e97c,300,&DAT_0052eaa8,0x9c,0,0,&DAT_0052eb44,
                0x40c);
   FUN_0014e188(puVar2 + 0xd,0x1e,0,puVar2 + 5,0xc9);
   uiSpriteSetKeyframe(puVar2 + 0xd,0);

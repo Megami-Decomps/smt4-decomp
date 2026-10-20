@@ -29,7 +29,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0022fa2c. */
 /* Supplied declaration required: FUN_0022fb64. */
 extern int FUN_0022fbc0(int);
-extern int FUN_00230c1c(unsigned short, unsigned int);
+extern int btlRollClamped(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00230df0. */
 extern unsigned int FUN_00230e04(unsigned short *);
 /* Supplied declaration required: FUN_00232848. */
@@ -83,7 +83,7 @@ void FUN_003a3a9c(int param_1)
   puVar5 = (unsigned short *)(param_1 + temp_v1 * 0x1002 + 0xc94 + temp_v2 * 4);
   if (*(int *)(param_1 + 0x860) != 8) {
     temp_v3 = FUN_00230e04(puVar5);
-    temp_v1 = FUN_00230c1c(*puVar5,temp_v3);
+    temp_v1 = btlRollClamped(*puVar5,temp_v3);
     if (temp_v1 != 0) {
       if (temp_v0 != 0) {
         FUN_002328b4();

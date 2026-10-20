@@ -1,95 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c4f38` (_code @ 0x3c4f38, 0x214 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_004398d4; /* 0x4398d4 */
+/* Settings record the list box writes into: values from 0x40 (0x58 is a text), three texts at 0x90. */
+typedef struct ListSettings {
+    /* 0x00 */ u8 unk00[0x40];
+    /* 0x40 */ u32 value[13];
+    /* 0x74 */ u8 unk74[0x1C];
+    /* 0x90 */ u32 text[3];
+} ListSettings;
 
-extern unsigned int *asdListBoxGetItemText(unsigned int);
-extern unsigned int *asdListBoxGetItemValuePtr(unsigned int);
-extern unsigned int FUN_0025628c(unsigned int);
+typedef struct ListScreen {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ void *listBox;
+} ListScreen;
 
+extern ListSettings *DAT_004398d4; /* 0x4398d4 */
 
-void FUN_003c4f38(int param_1)
+extern u32 *asdListBoxGetItemText(void *listBox, u32 id);
+extern u32 *asdListBoxGetItemValuePtr(void *listBox, u32 id);
+extern u32 FUN_0025628c(void *listBox);
 
+/* Copies the selected list box item into its slot of the settings record. */
+void FUN_003c4f38(ListScreen *screen)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned int *puVar4;
-  
-  temp_v1 = FUN_0025628c(*(unsigned int *)(param_1 + 0x10));
-  temp_v0 = DAT_004398d4;
-  puVar4 = (unsigned int *)(DAT_004398d4 + 0x90);
-  switch(temp_v1) {
-  case 0:
-    puVar3 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
-    *puVar4 = *puVar3;
-    return;
-  case 1:
-    puVar4 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(temp_v0 + 0x94) = *puVar4;
-    return;
-  case 2:
-    puVar4 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(temp_v0 + 0x98) = *puVar4;
-    return;
-  case 3:
-    puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_004398d4 + 0x40) = *puVar4;
-    return;
-  case 4:
-    puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_004398d4 + 0x44) = *puVar4;
-    return;
-  case 5:
-    puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_004398d4 + 0x48) = *puVar4;
-    return;
-  case 6:
-    puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_004398d4 + 0x4c) = *puVar4;
-    return;
-  case 7:
-    puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_004398d4 + 0x50) = *puVar4;
-    return;
-  case 8:
-    puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_004398d4 + 0x54) = *puVar4;
-    return;
-  case 9:
-    puVar4 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_004398d4 + 0x58) = *puVar4;
-    return;
-  case 10:
-    puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_004398d4 + 0x5c) = *puVar4;
-    return;
-  case 0xb:
-    puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_004398d4 + 0x60) = *puVar4;
-    return;
-  case 0xc:
-    puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_004398d4 + 100) = *puVar4;
-    return;
-  case 0xd:
-    puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_004398d4 + 0x68) = *puVar4;
-    return;
-  case 0xe:
-    puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_004398d4 + 0x6c) = *puVar4;
-    return;
-  case 0xf:
-    puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_004398d4 + 0x70) = *puVar4;
-    return;
-  default:
-    return;
-  }
+    u32 id = FUN_0025628c(screen->listBox);
+    u32 *text = DAT_004398d4->text;
+
+    switch (id) {
+    case 0:
+        text[0] = *asdListBoxGetItemText(screen->listBox, id);
+        break;
+    case 1:
+        text[1] = *asdListBoxGetItemText(screen->listBox, id);
+        break;
+    case 2:
+        text[2] = *asdListBoxGetItemText(screen->listBox, id);
+        break;
+    case 3:
+        DAT_004398d4->value[0] = *asdListBoxGetItemValuePtr(screen->listBox, id);
+        break;
+    case 4:
+        DAT_004398d4->value[1] = *asdListBoxGetItemValuePtr(screen->listBox, id);
+        break;
+    case 5:
+        DAT_004398d4->value[2] = *asdListBoxGetItemValuePtr(screen->listBox, id);
+        break;
+    case 6:
+        DAT_004398d4->value[3] = *asdListBoxGetItemValuePtr(screen->listBox, id);
+        break;
+    case 7:
+        DAT_004398d4->value[4] = *asdListBoxGetItemValuePtr(screen->listBox, id);
+        break;
+    case 8:
+        DAT_004398d4->value[5] = *asdListBoxGetItemValuePtr(screen->listBox, id);
+        break;
+    case 9:
+        DAT_004398d4->value[6] = *asdListBoxGetItemText(screen->listBox, id);
+        break;
+    case 10:
+        DAT_004398d4->value[7] = *asdListBoxGetItemValuePtr(screen->listBox, id);
+        break;
+    case 11:
+        DAT_004398d4->value[8] = *asdListBoxGetItemValuePtr(screen->listBox, id);
+        break;
+    case 12:
+        DAT_004398d4->value[9] = *asdListBoxGetItemValuePtr(screen->listBox, id);
+        break;
+    case 13:
+        DAT_004398d4->value[10] = *asdListBoxGetItemValuePtr(screen->listBox, id);
+        break;
+    case 14:
+        DAT_004398d4->value[11] = *asdListBoxGetItemValuePtr(screen->listBox, id);
+        break;
+    case 15:
+        DAT_004398d4->value[12] = *asdListBoxGetItemValuePtr(screen->listBox, id);
+        break;
+    }
 }
 
-} /* extern "C" */
+}

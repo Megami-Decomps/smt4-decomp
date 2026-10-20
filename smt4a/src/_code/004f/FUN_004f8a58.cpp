@@ -8,7 +8,7 @@ int btlGetMainState(void);
 int FUN_001568f8(int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int moriModelContentCopyBody(void);
-int FUN_004f7520(int, int);
+int handleSlotRelease(int, int);
 
 extern unsigned char LAB_004f8d5c; /* 0x4f8d5c */
 
@@ -18,7 +18,7 @@ extern unsigned char LAB_004f8d5c; /* 0x4f8d5c */
 extern int FUN_003ef9e0(unsigned int, int);
 /* Supplied declaration required: moriModelContentCopyBody. */
 extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_004f7520. */
+/* Supplied declaration required: handleSlotRelease. */
 
 
 void FUN_004f8a58(int param_1,int param_2,int param_3)
@@ -49,7 +49,7 @@ void FUN_004f8a58(int param_1,int param_2,int param_3)
   if (param_2 == 0 || param_2 == 0x16) {
     return;
   }
-  FUN_004f7520(param_1,param_3);
+  handleSlotRelease(param_1,param_3);
   temp_v1 = btlGetMainState();
   temp_v6 = *(int *)(temp_v1 + 0x1ed4) + param_3 * 0x1d0;
   temp_v1 = (int)*(short *)(temp_v6 + 0x6a);

@@ -28,7 +28,7 @@ extern unsigned char LAB_002a16a4; /* 0x2a16a4 */
 extern unsigned char LAB_002a16bc; /* 0x2a16bc */
 extern unsigned char LAB_002e0560; /* 0x2e0560 */
 extern unsigned char LAB_003162c8; /* 0x3162c8 */
-extern int FUN_0032b04c(...); /* 0x32b04c */
+extern int titleMainRelease(...); /* 0x32b04c */
 extern int FUN_0032b0d4(...); /* 0x32b0d4 */
 extern unsigned int g_aocSystem; /* 0x570280 */
 extern unsigned int *DAT_00589170; /* 0x589170 */
@@ -140,7 +140,7 @@ void FUN_002a1358(unsigned char *param_1)
     *(unsigned char *)(puVar1 + 4) = 0;
   }
   puVar3 = &LAB_002a1684;
-  asdProcessCreateSimple(&LAB_002a1684,4,0,0,FUN_0029f2fc,FUN_0032b04c,0);
+  asdProcessCreateSimple(&LAB_002a1684,4,0,0,FUN_0029f2fc,titleMainRelease,0);
   *puVar1 = (unsigned int)puVar3;
   taskCreateDraw(&LAB_002a1690,0x78,0,0,&LAB_002e0560,0,0,puVar3);
   taskCreateDraw(&LAB_002a16a4,0xd4,0,0,&LAB_003162c8,0,0,*puVar1);

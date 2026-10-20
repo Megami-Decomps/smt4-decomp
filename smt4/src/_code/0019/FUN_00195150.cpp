@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0029efd8(int, int);
 int FUN_0029f5d8(int, unsigned int, int, int, int, int, unsigned char [8], int, int);
 int FUN_002b8ee0(int, int);
-int FUN_002bc01c(int);
+int eventQueueAddUniqueIfValid(int);
 int timerStart(int, int, int);
 int FUN_002bf818(int);
 int FUN_002c1658(void);
@@ -28,7 +28,7 @@ extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_0029f5d8. */
 extern unsigned short FUN_002b8584(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b8ee0. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
@@ -128,7 +128,7 @@ void FUN_00195150(int *param_1)
           *(int *)(temp_v5 + 0x340) = *(int *)(temp_v5 + 0x340) + 1;
           return;
         }
-        FUN_002bc01c(0x100016e);
+        eventQueueAddUniqueIfValid(0x100016e);
         temp_v1 = 0;
         do {
           timerStart(temp_v5 + temp_v1 * 0x8c + 0x20,1,0);
@@ -155,7 +155,7 @@ void FUN_00195150(int *param_1)
       temp_v6 = FUN_0029efc0(temp_v5 + 0x2dc);
     }
     if (temp_v6 != temp_v1) {
-      FUN_002bc01c(0x100016c);
+      eventQueueAddUniqueIfValid(0x100016c);
     }
   }
   *(int *)(temp_v5 + 0x340) = *(int *)(temp_v5 + 0x340) + 1;

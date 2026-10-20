@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00109724(int, unsigned char [8]);
 int FUN_002e6e34(unsigned char [16], unsigned char *);
-int FUN_002e6e5c(unsigned char [16]);
+int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int onlineTimeGetNow(unsigned char [8]);
 
 extern unsigned char DAT_00558bd8; /* 0x558bd8 */
@@ -19,9 +19,9 @@ extern unsigned char DAT_0062e610; /* 0x62e610 */
 
 /* Supplied declaration required: FUN_00109724. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int onlineStringConstruct(unsigned int *);
-extern int constructObj0055affc(int);
+extern int _ZN9Obj55aff4C1Ev(int);
 /* Supplied declaration required: onlineTimeGetNow. */
 extern int wordRefsDiffer_002f2968(unsigned int *, unsigned char *);
 
@@ -43,8 +43,8 @@ int FUN_002f1858(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   param_1[0xf] = 0;
   *param_1 = (unsigned int)&DAT_00558bd8;
   temp_v0 = onlineStringConstruct(param_1 + 0x12);
-  temp_v0 = constructObj0055affc(temp_v0 + 0x18);
-  temp_v1 = constructObj0055affc(temp_v0 + 8);
+  temp_v0 = _ZN9Obj55aff4C1Ev(temp_v0 + 0x18);
+  temp_v1 = _ZN9Obj55aff4C1Ev(temp_v0 + 8);
   temp_v3 = temp_v1 - 0x68;
   onlineTimeGetNow(temp_v5);
   FUN_00109724(temp_v3,temp_v5);
@@ -66,7 +66,7 @@ int FUN_002f1858(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   DAT_0062e604 = temp_v3;
   *(int *)(temp_v1 - 0x14) = DAT_005949e4;
   DAT_005949e4 = DAT_005949e4 + 1;
-  FUN_002e6e5c(temp_v4);
+  _ZN9Obj55b28cD1Ev(temp_v4);
   return temp_v3;
 }
 

@@ -16,7 +16,7 @@ typedef struct {
 
 extern int FUN_002ea962(char *, int);
 extern char *FUN_002eb4c8(int);
-extern int FUN_0030c0d8(int, int, int);
+extern int onlineSockAddrLessWithPort(int, int, int);
 /* Supplied declaration required: rbTreeRotateRight_0030c12a. */
 /* Supplied declaration required: rbTreeRotateLeft_0030c15c. */
 
@@ -38,7 +38,7 @@ void FUN_0030bfc8(unsigned int *param_1,int param_2,int param_3,int param_4,int 
   }
   *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) + 1;
   if (((*(int *)(param_2 + 0x10) == param_4) || (param_3 != 0)) ||
-     (temp_v0 = FUN_0030c0d8(param_2 + 0x19,param_5,param_4 + 0x10), temp_v0 != 0)) {
+     (temp_v0 = onlineSockAddrLessWithPort(param_2 + 0x19,param_5,param_4 + 0x10), temp_v0 != 0)) {
     *(char **)(param_4 + 8) = pcVar1;
     temp_v0 = *(int *)(param_2 + 0x10);
     if (temp_v0 == param_4) {

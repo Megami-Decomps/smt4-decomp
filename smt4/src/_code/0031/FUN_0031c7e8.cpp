@@ -1,62 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031c7e8` (_code @ 0x31c7e8, 0xb8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
-int scrGetArg(int);
+typedef struct BattleUnit {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x6A];
+    /* 0x06E */ u8 unk06E[4];
+    /* 0x072 */ s16 stats[12];
+    /* 0x08A */ u8 unk08A[0x44];
+    /* 0x0CE */ u16 id;
+    /* 0x0D0 */ u8 unk0D0[0x1B8];
+} BattleUnit;
 
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
+typedef struct BattleState {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ BattleUnit *units;
+} BattleState;
 
+s32 scrSetResult(s32 value);
+BattleState *btlGetMainState(void);
+s32 scrGetArg(s32 index);
 
-unsigned int FUN_0031c7e8(void)
-
+/* Script command: sets the result to 1 when the live, non-excluded unit with id `arg0` has a positive stat (arg 1: 0 -> 7, 1 -> 10, 2 -> 11). */
+u32 FUN_0031c7e8(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v4 = 0;
-  if (temp_v1 == 0) {
-    temp_v4 = 7;
-  }
-  else if (temp_v1 == 1) {
-    temp_v4 = 10;
-  }
-  else if (temp_v1 == 2) {
-    temp_v4 = 0xb;
-  }
-  temp_v1 = 0;
-  do {
-    temp_v2 = btlGetMainState();
-    puVar4 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v1 * 0x288);
-    temp_v3 = *puVar4;
-    if ((temp_v3 & 0x10) != 0 && (temp_v3 & 1) != 0) {
-      temp_v5 = (temp_v3 & 0x40) == 0;
-      if (temp_v5) {
-        temp_v3 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
-      }
-      if ((temp_v5 && temp_v3 == temp_v0) && (0 < *(short *)((int)puVar4 + temp_v4 * 2 + 0x72))) {
-        scrSetResult(1);
-        return 1;
-      }
+    u32 id = scrGetArg(0);
+    s32 arg = scrGetArg(1);
+    s32 stat = 0;
+    s32 i;
+
+    if (arg == 0) {
+        stat = 7;
+    } else if (arg == 1) {
+        stat = 10;
+    } else if (arg == 2) {
+        stat = 11;
     }
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
+    for (i = 0; i < 109; i++) {
+        BattleUnit *unit = &btlGetMainState()->units[i];
+
+        if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0 && unit->id == id && unit->stats[stat] >= 1) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-  } while( 1 );
+    scrSetResult(0);
+    return 1;
 }
 
 } /* extern "C" */

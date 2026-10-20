@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002bff38(int);
 int FUN_002bff50(void);
 
-extern int FUN_00118f1c(int);
+extern int eventTexSelectJobsById(int);
 extern int FUN_0011921c(void);
 /* Supplied declaration required: FUN_002bff38. */
 /* Supplied declaration required: FUN_002bff50. */
@@ -21,7 +21,7 @@ unsigned int FUN_00108074(int param_1)
   
   if (param_1 != 0) {
     temp_v0 = FUN_0011921c();
-    if ((temp_v0 == 0) && (temp_v0 = FUN_00118f1c(param_1), temp_v0 == 0)) {
+    if ((temp_v0 == 0) && (temp_v0 = eventTexSelectJobsById(param_1), temp_v0 == 0)) {
       FUN_002bff38(2);
     }
   }

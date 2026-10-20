@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001871c0(...);
+int trackAdvance(...);
 int FUN_001882fc(void);
 int FUN_00193c08(unsigned int, unsigned int);
 int FUN_00198144(int *, unsigned int);
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001871c0. */
+/* Supplied declaration required: trackAdvance. */
 /* Supplied declaration required: FUN_001882fc. */
 /* Supplied declaration required: FUN_00193c08. */
 /* Supplied declaration required: FUN_00198144. */
@@ -87,7 +87,7 @@ void FUN_0016a220(int param_1)
   }
   if (*(char *)(param_1 + 0x20) != '\0') {
     *(float *)(param_1 + 0x18) = *(float *)(param_1 + 0x18) + in_s0;
-    temp_v3 = FUN_001871c0(param_1 + *(int *)(param_1 + 0x1c) * 0x30 + 0x24);
+    temp_v3 = trackAdvance(param_1 + *(int *)(param_1 + 0x1c) * 0x30 + 0x24);
     temp_v2 = 0;
     if (temp_v3 != 0) {
       temp_v2 = *(int *)(param_1 + 0x25c);
@@ -95,10 +95,10 @@ void FUN_0016a220(int param_1)
     if (temp_v3 != 0 && temp_v2 != 0) {
       FUN_001882fc();
     }
-    FUN_001871c0(param_1 + (*(unsigned int *)(param_1 + 0x1c) ^ 1) * 0x30 + 0x24);
+    trackAdvance(param_1 + (*(unsigned int *)(param_1 + 0x1c) ^ 1) * 0x30 + 0x24);
     return;
   }
-  temp_v2 = FUN_001871c0(param_1 + *(int *)(param_1 + 0x1c) * 0x30 + 0x24);
+  temp_v2 = trackAdvance(param_1 + *(int *)(param_1 + 0x1c) * 0x30 + 0x24);
   if ((temp_v2 != 0) && (*(int *)(param_1 + 0x25c) != 0)) {
     FUN_001882fc();
     return;

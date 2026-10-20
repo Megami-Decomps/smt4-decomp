@@ -25,7 +25,7 @@ extern unsigned char LAB_00186004; /* 0x186004 */
 /* Supplied declaration required: FUN_00180310. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
-extern unsigned int FUN_0018439c(unsigned int);
+extern unsigned int requestKindToId(unsigned int);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int idIsAbove400(void);
 /* Supplied declaration required: FUN_0019d390. */
@@ -65,7 +65,7 @@ void FUN_00185e84(unsigned int param_1,int param_2,int param_3,int param_4,int p
         temp_v0 = 1000;
       }
       else {
-        temp_v0 = FUN_0018439c(*(unsigned int *)(temp_v2 + 0x28) & 0x1f);
+        temp_v0 = requestKindToId(*(unsigned int *)(temp_v2 + 0x28) & 0x1f);
       }
     }
   }

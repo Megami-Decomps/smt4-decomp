@@ -1,23 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c2c4c` (_code @ 0x2c2c4c, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the tail call goes to 0x340f80, which has no symbol; retail's `b` carries no relocation. */
+#include "common.h"
 
 extern "C" {
 
-int func_0x00340f80(int);
+typedef struct Widget {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ u8 sub[0x3A];
+    /* 0x62 */ u8 hidden;
+} Widget;
 
-/* Supplied declaration required: func_0x00340f80. */
+s32 func_0x00340f80(u8 *sub);
 
-
-void FUN_002c2c4c(int param_1)
-
+/* Runs the sub-object's update unless the widget is hidden; returns 0 when hidden. */
+s32 FUN_002c2c4c(Widget *widget)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(char *)(param_1 + 0x62) == '\0') {
-    func_0x00340f80(param_1 + 0x28);
-    return;
-  }
-  return;
+    if (widget->hidden == 0) {
+        return func_0x00340f80(widget->sub);
+    }
+    return 0;
 }
 
 } /* extern "C" */

@@ -11,11 +11,11 @@ extern s32 FUN_0023360c(Scene3aSlotInfo *info);
 extern s32 FUN_002ae3c0(u32 id);
 extern void FUN_0029a084(s32 kind, u16 id);
 extern s32 FUN_00295618(void);
-extern void FUN_0029a128(s32 a);
+extern void gameGlobalsSetSelected(s32 a);
 extern void FUN_00292c0c(void);
 extern void FUN_002305e8(s32 a);
 extern void FUN_0029ca58(void);
-extern void FUN_00230558(s32 a);
+extern void messageWindowStartTimer(s32 a);
 extern void asdMdlManagerDestroy(void *manager);
 
 /* Steps the scene's loading state machine: start -> running, stop -> idle, finish -> stop. */
@@ -53,7 +53,7 @@ void FUN_003a1504(Scene3a *scene)
     case SCENE3A_STATE_STOP:
         if (FUN_00295618() != 0) {
             *state = SCENE3A_STATE_IDLE;
-            FUN_0029a128(0);
+            gameGlobalsSetSelected(0);
             FUN_00292c0c();
             FUN_002305e8(1);
         }
@@ -66,7 +66,7 @@ void FUN_003a1504(Scene3a *scene)
             }
             FUN_0029ca58();
             *state = SCENE3A_STATE_STOP;
-            FUN_00230558(0);
+            messageWindowStartTimer(0);
             if (scene->modelManager != NULL) {
                 asdMdlManagerDestroy(scene->modelManager);
                 scene->modelManager = NULL;

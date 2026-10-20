@@ -6,7 +6,7 @@ extern "C" {
 
 int asdTMTexTableLoadSprites(int);
 int FUN_0014e188(int, int, int, int, int);
-int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
+int paramsInit(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int asdMemoryAllocTracked(int, int, int, int, int);
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(...);
@@ -35,7 +35,7 @@ extern int g_playLog; /* 0x57f278 */
 
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -70,7 +70,7 @@ void FUN_00215254(void)
   FUN_001acf98(0x25,0);
   loadSlotEnsureLoaded(0x37);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(temp_v0);
-  FUN_001505ac(temp_v0,&DAT_0052dd98,0x48,&DAT_0052dde0,0x18,0,0,0,0,&DAT_0052ddf8,0xe0);
+  paramsInit(temp_v0,&DAT_0052dd98,0x48,&DAT_0052dde0,0x18,0,0,0,0,&DAT_0052ddf8,0xe0);
   temp_v1 = 0;
   do {
     temp_v2 = temp_v0 + temp_v1 * 0x8c;

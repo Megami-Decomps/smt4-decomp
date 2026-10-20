@@ -7,12 +7,12 @@ extern "C" {
 int dataTable00FindById(void);
 int scrGetArg(int);
 int scrSetResult(void);
-int FUN_003e00f8(int);
+int gameGetPlayerStat(int);
 
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_003e00f8. */
+/* Supplied declaration required: gameGetPlayerStat. */
 
 
 unsigned int FUN_003bcd44(void)
@@ -23,7 +23,7 @@ unsigned int FUN_003bcd44(void)
   unsigned short temp_v1;
   
   temp_v0 = scrGetArg(0);
-  FUN_003e00f8(temp_v0);
+  gameGetPlayerStat(temp_v0);
   temp_v1 = scrGetArg(1);
   dataTable00FindById();
   if (temp_v1 != 0) {

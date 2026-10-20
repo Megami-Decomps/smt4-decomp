@@ -1,21 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b89a4` (_code @ 0x2b89a4, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int DAT_004d975c; /* 0x4d975c */
-extern unsigned char DAT_004d9768; /* 0x4d9768 */
+typedef struct SlotState {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 count;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ u8 state;
+    /* 0x11 */ u8 unk11[3];
+} SlotState;                         /* 0x14 */
 
+extern SlotState DAT_004d9758[];
 
-unsigned int FUN_002b89a4(int param_1)
-
+/* Returns 1 if slot `index` is idle (state 0) or in state 3 with a positive count, else 0. */
+u32 FUN_002b89a4(s32 index)
 {
-  if (((&DAT_004d9768)[param_1 * 0x14] != '\0') &&
-     (((&DAT_004d9768)[param_1 * 0x14] != '\x03' || ((int)(&DAT_004d975c)[param_1 * 5] < 1)))) {
-    return 0;
-  }
-  return 1;
+    SlotState *slot = &DAT_004d9758[index];
+
+    if (slot->state != 0 && (slot->state != 3 || slot->count < 1)) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

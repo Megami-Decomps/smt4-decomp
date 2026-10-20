@@ -1,55 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028dbe0` (_code @ 0x28dbe0, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0028dbe0_arg0 fn_0028dbe0_arg0;
-struct fn_0028dbe0_arg0 {
-    unsigned char pad_0x0[0x1c];
-    int field_0x1c; /* +0x1c */
-    unsigned char pad_0x20[0x3];
-    byte field_0x23; /* +0x23 */
-    unsigned char pad_0x24[0x10];
-    void *field_0x34; /* +0x34 */
-};
+typedef struct Selector {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ s32 index;
+    /* 0x20 */ u8 unk20[3];
+    /* 0x23 */ u8 disabled;
+    /* 0x24 */ u8 unk24[0x10];
+    /* 0x34 */ s32 source;
+} Selector;
 
-extern int gameGetUnitRecord(void);
-extern unsigned int FUN_002b05d0(int);
-extern int gameGetPlayerData(void);
+typedef struct UnitRecord {
+    /* 0x00 */ u8 unk00[0x44];
+    /* 0x44 */ u16 mask;
+} UnitRecord;
 
+typedef struct PlayerData {
+    /* 0x00 */ u8 unk00[0x72];
+    /* 0x72 */ u16 mask;
+} PlayerData;
 
-unsigned int FUN_0028dbe0(fn_0028dbe0_arg0 *param_1)
+extern UnitRecord *gameGetUnitRecord(void);
+extern PlayerData *gameGetPlayerData(void);
+extern u32 categoryGetColor(s16 value);
 
+/* Returns categoryGetColor for the selector's index-th set bit (1..10) of the player's or unit's mask; -1 when it is disabled or there is none. */
+s32 FUN_0028dbe0(Selector *selector)
 {
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  if (param_1->field_0x23 == 0) {
-    if ((int)param_1->field_0x34 < 0) {
-      temp_v1 = gameGetPlayerData();
-      temp_v0 = *(unsigned short *)(temp_v1 + 0x72);
-    }
-    else {
-      temp_v1 = gameGetUnitRecord();
-      temp_v0 = *(unsigned short *)(temp_v1 + 0x44);
-    }
-    temp_v2 = 1;
-    temp_v1 = 0;
-    do {
-      if (((unsigned int)temp_v0 & (1 << (temp_v2 & 0xff))) != 0) {
-        if (param_1->field_0x1c == temp_v1) {
-          temp_v3 = FUN_002b05d0((int)(short)temp_v2);
-          return temp_v3;
+    s32 result = -1;
+
+    if (selector->disabled == 0) {
+        u16 mask;
+        s32 bit;
+        s32 count;
+
+        if (selector->source < 0) {
+            mask = gameGetPlayerData()->mask;
+        } else {
+            mask = gameGetUnitRecord()->mask;
         }
-        temp_v1 = temp_v1 + 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while ((int)temp_v2 < 0xb);
-  }
-  return 0xffffffff;
+        count = 0;
+        for (bit = 1; bit < 11; bit++) {
+            if ((mask & (1 << bit)) != 0) {
+                if (selector->index == count) {
+                    result = categoryGetColor(bit);
+                    break;
+                }
+                count++;
+            }
+        }
+    }
+    return result;
 }
 
 } /* extern "C" */

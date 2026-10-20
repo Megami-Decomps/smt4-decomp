@@ -5,7 +5,7 @@
 extern "C" {
 
 int renderCtxResetColorScale(int);
-int FUN_0016c560(int);
+int skinObjectUpdateMatrices(int);
 int FUN_00230038(int *);
 int FUN_003fac30(int, int, int *, int, int, int);
 int FUN_003fba4c(int, int, int, int *, int, int);
@@ -24,7 +24,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int *jobGetWork(void);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00230038. */
 extern int FUN_00387580(unsigned int);
 /* Supplied declaration required: FUN_003fac30. */
@@ -125,7 +125,7 @@ unsigned int FUN_00289f10(void)
       (**(romwright_code **)(temp_v1 + 0x1274))();
       *(unsigned char *)(temp_v1 + 0x1270) = 0;
     }
-    FUN_0016c560(g_renderCtx);
+    skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
   }
   return 0;

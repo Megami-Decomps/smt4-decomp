@@ -1,45 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026c820` (_code @ 0x26c820, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int playSceneTimerSubStart(int);
-int playSceneFadeInStart(int);
-int FUN_0028be84(void);
+typedef struct BtlUiPanel {
+    /* 0x0000 */ u8 unk0000[8];
+    /* 0x0008 */ u8 scene[0x21F8];
+    /* 0x2200 */ u8 timer[1];
+} BtlUiPanel;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+typedef struct BtlUiView {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ BtlUiPanel *panel;
+} BtlUiView;
 
-extern unsigned char g_btlUi; /* 0x439c88 */
+extern BtlUiView g_btlUi;
 
-/* Supplied declaration required: playSceneTimerSubStart. */
-/* Supplied declaration required: playSceneFadeInStart. */
-/* Supplied declaration required: FUN_0028be84. */
-extern int playSceneIsFadeOutDone(int);
+s32 playSceneIsFadeOutDone(void *scene);
+s32 FUN_0028be84(void *timer);
+int playSceneFadeInStart(void *scene);
+int playSceneTimerSubStart(void *timer);
 
-
+/* Once the panel's scene has faded out and FUN_0028be84 accepts its timer, fades the scene back in and starts the timer. */
 void FUN_0026c820(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x20));
-  temp_v1 = playSceneIsFadeOutDone((*(int *)((unsigned char *)&g_btlUi + 0x20)) + 8);
-  if (temp_v1 != 0) {
-    temp_v1 = temp_v0 + 0x2200;
-    FUN_0028be84();
-    if (temp_v1 != 0) {
-      playSceneFadeInStart(temp_v0 + 8);
-      playSceneTimerSubStart(temp_v0 + 0x2200);
-      return;
+    BtlUiPanel *panel = g_btlUi.panel;
+
+    if (playSceneIsFadeOutDone(panel->scene) != 0 && FUN_0028be84(panel->timer) != 0) {
+        playSceneFadeInStart(panel->scene);
+        playSceneTimerSubStart(panel->timer);
     }
-  }
-  return;
 }
 
 } /* extern "C" */

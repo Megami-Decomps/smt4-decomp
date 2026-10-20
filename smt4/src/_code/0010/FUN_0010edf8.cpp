@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001175d4(int);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_002bc02c(void);
 int FUN_002c15fc(int);
 int FUN_002c1658(...);
@@ -16,7 +16,7 @@ extern signed char DAT_00493828; /* 0x493828 */
 extern unsigned char DAT_00493829; /* 0x493829 */
 
 /* Supplied declaration required: FUN_001175d4. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_002bc02c. */
 extern int FUN_002bc088(void);
 extern unsigned int FUN_002bfdd4(void);
@@ -74,7 +74,7 @@ unsigned int FUN_0010edf8(int param_1)
           }
           if (DAT_00493828 != '\0') {
             DAT_00493828 = 0;
-            FUN_002bc01c(0x100016e);
+            eventQueueAddUniqueIfValid(0x100016e);
             return 0;
           }
           DAT_00493828 = 1;
@@ -91,7 +91,7 @@ unsigned int FUN_0010edf8(int param_1)
           }
           DAT_00493828 = 0;
         }
-        FUN_002bc01c(temp_v3);
+        eventQueueAddUniqueIfValid(temp_v3);
         return 0;
       }
     }
@@ -107,7 +107,7 @@ LAB_0010ee84:
     FUN_002bc02c();
   }
   if (DAT_00493829 == 0) {
-    FUN_002bc01c(0x100016c);
+    eventQueueAddUniqueIfValid(0x100016c);
   }
   return 1;
 }

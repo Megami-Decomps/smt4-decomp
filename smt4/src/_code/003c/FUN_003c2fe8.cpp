@@ -20,7 +20,7 @@ extern short DAT_0043438a; /* 0x43438a */
 extern unsigned int DAT_00435dc0; /* 0x435dc0 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_002201f4(unsigned int);
+extern int entryTableCallSlot3(unsigned int);
 extern unsigned int FUN_0023eb18(int);
 /* Supplied declaration required: FUN_00256224. */
 extern unsigned int FUN_0025c05c(int);
@@ -96,7 +96,7 @@ void FUN_003c2fe8(unsigned int param_1,int param_2)
       FUN_003bbfdc(temp_v4,temp_v1);
     }
     temp_v3 = 0;
-    temp_v0 = FUN_002201f4(3);
+    temp_v0 = entryTableCallSlot3(3);
     temp_v2 = 0;
     do {
       if (temp_v4[temp_v2] != 0) {

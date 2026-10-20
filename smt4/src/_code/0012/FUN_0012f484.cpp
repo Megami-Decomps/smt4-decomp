@@ -1,4 +1,4 @@
-/* NON_MATCHING: the bucket table is a function-local static with a LinkList constructor and init guard in the original (retail runs the guard and the vector constructor FUN_002c5d5c, and names the table DAT_004ead80); here it is plain zeroed storage */
+/* NON_MATCHING: the bucket table is a function-local static with a LinkList constructor and init guard in the original (retail runs the guard and the vector constructor __aeabi_vec_ctor_nocookie_nodtor, and names the table DAT_004ead80); here it is plain zeroed storage */
 #include "shard/S1NwSnd.h"
 
 extern "C" {

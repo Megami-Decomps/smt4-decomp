@@ -1,43 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030b104` (_code @ 0x30b104, 0x84 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "shard/W4_Match6_BtlEntry.h"
 
 extern "C" {
 
-int scrSetResult(int);
+extern BtlMainState *btlGetMainState(void);
+extern u32 scrGetArg(u32 index);
+extern int scrSetResult(s32 value);
+extern int FUN_0024579c(BtlEntry *entry, u32 arg);
 
-extern int FUN_0024579c(unsigned int *, unsigned int);
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
-
-
-unsigned int FUN_0030b104(void)
-
+/* Script command: 1 if FUN_0024579c accepts `arg` for some present, active, unblocked entry, else 0. */
+u32 FUN_0030b104(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v3 = 0;
-  while( 1 ) {
-    temp_v1 = btlGetMainState();
-    puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + temp_v3 * 0x288);
-    temp_v2 = *puVar3;
-    if ((((temp_v2 & 0x10) != 0 && (temp_v2 & 1) != 0) && ((temp_v2 & 0x40) == 0)) &&
-       (temp_v1 = FUN_0024579c(puVar3,temp_v0), temp_v1 != 0)) break;
-    temp_v3 = temp_v3 + 1;
-    if (temp_v3 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
+    u32 arg = scrGetArg(0);
+    s32 i;
+
+    for (i = 0; i < BTL_ENTRY_COUNT; i++) {
+        BtlEntry *entry = &btlGetMainState()->entries[i];
+
+        if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) != 0 && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&
+            (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && FUN_0024579c(entry, arg) != 0) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-  }
-  scrSetResult(1);
-  return 1;
+    scrSetResult(0);
+    return 1;
 }
 
-} /* extern "C" */
+}

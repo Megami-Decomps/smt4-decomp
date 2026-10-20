@@ -8,7 +8,7 @@ int FUN_00145084(int);
 int FUN_001640cc(int *);
 int renderCtxResetColorScale(unsigned int);
 int FUN_0016c4b8(unsigned int, unsigned int);
-int FUN_0016c560(unsigned int);
+int skinObjectUpdateMatrices(unsigned int);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(int, int);
 
@@ -32,7 +32,7 @@ extern unsigned int FUN_00153f64(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001640cc. */
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 
 
 unsigned int FUN_0013a9c8(void)
@@ -68,7 +68,7 @@ unsigned int FUN_0013a9c8(void)
       temp_v0 = FUN_00153f64(0x21,0);
       FUN_0016c4b8(g_renderCtx,temp_v0);
       FUN_001640cc(&temp_v2);
-      FUN_0016c560(g_renderCtx);
+      skinObjectUpdateMatrices(g_renderCtx);
       renderCtxResetColorScale(g_renderCtx);
     }
     temp_v1 = FUN_00144eec();

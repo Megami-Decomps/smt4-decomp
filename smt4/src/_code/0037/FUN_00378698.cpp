@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b4ee4(int, int);
-int FUN_002c5d5c(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int FUN_003795b0(int, int);
 int FUN_0037ab08(int, int);
 int FUN_0037ac9c(int, int);
@@ -63,7 +63,7 @@ extern unsigned char LAB_0014c240; /* 0x14c240 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0014d3cc(unsigned int, int, unsigned int *);
 /* Supplied declaration required: FUN_002b4ee4. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_003795b0. */
 /* Supplied declaration required: FUN_0037ab08. */
 extern int FUN_0037ab50(int, int *, unsigned int *);
@@ -151,8 +151,8 @@ FUN_00378698(int param_1,int param_2,unsigned int *param_3,unsigned int *param_4
   temp_v1 = *(int *)(temp_v33 + 4);
   temp_v29 = 0xffffffff;
   iStack_44 = 0;
-  FUN_002c5d5c(temp_v8,&LAB_0014c240,8,4);
-  FUN_002c5d5c(temp_v10,&LAB_0014c240,8,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v8,&LAB_0014c240,8,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v10,&LAB_0014c240,8,4);
   temp_v29 = *(unsigned int *)(temp_v33 + 0x9c);
   if ((temp_v0 == 0) && (temp_v7 = temp_v1 != 0, !temp_v7)) {
     return 5;

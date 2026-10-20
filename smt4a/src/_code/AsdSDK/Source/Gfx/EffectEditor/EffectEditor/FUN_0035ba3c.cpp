@@ -10,7 +10,7 @@ int FUN_00200bcc(int);
 int FUN_00202178(int);
 int effEditorNodeChainApply(int);
 int FUN_002e59f8(...);
-int FUN_00300124(void);
+int effMenuListAppend(void);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -28,7 +28,7 @@ extern unsigned char DAT_0059dc7c; /* 0x59dc7c */
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: FUN_002e59f8. */
-/* Supplied declaration required: FUN_00300124. */
+/* Supplied declaration required: effMenuListAppend. */
 
 
 unsigned char * FUN_0035ba3c(unsigned long long *param_1,unsigned int param_2,int param_3)
@@ -57,7 +57,7 @@ unsigned char * FUN_0035ba3c(unsigned long long *param_1,unsigned int param_2,in
   *(int *)(temp_v0 + 0x14) = (int)((unsigned long long)temp_v3 >> 0x20);
   *(unsigned int *)(temp_v0 + 4) = 0xc;
   *(unsigned int *)(temp_v0 + 0x18) = param_2;
-  FUN_00300124();
+  effMenuListAppend();
   temp_v0 = padButtonIsPressed(1);
   if (temp_v0 == 0) {
     FUN_00202178(1);

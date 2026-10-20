@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001505ac(unsigned int *, int, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
+int paramsInit(unsigned int *, int, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int FUN_0019ea64(int);
 int FUN_001ad9b4(void);
 int qcMainSetMode(int);
@@ -33,9 +33,9 @@ extern unsigned char LAB_00467ff8; /* 0x467ff8 */
 extern unsigned char DAT_00533458; /* 0x533458 */
 extern unsigned char DAT_00533470; /* 0x533470 */
 
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: FUN_0019ea64. */
-extern int FUN_0019f1a4(unsigned int, unsigned int);
+extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: qcMainSetMode. */
 /* Supplied declaration required: FUN_002804b0. */
@@ -77,7 +77,7 @@ void FUN_00467e64(unsigned int *param_1)
   FUN_002804b0(&LAB_00467fd4,param_1 + 0xa1,0);
   FUN_002804b0(&LAB_00467ff8,param_1 + 0xa2,0);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 7);
-  FUN_001505ac(param_1 + 7,0,0,&DAT_00533458,0x18,0,0,0,0,&DAT_00533470,0xa8);
+  paramsInit(param_1 + 7,0,0,&DAT_00533458,0x18,0,0,0,0,&DAT_00533470,0xa8);
   dataTable27Load((int)param_1 + 0x19);
   dataTable28Load((int)param_1 + 0x19);
   param_1[0x2b5] = 0;
@@ -93,7 +93,7 @@ void FUN_00467e64(unsigned int *param_1)
     temp_v0 = temp_v2;
     FUN_001ad9b4();
     if (((temp_v0 != 0) && (*(char *)(temp_v0 + 6) == '\0')) &&
-       (temp_v1 = FUN_0019f1a4(temp_v2,1), temp_v1 == 0)) {
+       (temp_v1 = gameFlagEntryGetBit(temp_v2,1), temp_v1 == 0)) {
       FUN_00417e08(temp_v2);
     }
     temp_v2 = temp_v2 + 1;

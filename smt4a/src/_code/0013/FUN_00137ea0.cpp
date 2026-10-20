@@ -1,30 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00137ea0` (_code @ 0x137ea0, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00140e00(void);
+typedef struct GameDataFlagsView {
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ u8 noFlags;  /* 1 when `flags` is zero */
+    /* 0x02 */ u8 unk02[0x16];
+    /* 0x18 */ u32 flags;
+} GameDataFlagsView;
 
-extern unsigned char DAT_0057f699; /* 0x57f699 */
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+extern GameDataFlagsView g_gameDataBlocks;
 
-/* Supplied declaration required: FUN_00140e00. */
+s32 FUN_00140e00(void);
 
-
-void FUN_00137ea0(unsigned int param_1)
-
+/* Clears the given bits of the flag word and updates the "no flags set" byte. */
+void FUN_00137ea0(u32 mask)
 {
-/* irregular: 1 native warning(s); review required */
-  (*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0x18)) = (*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0x18)) & ~param_1;
-  if ((*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0x18)) != 0) {
-    DAT_0057f699 = 0;
+    g_gameDataBlocks.flags &= ~mask;
+    if (g_gameDataBlocks.flags != 0) {
+        g_gameDataBlocks.noFlags = 0;
+        FUN_00140e00();
+        return;
+    }
+    g_gameDataBlocks.noFlags = 1;
     FUN_00140e00();
-    return;
-  }
-  DAT_0057f699 = 1;
-  FUN_00140e00();
-  return;
 }
 
 } /* extern "C" */

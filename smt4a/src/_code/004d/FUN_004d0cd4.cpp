@@ -1,42 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d0cd4` (_code @ 0x4d0cd4, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: loop shape only: retail counts the ordered slots with a plain signed index and a separate counter (`add r0; cmp r0, #24; add r1; blt`); built needs a u16 index (extra uxth, bcc) to keep the two counters apart. */
+#include "common.h"
 
 extern "C" {
 
-extern int gameGetSlotTable(void);
-extern int FUN_004bd730(int);
+typedef struct SlotEntry {
+    /* 0x000 */ u8 data[300];
+} SlotEntry;
 
+typedef struct SlotTable {
+    /* 0x0000 */ u8 unk0000[0x68];
+    /* 0x0068 */ SlotEntry entries[22];
+    /* 0x1A30 */ u8 unk1a30[0x258];
+    /* 0x1C88 */ s8 order[0x1B];
+    /* 0x1CA3 */ u8 count;
+} SlotTable;
 
-int FUN_004d0cd4(void)
+SlotTable *gameGetSlotTable(void);
+s32 FUN_004bd730(SlotEntry *entry);
 
+/* Returns the index of the first free slot entry when the ordered slots are not all in use, else -1. */
+s32 FUN_004d0cd4(void)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = gameGetSlotTable();
-  temp_v1 = gameGetSlotTable();
-  temp_v3 = 0;
-  temp_v2 = 0;
-  do {
-    if (*(char *)(temp_v1 + temp_v2 + 0x1c88) < '\0') break;
-    temp_v2 = temp_v2 + 1;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v2 < 0x18);
-  if (temp_v3 < (int)(unsigned int)*(unsigned char *)(temp_v0 + 0x1ca3)) {
-    temp_v0 = gameGetSlotTable();
-    temp_v1 = 0;
+    SlotTable *table = gameGetSlotTable();
+    SlotTable *orderTable = gameGetSlotTable();
+    s32 used = 0;
+    u16 i = 0;
+    s32 index;
+
     do {
-      temp_v2 = FUN_004bd730(temp_v0 + temp_v1 * 300 + 0x68);
-      if (temp_v2 == 0) {
-        return temp_v1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0x18);
-  }
-  return -1;
+        if (orderTable->order[i] < 0) {
+            break;
+        }
+        i++;
+        used++;
+    } while (i < 0x18);
+    if (table->count > used) {
+        SlotTable *entries = gameGetSlotTable();
+
+        index = 0;
+        do {
+            if (FUN_004bd730(&entries->entries[index]) == 0) {
+                return index;
+            }
+            index++;
+        } while (index < 0x18);
+    }
+    return -1;
 }
 
 } /* extern "C" */

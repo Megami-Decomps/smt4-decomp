@@ -1,68 +1,76 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a0b78` (_code @ 0x3a0b78, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the cursor's confirmed flag with `ldrsb` through a register copy of the cursor pointer (mov r0, r5; ldrsb r0, [r0, #138]); the build emits `ldrb r0, [r5, #138]`. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00231240(int, unsigned int, unsigned int);
-int FUN_00233240(int, int);
-int FUN_002b8ee0(int, int);
+typedef struct PopupCursor {
+    /* 0x00 */ u8 unk00[0x8A];
+    /* 0x8A */ s8 confirmed;
+} PopupCursor;
 
-/* Supplied declaration required: FUN_00231240. */
-/* Supplied declaration required: FUN_00233240. */
+typedef struct PopupTask {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ s32 state;
+    /* 0x008 */ s32 step;
+    /* 0x00C */ u8 unk00C[0x374];
+    /* 0x380 */ u8 panel[0x28];
+    /* 0x3A8 */ u8 intro[0x20];
+    /* 0x3C8 */ PopupCursor cursor;
+    /* 0x453 */ u8 unk453[0x860 - 0x3C8 - 0x8B];
+    /* 0x860 */ u32 choice;
+} PopupTask;
+
+extern int FUN_00231240(void *panel, u32 x, u32 y);
+extern int FUN_00233240(void *intro, int arg);
+extern int FUN_002b8ee0(PopupCursor *cursor, int arg);
 extern int FUN_0029e0f8(void);
-/* Supplied declaration required: FUN_002b8ee0. */
-extern unsigned int vec2GetYInt(int);
-extern unsigned int vec2GetXInt(int);
+extern u32 vec2GetYInt(PopupCursor *cursor);
+extern u32 vec2GetXInt(PopupCursor *cursor);
 
-
-void FUN_003a0b78(int param_1)
-
+/* Per-frame update: step 0 starts the intro, step 1 follows the cursor and, once confirmed, picks the next state from the choice. */
+void FUN_003a0b78(PopupTask *task)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  if (*(int *)(param_1 + 8) == 0) {
-    FUN_00233240(param_1 + 0x3a8,0);
-    *(unsigned int *)(param_1 + 8) = 1;
-    return;
-  }
-  if (*(int *)(param_1 + 8) == 1) {
-    temp_v2 = param_1 + 0x3c8;
-    FUN_002b8ee0(temp_v2,0);
-    temp_v0 = vec2GetYInt(temp_v2);
-    temp_v1 = vec2GetXInt(temp_v2);
-    FUN_00231240(param_1 + 0x380,temp_v1,temp_v0);
-    if (*(char *)(param_1 + 0x452) != '\0') {
-      switch(*(unsigned int *)(param_1 + 0x860)) {
-      case 0:
-      case 1:
-      case 2:
-      case 3:
-      case 4:
-      case 5:
-      case 6:
-        temp_v2 = FUN_0029e0f8();
-        if (temp_v2 != 0) {
-          *(unsigned int *)(param_1 + 4) = 0xf;
-          *(unsigned int *)(param_1 + 8) = 0;
-          return;
-        }
-        break;
-      case 7:
-        *(unsigned int *)(param_1 + 4) = 0xf;
-        *(unsigned int *)(param_1 + 8) = 0;
+    PopupCursor *cursor;
+    u32 y;
+    u32 x;
+
+    if (task->step == 0) {
+        FUN_00233240(task->intro, 0);
+        task->step = 1;
         return;
-      case 8:
-        *(unsigned int *)(param_1 + 4) = 0x10;
-        *(unsigned int *)(param_1 + 8) = 0;
-        return;
-      }
     }
-  }
-  return;
+    if (task->step == 1) {
+        cursor = &task->cursor;
+        FUN_002b8ee0(cursor, 0);
+        y = vec2GetYInt(cursor);
+        x = vec2GetXInt(cursor);
+        FUN_00231240(task->panel, x, y);
+        if (cursor->confirmed != 0) {
+            switch (task->choice) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+                if (FUN_0029e0f8() != 0) {
+                    task->state = 0xF;
+                    task->step = 0;
+                    return;
+                }
+                break;
+            case 7:
+                task->state = 0xF;
+                task->step = 0;
+                return;
+            case 8:
+                task->state = 0x10;
+                task->step = 0;
+                return;
+            }
+        }
+    }
 }
 
 } /* extern "C" */

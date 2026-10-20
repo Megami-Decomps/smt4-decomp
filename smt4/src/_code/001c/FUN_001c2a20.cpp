@@ -1,39 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c2a20` (_code @ 0x1c2a20, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the constant 7 for the last call's fourth argument in r4 from the start (mov r4, #7 before the first test); built passes it with mov r3, #7 */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002866b4(unsigned int, unsigned int, unsigned int, int, int, int);
+typedef struct MessageWindow {
+    /* 0x000 */ u8 unk000[0xA11];
+    /* 0xA11 */ u8 mode;
+} MessageWindow;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+typedef struct MessageOwner {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ MessageWindow *window;
+} MessageOwner;
 
-extern unsigned int FUN_002865f8(void);
-/* Supplied declaration required: FUN_002866b4. */
-extern unsigned int scrGetCommandFrame(void);
-extern unsigned int scrGetArg(unsigned int);
+extern u32 scrGetArg(s32 index);
+extern u32 FUN_002865f8(void);
+extern u32 scrGetCommandFrame(void);
+extern void FUN_002866b4(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
 
-
-void FUN_001c2a20(int param_1)
-
+void FUN_001c2a20(MessageOwner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  if (*(int *)(param_1 + 4) != 0) {
-    *(unsigned char *)(*(int *)(param_1 + 4) + 0xa11) = 0x14;
-  }
-  temp_v0 = FUN_002865f8();
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetCommandFrame();
-  FUN_002866b4(temp_v0,temp_v1,temp_v2,7,0,0);
-  return;
+    u32 first;
+    u32 second;
+    u32 third;
+
+    if (owner->window != NULL) {
+        owner->window->mode = 0x14;
+    }
+    first = FUN_002865f8();
+    second = scrGetArg(0);
+    third = scrGetCommandFrame();
+    FUN_002866b4(first, second, third, 7, 0, 0);
 }
 
 } /* extern "C" */

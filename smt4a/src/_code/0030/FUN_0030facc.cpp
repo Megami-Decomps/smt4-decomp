@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_002e6e34(int *, unsigned char *);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int sharedRefRelease(int);
 
 extern unsigned char g_flagBlock; /* 0x594958 */
 extern unsigned char DAT_0062e558; /* 0x62e558 */
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 
 
@@ -35,7 +35,7 @@ void FUN_0030facc(int param_1,int param_2,unsigned int param_3,unsigned int para
     }
     FUN_002e6e34(&iStack_18,puVar1);
     sharedRefRelease(param_2);
-    FUN_002e6e5c(&iStack_18);
+    _ZN9Obj55b28cD1Ev(&iStack_18);
     return;
   }
   sharedRefRelease(param_2);

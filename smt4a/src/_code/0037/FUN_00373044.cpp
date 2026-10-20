@@ -1,29 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00373044` (_code @ 0x373044, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+typedef struct UnitStats {
+    /* 0x000 */ u8 unk000[0x152];
+    /* 0x152 */ u16 skills[1];      /* bits 10 and up: the skill's state */
+} UnitStats;
 
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
+typedef struct Unit {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ UnitStats *stats;
+} Unit;
 
-extern int scrGetArg(void);
-/* Supplied declaration required: scrSetResult. */
-extern int btlUnitGet(unsigned int);
+extern u32 g_btlScriptUnit;
 
+s32 scrGetArg(void);
+Unit *btlUnitGet(u32 unit);
+int scrSetResult(bool value);
 
-unsigned int FUN_00373044(void)
-
+/* Script command: result is whether the state (bits 10+) of the unit's entry for the argument is 2. */
+u32 FUN_00373044(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
-  scrSetResult(*(unsigned short *)(*(int *)(temp_v1 + 0x28) + temp_v0 * 2 + 0x152) >> 10 == 2);
-  return 1;
+    s32 index = scrGetArg();
+    UnitStats *stats = btlUnitGet(g_btlScriptUnit)->stats;
+
+    scrSetResult(stats->skills[index] >> 10 == 2);
+    return 1;
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 int asdTMTexTableLoadTmx(int, int);
 int FUN_0014e188(...);
 int FUN_0014e220(...);
-int FUN_001505ac(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
+int paramsInit(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
 int FUN_001a90e0(unsigned char *);
@@ -38,7 +38,7 @@ extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_0014e220. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -96,7 +96,7 @@ void FUN_00485e74(unsigned char *param_1)
   *(unsigned int *)(param_1 + 0x4c4) = 0;
   *(unsigned int *)(param_1 + 0x4c8) = 0;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0xc20);
-  FUN_001505ac(param_1 + 0xc20,&DAT_00532378,0x60,&DAT_005323d8,0x54,0,0,0,0,&DAT_0053242c,0x8c);
+  paramsInit(param_1 + 0xc20,&DAT_00532378,0x60,&DAT_005323d8,0x54,0,0,0,0,&DAT_0053242c,0x8c);
   temp_v2 = 0;
   do {
     FUN_0014e188(param_1 + temp_v2 * 0x8c + 0xc40,0x13,0xfa1,param_1 + 0xc20,0x15);

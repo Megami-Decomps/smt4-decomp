@@ -13,7 +13,7 @@ typedef struct {
 
 extern int FUN_001008c8(char **, char, unsigned int);
 /* Supplied declaration required: FUN_00100bfe. */
-extern unsigned int FUN_002c66f2(unsigned int, unsigned int);
+extern unsigned int libcLocaleGetCategory(unsigned int, unsigned int);
 
 
 unsigned int libc_mbstowcs(unsigned short *param_1,char *param_2,unsigned int param_3)
@@ -47,7 +47,7 @@ unsigned int libc_mbstowcs(unsigned short *param_1,char *param_2,unsigned int pa
   }
   pcStack_20 = param_2;
   uStack_1c = param_3;
-  uStack_1c = FUN_002c66f2(0,2);
+  uStack_1c = libcLocaleGetCategory(0,2);
   temp_v1 = 0;
   do {
     do {

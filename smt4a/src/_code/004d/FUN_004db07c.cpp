@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_0032fea0(unsigned int *, int, int);
-int FUN_0035dd74(void);
+int contentEntryFindById(void);
 
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 extern int gameSlotTableFindFree(void);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_0032fea0. */
-/* Supplied declaration required: FUN_0035dd74. */
+/* Supplied declaration required: contentEntryFindById. */
 extern int bitsAt60Test(int, unsigned int);
 
 
@@ -31,7 +31,7 @@ void FUN_004db07c(unsigned int param_1,int param_2,unsigned int *param_3)
   
   temp_v6 = 0;
   temp_v0 = gameGetSlotTable();
-  FUN_0035dd74();
+  contentEntryFindById();
   if (param_2 != 0) {
     *param_3 = 0;
     param_3[1] = 0;

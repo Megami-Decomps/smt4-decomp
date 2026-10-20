@@ -41,7 +41,7 @@ extern int FUN_00239278(void);
 extern int FUN_00330ad4(unsigned char, unsigned int);
 /* Supplied declaration required: FUN_0035bc4c. */
 extern int FUN_00389c88(unsigned char, int);
-extern int FUN_00389cb4(void);
+extern int keyedRecordGetKey(void);
 extern int FUN_0039aee8(unsigned char);
 /* Supplied declaration required: FUN_003b6704. */
 extern unsigned long long *FUN_003c0d64(unsigned char, int);
@@ -74,7 +74,7 @@ void FUN_002c17dc(unsigned int *param_1)
   if ((int)param_1[1] <= (int)param_1[2]) {
     temp_v0 = FUN_00239278();
     if (-1 < (int)((temp_v0 - (unsigned int)*(unsigned char *)(param_1 + 0xc)) - 1)) {
-      temp_v0 = FUN_00389cb4();
+      temp_v0 = keyedRecordGetKey();
       temp_v1 = FUN_0039aee8(*(unsigned char *)(param_1 + 0xc));
       if (0 < temp_v1) {
         do {

@@ -1,48 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028d24c` (_code @ 0x28d24c, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the owner in r5 and the rank in r6 (swapped here). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ae164(void);
+typedef struct Slot {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ s16 active;
+    /* 0x4A */ u8 unk4A;
+    /* 0x4B */ u8 rank;
+} Slot;
 
-extern int FUN_0026efec(unsigned int);
-/* Supplied declaration required: FUN_002ae164. */
+typedef struct SlotOwner {
+    /* 0x0000 */ u8 unk0000[0x8C];
+    /* 0x008C */ u16 ids[0x14];
+    /* 0x00B4 */ s16 idCount;
+    /* 0x00B6 */ u8 unk00B6[0x2E7E];
+    /* 0x2F34 */ u32 rank;
+} SlotOwner;
 
+extern Slot *FUN_0026efec(int index);
+extern Slot *FUN_002ae164(u32 id);
 
-unsigned int FUN_0028d24c(int param_1)
-
+/* Finds the id in the owner's list whose slot has the owner's rank (or, with no valid rank, the number of active slots). */
+u32 FUN_0028d24c(SlotOwner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v1 = *(unsigned int *)(param_1 + 0x2f34);
-  if (temp_v1 - 1 >= 4) {
-    temp_v2 = 0;
-    temp_v1 = temp_v2;
-    do {
-      temp_v0 = FUN_0026efec(temp_v2);
-      temp_v2 = temp_v2 + 1;
-      if (*(short *)(temp_v0 + 0x48) != 0) {
-        temp_v1 = temp_v1 + 1;
-      }
-    } while ((int)temp_v2 < 0xc);
-  }
-  if ((0 < (int)temp_v1) && (temp_v0 = 0, 0 < *(short *)(param_1 + 0xb4))) {
-    do {
-      temp_v3 = (unsigned int)*(unsigned short *)(param_1 + temp_v0 * 2 + 0x8c);
-      temp_v2 = temp_v3;
-      FUN_002ae164();
-      if (*(unsigned char *)(temp_v2 + 0x4b) == temp_v1) {
-        return temp_v3;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(short *)(param_1 + 0xb4));
-  }
-  return 0;
+    int rank = owner->rank;
+    int i;
+
+    if ((u32)(rank - 1) > 3) {
+        rank = 0;
+        for (i = 0; i < 12; i++) {
+            if (FUN_0026efec(i)->active != 0) {
+                rank++;
+            }
+        }
+    }
+    if (rank >= 1) {
+        for (i = 0; i < owner->idCount; i++) {
+            u32 id = owner->ids[i];
+
+            if (FUN_002ae164(id)->rank == rank) {
+                return id;
+            }
+        }
+    }
+    return 0;
 }
 
 } /* extern "C" */

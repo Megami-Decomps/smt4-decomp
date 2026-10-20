@@ -1,26 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039ecc4` (_code @ 0x39ecc4, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00192608(void);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x70];
+    /* 0x70 */ u16 sortKey;
+} Record;
 
-/* Supplied declaration required: FUN_00192608. */
+extern Record *FUN_00192608(u16 id);
 
-
-int FUN_0039ecc4(unsigned short *param_1,unsigned short *param_2)
-
+/* Orders two ids by their record's sort key, descending. */
+int FUN_0039ecc4(u16 *a, u16 *b)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = (unsigned int)*param_1;
-  FUN_00192608();
-  temp_v1 = (unsigned int)*param_2;
-  FUN_00192608();
-  return (unsigned int)*(unsigned short *)(temp_v1 + 0x70) - (unsigned int)*(unsigned short *)(temp_v0 + 0x70);
+    Record *recordA = FUN_00192608(*a);
+    Record *recordB = FUN_00192608(*b);
+
+    return recordB->sortKey - recordA->sortKey;
 }
 
-} /* extern "C" */
+}

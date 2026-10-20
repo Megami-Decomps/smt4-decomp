@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00254a2c(unsigned int, int);
-int FUN_0025beb8(unsigned int, int);
+int animPlayerSetLoopPolicy(unsigned int, int);
+int nodeSetScale(unsigned int, int);
 int FUN_002a0428(int, int);
 int FUN_002d582c(unsigned int);
 
-/* Supplied declaration required: FUN_00254a2c. */
-/* Supplied declaration required: FUN_0025beb8. */
+/* Supplied declaration required: animPlayerSetLoopPolicy. */
+/* Supplied declaration required: nodeSetScale. */
 /* Supplied declaration required: FUN_002a0428. */
 extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: FUN_002d582c. */
@@ -28,8 +28,8 @@ unsigned int FUN_00339860(int param_1)
   if (temp_v0 != 0) {
     if (*(int *)(*(int *)(*(int *)(param_1 + 0x4398) + 8) + 0xc) < 0) {
       FUN_002a0428(*(int *)(param_1 + 0x4398),1);
-      FUN_0025beb8(*(unsigned int *)(*(int *)(param_1 + 0x4398) + 8),0);
-      FUN_00254a2c(*(unsigned int *)(*(int *)(param_1 + 0x4398) + 8),1);
+      nodeSetScale(*(unsigned int *)(*(int *)(param_1 + 0x4398) + 8),0);
+      animPlayerSetLoopPolicy(*(unsigned int *)(*(int *)(param_1 + 0x4398) + 8),1);
       FUN_002d582c(*(unsigned int *)(param_1 + 0x4398));
     }
     temp_v1 = 1;

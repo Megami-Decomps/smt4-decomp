@@ -1,73 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00404974` (_code @ 0x404974, 0x118 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the info-pointer address (obj + 0x664) is kept in r6 and the texture id in r5; retail has them swapped. */
+#include "common.h"
 
 extern "C" {
 
-int asdTMTexTableLoadTmx(unsigned int, int);
-int FUN_001acf98(unsigned int, unsigned int);
-int FUN_00203b40(int, unsigned int, int, int, int, int);
-int FUN_002e08b0(int, int);
-int FUN_00403a34(int, int);
-int FUN_0040a844(int, int);
-int FUN_0040a864(int, int);
+/* Record the object points at (+0x664): its id and the texture it uses. */
+typedef struct EntryInfo {
+    /* 0x0 */ u16 id;
+    /* 0x2 */ u16 unk2[2];
+    /* 0x6 */ u16 texId;
+    /* 0x8 */ u16 texSub;
+} EntryInfo;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
+typedef struct Entry {
+    /* 0x000 */ u8 unk000[0x1C];
+    /* 0x01C */ u32 texId;
+    /* 0x020 */ u32 texSub;
+    /* 0x024 */ u8 texLoaded;       /* the texture was loaded here and must be freed */
+    /* 0x025 */ u8 unk025[3];
+    /* 0x028 */ u8 sprite[0x64];
+    /* 0x08C */ s32 unk08c;
+    /* 0x090 */ u8 unk090[0x74];
+    /* 0x104 */ u8 hasTexture;
+    /* 0x105 */ u8 unk105[3];
+    /* 0x108 */ s32 unk108;
+    /* 0x10C */ u8 unk10c[0x558];
+    /* 0x664 */ EntryInfo *info;
+    /* 0x668 */ u8 unk668[0x1C];
+    /* 0x684 */ u32 resource;
+} Entry;
 
-/* Supplied declaration required: asdTMTexTableLoadTmx. */
-/* Supplied declaration required: FUN_001acf98. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_002e08b0. */
-extern int FUN_00341940(unsigned int);
-/* Supplied declaration required: FUN_00403a34. */
-extern int tableFlagBit2(unsigned short);
-extern int tableFlagBit1(unsigned short);
-/* Supplied declaration required: FUN_0040a844. */
-/* Supplied declaration required: FUN_0040a864. */
+s32 FUN_00341940(u32 texId);
+s32 asdTMTexTableLoadTmx(u32 texId, s32 arg);
+s32 FUN_001acf98(u32 texId, u32 texSub);
+s32 FUN_00403a34(Entry *entry, u32 id);
+s32 FUN_00203b40(void *sprite, u32 resource, s32 a, s32 b, s32 c, s32 d);
+s32 FUN_002e08b0(void *sprite, s32 arg);
+s32 tableFlagBit1(u16 id);
+s32 tableFlagBit2(u16 id);
+s32 FUN_0040a864(u16 id, s32 arg);
+s32 FUN_0040a844(u16 id, s32 arg);
 
-
-void FUN_00404974(int param_1)
-
+/* Resets the entry and sets it up from its info record: loads the texture if it isn't loaded yet,
+ * builds the sprite, and applies the table flags for the info's id. */
+void FUN_00404974(Entry *entry)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  *(unsigned int *)(param_1 + 0x8c) = 0;
-  *(unsigned char *)(param_1 + 0x104) = 0;
-  *(unsigned int *)(param_1 + 0x1c) = 0;
-  *(unsigned int *)(param_1 + 0x20) = 0;
-  temp_v1 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x664) + 6);
-  if (temp_v1 != 0) {
-    *(unsigned int *)(param_1 + 0x1c) = temp_v1;
-    temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x664) + 8);
-    *(unsigned int *)(param_1 + 0x20) = temp_v2;
-    *(unsigned char *)(param_1 + 0x104) = 1;
-    *(unsigned char *)(param_1 + 0x24) = 0;
-    temp_v0 = FUN_00341940(temp_v1);
-    if (temp_v0 == 0) {
-      asdTMTexTableLoadTmx(temp_v1,0);
-      *(unsigned char *)(param_1 + 0x24) = 1;
+    u32 texId;
+    u32 texSub;
+
+    entry->unk08c = 0;
+    entry->hasTexture = 0;
+    entry->texId = 0;
+    entry->texSub = 0;
+    texId = entry->info->texId;
+    if (texId != 0) {
+        entry->texId = texId;
+        texSub = entry->info->texSub;
+        entry->texSub = texSub;
+        entry->hasTexture = 1;
+        entry->texLoaded = 0;
+        if (FUN_00341940(texId) == 0) {
+            asdTMTexTableLoadTmx(texId, 0);
+            entry->texLoaded = 1;
+        }
+        FUN_001acf98(texId, texSub);
     }
-    FUN_001acf98(temp_v1,temp_v2);
-  }
-  FUN_00403a34(param_1,**(unsigned short **)(param_1 + 0x664));
-  FUN_00203b40(param_1 + 0x28,*(unsigned int *)(param_1 + 0x684),8,1,0,1);
-  FUN_002e08b0(param_1 + 0x28,0);
-  *(unsigned int *)(param_1 + 0x108) = 0;
-  *(unsigned int *)(param_1 + 0x8c) = 0;
-  temp_v0 = tableFlagBit1(**(unsigned short **)(param_1 + 0x664));
-  if ((temp_v0 == 0) && (temp_v0 = tableFlagBit2(**(unsigned short **)(param_1 + 0x664)), temp_v0 == 0)) {
-    return;
-  }
-  FUN_0040a864(**(unsigned short **)(param_1 + 0x664),0);
-  FUN_0040a844(**(unsigned short **)(param_1 + 0x664),0);
-  return;
+    FUN_00403a34(entry, entry->info->id);
+    FUN_00203b40(entry->sprite, entry->resource, 8, 1, 0, 1);
+    FUN_002e08b0(entry->sprite, 0);
+    entry->unk108 = 0;
+    entry->unk08c = 0;
+    if (tableFlagBit1(entry->info->id) != 0 || tableFlagBit2(entry->info->id) != 0) {
+        FUN_0040a864(entry->info->id, 0);
+        FUN_0040a844(entry->info->id, 0);
+    }
 }
 
-} /* extern "C" */
+}

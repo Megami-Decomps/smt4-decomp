@@ -20,7 +20,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0019e0c0(unsigned int);
-extern int FUN_002597e0(void);
+extern int gameDataBlocksGetFlagByteA(void);
 extern int FUN_00262f38(void);
 /* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
 /* Supplied declaration required: FUN_0028bf2c. */
@@ -71,7 +71,7 @@ unsigned int FUN_002110ac(int param_1)
   case 2:
     temp_v6[0] = 0xc000b;
     temp_v2 = *(int *)(param_1 + *(int *)(param_1 + 0xd50) * 4 + 0xd48);
-    if ((0 < temp_v2) && (temp_v0 = FUN_002597e0(), temp_v0 == 0)) {
+    if ((0 < temp_v2) && (temp_v0 = gameDataBlocksGetFlagByteA(), temp_v0 == 0)) {
       FUN_0029ede8(1,temp_v2,0xffffffff,0);
       temp_v1 = (unsigned int)*(unsigned short *)((int)temp_v6 + *(int *)(param_1 + 0xd50) * 2);
       FUN_002be650(temp_v1,1);
@@ -83,7 +83,7 @@ unsigned int FUN_002110ac(int param_1)
       FUN_00297050(1);
       return 0;
     }
-    temp_v2 = FUN_002597e0();
+    temp_v2 = gameDataBlocksGetFlagByteA();
     if (temp_v2 == 0) {
       temp_v2 = *(int *)(param_1 + 0xd50) + 1;
       *(int *)(param_1 + 0xd50) = temp_v2;

@@ -1,57 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f4258` (_code @ 0x2f4258, 0x66 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation and call layout: retail keeps the element in r0/r1 (without a separate pointer register), builds the argument to the growth function through a shared tail (`b.n 28`), and stores the chunk fields in a different order; built allocates r2/r5-r7 differently. */
+#include "common.h"
 
 extern "C" {
 
-int rt_malloc(int);
+typedef struct Element {
+    /* 0x00 */ u8 used;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u32 field04;
+    /* 0x08 */ u32 field08;
+    /* 0x0C */ struct Element *nextFree;  /* while the element is on the free list */
+    /* 0x10 */ u32 field10;
+    /* 0x14 */ u32 field14;
+    /* 0x18 */ u32 field18;
+} Element;
 
-extern int vectorGrowCapacity_0012d178(unsigned int, int *, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: rt_malloc. */
+typedef struct Chunk {
+    /* 0x0 */ struct Chunk *previous;
+    /* 0x4 */ s32 count;
+    /* 0x8 */ Element *elements;
+} Chunk;
 
+typedef struct Pool {
+    /* 0x0 */ Chunk *chunks;      /* newest chunk first */
+    /* 0x4 */ Element *freeList;
+    /* 0x8 */ Element *cursor;    /* next unused element of the newest chunk */
+    /* 0xC */ Element *end;
+} Pool;
 
-void FUN_002f4258(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
+void *rt_malloc(s32 size);
+s32 vectorGrowCapacity_0012d178(s32 previousCount, Pool *pool);
 
+/* Takes an element from the pool (free list first, else the next of the newest chunk, growing a new chunk when full) and clears it. */
+void FUN_002f4258(Pool *pool)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  int *piVar4;
-  int temp_v2;
-  
-  puVar1 = (unsigned char *)param_1[1];
-  if (puVar1 != (unsigned char *)0x0) {
-    param_1[1] = *(int *)(puVar1 + 0xc);
-  }
-  else {
-    puVar1 = (unsigned char *)param_1[2];
-    if (puVar1 == (unsigned char *)param_1[3]) {
-      if (*param_1 != 0) {
-        temp_v0 = *(unsigned int *)(*param_1 + 4);
-      }
-      else {
-        temp_v0 = 0;
-      }
-      temp_v1 = vectorGrowCapacity_0012d178(temp_v0,param_1,param_3,param_4,param_4);
-      piVar4 = (int *)rt_malloc(0xc);
-      temp_v2 = rt_malloc(temp_v1 * 0x1c);
-      piVar4[2] = temp_v2;
-      temp_v2 = *param_1;
-      piVar4[1] = temp_v1;
-      *piVar4 = temp_v2;
-      *param_1 = (int)piVar4;
-      puVar1 = (unsigned char *)piVar4[2];
-      param_1[3] = (int)(puVar1 + temp_v1 * 0x1c);
-      param_1[2] = (int)puVar1;
+    Element *element = pool->freeList;
+
+    if (element != NULL) {
+        pool->freeList = element->nextFree;
+    } else {
+        element = pool->cursor;
+        if (element == pool->end) {
+            s32 count;
+            Chunk *chunk;
+
+            count = vectorGrowCapacity_0012d178(pool->chunks != NULL ? pool->chunks->count : 0, pool);
+            chunk = (Chunk *)rt_malloc(sizeof(Chunk));
+            chunk->elements = (Element *)rt_malloc(count * sizeof(Element));
+            chunk->count = count;
+            chunk->previous = pool->chunks;
+            pool->chunks = chunk;
+            element = chunk->elements;
+            pool->end = element + count;
+            pool->cursor = element;
+        }
+        pool->cursor = element + 1;
     }
-    param_1[2] = (int)(puVar1 + 0x1c);
-  }
-  *(unsigned int *)(puVar1 + 4) = 0;
-  *(unsigned int *)(puVar1 + 8) = 0;
-  *(unsigned int *)(puVar1 + 0xc) = 0;
-  *puVar1 = 0;
-  return;
+    element->field04 = 0;
+    element->field08 = 0;
+    element->nextFree = NULL;
+    element->used = 0;
 }
 
 } /* extern "C" */

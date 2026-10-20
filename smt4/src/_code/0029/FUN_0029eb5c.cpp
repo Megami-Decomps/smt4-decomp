@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00289058(...);
+int scrollListSetSelection(...);
 
 typedef struct fn_0029eb5c_arg0 fn_0029eb5c_arg0;
 struct fn_0029eb5c_arg0 {
@@ -28,7 +28,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00289058. */
+/* Supplied declaration required: scrollListSetSelection. */
 
 
 void FUN_0029eb5c(fn_0029eb5c_arg0 *param_1,int param_2)
@@ -41,7 +41,7 @@ void FUN_0029eb5c(fn_0029eb5c_arg0 *param_1,int param_2)
   if (param_1->field_0x20 + param_1->field_0x24 != param_2) {
     param_1[1].field_0x18 = 1;
   }
-  FUN_00289058(param_1,param_2);
+  scrollListSetSelection(param_1,param_2);
   return;
 }
 

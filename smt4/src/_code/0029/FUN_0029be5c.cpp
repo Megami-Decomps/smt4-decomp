@@ -5,7 +5,7 @@ extern "C" {
 int FUN_00343a04(u32 amount);
 int FUN_00343a2c(u32 amount);
 int FUN_00343a74(u32 amount);
-int FUN_00343ba0(u32 amount);
+int questCenterAddPoints(u32 amount);
 extern u32 *gameGetCounters(void);
 
 /* Adds `amount` to counter `index` (saturating at 0xFFFFFFFF) and notifies the counter's handler. */
@@ -26,7 +26,7 @@ void FUN_0029be5c(int index, u32 amount)
         FUN_00343a74(amount);
         return;
     case 9:
-        FUN_00343ba0(amount);
+        questCenterAddPoints(amount);
         return;
     case 0x13:
         FUN_00343a04(amount);

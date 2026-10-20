@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0029a268(...);
+int fadeObjectResetIfActive(...);
 int FUN_002b1fc4(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
-int FUN_002c5d5c(float [24], unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(float [24], unsigned char *, int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
 
@@ -50,14 +50,14 @@ extern int g_titleScene; /* 0x44ea00 */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_0029a268. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: FUN_002b1fc4. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int dataTable0eSub1GetId(unsigned short);
 
@@ -118,7 +118,7 @@ void FUN_00190e48(void)
   temp_v5 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
   temp_v19 = 0;
   temp_v20 = 0;
-  FUN_002c5d5c(temp_v21,&LAB_00141adc,0x10,6);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v21,&LAB_00141adc,0x10,6);
   temp_v10 = 0;
   temp_v16 = 255.0f;
   temp_v17 = 0.003921569f;
@@ -462,7 +462,7 @@ void FUN_00190e48(void)
           temp_v38 = temp_v26;
           FUN_002b1fc4(&temp_v23,&temp_v27,&temp_v31,&temp_v35,0,1);
         }
-        FUN_0029a268(temp_v5 + temp_v7 * 0x8c + 0x34);
+        fadeObjectResetIfActive(temp_v5 + temp_v7 * 0x8c + 0x34);
       }
       temp_v10 = g_titleScene;
       temp_v7 = temp_v7 + 1;

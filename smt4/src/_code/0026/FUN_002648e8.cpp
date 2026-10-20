@@ -1,40 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002648e8` (_code @ 0x2648e8, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003965f0(unsigned int *);
-int FUN_00396b08(unsigned int *, int);
+typedef struct Timer {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ s32 frame;
+} Timer;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+extern void FUN_003965f0(Timer *timer);
+extern void FUN_00396b08(Timer *timer, s32 arg);
 
-/* Supplied declaration required: FUN_003965f0. */
-/* Supplied declaration required: FUN_00396b08. */
-
-
-void FUN_002648e8(unsigned int *param_1)
-
+/* Counts one frame unless flag 2 is set; after 120 frames restarts the counter via FUN_00396b08. */
+static __inline void timerAdvance(Timer *timer)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  if ((*param_1 & 1) == 0) {
-    if ((*param_1 & 2) == 0) {
-      temp_v0 = param_1[3];
-      param_1[3] = temp_v0 + 1;
-      if ((int)(temp_v0 + 1) >= 0x78) {
-        param_1[3] = 0;
-        FUN_00396b08(param_1,2);
-      }
+    if ((timer->flags & 2) != 0) {
+        return;
     }
-    FUN_003965f0(param_1);
-    return;
-  }
-  return;
+    timer->frame++;
+    if (timer->frame >= 120) {
+        timer->frame = 0;
+        FUN_00396b08(timer, 2);
+    }
+}
+
+/* Unless flag 1 is set: advances the frame counter (unless flag 2), restarting it through FUN_00396b08 after 120 frames, then runs FUN_003965f0. */
+void FUN_002648e8(Timer *timer)
+{
+    if ((timer->flags & 1) == 0) {
+        timerAdvance(timer);
+        FUN_003965f0(timer);
+    }
 }
 
 } /* extern "C" */

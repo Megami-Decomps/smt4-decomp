@@ -21,7 +21,7 @@ int FUN_00241f98(...);
 int FUN_00242000(...);
 int FUN_00248738(...);
 int FUN_0026e420(...);
-int FUN_002829d4(void);
+int questEntryCheck(void);
 int FUN_00295660(...);
 int FUN_0029eb5c(int, int);
 int FUN_0029efc0(...);
@@ -31,7 +31,7 @@ int FUN_0029f848(...);
 int FUN_002b8584(int, int);
 int buttonHelpSetPreset(...);
 int eventQueueAddUnique(...);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_002bf818(...);
 int FUN_002bff6c(int, int, int, int, int);
 int FUN_002c1658(...);
@@ -51,7 +51,7 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_00242000. */
 /* Supplied declaration required: FUN_00248738. */
 /* Supplied declaration required: FUN_0026e420. */
-/* Supplied declaration required: FUN_002829d4. */
+/* Supplied declaration required: questEntryCheck. */
 extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -79,7 +79,7 @@ extern int sys43e188GetState(void);
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int FUN_002b8ee0(int, unsigned int);
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
 extern int padIsButtonPressed(unsigned int);
@@ -142,7 +142,7 @@ unsigned int FUN_003291e0(int *param_1)
     if (temp_v6 == 0) {
       temp_v6 = padIsButtonPressed(1);
       if (temp_v6 != 0) {
-        FUN_002bc01c(0x100016e);
+        eventQueueAddUniqueIfValid(0x100016e);
         return 0xffffffff;
       }
       temp_v6 = padIsButtonRepeat(5);
@@ -203,7 +203,7 @@ unsigned int FUN_003291e0(int *param_1)
     if (temp_v7 == 0) {
       return 0;
     }
-    FUN_002bc01c(temp_v9);
+    eventQueueAddUniqueIfValid(temp_v9);
     break;
   case 2:
     temp_v6 = temp_v7 + 0x10;
@@ -222,7 +222,7 @@ unsigned int FUN_003291e0(int *param_1)
       if (temp_v7 == 0) {
         return 0;
       }
-      FUN_002bc01c();
+      eventQueueAddUniqueIfValid();
       return 0;
     }
     temp_v6 = FUN_0029efc0(temp_v7 + 0x10);
@@ -232,14 +232,14 @@ unsigned int FUN_003291e0(int *param_1)
     if (temp_v6 == 0) {
       return 0;
     }
-    FUN_002bc01c(0x100016d);
+    eventQueueAddUniqueIfValid(0x100016d);
     *(unsigned int *)(temp_v7 + 0x2a8) = 0;
     if (*(char *)(temp_v7 + 0x2b4) != '\0') {
       temp_v10 = 0x2e;
       temp_v6 = flagBitIsSet(0x2e);
       if (temp_v6 == 0) {
         temp_v6 = 0x2e;
-        FUN_002829d4();
+        questEntryCheck();
         if (temp_v6 == 0) {
           *(unsigned int *)(temp_v7 + *(int *)(temp_v7 + 0x2a8) * 4 + 0x74) = temp_v10;
           *(int *)(temp_v7 + 0x2a8) = *(int *)(temp_v7 + 0x2a8) + 1;
@@ -250,7 +250,7 @@ unsigned int FUN_003291e0(int *param_1)
       temp_v8 = 1;
       do {
         temp_v6 = flagBitIsSet(temp_v8);
-        if ((temp_v6 == 0) && (temp_v5 = temp_v8, FUN_002829d4(), temp_v5 == 0)) {
+        if ((temp_v6 == 0) && (temp_v5 = temp_v8, questEntryCheck(), temp_v5 == 0)) {
           *(unsigned int *)(temp_v7 + *(int *)(temp_v7 + 0x2a8) * 4 + 0x74) = temp_v8;
           *(int *)(temp_v7 + 0x2a8) = *(int *)(temp_v7 + 0x2a8) + 1;
         }
@@ -262,7 +262,7 @@ unsigned int FUN_003291e0(int *param_1)
       temp_v6 = flagBitIsSet(0x18);
       if (temp_v6 == 0) {
         temp_v6 = 0x18;
-        FUN_002829d4();
+        questEntryCheck();
         if (temp_v6 == 0) {
           *(unsigned int *)(temp_v7 + *(int *)(temp_v7 + 0x2a8) * 4 + 0x74) = temp_v10;
           *(int *)(temp_v7 + 0x2a8) = *(int *)(temp_v7 + 0x2a8) + 1;
@@ -312,7 +312,7 @@ unsigned int FUN_003291e0(int *param_1)
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v7 + 0x530),0);
       FUN_00248738(temp_v7,4);
       temp_v10 = temp_v9;
-      FUN_002bc01c(temp_v10);
+      eventQueueAddUniqueIfValid(temp_v10);
       return 0;
     }
     temp_v6 = 1;
@@ -335,7 +335,7 @@ unsigned int FUN_003291e0(int *param_1)
         return 0;
       }
       FUN_00248738(temp_v7,7);
-      FUN_002bc01c(temp_v10);
+      eventQueueAddUniqueIfValid(temp_v10);
       return 0;
     }
     temp_v6 = 9;
@@ -343,7 +343,7 @@ unsigned int FUN_003291e0(int *param_1)
     if (temp_v6 == 0) {
       return 0;
     }
-    FUN_002bc01c(0x100016d);
+    eventQueueAddUniqueIfValid(0x100016d);
     sortMenuCreate(0xd,0);
     FUN_0029e328(0x21);
     FUN_0029e328(0x15);
@@ -409,7 +409,7 @@ unsigned int FUN_003291e0(int *param_1)
             FUN_002ae584();
             if ((temp_v5 != 0) &&
                ((temp_v6 = flagBitIsSet(temp_v8), temp_v6 != 0 ||
-                (temp_v5 = temp_v8, FUN_002829d4(), temp_v5 != 2)))) {
+                (temp_v5 = temp_v8, questEntryCheck(), temp_v5 != 2)))) {
               *(unsigned int *)(temp_v7 + *(int *)(temp_v7 + 0x2a8) * 4 + 0x74) = temp_v8;
               *(int *)(temp_v7 + 0x2a8) = *(int *)(temp_v7 + 0x2a8) + 1;
             }
@@ -427,7 +427,7 @@ unsigned int FUN_003291e0(int *param_1)
     }
     FUN_00248738(temp_v7,7);
     temp_v9 = temp_v10;
-    FUN_002bc01c(temp_v9);
+    eventQueueAddUniqueIfValid(temp_v9);
     break;
   case 6:
     temp_v6 = useCounterIsFinished();

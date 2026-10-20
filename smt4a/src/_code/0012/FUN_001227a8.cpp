@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0010d29c(int);
 int FUN_002e6e26(void);
-int FUN_002e6e5c(unsigned char **);
+int _ZN9Obj55b28cD1Ev(unsigned char **);
 int sharedRefRelease(void);
 int FUN_002e78d0(unsigned int, unsigned int, int);
 int FUN_002f4f20(int, int);
@@ -27,7 +27,7 @@ extern unsigned char DAT_0055b294; /* 0x55b294 */
 extern int FUN_00105c54(int, unsigned int, int);
 /* Supplied declaration required: FUN_0010d29c. */
 /* Supplied declaration required: FUN_002e6e26. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 extern int operatorNew(unsigned int);
 extern int FUN_002e789a(unsigned char *);
@@ -75,7 +75,7 @@ void FUN_001227a8(int param_1,unsigned char *param_2,unsigned int param_3,unsign
     temp_v2 = FUN_002e6e26();
     FUN_002e78d0(temp_v2,*(unsigned int *)(param_1 + 0x120),0);
   }
-  FUN_002e6e5c(&temp_v3);
+  _ZN9Obj55b28cD1Ev(&temp_v3);
   return;
 }
 

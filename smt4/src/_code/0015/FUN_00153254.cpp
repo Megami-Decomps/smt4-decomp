@@ -1,21 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00153254` (_code @ 0x153254, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern signed char DAT_004e827c; /* 0x4e827c */
-extern signed char DAT_004e827d; /* 0x4e827d */
+typedef struct Tracker {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s8 active;
+    /* 0x19 */ s8 value;
+} Tracker;
 
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0xE];
+    /* 0x0E */ s8 forced;
+    /* 0x0F */ s8 value;
+} Entry;
 
-unsigned int FUN_00153254(int param_1)
+extern Tracker DAT_004e8264;
 
+/* Returns 1 when the entry is forced, or the tracker is active and its value is at most 2 above the entry's; else 0. */
+u32 FUN_00153254(Entry *entry)
 {
-  if ((*(char *)(param_1 + 0xe) == '\0') &&
-     ((DAT_004e827c == '\0' || ('\x02' < (char)(DAT_004e827d - *(char *)(param_1 + 0xf)))))) {
-    return 0;
-  }
-  return 1;
+    if (entry->forced == 0 && (DAT_004e8264.active == 0 || (s8)(DAT_004e8264.value - entry->value) > 2)) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

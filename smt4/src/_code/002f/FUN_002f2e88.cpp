@@ -1,20 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f2e88` (_code @ 0x2f2e88, 0x14 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int libc_sprintf(unsigned int, int, int);
+typedef struct NamedObject {
+    /* 0x00 */ u8 unk00[0x21];
+    /* 0x21 */ char name[1];
+} NamedObject;
 
-/* Supplied declaration required: libc_sprintf. */
+extern s32 libc_sprintf(char *buffer, const char *format, ...);
 
-
-void FUN_002f2e88(int param_1,unsigned int param_2)
-
+/* Writes the object's name into `buffer`. */
+s32 FUN_002f2e88(NamedObject *object, char *buffer)
 {
-/* irregular: 1 native warning(s); review required */
-  libc_sprintf(param_2,0x2f2e9c,param_1 + 0x21);
-  return;
+    return libc_sprintf(buffer, "%s", object->name);
 }
 
 } /* extern "C" */

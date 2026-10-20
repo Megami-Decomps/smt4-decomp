@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00132fac(void);
 int FUN_002e6e34(int *, unsigned char *);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int operatorDelete(void);
 
 extern int DAT_00599374; /* 0x599374 */
@@ -16,7 +16,7 @@ extern unsigned char DAT_006306ac; /* 0x6306ac */
 
 /* Supplied declaration required: FUN_00132fac. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: operatorDelete. */
 
 
@@ -41,7 +41,7 @@ void FUN_00300bb0(unsigned int param_1,unsigned int param_2,unsigned int param_3
     DAT_00599378 = 0;
     DAT_005c4c18 = 0;
   }
-  FUN_002e6e5c(&uStack_18);
+  _ZN9Obj55b28cD1Ev(&uStack_18);
   return;
 }
 

@@ -54,14 +54,14 @@ extern unsigned int DAT_0049fc1c; /* 0x49fc1c */
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-extern int FUN_00192654(unsigned int);
+extern int slotIsReady(unsigned int);
 /* Supplied declaration required: FUN_0019e0c0. */
 /* Supplied declaration required: npcRoomDestroy. */
 /* Supplied declaration required: FUN_00290d5c. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 extern int FUN_00290e78(void);
 extern int FUN_00290e9c(void);
-extern int FUN_00290eb0(void);
+extern int messageWindowIsState1(void);
 /* Supplied declaration required: FUN_00290ed8. */
 /* Supplied declaration required: bgmFadeOut. */
 /* Supplied declaration required: buttonHelpRelease. */
@@ -197,7 +197,7 @@ unsigned int FUN_00194278(void)
     }
     break;
   case 1:
-    temp_v5 = FUN_00192654(0);
+    temp_v5 = slotIsReady(0);
     if (temp_v5 != 0) break;
     temp_v5 = puVar3[0x3d];
     if (temp_v5 < 1) {
@@ -233,7 +233,7 @@ LAB_001945e8:
     }
     break;
   case 2:
-    temp_v5 = FUN_00290eb0();
+    temp_v5 = messageWindowIsState1();
     if ((temp_v5 != 0) && (temp_v5 = 0, 0 < (int)puVar3[0x39])) {
       do {
         temp_v2 = FUN_00290e9c();
@@ -374,7 +374,7 @@ LAB_001945e8:
     puVar2[0x3c] = 6;
     break;
   case 6:
-    temp_v5 = FUN_00192654(0);
+    temp_v5 = slotIsReady(0);
     puVar2 = g_npcRoom;
     if (temp_v5 == 0) {
       g_npcRoom[0x3b] = 0;

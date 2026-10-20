@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e26(void);
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002e78d0(unsigned int, int, int);
 int FUN_00303aac(int, unsigned int, int, unsigned int, unsigned int, int, unsigned int, int, int, int, int, int, int, int);
 
@@ -27,7 +27,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e6e26. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int operatorNew(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
@@ -62,11 +62,11 @@ FUN_00117d74(int param_1,int param_2,unsigned int param_3,unsigned int param_4,u
     }
     temp_v1 = FUN_002e6e26();
     FUN_002e78d0(temp_v1,temp_v0,0);
-    FUN_002e6e5c(temp_v2);
+    _ZN9Obj55b28cD1Ev(temp_v2);
     temp_v1 = 1;
   }
   else {
-    FUN_002e6e5c(temp_v2);
+    _ZN9Obj55b28cD1Ev(temp_v2);
     temp_v1 = 0;
   }
   return temp_v1;

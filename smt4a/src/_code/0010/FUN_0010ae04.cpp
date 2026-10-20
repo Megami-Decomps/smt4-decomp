@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], unsigned int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002f3df8(int *, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002f3df8. */
 extern int wordRefsDiffer_002f3e5a(int *, unsigned int *);
@@ -44,7 +44,7 @@ unsigned int FUN_0010ae04(int param_1)
       temp_v0 = *(unsigned int *)(temp_v3 + 0x18);
     }
   }
-  FUN_002e6e5c(temp_v2);
+  _ZN9Obj55b28cD1Ev(temp_v2);
   return temp_v0;
 }
 

@@ -11,7 +11,7 @@ int FUN_002ba78c(int);
 int FUN_002bd81c(...);
 int FUN_002bd82c(...);
 int FUN_002bd954(int, int, int, int, int);
-int FUN_002c312c(int, int, int, unsigned char *, int, int, int, int, int, int, int);
+int paramsInit(int, int, int, unsigned char *, int, int, int, int, int, int, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
 
 /* stack frame of param_1: 8 slot(s), 32 byte(s) */
@@ -37,7 +37,7 @@ extern int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: FUN_002bd82c. */
 extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -51,7 +51,7 @@ void FUN_0038f738(int param_1)
   char temp_v3 [36];
   
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x35c);
-  FUN_002c312c(param_1 + 0x35c,0,0,&DAT_003ff12c,0xc,0,0,0,0,0,0);
+  paramsInit(param_1 + 0x35c,0,0,&DAT_003ff12c,0xc,0,0,0,0,0,0);
   FUN_002bd954(param_1 + 0x109c,0x1d,2000,param_1 + 0x35c,0xb);
   uiSpriteSetImageKeyframe(param_1 + 0x109c,0);
   temp_v3[0x14] = '\0';

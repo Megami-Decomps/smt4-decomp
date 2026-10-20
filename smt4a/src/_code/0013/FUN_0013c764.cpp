@@ -1,45 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013c764` (_code @ 0x13c764, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: addressing only: retail forms a base at JobWork+0xF00 for the 0xFF5/0xFFD flags and folds the 0x148C flag as (work+0x1400)+0x8C; built uses flat offsets */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00150d38(int);
-int FUN_00157558(unsigned int);
+typedef struct JobWork {
+    /* 0x000 */ u8 unk000[0xFF4];
+    /* 0xFF4 */ u8 enabled;
+    /* 0xFF5 */ u8 ready;
+    /* 0xFF6 */ u8 unkFF6[7];
+    /* 0xFFD */ u8 shown;
+    /* 0xFFE */ u8 unkFFE[0x48E];
+    /* 0x148C */ u8 busy;
+    /* 0x148D */ u8 unk148D[3];
+    /* 0x1490 */ s32 request;
+} JobWork;
 
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
+extern u32 g_renderCtx;
 
-/* Supplied declaration required: FUN_00150d38. */
-/* Supplied declaration required: FUN_00157558. */
-extern int jobGetWork(void);
+extern JobWork *jobGetWork(void);
+extern void FUN_00157558(u32 ctx);
+extern void FUN_00150d38(s32 arg);
 
-
-unsigned int FUN_0013c764(void)
-
+s32 FUN_0013c764(void)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v1 = jobGetWork();
-  temp_v2 = temp_v1 + 0xf00;
-  temp_v3 = *(char *)(temp_v1 + 0xff4) != '\0';
-  temp_v0 = '\0';
-  if (temp_v3) {
-    temp_v0 = *(char *)(temp_v1 + 0xff5);
-  }
-  if (temp_v3 && temp_v0 != '\0') {
-    temp_v2 = (unsigned int)*(unsigned char *)(temp_v1 + 0xffd);
-  }
-  if ((((temp_v3 && temp_v0 != '\0') && temp_v2 != 0) && (*(int *)(temp_v1 + 0x1490) != 0)) &&
-     (*(char *)(temp_v1 + 0x148c) == '\0')) {
-    FUN_00157558(g_renderCtx);
-    FUN_00150d38(1);
+    JobWork *work = jobGetWork();
+
+    if (work->enabled != 0 && work->ready != 0 && work->shown != 0 && work->request != 0 && work->busy == 0) {
+        FUN_00157558(g_renderCtx);
+        FUN_00150d38(1);
+        return 0;
+    }
     return 0;
-  }
-  return 0;
 }
 
 } /* extern "C" */

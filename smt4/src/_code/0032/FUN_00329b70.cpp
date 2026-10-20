@@ -37,7 +37,7 @@ int FUN_0029c2cc(...);
 int soundChannelRequestIfEnabled(int, int, int);
 int FUN_002a03d8(...);
 int FUN_002a0428(...);
-int FUN_002a043c(...);
+int modelSlotAttachChild(...);
 int asdMdlManagerDestroy(...);
 int sndObjectForwardField8(void);
 int buttonHelpSetPreset(...);
@@ -103,7 +103,7 @@ extern int FUN_00295618(void);
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002a043c. */
+/* Supplied declaration required: modelSlotAttachChild. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: sndObjectForwardField8. */
@@ -199,7 +199,7 @@ unsigned int FUN_00329b70(void)
     if (((temp_v7 != 0) && (temp_v7 = FUN_002b89a4(1), temp_v7 != 0)) &&
        (*(char *)(temp_v2 + 0x582) != '\0')) {
       FUN_002a0428(*(unsigned int *)(temp_v2 + 0x84),1);
-      FUN_002a043c(*(unsigned int *)(temp_v2 + 0x8c),0);
+      modelSlotAttachChild(*(unsigned int *)(temp_v2 + 0x8c),0);
       temp_v7 = DAT_0043dd90;
       *(unsigned int *)(DAT_0043dd90 + 4) = 3;
       *(unsigned int *)(temp_v7 + 8) = 0;
@@ -300,7 +300,7 @@ unsigned int FUN_00329b70(void)
       gfxObjectDestroy(*(unsigned int *)(temp_v2 + 0x8c));
       *(unsigned int *)(temp_v2 + 0x8c) = 0;
       FUN_002a0428(*(unsigned int *)(temp_v2 + 0x88),1);
-      FUN_002a043c(*(unsigned int *)(temp_v2 + 0x90),0);
+      modelSlotAttachChild(*(unsigned int *)(temp_v2 + 0x90),0);
       asdMdlManagerMarkDestroy(*(unsigned int *)(temp_v2 + 0x84));
       asdMdlManagerDestroy(*(unsigned int *)(temp_v2 + 0x84));
       *(unsigned int *)(temp_v2 + 0x84) = 0;

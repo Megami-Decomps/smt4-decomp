@@ -3,15 +3,15 @@
 extern "C" {
 
 void FUN_00183e58(void);
-void FUN_002852f0(s32 value);
+void messageSlotSet(s32 value);
 void FUN_002c76c0(...);
-void FUN_002e6134(void);
+void messageStateEndMode2(void);
 void FUN_003457b8(void);
-void FUN_003c5848(void);
+void commonBgReset(void);
 s32 scrGetCommandFrame(void);
 s32 ref208StateIs7(void);
 
-/* Script step: when scrGetCommandFrame reports nonzero and ref208StateIs7 agrees, finishes (FUN_002e6134, FUN_002c76c0(-1), FUN_002852f0(0)) and returns 1; when scrGetCommandFrame reports 0, runs the three clean-up calls; returns 0 otherwise. */
+/* Script step: when scrGetCommandFrame reports nonzero and ref208StateIs7 agrees, finishes (messageStateEndMode2, FUN_002c76c0(-1), messageSlotSet(0)) and returns 1; when scrGetCommandFrame reports 0, runs the three clean-up calls; returns 0 otherwise. */
 u32 FUN_002a3598(void)
 {
     s32 result;
@@ -21,14 +21,14 @@ u32 FUN_002a3598(void)
     if (result != 0) {
         result = ref208StateIs7();
         if (result != 0) {
-            FUN_002e6134();
+            messageStateEndMode2();
             FUN_002c76c0(0xFFFFFFFF);
-            FUN_002852f0(0);
+            messageSlotSet(0);
             return 1;
         }
     } else {
         FUN_00183e58();
-        FUN_003c5848();
+        commonBgReset();
         FUN_003457b8();
     }
     return 0;

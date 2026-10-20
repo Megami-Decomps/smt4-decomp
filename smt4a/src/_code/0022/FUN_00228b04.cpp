@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int FUN_002be8d0(void);
-int FUN_0032c49c(int, int);
+int scrollListSetSelection(int, int);
 int FUN_00340f2c(int, int, int);
 int FUN_00340f58(void);
 int __aeabi_idivmod(...);
@@ -20,10 +20,10 @@ typedef struct {
 } param_2_stack;
 
 extern int FUN_00163fd4(void);
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int padButtonIsPressed(unsigned char);
 /* Supplied declaration required: FUN_002be8d0. */
-/* Supplied declaration required: FUN_0032c49c. */
+/* Supplied declaration required: scrollListSetSelection. */
 /* Supplied declaration required: FUN_00340f2c. */
 /* Supplied declaration required: FUN_00340f58. */
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -75,7 +75,7 @@ unsigned char FUN_00228b04(int param_1,int param_2)
     temp_v8 = *(int *)(param_1 + 0x38);
     temp_v9 = __aeabi_idivmod(*(unsigned int *)(param_1 + 0x50),temp_v8);
     if (temp_v9 <= temp_v7) {
-      FUN_0032c49c(param_1,temp_v9);
+      scrollListSetSelection(param_1,temp_v9);
     }
     if ((!temp_v1) && (temp_v4 != temp_v7)) {
       temp_v1 = 1;
@@ -99,10 +99,10 @@ unsigned char FUN_00228b04(int param_1,int param_2)
          (((temp_v4 = padButtonIsPressed(*(unsigned char *)(param_1 + 0x2c)), temp_v4 != 0 ||
            (temp_v4 = padButtonIsPressed(*(unsigned char *)(param_1 + 0x30)), temp_v4 != 0)) &&
           ((*(unsigned int *)(param_1 + 0x28) & 4) != 0)))) {
-        FUN_0032c49c(param_1 + 0x28,0);
+        scrollListSetSelection(param_1 + 0x28,0);
       }
       else {
-        FUN_0032c49c(param_1 + 0x28,temp_v14 - 1);
+        scrollListSetSelection(param_1 + 0x28,temp_v14 - 1);
       }
     }
     temp_v4 = 0;
@@ -344,7 +344,7 @@ unsigned char FUN_00228b04(int param_1,int param_2)
     temp_v3 = 0;
     if ((unsigned char)(temp_v1 | temp_v2)) {
       if (param_2 != 0) {
-        FUN_001641b4(0x100020d);
+        eventQueueAddUniqueIfValid(0x100020d);
       }
       temp_v3 = 1;
     }

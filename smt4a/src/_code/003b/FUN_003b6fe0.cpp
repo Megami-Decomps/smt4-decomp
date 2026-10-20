@@ -1,45 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b6fe0` (_code @ 0x3b6fe0, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reloads the g_gameState address for the stores (the zero takes r0, the address r1) and loads the flag byte into r0; this build keeps the address in r0 */
+#include "common.h"
 
 extern "C" {
 
-int jyoucyuGetTableEntry(int);
-int setBit0(void);
-int QuestCenter_GetActiveEntry(void);
+typedef struct GameState {
+    /* 0x000 */ u8 unk000[0x3F5];
+    /* 0x3F5 */ u8 questCenterActive;
+    /* 0x3F6 */ u8 unk3f6[2];
+    /* 0x3F8 */ u32 questCenterWork[3];
+} GameState;
 
-extern signed char DAT_005f19f1; /* 0x5f19f1 */
-extern unsigned int DAT_005f19f4; /* 0x5f19f4 */
-extern unsigned int DAT_005f19f8; /* 0x5f19f8 */
-extern unsigned int DAT_005f19fc; /* 0x5f19fc */
+extern GameState g_gameState;
 
-/* Supplied declaration required: jyoucyuGetTableEntry. */
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: setBit0. */
-extern int QuestCenterMode_IsBusy(void);
-/* Supplied declaration required: QuestCenter_GetActiveEntry. */
+extern s32 scrGetCommandFrame(void);
+extern void jyoucyuGetTableEntry(s32 index);
+extern void QuestCenter_GetActiveEntry(void);
+extern void setBit0(void);
+extern s32 QuestCenterMode_IsBusy(void);
 
-
-unsigned char FUN_003b6fe0(void)
-
+/* Script command: on its first frame refreshes the quest center entry and clears its active state; returns 1 once the quest center mode is no longer busy. */
+u32 FUN_003b6fe0(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = scrGetCommandFrame();
-  if (temp_v0 == 0) {
-    jyoucyuGetTableEntry(0);
-    QuestCenter_GetActiveEntry();
-    setBit0();
-    if (DAT_005f19f1 != '\0') {
-      DAT_005f19f1 = '\0';
-      DAT_005f19f4 = 0;
-      DAT_005f19f8 = 0;
-      DAT_005f19fc = 0;
+    if (scrGetCommandFrame() == 0) {
+        jyoucyuGetTableEntry(0);
+        QuestCenter_GetActiveEntry();
+        setBit0();
+        if (g_gameState.questCenterActive != 0) {
+            g_gameState.questCenterActive = 0;
+            g_gameState.questCenterWork[0] = 0;
+            g_gameState.questCenterWork[1] = 0;
+            g_gameState.questCenterWork[2] = 0;
+        }
     }
-  }
-  temp_v0 = QuestCenterMode_IsBusy();
-  return temp_v0 == 0;
+    return QuestCenterMode_IsBusy() == 0;
 }
 
 } /* extern "C" */

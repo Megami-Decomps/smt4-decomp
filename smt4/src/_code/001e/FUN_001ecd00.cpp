@@ -3,9 +3,9 @@
 extern "C" {
 
 int FUN_002123dc(void);
-int FUN_0025a0e0(void);
-int FUN_0026a704(void);
-int FUN_0028dc68(int a);
+int commonBgReset(void);
+int buttonHelpResetSlots(void);
+int messageSlotSet(int a);
 int FUN_0028dc98(...);
 int commonBgCreate(void);
 extern int scrGetCommandFrame(void);
@@ -18,12 +18,12 @@ u32 FUN_001ecd00(void)
         if (FUN_002ed5bc() != 0) {
             FUN_002123dc();
             FUN_0028dc98(0xffffffff);
-            FUN_0028dc68(0);
+            messageSlotSet(0);
             return 1;
         }
     } else {
-        FUN_0026a704();
-        FUN_0025a0e0();
+        buttonHelpResetSlots();
+        commonBgReset();
         commonBgCreate();
     }
     return 0;

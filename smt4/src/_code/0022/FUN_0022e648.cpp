@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int FUN_00230b90(int, unsigned short);
-extern int FUN_00230c1c(unsigned short, unsigned int);
+extern int btlRollClamped(unsigned short, unsigned int);
 extern unsigned int FUN_00230e04(unsigned short *);
 extern int FUN_0023360c(int);
 extern int FUN_00240d5c(int);
@@ -35,7 +35,7 @@ void FUN_0022e648(int param_1,unsigned int param_2)
   puVar5 = (unsigned short *)(param_1 + temp_v1 * 0x1002 + 0xc94 + temp_v2 * 4);
   if (*(int *)(param_1 + 0x860) != 8) {
     temp_v3 = FUN_00230e04(puVar5);
-    temp_v1 = FUN_00230c1c(*puVar5,temp_v3);
+    temp_v1 = btlRollClamped(*puVar5,temp_v3);
   }
   else {
     temp_v1 = FUN_0028fb3c(*puVar5);

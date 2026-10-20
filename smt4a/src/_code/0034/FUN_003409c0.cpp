@@ -1,43 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003409c0` (_code @ 0x3409c0, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the constant stored into `closing` is materialised in r1 (retail: r0). */
+#include "common.h"
 
 extern "C" {
 
-int jyoucyuGetTableEntry(int);
-int FUN_0019e290(void);
-int asdOperatorDelete(int);
+typedef struct StreamBuffer {
+    /* 0x000 */ u8 unk000[0x110];
+    /* 0x110 */ u8 unk110[1];
+} StreamBuffer;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct JyoucyuScreen {
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ u8 closing;
+    /* 0x5 */ u8 unk5[3];
+    /* 0x8 */ StreamBuffer *buffer;
+} JyoucyuScreen;
 
-/* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_0019e290. */
-/* Supplied declaration required: asdOperatorDelete. */
-extern int FUN_004d08d0(int);
+typedef struct JyoucyuHandle {
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ JyoucyuScreen *screen;
+} JyoucyuHandle;
 
+void FUN_0019e290(StreamBuffer *buffer);
+u8 *FUN_004d08d0(u8 *member);
+void asdOperatorDelete(void *block);
+int jyoucyuGetTableEntry(int index);
 
-void FUN_003409c0(int param_1)
-
+/* Closes the screen: flags it as closing, releases its stream buffer, then resets the table entry. */
+void FUN_002d54e0(JyoucyuHandle *handle)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = *(int *)(param_1 + 4);
-  *(unsigned char *)(temp_v1 + 4) = 1;
-  if (*(int *)(temp_v1 + 8) != 0) {
-    FUN_0019e290();
-    if (*(int *)(temp_v1 + 8) != 0) {
-      temp_v0 = FUN_004d08d0(*(int *)(temp_v1 + 8) + 0x110);
-      asdOperatorDelete(temp_v0 - 0x110);
+    JyoucyuScreen *screen = handle->screen;
+
+    screen->closing = 1;
+    if (screen->buffer != NULL) {
+        FUN_0019e290(screen->buffer);
+        if (screen->buffer != NULL) {
+            asdOperatorDelete(FUN_004d08d0(screen->buffer->unk110) - 0x110);
+        }
+        screen->buffer = NULL;
     }
-    *(unsigned int *)(temp_v1 + 8) = 0;
-  }
-  jyoucyuGetTableEntry(0);
-  return;
+    jyoucyuGetTableEntry(0);
 }
 
-} /* extern "C" */
+}

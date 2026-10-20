@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001b0b98(...);
-int FUN_00288790(...);
+int messageKindForward(...);
 int FUN_00288844(...);
 int FUN_0028886c(void);
 int FUN_002888a8(...);
@@ -23,7 +23,7 @@ int FUN_002be90c(...);
 int gameDataBlocksGetSaveData(void);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
-int FUN_002d8514(...);
+int requestForward(...);
 
 int FUN_001ee4e4(...);
 int FUN_00288ef0(...);
@@ -113,7 +113,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001b0b98. */
 /* Supplied declaration required: FUN_001ee4e4. */
-/* Supplied declaration required: FUN_00288790. */
+/* Supplied declaration required: messageKindForward. */
 /* Supplied declaration required: FUN_00288844. */
 /* Supplied declaration required: FUN_0028886c. */
 /* Supplied declaration required: FUN_002888a8. */
@@ -155,7 +155,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002d8514. */
+/* Supplied declaration required: requestForward. */
 /* Supplied declaration required: FUN_0033d3f8. */
 extern int __aeabi_idivmod(int, unsigned int);
 
@@ -1572,11 +1572,11 @@ LAB_001a3ea8:
                 temp_v11 = FUN_002bf4f8(0x1a,temp_v12 + 0xa9);
                 FUN_00288844((unsigned char *)((int)*(short *)(temp_v11 + 8) + (int)temp_v28),
                              (int)*(short *)(temp_v11 + 10) + (int)temp_v30,0xd3);
-                FUN_00288790((int)(short)temp_v8,
+                messageKindForward((int)(short)temp_v8,
                              (unsigned char *)((int)*(short *)(temp_v11 + 8) + (int)temp_v28),
                              (int)*(short *)(temp_v11 + 10) + (int)temp_v30,0xd3);
                 temp_v11 = FUN_002bf4f8(0x1a,temp_v12 + 0xaf);
-                FUN_002d8514((int)(short)temp_v8,
+                requestForward((int)(short)temp_v8,
                              (unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v11 + 8)),
                              (int)temp_v30 + (int)*(short *)(temp_v11 + 10),0xd3);
                 temp_v10 = temp_v10 + 1;

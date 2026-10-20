@@ -5,14 +5,14 @@
 extern "C" {
 
 int memClear(int, int);
-int FUN_002c5d5c(int, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int, unsigned char *, int, int);
 int nn_gr_CTR_Vertex_LoadArray_DisableAll(unsigned int);
 
 extern unsigned char LAB_003572d0; /* 0x3572d0 */
 extern unsigned char LAB_003572dc; /* 0x3572dc */
 
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: nn_gr_CTR_Vertex_LoadArray_DisableAll. */
 
 
@@ -28,9 +28,9 @@ void FUN_002693e4(int param_1)
   unsigned long long temp_v5;
   
   param_1 = param_1 + 0x1ac;
-  FUN_002c5d5c(param_1,&LAB_003572dc,0x70,0xc);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_003572dc,0x70,0xc);
   param_1 = param_1 + 0x540;
-  FUN_002c5d5c(param_1,&LAB_003572d0,0x14,0xc);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_003572d0,0x14,0xc);
   temp_v3 = param_1 - 0x6a0;
   *(unsigned int *)(param_1 - 0x6a0) = 0;
   memClear(param_1 - 0x69c,0x150);

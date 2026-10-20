@@ -1,22 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ae2d0` (_code @ 0x3ae2d0, 0x18 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "battle/btlUI.h"
 
 extern "C" {
 
-int FUN_001f4ddc(int, int);
+extern BtlUiGlobals g_btlUi;
 
-extern unsigned char g_btlUi; /* 0x439c88 */
+extern void FUN_001f4ddc(BtlUiObjC *obj, s16 arg);
 
-/* Supplied declaration required: FUN_001f4ddc. */
-
-
-void FUN_003ae2d0(unsigned int param_1,short param_2)
-
+void FUN_003ae2d0(u32 unused, s32 arg)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001f4ddc((*(int *)((unsigned char *)&g_btlUi + 0x20)) + 0x2460,(int)param_2);
-  return;
+    FUN_001f4ddc(&g_btlUi.ui->objC, arg);
 }
 
 } /* extern "C" */

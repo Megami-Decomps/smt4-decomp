@@ -13,7 +13,7 @@ int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002beed0(...);
 int gameDataBlocksGetSaveData(void);
-int FUN_002c312c(...);
+int paramsInit(...);
 int memClear(...);
 int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
@@ -65,7 +65,7 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002beed0. */
 /* Supplied declaration required: gameDataBlocksGetSaveData. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -156,7 +156,7 @@ void FUN_00202ab4(void)
   puVar1[0xb] = 0x3f000000;
   puVar1[0xc] = 0x3f000000;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0x1f);
-  FUN_002c312c(puVar1 + 0x1f,&DAT_00405e2c,0x3c,0,0,0,0,0,0,&DAT_00405e68,0xe0);
+  paramsInit(puVar1 + 0x1f,&DAT_00405e2c,0x3c,0,0,0,0,0,0,&DAT_00405e68,0xe0);
   FUN_002bd954(puVar1 + 0x27,0x36,1,puVar1 + 0x1f,0xc9);
   FUN_002beed0(puVar1 + 0x4a,0x36,0x51,2,puVar1 + 0x1f,2);
   FUN_002beed0(puVar1 + 0x6d,0x36,0x52,2,puVar1 + 0x1f,2);

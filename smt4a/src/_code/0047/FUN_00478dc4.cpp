@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int flagObjAdvance(int);
 int FUN_0047306c(int, int, int);
-int FUN_0047314c(int);
+int jobOwnerFreeSlotAndStop(int);
 int FUN_00477d10(...);
 int FUN_0047daf4(unsigned char [20]);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: flagObjAdvance. */
 /* Supplied declaration required: FUN_0047306c. */
-/* Supplied declaration required: FUN_0047314c. */
+/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 /* Supplied declaration required: FUN_00477d10. */
 /* Supplied declaration required: FUN_0047daf4. */
 
@@ -42,7 +42,7 @@ void FUN_00478dc4(int param_1)
   }
   if (temp_v1 != 1) {
     if ((temp_v1 == 2) && (*(char *)(param_1 + 0x167a) != '\0')) {
-      FUN_0047314c(temp_v2);
+      jobOwnerFreeSlotAndStop(temp_v2);
       *(unsigned int *)(param_1 + 4) = 0xf;
       *(unsigned int *)(param_1 + 8) = 0;
       if (*(int **)(param_1 + 0x208) != (int *)0x0) {
@@ -52,7 +52,7 @@ void FUN_00478dc4(int param_1)
     }
   }
   else if ((*(char *)(param_1 + 0x167a) != '\0') && (temp_v1 = FUN_002e1a18(0x10), temp_v1 != 0)) {
-    FUN_001641b4(0x100020e);
+    eventQueueAddUniqueIfValid(0x100020e);
     flagObjAdvance(temp_v2);
     FUN_00477d10(param_1,0xffffffff,0);
     temp_v0 = 2;

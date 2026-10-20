@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002eca44(void);
-int FUN_00300820(unsigned int *, unsigned int);
+int sharedRefHolderReplace(unsigned int *, unsigned int);
 
 extern unsigned char DAT_0055970c; /* 0x55970c */
 
 /* Supplied declaration required: FUN_002eca44. */
-/* Supplied declaration required: FUN_00300820. */
+/* Supplied declaration required: sharedRefHolderReplace. */
 
 
 unsigned int * FUN_002fafd0(unsigned int *param_1,unsigned int param_2)
@@ -25,7 +25,7 @@ unsigned int * FUN_002fafd0(unsigned int *param_1,unsigned int param_2)
   param_1[0x1b] = 0;
   param_1[0x1c] = 0;
   param_1[0x1d] = 0;
-  FUN_00300820(param_1,param_2);
+  sharedRefHolderReplace(param_1,param_2);
   return param_1;
 }
 

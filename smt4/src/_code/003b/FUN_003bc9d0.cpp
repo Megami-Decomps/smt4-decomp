@@ -12,7 +12,7 @@ int asdMdlManagerCreateLoaded(...);
 int FUN_0029c2cc(...);
 int FUN_0029c3c0(...);
 int FUN_002a0428(...);
-int FUN_002a043c(...);
+int modelSlotAttachChild(...);
 int FUN_002a09b4(...);
 int asdWorkAreaReset(...);
 int asdModelSlotRelease(...);
@@ -54,7 +54,7 @@ extern int FUN_00282b28(void);
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: FUN_0029c3c0. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002a043c. */
+/* Supplied declaration required: modelSlotAttachChild. */
 /* Supplied declaration required: FUN_002a09b4. */
 /* Supplied declaration required: asdWorkAreaReset. */
 /* Supplied declaration required: asdModelSlotRelease. */
@@ -88,7 +88,7 @@ void FUN_003bc9d0(fn_003bc9d0_arg0 *param_1)
     FUN_002a09b4("title/title.bcenv",0);
     pvVar2 = (void *)FUN_00263c1c("title/title_1.bccam");
     param_1->field_0x18 = pvVar2;
-    FUN_002a043c(pvVar2,0);
+    modelSlotAttachChild(pvVar2,0);
     temp_v1 = FUN_002c501c();
     FUN_002a8638(*(unsigned int *)((int)param_1->field_0x18 + 8),&temp_v2,temp_v5,temp_v3,
                  temp_v4);

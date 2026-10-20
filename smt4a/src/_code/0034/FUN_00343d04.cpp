@@ -30,7 +30,7 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: FUN_0031416c. */
 extern int lmapSceneGetScript(void);
-extern unsigned int *FUN_003e5d10(void);
+extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: FUN_0040ae70. */
 extern int FUN_0040af60(unsigned int);
 /* Supplied declaration required: FUN_0040b0f8. */
@@ -53,7 +53,7 @@ void FUN_00343d04(int param_1)
   asdOperatorNew(0x130,param_1);
   puVar3 = (unsigned int *)0x0;
   if (temp_v1 != 0) {
-    puVar3 = (unsigned int *)FUN_003e5d10();
+    puVar3 = (unsigned int *)_ZN9Obj557ae8C1Ev();
     *puVar3 = (unsigned int)&DAT_00557c60;
   }
   *(unsigned int **)(param_1 + 0x1c) = puVar3;

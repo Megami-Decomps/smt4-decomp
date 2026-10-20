@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMdlManagerMarkDestroy(...);
-int FUN_00254a2c(...);
+int animPlayerSetLoopPolicy(...);
 int gfxObjectDestroy(...);
 int FUN_0028703c(...);
 int FUN_00287728(...);
@@ -13,7 +13,7 @@ int FUN_0029bb14(...);
 int FUN_0029c2cc(...);
 int FUN_002a03d8(...);
 int FUN_002a0428(...);
-int FUN_002a043c(...);
+int modelSlotAttachChild(...);
 int FUN_002a04f0(...);
 int FUN_002a09b4(...);
 int FUN_002a5710(...);
@@ -32,7 +32,7 @@ extern int nw_anim_PlayPolicy_Loop(...); /* 0x151500 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: asdMdlManagerMarkDestroy. */
-/* Supplied declaration required: FUN_00254a2c. */
+/* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: gfxObjectDestroy. */
 extern int effTimelineIsDone(unsigned int);
 extern unsigned int FUN_00263c1c(char *);
@@ -43,7 +43,7 @@ extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002a043c. */
+/* Supplied declaration required: modelSlotAttachChild. */
 /* Supplied declaration required: FUN_002a04f0. */
 /* Supplied declaration required: FUN_002a09b4. */
 /* Supplied declaration required: FUN_002a5710. */
@@ -94,7 +94,7 @@ unsigned int FUN_00205184(void)
       *(unsigned int *)(temp_v0 + 0x570) = 1;
       if ((temp_v1 != 0) && (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0)) {
         FUN_002a0428(temp_v1,1);
-        FUN_00254a2c(*(unsigned int *)(*piVar4 + 8),1);
+        animPlayerSetLoopPolicy(*(unsigned int *)(*piVar4 + 8),1);
         FUN_002a5710(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x570));
         FUN_0028703c(*(unsigned int *)(*piVar4 + 8));
         FUN_0029bb14(*(unsigned int *)(*piVar4 + 8));
@@ -102,7 +102,7 @@ unsigned int FUN_00205184(void)
       FUN_002a04f0(0);
       temp_v2 = *(unsigned int *)(temp_v0 + *(int *)(temp_v0 + 0x570) * 4 + 0x55c);
       *(unsigned int *)(temp_v0 + 0x558) = temp_v2;
-      FUN_002a043c(temp_v2,0);
+      modelSlotAttachChild(temp_v2,0);
       temp_v1 = *(int *)(*(int *)(temp_v0 + 0x55c) + 4);
       *(romwright_code **)(temp_v1 + 0x4c) = nw_anim_PlayPolicy_Loop;
       *(unsigned char *)(temp_v1 + 0x58) = 1;
@@ -132,7 +132,7 @@ unsigned int FUN_00205184(void)
       FUN_002a5710(*(unsigned int *)(*piVar5 + 8),0);
       temp_v2 = *(unsigned int *)(temp_v0 + *piVar4 * 4 + 0x55c);
       *(unsigned int *)(temp_v0 + 0x558) = temp_v2;
-      FUN_002a043c(temp_v2,0);
+      modelSlotAttachChild(temp_v2,0);
       temp_v1 = *(int *)(*(int *)(temp_v0 + *piVar4 * 4 + 0x55c) + 4);
       temp_v2 = *(unsigned int *)(temp_v1 + 0x44);
       (**(romwright_code **)(temp_v1 + 0x4c))(*(unsigned int *)(temp_v1 + 0x50));

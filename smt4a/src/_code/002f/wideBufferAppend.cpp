@@ -1,31 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `wideBufferAppend` (_code @ 0x2f32f8, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail branches to an out-of-line `add r1, pc, #0` (the empty-string literal) that jumps back to the first test, i.e. the default is applied by re-running the test; this build tests once and sets the default inline */
+#include "common.h"
 
 extern "C" {
 
-int wstrcpyU16(unsigned int, int);
-int FUN_002ee796(int, int);
+typedef struct WideBuffer {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u16 *end;
+} WideBuffer;
 
-extern int wstrlenU16(int);
-/* Supplied declaration required: wstrcpyU16. */
-/* Supplied declaration required: FUN_002ee796. */
+s32 wstrlenU16(const u16 *text);
+void wstrcpyU16(u16 *dest, const u16 *text);
+void FUN_002ee796(WideBuffer *buffer, s32 count);
 
-
-int wideBufferAppend(int param_1,int param_2)
-
+/* Appends a wide string (an empty one when text is NULL) to the buffer and returns the buffer. */
+WideBuffer *wideBufferAppend(WideBuffer *buffer, const u16 *text)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  while (param_2 == 0) {
-    param_2 = 0x2f3328;
-  }
-  temp_v0 = wstrlenU16(param_2);
-  FUN_002ee796(param_1,temp_v0 + 1);
-  wstrcpyU16(*(unsigned int *)(param_1 + 0xc),param_2);
-  *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + temp_v0 * 2;
-  return param_1;
+    s32 length;
+
+    text = text != NULL ? text : (const u16 *)L"";
+    length = wstrlenU16(text);
+    FUN_002ee796(buffer, length + 1);
+    wstrcpyU16(buffer->end, text);
+    buffer->end += length;
+    return buffer;
 }
 
 } /* extern "C" */

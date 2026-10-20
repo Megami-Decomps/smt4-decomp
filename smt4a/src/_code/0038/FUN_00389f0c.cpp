@@ -1,39 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00389f0c` (_code @ 0x389f0c, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail materialises the table index 0 in r1 before storing the key id and copies it to r0 (mov r1,#0; strh; mov r0,r1); built loads r0 directly. */
+#include "common.h"
 
 extern "C" {
 
-int libc_bsearch(unsigned short [92], unsigned int, unsigned int, int, unsigned char *);
+typedef int (*SearchCompare)(const void *key, const void *entry);
 
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short spC4; /* 0xc4: local_c4 */
-    unsigned int spC8; /* 0xc8: local_c8 */
-} param_1_stack;
+typedef struct SearchKey {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02[0xB2];
+} SearchKey; /* 0xB4 bytes, the size of a table entry */
 
-extern unsigned char LAB_0018449c; /* 0x18449c */
+extern u32 dataTableGet(u32 table);
+extern void *dataTableGetEntries(void);
+extern u32 dataTableGetCount(u32 table);
+extern void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, SearchCompare compare);
 
-/* Supplied declaration required: libc_bsearch. */
-extern unsigned int dataTableGet(unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-
-
-void FUN_00389f0c(unsigned short param_1)
-
+/* Looks up table entry `id` in data table 0 by binary search (result unused). */
+void FUN_00389f0c(u16 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned short temp_v2 [92];
-  
-  temp_v2[0] = param_1;
-  temp_v0 = dataTableGet(0);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  libc_bsearch(temp_v2,temp_v1,temp_v0,0xb4,&LAB_0018449c);
-  return;
+    SearchKey key;
+    u32 table;
+    void *entries;
+
+    key.id = id;
+    table = dataTableGet(0);
+    entries = dataTableGetEntries();
+    libc_bsearch(&key, entries, dataTableGetCount(table), 0xB4, (SearchCompare)0x18449C);
 }
 
 } /* extern "C" */

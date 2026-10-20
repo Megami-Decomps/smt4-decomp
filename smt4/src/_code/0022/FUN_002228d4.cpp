@@ -1,16 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002228d4` (_code @ 0x2228d4, 0x18 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail adds the table base (+0x88) as a separate `add r0, r0, #136` and indexes it with the 0x24B27 literal; the build folds both into one 0x24BAF literal. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
+typedef struct GameBlock04 {
+    /* 0x00000 */ u8 unk00000[0x88];
+    /* 0x00088 */ u8 table[0x24B28];   /* indexed by id */
+} GameBlock04;
 
+typedef struct GameDataBlocksView {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ GameBlock04 *block04;
+} GameDataBlocksView;
 
-unsigned char FUN_002228d4(void)
+extern GameDataBlocksView g_gameDataBlocks; /* 0x43e2a8 */
 
+/* Byte 0x24B27 of the block-04 table. */
+u8 FUN_002228d4(void)
 {
-  return *(unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x24baf);
+    return g_gameDataBlocks.block04->table[0x24B27];
 }
 
 } /* extern "C" */

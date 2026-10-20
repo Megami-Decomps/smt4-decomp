@@ -1,57 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029bd4c` (_code @ 0x29bd4c, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct StatusDown {
+    /* 0x000 */ u8 unk000[0x28];
+    /* 0x028 */ u8 timer[0x3D4];
+    /* 0x3FC */ u8 unk3FC;
+    /* 0x3FD */ u8 unk3FD[3];
+    /* 0x400 */ s32 state;
+    /* 0x404 */ s32 prevState;
+    /* 0x408 */ u32 unk408;
+    /* 0x40C */ u32 unk40C;
+    /* 0x410 */ u8 unk410[0x1C];
+    /* 0x42C */ u8 slots[0x29];
+    /* 0x455 */ u8 unk455[0x2B];
+    /* 0x480 */ u8 touchRegionCount;
+} StatusDown;
+
+extern StatusDown *g_statusDown;
+
+int timerStart(void *timer, s32 arg0, s32 arg1);
 int ifTouchRegionRemove(void);
-int timerStart(int, int, int);
-int __aeabi_memset4(int, int, unsigned int);
+void __aeabi_memset4(void *block, u32 size, u32 value);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern int g_statusDown; /* 0x44e190 */
-
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: timerStart. */
-/* Supplied declaration required: __aeabi_memset4. */
-
-
+/* If the status screen is up, restarts its timer, moves it to state 2, removes its touch regions and clears its slot block. */
 void FUN_0029bd4c(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  int temp_v2;
-  
-  temp_v2 = g_statusDown;
-  if (*(int *)(g_statusDown + 0x400) != 0) {
-    timerStart(g_statusDown + 0x28,2,0);
-    temp_v0 = g_statusDown;
-    puVar3 = (unsigned int *)(g_statusDown + 0x400);
-    *(unsigned int *)(g_statusDown + 0x40c) = 0;
-    temp_v1 = *(unsigned int *)(temp_v0 + 0x400);
-    *puVar3 = 2;
-    *(unsigned int *)(temp_v0 + 0x404) = temp_v1;
-    *(unsigned int *)(temp_v2 + 0x408) = 0;
-    *(unsigned char *)(temp_v2 + 0x3fc) = 0;
-    temp_v2 = 0;
-    if (*(char *)(temp_v0 + 0x480) != '\0') {
-      do {
-        ifTouchRegionRemove();
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < (int)(unsigned int)*(unsigned char *)(temp_v0 + 0x480));
+    StatusDown *screen = g_statusDown;
+    StatusDown *status;
+    s32 previous;
+    s32 i;
+
+    if (screen->state == 0) {
+        return;
     }
-    *(unsigned char *)(temp_v0 + 0x480) = 0;
-    __aeabi_memset4(temp_v0 + 0x42c,0x29,0xffffffff);
-    return;
-  }
-  return;
+    timerStart(screen->timer, 2, 0);
+    status = g_statusDown;
+    status->unk40C = 0;
+    previous = status->state;
+    status->state = 2;
+    status->prevState = previous;
+    screen->unk408 = 0;
+    screen->unk3FC = 0;
+    for (i = 0; i < status->touchRegionCount; i++) {
+        ifTouchRegionRemove();
+    }
+    status->touchRegionCount = 0;
+    __aeabi_memset4(status->slots, 0x29, 0xFFFFFFFF);
 }
 
 } /* extern "C" */

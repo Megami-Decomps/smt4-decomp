@@ -7,7 +7,7 @@ extern "C" {
 int rt_memclr(unsigned int, unsigned int);
 int asdOperatorDeleteArray(unsigned int);
 int FUN_002e6e34(unsigned char [12], int *);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineStringSetFromRaw(unsigned int, unsigned int);
 int FUN_0030eef0(...);
 
@@ -25,7 +25,7 @@ extern unsigned int rt_malloc(unsigned int);
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineStringSetFromRaw. */
 /* Supplied declaration required: FUN_0030eef0. */
 
@@ -60,11 +60,11 @@ int FUN_00123d50(int *param_1,unsigned int param_2,unsigned int param_3)
         onlineStringSetFromRaw(param_3,temp_v0);
       }
       asdOperatorDeleteArray(temp_v0);
-      FUN_002e6e5c(temp_v3);
+      _ZN9Obj55b28cD1Ev(temp_v3);
       return temp_v2;
     }
   }
-  FUN_002e6e5c(temp_v3);
+  _ZN9Obj55b28cD1Ev(temp_v3);
   return 0;
 }
 

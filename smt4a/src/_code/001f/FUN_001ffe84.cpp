@@ -19,7 +19,7 @@ int FUN_003450d4(...);
 int FUN_003da8f4(...);
 
 int FUN_001517b4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int gameGetSlotRecord(void);
 int FUN_0020b660(...);
 int FUN_0020d700(void);
@@ -50,7 +50,7 @@ typedef struct {
 extern int g_camp; /* 0x57f108 */
 
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern unsigned short FUN_00167f08(void);
 /* Supplied declaration required: sysPlaySe. */
@@ -166,7 +166,7 @@ void FUN_001ffe84(void)
       FUN_0020d700();
       *(unsigned char *)(temp_v8 + 0x32a8) = 0;
     }
-    FUN_001641b4(0x100020f);
+    eventQueueAddUniqueIfValid(0x100020f);
     return;
   }
   FUN_003d386c(0);
@@ -283,7 +283,7 @@ void FUN_001ffe84(void)
         temp_v3 = gameGetPlayerData();
         if ((*(unsigned short *)(temp_v3 + 0x5e) & 2) != 0) {
           temp_v7 = 0x100020f;
-          FUN_001641b4(temp_v7);
+          eventQueueAddUniqueIfValid(temp_v7);
           return;
         }
       }
@@ -296,7 +296,7 @@ void FUN_001ffe84(void)
         temp_v3 = gameFlagIsSet(0x401);
         if (temp_v3 == 0 || !temp_v0) {
           temp_v7 = 0x100020f;
-          FUN_001641b4(temp_v7);
+          eventQueueAddUniqueIfValid(temp_v7);
           return;
         }
       }
@@ -326,7 +326,7 @@ void FUN_001ffe84(void)
           FUN_00334214(temp_v7,0,0);
           FUN_002a7324(0);
         }
-        FUN_001641b4(0x100021c);
+        eventQueueAddUniqueIfValid(0x100021c);
         FUN_002e1b3c(0);
         FUN_0020b660(0x47);
         sysPlaySe(0xa0);
@@ -359,7 +359,7 @@ void FUN_001ffe84(void)
           FUN_00334214(temp_v7,0,0);
           FUN_002a7324(0);
         }
-        FUN_001641b4(0x100021c);
+        eventQueueAddUniqueIfValid(0x100021c);
         FUN_002e1b3c(4);
         FUN_0020b660(0x47);
         sysPlaySe(0xa0);
@@ -396,7 +396,7 @@ void FUN_001ffe84(void)
           temp_v2 = FUN_00167f08();
           *(unsigned short *)(temp_v8 + 0x3a) = temp_v2;
           FUN_0020b660(0x2b);
-          FUN_001641b4(temp_v7);
+          eventQueueAddUniqueIfValid(temp_v7);
           return;
         }
       }
@@ -418,7 +418,7 @@ void FUN_001ffe84(void)
     FUN_002277d8();
     temp_v7 = 0x100020f;
   }
-  FUN_001641b4(temp_v7);
+  eventQueueAddUniqueIfValid(temp_v7);
   return;
 }
 

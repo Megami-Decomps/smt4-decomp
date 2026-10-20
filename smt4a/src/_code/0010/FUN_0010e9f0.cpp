@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], unsigned int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002ea974(unsigned char [104]);
 int onlineUrlSetAddress(unsigned char [104], int);
 int onlineUrlDestroy(unsigned char [104]);
@@ -24,7 +24,7 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 extern unsigned int onlineUrlGetAddress(unsigned char *);
 /* Supplied declaration required: FUN_002ea974. */
@@ -75,7 +75,7 @@ void FUN_0010e9f0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   FUN_002e6e34(temp_v5,temp_v0);
   temp_v1 = FUN_002f86cc(param_1,param_2);
   if (temp_v1 == 0) {
-    FUN_002e6e5c(temp_v5);
+    _ZN9Obj55b28cD1Ev(temp_v5);
     return;
   }
   if (*(int *)(param_1 + 0xbc) != 0) {
@@ -87,7 +87,7 @@ void FUN_0010e9f0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     FUN_002eb17c(param_6,temp_v0);
     onlineUrlDestroy(temp_v4);
     if (temp_v1 != 0) {
-      FUN_002e6e5c(temp_v5);
+      _ZN9Obj55b28cD1Ev(temp_v5);
       return;
     }
   }
@@ -100,7 +100,7 @@ void FUN_0010e9f0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   *(unsigned char *)(param_6 + 0x26) = *puVar3;
   *(short *)(param_6 + 0x86) = (short)param_2;
   (**(romwright_code **)(**(int **)(param_1 + 500) + 0xc))(*(int **)(param_1 + 500),param_6,1);
-  FUN_002e6e5c(temp_v5);
+  _ZN9Obj55b28cD1Ev(temp_v5);
   return;
 }
 

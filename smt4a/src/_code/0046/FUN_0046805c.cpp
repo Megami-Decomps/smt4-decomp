@@ -28,7 +28,7 @@ extern unsigned char gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019ea64. */
 /* Supplied declaration required: FUN_0020401c. */
 extern int FUN_002c2758(unsigned short);
-extern int FUN_0031d62c(void);
+extern int messageWindowIsState1(void);
 /* Supplied declaration required: FUN_0034913c. */
 /* Supplied declaration required: FUN_0037d6e4. */
 /* Supplied declaration required: FUN_003a7630. */
@@ -102,7 +102,7 @@ void FUN_0046805c(unsigned int *param_1)
     *param_1 = *param_1 & 0xfffffdff;
     param_1[1] = 0x11;
     param_1[2] = 0;
-    temp_v3 = FUN_0031d62c();
+    temp_v3 = messageWindowIsState1();
     if (temp_v3 != 0) {
       FUN_0034913c();
       return;

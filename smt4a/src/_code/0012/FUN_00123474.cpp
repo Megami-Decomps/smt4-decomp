@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002f3dc4(void);
 int FUN_002f3dde(int, int *, unsigned int, unsigned char [4]);
@@ -19,7 +19,7 @@ typedef struct {
 
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern int FUN_002ea6fc(unsigned int *);
@@ -59,7 +59,7 @@ void FUN_00123474(unsigned int param_1,unsigned int *param_2,unsigned int *param
     }
   }
   FUN_002f674e(param_1);
-  FUN_002e6e5c(temp_v3);
+  _ZN9Obj55b28cD1Ev(temp_v3);
   return;
 }
 

@@ -1,47 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e892c` (_code @ 0x3e892c, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the final slot value is loaded with `ldrsh` (retail `ldrh`) and the +0x2004 store address comes from a literal pool word; retail forms r1 = list + 0x2000 and stores at [r1, #4]. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003f26d4(int);
+#define SLOT_COUNT 12
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct SlotState {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ s16 current;          /* the slot value in use, -1 when there is none */
+} SlotState;
 
-/* Supplied declaration required: FUN_003f26d4. */
+typedef struct SlotList {
+    /* 0x0000 */ u8 unk0000[0x2000];
+    /* 0x2000 */ SlotState state;
+    /* 0x2006 */ u8 unk2006[0xFFA];
+    /* 0x3000 */ u8 unk3000[6];
+    /* 0x3006 */ s16 slots[SLOT_COUNT]; /* negative when empty */
+    /* 0x301E */ s16 cursor;
+} SlotList;
 
+extern void FUN_003f26d4(SlotList *list);
 
-void FUN_003e892c(int param_1)
-
+/* Advances the cursor to the next non-empty slot (or hands the list on when it runs out) and publishes its value. */
+void FUN_003e892c(SlotList *list)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  unsigned short temp_v1;
-  
-  if (*(short *)(param_1 + 0x301e) < 0) {
-    FUN_003f26d4(param_1);
-    return;
-  }
-  do {
-    temp_v0 = *(short *)(param_1 + 0x301e) + 1;
-    *(short *)(param_1 + 0x301e) = temp_v0;
-    if (temp_v0 >= 0xc) {
-      FUN_003f26d4(param_1);
-      break;
+    if (list->cursor < 0) {
+        FUN_003f26d4(list);
+        return;
     }
-  } while (*(short *)(param_1 + temp_v0 * 2 + 0x3006) < 0);
-  if (*(short *)(param_1 + 0x301e) >= 0) {
-    temp_v1 = *(unsigned short *)(param_1 + *(short *)(param_1 + 0x301e) * 2 + 0x3006);
-  }
-  else {
-    temp_v1 = 0xffff;
-    *(unsigned short *)(param_1 + 0x301e) = 0;
-  }
-  *(unsigned short *)(param_1 + 0x2004) = temp_v1;
-  return;
+    do {
+        list->cursor++;
+        if (list->cursor >= SLOT_COUNT) {
+            FUN_003f26d4(list);
+            break;
+        }
+    } while (list->slots[list->cursor] < 0);
+    s16 value;
+
+    if (list->cursor >= 0) {
+        value = list->slots[list->cursor];
+    } else {
+        list->cursor = 0;
+        value = -1;
+    }
+    list->state.current = value;
 }
 
-} /* extern "C" */
+}

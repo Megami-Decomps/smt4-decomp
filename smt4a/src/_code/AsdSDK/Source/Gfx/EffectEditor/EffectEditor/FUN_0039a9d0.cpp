@@ -13,7 +13,7 @@ int FUN_00200bcc(unsigned int *);
 int FUN_00202178(int);
 int effEditorNodeChainApply(unsigned int *);
 int FUN_0020ea14(void);
-int FUN_00222260(...);
+int effBlockLoadClone(...);
 int FUN_00243c24(void);
 int FUN_00272204(unsigned int, unsigned int [2], int);
 int taskRunWithObject(unsigned int, int, int);
@@ -77,7 +77,7 @@ extern unsigned int uRam00634d68; /* 0x634d68 */
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: FUN_0020ea14. */
-/* Supplied declaration required: FUN_00222260. */
+/* Supplied declaration required: effBlockLoadClone. */
 /* Supplied declaration required: FUN_00243c24. */
 /* Supplied declaration required: FUN_00272204. */
 /* Supplied declaration required: taskRunWithObject. */
@@ -183,7 +183,7 @@ LAB_0039ab4c:
     FUN_001b4ddc(&DAT_00634d20);
     temp_v6 = *piVar3;
     if (piVar3[2] != 0) {
-      temp_v1 = FUN_00222260();
+      temp_v1 = effBlockLoadClone();
       temp_v2 = FUN_002b41c4();
       rt_memcpy(*(unsigned int *)(temp_v6 + 0xc),temp_v2,*(unsigned int *)(temp_v6 + 0x10));
     }
@@ -267,7 +267,7 @@ LAB_0039ab4c:
         uRam00634d60 = *(unsigned int *)(param_2 + 0xc);
         uRam00634d64 = *(unsigned int *)(param_2 + 0x10);
         uRam00634d68 = *(unsigned int *)(param_2 + 0x14);
-        temp_v5 = FUN_00222260(*(unsigned int *)(param_2 + 8));
+        temp_v5 = effBlockLoadClone(*(unsigned int *)(param_2 + 8));
         temp_v6 = temp_v5;
         FUN_00243c24();
         DAT_0059dc00 = temp_v6;

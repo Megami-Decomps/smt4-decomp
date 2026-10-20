@@ -17,9 +17,9 @@ extern int FUN_001f5f20(...); /* 0x1f5f20 */
 extern int FUN_001f646c(...); /* 0x1f646c */
 extern int FUN_00206e9c(...); /* 0x206e9c */
 extern int FUN_00206ef0(...); /* 0x206ef0 */
-extern int FUN_00206f30(...); /* 0x206f30 */
-extern int FUN_00206f94(...); /* 0x206f94 */
-extern int FUN_00206fd4(...); /* 0x206fd4 */
+extern int devilRecordCompare(...); /* 0x206f30 */
+extern int devilIdCompareGradeDesc(...); /* 0x206f94 */
+extern int dataTable08Sub2CompareByRank(...); /* 0x206fd4 */
 extern int FUN_00207014(...); /* 0x207014 */
 extern int FUN_00207054(...); /* 0x207054 */
 extern int FUN_00207094(...); /* 0x207094 */
@@ -29,7 +29,7 @@ extern int FUN_00219148(...); /* 0x219148 */
 extern int FUN_00219208(...); /* 0x219208 */
 extern int FUN_002194dc(...); /* 0x2194dc */
 extern int FUN_00219530(...); /* 0x219530 */
-extern int FUN_0021963c(...); /* 0x21963c */
+extern int dataTable08Sub1CompareRank(...); /* 0x21963c */
 extern int FUN_002497f8(...); /* 0x2497f8 */
 extern int FUN_00257568(...); /* 0x257568 */
 extern int FUN_002c6d30(...); /* 0x2c6d30 */
@@ -45,12 +45,12 @@ extern int FUN_002e46f8(...); /* 0x2e46f8 */
 extern int FUN_002e4744(...); /* 0x2e4744 */
 extern int FUN_002e4798(...); /* 0x2e4798 */
 extern int FUN_002e47d8(...); /* 0x2e47d8 */
-extern int FUN_002e482c(...); /* 0x2e482c */
-extern int FUN_002e4890(...); /* 0x2e4890 */
-extern int FUN_002e48d0(...); /* 0x2e48d0 */
+extern int dataTable08Sub2CompareByGroup(...); /* 0x2e482c */
+extern int devilIdCompareGradeAsc(...); /* 0x2e4890 */
+extern int dataTable08Sub2CompareByRankAscending(...); /* 0x2e48d0 */
 extern int FUN_002e4910(...); /* 0x2e4910 */
 extern int FUN_002e4950(...); /* 0x2e4950 */
-extern int FUN_002e4990(...); /* 0x2e4990 */
+extern int dataTable08CompareIds(...); /* 0x2e4990 */
 extern int FUN_002e49dc(...); /* 0x2e49dc */
 extern int FUN_002e4a0c(...); /* 0x2e4a0c */
 extern int FUN_002e4a60(...); /* 0x2e4a60 */
@@ -66,7 +66,7 @@ extern int FUN_0030bce8(...); /* 0x30bce8 */
 extern int FUN_0030bd88(...); /* 0x30bd88 */
 extern int FUN_0030be80(...); /* 0x30be80 */
 extern int FUN_0030bed8(...); /* 0x30bed8 */
-extern int FUN_0030bf40(...); /* 0x30bf40 */
+extern int dataTable08Sub2CompareIds(...); /* 0x30bf40 */
 extern int FUN_00313184(...); /* 0x313184 */
 extern int FUN_0031324c(...); /* 0x31324c */
 extern int FUN_00313298(...); /* 0x313298 */
@@ -233,7 +233,7 @@ void FUN_00282f80(int param_1)
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,2,FUN_0021963c);
+        FUN_002b7bca(temp_v1,temp_v2,2,dataTable08Sub1CompareRank);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x10) {
@@ -278,7 +278,7 @@ void FUN_00282f80(int param_1)
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,2,FUN_002e4990);
+        FUN_002b7bca(temp_v1,temp_v2,2,dataTable08CompareIds);
       }
     }
     if ((*pbVar4 & 0x7f) == 3) {
@@ -309,11 +309,11 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 6) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_002e482c);
+        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08Sub2CompareByGroup);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_00206f30);
+        FUN_002b7bca(temp_v5,temp_v2,2,devilRecordCompare);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x11) {
@@ -354,11 +354,11 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 6) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,FUN_002e482c);
+        FUN_002b7bca(temp_v4,temp_v2,2,dataTable08Sub2CompareByGroup);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,FUN_00206f30);
+        FUN_002b7bca(temp_v4,temp_v2,2,devilRecordCompare);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x1f) {
@@ -428,11 +428,11 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 0x25) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_002e4890);
+        FUN_002b7bca(temp_v5,temp_v2,2,devilIdCompareGradeAsc);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_00206f94);
+        FUN_002b7bca(temp_v5,temp_v2,2,devilIdCompareGradeDesc);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x26) {
@@ -458,11 +458,11 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 0x28) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_002e48d0);
+        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08Sub2CompareByRankAscending);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_00206fd4);
+        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08Sub2CompareByRank);
       }
     }
     if ((*pbVar4 & 0x7f) == 3) {
@@ -493,7 +493,7 @@ void FUN_00282f80(int param_1)
     if ((temp_v0 & 0x7f) == 0x33) {
       if ((char)temp_v0 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,FUN_0030bf40);
+        FUN_002b7bca(temp_v4,temp_v2,2,dataTable08Sub2CompareIds);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);

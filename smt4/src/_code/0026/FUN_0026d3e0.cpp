@@ -8,7 +8,7 @@ int FUN_0026cba4(int, int, unsigned int);
 int FUN_0028caf8(...);
 int FUN_00292be4(unsigned int, int, int);
 int FUN_00298d28(int, int);
-int FUN_0029e908(...);
+int objectPartRunUnlessLocked(...);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_0028caf8. */
 /* Supplied declaration required: FUN_00292be4. */
 /* Supplied declaration required: FUN_00298d28. */
-/* Supplied declaration required: FUN_0029e908. */
+/* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int FUN_0029efa8(unsigned int);
 extern int gameGetSlotTable(void);
 
@@ -46,21 +46,21 @@ void FUN_0026d3e0(unsigned int param_1,int param_2)
   temp_v6 = 0;
   if (param_2 != 0) {
     if (*(char *)(temp_v0 + 0x42) != '\0') {
-      temp_v2 = FUN_0029e908();
+      temp_v2 = objectPartRunUnlessLocked();
       temp_v1 = FUN_0029efa8(param_1);
       temp_v2 = temp_v2 + temp_v1 * 4;
     }
     else {
       temp_v1 = FUN_0029efa8(param_1);
       temp_v4 = *(int *)(temp_v0 + 0x2c);
-      temp_v2 = FUN_0029e908(param_1);
+      temp_v2 = objectPartRunUnlessLocked(param_1);
       temp_v2 = temp_v1 * 4 + temp_v4 * 0xc + temp_v2;
     }
   }
   else {
     temp_v2 = FUN_0029efa8(param_1);
     if (temp_v2 < 1) {
-      temp_v2 = FUN_0029e908(param_1);
+      temp_v2 = objectPartRunUnlessLocked(param_1);
       if (temp_v2 != 0) {
         FUN_0028caf8((int)*(char *)(temp_v1 + temp_v2 + 0x9107),*(unsigned short *)(temp_v0 + 0x36),&temp_v5,
                      &temp_v6);
@@ -76,14 +76,14 @@ void FUN_0026d3e0(unsigned int param_1,int param_2)
       return;
     }
     if (*(char *)(temp_v0 + 0x42) != '\0') {
-      temp_v2 = FUN_0029e908();
+      temp_v2 = objectPartRunUnlessLocked();
       temp_v1 = FUN_0029efa8(param_1);
       temp_v2 = temp_v2 + temp_v1 * 4;
     }
     else {
       temp_v1 = FUN_0029efa8(param_1);
       temp_v4 = *(int *)(temp_v0 + 0x2c);
-      temp_v2 = FUN_0029e908(param_1);
+      temp_v2 = objectPartRunUnlessLocked(param_1);
       temp_v2 = temp_v2 + temp_v1 * 4 + temp_v4 * 0xc;
     }
     temp_v2 = temp_v2 - 4;

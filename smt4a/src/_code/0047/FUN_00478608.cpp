@@ -9,7 +9,7 @@ int scrScriptProcessDestroy(int);
 int FUN_001b57a8(unsigned int *, int);
 int FUN_001ba1c0(int, int *);
 int FUN_00275bc8(void *, unsigned int);
-int FUN_002844e4(void);
+int msgWindowReset(void);
 int FUN_0034913c(void);
 int FUN_0047daf4(int *);
 
@@ -50,7 +50,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_001b57a8. */
 /* Supplied declaration required: FUN_001ba1c0. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_002844e4. */
+/* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: FUN_0034913c. */
 /* Supplied declaration required: FUN_0047daf4. */
 
@@ -88,7 +88,7 @@ void FUN_00478608(fn_00478608_arg0 *param_1)
     FUN_00275bc8(pvVar1,*(unsigned int *)&param_1->field_0x354);
     param_1->field_0x358 = (int)pvVar1;
     *(unsigned int *)((int)pvVar1 + 0x108) = 2;
-    FUN_002844e4();
+    msgWindowReset();
     FUN_0034913c();
     ifTouchRegionRemove();
     ifTouchRegionRemove();

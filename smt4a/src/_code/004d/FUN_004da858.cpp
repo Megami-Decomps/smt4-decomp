@@ -13,7 +13,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00184310. */
 extern int gameFlagIsSet(void);
-extern int FUN_00239234(unsigned short, unsigned char *);
+extern int gameDataCopySaveEntry(unsigned short, unsigned char *);
 
 
 unsigned int FUN_004da858(unsigned int param_1,unsigned short *param_2)
@@ -33,10 +33,10 @@ unsigned int FUN_004da858(unsigned int param_1,unsigned short *param_2)
   temp_v0 = param_2[0x1e];
   if ((temp_v0 & 1) != 0) {
     if ((temp_v0 & 0xfffe) != 0) {
-      temp_v1 = FUN_00239234(temp_v0 >> 1,temp_v2);
+      temp_v1 = gameDataCopySaveEntry(temp_v0 >> 1,temp_v2);
     }
     else {
-      temp_v1 = FUN_00239234(*param_2,temp_v2);
+      temp_v1 = gameDataCopySaveEntry(*param_2,temp_v2);
     }
     if (temp_v1 == 0) {
       return 0;

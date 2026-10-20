@@ -1,53 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a5cf4` (_code @ 0x2a5cf4, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0020b718(int, int);
-int FUN_0022e774(void);
-int FUN_00230ac0(int, unsigned int, int);
-int FUN_003344b4(int);
-int FUN_0038b548(int);
+typedef struct PartyPanel {
+    /* 0x000 */ u8 unk000[0x9B4];
+    /* 0x9B4 */ u8 state;
+} PartyPanel;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+extern PartyPanel *g_partyPanel;
 
-extern int g_partyPanel; /* 0x57f268 */
-
-/* Supplied declaration required: FUN_0020b718. */
-/* Supplied declaration required: FUN_0022e774. */
-/* Supplied declaration required: FUN_00230ac0. */
-/* Supplied declaration required: FUN_003344b4. */
-/* Supplied declaration required: FUN_0038b548. */
-
+extern void FUN_0020b718(s32 a, s32 b);
+extern void FUN_0022e774(void);
+extern void FUN_00230ac0(s32 a, s32 b, s32 c, s32 d);
+extern void FUN_003344b4(s32 a, s32 b);
+extern void FUN_0038b548(s32 a);
 
 void FUN_002a5cf4(void)
-
 {
-/* irregular: 5 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  
-  temp_v1 = g_partyPanel;
-  if (g_partyPanel != 0) {
-    temp_v0 = *(char *)(g_partyPanel + 0x9b4);
-    if ((temp_v0 != '\f' && temp_v0 != '\x04') &&
-       ((temp_v0 != '\x0f' && temp_v0 != '\x11') && temp_v0 != '\x13')) {
-      FUN_00230ac0(7,0xffffffff,0);
+    PartyPanel *panel = g_partyPanel;
+
+    if (panel != NULL) {
+        if (panel->state != 12 && panel->state != 4 && panel->state != 15 && panel->state != 17 && panel->state != 19) {
+            FUN_00230ac0(7, -1, 0, 0);
+        }
+        FUN_003344b4(0, 0);
+        if (panel->state != 1 && panel->state != 6 && panel->state != 7 && panel->state != 18) {
+            FUN_0022e774();
+        }
+        FUN_0038b548(1);
+        FUN_0020b718(0x17, 1);
     }
-    FUN_003344b4(0);
-    temp_v0 = *(char *)(temp_v1 + 0x9b4);
-    if ((temp_v0 != '\x01' && temp_v0 != '\x06') && (temp_v0 != '\a' && temp_v0 != '\x12')) {
-      FUN_0022e774();
-    }
-    FUN_0038b548(1);
-    FUN_0020b718(0x17,1);
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

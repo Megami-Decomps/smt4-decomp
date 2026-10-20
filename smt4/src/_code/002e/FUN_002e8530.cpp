@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002a043c(u32 a, int b);
+int modelSlotAttachChild(u32 a, int b);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0x2B0];
@@ -21,7 +21,7 @@ void FUN_002e8530(void)
     Obj *obj = DAT_004474f0.obj;
 
     DAT_004474f0.obj->unk2B0 = 1;
-    FUN_002a043c(obj->unk2B4, 0);
+    modelSlotAttachChild(obj->unk2B4, 0);
 }
 
 } /* extern "C" */

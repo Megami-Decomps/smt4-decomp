@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014e188(int, int, int, int, int);
-int FUN_001505ac(int, int, int, unsigned char *, int, int, int, int, int, int, int);
+int paramsInit(int, int, int, unsigned char *, int, int, int, int, int, int, int);
 int FUN_00151408(...);
 int FUN_001527d8(...);
 int FUN_0015f258(int);
@@ -31,7 +31,7 @@ extern int g_aocMain; /* 0x570260 */
 
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: FUN_00151408. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_0015f258. */
@@ -51,7 +51,7 @@ void FUN_004788dc(int param_1)
   char temp_v3 [36];
   
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x35c);
-  FUN_001505ac(param_1 + 0x35c,0,0,&DAT_00526308,0xc,0,0,0,0,0,0);
+  paramsInit(param_1 + 0x35c,0,0,&DAT_00526308,0xc,0,0,0,0,0,0);
   FUN_0014e188(param_1 + 0x109c,0x14,2000,param_1 + 0x35c,0xb);
   uiSpriteSetImageKeyframe(param_1 + 0x109c,0);
   temp_v3[0x14] = '\0';

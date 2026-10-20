@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0010c97e(unsigned int, unsigned int);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e50(int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int vectorCopyHeader(int, unsigned int);
 int FUN_002eac60(unsigned int, unsigned int);
 int FUN_002eac8e(unsigned int, unsigned int);
@@ -21,7 +21,7 @@ typedef struct {
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e50. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
 /* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002eac60. */
@@ -53,7 +53,7 @@ void FUN_0011a4b8(int param_1,int param_2)
     ;
   }
   FUN_002e6e50(param_1);
-  FUN_002e6e5c(temp_v2);
+  _ZN9Obj55b28cD1Ev(temp_v2);
   return;
 }
 

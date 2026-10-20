@@ -1,36 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00327558` (_code @ 0x327558, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail predicates the second lookup (cmp, then subcc/addcc/addcc/movcs) and loads the entries pointer before adding the counts; built branches around it. */
+#include "common.h"
 
 extern "C" {
 
-extern int g_aocSystem; /* 0x570280 */
+typedef struct DataTableEntry {
+    /* 0x00 */ u8 data[0x14];
+} DataTableEntry;
 
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
+typedef struct AocSystem {
+    /* 0x000 */ u8 unk000[0x3FC];
+    /* 0x3FC */ u32 entryCount;
+    /* 0x400 */ DataTableEntry *entries;
+} AocSystem;
 
+extern AocSystem *g_aocSystem;
 
-int FUN_00327558(unsigned int param_1)
+u32 dataTableGet(u32 id, u32 section);
+u32 dataTableGetCount(u32 table);
+DataTableEntry *dataTableGetEntries(void);
 
+/* Returns entry `index` of the base data table, continuing into the add-on content table past its end (NULL when out of range). */
+DataTableEntry *FUN_00327558(u32 index)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = dataTableGet(0x23,3);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  if (param_1 < temp_v2) {
-    temp_v1 = temp_v1 + param_1 * 0x14;
-  }
-  else if (param_1 < *(int *)(g_aocSystem + 0x3fc) + temp_v2) {
-    temp_v1 = *(int *)(g_aocSystem + 0x400) + (param_1 - temp_v2) * 0x14;
-  }
-  else {
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    u32 table = dataTableGet(0x23, 3);
+    DataTableEntry *entries = dataTableGetEntries();
+    u32 count = dataTableGetCount(table);
+
+    if (index < count) {
+        return entries + index;
+    }
+    if (index < g_aocSystem->entryCount + count) {
+        return g_aocSystem->entries + (index - count);
+    }
+    return NULL;
 }
 
 } /* extern "C" */

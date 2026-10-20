@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014e188(int, int, int, int, int);
-int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, unsigned char *, int, unsigned char *, int);
+int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, unsigned char *, int, unsigned char *, int);
 int uiSpriteSelectAnim(int, int);
 int uiSpriteSetKeyframe(int, int);
 int FUN_00352d30(float *);
@@ -44,7 +44,7 @@ extern unsigned short DAT_005f1e18; /* 0x5f1e18 */
 extern unsigned short DAT_005f1e1a; /* 0x5f1e1a */
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -138,7 +138,7 @@ void FUN_0029a794(int param_1,int param_2)
   DAT_005f1e18 = 0;
   DAT_005f1e1a = 0;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x128);
-  FUN_001505ac(param_1 + 0x128,&DAT_005315d8,0x18,&DAT_00531608,0x18,&DAT_005315f0,0x18,
+  paramsInit(param_1 + 0x128,&DAT_005315d8,0x18,&DAT_00531608,0x18,&DAT_005315f0,0x18,
                &DAT_005315d0,8,&DAT_00531620,0x54);
   *(unsigned int *)(param_1 + 0x490) = 0;
   FUN_0014e188(param_1 + 0x148,0x1d,0,param_1 + 0x128,1);

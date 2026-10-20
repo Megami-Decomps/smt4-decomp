@@ -1,42 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00288f78` (_code @ 0x288f78, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc here duplicates the `return 1` tail for the slot path (b to a copy); retail shares one `mov r0, #1; pop` between the slot and special-state paths. */
+#include "common.h"
 
 extern "C" {
 
-extern int gameFlagIsSet(unsigned int);
-extern int gameGetMapBlock(void);
+typedef struct MapBlock {
+    /* 0x000 */ u8 unk000[3];
+    /* 0x003 */ u8 mode;
+    /* 0x004 */ u8 unk004[0xE10];
+    /* 0xE14 */ u8 slotState[0x29]; /* indexed by id (0-63) */
+    /* 0xE3D */ u8 specialState;
+} MapBlock;
 
+extern int gameFlagIsSet(u32 flag);
+extern MapBlock *gameGetMapBlock(void);
 
-unsigned int FUN_00288f78(int param_1)
-
+/* Classifies `id`: 3 when a required unlock flag is missing, 2 for id 0x18, 0 when its state is 3 or out of range, else 1. */
+u32 FUN_00288f78(s32 id)
 {
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = gameGetMapBlock();
-  if ((((param_1 - 0x19U < 6) || (param_1 == 0x66)) && (temp_v2 = gameFlagIsSet(0x144), temp_v2 == 0)) ||
-     (((param_1 - 0x1fU < 5 || (param_1 == 0x67)) && (temp_v2 = gameFlagIsSet(0x15a), temp_v2 == 0)))) {
-    return 3;
-  }
-  temp_v2 = gameGetMapBlock();
-  if (*(char *)(temp_v2 + 3) != '\x01') {
-    if (param_1 == 0x18) {
-      return 2;
+    MapBlock *block = gameGetMapBlock();
+
+    if ((id - 0x19 <= 5U || id == 0x66) && gameFlagIsSet(0x144) == 0) {
+        return 3;
     }
-    if (param_1 >= 0x40) {
-      return 0;
+    if ((id - 0x1F <= 4U || id == 0x67) && gameFlagIsSet(0x15A) == 0) {
+        return 3;
     }
-    temp_v0 = *(char *)(temp_v1 + param_1 + 0xe14);
-  }
-  else {
-    temp_v0 = *(char *)(temp_v1 + 0xe3d);
-  }
-  if (temp_v0 != '\x03') {
-    return 1;
-  }
-  return 0;
+    if (gameGetMapBlock()->mode != 1) {
+        if (id == 0x18) {
+            return 2;
+        }
+        if (id >= 0x40) {
+            return 0;
+        }
+        if (block->slotState[id] == 3) {
+            return 0;
+        }
+        return 1;
+    }
+    if (block->specialState != 3) {
+        return 1;
+    }
+    return 0;
 }
 
-} /* extern "C" */
+}

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(int *, unsigned char *);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 
 extern unsigned char DAT_0062e640; /* 0x62e640 */
 extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
@@ -16,7 +16,7 @@ extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 #endif
 extern unsigned int FUN_001239c6(unsigned char *);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 
 
 unsigned long long FUN_0030f61c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -33,7 +33,7 @@ unsigned long long FUN_0030f61c(unsigned int param_1,unsigned int param_2,unsign
   uStack_10 = param_4;
   FUN_002e6e34(&uStack_18,&DAT_0062e6a0);
   temp_v0 = FUN_001239c6(&DAT_0062e640);
-  FUN_002e6e5c(&uStack_18);
+  _ZN9Obj55b28cD1Ev(&uStack_18);
   return romwright_piece_4_4(uStack_18,temp_v0);
 }
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00159110(unsigned char *, int, int, int);
+int heapOwnerCreate(unsigned char *, int, int, int);
 int FUN_0016f864(int);
 int FUN_001a1244(unsigned char *, unsigned int *);
 int FUN_0043f384(void);
@@ -24,7 +24,7 @@ extern unsigned char DAT_0062d6b4; /* 0x62d6b4 */
 extern unsigned char DAT_0062d6b5; /* 0x62d6b5 */
 extern unsigned char DAT_0062d6b6; /* 0x62d6b6 */
 
-/* Supplied declaration required: FUN_00159110. */
+/* Supplied declaration required: heapOwnerCreate. */
 /* Supplied declaration required: FUN_0016f864. */
 extern unsigned int *nn_os_CriticalSection_Initialize(unsigned char *);
 /* Supplied declaration required: FUN_001a1244. */
@@ -54,7 +54,7 @@ unsigned int * FUN_0043d3d8(unsigned int *param_1,int param_2,int param_3,unsign
   }
   else {
     FUN_0016f864(0);
-    FUN_00159110(&DAT_0062d648,(int)param_1 + param_3,param_2 - param_3,0);
+    heapOwnerCreate(&DAT_0062d648,(int)param_1 + param_3,param_2 - param_3,0);
     puVar2 = (unsigned int *)nn_os_CriticalSection_Initialize(&DAT_0062d6a0);
     DAT_0062d6b0 = &DAT_0062d648;
     DAT_0062d6b4 = 0;

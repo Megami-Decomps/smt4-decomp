@@ -11,7 +11,7 @@ int scrScriptProcessDestroy(void);
 int FUN_0019de98(int, unsigned int);
 int dataTableFree(int);
 int ptrListRemoveClearOwner(unsigned int, unsigned int);
-int FUN_002844e4(void);
+int msgWindowReset(void);
 int FUN_002c1648(void);
 int FUN_002c85b0(int);
 int asdTMTexTableFreeEntry(int);
@@ -35,7 +35,7 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: dataTableFree. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_002844e4. */
+/* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: FUN_002c1648. */
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
@@ -79,7 +79,7 @@ void FUN_00420b70(int param_1)
   asdTMTexTableFreeEntry(0x2b);
   FUN_002c1648();
   dataTableFree(0x3d);
-  FUN_002844e4();
+  msgWindowReset();
   if (*(int *)(param_1 + 0x54) != 0) {
     asdMemFree();
     *(unsigned int *)(param_1 + 0x54) = 0;

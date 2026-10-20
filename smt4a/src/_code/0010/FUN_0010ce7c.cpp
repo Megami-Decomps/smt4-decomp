@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [16], unsigned int);
-int FUN_002e6e5c(unsigned char [16]);
+int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int mapIteratorNext5(int *);
 
 /* stack frame of param_2: 8 slot(s), 32 byte(s) */
@@ -21,7 +21,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 extern int FUN_002eba9c(unsigned int *, unsigned int *);
 /* Supplied declaration required: mapIteratorNext5. */
@@ -71,7 +71,7 @@ void FUN_0010ce7c(int param_1,unsigned int *param_2)
     }
     mapIteratorNext5(&temp_v2);
   }
-  FUN_002e6e5c(temp_v8);
+  _ZN9Obj55b28cD1Ev(temp_v8);
   return;
 }
 

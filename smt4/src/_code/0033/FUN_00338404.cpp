@@ -1,23 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00338404` (_code @ 0x338404, 0x1c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0027f94c(void);
+typedef struct Holder {
+    /* 0x0000 */ u8 unk0000[0x4394];
+    /* 0x4394 */ void *target;
+} Holder;
 
-/* Supplied declaration required: FUN_0027f94c. */
+f32 FUN_0027f94c(void *target);
 
-
-void FUN_00338404(int param_1)
-
+/* Returns FUN_0027f94c's value for the holder's target, or -1.0 when there is none. */
+f32 FUN_00338404(Holder *holder)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x4394) != 0) {
-    FUN_0027f94c();
-    return;
-  }
-  return;
+    if (holder->target != NULL) {
+        return FUN_0027f94c(holder->target);
+    }
+    return -1.0f;
 }
 
 } /* extern "C" */

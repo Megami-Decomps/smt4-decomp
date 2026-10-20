@@ -26,7 +26,7 @@ extern int onlineStringDestroy(unsigned int *);
 extern int FUN_002ea00c(int);
 extern int FUN_002f8760(int);
 /* Supplied declaration required: FUN_002fe97c. */
-extern int FUN_002fe996(int);
+extern int _ZN9Obj558aacD1Ev(int);
 
 
 unsigned long long FUN_00113c60(unsigned int *param_1,unsigned int param_2,int param_3,unsigned int param_4)
@@ -60,8 +60,8 @@ unsigned long long FUN_00113c60(unsigned int *param_1,unsigned int param_2,int p
     }
   }
   temp_v0 = FUN_002ea00c(temp_v0 - 0x90);
-  temp_v0 = FUN_002fe996(temp_v0 - 0x30);
-  temp_v0 = FUN_002fe996(temp_v0 - 0x1c);
+  temp_v0 = _ZN9Obj558aacD1Ev(temp_v0 - 0x30);
+  temp_v0 = _ZN9Obj558aacD1Ev(temp_v0 - 0x1c);
   temp_v0 = FUN_002f8760(temp_v0 - 0x18);
   return romwright_piece_4_4(temp_v2,temp_v0 - 0x1c);
 }

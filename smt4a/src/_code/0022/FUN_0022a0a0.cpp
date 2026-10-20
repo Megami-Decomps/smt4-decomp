@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001517b4(...);
 int FUN_00163aa4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
 int FUN_001643b4(int, int);
 int FUN_0019de98(...);
@@ -28,7 +28,7 @@ extern int DAT_0057f280; /* 0x57f280 */
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_001643b4. */
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
@@ -209,7 +209,7 @@ unsigned int FUN_0022a0a0(void)
           }
           temp_v7 = 0x100020f;
         }
-        FUN_001641b4(temp_v7);
+        eventQueueAddUniqueIfValid(temp_v7);
         break;
       }
       *(unsigned char *)(temp_v0 + 0x74d) = 1;

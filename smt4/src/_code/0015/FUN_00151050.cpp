@@ -18,7 +18,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 extern int FUN_00153254(void);
-extern int FUN_001532a0(void);
+extern int trackIsInRange(void);
 /* Supplied declaration required: FUN_002a3178. */
 /* Supplied declaration required: FUN_002b4cd4. */
 extern unsigned int FUN_002baf30(void);
@@ -105,7 +105,7 @@ LAB_001510cc:
       if ((*(int *)(temp_v6 + 0x2a0) != 0) && (*(char *)(temp_v6 + 0x2a4) == '\x02')) {
         if (temp_v3 != 0) {
           if (temp_v3 == 1) {
-            temp_v4 = FUN_001532a0();
+            temp_v4 = trackIsInRange();
             if (temp_v4 == 0) {
               *(int *)(temp_v6 + 0x2a0) = 0;
               *(unsigned char *)(temp_v6 + 0x2a4) = 0;

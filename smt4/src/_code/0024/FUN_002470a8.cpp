@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0024ba44(...);
-int FUN_0024baec(void);
+int binFileGetValue(void);
 int tbcrBlockGetPayload(void);
 int libc_strcmp(int, unsigned char *);
 int dataTableFileGetTable(...);
 
 /* Supplied declaration required: FUN_0024ba44. */
-/* Supplied declaration required: FUN_0024baec. */
+/* Supplied declaration required: binFileGetValue. */
 /* Supplied declaration required: tbcrBlockGetPayload. */
 /* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: dataTableFileGetTable. */
@@ -41,7 +41,7 @@ int FUN_002470a8(int param_1,int param_2,int param_3)
         temp_v5 = (unsigned int)*pbVar4;
         temp_v3 = (unsigned int)pbVar4[1];
         temp_v1 = fileSlotGetBuffer(7);
-        temp_v2 = FUN_0024baec();
+        temp_v2 = binFileGetValue();
         if (temp_v2 <= temp_v5) {
           temp_v5 = 0;
         }
@@ -64,7 +64,7 @@ int FUN_002470a8(int param_1,int param_2,int param_3)
     pbVar4 = pbVar4 + 0x22;
   } while (temp_v4 < 0x1c7);
   temp_v1 = fileSlotGetBuffer(7);
-  FUN_0024baec();
+  binFileGetValue();
   FUN_0024ba44(temp_v1,0);
   tbcrBlockGetPayload();
   dataTableFileGetTable(temp_v1,0);

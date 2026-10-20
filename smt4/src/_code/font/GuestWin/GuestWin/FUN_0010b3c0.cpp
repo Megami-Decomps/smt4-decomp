@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002bd954(...);
 int FUN_002bee58(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -37,7 +37,7 @@ extern unsigned int *g_guestWin; /* 0x43e110 */
 
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -66,7 +66,7 @@ void FUN_0010b3c0(void)
   taskCreateDraw(&LAB_0010b560,0xdf,0,0,FUN_0011aa94,0,0,*puVar1);
   puVar1 = g_guestWin;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_guestWin + 4);
-  FUN_002c312c(puVar1 + 4,&DAT_00403964,0x18,&DAT_0040397c,0x18,0,0,0,0,&DAT_00403994,0x70);
+  paramsInit(puVar1 + 4,&DAT_00403964,0x18,&DAT_0040397c,0x18,0,0,0,0,&DAT_00403994,0x70);
   FUN_002bd954(puVar1 + 0xc,0xe,0x87,puVar1 + 4,1);
   FUN_002bee58(puVar1 + 0xc,0);
   return;

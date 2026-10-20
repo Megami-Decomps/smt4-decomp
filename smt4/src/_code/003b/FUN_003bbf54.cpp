@@ -1,48 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bbf54` (_code @ 0x3bbf54, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002c0a9c(int, int, int);
+typedef struct ItemState {
+    /* 0 */ u8 count;
+    /* 1 */ u8 flags;   /* bits 0-6 cleared */
+    /* 2 */ u8 unk2[2];
+} ItemState; /* 4 */
 
-extern int gameDataBlocksGetSaveData(void);
-/* Supplied declaration required: FUN_002c0a9c. */
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
+typedef struct SaveData {
+    /* 0x00000 */ u8 unk00000[0x1EC56];
+    /* 0x1EC56 */ ItemState items[1];
+} SaveData;
 
+typedef struct ItemPair {
+    /* 0 */ u8 type;
+    /* 1 */ u8 id;
+} ItemPair;
 
+extern void *dataTableGet(s32 table, s32 section);
+extern ItemPair *dataTableGetEntries(void *section);
+extern s32 dataTableGetCount(void *section);
+extern SaveData *gameDataBlocksGetSaveData(void);
+extern void FUN_002c0a9c(u32 type, u32 id, s32 arg);
+
+/* Resets the saved state of every table entry (keeping only its seen bit) and re-applies the entry. */
 void FUN_003bbf54(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char *pbVar6;
-  unsigned char *puVar7;
-  int temp_v5;
-  
-  temp_v0 = dataTableGet(2,3);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  temp_v3 = gameDataBlocksGetSaveData();
-  temp_v5 = 0;
-  if (temp_v5 < temp_v2) {
-    do {
-      temp_v4 = temp_v3 + temp_v5 * 4;
-      pbVar6 = (unsigned char *)(temp_v4 + 0x1ec57);
-      *(unsigned char *)(temp_v4 + 0x1ec56) = 0;
-      *pbVar6 = *pbVar6 & 0x80;
-      puVar7 = (unsigned char *)(temp_v1 + temp_v5 * 2);
-      FUN_002c0a9c(*puVar7,puVar7[1],1);
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < temp_v2);
-  }
-  return;
+    void *section = dataTableGet(2, 3);
+    ItemPair *entries = dataTableGetEntries(section);
+    s32 count = dataTableGetCount(section);
+    SaveData *save = gameDataBlocksGetSaveData();
+    s32 i;
+
+    for (i = 0; i < count; i++) {
+        save->items[i].count = 0;
+        save->items[i].flags &= ~0x7F;
+        FUN_002c0a9c(entries[i].type, entries[i].id, 1);
+    }
 }
 
 } /* extern "C" */

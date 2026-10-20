@@ -1,23 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f2c94` (_code @ 0x2f2c94, 0x1e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002eb6ae(unsigned int, unsigned int);
+extern s32 FUN_002eb6ae(u32 id, u32 mask);
 
-
-unsigned int FUN_002f2c94(unsigned int param_1)
-
+/* Whether either of the two conditions 0x20 and 0x10 holds for `id`. */
+s32 FUN_002f2c94(u32 id)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_002eb6ae(param_1,0x20);
-  if ((temp_v0 != 0) || (temp_v0 = FUN_002eb6ae(param_1,0x10), temp_v1 = 0, temp_v0 != 0)) {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    return FUN_002eb6ae(id, 0x20) || FUN_002eb6ae(id, 0x10);
 }
 
-} /* extern "C" */
+}

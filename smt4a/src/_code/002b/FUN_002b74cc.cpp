@@ -1,42 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b74cc` (_code @ 0x2b74cc, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the slot base in r0 and loads the target through it (+104) while the active byte is read through a separate base+12 pointer; built folds the +12 into the base */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00182540(void);
+typedef struct EplWork {
+    /* 0x00 */ u8 unk00[0x5C];
+    /* 0x5C */ void *target;
+    /* 0x60 */ u8 active;
+    /* 0x61 */ u8 unk61[3];
+} EplWork; /* 0x64 */
 
-extern int g_eplSlots; /* 0x580c8c */
-extern unsigned char g_gameState; /* 0x5f15fc */
+typedef struct EplSlots {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ EplWork work[16];
+} EplSlots;
 
-/* Supplied declaration required: FUN_00182540. */
+typedef struct GameStateFlags {
+    /* 0x00 */ u8 unk00[0x23];
+    /* 0x23 */ u8 paused;
+} GameStateFlags;
 
+void FUN_00182540(void);
 
-void FUN_002b74cc(void)
+extern EplSlots *g_eplSlots;
+extern GameStateFlags g_gameState;
 
+static inline bool eplWorkIsActive(EplWork *work)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  if ((g_eplSlots != 0) && ((*(signed char *)((unsigned char *)&g_gameState + 0x23)) == '\0')) {
-    temp_v2 = 0;
-    do {
-      temp_v0 = g_eplSlots + temp_v2 * 100;
-      temp_v1 = temp_v0 + 0xc;
-      temp_v3 = *(int *)(temp_v0 + 0x68) != 0;
-      if (temp_v3) {
-        temp_v1 = (unsigned int)*(unsigned char *)(temp_v0 + 0x6c);
-      }
-      if (temp_v3 && temp_v1 != 0) {
-        FUN_00182540();
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x10);
-  }
-  return;
+    return work->target != NULL && work->active != 0;
+}
+
+/* Runs FUN_00182540 for each of the 16 effect works that has a target and is active, unless the game state is paused. */
+void FUN_002b74cc(void)
+{
+    s32 i;
+
+    if (g_eplSlots != NULL && g_gameState.paused == 0) {
+        for (i = 0; i < 16; i++) {
+            if (eplWorkIsActive(&g_eplSlots->work[i])) {
+                FUN_00182540();
+            }
+        }
+    }
 }
 
 } /* extern "C" */

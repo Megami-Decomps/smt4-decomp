@@ -18,7 +18,7 @@ typedef struct String {
     /* 0x04 */ u32 data;
 } String;
 
-String *constructObj0055affc(void);
+String *_ZN9Obj55aff4C1Ev(void);
 
 /* Builds a string with room for `length` 16-bit characters plus a terminator and copies the range's data into it. */
 void FUN_002f7b9c(u32 unused, DataRange *range)
@@ -26,7 +26,7 @@ void FUN_002f7b9c(u32 unused, DataRange *range)
     String *string;
     u32 data;
 
-    string = constructObj0055affc();
+    string = _ZN9Obj55aff4C1Ev();
     FUN_002eea94(string, range->length * 2 + 1);
     data = string->data;
     FUN_00110790(range->base + range->offset, data, range->length);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_004d8700(unsigned int, unsigned int);
+int targetStartIndexWithFlag2(unsigned int, unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern unsigned int DAT_00570d94; /* 0x570d94 */
 
 extern int btlGetMainState(void);
 extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_004d8700. */
+/* Supplied declaration required: targetStartIndexWithFlag2. */
 
 
 unsigned int FUN_003cc4e4(void)
@@ -53,7 +53,7 @@ unsigned int FUN_003cc4e4(void)
       return 1;
     }
   }
-  FUN_004d8700(*(unsigned int *)(*(int *)(temp_v2 + 0x1ed4) + temp_v5 * 0x1d0 + 0x1bc),temp_v1);
+  targetStartIndexWithFlag2(*(unsigned int *)(*(int *)(temp_v2 + 0x1ed4) + temp_v5 * 0x1d0 + 0x1bc),temp_v1);
   return 1;
 }
 

@@ -1,38 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a8e24` (_code @ 0x3a8e24, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable04FindById(void);
-int scrSetResult(int);
+typedef struct UnitData {
+    /* 0x000 */ u8 unk000[0x118];
+    /* 0x118 */ u16 skillIds[1];   /* indexed by the script argument */
+} UnitData;
 
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
+typedef struct Unit {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ UnitData *data;
+} Unit;
 
-/* Supplied declaration required: dataTable04FindById. */
-extern int scrGetArg(void);
-/* Supplied declaration required: scrSetResult. */
-extern int btlUnitGet(unsigned int);
+typedef struct SkillRecord {
+    /* 0x00 */ u8 unk00[0x23];
+    /* 0x23 */ u8 value;
+} SkillRecord;
 
+extern u32 g_btlScriptUnit;
 
-unsigned int FUN_003a8e24(void)
+extern s32 scrGetArg(void);
+extern void scrSetResult(s32 value);
+extern Unit *btlUnitGet(u32 unit);
+extern SkillRecord *dataTable04FindById(u32 id);
 
+/* Script command: result is the record byte for the script unit's skill in slot `argument`; 0 if it has none. */
+s32 FUN_003a8e24(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
-  temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 0x28) + temp_v0 * 2 + 0x118);
-  dataTable04FindById();
-  if (temp_v2 != 0) {
-    scrSetResult(*(unsigned char *)(temp_v2 + 0x23));
+    s32 slot = scrGetArg();
+    UnitData *data = btlUnitGet(g_btlScriptUnit)->data;
+    SkillRecord *record = dataTable04FindById(data->skillIds[slot]);
+
+    if (record != NULL) {
+        scrSetResult(record->value);
+        return 1;
+    }
+    scrSetResult(0);
     return 1;
-  }
-  scrSetResult(0);
-  return 1;
 }
 
 } /* extern "C" */

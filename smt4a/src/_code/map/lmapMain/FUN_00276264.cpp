@@ -74,7 +74,7 @@ int FUN_002c2358(void);
 int FUN_002c23cc(...);
 int FUN_002c2610(void);
 int FUN_002c3398(...);
-int FUN_00312aa0(void);
+int popupStart(void);
 int FUN_003254a0(void);
 int objectE0ResetFlags1040(void);
 int FUN_0033a988(void);
@@ -216,7 +216,7 @@ int gameFlagSetValue(...);
 int countersAddSaturating(int, int);
 int FUN_0040ae70(...);
 int FUN_0040b0f8(...);
-int FUN_004bb904(int);
+int itemResetOverLimitStates(int);
 int FUN_004bc95c(...);
 int VectorSignedToFloat(...);
 int func_0x00244acc(void);
@@ -493,7 +493,7 @@ extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: FUN_002e5924. */
 extern unsigned int FUN_002e5c2c(void);
 /* Supplied declaration required: FUN_00311b74. */
-/* Supplied declaration required: FUN_00312aa0. */
+/* Supplied declaration required: popupStart. */
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: FUN_00314bf8. */
 /* Supplied declaration required: FUN_00314c38. */
@@ -608,8 +608,8 @@ extern int scriptHolderUpdateSimple(int);
 /* Supplied declaration required: twoObjectsRelease. */
 extern int FUN_004a0404(void);
 extern int FUN_004a0f5c(void);
-/* Supplied declaration required: FUN_004bb904. */
-extern int FUN_004bbc34(int, int);
+/* Supplied declaration required: itemResetOverLimitStates. */
+extern int flagsBit7Get(int, int);
 /* Supplied declaration required: FUN_004bc95c. */
 extern int FUN_004d0584(void);
 extern int func_0x00224278(unsigned int, unsigned int);
@@ -722,7 +722,7 @@ unsigned int FUN_00276264(void)
     DAT_005f1898 = 0x41a00000;
     DAT_005f189c = 0x5a;
     temp_v8 = gameGetPlayerData();
-    FUN_004bb904(*(unsigned short *)(temp_v8 + 0x62));
+    itemResetOverLimitStates(*(unsigned short *)(temp_v8 + 0x62));
     temp_v8 = DAT_005f1c98;
     DAT_005f1610 = 2;
     if ((DAT_005f1b70 != '\0') && (DAT_005f1b74 >= 100)) {
@@ -1869,7 +1869,7 @@ LAB_00278b38:
                                     FUN_0020ecd4();
                                     FUN_00246344();
                                     FUN_00294cfc(DAT_005f18e8);
-                                    temp_v8 = FUN_004bbc34(g_gameState,DAT_005f1600);
+                                    temp_v8 = flagsBit7Get(g_gameState,DAT_005f1600);
                                     if (temp_v8 == 0) {
                                       popupTryStartScrollPrompt(g_gameState,DAT_005f1600);
                                       func_0x004bc758(g_gameState,DAT_005f1600,1);
@@ -2297,7 +2297,7 @@ LAB_00278774:
     temp_v8 = saveSlotFindSelected();
     if (temp_v8 != 0) {
       if (DAT_005f18c8 != *(unsigned short *)(temp_v8 + 300)) {
-        FUN_00312aa0();
+        popupStart();
         DAT_005f18c8 = (unsigned int)*(unsigned short *)(temp_v8 + 300);
       }
       else {

@@ -21,7 +21,7 @@ int FUN_0037e0b8(...);
 int FUN_0038843c(void);
 
 int FUN_001517b4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_00228b04(...);
 int FUN_0028b088(...);
 int FUN_0031f208(...);
@@ -75,7 +75,7 @@ extern int g_camp; /* 0x57f108 */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned short FUN_00167f08(void);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: gameGetPlayerData. */
@@ -404,7 +404,7 @@ void FUN_001fdde8(int param_1)
       psVar13 = (short *)(temp_v9 + (temp_v13 + temp_v5) * 2);
       temp_v5 = unitMatchesAlignment(*psVar13);
       if (temp_v5 == 0) {
-        FUN_001641b4(0x100020f);
+        eventQueueAddUniqueIfValid(0x100020f);
         return;
       }
       temp_v1 = 1;
@@ -452,7 +452,7 @@ void FUN_001fdde8(int param_1)
         FUN_003720a0(psVar4,0);
         FUN_00372100(psVar4,0);
       }
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
       FUN_003d2150(0x10000cc);
       return;
     }
@@ -471,7 +471,7 @@ void FUN_001fdde8(int param_1)
       }
       *(int *)(temp_v5 + 0x20) = *(int *)(temp_v5 + 0x20) + 1;
       temp_v3 = 0x100020f;
-      FUN_001641b4(temp_v3);
+      eventQueueAddUniqueIfValid(temp_v3);
       return;
     }
     temp_v4 = 8;
@@ -533,7 +533,7 @@ void FUN_001fdde8(int param_1)
         *(unsigned short *)(temp_v5 + 0x3a) = temp_v2;
         FUN_0020b660(0x2b);
         temp_v3 = 0x100020e;
-        FUN_001641b4(temp_v3);
+        eventQueueAddUniqueIfValid(temp_v3);
         return;
       }
       temp_v4 = FUN_002a4860(temp_v13);
@@ -631,7 +631,7 @@ void FUN_001fdde8(int param_1)
     *(unsigned int *)(temp_v5 + 0x20) = 2;
     menuItemPlaySe(param_1);
     temp_v3 = 0x1000210;
-    FUN_001641b4(temp_v3);
+    eventQueueAddUniqueIfValid(temp_v3);
     return;
   case 4:
     if (temp_v10 != 0) {
@@ -674,7 +674,7 @@ LAB_001fea60:
   *(unsigned int *)(temp_v5 + 0x20) = 2;
   menuItemPlaySe(param_1);
   temp_v3 = 0x1000210;
-  FUN_001641b4(temp_v3);
+  eventQueueAddUniqueIfValid(temp_v3);
   return;
 LAB_001fe16c:
   if (param_1 == 0x48) {

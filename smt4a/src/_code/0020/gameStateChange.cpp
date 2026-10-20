@@ -2,7 +2,7 @@
 
 extern "C" {
 
-s32 FUN_002adc20(void);
+s32 aocDataBlockResolveEntries(void);
 
 typedef struct Game {
     /* 0x0000 */ u8 unk0000[0x10];
@@ -19,7 +19,7 @@ typedef struct Global588fd0 {
 } Global588fd0;
 extern Global588fd0 g_gameGlobals;
 
-/* Switches the game to `newState`, remembering the previous one; state 4 falls back to 0xB when FUN_002adc20 reports 0. */
+/* Switches the game to `newState`, remembering the previous one; state 4 falls back to 0xB when aocDataBlockResolveEntries reports 0. */
 void gameStateChange(s32 newState)
 {
     Game *game;
@@ -30,7 +30,7 @@ void gameStateChange(s32 newState)
     previous = game->state;
     game->state = newState;
     game->previousState = previous;
-    if ((newState == 4) && (FUN_002adc20() == 0)) {
+    if ((newState == 4) && (aocDataBlockResolveEntries() == 0)) {
         game->state = 0xB;
     }
 }

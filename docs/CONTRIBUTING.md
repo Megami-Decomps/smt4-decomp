@@ -98,7 +98,9 @@ Constructors and destructors are written as such (`Obj55afc4::~Obj55afc4()`, ref
 
 - name the unit with the variant retail's function is: `D1` for the destructor a vtable lists
   (`_ZN9Obj55afc4D1Ev`), `C1` for a constructor (`_ZN9Obj55afc4C1Ev`); armcc emits the base-object
-  variant (`D2`/`C2`) as an alias of it and calls base and member structors by their `D1`/`C1` names;
+  variant (`D2`/`C2`) as an alias of it and calls base and member structors by their `D1`/`C1` names.
+  Files follow: `Obj55afc4__dtor_Obj55afc4.cpp` (D1), `Obj55afc4__deleting_dtor_Obj55afc4.cpp` (D0),
+  `Obj55afc4__Obj55afc4.cpp` (C1);
 - name the vtable as a sized global, the note starting with its size:
   `smt4a 0x55afc4 _ZTV9Obj55afc4 evidence size:0x1c vtable ...`. A pool word pointing at its address
   point (vtable + 8) then reads `_ZTV9Obj55afc4` plus 8 in the retail object, as armcc writes it;

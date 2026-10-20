@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00192268(void);
-int FUN_0019db18(...);
+int effBlockLoadClone(...);
 int taskRunWithObject(unsigned int, int, int);
 int effPartsSetData(void);
 int effEditorNodeChainApply(unsigned int *);
@@ -70,7 +70,7 @@ extern unsigned int uRam004d8ce8; /* 0x4d8ce8 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_00192268. */
-/* Supplied declaration required: FUN_0019db18. */
+/* Supplied declaration required: effBlockLoadClone. */
 /* Supplied declaration required: taskRunWithObject. */
 extern unsigned int effEditorNodeListCount(unsigned int);
 /* Supplied declaration required: effPartsSetData. */
@@ -185,7 +185,7 @@ LAB_002424b8:
     FUN_002a3d58(&DAT_004d8ca0);
     temp_v6 = *piVar3;
     if (piVar3[2] != 0) {
-      temp_v1 = FUN_0019db18();
+      temp_v1 = effBlockLoadClone();
       temp_v2 = FUN_0024c3f8();
       rt_memcpy(*(unsigned int *)(temp_v6 + 0xc),temp_v2,*(unsigned int *)(temp_v6 + 0x10));
     }
@@ -269,7 +269,7 @@ LAB_002424b8:
         uRam004d8ce0 = *(unsigned int *)(param_2 + 0xc);
         uRam004d8ce4 = *(unsigned int *)(param_2 + 0x10);
         uRam004d8ce8 = *(unsigned int *)(param_2 + 0x14);
-        temp_v5 = FUN_0019db18(*(unsigned int *)(param_2 + 8));
+        temp_v5 = effBlockLoadClone(*(unsigned int *)(param_2 + 8));
         temp_v6 = temp_v5;
         effBlockCreateFromBlock();
         DAT_0044eaa0 = temp_v6;

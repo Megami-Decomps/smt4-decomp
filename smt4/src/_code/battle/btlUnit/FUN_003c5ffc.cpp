@@ -40,7 +40,7 @@ extern unsigned int DAT_00493554; /* 0x493554 */
 extern unsigned int DAT_0049355c; /* 0x49355c */
 
 extern unsigned int *asdListBoxGetItemText(unsigned int);
-extern int FUN_0022a444(unsigned int);
+extern int listBoxItemHasOwner(unsigned int);
 extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
 
 
@@ -54,7 +54,7 @@ void FUN_003c5ffc(int param_1,int param_2,unsigned int param_3)
   
   switch(param_3) {
   case 0:
-    temp_v0 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     if (temp_v0 != 0) {
       temp_v2 = *(unsigned int *)(g_btlMain + 0x634) | 0x100;
     }
@@ -68,7 +68,7 @@ void FUN_003c5ffc(int param_1,int param_2,unsigned int param_3)
     *(unsigned int *)(g_btlMain + 0x560) = *puVar2;
     return;
   case 2:
-    temp_v0 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     temp_v2 = *(unsigned int *)(param_2 + 0x44a8);
     if (temp_v0 != 0) {
       temp_v2 = temp_v2 | 0x40000000;

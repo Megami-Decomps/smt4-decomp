@@ -14,14 +14,14 @@ typedef struct {
     u8 member[1];       /* 0x08 */
 } Derived;
 
-u8 *constructObj0055affc(u8 *member);
+u8 *_ZN9Obj55aff4C1Ev(u8 *member);
 
 /* Constructs the object: base vtable, flag cleared, member constructed, then the final vtable installed; returns the object. */
 Derived *FUN_0011fe6c(Derived *self)
 {
     self->vtbl = &DAT_0055adc0;
     self->flag = 0;
-    self = (Derived *)(constructObj0055affc(self->member) - 8);
+    self = (Derived *)(_ZN9Obj55aff4C1Ev(self->member) - 8);
     self->vtbl = &DAT_0055aca0;
     return self;
 }

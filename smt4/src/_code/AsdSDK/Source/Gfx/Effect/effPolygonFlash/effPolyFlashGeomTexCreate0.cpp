@@ -5,7 +5,7 @@ extern "C" {
 
 void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_00247334(u32 count, int w, int h, u8 *table, int tableSize);
-void FUN_002472f0(PolyGeom *geom, void *texture);
+void textureSlotReplace(PolyGeom *geom, void *texture);
 u32 FUN_0024c3c8(int id);
 void refCountIncrement(u32 texture);
 extern u8 DAT_004737c2;
@@ -21,7 +21,7 @@ PolyGeomBlock *effPolyFlashGeomTexCreate0(PolyParams *params, void *texture)
     geom = FUN_00247334(params->segments & 0xffff, 2, 4, &DAT_004737c2, 76);
     block->geom = geom;
     if (texture != NULL) {
-        FUN_002472f0(geom, texture);
+        textureSlotReplace(geom, texture);
     } else {
         geom->unk04 = FUN_0024c3c8(18);
         refCountIncrement(geom->unk04);

@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMemFree(unsigned int);
 int scrScriptProcessDestroy(unsigned int);
-int FUN_002852f0(int);
+int messageSlotSet(int);
 int byteTableASetValue(int);
 int byteTableASetValue3(int);
 int FUN_003d54f8(int, int);
@@ -17,7 +17,7 @@ extern int FUN_00162ea4(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int FUN_00224880(unsigned int);
-/* Supplied declaration required: FUN_002852f0. */
+/* Supplied declaration required: messageSlotSet. */
 extern int FUN_002e07f4(void);
 extern int getByteTableAValue(void);
 /* Supplied declaration required: byteTableASetValue. */
@@ -65,7 +65,7 @@ unsigned int FUN_002dfa1c(int *param_1)
       if (*(int *)(temp_v1 + 0xa38) != 0) {
         gameFlagSetValue(*(int *)(temp_v1 + 0xa38),1);
       }
-      FUN_002852f0(0);
+      messageSlotSet(0);
       scrScriptProcessDestroy(*(unsigned int *)(temp_v1 + 0xa34));
       *(unsigned int *)(temp_v1 + 0xa34) = 0;
       asdMemFree(*(unsigned int *)(temp_v1 + 0xa2c));

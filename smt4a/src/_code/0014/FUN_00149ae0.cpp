@@ -132,7 +132,7 @@ extern int FUN_001600b8(int);
 /* Supplied declaration required: FUN_001600fc. */
 extern int FUN_00160944(void);
 extern int FUN_00160ddc(int);
-extern int FUN_00160f90(int);
+extern int blockOpen(int);
 /* Supplied declaration required: FUN_001612f4. */
 extern unsigned long long FUN_001623d0(void);
 /* Supplied declaration required: FUN_00170050. */
@@ -196,7 +196,7 @@ unsigned int FUN_00149ae0(romwright_code *param_1,romwright_code *param_2)
     temp_v5 = DAT_0058919c + 0x2840;
     temp_v0 = FUN_00160944();
     if ((((-1 < temp_v0) && (temp_v0 = FUN_001600b8(temp_v1), -1 < temp_v0)) &&
-        (temp_v0 = FUN_00160f90(temp_v2), -1 < temp_v0)) &&
+        (temp_v0 = blockOpen(temp_v2), -1 < temp_v0)) &&
        ((FUN_001600fc(), -1 < temp_v4 && (temp_v0 = FUN_00160ddc(temp_v5), -1 < temp_v0)))) {
       nngxGetError();
       nngxBindCmdlist(temp_v9[2]);

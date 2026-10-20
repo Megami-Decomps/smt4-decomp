@@ -15,7 +15,7 @@ extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 extern int gameGetUnitRecord(int);
-extern unsigned int FUN_002b05d0(int);
+extern unsigned int categoryGetColor(int);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -68,7 +68,7 @@ void FUN_00298940(void)
           do {
             if (((unsigned int)temp_v0 & (1 << (temp_v5 & 0xff))) != 0) {
               if (*(int *)(temp_v9 + 0x24f8) == temp_v4) {
-                temp_v6 = FUN_002b05d0((int)(short)temp_v5);
+                temp_v6 = categoryGetColor((int)(short)temp_v5);
                 *(unsigned int *)(temp_v9 + 0x255c) = temp_v6;
                 break;
               }

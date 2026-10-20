@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00113f00(...);
 int FUN_002e6e34(...);
-int FUN_002e6e5c(...);
+int _ZN9Obj55b28cD1Ev(...);
 int sharedRefAddRef(...);
 int onlineSockAddrCopy(...);
 int onlineTimeGetNow(...);
@@ -33,7 +33,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00113f00. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: onlineSockAddrCopy. */
 /* Supplied declaration required: onlineTimeGetNow. */
@@ -88,7 +88,7 @@ unsigned int FUN_0011ca76(int param_1,fn_0011ca76_arg1 *param_2,unsigned int par
         handleLockRelease();
       }
     }
-    FUN_002e6e5c(temp_v4);
+    _ZN9Obj55b28cD1Ev(temp_v4);
   }
   return temp_v1;
 }

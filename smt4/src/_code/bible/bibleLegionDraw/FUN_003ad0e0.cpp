@@ -6,7 +6,7 @@ extern "C" {
 
 int uiSpriteSetImageKeyframe(...);
 int FUN_002bd954(...);
-int FUN_002c312c(unsigned int *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
+int paramsInit(unsigned int *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int memClear(unsigned int *, int);
 int asdMemAlloc(int, int, int, int, int);
 int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
@@ -33,7 +33,7 @@ extern unsigned int *DAT_0043d9e4; /* 0x43d9e4 */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002bd954. */
 extern short randNextInRange(unsigned int);
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -90,7 +90,7 @@ void FUN_003ad0e0(void)
     asdProcessCreateSimple(&LAB_003ad31c,2,0,0,&LAB_003ac480,0,0);
     *puVar2 = (unsigned int)puVar3;
     Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar2 + 8);
-    FUN_002c312c(puVar2 + 8,&DAT_004023c4,0x24,&DAT_004023e8,0x18,0,0,0,0,&DAT_00402400,0x70);
+    paramsInit(puVar2 + 8,&DAT_004023c4,0x24,&DAT_004023e8,0x18,0,0,0,0,&DAT_00402400,0x70);
     temp_v1 = 0;
     do {
       FUN_002bd954(puVar2 + temp_v1 * 0x23 + 0x10,0x23,0,puVar2 + 8,0x15);

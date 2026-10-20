@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001a9604(...);
 int FUN_0025ba8c(...);
 int FUN_0025bab8(...);
-int FUN_0025bae4(...);
+int colorSetAndCachePica(...);
 int FUN_0025bb10(...);
 int FUN_0025ca80(...);
 int FUN_00282390(void);
@@ -41,7 +41,7 @@ extern unsigned char LAB_00294c1c; /* 0x294c1c */
 /* Supplied declaration required: FUN_001a9604. */
 /* Supplied declaration required: FUN_0025ba8c. */
 /* Supplied declaration required: FUN_0025bab8. */
-/* Supplied declaration required: FUN_0025bae4. */
+/* Supplied declaration required: colorSetAndCachePica. */
 /* Supplied declaration required: FUN_0025bb10. */
 extern unsigned int FUN_0025bb34(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0025ca80. */
@@ -110,7 +110,7 @@ void FUN_00294834(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   temp_v0 = FUN_0025bb34(1,&LAB_00294bc8,0);
   temp_v3 = FUN_0025bb10(temp_v0,0);
   if (!((param_1 == 0 && param_2 == 0) && param_3 == 0)) {
-    FUN_0025bae4(&temp_v3);
+    colorSetAndCachePica(&temp_v3);
     FUN_0025bab8(&temp_v3);
     FUN_0025ba8c(&temp_v3);
     *(unsigned int *)(temp_v3 + 0x10c) = 0x3da3d70a;
@@ -118,7 +118,7 @@ void FUN_00294834(int param_1,int param_2,int param_3,unsigned int param_4,unsig
     *(unsigned int *)(temp_v3 + 0x114) = 0xbd23d70a;
   }
   else {
-    FUN_0025bae4(&temp_v3);
+    colorSetAndCachePica(&temp_v3);
     FUN_0025bab8(&temp_v3);
     FUN_0025ba8c(&temp_v3);
     *(float *)(temp_v3 + 0x10c) = temp_v4;
@@ -128,24 +128,24 @@ void FUN_00294834(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   temp_v0 = FUN_0025bb34(1,&LAB_00294bf8,0);
   temp_v6 = FUN_0025bb10(temp_v0,0);
   if (!((param_1 == 0 && param_2 == 0) && param_3 == 0)) {
-    FUN_0025bae4(&temp_v6);
+    colorSetAndCachePica(&temp_v6);
     FUN_0025bab8(&temp_v6);
     FUN_0025ba8c(&temp_v6);
   }
   else {
-    FUN_0025bae4(&temp_v6);
+    colorSetAndCachePica(&temp_v6);
     FUN_0025bab8(&temp_v6);
     FUN_0025ba8c(&temp_v6);
   }
   temp_v0 = FUN_0025bb34(1,&LAB_00294c1c,0);
   temp_v7[0] = FUN_0025bb10(temp_v0,0);
   if (!((param_1 == 0 && param_2 == 0) && param_3 == 0)) {
-    FUN_0025bae4(temp_v7);
+    colorSetAndCachePica(temp_v7);
     FUN_0025bab8(temp_v7);
     FUN_0025ba8c(temp_v7);
   }
   else {
-    FUN_0025bae4(temp_v7);
+    colorSetAndCachePica(temp_v7);
     FUN_0025bab8(temp_v7);
     FUN_0025ba8c(temp_v7);
   }

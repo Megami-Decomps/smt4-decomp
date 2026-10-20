@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_003e9f70(...);
-int FUN_003eaa14(...);
+int btlEffectsRelease(...);
+int saveSlotApplySelected(...);
 int btlClearMode4D74(...);
 int FUN_004bcb54(...);
 int bitsAt60Test(...);
@@ -37,8 +37,8 @@ extern int FUN_00213b5c(void);
 extern unsigned int FUN_003e0154(void);
 extern unsigned int FUN_003e0164(void);
 extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: FUN_003e9f70. */
-/* Supplied declaration required: FUN_003eaa14. */
+/* Supplied declaration required: btlEffectsRelease. */
+/* Supplied declaration required: saveSlotApplySelected. */
 /* Supplied declaration required: btlClearMode4D74. */
 /* Supplied declaration required: FUN_004bcb54. */
 /* Supplied declaration required: bitsAt60Test. */
@@ -128,11 +128,11 @@ LAB_0035f460:
   temp_v4 = saveSlotFindSelected();
   if (temp_v4 != 0) {
     FUN_004bcb54();
-    FUN_003eaa14(temp_v1);
+    saveSlotApplySelected(temp_v1);
     btlClearMode4D74(temp_v1);
   }
   if (0 < *(int *)(temp_v1 + 300)) {
-    FUN_003e9f70(temp_v1);
+    btlEffectsRelease(temp_v1);
   }
   return 1;
 }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001517b4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int FUN_0019de98(...);
 int FUN_00228b04(int, int);
@@ -34,7 +34,7 @@ extern unsigned char LAB_004bee70; /* 0x4bee70 */
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: sysPlaySe. */
 extern int FUN_00187168(void);
 /* Supplied declaration required: FUN_0019de98. */
@@ -137,11 +137,11 @@ void FUN_004bea0c(int param_1)
             if (*(int *)(param_1 + 0x334) == 0x7cd) {
               temp_v2 = 0x100021c;
             }
-            FUN_001641b4(temp_v2);
+            eventQueueAddUniqueIfValid(temp_v2);
             FUN_004be49c(param_1);
             return;
           }
-          FUN_001641b4(0x100020f);
+          eventQueueAddUniqueIfValid(0x100020f);
           return;
         }
         if (*(int *)(param_1 + 0x324) < 1) {
@@ -151,7 +151,7 @@ void FUN_004bea0c(int param_1)
             *(int *)(param_1 + *(int *)(param_1 + 0x328) * 4 + 0x2c4)) {
           return;
         }
-        FUN_001641b4(0x100020e);
+        eventQueueAddUniqueIfValid(0x100020e);
         sysPlaySe(0xf2);
         FUN_0035d03c(1);
         FUN_003343f0(1);
@@ -166,7 +166,7 @@ void FUN_004bea0c(int param_1)
       temp_v4 = 1;
       FUN_001517b4();
       if (temp_v4 != 0) {
-        FUN_001641b4(0x100020f);
+        eventQueueAddUniqueIfValid(0x100020f);
         *(unsigned int *)(param_1 + 8) = 0xd;
         FUN_003343f0(1);
       }

@@ -1,39 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002276f8` (_code @ 0x2276f8, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the battle flag update is read-modify-written through a precomputed field address here (add r1, r0, #1024 / #564); retail keeps r0 as the base and uses [r0, #1588] twice */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001ab998(void);
+typedef struct Owner {
+    /* 0x0000 */ u8 unk0000[0x3028];
+    /* 0x3028 */ u32 flags;
+    /* 0x302C */ u8 unk302c[8];
+    /* 0x3034 */ s32 handle;
+    /* 0x3038 */ u8 state;
+} Owner;
 
-typedef struct fn_002276f8_arg0 fn_002276f8_arg0;
-struct fn_002276f8_arg0 {
-    unsigned char pad_0x0[0x3028];
-    uint field_0x3028; /* +0x3028 */
-    unsigned char pad_0x302c[0x8];
-    int field_0x3034; /* +0x3034 */
-    undefined1 field_0x3038; /* +0x3038 */
-};
+typedef struct BtlMain {
+    /* 0x000 */ u8 unk000[0x634];
+    /* 0x634 */ u32 flags;
+} BtlMain;
 
-extern int g_btlMain; /* 0x4342c8 */
+extern BtlMain *g_btlMain;
 
-/* Supplied declaration required: FUN_001ab998. */
+extern void FUN_001ab998(void);
 
-
-void FUN_002276f8(fn_002276f8_arg0 *param_1)
-
+/* Releases the owner's handle, resets its state to 12, clears its flag 2 and the battle flag 0x4000000. */
+void FUN_002276f8(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_1->field_0x3034 != 0) {
-    FUN_001ab998();
-    param_1->field_0x3034 = 0;
-  }
-  param_1->field_0x3038 = 0xc;
-  param_1->field_0x3028 = param_1->field_0x3028 & 0xfffffffd;
-  if (g_btlMain != 0) {
-    *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) & 0xfbffffff;
-  }
-  return;
+    if (owner->handle != 0) {
+        FUN_001ab998();
+        owner->handle = 0;
+    }
+    owner->state = 12;
+    owner->flags &= ~2;
+    {
+        BtlMain *main = g_btlMain;
+
+        if (main != NULL) {
+            main->flags &= ~0x4000000;
+        }
+    }
 }
 
 } /* extern "C" */

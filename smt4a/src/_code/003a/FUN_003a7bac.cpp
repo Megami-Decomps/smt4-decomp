@@ -1,22 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a7bac` (_code @ 0x3a7bac, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the pool address is loaded into r0 and the constant 1 after the global load; retail loads the pool word into r1 and materialises 1 first. */
+#include "common.h"
 
 extern "C" {
 
-extern int g_statusDown; /* 0x588fe8 */
+typedef struct StatusCursor {
+    /* 0x00 */ u8 unk00[0xB8];
+    /* 0xB8 */ s32 mode;
+} StatusCursor;
 
+typedef struct StatusDown {
+    /* 0x0000 */ u8 unk0000[0x24AC];
+    /* 0x24AC */ StatusCursor cursor;
+} StatusDown;
 
-unsigned int FUN_003a7bac(void)
+extern StatusDown *g_statusDown;
 
+/* Whether the status screen is absent or its cursor is in mode 5. */
+u32 FUN_003a7bac(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 1;
-  if ((g_statusDown != 0) && (*(int *)(g_statusDown + 0x2564) != 5)) {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    StatusDown *down = g_statusDown;
+    u32 result = 1;
+
+    if (down != NULL) {
+        StatusCursor *cursor = &down->cursor;
+
+        if (cursor->mode != 5) {
+            result = 0;
+        }
+    }
+    return result;
 }
 
-} /* extern "C" */
+}

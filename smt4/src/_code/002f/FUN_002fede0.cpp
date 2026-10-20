@@ -1,52 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fede0` (_code @ 0x2fede0, 0x98 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register choice only: retail materialises the constant 1 once in r7 (shift base, then reused as the return value `mov r0, r7`); the build uses r1 for the shift and `mov r0, #1` for the returns. */
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+typedef struct BtlUnit {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0xCA];
+    /* 0x0CE */ u16 id;
+    /* 0x0D0 */ u8 unk0D0[0xF6];
+    /* 0x1C6 */ u16 mask;
+    /* 0x1C8 */ u8 unk1C8[0xC0];
+} BtlUnit;                              /* 0x288 bytes */
 
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
+typedef struct BtlMain {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ BtlUnit *units;
+} BtlMain;
 
+extern BtlMain *btlGetMainState(void);
+extern u32 scrGetArg(u32 index);
+extern int scrSetResult(int value);
 
-unsigned int FUN_002fede0(void)
-
+/* Script command: pushes whether a live unit with id argument 0 has bit argument 1 set in its mask. */
+u32 FUN_002fede0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v4 = 0;
-  do {
-    temp_v2 = btlGetMainState();
-    puVar4 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288);
-    temp_v3 = *puVar4;
-    if ((temp_v3 & 0x10) != 0 && (temp_v3 & 1) != 0) {
-      temp_v5 = (temp_v3 & 0x40) == 0;
-      if (temp_v5) {
-        temp_v3 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
-      }
-      if ((temp_v5 && temp_v3 == temp_v0) &&
-         (((unsigned int)*(unsigned short *)((int)puVar4 + 0x1c6) & (1 << (temp_v1 & 0xff))) != 0)) {
-        scrSetResult(1);
-        return 1;
-      }
+    u32 id = scrGetArg(0);
+    u32 bit = scrGetArg(1);
+    int i;
+
+    for (i = 0; i < 109; i++) {
+        BtlUnit *unit = &btlGetMainState()->units[i];
+
+        if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0
+            && unit->id == id && (unit->mask & (1 << bit)) != 0) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
-    }
-  } while( 1 );
+    scrSetResult(0);
+    return 1;
 }
 
 } /* extern "C" */

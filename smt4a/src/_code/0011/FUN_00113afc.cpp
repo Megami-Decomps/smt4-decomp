@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(int *, int);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int FUN_002fe278(int, unsigned int);
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -14,7 +14,7 @@ int FUN_002fe278(int, unsigned int);
 #endif
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002fe278. */
 extern int FUN_002fe3e8(int);
 
@@ -36,28 +36,28 @@ unsigned long long FUN_00113afc(int param_1,unsigned int param_2,unsigned int pa
   param_1 = param_1 + 0x50;
   FUN_002fe278(param_1,param_2);
   if (param_1 == 0) {
-    FUN_002e6e5c(&uStack_18);
+    _ZN9Obj55b28cD1Ev(&uStack_18);
     return romwright_piece_4_4(uStack_18,999);
   }
   if (*(int *)(param_1 + 0x78) != -1) {
     temp_v0 = FUN_002fe3e8(param_1 + 4);
     if (temp_v0 != 0) {
-      FUN_002e6e5c(&uStack_18);
+      _ZN9Obj55b28cD1Ev(&uStack_18);
       return romwright_piece_4_4(uStack_18,0x6e);
     }
-    FUN_002e6e5c(&uStack_18);
+    _ZN9Obj55b28cD1Ev(&uStack_18);
     return romwright_piece_4_4(uStack_18,100);
   }
   if (*(int *)(param_1 + 0x8c) == 0) {
-    FUN_002e6e5c(&uStack_18);
+    _ZN9Obj55b28cD1Ev(&uStack_18);
     return romwright_piece_4_4(uStack_18,200);
   }
   temp_v0 = FUN_002fe3e8(param_1 + 4);
   if (temp_v0 != 0) {
-    FUN_002e6e5c(&uStack_18);
+    _ZN9Obj55b28cD1Ev(&uStack_18);
     return romwright_piece_4_4(uStack_18,0xd2);
   }
-  FUN_002e6e5c(&uStack_18);
+  _ZN9Obj55b28cD1Ev(&uStack_18);
   return romwright_piece_4_4(uStack_18,0xc9);
 }
 

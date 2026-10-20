@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00401578(int, unsigned int);
+int childrenLowerToLevel(int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern int padButtonIsPressed(unsigned int);
 extern unsigned int *asdListBoxGetIntValuePtr(unsigned int);
 extern unsigned int *asdListBoxGetFloatValuePtr(unsigned int);
 extern unsigned int FUN_003874fc(unsigned int);
-/* Supplied declaration required: FUN_00401578. */
+/* Supplied declaration required: childrenLowerToLevel. */
 
 
 void FUN_004d463c(int param_1)
@@ -110,7 +110,7 @@ void FUN_004d463c(int param_1)
     temp_v0 = *puVar4;
     temp_v1 = padButtonIsPressed(9);
     if (temp_v1 != 0) {
-      FUN_00401578(g_btlStageModel,temp_v0);
+      childrenLowerToLevel(g_btlStageModel,temp_v0);
       return;
     }
   }

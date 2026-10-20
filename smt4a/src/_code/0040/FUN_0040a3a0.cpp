@@ -1,24 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040a3a0` (_code @ 0x40a3a0, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int gameDataBlocksGetStats(void);
+typedef struct StatsBlock {
+    /* 0x00 */ u8 unk00[0x16];
+    /* 0x16 */ u16 points;
+} StatsBlock;
 
+extern StatsBlock *gameDataBlocksGetStats(void);
 
-void FUN_0040a3a0(int param_1)
-
+/* Adds `amount` to the stats block's points, capped at 0xFFFF. */
+void FUN_0040a3a0(int amount)
 {
-  int temp_v0;
-  
-  temp_v0 = gameDataBlocksGetStats();
-  param_1 = (unsigned int)*(unsigned short *)(temp_v0 + 0x16) + param_1;
-  if (param_1 >= 0x10000) {
-    param_1 = 0xffff;
-  }
-  *(short *)(temp_v0 + 0x16) = (short)param_1;
-  return;
+    StatsBlock *block = gameDataBlocksGetStats();
+
+    amount = block->points + amount;
+    if (amount >= 0x10000) {
+        amount = 0xFFFF;
+    }
+    block->points = amount;
 }
 
 } /* extern "C" */

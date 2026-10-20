@@ -1,37 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00132932` (_code @ 0x132932, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps result/list/pos in r4/r5/r6 and the next node in r7, comparing `cmp end, node`; the build assigns r7/r4/r5, r6 and compares the other way round. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002fdafa(int);
+typedef struct ListNode {
+    /* 0x00 */ struct ListNode *next;
+    /* 0x04 */ struct ListNode *prev;
+    /* 0x08 */ u8 payload[1];
+} ListNode;
 
-/* Supplied declaration required: FUN_002fdafa. */
+typedef struct NodeList {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ ListNode *freeList;     /* erased nodes, linked through next */
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ ListNode *end;
+    /* 0x14 */ s32 size;
+} NodeList;
 
+extern int FUN_002fdafa(void *payload);
 
-void FUN_00132932(int *param_1,int param_2,int *param_3)
-
+/* Unlinks the node `*pos` from the list, destroys its payload, puts it on the free list and stores the following node in *result (the end node when `pos` is the end). */
+void FUN_00132932(ListNode **result, NodeList *list, ListNode **pos)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int *piVar2;
-  int temp_v0;
-  
-  piVar2 = (int *)*param_3;
-  if (piVar2 == *(int **)(param_2 + 0x10)) {
-    *param_1 = (int)*(int **)(param_2 + 0x10);
-    return;
-  }
-  temp_v0 = *piVar2;
-  *(int *)piVar2[1] = *piVar2;
-  *(int *)(*(int *)*param_3 + 4) = ((int *)*param_3)[1];
-  *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) - 1;
-  FUN_002fdafa(*param_3 + 8);
-  puVar1 = (unsigned int *)*param_3;
-  *puVar1 = *(unsigned int *)(param_2 + 4);
-  *(unsigned int **)(param_2 + 4) = puVar1;
-  *param_1 = temp_v0;
-  return;
+    ListNode *node = *pos;
+    ListNode *next;
+
+    if (node == list->end) {
+        *result = list->end;
+        return;
+    }
+    next = node->next;
+    node->prev->next = node->next;
+    (*pos)->next->prev = (*pos)->prev;
+    list->size--;
+    FUN_002fdafa((*pos)->payload);
+    node = *pos;
+    node->next = list->freeList;
+    list->freeList = node;
+    *result = next;
 }
 
 } /* extern "C" */

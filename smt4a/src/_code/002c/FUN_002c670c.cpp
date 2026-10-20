@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00281b94(...);
 int FUN_002b7a78(...);
-int FUN_003126a0(...);
+int recordSetValueAndName(...);
 int FUN_00313974(int);
 int FUN_00332fd8(void);
 int FUN_003534b0(...);
@@ -41,7 +41,7 @@ extern unsigned char LAB_002c6fd4; /* 0x2c6fd4 */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00281b94. */
 /* Supplied declaration required: FUN_002b7a78. */
-/* Supplied declaration required: FUN_003126a0. */
+/* Supplied declaration required: recordSetValueAndName. */
 /* Supplied declaration required: FUN_00313974. */
 /* Supplied declaration required: FUN_00332fd8. */
 /* Supplied declaration required: FUN_003534b0. */
@@ -121,7 +121,7 @@ void FUN_002c670c(int param_1)
             FUN_003534b0(0x2400001,0,&LAB_002c6e4c,0x1b,8,0xffffffff,0,
                          *(unsigned char *)(temp_v4 + 0x5814dc),*(unsigned char *)(temp_v4 + 0x5814dd),0,0,0,0
                          ,0xd,1,0,0,0,0);
-            FUN_003126a0(0x2400001,(int)*(short *)(temp_v4 + 0x5814de),temp_v4 + 0x5814e0);
+            recordSetValueAndName(0x2400001,(int)*(short *)(temp_v4 + 0x5814de),temp_v4 + 0x5814e0);
             FUN_002b7a78(0x2400001,0);
           }
         }
@@ -185,14 +185,14 @@ void FUN_002c670c(int param_1)
             FUN_003534b0(0x2400002,0,&LAB_002c6fd4,0x4a,4,0xffffffff,
                          *(unsigned char *)(temp_v2 + 0x5814f4),*(unsigned char *)(temp_v2 + 0x5814f5),0,0,0,0
                          ,0,0xd,1,0,0,0,0);
-            FUN_003126a0(0x2400002,(int)*(short *)(temp_v2 + 0x5814f6),temp_v2 + 0x5814f8);
+            recordSetValueAndName(0x2400002,(int)*(short *)(temp_v2 + 0x5814f6),temp_v2 + 0x5814f8);
             FUN_002b7a78(0x2400002,0);
           }
         }
         else {
           FUN_003534b0(0x2400002,0,&LAB_002c6fd4,0xc,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x5814f4),
                        *(unsigned char *)(temp_v2 + 0x5814f5),0,0,0,0,0,0xd,1,0,0,0,0);
-          FUN_003126a0(0x2400002,(int)*(short *)(temp_v2 + 0x5814f6),temp_v2 + 0x5814f8);
+          recordSetValueAndName(0x2400002,(int)*(short *)(temp_v2 + 0x5814f6),temp_v2 + 0x5814f8);
           FUN_002b7a78(0x2400002,0);
         }
       }

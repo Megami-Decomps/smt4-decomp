@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001ec9d0(...);
-int FUN_00259274(...);
+int gameDataFlagsSet(...);
 int FUN_00259294(...);
 int gameDataBlocksAddFlags(...);
 int asdMemAlloc(...);
@@ -29,7 +29,7 @@ extern unsigned short DAT_0043e2f6; /* 0x43e2f6 */
 extern unsigned int DAT_0043e2f8; /* 0x43e2f8 */
 
 /* Supplied declaration required: FUN_001ec9d0. */
-/* Supplied declaration required: FUN_00259274. */
+/* Supplied declaration required: gameDataFlagsSet. */
 /* Supplied declaration required: FUN_00259294. */
 /* Supplied declaration required: gameDataBlocksAddFlags. */
 extern int gameDataBlocksGetSaveData(void);
@@ -50,7 +50,7 @@ unsigned int FUN_0026b60c(unsigned int param_1)
   asdMemAlloc(0x100,0x100,0,0x18,1);
   gameDataBlocksAddFlags(1);
   FUN_00259294(1);
-  FUN_00259274(1);
+  gameDataFlagsSet(1);
   puVar2[2] = 0;
   temp_v1 = gameDataBlocksGetSaveData();
   temp_v0 = *(unsigned char *)(temp_v1 + 3);

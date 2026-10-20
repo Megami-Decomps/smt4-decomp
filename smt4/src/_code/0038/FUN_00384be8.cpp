@@ -43,7 +43,7 @@ extern int effIsFinished(unsigned int);
 /* Supplied declaration required: FUN_00290d5c. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 extern unsigned int FUN_00290e9c(void);
-extern int FUN_00290eb0(void);
+extern int messageWindowIsState1(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_002973d8. */
@@ -124,7 +124,7 @@ void FUN_00384be8(unsigned int *param_1)
   case 1:
     temp_v4 = FUN_0019e0c0(*(unsigned int *)param_1[0x171]);
     if (temp_v4 != 2) {
-      temp_v4 = FUN_00290eb0();
+      temp_v4 = messageWindowIsState1();
       if (temp_v4 != 0) {
         temp_v2 = FUN_00290e9c();
         param_1[0x369] = temp_v2;

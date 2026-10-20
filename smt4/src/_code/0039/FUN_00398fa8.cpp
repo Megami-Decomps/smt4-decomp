@@ -9,7 +9,7 @@ int flaggedEntrySetValueB(...);
 int flaggedEntrySetValueA(int, int);
 int flaggedEntryGetValueA(int);
 int FUN_0029eb5c(...);
-int FUN_002bc01c(int);
+int eventQueueAddUniqueIfValid(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -28,7 +28,7 @@ extern int FUN_0029efc0(int);
 extern int FUN_002af600(int);
 extern int FUN_002b8d54(void);
 extern int FUN_002b8d68(void);
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 extern short __aeabi_idivmod(int);
 
@@ -88,7 +88,7 @@ void FUN_00398fa8(int param_1)
           *(int *)(param_1 + 0x14) = temp_v3;
           if (*(int *)(param_1 + 0x10) == temp_v7 && temp_v3 == temp_v8) break;
         }
-        FUN_002bc01c(0x100016c);
+        eventQueueAddUniqueIfValid(0x100016c);
         break;
       }
       temp_v3 = temp_v3 + 1;
@@ -116,7 +116,7 @@ void FUN_00398fa8(int param_1)
           temp_v1 = flaggedEntryGetValueB(temp_v7);
           if ((temp_v1 == temp_v8) && (temp_v1 = flaggedEntryGetValueA(param_1 + 0x580), temp_v1 == temp_v0)) break;
         }
-        FUN_002bc01c(0x100016c);
+        eventQueueAddUniqueIfValid(0x100016c);
         break;
       }
       temp_v3 = temp_v3 + 1;

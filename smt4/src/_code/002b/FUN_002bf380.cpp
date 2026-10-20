@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } param_6_stack;
 
-extern int FUN_00126724(unsigned int, unsigned int);
+extern int texTableFindNode(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002af63c. */
 extern int asdTMTexTableCallFileA(unsigned int, int);
 
@@ -62,7 +62,7 @@ FUN_002bf380(unsigned int param_1,unsigned int param_2,unsigned int param_3,int 
   temp_v17 = param_2;
   uStack_2c = param_3;
   temp_v18 = param_4;
-  temp_v0 = FUN_00126724(param_2,param_3);
+  temp_v0 = texTableFindNode(param_2,param_3);
   temp_v3 = 0;
   if ((temp_v0 != 0) && (temp_v5 = 0, temp_v3 = temp_v15, 0 < *(int *)(temp_v0 + 4))) {
     temp_v16 = param_1 | 0x8000;

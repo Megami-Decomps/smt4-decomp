@@ -19,7 +19,7 @@ int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
 int asdMemFree(void);
 int jobStop(unsigned int, int);
 int FUN_002c526c(void);
-int FUN_00310ac0(void);
+int textureSlotsReleaseAll(void);
 int FUN_00337a34(unsigned int *);
 int FUN_00338fb0(unsigned int *);
 int software_interrupt(int);
@@ -52,7 +52,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_00310ac0. */
+/* Supplied declaration required: textureSlotsReleaseAll. */
 /* Supplied declaration required: FUN_00337a34. */
 /* Supplied declaration required: FUN_00338fb0. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
@@ -190,7 +190,7 @@ void FUN_0020f04c(void)
     }
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0x2a);
-  FUN_00310ac0();
+  textureSlotsReleaseAll();
   btlTalkBustUpDestroy();
   FUN_00295ba4(1);
   temp_v0 = jobIsValid(*puVar1);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00256810(void);
+int aocRecordLookup83(void);
 int FUN_00295a18(...);
 int jyoucyuGetTableEntry(int);
 int FUN_00389c44(int, unsigned int);
@@ -23,7 +23,7 @@ typedef struct {
 
 extern int g_aocSystem; /* 0x433158 */
 
-/* Supplied declaration required: FUN_00256810. */
+/* Supplied declaration required: aocRecordLookup83. */
 extern int FUN_0025b6e8(int);
 /* Supplied declaration required: FUN_00295a18. */
 extern int randNextInRange(unsigned int);
@@ -163,7 +163,7 @@ unsigned int FUN_001f8da8(unsigned int param_1,int param_2,int param_3,unsigned 
       temp_v2 = 0;
       do {
         temp_v6 = temp_v3;
-        FUN_00256810();
+        aocRecordLookup83();
         if (((temp_v6 != 0) && (temp_v8 <= *(unsigned char *)(temp_v6 + 0x24))) &&
            (*(unsigned char *)(temp_v6 + 0x24) <= temp_v9)) {
           temp_v11 = (unsigned int)*(unsigned char *)(temp_v6 + 0x25);

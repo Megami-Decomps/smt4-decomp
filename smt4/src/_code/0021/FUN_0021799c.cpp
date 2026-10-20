@@ -16,7 +16,7 @@ int FUN_0029da34(...);
 int FUN_002a0cc8(...);
 int dataTable00FindById(void);
 int buttonHelpSetPreset(...);
-int FUN_002bc01c(int);
+int eventQueueAddUniqueIfValid(int);
 int timerStart(...);
 int FUN_002bf818(int);
 int FUN_002c1658(int, int);
@@ -59,7 +59,7 @@ extern unsigned short FUN_002b8584(unsigned int, unsigned int);
 extern int FUN_002b8d54(void);
 extern int FUN_002b8d68(void);
 extern int FUN_002b8ee0(int, unsigned int);
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bf818. */
 /* Supplied declaration required: FUN_002c1658. */
@@ -292,7 +292,7 @@ joined_r0x00217be4:
       }
       temp_v1 = FUN_002b8d54();
       if (((temp_v1 == 1) && (temp_v1 = FUN_00259e7c(), temp_v1 < 1)) && (temp_v6 != 0x11)) {
-        FUN_002bc01c(0x100016c);
+        eventQueueAddUniqueIfValid(0x100016c);
       }
     }
     else {

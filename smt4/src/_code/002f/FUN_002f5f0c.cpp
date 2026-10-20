@@ -1,39 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f5f0c` (_code @ 0x2f5f0c, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(unsigned int);
-int FUN_002be624(unsigned char [68], unsigned char *, unsigned int);
+u32 scrGetArg(u32 index);
+int scrSetResult(u32 value);
+int FUN_002be624(char *buffer, const char *format, ...);
+s32 FUN_002c1d5c(void);
+u32 FUN_002d848c(const char *path);
 
-extern unsigned char LAB_002f5f60; /* 0x2f5f60 */
-
-/* Supplied declaration required: scrSetResult. */
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_002be624. */
-extern int FUN_002c1d5c(void);
-extern unsigned int FUN_002d848c(unsigned char *);
-
-
-unsigned int FUN_002f5f0c(void)
-
+/* Script command: result is FUN_002d848c for the effect file EV_<n>.eft (n = first script argument), or 0 when FUN_002c1d5c is non-zero. */
+u32 FUN_002f5f0c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3 [68];
-  
-  temp_v0 = scrGetArg(0);
-  temp_v2 = 0;
-  temp_v1 = FUN_002c1d5c();
-  if (temp_v1 == 0) {
-    FUN_002be624(temp_v3,&LAB_002f5f60,temp_v0);
-    temp_v2 = FUN_002d848c(temp_v3);
-  }
-  scrSetResult(temp_v2);
-  return 1;
+    char path[68];
+    u32 id = scrGetArg(0);
+    u32 result = 0;
+
+    if (FUN_002c1d5c() == 0) {
+        FUN_002be624(path, "battle/effect/EV_%03d.eft", id);
+        result = FUN_002d848c(path);
+    }
+    scrSetResult(result);
+    return 1;
 }
 
 } /* extern "C" */

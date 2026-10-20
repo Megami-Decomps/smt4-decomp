@@ -1,16 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004aa2bc` (_code @ 0x4aa2bc, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail splits the 0x74B3 offset as `add r0,#0x7400; ldrb r0,[r0,#179]`; the build adds both parts and loads with a zero offset (one instruction more). */
+#include "battle/btlUI.h"
 
 extern "C" {
 
-extern unsigned char g_btlUi; /* 0x57a9b8 */
+extern BtlUiGlobalsA g_btlUi; /* 0x57a9b8 */
 
-
-unsigned char FUN_004aa2bc(void)
-
+/* Whether the battle UI's flag byte at 0x74B3 is clear. */
+u8 FUN_004aa2bc(void)
 {
-  return *(char *)((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x74b3) == '\0';
+    return ((u8 *)g_btlUi.ui)[0x74B3] == 0;
 }
 
 } /* extern "C" */

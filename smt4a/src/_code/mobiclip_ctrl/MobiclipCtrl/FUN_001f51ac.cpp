@@ -11,7 +11,7 @@ int FUN_00512e38(void);
 int FUN_00513210(void);
 int FUN_00513620(void);
 int FUN_00513718(void);
-int FUN_00513a30(void);
+int mobiclipAllocatorReset(void);
 int FUN_00513f6c(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -39,7 +39,7 @@ extern unsigned int DAT_00617e30; /* 0x617e30 */
 /* Supplied declaration required: FUN_00513210. */
 /* Supplied declaration required: FUN_00513620. */
 /* Supplied declaration required: FUN_00513718. */
-/* Supplied declaration required: FUN_00513a30. */
+/* Supplied declaration required: mobiclipAllocatorReset. */
 /* Supplied declaration required: FUN_00513f6c. */
 extern void nn_fnd_ExpHeapBase_Finalize(unsigned int);
 
@@ -56,7 +56,7 @@ void FUN_001f51ac(void)
   FUN_00513210();
   FUN_00512e38();
   FUN_00513718();
-  FUN_00513a30();
+  mobiclipAllocatorReset();
   FUN_00513620();
   temp_v0 = DAT_00617c78;
   nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617c48);

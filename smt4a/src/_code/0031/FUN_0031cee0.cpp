@@ -1,16 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031cee0` (_code @ 0x31cee0, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
-unsigned char FUN_0031cee0(void)
-
+/* Reads the byte at +0x27E0E of the game data's save-data part. */
+u8 FUN_0031cee0(void)
 {
-  return *(unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x27e96);
+    GameDataSub *sub = &g_gameDataBlocks.block->sub;
+
+    return sub->flag0e;
 }
 
-} /* extern "C" */
+}

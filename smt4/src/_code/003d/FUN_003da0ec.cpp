@@ -21,7 +21,7 @@ int asdOperatorNew(void);
 int FUN_0034c7a8(unsigned int, float *);
 int FUN_0034c86c(...);
 int FUN_0034c8d0(unsigned int);
-int FUN_0034c9fc(void);
+int deadEffectStartLoad(void);
 int FUN_003dc19c(int);
 int FUN_003dcfdc(int);
 int nn_math_ARMv6_MTX34CopyAsm(...);
@@ -90,8 +90,8 @@ extern int asdMdlManagerCreateFromSourceB(int, unsigned int, unsigned short);
 /* Supplied declaration required: FUN_0034c7a8. */
 /* Supplied declaration required: FUN_0034c86c. */
 /* Supplied declaration required: FUN_0034c8d0. */
-/* Supplied declaration required: FUN_0034c9fc. */
-extern unsigned int FUN_0034d58c(void);
+/* Supplied declaration required: deadEffectStartLoad. */
+extern unsigned int _ZN9Obj4209ccC1Ev(void);
 /* Supplied declaration required: FUN_003dc19c. */
 /* Supplied declaration required: FUN_003dcfdc. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
@@ -261,10 +261,10 @@ void FUN_003da0ec(int param_1)
       asdOperatorNew();
       temp_v16 = 0;
       if (temp_v6 != 0) {
-        temp_v16 = FUN_0034d58c();
+        temp_v16 = _ZN9Obj4209ccC1Ev();
       }
       *(unsigned int *)(param_1 + 0x304c) = temp_v16;
-      FUN_0034c9fc();
+      deadEffectStartLoad();
       *(unsigned char *)(param_1 + 0x3040) = 6;
     }
     break;
@@ -275,10 +275,10 @@ void FUN_003da0ec(int param_1)
     asdOperatorNew();
     temp_v16 = 0;
     if (temp_v6 != 0) {
-      temp_v16 = FUN_0034d58c();
+      temp_v16 = _ZN9Obj4209ccC1Ev();
     }
     *(unsigned int *)(param_1 + 0x304c) = temp_v16;
-    FUN_0034c9fc();
+    deadEffectStartLoad();
     *(unsigned char *)(param_1 + 0x3040) = 6;
     break;
   case 6:

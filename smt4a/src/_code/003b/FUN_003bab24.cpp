@@ -8,7 +8,7 @@ int FUN_00157558(int);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
-int FUN_0016c560(...);
+int skinObjectUpdateMatrices(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_0032cdc8(...);
 
@@ -30,7 +30,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0032cdc8. */
@@ -113,7 +113,7 @@ char FUN_003bab24(void)
       (**(romwright_code **)(temp_v2 + 0x1274))();
       *(unsigned char *)(temp_v2 + 0x1270) = 0;
     }
-    FUN_0016c560(g_renderCtx);
+    skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     temp_v0 = '\0';
   }

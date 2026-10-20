@@ -9,7 +9,7 @@ int FUN_00103a4c(unsigned int, int);
 int FUN_00103a60(unsigned int, int);
 int FUN_00103ab8(unsigned int, int);
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineStringDestroy(unsigned char [8]);
 int FUN_002ee938(...);
 int FUN_002ee978(...);
@@ -29,7 +29,7 @@ typedef struct {
 extern int FUN_00123f04(int, unsigned int, unsigned int);
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineStringDestroy. */
 extern int wordRefsDiffer_002ee774(unsigned int **, unsigned int *);
 /* Supplied declaration required: FUN_002ee938. */
@@ -99,13 +99,13 @@ unsigned int FUN_001139e8(int param_1,unsigned int param_2)
         FUN_002fe1b8(temp_v1,param_2);
         if (temp_v1 == 0) {
           FUN_002fbac6(param_1 + 0x1c,param_2);
-          FUN_002e6e5c(temp_v3);
+          _ZN9Obj55b28cD1Ev(temp_v3);
           return 1;
         }
       }
     }
   }
-  FUN_002e6e5c(temp_v3);
+  _ZN9Obj55b28cD1Ev(temp_v3);
   return 0;
 }
 

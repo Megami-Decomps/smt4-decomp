@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00352e04(int, int);
+int gameFlagsWriteBit(int, int);
 int FUN_004a00f4(int);
 
 extern int g_gameState; /* 0x5f15fc */
@@ -12,9 +12,9 @@ extern int g_gameState; /* 0x5f15fc */
 extern int randRange(unsigned int);
 extern int FUN_0015fa74(int, int);
 extern int FUN_00352c60(void);
-/* Supplied declaration required: FUN_00352e04. */
+/* Supplied declaration required: gameFlagsWriteBit. */
 /* Supplied declaration required: FUN_004a00f4. */
-extern int FUN_004bbc34(int, int);
+extern int flagsBit7Get(int, int);
 
 
 int FUN_00272d44(void)
@@ -44,7 +44,7 @@ int FUN_00272d44(void)
   if (temp_v0 != 0) {
     temp_v1 = FUN_00352c60();
     if (temp_v1 == 0) {
-      temp_v2 = FUN_004bbc34(g_gameState,(*(int *)((unsigned char *)&g_gameState + 0x4)));
+      temp_v2 = flagsBit7Get(g_gameState,(*(int *)((unsigned char *)&g_gameState + 0x4)));
       temp_v1 = 0;
       if (temp_v2 != 0) {
         temp_v1 = FUN_0015fa74(g_gameState,(*(int *)((unsigned char *)&g_gameState + 0x4)));
@@ -52,7 +52,7 @@ int FUN_00272d44(void)
         if ((int)(unsigned int)*(unsigned short *)(temp_v1 + 8) <= (int)in_s0) {
           return 0;
         }
-        FUN_00352e04((int)(short)temp_v0,1);
+        gameFlagsWriteBit((int)(short)temp_v0,1);
         temp_v1 = randRange(1);
         temp_v1 = temp_v1 + 1;
       }

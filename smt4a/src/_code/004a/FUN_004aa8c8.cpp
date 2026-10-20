@@ -9,7 +9,7 @@ int dataTable04FindById(void);
 int FUN_00280030(void);
 int FUN_002ccde8(int, short [4], short [2]);
 int FUN_002fa7a8(int);
-int FUN_00336da0(int);
+int uiWorkEndState1(int);
 int owner2DCInitSub(int);
 int menu32EnterState27(int);
 
@@ -26,7 +26,7 @@ extern unsigned char g_btlUi; /* 0x57a9b8 */
 /* Supplied declaration required: FUN_00280030. */
 /* Supplied declaration required: FUN_002ccde8. */
 /* Supplied declaration required: FUN_002fa7a8. */
-/* Supplied declaration required: FUN_00336da0. */
+/* Supplied declaration required: uiWorkEndState1. */
 /* Supplied declaration required: owner2DCInitSub. */
 /* Supplied declaration required: menu32EnterState27. */
 extern int menu32ModeIsNot5(int);
@@ -94,7 +94,7 @@ void FUN_004aa8c8(void)
       temp_v1 = temp_v0 + 0x24bc;
       FUN_00280030();
       if (temp_v1 != 0) {
-        FUN_00336da0(temp_v0 + 8);
+        uiWorkEndState1(temp_v0 + 8);
         owner2DCInitSub(temp_v0 + 0x24bc);
         return;
       }

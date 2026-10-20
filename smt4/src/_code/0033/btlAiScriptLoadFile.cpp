@@ -24,7 +24,7 @@ extern int FUN_002b6ad0(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
-extern int FUN_00385f34(int, unsigned short);
+extern int aocContentLookupSucceeds(int, unsigned short);
 
 
 void btlAiScriptLoadFile(int *param_1,int param_2)
@@ -73,7 +73,7 @@ void btlAiScriptLoadFile(int *param_1,int param_2)
       FUN_002be624(temp_v3,"battle/AI/tmp.bf");
     }
     libc_strcpy(param_1 + 4,temp_v3);
-    temp_v1 = FUN_00385f34(g_aocSystem,*(unsigned short *)(*(int *)(param_2 + 0x28) + 2));
+    temp_v1 = aocContentLookupSucceeds(g_aocSystem,*(unsigned short *)(*(int *)(param_2 + 0x28) + 2));
     if (temp_v1 != 0) {
       *(unsigned int *)(g_aocSystem + 0x444) = (unsigned int)*(unsigned short *)(*(int *)(param_2 + 0x28) + 2);
       return;

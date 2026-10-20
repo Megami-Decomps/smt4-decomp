@@ -7,7 +7,7 @@ extern "C" {
 int effMenuCallHandler(int, int);
 int requestDispatch(void);
 int FUN_0028186c(void);
-int FUN_002880a8(int);
+int layoutApplyForState(int);
 int FUN_002c18e4(int);
 int FUN_002c198c(int);
 int FUN_002c4f8c(int, unsigned int);
@@ -22,7 +22,7 @@ extern int DAT_0044eaac; /* 0x44eaac */
 /* Supplied declaration required: effMenuCallHandler. */
 /* Supplied declaration required: requestDispatch. */
 /* Supplied declaration required: FUN_0028186c. */
-/* Supplied declaration required: FUN_002880a8. */
+/* Supplied declaration required: layoutApplyForState. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c4f8c. */
@@ -74,7 +74,7 @@ void FUN_002e1c04(void)
     *(unsigned char *)(temp_v0 + 0x12c4) = 0;
   }
   if (g_effectEditor != '\0') {
-    FUN_002880a8(g_titleScene);
+    layoutApplyForState(g_titleScene);
   }
   else {
     temp_v1 = FUN_002c501c();

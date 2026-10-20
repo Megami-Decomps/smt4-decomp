@@ -1,48 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00203640` (_code @ 0x203640, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the state/prevState stores: retail writes them with `stmib r0!, {r1, r2}` then stateTime via the updated r0; armcc here stores stateTime first and uses add + stm. */
+#include "common.h"
 
 extern "C" {
 
-int buttonHelpSetPreset(int);
-int timerStart(int, int, int);
-int FUN_002bee58(int, int);
-int FUN_002bf810(int);
+typedef struct UiQuest {
+    /* 0x000 */ u32 unk000;
+    /* 0x004 */ s32 state;
+    /* 0x008 */ s32 prevState;
+    /* 0x00C */ u32 unk00c;
+    /* 0x010 */ s32 stateTime;
+    /* 0x014 */ u8 unk014[0x20];
+    /* 0x034 */ u8 timer[0x2BC];
+    /* 0x2F0 */ u8 anim0[0x8C];
+    /* 0x37C */ u8 anim1[0x26C];
+    /* 0x5E8 */ u32 unk5e8;
+    /* 0x5EC */ u8 unk5ec[0x392];
+    /* 0x97E */ u16 page;
+} UiQuest;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+extern UiQuest *g_uiQuest; /* 0x43dd50 */
 
-extern int g_uiQuest; /* 0x43dd50 */
+extern int buttonHelpSetPreset(int preset);
+extern int timerStart(u8 *timer, int a, int b);
+extern int FUN_002bee58(u8 *anim, int id);
+extern int FUN_002bf810(u32 arg);
 
-/* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002bf810. */
-
-
-void FUN_00203640(unsigned short param_1)
-
+/* Opens page `page` of the quest screen: starts its timer and animations and enters state 17. */
+void FUN_00203640(u16 page)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = g_uiQuest;
-  *(unsigned short *)(g_uiQuest + 0x97e) = param_1;
-  *(unsigned int *)(temp_v0 + 0x5e8) = 0;
-  timerStart(temp_v0 + 0x34,1,0);
-  FUN_002bee58(temp_v0 + 0x2f0,2);
-  FUN_002bee58(temp_v0 + 0x37c,3);
-  temp_v0 = g_uiQuest;
-  temp_v1 = *(unsigned int *)(g_uiQuest + 4);
-  *(unsigned int *)(g_uiQuest + 4) = 0x11;
-  *(unsigned int *)(temp_v0 + 8) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0x10) = 0;
-  buttonHelpSetPreset(0x1a);
-  FUN_002bf810(0x100025d);
-  return;
+    UiQuest *quest = g_uiQuest;
+
+    quest->page = page;
+    quest->unk5e8 = 0;
+    timerStart(quest->timer, 1, 0);
+    FUN_002bee58(quest->anim0, 2);
+    FUN_002bee58(quest->anim1, 3);
+    quest = g_uiQuest;
+    quest->prevState = quest->state;
+    quest->state = 17;
+    quest->stateTime = 0;
+    buttonHelpSetPreset(26);
+    FUN_002bf810(0x100025D);
 }
 
-} /* extern "C" */
+}

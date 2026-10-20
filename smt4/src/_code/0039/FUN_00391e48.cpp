@@ -10,15 +10,15 @@ int FUN_00233854(unsigned int *);
 int FUN_0023392c(...);
 int FUN_002353b4(void);
 int bgmStopNoForce(int, int);
-int FUN_0028971c(void);
+int msgWindowReset(void);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002a126c(unsigned char [4], unsigned int);
 int FUN_002b8244(int);
 int ifTouchRegionRemove(void);
 int FUN_002baa40(unsigned int *, int);
-int FUN_002bc01c(int);
+int eventQueueAddUniqueIfValid(int);
 int FUN_002c1658(void);
-int FUN_002fea6c(void);
+int messageClearObjectFlags(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 1 byte(s) */
@@ -39,7 +39,7 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_002353b4. */
 /* Supplied declaration required: bgmStopNoForce. */
 extern int FUN_0026b564(void);
-/* Supplied declaration required: FUN_0028971c. */
+/* Supplied declaration required: msgWindowReset. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002973d8(void);
@@ -48,10 +48,10 @@ extern int FUN_002973d8(void);
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_002baa40. */
 extern unsigned int *FUN_002bad5c(unsigned char *);
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_002c1658. */
 extern int sys43e188GetStateB(void);
-/* Supplied declaration required: FUN_002fea6c. */
+/* Supplied declaration required: messageClearObjectFlags. */
 
 
 void FUN_00391e48(unsigned int *param_1)
@@ -149,10 +149,10 @@ void FUN_00391e48(unsigned int *param_1)
     if (temp_v1 == 0) {
       return;
     }
-    FUN_002bc01c(0x100016d);
-    FUN_0028971c();
+    eventQueueAddUniqueIfValid(0x100016d);
+    msgWindowReset();
     FUN_002353b4();
-    FUN_002fea6c();
+    messageClearObjectFlags();
     ifTouchRegionRemove();
     ifTouchRegionRemove();
     piVar3 = (int *)param_1[0x82];

@@ -17,7 +17,7 @@ typedef struct {
 
 extern int g_titleScene; /* 0x44ea00 */
 
-extern int FUN_0029e908(int);
+extern int objectPartRunUnlessLocked(int);
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf288. */
@@ -107,7 +107,7 @@ void FUN_0025ccac(int param_1,int param_2)
       } while (temp_v6 < 4);
     }
     else {
-      temp_v6 = FUN_0029e908(param_1 + 0x33a8);
+      temp_v6 = objectPartRunUnlessLocked(param_1 + 0x33a8);
       temp_v2 = FUN_002bf4f8(0x15,temp_v6 + 0x52);
       temp_v6 = g_titleScene;
       temp_v3 = packNibblesAndByte(6,1,0);

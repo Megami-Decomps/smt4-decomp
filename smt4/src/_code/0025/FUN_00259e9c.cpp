@@ -5,12 +5,12 @@
 extern "C" {
 
 int memFill8(int, unsigned int);
-int FUN_0029e054(int, int, int, int);
+int ifTouchRegionAdd(int, int, int, int);
 int ifTouchRegionRemove(void);
 int FUN_002bf4f8(int, int);
 
 /* Supplied declaration required: memFill8. */
-/* Supplied declaration required: FUN_0029e054. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -39,23 +39,23 @@ void FUN_00259e9c(int *param_1)
   temp_v2 = FUN_002bf4f8(0x2f,temp_v2 + 0x1f);
   temp_v0 = FUN_002bf4f8(0x2f,0x1b);
   temp_v1 = (int)(short)(*(short *)(temp_v2 + 8) + *(short *)(temp_v0 + 8));
-  FUN_0029e054(temp_v1,(int)(short)(*(short *)(temp_v2 + 10) + *(short *)(temp_v0 + 10)),
+  ifTouchRegionAdd(temp_v1,(int)(short)(*(short *)(temp_v2 + 10) + *(short *)(temp_v0 + 10)),
                *(unsigned short *)(temp_v0 + 4) & 0x7fff,*(unsigned short *)(temp_v0 + 6) & 0x7fff);
   *(short *)(temp_v3 + 0x1c) = (short)temp_v1;
   *(short *)(temp_v3 + 0x24) = *(short *)(temp_v3 + 0x24) + 1;
   temp_v0 = FUN_002bf4f8(0x2f,0x34);
   temp_v1 = (int)(short)(*(short *)(temp_v2 + 8) + *(short *)(temp_v0 + 8));
-  FUN_0029e054(temp_v1,(int)(short)(*(short *)(temp_v2 + 10) + *(short *)(temp_v0 + 10)),
+  ifTouchRegionAdd(temp_v1,(int)(short)(*(short *)(temp_v2 + 10) + *(short *)(temp_v0 + 10)),
                *(unsigned short *)(temp_v0 + 4) & 0x7fff,*(unsigned short *)(temp_v0 + 6) & 0x7fff);
   *(short *)(temp_v3 + 0x1e) = (short)temp_v1;
   temp_v0 = FUN_002bf4f8(0x2f,0x38);
   temp_v1 = (int)(short)(*(short *)(temp_v2 + 8) + *(short *)(temp_v0 + 8));
-  FUN_0029e054(temp_v1,(int)(short)(*(short *)(temp_v2 + 10) + *(short *)(temp_v0 + 10)),
+  ifTouchRegionAdd(temp_v1,(int)(short)(*(short *)(temp_v2 + 10) + *(short *)(temp_v0 + 10)),
                *(unsigned short *)(temp_v0 + 4) & 0x7fff,*(unsigned short *)(temp_v0 + 6) & 0x7fff);
   *(short *)(temp_v3 + 0x20) = (short)temp_v1;
   temp_v0 = FUN_002bf4f8(0x2f,0x33);
   temp_v1 = (int)(short)(*(short *)(temp_v2 + 8) + *(short *)(temp_v0 + 8));
-  FUN_0029e054(temp_v1,(int)(short)(*(short *)(temp_v2 + 10) + *(short *)(temp_v0 + 10)),
+  ifTouchRegionAdd(temp_v1,(int)(short)(*(short *)(temp_v2 + 10) + *(short *)(temp_v0 + 10)),
                (int)**(short **)(temp_v0 + 0xc),(int)(*(short **)(temp_v0 + 0xc))[1]);
   *(short *)(temp_v3 + 0x22) = (short)temp_v1;
   *(short *)(temp_v3 + 0x24) = *(short *)(temp_v3 + 0x24) + 3;

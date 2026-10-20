@@ -20,7 +20,7 @@ int FUN_002992e0(...);
 int FUN_00299370(...);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
-int FUN_0029e908(...);
+int objectPartRunUnlessLocked(...);
 int FUN_0029ee6c(...);
 int buttonHelpSetPreset(...);
 int FUN_002bf810(...);
@@ -28,18 +28,18 @@ int FUN_002bf810(...);
 int FUN_002996d8(...);
 int FUN_0029974c(...);
 int FUN_00299900(...);
-int FUN_0029a014(...);
+int nodeSetTranslation3f(...);
 int FUN_0029a084(...);
 int FUN_0029a0cc(...);
 int FUN_0029a0e8(...);
-int FUN_0029a128(...);
+int gameGlobalsSetSelected(...);
 int FUN_0029a164(...);
 int FUN_0029c4c8(...);
 int FUN_0029d684(int);
 int FUN_0029efd8(...);
 int FUN_0029f5d8(...);
 int FUN_002a0428(...);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_002c1658(...);
 
 /* stack frame of param_1: 4 slot(s), 13 byte(s) */
@@ -69,12 +69,12 @@ extern unsigned int FUN_0029963c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00299d84. */
 /* Supplied declaration required: FUN_00299da0. */
 extern int FUN_00299fc0(void);
-/* Supplied declaration required: FUN_0029a014. */
+/* Supplied declaration required: nodeSetTranslation3f. */
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0029a084. */
 /* Supplied declaration required: FUN_0029a0cc. */
 /* Supplied declaration required: FUN_0029a0e8. */
-/* Supplied declaration required: FUN_0029a128. */
+/* Supplied declaration required: gameGlobalsSetSelected. */
 /* Supplied declaration required: FUN_0029a164. */
 /* Supplied declaration required: FUN_0029c4c8. */
 /* Supplied declaration required: FUN_0029ca58. */
@@ -85,7 +85,7 @@ extern int FUN_0029e0f8(void);
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: FUN_0029e648. */
-/* Supplied declaration required: FUN_0029e908. */
+/* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int FUN_0029e958(int);
 /* Supplied declaration required: FUN_0029ee6c. */
 extern int FUN_0029efa8(int);
@@ -98,7 +98,7 @@ extern int FUN_002adee0(int);
 extern short *gameGetPlayerData(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern unsigned char FUN_002b898c(void);
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
@@ -205,7 +205,7 @@ void FUN_0018854c(unsigned int param_1)
     if (temp_v4 == 0) {
       return;
     }
-    FUN_0029a128(3);
+    gameGlobalsSetSelected(3);
     FUN_0029c4c8(1);
     FUN_0029a0e8(psVar3);
     FUN_0029a0cc(psVar3);
@@ -247,7 +247,7 @@ void FUN_0018854c(unsigned int param_1)
     temp_v9 = FUN_002adee0(*piVar12);
     if ((temp_v9 != 0) && (*(int *)(*(int *)(*piVar12 + 8) + 0xc) < 0)) {
       FUN_002a0428(*piVar12,1);
-      FUN_0029a014(*(unsigned int *)(*piVar12 + 8),0);
+      nodeSetTranslation3f(*(unsigned int *)(*piVar12 + 8),0);
     }
     temp_v9 = FUN_00299fc0();
     if (temp_v9 == 0) {
@@ -334,7 +334,7 @@ void FUN_0018854c(unsigned int param_1)
       psVar14 = (short *)(temp_v9 + (temp_v11 + temp_v5) * 2);
       temp_v5 = FUN_002995d8(*psVar14);
       if (temp_v5 == 0) {
-        FUN_002bc01c(0x100016e);
+        eventQueueAddUniqueIfValid(0x100016e);
         return;
       }
       temp_v12 = 1;
@@ -396,7 +396,7 @@ void FUN_0018854c(unsigned int param_1)
       }
       FUN_0029a0e8(psVar3);
       FUN_0029a0cc(psVar3);
-      FUN_002bc01c(0x100016d);
+      eventQueueAddUniqueIfValid(0x100016d);
       FUN_002bf810(0x100025f);
       return;
     }
@@ -483,7 +483,7 @@ void FUN_0018854c(unsigned int param_1)
           *(unsigned int *)(temp_v5 + 0x1c) = 0;
           *(unsigned int *)(temp_v5 + 0x14) = 0;
           temp_v2 = 0x100016d;
-          FUN_002bc01c(temp_v2);
+          eventQueueAddUniqueIfValid(temp_v2);
           return;
         }
         temp_v4 = FUN_0029efc0(temp_v11);
@@ -509,7 +509,7 @@ void FUN_0018854c(unsigned int param_1)
           FUN_002996d8(0);
           *(unsigned char *)(temp_v5 + 0x32) = 1;
         }
-        temp_v9 = FUN_0029e908(temp_v5 + 0x34);
+        temp_v9 = objectPartRunUnlessLocked(temp_v5 + 0x34);
         temp_v6 = 0;
         temp_v4 = FUN_0029e958(temp_v5 + 0x34);
         if (0 < temp_v4) {
@@ -527,7 +527,7 @@ void FUN_0018854c(unsigned int param_1)
             }
             if (0 < temp_v4) {
               flaggedEntrySetValueB(temp_v5 + 0x34,temp_v9);
-              temp_v2 = FUN_0029e908(temp_v5 + 0x34);
+              temp_v2 = objectPartRunUnlessLocked(temp_v5 + 0x34);
               param_1 = FUN_00299218((int)*(char *)(temp_v5 + 0x98),temp_v2);
               FUN_00299900();
               break;
@@ -544,27 +544,27 @@ void FUN_0018854c(unsigned int param_1)
             temp_v2 = 0x15;
             buttonHelpSetPreset(temp_v2);
             temp_v2 = 0x100016f;
-            FUN_002bc01c(temp_v2);
+            eventQueueAddUniqueIfValid(temp_v2);
             return;
           }
           temp_v2 = 0xe;
           buttonHelpSetPreset(temp_v2);
           temp_v2 = 0x100016f;
-          FUN_002bc01c(temp_v2);
+          eventQueueAddUniqueIfValid(temp_v2);
           return;
         }
         if (param_1 == 0x12) {
           temp_v2 = 0xf;
           buttonHelpSetPreset(temp_v2);
           temp_v2 = 0x100016f;
-          FUN_002bc01c(temp_v2);
+          eventQueueAddUniqueIfValid(temp_v2);
           return;
         }
         if (param_1 == 0x13) {
           temp_v2 = 0x10;
           buttonHelpSetPreset(temp_v2);
           temp_v2 = 0x100016f;
-          FUN_002bc01c(temp_v2);
+          eventQueueAddUniqueIfValid(temp_v2);
           return;
         }
         if (param_1 == 0x14) {
@@ -573,27 +573,27 @@ void FUN_0018854c(unsigned int param_1)
             temp_v2 = 0x16;
             buttonHelpSetPreset(temp_v2);
             temp_v2 = 0x100016f;
-            FUN_002bc01c(temp_v2);
+            eventQueueAddUniqueIfValid(temp_v2);
             return;
           }
           temp_v2 = 0x11;
           buttonHelpSetPreset(temp_v2);
           temp_v2 = 0x100016f;
-          FUN_002bc01c(temp_v2);
+          eventQueueAddUniqueIfValid(temp_v2);
           return;
         }
         if (param_1 == 0x15) {
           temp_v2 = 0x12;
           buttonHelpSetPreset(temp_v2);
           temp_v2 = 0x100016f;
-          FUN_002bc01c(temp_v2);
+          eventQueueAddUniqueIfValid(temp_v2);
           return;
         }
         if (param_1 == 0x16) {
           temp_v2 = 0x13;
           buttonHelpSetPreset(temp_v2);
           temp_v2 = 0x100016f;
-          FUN_002bc01c(temp_v2);
+          eventQueueAddUniqueIfValid(temp_v2);
           return;
         }
 joined_r0x00188f3c:
@@ -625,7 +625,7 @@ joined_r0x00188f3c:
           FUN_002996d8(0);
           *(unsigned char *)(temp_v5 + 0x32) = 1;
         }
-        temp_v9 = FUN_0029e908(temp_v5 + 0x34);
+        temp_v9 = objectPartRunUnlessLocked(temp_v5 + 0x34);
         temp_v6 = 0;
         temp_v4 = FUN_0029e958(temp_v5 + 0x34);
         if (0 < temp_v4) {
@@ -643,7 +643,7 @@ joined_r0x00188f3c:
             }
             if (0 < temp_v4) {
               flaggedEntrySetValueB(temp_v5 + 0x34,temp_v9);
-              temp_v2 = FUN_0029e908(temp_v5 + 0x34);
+              temp_v2 = objectPartRunUnlessLocked(temp_v5 + 0x34);
               param_1 = FUN_00299218((int)*(char *)(temp_v5 + 0x98),temp_v2);
               FUN_00299900();
               break;
@@ -672,7 +672,7 @@ joined_r0x00188f3c:
                   temp_v2 = 0x11;
                   buttonHelpSetPreset(temp_v2);
                   temp_v2 = 0x100016f;
-                  FUN_002bc01c(temp_v2);
+                  eventQueueAddUniqueIfValid(temp_v2);
                   return;
                 }
                 temp_v2 = 0x16;
@@ -692,7 +692,7 @@ joined_r0x00188f3c:
             temp_v2 = 0xe;
             buttonHelpSetPreset(temp_v2);
             temp_v2 = 0x100016f;
-            FUN_002bc01c(temp_v2);
+            eventQueueAddUniqueIfValid(temp_v2);
             return;
           }
           temp_v2 = 0x15;
@@ -701,7 +701,7 @@ joined_r0x00188f3c:
       }
       temp_v2 = 0x100016f;
     }
-    FUN_002bc01c(temp_v2);
+    eventQueueAddUniqueIfValid(temp_v2);
     return;
   case 4:
     temp_v9 = FUN_00299fc0();
@@ -709,7 +709,7 @@ joined_r0x00188f3c:
       FUN_0029a164(0xffffffff);
       FUN_0029c4c8(0);
       FUN_0029ca58();
-      FUN_0029a128(0);
+      gameGlobalsSetSelected(0);
       FUN_00299900(0);
       timerStart(temp_v5 + 0x6d4,3,0);
       *(unsigned int *)(temp_v5 + 0x20) = 6;

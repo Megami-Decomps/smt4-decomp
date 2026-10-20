@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0029a014(unsigned int, int);
+int nodeSetTranslation3f(unsigned int, int);
 
-/* Supplied declaration required: FUN_0029a014. */
+/* Supplied declaration required: nodeSetTranslation3f. */
 
 
 void FUN_003404a0(int param_1)
@@ -20,7 +20,7 @@ void FUN_003404a0(int param_1)
   do {
     temp_v0 = *(int *)(param_1 + temp_v1 * 4 + 0x10);
     if (temp_v0 != 0) {
-      FUN_0029a014(*(unsigned int *)(temp_v0 + 8),0);
+      nodeSetTranslation3f(*(unsigned int *)(temp_v0 + 8),0);
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 3);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00188374(unsigned char **, int);
+int fileHandleClose(unsigned char **, int);
 int FUN_002e0c48(void);
 int FUN_002e0fac(void);
 int taggedOwnerRelease(unsigned char **);
@@ -23,7 +23,7 @@ typedef struct {
 
 extern unsigned char DAT_00558024; /* 0x558024 */
 
-/* Supplied declaration required: FUN_00188374. */
+/* Supplied declaration required: fileHandleClose. */
 extern int FUN_002bee0c(unsigned char **);
 extern int FUN_002befc0(void);
 extern int FUN_002e09b4(unsigned char **, unsigned int, unsigned int);
@@ -74,7 +74,7 @@ unsigned int FUN_003416a0(int param_1,unsigned int param_2)
     temp_v0 = FUN_002e09b4(&temp_v1,param_2,2);
   }
   if (temp_v0 < 0) {
-    FUN_00188374(&temp_v1,0);
+    fileHandleClose(&temp_v1,0);
     return 0;
   }
   if (param_1 != 0) {
@@ -95,7 +95,7 @@ unsigned int FUN_003416a0(int param_1,unsigned int param_2)
   else {
     taggedOwnerRelease(&temp_v1);
   }
-  FUN_00188374(&temp_v1,0);
+  fileHandleClose(&temp_v1,0);
   return 1;
 }
 

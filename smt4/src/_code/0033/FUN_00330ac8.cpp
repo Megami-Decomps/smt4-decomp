@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00240d88(...);
-int FUN_0029a268(int);
+int fadeObjectResetIfActive(int);
 int vec2GetXInt(...);
 int FUN_002bf288(...);
 int FUN_002bf380(int, int, int, unsigned int, unsigned int, int);
@@ -28,7 +28,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00240d88. */
-/* Supplied declaration required: FUN_0029a268. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -155,7 +155,7 @@ unsigned int FUN_00330ac8(void)
     }
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 4);
-  FUN_0029a268(temp_v1 + 0x840);
+  fadeObjectResetIfActive(temp_v1 + 0x840);
   if (*(int *)(temp_v1 + 4) < 3) {
     temp_v3 = vec2GetXInt();
     temp_v4 = vec2GetYInt(temp_v1 + 0x4f8);

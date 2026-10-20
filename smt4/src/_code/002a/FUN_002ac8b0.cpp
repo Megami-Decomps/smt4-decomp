@@ -15,7 +15,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern unsigned int FUN_001008c8(unsigned char **, unsigned char, unsigned int);
-extern unsigned int FUN_002c66f2(unsigned int, unsigned int);
+extern unsigned int libcLocaleGetCategory(unsigned int, unsigned int);
 
 
 unsigned long long FUN_002ac8b0(int param_1,unsigned char *param_2,unsigned int param_3,unsigned int param_4)
@@ -31,7 +31,7 @@ unsigned long long FUN_002ac8b0(int param_1,unsigned char *param_2,unsigned int 
   temp_v3 = param_2;
   temp_v4 = param_3;
   uStack_18 = param_4;
-  temp_v4 = FUN_002c66f2(0,2);
+  temp_v4 = libcLocaleGetCategory(0,2);
   temp_v2 = 0;
   do {
     do {

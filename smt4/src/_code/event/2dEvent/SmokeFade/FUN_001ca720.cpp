@@ -1,22 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ca720` (_code @ 0x1ca720, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: branch layout only: built adds a redundant `bne` to the final return after the conditional `moveq r0, #1`; retail falls through */
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0043df28; /* 0x43df28 */
+typedef struct Scene {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ s32 state;
+} Scene;
 
+extern Scene *DAT_0043df28;
 
-unsigned int FUN_001ca720(void)
-
+/* True while the scene exists and is in state 3. */
+s32 FUN_001ca720(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if ((DAT_0043df28 != 0) && (*(int *)(DAT_0043df28 + 0xc) == 3)) {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    s32 result = 0;
+
+    if (DAT_0043df28 != NULL && DAT_0043df28->state == 3) {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

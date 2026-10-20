@@ -1,27 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001328c2` (_code @ 0x1328c2, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the node-end pointer is loaded into r1 where retail uses r2 (retail keeps the free-list link value in r1 live); same as FUN_00132514. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001328ea(int);
+typedef struct PoolNode {
+    /* 0x00 */ struct PoolNode *next;     /* free-list link while unused */
+    /* 0x04 */ u8 unk04[0x34];
+} PoolNode;                                /* 0x38 bytes */
 
-/* Supplied declaration required: FUN_001328ea. */
+typedef struct NodePool {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ PoolNode *freeList;
+    /* 0x08 */ PoolNode *cursor;           /* next never-used node */
+    /* 0x0C */ PoolNode *end;
+} NodePool;
 
+extern void FUN_001328ea(NodePool *pool);
 
-void FUN_001328c2(int param_1)
-
+/* Takes a node from the pool: the head of the free list, else the next unused node (growing the pool when exhausted). */
+PoolNode *FUN_001328c2(NodePool *pool)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(unsigned int **)(param_1 + 4) != (unsigned int *)0x0) {
-    *(unsigned int *)(param_1 + 4) = **(unsigned int **)(param_1 + 4);
-    return;
-  }
-  if (*(int *)(param_1 + 8) == *(int *)(param_1 + 0xc)) {
-    FUN_001328ea(param_1);
-  }
-  *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 0x38;
-  return;
+    PoolNode *node = pool->freeList;
+
+    if (node != NULL) {
+        pool->freeList = node->next;
+        return node;
+    }
+    if (pool->cursor == pool->end) {
+        FUN_001328ea(pool);
+    }
+    node = pool->cursor;
+    pool->cursor = node + 1;
+    return node;
 }
 
 } /* extern "C" */

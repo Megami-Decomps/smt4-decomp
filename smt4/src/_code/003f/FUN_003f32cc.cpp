@@ -5,7 +5,7 @@
 extern "C" {
 
 int nn_os_CriticalSection_Initialize(unsigned int *);
-int FUN_002c5d5c(unsigned char *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned char *, unsigned char *, int, int);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -51,7 +51,7 @@ extern unsigned int DAT_004d43d0; /* 0x4d43d0 */
 extern unsigned char DAT_004d43e0; /* 0x4d43e0 */
 
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern void nn_fnd_UnitHeapBase_Initialize(unsigned int, unsigned int, unsigned int, unsigned int, int, unsigned int);
 
 
@@ -59,7 +59,7 @@ unsigned long long FUN_003f32cc(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_002c5d5c(&DAT_004d43e0,&LAB_00355f8c,0x10,0x20);
+  __aeabi_vec_ctor_nocookie_nodtor(&DAT_004d43e0,&LAB_00355f8c,0x10,0x20);
   DAT_0044e660 = 0;
   DAT_004d43d0 = 0;
   nn_os_CriticalSection_Initialize(&DAT_004d43d0);

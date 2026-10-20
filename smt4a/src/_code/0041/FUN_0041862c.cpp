@@ -1,35 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041862c` (_code @ 0x41862c, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int gameFlagBlockGet(void);
-extern unsigned int FUN_001bd100(unsigned int);
+typedef struct FlagEntry {
+    /* 0x0 */ u8 bits;
+    /* 0x1 */ u8 unk1[3];
+} FlagEntry;
 
+typedef struct FlagBlock {
+    /* 0x000 */ u8 unk000[0x2A0];
+    /* 0x2A0 */ FlagEntry entries[1];  /* one per id below 0x15E */
+} FlagBlock;
 
-int FUN_0041862c(unsigned int param_1)
+FlagBlock *gameFlagBlockGet(void);
+u32 FUN_001bd100(u32 id);
 
+static u32 bit3(u8 value)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned short temp_v2;
-  int temp_v3;
-  
-  temp_v3 = 0;
-  temp_v2 = 0;
-  do {
-    temp_v0 = FUN_001bd100(temp_v2);
-    if ((temp_v0 & ~param_1) == 0) {
-      temp_v0 = FUN_001bd100(temp_v2);
-      if ((((param_1 & ~temp_v0) == 0) && (temp_v2 < 0x15e)) &&
-         (temp_v1 = gameFlagBlockGet(), (*(unsigned char *)(temp_v1 + temp_v2 * 4 + 0x2a0) & 8) != 0)) {
-        temp_v3 = temp_v3 + 1;
-      }
-    }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 400);
-  return temp_v3;
+    return (value & 8) >> 3;
+}
+
+/* Counts the ids below 400 whose FUN_001bd100 mask equals `mask` and that have bit 3 of their flag entry set. */
+s32 FUN_0041862c(u32 mask)
+{
+    s32 count = 0;
+    u16 id = 0;
+
+    do {
+        if ((FUN_001bd100(id) & ~mask) == 0) {
+            if ((mask & ~FUN_001bd100(id)) == 0 && id < 0x15E && bit3(gameFlagBlockGet()->entries[id].bits)) {
+                count++;
+            }
+        }
+        id++;
+    } while (id < 400);
+    return count;
 }
 
 } /* extern "C" */

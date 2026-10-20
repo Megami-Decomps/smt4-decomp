@@ -58,14 +58,14 @@ int FUN_00297b94(...);
 int FUN_00297ca4(...);
 int playSceneSetState(...);
 int FUN_0029e8b8(...);
-int FUN_0029e908(...);
+int objectPartRunUnlessLocked(...);
 int FUN_0029eb5c(char *, int);
 int FUN_0029efd8(...);
 int FUN_0029f5d8(...);
 int FUN_0029f848(...);
 int gameGetSlotTable(void);
 int gameGetPlayerData(void);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_002bf818(...);
 int FUN_002c1658(...);
 
@@ -116,7 +116,7 @@ extern unsigned int listGetU16OrZero(unsigned int, int);
 extern int FUN_0028d594(void);
 /* Supplied declaration required: FUN_0028d5ac. */
 /* Supplied declaration required: FUN_0028da40. */
-extern int FUN_0028dba8(unsigned int);
+extern int btlActorIsDown(unsigned int);
 extern int FUN_0028e9a0(unsigned int);
 extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_0028e9ec. */
@@ -146,7 +146,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: FUN_0029e8b8. */
-/* Supplied declaration required: FUN_0029e908. */
+/* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int FUN_0029e958(int);
 /* Supplied declaration required: FUN_0029eb5c. */
 extern int flagWordTestBit(unsigned int *, unsigned int);
@@ -167,7 +167,7 @@ extern int FUN_002b6ad0(void);
 extern int FUN_002b8d54(void);
 extern int FUN_002b8d68(void);
 /* Supplied declaration required: FUN_002b8ee0. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 extern short vec2GetYInt(int);
 extern short vec2GetXInt(int);
@@ -392,7 +392,7 @@ LAB_0019a82c:
   switch(*(unsigned int *)(param_1 + 0x3048)) {
   case 1:
     if ((*(int *)(param_1 + 0x59bc) == 0) || (*(char *)(param_1 + 0x307c) != '\0')) break;
-    temp_v5 = FUN_0029e908(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+    temp_v5 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
     temp_v33 = temp_v37;
     temp_v32 = 0xffffffff;
     temp_v34 = 1;
@@ -404,10 +404,10 @@ LAB_0019a82c:
       temp_v9 = FUN_00297ca4(param_1,1);
       FUN_00297b94(param_1,temp_v9,*(unsigned int *)(param_1 + 0x305c));
       if (temp_v5 == 0) {
-        temp_v5 = FUN_0029e908(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+        temp_v5 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
         goto joined_r0x0019aa34;
       }
-      temp_v5 = FUN_0029e908(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+      temp_v5 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
       if (temp_v5 != 0) break;
       temp_v9 = 1;
       FUN_00292dd0(temp_v9);
@@ -420,13 +420,13 @@ LAB_0019a82c:
       FUN_00297b94(param_1,temp_v9,*(unsigned int *)(param_1 + 0x305c));
       temp_v17 = param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088;
       if (temp_v5 != 0) {
-        temp_v5 = FUN_0029e908(temp_v17);
+        temp_v5 = objectPartRunUnlessLocked(temp_v17);
         if (temp_v5 == 0) {
           FUN_00292dd0(1);
         }
         break;
       }
-      temp_v5 = FUN_0029e908(temp_v17);
+      temp_v5 = objectPartRunUnlessLocked(temp_v17);
 joined_r0x0019aa34:
       if (temp_v5 == 0) break;
       temp_v9 = 0;
@@ -447,17 +447,17 @@ joined_r0x0019aa34:
           *(unsigned char *)(param_1 + 0x3083) = 1;
           playSceneSetState(param_1,0x2d,1);
           temp_v9 = 0x100016e;
-          FUN_002bc01c(temp_v9);
+          eventQueueAddUniqueIfValid(temp_v9);
           break;
         }
-        temp_v5 = FUN_0029e908(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+        temp_v5 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
         if (temp_v5 < 1) break;
         FUN_0029e8b8(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088,0);
         temp_v9 = FUN_00297ca4(param_1,1);
         FUN_00297b94(param_1,temp_v9,*(unsigned int *)(param_1 + 0x305c));
         FUN_00292dd0(1);
         temp_v9 = 0x100016e;
-        FUN_002bc01c(temp_v9);
+        eventQueueAddUniqueIfValid(temp_v9);
         break;
       }
       temp_v5 = 9;
@@ -466,7 +466,7 @@ joined_r0x0019aa34:
         *(unsigned char *)(param_1 + 0x3060) = 9;
         playSceneSetState(param_1,2,1);
         temp_v9 = 0x100016d;
-        FUN_002bc01c(temp_v9);
+        eventQueueAddUniqueIfValid(temp_v9);
         break;
       }
       temp_v5 = flagBitIsSet(0x7f);
@@ -477,17 +477,17 @@ joined_r0x0019aa34:
       *(unsigned char *)(param_1 + 0x3060) = 10;
       playSceneSetState(param_1,3,1);
       temp_v9 = 0x100016d;
-      FUN_002bc01c(temp_v9);
+      eventQueueAddUniqueIfValid(temp_v9);
       break;
     }
     temp_v5 = FUN_00190ab0(param_1);
     if (temp_v5 != 0) {
       temp_v9 = 0x100016d;
-      FUN_002bc01c(temp_v9);
+      eventQueueAddUniqueIfValid(temp_v9);
       break;
     }
     temp_v9 = 0x100016e;
-    FUN_002bc01c(temp_v9);
+    eventQueueAddUniqueIfValid(temp_v9);
     break;
   case 3:
     playSceneSetState(param_1,4,0);
@@ -642,7 +642,7 @@ LAB_0019aebc:
                 FUN_002bee58(param_1 + 0x11a0,0);
                 playSceneSetState(param_1,0x12,1);
                 temp_v9 = 0x100016d;
-                FUN_002bc01c(temp_v9);
+                eventQueueAddUniqueIfValid(temp_v9);
                 break;
               }
             }
@@ -705,7 +705,7 @@ LAB_0019aebc:
         FUN_002bee58(param_1 + 0x11a0,0);
         playSceneSetState(param_1,0x12,1);
         temp_v9 = 0x100016d;
-        FUN_002bc01c(temp_v9);
+        eventQueueAddUniqueIfValid(temp_v9);
         break;
       }
       temp_v17 = FUN_00297ca4(param_1,1);
@@ -776,7 +776,7 @@ LAB_0019b2b0:
             playSceneSetState(param_1,0x14,1);
           }
           temp_v9 = 0x100016d;
-          FUN_002bc01c(temp_v9);
+          eventQueueAddUniqueIfValid(temp_v9);
           break;
         }
       }
@@ -796,7 +796,7 @@ LAB_0019b2b0:
         playSceneSetState(param_1,1);
         FUN_00297ca4(param_1,1);
         temp_v9 = 0x100016e;
-        FUN_002bc01c(temp_v9);
+        eventQueueAddUniqueIfValid(temp_v9);
         break;
       }
       temp_v5 = 9;
@@ -810,11 +810,11 @@ LAB_0019b2b0:
             *(unsigned char *)(param_1 + 0x3060) = 10;
             playSceneSetState(param_1,3,1);
             temp_v9 = 0x100016d;
-            FUN_002bc01c(temp_v9);
+            eventQueueAddUniqueIfValid(temp_v9);
             break;
           }
         }
-        temp_v5 = FUN_0029e908(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+        temp_v5 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
         temp_v33 = temp_v37;
         temp_v32 = 0xffffffff;
         temp_v34 = 1;
@@ -824,7 +824,7 @@ LAB_0019b2b0:
         FUN_0029f5d8(temp_v17,0,param_1 + 0x5716,0xffffffff);
         temp_v7 = param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088;
         if (temp_v17 != 0) {
-          temp_v17 = FUN_0029e908();
+          temp_v17 = objectPartRunUnlessLocked();
           if (temp_v17 != temp_v5) {
 LAB_0019b58c:
             *(unsigned int *)(param_1 + *(int *)(param_1 + 0x305c) * 4 + 0x3470) = 0;
@@ -945,7 +945,7 @@ LAB_0019b58c:
       playSceneSetState(param_1,2,1);
       temp_v9 = 0x100016d;
     }
-    FUN_002bc01c(temp_v9);
+    eventQueueAddUniqueIfValid(temp_v9);
     break;
   case 10:
     goto LAB_0019b924;
@@ -999,7 +999,7 @@ LAB_0019b924:
       if (temp_v5 < 1) {
         playSceneSetState(param_1,1);
         temp_v9 = 0x100016d;
-        FUN_002bc01c(temp_v9);
+        eventQueueAddUniqueIfValid(temp_v9);
         break;
       }
       temp_v5 = FUN_0029efc0(*piVar14);
@@ -1013,7 +1013,7 @@ LAB_0019b924:
         if (temp_v6 == 0) {
           playSceneSetState(param_1,0x15,1);
           temp_v9 = 0x100016d;
-          FUN_002bc01c(temp_v9);
+          eventQueueAddUniqueIfValid(temp_v9);
           break;
         }
         FUN_002ae164();
@@ -1030,17 +1030,17 @@ LAB_0019b924:
         if ((temp_v19 && temp_v20) && temp_v10 != temp_v6 >> 0x1c) {
           playSceneSetState(param_1,0x15,1);
           temp_v9 = 0x100016d;
-          FUN_002bc01c(temp_v9);
+          eventQueueAddUniqueIfValid(temp_v9);
           break;
         }
         FUN_002bee58(param_1 + 0x11a0,0);
         playSceneSetState(param_1,0x12,1);
         temp_v9 = 0x100016d;
-        FUN_002bc01c(temp_v9);
+        eventQueueAddUniqueIfValid(temp_v9);
         break;
       }
       temp_v9 = 0x100016e;
-      FUN_002bc01c(temp_v9);
+      eventQueueAddUniqueIfValid(temp_v9);
       break;
     }
     temp_v5 = 1;
@@ -1051,7 +1051,7 @@ LAB_0019b924:
       if (temp_v5 != 0) {
         *(unsigned char *)(param_1 + 0x3060) = 9;
         playSceneSetState(param_1,2,1);
-        FUN_002bc01c(0x100016d);
+        eventQueueAddUniqueIfValid(0x100016d);
         break;
       }
       temp_v5 = flagBitIsSet(0x7f);
@@ -1061,11 +1061,11 @@ LAB_0019b924:
         if (temp_v5 != 0) {
           *(unsigned char *)(param_1 + 0x3060) = 10;
           playSceneSetState(param_1,3,1);
-          FUN_002bc01c(0x100016d);
+          eventQueueAddUniqueIfValid(0x100016d);
           break;
         }
       }
-      temp_v5 = FUN_0029e908(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+      temp_v5 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
       temp_v33 = temp_v37;
       temp_v32 = 0xffffffff;
       temp_v34 = 1;
@@ -1074,7 +1074,7 @@ LAB_0019b924:
       temp_v17 = param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088;
       FUN_0029f5d8(temp_v17,0,param_1 + 0x5716,0xffffffff);
       if (temp_v17 != 0) {
-        temp_v17 = FUN_0029e908(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+        temp_v17 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
         if (temp_v17 == temp_v5) break;
       }
       else {
@@ -1095,7 +1095,7 @@ LAB_0019b924:
     FUN_00297b94(param_1,temp_v9,*(unsigned int *)(param_1 + 0x305c));
     playSceneSetState(param_1,1);
     temp_v9 = 0x100016e;
-    FUN_002bc01c(temp_v9);
+    eventQueueAddUniqueIfValid(temp_v9);
     break;
   case 0xc:
     goto LAB_0019bce0;
@@ -1130,7 +1130,7 @@ LAB_0019bce0:
     if (temp_v5 != 0 || temp_v36[0] != '\0') {
       FUN_002bee58(param_1 + 0x11a0,0);
       playSceneSetState(param_1,0x12,1);
-      FUN_002bc01c(0x100016d);
+      eventQueueAddUniqueIfValid(0x100016d);
       break;
     }
     temp_v5 = 1;
@@ -1142,7 +1142,7 @@ LAB_0019bce0:
         *(unsigned char *)(param_1 + 0x3060) = 9;
         playSceneSetState(param_1,2,1);
         temp_v9 = 0x100016d;
-        FUN_002bc01c(temp_v9);
+        eventQueueAddUniqueIfValid(temp_v9);
         break;
       }
       temp_v5 = flagBitIsSet(0x7f);
@@ -1152,11 +1152,11 @@ LAB_0019bce0:
         if (temp_v5 == 0) goto LAB_0019be74;
         *(unsigned char *)(param_1 + 0x3060) = 10;
         playSceneSetState(param_1,3,1);
-        FUN_002bc01c(0x100016d);
+        eventQueueAddUniqueIfValid(0x100016d);
         break;
       }
 LAB_0019be74:
-      temp_v5 = FUN_0029e908(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+      temp_v5 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
       temp_v33 = temp_v37;
       temp_v32 = 0xffffffff;
       temp_v34 = 1;
@@ -1166,7 +1166,7 @@ LAB_0019be74:
       FUN_0029f5d8(temp_v17,0,param_1 + 0x5716,0xffffffff);
       temp_v7 = param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088;
       if (temp_v17 != 0) {
-        temp_v17 = FUN_0029e908();
+        temp_v17 = objectPartRunUnlessLocked();
         if (temp_v17 == temp_v5) break;
       }
       else {
@@ -1186,10 +1186,10 @@ LAB_0019be74:
     FUN_00297b94(param_1,temp_v9,*(unsigned int *)(param_1 + 0x305c));
     playSceneSetState(param_1,1);
     temp_v9 = 0x100016e;
-    FUN_002bc01c(temp_v9);
+    eventQueueAddUniqueIfValid(temp_v9);
     break;
   case 0xe:
-    temp_v5 = FUN_0028dba8(*(unsigned int *)(param_1 + 0x3040));
+    temp_v5 = btlActorIsDown(*(unsigned int *)(param_1 + 0x3040));
     if ((temp_v5 != 0) && (temp_v5 = FUN_002b6ad0(), temp_v5 != 0)) {
       if (((*(int *)(param_1 + 0x3044) >= 0x18) &&
           (temp_v17 = FUN_002bf818(param_1 + 0x96c), *(int *)(param_1 + 0x3044) == 0x18)) &&
@@ -1360,7 +1360,7 @@ joined_r0x0019c3c8:
       }
     }
     temp_v17 = param_1 + 0x33a8;
-    temp_v7 = FUN_0029e908();
+    temp_v7 = objectPartRunUnlessLocked();
     temp_v33 = temp_v36;
     temp_v32 = 0xffffffff;
     temp_v34 = 1;
@@ -1369,7 +1369,7 @@ joined_r0x0019c3c8:
     temp_v5 = temp_v17;
     FUN_0029f5d8(temp_v17,0,param_1 + 0x574e,0xffffffff);
     if (temp_v5 != 0) {
-      temp_v5 = FUN_0029e908(temp_v17);
+      temp_v5 = objectPartRunUnlessLocked(temp_v17);
       if (temp_v5 != temp_v7) {
         FUN_002bee58(param_1 + 0xac,1);
         temp_v5 = FUN_00297ca4(param_1,1);
@@ -1388,7 +1388,7 @@ joined_r0x0019c3c8:
           temp_v34 = temp_v34 & 0xffff0000;
           temp_v31 = (unsigned int *)((unsigned int)temp_v31 & 0xffff0000);
           FUN_0028cb40(param_1,&temp_v34,&temp_v31);
-          temp_v5 = FUN_0029e908(temp_v17);
+          temp_v5 = objectPartRunUnlessLocked(temp_v17);
           if (temp_v5 != 0) {
             temp_v17 = gameGetSlotTable();
             temp_v7 = param_1 + temp_v5 * 4;
@@ -1438,7 +1438,7 @@ joined_r0x0019c3c8:
               temp_v33 = (char *)((unsigned int)temp_v33 & 0xffff0000);
               temp_v32 = temp_v32 & 0xffff0000;
               FUN_0028cb40(param_1,&temp_v33,&temp_v32);
-              temp_v5 = FUN_0029e908(temp_v17);
+              temp_v5 = objectPartRunUnlessLocked(temp_v17);
               if (temp_v5 == 0) {
                 FUN_0028caf8(0xffffffff,(int)(short)temp_v32,param_1 + 0x3460,param_1 + 0x3470);
                 break;
@@ -1471,12 +1471,12 @@ joined_r0x0019c3c8:
       *(unsigned int *)(param_1 + 0x347c) = 0;
       playSceneSetState(param_1,*(unsigned int *)(param_1 + 0x304c),1);
       temp_v9 = 0x100016e;
-      FUN_002bc01c(temp_v9);
+      eventQueueAddUniqueIfValid(temp_v9);
       break;
     }
-    temp_v5 = FUN_0029e908(temp_v17);
+    temp_v5 = objectPartRunUnlessLocked(temp_v17);
     if (*(char *)(temp_v5 + param_1 + 0x345c) == '\0') break;
-    temp_v9 = FUN_0029e908(temp_v17);
+    temp_v9 = objectPartRunUnlessLocked(temp_v17);
     *(unsigned int *)(param_1 + 0x3064) = temp_v9;
     temp_v5 = FUN_00297ca4(param_1,1);
     if (temp_v5 == 2) goto LAB_0019c9b8;
@@ -1491,7 +1491,7 @@ LAB_0019c714:
     *(unsigned int *)(param_1 + 0x3478) = 0;
     *(unsigned int *)(param_1 + 0x347c) = 0;
     temp_v9 = 0x100016d;
-    FUN_002bc01c(temp_v9);
+    eventQueueAddUniqueIfValid(temp_v9);
     break;
   case 0x23:
     temp_v17 = 0;
@@ -1538,7 +1538,7 @@ LAB_0019c9b8:
     *(unsigned int *)(param_1 + 0x347c) = 0;
     playSceneSetState(param_1,*(unsigned int *)(param_1 + 0x304c),1);
     temp_v9 = 0x100016e;
-    FUN_002bc01c(temp_v9);
+    eventQueueAddUniqueIfValid(temp_v9);
     break;
   case 0x24:
     temp_v5 = FUN_0029d65c((int)*(short *)(param_1 + *(int *)(param_1 + 0x305c) * 2 + 0x574e));
@@ -1557,10 +1557,10 @@ LAB_0019c9b8:
       *(unsigned char *)(param_1 + 0x3060) = 1;
       playSceneSetState(param_1,*(unsigned int *)(param_1 + 0x304c),1);
       temp_v9 = 0x100016e;
-      FUN_002bc01c(temp_v9);
+      eventQueueAddUniqueIfValid(temp_v9);
       break;
     }
-    temp_v9 = FUN_0029e908(param_1 + 0x33a8);
+    temp_v9 = objectPartRunUnlessLocked(param_1 + 0x33a8);
     *(unsigned int *)(param_1 + 0x3064) = temp_v9;
     temp_v5 = FUN_00297ca4(param_1,1);
     if (temp_v5 != 2) {
@@ -1570,7 +1570,7 @@ LAB_0019c9b8:
       playSceneSetState(param_1,0x25,1);
     }
     temp_v9 = 0x100016d;
-    FUN_002bc01c(temp_v9);
+    eventQueueAddUniqueIfValid(temp_v9);
     break;
   case 0x25:
     temp_v5 = FUN_0029c3ec();
@@ -1625,7 +1625,7 @@ LAB_0019c9b8:
     break;
   case 0x2d:
     temp_v17 = param_1 + 0x33a8;
-    temp_v7 = FUN_0029e908();
+    temp_v7 = objectPartRunUnlessLocked();
     temp_v33 = temp_v36;
     temp_v32 = 0xffffffff;
     temp_v34 = 1;
@@ -1634,7 +1634,7 @@ LAB_0019c9b8:
     temp_v5 = temp_v17;
     FUN_0029f5d8(temp_v17,0,param_1 + 0x574e,0xffffffff);
     if (temp_v5 != 0) {
-      temp_v5 = FUN_0029e908(temp_v17);
+      temp_v5 = objectPartRunUnlessLocked(temp_v17);
       if (temp_v5 == temp_v7) break;
     }
     else {
@@ -1647,7 +1647,7 @@ LAB_0019c9b8:
           *(unsigned char *)(param_1 + 0x3060) = 0;
         }
         if (temp_v5 == 0 && temp_v36[0] == '\0') break;
-        temp_v5 = FUN_0029e908(temp_v17);
+        temp_v5 = objectPartRunUnlessLocked(temp_v17);
         if (temp_v5 != 0) {
           temp_v17 = gameGetSlotTable();
           if (*(char *)(temp_v17 + temp_v5 + 0x9108) < '\0') break;
@@ -1667,12 +1667,12 @@ LAB_0019c9b8:
         } while (temp_v5 < 6);
         FUN_0028cf30(param_1,*(unsigned int *)(param_1 + 0x305c),1);
         temp_v9 = 0x100016d;
-        FUN_002bc01c(temp_v9);
+        eventQueueAddUniqueIfValid(temp_v9);
         break;
       }
     }
     FUN_002bee58(param_1 + 0xac,1);
-    temp_v9 = FUN_0029e908(temp_v17);
+    temp_v9 = objectPartRunUnlessLocked(temp_v17);
     *(unsigned int *)(param_1 + 0x305c) = temp_v9;
     FUN_0028e9ec(param_1);
   }

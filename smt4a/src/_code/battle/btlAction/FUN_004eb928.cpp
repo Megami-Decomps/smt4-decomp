@@ -54,7 +54,7 @@ int FUN_00192550(void);
 int FUN_002c7bf4(...);
 int FUN_0047eccc(...);
 int FUN_0047f138(...);
-int FUN_004c3c84(...);
+int btlSlotSetStoreValue(...);
 int FUN_004c571c(...);
 int FUN_004de7a0(...);
 int FUN_004fbeac(...);
@@ -202,7 +202,7 @@ extern unsigned short FUN_004bca20(void);
 extern unsigned int FUN_004bcbb4(unsigned int, unsigned int);
 extern int FUN_004bf67c(unsigned int);
 extern int FUN_004c3a98(int, unsigned int);
-/* Supplied declaration required: FUN_004c3c84. */
+/* Supplied declaration required: btlSlotSetStoreValue. */
 /* Supplied declaration required: FUN_004c4604. */
 /* Supplied declaration required: FUN_004c571c. */
 extern int FUN_004c6b5c(int, int);
@@ -232,7 +232,7 @@ extern int FUN_004ea0c0(int *, unsigned int *);
 extern int FUN_004f5710(int, int);
 extern int FUN_004f59b0(int);
 extern int FUN_004f5a40(int);
-extern int FUN_004f5d2c(int);
+extern int btlUnitGetSkillValue(int);
 /* Supplied declaration required: FUN_004f612c. */
 extern int FUN_004f6478(int);
 /* Supplied declaration required: objRef1F50Release. */
@@ -530,10 +530,10 @@ LAB_004ebd00:
         temp_v11 = (int)*psVar17;
         temp_v14 = FUN_004f9ae4(DAT_00573808,1);
         temp_v10 = temp_v14 + temp_v10 + temp_v5;
-        temp_v14 = FUN_004f5d2c(DAT_00573808);
+        temp_v14 = btlUnitGetSkillValue(DAT_00573808);
         temp_v14 = temp_v14 * temp_v22;
         if (*(int *)(temp_v20 + 0x59c) == 1) {
-          temp_v14 = FUN_004f5d2c(DAT_00573808);
+          temp_v14 = btlUnitGetSkillValue(DAT_00573808);
           temp_v14 = *(int *)(*(int *)(*piVar16 + 0x1ed4) + temp_v11 * 0x1d0 + 100) + temp_v14;
         }
         temp_v14 = temp_v14 + temp_v10;
@@ -729,7 +729,7 @@ LAB_004ebd00:
             temp_v13 = FUN_004f59b0(DAT_00573808);
             if (-1 < temp_v13) {
               temp_v2 = *(short *)(temp_v21 + temp_v10 * 0x16 + 0x6a);
-              temp_v13 = FUN_004f5d2c(DAT_00573808);
+              temp_v13 = btlUnitGetSkillValue(DAT_00573808);
               switch(temp_v2) {
               case 0:
               case 1:
@@ -758,7 +758,7 @@ LAB_004ebd00:
       else {
 code_r0x004ef594:
         if ((uStack_70 == 3) && ((sStack_4ce == 6 || (sStack_4ce == 7)))) {
-          FUN_004c3c84((int)*psVar17,0x16,0);
+          btlSlotSetStoreValue((int)*psVar17,0x16,0);
         }
       }
       piVar16 = piStack_30;
@@ -819,32 +819,32 @@ code_r0x004ef594:
     dataTable04FindById();
     if ((*puVar25 & 0x200) == 0) {
       if (*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be) == 1) {
-        FUN_004c3c84((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0xe,0);
-        FUN_004c3c84((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x10,0);
-        FUN_004c3c84((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x13,0);
+        btlSlotSetStoreValue((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0xe,0);
+        btlSlotSetStoreValue((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x10,0);
+        btlSlotSetStoreValue((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x13,0);
         goto code_r0x004ef7e8;
       }
       if (temp_v17 != 0) {
         if (*(char *)(temp_v17 + 0x23) != '\0') {
           if (*(char *)(temp_v17 + 0x23) == '\x01') {
-            FUN_004c3c84((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0xf,0);
-            FUN_004c3c84((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x11,0);
+            btlSlotSetStoreValue((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0xf,0);
+            btlSlotSetStoreValue((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x11,0);
             temp_v18 = (*(unsigned int *)(temp_v17 + 0x28) & 0xffff) >> 0xb;
             if ((temp_v18 == 2 || temp_v18 == 3) || temp_v18 == 0x14) {
               temp_v4 = 0x2a;
               temp_v2 = *(short *)(*(int *)(temp_v20 + 0x28) + 0x6a);
-              FUN_004c3c84((int)temp_v2,temp_v4,0);
+              btlSlotSetStoreValue((int)temp_v2,temp_v4,0);
             }
           }
         }
         else {
-          FUN_004c3c84((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0xe,0);
-          FUN_004c3c84((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x10,0);
+          btlSlotSetStoreValue((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0xe,0);
+          btlSlotSetStoreValue((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x10,0);
           temp_v4 = 0x13;
           temp_v2 = *(short *)(*(int *)(temp_v20 + 0x28) + 0x6a);
-          FUN_004c3c84((int)temp_v2,temp_v4,0);
+          btlSlotSetStoreValue((int)temp_v2,temp_v4,0);
         }
-        FUN_004c3c84((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x12,0);
+        btlSlotSetStoreValue((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x12,0);
         goto code_r0x004ef7f0;
       }
     }

@@ -7,7 +7,7 @@ extern "C" {
 int sharedRefAddRef(...);
 int onlineStringDestroy(...);
 int FUN_002e9c0c(...);
-int constructObj0055affc(...);
+int _ZN9Obj55aff4C1Ev(...);
 int FUN_002ea3c0(...);
 int FUN_002ea3d0(...);
 int FUN_002ea974(...);
@@ -40,7 +40,7 @@ extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(int *, unsigned int *);
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002e9c0c. */
-/* Supplied declaration required: constructObj0055affc. */
+/* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea974. */
@@ -53,7 +53,7 @@ extern unsigned int FUN_002ee568(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002f7cba. */
 extern int FUN_002fe22a(int, unsigned int);
 extern int FUN_003054ce(unsigned int);
-extern unsigned long long FUN_00305696(unsigned int, int *);
+extern unsigned long long ownerChildValue(unsigned int, int *);
 /* Supplied declaration required: FUN_003056a0. */
 /* Supplied declaration required: FUN_003056e4. */
 /* Supplied declaration required: ownedPtrReset. */
@@ -77,7 +77,7 @@ void FUN_0011fb5c(int param_1)
   
   temp_v0 = FUN_003054ce(*(unsigned int *)(param_1 + 400));
   if (*(int *)(temp_v0 + 0x1c) != 2) {
-    constructObj0055affc(temp_v8);
+    _ZN9Obj55aff4C1Ev(temp_v8);
     FUN_002ea974(temp_v6);
     temp_v1 = FUN_002ee568(temp_v7,&LAB_0011fca0);
     temp_v0 = FUN_002fe22a(param_1 + 0x208,temp_v1);
@@ -102,7 +102,7 @@ void FUN_0011fb5c(int param_1)
     temp_v5 = *(unsigned int *)(param_1 + 0x324);
     piVar3 = temp_v4 + 3;
     FUN_002ec8f8(piVar3);
-    temp_v2 = FUN_00305696(*(unsigned int *)(param_1 + 400),piVar3);
+    temp_v2 = ownerChildValue(*(unsigned int *)(param_1 + 400),piVar3);
     temp_v3 = (unsigned int)((unsigned long long)temp_v2 >> 0x20);
     temp_v0 = *(int *)((int)temp_v2 + 0x18);
     temp_v4[0] = param_1 + 0x310;

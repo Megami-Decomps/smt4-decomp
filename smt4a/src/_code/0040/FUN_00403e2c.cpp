@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001517b4(...);
 int FUN_00163aa4(int);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(...);
 int FUN_0019de98(...);
@@ -31,7 +31,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int FUN_001643a0(void);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -81,7 +81,7 @@ void FUN_00403e2c(int param_1)
     temp_v3 = 0;
     FUN_001517b4(0,1);
     if ((temp_v3 != 0) || (temp_v1 == 6)) {
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
       FUN_00404974(param_1);
       uiSpriteSetKeyframe(param_1 + 0x1d8,1,0);
       uiSpriteSetImageKeyframe(param_1 + 0x1d8,0);
@@ -91,7 +91,7 @@ void FUN_00403e2c(int param_1)
     temp_v1 = 1;
     FUN_001517b4();
     if (temp_v1 != 0) {
-      FUN_001641b4(0x100020f);
+      eventQueueAddUniqueIfValid(0x100020f);
       uiSpriteSetKeyframe(param_1 + 0x14c,2,0);
       uiSpriteSetImageKeyframe(param_1 + 0x14c,1,0);
       FUN_00212724();
@@ -106,7 +106,7 @@ void FUN_00403e2c(int param_1)
         FUN_0031f208(0x1b);
         useCounterStart();
         FUN_0019de98(0,0xf4f4f4ff);
-        FUN_001641b4(0x100020e);
+        eventQueueAddUniqueIfValid(0x100020e);
         FUN_004029f4(param_1,8,0);
         return;
       }

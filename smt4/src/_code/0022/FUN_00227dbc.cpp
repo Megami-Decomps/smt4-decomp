@@ -1,47 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00227dbc` (_code @ 0x227dbc, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the entry address is computed as table + (0x58 + i*0x16) in retail (offset first, table loaded after); this build loads the table first */
+#include "common.h"
 
 extern "C" {
 
-int btlGetMainState(void);
+typedef struct NameEntry {
+    /* 0x00 */ char name[0x10];
+    /* 0x10 */ s16 id;
+    /* 0x12 */ u8 unk12[4];
+} NameEntry; /* 0x16 */
 
-extern unsigned char g_btlEffect; /* 0x435d00 */
+typedef struct NameTable {
+    /* 0x00 */ u8 unk00[0x58];
+    /* 0x58 */ NameEntry entries[4];
+} NameTable;
 
-extern int FUN_00293230(void);
-/* Supplied declaration required: btlGetMainState. */
-extern int libc_strncmp(int, unsigned int, unsigned int);
-extern unsigned int libc_strlen(unsigned int);
+typedef struct Owner {
+    /* 0x0000 */ u8 unk0000[0x1CFC];
+    /* 0x1CFC */ NameTable *table;
+} Owner;
 
+typedef struct BtlEffect {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ const char *name;
+} BtlEffect;
 
-int FUN_00227dbc(int param_1)
+extern BtlEffect g_btlEffect;
 
+extern void *btlGetMainState(void);
+extern s32 FUN_00293230(void);
+extern s32 libc_strncmp(const char *a, const char *b, u32 count);
+extern u32 libc_strlen(const char *text);
+
+/* Returns the id of the owner's name entry that starts with the current battle effect's name; -1 when there is none. */
+s32 FUN_00227dbc(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  if (*(int *)(param_1 + 0x1cfc) != 0) {
-    btlGetMainState();
-    temp_v0 = FUN_00293230();
-    if (temp_v0 == 0) {
-      temp_v0 = 0;
-      do {
-        temp_v3 = *(int *)(param_1 + 0x1cfc) + temp_v0 * 0x16 + 0x58;
-        if (temp_v3 != 0) {
-          temp_v1 = libc_strlen((*(unsigned int *)((unsigned char *)&g_btlEffect + 0xc)));
-          temp_v2 = libc_strncmp(temp_v3,(*(unsigned int *)((unsigned char *)&g_btlEffect + 0xc)),temp_v1);
-          if (temp_v2 == 0) {
-            return (int)*(short *)(temp_v3 + 0x10);
-          }
+    s32 i;
+
+    if (owner->table != NULL) {
+        btlGetMainState();
+        if (FUN_00293230() == 0) {
+            for (i = 0; i < 4; i++) {
+                NameEntry *entry = &owner->table->entries[i];
+
+                if (entry != NULL && libc_strncmp(entry->name, g_btlEffect.name, libc_strlen(g_btlEffect.name)) == 0) {
+                    return entry->id;
+                }
+            }
         }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < 4);
     }
-  }
-  return -1;
+    return -1;
 }
 
 } /* extern "C" */

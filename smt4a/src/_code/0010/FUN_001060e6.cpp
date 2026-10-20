@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002ecf70(unsigned char [4], unsigned int *, int *);
 int FUN_002ed054(unsigned int *, int *);
 
@@ -16,7 +16,7 @@ typedef struct {
 
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002ecf70. */
 extern int wordRefsDiffer_002ed044(unsigned char *, unsigned int *);
 /* Supplied declaration required: FUN_002ed054. */
@@ -45,12 +45,12 @@ unsigned char FUN_001060e6(int param_1,unsigned int param_2,unsigned int param_3
   temp_v2 = *(unsigned int *)(param_1 + 0x38);
   temp_v0 = wordRefsDiffer_002ed044(temp_v3,(unsigned int *)&temp_v2);
   if (temp_v0 != 0) {
-    FUN_002e6e5c(temp_v1);
+    _ZN9Obj55b28cD1Ev(temp_v1);
   }
   else {
     FUN_002ed054(puVar2,&uStack_18);
     *puVar2 = param_3;
-    FUN_002e6e5c(temp_v1);
+    _ZN9Obj55b28cD1Ev(temp_v1);
   }
   return temp_v0 == 0;
 }

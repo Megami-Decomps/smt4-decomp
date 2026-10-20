@@ -8,7 +8,7 @@ int CONCAT44(double, double);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
-int FUN_0016c560(...);
+int skinObjectUpdateMatrices(...);
 int FUN_0018291c(...);
 int FUN_001835b4(...);
 int camSetMatrixA(...);
@@ -82,7 +82,7 @@ extern float DAT_0064c0c0; /* 0x64c0c0 */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_0018291c. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: camSetMatrixA. */
@@ -362,7 +362,7 @@ void FUN_001634bc(unsigned int *param_1)
       temp_v27 = temp_v8;
       temp_v28 = temp_v8;
       FUN_0018291c(&temp_v13,&temp_v17,&temp_v21,&temp_v25,0,1);
-      FUN_0016c560(g_renderCtx);
+      skinObjectUpdateMatrices(g_renderCtx);
       renderCtxResetColorScale(g_renderCtx);
     }
   }

@@ -1,70 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fcc94` (_code @ 0x3fcc94, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(...);
-int FUN_003fc1b0(...);
-int FUN_003fcd20(...);
-int aocClearFlagD_C(...);
-int aocClearFlagD_10(...);
+typedef struct Object003fcc94 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 id;
+    /* 0x08 */ s32 mode;
+    /* 0x0c */ u8 unk0c[4];
+    /* 0x10 */ u32 words[6];
+    /* 0x28 */ void *buffer;
+    /* 0x2c */ u8 unk2c[0x10];
+    /* 0x3c */ u8 flagA;
+    /* 0x3d */ u8 flagB;
+} Object003fcc94;
 
-typedef struct fn_003fcc94_arg0 fn_003fcc94_arg0;
-struct fn_003fcc94_arg0 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    int field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x4];
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-    undefined4 field_0x20; /* +0x20 */
-    undefined4 field_0x24; /* +0x24 */
-    int field_0x28; /* +0x28 */
-    unsigned char pad_0x2c[0x10];
-    undefined1 field_0x3c; /* +0x3c */
-};
+extern u32 g_aocSystem;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+void asdMemFree(void *block);
+void aocClearFlagD_C(u32 aoc, s32 id);
+void aocClearFlagD_10(u32 aoc, s32 id);
+void FUN_003fc1b0(Object003fcc94 *object, s32 id);
+void FUN_003fcd20(Object003fcc94 *object, s32 id);
 
-extern unsigned int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_003fc1b0. */
-/* Supplied declaration required: FUN_003fcd20. */
-/* Supplied declaration required: aocClearFlagD_C. */
-/* Supplied declaration required: aocClearFlagD_10. */
-
-
-void FUN_003fcc94(fn_003fcc94_arg0 *param_1)
-
+/* Frees the object's buffer and clears its words and flags, then clears the AOC flag for its id (mode 6 uses flag D_10 instead of D_C). */
+void FUN_003fcc94(Object003fcc94 *object)
 {
-/* irregular: 5 native warning(s); review required */
-  if (param_1->field_0x28 != 0) {
-    asdMemFree();
-    param_1->field_0x10 = 0;
-    param_1->field_0x14 = 0;
-    param_1->field_0x18 = 0;
-    param_1->field_0x1c = 0;
-    param_1->field_0x20 = 0;
-    param_1->field_0x24 = 0;
-    param_1->field_0x28 = 0;
-    param_1->field_0x3c = 0;
-    *(unsigned char *)((int)param_1 + 0x3d) = 0;
-  }
-  if (param_1->field_0x8 != 6) {
-    aocClearFlagD_C();
-    FUN_003fcd20(param_1,-param_1->field_0x4);
-    return;
-  }
-  aocClearFlagD_10(g_aocSystem,param_1->field_0x4);
-  FUN_003fc1b0(param_1,param_1->field_0x4);
-  return;
+    if (object->buffer != NULL) {
+        asdMemFree(object->buffer);
+        object->words[0] = 0;
+        object->words[1] = 0;
+        object->words[2] = 0;
+        object->words[3] = 0;
+        object->words[4] = 0;
+        object->words[5] = 0;
+        object->buffer = NULL;
+        object->flagA = 0;
+        object->flagB = 0;
+    }
+    if (object->mode != 6) {
+        aocClearFlagD_C(g_aocSystem, object->id);
+        FUN_003fcd20(object, -object->id);
+        return;
+    }
+    aocClearFlagD_10(g_aocSystem, object->id);
+    FUN_003fc1b0(object, object->id);
 }
 
 } /* extern "C" */

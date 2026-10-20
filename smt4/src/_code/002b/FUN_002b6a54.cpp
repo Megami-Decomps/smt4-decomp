@@ -1,47 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b6a54` (_code @ 0x2b6a54, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned char);
+typedef struct TableEntry {
+    /* 0x00 */ u8 unk00[0x5C];
+} TableEntry;
 
+void *dataTableGet(u32 table, u8 section);
+TableEntry *dataTableGetEntries(void *table);
+u32 dataTableGetCount(void *table);
 
-int FUN_002b6a54(int param_1,unsigned int param_2)
-
+/* Returns entry `index` of data table 10; the section is picked from `kind`. NULL if the index is out of range. */
+TableEntry *FUN_002b6a54(s32 kind, u32 index)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v3 = 0;
-  if (param_1 == 5) {
-    temp_v3 = 2;
-  }
-  else if (param_1 < 6) {
-    if (param_1 != 3) {
-      temp_v3 = param_1 == 4;
+    u8 section = 0;
+    void *table;
+    TableEntry *entries;
+
+    switch (kind) {
+    case 3:
+        section = 0;
+        break;
+    case 4:
+        section = 1;
+        break;
+    case 5:
+        section = 2;
+        break;
+    case 92:
+        section = 4;
+        break;
+    case 93:
+        section = 3;
+        break;
     }
-  }
-  else if (param_1 == 0x5c) {
-    temp_v3 = 4;
-  }
-  else if (param_1 == 0x5d) {
-    temp_v3 = 3;
-  }
-  temp_v0 = dataTableGet(10,temp_v3);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  if (param_2 < temp_v2) {
-    temp_v1 = temp_v1 + param_2 * 0x5c;
-  }
-  else {
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    table = dataTableGet(10, section);
+    entries = dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+
+    if (index < count) {
+        return &entries[index];
+    }
+    return NULL;
 }
 
 } /* extern "C" */

@@ -23,7 +23,7 @@ int FUN_00262f78(void);
 int FUN_00262f94(void);
 int btlTalkBustUpReleaseAllSlots(void);
 int FUN_0028bf2c(void);
-int FUN_00292ca0(...);
+int statusDownSwitchTab(...);
 int FUN_00293f10(...);
 int FUN_002942c4(unsigned int, int);
 int FUN_002954bc(...);
@@ -31,7 +31,7 @@ int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
 int FUN_00295660(int, unsigned char [32]);
 int scrScriptProcessStartEntry(...);
-int FUN_0029a128(...);
+int gameGlobalsSetSelected(...);
 int FUN_0029bed8(...);
 int FUN_0029c6b0(...);
 int FUN_0029e788(void);
@@ -44,7 +44,7 @@ int rt_memcpy_w(int, int, int);
 extern int FUN_0019e0c0(unsigned int);
 extern int FUN_001ddc00(void);
 extern int FUN_00223c78(void);
-extern int FUN_00262f14(void);
+extern int partyPanelIsActive(void);
 extern int FUN_00262f38(void);
 /* Supplied declaration required: FUN_00262f68. */
 /* Supplied declaration required: FUN_00262f78. */
@@ -54,7 +54,7 @@ extern int FUN_00262f38(void);
 extern int FUN_0026ee68(unsigned int);
 /* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
 /* Supplied declaration required: FUN_0028bf2c. */
-/* Supplied declaration required: FUN_00292ca0. */
+/* Supplied declaration required: statusDownSwitchTab. */
 extern int FUN_00293aac(void);
 /* Supplied declaration required: FUN_00293f10. */
 /* Supplied declaration required: FUN_002942c4. */
@@ -67,7 +67,7 @@ extern int FUN_0029563c(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_002958f8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_0029a128. */
+/* Supplied declaration required: gameGlobalsSetSelected. */
 /* Supplied declaration required: FUN_0029bed8. */
 /* Supplied declaration required: FUN_0029c4ac. */
 /* Supplied declaration required: FUN_0029c4c8. */
@@ -239,8 +239,8 @@ unsigned int FUN_001dbf34(int param_1)
           else {
             temp_v2 = (int)*(short *)(param_1 + 0xdc);
             if (temp_v2 < 1) {
-              FUN_0029a128(0);
-              FUN_00292ca0(0);
+              gameGlobalsSetSelected(0);
+              statusDownSwitchTab(0);
               FUN_0029e874(0);
               temp_v6 = FUN_00262f78();
               FUN_002942c4(temp_v6,1);
@@ -305,7 +305,7 @@ unsigned int FUN_001dbf34(int param_1)
     *(unsigned char *)(param_1 + 0xd62) = 0;
     FUN_0029e874(1);
     FUN_0029e788();
-    temp_v3 = FUN_00262f14();
+    temp_v3 = partyPanelIsActive();
     if (temp_v3 == 0) {
       temp_v5 = 0xe3;
     }
@@ -321,7 +321,7 @@ unsigned int FUN_001dbf34(int param_1)
     if (temp_v3 == 0) {
       return 0;
     }
-    FUN_0029a128(0);
+    gameGlobalsSetSelected(0);
     FUN_0029c4c8(1);
     FUN_0029d8f4(param_1 + 0x6e4,0);
     FUN_00262f94();
@@ -374,8 +374,8 @@ LAB_001dc504:
     }
     temp_v5 = FUN_00262f78();
     FUN_002958f8(temp_v5,1);
-    FUN_0029a128(0);
-    FUN_00292ca0(0);
+    gameGlobalsSetSelected(0);
+    statusDownSwitchTab(0);
     FUN_0026d654(1);
     FUN_0029dfc0(0);
     FUN_0029e874(0);

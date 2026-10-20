@@ -1,36 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a81ac` (_code @ 0x1a81ac, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
 extern "C" {
+typedef struct UnitRecord {
+    u8 unk00[0x46];
+    u16 tableId;
+} UnitRecord;
+extern int dataTableGetEntry0102Value(u16 id);
+extern UnitRecord *gameGetUnitRecord(s32 unit);
 
-extern int dataTableGetEntry0102Value(unsigned short);
-extern int gameGetUnitRecord(int);
-
-
-int FUN_001a81ac(unsigned int param_1,int *param_2,int *param_3)
-
+/* Orders two unit handles: a valid handle sorts after an invalid (negative) one, valid ones by their table value. */
+s32 FUN_001a81ac(u32 unused, s32 *a, s32 *b)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = 0;
-  if (*param_3 < 0) {
-    if (-1 < *param_2) {
-      temp_v0 = 1;
-    }
-  }
-  else {
-    if (-1 < *param_2) {
-      temp_v0 = gameGetUnitRecord(*param_3);
-      temp_v1 = gameGetUnitRecord(*param_2);
-      temp_v0 = dataTableGetEntry0102Value(*(unsigned short *)(temp_v0 + 0x46));
-      temp_v1 = dataTableGetEntry0102Value(*(unsigned short *)(temp_v1 + 0x46));
-      return temp_v0 - temp_v1;
-    }
-    temp_v0 = -1;
-  }
-  return temp_v0;
-}
+    s32 result = 0;
 
-} /* extern "C" */
+    if (*b < 0) {
+        if (*a >= 0) {
+            result = 1;
+        }
+    } else {
+        if (*a < 0) {
+            result = -1;
+        } else {
+            UnitRecord *unitB = gameGetUnitRecord(*b);
+            UnitRecord *unitA = gameGetUnitRecord(*a);
+            s32 valueB = dataTableGetEntry0102Value(unitB->tableId);
+            s32 valueA = dataTableGetEntry0102Value(unitA->tableId);
+            result = valueB - valueA;
+        }
+    }
+    return result;
+}
+}

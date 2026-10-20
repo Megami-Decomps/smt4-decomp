@@ -1,32 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fe204` (_code @ 0x1fe204, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003a2f88(void);
+typedef struct ViewTarget {
+    /* 0x00 */ u8 unk00[5];
+    /* 0x05 */ u8 mode;
+    /* 0x06 */ u8 unk06[0x12];
+    /* 0x18 */ void *handle;
+} ViewTarget;
 
-/* Supplied declaration required: FUN_003a2f88. */
+typedef struct ViewHolder {
+    /* 0x00 */ ViewTarget *target;
+} ViewHolder;
 
+extern int FUN_003a2f88(void);
 
-unsigned int FUN_001fe204(int *param_1)
-
+/* Calls FUN_003a2f88 when the held target is in mode 0-2 and has a handle; always returns 0. */
+u32 FUN_001fe204(ViewHolder *holder)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = *param_1;
-  if (*(unsigned char *)(temp_v0 + 5) < 3) {
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      temp_v1 = *(int *)(temp_v0 + 0x18);
+    ViewTarget *target = holder->target;
+
+    if (target->mode == 0 || target->mode == 1 || target->mode == 2) {
+        if (target != NULL && target->handle != NULL) {
+            FUN_003a2f88();
+        }
     }
-    if (temp_v0 != 0 && temp_v1 != 0) {
-      FUN_003a2f88();
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

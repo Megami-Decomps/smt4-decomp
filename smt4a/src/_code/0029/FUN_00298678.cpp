@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00157558(int);
 int renderCtxResetColorScale(int);
-int FUN_0016c560(int);
+int skinObjectUpdateMatrices(int);
 int FUN_0028cb88(int);
 
 typedef int romwright_code(...);
@@ -15,7 +15,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00157558. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_0028cb88. */
@@ -77,7 +77,7 @@ unsigned int FUN_00298678(int param_1)
         (**(romwright_code **)(temp_v4 + 0x1274))();
         *(unsigned char *)(temp_v4 + 0x1270) = 0;
       }
-      FUN_0016c560(g_renderCtx);
+      skinObjectUpdateMatrices(g_renderCtx);
       renderCtxResetColorScale(g_renderCtx);
       return 0;
     }

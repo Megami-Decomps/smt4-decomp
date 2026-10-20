@@ -42,7 +42,7 @@ extern unsigned int eventCommandGetPendingCleanup(void);
 /* Supplied declaration required: nodeTreeReleaseItem. */
 extern int FUN_002cda20(unsigned char, unsigned int);
 extern int FUN_002fdecc(unsigned char, int);
-extern int FUN_002fdef8(void);
+extern int keyedRecordGetKey(void);
 extern int FUN_0030a0d4(unsigned char);
 extern unsigned long long *FUN_00322aa8(unsigned char, int);
 extern int FUN_00324b24(unsigned char, int);
@@ -74,7 +74,7 @@ void FUN_00200c9c(unsigned int *param_1)
   if ((int)param_1[1] <= (int)param_1[2]) {
     temp_v0 = FUN_001ab9cc();
     if (-1 < (int)((temp_v0 - (unsigned int)*(unsigned char *)(param_1 + 0xc)) - 1)) {
-      temp_v0 = FUN_002fdef8();
+      temp_v0 = keyedRecordGetKey();
       temp_v1 = FUN_0030a0d4(*(unsigned char *)(param_1 + 0xc));
       if (0 < temp_v1) {
         do {

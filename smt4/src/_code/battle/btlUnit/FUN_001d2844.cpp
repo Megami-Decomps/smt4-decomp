@@ -26,7 +26,7 @@ typedef struct {
 extern int FUN_001b7a0c(...); /* 0x1b7a0c */
 extern unsigned char LAB_001d2a60; /* 0x1d2a60 */
 extern unsigned char LAB_001d2a74; /* 0x1d2a74 */
-extern int FUN_001e4d40(...); /* 0x1e4d40 */
+extern int jobFrameCounterAdvance(...); /* 0x1e4d40 */
 extern int FUN_0020f5e8(...); /* 0x20f5e8 */
 extern unsigned char DAT_00420774; /* 0x420774 */
 extern unsigned char DAT_004208ec; /* 0x4208ec */
@@ -76,7 +76,7 @@ void FUN_001d2844(unsigned int *param_1)
   param_1[0xd] = (unsigned int)puVar1;
   temp_v4 = param_1;
   temp_v5 = puVar1;
-  taskCreateDraw(&LAB_001d2a74,0x6f,0,0,FUN_001e4d40,0);
+  taskCreateDraw(&LAB_001d2a74,0x6f,0,0,jobFrameCounterAdvance,0);
   puVar2 = (unsigned int *)0x14;
   asdOperatorNew();
   if (puVar2 != (unsigned int *)0x0) {

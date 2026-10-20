@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00256810(void);
-int FUN_00342134(int, unsigned int, int);
+int aocRecordLookup83(void);
+int bitTableSetFlag(int, unsigned int, int);
 
-/* Supplied declaration required: FUN_00256810. */
+/* Supplied declaration required: aocRecordLookup83. */
 extern int FUN_002ae3c4(void);
 extern int randNextInRange(unsigned int);
-/* Supplied declaration required: FUN_00342134. */
+/* Supplied declaration required: bitTableSetFlag. */
 
 
 unsigned int FUN_003a61b4(unsigned int param_1,int param_2,unsigned int param_3)
@@ -26,11 +26,11 @@ unsigned int FUN_003a61b4(unsigned int param_1,int param_2,unsigned int param_3)
   temp_v0 = FUN_002ae3c4();
   if (temp_v0 != 9) {
     if (param_2 != 0xffff) {
-      FUN_00342134(param_2,param_3,1);
+      bitTableSetFlag(param_2,param_3,1);
     }
     return param_1;
   }
-  FUN_00256810();
+  aocRecordLookup83();
   if (param_1 != 0) {
     temp_v1 = 0;
     if (*(short *)(param_1 + 0x28) != 0) {
@@ -62,7 +62,7 @@ unsigned int FUN_003a61b4(unsigned int param_1,int param_2,unsigned int param_3)
         if (param_2 == 0xffff) {
           return temp_v1;
         }
-        FUN_00342134(param_2,param_3,1);
+        bitTableSetFlag(param_2,param_3,1);
         return temp_v1;
       }
       temp_v4 = temp_v4 + 1;

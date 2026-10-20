@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0028727c(void);
+int buttonHelpTexturesUnref(void);
 int buttonHelpRelease(void);
 int FUN_00292c0c(void);
-int FUN_0029a128(int);
+int gameGlobalsSetSelected(int);
 int FUN_002a0cc8(int);
 int scrScriptProcessDestroy(void);
 int asdTMTexTableFreeEntry(int);
@@ -37,10 +37,10 @@ extern unsigned int *DAT_0043dc24; /* 0x43dc24 */
 extern signed char g_uiFade; /* 0x43dd38 */
 extern unsigned int *DAT_0043dd3c; /* 0x43dd3c */
 
-/* Supplied declaration required: FUN_0028727c. */
+/* Supplied declaration required: buttonHelpTexturesUnref. */
 /* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: FUN_00292c0c. */
-/* Supplied declaration required: FUN_0029a128. */
+/* Supplied declaration required: gameGlobalsSetSelected. */
 /* Supplied declaration required: FUN_002a0cc8. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
@@ -69,7 +69,7 @@ void FUN_00291860(fn_00291860_arg0 *param_1,unsigned int param_2,unsigned int pa
     asdMemFree();
     param_1->field_0x59c = 0;
   }
-  FUN_0029a128(0);
+  gameGlobalsSetSelected(0);
   FUN_002a0cc8(0);
   FUN_00292c0c();
   if (param_1->field_0x1e != 0) {
@@ -86,7 +86,7 @@ void FUN_00291860(fn_00291860_arg0 *param_1,unsigned int param_2,unsigned int pa
   }
   if (param_1->field_0x1c != 0) {
     buttonHelpRelease();
-    FUN_0028727c();
+    buttonHelpTexturesUnref();
     param_1->field_0x1c = 0;
   }
   puVar1 = DAT_0043dc24;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001413d0(unsigned int, int, unsigned int, unsigned int, unsigned int);
 int FUN_002b04e8(...);
-int FUN_002b05d0(int);
+int categoryGetColor(int);
 int dataTable00FindById(void);
 int devilGetRecord(void);
 int drawSetColorFromRGBA8(void);
@@ -30,7 +30,7 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 /* Supplied declaration required: FUN_001413d0. */
 extern int FUN_0014143c(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_002b04e8. */
-/* Supplied declaration required: FUN_002b05d0. */
+/* Supplied declaration required: categoryGetColor. */
 extern int FUN_002b066c(unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: devilGetRecord. */
@@ -65,7 +65,7 @@ void FUN_002b6758(unsigned int param_1,unsigned int param_2,unsigned int param_3
     }
     if (((param_5 != 0) && (temp_v2 = FUN_002b066c(param_1 & 0xffff), temp_v2 != 0)) &&
        ((*(unsigned short *)(temp_v2 + 0x44) & 2) != 0)) {
-      FUN_002b05d0(1);
+      categoryGetColor(1);
       drawSetColorFromRGBA8();
     }
     temp_v2 = FUN_0014143c(g_aocSystem,*(unsigned short *)(temp_v0 + 0x90));

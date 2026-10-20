@@ -1,41 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00389f60` (_code @ 0x389f60, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
-extern int g_eventTex; /* 0x57f3b0 */
+s32 jobIsValid(u32 handle);
 
-extern int jobIsValid(unsigned int);
+extern EventTexA *g_eventTex; /* 0x57f3b0 */
 
-
-void FUN_00389f60(unsigned int param_1)
-
+/* Drops finished handles, then stores the new one in the first free handle slot. */
+void FUN_00389f60(u32 handle)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = g_eventTex;
-  temp_v2 = 0;
-  do {
-    temp_v3 = temp_v0 + temp_v2 * 4;
-    temp_v1 = jobIsValid(*(unsigned int *)(temp_v3 + 0x4c));
-    temp_v2 = temp_v2 + 1;
-    if (temp_v1 == 0) {
-      *(unsigned int *)(temp_v3 + 0x4c) = 0;
+    EventTexA *tex = g_eventTex;
+    s32 i;
+
+    for (i = 0; i < EVENT_TEX_HANDLES_A; i++) {
+        if (jobIsValid(tex->handles[i]) == 0) {
+            tex->handles[i] = 0;
+        }
     }
-  } while (temp_v2 < 0x10);
-  temp_v2 = 0;
-  do {
-    if (*(int *)(temp_v0 + temp_v2 * 4 + 0x4c) == 0) {
-      *(unsigned int *)(temp_v0 + temp_v2 * 4 + 0x4c) = param_1;
-      return;
+    for (i = 0; i < EVENT_TEX_HANDLES_A; i++) {
+        if (tex->handles[i] == 0) {
+            tex->handles[i] = handle;
+            return;
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x10);
-  return;
 }
 
 } /* extern "C" */

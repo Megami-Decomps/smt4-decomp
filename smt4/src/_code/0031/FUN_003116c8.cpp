@@ -40,7 +40,7 @@ extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: __aeabi_memset4. */
-extern int FUN_002cdaa4(unsigned short);
+extern int gameDataBlocksGetFlagBit2(unsigned short);
 /* Supplied declaration required: FUN_002d91b8. */
 /* Supplied declaration required: dataTable05Sub9GetCount. */
 /* Supplied declaration required: FUN_003c8b10. */
@@ -87,7 +87,7 @@ unsigned int FUN_003116c8(void)
         FUN_0029f7d4();
         temp_v5 = temp_v9;
         if (((temp_v3 != 0) &&
-            (temp_v6 = FUN_002cdaa4(*(unsigned short *)((int)piVar3 + temp_v8 * 2 + 0x933c)), temp_v6 == 0)
+            (temp_v6 = gameDataBlocksGetFlagBit2(*(unsigned short *)((int)piVar3 + temp_v8 * 2 + 0x933c)), temp_v6 == 0)
             ) && (temp_v6 = FUN_0029b7b8(*piVar3,*(unsigned short *)((int)piVar3 + temp_v8 * 2 + 0x933c),
                                         temp_v10), temp_v6 != 0)) {
           temp_v5 = temp_v9 + 1;

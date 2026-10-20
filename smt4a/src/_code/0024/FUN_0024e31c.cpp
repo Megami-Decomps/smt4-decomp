@@ -14,7 +14,7 @@ int FUN_00168770(void);
 int FUN_00168e00(...);
 int renderCtxResetColorScale(...);
 int FUN_0016c4b8(...);
-int FUN_0016c560(...);
+int skinObjectUpdateMatrices(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_00184c40(int, int, int);
 int FUN_001879d0(...);
@@ -59,7 +59,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -313,7 +313,7 @@ unsigned int FUN_0024e31c(void)
         (**(romwright_code **)(temp_v1 + 0x12d4))();
         *(unsigned char *)(temp_v1 + 0x12d0) = 0;
       }
-      FUN_0016c560(g_renderCtx);
+      skinObjectUpdateMatrices(g_renderCtx);
       renderCtxResetColorScale(g_renderCtx);
       return 0;
     }

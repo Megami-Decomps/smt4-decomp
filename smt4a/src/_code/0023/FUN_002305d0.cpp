@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(void);
 int dataTable04FindById(void);
-int FUN_00239234(int, unsigned short *);
+int gameDataCopySaveEntry(int, unsigned short *);
 int FUN_002854d8(int, int);
 int FUN_002a6894(unsigned short *);
 int FUN_002c7a5c(int, int);
@@ -50,7 +50,7 @@ extern int FUN_0018416c(unsigned short);
 /* Supplied declaration required: FUN_00184310. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_00239234. */
+/* Supplied declaration required: gameDataCopySaveEntry. */
 /* Supplied declaration required: FUN_002854d8. */
 /* Supplied declaration required: FUN_002a6894. */
 /* Supplied declaration required: FUN_002c7a5c. */
@@ -120,7 +120,7 @@ void FUN_002305d0(unsigned short *param_1,unsigned char param_2,unsigned short p
   temp_v4 = 0;
   if (param_4 != 0) {
     if (param_4 == 1) {
-      FUN_00239234(param_3,&temp_v6);
+      gameDataCopySaveEntry(param_3,&temp_v6);
       param_1[0x32] = temp_v6;
       *param_1 = temp_v18;
       param_1[1] = temp_v19;

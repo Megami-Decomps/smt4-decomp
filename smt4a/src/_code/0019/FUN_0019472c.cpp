@@ -1,32 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019472c` (_code @ 0x19472c, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail moves the two call arguments into r1/r2 before testing the enabled flag (flag in r3); armcc tests it first and sets the arguments after. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned int nw_snd_internal_SoundArchiveFileReader_ReadSequenceSoundInfo(unsigned int);
+struct SoundHolder;
 
+typedef struct SoundHolderVtbl {
+    /* 0x00 */ void *unk00[15];
+    /* 0x3C */ u32 (*update)(struct SoundHolder *holder, u32 a, u32 b);
+} SoundHolderVtbl;
 
-unsigned int FUN_0019472c(int param_1,unsigned int param_2,unsigned int param_3)
+typedef struct SoundHolder {
+    /* 0x0 */ SoundHolderVtbl *vtbl;
+    /* 0x4 */ u8 enabled;
+} SoundHolder;
 
+typedef struct SoundSet {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u32 archive;
+    /* 0x8 */ SoundHolder *holder;
+} SoundSet;
+
+extern u32 nw_snd_internal_SoundArchiveFileReader_ReadSequenceSoundInfo(u32 archive);
+
+/* Reads the set's sequence sound info and combines it with its holder's update result when the holder is enabled. */
+u32 FUN_0019472c(SoundSet *set, u32 a, u32 b)
 {
-  unsigned int temp_v0;
-  int *piVar2;
-  unsigned int temp_v1;
-  
-  temp_v0 = nw_snd_internal_SoundArchiveFileReader_ReadSequenceSoundInfo(*(unsigned int *)(param_1 + 4));
-  piVar2 = *(int **)(param_1 + 8);
-  if (piVar2 != (int *)0x0) {
-    if ((char)piVar2[1] == '\0') {
-      temp_v1 = 0;
+    u32 result = nw_snd_internal_SoundArchiveFileReader_ReadSequenceSoundInfo(set->archive);
+    SoundHolder *holder = set->holder;
+
+    if (holder != NULL) {
+        u32 update;
+
+        if (holder->enabled == 0) {
+            update = 0;
+        } else {
+            update = holder->vtbl->update(holder, a, b);
+        }
+        result |= update;
     }
-    else {
-      temp_v1 = (**(romwright_code **)(*piVar2 + 0x3c))(piVar2,param_2,param_3);
-    }
-    temp_v0 = temp_v0 | temp_v1;
-  }
-  return temp_v0;
+    return result;
 }
 
-} /* extern "C" */
+}

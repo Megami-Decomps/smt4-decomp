@@ -1,73 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00353b00` (_code @ 0x353b00, 0x10c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation of the flag mask/index in the loop (retail: index r5, mask r6) and the popup stores (retail uses post-increment `str r2,[r0],#4; str r1,[r0],#16`, the build emits stm and an offset store). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00100388(unsigned char *, unsigned char *);
-int FUN_00152f44(void);
+typedef struct FlagBlock {
+    /* 0x000 */ u8 unk000[0xDD0];
+    /* 0xDD0 */ u8 seen[0x12];   /* one bit per id */
+} FlagBlock;
 
-extern unsigned char DAT_00531ac8; /* 0x531ac8 */
-extern unsigned int *g_popupState; /* 0x58104c */
+typedef struct PopupState {
+    /* 0x00 */ u32 type;
+    /* 0x04 */ u32 state;
+    /* 0x08 */ u8 unk08[0x0C];
+    /* 0x14 */ void *text;
+} PopupState;
+
+extern u8 DAT_00531ac8; /* 0x531ac8 */
+extern PopupState *g_popupState; /* 0x58104c */
 extern int g_gameState; /* 0x5f15fc */
-extern unsigned char DAT_0060a198; /* 0x60a198 */
+extern u8 DAT_0060a198; /* 0x60a198 */
 
-/* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_00152f44. */
-extern int gameFlagsGetBlock(void);
-extern int gameFlagIsSet(unsigned int);
-extern int FUN_003e4230(unsigned int);
-extern int gameDataFlagTestBit(unsigned int);
+extern int FUN_00100388(u8 *dst, u8 *src);
+extern int FUN_00152f44(void);
+extern FlagBlock *gameFlagsGetBlock(void);
+extern int gameFlagIsSet(u32 flag);
+extern int FUN_003e4230(u32 id);
+extern int gameDataFlagTestBit(u32 id);
 
-
-void FUN_00353b00(int param_1)
-
+/* Marks every id 1-0x8C whose data flag is set (or whose check does not return 2) as seen; when something new was marked outside a popup, opens popup type 0x18. */
+void FUN_00353b00(int popupOpen)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  unsigned int *puVar4;
-  int temp_v3;
-  int temp_v4;
-  unsigned int *puVar7;
-  unsigned int temp_v5;
-  
-  FUN_00152f44();
-  temp_v5 = 1;
-  temp_v1 = 0;
-  do {
-    temp_v3 = gameFlagsGetBlock();
-    temp_v4 = (int)(temp_v5 + ((unsigned int)((int)temp_v5 >> 0x1f) >> 0x1d)) >> 3;
-    temp_v0 = 1 << (((int)temp_v5 % 8) & 0xffU);
-    if ((*(unsigned char *)(temp_v3 + temp_v4 + 0xdd0) & temp_v0) == 0) {
-      temp_v3 = gameDataFlagTestBit(temp_v5);
-      temp_v2 = (unsigned char)temp_v0;
-      if (temp_v3 != 0) {
-        temp_v3 = gameFlagsGetBlock();
-        *(unsigned char *)(temp_v3 + temp_v4 + 0xdd0) = *(unsigned char *)(temp_v3 + temp_v4 + 0xdd0) | temp_v2;
-      }
-      else {
-        temp_v3 = FUN_003e4230(temp_v5);
-        if (temp_v3 != 2) {
-          temp_v3 = gameFlagsGetBlock();
-          temp_v1 = 1;
-          *(unsigned char *)(temp_v3 + temp_v4 + 0xdd0) = *(unsigned char *)(temp_v3 + temp_v4 + 0xdd0) | temp_v2;
+    u32 id;
+    u8 marked;
+
+    FUN_00152f44();
+    marked = 0;
+    for (id = 1; id < 0x8D; id++) {
+        FlagBlock *block = gameFlagsGetBlock();
+        int mask = 1 << ((int)id % 8);
+
+        if ((block->seen[(int)id / 8] & mask) == 0) {
+            if (gameDataFlagTestBit(id) != 0) {
+                gameFlagsGetBlock()->seen[(int)id / 8] |= mask;
+            } else if (FUN_003e4230(id) != 2) {
+                gameFlagsGetBlock()->seen[(int)id / 8] |= mask;
+                marked = 1;
+            }
         }
-      }
     }
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v5 < 0x8d);
-  if ((((param_1 == 0) && (temp_v1)) && (g_gameState != 0x24)) &&
-     (temp_v4 = gameFlagIsSet(0x408), temp_v4 != 0)) {
-    FUN_00100388(&DAT_0060a198,&DAT_00531ac8);
-    puVar4 = g_popupState;
-    puVar7 = g_popupState + 1;
-    *g_popupState = 0x18;
-    *puVar7 = 0;
-    puVar4[5] = (unsigned int)&DAT_0060a198;
-  }
-  return;
+    if (popupOpen == 0 && marked && g_gameState != 0x24 && gameFlagIsSet(0x408) != 0) {
+        FUN_00100388(&DAT_0060a198, &DAT_00531ac8);
+        g_popupState->type = 0x18;
+        g_popupState->state = 0;
+        g_popupState->text = &DAT_0060a198;
+    }
 }
 
 } /* extern "C" */

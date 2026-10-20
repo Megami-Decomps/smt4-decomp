@@ -13,7 +13,7 @@ extern int DAT_0044cd88; /* 0x44cd88 */
 
 extern int FUN_0028fb40(unsigned short);
 /* Supplied declaration required: FUN_00295a18. */
-extern int FUN_002b8dc0(unsigned short);
+extern int recordPackedValue(unsigned short);
 extern int gameFlagIsSet(void);
 extern int randNextInRange(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
@@ -77,7 +77,7 @@ unsigned short FUN_0021e7f4(unsigned int param_1,int param_2)
           if (temp_v7 >= 4) {
 LAB_0021e958:
             if (param_2 != 0) {
-              temp_v1 = FUN_002b8dc0(temp_v8);
+              temp_v1 = recordPackedValue(temp_v8);
               temp_v6 = FUN_0028fb40(temp_v8);
               if (temp_v6 >= temp_v1) {
                 *(unsigned char *)(DAT_0044cd88 + 0x14) = 1;

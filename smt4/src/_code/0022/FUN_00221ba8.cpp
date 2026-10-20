@@ -1,42 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00221ba8` (_code @ 0x221ba8, 0x60 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int taskCreate(...);
-int memClear(...);
+typedef struct TaskWork {
+    /* 0x00 */ u8 unk00[0x6C];
+    /* 0x6C */ u8 enabled;
+    /* 0x6D */ u8 unk6d[3];
+} TaskWork; /* 0x70 bytes */
 
-typedef int romwright_code(...);
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+extern void FUN_00200b24(void *work);
+extern TaskWork *taskCreate(void (*update)(void *), u32 a, u32 b, u32 c, u32 d, u32 size, u32 list, u32 e, u32 f);
+extern int memClear(void *buffer, u32 size);
 
-extern int FUN_00200b24(...); /* 0x200b24 */
-extern romwright_code *DAT_00433a58; /* 0x433a58 */
+extern TaskWork *DAT_00433a58; /* 0x433a58 */
 
-/* Supplied declaration required: taskCreate. */
-/* Supplied declaration required: memClear. */
-
-
+/* Creates the task running FUN_00200b24 with a cleared 0x70-byte work area, disabled. */
 void FUN_00221ba8(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  romwright_code *pcVar1;
-  
-  pcVar1 = FUN_00200b24;
-  taskCreate(FUN_00200b24,0,0,0,0,0x70,3,0,0);
-  if (pcVar1 != (romwright_code *)0x0) {
-    memClear();
-    DAT_00433a58 = pcVar1;
-    ((unsigned char *)pcVar1)[0x6c] = (unsigned char)0x0;
-  }
-  return;
+    TaskWork *work = taskCreate(FUN_00200b24, 0, 0, 0, 0, 0x70, 3, 0, 0);
+
+    if (work != NULL) {
+        memClear(work, 0x70);
+        DAT_00433a58 = work;
+        work->enabled = 0;
+    }
 }
 
-} /* extern "C" */
+}

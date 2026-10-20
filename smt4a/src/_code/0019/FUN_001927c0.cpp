@@ -1,35 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001927c0` (_code @ 0x1927c0, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling/register allocation only: retail predicates the load of `shared` (ldrne, before the branch) and decrements the two counts through r1; built loads it after the branch and decrements in r0. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct Slot Slot;
 
-void FUN_001927c0(int param_1)
+typedef struct SlotVtable {
+    /* 0x00 */ void (*unk00)(Slot *slot);
+    /* 0x04 */ void (*release)(Slot *slot);
+} SlotVtable;
 
+struct Slot {
+    /* 0x00 */ SlotVtable *vtable;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ s32 shared;
+};
+
+typedef struct SlotPool {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s32 usedCount;
+    /* 0x14 */ s32 ownedCount;  /* slots that are not shared */
+    /* 0x18 */ Slot *slots[32];
+} SlotPool;
+
+/* Releases every slot in the pool and updates the counts. */
+void FUN_001927c0(SlotPool *pool)
 {
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = 0;
-  do {
-    temp_v1 = param_1 + temp_v0 * 4;
-    piVar1 = *(int **)(temp_v1 + 0x18);
-    if (piVar1 != (int *)0x0) {
-      temp_v2 = piVar1[2];
-      (**(romwright_code **)(*piVar1 + 4))();
-      *(unsigned int *)(temp_v1 + 0x18) = 0;
-      if (temp_v2 == 0) {
-        *(int *)(param_1 + 0x14) = *(int *)(param_1 + 0x14) - 1;
-      }
-      *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) - 1;
-    }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x20);
-  return;
+    s32 i = 0;
+
+    do {
+        Slot *slot = pool->slots[i];
+
+        if (slot != NULL) {
+            s32 shared = slot->shared;
+
+            slot->vtable->release(slot);
+            pool->slots[i] = NULL;
+            if (shared == 0) {
+                pool->ownedCount--;
+            }
+            pool->usedCount--;
+        }
+        i++;
+    } while (i < 32);
 }
 
 } /* extern "C" */

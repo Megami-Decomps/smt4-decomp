@@ -1,45 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b7534` (_code @ 0x2b7534, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the constant 0 in r6 and the g_eplSlots address in r7, built the other way round */
+#include "shard/W4_Match3_EplSlots.h"
 
 extern "C" {
 
-int resourceListDestroy(int);
-int asdMemFree(int);
+extern void resourceListDestroy(void *list);
+extern void asdMemFree(void *block);
 
-extern int g_eplSlots; /* 0x580c8c */
-
-/* Supplied declaration required: resourceListDestroy. */
-/* Supplied declaration required: asdMemFree. */
-
-
+/* Releases every slot's resource list and buffer, then the slot table itself. */
 void FUN_002b7534(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  do {
-    temp_v0 = temp_v1 * 100 + g_eplSlots + 0xc;
-    if (*(int *)(temp_v0 + 0x5c) != 0) {
-      resourceListDestroy(*(int *)(temp_v0 + 0x5c));
-      *(unsigned int *)(temp_v0 + 0x5c) = 0;
-      *(unsigned char *)(temp_v0 + 0x60) = 0;
+    s32 i;
+
+    for (i = 0; i < EPL_SLOT_COUNT; i++) {
+        EplSlot *slot = &g_eplSlots->slots[i];
+
+        if (slot->list != NULL) {
+            resourceListDestroy(slot->list);
+            slot->list = NULL;
+            slot->loaded = 0;
+        }
+        if (slot->buffer != NULL) {
+            asdMemFree(slot->buffer);
+            slot->buffer = NULL;
+            slot->loaded = 0;
+        }
     }
-    if (*(int *)(temp_v0 + 0x58) != 0) {
-      asdMemFree(*(int *)(temp_v0 + 0x58));
-      *(unsigned int *)(temp_v0 + 0x58) = 0;
-      *(unsigned char *)(temp_v0 + 0x60) = 0;
+    if (g_eplSlots != NULL) {
+        asdMemFree(g_eplSlots);
+        g_eplSlots = NULL;
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x10);
-  if (g_eplSlots != 0) {
-    asdMemFree(g_eplSlots);
-    g_eplSlots = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

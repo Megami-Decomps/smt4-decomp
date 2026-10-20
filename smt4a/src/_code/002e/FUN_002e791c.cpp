@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e26(void);
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefRelease(void);
 int sharedRefAddRef(int);
 int FUN_002e78d0(unsigned int, int, int);
@@ -46,7 +46,7 @@ extern int FUN_00103fd4(void);
 extern int FUN_0011997c(int, unsigned int, fn_002e791c_arg0 *, unsigned int, unsigned char *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002e6e26. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: sharedRefAddRef. */
 extern int operatorNew(unsigned int);
@@ -85,7 +85,7 @@ FUN_002e791c(fn_002e791c_arg0 *param_1,int param_2,unsigned int param_3,unsigned
   FUN_002e6e34(temp_v3,temp_v1 + 0x58);
   if (param_1->field_0x9c != 0) {
     if (*(char *)(param_1->field_0x9c + 0x22) != '\x05') {
-      FUN_002e6e5c(temp_v3);
+      _ZN9Obj55b28cD1Ev(temp_v3);
       return 0;
     }
     sharedRefRelease();
@@ -93,7 +93,7 @@ FUN_002e791c(fn_002e791c_arg0 *param_1,int param_2,unsigned int param_3,unsigned
   }
   if (param_1->field_0x94 != 0) {
     if (*(char *)(param_1->field_0x94 + 0x22) != '\x05') {
-      FUN_002e6e5c(temp_v3);
+      _ZN9Obj55b28cD1Ev(temp_v3);
       return 0;
     }
     sharedRefRelease();
@@ -101,7 +101,7 @@ FUN_002e791c(fn_002e791c_arg0 *param_1,int param_2,unsigned int param_3,unsigned
   }
   if (param_1->field_0x98 != 0) {
     if (*(char *)(param_1->field_0x98 + 0x22) != '\x05') {
-      FUN_002e6e5c(temp_v3);
+      _ZN9Obj55b28cD1Ev(temp_v3);
       return 0;
     }
     sharedRefRelease();
@@ -138,10 +138,10 @@ FUN_002e791c(fn_002e791c_arg0 *param_1,int param_2,unsigned int param_3,unsigned
     sharedRefAddRef(temp_v1);
     temp_v0 = FUN_002e6e26();
     FUN_002e78d0(temp_v0,param_1->field_0x94,0);
-    FUN_002e6e5c(temp_v3);
+    _ZN9Obj55b28cD1Ev(temp_v3);
     return 1;
   }
-  FUN_002e6e5c(temp_v3);
+  _ZN9Obj55b28cD1Ev(temp_v3);
   return 0;
 }
 

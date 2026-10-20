@@ -1,23 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038b330` (_code @ 0x38b330, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00429f38(void);
+typedef struct SaveLoadProcess {
+    /* 0x0 */ u8 unk0[5];
+    /* 0x5 */ u8 slot;
+} SaveLoadProcess;
 
-extern unsigned char g_saveLoadProcess; /* 0x57f6bc */
+extern u8 FUN_00429f38(void);
 
-/* Supplied declaration required: FUN_00429f38. */
+extern SaveLoadProcess g_saveLoadProcess; /* 0x57f6bc */
 
-
-void FUN_0038b330(unsigned char param_1)
-
+/* Stores the slot FUN_00429f38 selects into the save/load process. */
+void FUN_0038b330(void)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00429f38();
-  (*(unsigned char *)((unsigned char *)&g_saveLoadProcess + 0x5)) = param_1;
-  return;
+    g_saveLoadProcess.slot = FUN_00429f38();
 }
 
-} /* extern "C" */
+}

@@ -8,7 +8,7 @@ int FUN_001517b4(...);
 int eventQueueAddUnique(...);
 int FUN_002277d8(void);
 int useCounterStart(void);
-int FUN_002844e4(void);
+int msgWindowReset(void);
 int FUN_002a48e0(...);
 int FUN_003180c4(...);
 int flaggedEntrySetValueA(...);
@@ -24,7 +24,7 @@ int gameFlagSetValue(...);
 
 int FUN_00152cf8(int, int, int, int, int);
 int FUN_00163aa4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_001643b4(int, int);
 int sysPlaySe(...);
 int FUN_00203b40(...);
@@ -51,7 +51,7 @@ extern int g_gauntletAppMenu; /* 0x57f238 */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00152cf8. */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_001643b4. */
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
@@ -69,7 +69,7 @@ extern int FUN_00224880(unsigned int);
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002844e4. */
+/* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: FUN_002a4860. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a48e0. */
@@ -158,7 +158,7 @@ unsigned int FUN_003ce598(void)
     if (temp_v7 == 0) {
       temp_v7 = padButtonIsPressed(1);
       if (temp_v7 != 0) {
-        FUN_001641b4(0x100020f);
+        eventQueueAddUniqueIfValid(0x100020f);
         return 0xffffffff;
       }
       temp_v7 = padButtonRepeat(5);
@@ -219,7 +219,7 @@ unsigned int FUN_003ce598(void)
     if (temp_v6 == 0) {
       return 0;
     }
-    FUN_001641b4(temp_v8);
+    eventQueueAddUniqueIfValid(temp_v8);
     break;
   case 2:
     temp_v7 = temp_v6 + 0x10;
@@ -238,7 +238,7 @@ unsigned int FUN_003ce598(void)
       if (temp_v6 == 0) {
         return 0;
       }
-      FUN_001641b4();
+      eventQueueAddUniqueIfValid();
       return 0;
     }
     temp_v7 = FUN_002a4860(temp_v6 + 0x10);
@@ -247,7 +247,7 @@ unsigned int FUN_003ce598(void)
     if (temp_v7 == 0) {
       return 0;
     }
-    FUN_001641b4(0x100020e);
+    eventQueueAddUniqueIfValid(0x100020e);
     *(unsigned int *)(temp_v6 + 0x2a8) = 0;
     if (*(char *)(temp_v6 + 0x2b4) != '\0') {
       temp_v8 = 0x2e;
@@ -330,7 +330,7 @@ unsigned int FUN_003ce598(void)
             FUN_00359974(0x18,temp_v8,0xffffffff,0);
             scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x530),0);
             FUN_003dc0c0(temp_v6,4);
-            FUN_001641b4(0x100020e);
+            eventQueueAddUniqueIfValid(0x100020e);
             temp_v7 = FUN_003e4718(temp_v5);
             if (temp_v7 != 0) {
               FUN_003e41f8(temp_v5,0);
@@ -357,7 +357,7 @@ unsigned int FUN_003ce598(void)
               }
               if (temp_v9 && temp_v4 == 0) {
                 FUN_003dc0c0(temp_v6,7);
-                FUN_001641b4(0x100020f);
+                eventQueueAddUniqueIfValid(0x100020f);
               }
             }
           }
@@ -365,7 +365,7 @@ unsigned int FUN_003ce598(void)
             temp_v7 = 9;
             FUN_001517b4(9,1);
             if (temp_v7 != 0) {
-              FUN_001641b4(0x100020e);
+              eventQueueAddUniqueIfValid(0x100020e);
               FUN_0031f27c(0xd,0);
               FUN_0031f208(0x21);
               FUN_0031f208(0x15);
@@ -378,7 +378,7 @@ unsigned int FUN_003ce598(void)
               temp_v7 = 10;
               FUN_001517b4(10,1);
               if ((temp_v7 != 0) && (temp_v7 = FUN_003e4510(temp_v5), temp_v7 != 0)) {
-                FUN_001641b4(0x100020f);
+                eventQueueAddUniqueIfValid(0x100020f);
               }
             }
           }
@@ -411,7 +411,7 @@ unsigned int FUN_003ce598(void)
         eventQueueAddUnique(0x1000308);
         FUN_003dc0c0(temp_v6,5);
       }
-      FUN_002844e4();
+      msgWindowReset();
       FUN_0034913c();
       sysPlaySe(0x19);
     }
@@ -445,7 +445,7 @@ unsigned int FUN_003ce598(void)
     }
     FUN_003dc0c0(temp_v6,7);
     temp_v8 = 0x100020f;
-    FUN_001641b4(temp_v8);
+    eventQueueAddUniqueIfValid(temp_v8);
     break;
   case 6:
     temp_v7 = useCounterIsFinished();

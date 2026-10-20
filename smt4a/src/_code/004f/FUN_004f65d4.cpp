@@ -21,7 +21,7 @@ int FUN_00420e4c(unsigned int, float *);
 int FUN_00420f08(...);
 int FUN_00420fc0(...);
 int FUN_00421078(unsigned int);
-int FUN_00421314(void);
+int deadEffectStartLoad(void);
 int FUN_004f913c(int);
 int FUN_004fa15c(int);
 int FUN_004fa228(...);
@@ -64,7 +64,7 @@ extern unsigned int FUN_0040ac08(void);
 /* Supplied declaration required: FUN_00420f08. */
 /* Supplied declaration required: FUN_00420fc0. */
 /* Supplied declaration required: FUN_00421078. */
-/* Supplied declaration required: FUN_00421314. */
+/* Supplied declaration required: deadEffectStartLoad. */
 extern unsigned int FUN_004218dc(void);
 /* Supplied declaration required: FUN_004f913c. */
 /* Supplied declaration required: FUN_004fa15c. */
@@ -207,7 +207,7 @@ void FUN_004f65d4(int param_1)
         temp_v9 = FUN_004218dc();
       }
       *(unsigned int *)(param_1 + 0x33c0) = temp_v9;
-      FUN_00421314();
+      deadEffectStartLoad();
       *(unsigned char *)(param_1 + 0x33b4) = 6;
     }
     break;
@@ -221,7 +221,7 @@ void FUN_004f65d4(int param_1)
       temp_v9 = FUN_004218dc();
     }
     *(unsigned int *)(param_1 + 0x33c0) = temp_v9;
-    FUN_00421314();
+    deadEffectStartLoad();
     *(unsigned char *)(param_1 + 0x33b4) = 6;
     break;
   case 6:

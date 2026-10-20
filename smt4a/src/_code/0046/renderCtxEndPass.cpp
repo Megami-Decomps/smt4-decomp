@@ -10,14 +10,14 @@ typedef struct DrawOwner {
 } DrawOwner;
 
 int renderCtxResetColorScale(RenderCtxA *ctx);
-int FUN_0016c560(RenderCtxA *ctx);
+int skinObjectUpdateMatrices(RenderCtxA *ctx);
 
 extern RenderCtxA *g_renderCtx;
 
 void renderCtxEndPass(DrawOwner *owner)
 {
     if (owner->state > 2) {
-        FUN_0016c560(g_renderCtx);
+        skinObjectUpdateMatrices(g_renderCtx);
         renderCtxResetColorScale(g_renderCtx);
     }
 }

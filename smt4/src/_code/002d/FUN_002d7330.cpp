@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002947c0(void);
+int playerModelListCreate(void);
 int FUN_00294834(int, int, int, int, int, int, int, int, int, int, int, int);
 int FUN_002a09b4(int, int);
 int asdOperatorNew(int, int);
@@ -24,8 +24,8 @@ typedef struct {
 
 extern unsigned char DAT_004207d8; /* 0x4207d8 */
 
-/* Supplied declaration required: FUN_002947c0. */
-extern unsigned int *FUN_002947f4(void);
+/* Supplied declaration required: playerModelListCreate. */
+extern unsigned int *_ZN9Obj4206e8C1Ev(void);
 /* Supplied declaration required: FUN_00294834. */
 /* Supplied declaration required: FUN_002a09b4. */
 extern int lmapSceneGetScript(void);
@@ -48,11 +48,11 @@ void FUN_002d7330(int param_1)
   asdOperatorNew(0x100,param_1);
   puVar2 = (unsigned int *)0x0;
   if (temp_v0 != 0) {
-    puVar2 = (unsigned int *)FUN_002947f4();
+    puVar2 = (unsigned int *)_ZN9Obj4206e8C1Ev();
     *puVar2 = (unsigned int)&DAT_004207d8;
   }
   *(unsigned int **)(param_1 + 0x1c) = puVar2;
-  FUN_002947c0();
+  playerModelListCreate();
   *(unsigned char *)(param_1 + 0x2c) = 0;
   temp_v0 = lmapMainIsRunning();
   if ((temp_v0 == 0) && (temp_v0 = lmapSceneGetScript(), temp_v0 == 0)) {

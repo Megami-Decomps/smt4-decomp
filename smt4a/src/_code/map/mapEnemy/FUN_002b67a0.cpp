@@ -9,7 +9,7 @@ int FUN_00178b04(int, unsigned char *, int);
 int FUN_002b5cb4(void);
 int FUN_002d7c88(unsigned int);
 int FUN_00357b18(char *, int, int, int, int, int, int);
-int FUN_00364444(...);
+int gameFlagIsSetByBlockAt156c(...);
 int sub68OwnerStart1(...);
 int FUN_00379958(void);
 int moriModelContentCopyBody(void);
@@ -41,7 +41,7 @@ extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002d7c88. */
 /* Supplied declaration required: FUN_00357b18. */
-/* Supplied declaration required: FUN_00364444. */
+/* Supplied declaration required: gameFlagIsSetByBlockAt156c. */
 /* Supplied declaration required: sub68OwnerStart1. */
 /* Supplied declaration required: FUN_00379958. */
 extern int FUN_003b99d4(void);
@@ -94,7 +94,7 @@ unsigned int FUN_002b67a0(int param_1)
           temp_v6 = VectorSignedToFloat((int)*(short *)(pcVar4 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v9 = VectorSignedToFloat((int)*(short *)(pcVar4 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v7 = romwright_piece_4_4(temp_v6,temp_v9);
-          temp_v2 = FUN_00364444();
+          temp_v2 = gameFlagIsSetByBlockAt156c();
           if ((temp_v2 == 0) &&
              ((*(short *)(pcVar4 + 0x14) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) {
             if (*(short *)(pcVar4 + 0x16) != 0) {
@@ -229,7 +229,7 @@ LAB_002b6ad4:
           }
         }
         else {
-          temp_v2 = FUN_00364444((int)temp_v10);
+          temp_v2 = gameFlagIsSetByBlockAt156c((int)temp_v10);
           if (((temp_v2 != 0) ||
               ((*(short *)(pcVar4 + 0x14) != 0 && (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) ||
              ((*(short *)(pcVar4 + 0x16) != 0 && (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) {

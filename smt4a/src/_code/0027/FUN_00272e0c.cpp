@@ -1,26 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00272e0c` (_code @ 0x272e0c, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int DAT_005f0ca8; /* 0x5f0ca8 */
-extern unsigned int DAT_005f0ce4; /* 0x5f0ce4 */
+typedef struct SceneState {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ u32 value;
+    /* 0x30 */ u8 unk30[0x38];
+    /* 0x68 */ u32 pending;
+} SceneState;
 
-extern int gameFlagIsSet(unsigned int);
+extern SceneState DAT_005f0c7c;
 
+s32 gameFlagIsSet(u32 flag);
 
-void FUN_00272e0c(unsigned int param_1)
-
+/* Stores `value` and clears the pending word when game flag 0x4D0 is set. */
+void FUN_00272e0c(u32 value)
 {
-  int temp_v0;
-  
-  temp_v0 = gameFlagIsSet(0x4d0);
-  if (temp_v0 != 0) {
-    DAT_005f0ce4 = 0;
-    DAT_005f0ca8 = param_1;
-  }
-  return;
+    if (gameFlagIsSet(0x4D0)) {
+        DAT_005f0c7c.value = value;
+        DAT_005f0c7c.pending = 0;
+    }
 }
 
 } /* extern "C" */

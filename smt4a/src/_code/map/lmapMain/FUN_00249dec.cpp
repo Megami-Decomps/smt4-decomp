@@ -22,7 +22,7 @@ int libc_strcpy(unsigned char *, int);
 int FUN_003146ac(int, int, int);
 int FUN_0033abb4(void);
 int FUN_00352bc4(void);
-int FUN_00364530(int, int);
+int gameFlagsBitSet(int, int);
 int FUN_003689d0(void);
 int FUN_00384830(void);
 int FUN_00385384(void);
@@ -127,7 +127,7 @@ extern int FUN_0033aa6c(int);
 /* Supplied declaration required: FUN_00352bc4. */
 /* Supplied declaration required: FUN_00357b70. */
 extern int FUN_00364484(int);
-/* Supplied declaration required: FUN_00364530. */
+/* Supplied declaration required: gameFlagsBitSet. */
 /* Supplied declaration required: FUN_003659f4. */
 /* Supplied declaration required: FUN_003689d0. */
 /* Supplied declaration required: sub68OwnerStart2. */
@@ -438,7 +438,7 @@ LAB_0024a684:
                     temp_v10 = 1;
                     *(unsigned int *)(temp_v8 + 0xa8) = 2;
                     FUN_00408184(0x18,1);
-                    FUN_00364530((int)(short)*(unsigned int *)(temp_v8 + 0xcc),1);
+                    gameFlagsBitSet((int)(short)*(unsigned int *)(temp_v8 + 0xcc),1);
                     FUN_002941c8(&temp_v17,0x84);
                     break;
                   }
@@ -490,7 +490,7 @@ LAB_0024a684:
                       temp_v2 = (unsigned int)*(unsigned char *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0x14);
                     }
                     if (temp_v11 && temp_v2 == 0) {
-                      FUN_00364530((int)(short)*(int *)(temp_v8 + 0xcc),1);
+                      gameFlagsBitSet((int)(short)*(int *)(temp_v8 + 0xcc),1);
                     }
                   }
                   temp_v1 = *(short *)(temp_v8 + 200);

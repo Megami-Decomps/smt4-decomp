@@ -11,7 +11,7 @@ int callOnHandleField4A(...);
 int FUN_004d8668(...);
 int FUN_004d86a0(...);
 int FUN_004d86c0(...);
-int FUN_004d8700(...);
+int targetStartIndexWithFlag2(...);
 int FUN_004d888c(...);
 int obj4FStartSwitch(...);
 int FUN_004fd2cc(...);
@@ -60,7 +60,7 @@ extern int holderObjectCall(unsigned int);
 /* Supplied declaration required: FUN_004d8668. */
 /* Supplied declaration required: FUN_004d86a0. */
 /* Supplied declaration required: FUN_004d86c0. */
-/* Supplied declaration required: FUN_004d8700. */
+/* Supplied declaration required: targetStartIndexWithFlag2. */
 extern int FUN_004d87a0(unsigned int);
 /* Supplied declaration required: FUN_004d888c. */
 extern int btlUnitGet(unsigned int);
@@ -196,7 +196,7 @@ LAB_004cb0b4:
           FUN_004d86c0(*(unsigned int *)(param_2 + 0x1bc),(*(unsigned int *)(temp_v8 + 0x10) & 0x7ff) >> 1);
         }
         if ((*(unsigned int *)(temp_v8 + 0x10) & 0x800) != 0) {
-          FUN_004d8700(*(unsigned int *)(param_2 + 0x1bc),(*(unsigned int *)(temp_v8 + 0x10) & 0x3fffff) >> 0xc)
+          targetStartIndexWithFlag2(*(unsigned int *)(param_2 + 0x1bc),(*(unsigned int *)(temp_v8 + 0x10) & 0x3fffff) >> 0xc)
           ;
         }
         temp_v7 = *(int *)&param_1[0x11].field_0x40;

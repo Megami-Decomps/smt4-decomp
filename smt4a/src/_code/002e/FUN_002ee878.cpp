@@ -12,8 +12,8 @@ int FUN_0012cf84(int);
 int asdOperatorDeleteArray(void);
 int FUN_002eb744(unsigned int *);
 int FUN_002ecf40(void);
-int FUN_002f28bc(int);
-int FUN_002f33b4(int);
+int _ZN9Obj558bd0D1Ev(int);
+int _ZN9Obj558c28D1Ev(int);
 int FUN_002f8da8(void);
 
 typedef int romwright_code(...);
@@ -32,8 +32,8 @@ extern int destroyObj0055afbc(int);
 extern int FUN_002eb728(int);
 /* Supplied declaration required: FUN_002eb744. */
 /* Supplied declaration required: FUN_002ecf40. */
-/* Supplied declaration required: FUN_002f28bc. */
-/* Supplied declaration required: FUN_002f33b4. */
+/* Supplied declaration required: _ZN9Obj558bd0D1Ev. */
+/* Supplied declaration required: _ZN9Obj558c28D1Ev. */
 /* Supplied declaration required: FUN_002f8da8. */
 extern int FUN_002f9ef8(int);
 
@@ -65,14 +65,14 @@ void FUN_002ee878(unsigned int *param_1)
   temp_v0 = FUN_001210e0(param_1 + 0xa5);
   temp_v0 = destroyObj0055afbc(temp_v0 - 0x10);
   temp_v0 = temp_v0 - 0x74;
-  FUN_002f28bc(temp_v0);
+  _ZN9Obj558bd0D1Ev(temp_v0);
   temp_v0 = temp_v0 - 0x18;
   FUN_0012cf84(temp_v0);
   temp_v0 = FUN_002eb728(temp_v0 - 0x24);
   temp_v0 = FUN_0010b89c(temp_v0 - 8);
   temp_v0 = FUN_0011571c(temp_v0 - 0x5c);
   temp_v0 = FUN_002f9ef8(temp_v0 - 0xc);
-  FUN_002f33b4(temp_v0 - 0x164);
+  _ZN9Obj558c28D1Ev(temp_v0 - 0x164);
   return;
 }
 

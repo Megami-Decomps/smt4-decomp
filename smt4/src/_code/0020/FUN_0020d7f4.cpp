@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0025beb8(unsigned int, int);
+int nodeSetScale(unsigned int, int);
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int);
 int asdMdlManagerCreateLoaded(unsigned char [132], int);
@@ -15,7 +15,7 @@ int FUN_002c58c8(int, int);
 extern unsigned char LAB_0020d8cc; /* 0x20d8cc */
 extern int g_mapIf; /* 0x447a78 */
 
-/* Supplied declaration required: FUN_0025beb8. */
+/* Supplied declaration required: nodeSetScale. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
@@ -51,7 +51,7 @@ void FUN_0020d7f4(void)
   FUN_002a0428();
   nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v0 + 0xcbec) + 8),0,temp_v0 + 0xcbdc);
   FUN_0028c618(*(unsigned int *)(*(int *)(temp_v0 + 0xcbec) + 8),0);
-  FUN_0025beb8(*(unsigned int *)(*(int *)(temp_v0 + 0xcbec) + 8),0);
+  nodeSetScale(*(unsigned int *)(*(int *)(temp_v0 + 0xcbec) + 8),0);
   FUN_002c58c8(10,0x25);
   *(unsigned char *)(temp_v0 + 0xccd8) = 1;
   *(unsigned int *)(temp_v0 + 0xccdc) = 0;

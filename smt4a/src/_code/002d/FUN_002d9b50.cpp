@@ -11,7 +11,7 @@ int FUN_0031ebf8(...);
 int FUN_00327ee8(...);
 int FUN_0033f938(...);
 int FUN_003d54f8(...);
-int FUN_003e5728(...);
+int linkedTargetSetFloat(...);
 
 int FUN_0015f858(...);
 int FUN_001f4908(...);
@@ -41,7 +41,7 @@ int sysPlaySe(...);
 int FUN_001bbf0c(...);
 int FUN_001bc124(...);
 int FUN_00297f00(...);
-int FUN_002ba400(...);
+int mapTrapArm(...);
 int FUN_002c2d44(...);
 int FUN_002d1f40(...);
 int FUN_003024a0(...);
@@ -105,7 +105,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002950a8. */
 /* Supplied declaration required: FUN_00297f00. */
 /* Supplied declaration required: mapTrapGetUnk3C. */
-/* Supplied declaration required: FUN_002ba400. */
+/* Supplied declaration required: mapTrapArm. */
 /* Supplied declaration required: FUN_002c2d44. */
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: FUN_002de104. */
@@ -140,7 +140,7 @@ extern unsigned int FUN_003e0034(void);
 extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: FUN_003e54b8. */
 extern int linkHolderCheckFirst(unsigned int);
-/* Supplied declaration required: FUN_003e5728. */
+/* Supplied declaration required: linkedTargetSetFloat. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: flagValueSub. */
 extern int FUN_004d04f4(void);
@@ -182,7 +182,7 @@ void FUN_002d9b50(void)
         DAT_005f1859 = 0;
         DAT_005f185a = 0;
         temp_v6 = mapTrapGetUnk38();
-        FUN_002ba400(*(short *)(temp_v6 + 0xe) != 0);
+        mapTrapArm(*(short *)(temp_v6 + 0xe) != 0);
         temp_v6 = g_lmapScene;
         puVar6 = (unsigned int *)(g_lmapScene + 0x1c);
         *(unsigned int *)(g_lmapScene + 0x54) = 9;
@@ -663,7 +663,7 @@ LAB_002dad8c:
                 if (temp_v6 == 0x11) {
                   temp_v6 = linkHolderCheckFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
                   if (temp_v6 != 0) {
-                    FUN_003e5728(*(unsigned int *)(g_lmapScene + 0x1a8));
+                    linkedTargetSetFloat(*(unsigned int *)(g_lmapScene + 0x1a8));
                     temp_v6 = g_lmapScene;
                     *(unsigned int *)(g_lmapScene + 4) = 3;
                     *(unsigned int *)(temp_v6 + 8) = 0;

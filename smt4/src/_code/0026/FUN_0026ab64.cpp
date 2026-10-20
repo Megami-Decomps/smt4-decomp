@@ -18,7 +18,7 @@ extern short FUN_001c3688(void);
 extern short FUN_001c36a0(void);
 extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_0029e8b8. */
-extern int FUN_0029e908(unsigned int);
+extern int objectPartRunUnlessLocked(unsigned int);
 /* Supplied declaration required: FUN_0029e93c. */
 extern int FUN_0029e958(unsigned int);
 /* Supplied declaration required: FUN_0029eb5c. */
@@ -94,7 +94,7 @@ FUN_0026ab64(unsigned int param_1,unsigned int param_2,int param_3,short param_4
     temp_v1 = temp_v2 + temp_v1 + 1;
     if (param_7 != 0) {
       temp_v1 = FUN_0029e93c();
-      temp_v2 = FUN_0029e908(param_1);
+      temp_v2 = objectPartRunUnlessLocked(param_1);
       temp_v2 = temp_v2 + temp_v1 + 1;
       temp_v1 = FUN_0029e958(param_1);
       if (temp_v1 <= temp_v2) {
@@ -116,7 +116,7 @@ FUN_0026ab64(unsigned int param_1,unsigned int param_2,int param_3,short param_4
     temp_v2 = temp_v2 + temp_v1;
     if (param_7 != 0) {
       temp_v1 = FUN_0029e93c(param_1);
-      temp_v2 = FUN_0029e908(param_1);
+      temp_v2 = objectPartRunUnlessLocked(param_1);
       temp_v2 = temp_v2 + temp_v1;
     }
     if (temp_v2 - 1 < 0) {

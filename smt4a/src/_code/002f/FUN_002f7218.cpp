@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [16], int);
-int FUN_002e6e5c(unsigned char [16]);
+int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int onlineTimeGetNow(int *);
 
 typedef int romwright_code(...);
@@ -16,7 +16,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineTimeGetNow. */
 
 
@@ -40,12 +40,12 @@ void FUN_002f7218(int param_1,int param_2)
     if (pcVar1 != (romwright_code *)0x0) {
       temp_v0 = *(unsigned int *)(param_1 + 0x44);
       *(unsigned int *)(param_1 + 0x40) = 0;
-      FUN_002e6e5c(temp_v3);
+      _ZN9Obj55b28cD1Ev(temp_v3);
       (*pcVar1)(temp_v0);
       return;
     }
   }
-  FUN_002e6e5c(temp_v3);
+  _ZN9Obj55b28cD1Ev(temp_v3);
   return;
 }
 

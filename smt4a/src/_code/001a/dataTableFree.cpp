@@ -1,32 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `dataTableFree` (_code @ 0x1add24, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(int);
+#define DATA_TABLE_SLOTS 0x50
 
-/* Supplied declaration required: asdMemFree. */
+typedef struct DataTableSlot {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ void *data;      /* loaded table, NULL when free */
+    /* 0x08 */ u32 unk08;
+    /* 0x0c */ u8 locked;       /* non-zero keeps the table loaded */
+    /* 0x0d */ u8 unk0d[3];
+} DataTableSlot;
 
+void asdMemFree(void *block);
 
-unsigned int dataTableFree(unsigned int param_1)
+extern DataTableSlot g_dataTableSlots[DATA_TABLE_SLOTS]; /* 0x5e2214 */
 
+/* Frees data table slot `index`; fails (0) for a bad index or a locked table. */
+u32 dataTableFree(u32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if (param_1 < 0x50) {
-    temp_v0 = param_1 * 0x10;
-    if (*(int *)(temp_v0 + 0x5e2218) == 0) {
-      return 1;
+    DataTableSlot *slot;
+
+    if (index < DATA_TABLE_SLOTS) {
+        slot = &g_dataTableSlots[index];
+        if (slot->data == NULL) {
+            return 1;
+        }
+        if (slot->locked == 0) {
+            asdMemFree(slot->data);
+            slot->data = NULL;
+            return 1;
+        }
     }
-    if (*(char *)(temp_v0 + 0x5e2220) == '\0') {
-      asdMemFree(*(int *)(temp_v0 + 0x5e2218));
-      *(unsigned int *)(temp_v0 + 0x5e2218) = 0;
-      return 1;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

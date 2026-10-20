@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001517b4(int, int);
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int saveSlotFindById(unsigned int);
 int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_003180c4(int, unsigned int);
@@ -15,7 +15,7 @@ int FUN_003e4e4c(unsigned int);
 int FUN_004bd6b0(unsigned int, int, unsigned int);
 
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned int FUN_00180114(unsigned short);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: saveSlotFindById. */
@@ -54,7 +54,7 @@ unsigned int FUN_0041774c(int param_1)
       FUN_001517b4(9,0);
       if ((temp_v3 == 0) || (*(int *)(param_1 + 0x14) < 3)) break;
     }
-    FUN_001641b4(0x100020e);
+    eventQueueAddUniqueIfValid(0x100020e);
     obj04Finish();
     if (*(char *)(param_1 + 0x40) != '\0') {
       if ((-1 < *(int *)(param_1 + 0x3c)) &&

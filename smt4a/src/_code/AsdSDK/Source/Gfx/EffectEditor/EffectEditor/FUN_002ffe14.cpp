@@ -5,7 +5,7 @@
 extern "C" {
 
 int memAlloc(int, int, int, int, int, int);
-int FUN_00300124(...);
+int effMenuListAppend(...);
 int rt_memcpy_w(void);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
@@ -33,7 +33,7 @@ extern unsigned int DAT_005c1428; /* 0x5c1428 */
 extern unsigned int DAT_005c142c; /* 0x5c142c */
 
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_00300124. */
+/* Supplied declaration required: effMenuListAppend. */
 extern int displayIsStereoActive(void);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -129,13 +129,13 @@ void FUN_002ffe14(unsigned int *param_1,unsigned int param_2,unsigned int *param
   *(unsigned int *)(temp_v0 + 4) = 7;
   *(unsigned int *)(temp_v0 + 0x1c) = param_2;
   *(unsigned int *)(temp_v0 + 0x60) = param_4;
-  FUN_00300124(temp_v0,1);
+  effMenuListAppend(temp_v0,1);
   temp_v0 = displayIsStereoActive();
   if (temp_v0 != 0) {
     temp_v1 = 0x10000;
     memAlloc(0x10000,0x100,0,0x68,0x10,1);
     rt_memcpy_w();
-    FUN_00300124(temp_v1,2);
+    effMenuListAppend(temp_v1,2);
     return;
   }
   return;

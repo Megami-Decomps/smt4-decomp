@@ -1,14 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00129020` (_code @ 0x129020, 0x14 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the +8 base adjust separate and loads through +0x14; built folds the constants into one pre-indexed load */
+#include "common.h"
 
 extern "C" {
 
+typedef struct VBaseTarget {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u32 value;
+} VBaseTarget;
 
-unsigned int FUN_00129020(int param_1)
+typedef struct VBaseOwner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u8 base[0x10];
+    /* 0x18 */ s32 baseOffset;      /* offset of the target from `base` */
+} VBaseOwner;
 
+/* Returns the value of the target object located `baseOffset` bytes past the owner's base. */
+u32 FUN_00129020(VBaseOwner *owner)
 {
-  return *(unsigned int *)(param_1 + *(int *)(param_1 + 0x18) + 0x1c);
+    return ((VBaseTarget *)(owner->base + owner->baseOffset))->value;
 }
 
 } /* extern "C" */

@@ -9,7 +9,7 @@ int FUN_001b4a74(int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int sysMemClear(char [256], int);
 int FUN_0046eb24(int, int);
-int FUN_00470080(int, int, int);
+int contentEntryGetFromFilesByKind(int, int, int);
 int FUN_004b75d0(...);
 int FUN_004b9ff4(...);
 int menu4CScrollToKind(int, int);
@@ -40,7 +40,7 @@ extern int FUN_00224880(unsigned int);
 extern int gameStateIsFlagSetAndLarge(void);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0046eb24. */
-/* Supplied declaration required: FUN_00470080. */
+/* Supplied declaration required: contentEntryGetFromFilesByKind. */
 /* Supplied declaration required: FUN_004b75d0. */
 /* Supplied declaration required: FUN_004b9ff4. */
 extern int menu4CGetCurrentEntry(int);
@@ -131,7 +131,7 @@ LAB_004b6d80:
   if (temp_v1 < temp_v0) {
     do {
       temp_v3 = g_aocSystem;
-      FUN_00470080(g_aocSystem,*(int *)(param_1 + 0x1120) + 1,temp_v1);
+      contentEntryGetFromFilesByKind(g_aocSystem,*(int *)(param_1 + 0x1120) + 1,temp_v1);
       if ((*(unsigned char *)(temp_v3 + 0x20) == 0) || (acStack_168[*(unsigned char *)(temp_v3 + 0x20)] == '\0')) {
         temp_v4 = *(unsigned int *)(param_1 + 0x1144);
         temp_v5 = *(unsigned int *)(param_1 + 0x114c);

@@ -8,7 +8,7 @@ int FUN_0026a858(int, unsigned char [42]);
 int FUN_0026a958(int);
 int FUN_0029d684(int);
 int FUN_0029d8f4(unsigned char [42], int, int);
-int FUN_002b05d0(int);
+int categoryGetColor(int);
 int FUN_00317e58(void);
 int __aeabi_idivmod(int, int);
 
@@ -29,7 +29,7 @@ typedef struct {
 extern short *FUN_0029acb0(void);
 /* Supplied declaration required: FUN_0029d684. */
 /* Supplied declaration required: FUN_0029d8f4. */
-/* Supplied declaration required: FUN_002b05d0. */
+/* Supplied declaration required: categoryGetColor. */
 /* Supplied declaration required: FUN_00317e58. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -72,7 +72,7 @@ void FUN_001ce29c(int param_1)
             do {
               if (((unsigned int)*(unsigned short *)(temp_v0 + 0x5766) & (1 << (temp_v2 & 0xff))) != 0) {
                 if (*piVar5 == temp_v3) {
-                  FUN_002b05d0((int)(short)temp_v2);
+                  categoryGetColor((int)(short)temp_v2);
                   FUN_00317e58();
                   FUN_0026a958(1);
                   if (*(short *)(temp_v0 + 0x5766) != psVar1[10]) {
@@ -99,7 +99,7 @@ void FUN_001ce29c(int param_1)
         }
         else {
 LAB_001ce408:
-          FUN_002b05d0(0);
+          categoryGetColor(0);
           FUN_00317e58();
           if (*(short *)(temp_v0 + 0x5766) != psVar1[10]) {
             FUN_0026a858(*(unsigned short *)(temp_v0 + 0x5760),temp_v9);

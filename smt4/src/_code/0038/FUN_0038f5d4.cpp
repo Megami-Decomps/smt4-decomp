@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00233818(unsigned int *);
 int FUN_00233854(unsigned int *);
 int jobStopAndClearFlags(unsigned int *);
-int FUN_0027eb30(unsigned int *);
+int jobOwnerFreeSlotAndStop(unsigned int *);
 int scrScriptProcessDestroy(void);
 int asdMemFreeSlot(unsigned int);
 int asdTMTexTableFreeEntry(int);
@@ -23,7 +23,7 @@ extern int g_aocDisplay; /* 0x433130 */
 /* Supplied declaration required: FUN_00233818. */
 /* Supplied declaration required: FUN_00233854. */
 /* Supplied declaration required: jobStopAndClearFlags. */
-/* Supplied declaration required: FUN_0027eb30. */
+/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
@@ -48,7 +48,7 @@ void FUN_0038f5d4(unsigned int *param_1)
   *(unsigned char *)(g_aocDisplay + 0x450c) = 0;
   FUN_00233854(param_1 + 0xba);
   FUN_00233818(param_1 + 0xad);
-  FUN_0027eb30(param_1 + 0x46c);
+  jobOwnerFreeSlotAndStop(param_1 + 0x46c);
   jobStopAndClearFlags(param_1);
   temp_v0 = jobIsValid(param_1[0x5e8]);
   if (temp_v0 != 0) {

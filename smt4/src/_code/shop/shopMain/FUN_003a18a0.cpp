@@ -12,13 +12,13 @@ int FUN_0022faf8(void);
 int FUN_0022fb64(int);
 int FUN_0022fbc0(int);
 int FUN_002302d8(int, int);
-int FUN_00230558(int);
+int messageWindowStartTimer(int);
 int FUN_00232848(void);
 int FUN_00233240(int, int);
 int FUN_002992e0(int);
 int FUN_002996d8(int);
 int FUN_00299d84(...);
-int FUN_0029a014(unsigned int, int);
+int nodeSetTranslation3f(unsigned int, int);
 int FUN_0029ca58(void);
 int FUN_002a0428(int, int);
 int asdMdlManagerDestroy(void);
@@ -41,7 +41,7 @@ extern int FUN_0022fb34(void);
 /* Supplied declaration required: FUN_0022fb64. */
 /* Supplied declaration required: FUN_0022fbc0. */
 /* Supplied declaration required: FUN_002302d8. */
-/* Supplied declaration required: FUN_00230558. */
+/* Supplied declaration required: messageWindowStartTimer. */
 /* Supplied declaration required: FUN_00232848. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233240. */
@@ -51,7 +51,7 @@ extern int FUN_002762e0(void);
 /* Supplied declaration required: FUN_002996d8. */
 /* Supplied declaration required: FUN_00299d84. */
 extern int FUN_00299fc0(void);
-/* Supplied declaration required: FUN_0029a014. */
+/* Supplied declaration required: nodeSetTranslation3f. */
 /* Supplied declaration required: FUN_0029ca58. */
 extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_002a0428. */
@@ -82,7 +82,7 @@ void FUN_003a18a0(int param_1)
       }
       if (*(int *)(*(int *)(*piVar3 + 8) + 0xc) < 0) {
         FUN_002a0428(*piVar3,1);
-        FUN_0029a014(*(unsigned int *)(*piVar3 + 8),0);
+        nodeSetTranslation3f(*(unsigned int *)(*piVar3 + 8),0);
       }
     }
     if (*(int *)(param_1 + 0x860) != 3) {
@@ -216,7 +216,7 @@ void FUN_003a18a0(int param_1)
     }
     FUN_0029ca58();
     *piVar4 = 3;
-    FUN_00230558(0);
+    messageWindowStartTimer(0);
     if (*piVar3 != 0) {
       asdMdlManagerDestroy();
       *piVar3 = 0;

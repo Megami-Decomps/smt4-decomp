@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002012f0(void);
+int dataTable19ResolveVariants(void);
 int FUN_0025c5a0(int);
 int libc_strcpy(unsigned char *, unsigned int *);
 int taskCreateDraw(...);
@@ -33,7 +33,7 @@ extern unsigned int DAT_004937c4; /* 0x4937c4 */
 extern int DAT_004937c8; /* 0x4937c8 */
 extern unsigned char DAT_004937cc; /* 0x4937cc */
 
-/* Supplied declaration required: FUN_002012f0. */
+/* Supplied declaration required: dataTable19ResolveVariants. */
 /* Supplied declaration required: FUN_0025c5a0. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -71,7 +71,7 @@ void FUN_001e1e20(unsigned int *param_1,unsigned int *param_2)
       FUN_0025c5a0(0x19);
       FUN_0025c5a0(0x1b);
       FUN_0025c5a0(0x1c);
-      FUN_002012f0();
+      dataTable19ResolveVariants();
     }
     puVar1 = &LAB_001e1fc8;
     asdProcessCreateSimple(&LAB_001e1fc8,2,0,0,FUN_001e4d70,&LAB_002ca064,0);

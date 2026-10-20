@@ -5,7 +5,7 @@
 extern "C" {
 
 void *memAlloc(int, int, int, u32 size, int align, int);
-s32 FUN_0028c904(void *data);
+s32 stexHeaderIsValid(void *data);
 void *asdEffectTextureCreate(void *data);
 void *FUN_0028c814(void);
 
@@ -37,7 +37,7 @@ TlpObject *effTlpCreate(TlpFile *file)
         TlpEntry *dst = &tlp->entries[i];
 
         *dst = *src;
-        if (FUN_0028c904(block) != 0) {
+        if (stexHeaderIsValid(block) != 0) {
             tlp->objects[i] = asdEffectTextureCreate(block);
         } else {
             tlp->objects[i] = FUN_0028c814();

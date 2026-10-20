@@ -6,7 +6,7 @@ extern "C" {
 
 int logFormatBuffer(int *, int, int);
 int FUN_002327e0(int, int *);
-int FUN_0026a704(void);
+int buttonHelpResetSlots(void);
 int FUN_00295660(int, int *);
 int FUN_00296ee0(int, int);
 int scrScriptProcessStartEntry(unsigned int, int);
@@ -21,7 +21,7 @@ typedef struct {
 extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: logFormatBuffer. */
 /* Supplied declaration required: FUN_002327e0. */
-/* Supplied declaration required: FUN_0026a704. */
+/* Supplied declaration required: buttonHelpResetSlots. */
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_00296ee0. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -63,7 +63,7 @@ void FUN_00397b40(int param_1)
       }
       uiSpriteSetImageKeyframe(param_1 + 0x794,0,1);
       if (*(unsigned char *)(param_1 + 0x649) >= 2) {
-        FUN_0026a704();
+        buttonHelpResetSlots();
         FUN_00296ee0(param_1,7);
         return;
       }
@@ -101,7 +101,7 @@ LAB_00397cf4:
           logFormatBuffer(&uStack_30,param_1 + 0x94e,1);
           temp_v1 = FUN_00309fcc((unsigned int *)&uStack_30,param_1 + 0x94e);
           if ((*piVar3 == 0) && (temp_v1 < 6)) {
-            FUN_0026a704();
+            buttonHelpResetSlots();
             FUN_00296ee0(param_1,7);
             return;
           }

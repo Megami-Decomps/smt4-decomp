@@ -1,45 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00284ee4` (_code @ 0x284ee4, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the bool argument for FUN_00230ac0 is converted with cmp/movne/moveq; retail copies the flag byte with `adds r3, r0, #0` and sets 1 with movne */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0020b718(int, int);
-int FUN_00230ac0(int, unsigned int, int, int);
-int FUN_0023fc38(void);
+typedef struct PartyPanel {
+    /* 0x000 */ u8 unk000[0x34];
+    /* 0x034 */ u8 flag34;
+    /* 0x035 */ u8 flag35;
+    /* 0x036 */ u8 unk036[0xc];
+    /* 0x042 */ u8 flag42;
+    /* 0x043 */ u8 unk043[0x971];
+    /* 0x9b4 */ u8 state;
+} PartyPanel;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+extern PartyPanel *g_partyPanel;
 
-extern int g_partyPanel; /* 0x57f268 */
+void FUN_0020b718(s32 a, s32 b);
+void FUN_00230ac0(s32 a, s32 b, s32 c, bool d);
+void FUN_0023fc38(void);
 
-/* Supplied declaration required: FUN_0020b718. */
-/* Supplied declaration required: FUN_00230ac0. */
-/* Supplied declaration required: FUN_0023fc38. */
-
-
-void FUN_00284ee4(int param_1)
-
+/* Clears the party panel's two flags, optionally starts FUN_00230ac0, and runs FUN_0023fc38 unless the panel is in state 0 or 1. */
+void FUN_00284ee4(s32 start)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_partyPanel;
-  if (g_partyPanel != 0) {
-    *(unsigned char *)(g_partyPanel + 0x34) = 0;
-    *(unsigned char *)(temp_v0 + 0x35) = 0;
-    if (param_1 != 0) {
-      FUN_00230ac0(4,0xffffffff,0,*(char *)(temp_v0 + 0x42) != '\0');
+    PartyPanel *panel = g_partyPanel;
+
+    if (panel != NULL) {
+        panel->flag34 = 0;
+        panel->flag35 = 0;
+        if (start != 0) {
+            FUN_00230ac0(4, -1, 0, panel->flag42 != 0);
+        }
+        if (panel->state != 0 && panel->state != 1) {
+            FUN_0023fc38();
+        }
+        FUN_0020b718(0, 1);
     }
-    if (*(unsigned char *)(temp_v0 + 0x9b4) >= 2) {
-      FUN_0023fc38();
-    }
-    FUN_0020b718(0,1);
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

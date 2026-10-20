@@ -1,23 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d86c0` (_code @ 0x4d86c0, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003fd7c0(unsigned int, unsigned int, int);
+typedef struct ModelHolder {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ void *model;
+} ModelHolder;
 
-/* Supplied declaration required: FUN_003fd7c0. */
+typedef struct ModelRef {
+    /* 0x0 */ ModelHolder *holder;
+} ModelRef;
 
+void FUN_003fd7c0(void *model, u32 index, f32 frame, u32 flag);
 
-void FUN_004d86c0(int *param_1,unsigned int param_2)
-
+/* Starts the referenced model's entry `index` at frame 0. */
+void FUN_004d86c0(ModelRef *ref, u32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*param_1 != 0) {
-    FUN_003fd7c0(*(unsigned int *)(*param_1 + 4),param_2,2);
-    return;
-  }
-  return;
+    if (ref->holder != NULL) {
+        f32 frame = 0.0f;
+        FUN_003fd7c0(ref->holder->model, index, frame, 2);
+    }
 }
 
 } /* extern "C" */

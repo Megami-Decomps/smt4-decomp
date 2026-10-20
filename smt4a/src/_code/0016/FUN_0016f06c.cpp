@@ -7,7 +7,7 @@ extern "C" {
 int coproc_movefrom_User_R_Thread_and_Process_ID(void);
 int software_interrupt(int);
 
-extern int DAT_005c14bc; /* 0x5c14bc */
+extern int _ZTV9Obj5c14bc; /* 0x5c14bc */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -24,8 +24,8 @@ int FUN_0016f06c(unsigned int *param_1,unsigned int *param_2,unsigned int *param
   temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
   *(unsigned int *)(temp_v1 + 0x80) = 0xa0000;
   software_interrupt(0x32);
-  temp_v0 = DAT_005c14bc;
-  if (-1 < DAT_005c14bc) {
+  temp_v0 = _ZTV9Obj5c14bc;
+  if (-1 < _ZTV9Obj5c14bc) {
     *param_1 = *(unsigned int *)(temp_v1 + 0x8c);
     *param_2 = *(unsigned int *)(temp_v1 + 0x90);
     *param_3 = *(unsigned int *)(temp_v1 + 0x94);

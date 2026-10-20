@@ -10,7 +10,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_004039b4(...); /* 0x4039b4 */
-extern int FUN_0040456c(...); /* 0x40456c */
+extern int entryRefCompareByOrderDefault(...); /* 0x40456c */
 extern int FUN_00404d50(...); /* 0x404d50 */
 extern int FUN_00404f00(...); /* 0x404f00 */
 
@@ -38,7 +38,7 @@ void sortOwnerRun(int param_1)
       return;
     }
     temp_v2 = FUN_002c2c68(temp_v1);
-    arraySortQsort(param_1,temp_v2,2,FUN_0040456c);
+    arraySortQsort(param_1,temp_v2,2,entryRefCompareByOrderDefault);
     return;
   }
   if ((temp_v0 & 0x7f) == 0x1b) {

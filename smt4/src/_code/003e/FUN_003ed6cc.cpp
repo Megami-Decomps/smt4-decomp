@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c5d5c(unsigned char *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned char *, unsigned char *, int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -30,7 +30,7 @@ extern unsigned char DAT_004d494c; /* 0x4d494c */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 unsigned long long FUN_003ed6cc(unsigned int param_1,unsigned int param_2,int param_3)
@@ -53,7 +53,7 @@ unsigned long long FUN_003ed6cc(unsigned int param_1,unsigned int param_2,int pa
   DAT_004d4940 = 0x3f800000;
   DAT_004d4944 = 0;
   puVar1 = &DAT_004d494c;
-  FUN_002c5d5c(&DAT_004d494c,&LAB_0033b5a0,0x544,2);
+  __aeabi_vec_ctor_nocookie_nodtor(&DAT_004d494c,&LAB_0033b5a0,0x544,2);
   return romwright_piece_4_4(FUN_00348784,puVar1 + -4);
 }
 

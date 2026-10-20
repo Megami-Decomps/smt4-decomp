@@ -1,43 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d0fcc` (_code @ 0x1d0fcc, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the lookup code in r0 (zero constant in r1) and tests the sign bit with `ands r2, r0, #0x80000000; bpl`; this build moves the code to r1 and tests with tst/beq */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001b57a8(unsigned int [3], int);
+/* A 16-byte name buffer that starts at an odd offset. */
+typedef __packed struct NameBuffer {
+    u32 words[4];
+} NameBuffer;
 
-extern int FUN_001a0380(int);
-/* Supplied declaration required: FUN_001b57a8. */
-extern int FUN_001d25a0(unsigned int, unsigned int);
+typedef struct Pair {
+    u32 first;
+    u32 second;
+} Pair;
 
+typedef struct Node {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Pair pair;
+} Node;
 
-void FUN_001d0fcc(unsigned int param_1,int param_2)
+typedef struct Request {
+    /* 0x000 */ u8 unk000[0x330];
+    /* 0x330 */ u8 pending;
+    /* 0x331 */ NameBuffer name;
+} Request;
 
+extern Node *FUN_001d25a0(u32 arg, s32 index);
+extern s32 FUN_001a0380(NameBuffer *name);
+extern Pair *FUN_001b57a8(Pair *out, s32 code);
+
+/* Consumes the request's pending name: clears it and, when its lookup code has the high bit set, copies the resulting pair into the node. */
+void FUN_001d0fcc(u32 arg, Request *request)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  unsigned int temp_v3 [3];
-  
-  puVar3 = temp_v3;
-  temp_v0 = FUN_001d25a0(param_1,0);
-  if (*(char *)(param_2 + 0x330) != '\0') {
-    temp_v1 = FUN_001a0380(param_2 + 0x331);
-    *(unsigned int *)(param_2 + 0x331) = 0;
-    *(unsigned int *)(param_2 + 0x335) = 0;
-    *(unsigned int *)(param_2 + 0x339) = 0;
-    *(unsigned int *)(param_2 + 0x33d) = 0;
-    *(unsigned char *)(param_2 + 0x330) = 0;
-    if (temp_v1 < 0) {
-      FUN_001b57a8(temp_v3,temp_v1);
-      temp_v2 = puVar3[1];
-      *(unsigned int *)(temp_v0 + 4) = *puVar3;
-      *(unsigned int *)(temp_v0 + 8) = temp_v2;
+    Node *node = FUN_001d25a0(arg, 0);
+
+    if (request->pending != 0) {
+        s32 code = FUN_001a0380(&request->name);
+        Pair local;
+
+        request->name.words[0] = 0;
+        request->name.words[1] = 0;
+        request->name.words[2] = 0;
+        request->name.words[3] = 0;
+        request->pending = 0;
+        if ((code & 0x80000000) != 0) {
+            node->pair = *FUN_001b57a8(&local, code);
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

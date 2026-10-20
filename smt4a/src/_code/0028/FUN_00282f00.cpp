@@ -8,7 +8,7 @@ int FUN_00163fd4(int);
 int asdTextureRelease(void);
 int FUN_002fe590(void);
 int FUN_00388aac(int);
-int FUN_00390274(void);
+int effMenuListsClear(void);
 int FUN_00399768(int, int);
 int floatPairAddA(int, float *);
 int floatPairAddB(void);
@@ -45,7 +45,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: FUN_002fe590. */
 /* Supplied declaration required: FUN_00388aac. */
-/* Supplied declaration required: FUN_00390274. */
+/* Supplied declaration required: effMenuListsClear. */
 /* Supplied declaration required: FUN_00399768. */
 /* Supplied declaration required: floatPairAddA. */
 /* Supplied declaration required: floatPairAddB. */
@@ -83,7 +83,7 @@ unsigned int FUN_00282f00(void)
     floatPairAddB();
     FUN_002fe590();
     DAT_0059dc0c = 0;
-    FUN_00390274();
+    effMenuListsClear();
     FUN_00388aac(0);
     temp_v1 = FUN_00163fd4(0x1c);
     if ((temp_v1 != 0) && (temp_v1 = padButtonIsPressed(0x1b), temp_v1 != 0)) {

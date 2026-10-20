@@ -13,7 +13,7 @@ int FUN_00106f70(...);
 int FUN_002c0d08(...);
 int FUN_002c55b4(...);
 int appletIsExitRequested(...);
-int FUN_002c55d4(...);
+int sleepQueryAnswer(...);
 int FUN_002c560c(...);
 int FUN_002c5620(...);
 
@@ -43,7 +43,7 @@ int FUN_00123934(...);
 int FUN_002c5630(...);
 int asdProcessSetGroupEnabled(...);
 int FUN_002c567c(...);
-int FUN_002c56dc(...);
+int gameDataFlagsClear(...);
 int VectorSignedToFloat(...);
 int software_interrupt(...);
 
@@ -70,7 +70,7 @@ int FUN_00106ba8(...);
 int FUN_0010707c(...);
 int FUN_001070ac(...);
 int FUN_001071a0(...);
-int FUN_002c5728(...);
+int gameDataFlagsClearAndRefresh(...);
 int FUN_002c5758(...);
 int asdProcessCreateSimple(...);
 int asdSequenceRequest(...);
@@ -98,7 +98,7 @@ int FUN_00105a10(...);
 int FUN_00105b94(...);
 int FUN_00105e10(...);
 int FUN_00105e28(...);
-int FUN_00105e38(...);
+int asdGxPresetRequest(...);
 int asdMemorySetUseAllocatorA(...);
 int FUN_00106c28(...);
 int FUN_00106d40(...);
@@ -107,7 +107,7 @@ int FUN_00107734(...);
 int FUN_0010dc00(...);
 int asdGxCommandListCreate(...);
 int asdLoadFileSync(...);
-int FUN_002c5d5c(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 
 typedef int romwright_code(...);
 /* stack frame of void: 22 slot(s), 86 byte(s) */
@@ -164,7 +164,7 @@ extern int FUN_001026a8(...); /* 0x1026a8 */
 extern int FUN_001026ec(...); /* 0x1026ec */
 extern int FUN_00102738(...); /* 0x102738 */
 extern int FUN_00102798(...); /* 0x102798 */
-extern int FUN_001027d4(...); /* 0x1027d4 */
+extern int titleSceneStep(...); /* 0x1027d4 */
 extern int FUN_00102834(...); /* 0x102834 */
 extern int FUN_00102884(...); /* 0x102884 */
 extern unsigned char LAB_00102d38; /* 0x102d38 */
@@ -182,7 +182,7 @@ extern int renderCtxApplyCurrentA(...); /* 0x10618c */
 extern int renderCtxApplyCurrentB(...); /* 0x1061bc */
 extern int FUN_001061ec(...); /* 0x1061ec */
 extern unsigned char LAB_001071c8; /* 0x1071c8 */
-extern unsigned char DAT_00446db0; /* 0x446db0 */
+extern unsigned char g_titleFlags; /* 0x446db0 */
 extern signed char DAT_00446db1; /* 0x446db1 */
 extern signed char DAT_00446db2; /* 0x446db2 */
 extern unsigned char DAT_00446db3; /* 0x446db3 */
@@ -339,7 +339,7 @@ extern unsigned int asdModelGetStatic54(void);
 /* Supplied declaration required: FUN_00105e00. */
 /* Supplied declaration required: FUN_00105e10. */
 /* Supplied declaration required: FUN_00105e28. */
-/* Supplied declaration required: FUN_00105e38. */
+/* Supplied declaration required: asdGxPresetRequest. */
 /* Supplied declaration required: FUN_00105e50. */
 /* Supplied declaration required: asdMemorySetUseAllocatorA. */
 /* Supplied declaration required: FUN_00105e98. */
@@ -371,15 +371,15 @@ extern int FUN_00107538(unsigned int);
 extern unsigned long long FUN_002c5434(unsigned int);
 /* Supplied declaration required: FUN_002c55b4. */
 /* Supplied declaration required: appletIsExitRequested. */
-/* Supplied declaration required: FUN_002c55d4. */
+/* Supplied declaration required: sleepQueryAnswer. */
 /* Supplied declaration required: FUN_002c560c. */
 /* Supplied declaration required: FUN_002c5620. */
 /* Supplied declaration required: FUN_002c5630. */
 extern unsigned long long jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: asdProcessSetGroupEnabled. */
 /* Supplied declaration required: FUN_002c567c. */
-/* Supplied declaration required: FUN_002c56dc. */
-/* Supplied declaration required: FUN_002c5728. */
+/* Supplied declaration required: gameDataFlagsClear. */
+/* Supplied declaration required: gameDataFlagsClearAndRefresh. */
 /* Supplied declaration required: FUN_002c5758. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: asdSequenceRequest. */
@@ -390,7 +390,7 @@ extern unsigned long long jyoucyuGetTableEntry(unsigned int);
 extern int FUN_002c5be8(void);
 extern unsigned int asdModelGetStatic38(void);
 /* Supplied declaration required: asdLoadFileSync. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int nn_applet_CTR_detail_CloseApplication(unsigned char *, unsigned int, unsigned int);
@@ -491,7 +491,7 @@ void FUN_00101308(void)
   temp_v38 = 0x8d62;
   temp_v39 = 0x8d62;
   FUN_001054bc(&temp_v32);
-  FUN_00105e38(1);
+  asdGxPresetRequest(1);
   FUN_00105b94();
   temp_v2 = g_titleScene;
   *(unsigned int *)(g_titleScene + 0x136c) = 0;
@@ -503,7 +503,7 @@ void FUN_00101308(void)
   FUN_001042dc();
   FUN_00105e10(0);
   FUN_00105e10(1);
-  FUN_002c5d5c(&temp_v26,&LAB_001071c8,0x3c,2);
+  __aeabi_vec_ctor_nocookie_nodtor(&temp_v26,&LAB_001071c8,0x3c,2);
   *(unsigned int *)((int)ppcVar5 + 0x80) = 0;
   *(unsigned short *)((int)ppcVar5 + 0x84) = 0x8058;
   *(unsigned int *)((int)ppcVar5 + 0x88) = 0;
@@ -642,7 +642,7 @@ void FUN_00101308(void)
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101c80,0xcd,0);
-  temp_v26 = FUN_001027d4;
+  temp_v26 = titleSceneStep;
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101c90,0xd2,0);
@@ -697,8 +697,8 @@ void FUN_00101308(void)
   temp_v22 = 0.25f;
   FUN_00106a18(g_titleScene);
   FUN_002c5758(7);
-  FUN_002c5728(7);
-  FUN_002c56dc(1);
+  gameDataFlagsClearAndRefresh(7);
+  gameDataFlagsClear(1);
   DAT_00446db3 = 0;
   FUN_002c567c(&temp_v26);
   temp_v3 = (unsigned int)(romwright_zext_4_8(temp_v26) * 1000000);
@@ -713,7 +713,7 @@ LAB_00101b80:
         uRam00446dd0.whole = temp_v23;
         FUN_0010b5e8();
         temp_v2 = FUN_001037b4();
-        DAT_00446db0 = temp_v2 != 0;
+        g_titleFlags = temp_v2 != 0;
         temp_v2 = nngxIsStereoVisionAllowed();
         if (temp_v2 != 0) {
           DAT_00446db1 = '\x01';
@@ -919,7 +919,7 @@ LAB_00101b80:
     temp_v25 = FUN_00105478();
     temp_v23 = temp_v25 & 0xffffffff00000000;
   } while ((int)temp_v25 == 0);
-  FUN_002c55d4(1);
+  sleepQueryAnswer(1);
   if (g_mobiclipProcess != 0) {
     FUN_002c5630(1);
   }

@@ -16,7 +16,7 @@ int FUN_003f5220(...);
 
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int uiSpriteSelectAnim(...);
@@ -77,7 +77,7 @@ extern unsigned char DAT_005f1634; /* 0x5f1634 */
 
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -119,7 +119,7 @@ extern unsigned char FUN_003e42f0(void);
 /* Supplied declaration required: obj48Arm. */
 /* Supplied declaration required: FUN_003f5220. */
 /* Supplied declaration required: pair40Set. */
-extern int FUN_00418768(unsigned int);
+extern int flagSetAllCoveredBy(unsigned int);
 /* Supplied declaration required: clearThreeWords. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
@@ -174,7 +174,7 @@ void FUN_002c3398(void)
   FUN_003423e8(0);
   puVar4 = puVar2 + 0x18e;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
-  FUN_001505ac(puVar4,&DAT_0052b8bc,0xb4,&DAT_0052b970,0x150,&DAT_0052bac0,0x30,0,0,&DAT_0052baf0,
+  paramsInit(puVar4,&DAT_0052b8bc,0xb4,&DAT_0052b970,0x150,&DAT_0052bac0,0x30,0,0,&DAT_0052baf0,
                0x4d0);
   FUN_0014e188(puVar2 + 0x196,0x14,0,puVar4,0xc9);
   FUN_0014e188(puVar2 + 0x1b9,0x14,0,puVar4,0xc9);
@@ -209,12 +209,12 @@ void FUN_002c3398(void)
   *(unsigned char *)((int)puVar4 + 0x32b5) = 0;
   *(unsigned char *)((int)puVar4 + 0x32b6) = 0;
   temp_v6 = FUN_003deee4(1);
-  if ((temp_v6 != 0) || (temp_v6 = FUN_00418768(1), temp_v6 == 0)) {
+  if ((temp_v6 != 0) || (temp_v6 = flagSetAllCoveredBy(1), temp_v6 == 0)) {
     *(unsigned char *)puVar11 = 1;
   }
   *(unsigned char *)((int)puVar4 + 0x32b1) = 0;
   temp_v6 = FUN_003deee4(0);
-  if ((temp_v6 != 0) || (temp_v6 = FUN_00418768(0), temp_v6 == 0)) {
+  if ((temp_v6 != 0) || (temp_v6 = flagSetAllCoveredBy(0), temp_v6 == 0)) {
     *(unsigned char *)((int)puVar4 + 0x32b1) = 1;
   }
   puVar4 = g_camp;

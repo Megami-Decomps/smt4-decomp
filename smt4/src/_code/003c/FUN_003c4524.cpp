@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0022a444(unsigned int, unsigned int);
+extern int listBoxItemHasOwner(unsigned int, unsigned int);
 extern unsigned int *asdListBoxGetItemValuePtr(unsigned int);
 extern unsigned int FUN_0025628c(unsigned int);
 
@@ -22,7 +22,7 @@ void FUN_003c4524(int param_1,int param_2)
   puVar5 = (unsigned int *)(param_2 + 0x44a8);
   switch(temp_v0) {
   case 0:
-    temp_v1 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
     if (temp_v1 != 0) {
       temp_v2 = *puVar5 | 0x1000;
     }
@@ -31,7 +31,7 @@ void FUN_003c4524(int param_1,int param_2)
     }
     break;
   case 1:
-    temp_v1 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
     if (temp_v1 != 0) {
       temp_v2 = *puVar5 | 0x2000;
     }
@@ -44,7 +44,7 @@ void FUN_003c4524(int param_1,int param_2)
     *(unsigned int *)(param_2 + 0x2268) = *puVar2;
     return;
   case 3:
-    temp_v1 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
     if (temp_v1 != 0) {
       temp_v2 = *puVar5 | 0x40000;
     }
@@ -53,7 +53,7 @@ void FUN_003c4524(int param_1,int param_2)
     }
     break;
   case 4:
-    temp_v1 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
     if (temp_v1 != 0) {
       temp_v2 = *puVar5 | 0x200000;
     }

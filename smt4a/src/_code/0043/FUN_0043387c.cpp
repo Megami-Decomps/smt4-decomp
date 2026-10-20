@@ -38,7 +38,7 @@ extern unsigned char DAT_0055ad8c; /* 0x55ad8c */
 extern unsigned int onlineStringConstruct(unsigned char *, unsigned char *);
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: onlineStringAssign. */
-extern int constructObj0055affc(unsigned int *);
+extern int _ZN9Obj55aff4C1Ev(unsigned int *);
 /* Supplied declaration required: FUN_002f4cac. */
 extern int FUN_003038fc(int, unsigned int);
 /* Supplied declaration required: FUN_00303928. */
@@ -69,7 +69,7 @@ unsigned int * FUN_0043387c(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_0055ad8c;
   *(unsigned char *)(param_1 + 1) = 0;
-  temp_v0 = constructObj0055affc(param_1 + 3);
+  temp_v0 = _ZN9Obj55aff4C1Ev(param_1 + 3);
   temp_v3 = 0;
   temp_v4 = 0;
   temp_v5 = 0;

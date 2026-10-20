@@ -1,31 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d91b8` (_code @ 0x2d91b8, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail loads the table pointer into r2 (built: r1) */
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0043e2ac; /* 0x43e2ac */
+typedef struct FlagData {
+    /* 0x00000 */ u8 unk00000[0x1ec10];
+    /* 0x1ec10 */ u8 flagsA[0x40];    /* flags for ids 0..0x3f, indexed by id */
+    /* 0x1ec50 */ u8 unk1ec50[0x590c];
+    /* 0x2455c */ u8 unk2455c[0x600];
+    /* 0x24b5c */ u8 flagsB[0x48];    /* flags for ids 0x40..0x47, indexed by id */
+} FlagData;
 
+typedef struct FlagTable {
+    /* 0x00 */ u8 unk00[0x88];
+    /* 0x88 */ FlagData data;
+} FlagTable;
 
-void FUN_002d91b8(int param_1)
+typedef struct GameDataBlocks {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ FlagTable *table;
+} GameDataBlocks;
 
+extern GameDataBlocks g_gameDataBlocks;
+
+/* Sets bit 2 of the flag byte for id `id` (0..0x47). */
+void FUN_002d91b8(s32 id)
 {
-  int temp_v0;
-  unsigned char *pbVar2;
-  
-  if ((param_1 < 0x48) && (-1 < param_1)) {
-    temp_v0 = param_1 + DAT_0043e2ac + 0x88;
-    if (param_1 >= 0x40) {
-      pbVar2 = (unsigned char *)(temp_v0 + 0x24b5c);
+    FlagTable *table;
+    FlagData *data;
+    u8 *flag;
+
+    if (id < 0x48) {
+        if (id >= 0) {
+            table = g_gameDataBlocks.table;
+            data = &table->data;
+            if (id >= 0x40) {
+                flag = &data->flagsB[id];
+            } else {
+                flag = &data->flagsA[id];
+            }
+            if (flag != NULL) {
+                *flag |= 4;
+            }
+        }
     }
-    else {
-      pbVar2 = (unsigned char *)(temp_v0 + 0x1ec10);
-    }
-    if (pbVar2 != (unsigned char *)0x0) {
-      *pbVar2 = *pbVar2 | 4;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

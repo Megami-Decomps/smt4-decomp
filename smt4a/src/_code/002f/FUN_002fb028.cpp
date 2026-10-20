@@ -6,20 +6,20 @@ extern "C" {
 
 int asdOperatorDeleteArray(void);
 int FUN_002e6e34(int *, int);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int FUN_002e9f00(unsigned int *, int);
 int FUN_002ea00c(unsigned int *);
-int FUN_00300820(unsigned int *, int);
+int sharedRefHolderReplace(unsigned int *, int);
 
 extern unsigned char DAT_0055970c; /* 0x55970c */
 
 /* Supplied declaration required: asdOperatorDeleteArray. */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e9f00. */
 /* Supplied declaration required: FUN_002ea00c. */
-/* Supplied declaration required: FUN_00300820. */
+/* Supplied declaration required: sharedRefHolderReplace. */
 
 
 void FUN_002fb028(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -41,9 +41,9 @@ void FUN_002fb028(unsigned int *param_1,unsigned int param_2,unsigned int param_
     if (*(char *)(param_1 + 4) == '\x01') {
       FUN_002e9f00(param_1,4);
     }
-    FUN_002e6e5c(&uStack_18);
+    _ZN9Obj55b28cD1Ev(&uStack_18);
   }
-  FUN_00300820(param_1,0);
+  sharedRefHolderReplace(param_1,0);
   for (temp_v0 = param_1[0x18]; temp_v0 != param_1[0x19]; temp_v0 = temp_v0 + 4) {
   }
   asdOperatorDeleteArray();

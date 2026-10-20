@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026aae8(void);
+int dataTable0cLookupById(void);
 int FUN_00290994(...);
 int FUN_0029a17c(...);
 int FUN_0029ab54(int, int);
@@ -36,7 +36,7 @@ extern int g_statusDown; /* 0x44e190 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0026aae8. */
+/* Supplied declaration required: dataTable0cLookupById. */
 /* Supplied declaration required: FUN_00290994. */
 /* Supplied declaration required: FUN_0029a17c. */
 /* Supplied declaration required: FUN_0029ab54. */
@@ -120,7 +120,7 @@ void FUN_0032bc00(int param_1,int param_2)
       }
       else {
         temp_v9 = (unsigned int)*(unsigned short *)(temp_v6 + 0x5ca);
-        FUN_0026aae8();
+        dataTable0cLookupById();
         if (temp_v9 != 0) {
           VectorSignedToFloat((int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);

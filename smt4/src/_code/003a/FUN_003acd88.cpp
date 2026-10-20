@@ -1,38 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003acd88` (_code @ 0x3acd88, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int devilGetRecord(void);
+typedef struct DevilRecord {
+    /* 0x00 */ u8 unk00[3];
+    /* 0x03 */ u8 rank;
+    /* 0x04 */ u8 unk04[0x10];
+    /* 0x14 */ u16 first;
+    /* 0x16 */ u16 second;
+} DevilRecord;
 
-/* Supplied declaration required: devilGetRecord. */
+extern DevilRecord *devilGetRecord(u32 id);
 
-
-int FUN_003acd88(unsigned short *param_1,unsigned short *param_2)
-
+/* Sort comparison of two devil ids: by field 0x16 descending, then rank ascending, then id descending. */
+s32 FUN_003acd88(u16 *idA, u16 *idB)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (unsigned int)*param_1;
-  devilGetRecord();
-  temp_v1 = (unsigned int)*param_2;
-  devilGetRecord();
-  temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x16) - (unsigned int)*(unsigned short *)(temp_v0 + 0x16);
-  if (temp_v2 == 0) {
-    temp_v0 = (unsigned int)*param_1;
-    devilGetRecord();
-    temp_v1 = (unsigned int)*param_2;
-    devilGetRecord();
-    temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + 3) - (unsigned int)*(unsigned char *)(temp_v1 + 3);
-    if (temp_v2 == 0) {
-      temp_v2 = (unsigned int)*param_2 - (unsigned int)*param_1;
+    DevilRecord *recordA = devilGetRecord(*idA);
+    DevilRecord *recordB = devilGetRecord(*idB);
+    s32 diff = recordB->second - recordA->second;
+
+    if (diff == 0) {
+        recordA = devilGetRecord(*idA);
+        recordB = devilGetRecord(*idB);
+        diff = recordA->rank - recordB->rank;
+        if (diff == 0) {
+            diff = *idB - *idA;
+        }
     }
-  }
-  return temp_v2;
+    return diff;
 }
 
 } /* extern "C" */

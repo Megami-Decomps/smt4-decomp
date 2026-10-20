@@ -7,7 +7,7 @@ extern "C" {
 int asdTMTexTableLoadSprites(int);
 int FUN_0014afd0(int, int);
 int FUN_0014e188(...);
-int FUN_001505ac(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
+int paramsInit(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
@@ -38,7 +38,7 @@ extern int stateSetterStart9(...); /* 0x4850c4 */
 extern int rect48Init(...); /* 0x4850e4 */
 extern int FUN_004852a0(...); /* 0x4852a0 */
 extern int FUN_00485308(...); /* 0x485308 */
-extern int FUN_0048550c(...); /* 0x48550c */
+extern int nameEntryMenuClearTarget(...); /* 0x48550c */
 extern unsigned char DAT_00532e94; /* 0x532e94 */
 extern unsigned char DAT_00532eac; /* 0x532eac */
 extern unsigned char DAT_00532ed0; /* 0x532ed0 */
@@ -47,7 +47,7 @@ extern unsigned short DAT_00588108; /* 0x588108 */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 extern unsigned int *FUN_0015687c(void);
 extern unsigned short FUN_00167f08(void);
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -84,7 +84,7 @@ void stateSetterConstruct(unsigned char *param_1,unsigned char param_2)
   *(unsigned int *)(param_1 + 0x100) = 0;
   *(romwright_code **)(param_1 + 0x104) = jobAt26CWaitDone;
   *(unsigned int *)(param_1 + 0x108) = 0;
-  *(romwright_code **)(param_1 + 0x10c) = FUN_0048550c;
+  *(romwright_code **)(param_1 + 0x10c) = nameEntryMenuClearTarget;
   *(unsigned int *)(param_1 + 0x110) = 0;
   *(romwright_code **)(param_1 + 0x114) = stateSetterStart9;
   *(unsigned int *)(param_1 + 0x118) = 0;
@@ -162,7 +162,7 @@ void stateSetterConstruct(unsigned char *param_1,unsigned char param_2)
   FUN_00275bc8();
   *(unsigned char **)(param_1 + 0x26c) = puVar2;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x274);
-  FUN_001505ac(param_1 + 0x274,&DAT_00532e94,0x18,&DAT_00532eac,0x24,0,0,0,0,&DAT_00532ed0,0x70);
+  paramsInit(param_1 + 0x274,&DAT_00532e94,0x18,&DAT_00532eac,0x24,0,0,0,0,&DAT_00532ed0,0x70);
   FUN_0014e188(param_1 + 0x294,0x23,0,param_1 + 0x274,1);
   uiSpriteSelectAnim(param_1 + 0x294,0);
   FUN_0014e188(param_1 + 800,0x23,0,param_1 + 0x274,1);

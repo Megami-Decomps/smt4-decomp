@@ -1,34 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f217c` (_code @ 0x3f217c, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned short FUN_003e4a00(void);
+s32 FUN_003e4a00(void);
 
-
-unsigned int FUN_003f217c(void)
-
+/* Maps the state FUN_003e4a00 reports (2..7) to its id 201..206; anything else gives 200. */
+u32 FUN_003f217c(void)
 {
-  unsigned short temp_v0;
-  
-  temp_v0 = FUN_003e4a00();
-  switch(temp_v0) {
-  default:
-    return 200;
-  case 2:
-    return 0xc9;
-  case 3:
-    return 0xca;
-  case 4:
-    return 0xcb;
-  case 5:
-    return 0xcc;
-  case 6:
-    return 0xcd;
-  case 7:
-    return 0xce;
-  }
+    switch ((s16)FUN_003e4a00()) {
+    case 2:
+        return 201;
+    case 3:
+        return 202;
+    case 4:
+        return 203;
+    case 5:
+        return 204;
+    case 6:
+        return 205;
+    case 7:
+        return 206;
+    case 0:
+        return 200;
+    case 1:
+        return 200;
+    default:
+        return 200;
+    }
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(int *, int);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int __aeabi_uidivmod(...);
 
 extern int DAT_00594b00; /* 0x594b00 */
@@ -16,7 +16,7 @@ extern int DAT_00594b00; /* 0x594b00 */
 #endif
 extern int FUN_001239a2(int, unsigned int);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -40,7 +40,7 @@ unsigned long long FUN_001238bc(int param_1,unsigned int param_2,unsigned int pa
   while( 1 ) {
     if (*(unsigned int *)(param_1 + 0x3c) <= temp_v3) {
       DAT_00594b00 = DAT_00594b00 + 1;
-      FUN_002e6e5c(&uStack_20);
+      _ZN9Obj55b28cD1Ev(&uStack_20);
       return romwright_piece_4_4(uStack_20,0xffff);
     }
     __aeabi_uidivmod(temp_v3 + DAT_00594b00);
@@ -49,7 +49,7 @@ unsigned long long FUN_001238bc(int param_1,unsigned int param_2,unsigned int pa
     temp_v3 = temp_v3 + 1;
   }
   __aeabi_uidivmod(temp_v3 + DAT_00594b00,*(unsigned int *)(param_1 + 0x3c));
-  FUN_002e6e5c(&uStack_20);
+  _ZN9Obj55b28cD1Ev(&uStack_20);
   return romwright_piece_4_4(uStack_20,temp_v2) & 0xffffffff0000ffff;
 }
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023aea4(void);
+int _ZN9Obj42072cC1Ei(void);
 int asdOperatorNewB(void);
 int asdOperatorNew(void);
 int FUN_0035708c(void);
@@ -18,7 +18,7 @@ typedef struct {
 extern unsigned char DAT_004208cc; /* 0x4208cc */
 extern unsigned char DAT_0047e554; /* 0x47e554 */
 
-/* Supplied declaration required: FUN_0023aea4. */
+/* Supplied declaration required: _ZN9Obj42072cC1Ei. */
 /* Supplied declaration required: asdOperatorNewB. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_0035708c. */
@@ -133,7 +133,7 @@ void FUN_0023fb84(int param_1)
         temp_v1 = temp_v3;
         asdOperatorNew();
         if (temp_v1 != 0) {
-          FUN_0023aea4();
+          _ZN9Obj42072cC1Ei();
         }
         *(int *)(puVar1[2] + temp_v2 * 4) = temp_v1;
         FUN_0035708c();
@@ -143,7 +143,7 @@ void FUN_0023fb84(int param_1)
         temp_v1 = temp_v3;
         asdOperatorNew();
         if (temp_v1 != 0) {
-          FUN_0023aea4();
+          _ZN9Obj42072cC1Ei();
         }
         *(int *)(puVar1[1] + temp_v2 * 4) = temp_v1;
         FUN_0035708c();
@@ -153,7 +153,7 @@ void FUN_0023fb84(int param_1)
         temp_v1 = temp_v3;
         asdOperatorNew();
         if (temp_v1 != 0) {
-          FUN_0023aea4();
+          _ZN9Obj42072cC1Ei();
         }
         *(int *)(puVar1[3] + temp_v2 * 4) = temp_v1;
         FUN_0035708c();

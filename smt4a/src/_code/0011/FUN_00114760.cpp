@@ -12,7 +12,7 @@ int onlineUrlDestroy(...);
 int FUN_002eb858(unsigned char [32], unsigned int, int);
 int onlineSockAddrConstruct2(...);
 int FUN_002ee568(...);
-int FUN_002f3490(unsigned char [36]);
+int _ZN9Obj558b24D1Ev(unsigned char [36]);
 int FUN_002fa434(unsigned char [36], unsigned int);
 int FUN_002fff82(int, unsigned int);
 int FUN_002fffbe(unsigned char [48]);
@@ -36,7 +36,7 @@ extern unsigned int FUN_002ea3c0(int *, unsigned char *, unsigned int, unsigned 
 /* Supplied declaration required: FUN_002eb858. */
 /* Supplied declaration required: onlineSockAddrConstruct2. */
 /* Supplied declaration required: FUN_002ee568. */
-/* Supplied declaration required: FUN_002f3490. */
+/* Supplied declaration required: _ZN9Obj558b24D1Ev. */
 /* Supplied declaration required: FUN_002fa434. */
 extern int FUN_002fdb0c(unsigned char *);
 extern unsigned int FUN_002fff64(unsigned char *, unsigned int, unsigned int);
@@ -99,7 +99,7 @@ void FUN_00114760(int param_1)
         else {
           temp_v0 = 0;
         }
-        FUN_002f3490(temp_v8);
+        _ZN9Obj558b24D1Ev(temp_v8);
         if (temp_v0) {
           temp_v2 = ((int *)*piVar3)[1];
         }

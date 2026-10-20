@@ -1,45 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039fb38` (_code @ 0x39fb38, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: callee-saved register assignment of the parameters differs (retail: id r4, p1 r5, p2 r6, p0 r7), and retail keeps the entry in r0 while loading the override pointer into r1. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00230fe4(int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+typedef struct SizePair {
+    /* 0x00 */ s16 width;
+    /* 0x02 */ s16 height;
+    /* 0x04 */ s16 valid;
+} SizePair;
 
-/* stack frame of param_5: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_5_stack;
+typedef struct UiEntry {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 width;       /* bit 15 is a flag */
+    /* 0x06 */ u16 height;      /* bit 15 is a flag */
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0C */ SizePair *override;
+} UiEntry;
 
-/* Supplied declaration required: FUN_00230fe4. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
+extern UiEntry *FUN_002bf4f8(int kind, u32 id);
+extern int FUN_00230fe4(int a, int kind, u32 id, u32 p0, u32 p1, u32 width, u32 height, u32 p2, u32 p3);
 
-
-void FUN_0039fb38(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5)
-
+/* Looks up the entry of kind 0x1C and forwards its size (the override if valid, else the entry's own size without the flag bit) with the caller's parameters. */
+void FUN_0039fb38(u32 id, u32 p0, u32 p1, u32 p2, u32 p3)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  short *psVar3;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_002bf4f8(0x1c,param_1);
-  psVar3 = *(short **)(temp_v0 + 0xc);
-  if ((psVar3 != (short *)0x0) && (psVar3[2] == 1)) {
-    temp_v2 = (unsigned int)*psVar3;
-    temp_v1 = (unsigned int)psVar3[1];
-  }
-  else {
-    temp_v2 = *(unsigned short *)(temp_v0 + 4) & 0xffff7fff;
-    temp_v1 = *(unsigned short *)(temp_v0 + 6) & 0xffff7fff;
-  }
-  FUN_00230fe4(2,0x1c,param_1,param_2,param_3,temp_v2,temp_v1,param_4,param_5);
-  return;
+    UiEntry *entry = FUN_002bf4f8(0x1C, id);
+    SizePair *override;
+    u32 width;
+    u32 height;
+
+    override = entry->override;
+    if (override != NULL && override->valid == 1) {
+        width = override->width;
+        height = override->height;
+    } else {
+        width = entry->width & 0xFFFF7FFF;
+        height = entry->height & 0xFFFF7FFF;
+    }
+    FUN_00230fe4(2, 0x1C, id, p0, p1, width, height, p2, p3);
 }
 
 } /* extern "C" */

@@ -1,32 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034e0d4` (_code @ 0x34e0d4, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+typedef struct UnitStats {
+    /* 0x00 */ u8 unk00[0xFC];
+    /* 0xFC */ s32 current;
+    /* 0x100 */ s32 max;
+} UnitStats;
 
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
+typedef struct Unit {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ UnitStats *stats;
+} Unit;
 
-extern int scrGetArg(void);
-/* Supplied declaration required: scrSetResult. */
-extern int btlUnitGet(unsigned int);
-extern int __aeabi_idivmod(int, unsigned int);
+extern u32 g_btlScriptUnit;
 
+s32 scrGetArg(void);
+Unit *btlUnitGet(u32 unit);
+int scrSetResult(bool value);
 
-unsigned int FUN_0034e0d4(void)
-
+/* Script command: result is whether the unit's current/max percentage is at most the script argument. */
+u32 FUN_0034e0d4(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
-  temp_v1 = __aeabi_idivmod(*(int *)(*(int *)(temp_v1 + 0x28) + 0xfc) * 100,
-                        *(unsigned int *)(*(int *)(temp_v1 + 0x28) + 0x100));
-  scrSetResult(temp_v1 <= temp_v0);
-  return 1;
+    s32 threshold = scrGetArg();
+    UnitStats *stats = btlUnitGet(g_btlScriptUnit)->stats;
+
+    s32 current = stats->current;
+    s32 max = stats->max;
+
+    scrSetResult(current * 100 / max <= threshold);
+    return 1;
 }
 
 } /* extern "C" */

@@ -12,10 +12,10 @@ int FUN_0020401c(...);
 int FUN_002a49e4(...);
 int FUN_002e5924(...);
 int FUN_0035c6ac(void);
-int FUN_004072b0(...);
+int moveCameraCtrlCreateEntry(...);
 int linkSlotSetFlag1C(...);
 int linkSlotSetFlag20(...);
-int FUN_0040792c(...);
+int listSelectItem(...);
 int FUN_00407978(void);
 int FUN_00407ab0(...);
 int FUN_00407eb0(...);
@@ -107,10 +107,10 @@ extern int FUN_002802c8(void);
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: FUN_003c91e8. */
 /* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: FUN_004072b0. */
+/* Supplied declaration required: moveCameraCtrlCreateEntry. */
 /* Supplied declaration required: linkSlotSetFlag1C. */
 /* Supplied declaration required: linkSlotSetFlag20. */
-/* Supplied declaration required: FUN_0040792c. */
+/* Supplied declaration required: listSelectItem. */
 /* Supplied declaration required: FUN_00407978. */
 /* Supplied declaration required: FUN_00407ab0. */
 /* Supplied declaration required: FUN_00407eb0. */
@@ -333,14 +333,14 @@ void FUN_004b990c(int param_1)
           if (0 < (int)puVar7) {
             do {
               FUN_00100388(temp_v9,&LAB_004b9fe4,"mikado/",puVar12);
-              FUN_004072b0(*(unsigned int *)(param_1 + 0x1218),temp_v9,temp_v4);
+              moveCameraCtrlCreateEntry(*(unsigned int *)(param_1 + 0x1218),temp_v9,temp_v4);
               puVar12 = puVar12 + 0x20;
               temp_v4 = temp_v4 + 1;
               puVar7 = temp_v11;
               dataTable33TypeCount(puVar7,*(unsigned int *)(*(int *)(param_1 + 0x1118) + 0x60));
             } while (temp_v4 < (int)puVar7);
           }
-          FUN_0040792c(*(unsigned int *)(param_1 + 0x1218),(int)*(char *)(temp_v6 + 0x2b));
+          listSelectItem(*(unsigned int *)(param_1 + 0x1218),(int)*(char *)(temp_v6 + 0x2b));
         }
       }
       if ((!(*(short *)(param_1 + 0x3c) == 4 || *(short *)(param_1 + 0x3c) == 3)) ||

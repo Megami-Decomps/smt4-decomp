@@ -41,7 +41,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185dd4. */
-extern int FUN_0019e130(int);
+extern int markerKindGetColor(int);
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: FUN_004b42b0. */
 
@@ -135,7 +135,7 @@ LAB_004b3b88:
     do {
       if (((unsigned int)temp_v0 & (1 << (temp_v4 & 0xff))) != 0) {
         if (temp_v3 == temp_v5) {
-          temp_v6 = FUN_0019e130((int)(short)temp_v4);
+          temp_v6 = markerKindGetColor((int)(short)temp_v4);
           if (DAT_00588c50 != temp_v6) {
             drawSetColorFromRGBA8(temp_v6);
             DAT_00588c50 = temp_v6;

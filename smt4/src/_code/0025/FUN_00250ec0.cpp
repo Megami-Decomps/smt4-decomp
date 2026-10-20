@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022169c(void);
+int bitArrayCountSet1to500(void);
 int FUN_0027d98c(void);
 int FUN_00287800(void);
 int FUN_0028fb40(int);
@@ -12,7 +12,7 @@ int gameGetUnitRecord(void);
 int gameGetSlotTable(void);
 int dataTable1bOr1cGetRecord(void);
 
-/* Supplied declaration required: FUN_0022169c. */
+/* Supplied declaration required: bitArrayCountSet1to500. */
 extern int FUN_0025b6e8(unsigned short);
 /* Supplied declaration required: FUN_0027d98c. */
 /* Supplied declaration required: FUN_00287800. */
@@ -128,7 +128,7 @@ void FUN_00250ec0(int param_1)
                 if (-1 < *(char *)(temp_v8 + 0x90f0 + temp_v5)) {
                   temp_v6 = gameGetUnitRecord();
                   temp_v7 = temp_v6 + 0x4c;
-                  FUN_0022169c();
+                  bitArrayCountSet1to500();
                   if (*(unsigned int *)(temp_v10 + 0x170) <= temp_v7) break;
                 }
                 temp_v5 = temp_v5 + 1;

@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_002104c8(void);
-int FUN_00220280(unsigned char **, int, unsigned int, unsigned int);
+int fileObjSeekRead(unsigned char **, int, unsigned int, unsigned int);
 int FUN_00220438(void);
-int FUN_002bb688(unsigned char **, int);
+int fileHandleClose(unsigned char **, int);
 int FUN_002cbf90(void);
 int FUN_002d5f90(void);
 int FUN_002e1458(void);
@@ -29,7 +29,7 @@ extern unsigned char DAT_004651e8; /* 0x4651e8 */
 extern unsigned char *FUN_001ff93c(unsigned char **);
 extern unsigned char *FUN_001ffaf0(void);
 /* Supplied declaration required: FUN_002104c8. */
-/* Supplied declaration required: FUN_00220280. */
+/* Supplied declaration required: fileObjSeekRead. */
 extern unsigned char *FUN_00220330(unsigned char **);
 /* Supplied declaration required: FUN_00220438. */
 extern unsigned char *fileOwnerCloseA(unsigned char **);
@@ -37,7 +37,7 @@ extern unsigned char *fileOwnerCloseB(unsigned char **);
 extern unsigned char *fileOwnerCloseC(unsigned char **);
 extern unsigned char *fileOwnerCloseD(void);
 extern unsigned char *FUN_0024ab94(unsigned char **, int, unsigned int);
-/* Supplied declaration required: FUN_002bb688. */
+/* Supplied declaration required: fileHandleClose. */
 extern unsigned char *FUN_002cbe94(unsigned char **, int, unsigned int);
 /* Supplied declaration required: FUN_002cbf90. */
 extern unsigned char *FUN_002cbfe8(unsigned char **);
@@ -159,7 +159,7 @@ unsigned int FUN_002f55cc(int param_1,int param_2,unsigned int param_3,unsigned 
       }
     }
     else {
-      FUN_00220280(&temp_v0,0,param_3,param_4);
+      fileObjSeekRead(&temp_v0,0,param_3,param_4);
     }
     if (-1 < (int)ppuVar3) {
       if (param_1 != 0) {
@@ -181,12 +181,12 @@ unsigned int FUN_002f55cc(int param_1,int param_2,unsigned int param_3,unsigned 
         puVar5 = (unsigned char *)fileOwnerCloseC(&temp_v0);
       }
       if (-1 < (int)puVar5) {
-        FUN_002bb688(&temp_v0,0);
+        fileHandleClose(&temp_v0,0);
         return 1;
       }
     }
   }
-  FUN_002bb688(&temp_v0,0);
+  fileHandleClose(&temp_v0,0);
   return 0;
 }
 

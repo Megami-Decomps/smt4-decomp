@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps `kind` in r6 and the preset pointer in r5 (saving r3-r7) where the build reuses r0-r2 */
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
@@ -15,8 +14,8 @@ u32 FUN_002bc11c(void);
  * ASD_HEAP_EXTRA; the element type comes from the preset. */
 AsdGxTexture *asdGxIndexBufferCreate(u32 kind)
 {
-    AsdGxTexture *tex = asdTextureCreate(0);
     AsdGxPreset *preset = NULL;
+    AsdGxTexture *tex = asdTextureCreate(0);
 
     if (kind == 0 || kind == 1) {
         tex->width = 0x200;

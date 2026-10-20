@@ -1,23 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d8668` (_code @ 0x4d8668, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_004ffb30(unsigned int);
+typedef struct HandleObject {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 id;
+} HandleObject;
 
-/* Supplied declaration required: FUN_004ffb30. */
+typedef struct HandleHolder {
+    /* 0x00 */ HandleObject *object;
+} HandleHolder;
 
+extern f32 FUN_004ffb30(u32 id);
 
-void FUN_004d8668(int *param_1)
-
+/* The value FUN_004ffb30 reports for the held object's id, or 0 with none. */
+f32 FUN_004d8668(HandleHolder *holder)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*param_1 != 0) {
-    FUN_004ffb30(*(unsigned int *)(*param_1 + 4));
-    return;
-  }
-  return;
+    if (holder->object != NULL) {
+        return FUN_004ffb30(holder->object->id);
+    }
+    return 0.0f;
 }
 
 } /* extern "C" */

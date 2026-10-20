@@ -77,7 +77,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int isLowThreshold(int, int);
 /* Supplied declaration required: FUN_00288ddc. */
 extern int gameGetUnitRecord(void);
-extern unsigned int FUN_002b05d0(int);
+extern unsigned int categoryGetColor(int);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002b6758. */
 extern unsigned int FUN_002bd068(unsigned short);
@@ -209,7 +209,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
         do {
           if (((unsigned int)temp_v1 & (1 << (temp_v5 & 0xff))) != 0) {
             if (param_1->field_0x1c == temp_v3) {
-              temp_v2 = FUN_002b05d0((int)(short)temp_v5);
+              temp_v2 = categoryGetColor((int)(short)temp_v5);
               break;
             }
             temp_v3 = temp_v3 + 1;

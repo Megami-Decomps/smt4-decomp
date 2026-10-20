@@ -22,7 +22,7 @@ void nn_os_CriticalSection_Initialize(void *lock);
 void memClear(void *dst, u32 size);
 void addressBlockAllocate(void *block, u32 size);
 void rt_memclr(u32 base, u32 size);
-void FUN_002c3918(void *expHeap, u32 base, u32 size, u32 flags);
+void heapOwnerCreate(void *expHeap, u32 base, u32 size, u32 flags);
 
 static __inline void criticalSectionConstruct(NnCriticalSection *lock)
 {
@@ -81,7 +81,7 @@ void FUN_00104f60(u32 reserveSize, u32 allocatorSize, u32 extraReserve)
     g_asdMemory.system->main.size = g_asdMemory.system->block.size;
     rt_memclr(g_asdMemory.system->main.base, g_asdMemory.system->main.size);
     heap = &g_asdMemory.system->mainHeap;
-    FUN_002c3918(heap, g_asdMemory.system->main.base, g_asdMemory.system->main.size, 0x100);
+    heapOwnerCreate(heap, g_asdMemory.system->main.base, g_asdMemory.system->main.size, 0x100);
     nn_os_CriticalSection_Initialize(&heap->lock);
 }
 

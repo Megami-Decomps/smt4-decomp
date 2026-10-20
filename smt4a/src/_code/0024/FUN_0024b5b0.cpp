@@ -17,7 +17,7 @@ int FUN_003a7644(void);
 int soundChannelStopAll(int);
 int FUN_003d54f8(...);
 int FUN_0047c36c(unsigned int);
-int FUN_0047c5f0(void);
+int aocMainShutdown(void);
 int FUN_0047c950(void);
 
 /* stack frame of param_4: 1 slot(s), 1 byte(s) */
@@ -42,7 +42,7 @@ typedef struct {
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_0047c36c. */
-/* Supplied declaration required: FUN_0047c5f0. */
+/* Supplied declaration required: aocMainShutdown. */
 extern unsigned int FUN_0047c8b8(void);
 /* Supplied declaration required: FUN_0047c950. */
 
@@ -79,7 +79,7 @@ unsigned int FUN_0024b5b0(int *param_1,unsigned int param_2,unsigned int param_3
         }
         *(unsigned char *)(temp_v3 + 0x1a) = 3;
         *(unsigned char *)(temp_v3 + 0x18) = 1;
-        if ((*(int *)(temp_v3 + 0x1c) != 0) && (FUN_0047c5f0(), *(int *)(temp_v3 + 0x1c) != 0)) {
+        if ((*(int *)(temp_v3 + 0x1c) != 0) && (aocMainShutdown(), *(int *)(temp_v3 + 0x1c) != 0)) {
           FUN_0047c950();
           asdOperatorDelete();
           *(unsigned int *)(temp_v3 + 0x1c) = 0;

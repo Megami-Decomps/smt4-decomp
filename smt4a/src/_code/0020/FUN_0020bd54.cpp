@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0025c848(...);
+int fadeObjectResetIfActive(...);
 
 int FUN_00164b5c(...);
 int FUN_0018291c(...);
@@ -61,7 +61,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018291c. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0025c848. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: FUN_002f5020. */
 extern unsigned int dataTable0eSub1GetId(unsigned short);
 
@@ -576,7 +576,7 @@ LAB_0020c98c:
           temp_v42 = temp_v27;
           FUN_0018291c(&temp_v24,&temp_v28,&temp_v32,&temp_v39,0,1);
         }
-        FUN_0025c848(temp_v5 + temp_v7 * 0x8c + 0x34);
+        fadeObjectResetIfActive(temp_v5 + temp_v7 * 0x8c + 0x34);
       }
       temp_v10 = g_renderCtx;
       temp_v7 = temp_v7 + 1;

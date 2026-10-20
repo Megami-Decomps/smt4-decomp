@@ -19,7 +19,7 @@ int FUN_00283d74(int);
 int FUN_002856f8(void);
 int FUN_002a4cac(void);
 int FUN_002bf464(void);
-int FUN_002c1e9c(void);
+int dataTableResolveEntryVariants(void);
 int FUN_002c3364(void);
 int FUN_002e51c4(void);
 int FUN_0031f4fc(void);
@@ -51,7 +51,7 @@ extern signed char g_jyoucyuLevel; /* 0x57ffd4 */
 /* Supplied declaration required: FUN_002856f8. */
 /* Supplied declaration required: FUN_002a4cac. */
 /* Supplied declaration required: FUN_002bf464. */
-/* Supplied declaration required: FUN_002c1e9c. */
+/* Supplied declaration required: dataTableResolveEntryVariants. */
 /* Supplied declaration required: FUN_002c3364. */
 /* Supplied declaration required: FUN_002e51c4. */
 /* Supplied declaration required: FUN_0031f4fc. */
@@ -93,7 +93,7 @@ void FUN_0022258c(unsigned int param_1)
       else if (DAT_0057ffb9 == '\0') {
         FUN_00387454();
         FUN_003f8898();
-        FUN_002c1e9c();
+        dataTableResolveEntryVariants();
         asdTMTexTableLoadTmx(6,0);
         asdTMTexTableLoadTmx(0x10,0);
         asdTMTexTableLoadTmx(0);

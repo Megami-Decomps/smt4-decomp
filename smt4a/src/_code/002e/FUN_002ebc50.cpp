@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int FUN_002f1468(unsigned int *, int *);
 int FUN_002fb208(void);
 
@@ -14,7 +14,7 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned int FUN_002e6e34(int *, int);
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002f1468. */
 /* Supplied declaration required: FUN_002fb208. */
 
@@ -40,7 +40,7 @@ int FUN_002ebc50(int param_1,unsigned int *param_2,unsigned int param_3,unsigned
   temp_v1 = temp_v0;
   FUN_002f1468(puVar2,&temp_v1);
   *puVar2 = *param_2;
-  FUN_002e6e5c(&iStack_20);
+  _ZN9Obj55b28cD1Ev(&iStack_20);
   return param_1;
 }
 

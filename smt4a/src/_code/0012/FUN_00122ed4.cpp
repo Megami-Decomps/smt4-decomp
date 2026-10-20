@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00135a9c(...);
 int FUN_002e6e34(...);
-int FUN_002e6e5c(...);
+int _ZN9Obj55b28cD1Ev(...);
 int onlineJobSetStateReady(...);
 int FUN_002e78d0(...);
 int FUN_002e9d28(...);
@@ -28,7 +28,7 @@ extern unsigned char LAB_00122f8c; /* 0x122f8c */
 
 /* Supplied declaration required: FUN_00135a9c. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineJobSetStateReady. */
 /* Supplied declaration required: FUN_002e78d0. */
 /* Supplied declaration required: FUN_002e9d28. */
@@ -66,7 +66,7 @@ unsigned int FUN_00122ed4(int param_1,unsigned int param_2,int param_3)
       mapIteratorNext9(&temp_v4);
     }
     FUN_00135a9c(param_1 + 0x110);
-    FUN_002e6e5c(temp_v5);
+    _ZN9Obj55b28cD1Ev(temp_v5);
   }
   FUN_002e9d28(temp_v2,10,param_2);
   temp_v3 = 2;

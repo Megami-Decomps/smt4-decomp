@@ -1,31 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025bab8` (_code @ 0x25bab8, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int nw_ut_FloatColor_ToPicaU32(int);
+typedef struct FloatColor {
+    f32 r;
+    f32 g;
+    f32 b;
+    f32 a;
+} FloatColor;
 
+typedef struct ColorTarget {
+    /* 0x000 */ u8 unk000[0xDC];
+    /* 0x0DC */ FloatColor color;
+    /* 0x0EC */ u8 unk0EC[0x18];
+    /* 0x104 */ u32 picaColor;
+} ColorTarget;
 
-void FUN_0025bab8(int *param_1)
+typedef struct ColorOwner {
+    /* 0x00 */ ColorTarget *target;
+} ColorOwner;
 
+extern u32 nw_ut_FloatColor_ToPicaU32(FloatColor *color);
+
+/* Sets the target's color and its packed Pica form. */
+void FUN_0025bab8(ColorOwner *owner, FloatColor color)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3; 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int in_s3;
-  
-  temp_v0 = *param_1;
-  *(unsigned int *)(temp_v0 + 0xdc) = in_s0;
-  *(unsigned int *)(temp_v0 + 0xe0) = in_s1;
-  *(unsigned int *)(temp_v0 + 0xe4) = in_s2;
-  *(unsigned int *)(temp_v0 + 0xe8) = in_s3;
-  temp_v1 = nw_ut_FloatColor_ToPicaU32(*param_1 + 0xdc);
-  *(unsigned int *)(*param_1 + 0x104) = temp_v1;
-  return;
+    owner->target->color = color;
+    owner->target->picaColor = nw_ut_FloatColor_ToPicaU32(&owner->target->color);
 }
 
 } /* extern "C" */

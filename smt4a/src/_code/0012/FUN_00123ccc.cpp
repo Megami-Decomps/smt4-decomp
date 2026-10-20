@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int *);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 
 
 unsigned char FUN_00123ccc(int *param_1,int *param_2)
@@ -27,11 +27,11 @@ unsigned char FUN_00123ccc(int *param_1,int *param_2)
   FUN_002e6e34(temp_v0,param_1 + 0x417);
   (**(romwright_code **)(*param_1 + 0x40))(temp_v1,param_1);
   if (-1 >= temp_v1[0]) {
-    FUN_002e6e5c(temp_v0);
+    _ZN9Obj55b28cD1Ev(temp_v0);
   }
   else {
     *param_2 = param_1[0x425];
-    FUN_002e6e5c(temp_v0);
+    _ZN9Obj55b28cD1Ev(temp_v0);
   }
   return -1 < temp_v1[0];
 }

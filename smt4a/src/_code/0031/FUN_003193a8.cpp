@@ -34,7 +34,7 @@ int FUN_0031cf00(void);
 int btlTalkBustUpReleaseAllSlots(void);
 int FUN_00336de4(...);
 int FUN_00359974(...);
-int FUN_0035fc4c(void);
+int btlTalkBustUpReleaseContent(void);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_00371c3c(unsigned int, int);
 int FUN_003a7a88(...);
@@ -79,11 +79,11 @@ extern int FUN_00334044(void);
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_00336de4. */
-extern int FUN_00349af0(void);
+extern int partyPanelIsActive(void);
 extern int FUN_0034efb0(void);
 /* Supplied declaration required: FUN_00359974. */
 extern int FUN_0035db94(void);
-/* Supplied declaration required: FUN_0035fc4c. */
+/* Supplied declaration required: btlTalkBustUpReleaseContent. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_00371c3c. */
 extern int maskToCode(void);
@@ -301,12 +301,12 @@ unsigned int FUN_003193a8(int param_1)
     if (temp_v3 == 0) {
       return 0;
     }
-    FUN_0035fc4c();
+    btlTalkBustUpReleaseContent();
     FUN_00336de4(*(unsigned short *)(temp_v6 + 0x62),1);
     *(unsigned char *)(param_1 + 0x3e6) = 0;
     FUN_002c8538(1);
     FUN_00215bd0();
-    temp_v6 = FUN_00349af0();
+    temp_v6 = partyPanelIsActive();
     if (temp_v6 == 0) {
       temp_v7 = 0xe5;
     }
@@ -401,7 +401,7 @@ unsigned int FUN_003193a8(int param_1)
     }
     break;
   case 10:
-    FUN_0035fc4c();
+    btlTalkBustUpReleaseContent();
     *(unsigned int *)(param_1 + 0x3bc) = 0;
     FUN_003343f0();
     temp_v8 = 3;

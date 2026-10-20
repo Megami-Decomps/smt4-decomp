@@ -13,14 +13,14 @@ typedef struct Object559504 {
     /* 0x10 */ u32 second;
 } Object559504;
 
-Object559504 *FUN_002fd284(void);
+Object559504 *_ZN9Obj559eccC1Ev(void);
 
-/* Creates the object through FUN_002fd284, sets its vtable and fills its two members; returns it. */
+/* Creates the object through _ZN9Obj559eccC1Ev, sets its vtable and fills its two members; returns it. */
 Object559504 *FUN_002f7b34(u32 unused, u32 first, u32 second)
 {
     Object559504 *object;
 
-    object = FUN_002fd284();
+    object = _ZN9Obj559eccC1Ev();
     object->vtbl = DAT_00559504;
     onlineStringAssign(&object->first, first);
     onlineStringAssign(&object->second, second);

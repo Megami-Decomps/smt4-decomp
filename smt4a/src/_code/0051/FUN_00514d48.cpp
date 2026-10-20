@@ -9,8 +9,8 @@ int rt_malloc(...);
 int asdOperatorDeleteArray(unsigned int);
 int onlineStringDestroy(unsigned char *[2]);
 int FUN_002e9518(int, int);
-int constructObj0055affc(...);
-int FUN_002fd2a4(unsigned char **);
+int _ZN9Obj55aff4C1Ev(...);
+int _ZN9Obj559edcD1Ev(unsigned char **);
 
 /* stack frame of param_2: 16 slot(s), 61 byte(s) */
 typedef struct {
@@ -47,8 +47,8 @@ extern unsigned char DAT_0055ad28; /* 0x55ad28 */
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002e9518. */
 extern int onlineStringCopyConstruct(unsigned int *, unsigned int *);
-/* Supplied declaration required: constructObj0055affc. */
-/* Supplied declaration required: FUN_002fd2a4. */
+/* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
+/* Supplied declaration required: _ZN9Obj559edcD1Ev. */
 extern int clearWords2Alt(int);
 extern int FUN_00303146(int, unsigned int *);
 extern int FUN_003038fc(int, unsigned int);
@@ -93,7 +93,7 @@ int * FUN_00514d48(int *param_1,unsigned int param_2)
   temp_v14 = &DAT_00559ee4;
   temp_v15 = 0;
   temp_v13 = param_1;
-  temp_v0 = constructObj0055affc(temp_v16);
+  temp_v0 = _ZN9Obj55aff4C1Ev(temp_v16);
   temp_v0 = FUN_003038fc(temp_v0 + 0xc,0);
   temp_v17 = 0;
   temp_v18 = 0;
@@ -109,7 +109,7 @@ int * FUN_00514d48(int *param_1,unsigned int param_2)
   temp_v0 = clearWords2Alt(temp_v0 + 8);
   temp_v0 = clearWords2Alt(temp_v0 + 0x18);
   temp_v0 = clearWords2Alt(temp_v0 + 8);
-  constructObj0055affc(temp_v7);
+  _ZN9Obj55aff4C1Ev(temp_v7);
   *(int *)(temp_v0 + 8) = 0;
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
@@ -283,7 +283,7 @@ int * FUN_00514d48(int *param_1,unsigned int param_2)
   piVar9 = temp_v13;
   temp_v13[1] = *temp_v13 + temp_v17 * 0xb8;
   temp_v13[2] = *temp_v13 + temp_v20 * 0xb8;
-  FUN_002fd2a4(&temp_v14);
+  _ZN9Obj559edcD1Ev(&temp_v14);
   return piVar9;
 }
 

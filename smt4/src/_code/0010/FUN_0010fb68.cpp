@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00139a70(unsigned char [4]);
-int FUN_002bb688(unsigned char **, int);
+int fileHandleClose(unsigned char **, int);
 int FUN_002bb6c4(unsigned char **, unsigned char [4]);
 
 /* stack frame of param_1: 8 slot(s), 30 byte(s) */
@@ -24,7 +24,7 @@ extern unsigned char DAT_00420b78; /* 0x420b78 */
 
 /* Supplied declaration required: FUN_00139a70. */
 extern int FUN_00139e40(unsigned char **, unsigned char *);
-/* Supplied declaration required: FUN_002bb688. */
+/* Supplied declaration required: fileHandleClose. */
 /* Supplied declaration required: FUN_002bb6c4. */
 
 
@@ -55,10 +55,10 @@ unsigned int FUN_0010fb68(unsigned short *param_1)
   FUN_002bb6c4(&temp_v1,temp_v8);
   *param_1 = temp_v9;
   if (temp_v0 != 0) {
-    FUN_002bb688(&temp_v1,0);
+    fileHandleClose(&temp_v1,0);
     return 0x11464;
   }
-  FUN_002bb688(&temp_v1,0);
+  fileHandleClose(&temp_v1,0);
   return 0;
 }
 

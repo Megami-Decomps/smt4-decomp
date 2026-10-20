@@ -1,47 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ab348` (_code @ 0x3ab348, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads the enabled flag with `mov r0, r5; ldrsb r0, [r0, #138]`; armcc here emits `ldrb r0, [r5, #138]`. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00231240(...);
-int FUN_002b8ee0(int, int);
+typedef struct Widget {
+    /* 0x00 */ u8 unk00[0x8A];
+    /* 0x8A */ s8 enabled;
+} Widget;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Panel {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 state;
+    /* 0x18 */ s32 stateArg;
+    /* 0x1C */ u8 unk1c[0xAC];
+    /* 0xC8 */ u8 cursor[0x34];
+    /* 0xFC */ Widget widget;
+} Panel;
 
+extern int FUN_002b8ee0(Widget *widget, int arg);
+extern int FUN_00231240(u8 *cursor, u32 x, u32 y);
 extern int FUN_00231184(void);
-/* Supplied declaration required: FUN_00231240. */
 extern int FUN_00241a44(void);
 extern int FUN_0029e0f8(void);
-/* Supplied declaration required: FUN_002b8ee0. */
-extern unsigned int vec2GetYInt(int);
-extern unsigned int vec2GetXInt(int);
+extern u32 vec2GetYInt(Widget *widget);
+extern u32 vec2GetXInt(Widget *widget);
 
-
-void FUN_003ab348(int param_1)
-
+/* Re-places the cursor on the widget; when the widget is enabled and all four checks pass, switches to state 3 and resets the cursor. */
+void FUN_003ab348(Panel *panel)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = param_1 + 0xfc;
-  FUN_002b8ee0(temp_v2,0);
-  temp_v0 = vec2GetYInt(temp_v2);
-  temp_v1 = vec2GetXInt(temp_v2);
-  FUN_00231240(param_1 + 200,temp_v1,temp_v0);
-  if ((((*(char *)(param_1 + 0x186) != '\0') && (temp_v2 = FUN_00231184(), temp_v2 != 0)) &&
-      (temp_v2 = FUN_00241a44(), temp_v2 != 0)) && (temp_v2 = FUN_0029e0f8(), temp_v2 != 0)) {
-    *(unsigned int *)(param_1 + 0x14) = 3;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    FUN_00231240(param_1 + 200,0,0);
-    return;
-  }
-  return;
+    Widget *widget = &panel->widget;
+    u32 y;
+    u32 x;
+
+    FUN_002b8ee0(widget, 0);
+    y = vec2GetYInt(widget);
+    x = vec2GetXInt(widget);
+    FUN_00231240(panel->cursor, x, y);
+    if (widget->enabled != 0 && FUN_00231184() != 0 && FUN_00241a44() != 0 && FUN_0029e0f8() != 0) {
+        panel->state = 3;
+        panel->stateArg = 0;
+        FUN_00231240(panel->cursor, 0, 0);
+    }
 }
 
-} /* extern "C" */
+}

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001322b6(int, unsigned char [4]);
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineTimeGetNow(unsigned char [8]);
 int wordMoveOut_002f3724(unsigned char [4], int *, int);
 int mapIteratorNext3(int *);
@@ -30,7 +30,7 @@ extern unsigned char DAT_00594a58; /* 0x594a58 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001322b6. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned long long FUN_002eab1c(unsigned char *, int);
 /* Supplied declaration required: onlineTimeGetNow. */
 extern int wordRefsDiffer_002f3594(int *, unsigned int *);
@@ -98,7 +98,7 @@ void FUN_0010a8a4(int param_1)
       mapIteratorNext4(&temp_v6);
     }
   }
-  FUN_002e6e5c(temp_v9);
+  _ZN9Obj55b28cD1Ev(temp_v9);
   return;
 }
 

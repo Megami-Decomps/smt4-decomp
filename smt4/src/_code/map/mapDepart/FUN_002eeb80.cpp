@@ -5,7 +5,7 @@
 extern "C" {
 
 int mikadoSetCameraFlag80(void);
-int FUN_00215a54(int);
+int debugOverlaySetShown(int);
 int FUN_00273f90(void);
 int FUN_00273fc0(void);
 int FUN_00274798(void);
@@ -22,7 +22,7 @@ int FUN_00275bc8(void);
 int FUN_00275be8(int);
 int FUN_00275dc4(void);
 int FUN_0027653c(void);
-int FUN_0027d490(unsigned int);
+int mapEntryTriggerForScene(unsigned int);
 int FUN_0027dba4(void);
 int FUN_00280ac0(int);
 int FUN_0028a420(int);
@@ -54,7 +54,7 @@ extern unsigned char DAT_0049fb48; /* 0x49fb48 */
 
 /* Supplied declaration required: mikadoSetCameraFlag80. */
 extern int mikadoIsCameraNotState7(void);
-/* Supplied declaration required: FUN_00215a54. */
+/* Supplied declaration required: debugOverlaySetShown. */
 /* Supplied declaration required: FUN_00273f90. */
 /* Supplied declaration required: FUN_00273fc0. */
 /* Supplied declaration required: FUN_00274798. */
@@ -71,7 +71,7 @@ extern int mikadoIsCameraNotState7(void);
 /* Supplied declaration required: FUN_00275be8. */
 /* Supplied declaration required: FUN_00275dc4. */
 /* Supplied declaration required: FUN_0027653c. */
-/* Supplied declaration required: FUN_0027d490. */
+/* Supplied declaration required: mapEntryTriggerForScene. */
 /* Supplied declaration required: FUN_0027dba4. */
 /* Supplied declaration required: FUN_00280ac0. */
 /* Supplied declaration required: FUN_0028a420. */
@@ -91,7 +91,7 @@ unsigned int FUN_002eeb80(void)
   
   if ((DAT_0049f93f != '\0') && (DAT_0044751a == '\0')) {
     DAT_0044751a = '\x01';
-    FUN_00215a54(1);
+    debugOverlaySetShown(1);
   }
   temp_v0 = g_lmapScene;
   if (DAT_0049f930 == 3) {
@@ -105,7 +105,7 @@ unsigned int FUN_002eeb80(void)
     }
     DAT_00447518 = 0;
     if (DAT_0044751a != '\0') {
-      FUN_00215a54(0);
+      debugOverlaySetShown(0);
       DAT_0044751a = '\0';
     }
     return 1;
@@ -121,7 +121,7 @@ unsigned int FUN_002eeb80(void)
     DAT_00447519 = '\0';
     DAT_00447518 = 0;
     if (DAT_0044751a != '\0') {
-      FUN_00215a54(0);
+      debugOverlaySetShown(0);
       DAT_0044751a = '\0';
     }
     return 1;
@@ -172,7 +172,7 @@ unsigned int FUN_002eeb80(void)
       DAT_0049f93e = 0;
       FUN_002757a8();
       FUN_00275714();
-      FUN_0027d490(DAT_0049f920);
+      mapEntryTriggerForScene(DAT_0049f920);
       FUN_00275364();
       FUN_0027522c();
       FUN_00274fac();

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern int FUN_001010d4(char, int);
+extern int digitValueInBase(char, int);
 extern unsigned int *__aeabi_errno_addr(void);
 
 
@@ -56,7 +56,7 @@ unsigned int FUN_00100d1c(char *param_1,unsigned int *param_2,int param_3)
   }
   temp_v5 = 0;
   temp_v6 = 0;
-  while (temp_v4 = FUN_001010d4(temp_v2,param_3), -1 < temp_v4) {
+  while (temp_v4 = digitValueInBase(temp_v2,param_3), -1 < temp_v4) {
     temp_v0 = 1;
     temp_v3 = param_3 * temp_v6 + temp_v4;
     temp_v6 = temp_v3 & 0xffff;

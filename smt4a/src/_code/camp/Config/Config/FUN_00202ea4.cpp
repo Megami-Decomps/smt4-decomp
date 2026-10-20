@@ -11,7 +11,7 @@ int obj04Finish(void);
 int FUN_0014e188(...);
 int FUN_001517b4(...);
 int FUN_00163aa4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
 int eventQueueAddUnique(...);
 int FUN_001834a4(int, int);
@@ -25,7 +25,7 @@ int FUN_00224880(...);
 int FUN_00228b04(int, int);
 int FUN_00275bc8(void);
 int scrScriptProcessStartEntry(...);
-int FUN_00284168(int, int, int, int);
+int ifTouchRegionAdd(int, int, int, int);
 int FUN_003450d4(...);
 int FUN_003a76a8(...);
 int fillThreeWordsWithByte(int, unsigned int);
@@ -44,7 +44,7 @@ extern int g_gameState; /* 0x5f15fc */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int FUN_001643a0(void);
 /* Supplied declaration required: sysPlaySe. */
@@ -62,7 +62,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00284168. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 extern int FUN_002a4894(int);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
@@ -147,7 +147,7 @@ void FUN_00202ea4(void)
         do {
           temp_v1 = FUN_001834a4(0x24,temp_v3 + temp_v11);
           temp_v2 = (int)*(short *)(temp_v1 + 8);
-          FUN_00284168(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
+          ifTouchRegionAdd(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                        (int)(*(short **)(temp_v1 + 0xc))[1]);
           temp_v1 = temp_v11 * 2;
           temp_v11 = temp_v11 + 1;
@@ -219,7 +219,7 @@ void FUN_00202ea4(void)
       temp_v6 = 1;
       FUN_001517b4();
       if (temp_v6 != 0) {
-        FUN_001641b4(0x100020f);
+        eventQueueAddUniqueIfValid(0x100020f);
         FUN_003a76a8(1);
         FUN_0019de98(0,0xf4f4f4ff);
         uiSpriteSetKeyframe(temp_v7 + 0xe8,1,0);

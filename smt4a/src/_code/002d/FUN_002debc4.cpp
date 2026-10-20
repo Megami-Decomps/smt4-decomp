@@ -5,11 +5,11 @@
 extern "C" {
 
 int asdOperatorDelete(void);
-int FUN_0047c5f0(void);
+int aocMainShutdown(void);
 int FUN_0047c950(void);
 
 /* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: FUN_0047c5f0. */
+/* Supplied declaration required: aocMainShutdown. */
 /* Supplied declaration required: FUN_0047c950. */
 
 
@@ -22,7 +22,7 @@ void FUN_002debc4(int *param_1)
   temp_v0 = *param_1;
   *(unsigned char *)(temp_v0 + 0x18) = 1;
   if (*(int *)(temp_v0 + 0x1c) != 0) {
-    FUN_0047c5f0();
+    aocMainShutdown();
     if (*(int *)(temp_v0 + 0x1c) != 0) {
       FUN_0047c950();
       asdOperatorDelete();

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned int *, int);
-int FUN_002e6e5c(unsigned int *);
+int _ZN9Obj55b28cD1Ev(unsigned int *);
 
 typedef int romwright_code(...);
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -14,7 +14,7 @@ typedef int romwright_code(...);
 #endif
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int *FUN_0030f044(int, unsigned int);
 
 
@@ -42,10 +42,10 @@ long long FUN_001239f2(int param_1,unsigned int param_2,unsigned int param_3,uns
     else {
       temp_v1 = 1;
     }
-    FUN_002e6e5c(&uStack_18);
+    _ZN9Obj55b28cD1Ev(&uStack_18);
     return romwright_piece_4_4(uStack_18,temp_v1);
   }
-  FUN_002e6e5c(&uStack_18);
+  _ZN9Obj55b28cD1Ev(&uStack_18);
   return (unsigned long long)uStack_18 << 0x20;
 }
 

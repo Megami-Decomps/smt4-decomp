@@ -28,22 +28,22 @@ extern int FUN_002fd824(...); /* 0x2fd824 */
 extern int FUN_002fd8e4(...); /* 0x2fd8e4 */
 extern int FUN_002fdd2c(...); /* 0x2fdd2c */
 extern int FUN_002fdd80(...); /* 0x2fdd80 */
-extern int FUN_002fdec8(...); /* 0x2fdec8 */
+extern int entryRefCompareByOrder(...); /* 0x2fdec8 */
 extern int FUN_00321a98(...); /* 0x321a98 */
 extern int FUN_00321b8c(...); /* 0x321b8c */
 extern int kindRefTieBreak(...); /* 0x34f028 */
-extern int FUN_0034f4f0(...); /* 0x34f4f0 */
+extern int itemCompareByNibbles(...); /* 0x34f4f0 */
 extern int FUN_0034f558(...); /* 0x34f558 */
 extern int FUN_0034f678(...); /* 0x34f678 */
 extern int FUN_0035feb0(...); /* 0x35feb0 */
 extern int FUN_0035ff04(...); /* 0x35ff04 */
 extern int FUN_0035ff78(...); /* 0x35ff78 */
-extern int FUN_0035ffcc(...); /* 0x35ffcc */
+extern int entryRefCompareByGroupThenOrder(...); /* 0x35ffcc */
 extern unsigned char LAB_00360030; /* 0x360030 */
 extern int FUN_003600a4(...); /* 0x3600a4 */
 extern int FUN_00360118(...); /* 0x360118 */
 extern int FUN_0036018c(...); /* 0x36018c */
-extern int FUN_00360200(...); /* 0x360200 */
+extern int pairCompareByKeyThenOrder(...); /* 0x360200 */
 extern int FUN_0036024c(...); /* 0x36024c */
 extern int FUN_0036027c(...); /* 0x36027c */
 extern int idCompareByKeyThenRank(...); /* 0x3602d0 */
@@ -56,7 +56,7 @@ extern int FUN_00375afc(...); /* 0x375afc */
 extern int FUN_00375b54(...); /* 0x375b54 */
 extern int FUN_003811ec(...); /* 0x3811ec */
 extern int FUN_003812e0(...); /* 0x3812e0 */
-extern int FUN_0039ec5c(...); /* 0x39ec5c */
+extern int recordCompareByRank(...); /* 0x39ec5c */
 extern int FUN_0039ecc4(...); /* 0x39ecc4 */
 extern int FUN_003aa0b4(...); /* 0x3aa0b4 */
 extern int FUN_003aa108(...); /* 0x3aa108 */
@@ -168,7 +168,7 @@ void FUN_003d0bc0(int param_1)
           }
           else {
             temp_v2 = FUN_002c2c68(temp_v3);
-            qsort(temp_v1,temp_v2,2,FUN_002fdec8);
+            qsort(temp_v1,temp_v2,2,entryRefCompareByOrder);
           }
         }
         if ((*pbVar5 & 0x7f) == 0x10) {
@@ -213,7 +213,7 @@ void FUN_003d0bc0(int param_1)
           }
           else {
             temp_v2 = FUN_002c2c68(temp_v3);
-            qsort(temp_v1,temp_v2,2,FUN_00360200);
+            qsort(temp_v1,temp_v2,2,pairCompareByKeyThenOrder);
           }
         }
         if ((*pbVar5 & 0x7f) != 3) {
@@ -243,7 +243,7 @@ LAB_003d1140:
         if ((*pbVar5 & 0x7f) == 6) {
           if ((char)*pbVar5 < '\0') {
             temp_v2 = FUN_002c2c68(temp_v4);
-            qsort(temp_v5,temp_v2,2,FUN_0035ffcc);
+            qsort(temp_v5,temp_v2,2,entryRefCompareByGroupThenOrder);
           }
           else {
             temp_v2 = FUN_002c2c68(temp_v4);
@@ -263,11 +263,11 @@ LAB_003d1140:
         if ((*pbVar5 & 0x7f) == 0x12) {
           if ((char)*pbVar5 < '\0') {
             temp_v2 = FUN_002c2c68(temp_v4);
-            qsort(temp_v5,temp_v2,2,FUN_0039ec5c);
+            qsort(temp_v5,temp_v2,2,recordCompareByRank);
           }
           else {
             temp_v2 = FUN_002c2c68(temp_v4);
-            qsort(temp_v5,temp_v2,2,FUN_0034f4f0);
+            qsort(temp_v5,temp_v2,2,itemCompareByNibbles);
           }
         }
         if ((*pbVar5 & 0x7f) != 3) {
@@ -289,7 +289,7 @@ LAB_003d0c64:
         if ((*pbVar5 & 0x7f) == 6) {
           if ((char)*pbVar5 < '\0') {
             temp_v2 = FUN_002c2c68(temp_v3);
-            qsort(temp_v4,temp_v2,2,FUN_0035ffcc);
+            qsort(temp_v4,temp_v2,2,entryRefCompareByGroupThenOrder);
           }
           else {
             temp_v2 = FUN_002c2c68(temp_v3);

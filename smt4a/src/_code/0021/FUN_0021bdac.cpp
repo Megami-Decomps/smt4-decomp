@@ -10,7 +10,7 @@ int FUN_00165088(int, int);
 int sysPlaySe(int);
 int FUN_00169548(void);
 int FUN_00203da4(...);
-int FUN_002852f0(int);
+int messageSlotSet(int);
 int FUN_0028b350(int, int);
 int FUN_002c76c0(unsigned int);
 int scrSetResult(unsigned int);
@@ -37,7 +37,7 @@ extern unsigned short FUN_00167f08(void);
 extern unsigned int FUN_001688c4(unsigned int);
 /* Supplied declaration required: FUN_00169548. */
 /* Supplied declaration required: FUN_00203da4. */
-/* Supplied declaration required: FUN_002852f0. */
+/* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: FUN_0028b350. */
 /* Supplied declaration required: FUN_002c76c0. */
 /* Supplied declaration required: scrSetResult. */
@@ -124,7 +124,7 @@ FUN_0021bdac(unsigned int param_1,int param_2,int param_3,int param_4,int param_
       if (temp_v2 == 0 || temp_v6 == '\0') {
         scrSetResult(*(unsigned int *)(temp_v5 + 0x18));
         FUN_002c76c0(0xffffffff);
-        FUN_002852f0(0);
+        messageSlotSet(0);
         return 1;
       }
       return 0;

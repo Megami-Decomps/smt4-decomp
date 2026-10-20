@@ -1,27 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e3b34` (_code @ 0x2e3b34, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
+typedef struct UnitSlot {
+    /* 0x00 */ u8 unk00[0x4C];
+    /* 0x4C */ u16 mode;
+    /* 0x4E */ u16 arg;
+} UnitSlot;
 
-extern int btlUnitGet(unsigned int);
-extern unsigned short scrGetArg(void);
+typedef struct UnitData {
+    /* 0x000 */ u8 unk000[0x100];
+    /* 0x100 */ UnitSlot slot;
+} UnitData;
 
+typedef struct Unit {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ UnitData *data;
+} Unit;
 
-unsigned int FUN_002e3b34(void)
+extern u32 g_btlScriptUnit;
 
+s32 scrGetArg(void);
+Unit *btlUnitGet(u32 unit);
+
+/* Script command: sets the script unit's slot to mode 2 with the script's argument. */
+u32 FUN_002e3b34(void)
 {
-  unsigned short temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
-  temp_v1 = *(int *)(temp_v1 + 0x28);
-  *(unsigned short *)(temp_v1 + 0x14c) = 2;
-  *(unsigned short *)(temp_v1 + 0x14e) = temp_v0;
-  return 1;
+    s32 arg = scrGetArg();
+    UnitSlot *slot = &btlUnitGet(g_btlScriptUnit)->data->slot;
+
+    slot->mode = 2;
+    slot->arg = arg;
+    return 1;
 }
 
 } /* extern "C" */

@@ -27,7 +27,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00253d60. */
 /* Supplied declaration required: FUN_00253f94. */
 /* Supplied declaration required: FUN_0026242c. */
-extern int FUN_00295f28(unsigned char);
+extern int dataTable9EntryOrZero(unsigned char);
 extern int FUN_0029aafc(void);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern unsigned int FUN_002bd1fc(void);
@@ -69,7 +69,7 @@ void FUN_0024d94c(unsigned short *param_1,unsigned short *param_2)
   temp_v1 = param_2[0x3b];
   *param_1 = 0xffff;
   param_1[1] = (unsigned short)(unsigned char)temp_v1;
-  temp_v4 = FUN_00295f28((char)param_2[0x3b]);
+  temp_v4 = dataTable9EntryOrZero((char)param_2[0x3b]);
   temp_v1 = param_2[0x15];
   temp_v0 = param_2[0x16];
   *(int *)(param_1 + 2) = temp_v4 - *(int *)(param_2 + 0x18);

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0012e570(int *, int, int [2]);
 int FUN_0030b108(int, unsigned int);
-int FUN_0030b190(int *);
+int mapIteratorNextAlt(int *);
 
 /* stack frame of param_4: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0012e570. */
 extern int wordRefsEqual_002ed902(int *, unsigned int *);
 /* Supplied declaration required: FUN_0030b108. */
-/* Supplied declaration required: FUN_0030b190. */
+/* Supplied declaration required: mapIteratorNextAlt. */
 
 
 void FUN_002eda80(unsigned int *param_1,int param_2,int *param_3,int *param_4)
@@ -58,7 +58,7 @@ void FUN_002eda80(unsigned int *param_1,int param_2,int *param_3,int *param_4)
     }
   }
   while (temp_v0 = *param_3, temp_v0 != *temp_v5) {
-    FUN_0030b190(param_3);
+    mapIteratorNextAlt(param_3);
     temp_v4[0] = temp_v0;
     FUN_0012e570(&temp_v3,param_2,temp_v4);
     *param_1 = temp_v3;

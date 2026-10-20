@@ -1,42 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038b7f0` (_code @ 0x38b7f0, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002be624(unsigned char [128], unsigned char *, int, unsigned char *);
-int memClear(unsigned char [128], int);
-int FUN_0038a154(unsigned int, unsigned char [128], int, int, int, int);
+typedef struct AocEntry {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ char dir[0x14];
+    /* 0x38 */ u32 unk38;
+    /* 0x3C */ u32 unk3c;
+    /* 0x40 */ u32 unk40;
+    /* 0x44 */ u8 unk44;
+    /* 0x45 */ u8 unk45;
+    /* 0x46 */ u8 unk46[2];
+    /* 0x48 */ u8 unk48[1];
+} AocEntry;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp90; /* 0x90: local_90 */
-} param_1_stack;
+extern int FUN_002be624(char *out, const char *format, const char *dir, const char *name);
+extern int memClear(void *buffer, int size);
+extern int FUN_0038a154(u32 context, char *path, void *arg0, int arg1, int size, void *arg2);
 
-extern unsigned char LAB_0038b860; /* 0x38b860 */
-extern unsigned char LAB_0038b870; /* 0x38b870 */
-extern unsigned int g_aocDisplay; /* 0x433130 */
+extern u32 g_aocDisplay; /* 0x433130 */
 
-/* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_0038a154. */
-
-
-void FUN_0038b7f0(int param_1)
-
+/* Builds "<dir>/aoc_base.bin" for the entry, clears its state and hands the path to the display queue. */
+void FUN_0038b7f0(AocEntry *entry)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0 [128];
-  
-  memClear(temp_v0,0x80);
-  *(unsigned int *)(param_1 + 0x38) = 0;
-  *(unsigned int *)(param_1 + 0x3c) = 0;
-  *(unsigned int *)(param_1 + 0x40) = 0;
-  *(unsigned char *)(param_1 + 0x44) = 0;
-  *(unsigned char *)(param_1 + 0x45) = 0;
-  FUN_002be624(temp_v0,&LAB_0038b870,param_1 + 0x24,&LAB_0038b860);
-  FUN_0038a154(g_aocDisplay,temp_v0,param_1 + 0x48,1,0x80,param_1 + 0x38);
-  return;
+    char path[128];
+
+    memClear(path, 0x80);
+    entry->unk38 = 0;
+    entry->unk3c = 0;
+    entry->unk40 = 0;
+    entry->unk44 = 0;
+    entry->unk45 = 0;
+    FUN_002be624(path, "%s/%s", entry->dir, "aoc_base.bin");
+    FUN_0038a154(g_aocDisplay, path, entry->unk48, 1, 0x80, &entry->unk38);
 }
 
-} /* extern "C" */
+}

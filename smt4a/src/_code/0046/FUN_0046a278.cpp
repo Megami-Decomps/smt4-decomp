@@ -1,49 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0046a278` (_code @ 0x46a278, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only at the top of the loop: retail loads the count into r1 and reuses r1 for the index (r3 for the cursor), built uses r2/r3 */
+#include "common.h"
 
 extern "C" {
 
+typedef struct ItemState {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u32 flags;      /* bit 0: dimmed */
+} ItemState;
 
-void FUN_0046a278(int param_1,int param_2)
+typedef struct Item {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ ItemState *state;
+} Item;
 
+typedef struct EntryInfo {
+    /* 0x0 */ s32 type;
+    /* 0x4 */ s32 unk4;
+} EntryInfo; /* 0x8 */
+
+typedef struct Menu {
+    /* 0x000 */ u8 unk000[0xA30];
+    /* 0xA30 */ Item *items[17];
+    /* 0xA74 */ EntryInfo entries[1];
+    /* 0xA7C */ u8 unkA7C[0x44];
+    /* 0xAC0 */ s32 order[4];
+    /* 0xAD0 */ s32 count;
+    /* 0xAD4 */ s32 cursor;
+    /* 0xAD8 */ u8 unkAD8[0x208];
+    /* 0xCE0 */ s32 mode;
+} Menu;
+
+/* Selects the menu mode from the entry at position `index` (type 8 -> 5, type 9 -> 4), then dims
+ * every item except the one under the cursor. */
+void FUN_0046a278(Menu *menu, s32 index)
 {
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  if (param_2 != -1) {
-    temp_v0 = param_1 + param_2 * 4;
-    piVar2 = (int *)(temp_v0 + 0xac0);
-    *(unsigned int *)(param_1 + 0xce0) = *(unsigned int *)(param_1 + *piVar2 * 8 + 0xa74);
-    if (*(int *)(param_1 + *piVar2 * 8 + 0xa74) == 8) {
-      *(unsigned int *)(param_1 + 0xce0) = 5;
-    }
-    if (*(int *)(param_1 + *(int *)(temp_v0 + 0xac0) * 8 + 0xa74) == 9) {
-      *(unsigned int *)(param_1 + 0xce0) = 4;
-    }
-    temp_v0 = 0;
-    if (temp_v0 < *(int *)(param_1 + 0xad0)) {
-      do {
-        temp_v1 = *(int *)(*(int *)(param_1 + *(int *)(param_1 + *(int *)(param_1 + temp_v0 * 4 + 0xac0)
-                                                               * 8 + 0xa74) * 4 + 0xa30) + 4);
-        temp_v2 = *(unsigned int *)(temp_v1 + 4);
-        if (*(int *)(param_1 + 0xad4) == temp_v0) {
-          if ((temp_v2 & 1) != 0) {
-            temp_v2 = temp_v2 & 0xfffffffe;
-            *(unsigned int *)(temp_v1 + 4) = temp_v2;
-          }
+    s32 i;
+
+    if (index != -1) {
+        menu->mode = menu->entries[menu->order[index]].type;
+        if (menu->entries[menu->order[index]].type == 8) {
+            menu->mode = 5;
         }
-        else if ((temp_v2 & 1) == 0) {
-          temp_v2 = temp_v2 | 1;
-          *(unsigned int *)(temp_v1 + 4) = temp_v2;
+        if (menu->entries[menu->order[index]].type == 9) {
+            menu->mode = 4;
         }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < *(int *)(param_1 + 0xad0));
+        for (i = 0; i < menu->count; i++) {
+            ItemState *state = menu->items[menu->entries[menu->order[i]].type]->state;
+
+            if (menu->cursor == i) {
+                if ((state->flags & 1) != 0) {
+                    state->flags &= ~1;
+                }
+            } else if ((state->flags & 1) == 0) {
+                state->flags |= 1;
+            }
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

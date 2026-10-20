@@ -1,21 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d21dc` (_code @ 0x3d21dc, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameState; /* 0x5f15fc */
+typedef struct GameState {
+    /* 0x00 */ u8 unk00[0x27];
+    /* 0x27 */ s8 unlocked;
+} GameState;
+
+extern GameState g_gameState; /* 0x5f15fc */
 
 extern int FUN_00376f94(void);
 
-
-unsigned char FUN_003d21dc(void)
-
+/* Whether the feature is unlocked and FUN_00376f94 reports more than 100. */
+u8 FUN_003d21dc(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_00376f94();
-  return (*(signed char *)((unsigned char *)&g_gameState + 0x27)) != '\0' && temp_v0 >= 101;
+    int level = FUN_00376f94();
+
+    return g_gameState.unlocked != 0 && level > 100;
 }
 
 } /* extern "C" */

@@ -1,33 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035c6ac` (_code @ 0x35c6ac, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+typedef struct FrameTex {
+    /* 0x0000 */ u8 unk0000[0x1414];
+    /* 0x1414 */ u8 active;
+    /* 0x1415 */ u8 unk1415[2];
+    /* 0x1417 */ u8 unk1417;
+    /* 0x1418 */ u8 unk1418;
+    /* 0x1419 */ u8 unk1419;
+    /* 0x141A */ u8 unk141A[0x33];
+    /* 0x144D */ u8 unk144D;
+} FrameTex;
 
-extern int g_frameTex; /* 0x57f65c */
+extern FrameTex *g_frameTex;
 
-
+/* Starts the frame texture (active) and clears its state bytes. */
 void FUN_0035c6ac(void)
-
 {
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned char *puVar3;
-  
-  temp_v0 = g_frameTex;
-  puVar3 = (unsigned char *)(g_frameTex + 0x1417);
-  puVar2 = (unsigned char *)(g_frameTex + 0x1418);
-  *(unsigned char *)(g_frameTex + 0x1414) = 1;
-  *puVar3 = 0;
-  *puVar2 = 0;
-  *(unsigned char *)(temp_v0 + 0x1419) = 0;
-  *(unsigned char *)(temp_v0 + 0x144d) = 0;
-  return;
+    FrameTex *tex = g_frameTex;
+
+    tex->active = 1;
+    tex->unk1417 = 0;
+    tex->unk1418 = 0;
+    tex->unk1419 = 0;
+    tex->unk144D = 0;
 }
 
 } /* extern "C" */

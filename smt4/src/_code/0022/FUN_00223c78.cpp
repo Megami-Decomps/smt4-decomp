@@ -1,4 +1,3 @@
-/* NON_MATCHING: one extra `bne` to the return after `moveq r0, #1` (armcc's branch layout for the nested if) */
 /* Returns 1 if the global object exists and its state (+0x400) is 20. */
 #include "common.h"
 
@@ -16,10 +15,11 @@ s32 FUN_00223c78(void)
     Obj00223c78 *obj = g_statusDown;
     s32 result = 0;
 
-    if (obj != NULL) {
-        if (obj->state == 20) {
-            result = 1;
-        }
+    if (obj == NULL) {
+        return 0;
+    }
+    if (obj->state == 20) {
+        result = 1;
     }
     return result;
 }

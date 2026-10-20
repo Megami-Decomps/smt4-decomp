@@ -3,7 +3,7 @@
 extern "C" {
 
 void linkHolderApplyFlag(u32 handle, s32 flag);
-void FUN_002844e4(void);
+void msgWindowReset(void);
 
 typedef struct Screen {
     /* 0x000 */ u8 unk000[4];
@@ -22,14 +22,14 @@ typedef struct Screen {
 } Screen;
 extern Screen *g_campCecEdit;
 
-/* Resets the screen at 0x57F118 (if there is one): runs FUN_002844e4 and linkHolderApplyFlag and restores its fields to their initial values. */
+/* Resets the screen at 0x57F118 (if there is one): runs msgWindowReset and linkHolderApplyFlag and restores its fields to their initial values. */
 void FUN_002816d0(void)
 {
     Screen *screen;
 
     screen = g_campCecEdit;
     if (g_campCecEdit != NULL) {
-        FUN_002844e4();
+        msgWindowReset();
         screen->unk114 = 0;
         linkHolderApplyFlag(screen->handle, 0);
         screen->unk10F = 1;

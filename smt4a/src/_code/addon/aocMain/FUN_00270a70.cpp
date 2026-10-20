@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMemFree(unsigned int *);
 int asdOperatorDelete(void);
-int FUN_0047c5f0(void);
+int aocMainShutdown(void);
 int FUN_0047c950(void);
 
 extern unsigned int *DAT_00570278; /* 0x570278 */
@@ -14,7 +14,7 @@ extern unsigned int *DAT_00570278; /* 0x570278 */
 extern int jobFind(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: FUN_0047c5f0. */
+/* Supplied declaration required: aocMainShutdown. */
 /* Supplied declaration required: FUN_0047c950. */
 
 
@@ -36,7 +36,7 @@ unsigned int FUN_00270a70(void)
     if (DAT_00570278 != (unsigned int *)0x0) {
       *(unsigned char *)(DAT_00570278 + 6) = 1;
       if (puVar2[7] != 0) {
-        FUN_0047c5f0();
+        aocMainShutdown();
         if (puVar2[7] != 0) {
           FUN_0047c950();
           asdOperatorDelete();

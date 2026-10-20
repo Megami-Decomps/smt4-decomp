@@ -33,7 +33,7 @@ extern unsigned int FUN_00132c28(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_002e7168. */
 extern int operatorNew(unsigned int);
 extern int onlineSockAddrConstruct(int);
-extern int constructObj0055affc(int);
+extern int _ZN9Obj55aff4C1Ev(int);
 extern unsigned int FUN_002ea2e8(void);
 extern unsigned int *arrayElementAddress_002f32d4(int *, int);
 /* Supplied declaration required: FUN_002f3340. */
@@ -98,7 +98,7 @@ FUN_0010a3a0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   *(unsigned int *)(temp_v0 + 0x18) = 0;
   *(unsigned int *)(temp_v0 + 0x1c) = 0;
   temp_v0 = onlineSockAddrConstruct(temp_v0 + 0x20);
-  temp_v0 = constructObj0055affc(temp_v0 + 0x20);
+  temp_v0 = _ZN9Obj55aff4C1Ev(temp_v0 + 0x20);
   *(int *)(temp_v0 - 0x88) = temp_v0 - 0x140;
   piVar10 = (int *)(temp_v0 - 0x2c);
   temp_v5 = 0;

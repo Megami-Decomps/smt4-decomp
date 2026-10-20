@@ -10,12 +10,12 @@ int FUN_00297060(...);
 int fileSlotLoad(...);
 int FUN_002a019c(...);
 int FUN_002bcc60(...);
-int FUN_002bcd44(...);
+int resultReportIfFailed(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int asdOperatorNew(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int memAlloc(...);
 int __aeabi_memset4(...);
 int memClear(...);
@@ -76,13 +76,13 @@ extern int FUN_002a0d0c(void);
 extern int gameGetUnitRecord(void);
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002bcd44. */
+/* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
@@ -149,7 +149,7 @@ void FUN_001f3044(void)
     *(unsigned char *)(puVar4 + 4) = 0;
   }
   piVar1[0x2579] = (int)puVar4;
-  FUN_002bcd44();
+  resultReportIfFailed();
   temp_v0 = piVar1[0x2579];
   temp_v5 = 4;
   temp_v6 = &LAB_003f6ea4;
@@ -211,7 +211,7 @@ void FUN_001f3044(void)
   FUN_002a019c();
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(piVar1 + 1);
   temp_v3 = (int *)0x16c;
-  FUN_002c312c(piVar1 + 1,&DAT_004030ec,0x54,&DAT_00403140,0x3c,0,0,0,0,&DAT_0040317c);
+  paramsInit(piVar1 + 1,&DAT_004030ec,0x54,&DAT_00403140,0x3c,0,0,0,0,&DAT_0040317c);
   FUN_002bd954(piVar1 + 9,0x24,0,piVar1 + 1,1);
   FUN_002bee58(piVar1 + 9,0);
   FUN_002bd954(piVar1 + 0x2c,0x24,0,piVar1 + 1,1);

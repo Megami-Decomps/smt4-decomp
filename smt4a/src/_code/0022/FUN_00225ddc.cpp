@@ -7,7 +7,7 @@ extern "C" {
 int asdSequenceRequest(...);
 int jobStop(...);
 int FUN_001656e0(...);
-int FUN_002852f0(...);
+int messageSlotSet(...);
 int FUN_00324c48(...);
 int FUN_004731d8(void);
 int FUN_0047db34(...);
@@ -23,12 +23,12 @@ int FUN_0020214c(void);
 int scrScriptProcessGetEntry(unsigned int, unsigned int);
 int FUN_00275bc8(int, unsigned int);
 int scrScriptProcessStartEntry(unsigned int, int);
-int FUN_002844e4(void);
+int msgWindowReset(void);
 int rt_aeabi_memclr(...);
 int campCommonBgAcquire(void);
 int campButtonHelpAcquire(void);
 int campCommonBgRelease(void);
-int FUN_0035bea0(void);
+int eventTexReleaseJobs(void);
 int byteTableASetValue(...);
 int bustupCutAnimStopJob(void);
 int campButtonHelpRelease(void);
@@ -82,8 +82,8 @@ extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: scrScriptProcessGetEntry. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002844e4. */
-/* Supplied declaration required: FUN_002852f0. */
+/* Supplied declaration required: msgWindowReset. */
+/* Supplied declaration required: messageSlotSet. */
 extern int FUN_002a4b60(void);
 extern int FUN_002e07f4(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
@@ -93,7 +93,7 @@ extern int getByteTableAValue(void);
 /* Supplied declaration required: campButtonHelpAcquire. */
 extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: campCommonBgRelease. */
-/* Supplied declaration required: FUN_0035bea0. */
+/* Supplied declaration required: eventTexReleaseJobs. */
 /* Supplied declaration required: byteTableASetValue. */
 extern int byteTableAGetValue3(void);
 /* Supplied declaration required: bustupCutAnimStopJob. */
@@ -255,9 +255,9 @@ unsigned int FUN_00225ddc(void)
           campCommonBgRelease();
           campButtonHelpRelease();
           FUN_001695a0();
-          FUN_002844e4();
+          msgWindowReset();
           bustupCutAnimStopJob();
-          FUN_0035bea0();
+          eventTexReleaseJobs();
           eventCommandStop();
           FUN_003bb45c();
           if (puVar2[0xc] != 0) {
@@ -273,7 +273,7 @@ unsigned int FUN_00225ddc(void)
             puVar2[0xd] = 0;
           }
           puVar2[2] = 99;
-          FUN_002852f0(0);
+          messageSlotSet(0);
         }
         temp_v3 = 0;
         if (*(char *)(puVar2 + 0x1f) == '\0') {

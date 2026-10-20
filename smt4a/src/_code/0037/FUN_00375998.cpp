@@ -1,4 +1,3 @@
-/* NON_MATCHING: comparison form only: retail tests the slot ids with `subs r0,r0,r4; bne`, built uses `cmp r0,r4; bne` */
 /* If both entries have the same slot id (u16 at +0x62 of their gameGetSlotRecord record, 0 for negative handles), forwards them to FUN_003811ec. */
 #include "common.h"
 
@@ -21,6 +20,7 @@ void FUN_00375998(Entry *a, Entry *b)
 {
     u16 slotA;
     u16 slotB;
+    s32 diff;
 
     if (a->handle < 0) {
         slotA = 0;
@@ -32,10 +32,10 @@ void FUN_00375998(Entry *a, Entry *b)
     } else {
         slotB = gameGetSlotRecord()->slot;
     }
-    if (slotB != slotA) {
-        return;
+    diff = slotB - slotA;
+    if (diff == 0) {
+        FUN_003811ec(a, b);
     }
-    FUN_003811ec(a, b);
 }
 
 }

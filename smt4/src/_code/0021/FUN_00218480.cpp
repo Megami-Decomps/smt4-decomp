@@ -36,7 +36,7 @@ typedef struct {
 extern int FUN_00295d08(unsigned int);
 /* Supplied declaration required: playSceneSetState. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
-extern int FUN_0029e908(int);
+extern int objectPartRunUnlessLocked(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
@@ -228,7 +228,7 @@ void FUN_00218480(int param_1)
         temp_v14[0] = 0;
         temp_v10[0] = 0;
         FUN_0028cb40(param_1,temp_v14,temp_v10);
-        temp_v6 = FUN_0029e908(temp_v11);
+        temp_v6 = objectPartRunUnlessLocked(temp_v11);
         if (temp_v6 != 0) {
           temp_v3 = gameGetSlotTable();
           temp_v5 = param_1 + temp_v6 * 4;

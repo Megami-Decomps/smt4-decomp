@@ -12,7 +12,7 @@ extern int FUN_002b6a54(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetOptions. */
 extern int randNextInRange(short);
 /* Supplied declaration required: memClear. */
-extern unsigned int FUN_002eea80(unsigned int, unsigned char);
+extern unsigned int tableEntryIndexByKey(unsigned int, unsigned char);
 
 
 void FUN_003c86bc(void)
@@ -65,7 +65,7 @@ void FUN_003c86bc(void)
   while (temp_v8 = temp_v8 + 1, temp_v8 < 3) {
     if ((unsigned short)puVar12[temp_v8 + 0x305] == temp_v12) {
       temp_v8 = gameGetPlayerData();
-      temp_v13 = FUN_002eea80(temp_v12,*(unsigned char *)(temp_v8 + 0x76));
+      temp_v13 = tableEntryIndexByKey(temp_v12,*(unsigned char *)(temp_v8 + 0x76));
       break;
     }
   }

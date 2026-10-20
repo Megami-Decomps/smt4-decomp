@@ -20,7 +20,7 @@ int FUN_003d2150(...);
 int VectorSignedToFloat(...);
 
 int FUN_002342b8(void);
-int FUN_002d8af4(void);
+int mapIfOverlayRelease(void);
 int FUN_002dae68(void);
 int FUN_002e364c(...);
 int FUN_00303460(...);
@@ -64,7 +64,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_00246014. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_002d1f40. */
-/* Supplied declaration required: FUN_002d8af4. */
+/* Supplied declaration required: mapIfOverlayRelease. */
 /* Supplied declaration required: FUN_002dae68. */
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
@@ -245,7 +245,7 @@ void FUN_003661c8(void)
       else {
         if (temp_v2 == 0x37) {
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-          FUN_002d8af4();
+          mapIfOverlayRelease();
           FUN_00313648(0xc);
           FUN_002e364c(g_lmapScene + 0x28);
           FUN_00327ee8();
@@ -266,7 +266,7 @@ void FUN_003661c8(void)
             FUN_00327ee8();
             return;
           }
-          FUN_002d8af4();
+          mapIfOverlayRelease();
           temp_v1 = g_lmapScene;
           temp_v2 = *(int *)(temp_v1 + 4);
         }
@@ -553,7 +553,7 @@ LAB_00366a74:
       *(unsigned int *)(temp_v1 + 8) = 0;
       break;
     case 0xf:
-      FUN_002d8af4();
+      mapIfOverlayRelease();
       temp_v1 = g_lmapScene;
       temp_v2 = *(int *)(temp_v1 + 4);
       *(int *)(temp_v1 + 4) = temp_v2 + 1;

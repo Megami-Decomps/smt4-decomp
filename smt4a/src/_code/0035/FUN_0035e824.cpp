@@ -13,7 +13,7 @@ int FUN_00333f6c(void);
 int FUN_0037c770(unsigned int, int);
 int FUN_0038e4c4(int);
 int FUN_003a7b54(void);
-int FUN_003a7bdc(unsigned int, int);
+int statusDownEnterState1(unsigned int, int);
 int flagValueAdd(unsigned int, int);
 int flagValueSub(unsigned int, int);
 
@@ -33,7 +33,7 @@ extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_0038e4c4. */
 /* Supplied declaration required: FUN_003a7b54. */
 extern int stateHolderIsMissingOrState0(void);
-/* Supplied declaration required: FUN_003a7bdc. */
+/* Supplied declaration required: statusDownEnterState1. */
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: flagValueSub. */
 
@@ -75,7 +75,7 @@ unsigned int FUN_0035e824(void)
       scrWorkSetValue(0,2);
       FUN_002c7e6c();
       FUN_002c8538(0);
-      FUN_003a7bdc(temp_v0 & 0xffff,0);
+      statusDownEnterState1(temp_v0 & 0xffff,0);
       FUN_002fb404(g_btlUiBlock + 0x28c4);
     }
   }

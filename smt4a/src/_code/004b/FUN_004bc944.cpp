@@ -7,11 +7,11 @@ typedef struct ByteAt3 {
     /* 0x03 */ u8 unk03;
 } ByteAt3;
 
-extern ByteAt3 *FUN_00152978(void);
+extern ByteAt3 *gameDataGetTableEntry(void);
 
 u32 FUN_004bc944(void)
 {
-    return (FUN_00152978()->unk03 & 0x40) >> 6;
+    return (gameDataGetTableEntry()->unk03 & 0x40) >> 6;
 }
 
 } /* extern "C" */

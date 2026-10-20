@@ -1,57 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a688c` (_code @ 0x2a688c, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the source pointer in r1 and the value/multiplier in r0 (multiplying count*multiplier as r1*r0); built uses r0/r1 the other way round */
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_004655c0; /* 0x4655c0 */
+typedef struct Source {
+    /* 0x00 */ u32 value;
+    /* 0x04 */ u32 count;
+    /* 0x08 */ s32 kind;
+    /* 0x0C */ u32 total;      /* 0 = count * the kind's multiplier */
+    /* 0x10 */ u8 unk10[8];
+} Source; /* 0x18 */
 
+typedef struct Table {
+    /* 0x00 */ u32 header;
+    /* 0x04 */ u32 values[18];
+    /* 0x4C */ u32 copies[16];
+    /* 0x8C */ u32 totals[16];
+} Table;
 
-void FUN_002a688c(int param_1)
+typedef struct Globals {
+    /* 0x000 */ u8 unk000[0x458];
+    /* 0x458 */ Source sources[16];
+    /* 0x5D8 */ u8 unk5D8[0xC8];
+    /* 0x6A0 */ Table table;
+} Globals;
 
+extern Globals *DAT_004655c0;
+
+/* Copies source `index` into the table (its value twice, and its total or count times the kind's
+ * multiplier); index 16 clears the table's header and last value. */
+void FUN_002a688c(s32 index)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int *puVar4;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v1 = DAT_004655c0;
-  puVar3 = (unsigned int *)(DAT_004655c0 + 0x6a0);
-  if (param_1 == 0x10) {
-    *puVar3 = 0;
-    *(unsigned int *)(temp_v1 + 0x6e8) = 0;
-    return;
-  }
-  puVar4 = (unsigned int *)(DAT_004655c0 + 0x458 + param_1 * 0x18);
-  temp_v0 = *puVar4;
-  puVar3[param_1 + 1] = temp_v0;
-  puVar3[param_1 + 0x13] = temp_v0;
-  temp_v1 = puVar4[2];
-  temp_v3 = temp_v1 == 0x1400;
-  if (!temp_v3) {
-    temp_v1 = temp_v1 - 0x1401;
-    temp_v3 = temp_v1 == 0;
-  }
-  if (temp_v3) {
-    temp_v1 = 1;
-  }
-  else if (temp_v1 == 1) {
-    temp_v1 = 2;
-  }
-  else if (temp_v1 == 5) {
-    temp_v1 = 4;
-  }
-  else {
-    temp_v1 = 0;
-  }
-  temp_v2 = puVar4[3];
-  if (temp_v2 == 0) {
-    temp_v2 = puVar4[1] * temp_v1;
-  }
-  puVar3[param_1 + 0x23] = temp_v2;
-  return;
+    Globals *globals = DAT_004655c0;
+    Table *table = &globals->table;
+    Source *sources = globals->sources;
+    Source *source;
+    s32 multiplier;
+    u32 value;
+    u32 total;
+
+    if (index == 16) {
+        table->header = 0;
+        table->values[17] = 0;
+        return;
+    }
+    source = &sources[index];
+    value = source->value;
+    table->values[index] = value;
+    table->copies[index] = value;
+    switch (source->kind) {
+    case 0x1400:
+    case 0x1401:
+        multiplier = 1;
+        break;
+    case 0x1402:
+        multiplier = 2;
+        break;
+    case 0x1406:
+        multiplier = 4;
+        break;
+    default:
+        multiplier = 0;
+        break;
+    }
+    total = source->total;
+    if (total == 0) {
+        total = source->count * multiplier;
+    }
+    table->totals[index] = total;
 }
 
 } /* extern "C" */

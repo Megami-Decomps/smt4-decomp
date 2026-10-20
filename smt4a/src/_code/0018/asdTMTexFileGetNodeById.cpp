@@ -1,20 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdTMTexFileGetNodeById` (_code @ 0x186a3c, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct TexNode {
+    /* 0x00 */ u8 unk00[0x20];
+} TexNode; /* 0x20 */
 
-int asdTMTexFileGetNodeById(int *param_1,int param_2)
+typedef struct TexFile {
+    /* 0x00 */ TexNode *nodes;
+} TexFile;
 
+/* Returns the node of the texture file for `id` (ids are in thousands: node = id / 1000); NULL for a missing file. */
+TexNode *asdTMTexFileGetNodeById(TexFile *file, s32 id)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (param_1 != (int *)0x0) {
-    temp_v0 = *param_1 + (param_2 / 1000) * 0x20;
-  }
-  return temp_v0;
+    if (file == NULL) {
+        return NULL;
+    }
+    return &file->nodes[id / 1000];
 }
 
 } /* extern "C" */

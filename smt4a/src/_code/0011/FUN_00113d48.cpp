@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 extern unsigned char g_flagBlock; /* 0x594958 */
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int wordRefsDiffer_002fe9f2(int, int);
 
 
@@ -44,7 +44,7 @@ void FUN_00113d48(int param_1,int param_2)
     }
     *piVar2 = temp_v2;
     *(int *)(param_1 + 0x14) = *(int *)(param_1 + 0x14) + 1;
-    FUN_002e6e5c(temp_v1);
+    _ZN9Obj55b28cD1Ev(temp_v1);
   }
   return;
 }

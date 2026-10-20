@@ -20,7 +20,7 @@ extern void asdMemFree(u32 ptr);
 extern void scrScriptProcessDestroy(u32 process);
 extern void freeTexEntry1F(u8 *block);
 extern void dataTable33Unload(u8 *block);
-extern void FUN_00493154(void);
+extern void texSetRelease(void);
 extern u32 dialogIsActive(void);
 extern void dialogClose(s32 a);
 extern void FUN_00168980(u32 id);
@@ -58,7 +58,7 @@ void owner4DDestroy(Owner4D *obj)
     }
     freeTexEntry1F(obj->block9C);
     dataTable33Unload(obj->block1114);
-    FUN_00493154();
+    texSetRelease();
     if (dialogIsActive() != 0) {
         dialogClose(0);
     }

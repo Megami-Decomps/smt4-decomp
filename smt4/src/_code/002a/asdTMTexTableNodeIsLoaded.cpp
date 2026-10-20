@@ -1,19 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdTMTexTableNodeIsLoaded` (_code @ 0x2a60b4, 0x18 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int asdTMTexTableCallFileB(void);
+typedef struct TexTableFile {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 flags;
+} TexTableFile;
 
+#define TEX_TABLE_FILE_LOADED 4
 
-unsigned char asdTMTexTableNodeIsLoaded(void)
+extern TexTableFile *asdTMTexTableCallFileB(u32 table, u32 node);
 
+/* Whether the texture table node's file is loaded. */
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node)
 {
-  int temp_v0;
-  
-  temp_v0 = asdTMTexTableCallFileB();
-  return (*(unsigned int *)(temp_v0 + 0x10) & 4) != 0;
+    if (asdTMTexTableCallFileB(table, node)->flags & TEX_TABLE_FILE_LOADED) {
+        return 1;
+    }
+    return 0;
 }
 
-} /* extern "C" */
+}

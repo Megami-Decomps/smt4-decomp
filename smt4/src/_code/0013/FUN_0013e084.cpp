@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_002bc11c(...);
-int FUN_002c37a0(int);
+int vramAreaGetBaseAddress(int);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_004211d0; /* 0x4211d0 */
 
 /* Supplied declaration required: FUN_002bc11c. */
-/* Supplied declaration required: FUN_002c37a0. */
+/* Supplied declaration required: vramAreaGetBaseAddress. */
 
 
 unsigned int * FUN_0013e084(unsigned int *param_1,int param_2,int *param_3,int *param_4)
@@ -75,7 +75,7 @@ unsigned int * FUN_0013e084(unsigned int *param_1,int param_2,int *param_3,int *
       temp_v1 = (temp_v0 + 0x1fU) & 0xffffffe0;
       temp_v0 = temp_v1 + temp_v6;
       puVar2[temp_v3 + 0x7e] = temp_v1;
-      FUN_002c37a0(0x20000);
+      vramAreaGetBaseAddress(0x20000);
       temp_v4 = FUN_002bc11c();
       temp_v2 = FUN_002bc11c(puVar2[temp_v3 + 0x7e]);
       temp_v5 = temp_v3 + 1;

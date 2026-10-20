@@ -20,13 +20,13 @@ int scrScriptProcessDestroy(void);
 int FUN_0020214c(void);
 int FUN_00212204(int);
 int asdLoadFileSetUseRawPaths(int);
-int FUN_002844e4(void);
-int FUN_002852f0(int);
+int msgWindowReset(void);
+int messageSlotSet(int);
 int rt_aeabi_memclr(unsigned int *, int);
 int campCommonBgAcquire(void);
 int campButtonHelpAcquire(void);
 int campCommonBgRelease(void);
-int FUN_0035bea0(void);
+int eventTexReleaseJobs(void);
 int bustupCutAnimStopJob(void);
 int campButtonHelpRelease(void);
 int FUN_003b61ec(void);
@@ -65,15 +65,15 @@ extern int FUN_00239414(void);
 /* Supplied declaration required: FUN_00275bc8. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 extern int asdLoadFileGetUseRawPaths(void);
-/* Supplied declaration required: FUN_002844e4. */
-/* Supplied declaration required: FUN_002852f0. */
+/* Supplied declaration required: msgWindowReset. */
+/* Supplied declaration required: messageSlotSet. */
 extern int FUN_002a4b60(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 extern int flagBrowserStep(void);
 /* Supplied declaration required: campCommonBgRelease. */
-/* Supplied declaration required: FUN_0035bea0. */
+/* Supplied declaration required: eventTexReleaseJobs. */
 /* Supplied declaration required: bustupCutAnimStopJob. */
 /* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_003b61ec. */
@@ -163,9 +163,9 @@ unsigned int FUN_00298978(void)
     campCommonBgRelease();
     campButtonHelpRelease();
     FUN_001695a0();
-    FUN_002844e4();
+    msgWindowReset();
     bustupCutAnimStopJob();
-    FUN_0035bea0();
+    eventTexReleaseJobs();
     eventCommandStop();
     FUN_003bb45c();
     if (puVar2[0xc] != 0) {
@@ -181,7 +181,7 @@ unsigned int FUN_00298978(void)
       puVar2[0xd] = 0;
     }
     puVar2[2] = 1;
-    FUN_002852f0(0);
+    messageSlotSet(0);
     FUN_00212204(0);
     FUN_00212204(1);
     soundChannelStopAll(0xf);

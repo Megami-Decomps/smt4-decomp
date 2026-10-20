@@ -15,7 +15,7 @@ int scrWorkSetValue(...);
 int libc_strcpy(...);
 int FUN_003180c4(...);
 int FUN_0034a240(int);
-int FUN_0035dd74(void);
+int contentEntryFindById(void);
 int FUN_003b7348(...);
 int dataTable5Type9Count(void);
 int FUN_004da858(...);
@@ -40,7 +40,7 @@ extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_003180c4. */
 extern int FUN_00330bb4(unsigned short);
 /* Supplied declaration required: FUN_0034a240. */
-/* Supplied declaration required: FUN_0035dd74. */
+/* Supplied declaration required: contentEntryFindById. */
 /* Supplied declaration required: FUN_003b7348. */
 /* Supplied declaration required: dataTable5Type9Count. */
 /* Supplied declaration required: gameFlagSetValue. */
@@ -86,7 +86,7 @@ unsigned int FUN_003a7d74(void)
       if (0 < temp_v6) {
         do {
           temp_v4 = (unsigned int)*(unsigned short *)((int)piVar3 + temp_v9 * 2 + 0x8f7c);
-          FUN_0035dd74();
+          contentEntryFindById();
           temp_v6 = temp_v3;
           if (((temp_v4 != 0) &&
               (temp_v7 = FUN_00330bb4(*(unsigned short *)((int)piVar3 + temp_v9 * 2 + 0x8f7c)),
@@ -115,7 +115,7 @@ unsigned int FUN_003a7d74(void)
     if (temp_v3 != 0xb) {
       if (temp_v3 == 0xc) {
         temp_v4 = (int)*(char *)((int)g_unite + g_unite[0x241b] + 0x901c) & 0xffff;
-        FUN_0035dd74();
+        contentEntryFindById();
         temp_v8 = (unsigned int)*(unsigned short *)(temp_v4 + 0x1a);
         FUN_00180118(temp_v8);
         libc_strcpy(temp_v10,temp_v8);

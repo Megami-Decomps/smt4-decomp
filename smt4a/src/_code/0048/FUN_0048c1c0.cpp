@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00163aa4(int);
 int FUN_00168980(int);
 int FUN_00184528(int, int);
-int FUN_002844e4(void);
+int msgWindowReset(void);
 int sub68OwnerDestroy(void);
 int FUN_004935b0(int, unsigned int, unsigned int);
 
@@ -28,7 +28,7 @@ extern unsigned int vec2GetXInt(int);
 extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00168980. */
 /* Supplied declaration required: FUN_00184528. */
-/* Supplied declaration required: FUN_002844e4. */
+/* Supplied declaration required: msgWindowReset. */
 extern int FUN_002e19f8(void);
 /* Supplied declaration required: sub68OwnerDestroy. */
 /* Supplied declaration required: FUN_004935b0. */
@@ -86,7 +86,7 @@ void FUN_0048c1c0(int param_1)
     DAT_005f1a5e = 0;
     *(unsigned int *)(param_1 + 8) = 2;
     *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 2;
-    FUN_002844e4();
+    msgWindowReset();
   }
   temp_v1 = vec2GetYInt(temp_v3);
   temp_v2 = vec2GetXInt(temp_v3);

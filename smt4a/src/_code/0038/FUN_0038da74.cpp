@@ -6,7 +6,7 @@ extern "C" {
 
 int scrGetArg(int);
 int FUN_003f0e20(unsigned int *, unsigned int);
-int FUN_004c3c84(unsigned int, int, int);
+int btlSlotSetStoreValue(unsigned int, int, int);
 
 extern unsigned int DAT_00571118; /* 0x571118 */
 extern unsigned int DAT_0057111c; /* 0x57111c */
@@ -16,7 +16,7 @@ extern unsigned int DAT_00571124; /* 0x571124 */
 extern unsigned int *btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004c3c84. */
+/* Supplied declaration required: btlSlotSetStoreValue. */
 
 
 unsigned int FUN_0038da74(void)
@@ -39,13 +39,13 @@ unsigned int FUN_0038da74(void)
         temp_v2 = DAT_00571120 | *puVar3;
         puVar3[1] = DAT_00571124 | puVar3[1];
         *puVar3 = temp_v2;
-        FUN_004c3c84(temp_v0,0x1a,2);
+        btlSlotSetStoreValue(temp_v0,0x1a,2);
       }
     }
     else {
       puVar3[1] = DAT_0057111c | puVar3[1];
       *puVar3 = *puVar3 | temp_v2;
-      FUN_004c3c84(temp_v0,0x1a,1);
+      btlSlotSetStoreValue(temp_v0,0x1a,1);
     }
   }
   return 1;

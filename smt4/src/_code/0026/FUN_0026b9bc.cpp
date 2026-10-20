@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0026bc6c(void);
 int FUN_0029e8b8(...);
-int FUN_0029e908(...);
+int objectPartRunUnlessLocked(...);
 int FUN_0029eb5c(...);
 int FUN_0029f848(...);
 
@@ -22,7 +22,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_0026bc6c. */
 /* Supplied declaration required: FUN_0029e8b8. */
-/* Supplied declaration required: FUN_0029e908. */
+/* Supplied declaration required: objectPartRunUnlessLocked. */
 /* Supplied declaration required: FUN_0029eb5c. */
 extern unsigned int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029f848. */
@@ -80,10 +80,10 @@ void FUN_0026b9bc(void)
   if ((*(unsigned char *)(temp_v9 + 0x910b) & 3) != 0) {
     temp_v10 = temp_v10 + 1;
   }
-  temp_v2 = FUN_0029e908(temp_v6 + 0x940);
+  temp_v2 = objectPartRunUnlessLocked(temp_v6 + 0x940);
   temp_v3 = FUN_0029efa8(temp_v6 + 0x940);
   temp_v1 = temp_v6 + 0xa08;
-  temp_v4 = FUN_0029e908();
+  temp_v4 = objectPartRunUnlessLocked();
   temp_v5 = FUN_0029efa8(temp_v1);
   temp_v7 = (unsigned int)*(unsigned char *)(temp_v9 + 0x910b);
   if (temp_v7 < 0xc) {
@@ -103,10 +103,10 @@ void FUN_0026b9bc(void)
   FUN_0029e8b8(temp_v1,temp_v4);
   FUN_0029eb5c(temp_v1,temp_v5);
   temp_v1 = temp_v6 + 0x9a4;
-  temp_v2 = FUN_0029e908();
+  temp_v2 = objectPartRunUnlessLocked();
   temp_v3 = FUN_0029efa8(temp_v1);
   temp_v6 = temp_v6 + 0xa6c;
-  temp_v4 = FUN_0029e908();
+  temp_v4 = objectPartRunUnlessLocked();
   temp_v5 = FUN_0029efa8(temp_v6);
   FUN_0029f848(temp_v1,*(unsigned char *)(temp_v9 + 0x910b),temp_v10,4,1,1);
   FUN_0029f848(temp_v6,*(unsigned char *)(temp_v9 + 0x910b) + 4,temp_v10 + 1,4,1,1);

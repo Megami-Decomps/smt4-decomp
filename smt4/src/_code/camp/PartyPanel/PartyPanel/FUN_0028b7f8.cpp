@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00269c7c(...);
+int slotPlacementSetSlot(...);
 int FUN_0026b9bc(...);
 int FUN_0026bc6c(...);
 int FUN_0028c040(...);
@@ -17,7 +17,7 @@ int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int asdOperatorNew(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -49,7 +49,7 @@ extern unsigned char DAT_00402af4; /* 0x402af4 */
 extern unsigned char DAT_00402b0c; /* 0x402b0c */
 extern unsigned int *g_partyPanel; /* 0x43dcf0 */
 
-/* Supplied declaration required: FUN_00269c7c. */
+/* Supplied declaration required: slotPlacementSetSlot. */
 /* Supplied declaration required: FUN_0026b9bc. */
 /* Supplied declaration required: FUN_0026bc6c. */
 /* Supplied declaration required: FUN_0028c040. */
@@ -63,7 +63,7 @@ extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -125,7 +125,7 @@ void FUN_0028b7f8(int param_1)
   puVar2[0x1b2] = temp_v1;
   *(unsigned char *)(temp_v1 + 0x20) = 0;
   *(unsigned int *)(puVar2[0x1b2] + 0x34) = 0xffffffff;
-  FUN_00269c7c(puVar2[0x1b2],0);
+  slotPlacementSetSlot(puVar2[0x1b2],0);
   temp_v1 = 0;
   do {
     temp_v2 = 0x54;
@@ -148,7 +148,7 @@ void FUN_0028b7f8(int param_1)
   *(unsigned short *)((int)g_partyPanel + 0x36) = 0;
   *(unsigned short *)(puVar2 + 0xe) = 0xffff;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar8);
-  FUN_002c312c(puVar2 + 0x12,&DAT_00402a4c,0x6c,&DAT_00402ab8,0x3c,&DAT_00402af4,0x18,0,0,
+  paramsInit(puVar2 + 0x12,&DAT_00402a4c,0x6c,&DAT_00402ab8,0x3c,&DAT_00402af4,0x18,0,0,
                &DAT_00402b0c,0x1f8);
   FUN_002bd954(puVar2 + 0x1a,0x19,0x24,puVar2 + 0x12,0x6a);
   FUN_002bee58(puVar2 + 0x1a,0);

@@ -10,7 +10,7 @@ int fileSlotLoad(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -50,7 +50,7 @@ extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -107,7 +107,7 @@ unsigned int FUN_002e24c8(void)
   temp_v1 = dataTableGetCount(temp_v1);
   puVar1[0xac] = temp_v1;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0xae);
-  FUN_002c312c(puVar1 + 0xae,&DAT_004028f0,0x24,&DAT_00402914,0x30,0,0,0,0,&DAT_00402944,0xc4);
+  paramsInit(puVar1 + 0xae,&DAT_004028f0,0x24,&DAT_00402914,0x30,0,0,0,0,&DAT_00402944,0xc4);
   FUN_002bd954(puVar1 + 0xb6,0x1d,0,puVar1 + 0xae,0xc9);
   timerStart(puVar1 + 0xb6,0);
   FUN_002bd954(puVar1 + 0xd9,0x1d,0,puVar1 + 0xae,0xc9);

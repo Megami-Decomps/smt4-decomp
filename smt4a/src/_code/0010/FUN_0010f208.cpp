@@ -9,7 +9,7 @@ int FUN_002ea3d0(int, unsigned int);
 int onlineJobSetStateTimed(int, int);
 int FUN_002ea704(void);
 int onlineTimeGetNow(unsigned char [8]);
-int FUN_002f3490(unsigned char [40]);
+int _ZN9Obj558b24D1Ev(unsigned char [40]);
 int FUN_002fa434(unsigned char [40], unsigned int);
 
 extern unsigned char LAB_0010f1e9; /* 0x10f1e9 */
@@ -24,7 +24,7 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int,
 /* Supplied declaration required: FUN_002ea704. */
 /* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eba9c(unsigned char *, int);
-/* Supplied declaration required: FUN_002f3490. */
+/* Supplied declaration required: _ZN9Obj558b24D1Ev. */
 /* Supplied declaration required: FUN_002fa434. */
 
 
@@ -58,7 +58,7 @@ void FUN_0010f208(int param_1)
         FUN_002fa434(temp_v2,temp_v1);
         temp_v1 = FUN_002ea3c0(temp_v4,&LAB_0010f425,0,&LAB_0010f2ac);
         FUN_002ea3d0(param_1,temp_v1);
-        FUN_002f3490(temp_v2);
+        _ZN9Obj558b24D1Ev(temp_v2);
         return;
       }
     }

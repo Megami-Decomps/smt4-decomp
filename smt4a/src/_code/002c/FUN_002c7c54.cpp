@@ -1,32 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c7c54` (_code @ 0x2c7c54, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail computes &state->sub into r0 and moves it to r5; built computes it into r5 directly */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_useCounter; /* 0x57f27c */
+typedef struct UseSub {
+    /* 0x00 */ u8 unk00[1];
+} UseSub;
 
-extern int FUN_002a4860(void);
-extern int FUN_002a4894(int);
+typedef struct UseState {
+    /* 0x000 */ u8 unk000[0x74c];
+    /* 0x74c */ u8 active;
+    /* 0x74d */ u8 unk74d[0xb];
+    /* 0x758 */ u8 values[0x30];
+    /* 0x788 */ UseSub sub;
+} UseState;
 
+typedef struct UseCounter {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ UseState *state;
+} UseCounter;
 
-unsigned char FUN_002c7c54(void)
+extern UseCounter g_useCounter;
 
+s32 FUN_002a4860(void);
+s32 FUN_002a4894(UseSub *sub);
+
+/* The current use-counter value byte (105 while the state is inactive). */
+u8 FUN_002c7c54(void)
 {
-  int temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_useCounter + 0x4));
-  temp_v1 = 0x69;
-  if (*(char *)((*(int *)((unsigned char *)&g_useCounter + 0x4)) + 0x74c) != '\0') {
-    temp_v2 = (*(int *)((unsigned char *)&g_useCounter + 0x4)) + 0x788;
-    temp_v3 = FUN_002a4860();
-    temp_v2 = FUN_002a4894(temp_v2);
-    temp_v1 = *(unsigned char *)(temp_v2 + temp_v3 + temp_v0 + 0x758);
-  }
-  return temp_v1;
+    UseState *state = g_useCounter.state;
+    u8 value = 105;
+
+    if (state->active != 0) {
+        UseSub *sub = &state->sub;
+        s32 first = FUN_002a4860();
+        s32 second = FUN_002a4894(sub);
+
+        value = state->values[second + first];
+    }
+    return value;
 }
 
 } /* extern "C" */

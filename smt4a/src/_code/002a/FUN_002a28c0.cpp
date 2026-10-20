@@ -10,7 +10,7 @@ int FUN_002a4664(int *);
 int FUN_002a469c(void);
 int FUN_002bf520(void);
 int FUN_002c0b10(unsigned short [2]);
-int FUN_002c0b5c(void);
+int cecProcessForward(void);
 int btlTalkBustUpCreate(void);
 int rt_aeabi_memclr(int, int);
 int cecProcessCall2(void);
@@ -60,10 +60,10 @@ extern int FUN_002a2cf0(void);
 /* Supplied declaration required: FUN_002a4664. */
 /* Supplied declaration required: FUN_002a469c. */
 extern unsigned char FUN_002a46b8(void);
-extern unsigned char FUN_002a46d8(void);
+extern unsigned char saveFlagGet27e1f(void);
 /* Supplied declaration required: FUN_002bf520. */
 /* Supplied declaration required: FUN_002c0b10. */
-/* Supplied declaration required: FUN_002c0b5c. */
+/* Supplied declaration required: cecProcessForward. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 extern int rt_memcmp(unsigned char *, int, unsigned int);
@@ -73,7 +73,7 @@ extern unsigned char FUN_0031cee0(void);
 extern unsigned int gameDataBlocksGetWord27E8C(void);
 /* Supplied declaration required: FUN_00333bfc. */
 /* Supplied declaration required: ownerSetName. */
-extern int FUN_00345388(unsigned int);
+extern int gameDataTestFlags(unsigned int);
 /* Supplied declaration required: FUN_0035a074. */
 /* Supplied declaration required: FUN_00387edc. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
@@ -124,7 +124,7 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
       temp_v0 = FUN_002391e0();
       temp_v4 = FUN_002bf520();
       *(unsigned char *)(temp_v4 + 0x22) = temp_v0;
-      temp_v0 = FUN_002a46d8();
+      temp_v0 = saveFlagGet27e1f();
       temp_v4 = FUN_002bf520();
       *(unsigned char *)(temp_v4 + 0x23) = temp_v0;
       temp_v1 = FUN_002840ac();
@@ -152,7 +152,7 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
       if (temp_v3 != 1) {
         temp_v4 = FUN_002a2cf0();
         param_1->field_0x3e4 = (char)temp_v4;
-        if ((temp_v4 != 0) && (temp_v4 = FUN_00345388(0x20), temp_v4 != 0)) {
+        if ((temp_v4 != 0) && (temp_v4 = gameDataTestFlags(0x20), temp_v4 != 0)) {
           FUN_002c0b10(temp_v6);
           temp_v4 = FUN_002bf520();
           temp_v4 = rt_memcmp(temp_v9,temp_v4 + 0x50,0x14);
@@ -161,14 +161,14 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
             if (*(short *)(temp_v4 + 0x60) != 0) {
               cecProcessCall2();
               FUN_002bf520();
-              FUN_002c0b5c();
+              cecProcessForward();
             }
             else {
               temp_v1 = FUN_002bf520();
               FUN_0032e25c(temp_v1,0);
               cecProcessCall2();
               FUN_002bf520();
-              FUN_002c0b5c();
+              cecProcessForward();
               temp_v4 = FUN_002bf520();
               rt_aeabi_memclr(temp_v4 + 0x50,0x14);
             }

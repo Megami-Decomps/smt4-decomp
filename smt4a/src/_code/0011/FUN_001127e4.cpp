@@ -8,7 +8,7 @@ int FUN_002e93c2(int, int);
 int FUN_002ea3d0(int, unsigned int);
 int onlineUrlSetAddress(int, unsigned char [32]);
 int FUN_002eb858(unsigned char [32], unsigned int, unsigned int);
-int FUN_002f3490(unsigned char [28]);
+int _ZN9Obj558b24D1Ev(unsigned char [28]);
 int FUN_002f8728(unsigned char [24]);
 int FUN_002fa434(unsigned char [28], unsigned int);
 int FUN_002fbac6(unsigned char [24], int);
@@ -29,7 +29,7 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int,
 extern unsigned int FUN_002ea704(void);
 /* Supplied declaration required: onlineUrlSetAddress. */
 /* Supplied declaration required: FUN_002eb858. */
-/* Supplied declaration required: FUN_002f3490. */
+/* Supplied declaration required: _ZN9Obj558b24D1Ev. */
 /* Supplied declaration required: FUN_002f8728. */
 /* Supplied declaration required: FUN_002fa434. */
 /* Supplied declaration required: FUN_002fbac6. */
@@ -56,7 +56,7 @@ unsigned char * FUN_001127e4(int param_1)
   onlineUrlSetAddress(temp_v0,temp_v7);
   temp_v1 = FUN_002ea704();
   FUN_002fa434(temp_v4,temp_v1);
-  FUN_002f3490(temp_v4);
+  _ZN9Obj558b24D1Ev(temp_v4);
   temp_v2 = FUN_002fd624(temp_v0);
   temp_v3 = temp_v2 + temp_v5;
   if (temp_v3 >= 0xffff) {

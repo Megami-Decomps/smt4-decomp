@@ -1,31 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023c0d0` (_code @ 0x23c0d0, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct BtlMainState {
+    /* 0x0000 */ u8 unk0000[0x44A8];
+    /* 0x44A8 */ u32 flags;
+} BtlMainState;
 
-unsigned int FUN_0023c0d0(int *param_1,int param_2,int param_3,int param_4)
+typedef struct CounterBlock {
+    /* 0x000 */ u8 unk000[0x9D4];
+    /* 0x9D4 */ u16 counters[1];
+} CounterBlock;
 
+typedef struct StateRef {
+    /* 0x00 */ BtlMainState *state;
+} StateRef;
+
+/* Adds `delta` to the u16 counter of slot `index` (10-byte stride from 0x9d4), clamping it at 0;
+ * returns 1 when it hit the floor, 0 otherwise and when the state's flag 4 is set (nothing changes). */
+u32 FUN_0023c0d0(StateRef *ref, CounterBlock *block, s32 index, s32 delta)
 {
-  unsigned int temp_v0;
-  
-  if ((*(unsigned int *)(*param_1 + 0x44a8) & 4) != 0) {
-    temp_v0 = 0;
-  }
-  else {
-    param_2 = param_2 + param_3 * 10;
-    param_4 = (unsigned int)*(unsigned short *)(param_2 + 0x9d4) + param_4;
-    if (-1 < param_4) {
-      *(short *)(param_2 + 0x9d4) = (short)param_4;
+    s32 value;
+
+    if (ref->state->flags & 4) {
+        return 0;
     }
-    temp_v0 = 0;
-    if (-1 >= param_4) {
-      *(unsigned short *)(param_2 + 0x9d4) = 0;
-      temp_v0 = 1;
+    value = block->counters[index * 5] + delta;
+    if (value < 0) {
+        block->counters[index * 5] = 0;
+        return 1;
     }
-  }
-  return temp_v0;
+    block->counters[index * 5] = value;
+    return 0;
 }
 
 } /* extern "C" */

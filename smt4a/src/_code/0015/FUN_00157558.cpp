@@ -1,41 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00157558` (_code @ 0x157558, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00187a84(int, int, int, int);
-int FUN_00187d90(unsigned int, int);
+typedef struct Panel {
+    /* 0x0000 */ u8 unk0000[0x52C];
+    /* 0x052C */ u32 mode;
+    /* 0x0530 */ u32 handle;
+    /* 0x0534 */ u8 state[0xC4];
+    /* 0x05F8 */ u8 shownMode;
+    /* 0x05F9 */ u8 unk05F9[3];
+    /* 0x05FC */ u8 areaA[0x40];
+    /* 0x063C */ u8 areaB[0x40];
+    /* 0x067C */ u8 unk067C[0xB1C];
+    /* 0x1198 */ u8 target[1];
+} Panel;
 
-/* Supplied declaration required: FUN_00187a84. */
-/* Supplied declaration required: FUN_00187d90. */
+int FUN_00187a84(Panel *panel, void *area, s32 arg, void *state);
+int FUN_00187d90(u32 handle, void *target);
 
-
-void FUN_00157558(int param_1)
-
+/* Switches the panel to the display area for its mode (modes 0 and 1 use area A, mode 2 uses area B)
+ * and records the mode shown. */
+void FUN_00157558(Panel *panel)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  char temp_v1;
-  
-  temp_v0 = 0;
-  if (*(unsigned int *)(param_1 + 0x52c) < 2) {
-    temp_v1 = '\x01';
-    temp_v0 = param_1 + 0x5fc;
-  }
-  else if (*(unsigned int *)(param_1 + 0x52c) != 2) {
-    temp_v1 = '\0';
-  }
-  else {
-    temp_v1 = '\x02';
-    temp_v0 = param_1 + 0x63c;
-  }
-  if (*(char *)(param_1 + 0x5f8) != temp_v1) {
-    FUN_00187a84(param_1,temp_v0,0,param_1 + 0x534);
-    FUN_00187d90(*(unsigned int *)(param_1 + 0x530),param_1 + 0x1198);
-    *(char *)(param_1 + 0x5f8) = temp_v1;
-  }
-  return;
+    void *area = NULL;
+    u8 shown;
+
+    switch (panel->mode) {
+    case 0:
+    case 1:
+        shown = 1;
+        area = panel->areaA;
+        break;
+    case 2:
+        shown = 2;
+        area = panel->areaB;
+        break;
+    default:
+        shown = 0;
+        break;
+    }
+    if (panel->shownMode != shown) {
+        FUN_00187a84(panel, area, 0, panel->state);
+        FUN_00187d90(panel->handle, panel->target);
+        panel->shownMode = shown;
+    }
 }
 
 } /* extern "C" */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads SlotSet.count with ldrh (unsigned) yet compares it signed (ble); built uses ldrsh */
+/* NON_MATCHING: retail loads resource->value before starter->key; built loads them the other way round */
 /* Starts the object once: records the resource's value in its first slot, then runs the start callback. */
 #include "common.h"
 
@@ -12,7 +12,7 @@ typedef struct Slot {
 
 typedef struct SlotSet {
     /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ s16 count;
+    /* 0x04 */ u16 count;
 } SlotSet;
 
 typedef struct Resource {
@@ -47,10 +47,11 @@ s32 FUN_003fce08(Starter *starter, u32 arg)
         if (FUN_003fcbe0(starter) != 0) {
             FUN_003fcc94(starter);
         }
-        u32 value = resource->value;
         u32 key = starter->key;
+        u32 value = resource->value;
         starter->started = 1;
-        if (starter->slotSet->count > 0) {
+        s32 slotCount = starter->slotSet->count;
+        if (slotCount > 0) {
             Slot *slot = starter->slots;
             slot->value = value;
             slot->key = key;

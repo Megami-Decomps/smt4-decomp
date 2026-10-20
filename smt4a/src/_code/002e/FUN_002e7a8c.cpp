@@ -8,11 +8,11 @@ int FUN_00100388(...);
 int FUN_0014e314(...);
 int renderCtxResetColorScale(...);
 int FUN_0016c4b8(...);
-int FUN_0016c560(...);
+int skinObjectUpdateMatrices(...);
 int FUN_00180310(...);
 int FUN_001835b4(...);
 int drawSetColorFromRGBA8(...);
-int FUN_0025c848(...);
+int fadeObjectResetIfActive(...);
 int FUN_002ace4c(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
@@ -60,14 +60,14 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00180310. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_0025c848. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 extern int FUN_002618f8(void);
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002892a8. */
@@ -794,8 +794,8 @@ LAB_002e90ec:
         (**(romwright_code **)(temp_v3 + 0x12d4))();
         *(unsigned char *)(temp_v3 + 0x12d0) = 0;
       }
-      FUN_0025c848(temp_v2 + 0x554);
-      FUN_0025c848(temp_v2 + 0x5e0);
+      fadeObjectResetIfActive(temp_v2 + 0x554);
+      fadeObjectResetIfActive(temp_v2 + 0x5e0);
       temp_v2 = g_renderCtx;
       temp_v3 = packNibblesAndByte(6,7,0);
       piVar11 = (int *)(temp_v2 + 0x12b8);
@@ -817,7 +817,7 @@ LAB_002e90ec:
     (**(romwright_code **)(temp_v2 + 0x1274))();
     *(unsigned char *)(temp_v2 + 0x1270) = 0;
   }
-  FUN_0016c560(g_renderCtx);
+  skinObjectUpdateMatrices(g_renderCtx);
   renderCtxResetColorScale(g_renderCtx);
   return 0;
 }

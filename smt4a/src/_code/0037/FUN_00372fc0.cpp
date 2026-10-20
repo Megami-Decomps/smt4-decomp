@@ -1,29 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00372fc0` (_code @ 0x372fc0, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+typedef struct UnitFlags {
+    /* 0x000 */ u8 unk000[0x2F5];
+    /* 0x2F5 */ u8 flags[1];
+} UnitFlags;
 
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
+typedef struct Unit {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ UnitFlags *flags;
+} Unit;
 
-extern int scrGetArg(void);
-/* Supplied declaration required: scrSetResult. */
-extern int btlUnitGet(unsigned int);
+extern u32 g_btlScriptUnit;
 
+s32 scrGetArg(void);
+Unit *btlUnitGet(u32 unit);
+int scrSetResult(bool value);
 
-unsigned int FUN_00372fc0(void)
-
+/* Script command: result is whether the unit's flag byte for the argument is set. */
+u32 FUN_00372fc0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
-  scrSetResult(*(char *)(*(int *)(temp_v1 + 0x20) + temp_v0 + 0x2f5) != '\0');
-  return 1;
+    s32 index = scrGetArg();
+
+    UnitFlags *table = btlUnitGet(g_btlScriptUnit)->flags;
+
+    scrSetResult(table->flags[index] != 0);
+    return 1;
 }
 
 } /* extern "C" */

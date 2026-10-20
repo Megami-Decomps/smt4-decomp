@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00193038(int *, int *);
 int FUN_0030fc80(int *);
 int FUN_0042d5b4(int);
-int FUN_0042d6a8(void);
+int moduleStartOnce(void);
 int FUN_0042d798(int, int, int, unsigned int);
 int FUN_0042e870(int, int);
 int rt_memcpy_w(int, unsigned char [8], int);
@@ -27,7 +27,7 @@ extern unsigned int DAT_006426c0; /* 0x6426c0 */
 /* Supplied declaration required: FUN_00193038. */
 /* Supplied declaration required: FUN_0030fc80. */
 /* Supplied declaration required: FUN_0042d5b4. */
-/* Supplied declaration required: FUN_0042d6a8. */
+/* Supplied declaration required: moduleStartOnce. */
 /* Supplied declaration required: FUN_0042d798. */
 /* Supplied declaration required: FUN_0042e870. */
 extern int FUN_00501b90(int, unsigned char *, unsigned int);
@@ -53,7 +53,7 @@ int asdCecMessageBoxOpen(int param_1,unsigned int param_2,int param_3)
   unsigned int uStack_28;
   
   nn_os_CriticalSection_Enter((unsigned int)&DAT_006426c0);
-  FUN_0042d6a8();
+  moduleStartOnce();
   DAT_005b448c = '\x01';
   *(unsigned int *)(param_1 + 4) = param_2;
   temp_v0 = FUN_00501b90(param_1,temp_v2,param_2);

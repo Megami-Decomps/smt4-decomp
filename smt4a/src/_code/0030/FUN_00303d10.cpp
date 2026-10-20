@@ -1,20 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00303d10` (_code @ 0x303d10, 0xe bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the argument swap goes through r3 in the other direction (retail: r3 = b, b slot = c, c slot = r3). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003113ee(unsigned int, unsigned int, unsigned int);
+extern void FUN_003113ee(u32 a, u32 c, u32 b);
 
-/* Supplied declaration required: FUN_003113ee. */
-
-
-void FUN_00303d10(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Forwards its arguments with the last two swapped. */
+void FUN_00303d10(u32 a, u32 b, u32 c)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_003113ee(param_1,param_3,param_2);
-  return;
+    FUN_003113ee(a, c, b);
 }
 
 } /* extern "C" */

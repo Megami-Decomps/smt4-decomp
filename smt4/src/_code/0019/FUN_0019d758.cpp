@@ -1,43 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019d758` (_code @ 0x19d758, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ae584(void);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ u16 sortKey;
+} Record;
 
-extern unsigned int flagBitIsSet(int);
-/* Supplied declaration required: FUN_002ae584. */
+extern u32 flagBitIsSet(s32 id);
+extern Record *FUN_002ae584(s32 id);
 
-
-int FUN_0019d758(int *param_1,int *param_2)
-
+/* Comparison of two ids: an id with flag bits the other lacks sorts first (-1) or last (1); otherwise by the records' sort key. */
+s32 FUN_0019d758(s32 *a, s32 *b)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v0 = flagBitIsSet(*param_1);
-  temp_v3 = 0;
-  temp_v1 = flagBitIsSet(*param_2);
-  if ((temp_v0 & ~temp_v1) != 0) {
-    temp_v3 = -1;
-  }
-  temp_v4 = (temp_v1 & ~temp_v0) != 0;
-  if (temp_v4) {
-    temp_v3 = 1;
-  }
-  if (!temp_v4 && temp_v3 == 0) {
-    temp_v3 = *param_1;
-    FUN_002ae584();
-    temp_v2 = *param_2;
-    FUN_002ae584();
-    temp_v3 = (unsigned int)*(unsigned short *)(temp_v3 + 0x24) - (unsigned int)*(unsigned short *)(temp_v2 + 0x24);
-  }
-  return temp_v3;
+    u32 flagsA = flagBitIsSet(*a);
+    s32 result = 0;
+    u32 flagsB = flagBitIsSet(*b);
+
+    if ((flagsA & ~flagsB) != 0) {
+        result = -1;
+    }
+    if ((flagsB & ~flagsA) != 0) {
+        result = 1;
+    }
+    if (result == 0) {
+        Record *recordA = FUN_002ae584(*a);
+        Record *recordB = FUN_002ae584(*b);
+
+        result = recordA->sortKey - recordB->sortKey;
+    }
+    return result;
 }
 
-} /* extern "C" */
+}

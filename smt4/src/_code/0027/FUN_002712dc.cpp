@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0021b0f0(void);
 int FUN_002c5be8(void);
-int FUN_003727d8(...);
+int entryOwnerSetPosition(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
@@ -288,7 +288,7 @@ extern unsigned int asdModelGetStatic38(void);
 /* Supplied declaration required: mapEnemyAdvancePursuit. */
 /* Supplied declaration required: FUN_002d3e58. */
 /* Supplied declaration required: mapIfReleaseSlot0. */
-/* Supplied declaration required: FUN_003727d8. */
+/* Supplied declaration required: entryOwnerSetPosition. */
 /* Supplied declaration required: FUN_003a66c4. */
 /* Supplied declaration required: FUN_003a6988. */
 /* Supplied declaration required: func_0x001fa730. */
@@ -5108,7 +5108,7 @@ LAB_0027142c:
     fStack_7c = temp_v35;
     fStack_78 = temp_v34;
     temp_v6 = FUN_002c5be8();
-    FUN_003727d8(temp_v6,&fStack_80);
+    entryOwnerSetPosition(temp_v6,&fStack_80);
     temp_v17 = fStack_80 + fStack_6c;
     temp_v18 = fStack_7c + fStack_68;
     temp_v19 = fStack_78 + fStack_64;

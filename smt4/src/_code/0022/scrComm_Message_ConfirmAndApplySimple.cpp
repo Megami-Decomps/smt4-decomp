@@ -1,74 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Message_ConfirmAndApplySimple` (_code @ 0x223188, 0x100 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the early `return 1` is built as `moveq r0, #1; beq` to its own epilogue; retail branches straight to the shared `mov r0, #1; pop` at the end. */
+#include "common.h"
 
 extern "C" {
 
-int scrWorkGetValue(int);
-int scrWorkSetValue(...);
-int FUN_00254e2c(int, int, unsigned int, int, int);
-int FUN_0028ed3c(unsigned int, int, int);
-int FUN_002900d0(void);
-int FUN_0029016c(unsigned int, int);
-int FUN_00290248(unsigned int);
+s32 scrGetCommandFrame(void);
+s32 scrWorkGetValue(s32 index);
+int scrWorkSetValue(s32 index, s32 value);
+s32 FUN_0029022c(void);
+void *fileSlotGetBuffer(u32 slot);
+void *FUN_002903f0(void);
+int FUN_0028ed3c(void *object, s32 arg0, s32 arg1);
 int FUN_002bff50(void);
+s32 FUN_00254e2c(void *buffer, s32 arg1, s32 step, s32 arg3, s32 arg4);
+int FUN_0029016c(void *object, s32 arg);
+int FUN_00290248(void *object);
+int FUN_002900d0(void);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-/* Supplied declaration required: scrWorkGetValue. */
-/* Supplied declaration required: scrWorkSetValue. */
-/* Supplied declaration required: FUN_00254e2c. */
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_0028ed3c. */
-/* Supplied declaration required: FUN_002900d0. */
-/* Supplied declaration required: FUN_0029016c. */
-extern int FUN_0029022c(void);
-/* Supplied declaration required: FUN_00290248. */
-extern unsigned int FUN_002903f0(void);
-extern int fileSlotGetBuffer(unsigned int);
-/* Supplied declaration required: FUN_002bff50. */
-
-
-unsigned int scrComm_Message_ConfirmAndApplySimple(void)
-
+/* Script command: applies the confirmed message step by step through scrWork 1; finishes (returns 1) when done. */
+u32 scrComm_Message_ConfirmAndApplySimple(void)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = scrGetCommandFrame();
-  if (temp_v0 == 0) {
-    temp_v0 = FUN_0029022c();
-    if (temp_v0 == 0) {
-      return 1;
+    void *buffer;
+    void *object;
+    s32 result;
+
+    if (scrGetCommandFrame() == 0) {
+        if (FUN_0029022c() == 0) {
+            return 1;
+        }
+        scrWorkSetValue(0, 0);
+        scrWorkSetValue(1, 0);
     }
-    scrWorkSetValue(0,0);
-    scrWorkSetValue(1,0);
-  }
-  temp_v1 = fileSlotGetBuffer(0x1e);
-  temp_v0 = scrWorkGetValue(0);
-  if (temp_v0 == 0) {
-    temp_v2 = FUN_002903f0();
-    FUN_0028ed3c(temp_v2,0,1);
-    FUN_002bff50();
-    temp_v3 = scrWorkGetValue(1);
-    temp_v1 = FUN_00254e2c(temp_v1,2,temp_v3,6,0);
-    temp_v0 = scrWorkGetValue(1);
-    scrWorkSetValue(1,temp_v0 + 1);
-    if (temp_v1 == 1) {
-      scrWorkSetValue(1,0);
-      FUN_0029016c(temp_v2,0);
-      FUN_00290248(temp_v2);
-      FUN_002900d0();
-      return 1;
+    buffer = fileSlotGetBuffer(30);
+    if (scrWorkGetValue(0) == 0) {
+        object = FUN_002903f0();
+        FUN_0028ed3c(object, 0, 1);
+        FUN_002bff50();
+        result = FUN_00254e2c(buffer, 2, scrWorkGetValue(1), 6, 0);
+        scrWorkSetValue(1, scrWorkGetValue(1) + 1);
+        if (result == 1) {
+            scrWorkSetValue(1, 0);
+            FUN_0029016c(object, 0);
+            FUN_00290248(object);
+            FUN_002900d0();
+            return 1;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

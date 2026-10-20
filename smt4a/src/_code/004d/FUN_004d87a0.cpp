@@ -1,23 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d87a0` (_code @ 0x4d87a0, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the tail call goes to 0x3fd720, which has no symbol; retail's `b` carries no relocation. */
+#include "common.h"
 
 extern "C" {
 
-int func_0x003fd720(unsigned int);
+typedef struct Handle {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 id;
+} Handle;
 
-/* Supplied declaration required: func_0x003fd720. */
+typedef struct HandleOwner {
+    /* 0x00 */ Handle *handle;
+} HandleOwner;
 
+s32 func_0x003fd720(u32 id);
 
-void FUN_004d87a0(int *param_1)
-
+/* Queries the owner's handle; an owner without one reports 1. */
+s32 FUN_004d87a0(HandleOwner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*param_1 != 0) {
-    func_0x003fd720(*(unsigned int *)(*param_1 + 4));
-    return;
-  }
-  return;
+    if (owner->handle != NULL) {
+        return func_0x003fd720(owner->handle->id);
+    }
+    return 1;
 }
 
 } /* extern "C" */

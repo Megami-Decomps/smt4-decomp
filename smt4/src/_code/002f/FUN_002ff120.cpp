@@ -1,52 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ff120` (_code @ 0x2ff120, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
-int scrGetArg(int);
+typedef struct BattleUnit {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0xCA];
+    /* 0x0CE */ u16 id;
+    /* 0x0D0 */ u8 unk0D0[0xFC];
+    /* 0x1CC */ u16 count;
+    /* 0x1CE */ u8 unk1CE[0x24];
+    /* 0x1F2 */ u16 slots[8];
+    /* 0x202 */ u8 unk202[0x86];
+} BattleUnit;
 
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
+typedef struct BattleState {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ BattleUnit *units;
+} BattleState;
 
+s32 scrSetResult(s32 value);
+BattleState *btlGetMainState(void);
+s32 scrGetArg(s32 index);
 
-unsigned int FUN_002ff120(void)
-
+/* Script command: sets the result to 1 when the live, non-excluded unit with id `arg0` has state 2 in slot `arg1`. */
+u32 FUN_002ff120(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v4 = 0;
-  do {
-    temp_v2 = btlGetMainState();
-    puVar4 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288);
-    temp_v3 = *puVar4;
-    if ((temp_v3 & 0x10) != 0 && (temp_v3 & 1) != 0) {
-      temp_v5 = (temp_v3 & 0x40) == 0;
-      if (temp_v5) {
-        temp_v3 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
-      }
-      if ((temp_v5 && temp_v3 == temp_v0) && (*(unsigned short *)((int)puVar4 + temp_v1 * 2 + 0x1f2) >> 10 == 2)) {
-        scrSetResult(1);
-        return 1;
-      }
+    u32 id = scrGetArg(0);
+    s32 arg = scrGetArg(1);
+    s32 i;
+
+    for (i = 0; i < 109; i++) {
+        BattleUnit *unit = &btlGetMainState()->units[i];
+
+        if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0 && unit->id == id && unit->slots[arg] >> 10 == 2) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
-    }
-  } while( 1 );
+    scrSetResult(0);
+    return 1;
 }
 
 } /* extern "C" */

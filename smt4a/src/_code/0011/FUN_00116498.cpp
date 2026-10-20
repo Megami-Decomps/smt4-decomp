@@ -31,7 +31,7 @@ extern int wstrlen(unsigned int);
 extern int strInit(int);
 extern unsigned int FUN_002e784e(int, unsigned char *, unsigned int);
 /* Supplied declaration required: onlineStringAssign. */
-extern int constructObj0055affc(int);
+extern int _ZN9Obj55aff4C1Ev(int);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern int FUN_002ec75c(unsigned int *);
@@ -58,7 +58,7 @@ int FUN_00116498(fn_00116498_arg0 *param_1,unsigned int param_2,unsigned int par
   puVar1 = puVar1 + 0x1e;
   FUN_002eca44(puVar1);
   temp_v0 = FUN_002ec75c(puVar1 + 0x18);
-  temp_v0 = constructObj0055affc(temp_v0 + 0x18);
+  temp_v0 = _ZN9Obj55aff4C1Ev(temp_v0 + 0x18);
   temp_v0 = FUN_002fafd8(temp_v0 + 0x20,0);
   temp_v0 = strInit(temp_v0 + 0x78);
   *(unsigned int *)(temp_v0 - 0x11c) = param_3;

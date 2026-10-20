@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00288790(...);
-int FUN_002b05d0(int);
+int messageKindForward(...);
+int categoryGetColor(int);
 int FUN_002b6758(...);
 int FUN_002ba12c(int);
 int drawSetColorFromRGBA8(void);
@@ -36,8 +36,8 @@ extern int g_titleScene; /* 0x44ea00 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00288790. */
-/* Supplied declaration required: FUN_002b05d0. */
+/* Supplied declaration required: messageKindForward. */
+/* Supplied declaration required: categoryGetColor. */
 /* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -122,7 +122,7 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
   FUN_002bf288(2,0x14,0x58,(int)((float)temp_v12 + temp_v13),(int)temp_v19,param_2);
   temp_v5 = (unsigned int)((unsigned long long)temp_v19 >> 0x20);
   if (*(int *)(param_3 + 0x2c) != 0) {
-    FUN_002b05d0((int)(short)*(unsigned int *)(param_3 + *(int *)(param_3 + 0x30) * 4));
+    categoryGetColor((int)(short)*(unsigned int *)(param_3 + *(int *)(param_3 + 0x30) * 4));
     drawSetColorFromRGBA8();
   }
   temp_v13 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -138,7 +138,7 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
       __aeabi_idivmod(*(int *)(param_3 + 0x30) + temp_v15);
       temp_v13 = (float)VectorSignedToFloat((int)temp_v14,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v1 = param_1 + temp_v15 * 8;
-      FUN_00288790((int)(short)*(unsigned int *)(param_3 + temp_v4 * 4),
+      messageKindForward((int)(short)*(unsigned int *)(param_3 + temp_v4 * 4),
                    (int)(*(float *)(temp_v1 + 0x308) + (float)temp_v12 + temp_v13),
                    (int)(*(float *)(temp_v1 + 0x30c) + (float)((unsigned long long)temp_v12 >> 0x20)),param_2 + 5
                   );
@@ -154,7 +154,7 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
       FUN_002bf538();
       temp_v1 = param_1 + temp_v15 * 8;
       temp_v13 = (float)VectorSignedToFloat((int)temp_v14,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_00288790((int)(short)*(unsigned int *)(param_3 + temp_v3 * 4),
+      messageKindForward((int)(short)*(unsigned int *)(param_3 + temp_v3 * 4),
                    (int)(((*(float *)(temp_v1 + 0x308) + (float)temp_v12) - (float)temp_v17) + temp_v13),
                    (int)(*(float *)(temp_v1 + 0x30c) + (float)((unsigned long long)temp_v12 >> 0x20)),param_2 + 5
                   );

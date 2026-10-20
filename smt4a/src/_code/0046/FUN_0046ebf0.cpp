@@ -1,27 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0046ebf0` (_code @ 0x46ebf0, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int g_aocMain; /* 0x570260 */
+extern u32 g_aocMain;
 
-extern int FUN_001b2d88(unsigned int, unsigned int, unsigned int);
-extern int FUN_001b3148(unsigned int);
+s32 FUN_001b3148(u32 main);
+s32 FUN_001b2d88(u32 arg0, u32 arg1, u32 arg2);
 
-
-unsigned int FUN_0046ebf0(unsigned int param_1,unsigned int param_2)
-
+/* Returns 1 when FUN_001b3148 succeeds on the add-on main object and FUN_001b2d88(arg0, 0x39, arg1) succeeds too. */
+u32 FUN_0046ebf0(u32 arg0, u32 arg1)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_001b3148(g_aocMain);
-  temp_v1 = 0;
-  if ((temp_v0 != 0) && (temp_v0 = FUN_001b2d88(param_1,0x39,param_2), temp_v1 = 0, temp_v0 != 0)) {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    if (FUN_001b3148(g_aocMain) != 0) {
+        return FUN_001b2d88(arg0, 0x39, arg1) != 0;
+    }
+    return 0;
 }
 
 } /* extern "C" */

@@ -1,42 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00103650` (_code @ 0x103650, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0010d230(int);
-int FUN_002c3a14(unsigned int);
-int FUN_002c4f8c(unsigned int, unsigned int);
-int FUN_002c501c(void);
+typedef struct TitleFlags {
+    /* 0 */ s8 first;
+    /* 1 */ s8 second;
+} TitleFlags;
 
-extern signed char DAT_00446db0; /* 0x446db0 */
-extern signed char DAT_00446db1; /* 0x446db1 */
-extern unsigned int g_titleScene; /* 0x44ea00 */
+extern TitleFlags g_titleFlags;
+extern u32 g_titleScene;
 
-/* Supplied declaration required: FUN_0010d230. */
-/* Supplied declaration required: FUN_002c3a14. */
-/* Supplied declaration required: FUN_002c4f8c. */
-/* Supplied declaration required: FUN_002c501c. */
-extern int FUN_002c5210(void);
+extern s32 FUN_002c5210(void);
+extern s32 asdProcessSetCommandListRecording(s32 arg);
+extern s32 FUN_002c3a14(u32 scene);
+extern u32 FUN_002c501c(void);
+extern s32 FUN_002c4f8c(u32 scene, u32 value);
 
-
-unsigned int FUN_00103650(void)
-
+/* Per-frame hook: opens the pending screen once both flags allow it, then passes the scene the pending value, if any; always returns 0. */
+u32 FUN_00103650(void)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (((DAT_00446db0 == '\0') && (temp_v0 = FUN_002c5210(), temp_v0 == 1)) && (DAT_00446db1 != '\0')) {
-    FUN_0010d230(0);
-  }
-  FUN_002c3a14(g_titleScene);
-  temp_v0 = FUN_002c501c();
-  if (temp_v0 != 0) {
-    temp_v1 = FUN_002c501c();
-    FUN_002c4f8c(g_titleScene,temp_v1);
-  }
-  return 0;
+    if (g_titleFlags.first == 0 && FUN_002c5210() == 1 && g_titleFlags.second != 0) {
+        asdProcessSetCommandListRecording(0);
+    }
+    FUN_002c3a14(g_titleScene);
+    if (FUN_002c501c() != 0) {
+        FUN_002c4f8c(g_titleScene, FUN_002c501c());
+    }
+    return 0;
 }
 
-} /* extern "C" */
+}

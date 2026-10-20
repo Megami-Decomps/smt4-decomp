@@ -26,7 +26,7 @@ extern int DAT_0057f58c; /* 0x57f58c */
 extern unsigned int *asdListBoxGetIntValuePtr(unsigned int);
 extern int FUN_003216d0(void);
 /* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
-extern int FUN_0032c430(unsigned int, unsigned int);
+extern int listBoxItemHasOwner(unsigned int, unsigned int);
 extern unsigned int FUN_003874fc(unsigned int);
 
 
@@ -45,7 +45,7 @@ void FUN_004d3360(int param_1,int param_2)
   puVar6 = (unsigned int *)(param_2 + 0x45a8);
   switch(temp_v0) {
   case 0:
-    temp_v1 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
     if (temp_v1 == 0) {
       temp_v2 = *puVar6 & ~DAT_00571690;
       temp_v3 = *(unsigned int *)(param_2 + 0x45ac) & ~DAT_00571694;
@@ -57,7 +57,7 @@ void FUN_004d3360(int param_1,int param_2)
     *puVar6 = *puVar6 | DAT_00571690;
     break;
   case 1:
-    temp_v1 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
     if (temp_v1 != 0) {
       temp_v2 = *puVar6 | DAT_00571698;
       temp_v3 = *(unsigned int *)(param_2 + 0x45ac) | DAT_0057169c;
@@ -88,7 +88,7 @@ void FUN_004d3360(int param_1,int param_2)
     *(unsigned int *)(param_2 + 0x2364) = *puVar2;
     return;
   case 3:
-    temp_v1 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
     temp_v2 = DAT_005716c0;
     if (temp_v1 != 0) {
       *(unsigned int *)(param_2 + 0x45ac) = *(unsigned int *)(param_2 + 0x45ac) | DAT_005716c4;
@@ -101,7 +101,7 @@ void FUN_004d3360(int param_1,int param_2)
     *(unsigned int *)(param_2 + 0x45ac) = temp_v3;
     return;
   case 4:
-    temp_v1 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
     if (temp_v1 == 0) {
       temp_v2 = ~DAT_005716d4;
       *puVar6 = *puVar6 & ~DAT_005716d0;

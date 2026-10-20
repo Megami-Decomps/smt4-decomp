@@ -19,7 +19,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern long long rt_lmul(int, int, int, int);
-extern int FUN_002e49dc(int, int);
+extern int digitValueInBase(int, int);
 
 
 int FUN_00100e62(unsigned int param_1,unsigned int param_2,int param_3,unsigned int *param_4)
@@ -107,7 +107,7 @@ LAB_00100f4e:
   while( 1 ) {
     temp_v9 = (int)((unsigned long long)temp_v7 >> 0x20);
     temp_v8 = (int)temp_v7;
-    if ((temp_v6 < 1) || (temp_v2 = FUN_002e49dc(temp_v10,temp_v11), temp_v2 < 0)) break;
+    if ((temp_v6 < 1) || (temp_v2 = digitValueInBase(temp_v10,temp_v11), temp_v2 < 0)) break;
     temp_v6 = temp_v6 - 1;
     temp_v7 = rt_lmul(temp_v8,temp_v9,temp_v11,temp_v11 >> 0x1f);
     temp_v0 = temp_v0 + 1;

@@ -1,87 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00105394` (_code @ 0x105394, 0xdc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation of the temporaries only (retail rotates r2/r3/ip differently in the tick test and in each countdown loop); control flow and instructions are otherwise identical. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0010b580(void);
+typedef struct MapBlock {
+    /* 0x000 */ u8 unk000[0xBD8];
+    /* 0xBD8 */ u8 cooldownA[64];    /* 0xFF means no expiry */
+    /* 0xC18 */ u8 cooldownB[128];
+    /* 0xC98 */ u8 unkC98[0xC4];
+    /* 0xD5C */ s16 cooldownC[16];
+    /* 0xD7C */ u8 unkD7C[0xE4];
+    /* 0xE60 */ s32 cooldownD[48];
+} MapBlock;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+typedef struct GameState {
+    /* 0x000 */ u8 unk000[0x220];
+    /* 0x220 */ s32 tick;
+} GameState;
 
-extern unsigned char g_gameState; /* 0x49f91c */
+extern GameState g_gameState; /* 0x49f91c */
 
-/* Supplied declaration required: FUN_0010b580. */
-extern int gameGetMapBlock(void);
+extern MapBlock *gameGetMapBlock(void);
+extern int FUN_0010b580(void);
 
-
+/* Per-frame tick of the map block's countdowns; every 0x709 frames the slower tables count down as well. */
 void FUN_00105394(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  short temp_v1;
-  int temp_v2;
-  char *pcVar4;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar8;
-  
-  temp_v2 = gameGetMapBlock();
-  (*(int *)((unsigned char *)&g_gameState + 0x220)) = (*(int *)((unsigned char *)&g_gameState + 0x220)) + 1;
-  if ((*(int *)((unsigned char *)&g_gameState + 0x220)) >= 0x709) {
-    (*(int *)((unsigned char *)&g_gameState + 0x220)) = 0;
-    temp_v3 = 0x40;
-    pcVar4 = (char *)(temp_v2 + 0xbd8);
-    do {
-      temp_v0 = *pcVar4;
-      if (temp_v0 != '\0' && temp_v0 != -1) {
-        *pcVar4 = temp_v0 - '\x01';
-      }
-      temp_v3 = temp_v3 - 1;
-      pcVar4 = pcVar4 + 1;
-    } while (temp_v3 != 0);
-    temp_v3 = 0;
-    temp_v5 = 0x80;
-    do {
-      temp_v4 = temp_v2 + temp_v3;
-      temp_v3 = temp_v3 + 1;
-      pcVar4 = (char *)(temp_v4 + 0xc18);
-      temp_v0 = *pcVar4;
-      if (temp_v0 != '\0') {
-        *pcVar4 = temp_v0 - '\x01';
-      }
-      temp_v5 = temp_v5 - 1;
-    } while (temp_v5 != 0);
-    temp_v3 = 0;
-    temp_v5 = 0x10;
-    do {
-      temp_v4 = temp_v2 + temp_v3 * 2;
-      temp_v3 = temp_v3 + 1;
-      temp_v1 = *(short *)(temp_v4 + 0xd5c);
-      if (0 < temp_v1) {
-        *(short *)(temp_v4 + 0xd5c) = temp_v1 - 1;
-      }
-      temp_v5 = temp_v5 - 1;
-    } while (temp_v5 != 0);
-  }
-  temp_v3 = 0;
-  temp_v5 = 0x30;
-  do {
-    temp_v4 = temp_v3 * 4;
-    temp_v3 = temp_v3 + 1;
-    piVar8 = (int *)(temp_v2 + temp_v4 + 0xe60);
-    temp_v4 = *piVar8;
-    if (0 < temp_v4) {
-      *piVar8 = temp_v4 - 1;
+    MapBlock *block = gameGetMapBlock();
+    int i;
+
+    g_gameState.tick = g_gameState.tick + 1;
+    if (g_gameState.tick > 0x708) {
+        g_gameState.tick = 0;
+        for (i = 0; i < 64; i++) {
+            if (block->cooldownA[i] != 0 && block->cooldownA[i] != 0xFF) {
+                block->cooldownA[i]--;
+            }
+        }
+        for (i = 0; i < 128; i++) {
+            if (block->cooldownB[i] != 0) {
+                block->cooldownB[i]--;
+            }
+        }
+        for (i = 0; i < 16; i++) {
+            if (block->cooldownC[i] > 0) {
+                block->cooldownC[i]--;
+            }
+        }
     }
-    temp_v5 = temp_v5 - 1;
-  } while (temp_v5 != 0);
-  FUN_0010b580();
-  return;
+    for (i = 0; i < 48; i++) {
+        if (block->cooldownD[i] > 0) {
+            block->cooldownD[i]--;
+        }
+    }
+    FUN_0010b580();
 }
 
 } /* extern "C" */

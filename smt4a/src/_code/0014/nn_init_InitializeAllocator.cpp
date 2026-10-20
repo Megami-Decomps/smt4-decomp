@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00159110(unsigned int *, unsigned int, unsigned int, int, unsigned int);
+int heapOwnerCreate(unsigned int *, unsigned int, unsigned int, int, unsigned int);
 int addressBlockInit(unsigned char *, unsigned int);
 int nn_os_CriticalSection_Initialize(unsigned int);
 
@@ -24,7 +24,7 @@ extern unsigned char uRam0062d61a; /* 0x62d61a */
 extern unsigned char DAT_0062d61c; /* 0x62d61c */
 extern int DAT_0062d624; /* 0x62d624 */
 
-/* Supplied declaration required: FUN_00159110. */
+/* Supplied declaration required: heapOwnerCreate. */
 /* Supplied declaration required: addressBlockInit. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 
@@ -57,7 +57,7 @@ void nn_init_InitializeAllocator(unsigned int param_1)
     *(unsigned int *)(temp_v0 + 0x60) = 0;
     *(unsigned int *)(temp_v0 + 100) = 0xffffffff;
     *puVar3 = (unsigned int)&DAT_00558414;
-    FUN_00159110(puVar3,temp_v0 + 0x68,(temp_v1 + param_1) - (temp_v0 + 0x68),0,unaff_r4);
+    heapOwnerCreate(puVar3,temp_v0 + 0x68,(temp_v1 + param_1) - (temp_v0 + 0x68),0,unaff_r4);
     nn_os_CriticalSection_Initialize(temp_v0 + 0x5c);
   }
   puRam005893bc = puVar3;

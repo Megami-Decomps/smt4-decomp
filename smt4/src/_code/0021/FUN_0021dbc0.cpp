@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0024f24c(...);
-int FUN_0025663c(void);
+int dataTable29GetEntryWithAoc(void);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_3: 15 slot(s), 60 byte(s) */
@@ -31,7 +31,7 @@ extern unsigned char LAB_0021dea0; /* 0x21dea0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0024f24c. */
-/* Supplied declaration required: FUN_0025663c. */
+/* Supplied declaration required: dataTable29GetEntryWithAoc. */
 extern int gameFlagIsSet(void);
 extern int randNextInRange(unsigned int);
 extern int gameGetMapBlock(void);
@@ -59,7 +59,7 @@ void FUN_0021dbc0(int param_1,int param_2,int param_3)
         if (*(char *)(temp_v0 + temp_v2 + 0xde4) == '\x02') {
           temp_v3 = (int)*(char *)(temp_v0 + temp_v2 + 0xdec);
           temp_v1 = temp_v3;
-          FUN_0025663c();
+          dataTable29GetEntryWithAoc();
           VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -79,7 +79,7 @@ void FUN_0021dbc0(int param_1,int param_2,int param_3)
     if (0 < temp_v2) {
       do {
         pcVar2 = pcVar5;
-        FUN_0025663c();
+        dataTable29GetEntryWithAoc();
         if (((*pcVar2 != -1) && (*pcVar2 == param_1)) && (pcVar2[1] == param_2)) {
           temp_v4 = 0;
           if (*(short *)(pcVar2 + 0x10) != 0) {

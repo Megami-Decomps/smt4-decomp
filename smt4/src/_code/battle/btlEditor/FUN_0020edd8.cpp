@@ -1,34 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020edd8` (_code @ 0x20edd8, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003d8e24(int, unsigned int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
 extern int DAT_00435ce8; /* 0x435ce8 */
 
-extern unsigned int jobGetWork(void);
-/* Supplied declaration required: FUN_003d8e24. */
+extern u32 jobGetWork(void);
+extern int FUN_003d8e24(int editor, u32 work);
 
-
-void FUN_0020edd8(void)
-
+/* Passes the job work to the battle editor if one is active; returns its result, or 0 with none. */
+int FUN_0020edd8(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  if (DAT_00435ce8 != 0) {
-    FUN_003d8e24(DAT_00435ce8,temp_v0);
-    return;
-  }
-  return;
+    u32 work = jobGetWork();
+
+    if (DAT_00435ce8 != 0) {
+        return FUN_003d8e24(DAT_00435ce8, work);
+    }
+    return 0;
 }
 
 } /* extern "C" */

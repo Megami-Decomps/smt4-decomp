@@ -9,7 +9,7 @@ int FUN_003e8bb0(unsigned char [4], int, unsigned int);
 int btlResetSlot(int, int, int);
 int FUN_003f2aac(...);
 int FUN_004ab8e4(unsigned int);
-int FUN_004c3c84(int, int, int);
+int btlSlotSetStoreValue(int, int, int);
 int FUN_004c571c(int, int, int, int);
 int FUN_004c6b8c(unsigned int, int);
 int FUN_004f64f4(int);
@@ -52,7 +52,7 @@ extern int btlSlotStateIs4To7(int, unsigned int);
 extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 extern int FUN_004ab8bc(unsigned int);
 /* Supplied declaration required: FUN_004ab8e4. */
-/* Supplied declaration required: FUN_004c3c84. */
+/* Supplied declaration required: btlSlotSetStoreValue. */
 /* Supplied declaration required: FUN_004c571c. */
 /* Supplied declaration required: FUN_004c6b8c. */
 /* Supplied declaration required: FUN_004f64f4. */
@@ -185,7 +185,7 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
         if ((*(unsigned short *)(param_2[10] + 0x110) & 0x10) != 0) {
           FUN_003e8bb0(temp_v7,*param_1,param_2[8]);
           if ((temp_v10 == '\0') || (temp_v2 = FUN_004c6b8c(param_2[8],(int)temp_v9), temp_v2 != 0)) {
-            FUN_004c3c84((int)*(short *)(param_2[9] + 0x6a),0x12,0);
+            btlSlotSetStoreValue((int)*(short *)(param_2[9] + 0x6a),0x12,0);
           }
           else {
             FUN_004c571c((int)*(short *)(param_2[9] + 0x6a),0x12,1,0);

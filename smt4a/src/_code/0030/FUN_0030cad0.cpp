@@ -1,17 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030cad0` (_code @ 0x30cad0, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the +0x10 word before the +0x14 word */
+#include "common.h"
 
 extern "C" {
 
+typedef struct Cursor {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 start;
+    /* 0x14 */ u32 end;
+} Cursor;
 
-unsigned int FUN_0030cad0(int param_1)
-
+/* True when the cursor has reached its end. */
+u32 FUN_0030cad0(Cursor *cursor)
 {
-  if (*(int *)(param_1 + 0x14) == *(int *)(param_1 + 0x10)) {
-    return 1;
-  }
-  return 0;
+    if (cursor->end == cursor->start) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

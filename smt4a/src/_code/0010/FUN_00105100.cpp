@@ -11,7 +11,7 @@ int FUN_0012df0c(unsigned char [8], int *, int *, int *);
 int FUN_00132b14(void);
 int asdOperatorDeleteArray(...);
 int FUN_002e6e34(unsigned char [12], unsigned int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineInstantiationContextGetCurrent(void);
 int FUN_002ea734(int *);
 int onlineMutexLockIfNeeded(void);
@@ -39,7 +39,7 @@ extern int FUN_0011c900(int);
 /* Supplied declaration required: FUN_00132b14. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int vectorDestroyWords(int);
 /* Supplied declaration required: onlineInstantiationContextGetCurrent. */
 extern unsigned int onlineGetActiveLock(void);
@@ -91,7 +91,7 @@ void FUN_00105100(unsigned int *param_1)
   }
   onlineMutexUnlockIfNeeded(param_1 + 0x3e);
   FUN_002eb46c(param_1,1);
-  FUN_002e6e5c(temp_v4);
+  _ZN9Obj55b28cD1Ev(temp_v4);
   temp_v1 = FUN_002eb624(param_1 + 0x3e);
   temp_v1 = vectorDestroyWords(temp_v1 - 0x14);
   temp_v1 = temp_v1 - 0x1c;

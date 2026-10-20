@@ -13,7 +13,7 @@ int dataTable1bOr1cGetRecord(...);
 int FUN_002b7bca(...);
 int rt_memclr(...);
 int memClear(...);
-int FUN_0032aa84(...);
+int uiQuestSortListByEntryKind(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -45,7 +45,7 @@ extern int FUN_0029ee54(int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_0032aa84. */
+/* Supplied declaration required: uiQuestSortListByEntryKind. */
 
 
 void FUN_00189c24(void)
@@ -161,7 +161,7 @@ LAB_00189e6c:
         temp_v11[0] = 1;
         temp_v11[1] = 1;
         FUN_0029f848(temp_v2 + 0x660,temp_v8,10,1);
-        FUN_0032aa84(0);
+        uiQuestSortListByEntryKind(0);
         temp_v6 = 0;
         if (0 < temp_v9) goto LAB_00189eec;
         goto LAB_00189f2c;

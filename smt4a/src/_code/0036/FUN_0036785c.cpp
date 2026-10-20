@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(int);
 int FUN_001f4908(...);
 int FUN_00246014(void);
-int FUN_002d8af4(void);
+int mapIfOverlayRelease(void);
 int FUN_00313648(...);
 
 int FUN_0013c1ec(...);
@@ -54,7 +54,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_001f4908. */
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_00246014. */
-/* Supplied declaration required: FUN_002d8af4. */
+/* Supplied declaration required: mapIfOverlayRelease. */
 /* Supplied declaration required: FUN_002dae68. */
 extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_002e364c. */
@@ -310,7 +310,7 @@ LAB_00367d2c:
             return;
           }
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-          FUN_002d8af4();
+          mapIfOverlayRelease();
           temp_v0 = 0x12;
           FUN_00313648(temp_v0);
           FUN_002e364c(g_lmapScene + 0x28);
@@ -341,7 +341,7 @@ LAB_00367d2c:
           FUN_00327ee8();
           return;
         }
-        FUN_002d8af4();
+        mapIfOverlayRelease();
         temp_v1 = g_lmapScene;
       }
       temp_v2 = *(int *)(temp_v1 + 4);

@@ -10,7 +10,7 @@ int asdTMTexTableNodeIsLoaded(int, int);
 int asdTMTexTableReleaseNode(int, int);
 int FUN_001acf98(int, int);
 int FUN_001f4908(int, int, int);
-int FUN_00284168(int, int, int, int);
+int ifTouchRegionAdd(int, int, int, int);
 int asdTMTexTableFreeEntry(...);
 int FUN_0037ed38(void);
 int ref208SetPair1C(int);
@@ -30,7 +30,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_001f4908. */
 extern int bgmGetStateById(unsigned int);
-/* Supplied declaration required: FUN_00284168. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 extern int FUN_00341940(unsigned int);
 /* Supplied declaration required: FUN_0037ed38. */
@@ -87,7 +87,7 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
     ref208SetPair1C(1);
     temp_v2 = 0;
     param_1[0x10] = 0;
-    FUN_00284168(0,0,0x140,0xf0);
+    ifTouchRegionAdd(0,0,0x140,0xf0);
     param_1[0x10] = temp_v2;
     temp_v0 = bgmGetStateById(0x100003c);
     if (temp_v0 != 1) {

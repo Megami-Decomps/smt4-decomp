@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0029cc44(...);
 
 int FUN_0019e0c0(...);
-int FUN_0022e740(...);
+int shopSelectEntryStart(...);
 int FUN_0022e818(...);
 int dataTable17Sub0GetRecord(...);
 int FUN_0022fcb8(...);
@@ -30,7 +30,7 @@ extern unsigned char LAB_003a3788; /* 0x3a3788 */
 extern unsigned char LAB_003a3798; /* 0x3a3798 */
 
 /* Supplied declaration required: FUN_0019e0c0. */
-/* Supplied declaration required: FUN_0022e740. */
+/* Supplied declaration required: shopSelectEntryStart. */
 /* Supplied declaration required: FUN_0022e818. */
 /* Supplied declaration required: dataTable17Sub0GetRecord. */
 /* Supplied declaration required: FUN_0022fcb8. */
@@ -41,7 +41,7 @@ extern unsigned char LAB_003a3798; /* 0x3a3798 */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int FUN_00290e78(void);
 extern int FUN_00290e9c(void);
-extern int FUN_00290eb0(void);
+extern int messageWindowIsState1(void);
 /* Supplied declaration required: FUN_00296e90. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002973d8(void);
@@ -81,7 +81,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
     FUN_0019e0c0(param_1[0x5a]);
     *param_1 = *param_1 | 4;
     FUN_0022e818(param_1,0);
-    FUN_0022e740(param_1,0);
+    shopSelectEntryStart(param_1,0);
     FUN_00233240(param_1 + 0xea,1);
     param_1[2] = 1;
     return;
@@ -96,7 +96,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
       temp_v2 = vec2GetXInt(puVar5);
       FUN_00231240(param_1 + 0xe0,temp_v2,temp_v1);
       if (*(char *)((int)param_1 + 0x4de) != '\0') {
-        temp_v3 = FUN_00290eb0();
+        temp_v3 = messageWindowIsState1();
         if (temp_v3 != 0) {
           temp_v3 = FUN_00290e9c();
           temp_v3 = dataTable17Sub0GetRecord(&temp_v4,param_1[temp_v3 + 0x574b] + 4);
@@ -123,7 +123,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
             param_1[0x5758] = 1;
           }
           FUN_0022e818(param_1,0);
-          FUN_0022e740(param_1,0);
+          shopSelectEntryStart(param_1,0);
           param_1[2] = 1;
           return;
         }
@@ -139,7 +139,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
     FUN_00231240(param_1 + 0xe0,temp_v2,temp_v1);
     if (*(char *)((int)param_1 + 0x4de) != '\0') {
       *param_1 = *param_1 & 0xfffff0ff;
-      temp_v3 = FUN_00290eb0();
+      temp_v3 = messageWindowIsState1();
       if (temp_v3 != 0) {
         temp_v3 = FUN_00290e9c();
         temp_v3 = dataTable17Sub0GetRecord(&temp_v4,param_1[temp_v3 + 0x574b]);
@@ -176,7 +176,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
             if ((int)param_1[0x574f] >= 2) {
               puVar5 = param_1 + 0x5759;
               *(unsigned char *)puVar5 = 1;
-              FUN_0022e740(param_1,2);
+              shopSelectEntryStart(param_1,2);
               param_1[2] = 4;
               *(unsigned char *)puVar5 = 0;
               return;
@@ -187,7 +187,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
             if ((int)param_1[0x574f] >= 2) {
               puVar5 = (unsigned int *)((int)param_1 + 0x15d65);
               *(unsigned char *)puVar5 = 1;
-              FUN_0022e740(param_1,1);
+              shopSelectEntryStart(param_1,1);
               param_1[2] = 3;
               *(unsigned char *)puVar5 = 0;
               return;

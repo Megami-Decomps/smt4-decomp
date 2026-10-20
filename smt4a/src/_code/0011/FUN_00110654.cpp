@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00132006(int [2], int, unsigned short [2]);
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002fb344(unsigned char [4], int, unsigned short [2]);
 
 typedef int romwright_code(...);
@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00132006. */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002fb344. */
 extern int wordRefsDiffer_002fb3b6(unsigned char *, unsigned int *);
 
@@ -65,7 +65,7 @@ unsigned int FUN_00110654(int param_1,int *param_2)
     FUN_00132006(temp_v1,param_1,temp_v2);
     *(int **)(temp_v1[0] + 0x14) = param_2;
   }
-  FUN_002e6e5c(temp_v4);
+  _ZN9Obj55b28cD1Ev(temp_v4);
   return 1;
 }
 

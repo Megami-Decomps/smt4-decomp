@@ -24,7 +24,7 @@ int eventTexSetFlag(int);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int FUN_0028784c(unsigned int, int);
-int FUN_0028dc68(int);
+int messageSlotSet(int);
 int FUN_0028dc98(...);
 int scrSetResult(...);
 int FUN_002900d0(void);
@@ -70,7 +70,7 @@ extern int FUN_00250ec0(unsigned int);
 /* Supplied declaration required: FUN_00254e2c. */
 /* Supplied declaration required: FUN_0028784c. */
 extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_0028dc68. */
+/* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: FUN_0028dc98. */
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_0028ed3c. */
@@ -103,7 +103,7 @@ extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002cdf2c. */
 /* Supplied declaration required: bustupCutAnimSetFlag. */
 extern int FUN_002e4464(void);
-extern unsigned int FUN_002f25f0(void);
+extern unsigned int btlTalkBustUpGetId(void);
 extern int FUN_00333a38(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00333af8. */
 /* Supplied declaration required: FUN_00333b74. */
@@ -190,7 +190,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
       bustupCutAnimSetFlag(0);
       temp_v1 = btlTalkBustUpExists();
       if (temp_v1 != 0) {
-        temp_v2 = FUN_002f25f0();
+        temp_v2 = btlTalkBustUpGetId();
         scrWorkSetValue(2,temp_v2);
       }
       else {
@@ -226,7 +226,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     }
     FUN_0029b074();
     FUN_0028dc98(0xffffffff);
-    FUN_0028dc68(0);
+    messageSlotSet(0);
     buttonHelpSetPreset(0x90);
     scrWorkGetValue(3);
     eventTexSetFlag(1);
@@ -237,7 +237,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
       if (temp_v1 == 0) {
         btlTalkBustUpCreate();
       }
-      if ((temp_v3 != 0) && (temp_v4 = FUN_002f25f0(), temp_v4 != temp_v3)) {
+      if ((temp_v3 != 0) && (temp_v4 = btlTalkBustUpGetId(), temp_v4 != temp_v3)) {
         FUN_002954f4(temp_v3 & 0xffff,0);
       }
       btlTalkBustUpSetUnk2F4(1);

@@ -1,36 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f2a44` (_code @ 0x2f2a44, 0x26 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ece58(unsigned int *, unsigned int);
+typedef struct StrHolder {
+    /* 0x0 */ const void *vtbl;
+} StrHolder;
 
-extern unsigned char DAT_0055b22c; /* 0x55b22c */
+extern const u8 DAT_0055b22c[];  /* vtable */
 
-extern int operatorNew(unsigned int);
-extern unsigned int strInit(void);
-/* Supplied declaration required: FUN_002ece58. */
-extern unsigned int *FUN_003022b4(void);
+StrHolder *FUN_003022b4(StrHolder *self);
+void *operatorNew(u32 size);
+void *strInit(void *memory);
+int FUN_002ece58(StrHolder *holder, void *str);
 
-
-unsigned int * FUN_002f2a44(void)
-
+/* Constructor: base-initialises the holder, stores its vtable and gives it a freshly allocated string. */
+StrHolder *FUN_002f2a44(StrHolder *self)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  puVar1 = (unsigned int *)FUN_003022b4();
-  *puVar1 = (unsigned int)&DAT_0055b22c;
-  temp_v0 = operatorNew(0x20);
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    temp_v1 = strInit();
-  }
-  FUN_002ece58(puVar1,temp_v1);
-  return puVar1;
+    StrHolder *holder = FUN_003022b4(self);
+    void *memory;
+
+    holder->vtbl = DAT_0055b22c;
+    memory = operatorNew(32);
+    if (memory != NULL) {
+        memory = strInit(memory);
+    }
+    FUN_002ece58(holder, memory);
+    return holder;
 }
 
 } /* extern "C" */

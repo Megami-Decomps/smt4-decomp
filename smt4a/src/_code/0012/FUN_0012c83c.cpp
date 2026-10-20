@@ -7,8 +7,8 @@ extern "C" {
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(int *);
-int FUN_0030c6b4(unsigned int *, unsigned int);
-int FUN_0030c6f0(int, unsigned int);
+int vectorAt4(unsigned int *, unsigned int);
+int vectorAt24(int, unsigned int);
 int FUN_0030c720(int, unsigned int *);
 int FUN_0030c846(int, unsigned int, unsigned int, unsigned int);
 
@@ -31,8 +31,8 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int,
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
 extern int FUN_002fd38c(unsigned int *);
-/* Supplied declaration required: FUN_0030c6b4. */
-/* Supplied declaration required: FUN_0030c6f0. */
+/* Supplied declaration required: vectorAt4. */
+/* Supplied declaration required: vectorAt24. */
 /* Supplied declaration required: FUN_0030c720. */
 extern int FUN_0030c7f4(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_0030c846. */
@@ -62,7 +62,7 @@ void FUN_0012c83c(int param_1)
       if (*(char *)(param_1 + 0x90) == '\x02') {
 LAB_0012c894:
         temp_v1 = param_1 + 0x110;
-        FUN_0030c6f0(temp_v1,*(unsigned int *)(param_1 + 0x3f4));
+        vectorAt24(temp_v1,*(unsigned int *)(param_1 + 0x3f4));
         FUN_0030c846(param_1 + 0x280,temp_v2,*(unsigned int *)(temp_v1 + 8),
                      *(unsigned int *)(temp_v1 + 0xc));
         temp_v6 = *(int **)(param_1 + 0x3ec);
@@ -73,7 +73,7 @@ LAB_0012c894:
         }
         else {
           puVar3 = (unsigned int *)(param_1 + 0x3e0);
-          FUN_0030c6b4(puVar3,*(unsigned int *)(param_1 + 0x3f0));
+          vectorAt4(puVar3,*(unsigned int *)(param_1 + 0x3f0));
           temp_v3 = *puVar3;
         }
         (**(romwright_code **)(*temp_v6 + 0xc))(temp_v6,param_1 + 0x280,temp_v3);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001517b4(void);
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int ifTouchRegionRemove(void);
 int FUN_00169548(int);
 int FUN_0016ccb4(int);
@@ -13,7 +13,7 @@ int FUN_001b57a8(unsigned int *, int);
 int FUN_001d0fcc(unsigned char [4], unsigned int);
 int FUN_0021c118(int, int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int FUN_002844e4(void);
+int msgWindowReset(void);
 int FUN_0034913c(void);
 int FUN_0038afe8(void);
 int FUN_00477d10(...);
@@ -32,7 +32,7 @@ extern int g_aocDisplay; /* 0x57027c */
 extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_00169548. */
 /* Supplied declaration required: FUN_0016ccb4. */
@@ -42,7 +42,7 @@ extern unsigned int *FUN_001b5acc(unsigned char *);
 /* Supplied declaration required: FUN_0021c118. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002844e4. */
+/* Supplied declaration required: msgWindowReset. */
 extern int FUN_002a4b74(void);
 extern int FUN_002e19f8(void);
 /* Supplied declaration required: FUN_0034913c. */
@@ -149,8 +149,8 @@ void FUN_0047b224(unsigned int *param_1)
     if (temp_v1 == 0) {
       return;
     }
-    FUN_001641b4(0x100020e);
-    FUN_002844e4();
+    eventQueueAddUniqueIfValid(0x100020e);
+    msgWindowReset();
     FUN_0034913c();
     FUN_0038afe8();
     ifTouchRegionRemove();

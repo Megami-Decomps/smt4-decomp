@@ -20,7 +20,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_00190fc8. */
-extern int FUN_00194784(int, unsigned int, unsigned int *);
+extern int soundInfoOwnerReadInfo(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00194c68. */
 extern unsigned int FUN_001a8e14(int);
 extern int nw_snd_internal_WaveSoundFileReader_ReadNoteInfo(unsigned char *, unsigned int *, unsigned int, unsigned int);
@@ -49,7 +49,7 @@ void nw_snd_internal_SoundArchiveLoader_IsWaveSoundDataLoaded
     temp_v5 = 0;
     temp_v4 = 0;
     temp_v6 = 0;
-    temp_v2 = FUN_00194784(param_1[1],param_2,(unsigned int *)&temp_v3);
+    temp_v2 = soundInfoOwnerReadInfo(param_1[1],param_2,(unsigned int *)&temp_v3);
     temp_v0 = temp_v3;
     if (temp_v2 != 0) {
       FUN_00190fc8(temp_v10,temp_v1);

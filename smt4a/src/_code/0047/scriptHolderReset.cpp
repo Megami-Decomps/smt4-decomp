@@ -1,35 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scriptHolderReset` (_code @ 0x47e38c, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(void);
-int scrScriptProcessDestroy(void);
+typedef struct ScriptHolderReset {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 state;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0C */ void *buf0C;
+    /* 0x10 */ void *buf10;
+    /* 0x14 */ u32 proc14;
+} ScriptHolderReset;
 
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
+extern void asdMemFree(void *ptr);
+extern void scrScriptProcessDestroy(u32 process);
 
-
-void scriptHolderReset(unsigned int *param_1)
-
+/* Resets the holder to state 0x10, freeing its two buffers and its script process. */
+void scriptHolderReset(ScriptHolderReset *holder)
 {
-/* irregular: 2 native warning(s); review required */
-  param_1[1] = 0x10;
-  *param_1 = 0;
-  if (param_1[3] != 0) {
-    asdMemFree();
-    param_1[3] = 0;
-  }
-  if (param_1[4] != 0) {
-    asdMemFree();
-    param_1[4] = 0;
-  }
-  if (param_1[5] != 0) {
-    scrScriptProcessDestroy();
-    param_1[5] = 0;
-  }
-  return;
+    holder->state = 0x10;
+    holder->unk00 = 0;
+    if (holder->buf0C != NULL) {
+        asdMemFree(holder->buf0C);
+        holder->buf0C = NULL;
+    }
+    if (holder->buf10 != NULL) {
+        asdMemFree(holder->buf10);
+        holder->buf10 = NULL;
+    }
+    if (holder->proc14 != 0) {
+        scrScriptProcessDestroy(holder->proc14);
+        holder->proc14 = 0;
+    }
 }
 
 } /* extern "C" */

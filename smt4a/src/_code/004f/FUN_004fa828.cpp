@@ -42,7 +42,7 @@ extern int FUN_00100d60(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002c1c88. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_00347664(void);
+extern int gameObjectFlagIsSet(void);
 extern int findRecordByKey(int);
 /* Supplied declaration required: FUN_003e7840. */
 /* Supplied declaration required: FUN_003fd7b4. */
@@ -106,7 +106,7 @@ unsigned int FUN_004fa828(int param_1,unsigned int param_2,unsigned int param_3,
   if ((*(unsigned int *)(param_1 + 0x339c) & 8) != 0) {
     FUN_002c1c88(temp_v10);
     FUN_003e7840(param_2);
-    temp_v4 = FUN_00347664();
+    temp_v4 = gameObjectFlagIsSet();
     if (temp_v4 == 0) {
       *(unsigned int *)(param_1 + 0x339c) = *(unsigned int *)(param_1 + 0x339c) & 0xfffffff7;
     }

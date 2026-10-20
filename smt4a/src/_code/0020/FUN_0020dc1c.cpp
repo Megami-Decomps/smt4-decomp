@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001517b4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
 int FUN_0020b660(...);
 int FUN_0021b274(...);
@@ -26,7 +26,7 @@ int FUN_001834a4(...);
 int FUN_00203b40(int, int, int, int);
 int FUN_00215bd0(void);
 int FUN_0026fc00(...);
-int FUN_00284168(int, int, int, int);
+int ifTouchRegionAdd(int, int, int, int);
 int FUN_002a4860(...);
 int FUN_002a7324(...);
 int FUN_002c8538(int);
@@ -69,7 +69,7 @@ extern unsigned int DAT_0057f10c; /* 0x57f10c */
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int FUN_001643a0(void);
 /* Supplied declaration required: sysPlaySe. */
@@ -87,7 +87,7 @@ extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023f604. */
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_0026fc00. */
-/* Supplied declaration required: FUN_00284168. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: FUN_002a4860. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a7324. */
@@ -170,7 +170,7 @@ void FUN_0020dc1c(void)
           do {
             temp_v3 = FUN_001834a4(0x12,temp_v6 + 0x477);
             temp_v1 = (int)*(short *)(temp_v3 + 8);
-            FUN_00284168(temp_v1,(int)(short)(*(short *)(temp_v3 + 10) + (short)DAT_0057f10c),
+            ifTouchRegionAdd(temp_v1,(int)(short)(*(short *)(temp_v3 + 10) + (short)DAT_0057f10c),
                          (int)**(short **)(temp_v3 + 0xc),(int)(*(short **)(temp_v3 + 0xc))[1]);
             *(short *)(temp_v4 + temp_v6 * 2 + 0x1b3e) = (short)temp_v1;
             *(char *)(temp_v4 + 0x1b6c) = *(char *)(temp_v4 + 0x1b6c) + '\x01';
@@ -296,7 +296,7 @@ LAB_0020de28:
           temp_v6 = 1;
           FUN_001517b4();
           if (temp_v6 != 0) {
-            FUN_001641b4(0x100020f);
+            eventQueueAddUniqueIfValid(0x100020f);
             FUN_0026fc00(2,3,0xffffffff,0);
             FUN_0022e774();
             *(unsigned int *)(temp_v4 + 0x20) = 3;
@@ -310,7 +310,7 @@ LAB_0020de28:
         if (temp_v3 == 0) {
           return;
         }
-        FUN_001641b4(0x100020e);
+        eventQueueAddUniqueIfValid(0x100020e);
         FUN_003d2150(0x10000cc);
         temp_v6 = temp_v4 + (temp_v6 + temp_v5) * 4;
         FUN_004803e4(*(unsigned int *)(temp_v6 + 0x3338));
@@ -346,7 +346,7 @@ LAB_0020de28:
         }
         return;
       }
-      FUN_001641b4(0x100020d);
+      eventQueueAddUniqueIfValid(0x100020d);
       temp_v6 = FUN_002a4860(temp_v3);
       temp_v5 = FUN_002a4894(temp_v3);
       temp_v3 = *(int *)(temp_v4 + (temp_v6 + temp_v5) * 4 + 0x3338);

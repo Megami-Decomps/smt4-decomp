@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, double);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
-int FUN_0016c560(...);
+int skinObjectUpdateMatrices(...);
 int FUN_0018291c(...);
 int camSetMatrixA(...);
 int mtx44Copy(...);
@@ -44,7 +44,7 @@ extern float DAT_0064c0c0; /* 0x64c0c0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_0018291c. */
 extern unsigned int asdTMTexTableGetNode(unsigned int, unsigned int);
 /* Supplied declaration required: camSetMatrixA. */
@@ -340,7 +340,7 @@ void FUN_0046ed8c(unsigned int param_1,unsigned int param_2,unsigned int param_3
         uStack_80 = temp_v8;
         uStack_7c = temp_v8;
         FUN_0018291c(&uStack_b8,&uStack_a8,&uStack_98,&uStack_88,0,1);
-        FUN_0016c560(g_renderCtx);
+        skinObjectUpdateMatrices(g_renderCtx);
         renderCtxResetColorScale(g_renderCtx);
       }
     }

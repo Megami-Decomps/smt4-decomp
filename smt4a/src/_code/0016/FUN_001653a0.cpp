@@ -1,49 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001653a0` (_code @ 0x1653a0, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
+typedef struct Vertex {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+    /* 0x08 */ f32 z;
+    /* 0x0C */ f32 w;
+    /* 0x10 */ s32 color;
+} Vertex; /* 0x14 */
 
-extern unsigned char DAT_005b4028; /* 0x5b4028 */
+#define VERTEX_BATCH 256
 
+/* A batch of vertices collected until VERTEX_BATCH are queued, then submitted at once. */
+typedef struct VertexBatch {
+    /* 0x0000 */ u8 unk0000[0x10];
+    /* 0x0010 */ Vertex vertices[VERTEX_BATCH];
+    /* 0x1410 */ u32 count;
+} VertexBatch;
 
-void FUN_001653a0(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
+typedef struct Renderer {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ void (*drawPoint)(s32 x, s32 y, s32 z, s32 w, s32 color);
+    /* 0x2C */ u8 unk2C[4];
+    /* 0x30 */ void (*drawBatch)(Vertex *vertices, s32 count);
+} Renderer;
 
+typedef struct RenderGlobals {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Renderer *renderer;
+} RenderGlobals;
+
+extern RenderGlobals DAT_005b4028;
+
+/* Queues one vertex into the batch (flushing a full batch to the renderer), or, without a batch or
+ * batch callback, draws it immediately with its coordinates truncated to integers. */
+void FUN_001653a0(VertexBatch *batch, s32 color, f32 x, f32 y, f32 z, f32 w)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3; 4 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  float in_s0;
-  float in_s1;
-  float in_s2;
-  float in_s3;
-  
-  if (*(int *)((*(int *)((unsigned char *)&DAT_005b4028 + 0x8)) + 0x30) != 0 && param_1 != 0) {
-    puVar3 = (unsigned int *)(param_1 + 0x1410);
-    *(float *)(param_1 + *puVar3 * 0x14 + 0x10) = in_s0;
-    *(float *)(param_1 + *puVar3 * 0x14 + 0x14) = in_s1;
-    *(float *)(param_1 + *puVar3 * 0x14 + 0x18) = in_s2;
-    *(float *)(param_1 + *puVar3 * 0x14 + 0x1c) = in_s3;
-    temp_v1 = param_1 + *puVar3 * 0x14;
-    *(unsigned int *)(temp_v1 + 0x20) = param_2;
-    temp_v0 = *puVar3;
-    *puVar3 = temp_v0 + 1;
-    if (temp_v0 + 1 >= 0x100) {
-      (**(romwright_code **)((*(int *)((unsigned char *)&DAT_005b4028 + 0x8)) + 0x30))
-                (param_1 + 0x10,0x100,*(romwright_code **)((*(int *)((unsigned char *)&DAT_005b4028 + 0x8)) + 0x30),temp_v1,param_4);
-      *puVar3 = 0;
+    if (DAT_005b4028.renderer->drawBatch != NULL && batch != NULL) {
+        batch->vertices[batch->count].x = x;
+        batch->vertices[batch->count].y = y;
+        batch->vertices[batch->count].z = z;
+        batch->vertices[batch->count].w = w;
+        batch->vertices[batch->count].color = color;
+        batch->count++;
+        if (batch->count >= VERTEX_BATCH) {
+            DAT_005b4028.renderer->drawBatch(batch->vertices, VERTEX_BATCH);
+            batch->count = 0;
+        }
+        return;
     }
-    return;
-  }
-  (**(romwright_code **)((*(int *)((unsigned char *)&DAT_005b4028 + 0x8)) + 0x28))((int)in_s0,(int)in_s1,(int)in_s2,(int)in_s3,param_2);
-  return;
+    DAT_005b4028.renderer->drawPoint((s32)x, (s32)y, (s32)z, (s32)w, color);
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0013ddf0(void);
 int FUN_00147f08(unsigned char *);
-int FUN_0015e068(int, unsigned char *);
+int queueRequesterNode(int, unsigned char *);
 int asdMemoryAlloc(int, int, int, unsigned int);
 int nw_snd_FxDelay_AssignWorkBuffer(unsigned char *, unsigned int, unsigned int);
 
@@ -24,7 +24,7 @@ extern unsigned char DAT_00619648; /* 0x619648 */
 
 /* Supplied declaration required: FUN_0013ddf0. */
 /* Supplied declaration required: FUN_00147f08. */
-/* Supplied declaration required: FUN_0015e068. */
+/* Supplied declaration required: queueRequesterNode. */
 /* Supplied declaration required: asdMemoryAlloc. */
 extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: nw_snd_FxDelay_AssignWorkBuffer. */
@@ -51,7 +51,7 @@ void FUN_00138114(void)
     asdMemoryAlloc(0x10000,0x100,0,temp_v1);
     g_soundEffectBuffers = temp_v2;
     nw_snd_FxDelay_AssignWorkBuffer(&DAT_006195dc,temp_v2,temp_v1);
-    FUN_0015e068(0,&DAT_006195dc);
+    queueRequesterNode(0,&DAT_006195dc);
   }
   FUN_0013ddf0();
   return;

@@ -3,14 +3,14 @@
 extern "C" {
 
 void FUN_00124282(u32 a, u32 b);
-u32 constructObj0055affc(void);
+u32 _ZN9Obj55aff4C1Ev(void);
 
-/* Calls FUN_00124282(b, constructObj0055affc()). */
+/* Calls FUN_00124282(b, _ZN9Obj55aff4C1Ev()). */
 void FUN_002fa794(u32 unused, u32 b)
 {
     u32 value;
 
-    value = constructObj0055affc();
+    value = _ZN9Obj55aff4C1Ev();
     FUN_00124282(b, value);
 }
 

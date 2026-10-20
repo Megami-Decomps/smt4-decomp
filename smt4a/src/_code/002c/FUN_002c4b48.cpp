@@ -15,7 +15,7 @@ int FUN_001ad9b4(void);
 int FUN_00237898(...);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
-int FUN_002852f0(int);
+int messageSlotSet(int);
 int FUN_002c76c0(...);
 int libc_strcpy(unsigned int [32], unsigned int);
 int sysMemClear(unsigned int [32], int);
@@ -45,7 +45,7 @@ extern int gameGetSlotTable(void);
 extern int FUN_0026272c(void);
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
-/* Supplied declaration required: FUN_002852f0. */
+/* Supplied declaration required: messageSlotSet. */
 extern int FUN_002a4b74(void);
 extern int FUN_002ba85c(void);
 /* Supplied declaration required: FUN_002c76c0. */
@@ -88,7 +88,7 @@ unsigned int FUN_002c4b48(void)
   temp_v3 = QuestCenter_GetActiveEntry();
   if (temp_v3 == 0) {
     FUN_002c76c0(0xffffffff);
-    FUN_002852f0(0);
+    messageSlotSet(0);
     return 1;
   }
   temp_v3 = scrGetCommandFrame();
@@ -104,7 +104,7 @@ unsigned int FUN_002c4b48(void)
   temp_v3 = scrWorkGetValue(0);
   if (temp_v3 == 100) {
     FUN_002c76c0(0xffffffff);
-    FUN_002852f0(0);
+    messageSlotSet(0);
     return 1;
   }
   temp_v13 = FUN_002ba85c();

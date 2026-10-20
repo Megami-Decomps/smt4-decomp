@@ -16,7 +16,7 @@ int FUN_004e62b4(...);
 
 int ARM_common_memcpy4_9(...);
 int FUN_001568f8(...);
-int FUN_004c3c84(...);
+int btlSlotSetStoreValue(...);
 int FUN_004c3cb0(...);
 int FUN_004c518c(void);
 int FUN_004c53fc(...);
@@ -258,7 +258,7 @@ extern int FUN_003eca48(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_004c2ca8. */
 /* Supplied declaration required: FUN_004c34e0. */
 /* Supplied declaration required: FUN_004c3a98. */
-/* Supplied declaration required: FUN_004c3c84. */
+/* Supplied declaration required: btlSlotSetStoreValue. */
 /* Supplied declaration required: FUN_004c3cb0. */
 /* Supplied declaration required: FUN_004c3d78. */
 /* Supplied declaration required: FUN_004c4128. */
@@ -285,7 +285,7 @@ extern int FUN_004c6b8c(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_004e699c. */
 extern int FUN_004e83ac(unsigned int *, unsigned int *, int);
 extern int btlUnitGet(unsigned int *);
-extern int FUN_004f5d2c(int);
+extern int btlUnitGetSkillValue(int);
 /* Supplied declaration required: btlEffectFindSlotId. */
 extern int FUN_004f6478(int);
 /* Supplied declaration required: resolveBattleValue. */
@@ -663,7 +663,7 @@ LAB_004e2728:
       else {
         temp_v18 = 0;
       }
-      temp_v8 = FUN_004f5d2c(DAT_00573808);
+      temp_v8 = btlUnitGetSkillValue(DAT_00573808);
       temp_v9 = FUN_004f6478(DAT_00573808);
       FUN_004fe764(temp_v9 + temp_v8 * param_11 + temp_v12,param_2,
                    *(int *)(*param_1 + 0x1ed4) + temp_v5 * 0x1d0,0,temp_v18);
@@ -831,7 +831,7 @@ LAB_004e2ab0:
     if (!(temp_v107 == 1 || temp_v107 == 2)) {
       if ((temp_v107 == 3) && (temp_v81 < 0x6d)) {
         temp_v5 = FUN_004f9ae4(DAT_00573808,1);
-        temp_v8 = FUN_004f5d2c(DAT_00573808);
+        temp_v8 = btlUnitGetSkillValue(DAT_00573808);
         temp_v21 = (unsigned int *)(temp_v8 * (param_11 + temp_v52));
         FUN_004c571c(temp_v81,1,1,0);
         temp_v5 = temp_v5 + (int)temp_v21;
@@ -847,7 +847,7 @@ LAB_004e2ab0:
     else if (temp_v81 < 0x6d) {
       temp_v5 = FUN_004f6478(DAT_00573808);
       if (temp_v5 >= 0) {
-        temp_v5 = FUN_004f5d2c(DAT_00573808);
+        temp_v5 = btlUnitGetSkillValue(DAT_00573808);
         temp_v5 = temp_v5 * (param_11 + temp_v52);
         temp_v8 = FUN_004f6478(DAT_00573808);
         FUN_004fe764(temp_v8 + temp_v5 + temp_v12,param_2,*(int *)(*param_1 + 0x1ed4) + temp_v102 * 0x10);
@@ -897,10 +897,10 @@ LAB_004e30c4:
         temp_v90 = 1;
       }
     }
-    temp_v85 = FUN_004f5d2c(DAT_00573808);
+    temp_v85 = btlUnitGetSkillValue(DAT_00573808);
     temp_v85 = temp_v85 * (temp_v52 + param_11);
     if (param_2[0x166] == 1) {
-      temp_v85 = FUN_004f5d2c(DAT_00573808);
+      temp_v85 = btlUnitGetSkillValue(DAT_00573808);
       temp_v85 = temp_v85 + *(int *)(*(int *)(*param_1 + 0x1ed4) + temp_v104);
     }
     temp_v5 = FUN_003e8430(*param_1);
@@ -1313,7 +1313,7 @@ LAB_004e34b8:
       resolveBattleValue(DAT_00573808,temp_v100);
       FUN_004fec2c(temp_v5 + temp_v106 + temp_v12,param_2,0x46,temp_v60,&temp_v23,1);
       temp_v18 = FUN_004c53fc(0x17);
-      FUN_004c3c84(param_8,0x17,temp_v18);
+      btlSlotSetStoreValue(param_8,0x17,temp_v18);
     }
     temp_v5 = FUN_004f8f44(DAT_00573808);
     temp_v13 = temp_v5 + temp_v85 + temp_v12;
@@ -1366,7 +1366,7 @@ LAB_004e4280:
     if (temp_v6 != 1) {
       puVar9 = (unsigned int *)*param_1;
       FUN_003f0e20(puVar9,param_8);
-      temp_v5 = FUN_004f5d2c(DAT_00573808);
+      temp_v5 = btlUnitGetSkillValue(DAT_00573808);
       temp_v5 = temp_v5 * (param_11 + temp_v52);
       if (puVar9 != (unsigned int *)0x0) {
         if ((((*puVar9 & DAT_00571200) != 0 || (puVar9[1] & DAT_00571204) != 0) &&
@@ -1406,7 +1406,7 @@ LAB_004e4280:
                 if (temp_v8 != 0) {
                   temp_v5 = 0;
                 }
-                temp_v8 = FUN_004f5d2c(DAT_00573808);
+                temp_v8 = btlUnitGetSkillValue(DAT_00573808);
                 temp_v13 = temp_v5 + temp_v8 * (param_11 + temp_v52) + temp_v12;
                 FUN_004fda78(temp_v13,0,param_2,*(int *)(*param_1 + 0x1ed4) + temp_v80 * 0x10,3,0);
                 if ((int)temp_v13 <= (int)param_2[7]) {
@@ -1504,7 +1504,7 @@ LAB_004e45bc:
       if ((int)temp_v50 < 0) {
         temp_v50 = (unsigned int *)0xffffffff;
       }
-      temp_v5 = FUN_004f5d2c(DAT_00573808);
+      temp_v5 = btlUnitGetSkillValue(DAT_00573808);
       temp_v5 = temp_v5 * param_11;
       temp_v8 = btlEffectFindSlotId(DAT_00573808);
       temp_v9 = FUN_004f9ae4(DAT_00573808,1);

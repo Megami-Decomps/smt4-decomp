@@ -1,77 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00139b6c` (_code @ 0x139b6c, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail loads the tick counter into r2 and the 0x708 limit into r3, and the second timer loop counts down in r3; built uses r3/r2 */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameState; /* 0x5f15fc */
+typedef struct FlagsBlock {
+    /* 0x000 */ u8 unk000[0xC0C];
+    /* 0xC0C */ u8 timersA[64];     /* 0 and 255 stay as they are */
+    /* 0xC4C */ u8 timersB[128];
+    /* 0xCCC */ u8 unkCCC[0xC4];
+    /* 0xD90 */ s16 timersC[16];
+    /* 0xDB0 */ u8 unkDB0[0xE4];
+    /* 0xE94 */ s32 timersD[48];
+} FlagsBlock;
 
-extern int gameFlagsGetBlock(void);
+typedef struct GameState {
+    /* 0x000 */ u8 unk000[0x254];
+    /* 0x254 */ s32 ticks;
+} GameState;
 
+#define TIMER_PERIOD 0x708
 
+extern GameState g_gameState;
+
+extern FlagsBlock *gameFlagsGetBlock(void);
+
+/* Counts one frame; every TIMER_PERIOD frames the coarse timers tick down, and the fine ones every frame. */
 void FUN_00139b6c(void)
-
 {
-  char temp_v0;
-  short temp_v1;
-  int temp_v2;
-  char *pcVar4;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar8;
-  
-  temp_v2 = gameFlagsGetBlock();
-  (*(int *)((unsigned char *)&g_gameState + 0x254)) = (*(int *)((unsigned char *)&g_gameState + 0x254)) + 1;
-  if ((*(int *)((unsigned char *)&g_gameState + 0x254)) >= 0x709) {
-    (*(int *)((unsigned char *)&g_gameState + 0x254)) = 0;
-    temp_v3 = 0x40;
-    pcVar4 = (char *)(temp_v2 + 0xc0c);
-    do {
-      temp_v0 = *pcVar4;
-      if (temp_v0 != '\0' && temp_v0 != -1) {
-        *pcVar4 = temp_v0 - '\x01';
-      }
-      temp_v3 = temp_v3 - 1;
-      pcVar4 = pcVar4 + 1;
-    } while (temp_v3 != 0);
-    temp_v3 = 0;
-    temp_v5 = 0x80;
-    do {
-      temp_v4 = temp_v2 + temp_v3;
-      temp_v3 = temp_v3 + 1;
-      pcVar4 = (char *)(temp_v4 + 0xc4c);
-      temp_v0 = *pcVar4;
-      if (temp_v0 != '\0') {
-        *pcVar4 = temp_v0 - '\x01';
-      }
-      temp_v5 = temp_v5 - 1;
-    } while (temp_v5 != 0);
-    temp_v3 = 0;
-    temp_v5 = 0x10;
-    do {
-      temp_v4 = temp_v2 + temp_v3 * 2;
-      temp_v3 = temp_v3 + 1;
-      temp_v1 = *(short *)(temp_v4 + 0xd90);
-      if (0 < temp_v1) {
-        *(short *)(temp_v4 + 0xd90) = temp_v1 - 1;
-      }
-      temp_v5 = temp_v5 - 1;
-    } while (temp_v5 != 0);
-  }
-  temp_v3 = 0;
-  temp_v5 = 0x30;
-  do {
-    temp_v4 = temp_v3 * 4;
-    temp_v3 = temp_v3 + 1;
-    piVar8 = (int *)(temp_v2 + temp_v4 + 0xe94);
-    temp_v4 = *piVar8;
-    if (0 < temp_v4) {
-      *piVar8 = temp_v4 - 1;
+    FlagsBlock *flags = gameFlagsGetBlock();
+    s32 i;
+
+    if (++g_gameState.ticks > TIMER_PERIOD) {
+        g_gameState.ticks = 0;
+        for (i = 0; i < 64; i++) {
+            if (flags->timersA[i] != 0 && flags->timersA[i] != 255) {
+                flags->timersA[i]--;
+            }
+        }
+        for (i = 0; i < 128; i++) {
+            if (flags->timersB[i] != 0) {
+                flags->timersB[i]--;
+            }
+        }
+        for (i = 0; i < 16; i++) {
+            if (flags->timersC[i] > 0) {
+                flags->timersC[i]--;
+            }
+        }
     }
-    temp_v5 = temp_v5 - 1;
-  } while (temp_v5 != 0);
-  return;
+    for (i = 0; i < 48; i++) {
+        if (flags->timersD[i] > 0) {
+            flags->timersD[i]--;
+        }
+    }
 }
 
 } /* extern "C" */

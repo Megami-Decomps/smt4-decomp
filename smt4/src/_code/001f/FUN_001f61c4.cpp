@@ -1,49 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f61c4` (_code @ 0x1f61c4, 0x98 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00257510(void);
-int devilGetRecord(...);
+typedef struct Ref {
+    /* 0x0 */ u16 id;
+    /* 0x2 */ u16 group;
+} Ref;
 
-extern int FUN_00257444(int);
-/* Supplied declaration required: FUN_00257510. */
-/* Supplied declaration required: devilGetRecord. */
+typedef struct Record {
+    /* 0x0 */ u16 id;
+    /* 0x2 */ u8 kind;
+    /* 0x3 */ u8 grade;
+} Record;
 
+typedef struct Group {
+    /* 0x00 */ u8 unk00[0x22];
+    /* 0x22 */ s16 id;
+} Group;
 
-int FUN_001f61c4(unsigned short *param_1,unsigned short *param_2)
+Group *FUN_00257510(u32 group);
+Record *devilGetRecord(u32 id);
+s32 FUN_00257444(s32 id);
 
+/* Compares two refs by their group's FUN_00257444 value (higher first), then record kind, grade (higher first) and id. */
+s32 FUN_001f61c4(Ref *a, Ref *b)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned short *puVar5;
-  unsigned short *puVar6;
-  
-  temp_v0 = (unsigned int)param_1[1];
-  FUN_00257510();
-  temp_v1 = (unsigned int)param_2[1];
-  FUN_00257510();
-  devilGetRecord(*param_1);
-  devilGetRecord(*param_2);
-  temp_v2 = FUN_00257444((int)*(short *)(temp_v0 + 0x22));
-  temp_v3 = FUN_00257444((int)*(short *)(temp_v1 + 0x22));
-  temp_v2 = temp_v2 - temp_v3;
-  if (temp_v2 == 0) {
-    puVar5 = (unsigned short *)(unsigned int)*param_1;
-    devilGetRecord();
-    puVar6 = (unsigned short *)(unsigned int)*param_2;
-    devilGetRecord();
-    temp_v2 = (unsigned int)(unsigned char)puVar5[1] - (unsigned int)(unsigned char)puVar6[1];
-    if ((temp_v2 == 0) &&
-       (temp_v2 = (unsigned int)*(unsigned char *)((int)puVar6 + 3) - (unsigned int)*(unsigned char *)((int)puVar5 + 3), temp_v2 == 0)) {
-      temp_v2 = (unsigned int)*puVar5 - (unsigned int)*puVar6;
+    Group *groupA = FUN_00257510(a->group);
+    Group *groupB = FUN_00257510(b->group);
+    s32 diff;
+
+    devilGetRecord(a->id);
+    devilGetRecord(b->id);
+    diff = FUN_00257444(groupA->id) - FUN_00257444(groupB->id);
+    if (diff == 0) {
+        Record *recordA = devilGetRecord(a->id);
+        Record *recordB = devilGetRecord(b->id);
+
+        diff = recordA->kind - recordB->kind;
+        if (diff == 0) {
+            diff = recordB->grade - recordA->grade;
+            if (diff == 0) {
+                diff = recordA->id - recordB->id;
+            }
+        }
     }
-  }
-  return temp_v2;
+    return diff;
 }
 
 } /* extern "C" */

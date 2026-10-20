@@ -26,7 +26,7 @@ extern unsigned int DAT_00571624; /* 0x571624 */
 extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00212234. */
-extern unsigned int FUN_003173c4(unsigned int);
+extern unsigned int entryTableCallSlot3(unsigned int);
 
 
 void FUN_004d1198(unsigned int param_1,unsigned int *param_2)
@@ -43,7 +43,7 @@ void FUN_004d1198(unsigned int param_1,unsigned int *param_2)
   unsigned int uStack_20;
   
   if (param_2 != (unsigned int *)0x0) {
-    temp_v0 = FUN_003173c4(3);
+    temp_v0 = entryTableCallSlot3(3);
     uStack_28 = 0;
     uStack_24 = 0;
     uStack_20 = 0;

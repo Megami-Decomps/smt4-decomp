@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00316750(char [46], unsigned int, int, unsigned int, int);
 int FUN_00340c68(int);
 int FUN_00359008(unsigned int, unsigned int, char [34], unsigned int, int);
-int FUN_0036b9a8(int, int, int, int, unsigned int);
+int cecSettingsSet(int, int, int, int, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ extern char s_Shin_Megami_Tensei_I_0057f34a[34]; /* 0x57f34a */
 /* Supplied declaration required: FUN_00316750. */
 /* Supplied declaration required: FUN_00340c68. */
 /* Supplied declaration required: FUN_00359008. */
-/* Supplied declaration required: FUN_0036b9a8. */
+/* Supplied declaration required: cecSettingsSet. */
 extern unsigned int FUN_0042d694(unsigned int);
 
 
@@ -35,7 +35,7 @@ unsigned int FUN_004bb200(int param_1,unsigned int param_2,unsigned int param_3,
   unsigned int temp_v1;
   
   temp_v1 = 0;
-  FUN_0036b9a8(2,3,0xff,0,param_4);
+  cecSettingsSet(2,3,0xff,0,param_4);
   temp_v0 = FUN_0042d694(0x19a2);
   FUN_00359008(temp_v0,DAT_0057f2c8,s_Shin_Megami_Tensei_I_0057f34a,*(unsigned int *)(param_1 + 4),
                0x1200);

@@ -10,7 +10,7 @@ int FUN_001bc124(void);
 int FUN_002b5cd4(void);
 int FUN_002d2834(void);
 int FUN_003281c4(int, unsigned int, unsigned int, int);
-int FUN_0033f950(int);
+int naviMainQueueRequest(int);
 int FUN_00352bc4(void);
 int FUN_003b959c(void);
 int FUN_003fd76c(int, int *);
@@ -60,7 +60,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: FUN_002d2834. */
 /* Supplied declaration required: FUN_003281c4. */
-/* Supplied declaration required: FUN_0033f950. */
+/* Supplied declaration required: naviMainQueueRequest. */
 /* Supplied declaration required: FUN_00352bc4. */
 /* Supplied declaration required: FUN_003b959c. */
 /* Supplied declaration required: FUN_003fd76c. */
@@ -341,7 +341,7 @@ LAB_00273700:
             }
           }
 LAB_0027370c:
-          FUN_0033f950(temp_v2);
+          naviMainQueueRequest(temp_v2);
         }
         temp_v2 = temp_v2 + 1;
         if (temp_v2 >= 0x28) {

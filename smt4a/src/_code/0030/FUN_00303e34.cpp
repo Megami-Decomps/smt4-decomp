@@ -1,38 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00303e34` (_code @ 0x303e34, 0x2a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Built with -Ospace (see flags_W4Match4b.txt). */
+#include "common.h"
 
 extern "C" {
 
-int strHolderAssignU32(unsigned int, int *);
-int strHolderAssignU64Alias(unsigned int, int);
+typedef struct Vector8 {
+    /* 0x0 */ u8 *begin;  /* 8-byte elements */
+    /* 0x4 */ u8 *end;
+} Vector8;
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
+void strHolderAssignU32(u32 holder, u32 *value);
+void strHolderAssignU64Alias(u32 holder, u8 *value);
+u32 vectorCount8_0030d3b2(Vector8 *vec);
 
-/* Supplied declaration required: strHolderAssignU32. */
-/* Supplied declaration required: strHolderAssignU64Alias. */
-extern unsigned int vectorCount8_0030d3b2(int *);
-
-
-void FUN_00303e34(unsigned int param_1,int *param_2,unsigned int param_3,unsigned int param_4)
-
+/* Assigns the element count, then each 8-byte element, to the holder. */
+void FUN_00303e34(u32 holder, Vector8 *vec)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = param_4;
-  temp_v2 = vectorCount8_0030d3b2(param_2);
-  strHolderAssignU32(param_1,&temp_v2);
-  temp_v1 = param_2[1];
-  for (temp_v0 = *param_2; temp_v0 != temp_v1; temp_v0 = temp_v0 + 8) {
-    strHolderAssignU64Alias(param_1,temp_v0);
-  }
-  return;
+    u32 count = vectorCount8_0030d3b2(vec);
+    u8 *end;
+    u8 *it;
+
+    strHolderAssignU32(holder, &count);
+    end = vec->end;
+    for (it = vec->begin; it != end; it += 8) {
+        strHolderAssignU64Alias(holder, it);
+    }
 }
 
 } /* extern "C" */

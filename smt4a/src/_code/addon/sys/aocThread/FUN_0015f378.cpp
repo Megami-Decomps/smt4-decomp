@@ -6,7 +6,7 @@ extern "C" {
 
 int asdOperatorNew(int, unsigned int);
 int memAlloc(int, int, int, unsigned int, int, int);
-int FUN_0016dfc4(void);
+int resultReportIfFailed(void);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_0016dfc4. */
+/* Supplied declaration required: resultReportIfFailed. */
 
 
 void FUN_0015f378(int param_1,unsigned int param_2)
@@ -39,7 +39,7 @@ void FUN_0015f378(int param_1,unsigned int param_2)
     *(unsigned char *)(puVar2 + 4) = 0;
   }
   *(unsigned int **)(param_1 + 0xc) = puVar2;
-  FUN_0016dfc4();
+  resultReportIfFailed();
   return;
 }
 

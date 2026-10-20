@@ -5,7 +5,7 @@
 extern "C" {
 
 int randRange(...);
-int FUN_00480838(void);
+int aocRecordLookup83(void);
 int flagValueAdd(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -31,7 +31,7 @@ extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern int FUN_003e4d68(unsigned int);
-/* Supplied declaration required: FUN_00480838. */
+/* Supplied declaration required: aocRecordLookup83. */
 /* Supplied declaration required: flagValueAdd. */
 extern int FUN_004813bc(int);
 
@@ -150,7 +150,7 @@ int FUN_003774e8(unsigned int param_1,int param_2,int param_3,int *param_4)
             temp_v15 = 0;
             do {
               temp_v10 = temp_v8;
-              FUN_00480838();
+              aocRecordLookup83();
               temp_v9 = temp_v20;
               if (((temp_v10 != 0) && (temp_v14 <= *(unsigned char *)(temp_v10 + 0x24))) &&
                  (*(unsigned char *)(temp_v10 + 0x24) <= temp_v16)) {
@@ -193,7 +193,7 @@ int FUN_003774e8(unsigned int param_1,int param_2,int param_3,int *param_4)
                   *(unsigned char *)(temp_v26 + temp_v19) = temp_v15 == 0;
                   flagValueAdd(temp_v17,1);
                   temp_v15 = temp_v17;
-                  FUN_00480838();
+                  aocRecordLookup83();
                   temp_v1 = *(char *)(temp_v15 + 0x25);
                   if (temp_v1 != '\t') {
                     if (temp_v1 == '\n') {

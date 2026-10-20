@@ -1,51 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001565ec` (_code @ 0x1565ec, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation: retail keeps the queue tail in r0/next in r1 and loads the constant 1 separately for the node state (built shares r7 and swaps the walk registers). */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct QueueNode {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 data;
+    /* 0x08 */ u8 unk08[9];
+    /* 0x11 */ u8 state;        /* 1 queued, 3 rejected */
+    /* 0x12 */ u16 ticket;
+    /* 0x14 */ struct QueueNode *next;
+} QueueNode;
 
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
+typedef struct QueueManager {
+    /* 0x00 */ u8 unk00[6];
+    /* 0x06 */ u16 nextTicket;
+    /* 0x08 */ u8 unk08[0x28];
+    /* 0x30 */ QueueNode *head;
+    /* 0x34 */ u8 unk34[0x3C];
+    /* 0x70 */ u8 lock[0x1C];
+} QueueManager;
 
+extern void nn_os_CriticalSection_Enter(u8 *section);
+extern void nn_os_CriticalSection_Leave(u8 *section);
 
-void FUN_001565ec(int param_1,int param_2)
-
+/* Appends `node` to the manager's queue under its lock and gives it the next ticket; nodes without data are rejected. */
+void FUN_001565ec(QueueManager *manager, QueueNode *node)
 {
-  int temp_v0;
-  short temp_v1;
-  int temp_v2;
-  
-  if (*(int *)(param_2 + 4) == 0) {
-    *(unsigned char *)(param_2 + 0x11) = 3;
-    return;
-  }
-  *(unsigned int *)(param_2 + 0x14) = 0;
-  *(unsigned char *)(param_2 + 0x11) = 1;
-  nn_os_CriticalSection_Enter(param_1 + 0x70);
-  temp_v2 = *(int *)(param_1 + 0x30);
-  if (temp_v2 == 0) {
-    *(int *)(param_1 + 0x30) = param_2;
-  }
-  else {
-    for (temp_v0 = *(int *)(temp_v2 + 0x14); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x14)) {
-      temp_v2 = temp_v0;
+    u8 *lock;
+    QueueNode *tail;
+    QueueNode *next;
+    u16 ticket;
+
+    if (node->data == 0) {
+        node->state = 3;
+        return;
     }
-    *(int *)(temp_v2 + 0x14) = param_2;
-  }
-  temp_v1 = *(short *)(param_1 + 6);
-  if (temp_v1 == 0) {
-    temp_v1 = 1;
-    *(unsigned short *)(param_1 + 6) = 1;
-  }
-  *(short *)(param_2 + 0x12) = temp_v1;
-  *(short *)(param_1 + 6) = *(short *)(param_1 + 6) + 1;
-  nn_os_CriticalSection_Leave(param_1 + 0x70);
-  return;
+    node->next = NULL;
+    node->state = 1;
+    lock = manager->lock;
+    nn_os_CriticalSection_Enter(lock);
+    tail = manager->head;
+    if (tail == NULL) {
+        manager->head = node;
+    } else {
+        for (next = tail->next; next != NULL; next = next->next) {
+            tail = next;
+        }
+        tail->next = node;
+    }
+    ticket = manager->nextTicket;
+    if (ticket == 0) {
+        ticket = 1;
+        manager->nextTicket = 1;
+    }
+    node->ticket = ticket;
+    manager->nextTicket = manager->nextTicket + 1;
+    nn_os_CriticalSection_Leave(lock);
 }
 
 } /* extern "C" */

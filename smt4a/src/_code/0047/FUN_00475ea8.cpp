@@ -23,7 +23,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_001b57a8. */
 extern unsigned int *FUN_001b5acc(unsigned char *);
 extern int FUN_001d25ec(int);
-extern int FUN_004288bc(int);
+extern int queryResultFailureOnly(int);
 /* Supplied declaration required: FUN_00473acc. */
 extern int block88OwnerCheck(int);
 /* Supplied declaration required: FUN_00473da0. */
@@ -82,7 +82,7 @@ void FUN_00475ea8(unsigned char *param_1,int param_2)
     temp_v1 = param_2 + 0x18;
     FUN_0047d904(temp_v1,&temp_v4,&temp_v5);
     if (temp_v1 != 0) {
-      temp_v1 = FUN_004288bc(temp_v2 + 0x80);
+      temp_v1 = queryResultFailureOnly(temp_v2 + 0x80);
       if (temp_v1 < 0) {
         FUN_00473acc(&temp_v6,temp_v2);
         *(unsigned int *)(param_2 + 0xc) = temp_v6;

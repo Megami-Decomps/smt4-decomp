@@ -1,48 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034f2e0` (_code @ 0x34f2e0, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184310(...);
-int FUN_00282b9c(void);
+typedef struct Ref {
+    /* 0x0 */ u16 id;
+    /* 0x2 */ u16 group;
+} Ref;
 
-/* Supplied declaration required: FUN_00184310. */
-extern int FUN_0023e60c(int);
-/* Supplied declaration required: FUN_00282b9c. */
+typedef struct Record {
+    /* 0x0 */ u16 id;
+    /* 0x2 */ u8 kind;
+    /* 0x3 */ u8 unk3;
+    /* 0x4 */ u8 unk4[2];
+    /* 0x6 */ u16 order;
+} Record;
 
+typedef struct Group {
+    /* 0x00 */ u8 unk00[0x22];
+    /* 0x22 */ s16 id;
+} Group;
 
-int FUN_0034f2e0(unsigned short *param_1,unsigned short *param_2)
+Group *FUN_00282b9c(u32 group);
+Record *FUN_00184310(u32 id);
+s32 FUN_0023e60c(s32 id);
 
+/* Compares two refs by their group's FUN_0023e60c value (higher first), then record kind, order and id. */
+s32 FUN_0034f2e0(Ref *a, Ref *b)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned short *puVar5;
-  unsigned short *puVar6;
-  
-  temp_v0 = (unsigned int)param_1[1];
-  FUN_00282b9c();
-  temp_v1 = (unsigned int)param_2[1];
-  FUN_00282b9c();
-  FUN_00184310(*param_1);
-  FUN_00184310(*param_2);
-  temp_v2 = FUN_0023e60c((int)*(short *)(temp_v1 + 0x22));
-  temp_v3 = FUN_0023e60c((int)*(short *)(temp_v0 + 0x22));
-  temp_v2 = temp_v2 - temp_v3;
-  if (temp_v2 == 0) {
-    puVar5 = (unsigned short *)(unsigned int)*param_1;
-    FUN_00184310();
-    puVar6 = (unsigned short *)(unsigned int)*param_2;
-    FUN_00184310();
-    temp_v2 = (unsigned int)(unsigned char)puVar6[1] - (unsigned int)(unsigned char)puVar5[1];
-    if ((temp_v2 == 0) && (temp_v2 = (unsigned int)puVar6[3] - (unsigned int)puVar5[3], temp_v2 == 0)) {
-      temp_v2 = (unsigned int)*puVar5 - (unsigned int)*puVar6;
+    Group *groupA = FUN_00282b9c(a->group);
+    Group *groupB = FUN_00282b9c(b->group);
+    s32 diff;
+
+    FUN_00184310(a->id);
+    FUN_00184310(b->id);
+    diff = FUN_0023e60c(groupB->id) - FUN_0023e60c(groupA->id);
+    if (diff == 0) {
+        Record *recordA = FUN_00184310(a->id);
+        Record *recordB = FUN_00184310(b->id);
+
+        diff = recordB->kind - recordA->kind;
+        if (diff == 0) {
+            diff = recordB->order - recordA->order;
+            if (diff == 0) {
+                diff = recordA->id - recordB->id;
+            }
+        }
     }
-  }
-  return temp_v2;
+    return diff;
 }
 
 } /* extern "C" */

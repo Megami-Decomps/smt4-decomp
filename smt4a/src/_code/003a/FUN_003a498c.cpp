@@ -13,7 +13,7 @@ int asdTMTexTableReleaseNode(...);
 int FUN_0019e52c(...);
 int FUN_001a90f0(unsigned short *, unsigned char *);
 int FUN_0023723c(...);
-int FUN_002adba8(...);
+int requestIdToCode(...);
 int rt_aeabi_memclr(...);
 int FUN_00371c3c(...);
 int FUN_0038b3f8(...);
@@ -49,7 +49,7 @@ extern unsigned int FUN_0019acdc(short, unsigned int);
 /* Supplied declaration required: FUN_0019e52c. */
 /* Supplied declaration required: FUN_001a90f0. */
 /* Supplied declaration required: FUN_0023723c. */
-/* Supplied declaration required: FUN_002adba8. */
+/* Supplied declaration required: requestIdToCode. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 extern int dataTable4AGetEntry2C(unsigned char);
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
@@ -257,28 +257,28 @@ void FUN_003a498c(unsigned int *param_1,short *param_2,int param_3)
   }
   temp_v2 = 0;
   do {
-    temp_v3 = FUN_002adba8(temp_v2);
+    temp_v3 = requestIdToCode(temp_v2);
     temp_v4 = asdTMTexTableNodeIsLoaded(0x2e,temp_v3);
     temp_v10 = temp_v2;
     if (temp_v4 != 0) break;
     temp_v2 = temp_v2 + 1;
     temp_v10 = 0;
   } while (temp_v2 < 9);
-  temp_v3 = FUN_002adba8((char)param_2[0x11]);
+  temp_v3 = requestIdToCode((char)param_2[0x11]);
   temp_v2 = asdTMTexTableNodeIsLoaded(0x2e,temp_v3);
   if (temp_v2 == 0) {
     if (param_1 != (unsigned int *)0x0) {
-      temp_v3 = FUN_002adba8(temp_v10);
+      temp_v3 = requestIdToCode(temp_v10);
       temp_v2 = asdTMTexTableNodeIsLoaded(0x2e,temp_v3);
       if ((temp_v2 != 0) && (param_1[temp_v10 + 0x25] != 2)) {
-        temp_v3 = FUN_002adba8(temp_v10);
+        temp_v3 = requestIdToCode(temp_v10);
         asdTMTexTableReleaseNode(0x2e,temp_v3);
         param_1[temp_v10 + 0x25] = 0;
       }
     }
     temp_v6 = (unsigned int)*(unsigned char *)(param_2 + 0x11);
     if (param_1 != (unsigned int *)0x0) {
-      temp_v3 = FUN_002adba8(temp_v6);
+      temp_v3 = requestIdToCode(temp_v6);
       temp_v2 = asdTMTexTableNodeIsLoaded(0x2e,temp_v3);
       if ((temp_v2 == 0) && (param_1[temp_v6 + 0x25] != 3 && param_1[temp_v6 + 0x25] != 2)) {
         param_1[temp_v6 + 0x25] = 1;

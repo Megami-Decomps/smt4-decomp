@@ -8,7 +8,7 @@ int FUN_00231240(...);
 int FUN_0023150c(int, int);
 int FUN_002316e8(int, int);
 int FUN_00233240(int, int);
-int FUN_0025a0e0(void);
+int commonBgReset(void);
 int FUN_00275f00(void);
 int FUN_00289880(void);
 int FUN_002bf818(int);
@@ -26,7 +26,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: FUN_0023150c. */
 /* Supplied declaration required: FUN_002316e8. */
 /* Supplied declaration required: FUN_00233240. */
-/* Supplied declaration required: FUN_0025a0e0. */
+/* Supplied declaration required: commonBgReset. */
 /* Supplied declaration required: FUN_00275f00. */
 /* Supplied declaration required: FUN_00289880. */
 extern unsigned int vec2GetYInt(int);
@@ -97,7 +97,7 @@ void FUN_0039c09c(int param_1)
       (*(signed char *)((unsigned char *)&g_gameState + 0x251)) = '\0';
       temp_v0 = gameFlagIsSet(0x16);
       if (temp_v0 != 0) {
-        FUN_0025a0e0();
+        commonBgReset();
       }
       else {
         FUN_00289880();

@@ -7,7 +7,7 @@ extern "C" {
 int dataTable00FindById(void);
 int scrSetResult(int);
 int FUN_003e8bb0(unsigned char [2], int, int);
-int FUN_004c3ac0(int, int [3]);
+int kindIdStore(int, int [3]);
 int FUN_004c58e0(int, int, int, int);
 int VectorSignedToFloat(int, int);
 
@@ -32,7 +32,7 @@ extern int btlGetMainState(void);
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_004c3ac0. */
+/* Supplied declaration required: kindIdStore. */
 /* Supplied declaration required: FUN_004c58e0. */
 
 
@@ -79,7 +79,7 @@ unsigned int FUN_0038d5c8(void)
           *(unsigned short *)(temp_v6 + 0x324) = 1;
           FUN_003e8bb0(temp_v9,temp_v8[0],temp_v6);
           temp_v8[0] = 0;
-          FUN_004c3ac0(temp_v10,temp_v8);
+          kindIdStore(temp_v10,temp_v8);
           temp_v5 = temp_v8[0] * 2;
           temp_v8[0] = (int)temp_v11;
           temp_v8[1] = 1;

@@ -27,7 +27,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0022c9f4. */
-extern unsigned char FUN_0022e0b0(int, unsigned int);
+extern unsigned char gaugePercent(int, unsigned int);
 /* Supplied declaration required: FUN_0022e158. */
 /* Supplied declaration required: FUN_0022e17c. */
 /* Supplied declaration required: FUN_0022e2fc. */
@@ -82,7 +82,7 @@ void FUN_003a8aa0(int param_1)
     FUN_0022c9f4(param_1,1);
     FUN_00233730(param_1 + 0x20,10,(int)*(short *)(param_1 + 0x5a8),0,1,1);
     *(unsigned char *)(param_1 + 0x2d) = 1;
-    temp_v0 = FUN_0022e0b0(param_1 + 0x5a8,1);
+    temp_v0 = gaugePercent(param_1 + 0x5a8,1);
     *(unsigned char *)(param_1 + 0x94) = temp_v0;
     jyoucyuGetTableEntry(0);
     jyoucyuGetTableEntry(0);

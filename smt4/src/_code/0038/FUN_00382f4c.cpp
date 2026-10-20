@@ -29,7 +29,7 @@ extern int FUN_002485b8(void);
 /* Supplied declaration required: FUN_002636b0. */
 /* Supplied declaration required: FUN_00269dc8. */
 /* Supplied declaration required: FUN_00290e9c. */
-extern int FUN_00290eb0(void);
+extern int messageWindowIsState1(void);
 /* Supplied declaration required: FUN_002973d8. */
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029e620. */
@@ -53,7 +53,7 @@ void FUN_00382f4c(int param_1)
   
   temp_v0 = FUN_0019e0c0(**(unsigned int **)(param_1 + 0x5c4));
   if (temp_v0 != 2) {
-    temp_v0 = FUN_00290eb0();
+    temp_v0 = messageWindowIsState1();
     if (temp_v0 != 0) {
       temp_v0 = FUN_00290e9c();
       if (*(char *)(param_1 + 0x18) == '\0') {

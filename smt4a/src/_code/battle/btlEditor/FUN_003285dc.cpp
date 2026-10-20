@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_005737e0; /* 0x5737e0 */
+extern int g_btlEditor; /* 0x5737e0 */
 extern unsigned int DAT_005737e8; /* 0x5737e8 */
 extern unsigned int DAT_005737ec; /* 0x5737ec */
 extern int g_btlUiBlock; /* 0x57a9c8 */
@@ -38,7 +38,7 @@ void FUN_003285dc(void)
   if (g_btlUiBlock != 0) {
     FUN_004aa780(g_btlUiBlock,0);
   }
-  if (DAT_005737e0 != 0) {
+  if (g_btlEditor != 0) {
     if (temp_v0 != 0) {
       piVar3 = (int *)(temp_v0 + 0x1ed4);
       temp_v1 = 0;
@@ -70,8 +70,8 @@ void FUN_003285dc(void)
     temp_v3 = ~DAT_005737e8;
     *(unsigned int *)(temp_v0 + 0x45ac) = *(unsigned int *)(temp_v0 + 0x45ac) & ~DAT_005737ec;
     *(unsigned int *)(temp_v0 + 0x45a8) = *(unsigned int *)(temp_v0 + 0x45a8) & temp_v3;
-    asdMemFree(DAT_005737e0);
-    DAT_005737e0 = 0;
+    asdMemFree(g_btlEditor);
+    g_btlEditor = 0;
   }
   jobStop(*(unsigned int *)(temp_v0 + 0x7c),0);
   return;

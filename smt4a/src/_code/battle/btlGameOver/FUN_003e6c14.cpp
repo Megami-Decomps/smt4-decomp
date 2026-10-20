@@ -8,7 +8,7 @@ int FUN_001f4908(int, unsigned int, int);
 int FUN_002804b0(...);
 int FUN_003e6dc8(...);
 int FUN_003e71a8(...);
-int FUN_004ab854(unsigned int);
+int btlUiPanelStart(unsigned int);
 int FUN_004fdcd8(int, int, int, int, int, int, int, int);
 int FUN_004fddf4(int, int, unsigned int, int, int, unsigned int, int, int, unsigned int);
 
@@ -41,7 +41,7 @@ extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_003e6dc8. */
 /* Supplied declaration required: FUN_003e71a8. */
-/* Supplied declaration required: FUN_004ab854. */
+/* Supplied declaration required: btlUiPanelStart. */
 /* Supplied declaration required: FUN_004fdcd8. */
 /* Supplied declaration required: FUN_004fddf4. */
 
@@ -55,7 +55,7 @@ void FUN_003e6c14(unsigned int *param_1)
   
   if (param_1[2] == DAT_0057a684) {
     FUN_004fdcd8(0,0,0,0,7,0,0xb,0);
-    FUN_004ab854(g_btlUiBlock);
+    btlUiPanelStart(g_btlUiBlock);
   }
   if (param_1[2] == DAT_0057a698) {
     FUN_004fddf4(0,0,DAT_0057a69c,0x10,0,DAT_0057a6a0,0,2,0xffffffff);

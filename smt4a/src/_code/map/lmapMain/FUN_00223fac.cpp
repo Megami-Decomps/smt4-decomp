@@ -12,7 +12,7 @@ extern int DAT_005f1ac4; /* 0x5f1ac4 */
 
 /* Supplied declaration required: randRange. */
 extern int gameFlagIsSet(unsigned int);
-extern int FUN_002d0044(void);
+extern int gameFlagStateIsOne(void);
 extern int FUN_002d8b58(unsigned int, unsigned int);
 /* Supplied declaration required: gameFlagSetValue. */
 
@@ -24,7 +24,7 @@ void FUN_00223fac(void)
   int *piVar1;
   int temp_v0;
   
-  if ((*g_popupState == 0) && (temp_v0 = FUN_002d0044(), temp_v0 != 0)) {
+  if ((*g_popupState == 0) && (temp_v0 = gameFlagStateIsOne(), temp_v0 != 0)) {
     temp_v0 = gameFlagIsSet(0x111a);
     if (temp_v0 != 0) {
       randRange(99);

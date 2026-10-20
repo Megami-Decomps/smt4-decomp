@@ -25,7 +25,7 @@ int gameStateClearFlag(void);
 int FUN_00314c38(...);
 int mapPlaceSet(...);
 int FUN_00324c48(...);
-int FUN_003339bc(void);
+int useCounterSelectMode2(void);
 int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
 int FUN_003a2278(...);
@@ -44,7 +44,7 @@ int FUN_00224880(...);
 int useCounterStart(void);
 int FUN_002686b8(void);
 int FUN_0026edbc(...);
-int FUN_002844e4(void);
+int msgWindowReset(void);
 int FUN_002bf4f4(...);
 int FUN_0031f27c(...);
 int obj7ECSetPair(...);
@@ -78,8 +78,8 @@ int campButtonHelpAcquire(void);
 int FUN_0036b824(...);
 int FUN_003870a8(...);
 int soundChannelRequestIfEnabled(...);
-int FUN_003e5478(...);
-int FUN_003e5728(...);
+int controllerTargetNodeStart(...);
+int linkedTargetSetFloat(...);
 int gameFlagSetValue(...);
 int FUN_0040ae70(...);
 int FUN_004d9c54(...);
@@ -211,7 +211,7 @@ extern unsigned int gameDataGetPlayerName(void);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002802c8(void);
-/* Supplied declaration required: FUN_002844e4. */
+/* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: FUN_002bf4f4. */
 extern int FUN_002c7c54(void);
 /* Supplied declaration required: gameStateClearFlag. */
@@ -223,7 +223,7 @@ extern int FUN_002c7c54(void);
 extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_00324c48. */
-/* Supplied declaration required: FUN_003339bc. */
+/* Supplied declaration required: useCounterSelectMode2. */
 /* Supplied declaration required: obj7ECSetPair. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: campCommonBgRelease. */
@@ -239,17 +239,17 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: FUN_003d54f8. */
 extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: FUN_003e542c. */
-/* Supplied declaration required: FUN_003e5478. */
+/* Supplied declaration required: controllerTargetNodeStart. */
 /* Supplied declaration required: linkHolderApplyFirst. */
 /* Supplied declaration required: FUN_003e54b8. */
 extern int linkHolderCheckFirst(unsigned int);
-/* Supplied declaration required: FUN_003e5728. */
+/* Supplied declaration required: linkedTargetSetFloat. */
 /* Supplied declaration required: FUN_003e5858. */
 extern int fourPtrsAllNull(unsigned int);
 /* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: linkHolderClearFlag. */
 /* Supplied declaration required: FUN_003e5c00. */
-extern unsigned int *FUN_003e5d10(void);
+extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: FUN_003f9c0c. */
 /* Supplied declaration required: FUN_003f9c6c. */
 /* Supplied declaration required: FUN_003f9e80. */
@@ -358,7 +358,7 @@ unsigned int FUN_0027e0d8(void)
     asdOperatorNew();
     puVar6 = (unsigned int *)0x0;
     if (temp_v7 != 0) {
-      puVar6 = (unsigned int *)FUN_003e5d10();
+      puVar6 = (unsigned int *)_ZN9Obj557ae8C1Ev();
       *puVar6 = (unsigned int)&DAT_00557c60;
     }
     puVar8[0xf] = (unsigned int)puVar6;
@@ -542,8 +542,8 @@ unsigned int FUN_0027e0d8(void)
   case 2:
     temp_v7 = fourPtrsAllNull(puVar3[0xf]);
     if (temp_v7 == 0) break;
-    FUN_003e5478(puVar3[0xf],0);
-    FUN_003e5728(puVar3[0xf]);
+    controllerTargetNodeStart(puVar3[0xf],0);
+    linkedTargetSetFloat(puVar3[0xf]);
     puVar3[6] = g_gameState;
     puVar3[7] = DAT_005f1600;
     puVar9 = &LAB_0027ece0;
@@ -619,7 +619,7 @@ unsigned int FUN_0027e0d8(void)
       if (puVar3[5] == 1) {
         temp_v7 = FUN_00239480();
         if (temp_v7 != 0) {
-          FUN_002844e4();
+          msgWindowReset();
         }
         temp_v7 = FUN_00224880(puVar3[10]);
         if (temp_v7 != 2) break;
@@ -662,7 +662,7 @@ LAB_0027edcc:
         puVar3[5] = 0;
         FUN_001f4908(0,10,0xff);
         FUN_001f4908(1,10,0xff);
-        FUN_002844e4();
+        msgWindowReset();
       }
       else {
         temp_v7 = FUN_002c7c54();
@@ -677,7 +677,7 @@ LAB_0027edcc:
           else {
             FUN_003180c4(0x28,(int)puVar3[(int)puVar8 + 0x16a] + 7);
           }
-          FUN_002844e4();
+          msgWindowReset();
           puVar3[5] = 1;
         }
       }
@@ -686,7 +686,7 @@ LAB_0027edcc:
     if ((temp_v7 != 0x13) || (FUN_003e542c(puVar3[0xf]), in_s0 < 0x41a00000)) break;
     FUN_003e54b8(puVar3[0xf]);
     temp_v4 = puVar3[0xf];
-    FUN_003e5728(temp_v4);
+    linkedTargetSetFloat(temp_v4);
     break;
   case 5:
     temp_v7 = linkHolderCheckFirst(puVar3[0xf]);
@@ -845,7 +845,7 @@ LAB_0027edcc:
         FUN_004d9c54(puVar3,2);
         *(unsigned char *)(puVar3 + 0x15a) = 1;
         puVar3[0x15b] = 0x88;
-        FUN_003e5478(puVar3[0xf],0x1a);
+        controllerTargetNodeStart(puVar3[0xf],0x1a);
         FUN_003d54f8(0,10);
         FUN_003d54f8(1,10);
       }
@@ -853,7 +853,7 @@ LAB_0027edcc:
         FUN_004d9c54(puVar3,1);
         *(unsigned char *)(puVar3 + 0x15a) = 1;
         puVar3[0x15b] = 0;
-        FUN_003e5478(puVar3[0xf],0x1a);
+        controllerTargetNodeStart(puVar3[0xf],0x1a);
         FUN_003d54f8(0,0x14);
         FUN_003d54f8(1,0x14);
       }
@@ -893,7 +893,7 @@ LAB_0027edcc:
     if (temp_v7 == 2) {
       puVar3[4] = 4;
       puVar3[5] = 0;
-      FUN_003339bc();
+      useCounterSelectMode2();
     }
     break;
   case 0xd:
@@ -926,9 +926,9 @@ LAB_0027edcc:
     *(unsigned char *)(puVar3 + 0x166) = 0;
     *(unsigned char *)(puVar3 + 0x169) = 0;
     FUN_004d9c54(puVar3,0);
-    FUN_003e5478(puVar3[0xf],0x13);
+    controllerTargetNodeStart(puVar3[0xf],0x13);
     temp_v4 = puVar3[0xf];
-    FUN_003e5728(temp_v4);
+    linkedTargetSetFloat(temp_v4);
     break;
   case 0xf:
     FUN_00408184(0x21,1);
@@ -949,8 +949,8 @@ LAB_0027edcc:
     *(unsigned char *)(puVar3 + 0x166) = 0;
     *(unsigned char *)(puVar3 + 0x169) = 0;
     FUN_004d9c54(puVar3,0);
-    FUN_003e5478(puVar3[0xf],0x13);
-    FUN_003e5728(puVar3[0xf]);
+    controllerTargetNodeStart(puVar3[0xf],0x13);
+    linkedTargetSetFloat(puVar3[0xf]);
     break;
   case 0x10:
     temp_v7 = FUN_002802c8();
@@ -992,7 +992,7 @@ LAB_0027edcc:
   case 0x12:
     temp_v7 = FUN_00239480();
     if (temp_v7 != 0) {
-      FUN_002844e4();
+      msgWindowReset();
     }
     temp_v7 = FUN_00224880(puVar3[10]);
     if ((temp_v7 == 2) && (temp_v7 = FUN_002802c8(), temp_v7 == 0)) {
@@ -1173,8 +1173,8 @@ LAB_0027edcc:
     }
     if (puVar3[0x15b] == 0x55) {
       linkHolderClearFlag(puVar3[0xf]);
-      FUN_003e5478(puVar3[0xf],0x1a);
-      FUN_003e5728(puVar3[0xf]);
+      controllerTargetNodeStart(puVar3[0xf],0x1a);
+      linkedTargetSetFloat(puVar3[0xf]);
     }
     if (((int)puVar3[0x15b] >= 0x88) && (temp_v7 = linkHolderCheckFirst(puVar3[0xf]), temp_v7 != 0)) {
       linkHolderApplyFirst(puVar3[0xf],0);

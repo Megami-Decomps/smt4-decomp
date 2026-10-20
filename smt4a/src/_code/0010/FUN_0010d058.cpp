@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_002e6e34(int *, int);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int FUN_002f7038(int, unsigned int, unsigned int);
 
 extern unsigned int initVtable0055a580(int, int);
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002f7038. */
 
@@ -40,7 +40,7 @@ void FUN_0010d058(int param_1,unsigned int param_2,unsigned int param_3,unsigned
       }
       *(unsigned int *)(param_1 + 0xa8) = temp_v1;
     }
-    FUN_002e6e5c(&uStack_20);
+    _ZN9Obj55b28cD1Ev(&uStack_20);
   }
   FUN_002f7038(param_1,param_2,*(unsigned int *)(param_1 + 0xa8));
   return;

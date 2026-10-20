@@ -14,7 +14,7 @@ typedef struct {
 
 extern int FUN_00270d74(...); /* 0x270d74 */
 extern int FUN_002b2ca8(...); /* 0x2b2ca8 */
-extern int FUN_002ce824(...); /* 0x2ce824 */
+extern int devilCompareByRankGradeAscending(...); /* 0x2ce824 */
 extern int FUN_002fe074(...); /* 0x2fe074 */
 extern int FUN_00321cc0(...); /* 0x321cc0 */
 extern int FUN_0034f6fc(...); /* 0x34f6fc */
@@ -48,7 +48,7 @@ void FUN_0020cfac(void)
   temp_v2 = ~(*pbVar3 >> 7) & 1;
   if ((*pbVar3 & 0x7f) == 1) {
     if (temp_v2 != 0) {
-      qsort(temp_v0 + 0x62a0,*(unsigned int *)(temp_v0 + 0x6698),2,FUN_002ce824);
+      qsort(temp_v0 + 0x62a0,*(unsigned int *)(temp_v0 + 0x6698),2,devilCompareByRankGradeAscending);
     }
     else {
       qsort(temp_v0 + 0x62a0,*(unsigned int *)(temp_v0 + 0x6698),2,FUN_003603a0);

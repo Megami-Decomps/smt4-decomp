@@ -1,44 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Message_ShowConfirmWait` (_code @ 0x1ecc20, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002866b4(unsigned int, unsigned int, unsigned int, int, int, int);
-int FUN_0028dc98(int);
+typedef struct MessageState {
+    /* 0x000 */ u8 unk000[0xA11];
+    /* 0xA11 */ u8 mode;
+} MessageState;
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+typedef struct MessageMainView {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ MessageState *state;
+} MessageMainView;
 
-extern unsigned char g_messageMain; /* 0x43e188 */
+extern MessageMainView g_messageMain;
 
-extern unsigned int FUN_002865f8(void);
-/* Supplied declaration required: FUN_002866b4. */
-extern unsigned int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_0028dc98. */
-extern unsigned int scrGetArg(unsigned int);
+s32 FUN_0028dc98(s32 arg);
+u32 FUN_002865f8(void);
+u32 scrGetArg(u32 index);
+u32 scrGetCommandFrame(void);
+s32 FUN_002866b4(u32 a, u32 b, u32 c, s32 mode, s32 wait, s32 f);
 
-
-void scrComm_Message_ShowConfirmWait(void)
-
+static void showMessage(s32 mode, s32 wait)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  FUN_0028dc98(0);
-  if ((*(int *)((unsigned char *)&g_messageMain + 0x4)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0xa11) = 0x14;
-  }
-  temp_v0 = FUN_002865f8();
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetCommandFrame();
-  FUN_002866b4(temp_v0,temp_v1,temp_v2,6,1,0);
-  return;
+    u32 a = FUN_002865f8();
+    u32 b = scrGetArg(0);
+    u32 c = scrGetCommandFrame();
+
+    FUN_002866b4(a, b, c, mode, wait, 0);
+}
+
+/* Script command: clears the message state, puts it in mode 0x14 and shows a confirm message, waiting for it. */
+void scrComm_Message_ShowConfirmWait(void)
+{
+    FUN_0028dc98(0);
+    if (g_messageMain.state != NULL) {
+        g_messageMain.state->mode = 0x14;
+    }
+    showMessage(6, 1);
 }
 
 } /* extern "C" */

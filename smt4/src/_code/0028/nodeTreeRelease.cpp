@@ -38,7 +38,7 @@ void nodeTreeRelease(Node *node)
     }
     parent = node->parent;
     if (parent != NULL) {
-        if (parent->child == node) {
+        if (node == parent->child) {
             parent->child = node->next;
             if (node->next != NULL) {
                 node->next->prev = NULL;

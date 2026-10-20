@@ -1,20 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003aa068` (_code @ 0x3aa068, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Object003aa068 {
+    /* 0x0000 */ u8 unk0000[0x243c];
+    /* 0x243c */ u32 value;
+} Object003aa068;
 
-unsigned int FUN_003aa068(int param_1)
-
+/* True when the object exists and its value word is nonzero. */
+u32 FUN_003aa068(Object003aa068 *object)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if ((param_1 != 0) && (temp_v0 = 0, *(int *)(param_1 + 0x243c) != 0)) {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    u32 result = object != NULL ? object->value : 0;
+
+    if (result != 0) {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

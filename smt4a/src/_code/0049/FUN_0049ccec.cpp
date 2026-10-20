@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00480d20(void);
+int aocRecordLookup84(void);
 
 extern int FUN_0019271c(void);
-/* Supplied declaration required: FUN_00480d20. */
+/* Supplied declaration required: aocRecordLookup84. */
 
 
 void FUN_0049ccec(void)
@@ -18,7 +18,7 @@ void FUN_0049ccec(void)
   
   temp_v0 = FUN_0019271c();
   if (temp_v0 == 10) {
-    FUN_00480d20();
+    aocRecordLookup84();
   }
   return;
 }

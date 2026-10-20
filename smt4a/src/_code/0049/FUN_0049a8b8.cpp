@@ -10,9 +10,9 @@ extern int FUN_00494940(...); /* 0x494940 */
 extern int FUN_00494a34(...); /* 0x494a34 */
 extern int FUN_00495584(...); /* 0x495584 */
 extern int FUN_0049569c(...); /* 0x49569c */
-extern int FUN_00496638(...); /* 0x496638 */
+extern int _ZN9Obj53604414waitControllerEv(...); /* 0x496638 */
 extern int FUN_004969a8(...); /* 0x4969a8 */
-extern int FUN_00497250(...); /* 0x497250 */
+extern int _ZN9Obj53604411enterState3Ev(...); /* 0x497250 */
 extern int FUN_00497290(...); /* 0x497290 */
 extern int FUN_00498594(...); /* 0x498594 */
 extern int FUN_00498ac0(...); /* 0x498ac0 */
@@ -48,11 +48,11 @@ void FUN_0049a8b8(int param_1)
   *(unsigned int *)(param_1 + 0x28) = 0;
   *(romwright_code **)(param_1 + 0x2c) = FUN_00494a34;
   *(unsigned int *)(param_1 + 0x30) = 0;
-  *(romwright_code **)(param_1 + 0x34) = FUN_00497250;
+  *(romwright_code **)(param_1 + 0x34) = _ZN9Obj53604411enterState3Ev;
   *(unsigned int *)(param_1 + 0x38) = 0;
   *(romwright_code **)(param_1 + 0x3c) = FUN_00498ac0;
   *(unsigned int *)(param_1 + 0x40) = 0;
-  *(romwright_code **)(param_1 + 0x44) = FUN_00496638;
+  *(romwright_code **)(param_1 + 0x44) = _ZN9Obj53604414waitControllerEv;
   *(unsigned int *)(param_1 + 0x48) = 0;
   *(romwright_code **)(param_1 + 0x4c) = FUN_004995b0;
   *(unsigned int *)(param_1 + 0x50) = 0;

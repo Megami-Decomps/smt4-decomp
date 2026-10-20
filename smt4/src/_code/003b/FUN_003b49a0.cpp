@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026a794(void);
+int contentEntryFlagTest(void);
 int FUN_0029a17c(...);
 int FUN_0029cde0(...);
 int FUN_0029efa8(...);
@@ -54,7 +54,7 @@ extern unsigned char LAB_003b5f24; /* 0x3b5f24 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0026a794. */
+/* Supplied declaration required: contentEntryFlagTest. */
 /* Supplied declaration required: FUN_0029a17c. */
 extern unsigned int FUN_0029a924(unsigned short);
 extern int FUN_0029aafc(void);
@@ -397,7 +397,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
           ;
           temp_v2 = 0xff;
           temp_v8 = (unsigned int)*(unsigned short *)(temp_v22 + 0x34);
-          FUN_0026a794();
+          contentEntryFlagTest();
           if (temp_v8 == 0) {
             temp_v2 = 0x5a5a5aff;
           }
@@ -512,7 +512,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
     temp_v2 = 0xffffffff;
     temp_v1 = temp_v14 + temp_v1 * 2;
     temp_v8 = (unsigned int)*(unsigned short *)(temp_v1 + 0x34);
-    FUN_0026a794();
+    contentEntryFlagTest();
     if (temp_v8 == 0) {
       temp_v2 = 0x5a5a5aff;
     }

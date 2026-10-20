@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_001bc2ec(...);
-int FUN_001c44b4(int);
+int vramAreaGetBaseAddress(int);
 
 extern unsigned char DAT_005448d8; /* 0x5448d8 */
 extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
 extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
 
 /* Supplied declaration required: FUN_001bc2ec. */
-/* Supplied declaration required: FUN_001c44b4. */
+/* Supplied declaration required: vramAreaGetBaseAddress. */
 
 
 unsigned int FUN_001cb4c8(int param_1,int *param_2,int param_3)
@@ -35,7 +35,7 @@ unsigned int FUN_001cb4c8(int param_1,int *param_2,int param_3)
   if (*(unsigned int **)(param_1 + 8) == (unsigned int *)0x0) {
     puVar4 = g_commandBufferCursor;
   }
-  FUN_001c44b4(0x20000);
+  vramAreaGetBaseAddress(0x20000);
   temp_v0 = FUN_001bc2ec();
   temp_v1 = param_2[8];
   if (temp_v1 == 0) {

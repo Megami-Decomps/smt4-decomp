@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024f520(void);
+int dataTable29Sub0GetEntryWithAoc(void);
 int memClear(unsigned char *, int);
 
 extern int DAT_00447604; /* 0x447604 */
@@ -12,7 +12,7 @@ extern unsigned int g_gameState; /* 0x49f91c */
 extern unsigned char DAT_004a0be4; /* 0x4a0be4 */
 
 extern int FUN_0024f4e8(void);
-/* Supplied declaration required: FUN_0024f520. */
+/* Supplied declaration required: dataTable29Sub0GetEntryWithAoc. */
 /* Supplied declaration required: memClear. */
 
 
@@ -27,7 +27,7 @@ void FUN_0021be00(void)
   unsigned char *unaff_r8;
   
   temp_v0 = 0;
-  FUN_0024f520();
+  dataTable29Sub0GetEntryWithAoc();
   if (temp_v0 != 0) {
     memClear(&DAT_004a0be4,0x400);
     temp_v0 = FUN_0024f4e8();
@@ -40,7 +40,7 @@ void FUN_0021be00(void)
     if (0 < temp_v0) {
       do {
         pcVar2 = pcVar3;
-        FUN_0024f520();
+        dataTable29Sub0GetEntryWithAoc();
         if (((*pcVar2 != -1) && ((int)*pcVar2 == *unaff_r6)) && ((int)pcVar2[1] == unaff_r6[1])) {
           *(char **)(unaff_r8 + DAT_00447604 * 4) = pcVar3;
           DAT_00447604 = DAT_00447604 + 1;

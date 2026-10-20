@@ -12,7 +12,7 @@ int CONCAT44(...);
 int asdMdlManagerMarkDestroy(...);
 int FUN_002533f4(...);
 int FUN_002535d4(void);
-int FUN_0025be2c(...);
+int vec4Forward(...);
 int FUN_0027eee0(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
@@ -98,7 +98,7 @@ extern int FUN_00253ba0(char *);
 /* Supplied declaration required: FUN_00253c70. */
 extern int FUN_00256550(unsigned int);
 /* Supplied declaration required: FUN_0025b4b0. */
-/* Supplied declaration required: FUN_0025be2c. */
+/* Supplied declaration required: vec4Forward. */
 extern int FUN_0025c05c(void);
 /* Supplied declaration required: FUN_0027eee0. */
 /* Supplied declaration required: FUN_00281e34. */
@@ -1080,7 +1080,7 @@ LAB_0020a6f0:
           *(short *)(temp_v44 + 0x38) = temp_v1 + 9;
         }
         if (*(int *)(temp_v3 + 0xbc) >= 0x1e) break;
-        FUN_0025be2c(*(unsigned int *)(temp_v3 + 0x19c));
+        vec4Forward(*(unsigned int *)(temp_v3 + 0x19c));
         break;
       case 8:
         temp_v44 = temp_v3 + 0x134;
@@ -1236,7 +1236,7 @@ LAB_0020abfc:
                 }
                 temp_v6 = *(int *)(temp_v3 + 0xbc);
                 if (temp_v6 < 0x1e) {
-                  FUN_0025be2c(*(unsigned int *)(temp_v3 + 0x19c));
+                  vec4Forward(*(unsigned int *)(temp_v3 + 0x19c));
                 }
                 break;
               }
@@ -1829,7 +1829,7 @@ LAB_0020ba2c:
         }
         temp_v6 = *(int *)(temp_v3 + 0xbc);
         if (temp_v6 < 0x1e) {
-          FUN_0025be2c(*(unsigned int *)(temp_v3 + 0x19c));
+          vec4Forward(*(unsigned int *)(temp_v3 + 0x19c));
         }
         break;
       case 0xe:
@@ -2029,7 +2029,7 @@ LAB_0020c014:
               }
               temp_v6 = *(int *)(temp_v3 + 0xbc);
               if (temp_v6 < 0x1e) {
-                FUN_0025be2c(*(unsigned int *)(temp_v3 + 0x19c));
+                vec4Forward(*(unsigned int *)(temp_v3 + 0x19c));
               }
               break;
             }
@@ -2123,7 +2123,7 @@ LAB_0020c014:
                 *(short *)(temp_v3 + 0x16c) = temp_v1 + 5;
               }
               if (*(int *)(temp_v3 + 0xbc) < 0x1e) {
-                FUN_0025be2c(*(unsigned int *)(temp_v3 + 0x19c));
+                vec4Forward(*(unsigned int *)(temp_v3 + 0x19c));
               }
               break;
             }

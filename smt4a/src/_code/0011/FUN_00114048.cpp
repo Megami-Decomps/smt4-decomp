@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdOperatorDeleteArray(...);
-int FUN_002fedf4(int);
+int _ZN9Obj5592acD1Ev(int);
 int FUN_002fee58(int *);
 int FUN_002fee98(int *, int *, int *, int *);
 
@@ -23,7 +23,7 @@ extern unsigned char DAT_0055962c; /* 0x55962c */
 #endif
 /* Supplied declaration required: asdOperatorDeleteArray. */
 extern int onlineStringDestroy(unsigned int *);
-/* Supplied declaration required: FUN_002fedf4. */
+/* Supplied declaration required: _ZN9Obj5592acD1Ev. */
 /* Supplied declaration required: FUN_002fee58. */
 extern int wordRefsDiffer_002fee88(int *, int *);
 /* Supplied declaration required: FUN_002fee98. */
@@ -50,9 +50,9 @@ FUN_00114048(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
     if (temp_v0 == 0) break;
     if (*(int *)(temp_v1 + 0x14) != 0) {
       temp_v0 = *(int *)(temp_v1 + 0x14) + 0x28;
-      FUN_002fedf4(temp_v0);
+      _ZN9Obj5592acD1Ev(temp_v0);
       temp_v0 = temp_v0 - 0x24;
-      FUN_002fedf4(temp_v0);
+      _ZN9Obj5592acD1Ev(temp_v0);
       asdOperatorDeleteArray(temp_v0 - 4);
     }
     FUN_002fee58(&temp_v1);

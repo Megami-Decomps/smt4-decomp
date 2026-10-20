@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int uiSpriteSelectAnim(...);
@@ -44,7 +44,7 @@ extern unsigned int *g_gauntletAppMenu; /* 0x57f238 */
 
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -110,7 +110,7 @@ unsigned int FUN_0035c810(void)
   temp_v1 = dataTableGetCount(temp_v1);
   puVar1[0xac] = temp_v1;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0xae);
-  FUN_001505ac(puVar1 + 0xae,&DAT_0052caec,0x3c,&DAT_0052cb28,0x60,0,0,0,0,&DAT_0052cb88,0x134);
+  paramsInit(puVar1 + 0xae,&DAT_0052caec,0x3c,&DAT_0052cb28,0x60,0,0,0,0,&DAT_0052cb88,0x134);
   FUN_0014e188(puVar1 + 0xb6,0x14,0,puVar1 + 0xae,0xc9);
   uiSpriteSetKeyframe(puVar1 + 0xb6,3,0);
   uiSpriteSetImageKeyframe(puVar1 + 0xb6,6,0);

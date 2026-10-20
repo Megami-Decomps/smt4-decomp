@@ -1,43 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004aa020` (_code @ 0x4aa020, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "battle/btlUI.h"
 
 extern "C" {
 
-int FUN_002ccde8(int, int, int);
+int FUN_002cccf8(BtlUiObjCA *obj);
+int FUN_002ccde8(BtlUiObjCA *obj, u16 *idA, u16 *idB);
 
-extern unsigned char g_btlUi; /* 0x57a9b8 */
+extern BtlUiGlobalsA g_btlUi;
 
-extern int FUN_002cccf8(int);
-/* Supplied declaration required: FUN_002ccde8. */
-
-
+/* Polls the widget; when it reports a result, reads its two ids and switches the UI state to 0xE or 0. */
 int FUN_004aa020(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x10));
-  puVar5 = (unsigned int *)((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x74a0);
-  if (*puVar5 == 0xf) {
-    return 0;
-  }
-  temp_v2 = (*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x28c4;
-  temp_v1 = FUN_002cccf8(temp_v2);
-  if (temp_v1 != 0) {
-    FUN_002ccde8(temp_v2,temp_v0 + 0x74b6,temp_v0 + 0x74b8);
-    temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x74b6);
-    if (temp_v3 != 0xe) {
-      temp_v3 = 0;
+    BtlUiA *ui = g_btlUi.ui;
+    int result;
+
+    if (ui->state == 0xF) {
+        return 0;
     }
-    *puVar5 = temp_v3;
-  }
-  return temp_v1;
+    result = FUN_002cccf8(&ui->objC);
+    if (result != 0) {
+        FUN_002ccde8(&ui->objC, &ui->unk74B6, &ui->unk74B8);
+        ui->state = (ui->unk74B6 == 0xE) ? 0xE : 0;
+    }
+    return result;
 }
 
 } /* extern "C" */

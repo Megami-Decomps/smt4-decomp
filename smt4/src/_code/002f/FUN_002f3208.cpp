@@ -1,61 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f3208` (_code @ 0x2f3208, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail predicates the tail/prev stores separately (strne/streq) and bumps the count before storing the new tail; this build merges the node->prev store and stores the tail first */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0025c870(void);
-int effBlockCloneDeep(void);
+typedef struct EffNode {
+    /* 0x000 */ u8 unk000[0x90];
+    /* 0x090 */ void *block;
+    /* 0x094 */ u8 unk094[0x18];
+    /* 0x0AC */ struct EffNode *next;
+    /* 0x0B0 */ struct EffNode *prev;
+} EffNode;
 
-typedef struct fn_002f3208_arg0 fn_002f3208_arg0;
-typedef struct fn_002f3208_arg1 fn_002f3208_arg1;
-struct fn_002f3208_arg0 {
-    unsigned char pad_0x0[0x80];
-    int field_0x80; /* +0x80 */
-    unsigned char pad_0x84[0x4];
-    void *field_0x88; /* +0x88 */
-    int field_0x8c; /* +0x8c */
-};
-struct fn_002f3208_arg1 {
-    unsigned char pad_0x0[0x80];
-    unsigned char field_0x80; /* +0x80 */
-    unsigned char pad_0x81[0x7];
-    unsigned char field_0x88; /* +0x88 */
-    unsigned char pad_0x89[0x3];
-    unsigned char field_0x8c; /* +0x8c */
-    unsigned char pad_0x8d[0x3];
-    undefined4 field_0x90; /* +0x90 */
-    unsigned char pad_0x94[0x18];
-    undefined4 field_0xac; /* +0xac */
-    undefined4 field_0xb0; /* +0xb0 */
-};
+typedef struct EffList {
+    /* 0x00 */ u8 unk00[0x80];
+    /* 0x80 */ s32 count;
+    /* 0x84 */ u8 unk84[4];
+    /* 0x88 */ EffNode *tail;
+    /* 0x8C */ EffNode *head;
+} EffList;
 
-/* Supplied declaration required: FUN_0025c870. */
-/* Supplied declaration required: effBlockCloneDeep. */
+extern void *effBlockCloneDeep(void *block);
+extern EffNode *FUN_0025c870(void);
 
-
-void FUN_002f3208(fn_002f3208_arg0 *param_1,fn_002f3208_arg1 *param_2)
-
+/* Appends a node holding a deep copy of `block` to the list. */
+void FUN_002f3208(EffList *list, void *block)
 {
-/* irregular: 2 native warning(s); review required */
-  fn_002f3208_arg1 *pfVar1;
-  
-  effBlockCloneDeep();
-  pfVar1 = param_2;
-  FUN_0025c870();
-  pfVar1->field_0xac = 0;
-  pfVar1->field_0x90 = (undefined4)param_2;
-  if (param_1->field_0x88 != (void *)0x0) {
-    *(fn_002f3208_arg1 **)((int)param_1->field_0x88 + 0xac) = pfVar1;
-    pfVar1->field_0xb0 = (undefined4)param_1->field_0x88;
-  }
-  else {
-    param_1->field_0x8c = (int)pfVar1;
-    pfVar1->field_0xb0 = 0;
-  }
-  param_1->field_0x80 = param_1->field_0x80 + 1;
-  param_1->field_0x88 = pfVar1;
-  return;
+    void *clone = effBlockCloneDeep(block);
+    EffNode *node = FUN_0025c870();
+
+    node->next = NULL;
+    node->block = clone;
+    if (list->tail != NULL) {
+        list->tail->next = node;
+        node->prev = list->tail;
+    } else {
+        list->head = node;
+        node->prev = NULL;
+    }
+    list->count++;
+    list->tail = node;
 }
 
 } /* extern "C" */

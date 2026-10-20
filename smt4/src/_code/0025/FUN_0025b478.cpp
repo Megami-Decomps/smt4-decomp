@@ -1,20 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025b478` (_code @ 0x25b478, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int gameGetMapBlock(void);
+typedef struct MapBlock {
+    /* 0x000 */ u8 unk000[0x7D4];
+    /* 0x7D4 */ u32 words[1];       /* one bit per flag */
+} MapBlock;
 
+MapBlock *gameGetMapBlock(void);
 
-unsigned char FUN_0025b478(int param_1)
-
+/* Returns whether bit `flag` of the map block's flag bitmap is set. */
+bool FUN_0025b478(s32 flag)
 {
-  int temp_v0;
-  
-  temp_v0 = gameGetMapBlock();
-  return (*(unsigned int *)(temp_v0 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4 + 0x7d4) &
-         (1 << ((param_1 % 0x20) & 0xffU))) != 0;
+    MapBlock *block = gameGetMapBlock();
+    s32 index = flag / 32;
+    s32 bit = flag % 32;
+
+    return (block->words[index] & (1 << bit)) != 0;
 }
 
 } /* extern "C" */

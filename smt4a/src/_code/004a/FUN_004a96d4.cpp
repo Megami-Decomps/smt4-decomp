@@ -1,25 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a96d4` (_code @ 0x4a96d4, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00270bfc(int);
+typedef struct BtlUiPanel {
+    /* 0x0000 */ u8 unk0000[0x28C4];
+    /* 0x28C4 */ u8 holder[1];
+} BtlUiPanel;
 
-extern unsigned char g_btlUi; /* 0x57a9b8 */
+typedef struct BtlUiView {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ BtlUiPanel *panel;
+} BtlUiView;
 
-/* Supplied declaration required: FUN_00270bfc. */
+extern BtlUiView g_btlUi;
 
+u8 FUN_00270bfc(void *holder);
 
-void FUN_004a96d4(void)
-
+/* Returns 1 when there is no panel, otherwise FUN_00270bfc's result for the panel's holder. */
+u8 FUN_004a96d4(void)
 {
-/* irregular: 1 native warning(s); review required */
-  if ((*(int *)((unsigned char *)&g_btlUi + 0x10)) != 0) {
-    FUN_00270bfc((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x28c4);
-    return;
-  }
-  return;
+    BtlUiPanel *panel = g_btlUi.panel;
+
+    if (panel == NULL) {
+        return 1;
+    }
+    return FUN_00270bfc(panel->holder);
 }
 
 } /* extern "C" */

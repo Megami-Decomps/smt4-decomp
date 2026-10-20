@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023e51c(unsigned short *, int *, int, int);
+int aocCollectLevelEntries(unsigned short *, int *, int, int);
 int asdOperatorNewD(void);
 int asdOperatorDeleteC(unsigned short *);
 int rt_memclr(void);
@@ -27,7 +27,7 @@ typedef struct {
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0023e51c. */
+/* Supplied declaration required: aocCollectLevelEntries. */
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: asdOperatorDeleteC. */
 /* Supplied declaration required: rt_memclr. */
@@ -72,7 +72,7 @@ unsigned int FUN_003da99c(int param_1,fn_003da99c_arg1 *param_2,unsigned int par
   temp_v8 = 0;
   asdOperatorNewD();
   rt_memclr();
-  FUN_0023e51c(puVar6,&temp_v8,temp_v0,param_1);
+  aocCollectLevelEntries(puVar6,&temp_v8,temp_v0,param_1);
   temp_v5 = 0;
   if (temp_v8 != 0) {
     puVar9 = puVar6 + 1;

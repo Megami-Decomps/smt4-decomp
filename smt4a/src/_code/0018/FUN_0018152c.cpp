@@ -12,7 +12,7 @@ int drawSetColorFromRGBA8(void);
 int FUN_00191ea8(...);
 int FUN_00191f18(unsigned int, int);
 int dataTable00FindById(void);
-int FUN_0019e130(int);
+int markerKindGetColor(int);
 
 /* stack frame of param_5: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -37,7 +37,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00191ea8. */
 /* Supplied declaration required: FUN_00191f18. */
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_0019e130. */
+/* Supplied declaration required: markerKindGetColor. */
 extern int slotRecordFindById(unsigned int);
 
 
@@ -81,7 +81,7 @@ void FUN_0018152c(unsigned int param_1,unsigned int param_2,unsigned int param_3
     }
     if (((param_5 != 0) && (temp_v0 = slotRecordFindById(param_1 & 0xffff), temp_v0 != 0)) &&
        ((*(unsigned short *)(temp_v0 + 0x60) & 2) != 0)) {
-      FUN_0019e130(1);
+      markerKindGetColor(1);
       drawSetColorFromRGBA8();
     }
     temp_v0 = FUN_00191f18(g_aocSystem,*(unsigned short *)(temp_v1 + 0x9c));

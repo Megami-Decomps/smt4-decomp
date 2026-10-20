@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned int *, unsigned int);
-int FUN_002e6e5c(unsigned int *);
+int _ZN9Obj55b28cD1Ev(unsigned int *);
 
 typedef int romwright_code(...);
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -13,7 +13,7 @@ typedef int romwright_code(...);
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 extern int rangeIsEmpty3(int *);
 
@@ -36,12 +36,12 @@ long long FUN_0010e290(int *param_1,unsigned int param_2,unsigned int param_3,un
   do {
     temp_v1 = rangeIsEmpty3(param_1 + 0x58);
     if (temp_v1 != 0) {
-      FUN_002e6e5c(&uStack_18);
+      _ZN9Obj55b28cD1Ev(&uStack_18);
       return romwright_piece_4_4(uStack_18,1);
     }
     temp_v1 = (**(romwright_code **)(*param_1 + 0x14))(param_1,*(unsigned short *)param_1[0x59]);
   } while (temp_v1 != 0);
-  FUN_002e6e5c(&uStack_18);
+  _ZN9Obj55b28cD1Ev(&uStack_18);
   return (unsigned long long)uStack_18 << 0x20;
 }
 

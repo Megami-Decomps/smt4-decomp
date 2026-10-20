@@ -1,21 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029ee2c` (_code @ 0x29ee2c, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_messageMain; /* 0x43e188 */
+typedef struct MessageSlot {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ u8 state;
+} MessageSlot;
 
+typedef struct MessageMain {
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ MessageSlot *slot;
+} MessageMain;
 
-unsigned char FUN_0029ee2c(void)
+extern MessageMain g_messageMain; /* 0x43e188 */
 
+/* Whether the message slot exists and is in state 1. */
+u8 FUN_0029ee2c(void)
 {
-  unsigned char temp_v0;
-  
-  if (((*(int *)((unsigned char *)&g_messageMain + 0x4)) == 0) || (temp_v0 = 1, *(char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 8) != '\x01')) {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    return g_messageMain.slot != NULL && g_messageMain.slot->state == 1;
 }
 
-} /* extern "C" */
+}

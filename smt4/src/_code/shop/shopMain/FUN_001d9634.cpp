@@ -15,8 +15,8 @@ int FUN_003a0994(unsigned int);
 int FUN_003a14ac(void);
 int FUN_003a3914(void);
 int FUN_003a5e30(void);
-int FUN_003a63c8(int [2]);
-int FUN_003a63f8(int [2]);
+int fileSlot17Acquire(int [2]);
+int fileSlot17Release(int [2]);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -45,8 +45,8 @@ extern int FUN_00343af0(void);
 /* Supplied declaration required: FUN_003a3914. */
 /* Supplied declaration required: FUN_003a5e30. */
 extern int storyFlagRangeAnySet(void);
-/* Supplied declaration required: FUN_003a63c8. */
-/* Supplied declaration required: FUN_003a63f8. */
+/* Supplied declaration required: fileSlot17Acquire. */
+/* Supplied declaration required: fileSlot17Release. */
 
 
 unsigned int FUN_001d9634(void)
@@ -150,7 +150,7 @@ unsigned int FUN_001d9634(void)
             temp_v2 = FUN_00263c34(*(int *)(temp_v3 + 0x18) + 0x828);
             asdMemFreeNonNull(temp_v2 - 0x828);
           }
-          FUN_003a63f8(temp_v7);
+          fileSlot17Release(temp_v7);
         }
         *(unsigned char *)(temp_v3 + 5) = 3;
       }
@@ -172,7 +172,7 @@ unsigned int FUN_001d9634(void)
       *(unsigned char *)(temp_v3 + 5) = 3;
     }
     else {
-      FUN_003a63c8(temp_v7);
+      fileSlot17Acquire(temp_v7);
       temp_v2 = 0x15d6c;
       if (*(char *)(temp_v3 + 6) != '\0') {
         if (*(char *)(temp_v3 + 6) == '\x01') {

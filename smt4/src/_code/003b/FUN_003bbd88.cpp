@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ebaec(int, int, int, int);
+int cecSettingsSet(int, int, int, int);
 int FUN_003103e4(unsigned int, unsigned int, char [33], unsigned int, int, char [22], int, int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -20,7 +20,7 @@ extern char s__SHIN_MEGAMITENSEI_4_0043ddd0[33]; /* 0x43ddd0 */
 extern char s_Shin_Megami_Tensei_I_0043de3c[22]; /* 0x43de3c */
 
 extern int FUN_002e0e44(unsigned int, unsigned int, char *, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002ebaec. */
+/* Supplied declaration required: cecSettingsSet. */
 /* Supplied declaration required: FUN_003103e4. */
 extern unsigned int FUN_00357818(unsigned int);
 
@@ -37,7 +37,7 @@ unsigned int FUN_003bbd88(int param_1)
                0x1200,s_Shin_Megami_Tensei_I_0043de3c,0xc,99);
   switch(temp_v0) {
   default:
-    FUN_002ebaec(2,3,0xff,0);
+    cecSettingsSet(2,3,0xff,0);
     temp_v0 = FUN_00357818(0xe5c);
     temp_v1 = FUN_002e0e44(temp_v0,DAT_0043ddb8,s_Shin_Megami_Tensei_I_0043de3c,
                          *(unsigned int *)(param_1 + 4),0x1200);

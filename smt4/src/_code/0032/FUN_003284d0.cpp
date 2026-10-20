@@ -1,25 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003284d0` (_code @ 0x3284d0, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail's literal pool holds an extra unreferenced address word (0x0044dc20) before the 0xcf78 offset */
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+typedef struct Entry003284d0 {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ u16 value;
+    /* 0x00a */ u8 unk00a[0x616];
+} Entry003284d0;  /* 0x620 */
 
-/* Supplied declaration required: scrSetResult. */
+typedef struct Game003284d0 {
+    /* 0x0000 */ u8 unk0000[0x3c54];
+    /* 0x3c54 */ Entry003284d0 entries[16];
+    /* 0xcf74 */ u8 unkcf74[4];
+    /* 0xcf78 */ s32 current;      /* index of the current entry */
+} Game003284d0;
 
+typedef struct Holder003284d0 {
+    /* 0x00 */ Game003284d0 *game;
+} Holder003284d0;
 
-unsigned int FUN_003284d0(int *param_1)
+void scrSetResult(s32 value);
 
+/* Script command: reports the value of the current entry (when there is a game). Returns 1. */
+u32 FUN_003284d0(Holder003284d0 *holder)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *param_1;
-  if (temp_v0 != 0) {
-    scrSetResult(*(unsigned short *)(temp_v0 + *(int *)(temp_v0 + 0xcf78) * 0x620 + 0x3c5c));
-  }
-  return 1;
+    Game003284d0 *game = holder->game;
+
+    if (game != NULL) {
+        Entry003284d0 *entry = &game->entries[game->current];
+
+        scrSetResult(entry->value);
+    }
+    return 1;
 }
 
 } /* extern "C" */

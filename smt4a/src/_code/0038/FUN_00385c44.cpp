@@ -13,7 +13,7 @@ int FUN_0047f1c4(...);
 int FUN_004a9a64(...);
 int FUN_004a9c84(...);
 int FUN_004c3a98(...);
-int FUN_004c3c84(unsigned int, int, int);
+int btlSlotSetStoreValue(unsigned int, int, int);
 int FUN_004c571c(...);
 int FUN_004fdc9c(...);
 
@@ -88,7 +88,7 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_004a9a64. */
 /* Supplied declaration required: FUN_004a9c84. */
 /* Supplied declaration required: FUN_004c3a98. */
-/* Supplied declaration required: FUN_004c3c84. */
+/* Supplied declaration required: btlSlotSetStoreValue. */
 /* Supplied declaration required: FUN_004c571c. */
 extern int hasFlag80Or1000(unsigned int);
 extern int btlUnitGet(unsigned int);
@@ -230,13 +230,13 @@ void FUN_00385c44(unsigned int *param_1)
   temp_v12 = temp_v7;
   if (temp_v7 < temp_v15) {
     do {
-      FUN_004c3c84(temp_v12,0x14,0);
-      FUN_004c3c84(temp_v12,0x15,0);
-      FUN_004c3c84(temp_v12,0x18,0);
-      FUN_004c3c84(temp_v12,0x19,0);
-      FUN_004c3c84(temp_v12,0x27,0);
-      FUN_004c3c84(temp_v12,0x28,0);
-      FUN_004c3c84(temp_v12,0x29,0);
+      btlSlotSetStoreValue(temp_v12,0x14,0);
+      btlSlotSetStoreValue(temp_v12,0x15,0);
+      btlSlotSetStoreValue(temp_v12,0x18,0);
+      btlSlotSetStoreValue(temp_v12,0x19,0);
+      btlSlotSetStoreValue(temp_v12,0x27,0);
+      btlSlotSetStoreValue(temp_v12,0x28,0);
+      btlSlotSetStoreValue(temp_v12,0x29,0);
       temp_v8 = FUN_004c3a98(temp_v12,0x24);
       if (0 < temp_v8) {
         FUN_004c571c(temp_v12,0x24,0xffffffff,0);

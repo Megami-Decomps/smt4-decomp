@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022e3f8(void);
+int aocRecordLookup84(void);
 int FUN_00250d84(int, int);
 int FUN_00295a18(void);
 int FUN_00295c04(int);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_0022e3f8. */
+/* Supplied declaration required: aocRecordLookup84. */
 /* Supplied declaration required: FUN_00250d84. */
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: FUN_00295c04. */
@@ -67,7 +67,7 @@ void FUN_002306f8(unsigned short *param_1,int param_2,int param_3)
           }
           break;
         case 10:
-          FUN_0022e3f8();
+          aocRecordLookup84();
           temp_v2 = temp_v3;
           if (temp_v1 != 0) {
             temp_v2 = *(int *)(temp_v1 + 0x2c);

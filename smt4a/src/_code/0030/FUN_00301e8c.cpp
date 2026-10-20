@@ -10,7 +10,7 @@ int FUN_002ece14(unsigned char [36]);
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ece14. */
 extern int FUN_002fdef8(int, unsigned char *);
-extern int FUN_002fdfa6(int, unsigned char *, unsigned int);
+extern int _ZN9Obj558c007vfunc10EiP14Obj558c00Range(int, unsigned char *, unsigned int);
 
 
 unsigned char FUN_00301e8c(int param_1,unsigned int param_2,unsigned int param_3)
@@ -24,7 +24,7 @@ unsigned char FUN_00301e8c(int param_1,unsigned int param_2,unsigned int param_3
   FUN_002ece14(temp_v2);
   temp_v0 = FUN_002fdef8(param_1 + 0x234,temp_v2);
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002fdfa6(param_1 + 4,temp_v2,param_3);
+    temp_v0 = _ZN9Obj558c007vfunc10EiP14Obj558c00Range(param_1 + 4,temp_v2,param_3);
     temp_v1 = temp_v0 == 0;
     strDestroy(temp_v2);
   }

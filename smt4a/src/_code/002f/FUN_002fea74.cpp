@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002f2a22(int, int *, int, unsigned int, int);
-int FUN_002feac0(int, int **);
+int ringPush(int, int **);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002f2a22. */
-/* Supplied declaration required: FUN_002feac0. */
+/* Supplied declaration required: ringPush. */
 
 
 void FUN_002fea74(int param_1,int *param_2,unsigned int param_3,unsigned int param_4)
@@ -37,7 +37,7 @@ void FUN_002fea74(int param_1,int *param_2,unsigned int param_3,unsigned int par
         (**(romwright_code **)(*piVar1 + 4))();
       }
     }
-    FUN_002feac0(param_1 + 0x24,&temp_v1);
+    ringPush(param_1 + 0x24,&temp_v1);
   }
   return;
 }

@@ -5,10 +5,10 @@
 extern "C" {
 
 int rt_memclr(short *, int);
-int FUN_0035dd74(void);
+int contentEntryFindById(void);
 
 /* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: FUN_0035dd74. */
+/* Supplied declaration required: contentEntryFindById. */
 
 
 void FUN_004da920(unsigned int param_1,short *param_2,short *param_3)
@@ -18,7 +18,7 @@ void FUN_004da920(unsigned int param_1,short *param_2,short *param_3)
   int temp_v0;
   int temp_v1;
   
-  FUN_0035dd74();
+  contentEntryFindById();
   if (param_2 != (short *)0x0) {
     rt_memclr(param_3,0x28);
     temp_v1 = 0xc;

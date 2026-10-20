@@ -1,71 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00230234` (_code @ 0x230234, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00230558(int);
-int FUN_002305e8(int);
-int FUN_0028c040(void);
-int FUN_00292ca0(int);
-int FUN_0029a0cc(unsigned int);
-int FUN_0029a0e8(unsigned int);
-int FUN_0029a128(unsigned int);
-int FUN_0029c4c8(int);
+typedef struct Scene {
+    /* 0x00000 */ u8 unk00000[0x10];
+    /* 0x00010 */ s32 mode;
+    /* 0x00014 */ u8 unk00014[0x15D10];
+    /* 0x15D24 */ u32 active;
+    /* 0x15D28 */ u32 unk15d28;
+    /* 0x15D2C */ u8 unk15d2c[0x1C];
+    /* 0x15D48 */ void *secondList;
+} Scene;
 
-typedef struct fn_00230234_arg0 fn_00230234_arg0;
-struct fn_00230234_arg0 {
-    unsigned char pad_0x0[0x10];
-    int field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x15d10];
-    unsigned char field_0x15d24; /* +0x15d24 */
-    unsigned char pad_0x15d25[0x3];
-    undefined4 field_0x15d28; /* +0x15d28 */
-    unsigned char pad_0x15d2c[0x1c];
-    int field_0x15d48; /* +0x15d48 */
-};
+extern const char DAT_00407648[];  /* "player/pl_dammy.bam" */
 
-/* Supplied declaration required: FUN_00230558. */
-/* Supplied declaration required: FUN_002305e8. */
-/* Supplied declaration required: FUN_0028c040. */
-/* Supplied declaration required: FUN_00292ca0. */
-extern int asdMdlManagerCreateSecondList(char *, unsigned int);
-/* Supplied declaration required: FUN_0029a0cc. */
-/* Supplied declaration required: FUN_0029a0e8. */
-/* Supplied declaration required: FUN_0029a128. */
-/* Supplied declaration required: FUN_0029c4c8. */
-extern unsigned int gameGetPlayerData(void);
+s32 FUN_0028c040(void);
+s32 gameGlobalsSetSelected(u32 arg);
+s32 statusDownSwitchTab(s32 arg);
+u32 gameGetPlayerData(void);
+s32 FUN_0029c4c8(s32 arg);
+s32 FUN_0029a0e8(u32 arg);
+s32 FUN_0029a0cc(u32 arg);
+s32 messageWindowStartTimer(s32 arg);
+s32 FUN_002305e8(s32 arg);
+void *asdMdlManagerCreateSecondList(const char *name, u32 arg);
 
-
-void FUN_00230234(fn_00230234_arg0 *param_1)
-
+/* Resets the scene's player state and creates its second model list on first use. */
+void FUN_00230234(Scene *scene)
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  FUN_0028c040();
-  if (param_1->field_0x10 == 1) {
-    temp_v0 = 3;
-  }
-  else {
-    temp_v0 = 7;
-  }
-  FUN_0029a128(temp_v0);
-  FUN_00292ca0(0);
-  temp_v0 = gameGetPlayerData();
-  FUN_0029c4c8(1);
-  FUN_0029a0e8(temp_v0);
-  FUN_0029a0cc(temp_v0);
-  *(unsigned int *)&param_1->field_0x15d24 = 1;
-  FUN_00230558(1);
-  FUN_002305e8(0);
-  if (param_1->field_0x15d48 == 0) {
-    temp_v1 = asdMdlManagerCreateSecondList("player/pl_dammy.bam",7);
-    param_1->field_0x15d48 = temp_v1;
-  }
-  param_1->field_0x15d28 = 0;
-  return;
+    u32 value;
+
+    FUN_0028c040();
+    if (scene->mode == 1) {
+        value = 3;
+    } else {
+        value = 7;
+    }
+    gameGlobalsSetSelected(value);
+    statusDownSwitchTab(0);
+    value = gameGetPlayerData();
+    FUN_0029c4c8(1);
+    FUN_0029a0e8(value);
+    FUN_0029a0cc(value);
+    scene->active = 1;
+    messageWindowStartTimer(1);
+    FUN_002305e8(0);
+    if (scene->secondList == NULL) {
+        scene->secondList = asdMdlManagerCreateSecondList(DAT_00407648, 7);
+    }
+    scene->unk15d28 = 0;
 }
 
 } /* extern "C" */

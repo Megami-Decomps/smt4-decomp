@@ -1,29 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038c414` (_code @ 0x38c414, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W4_W4Match6b_BtlUnitWork.h"
 
 extern "C" {
 
-int scrSetResult(int);
+extern s32 g_btlScriptUnit;
+extern s32 scrGetArg(void);
+extern BtlUnit *btlUnitGet(s32 id);
+extern void scrSetResult(s32 value);
 
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-
-extern int scrGetArg(void);
-/* Supplied declaration required: scrSetResult. */
-extern int btlUnitGet(unsigned int);
-
-
-unsigned int FUN_0038c414(void)
-
+/* Script command: whether the kind (top 6 bits) of value `arg` of the scripted unit is 4. */
+u32 FUN_0038c414(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
-  scrSetResult(*(unsigned short *)(*(int *)(temp_v1 + 0x28) + temp_v0 * 2 + 0x152) >> 10 == 4);
-  return 1;
+    s32 index = scrGetArg();
+    BtlUnitWork *work = btlUnitGet(g_btlScriptUnit)->work;
+
+    scrSetResult(work->values[index] >> 10 == 4);
+    return 1;
 }
 
-} /* extern "C" */
+}

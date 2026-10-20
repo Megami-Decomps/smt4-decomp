@@ -1,69 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037dfb0` (_code @ 0x37dfb0, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register naming only: retail keeps the status block in r4 and the list pointer (add r0; mov r5, r0) in r5; the build swaps them. */
+#include "common.h"
 
 extern "C" {
 
-int ifTouchRegionRemove(void);
-int __aeabi_memset4(int, int, unsigned int);
-int FUN_00203b40(int, int, int, int, int, int);
-int FUN_00230d30(void);
-int FUN_002a4964(int, int);
-int FUN_002c2c68(...);
+typedef struct StatusList {
+    /* 0x00 */ u8 unk00[0x10];
+} StatusList;
 
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
+typedef struct StatusDown {
+    /* 0x000 */ u8 unk000[0x518];
+    /* 0x518 */ u32 state;
+    /* 0x51C */ u32 prevState;
+    /* 0x520 */ u8 unk520[4];
+    /* 0x524 */ u32 unk524;
+    /* 0x528 */ u8 unk528;
+    /* 0x529 */ u8 unk529[0x1B];
+    /* 0x544 */ u8 slots[0x54];
+    /* 0x598 */ u8 unk598[2];
+    /* 0x59A */ u8 touchRegionCount;
+    /* 0x59B */ u8 unk59B[0x51];
+    /* 0x5EC */ StatusList list;
+    /* 0x5FC */ u8 unk5FC[0x5C];
+    /* 0x658 */ u32 argA;
+    /* 0x65C */ u32 argB;
+} StatusDown;
 
-extern int g_statusDown; /* 0x588fe8 */
+extern StatusDown *g_statusDown; /* 0x588fe8 */
 
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_00230d30. */
-/* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: FUN_002c2c68. */
+extern int ifTouchRegionRemove(void);
+extern void __aeabi_memset4(void *dst, int size, u32 value);
+extern int FUN_00203b40(StatusList *list, int a, int b, int c, int d, int e);
+extern int FUN_00230d30(void);
+extern int FUN_002a4964(StatusList *list, int index);
+extern int FUN_002c2c68(StatusList *list);
 
-
-void FUN_0037dfb0(unsigned int param_1,unsigned int param_2)
-
+/* Opens the status screen's list with the two arguments: rebuilds the list, resets the touch regions and slots and enters state 0xE. */
+void FUN_0037dfb0(u32 argA, u32 argB)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  
-  temp_v0 = g_statusDown;
-  *(unsigned int *)(g_statusDown + 0x65c) = param_1;
-  temp_v1 = temp_v0 + 0x5ec;
-  *(unsigned int *)(temp_v0 + 0x658) = param_2;
-  temp_v2 = FUN_002c2c68();
-  FUN_00203b40(temp_v1,temp_v2 + 1,9,1,0,1);
-  temp_v2 = FUN_002c2c68(temp_v1);
-  FUN_002a4964(temp_v1,temp_v2 - 1);
-  *(unsigned char *)(temp_v0 + 0x528) = 1;
-  temp_v0 = g_statusDown;
-  temp_v1 = 0;
-  if (*(char *)(g_statusDown + 0x59a) != '\0') {
-    do {
-      ifTouchRegionRemove();
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < (int)(unsigned int)*(unsigned char *)(temp_v0 + 0x59a));
-  }
-  *(unsigned char *)(temp_v0 + 0x59a) = 0;
-  __aeabi_memset4(temp_v0 + 0x544,0x54,0xffffffff);
-  temp_v0 = g_statusDown;
-  *(unsigned int *)(g_statusDown + 0x524) = 0;
-  puVar4 = (unsigned int *)(temp_v0 + 0x518);
-  temp_v3 = *puVar4;
-  *puVar4 = 0xe;
-  *(unsigned int *)(temp_v0 + 0x51c) = temp_v3;
-  FUN_00230d30();
-  return;
+    StatusDown *status = g_statusDown;
+    u32 previous;
+    int i;
+
+    status->argB = argA;
+    status->argA = argB;
+    FUN_00203b40(&status->list, FUN_002c2c68(&status->list) + 1, 9, 1, 0, 1);
+    FUN_002a4964(&status->list, FUN_002c2c68(&status->list) - 1);
+    status->unk528 = 1;
+    status = g_statusDown;
+    for (i = 0; i < status->touchRegionCount; i++) {
+        ifTouchRegionRemove();
+    }
+    status->touchRegionCount = 0;
+    __aeabi_memset4(status->slots, 0x54, 0xFFFFFFFF);
+    status = g_statusDown;
+    status->unk524 = 0;
+    previous = status->state;
+    status->state = 0xE;
+    status->prevState = previous;
+    FUN_00230d30();
 }
 
 } /* extern "C" */

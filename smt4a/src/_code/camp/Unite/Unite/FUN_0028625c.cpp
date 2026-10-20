@@ -15,7 +15,7 @@ int gameFlagSetValue(...);
 int asdMemoryAlloc(...);
 int slotRecordFindById(...);
 int svcSleepThread(...);
-int FUN_00239234(int, unsigned short [14]);
+int gameDataCopySaveEntry(int, unsigned short [14]);
 int sysMemClear(int *, int);
 int recSet148(int, int);
 int recSet150(int, int);
@@ -60,7 +60,7 @@ typedef struct {
 
 extern int FUN_00270d74(...); /* 0x270d74 */
 extern int FUN_002b2ca8(...); /* 0x2b2ca8 */
-extern int FUN_002ce824(...); /* 0x2ce824 */
+extern int devilCompareByRankGradeAscending(...); /* 0x2ce824 */
 extern int FUN_002fe074(...); /* 0x2fe074 */
 extern int FUN_00321cc0(...); /* 0x321cc0 */
 extern int FUN_00337110(...); /* 0x337110 */
@@ -87,7 +87,7 @@ extern int gameGetSlotTable(void);
 extern int gameSlotTableFindFree(void);
 /* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_00239234. */
+/* Supplied declaration required: gameDataCopySaveEntry. */
 extern int FUN_0026140c(void);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_002a7324. */
@@ -284,7 +284,7 @@ void FUN_0028625c(int *param_1)
                      (param_1[param_1[0x172] * 2 + 0x4ee] & 0x3fffffffU) | 0x40000000;
                 temp_v5 = slotRecordFindById(temp_v1);
                 if ((temp_v5 == 0) || (temp_v6 = bitsAt60Test(temp_v5,10), temp_v6 != 0)) {
-                  FUN_00239234(temp_v1,temp_v26);
+                  gameDataCopySaveEntry(temp_v1,temp_v26);
                   if ('\0' < *(char *)((int)temp_v25 + 0x17)) {
                     temp_v12 = (unsigned int)temp_v26[0];
                     temp_v15 = SBORROW4(temp_v12,temp_v3);
@@ -703,7 +703,7 @@ LAB_0028727c:
           temp_v14 = ~(*pbVar19 >> 7) & 1;
           if ((*pbVar19 & 0x7f) == 1) {
             if (temp_v14 != 0) {
-              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_002ce824);
+              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,devilCompareByRankGradeAscending);
             }
             else {
               qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_003603a0);

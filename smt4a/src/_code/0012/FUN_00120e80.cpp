@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0010d2c4(void);
 int FUN_00122ed4(unsigned int, int, int);
 int FUN_002e6e34(...);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002e6fb0(unsigned char [12], unsigned int, unsigned int);
 int sharedRefInitEmpty(int);
 int FUN_002f9f4e(unsigned int);
@@ -22,7 +22,7 @@ extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 /* Supplied declaration required: FUN_00122ed4. */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e6fb0. */
 /* Supplied declaration required: sharedRefInitEmpty. */
 extern int FUN_002eb624(unsigned int *);
@@ -43,7 +43,7 @@ void FUN_00120e80(unsigned int *param_1)
   temp_v0 = FUN_002e6e26();
   FUN_002e6e34(temp_v2,temp_v0 + 0x58);
   FUN_002f9f4e(*(unsigned int *)(param_1[5] + 0x44));
-  FUN_002e6e5c(temp_v2);
+  _ZN9Obj55b28cD1Ev(temp_v2);
   FUN_002e6fb0(temp_v1,param_1[5],0xffffffff);
   FUN_00122ed4(param_1[3],60000,1);
   FUN_00301792(*(unsigned int *)(param_1[5] + 0x44),param_1[4]);
@@ -58,7 +58,7 @@ void FUN_00120e80(unsigned int *param_1)
   }
   FUN_002e6e34(temp_v2,&DAT_0062e6a0);
   (*(int *)((unsigned char *)&DAT_005949d8 + 0x18)) = (*(int *)((unsigned char *)&DAT_005949d8 + 0x18)) - 1;
-  FUN_002e6e5c(temp_v2);
+  _ZN9Obj55b28cD1Ev(temp_v2);
   FUN_0010d2c4();
   temp_v0 = FUN_002eb624(param_1 + 0x13);
   temp_v0 = FUN_002ed250(temp_v0 - 0x30);

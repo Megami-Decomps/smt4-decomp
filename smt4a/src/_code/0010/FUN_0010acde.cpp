@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(...);
-int FUN_002e6e5c(...);
+int _ZN9Obj55b28cD1Ev(...);
 int sharedRefRelease(...);
 int FUN_002eb310(int, int *);
 int wordMoveOut_002f1324(unsigned char [4], int [3], int);
@@ -34,7 +34,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002eb310. */
@@ -109,7 +109,7 @@ void FUN_0010acde(int param_1,int param_2,int param_3)
           temp_v6 = temp_v9;
           temp_v17 = temp_v8;
           FUN_002f3f72(temp_v18,param_3,&temp_v17,&temp_v6);
-          FUN_002e6e5c(temp_v13);
+          _ZN9Obj55b28cD1Ev(temp_v13);
         }
       }
     }
@@ -132,7 +132,7 @@ void FUN_0010acde(int param_1,int param_2,int param_3)
     }
     sharedRefRelease(temp_v2);
   }
-  FUN_002e6e5c(temp_v11);
+  _ZN9Obj55b28cD1Ev(temp_v11);
   return;
 }
 

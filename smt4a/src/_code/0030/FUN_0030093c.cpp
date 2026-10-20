@@ -6,7 +6,7 @@ extern "C" {
 
 int onlineStringDestroy(int *);
 int onlineUrlSetText(unsigned int, unsigned int);
-int constructObj0055affc(int *);
+int _ZN9Obj55aff4C1Ev(int *);
 int FUN_002fbc1a(int, int *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: onlineUrlSetText. */
-/* Supplied declaration required: constructObj0055affc. */
+/* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 /* Supplied declaration required: FUN_002fbc1a. */
 
 
@@ -29,7 +29,7 @@ unsigned int FUN_0030093c(int param_1,unsigned int param_2,unsigned int param_3,
   
   uStack_18 = param_3;
   temp_v0 = param_4;
-  constructObj0055affc(&uStack_18);
+  _ZN9Obj55aff4C1Ev(&uStack_18);
   FUN_002fbc1a(param_1,&uStack_18);
   if (param_1 != 0) {
     onlineUrlSetText(param_2,temp_v0);

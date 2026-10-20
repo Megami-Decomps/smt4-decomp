@@ -1,4 +1,4 @@
-/* If the pending-draw check reports 1 and the flag at DAT_0057ffd0+1 is set, starts a draw pass
+/* If the pending-draw check reports 1 and the flag at g_titleFlags+1 is set, starts a draw pass
  * on the draw context. */
 #include "common.h"
 #include "camp/RenderCtx.h"
@@ -11,7 +11,7 @@ int FUN_00144ab4(int arg);
 int FUN_00157558(RenderCtxA *ctx);
 int FUN_001575cc(RenderCtxA *ctx);
 
-extern s8 DAT_0057ffd0[];
+extern s8 g_titleFlags[];
 extern RenderCtxA *g_renderCtx;
 
 extern int FUN_001696f4(void);
@@ -20,7 +20,7 @@ u32 renderCtxBeginPass(void)
 {
     RenderCtxA *ctx;
 
-    if (FUN_001696f4() == 1 && DAT_0057ffd0[1] != 0) {
+    if (FUN_001696f4() == 1 && g_titleFlags[1] != 0) {
         FUN_00144ab4(1);
         ctx = g_renderCtx;
         ctx->unk052C = 1;

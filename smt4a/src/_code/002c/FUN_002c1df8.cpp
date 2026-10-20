@@ -1,62 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c1df8` (_code @ 0x2c1df8, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction order only: retail loads the other table's first word before the entry's id (ldr r0, [r0] then ldrsh r1); the compiler loads the id first. */
+#include "common.h"
 
 extern "C" {
 
-int dataTableGetEntries(void);
-int dataTableFileGetTable(...);
+typedef struct TableEntry {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ s16 id;
+    /* 0x22 */ u8 unk22[4];
+    /* 0x26 */ u8 fileIndex;
+    /* 0x27 */ u8 unk27;
+} TableEntry;                        /* 0x28 */
 
-typedef struct fn_002c1df8_arg0 fn_002c1df8_arg0;
-struct fn_002c1df8_arg0 {
-    undefined4 field_0x0; /* +0x0 */
-    unsigned char pad_0x4[0x1c];
-    short field_0x20; /* +0x20 */
-    unsigned char pad_0x22[0x4];
-    byte field_0x26; /* +0x26 */
-};
+u32 tbcrBlockGetPayload(void);
+void *dataTableFileGetTable(void *file, u32 index);
+TableEntry *dataTableGetEntries(void *table);
+u32 dataTableGetCount(void *table);
 
-extern unsigned int dataTableGetCount(unsigned int);
-/* Supplied declaration required: dataTableGetEntries. */
-/* Supplied declaration required: dataTableFileGetTable. */
-extern unsigned int tbcrBlockGetPayload(void);
-
-
-void FUN_002c1df8(fn_002c1df8_arg0 *param_1)
-
+/* For every entry of the file's first table that has a file index set, finds the first of the
+ * file's other tables whose first entry has the same id and stores that table's index. */
+void FUN_002c1df8(void *file)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int *piVar5;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v0 = tbcrBlockGetPayload();
-  temp_v1 = dataTableFileGetTable(param_1,0);
-  temp_v2 = dataTableGetEntries();
-  temp_v3 = dataTableGetCount(temp_v1);
-  temp_v5 = 0;
-  if (temp_v5 < temp_v3) {
-    do {
-      if ((*(char *)(temp_v2 + 0x26) != '\0') && (temp_v4 = 1, temp_v0 >= 2)) {
-        do {
-          dataTableFileGetTable(param_1,temp_v4);
-          piVar5 = (int *)dataTableGetEntries();
-          if (*piVar5 == (int)*(short *)(temp_v2 + 0x20)) {
-            *(char *)(temp_v2 + 0x26) = (char)temp_v4;
-            break;
-          }
-          temp_v4 = temp_v4 + 1;
-        } while (temp_v4 < temp_v0);
-      }
-      temp_v5 = temp_v5 + 1;
-      temp_v2 = temp_v2 + 0x28;
-    } while (temp_v5 < temp_v3);
-  }
-  return;
+    u32 tableCount = tbcrBlockGetPayload();
+    void *table = dataTableFileGetTable(file, 0);
+    TableEntry *entry = dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+    u32 i;
+    u32 j;
+
+    for (i = 0; i < count; i++, entry++) {
+        if (entry->fileIndex == 0) {
+            continue;
+        }
+        for (j = 1; j < tableCount; j++) {
+            if (*(s32 *)dataTableGetEntries(dataTableFileGetTable(file, j)) == entry->id) {
+                entry->fileIndex = j;
+                break;
+            }
+        }
+    }
 }
 
 } /* extern "C" */

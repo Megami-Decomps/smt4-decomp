@@ -14,7 +14,7 @@ int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_002c8538(...);
 int FUN_002c9104(void);
 int libc_strcpy(...);
-int FUN_002e6134(void);
+int messageStateEndMode2(void);
 int FUN_002f0384(...);
 int FUN_0033440c(...);
 int FUN_0033449c(...);
@@ -53,7 +53,7 @@ extern int FUN_002a6464(void);
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c9104. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002e6134. */
+/* Supplied declaration required: messageStateEndMode2. */
 /* Supplied declaration required: FUN_002f0384. */
 extern int objBStateAllowsAction(void);
 /* Supplied declaration required: FUN_0033440c. */
@@ -99,7 +99,7 @@ void FUN_0041de6c(int param_1)
       sysPlaySe(0xaa);
       return;
     }
-    FUN_002e6134();
+    messageStateEndMode2();
     FUN_003a76a8(0);
     *(unsigned char *)(param_1 + 0xe) = 1;
     temp_v1 = gameDataBlocksGetTable();

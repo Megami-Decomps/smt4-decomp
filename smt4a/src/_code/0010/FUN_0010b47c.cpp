@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0013462c(int, unsigned int *, unsigned int *[5]);
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineStringDestroy(unsigned char [16]);
-int constructObj0055affc(unsigned char [16]);
+int _ZN9Obj55aff4C1Ev(unsigned char [16]);
 int FUN_002f42be(unsigned char [16], unsigned char *, unsigned int);
 int onlineObjectThreadRootStart(unsigned int *, int);
 
@@ -23,10 +23,10 @@ extern unsigned char DAT_00558864; /* 0x558864 */
 extern unsigned int *FUN_001104e8(int, unsigned char *);
 /* Supplied declaration required: FUN_0013462c. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int operatorNew(unsigned int);
 /* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: constructObj0055affc. */
+/* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 /* Supplied declaration required: FUN_002f42be. */
 /* Supplied declaration required: onlineObjectThreadRootStart. */
 
@@ -45,13 +45,13 @@ unsigned int FUN_0010b47c(int param_1,unsigned int param_2)
   
   FUN_002e6e34(temp_v4,param_1 + 4);
   if (*(char *)(param_1 + 0x34) != '\x02') {
-    FUN_002e6e5c(temp_v4);
+    _ZN9Obj55b28cD1Ev(temp_v4);
     temp_v0 = 0;
   }
   else {
     *(unsigned char *)(param_1 + 0x34) = 0;
     for (temp_v2 = 0; temp_v2 < param_2; temp_v2 = temp_v2 + 1) {
-      constructObj0055affc(temp_v5);
+      _ZN9Obj55aff4C1Ev(temp_v5);
       FUN_002f42be(temp_v5,&LAB_0010b52c,temp_v2 + 1);
       temp_v1 = operatorNew(0x34);
       puVar3 = (unsigned int *)0x0;
@@ -80,7 +80,7 @@ unsigned int FUN_0010b47c(int param_1,unsigned int param_2)
       }
       onlineStringDestroy(temp_v5);
     }
-    FUN_002e6e5c(temp_v4);
+    _ZN9Obj55b28cD1Ev(temp_v4);
     temp_v0 = 1;
   }
   return temp_v0;

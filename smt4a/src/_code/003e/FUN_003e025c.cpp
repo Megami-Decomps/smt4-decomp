@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_003e1068(...);
 int FUN_003f0e20(...);
-int FUN_004f1a54(...);
+int btlCameraObjectCreate(...);
 int FUN_004f2abc(...);
 
 typedef struct fn_003e025c_arg1 fn_003e025c_arg1;
@@ -53,7 +53,7 @@ extern int DAT_00573808; /* 0x573808 */
 extern int FUN_003eca48(fn_003e025c_arg1 *, unsigned short);
 extern int FUN_003eccd0(fn_003e025c_arg1 *);
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004f1a54. */
+/* Supplied declaration required: btlCameraObjectCreate. */
 extern int FUN_004f2294(unsigned int);
 /* Supplied declaration required: FUN_004f2abc. */
 
@@ -112,7 +112,7 @@ void FUN_003e025c(unsigned int *param_1,fn_003e025c_arg1 *param_2)
       param_1[3] = 0;
       temp_v0 = FUN_004f2294(g_btlCamera);
       if (temp_v0 != 0) {
-        FUN_004f1a54(g_btlCamera);
+        btlCameraObjectCreate(g_btlCamera);
         *param_1 = 0xf;
         param_1[4] = 0;
         param_1[3] = 0;

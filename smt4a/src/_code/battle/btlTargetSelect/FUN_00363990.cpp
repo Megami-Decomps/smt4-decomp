@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014e188(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int taskCreateDraw(...);
 int asdOperatorNew(int, unsigned int *);
 int asdMemoryAlloc(int, int, int, int, int);
@@ -36,7 +36,7 @@ extern unsigned char DAT_00557d50; /* 0x557d50 */
 extern unsigned int *g_btlTargetSelect; /* 0x57a9a8 */
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemoryAlloc. */
@@ -92,7 +92,7 @@ void FUN_00363990(unsigned int *param_1)
   taskCreateDraw(&LAB_00363bb4,0x7e,0,0,payloadWorkRelease,0,puVar1,puVar7);
   taskCreateDraw(&LAB_00363bcc,0xda,0,0,payloadWorkRelease,0,puVar1,param_1[0xf]);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 3);
-  FUN_001505ac(puVar1 + 3,0,0,0,0,0,0,&DAT_0052aa0c,0x10,0,0);
+  paramsInit(puVar1 + 3,0,0,0,0,0,0,&DAT_0052aa0c,0x10,0,0);
   FUN_0014e188(puVar1 + 0xb,0xc,0x71,puVar1 + 3,1);
   FUN_0036b644(puVar1 + 0xb,0);
   return;

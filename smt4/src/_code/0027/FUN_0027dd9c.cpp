@@ -1,47 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027dd9c` (_code @ 0x27dd9c, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register choice only: retail walks model->info->loadState through r1 (ldr r1,[r0,#8]; ldr r1,[r1,#12]) keeping r0, the build reuses r0. */
+#include "common.h"
 
 extern "C" {
 
-int asdMdlManagerMarkDestroy(void);
-int asdMdlManagerDestroy(int);
+struct ModelObject {
+    virtual void vfunc0();
+    virtual void destroy();
+};
 
-typedef int romwright_code(...);
-/* Supplied declaration required: asdMdlManagerMarkDestroy. */
-/* Supplied declaration required: asdMdlManagerDestroy. */
+typedef struct ModelInfo {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s32 loadState;
+} ModelInfo;
 
+typedef struct ModelHandle {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ ModelInfo *info;
+} ModelHandle;
 
-void FUN_0027dd9c(int param_1)
+typedef struct ModelSlot {
+    /* 0x00 */ ModelHandle *model;
+    /* 0x04 */ s32 unk04;
+    /* 0x08 */ s32 unk08;
+    /* 0x0C */ u8 unk0C[0x10];
+    /* 0x1C */ u32 unk1C;
+    /* 0x20 */ ModelObject *object;
+    /* 0x24 */ u32 unk24;
+} ModelSlot;                           /* 0x28 bytes */
 
+typedef struct ModelSet {
+    /* 0x000 */ u8 unk000[0x190];
+    /* 0x190 */ ModelSlot slots[50];
+} ModelSet;
+
+extern int asdMdlManagerMarkDestroy(void);
+extern int asdMdlManagerDestroy(ModelHandle *model);
+
+/* Resets all 50 model slots: destroys each slot's object and model (marking the model for destruction first when it is loaded). */
+void FUN_0027dd9c(ModelSet *set)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  do {
-    temp_v0 = param_1 + temp_v1 * 0x28;
-    piVar2 = (int *)(temp_v0 + 400);
-    *(unsigned int *)(temp_v0 + 0x194) = 0xffffffff;
-    *(unsigned int *)(temp_v0 + 0x1b4) = 0;
-    *(unsigned int *)(temp_v0 + 0x198) = 0xffffffff;
-    *(unsigned int *)(temp_v0 + 0x1ac) = 0;
-    if (*(int **)(temp_v0 + 0x1b0) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(temp_v0 + 0x1b0) + 4))();
-      *(unsigned int *)(temp_v0 + 0x1b0) = 0;
+    int i;
+
+    for (i = 0; i < 50; i++) {
+        ModelSlot *slot = &set->slots[i];
+
+        slot->unk04 = -1;
+        slot->unk08 = -1;
+        slot->unk24 = 0;
+        slot->unk1C = 0;
+        if (slot->object != NULL) {
+            slot->object->destroy();
+            slot->object = NULL;
+        }
+        if (slot->model != NULL) {
+            if (slot->model->info->loadState >= 0) {
+                asdMdlManagerMarkDestroy();
+            }
+            asdMdlManagerDestroy(slot->model);
+            slot->model = NULL;
+        }
     }
-    if (*piVar2 != 0) {
-      if (-1 < *(int *)(*(int *)(*piVar2 + 8) + 0xc)) {
-        asdMdlManagerMarkDestroy();
-      }
-      asdMdlManagerDestroy(*piVar2);
-      *piVar2 = 0;
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x32);
-  return;
 }
 
 } /* extern "C" */

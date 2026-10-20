@@ -29,7 +29,7 @@ typedef struct {
 
 extern unsigned int FUN_001581dc(unsigned int *);
 /* Supplied declaration required: FUN_00178b04. */
-extern unsigned int FUN_00406260(void);
+extern unsigned int _ZN9Obj557b58C1Ev(void);
 
 
 void FUN_0040a884(fn_0040a884_arg0 *param_1,unsigned int param_2)
@@ -57,7 +57,7 @@ void FUN_0040a884(fn_0040a884_arg0 *param_1,unsigned int param_2)
   FUN_00178b04(0x1c,"c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelContent.cpp",0xfb);
   temp_v0 = 0;
   if (temp_v1 != 0) {
-    temp_v0 = FUN_00406260();
+    temp_v0 = _ZN9Obj557b58C1Ev();
   }
   param_1->field_0x8 = temp_v0;
   return;

@@ -1,22 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c2138` (_code @ 0x2c2138, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_eventEffect; /* 0x57f3b4 */
+typedef struct EventEffectView {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 state;
+} EventEffectView;
 
+typedef struct EventEffectGlobalsView {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ EventEffectView *effect;
+} EventEffectGlobalsView;
 
-unsigned int FUN_002c2138(void)
+extern EventEffectGlobalsView g_eventEffect;
 
+/* Returns 1 if the event effect exists and its state is 5. */
+u32 FUN_002c2138(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (((*(int *)((unsigned char *)&g_eventEffect + 0x8)) != 0) && (*(int *)((*(int *)((unsigned char *)&g_eventEffect + 0x8)) + 8) == 5)) {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    EventEffectView *effect = g_eventEffect.effect;
+    u32 result = 0;
+
+    if (effect == NULL) {
+        return 0;
+    }
+    if (effect->state == 5) {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

@@ -1,43 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00350320` (_code @ 0x350320, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the final tail call goes to 0x3F5FF0, which has no symbol; retail's `b` carries no relocation. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Part Part;
 
+typedef struct PartVtable {
+    /* 0x00 */ void (*unk00[6])(Part *part);
+    /* 0x18 */ void (*onEnd)(Part *part);
+    /* 0x1C */ void (*unk1C[3])(Part *part);
+    /* 0x28 */ void (*onStart)(Part *part);
+} PartVtable;
 
-unsigned int FUN_00350320(int param_1)
+struct Part {
+    /* 0x0 */ PartVtable *vtable;
+};
 
+typedef struct PartHolder {
+    /* 0x000 */ u8 unk000[0x158];
+    /* 0x158 */ u8 sub[0x190];
+    /* 0x2E8 */ s32 startCount;
+    /* 0x2EC */ Part *startParts[0x66];
+    /* 0x484 */ s32 endCount;
+    /* 0x488 */ Part *endParts[1];
+} PartHolder;
+
+u32 func_0x003f5ff0(u8 *sub);
+
+/* Calls every start part and every end part, then forwards the sub-object to FUN at 0x3F5FF0. */
+u32 FUN_00350320(PartHolder *holder)
 {
-  int *piVar1;
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (temp_v0 < *(int *)(param_1 + 0x2e8)) {
-    do {
-      piVar1 = *(int **)(param_1 + temp_v0 * 4 + 0x2ec);
-      if (piVar1 != (int *)0x0) {
-        (**(romwright_code **)(*piVar1 + 0x28))();
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(int *)(param_1 + 0x2e8));
-  }
-  temp_v0 = 0;
-  if (temp_v0 < *(int *)(param_1 + 0x484)) {
-    do {
-      piVar1 = *(int **)(param_1 + temp_v0 * 4 + 0x488);
-      if (piVar1 != (int *)0x0) {
-        (**(romwright_code **)(*piVar1 + 0x18))();
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(int *)(param_1 + 0x484));
-  }
-  return *(unsigned int *)(param_1 + 0x158);
+    s32 i;
+
+    for (i = 0; i < holder->startCount; i++) {
+        Part *part = holder->startParts[i];
+
+        if (part != NULL) {
+            part->vtable->onStart(part);
+        }
+    }
+    for (i = 0; i < holder->endCount; i++) {
+        Part *part = holder->endParts[i];
+
+        if (part != NULL) {
+            part->vtable->onEnd(part);
+        }
+    }
+    return func_0x003f5ff0(holder->sub);
 }
 
 } /* extern "C" */

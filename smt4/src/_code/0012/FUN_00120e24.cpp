@@ -1,67 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00120e24` (_code @ 0x120e24, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the base sum in r7, the first lookup in r6 and the config pointer in r5 (summing the three base words in a different order); built uses r6/r5/r7 and loads the third word last. */
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_00120e24_arg0 fn_00120e24_arg0;
-struct fn_00120e24_arg0 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    int field_0x8; /* +0x8 */
-    int field_0xc; /* +0xc */
-    unsigned char pad_0x10[0x4];
-    int field_0x14; /* +0x14 */
-    int field_0x18; /* +0x18 */
-    byte field_0x1c; /* +0x1c */
-    byte field_0x1d; /* +0x1d */
-    byte field_0x1e; /* +0x1e */
-    unsigned char pad_0x1f[0x1];
-    int field_0x20; /* +0x20 */
-};
+typedef struct Totals {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 mode;
+    /* 0x08 */ s32 bonus;
+    /* 0x0C */ s32 baseA;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ s32 baseC;
+    /* 0x18 */ s32 baseB;
+    /* 0x1C */ u8 flagA;
+    /* 0x1D */ u8 flagB;
+    /* 0x1E */ u8 flagC;
+    /* 0x1F */ u8 unk1F;
+    /* 0x20 */ s32 count;
+} Totals;
 
-extern unsigned char DAT_0044e908; /* 0x44e908 */
+typedef struct Config {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u32 value;
+} Config;
 
-extern int FUN_001310c4(unsigned int, unsigned int);
-extern int FUN_0013127c(unsigned int, unsigned int);
-extern unsigned int FUN_002baf30(void);
-extern unsigned int FUN_002bafb0(void);
+extern Config DAT_0044e908;
 
+u32 FUN_002baf30(void);
+u32 FUN_002bafb0(void);
+s32 FUN_0013127c(u32 a, u32 value);
+s32 FUN_001310c4(u32 a, u32 value);
 
-int FUN_00120e24(fn_00120e24_arg0 *param_1)
-
+/* Adds up the object's base amounts, the two lookups and the optional bonus and per-item amounts. */
+s32 FUN_00120e24(Totals *totals)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  
-  temp_v0 = param_1->field_0xc;
-  temp_v4 = param_1->field_0x18;
-  temp_v5 = param_1->field_0x14;
-  temp_v1 = FUN_002baf30();
-  temp_v2 = FUN_0013127c(temp_v1,(*(unsigned int *)((unsigned char *)&DAT_0044e908 + 0x4)));
-  temp_v1 = FUN_002bafb0();
-  temp_v3 = FUN_001310c4(temp_v1,(*(unsigned int *)((unsigned char *)&DAT_0044e908 + 0x4)));
-  temp_v0 = temp_v3 + temp_v2 + temp_v0 + temp_v4 + temp_v5;
-  if (param_1->field_0x1c == 1) {
-    temp_v0 = temp_v0 + param_1->field_0x8;
-  }
-  if ((param_1->field_0x4 == 1) && (param_1->field_0x1e != 0)) {
-    temp_v0 = temp_v0 + param_1->field_0x8;
-  }
-  temp_v6 = param_1->field_0x1d != 0;
-  temp_v2 = 0;
-  if (temp_v6) {
-    temp_v2 = param_1->field_0x20;
-  }
-  if (temp_v6 && 0 < temp_v2) {
-    temp_v0 = temp_v0 + temp_v2 * 8;
-  }
-  return temp_v0;
+    s32 base = totals->baseA + totals->baseB + totals->baseC;
+    s32 first = FUN_0013127c(FUN_002baf30(), DAT_0044e908.value);
+    s32 second = FUN_001310c4(FUN_002bafb0(), DAT_0044e908.value);
+    s32 total = second + first + base;
+    u8 hasItems;
+    s32 count;
+
+    if (totals->flagA == 1) {
+        total = total + totals->bonus;
+    }
+    if (totals->mode == 1 && totals->flagC != 0) {
+        total = total + totals->bonus;
+    }
+    hasItems = totals->flagB != 0;
+    count = 0;
+    if (hasItems) {
+        count = totals->count;
+    }
+    if (hasItems && 0 < count) {
+        total = total + count * 8;
+    }
+    return total;
 }
 
 } /* extern "C" */

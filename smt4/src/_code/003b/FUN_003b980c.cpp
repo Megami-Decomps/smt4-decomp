@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028727c(void);
+int buttonHelpTexturesUnref(void);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int FUN_00291998(void);
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0028727c. */
+/* Supplied declaration required: buttonHelpTexturesUnref. */
 /* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: uiFadeRelease. */
 /* Supplied declaration required: FUN_00291998. */
@@ -74,7 +74,7 @@ void FUN_003b980c(int param_1)
   }
   FUN_002b827c(3);
   buttonHelpRelease();
-  FUN_0028727c();
+  buttonHelpTexturesUnref();
   uiFadeRelease();
   asdTMTexTableFreeEntry(0x21);
   return;

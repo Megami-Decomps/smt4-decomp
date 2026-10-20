@@ -10,7 +10,7 @@ int FUN_002b0750(unsigned int, unsigned int, unsigned int, unsigned int, unsigne
 int FUN_002b1fc4(int *, int *, int *, int *, int, int);
 int FUN_002bed3c(void);
 int FUN_002bf538(void);
-int FUN_002c5d5c(int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 
 /* stack frame of param_8: 11 slot(s), 44 byte(s) */
 typedef struct {
@@ -36,7 +36,7 @@ extern unsigned char LAB_00141adc; /* 0x141adc */
 /* Supplied declaration required: FUN_002bed3c. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf538. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_00230fe4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -89,7 +89,7 @@ void FUN_00230fe4(unsigned int param_1,unsigned int param_2,unsigned int param_3
     return;
   }
   if (param_8 != 0 && temp_v1 != 0) {
-    FUN_002c5d5c(&temp_v2,&LAB_00141adc,0x10,4);
+    __aeabi_vec_ctor_nocookie_nodtor(&temp_v2,&LAB_00141adc,0x10,4);
     temp_v1 = *(int *)(temp_v0 + 0xc);
     temp_v2 = *(unsigned int *)(temp_v1 + 0x10);
     uStack_b4 = *(unsigned int *)(temp_v1 + 0x14);

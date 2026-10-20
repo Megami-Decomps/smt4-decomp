@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00157558(...);
 int renderCtxResetColorScale(...);
-int FUN_0016c560(...);
+int skinObjectUpdateMatrices(...);
 int FUN_00183bb0(void);
 int FUN_00486444(void);
 int FUN_00487470(...);
@@ -49,7 +49,7 @@ extern signed char DAT_005f1a5e; /* 0x5f1a5e */
 /* Supplied declaration required: FUN_00157558. */
 extern int FUN_00162858(void);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00183bb0. */
 extern int dataTableGetEntry49(unsigned char);
 extern int gameFlagsClassify(unsigned int);
@@ -317,7 +317,7 @@ LAB_004925c8:
     if ((DAT_005f1a5e != '\0') && (temp_v3 = FUN_00384cf4(), temp_v3 == 0)) {
       FUN_0048b260(temp_v33);
     }
-    FUN_0016c560(g_renderCtx);
+    skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     if ((*(char *)(temp_v33 + 0x12d0) != '\0') && (*(char *)(temp_v33 + 0x12d2) == '\0')) {
       FUN_0048b514(temp_v33);

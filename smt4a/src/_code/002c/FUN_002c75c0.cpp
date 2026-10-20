@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int FUN_002681b0(...); /* 0x2681b0 */
+extern int runnerShutdown(...); /* 0x2681b0 */
 extern unsigned char LAB_002a60c8; /* 0x2a60c8 */
 extern unsigned char LAB_002ef9ec; /* 0x2ef9ec */
 extern unsigned char LAB_002efa8c; /* 0x2efa8c */
@@ -45,7 +45,7 @@ void FUN_002c75c0(void)
   }
   pcVar2 = "SAVELOAD_UI C";
   DAT_00588e2c = puVar1;
-  asdProcessCreateSimple("SAVELOAD_UI C",4,0,0,FUN_002681b0,&LAB_002ef9ec,0);
+  asdProcessCreateSimple("SAVELOAD_UI C",4,0,0,runnerShutdown,&LAB_002ef9ec,0);
   *puVar1 = (unsigned int)pcVar2;
   taskCreateDraw("SAVELOAD_UI UD",0x83,0,0,&LAB_002a60c8,0,0,pcVar2);
   taskCreateDraw("SAVELOAD_UI UDD",0xdf,0,0,&LAB_002a60c8,0,0,*puVar1);

@@ -1,82 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003811ec` (_code @ 0x3811ec, 0xf4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable04FindById(void);
+typedef struct DataRow {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ u16 order;
+} DataRow;
 
-extern int idIsAbove400(int);
-extern int gameGetSlotRecord(void);
-/* Supplied declaration required: dataTable04FindById. */
-extern int FUN_0039a598(int);
-extern int FUN_003a679c(int);
+typedef struct SlotRecord {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 sortKey;
+} SlotRecord;
 
+typedef struct SortItem {
+    /* 0x00 */ int id;
+    /* 0x04 */ int slot;       /* negative when the item is not in a slot */
+} SortItem;
 
-int FUN_003811ec(int *param_1,int *param_2)
+extern int idIsAbove400(int id);
+extern int FUN_003a679c(int id);
+extern int FUN_0039a598(int id);
+extern DataRow *dataTable04FindById(int id);
+extern SlotRecord *gameGetSlotRecord(int slot);
 
+/* Compare function for sorting items: by two ranks, the data row's order, the id, then the slot's sort key. */
+int FUN_003811ec(SortItem *a, SortItem *b)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7;
-  
-  temp_v0 = idIsAbove400(*param_1);
-  if (temp_v0 != 0) {
-    temp_v0 = 99;
-    temp_v6 = 99;
-    temp_v4 = 0;
-  }
-  else {
-    temp_v0 = FUN_003a679c(*param_1);
-    temp_v6 = FUN_0039a598(*param_1);
-    temp_v1 = *param_1;
-    dataTable04FindById();
-    temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x2c);
-  }
-  temp_v1 = idIsAbove400(*param_2);
-  if (temp_v1 != 0) {
-    temp_v5 = 99;
-    temp_v1 = 99;
-    temp_v3 = 0;
-  }
-  else {
-    temp_v5 = FUN_003a679c(*param_2);
-    temp_v1 = FUN_0039a598(*param_2);
-    temp_v2 = *param_2;
-    dataTable04FindById();
-    temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x2c);
-  }
-  temp_v5 = temp_v5 - temp_v0;
-  temp_v7 = 0;
-  if (temp_v5 == 0) {
-    temp_v5 = temp_v1 - temp_v6;
-    temp_v7 = temp_v5 == 0;
-  }
-  if (((temp_v7) && (temp_v5 = temp_v4 - temp_v3, temp_v5 == 0)) && (temp_v5 = *param_2 - *param_1, temp_v5 == 0))
-  {
-    if (param_1[1] < 0) {
-      temp_v4 = 0;
+    int rankB;
+    int rankA;
+    int subB;
+    int subA;
+    u32 orderB;
+    u32 orderA;
+    u32 slotKeyA;
+    u32 slotKeyB;
+    int diff;
+
+    if (idIsAbove400(a->id) != 0) {
+        rankA = 99;
+        subA = 99;
+        orderA = 0;
+    } else {
+        rankA = FUN_003a679c(a->id);
+        subA = FUN_0039a598(a->id);
+        orderA = dataTable04FindById(a->id)->order;
     }
-    else {
-      temp_v0 = gameGetSlotRecord();
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v0 + 0x62);
+    if (idIsAbove400(b->id) != 0) {
+        rankB = 99;
+        subB = 99;
+        orderB = 0;
+    } else {
+        rankB = FUN_003a679c(b->id);
+        subB = FUN_0039a598(b->id);
+        orderB = dataTable04FindById(b->id)->order;
     }
-    if (param_2[1] < 0) {
-      temp_v3 = 0;
+    diff = rankB - rankA;
+    if (diff == 0) {
+        diff = subB - subA;
+        if (diff == 0) {
+            diff = orderA - orderB;
+            if (diff == 0) {
+                diff = b->id - a->id;
+                if (diff == 0) {
+                    slotKeyA = (a->slot < 0) ? 0 : gameGetSlotRecord(a->slot)->sortKey;
+                    slotKeyB = (b->slot < 0) ? 0 : gameGetSlotRecord(b->slot)->sortKey;
+                    diff = slotKeyB - slotKeyA;
+                }
+            }
+        }
     }
-    else {
-      temp_v0 = gameGetSlotRecord();
-      temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x62);
-    }
-    temp_v5 = temp_v3 - temp_v4;
-  }
-  return temp_v5;
+    return diff;
 }
 
 } /* extern "C" */

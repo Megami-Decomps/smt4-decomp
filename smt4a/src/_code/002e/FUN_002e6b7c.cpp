@@ -19,7 +19,7 @@ typedef struct {
 #endif
 extern unsigned int *__aeabi_errno_addr(void);
 extern long long rt_lmul(int, int, unsigned int, unsigned int);
-extern int FUN_002e49dc(char, int);
+extern int digitValueInBase(char, int);
 
 
 unsigned long long FUN_002e6b7c(char *param_1,unsigned int *param_2,int param_3)
@@ -64,7 +64,7 @@ unsigned long long FUN_002e6b7c(char *param_1,unsigned int *param_2,int param_3)
   temp_v2 = 0;
   temp_v7 = 0;
   while( 1 ) {
-    temp_v4 = FUN_002e49dc(temp_v3,param_3);
+    temp_v4 = digitValueInBase(temp_v3,param_3);
     if (temp_v4 < 0) break;
     temp_v0 = 1;
     temp_v7 = param_3 * temp_v7 + temp_v4;

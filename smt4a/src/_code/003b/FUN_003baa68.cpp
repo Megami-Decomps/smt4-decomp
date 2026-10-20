@@ -1,59 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003baa68` (_code @ 0x3baa68, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the constant 6 (FUN_0021bdac's fourth argument) in r5 across the earlier calls (mov r5, #6 first), which shifts the other saved registers; built passes it with mov r3, #6 */
+#include "common.h"
 
 extern "C" {
 
-int msgBoxFlagsSetBit7(unsigned int);
-int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
-int eventTexRequestStopAll(void);
-int scrGetCommandFrame(void);
-int bustupCutAnimRequestStopSlots(void);
+typedef struct MessageWindow {
+    /* 0x0000 */ u8 unk0000[4];
+    /* 0x0004 */ u32 message;
+    /* 0x0008 */ u8 unk0008[4];
+    /* 0x000C */ u32 flags;
+    /* 0x0010 */ u8 unk0010[0x19B4];
+    /* 0x19C4 */ u8 unk19C4;
+    /* 0x19C5 */ u8 mode;
+} MessageWindow;
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+typedef struct MessageMain {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ MessageWindow *window;
+} MessageMain;
 
-extern unsigned char g_messageMain; /* 0x57f588 */
+extern MessageMain g_messageMain;
 
-/* Supplied declaration required: msgBoxFlagsSetBit7. */
-/* Supplied declaration required: FUN_0021bdac. */
-extern unsigned int scrGetArg(unsigned int);
-extern unsigned int FUN_002ba85c(void);
-/* Supplied declaration required: eventTexRequestStopAll. */
-/* Supplied declaration required: scrGetCommandFrame. */
-/* Supplied declaration required: bustupCutAnimRequestStopSlots. */
+extern u32 scrGetArg(s32 index);
+extern u32 FUN_002ba85c(void);
+extern u32 scrGetCommandFrame(void);
+extern u32 FUN_0021bdac(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
+extern void bustupCutAnimRequestStopSlots(void);
+extern void eventTexRequestStopAll(void);
+extern void msgBoxFlagsSetBit7(u32 message);
 
-
-unsigned int FUN_003baa68(void)
-
+u32 FUN_003baa68(void)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x4));
-  bustupCutAnimRequestStopSlots();
-  eventTexRequestStopAll();
-  if ((*(int *)((unsigned char *)&g_messageMain + 0x4)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0x19c5) = 0x15;
-  }
-  temp_v1 = FUN_002ba85c();
-  temp_v2 = scrGetArg(0);
-  temp_v3 = scrGetCommandFrame();
-  FUN_0021bdac(temp_v1,temp_v2,temp_v3,6,0,0);
-  temp_v4 = scrGetCommandFrame();
-  if (temp_v4 == 0) {
-    msgBoxFlagsSetBit7(*(unsigned int *)(temp_v0 + 4));
-    *(unsigned char *)(temp_v0 + 0x19c4) = 0;
-    *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(temp_v0 + 0xc) | 0x20;
-  }
-  return temp_v1;
+    MessageWindow *window = g_messageMain.window;
+    u32 first;
+    u32 second;
+    u32 third;
+    u32 result;
+
+    bustupCutAnimRequestStopSlots();
+    eventTexRequestStopAll();
+    if (g_messageMain.window != NULL) {
+        g_messageMain.window->mode = 0x15;
+    }
+    first = FUN_002ba85c();
+    second = scrGetArg(0);
+    third = scrGetCommandFrame();
+    result = FUN_0021bdac(first, second, third, 6, 0, 0);
+    if (scrGetCommandFrame() == 0) {
+        msgBoxFlagsSetBit7(window->message);
+        window->unk19C4 = 0;
+        window->flags |= 0x20;
+    }
+    return result;
 }
 
 } /* extern "C" */

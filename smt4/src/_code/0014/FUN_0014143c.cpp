@@ -1,27 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014143c` (_code @ 0x14143c, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int g_aocMain; /* 0x432fc8 */
+extern u32 g_aocMain; /* 0x432fc8 */
 
-extern int FUN_002a6c5c(unsigned int, unsigned int, unsigned int);
-extern int FUN_002a6d08(unsigned int);
+extern int FUN_002a6c5c(u32 slot, u32 kind, u32 arg);
+extern int FUN_002a6d08(u32 context);
 
-
-unsigned int FUN_0014143c(unsigned int param_1,unsigned int param_2)
-
+/* Whether the context's check passes and FUN_002a6c5c accepts kind 25 for the two arguments. */
+u32 FUN_0014143c(u32 slot, u32 arg)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_002a6d08(g_aocMain);
-  temp_v1 = 0;
-  if ((temp_v0 != 0) && (temp_v0 = FUN_002a6c5c(param_1,0x19,param_2), temp_v1 = 0, temp_v0 != 0)) {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    u32 ok = FUN_002a6d08(g_aocMain);
+
+    if (ok != 0) {
+        ok = FUN_002a6c5c(slot, 0x19, arg) != 0;
+    }
+    return ok;
 }
 
-} /* extern "C" */
+}

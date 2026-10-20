@@ -1,23 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00203460` (_code @ 0x203460, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0043e2ac; /* 0x43e2ac */
+typedef struct GameBlock04 {
+    /* 0x00000 */ u8 unk00000[0x88];
+    /* 0x00088 */ u8 table[1];      /* base of the block's tables (offsets below are from here) */
+} GameBlock04;
 
+typedef struct GameDataBlockView {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ GameBlock04 *block;
+} GameDataBlockView;
 
-void FUN_00203460(unsigned int param_1,unsigned int param_2,unsigned int param_3)
+extern GameDataBlockView g_gameDataBlocks; /* 0x43e2a8 */
 
+/* Stores the two words in slot `index` (0 or 1) of the block's link table; other indices are ignored. */
+void FUN_00203460(u32 index, u32 a, u32 b)
 {
-  int temp_v0;
-  
-  if (param_1 < 2) {
-    temp_v0 = DAT_0043e2ac + 0x88 + param_1 * 8;
-    *(unsigned int *)(temp_v0 + 0x24b2c) = param_2;
-    *(unsigned int *)(temp_v0 + 0x24b30) = param_3;
-  }
-  return;
+    u8 *table;
+    u8 *slot;
+
+    if (index == 0 || index == 1) {
+        table = g_gameDataBlocks.block->table;
+        slot = table + index * 8;
+        *(u32 *)(slot + 0x24B2C) = a;
+        *(u32 *)(slot + 0x24B30) = b;
+    }
 }
 
 } /* extern "C" */

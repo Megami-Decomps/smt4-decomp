@@ -10,7 +10,7 @@ int CONCAT44(...);
 int FUN_002c0dbc(...);
 int FUN_002de124(...);
 int dataTable2CType0Count(void);
-int FUN_003a3070(void);
+int contentEntryGetC(void);
 int FUN_003a315c(void);
 int dataTable2CType3Count(void);
 int VectorFloatToUnsigned(...);
@@ -111,7 +111,7 @@ extern unsigned int *FUN_0033aaac(int);
 extern char *dataTable2CGetEntry(int);
 extern char *dataTable2CType3GetEntry(int);
 /* Supplied declaration required: dataTable2CType0Count. */
-/* Supplied declaration required: FUN_003a3070. */
+/* Supplied declaration required: contentEntryGetC. */
 /* Supplied declaration required: FUN_003a315c. */
 extern unsigned int dataTable2CType2GetEntry(int);
 /* Supplied declaration required: dataTable2CType3Count. */
@@ -1002,7 +1002,7 @@ void FUN_0020f12c(unsigned int *param_1,unsigned int *param_2)
         else {
           temp_v4 = temp_v2 + temp_v6 * 2;
           temp_v5 = (int)*(short *)(temp_v4 + 0x1604);
-          FUN_003a3070();
+          contentEntryGetC();
           if (((*(short *)(temp_v5 + 0x14) == 0) || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)) &&
              ((*(short *)(temp_v5 + 0x16) == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 == 0)))) {
             temp_v10 = (float)((unsigned long long)temp_v30 >> 0x20);
@@ -1232,7 +1232,7 @@ LAB_002120ec:
       temp_v69 = temp_v2 + 0x15f4;
       do {
         pcVar6 = pcVar5;
-        FUN_003a3070();
+        contentEntryGetC();
         if (((((unsigned int *)(int)*pcVar6 != (unsigned int *)0xffffffff) &&
              ((unsigned int *)(int)*pcVar6 == param_1)) &&
             (((unsigned int *)(int)pcVar6[1] == param_2 &&

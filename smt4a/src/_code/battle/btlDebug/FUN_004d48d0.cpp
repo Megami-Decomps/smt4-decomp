@@ -12,7 +12,7 @@ int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
 int asdListBoxSetToggleItem(...);
 int FUN_003592dc(unsigned int);
-int FUN_004bb7f4(void);
+int dataTable22GetCount(void);
 int dataTable3Type0Count(void);
 
 typedef struct fn_004d48d0_arg0 fn_004d48d0_arg0;
@@ -70,7 +70,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: asdListBoxSetToggleItem. */
 /* Supplied declaration required: FUN_003592dc. */
-/* Supplied declaration required: FUN_004bb7f4. */
+/* Supplied declaration required: dataTable22GetCount. */
 /* Supplied declaration required: dataTable3Type0Count. */
 
 
@@ -101,7 +101,7 @@ void FUN_004d48d0(fn_004d48d0_arg0 *param_1,int param_2)
     asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,1,(int)(char)DAT_005715f8);
   }
   else {
-    FUN_004bb7f4();
+    dataTable22GetCount();
     asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,0,DAT_005715fc,0,temp_v2 - 1,0);
     asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,1,(int)(char)DAT_005715f8);
   }

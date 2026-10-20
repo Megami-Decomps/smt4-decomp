@@ -9,7 +9,7 @@ int scrScriptProcessDestroy(...);
 int FUN_001f4908(...);
 int FUN_003180c4(...);
 int FUN_00336de4(...);
-int FUN_0035fc4c(void);
+int btlTalkBustUpReleaseContent(void);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_0038b3f8(...);
 int soundChannelStopAll(...);
@@ -105,7 +105,7 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: uniteCameraDestroy. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_00336de4. */
-/* Supplied declaration required: FUN_0035fc4c. */
+/* Supplied declaration required: btlTalkBustUpReleaseContent. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_0038b3f8. */
 /* Supplied declaration required: FUN_003d2150. */
@@ -669,7 +669,7 @@ LAB_003cf9bc:
       workOwnerRelease(temp_v2 + 0x38);
       FUN_0040a244(*(unsigned int *)(temp_v2 + 0x8c));
       *(unsigned int *)(temp_v2 + 0x8c) = 0;
-      FUN_0035fc4c();
+      btlTalkBustUpReleaseContent();
       ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + 0x94) + 4));
       if (*(int **)(temp_v2 + 0x94) != (int *)0x0) {
         (**(romwright_code **)(**(int **)(temp_v2 + 0x94) + 4))();

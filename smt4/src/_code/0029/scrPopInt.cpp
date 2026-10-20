@@ -1,30 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrPopInt` (_code @ 0x297514, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail forms the type-array address (stack + 0x20) before decrementing and loads the type with a register offset. */
+#include "shard/W4_W4Match2_ScrStack.h"
 
 extern "C" {
 
-
-int scrPopInt(int param_1)
-
+/* Pops the top value of the script stack and returns it as an int, converting float values and
+ * resolving variable references. */
+s32 scrPopInt(ScriptStack *stack)
 {
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0x1c) - 1;
-  *(int *)(param_1 + 0x1c) = temp_v0;
-  switch(*(unsigned char *)(temp_v0 + param_1 + 0x20)) {
-  case 0:
-  case 4:
-    return *(int *)(param_1 + temp_v0 * 4 + 0x3c);
-  case 1:
-    return (int)*(float *)(param_1 + temp_v0 * 4 + 0x3c);
-  case 2:
-    return *(int *)(*(int *)(param_1 + temp_v0 * 4 + 0x3c) * 4 + 0x4c4744);
-  case 3:
-    return (int)*(float *)(*(int *)(param_1 + temp_v0 * 4 + 0x3c) * 4 + 0x4c4d44);
-  default:
-    return 0;
-  }
+    s32 slot = --stack->count;
+    switch (stack->types[slot]) {
+    case SCR_VALUE_INT:
+    case SCR_VALUE_RAW:
+        return stack->values[slot].i;
+    case SCR_VALUE_FLOAT:
+        return (s32)stack->values[slot].f;
+    case SCR_VALUE_INT_VAR:
+        return g_scrIntVars[stack->values[slot].i];
+    case SCR_VALUE_FLOAT_VAR:
+        return (s32)g_scrFloatVars[stack->values[slot].i];
+    default:
+        return 0;
+    }
 }
 
 } /* extern "C" */

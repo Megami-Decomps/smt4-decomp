@@ -13,7 +13,7 @@ extern unsigned char DAT_0055a25c; /* 0x55a25c */
 
 /* Supplied declaration required: FUN_00119ee6. */
 extern int operatorNew(unsigned int);
-extern int constructObj0055affc(unsigned int *);
+extern int _ZN9Obj55aff4C1Ev(unsigned int *);
 /* Supplied declaration required: FUN_002f76ca. */
 extern unsigned int *FUN_002fb018(void);
 
@@ -30,7 +30,7 @@ unsigned int * FUN_001241e8(unsigned int param_1)
     puVar2 = (unsigned int *)FUN_002fb018();
     *puVar2 = (unsigned int)&DAT_0055a25c;
     *(unsigned char *)((int)puVar2 + 5) = 0;
-    temp_v0 = constructObj0055affc(puVar2 + 2);
+    temp_v0 = _ZN9Obj55aff4C1Ev(puVar2 + 2);
     puVar2 = (unsigned int *)(temp_v0 - 8);
     *puVar2 = (unsigned int)&DAT_00559534;
     FUN_002f76ca(temp_v0,&LAB_00124238);

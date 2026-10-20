@@ -11,7 +11,7 @@ int FUN_00297468(unsigned char *, unsigned int *, int);
 int asdTMTexTableLoadEntryAsync(int, int);
 int FUN_002a71fc(int);
 int dataTable1bOr1cGetRecord(void);
-int FUN_002c312c(unsigned int *, int, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
+int paramsInit(unsigned int *, int, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int memClear(unsigned int *, int);
 int asdTMTexTableLoadSprites(int);
 int FUN_003852c8(void);
@@ -44,7 +44,7 @@ extern int FUN_00298fa0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a71fc. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern unsigned int asdTextCreate(unsigned int);
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_003852c8. */
@@ -80,7 +80,7 @@ void FUN_00381b8c(unsigned int *param_1)
   FUN_00297468(&LAB_00381d28,param_1 + 0x168,0);
   FUN_00297468(&LAB_00381d4c,param_1 + 0x169,0);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 9);
-  FUN_002c312c(param_1 + 9,0,0,&DAT_004057a8,0x18,0,0,0,0,&DAT_004057c0,0xa8);
+  paramsInit(param_1 + 9,0,0,&DAT_004057a8,0x18,0,0,0,0,&DAT_004057c0,0xa8);
   dataTable27Load(param_1 + 8);
   FUN_00385aec(param_1 + 8);
   FUN_00385af4(param_1 + 8);

@@ -21,7 +21,7 @@ int FUN_0029ee6c(...);
 int FUN_0029efc0(...);
 int FUN_0029efd8(int, int);
 int FUN_0029f5d8(int, unsigned int, int, int, int, int, char [8], int, int);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 int timerStart(...);
 int FUN_002c1658(...);
 int asdMemFree(void);
@@ -63,7 +63,7 @@ extern int FUN_0029efa8(int);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
@@ -114,7 +114,7 @@ void FUN_001afc0c(void)
       *(unsigned int *)(g_uiQuest + 4) = 3;
       *(unsigned int *)(temp_v11 + 8) = temp_v6;
       *(unsigned int *)(temp_v11 + 0x10) = 0;
-      FUN_002bc01c(0x100016e);
+      eventQueueAddUniqueIfValid(0x100016e);
     }
   }
   else {
@@ -211,7 +211,7 @@ void FUN_001afc0c(void)
             *(unsigned int *)(g_uiQuest + 4) = 5;
             *(unsigned int *)(temp_v9 + 8) = temp_v6;
             *(unsigned int *)(temp_v9 + 0x10) = 0;
-            FUN_002bc01c(0x100016f);
+            eventQueueAddUniqueIfValid(0x100016f);
           }
         }
         else {
@@ -230,7 +230,7 @@ void FUN_001afc0c(void)
               *(unsigned int *)(g_uiQuest + 4) = 5;
               *(unsigned int *)(temp_v9 + 8) = temp_v6;
               *(unsigned int *)(temp_v9 + 0x10) = 0;
-              FUN_002bc01c(0x100016f);
+              eventQueueAddUniqueIfValid(0x100016f);
             }
           }
           else {
@@ -239,7 +239,7 @@ void FUN_001afc0c(void)
             FUN_002c1658(9,1);
             temp_v6 = 0x100016d;
             if (temp_v2 != 0) {
-              FUN_002bc01c(0x100016d);
+              eventQueueAddUniqueIfValid(0x100016d);
               FUN_0029ee6c(0,0x323232ff);
               sortMenuCreate(0xe,0);
               FUN_0029e328(0x22);
@@ -267,7 +267,7 @@ void FUN_001afc0c(void)
                     temp_v9 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),1);
                     if (temp_v9 != 0) {
                       buttonHelpSetPreset(0xe2);
-                      FUN_002bc01c(0x100016d);
+                      eventQueueAddUniqueIfValid(0x100016d);
                       temp_v6 = 7;
                       temp_v9 = g_uiQuest;
                       temp_v5 = *(unsigned int *)(g_uiQuest + 4);
@@ -409,7 +409,7 @@ void FUN_001afc0c(void)
                 }
               }
 LAB_001b0364:
-              FUN_002bc01c(temp_v6);
+              eventQueueAddUniqueIfValid(temp_v6);
             }
             else {
 LAB_001b02f8:
@@ -429,7 +429,7 @@ LAB_001b02f8:
                     *(unsigned short *)(temp_v1 + 0x982) = 0;
                   }
                   temp_v6 = 0x100016e;
-                  FUN_002bc01c(temp_v6);
+                  eventQueueAddUniqueIfValid(temp_v6);
                 }
               }
             }

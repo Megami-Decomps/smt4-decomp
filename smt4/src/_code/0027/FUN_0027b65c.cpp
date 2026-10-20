@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002a7c80(...);
 
-int FUN_002481e8(...);
+int aocDataTable23GetEntry(...);
 int FUN_0024f24c(...);
 int dataTable2fSub0GetCount(void);
 int FUN_0025b670(void);
@@ -16,7 +16,7 @@ int libc_strcpy(...);
 int gameFlagIsSet(void);
 int FUN_002dfe08(...);
 int FUN_002eaec0(int, unsigned char [20]);
-int FUN_00308cd4(...);
+int contentEntryGet(...);
 int dataTable2fSub1GetCount(void);
 int dataTable2fSub2GetCount(void);
 int VectorSignedToFloat(int, int);
@@ -62,7 +62,7 @@ extern unsigned char DAT_004a1264; /* 0x4a1264 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_002481b0(void);
-/* Supplied declaration required: FUN_002481e8. */
+/* Supplied declaration required: aocDataTable23GetEntry. */
 extern unsigned int *dataTable23Sub0GetEntry(unsigned int);
 extern int dataTable23Type0CountWithAoc(void);
 /* Supplied declaration required: FUN_0024f24c. */
@@ -83,10 +83,10 @@ extern unsigned int FUN_002df80c(int);
 extern unsigned int FUN_002e0164(int);
 extern unsigned int FUN_002eac34(int);
 /* Supplied declaration required: FUN_002eaec0. */
-extern int FUN_002eb024(void);
+extern int categoryReturnsZero(void);
 extern int FUN_002f3614(int);
-/* Supplied declaration required: FUN_00308cd4. */
-extern int FUN_0030f6cc(void);
+/* Supplied declaration required: contentEntryGet. */
+extern int dataTable23Section5CountWithExtras(void);
 extern unsigned int *dataTable2fSub2GetRecord(int);
 extern unsigned int FUN_0031b7b0(void);
 extern int dataTable23Type4CountWithAoc(void);
@@ -171,7 +171,7 @@ void FUN_0027b65c(int param_1,int param_2)
             temp_v10 = 0;
             if (0 < temp_v1) {
               do {
-                puVar4 = (unsigned int *)FUN_00308cd4(temp_v10);
+                puVar4 = (unsigned int *)contentEntryGet(temp_v10);
                 if (*puVar4 == 0xffffffff) break;
                 temp_v2 = FUN_00298dc8((short)puVar4[1]);
                 if ((((temp_v2 != 0) && (*puVar4 == temp_v12)) &&
@@ -192,7 +192,7 @@ LAB_0027b7d0:
             temp_v4 = temp_v3;
             if (0 < (int)temp_v3) {
               do {
-                puVar4 = (unsigned int *)FUN_002481e8(temp_v13);
+                puVar4 = (unsigned int *)aocDataTable23GetEntry(temp_v13);
                 temp_v4 = *puVar4;
                 if (temp_v4 == 0xffffffff) break;
                 if (temp_v4 == temp_v11) {
@@ -207,7 +207,7 @@ LAB_0027b7d0:
                         goto LAB_0027b92c;
                       }
                       if (temp_v13 == -1) goto LAB_0027b92c;
-                      piVar11 = (int *)FUN_002481e8(temp_v13);
+                      piVar11 = (int *)aocDataTable23GetEntry(temp_v13);
                       DAT_00447a30 = 0;
                       DAT_00447a31 = 0;
                       DAT_00447a32 = 0;
@@ -389,7 +389,7 @@ LAB_0027bc38:
               }
               if (temp_v13 != -1) {
 LAB_0027bc88:
-                temp_v1 = FUN_002481e8(temp_v13);
+                temp_v1 = aocDataTable23GetEntry(temp_v13);
                 temp_v9 = *(short *)(temp_v1 + 8);
                 temp_v16 = temp_v9 == 0;
                 if (temp_v16) {
@@ -412,7 +412,7 @@ LAB_0027bc48:
                    0xff000000;
         }
 LAB_0027bccc:
-        temp_v1 = FUN_0030f6cc();
+        temp_v1 = dataTable23Section5CountWithExtras();
         temp_v10 = 0;
         if (temp_v10 < temp_v1) {
           do {
@@ -431,10 +431,10 @@ LAB_0027bccc:
 LAB_0027bd40:
         temp_v4 = (unsigned int)*(char *)((int)puVar2 + 10);
         if ((temp_v13 != -1) && (temp_v4 == 3 || temp_v4 == 0xb)) {
-          FUN_002481e8(temp_v13);
+          aocDataTable23GetEntry(temp_v13);
           temp_v4 = 0x10;
         }
-        temp_v1 = FUN_002eb024();
+        temp_v1 = categoryReturnsZero();
         temp_v6 = FUN_002e0164((int)(short)temp_v4);
         temp_v7 = FUN_002eac34((int)*(char *)((int)puVar2 + 10));
         VectorSignedToFloat((int)*(short *)((int)puVar2 + 0x16),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -539,7 +539,7 @@ LAB_0027bef0:
           else if (temp_v4 == 10 || temp_v4 == 0x2a) goto LAB_0027bea8;
         }
         if (temp_v34 != -1) {
-          piVar11 = (int *)FUN_00308cd4();
+          piVar11 = (int *)contentEntryGet();
           temp_v1 = 0;
           if (temp_v1 < DAT_00447a2c) {
             do {
@@ -571,7 +571,7 @@ LAB_0027bef0:
           }
         }
         if (temp_v13 != -1) {
-          piVar11 = (int *)FUN_002481e8(temp_v13);
+          piVar11 = (int *)aocDataTable23GetEntry(temp_v13);
           if ((short)piVar11[2] != 0) {
             temp_v1 = 0;
             if (temp_v1 < DAT_00447a2c) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00288790(...);
+int messageKindForward(...);
 int FUN_0028f694(int, int, int);
 int dataTable08Sub2GetRecord(void);
 int FUN_002bdf94(...);
@@ -44,7 +44,7 @@ extern unsigned char LAB_002db8ec; /* 0x2db8ec */
 extern int g_camp; /* 0x43da90 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00288790. */
+/* Supplied declaration required: messageKindForward. */
 /* Supplied declaration required: FUN_0028f694. */
 extern unsigned int FUN_0028fb40(int);
 extern int FUN_002995d8(int);
@@ -203,7 +203,7 @@ LAB_002db240:
     FUN_002be5a4(3,0xffffffff,temp_v12,(int)*(short *)(temp_v6 + 10));
     if (*(char *)(temp_v2 + 0x5b) != '\0') {
       temp_v6 = FUN_002bf4f8(0x1d,0x529);
-      FUN_00288790(*(unsigned char *)(temp_v2 + 0x5b),
+      messageKindForward(*(unsigned char *)(temp_v2 + 0x5b),
                    (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v6 + 8) + param_4 + 0x18,
                    (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v3 + 10) + param_5,0x83);
     }

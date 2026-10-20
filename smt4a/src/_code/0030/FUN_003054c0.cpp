@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00305696(void);
+extern int ownerChildValue(void);
 
 
 unsigned int FUN_003054c0(void)
@@ -13,7 +13,7 @@ unsigned int FUN_003054c0(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_00305696();
+  temp_v0 = ownerChildValue();
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = *(unsigned int *)(temp_v0 + 0x10);

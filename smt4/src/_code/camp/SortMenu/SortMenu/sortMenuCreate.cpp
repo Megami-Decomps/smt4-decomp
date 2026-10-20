@@ -8,7 +8,7 @@ int uiSpriteSetImageKeyframe(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int __aeabi_memset4(...);
 int memClear(...);
 int asdMemAlloc(...);
@@ -41,7 +41,7 @@ extern unsigned int *DAT_0043dd24; /* 0x43dd24 */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -76,7 +76,7 @@ void sortMenuCreate(unsigned int param_1,unsigned char param_2)
     puVar2[1] = (unsigned int)puVar4;
     puVar1 = DAT_0043dd24;
     Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(DAT_0043dd24 + 2);
-    FUN_002c312c(puVar1 + 2,&DAT_00402d1c,0x18,&DAT_00402d34,0x24,0,0,0,0,&DAT_00402d58,0xa8);
+    paramsInit(puVar1 + 2,&DAT_00402d1c,0x18,&DAT_00402d34,0x24,0,0,0,0,&DAT_00402d58,0xa8);
     temp_v0 = 0;
     do {
       FUN_002bd954(puVar1 + temp_v0 * 0x23 + 10,0x1e,0,puVar1 + 2,1);

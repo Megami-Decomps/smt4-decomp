@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001339e0(int, int, unsigned short [2]);
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineStringConstruct(unsigned char [8], unsigned char *);
 int onlineStringDestroy(unsigned char [8]);
 int onlineMutexLockIfNeeded(...);
@@ -36,7 +36,7 @@ extern int DAT_00594a5c; /* 0x594a5c */
 
 /* Supplied declaration required: FUN_001339e0. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int operatorNew(unsigned int);
 /* Supplied declaration required: onlineStringConstruct. */
 /* Supplied declaration required: onlineStringDestroy. */
@@ -138,11 +138,11 @@ unsigned int FUN_0011b970(int param_1,unsigned int param_2,unsigned int param_3)
     }
     onlineMutexUnlockIfNeeded(param_1 + 0x70);
     *(unsigned char *)(param_1 + 5) = 0;
-    FUN_002e6e5c(temp_v11);
+    _ZN9Obj55b28cD1Ev(temp_v11);
     temp_v3 = 1;
   }
   else {
-    FUN_002e6e5c(temp_v11);
+    _ZN9Obj55b28cD1Ev(temp_v11);
     temp_v3 = 0;
   }
   return temp_v3;

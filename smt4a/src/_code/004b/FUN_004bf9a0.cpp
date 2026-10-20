@@ -1,37 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bf9a0` (_code @ 0x4bf9a0, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_004bf9a0(unsigned int param_1)
-
+/* Maps a category id (3, 5-13) to its slot id; 0 for any other id. */
+u32 FUN_004bf9a0(u32 id)
 {
-  switch(param_1) {
-  case 3:
-    return 9;
-  default:
-    return 0;
-  case 5:
-    return 0xb;
-  case 6:
-    return 0xc;
-  case 7:
-    return 0xd;
-  case 8:
-    return 0xe;
-  case 9:
-    return 0xf;
-  case 10:
-    return 0x10;
-  case 0xb:
-    return 0x11;
-  case 0xc:
-    return 0x12;
-  case 0xd:
-    return 0x13;
-  }
+    u32 slot = 0;
+
+    switch (id) {
+    case 5:
+        slot = 0xB;
+        break;
+    case 6:
+        slot = 0xC;
+        break;
+    case 7:
+        slot = 0xD;
+        break;
+    case 8:
+        slot = 0xE;
+        break;
+    case 9:
+        slot = 0xF;
+        break;
+    case 10:
+        slot = 0x10;
+        break;
+    case 3:
+        slot = 9;
+        break;
+    case 11:
+        slot = 0x11;
+        break;
+    case 12:
+        slot = 0x12;
+        break;
+    case 13:
+        slot = 0x13;
+        break;
+    }
+    return slot;
 }
 
 } /* extern "C" */

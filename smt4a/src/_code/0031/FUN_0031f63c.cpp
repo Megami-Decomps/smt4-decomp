@@ -1,22 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031f63c` (_code @ 0x31f63c, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail clears r0 before the null test and falls into the shared `bx lr` after the moveq; armcc here tests first and branches. */
+#include "common.h"
 
 extern "C" {
 
-extern int g_statusDown; /* 0x588fe8 */
+typedef struct StatusDown {
+    /* 0x000 */ u8 unk000[0x518];
+    /* 0x518 */ s32 state;
+} StatusDown;
 
+extern StatusDown *g_statusDown; /* 0x588fe8 */
 
-unsigned int FUN_0031f63c(void)
-
+/* Whether the status screen exists and is in state 23. */
+u32 FUN_0031f63c(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if ((g_statusDown != 0) && (*(int *)(g_statusDown + 0x518) == 0x17)) {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    u32 result = 0;
+
+    if (g_statusDown != NULL && g_statusDown->state == 23) {
+        result = 1;
+    }
+    return result;
 }
 
-} /* extern "C" */
+}

@@ -12,7 +12,7 @@ int FUN_002ad8b4(...);
 int buttonHelpSetPreset(...);
 int timerStart(...);
 int FUN_002bd954(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
@@ -52,7 +52,7 @@ extern unsigned int FUN_0021f498(unsigned char);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -77,7 +77,7 @@ void FUN_002f4ce8(void)
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_002f4ee4,0xe6,0,0,FUN_002cb054,0,0,puVar2);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0xf);
-  FUN_002c312c(puVar1 + 0xf,&DAT_00407dd6,0x18,0,0,0,0,0,0,0,0);
+  paramsInit(puVar1 + 0xf,&DAT_00407dd6,0x18,0,0,0,0,0,0,0,0);
   FUN_002bd954(puVar1 + 0x17,0x2f,0,puVar1 + 0xf,0xc9);
   timerStart(puVar1 + 0x17,0);
   FUN_0029f848(puVar1 + 0x3a,3,3,1,0,1);

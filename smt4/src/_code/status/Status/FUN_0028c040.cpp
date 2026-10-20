@@ -8,7 +8,7 @@ int uiSpriteSetImageKeyframe(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -46,7 +46,7 @@ extern unsigned int *DAT_0044e144; /* 0x44e144 */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -94,7 +94,7 @@ void FUN_0028c040(void)
     *(unsigned char *)(puVar1 + 0x79f) = 0;
     *(unsigned char *)((int)puVar1 + 0x1e7d) = 0;
     Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 9);
-    FUN_002c312c(puVar1 + 9,&DAT_00407728,0xb4,&DAT_004077dc,0x90,0,0,0,0,&DAT_0040786c,0x348);
+    paramsInit(puVar1 + 9,&DAT_00407728,0xb4,&DAT_004077dc,0x90,0,0,0,0,&DAT_0040786c,0x348);
     FUN_002bd954(puVar1 + 0xe3,0x17,0,puVar1 + 9,1);
     timerStart(puVar1 + 0xe3,1,0);
     FUN_002bd954(puVar1 + 0x106,0x1a,1,puVar1 + 9,1);

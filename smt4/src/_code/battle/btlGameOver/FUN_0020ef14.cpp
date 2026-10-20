@@ -27,7 +27,7 @@ int btlGetMainState(...);
 int FUN_00297468(...);
 int soundChannelStopAll(...);
 int FUN_0029c3c0(...);
-int FUN_0029e054(...);
+int ifTouchRegionAdd(...);
 int soundChannelRequestIfEnabled(...);
 int FUN_002a03d8(...);
 int asdTMTexTableLoadEntryAsync(...);
@@ -83,7 +83,7 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_0029c3c0. */
-/* Supplied declaration required: FUN_0029e054. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
@@ -275,7 +275,7 @@ FUN_003357c0:
       } while (temp_v1 < 7);
       temp_v2 = 0;
       puVar2[0xf] = 0;
-      FUN_0029e054();
+      ifTouchRegionAdd();
       puVar2[0xf] = temp_v2;
       temp_v1 = bgmGetStateById(0x1000051);
       if (temp_v1 != 1) {

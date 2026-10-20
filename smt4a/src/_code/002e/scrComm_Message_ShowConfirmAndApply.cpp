@@ -1,57 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Message_ShowConfirmAndApply` (_code @ 0x2ed380, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001695a0(void);
-int FUN_00237898(int, int, unsigned int, int, int);
-int scrWorkGetValue(int);
-int scrWorkSetValue(...);
-int FUN_003dea6c(int, int, int);
-int FUN_00417c24(int);
+s32 scrWorkGetValue(s32 index);
+void scrWorkSetValue(s32 index, s32 value);
+s32 FUN_00237898(s32 buffer, s32 size, u32 value, s32 kind, s32 flag);
+void FUN_003dea6c(u32 arg, s32 a, s32 b);
+void FUN_001695a0(void);
+s32 FUN_00417c24(u32 arg);
+s32 scrGetCommandFrame(void);
+u32 scrGetArg(u32 index);
+s32 dataTableValueOrZero(u32 slot);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-/* Supplied declaration required: FUN_001695a0. */
-extern int dataTableValueOrZero(unsigned int);
-extern unsigned short scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_00237898. */
-/* Supplied declaration required: scrWorkGetValue. */
-/* Supplied declaration required: scrWorkSetValue. */
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_003dea6c. */
-/* Supplied declaration required: FUN_00417c24. */
-
-
-unsigned char scrComm_Message_ShowConfirmAndApply(void)
-
+/* Shows the confirm message; on the first frame resets work value 0 and starts the message, then
+ * counts work value 0 up. Returns 1 (after passing the script argument to FUN_00417c24) when the answer is 1. */
+u8 scrComm_Message_ShowConfirmAndApply(void)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetCommandFrame();
-  if (temp_v1 == 0) {
-    scrWorkSetValue(0);
-    FUN_003dea6c(temp_v0,0,1);
-    FUN_001695a0();
-  }
-  temp_v1 = dataTableValueOrZero(0x1e);
-  temp_v2 = scrWorkGetValue(0);
-  FUN_00237898(temp_v1,0x10,temp_v2,6,0);
-  temp_v3 = scrWorkGetValue(0);
-  scrWorkSetValue(0,temp_v3 + 1);
-  if (temp_v1 == 1) {
-    FUN_00417c24(temp_v0);
-  }
-  return temp_v1 == 1;
+    u16 arg = scrGetArg(0);
+    s32 buffer;
+    u32 frame;
+    s32 answer;
+
+    if (scrGetCommandFrame() == 0) {
+        scrWorkSetValue(0, 0);
+        FUN_003dea6c(arg, 0, 1);
+        FUN_001695a0();
+    }
+    buffer = dataTableValueOrZero(0x1e);
+    frame = scrWorkGetValue(0);
+    answer = FUN_00237898(buffer, 0x10, frame, 6, 0);
+    scrWorkSetValue(0, scrWorkGetValue(0) + 1);
+    if (answer == 1) {
+        FUN_00417c24(arg);
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

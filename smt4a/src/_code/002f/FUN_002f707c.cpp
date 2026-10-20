@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int sysPlaySe(int);
 int FUN_0020b718(int, int);
 int FUN_002a7324(int);
@@ -20,7 +20,7 @@ typedef struct {
 
 extern int g_partyPanel; /* 0x57f268 */
 
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0020b718. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
@@ -78,7 +78,7 @@ void FUN_002f707c(unsigned int param_1,unsigned int param_2,int param_3)
       FUN_002a7324(1);
     }
   }
-  FUN_001641b4(0x100020f);
+  eventQueueAddUniqueIfValid(0x100020f);
   return;
 }
 

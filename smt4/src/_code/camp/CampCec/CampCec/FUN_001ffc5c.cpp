@@ -13,7 +13,7 @@ int FUN_00297468(...);
 int soundChannelRequestIfEnabled(...);
 int buttonHelpSetPreset(...);
 int FUN_002bcc60(...);
-int FUN_002bcd44(void);
+int resultReportIfFailed(void);
 int asdOperatorNew(...);
 int memAlloc(...);
 int memClear(void);
@@ -73,7 +73,7 @@ extern unsigned int *g_campCec; /* 0x43daa8 */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002bcd44. */
+/* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: memClear. */
@@ -180,7 +180,7 @@ void FUN_001ffc5c(void)
       *(unsigned char *)(puVar4 + 4) = 0;
     }
     puVar1[0x35b] = (unsigned int)puVar4;
-    FUN_002bcd44();
+    resultReportIfFailed();
     puVar4 = puVar1 + 0x35c;
     temp_v1 = 4;
     temp_v2 = &LAB_003f6eb4;

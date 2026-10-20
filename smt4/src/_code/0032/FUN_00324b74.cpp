@@ -3,8 +3,8 @@
 extern "C" {
 
 int asdMemFree(...);
-int FUN_002c56dc(int a);
-int FUN_002c5728(int a);
+int gameDataFlagsClear(int a);
+int gameDataFlagsClearAndRefresh(int a);
 int FUN_002c5758(int a);
 
 typedef struct JobWork {
@@ -19,8 +19,8 @@ void FUN_00324b74(u32 job)
     JobWork *work;
 
     FUN_002c5758(1);
-    FUN_002c5728(1);
-    FUN_002c56dc(1);
+    gameDataFlagsClearAndRefresh(1);
+    gameDataFlagsClear(1);
     work = jobGetWork(job);
     if (work->buffer != 0) {
         asdMemFree(work->buffer);

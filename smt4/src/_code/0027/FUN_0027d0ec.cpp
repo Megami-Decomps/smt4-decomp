@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001b49c0(unsigned int, unsigned int);
 int bgmReleaseStopped(void);
-int FUN_0026fa44(int, unsigned int);
+int slotFindByPair(int, unsigned int);
 int FUN_00275714(void);
 int FUN_00287328(int);
 int bgmGetStateById(...);
@@ -28,7 +28,7 @@ extern signed char DAT_0049fa61; /* 0x49fa61 */
 extern int FUN_001fb4d8(void);
 extern int FUN_00254e10(void);
 /* Supplied declaration required: bgmReleaseStopped. */
-/* Supplied declaration required: FUN_0026fa44. */
+/* Supplied declaration required: slotFindByPair. */
 /* Supplied declaration required: FUN_00275714. */
 extern int FUN_00285574(void);
 /* Supplied declaration required: FUN_00287328. */
@@ -73,7 +73,7 @@ void FUN_0027d0ec(void)
     temp_v0 = FUN_00254e10();
     if (temp_v0 == 1) {
       temp_v0 = *(int *)(temp_v2 + 0x2c);
-      FUN_0026fa44(temp_v0,*(unsigned int *)(temp_v2 + 0x30));
+      slotFindByPair(temp_v0,*(unsigned int *)(temp_v2 + 0x30));
       temp_v0 = *(int *)(temp_v0 * 0x5c + 0x448e2c);
       if (temp_v0 != 0) {
         DAT_0049f944 = temp_v0;
@@ -105,7 +105,7 @@ void FUN_0027d0ec(void)
   else {
     temp_v3 = 1;
   }
-  FUN_0026fa44(temp_v0,temp_v3);
+  slotFindByPair(temp_v0,temp_v3);
   temp_v0 = temp_v0 * 0x5c;
   DAT_0049f944 = *(int *)(temp_v0 + 0x448e20);
   if (((*(int *)(temp_v0 + 0x448e28) != 0) &&

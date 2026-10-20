@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0025beb8(unsigned int, int);
+int nodeSetScale(unsigned int, int);
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int *);
 int FUN_002a0428(unsigned int, int);
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0025beb8. */
+/* Supplied declaration required: nodeSetScale. */
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
@@ -45,7 +45,7 @@ void FUN_002329a8(int param_1,unsigned int param_2)
   temp_v3 = 0;
   nodeSetTranslation(*(unsigned int *)(*(int *)(param_1 + 0x6c) + 8),0,&temp_v1);
   FUN_0028c618(*(unsigned int *)(*(int *)(param_1 + 0x6c) + 8),0);
-  FUN_0025beb8(*(unsigned int *)(*(int *)(param_1 + 0x6c) + 8),0);
+  nodeSetScale(*(unsigned int *)(*(int *)(param_1 + 0x6c) + 8),0);
   return;
 }
 

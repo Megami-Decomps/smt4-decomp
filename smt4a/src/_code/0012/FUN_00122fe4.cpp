@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(...);
+int _ZN9Obj55b28cD1Ev(...);
 int FUN_0030f3e0(unsigned int);
 int FUN_0030f490(int *, int *, int *, int *);
 int mapIteratorNext9(int *);
@@ -29,7 +29,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_0030f3e0. */
 /* Supplied declaration required: FUN_0030f490. */
 /* Supplied declaration required: mapIteratorNext9. */
@@ -103,17 +103,17 @@ unsigned int FUN_00122fe4(int param_1,int param_2)
       temp_v0 = wordRefsDiffer_0030f88a(&temp_v12,(unsigned int *)(param_1 + 0x108));
       if (temp_v0 == 0) {
         if (*(int *)(param_1 + 4) != temp_v15) {
-          FUN_002e6e5c(temp_v8);
-          FUN_002e6e5c(temp_v7);
-          FUN_002e6e5c(temp_v6);
+          _ZN9Obj55b28cD1Ev(temp_v8);
+          _ZN9Obj55b28cD1Ev(temp_v7);
+          _ZN9Obj55b28cD1Ev(temp_v6);
           return temp_v1;
         }
         *(unsigned char *)(param_1 + 8) = 0;
         temp_v1 = 1;
         FUN_0030facc(param_1,temp_v15);
-        FUN_002e6e5c(temp_v8);
-        FUN_002e6e5c(temp_v7);
-        FUN_002e6e5c(temp_v6);
+        _ZN9Obj55b28cD1Ev(temp_v8);
+        _ZN9Obj55b28cD1Ev(temp_v7);
+        _ZN9Obj55b28cD1Ev(temp_v6);
         return temp_v1;
       }
       temp_v3[0] = temp_v12;
@@ -123,9 +123,9 @@ unsigned int FUN_00122fe4(int param_1,int param_2)
   }
   temp_v1 = 1;
   FUN_0030facc(param_1,temp_v15);
-  FUN_002e6e5c(temp_v8);
-  FUN_002e6e5c(temp_v7);
-  FUN_002e6e5c(temp_v6);
+  _ZN9Obj55b28cD1Ev(temp_v8);
+  _ZN9Obj55b28cD1Ev(temp_v7);
+  _ZN9Obj55b28cD1Ev(temp_v6);
   return temp_v1;
 }
 

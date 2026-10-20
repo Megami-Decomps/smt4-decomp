@@ -19,7 +19,7 @@ int VectorSignedToFloat(...);
 #endif
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001834a4. */
-extern unsigned long long FUN_002121c4(unsigned int);
+extern unsigned long long slotIsReady(unsigned int);
 extern int FUN_0028a230(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0035e6d4. */
@@ -214,7 +214,7 @@ LAB_003c4fac:
     }
     break;
   case 1:
-    temp_v15 = FUN_002121c4(0);
+    temp_v15 = slotIsReady(0);
     temp_v2 = (int)((unsigned long long)temp_v15 >> 0x20);
     if ((int)temp_v15 == 0) {
       temp_v6 = *(int *)(param_1 + 0xf0);

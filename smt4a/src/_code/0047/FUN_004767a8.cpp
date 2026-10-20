@@ -10,7 +10,7 @@ int FUN_00426e18(...);
 int FUN_00426eb8(...);
 int FUN_00426fe4(int *, int, int);
 int FUN_004275c8(...);
-int FUN_004279d4(int [3], unsigned char [1024], int);
+int _ZN9Obj4279d4C1Ejj(int [3], unsigned char [1024], int);
 int FUN_00427ff4(...);
 int FUN_00429934(int *, unsigned char [16]);
 int FUN_00429c08(int *, unsigned char [16], int);
@@ -52,7 +52,7 @@ extern int g_aocMain; /* 0x570260 */
 extern unsigned int halfPair48LowByteA(int);
 extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: FUN_004275c8. */
-/* Supplied declaration required: FUN_004279d4. */
+/* Supplied declaration required: _ZN9Obj4279d4C1Ejj. */
 /* Supplied declaration required: FUN_00427ff4. */
 /* Supplied declaration required: FUN_00429934. */
 /* Supplied declaration required: FUN_00429c08. */
@@ -140,7 +140,7 @@ void FUN_004767a8(int param_1)
     FUN_00429d24(temp_v17);
     return;
   }
-  FUN_004279d4(temp_v12,temp_v7,0x400);
+  _ZN9Obj4279d4C1Ejj(temp_v12,temp_v7,0x400);
   FUN_00429934(&temp_v8,temp_v17);
   temp_v14 = temp_v8;
   uStack_74 = uStack_f4;

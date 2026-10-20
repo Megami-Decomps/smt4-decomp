@@ -1,24 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003002ae` (_code @ 0x3002ae, 0x1a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the loop compare is `cmp r2, r1` (end, it); retail has `cmp r1, r2`. */
+#include "common.h"
 
 extern "C" {
 
-int asdOperatorDeleteArray(void);
+typedef struct Elem32 {
+    /* 0x00 */ u8 bytes[0x20];
+} Elem32;
 
-/* Supplied declaration required: asdOperatorDeleteArray. */
+typedef struct Vector32 {
+    /* 0x0 */ Elem32 *begin;
+    /* 0x4 */ Elem32 *end;
+} Vector32;
 
+extern void asdOperatorDeleteArray(Elem32 *block);
 
-int * FUN_003002ae(int *param_1)
-
+/* Destroys the elements of the vector and frees its storage; returns the vector. */
+Vector32 *FUN_003002ae(Vector32 *vec)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  for (temp_v0 = *param_1; temp_v0 != param_1[1]; temp_v0 = temp_v0 + 0x20) {
-  }
-  asdOperatorDeleteArray();
-  return param_1;
+    Elem32 *begin = vec->begin;
+    Elem32 *it;
+
+    for (it = begin; it != vec->end; it++) {
+    }
+    asdOperatorDeleteArray(begin);
+    return vec;
 }
 
-} /* extern "C" */
+}

@@ -21,7 +21,7 @@ int FUN_0028520c(void);
 int FUN_0028c258(void);
 int rt_aeabi_memclr(unsigned char [140], int);
 int FUN_002ef750(void);
-int FUN_0035bea0(void);
+int eventTexReleaseJobs(void);
 int bustupCutAnimStopJob(void);
 int FUN_0037d038(...);
 int VectorSignedToFloat(int, int);
@@ -55,7 +55,7 @@ extern int FUN_00224880(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_002ef750. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_0035bea0. */
+/* Supplied declaration required: eventTexReleaseJobs. */
 /* Supplied declaration required: bustupCutAnimStopJob. */
 /* Supplied declaration required: FUN_0037d038. */
 /* Supplied declaration required: FUN_003d209c. */
@@ -93,7 +93,7 @@ unsigned int FUN_003150f4(void)
   else if (temp_v1 != 1) {
     if (temp_v1 == 2) {
       asdMemFreeSlot(g_bustupViewer[0x28]);
-      FUN_0035bea0();
+      eventTexReleaseJobs();
       bustupCutAnimStopJob();
       temp_v1 = 0;
       do {
@@ -491,7 +491,7 @@ LAB_0031532c:
                 if (puVar3[3] != 2) {
 LAB_003153fc:
                   *(unsigned char *)(puVar3 + 0x11) = 1;
-                  FUN_0035bea0();
+                  eventTexReleaseJobs();
                   bustupCutAnimStopJob();
                   temp_v1 = 0;
                   do {

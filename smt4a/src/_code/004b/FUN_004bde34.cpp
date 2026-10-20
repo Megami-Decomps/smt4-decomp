@@ -39,7 +39,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183788. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-extern unsigned int FUN_0019e130(int);
+extern unsigned int markerKindGetColor(int);
 extern unsigned int FUN_002b4dcc(int);
 extern int valueAtMostFifthOfTotal(int, unsigned int);
 /* Supplied declaration required: FUN_004bda84. */
@@ -100,7 +100,7 @@ void FUN_004bde34(int param_1,int param_2,int param_3,int param_4,int param_5)
   do {
     if (((unsigned int)temp_v1 & (1 << (temp_v3 & 0xff))) != 0) {
       if (*(int *)(param_1 + param_3 * 4 + 0x378) == temp_v6) {
-        temp_v4 = FUN_0019e130((int)(short)temp_v3);
+        temp_v4 = markerKindGetColor((int)(short)temp_v3);
         break;
       }
       temp_v6 = temp_v6 + 1;

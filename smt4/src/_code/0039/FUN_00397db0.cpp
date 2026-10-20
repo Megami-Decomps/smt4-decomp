@@ -27,7 +27,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0028cfbc. */
-extern int FUN_0029e908(int);
+extern int objectPartRunUnlessLocked(int);
 extern int FUN_002aeaac(unsigned int, int);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -194,7 +194,7 @@ void FUN_00397db0(int param_1)
             } while (temp_v8 < temp_v9);
           }
           if (*(char *)(param_1 + 0x648) != '\0') {
-            temp_v9 = FUN_0029e908(temp_v15);
+            temp_v9 = objectPartRunUnlessLocked(temp_v15);
             temp_v8 = FUN_002bf4f8(0x2e,temp_v9 + 0xc6);
             (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);
             temp_v13 = 0x1f;

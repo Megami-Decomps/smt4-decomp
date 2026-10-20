@@ -1,27 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00273358` (_code @ 0x273358, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: literal pool order: retail holds the DAT_004474f0 address first, then 0.0f and 1.0f; this build emits 0.0f and 1.0f first */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_004474f0; /* 0x4474f0 */
+typedef struct EffectState {
+    /* 0x000 */ u8 unk000[0xB0];
+    /* 0x0B0 */ u8 unk0b0;
+    /* 0x0B1 */ u8 unk0b1;
+    /* 0x0B2 */ u16 frames;
+    /* 0x0B4 */ u16 unk0b4;
+    /* 0x0B6 */ u8 unk0b6[2];
+    /* 0x0B8 */ f32 unk0b8;
+    /* 0x0BC */ f32 unk0bc;
+    /* 0x0C0 */ f32 scale;
+    /* 0x0C4 */ u8 unk0c4[0x144];
+    /* 0x208 */ u32 handle;
+} EffectState;
 
+typedef struct EffectHolder {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ EffectState *state;
+} EffectHolder;
 
-void FUN_00273358(unsigned int param_1)
+extern EffectHolder DAT_004474f0;
 
+/* Resets the effect state: stores the handle and restarts the 10-frame, scale 1 parameters. */
+void FUN_00273358(u32 handle)
 {
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_004474f0 + 0x4));
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x208) = param_1;
-  *(unsigned char *)(temp_v0 + 0xb0) = 0;
-  *(unsigned char *)(temp_v0 + 0xb1) = 0;
-  *(unsigned short *)(temp_v0 + 0xb2) = 10;
-  *(unsigned short *)(temp_v0 + 0xb4) = 0;
-  *(unsigned int *)(temp_v0 + 0xb8) = 0;
-  *(unsigned int *)(temp_v0 + 0xbc) = 0;
-  *(unsigned int *)(temp_v0 + 0xc0) = 0x3f800000;
-  return;
+    EffectState *state = DAT_004474f0.state;
+
+    state->handle = handle;
+    state->unk0b0 = 0;
+    state->unk0b1 = 0;
+    state->frames = 10;
+    state->unk0b4 = 0;
+    state->unk0b8 = 0.0f;
+    state->unk0bc = 0.0f;
+    state->scale = 1.0f;
 }
 
 } /* extern "C" */

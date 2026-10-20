@@ -22,7 +22,7 @@ struct fn_0012229c_arg0 {
 
 extern unsigned char DAT_0055b1ec; /* 0x55b1ec */
 
-extern int constructObj0055affc(int);
+extern int _ZN9Obj55aff4C1Ev(int);
 extern int FUN_002ea2a8(int, unsigned int);
 extern unsigned int *FUN_002eca10(fn_0012229c_arg0 *, unsigned int, unsigned int *);
 extern int FUN_002fafd8(unsigned int *, unsigned int);
@@ -49,7 +49,7 @@ int FUN_0012229c(fn_0012229c_arg0 *param_1,unsigned int param_2,unsigned int par
   *(unsigned int *)(temp_v0 + 0x98) = 0;
   *(unsigned int *)(temp_v0 + 0x9c) = 0;
   temp_v0 = FUN_002ea2a8(temp_v0 + 0xa0,0);
-  temp_v0 = constructObj0055affc(temp_v0 + 8);
+  temp_v0 = _ZN9Obj55aff4C1Ev(temp_v0 + 8);
   return temp_v0 - 0x110;
 }
 

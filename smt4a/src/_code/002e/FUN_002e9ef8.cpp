@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [16], int);
-int FUN_002e6e5c(unsigned char [16]);
+int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int onlineInstanceTableGetCurrent(void);
 int vectorInitEmpty(unsigned int **);
 int FUN_002e9e8a(unsigned int, unsigned int, unsigned int **);
@@ -16,7 +16,7 @@ int vectorDestroyWords(unsigned int **);
 extern unsigned int FUN_00103e8e(int, unsigned int);
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineInstanceTableGetCurrent. */
 /* Supplied declaration required: vectorInitEmpty. */
 /* Supplied declaration required: FUN_002e9e8a. */
@@ -50,7 +50,7 @@ unsigned int FUN_002e9ef8(int param_1,unsigned int param_2)
     }
   }
   vectorDestroyWords(&puStack_28);
-  FUN_002e6e5c(temp_v2);
+  _ZN9Obj55b28cD1Ev(temp_v2);
   return temp_v1;
 }
 

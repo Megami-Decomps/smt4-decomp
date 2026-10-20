@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00267074(...);
-int FUN_002670cc(void);
+int contentEntryGetE(void);
 int FUN_002eb1a4(int);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -18,7 +18,7 @@ typedef struct {
 extern int g_mapEnemy; /* 0x447600 */
 
 /* Supplied declaration required: FUN_00267074. */
-/* Supplied declaration required: FUN_002670cc. */
+/* Supplied declaration required: contentEntryGetE. */
 extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002eb1a4. */
 
@@ -49,7 +49,7 @@ void FUN_002f3c28(void)
       if ((temp_v0 & 4) != 0) {
         if (((temp_v0 & 2) != 0) && (temp_v6 = (int)*(short *)(temp_v8 + 0xf24), (temp_v0 & 8) != 0)) {
           *(unsigned char *)(temp_v8 + 0xf20) = (temp_v0 & 0xf7) | 0x20;
-          FUN_002670cc();
+          contentEntryGetE();
           temp_v4 = *(char *)(temp_v8 + 0xf23) + '\x01';
           *(char *)(temp_v8 + 0xf23) = temp_v4;
           if (temp_v4 != '\x01') {

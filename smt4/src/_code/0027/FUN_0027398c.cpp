@@ -9,7 +9,7 @@ int FUN_00297060(int, unsigned int);
 int dataTable1bOr1cGetRecord(void);
 int buttonHelpSetPreset(int);
 int FUN_002be624(...);
-int FUN_003880c8(unsigned int, int, unsigned int *, int);
+int aocQueueType08(unsigned int, int, unsigned int *, int);
 int aocQueueType07(unsigned int, int, unsigned int *, int);
 
 extern unsigned char LAB_00273b38; /* 0x273b38 */
@@ -26,7 +26,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_003880c8. */
+/* Supplied declaration required: aocQueueType08. */
 /* Supplied declaration required: aocQueueType07. */
 
 
@@ -54,7 +54,7 @@ unsigned int FUN_0027398c(unsigned int *param_1)
     temp_v3 = FUN_00289e54(g_aocSystem,*(unsigned short *)(temp_v3 + 0x148),1);
     if (temp_v3 != 0) {
       aocQueueType07(g_aocSystem,temp_v0,param_1 + 3,0);
-      FUN_003880c8(g_aocSystem,temp_v0,param_1 + 4,0);
+      aocQueueType08(g_aocSystem,temp_v0,param_1 + 4,0);
       *param_1 = 1;
       return 0;
     }

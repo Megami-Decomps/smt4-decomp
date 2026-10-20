@@ -1,30 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fa680` (_code @ 0x1fa680, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMdlManagerMarkDestroy(void);
+typedef struct GimicSlot {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ void *model;
+    /* 0x20 */ u8 unk20[8];
+} GimicSlot; /* 0x28 */
 
-extern int g_mapGimic; /* 0x447a48 */
+typedef struct MapGimic {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ GimicSlot slots[24];
+} MapGimic;
 
-/* Supplied declaration required: asdMdlManagerMarkDestroy. */
+extern MapGimic *g_mapGimic;
 
+extern void asdMdlManagerMarkDestroy(void *model);
 
+/* Marks every slot's model for destruction, last slot first. */
 void FUN_001fa680(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0x17;
-  do {
-    if (*(int *)(g_mapGimic + temp_v0 * 0x28 + 0x34) != 0) {
-      asdMdlManagerMarkDestroy();
+    s32 i;
+
+    for (i = 23; i >= 0; i--) {
+        if (g_mapGimic->slots[i].model != NULL) {
+            asdMdlManagerMarkDestroy(g_mapGimic->slots[i].model);
+        }
     }
-    temp_v0 = temp_v0 - 1;
-  } while (-1 < temp_v0);
-  return;
 }
 
 } /* extern "C" */

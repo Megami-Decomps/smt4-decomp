@@ -9,14 +9,14 @@ int FUN_002897f0(...);
 int asdLoadFileSetUseRawPaths(int);
 int FUN_00282bfc(int, int);
 int FUN_00287728(int);
-int FUN_0028971c(void);
+int msgWindowReset(void);
 int gameFlagSetValue(...);
 int FUN_00289880(void);
 int FUN_002898e4(void);
 int FUN_00289d74(int, unsigned int, int);
 int FUN_00289de4(int, unsigned int, int);
 int buttonHelpCreate(void);
-int FUN_0028dc68(int);
+int messageSlotSet(int);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int FUN_00297060(int, unsigned int);
@@ -29,7 +29,7 @@ int gameFlagIsSet(void);
 int asdMemFree(void);
 int jobStop(unsigned int, int);
 int FUN_002cb8d8(void);
-int FUN_002e2028(void);
+int eventTexReleaseJobs(void);
 int bustupCutAnimStopJob(void);
 int eventCommandStop(void);
 int FUN_0031eb34(void);
@@ -46,7 +46,7 @@ extern int FUN_001aba04(void);
 extern int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: FUN_00287728. */
-/* Supplied declaration required: FUN_0028971c. */
+/* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_002897f0. */
 extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
@@ -56,7 +56,7 @@ extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00289de4. */
 extern int FUN_00289e54(int, unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: FUN_0028dc68. */
+/* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: uiFadeRelease. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
@@ -75,7 +75,7 @@ extern int jyoucyuGetTableEntry(unsigned int);
 extern unsigned int FUN_002c5c04(unsigned char *);
 /* Supplied declaration required: FUN_002cb8d8. */
 extern int FUN_002d860c(void);
-/* Supplied declaration required: FUN_002e2028. */
+/* Supplied declaration required: eventTexReleaseJobs. */
 /* Supplied declaration required: bustupCutAnimStopJob. */
 /* Supplied declaration required: eventCommandStop. */
 /* Supplied declaration required: FUN_0031eb34. */
@@ -127,9 +127,9 @@ unsigned int FUN_001e4d70(void)
     uiFadeRelease();
     buttonHelpRelease();
     FUN_002bff50();
-    FUN_0028971c();
+    msgWindowReset();
     bustupCutAnimStopJob();
-    FUN_002e2028();
+    eventTexReleaseJobs();
     eventCommandStop();
     FUN_0031eb34();
     if (puVar1[0xc] != 0) {
@@ -145,7 +145,7 @@ unsigned int FUN_001e4d70(void)
       puVar1[0xd] = 0;
     }
     puVar1[2] = 1;
-    FUN_0028dc68(0);
+    messageSlotSet(0);
     FUN_00287728(0);
     FUN_00287728(1);
     soundChannelStopAll(0xf);

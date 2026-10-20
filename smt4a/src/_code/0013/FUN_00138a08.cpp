@@ -1,40 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00138a08` (_code @ 0x138a08, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the process count in ip and the slot array in r4 (loading it after the early exit); built swaps them. */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} void_stack;
+typedef struct Process Process;
 
-extern int g_asdProcess; /* 0x640118 */
+struct Process {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ u32 flags;
+    /* 0x20 */ u8 unk20[0x2C];
+    /* 0x4C */ Process *next;
+};
 
+typedef struct ProcessSlot {
+    /* 0x0 */ Process *head;
+    /* 0x4 */ u32 unk4;
+} ProcessSlot;
 
+typedef struct ProcessTable {
+    /* 0x0 */ ProcessSlot *slots;
+    /* 0x4 */ s32 count;
+} ProcessTable;
+
+extern ProcessTable g_asdProcess;
+
+/* Marks every process that has flag 0x80000 with flag 0x200000. */
 void FUN_00138a08(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v1 = (*(int *)((unsigned char *)&g_asdProcess + 0x4));
-  temp_v0 = g_asdProcess;
-  temp_v3 = 0;
-  if (0 < (*(int *)((unsigned char *)&g_asdProcess + 0x4))) {
+    s32 count = g_asdProcess.count;
+    ProcessSlot *slots;
+    s32 i = 0;
+
+    if (count <= 0) {
+        return;
+    }
+    slots = g_asdProcess.slots;
     do {
-      for (temp_v2 = *(int *)(temp_v0 + temp_v3 * 8); temp_v2 != 0; temp_v2 = *(int *)(temp_v2 + 0x4c)) {
-        if ((*(unsigned int *)(temp_v2 + 0x1c) & 0x80000) != 0) {
-          *(unsigned int *)(temp_v2 + 0x1c) = *(unsigned int *)(temp_v2 + 0x1c) | 0x200000;
+        Process *process;
+
+        for (process = slots[i].head; process != NULL; process = process->next) {
+            if ((process->flags & 0x80000) != 0) {
+                process->flags |= 0x200000;
+            }
         }
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < temp_v1);
-    return;
-  }
-  return;
+        i++;
+    } while (count > i);
 }
 
 } /* extern "C" */

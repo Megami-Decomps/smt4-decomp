@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0025ca80(int, int);
 int asdModelSlotSetColor(int, int);
 int FUN_00263670(int, int);
-int FUN_002f5084(unsigned int);
+int colorObjectSetRgb(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,8 +18,8 @@ extern int asdModelBankGetModel(int, unsigned int);
 /* Supplied declaration required: FUN_0025ca80. */
 /* Supplied declaration required: asdModelSlotSetColor. */
 /* Supplied declaration required: FUN_00263670. */
-extern int FUN_002cb7e0(int, unsigned int);
-/* Supplied declaration required: FUN_002f5084. */
+extern int unitTableGetValue(int, unsigned int);
+/* Supplied declaration required: colorObjectSetRgb. */
 
 
 void FUN_001e18d4(int param_1)
@@ -36,7 +36,7 @@ void FUN_001e18d4(int param_1)
       temp_v0 = *(int *)(param_1 + 0xc4);
     }
     if ((temp_v1 == 1 && temp_v0 == 0) &&
-       (temp_v1 = FUN_002cb7e0((int)(short)*(unsigned int *)(param_1 + 0xcc),0), temp_v1 != 0)) {
+       (temp_v1 = unitTableGetValue((int)(short)*(unsigned int *)(param_1 + 0xcc),0), temp_v1 != 0)) {
       FUN_00263670((int)(short)*(unsigned int *)(param_1 + 0xcc),0);
       FUN_0025ca80((int)(short)*(unsigned int *)(param_1 + 0xcc),0);
       return;
@@ -44,7 +44,7 @@ void FUN_001e18d4(int param_1)
   }
   else {
     if (*(int *)(param_1 + 0xc4) == 1) {
-      FUN_002f5084(*(unsigned int *)(param_1 + 0x10c));
+      colorObjectSetRgb(*(unsigned int *)(param_1 + 0x10c));
       return;
     }
     if ((*(int *)(param_1 + 0xc4) == 0) &&

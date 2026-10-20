@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0013232a(int, int *);
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002ecf70(int *, int, int *);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0013232a. */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002ecf70. */
 extern int iterEqual(unsigned int *, unsigned int *);
 
@@ -45,7 +45,7 @@ unsigned int FUN_0011c58a(int param_1,unsigned int param_2)
     temp_v2 = temp_v3;
     FUN_0013232a(param_1 + 0x60,&temp_v2);
   }
-  FUN_002e6e5c(temp_v1);
+  _ZN9Obj55b28cD1Ev(temp_v1);
   return 1;
 }
 

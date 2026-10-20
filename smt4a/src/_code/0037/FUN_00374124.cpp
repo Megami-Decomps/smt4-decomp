@@ -1,28 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00374124` (_code @ 0x374124, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail forms the flag-word address in r1 and the 1 in r0 (built: r0 and r1). */
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+typedef struct BtlState {
+    /* 0x0000 */ u8 unk0000[0x4CC8];
+    /* 0x4CC8 */ u32 flags;
+} BtlState;
 
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(void);
-/* Supplied declaration required: scrSetResult. */
+extern BtlState *btlGetMainState(void);
+extern u32 scrGetArg(void);
+extern void scrSetResult(s32 value);
 
-
-unsigned int FUN_00374124(void)
-
+/* Script command: pushes whether bit <arg> of the battle state's flag word is set; returns 1. */
+s32 FUN_00374124(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlGetMainState();
-  scrSetResult((*(unsigned int *)(temp_v1 + 0x4cc8) & (1 << (temp_v0 & 0xff))) != 0);
-  return 1;
+    u32 bit = scrGetArg();
+
+    scrSetResult((btlGetMainState()->flags & (1 << bit)) != 0);
+    return 1;
 }
 
 } /* extern "C" */

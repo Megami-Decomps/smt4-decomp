@@ -26,8 +26,8 @@ extern int FUN_002eac34(unsigned int);
 /* Supplied declaration required: FUN_002eb624. */
 /* Supplied declaration required: FUN_002ecf40. */
 extern int FUN_002ed250(int);
-extern int FUN_002f31cc(int);
-extern int FUN_0030153c(int);
+extern int _ZN9Obj558c00D1Ev(int);
+extern int _ZN9Obj55984cD1Ev(int);
 
 
 void FUN_00121e38(unsigned int *param_1)
@@ -87,8 +87,8 @@ void FUN_00121e38(unsigned int *param_1)
   temp_v1 = 0x358;
   temp_v0 = FUN_002eb624(temp_v0 + 0x358);
   temp_v0 = vectorDestroyWords((temp_v0 - temp_v1) + 0x34c);
-  temp_v0 = FUN_002f31cc(temp_v0 - 0x264);
-  temp_v0 = FUN_0030153c(temp_v0 - 0x14);
+  temp_v0 = _ZN9Obj558c00D1Ev(temp_v0 - 0x264);
+  temp_v0 = _ZN9Obj55984cD1Ev(temp_v0 - 0x14);
   temp_v0 = FUN_001145a0(temp_v0 - 0x30);
   temp_v0 = FUN_00129380(temp_v0 - 0x50);
   temp_v0 = FUN_002ed250(temp_v0 - 0x14);

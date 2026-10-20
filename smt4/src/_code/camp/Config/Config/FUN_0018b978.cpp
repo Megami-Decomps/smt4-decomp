@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00296e90(void);
 int FUN_0029efd8(...);
 int eventQueueAddUnique(...);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 
 int FUN_00195510(...);
 int FUN_0019e0c0(unsigned int);
@@ -50,7 +50,7 @@ extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_0029efd8. */
 extern unsigned short FUN_002b8584(unsigned int, unsigned int);
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_002bf4f8. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
@@ -343,7 +343,7 @@ LAB_0018bf50:
           if (temp_v2 == 0) {
             return;
           }
-          FUN_002bc01c(0x100016e);
+          eventQueueAddUniqueIfValid(0x100016e);
           FUN_00297050(1);
           temp_v9 = 3;
           *(unsigned int *)(temp_v8 + 100) = temp_v9;
@@ -363,7 +363,7 @@ LAB_0018bf50:
             if (temp_v2 == 0) {
               return;
             }
-            FUN_002bc01c(0x100016e);
+            eventQueueAddUniqueIfValid(0x100016e);
             FUN_00297050(1);
             temp_v9 = 3;
             *(unsigned int *)(temp_v8 + 100) = temp_v9;

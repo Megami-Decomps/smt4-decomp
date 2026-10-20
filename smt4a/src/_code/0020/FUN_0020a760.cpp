@@ -9,7 +9,7 @@ int FUN_003f3a04(...);
 int FUN_003f5220(...);
 
 int FUN_001517b4(int, int);
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int uiSpriteSetKeyframe(int, int, int);
 int FUN_0020b718(int, int);
 int useCounterStart(void);
@@ -28,7 +28,7 @@ extern int g_partyPanel; /* 0x57f268 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_0020b718. */
 /* Supplied declaration required: useCounterStart. */
@@ -89,7 +89,7 @@ unsigned int FUN_0020a760(int param_1)
     useCounterStart();
     FUN_0020b718(0xf,1);
     FUN_003343f0(1);
-    FUN_001641b4(0x100020e);
+    eventQueueAddUniqueIfValid(0x100020e);
     return 1;
   }
   temp_v0 = *(unsigned char *)(temp_v5 + 0x42) ^ 1;
@@ -100,7 +100,7 @@ unsigned int FUN_0020a760(int param_1)
   else {
     uiSpriteSetKeyframe(temp_v5 + 0x4c8,4,0);
   }
-  FUN_001641b4(0x100020e);
+  eventQueueAddUniqueIfValid(0x100020e);
   if (*(int *)(temp_v5 + 0x1c) != 6) {
     if (*(int *)(temp_v5 + 0x1c) == 8) {
       if (*(char *)(temp_v5 + 0x42) != '\0') {

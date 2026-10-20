@@ -1,31 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037c770` (_code @ 0x37c770, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0026140c(void);
+typedef struct BitFlags {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ u8 bits[1];
+} BitFlags;
 
+extern BitFlags *FUN_0026140c(void);
 
-void FUN_0037c770(unsigned int param_1,int param_2)
-
+/* Sets or clears bit `bit` of the flag bitmap at 0x48 of the FUN_0026140c block. */
+void FUN_0037c770(u32 bit, s32 on)
 {
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v1 = FUN_0026140c();
-  temp_v2 = (unsigned char)(1 << (param_1 & 7));
-  temp_v1 = temp_v1 + (param_1 >> 3);
-  temp_v0 = *(unsigned char *)(temp_v1 + 0x48);
-  if (param_2 != 0) {
-    temp_v2 = temp_v2 | temp_v0;
-  }
-  else {
-    temp_v2 = temp_v0 & ~temp_v2;
-  }
-  *(unsigned char *)(temp_v1 + 0x48) = temp_v2;
-  return;
+    BitFlags *flags = FUN_0026140c();
+    if (on != 0) {
+        flags->bits[bit >> 3] |= 1 << (bit & 7);
+    } else {
+        flags->bits[bit >> 3] &= ~(1 << (bit & 7));
+    }
 }
 
 } /* extern "C" */

@@ -9,7 +9,7 @@ int FUN_00230df0(int);
 int FUN_00231240(int, unsigned int, unsigned int);
 int FUN_00233240(int, int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int FUN_0029a014(unsigned int, int);
+int nodeSetTranslation3f(unsigned int, int);
 int FUN_002a0428(int, int);
 int FUN_002b8ee0(int, int);
 
@@ -27,7 +27,7 @@ extern unsigned char LAB_003a0b60; /* 0x3a0b60 */
 /* Supplied declaration required: FUN_00233240. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_0029a014. */
+/* Supplied declaration required: nodeSetTranslation3f. */
 extern int FUN_0029e0f8(void);
 /* Supplied declaration required: FUN_002a0428. */
 extern int FUN_002adee0(void);
@@ -95,7 +95,7 @@ void FUN_003a099c(int param_1)
   if (((*piVar3 != 0) && (temp_v2 = FUN_002adee0(), temp_v2 != 0)) &&
      (*(int *)(*(int *)(*piVar3 + 8) + 0xc) < 0)) {
     FUN_002a0428(*piVar3,1);
-    FUN_0029a014(*(unsigned int *)(*piVar3 + 8),0);
+    nodeSetTranslation3f(*(unsigned int *)(*piVar3 + 8),0);
     return;
   }
   return;

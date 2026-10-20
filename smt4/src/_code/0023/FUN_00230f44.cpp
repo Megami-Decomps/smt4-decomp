@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0022e3f8(void);
-int FUN_00256810(void);
+int aocRecordLookup84(void);
+int aocRecordLookup83(void);
 int dataTable08Sub2GetRecord(void);
 int dataTable08Sub1GetRecord(void);
 
-/* Supplied declaration required: FUN_0022e3f8. */
-/* Supplied declaration required: FUN_00256810. */
+/* Supplied declaration required: aocRecordLookup84. */
+/* Supplied declaration required: aocRecordLookup83. */
 extern unsigned int FUN_002ae3c4(unsigned int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
@@ -47,13 +47,13 @@ unsigned short FUN_00230f44(unsigned short *param_1)
     }
     break;
   case 9:
-    FUN_00256810();
+    aocRecordLookup83();
     if (temp_v2 != 0) {
       temp_v1 = *(unsigned short *)(temp_v2 + 0x26);
     }
     break;
   case 10:
-    FUN_0022e3f8();
+    aocRecordLookup84();
     if (temp_v2 != 0) {
       temp_v1 = *(unsigned short *)(temp_v2 + 0x28);
     }

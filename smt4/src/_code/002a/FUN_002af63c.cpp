@@ -14,7 +14,7 @@ int cameraSetViewMatrix(...);
 int FUN_002ba12c(...);
 int FUN_002bf538(void);
 int FUN_002c1b64(...);
-int FUN_002c5d5c(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -84,7 +84,7 @@ extern unsigned int DAT_004d4914; /* 0x4d4914 */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bf538. */
 /* Supplied declaration required: FUN_002c1b64. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 int FUN_002af63c(unsigned int param_1,int param_2,unsigned int *param_3)
@@ -163,8 +163,8 @@ int FUN_002af63c(unsigned int param_1,int param_2,unsigned int *param_3)
   iStack_2c = param_2;
   puStack_28 = param_3;
   temp_v15 = DAT_004d4704;
-  FUN_002c5d5c(temp_v24 + 0x10,&LAB_00141adc,0x10,4);
-  FUN_002c5d5c(temp_v24,&LAB_00141adc,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v24 + 0x10,&LAB_00141adc,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v24,&LAB_00141adc,0x10,4);
   temp_v28 = &g_asdSoundOptions;
   temp_v23 = 0;
   if (DAT_004d4912 != '\0') {

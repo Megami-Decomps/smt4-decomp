@@ -28,7 +28,7 @@ int FUN_001387c0(...);
 int FUN_001388d8(...);
 int asdPrimSwapBuffers(...);
 int FUN_00138aa4(...);
-int FUN_00138cf8(...);
+int gameDataBlocksMaskClearBits(...);
 int FUN_00139ab0(...);
 int FUN_00139b6c(...);
 int FUN_0013a078(...);
@@ -99,7 +99,7 @@ int FUN_00139c90(...);
 int FUN_0013a1e4(...);
 int FUN_0013a324(...);
 int FUN_0013a5f0(...);
-int FUN_0013a618(...);
+int asdGxPresetRequest(...);
 int asdMemorySetUseAllocatorA(...);
 int FUN_0013b4ac(...);
 int FUN_0013b5c8(...);
@@ -171,7 +171,7 @@ extern int FUN_00136f30(...); /* 0x136f30 */
 extern int FUN_00136f74(...); /* 0x136f74 */
 extern int FUN_00136fc0(...); /* 0x136fc0 */
 extern int FUN_00137020(...); /* 0x137020 */
-extern int FUN_0013705c(...); /* 0x13705c */
+extern int titleSceneStep(...); /* 0x13705c */
 extern int FUN_001370bc(...); /* 0x1370bc */
 extern int FUN_0013710c(...); /* 0x13710c */
 extern unsigned char LAB_00137668; /* 0x137668 */
@@ -190,7 +190,7 @@ extern int renderCtxApplyCurrentB(...); /* 0x13a998 */
 extern int FUN_0013a9c8(...); /* 0x13a9c8 */
 extern unsigned char LAB_0013ba98; /* 0x13ba98 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern unsigned char DAT_0057ffd0; /* 0x57ffd0 */
+extern unsigned char g_titleFlags; /* 0x57ffd0 */
 extern signed char DAT_0057ffd1; /* 0x57ffd1 */
 extern signed char DAT_0057ffd2; /* 0x57ffd2 */
 extern unsigned char DAT_0057ffd3; /* 0x57ffd3 */
@@ -316,7 +316,7 @@ extern int FUN_00138940(void);
 extern int FUN_00138ca4(void);
 extern int FUN_00138cb4(void);
 /* Supplied declaration required: FUN_00138cc4. */
-/* Supplied declaration required: FUN_00138cf8. */
+/* Supplied declaration required: gameDataBlocksMaskClearBits. */
 /* Supplied declaration required: FUN_00138d1c. */
 /* Supplied declaration required: FUN_00138d34. */
 /* Supplied declaration required: asdPrimInit. */
@@ -347,7 +347,7 @@ extern unsigned long long FUN_00139c4c(void);
 /* Supplied declaration required: FUN_0013a5e0. */
 /* Supplied declaration required: FUN_0013a5f0. */
 extern unsigned int FUN_0013a608(unsigned int);
-/* Supplied declaration required: FUN_0013a618. */
+/* Supplied declaration required: asdGxPresetRequest. */
 /* Supplied declaration required: FUN_0013a630. */
 /* Supplied declaration required: FUN_0013a668. */
 /* Supplied declaration required: FUN_0013a67c. */
@@ -490,7 +490,7 @@ void FUN_00135c30(void)
   temp_v35 = 0x8d62;
   temp_v36 = 0x8d62;
   FUN_00139c90(&temp_v28);
-  FUN_0013a618(1);
+  asdGxPresetRequest(1);
   FUN_0013a324();
   temp_v2 = g_renderCtx;
   *(unsigned int *)(g_renderCtx + 0x1378) = 0;
@@ -601,7 +601,7 @@ void FUN_00135c30(void)
   temp_v23 = 0;
   temp_v24 = 0;
   asdProcessCreateSimple(&LAB_00136538,0xcd,0);
-  temp_v22 = FUN_0013705c;
+  temp_v22 = titleSceneStep;
   temp_v23 = 0;
   temp_v24 = 0;
   asdProcessCreateSimple(&LAB_00136548,0xd2,0);
@@ -658,7 +658,7 @@ void FUN_00135c30(void)
   FUN_0013b244(g_renderCtx);
   FUN_001386e8(0xf);
   FUN_00137ea0(7);
-  FUN_00138cf8(1);
+  gameDataBlocksMaskClearBits(1);
   DAT_0057ffd3 = 0;
   FUN_0030fc80(&temp_v22);
   temp_v3 = (unsigned int)(romwright_zext_4_8(temp_v22) * 1000000);
@@ -673,7 +673,7 @@ LAB_00136430:
         uRam0057fff0.whole = temp_v19;
         FUN_00140ba4();
         temp_v2 = FUN_001381cc();
-        DAT_0057ffd0 = temp_v2 != 0;
+        g_titleFlags = temp_v2 != 0;
         temp_v2 = nngxIsStereoVisionAllowed();
         if (temp_v2 != 0) {
           DAT_0057ffd1 = '\x01';

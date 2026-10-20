@@ -19,7 +19,7 @@ int FUN_003f21ec(void);
 int FUN_004bd098(...);
 int FUN_004c0f74(...);
 int source4CCopyHalves(void);
-int FUN_004c3ac0(...);
+int kindIdStore(...);
 int FUN_004c60c0(unsigned int, unsigned int);
 int FUN_004c8340(unsigned int, unsigned int, unsigned int, unsigned int *);
 int VectorSignedToFloat(...);
@@ -130,7 +130,7 @@ extern unsigned int FUN_0034ef58(unsigned int, unsigned int);
 extern unsigned int FUN_004bf9a0(unsigned int);
 /* Supplied declaration required: FUN_004c0f74. */
 /* Supplied declaration required: source4CCopyHalves. */
-/* Supplied declaration required: FUN_004c3ac0. */
+/* Supplied declaration required: kindIdStore. */
 /* Supplied declaration required: FUN_004c60c0. */
 /* Supplied declaration required: FUN_004c8340. */
 extern int btlUnitGet(unsigned int);
@@ -471,7 +471,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
         temp_v10 = 0;
       }
       temp_v44[temp_v11 + 0xe] = temp_v10 | temp_v44[temp_v11 + 0xe];
-      FUN_004c3ac0(temp_v37[temp_v11],&temp_v35);
+      kindIdStore(temp_v37[temp_v11],&temp_v35);
       puVar4 = temp_v43;
       FUN_004c0f74(temp_v43,temp_v35 & 0xff);
       temp_v5 = (unsigned int)temp_v27;

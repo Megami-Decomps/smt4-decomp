@@ -21,7 +21,7 @@ extern int g_camp; /* 0x57f108 */
 /* Supplied declaration required: FUN_002f3bc4. */
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_00331380. */
-extern int FUN_00349af0(void);
+extern int partyPanelIsActive(void);
 
 
 void FUN_002add8c(void)
@@ -48,7 +48,7 @@ void FUN_002add8c(void)
     sysPlaySe(0x51);
     return;
   }
-  temp_v1 = FUN_00349af0();
+  temp_v1 = partyPanelIsActive();
   if (temp_v1 == 0) {
     if (*(char *)(temp_v0 + 0xa4) != '\x01') {
       sysPlaySe(3);

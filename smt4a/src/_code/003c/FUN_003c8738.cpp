@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-extern unsigned int FUN_002adba8(int);
+extern unsigned int requestIdToCode(int);
 
 
 unsigned int FUN_003c8738(int param_1)
@@ -21,7 +21,7 @@ unsigned int FUN_003c8738(int param_1)
   temp_v2 = 0;
   do {
     if (*(int *)(param_1 + temp_v2 * 4 + 0x94) == 2) {
-      temp_v0 = FUN_002adba8(temp_v2);
+      temp_v0 = requestIdToCode(temp_v2);
       temp_v1 = asdTMTexTableNodeIsLoaded(0x2e,temp_v0);
       if (temp_v1 == 0) {
         return 0;

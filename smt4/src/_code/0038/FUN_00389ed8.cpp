@@ -1,39 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00389ed8` (_code @ 0x389ed8, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the constant 0x10 (second argument of FUN_002a6e7c) in r8 from the start, which also moves the parameters to r6/r4/r5/r7; built loads it just before the call */
+#include "common.h"
 
 extern "C" {
 
-int aocDisplayQueueRecord(unsigned int, unsigned char [128], unsigned int, unsigned int, int, int, int);
-int memClear(unsigned char [128], int);
+extern u32 g_aocDisplay;
 
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int spA0; /* 0xa0: local_a0 */
-    unsigned int spA4; /* 0xa4: local_a4 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-} param_4_stack;
+extern void memClear(void *buffer, s32 size);
+extern s32 FUN_002a6e7c(u32 a, s32 kind, u32 b, u8 *buffer);
+extern void aocDisplayQueueRecord(u32 display, u8 *buffer, u32 d, u32 c, s32 e, s32 size, s32 length);
 
-extern unsigned int g_aocDisplay; /* 0x433130 */
-
-/* Supplied declaration required: aocDisplayQueueRecord. */
-extern int FUN_002a6e7c(unsigned int, unsigned int, unsigned int, unsigned char *);
-/* Supplied declaration required: memClear. */
-
-
-void FUN_00389ed8(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+void FUN_00389ed8(u32 a, u32 b, u32 c, u32 d)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [128];
-  
-  memClear(temp_v1,0x80);
-  temp_v0 = FUN_002a6e7c(param_1,0x10,param_2,temp_v1);
-  if (temp_v0 != 0) {
-    aocDisplayQueueRecord(g_aocDisplay,temp_v1,param_4,param_3,0,0x80,temp_v0);
-  }
-  return;
+    u8 buffer[128];
+    s32 length;
+
+    memClear(buffer, sizeof(buffer));
+    length = FUN_002a6e7c(a, 0x10, b, buffer);
+    if (length != 0) {
+        aocDisplayQueueRecord(g_aocDisplay, buffer, d, c, 0, sizeof(buffer), length);
+    }
 }
 
 } /* extern "C" */

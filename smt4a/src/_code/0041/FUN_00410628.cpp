@@ -16,7 +16,7 @@ int FUN_003e503c(void);
 int btlReleaseEntries(...);
 int FUN_003efbac(...);
 int FUN_003f1b3c(int, unsigned int, int, int ***);
-int FUN_004012f0(...);
+int markerOwnerUpdatePositions(...);
 int FUN_00411c04(int, int);
 int FUN_00416610(unsigned int);
 int FUN_0047f98c(unsigned int);
@@ -93,7 +93,7 @@ extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: btlReleaseEntries. */
 /* Supplied declaration required: FUN_003efbac. */
 /* Supplied declaration required: FUN_003f1b3c. */
-/* Supplied declaration required: FUN_004012f0. */
+/* Supplied declaration required: markerOwnerUpdatePositions. */
 extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00411c04. */
 /* Supplied declaration required: FUN_00416610. */
@@ -369,7 +369,7 @@ void FUN_00410628(int param_1)
       return;
     }
     FUN_004f1530(g_btlCamera);
-    FUN_004012f0(g_btlStageModel);
+    markerOwnerUpdatePositions(g_btlStageModel);
     FUN_004f1c5c(g_btlCamera,0);
     FUN_004f1edc(g_btlCamera);
     temp_v3 = g_btlCamera;

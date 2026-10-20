@@ -1,26 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00133126` (_code @ 0x133126, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the result pointer in r4, the list in r6, the position in r5 and the value in r7; built uses r6/r5/r4/r7. */
+#include "common.h"
 
 extern "C" {
 
-extern int *FUN_001330c0(int, unsigned int, int *, unsigned char *, unsigned char *);
+typedef struct ListNode ListNode;
 
+struct ListNode {
+    /* 0x0 */ ListNode *next;
+    /* 0x4 */ ListNode *prev;
+    /* 0x8 */ u8 value;
+};
 
-void FUN_00133126(int *param_1,int param_2,int *param_3,unsigned char *param_4)
+typedef struct List {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 count;
+} List;
 
+ListNode *FUN_001330c0(List *list, s32 zero, ListNode **position, u8 *value);
+
+/* Inserts a node holding *value before *position and stores it in *result. */
+void FUN_00133126(ListNode **result, List *list, ListNode **position, u8 *value)
 {
-  int *piVar1;
-  
-  piVar1 = (int *)FUN_001330c0(param_2,0,param_3,param_4,param_4);
-  *(unsigned char *)(piVar1 + 2) = *param_4;
-  *piVar1 = *param_3;
-  piVar1[1] = *(int *)(*param_3 + 4);
-  **(int **)(*param_3 + 4) = (int)piVar1;
-  *(int **)(*param_3 + 4) = piVar1;
-  *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) + 1;
-  *param_1 = (int)piVar1;
-  return;
+    ListNode *node = FUN_001330c0(list, 0, position, value);
+
+    node->value = *value;
+    node->next = *position;
+    node->prev = (*position)->prev;
+    (*position)->prev->next = node;
+    (*position)->prev = node;
+    list->count = list->count + 1;
+    *result = node;
 }
 
 } /* extern "C" */

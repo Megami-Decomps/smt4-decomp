@@ -20,7 +20,7 @@ typedef struct {
 extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_00234124. */
-extern int FUN_0023a0b4(int);
+extern int queryResultFailureOnly(int);
 /* Supplied declaration required: FUN_002a116c. */
 /* Supplied declaration required: FUN_002a1200. */
 /* Supplied declaration required: FUN_002a12d8. */
@@ -58,7 +58,7 @@ void FUN_00233e70(int param_1,unsigned int param_2,unsigned int param_3)
     else {
       temp_v0 = param_1 + 0x214;
       FUN_002a116c();
-      if ((temp_v0 != 0) || (temp_v1 = FUN_0023a0b4(temp_v1 + 0x80), -1 >= temp_v1)) {
+      if ((temp_v0 != 0) || (temp_v1 = queryResultFailureOnly(temp_v1 + 0x80), -1 >= temp_v1)) {
         piVar2 = *(int **)(param_1 + 0x208);
         *(unsigned int *)(param_1 + 4) = 3;
         *(unsigned int *)(param_1 + 8) = 0;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0027e874(void);
 int FUN_00295ba4(int);
-int FUN_002bc01c(int);
+int eventQueueAddUniqueIfValid(int);
 int FUN_002c1658(...);
 int FUN_003c033c(...);
 
@@ -18,7 +18,7 @@ extern int g_btlUiBlock; /* 0x439ca8 */
 extern int btlUnitGet(void);
 /* Supplied declaration required: FUN_00295ba4. */
 extern int dialogIsActive(void);
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int jobIsValid(unsigned int);
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c1658. */
@@ -108,7 +108,7 @@ unsigned int FUN_001b5154(void)
             FUN_0027e874();
             FUN_00295ba4(1);
             *puVar6 = *puVar6 & 0xffffffbf;
-            FUN_002bc01c(0x100016e);
+            eventQueueAddUniqueIfValid(0x100016e);
             return 0;
           }
           if ((*puVar6 & 0x100) != 0) {
@@ -120,7 +120,7 @@ unsigned int FUN_001b5154(void)
             FUN_0027e874();
             FUN_00295ba4(1);
             *puVar6 = *puVar6 & 0xfffffeff;
-            FUN_002bc01c(0x100016e);
+            eventQueueAddUniqueIfValid(0x100016e);
             return 0;
           }
           temp_v3 = 7;
@@ -129,7 +129,7 @@ unsigned int FUN_001b5154(void)
             FUN_0027e874();
             FUN_003c033c(0);
             *puVar6 = *puVar6 | 0x40;
-            FUN_002bc01c(0x100016d);
+            eventQueueAddUniqueIfValid(0x100016d);
             return 0;
           }
           temp_v3 = 8;
@@ -144,7 +144,7 @@ unsigned int FUN_001b5154(void)
           FUN_0027e874();
           FUN_003c033c(1,0);
           *puVar6 = *puVar6 | 0x100;
-          FUN_002bc01c(0x100016d);
+          eventQueueAddUniqueIfValid(0x100016d);
           return 0;
         }
         *puVar6 = *puVar6 & 0xfffffebf;

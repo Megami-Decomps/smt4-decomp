@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00157558(int);
 int efctSetSpeed(void);
-int FUN_0016c560(int);
+int skinObjectUpdateMatrices(int);
 int FUN_002a2210(unsigned int, int, int, int, int, int);
 int FUN_00359c78(int, int, int);
 int FUN_0036c8a0(int, int);
@@ -27,7 +27,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_002a2210. */
 extern int gameDataGetMarkEntry(int);
@@ -101,7 +101,7 @@ unsigned int FUN_002e241c(void)
     (**(romwright_code **)(temp_v1 + 0x1274))();
     *(unsigned char *)(temp_v1 + 0x1270) = 0;
   }
-  FUN_0016c560(g_renderCtx);
+  skinObjectUpdateMatrices(g_renderCtx);
   efctSetSpeed();
   return 0;
 }

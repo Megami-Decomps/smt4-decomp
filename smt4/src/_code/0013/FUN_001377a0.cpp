@@ -1,38 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001377a0` (_code @ 0x1377a0, 0x6c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation/instruction selection only: retail keeps a second copy of the node in r1 and unlinks it through `ldrd r2, [r1]` pairs, and saves the lock address in r6; built uses `ldm r4, {r1, r2}` and recomputes it. */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct Node Node;
 
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
+struct Node {
+    /* 0x0 */ Node *next;
+    /* 0x4 */ Node *prev;
+    /* 0x8 */ u32 unk8;
+    /* 0xC */ u32 unkC;
+};
 
+typedef struct NodeQueue {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Node *head;
+    /* 0x0C */ u8 lock[1];  /* critical section */
+} NodeQueue;
 
-void FUN_001377a0(int param_1,int *param_2)
+void nn_os_CriticalSection_Enter(u8 *lock);
+void nn_os_CriticalSection_Leave(u8 *lock);
 
+/* Unlinks `node` from the queue's circular list (clearing the head when it was the only node) and clears the node. */
+void FUN_001377a0(NodeQueue *queue, Node *node)
 {
-  nn_os_CriticalSection_Enter(param_1 + 0xc);
-  if ((int *)*param_2 == param_2) {
-    *(unsigned int *)(param_1 + 8) = 0;
-  }
-  else {
-    if (*(int **)(param_1 + 8) == param_2) {
-      *(int *)(param_1 + 8) = (*(int **)(param_1 + 8))[1];
+    nn_os_CriticalSection_Enter(queue->lock);
+    if (node->next == node) {
+        queue->head = NULL;
+    } else {
+        if (queue->head == node) {
+            queue->head = queue->head->prev;
+        }
+        node->prev->next = node->next;
+        node->next->prev = node->prev;
     }
-    *(int *)param_2[1] = *param_2;
-    *(int *)(*param_2 + 4) = param_2[1];
-  }
-  param_2[1] = 0;
-  *param_2 = 0;
-  param_2[2] = 0;
-  param_2[3] = 0;
-  nn_os_CriticalSection_Leave(param_1 + 0xc);
-  return;
+    node->prev = NULL;
+    node->next = NULL;
+    node->unk8 = 0;
+    node->unkC = 0;
+    nn_os_CriticalSection_Leave(queue->lock);
 }
 
 } /* extern "C" */

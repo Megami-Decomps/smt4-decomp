@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int FUN_001654f8(...);
@@ -54,7 +54,7 @@ extern int gameDataBlocksGetSaveData(void);
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001654f8. */
@@ -120,7 +120,7 @@ void FUN_0037b7e4(void)
   temp_v11 = 0x4d0;
   temp_v8 = (unsigned char *)0x0;
   temp_v9 = 0;
-  FUN_001505ac(puVar2 + 0x26,&DAT_0052c050,0xb4,&DAT_0052c104,0x150,&DAT_0052c254);
+  paramsInit(puVar2 + 0x26,&DAT_0052c050,0xb4,&DAT_0052c104,0x150,&DAT_0052c254);
   FUN_0014e188(puVar2 + 3,0x2e,1000,puVar2 + 0x26,0x65);
   temp_v5 = 0;
   do {

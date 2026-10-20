@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002497f8(unsigned int [3], unsigned int *);
 int FUN_002498ec(void);
-int FUN_002503d4(...);
+int recordKindRank(...);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002497f8. */
 /* Supplied declaration required: FUN_002498ec. */
-/* Supplied declaration required: FUN_002503d4. */
+/* Supplied declaration required: recordKindRank. */
 extern int idIsAbove400(unsigned int);
 
 
@@ -46,14 +46,14 @@ void FUN_0030bce8(unsigned short *param_1,unsigned short *param_2)
     temp_v2 = 99;
   }
   else {
-    temp_v2 = FUN_002503d4(temp_v4[0]);
+    temp_v2 = recordKindRank(temp_v4[0]);
   }
   temp_v3 = idIsAbove400(temp_v4[2]);
   if (temp_v3 != 0) {
     temp_v3 = 99;
   }
   else {
-    temp_v3 = FUN_002503d4();
+    temp_v3 = recordKindRank();
   }
   if (temp_v3 == temp_v2) {
     FUN_002497f8(temp_v4,temp_v4 + 2);

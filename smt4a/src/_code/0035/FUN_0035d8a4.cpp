@@ -1,34 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035d8a4` (_code @ 0x35d8a4, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int asdMemFree(unsigned int *);
+/* A use count and the object (its first word is a job id) that exists while the count is positive. */
+typedef struct UseCounter0035d8a4 {
+    /* 0x00 */ s8 users;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u32 *object;
+} UseCounter0035d8a4;
 
-extern signed char g_useCounter; /* 0x57f27c */
-extern unsigned int *DAT_0057f280; /* 0x57f280 */
+extern UseCounter0035d8a4 g_useCounter;
 
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: asdMemFree. */
+void asdMemFree(void *block);
+void jobStop(u32 job, s32 arg);
 
-
+/* Drops one use; the last one stops the object's job and frees it. */
 void FUN_0035d8a4(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = DAT_0057f280;
-  g_useCounter = g_useCounter - '\x01';
-  if (g_useCounter < '\x01') {
-    jobStop(*DAT_0057f280,0);
-    asdMemFree(puVar1);
-    DAT_0057f280 = (unsigned int *)0x0;
-    g_useCounter = '\0';
-  }
-  return;
+    g_useCounter.users--;
+    if (g_useCounter.users <= 0) {
+        u32 *object = g_useCounter.object;
+
+        jobStop(*object, 0);
+        asdMemFree(object);
+        g_useCounter.object = NULL;
+        g_useCounter.users = 0;
+    }
 }
 
 } /* extern "C" */

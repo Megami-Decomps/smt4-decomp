@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0021e77c(void);
+int aocDataTable2dGetEntryKind4(void);
 int FUN_0027ef2c(...);
 int VectorSignedToFloat(int, int);
 
@@ -16,7 +16,7 @@ typedef struct {
 extern int DAT_00448c20; /* 0x448c20 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0021e77c. */
+/* Supplied declaration required: aocDataTable2dGetEntryKind4. */
 /* Supplied declaration required: FUN_0027ef2c. */
 extern int FUN_002f4814(void);
 
@@ -39,7 +39,7 @@ void FUN_001b49c0(int param_1,int param_2)
   if (0 < temp_v0) {
     do {
       pcVar2 = pcVar4;
-      FUN_0021e77c();
+      aocDataTable2dGetEntryKind4();
       if (((*pcVar2 != -1) && (*pcVar2 == param_1)) && (pcVar2[1] == param_2)) {
         temp_v1 = *(int *)(pcVar2 + 8);
         VectorSignedToFloat((int)*(short *)(pcVar2 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);

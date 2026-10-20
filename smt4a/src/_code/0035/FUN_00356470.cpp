@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0046c35c(int, int, int);
-int FUN_0046dedc(int, unsigned int);
+int contentEntryGetFromFiles5(int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0046c35c. */
-/* Supplied declaration required: FUN_0046dedc. */
+/* Supplied declaration required: contentEntryGetFromFiles5. */
 
 
 int FUN_00356470(unsigned int param_1)
@@ -40,7 +40,7 @@ int FUN_00356470(unsigned int param_1)
     FUN_0046c35c(g_aocSystem,0x25,1);
     if (param_1 < temp_v1 + temp_v2) {
       temp_v1 = g_aocSystem;
-      FUN_0046dedc(g_aocSystem,param_1 - temp_v2);
+      contentEntryGetFromFiles5(g_aocSystem,param_1 - temp_v2);
       return temp_v1;
     }
     temp_v1 = 0;

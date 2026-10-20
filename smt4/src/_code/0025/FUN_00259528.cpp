@@ -1,41 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00259528` (_code @ 0x259528, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int g_eventTex; /* 0x43ded0 */
+typedef struct EventTex {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ u32 jobs[10];
+} EventTex;
 
-extern int jobIsValid(unsigned int);
+extern EventTex *g_eventTex;
 
+s32 jobIsValid(u32 job);
 
-void FUN_00259528(unsigned int param_1)
-
+/* Drops finished jobs from the event slots, then stores `job` in the first free slot. */
+void FUN_00259528(u32 job)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = g_eventTex;
-  temp_v2 = 0;
-  do {
-    temp_v3 = temp_v0 + temp_v2 * 4;
-    temp_v1 = jobIsValid(*(unsigned int *)(temp_v3 + 0x34));
-    temp_v2 = temp_v2 + 1;
-    if (temp_v1 == 0) {
-      *(unsigned int *)(temp_v3 + 0x34) = 0;
+    EventTex *tex = g_eventTex;
+    s32 i;
+
+    for (i = 0; i < 10; i++) {
+        if (jobIsValid(tex->jobs[i]) == 0) {
+            tex->jobs[i] = 0;
+        }
     }
-  } while (temp_v2 < 10);
-  temp_v2 = 0;
-  do {
-    if (*(int *)(temp_v0 + temp_v2 * 4 + 0x34) == 0) {
-      *(unsigned int *)(temp_v0 + temp_v2 * 4 + 0x34) = param_1;
-      return;
+    for (i = 0; i < 10; i++) {
+        if (tex->jobs[i] == 0) {
+            tex->jobs[i] = job;
+            return;
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 10);
-  return;
 }
 
 } /* extern "C" */

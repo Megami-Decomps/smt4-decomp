@@ -1,56 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031a914` (_code @ 0x31a914, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the (short) conversion for the switch is predicated (sxthlt) before the bge in retail; built emits it after the branch */
+#include "common.h"
 
 extern "C" {
 
-int dataTableGet(int, int);
+typedef struct NameRow0031a914 {
+    /* 0x00 */ char name[0xc];
+} NameRow0031a914;
 
-/* Supplied declaration required: dataTableGet. */
-extern int dataTableGetEntries(void);
-extern int loadSlotIsLoaded(unsigned int);
+typedef struct NameTable0031a914 {
+    /* 0x00 */ u8 unk00[0x1e];
+    /* 0x1e */ NameRow0031a914 rows[1];
+} NameTable0031a914;
 
+extern char DAT_0052c8f4[];   /* "NoTableLoaded" */
+extern char DAT_0052c904[];   /* "NoName" */
 
-char * FUN_0031a914(int param_1)
+s32 loadSlotIsLoaded(u32 slot);
+void *dataTableGet(s32 table, s32 slot);
+NameTable0031a914 *dataTableGetEntries(void *table);
 
+/* The display name of party slot `index` (0..4) from data table 0x36; placeholder texts when the table is not loaded or the index is out of range. */
+const char *FUN_0031a914(s32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  
-  temp_v0 = loadSlotIsLoaded(0x36);
-  if (temp_v0 == 0) {
-    pcVar2 = "NoTableLoaded";
-  }
-  else if (param_1 >= 5) {
-    pcVar2 = "NoName";
-  }
-  else {
-    switch((short)param_1) {
-    case 0:
-      temp_v0 = 2;
-      break;
-    case 1:
-      temp_v0 = 1;
-      break;
-    case 2:
-      temp_v0 = 3;
-      break;
-    case 3:
-      temp_v0 = 0;
-      break;
-    case 4:
-      temp_v0 = 4;
-      break;
-    default:
-      temp_v0 = -1;
+    const char *result;
+    s32 row;
+
+    if (loadSlotIsLoaded(0x36) == 0) {
+        result = DAT_0052c8f4;
+    } else if (index >= 5) {
+        result = DAT_0052c904;
+    } else {
+        switch ((s16)index) {
+        case 0:
+            row = 2;
+            break;
+        case 1:
+            row = 1;
+            break;
+        case 2:
+            row = 3;
+            break;
+        case 3:
+            row = 0;
+            break;
+        case 4:
+            row = 4;
+            break;
+        default:
+            row = -1;
+            break;
+        }
+        result = dataTableGetEntries(dataTableGet(0x36, 0))->rows[row].name;
     }
-    dataTableGet(0x36,0);
-    temp_v1 = dataTableGetEntries();
-    pcVar2 = (char *)(temp_v1 + temp_v0 * 0xc + 0x1e);
-  }
-  return pcVar2;
+    return result;
 }
 
 } /* extern "C" */

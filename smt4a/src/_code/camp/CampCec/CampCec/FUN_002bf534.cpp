@@ -20,7 +20,7 @@ int FUN_002a4664(...);
 int FUN_002a469c(void);
 int FUN_002a4aa4(void);
 int FUN_002c0b10(...);
-int FUN_002c0b5c(...);
+int cecProcessForward(...);
 int sysMemClear(void);
 int rt_aeabi_memclr(...);
 int cecProcessCall2(void);
@@ -93,11 +93,11 @@ extern unsigned char FUN_002a2cf0(void);
 /* Supplied declaration required: FUN_002a4664. */
 /* Supplied declaration required: FUN_002a469c. */
 extern unsigned char FUN_002a46b8(void);
-extern unsigned char FUN_002a46d8(void);
+extern unsigned char saveFlagGet27e1f(void);
 /* Supplied declaration required: FUN_002a4aa4. */
 /* Supplied declaration required: FUN_002a6480. */
 /* Supplied declaration required: FUN_002c0b10. */
-/* Supplied declaration required: FUN_002c0b5c. */
+/* Supplied declaration required: cecProcessForward. */
 extern int wstrlen(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_aeabi_memclr. */
@@ -110,7 +110,7 @@ extern unsigned int gameDataBlocksGetWord27E8C(void);
 /* Supplied declaration required: FUN_00331380. */
 /* Supplied declaration required: ownerSetName. */
 /* Supplied declaration required: FUN_00343d04. */
-extern int FUN_00345388(unsigned int);
+extern int gameDataTestFlags(unsigned int);
 /* Supplied declaration required: FUN_0035a074. */
 /* Supplied declaration required: FUN_0037b5e0. */
 /* Supplied declaration required: FUN_00387edc. */
@@ -245,7 +245,7 @@ void FUN_002bf534(int param_1)
   *(unsigned char *)((int)DAT_0057f114 + 0x61) = temp_v1;
   temp_v1 = FUN_002391e0();
   *(unsigned char *)((int)DAT_0057f114 + 0x62) = temp_v1;
-  temp_v1 = FUN_002a46d8();
+  temp_v1 = saveFlagGet27e1f();
   *(unsigned char *)((int)DAT_0057f114 + 99) = temp_v1;
   temp_v3 = FUN_002840ac();
   ownerSetName(DAT_0057f114 + 0x10,temp_v3);
@@ -294,7 +294,7 @@ void FUN_002bf534(int param_1)
   *(unsigned char *)((int)DAT_0057f114 + 0x61) = temp_v1;
   temp_v1 = FUN_002391e0();
   *(unsigned char *)((int)DAT_0057f114 + 0x62) = temp_v1;
-  temp_v1 = FUN_002a46d8();
+  temp_v1 = saveFlagGet27e1f();
   *(unsigned char *)((int)DAT_0057f114 + 99) = temp_v1;
   temp_v3 = FUN_002840ac();
   ownerSetName(DAT_0057f114 + 0x10,temp_v3);
@@ -319,12 +319,12 @@ LAB_002bfc18:
       if (temp_v2 == 0) {
         FUN_0032e25c(DAT_0057f114 + 0x10,0);
       }
-      if ((*(char *)(puVar4 + 0x5b) != '\0') && (temp_v2 = FUN_00345388(0x20), temp_v2 != 0)) {
+      if ((*(char *)(puVar4 + 0x5b) != '\0') && (temp_v2 = gameDataTestFlags(0x20), temp_v2 != 0)) {
         FUN_002c0b10(&temp_v9);
         temp_v2 = rt_memcmp(temp_v14,DAT_0057f114 + 0x24,0x14);
         if (temp_v2 != 0) {
           cecProcessCall2();
-          FUN_002c0b5c(DAT_0057f114 + 0x10);
+          cecProcessForward(DAT_0057f114 + 0x10);
         }
       }
       temp_v2 = FUN_002a469c();

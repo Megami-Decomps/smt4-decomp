@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a2164(unsigned int, int);
-int FUN_002c5d5c(int, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int, unsigned char *, int, int);
 int FUN_00379ca4(void);
 int nw_snd_internal_CurveLfoParam_Initialize(int);
 
@@ -14,7 +14,7 @@ extern unsigned char DAT_00421ee0; /* 0x421ee0 */
 
 /* Supplied declaration required: FUN_002a2164. */
 extern unsigned int FUN_002a2174(void);
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_00379ca4. */
 /* Supplied declaration required: nw_snd_internal_CurveLfoParam_Initialize. */
 
@@ -26,7 +26,7 @@ int FUN_00380138(int param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  FUN_002c5d5c(param_1,&LAB_0015329c,0x18,4);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_0015329c,0x18,4);
   *(unsigned int *)(param_1 + 0x84) = 0;
   *(unsigned int *)(param_1 + 0x88) = 0;
   *(unsigned char **)(param_1 + 0x80) = &DAT_00421ee0;

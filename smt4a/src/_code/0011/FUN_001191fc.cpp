@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00103e4c(unsigned int *, unsigned int);
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineStringDestroy(...);
 int FUN_002e93c2(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
@@ -32,7 +32,7 @@ extern unsigned char LAB_0011987d; /* 0x11987d */
 
 /* Supplied declaration required: FUN_00103e4c. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002e93c2. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
@@ -120,7 +120,7 @@ LAB_00119254:
       }
       temp_v3 = FUN_002eb5f4();
       FUN_002f8aa8(temp_v3,temp_v0);
-      FUN_002e6e5c(temp_v7);
+      _ZN9Obj55b28cD1Ev(temp_v7);
     }
     FUN_002ee5b8(*(int *)(param_1 + 0x198) + 0xb0,temp_v0);
     (**(romwright_code **)(**(int **)(param_1 + 0x198) + 0xc))();

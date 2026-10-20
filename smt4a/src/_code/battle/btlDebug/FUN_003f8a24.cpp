@@ -15,7 +15,7 @@ int FUN_00183bb0(void);
 int FUN_0018408c(...);
 int drawSetColorFromRGBA8(void);
 int FUN_001879d0(unsigned int);
-int FUN_0019e130(...);
+int markerKindGetColor(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
 int __aeabi_idivmod(...);
@@ -53,7 +53,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_001879d0. */
-/* Supplied declaration required: FUN_0019e130. */
+/* Supplied declaration required: markerKindGetColor. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -119,7 +119,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
   FUN_001835b4(2,0xc,0x58,(int)(in_s0 + temp_v12),(int)temp_v24,param_2);
   temp_v5 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
   if (*(int *)(param_3 + 0x38) != 0) {
-    FUN_0019e130((int)(short)*(unsigned int *)(param_3 + *(int *)(param_3 + 0x3c) * 4));
+    markerKindGetColor((int)(short)*(unsigned int *)(param_3 + *(int *)(param_3 + 0x3c) * 4));
     drawSetColorFromRGBA8();
   }
   temp_v12 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);

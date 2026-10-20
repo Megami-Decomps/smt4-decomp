@@ -18,7 +18,7 @@ struct fn_002108c0_arg0 {
     undefined4 field_0x1c; /* +0x1c */
 };
 
-extern int FUN_00126724(void);
+extern int texTableFindNode(void);
 extern int asdTMTexTableCallFileB(fn_002108c0_arg0 *, unsigned int);
 /* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: asdMemFree. */
@@ -34,7 +34,7 @@ unsigned int FUN_002108c0(fn_002108c0_arg0 *param_1)
   int temp_v3;
   unsigned int *puVar5;
   
-  temp_v0 = FUN_00126724();
+  temp_v0 = texTableFindNode();
   temp_v2 = 0;
   if (temp_v0 != 0) {
     temp_v3 = 0;

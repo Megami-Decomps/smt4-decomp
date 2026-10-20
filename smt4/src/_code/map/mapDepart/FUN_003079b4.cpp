@@ -90,7 +90,7 @@ extern int FUN_002820a4(void);
 /* Supplied declaration required: FUN_00287b0c. */
 /* Supplied declaration required: FUN_002c5be8. */
 /* Supplied declaration required: FUN_002d1e4c. */
-/* Supplied declaration required: FUN_003727d8. */
+/* Supplied declaration required: entryOwnerSetPosition. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 

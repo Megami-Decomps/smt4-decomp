@@ -8,11 +8,11 @@ extern void FUN_0019ea64(u8 value);
 extern void asdMemFree(void *ptr);
 extern void scrScriptProcessDestroy(u32 process);
 extern void jobStop(u32 job, u16 arg);
-extern u8 FUN_00345388(u8 value);
+extern u8 gameDataTestFlags(u8 value);
 extern s32 FUN_002a469c(void);
 extern void FUN_0032e25c(void *block, s32 value);
 extern void cecProcessCall2(void);
-extern u32 FUN_002c0b5c(void *block);
+extern u32 cecProcessForward(void *block);
 extern u32 *rt_aeabi_memclr(void *block, u32 size);
 extern MarkEntry *gameDataGetMarkEntry(u32 index);
 extern void cecProcessDestroy(void);
@@ -47,12 +47,12 @@ void FUN_0032d388(s32 leaving)
         asdMemFree(overlay);
         g_campCec.instance = NULL;
     } else {
-        if (overlay->unk16C != 0 && FUN_00345388(0x20) != 0) {
+        if (overlay->unk16C != 0 && gameDataTestFlags(0x20) != 0) {
             if (FUN_002a469c() == 0) {
                 FUN_0032e25c(g_campCec.instance->block40, 0);
             }
             cecProcessCall2();
-            FUN_002c0b5c(g_campCec.instance->block40);
+            cecProcessForward(g_campCec.instance->block40);
             if (FUN_002a469c() == 0) {
                 rt_aeabi_memclr(g_campCec.instance->block90, 0x14);
             }

@@ -13,7 +13,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: gameFlagSetValue. */
-extern int FUN_002ba698(unsigned char, unsigned char);
+extern int aocEntryFind(unsigned char, unsigned char);
 extern int FUN_002ba764(unsigned char, unsigned char);
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_002c0a9c. */
@@ -67,9 +67,9 @@ void FUN_0023ddbc(unsigned int param_1,unsigned int param_2)
         temp_v0 = *puVar6;
         temp_v1 = puVar6[1];
         temp_v5 = FUN_002ba764(temp_v0,temp_v1);
-        temp_v6 = FUN_002ba698(temp_v0,temp_v1);
+        temp_v6 = aocEntryFind(temp_v0,temp_v1);
         gameFlagSetValue(param_1,param_2,0);
-        temp_v7 = FUN_002ba698(temp_v0,temp_v1);
+        temp_v7 = aocEntryFind(temp_v0,temp_v1);
         if (temp_v6 != temp_v7) {
           *(unsigned char *)(temp_v5 + 2) = 0;
           *(unsigned char *)(temp_v5 + 3) = *(unsigned char *)(temp_v5 + 3) & 0xe0;

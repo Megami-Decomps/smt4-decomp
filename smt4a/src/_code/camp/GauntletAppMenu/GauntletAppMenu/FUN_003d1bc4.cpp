@@ -19,7 +19,7 @@ extern int FUN_002418f8(...); /* 0x2418f8 */
 extern int FUN_002b2c44(...); /* 0x2b2c44 */
 extern int FUN_002ce57c(...); /* 0x2ce57c */
 extern int FUN_002ce6dc(...); /* 0x2ce6dc */
-extern int FUN_002fdfc0(...); /* 0x2fdfc0 */
+extern int entryRefCompareByKindLevelOrder(...); /* 0x2fdfc0 */
 extern int g_gauntletAppMenu; /* 0x57f238 */
 
 /* Supplied declaration required: qsort. */
@@ -59,7 +59,7 @@ void FUN_003d1bc4(void)
     }
     else {
       temp_v2 = FUN_002c2c68(temp_v0 + 0x10);
-      qsort(temp_v0 + 0x74,temp_v2,4,FUN_002fdfc0);
+      qsort(temp_v0 + 0x74,temp_v2,4,entryRefCompareByKindLevelOrder);
     }
   }
   if ((*pbVar5 & 0x7f) == 0x16) {

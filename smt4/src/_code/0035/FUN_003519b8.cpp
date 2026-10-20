@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002c526c(int);
-int FUN_00360294(int);
+int asdResultCheck(int);
 int FUN_003602b0(unsigned int, int, int, int);
 int FUN_003602ec(unsigned int, int, int, int);
 int FUN_00360328(unsigned int, int, int, int);
@@ -17,7 +17,7 @@ int FUN_003604d8(int);
 int FUN_003604f4(void);
 int FUN_0036051c(void);
 int FUN_00360538(unsigned int);
-int FUN_00360554(int);
+int resultFatalIfFailed(int);
 int FUN_003605b0(unsigned int);
 int FUN_003605cc(int);
 int FUN_00360aac(int);
@@ -33,7 +33,7 @@ extern int DAT_0044e9e8; /* 0x44e9e8 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_00360294. */
+/* Supplied declaration required: asdResultCheck. */
 /* Supplied declaration required: FUN_003602b0. */
 /* Supplied declaration required: FUN_003602ec. */
 /* Supplied declaration required: FUN_00360328. */
@@ -45,7 +45,7 @@ extern int DAT_0044e9e8; /* 0x44e9e8 */
 /* Supplied declaration required: FUN_003604f4. */
 /* Supplied declaration required: FUN_0036051c. */
 /* Supplied declaration required: FUN_00360538. */
-/* Supplied declaration required: FUN_00360554. */
+/* Supplied declaration required: resultFatalIfFailed. */
 /* Supplied declaration required: FUN_003605b0. */
 /* Supplied declaration required: FUN_003605cc. */
 /* Supplied declaration required: FUN_00360aac. */
@@ -81,11 +81,11 @@ void FUN_003519b8(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   }
   FUN_003604a0(1);
   FUN_003604d8(param_3);
-  FUN_00360294(0);
+  asdResultCheck(0);
   FUN_00360538(param_5);
   FUN_003605cc(1);
   temp_v0 = (short)param_1;
-  FUN_00360554((int)temp_v0);
+  resultFatalIfFailed((int)temp_v0);
   FUN_003603dc((int)(short)param_2);
   FUN_003605b0(param_4);
   FUN_00360aac(0xff);

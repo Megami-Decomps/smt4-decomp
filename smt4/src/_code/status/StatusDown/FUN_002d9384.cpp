@@ -10,7 +10,7 @@ int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int FUN_002beed0(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int __aeabi_memset4(...);
 int memClear(...);
 int asdMemAlloc(...);
@@ -46,7 +46,7 @@ extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002beed0. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -79,7 +79,7 @@ void FUN_002d9384(void)
   puVar1[1] = (unsigned int)puVar3;
   puVar1 = g_statusDown;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_statusDown + 2);
-  FUN_002c312c(puVar1 + 2,&DAT_00407bc0,0x48,&DAT_00407c08,0x48,&DAT_00407c50,0x18,0,0,&DAT_00407c68
+  paramsInit(puVar1 + 2,&DAT_00407bc0,0x48,&DAT_00407c08,0x48,&DAT_00407c50,0x18,0,0,&DAT_00407c68
                ,0x134);
   FUN_002bd954(puVar1 + 10,0x1a,1000,puVar1 + 2,1);
   timerStart(puVar1 + 10,0);

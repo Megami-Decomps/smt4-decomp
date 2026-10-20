@@ -11,7 +11,7 @@ int FUN_00333dc8(...);
 
 int FUN_001517b4(...);
 int FUN_00163aa4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int gameGetPlayerData(void);
 int FUN_001834a4(int, int);
@@ -20,7 +20,7 @@ int FUN_0019de98(...);
 int dialogOpen(...);
 int FUN_00228b04(...);
 int scrScriptProcessStartEntry(...);
-int FUN_00284168(int, int, int, int);
+int ifTouchRegionAdd(int, int, int, int);
 int FUN_002a4894(...);
 int FUN_002a49e4(...);
 int FUN_002c2d5c(...);
@@ -49,7 +49,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001517b4. */
 extern int FUN_001632fc(void);
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned short FUN_001643b4(unsigned int, int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: gameGetPlayerData. */
@@ -70,7 +70,7 @@ extern int FUN_0022e750(void);
 extern int dialogIsActive(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_00284140(int);
-/* Supplied declaration required: FUN_00284168. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: FUN_002a4894. */
 /* Supplied declaration required: FUN_002a49e4. */
 extern int FUN_002a4b74(void);
@@ -141,14 +141,14 @@ void FUN_002c9a8c(int param_1)
       temp_v13 = FUN_001834a4(0x1d,0x117);
       temp_v0 = **(short **)(temp_v13 + 0xc);
       temp_v12 = (int)(short)(*(short *)(temp_v14 + 8) + *(short *)(temp_v13 + 8) + temp_v0 * -2);
-      FUN_00284168(temp_v12,(int)(short)(*(short *)(temp_v14 + 10) + *(short *)(temp_v13 + 10)),
+      ifTouchRegionAdd(temp_v12,(int)(short)(*(short *)(temp_v14 + 10) + *(short *)(temp_v13 + 10)),
                    (int)(short)(temp_v0 * 3),(int)(*(short **)(temp_v13 + 0xc))[1]);
       temp_v21 = param_1 + temp_v20 * 4;
       *(short *)(temp_v21 + 0x43d8) = (short)temp_v12;
       temp_v14 = FUN_001834a4(0x1d,temp_v20 + 0xba);
       temp_v13 = FUN_001834a4(0x1d,0x116);
       temp_v12 = (int)(short)(*(short *)(temp_v14 + 8) + *(short *)(temp_v13 + 8));
-      FUN_00284168(temp_v12,(int)(short)(*(short *)(temp_v14 + 10) + *(short *)(temp_v13 + 10)),
+      ifTouchRegionAdd(temp_v12,(int)(short)(*(short *)(temp_v14 + 10) + *(short *)(temp_v13 + 10)),
                    (int)(short)(**(short **)(temp_v13 + 0xc) * 3),(int)(*(short **)(temp_v13 + 0xc))[1])
       ;
       *(short *)(temp_v21 + 0x43da) = (short)temp_v12;
@@ -275,7 +275,7 @@ LAB_002ca008:
     }
     temp_v19 = FUN_002a4894(temp_v20);
     if (temp_v19 != temp_v24) {
-      FUN_001641b4(0x100020d);
+      eventQueueAddUniqueIfValid(0x100020d);
     }
     temp_v19 = temp_v20;
     FUN_003450d4(temp_v20,0,param_1 + 0x43b6,0xffffffff,0xffffffff,0xffffffff,temp_v23,0,1);
@@ -297,7 +297,7 @@ LAB_002ca0e0:
       FUN_0019de98(temp_v19,0xf4f4f4ff);
       temp_v19 = FUN_002a4894(temp_v20);
       if (temp_v19 != temp_v24) {
-        FUN_001641b4(0x100020d);
+        eventQueueAddUniqueIfValid(0x100020d);
       }
 LAB_002ca3c0:
       temp_v19 = gameGetPlayerData();
@@ -315,7 +315,7 @@ LAB_002ca3c0:
         if (*psVar24 <= *psVar26) goto LAB_002ca3c0;
         *psVar24 = *psVar24 - 1;
         *piVar23 = *piVar23 + 1;
-        FUN_001641b4(0x100020d);
+        eventQueueAddUniqueIfValid(0x100020d);
       }
       else {
         temp_v19 = 3;
@@ -324,7 +324,7 @@ LAB_002ca3c0:
         if (!(temp_v19 == 0 && !temp_v22)) {
           if ((*piVar23 < 1) || (temp_v16 = 0x100020d, *psVar24 >= 0x3e7)) {
 LAB_002ca1c0:
-            FUN_001641b4(temp_v16);
+            eventQueueAddUniqueIfValid(temp_v16);
             goto LAB_002ca3c0;
           }
           *psVar24 = *psVar24 + 1;
@@ -389,7 +389,7 @@ LAB_002ca1c0:
                      ((int)temp_v8 - (int)temp_v9);
         }
 LAB_002ca354:
-        FUN_001641b4(temp_v16);
+        eventQueueAddUniqueIfValid(temp_v16);
       }
       FUN_003df7c4(0);
       temp_v16 = gameGetPlayerData();

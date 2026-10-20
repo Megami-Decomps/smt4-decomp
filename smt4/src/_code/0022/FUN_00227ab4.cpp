@@ -1,35 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00227ab4` (_code @ 0x227ab4, 0x60 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int btlMainFindEntryByListedId(int, int);
+typedef struct BattleEntry {
+    /* 0x000 */ u8 unk000[0x1B4];
+    /* 0x1B4 */ u16 valueA;
+    /* 0x1B6 */ u16 valueB;
+} BattleEntry;
 
-/* Supplied declaration required: btlMainFindEntryByListedId. */
+typedef struct EntryCopy {
+    /* 0x0 */ u16 valueA;
+    /* 0x2 */ u16 valueB;
+    /* 0x4 */ u8 unk4[6];
+} EntryCopy;
 
+typedef struct CopyTable {
+    /* 0x000 */ u8 unk000[0x9D4];
+    /* 0x9D4 */ EntryCopy entries[109];
+} CopyTable;
 
-void FUN_00227ab4(int *param_1,int param_2)
+BattleEntry *btlMainFindEntryByListedId(void *state, s32 id);
 
+/* Copies the two values of each of the 109 listed battle entries into the table (zero for a missing entry). */
+void FUN_00227ab4(void **stateRef, CopyTable *table)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  do {
-    temp_v0 = param_2 + temp_v2 * 10;
-    *(unsigned short *)(temp_v0 + 0x9d4) = 0;
-    temp_v1 = *param_1;
-    btlMainFindEntryByListedId(temp_v1,temp_v2);
-    if (temp_v1 != 0) {
-      *(unsigned short *)(temp_v0 + 0x9d4) = *(unsigned short *)(temp_v1 + 0x1b4);
-      *(unsigned short *)(temp_v0 + 0x9d6) = *(unsigned short *)(temp_v1 + 0x1b6);
-    }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x6d);
-  return;
+    s32 i = 0;
+
+    do {
+        BattleEntry *entry;
+
+        table->entries[i].valueA = 0;
+        entry = btlMainFindEntryByListedId(*stateRef, i);
+        if (entry != NULL) {
+            table->entries[i].valueA = entry->valueA;
+            table->entries[i].valueB = entry->valueB;
+        }
+        i++;
+    } while (i < 109);
 }
 
 } /* extern "C" */

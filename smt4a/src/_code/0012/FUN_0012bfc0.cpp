@@ -9,8 +9,8 @@ int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(int *);
 int FUN_0030c800(int, unsigned int *);
 int FUN_0030c846(int, unsigned int, unsigned int, unsigned int);
-int FUN_0030c854(unsigned int *, unsigned int);
-int FUN_0030c890(int, unsigned int);
+int wordListAt(unsigned int *, unsigned int);
+int recordListAt(int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -34,8 +34,8 @@ extern int FUN_002fd38c(unsigned int *);
 extern int FUN_0030c7f4(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_0030c800. */
 /* Supplied declaration required: FUN_0030c846. */
-/* Supplied declaration required: FUN_0030c854. */
-/* Supplied declaration required: FUN_0030c890. */
+/* Supplied declaration required: wordListAt. */
+/* Supplied declaration required: recordListAt. */
 
 
 void FUN_0012bfc0(int param_1)
@@ -62,7 +62,7 @@ void FUN_0012bfc0(int param_1)
       if (*(char *)(param_1 + 0x90) == '\x02') {
 LAB_0012c018:
         temp_v1 = param_1 + 0x110;
-        FUN_0030c890(temp_v1,*(unsigned int *)(param_1 + 0x3f4));
+        recordListAt(temp_v1,*(unsigned int *)(param_1 + 0x3f4));
         FUN_0030c846(param_1 + 0x280,temp_v2,*(unsigned int *)(temp_v1 + 8),
                      *(unsigned int *)(temp_v1 + 0xc));
         temp_v6 = *(int **)(param_1 + 0x3ec);
@@ -73,7 +73,7 @@ LAB_0012c018:
         }
         else {
           puVar3 = (unsigned int *)(param_1 + 0x3e0);
-          FUN_0030c854(puVar3,*(unsigned int *)(param_1 + 0x3f0));
+          wordListAt(puVar3,*(unsigned int *)(param_1 + 0x3f0));
           temp_v3 = *puVar3;
         }
         (**(romwright_code **)(*temp_v6 + 0xc))(temp_v6,param_1 + 0x280,temp_v3);

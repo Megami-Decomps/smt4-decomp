@@ -9,7 +9,7 @@ int sysPlaySe(int);
 int FUN_001ad9b4(void);
 int FUN_00275bc8(int, unsigned int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int FUN_0046eca4(unsigned int, unsigned int, unsigned int *, int);
+int aocQueueType08(unsigned int, unsigned int, unsigned int *, int);
 int aocQueueType07(unsigned int, unsigned int, unsigned int *, int);
 
 extern unsigned char LAB_0047e2ec; /* 0x47e2ec */
@@ -26,7 +26,7 @@ extern int FUN_00224880(unsigned int);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int FUN_004186e0(void);
 extern int FUN_0046e08c(unsigned int, unsigned short, unsigned int);
-/* Supplied declaration required: FUN_0046eca4. */
+/* Supplied declaration required: aocQueueType08. */
 /* Supplied declaration required: aocQueueType07. */
 
 
@@ -57,7 +57,7 @@ unsigned int FUN_0047e150(unsigned int *param_1)
     temp_v2 = FUN_0046e08c(g_aocSystem,*(unsigned short *)(temp_v2 + 0xd4),1);
     if (temp_v2 != 0) {
       aocQueueType07(g_aocSystem,unaff_r6,param_1 + 3,0);
-      FUN_0046eca4(g_aocSystem,unaff_r6,param_1 + 4,0);
+      aocQueueType08(g_aocSystem,unaff_r6,param_1 + 4,0);
       *param_1 = 1;
       return 0;
     }

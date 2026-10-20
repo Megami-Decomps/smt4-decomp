@@ -1,45 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00333a38` (_code @ 0x333a38, 0x74 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail predicates the index conversion (`cmp r7,#0; uxthne r0,r4; beq`) ahead of the FUN_00240cd4 call; the build converts after the branch. */
+#include "common.h"
 
 extern "C" {
 
-int dataTable1bOr1cGetRecord(void);
+typedef struct DataRecord {
+    /* 0x000 */ u8 unk000[0x1AA];
+    /* 0x1AA */ u16 idA;
+    /* 0x1AC */ u16 idB;
+} DataRecord;
 
-extern unsigned char *FUN_00240cd4(unsigned int);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+extern DataRecord *dataTable1bOr1cGetRecord(u16 index);
+extern u8 *FUN_00240cd4(u16 index);
 
-
-int FUN_00333a38(unsigned int param_1,int param_2)
-
+/* Counts the records (of 400) that reference `id` through either id field and, when `checkFlag` is set, whose flag byte has bit 0. */
+int FUN_00333a38(u32 id, int checkFlag)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  unsigned char *pbVar3;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v3 = 0;
-  temp_v2 = 0;
-  do {
-    temp_v0 = temp_v2;
-    dataTable1bOr1cGetRecord();
-    if (temp_v0 != 0) {
-      temp_v1 = temp_v0 + 0x100;
-      temp_v4 = *(unsigned short *)(temp_v0 + 0x1aa) != param_1;
-      if (temp_v4) {
-        temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0x1ac);
-      }
-      if ((!temp_v4 || temp_v1 == param_1) &&
-         ((param_2 == 0 || (pbVar3 = (unsigned char *)FUN_00240cd4(temp_v2 & 0xffff), (*pbVar3 & 1) != 0)))) {
-        temp_v3 = temp_v3 + 1;
-      }
+    int count = 0;
+    int i;
+
+    for (i = 0; i < 400; i++) {
+        DataRecord *record = dataTable1bOr1cGetRecord(i);
+
+        if (record != NULL && (record->idA == id || record->idB == id)
+            && (checkFlag == 0 || (*FUN_00240cd4(i) & 1) != 0)) {
+            count++;
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while ((int)temp_v2 < 400);
-  return temp_v3;
+    return count;
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00115350(int, unsigned char [40]);
 int FUN_002e6e34(unsigned char [20], unsigned int);
-int FUN_002e6e5c(unsigned char [20]);
+int _ZN9Obj55b28cD1Ev(unsigned char [20]);
 int sharedRefAddRef(unsigned int);
 int onlineSockAddrConstruct(unsigned char [40]);
 int FUN_002f9086(int);
@@ -25,7 +25,7 @@ typedef struct {
 extern unsigned int FUN_00115380(void);
 extern int FUN_001153a0(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: onlineSockAddrConstruct. */
 extern int FUN_002f905e(int, unsigned char *);
@@ -77,7 +77,7 @@ unsigned int FUN_0010e83a(int param_1,unsigned int param_2,unsigned int param_3)
       temp_v3 = 0;
     }
   }
-  FUN_002e6e5c(temp_v7);
+  _ZN9Obj55b28cD1Ev(temp_v7);
   return temp_v3;
 }
 

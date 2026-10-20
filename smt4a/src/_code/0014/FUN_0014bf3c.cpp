@@ -1,58 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014bf3c` (_code @ 0x14bf3c, 0xdc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the compiler's handling of the two record-selection tails differs: retail copies the `wide` flag into a fresh register per path before the lookup, returns from `(id < count) ? ... : records` with conditional moves and pops directly; the build shares a branch tail. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184310(void);
-int dataTableGetCount(unsigned int);
+typedef struct AocEntry {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u8 id;
+} AocEntry;
 
-extern unsigned int g_aocSystem; /* 0x570280 */
+extern u32 g_aocSystem; /* 0x570280 */
 
-extern int FUN_0017607c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00184310. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: dataTableGetCount. */
-extern int dataTableGetEntries(void);
+extern AocEntry *FUN_00184310(void);
+extern u8 *FUN_0017607c(u32 system, u32 id);
+extern u32 dataTableGet(u32 table, u32 index);
+extern u8 *dataTableGetEntries(void);
+extern u32 dataTableGetCount(u32 table);
 
-
-int FUN_0014bf3c(int param_1,int param_2)
-
+/* Returns the add-on entry's table record, or the system's own data + 2 when it has some; `wide` selects the record's second half (+0x10). */
+u8 *FUN_0014bf3c(int unused, int wide)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  FUN_00184310();
-  if (param_1 != 0) {
-    temp_v4 = (unsigned int)*(unsigned char *)(param_1 + 2);
-    temp_v0 = FUN_0017607c(g_aocSystem,temp_v4);
-    if (temp_v0 == 0) {
-      temp_v1 = dataTableGet(1,0);
-      temp_v0 = dataTableGetEntries();
-      temp_v2 = dataTableGetCount(temp_v1);
-      if ((temp_v4 < temp_v2) && (temp_v0 = temp_v0 + temp_v4 * 0x30, param_2 != 0)) {
-        temp_v0 = temp_v0 + 0x10;
-      }
-      return temp_v0;
+    AocEntry *entry = FUN_00184310();
+    u8 *result;
+    u32 id;
+    u32 table;
+    u8 *records;
+    u32 count;
+
+    if (entry != NULL) {
+        id = entry->id;
+        result = FUN_0017607c(g_aocSystem, id);
+        if (result == NULL) {
+            table = dataTableGet(1, 0);
+            records = dataTableGetEntries();
+            count = dataTableGetCount(table);
+            if (id < count) {
+                records = records + id * 0x30;
+                if (wide != 0) {
+                    return records + 0x10;
+                }
+            }
+            return records;
+        }
+    } else {
+        result = FUN_0017607c(g_aocSystem, 0);
+        if (result == NULL) {
+            table = dataTableGet(1, 0);
+            records = dataTableGetEntries();
+            count = dataTableGetCount(table);
+            if (count != 0 && wide != 0) {
+                return records + 0x10;
+            }
+            return records;
+        }
     }
-  }
-  else {
-    temp_v0 = FUN_0017607c(g_aocSystem,0);
-    if (temp_v0 == 0) {
-      temp_v1 = dataTableGet(1,0);
-      temp_v0 = dataTableGetEntries();
-      temp_v3 = dataTableGetCount(temp_v1);
-      if ((temp_v3 != 0) && (param_2 != 0)) {
-        return temp_v0 + 0x10;
-      }
-      return temp_v0;
-    }
-  }
-  return temp_v0 + 2;
+    return result + 2;
 }
 
 } /* extern "C" */

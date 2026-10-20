@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_00276310(void);
 int FUN_002c8b60(void);
-int FUN_002dfd68(void);
+int mapGimicReset(void);
 
 extern unsigned char DAT_00447518; /* 0x447518 */
 
 /* Supplied declaration required: FUN_00276310. */
 /* Supplied declaration required: FUN_002c8b60. */
 extern int FUN_002d3ec0(void);
-/* Supplied declaration required: FUN_002dfd68. */
+/* Supplied declaration required: mapGimicReset. */
 extern int FUN_002f3af4(void);
 
 
@@ -45,7 +45,7 @@ unsigned int FUN_00311048(void)
   }
   else {
     FUN_00276310();
-    FUN_002dfd68();
+    mapGimicReset();
     (*(int *)((unsigned char *)&DAT_00447518 + 0x8)) = 1;
   }
   return 0;

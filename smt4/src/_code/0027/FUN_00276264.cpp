@@ -1,36 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00276264` (_code @ 0x276264, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register choice only: retail loads g_aocSystem into r2 and adds the list offset in place, this build uses r1 then r2 */
+#include "common.h"
 
 extern "C" {
 
-extern int g_aocSystem; /* 0x433158 */
+typedef struct Entry {
+    u8 data[0x2C];
+} Entry;
 
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
+typedef struct EntryList {
+    u32 count;
+    Entry *entries;
+} EntryList;
 
+typedef struct AocSystem {
+    /* 0x000 */ u8 unk000[0x40C];
+    /* 0x40C */ EntryList extra;
+} AocSystem;
 
-int FUN_00276264(unsigned int param_1)
+extern AocSystem *g_aocSystem;
 
+extern void *dataTableGet(u32 table, u32 index);
+extern u32 dataTableGetCount(void *table);
+extern Entry *dataTableGetEntries(void);
+
+/* Returns entry `index` of data table 0x23/5, or of the AOC system's extra entries that follow it; NULL when out of range. */
+Entry *FUN_00276264(u32 index)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = dataTableGet(0x23,5);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  if (param_1 < temp_v2) {
-    temp_v1 = temp_v1 + param_1 * 0x2c;
-  }
-  else {
-    if (param_1 < *(int *)(g_aocSystem + 0x40c) + temp_v2) {
-      return *(int *)(g_aocSystem + 0x410) + (param_1 - temp_v2) * 0x2c;
+    void *table = dataTableGet(0x23, 5);
+    Entry *entries = dataTableGetEntries();
+    u32 count = dataTableGetCount(table);
+
+    if (index < count) {
+        return &entries[index];
     }
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    EntryList *list = &g_aocSystem->extra;
+    EntryList extra = *list;
+
+    if (index < extra.count + count) {
+        return &extra.entries[index - count];
+    }
+    return NULL;
 }
 
 } /* extern "C" */

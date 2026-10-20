@@ -9,7 +9,7 @@ int gameGetSlotTable(void);
 int FUN_00275bc8(void);
 int scrScriptProcessStartEntry(...);
 int FUN_002bf520(void);
-int FUN_002c0b5c(void);
+int cecProcessForward(void);
 int FUN_002f4014(void);
 int cecProcessCall2(void);
 int gameDataBlocksSetFlagBits(int, int);
@@ -27,14 +27,14 @@ extern int FUN_00224880(unsigned int);
 extern int FUN_002a2cf0(void);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002bf520. */
-/* Supplied declaration required: FUN_002c0b5c. */
+/* Supplied declaration required: cecProcessForward. */
 extern int FUN_002e2014(void);
 /* Supplied declaration required: FUN_002f4014. */
 /* Supplied declaration required: cecProcessCall2. */
 /* Supplied declaration required: gameDataBlocksSetFlagBits. */
 /* Supplied declaration required: playerSummaryFill. */
 /* Supplied declaration required: FUN_0034280c. */
-extern int FUN_00345388(unsigned int);
+extern int gameDataTestFlags(unsigned int);
 extern int FUN_0035b044(void);
 /* Supplied declaration required: cecProcessCall4. */
 /* Supplied declaration required: stateAtF4Destroy. */
@@ -73,7 +73,7 @@ unsigned int FUN_002c04a0(int *param_1,int param_2)
               FUN_002bf520();
               playerSummaryFill();
               FUN_002bf520();
-              FUN_002c0b5c();
+              cecProcessForward();
               FUN_002bf520();
               FUN_002f4014();
               gameFlagSetValue(0x550,1);
@@ -129,7 +129,7 @@ unsigned int FUN_002c04a0(int *param_1,int param_2)
                     FUN_002bf520();
                     playerSummaryFill();
                     FUN_002bf520();
-                    temp_v1 = FUN_002c0b5c();
+                    temp_v1 = cecProcessForward();
                     if (temp_v1 == 5) {
                       *(unsigned int *)(temp_v3 + 0x38) = 1;
                     }
@@ -153,7 +153,7 @@ unsigned int FUN_002c04a0(int *param_1,int param_2)
                   }
                   return 0;
                 }
-                temp_v1 = FUN_00345388(0x20);
+                temp_v1 = gameDataTestFlags(0x20);
                 if (temp_v1 != 0) {
                   temp_v1 = 5;
                 }
@@ -179,7 +179,7 @@ LAB_002c0648:
             }
             sysPlaySe(0x3e);
             temp_v1 = FUN_002a2cf0();
-            if ((temp_v1 != 0) && (temp_v1 = FUN_00345388(0x20), temp_v1 != 0)) {
+            if ((temp_v1 != 0) && (temp_v1 = gameDataTestFlags(0x20), temp_v1 != 0)) {
               *(unsigned int *)(temp_v3 + 0x38) = 9;
               temp_v0 = (*(unsigned char *)(temp_v3 + 0x3c) & 0xfe) | 2;
               goto LAB_002c0810;

@@ -9,12 +9,12 @@ int btlGetMainState(void);
 int gameGetSlotTable(...);
 
 extern int FUN_0023dcb8(void);
-extern int FUN_00292914(int);
+extern int idOwnerHasActiveObject(int);
 /* Supplied declaration required: FUN_00292960. */
 extern int flagBitIsSet(void);
 extern int FUN_00293988(void);
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_0029e908(int);
+extern int objectPartRunUnlessLocked(int);
 extern int gameGetUnitRecord(int);
 /* Supplied declaration required: gameGetSlotTable. */
 extern int gameFlagIsSet(void);
@@ -62,7 +62,7 @@ unsigned int FUN_00297ca4(int param_1,int param_2)
         if (*pcVar2 == '\x03') {
           if (*(int *)(param_1 + 0x305c) == 0) goto LAB_00297e5c;
           if (temp_v3 != 0) {
-            temp_v3 = FUN_00292914(temp_v3);
+            temp_v3 = idOwnerHasActiveObject(temp_v3);
             if (temp_v3 == 0) goto LAB_00297e6c;
             goto LAB_00297e3c;
           }
@@ -81,7 +81,7 @@ LAB_00297e5c:
           if (temp_v3 != 0) goto LAB_00297e6c;
         }
       }
-      temp_v3 = FUN_0029e908(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+      temp_v3 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
       if (temp_v3 == temp_v4) goto LAB_00297e80;
       temp_v4 = temp_v4 + 1;
     }

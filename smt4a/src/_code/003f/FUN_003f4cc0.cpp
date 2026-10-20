@@ -40,7 +40,7 @@ extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-extern unsigned int FUN_0019e130(int);
+extern unsigned int markerKindGetColor(int);
 extern int gameGetSlotRecord(void);
 extern int btlMainGetUnk14(void);
 
@@ -218,7 +218,7 @@ LAB_003f510c:
             do {
               if ((temp_v8 & (1 << (temp_v2 & 0xff))) != 0) {
                 if (*(int *)(param_1 + 0x1c) == temp_v4) {
-                  temp_v3 = FUN_0019e130((int)(short)temp_v2);
+                  temp_v3 = markerKindGetColor((int)(short)temp_v2);
                   break;
                 }
                 temp_v4 = temp_v4 + 1;

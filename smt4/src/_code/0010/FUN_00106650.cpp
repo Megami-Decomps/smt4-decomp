@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010d2bc(int);
+int asdSoundSetVolumeIfEnabled(int);
 int FUN_0010dd80(void);
 int asdSoundDuckSetup(int);
 
@@ -25,7 +25,7 @@ extern unsigned int DAT_004c5824; /* 0x4c5824 */
 extern unsigned int DAT_004c5828; /* 0x4c5828 */
 extern unsigned int DAT_004c582c; /* 0x4c582c */
 
-/* Supplied declaration required: FUN_0010d2bc. */
+/* Supplied declaration required: asdSoundSetVolumeIfEnabled. */
 /* Supplied declaration required: FUN_0010dd80. */
 /* Supplied declaration required: asdSoundDuckSetup. */
 extern int FUN_002c3124(unsigned char *, unsigned int *, unsigned int);
@@ -45,7 +45,7 @@ void FUN_00106650(void)
     DAT_004c5819 = 0x60;
     DAT_004c5818 = DAT_004c5818 | 3;
     DAT_004c581a = 0;
-    FUN_0010d2bc(1);
+    asdSoundSetVolumeIfEnabled(1);
     DAT_004c581c = 0x3f333333;
     DAT_004c5820 = 5;
     DAT_004c5824 = 0x1e;

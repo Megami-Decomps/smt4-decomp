@@ -1,27 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037db9c` (_code @ 0x37db9c, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int g_partyPanel; /* 0x57f268 */
+typedef struct PartyPanel {
+    /* 0x000 */ u8 unk000[0xA04];
+    /* 0xA04 */ s16 count;
+} PartyPanel;
 
+extern PartyPanel *g_partyPanel;
 
-unsigned int FUN_0037db9c(void)
-
+/* Returns whether the party panel exists and has a positive count. */
+u32 FUN_0037db9c(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (g_partyPanel != 0) {
-    if (*(short *)(g_partyPanel + 0xa04) < 1) {
-      temp_v0 = 0;
+    if (g_partyPanel != NULL) {
+        if (g_partyPanel->count <= 0) {
+            return 0;
+        }
+        return 1;
     }
-    else {
-      temp_v0 = 1;
-    }
-  }
-  return temp_v0;
+    return 0;
 }
 
 } /* extern "C" */

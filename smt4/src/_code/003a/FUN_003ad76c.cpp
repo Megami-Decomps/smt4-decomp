@@ -11,7 +11,7 @@ int uiSpriteSetImageKeyframe(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int asdOperatorNew(...);
-int FUN_002c312c(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
+int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
 
 typedef struct fn_003ad76c_arg0 fn_003ad76c_arg0;
@@ -56,7 +56,7 @@ extern int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 extern unsigned int FUN_0033d3e4(void);
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
@@ -89,7 +89,7 @@ void FUN_003ad76c(fn_003ad76c_arg0 *param_1,int param_2)
   *(unsigned short *)(temp_v1 + 0x75b6) = 0;
   temp_v1 = temp_v0 + 0x7ea0;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
-  FUN_002c312c(temp_v1,&DAT_004019cc,0xfc,&DAT_00401ac8,0xe4,&DAT_00401bac,0xc0,0,0,&DAT_00401c6c,
+  paramsInit(temp_v1,&DAT_004019cc,0xfc,&DAT_00401ac8,0xe4,&DAT_00401bac,0xc0,0,0,&DAT_00401c6c,
                0x5b0);
   temp_v6 = 0;
   do {

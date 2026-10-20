@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int FUN_00276230(...); /* 0x276230 */
+extern int btlStageRunWork(...); /* 0x276230 */
 extern unsigned char LAB_00291dc8; /* 0x291dc8 */
 extern int btlStageDestroy(...); /* 0x315080 */
 extern int g_btlStageModel; /* 0x57a4f8 */
@@ -36,7 +36,7 @@ void FUN_00291ce8(unsigned int *param_1)
   unsigned char temp_v3;
   
   puVar1 = &LAB_00291dc8;
-  taskCreateDraw(&LAB_00291dc8,4,0,0,FUN_00276230,btlStageDestroy,param_1,*param_1);
+  taskCreateDraw(&LAB_00291dc8,4,0,0,btlStageRunWork,btlStageDestroy,param_1,*param_1);
   param_1[0x15] = (unsigned int)puVar1;
   temp_v0 = 0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0xc4,1);

@@ -1,3 +1,4 @@
+/* NON_MATCHING: `mov r4, #0` (slot = 0) is scheduled after the first compare in retail, before the scrGetArg call here */
 /* NON_MATCHING: the slot constant 0 is set before the argument call, and the stat is addressed with mov r1, #114 / register offset instead of add + ldrsh [r0, #114]. */
 #include "common.h"
 
@@ -24,6 +25,7 @@ u32 FUN_003120e8(int firstArg)
 {
     int which = scrGetArg(firstArg);
     int slot = 0;
+    Stats *stats;
 
     if (which == 0) {
         slot = 7;
@@ -32,7 +34,8 @@ u32 FUN_003120e8(int firstArg)
     } else if (which == 2) {
         slot = 11;
     }
-    scrSetResult(((Character *)btlUnitGet(g_btlScriptUnit))->stats->values[slot] >= 1);
+    stats = ((Character *)btlUnitGet(g_btlScriptUnit))->stats;
+    scrSetResult(stats->values[slot] >= 1);
     return 1;
 }
 

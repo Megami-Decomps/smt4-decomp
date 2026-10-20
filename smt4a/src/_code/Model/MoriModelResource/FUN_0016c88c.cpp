@@ -21,7 +21,7 @@ extern int g_handleRegistry; /* 0x56fcc0 */
 /* Supplied declaration required: FUN_00178b04. */
 extern unsigned int FUN_00186118(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00187e08. */
-extern unsigned int FUN_00188340(void);
+extern unsigned int _ZN9Obj557dccC1Ev(void);
 /* Supplied declaration required: FUN_0018f4e4. */
 /* Supplied declaration required: FUN_0018f69c. */
 /* Supplied declaration required: FUN_0018f9c0. */
@@ -116,7 +116,7 @@ LAB_0016ca7c:
   FUN_00178b04(0x18,&LAB_0016caa4,100);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_00188340();
+    temp_v1 = _ZN9Obj557dccC1Ev();
   }
   *(unsigned int *)(param_2 + 0x88) = temp_v1;
   return;

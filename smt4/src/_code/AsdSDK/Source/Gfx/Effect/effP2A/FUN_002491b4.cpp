@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001d22a0. */
 extern unsigned int FUN_0028c814(void);
 /* Supplied declaration required: asdEffectTextureCreate. */
-extern int FUN_0028c904(int);
+extern int stexHeaderIsValid(int);
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -53,7 +53,7 @@ unsigned int * FUN_002491b4(int *param_1)
       do {
         piVar6 = piVar6 + 1;
         temp_v4 = *piVar6 + (int)param_1;
-        temp_v0 = FUN_0028c904(temp_v4);
+        temp_v0 = stexHeaderIsValid(temp_v4);
         if (temp_v0 != 0) {
           asdEffectTextureCreate();
           *(int *)(piVar5[5] + temp_v2 * 4) = temp_v4;

@@ -1,22 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bfd04` (_code @ 0x2bfd04, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: branch layout only: built adds a redundant `bne` to the final return after the conditional `moveq r0, #1`; retail falls through */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_campCec; /* 0x57f110 */
+typedef struct CampCec {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ struct CampState *state;
+} CampCec;
 
+typedef struct CampState {
+    /* 0x000 */ u8 unk000[0x140];
+    /* 0x140 */ s32 mode;
+} CampState;
 
-unsigned int FUN_002bfd04(void)
+extern CampCec g_campCec;
 
+/* True while the camp's state exists and is in mode 1. */
+u32 FUN_002bfd04(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (((*(int *)((unsigned char *)&g_campCec + 0x4)) != 0) && (*(int *)((*(int *)((unsigned char *)&g_campCec + 0x4)) + 0x140) == 1)) {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    u32 result = 0;
+
+    if (g_campCec.state != NULL && g_campCec.state->mode == 1) {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

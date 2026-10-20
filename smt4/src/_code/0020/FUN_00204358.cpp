@@ -13,7 +13,7 @@ int SBORROW4(...);
 int FUN_00191c64(...);
 int scrScriptProcessStartEntry(...);
 int flaggedEntrySetValueA(...);
-int FUN_0029e054(int, int, int, int);
+int ifTouchRegionAdd(int, int, int, int);
 int FUN_0029ede8(int, unsigned int, unsigned int, int);
 int FUN_0029ee6c(...);
 int FUN_0029efa8(...);
@@ -23,7 +23,7 @@ int FUN_002a71fc(...);
 int gameGetPlayerData(void);
 int buttonHelpSetPreset(...);
 int FUN_002b8ee0(int, int);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 int timerStart(...);
 int FUN_002bf4f8(int, int);
 int FUN_002bf818(...);
@@ -56,7 +56,7 @@ extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_0029c424. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern int FUN_0029d65c(int);
-/* Supplied declaration required: FUN_0029e054. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_0029efa8. */
@@ -68,7 +68,7 @@ extern unsigned short FUN_002b8584(unsigned int, int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_002b898c(void);
 /* Supplied declaration required: FUN_002b8ee0. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf818. */
@@ -126,14 +126,14 @@ void FUN_00204358(int param_1)
       temp_v4 = FUN_002bf4f8(0x28,0x117);
       temp_v2 = **(short **)(temp_v4 + 0xc);
       temp_v3 = (int)(short)(*(short *)(temp_v5 + 8) + *(short *)(temp_v4 + 8) + temp_v2 * -2);
-      FUN_0029e054(temp_v3,(int)(short)(*(short *)(temp_v5 + 10) + *(short *)(temp_v4 + 10)),
+      ifTouchRegionAdd(temp_v3,(int)(short)(*(short *)(temp_v5 + 10) + *(short *)(temp_v4 + 10)),
                    (int)(short)(temp_v2 * 3),(int)(*(short **)(temp_v4 + 0xc))[1]);
       temp_v11 = param_1 + temp_v10 * 4;
       *(short *)(temp_v11 + 0x359e) = (short)temp_v3;
       temp_v5 = FUN_002bf4f8(0x28,temp_v10 + 0xba);
       temp_v4 = FUN_002bf4f8(0x28,0x116);
       temp_v3 = (int)(short)(*(short *)(temp_v5 + 8) + *(short *)(temp_v4 + 8));
-      FUN_0029e054(temp_v3,(int)(short)(*(short *)(temp_v5 + 10) + *(short *)(temp_v4 + 10)),
+      ifTouchRegionAdd(temp_v3,(int)(short)(*(short *)(temp_v5 + 10) + *(short *)(temp_v4 + 10)),
                    (int)(short)(**(short **)(temp_v4 + 0xc) * 3),(int)(*(short **)(temp_v4 + 0xc))[1]);
       *(short *)(temp_v11 + 0x35a0) = (short)temp_v3;
       temp_v10 = temp_v10 + 1;
@@ -260,7 +260,7 @@ LAB_00204838:
     }
     temp_v12 = FUN_0029efa8(temp_v10);
     if (temp_v12 != temp_v15) {
-      FUN_002bc01c(0x100016c);
+      eventQueueAddUniqueIfValid(0x100016c);
     }
     temp_v12 = temp_v10;
     FUN_0029f5d8(temp_v10,0,param_1 + 0x357e,0xffffffff,0xffffffff,0xffffffff,temp_v14,0,1);
@@ -275,7 +275,7 @@ LAB_00204838:
           if (*psVar13 > *psVar18) {
             *psVar13 = *psVar13 - 1;
             *piVar14 = *piVar14 + 1;
-            FUN_002bc01c(0x100016c);
+            eventQueueAddUniqueIfValid(0x100016c);
             goto LAB_00204d14;
           }
 LAB_002049f8:
@@ -311,7 +311,7 @@ LAB_002049f8:
             if ((*piVar14 < 1) && (temp_v13)) {
               temp_v7 = 0x100016e;
             }
-            FUN_002bc01c(temp_v7);
+            eventQueueAddUniqueIfValid(temp_v7);
             FUN_00191c64(param_1);
             if (0 < *piVar14) {
               temp_v10 = 0;
@@ -377,7 +377,7 @@ LAB_00204d40:
               buttonHelpSetPreset(0x9a);
               scrScriptProcessStartEntry(*puVar19,0xb);
               *piVar16 = *piVar16 + 1;
-              FUN_002bc01c(0x100016d);
+              eventQueueAddUniqueIfValid(0x100016d);
               if (temp_v16 == 0) goto LAB_00204cf8;
             }
             else {
@@ -395,14 +395,14 @@ LAB_00204d40:
                 }
                 if (temp_v13 || temp_v12 < 0 != (0 < temp_v5 && SBORROW4(999,temp_v10))) {
 LAB_002049fc:
-                  FUN_002bc01c(temp_v7);
+                  eventQueueAddUniqueIfValid(temp_v7);
                   goto LAB_00204cf8;
                 }
 LAB_00204ca0:
                 *psVar13 = (short)temp_v10 + 1;
                 *piVar14 = *piVar14 - 1;
 LAB_00204cb8:
-                FUN_002bc01c(temp_v7);
+                eventQueueAddUniqueIfValid(temp_v7);
               }
               else {
 LAB_00204cf8:
@@ -433,7 +433,7 @@ LAB_00204d14:
         if (0x3e6 >= *psVar13) {
           *psVar13 = *psVar13 + 1;
           *piVar14 = *piVar14 - 1;
-          FUN_002bc01c(0x100016c);
+          eventQueueAddUniqueIfValid(0x100016c);
           goto LAB_00204d14;
         }
         goto LAB_002049f0;

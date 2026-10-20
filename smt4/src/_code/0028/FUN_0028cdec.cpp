@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002621b4. */
 /* Supplied declaration required: FUN_0028cb40. */
-extern int FUN_0029e908(int);
+extern int objectPartRunUnlessLocked(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002ae164. */
 
@@ -33,7 +33,7 @@ unsigned int FUN_0028cdec(int param_1)
   temp_v3[0] = 0;
   temp_v2[0] = 0;
   FUN_0028cb40(param_1,temp_v3,temp_v2);
-  temp_v0 = FUN_0029e908(param_1 + 0x33a8);
+  temp_v0 = objectPartRunUnlessLocked(param_1 + 0x33a8);
   if (temp_v0 != 0) {
     temp_v1 = gameGetSlotTable();
     FUN_002621b4(*(int *)(param_1 + 0x305c) - 1,(int)*(char *)(temp_v1 + temp_v0 + 0x9107),

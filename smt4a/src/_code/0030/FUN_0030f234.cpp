@@ -10,7 +10,7 @@ typedef struct String {
     /* 0x04 */ u32 data;
 } String;
 
-String *constructObj0055affc(void);
+String *_ZN9Obj55aff4C1Ev(void);
 
 /* Builds a string with room for `a + b` 16-bit characters plus a terminator: `first` is copied to its start and `second` after the first `a` characters. */
 void FUN_0030f234(u32 unused, u32 first, s32 a, u32 second, s32 b)
@@ -18,7 +18,7 @@ void FUN_0030f234(u32 unused, u32 first, s32 a, u32 second, s32 b)
     String *string;
     u32 data;
 
-    string = constructObj0055affc();
+    string = _ZN9Obj55aff4C1Ev();
     FUN_002eea94(string, a + b + 1);
     data = string->data;
     wstrcpyU16(data, first);

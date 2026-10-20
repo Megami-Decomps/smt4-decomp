@@ -7,8 +7,8 @@ extern "C" {
 int FUN_0023392c(...);
 int FUN_0027e9c0(int);
 int FUN_0027ea28(int, int, int, int);
-int FUN_0027eb30(int);
-int FUN_002bc01c(int);
+int jobOwnerFreeSlotAndStop(int);
+int eventQueueAddUniqueIfValid(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -20,9 +20,9 @@ typedef struct {
 extern int FUN_002762e0(void);
 /* Supplied declaration required: FUN_0027e9c0. */
 /* Supplied declaration required: FUN_0027ea28. */
-/* Supplied declaration required: FUN_0027eb30. */
+/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 
 
 void FUN_0038ea88(int param_1)
@@ -44,7 +44,7 @@ void FUN_0038ea88(int param_1)
   }
   if (temp_v1 != 1) {
     if ((temp_v1 == 2) && (*(char *)(param_1 + 0x167a) != '\0')) {
-      FUN_0027eb30(temp_v2);
+      jobOwnerFreeSlotAndStop(temp_v2);
       *(unsigned int *)(param_1 + 4) = 3;
       *(unsigned int *)(param_1 + 8) = 0;
       if (*(int **)(param_1 + 0x208) != (int *)0x0) {
@@ -56,7 +56,7 @@ void FUN_0038ea88(int param_1)
   else if (*(char *)(param_1 + 0x167a) != '\0') {
     temp_v1 = FUN_0027ee9c();
     if (temp_v1 != 0) {
-      FUN_002bc01c(0x100016d);
+      eventQueueAddUniqueIfValid(0x100016d);
       FUN_0023392c(param_1,0xffffffff,0);
       FUN_0027e9c0(temp_v2);
       temp_v0 = 2;
@@ -65,7 +65,7 @@ void FUN_0038ea88(int param_1)
     }
     temp_v1 = FUN_002762e0();
     if (temp_v1 != 0) {
-      FUN_002bc01c(0x100016d);
+      eventQueueAddUniqueIfValid(0x100016d);
       *(unsigned int *)(param_1 + 4) = 0xf;
       *(unsigned int *)(param_1 + 8) = 0;
       if (*(int **)(param_1 + 0x208) != (int *)0x0) {

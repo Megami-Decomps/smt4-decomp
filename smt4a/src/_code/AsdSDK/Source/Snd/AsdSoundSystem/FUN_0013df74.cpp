@@ -30,7 +30,7 @@ typedef struct {
 
 extern unsigned char LAB_0013e318; /* 0x13e318 */
 extern unsigned int DAT_005c4c20; /* 0x5c4c20 */
-extern unsigned char DAT_0063e1e8; /* 0x63e1e8 */
+extern unsigned char g_asdSoundSystem; /* 0x63e1e8 */
 extern unsigned char DAT_0063e324; /* 0x63e324 */
 extern unsigned char DAT_0063e37c; /* 0x63e37c */
 extern unsigned char DAT_0063e494; /* 0x63e494 */
@@ -109,25 +109,25 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
   if (temp_v0 != 0) {
     DAT_0063f52c = 1;
   }
-  temp_v0 = nw_snd_SoundArchive_IsAvailable(&DAT_0063e1e8);
+  temp_v0 = nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem);
   if (temp_v0 != 0) {
     FUN_00150784();
   }
-  FUN_0015ea28(&DAT_0063e1e8,&DAT_0063e6cc);
+  FUN_0015ea28(&g_asdSoundSystem,&DAT_0063e6cc);
   temp_v1 = nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(&DAT_0063e324);
   temp_v2 = 0x10000;
   temp_v5 = (unsigned char *)0x1;
   asdMemoryAlloc(0x10000,0x100,0,temp_v1);
   DAT_0063e6b8 = temp_v2;
-  FUN_0015e8d0(&DAT_0063e1e8,temp_v2,temp_v1);
-  temp_v1 = nw_snd_SoundDataManager_GetRequiredMemSize(&DAT_0063e494,&DAT_0063e1e8);
+  FUN_0015e8d0(&g_asdSoundSystem,temp_v2,temp_v1);
+  temp_v1 = nw_snd_SoundDataManager_GetRequiredMemSize(&DAT_0063e494,&g_asdSoundSystem);
   temp_v2 = 0x10000;
   temp_v5 = (unsigned char *)0x1;
   asdMemoryAlloc(0x10000,0x100,0,temp_v1);
   DAT_0063e6bc = temp_v2;
-  FUN_0015e314(&DAT_0063e494,&DAT_0063e1e8,temp_v2,temp_v1);
+  FUN_0015e314(&DAT_0063e494,&g_asdSoundSystem,temp_v2,temp_v1);
   puVar4 = &DAT_0063e37c;
-  FUN_0015fea8(&DAT_0063e37c,&DAT_0063e1e8,0);
+  FUN_0015fea8(&DAT_0063e37c,&g_asdSoundSystem,0);
   temp_v1 = 0x10000;
   temp_v6 = 1;
   temp_v5 = (unsigned char *)0x20;
@@ -135,7 +135,7 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
   DAT_0063e6c0 = temp_v1;
   if (param_3 == (unsigned char *)0x0) {
     param_3 = &DAT_0063e37c;
-    nw_snd_SoundArchivePlayer_GetRequiredStreamBufferSize(&DAT_0063e37c,&DAT_0063e1e8);
+    nw_snd_SoundArchivePlayer_GetRequiredStreamBufferSize(&DAT_0063e37c,&g_asdSoundSystem);
   }
   temp_v1 = 0x10000;
   temp_v6 = 1;
@@ -146,16 +146,16 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
   temp_v6 = temp_v1;
   temp_v7 = param_3;
   DAT_0063e6c4 = temp_v1;
-  FUN_0015e420(&DAT_0063e37c,&DAT_0063e1e8,&DAT_0063e494,DAT_0063e6c0);
+  FUN_0015e420(&DAT_0063e37c,&g_asdSoundSystem,&DAT_0063e494,DAT_0063e6c0);
   if (param_2 != 0) {
     puVar4 = &DAT_0063ea3c;
     DAT_0063f4c4 = '\x01';
-    nw_snd_Sound3DManager_GetRequiredMemSize(&DAT_0063ea3c,&DAT_0063e1e8);
+    nw_snd_Sound3DManager_GetRequiredMemSize(&DAT_0063ea3c,&g_asdSoundSystem);
     temp_v1 = 0x10000;
     temp_v5 = (unsigned char *)0x1;
     asdMemoryAlloc(0x10000,0x100,0,puVar4);
     DAT_0063f4c0 = temp_v1;
-    FUN_0015e1ec(&DAT_0063ea3c,&DAT_0063e1e8,temp_v1,puVar4);
+    FUN_0015e1ec(&DAT_0063ea3c,&g_asdSoundSystem,temp_v1,puVar4);
     temp_v1 = 0;
     DAT_0063ea58 = 0x20;
     DAT_0063ea60 = 0x40b55555;

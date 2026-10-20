@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [16], int);
-int FUN_002e6e5c(unsigned char [16]);
+int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int onlineStringDestroy(unsigned char [8]);
 int FUN_002ee938(...);
 int FUN_002ee978(...);
@@ -22,7 +22,7 @@ typedef struct {
 
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineStringDestroy. */
 extern int wordRefsDiffer_002ee774(unsigned int **, unsigned int *);
 /* Supplied declaration required: FUN_002ee938. */
@@ -54,7 +54,7 @@ unsigned char FUN_002ee64c(int param_1,unsigned int param_2)
   FUN_002fe1b8(temp_v0,param_2);
   if (temp_v0 != 0) {
     temp_v2 = *(int *)(temp_v0 + 0x78) == -1;
-    FUN_002e6e5c(temp_v3);
+    _ZN9Obj55b28cD1Ev(temp_v3);
   }
   else {
     temp_v0 = param_1 + 0x34;
@@ -89,7 +89,7 @@ unsigned char FUN_002ee64c(int param_1,unsigned int param_2)
         onlineStringDestroy(temp_v9);
       } while (!temp_v2);
     }
-    FUN_002e6e5c(temp_v3);
+    _ZN9Obj55b28cD1Ev(temp_v3);
     temp_v2 = 0;
   }
   return temp_v2;
@@ -97,7 +97,7 @@ LAB_002ee75a:
   temp_v8 = *(unsigned int *)(param_1 + 0x104);
   temp_v0 = wordRefsDiffer_002fe38c(&temp_v5,(unsigned int *)&temp_v8);
   if (temp_v0 == 0) {
-    FUN_002e6e5c(temp_v3);
+    _ZN9Obj55b28cD1Ev(temp_v3);
     return 1;
   }
   temp_v1 = temp_v5 + 0x20;
@@ -120,7 +120,7 @@ LAB_002ee75a:
   onlineStringDestroy(temp_v6);
   onlineStringDestroy(temp_v9);
   if (temp_v2) {
-    FUN_002e6e5c(temp_v3);
+    _ZN9Obj55b28cD1Ev(temp_v3);
     temp_v2 = 0;
     return temp_v2;
   }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00157558(int);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
-int FUN_0016c560(...);
+int skinObjectUpdateMatrices(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_001879d0(int);
@@ -27,7 +27,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
@@ -127,7 +127,7 @@ void FUN_0047c00c(int param_1)
     }
     FUN_00183bb0();
     efctSetSpeed();
-    FUN_0016c560(g_renderCtx);
+    skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     temp_v1 = param_1 + *(int *)(param_1 + 4) * 8;
     UNRECOVERED_JUMPTABLE = *(romwright_code **)(temp_v1 + 0xb8);

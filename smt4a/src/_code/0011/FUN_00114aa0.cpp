@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00114a30(int, int);
 int asdOperatorDeleteArray(void);
 int FUN_002e6e34(int *, unsigned char *);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int FUN_003002c8(void);
 
 typedef int romwright_code(...);
@@ -23,7 +23,7 @@ extern int FUN_00114a08(void);
 /* Supplied declaration required: FUN_00114a30. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int *FUN_002ea704(void);
 /* Supplied declaration required: FUN_003002c8. */
 
@@ -44,7 +44,7 @@ void FUN_00114aa0(unsigned int param_1,unsigned int param_2,unsigned int param_3
   FUN_002e6e34(&uStack_20,&DAT_0062e6a0);
   DAT_005949d0 = DAT_005949d0 - 1;
   if ((DAT_005949d0 != 0) || (temp_v0 = FUN_00114a08(), temp_v0 == 0)) {
-    FUN_002e6e5c(&uStack_20);
+    _ZN9Obj55b28cD1Ev(&uStack_20);
     return;
   }
   piVar2 = (int *)FUN_002ea704();
@@ -84,7 +84,7 @@ void FUN_00114aa0(unsigned int param_1,unsigned int param_2,unsigned int param_3
   DAT_005949c8 = 0;
   DAT_005949c0 = 0;
   DAT_005949c4 = 0;
-  FUN_002e6e5c(&uStack_20);
+  _ZN9Obj55b28cD1Ev(&uStack_20);
   return;
 }
 

@@ -13,7 +13,7 @@ int FUN_003756c8(...);
 int FUN_003ebc08(...);
 int gameFlagSetValue(...);
 int FUN_004ab734(...);
-int FUN_004ab854(...);
+int btlUiPanelStart(...);
 int FUN_004abb94(...);
 int FUN_004f8f08(...);
 
@@ -43,7 +43,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_003ebc08. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_004ab734. */
-/* Supplied declaration required: FUN_004ab854. */
+/* Supplied declaration required: btlUiPanelStart. */
 /* Supplied declaration required: FUN_004abb94. */
 /* Supplied declaration required: FUN_004f8f08. */
 
@@ -84,7 +84,7 @@ unsigned int FUN_003e69ac(unsigned int *param_1)
     if (temp_v2 != 0) {
       dialogClose(1);
     }
-    FUN_004ab854(g_btlUiBlock);
+    btlUiPanelStart(g_btlUiBlock);
     temp_v3 = 3;
     break;
   case 3:

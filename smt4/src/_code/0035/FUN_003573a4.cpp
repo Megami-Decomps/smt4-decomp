@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002c40f8(...);
-int FUN_002c5d5c(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int nn_os(...);
 
 /* stack frame of param_6: 4 slot(s), 13 byte(s) */
@@ -20,7 +20,7 @@ extern unsigned char LAB_0013b628; /* 0x13b628 */
 extern int FUN_00357628(...); /* 0x357628 */
 
 /* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: nn_os. */
 
 
@@ -36,7 +36,7 @@ void FUN_003573a4(unsigned int param_1,unsigned int *param_2,unsigned int param_
   unsigned char temp_v3 [4];
   
   if ((int)param_3 < 0xb) {
-    FUN_002c5d5c(&temp_v2,&LAB_0013b628,4);
+    __aeabi_vec_ctor_nocookie_nodtor(&temp_v2,&LAB_0013b628,4);
     if ((int)param_3 < 1) {
       temp_v0 = 0;
     }

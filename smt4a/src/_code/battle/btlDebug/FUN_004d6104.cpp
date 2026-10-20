@@ -38,10 +38,10 @@ int FUN_004d5fc0(...);
 int jobStop(...);
 int asdListBoxGetIntValuePtr(...);
 int asdListBoxSetIntItem(...);
-int FUN_0032c430(...);
+int listBoxItemHasOwner(...);
 int FUN_003592dc(...);
 int FUN_003874fc(...);
-int FUN_004bb7f4(void);
+int dataTable22GetCount(void);
 int dataTable3Type0Count(void);
 int FUN_004d130c(unsigned int *, int);
 
@@ -119,14 +119,14 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: asdListBoxSetIntItem. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: FUN_0032c430. */
+/* Supplied declaration required: listBoxItemHasOwner. */
 /* Supplied declaration required: asdListBoxSetToggleItem. */
 /* Supplied declaration required: asdListBoxGetFloatValuePtr. */
 /* Supplied declaration required: FUN_00340edc. */
 /* Supplied declaration required: FUN_003592dc. */
 /* Supplied declaration required: FUN_003874fc. */
 /* Supplied declaration required: FUN_003ed238. */
-/* Supplied declaration required: FUN_004bb7f4. */
+/* Supplied declaration required: dataTable22GetCount. */
 /* Supplied declaration required: dataTable3Type0Count. */
 /* Supplied declaration required: FUN_004d130c. */
 /* Supplied declaration required: FUN_004d1470. */
@@ -195,7 +195,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
         DAT_005715fc = temp_v6;
       }
       else {
-        FUN_004bb7f4();
+        dataTable22GetCount();
         asdListBoxSetIntItem(param_1[4],0,temp_v6,0,(int)puVar3 - 1,0);
         *(unsigned int *)(param_2 + 0xf0) = 0xffffffff;
         *(unsigned int *)(param_2 + 0xec) = temp_v6;
@@ -203,7 +203,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 1:
-      DAT_005715f8 = FUN_0032c430(param_1[4],temp_v6);
+      DAT_005715f8 = listBoxItemHasOwner(param_1[4],temp_v6);
       break;
     case 2:
       puVar3 = (unsigned int *)asdListBoxGetIntValuePtr(param_1[4]);
@@ -218,7 +218,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       *puVar3 = temp_v6;
       break;
     case 4:
-      temp_v5 = FUN_0032c430(param_1[4],temp_v6);
+      temp_v5 = listBoxItemHasOwner(param_1[4],temp_v6);
       if (temp_v5 != 0) {
         temp_v3 = DAT_005716a4 | *(unsigned int *)(param_2 + 0x45ac);
         *(unsigned int *)(param_2 + 0x45a8) = *(unsigned int *)(param_2 + 0x45a8) | DAT_005716a0;
@@ -231,7 +231,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 5:
-      temp_v5 = FUN_0032c430(param_1[4],temp_v6);
+      temp_v5 = listBoxItemHasOwner(param_1[4],temp_v6);
       if (temp_v5 != 0) {
         temp_v3 = *(unsigned int *)(param_2 + 0x45a8) | DAT_005716a8;
         temp_v4 = DAT_005716ac | *(unsigned int *)(param_2 + 0x45ac);
@@ -244,7 +244,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       *(unsigned int *)(param_2 + 0x45a8) = *(unsigned int *)(param_2 + 0x45a8) & temp_v3;
       break;
     case 6:
-      temp_v5 = FUN_0032c430(param_1[4],temp_v6);
+      temp_v5 = listBoxItemHasOwner(param_1[4],temp_v6);
       if (temp_v5 == 0) {
         temp_v3 = *(unsigned int *)(param_2 + 0x45a8) & ~DAT_005716b0;
         temp_v4 = *(unsigned int *)(param_2 + 0x45ac) & ~DAT_005716b4;
@@ -273,7 +273,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       *(unsigned int *)(param_2 + 0xac) = *puVar3;
       break;
     case 0xb:
-      temp_v5 = FUN_0032c430(param_1[4],temp_v6);
+      temp_v5 = listBoxItemHasOwner(param_1[4],temp_v6);
       if (temp_v5 != 0) {
         temp_v3 = DAT_00571710 | *(unsigned int *)(param_2 + 0x45a8);
         temp_v4 = *(unsigned int *)(param_2 + 0x45ac) | DAT_00571714;
@@ -286,7 +286,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       *(unsigned int *)(param_2 + 0x45ac) = temp_v4;
       break;
     case 0xc:
-      temp_v5 = FUN_0032c430(param_1[4],temp_v6);
+      temp_v5 = listBoxItemHasOwner(param_1[4],temp_v6);
       if (temp_v5 == 0) {
         temp_v4 = *(unsigned int *)(param_2 + 0x45a8) & ~DAT_00571750;
         temp_v3 = *(unsigned int *)(param_2 + 0x45ac) & ~DAT_00571754;
@@ -300,7 +300,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       *(unsigned int *)(param_2 + 0x45ac) = temp_v4;
       break;
     case 0xd:
-      temp_v5 = FUN_0032c430(param_1[4],temp_v6);
+      temp_v5 = listBoxItemHasOwner(param_1[4],temp_v6);
       if (temp_v5 == 0) {
         temp_v4 = *(unsigned int *)(param_2 + 0x45a8) & ~DAT_00571760;
         temp_v3 = *(unsigned int *)(param_2 + 0x45ac) & ~DAT_00571764;
@@ -314,7 +314,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       *(unsigned int *)(param_2 + 0x45ac) = temp_v4;
       break;
     case 0xe:
-      temp_v5 = FUN_0032c430(param_1[4],temp_v6);
+      temp_v5 = listBoxItemHasOwner(param_1[4],temp_v6);
       puVar6 = (unsigned int *)(param_2 + 0x45a8);
       if (temp_v5 != 0) {
         temp_v3 = DAT_005716c8 | *puVar6;
@@ -328,7 +328,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       *(unsigned int *)(param_2 + 0x45ac) = temp_v4;
       break;
     case 0xf:
-      temp_v5 = FUN_0032c430(param_1[4],temp_v6);
+      temp_v5 = listBoxItemHasOwner(param_1[4],temp_v6);
       if (temp_v5 == 0) {
         temp_v4 = *(unsigned int *)(param_2 + 0x45a8) & ~DAT_00571720;
         temp_v3 = *(unsigned int *)(param_2 + 0x45ac) & ~DAT_00571724;
@@ -634,7 +634,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       FUN_003ed238(param_2,0x400);
       break;
     case 1:
-      temp_v5 = FUN_0032c430(param_1[4],temp_v6);
+      temp_v5 = listBoxItemHasOwner(param_1[4],temp_v6);
       if (temp_v5 != 0) {
         temp_v3 = DAT_00571774 | *(unsigned int *)(param_2 + 0x45ac);
         *(unsigned int *)(param_2 + 0x45a8) = DAT_00571770 | *(unsigned int *)(param_2 + 0x45a8);
@@ -963,7 +963,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     temp_v5 = FUN_003874fc(param_1[4]);
     if (temp_v5 != 0) {
       if (temp_v5 == 1) {
-        temp_v5 = FUN_0032c430(param_1[4]);
+        temp_v5 = listBoxItemHasOwner(param_1[4]);
         if (temp_v5 != 0) {
           temp_v3 = DAT_00571748 | *(unsigned int *)(param_2 + 0x45a8);
           *(unsigned int *)(param_2 + 0x45ac) = DAT_0057174c | *(unsigned int *)(param_2 + 0x45ac);
@@ -978,7 +978,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
     }
     else {
-      temp_v5 = FUN_0032c430(param_1[4]);
+      temp_v5 = listBoxItemHasOwner(param_1[4]);
       if (temp_v5 != 0) {
         temp_v3 = DAT_00571744 | *(unsigned int *)(param_2 + 0x45ac);
         *(unsigned int *)(param_2 + 0x45a8) = *(unsigned int *)(param_2 + 0x45a8) | DAT_00571740;
@@ -1044,7 +1044,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       *puVar3 = temp_v6;
       break;
     case 4:
-      DAT_0057aa04 = FUN_0032c430(param_1[4],temp_v6);
+      DAT_0057aa04 = listBoxItemHasOwner(param_1[4],temp_v6);
     default:
     }
 LAB_004d729c:

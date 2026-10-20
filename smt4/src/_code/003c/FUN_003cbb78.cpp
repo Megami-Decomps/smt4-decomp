@@ -11,7 +11,7 @@ extern unsigned int g_btlActionReflect; /* 0x434290 */
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00229754. */
-extern int FUN_002298a0(void);
+extern int btlNodeListAnyReady(void);
 extern int nodeListCountActiveById(unsigned int);
 extern int FUN_003ae838(unsigned int, int);
 extern int FUN_003aef88(unsigned int);
@@ -41,7 +41,7 @@ unsigned int FUN_003cbb78(int *param_1,unsigned int *param_2)
   } while (temp_v0 < 4);
   temp_v0 = FUN_003aef88(g_btlUiBlock);
   if (temp_v0 != 0) {
-    if (((*param_2 & 0x1080) == 0) && (temp_v0 = FUN_002298a0(), temp_v0 != 0)) {
+    if (((*param_2 & 0x1080) == 0) && (temp_v0 = btlNodeListAnyReady(), temp_v0 != 0)) {
       return 0;
     }
     temp_v1 = *param_1;

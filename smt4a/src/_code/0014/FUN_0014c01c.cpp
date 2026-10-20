@@ -27,7 +27,7 @@ int FUN_0014afd0(int, int);
 int objFlagsSetBits(unsigned int, int);
 int gameDataCounterSpend(int);
 int FUN_00163aa4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int msgBoxFlagsClear(...);
 int FUN_00167458(...);
 int eventQueueAddUnique(...);
@@ -77,7 +77,7 @@ extern int FUN_0016345c(void);
 /* Supplied declaration required: FUN_00163aa4. */
 extern int FUN_00163e84(unsigned int);
 extern int FUN_00163fd4(unsigned int);
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_00164288. */
 extern int msgBoxFlagsTestAny(unsigned int, unsigned int);
@@ -584,7 +584,7 @@ LAB_0014c9fc:
                       ((temp_v9 <= *(short *)(temp_v2 + temp_v10 * 2 + 0x62) &&
                        (temp_v9 = temp_v9 - *(short *)(temp_v2 + 100), *(int *)(temp_v2 + 0x18) = temp_v9,
                        temp_v9 != temp_v21)))) {
-                FUN_001641b4(0x100020d);
+                eventQueueAddUniqueIfValid(0x100020d);
               }
               temp_v8 = padButtonRepeat(5);
               if (temp_v8 == 0) {
@@ -603,7 +603,7 @@ LAB_0014c9fc:
                         goto LAB_0014d034;
                         *(unsigned char *)(temp_v2 + 0x30) = 0;
                         *(unsigned char *)(temp_v2 + 0x31) = 0;
-                        FUN_001641b4(0x1000227);
+                        eventQueueAddUniqueIfValid(0x1000227);
                         temp_v8 = 0;
                         if (temp_v8 < temp_v10) {
                           do {
@@ -645,7 +645,7 @@ LAB_0014d034:
                             }
                             *(unsigned char *)(temp_v2 + 0x30) = 0;
                             *(unsigned char *)(temp_v2 + 0x31) = 0;
-                            FUN_001641b4(0x100020f);
+                            eventQueueAddUniqueIfValid(0x100020f);
                             temp_v8 = 0;
                             if (temp_v8 < temp_v10) {
                               do {
@@ -677,25 +677,25 @@ LAB_0014d034:
                     }
                     else {
                       *(int *)(temp_v2 + 0x18) = *(int *)(temp_v2 + 0x18) + 1;
-                      FUN_001641b4(0x100020d);
+                      eventQueueAddUniqueIfValid(0x100020d);
                       *(unsigned int *)(temp_v2 + 0x70) = 0;
                     }
                   }
                   else {
                     *(int *)(temp_v2 + 0x18) = *(int *)(temp_v2 + 0x18) - 1;
-                    FUN_001641b4(0x100020d);
+                    eventQueueAddUniqueIfValid(0x100020d);
                     *(unsigned int *)(temp_v2 + 0x70) = 0;
                   }
                 }
                 else {
                   *(int *)(temp_v2 + 0x18) = *(int *)(temp_v2 + 0x18) + 1;
-                  FUN_001641b4(0x100020d);
+                  eventQueueAddUniqueIfValid(0x100020d);
                   *(unsigned int *)(temp_v2 + 0x70) = 0;
                 }
               }
               else {
                 *(int *)(temp_v2 + 0x18) = *(int *)(temp_v2 + 0x18) - 1;
-                FUN_001641b4(0x100020d);
+                eventQueueAddUniqueIfValid(0x100020d);
                 *(unsigned int *)(temp_v2 + 0x70) = 0;
               }
               temp_v8 = *(int *)(temp_v2 + 0x18);
@@ -728,7 +728,7 @@ LAB_0014d1a4:
             }
             *(unsigned char *)(temp_v2 + 0x30) = 0;
             *(unsigned char *)(temp_v2 + 0x31) = 0;
-            FUN_001641b4(0x1000227);
+            eventQueueAddUniqueIfValid(0x1000227);
             temp_v8 = 0;
             if (temp_v8 < temp_v10) {
               do {
@@ -871,7 +871,7 @@ LAB_0014cbbc:
           DAT_005e204e = '\0';
         }
         else {
-          FUN_001641b4(0x1000226);
+          eventQueueAddUniqueIfValid(0x1000226);
         }
         if (temp_v2 != 0) {
           if (*(char *)(temp_v2 + 8) != '\0') {
@@ -939,7 +939,7 @@ LAB_0014d584:
             temp_v1 = FUN_00167f08();
             *(unsigned short *)(temp_v2 + 0x19c6) = temp_v1;
             if (*(char *)(temp_v2 + 9) == '\v') {
-              FUN_001641b4(0x1000221);
+              eventQueueAddUniqueIfValid(0x1000221);
             }
             goto LAB_0014d5b8;
           }

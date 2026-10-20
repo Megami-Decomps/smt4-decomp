@@ -1,69 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041dbdc` (_code @ 0x41dbdc, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: prologue order only: retail copies `selected` to r5 (movs r5, r1) and stores the selected byte after `mov r0, #1`; built stores it before. */
+#include "common.h"
 
 extern "C" {
 
-int sysPlaySe(unsigned int);
-int FUN_0041e2d8(int);
-int FUN_0041f020(int, int);
-int FUN_0041fc24(int);
-int rt_memcpy_w(int, int, int);
+typedef struct Entry {
+    /* 0x00 */ u8 data[100];
+} Entry;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct Menu {
+    /* 0x000 */ u8 unk000[0x14];
+    /* 0x014 */ s8 selected;
+    /* 0x015 */ u8 unk015[3];
+    /* 0x018 */ u32 mode;
+    /* 0x01C */ u8 unk01C[0x2DC];
+    /* 0x2F8 */ s32 total;
+    /* 0x2FC */ s32 prevTotal;
+    /* 0x300 */ s32 bonus;
+    /* 0x304 */ s32 extra;
+    /* 0x308 */ s32 value;
+    /* 0x30C */ s8 busy;
+    /* 0x30D */ u8 unk30D[3];
+    /* 0x310 */ Entry entryA;
+    /* 0x374 */ Entry entryB;
+    /* 0x3D8 */ Entry current;
+} Menu;
 
-/* Supplied declaration required: sysPlaySe. */
-extern unsigned int FUN_002a4860(int);
-extern int flaggedEntryGetValueA(int);
-/* Supplied declaration required: FUN_0041e2d8. */
-/* Supplied declaration required: FUN_0041f020. */
-/* Supplied declaration required: FUN_0041fc24. */
-/* Supplied declaration required: rt_memcpy_w. */
+s32 sysPlaySe(u32 id);
+s32 FUN_0041f020(Menu *menu, s32 selected);
+s32 rt_memcpy_w(void *dest, void *src, s32 size);
+s32 FUN_002a4860(Entry *entry);
+s32 flaggedEntryGetValueA(Entry *entry);
+s32 FUN_0041fc24(Menu *menu);
+s32 FUN_0041e2d8(Menu *menu);
 
-
-void FUN_0041dbdc(int param_1,int param_2)
-
+/* Switches the menu between its two entries (`selected` nonzero: B), refreshes the current entry's values and the total. */
+void FUN_0041dbdc(Menu *menu, s32 selected)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  *(char *)(param_1 + 0x14) = (char)param_2;
-  if (param_2 != 0) {
-    *(unsigned int *)(param_1 + 0x300) = 1;
-    *(unsigned int *)(param_1 + 0x18) = 2;
-    temp_v0 = 0x10c;
-  }
-  else {
-    *(unsigned int *)(param_1 + 0x18) = 1;
-    temp_v0 = 0x10b;
-    *(unsigned int *)(param_1 + 0x300) = 0;
-  }
-  sysPlaySe(temp_v0);
-  FUN_0041f020(param_1,param_2);
-  if (param_2 != 0) {
-    rt_memcpy_w(param_1 + 0x310,param_1 + 0x3d8,100);
-    rt_memcpy_w(param_1 + 0x3d8,param_1 + 0x374,100);
-  }
-  else {
-    rt_memcpy_w(param_1 + 0x374,param_1 + 0x3d8,100);
-    rt_memcpy_w(param_1 + 0x3d8,param_1 + 0x310,100);
-  }
-  temp_v0 = FUN_002a4860(param_1 + 0x3d8);
-  *(unsigned int *)(param_1 + 0x304) = temp_v0;
-  temp_v1 = flaggedEntryGetValueA(param_1 + 0x3d8);
-  *(int *)(param_1 + 0x308) = temp_v1;
-  *(unsigned int *)(param_1 + 0x2fc) = *(unsigned int *)(param_1 + 0x2f8);
-  *(int *)(param_1 + 0x2f8) = temp_v1 + *(int *)(param_1 + 0x304) + *(int *)(param_1 + 0x300);
-  FUN_0041fc24(param_1);
-  if (*(char *)(param_1 + 0x30c) != '\0') {
-    return;
-  }
-  FUN_0041e2d8(param_1);
-  return;
+    u32 se;
+
+    menu->selected = selected;
+    if (selected != 0) {
+        menu->bonus = 1;
+        menu->mode = 2;
+        se = 0x10C;
+    } else {
+        menu->mode = 1;
+        se = 0x10B;
+        menu->bonus = 0;
+    }
+    sysPlaySe(se);
+    FUN_0041f020(menu, selected);
+    if (selected != 0) {
+        rt_memcpy_w(&menu->entryA, &menu->current, 100);
+        rt_memcpy_w(&menu->current, &menu->entryB, 100);
+    } else {
+        rt_memcpy_w(&menu->entryB, &menu->current, 100);
+        rt_memcpy_w(&menu->current, &menu->entryA, 100);
+    }
+    menu->extra = FUN_002a4860(&menu->current);
+    menu->value = flaggedEntryGetValueA(&menu->current);
+    menu->prevTotal = menu->total;
+    menu->total = menu->value + menu->extra + menu->bonus;
+    FUN_0041fc24(menu);
+    if (menu->busy != 0) {
+        return;
+    }
+    FUN_0041e2d8(menu);
 }
 
 } /* extern "C" */

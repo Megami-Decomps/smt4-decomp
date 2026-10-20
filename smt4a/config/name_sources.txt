@@ -2578,3 +2578,439 @@
 0012140c _ZN9Obj55afc4D1Ev evidence destructor: stores the vtable at 0x55afc4 (+8) and is its slot 2
 002f30c4 _ZN9Obj55afc44stopEv evidence called on this by the 0x55afc4 destructor: a base-class method Obj558be0 inherits
 0055afc4 _ZTV9Obj55afc4 evidence size:0x1c vtable (offset-to-top, RTTI, D1, D0, three pure virtual slots; the next vtable starts at 0x55afe0)
+0039995c _ZN9Obj464cb010post010040Ev evidence posts message id 0x10040 to the command queue; vtable slot 0 of Obj464cb0
+00399c10 _ZN9Obj464cb010post0f0106Ev evidence posts message id 0xf0106; vtable slot 2
+003997b4 _ZN9Obj464cb010post0f0104Ev evidence posts message id 0xf0104; vtable slot 4
+00557ae8 _ZTV9Obj557ae8 evidence size:0x1c vtable of Obj557ae8 (stored by FUN_003e5d10, FUN_003e5de8)
+00557b58 _ZTV9Obj557b58 evidence size:0x10 vtable of Obj557b58 (stored by FUN_00406260, FUN_004062b0)
+00557b68 _ZTV9Obj557b68 evidence size:0x1c vtable of Obj557b68 (stored by FUN_00406e6c, FUN_004070b4)
+00557be8 _ZTV9Obj420794 evidence size:0x30 vtable of Obj420794 (stored by FUN_0041db20, filter4PolyBaseDestroy, filter4PolyBaseDestroy2, filter4PolyDestroy, filter4PolyExtDestroy)
+00557c18 _ZTV9Obj4207c0 evidence size:0x2c vtable of Obj4207c0 (stored by FUN_0040a2c0)
+00557ca0 _ZTV9Obj42080c evidence size:0x30 vtable of Obj42080c (stored by FUN_004151b0)
+00557cd0 _ZTV9Obj42083c evidence size:0x30 vtable of Obj42083c (stored by FUN_00415be0, filter4PolyExtDestroy)
+00557d00 _ZTV9Obj557d00 evidence size:0x10 vtable of Obj557d00 (stored by FUN_001581dc, FUN_004162a4)
+00557d58 _ZTV9Obj557d58 evidence size:0x10 vtable of Obj557d58 (stored by FUN_0041a3ac, tablePairDestroy)
+00557dcc _ZTV9Obj557dcc evidence size:0x10 vtable of Obj557dcc (stored by FUN_00188340, FUN_0041c63c)
+00557ddc _ZTV9Obj42094c evidence size:0x30 vtable of Obj42094c (stored by FUN_0041cbac, filter4PolyDestroy)
+00557e0c _ZTV9Obj420990 evidence size:0x30 vtable of Obj420990 (stored by FUN_0041d6bc, FUN_0041db20)
+00557ee0 _ZTV9Obj420a2c evidence size:0x20 vtable of Obj420a2c (stored by FUN_00423a3c)
+00557f00 _ZTV9Obj557f00 evidence size:0x14 vtable of Obj557f00 (stored by )
+00558aac _ZTV9Obj558aac evidence size:0x10 vtable of Obj558aac (stored by FUN_002fe94c)
+00558b24 _ZTV9Obj558b24 evidence size:0x10 vtable of Obj558b24 (stored by FUN_002f3378, FUN_002f3490, FUN_002fa434)
+00558bd0 _ZTV9Obj558bd0 evidence size:0x10 vtable of Obj558bd0 (stored by FUN_002f1858, FUN_002f28bc)
+00558be0 _ZTV9Obj558be0 evidence size:0x20 vtable of Obj558be0 (stored by FUN_002f8574, destroyObj00558be8)
+00558c00 _ZTV9Obj558c00 evidence size:0x28 vtable of Obj558c00 (stored by FUN_002ecd54, FUN_002f31cc)
+00558c28 _ZTV9Obj558c28 evidence size:0x4c vtable of Obj558c28 (stored by FUN_0010a3a0, FUN_002f33b4)
+00558c90 _ZTV9Obj558c90 evidence size:0x2c vtable of Obj558c90 (stored by FUN_00300ae8, destroyObj00558c98)
+00558cbc _ZTV9Obj558cbc evidence size:0x20 vtable of Obj558cbc (stored by FUN_002f42ec, FUN_004324d4)
+00559020 _ZTV9Obj559020 evidence size:0x10 vtable of Obj559020 (stored by FUN_0030cbdc, FUN_0030cbf0, FUN_004325f4)
+005592ac _ZTV9Obj5592ac evidence size:0x10 vtable of Obj5592ac (stored by FUN_002fed24, FUN_002fedf4)
+00559374 _ZTV9Obj559374 evidence size:0x14 vtable of Obj559374 (stored by FUN_001104e8, FUN_002f58d0, FUN_0030262c)
+005596dc _ZTV9Obj5596dc evidence size:0x28 vtable of Obj5596dc (stored by FUN_0011468c, destroyObj005596e4)
+00559720 _ZTV9Obj559720 evidence size:0x20 vtable of Obj559720 (stored by FUN_0030723c)
+0055984c _ZTV9Obj55984c evidence size:0x2c vtable of Obj55984c (stored by FUN_001158c4, FUN_0030153c)
+00559edc _ZTV9Obj559edc evidence size:0x10 vtable of Obj559edc (stored by FUN_00117a90, FUN_00117b3c, FUN_002fd2a4, FUN_00514d48)
+00559eec _ZTV9Obj559eec evidence size:0x1c vtable of Obj559eec (stored by FUN_00120394, FUN_001327b4, destroyObj00559ef4)
+0055a178 _ZTV9Obj55a178 evidence size:0x64 vtable of Obj55a178 (stored by FUN_00311780)
+0055a218 _ZTV9Obj55a218 evidence size:0x3c vtable of Obj55a218 (stored by FUN_00119d20, FUN_00306c8c)
+0055a254 _ZTV9Obj55a254 evidence size:0x28 vtable of Obj55a254 (stored by FUN_001241e8, FUN_002ea268, FUN_002fd374)
+0055a314 _ZTV9Obj55a314 evidence size:0x14 vtable of Obj55a314 (stored by FUN_001296f0, FUN_0030e588)
+0055a328 _ZTV9Obj55a328 evidence size:0x20 vtable of Obj55a328 (stored by FUN_0030c9cc)
+0055a5a8 _ZTV9Obj55a5a8 evidence size:0x20 vtable of Obj55a5a8 (stored by FUN_00432b10, FUN_00433650)
+0055a918 _ZTV9Obj55a918 evidence size:0x14 vtable of Obj55a918 (stored by FUN_001298b8, FUN_0030e6cc)
+0055a9e0 _ZTV9Obj55a9e0 evidence size:0x10 vtable of Obj55a9e0 (stored by FUN_0030ca9c)
+0055aad4 _ZTV9Obj55aad4 evidence size:0x10 vtable of Obj55aad4 (stored by FUN_00413144, FUN_004336b4)
+0055aae4 _ZTV9Obj55aae4 evidence size:0x20 vtable of Obj55aae4 (stored by FUN_0030c9cc, FUN_00432d8c, FUN_00433740)
+0055ac38 _ZTV9Obj55ac38 evidence size:0x20 vtable of Obj55ac38 (stored by FUN_00413e50, FUN_0043378c)
+0055ac68 _ZTV9Obj55ac68 evidence size:0x48 vtable of Obj55ac68 (stored by FUN_0043387c)
+0055ad40 _ZTV9Obj55ad40 evidence size:0x14 vtable of Obj55ad40 (stored by FUN_00129998, FUN_0030e6b8)
+0055ada4 _ZTV9Obj55ada4 evidence size:0x14 vtable of Obj55ada4 (stored by FUN_00129a78, FUN_0030e588)
+0055add8 _ZTV9Obj55add8 evidence size:0x14 vtable of Obj55add8 (stored by FUN_00129b6c, FUN_0030e690)
+0055adec _ZTV9Obj55adec evidence size:0x14 vtable of Obj55adec (stored by FUN_00129c4c, FUN_0030e6cc)
+0055ae00 _ZTV9Obj55ae00 evidence size:0x14 vtable of Obj55ae00 (stored by FUN_00129d40, FUN_0030e6a4)
+0055aea8 _ZTV9Obj55aea8 evidence size:0x20 vtable of Obj55aea8 (stored by FUN_00129e20, FUN_0030e67c)
+0055af5c _ZTV9Obj55af5c evidence size:0x20 vtable of Obj55af5c (stored by FUN_00301590, FUN_003022b4)
+0055b12c _ZTV9Obj55b12c evidence size:0x10 vtable of Obj55b12c (stored by FUN_002f1744, FUN_002f292c)
+0055b28c _ZTV9Obj55b28c evidence size:0x20 vtable of Obj55b28c (stored by FUN_001227a8, FUN_002e6e34, FUN_002e6e5c)
+0055b334 _ZTV9Obj55b334 evidence size:0x14 vtable of Obj55b334 (stored by FUN_002eb108, destroyObj0055b33c)
+0055b8d0 _ZTV9Obj55b8d0 evidence size:0x24 vtable of Obj55b8d0 (stored by FUN_001ca5d0, FUN_0044b310)
+0055b8f4 _ZTV9Obj4214d8 evidence size:0x1c vtable of Obj4214d8 (stored by FUN_001cf5a4, FUN_0044b358)
+0055ba10 _ZTV9Obj55ba10 evidence size:0x24 vtable of Obj55ba10 (stored by FUN_001cadd8, FUN_0044e990)
+0055ba70 _ZTV9Obj421654 evidence size:0x2c vtable of Obj421654 (stored by FUN_001b25c0)
+0055bad0 _ZTV9Obj55bad0 evidence size:0x24 vtable of Obj55bad0 (stored by FUN_0017261c, FUN_001cae40, FUN_0044fc9c)
+0055bc7c _ZTV9Obj55bc7c evidence size:0x14 vtable of Obj55bc7c (stored by FUN_00456e98, FUN_00456f60)
+0055bc90 _ZTV9Obj55bc90 evidence size:0x3c vtable of Obj55bc90 (stored by FUN_001b77a8, FUN_00457010)
+0055c6a8 _ZTV9Obj4221a4 evidence size:0x28 vtable of Obj4221a4 (stored by FUN_0047c8b8)
+0055c6dc _ZTV9Obj4221d4 evidence size:0x1c vtable of Obj4221d4 (stored by destroyObj0055c6e4)
+0055c71c _ZTV9Obj422214 evidence size:0x18 vtable of Obj422214 (stored by FUN_00474b34, vtblPairInit55C724)
+0055c81c _ZTV9Obj55c81c evidence size:0x24 vtable of Obj55c81c (stored by FUN_00482758, owner1DDestroy)
+0055c9e4 _ZTV9Obj55c9e4 evidence size:0x24 vtable of Obj55c9e4 (stored by FUN_004afe50)
+0055ca08 _ZTV9Obj55ca08 evidence size:0xc vtable of Obj55ca08 (stored by FUN_002bd1f4, FUN_0049c3c0, FUN_004a82cc, FUN_004d08d0)
+0055ca14 _ZTV9Obj422594 evidence size:0x1c vtable of Obj422594 (stored by FUN_004d0b3c, FUN_004d0b58, FUN_004d0ba4)
+0057fff8 _ZTV9Obj57fff8 evidence size:0xc vtable of Obj57fff8 (stored by FUN_0013963c)
+005b3d14 _ZTV9Obj464cb0 evidence size:0x40 vtable of Obj464cb0 (stored by FUN_00156fd8)
+005c14bc _ZTV9Obj5c14bc evidence size:0x10 vtable of Obj5c14bc (stored by FUN_004351b8, FUN_0043596c)
+00558a3c _ZTV9Obj558a3c evidence size:0x14 vtable of the chain root of Obj559720 (stored by FUN_00106e4c)
+0055b314 _ZTV9Obj55b314 evidence size:0x20 vtable of the middle of the Obj559720 chain (stored by FUN_00300844 and the inline destructor)
+00559010 _ZTV9Obj559010 evidence size:0x10 vtable of the object Obj559020 embeds (stored by FUN_0010cc7c, FUN_0010cc4c, FUN_0010ccb0)
+003e5de8 _ZN9Obj557ae8D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj557ae8
+004062b0 _ZN9Obj557b58D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj557b58
+0040a2c0 _ZN9Obj4207c0D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj4207c0
+004162a4 _ZN9Obj557d00D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj557d00
+0041c63c _ZN9Obj557dccD1Ev inferred destructor (base-object variant): vtable slot 0 of Obj557dcc
+002fe996 _ZN9Obj558aacD1Ev inferred destructor (base-object variant): vtable slot 0 of Obj558aac
+002f3490 _ZN9Obj558b24D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj558b24
+002f28bc _ZN9Obj558bd0D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj558bd0
+002f3084 _ZN9Obj558be0D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj558be0
+002f31cc _ZN9Obj558c00D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj558c00
+002f33b4 _ZN9Obj558c28D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj558c28
+00300bf0 _ZN9Obj558c90D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj558c90
+002f42ec _ZN9Obj558cbcD1Ev inferred destructor (base-object variant): vtable slot 0 of Obj558cbc
+0030cbdc _ZN9Obj559020D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj559020
+002fedf4 _ZN9Obj5592acD1Ev inferred destructor (base-object variant): vtable slot 0 of Obj5592ac
+0030262c _ZN9Obj559374D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj559374
+002f31f0 _ZN9Obj5596dcD1Ev inferred destructor (base-object variant): vtable slot 0 of Obj5596dc
+00300860 _ZN9Obj559720D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj559720
+0030153c _ZN9Obj55984cD1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55984c
+002fd2a4 _ZN9Obj559edcD1Ev inferred destructor (base-object variant): vtable slot 0 of Obj559edc
+002fd360 _ZN9Obj559eecD1Ev inferred destructor (base-object variant): vtable slot 0 of Obj559eec
+00306c8c _ZN9Obj55a218D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55a218
+002fd374 _ZN9Obj55a254D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55a254
+00432d8c _ZN9Obj55a328D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55a328
+00433650 _ZN9Obj55a5a8D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55a5a8
+004336b4 _ZN9Obj55aad4D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55aad4
+00433740 _ZN9Obj55aae4D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55aae4
+0043378c _ZN9Obj55ac38D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55ac38
+00433a3c _ZN9Obj55ac68D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55ac68
+00301590 _ZN9Obj55af5cD1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55af5c
+002f292c _ZN9Obj55b12cD1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55b12c
+002e6e5c _ZN9Obj55b28cD1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55b28c
+003023f8 _ZN9Obj55b334D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55b334
+0044b310 _ZN9Obj55b8d0D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55b8d0
+0044b358 _ZN9Obj4214d8D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj4214d8
+0044e990 _ZN9Obj55ba10D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55ba10
+0044f20c _ZN9Obj421654D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj421654
+0044fc9c _ZN9Obj55bad0D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55bad0
+00456f60 _ZN9Obj55bc7cD1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55bc7c
+00457010 _ZN9Obj55bc90D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj55bc90
+0019241c _ZN9Obj4221d4D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj4221d4
+00474b34 _ZN9Obj422214D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj422214
+004d0ba4 _ZN9Obj422594D1Ev inferred destructor (base-object variant): vtable slot 0 of Obj422594
+00409f80 _ZN9Obj420794D0Ev inferred deleting destructor of Obj420794
+00415450 _ZN9Obj42080cD0Ev inferred deleting destructor of Obj42080c
+004160e0 _ZN9Obj42083cD0Ev inferred deleting destructor of Obj42083c
+0041cfa4 _ZN9Obj42094cD0Ev inferred deleting destructor of Obj42094c
+0041db20 _ZN9Obj420990D0Ev inferred deleting destructor of Obj420990
+0041a408 _ZN9Obj557d5cD0Ev inferred deleting destructor of Obj557d5c
+004070b4 _ZN9Obj557b68D0Ev inferred deleting destructor of Obj557b68
+00416294 _ZN9Obj557d00D0Ev inferred deleting destructor of Obj557d00
+00109f42 _ZN9Obj558be0D0Ev inferred deleting destructor of Obj558be0
+0010a036 _ZN9Obj558c00D0Ev inferred deleting destructor of Obj558c00
+0010b188 _ZN9Obj558cbcD0Ev inferred deleting destructor of Obj558cbc
+00114c82 _ZN9Obj559720D0Ev inferred deleting destructor of Obj559720
+00119eda _ZN9Obj55a254D0Ev inferred deleting destructor of Obj55a254
+0012127a _ZN9Obj55af5cD0Ev inferred deleting destructor of Obj55af5c
+00122c3a _ZN9Obj55b334D0Ev inferred deleting destructor of Obj55b334
+004733bc _ZN9Obj4221a4D0Ev inferred deleting destructor of Obj4221a4
+00109f6e _ZN9Obj558c007vfunc1cEv evidence calls rc4KeySetup then saves the keyed state; vtable slot 7 of Obj558c00
+0010a01c _ZN9Obj558c007vfunc08EiP14Obj558c00Range evidence prepares the range and calls vfunc0c; vtable slot 2 of Obj558c00
+002fdfa6 _ZN9Obj558c007vfunc10EiP14Obj558c00Range evidence prepares the range and calls vfunc14; vtable slot 4 of Obj558c00
+004d0af0 _ZN13ObjBase3c2ef07vfunc0cEv evidence hands the window rectangle to the screen (twin of smt4 FUN_003c2ef0, shared by Obj4221a4/Obj4223ac)
+003e5d10 _ZN9Obj557ae8C1Ev inferred constructor: stores the vtable and builds the three slots
+00406260 _ZN9Obj557b58C1Ev inferred constructor: stores the vtable and clears the array
+00188340 _ZN9Obj557dccC1Ev inferred constructor: stores the vtable and clears the array
+0010ccb0 _ZN9Obj559010D1Ev evidence destructor of the 0x50-byte object Obj559020 embeds (vtable 0x559010)
+0030723c _ZN9Obj559720C1Ei evidence constructor: builds the base with 0 and keeps the extra word
+00399804 _ZN9Obj464cb010post0f0107Ev evidence posts the object ORed with the selected word, id 0xf0107; vtable slot 5
+0035954c _ZN9Obj464cb010post0f0101Ev evidence posts 0xe40100 with id 0x20100, then the object and id 0xf0101; vtable slot 6
+0036bb44 _ZN9Obj464cb010post0100e0Ev evidence posts two commands with 1 (ids 0xf0111, 0xf0110) then the object with id 0x100e0; vtable slot 8
+0039988c _ZN9Obj464cb014post0f0107HeaderEv evidence posts the object with the selected word masked in, id 0xf0107 then 0x80126; vtable slot 3
+004785b4 _ZN9Obj52623816leaveWhenAocFreeEv inferred returns the scene to state 3 and deletes its child when no add-on content flag is set; step 0x526238 table
+00468028 _ZN9Obj5333c015chooseNextStateEv inferred after the transition picks state 5 or 4 from the mode byte; step 0x5333c0 table
+00497250 _ZN9Obj53604411enterState3Ev inferred after the transition flags the scene changed (0x102), saves the state and enters state 3; step 0x536044 table
+00496638 _ZN9Obj53604414waitControllerEv inferred enters state 5 once the controller reports 2; step 0x536044 table
+004a8550 calcPercentClamped evidence twin of smt4 calcPercentClamped (value*100/total clamped to 1..100)
+00360200 pairCompareByKeyThenOrder inferred qsort-style comparator: FUN_001ba3d4 key then record order byte
+004bd748 idListHasFlaggedRecord inferred true if any of 8 ids names a record with its flag set
+002e49dc digitValueInBase evidence char to digit value (0-9,A-Z,a-z) or -1 when >= base
+003e00f8 gameGetPlayerStat inferred returns the s16 stat at index 0-4 of the player data block
+0030c0d8 onlineSockAddrLessWithPort inferred strict ordering of two socket addresses: onlineSockAddrLess, then equal addresses by port byte
+00365920 mapIfStartTransition inferred sets the map interface busy flag and starts the transition selected by kind (0..5) through FUN_00246450
+003a1f88 effHolderSetParams inferred creates the holder's effect object on first use and rebuilds it for parameter set kind
+00370228 scrComm_SetGameStateText inferred script command storing argument 0 and string argument 1 into the game state
+002adc20 aocDataBlockResolveEntries inferred ensures the loaded block's entry list/count are resolved from its table file
+0016c560 skinObjectUpdateMatrices inferred rebuilds the skin matrices when dirty or when the bind matrix is not the identity
+003bbbcc scrComm_BtlCounterIsPositive inferred script command: pushes whether the battle counter selected by argument 0 is positive
+003c4854 btlUiAdvanceWidgets inferred when all readiness checks pass, updates the battle UI's first and second widgets
+0023e51c aocCollectLevelEntries inferred collects table 9/4 entries of a kind up to a level and appends a default entry
+004931e0 sceneTexturesAreLoaded inferred whether the texture node needed by scene 0x65-0x67 is loaded
+00435f1c idListCheck inferred twin of smt4 FUN_0035caf4
+0032d54c uiSpawnSlotMarkers inferred spawns a marker for each of the eleven slots below count except the skipped one
+004f5d2c btlUnitGetSkillValue inferred unit's current skill value or 0
+003341b0 mapBlockSetRequest inferred stores a request in the map block unless the mode forbids it
+003bb3a8 scrComm_NpcRoomStartEffect inferred starts effect kind for the room NPC with the given id/variant
+004a6da0 sortCompareByCategoryRankDesc inferred twin of smt4 FUN_003aac1c
+004a69e0 sortCompareByCategoryOrder inferred twin of smt4 FUN_003aa934
+001b4bd4 bitArrayCountSet1to500 inferred twin of smt4 FUN_0022169c
+00155050 modelCmdAppendPacked inferred twin of smt4 FUN_0011a3cc
+002efc0c debugOverlaySetShown inferred twin of smt4 FUN_00215a54
+002ab7ac uniteGetState inferred twin of smt4 FUN_001f302c
+003493c4 partyPanelGetState inferred state word of the party panel or 0
+0035d0a4 partyPanelGetMember inferred pointer to party panel member index (0-16) or NULL
+004249c4 stateObjectClassify inferred twin of smt4 FUN_003503ac
+0025c848 fadeObjectResetIfActive inferred twin of smt4 FUN_0029a268
+004bb7f4 dataTable22GetCount inferred twin of smt4 FUN_003bbf3c
+0035f690 scrComm_BtlLookupResult inferred twin of smt4 FUN_002e410c
+00368c24 scrComm_FormatDecimal inferred twin of smt4 FUN_002eb1f0
+003a440c aocMarkJumpRequestPending inferred twin of smt4 FUN_003100b8
+00375c04 scrComm_GetGlobalTableEntry inferred script command pushing entry argument 0 (0-31) of a global table
+003b66c8 effectEditorFree inferred frees the effect editor's handle holder and node list
+0036bafc nodeSetTranslation3f inferred twin of smt4 FUN_0029a014
+00159110 heapOwnerCreate inferred twin of smt4 FUN_002c3918
+00338ba4 lmapMainStateRefreshSetter inferred when the lmap main state exists: starts its setter at +0xf4, sets it from the base (unk40-100, unk48) and finishes it
+00194784 soundInfoOwnerReadInfo inferred reads the wave sound info for the owner reader and ORs in the owner object update result (vtable slot 0x48) when the object is enabled
+0036b9a8 cecSettingsSet inferred twin of smt4 FUN_002ebaec
+002377a8 scrComm_PopIntToVariable inferred twin of smt4 FUN_001aa158
+00352e04 gameFlagsWriteBit inferred sets or clears one bit of the flag bitmap at 0x167c of the flag block (gameFlagsGetBlock)
+00239234 gameDataCopySaveEntry inferred copies entry `index` (0x50 bytes, table at 0x5f0c of the save block) to the destination; 0 when index > 0x500
+003173c4 entryTableCallSlot3 inferred twin of smt4 FUN_002201f4
+00284168 ifTouchRegionAdd inferred twin of smt4 FUN_0029e054
+003c5848 commonBgReset inferred twin of smt4 FUN_0025a0e0
+00377028 dataTable23FindIndexByValue inferred index (from 1, s16) of the first data table 0x23 entry whose first or second value equals the key; 0 when none
+0039c6d8 dataTable5Sub3Lookup inferred twin of smt4 FUN_00229e94
+001871c0 trackAdvance inferred advances the track head by the step (previous kept), restarting at 0 (returns 1) at the end of its data for mode 1 or mode 2 with flag 1, else clamping to the end
+004f7520 handleSlotRelease inferred deletes the plain handle at +0x968 and the registry-registered handle at +0x960 (removed from g_handleRegistry first) of the 16-byte-stride slot, clears +0x96c
+00480838 aocRecordLookup83 inferred twin of smt4 FUN_00256810
+00480d20 aocRecordLookup84 inferred twin of smt4 FUN_0022e3f8
+0035bea0 eventTexReleaseJobs inferred twin of smt4 FUN_002e2028
+003d18e0 uiQuestSortListByEntryKind inferred twin of smt4 FUN_0032aa84: qsort of the quest menu list chosen by the selected entry kind
+002adba8 requestIdToCode inferred maps request ids 1..8 to codes 3..10, default 2
+0032b04c titleMainRelease inferred releases title texture tables and button help, frees the title block
+002c1e9c dataTableResolveEntryVariants inferred resolves each entry variant of data table 0x19 by matching the variant tables first entry id
+004bb904 itemResetOverLimitStates inferred resets item states whose limit entry is set and not above the level when the value drifted from its base
+003c18d8 scrCommBtlUnitSlotIsNegative inferred script command: pushes whether the selected slot value of the current unit is negative
+003e9f70 btlEffectsRelease inferred releases the battle background and slot effects and clears flag 1 of the owner state
+001c44b4 vramAreaGetBaseAddress inferred twin of smt4 FUN_002c37a0
+0032850c btlCameraDestroy inferred tears down the battle camera: job, gfx object, backend, registry entry; frees the block and stops the job
+004c3ac0 kindIdStore inferred stores a kind id (0..20 except 8 and 10) to the output, ignoring other ids
+003657f0 conditionalTableFindIndex inferred finds the index of the entry for an id whose flag conditions hold; -1 absent, -2 chain ended without a match
+0048550c nameEntryMenuClearTarget inferred after the confirm animation clears the name buffer selected by the menu target and enters state 8
+003e2038 aocLoaderUpdateRecords inferred twin of smt4 FUN_00334838
+0047c5f0 aocMainShutdown inferred releases the add-on content main subsystems, deletes its loader and finishes the block
+004f61b0 btlUnitSlotBind inferred binds a battle unit slot to the entry for two arguments of the battle state, or marks it empty
+00349af0 partyPanelIsActive inferred twin of smt4 FUN_00262f14
+002decb4 btlEditorUpdate inferred runs the battle editor step for the current job work; 0 when there is no editor
+005737e0 g_btlEditor inferred battle editor object pointer passed to FUN_004f4938
+0018439c requestKindToId inferred maps request kinds 0..15 to ids (0 for unknown)
+00348718 scrCommBustupCutAnimStart inferred script command: starts the bust-up cut animation and pushes its id
+001ad10c aocSlotRelease inferred releases the slot texture node and handle and marks it inactive
+00390548 objResourceReplace inferred drops the object resource (+0x44) and creates a new one
+002b7478 dataTable00GetCurrentValue inferred 15-bit value of the table-00 record for the current id
+002b26b0 entryCompareByRank inferred qsort comparison by rank (kind 10 entries ranked +-99 by flags) then first halfword
+003e5478 controllerTargetNodeStart inferred forwards id and timing to the controller target node when it has one
+0038d860 scrCommTalkBustUpStart inferred script command: first frame starts the talk bust-up for the id; returns whether it is done
+00201e1c vec4Forward inferred twin of smt4 FUN_0025be2c
+003c16b8 statusDownGetCursorPosition inferred status screen cursor position, -1 when the screen does not exist
+002ef6c4 refSlotInit inferred fills a slot taking a shared reference on the given object and storing three values
+0016dfc4 resultReportIfFailed inferred twin of smt4 FUN_002bcd44
+00381830 textureSlotReplace inferred twin of smt4 FUN_002472f0
+0038ad6c scrCommGameValueGet inferred script command: pushes game value A (arg 0) or B (arg 1)
+003f3d54 slotPlacementSetSlot inferred twin of smt4 FUN_00269c7c
+004012f0 markerOwnerUpdatePositions inferred moves each of the owner three markers to the owner position
+00379310 lmapSceneMarkerStart inferred starts an id on the lmap scene marker with no delay
+003f25b4 slotTableStateIsActive inferred true when the slot state is 0..3
+0033f950 naviMainQueueRequest inferred queues an id on the navi request with no extra parameters
+002fde98 dataTableCompareIdsByOrder inferred qsort comparison of two ids by their records order byte
+0016887c entryListCurrentIsUsable inferred twin of smt4 FUN_001264c4
+003b6808 eventTexGetCurrent inferred current value of the event texture block, 0 when there is none
+0063e1e8 g_asdSoundSystem inferred sound system block holding the SoundArchivePlayer at 0x194
+003ece6c btlScriptUnitIsNotKind6 inferred true when the script unit exists and is not of kind 6
+0040a5e4 questCenterAddPoints inferred twin of smt4 FUN_00343ba0 (stats block counter)
+00142a78 asdProcessSetCommandListRecording inferred twin of smt4 FUN_0010d230
+002e3c36 libcLocaleGetCategory inferred twin of smt4 FUN_002c66f2
+0031c3b8 scrCommSoundChannelRequestByName inferred script command: resolves the sound named by string arg 0 and requests it with args 1 and 2 clamped at 0
+004288bc queryResultFailureOnly inferred twin of smt4 FUN_0023a0b4
+002bd910 gameDataBlocksAddFloat inferred adds a float to the value at +0x1F0 of the sub-block at +0x5274 of the game data blocks
+0031d1fc gameDataBlocksClearSlots inferred zeroes the two words and the 0x4C-byte table at +0x2D68 of the game data blocks
+0037d320 scrCommSetResultFromClass inferred twin of smt4 FUN_002f6044
+00375848 btlTalkBustUpGetId inferred twin of smt4 FUN_002f25f0
+003796d4 aocDataTable23GetEntry inferred twin of smt4 FUN_002481e8
+003a7bdc statusDownEnterState1 inferred sets status screen state 1 (remembering the previous one) and clears its timer
+003275c0 aocDataTable2dGetEntryKind3 inferred returns entry index of data table 0x2d kind 3: base entries then add-on entries, NULL when out of range
+003fd540 saveDataClearValues inferred clears the five packed values (four words and a halfword) of one record of the save data
+0047393c ownerReleaseResources inferred releases the object and the buffer an owner holds, clearing both members
+004a4a10 jobOwnerStopB inferred releases the child, clears registry flags 0-1, finishes the owner through its vtable and stops its job
+00319ca4 holderKindIsActive inferred whether the current holder exists and its kind is 3, 5, 6 or 7
+0046c474 aocContentLookupSucceeds inferred twin of smt4 FUN_00385f34
+002a3aa8 scrCommEventTexJobCreate inferred script command: creates an event texture job from arguments 0..2 when allowed and pushes its handle (0 when not)
+003339bc useCounterSelectMode2 inferred twin of smt4 FUN_002cf384
+00513a30 mobiclipAllocatorReset inferred twin of smt4 FUN_003f63bc
+00303504 blockResetAxis inferred resets the block timer and step state with the given value and sets its axis vector to (0, 0, 1)
+004a7068 dataTable00CompareByValueAscending inferred qsort comparison of two ids by table record value (ascending), devil grade (descending), then id
+004a74c0 dataTable00CompareByValueDescending inferred qsort comparison of two ids by table record value (descending), devil grade (ascending), then id (descending)
+004a6ea4 devilCompareBySkillRank inferred twin of smt4 FUN_003aad38
+002ce824 devilCompareByRankGradeAscending inferred qsort comparison of two devil ids by rank (ascending), grade (descending) and id (ascending)
+0034f4f0 itemCompareByNibbles inferred qsort comparison of two ids by the records high and low nibble (descending), then order (ascending)
+002c7a9c slotBlockSetPair inferred stores two words into pair 0 or 1 of the slot block of the game data blocks
+0036f814 scrCommRecordProgressWait inferred script command: on the first frame starts FUN_0036b6cc when record 0x7B6 has a count, then reports whether FUN_003c3ec4 is done
+00318054 renderStatePop inferred pops a render state from the stack and applies the state below when it differs or the stack is dirty
+00401578 childrenLowerToLevel inferred calls FUN_003fe86c with mode 2 for every child whose current value exceeds the given level
+001947dc soundGroupUpdate inferred reads the sound group info and ORs in the active child update result
+0035c354 scrCommBgmPlay inferred script command: looks up argument 0 as a BGM name and plays it with arguments 1 and 2 clamped at 0
+0032c430 listBoxItemHasOwner inferred twin of smt4 FUN_0022a444
+002b2a94 entryRefCompareByKey inferred twin of smt4 FUN_001f625c
+002fdec8 entryRefCompareByOrder inferred qsort comparator: looks both entries up by id and subtracts their key (u8 at +0x43)
+002d0044 gameFlagStateIsOne inferred game flag 0x4D0 is set and the state block (+8) is 1
+00318100 binFileGetValue inferred twin of smt4 FUN_0024baec
+00300820 sharedRefHolderReplace inferred replaces the held shared reference: releases the old one, stores the new one and adds a reference
+002844e4 msgWindowReset inferred twin of smt4 FUN_0028971c
+0047314c jobOwnerFreeSlotAndStop inferred twin of smt4 FUN_0027eb30
+004084f8 bitTableSetFlag inferred twin of smt4 FUN_00342134
+003a6c18 textureSlotsReleaseAll inferred twin of smt4 FUN_00310ac0
+00327678 dataTable2aGetEntryWithAoc inferred entry `index` of table 0x2A/0, continuing into the AOC content entries
+0019e130 markerKindGetColor inferred RGBA color for a marker kind (switch over 1,3,5-13), white otherwise
+0035ffcc entryRefCompareByGroupThenOrder inferred qsort comparator: group bits of +0x24 then order u16 at +0x70, descending
+0040456c entryRefCompareByOrderDefault inferred qsort comparator: entry order (u16 at +0), 999 for a missing entry
+0035dde8 uniteIsPhase26Active inferred unite exists, state != 0x28, game flag 0x458 clear, phase 0x1A and active byte set
+0035fd60 entryRefCompareByRankOrderId inferred qsort comparator: rank, order (descending) then id
+003126a0 recordSetValueAndName inferred finds the record by id and stores its value and name
+002fdfc0 entryRefCompareByKindLevelOrder inferred qsort comparator: kind-2 entries first, then level and order descending
+003de830 recordIsAvailable inferred record exists, FUN_003df390 holds and the flag A/B gating allows it
+002fd284 _ZN9Obj559eccC1Ev evidence constructor: stores the vtable at 0x559ecc (+8), clears byte 4, constructs two Obj55aff4 members at 8 and 0x10 (matches once the name and callee names are applied)
+002ea0e4 _ZN9Obj55aff4C1Ev evidence constructor of the 0x55aff4 object: stores its vtable (+8) and initialises the string at 4
+00559ecc _ZTV9Obj559ecc evidence size:0x10 vtable (offset-to-top, RTTI, D1, D0); the next vtable starts at 0x559edc
+0055aff4 _ZTV9Obj55aff4 evidence size:0x10 vtable (offset-to-top, RTTI, D1, D0); the next vtable starts at 0x55b004
+0034f378 recordCompareByKey evidence twin of smt4 recordCompareByKey (identical structure: difference of the +0x32 keys of the records two entries refer to)
+00188374 fileHandleClose inferred closes the handle at +8 (low bit marks a non-closable handle: fatal error) and clears it (twin)
+003efa38 btlPosArrangeGetFileName evidence builds "battle/pos_arrange/00_%04d.earg" / "01_%04d.earg" into a local buffer from the two set ids
+00421314 deadEffectStartLoad evidence builds "battle/dead_effect/dead_effect%d.bcmdl" (smt4a .bam) and starts loading the dead effect model (twin)
+001695c8 texTableFindNode inferred walks the texture slot list for the node with the given id (twin)
+00271cb4 effMiscDestroy inferred twin of smt4 effMiscDestroy (identical source)
+004f1a54 btlCameraObjectCreate inferred allocates (0x48 bytes, btlCamera.cpp line 1089) and constructs the camera object on first use
+002d2288 gameFlagIsSetByBlock inferred tests one bit of the flag block at +0x808 (flag number / 32)
+00364444 gameFlagIsSetByBlockAt156c inferred tests one bit of the flag block at +0x156C (flag number / 32)
+00384ca8 gameFlagIsSetByBlockAt14f8 inferred tests one bit of the flag block at +0x14F8; flags below 1 are never set
+0049cbac btlRollClamped inferred divides FUN_0022ea28() by a divisor, clamps to 0-99 and then to the id's available count (twin)
+004279d4 _ZN9Obj4279d4C1Ejj inferred constructor of a class with no vtable: zero-initialises 11 members and constructs a two-word range member from the arguments (returns this); named after its address until the real name is known
+00350ff0 effTlpReplace inferred twin of smt4 FUN_002de424
+00364530 gameFlagsBitSet inferred sets or clears bit N of the bit set at +0x784 of gameFlagsGetBlock()
+003a320c dataTable23Section5CountWithExtras inferred twin of smt4 FUN_0030f6cc
+00290e04 entryListSetPhase inferred twin of smt4 FUN_00256f88
+002852f0 messageSlotSet inferred twin of smt4 FUN_0028dc68
+0031d62c messageWindowIsState1 inferred twin of smt4 FUN_00290eb0
+00347664 gameObjectFlagIsSet inferred twin of smt4 FUN_002d8214
+002abff8 uniteSetMode inferred twin of smt4 FUN_00269da0
+002e54f4 scrCommJobStopOrSetOffset inferred twin of smt4 FUN_00211ef4
+003b048c scrCommSetMode inferred twin of smt4 FUN_00317d90
+002f1334 seq16IsGreaterOrFlag inferred FUN_002efb80() || seq16IsGreater(a, b)
+00513288 handleObjectRelease inferred twin of smt4 FUN_003f5c14
+004bbc34 flagsBit7Get inferred bit 7 of byte +3 of FUN_00152978()'s object
+003c3154 dataTable29Section6Count inferred entry count of data table 0x29 section 6
+003e5728 linkedTargetSetFloat inferred stores a float at +0x1fc of owner->link->target when it exists
+004d8700 targetStartIndexWithFlag2 inferred calls FUN_003fda08(target handle, index, 2, 0.0) when the held target exists
+00316164 ownerChildNotifyEarlyState inferred for owner states 0..2 hands the owner's child to FUN_0049597c; returns 0
+00324c78 gameFlagsValueGet inferred signed byte index of the value table at +0xe48 of the game flags block
+0040792c listSelectItem inferred marks the previously selected item's widget flag bit 0 and clears it for the new selection (negative = none)
+00138cf8 gameDataBlocksMaskClearBits inferred clears bits from the mask at +0x1c and records whether it is empty at +2
+00167cf8 entryWorkSwitchTo inferred switches the job's entry work to table entry `index`, remembering the previous id and starting the load
+00235ce0 naviMenuStartIfIdle inferred runs FUN_00492088 on the navi menu when FUN_004931e0 holds and the navi is idle; returns 0
+00305696 ownerChildValue inferred value word +0x24 of the owner's child or 0
+00331368 partyPanelValueGet inferred party panel's word +0xfc8 or 0 without a panel
+0035f150 scrCommUnitSlotSet inferred script command: stores script argument 0 in slot (argument 1, < 16) of the script unit's stats +0x3b4
+00378924 hakaiEntriesNotify inferred passes every used entry of g_mapHakai (16 x 0x54 bytes from +0x5c) to FUN_0033c9f0
+0038c3c8 scrCommUnitSlotKindIs3 inferred script command: slot kind (halfword >> 10) of script unit stats equals 3
+00418768 flagSetAllCoveredBy inferred returns 0 when some defined unblocked entry has exactly the set mask
+004706a8 aocReadyAndAccepts inferred true when FUN_001b3148(g_aocMain) holds and FUN_001b2d88(a, 0x38, b) accepts
+004c621c slotStreakUpdate inferred for each used slot counts up record +0x12a while bit 10 is set, else resets it
+003e1390 contentRequestStart inferred starts loading a content request through the add-on content system or the default source
+004c3c84 btlSlotSetStoreValue inferred stores a value at an index of the slot set FUN_003f0e20 finds for the key
+002d8af4 mapIfOverlayRelease inferred releases the map interface overlay object through its vtable and clears the active flag
+003ec580 btlMainBuffersFree inferred frees the battle module's buffers (the shared ones too on request) and the state block's buffer
+002eefc4 onlineEntryApply inferred applies the entry at an index, stamping the set with the given time unless the owner keeps local time
+004a8454 gaugePercent inferred value*100/max clamped to 0..100, at least 1 while positive
+0019f1a4 gameFlagEntryGetBit inferred reads bit 0-4 of the game flag entry, or asks FUN_001ada74 for case 5
+002a3bd4 scrCommJobStartWithFloat inferred script command: starts a job from args 0-4 (arg 3 float) when allowed and returns its handle
+0039d35c scrCommBattleGaugeAtLeast inferred script command: true when the battle gauge is filled to at least arg0 percent
+003a7888 scrCommEnableKinds inferred script command: runs FUN_004d9e58 for kinds 3,4,5 when args 0,1,2 are set
+002f2910 ptrVectorFree inferred walks the vector's element range then frees its storage
+00321298 workTablesClear inferred state 0x28 clears the current entry of both tables, otherwise clears the second table and switches state to 0x1c
+0039ec5c recordCompareByRank inferred sort comparator over two record ids: rank high nibble, rank low nibble, then order descending
+002e6134 messageStateEndMode2 inferred ends the message window's mode 2; clears the box's bit 7 unless flag 0x20 is set
+0047da90 handleOwnerClose inferred stops the owner if started and closes its kernel handle
+003983b8 contentEntryGet inferred entry of data table 0x23 section 4, continuing into the add-on content's extra entries
+003c3ec4 sceneHolderUpdate inferred destroys the held scene once its job ended; returns 0 while the job still runs
+003eaa14 saveSlotApplySelected inferred loads the selected save slot's data and applies it to the target
+00469e1c scenePartAdvanceState inferred once the handle reports 2 picks the next state (0x10 for kinds 1 and 2, else 3 resetting finished slots) and refreshes
+0015e068 queueRequesterNode inferred queues a kind-0x34 node for the requester on a channel when the requester accepts
+002feac0 ringPush inferred writes a word at the ring head, advances the head modulo capacity and counts it
+004ab854 btlUiPanelStart inferred when the menu is not in mode 5 and the panel accepts runs the menu step and initialises the panel
+00222260 effBlockLoadClone inferred loads a file, deep-clones it as an effect block, frees the loaded copy and returns the clone
+0013705c titleSceneStep inferred title step: forwards the pending value and starts the scene when ready and not skipped
+002e3f74 holderDeleteObject inferred runs the deleting destructor on the held object with FUN_002e3f68 as callback
+0039c410 statusDownEnterState11 inferred enters state 0x11 and restarts the timer, clearing the selection unless asked to keep it
+00358c60 thresholdIndexFind inferred index of the first threshold in the byte table that reaches the value, 0 when none
+004a1d04 ownerShutdown inferred releases the owner's child, clears its part, runs its stop slot and stops its job
+0037d358 scrCommOptionRandomPick inferred script command: when FUN_001b34b8 reports 1 picks one of the set option choices at random, default 2
+002a46d8 saveFlagGet27e1f inferred reads byte flag 0x27e1f of the save block
+003804ac scrCommBattleEntryApply inferred script command: runs FUN_004fe5dc on battle entry arg0 for the script's unit
+003a2fc4 contentEntryGetB inferred entry of data table 0x29 section 1, continuing into the add-on content's entries
+003a3070 contentEntryGetC inferred entry of data table 0x29 section 2, continuing into the add-on content's entries
+00389cb4 keyedRecordGetKey inferred key of keyed record index, 0 past the last record
+0030c6b4 vectorAt4 inferred address of the 4-byte element index of a vector, reporting an out-of-range index
+0030c6f0 vectorAt24 inferred address of the 24-byte element index of a vector, reporting an out-of-range index
+00359510 animPlayerSetLoopPolicy inferred sets the looping policy of the owner's active player: library loop policy or the one at 0x1b9f9c
+0041306c objectRegisterPart inferred registers the object's embedded part (+0x20) with a callback and returns the object
+0035dd74 contentEntryFindById inferred finds entry id: add-on content first, else data table 5 section 4 by binary search
+00192690 contentEntryFindById2 inferred finds entry id: add-on content first, else data table 8 by binary search
+003dc530 uiQuestSpritesCreate inferred loads QuestSys.mbm and creates the quest screen's four sprites
+00336da0 uiWorkEndState1 inferred state 1 ends: moves to state 6, clears the timer and starts the sprite's keyframe 0
+00398328 slotFindByPair inferred index of the slot holding the id pair, -1 when absent
+0030b190 mapIteratorNextAlt inferred second copy of the map iterator advance (tree successor), same code as mapIteratorNext8
+0035fc4c btlTalkBustUpReleaseContent inferred releases the bust-up's texture node and add-on content slot, then resets it to state 3
+004708a0 contentEntryGetFromFiles2 inferred entry index of the 0x1c-byte data tables (section 2) of the add-on content's files counted across all files
+004707d0 contentEntryGetFromFiles1 inferred entry index of the 8-byte data tables (section 1) of the add-on content's files counted across all files
+00493154 texSetRelease inferred drops one user of the loaded texture set; the last user releases its texture node
+001505ac paramsInit inferred fills a parameter block from its arguments (interleaved halfwords and words)
+00280f98 handlerFinishById inferred finishes the handler with the given id: stops its job, marks it done and clears its callback
+002681b0 runnerShutdown inferred updates the runner; once it is running stops and releases its child, stops its job and frees it
+002c1ce4 contentEntryDataGet inferred address of entry id's data: add-on content first, else data table 1 (second selects the part at +0x10)
+00160f90 blockOpen inferred clears the block, opens its handle and publishes it; on failure reports through the error callback and returns -1
+002ba400 mapTrapArm inferred arms the map trap (state 1 to 2) at the scene's position and angle; hide sets the hidden flag
+002ffd8c socketReset inferred resets a socket description
+0046de0c contentEntryGetFromFiles4 inferred entry index of the 0x10-byte data tables (section 2, '%' rows) of the add-on content's files counted across all files
+0046dedc contentEntryGetFromFiles5 inferred entry index of the 0x34-byte data tables (section 1, '%' rows) of the add-on content's files counted across all files
+00470080 contentEntryGetFromFilesByKind inferred entry index of the kind-6 data tables (section slot) of the add-on content's files counted across all files
+002b7af0 dataTableEntryNameById inferred name of entry id in data table 0x2e section 2; id 10 read as kind 9 or 10 has its own fixed name
+002121c4 slotIsReady inferred true when slot index is in use and, if waiting (state 3), its timer has run out
+0042d6a8 moduleStartOnce inferred starts the module once under its critical section; 0xc8a10bf0 when not initialised, else the failure from FUN_004320e4
+002fbfe8 byteRingWrite inferred appends bytes at the ring's head, wrapping at the capacity
+004188ec ownerUpdateChild inferred updates the owner's child and releases it once it is no longer running; marks the owner done
+0046eca4 aocQueueType08 inferred twin of smt4 FUN_003880c8
+004a691c itemCompareByCategory inferred twin of smt4 FUN_003aa870
+001641b4 eventQueueAddUniqueIfValid inferred twin of smt4 FUN_002bc01c
+0032c49c scrollListSetSelection inferred twin of smt4 FUN_00289058
+0038d9dc scrBtlGetEntryValueByListedId inferred twin of smt4 FUN_002e40cc (reads +0x25c)
+00276230 btlStageRunWork inferred twin of smt4 FUN_001d3e08
+00439020 ngwordStateReset inferred twin of smt4 FUN_0035f198
+0030c890 recordListAt inferred bounds-checked element access of a vector of 0x18-byte records (reports through FUN_002e32a4 when index >= size)
+0013a618 asdGxPresetRequest inferred twin of smt4 FUN_00105e38
+002e2030 campCecEditIsActive inferred g_campCecEdit exists and its byte at +0x10E is set
+0030c854 wordListAt inferred bounds-checked element access of a vector of words (reports through FUN_002e32a4)
+00345388 gameDataTestFlags inferred tests mask bits in the byte at +0x27E0F of the save-data part of g_gameDataBlocks
+00152978 gameDataGetTableEntry inferred address of entry FUN_001775a8() of the table at +0x2158C of the save-data part
+00588f9c g_fileSlot17Ref inferred twin of smt4 DAT_0044e068
+0049cf9c fileSlot17Acquire inferred twin of smt4 FUN_003a63c8
+0049d004 fileSlot17Release inferred twin of smt4 FUN_003a63f8
+002c0b5c cecProcessForward inferred twin of smt4 FUN_00259784
+00300124 effMenuListAppend evidence twin of smt4 effMenuListAppend
+00390274 effMenuListsClear evidence twin of smt4 effMenuListsClear
+00237764 scrOpPopFloatToVar inferred twin of smt4 FUN_001aa114
+0057ffd0 g_titleFlags inferred twin of smt4 DAT_00446db0
+004c6c08 flagsClearActionBits inferred clears eight fixed bits of a 16-bit flag word
+003493ac partyPanelGetFlag inferred byte at +0x9B4 of g_partyPanel, 0 without a panel
+003b1df8 scrSetSaveScriptValue inferred script command: stores its argument byte into the save data
+00312aa0 popupStart inferred starts the popup (state 3, remembers the argument and the handle FUN_002d8b58 returns) when idle
+003980ec saveSlotInfoSet inferred stores the id and name of a 0x17C-byte save slot info record
+00232228 effMiscUpdate inferred runs the per-kind update callback of the effect and advances its frame counter (twin of effMiscClone's table)
+004072b0 moveCameraCtrlCreateEntry inferred allocates (MoveCameraCtrl.cpp:0x1a3) and initialises camera entry `index`, registering its child
+00317c98 fileObjSeekRead inferred twin of smt4 FUN_00220280

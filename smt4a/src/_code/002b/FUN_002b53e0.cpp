@@ -11,7 +11,7 @@ int FUN_002c52d8(...);
 int FUN_002ed428(...);
 int FUN_0031e6f4(...);
 int FUN_00331c60(...);
-int FUN_004ab854(...);
+int btlUiPanelStart(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -33,7 +33,7 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_002ed428. */
 /* Supplied declaration required: FUN_0031e6f4. */
 /* Supplied declaration required: FUN_00331c60. */
-/* Supplied declaration required: FUN_004ab854. */
+/* Supplied declaration required: btlUiPanelStart. */
 
 
 /* WARNING: Removing unreachable block (ram,0x0038e4f0) */
@@ -69,7 +69,7 @@ void FUN_002b53e0(unsigned int *param_1)
     } while (temp_v0 < (int)param_1[0x10b]);
   }
   param_1[0x10b] = 0;
-  FUN_004ab854(g_btlUiBlock);
+  btlUiPanelStart(g_btlUiBlock);
   temp_v0 = g_btlUiBlock;
   *(unsigned int *)(g_btlUiBlock + 0x74a0) = 0x14;
   if (*(int *)(temp_v0 + 0x6140) != 0) {

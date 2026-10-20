@@ -1,36 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e1574` (_code @ 0x2e1574, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail builds the constant 0x30000 in r5 right after the first call (before the null test) and ORs flags through a second register; the constant is built where it is used here. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b9178(void);
-int asdTextureSetImage(void);
+typedef struct TextureImage {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ u32 format;
+} TextureImage;
 
-/* Supplied declaration required: FUN_002b9178. */
-extern int asdTMTexTableCallFileB(void);
-/* Supplied declaration required: asdTextureSetImage. */
+typedef struct Texture {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ TextureImage *image;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ u32 flags;
+} Texture;
 
+Texture *asdTMTexTableCallFileB(void);
+int FUN_002b9178(Texture *texture);
+int asdTextureSetImage(TextureImage *image);
 
-int FUN_002e1574(void)
-
+/* Fetches the texture, gives its image format 0x30000 and flags it (0x40, then 4 once the image is set). */
+Texture *FUN_002e1574(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = asdTMTexTableCallFileB();
-  if (temp_v0 != 0) {
-    FUN_002b9178();
-    if (*(int *)(temp_v0 + 8) != 0) {
-      *(unsigned int *)(*(int *)(temp_v0 + 8) + 8) = 0x30000;
-      *(unsigned int *)(temp_v0 + 0x10) = *(unsigned int *)(temp_v0 + 0x10) | 0x40;
-      if (*(int *)(temp_v0 + 8) != 0) {
-        asdTextureSetImage();
-        *(unsigned int *)(temp_v0 + 0x10) = *(unsigned int *)(temp_v0 + 0x10) | 4;
-      }
+    u32 format = 0x30000;
+    Texture *texture = asdTMTexTableCallFileB();
+
+    if (texture != NULL) {
+        FUN_002b9178(texture);
+        if (texture->image != NULL) {
+            texture->image->format = format;
+            texture->flags |= 0x40;
+            if (texture->image != NULL) {
+                asdTextureSetImage(texture->image);
+                texture->flags |= 4;
+            }
+        }
     }
-  }
-  return temp_v0;
+    return texture;
 }
 
 } /* extern "C" */

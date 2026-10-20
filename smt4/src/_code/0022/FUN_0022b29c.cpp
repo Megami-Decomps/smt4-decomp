@@ -12,7 +12,7 @@ int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002be624(unsigned char [36], unsigned char *, int);
 int memClear(char [256], int);
 int FUN_00387f88(int, int);
-int FUN_00389444(int, int, int);
+int contentEntryGetFromFilesByKind(int, int, int);
 int entryListReset(int);
 int entryListAppend(int, int);
 int FUN_003bb9d4(int);
@@ -39,7 +39,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_00387f88. */
-/* Supplied declaration required: FUN_00389444. */
+/* Supplied declaration required: contentEntryGetFromFilesByKind. */
 /* Supplied declaration required: entryListReset. */
 /* Supplied declaration required: entryListAppend. */
 /* Supplied declaration required: FUN_003bb9d4. */
@@ -125,7 +125,7 @@ LAB_0022b450:
   if (temp_v1 < temp_v0) {
     do {
       temp_v3 = g_aocSystem;
-      FUN_00389444(g_aocSystem,*(int *)(param_1 + 0xd64) + 1,temp_v1);
+      contentEntryGetFromFilesByKind(g_aocSystem,*(int *)(param_1 + 0xd64) + 1,temp_v1);
       if ((*(unsigned char *)(temp_v3 + 0x20) == 0) || (acStack_150[*(unsigned char *)(temp_v3 + 0x20)] == '\0')) {
         temp_v4 = *(unsigned int *)(param_1 + 0xd90);
         temp_v5 = *(unsigned int *)(param_1 + 0xd88);

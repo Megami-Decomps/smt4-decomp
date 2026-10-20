@@ -1,28 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cde88` (_code @ 0x2cde88, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail evaluates `id & 0xFF` twice (once before each gameGetCounters call, in r6 and r5); built computes it once, after the first call. */
+#include "common.h"
 
 extern "C" {
 
-extern int gameGetCounters(void);
-extern unsigned int scrGetArg(unsigned int);
+u32 *gameGetCounters(void);
+u32 scrGetArg(u32 index);
 
-
-unsigned int FUN_002cde88(void)
-
+/* Script command: raises counter (argument 0 & 0xFF) to argument 1 if it is lower. */
+u32 FUN_002cde88(void)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = gameGetCounters();
-  if (*(unsigned int *)(temp_v2 + (temp_v0 & 0xff) * 4) < temp_v1) {
-    temp_v2 = gameGetCounters();
-    *(unsigned int *)(temp_v2 + (temp_v0 & 0xff) * 4) = temp_v1;
-  }
-  return 1;
+    u32 id = scrGetArg(0);
+    u32 value = scrGetArg(1);
+
+    if (gameGetCounters()[id & 0xFF] < value) {
+        gameGetCounters()[id & 0xFF] = value;
+    }
+    return 1;
 }
 
 } /* extern "C" */

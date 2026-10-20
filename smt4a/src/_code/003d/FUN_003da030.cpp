@@ -10,11 +10,11 @@ int FUN_00164b5c(int, int, int, int, int, int);
 int vec2GetXInt(...);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
-int FUN_0016c560(...);
+int skinObjectUpdateMatrices(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int pairSetSecondResetFirst(...);
 int FUN_002199fc(...);
-int FUN_0025c848(...);
+int fadeObjectResetIfActive(...);
 int FUN_003346a8(...);
 int SBORROW4(int, int);
 int VectorSignedToFloat(...);
@@ -44,12 +44,12 @@ extern int vec2GetYInt(int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: pairSetSecondResetFirst. */
 /* Supplied declaration required: FUN_002199fc. */
-/* Supplied declaration required: FUN_0025c848. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: FUN_003346a8. */
 
 
@@ -170,7 +170,7 @@ unsigned int FUN_003da030(void)
     else {
       pairSetSecondResetFirst(temp_v3 + 0x8d8,0x18);
     }
-    FUN_0025c848(temp_v3 + 0x8d8);
+    fadeObjectResetIfActive(temp_v3 + 0x8d8);
     if (*(int *)(temp_v3 + 4) < 3) {
       temp_v2 = vec2GetXInt(temp_v3 + 0x590);
       temp_v3 = vec2GetYInt(temp_v3 + 0x590);
@@ -221,7 +221,7 @@ unsigned int FUN_003da030(void)
       (**(romwright_code **)(temp_v3 + 0x1274))();
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
-    FUN_0016c560(g_renderCtx);
+    skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
   }
   return 0;

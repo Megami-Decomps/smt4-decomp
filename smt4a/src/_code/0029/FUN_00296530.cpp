@@ -10,7 +10,7 @@ int linkHolderCopyWords(...);
 int FUN_003fda64(...);
 int FUN_0040ace8(...);
 
-int FUN_00201e1c(void);
+int vec4Forward(void);
 int FUN_003135bc(void);
 int FUN_00324cd0(void);
 int FUN_00324e38(...);
@@ -76,7 +76,7 @@ extern int DAT_005f1be8; /* 0x5f1be8 */
 extern int gameFlagsGetBlock(void);
 extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_00201e1c. */
+/* Supplied declaration required: vec4Forward. */
 /* Supplied declaration required: FUN_002db06c. */
 extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_003135bc. */
@@ -135,7 +135,7 @@ void FUN_00296530(void)
   
   temp_v0 = gameFlagsGetBlock();
   if ((0 < g_lmapScene[0x69]) && (g_lmapScene[0x68] != -1)) {
-    FUN_00201e1c();
+    vec4Forward();
     g_lmapScene[0x69] = g_lmapScene[0x69] - 1;
   }
   if ((char)g_lmapScene[0x4d] == '\0') {

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(int *);
 int FUN_002eb5f4(void);
@@ -27,7 +27,7 @@ extern unsigned char LAB_0011f7bc; /* 0x11f7bc */
 extern unsigned char LAB_0011fcb5; /* 0x11fcb5 */
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
@@ -97,7 +97,7 @@ LAB_0011f72a:
     (**(romwright_code **)(**(int **)(param_1 + 400) + 0xc))();
     temp_v3 = FUN_002ea3c0(temp_v6,&LAB_0011fcb5,0,&LAB_0011f7bc);
     FUN_002ea3d0(param_1,temp_v3);
-    FUN_002e6e5c(temp_v5);
+    _ZN9Obj55b28cD1Ev(temp_v5);
   }
   return;
 }

@@ -1,62 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e1114` (_code @ 0x3e1114, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation: retail keeps the entry table in r2 and the tested byte in r1 (built r1/r2), and stores the state word after the first clear in the final path */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003e03b0(...);
-int FUN_003f12d4(...);
+typedef struct Entry {
+    /* 0x000 */ u8 unk000[0x23A];
+    /* 0x23A */ u8 active;
+    /* 0x23B */ u8 unk23B[0x1CD];
+} Entry; /* 0x408 */
 
-typedef struct fn_003e1114_arg1 fn_003e1114_arg1;
-struct fn_003e1114_arg1 {
-    unsigned char pad_0x0[0x3];
-    byte field_0x3; /* +0x3 */
-    unsigned char pad_0x4[0x30];
-    undefined4 field_0x34; /* +0x34 */
-    unsigned char pad_0x38[0x32];
-    short field_0x6a; /* +0x6a */
-    unsigned char pad_0x6c[0x358];
-    unsigned char field_0x3c4; /* +0x3c4 */
-    unsigned char pad_0x3c5[0x3f];
-    void *field_0x404; /* +0x404 */
-};
+typedef struct Context {
+    /* 0x0000 */ u8 unk0000[0x1FFC];
+    /* 0x1FFC */ Entry *entries;
+} Context;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct Action {
+    /* 0x00 */ s32 state;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+} Action;
 
-/* Supplied declaration required: FUN_003e03b0. */
-extern int FUN_003f0f2c(fn_003e1114_arg1 *);
-/* Supplied declaration required: FUN_003f12d4. */
+extern void FUN_003f12d4(Context *ctx, s32 arg);
+extern s32 FUN_003f0f2c(Context *ctx);
+extern void FUN_003e03b0(Action *action, Context *ctx);
 
-
-void FUN_003e1114(unsigned int *param_1,fn_003e1114_arg1 *param_2)
-
+/* Starts the action: state 7 (after FUN_003f12d4) when one of entries 4-53 is active and
+ * FUN_003f0f2c refuses, otherwise state 8 through FUN_003e03b0. */
+void FUN_003e1114(Action *action, Context *ctx)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 4;
-  do {
-    if (*(char *)(*(int *)&param_2[7].field_0x3c4 + temp_v0 * 0x408 + 0x23a) != '\0') {
-      FUN_003f12d4(param_2,1);
-      *param_1 = 7;
-      param_1[4] = 0;
-      param_1[3] = 0;
-      temp_v0 = FUN_003f0f2c(param_2);
-      if (temp_v0 == 0) {
-        return;
-      }
-      break;
+    Entry **list = &ctx->entries;
+    Entry *entries = *list;
+    s32 i;
+
+    for (i = 4; i < 54; i++) {
+        if (entries[i].active != 0) {
+            FUN_003f12d4(ctx, 1);
+            action->state = 7;
+            action->unk10 = 0;
+            action->unk0C = 0;
+            if (FUN_003f0f2c(ctx) == 0) {
+                return;
+            }
+            break;
+        }
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x36);
-  param_1[4] = 0;
-  *param_1 = 8;
-  param_1[3] = 0;
-  FUN_003e03b0(param_1,param_2);
-  return;
+    action->state = 8;
+    action->unk10 = 0;
+    action->unk0C = 0;
+    FUN_003e03b0(action, ctx);
 }
 
 } /* extern "C" */

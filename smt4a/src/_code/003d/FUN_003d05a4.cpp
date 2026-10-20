@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014e188(...);
-int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
+int paramsInit(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
@@ -30,7 +30,7 @@ extern unsigned char DAT_0052c854; /* 0x52c854 */
 extern unsigned char DAT_0052c884; /* 0x52c884 */
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -148,7 +148,7 @@ LAB_003d06d4:
       FUN_00203b40(param_1,temp_v5,temp_v5,1,0,1);
       FUN_002a4964(param_1,*(unsigned int *)(param_1 + 0x88));
       Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 200);
-      FUN_001505ac(param_1 + 200,&DAT_0052c83c,0x18,&DAT_0052c854,0x30,0,0,0,0,&DAT_0052c884,0x70);
+      paramsInit(param_1 + 200,&DAT_0052c83c,0x18,&DAT_0052c854,0x30,0,0,0,0,&DAT_0052c884,0x70);
       FUN_0014e188(param_1 + 0xe8,0x24,0x57,param_1 + 200,1);
       uiSpriteSetKeyframe(param_1 + 0xe8,0);
       uiSpriteSetImageKeyframe(param_1 + 0xe8,0);

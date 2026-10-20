@@ -18,7 +18,7 @@ int asdMdlManagerDestroy(void);
 int eventQueueAddUnique(int);
 int libc_strcpy(unsigned char *, int);
 int FUN_002bf810(int);
-int FUN_002e8550(int, int);
+int mapFlagsWriteBit(int, int);
 int FUN_002e8a78(void);
 int FUN_002f3b14(void);
 int FUN_002f3bc0(void);
@@ -75,7 +75,7 @@ extern int FUN_0027ef00(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bf810. */
 extern int gameGetMapBlock(void);
-/* Supplied declaration required: FUN_002e8550. */
+/* Supplied declaration required: mapFlagsWriteBit. */
 /* Supplied declaration required: FUN_002e8a78. */
 /* Supplied declaration required: FUN_002f3b14. */
 /* Supplied declaration required: FUN_002f3bc0. */
@@ -259,7 +259,7 @@ LAB_002709b8:
                     *(unsigned char *)(temp_v1 + 0xdd5) = 0;
                   }
                   else {
-                    FUN_002e8550((int)(short)*(int *)(temp_v6 + 0x80),1);
+                    mapFlagsWriteBit((int)(short)*(int *)(temp_v6 + 0x80),1);
                   }
                   temp_v0 = *(short *)(temp_v6 + 0x7c);
                   if ((temp_v0 == 3 || temp_v0 == 4) || (temp_v0 == 5 || temp_v0 == 7)) {

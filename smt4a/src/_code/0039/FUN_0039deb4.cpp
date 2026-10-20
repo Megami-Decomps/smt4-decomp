@@ -1,32 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039deb4` (_code @ 0x39deb4, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_004fe5dc(int, unsigned int, int, int);
+typedef struct Unit {
+    /* 0x00 */ u8 unk00[0x1D0];
+} Unit;
 
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
+typedef struct MainState {
+    /* 0x0000 */ u8 unk0000[0x1ED4];
+    /* 0x1ED4 */ Unit *units;
+} MainState;
 
-extern int btlGetMainState(void);
-extern int scrGetArg(unsigned int);
-extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_004fe5dc. */
+extern u32 g_btlScriptUnit;
 
+s32 scrGetArg(u32 index);
+u32 btlUnitGet(u32 unit);
+MainState *btlGetMainState(void);
+int FUN_004fe5dc(s32 a, u32 caster, Unit *target, s32 b);
 
-unsigned int FUN_0039deb4(void)
-
+/* Script command: runs FUN_004fe5dc from the script unit on the unit given by argument 0. */
+u32 FUN_0039deb4(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
-  temp_v2 = btlGetMainState();
-  FUN_004fe5dc(0,temp_v1,*(int *)(temp_v2 + 0x1ed4) + temp_v0 * 0x1d0,1);
-  return 1;
+    s32 index = scrGetArg(0);
+    u32 caster = btlUnitGet(g_btlScriptUnit);
+
+    FUN_004fe5dc(0, caster, &btlGetMainState()->units[index], 1);
+    return 1;
 }
 
 } /* extern "C" */

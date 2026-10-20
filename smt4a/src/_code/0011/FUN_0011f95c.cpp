@@ -48,7 +48,7 @@ extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned ch
 /* Supplied declaration required: FUN_002f7cba. */
 extern unsigned int FUN_002fbd00(unsigned int, int);
 /* Supplied declaration required: FUN_0030568e. */
-extern unsigned long long FUN_00305696(unsigned int, unsigned int *);
+extern unsigned long long ownerChildValue(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_003056a0. */
 /* Supplied declaration required: FUN_00310784. */
 
@@ -86,7 +86,7 @@ void FUN_0011f95c(int param_1)
   temp_v8 = *(unsigned int *)(param_1 + 0x324);
   puVar2 = (unsigned int *)&temp_v7;
   FUN_002ec8f8(puVar2);
-  temp_v2 = FUN_00305696(*(unsigned int *)(param_1 + 400),puVar2);
+  temp_v2 = ownerChildValue(*(unsigned int *)(param_1 + 400),puVar2);
   temp_v3 = (unsigned int)((unsigned long long)temp_v2 >> 0x20);
   temp_v1 = *(int *)((int)temp_v2 + 0x18);
   temp_v4 = param_1 + 0x310;

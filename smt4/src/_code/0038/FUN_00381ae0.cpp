@@ -6,14 +6,14 @@ extern "C" {
 
 int dataTable1bOr1cGetRecord(void);
 int jyoucyuGetTableEntry(int);
-int FUN_003489c8(unsigned int);
+int flagEntryReset(unsigned int);
 int FUN_00348e10(void);
 
 extern int FUN_00240a6c(unsigned int);
 extern int FUN_00298fa0(unsigned int, unsigned int);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_003489c8. */
+/* Supplied declaration required: flagEntryReset. */
 /* Supplied declaration required: FUN_00348e10. */
 
 
@@ -35,7 +35,7 @@ int FUN_00381ae0(unsigned int param_1)
       dataTable1bOr1cGetRecord();
       if ((temp_v1 != 0) &&
          ((*(unsigned short *)(temp_v1 + 0x19c) != 0 && (*(unsigned short *)(temp_v1 + 0x19c) == param_1)))) {
-        FUN_003489c8(temp_v2 & 0xffff);
+        flagEntryReset(temp_v2 & 0xffff);
         temp_v3 = 1;
         jyoucyuGetTableEntry(0);
       }

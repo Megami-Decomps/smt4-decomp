@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c5d5c(void);
+int __aeabi_vec_ctor_nocookie_nodtor(void);
 int FUN_0037e0a4(unsigned char *, unsigned char *, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -25,7 +25,7 @@ extern unsigned char *DAT_00472354; /* 0x472354 */
 extern unsigned char *DAT_00472358; /* 0x472358 */
 extern unsigned char DAT_004ea168; /* 0x4ea168 */
 
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_0037e0a4. */
 
 
@@ -33,7 +33,7 @@ void FUN_003f3f34(int param_1)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_002c5d5c();
+  __aeabi_vec_ctor_nocookie_nodtor();
   *(unsigned int *)(param_1 + 0x38) = 0;
   *(unsigned int *)(param_1 + 0x3c) = 0;
   *(unsigned int *)(param_1 + 0x40) = 0;

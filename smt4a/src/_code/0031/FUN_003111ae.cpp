@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002e6e34(int *, int);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int onlineSockAddrCopy(int *, unsigned int);
 int FUN_002ec8a8(int, unsigned int);
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineSockAddrCopy. */
 /* Supplied declaration required: FUN_002ec8a8. */
 extern int *FUN_00311202(int);
@@ -34,7 +34,7 @@ void FUN_003111ae(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     FUN_002ec8a8(*piVar1,param_2);
     onlineSockAddrCopy(piVar1 + 1,param_3);
   }
-  FUN_002e6e5c(&uStack_20);
+  _ZN9Obj55b28cD1Ev(&uStack_20);
   return;
 }
 

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0010e05c(...);
 int FUN_002e6e34(...);
-int FUN_002e6e5c(...);
+int _ZN9Obj55b28cD1Ev(...);
 int FUN_002e93c2(...);
 int FUN_002ea704(...);
 int FUN_002f7270(...);
@@ -41,7 +41,7 @@ extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
 /* Supplied declaration required: FUN_0010e05c. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e93c2. */
 /* Supplied declaration required: FUN_002ea704. */
 extern unsigned int onlineGetActiveLock(void);
@@ -96,7 +96,7 @@ FUN_0010e300(fn_0010e300_arg0 *param_1,unsigned int param_2,unsigned short *para
       if (temp_v0) {
         param_1->field_0xc0 = temp_v4[0];
       }
-      FUN_002e6e5c(temp_v7);
+      _ZN9Obj55b28cD1Ev(temp_v7);
       return 1;
     }
   }
@@ -111,7 +111,7 @@ FUN_0010e300(fn_0010e300_arg0 *param_1,unsigned int param_2,unsigned short *para
     if (pfVar4 == (fn_0010e300_arg0 *)0x0) {
       FUN_002ea704();
       FUN_002f7270();
-      FUN_002e6e5c(temp_v7);
+      _ZN9Obj55b28cD1Ev(temp_v7);
       return 0;
     }
     if (temp_v8 != 0) {
@@ -136,7 +136,7 @@ FUN_0010e300(fn_0010e300_arg0 *param_1,unsigned int param_2,unsigned short *para
   if (temp_v0) {
     param_1->field_0xc0 = temp_v4[0];
   }
-  FUN_002e6e5c(temp_v7);
+  _ZN9Obj55b28cD1Ev(temp_v7);
   return 1;
 }
 

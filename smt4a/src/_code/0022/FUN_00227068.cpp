@@ -8,11 +8,11 @@ int FUN_00157558(int);
 int FUN_00164b5c(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(int);
-int FUN_0016c560(int);
+int skinObjectUpdateMatrices(int);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_00183bb0(void);
 int FUN_001879d0(int);
-int FUN_002adba8(int);
+int requestIdToCode(int);
 int sysMemClear(int [5], int);
 
 typedef int romwright_code(...);
@@ -38,12 +38,12 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_001879d0. */
-/* Supplied declaration required: FUN_002adba8. */
+/* Supplied declaration required: requestIdToCode. */
 /* Supplied declaration required: sysMemClear. */
 
 
@@ -84,29 +84,29 @@ void FUN_00227068(int param_1)
   }
   efctSetSpeed();
   sysMemClear(aiStack_68,0x48);
-  aiStack_68[1] = FUN_002adba8(0);
+  aiStack_68[1] = requestIdToCode(0);
   aiStack_68[1] = aiStack_68[1] * 1000;
-  temp_v7 = FUN_002adba8(1);
+  temp_v7 = requestIdToCode(1);
   aiStack_68[3] = (int)temp_v7 * (int)((unsigned long long)temp_v7 >> 0x20);
-  temp_v7 = FUN_002adba8(2);
+  temp_v7 = requestIdToCode(2);
   temp_v8 = (int)temp_v7 * (int)((unsigned long long)temp_v7 >> 0x20);
-  temp_v7 = FUN_002adba8(3);
+  temp_v7 = requestIdToCode(3);
   temp_v9 = (int)temp_v7 * (int)((unsigned long long)temp_v7 >> 0x20);
-  temp_v7 = FUN_002adba8(4);
+  temp_v7 = requestIdToCode(4);
   temp_v10 = (int)temp_v7 * (int)((unsigned long long)temp_v7 >> 0x20);
-  temp_v7 = FUN_002adba8(5);
+  temp_v7 = requestIdToCode(5);
   temp_v11 = (int)temp_v7 * (int)((unsigned long long)temp_v7 >> 0x20);
-  temp_v7 = FUN_002adba8(6);
+  temp_v7 = requestIdToCode(6);
   temp_v12 = (int)temp_v7 * (int)((unsigned long long)temp_v7 >> 0x20);
-  temp_v7 = FUN_002adba8(7);
+  temp_v7 = requestIdToCode(7);
   temp_v13 = (int)temp_v7 * (int)((unsigned long long)temp_v7 >> 0x20);
-  temp_v7 = FUN_002adba8(8);
+  temp_v7 = requestIdToCode(8);
   temp_v6 = 0.35f;
   temp_v14 = (int)temp_v7 * (int)((unsigned long long)temp_v7 >> 0x20);
   temp_v5 = temp_v6;
   FUN_001879d0(g_renderCtx);
   FUN_00164b5c(2,0x2e,aiStack_68[(unsigned int)*(unsigned char *)(param_1 + 0x22) * 2],(int)temp_v6,0,0xb);
-  temp_v1 = FUN_002adba8(*(unsigned char *)(param_1 + 0x22));
+  temp_v1 = requestIdToCode(*(unsigned char *)(param_1 + 0x22));
   temp_v2 = asdTMTexTableNodeIsLoaded(0x2e,temp_v1);
   if (temp_v2 != 0) {
     FUN_001879d0(g_renderCtx);
@@ -121,7 +121,7 @@ void FUN_00227068(int param_1)
     (**(romwright_code **)(temp_v2 + 0x1274))();
     *(unsigned char *)(temp_v2 + 0x1270) = 0;
   }
-  FUN_0016c560(g_renderCtx);
+  skinObjectUpdateMatrices(g_renderCtx);
   renderCtxResetColorScale(g_renderCtx);
   return;
 }

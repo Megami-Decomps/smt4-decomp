@@ -1,39 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034f5f8` (_code @ 0x34f5f8, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail clears the three words at 0x18 with one stm of three registers (zeros copied into r0-r2); built stores each zero separately */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0034ec10(void);
+typedef struct Object0034f5f8 {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0c */ s32 handle;     /* -1 when unset */
+    /* 0x10 */ u8 unk10[8];
+    /* 0x18 */ u32 words[3];
+    /* 0x24 */ u8 flagA;
+    /* 0x25 */ u8 flagB;
+} Object0034f5f8;
 
-typedef struct fn_0034f5f8_arg0 fn_0034f5f8_arg0;
-struct fn_0034f5f8_arg0 {
-    unsigned char pad_0x0[0xc];
-    int field_0xc; /* +0xc */
-    unsigned char pad_0x10[0x8];
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-    undefined4 field_0x20; /* +0x20 */
-    undefined1 field_0x24; /* +0x24 */
-    undefined1 field_0x25; /* +0x25 */
-};
+void FUN_0034ec10(s32 handle);
 
-/* Supplied declaration required: FUN_0034ec10. */
-
-
-void FUN_0034f5f8(fn_0034f5f8_arg0 *param_1)
-
+/* Releases the object's handle (if set) and clears its flags and words. */
+void FUN_0034f5f8(Object0034f5f8 *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_1->field_0xc != -1) {
-    FUN_0034ec10();
-    param_1->field_0x24 = 0;
-    param_1->field_0x25 = 0;
-    param_1->field_0x18 = 0;
-    param_1->field_0x1c = 0;
-    param_1->field_0x20 = 0;
-  }
-  return;
+    if (obj->handle != -1) {
+        FUN_0034ec10(obj->handle);
+        obj->flagA = 0;
+        obj->flagB = 0;
+        obj->words[0] = 0;
+        obj->words[1] = 0;
+        obj->words[2] = 0;
+    }
 }
 
 } /* extern "C" */

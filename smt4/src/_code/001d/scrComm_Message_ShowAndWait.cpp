@@ -1,45 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Message_ShowAndWait` (_code @ 0x1dc910, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002866b4(unsigned int, unsigned int, unsigned int, int, int, int);
-int FUN_0028dc98(int);
+s32 FUN_0028dc98(s32 arg);
+s32 FUN_0028660c(void);
+u32 FUN_002865f8(void);
+u32 scrGetArg(u32 index);
+u32 scrGetCommandFrame(void);
+s32 FUN_002866b4(u32 a, u32 b, u32 c, s32 mode, s32 wait, s32 f);
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern unsigned int FUN_002865f8(void);
-extern int FUN_0028660c(void);
-/* Supplied declaration required: FUN_002866b4. */
-extern unsigned int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_0028dc98. */
-extern unsigned int scrGetArg(unsigned int);
-
-
-void scrComm_Message_ShowAndWait(void)
-
+static void showMessage(s32 mode, s32 wait)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  FUN_0028dc98(0);
-  temp_v0 = FUN_0028660c();
-  if (temp_v0 == 0x14) {
-    temp_v0 = 5;
-  }
-  temp_v1 = FUN_002865f8();
-  temp_v2 = scrGetArg(0);
-  temp_v3 = scrGetCommandFrame();
-  FUN_002866b4(temp_v1,temp_v2,temp_v3,temp_v0,1,0);
-  return;
+    u32 a = FUN_002865f8();
+    u32 b = scrGetArg(0);
+    u32 c = scrGetCommandFrame();
+
+    FUN_002866b4(a, b, c, mode, wait, 0);
+}
+
+/* Script command: clears the message state and shows a message, waiting for it (mode 5 when the current mode is 20). */
+void scrComm_Message_ShowAndWait(void)
+{
+    s32 mode;
+
+    FUN_0028dc98(0);
+    mode = FUN_0028660c();
+    if (mode == 20) {
+        mode = 5;
+    }
+    showMessage(mode, 1);
 }
 
 } /* extern "C" */

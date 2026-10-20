@@ -18,7 +18,7 @@ struct fn_003bc688_arg2 {
 extern unsigned int *g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_0022ac3c. */
-extern int FUN_002ba698(fn_003bc688_arg2 *, unsigned int);
+extern int aocEntryFind(fn_003bc688_arg2 *, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int *dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int);
@@ -52,7 +52,7 @@ void FUN_003bc688(unsigned int *param_1,unsigned int param_2,fn_003bc688_arg2 *p
   param_1[5] = 0;
   param_1[0xc] = 0x3f800000;
   param_1[0xd] = 0x3f800000;
-  temp_v2 = FUN_002ba698(param_3,param_4);
+  temp_v2 = aocEntryFind(param_3,param_4);
   temp_v3 = dataTableGet(2);
   puVar5 = (unsigned int *)dataTableGetEntries();
   puVar7 = puVar5;

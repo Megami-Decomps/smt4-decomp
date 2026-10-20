@@ -30,7 +30,7 @@ extern signed char DAT_005b448c; /* 0x5b448c */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0030fc80. */
 /* Supplied declaration required: FUN_0042d5b4. */
-extern unsigned int FUN_0042d6a8(void);
+extern unsigned int moduleStartOnce(void);
 /* Supplied declaration required: FUN_0042e870. */
 extern unsigned int nn_cec_CTR_Base64Str2CecTitleId(unsigned char *);
 /* Supplied declaration required: nn_cec_CTR_MessageBox_GetMessageBoxNum. */
@@ -71,7 +71,7 @@ unsigned int FUN_0042ed58(int *param_1,unsigned int param_2,int param_3,int para
   uStack_30 = param_2;
   temp_v9 = param_3;
   temp_v10 = param_4;
-  temp_v0 = FUN_0042d6a8();
+  temp_v0 = moduleStartOnce();
   if (param_2 == 0) {
     temp_v0 = 0xc8810bea;
   }

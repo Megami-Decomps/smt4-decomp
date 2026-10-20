@@ -1,27 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030ab34` (_code @ 0x30ab34, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail writes state/prevState with one stm (r1 = 14, r2 = old state); armcc here stores them as separate pre-indexed stores. */
+#include "common.h"
 
 extern "C" {
 
-extern int g_statusDown; /* 0x44e190 */
+typedef struct StatusDown {
+    /* 0x000 */ u8 unk000[0x400];
+    /* 0x400 */ u32 state;
+    /* 0x404 */ u32 prevState;
+    /* 0x408 */ u32 unk408;
+    /* 0x40C */ u32 stateTime;
+    /* 0x410 */ u8 unk410[0x544 - 0x410];
+    /* 0x544 */ s32 cursor;
+} StatusDown;
 
+extern StatusDown *g_statusDown; /* 0x44e190 */
 
-void FUN_0030ab34(int param_1)
-
+/* Enters state 14 (remembering the previous one); resets the cursor when `keepCursor` is 0. */
+void FUN_0030ab34(s32 keepCursor)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = g_statusDown;
-  if (param_1 == 0) {
-    *(unsigned int *)(g_statusDown + 0x544) = 0xffffffff;
-  }
-  temp_v1 = *(unsigned int *)(temp_v0 + 0x400);
-  *(unsigned int *)(temp_v0 + 0x40c) = 0;
-  *(unsigned int *)(temp_v0 + 0x400) = 0xe;
-  *(unsigned int *)(temp_v0 + 0x404) = temp_v1;
-  return;
+    StatusDown *status = g_statusDown;
+    u32 old;
+
+    if (keepCursor == 0) {
+        g_statusDown->cursor = -1;
+    }
+    old = status->state;
+    status->stateTime = 0;
+    status->state = 14;
+    status->prevState = old;
 }
 
-} /* extern "C" */
+}

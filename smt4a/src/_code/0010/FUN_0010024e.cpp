@@ -1,49 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010024e` (_code @ 0x10024e, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int *FUN_002e2a98(void);
+typedef struct KeyTable {
+    /* 0x0 */ const u8 *flags;
+} KeyTable;
 
+KeyTable *FUN_002e2a98(void);
 
-unsigned int FUN_0010024e(unsigned int param_1)
-
+/* Built with --cpu=5TE -Ospace (see flags_Match4.txt). Derives a key's combined flag word from its raw table byte (the table has 256 entries; others give 0):
+ * the extra bits 0x400-0x1000 and 0x80 are computed from the raw bits, 0x20 is cleared when 0x80 isn't set. */
+u32 FUN_0010024e(u32 key)
 {
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  int *piVar3;
-  
-  if (param_1 >= 0x100) {
-    temp_v1 = 0;
-  }
-  else {
-    piVar3 = (int *)FUN_002e2a98();
-    temp_v0 = *(unsigned char *)(*piVar3 + param_1);
-    temp_v1 = (unsigned int)temp_v0;
-    if (((temp_v0 & 0x98) != 0) && ((temp_v0 & 1) == 0)) {
-      temp_v1 = temp_v1 | 0x400;
+    u32 flags;
+
+    if (key > 0xFF) {
+        return 0;
     }
-    if ((temp_v1 & 0x420) != 0) {
-      temp_v1 = temp_v1 | 0x800;
+    flags = FUN_002e2a98()->flags[key];
+    if ((flags & 0x98) != 0 && (flags & 0x01) == 0) {
+        flags |= 0x400;
     }
-    if ((temp_v1 & 0xba) != 0) {
-      temp_v1 = temp_v1 | 0x100;
+    if ((flags & 0x420) != 0) {
+        flags |= 0x800;
     }
-    if ((temp_v1 & 0xbe) != 0) {
-      temp_v1 = temp_v1 | 0x200;
+    if ((flags & 0xBA) != 0) {
+        flags |= 0x100;
     }
-    if (((int)(temp_v1 << 0x1a) < 0) && (-1 < (int)(temp_v1 << 0x18))) {
-      temp_v1 = temp_v1 | 0x80;
+    if ((flags & 0xBE) != 0) {
+        flags |= 0x200;
     }
-    else {
-      temp_v1 = temp_v1 & 0xffffffdf;
+    if ((flags & 0x20) != 0 && (flags & 0x80) == 0) {
+        flags |= 0x80;
+    } else {
+        flags &= ~0x20;
     }
-    if ((((temp_v1 & 1) != 0) && (-1 < (int)(temp_v1 << 0x19))) || (param_1 == 9)) {
-      return temp_v1 | 0x1000;
+    if (((flags & 0x01) != 0 && (flags & 0x40) == 0) || key == 9) {
+        flags |= 0x1000;
     }
-  }
-  return temp_v1;
+    return flags;
 }
 
 } /* extern "C" */

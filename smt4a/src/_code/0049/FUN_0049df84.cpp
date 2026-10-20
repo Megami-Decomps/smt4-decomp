@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001517b4(...);
 int FUN_00163aa4(int);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int uiSpriteSelectAnim(...);
 int asdTMTexTableReleaseNode(...);
 int FUN_001acf98(int, int);
@@ -29,7 +29,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int FUN_001643a0(void);
 extern int asdTMTexTableNodeIsLoaded(unsigned int, short);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
@@ -80,7 +80,7 @@ void FUN_0049df84(int param_1)
     temp_v4 = 0;
     FUN_001517b4(0,1);
     if ((temp_v4 != 0) || (temp_v2 == 6)) {
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
       temp_v0 = *(short *)(*(int *)(param_1 + 0x84) + 0x36);
       if ((temp_v0 != 0) && (temp_v2 = asdTMTexTableNodeIsLoaded(0x33,temp_v0), temp_v2 == 0)) {
         FUN_001acf98(0x33,temp_v0);
@@ -104,7 +104,7 @@ void FUN_0049df84(int param_1)
     temp_v2 = 1;
     FUN_001517b4();
     if (temp_v2 != 0) {
-      FUN_001641b4(0x100020f);
+      eventQueueAddUniqueIfValid(0x100020f);
       temp_v0 = *(short *)(*(int *)(param_1 + 0x84) + 0x36);
       if ((temp_v0 != 0) && (temp_v2 = asdTMTexTableNodeIsLoaded(0x33,temp_v0), temp_v2 != 0)) {
         asdTMTexTableReleaseNode(0x33,temp_v0);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned int *, int);
-int FUN_002e6e5c(unsigned int *);
+int _ZN9Obj55b28cD1Ev(unsigned int *);
 int FUN_002f4ab0(unsigned int, unsigned int);
 
 typedef int romwright_code(...);
@@ -19,7 +19,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002f4ab0. */
 extern unsigned int vectorCount4_002f4ba0(unsigned int);
 
@@ -45,7 +45,7 @@ long long FUN_002f4bfc(int param_1,unsigned int param_2,unsigned int param_3,uns
   FUN_002e6e34(&temp_v2,param_1 + 4);
   if (*(char *)(param_1 + 0x34) == '\0') {
     *(unsigned char *)(param_1 + 0x34) = 1;
-    FUN_002e6e5c(&temp_v2);
+    _ZN9Obj55b28cD1Ev(&temp_v2);
     temp_v1 = 0;
     temp_v2 = param_1 + 0x38;
     while( 1 ) {
@@ -74,10 +74,10 @@ long long FUN_002f4bfc(int param_1,unsigned int param_2,unsigned int param_3,uns
     }
     FUN_002e6e34(&temp_v2,param_1 + 4);
     *(unsigned char *)(param_1 + 0x34) = 2;
-    FUN_002e6e5c(&temp_v2);
+    _ZN9Obj55b28cD1Ev(&temp_v2);
     return romwright_piece_4_4(temp_v2,1);
   }
-  FUN_002e6e5c(&temp_v2);
+  _ZN9Obj55b28cD1Ev(&temp_v2);
   return (unsigned long long)temp_v2 << 0x20;
 }
 

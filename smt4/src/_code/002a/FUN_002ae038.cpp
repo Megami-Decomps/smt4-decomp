@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b1fc4(int *, int *, int *, int *, int, int);
-int FUN_002c5d5c(int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 
 /* stack frame of param_1: 14 slot(s), 56 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern unsigned char LAB_00141adc; /* 0x141adc */
 extern unsigned int DAT_004d4704; /* 0x4d4704 */
 
 /* Supplied declaration required: FUN_002b1fc4. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_002ae038(unsigned int *param_1)
@@ -69,7 +69,7 @@ void FUN_002ae038(unsigned int *param_1)
   unsigned int uStack_10;
   unsigned int uStack_c;
   
-  FUN_002c5d5c(&temp_v0,&LAB_00141adc,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(&temp_v0,&LAB_00141adc,0x10,4);
   temp_v0 = *param_1;
   uStack_84 = param_1[1];
   uStack_80 = param_1[2];

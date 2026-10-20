@@ -1,26 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023e330` (_code @ 0x23e330, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int g_aocMain; /* 0x432fc8 */
+extern u32 g_aocMain; /* 0x432fc8 */
 
-extern int FUN_002a6c5c(unsigned int, unsigned int, unsigned int);
-extern int FUN_002a6d08(unsigned int);
+extern int FUN_002a6c5c(u32 slot, u32 kind, u32 arg);
+extern int FUN_002a6d08(u32 context);
 
-
-unsigned int FUN_0023e330(unsigned int param_1,unsigned int param_2,int param_3)
-
+/* Whether FUN_002a6c5c accepts kind 12 for the arguments (after the context check, when `checkContext` is set). */
+u32 FUN_0023e330(u32 slot, u32 arg, s32 checkContext)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (((param_3 == 0) || (temp_v0 = FUN_002a6d08(g_aocMain), temp_v1 = 0, temp_v0 != 0)) &&
-     (temp_v0 = FUN_002a6c5c(param_1,0xc,param_2), temp_v1 = 0, temp_v0 != 0)) {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    u32 ok = 1;
+
+    if (checkContext != 0) {
+        ok = FUN_002a6d08(g_aocMain);
+    }
+    if (ok != 0) {
+        ok = FUN_002a6c5c(slot, 0xC, arg) != 0;
+    }
+    return ok;
 }
 
-} /* extern "C" */
+}

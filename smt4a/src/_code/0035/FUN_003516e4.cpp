@@ -11,7 +11,7 @@ int FUN_001d3e14(...);
 int FUN_001d3e54(...);
 int refCountIncrement(...);
 int FUN_00290c28(...);
-int FUN_00290e04(...);
+int entryListSetPhase(...);
 int FUN_00291644(...);
 int FUN_002b3c9c(...);
 int FUN_002ff7ac(unsigned short *, int, int);
@@ -141,7 +141,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_001d3e54. */
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_00290c28. */
-/* Supplied declaration required: FUN_00290e04. */
+/* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: FUN_00291644. */
 /* Supplied declaration required: FUN_002b3c9c. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -315,7 +315,7 @@ void FUN_003516e4(int param_1)
   temp_v8 = 0.0625f;
   temp_v11 = 0.0f;
   if (*(int *)(param_1 + 0x144) != 0) {
-    FUN_00290e04(*(int *)(param_1 + 0x144),temp_v4);
+    entryListSetPhase(*(int *)(param_1 + 0x144),temp_v4);
     FUN_00290c28(*(unsigned int *)(param_1 + 0x144),&temp_v74);
     temp_v68 = VectorFloatToUnsigned(temp_v79,3);
     temp_v89 = VectorFloatToUnsigned(fStack_9c,3);

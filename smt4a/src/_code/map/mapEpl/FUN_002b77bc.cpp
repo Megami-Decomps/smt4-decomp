@@ -10,7 +10,7 @@ int FUN_001642e4(unsigned char *, unsigned int [2], int, int);
 int gameFlagIsSet(...);
 int FUN_001abbc4(void);
 int FUN_001b4eb8(void);
-int FUN_003275c0(void);
+int aocDataTable2dGetEntryKind3(void);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -28,7 +28,7 @@ extern unsigned int *g_mapEpl; /* 0x580c88 */
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: FUN_001abbc4. */
 /* Supplied declaration required: FUN_001b4eb8. */
-/* Supplied declaration required: FUN_003275c0. */
+/* Supplied declaration required: aocDataTable2dGetEntryKind3. */
 extern int FUN_0038589c(void);
 
 
@@ -78,7 +78,7 @@ void FUN_002b77bc(int param_1,int param_2)
   if (0 < temp_v1) {
     do {
       pcVar4 = pcVar7;
-      FUN_003275c0();
+      aocDataTable2dGetEntryKind3();
       if (((*pcVar4 != -1) &&
           ((temp_v0 = *(short *)(pcVar4 + 0x1a), *(short *)(pcVar4 + 0x18) == 0 ||
            (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&

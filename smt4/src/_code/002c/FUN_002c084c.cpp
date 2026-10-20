@@ -29,7 +29,7 @@ extern int *FUN_001246cc(int *);
 /* Supplied declaration required: refCountIncrement. */
 extern int *FUN_0028c814(void);
 /* Supplied declaration required: asdEffectTextureCreate. */
-extern int FUN_0028c904(int *);
+extern int stexHeaderIsValid(int *);
 /* Supplied declaration required: FUN_002a8554. */
 /* Supplied declaration required: asdMemFree. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -46,7 +46,7 @@ void FUN_002c084c(int param_1,int *param_2)
   unsigned int unaff_r4;
   unsigned int in_lr;
   
-  temp_v1 = FUN_0028c904(param_2);
+  temp_v1 = stexHeaderIsValid(param_2);
   if (temp_v1 != 0) {
     asdEffectTextureCreate();
   }

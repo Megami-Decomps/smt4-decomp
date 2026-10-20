@@ -1,39 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00357cec` (_code @ 0x357cec, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int saveSlotFindSelected(void);
-int FUN_003e4e4c(int);
-int FUN_004bd410(int);
+extern u32 scrGetArg(void);
+extern s32 FUN_0019e52c(u16 id);
+extern void FUN_004bd410(u16 id);
+extern void saveSlotFindSelected(void);
+extern s32 FUN_00187168(void);
+extern void FUN_003e4e4c(u16 id);
 
-/* Supplied declaration required: saveSlotFindSelected. */
-extern int FUN_00187168(void);
-extern int FUN_0019e52c(unsigned short);
-extern unsigned short scrGetArg(void);
-/* Supplied declaration required: FUN_003e4e4c. */
-/* Supplied declaration required: FUN_004bd410. */
-
-
-unsigned int FUN_00357cec(void)
-
+/* Script command. */
+u32 FUN_00357cec(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = FUN_0019e52c(temp_v0);
-  if (temp_v1 != 0) {
-    FUN_004bd410(temp_v0);
-    saveSlotFindSelected();
-    temp_v1 = FUN_00187168();
-    if (temp_v1 == 0) {
-      FUN_003e4e4c(temp_v0);
+    u32 id = scrGetArg();
+
+    if (FUN_0019e52c(id) != 0) {
+        FUN_004bd410(id);
+        saveSlotFindSelected();
+        if (FUN_00187168() == 0) {
+            FUN_003e4e4c(id);
+        }
     }
-  }
-  return 1;
+    return 1;
 }
 
-} /* extern "C" */
+}

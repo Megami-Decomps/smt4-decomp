@@ -9,7 +9,7 @@ int FUN_0023959c(int, int, int, unsigned int);
 int FUN_0024ee68(int);
 int FUN_002ad66c(int *, int *);
 int FUN_002c567c(int *);
-int FUN_0035782c(void);
+int moduleStartOnce(void);
 int rt_memcpy_w(int, unsigned char [8], int);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
@@ -29,7 +29,7 @@ extern unsigned int DAT_004e62a8; /* 0x4e62a8 */
 /* Supplied declaration required: FUN_0024ee68. */
 /* Supplied declaration required: FUN_002ad66c. */
 /* Supplied declaration required: FUN_002c567c. */
-/* Supplied declaration required: FUN_0035782c. */
+/* Supplied declaration required: moduleStartOnce. */
 extern int nn_cec_CTR_MessageBox_ReadMessageBoxInfo(int, unsigned char *, unsigned int);
 extern unsigned int nn_cec_CTR_MessageBox_ReadOutBoxIndex(unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -53,7 +53,7 @@ int asdCecMessageBoxOpen(int param_1,unsigned int param_2,int param_3)
   unsigned int uStack_28;
   
   nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62a8);
-  FUN_0035782c();
+  moduleStartOnce();
   DAT_004656d1 = '\x01';
   *(unsigned int *)(param_1 + 4) = param_2;
   temp_v0 = nn_cec_CTR_MessageBox_ReadMessageBoxInfo(param_1,temp_v2,param_2);

@@ -13,7 +13,7 @@ int onlineJobSetStateDone(int);
 int FUN_002ea704(void);
 int FUN_002ec738(int);
 int _ZN9Obj55afc44stopEv(int);
-int FUN_002f3490(unsigned char [12]);
+int _ZN9Obj558b24D1Ev(unsigned char [12]);
 int FUN_002fa18c(int);
 int FUN_002fa434(unsigned char [12], unsigned int);
 int FUN_002fd784(unsigned int, unsigned char [12]);
@@ -51,7 +51,7 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, un
 /* Supplied declaration required: FUN_002ea704. */
 /* Supplied declaration required: FUN_002ec738. */
 /* Supplied declaration required: _ZN9Obj55afc44stopEv. */
-/* Supplied declaration required: FUN_002f3490. */
+/* Supplied declaration required: _ZN9Obj558b24D1Ev. */
 /* Supplied declaration required: FUN_002fa18c. */
 /* Supplied declaration required: FUN_002fa434. */
 /* Supplied declaration required: FUN_002fd784. */
@@ -93,7 +93,7 @@ void FUN_00112a0c(int param_1)
           temp_v5 = (*(unsigned short *)(param_1 + 0x13e) << 8) | (*(unsigned short *)(param_1 + 0x13e) >> 8);
           temp_v3 = FUN_002ea704();
           FUN_002fd784(temp_v3,temp_v4);
-          FUN_002f3490(temp_v4);
+          _ZN9Obj558b24D1Ev(temp_v4);
         }
       }
       else {

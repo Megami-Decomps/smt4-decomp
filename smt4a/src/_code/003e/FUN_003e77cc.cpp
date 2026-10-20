@@ -1,30 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e77cc` (_code @ 0x3e77cc, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction scheduling only: in the second store retail loads the count before the buffer pointer and keeps them in r8/r1, built in r1/r8 */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_5_stack;
+typedef struct Command {
+    /* 0x00 */ u32 a;
+    /* 0x04 */ u32 b;
+    /* 0x08 */ u32 c;
+    /* 0x0C */ u32 d;
+} Command; /* 0x10 */
 
+typedef struct CommandList {
+    /* 0x0000 */ u8 unk0000[0x2410];
+    /* 0x2410 */ Command *commands;
+    /* 0x2414 */ s32 count;
+} CommandList;
 
-void FUN_003e77cc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5)
-
+/* Appends a four-word command to the list. */
+void FUN_003e77cc(CommandList *list, u32 a, u32 b, u32 c, u32 d)
 {
-  int *piVar1;
-  int *piVar2;
-  
-  piVar2 = (int *)(param_1 + 0x2410);
-  piVar1 = (int *)(param_1 + 0x2414);
-  *(unsigned int *)(*piVar2 + *piVar1 * 0x10) = param_2;
-  *(unsigned int *)(*piVar2 + *piVar1 * 0x10 + 4) = param_3;
-  *(unsigned int *)(*piVar2 + *piVar1 * 0x10 + 8) = param_4;
-  *(unsigned int *)(*piVar2 + *piVar1 * 0x10 + 0xc) = param_5;
-  *piVar1 = *piVar1 + 1;
-  return;
+    list->commands[list->count].a = a;
+    list->commands[list->count].b = b;
+    list->commands[list->count].c = c;
+    list->commands[list->count].d = d;
+    list->count++;
 }
 
 } /* extern "C" */

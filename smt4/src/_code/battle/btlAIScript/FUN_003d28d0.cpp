@@ -36,7 +36,7 @@ extern unsigned int g_btlEvent; /* 0x435d48 */
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00229754. */
-extern int FUN_002298a0(void);
+extern int btlNodeListAnyReady(void);
 /* Supplied declaration required: FUN_00229ad4. */
 /* Supplied declaration required: FUN_00229b10. */
 /* Supplied declaration required: btlUnitSetParam. */
@@ -257,7 +257,7 @@ int * FUN_003d28d0(int *param_1,unsigned int param_2)
     if (0 < temp_v2) {
       return (int *)0x0;
     }
-    if (((*puVar6 & 0x1080) == 0) && (temp_v2 = FUN_002298a0(), temp_v2 != 0)) {
+    if (((*puVar6 & 0x1080) == 0) && (temp_v2 = btlNodeListAnyReady(), temp_v2 != 0)) {
       return (int *)0x0;
     }
     FUN_00229754(param_1,puVar6);

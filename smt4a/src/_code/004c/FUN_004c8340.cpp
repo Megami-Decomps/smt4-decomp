@@ -9,7 +9,7 @@ int FUN_0034a290(void);
 int FUN_003e8bb0(unsigned int [9], int, int);
 int FUN_003f0e20(...);
 int source4CCopyHalves(void);
-int FUN_004c3ac0(unsigned int, int [2]);
+int kindIdStore(unsigned int, int [2]);
 
 /* stack frame of param_5: 9 slot(s), 36 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ typedef struct {
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: source4CCopyHalves. */
-/* Supplied declaration required: FUN_004c3ac0. */
+/* Supplied declaration required: kindIdStore. */
 
 
 unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,int param_4,int param_5)
@@ -116,7 +116,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
     }
   }
   temp_v11[0] = 0;
-  FUN_004c3ac0(param_3,temp_v11);
+  kindIdStore(param_3,temp_v11);
   temp_v3 = temp_v1 + temp_v11[0] * 2;
   temp_v0 = *(unsigned short *)(temp_v3 + 0x2b6);
   temp_v7 = temp_v0 & 0xffff03ff;

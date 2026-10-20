@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the Thumb literal-pool alignment pad differs in fdiff (retail lists it as code `movs r0, r0`, the build as data `.short 0x0000`); the bytes are the same. */
 /* Destructor: restores the vtable, releases the owned resource, then runs the base destructor. */
 #include "common.h"
 

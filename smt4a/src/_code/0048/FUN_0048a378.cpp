@@ -8,7 +8,7 @@ int sysPlaySe(int);
 int FUN_00183e58(void);
 int FUN_003adc58(void);
 int FUN_003b61ec(void);
-int FUN_003c5848(void);
+int commonBgReset(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_003adc58. */
 /* Supplied declaration required: FUN_003b61ec. */
-/* Supplied declaration required: FUN_003c5848. */
+/* Supplied declaration required: commonBgReset. */
 
 
 void FUN_0048a378(int param_1)
@@ -42,7 +42,7 @@ void FUN_0048a378(int param_1)
     DAT_005f1891 = '\0';
     temp_v1 = gameFlagIsSet(0x49a);
     if (temp_v1 != 0) {
-      FUN_003c5848();
+      commonBgReset();
     }
     else {
       FUN_003b61ec();

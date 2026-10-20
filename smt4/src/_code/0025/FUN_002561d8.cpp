@@ -1,27 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002561d8` (_code @ 0x2561d8, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct BtlEntry {
+    /* 0x000 */ u32 flags;      /* bit 0: in use */
+    /* 0x004 */ u8 unk004[0x284];
+} BtlEntry; /* 0x288 */
 
-unsigned int * FUN_002561d8(int param_1,int param_2,int param_3)
+typedef struct BtlMainState {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ BtlEntry *entries;
+} BtlMainState;
 
+/* Entry `index` (0-108) if its in-use bit matches `wantUsed`; NULL otherwise. */
+BtlEntry *FUN_002561d8(BtlMainState *state, s32 index, s32 wantUsed)
 {
-  unsigned int *puVar1;
-  
-  if ((-1 < param_2) && (param_2 < 0x6d)) {
-    puVar1 = (unsigned int *)(*(int *)(param_1 + 0x1fc0) + param_2 * 0x288);
-    if (param_3 != 0) {
-      if ((*puVar1 & 1) != 0) {
-        return puVar1;
-      }
+    BtlEntry *entry;
+    u32 used;
+
+    if (index < 0) {
+        return NULL;
     }
-    else if ((*puVar1 & 1) == 0) {
-      return puVar1;
+    if (index >= 0x6d) {
+        return NULL;
     }
-  }
-  return (unsigned int *)0x0;
+    entry = &state->entries[index];
+    used = entry->flags & 1;
+    if (wantUsed != 0) {
+        if (used != 0) {
+            return entry;
+        }
+    } else if (used == 0) {
+        return entry;
+    }
+    return NULL;
 }
 
 } /* extern "C" */

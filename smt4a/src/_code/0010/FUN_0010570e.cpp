@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002e6e34(int **, int);
-int FUN_002e6e5c(int **);
+int _ZN9Obj55b28cD1Ev(int **);
 int FUN_002ebd94(int, int *);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int FUN_002ebd34(int, int *);
 /* Supplied declaration required: FUN_002ebd94. */
 
@@ -34,7 +34,7 @@ void FUN_0010570e(int param_1,int *param_2,unsigned int param_3,unsigned int par
   if (param_2 != (int *)0x0) {
     (**(romwright_code **)(*param_2 + 4))(param_2);
   }
-  FUN_002e6e5c(&piStack_18);
+  _ZN9Obj55b28cD1Ev(&piStack_18);
   return;
 }
 

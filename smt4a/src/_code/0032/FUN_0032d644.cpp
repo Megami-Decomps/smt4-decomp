@@ -70,7 +70,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern unsigned int FUN_0019acdc(short, unsigned int);
 extern unsigned int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_0025cc78. */
-extern unsigned int FUN_002adba8(unsigned char);
+extern unsigned int requestIdToCode(unsigned char);
 /* Supplied declaration required: FUN_002e13dc. */
 /* Supplied declaration required: FUN_0035d8f0. */
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
@@ -114,7 +114,7 @@ void FUN_0032d644(unsigned int *param_1,int param_2,float *param_3,int param_4,i
   
   temp_v5 = (int)*(short *)(param_1 + 0x24);
   if ((temp_v5 == 0) || (FUN_003a7a88(temp_v5,1), temp_v5 != 0)) {
-    temp_v6 = FUN_002adba8(*(unsigned char *)(param_2 + 0x22));
+    temp_v6 = requestIdToCode(*(unsigned char *)(param_2 + 0x22));
     temp_v5 = asdTMTexTableNodeIsLoaded(0x2e,temp_v6);
     if (temp_v5 != 0) {
       temp_v20[0] = 4;

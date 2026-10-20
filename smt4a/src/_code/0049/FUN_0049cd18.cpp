@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00192550(void);
 int FUN_00192608(void);
 int FUN_00408184(int, int);
-int FUN_00480d20(void);
+int aocRecordLookup84(void);
 int flagValueAdd(void);
 int flagValueSub(int, int);
 int FUN_004a0ef4(int);
@@ -22,7 +22,7 @@ typedef struct {
 extern unsigned int FUN_0019271c(unsigned int);
 extern int FUN_00213b5c(void);
 /* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: FUN_00480d20. */
+/* Supplied declaration required: aocRecordLookup84. */
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: flagValueSub. */
 /* Supplied declaration required: FUN_004a0ef4. */
@@ -75,7 +75,7 @@ void FUN_0049cd18(unsigned short *param_1,int param_2,int param_3)
       temp_v3 = *(int *)(temp_v4 + 0x78);
       break;
     case 10:
-      FUN_00480d20();
+      aocRecordLookup84();
       if (temp_v4 == 0) {
         temp_v3 = 99999999;
         break;

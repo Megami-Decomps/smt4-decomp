@@ -15,11 +15,11 @@ int FUN_002b5cb4(void);
 int FUN_002b64c0(...);
 int FUN_002b67a0(int);
 int FUN_00356308(void);
-int FUN_003a2fc4(void);
-int FUN_003a3070(void);
+int contentEntryGetB(void);
+int contentEntryGetC(void);
 int FUN_003a30e8(void);
 int FUN_003a315c(void);
-int FUN_003c3154(void);
+int dataTable29Section6Count(void);
 int dataTable2FType0Count(void);
 int FUN_004bc420(...);
 int SBORROW4(...);
@@ -94,9 +94,9 @@ extern char *FUN_00332fcc(void);
 /* Supplied declaration required: FUN_00356308. */
 extern char *FUN_00371058(void);
 extern int FUN_00376f94(void);
-/* Supplied declaration required: FUN_003a2fc4. */
+/* Supplied declaration required: contentEntryGetB. */
 extern char *FUN_003a3038(void);
-/* Supplied declaration required: FUN_003a3070. */
+/* Supplied declaration required: contentEntryGetC. */
 /* Supplied declaration required: FUN_003a30e8. */
 /* Supplied declaration required: FUN_003a315c. */
 extern char *dataTable29Type6GetEntry(int);
@@ -105,7 +105,7 @@ extern int FUN_003c3074(void);
 extern int FUN_003c30ac(void);
 extern int FUN_003c30e4(void);
 extern int FUN_003c311c(void);
-/* Supplied declaration required: FUN_003c3154. */
+/* Supplied declaration required: dataTable29Section6Count. */
 /* Supplied declaration required: dataTable2FType0Count. */
 extern int FUN_003cb88c(int, unsigned int);
 /* Supplied declaration required: moriModelContentCopyBody. */
@@ -328,7 +328,7 @@ void FUN_00303f48(void)
   if (0 < temp_v2) {
     do {
       psVar6 = psVar13;
-      FUN_003a2fc4();
+      contentEntryGetB();
       if (((((*psVar6 != -1) && ((int)*psVar6 == *(int *)(temp_v6 + 0xc))) &&
            ((int)psVar6[1] == *(int *)(temp_v6 + 0x10))) &&
           ((psVar6[2] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
@@ -347,7 +347,7 @@ LAB_003044d0:
     if ((temp_v17 != (char *)0x0) && (pcVar14 = (char *)0x0, 0 < temp_v0)) {
       do {
         pcVar7 = pcVar14;
-        FUN_003a3070();
+        contentEntryGetC();
         if ((*pcVar7 != -1) &&
            ((((int)*pcVar7 == *(int *)(temp_v6 + 0xc) && ((int)pcVar7[1] == *(int *)(temp_v6 + 0x10)))
             && (*(short *)(pcVar7 + 0x10) != 0)))) {
@@ -396,7 +396,7 @@ LAB_003044d0:
         pcVar7 = pcVar7 + 1;
       } while ((int)pcVar7 < temp_v0);
     }
-    FUN_003c3154();
+    dataTable29Section6Count();
     if ((temp_v17 != (char *)0x0) && (temp_v0 = 0, 0 < (int)pcVar14)) {
       do {
         pcVar7 = (char *)dataTable29Type6GetEntry(temp_v0);

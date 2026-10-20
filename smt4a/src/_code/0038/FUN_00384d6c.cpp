@@ -1,31 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00384d6c` (_code @ 0x384d6c, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: `mov r3, #1` is scheduled before the divisions and `cmp r5, #0` after the shift; retail has them the other way round. */
+#include "common.h"
 
 extern "C" {
 
-extern int gameFlagsGetBlock(void);
+typedef struct FlagBlock {
+    /* 0x000 */ u8 unk000[0xe8c];
+    /* 0xe8c */ u32 flags;    /* first of the flag words, one bit per flag */
+} FlagBlock;
 
+extern FlagBlock *gameFlagsGetBlock(void);
 
-void FUN_00384d6c(int param_1,int param_2)
-
+/* Sets or clears bit `index` of the flag block's flag words. */
+void FUN_00384d6c(s32 index, s32 value)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v1 = gameFlagsGetBlock();
-  temp_v1 = temp_v1 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4;
-  temp_v2 = *(unsigned int *)(temp_v1 + 0xe8c);
-  temp_v0 = 1 << ((param_1 % 0x20) & 0xffU);
-  if (param_2 != 0) {
-    temp_v2 = temp_v2 | temp_v0;
-  }
-  else {
-    temp_v2 = temp_v2 & ~temp_v0;
-  }
-  *(unsigned int *)(temp_v1 + 0xe8c) = temp_v2;
-  return;
+    FlagBlock *word = (FlagBlock *)((u8 *)gameFlagsGetBlock() + index / 32 * 4);
+    u32 bits = word->flags;
+    u32 mask = 1 << (index % 32);
+
+    if (value != 0) {
+        bits |= mask;
+    } else {
+        bits &= ~mask;
+    }
+    word->flags = bits;
 }
 
-} /* extern "C" */
+}

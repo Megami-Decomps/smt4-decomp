@@ -26,7 +26,7 @@ extern int FUN_001224b0(int);
 /* Supplied declaration required: FUN_0012922c. */
 extern int FUN_0012cfb6(int);
 extern unsigned int *sharedRefInit(void);
-extern int constructObj0055affc(unsigned int *);
+extern int _ZN9Obj55aff4C1Ev(unsigned int *);
 /* Supplied declaration required: FUN_002f74ec. */
 extern int FUN_002f7664(void);
 /* Supplied declaration required: FUN_002f76ca. */
@@ -46,7 +46,7 @@ int FUN_0010d3a4(void)
   
   puVar1 = (unsigned int *)sharedRefInit();
   *puVar1 = (unsigned int)&DAT_00559114;
-  temp_v0 = constructObj0055affc(puVar1 + 3);
+  temp_v0 = _ZN9Obj55aff4C1Ev(puVar1 + 3);
   temp_v0 = temp_v0 + 8;
   temp_v3 = 0;
   FUN_002f74ec(temp_v0,&temp_v3);

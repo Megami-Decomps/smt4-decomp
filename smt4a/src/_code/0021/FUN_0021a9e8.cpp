@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int FUN_002fde98(...); /* 0x2fde98 */
+extern int dataTableCompareIdsByOrder(...); /* 0x2fde98 */
 extern int DAT_00573b8c; /* 0x573b8c */
 extern unsigned int DAT_00573b90; /* 0x573b90 */
 extern unsigned int DAT_00573bc8; /* 0x573bc8 */
@@ -247,7 +247,7 @@ void FUN_0021a9e8(int param_1)
     if (temp_v3 >= 0x7df) {
       FUN_00203b40(param_1 + 0x3db4,*(int *)(param_1 + 0x3e18) != 0,1,1,0,1);
       FUN_00203b40(param_1 + 0x3b14,temp_v1,6,1,0,1);
-      qsort(param_1 + 0x3ca8,temp_v1,2,FUN_002fde98);
+      qsort(param_1 + 0x3ca8,temp_v1,2,dataTableCompareIdsByOrder);
       FUN_002a4914(param_1 + *piVar8 * 100 + 0x38bc,0);
       *(int *)(param_1 + 0x3c40) = temp_v6;
       return;

@@ -1,31 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002331c0` (_code @ 0x2331c0, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction scheduling/register choice: retail keeps the scene pointer in r0 apart from the stack pointer (r4) and orders the top decrement after the first load */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern int g_titleScene; /* 0x44ea00 */
+typedef struct StateStack {
+    /* 0x00 */ s32 top;
+    /* 0x04 */ s32 unk04;
+    /* 0x08 */ s32 items[4];
+    /* 0x18 */ u8 pending;
+    /* 0x19 */ u8 unk19[3];
+    /* 0x1C */ void (*callback)(void);
+} StateStack;
 
+typedef struct TitleScene {
+    /* 0x0000 */ u8 unk0000[0x12AC];
+    /* 0x12AC */ StateStack stack;
+} TitleScene;
 
+extern TitleScene *g_titleScene;
+
+/* Pops the title scene's state stack; when a change is pending or the new top differs, runs the callback and clears the pending flag. */
 void FUN_002331c0(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  
-  temp_v0 = g_titleScene;
-  piVar4 = (int *)(g_titleScene + 0x12ac);
-  temp_v1 = *piVar4;
-  temp_v2 = piVar4[temp_v1 + 2];
-  *piVar4 = temp_v1 - 1;
-  if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v2 != piVar4[temp_v1 + 1]) {
-    (**(romwright_code **)(temp_v0 + 0x12c8))();
-    *(unsigned char *)(temp_v0 + 0x12c4) = 0;
-  }
-  return;
+    StateStack *stack = &g_titleScene->stack;
+    s32 popped = stack->items[stack->top];
+    s32 current;
+
+    stack->top--;
+    current = stack->items[stack->top];
+    if (stack->pending != 0 || popped != current) {
+        stack->callback();
+        stack->pending = 0;
+    }
 }
 
 } /* extern "C" */

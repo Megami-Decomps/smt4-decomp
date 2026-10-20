@@ -1,20 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001002c2` (_code @ 0x1002c2, 0x52 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: matches retail with `--cpu=5TE -Ospace` except that retail's function starts 2 bytes past a word boundary, so its literal pool needs no alignment pad (built has `movs r0, r0` and the pool loads read 4 bytes further) */
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_001002c2(int param_1)
-
+/* True for the Unicode white-space characters (TAB..CR, space, NBSP, the U+2000 block, line/paragraph
+ * separators, narrow NBSP, medium mathematical space, ideographic space). */
+u32 FUN_001002c2(s32 c)
 {
-  if ((((((param_1 - 9U >= 5) && (param_1 != 0x20)) && (param_1 != 0xa0)) &&
-       ((param_1 != 0x1680 && (param_1 != 0x180e)))) &&
-      ((param_1 - 0x2000U >= 11 && ((param_1 != 0x2028 && (param_1 != 0x2029)))))) &&
-     ((param_1 != 0x202f && ((param_1 != 0x205f && (param_1 != 0x3000)))))) {
+    if ((u32)(c - 9) <= 4 || c == 0x20 || c == 0xa0 || c == 0x1680 || c == 0x180e
+        || (u32)(c - 0x2000) <= 10 || c == 0x2028 || c == 0x2029 || c == 0x202f || c == 0x205f
+        || c == 0x3000) {
+        return 1;
+    }
     return 0;
-  }
-  return 1;
 }
 
 } /* extern "C" */

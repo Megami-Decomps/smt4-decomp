@@ -11,7 +11,7 @@ typedef struct AsdSoundArchive {
     void *stringBlock;      /* 0x4e0 */
 } AsdSoundArchive;
 
-extern AsdSoundArchive DAT_0063e1e8;
+extern AsdSoundArchive g_asdSoundSystem;
 
 extern s32 nw_snd_SoundArchive_IsAvailable(void *reader);
 extern u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(void *fileHeader);
@@ -21,7 +21,7 @@ extern void FUN_0015e978(void *reader, void *stringBlock, u32 size);
 /* Returns the archive's string block, loading it into the main heap on first use. */
 void *asdSoundGetStringBlock(void)
 {
-    AsdSoundArchive *archive = &DAT_0063e1e8;
+    AsdSoundArchive *archive = &g_asdSoundSystem;
     void **stringBlock = &archive->stringBlock;
 
     if (nw_snd_SoundArchive_IsAvailable(archive->reader)) {

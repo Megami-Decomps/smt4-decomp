@@ -9,7 +9,7 @@ int FUN_003e8bb0(unsigned char [2], unsigned int, unsigned int);
 int FUN_003f0e20(...);
 int FUN_004c0f74(int, unsigned int);
 int FUN_004c28b4(unsigned int, int);
-int FUN_004c3ac0(int, unsigned int *);
+int kindIdStore(int, unsigned int *);
 int FUN_004c8340(unsigned int, unsigned int, int, int, unsigned int);
 int VectorSignedToFloat(int, int);
 
@@ -27,7 +27,7 @@ typedef struct {
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004c0f74. */
 /* Supplied declaration required: FUN_004c28b4. */
-/* Supplied declaration required: FUN_004c3ac0. */
+/* Supplied declaration required: kindIdStore. */
 /* Supplied declaration required: FUN_004c8340. */
 
 
@@ -62,7 +62,7 @@ void FUN_004c1598(unsigned int param_1,unsigned int param_2)
     }
     temp_v4 = temp_v0;
     FUN_003f0e20(temp_v0,param_1);
-    FUN_004c3ac0(temp_v9,&temp_v7);
+    kindIdStore(temp_v9,&temp_v7);
     temp_v5 = temp_v4;
     FUN_004c0f74(temp_v4,temp_v7 & 0xff);
     if (temp_v5 != 0) {

@@ -1,44 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034f6fc` (_code @ 0x34f6fc, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184310(void);
+typedef struct Record {
+    /* 0x0 */ u16 id;
+    /* 0x2 */ u8 kind;
+    /* 0x3 */ u8 unk3;
+    /* 0x4 */ u8 unk4[2];
+    /* 0x6 */ u16 order;
+} Record;
 
-/* Supplied declaration required: FUN_00184310. */
-extern int dataTableGetEntry0102Value(unsigned short);
+Record *FUN_00184310(u32 id);
+s32 dataTableGetEntry0102Value(u16 id);
 
-
-int FUN_0034f6fc(unsigned short *param_1,unsigned short *param_2)
-
+/* Compares two record ids by their table value (higher first), then kind (higher first), order and id. */
+s32 FUN_0034f6fc(u16 *a, u16 *b)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned short *puVar2;
-  int temp_v0;
-  int temp_v1;
-  unsigned short *puVar5;
-  unsigned short *puVar6;
-  
-  puVar1 = (unsigned short *)(unsigned int)*param_1;
-  FUN_00184310();
-  puVar2 = (unsigned short *)(unsigned int)*param_2;
-  FUN_00184310();
-  temp_v0 = dataTableGetEntry0102Value(*puVar1);
-  temp_v1 = dataTableGetEntry0102Value(*puVar2);
-  temp_v1 = temp_v1 - temp_v0;
-  if (temp_v1 == 0) {
-    puVar5 = (unsigned short *)(unsigned int)*param_1;
-    FUN_00184310();
-    puVar6 = (unsigned short *)(unsigned int)*param_2;
-    FUN_00184310();
-    temp_v1 = (unsigned int)(unsigned char)puVar6[1] - (unsigned int)(unsigned char)puVar5[1];
-    if ((temp_v1 == 0) && (temp_v1 = (unsigned int)puVar5[3] - (unsigned int)puVar6[3], temp_v1 == 0)) {
-      temp_v1 = (unsigned int)*puVar6 - (unsigned int)*puVar5;
+    Record *recordA = FUN_00184310(*a);
+    Record *recordB = FUN_00184310(*b);
+    s32 valueA = dataTableGetEntry0102Value(recordA->id);
+    s32 valueB = dataTableGetEntry0102Value(recordB->id);
+    s32 diff = valueB - valueA;
+
+    if (diff == 0) {
+        recordA = FUN_00184310(*a);
+        recordB = FUN_00184310(*b);
+        diff = recordB->kind - recordA->kind;
+        if (diff == 0) {
+            diff = recordA->order - recordB->order;
+            if (diff == 0) {
+                diff = recordB->id - recordA->id;
+            }
+        }
     }
-  }
-  return temp_v1;
+    return diff;
 }
 
 } /* extern "C" */

@@ -8,7 +8,7 @@ int FUN_00247478(...);
 int FUN_002ae164(void);
 int dataTable08Sub1GetRecord(void);
 int FUN_003daf3c(unsigned int, unsigned int, int, int);
-int FUN_003db57c(unsigned int, unsigned int, int, int);
+int objectSetResultFromLookup(unsigned int, unsigned int, int, int);
 int FUN_003dc108(unsigned int, unsigned int, int, int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -24,7 +24,7 @@ extern unsigned int DAT_00435d18; /* 0x435d18 */
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_003daf3c. */
-/* Supplied declaration required: FUN_003db57c. */
+/* Supplied declaration required: objectSetResultFromLookup. */
 /* Supplied declaration required: FUN_003dc108. */
 
 
@@ -73,7 +73,7 @@ void FUN_003cee94(unsigned int *param_1,int param_2)
       temp_v2 = (temp_v3 != 2 && temp_v3 != 3) && temp_v3 != 4;
     }
   }
-  FUN_003db57c(DAT_00435d18,temp_v1,temp_v2,0);
+  objectSetResultFromLookup(DAT_00435d18,temp_v1,temp_v2,0);
   return;
 }
 

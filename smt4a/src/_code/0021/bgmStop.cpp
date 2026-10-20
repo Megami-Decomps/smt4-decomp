@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00280f98(unsigned int, int);
+int handlerFinishById(unsigned int, int);
 
 extern unsigned int DAT_0061951c; /* 0x61951c */
 extern unsigned int DAT_00619520; /* 0x619520 */
@@ -14,7 +14,7 @@ extern unsigned int DAT_0061952c; /* 0x61952c */
 extern unsigned int DAT_00619538; /* 0x619538 */
 
 extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: FUN_00280f98. */
+/* Supplied declaration required: handlerFinishById. */
 
 
 void bgmStop(int param_1,int param_2,int param_3)
@@ -36,7 +36,7 @@ void bgmStop(int param_1,int param_2,int param_3)
         if ((&DAT_00619528)[temp_v0 * 8] == param_1) {
           if (param_2 == 0) {
 LAB_0021c16c:
-            FUN_00280f98((&DAT_0061951c)[temp_v0 * 8],0);
+            handlerFinishById((&DAT_0061951c)[temp_v0 * 8],0);
             (&DAT_00619528)[temp_v0 * 8] = 0;
             (&DAT_00619520)[temp_v0 * 8] = 0;
             (&DAT_00619524)[temp_v0 * 8] = 0;

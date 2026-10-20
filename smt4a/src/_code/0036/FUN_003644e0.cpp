@@ -1,32 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003644e0` (_code @ 0x3644e0, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int gameFlagsGetBlock(void);
+typedef struct FlagBitBlock {
+    /* 0x000 */ u8 unk000[0x156c];
+    /* 0x156c */ u32 bits[1];   /* bit set, indexed from 0 */
+} FlagBitBlock;
 
+FlagBitBlock *gameFlagsGetBlock(void);
 
-void FUN_003644e0(int param_1,int param_2)
-
+/* Sets or clears bit `index` of the bit set. */
+void FUN_003644e0(s32 index, s32 value)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  
-  temp_v1 = gameFlagsGetBlock();
-  puVar3 = (unsigned int *)(temp_v1 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4 + 0x156c);
-  temp_v2 = *puVar3;
-  temp_v0 = 1 << ((param_1 % 0x20) & 0xffU);
-  if (param_2 != 0) {
-    temp_v2 = temp_v2 | temp_v0;
-  }
-  else {
-    temp_v2 = temp_v2 & ~temp_v0;
-  }
-  *puVar3 = temp_v2;
-  return;
+    FlagBitBlock *block = gameFlagsGetBlock();
+    s32 word = index / 32;
+
+    if (value != 0) {
+        block->bits[word] |= 1 << (index % 32);
+    } else {
+        block->bits[word] &= ~(1 << (index % 32));
+    }
 }
 
 } /* extern "C" */

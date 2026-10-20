@@ -1,36 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `mapIteratorNext8` (_code @ 0x30c558, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the build folds the walk down the left spine differently: retail copies the right child into a second register (mov r1,r2) and enters the loop at its test, storing in the loop body */
+#include "common.h"
 
 extern "C" {
 
+typedef struct MapNode0030 {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ struct MapNode0030 *parent;
+    /* 0x08 */ struct MapNode0030 *left;
+    /* 0x0c */ struct MapNode0030 *right;
+} MapNode0030;
 
-void mapIteratorNext8(int *param_1)
-
+/* Advances a map iterator to the next node in key order (tree successor). */
+void mapIteratorNext8(MapNode0030 **iterator)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = *param_1;
-  temp_v1 = *(int *)(temp_v0 + 0xc);
-  if (temp_v1 != 0) {
-    *param_1 = temp_v1;
-    while (temp_v1 = *(int *)(temp_v1 + 8), temp_v1 != 0) {
-      *param_1 = temp_v1;
+    MapNode0030 *node = *iterator;
+    MapNode0030 *right = node->right;
+
+    if (right != NULL) {
+        *iterator = right;
+        while (right = right->left, right != NULL) {
+            *iterator = right;
+        }
+    } else {
+        while (1) {
+            node = node->parent;
+            if (*iterator != node->right) {
+                break;
+            }
+            *iterator = node;
+        }
+        if ((*iterator)->right != node) {
+            *iterator = node;
+        }
     }
-  }
-  else {
-    while( 1 ) {
-      temp_v0 = *(int *)(temp_v0 + 4);
-      if (*param_1 != *(int *)(temp_v0 + 0xc)) break;
-      *param_1 = temp_v0;
-    }
-    if (*(int *)(*param_1 + 0xc) != temp_v0) {
-      *param_1 = temp_v0;
-      return;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

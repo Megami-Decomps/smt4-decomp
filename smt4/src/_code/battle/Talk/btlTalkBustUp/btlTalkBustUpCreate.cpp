@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c312c(...);
+int paramsInit(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -33,7 +33,7 @@ extern unsigned char DAT_003ff9dc; /* 0x3ff9dc */
 extern unsigned char DAT_003ffa6c; /* 0x3ffa6c */
 extern int g_btlTalkBustUp; /* 0x434210 */
 
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -66,7 +66,7 @@ void btlTalkBustUpCreate(void)
     taskCreateDraw(&LAB_002958c4,0x7d,0,0,FUN_0022535c,0,0,puVar2);
     taskCreateDraw(&LAB_002958d8,0xdb,0,0,FUN_0022535c,0,0,*(unsigned int *)(temp_v0 + 0x2e4));
     Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(temp_v0);
-    FUN_002c312c(temp_v0,&DAT_003ff838,0x60,&DAT_003ff898,0x144,&DAT_003ff9dc,0x90,0,0,&DAT_003ffa6c,
+    paramsInit(temp_v0,&DAT_003ff838,0x60,&DAT_003ff898,0x144,&DAT_003ff9dc,0x90,0,0,&DAT_003ffa6c,
                  0x9bc);
   }
   return;

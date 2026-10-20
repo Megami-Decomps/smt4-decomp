@@ -15,9 +15,9 @@ u32 nn_fnd_ExpHeapBase_Allocate(void *heap, u32 size, int alignment, u8 mode, in
 int nngxGetVramEndAddr(u32 heapId);
 u32 FUN_002c3994(void);
 u32 FUN_002c3984(void);
-u32 FUN_002c37a0(u32 heapId);
+u32 vramAreaGetBaseAddress(u32 heapId);
 void rt_memclr(u32 base, u32 size);
-void FUN_002c3918(void *expHeap, u32 base, u32 size, u32 flags);
+void heapOwnerCreate(void *expHeap, u32 base, u32 size, u32 flags);
 void nn_os_CriticalSection_Initialize(void *lock);
 void FUN_0011bfec(void *expHeap, u32 block, u32 size);
 void FUN_0010a174(u32 mainBase, u32 mainSize, u32 extraBase, u32 extraSize, u32 vramABase, u32 vramASize, u32 vramBBase, u32 vramBSize);
@@ -37,7 +37,7 @@ void asdMemoryInit(void)
     sys->extra.base = FUN_002c3994();
     sys->extra.size = FUN_002c3984();
     rt_memclr(sys->extra.base, sys->extra.size);
-    FUN_002c3918(sys->extraHeap, sys->extra.base, sys->extra.size, 0x100);
+    heapOwnerCreate(sys->extraHeap, sys->extra.base, sys->extra.size, 0x100);
     nn_os_CriticalSection_Initialize(sys->extraLock);
 
     /* Large extra regions give up their tail: grab all but 32 MB from the back and trim it. */
@@ -51,10 +51,10 @@ void asdMemoryInit(void)
         nn_os_CriticalSection_Leave(sys->extraLock);
     }
 
-    sys->vramA.base = FUN_002c37a0(ASD_HEAP_VRAM_A);
+    sys->vramA.base = vramAreaGetBaseAddress(ASD_HEAP_VRAM_A);
     sys->vramA.size = nngxGetVramEndAddr(ASD_HEAP_VRAM_A) - sys->vramA.base;
     sys->vramABase = sys->vramA.base;
-    sys->vramB.base = FUN_002c37a0(ASD_HEAP_VRAM_B);
+    sys->vramB.base = vramAreaGetBaseAddress(ASD_HEAP_VRAM_B);
     sys->vramB.size = nngxGetVramEndAddr(ASD_HEAP_VRAM_B) - sys->vramB.base;
     sys->vramBBase = sys->vramB.base;
     FUN_0010a174(sys->main.base, sys->main.size, sys->extra.base, sys->extra.size,

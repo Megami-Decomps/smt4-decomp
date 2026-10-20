@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00162790(int, unsigned int, int);
 int FUN_001689e8(int, int, int, int, int);
-int FUN_0016c560(unsigned int);
+int skinObjectUpdateMatrices(unsigned int);
 int FUN_00180310(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_0018408c(int, int);
@@ -49,7 +49,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00162790. */
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_001689e8. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00180310. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -118,7 +118,7 @@ void FUN_00165778(int param_1,int param_2)
   VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(4,0xffffffff,param_1 + 0x26c);
   FUN_001689e8((int)*(short *)(param_1 + 0x18),temp_v0 - 0xd,8,0x79,0);
-  FUN_0016c560(g_renderCtx);
+  skinObjectUpdateMatrices(g_renderCtx);
   temp_v0 = FUN_001834a4(8,0x1ab);
   temp_v1 = vec2GetXInt(param_1 + 0x154);
   FUN_001835b4(2,8,0x1a8,*(short *)(temp_v0 + 8) + temp_v1,(int)*(short *)(temp_v0 + 10),0x65);

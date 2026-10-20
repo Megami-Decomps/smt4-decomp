@@ -7,7 +7,7 @@ extern "C" {
 int gameFlagSetValue(int, int);
 int FUN_002897b0(int);
 int FUN_002897d0(int);
-int FUN_0028dc68(int);
+int messageSlotSet(int);
 int FUN_002a03d8(int, int);
 int scrScriptProcessDestroy(unsigned int);
 int asdMemFree(unsigned int);
@@ -19,7 +19,7 @@ extern int FUN_002896bc(void);
 extern int FUN_002897c0(void);
 /* Supplied declaration required: FUN_002897d0. */
 extern int FUN_002897e0(void);
-/* Supplied declaration required: FUN_0028dc68. */
+/* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int FUN_002c1d5c(void);
@@ -65,7 +65,7 @@ unsigned int FUN_00270cc8(int *param_1)
       if (*(int *)(temp_v1 + 0x98) != 0) {
         gameFlagSetValue(*(int *)(temp_v1 + 0x98),1);
       }
-      FUN_0028dc68(0);
+      messageSlotSet(0);
       scrScriptProcessDestroy(*(unsigned int *)(temp_v1 + 0x94));
       *(unsigned int *)(temp_v1 + 0x94) = 0;
       asdMemFree(*(unsigned int *)(temp_v1 + 0x8c));

@@ -1,45 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00267d3c` (_code @ 0x267d3c, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "battle/btlUI.h"
 
 extern "C" {
 
-int FUN_00249974(void);
-int playSceneTimerSubStartReverse(int);
-int playSceneFadeOutStart(int);
+extern BtlUiGlobals g_btlUi;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+extern s32 playSceneIsFadeInDone(BtlUiObjA *scene);
+extern s32 FUN_00249974(BtlUiObjB *timer);
+extern void playSceneFadeOutStart(BtlUiObjA *scene);
+extern void playSceneTimerSubStartReverse(BtlUiObjB *timer);
 
-extern unsigned char g_btlUi; /* 0x439c88 */
-
-/* Supplied declaration required: FUN_00249974. */
-/* Supplied declaration required: playSceneTimerSubStartReverse. */
-/* Supplied declaration required: playSceneFadeOutStart. */
-extern int playSceneIsFadeInDone(int);
-
-
+/* When the battle UI scene has finished fading in and the timer reports ready, fades the scene out
+ * and runs the timer in reverse. */
 void FUN_00267d3c(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x20));
-  temp_v1 = playSceneIsFadeInDone((*(int *)((unsigned char *)&g_btlUi + 0x20)) + 8);
-  if (temp_v1 != 0) {
-    temp_v1 = temp_v0 + 0x2200;
-    FUN_00249974();
-    if (temp_v1 != 0) {
-      playSceneFadeOutStart(temp_v0 + 8);
-      playSceneTimerSubStartReverse(temp_v0 + 0x2200);
-      return;
+    BtlUi *ui = g_btlUi.ui;
+
+    if (playSceneIsFadeInDone(&ui->objA) != 0 && FUN_00249974(&ui->objB) != 0) {
+        playSceneFadeOutStart(&ui->objA);
+        playSceneTimerSubStartReverse(&ui->objB);
     }
-  }
-  return;
 }
 
 } /* extern "C" */

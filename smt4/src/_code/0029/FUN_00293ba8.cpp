@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00292ca0(int);
+int statusDownSwitchTab(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 
 extern unsigned char g_gameGlobals; /* 0x44e140 */
 
-/* Supplied declaration required: FUN_00292ca0. */
+/* Supplied declaration required: statusDownSwitchTab. */
 
 
 void FUN_00293ba8(void)
@@ -33,10 +33,10 @@ void FUN_00293ba8(void)
   temp_v0 = *(char *)(temp_v1 + 0x1e66);
   if (temp_v0 == '\0') {
     if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) == 0) {
-      FUN_00292ca0(0);
+      statusDownSwitchTab(0);
     }
     if (*(int *)(temp_v2 + 0x12e4) == 1) {
-      FUN_00292ca0(1);
+      statusDownSwitchTab(1);
     }
     temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 0x12f1);
     temp_v4 = temp_v3 == 0;
@@ -46,7 +46,7 @@ void FUN_00293ba8(void)
     if (!temp_v4 || temp_v3 != 2) {
       return;
     }
-    FUN_00292ca0(2);
+    statusDownSwitchTab(2);
     return;
   }
   if (temp_v0 != '\x06') {
@@ -56,7 +56,7 @@ void FUN_00293ba8(void)
         if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) != 0) {
           return;
         }
-        FUN_00292ca0(0);
+        statusDownSwitchTab(0);
         return;
       }
       if (temp_v0 != '\r') {
@@ -64,20 +64,20 @@ void FUN_00293ba8(void)
           if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) != 0) {
             return;
           }
-          FUN_00292ca0(1);
+          statusDownSwitchTab(1);
           return;
         }
         if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) == 0) {
-          FUN_00292ca0(0);
+          statusDownSwitchTab(0);
         }
         if (*(int *)(temp_v2 + 0x12e4) == 1) {
-          FUN_00292ca0(1);
+          statusDownSwitchTab(1);
         }
         if (*(char *)(temp_v1 + 0x12f1) != '\0') {
           return;
         }
         if (*(int *)(temp_v2 + 0x12e4) == 2) {
-          FUN_00292ca0(4);
+          statusDownSwitchTab(4);
         }
         if (*(int *)(temp_v2 + 0x12e4) != 3) {
           return;
@@ -85,16 +85,16 @@ void FUN_00293ba8(void)
       }
       else {
         if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) == 0) {
-          FUN_00292ca0(0);
+          statusDownSwitchTab(0);
         }
         if (*(int *)(temp_v2 + 0x12e4) == 1) {
-          FUN_00292ca0(1);
+          statusDownSwitchTab(1);
         }
         if (*(char *)(temp_v1 + 0x12f1) != '\0') {
           return;
         }
         if (*(int *)(temp_v2 + 0x12e4) == 2) {
-          FUN_00292ca0(4);
+          statusDownSwitchTab(4);
         }
         if (*(int *)(temp_v2 + 0x12e4) != 3) {
           return;
@@ -103,10 +103,10 @@ void FUN_00293ba8(void)
     }
     else {
       if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) == 0) {
-        FUN_00292ca0(1);
+        statusDownSwitchTab(1);
       }
       if (*(int *)(temp_v2 + 0x12e4) == 1) {
-        FUN_00292ca0(4);
+        statusDownSwitchTab(4);
       }
       if (*(int *)(temp_v2 + 0x12e4) != 2) {
         return;
@@ -115,16 +115,16 @@ void FUN_00293ba8(void)
   }
   else {
     if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) == 0) {
-      FUN_00292ca0(0);
+      statusDownSwitchTab(0);
     }
     if (*(int *)(temp_v2 + 0x12e4) == 1) {
-      FUN_00292ca0(1);
+      statusDownSwitchTab(1);
     }
     if (*(int *)(temp_v2 + 0x12e4) != 2) {
       return;
     }
   }
-  FUN_00292ca0(5);
+  statusDownSwitchTab(5);
   return;
 }
 

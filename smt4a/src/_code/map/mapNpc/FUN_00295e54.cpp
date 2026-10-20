@@ -9,7 +9,7 @@ int FUN_00178b04(int, unsigned char *, int);
 int FUN_001cd3ec(void);
 int FUN_00295d40(void);
 int FUN_00312de8(void);
-int FUN_00327678(void);
+int dataTable2aGetEntryWithAoc(void);
 int FUN_00353cd4(void);
 int FUN_0037976c(void);
 int FUN_00385964(void);
@@ -35,7 +35,7 @@ extern int *DAT_00581280; /* 0x581280 */
 /* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: FUN_00295d40. */
 /* Supplied declaration required: FUN_00312de8. */
-/* Supplied declaration required: FUN_00327678. */
+/* Supplied declaration required: dataTable2aGetEntryWithAoc. */
 extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: FUN_00353cd4. */
 /* Supplied declaration required: FUN_0037976c. */
@@ -121,7 +121,7 @@ unsigned int FUN_00295e54(int param_1,int param_2,int param_3)
     for (psVar11 = (short *)DAT_00581280[1]; (int)psVar11 < temp_v5;
         psVar11 = (short *)((int)psVar11 + 1)) {
       psVar5 = psVar11;
-      FUN_00327678();
+      dataTable2aGetEntryWithAoc();
       temp_v3 = g_aocSystem;
       FUN_0046c35c(g_aocSystem,0x24);
       piVar12 = DAT_00581280;
@@ -172,7 +172,7 @@ LAB_002960c8:
     piVar12 = DAT_00581280;
     temp_v3 = DAT_00581280[2];
     temp_v5 = DAT_00581280[1];
-    FUN_00327678();
+    dataTable2aGetEntryWithAoc();
     *(unsigned short *)(piVar12 + temp_v3 * 0xf + 0xd) = *(unsigned short *)(temp_v5 + 4);
     *(unsigned short *)((int)piVar12 + temp_v3 * 0x3c + 0x36) = *(unsigned short *)(temp_v5 + 6);
     *(unsigned char *)((int)piVar12 + temp_v3 * 0x3c + 0xf) = 0;
@@ -279,7 +279,7 @@ LAB_002961f8:
   FUN_003fe86c(temp_v9,0,2);
   FUN_0040ace8(g_handleRegistry,temp_v9);
   temp_v3 = DAT_00581280[1];
-  FUN_00327678();
+  dataTable2aGetEntryWithAoc();
   FUN_00385964();
   temp_v0 = *(char *)(temp_v3 + 0x37);
   if ((temp_v0 == '\x13' || temp_v0 == '\x17') || temp_v0 == '\x18') {

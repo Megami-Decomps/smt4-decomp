@@ -1,56 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004369c8` (_code @ 0x4369c8, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack layout and r5/r6 assignment: retail keeps the by-reference temporary at sp+4, item at sp+8 and the slot reference at sp+12; built puts item lowest and the temporary highest */
+#include "common.h"
 
 extern "C" {
 
-int FUN_004352b0(int *, int *);
-int FUN_00437e98(void);
-int variantSetWordB(int, int *, int);
-int FUN_00515618(int *, int);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ struct Record *next;
+    /* 0x08 */ u8 unk08[2];
+    /* 0x0A */ u8 kind;
+} Record;
 
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-} param_3_stack;
+typedef struct Cursor {
+    /* 0x00 */ Record *record;
+    /* 0x04 */ u8 unk04[0x10];
+    /* 0x14 */ u32 arg;
+} Cursor;
 
-/* Supplied declaration required: FUN_004352b0. */
-/* Supplied declaration required: FUN_00437e98. */
-extern int FUN_004386c4(int, unsigned char);
-/* Supplied declaration required: variantSetWordB. */
-/* Supplied declaration required: FUN_00515618. */
+typedef struct Slot {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u8 header[8];
+    /* 0x10 */ u8 body[1];
+} Slot;
 
+extern void FUN_004352b0(Record **item, Cursor *cursor);
+typedef struct SlotRef {
+    Slot *slot;
+} SlotRef;
 
-unsigned int FUN_004369c8(int *param_1,int *param_2,int *param_3)
+extern void FUN_00515618(SlotRef *ref, void *key);
+extern void variantSetWordB(void *header, void *const &item, u32 arg);
+extern s32 FUN_004386c4(void *body, u8 kind);
+extern s32 FUN_00437e98(void *body);
 
+/* Resolves the cursor's item and its slot, fills in the slot and advances the cursor; 0 on success, 2 on failure. */
+s32 FUN_004369c8(Cursor *cursor, Record **result, void **owner)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  FUN_004352b0(&temp_v2,param_1);
-  if (temp_v2 != 0) {
-    FUN_00515618(&temp_v3,*param_3 + 8);
-    if (temp_v3 != 0) {
-      temp_v1 = temp_v2;
-      variantSetWordB(temp_v3 + 8,&temp_v1,param_1[5]);
-      temp_v0 = FUN_004386c4(temp_v3 + 0x10,*(unsigned char *)(*param_1 + 10));
-      if (temp_v0 != 0) {
-        temp_v0 = temp_v3 + 0x10;
-        FUN_00437e98();
-        if (temp_v0 != 0) {
-          *param_2 = temp_v2;
-          *param_1 = *(int *)(*param_1 + 4);
-          return 0;
+    Record *item;
+    SlotRef ref;
+
+    FUN_004352b0(&item, cursor);
+    if (item != NULL) {
+        FUN_00515618(&ref, (u8 *)*owner + 8);
+        if (ref.slot != NULL) {
+            variantSetWordB(ref.slot->header, item, cursor->arg);
+            if (FUN_004386c4(ref.slot->body, cursor->record->kind) != 0 && FUN_00437e98(ref.slot->body) != 0) {
+                *result = item;
+                cursor->record = cursor->record->next;
+                return 0;
+            }
         }
-      }
     }
-  }
-  return 2;
+    return 2;
 }
 
 } /* extern "C" */

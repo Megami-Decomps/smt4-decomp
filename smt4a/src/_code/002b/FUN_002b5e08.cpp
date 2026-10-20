@@ -6,7 +6,7 @@ extern "C" {
 
 int jyoucyuGetTableEntry(int);
 int FUN_00470ce0(int, unsigned int);
-int FUN_00480838(void);
+int aocRecordLookup83(void);
 int flagValueAdd(...);
 
 /* stack frame of param_4: 7 slot(s), 28 byte(s) */
@@ -29,7 +29,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00470ce0. */
-/* Supplied declaration required: FUN_00480838. */
+/* Supplied declaration required: aocRecordLookup83. */
 /* Supplied declaration required: flagValueAdd. */
 extern int FUN_004813bc(int);
 extern unsigned int __aeabi_idivmod(int, unsigned int);
@@ -163,7 +163,7 @@ unsigned int FUN_002b5e08(unsigned int param_1,int param_2,int param_3,unsigned 
       temp_v11 = 0;
       do {
         temp_v6 = temp_v8;
-        FUN_00480838();
+        aocRecordLookup83();
         if (((temp_v6 != 0) && (temp_v7 <= *(unsigned char *)(temp_v6 + 0x24))) &&
            (*(unsigned char *)(temp_v6 + 0x24) <= temp_v9)) {
           temp_v12 = (unsigned int)*(unsigned char *)(temp_v6 + 0x25);

@@ -17,7 +17,7 @@ extern int scrGetCommandFrame(void);
 /* Supplied declaration required: eventTexSetCurrent. */
 /* Supplied declaration required: FUN_0036f298. */
 extern int FUN_0039af04(void);
-extern unsigned int FUN_003b6808(void);
+extern unsigned int eventTexGetCurrent(void);
 /* Supplied declaration required: FUN_003b6820. */
 
 
@@ -33,7 +33,7 @@ unsigned int FUN_002a3b10(void)
   temp_v1 = scrGetArg(1);
   temp_v2 = scrGetCommandFrame();
   if (temp_v2 != 0) {
-    temp_v1 = FUN_003b6808();
+    temp_v1 = eventTexGetCurrent();
     temp_v2 = jobIsValid();
     if (temp_v2 != 0) {
       temp_v2 = jobGetWork(temp_v1);

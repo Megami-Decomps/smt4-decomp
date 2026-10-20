@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(int *, unsigned char *);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 
 extern unsigned char DAT_005592b4; /* 0x5592b4 */
 extern int DAT_0062e58c; /* 0x62e58c */
@@ -19,7 +19,7 @@ extern unsigned char DAT_0062e59c; /* 0x62e59c */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int onlineStringCopyConstruct(unsigned int *);
 extern int wordRefsDiffer_002fa114(unsigned int *, unsigned int *);
 
@@ -60,7 +60,7 @@ FUN_002fed24(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   DAT_0062e58c = temp_v0;
   DAT_0062e598 = DAT_0062e598 + 1;
   DAT_0062e590 = temp_v3;
-  FUN_002e6e5c(&uStack_18);
+  _ZN9Obj55b28cD1Ev(&uStack_18);
   return romwright_piece_4_4(uStack_18,temp_v3);
 }
 

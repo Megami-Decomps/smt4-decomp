@@ -27,7 +27,7 @@ extern int DAT_00618488; /* 0x618488 */
 /* Supplied declaration required: FUN_00423670. */
 /* Supplied declaration required: FUN_00423a8c. */
 /* Supplied declaration required: FUN_004241e0. */
-extern unsigned int FUN_004249c4(unsigned char *, int);
+extern unsigned int stateObjectClassify(unsigned char *, int);
 extern unsigned int FUN_00424c0c(unsigned char *, int);
 extern int FUN_00424c2c(unsigned char *, unsigned int);
 extern unsigned int table46COwnerGet(unsigned char *, unsigned int);
@@ -74,7 +74,7 @@ void FUN_00229108(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v5 = ll_sdiv((int)temp_v0,(int)((unsigned long long)temp_v0 >> 0x20),*(unsigned int *)(temp_v3 + 0xc),0);
   DAT_0058802c = (int)((unsigned long long)temp_v5 >> 0x20);
   DAT_00588028 = (unsigned int)temp_v5;
-  temp_v4 = FUN_004249c4(&DAT_00617f40,temp_v3);
+  temp_v4 = stateObjectClassify(&DAT_00617f40,temp_v3);
   temp_v1 = DAT_00588028;
   temp_v3 = ((int)temp_v4 >> 0x1f) * DAT_00588028 +
           (int)((unsigned long long)DAT_00588028 * (unsigned long long)temp_v4 >> 0x20);

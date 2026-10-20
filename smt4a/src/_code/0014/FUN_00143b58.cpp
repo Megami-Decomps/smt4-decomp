@@ -10,7 +10,7 @@ int FUN_0015e874(...);
 int nw_snd_SoundArchive_GetSoundType(unsigned char *, int);
 int VectorUnsignedToFloat(int, int);
 
-extern unsigned char DAT_0063e1e8; /* 0x63e1e8 */
+extern unsigned char g_asdSoundSystem; /* 0x63e1e8 */
 extern unsigned char DAT_0063e37c; /* 0x63e37c */
 extern int DAT_0063f500; /* 0x63f500 */
 
@@ -50,10 +50,10 @@ int FUN_00143b58(int param_1,int param_2,unsigned int param_3)
         if (temp_v2 == -1) {
           return -1;
         }
-        puVar4 = &DAT_0063e1e8;
-        temp_v0 = nw_snd_SoundArchive_IsAvailable(&DAT_0063e1e8);
+        puVar4 = &g_asdSoundSystem;
+        temp_v0 = nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem);
         if (temp_v0 != 0) {
-          nw_snd_SoundArchive_GetSoundType(&DAT_0063e1e8,param_1);
+          nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem,param_1);
           if (puVar4 == (unsigned char *)0x0) {
             return temp_v2;
           }

@@ -39,7 +39,7 @@ extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_0032fbd0. */
 /* Supplied declaration required: FUN_00389f0c. */
 /* Supplied declaration required: FUN_004a83f8. */
-extern unsigned char FUN_004a8454(int, unsigned int);
+extern unsigned char gaugePercent(int, unsigned int);
 /* Supplied declaration required: FUN_004a849c. */
 /* Supplied declaration required: FUN_004a84e8. */
 extern unsigned char FUN_004a8544(int, int);
@@ -134,7 +134,7 @@ LAB_004a19b4:
     }
     FUN_004cfeb0(param_1 + 0x20,10,(int)*(short *)(param_1 + 0x864),0,1,1);
     *(unsigned char *)(param_1 + 0x2d) = 1;
-    temp_v1 = FUN_004a8454(temp_v2,1);
+    temp_v1 = gaugePercent(temp_v2,1);
     *(unsigned char *)(param_1 + 0x94) = temp_v1;
     jyoucyuGetTableEntry(0);
   }

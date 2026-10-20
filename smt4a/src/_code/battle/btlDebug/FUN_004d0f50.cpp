@@ -46,7 +46,7 @@ extern unsigned int DAT_00573970; /* 0x573970 */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00212234. */
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_003173c4(unsigned int);
+extern int entryTableCallSlot3(unsigned int);
 extern unsigned int FUN_004bb80c(unsigned int);
 /* Supplied declaration required: FUN_004bb9c0. */
 /* Supplied declaration required: FUN_004bbb74. */
@@ -115,7 +115,7 @@ void FUN_004d0f50(unsigned int param_1,unsigned int param_2)
       FUN_004bb9c0(temp_v4,temp_v1);
     }
     temp_v3 = 0;
-    temp_v0 = FUN_003173c4(3);
+    temp_v0 = entryTableCallSlot3(3);
     temp_v2 = 0;
     do {
       if (temp_v4[temp_v2] != 0) {

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bcc60(...);
-int FUN_002bcd44(...);
+int resultReportIfFailed(...);
 int asdOperatorNew(...);
 int memAlloc(...);
 int nn_os_CriticalSection_Initialize(...);
@@ -30,7 +30,7 @@ extern unsigned char LAB_003f6f44; /* 0x3f6f44 */
 extern unsigned char LAB_003f6fe0; /* 0x3f6fe0 */
 
 /* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002bcd44. */
+/* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
@@ -73,7 +73,7 @@ void FUN_0033a414(int param_1)
       *(unsigned char *)(puVar2 + 4) = 0;
     }
     *piVar5 = (int)puVar2;
-    FUN_002bcd44();
+    resultReportIfFailed();
   }
   piVar4 = (int *)(param_1 + 0x49ec);
   aiStack_38[0] = *piVar4;

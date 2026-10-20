@@ -9,7 +9,7 @@ int FUN_002a0428(...);
 int FUN_0020ffe8(int, int);
 int FUN_0025bc80(void);
 int FUN_0025bdc4(void);
-int FUN_0025be2c(void);
+int vec4Forward(void);
 int FUN_0027f94c(int);
 int FUN_0027fca0(unsigned int);
 int FUN_00287098(...);
@@ -47,7 +47,7 @@ extern int DAT_0049fc88; /* 0x49fc88 */
 extern int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0025bc80. */
 /* Supplied declaration required: FUN_0025bdc4. */
-/* Supplied declaration required: FUN_0025be2c. */
+/* Supplied declaration required: vec4Forward. */
 /* Supplied declaration required: FUN_0027f94c. */
 /* Supplied declaration required: FUN_0027fca0. */
 /* Supplied declaration required: FUN_00287098. */
@@ -83,7 +83,7 @@ void FUN_00273fc0(void)
   int temp_v5;
   
   if ((0 < g_lmapScene[100]) && (g_lmapScene[99] != -1)) {
-    FUN_0025be2c();
+    vec4Forward();
     g_lmapScene[100] = g_lmapScene[100] - 1;
   }
   if ((char)g_lmapScene[0x4d] == '\0') {

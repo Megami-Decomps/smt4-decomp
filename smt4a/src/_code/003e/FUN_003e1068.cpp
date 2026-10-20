@@ -1,68 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e1068` (_code @ 0x3e1068, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: store scheduling in the final request setup only: retail interleaves `str r6,[r4,#16]; mov r2,#20; str r6,[r4,#12]; mov r0,r4; mov r1,r5; str r2,[r4]`, the build stores the state first. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003e1454(...);
-int FUN_003e9b74(...);
-int FUN_003eaa9c(...);
-int FUN_003f0e20(...);
+typedef struct SkillInfo {
+    /* 0x00 */ u8 unk00[3];
+    /* 0x03 */ u8 flags;
+    /* 0x04 */ u8 unk04[0x66];
+    /* 0x6A */ s16 skillId;
+} SkillInfo;
 
-typedef struct fn_003e1068_arg1 fn_003e1068_arg1;
-struct fn_003e1068_arg1 {
-    unsigned char pad_0x0[0x3];
-    byte field_0x3; /* +0x3 */
-    unsigned char pad_0x4[0x66];
-    short field_0x6a; /* +0x6a */
-    unsigned char pad_0x6c[0x84];
-    undefined4 field_0xf0; /* +0xf0 */
-    unsigned char pad_0xf4[0x72];
-    ushort field_0x166; /* +0x166 */
-};
+typedef struct SkillSlot {
+    /* 0x000 */ u8 unk000[0x166];
+    /* 0x166 */ u16 infoId;
+} SkillSlot;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct BtlObject {
+    /* 0x00 */ u8 unk00[4];
+} BtlObject;
 
-/* Supplied declaration required: FUN_003e1454. */
-/* Supplied declaration required: FUN_003e9b74. */
-/* Supplied declaration required: FUN_003eaa9c. */
-extern int FUN_003eca48(fn_003e1068_arg1 *, unsigned short);
-extern int FUN_003eccd0(fn_003e1068_arg1 *);
-extern int FUN_003ece50(fn_003e1068_arg1 *);
-/* Supplied declaration required: FUN_003f0e20. */
+typedef struct StateRequest {
+    /* 0x00 */ u32 state;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ u32 arg0;
+    /* 0x10 */ u32 arg1;
+} StateRequest;
 
+extern SkillInfo *FUN_003eccd0(BtlObject *obj);
+extern SkillSlot *FUN_003f0e20(BtlObject *obj, int skillId);
+extern SkillInfo *FUN_003eca48(BtlObject *obj, u16 infoId);
+extern int FUN_003e9b74(BtlObject *obj);
+extern int FUN_003ece50(BtlObject *obj);
+extern int FUN_003eaa9c(BtlObject *obj);
+extern int FUN_003e1454(StateRequest *request, BtlObject *obj);
 
-void FUN_003e1068(unsigned int *param_1,fn_003e1068_arg1 *param_2)
-
+/* Chooses the next state: state 0x10 when the object's skill has flag 2 set and the follow-up check passes, else state 0x14 and a restart. */
+void FUN_003e1068(StateRequest *request, BtlObject *obj)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  fn_003e1068_arg1 *pfVar2;
-  
-  temp_v0 = FUN_003eccd0(param_2);
-  if ((((temp_v0 != 0) &&
-       (pfVar2 = param_2, FUN_003f0e20(param_2,(int)*(short *)(temp_v0 + 0x6a)),
-       pfVar2 != (fn_003e1068_arg1 *)0x0)) &&
-      (temp_v0 = FUN_003eca48(param_2,pfVar2->field_0x166), temp_v0 != 0)) &&
-     ((*(unsigned char *)(temp_v0 + 3) & 2) != 0)) {
-    FUN_003e9b74(param_2);
-    *param_1 = 0x10;
-    param_1[4] = 0;
-    param_1[3] = 0;
-    temp_v0 = FUN_003ece50(param_2);
-    if (temp_v0 == 0) {
-      return;
+    SkillInfo *info = FUN_003eccd0(obj);
+    SkillSlot *slot;
+
+    if (info != NULL) {
+        slot = FUN_003f0e20(obj, info->skillId);
+        if (slot != NULL) {
+            info = FUN_003eca48(obj, slot->infoId);
+            if (info != NULL && (info->flags & 2) != 0) {
+                FUN_003e9b74(obj);
+                request->state = 0x10;
+                request->arg1 = 0;
+                request->arg0 = 0;
+                if (FUN_003ece50(obj) == 0) {
+                    return;
+                }
+                FUN_003eaa9c(obj);
+            }
+        }
     }
-    FUN_003eaa9c(param_2);
-  }
-  param_1[4] = 0;
-  param_1[3] = 0;
-  *param_1 = 0x14;
-  FUN_003e1454(param_1,param_2);
-  return;
+    request->arg1 = 0;
+    request->arg0 = 0;
+    request->state = 0x14;
+    FUN_003e1454(request, obj);
 }
 
 } /* extern "C" */

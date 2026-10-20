@@ -11,7 +11,7 @@ int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea704(void);
 int FUN_002eb338(int *, unsigned char [8], unsigned int);
 int onlineTimeGetNow(unsigned char [8]);
-int FUN_002f3490(unsigned char [24]);
+int _ZN9Obj558b24D1Ev(unsigned char [24]);
 int FUN_002fa434(unsigned char [24], unsigned int);
 
 typedef int romwright_code(...);
@@ -40,7 +40,7 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int,
 /* Supplied declaration required: FUN_002eb338. */
 /* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eb5f4(void);
-/* Supplied declaration required: FUN_002f3490. */
+/* Supplied declaration required: _ZN9Obj558b24D1Ev. */
 extern unsigned int FUN_002f8744(int);
 /* Supplied declaration required: FUN_002fa434. */
 
@@ -91,7 +91,7 @@ void FUN_0010f424(int param_1)
         FUN_002eb338(&temp_v7,temp_v9,temp_v1);
         *(unsigned int *)(param_1 + 0xd0) = temp_v7;
         *(unsigned int *)(param_1 + 0xd4) = temp_v8;
-        FUN_002f3490(temp_v3);
+        _ZN9Obj558b24D1Ev(temp_v3);
         return;
       }
     }

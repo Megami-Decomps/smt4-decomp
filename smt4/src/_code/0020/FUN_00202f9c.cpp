@@ -30,10 +30,10 @@ typedef struct SceneGlobals {
 extern SceneGlobals g_saveLoadUIFlags;
 
 int FUN_002108c0(int arg0, u32 arg1);
-int FUN_0028971c(void);
+int msgWindowReset(void);
 int FUN_00292c0c(void);
 int FUN_00297050(int arg);
-int FUN_0029a128(int arg);
+int gameGlobalsSetSelected(int arg);
 int FUN_0029ee6c(int arg0, int color);
 int fileSlotFree(int arg);
 int scrScriptProcessDestroy(void);
@@ -63,7 +63,7 @@ void FUN_00202f9c(void)
         i++;
     } while (i < 10);
     fileSlotFree(0x3d);
-    FUN_0028971c();
+    msgWindowReset();
     if (state2->buffer248 != NULL) {
         scrScriptProcessDestroy();
         state2->buffer248 = NULL;
@@ -76,7 +76,7 @@ void FUN_00202f9c(void)
         asdMemFree(state2->buffer244);
         state2->buffer244 = NULL;
     }
-    FUN_0029a128(0);
+    gameGlobalsSetSelected(0);
     FUN_00292c0c();
     FUN_00297050(1);
     state->released = 1;

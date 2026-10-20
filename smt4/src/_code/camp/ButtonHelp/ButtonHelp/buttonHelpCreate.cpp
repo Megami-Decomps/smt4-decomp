@@ -10,7 +10,7 @@ int FUN_00297060(...);
 int FUN_002bd81c(...);
 int FUN_002bd82c(...);
 int FUN_002bd954(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -48,7 +48,7 @@ extern unsigned int DAT_0043da34; /* 0x43da34 */
 /* Supplied declaration required: FUN_002bd82c. */
 extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -85,7 +85,7 @@ void buttonHelpCreate(void)
     puVar3[2] = (unsigned int)puVar5;
     puVar1 = DAT_0043da2c;
     Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(DAT_0043da2c + 5);
-    FUN_002c312c(puVar1 + 5,0x402506,0x30,&DAT_00402538,0xc,&DAT_00402544,0xc,0,0,&DAT_00402550,0xa8
+    paramsInit(puVar1 + 5,0x402506,0x30,&DAT_00402538,0xc,&DAT_00402544,0xc,0,0,&DAT_00402550,0xa8
                 );
     temp_v1 = 0;
     do {

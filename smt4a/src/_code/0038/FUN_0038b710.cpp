@@ -7,7 +7,7 @@ extern "C" {
 int uiSpriteSetKeyframe(int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_003d498c(unsigned int, int);
-int FUN_003dc530(void);
+int uiQuestSpritesCreate(void);
 
 extern int g_uiQuest; /* 0x57f28c */
 
@@ -15,7 +15,7 @@ extern int g_uiQuest; /* 0x57f28c */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern unsigned char FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_003d498c. */
-/* Supplied declaration required: FUN_003dc530. */
+/* Supplied declaration required: uiQuestSpritesCreate. */
 
 
 void FUN_0038b710(unsigned int param_1)
@@ -31,7 +31,7 @@ void FUN_0038b710(unsigned int param_1)
   temp_v2 = FUN_001bd100(param_1);
   *(unsigned char *)(temp_v0 + 0x90c) = temp_v2;
   *(short *)(temp_v0 + 0xcca) = (short)param_1;
-  FUN_003dc530();
+  uiQuestSpritesCreate();
   FUN_003d498c(param_1,1);
   uiSpriteSetKeyframe(temp_v0 + 0x34,0);
   uiSpriteSetImageKeyframe(temp_v0 + 0x34,8,0);

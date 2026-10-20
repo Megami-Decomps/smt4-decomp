@@ -1,47 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00219208` (_code @ 0x219208, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00257568(int, int);
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 handle;
+} Entry;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x46];
+    /* 0x46 */ u16 slot;
+} Record;
 
-/* Supplied declaration required: FUN_00257568. */
-extern int gameGetUnitRecord(void);
+extern Record *gameGetUnitRecord(void);
+extern int FUN_00257568(Entry *a, Entry *b);
 
-
-void FUN_00219208(int param_1,int param_2)
-
+/* If both entries have the same slot (0 for a negative handle), forwards them to FUN_00257568. */
+void FUN_00219208(Entry *a, Entry *b)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  short temp_v2;
-  
-  if (*(int *)(param_1 + 4) < 0) {
-    temp_v2 = 0;
-  }
-  else {
-    temp_v1 = gameGetUnitRecord();
-    temp_v2 = *(short *)(temp_v1 + 0x46);
-  }
-  if (*(int *)(param_2 + 4) < 0) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v1 = gameGetUnitRecord();
-    temp_v0 = *(short *)(temp_v1 + 0x46);
-  }
-  if (temp_v2 != temp_v0) {
-    return;
-  }
-  FUN_00257568(param_1,param_2);
-  return;
+    u16 slotA;
+    u16 slotB;
+    s32 diff;
+
+    if (a->handle < 0) {
+        slotA = 0;
+    } else {
+        slotA = gameGetUnitRecord()->slot;
+    }
+    if (b->handle < 0) {
+        slotB = 0;
+    } else {
+        slotB = gameGetUnitRecord()->slot;
+    }
+    diff = slotA - slotB;
+    if (diff == 0) {
+        FUN_00257568(a, b);
+    }
 }
 
-} /* extern "C" */
+}

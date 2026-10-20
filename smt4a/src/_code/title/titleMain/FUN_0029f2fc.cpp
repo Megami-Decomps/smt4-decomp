@@ -37,7 +37,7 @@ int FUN_0037a2e4(void);
 int FUN_0039c244(void);
 int mobiclipProcessSetFlag77(...);
 int FUN_003c4f28(...);
-int FUN_003c5848(void);
+int commonBgReset(void);
 int FUN_003ca7d8(void);
 int soundChannelRequestIfEnabled(...);
 
@@ -102,7 +102,7 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: configOpen. */
 /* Supplied declaration required: FUN_00202ea4. */
 /* Supplied declaration required: FUN_0020e79c. */
-extern int FUN_002121c4(unsigned int);
+extern int slotIsReady(unsigned int);
 extern int configIsClosed(void);
 /* Supplied declaration required: FUN_00215994. */
 /* Supplied declaration required: FUN_0022258c. */
@@ -142,7 +142,7 @@ extern int FUN_0038b358(void);
 /* Supplied declaration required: mobiclipProcessSetFlag78. */
 /* Supplied declaration required: mobiclipProcessSetFlag77. */
 /* Supplied declaration required: FUN_003c4f28. */
-/* Supplied declaration required: FUN_003c5848. */
+/* Supplied declaration required: commonBgReset. */
 /* Supplied declaration required: FUN_003c91e8. */
 /* Supplied declaration required: FUN_003ca7d8. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
@@ -268,7 +268,7 @@ LAB_0029f580:
       FUN_003d54f8(0,0xf);
       puVar4[0x1f] = 1;
     case 1:
-      temp_v5 = FUN_002121c4(0);
+      temp_v5 = slotIsReady(0);
       if (temp_v5 == 0) {
         temp_v0 = *(char *)(puVar4 + 0x24);
 joined_r0x0029f8b8:
@@ -334,7 +334,7 @@ LAB_0029f9fc:
       puVar4[0x20] = temp_v5 + 1;
       break;
     case 4:
-      temp_v5 = FUN_002121c4(0);
+      temp_v5 = slotIsReady(0);
       if (temp_v5 != 0) break;
       puVar4[0x1f] = 5;
     case 5:
@@ -382,7 +382,7 @@ LAB_0029f848:
         FUN_003d54f8(0,0xf);
         puVar4[0x1f] = 1;
       case 1:
-        temp_v5 = FUN_002121c4(0);
+        temp_v5 = slotIsReady(0);
         if (temp_v5 != 0) goto LAB_002a0858;
         temp_v0 = *(char *)(puVar4 + 0x24);
         goto joined_r0x0029f8b8;
@@ -428,7 +428,7 @@ LAB_0029f848:
         if (temp_v5 < (int)puVar4[0x21]) goto LAB_0029f9fc;
         break;
       case 4:
-        temp_v5 = FUN_002121c4(0);
+        temp_v5 = slotIsReady(0);
         if (temp_v5 != 0) goto LAB_002a0858;
         *(unsigned char *)(puVar4 + 0x18) = 0;
         puVar4[0x1f] = 5;
@@ -586,7 +586,7 @@ LAB_0029fb00:
       FUN_00100388(&temp_v13,temp_v5 + temp_v7 * 100 + 0x14,&LAB_0029ff54);
       FUN_0019de98(&temp_v13,0xf4f4f4ff);
       if (*(char *)(puVar5 + 0xf) != '\0') {
-        FUN_003c5848();
+        commonBgReset();
       }
       else {
         FUN_002e4b9c();
@@ -962,7 +962,7 @@ LAB_0029fb00:
       if (temp_v5 < 0) {
         FUN_003ca7d8();
         if (*(char *)(puVar5 + 0xf) != '\0') {
-          FUN_003c5848();
+          commonBgReset();
         }
         else {
           FUN_002e4b9c();

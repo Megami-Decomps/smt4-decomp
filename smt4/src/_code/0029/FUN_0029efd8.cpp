@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_001ff474(void);
-int FUN_00289058(int, int);
-int FUN_002bc01c(int);
+int scrollListSetSelection(int, int);
+int eventQueueAddUniqueIfValid(int);
 int FUN_002d56c4(int, int, int);
 int FUN_002d56f0(void);
 int __aeabi_idivmod(...);
@@ -20,8 +20,8 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_001ff474. */
-/* Supplied declaration required: FUN_00289058. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: scrollListSetSelection. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int padIsButtonPressed(unsigned char);
 extern int FUN_002c15fc(void);
 /* Supplied declaration required: FUN_002d56c4. */
@@ -75,7 +75,7 @@ unsigned char FUN_0029efd8(int param_1,int param_2)
     temp_v8 = *(int *)(param_1 + 0x38);
     temp_v9 = __aeabi_idivmod(*(unsigned int *)(param_1 + 0x50),temp_v8);
     if (temp_v9 <= temp_v7) {
-      FUN_00289058(param_1,temp_v9);
+      scrollListSetSelection(param_1,temp_v9);
     }
     if ((!temp_v1) && (temp_v4 != temp_v7)) {
       temp_v1 = 1;
@@ -99,10 +99,10 @@ unsigned char FUN_0029efd8(int param_1,int param_2)
          (((temp_v4 = padIsButtonPressed(*(unsigned char *)(param_1 + 0x2c)), temp_v4 != 0 ||
            (temp_v4 = padIsButtonPressed(*(unsigned char *)(param_1 + 0x30)), temp_v4 != 0)) &&
           ((*(unsigned int *)(param_1 + 0x28) & 4) != 0)))) {
-        FUN_00289058(param_1 + 0x28,0);
+        scrollListSetSelection(param_1 + 0x28,0);
       }
       else {
-        FUN_00289058(param_1 + 0x28,temp_v14 - 1);
+        scrollListSetSelection(param_1 + 0x28,temp_v14 - 1);
       }
     }
     temp_v4 = 0;
@@ -344,7 +344,7 @@ unsigned char FUN_0029efd8(int param_1,int param_2)
     temp_v3 = 0;
     if ((unsigned char)(temp_v1 | temp_v2)) {
       if (param_2 != 0) {
-        FUN_002bc01c(0x100016c);
+        eventQueueAddUniqueIfValid(0x100016c);
       }
       temp_v3 = 1;
     }

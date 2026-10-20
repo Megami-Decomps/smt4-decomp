@@ -9,13 +9,13 @@ int FUN_0019de98(...);
 int FUN_001ad9b4(void);
 int FUN_00212724(void);
 int useCounterStart(void);
-int FUN_002c7a9c(...);
+int slotBlockSetPair(...);
 int FUN_0031f208(...);
 int FUN_0031f27c(...);
 int FUN_003dea6c(...);
 
 int FUN_001517b4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
 int asdMemFree(void);
@@ -44,7 +44,7 @@ extern int g_uiQuest; /* 0x57f28c */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001517b4. */
 extern int FUN_00162858(void);
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -61,7 +61,7 @@ extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002ae320. */
 extern int FUN_002c2c68(int);
-/* Supplied declaration required: FUN_002c7a9c. */
+/* Supplied declaration required: slotBlockSetPair. */
 extern int FUN_002f7730(int, unsigned int);
 extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: FUN_0031f208. */
@@ -123,7 +123,7 @@ void FUN_0023eaf8(void)
       *(unsigned int *)(g_uiQuest + 4) = 3;
       *(unsigned int *)(temp_v11 + 8) = temp_v12;
       *(unsigned int *)(temp_v11 + 0x10) = 0;
-      FUN_001641b4(0x100020f);
+      eventQueueAddUniqueIfValid(0x100020f);
     }
   }
   else {
@@ -263,7 +263,7 @@ void FUN_0023eaf8(void)
             *(unsigned int *)(temp_v8 + 0x10) = 0;
             temp_v12 = 0x1000210;
 LAB_0023f080:
-            FUN_001641b4(temp_v12);
+            eventQueueAddUniqueIfValid(temp_v12);
           }
         }
         else {
@@ -284,7 +284,7 @@ LAB_0023f080:
               *(unsigned int *)(temp_v8 + 8) = temp_v12;
               *(unsigned int *)(temp_v8 + 0x10) = 0;
               temp_v12 = 0x1000210;
-              FUN_001641b4(temp_v12);
+              eventQueueAddUniqueIfValid(temp_v12);
             }
           }
           else {
@@ -292,7 +292,7 @@ LAB_0023f080:
               temp_v3 = 9;
               FUN_001517b4(9,1);
               if (temp_v3 != 0) {
-                FUN_001641b4(0x100020e);
+                eventQueueAddUniqueIfValid(0x100020e);
                 FUN_0019de98(0,0xf4f4f4ff);
                 FUN_0031f27c(0xe,0);
                 FUN_0031f208(0x22);
@@ -355,7 +355,7 @@ LAB_0023f080:
                             *(unsigned int *)(temp_v8 + 8) = temp_v12;
                             *(unsigned int *)(temp_v8 + 0x10) = 0;
                             temp_v12 = 0x100020e;
-                            FUN_001641b4(temp_v12);
+                            eventQueueAddUniqueIfValid(temp_v12);
                           }
                         }
                         else {
@@ -381,7 +381,7 @@ LAB_0023f080:
                             *(unsigned int *)(temp_v8 + 0x10) = 0;
                             sysPlaySe(0xe4);
                             temp_v12 = 0x100020e;
-                            FUN_001641b4(temp_v12);
+                            eventQueueAddUniqueIfValid(temp_v12);
                           }
                         }
                       }
@@ -424,7 +424,7 @@ LAB_0023f21c:
                 FUN_00417d08(temp_v2);
                 *(unsigned short *)(temp_v2 + 0xcce) = 0;
               }
-              FUN_001641b4(temp_v12);
+              eventQueueAddUniqueIfValid(temp_v12);
             }
           }
         }
@@ -440,7 +440,7 @@ LAB_0023f2a8:
       temp_v12 = FUN_002a4860(temp_v11);
       temp_v5 = flaggedEntryGetValueA(temp_v11);
     }
-    FUN_002c7a9c(temp_v14,temp_v5,temp_v12);
+    slotBlockSetPair(temp_v14,temp_v5,temp_v12);
   }
   *(short *)(temp_v2 + 0xcd0) = *(short *)(temp_v2 + 0xcd0) + 1;
   return;

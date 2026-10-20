@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bcd44(void);
+int resultReportIfFailed(void);
 int asdOperatorNew(int, unsigned int);
 int memAlloc(int, int, int, unsigned int, int, int);
 
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002bcd44. */
+/* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
 
@@ -39,7 +39,7 @@ void FUN_00121ee8(int param_1,unsigned int param_2)
     *(unsigned char *)(puVar2 + 4) = 0;
   }
   *(unsigned int **)(param_1 + 0xc) = puVar2;
-  FUN_002bcd44();
+  resultReportIfFailed();
   return;
 }
 

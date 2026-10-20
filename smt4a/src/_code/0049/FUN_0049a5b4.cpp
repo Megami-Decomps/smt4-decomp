@@ -6,7 +6,7 @@ extern "C" {
 
 int qsort(int, int, int, unsigned char *);
 int sysMemClear(int, int);
-int FUN_00480838(unsigned int);
+int aocRecordLookup83(unsigned int);
 int FUN_0049cd18(unsigned int *, int, int);
 int FUN_004cfeb0(int, int, int, int);
 int FUN_004cff88(int, int);
@@ -32,7 +32,7 @@ extern unsigned char LAB_00494398; /* 0x494398 */
 extern unsigned short *FUN_00145f04(unsigned char, unsigned int);
 extern int FUN_001ba3d0(unsigned int);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_00480838. */
+/* Supplied declaration required: aocRecordLookup83. */
 extern int FUN_00481100(unsigned int);
 extern unsigned int FUN_0049c848(unsigned int, unsigned int, unsigned int);
 extern int FUN_0049cab8(unsigned int);
@@ -85,7 +85,7 @@ void FUN_0049a5b4(int param_1)
       temp_v7 = 0;
       if (temp_v7 < temp_v3) {
         do {
-          FUN_00480838(temp_v8);
+          aocRecordLookup83(temp_v8);
           temp_v4 = FUN_0049c848(temp_v8,0xffff,0xffff);
           if (temp_v4 != 0) {
             temp_v1 = temp_v8;

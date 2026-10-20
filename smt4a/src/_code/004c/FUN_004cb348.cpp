@@ -1,43 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004cb348` (_code @ 0x4cb348, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same instructions; block layout differs: retail lays the `mode == 0` block out after the final `str flags; bx lr` (beq to it, b back); built falls through into it. */
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_004cb348_arg1 fn_004cb348_arg1;
-struct fn_004cb348_arg1 {
-    unsigned char pad_0x0[0x50];
-    uint field_0x50; /* +0x50 */
-    unsigned char pad_0x54[0x18];
-    uint field_0x6c; /* +0x6c */
-    unsigned char pad_0x70[0x8];
-    int field_0x78; /* +0x78 */
-    undefined4 field_0x7c; /* +0x7c */
-    unsigned char pad_0x80[0xc];
-    uint field_0x8c; /* +0x8c */
-    uint field_0x90; /* +0x90 */
-};
+typedef struct Slot {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 flags;
+    /* 0x54 */ u8 unk54[0x18];
+    /* 0x6C */ u32 color;
+    /* 0x70 */ u8 unk70[8];
+    /* 0x78 */ s32 mode;
+    /* 0x7C */ u32 unk7C;
+    /* 0x80 */ u8 unk80[0xC];
+    /* 0x8C */ u32 colorBase;
+    /* 0x90 */ u32 colorOld;
+} Slot;
 
-
-void FUN_004cb348(unsigned int param_1,fn_004cb348_arg1 *param_2,int param_3,unsigned int param_4)
-
+/* Sets the slot's mode and base color (alpha byte cleared); a zero mode also copies the base color in. */
+void FUN_004cb348(u32 unused, Slot *slot, s32 mode, u32 color)
 {
-  unsigned int temp_v0;
-  
-  param_2->field_0x7c = 0;
-  param_2->field_0x78 = param_3;
-  param_2->field_0x8c = param_4 & 0xffffff00;
-  temp_v0 = param_2->field_0x50;
-  if (param_3 != 0) {
-    temp_v0 = temp_v0 | 0x1000;
-  }
-  param_2->field_0x90 = param_2->field_0x6c & 0xffffff00;
-  if (param_3 == 0) {
-    temp_v0 = temp_v0 & 0xffffefff;
-    param_2->field_0x6c = (param_2->field_0x6c & 0xff) | (param_4 & 0xffffff00);
-  }
-  param_2->field_0x50 = temp_v0;
-  return;
+    u32 flags;
+
+    slot->unk7C = 0;
+    slot->mode = mode;
+    slot->colorBase = color & ~0xFF;
+    flags = slot->flags;
+    if (mode != 0) {
+        flags |= 0x1000;
+    }
+    slot->colorOld = slot->color & ~0xFF;
+    if (mode == 0) {
+        flags &= ~0x1000;
+        slot->color = (slot->color & 0xFF) | (color & ~0xFF);
+    }
+    slot->flags = flags;
 }
 
 } /* extern "C" */

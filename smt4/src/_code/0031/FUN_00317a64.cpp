@@ -1,24 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00317a64` (_code @ 0x317a64, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the constant 7 into r1 before the panel pointer; built loads the pointer first */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bee58(int, int);
+typedef struct Panel {
+    /* 0x000 */ u8 unk000[0x88];
+    /* 0x088 */ u8 state;
+    /* 0x089 */ u8 unk089[0x8FB];
+    /* 0x984 */ u8 list[1];
+} Panel;
 
-/* Supplied declaration required: FUN_002bee58. */
+typedef struct PanelTask {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ Panel *panel;
+} PanelTask;
 
+void FUN_002bee58(void *list, s32 mode);
 
-unsigned int FUN_00317a64(int param_1)
-
+/* Task step: sets the panel's list to mode 7 and its state to 4; always finishes. */
+u32 FUN_00317a64(PanelTask *task)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 8);
-  FUN_002bee58(temp_v0 + 0x984,7);
-  *(unsigned char *)(temp_v0 + 0x88) = 4;
-  return 1;
+    Panel *panel = task->panel;
+
+    FUN_002bee58(panel->list, 7);
+    panel->state = 4;
+    return 1;
 }
 
 } /* extern "C" */

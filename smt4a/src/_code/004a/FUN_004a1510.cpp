@@ -5,7 +5,7 @@
 extern "C" {
 
 int renderCtxResetColorScale(unsigned int);
-int FUN_0016c560(unsigned int);
+int skinObjectUpdateMatrices(unsigned int);
 int FUN_00183bb0(void);
 
 typedef int romwright_code(...);
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00183bb0. */
 
 
@@ -39,7 +39,7 @@ void FUN_004a1510(int param_1)
     }
     (*pcVar2)();
   }
-  FUN_0016c560(g_renderCtx);
+  skinObjectUpdateMatrices(g_renderCtx);
   renderCtxResetColorScale(g_renderCtx);
   return;
 }

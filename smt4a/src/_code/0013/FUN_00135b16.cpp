@@ -1,4 +1,4 @@
-/* NON_MATCHING: loop shape only: retail enters the loop with `b.n` to the bottom test, built tests first (`cmp; beq`) */
+/* Built with -Ospace (see flags_W4Match4b.txt). */
 /* Copies the 8-byte elements in [first, last) one by one through FUN_0030d3ba into the output run starting at `out`; returns the end of the output. */
 #include "common.h"
 

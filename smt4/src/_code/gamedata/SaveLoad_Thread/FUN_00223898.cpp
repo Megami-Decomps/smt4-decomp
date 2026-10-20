@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bcc60(...);
-int FUN_002bcd44(...);
+int resultReportIfFailed(...);
 int memAlloc(...);
 int FUN_002c5254(...);
 int FUN_002c526c(...);
@@ -27,7 +27,7 @@ extern unsigned char LAB_003f6f50; /* 0x3f6f50 */
 extern unsigned char LAB_003f6fe4; /* 0x3f6fe4 */
 
 /* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002bcd44. */
+/* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c5254. */
 /* Supplied declaration required: FUN_002c526c. */
@@ -78,7 +78,7 @@ unsigned char FUN_00223898(int param_1,int param_2)
   temp_v0 = 0x100;
   memAlloc(0x100,0x100,0,0x2000);
   *(unsigned int *)(param_1 + 0x28) = temp_v0;
-  FUN_002bcd44(param_1 + 0x2c,temp_v0,0x2000);
+  resultReportIfFailed(param_1 + 0x2c,temp_v0,0x2000);
   if (param_2 != 1) {
     if (!(param_2 == 0 || param_2 == 3)) {
       if (param_2 != 2) {

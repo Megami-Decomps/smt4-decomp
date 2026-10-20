@@ -20,7 +20,7 @@ int nn_os_LightEvent_Signal(unsigned int *);
 int FUN_002c40f8(unsigned int *, int *, int, int);
 int FUN_002c526c(void);
 int asdFatalError(void);
-int FUN_002c5d5c(int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 int software_interrupt(int);
 
 typedef int romwright_code(...);
@@ -63,7 +63,7 @@ extern unsigned int FUN_002bb100(void);
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: asdFatalError. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern unsigned char nn_os_LightEvent_TryWait(unsigned int);
 
 
@@ -85,7 +85,7 @@ void FUN_0012a37c(void)
   unsigned int temp_v7;
   unsigned int temp_v8;
   
-  FUN_002c5d5c(&temp_v6,&LAB_0013b628,4,3);
+  __aeabi_vec_ctor_nocookie_nodtor(&temp_v6,&LAB_0013b628,4,3);
   temp_v6 = DAT_004e5290;
   temp_v7 = DAT_004e5294;
   temp_v8 = DAT_004e5298;

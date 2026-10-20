@@ -1,47 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Message_ShowConfirm` (_code @ 0x1ecc90, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int eventTexRequestStopAll(void);
-int bustupCutAnimRequestStopSlots(void);
-int FUN_002866b4(unsigned int, unsigned int, unsigned int, int, int, int);
+typedef struct MessageBox {
+    /* 0x000 */ u8 unk000[0xa11];
+    /* 0xa11 */ u8 mode;
+} MessageBox;
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+typedef struct MessageMain {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ MessageBox *box;
+} MessageMain;
 
-extern unsigned char g_messageMain; /* 0x43e188 */
+extern MessageMain g_messageMain;
 
-/* Supplied declaration required: eventTexRequestStopAll. */
-/* Supplied declaration required: bustupCutAnimRequestStopSlots. */
-extern unsigned int FUN_002865f8(void);
-/* Supplied declaration required: FUN_002866b4. */
-extern unsigned int scrGetCommandFrame(void);
-extern unsigned int scrGetArg(unsigned int);
+void eventTexRequestStopAll(void);
+void bustupCutAnimRequestStopSlots(void);
+void FUN_002866b4(u32 unit, u32 arg, u32 value, s32 kind, s32 a, s32 b);
+u32 FUN_002865f8(void);
+u32 scrGetCommandFrame(void);
+u32 scrGetArg(u32 index);
 
+/* Sets the message box's mode (when there is one) and shows a message of the given kind for the
+ * unit FUN_002865f8 names, using script argument 0 and the command frame. */
+static void showMessage(s32 kind)
+{
+    if (g_messageMain.box != NULL) {
+        g_messageMain.box->mode = 0x14;
+    }
+    u32 unit = FUN_002865f8();
+    u32 arg = scrGetArg(0);
+    u32 value = scrGetCommandFrame();
+
+    FUN_002866b4(unit, arg, value, kind, 0, 0);
+}
 
 void scrComm_Message_ShowConfirm(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  bustupCutAnimRequestStopSlots();
-  eventTexRequestStopAll();
-  if ((*(int *)((unsigned char *)&g_messageMain + 0x4)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0xa11) = 0x14;
-  }
-  temp_v0 = FUN_002865f8();
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetCommandFrame();
-  FUN_002866b4(temp_v0,temp_v1,temp_v2,6,0,0);
-  return;
+    bustupCutAnimRequestStopSlots();
+    eventTexRequestStopAll();
+    showMessage(6);
 }
 
 } /* extern "C" */

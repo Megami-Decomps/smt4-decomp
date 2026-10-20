@@ -9,10 +9,10 @@ int flagBitIsSet(int);
 int FUN_00292f4c(void);
 int btlGetMainState(void);
 int FUN_00297b94(int, unsigned int, unsigned int);
-int FUN_0029e908(int);
+int objectPartRunUnlessLocked(int);
 int FUN_0029e958(...);
 int FUN_0029f848(int, int, int, int, int, int);
-int FUN_002a0cb0(void);
+int buttonHelpGetMode(void);
 int dataTable00FindById(void);
 int FUN_002b8584(...);
 int buttonHelpSetPreset(void);
@@ -33,11 +33,11 @@ extern int FUN_00293230(void);
 /* Supplied declaration required: FUN_00297b94. */
 extern unsigned int FUN_00297ca4(int, unsigned int);
 extern int FUN_0029d644(unsigned int);
-/* Supplied declaration required: FUN_0029e908. */
+/* Supplied declaration required: objectPartRunUnlessLocked. */
 /* Supplied declaration required: FUN_0029e958. */
 extern int FUN_0029ee54(unsigned int);
 /* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: FUN_002a0cb0. */
+/* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002b8584. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -63,12 +63,12 @@ void playSceneSetState(int param_1,int param_2,int param_3)
     FUN_0029f848(param_1 + 0x33a8,4,1,4,1,1);
   }
   if (*(int *)(param_1 + 0x3048) == 0x13 || *(int *)(param_1 + 0x3048) == 0x16) {
-    FUN_002a0cb0();
+    buttonHelpGetMode();
     buttonHelpSetPreset();
   }
   temp_v1 = *(int *)(param_1 + 0x3048);
   if ((temp_v1 == 0x22 || temp_v1 == 0x23) || temp_v1 == 0x24) {
-    FUN_002a0cb0();
+    buttonHelpGetMode();
     buttonHelpSetPreset();
   }
   temp_v1 = FUN_002b898c();
@@ -76,7 +76,7 @@ void playSceneSetState(int param_1,int param_2,int param_3)
     btlGetMainState();
     temp_v1 = FUN_00293230();
     if (temp_v1 == 0) {
-      FUN_002a0cb0();
+      buttonHelpGetMode();
       buttonHelpSetPreset();
     }
   }
@@ -93,7 +93,7 @@ void playSceneSetState(int param_1,int param_2,int param_3)
     if (((!(param_2 == 9 || param_2 == 8)) && (!(param_2 == 0xb || param_2 == 10))) &&
        (!(param_2 == 0xd || param_2 == 0xc))) {
       if (param_2 == 1) {
-        FUN_0029e908(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+        objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
         FUN_00292dd0();
       }
     }

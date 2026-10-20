@@ -1,36 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00328674` (_code @ 0x328674, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the 0x4d8b40 buffer address from three separate literal-pool words (this build shares one) and loads the offsets in the other order */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00323a08(unsigned char *, int);
-int rt_memcpy_w(...);
+typedef struct SourceInfo {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s32 offset;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ u32 handle;
+} SourceInfo;
 
-extern unsigned char DAT_004d8b40; /* 0x4d8b40 */
+typedef struct OffsetInfo {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s32 offset;
+} OffsetInfo;
 
-extern unsigned int FUN_002468e0(unsigned int, int);
-/* Supplied declaration required: FUN_00323a08. */
-/* Supplied declaration required: rt_memcpy_w. */
+extern u8 DAT_004d8b40[0x90];
 
+extern void *FUN_002468e0(u32 handle, s32 offset);
+extern u32 FUN_00323a08(u8 *buffer, s32 arg);
+extern void rt_memcpy_w(void *dst, void *src, u32 size);
 
-unsigned char * FUN_00328674(int param_1,int param_2)
-
+/* Edits the 0x90-byte record found for `source` through the shared buffer and returns FUN_00323a08's
+ * result, with bit 23 added when its bit 0 is set. */
+u32 FUN_00328674(SourceInfo *source, OffsetInfo *other)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char *puVar2;
-  
-  temp_v0 = FUN_002468e0(*(unsigned int *)(param_1 + 0x14),
-                       *(int *)(param_2 + 0xc) + *(int *)(param_1 + 0xc));
-  rt_memcpy_w(&DAT_004d8b40,temp_v0,0x90);
-  puVar2 = &DAT_004d8b40;
-  FUN_00323a08(&DAT_004d8b40,1);
-  rt_memcpy_w(temp_v0,&DAT_004d8b40,0x90);
-  if (((unsigned int)puVar2 & 1) != 0) {
-    puVar2 = (unsigned char *)((unsigned int)puVar2 | 0x800000);
-  }
-  return puVar2;
+    void *record = FUN_002468e0(source->handle, source->offset + other->offset);
+    u32 result;
+
+    rt_memcpy_w(DAT_004d8b40, record, 0x90);
+    result = FUN_00323a08(DAT_004d8b40, 1);
+    rt_memcpy_w(record, DAT_004d8b40, 0x90);
+    if (result & 1) {
+        result |= 0x800000;
+    }
+    return result;
 }
 
 } /* extern "C" */

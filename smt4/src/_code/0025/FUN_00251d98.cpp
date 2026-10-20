@@ -47,7 +47,7 @@ extern unsigned char LAB_0025217c; /* 0x25217c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: gameGetUnitRecord. */
-extern unsigned int FUN_002b05d0(int);
+extern unsigned int categoryGetColor(int);
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002b6dd8. */
@@ -181,7 +181,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
           do {
             if (((unsigned int)temp_v0 & (1 << (temp_v4 & 0xff))) != 0) {
               if (*(int *)&param_1->field_0x1c == temp_v6) {
-                temp_v5 = FUN_002b05d0((int)(short)temp_v4);
+                temp_v5 = categoryGetColor((int)(short)temp_v4);
                 break;
               }
               temp_v6 = temp_v6 + 1;

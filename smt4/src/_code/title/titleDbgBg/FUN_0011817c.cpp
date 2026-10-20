@@ -22,7 +22,7 @@ extern unsigned char LAB_0011827c; /* 0x11827c */
 extern unsigned char LAB_00118288; /* 0x118288 */
 extern unsigned char LAB_001251d8; /* 0x1251d8 */
 extern int FUN_00125e64(...); /* 0x125e64 */
-extern int FUN_00126420(...); /* 0x126420 */
+extern int titleDbgBgDestroy(...); /* 0x126420 */
 extern unsigned int *DAT_0044e2e8; /* 0x44e2e8 */
 
 /* Supplied declaration required: FUN_002be624. */
@@ -46,7 +46,7 @@ void FUN_0011817c(void)
   FUN_002be624(puVar1 + 4,&LAB_0011826c,"Jun 10 2013");
   *(unsigned char *)(puVar1 + 1) = 0;
   puVar2 = &LAB_0011827c;
-  asdProcessCreateSimple(&LAB_0011827c,2,0,0,&LAB_001251d8,FUN_00126420,0);
+  asdProcessCreateSimple(&LAB_0011827c,2,0,0,&LAB_001251d8,titleDbgBgDestroy,0);
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_00118288,0x73,0,0,FUN_00125e64,0,0,puVar2);
   return;

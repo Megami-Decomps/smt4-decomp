@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00295f28(...);
+int dataTable9EntryOrZero(...);
 int dataTable1bOr1cGetRecord(void);
 int randNextInRange(int);
 int dataTableGetCount(unsigned int);
@@ -23,7 +23,7 @@ struct fn_00333b74_arg1 {
 extern int g_aocSystem; /* 0x433158 */
 
 extern unsigned char *FUN_00240cd4(fn_00333b74_arg1 *);
-/* Supplied declaration required: FUN_00295f28. */
+/* Supplied declaration required: dataTable9EntryOrZero. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: randNextInRange. */
@@ -146,11 +146,11 @@ LAB_00333c78:
     else {
       temp_v7 = gameGetPlayerData();
       if (*(unsigned char *)(temp_v7 + 0x76) >= 99) {
-        temp_v8 = FUN_00295f28(0x62);
+        temp_v8 = dataTable9EntryOrZero(0x62);
         param_1[0xd] = temp_v8;
       }
       else {
-        temp_v8 = FUN_00295f28();
+        temp_v8 = dataTable9EntryOrZero();
         param_1[0xd] = temp_v8;
       }
       pvVar12 = (void *)((temp_v8 * puVar17[3]) / 100);

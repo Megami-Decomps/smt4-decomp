@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c3918(...);
+int heapOwnerCreate(...);
 int asdMemoryAlloc(...);
 int FUN_0034e43c(...);
 int FUN_0035196c(void);
@@ -39,7 +39,7 @@ extern unsigned int DAT_004c3988; /* 0x4c3988 */
 extern unsigned int DAT_004c39e0; /* 0x4c39e0 */
 extern unsigned int DAT_004c3a38; /* 0x4c3a38 */
 
-/* Supplied declaration required: FUN_002c3918. */
+/* Supplied declaration required: heapOwnerCreate. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0034e43c. */
 /* Supplied declaration required: FUN_0035196c. */
@@ -59,22 +59,22 @@ void FUN_0017fc6c(void)
   
   temp_v0 = 0x10000;
   asdMemoryAlloc(0x10000,0x100,0,&LAB_00240000,1);
-  FUN_002c3918(&DAT_004c3828,temp_v0,&LAB_00240000,0x100);
+  heapOwnerCreate(&DAT_004c3828,temp_v0,&LAB_00240000,0x100);
   temp_v0 = 0x10000;
   asdMemoryAlloc(0x10000,0x100,0,0x80000,1);
-  FUN_002c3918(&DAT_004c3880,temp_v0,0x80000,0x100);
+  heapOwnerCreate(&DAT_004c3880,temp_v0,0x80000,0x100);
   temp_v0 = 0x10000;
   asdMemoryAlloc(0x10000,0x100,0,0x400000,1);
-  FUN_002c3918(&DAT_004c39e0,temp_v0,0x400000,0x100);
+  heapOwnerCreate(&DAT_004c39e0,temp_v0,0x400000,0x100);
   temp_v0 = 0x10000;
   asdMemoryAlloc(0x10000,0x100,0,0x100000,1);
-  FUN_002c3918(&DAT_004c38d8,temp_v0,0x100000,0);
+  heapOwnerCreate(&DAT_004c38d8,temp_v0,0x100000,0);
   temp_v0 = 0x10000;
   asdMemoryAlloc(0x10000,0x100,0,0x8000,1);
-  FUN_002c3918(&DAT_004c3930,temp_v0,0x8000,0);
+  heapOwnerCreate(&DAT_004c3930,temp_v0,0x8000,0);
   temp_v0 = 0x10000;
   asdMemoryAlloc(0x10000,0x100,0,0x90000,1);
-  FUN_002c3918(&DAT_004c3988,temp_v0,0x90000,0);
+  heapOwnerCreate(&DAT_004c3988,temp_v0,0x90000,0);
   g_mobiclipCtrl = 0;
   FUN_003f5fc4(mobiclipHeapAllocB,&LAB_001a0f60);
   FUN_003f6520(mobiclipHeapAllocD,&LAB_001df8b4);

@@ -1,48 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b2bbc` (_code @ 0x2b2bbc, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00192608(void);
-int FUN_0048026c(...);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x36];
+    /* 0x36 */ s16 bonus;
+    /* 0x38 */ u8 unk38[0x38];
+    /* 0x70 */ u16 order;
+} Record;
 
-/* stack frame of param_2: 2 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned short sp28; /* 0x28: local_28 */
-    unsigned short sp38; /* 0x38: local_38 */
-} param_2_stack;
+extern Record *FUN_00192608(u32 id);
+extern void FUN_0048026c(u32 id, s16 *values);
 
-/* Supplied declaration required: FUN_00192608. */
-/* Supplied declaration required: FUN_0048026c. */
-
-
-int FUN_002b2bbc(unsigned short *param_1,unsigned short *param_2)
-
+/* Sort comparison of two ids: by the sum of the first FUN_0048026c value and the record bonus (b before a when larger), then by order ascending. */
+s32 FUN_002b2bbc(u16 *idA, u16 *idB)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  short temp_v3 [8];
-  short temp_v4 [10];
-  
-  temp_v0 = (unsigned int)*param_1;
-  FUN_00192608();
-  temp_v1 = (unsigned int)*param_2;
-  FUN_00192608();
-  FUN_0048026c(*param_1,temp_v3);
-  FUN_0048026c(*param_2,temp_v4);
-  temp_v2 = ((int)temp_v4[0] + (int)*(short *)(temp_v1 + 0x36)) -
-          ((int)temp_v3[0] + (int)*(short *)(temp_v0 + 0x36));
-  if (temp_v2 == 0) {
-    temp_v0 = (unsigned int)*param_1;
-    FUN_00192608();
-    temp_v1 = (unsigned int)*param_2;
-    FUN_00192608();
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x70) - (unsigned int)*(unsigned short *)(temp_v1 + 0x70);
-  }
-  return temp_v2;
+    s16 valuesA[8];
+    s16 valuesB[8];
+    Record *recordA = FUN_00192608(*idA);
+    Record *recordB = FUN_00192608(*idB);
+    s32 diff;
+
+    FUN_0048026c(*idA, valuesA);
+    FUN_0048026c(*idB, valuesB);
+    diff = (valuesB[0] + recordB->bonus) - (valuesA[0] + recordA->bonus);
+    if (diff == 0) {
+        recordA = FUN_00192608(*idA);
+        recordB = FUN_00192608(*idB);
+        diff = recordA->order - recordB->order;
+    }
+    return diff;
 }
 
 } /* extern "C" */

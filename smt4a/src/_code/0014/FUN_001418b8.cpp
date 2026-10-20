@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned char DAT_0063e1e8; /* 0x63e1e8 */
+extern unsigned char g_asdSoundSystem; /* 0x63e1e8 */
 
 extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
 /* Supplied declaration required: FUN_0015fe40. */
@@ -23,9 +23,9 @@ void FUN_001418b8(unsigned int param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = nw_snd_SoundArchive_IsAvailable(&DAT_0063e1e8);
+  temp_v0 = nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem);
   if (temp_v0 != 0) {
-    FUN_0015fe40(&DAT_0063e1e8,param_1);
+    FUN_0015fe40(&g_asdSoundSystem,param_1);
     return;
   }
   return;

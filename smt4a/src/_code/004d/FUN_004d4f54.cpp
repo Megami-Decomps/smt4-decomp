@@ -5,7 +5,7 @@
 extern "C" {
 
 extern unsigned int *asdListBoxGetIntValuePtr(unsigned int, unsigned int);
-extern unsigned int FUN_0032c430(unsigned int);
+extern unsigned int listBoxItemHasOwner(unsigned int);
 extern unsigned int FUN_003874fc(unsigned int);
 
 
@@ -18,15 +18,15 @@ void FUN_004d4f54(int param_1,int param_2)
   temp_v0 = FUN_003874fc(*(unsigned int *)(param_1 + 0x10));
   switch(temp_v0) {
   case 0:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_2 + 0x23a4) = temp_v0;
     return;
   case 1:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_2 + 0x23a8) = temp_v0;
     return;
   case 2:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_2 + 0x23ac) = temp_v0;
     return;
   case 3:
@@ -38,15 +38,15 @@ void FUN_004d4f54(int param_1,int param_2)
     *(unsigned int *)(param_2 + 0x23b4) = *puVar2;
     return;
   case 5:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_2 + 0x23b8) = temp_v0;
     return;
   case 6:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_2 + 0x23bc) = temp_v0;
     return;
   case 7:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_2 + 0x23c0) = temp_v0;
     return;
   case 8:
@@ -70,11 +70,11 @@ void FUN_004d4f54(int param_1,int param_2)
     *(unsigned int *)(param_2 + 0x23d4) = *puVar2;
     return;
   case 0xd:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_2 + 0x23d8) = temp_v0;
     return;
   case 0xe:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_2 + 0x23dc) = temp_v0;
     return;
   case 0xf:
@@ -86,7 +86,7 @@ void FUN_004d4f54(int param_1,int param_2)
     *(unsigned int *)(param_2 + 0x23e4) = *puVar2;
     return;
   case 0x11:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_2 + 0x23e8) = temp_v0;
     return;
   case 0x12:
@@ -98,23 +98,23 @@ void FUN_004d4f54(int param_1,int param_2)
     *(unsigned int *)(param_2 + 0x23f0) = *puVar2;
     return;
   case 0x14:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_2 + 0x23f4) = temp_v0;
     return;
   case 0x15:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_2 + 0x23f8) = temp_v0;
     return;
   case 0x16:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_2 + 0x23fc) = temp_v0;
     return;
   case 0x17:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     puVar2 = (unsigned int *)(param_2 + 0x2400);
     break;
   case 0x18:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     puVar2 = (unsigned int *)(param_2 + 0x2404);
     break;
   case 0x19:

@@ -53,7 +53,7 @@ int FUN_003a366c(...);
 int FUN_003adc58(...);
 int FUN_003d54f8(...);
 int FUN_003e0090(...);
-int FUN_003e5728(...);
+int linkedTargetSetFloat(...);
 int flagValueSub(...);
 int FUN_0049fe58(...);
 int VectorUnsignedToFloat(...);
@@ -65,7 +65,7 @@ int FUN_00246688(...);
 int FUN_00294a44(...);
 int FUN_00297f00(...);
 int mapIfReleaseSlot4(...);
-int FUN_002ba400(...);
+int mapTrapArm(...);
 int FUN_002c2d44(...);
 int FUN_002de104(...);
 int FUN_003024a0(...);
@@ -80,7 +80,7 @@ int FUN_002342b8(...);
 int FUN_00245e38(...);
 int FUN_00246014(...);
 int FUN_002d88a0(...);
-int FUN_002d8af4(...);
+int mapIfOverlayRelease(...);
 int mapIfReleaseSlot2(...);
 int mapIfReleaseSlot3(...);
 int FUN_00325ba4(...);
@@ -341,13 +341,13 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapIfReleaseSlot4. */
 /* Supplied declaration required: FUN_002b80b8. */
 /* Supplied declaration required: mapTrapGetUnk3C. */
-/* Supplied declaration required: FUN_002ba400. */
+/* Supplied declaration required: mapTrapArm. */
 /* Supplied declaration required: FUN_002c2d44. */
 /* Supplied declaration required: FUN_002d1780. */
 /* Supplied declaration required: FUN_002d1e44. */
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: FUN_002d88a0. */
-/* Supplied declaration required: FUN_002d8af4. */
+/* Supplied declaration required: mapIfOverlayRelease. */
 /* Supplied declaration required: FUN_002dae68. */
 /* Supplied declaration required: FUN_002de104. */
 extern int FUN_002e07f4(void);
@@ -412,7 +412,7 @@ extern int linkHolderCallFirst(int);
 /* Supplied declaration required: FUN_003e54b8. */
 extern int linkHolderCheckFirst(int);
 /* Supplied declaration required: FUN_003e5708. */
-/* Supplied declaration required: FUN_003e5728. */
+/* Supplied declaration required: linkedTargetSetFloat. */
 /* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: linkHolderClearFlag. */
 /* Supplied declaration required: gameFlagSetValue. */
@@ -2713,7 +2713,7 @@ LAB_003270bc:
         else {
           if (temp_v32 == 0x37) {
             g_lmapScene[2] = g_lmapScene[2] + 1;
-            FUN_002d8af4();
+            mapIfOverlayRelease();
             FUN_00313648(0xc);
             FUN_002e364c(g_lmapScene + 10);
             FUN_00327ee8();
@@ -2733,7 +2733,7 @@ LAB_003270bc:
               FUN_00327ee8();
               return;
             }
-            FUN_002d8af4();
+            mapIfOverlayRelease();
             piVar18 = g_lmapScene;
             temp_v32 = piVar18[1];
           }
@@ -3018,7 +3018,7 @@ LAB_00366704:
         piVar18[2] = 0;
         break;
       case 0xf:
-        FUN_002d8af4();
+        mapIfOverlayRelease();
         piVar18 = g_lmapScene;
         temp_v32 = piVar18[1];
         piVar18[1] = temp_v32 + 1;
@@ -3223,7 +3223,7 @@ LAB_00366704:
             return;
           }
           if (temp_v32 == 0x5b) {
-            FUN_002d8af4();
+            mapIfOverlayRelease();
             piVar18 = g_lmapScene;
             g_lmapScene[1] = g_lmapScene[1] + 1;
             piVar18[2] = 0;
@@ -3263,7 +3263,7 @@ LAB_00366704:
         FUN_002342b8();
       }
       if ((g_lmapScene[2] >= 0x1f) && (temp_v32 = mapIfHasSelection(), temp_v32 == 0)) {
-        FUN_002d8af4();
+        mapIfOverlayRelease();
         piVar18 = DAT_005806a4;
         DAT_005806a4[6] = (int)((float)g_lmapScene[0x14] + temp_v18);
         piVar18[0x2c] = 0;
@@ -3620,7 +3620,7 @@ LAB_00366704:
           if (temp_v32 != 0x36) {
             if (temp_v32 == 0x37) {
               g_lmapScene[2] = g_lmapScene[2] + 1;
-              FUN_002d8af4();
+              mapIfOverlayRelease();
               temp_v17 = 0x12;
               FUN_00313648(temp_v17);
             }
@@ -3646,7 +3646,7 @@ LAB_00366704:
           }
         }
         else {
-          FUN_002d8af4();
+          mapIfOverlayRelease();
           piVar18 = g_lmapScene;
           temp_v32 = piVar18[1];
           piVar18[1] = temp_v32 + 1;
@@ -4554,7 +4554,7 @@ joined_r0x00248750:
           DAT_005f1859 = 0;
           DAT_005f185a = 0;
           temp_v32 = mapTrapGetUnk38();
-          FUN_002ba400(*(short *)(temp_v32 + 0xe) != 0);
+          mapTrapArm(*(short *)(temp_v32 + 0xe) != 0);
           piVar18 = g_lmapScene;
           piVar10 = g_lmapScene + 7;
           g_lmapScene[0x15] = 9;
@@ -5035,7 +5035,7 @@ LAB_002dad8c:
                   temp_v32 = linkHolderCallFirst(g_lmapScene[0x6a]);
                   if ((temp_v32 == 0x11) && (temp_v32 = linkHolderCheckFirst(g_lmapScene[0x6a]), temp_v32 != 0))
                   {
-                    FUN_003e5728(g_lmapScene[0x6a]);
+                    linkedTargetSetFloat(g_lmapScene[0x6a]);
                     piVar18 = g_lmapScene;
                     g_lmapScene[1] = 3;
                     piVar18[2] = 0;
@@ -6083,7 +6083,7 @@ code_r0x00313648:
         FUN_003fe86c(temp_v32,0,2);
         *(unsigned int *)(temp_v32 + 4) = *(unsigned int *)(temp_v32 + 4) & 0xfffffffc;
         FUN_003e54b8(g_lmapScene[0x6a]);
-        FUN_003e5728(g_lmapScene[0x6a]);
+        linkedTargetSetFloat(g_lmapScene[0x6a]);
       }
       if (g_lmapScene[2] >= 7) {
         DAT_005f17b0 = g_lmapScene[7];
@@ -6109,7 +6109,7 @@ code_r0x00313648:
       temp_v32 = *(int *)(g_lmapScene[0x61] + 4);
       *(unsigned int *)(temp_v32 + 4) = *(unsigned int *)(temp_v32 + 4) | 3;
       *(unsigned int *)(temp_v32 + 0x1fc) = 0x3f800000;
-      FUN_003e5728(piVar18[0x6a]);
+      linkedTargetSetFloat(piVar18[0x6a]);
       DAT_005f1a4e = 0;
       FUN_00313648(1);
       FUN_00303460(0);
@@ -6224,7 +6224,7 @@ code_r0x00313648:
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
       temp_v32 = linkHolderCheckFirst(piVar18[0x6a]);
-      if ((temp_v32 != 0) && (FUN_003e5728(g_lmapScene[0x6a]), g_lmapScene[2] >= 5))
+      if ((temp_v32 != 0) && (linkedTargetSetFloat(g_lmapScene[0x6a]), g_lmapScene[2] >= 5))
       goto code_r0x00313648;
     }
     break;
@@ -8183,7 +8183,7 @@ LAB_00246d70:
         FUN_003fe86c(temp_v32,0,2);
         *(unsigned int *)(temp_v32 + 4) = *(unsigned int *)(temp_v32 + 4) & 0xfffffffc;
         FUN_003e54b8(g_lmapScene[0x6a]);
-        FUN_003e5728(g_lmapScene[0x6a]);
+        linkedTargetSetFloat(g_lmapScene[0x6a]);
       }
       if (g_lmapScene[2] >= 7) {
         DAT_005f17b0 = g_lmapScene[7];

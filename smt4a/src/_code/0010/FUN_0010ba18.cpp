@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineJobSetStateTimed(int, int);
 int FUN_002f5898(int, unsigned int);
 
@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
 extern int wordRefsEqual_002ea42c(int, unsigned int);
 /* Supplied declaration required: onlineJobSetStateTimed. */
@@ -47,7 +47,7 @@ void FUN_0010ba18(int param_1)
     temp_v0 = FUN_002e7908(temp_v5,temp_v6);
     FUN_002f5898(param_1,temp_v0);
   }
-  FUN_002e6e5c(temp_v2);
+  _ZN9Obj55b28cD1Ev(temp_v2);
   return;
 }
 

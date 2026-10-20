@@ -6,7 +6,7 @@ extern "C" {
 
 extern float *g_btlCamera; /* 0x571508 */
 
-extern int FUN_0032c430(unsigned int);
+extern int listBoxItemHasOwner(unsigned int);
 extern float *asdListBoxGetFloatValuePtr(unsigned int);
 
 
@@ -24,7 +24,7 @@ void FUN_004d542c(int param_1,unsigned int param_2,unsigned int param_3)
   temp_v3 = g_btlCamera[0x161];
   switch(param_3) {
   case 0:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     if (temp_v0 != 0) {
       temp_v1 = (float)((unsigned int)g_btlCamera[0x193] | 0x10000000);
     }
@@ -53,7 +53,7 @@ void FUN_004d542c(int param_1,unsigned int param_2,unsigned int param_3)
     g_btlCamera[3] = *pfVar1 - g_btlCamera[0x170];
     return;
   case 6:
-    temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
+    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
     if (temp_v0 != 0) {
       temp_v1 = (float)((unsigned int)g_btlCamera[0x193] | 0x20000000);
     }

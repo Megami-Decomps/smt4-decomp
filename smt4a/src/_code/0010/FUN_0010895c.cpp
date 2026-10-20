@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], unsigned int);
-int FUN_002e6e5c(...);
+int _ZN9Obj55b28cD1Ev(...);
 int sharedRefRelease(...);
 int strAssign(int *, unsigned int, unsigned int, unsigned int);
 int operatorNew(int);
@@ -46,7 +46,7 @@ typedef struct {
 } param_10_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: strAssign. */
 /* Supplied declaration required: operatorNew. */
@@ -206,7 +206,7 @@ LAB_001089c6:
   temp_v15[1] = iStack_58;
   temp_v15[2] = (int)temp_v8[0];
   FUN_002f1486(&temp_v9);
-  FUN_002e6e5c(temp_v11);
+  _ZN9Obj55b28cD1Ev(temp_v11);
   return;
 LAB_00108b04:
   if ((param_7 << 0x1a < 0) && (param_9 != 0)) {
@@ -217,7 +217,7 @@ LAB_00108b04:
   temp_v12 = 0x10001;
   FUN_002e7908(temp_v15,&temp_v12);
   FUN_002f1486(&temp_v9);
-  FUN_002e6e5c(temp_v11);
+  _ZN9Obj55b28cD1Ev(temp_v11);
   return;
 }
 

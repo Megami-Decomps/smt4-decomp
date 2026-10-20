@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001517b4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_001643b4(...);
 int dialogOpen(...);
 int FUN_00203b40(...);
@@ -81,7 +81,7 @@ extern unsigned char LAB_00321c94; /* 0x321c94 */
 /* Supplied declaration required: FUN_001517b4. */
 extern int FUN_001632fc(void);
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_001643b4. */
 extern int FUN_00167f08(void);
 /* Supplied declaration required: sysPlaySe. */
@@ -911,7 +911,7 @@ LAB_0026e66c:
     if ((temp_v7 != 0) || (temp_v7 = temp_v26, FUN_00228b04(temp_v26,0), temp_v7 != 0)) {
       temp_v6 = FUN_002a4894(temp_v26);
       if (temp_v6 != temp_v28) {
-        FUN_001641b4(0x100020d);
+        eventQueueAddUniqueIfValid(0x100020d);
       }
       temp_v6 = FUN_00284140((int)*(short *)(param_1 + *(short *)(temp_v32 + 0x68) * 2 + 0x43b6));
       if (temp_v6 != 0) {
@@ -941,7 +941,7 @@ LAB_0026e66c:
       }
       *(unsigned int *)(param_1 + 0x436c) = 6;
       *(unsigned int *)(param_1 + 0x437c) = 0;
-      FUN_001641b4(0x100020f);
+      eventQueueAddUniqueIfValid(0x100020f);
       return;
     }
     temp_v9 = 0;
@@ -953,7 +953,7 @@ LAB_0026e66c:
     } while (temp_v9 < 8);
     temp_v9 = FUN_002c2c68(temp_v26);
     if (temp_v9 - 1 <= temp_v28) {
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
       obj04Finish();
       sysPlaySe(0x9c);
       temp_v8 = *(unsigned int *)(param_1 + 0x436c);
@@ -973,10 +973,10 @@ LAB_0026e66c:
         temp_v5 = temp_v29;
         FUN_0032fea0(temp_v29,*puVar27,*(unsigned short *)(temp_v9 + 0x34));
         if (temp_v5 == 0) {
-          FUN_001641b4(0x100020f);
+          eventQueueAddUniqueIfValid(0x100020f);
           return;
         }
-        FUN_001641b4(0x100020f);
+        eventQueueAddUniqueIfValid(0x100020f);
         temp_v4 = *(short *)(temp_v9 + 0x34);
         temp_v5 = 0;
         do {
@@ -1065,7 +1065,7 @@ LAB_0026d4c4:
       }
       *(unsigned int *)(param_1 + 0x436c) = temp_v8;
     }
-    FUN_001641b4();
+    eventQueueAddUniqueIfValid();
     return;
   case 4:
     FUN_00224880(*(unsigned int *)(param_1 + 0x43ac));
@@ -1090,7 +1090,7 @@ LAB_0026d4c4:
     if ((temp_v7 != 0) || (temp_v7 = temp_v30, FUN_00228b04(temp_v30,0), temp_v7 != 0)) {
       temp_v9 = FUN_002a4894(temp_v30);
       if (temp_v9 != temp_v6) {
-        FUN_001641b4(0x100020d);
+        eventQueueAddUniqueIfValid(0x100020d);
       }
       FUN_002a4894(temp_v30);
       temp_v6 = FUN_002a4894(temp_v30);
@@ -1154,7 +1154,7 @@ LAB_0026d4c4:
         }
         flaggedEntrySetValueA(temp_v13,temp_v14);
         temp_v8 = 0x100020e;
-        FUN_001641b4(temp_v8);
+        eventQueueAddUniqueIfValid(temp_v8);
       }
       else {
         temp_v6 = 10;
@@ -1171,7 +1171,7 @@ LAB_0026d4c4:
               *(unsigned short *)(param_1 + (temp_v7 - 1) * 2 + 0x76c4) = 0;
               *(unsigned int *)(param_1 + 0x436c) = 3;
               temp_v8 = 0x100020f;
-              FUN_001641b4(temp_v8);
+              eventQueueAddUniqueIfValid(temp_v8);
             }
           }
         }

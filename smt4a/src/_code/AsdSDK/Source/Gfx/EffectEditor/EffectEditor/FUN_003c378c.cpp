@@ -13,7 +13,7 @@ int effEditorNodeChainApply(unsigned char *);
 int FUN_002b3ed8(...);
 int FUN_002f8794(void);
 int FUN_002ffe14(float *, unsigned int, int);
-int FUN_00300124(void);
+int effMenuListAppend(void);
 int FUN_00390038(int);
 
 /* stack frame of param_2: 13 slot(s), 52 byte(s) */
@@ -74,7 +74,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002b3ed8. */
 /* Supplied declaration required: FUN_002f8794. */
 /* Supplied declaration required: FUN_002ffe14. */
-/* Supplied declaration required: FUN_00300124. */
+/* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: FUN_00390038. */
 
 
@@ -244,7 +244,7 @@ unsigned int FUN_003c378c(int param_1,int param_2)
   *(float *)(temp_v5 + 0xc) = fStack_54;
   *(float *)&*(unsigned int *)(temp_v5 + 0x10) = uStack_50;
   *(float *)&*(unsigned int *)(temp_v5 + 0x14) = temp_v21;
-  FUN_00300124();
+  effMenuListAppend();
   return temp_v6;
 }
 

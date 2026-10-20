@@ -39,7 +39,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00230aec. */
 extern int FUN_00230b90(int);
-extern int FUN_00230c1c(unsigned short, unsigned int);
+extern int btlRollClamped(unsigned short, unsigned int);
 extern unsigned int FUN_00230c80(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00230cc0. */
 /* Supplied declaration required: FUN_00230d2c. */
@@ -180,7 +180,7 @@ void FUN_0022f1d0(int param_1,int param_2,int param_3,unsigned short *param_4)
     temp_v16 = 0xad;
     if (*(int *)(param_1 + 0x860) != 8) {
       temp_v9 = FUN_00230e04(param_4);
-      temp_v5 = FUN_00230c1c(*param_4,temp_v9);
+      temp_v5 = btlRollClamped(*param_4,temp_v9);
       if (temp_v5 == 0) {
         temp_v12 = 0x787878ff;
       }
@@ -198,7 +198,7 @@ void FUN_0022f1d0(int param_1,int param_2,int param_3,unsigned short *param_4)
     temp_v16 = 0x9a;
     if (*(int *)(param_1 + 0x860) != 8) {
       temp_v9 = FUN_00230e04(param_4);
-      temp_v5 = FUN_00230c1c(*param_4,temp_v9);
+      temp_v5 = btlRollClamped(*param_4,temp_v9);
       if (temp_v5 == 0) {
         temp_v12 = 0x5a5a5aff;
       }

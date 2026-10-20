@@ -8,10 +8,10 @@ int FUN_0021dbc0(...);
 
 int CONCAT44(...);
 int FUN_0020e738(...);
-int FUN_00291ba4(void);
+int contentEntryGetD(void);
 int FUN_00291c20(...);
 int dataTable2cSub0GetCount(void);
-int FUN_0030f654(void);
+int contentEntryGetC(void);
 int dataTable2cSub3GetCount(void);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
@@ -101,16 +101,16 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_0020e738. */
 /* Supplied declaration required: FUN_0021dbc0. */
-/* Supplied declaration required: FUN_00291ba4. */
+/* Supplied declaration required: contentEntryGetD. */
 /* Supplied declaration required: FUN_00291c20. */
 /* Supplied declaration required: dataTable2cSub0GetCount. */
 extern int gameFlagIsSet(void);
 extern int randNextInRange(unsigned int);
 extern int gameGetMapBlock(void);
-extern unsigned int *FUN_002d2a00(int);
+extern unsigned int *mapBlockBitIsSet(int);
 extern char *dataTable2cSub0GetRecord(int);
 extern char *dataTable2cSub3GetRecord(int);
-/* Supplied declaration required: FUN_0030f654. */
+/* Supplied declaration required: contentEntryGetC. */
 extern unsigned int dataTable2cSub2GetRecord(int);
 /* Supplied declaration required: dataTable2cSub3GetCount. */
 extern int FUN_00323500(void);
@@ -262,7 +262,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
             }
             if ((temp_v6 && puVar3 == param_2) &&
                ((temp_v0 != '\x02' ||
-                (puVar3 = (unsigned int *)FUN_002d2a00((int)pcVar4[3]), puVar3 == (unsigned int *)0x0)))
+                (puVar3 = (unsigned int *)mapBlockBitIsSet((int)pcVar4[3]), puVar3 == (unsigned int *)0x0)))
                ) {
               temp_v45 = (float)((unsigned long long)temp_v29 >> 0x20);
               temp_v53 = (float)VectorSignedToFloat((int)*(short *)(pcVar4 + 10),
@@ -794,7 +794,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
           if (*(char *)(temp_v2 + 0xde4) == '\x03') {
             temp_v0 = *(char *)(temp_v2 + 0xdec);
             temp_v2 = (int)temp_v0;
-            FUN_00291ba4();
+            contentEntryGetD();
             if (((*(short *)(temp_v2 + 0x10) == 0) || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)) &&
                ((*(short *)(temp_v2 + 0x12) == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 == 0)))) {
               temp_v8 = (float)((unsigned long long)temp_v29 >> 0x20);
@@ -981,7 +981,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
         }
         else {
           temp_v2 = (int)*(char *)(temp_v2 + 0xdec);
-          FUN_0030f654();
+          contentEntryGetC();
           if (((*(short *)(temp_v2 + 0x10) == 0) || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)) &&
              ((*(short *)(temp_v2 + 0x12) == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 == 0)))) {
             temp_v8 = (float)((unsigned long long)temp_v29 >> 0x20);
@@ -1195,7 +1195,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
       temp_v63 = temp_v1 + 0xdec;
       do {
         pcVar6 = pcVar4;
-        FUN_0030f654();
+        contentEntryGetC();
         if (((((unsigned int *)(int)*pcVar6 != (unsigned int *)0xffffffff) &&
              ((unsigned int *)(int)*pcVar6 == param_1)) &&
             (((unsigned int *)(int)pcVar6[1] == param_2 &&
@@ -1417,7 +1417,7 @@ LAB_0027907c:
       temp_v64 = temp_v1 + 0xdec;
       do {
         pcVar6 = pcVar4;
-        FUN_00291ba4();
+        contentEntryGetD();
         if ((((((unsigned int *)(int)*pcVar6 != (unsigned int *)0xffffffff) &&
               ((unsigned int *)(int)*pcVar6 == param_1)) && ((unsigned int *)(int)pcVar6[1] == param_2))
             && ((temp_v5 = 0, *(short *)(pcVar6 + 0x10) == 0 || (temp_v4 = gameFlagIsSet(), temp_v4 != 0)))

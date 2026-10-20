@@ -1,43 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030b080` (_code @ 0x30b080, 0x84 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the entity's flags with a writeback load (ldr r1, [r0, r1, lsl #3]!), reusing r0 as the entity pointer; built computes the pointer into r2 first */
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+/* 0x288-byte battle entity record. */
+typedef struct Entity0030b080 {
+    u32 flags;          /* 0x000: bit 0 active, bit 4 enabled, bit 6 hidden */
+    u8 unk04[0x284];
+} Entity0030b080;
 
-extern int FUN_00245854(unsigned int *, unsigned int);
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
+typedef struct BtlState0030b080 {
+    /* 0x0000 */ u8 unk0000[0x1fc0];
+    /* 0x1fc0 */ Entity0030b080 *entities;
+} BtlState0030b080;
 
+u32 scrGetArg(u32 index);
+BtlState0030b080 *btlGetMainState(void);
+s32 FUN_00245854(Entity0030b080 *entity, u32 arg);
+void scrSetResult(s32 value);
 
-unsigned int FUN_0030b080(void)
-
+/* Script command: reports whether some active, enabled, visible entity accepts script argument 0 (FUN_00245854). Returns 1. */
+u32 FUN_0030b080(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v3 = 0;
-  while( 1 ) {
-    temp_v1 = btlGetMainState();
-    puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + temp_v3 * 0x288);
-    temp_v2 = *puVar3;
-    if ((((temp_v2 & 0x10) != 0 && (temp_v2 & 1) != 0) && ((temp_v2 & 0x40) == 0)) &&
-       (temp_v1 = FUN_00245854(puVar3,temp_v0), temp_v1 != 0)) break;
-    temp_v3 = temp_v3 + 1;
-    if (temp_v3 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
+    u32 arg = scrGetArg(0);
+    s32 i;
+
+    for (i = 0; i < 109; i++) {
+        Entity0030b080 *entity = &btlGetMainState()->entities[i];
+        u32 flags = entity->flags;
+
+        if ((flags & 0x10) != 0 && (flags & 1) != 0 && (flags & 0x40) == 0 && FUN_00245854(entity, arg) != 0) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-  }
-  scrSetResult(1);
-  return 1;
+    scrSetResult(0);
+    return 1;
 }
 
 } /* extern "C" */

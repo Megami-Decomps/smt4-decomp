@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00256550(unsigned int);
-int FUN_002670cc(void);
+int contentEntryGetE(void);
 int FUN_00267144(void);
 int FUN_00273f5c(void);
 int FUN_00287aec(void);
@@ -35,7 +35,7 @@ extern int g_lmapScene; /* 0x447e88 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_00256550. */
-/* Supplied declaration required: FUN_002670cc. */
+/* Supplied declaration required: contentEntryGetE. */
 /* Supplied declaration required: FUN_00267144. */
 extern int FUN_002671bc(void);
 /* Supplied declaration required: FUN_00273f5c. */
@@ -141,7 +141,7 @@ unsigned int FUN_001f9334(int param_1)
               }
               *(unsigned char *)(temp_v6 + 0xf20) = *(unsigned char *)(temp_v6 + 0xf20) & 0xdf;
               temp_v7 = (int)*(short *)(temp_v6 + 0xf24);
-              FUN_002670cc();
+              contentEntryGetE();
               temp_v10 = *(int *)(temp_v3 + 0xc);
               if (((((*(char *)(temp_v7 + 4) == temp_v10) &&
                     ((int)*(char *)(temp_v7 + 5) == *(int *)(temp_v3 + 0x10))) ||

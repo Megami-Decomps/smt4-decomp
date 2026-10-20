@@ -1,47 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003aa9a4` (_code @ 0x3aa9a4, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: last call: retail hoists `add r5, sp, #12` above `mov r0, r4`; here the temporary takes r4 after the move. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00152530(void);
-int FUN_00231434(int, int, int *, int *, int *, int *);
-int FUN_002346ac(...);
-int FUN_0023470c(unsigned int, int, int, int, int);
-int FUN_0023474c(unsigned int, int, int, int, int);
+extern int FUN_00152530(void);
+extern int FUN_00231434(int table, int id, s32 *x, s32 *y, s32 *w, s32 *h);
+extern int FUN_002346ac(u32 target, s32 x, s32 y, s32 w, s32 h);
+extern int FUN_0023470c(u32 target, s32 x, s32 y, s32 w, s32 h);
+extern int FUN_0023474c(u32 target, s32 x, s32 y, s32 w, s32 h);
 
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_00152530. */
-/* Supplied declaration required: FUN_00231434. */
-/* Supplied declaration required: FUN_002346ac. */
-/* Supplied declaration required: FUN_0023470c. */
-/* Supplied declaration required: FUN_0023474c. */
-
-
-void FUN_003aa9a4(unsigned int param_1)
-
+/* Looks up three rectangles of table 0x1d (ids 0x573-0x575) and applies each to `target`. */
+void FUN_003aa9a4(u32 target)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int uStack_18;
-  int temp_v2;
-  
-  FUN_00152530();
-  FUN_00231434(0x1d,0x573,&temp_v1,&uStack_18,&temp_v0,&temp_v2);
-  FUN_0023474c(param_1,temp_v1,uStack_18,temp_v0,temp_v2);
-  FUN_00231434(0x1d,0x574,&temp_v1,&uStack_18,&temp_v0,&temp_v2);
-  FUN_0023470c(param_1,temp_v1,uStack_18,temp_v0,temp_v2);
-  FUN_00231434(0x1d,0x575,&temp_v1,&uStack_18,&temp_v0,&temp_v2);
-  FUN_002346ac(param_1,temp_v1,uStack_18,temp_v0,temp_v2);
-  return;
+    s32 x;
+    s32 y;
+    s32 w;
+    s32 h;
+
+    FUN_00152530();
+    FUN_00231434(0x1D, 0x573, &x, &y, &w, &h);
+    FUN_0023474c(target, x, y, w, h);
+    FUN_00231434(0x1D, 0x574, &x, &y, &w, &h);
+    FUN_0023470c(target, x, y, w, h);
+    FUN_00231434(0x1D, 0x575, &x, &y, &w, &h);
+    FUN_002346ac(target, x, y, w, h);
 }
 
-} /* extern "C" */
+}

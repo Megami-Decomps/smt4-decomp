@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_004288bc(void);
+extern int queryResultFailureOnly(void);
 
 
 int FUN_004283cc(void)
@@ -12,7 +12,7 @@ int FUN_004283cc(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_004288bc();
+  temp_v0 = queryResultFailureOnly();
   if (-1 < temp_v0) {
     temp_v0 = 0;
   }

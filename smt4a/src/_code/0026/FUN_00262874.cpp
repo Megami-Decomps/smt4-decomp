@@ -79,7 +79,7 @@ int FUN_003f5220(...);
 int pair40Set(...);
 
 int FUN_001517b4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int gameGetSlotRecord(...);
 int FUN_00228b04(...);
 int FUN_0026e848(...);
@@ -112,7 +112,7 @@ int FUN_002a4878(...);
 int FUN_002c2c88(int);
 int FUN_002c7e24(void);
 int FUN_00333dac(int);
-int FUN_003341b0(void);
+int mapBlockSetRequest(void);
 int FUN_003343f0(...);
 int obj04Finish(void);
 int FUN_0034cda0(void);
@@ -134,7 +134,7 @@ extern int btlGetMainState(void);
 extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int btlMainIsRunning(void);
 extern int FUN_001643a0(void);
@@ -231,7 +231,7 @@ extern int FUN_002effbc(void);
 extern int FUN_002f036c(void);
 /* Supplied declaration required: FUN_002f707c. */
 /* Supplied declaration required: FUN_002f8288. */
-extern int FUN_00319ca4(void);
+extern int holderKindIsActive(void);
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: FUN_0031d890. */
 /* Supplied declaration required: FUN_0031f688. */
@@ -240,7 +240,7 @@ extern int FUN_0032fb18(void);
 /* Supplied declaration required: FUN_00333694. */
 /* Supplied declaration required: FUN_00333dac. */
 extern int FUN_0033413c(void);
-/* Supplied declaration required: FUN_003341b0. */
+/* Supplied declaration required: mapBlockSetRequest. */
 /* Supplied declaration required: FUN_00334214. */
 /* Supplied declaration required: FUN_003343c0. */
 /* Supplied declaration required: FUN_003343f0. */
@@ -342,7 +342,7 @@ unsigned int FUN_00262874(void)
   } while (temp_v14 < 3);
   *(int *)(temp_v1 + 0x1214) = *(int *)(temp_v1 + 0x1214) + 1;
   FUN_0021c1e0();
-  FUN_003341b0();
+  mapBlockSetRequest();
   temp_v5 = *(unsigned int *)(temp_v1 + 0x1c);
   if (((!(temp_v5 == 0 || temp_v5 == 0x17)) && (!(temp_v5 == 0xe || temp_v5 == 0xd))) &&
      (!(temp_v5 == 0x12 || temp_v5 == 0x18))) {
@@ -568,14 +568,14 @@ unsigned int FUN_00262874(void)
       FUN_0026fa30();
       FUN_0020b718(3,1);
       temp_v10 = 0x1000210;
-      FUN_001641b4(temp_v10);
+      eventQueueAddUniqueIfValid(temp_v10);
     }
     else {
 LAB_00263038:
       if ((temp_v14 == 1 || temp_v14 == 2) && ((int)temp_v8 < 4)) {
         temp_v5 = FUN_002a4878(temp_v4);
         if (temp_v5 != temp_v8) {
-          FUN_001641b4(0x100020d);
+          eventQueueAddUniqueIfValid(0x100020d);
         }
         FUN_002a4914(temp_v4,temp_v8);
         FUN_0023b45c(0);
@@ -594,7 +594,7 @@ LAB_00263038:
               if (*(char *)(temp_v1 + 0x9b4) == '\x02') {
                 *(unsigned char *)(temp_v1 + 0x34) = 1;
                 FUN_002a5cf4();
-                FUN_001641b4(0x100020e);
+                eventQueueAddUniqueIfValid(0x100020e);
               }
               if (*(char *)(temp_v1 + 0x9b4) == '\x04') {
                 *(unsigned char *)(temp_v1 + 0x34) = 1;
@@ -604,7 +604,7 @@ LAB_00263038:
             }
             else {
               temp_v10 = 0x100020f;
-              FUN_001641b4(temp_v10);
+              eventQueueAddUniqueIfValid(temp_v10);
             }
           }
           else {
@@ -625,7 +625,7 @@ LAB_00263038:
                 temp_v14 = temp_v14 + 1;
               } while (temp_v14 < 0x18);
               temp_v10 = 0x100020f;
-              FUN_001641b4(temp_v10);
+              eventQueueAddUniqueIfValid(temp_v10);
             }
             else {
               FUN_0020a760(1);
@@ -795,7 +795,7 @@ LAB_00263038:
         FUN_0023b45c(0);
         if (temp_v4 + temp_v14 * 4 != temp_v5) {
           temp_v10 = 0x100020d;
-          FUN_001641b4(temp_v10);
+          eventQueueAddUniqueIfValid(temp_v10);
         }
       }
     }
@@ -812,7 +812,7 @@ LAB_00263038:
       FUN_0026fa30();
       FUN_0023b45c(0);
       FUN_0020b718(3,1);
-      FUN_001641b4(0x1000210);
+      eventQueueAddUniqueIfValid(0x1000210);
     }
     else {
 LAB_00263748:
@@ -861,12 +861,12 @@ LAB_00263748:
             if (*(char *)(temp_v1 + 0x9b4) == '\x02') {
               *(unsigned char *)(temp_v1 + 0x34) = 1;
               FUN_002a5cf4();
-              FUN_001641b4(0x100020e);
+              eventQueueAddUniqueIfValid(0x100020e);
             }
             if (*(char *)(temp_v1 + 0x9b4) == '\x03') {
               *(unsigned char *)(temp_v1 + 0x34) = 1;
               FUN_002a5cf4();
-              FUN_001641b4(0x100020e);
+              eventQueueAddUniqueIfValid(0x100020e);
             }
             if (*(char *)(temp_v1 + 0x9b4) == '\x04') {
               *(unsigned char *)(temp_v1 + 0x34) = 1;
@@ -876,7 +876,7 @@ LAB_00263748:
           }
           else {
             temp_v10 = 0x100020f;
-            FUN_001641b4(temp_v10);
+            eventQueueAddUniqueIfValid(temp_v10);
           }
         }
         else {
@@ -919,7 +919,7 @@ LAB_00263748:
             temp_v6 = 1;
             temp_v10 = 0x100020f;
 LAB_00263984:
-            FUN_001641b4(temp_v10);
+            eventQueueAddUniqueIfValid(temp_v10);
           }
           else {
             temp_v4 = FUN_0020a760(1);
@@ -1242,7 +1242,7 @@ LAB_00263984:
         FUN_0023b45c(0);
       }
       FUN_0020b718(3,1);
-      FUN_001641b4(0x1000210);
+      eventQueueAddUniqueIfValid(0x1000210);
     }
     else {
 LAB_00264384:
@@ -1269,7 +1269,7 @@ LAB_00264384:
           FUN_002a4914(temp_v6,(int)temp_v8 % 4);
           FUN_002a4964(temp_v6,(int)(temp_v8 + ((unsigned int)((int)temp_v8 >> 0x1f) >> 0x1e)) >> 2);
           if (temp_v4 + temp_v14 * 4 != temp_v8) {
-            FUN_001641b4();
+            eventQueueAddUniqueIfValid();
           }
         }
         temp_v4 = 0;
@@ -1482,7 +1482,7 @@ LAB_00264c78:
                           temp_v10 = gameGetSlotRecord((int)*(char *)(temp_v4 + 0x1c9f));
                           FUN_00334214(temp_v10,0,0);
                           FUN_0021c1e0();
-                          FUN_003341b0();
+                          mapBlockSetRequest();
                           temp_v14 = (int)*(short *)(temp_v1 + 0x38);
                           FUN_00333694(temp_v14,(int)*(char *)(temp_v4 + 0x1c9f),
                                        *(unsigned short *)(temp_v1 + 0x36),1);
@@ -1500,7 +1500,7 @@ LAB_00264c78:
                                        *(unsigned short *)(temp_v1 + 0x36),0);
                           FUN_0031f718(0xffffffff,0);
                           FUN_0021c1e0();
-                          FUN_003341b0();
+                          mapBlockSetRequest();
                           temp_v4 = (int)*(short *)(temp_v1 + 0x38);
                           FUN_00333694(temp_v4,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
                           if (temp_v4 == 1) {
@@ -1526,7 +1526,7 @@ LAB_00264d34:
                       temp_v10 = gameGetSlotRecord((int)*(char *)(temp_v4 + 0x1c9f));
                       FUN_00334214(temp_v10,0,0);
                       FUN_0021c1e0();
-                      FUN_003341b0();
+                      mapBlockSetRequest();
                       temp_v14 = (int)*(char *)(temp_v4 + 0x1c9f);
                       FUN_00480140(temp_v14,*(unsigned short *)(temp_v1 + 0x36),1);
                       if (temp_v14 == 1) {
@@ -1546,14 +1546,14 @@ LAB_00264b88:
                       FUN_00480140(0xffffffff,*(unsigned short *)(temp_v1 + 0x36),0);
                       FUN_0031f718(0xffffffff,0);
                       FUN_0021c1e0();
-                      FUN_003341b0();
+                      mapBlockSetRequest();
                       temp_v4 = -1;
                       FUN_00480140(0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
                       if (temp_v4 == 1) {
                         *(unsigned char *)(temp_v1 + 0x9c0) = 0;
                       }
                       FUN_0021c1e0();
-                      FUN_003341b0();
+                      mapBlockSetRequest();
                       obj48Arm(*(unsigned int *)(temp_v1 + 0xa10),0xff);
                       temp_v10 = gameGetPlayerData();
                       rt_memcpy_w(temp_v1 + 0x1080,temp_v10,100);
@@ -1564,7 +1564,7 @@ LAB_00264b88:
 LAB_00265434:
                   temp_v10 = 0x100021c;
 LAB_0026546c:
-                  FUN_001641b4(temp_v10);
+                  eventQueueAddUniqueIfValid(temp_v10);
                 }
                 else if ((((*(char *)(temp_v1 + 0x9b4) == '\x12') && (temp_v14 >= 1)) &&
                          (*(char *)(temp_v4 + temp_v14 + 0x1c9f) >= '\0')) &&
@@ -1576,7 +1576,7 @@ LAB_0026546c:
                 else {
 LAB_002654c8:
                   temp_v10 = 0x100020f;
-                  FUN_001641b4(temp_v10);
+                  eventQueueAddUniqueIfValid(temp_v10);
                 }
               }
               else {
@@ -1680,7 +1680,7 @@ LAB_002654c8:
                             FUN_00334214(temp_v10,0,0);
                             temp_v22 = 1;
                             FUN_0021c1e0();
-                            FUN_003341b0();
+                            mapBlockSetRequest();
                             temp_v14 = (int)*(short *)(temp_v1 + 0x38);
                             FUN_00333694(temp_v14,*(unsigned int *)(temp_v4 + 0xa80),
                                          *(unsigned short *)(temp_v1 + 0x36),1);
@@ -1704,7 +1704,7 @@ LAB_002654c8:
                           FUN_00334214(temp_v10,0,0);
                           temp_v22 = 1;
                           FUN_0021c1e0();
-                          FUN_003341b0();
+                          mapBlockSetRequest();
                           temp_v14 = *(int *)(temp_v4 + 0xa80);
                           FUN_00480140(temp_v14,*(unsigned short *)(temp_v1 + 0x36),1);
                           if (temp_v14 == 1) {
@@ -1791,7 +1791,7 @@ LAB_002654c8:
 LAB_00264df0:
                     temp_v10 = 0x100020e;
                   }
-                  FUN_001641b4(temp_v10);
+                  eventQueueAddUniqueIfValid(temp_v10);
                 }
                 else if (((*(char *)(temp_v1 + 0x9b4) == '\x12') && (*(int *)(temp_v4 + 0xa80) >= 0)) &&
                         (temp_v4 = gameGetSlotRecord(), temp_v4 != 0)) {
@@ -1801,7 +1801,7 @@ LAB_00264df0:
                 }
                 else {
                   temp_v10 = 0x100020f;
-                  FUN_001641b4(temp_v10);
+                  eventQueueAddUniqueIfValid(temp_v10);
                 }
               }
               goto LAB_002657e4;
@@ -1901,7 +1901,7 @@ LAB_002654dc:
               FUN_0020d934();
             }
           }
-          FUN_001641b4(0x100020f);
+          eventQueueAddUniqueIfValid(0x100020f);
           FUN_0033449c(0);
         }
         else {
@@ -2070,7 +2070,7 @@ LAB_00265d24:
           FUN_0020b718(3,1);
           temp_v10 = 0x1000210;
         }
-        FUN_001641b4(temp_v10);
+        eventQueueAddUniqueIfValid(temp_v10);
       }
       else {
         temp_v0 = *(char *)(temp_v1 + 0x9b4);
@@ -2100,10 +2100,10 @@ LAB_00265d24:
 LAB_00265bc8:
               FUN_0031f718(0xffffffff,0);
               FUN_0021c1e0();
-              FUN_003341b0();
+              mapBlockSetRequest();
               FUN_0020b718(0x16,1);
               temp_v10 = 0x100021c;
-              FUN_001641b4(temp_v10);
+              eventQueueAddUniqueIfValid(temp_v10);
               FUN_002c85b0(0);
               FUN_0034cda0();
               break;
@@ -2117,7 +2117,7 @@ LAB_00265bc8:
           FUN_0047fa90(temp_v5,1);
           if (temp_v5 != 0) {
             temp_v10 = 0x100020f;
-            FUN_001641b4(temp_v10);
+            eventQueueAddUniqueIfValid(temp_v10);
             FUN_002c85b0(0);
             FUN_0034cda0();
             break;
@@ -2128,11 +2128,11 @@ LAB_00265c00:
           temp_v10 = gameGetSlotRecord();
           FUN_00334214(temp_v10,0,0);
           FUN_0021c1e0();
-          FUN_003341b0();
+          mapBlockSetRequest();
           FUN_0020b718(0x16,1);
           temp_v10 = 0x100021c;
         }
-        FUN_001641b4(temp_v10);
+        eventQueueAddUniqueIfValid(temp_v10);
         FUN_002c85b0(0);
       }
     }
@@ -2249,7 +2249,7 @@ LAB_002661cc:
                 sysPlaySe(0xa0);
               }
               temp_v10 = 0x100020e;
-              FUN_001641b4(temp_v10);
+              eventQueueAddUniqueIfValid(temp_v10);
               break;
             }
             goto LAB_002660c4;
@@ -2261,7 +2261,7 @@ LAB_002661cc:
           }
 LAB_002662a0:
           temp_v10 = 0x100020e;
-          FUN_001641b4(temp_v10);
+          eventQueueAddUniqueIfValid(temp_v10);
         }
         else {
           temp_v14 = FUN_0023b3b8();
@@ -2309,7 +2309,7 @@ LAB_002662a0:
               FUN_0020d934();
               FUN_0023fc38();
               temp_v10 = 0x100020f;
-              FUN_001641b4(temp_v10);
+              eventQueueAddUniqueIfValid(temp_v10);
             }
           }
         }
@@ -2636,7 +2636,7 @@ LAB_00266ac4:
           FUN_002a4914(temp_v4,temp_v14 % 4);
           FUN_002a4964(temp_v4,(int)(temp_v14 + ((unsigned int)(temp_v14 >> 0x1f) >> 0x1e)) >> 2);
           countersAddSaturating(7,1);
-          FUN_001641b4(0x100021f);
+          eventQueueAddUniqueIfValid(0x100021f);
         }
       }
       FUN_0023fc38();
@@ -2650,7 +2650,7 @@ LAB_00266ac4:
     if (*(char *)(g_partyPanel + 0x42) != '\0') {
       temp_v4 = g_partyPanel + 0xdb4;
     }
-    temp_v14 = FUN_00319ca4();
+    temp_v14 = holderKindIsActive();
     if (temp_v14 == 0) {
       FUN_0037e1b0(0xffffffff,1);
       temp_v14 = FUN_002a4894(temp_v4);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the Thumb literal-pool alignment pad differs in fdiff (retail lists it as code `movs r0, r0`, the build as data `.short 0x0000`); the bytes are the same. */
 /* Replaces the owned 16-bit string: frees the old one, allocates a new empty one of the given capacity. */
 #include "common.h"
 

@@ -13,7 +13,7 @@ typedef struct {
 extern int FUN_002311a4(...); /* 0x2311a4 */
 extern int FUN_00399638(...); /* 0x399638 */
 extern int FUN_00399b44(...); /* 0x399b44 */
-extern int FUN_0039bc28(...); /* 0x39bc28 */
+extern int screenStep(...); /* 0x39bc28 */
 extern int FUN_0039c09c(...); /* 0x39c09c */
 extern int FUN_0039c348(...); /* 0x39c348 */
 extern int FUN_0039c9d4(...); /* 0x39c9d4 */
@@ -62,7 +62,7 @@ void NaviMain_InitCallbacks(int param_1)
   *(unsigned int *)(param_1 + 0xb60) = 0;
   *(romwright_code **)(param_1 + 0xb64) = FUN_002311a4;
   *(unsigned int *)(param_1 + 0xb68) = 0;
-  *(romwright_code **)(param_1 + 0xb6c) = FUN_0039bc28;
+  *(romwright_code **)(param_1 + 0xb6c) = screenStep;
   *(unsigned int *)(param_1 + 0xb70) = 0;
   return;
 }

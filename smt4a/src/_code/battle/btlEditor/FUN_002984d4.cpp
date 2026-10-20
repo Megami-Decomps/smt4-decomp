@@ -30,7 +30,7 @@ typedef struct {
 
 extern unsigned char DAT_00528144; /* 0x528144 */
 extern unsigned int *g_btlCamera; /* 0x571508 */
-extern unsigned int *DAT_005737e0; /* 0x5737e0 */
+extern unsigned int *g_btlEditor; /* 0x5737e0 */
 
 /* Supplied declaration required: FUN_001568f8. */
 /* Supplied declaration required: jobStop. */
@@ -50,7 +50,7 @@ extern unsigned int asdListBoxGetIntValuePtr(unsigned int, unsigned int);
 extern unsigned int asdListBoxGetFloatValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: jobSetWork7C. */
 /* Supplied declaration required: FUN_003874fc. */
-extern unsigned int FUN_003efa38(int);
+extern unsigned int btlPosArrangeGetFileName(int);
 /* Supplied declaration required: FUN_004f43f0. */
 /* Supplied declaration required: FUN_004f452c. */
 /* Supplied declaration required: FUN_004f4648. */
@@ -77,12 +77,12 @@ unsigned int FUN_002984d4(void)
   unsigned int temp_v7 [34];
   
   temp_v1 = jobGetWork();
-  puVar8 = DAT_005737e0;
-  if (DAT_005737e0 == (unsigned int *)0x0) {
+  puVar8 = g_btlEditor;
+  if (g_btlEditor == (unsigned int *)0x0) {
     return 0;
   }
   puVar4 = temp_v7;
-  switch(*DAT_005737e0) {
+  switch(*g_btlEditor) {
   case 0:
     if (temp_v1 != 0) {
       piVar9 = (int *)(temp_v1 + 0x1ed4);
@@ -223,7 +223,7 @@ code_r0x004f4c54:
     break;
   case 6:
     sysMemClear(temp_v7,0x80);
-    temp_v2 = FUN_003efa38(temp_v1);
+    temp_v2 = btlPosArrangeGetFileName(temp_v1);
     libc_strcpy(temp_v7,temp_v2);
     temp_v2 = asdLoadFileGetUseRawPaths();
     asdLoadFileSetUseRawPaths(1);

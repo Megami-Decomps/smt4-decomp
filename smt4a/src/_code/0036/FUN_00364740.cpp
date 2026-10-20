@@ -14,9 +14,9 @@ int FUN_001bc124(void);
 int FUN_003534b0(...);
 int FUN_0035363c(...);
 int FUN_003686f4(int, unsigned char [8]);
-int FUN_003796d4(...);
+int aocDataTable23GetEntry(...);
 int FUN_003799d0(void);
-int FUN_003983b8(...);
+int contentEntryGet(...);
 int dataTable2FType0Count(void);
 int dataTable2FType1Count(void);
 int dataTable2FType2Count(void);
@@ -84,11 +84,11 @@ extern unsigned int FUN_003683c8(int);
 /* Supplied declaration required: FUN_003686f4. */
 extern int FUN_00368868(void);
 extern int gameOwnedBitTest(int);
-/* Supplied declaration required: FUN_003796d4. */
+/* Supplied declaration required: aocDataTable23GetEntry. */
 extern unsigned int *dataTable23Sub0GetEntry(unsigned int);
 /* Supplied declaration required: FUN_003799d0. */
-/* Supplied declaration required: FUN_003983b8. */
-extern int FUN_003a320c(void);
+/* Supplied declaration required: contentEntryGet. */
+extern int dataTable23Section5CountWithExtras(void);
 extern unsigned int *dataTable2FType0GetEntry(unsigned char *);
 extern unsigned int *dataTable2FType1GetEntry(unsigned char *);
 extern unsigned int *dataTable2FType2GetEntry(unsigned char *);
@@ -213,7 +213,7 @@ LAB_003647c0:
                           temp_v7 = 0;
                           if (0 < temp_v3) {
                             do {
-                              piVar6 = (int *)FUN_003983b8(temp_v7);
+                              piVar6 = (int *)contentEntryGet(temp_v7);
                               if (*piVar6 == -1) break;
                               temp_v4 = partyEntryFlagsBit1((short)piVar6[1]);
                               if ((((temp_v4 != 0) && ((unsigned int *)*piVar6 == puVar16)) &&
@@ -236,7 +236,7 @@ LAB_00364944:
                           temp_v6 = temp_v5;
                           if (0 < (int)temp_v5) {
                             do {
-                              puVar11 = (unsigned int *)FUN_003796d4(temp_v8);
+                              puVar11 = (unsigned int *)aocDataTable23GetEntry(temp_v8);
                               temp_v6 = *puVar11;
                               if (temp_v6 == 0xffffffff) break;
                               if (temp_v6 == temp_v9) {
@@ -253,7 +253,7 @@ LAB_00364944:
                                   if (temp_v8 != 0xfffffffe) {
                                     temp_v23 = temp_v8;
                                     if (temp_v8 == 0xffffffff) goto LAB_00364aa0;
-                                    param_3 = (unsigned int *)FUN_003796d4();
+                                    param_3 = (unsigned int *)aocDataTable23GetEntry();
                                     DAT_00580c98 = 0;
                                     DAT_00580c99 = 0;
                                     DAT_00580c9a = 0;
@@ -424,7 +424,7 @@ LAB_00364d94:
                             }
                             if (temp_v23 != 0xffffffff) {
 LAB_00364de8:
-                              temp_v3 = FUN_003796d4(temp_v23);
+                              temp_v3 = aocDataTable23GetEntry(temp_v23);
                               temp_v0 = *(short *)(temp_v3 + 8);
                               temp_v11 = temp_v0 == 0;
                               if (temp_v11) {
@@ -451,7 +451,7 @@ LAB_00364da4:
                       }
 LAB_00364e34:
                       puVar11 = temp_v24;
-                      temp_v3 = FUN_003a320c();
+                      temp_v3 = dataTable23Section5CountWithExtras();
                       temp_v16 = 0;
                       if (temp_v16 < temp_v3) {
                         do {
@@ -472,7 +472,7 @@ LAB_00364e34:
 LAB_00364eac:
                       temp_v8 = (unsigned int)*(char *)((int)puVar4 + 10);
                       if ((temp_v23 != 0xffffffff) && (temp_v8 == 3 || temp_v8 == 0xb)) {
-                        FUN_003796d4();
+                        aocDataTable23GetEntry();
                         temp_v8 = 0x10;
                       }
                       temp_v3 = FUN_00368868();
@@ -579,7 +579,7 @@ LAB_003652e4:
                         }
                       }
                       if (temp_v33 != -1) {
-                        piVar6 = (int *)FUN_003983b8();
+                        piVar6 = (int *)contentEntryGet();
                         temp_v3 = 0;
                         if (0 < (int)DAT_00580c94) {
                           in_r12 = &DAT_005f32a0;
@@ -614,7 +614,7 @@ LAB_003652e4:
                         }
                       }
                       if (temp_v23 != 0xffffffff) {
-                        piVar6 = (int *)FUN_003796d4();
+                        piVar6 = (int *)aocDataTable23GetEntry();
                         if ((short)piVar6[2] != 0) {
                           temp_v3 = 0;
                           if (0 < (int)DAT_00580c94) {

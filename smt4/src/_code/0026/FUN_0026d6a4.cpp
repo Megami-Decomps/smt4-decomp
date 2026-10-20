@@ -15,11 +15,11 @@ int useCounterStart(void);
 int FUN_0029e328(int);
 int sortMenuCreate(int);
 int FUN_0029e8b8(...);
-int FUN_0029e908(...);
+int objectPartRunUnlessLocked(...);
 int FUN_0029eb5c(...);
 int FUN_0029efa8(...);
 int FUN_002a0cc8(int);
-int FUN_002bc01c(int);
+int eventQueueAddUniqueIfValid(int);
 int timerStart(int, int, int);
 int FUN_002c1658(int, int);
 int SBORROW4(...);
@@ -38,11 +38,11 @@ extern int FUN_0029e02c(void);
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: FUN_0029e8b8. */
-/* Supplied declaration required: FUN_0029e908. */
+/* Supplied declaration required: objectPartRunUnlessLocked. */
 /* Supplied declaration required: FUN_0029eb5c. */
 /* Supplied declaration required: FUN_0029efa8. */
 /* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002c1658. */
 
@@ -89,7 +89,7 @@ unsigned int FUN_0026d6a4(int param_1)
     useCounterStart();
     FUN_00293348(0xf,1);
     FUN_002a0cc8(1);
-    FUN_002bc01c(0x100016d);
+    eventQueueAddUniqueIfValid(0x100016d);
     return 1;
   }
   temp_v0 = *(unsigned char *)(temp_v5 + 0x42) ^ 1;
@@ -100,11 +100,11 @@ unsigned int FUN_0026d6a4(int param_1)
   else {
     timerStart(temp_v5 + 0x4c8,4,0);
   }
-  FUN_002bc01c(0x100016d);
+  eventQueueAddUniqueIfValid(0x100016d);
   if (*(int *)(temp_v5 + 0x1c) != 6) {
     if (*(int *)(temp_v5 + 0x1c) == 8) {
       if (*(char *)(temp_v5 + 0x42) != '\0') {
-        temp_v2 = FUN_0029e908();
+        temp_v2 = objectPartRunUnlessLocked();
         temp_v3 = temp_v5 + 0xa6c;
         FUN_0029e8b8(temp_v3,temp_v2);
         temp_v1 = FUN_0029efa8(temp_v5 + 0xa08);
@@ -136,7 +136,7 @@ unsigned int FUN_0026d6a4(int param_1)
           *(unsigned int *)(temp_v5 + 0x2c) = 1;
         }
         FUN_002937e0();
-        temp_v2 = FUN_0029e908(temp_v3);
+        temp_v2 = objectPartRunUnlessLocked(temp_v3);
         temp_v1 = temp_v5 + 0xa08;
         FUN_0029e8b8(temp_v1,temp_v2);
         temp_v4 = FUN_0029efa8(temp_v3);
@@ -158,7 +158,7 @@ unsigned int FUN_0026d6a4(int param_1)
     }
   }
   else if (*(char *)(temp_v5 + 0x42) != '\0') {
-    temp_v2 = FUN_0029e908(temp_v5 + 0x940);
+    temp_v2 = objectPartRunUnlessLocked(temp_v5 + 0x940);
     temp_v3 = temp_v5 + 0x9a4;
     FUN_0029e8b8(temp_v3,temp_v2);
     temp_v1 = FUN_0029efa8(temp_v5 + 0x940);
@@ -184,7 +184,7 @@ unsigned int FUN_0026d6a4(int param_1)
       *(unsigned int *)(temp_v5 + 0x2c) = 1;
     }
     FUN_002937e0();
-    temp_v2 = FUN_0029e908(temp_v3);
+    temp_v2 = objectPartRunUnlessLocked(temp_v3);
     FUN_0029e8b8(temp_v5 + 0x940,temp_v2);
     temp_v1 = FUN_0029efa8(temp_v3);
     if (temp_v1 >= 3) {

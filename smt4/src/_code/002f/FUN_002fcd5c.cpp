@@ -1,32 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fcd5c` (_code @ 0x2fcd5c, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nodeListOwnerFree(void);
-int FUN_00247240(void);
+typedef struct EffectEditor {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ void *nodeListOwner;
+    /* 0x40 */ void *unk40;
+} EffectEditor;
 
-extern int DAT_0044eabc; /* 0x44eabc */
-extern int DAT_0044eac0; /* 0x44eac0 */
+extern EffectEditor g_effectEditor;
 
-/* Supplied declaration required: nodeListOwnerFree. */
-/* Supplied declaration required: FUN_00247240. */
+void FUN_00247240(void);
+void nodeListOwnerFree(void);
 
-
+/* Frees the editor's two owned objects, if present. */
 void FUN_002fcd5c(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  if (DAT_0044eac0 != 0) {
-    FUN_00247240();
-    DAT_0044eac0 = 0;
-  }
-  if (DAT_0044eabc != 0) {
-    nodeListOwnerFree();
-    DAT_0044eabc = 0;
-  }
-  return;
+    if (g_effectEditor.unk40 != NULL) {
+        FUN_00247240();
+        g_effectEditor.unk40 = NULL;
+    }
+    if (g_effectEditor.nodeListOwner != NULL) {
+        nodeListOwnerFree();
+        g_effectEditor.nodeListOwner = NULL;
+    }
 }
 
 } /* extern "C" */

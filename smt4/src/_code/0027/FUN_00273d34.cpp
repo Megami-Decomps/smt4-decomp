@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00267074(int);
-int FUN_002670cc(void);
+int contentEntryGetE(void);
 int FUN_00267144(void);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_00267074. */
-/* Supplied declaration required: FUN_002670cc. */
+/* Supplied declaration required: contentEntryGetE. */
 /* Supplied declaration required: FUN_00267144. */
 extern int FUN_002671bc(void);
 extern int FUN_0027d968(void);
@@ -78,7 +78,7 @@ void FUN_00273d34(void)
           if (0 < temp_v3) {
             do {
               piVar7 = piVar10;
-              FUN_002670cc();
+              contentEntryGetE();
               if ((*piVar7 != -1) && (piVar11 = piVar10, *piVar7 == (int)temp_v0)) break;
               piVar10 = (int *)((int)piVar10 + 1);
               temp_v3 = FUN_00326e44();
@@ -87,7 +87,7 @@ void FUN_00273d34(void)
           }
           temp_v3 = (int)(short)(int)piVar11;
           *(short *)(temp_v2 + 0xf24) = (short)(int)piVar11;
-          FUN_002670cc();
+          contentEntryGetE();
           *(unsigned char *)(temp_v2 + 0xf23) = 0;
           *(short *)(temp_v2 + 0xf28) = *(short *)(temp_v3 + 0xe) * 0x708;
           *(unsigned char *)(temp_v2 + 0xf21) = *(unsigned char *)(temp_v3 + 4);

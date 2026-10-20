@@ -6,7 +6,7 @@ extern "C" {
 
 int jobGetWork(void);
 int renderCtxResetColorScale(int);
-int FUN_0016c560(int);
+int skinObjectUpdateMatrices(int);
 
 typedef int romwright_code(...);
 extern unsigned char g_btlEffect; /* 0x5737f0 */
@@ -14,7 +14,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: jobGetWork. */
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int FUN_00387580(unsigned int);
 
 
@@ -61,7 +61,7 @@ unsigned int FUN_002dece8(void)
         (**(romwright_code **)(temp_v0 + 0x1294))(piVar7[temp_v3 + 1]);
         *(unsigned char *)(temp_v0 + 0x1290) = 0;
       }
-      FUN_0016c560(g_renderCtx);
+      skinObjectUpdateMatrices(g_renderCtx);
       renderCtxResetColorScale(g_renderCtx);
     }
   }

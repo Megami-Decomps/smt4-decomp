@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail forms the address of the id with `adds r0, #128` from the shared pool word; built folds the offset into a second pool word. */
 #include "sys/FlagBlock.h"
 
 extern "C" {

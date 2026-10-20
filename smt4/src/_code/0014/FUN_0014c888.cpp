@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c5d5c(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int nw_snd_internal_PoolImpl_CreateImpl(...);
 
 extern int FUN_00150fc8(...); /* 0x150fc8 */
@@ -12,7 +12,7 @@ extern unsigned char DAT_00421d40; /* 0x421d40 */
 
 extern int FUN_00150f24(unsigned int *);
 extern unsigned int *FUN_002a7b78(int);
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: nw_snd_internal_PoolImpl_CreateImpl. */
 
 
@@ -33,7 +33,7 @@ unsigned int * FUN_0014c888(unsigned int *param_1)
   puVar2[10] = (unsigned int)(puVar2 + 9);
   puVar2[0xb] = 0;
   puVar2 = puVar2 + 0xc;
-  FUN_002c5d5c(puVar2,FUN_00150fc8,0x50,0x20);
+  __aeabi_vec_ctor_nocookie_nodtor(puVar2,FUN_00150fc8,0x50,0x20);
   nw_snd_internal_PoolImpl_CreateImpl(puVar2 + -1,puVar2,0xa00,0x50);
   return puVar2 + -0x24;
 }

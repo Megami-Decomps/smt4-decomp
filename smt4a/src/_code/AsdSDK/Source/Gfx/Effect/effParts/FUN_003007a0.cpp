@@ -1,39 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003007a0` (_code @ 0x3007a0, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: store scheduling only: retail issues the last byte store before `mov r0, r4` (all three byte stores share r0/r1); armcc delays one past it. */
+#include "AsdSDK/Source/Gfx/Effect/effParts.h"
+
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char g_effPartsSourcePath[]; /* "c:\SMT4F\SMT4F\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */
 
-int memAlloc(int, int, int, int, int, int);
-int FUN_001b4ddc(int);
-int sysMemClear(...);
+void *memAlloc(int, int, int, int size, int align, int);
+void sysMemClear(void *block, s32 size);
+void FUN_001b4ddc(EffPart *part);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_001b4ddc. */
-/* Supplied declaration required: sysMemClear. */
-
-
-int FUN_003007a0(void)
-
+/* Creates the 0xC0-byte part variant: a cleared block whose first 0x90 bytes are cleared again, then flagged and initialized. */
+EffPart *FUN_003007a0(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0x10000;
-  memAlloc(0x10000,0x100,0,0xc0,0x10,1);
-  sysMemClear();
-  sysMemClear(temp_v0,0x90);
-  *(unsigned int *)(temp_v0 + 0x84) = 1;
-  *(unsigned char *)(temp_v0 + 0x88) = 8;
-  *(unsigned char *)(temp_v0 + 0x89) = 0;
-  *(unsigned char *)(temp_v0 + 0x8a) = 0;
-  FUN_001b4ddc(temp_v0);
-  return temp_v0;
+    EffPart *part;
+
+    asdDebugTrace(g_effPartsSourcePath, 1462);
+    part = (EffPart *)memAlloc(0x10000, 0x100, 0, 0xC0, 0x10, 1);
+    sysMemClear(part, 0xC0);
+    sysMemClear(part, 0x90);
+    part->unk84 = 1;
+    part->unk88 = 8;
+    part->unk89 = 0;
+    part->unk8a = 0;
+    FUN_001b4ddc(part);
+    return part;
 }
 
 } /* extern "C" */

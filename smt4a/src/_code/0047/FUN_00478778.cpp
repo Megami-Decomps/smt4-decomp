@@ -11,7 +11,7 @@ int asdTMTexTableReleaseNode(int, int);
 int scrScriptProcessDestroy(void);
 int asdMemFreeSlot(unsigned int);
 int asdTMTexTableFreeEntry(int);
-int FUN_0047314c(unsigned int *);
+int jobOwnerFreeSlotAndStop(unsigned int *);
 int jobFlagsWorkStop(unsigned int *);
 int releaseEntriesA(unsigned int *);
 int releaseEntriesB(unsigned int *);
@@ -28,7 +28,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_0047314c. */
+/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 /* Supplied declaration required: jobFlagsWorkStop. */
 /* Supplied declaration required: releaseEntriesA. */
 /* Supplied declaration required: releaseEntriesB. */
@@ -48,7 +48,7 @@ void FUN_00478778(unsigned int *param_1)
   *(unsigned char *)(g_aocDisplay + 0x450c) = 0;
   releaseEntriesB(param_1 + 0xba);
   releaseEntriesA(param_1 + 0xad);
-  FUN_0047314c(param_1 + 0x46c);
+  jobOwnerFreeSlotAndStop(param_1 + 0x46c);
   jobFlagsWorkStop(param_1);
   temp_v0 = jobIsValid(param_1[0x5e8]);
   if (temp_v0 != 0) {

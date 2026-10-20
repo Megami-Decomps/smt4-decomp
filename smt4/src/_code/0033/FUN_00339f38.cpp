@@ -5,7 +5,7 @@
 extern "C" {
 
 int mdlPartsRelease(void);
-int FUN_002947c0(void);
+int playerModelListCreate(void);
 int asdOperatorNew(void);
 
 typedef int romwright_code(...);
@@ -17,8 +17,8 @@ typedef struct {
 extern unsigned char DAT_004207d8; /* 0x4207d8 */
 
 /* Supplied declaration required: mdlPartsRelease. */
-/* Supplied declaration required: FUN_002947c0. */
-extern unsigned int *FUN_002947f4(void);
+/* Supplied declaration required: playerModelListCreate. */
+extern unsigned int *_ZN9Obj4206e8C1Ev(void);
 /* Supplied declaration required: asdOperatorNew. */
 
 
@@ -40,11 +40,11 @@ void FUN_00339f38(int param_1)
   asdOperatorNew();
   puVar2 = (unsigned int *)0x0;
   if (temp_v0 != 0) {
-    puVar2 = (unsigned int *)FUN_002947f4();
+    puVar2 = (unsigned int *)_ZN9Obj4206e8C1Ev();
     *puVar2 = (unsigned int)&DAT_004207d8;
   }
   *(unsigned int **)(param_1 + 0x4394) = puVar2;
-  FUN_002947c0();
+  playerModelListCreate();
   return;
 }
 

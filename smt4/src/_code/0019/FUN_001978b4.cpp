@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0029e908(...);
+int objectPartRunUnlessLocked(...);
 int vec2GetYInt(...);
 int vec2GetXInt(...);
 int FUN_002bf288(...);
@@ -28,12 +28,12 @@ extern int g_camp; /* 0x43da90 */
 extern int g_titleScene; /* 0x44ea00 */
 
 extern int idListAnyValid(unsigned int);
-extern int FUN_00224090(void);
+extern int uniteFlagIsClear(void);
 extern int FUN_0028f670(void);
 extern unsigned int FUN_00292844(unsigned int);
 extern unsigned int FUN_00299218(int, unsigned int);
 extern int FUN_0029d65c(int);
-/* Supplied declaration required: FUN_0029e908. */
+/* Supplied declaration required: objectPartRunUnlessLocked. */
 extern unsigned int FUN_0029e958(int);
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
@@ -81,7 +81,7 @@ void FUN_001978b4(void)
   if ((((temp_v1 == 0) && (temp_v1 = gameFlagIsSet(0x418), temp_v1 == 0)) ||
       ((temp_v1 = FUN_0028f670(), temp_v1 == 0 &&
        ((temp_v1 = gameFlagIsSet(0x453), temp_v1 != 0 && (temp_v1 = gameFlagIsSet(0x425), temp_v1 == 0))))))
-     || ((temp_v1 = FUN_0028f670(), temp_v1 == 0 && (temp_v1 = FUN_00224090(), temp_v1 == 0)))) {
+     || ((temp_v1 = FUN_0028f670(), temp_v1 == 0 && (temp_v1 = uniteFlagIsClear(), temp_v1 == 0)))) {
     temp_v19 = 1;
   }
   temp_v2 = vec2GetXInt();
@@ -102,7 +102,7 @@ void FUN_001978b4(void)
         temp_v11 = temp_v0 + temp_v10 * 0x8c + 0x904;
         temp_v1 = vec2GetXInt(temp_v11);
         temp_v2 = vec2GetYInt(temp_v11);
-        temp_v5 = FUN_0029e908(temp_v0 + 0x34);
+        temp_v5 = objectPartRunUnlessLocked(temp_v0 + 0x34);
         temp_v13 = temp_v5 == temp_v10;
         if (temp_v13) {
           temp_v5 = (unsigned int)*(unsigned char *)(temp_v0 + 0xad);
@@ -138,7 +138,7 @@ void FUN_001978b4(void)
         temp_v10 = temp_v10 + 1;
       } while ((int)temp_v10 < (int)temp_v4);
     }
-    temp_v1 = FUN_0029e908(temp_v0 + 0x34);
+    temp_v1 = objectPartRunUnlessLocked(temp_v0 + 0x34);
     temp_v5 = (unsigned int)*(unsigned char *)(temp_v0 + 0xad);
     temp_v10 = temp_v5;
     if (temp_v5 == 3) {
@@ -160,7 +160,7 @@ void FUN_001978b4(void)
           temp_v1 = vec2GetXInt();
           temp_v12 = vec2GetYInt(temp_v0 + 0xd64);
         }
-        temp_v3 = FUN_0029e908(temp_v0 + 0x34);
+        temp_v3 = objectPartRunUnlessLocked(temp_v0 + 0x34);
         temp_v3 = FUN_00299218((int)*(char *)(temp_v0 + 0x98),temp_v3);
         if ((temp_v4 & 1) == 0) {
           temp_v7 = 8 - temp_v4;
@@ -170,7 +170,7 @@ void FUN_001978b4(void)
           temp_v7 = 7 - temp_v4;
           temp_v9 = 0x1b;
         }
-        temp_v8 = FUN_0029e908(temp_v0 + 0x34);
+        temp_v8 = objectPartRunUnlessLocked(temp_v0 + 0x34);
         temp_v7 = FUN_002bf4f8(0x1d,temp_v8 + temp_v9 + temp_v7 / 2);
         temp_v12 = temp_v12 + temp_v2;
         temp_v1 = temp_v1 + temp_v11;

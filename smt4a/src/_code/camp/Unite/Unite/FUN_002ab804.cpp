@@ -10,12 +10,12 @@ int dataTableGetEntries(...);
 int FUN_0013c174(...);
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int taskCreateDraw(...);
 int asdOperatorNew(...);
 int asdMemoryAllocTracked(...);
 int memAlloc(...);
-int FUN_0016dfc4(...);
+int resultReportIfFailed(...);
 int FUN_00178b04(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
@@ -74,13 +74,13 @@ extern int *g_unite; /* 0x57f290 */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_0016dfc4. */
+/* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -171,7 +171,7 @@ void FUN_002ab804(void)
     *(unsigned char *)(puVar5 + 4) = 0;
   }
   piVar2[0x249a] = (int)puVar5;
-  FUN_0016dfc4();
+  resultReportIfFailed();
   temp_v8 = 4;
   temp_v9 = &LAB_00514a54;
   piVar6 = piVar2 + 0x249b;
@@ -232,7 +232,7 @@ void FUN_002ab804(void)
   FUN_0026f608();
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(piVar2 + 1);
   temp_v6 = (int *)0x1dc;
-  FUN_001505ac(piVar2 + 1,&DAT_0052ef50,0x84,&DAT_0052efd4,0x60,0,0,0,0,&DAT_0052f034);
+  paramsInit(piVar2 + 1,&DAT_0052ef50,0x84,&DAT_0052efd4,0x60,0,0,0,0,&DAT_0052f034);
   FUN_0014e188(piVar2 + 9,0x1a,0,piVar2 + 1,1);
   uiSpriteSelectAnim(piVar2 + 9,0);
   FUN_0014e188(piVar2 + 0x2c,0x1a,0,piVar2 + 1,1);

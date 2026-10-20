@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00379450(void);
+int _ZN9Obj421aa44initEv(void);
 
 typedef struct fn_0037a858_arg0 fn_0037a858_arg0;
 struct fn_0037a858_arg0 {
@@ -30,14 +30,14 @@ struct fn_0037a858_arg0 {
     undefined1 field_0x555; /* +0x555 */
 };
 
-/* Supplied declaration required: FUN_00379450. */
+/* Supplied declaration required: _ZN9Obj421aa44initEv. */
 
 
 void FUN_0037a858(fn_0037a858_arg0 *param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_00379450();
+  _ZN9Obj421aa44initEv();
   param_1->field_0x254 = 0;
   param_1->field_0x554 = 0;
   param_1->field_0x264 = 0;

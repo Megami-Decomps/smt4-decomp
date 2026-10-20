@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00229ad4(...);
 int FUN_00244fb0(...);
 int FUN_0026c820(...);
-int FUN_002a0cb0(void);
+int buttonHelpGetMode(void);
 int buttonHelpSetPreset(void);
 int FUN_00339828(...);
 
@@ -29,7 +29,7 @@ int FUN_00339254(...);
 int FUN_00339754(int);
 int FUN_00339dc0(...);
 int FUN_0033a264(int);
-int FUN_0034008c(...);
+int groupStartItems(...);
 int FUN_003d5ef4(unsigned int);
 int FUN_003d6408(unsigned int);
 int FUN_003d660c(...);
@@ -65,7 +65,7 @@ extern int FUN_00245278(int, unsigned int);
 /* Supplied declaration required: FUN_00293e08. */
 extern int FUN_00293ed0(int);
 /* Supplied declaration required: FUN_00295d28. */
-/* Supplied declaration required: FUN_002a0cb0. */
+/* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: FUN_00338358. */
@@ -78,7 +78,7 @@ extern int FUN_00293ed0(int);
 /* Supplied declaration required: FUN_00339828. */
 /* Supplied declaration required: FUN_00339dc0. */
 /* Supplied declaration required: FUN_0033a264. */
-/* Supplied declaration required: FUN_0034008c. */
+/* Supplied declaration required: groupStartItems. */
 /* Supplied declaration required: FUN_003d5ef4. */
 /* Supplied declaration required: FUN_003d6408. */
 /* Supplied declaration required: FUN_003d660c. */
@@ -195,7 +195,7 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
         if (temp_v0 == 0x122) {
           *(unsigned int *)(*param_1 + 0x49e8) = 0xffffffff;
           FUN_00339254(*param_1);
-          FUN_0034008c(DAT_004398d4);
+          groupStartItems(DAT_004398d4);
           FUN_00227750(0,param_2,1);
           FUN_003d660c(g_btlMain);
           FUN_0024082c(g_btlMain,0);
@@ -205,7 +205,7 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
           FUN_00338754(*param_1);
           FUN_00339828(*param_1);
           FUN_0026c820(g_btlUiBlock);
-          FUN_002a0cb0();
+          buttonHelpGetMode();
           buttonHelpSetPreset();
           FUN_00229ad4(param_1);
           temp_v4 = 1;

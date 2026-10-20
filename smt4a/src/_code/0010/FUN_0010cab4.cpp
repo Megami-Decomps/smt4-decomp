@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00117588(void);
 int FUN_002e6e34(unsigned char [16], int);
-int FUN_002e6e5c(unsigned char [16]);
+int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int FUN_002f4dc2(...);
 int FUN_002f6758(void);
 int FUN_002f678c(...);
@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00117588. */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int onlineUrlGetAddress(void);
 /* Supplied declaration required: FUN_002f4dc2. */
 extern int FUN_002f4dea(unsigned char *);
@@ -129,7 +129,7 @@ void FUN_0010cab4(int *param_1,unsigned char *param_2,unsigned char *param_3,uns
       puVar8 = param_5;
     }
     (*pcVar9)(param_1,puVar6,puVar7,puVar8,param_7,temp_v0);
-    FUN_002e6e5c(temp_v5);
+    _ZN9Obj55b28cD1Ev(temp_v5);
   }
   FUN_002f4dc2(param_1,0);
   FUN_002f6758();

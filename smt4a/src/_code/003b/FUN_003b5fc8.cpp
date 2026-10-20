@@ -49,7 +49,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
 /* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: asdMemFreeSlot. */
-extern unsigned int FUN_002adba8(int);
+extern unsigned int requestIdToCode(int);
 /* Supplied declaration required: FUN_0038b3f8. */
 extern unsigned int nn_err_CTR_FatalErr_Throw(unsigned int, unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -95,10 +95,10 @@ unsigned char * FUN_003b5fc8(unsigned int *param_1)
   if (param_1 != (unsigned int *)0x0) {
     temp_v3 = 0;
     do {
-      temp_v0 = FUN_002adba8(temp_v3);
+      temp_v0 = requestIdToCode(temp_v3);
       temp_v1 = asdTMTexTableNodeIsLoaded(0x2e,temp_v0);
       if (temp_v1 != 0) {
-        temp_v0 = FUN_002adba8(temp_v3);
+        temp_v0 = requestIdToCode(temp_v3);
         asdTMTexTableReleaseNode(0x2e,temp_v0);
         param_1[temp_v3 + 0x25] = 0;
       }

@@ -1,36 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `dataTable23Sub0GetEntry` (_code @ 0x248248, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the AOC table count and entries pointer as a pair (add #996; ldm); built loads them separately */
+#include "common.h"
 
 extern "C" {
 
-extern int g_aocSystem; /* 0x433158 */
+typedef struct Table23Entry {
+    /* 0x00 */ u8 unk00[0x20];
+} Table23Entry; /* 0x20 */
 
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
+typedef struct AocTable23 {
+    /* 0x0 */ s32 count;
+    /* 0x4 */ Table23Entry *entries;
+} AocTable23;
 
+typedef struct AocSystem {
+    /* 0x000 */ u8 unk000[0x3E4];
+    /* 0x3E4 */ AocTable23 table23;
+} AocSystem;
 
-int dataTable23Sub0GetEntry(unsigned int param_1)
+extern AocSystem *g_aocSystem;
+extern void *dataTableGet(s32 group, s32 index);
+extern Table23Entry *dataTableGetEntries(void *table);
+extern u32 dataTableGetCount(void *table);
 
+/* Returns entry `index` of data table 0x23/0, continuing into the AOC content entries after the base ones; NULL when out of range. */
+Table23Entry *dataTable23Sub0GetEntry(u32 index)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = dataTableGet(0x23,0);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  if (param_1 < temp_v2) {
-    temp_v1 = temp_v1 + param_1 * 0x20;
-  }
-  else if (param_1 < *(int *)(g_aocSystem + 0x3e4) + temp_v2) {
-    temp_v1 = *(int *)(g_aocSystem + 1000) + (param_1 - temp_v2) * 0x20;
-  }
-  else {
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    void *table = dataTableGet(0x23, 0);
+    Table23Entry *entries = dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+
+    if (index < count) {
+        return &entries[index];
+    }
+    if (index < g_aocSystem->table23.count + count) {
+        return &g_aocSystem->table23.entries[index - count];
+    }
+    return NULL;
 }
 
 } /* extern "C" */

@@ -1,61 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00394e08` (_code @ 0x394e08, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable08Sub2GetRecord(void);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x52];
+    /* 0x52 */ u8 kind;
+    /* 0x53 */ u8 unk53[0xD];
+    /* 0x60 */ u8 directions;  /* bits 0-2: stick directions that select it */
+} Record;
 
-extern int padGetStickHorizontalDirection(void);
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-extern unsigned short *gameGetPlayerData(void);
+s32 padGetStickHorizontalDirection(void);
+Record *dataTable08Sub2GetRecord(u32 id);
+u16 *gameGetPlayerData(void);
 
-
-void FUN_00394e08(int param_1)
-
+/* Stores record `id` in the player's slot for its kind when the stick direction matches the record's allowed directions. */
+void FUN_00394e08(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned short *puVar5;
-  
-  temp_v2 = padGetStickHorizontalDirection();
-  temp_v3 = param_1;
-  dataTable08Sub2GetRecord();
-  if ((temp_v3 != 0) &&
-     ((((temp_v0 = *(unsigned char *)(temp_v3 + 0x60), (temp_v0 & 1) != 0 && (temp_v2 == 4)) ||
-       (((temp_v0 & 4) != 0 && (temp_v2 == 5)))) || (((temp_v0 & 2) != 0 && (temp_v2 == 1)))))) {
-    puVar5 = (unsigned short *)gameGetPlayerData();
-    temp_v3 = param_1;
-    dataTable08Sub2GetRecord();
-    temp_v1 = (unsigned short)param_1;
-    switch(*(unsigned char *)(temp_v3 + 0x52)) {
-    case 2:
-      *puVar5 = temp_v1;
-      return;
-    case 3:
-      puVar5[1] = temp_v1;
-      return;
-    case 4:
-      puVar5[3] = temp_v1;
-      return;
-    case 5:
-      puVar5[4] = temp_v1;
-      return;
-    case 6:
-      puVar5[5] = temp_v1;
-      return;
-    case 7:
-      puVar5[6] = temp_v1;
-      return;
-    case 8:
-      puVar5[2] = temp_v1;
-      return;
+    s32 direction = padGetStickHorizontalDirection();
+    Record *record = dataTable08Sub2GetRecord(id);
+    u16 *slots;
+
+    if (record != NULL) {
+        u8 directions = record->directions;
+
+        if (((directions & 1) != 0 && direction == 4) || ((directions & 4) != 0 && direction == 5) ||
+            ((directions & 2) != 0 && direction == 1)) {
+            slots = gameGetPlayerData();
+            switch (dataTable08Sub2GetRecord(id)->kind) {
+            case 2:
+                slots[0] = id;
+                break;
+            case 3:
+                slots[1] = id;
+                break;
+            case 4:
+                slots[3] = id;
+                break;
+            case 5:
+                slots[4] = id;
+                break;
+            case 6:
+                slots[5] = id;
+                break;
+            case 7:
+                slots[6] = id;
+                break;
+            case 8:
+                slots[2] = id;
+                break;
+            }
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

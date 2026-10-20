@@ -1,93 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c63a8` (_code @ 0x3c63a8, 0x138 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: case 0 loads g_btlMain before the branch (no nop/beq before the load) and the per-case stores of items 3-7 are tail-merged differently (retail: item 3 branches to the shared `str r0,[r1]`, item 4 stores inline). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003d88a0(void);
+typedef struct BtlMain {
+    /* 0x000 */ u32 setting0;
+    /* 0x004 */ u32 setting1;
+    /* 0x008 */ u32 setting2;
+    /* 0x00C */ u8 unk00C[0x628];
+    /* 0x634 */ u32 flags;
+} BtlMain;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
+typedef struct OptionScreen {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 listBox;
+} OptionScreen;
 
-extern unsigned int *g_btlMain; /* 0x4342c8 */
-extern unsigned int DAT_004342cc; /* 0x4342cc */
-extern unsigned int DAT_004342d0; /* 0x4342d0 */
+extern BtlMain *g_btlMain;   /* 0x4342c8 */
+extern u32 DAT_004342cc;     /* 0x4342cc */
+extern u32 DAT_004342d0;     /* 0x4342d0 */
 
-extern unsigned int *asdListBoxGetItemText(unsigned int, unsigned int);
-extern int FUN_0022a444(unsigned int);
-/* Supplied declaration required: FUN_003d88a0. */
+extern u32 *asdListBoxGetItemText(u32 listBox, u32 index);
+extern int listBoxItemHasOwner(u32 listBox);
+extern int FUN_003d88a0(void);
 
-
-void FUN_003c63a8(int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Applies the option list item `item` of the battle option screen: items 0-2 toggle flag bits, items 3-7 copy the item's value into a setting. */
+void FUN_003c63a8(OptionScreen *screen, u32 unused, u32 item)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  
-  switch(param_3) {
-  case 0:
-    temp_v0 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10));
-    if (temp_v0 != 0) {
-      if ((g_btlMain[0x18d] & 0x20) != 0) {
+    u32 value;
+
+    switch (item) {
+    case 0:
+        if (listBoxItemHasOwner(screen->listBox) == 0) {
+            FUN_003d88a0();
+            g_btlMain->flags &= ~0x20;
+            break;
+        }
+        if ((g_btlMain->flags & 0x20) != 0) {
+            return;
+        }
+        FUN_003d88a0();
         return;
-      }
-      FUN_003d88a0();
-      return;
+    case 1:
+        if (listBoxItemHasOwner(screen->listBox) != 0) {
+            g_btlMain->flags |= 0x40;
+        } else {
+            g_btlMain->flags &= ~0x40;
+        }
+        break;
+    case 2:
+        if (listBoxItemHasOwner(screen->listBox) != 0) {
+            g_btlMain->flags |= 0x80;
+        } else {
+            g_btlMain->flags &= ~0x80;
+            return;
+        }
+        break;
+    case 3:
+        value = *asdListBoxGetItemText(screen->listBox, item);
+        DAT_004342cc = value;
+        break;
+    case 4:
+        value = *asdListBoxGetItemText(screen->listBox, item);
+        DAT_004342d0 = value;
+        break;
+    case 5:
+        g_btlMain->setting0 = *asdListBoxGetItemText(screen->listBox, item);
+        break;
+    case 6:
+        g_btlMain->setting1 = *asdListBoxGetItemText(screen->listBox, item);
+        break;
+    case 7:
+        g_btlMain->setting2 = *asdListBoxGetItemText(screen->listBox, item);
+        break;
     }
-    FUN_003d88a0();
-    temp_v2 = g_btlMain[0x18d] & 0xffffffdf;
-    break;
-  case 1:
-    temp_v0 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10));
-    if (temp_v0 != 0) {
-      temp_v2 = g_btlMain[0x18d] | 0x40;
-    }
-    else {
-      temp_v2 = g_btlMain[0x18d] & 0xffffffbf;
-    }
-    break;
-  case 2:
-    temp_v0 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10));
-    if (temp_v0 == 0) {
-      g_btlMain[0x18d] = g_btlMain[0x18d] & 0xffffff7f;
-      return;
-    }
-    temp_v2 = g_btlMain[0x18d] | 0x80;
-    break;
-  case 3:
-    puVar3 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar3;
-    puVar3 = &DAT_004342cc;
-    *puVar3 = temp_v1;
-    return;
-  case 4:
-    puVar3 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar3;
-    puVar3 = &DAT_004342d0;
-    *puVar3 = temp_v1;
-    return;
-  case 5:
-    puVar3 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10),param_3);
-    *g_btlMain = *puVar3;
-    return;
-  case 6:
-    puVar3 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10),param_3);
-    g_btlMain[1] = *puVar3;
-    return;
-  case 7:
-    puVar3 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10),param_3);
-    g_btlMain[2] = *puVar3;
-    return;
-  default:
-    return;
-  }
-  g_btlMain[0x18d] = temp_v2;
-  return;
 }
 
 } /* extern "C" */

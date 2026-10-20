@@ -35,7 +35,7 @@ extern unsigned char LAB_0010d0ec; /* 0x10d0ec */
 #define ROMWRIGHT_PIECE_1_1_DEFINED
 #define romwright_piece_1_1(upper, lower) ((unsigned short)(((unsigned short)(unsigned char)(upper) << 8) | (unsigned char)(lower)))
 #endif
-extern int FUN_00118f1c(short);
+extern int eventTexSelectJobsById(short);
 extern int FUN_0011921c(short);
 /* Supplied declaration required: eventTexCallIfIdle. */
 /* Supplied declaration required: FUN_0011a0d4. */
@@ -215,7 +215,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       if (temp_v9 != 0) {
         return 1;
       }
-      temp_v9 = FUN_00118f1c(temp_v1);
+      temp_v9 = eventTexSelectJobsById(temp_v1);
       if (temp_v9 != 0) {
         return 1;
       }

@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_002ffd8c(void);
+void socketReset(void);
 
-/* Runs FUN_002ffd8c and returns `object`. */
+/* Runs socketReset and returns `object`. */
 void *FUN_003014a8(void *object)
 {
-    FUN_002ffd8c();
+    socketReset();
     return object;
 }
 

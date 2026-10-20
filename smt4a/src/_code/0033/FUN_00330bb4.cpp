@@ -1,31 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00330bb4` (_code @ 0x330bb4, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the save pointer in r2 and the +0x88 base in r1, built reuses r1 for both */
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f69c; /* 0x57f69c */
+typedef struct GameDataBlocks {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 *save;
+} GameDataBlocks;
 
+extern GameDataBlocks g_gameDataBlocks;
 
-unsigned int FUN_00330bb4(int param_1)
+#define SAVE_FLAGS_A 0x21548  /* flags for ids 0-63 */
+#define SAVE_FLAGS_B 0x27E70  /* flags for ids 64-71 */
 
+/* Bit 2 of the flag byte kept for id 0-71 in the save data; 0 for other ids. */
+u32 FUN_00330bb4(s32 id)
 {
-  int temp_v0;
-  unsigned char *pbVar2;
-  
-  if ((param_1 < 0x48) && (-1 < param_1)) {
-    temp_v0 = param_1 + DAT_0057f69c + 0x88;
-    if (param_1 >= 0x40) {
-      pbVar2 = (unsigned char *)(temp_v0 + 0x27e70);
+    u8 *flag;
+    u8 *entry;
+    u8 *base;
+
+    if (id >= 72) {
+        return 0;
     }
-    else {
-      pbVar2 = (unsigned char *)(temp_v0 + 0x21548);
+    if (id >= 0) {
+        base = g_gameDataBlocks.save + 0x88;
+        entry = id + base;
+        if (id >= 64) {
+            flag = entry + SAVE_FLAGS_B;
+        } else {
+            flag = entry + SAVE_FLAGS_A;
+        }
+        if (flag != NULL) {
+            return (*flag & 4) >> 2;
+        }
     }
-    if (pbVar2 != (unsigned char *)0x0) {
-      return (*pbVar2 & 4) >> 2;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

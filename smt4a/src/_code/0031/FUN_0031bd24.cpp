@@ -8,8 +8,8 @@ int FUN_00100388(...);
 int FUN_001f474c(unsigned char [64], int);
 int FUN_001ffba8(void);
 int FUN_00280c5c(int, int);
-int FUN_00359510(unsigned int, int);
-int FUN_0036bafc(unsigned int, int);
+int animPlayerSetLoopPolicy(unsigned int, int);
+int nodeSetTranslation3f(unsigned int, int);
 int FUN_003d502c(int);
 
 /* Supplied declaration required: FUN_00100388. */
@@ -20,8 +20,8 @@ extern int FUN_001ab8c0(void);
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_001ffba8. */
 /* Supplied declaration required: FUN_00280c5c. */
-/* Supplied declaration required: FUN_00359510. */
-/* Supplied declaration required: FUN_0036bafc. */
+/* Supplied declaration required: animPlayerSetLoopPolicy. */
+/* Supplied declaration required: nodeSetTranslation3f. */
 /* Supplied declaration required: FUN_003d502c. */
 
 
@@ -49,8 +49,8 @@ unsigned int FUN_0031bd24(void)
         if (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0) {
           FUN_00280c5c(temp_v1,1);
         }
-        FUN_0036bafc(*(unsigned int *)(*(int *)(temp_v0 + 0x18) + 8),0);
-        FUN_00359510(*(unsigned int *)(*(int *)(temp_v0 + 0x18) + 8),1);
+        nodeSetTranslation3f(*(unsigned int *)(*(int *)(temp_v0 + 0x18) + 8),0);
+        animPlayerSetLoopPolicy(*(unsigned int *)(*(int *)(temp_v0 + 0x18) + 8),1);
       }
       FUN_003d502c(0);
       *(unsigned int *)(temp_v0 + 8) = 2;

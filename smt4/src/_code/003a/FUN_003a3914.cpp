@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_0028727c(void);
+int buttonHelpTexturesUnref(void);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int FUN_00292c0c(void);
-int FUN_0029a128(int a);
+int gameGlobalsSetSelected(int a);
 int FUN_002a71fc(int a);
 int scrScriptProcessDestroy(void);
 int FUN_002a7890(void);
@@ -94,14 +94,14 @@ void FUN_003a3914(Scene *scene)
         scene->bufferB = 0;
     }
     if (scene->unk15D24 != 0) {
-        FUN_0029a128(0);
+        gameGlobalsSetSelected(0);
         FUN_00292c0c();
     }
     if (scene->mode != 1) {
         uiFadeRelease();
     }
     buttonHelpRelease();
-    FUN_0028727c();
+    buttonHelpTexturesUnref();
     FUN_002bff50();
     FUN_002a71fc(1);
 }

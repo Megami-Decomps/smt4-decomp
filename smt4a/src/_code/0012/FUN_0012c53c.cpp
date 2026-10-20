@@ -10,14 +10,14 @@ int onlineInstanceTableFind(...);
 int FUN_002f7c94(unsigned int, unsigned int, unsigned int);
 int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
-int FUN_0030c6b4(unsigned int *, unsigned int);
+int vectorAt4(unsigned int *, unsigned int);
 int FUN_0030c6e4(unsigned char [8], int);
-int FUN_0030c6f0(int, unsigned int);
+int vectorAt24(int, unsigned int);
 int FUN_0030c720(...);
 int FUN_0030c846(...);
 int FUN_0030c9cc(unsigned char [8]);
 int FUN_0030d1ac(unsigned char [8]);
-int FUN_00433740(unsigned char [8]);
+int _ZN9Obj55aae4D1Ev(unsigned char [8]);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 16 slot(s), 62 byte(s) */
@@ -53,9 +53,9 @@ extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char 
 /* Supplied declaration required: FUN_002f7c94. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
-/* Supplied declaration required: FUN_0030c6b4. */
+/* Supplied declaration required: vectorAt4. */
 /* Supplied declaration required: FUN_0030c6e4. */
-/* Supplied declaration required: FUN_0030c6f0. */
+/* Supplied declaration required: vectorAt24. */
 /* Supplied declaration required: FUN_0030c720. */
 extern int vectorSize24B(void);
 extern unsigned int vectorCount4_0030c774(void);
@@ -63,7 +63,7 @@ extern unsigned int vectorCount4_0030c774(void);
 /* Supplied declaration required: FUN_0030c9cc. */
 /* Supplied declaration required: FUN_0030d1ac. */
 extern int FUN_0030d420(unsigned int *, unsigned char *);
-/* Supplied declaration required: FUN_00433740. */
+/* Supplied declaration required: _ZN9Obj55aae4D1Ev. */
 
 
 void FUN_0012c53c(int param_1)
@@ -113,7 +113,7 @@ void FUN_0012c53c(int param_1)
         for (temp_v0 = *(int *)(param_1 + 0x3fc); *(int *)(param_1 + 0x400) != temp_v0;
             temp_v0 = temp_v0 + 0x20) {
           temp_v3 = temp_v22;
-          FUN_0030c6f0(temp_v22,*(unsigned int *)(param_1 + 0x3f4));
+          vectorAt24(temp_v22,*(unsigned int *)(param_1 + 0x3f4));
           if (*(int *)(temp_v0 + 8) == *(int *)(temp_v3 + 0x10) &&
               *(int *)(temp_v0 + 0xc) == *(int *)(temp_v3 + 0x14)) {
             FUN_0030c6e4(temp_v15,temp_v0);
@@ -123,7 +123,7 @@ void FUN_0012c53c(int param_1)
         if (temp_v6 != 0) {
           piVar9 = *(int **)(param_1 + 0x3ec);
           temp_v0 = temp_v22;
-          FUN_0030c6f0(temp_v22,*(unsigned int *)(param_1 + 0x3f4));
+          vectorAt24(temp_v22,*(unsigned int *)(param_1 + 0x3f4));
           temp_v11 = *(unsigned int *)(temp_v0 + 0xc);
           temp_v10 = *(unsigned int *)(temp_v0 + 8);
           temp_v8 = (unsigned int)temp_v20;
@@ -143,7 +143,7 @@ void FUN_0012c53c(int param_1)
             temp_v0 = 0;
             if (puVar5 != (unsigned int *)0x0) {
               puVar6 = temp_v23;
-              FUN_0030c6b4(temp_v23,*(unsigned int *)(param_1 + 0x3f0));
+              vectorAt4(temp_v23,*(unsigned int *)(param_1 + 0x3f0));
               puVar5[1] = *puVar6;
               puVar5[2] = temp_v6;
               *puVar5 = (unsigned int)&DAT_0055aee0;
@@ -153,7 +153,7 @@ void FUN_0012c53c(int param_1)
             *(int *)(param_1 + 0x40c) = temp_v0;
             FUN_0030c9cc(temp_v12);
             temp_v0 = temp_v22;
-            FUN_0030c6f0(temp_v22,*(unsigned int *)(param_1 + 0x3f4));
+            vectorAt24(temp_v22,*(unsigned int *)(param_1 + 0x3f4));
             temp_v14 = *(unsigned int *)(temp_v0 + 0x14);
             temp_v13 = *(unsigned int *)(temp_v0 + 0x10);
             piVar9 = (int *)(*(int *)(param_1 + 0x6c) + ((int)DAT_00589570 >> 1));
@@ -179,13 +179,13 @@ void FUN_0012c53c(int param_1)
               temp_v2 = FUN_002e7908(&temp_v6,(unsigned int *)&temp_v9);
               FUN_0030c720(param_1,temp_v2);
             }
-            FUN_00433740(temp_v12);
+            _ZN9Obj55aae4D1Ev(temp_v12);
             return;
           }
         }
         else {
           temp_v0 = temp_v22;
-          FUN_0030c6f0(temp_v22,*(unsigned int *)(param_1 + 0x3f4));
+          vectorAt24(temp_v22,*(unsigned int *)(param_1 + 0x3f4));
           FUN_0030c846(param_1 + 0x280,temp_v4,*(unsigned int *)(temp_v0 + 8),
                        *(unsigned int *)(temp_v0 + 0xc));
           temp_v7 = *(unsigned int *)(param_1 + 0x294);

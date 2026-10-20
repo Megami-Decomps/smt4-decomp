@@ -1,40 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003acc1c` (_code @ 0x3acc1c, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable00FindById(void);
-int devilGetRecord(void);
+typedef struct Entry {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ s32 rank;
+} Entry;
 
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: devilGetRecord. */
+typedef struct DevilRecord {
+    /* 0x0 */ u8 unk0[3];
+    /* 0x3 */ u8 grade;
+} DevilRecord;
 
+Entry *dataTable00FindById(u32 id);
+DevilRecord *devilGetRecord(u32 id);
 
-int FUN_003acc1c(unsigned short *param_1,unsigned short *param_2)
-
+/* Compares two ids by entry rank (higher first), then devil grade (ascending), then id (higher first). */
+s32 FUN_003acc1c(u16 *a, u16 *b)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (unsigned int)*param_1;
-  dataTable00FindById();
-  temp_v1 = (unsigned int)*param_2;
-  dataTable00FindById();
-  temp_v2 = *(int *)(temp_v1 + 4) - *(int *)(temp_v0 + 4);
-  if (temp_v2 == 0) {
-    temp_v0 = (unsigned int)*param_1;
-    devilGetRecord();
-    temp_v1 = (unsigned int)*param_2;
-    devilGetRecord();
-    temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + 3) - (unsigned int)*(unsigned char *)(temp_v1 + 3);
-    if (temp_v2 == 0) {
-      temp_v2 = (unsigned int)*param_2 - (unsigned int)*param_1;
+    Entry *entryA = dataTable00FindById(*a);
+    Entry *entryB = dataTable00FindById(*b);
+    s32 diff = entryB->rank - entryA->rank;
+
+    if (diff == 0) {
+        DevilRecord *devilA = devilGetRecord(*a);
+        DevilRecord *devilB = devilGetRecord(*b);
+
+        diff = devilA->grade - devilB->grade;
+        if (diff == 0) {
+            diff = *b - *a;
+        }
     }
-  }
-  return temp_v2;
+    return diff;
 }
 
 } /* extern "C" */

@@ -14,7 +14,7 @@ int FUN_00296ee0(int, int);
 int flaggedEntrySetValueB(int, int);
 int flaggedEntryGetValueA(int);
 int FUN_0029efd8(int, int);
-int FUN_002bc01c(int);
+int eventQueueAddUniqueIfValid(int);
 int timerStart(int, int, int);
 int FUN_002bf818(int);
 int FUN_003983dc(...);
@@ -38,7 +38,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: flaggedEntryGetValueA. */
 /* Supplied declaration required: FUN_0029efd8. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bf818. */
 /* Supplied declaration required: FUN_003983dc. */
@@ -188,7 +188,7 @@ void FUN_00397580(int param_1)
       *(unsigned int *)(param_1 + 0x14) = temp_v10;
       return;
     }
-    FUN_002bc01c(0x100016c);
+    eventQueueAddUniqueIfValid(0x100016c);
     temp_v10 = flaggedEntryGetValueB(param_1 + 0x580);
     *(unsigned int *)(param_1 + 0x10) = temp_v10;
     temp_v10 = flaggedEntryGetValueA(param_1 + 0x580);

@@ -9,7 +9,7 @@ int libc_strcpy(unsigned char [132], unsigned int);
 int FUN_002e5924(int);
 int sysMemClear(unsigned char [132], int);
 int FUN_003e0bb8(unsigned int *, int);
-int FUN_003e1390(unsigned int *, int);
+int contentRequestStart(unsigned int *, int);
 int FUN_003ed6e8(int);
 int FUN_003edb9c(int);
 int FUN_003edbd0(int);
@@ -42,11 +42,11 @@ extern int FUN_00240c34(unsigned char *);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e0bb8. */
 extern int FUN_003e0f94(unsigned int *, int);
-/* Supplied declaration required: FUN_003e1390. */
+/* Supplied declaration required: contentRequestStart. */
 /* Supplied declaration required: FUN_003ed6e8. */
 /* Supplied declaration required: FUN_003edb9c. */
 /* Supplied declaration required: FUN_003edbd0. */
-extern unsigned int FUN_003efa38(int);
+extern unsigned int btlPosArrangeGetFileName(int);
 /* Supplied declaration required: FUN_003f0b28. */
 /* Supplied declaration required: FUN_003f0d50. */
 extern int FUN_003f10c8(int, unsigned short);
@@ -74,7 +74,7 @@ void FUN_003e1454(unsigned int *param_1,int param_2)
     temp_v0 = 1;
   }
   sysMemClear(temp_v6,0x80);
-  temp_v2 = FUN_003efa38(param_2);
+  temp_v2 = btlPosArrangeGetFileName(param_2);
   libc_strcpy(temp_v6,temp_v2);
   if ((!temp_v0) && (temp_v1 = FUN_00240c34(temp_v6), temp_v1 == 0)) {
     FUN_003edbd0(param_2);
@@ -125,7 +125,7 @@ void FUN_003e1454(unsigned int *param_1,int param_2)
   param_1[4] = 0;
   *param_1 = 0x15;
   param_1[3] = 0;
-  FUN_003e1390(param_1,param_2);
+  contentRequestStart(param_1,param_2);
   return;
 }
 

@@ -1,31 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00360aac` (_code @ 0x360aac, 0x1c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/Result.h"
 
 extern "C" {
 
-int asdFatalError(void);
-int FUN_00360a70(void);
+void asdFatalError(void);
+s32 FUN_00360a70(u32 arg);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-/* Supplied declaration required: asdFatalError. */
-/* Supplied declaration required: FUN_00360a70. */
-
-
-void FUN_00360aac(int param_1)
-
+/* Calls FUN_00360a70 and aborts when it returns a failed nn::Result. */
+void FUN_00360aac(u32 arg)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_00360a70();
-  if (param_1 < 0) {
-    asdFatalError();
-    return;
-  }
-  return;
+    if (nnResultIsFailure(FUN_00360a70(arg))) {
+        asdFatalError();
+    }
 }
 
 } /* extern "C" */

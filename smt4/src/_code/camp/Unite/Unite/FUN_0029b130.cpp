@@ -8,7 +8,7 @@ int FUN_001cffd0(...);
 int FUN_001d01f8(...);
 int FUN_001df8d4(...);
 int FUN_00205568(...);
-int FUN_0026a69c(...);
+int idMapLookup(...);
 int FUN_00283e48(...);
 int dataTable06Sub1GetRecord(...);
 int FUN_002ae164(...);
@@ -53,7 +53,7 @@ extern unsigned char DAT_004207e8; /* 0x4207e8 */
 /* Supplied declaration required: FUN_001df8d4. */
 /* Supplied declaration required: FUN_00205568. */
 extern int FUN_0026a604(unsigned int);
-/* Supplied declaration required: FUN_0026a69c. */
+/* Supplied declaration required: idMapLookup. */
 /* Supplied declaration required: FUN_00283e48. */
 extern int FUN_0029903c(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
@@ -137,7 +137,7 @@ void FUN_0029b130(int param_1,int param_2,int param_3,unsigned short *param_4)
   do {
     temp_v3 = (unsigned int)*(unsigned short *)(temp_v7 + temp_v1 * 2 + 0x3c);
     if (temp_v3 != 0) {
-      FUN_0026a69c();
+      idMapLookup();
       temp_v8[temp_v3] = temp_v8[temp_v3] + 1;
     }
     temp_v1 = temp_v1 + 1;

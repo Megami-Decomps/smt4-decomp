@@ -13,7 +13,7 @@ int FUN_0029f5d8(int, unsigned int, int, int, int, int, char [4], int, int);
 int libc_bsearch(...);
 int FUN_002b8584(int, int);
 int ifTouchRegionRemove(void);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_002bf818(...);
 int FUN_002c1658(...);
 
@@ -44,7 +44,7 @@ extern int FUN_002a0d0c(void);
 /* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: FUN_002b8584. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
 extern unsigned int dataTableGetCount(unsigned int);
@@ -270,7 +270,7 @@ LAB_001a2150:
           }
           temp_v7 = 0x100016e;
         }
-        FUN_002bc01c(temp_v7);
+        eventQueueAddUniqueIfValid(temp_v7);
         break;
       }
       *(unsigned char *)(temp_v0 + 0x74d) = 1;

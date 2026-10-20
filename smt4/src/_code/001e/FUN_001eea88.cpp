@@ -22,7 +22,7 @@ int FUN_002bd954(...);
 int FUN_002be624(...);
 int FUN_002bee58(...);
 int FUN_002beed0(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int FUN_0033dcec(unsigned int, int, int);
 int FUN_00343e5c(int, int, int, int, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
@@ -74,7 +74,7 @@ extern unsigned int FUN_00294090(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002beed0. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 extern unsigned int FUN_002c5c04(unsigned char *);
 extern int FUN_002cdecc(int);
 extern unsigned int asdVramBGetFreeBytes(void);
@@ -179,7 +179,7 @@ void FUN_001eea88(void)
   FUN_00297060(temp_v3,temp_v2);
   *(unsigned int *)(temp_v0 + 0x2a0) = temp_v3;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(temp_v0 + 0x2a8);
-  FUN_002c312c(temp_v0 + 0x2a8,&DAT_004033e0,0x24,&DAT_00403404,0x30,&DAT_00403434,0xc,0,0,
+  paramsInit(temp_v0 + 0x2a8,&DAT_004033e0,0x24,&DAT_00403404,0x30,&DAT_00403434,0xc,0,0,
                &DAT_00403440,0xe0);
   temp_v4 = 0;
   do {

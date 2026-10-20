@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: FUN_002eb164. */
 extern int FUN_002ef00c(unsigned char *, unsigned char *);
-extern int FUN_002f1334(unsigned char *, int);
+extern int seq16IsGreaterOrFlag(unsigned char *, int);
 /* Supplied declaration required: FUN_00300304. */
 extern int wordRefsEqual_0030060c(unsigned char *, unsigned int *);
 
@@ -38,7 +38,7 @@ void FUN_00114b86(int param_1,unsigned int param_2)
   unsigned char temp_v7 [12];
   
   FUN_002eb164(temp_v2);
-  temp_v0 = FUN_002f1334(temp_v2,param_1 + 0x20);
+  temp_v0 = seq16IsGreaterOrFlag(temp_v2,param_1 + 0x20);
   if (temp_v0 != 0) {
     FUN_002eb164(temp_v3,param_2);
     FUN_00300304(temp_v6,param_1 + 4,temp_v3);

@@ -11,7 +11,7 @@ extern unsigned int dataTableValueOrZero(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableFileGetTable. */
 /* Supplied declaration required: FUN_002bf384. */
-extern unsigned int FUN_00318100(void);
+extern unsigned int binFileGetValue(void);
 extern unsigned int tbcrBlockGetPayload(void);
 
 
@@ -76,7 +76,7 @@ int FUN_003c609c(int param_1,unsigned int param_2,int param_3,int param_4)
     temp_v3 = temp_v3 + 2;
   }
   temp_v0 = dataTableValueOrZero(7);
-  temp_v1 = FUN_00318100();
+  temp_v1 = binFileGetValue();
   if (temp_v1 < 0x28) {
     temp_v4 = 0;
   }

@@ -1,32 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027ef00` (_code @ 0x27ef00, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail puts dx in s0 and dz in s1 (built: s1 and s0) */
+#include "common.h"
+#include <math.h>
 
 extern "C" {
 
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+/* A sphere: centre and radius. */
+typedef struct Sphere {
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 radius;
+} Sphere;
+
+/* True when the two spheres overlap when seen from above (the y axis is ignored). */
+u8 FUN_0027ef00(Sphere a, Sphere b)
 {
-    return (float)sqrt((double)value);
-}
-#endif
+    f32 dx = a.x - b.x;
+    f32 dz = a.z - b.z;
 
-
-unsigned char FUN_0027ef00(void)
-
-{
-/* irregular: irregular input(s): in_s0, in_s2, in_s3, in_s4, in_s6, in_s7; 6 native warning(s); review required */
-  float in_s0;
-  float in_s2;
-  float in_s3;
-  float in_s4;
-  float in_s6;
-  float in_s7;
-  
-  return romwright_sqrt_4((in_s0 - in_s4) * (in_s0 - in_s4) + (in_s2 - in_s6) * (in_s2 - in_s6)) <=
-         in_s3 + in_s7;
+    return a.radius + b.radius >= sqrtf(dx * dx + dz * dz);
 }
 
 } /* extern "C" */

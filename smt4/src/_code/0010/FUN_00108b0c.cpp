@@ -1,29 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00108b0c` (_code @ 0x108b0c, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the first two flag tests are if-converted (ldrbne/cmpne); retail branches after each and jumps straight to the return when the second is 0. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0011340c(int);
+typedef struct JobPanel {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ s8 shown;
+    /* 0x29 */ u8 unk29[2];
+    /* 0x2B */ s8 ready;
+} JobPanel;
 
-/* Supplied declaration required: FUN_0011340c. */
-extern int FUN_002bff10(unsigned int);
-extern int jobGetWork(void);
+typedef struct JobWork {
+    /* 0x000 */ u8 unk000[0x1C];
+    /* 0x01C */ u8 closeRequested;
+    /* 0x01D */ u8 unk01d[0xF00 - 0x1D];
+    /* 0xF00 */ JobPanel panel;
+} JobWork;
 
+extern JobWork *jobGetWork(void);
+extern int FUN_002bff10(u32 arg);
+extern int FUN_0011340c(u32 arg);
 
-unsigned char FUN_00108b0c(void)
-
+/* Closes the panel when it is shown and ready, the check FUN_002bff10 passes and a close was requested. */
+u8 FUN_00108b0c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = jobGetWork();
-  if ((((*(char *)(temp_v0 + 0xf28) != '\0') && (*(char *)(temp_v0 + 0xf2b) != '\0')) &&
-      (temp_v1 = FUN_002bff10(0), temp_v1 == 0)) && (*(char *)(temp_v0 + 0x1c) != '\0')) {
-    FUN_0011340c(0);
-  }
-  return 0;
+    JobWork *work = jobGetWork();
+
+    if (work->panel.shown != 0) {
+        if (work->panel.ready != 0) {
+            if (FUN_002bff10(0) == 0 && work->closeRequested != 0) {
+                FUN_0011340c(0);
+            }
+        }
+    }
+    return 0;
 }
 
-} /* extern "C" */
+}

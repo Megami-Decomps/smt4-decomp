@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002e7908(int *, unsigned int *);
-int FUN_002fbfe8(int, unsigned int, unsigned int);
+int byteRingWrite(int, unsigned int, unsigned int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -16,9 +16,9 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: FUN_002fbfe8. */
+/* Supplied declaration required: byteRingWrite. */
 
 
 void FUN_00110e78(int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -51,23 +51,23 @@ void FUN_00110e78(int *param_1,int param_2,unsigned int param_3,unsigned int par
         temp_v3 = 0x80050001;
         puVar2 = (unsigned int *)&temp_v3;
         FUN_002e7908(param_1,puVar2);
-        FUN_002e6e5c(temp_v2);
+        _ZN9Obj55b28cD1Ev(temp_v2);
         return;
       }
       if (param_4 == 0) {
         temp_v3 = 0x10001;
         puVar2 = (unsigned int *)&temp_v3;
         FUN_002e7908(param_1,puVar2);
-        FUN_002e6e5c(temp_v2);
+        _ZN9Obj55b28cD1Ev(temp_v2);
         return;
       }
-      FUN_002fbfe8(temp_v0,param_3,param_4);
+      byteRingWrite(temp_v0,param_3,param_4);
       puVar2 = (unsigned int *)&temp_v4;
       temp_v4 = 0x10001;
     }
     FUN_002e7908(param_1,puVar2);
   }
-  FUN_002e6e5c(temp_v2);
+  _ZN9Obj55b28cD1Ev(temp_v2);
   return;
 }
 

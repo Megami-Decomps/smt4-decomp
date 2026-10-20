@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int FUN_002b26b0(...); /* 0x2b26b0 */
+extern int entryCompareByRank(...); /* 0x2b26b0 */
 
 /* Supplied declaration required: qsort. */
 extern int gameFlagIsSet(void);
@@ -51,7 +51,7 @@ void FUN_003f5bd8(int param_1,int param_2)
   rt_memclr();
   rt_memcpy(temp_v1,*(unsigned int *)(param_1 + 0x20),param_2 * 0x34);
   temp_v4 = 0x34;
-  qsort(temp_v1,param_2,0x34,FUN_002b26b0);
+  qsort(temp_v1,param_2,0x34,entryCompareByRank);
   temp_v6 = 0;
   if (param_2 < 1) {
     asdOperatorDeleteC(temp_v1);

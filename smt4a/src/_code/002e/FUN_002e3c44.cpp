@@ -11,7 +11,7 @@ typedef struct {
     unsigned short sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-extern int FUN_002e3c36(unsigned int, unsigned int);
+extern int libcLocaleGetCategory(unsigned int, unsigned int);
 extern int FUN_002e3cb8(short *, unsigned char, int);
 extern unsigned int *__aeabi_errno_addr(void);
 
@@ -45,7 +45,7 @@ int FUN_002e3c44(short *param_1,unsigned char *param_2,int param_3,int param_4)
   iStack_1c = param_3;
   temp_v7 = param_4;
   if (param_4 == 0) {
-    temp_v7 = FUN_002e3c36(0,5);
+    temp_v7 = libcLocaleGetCategory(0,5);
   }
   while( 1 ) {
     temp_v4 = temp_v3 == 0;

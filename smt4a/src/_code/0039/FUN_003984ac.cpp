@@ -15,7 +15,7 @@ int FUN_003ebca0(void);
 int FUN_004abba8(...);
 int FUN_004abbe8(unsigned int);
 int FUN_004c1114(...);
-int FUN_004c3c84(...);
+int btlSlotSetStoreValue(...);
 int FUN_004c571c(...);
 int FUN_004c6cb0(int, int);
 int hasFlag80Or1000(...);
@@ -84,7 +84,7 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_004abba8. */
 /* Supplied declaration required: FUN_004abbe8. */
 /* Supplied declaration required: FUN_004c1114. */
-/* Supplied declaration required: FUN_004c3c84. */
+/* Supplied declaration required: btlSlotSetStoreValue. */
 extern unsigned int FUN_004c53fc(unsigned int);
 /* Supplied declaration required: FUN_004c571c. */
 /* Supplied declaration required: FUN_004c6cb0. */
@@ -125,7 +125,7 @@ void FUN_003984ac(int param_1)
       puVar6 = (unsigned int *)(*piVar9 + temp_v6 * 0x408);
       if (((DAT_00573978 & *puVar6) != 0 || (DAT_0057397c & puVar6[1]) != 0) &&
          ((*puVar6 & DAT_005739a0) == 0 && (puVar6[1] & DAT_005739a4) == 0)) {
-        FUN_004c3c84((int)*(short *)((int)puVar6 + 0x6e),0x2c,0);
+        btlSlotSetStoreValue((int)*(short *)((int)puVar6 + 0x6e),0x2c,0);
       }
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 0x6d);
@@ -218,7 +218,7 @@ LAB_003987dc:
               }
               else {
                 temp_v2 = FUN_004c53fc(0x22);
-                FUN_004c3c84((int)(short)puVar10[2],0x22,temp_v2);
+                btlSlotSetStoreValue((int)(short)puVar10[2],0x22,temp_v2);
               }
             }
             temp_v6 = temp_v6 + 1;
@@ -297,49 +297,49 @@ LAB_00398c7c:
                   }
                   else {
                     temp_v2 = FUN_004c53fc(0x1b);
-                    FUN_004c3c84(temp_v7,0x1b,temp_v2);
+                    btlSlotSetStoreValue(temp_v7,0x1b,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x40) != 0) {
                     FUN_004c571c(temp_v7,0x1c,1,0);
                   }
                   else {
                     temp_v2 = FUN_004c53fc(0x1c);
-                    FUN_004c3c84(temp_v7,0x1c,temp_v2);
+                    btlSlotSetStoreValue(temp_v7,0x1c,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x100) != 0) {
                     FUN_004c571c(temp_v7,0x1d,1,0);
                   }
                   else {
                     temp_v2 = FUN_004c53fc(0x1d);
-                    FUN_004c3c84(temp_v7,0x1d,temp_v2);
+                    btlSlotSetStoreValue(temp_v7,0x1d,temp_v2);
                   }
                   if ((puVar10[0x9d] & 8) != 0) {
                     FUN_004c571c(temp_v7,0x1e,1,0);
                   }
                   else {
                     temp_v2 = FUN_004c53fc(0x1e);
-                    FUN_004c3c84(temp_v7,0x1e,temp_v2);
+                    btlSlotSetStoreValue(temp_v7,0x1e,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x800) != 0) {
                     FUN_004c571c(temp_v7,0x1f,1,0);
                   }
                   else {
                     temp_v2 = FUN_004c53fc(0x1f);
-                    FUN_004c3c84(temp_v7,0x1f,temp_v2);
+                    btlSlotSetStoreValue(temp_v7,0x1f,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x1000) != 0) {
                     FUN_004c571c(temp_v7,0x20,1,0);
                   }
                   else {
                     temp_v2 = FUN_004c53fc(0x20);
-                    FUN_004c3c84(temp_v7,0x20,temp_v2);
+                    btlSlotSetStoreValue(temp_v7,0x20,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x2000) != 0) {
                     FUN_004c571c(temp_v7,0x21,1,0);
                   }
                   else {
                     temp_v2 = FUN_004c53fc(0x21);
-                    FUN_004c3c84(temp_v7,0x21,temp_v2);
+                    btlSlotSetStoreValue(temp_v7,0x21,temp_v2);
                   }
                 }
               }

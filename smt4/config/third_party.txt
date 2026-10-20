@@ -35,7 +35,7 @@
 0x00100f9c FUN_00100f9c between
 0x00100fc8 FUN_00100fc8 between
 0x0010108c libc_strtokR name
-0x001010d4 FUN_001010d4 between
+0x001010d4 digitValueInBase between
 0x001010f2 FUN_001010f2 callers
 0x001011c6 FUN_001011c6 callers
 0x001011e8 FUN_001011e8 callers
@@ -177,7 +177,7 @@
 0x00122224 FUN_00122224 between
 0x00122a6c FUN_00122a6c between
 0x00122f04 FUN_00122f04 between
-0x001230b8 FUN_001230b8 between
+0x001230b8 blockOpen between
 0x0012312c vldtr_initializeStateValidator name
 0x001239d4 nnosAddressSpaceManagerInitialize name
 0x00123a38 addressBlockInit callers
@@ -1187,7 +1187,7 @@
 0x002a8598 nn_fnd_UnitHeapBase_Initialize name
 0x002a86a4 FUN_002a86a4 between
 0x002a86d4 FUN_002a86d4 between
-0x002a86e4 FUN_002a86e4 between
+0x002a86e4 aocSlotRelease between
 0x002a8728 nn_math_ARMv6_MTX34ToMTX33Asm name
 0x002a87b4 nn_math_ARMv6_VEC3TransformAsm_2A87B4 name
 0x002aa568 libc_strcmp name
@@ -1430,6 +1430,7 @@
 0x002c424c __aeabi_memset4 name
 0x002c5220 nn_os_LightEvent_Initialize name
 0x002c5454 nn_applet_CTR_detail_CloseApplication name
+0x002c5d5c __aeabi_vec_ctor_nocookie_nodtor name
 0x002c5dc0 nn_cfg_CTR_Initialize name
 0x002c5de8 FUN_002c5de8 between
 0x002c5df8 rt_memcpy name
@@ -1459,6 +1460,7 @@
 0x0034f6e8 FUN_0034f6e8 callers
 0x0034f768 FUN_0034f768 between
 0x0034f780 FUN_0034f780 callers
+0x0034f7ec FUN_0034f7ec between
 0x0034f800 FUN_0034f800 between
 0x0034f8e8 FUN_0034f8e8 between
 0x0034f994 FUN_0034f994 between
@@ -1624,7 +1626,7 @@
 0x003572e8 FUN_003572e8 between
 0x00357320 nn_gr_CTR_Texture_Texture_sub_object name
 0x003573a4 FUN_003573a4 between
-0x00357488 FUN_00357488 between
+0x00357488 registerObj8Holder between
 0x003574ac FUN_003574ac between
 0x0035750c nn_os_TransferMemoryBlock_Initialize name
 0x003575a0 FUN_003575a0 between
@@ -1742,7 +1744,7 @@
 0x0035c44c FUN_0035c44c between
 0x0035c544 FUN_0035c544 between
 0x0035c7ac FUN_0035c7ac between
-0x0035caf4 FUN_0035caf4 between
+0x0035caf4 idListCheck between
 0x0035cb7c FUN_0035cb7c between
 0x0035cdf8 FUN_0035cdf8 between
 0x0035cea8 FUN_0035cea8 between
@@ -1776,7 +1778,7 @@
 0x0035eabc FUN_0035eabc between
 0x0035ebc4 FUN_0035ebc4 between
 0x0035efa0 FUN_0035efa0 between
-0x0035f198 FUN_0035f198 between
+0x0035f198 ngwordStateReset between
 0x0035f1f4 FUN_0035f1f4 between
 0x0035f244 FUN_0035f244 between
 0x0035f290 FUN_0035f290 between
@@ -2393,6 +2395,7 @@
 0x003f613c mwmoimaadpcmDecoderRelease name
 0x003f618c FUN_003f618c between
 0x003f62a4 FUN_003f62a4 between
+0x003f63bc mobiclipAllocatorReset name
 0x003f63f4 FUN_003f63f4 between
 0x003f64dc criticalSectionReadValue38 between
 0x003f6568 FUN_003f6568 between

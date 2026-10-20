@@ -12,7 +12,7 @@ int jobStop(...);
 int asdSequenceRequest(...);
 
 int FUN_00289608(int, int);
-int FUN_0028971c(void);
+int msgWindowReset(void);
 int gameFlagSetValue(...);
 int FUN_002897b0(int);
 int FUN_002897d0(...);
@@ -23,7 +23,7 @@ int FUN_00289c98(int);
 int FUN_00289d74(int, unsigned int, int);
 int FUN_00289de4(int, unsigned int, int);
 int buttonHelpCreate(void);
-int FUN_0028dc68(...);
+int messageSlotSet(...);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int scrScriptProcessStartEntry(unsigned int, int);
@@ -34,7 +34,7 @@ int buttonHelpSetPreset(int);
 int FUN_002be624(...);
 int FUN_002bff50(void);
 int asdMemFree(void);
-int FUN_002e2028(void);
+int eventTexReleaseJobs(void);
 int bustupCutAnimStopJob(void);
 int eventCommandStop(void);
 int FUN_0031eb34(void);
@@ -72,7 +72,7 @@ extern char *gameJumpRequestGet(void);
 /* Supplied declaration required: FUN_002895a8. */
 /* Supplied declaration required: FUN_00289608. */
 extern int FUN_002896bc(void);
-/* Supplied declaration required: FUN_0028971c. */
+/* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_002897b0. */
 extern int FUN_002897c0(void);
@@ -88,7 +88,7 @@ extern int campButtonHelpIsActive(void);
 /* Supplied declaration required: FUN_00289de4. */
 extern int FUN_00289e54(int, unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: FUN_0028dc68. */
+/* Supplied declaration required: messageSlotSet. */
 extern int gameJumpRequestIsPending(void);
 extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: buttonHelpRelease. */
@@ -106,7 +106,7 @@ extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: asdSequenceRequest. */
 extern unsigned int FUN_002c5c04(unsigned char *);
-/* Supplied declaration required: FUN_002e2028. */
+/* Supplied declaration required: eventTexReleaseJobs. */
 /* Supplied declaration required: bustupCutAnimStopJob. */
 /* Supplied declaration required: eventCommandStop. */
 /* Supplied declaration required: FUN_0031eb34. */
@@ -246,9 +246,9 @@ unsigned int FUN_0019f3dc(void)
         uiFadeRelease();
         buttonHelpRelease();
         FUN_002bff50();
-        FUN_0028971c();
+        msgWindowReset();
         bustupCutAnimStopJob();
-        FUN_002e2028();
+        eventTexReleaseJobs();
         eventCommandStop();
         FUN_0031eb34();
         if (puVar2[0xc] != 0) {
@@ -264,7 +264,7 @@ unsigned int FUN_0019f3dc(void)
           puVar2[0xd] = 0;
         }
         puVar2[2] = 99;
-        FUN_0028dc68(0);
+        messageSlotSet(0);
         return 0;
       }
       FUN_002a03d8(0,5);

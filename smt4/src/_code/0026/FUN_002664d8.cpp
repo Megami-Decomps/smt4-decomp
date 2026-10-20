@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024f520(void);
+int dataTable29Sub0GetEntryWithAoc(void);
 int FUN_003966b8(unsigned int *);
 int FUN_00396b08(unsigned int *, int);
 
@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0024f4e8(void);
-/* Supplied declaration required: FUN_0024f520. */
+/* Supplied declaration required: dataTable29Sub0GetEntryWithAoc. */
 /* Supplied declaration required: FUN_003966b8. */
 /* Supplied declaration required: FUN_00396b08. */
 
@@ -34,7 +34,7 @@ void FUN_002664d8(unsigned int *param_1)
     if (0 < temp_v0) {
       do {
         pcVar2 = pcVar3;
-        FUN_0024f520();
+        dataTable29Sub0GetEntryWithAoc();
         if ((((int)*pcVar2 != 0xffffffff) && ((int)*pcVar2 == param_1[1])) &&
            ((int)pcVar2[1] == param_1[2])) {
           *(short *)((int)param_1 + (unsigned int)(unsigned short)(int)param_1[0x28] * 2 + 0xa2) = (short)(int)pcVar3;

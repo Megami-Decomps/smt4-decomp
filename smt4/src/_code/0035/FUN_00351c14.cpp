@@ -1,39 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00351c14` (_code @ 0x351c14, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation (a/b/ready land in r5/r6/r4 where retail has r6/r4/r5) and retail's literal pool carries one extra unreferenced word (0xE0409FFF) before the 0xC9209F84 constant. */
+#include "common.h"
 
 extern "C" {
 
+void nn_cfg_CTR_Initialize(void);
+s32 FUN_00359f90(void);
 int FUN_001467a4(void);
-int FUN_00351ce8(int, unsigned int);
-int FUN_00359f90(void);
+s32 FUN_00351ce8(s32 a, u32 b);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_001467a4. */
-/* Supplied declaration required: FUN_00351ce8. */
-/* Supplied declaration required: FUN_00359f90. */
-extern void nn_cfg_CTR_Initialize(void);
-
-
-int FUN_00351c14(int param_1,unsigned int param_2)
-
+/* Initialises the config library; if FUN_00359f90 reports success, returns FUN_00351ce8(a, b), otherwise the
+ * failure result 0xC9209F84. */
+s32 FUN_00351c14(s32 a, u32 b)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = param_1;
-  nn_cfg_CTR_Initialize();
-  FUN_00359f90();
-  FUN_001467a4();
-  if (temp_v0 != 0) {
-    FUN_00351ce8(param_1,param_2);
-    return param_1;
-  }
-  return -0x36df607c;
+    s32 ready;
+
+    nn_cfg_CTR_Initialize();
+    ready = FUN_00359f90();
+    FUN_001467a4();
+    if (ready == 0) {
+        return 0xC9209F84;
+    }
+    return FUN_00351ce8(a, b);
 }
 
 } /* extern "C" */

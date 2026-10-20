@@ -3,11 +3,11 @@
 extern "C" {
 
 int asdOperatorDeleteB(unsigned int);
-int FUN_002e3f74(int);
+int holderDeleteObject(int);
 
 extern int FUN_00102168(int);
 /* Supplied declaration required: asdOperatorDeleteB. */
-/* Supplied declaration required: FUN_002e3f74. */
+/* Supplied declaration required: holderDeleteObject. */
 
 
 void FUN_002e4e6c(int param_1)
@@ -18,7 +18,7 @@ void FUN_002e4e6c(int param_1)
   
   asdOperatorDeleteB(*(unsigned int *)(param_1 + 0x18));
   temp_v0 = FUN_00102168(param_1 + 8);
-  FUN_002e3f74(temp_v0 - 8);
+  holderDeleteObject(temp_v0 - 8);
   return;
 }
 

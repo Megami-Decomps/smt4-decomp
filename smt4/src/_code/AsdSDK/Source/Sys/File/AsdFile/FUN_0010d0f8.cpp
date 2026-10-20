@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bcc60(...);
-int FUN_002bcd44(...);
+int resultReportIfFailed(...);
 int asdOperatorNew(...);
 int memAlloc(...);
 int FUN_002c526c(...);
@@ -31,7 +31,7 @@ extern unsigned int *DAT_0046501c; /* 0x46501c */
 extern unsigned int DAT_00465020; /* 0x465020 */
 
 /* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002bcd44. */
+/* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c526c. */
@@ -63,7 +63,7 @@ void FUN_0010d0f8(void)
     *(unsigned char *)(puVar2 + 4) = 0;
   }
   DAT_0046501c = puVar2;
-  FUN_002bcd44();
+  resultReportIfFailed();
   temp_v1 = 4;
   temp_v2 = &LAB_00123c88;
   puVar2 = &DAT_00465020;

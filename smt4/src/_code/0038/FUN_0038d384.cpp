@@ -19,7 +19,7 @@ typedef struct {
 
 extern int g_aocMain; /* 0x432fc8 */
 
-extern int FUN_0023a0b4(int);
+extern int queryResultFailureOnly(int);
 extern int FUN_002a12d8(int);
 /* Supplied declaration required: FUN_002b4810. */
 /* Supplied declaration required: FUN_002baa40. */
@@ -82,7 +82,7 @@ void FUN_0038d384(unsigned char *param_1,int param_2)
     temp_v1 = param_2 + 0x18;
     FUN_00394230(temp_v1,&temp_v4,&temp_v5);
     if (temp_v1 != 0) {
-      temp_v1 = FUN_0023a0b4(temp_v2 + 0x80);
+      temp_v1 = queryResultFailureOnly(temp_v2 + 0x80);
       if (temp_v1 < 0) {
         FUN_0038b25c(&temp_v6,temp_v2);
         *(unsigned int *)(param_2 + 0xc) = temp_v6;

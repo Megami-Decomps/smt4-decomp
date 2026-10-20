@@ -31,7 +31,7 @@ extern unsigned int DAT_005f19e4; /* 0x5f19e4 */
 extern unsigned short DAT_005f19e8; /* 0x5f19e8 */
 
 /* Supplied declaration required: asdOperatorNew. */
-extern unsigned int *FUN_003e5d10(void);
+extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 
 
 void FUN_002496b8(void)
@@ -86,7 +86,7 @@ void FUN_002496b8(void)
   asdOperatorNew();
   puVar2 = (unsigned int *)0x0;
   if (temp_v0 != 0) {
-    puVar2 = (unsigned int *)FUN_003e5d10();
+    puVar2 = (unsigned int *)_ZN9Obj557ae8C1Ev();
     *puVar2 = (unsigned int)&DAT_00557c60;
   }
   puVar3 = g_lmapScene;

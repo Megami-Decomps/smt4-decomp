@@ -7,14 +7,14 @@ extern "C" {
 int FUN_0040a378(unsigned int);
 int FUN_0040a3a0(unsigned int);
 int FUN_0040a3c8(unsigned int);
-int FUN_0040a5e4(unsigned int);
+int questCenterAddPoints(unsigned int);
 
 extern int gameGetCounters(void);
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_0040a378. */
 /* Supplied declaration required: FUN_0040a3a0. */
 /* Supplied declaration required: FUN_0040a3c8. */
-/* Supplied declaration required: FUN_0040a5e4. */
+/* Supplied declaration required: questCenterAddPoints. */
 
 
 unsigned int FUN_002c5214(void)
@@ -57,7 +57,7 @@ unsigned int FUN_002c5214(void)
       }
     }
     else {
-      FUN_0040a5e4(temp_v1);
+      questCenterAddPoints(temp_v1);
     }
   }
   else {

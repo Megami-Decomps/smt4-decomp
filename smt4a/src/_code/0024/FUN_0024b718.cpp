@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001517b4(...);
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int dialogClose(int);
 int FUN_003ea20c(void);
 int FUN_004c89e8(void);
@@ -33,13 +33,13 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_001517b4. */
 extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int jobGetWork(void);
 /* Supplied declaration required: dialogClose. */
 extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_003ea20c. */
 extern int FUN_003eb1cc(int);
-extern int FUN_003ece6c(int);
+extern int btlScriptUnitIsNotKind6(int);
 extern int FUN_0040ddec(unsigned int, unsigned int);
 extern int FUN_004a9428(void);
 /* Supplied declaration required: FUN_004c89e8. */
@@ -152,7 +152,7 @@ unsigned int FUN_0024b718(void)
         if (temp_v5 == 0) {
           return 0;
         }
-        temp_v5 = FUN_003ece6c(temp_v3);
+        temp_v5 = btlScriptUnitIsNotKind6(temp_v3);
         if (temp_v5 == 0) {
           return 0;
         }
@@ -194,7 +194,7 @@ unsigned int FUN_0024b718(void)
           temp_v4 = ~DAT_005713bc;
           *puVar8 = *puVar8 & ~DAT_005713b8;
           *(unsigned int *)(temp_v3 + 0x45a4) = *(unsigned int *)(temp_v3 + 0x45a4) & temp_v4;
-          FUN_001641b4(0x100020f);
+          eventQueueAddUniqueIfValid(0x100020f);
           return 0;
         }
         if ((*(unsigned int *)(temp_v3 + 0x45a4) & DAT_005713c4) != 0 || (DAT_005713c0 & *puVar8) != 0) {
@@ -208,7 +208,7 @@ unsigned int FUN_0024b718(void)
           temp_v4 = ~DAT_005713c4;
           *puVar8 = *puVar8 & ~DAT_005713c0;
           *(unsigned int *)(temp_v3 + 0x45a4) = *(unsigned int *)(temp_v3 + 0x45a4) & temp_v4;
-          FUN_001641b4(0x100020f);
+          eventQueueAddUniqueIfValid(0x100020f);
           return 0;
         }
         temp_v5 = 7;
@@ -219,7 +219,7 @@ unsigned int FUN_0024b718(void)
           temp_v4 = DAT_005713bc | *(unsigned int *)(temp_v3 + 0x45a4);
           *puVar8 = DAT_005713b8 | *puVar8;
           *(unsigned int *)(temp_v3 + 0x45a4) = temp_v4;
-          FUN_001641b4(0x100020e);
+          eventQueueAddUniqueIfValid(0x100020e);
           return 0;
         }
         temp_v5 = 8;
@@ -237,7 +237,7 @@ unsigned int FUN_0024b718(void)
         temp_v4 = DAT_005713c4 | *(unsigned int *)(temp_v3 + 0x45a4);
         *puVar8 = *puVar8 | DAT_005713c0;
         *(unsigned int *)(temp_v3 + 0x45a4) = temp_v4;
-        FUN_001641b4(0x100020e);
+        eventQueueAddUniqueIfValid(0x100020e);
         return 0;
       }
       temp_v4 = ~DAT_005713b8;

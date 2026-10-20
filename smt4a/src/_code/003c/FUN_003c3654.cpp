@@ -1,54 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c3654` (_code @ 0x3c3654, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b30e4(void);
-int libc_strcpy(unsigned int *, unsigned int);
-int FUN_0037cdcc(unsigned char *, int, unsigned char [256]);
+typedef struct FileInfo {
+    /* 0x000 */ u8 name[256];
+    /* 0x100 */ s32 type;
+} FileInfo;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+typedef struct EditorEntry {
+    /* 0x000 */ u8 unk000[0x9C];
+    /* 0x09C */ char path[1];
+} EditorEntry;
 
-extern unsigned char LAB_003c36c8; /* 0x3c36c8 */
-extern unsigned char LAB_00400001; /* 0x400001 */
-extern unsigned char LAB_00400002; /* 0x400002 */
-extern unsigned char g_effectEditor; /* 0x59dbe0 */
+typedef struct EffectEditor {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ void *current;
+} EffectEditor;
 
-/* Supplied declaration required: FUN_002b30e4. */
-/* Supplied declaration required: libc_strcpy. */
-extern unsigned int *FUN_0037667c(int, unsigned char *);
-/* Supplied declaration required: FUN_0037cdcc. */
+/* Result codes: the values 0x400000-0x400002. */
+extern EffectEditor g_effectEditor;
 
+extern s32 FUN_0037cdcc(const char *path, s32 flags, FileInfo *info);
+extern EditorEntry *FUN_0037667c(void *current, FileInfo *info);
+extern const char **FUN_002b30e4(void);
+extern char *libc_strcpy(char *dst, const char *src);
 
-unsigned char * FUN_003c3654(void)
-
+/* Looks up the effect editor's "effect_editor/ep/" entry: 0x400000 for a directory (type 2); for a
+ * file (type 1) copies the current entry's name into it and gives 0x400002; 0x400001 otherwise. */
+u8 *FUN_003c3654(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  unsigned char *puVar3;
-  unsigned char temp_v0 [256];
-  int temp_v1;
-  
-  puVar3 = &LAB_00400001;
-  FUN_0037cdcc(&LAB_003c36c8,0x20,temp_v0);
-  if (temp_v1 == 2) {
-    puVar3 = (unsigned char *)0x400000;
-  }
-  else if (temp_v1 == 1) {
-    if ((*(int *)((unsigned char *)&g_effectEditor + 0x14)) != 0) {
-      puVar1 = (unsigned int *)FUN_0037667c((*(int *)((unsigned char *)&g_effectEditor + 0x14)),temp_v0);
-      puVar2 = puVar1;
-      FUN_002b30e4();
-      libc_strcpy(puVar1 + 0x27,*puVar2);
+    FileInfo info;
+    u8 *result = (u8 *)0x400001;
+
+    FUN_0037cdcc("effect_editor/ep/", 0x20, &info);
+    if (info.type == 2) {
+        result = (u8 *)0x400000;
+    } else if (info.type == 1) {
+        if (g_effectEditor.current != NULL) {
+            EditorEntry *entry = FUN_0037667c(g_effectEditor.current, &info);
+
+            libc_strcpy(entry->path, *FUN_002b30e4());
+        }
+        result = (u8 *)0x400002;
     }
-    puVar3 = &LAB_00400002;
-  }
-  return puVar3;
+    return result;
 }
 
 } /* extern "C" */

@@ -43,7 +43,7 @@ int FUN_00388758(...);
 int FUN_003c3e48(...);
 
 int FUN_00163aa4(int);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int gameFlagIsSet(...);
 int FUN_0019de98(...);
@@ -81,7 +81,7 @@ extern int g_campCecEdit; /* 0x57f118 */
 extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int FUN_001643a0(void);
 extern int FUN_00165070(void);
 extern int FUN_00167f08(void);
@@ -142,12 +142,12 @@ extern int FUN_00330b58(void);
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 extern int FUN_0034919c(void);
-extern int FUN_00349af0(void);
+extern int partyPanelIsActive(void);
 /* Supplied declaration required: FUN_0034c940. */
 /* Supplied declaration required: screenSetColor670. */
 extern int FUN_0035a094(void);
 extern int FUN_0035db94(void);
-extern int FUN_0035dde8(void);
+extern int uniteIsPhase26Active(void);
 /* Supplied declaration required: dataTable15Sub0FindEntry. */
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: FUN_0037e1b0. */
@@ -228,7 +228,7 @@ void FUN_003dc628(void)
        ((temp_v5 = FUN_0020a2fc(), temp_v5 == 0 &&
         ((temp_v5 = gameFlagIsSet(0x453), temp_v5 != 0 && (temp_v5 = gameFlagIsSet(0x425), temp_v5 == 0))))))
       || (((temp_v5 = FUN_0020a2fc(), temp_v5 == 0 && (temp_v5 = region9100IsClear(), temp_v5 == 0)) ||
-          (temp_v5 = FUN_0035dde8(), temp_v5 != 0)))) ||
+          (temp_v5 = uniteIsPhase26Active(), temp_v5 != 0)))) ||
      ((((temp_v5 = FUN_0020a2fc(), temp_v5 == 0 && (temp_v5 = gameFlagIsSet(0x459), temp_v5 == 0)) &&
        (temp_v5 = FUN_002ab790(), temp_v5 == 0x19)) && (temp_v5 = FUN_0023c068(), temp_v5 == 0)))) {
     temp_v9 = FUN_00167f08();
@@ -263,7 +263,7 @@ void FUN_003dc628(void)
     return;
   }
   temp_v5 = FUN_00167f08();
-  if (((temp_v5 == 4) || (temp_v5 = FUN_00167f08(), temp_v5 == 2)) && (temp_v5 = FUN_00349af0(), temp_v5 == 0)
+  if (((temp_v5 == 4) || (temp_v5 = FUN_00167f08(), temp_v5 == 2)) && (temp_v5 = partyPanelIsActive(), temp_v5 == 0)
      ) {
     temp_v2 = 1;
     if (*(char *)(temp_v9 + 0xa4) != '\x01') {
@@ -272,7 +272,7 @@ void FUN_003dc628(void)
     sysPlaySe(temp_v2);
   }
   temp_v5 = FUN_00167f08();
-  if (((temp_v5 == 3) || (temp_v5 = FUN_00167f08(), temp_v5 == 1)) && (temp_v5 = FUN_00349af0(), temp_v5 != 0)
+  if (((temp_v5 == 3) || (temp_v5 = FUN_00167f08(), temp_v5 == 1)) && (temp_v5 = partyPanelIsActive(), temp_v5 != 0)
      ) {
     if (*(char *)(temp_v9 + 0xa4) == '\x01') {
       temp_v6 = 2;
@@ -323,7 +323,7 @@ void FUN_003dc628(void)
             temp_v13 = 1;
             temp_v7 = FUN_002a4878(temp_v9 + 0x40);
             if (temp_v7 != temp_v5) {
-              FUN_001641b4(0x100020d);
+              eventQueueAddUniqueIfValid(0x100020d);
             }
             break;
           }
@@ -515,7 +515,7 @@ LAB_003dcd84:
           temp_v3 = *(char *)(temp_v9 + 0xb8);
         }
         if (!temp_v14 || temp_v3 != temp_v4) {
-          FUN_001641b4(0x100020d);
+          eventQueueAddUniqueIfValid(0x100020d);
         }
         temp_v3 = *(char *)(temp_v9 + 0xb9);
         temp_v14 = temp_v3 == temp_v0;
@@ -548,7 +548,7 @@ LAB_003dcd84:
             FUN_002309dc();
             FUN_0026f0c4();
             temp_v6 = 0x100020e;
-            FUN_001641b4(temp_v6);
+            eventQueueAddUniqueIfValid(temp_v6);
           }
         }
         else {
@@ -630,7 +630,7 @@ LAB_003dcd84:
               }
             }
           }
-          FUN_001641b4(0x100020e);
+          eventQueueAddUniqueIfValid(0x100020e);
         }
       }
     }
@@ -761,7 +761,7 @@ LAB_003dcd84:
                   FUN_002a7b74();
                   FUN_0023c08c(0);
                 }
-                FUN_001641b4(0x100020f);
+                eventQueueAddUniqueIfValid(0x100020f);
               }
               else {
                 FUN_0026fc00(2,3,0xffffffff,0);
@@ -773,7 +773,7 @@ LAB_003dcd84:
             }
             else {
               *(unsigned char *)(temp_v9 + 0xb9) = 3;
-              FUN_001641b4(temp_v6);
+              eventQueueAddUniqueIfValid(temp_v6);
             }
           }
         }
@@ -801,7 +801,7 @@ LAB_003dda0c:
               if (temp_v3 != temp_v4) {
                 FUN_0023b45c(0);
                 temp_v6 = 0x100020d;
-                FUN_001641b4(temp_v6);
+                eventQueueAddUniqueIfValid(temp_v6);
               }
             }
             else {
@@ -827,7 +827,7 @@ LAB_003dda0c:
                 if (temp_v3 != temp_v4) {
                   FUN_0023b45c(0);
                   temp_v6 = 0x100020d;
-                  FUN_001641b4(temp_v6);
+                  eventQueueAddUniqueIfValid(temp_v6);
                 }
               }
               else {
@@ -842,7 +842,7 @@ LAB_003dda0c:
                   }
                   FUN_0023b45c(0);
                   temp_v6 = 0x100020d;
-                  FUN_001641b4(temp_v6);
+                  eventQueueAddUniqueIfValid(temp_v6);
                 }
                 else {
                   temp_v5 = 3;
@@ -856,7 +856,7 @@ LAB_003dda0c:
                     }
                     FUN_0023b45c(0);
                     temp_v6 = 0x100020d;
-                    FUN_001641b4(temp_v6);
+                    eventQueueAddUniqueIfValid(temp_v6);
                   }
                 }
               }
@@ -905,7 +905,7 @@ LAB_003dda0c:
                   }
                   if (*(char *)(temp_v9 + 0xb9) != temp_v3) {
                     temp_v6 = 0x100020d;
-                    FUN_001641b4(temp_v6);
+                    eventQueueAddUniqueIfValid(temp_v6);
                   }
                 }
               }
@@ -942,7 +942,7 @@ LAB_003dda0c:
 LAB_003ddbfc:
               if (*(char *)(temp_v9 + 0xb9) == temp_v3) goto LAB_003ddd08;
               temp_v6 = 0x100020d;
-              FUN_001641b4(temp_v6);
+              eventQueueAddUniqueIfValid(temp_v6);
             }
           }
           else {

@@ -33,7 +33,7 @@ extern unsigned char LAB_003e36cc; /* 0x3e36cc */
 /* Supplied declaration required: FUN_00184310. */
 extern int gameFlagIsSet(void);
 extern int FUN_00224880(unsigned int);
-extern int FUN_00239234(unsigned short, unsigned char *);
+extern int gameDataCopySaveEntry(unsigned short, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
@@ -122,10 +122,10 @@ void FUN_003e32b0(int param_1)
       temp_v0 = puVar3[0x1e];
       if ((temp_v0 & 1) != 0) {
         if ((temp_v0 & 0xfffe) != 0) {
-          temp_v2 = FUN_00239234(temp_v0 >> 1,temp_v7);
+          temp_v2 = gameDataCopySaveEntry(temp_v0 >> 1,temp_v7);
         }
         else {
-          temp_v2 = FUN_00239234(*puVar3,temp_v7);
+          temp_v2 = gameDataCopySaveEntry(*puVar3,temp_v7);
         }
         if ((temp_v2 == 0) || ((temp_v8 & 0xfc) == 0)) goto LAB_003e33d0;
       }

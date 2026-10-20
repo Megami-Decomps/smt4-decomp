@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014e188(...);
-int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
+int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
 int asdOperatorNew(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetImageKeyframe(...);
@@ -50,7 +50,7 @@ extern unsigned char DAT_0052af04; /* 0x52af04 */
 extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -89,7 +89,7 @@ void FUN_004a8ef4(fn_004a8ef4_arg0 *param_1,int param_2)
   *(unsigned short *)(temp_v1 + 0x7006) = 0;
   temp_v1 = temp_v0 + 0x7508;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
-  FUN_001505ac(temp_v1,&DAT_0052ac1c,0x120,&DAT_0052ad3c,0x108,&DAT_0052ae44,0xc0,0,0,&DAT_0052af04,
+  paramsInit(temp_v1,&DAT_0052ac1c,0x120,&DAT_0052ad3c,0x108,&DAT_0052ae44,0xc0,0,0,&DAT_0052af04,
                0x5b0);
   temp_v6 = 0;
   do {

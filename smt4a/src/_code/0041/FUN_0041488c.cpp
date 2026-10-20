@@ -1,49 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041488c` (_code @ 0x41488c, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(void);
-int vectorCopyHeader(int, int *);
-int FUN_004130c0(int, int);
+typedef struct Vec3 {
+    u32 x;
+    u32 y;
+    u32 z;
+} Vec3;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
+typedef struct Source {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ Vec3 position;
+} Source;
 
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: vectorCopyHeader. */
-extern int refIsNonNegative(int);
-/* Supplied declaration required: FUN_004130c0. */
+typedef struct Target {
+    /* 0x00 */ u8 unk00[0x7C];
+    /* 0x7C */ u8 header[0xC];
+    /* 0x88 */ void *buffer;
+    /* 0x8C */ u8 unk8c[0x70];
+    /* 0xFC */ u8 invalid;
+} Target;
 
+extern void asdMemFree(void *p);
+extern void vectorCopyHeader(u8 *header, Vec3 *vector);
+extern s32 refIsNonNegative(u8 *header);
+extern void FUN_004130c0(Target *target, s32 arg);
 
-void FUN_0041488c(int param_1,int param_2)
-
+/* Frees the target's buffer, copies the source's position into its header and runs FUN_004130c0 (3) when it is non-negative, else marks the target invalid. */
+void FUN_0041488c(Target *target, Source *source)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int uStack_14;
-  unsigned int uStack_10;
-  
-  if (*(int *)(param_1 + 0x88) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 0x88) = 0;
-  }
-  temp_v1 = *(unsigned int *)(param_2 + 0x38);
-  uStack_14 = *(unsigned int *)(param_2 + 0x3c);
-  uStack_10 = *(unsigned int *)(param_2 + 0x40);
-  vectorCopyHeader(param_1 + 0x7c,&temp_v1);
-  temp_v0 = refIsNonNegative(param_1 + 0x7c);
-  if (temp_v0 == 0) {
-    *(unsigned char *)(param_1 + 0xfc) = 1;
-  }
-  else {
-    FUN_004130c0(param_1,3);
-  }
-  return;
+    Vec3 position;
+
+    if (target->buffer != NULL) {
+        asdMemFree(target->buffer);
+        target->buffer = NULL;
+    }
+    position = source->position;
+    vectorCopyHeader(target->header, &position);
+    if (refIsNonNegative(target->header) == 0) {
+        target->invalid = 1;
+    } else {
+        FUN_004130c0(target, 3);
+    }
 }
 
 } /* extern "C" */

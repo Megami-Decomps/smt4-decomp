@@ -52,8 +52,8 @@ extern int FUN_00178400(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00190fc8. */
 /* Supplied declaration required: FUN_001946d4. */
 /* Supplied declaration required: FUN_0019472c. */
-extern int FUN_00194784(int, unsigned int, unsigned int *);
-extern int FUN_001947dc(int, unsigned int, unsigned int *);
+extern int soundInfoOwnerReadInfo(int, unsigned int, unsigned int *);
+extern int soundGroupUpdate(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00194834. */
 extern unsigned int FUN_00194850(unsigned int **);
 /* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
@@ -162,7 +162,7 @@ void FUN_00174ebc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
           temp_v14[1] = 0;
           temp_v13 = unaff_r8;
           temp_v14[0] = unaff_r8;
-          temp_v0 = FUN_001947dc(param_1[1],temp_v20,&temp_v13);
+          temp_v0 = soundGroupUpdate(param_1[1],temp_v20,&temp_v13);
           temp_v1 = 0;
           if (temp_v0 != 0) {
             temp_v1 = temp_v13;
@@ -176,7 +176,7 @@ void FUN_00174ebc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
                  (temp_v0 = FUN_00178400(param_1[1],temp_v13,(unsigned int *)&temp_v22), temp_v0 != 0)) {
                 temp_v14[3] = 0;
                 temp_v14[4] = temp_v14[4] & 0xffff0000;
-                temp_v0 = FUN_00194784(param_1[1],temp_v1,temp_v14 + 2);
+                temp_v0 = soundInfoOwnerReadInfo(param_1[1],temp_v1,temp_v14 + 2);
                 if ((temp_v0 != 0) &&
                    (temp_v0 = (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v22), temp_v0 != 0)) {
                   FUN_00190fc8(temp_v25,temp_v0);

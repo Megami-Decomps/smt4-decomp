@@ -1,0 +1,48 @@
+#include "common.h"
+
+extern "C" {
+
+typedef struct ItemEntry {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 itemId;
+    /* 0x06 */ u8 unk06[6];
+    /* 0x0C */ s32 amount;
+    /* 0x10 */ u8 unk10[0x10];
+} ItemEntry;                          /* 0x20 bytes */
+
+typedef struct ItemMenu {
+    /* 0x000 */ u8 unk000[0x14];
+    /* 0x014 */ s32 state;
+    /* 0x018 */ s32 step;
+    /* 0x01C */ u8 unk01C[4];
+    /* 0x020 */ u8 selector[0x588];
+    /* 0x5A8 */ ItemEntry entries[1];
+} ItemMenu;
+
+extern int FUN_0023553c(int arg);
+extern int FUN_0028ca0c(u16 itemId);
+extern int FUN_00295c04(int amount);
+extern int FUN_0029be5c(int kind, int amount);
+extern int FUN_0023360c(void *selector);
+extern int FUN_0029c3ec(void);
+extern int sys43e188GetState(void);
+
+/* Takes the selected entry's item from the menu: when ready, plays the take sequence with its amount and moves to state 3. */
+void itemMenuTakeSelected(ItemMenu *menu)
+{
+    ItemEntry *entries;
+    int amount;
+
+    if (sys43e188GetState() != 0 && FUN_0029c3ec() == 1) {
+        FUN_0023553c(0);
+        entries = menu->entries;
+        FUN_0028ca0c(entries[FUN_0023360c(menu->selector)].itemId);
+        amount = menu->entries[FUN_0023360c(menu->selector)].amount;
+        FUN_00295c04(-amount);
+        FUN_0029be5c(1, amount);
+        menu->state = 3;
+        menu->step = 0;
+    }
+}
+
+} /* extern "C" */

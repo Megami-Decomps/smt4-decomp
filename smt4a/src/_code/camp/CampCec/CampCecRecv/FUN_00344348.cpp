@@ -10,7 +10,7 @@ int asdOperatorNew(...);
 int asdMemoryAllocTracked(int, int, int, int, int);
 int memAlloc(...);
 int sysPlaySe(...);
-int FUN_0016dfc4(void);
+int resultReportIfFailed(void);
 int FUN_002804b0(...);
 int runWinOpen(void);
 int FUN_002c76d8(...);
@@ -65,7 +65,7 @@ extern unsigned int *g_campCecRecv; /* 0x57f128 */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_0016dfc4. */
+/* Supplied declaration required: resultReportIfFailed. */
 extern unsigned int gameDataBlocksAddFlags(unsigned int);
 /* Supplied declaration required: FUN_002804b0. */
 extern unsigned int FUN_002a2cf0(void);
@@ -196,7 +196,7 @@ void FUN_00344348(unsigned char param_1)
       *(unsigned char *)(puVar7 + 4) = 0;
     }
     puVar1[0x1fe] = (unsigned int)puVar7;
-    FUN_0016dfc4();
+    resultReportIfFailed();
     temp_v4 = 4;
     temp_v5 = &LAB_00514a64;
     temp_v6 = &LAB_00514b84;

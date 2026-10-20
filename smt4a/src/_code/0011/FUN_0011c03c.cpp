@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002fd2a4(unsigned char [188]);
+int _ZN9Obj559edcD1Ev(unsigned char [188]);
 int FUN_00311458(int *, int, unsigned int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char DAT_0055a808; /* 0x55a808 */
 
 extern int *wordRefMax(int *, unsigned int *);
-/* Supplied declaration required: FUN_002fd2a4. */
+/* Supplied declaration required: _ZN9Obj559edcD1Ev. */
 /* Supplied declaration required: FUN_00311458. */
 extern int allocElements184(int *, int, unsigned int);
 extern unsigned int bufGrowCapacity3(unsigned int, int *);
@@ -59,7 +59,7 @@ unsigned int * FUN_0011c03c(unsigned int *param_1)
   }
   param_1[5] = *piVar4 + temp_v3 * 0xb8;
   param_1[4] = *piVar4 + temp_v4 * 0xb8;
-  FUN_002fd2a4(temp_v7);
+  _ZN9Obj559edcD1Ev(temp_v7);
   return param_1;
 }
 

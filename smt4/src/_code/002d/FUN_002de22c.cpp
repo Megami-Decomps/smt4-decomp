@@ -1,34 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002de22c` (_code @ 0x2de22c, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int effPartsSetData(unsigned int, int, unsigned int, int);
-int effBlockCreateFromBlock(unsigned int);
+typedef struct PartsData {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u16 count;
+    /* 0x0A */ u8 unk0A[2];
+    /* 0x0C */ void *parts;
+    /* 0x10 */ u32 param;
+} PartsData;
+
+typedef struct EffectEditor {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ u32 block;
+} EffectEditor;
+
+extern EffectEditor g_effectEditor;
+
+int effPartsSetData(u32 block, void *parts, u32 param, s32 count);
+u32 effBlockCreateFromBlock(u32 block);
 int FUN_00250200(void);
 
-extern unsigned char g_effectEditor; /* 0x44ea80 */
-
-/* Supplied declaration required: effPartsSetData. */
-/* Supplied declaration required: effBlockCreateFromBlock. */
-/* Supplied declaration required: FUN_00250200. */
-
-
-unsigned int FUN_002de22c(int param_1)
-
+/* Applies the parts data to the editor's block, then creates the effect block from it and returns that call's result. */
+u32 FUN_002de22c(PartsData *data)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  if (*(int *)(param_1 + 0xc) != 0) {
-    effPartsSetData((*(unsigned int *)((unsigned char *)&g_effectEditor + 0x1c)),*(int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 0x10),
-                 *(unsigned short *)(param_1 + 8));
-  }
-  temp_v0 = (*(unsigned int *)((unsigned char *)&g_effectEditor + 0x1c));
-  effBlockCreateFromBlock((*(unsigned int *)((unsigned char *)&g_effectEditor + 0x1c)));
-  FUN_00250200();
-  return temp_v0;
+    u32 result;
+
+    if (data->parts != NULL) {
+        effPartsSetData(g_effectEditor.block, data->parts, data->param, data->count);
+    }
+    result = effBlockCreateFromBlock(g_effectEditor.block);
+    FUN_00250200();
+    return result;
 }
 
 } /* extern "C" */

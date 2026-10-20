@@ -1,32 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00371ef4` (_code @ 0x371ef4, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00230d30(void);
+typedef struct StatusDownMode {
+    /* 0x000 */ u8 unk000[0x518];
+    /* 0x518 */ s32 mode;
+    /* 0x51C */ s32 prevMode;
+    /* 0x520 */ u8 unk520[4];
+    /* 0x524 */ s32 unk524;
+} StatusDownMode;
 
-extern int g_statusDown; /* 0x588fe8 */
+extern StatusDownMode *g_statusDown;
 
-/* Supplied declaration required: FUN_00230d30. */
+extern void FUN_00230d30(void);
 
-
+/* Switches the status screen to mode 4, remembering the previous mode. */
 void FUN_00371ef4(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  
-  temp_v0 = g_statusDown;
-  *(unsigned int *)(g_statusDown + 0x524) = 0;
-  puVar2 = (unsigned int *)(temp_v0 + 0x518);
-  temp_v1 = *puVar2;
-  *puVar2 = 4;
-  *(unsigned int *)(temp_v0 + 0x51c) = temp_v1;
-  FUN_00230d30();
-  return;
+    StatusDownMode *status = g_statusDown;
+
+    status->unk524 = 0;
+    status->prevMode = status->mode;
+    status->mode = 4;
+    FUN_00230d30();
 }
 
-} /* extern "C" */
+}

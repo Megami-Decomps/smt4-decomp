@@ -1,41 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c39a4` (_code @ 0x2c39a4, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bbb74(unsigned int, int);
-int FUN_002bbbc8(int, int, int, int);
+typedef struct Screen2c39a4 {
+    /* 0x000 */ u8 unk000[0x528];
+    /* 0x528 */ u32 phase;
+    /* 0x52C */ u32 unk52c;
+    /* 0x530 */ u8 unk530[0xC4];
+    /* 0x5F4 */ u8 mode;        /* 0, 1 or 2: which layout is loaded */
+    /* 0x5F5 */ u8 unk5f5[3];
+    /* 0x5F8 */ u8 layoutA[0x40];
+    /* 0x638 */ u8 layoutB[0x40];
+    /* 0x678 */ u8 unk678[0xB14];
+    /* 0x118C */ u8 unk118c[1];
+} Screen2c39a4;
 
-/* Supplied declaration required: FUN_002bbb74. */
-/* Supplied declaration required: FUN_002bbbc8. */
+extern s32 FUN_002bbbc8(Screen2c39a4 *screen, u8 *layout, s32 arg, u8 *unk530);
+extern s32 FUN_002bbb74(u32 value, u8 *unk118c);
 
-
-void FUN_002c39a4(int param_1)
-
+/* Switches the screen to the layout of its current phase when that isn't the loaded mode yet. */
+void FUN_002c39a4(Screen2c39a4 *screen)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  char temp_v1;
-  
-  temp_v0 = 0;
-  if (*(unsigned int *)(param_1 + 0x528) < 2) {
-    temp_v1 = '\x01';
-    temp_v0 = param_1 + 0x5f8;
-  }
-  else if (*(unsigned int *)(param_1 + 0x528) != 2) {
-    temp_v1 = '\0';
-  }
-  else {
-    temp_v1 = '\x02';
-    temp_v0 = param_1 + 0x638;
-  }
-  if (*(char *)(param_1 + 0x5f4) != temp_v1) {
-    FUN_002bbbc8(param_1,temp_v0,0,param_1 + 0x530);
-    FUN_002bbb74(*(unsigned int *)(param_1 + 0x52c),param_1 + 0x118c);
-    *(char *)(param_1 + 0x5f4) = temp_v1;
-  }
-  return;
+    u8 *layout = NULL;
+    u8 mode;
+
+    switch (screen->phase) {
+    case 0:
+    case 1:
+        mode = 1;
+        layout = screen->layoutA;
+        break;
+    case 2:
+        mode = 2;
+        layout = screen->layoutB;
+        break;
+    default:
+        mode = 0;
+        break;
+    }
+    if (screen->mode != mode) {
+        FUN_002bbbc8(screen, layout, 0, screen->unk530);
+        FUN_002bbb74(screen->unk52c, screen->unk118c);
+        screen->mode = mode;
+    }
 }
 
-} /* extern "C" */
+}

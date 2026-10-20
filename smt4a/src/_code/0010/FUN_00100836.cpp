@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e3c44(int, unsigned int, unsigned int, int);
 
-extern int FUN_002e3c36(unsigned int, unsigned int);
+extern int libcLocaleGetCategory(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002e3c44. */
 
 
@@ -15,7 +15,7 @@ void FUN_00100836(unsigned int param_1,unsigned int param_2,int param_3)
 {
 /* irregular: 1 native warning(s); review required */
   if (param_3 == 0) {
-    param_3 = FUN_002e3c36(0,4);
+    param_3 = libcLocaleGetCategory(0,4);
   }
   FUN_002e3c44(0,param_1,param_2,param_3);
   return;

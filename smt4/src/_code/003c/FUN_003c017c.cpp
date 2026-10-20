@@ -1,45 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c017c` (_code @ 0x3c017c, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: the prologue copies of the arguments are emitted in the order r7, r8, r6 (retail: r6, r7, r8). */
+#include "common.h"
 extern "C" {
 
-int FUN_002550d8(...);
+extern int FUN_002550d8(...);
+int abs(int);
 
-/* Supplied declaration required: FUN_002550d8. */
-
-
-int FUN_003c017c(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Sums the absolute values of the results of up to three queries on `obj`, chosen by `mode` (0, 1, 2 one query, 3 all of them). */
+int FUN_003c017c(u32 obj, s32 mode, u32 a, u32 b)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  if (param_2 == 0 || param_2 == 3) {
-    temp_v1 = FUN_002550d8(param_1,7);
-    if (temp_v1 < 0) {
-      temp_v1 = -temp_v1;
+    s32 total = 0;
+    if (mode == 0 || mode == 3) {
+        total = abs(FUN_002550d8(obj, 7));
+        FUN_002550d8(obj, 8, a, b);
     }
-    FUN_002550d8(param_1,8,param_3,param_4);
-  }
-  if (param_2 == 1 || param_2 == 3) {
-    temp_v0 = FUN_002550d8(param_1,10,param_3,param_4);
-    if (temp_v0 < 0) {
-      temp_v0 = -temp_v0;
+    if (mode == 1 || mode == 3) {
+        total += abs(FUN_002550d8(obj, 10, a, b));
     }
-    temp_v1 = temp_v1 + temp_v0;
-  }
-  if (param_2 == 2 || param_2 == 3) {
-    temp_v0 = FUN_002550d8(param_1,0xb,param_3,param_4);
-    if (temp_v0 < 0) {
-      temp_v0 = -temp_v0;
+    if (mode == 2 || mode == 3) {
+        total += abs(FUN_002550d8(obj, 11, a, b));
+        FUN_002550d8(obj, 9, a, b);
     }
-    temp_v1 = temp_v1 + temp_v0;
-    FUN_002550d8(param_1,9,param_3,param_4);
-  }
-  return temp_v1;
+    return total;
 }
-
-} /* extern "C" */
+}

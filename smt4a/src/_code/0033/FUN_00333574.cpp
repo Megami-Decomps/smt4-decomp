@@ -1,19 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00333574` (_code @ 0x333574, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f69a; /* 0x57f69a */
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+typedef struct GameDataBlocksHead {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u8 unk02;
+    /* 0x03 */ u8 unk03[0x19];
+    /* 0x1C */ u32 flags;
+} GameDataBlocksHead;
 
+extern GameDataBlocksHead g_gameDataBlocks;
 
-void FUN_00333574(unsigned int param_1)
-
+/* Clears byte 2 of the game data blocks and sets the given bits in their flag word. */
+void FUN_00333574(u32 bits)
 {
-  DAT_0057f69a = 0;
-  (*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0x1c)) = param_1 | (*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0x1c));
-  return;
+    g_gameDataBlocks.unk02 = 0;
+    g_gameDataBlocks.flags |= bits;
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int uiSpriteSelectAnim(...);
@@ -34,7 +34,7 @@ extern unsigned int *DAT_0057f584; /* 0x57f584 */
 
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -62,7 +62,7 @@ void FUN_00333318(void)
   taskCreateDraw("SearchWin DrawUpLeft",0x86,0,0,FUN_0023a5f8,0,0,pcVar2);
   taskCreateDraw("SearchWin DrawUpRight",0xe2,0,0,FUN_0023a5f8,0,0,*puVar1);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 6);
-  FUN_001505ac(puVar1 + 6,&DAT_0052fcb4,0x24,&DAT_0052fcd8,0x24,0,0,0,0,&DAT_0052fcfc,0x70);
+  paramsInit(puVar1 + 6,&DAT_0052fcb4,0x24,&DAT_0052fcd8,0x24,0,0,0,0,&DAT_0052fcfc,0x70);
   FUN_0014e188(puVar1 + 0xe,8,0x87,puVar1 + 6,1);
   uiSpriteSelectAnim(puVar1 + 0xe,0);
   return;

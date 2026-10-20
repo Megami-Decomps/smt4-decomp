@@ -1,34 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c15fc` (_code @ 0x2c15fc, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int DAT_004650a8; /* 0x4650a8 */
-extern unsigned int DAT_004e3c28; /* 0x4e3c28 */
-extern unsigned int DAT_004e3c48; /* 0x4e3c48 */
+typedef struct MaskEntry {
+    /* 0x0 */ s32 disabled;
+    /* 0x4 */ u32 mask;
+} MaskEntry;
 
+typedef struct InputState {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ u32 flags;
+} InputState;
 
-unsigned char FUN_002c15fc(unsigned int param_1)
+extern MaskEntry DAT_00409ab0[31];
+extern InputState DAT_004650a0;
+extern u32 DAT_004e3c28;
+extern u32 DAT_004e3c48;
 
+/* Returns whether the entry's mask intersects the current input word (never for out-of-range or disabled entries). */
+u8 FUN_002c15fc(u32 index)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  if ((param_1 < 0x1f) && (*(int *)(param_1 * 8 + 0x409ab0) == 0)) {
-    if ((DAT_004650a8 & 1) != 0) {
-      puVar1 = &DAT_004e3c48;
+    MaskEntry *entry;
+    u32 *source;
+    u32 bits;
+
+    if (index < 31) {
+        entry = &DAT_00409ab0[index];
+        if (entry->disabled == 0) {
+            if ((DAT_004650a0.flags & 1) != 0) {
+                source = &DAT_004e3c48;
+            } else {
+                source = &DAT_004e3c28;
+            }
+            bits = source != NULL ? *source : 0;
+            return (bits & entry->mask) != 0;
+        }
     }
-    else {
-      puVar1 = &DAT_004e3c28;
-    }
-    temp_v0 = 0;
-    if (puVar1 != (unsigned int *)0x0) {
-      temp_v0 = *puVar1;
-    }
-    return (temp_v0 & *(unsigned int *)(param_1 * 8 + 0x409ab4)) != 0;
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

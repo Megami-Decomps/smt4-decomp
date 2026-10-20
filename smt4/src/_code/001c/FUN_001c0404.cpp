@@ -13,7 +13,7 @@ int FUN_001dc994(void);
 int FUN_001ddb40(void);
 int FUN_001ed7bc(void);
 int FUN_001f4c50(void);
-int FUN_002012f0(void);
+int dataTable19ResolveVariants(void);
 int FUN_00201ac8(void);
 int FUN_00211d00(void);
 int FUN_00223b84(void);
@@ -43,7 +43,7 @@ extern unsigned char DAT_00446db4; /* 0x446db4 */
 /* Supplied declaration required: FUN_001ddb40. */
 /* Supplied declaration required: FUN_001ed7bc. */
 /* Supplied declaration required: FUN_001f4c50. */
-/* Supplied declaration required: FUN_002012f0. */
+/* Supplied declaration required: dataTable19ResolveVariants. */
 /* Supplied declaration required: FUN_00201ac8. */
 /* Supplied declaration required: FUN_00211d00. */
 /* Supplied declaration required: FUN_00223b84. */
@@ -146,7 +146,7 @@ unsigned int FUN_001c0404(int *param_1)
     *(int *)(temp_v1 + 8) = temp_v0;
     break;
   case 4:
-    FUN_002012f0();
+    dataTable19ResolveVariants();
     FUN_0033f784();
     asdTMTexTableLoadTmx(0xc,0);
     asdTMTexTableLoadTmx(0x18,0);

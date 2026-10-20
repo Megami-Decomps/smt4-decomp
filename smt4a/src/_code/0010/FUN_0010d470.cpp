@@ -8,7 +8,7 @@ int FUN_0010564c(int);
 int FUN_00129288(int);
 int asdOperatorDeleteArray(...);
 int FUN_002e6e34(unsigned char [12], unsigned char *);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefInitEmpty(int);
 int FUN_002eda80(unsigned char [8], int *, int *, int *);
 int FUN_002f76ec(int *, unsigned int, int);
@@ -30,7 +30,7 @@ extern int FUN_001224c8(int);
 /* Supplied declaration required: FUN_00129288. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int onlineStringDestroy(int);
 /* Supplied declaration required: sharedRefInitEmpty. */
 /* Supplied declaration required: FUN_002eda80. */
@@ -54,7 +54,7 @@ void FUN_0010d470(unsigned int *param_1)
   *param_1 = (unsigned int)&DAT_00559114;
   FUN_002e6e34(temp_v2,&DAT_00630344);
   (*(unsigned int *)((unsigned char *)&DAT_005949d8 + 0x4)) = 0;
-  FUN_002e6e5c(temp_v2);
+  _ZN9Obj55b28cD1Ev(temp_v2);
   temp_v0 = FUN_001220aa(param_1 + 0x66);
   temp_v0 = temp_v0 - 0x20;
   FUN_0010564c(temp_v0);

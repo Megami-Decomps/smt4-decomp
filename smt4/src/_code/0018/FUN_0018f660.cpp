@@ -10,7 +10,7 @@ int FUN_00296284(...);
 int statusCameraApply(void);
 int eventQueueAddUnique(...);
 int FUN_002b8ee0(...);
-int FUN_002bc01c(...);
+int eventQueueAddUniqueIfValid(...);
 int timerStart(...);
 int FUN_002bee58(...);
 int FUN_002c1658(...);
@@ -25,7 +25,7 @@ int aocHandleButtons(...);
 int FUN_002942c4(int, int);
 int FUN_00294450(...);
 int FUN_002945a4(...);
-int FUN_002947c0(void);
+int playerModelListCreate(void);
 int FUN_00294834(int, int, int, int);
 int FUN_00294d6c(void);
 int FUN_00294e18(int);
@@ -94,8 +94,8 @@ extern unsigned int FUN_00294090(int, unsigned int);
 /* Supplied declaration required: FUN_002942c4. */
 /* Supplied declaration required: FUN_00294450. */
 /* Supplied declaration required: FUN_002945a4. */
-/* Supplied declaration required: FUN_002947c0. */
-extern unsigned int *FUN_002947f4(void);
+/* Supplied declaration required: playerModelListCreate. */
+extern unsigned int *_ZN9Obj4206e8C1Ev(void);
 /* Supplied declaration required: FUN_00294834. */
 /* Supplied declaration required: FUN_00294d6c. */
 /* Supplied declaration required: FUN_00294e18. */
@@ -115,12 +115,12 @@ extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_002a09b4. */
 extern int lmapSceneGetScript(void);
 /* Supplied declaration required: statusCameraApply. */
-extern unsigned int FUN_002b05d0(unsigned int);
+extern unsigned int categoryGetColor(unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_002b8ee0. */
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 extern unsigned int vec2GetXInt(char *);
 /* Supplied declaration required: FUN_002bee58. */
@@ -359,12 +359,12 @@ unsigned int FUN_0018f660(void)
         asdOperatorNew();
         puVar7 = (unsigned int *)0x0;
         if (temp_v7 != 0) {
-          puVar7 = (unsigned int *)FUN_002947f4();
+          puVar7 = (unsigned int *)_ZN9Obj4206e8C1Ev();
           *puVar7 = (unsigned int)&DAT_004207d8;
         }
         *piVar14 = (int)puVar7;
         DAT_0044e142 = 1;
-        FUN_002947c0();
+        playerModelListCreate();
         in_s0 = temp_v10;
         temp_v7 = lmapMainIsRunning();
         if (temp_v7 == 0) {
@@ -761,21 +761,21 @@ LAB_00190190:
                 pcVar4[0x12f0] = pcVar4[0x12f0] != '\x01';
                 timerStart(pcVar4 + 0x5bc,7,0);
                 temp_v6 = 0x100016d;
-                FUN_002bc01c(temp_v6);
+                eventQueueAddUniqueIfValid(temp_v6);
               }
             }
           }
         }
         else {
 LAB_001903c0:
-          FUN_002bc01c(temp_v6);
+          eventQueueAddUniqueIfValid(temp_v6);
         }
       }
     }
     pcVar5 = DAT_0044e144;
     if (pcVar4[0x1e70] != '\0') {
       if ((*(unsigned short *)(pcVar4 + 0x1314) & 2) != 0) {
-        temp_v6 = FUN_002b05d0(1);
+        temp_v6 = categoryGetColor(1);
         pcVar5 = DAT_0044e144;
         if ((DAT_0044e144 != (char *)0x0) && (DAT_0044e144[0x1e66] != '\r')) {
           if (DAT_0044e144[0x1e66] == '\x06') {

@@ -1,0 +1,30 @@
+/* NON_MATCHING: retail adds the 0x126 element offset after the scaled index (add #256 then ldrh #38); built loads 0x126 from the literal pool and uses a register offset. */
+#include "common.h"
+
+extern "C" {
+
+typedef struct UnitData {
+    /* 0x000 */ u8 unk000[0x126];
+    /* 0x126 */ u16 values[1];   /* bits 10..15 hold a kind */
+} UnitData;
+
+typedef struct BtlUnit {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ UnitData *data;
+} BtlUnit;
+
+extern u32 g_btlScriptUnit;
+extern BtlUnit *btlUnitGet(u32 unit);
+extern s32 scrGetArg(void);
+extern s32 scrSetResult(s32 value);
+
+/* Script command: pushes whether value `arg` of the script unit has kind 3. */
+u32 scrCommBtlUnitValueKindIs3(void)
+{
+    s32 index = scrGetArg();
+
+    scrSetResult(btlUnitGet(g_btlScriptUnit)->data->values[index] >> 10 == 3);
+    return 1;
+}
+
+} /* extern "C" */

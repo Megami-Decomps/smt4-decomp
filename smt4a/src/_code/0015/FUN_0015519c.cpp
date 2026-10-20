@@ -13,7 +13,7 @@ int efctSetSpeed(void);
 int FUN_00167860(...);
 int FUN_00168470(...);
 int FUN_001689e8(...);
-int FUN_0016c560(...);
+int skinObjectUpdateMatrices(...);
 int FUN_001835b4(...);
 int FUN_0018408c(...);
 int FUN_001879d0(int);
@@ -59,7 +59,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_001689e8. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0018408c. */
@@ -284,7 +284,7 @@ unsigned int FUN_0015519c(void)
         FUN_0016631c(temp_v0,temp_v1);
       }
     }
-    FUN_0016c560(g_renderCtx);
+    skinObjectUpdateMatrices(g_renderCtx);
     efctSetSpeed();
     temp_v0 = g_renderCtx;
     piVar7 = (int *)(g_renderCtx + 0x1258);

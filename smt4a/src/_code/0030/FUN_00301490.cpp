@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002ffd8c(void);
+int socketReset(void);
 
 extern int onlineSockAddrConstruct(int);
-/* Supplied declaration required: FUN_002ffd8c. */
+/* Supplied declaration required: socketReset. */
 
 
 int FUN_00301490(int param_1)
@@ -18,7 +18,7 @@ int FUN_00301490(int param_1)
   
   temp_v0 = onlineSockAddrConstruct(param_1 + 0x10);
   *(unsigned int *)(temp_v0 + 0x28) = 0;
-  FUN_002ffd8c();
+  socketReset();
   return temp_v0 - 0x10;
 }
 

@@ -16,10 +16,10 @@ int FUN_00180310(...);
 int FUN_00183bb0(void);
 int FUN_00184c40(...);
 int FUN_0019d880(void);
-int FUN_0019e130(...);
+int markerKindGetColor(...);
 int FUN_001a1ee0(void);
 int FUN_001f3e80(...);
-int FUN_0025c848(...);
+int fadeObjectResetIfActive(...);
 int FUN_003482a4(...);
 int FUN_0035d8f0(...);
 int FUN_003a7a88(...);
@@ -129,11 +129,11 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00184c40. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_0019d880. */
-/* Supplied declaration required: FUN_0019e130. */
+/* Supplied declaration required: markerKindGetColor. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: FUN_001f3e80. */
-/* Supplied declaration required: FUN_0025c848. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: FUN_0025e704. */
 extern int btlMainGetUnk14(void);
 /* Supplied declaration required: FUN_002b4dcc. */
@@ -709,7 +709,7 @@ LAB_002afaf4:
         temp_v18 = (temp_v18 + 1) & 0xffff;
         goto LAB_002afaf4;
       }
-      FUN_0019e130((int)(short)temp_v11);
+      markerKindGetColor((int)(short)temp_v11);
       drawSetColorFromRGBA8();
 LAB_002afb00:
       temp_v9 = FUN_001834a4(0xd,0x44);
@@ -818,7 +818,7 @@ LAB_002afb00:
         FUN_00184c40(temp_v13,(int)(short)(*(short *)(temp_v8 + 8) + *(short *)(temp_v15 + 0x4b82) +
                                         temp_v27),
                      (int)(short)(*(short *)(temp_v8 + 10) + *(short *)(temp_v15 + 0x4b8c) + temp_v1));
-        FUN_0025c848(temp_v13);
+        fadeObjectResetIfActive(temp_v13);
         temp_v13 = g_renderCtx;
         if (*(char *)(temp_v33 + 0x1941) != '\0') {
           temp_v9 = packNibblesAndByte(6,1,0);
@@ -833,8 +833,8 @@ LAB_002afb00:
           FUN_00184c40(temp_v13,(int)(short)(*(short *)(temp_v8 + 8) + temp_v27),
                        (int)(short)(*(short *)(temp_v8 + 10) + temp_v1));
           *(unsigned int *)(temp_v13 + 0x30) = *(unsigned int *)(temp_v7 + 0x4b40);
-          FUN_0025c848(temp_v13);
-          FUN_0025c848(temp_v13);
+          fadeObjectResetIfActive(temp_v13);
+          fadeObjectResetIfActive(temp_v13);
           temp_v7 = g_renderCtx;
           temp_v8 = packNibblesAndByte(6,7,0);
           piVar10 = (int *)(temp_v7 + 0x12b8);
@@ -1117,7 +1117,7 @@ LAB_002afb00:
                    0xd,0x66,0x69,0x68,0x67,temp_v6,temp_v5,0x47,0);
       temp_v4 = FUN_001834a4(0xd,0x6f);
       if ((*(unsigned short *)(temp_v3 + 0x60) & 2) != 0) {
-        FUN_0019e130(1);
+        markerKindGetColor(1);
         drawSetColorFromRGBA8();
       }
       FUN_0018152c((int)*(short *)(temp_v3 + 0x62),*(short *)(temp_v4 + 8) + temp_v6,

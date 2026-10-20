@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001517b4(...);
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_00228b04(int, int);
@@ -22,7 +22,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_00228b04. */
@@ -53,13 +53,13 @@ void FUN_002f7f6c(int param_1)
       if (!(temp_v1 == 0 && temp_v2[0] == '\0')) {
         if (temp_v0 < *(int *)(param_1 + 0x24ec)) {
           if (*(int *)(param_1 + 0x24f4) < 0) {
-            FUN_001641b4(0x100020e);
+            eventQueueAddUniqueIfValid(0x100020e);
             *(int *)(param_1 + 0x24f4) = temp_v0;
             *(unsigned char *)(param_1 + 0x24f0) = 1;
             return;
           }
           if (*(int *)(param_1 + 0x24f4) != temp_v0) {
-            FUN_001641b4(0x100020e);
+            eventQueueAddUniqueIfValid(0x100020e);
             if (temp_v0 >= *(int *)(param_1 + 0x24f4)) {
               *(int *)(param_1 + 0x24f8) = temp_v0;
             }
@@ -75,12 +75,12 @@ void FUN_002f7f6c(int param_1)
             *(unsigned int *)(param_1 + 0x2568) = 0;
             return;
           }
-          FUN_001641b4(0x100020f);
+          eventQueueAddUniqueIfValid(0x100020f);
           *(unsigned int *)(param_1 + 0x24f4) = 0xffffffff;
           *(unsigned char *)(param_1 + 0x24f0) = 0;
           return;
         }
-        FUN_001641b4(0x100020e);
+        eventQueueAddUniqueIfValid(0x100020e);
         scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x2574),1);
         *(unsigned int *)(param_1 + 0x2564) = 3;
         *(unsigned int *)(param_1 + 0x2568) = 0;
@@ -89,7 +89,7 @@ void FUN_002f7f6c(int param_1)
         temp_v0 = 1;
         FUN_001517b4();
         if (temp_v0 != 0) {
-          FUN_001641b4(0x100020f);
+          eventQueueAddUniqueIfValid(0x100020f);
           if (*(int *)(param_1 + 0x24f4) < 0) {
             scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x2574),2);
             *(unsigned int *)(param_1 + 0x2564) = 4;

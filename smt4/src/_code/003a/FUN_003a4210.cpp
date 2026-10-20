@@ -8,7 +8,7 @@ int FUN_00230434(int, int);
 int FUN_002306f8(unsigned int *, int, int);
 int FUN_00233670(int, int, int, int);
 int FUN_00233730(int, int, int, int);
-int FUN_00256810(unsigned int);
+int aocRecordLookup83(unsigned int);
 int FUN_002b7bca(int, int, int, unsigned char *);
 int memClear(int, int);
 
@@ -34,7 +34,7 @@ extern int FUN_0022f1b8(unsigned int);
 /* Supplied declaration required: FUN_00233670. */
 /* Supplied declaration required: FUN_00233730. */
 extern int FUN_00246570(unsigned int *);
-/* Supplied declaration required: FUN_00256810. */
+/* Supplied declaration required: aocRecordLookup83. */
 extern int FUN_0028e9d0(unsigned int);
 extern int FUN_0028fb3c(unsigned int);
 /* Supplied declaration required: FUN_002b7bca. */
@@ -85,7 +85,7 @@ void FUN_003a4210(int param_1)
       temp_v7 = 0;
       if (temp_v7 < temp_v3) {
         do {
-          FUN_00256810(temp_v8);
+          aocRecordLookup83(temp_v8);
           temp_v4 = FUN_003a61b4(temp_v8,0xffff,0xffff);
           if (temp_v4 != 0) {
             temp_v1 = temp_v8;

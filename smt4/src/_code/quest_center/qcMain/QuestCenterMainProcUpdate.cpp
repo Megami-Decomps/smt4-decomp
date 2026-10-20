@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028727c(void);
+int buttonHelpTexturesUnref(void);
 int FUN_00287328(unsigned int);
 int FUN_00287528(int);
 int FUN_00289880(void);
@@ -38,7 +38,7 @@ extern unsigned int DAT_0044db94; /* 0x44db94 */
 extern int DAT_0044db98; /* 0x44db98 */
 extern int DAT_0049fc18; /* 0x49fc18 */
 
-/* Supplied declaration required: FUN_0028727c. */
+/* Supplied declaration required: buttonHelpTexturesUnref. */
 extern int gameStateIsFlagSetAndLarge(void);
 extern int FUN_00287304(void);
 extern int FUN_00287314(unsigned int *);
@@ -229,7 +229,7 @@ LAB_001a9c38:
     if (DAT_0044db98 == 0) {
       uiFadeRelease();
       buttonHelpRelease();
-      FUN_0028727c();
+      buttonHelpTexturesUnref();
     }
     break;
   case 4:

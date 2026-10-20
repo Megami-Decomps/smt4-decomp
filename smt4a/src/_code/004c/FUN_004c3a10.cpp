@@ -1,37 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c3a10` (_code @ 0x4c3a10, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_004c3a10(unsigned int param_1)
-
+/* Returns the bit mask for an id: fixed masks for ids 0x1D-0x25, otherwise 1 << id (0 for id 0). */
+u32 FUN_004c3a10(u32 id)
 {
-  unsigned int temp_v0;
-  
-  switch(param_1) {
-  case 0x1d:
-  case 0x1e:
-    return 0x3e0;
-  case 0x20:
-    return 1000;
-  case 0x21:
-    return 800;
-  case 0x22:
-    return 0x8c0;
-  case 0x23:
-    return 0x920;
-  case 0x24:
-    return 0x940;
-  case 0x25:
-    return 0x3bea;
-  }
-  temp_v0 = (unsigned int)(param_1 != 0);
-  if (param_1 != 0) {
-    temp_v0 = 1 << (param_1 & 0xff);
-  }
-  return temp_v0;
+    u32 mask = 0;
+
+    switch (id) {
+    case 0x1D:
+    case 0x1E:
+        mask = 0x3E0;
+        break;
+    case 0x20:
+        mask = 1000;
+        break;
+    case 0x21:
+        mask = 800;
+        break;
+    case 0x22:
+        mask = 0x8C0;
+        break;
+    case 0x23:
+        mask = 0x920;
+        break;
+    case 0x24:
+        mask = 0x940;
+        break;
+    case 0x25:
+        mask = 0x3BEA;
+        break;
+    default:
+        if (id != 0) {
+            mask = 1 << (id & 0xFF);
+        }
+        break;
+    }
+    return mask;
 }
 
 } /* extern "C" */

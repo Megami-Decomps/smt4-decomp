@@ -1,40 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00132e98` (_code @ 0x132e98, 0x3e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps result/list/pos in r4/r5/r6 and loads the node's link pair with `ldmia r0!, {r1, r2}` (no tail sharing: both returns store and pop separately); the build assigns r6/r4/r5 and shares the final store. */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
+typedef struct ListNode {
+    /* 0x00 */ struct ListNode *next;
+    /* 0x04 */ struct ListNode *prev;
+} ListNode;
 
-extern int wordRefsEqual_001321a2(int *, unsigned int *);
+typedef struct NodeList {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ ListNode *freeList;     /* erased nodes, linked through next */
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ ListNode *end;
+    /* 0x14 */ s32 size;
+} NodeList;
 
+extern int wordRefsEqual_001321a2(ListNode **a, ListNode **b);
 
-void FUN_00132e98(unsigned int *param_1,int param_2,int *param_3)
-
+/* Unlinks the node `*pos` from the list, puts it on the free list and stores the following node in *result (the end node when `pos` is the end). */
+void FUN_00132e98(ListNode **result, NodeList *list, ListNode **pos)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = *(unsigned int *)(param_2 + 0x10);
-  temp_v0 = wordRefsEqual_001321a2(param_3,(unsigned int *)&temp_v2);
-  if (temp_v0 != 0) {
-    *param_1 = *(unsigned int *)(param_2 + 0x10);
-    return;
-  }
-  temp_v1 = *(unsigned int *)*param_3;
-  *(unsigned int *)((unsigned int *)*param_3)[1] = temp_v1;
-  *(int *)(*(int *)*param_3 + 4) = ((int *)*param_3)[1];
-  *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) - 1;
-  puVar2 = (unsigned int *)*param_3;
-  *puVar2 = *(unsigned int *)(param_2 + 4);
-  *(unsigned int **)(param_2 + 4) = puVar2;
-  *param_1 = temp_v1;
-  return;
+    ListNode *end = list->end;
+    ListNode *next;
+    ListNode *node;
+
+    if (wordRefsEqual_001321a2(pos, &end) != 0) {
+        *result = list->end;
+        return;
+    }
+    (*pos)->prev->next = next = (*pos)->next;
+    (*pos)->next->prev = (*pos)->prev;
+    list->size--;
+    node = *pos;
+    node->next = list->freeList;
+    list->freeList = node;
+    *result = next;
 }
 
 } /* extern "C" */

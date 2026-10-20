@@ -1,35 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037d438` (_code @ 0x37d438, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int g_gauntletAppMenu; /* 0x57f238 */
+typedef struct MenuPart0037d438 {
+    /* 0x00 */ u8 unk00[0xb4];
+    /* 0xb4 */ u8 flags[4];
+} MenuPart0037d438;
 
+typedef struct GauntletMenu0037d438 {
+    /* 0x000 */ u8 unk000[0x200];
+    /* 0x200 */ MenuPart0037d438 part;
+} GauntletMenu0037d438;
 
-unsigned int FUN_0037d438(void)
+extern GauntletMenu0037d438 *g_gauntletAppMenu;
 
+/* Returns 0 when none of the four flag bytes is set, 1 otherwise. */
+u32 FUN_0037d438(void)
 {
-  char temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v1 = g_gauntletAppMenu + 0x200;
-  temp_v0 = *(char *)(g_gauntletAppMenu + 0x2b4);
-  temp_v2 = temp_v0 == '\0';
-  if (temp_v2) {
-    temp_v0 = *(char *)(g_gauntletAppMenu + 0x2b5);
-  }
-  if (temp_v2 && temp_v0 == '\0') {
-    temp_v2 = *(char *)(g_gauntletAppMenu + 0x2b6) == '\0';
-    if (temp_v2) {
-      temp_v1 = (unsigned int)*(unsigned char *)(g_gauntletAppMenu + 0x2b7);
+    MenuPart0037d438 *part = &g_gauntletAppMenu->part;
+
+    if (part->flags[0] == 0 && part->flags[1] == 0 && part->flags[2] == 0 && part->flags[3] == 0) {
+        return 0;
     }
-    if (temp_v2 && temp_v1 == 0) {
-      return temp_v1;
-    }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

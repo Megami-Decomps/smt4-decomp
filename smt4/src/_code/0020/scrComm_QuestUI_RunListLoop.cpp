@@ -12,7 +12,7 @@ int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int FUN_00254e2c(...);
 int FUN_0028784c(...);
-int FUN_0028dc68(int);
+int messageSlotSet(int);
 int FUN_0028dc98(...);
 int FUN_00295660(int, unsigned int [32]);
 int FUN_0029cc3c(void);
@@ -40,7 +40,7 @@ typedef struct {
 extern int FUN_002865f8(void);
 /* Supplied declaration required: FUN_0028784c. */
 extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_0028dc68. */
+/* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: FUN_0028dc98. */
 /* Supplied declaration required: FUN_00295660. */
 extern int FUN_002973d8(void);
@@ -87,7 +87,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
   temp_v3 = QuestCenter_GetActiveEntry();
   if (temp_v3 == 0) {
     FUN_0028dc98(0xffffffff);
-    FUN_0028dc68(0);
+    messageSlotSet(0);
     return 1;
   }
   temp_v3 = scrGetCommandFrame();
@@ -103,7 +103,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
   temp_v3 = scrWorkGetValue(0);
   if (temp_v3 == 100) {
     FUN_0028dc98(0xffffffff);
-    FUN_0028dc68(0);
+    messageSlotSet(0);
     return 1;
   }
   temp_v13 = FUN_002865f8();

@@ -29,12 +29,12 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00218238. */
 extern int FUN_0023dcb8(void);
-extern int FUN_00292914(int);
+extern int idOwnerHasActiveObject(int);
 /* Supplied declaration required: FUN_00292960. */
 extern int flagBitIsSet(void);
 extern int FUN_00293988(void);
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_0029e908(int);
+extern int objectPartRunUnlessLocked(int);
 extern unsigned int FUN_0029e958(int);
 extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
@@ -80,7 +80,7 @@ void FUN_0025ee64(int param_1)
   temp_v6 = vec2GetYInt(temp_v3);
   FUN_002bf288(2,0x15,0xdb,temp_v2 + temp_v4,temp_v5 + temp_v6,0x29);
   FUN_002bf288(2,0x15,0xdc,temp_v2 + temp_v4,temp_v5 + temp_v6,0x29);
-  temp_v2 = FUN_0029e908(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+  temp_v2 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
   temp_v7 = FUN_0029e958(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
   temp_v4 = 0;
   if (temp_v4 < (int)temp_v7) {
@@ -125,7 +125,7 @@ void FUN_0025ee64(int param_1)
               if (*pcVar11 == '\x03') {
                 if (*(int *)(param_1 + 0x305c) == 0) goto LAB_0025f1a8;
                 if (temp_v13 == 0) goto LAB_0025f2b4;
-                temp_v13 = FUN_00292914(temp_v13);
+                temp_v13 = idOwnerHasActiveObject(temp_v13);
                 if (temp_v13 == 0) goto LAB_0025f1b8;
               }
               if ((*pcVar11 != '\x06' && *pcVar11 != '\b') && (*(int *)(param_1 + 0x305c) == 0)) {

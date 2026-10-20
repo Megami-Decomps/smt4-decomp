@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(int *, unsigned char *);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 
 extern int DAT_00599374; /* 0x599374 */
 extern unsigned int *DAT_00599378; /* 0x599378 */
@@ -15,7 +15,7 @@ extern unsigned char DAT_006306ac; /* 0x6306ac */
 
 extern unsigned int FUN_00132f3c(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int *operatorNew(unsigned int);
 
 
@@ -54,7 +54,7 @@ void FUN_00300b4c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   }
   DAT_00599374 = DAT_00599374 + 1;
   DAT_005c4c18 = &DAT_0059937c;
-  FUN_002e6e5c(&uStack_18);
+  _ZN9Obj55b28cD1Ev(&uStack_18);
   return;
 }
 

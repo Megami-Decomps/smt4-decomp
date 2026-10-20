@@ -33,7 +33,7 @@ extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_004a5b20. */
 /* Supplied declaration required: FUN_004a6610. */
 /* Supplied declaration required: FUN_004a83f8. */
-extern unsigned char FUN_004a8454(int, unsigned int);
+extern unsigned char gaugePercent(int, unsigned int);
 /* Supplied declaration required: FUN_004a849c. */
 /* Supplied declaration required: FUN_004a8584. */
 /* Supplied declaration required: FUN_004cfeb0. */
@@ -82,7 +82,7 @@ void FUN_004a4848(int param_1)
     FUN_004a6610(param_1,1);
     FUN_004cfeb0(param_1 + 0x20,10,(int)*(short *)(param_1 + 0x864),0,1,1);
     *(unsigned char *)(param_1 + 0x2d) = 1;
-    temp_v0 = FUN_004a8454(param_1 + 0x864,1);
+    temp_v0 = gaugePercent(param_1 + 0x864,1);
     *(unsigned char *)(param_1 + 0x94) = temp_v0;
     jyoucyuGetTableEntry(0);
     jyoucyuGetTableEntry(0);

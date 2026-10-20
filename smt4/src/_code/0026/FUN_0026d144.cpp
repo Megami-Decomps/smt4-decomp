@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002621b4(...);
 int FUN_00298d28(int, unsigned int);
-int FUN_0029e908(...);
+int objectPartRunUnlessLocked(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00298d28. */
 extern int FUN_0029a924(unsigned short);
 extern int FUN_0029a9d4(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_0029e908. */
+/* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int FUN_0029efa8(unsigned int);
 extern int gameGetSlotTable(void);
 
@@ -74,21 +74,21 @@ void FUN_0026d144(unsigned int param_1,int param_2,unsigned int param_3,unsigned
 LAB_0026d25c:
   if (param_2 != 0) {
     if (*(char *)(temp_v5 + 0x42) != '\0') {
-      temp_v2 = FUN_0029e908();
+      temp_v2 = objectPartRunUnlessLocked();
       temp_v3 = FUN_0029efa8(param_1);
       temp_v2 = temp_v2 + temp_v3 * 4;
     }
     else {
       temp_v3 = FUN_0029efa8(param_1);
       temp_v4 = *(int *)(temp_v5 + 0x2c);
-      temp_v2 = FUN_0029e908(param_1);
+      temp_v2 = objectPartRunUnlessLocked(param_1);
       temp_v2 = temp_v3 * 4 + temp_v4 * 0xc + temp_v2;
     }
   }
   else {
     temp_v3 = FUN_0029efa8(param_1);
     if (temp_v3 < 1) {
-      temp_v3 = FUN_0029e908(param_1);
+      temp_v3 = objectPartRunUnlessLocked(param_1);
       if (temp_v3 != 0) {
         temp_v0 = *(unsigned short *)(temp_v5 + 0x36);
         temp_v2 = (int)*(char *)(temp_v2 + temp_v3 + 0x9107);
@@ -106,14 +106,14 @@ LAB_0026d25c:
       return;
     }
     if (*(char *)(temp_v5 + 0x42) != '\0') {
-      temp_v2 = FUN_0029e908();
+      temp_v2 = objectPartRunUnlessLocked();
       temp_v3 = FUN_0029efa8(param_1);
       temp_v2 = temp_v2 + temp_v3 * 4;
     }
     else {
       temp_v3 = FUN_0029efa8(param_1);
       temp_v4 = *(int *)(temp_v5 + 0x2c);
-      temp_v2 = FUN_0029e908(param_1);
+      temp_v2 = objectPartRunUnlessLocked(param_1);
       temp_v2 = temp_v2 + temp_v3 * 4 + temp_v4 * 0xc;
     }
     temp_v2 = temp_v2 - 4;

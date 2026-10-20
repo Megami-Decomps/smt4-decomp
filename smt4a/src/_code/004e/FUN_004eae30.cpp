@@ -13,7 +13,7 @@ int FUN_003e8bb0(...);
 int FUN_003f0e20(...);
 int FUN_004c0f74(...);
 int FUN_004c3a98(...);
-int FUN_004c3ac0(...);
+int kindIdStore(...);
 int FUN_004c3cb0(...);
 int FUN_004c8340(...);
 
@@ -47,7 +47,7 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004c0f74. */
 /* Supplied declaration required: FUN_004c3a98. */
-/* Supplied declaration required: FUN_004c3ac0. */
+/* Supplied declaration required: kindIdStore. */
 /* Supplied declaration required: FUN_004c3cb0. */
 /* Supplied declaration required: FUN_004c8340. */
 extern int __aeabi_idivmod(int, unsigned int);
@@ -144,7 +144,7 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
         temp_v9 = 0;
         temp_v10 = 0;
         FUN_004c3cb0((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),&temp_v9,&temp_v10);
-        FUN_004c3ac0(temp_v9,temp_v11);
+        kindIdStore(temp_v9,temp_v11);
         temp_v3 = *(unsigned int *)(param_4 + 0x20);
         FUN_004c0f74(temp_v3,temp_v11[0] & 0xff);
       }
@@ -260,7 +260,7 @@ LAB_004eafdc:
           temp_v11[0] = 0;
           temp_v16 = 0;
           FUN_004c3cb0((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),temp_v11,&temp_v16);
-          FUN_004c3ac0(temp_v11[0],temp_v17);
+          kindIdStore(temp_v11[0],temp_v17);
           temp_v1 = *(unsigned int *)(param_4 + 0x20);
           FUN_004c0f74(temp_v1,temp_v17[0] & 0xff);
         }

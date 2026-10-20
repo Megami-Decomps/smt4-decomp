@@ -7,9 +7,9 @@ extern "C" {
 int effEmitterCreate(void);
 int effParticleRebuildHandles(int, unsigned int *);
 int FUN_002493a4(int, int, unsigned int);
-int FUN_002de424(int, unsigned int *);
+int effTlpReplace(int, unsigned int *);
 int effParticleParamRebuildHandles3c(int, unsigned int *);
-int FUN_003026b0(int, unsigned int *);
+int objResourceReplace(int, unsigned int *);
 int FUN_003026d8(int, unsigned int *);
 int FUN_0030ee9c(int, unsigned int *);
 int FUN_0031d0bc(int, unsigned int);
@@ -17,9 +17,9 @@ int FUN_0031d0bc(int, unsigned int);
 /* Supplied declaration required: effEmitterCreate. */
 /* Supplied declaration required: effParticleRebuildHandles. */
 /* Supplied declaration required: FUN_002493a4. */
-/* Supplied declaration required: FUN_002de424. */
+/* Supplied declaration required: effTlpReplace. */
 /* Supplied declaration required: effParticleParamRebuildHandles3c. */
-/* Supplied declaration required: FUN_003026b0. */
+/* Supplied declaration required: objResourceReplace. */
 /* Supplied declaration required: FUN_003026d8. */
 /* Supplied declaration required: FUN_0030ee9c. */
 /* Supplied declaration required: FUN_0031d0bc. */
@@ -44,7 +44,7 @@ void FUN_0030f214(int *param_1,unsigned int param_2,unsigned int *param_3)
     break;
   case 2:
     FUN_002493a4(param_1[0xb],*param_1,param_2);
-    FUN_003026b0(param_1[0xb],param_3);
+    objResourceReplace(param_1[0xb],param_3);
     break;
   case 4:
     FUN_002493a4(param_1[0xb],*param_1,param_2);
@@ -58,7 +58,7 @@ void FUN_0030f214(int *param_1,unsigned int param_2,unsigned int *param_3)
     break;
   case 7:
     FUN_002493a4(param_1[0xb],*param_1,param_2);
-    FUN_002de424(param_1[0xb],param_3);
+    effTlpReplace(param_1[0xb],param_3);
     break;
   case 9:
     FUN_002493a4(param_1[0xb],*param_1,param_2);

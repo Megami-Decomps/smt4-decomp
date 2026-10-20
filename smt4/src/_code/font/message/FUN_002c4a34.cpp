@@ -8,7 +8,7 @@ int FUN_001183bc(...);
 int FUN_002bc0e0(...);
 int FUN_002bd81c(...);
 int FUN_002bd82c(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -41,7 +41,7 @@ extern unsigned char DAT_00403df8; /* 0x403df8 */
 /* Supplied declaration required: FUN_002bd81c. */
 /* Supplied declaration required: FUN_002bd82c. */
 extern unsigned int asdTextCreate(unsigned int);
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -82,7 +82,7 @@ unsigned int * FUN_002c4a34(void)
   taskCreateDraw(&LAB_002c4c0c,0x81,0,0,FUN_00116a54,0,puVar1,puVar3);
   taskCreateDraw(&LAB_002c4c18,0xdf,0,0,FUN_00116a54,0,puVar1,*puVar1);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0x29);
-  FUN_002c312c(puVar1 + 0x29,&DAT_00403ce4,0x78,&DAT_00403d5c,0x48,&DAT_00403da4,0x54,0,0,
+  paramsInit(puVar1 + 0x29,&DAT_00403ce4,0x78,&DAT_00403d5c,0x48,&DAT_00403da4,0x54,0,0,
                &DAT_00403df8,0x310);
   return puVar1;
 }

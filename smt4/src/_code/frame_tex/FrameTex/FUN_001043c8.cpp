@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c312c(...);
+int paramsInit(...);
 int asdGxIndexBufferCreate(...);
 int memClear(...);
 int asdMemAlloc(...);
@@ -57,11 +57,11 @@ extern int FUN_00109348(...); /* 0x109348 */
 extern int FUN_001093e8(...); /* 0x1093e8 */
 extern int FUN_0010949c(...); /* 0x10949c */
 extern int FUN_00109520(...); /* 0x109520 */
-extern int FUN_00109f40(...); /* 0x109f40 */
+extern int titlePartStart(...); /* 0x109f40 */
 extern int FUN_00109fb4(...); /* 0x109fb4 */
 extern int FUN_0010a03c(...); /* 0x10a03c */
 extern int FUN_0010a110(...); /* 0x10a110 */
-extern int FUN_0010a3a4(...); /* 0x10a3a4 */
+extern int titleBackdropRender(...); /* 0x10a3a4 */
 extern int FUN_0010a450(...); /* 0x10a450 */
 extern int FUN_0010b224(...); /* 0x10b224 */
 extern int FUN_0010b2d0(...); /* 0x10b2d0 */
@@ -71,7 +71,7 @@ extern unsigned char DAT_00404188; /* 0x404188 */
 extern unsigned char DAT_00404194; /* 0x404194 */
 extern unsigned int *g_frameTex; /* 0x43e278 */
 
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: asdGxIndexBufferCreate. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -112,7 +112,7 @@ void FUN_001043c8(void)
   puVar2[6] = 0;
   *(unsigned char *)(puVar2 + 7) = 0;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar2 + 0xd);
-  FUN_002c312c(puVar2 + 0xd,&DAT_00404164,0x18,&DAT_0040417c,0xc,&DAT_00404188,0xc,0,0,&DAT_00404194
+  paramsInit(puVar2 + 0xd,&DAT_00404164,0x18,&DAT_0040417c,0xc,&DAT_00404188,0xc,0,0,&DAT_00404194
                ,0x70);
   puVar2[0xb] = 0x3e800000;
   puVar2[10] = 0x3e800000;
@@ -140,13 +140,13 @@ void FUN_001043c8(void)
   taskCreateDraw(&LAB_00104844,0xd6,0,0,FUN_001093e8,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104850,0x65,0,0,FUN_0010889c,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_0010485c,0xcc,0,0,FUN_00108b0c,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_00104868,0x77,0,0,FUN_0010a3a4,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_00104868,0x77,0,0,titleBackdropRender,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104878,0xd5,0,0,FUN_0010a450,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104888,0x82,0,0,FUN_0010a03c,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104898,0xe0,0,0,FUN_0010a110,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104868,0x7e,0,0,FUN_0010b224,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104878,0xdc,0,0,FUN_0010b2d0,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_00104980,0x77,0,0,FUN_00109f40,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_00104980,0x77,0,0,titlePartStart,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_0010498c,0xd5,0,0,FUN_00109fb4,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104998,0x79,0,0,FUN_0010949c,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001049a4,0xd7,0,0,FUN_00109520,0,g_frameTex,*puVar2);

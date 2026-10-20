@@ -1,20 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00384d34` (_code @ 0x384d34, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the shift constant 1 in r1 (materialised after the word load, shifted by r2) and the index temporaries in r1/r2; the build allocates the constant first. */
+#include "common.h"
 
 extern "C" {
 
-extern int gameFlagsGetBlock(void);
+typedef struct FlagArea {
+    /* 0x00 */ u8 unk00[0xE8C];
+    /* 0xE8C */ u32 bits[1];
+} FlagArea;
 
+extern FlagArea *gameFlagsGetBlock(void);
 
-unsigned char FUN_00384d34(int param_1)
-
+/* Whether bit `bit` of the game flag block's array is set. */
+u8 FUN_00384d34(int bit)
 {
-  int temp_v0;
-  
-  temp_v0 = gameFlagsGetBlock();
-  return (*(unsigned int *)(temp_v0 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4 + 0xe8c) &
-         (1 << ((param_1 % 0x20) & 0xffU))) != 0;
+    FlagArea *area = gameFlagsGetBlock();
+
+    return (area->bits[bit / 32] & (1 << (bit % 32))) != 0;
 }
 
 } /* extern "C" */

@@ -15,11 +15,11 @@ int dialogOpen(...);
 int dialogClose(int);
 int scrScriptProcessStartEntry(...);
 int FUN_002bf4f4(...);
-int FUN_004072b0(unsigned int, unsigned char *, int);
+int moveCameraCtrlCreateEntry(unsigned int, unsigned char *, int);
 int linkSlotSetFlag1C(unsigned int, int);
 int FUN_0040738c(unsigned int);
 int linkSlotSetFlag20(unsigned int, int);
-int FUN_0040792c(unsigned int, int);
+int listSelectItem(unsigned int, int);
 int FUN_00407a80(unsigned int);
 int FUN_004080bc(...);
 int FUN_004b7d88(...);
@@ -43,11 +43,11 @@ extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_002a49e4. */
 /* Supplied declaration required: FUN_002bf4f4. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_004072b0. */
+/* Supplied declaration required: moveCameraCtrlCreateEntry. */
 /* Supplied declaration required: linkSlotSetFlag1C. */
 /* Supplied declaration required: FUN_0040738c. */
 /* Supplied declaration required: linkSlotSetFlag20. */
-/* Supplied declaration required: FUN_0040792c. */
+/* Supplied declaration required: listSelectItem. */
 /* Supplied declaration required: FUN_00407a80. */
 /* Supplied declaration required: FUN_004080bc. */
 extern int FUN_004186e0(void);
@@ -129,8 +129,8 @@ void FUN_004b7e20(int param_1)
                       FUN_00407a80(*(unsigned int *)(param_1 + 0x1218));
                       FUN_004080bc(*(unsigned int *)(param_1 + 0x1218),(int)*(short *)(temp_v2 + 0x28),
                                    (int)*(char *)(temp_v2 + 0x2a));
-                      FUN_004072b0(*(unsigned int *)(param_1 + 0x1218),&LAB_004b820c,0);
-                      FUN_0040792c(*(unsigned int *)(param_1 + 0x1218),0);
+                      moveCameraCtrlCreateEntry(*(unsigned int *)(param_1 + 0x1218),&LAB_004b820c,0);
+                      listSelectItem(*(unsigned int *)(param_1 + 0x1218),0);
                       linkSlotSetFlag20(*(unsigned int *)(param_1 + 0x1218),1);
                       temp_v1 = *(unsigned int *)(param_1 + 0x1218);
                     }

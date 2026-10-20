@@ -10,7 +10,7 @@ int onlineStringCopyConstruct(int, unsigned int);
 extern int rt_malloc(int);
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: onlineStringCopyConstruct. */
-extern unsigned int constructObj0055affc(unsigned char *);
+extern unsigned int _ZN9Obj55aff4C1Ev(unsigned char *);
 
 
 int * FUN_0030395c(int *param_1,unsigned int param_2)
@@ -23,7 +23,7 @@ int * FUN_0030395c(int *param_1,unsigned int param_2)
   unsigned int temp_v3;
   unsigned char temp_v4 [12];
   
-  temp_v0 = constructObj0055affc(temp_v4);
+  temp_v0 = _ZN9Obj55aff4C1Ev(temp_v4);
   temp_v3 = 0x20;
   if (param_2 >= 0x20) {
     temp_v3 = param_2;

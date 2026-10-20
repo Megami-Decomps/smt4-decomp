@@ -1,49 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e525c` (_code @ 0x2e525c, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int FUN_003bb088(unsigned int);
+typedef struct JobWork {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ s32 state;
+    /* 0x10 */ u8 unk10[0x18];
+    /* 0x28 */ f32 velocity;
+    /* 0x2C */ u8 unk2C[4];
+    /* 0x30 */ u8 moving;
+    /* 0x31 */ u8 unk31[0x57];
+    /* 0x88 */ u8 holding;
+} JobWork;
 
-/* Supplied declaration required: jobStop. */
-extern int jobIsValid(void);
-extern int jobGetWork(unsigned int);
-extern int scrGetCommandFrame(void);
-extern unsigned int FUN_003b6808(void);
-/* Supplied declaration required: FUN_003bb088. */
+extern u32 eventTexGetCurrent(void);
+extern s32 jobIsValid(void);
+extern JobWork *jobGetWork(u32 job);
+extern s32 scrGetCommandFrame(void);
+extern void FUN_003bb088(u32 job);
+extern void jobStop(u32 job, s32 arg);
 
-
-unsigned int FUN_002e525c(void)
-
+/* Script step: while the job is valid, stops it once its state is 1; otherwise starts it moving
+ * backwards (slowly while holding, faster otherwise). Returns 1 when done, 0 to keep waiting. */
+s32 FUN_002e525c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = FUN_003b6808();
-  temp_v1 = jobIsValid();
-  if (temp_v1 != 0) {
-    temp_v1 = jobGetWork(temp_v0);
-    if (*(int *)(temp_v1 + 0xc) == 1) {
-      FUN_003bb088(temp_v0);
-      jobStop(temp_v0,0);
-      return 1;
+    u32 job = eventTexGetCurrent();
+
+    if (jobIsValid() != 0) {
+        JobWork *work = jobGetWork(job);
+
+        if (work->state == 1) {
+            FUN_003bb088(job);
+            jobStop(job, 0);
+            return 1;
+        }
+        if (work->holding != 0) {
+            if (scrGetCommandFrame() == 0) {
+                work->moving = 1;
+                work->velocity = -0.1f;
+            }
+            return 0;
+        }
+        work->moving = 1;
+        work->velocity = -0.25f;
     }
-    if (*(char *)(temp_v1 + 0x88) != '\0') {
-      temp_v2 = scrGetCommandFrame();
-      if (temp_v2 == 0) {
-        *(unsigned char *)(temp_v1 + 0x30) = 1;
-        *(unsigned int *)(temp_v1 + 0x28) = 0xbdcccccd;
-      }
-      return 0;
-    }
-    *(unsigned char *)(temp_v1 + 0x30) = 1;
-    *(unsigned int *)(temp_v1 + 0x28) = 0xbe800000;
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

@@ -9,7 +9,7 @@ int FUN_00183f58(...);
 int sub68OwnerCall3(void);
 int FUN_00379be8(void);
 int FUN_003b61ec(void);
-int FUN_003c5848(void);
+int commonBgReset(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern int sub68OwnerCall2(void);
 /* Supplied declaration required: sub68OwnerCall3. */
 /* Supplied declaration required: FUN_00379be8. */
 /* Supplied declaration required: FUN_003b61ec. */
-/* Supplied declaration required: FUN_003c5848. */
+/* Supplied declaration required: commonBgReset. */
 extern int FUN_004a0404(void);
 
 
@@ -52,7 +52,7 @@ void FUN_003a2278(int param_1)
     DAT_005f1891 = 0;
     temp_v0 = gameFlagIsSet(0x49a);
     if (temp_v0 != 0) {
-      FUN_003c5848();
+      commonBgReset();
     }
     else {
       FUN_003b61ec();

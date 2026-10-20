@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0018408c(...);
 int dataTable00FindById(void);
-int FUN_0025c848(...);
+int fadeObjectResetIfActive(...);
 int FUN_00288b20(...);
 
 int FUN_00100388(...);
@@ -79,7 +79,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned char *slotRecordFindById(void);
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_0022fb78. */
-/* Supplied declaration required: FUN_0025c848. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_00288b20. */
 extern int FUN_002a4894(void);
@@ -678,7 +678,7 @@ LAB_001fd57c:
       (**(romwright_code **)(temp_v12 + 0x12d4))();
       *(unsigned char *)(temp_v12 + 0x12d0) = 0;
     }
-    FUN_0025c848(temp_v2 + 0x370);
+    fadeObjectResetIfActive(temp_v2 + 0x370);
     temp_v2 = g_renderCtx;
     temp_v12 = packNibblesAndByte(6,7,0);
     piVar17 = (int *)(temp_v2 + 0x12b8);

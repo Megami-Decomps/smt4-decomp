@@ -1,4 +1,3 @@
-/* NON_MATCHING: the flag test is built as and+lsr instead of ands+movne. */
 #include "common.h"
 
 extern "C" {
@@ -16,7 +15,11 @@ u32 FUN_002ffdd0(void)
 {
     Player *player = btlGetMainState();
 
-    scrSetResult((player->flags & 2) != 0);
+    int set = 0;
+    if (player->flags & 2) {
+        set = 1;
+    }
+    scrSetResult(set);
     return 1;
 }
 

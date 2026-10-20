@@ -20,7 +20,7 @@ int FUN_00184310(void);
 int drawSetColorFromRGBA8(...);
 int slotRecordFindById(...);
 int FUN_0020caec(...);
-int FUN_00239234(...);
+int gameDataCopySaveEntry(...);
 int FUN_002a4860(...);
 int FUN_002f3a90(void);
 int FUN_00344cd0(...);
@@ -78,7 +78,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0020caec. */
 extern int FUN_0022e9b8(void);
-/* Supplied declaration required: FUN_00239234. */
+/* Supplied declaration required: gameDataCopySaveEntry. */
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a4860. */
 extern int FUN_002a4894(int);
@@ -249,7 +249,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_00162790(2,0x8262dff,temp_v20,(int)*(short *)(temp_v11 + 8));
       if (*(unsigned int *)(temp_v10 + 0x13b8) >> 0x1e == 3) {
-        FUN_00239234(*psVar13,temp_v19);
+        gameDataCopySaveEntry(*psVar13,temp_v19);
         temp_v0 = temp_v19[0];
       }
       else {
@@ -309,7 +309,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       FUN_00162790(2,0x8262dff,temp_v20,(int)*(short *)(temp_v11 + 8));
       FUN_001834a4(0x1a,0x117);
       if ((*(unsigned int *)(temp_v10 + 0x13bc) & 3) == 3) {
-        FUN_00239234(*psVar13,temp_v19);
+        gameDataCopySaveEntry(*psVar13,temp_v19);
         temp_v0 = temp_v19[0];
       }
       else {
@@ -470,7 +470,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   FUN_00162790(2,0x57d8ffff,temp_v20,(int)*(short *)(temp_v11 + 8));
   FUN_001834a4(0x1a,0x138);
   if (*(unsigned int *)(temp_v4 + 0x3b8) >> 0x1e == 3) {
-    FUN_00239234(*psVar13,temp_v19);
+    gameDataCopySaveEntry(*psVar13,temp_v19);
     temp_v0 = temp_v19[0];
   }
   else {
@@ -558,7 +558,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(2,0x57d8ffff,temp_v20,(int)*(short *)(temp_v14 + 8));
   if ((*(unsigned int *)(temp_v4 + 0x3bc) & 3) == 3) {
-    FUN_00239234(*psVar13,temp_v19);
+    gameDataCopySaveEntry(*psVar13,temp_v19);
     temp_v0 = temp_v19[0];
   }
   else {

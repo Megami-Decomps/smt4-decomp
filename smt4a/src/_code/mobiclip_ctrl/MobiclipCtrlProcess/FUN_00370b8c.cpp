@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_0013a618(...);
+int asdGxPresetRequest(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
@@ -30,7 +30,7 @@ extern char s__V_V_V_V_V_V_V_V_V_V_00588040[129]; /* 0x588040 */
 extern unsigned int DAT_0058804c; /* 0x58804c */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_0013a618. */
+/* Supplied declaration required: asdGxPresetRequest. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
@@ -88,7 +88,7 @@ unsigned int FUN_00370b8c(int param_1,unsigned char param_2)
       *(unsigned char *)((int)puVar1 + 0x79) = 0;
     }
     else {
-      FUN_0013a618(0);
+      asdGxPresetRequest(0);
       *(unsigned char *)((int)puVar1 + 0x79) = 1;
     }
     if (param_1 != 3) {

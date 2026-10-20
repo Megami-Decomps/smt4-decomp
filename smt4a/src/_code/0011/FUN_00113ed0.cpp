@@ -5,7 +5,7 @@
 extern "C" {
 
 int ringAdvance(int);
-int FUN_002feac0(int, unsigned int **);
+int ringPush(int, unsigned int **);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned int *FUN_002fea6a(void);
 /* Supplied declaration required: ringAdvance. */
-/* Supplied declaration required: FUN_002feac0. */
+/* Supplied declaration required: ringPush. */
 
 
 unsigned int * FUN_00113ed0(int param_1,unsigned int param_2)
@@ -28,7 +28,7 @@ unsigned int * FUN_00113ed0(int param_1,unsigned int param_2)
   temp_v0 = (unsigned int *)*temp_v0;
   ringAdvance(param_1 + 0x24);
   *temp_v0 = param_2;
-  FUN_002feac0(param_1 + 4,&temp_v0);
+  ringPush(param_1 + 4,&temp_v0);
   return temp_v0;
 }
 

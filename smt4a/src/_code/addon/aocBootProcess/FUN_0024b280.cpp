@@ -14,7 +14,7 @@ int FUN_0046e2d0(int);
 int FUN_0046f3ac(int *, int);
 int flagObjAdvance(int);
 int FUN_0047306c(int, int, int, int);
-int FUN_0047314c(int);
+int jobOwnerFreeSlotAndStop(int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -44,7 +44,7 @@ extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_0046f3ac. */
 /* Supplied declaration required: flagObjAdvance. */
 /* Supplied declaration required: FUN_0047306c. */
-/* Supplied declaration required: FUN_0047314c. */
+/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 extern int startsWithH(unsigned int *);
 extern int isEmptyString(unsigned int *);
 
@@ -91,7 +91,7 @@ unsigned int FUN_0024b280(void)
   if ((temp_v5 & 0x10) != 0) {
     *(unsigned char *)(temp_v0 + 8) = 4;
     FUN_001760cc(g_aocSystem);
-    FUN_0047314c(temp_v0 + 0xc);
+    jobOwnerFreeSlotAndStop(temp_v0 + 0xc);
     *(unsigned char *)(temp_v0 + 9) = 0;
     temp_v0 = FUN_001af210(g_aocMain + 0x98);
     if (temp_v0 != 0) {
@@ -150,7 +150,7 @@ unsigned int FUN_0024b280(void)
       }
       *(unsigned char *)(temp_v0 + 8) = 4;
       FUN_001760cc(g_aocSystem);
-      FUN_0047314c(temp_v0 + 0xc);
+      jobOwnerFreeSlotAndStop(temp_v0 + 0xc);
       *(unsigned char *)(temp_v0 + 9) = 0;
       temp_v0 = FUN_001af210(g_aocMain + 0x98);
       if (temp_v0 != 0) {
@@ -174,7 +174,7 @@ unsigned int FUN_0024b280(void)
         if (*(char *)(temp_v0 + 0x4d6) == '\0') {
           return 0;
         }
-        FUN_0047314c(temp_v0 + 0xc);
+        jobOwnerFreeSlotAndStop(temp_v0 + 0xc);
       }
       aocClearDisplayFlag(g_aocSystem);
       FUN_001d0fcc(&temp_v7,g_aocSystem);

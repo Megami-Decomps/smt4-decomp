@@ -6,14 +6,14 @@ extern "C" {
 
 int __aeabi_memset4(unsigned int [43], int, unsigned int);
 int FUN_0039ba24(unsigned int [43], int, unsigned int);
-int FUN_003e2038(unsigned int *, int);
+int aocLoaderUpdateRecords(unsigned int *, int);
 int FUN_003e8b78(int);
 int FUN_003ed1f8(int, int);
 int FUN_003efb68(int, unsigned int);
 
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_0039ba24. */
-/* Supplied declaration required: FUN_003e2038. */
+/* Supplied declaration required: aocLoaderUpdateRecords. */
 /* Supplied declaration required: FUN_003e8b78. */
 /* Supplied declaration required: FUN_003ed1f8. */
 extern int FUN_003efad8(int, unsigned int);
@@ -56,7 +56,7 @@ void FUN_003e12a8(unsigned int *param_1,int param_2)
   param_1[4] = 0;
   param_1[2] = temp_v3;
   param_1[3] = 0;
-  FUN_003e2038(param_1,param_2);
+  aocLoaderUpdateRecords(param_1,param_2);
   return;
 }
 

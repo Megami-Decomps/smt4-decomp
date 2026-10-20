@@ -12,7 +12,7 @@ int FUN_002eb17c(int, unsigned int);
 int FUN_002eb330(unsigned char [32], unsigned int);
 int FUN_002eb338(int [2], unsigned char [32], unsigned int);
 int FUN_002eed74(int *);
-int FUN_002ef6c4(int *, unsigned int, unsigned int, int);
+int refSlotInit(int *, unsigned int, unsigned int, int);
 int FUN_002ef6e2(unsigned int, int);
 int FUN_002ef708(void);
 int FUN_002ef8f8(int *, int);
@@ -43,7 +43,7 @@ extern unsigned int onlineUrlGetAddress(int *);
 /* Supplied declaration required: FUN_002eb330. */
 /* Supplied declaration required: FUN_002eb338. */
 /* Supplied declaration required: FUN_002eed74. */
-/* Supplied declaration required: FUN_002ef6c4. */
+/* Supplied declaration required: refSlotInit. */
 /* Supplied declaration required: FUN_002ef6e2. */
 /* Supplied declaration required: FUN_002ef708. */
 /* Supplied declaration required: FUN_002ef8f8. */
@@ -91,7 +91,7 @@ void FUN_00109050(unsigned int param_1,int *param_2,unsigned int param_3,unsigne
     (**(romwright_code **)(*param_2 + 0x58))(param_2,1);
     temp_v4 = param_6;
     temp_v8 = param_2 + 0x7a;
-    FUN_002ef6c4(temp_v8,temp_v11,temp_v12,param_5);
+    refSlotInit(temp_v8,temp_v11,temp_v12,param_5);
     temp_v1 = onlineInstantiationContextGetCurrent();
     temp_v3 = DAT_00594a30;
     if (*(char *)(temp_v1 + 0x30) != '\0') {

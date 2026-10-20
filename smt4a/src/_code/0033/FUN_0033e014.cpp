@@ -1,34 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033e014` (_code @ 0x33e014, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: store scheduling: retail stores the four halfwords in field order 0xcce8..0xccee; here the compiler hoists the arg store */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00324c78(int);
+typedef struct MapIf {
+    /* 0x0000 */ u8 unk0000[0xCCE8];
+    /* 0xCCE8 */ u16 request;
+    /* 0xCCEA */ u16 unkCCEA;
+    /* 0xCCEC */ s16 id;
+    /* 0xCCEE */ u16 arg;
+} MapIf;
 
-extern int g_mapIf; /* 0x58103c */
+extern MapIf *g_mapIf;
 
-/* Supplied declaration required: FUN_00324c78. */
-extern int FUN_00376f94(void);
+extern s32 FUN_00376f94(void);
+extern s32 gameFlagsValueGet(s32 id);
 
-
-void FUN_0033e014(int param_1,unsigned short param_2)
-
+/* Queues a map interface request (1) for `id` and `arg`, unless the id is blocked: 0x24, 0x29 while FUN_00376f94 is 1, or an id below 100 (other than 0x18) that gameFlagsValueGet reports as 1. */
+void FUN_0033e014(s32 id, u16 arg)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = g_mapIf;
-  if (((param_1 != 0x24) &&
-      ((temp_v1 = FUN_00376f94(), temp_v1 != 1 || (temp_v1 = FUN_00324c78(0x29), temp_v1 != 1)))) &&
-     ((param_1 == 0x18 || ((param_1 >= 100 || (temp_v1 = FUN_00324c78(param_1), temp_v1 != 1)))))) {
-    *(unsigned short *)(temp_v0 + 0xcce8) = 1;
-    *(unsigned short *)(temp_v0 + 0xccea) = 0;
-    *(short *)(temp_v0 + 0xccec) = (short)param_1;
-    *(unsigned short *)(temp_v0 + 0xccee) = param_2;
-  }
-  return;
+    MapIf *mapIf = g_mapIf;
+
+    if (id != 0x24 && (FUN_00376f94() != 1 || gameFlagsValueGet(0x29) != 1) &&
+        (id == 0x18 || id >= 100 || gameFlagsValueGet(id) != 1)) {
+        mapIf->id = id;
+        mapIf->arg = arg;
+        mapIf->request = 1;
+        mapIf->unkCCEA = 0;
+    }
 }
 
 } /* extern "C" */

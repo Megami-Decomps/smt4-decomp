@@ -16,8 +16,8 @@ int FUN_002b76d0(...);
 int FUN_002ba12c(...);
 int FUN_002bf538(void);
 int FUN_002c1b64(...);
-int FUN_002c5d5c(...);
-int FUN_002cc24c(double);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
+int renderStatePush(double);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -82,11 +82,11 @@ extern int asdSoundGetOption2(void);
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bf538. */
 /* Supplied declaration required: FUN_002c1b64. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002cc22c(void);
 extern int asdSoundGetOption0(void);
-/* Supplied declaration required: FUN_002cc24c. */
+/* Supplied declaration required: renderStatePush. */
 extern int asdSoundGetOption3(void);
 extern int asdSoundGetOption1(void);
 
@@ -159,8 +159,8 @@ int FUN_003937e4(unsigned int param_1,int param_2,unsigned int *param_3)
   iStack_2c = param_2;
   puStack_28 = param_3;
   FUN_00233218();
-  FUN_002c5d5c(temp_v19 + 0x10,&LAB_00141adc,0x10,4);
-  FUN_002c5d5c(temp_v19,&LAB_00141adc,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v19 + 0x10,&LAB_00141adc,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v19,&LAB_00141adc,0x10,4);
   temp_v18 = 0;
   temp_v4 = asdSoundGetOption2();
   if (temp_v4 != 0) {
@@ -214,7 +214,7 @@ LAB_00393954:
         temp_v19[0x21] = (float)packNibblesAndByte(6,1,0);
         temp_v19[0x22] = (float)packNibblesAndByte(6,1,2);
         temp_v20 = (float)packNibblesAndByte(5,0,1);
-        FUN_002cc24c(temp_v19[(*(unsigned char *)(temp_v9 + 0xc) >> 6) + 0x20]);
+        renderStatePush(temp_v19[(*(unsigned char *)(temp_v9 + 0xc) >> 6) + 0x20]);
       }
       if (((*(unsigned char *)(temp_v9 + 0xc) & 4) != 0) && (temp_v4 = 0, (*param_3 & 4) == 0)) {
         do {

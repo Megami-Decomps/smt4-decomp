@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0010b744(int);
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002e9b30(int, int, unsigned int, int);
 int FUN_002f3dde(int, int *, unsigned int, int *);
 int FUN_002f4db0(int *, int, unsigned int, int);
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0010b744. */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002e9b30. */
 extern int FUN_002ea6fc(unsigned int *, unsigned char *);
@@ -69,7 +69,7 @@ void FUN_00303d74(int param_1,int param_2,unsigned int param_3)
       temp_v6 = 0x80010001;
       temp_v1 = FUN_002e7908((unsigned int *)&temp_v3,(unsigned int *)&temp_v6);
       FUN_002e9b30(param_2,3,temp_v1,0);
-      FUN_002e6e5c(temp_v9);
+      _ZN9Obj55b28cD1Ev(temp_v9);
       return;
     }
   }
@@ -80,7 +80,7 @@ LAB_00303db6:
       temp_v6 = 0x80010001;
       temp_v1 = FUN_002e7908((unsigned int *)&temp_v3,(unsigned int *)&temp_v6);
       FUN_002e9b30(param_2,3,temp_v1,0);
-      FUN_002e6e5c(temp_v9);
+      _ZN9Obj55b28cD1Ev(temp_v9);
       return;
     }
   }
@@ -94,14 +94,14 @@ LAB_00303db6:
   if (temp_v2 == 0) {
     *(unsigned int *)(param_2 + 0x4c) = *(unsigned int *)(temp_v0 + 0x78);
     *(int *)(param_2 + 0x48) = temp_v0;
-    FUN_002e6e5c(temp_v9);
+    _ZN9Obj55b28cD1Ev(temp_v9);
     return;
   }
   temp_v3 = temp_v8;
   temp_v4 = uStack_28;
   temp_v5 = uStack_24;
   FUN_002f3dde(param_2,&temp_v3,uStack_24,&temp_v6);
-  FUN_002e6e5c(temp_v9);
+  _ZN9Obj55b28cD1Ev(temp_v9);
   return;
 }
 

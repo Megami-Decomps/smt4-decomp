@@ -1,20 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00522df0` (_code @ 0x522df0, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001006ec(int, int, int);
+typedef struct IntVector {
+    /* 0x00 */ s32 *begin;
+    /* 0x04 */ s32 *end;
+    /* 0x08 */ s32 *capacityEnd;
+} IntVector;
 
-/* Supplied declaration required: FUN_001006ec. */
+void FUN_001006ec(s32 *storage, s32 capacity, s32 arg);
 
-
-int * FUN_00522df0(int *param_1)
-
+/* Releases the vector's storage; returns the vector. */
+IntVector *FUN_00522df0(IntVector *vec)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001006ec(*param_1,(param_1[2] - *param_1) >> 2,0);
-  return param_1;
+    s32 *begin = vec->begin;
+    FUN_001006ec(begin, vec->capacityEnd - begin, 0);
+    return vec;
 }
 
 } /* extern "C" */

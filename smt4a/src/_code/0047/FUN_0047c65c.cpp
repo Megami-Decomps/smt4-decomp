@@ -13,7 +13,7 @@ extern int FUN_00477894(...); /* 0x477894 */
 extern int FUN_00477c74(...); /* 0x477c74 */
 extern int FUN_0047815c(...); /* 0x47815c */
 extern int FUN_004782ec(...); /* 0x4782ec */
-extern int FUN_004785b4(...); /* 0x4785b4 */
+extern int _ZN9Obj52623816leaveWhenAocFreeEv(...); /* 0x4785b4 */
 extern int FUN_00478608(...); /* 0x478608 */
 extern int FUN_00478778(...); /* 0x478778 */
 extern int FUN_00478dc4(...); /* 0x478dc4 */
@@ -84,7 +84,7 @@ void FUN_0047c65c(int param_1)
   *(unsigned int *)(param_1 + 0x94) = 0;
   *(romwright_code **)(param_1 + 0x98) = FUN_00478608;
   *(unsigned int *)(param_1 + 0x9c) = 0;
-  *(romwright_code **)(param_1 + 0xa0) = FUN_004785b4;
+  *(romwright_code **)(param_1 + 0xa0) = _ZN9Obj52623816leaveWhenAocFreeEv;
   *(unsigned int *)(param_1 + 0xa4) = 0;
   *(romwright_code **)(param_1 + 0xa8) = FUN_0047c81c;
   *(unsigned int *)(param_1 + 0xac) = 0;

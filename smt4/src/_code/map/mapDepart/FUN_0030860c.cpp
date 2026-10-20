@@ -19,7 +19,7 @@ static float romwright_fabs_4(float value)
 #endif
 
 int FUN_002c5be8(void);
-int FUN_003727d8(...);
+int entryOwnerSetPosition(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
@@ -96,7 +96,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_002c5be8. */
 extern unsigned int asdModelGetStatic38(void);
 /* Supplied declaration required: FUN_002d1e4c. */
-/* Supplied declaration required: FUN_003727d8. */
+/* Supplied declaration required: entryOwnerSetPosition. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
@@ -320,7 +320,7 @@ void FUN_0030860c(void)
   temp_v35 = temp_v29;
   temp_v36 = temp_v28;
   temp_v7 = FUN_002c5be8();
-  FUN_003727d8(temp_v7,&temp_v34);
+  entryOwnerSetPosition(temp_v7,&temp_v34);
   temp_v25 = temp_v34 + temp_v39;
   temp_v24 = temp_v35 + temp_v40;
   temp_v26 = temp_v36 + temp_v41;

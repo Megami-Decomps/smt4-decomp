@@ -9,7 +9,7 @@ int asdMemFree(void);
 int FUN_00275748(unsigned int *, int);
 int FUN_002c76c0(...);
 int FUN_003180c4(int, unsigned int);
-int FUN_003fd540(void);
+int saveDataClearValues(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern unsigned int gameDataGetPlayerName(void);
 /* Supplied declaration required: FUN_002c76c0. */
 /* Supplied declaration required: FUN_003180c4. */
 extern unsigned int gameBlockGetArea221AA(void);
-/* Supplied declaration required: FUN_003fd540. */
+/* Supplied declaration required: saveDataClearValues. */
 
 
 unsigned int FUN_003311d4(void)
@@ -51,7 +51,7 @@ unsigned int FUN_003311d4(void)
   FUN_002c76c0(1);
   if (g_name == '\0') {
     if ((temp_v2 >= 2) && (temp_v2 == 2)) {
-      FUN_003fd540();
+      saveDataClearValues();
     }
     FUN_00275748(&temp_v2,4);
     g_name = '\x01';

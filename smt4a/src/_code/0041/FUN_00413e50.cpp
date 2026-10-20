@@ -21,7 +21,7 @@ int FUN_00303928(...);
 int FUN_00387edc(unsigned char [104]);
 int FUN_004311c0(void);
 int FUN_00432dd8(void);
-int FUN_0043378c(...);
+int _ZN9Obj55ac38D1Ev(...);
 int FUN_00522a48(...);
 int FUN_00522bf4(...);
 int rt_memcpy_w(unsigned char [104], unsigned int, int);
@@ -83,7 +83,7 @@ extern int rt_malloc(unsigned int);
 /* Supplied declaration required: operatorNew. */
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: onlineStringAssign. */
-extern int constructObj0055affc(unsigned char *);
+extern int _ZN9Obj55aff4C1Ev(unsigned char *);
 /* Supplied declaration required: FUN_002ea100. */
 /* Supplied declaration required: FUN_002f4cac. */
 /* Supplied declaration required: FUN_002f4cd6. */
@@ -94,7 +94,7 @@ extern int FUN_0030395c(int, unsigned int);
 /* Supplied declaration required: FUN_00387edc. */
 /* Supplied declaration required: FUN_004311c0. */
 /* Supplied declaration required: FUN_00432dd8. */
-/* Supplied declaration required: FUN_0043378c. */
+/* Supplied declaration required: _ZN9Obj55ac38D1Ev. */
 /* Supplied declaration required: FUN_00522a48. */
 /* Supplied declaration required: FUN_00522bf4. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -157,7 +157,7 @@ void FUN_00413e50(int param_1)
   }
   temp_v8 = &DAT_0055ac40;
   temp_v9 = 0;
-  temp_v0 = constructObj0055affc(temp_v11);
+  temp_v0 = _ZN9Obj55aff4C1Ev(temp_v11);
   temp_v0 = FUN_003038fc(temp_v0 + 0xc,0);
   temp_v34 = 0;
   temp_v35 = 0;
@@ -253,7 +253,7 @@ void FUN_00413e50(int param_1)
     (**(romwright_code **)*puVar5)(puVar5);
   }
   asdOperatorDeleteArray(temp_v24);
-  FUN_0043378c(&temp_v8);
+  _ZN9Obj55ac38D1Ev(&temp_v8);
   return;
 }
 

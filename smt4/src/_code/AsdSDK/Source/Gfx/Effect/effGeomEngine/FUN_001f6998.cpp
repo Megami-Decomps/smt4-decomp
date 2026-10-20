@@ -33,7 +33,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: memAlloc. */
-extern int FUN_002d58b4(unsigned int, unsigned int);
+extern int poolCreate(unsigned int, unsigned int);
 
 
 int * FUN_001f6998(unsigned int param_1,unsigned int param_2,int param_3)
@@ -95,7 +95,7 @@ int * FUN_001f6998(unsigned int param_1,unsigned int param_2,int param_3)
   piVar1[2] = temp_v2;
   piVar1[5] = param_2;
   piVar1[0x2a] = param_3;
-  temp_v2 = FUN_002d58b4(param_1 & 0xffff,0x25);
+  temp_v2 = poolCreate(param_1 & 0xffff,0x25);
   piVar1[6] = temp_v2;
   temp_v2 = 0;
   temp_v1 = (*piVar1 + 0xfU) & 0xfffffff0;

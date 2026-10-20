@@ -1,38 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041be60` (_code @ 0x41be60, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdOperatorDelete(unsigned int *);
-int FUN_003fd76c(unsigned int, unsigned int *);
-int FUN_003fdb18(unsigned int);
-int FUN_003fe9b4(unsigned int, unsigned int *);
+typedef struct Vec3 {
+    f32 x;
+    f32 y;
+    f32 z;
+} Vec3;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 handle;
+} Owner;
 
-/* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: FUN_003fd76c. */
-/* Supplied declaration required: FUN_003fdb18. */
-/* Supplied declaration required: FUN_003fe9b4. */
+typedef struct Object {
+    /* 0x00 */ u32 vtable;
+    /* 0x04 */ Owner *owner;
+    /* 0x08 */ u8 unk08[0x88];
+    /* 0x90 */ u8 first[0xC];
+    /* 0x9C */ Vec3 vector;
+    /* 0xA8 */ u8 second[0xC];
+} Object;
 
+void asdOperatorDelete(Object *object);
+void FUN_003fd76c(u32 handle, u8 *data);
+void FUN_003fdb18(u32 handle, Vec3 vector);
+void FUN_003fe9b4(u32 handle, u8 *data);
 
-void FUN_0041be60(unsigned int *param_1,unsigned int param_2)
-
+/* Deleting destructor: sets the vtable, hands the object's data to its owner's handle, then frees it. */
+void FUN_0041be60(Object *object, u32 vtable)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  *param_1 = param_2;
-  temp_v0 = *(unsigned int *)(param_1[1] + 4);
-  FUN_003fd76c(temp_v0,param_1 + 0x24);
-  FUN_003fdb18(temp_v0);
-  FUN_003fe9b4(temp_v0,param_1 + 0x2a);
-  asdOperatorDelete(param_1);
-  return;
+    u32 handle;
+
+    object->vtable = vtable;
+    handle = object->owner->handle;
+    FUN_003fd76c(handle, object->first);
+    FUN_003fdb18(handle, object->vector);
+    FUN_003fe9b4(handle, object->second);
+    asdOperatorDelete(object);
 }
 
 } /* extern "C" */

@@ -1,46 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f056c` (_code @ 0x2f056c, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+typedef struct Unit {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x1C8];
+    /* 0x1CC */ u16 level;
+    /* 0x1CE */ u8 unk1CE[0xBA];
+} Unit;                              /* 0x288 */
 
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-extern int scrGetArg(unsigned int);
-extern int __aeabi_idivmod(int, int);
+typedef struct MainState {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ Unit *units;
+} MainState;
 
+MainState *btlGetMainState(void);
+s32 scrGetArg(u32 index);
+int scrSetResult(bool value);
 
-unsigned int FUN_002f056c(void)
-
+/* Script command: result is whether the argument is at most the average level of the active, present units. */
+u32 FUN_002f056c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v4 = 0;
-  temp_v5 = 0;
-  temp_v3 = 0;
-  do {
-    temp_v1 = btlGetMainState();
-    puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + temp_v3 * 0x288);
-    temp_v2 = *puVar3;
-    if (((temp_v2 & 0x10) != 0 && (temp_v2 & 1) != 0) && ((temp_v2 & 0x40) == 0)) {
-      temp_v5 = temp_v5 + 1;
-      temp_v4 = temp_v4 + (unsigned int)(unsigned short)puVar3[0x73];
+    s32 threshold = scrGetArg(0);
+    s32 count = 0;
+    s32 total = 0;
+    s32 i;
+
+    for (i = 0; i < 109; i++) {
+        Unit *unit = &btlGetMainState()->units[i];
+
+        if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0) {
+            count++;
+            total += unit->level;
+        }
     }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x6d);
-  temp_v3 = __aeabi_idivmod(temp_v4,temp_v5);
-  scrSetResult(temp_v0 <= temp_v3);
-  return 1;
+    scrSetResult(threshold <= total / count);
+    return 1;
 }
 
 } /* extern "C" */

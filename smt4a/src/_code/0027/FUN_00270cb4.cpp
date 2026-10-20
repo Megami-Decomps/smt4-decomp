@@ -1,39 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00270cb4` (_code @ 0x270cb4, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184310(void);
+typedef struct Item {
+    /* 0x0 */ u16 id;
+    /* 0x2 */ u16 group;
+} Item;
 
-/* Supplied declaration required: FUN_00184310. */
+typedef struct Record {
+    /* 0x0 */ u16 id;
+    /* 0x2 */ u8 rank;
+    /* 0x3 */ u8 unk3;
+    /* 0x4 */ u8 unk4[2];
+    /* 0x6 */ u16 order;
+} Record;
 
+extern Record *FUN_00184310(u32 id);
 
-unsigned int FUN_00270cb4(unsigned short *param_1,unsigned short *param_2)
-
+/* Sort comparison of two items: ungrouped ones last, otherwise by order (higher first), rank ascending and id ascending. */
+s32 FUN_00270cb4(Item *a, Item *b)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned short *puVar2;
-  unsigned short *puVar3;
-  
-  if (param_1[1] == 0) {
-    return (unsigned int)(param_2[1] != 0);
-  }
-  if (param_2[1] == 0) {
-    temp_v0 = 0xffffffff;
-  }
-  else {
-    puVar2 = (unsigned short *)(unsigned int)*param_1;
-    FUN_00184310();
-    puVar3 = (unsigned short *)(unsigned int)*param_2;
-    FUN_00184310();
-    temp_v0 = (unsigned int)puVar3[3] - (unsigned int)puVar2[3];
-    if ((temp_v0 == 0) && (temp_v0 = (unsigned int)(unsigned char)puVar2[1] - (unsigned int)(unsigned char)puVar3[1], temp_v0 == 0)) {
-      temp_v0 = (unsigned int)*puVar2 - (unsigned int)*puVar3;
+    Record *recordA;
+    Record *recordB;
+    s32 diff;
+
+    if (a->group == 0) {
+        if (b->group == 0) {
+            return 0;
+        }
+        return 1;
     }
-  }
-  return temp_v0;
+    if (b->group == 0) {
+        return -1;
+    }
+    recordA = FUN_00184310(a->id);
+    recordB = FUN_00184310(b->id);
+    diff = recordB->order - recordA->order;
+    if (diff == 0) {
+        diff = recordA->rank - recordB->rank;
+        if (diff == 0) {
+            diff = recordA->id - recordB->id;
+        }
+    }
+    return diff;
 }
 
 } /* extern "C" */

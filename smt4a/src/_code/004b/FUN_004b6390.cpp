@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014e188(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int FUN_001acf98(int, int);
@@ -37,7 +37,7 @@ extern unsigned char DAT_0053374c; /* 0x53374c */
 extern unsigned char DAT_00533768; /* 0x533768 */
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 extern int gameGetSlotRecord(void);
@@ -148,7 +148,7 @@ void FUN_004b6390(int param_1)
   *(unsigned int *)(param_1 + 0x7553) = 0;
   *(unsigned char *)(param_1 + 0x7557) = 0;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1);
-  FUN_001505ac(param_1,&DAT_0053356c,0x60,&DAT_005335cc,0xfc,&DAT_005336c8,0x84,&DAT_0053374c,0x1c,
+  paramsInit(param_1,&DAT_0053356c,0x60,&DAT_005335cc,0xfc,&DAT_005336c8,0x84,&DAT_0053374c,0x1c,
                &DAT_00533768,0x508);
   FUN_0014e188(param_1 + 0x20,0x1d,0,param_1,1);
   uiSpriteSetKeyframe(param_1 + 0x20,0);

@@ -13,11 +13,11 @@ extern TitleScene *g_titleScene;
 extern struct {
     u8 unk00;
     s8 unk01;
-} DAT_00446db0;
+} g_titleFlags;
 
 u32 renderCtxBeginPass(void)
 {
-    if (FUN_002c5210() == 1 && DAT_00446db0.unk01 != 0) {
+    if (FUN_002c5210() == 1 && g_titleFlags.unk01 != 0) {
         TitleScene *scene;
 
         FUN_002c35b0(1);

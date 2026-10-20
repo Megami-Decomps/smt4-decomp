@@ -1,29 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0042640c` (_code @ 0x42640c, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00426754(int);
+#define RESULT_INVALID_HANDLE 0xE0409FFF
 
-/* Supplied declaration required: FUN_00426754. */
+extern s32 FUN_00426754(void *object);
 
-
-void FUN_0042640c(int *param_1)
-
+/* Forwards the object a non-NULL handle refers to to FUN_00426754, otherwise returns the invalid-handle result. */
+s32 FUN_0042640c(void **handle)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (param_1 != (int *)0x0) {
-    temp_v0 = *param_1;
-  }
-  if (param_1 != (int *)0x0 && temp_v0 != 0) {
-    FUN_00426754(temp_v0);
-    return;
-  }
-  return;
+    if (handle == NULL || *handle == NULL) {
+        return RESULT_INVALID_HANDLE;
+    }
+    return FUN_00426754(*handle);
 }
 
-} /* extern "C" */
+}

@@ -10,7 +10,7 @@ int FUN_0034a290(void);
 int FUN_003e8bb0(unsigned char [2], unsigned int, unsigned int *);
 int FUN_003f0e20(int, int);
 int source4CCopyHalves(unsigned int *, unsigned int [5]);
-int FUN_004c3ac0(int, unsigned int [5]);
+int kindIdStore(int, unsigned int [5]);
 
 /* stack frame of param_2: 8 slot(s), 25 byte(s) */
 typedef struct {
@@ -34,7 +34,7 @@ extern unsigned int DAT_0057140c; /* 0x57140c */
 /* Supplied declaration required: FUN_003f0e20. */
 extern int FUN_004bd098(unsigned int, int);
 /* Supplied declaration required: source4CCopyHalves. */
-/* Supplied declaration required: FUN_004c3ac0. */
+/* Supplied declaration required: kindIdStore. */
 
 
 unsigned int FUN_004c0f74(unsigned int *param_1,unsigned int param_2)
@@ -101,7 +101,7 @@ unsigned int FUN_004c0f74(unsigned int *param_1,unsigned int param_2)
   if ((((temp_v9 == '\0') || ((param_1[0x9d] & 0x10) == 0)) ||
       (((*param_1 & DAT_00571408) != 0 || (DAT_0057140c & param_1[1]) != 0 &&
        (temp_v1 = FUN_004bd098(param_1[0xff],(int)temp_v8), temp_v1 < 0)))) ||
-     (FUN_004c3ac0(temp_v7,temp_v5), param_2 != temp_v5[0])) {
+     (kindIdStore(temp_v7,temp_v5), param_2 != temp_v5[0])) {
     temp_v2 = param_1[2];
     temp_v4 = btlGetMainState();
     FUN_003f0e20(temp_v4,(int)(short)temp_v2);

@@ -30,7 +30,7 @@ extern unsigned int DAT_00573884; /* 0x573884 */
 /* Supplied declaration required: FUN_003e12a8. */
 /* Supplied declaration required: FUN_003e3188. */
 /* Supplied declaration required: FUN_003eebf4. */
-extern int FUN_004706a8(unsigned int, unsigned short);
+extern int aocReadyAndAccepts(unsigned int, unsigned short);
 /* Supplied declaration required: aocQueueType38. */
 
 
@@ -55,7 +55,7 @@ void FUN_003e03b0(unsigned int *param_1,int param_2)
     sysMemClear(temp_v2,0x80);
     FUN_00100388(temp_v2,&LAB_003e04ec,*(unsigned char *)(puVar1 + 0x51),
                  *(unsigned char *)((int)puVar1 + 0xa3));
-    temp_v0 = FUN_004706a8(g_aocSystem,*puVar1);
+    temp_v0 = aocReadyAndAccepts(g_aocSystem,*puVar1);
     piVar4 = (int *)(param_2 + 0x1ec4);
     if (temp_v0 != 0) {
       aocQueueType38(g_aocSystem,*puVar1,piVar4,temp_v2);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003e5478(unsigned int, unsigned int);
+int controllerTargetNodeStart(unsigned int, unsigned int);
 int linkHolderRunAll(unsigned int, int *);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_003e5478. */
+/* Supplied declaration required: controllerTargetNodeStart. */
 /* Supplied declaration required: linkHolderRunAll. */
 
 
@@ -76,7 +76,7 @@ void FUN_0035a0c4(unsigned int *param_1,unsigned int param_2)
     *param_1 = 0x3f800000;
     param_1[1] = 0x40accccd;
     param_1[2] = 0x3fc00000;
-    FUN_003e5478(param_1[7],temp_v1);
+    controllerTargetNodeStart(param_1[7],temp_v1);
     temp_v2 = *param_1;
     uStack_14 = param_1[1];
     uStack_10 = param_1[2];
@@ -85,7 +85,7 @@ void FUN_0035a0c4(unsigned int *param_1,unsigned int param_2)
   default:
     temp_v1 = 0;
     param_1[0xc] = 1;
-    FUN_003e5478(param_1[7],temp_v1);
+    controllerTargetNodeStart(param_1[7],temp_v1);
     temp_v2 = *param_1;
     uStack_14 = param_1[1];
     uStack_10 = param_1[2];
@@ -93,7 +93,7 @@ void FUN_0035a0c4(unsigned int *param_1,unsigned int param_2)
     return;
   }
   param_1[0xc] = temp_v0;
-  FUN_003e5478(param_1[7],temp_v1);
+  controllerTargetNodeStart(param_1[7],temp_v1);
   temp_v2 = *param_1;
   uStack_14 = param_1[1];
   uStack_10 = param_1[2];

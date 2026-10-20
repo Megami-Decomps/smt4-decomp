@@ -6,7 +6,7 @@ extern "C" {
 
 int asdOperatorNew(...);
 int memAlloc(...);
-int FUN_0016dfc4(...);
+int resultReportIfFailed(...);
 int nn_os_CriticalSection_Initialize(...);
 int nn_os_LightEvent_Initialize(...);
 int nn_os_LightEvent_Signal(...);
@@ -34,7 +34,7 @@ extern unsigned int *DAT_00588104; /* 0x588104 */
 
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_0016dfc4. */
+/* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: nn_os_LightEvent_Signal. */
@@ -106,7 +106,7 @@ FUN_00425ab0(int param_1,int param_2,int param_3,int param_4,int param_5,unsigne
       *(unsigned char *)(puVar2 + 4) = 0;
     }
     DAT_00588104 = puVar2;
-    FUN_0016dfc4();
+    resultReportIfFailed();
     temp_v1 = param_1 + 0x28;
     temp_v2 = 4;
     temp_v3 = &LAB_00514a84;

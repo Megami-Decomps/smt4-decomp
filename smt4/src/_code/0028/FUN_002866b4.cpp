@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028dc68(int);
+int messageSlotSet(int);
 int FUN_0028dc98(unsigned int);
 int scrSetResult(unsigned int);
 int FUN_0028dcf4(int, int);
@@ -27,7 +27,7 @@ extern int DAT_0043e18c; /* 0x43e18c */
 extern int DAT_0043e190; /* 0x43e190 */
 extern int DAT_0043e194; /* 0x43e194 */
 
-/* Supplied declaration required: FUN_0028dc68. */
+/* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: FUN_0028dc98. */
 /* Supplied declaration required: scrSetResult. */
 extern int buttonHelpGetEntryValue(unsigned int);
@@ -116,7 +116,7 @@ FUN_002866b4(unsigned int param_1,unsigned int param_2,int param_3,int param_4,i
       if (temp_v2 == 0 || temp_v6 == '\0') {
         scrSetResult(*(unsigned int *)(temp_v5 + 0x18));
         FUN_0028dc98(0xffffffff);
-        FUN_0028dc68(0);
+        messageSlotSet(0);
         return 1;
       }
       return 0;

@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001d1438. */
 /* Supplied declaration required: FUN_00275bc8. */
-extern int FUN_004931e0(void);
+extern int sceneTexturesAreLoaded(void);
 /* Supplied declaration required: FUN_004b7128. */
 /* Supplied declaration required: FUN_004b7d88. */
 extern unsigned long long isFlag1F0Set(int);
@@ -33,7 +33,7 @@ void FUN_004b91fc(int param_1)
   unsigned long long temp_v3;
   
   temp_v0 = dataTable33IsLoaded(param_1 + 0x1114);
-  if (((temp_v0 != 0) && (temp_v0 = FUN_004931e0(), temp_v0 != 0)) &&
+  if (((temp_v0 != 0) && (temp_v0 = sceneTexturesAreLoaded(), temp_v0 != 0)) &&
      (temp_v3 = isFlag1F0Set(param_1 + 0x9c), temp_v0 = (int)((unsigned long long)temp_v3 >> 0x20), (int)temp_v3 != 0
      )) {
     temp_v1 = *(int *)(param_1 + 0x1138);

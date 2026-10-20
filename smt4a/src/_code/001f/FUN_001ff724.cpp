@@ -13,7 +13,7 @@ int FUN_002c2728(...);
 int sysMemClear(...);
 int rt_memclr(...);
 int flaggedEntrySetValueA(...);
-int FUN_003d18e0(...);
+int uiQuestSortListByEntryKind(...);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern int g_uiQuest; /* 0x57f28c */
 
 /* Supplied declaration required: qsort. */
 extern int idIsAtLeast350(unsigned int);
-extern int FUN_0019f1a4(unsigned int, unsigned int);
+extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_00203b40. */
@@ -39,7 +39,7 @@ extern int FUN_002c2c68(int);
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern int FUN_00348ed0(int);
-/* Supplied declaration required: FUN_003d18e0. */
+/* Supplied declaration required: uiQuestSortListByEntryKind. */
 extern int FUN_003df004(unsigned int, int, int *);
 extern int partyEntryFlagsBit3(unsigned int);
 extern int partyEntryFlagsBit1(unsigned short);
@@ -70,7 +70,7 @@ void FUN_001ff724(void)
   rt_memclr(temp_v5 + 0xad6,500);
   temp_v7 = 0;
   do {
-    temp_v1 = FUN_0019f1a4(temp_v7,0);
+    temp_v1 = gameFlagEntryGetBit(temp_v7,0);
     if (temp_v1 == 0) goto LAB_001ff908;
     do {
       if ((temp_v7 < 0x15e) || (temp_v2 = temp_v7, FUN_001ad9b4(), temp_v2 != 0)) {
@@ -145,7 +145,7 @@ LAB_001ff908:
         temp_v10[0] = 1;
         temp_v10[1] = 1;
         FUN_00203b40(temp_v3,temp_v8,10,1);
-        FUN_003d18e0(0);
+        uiQuestSortListByEntryKind(0);
         temp_v6 = 0;
         if (temp_v9 < 1) goto LAB_001ff9d0;
         goto LAB_001ff990;

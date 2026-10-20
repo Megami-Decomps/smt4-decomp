@@ -11,7 +11,7 @@ int FUN_003c5fc4(...);
 int flagValueSub(...);
 
 int FUN_001517b4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int uiSpriteSetImageKeyframe(...);
 int FUN_0019de98(...);
 int FUN_0020b660(...);
@@ -40,7 +40,7 @@ typedef struct {
 extern int g_camp; /* 0x57f108 */
 
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned short FUN_00167f08(void);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -158,7 +158,7 @@ void FUN_003daf0c(int param_1)
         FUN_0020b660(0x2b);
         temp_v2 = 0x100020e;
       }
-      FUN_001641b4(temp_v2);
+      eventQueueAddUniqueIfValid(temp_v2);
       return;
     }
     temp_v6 = FUN_002a4860(temp_v7);
@@ -167,29 +167,29 @@ void FUN_003daf0c(int param_1)
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v6 + 0x21b0);
     FUN_0048144c();
     if (temp_v4 == 0) {
-      FUN_001641b4(0x100020f);
+      eventQueueAddUniqueIfValid(0x100020f);
       return;
     }
     *(unsigned int *)(temp_v5 + 0x33b8) = (unsigned int)*(unsigned short *)(temp_v6 + 0x21b0);
     temp_v0 = *(short *)(temp_v6 + 0x21b0);
     if (temp_v0 == 0x79f) {
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
       FUN_002e1b3c(3);
       temp_v7 = 2;
     }
     else if (temp_v0 == 0x7af) {
-      FUN_001641b4(0x100021c);
+      eventQueueAddUniqueIfValid(0x100021c);
       FUN_002e1b3c(5);
       temp_v7 = 4;
     }
     else if (temp_v0 == 0x7b6) {
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
       temp_v7 = 5;
     }
     else {
       temp_v3 = FUN_00481404();
       if (temp_v3 != 0) {
-        FUN_001641b4(0x100020e);
+        eventQueueAddUniqueIfValid(0x100020e);
         *(unsigned int *)(temp_v5 + 0x20) = 6;
         return;
       }
@@ -201,13 +201,13 @@ void FUN_003daf0c(int param_1)
         FUN_002adce8(temp_v7,1);
         FUN_00388758(1);
         uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
-        FUN_001641b4(0x100020e);
+        eventQueueAddUniqueIfValid(0x100020e);
         if (*(short *)(temp_v6 + 0x21b0) == 0x7a5 || *(short *)(temp_v6 + 0x21b0) == 0x7a6) {
           FUN_003a7c00(0);
         }
         return;
       }
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
       temp_v7 = 7;
     }
     *(int *)(temp_v5 + 0x20) = temp_v7;

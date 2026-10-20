@@ -13,7 +13,7 @@ int FUN_00148bb8(...);
 int FUN_00163aa4(unsigned int *);
 int FUN_0019de98(...);
 int FUN_00224880(...);
-int FUN_0031d62c(...);
+int messageWindowIsState1(...);
 int obj04Finish(void);
 int FUN_00388758(...);
 int FUN_004935b0(unsigned int *, unsigned int, unsigned int);
@@ -45,7 +45,7 @@ extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b60(void);
 extern int FUN_002a4b74(void);
-/* Supplied declaration required: FUN_0031d62c. */
+/* Supplied declaration required: messageWindowIsState1. */
 extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: obj04Finish. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
@@ -84,7 +84,7 @@ void FUN_004995b0(unsigned int *param_1)
         temp_v1 = vec2GetYInt(puVar6);
         temp_v2 = vec2GetXInt(puVar6);
         FUN_004935b0(param_1 + 0xe9,temp_v2,temp_v1);
-        temp_v3 = FUN_0031d62c((int)*(char *)((int)param_1 + 0x502));
+        temp_v3 = messageWindowIsState1((int)*(char *)((int)param_1 + 0x502));
         if (temp_v3 != 0) {
           temp_v3 = FUN_002a4b60();
           temp_v3 = dataTable17Type0GetEntry(temp_v5,param_1[temp_v3 + 0x5803] + 4);
@@ -127,7 +127,7 @@ void FUN_004995b0(unsigned int *param_1)
       FUN_004935b0(param_1 + 0xe9,temp_v2,temp_v1);
       if (*(char *)((int)param_1 + 0x502) != '\0') {
         *param_1 = *param_1 & 0xfffff0ff;
-        temp_v3 = FUN_0031d62c();
+        temp_v3 = messageWindowIsState1();
         if (temp_v3 != 0) {
           temp_v3 = FUN_002a4b60();
           temp_v3 = dataTable17Type0GetEntry(temp_v5,param_1[temp_v3 + 0x5803]);

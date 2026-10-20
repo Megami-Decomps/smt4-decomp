@@ -1,38 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c9d98` (_code @ 0x2c9d98, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the handle->screen load is scheduled before the two constants (mov r2, #1; mvn r1, #0); retail loads it after them. */
+#include "common.h"
 
 extern "C" {
 
-int jyoucyuGetTableEntry(int);
+struct View;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+/* Virtual table of a screen view: slot 1 destroys it, slot 4 closes it. */
+typedef struct ViewVtbl {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ void (*destroy)(struct View *view);
+    /* 0x08 */ void *unk08[2];
+    /* 0x10 */ void (*close)(struct View *view);
+} ViewVtbl;
 
-/* Supplied declaration required: jyoucyuGetTableEntry. */
+typedef struct View {
+    /* 0x0 */ ViewVtbl *vtbl;
+} View;
 
+typedef struct JyoucyuScreen {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u8 closing;
+    /* 0x0D */ u8 unk0d[0xB];
+    /* 0x18 */ View *view;
+} JyoucyuScreen;
 
-void FUN_002c9d98(int *param_1)
+typedef struct JyoucyuHandle {
+    /* 0x0 */ JyoucyuScreen *screen;
+    /* 0x4 */ s32 state;
+} JyoucyuHandle;
 
+extern int jyoucyuGetTableEntry(int index);
+
+/* Closes the screen: flags it as closing, closes and destroys its view, then resets the table entry. */
+void FUN_002c9d98(JyoucyuHandle *handle)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *param_1;
-  *(unsigned char *)(temp_v0 + 0xc) = 1;
-  param_1[1] = -1;
-  if (*(int **)(temp_v0 + 0x18) != (int *)0x0) {
-    (**(romwright_code **)(**(int **)(temp_v0 + 0x18) + 0x10))();
-    if (*(int **)(temp_v0 + 0x18) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(temp_v0 + 0x18) + 4))();
+    JyoucyuScreen *screen = handle->screen;
+
+    screen->closing = 1;
+    handle->state = -1;
+    if (screen->view != NULL) {
+        screen->view->vtbl->close(screen->view);
+        if (screen->view != NULL) {
+            screen->view->vtbl->destroy(screen->view);
+        }
+        screen->view = NULL;
     }
-    *(unsigned int *)(temp_v0 + 0x18) = 0;
-  }
-  jyoucyuGetTableEntry(0);
-  return;
+    jyoucyuGetTableEntry(0);
 }
 
-} /* extern "C" */
+}

@@ -1,34 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a7254` (_code @ 0x3a7254, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jobStop(int, int);
-int FUN_003aabd8(int);
+typedef struct Child Child;
+typedef struct Owner Owner;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct ChildVtable {
+    /* 0x00 */ void (*unk00)(Child *child);
+    /* 0x04 */ void (*release)(Child *child);
+} ChildVtable;
 
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_003aabd8. */
+struct Child {
+    /* 0x0 */ ChildVtable *vtable;
+};
 
+typedef struct OwnerVtable {
+    /* 0x00 */ void (*unk00[10])(Owner *owner);
+    /* 0x28 */ void (*stop)(Owner *owner);
+} OwnerVtable;
 
-void FUN_003a7254(int *param_1)
+struct Owner {
+    /* 0x000 */ OwnerVtable *vtable;
+    /* 0x004 */ u32 job;
+    /* 0x008 */ u8 unk008[0x8E];
+    /* 0x096 */ u8 list[0x4FA];
+    /* 0x590 */ Child *child;
+};
 
+void FUN_003aabd8(u8 *list);
+s32 jobStop(u32 job, s32 arg);
+
+/* Releases the child, clears the list, runs the owner's stop handler and stops its job. */
+void FUN_003a7254(Owner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  if ((int *)param_1[0x164] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[0x164] + 4))();
-    param_1[0x164] = 0;
-  }
-  FUN_003aabd8((int)param_1 + 0x96);
-  (**(romwright_code **)(*param_1 + 0x28))(param_1);
-  jobStop(param_1[1],0);
-  return;
+    Child *child = owner->child;
+
+    if (child != NULL) {
+        child->vtable->release(child);
+        owner->child = NULL;
+    }
+    FUN_003aabd8(owner->list);
+    owner->vtable->stop(owner);
+    jobStop(owner->job, 0);
 }
 
 } /* extern "C" */

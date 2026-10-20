@@ -7,9 +7,9 @@ extern "C" {
 int FUN_0017ffa8(...);
 int gameGetPlayerData(void);
 int FUN_001835b4(...);
-int FUN_0018439c(...);
+int requestKindToId(...);
 int FUN_00192550(void);
-int FUN_00192690(void);
+int contentEntryFindById2(void);
 
 /* stack frame of param_5: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -20,9 +20,9 @@ typedef struct {
 /* Supplied declaration required: FUN_0017ffa8. */
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0018439c. */
+/* Supplied declaration required: requestKindToId. */
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_00192690. */
+/* Supplied declaration required: contentEntryFindById2. */
 extern unsigned int FUN_0019271c(void);
 
 
@@ -42,12 +42,12 @@ void FUN_001689e8(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v2 = FUN_0019271c();
   switch(temp_v2) {
   case 0:
-    FUN_00192690();
+    contentEntryFindById2();
     if (*(char *)(param_1 + 0x23) == '\0') {
       temp_v4 = 0x3ff;
     }
     else {
-      temp_v4 = FUN_0018439c();
+      temp_v4 = requestKindToId();
     }
   default:
     FUN_0017ffa8(2,0xb,temp_v4,param_2,param_3,param_4);
@@ -58,7 +58,7 @@ void FUN_001689e8(unsigned int param_1,unsigned int param_2,unsigned int param_3
   case 1:
   case 0xc:
     FUN_00192550();
-    temp_v4 = FUN_0018439c(*(unsigned char *)(param_1 + 0x40));
+    temp_v4 = requestKindToId(*(unsigned char *)(param_1 + 0x40));
     FUN_0017ffa8(2,0xb,temp_v4,param_2,param_3,param_4);
     if (temp_v1) {
       FUN_001835b4(2,0xb,0x417,param_2,param_3,param_4 + 1);

@@ -13,7 +13,7 @@ int effEditorNodeChainApply(unsigned char *);
 int FUN_00243ce8(...);
 int FUN_002b3fd8(int, int, int, int);
 int FUN_002cf28c(int, int, int, int, unsigned int, unsigned int);
-int FUN_00300124(void);
+int effMenuListAppend(void);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_2: 11 slot(s), 44 byte(s) */
@@ -58,7 +58,7 @@ extern float DAT_00635340; /* 0x635340 */
 /* Supplied declaration required: FUN_00243ce8. */
 /* Supplied declaration required: FUN_002b3fd8. */
 /* Supplied declaration required: FUN_002cf28c. */
-/* Supplied declaration required: FUN_00300124. */
+/* Supplied declaration required: effMenuListAppend. */
 
 
 unsigned char * FUN_00345f4c(unsigned int *param_1,int param_2)
@@ -254,7 +254,7 @@ LAB_00346144:
     *(int *)(temp_v2 + 8) = temp_v6;
     *(unsigned int *)(temp_v2 + 0x18) = temp_v3 | (temp_v3 << 0x10) | (temp_v3 << 8) | 0xff000000;
     *(unsigned int *)(temp_v2 + 0x1c) = temp_v4 | (temp_v4 << 0x10) | (temp_v4 << 8) | 0xff000000;
-    FUN_00300124();
+    effMenuListAppend();
     if (temp_v5 == DAT_0059dc34) {
       temp_v10 = temp_v10 + 0xa7;
       temp_v2 = 0x10000;
@@ -265,7 +265,7 @@ LAB_00346144:
       *(unsigned int *)(temp_v2 + 0xc) = 0x70;
       *(int *)(temp_v2 + 0x10) = temp_v10;
       *(unsigned int *)(temp_v2 + 0x14) = 0x88;
-      FUN_00300124();
+      effMenuListAppend();
       temp_v2 = 0x10000;
       memAlloc(0x10000,0x100,0,0x68,0x10,1);
       *(unsigned int *)(temp_v2 + 0x18) = 0xff00ff00;
@@ -285,7 +285,7 @@ LAB_00346144:
       *(unsigned int *)(temp_v2 + 0x14) = 0x88;
       *(unsigned int *)(temp_v2 + 0x18) = 0xffffffff;
     }
-    FUN_00300124();
+    effMenuListAppend();
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 3);
   temp_v2 = 0x10000;
@@ -296,7 +296,7 @@ LAB_00346144:
   *(unsigned int *)(temp_v2 + 0x10) = 0x160;
   *(unsigned int *)(temp_v2 + 0x14) = 0x88;
   *(unsigned int *)(temp_v2 + 0x18) = 0xffffffff;
-  FUN_00300124();
+  effMenuListAppend();
   FUN_00243ce8(0xa4,0x8c,8,&LAB_0034659c,temp_v16);
   temp_v2 = padButtonIsPressed(1);
   if (temp_v2 == 0) {

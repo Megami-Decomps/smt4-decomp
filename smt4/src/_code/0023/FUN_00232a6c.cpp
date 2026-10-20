@@ -7,13 +7,13 @@ extern "C" {
 int asdOperatorNew(void);
 int FUN_00395558(void);
 int FUN_00395e74(unsigned int, unsigned int);
-int FUN_00396274(void);
+int _ZN9Obj422338C1Ev(void);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00395558. */
 /* Supplied declaration required: FUN_00395e74. */
-/* Supplied declaration required: FUN_00396274. */
+/* Supplied declaration required: _ZN9Obj422338C1Ev. */
 
 
 unsigned int FUN_00232a6c(int param_1,int param_2,unsigned int param_3)
@@ -41,7 +41,7 @@ unsigned int FUN_00232a6c(int param_1,int param_2,unsigned int param_3)
       temp_v0 = 0x9c;
       asdOperatorNew();
       if (temp_v0 != 0) {
-        FUN_00396274();
+        _ZN9Obj422338C1Ev();
       }
       *(int *)(param_1 + temp_v1 * 4 + 0x18) = temp_v0;
     }

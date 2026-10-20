@@ -1,28 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00333fec` (_code @ 0x333fec, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the clamp to at least 1 is built with movlt/movge into r1; retail clamps r4 with movlt then moves it into r1 */
+#include "common.h"
 
 extern "C" {
 
-extern int gameGetPlayerData(void);
+typedef struct PlayerData {
+    /* 0x00 */ u8 unk00[0x1E];
+    /* 0x1E */ s16 limit;
+    /* 0x20 */ u8 unk20[0xC];
+    /* 0x2C */ s16 value;
+} PlayerData;
 
+extern PlayerData *gameGetPlayerData(void);
 
-void FUN_00333fec(int param_1)
-
+/* Sets the player value to `value` clamped to at least 1, but never above the player's limit. */
+void FUN_00333fec(s32 value)
 {
-  int temp_v0;
-  short temp_v1;
-  
-  temp_v0 = gameGetPlayerData();
-  temp_v1 = *(short *)(temp_v0 + 0x1e);
-  if (param_1 <= temp_v1) {
-    if (param_1 < 1) {
-      param_1 = 1;
-    }
-    temp_v1 = (short)param_1;
-  }
-  *(short *)(temp_v0 + 0x2c) = temp_v1;
-  return;
+    PlayerData *player = gameGetPlayerData();
+    s32 limit = player->limit;
+
+    player->value = value <= limit ? (value < 1 ? 1 : value) : limit;
 }
 
 } /* extern "C" */

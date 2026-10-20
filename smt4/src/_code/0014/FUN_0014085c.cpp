@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c5d5c(unsigned int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 
 typedef struct fn_0014085c_arg0 fn_0014085c_arg0;
 struct fn_0014085c_arg0 {
@@ -45,7 +45,7 @@ extern unsigned int *FUN_0014bfec(void);
 extern int FUN_0014c450(unsigned int *);
 extern int FUN_0014c9b4(unsigned int *);
 extern unsigned int *FUN_002a7b78(int);
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_0014085c(fn_0014085c_arg0 *param_1,unsigned int param_2)
@@ -68,7 +68,7 @@ void FUN_0014085c(fn_0014085c_arg0 *param_1,unsigned int param_2)
   puVar1[10] = 0;
   puVar1[0xe] = 0;
   puVar1 = puVar1 + 0xf;
-  FUN_002c5d5c(puVar1,&LAB_0014c240,8,4);
+  __aeabi_vec_ctor_nocookie_nodtor(puVar1,&LAB_0014c240,8,4);
   temp_v0 = FUN_0014c450(puVar1 + 8);
   *(unsigned int *)(temp_v0 + 0x264) = 0;
   *(unsigned char *)(temp_v0 + 0x291) = 0;

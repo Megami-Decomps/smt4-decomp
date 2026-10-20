@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(...);
+int _ZN9Obj55b28cD1Ev(...);
 int vectorCopyHeader(...);
 int vectorResizeBytes(...);
 int FUN_002f7824(...);
 int FUN_002f8b88(int);
 int FUN_002fb208(void);
 int FUN_002fbe90(...);
-int FUN_002fbfe8(...);
+int byteRingWrite(...);
 int FUN_002fc056(unsigned int, int, int);
 int ringBufferConsume(unsigned int, int);
 int FUN_0043af40(int);
@@ -36,7 +36,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: vectorCopyHeader. */
 extern int wordRefsEqual_002ea4ac(int *, unsigned int *);
 /* Supplied declaration required: vectorResizeBytes. */
@@ -44,7 +44,7 @@ extern int wordRefsEqual_002ea4ac(int *, unsigned int *);
 /* Supplied declaration required: FUN_002f8b88. */
 /* Supplied declaration required: FUN_002fb208. */
 /* Supplied declaration required: FUN_002fbe90. */
-/* Supplied declaration required: FUN_002fbfe8. */
+/* Supplied declaration required: byteRingWrite. */
 extern int rangeIsEmpty(int *);
 /* Supplied declaration required: FUN_002fc056. */
 /* Supplied declaration required: ringBufferConsume. */
@@ -111,7 +111,7 @@ LAB_00110f60:
       *(unsigned int *)(temp_v1 + 0x14) = 0;
     }
     *(unsigned char *)(param_1 + 0x108f) = *(unsigned char *)(param_1 + 0x108e);
-    FUN_002e6e5c(temp_v15);
+    _ZN9Obj55b28cD1Ev(temp_v15);
     temp_v1 = rangeIsEmpty(piVar3);
     if (temp_v1 == 0) {
       temp_v1 = FUN_0043aeac(temp_v4,*piVar3,*(int *)(param_1 + 0x10a4) - *piVar3);
@@ -150,7 +150,7 @@ LAB_00111002:
     FUN_002e6e34(temp_v15,temp_v13);
     *(unsigned char *)(param_1 + 0x1090) = 1;
     *(unsigned int *)(param_1 + 0x1094) = temp_v7;
-    FUN_002e6e5c(temp_v15);
+    _ZN9Obj55b28cD1Ev(temp_v15);
   }
 LAB_00111096:
   FUN_002e6e34(temp_v15,temp_v13);
@@ -166,7 +166,7 @@ LAB_00111096:
         FUN_002fbe90(temp_v16,temp_v11);
         vectorCopyHeader(temp_v12,temp_v16);
       }
-      FUN_002e6e5c(temp_v15);
+      _ZN9Obj55b28cD1Ev(temp_v15);
       return;
     }
     temp_v10 = 0;
@@ -184,10 +184,10 @@ LAB_00111096:
      ((unsigned int)(*(int *)(param_1 + 0x10a4) - *piVar3) <=
       (unsigned int)(*(int *)(*(int *)(param_1 + 0x109c) + 0x1c) -
             *(int *)(*(int *)(param_1 + 0x109c) + 0x18)))) {
-    FUN_002fbfe8(*(unsigned int *)(param_1 + 0x109c),*piVar3,*(int *)(param_1 + 0x10a4) - *piVar3);
+    byteRingWrite(*(unsigned int *)(param_1 + 0x109c),*piVar3,*(int *)(param_1 + 0x10a4) - *piVar3);
     FUN_002f7824(piVar3);
   }
-  FUN_002e6e5c(temp_v15);
+  _ZN9Obj55b28cD1Ev(temp_v15);
   goto LAB_00110f60;
 }
 

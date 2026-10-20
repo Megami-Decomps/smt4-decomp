@@ -10,7 +10,7 @@ int FUN_001bc460(void);
 int refCountIncrement(void);
 int requestDispatch(...);
 int FUN_00290c28(...);
-int FUN_00290e04(...);
+int entryListSetPhase(...);
 int handlerTableCallWithValue(...);
 int FUN_002b3538(...);
 int FUN_002b3c9c(...);
@@ -109,7 +109,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: requestDispatch. */
 /* Supplied declaration required: FUN_00290c28. */
 extern unsigned int tableOwnerGetEntry(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00290e04. */
+/* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: handlerTableCallWithValue. */
 /* Supplied declaration required: FUN_002b3538. */
 /* Supplied declaration required: FUN_002b3c9c. */
@@ -440,7 +440,7 @@ void FUN_00322984(fn_00322984_arg0 *param_1)
         temp_v31 = DAT_00647324;
         do {
           if (-1 < (int)pfVar8[4]) {
-            FUN_00290e04(temp_v2);
+            entryListSetPhase(temp_v2);
             FUN_00290c28(temp_v2,temp_v50);
             temp_v46 = (unsigned int *)&DAT_006472dc;
             DAT_00647338 = temp_v39;
@@ -536,7 +536,7 @@ void FUN_00322984(fn_00322984_arg0 *param_1)
         temp_v18 = 255.0f;
         do {
           if (-1 < (int)pfVar8[4]) {
-            FUN_00290e04(temp_v2);
+            entryListSetPhase(temp_v2);
             FUN_00290c28(temp_v2,temp_v50);
             *temp_v33 = temp_v54;
             temp_v33[1] = temp_v55;

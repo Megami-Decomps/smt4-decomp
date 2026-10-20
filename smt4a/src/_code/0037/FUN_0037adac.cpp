@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00188374(unsigned char **, int);
+int fileHandleClose(unsigned char **, int);
 int FUN_002e0c80(void);
-int FUN_00317c98(unsigned char **, int, unsigned int, unsigned int);
+int fileObjSeekRead(unsigned char **, int, unsigned int, unsigned int);
 int FUN_00317e50(void);
 int FUN_0032c9fc(void);
 int FUN_00341824(void);
@@ -26,7 +26,7 @@ typedef struct {
 extern unsigned char DAT_00557fcc; /* 0x557fcc */
 extern unsigned char DAT_005b40b4; /* 0x5b40b4 */
 
-/* Supplied declaration required: FUN_00188374. */
+/* Supplied declaration required: fileHandleClose. */
 extern unsigned char *FUN_002bee0c(unsigned char **);
 extern unsigned char *FUN_002befc0(void);
 extern unsigned char *FUN_002e09b4(unsigned char **, int, unsigned int);
@@ -34,7 +34,7 @@ extern unsigned char *FUN_002e0c48(unsigned char **);
 /* Supplied declaration required: FUN_002e0c80. */
 extern unsigned char *FUN_002e0fac(void);
 extern unsigned char *taggedOwnerRelease(unsigned char **);
-/* Supplied declaration required: FUN_00317c98. */
+/* Supplied declaration required: fileObjSeekRead. */
 extern unsigned char *FUN_00317d48(unsigned char **);
 /* Supplied declaration required: FUN_00317e50. */
 extern unsigned char *FUN_0032c900(unsigned char **, int, unsigned int);
@@ -159,7 +159,7 @@ unsigned int FUN_0037adac(int param_1,int param_2,unsigned int param_3,unsigned 
       }
     }
     else {
-      FUN_00317c98(&temp_v0,0,param_3,param_4);
+      fileObjSeekRead(&temp_v0,0,param_3,param_4);
     }
     if (-1 < (int)ppuVar3) {
       if (param_1 != 0) {
@@ -181,12 +181,12 @@ unsigned int FUN_0037adac(int param_1,int param_2,unsigned int param_3,unsigned 
         puVar5 = (unsigned char *)taggedOwnerRelease(&temp_v0);
       }
       if (-1 < (int)puVar5) {
-        FUN_00188374(&temp_v0,0);
+        fileHandleClose(&temp_v0,0);
         return 1;
       }
     }
   }
-  FUN_00188374(&temp_v0,0);
+  fileHandleClose(&temp_v0,0);
   return 0;
 }
 

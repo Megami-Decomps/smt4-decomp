@@ -4,7 +4,7 @@ extern "C" {
 
 extern Sub68Owner *g_naviMain;
 extern void FUN_00168980(void);
-extern void FUN_00493154(void);
+extern void texSetRelease(void);
 extern void campCommonBgRelease(void);
 extern void campButtonHelpRelease(void);
 extern u32 jobStop(u32 job, u16 arg);
@@ -15,7 +15,7 @@ extern void asdMemFree(void *ptr);
 void sub68OwnerDestroyAll(void)
 {
     FUN_00168980();
-    FUN_00493154();
+    texSetRelease();
     campCommonBgRelease();
     campButtonHelpRelease();
     if (g_naviMain != NULL) {

@@ -1,35 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001385f0` (_code @ 0x1385f0, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register choice only: retail zeroes the field through r1 (mov r1, #0; ldr r0, [r4]), built through r0/r1 swapped */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0014192c(int);
-int FUN_00144ab4(void);
-int FUN_00157558(int);
-int FUN_001575cc(int);
-int FUN_0017dd80(void);
+typedef struct RenderCtx {
+    /* 0x000 */ u8 unk000[0x52C];
+    /* 0x52C */ u32 unk52C;
+} RenderCtx;
 
-extern int g_renderCtx; /* 0x59dbb4 */
+extern RenderCtx *g_renderCtx;
 
-/* Supplied declaration required: FUN_0014192c. */
-/* Supplied declaration required: FUN_00144ab4. */
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_001575cc. */
-/* Supplied declaration required: FUN_0017dd80. */
+extern void FUN_00144ab4(void);
+extern void FUN_0017dd80(void);
+extern void FUN_0014192c(s32 a, s32 b);
+extern void FUN_001575cc(RenderCtx *ctx);
+extern void FUN_00157558(RenderCtx *ctx);
 
-
-unsigned int FUN_001385f0(void)
-
+s32 FUN_001385f0(void)
 {
-/* irregular: 5 native warning(s); review required */
-  FUN_00144ab4();
-  *(unsigned int *)(g_renderCtx + 0x52c) = 0;
-  FUN_0017dd80();
-  FUN_0014192c(0);
-  FUN_001575cc(g_renderCtx);
-  FUN_00157558(g_renderCtx);
-  return 0;
+    FUN_00144ab4();
+    g_renderCtx->unk52C = 0;
+    FUN_0017dd80();
+    FUN_0014192c(0, 0);
+    FUN_001575cc(g_renderCtx);
+    FUN_00157558(g_renderCtx);
+    return 0;
 }
 
 } /* extern "C" */

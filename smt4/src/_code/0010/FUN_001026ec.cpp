@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002c5030(int);
 int asdGxCommandListEnd(unsigned int, int);
 
-extern signed char DAT_00446db0; /* 0x446db0 */
+extern signed char g_titleFlags; /* 0x446db0 */
 extern signed char DAT_00446db1; /* 0x446db1 */
 extern unsigned int DAT_00446dbc; /* 0x446dbc */
 
@@ -22,7 +22,7 @@ unsigned int FUN_001026ec(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  if (((DAT_00446db0 == '\0') && (temp_v0 = FUN_002c5210(), temp_v0 == 1)) && (DAT_00446db1 != '\0')) {
+  if (((g_titleFlags == '\0') && (temp_v0 = FUN_002c5210(), temp_v0 == 1)) && (DAT_00446db1 != '\0')) {
     asdGxCommandListEnd(DAT_00446dbc,1);
   }
   FUN_002c5030(0x400);

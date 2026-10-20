@@ -8,10 +8,10 @@ int FUN_00157558(int);
 int FUN_00162790(...);
 int FUN_00164168(...);
 int renderCtxResetColorScale(...);
-int FUN_0016c560(...);
+int skinObjectUpdateMatrices(...);
 int FUN_001835b4(int, int, int, unsigned int, unsigned int, int);
 int FUN_0020bd54(void);
-int FUN_0025c848(...);
+int fadeObjectResetIfActive(...);
 int FUN_002acfc8(...);
 int VectorSignedToFloat(...);
 
@@ -33,11 +33,11 @@ extern unsigned int vec2GetXInt(int);
 extern unsigned int vec2GetYInt(int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0020bd54. */
-/* Supplied declaration required: FUN_0025c848. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: FUN_002acfc8. */
 
 
@@ -76,10 +76,10 @@ unsigned char FUN_002e169c(void)
     if (((temp_v3 < 2) || (temp_v3 == 2 || temp_v3 == 3)) &&
        (FUN_0020bd54(), *(char *)(temp_v1 + 0x5e1) != '\0')) {
       if (*(char *)(temp_v1 + 0x5e4) != '\x01') {
-        FUN_0025c848();
-        FUN_0025c848(temp_v1 + 0x494);
-        FUN_0025c848(temp_v1 + 0x520);
-        FUN_0025c848(temp_v1 + 0x408);
+        fadeObjectResetIfActive();
+        fadeObjectResetIfActive(temp_v1 + 0x494);
+        fadeObjectResetIfActive(temp_v1 + 0x520);
+        fadeObjectResetIfActive(temp_v1 + 0x408);
       }
       else {
         temp_v5 = vec2GetXInt(temp_v1 + 0x37c);
@@ -132,7 +132,7 @@ unsigned char FUN_002e169c(void)
       (**(romwright_code **)(temp_v1 + 0x1274))();
       *(unsigned char *)(temp_v1 + 0x1270) = 0;
     }
-    FUN_0016c560(g_renderCtx);
+    skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
   }
   return 0;

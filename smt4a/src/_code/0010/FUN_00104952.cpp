@@ -23,7 +23,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_0010cdce. */
 /* Supplied declaration required: FUN_002e6e34. */
-extern int FUN_002e6e5c(unsigned char *);
+extern int _ZN9Obj55b28cD1Ev(unsigned char *);
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002ea734. */
 extern int wordRefsDiffer_002ea764(int *, int *);
@@ -80,7 +80,7 @@ int FUN_00104952(int *param_1)
         FUN_002ea734(&temp_v9);
       }
       (**(romwright_code **)(*param_1 + 0x58))(param_1);
-      temp_v1 = FUN_002e6e5c(temp_v8);
+      temp_v1 = _ZN9Obj55b28cD1Ev(temp_v8);
     }
   }
   return temp_v1;

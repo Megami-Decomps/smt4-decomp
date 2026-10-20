@@ -20,7 +20,7 @@ int FUN_003f1244(void);
 int FUN_004a92b8(void);
 int FUN_004abfd0(...);
 int FUN_004c1114(int, int);
-int FUN_004c3c84(...);
+int btlSlotSetStoreValue(...);
 int FUN_004c571c(...);
 int FUN_004c8ee0(...);
 int FUN_004c9160(...);
@@ -108,7 +108,7 @@ extern int FUN_004abac8(int);
 /* Supplied declaration required: FUN_004abfd0. */
 extern int FUN_004abfec(int);
 /* Supplied declaration required: FUN_004c1114. */
-/* Supplied declaration required: FUN_004c3c84. */
+/* Supplied declaration required: btlSlotSetStoreValue. */
 extern unsigned int FUN_004c53fc(unsigned int);
 /* Supplied declaration required: FUN_004c571c. */
 /* Supplied declaration required: FUN_004c8ee0. */
@@ -370,7 +370,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
       }
       else {
         temp_v15 = FUN_004c53fc(0x1b);
-        FUN_004c3c84(temp_v19,0x1b,temp_v15);
+        btlSlotSetStoreValue(temp_v19,0x1b,temp_v15);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x40) != 0) {
         if ((DAT_00571264 & *(unsigned int *)(*param_1 + 0x45a4)) != 0 ||
@@ -380,7 +380,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
       }
       else {
         temp_v15 = FUN_004c53fc(0x1c);
-        FUN_004c3c84(temp_v19,0x1c,temp_v15);
+        btlSlotSetStoreValue(temp_v19,0x1c,temp_v15);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x100) != 0) {
         if ((*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571260) != 0 ||
@@ -390,7 +390,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
       }
       else {
         temp_v15 = FUN_004c53fc(0x1d);
-        FUN_004c3c84(temp_v19,0x1d,temp_v15);
+        btlSlotSetStoreValue(temp_v19,0x1d,temp_v15);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 8) != 0) {
         if ((*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) != 0 ||
@@ -400,7 +400,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
       }
       else {
         temp_v15 = FUN_004c53fc(0x1e);
-        FUN_004c3c84(temp_v19,0x1e,temp_v15);
+        btlSlotSetStoreValue(temp_v19,0x1e,temp_v15);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x800) != 0) {
         if ((DAT_00571264 & *(unsigned int *)(*param_1 + 0x45a4)) != 0 ||
@@ -410,11 +410,11 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
       }
       else {
         temp_v15 = FUN_004c53fc(0x1f);
-        FUN_004c3c84(temp_v19,0x1f,temp_v15);
+        btlSlotSetStoreValue(temp_v19,0x1f,temp_v15);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x1000) == 0) {
         temp_v15 = FUN_004c53fc(0x20);
-        FUN_004c3c84(temp_v19,0x20,temp_v15);
+        btlSlotSetStoreValue(temp_v19,0x20,temp_v15);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x2000) != 0) {
         if ((DAT_00571260 & *(unsigned int *)(*param_1 + 0x45a0)) != 0 ||
@@ -424,7 +424,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
       }
       else {
         temp_v15 = FUN_004c53fc(0x21);
-        FUN_004c3c84(temp_v19,0x21,temp_v15);
+        btlSlotSetStoreValue(temp_v19,0x21,temp_v15);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & ~temp_v24 & 0x19c0) != 0) {
         *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 5;

@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_00192550(void);
 int FUN_00192608(void);
-int FUN_00480d20(void);
+int aocRecordLookup84(void);
 
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_00192608. */
 extern unsigned int FUN_0019271c(unsigned int);
-/* Supplied declaration required: FUN_00480d20. */
+/* Supplied declaration required: aocRecordLookup84. */
 
 
 int FUN_0049cc10(unsigned short *param_1)
@@ -59,7 +59,7 @@ int FUN_0049cc10(unsigned short *param_1)
     }
     break;
   case 10:
-    FUN_00480d20();
+    aocRecordLookup84();
     if (temp_v2 != 0) {
       temp_v1 = *(int *)(temp_v2 + 0x2c);
       if ((param_1[1] & 2) != 0) {

@@ -10,7 +10,7 @@ int FUN_004ff364(...);
 int __aeabi_uidivmod(...);
 
 int FUN_001517b4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int eventQueueAddUnique(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
@@ -32,7 +32,7 @@ int dataTable00FindById(void);
 int gameStateChange(...);
 int FUN_00240170(void);
 int FUN_002a6fb8(int);
-int FUN_002adc20(void);
+int aocDataBlockResolveEntries(void);
 int FUN_0031416c(...);
 int FUN_00316580(...);
 int FUN_00371c3c(int, int);
@@ -73,7 +73,7 @@ extern int DAT_00588fd4; /* 0x588fd4 */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00163aa4. */
 extern int FUN_00163fd4(unsigned int);
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int lmapMainIsRunning(void);
 extern unsigned int vec2GetXInt(int);
 extern int padButtonIsPressed(unsigned int);
@@ -84,7 +84,7 @@ extern int padButtonIsPressed(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: dataTable00FindById. */
-extern unsigned int FUN_0019e130(unsigned int);
+extern unsigned int markerKindGetColor(unsigned int);
 extern unsigned int dataTableFileGetTable(int, unsigned int);
 /* Supplied declaration required: gameStateChange. */
 /* Supplied declaration required: FUN_0021af2c. */
@@ -92,7 +92,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_00240170. */
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_002a6fb8. */
-/* Supplied declaration required: FUN_002adc20. */
+/* Supplied declaration required: aocDataBlockResolveEntries. */
 extern int FUN_002c7ca0(void);
 extern int FUN_002c7cb4(void);
 /* Supplied declaration required: statusCameraApply. */
@@ -118,7 +118,7 @@ extern int FUN_0039c1f4(void);
 extern int fourPtrsAllNull(unsigned int);
 /* Supplied declaration required: linkHolderClearFlag. */
 /* Supplied declaration required: FUN_003e5c68. */
-extern unsigned int FUN_003e5d10(void);
+extern unsigned int _ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: aocHandleButtons. */
 /* Supplied declaration required: FUN_003fce08. */
 extern int nkdwLoaderParse(unsigned int);
@@ -178,7 +178,7 @@ unsigned int FUN_00208c08(void)
   }
   switch(*(unsigned int *)(temp_v2 + 0x1368)) {
   case 1:
-    temp_v3 = FUN_002adc20();
+    temp_v3 = aocDataBlockResolveEntries();
     if (temp_v3 != 0) {
       temp_v4 = 2;
       gameStateChange(temp_v4);
@@ -325,7 +325,7 @@ unsigned int FUN_00208c08(void)
         asdOperatorNew();
         puVar6 = (unsigned int *)0x0;
         if (temp_v3 != 0) {
-          puVar6 = (unsigned int *)FUN_003e5d10();
+          puVar6 = (unsigned int *)_ZN9Obj557ae8C1Ev();
           *puVar6 = (unsigned int)&DAT_00557c60;
         }
         *(unsigned int **)(temp_v2 + 0x2034) = puVar6;
@@ -430,7 +430,7 @@ LAB_002093e4:
           uiSpriteSetKeyframe(temp_v2 + 0x418,1,0);
           *(unsigned char *)(temp_v2 + 0x1382) = 0;
         }
-        temp_v14 = FUN_002adc20();
+        temp_v14 = aocDataBlockResolveEntries();
         temp_v7 = DAT_00588fd4;
         temp_v3 = (int)((unsigned long long)temp_v14 >> 0x20);
         if ((int)temp_v14 != 0) {
@@ -583,7 +583,7 @@ LAB_002097e0:
       if (temp_v7 != 0) {
         temp_v4 = 0x100020d;
 LAB_00209b8c:
-        FUN_001641b4(temp_v4);
+        eventQueueAddUniqueIfValid(temp_v4);
       }
       else {
         temp_v7 = padButtonIsPressed(2);
@@ -687,7 +687,7 @@ LAB_00209b8c:
                 *(unsigned int *)(temp_v2 + 0x1374) = 0;
                 FUN_0021af2c();
                 temp_v4 = 0x100020f;
-                FUN_001641b4(temp_v4);
+                eventQueueAddUniqueIfValid(temp_v4);
               }
               goto LAB_00209dc4;
             }
@@ -699,7 +699,7 @@ LAB_00209b8c:
               *(unsigned char *)(temp_v2 + 0x1380) = *(char *)(temp_v2 + 0x1380) != '\x01';
               uiSpriteSetKeyframe(temp_v2 + 0x648,7,0);
               temp_v4 = 0x100020e;
-              FUN_001641b4(temp_v4);
+              eventQueueAddUniqueIfValid(temp_v4);
             }
           }
         }
@@ -709,7 +709,7 @@ LAB_00209dc4:
     temp_v3 = DAT_00588fd4;
     if (*(char *)(temp_v2 + 0x2024) != '\0') {
       if ((*(unsigned short *)(temp_v2 + 0x13ac) & 2) != 0) {
-        temp_v4 = FUN_0019e130(1);
+        temp_v4 = markerKindGetColor(1);
         temp_v3 = DAT_00588fd4;
         if (((DAT_00588fd4 != 0) && (*(char *)(DAT_00588fd4 + 0x2017) != '\x0e')) &&
            (((*(char *)(DAT_00588fd4 + 0x2017) != '\a' ||
@@ -727,7 +727,7 @@ LAB_00209dc4:
     }
     break;
   case 0xb:
-    temp_v3 = FUN_002adc20();
+    temp_v3 = aocDataBlockResolveEntries();
     if (temp_v3 != 0) {
       temp_v4 = 4;
       gameStateChange(temp_v4);

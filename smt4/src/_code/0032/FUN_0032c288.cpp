@@ -15,8 +15,8 @@ typedef struct {
 extern int FUN_001d1cb8(...); /* 0x1d1cb8 */
 extern int entryCompareByDataValue(...); /* 0x1f628c */
 extern int FUN_00206d9c(...); /* 0x206d9c */
-extern int FUN_00206e20(...); /* 0x206e20 */
-extern int FUN_002c6dbc(...); /* 0x2c6dbc */
+extern int devilCompareNonEmptyFirstB(...); /* 0x206e20 */
+extern int devilCompareNonEmptyFirst(...); /* 0x2c6dbc */
 extern int entryCompareByDataValueB(...); /* 0x2dcb00 */
 extern int FUN_002e45f8(...); /* 0x2e45f8 */
 extern int FUN_002e467c(...); /* 0x2e467c */
@@ -43,7 +43,7 @@ void FUN_0032c288(void)
       FUN_002b7bca(temp_v0 + 0xe30,(int)*(short *)(temp_v0 + 0x2230),4,FUN_002e467c);
     }
     else {
-      FUN_002b7bca(temp_v0 + 0xe30,(int)*(short *)(temp_v0 + 0x2230),4,FUN_00206e20);
+      FUN_002b7bca(temp_v0 + 0xe30,(int)*(short *)(temp_v0 + 0x2230),4,devilCompareNonEmptyFirstB);
     }
   }
   if ((*pbVar3 & 0x7f) == 8) {
@@ -56,7 +56,7 @@ void FUN_0032c288(void)
   }
   if ((*pbVar3 & 0x7f) == 2) {
     if ((char)*pbVar3 < '\0') {
-      FUN_002b7bca(temp_v0 + 0xe30,(int)*(short *)(temp_v0 + 0x2230),4,FUN_002c6dbc);
+      FUN_002b7bca(temp_v0 + 0xe30,(int)*(short *)(temp_v0 + 0x2230),4,devilCompareNonEmptyFirst);
     }
     else {
       FUN_002b7bca(temp_v0 + 0xe30,(int)*(short *)(temp_v0 + 0x2230),4,FUN_001d1cb8);

@@ -1,43 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00238ff0` (_code @ 0x238ff0, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies position -> previous with ldm/stm through a pointer (add r2, r4, #16) and writes the target and previous blocks as stm of 3 and 2 words; this build uses ldrd/strd and separate stores */
+#include "common.h"
 
 extern "C" {
 
-int scrGetArg(int);
+typedef struct IVec2 {
+    s32 x;
+    s32 y;
+} IVec2;
 
-extern int jobGetWork(void);
-/* Supplied declaration required: scrGetArg. */
+typedef struct IVec3 {
+    s32 x;
+    s32 y;
+    s32 z;
+} IVec3;
 
+typedef struct Window {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ IVec2 position;
+    /* 0x18 */ u8 unk18[0x58];
+    /* 0x70 */ IVec2 previous;
+    /* 0x78 */ IVec3 target;
+    /* 0x84 */ s32 immediate;
+} Window;
 
-unsigned int FUN_00238ff0(void)
+extern s32 scrGetArg(s32 index);
+extern Window *jobGetWork(void);
 
+/* Script command: gives the job's window a new target position (arguments 1 and 2, offset to its corner); when argument 3 is 0 it moves there at once. Returns 1. */
+u32 FUN_00238ff0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  scrGetArg(0);
-  temp_v0 = jobGetWork();
-  if (temp_v0 != 0) {
-    temp_v1 = scrGetArg(1);
-    temp_v2 = scrGetArg(2);
-    temp_v3 = scrGetArg(3);
-    *(int *)(temp_v0 + 0x84) = temp_v3;
-    *(int *)(temp_v0 + 0x78) = temp_v1 - 0x38;
-    *(int *)(temp_v0 + 0x7c) = temp_v2 - 8;
-    *(unsigned int *)(temp_v0 + 0x80) = 0;
-    *(unsigned int *)(temp_v0 + 0x70) = *(unsigned int *)(temp_v0 + 0x10);
-    *(unsigned int *)(temp_v0 + 0x74) = *(unsigned int *)(temp_v0 + 0x14);
-    if (temp_v3 == 0) {
-      *(int *)(temp_v0 + 0x10) = temp_v1 - 0x38;
-      *(int *)(temp_v0 + 0x14) = temp_v2 - 0x38;
-      return 1;
+    Window *window;
+
+    scrGetArg(0);
+    window = jobGetWork();
+    if (window != NULL) {
+        s32 x = scrGetArg(1);
+        s32 y = scrGetArg(2);
+        s32 immediate = scrGetArg(3);
+
+        window->immediate = immediate;
+        window->target.x = x - 0x38;
+        window->target.y = y - 8;
+        window->target.z = 0;
+        window->previous = window->position;
+        if (immediate == 0) {
+            window->position.x = x - 0x38;
+            window->position.y = y - 0x38;
+            return 1;
+        }
     }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

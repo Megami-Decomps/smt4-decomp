@@ -13,7 +13,7 @@ int FUN_003f0e20(...);
 int FUN_004bf6e0(...);
 int FUN_004bf9a0(...);
 int FUN_004c0f74(unsigned int *, unsigned int);
-int FUN_004c3ac0(unsigned int, unsigned int [7]);
+int kindIdStore(unsigned int, unsigned int [7]);
 int FUN_004c60c0(...);
 int FUN_004c8340(...);
 int VectorSignedToFloat(int, int);
@@ -70,7 +70,7 @@ extern int FUN_0028cb6c(void);
 /* Supplied declaration required: FUN_004bf6e0. */
 /* Supplied declaration required: FUN_004bf9a0. */
 /* Supplied declaration required: FUN_004c0f74. */
-/* Supplied declaration required: FUN_004c3ac0. */
+/* Supplied declaration required: kindIdStore. */
 /* Supplied declaration required: FUN_004c60c0. */
 /* Supplied declaration required: FUN_004c8340. */
 extern int FUN_004c8754(short);
@@ -259,7 +259,7 @@ LAB_004c4810:
         }
         temp_v2 = temp_v38;
         FUN_004c8340(temp_v38,param_5,temp_v23[0],temp_v7,0xffffffff);
-        FUN_004c3ac0(temp_v23[0],temp_v36);
+        kindIdStore(temp_v23[0],temp_v36);
         puVar8 = puVar4;
         FUN_004c0f74(puVar4,temp_v36[0] & 0xff);
         if (puVar8 != (unsigned int *)0x0) {

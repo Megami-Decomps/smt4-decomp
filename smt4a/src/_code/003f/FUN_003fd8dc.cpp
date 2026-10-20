@@ -1,27 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fd8dc` (_code @ 0x3fd8dc, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003fe298(int, unsigned int, unsigned int);
+typedef struct Element {
+    /* 0x000 */ u8 unk000[0x158];
+} Element; /* 0x158 */
 
-/* Supplied declaration required: FUN_003fe298. */
+typedef struct ElementList {
+    /* 0x000 */ u8 unk000[0x10C];
+    /* 0x10C */ Element *elements;
+    /* 0x110 */ s32 count;
+} ElementList;
 
+void FUN_003fe298(Element *element, u32 arg0, u32 arg1);
 
-void FUN_003fd8dc(int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Calls FUN_003fe298 on every element of the list. */
+void FUN_003fd8dc(ElementList *list, u32 arg0, u32 arg1)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 0x10c);
-  temp_v1 = temp_v0 + *(int *)(param_1 + 0x110) * 0x158;
-  for (; temp_v0 != temp_v1; temp_v0 = temp_v0 + 0x158) {
-    FUN_003fe298(temp_v0,param_2,param_3);
-  }
-  return;
+    Element *element = list->elements;
+    Element *end = element + list->count;
+
+    for (; element != end; element++) {
+        FUN_003fe298(element, arg0, arg1);
+    }
 }
 
 } /* extern "C" */

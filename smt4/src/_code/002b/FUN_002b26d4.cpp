@@ -1,58 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b26d4` (_code @ 0x2b26d4, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation: retail keeps the node in r4 and a second copy of the next pointer in r5/r0; built keeps next in r4 and the node in r5 (one move fewer). */
+#include "shard/W4_W4Match2_IndexedList.h"
 
 extern "C" {
 
-int asdMemFree(int);
+extern void asdMemFree(void *block);
 
-typedef int romwright_code(...);
-/* Supplied declaration required: asdMemFree. */
-
-
-int FUN_002b26d4(int *param_1,int param_2)
-
+/* Unlinks `node` from `list`, renumbers the rest, runs the node's destroy callback and frees it;
+ * returns the node that followed it. */
+IndexedNode *FUN_002b26d4(IndexedList *list, IndexedNode *node)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  
-  temp_v0 = *(int *)(param_2 + 0x18);
-  if (param_1 != (int *)0x0 && param_2 != 0) {
-    temp_v1 = *(int *)(param_2 + 0x14);
-    if (temp_v1 == 0 && temp_v0 == 0) {
-      *param_1 = 0;
-      param_1[1] = 0;
+    IndexedNode *next = node->next;
+
+    if (list != NULL && node != NULL) {
+        IndexedNode *prev = node->prev;
+        IndexedNode *walk;
+        s32 index;
+
+        if (prev == NULL && next == NULL) {
+            list->head = NULL;
+            list->tail = NULL;
+        } else {
+            if (prev != NULL) {
+                prev->next = next;
+            } else {
+                next->prev = NULL;
+                list->head = next;
+            }
+            if (next != NULL) {
+                next->prev = prev;
+            } else {
+                prev->next = NULL;
+                list->tail = prev;
+            }
+        }
+        index = 0;
+        for (walk = list->head; walk != NULL; walk = walk->next) {
+            walk->index = index;
+            index++;
+        }
+        list->count = index;
     }
-    else {
-      if (temp_v1 != 0) {
-        *(int *)(temp_v1 + 0x18) = temp_v0;
-      }
-      else {
-        *(unsigned int *)(temp_v0 + 0x14) = 0;
-        *param_1 = temp_v0;
-      }
-      if (temp_v0 != 0) {
-        *(int *)(temp_v0 + 0x14) = temp_v1;
-      }
-      else {
-        *(unsigned int *)(temp_v1 + 0x18) = 0;
-        param_1[1] = temp_v1;
-      }
+    if (node->destroy != NULL) {
+        node->destroy(node->payload);
     }
-    temp_v1 = 0;
-    for (piVar2 = (int *)*param_1; piVar2 != (int *)0x0; piVar2 = (int *)piVar2[6]) {
-      *piVar2 = temp_v1;
-      temp_v1 = temp_v1 + 1;
-    }
-    param_1[2] = temp_v1;
-  }
-  if (*(romwright_code **)(param_2 + 0x10) != (romwright_code *)0x0) {
-    (**(romwright_code **)(param_2 + 0x10))(*(unsigned int *)(param_2 + 8));
-  }
-  asdMemFree(param_2);
-  return temp_v0;
+    asdMemFree(node);
+    return next;
 }
 
 } /* extern "C" */

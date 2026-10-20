@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_002e6e34(int *, int);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int FUN_002fbac6(int, unsigned int);
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002fbac6. */
 
 
@@ -26,7 +26,7 @@ void FUN_0030fe84(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   uStack_10 = param_4;
   FUN_002e6e34(&uStack_18,param_1 + 4);
   FUN_002fbac6(param_1 + 0x34,param_2);
-  FUN_002e6e5c(&uStack_18);
+  _ZN9Obj55b28cD1Ev(&uStack_18);
   return;
 }
 

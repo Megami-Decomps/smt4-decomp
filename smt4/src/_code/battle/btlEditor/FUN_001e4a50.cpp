@@ -36,7 +36,7 @@ extern unsigned int *DAT_00435ce8; /* 0x435ce8 */
 /* Supplied declaration required: FUN_00227200. */
 extern unsigned int *asdListBoxGetItemText(unsigned int, unsigned int);
 extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
-extern unsigned int FUN_00240448(int);
+extern unsigned int btlPosArrangeGetFilePath(int);
 /* Supplied declaration required: FUN_0025628c. */
 /* Supplied declaration required: asdLoadFileSetUseRawPaths. */
 extern unsigned int asdLoadFileGetUseRawPaths(void);
@@ -221,7 +221,7 @@ code_r0x003d9140:
     break;
   case 6:
     memClear(temp_v7,0x80);
-    temp_v2 = FUN_00240448(temp_v1);
+    temp_v2 = btlPosArrangeGetFilePath(temp_v1);
     libc_strcpy(temp_v7,temp_v2);
     temp_v2 = asdLoadFileGetUseRawPaths();
     asdLoadFileSetUseRawPaths(1);

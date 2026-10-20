@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: asdListBoxSetItemMode3. */
 /* Supplied declaration required: asdListBoxSetItemMode2. */
-extern int FUN_0022a444(unsigned int, unsigned int);
+extern int listBoxItemHasOwner(unsigned int, unsigned int);
 extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0024571c. */
 extern unsigned int FUN_00245768(unsigned short);
@@ -158,7 +158,7 @@ void FUN_003c4ac4(int param_1,unsigned int param_2)
     break;
   case 10:
     if (puVar2 != (unsigned int *)0x0) {
-      temp_v1 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10),temp_v0);
+      temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
       if (temp_v1 != 0) {
         temp_v2 = *puVar2 | 0x1000;
       }
@@ -171,7 +171,7 @@ void FUN_003c4ac4(int param_1,unsigned int param_2)
     break;
   case 0xb:
     if (puVar2 != (unsigned int *)0x0) {
-      temp_v1 = FUN_0022a444(*(unsigned int *)(param_1 + 0x10),temp_v0);
+      temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
       if (temp_v1 != 0) {
         temp_v2 = *puVar2 | 0x4000000;
       }

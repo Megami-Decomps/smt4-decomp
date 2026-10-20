@@ -89,7 +89,7 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002f7730. */
 /* Supplied declaration required: FUN_0037ce80. */
 extern int FUN_003de75c(unsigned int);
-extern int FUN_003de830(unsigned int);
+extern int recordIsAvailable(unsigned int);
 extern unsigned int aocGetEntryData(unsigned short);
 extern int FUN_003df004(unsigned int, int, unsigned char **);
 extern int partyEntryFlagsBit3(unsigned int);
@@ -513,7 +513,7 @@ LAB_00218d20:
     } while (temp_v12 < 4);
     if (*(char *)(temp_v29 + 6) == '\0') {
       temp_v12 = idIsAtLeast350(temp_v25);
-      if ((temp_v12 != 0) && (temp_v12 = FUN_003de830(temp_v25), temp_v12 == 0)) {
+      if ((temp_v12 != 0) && (temp_v12 = recordIsAvailable(temp_v25), temp_v12 == 0)) {
         temp_v34 = 0;
       }
       if ((*(char *)(temp_v29 + 6) == '\0') && (temp_v34 != 0)) {

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bcc60(...);
-int FUN_002bcd44(...);
+int resultReportIfFailed(...);
 int memAlloc(...);
 int nn_os_CriticalSection_Initialize(...);
 int FUN_002c526c(...);
@@ -28,7 +28,7 @@ extern unsigned char LAB_003f6fe8; /* 0x3f6fe8 */
 
 extern unsigned int asdCecInboxGetMessageCount(void);
 /* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002bcd44. */
+/* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: FUN_002c526c. */
@@ -55,7 +55,7 @@ void FUN_002e1a00(int param_1)
   temp_v0 = 0x100;
   memAlloc(0x100,0x100,0,0x1000,0x1000,1);
   *(unsigned int *)(param_1 + 0x44c) = temp_v0;
-  FUN_002bcd44(param_1 + 0x434,temp_v0,0x1000);
+  resultReportIfFailed(param_1 + 0x434,temp_v0,0x1000);
   temp_v2 = 4;
   temp_v3 = &LAB_003f6e94;
   temp_v4 = &LAB_003f6fe8;

@@ -1,25 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e407c` (_code @ 0x2e407c, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only: retail loads the button-help preset constant 0xDD between the flag-word address and its ldr/orr/str. */
+#include "common.h"
 
 extern "C" {
 
-int buttonHelpSetPreset(int);
+typedef struct BtlState {
+    /* 0x0000 */ u8 unk0000[0x44A0];
+    /* 0x44A0 */ u32 flags;
+} BtlState;
 
-extern int btlGetMainState(void);
-/* Supplied declaration required: buttonHelpSetPreset. */
+extern BtlState *btlGetMainState(void);
+extern void buttonHelpSetPreset(s32 preset);
 
-
-unsigned int FUN_002e407c(void)
-
+/* Script command: sets battle flag 0x100000 and shows button help preset 0xDD; returns 1. */
+s32 FUN_002e407c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = btlGetMainState();
-  *(unsigned int *)(temp_v0 + 0x44a0) = *(unsigned int *)(temp_v0 + 0x44a0) | 0x100000;
-  buttonHelpSetPreset(0xdd);
-  return 1;
+    BtlState *state = btlGetMainState();
+
+    state->flags |= 0x100000;
+    buttonHelpSetPreset(0xDD);
+    return 1;
 }
 
 } /* extern "C" */

@@ -51,7 +51,7 @@ extern unsigned int FUN_002c2c4c(int);
 extern unsigned int FUN_002e26c4(unsigned int);
 extern int region9100IsClear(void);
 /* Supplied declaration required: FUN_0032ef5c. */
-extern int FUN_0035dde8(void);
+extern int uniteIsPhase26Active(void);
 extern unsigned int FUN_003da8f4(int, unsigned int);
 
 
@@ -93,7 +93,7 @@ void FUN_00217f14(void)
        ((temp_v1 = FUN_0020a2fc(), temp_v1 == 0 &&
         ((temp_v1 = gameFlagIsSet(0x453), temp_v1 != 0 && (temp_v1 = gameFlagIsSet(0x425), temp_v1 == 0))))))
       || ((temp_v1 = FUN_0020a2fc(), temp_v1 == 0 && (temp_v1 = region9100IsClear(), temp_v1 == 0)))) ||
-     ((temp_v1 = FUN_0035dde8(), temp_v1 != 0 ||
+     ((temp_v1 = uniteIsPhase26Active(), temp_v1 != 0 ||
       ((((temp_v1 = FUN_0020a2fc(), temp_v1 == 0 && (temp_v1 = gameFlagIsSet(0x459), temp_v1 == 0)) &&
         (temp_v1 = FUN_002ab790(), temp_v1 == 0x19)) && (temp_v1 = FUN_0023c068(), temp_v1 == 0)))))) {
     temp_v20 = 1;

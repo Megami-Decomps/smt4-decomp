@@ -1,14 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `resourceIsReady` (_code @ 0x23e378, 0x10 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Resource {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 flags;      /* bit 2: loaded */
+} Resource;
 
-unsigned char resourceIsReady(int param_1)
-
+/* Whether the resource has finished loading. */
+u8 resourceIsReady(Resource *resource)
 {
-  return (*(unsigned int *)(param_1 + 0x10) & 4) != 0;
+    if ((resource->flags & 4) != 0) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

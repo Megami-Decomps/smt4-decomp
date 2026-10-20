@@ -55,7 +55,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_0029e874. */
 /* Supplied declaration required: FUN_0029e8b8. */
-extern unsigned int FUN_0029e908(void);
+extern unsigned int objectPartRunUnlessLocked(void);
 /* Supplied declaration required: FUN_0029eb5c. */
 extern unsigned int FUN_0029efa8(int);
 /* Supplied declaration required: gameGetUnitRecord. */
@@ -503,7 +503,7 @@ LAB_0028ad80:
 LAB_0028b264:
     if (*(char *)(temp_v0 + 0x42) != '\0') {
       temp_v3 = temp_v0 + 0xa6c;
-      temp_v7 = FUN_0029e908();
+      temp_v7 = objectPartRunUnlessLocked();
       temp_v8 = FUN_0029efa8(temp_v3);
       temp_v2 = 0;
       FUN_001a7d48(0,temp_v7,temp_v8,*(unsigned int *)(temp_v0 + 0x2c));
@@ -569,7 +569,7 @@ LAB_0028b308:
     }
     else {
       temp_v3 = temp_v0 + 0xa08;
-      temp_v7 = FUN_0029e908();
+      temp_v7 = objectPartRunUnlessLocked();
       temp_v8 = FUN_0029efa8(temp_v3);
       temp_v2 = 0;
       FUN_001a7d48(0,temp_v7,temp_v8,*(unsigned int *)(temp_v0 + 0x2c));

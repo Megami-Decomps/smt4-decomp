@@ -12,8 +12,8 @@ int scrScriptProcessDestroy(void);
 int FUN_002c40f8(unsigned char *, int *, int, int, int, int);
 int asdMemFree(void);
 int FUN_002c526c(void);
-int FUN_002c56dc(int);
-int FUN_002c5728(int);
+int gameDataFlagsClear(int);
+int gameDataFlagsClearAndRefresh(int);
 int FUN_002c5758(int);
 int FUN_002e2f14(unsigned char *);
 int FUN_00309a60(unsigned int, int, int, int, int, int);
@@ -39,8 +39,8 @@ extern unsigned int FUN_001c0954(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_002c56dc. */
-/* Supplied declaration required: FUN_002c5728. */
+/* Supplied declaration required: gameDataFlagsClear. */
+/* Supplied declaration required: gameDataFlagsClearAndRefresh. */
 /* Supplied declaration required: FUN_002c5758. */
 /* Supplied declaration required: FUN_002e2f14. */
 /* Supplied declaration required: FUN_00309a60. */
@@ -104,8 +104,8 @@ unsigned int FUN_001a1d08(unsigned int param_1,int param_2)
     if (DAT_0043e311 == '\0') {
       if (DAT_0043e31c != -1) {
         FUN_002c5758(1);
-        FUN_002c5728(1);
-        FUN_002c56dc(1);
+        gameDataFlagsClearAndRefresh(1);
+        gameDataFlagsClear(1);
         *(unsigned int *)(puVar1 + 0xc) = 10;
         scrScriptProcessStartEntry(*(unsigned int *)(puVar1 + 0x58),DAT_0043e31c);
         *(int *)(puVar1 + 0x10) = *(int *)(puVar1 + 0x10) + 1;

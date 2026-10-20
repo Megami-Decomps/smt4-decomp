@@ -9,7 +9,7 @@ int FUN_0020b908(int, int);
 int FUN_0022e774(void);
 int FUN_0023c08c(int);
 int FUN_002a7b74(void);
-int FUN_0035dd74(void);
+int contentEntryFindById(void);
 int FUN_003857b4(int);
 int soundChannelRequestIfEnabled(unsigned int, int, int);
 int linkHolderClearFlag(int);
@@ -31,7 +31,7 @@ extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_0023c08c. */
 extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_002a7b74. */
-/* Supplied declaration required: FUN_0035dd74. */
+/* Supplied declaration required: contentEntryFindById. */
 extern int lmapSceneGetScript(void);
 /* Supplied declaration required: FUN_003857b4. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
@@ -77,7 +77,7 @@ void FUN_003b0940(void)
   if (*(short *)(puVar1 + 0x23de) != 0) {
     do {
       temp_v3 = (unsigned int)*(unsigned short *)((int)puVar1 + temp_v0 * 2 + 0x8f7c);
-      FUN_0035dd74();
+      contentEntryFindById();
       temp_v1 = temp_v0 + 1;
       *(unsigned short *)((int)puVar1 + temp_v0 * 2 + 0x62a0) = *(unsigned short *)(temp_v3 + 0x1a);
       *piVar6 = *piVar6 + 1;

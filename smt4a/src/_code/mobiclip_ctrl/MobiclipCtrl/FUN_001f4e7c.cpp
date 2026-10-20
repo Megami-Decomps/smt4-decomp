@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00159110(...);
+int heapOwnerCreate(...);
 int asdMemoryAlloc(...);
 int FUN_00422940(...);
 int FUN_00425f68(...);
@@ -38,7 +38,7 @@ extern unsigned int DAT_00617da8; /* 0x617da8 */
 extern unsigned int DAT_00617e00; /* 0x617e00 */
 extern unsigned int DAT_00617e58; /* 0x617e58 */
 
-/* Supplied declaration required: FUN_00159110. */
+/* Supplied declaration required: heapOwnerCreate. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_00422940. */
 /* Supplied declaration required: FUN_00425f68. */
@@ -59,23 +59,23 @@ void FUN_001f4e7c(void)
   
   temp_v0 = 0x10000;
   asdMemoryAlloc(0x10000,0x100,0,&LAB_00240000,1);
-  FUN_00159110(&DAT_00617c48,temp_v0,&LAB_00240000,0x100);
+  heapOwnerCreate(&DAT_00617c48,temp_v0,&LAB_00240000,0x100);
   temp_v0 = 0x10000;
   asdMemoryAlloc(0x10000,0x100,0,0x80000,1);
-  FUN_00159110(&DAT_00617ca0,temp_v0,0x80000,0x100);
+  heapOwnerCreate(&DAT_00617ca0,temp_v0,0x80000,0x100);
   temp_v0 = 0x10000;
   asdMemoryAlloc(0x10000,0x100,0,0x400000,1);
-  FUN_00159110(&DAT_00617e00,temp_v0,0x400000,0x100);
+  heapOwnerCreate(&DAT_00617e00,temp_v0,0x400000,0x100);
   temp_v0 = 0x10000;
   asdMemoryAlloc(0x10000,0x100,0,0x100000,1);
-  FUN_00159110(&DAT_00617cf8,temp_v0,0x100000,0);
+  heapOwnerCreate(&DAT_00617cf8,temp_v0,0x100000,0);
   temp_v0 = 0x10000;
   asdMemoryAlloc(0x10000,0x100,0,0x8000,1);
-  FUN_00159110(&DAT_00617d50,temp_v0,0x8000,0);
+  heapOwnerCreate(&DAT_00617d50,temp_v0,0x8000,0);
   temp_v0 = 0x10000;
   temp_v1 = 1;
   asdMemoryAlloc(0x10000,0x100,0,0x90000);
-  FUN_00159110(&DAT_00617da8,temp_v0,0x90000,0);
+  heapOwnerCreate(&DAT_00617da8,temp_v0,0x90000,0);
   g_mobiclipCtrl = 0;
   mwmofilterDeblockerInitialize(mobiclipHeapAllocB,&LAB_00227f8c);
   FUN_00513b94(mobiclipHeapAllocD,&LAB_00287770);

@@ -1,35 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020ece8` (_code @ 0x20ece8, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the constant 1 stored to `released` is built in r1; retail reuses r0 (the dead argument register). */
+#include "common.h"
 
 extern "C" {
+
+typedef struct Resource {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u8 released;
+    /* 0x19 */ u8 unk19[3];
+    /* 0x1C */ void *buffer;
+} Resource;
 
 int FUN_0027e974(void);
 int asdMemFreeNonNull(void);
 int FUN_002c5700(void);
 
-/* Supplied declaration required: FUN_0027e974. */
-/* Supplied declaration required: asdMemFreeNonNull. */
-/* Supplied declaration required: FUN_002c5700. */
-
-
-void FUN_0020ece8(int *param_1)
-
+/* Marks the resource released and frees its buffer. */
+void FUN_0020ece8(Resource **handle)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *param_1;
-  *(unsigned char *)(temp_v0 + 0x18) = 1;
-  if (*(int *)(temp_v0 + 0x1c) != 0) {
-    FUN_002c5700();
-    if (*(int *)(temp_v0 + 0x1c) != 0) {
-      FUN_0027e974();
-      asdMemFreeNonNull();
-      *(unsigned int *)(temp_v0 + 0x1c) = 0;
+    Resource *res = *handle;
+
+    res->released = 1;
+    if (res->buffer != NULL) {
+        FUN_002c5700();
+        if (res->buffer != NULL) {
+            FUN_0027e974();
+            asdMemFreeNonNull();
+            res->buffer = NULL;
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

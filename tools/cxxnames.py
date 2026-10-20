@@ -101,16 +101,29 @@ def demangle(name):
         return name
 
 
+# The structor variant's role in a file name: the complete-object constructor and destructor (C1, D1)
+# read as the plain name; the others say what they are, so variants of one class get their own files.
+VARIANT_FILE = {"C2": "base_", "C3": "alloc_", "D0": "deleting_", "D2": "base_"}
+
+
 def file_stem(name):
-    """A file name for a function: `Obj558be0__stop` for `_ZN9Obj558be04stopEv`."""
+    """A file name for a function: `Obj558be0__stop` for `_ZN9Obj558be04stopEv`,
+    `Obj55afc4__dtor_Obj55afc4` for its destructor (D1), `Obj55afc4__deleting_dtor_Obj55afc4` for D0."""
     readable = demangle(name)
     if readable == name:
         return name
-    base = readable.split("(")[0].replace("::", "__").replace("~", "dtor_")
-    return re.sub(r"[^A-Za-z0-9_]", "_", base)
+    variant = re.search(r"(C[123]|D[012])E", name)
+    prefix = VARIANT_FILE.get(variant[1], "") if variant else ""
+    base = readable.split("(")[0]
+    head, _, last = base.rpartition("::")
+    last = last.replace("~", "dtor_")
+    if variant and head:
+        last = prefix + (last if last.startswith("dtor_") else "ctor_" + last if prefix else last)
+    base = f"{head}::{last}" if head else last
+    return re.sub(r"[^A-Za-z0-9_]", "_", base.replace("::", "__"))
 
 
 if __name__ == "__main__":
-    for sample in ("_ZN9Obj558be04stopEv", "_ZN2nn2fs4OpenEPKci", "_ZNK5Thing5valueEv", "_ZN4BaseD1Ev",
-                   "_ZN5ThingC1Ev", "_ZN4Base6updateEv", "FUN_002f30c4"):
+    for sample in ("_ZN9Obj558be04stopEv", "_ZN2nn2fs4OpenEPKci", "_ZNK5Thing5valueEv", "_ZN4BaseD1Ev", "_ZN4BaseD0Ev",
+                   "_ZN4BaseD2Ev", "_ZN5ThingC1Ev", "_ZN5ThingC2Ev", "_ZN4Base6updateEv", "FUN_002f30c4"):
         print(f"{sample:28} {demangle(sample):32} {file_stem(sample)}")

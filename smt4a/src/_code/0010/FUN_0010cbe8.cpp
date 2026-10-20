@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [20], unsigned int);
-int FUN_002e6e5c(unsigned char [20], int, unsigned int, unsigned int);
+int _ZN9Obj55b28cD1Ev(unsigned char [20], int, unsigned int, unsigned int);
 int onlineTimeGetNow(unsigned int *);
 int SBORROW4(...);
 
@@ -26,7 +26,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: onlineTimeGetNow. */
 
@@ -56,7 +56,7 @@ void FUN_0010cbe8(fn_0010cbe8_arg0 *param_1)
     param_1->field_0x10 = temp_v5;
     param_1->field_0x14 = temp_v6;
   }
-  FUN_002e6e5c(temp_v7,temp_v6,temp_v5,temp_v2 - temp_v4);
+  _ZN9Obj55b28cD1Ev(temp_v7,temp_v6,temp_v5,temp_v2 - temp_v4);
   return;
 }
 

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_003e5478(unsigned int, unsigned int);
+int controllerTargetNodeStart(unsigned int, unsigned int);
 int linkHolderRunAll(unsigned int, int *);
 
-/* Supplied declaration required: FUN_003e5478. */
+/* Supplied declaration required: controllerTargetNodeStart. */
 /* Supplied declaration required: linkHolderRunAll. */
 
 
@@ -74,7 +74,7 @@ void FUN_0035a0bc(unsigned int *param_1,unsigned int param_2)
     *param_1 = 0x3f800000;
     param_1[1] = 0x40accccd;
     param_1[2] = 0x3fc00000;
-    FUN_003e5478(param_1[7],temp_v1);
+    controllerTargetNodeStart(param_1[7],temp_v1);
     uStack_18 = *param_1;
     uStack_14 = param_1[1];
     uStack_10 = param_1[2];
@@ -83,7 +83,7 @@ void FUN_0035a0bc(unsigned int *param_1,unsigned int param_2)
   default:
     temp_v1 = 0;
     param_1[0xc] = 1;
-    FUN_003e5478(param_1[7],temp_v1);
+    controllerTargetNodeStart(param_1[7],temp_v1);
     uStack_18 = *param_1;
     uStack_14 = param_1[1];
     uStack_10 = param_1[2];
@@ -91,7 +91,7 @@ void FUN_0035a0bc(unsigned int *param_1,unsigned int param_2)
     return;
   }
   param_1[0xc] = temp_v0;
-  FUN_003e5478(param_1[7],temp_v1);
+  controllerTargetNodeStart(param_1[7],temp_v1);
   uStack_18 = *param_1;
   uStack_14 = param_1[1];
   uStack_10 = param_1[2];

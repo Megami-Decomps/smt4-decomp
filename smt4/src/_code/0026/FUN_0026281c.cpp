@@ -15,7 +15,7 @@ typedef struct {
 } param_3_stack;
 
 extern int FUN_001009a2(unsigned char *, short, unsigned int *);
-extern unsigned int *FUN_002c66f2(unsigned int, unsigned int);
+extern unsigned int *libcLocaleGetCategory(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -37,7 +37,7 @@ int FUN_0026281c(int param_1,short *param_2,unsigned int param_3)
   temp_v5 = param_1;
   psStack_1c = param_2;
   temp_v6 = param_3;
-  puVar1 = (unsigned int *)FUN_002c66f2(0,3);
+  puVar1 = (unsigned int *)libcLocaleGetCategory(0,3);
   while( 1 ) {
     if (puVar1 != (unsigned int *)0x0) {
       temp_v4 = puVar1[1];

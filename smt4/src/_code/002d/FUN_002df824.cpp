@@ -1,31 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002df824` (_code @ 0x2df824, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: `mov r3, #1` is scheduled before the divisions and `cmp r5, #0` after the shift; retail has them the other way round. */
+#include "common.h"
 
 extern "C" {
 
-extern int gameGetMapBlock(void);
+typedef struct MapBlock {
+    /* 0x000 */ u8 unk000[0x744];
+    /* 0x744 */ u32 flags;    /* first of the flag words, one bit per flag */
+} MapBlock;
 
+extern MapBlock *gameGetMapBlock(void);
 
-void FUN_002df824(int param_1,int param_2)
-
+/* Sets or clears bit `index` of the map block's flag words. */
+void FUN_002df824(s32 index, s32 value)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v1 = gameGetMapBlock();
-  temp_v1 = temp_v1 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4;
-  temp_v2 = *(unsigned int *)(temp_v1 + 0x744);
-  temp_v0 = 1 << ((param_1 % 0x20) & 0xffU);
-  if (param_2 != 0) {
-    temp_v2 = temp_v2 | temp_v0;
-  }
-  else {
-    temp_v2 = temp_v2 & ~temp_v0;
-  }
-  *(unsigned int *)(temp_v1 + 0x744) = temp_v2;
-  return;
+    MapBlock *word = (MapBlock *)((u8 *)gameGetMapBlock() + index / 32 * 4);
+    u32 bits = word->flags;
+    u32 mask = 1 << (index % 32);
+
+    if (value != 0) {
+        bits |= mask;
+    } else {
+        bits &= ~mask;
+    }
+    word->flags = bits;
 }
 
-} /* extern "C" */
+}

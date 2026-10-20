@@ -8,7 +8,7 @@ int FUN_00121f78(unsigned int);
 int FUN_0012e494(int **, int, int *);
 int FUN_0012fce0(int **, int, int *);
 int FUN_002e6e34(unsigned char [12], unsigned int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefRelease(int);
 int sharedRefAddRef(int);
 int FUN_002f6c54(int *, unsigned int);
@@ -39,7 +39,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0012e494. */
 /* Supplied declaration required: FUN_0012fce0. */
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: sharedRefAddRef. */
 extern unsigned int onlineGetActiveLock(void);
@@ -136,7 +136,7 @@ void FUN_002ef584(int param_1,int param_2)
   temp_v11 = temp_v9;
   temp_v12 = temp_v14;
   FUN_0012e494(&temp_v3,temp_v5,&temp_v10);
-  FUN_002e6e5c(temp_v13);
+  _ZN9Obj55b28cD1Ev(temp_v13);
   return;
 }
 

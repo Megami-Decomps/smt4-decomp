@@ -11,7 +11,7 @@ int FUN_001d0fcc(int *, unsigned int);
 int aocClearDisplayFlag(unsigned int);
 int FUN_0046e2d0(unsigned int);
 int FUN_0046f3ac(int *, unsigned int);
-int FUN_0047314c(unsigned int *);
+int jobOwnerFreeSlotAndStop(unsigned int *);
 int FUN_00477d10(unsigned int *, unsigned int, int);
 int jobFlagsWorkStop(unsigned int *);
 int FUN_0047bcdc(unsigned int *, int);
@@ -37,7 +37,7 @@ extern int FUN_002e19f8(void);
 /* Supplied declaration required: aocClearDisplayFlag. */
 /* Supplied declaration required: FUN_0046e2d0. */
 /* Supplied declaration required: FUN_0046f3ac. */
-/* Supplied declaration required: FUN_0047314c. */
+/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 /* Supplied declaration required: FUN_00477d10. */
 /* Supplied declaration required: jobFlagsWorkStop. */
 /* Supplied declaration required: FUN_0047bcdc. */
@@ -69,7 +69,7 @@ void FUN_004782ec(unsigned int *param_1)
   *(unsigned int *)(g_aocMain + 0x754) = temp_v0 & 0xffffff8f;
   if ((temp_v0 & 0x10) != 0) {
     FUN_00477d10(param_1,0xffffffff,0);
-    FUN_0047314c(param_1 + 0x46c);
+    jobOwnerFreeSlotAndStop(param_1 + 0x46c);
     jobFlagsWorkStop(param_1);
     param_1[1] = 0x12;
     param_1[2] = 0;

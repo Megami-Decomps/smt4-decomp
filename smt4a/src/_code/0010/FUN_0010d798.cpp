@@ -8,7 +8,7 @@ int strInit(unsigned char [32]);
 int onlineStringConstruct(...);
 int onlineStringDestroy(...);
 int onlineStringCopyConstruct(...);
-int constructObj0055affc(...);
+int _ZN9Obj55aff4C1Ev(...);
 int FUN_002ea2e8(...);
 int FUN_002ea3a8(...);
 int FUN_002ec70c(...);
@@ -46,7 +46,7 @@ extern unsigned char LAB_0010da30; /* 0x10da30 */
 /* Supplied declaration required: onlineStringConstruct. */
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: onlineStringCopyConstruct. */
-/* Supplied declaration required: constructObj0055affc. */
+/* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 extern unsigned int FUN_002ea100(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
@@ -124,7 +124,7 @@ void FUN_0010d798(int param_1)
   FUN_002f7af2(temp_v6,param_1 + 0x7c,temp_v12);
   onlineStringDestroy(temp_v9);
   FUN_002ec70c(temp_v6);
-  constructObj0055affc(temp_v17);
+  _ZN9Obj55aff4C1Ev(temp_v17);
   FUN_002f42be(temp_v17,&LAB_0010d9f0,*(unsigned int *)(param_1 + 0x128));
   temp_v2 = FUN_002ea100(temp_v16,&LAB_0010d9f8);
   temp_v2 = FUN_002f7b34(temp_v13,temp_v2,temp_v17);

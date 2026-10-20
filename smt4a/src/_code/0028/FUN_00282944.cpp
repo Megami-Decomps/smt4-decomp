@@ -1,39 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00282944` (_code @ 0x282944, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
+typedef struct MessageState {
+    /* 0x000 */ u8 unk000[0x19C5];
+    /* 0x19C5 */ u8 mode;
+} MessageState;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+typedef struct MessageCommand {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ MessageState *state;
+} MessageCommand;
 
-/* Supplied declaration required: FUN_0021bdac. */
-extern unsigned int scrGetArg(unsigned int);
-extern unsigned int FUN_002ba85c(void);
-extern unsigned int scrGetCommandFrame(void);
+u32 FUN_002ba85c(void);
+u32 scrGetArg(u32 index);
+u32 scrGetCommandFrame(void);
+s32 FUN_0021bdac(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
 
-
-void FUN_00282944(int param_1)
-
+static void showMessage(s32 mode)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  if (*(int *)(param_1 + 4) != 0) {
-    *(unsigned char *)(*(int *)(param_1 + 4) + 0x19c5) = 0x15;
-  }
-  temp_v0 = FUN_002ba85c();
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetCommandFrame();
-  FUN_0021bdac(temp_v0,temp_v1,temp_v2,9,0,0);
-  return;
+    u32 a = FUN_002ba85c();
+    u32 b = scrGetArg(0);
+    u32 c = scrGetCommandFrame();
+
+    FUN_0021bdac(a, b, c, mode, 0, 0);
+}
+
+/* Script command: puts the message state in mode 0x15 and starts FUN_0021bdac with the first argument. */
+void FUN_00282944(MessageCommand *command)
+{
+    if (command->state != NULL) {
+        command->state->mode = 0x15;
+    }
+    showMessage(9);
 }
 
 } /* extern "C" */

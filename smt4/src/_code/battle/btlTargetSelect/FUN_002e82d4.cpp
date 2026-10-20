@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_002bd954(...);
 int asdOperatorNew(int, unsigned int *);
-int FUN_002c312c(...);
+int paramsInit(...);
 int taskCreateDraw(...);
 int asdMemoryAlloc(int, int, int, int, int);
-int FUN_002c5d5c(unsigned int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int FUN_002eb76c(...);
 int FUN_00342fbc(void);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
@@ -38,10 +38,10 @@ extern int *g_btlTargetSelect; /* 0x439c60 */
 
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_002eb76c. */
 /* Supplied declaration required: FUN_00342fbc. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -73,7 +73,7 @@ void FUN_002e82d4(unsigned int *param_1)
   if (puVar3 != (unsigned int *)0x0) {
     puVar4 = puVar3 + 1;
     *puVar3 = (unsigned int)&DAT_004208bc;
-    FUN_002c5d5c(puVar4,&LAB_00349210,0x10,5);
+    __aeabi_vec_ctor_nocookie_nodtor(puVar4,&LAB_00349210,0x10,5);
     puVar5 = puVar4 + -1;
     *(unsigned char *)((int)puVar4 + 0xf) = 0;
     *(unsigned char *)((int)puVar4 + 0x1f) = 0;
@@ -91,7 +91,7 @@ void FUN_002e82d4(unsigned int *param_1)
   taskCreateDraw(&LAB_002e84f8,0x7a,0,0,FUN_002f4aec,0,piVar1,puVar6);
   taskCreateDraw(&LAB_002e8510,0xd8,0,0,FUN_002f4aec,0,piVar1,param_1[7]);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(piVar1 + 3);
-  FUN_002c312c(piVar1 + 3,0,0,0,0,0,0,&DAT_004017f4,0x10,0,0);
+  paramsInit(piVar1 + 3,0,0,0,0,0,0,&DAT_004017f4,0x10,0,0);
   FUN_002bd954(piVar1 + 0xb,0x14,0x71,piVar1 + 3,1);
   FUN_002eb76c(piVar1 + 0xb,0);
   return;

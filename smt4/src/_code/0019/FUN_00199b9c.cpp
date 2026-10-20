@@ -19,7 +19,7 @@ int FUN_002b7bca(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
-int FUN_002c312c(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
+int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
 
 /* stack frame of param_2: 8 slot(s), 32 byte(s) */
@@ -45,7 +45,7 @@ extern unsigned char DAT_00400d84; /* 0x400d84 */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
 /* Supplied declaration required: FUN_0028da40. */
-extern int FUN_0028dba8(unsigned int);
+extern int btlActorIsDown(unsigned int);
 extern int FUN_0028e9a0(unsigned int);
 extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_0028e9ec. */
@@ -64,7 +64,7 @@ extern int gameGetOptions(void);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -98,7 +98,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   *(unsigned int *)(param_1 + 0x3898) = 0;
   FUN_001e0698();
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1);
-  FUN_002c312c(param_1,&DAT_00400b98,0xa8,&DAT_00400c40,0xe4,&DAT_00400d24,0x60,0,0,&DAT_00400d84,
+  paramsInit(param_1,&DAT_00400b98,0xa8,&DAT_00400c40,0xe4,&DAT_00400d24,0x60,0,0,&DAT_00400d84,
                0x4d0);
   temp_v7 = (unsigned long long)temp_v6;
   temp_v1 = param_1 + 0x9f8;
@@ -133,7 +133,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 4);
   FUN_002bd954(param_1 + 0x96c,0x15,0x5e,param_1,6);
-  temp_v1 = FUN_0028dba8(*(unsigned int *)(param_1 + 0x3040));
+  temp_v1 = btlActorIsDown(*(unsigned int *)(param_1 + 0x3040));
   if ((temp_v1 != 0) && (temp_v1 = FUN_002b6ad0(), temp_v1 != 0)) {
     timerStart(param_1 + 0x96c,0xd,0);
   }

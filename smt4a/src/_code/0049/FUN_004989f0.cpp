@@ -1,61 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004989f0` (_code @ 0x4989f0, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00100388(int, unsigned char *, int, unsigned int);
-int FUN_001654f8(unsigned int, int);
-int FUN_00224880(unsigned int);
-int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int sysMemClear(int, int);
-int FUN_003c5fc4(int);
+typedef struct Shop004989f0 {
+    /* 0x000 */ u8 unk000[0x184];
+    /* 0x184 */ u32 table;
+    /* 0x188 */ u8 unk188[8];
+    /* 0x190 */ u32 process;
+    /* 0x194 */ char text[0x200];
+    /* 0x394 */ u8 unk394[0x15c78];
+    /* 0x1600c */ s32 items[4];
+    /* 0x1601c */ s32 itemCount;
+} Shop004989f0;
 
-extern unsigned char LAB_00498aa8; /* 0x498aa8 */
-extern unsigned char LAB_00498ab4; /* 0x498ab4 */
+void sysMemClear(void *buffer, s32 size);
+u32 dataTable17Type0GetEntry(u32 *out, s32 item);
+u32 FUN_001654f8(u32 entry, s32 a, s32 b);
+void FUN_00100388(char *dst, const char *format, char *src, u32 entry);
+u32 tableGroupFindEntryIndex(u32 table, const char *name);
+void scrScriptProcessStartEntry(u32 process, u32 index);
+void FUN_00224880(u32 process);
+void FUN_003c5fc4(s32 arg);
 
-/* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_001654f8. */
-/* Supplied declaration required: FUN_00224880. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: sysMemClear. */
-extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_003c5fc4. */
-extern unsigned int dataTable17Type0GetEntry(unsigned int *, int);
-
-
-void FUN_004989f0(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Builds the shop's text (one line per item) and starts the "shop_select" script entry. With `second` set each listed item is replaced by the item 4 further on. */
+void FUN_004989f0(Shop004989f0 *shop, s32 second)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int uStack_20;
-  
-  uStack_20 = param_4;
-  sysMemClear(param_1 + 0x194,0x200);
-  temp_v2 = 0;
-  if (temp_v2 < *(int *)(param_1 + 0x1601c)) {
-    do {
-      temp_v0 = param_1 + temp_v2 * 4;
-      if (param_2 == 0) {
-        temp_v0 = *(int *)(temp_v0 + 0x1600c);
-      }
-      else {
-        temp_v0 = *(int *)(temp_v0 + 0x1600c) + 4;
-      }
-      temp_v1 = dataTable17Type0GetEntry((unsigned int *)&uStack_20,temp_v0);
-      FUN_001654f8(temp_v1,0);
-      FUN_00100388(param_1 + 0x194,&LAB_00498ab4,param_1 + 0x194,temp_v1);
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(int *)(param_1 + 0x1601c));
-  }
-  temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_00498aa8);
-  scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 400),temp_v1);
-  FUN_00224880(*(unsigned int *)(param_1 + 400));
-  FUN_003c5fc4(1);
-  return;
+    const char *entryName = "shop_select";
+    u32 entryOut;
+    s32 i;
+
+    sysMemClear(shop->text, 0x200);
+    for (i = 0; i < shop->itemCount; i++) {
+        s32 item = second == 0 ? shop->items[i] : shop->items[i] + 4;
+        u32 entry = dataTable17Type0GetEntry(&entryOut, item);
+
+        FUN_00100388(shop->text, "%s%s<br>", shop->text, FUN_001654f8(entry, 0, 0));
+    }
+    scrScriptProcessStartEntry(shop->process, tableGroupFindEntryIndex(shop->table, entryName));
+    FUN_00224880(shop->process);
+    FUN_003c5fc4(1);
 }
 
 } /* extern "C" */

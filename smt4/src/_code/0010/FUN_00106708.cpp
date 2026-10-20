@@ -8,7 +8,7 @@ int FUN_0010b864(unsigned int, int, int);
 int FUN_0010b91c(unsigned int);
 int asdSoundWaveVoiceCreate(unsigned int, unsigned int, int);
 int FUN_0010c270(unsigned int);
-int FUN_0010dd24(void);
+int voiceSetMixParam(void);
 int FUN_002c1658(int, int);
 int rt_aeabi_memclr(char *, int);
 int asdMemFree(void);
@@ -20,7 +20,7 @@ extern signed char DAT_004c581a; /* 0x4c581a */
 /* Supplied declaration required: FUN_0010b91c. */
 /* Supplied declaration required: asdSoundWaveVoiceCreate. */
 /* Supplied declaration required: FUN_0010c270. */
-/* Supplied declaration required: FUN_0010dd24. */
+/* Supplied declaration required: voiceSetMixParam. */
 extern int FUN_002c15fc(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 extern int FUN_002c1850(unsigned int);
@@ -58,7 +58,7 @@ LAB_001067e0:
         temp_v1 = *(unsigned int *)(pcVar8 + 0x44);
         asdSoundWaveVoiceCreate(temp_v1,*(unsigned int *)(pcVar8 + 0x4c),1);
         *(unsigned int *)(pcVar8 + 0x48) = temp_v1;
-        FUN_0010dd24();
+        voiceSetMixParam();
         if (*(int *)(pcVar8 + 0x50) != 3) {
           FUN_0010b864(*(unsigned int *)(pcVar8 + 0x48),pcVar8[0x75],0);
         }

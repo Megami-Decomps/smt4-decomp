@@ -9,7 +9,7 @@ int gameFlagSetValue(int, int);
 int FUN_00417b70(unsigned int);
 
 extern int gameGetPlayerData(void);
-extern int FUN_0019f1a4(unsigned int, unsigned int);
+extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_003de734(unsigned int);
 extern int FUN_003df390(unsigned int);
@@ -30,7 +30,7 @@ unsigned int FUN_003a77d4(void)
   temp_v0 = *(unsigned short *)(temp_v1 + 0x62);
   temp_v3 = 100;
   do {
-    temp_v1 = FUN_0019f1a4(temp_v3 & 0xffff,0);
+    temp_v1 = gameFlagEntryGetBit(temp_v3 & 0xffff,0);
     if ((temp_v1 == 0) && (temp_v1 = FUN_003df390(temp_v3 & 0xffff), temp_v1 != 0)) {
       temp_v2 = temp_v3;
       FUN_001ad9b4();

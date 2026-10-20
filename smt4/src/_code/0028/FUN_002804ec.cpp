@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0026ec2c(...);
 int FUN_00276078(int);
 int FUN_002878fc(...);
-int FUN_002d2a58(...);
+int mapBlockBitSet(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -33,7 +33,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0026ec2c. */
 /* Supplied declaration required: FUN_00276078. */
 /* Supplied declaration required: FUN_002878fc. */
-/* Supplied declaration required: FUN_002d2a58. */
+/* Supplied declaration required: mapBlockBitSet. */
 
 
 unsigned int FUN_002804ec(float *param_1)
@@ -167,7 +167,7 @@ unsigned int FUN_002804ec(float *param_1)
           else if ((((temp_v6 & 4) == 0) && (temp_v7 < temp_v8)) &&
                   (FUN_0026ec2c(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5),temp_v4),
                   (float)in_d10 <= temp_v11[0])) {
-            FUN_002d2a58((int)*(short *)(temp_v4 + 6),1);
+            mapBlockBitSet((int)*(short *)(temp_v4 + 6),1);
             FUN_002878fc((int)*(short *)(temp_v4 + 6));
             temp_v6 = temp_v6 | 4;
           }

@@ -1,43 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `uiFadeRelease` (_code @ 0x291944, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(unsigned int *);
-int jobStop(unsigned int, int);
-int uiFadeClose(void);
+/* The common background fade's state: a use count and its job object. */
+typedef struct CommonBg {
+    /* 0x00 */ s8 users;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u32 *job;       /* points at the job id */
+} CommonBg;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+extern CommonBg g_commonBg;
 
-extern signed char g_commonBg; /* 0x43dc20 */
-extern unsigned int *DAT_0043dc24; /* 0x43dc24 */
+void asdMemFree(void *block);
+void jobStop(u32 job, s32 arg);
+void uiFadeClose(void);
 
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: uiFadeClose. */
-
-
+/* Drops one user of the common background fade; the last one stops its job, frees it and closes the fade. */
 void uiFadeRelease(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = DAT_0043dc24;
-  g_commonBg = g_commonBg - '\x01';
-  if (g_commonBg < '\x01') {
-    jobStop(*DAT_0043dc24,0);
-    asdMemFree(puVar1);
-    DAT_0043dc24 = (unsigned int *)0x0;
-    g_commonBg = 0;
-    uiFadeClose();
-    return;
-  }
-  return;
+    g_commonBg.users--;
+    if (g_commonBg.users <= 0) {
+        u32 *job = g_commonBg.job;
+
+        jobStop(*job, 0);
+        asdMemFree(job);
+        g_commonBg.job = NULL;
+        g_commonBg.users = 0;
+        uiFadeClose();
+    }
 }
 
 } /* extern "C" */

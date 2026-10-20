@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern unsigned char DAT_0063e1e8; /* 0x63e1e8 */
+extern unsigned char g_asdSoundSystem; /* 0x63e1e8 */
 extern unsigned char DAT_0063e4a0; /* 0x63e4a0 */
 extern int DAT_0063f500; /* 0x63f500 */
 
@@ -42,8 +42,8 @@ unsigned char * FUN_00151340(unsigned int param_1)
   puVar2 = (unsigned char *)0x0;
   temp_v1 = 0;
   temp_v2 = 0;
-  FUN_00178400(&DAT_0063e1e8,param_1,temp_v3);
-  FUN_00178458(&DAT_0063e1e8,temp_v4,&temp_v1);
+  FUN_00178400(&g_asdSoundSystem,param_1,temp_v3);
+  FUN_00178458(&g_asdSoundSystem,temp_v4,&temp_v1);
   if (temp_v2 != 0) {
     return (unsigned char *)0x1;
   }

@@ -18,7 +18,7 @@ int FUN_00202178(...);
 int FUN_00243ce8(...);
 int FUN_002b3ed8(...);
 int FUN_002f8794(void);
-int FUN_00300124(...);
+int effMenuListAppend(...);
 int VectorSignedToFloat(...);
 int rt_memcpy_w(void);
 
@@ -108,7 +108,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00243ce8. */
 /* Supplied declaration required: FUN_002b3ed8. */
 /* Supplied declaration required: FUN_002f8794. */
-/* Supplied declaration required: FUN_00300124. */
+/* Supplied declaration required: effMenuListAppend. */
 extern int displayIsStereoActive(void);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -358,7 +358,7 @@ LAB_003c01a8:
       *(int *)(temp_v10 + 0x18) = (int)((unsigned long long)in_d9 >> 0x20);
       *(unsigned int *)(temp_v10 + 0x1c) = 0xff008080;
       *(unsigned int *)(temp_v10 + 4) = 7;
-      FUN_00300124(temp_v10,1);
+      effMenuListAppend(temp_v10,1);
       temp_v10 = displayIsStereoActive();
     }
     else {
@@ -402,14 +402,14 @@ LAB_003c01a8:
       *(int *)(temp_v10 + 0x18) = (int)((unsigned long long)in_d9 >> 0x20);
       *(unsigned int *)(temp_v10 + 0x1c) = 0xff808080;
       *(unsigned int *)(temp_v10 + 4) = 7;
-      FUN_00300124(temp_v10,1);
+      effMenuListAppend(temp_v10,1);
       temp_v10 = displayIsStereoActive();
     }
     if (temp_v10 != 0) {
       temp_v11 = 0x10000;
       memAlloc(0x10000,0x100,0,0x68,0x10,1);
       rt_memcpy_w();
-      FUN_00300124(temp_v11,2);
+      effMenuListAppend(temp_v11,2);
     }
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 9);

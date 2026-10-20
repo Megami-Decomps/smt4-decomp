@@ -7,7 +7,7 @@ extern "C" {
 int onlineStringDestroy(int **);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002e9f00(int, int, int);
-int constructObj0055affc(int **);
+int _ZN9Obj55aff4C1Ev(int **);
 int FUN_002f6be2(int **, int *);
 int operatorDeleteArrayNullable(int);
 int FUN_00302428(int, int *, int);
@@ -30,7 +30,7 @@ extern unsigned char LAB_0012ad90; /* 0x12ad90 */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002e9f00. */
-/* Supplied declaration required: constructObj0055affc. */
+/* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 /* Supplied declaration required: FUN_002f6be2. */
 /* Supplied declaration required: operatorDeleteArrayNullable. */
 /* Supplied declaration required: FUN_00302428. */
@@ -53,7 +53,7 @@ unsigned long long FUN_0012ad10(int param_1,int *param_2,int param_3,unsigned in
   temp_v0 = onlineInstanceTableGetCurrent();
   onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x6c));
   if (temp_v0 != 0) {
-    constructObj0055affc(&piStack_1c);
+    _ZN9Obj55aff4C1Ev(&piStack_1c);
     temp_v0 = (**(romwright_code **)(*param_2 + 0x4c))(param_2,&LAB_0012ad90,&piStack_1c);
     if (temp_v0 != 0) {
       temp_v3 = 0;

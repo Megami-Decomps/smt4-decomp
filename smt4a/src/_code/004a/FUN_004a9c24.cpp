@@ -1,22 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a9c24` (_code @ 0x4a9c24, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ae554(int, int);
+typedef struct BtlUiPanel {
+    /* 0x0000 */ u8 unk0000[0x28C4];
+    /* 0x28C4 */ u8 holder[1];
+} BtlUiPanel;
 
-extern unsigned char g_btlUi; /* 0x57a9b8 */
+typedef struct BtlUiView {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ BtlUiPanel *panel;
+} BtlUiView;
 
-/* Supplied declaration required: FUN_002ae554. */
+extern BtlUiView g_btlUi;
 
+int FUN_002ae554(void *holder, s16 value);
 
-void FUN_004a9c24(unsigned int param_1,short param_2)
-
+/* Forwards `value` (as a 16-bit value) to FUN_002ae554 for the battle UI panel's holder. */
+void FUN_004a9c24(u32 unused, s32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002ae554((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x28c4,(int)param_2);
-  return;
+    FUN_002ae554(g_btlUi.panel->holder, value);
 }
 
 } /* extern "C" */

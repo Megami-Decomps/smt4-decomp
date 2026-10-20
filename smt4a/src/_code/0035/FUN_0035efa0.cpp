@@ -1,32 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035efa0` (_code @ 0x35efa0, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+typedef struct MainState {
+    /* 0x0000 */ u8 unk0000[0x4C70];
+    /* 0x4C70 */ s16 first;
+    /* 0x4C72 */ s16 second;
+} MainState;
 
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrSetResult. */
+MainState *btlGetMainState(void);
+int scrSetResult(s32 value);
 
-
-unsigned int FUN_0035efa0(void)
-
+/* Script command: result is the larger of the battle state's two 16-bit values at 0x4C70 and 0x4C72. */
+u32 FUN_0035efa0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = btlGetMainState();
-  temp_v0 = *(short *)(temp_v1 + 0x4c70);
-  temp_v2 = btlGetMainState();
-  temp_v1 = (int)temp_v0;
-  if ((int)temp_v0 < (int)*(short *)(temp_v2 + 0x4c72)) {
-    temp_v1 = (int)*(short *)(temp_v2 + 0x4c72);
-  }
-  scrSetResult(temp_v1);
-  return 1;
+    s16 value = btlGetMainState()->first;
+    MainState *state = btlGetMainState();
+
+    if (value < state->second) {
+        value = state->second;
+    }
+    scrSetResult(value);
+    return 1;
 }
 
 } /* extern "C" */

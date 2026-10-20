@@ -1,27 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00255180` (_code @ 0x255180, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the index in r5 and the value in r4; built has them swapped */
+#include "common.h"
 
 extern "C" {
 
-int btlMainFindEntryByListedId(int, unsigned int);
+typedef struct BtlEntry {
+    /* 0x00 */ u8 unk00[0x72];
+    /* 0x72 */ u16 values[1];
+} BtlEntry;
 
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-extern int btlGetMainState(void);
+extern void *btlGetMainState(void);
+extern BtlEntry *btlMainFindEntryByListedId(void *battle, u32 id);
 
-
-void FUN_00255180(unsigned int param_1,int param_2,unsigned short param_3)
-
+/* Stores `value` at index `index` of the value table of the battle entry with the listed id `id`, if it exists. */
+void FUN_00255180(u32 id, s32 index, u16 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = btlGetMainState();
-  btlMainFindEntryByListedId(temp_v0,param_1);
-  if (temp_v0 != 0) {
-    *(unsigned short *)(temp_v0 + param_2 * 2 + 0x72) = param_3;
-  }
-  return;
+    BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
+
+    if (entry != NULL) {
+        entry->values[index] = value;
+    }
 }
 
 } /* extern "C" */

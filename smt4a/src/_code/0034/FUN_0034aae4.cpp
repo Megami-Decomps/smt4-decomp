@@ -1,6 +1,6 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034aae4` (_code @ 0x34aae4, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps two registers for the quest pointer (a copy in r5 for the release steps, `movs r5, r7`, the original in r7 for jobStop and the free) and the g_uiQuest address in r8; the build coalesces them */
+/* NON_MATCHING: retail keeps two registers for the quest pointer (a copy in r5 for the release steps, `movs r5, r7`, the original in r7 for jobStop and the free); the build coalesces them */
+#include "common.h"
 
 extern "C" {
 
@@ -13,47 +13,57 @@ int dataTableFree(int);
 int uiFadeSetVisible(int);
 int asdTMTexTableFreeEntry(int);
 
-extern unsigned int *g_uiQuest; /* 0x57f28c */
+typedef struct TouchRegions {
+    /* 0x00 */ u8 unk00[0x44];
+    /* 0x44 */ u16 count;
+} TouchRegions;
 
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: dataTableFree. */
-/* Supplied declaration required: uiFadeSetVisible. */
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
+typedef struct UiQuest {
+    /* 0x000 */ u32 job;
+    /* 0x004 */ u8 unk004[0x8F0];
+    /* 0x8F4 */ u32 buffer8f4;
+    /* 0x8F8 */ u32 buffer8f8;
+    /* 0x8FC */ u32 process8fc;
+    /* 0x900 */ u32 buffer900;
+    /* 0x904 */ u32 buffer904;
+    /* 0x908 */ u32 process908;
+    /* 0x90C */ u8 unk90c[0x3F4];
+    /* 0xD00 */ TouchRegions touch;
+} UiQuest;
 
+extern UiQuest *g_uiQuest;
 
-void FUN_0034aae4(void)
-
+static __inline void uiQuestRelease(UiQuest *quest)
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = g_uiQuest;
-  if (puVar1 != (unsigned int *)0x0) {
-    for (temp_v0 = 0; temp_v0 < (int)(unsigned int)*(unsigned short *)(puVar1 + 0x351); temp_v0 = temp_v0 + 1) {
-      ifTouchRegionRemove();
+    s32 i;
+
+    for (i = 0; i < quest->touch.count; i++) {
+        ifTouchRegionRemove();
     }
-    scrScriptProcessDestroy(puVar1[0x23f]);
-    asdMemFree(puVar1[0x23e]);
-    asdMemFree(puVar1[0x23d]);
-    if (puVar1[0x240] != 0) {
-      scrScriptProcessDestroy(puVar1[0x242]);
-      asdMemFree(puVar1[0x240]);
-      asdMemFree(puVar1[0x241]);
+    scrScriptProcessDestroy(quest->process8fc);
+    asdMemFree(quest->buffer8f8);
+    asdMemFree(quest->buffer8f4);
+    if (quest->buffer900 != 0) {
+        scrScriptProcessDestroy(quest->process908);
+        asdMemFree(quest->buffer900);
+        asdMemFree(quest->buffer904);
     }
-    asdTMTexTableReleaseNode(0x1e,0);
+    asdTMTexTableReleaseNode(0x1e, 0);
     asdTMTexTableFreeEntry(0x1e);
     dataTableFree(0x34);
     uiFadeSetVisible(1);
-    jobStop(*puVar1,0);
-    asdMemFree(puVar1);
-    g_uiQuest = (unsigned int *)0x0;
-  }
-  return;
+}
+
+void FUN_0034aae4(void)
+{
+    UiQuest *quest = g_uiQuest;
+
+    if (quest != NULL) {
+        uiQuestRelease(quest);
+        jobStop(quest->job, 0);
+        asdMemFree(quest);
+        g_uiQuest = NULL;
+    }
 }
 
 } /* extern "C" */

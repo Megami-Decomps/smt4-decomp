@@ -1,181 +1,182 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041f6e0` (_code @ 0x41f6e0, 0x300 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: in state 0 retail builds the slot address (add r0,r4,r5 lsl #7; add r0,#108) after moving the table pointer into r1; built forms it first in r3 (state 1 matches). */
+#include "common.h"
 
 extern "C" {
 
-int gameGetPlayerData(void);
-int wordPairCopy(unsigned int, unsigned int);
-int FUN_0023b45c(int);
-int FUN_00275bc8(void);
-int FUN_002a7324(int);
-int FUN_002c8538(...);
-int sysMemClear(unsigned int, int);
-int FUN_002f0384(...);
-int FUN_003c12d8(int, int);
-int FUN_0041eb94(int);
-int rt_memcpy_w(unsigned int, unsigned int, int);
+#define SLOT_COUNT 5
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+typedef struct PlayerData {
+    /* 0x0 */ u32 a;
+    /* 0x4 */ u32 b;
+    /* 0x8 */ u32 c;
+    /* 0xC */ u16 d;
+} PlayerData; /* 0xE bytes */
 
-extern unsigned int gameDataBlocksGetSaveData(void);
-/* Supplied declaration required: gameGetPlayerData. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: wordPairCopy. */
-extern unsigned int configGetSettings(void);
-/* Supplied declaration required: FUN_0023b45c. */
-extern unsigned int gameDataBlocksGetTable(void);
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_002a7324. */
-/* Supplied declaration required: FUN_002c8538. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002f0384. */
-extern int byteTripleGetV0(void);
-extern int byteArr5Get3(void);
-/* Supplied declaration required: FUN_003c12d8. */
-extern int FUN_0040ab8c(unsigned int);
-/* Supplied declaration required: FUN_0041eb94. */
-/* Supplied declaration required: rt_memcpy_w. */
+typedef struct SaveSlot {
+    /* 0x00 */ u8 unk00[0x12];
+    /* 0x12 */ u8 player[0xE];
+    /* 0x20 */ u8 unk20[0x60];
+} SaveSlot; /* 0x80 bytes */
 
+typedef struct SaveLoadTask {
+    /* 0x00 */ u8 unk00[7];
+    /* 0x07 */ u8 mode;
+    /* 0x08 */ s32 state;
+    /* 0x0C */ u8 unk0C;
+    /* 0x0D */ u8 previousMode;
+    /* 0x0E */ u8 unk0E[5];
+    /* 0x13 */ u8 hasNextStage;
+    /* 0x14 */ u8 unk14;
+    /* 0x15 */ u8 slotsDone;
+    /* 0x16 */ u8 unk16[6];
+    /* 0x1C */ void *snapshotTable;
+    /* 0x20 */ void *snapshotConfig;
+    /* 0x24 */ void *snapshotSave;
+    /* 0x28 */ u8 unk28[0x10];
+    /* 0x38 */ u32 handleA;
+    /* 0x3C */ u32 handleB;
+    /* 0x40 */ u32 handleC;
+    /* 0x44 */ u8 unk44[0x10];
+    /* 0x54 */ void *snapshotPlayer;
+    /* 0x58 */ u32 request;
+    /* 0x5C */ u8 applied;
+    /* 0x5D */ u8 unk5D[0xB];
+    /* 0x68 */ u8 unk68;
+    /* 0x69 */ u8 unk69[3];
+    /* 0x6C */ SaveSlot slots[SLOT_COUNT];
+    /* 0x2EC */ u8 slotValid[8];
+    /* 0x2F4 */ u32 slotIndex;
+    /* 0x2F8 */ s32 selectedSlot;
+} SaveLoadTask;
 
-void FUN_0041f6e0(int param_1)
+extern s32 byteTripleGetV0(void);
+extern s32 byteArr5Get3(void);
+extern void *gameDataBlocksGetTable(void);
+extern void *configGetSettings(void);
+extern void *gameDataBlocksGetSaveData(void);
+extern PlayerData *gameGetPlayerData(void);
+extern void rt_memcpy_w(void *dest, const void *src, u32 size);
+extern void sysMemClear(void *block, s32 size);
+extern void wordPairCopy(void *dest, void *src);
+extern s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+extern s32 FUN_0040ab8c(u32 request);
+extern void FUN_003c12d8(s32 step, s32 arg);
+extern void FUN_00275bc8(void);
+extern void FUN_002a7324(s32 arg);
+extern void FUN_0023b45c(s32 arg);
+extern void FUN_002c8538(s32 arg);
+extern void FUN_002f0384(s32 arg);
+extern void FUN_0041eb94(SaveLoadTask *task);
 
+/* Steps the load: reads each slot's snapshot (states 0 and 1), then applies the snapshots once their resources are loaded (state 2). */
+void FUN_0041f6e0(SaveLoadTask *task)
 {
-/* irregular: 1 goto(s); 11 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  unsigned int temp_v4;
-  
-  temp_v1 = *(int *)(param_1 + 8);
-  if (temp_v1 != 0) {
-    if (temp_v1 != 1) {
-      if (temp_v1 != 2) {
-        return;
-      }
-      goto LAB_0041f880;
-    }
-  }
-  else {
-    temp_v1 = byteTripleGetV0();
-    if (temp_v1 == 0) {
-      return;
-    }
-    temp_v4 = *(unsigned int *)(param_1 + 0x2f4);
-    if (temp_v4 < 5) {
-      temp_v1 = byteTripleGetV0();
-      if (temp_v1 == 0) {
-        return;
-      }
-      temp_v1 = byteArr5Get3();
-      if (temp_v1 != 0) {
-        temp_v3 = gameDataBlocksGetTable();
-        rt_memcpy_w(param_1 + temp_v4 * 0x80 + 0x6c,temp_v3,0x80);
-        *(unsigned char *)(param_1 + temp_v4 + 0x2ec) = 1;
-      }
-      else {
-        sysMemClear(param_1 + temp_v4 * 0x80 + 0x6c,0x80);
-        *(unsigned char *)(param_1 + temp_v4 + 0x2ec) = 0;
-      }
-    }
-    temp_v1 = *(int *)(param_1 + 0x2f4);
-    temp_v2 = temp_v1 + 1;
-    *(int *)(param_1 + 0x2f4) = temp_v2;
-    if (temp_v2 < 1) {
-      FUN_003c12d8(temp_v2 + 1,1);
-      return;
-    }
-    if (*(char *)(param_1 + 0x13) == '\0') {
-      *(unsigned int *)(param_1 + 8) = 2;
-      return;
-    }
-    FUN_003c12d8(temp_v1 + 2,1);
-    *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
-  }
-  temp_v1 = byteTripleGetV0();
-  if (temp_v1 == 0) {
-    return;
-  }
-  temp_v4 = *(unsigned int *)(param_1 + 0x2f4);
-  if (temp_v4 < 5) {
-    temp_v1 = byteTripleGetV0();
-    if (temp_v1 == 0) {
-      return;
-    }
-    temp_v1 = byteArr5Get3();
-    if (temp_v1 != 0) {
-      temp_v3 = gameDataBlocksGetTable();
-      rt_memcpy_w(param_1 + temp_v4 * 0x80 + 0x6c,temp_v3,0x80);
-      *(unsigned char *)(param_1 + temp_v4 + 0x2ec) = 1;
-    }
-    else {
-      sysMemClear(param_1 + temp_v4 * 0x80 + 0x6c,0x80);
-      *(unsigned char *)(param_1 + temp_v4 + 0x2ec) = 0;
-    }
-  }
-  temp_v2 = *(int *)(param_1 + 0x2f4) + 1;
-  *(int *)(param_1 + 0x2f4) = temp_v2;
-  if (temp_v2 < 5) {
-    FUN_003c12d8(temp_v2 + 1,1);
-    return;
-  }
-  *(unsigned char *)(param_1 + 0x15) = 1;
-  *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
-LAB_0041f880:
-  temp_v1 = FUN_0040ab8c(*(unsigned int *)(param_1 + 0x58));
-  if (temp_v1 != 0) {
-    temp_v2 = asdTMTexTableNodeIsLoaded(0x2b,0);
-    temp_v1 = 0;
-    if (temp_v2 != 0) {
-      temp_v1 = *(int *)(param_1 + 0x38);
-    }
-    if ((temp_v2 != 0 && temp_v1 != 0) && (*(int *)(param_1 + 0x3c) != 0)) {
-      if (*(int *)(param_1 + 0x40) == 0) {
-        FUN_00275bc8();
-        *(int *)(param_1 + 0x40) = temp_v1;
-      }
-      temp_v3 = gameDataBlocksGetTable();
-      rt_memcpy_w(temp_v3,*(unsigned int *)(param_1 + 0x1c),0x80);
-      temp_v3 = configGetSettings();
-      wordPairCopy(temp_v3,*(unsigned int *)(param_1 + 0x20));
-      temp_v3 = gameDataBlocksGetSaveData();
-      rt_memcpy_w(temp_v3,*(unsigned int *)(param_1 + 0x24),0x2a71c);
-      temp_v1 = 0;
-      do {
-        if (*(char *)(param_1 + temp_v1 + 0x2ec) == '\0') {
-          puVar5 = (unsigned int *)gameGetPlayerData();
-          temp_v2 = param_1 + temp_v1 * 0x80;
-          *(unsigned int *)(temp_v2 + 0x7e) = *puVar5;
-          *(unsigned int *)(temp_v2 + 0x82) = puVar5[1];
-          *(unsigned int *)(temp_v2 + 0x86) = puVar5[2];
-          *(unsigned short *)(temp_v2 + 0x8a) = *(unsigned short *)(puVar5 + 3);
+    u32 index;
+
+    switch (task->state) {
+    case 0:
+        if (byteTripleGetV0() == 0) {
+            return;
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 5);
-      FUN_0041eb94(param_1);
-      temp_v3 = gameGetPlayerData();
-      rt_memcpy_w(temp_v3,*(unsigned int *)(param_1 + 0x54),0xe);
-      FUN_002a7324(1);
-      *(unsigned char *)(param_1 + 0x5c) = 1;
-      if (*(char *)(*(int *)(param_1 + 0x2f8) + param_1 + 0x2ec) == '\0') {
-        FUN_0023b45c(0);
-        FUN_002c8538(1);
-        FUN_002f0384(0);
-        *(unsigned char *)(param_1 + 0x68) = 0;
-      }
-      temp_v0 = *(unsigned char *)(param_1 + 7);
-      *(unsigned char *)(param_1 + 7) = 3;
-      *(unsigned char *)(param_1 + 0xd) = temp_v0;
-      *(unsigned int *)(param_1 + 8) = 0;
-      *(unsigned char *)(param_1 + 0xc) = 0;
+        index = task->slotIndex;
+        if (index < SLOT_COUNT) {
+            if (byteTripleGetV0() == 0) {
+                return;
+            }
+            if (byteArr5Get3() != 0) {
+                rt_memcpy_w(&task->slots[index], gameDataBlocksGetTable(), 0x80);
+                task->slotValid[index] = 1;
+            } else {
+                sysMemClear(&task->slots[index], 0x80);
+                task->slotValid[index] = 0;
+            }
+        }
+        task->slotIndex = task->slotIndex + 1;
+        if ((s32)task->slotIndex < 1) {
+            FUN_003c12d8(task->slotIndex + 1, 1);
+            return;
+        }
+        if (task->hasNextStage == 0) {
+            task->state = 2;
+            return;
+        }
+        FUN_003c12d8(task->slotIndex + 1, 1);
+        task->state = task->state + 1;
+        /* fall through */
+    case 1:
+        if (byteTripleGetV0() == 0) {
+            return;
+        }
+        index = task->slotIndex;
+        if (index < SLOT_COUNT) {
+            if (byteTripleGetV0() == 0) {
+                return;
+            }
+            if (byteArr5Get3() != 0) {
+                rt_memcpy_w(&task->slots[index], gameDataBlocksGetTable(), 0x80);
+                task->slotValid[index] = 1;
+            } else {
+                sysMemClear(&task->slots[index], 0x80);
+                task->slotValid[index] = 0;
+            }
+        }
+        task->slotIndex = task->slotIndex + 1;
+        if ((s32)task->slotIndex < SLOT_COUNT) {
+            FUN_003c12d8(task->slotIndex + 1, 1);
+            return;
+        }
+        task->slotsDone = 1;
+        task->state = task->state + 1;
+        /* fall through */
+    case 2:
+        if (FUN_0040ab8c(task->request) != 0) {
+            s32 loaded = asdTMTexTableNodeIsLoaded(0x2B, 0);
+            u32 handle = 0;
+
+            if (loaded != 0) {
+                handle = task->handleA;
+            }
+            if (loaded != 0 && handle != 0 && task->handleB != 0) {
+                s32 i;
+                u8 previous;
+
+                if (task->handleC == 0) {
+                    FUN_00275bc8();
+                    task->handleC = handle;
+                }
+                rt_memcpy_w(gameDataBlocksGetTable(), task->snapshotTable, 0x80);
+                wordPairCopy(configGetSettings(), task->snapshotConfig);
+                rt_memcpy_w(gameDataBlocksGetSaveData(), task->snapshotSave, 0x2A71C);
+                for (i = 0; i < SLOT_COUNT; i++) {
+                    if (task->slotValid[i] == 0) {
+                        PlayerData *player = gameGetPlayerData();
+                        PlayerData *dest = (PlayerData *)task->slots[i].player;
+
+                        dest->a = player->a;
+                        dest->b = player->b;
+                        dest->c = player->c;
+                        dest->d = player->d;
+                    }
+                }
+                FUN_0041eb94(task);
+                rt_memcpy_w(gameGetPlayerData(), task->snapshotPlayer, 0xE);
+                FUN_002a7324(1);
+                task->applied = 1;
+                if (task->slotValid[task->selectedSlot] == 0) {
+                    FUN_0023b45c(0);
+                    FUN_002c8538(1);
+                    FUN_002f0384(0);
+                    task->unk68 = 0;
+                }
+                previous = task->mode;
+                task->mode = 3;
+                task->previousMode = previous;
+                task->state = 0;
+                task->unk0C = 0;
+            }
+        }
+        break;
     }
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(int *, int);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 int FUN_002ebd94(int, unsigned int);
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -14,7 +14,7 @@ int FUN_002ebd94(int, unsigned int);
 #endif
 extern unsigned int FUN_00120f44(int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002ebd94. */
 
@@ -48,7 +48,7 @@ unsigned long long FUN_001056ae(int param_1,unsigned int param_2,unsigned int pa
   *(int *)(param_1 + 0x3c) = *(int *)(param_1 + 0x3c) + 1;
   FUN_002ebd94(param_1,*(unsigned int *)(*(int *)(param_1 + 0x38) + temp_v2));
   temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x38) + temp_v2);
-  FUN_002e6e5c(&uStack_20);
+  _ZN9Obj55b28cD1Ev(&uStack_20);
   return romwright_piece_4_4(uStack_20,temp_v1);
 }
 

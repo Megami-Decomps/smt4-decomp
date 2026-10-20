@@ -22,7 +22,7 @@ extern int g_uiQuest; /* 0x57f28c */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_003de75c(void);
-extern int FUN_003de830(int);
+extern int recordIsAvailable(int);
 extern int FUN_003dee58(int);
 extern int FUN_003df004(int, int, int *);
 extern int partyEntryFlagsBit3(int);
@@ -140,7 +140,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         }
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 4);
-      temp_v0 = FUN_003de830(temp_v5);
+      temp_v0 = recordIsAvailable(temp_v5);
       if (temp_v0 == 0) {
         temp_v0 = partyEntryFlagsBit3(temp_v5);
         if (temp_v0 == 0) {

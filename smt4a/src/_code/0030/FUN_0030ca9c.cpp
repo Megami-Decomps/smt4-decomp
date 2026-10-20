@@ -1,25 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030ca9c` (_code @ 0x30ca9c, 0x1a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the vtable address in r1 and the zero in r2, passing it with `mov r1, r2`; built reuses r1 for the zero. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0055a9e8; /* 0x55a9e8 */
-extern unsigned char DAT_0055ad7c; /* 0x55ad7c */
+typedef struct Member Member;
 
-extern int FUN_003038fc(unsigned int *, unsigned int);
+typedef struct Object {
+    /* 0x00 */ const void *vtable;
+    /* 0x04 */ u8 flag;
+    /* 0x05 */ u8 unk05[0xB];
+    /* 0x10 */ u8 member[1];
+} Object;
 
+extern u8 DAT_0055a9e8;
+extern u8 DAT_0055ad7c;
 
-void FUN_0030ca9c(unsigned int *param_1)
+u8 *FUN_003038fc(u8 *member, s32 arg);
 
+/* Constructs the object: base vtable, cleared flag, the member at 0x10, then the final vtable. */
+void FUN_0030ca9c(Object *object)
 {
-  int temp_v0;
-  
-  *param_1 = (unsigned int)&DAT_0055ad7c;
-  *(unsigned char *)(param_1 + 1) = 0;
-  temp_v0 = FUN_003038fc(param_1 + 4,0);
-  *(unsigned char **)(temp_v0 - 0x10) = &DAT_0055a9e8;
-  return;
+    Object *self;
+
+    object->vtable = &DAT_0055ad7c;
+    object->flag = 0;
+    self = (Object *)(FUN_003038fc(object->member, 0) - 0x10);
+    self->vtable = &DAT_0055a9e8;
 }
 
 } /* extern "C" */

@@ -1,75 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00318b3c` (_code @ 0x318b3c, 0x11c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register choice in the final store only: retail adds the entry offset into r2 (the loaded g_btlTalk pointer), the build into r0. */
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(void);
-int __aeabi_memset4(...);
+typedef struct BtlTalk {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ s32 used[32];     /* per-entry marker: -1 while the entry is free */
+} BtlTalk;
 
-extern int g_btlTalk; /* 0x439b58 */
+typedef struct TalkEntry {
+    /* 0x00 */ u8 unk00[0x74];
+    /* 0x74 */ s32 enabled;
+    /* 0x78 */ s32 flag;        /* game flag that gates the entry, 0 for none */
+} TalkEntry;                    /* 0x7C bytes */
 
-/* Supplied declaration required: scrSetResult. */
-extern int gameFlagIsSet(void);
-extern int randNextInRange(unsigned int);
-extern int dataTableGetCount(void);
-extern int dataTableGetEntries(unsigned int);
-/* Supplied declaration required: __aeabi_memset4. */
-extern unsigned int FUN_003c0868(int);
+extern BtlTalk *g_btlTalk; /* 0x439b58 */
 
+extern u32 FUN_003c0868(BtlTalk *talk);
+extern int dataTableGetCount(u32 table);
+extern TalkEntry *dataTableGetEntries(u32 table);
+extern int gameFlagIsSet(int flag);
+extern int randNextInRange(u32 max);
+extern int scrSetResult(void);
+extern void __aeabi_memset4(void *dst, int size, int value);
 
-unsigned int FUN_00318b3c(void)
-
+/* Script command: picks a random enabled, flag-allowed talk entry that is still unused and marks it used. */
+u32 FUN_00318b3c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  int temp_v4;
-  int temp_v5;
-  int aiStack_130 [32];
-  int aiStack_b0 [37];
-  
-  temp_v0 = FUN_003c0868(g_btlTalk);
-  temp_v1 = dataTableGetCount();
-  temp_v2 = dataTableGetEntries(temp_v0);
-  temp_v5 = 0;
-  __aeabi_memset4(aiStack_b0,0x80,0xffffffff);
-  temp_v4 = 0;
-  if (temp_v4 < temp_v1) {
-    do {
-      temp_v3 = temp_v2 + temp_v4 * 0x7c;
-      if (*(int *)(temp_v3 + 0x74) != 0) {
-        if ((*(int *)(temp_v3 + 0x78) == 0) || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)) {
-          aiStack_b0[temp_v5] = temp_v4;
+    s32 free[32];
+    s32 candidates[32];
+    u32 table = FUN_003c0868(g_btlTalk);
+    int count = dataTableGetCount(table);
+    TalkEntry *entries = dataTableGetEntries(table);
+    int numCandidates = 0;
+    int numFree;
+    int i;
+
+    __aeabi_memset4(candidates, 0x80, -1);
+    for (i = 0; i < count; i++) {
+        if (entries[i].enabled != 0) {
+            if (entries[i].flag == 0 || gameFlagIsSet(entries[i].flag) != 0) {
+                candidates[numCandidates] = i;
+            }
+            numCandidates++;
         }
-        temp_v5 = temp_v5 + 1;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < temp_v1);
-  }
-  temp_v2 = 0;
-  __aeabi_memset4(aiStack_130,0x80,0xffffffff);
-  piVar5 = aiStack_b0;
-  temp_v1 = 0x20;
-  do {
-    temp_v4 = *piVar5;
-    if ((temp_v4 != -1) && (*(int *)(g_btlTalk + temp_v4 * 4 + 0x34) == -1)) {
-      aiStack_130[temp_v2] = temp_v4;
-      temp_v2 = temp_v2 + 1;
     }
-    temp_v1 = temp_v1 - 1;
-    piVar5 = piVar5 + 1;
-  } while (temp_v1 != 0);
-  if (temp_v2 == 0) {
-    temp_v2 = 1;
-  }
-  temp_v1 = randNextInRange((temp_v2 - 1U) & 0xffff);
-  *(unsigned int *)(g_btlTalk + aiStack_130[temp_v1] * 4 + 0x34) = 0xffffffff;
-  scrSetResult();
-  return 1;
+    numFree = 0;
+    __aeabi_memset4(free, 0x80, -1);
+    for (i = 0; i < 32; i++) {
+        if (candidates[i] != -1 && g_btlTalk->used[candidates[i]] == -1) {
+            free[numFree] = candidates[i];
+            numFree++;
+        }
+    }
+    if (numFree == 0) {
+        numFree = 1;
+    }
+    int pick = free[randNextInRange((u16)(numFree - 1))];
+
+    g_btlTalk->used[pick] = -1;
+    scrSetResult();
+    return 1;
 }
 
 } /* extern "C" */

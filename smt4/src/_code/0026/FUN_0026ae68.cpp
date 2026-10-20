@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0029e054(int, int, int, int);
+int ifTouchRegionAdd(int, int, int, int);
 int FUN_002b8584(...);
 int ifTouchRegionRemove(void);
 int __aeabi_memset4(int, int, unsigned int);
 
 extern int g_statusDown; /* 0x44e190 */
 
-/* Supplied declaration required: FUN_0029e054. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_002b8584. */
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -115,7 +115,7 @@ void FUN_0026ae68(void)
     temp_v4 = FUN_002bf4f8(0x1a,0x4f1);
     temp_v2 = FUN_002bf4f8(0x1a,0x41f);
     temp_v5 = (int)*(short *)(temp_v4 + 8);
-    FUN_0029e054(temp_v5,(int)*(short *)(temp_v4 + 10),(int)**(short **)(temp_v2 + 0xc),
+    ifTouchRegionAdd(temp_v5,(int)*(short *)(temp_v4 + 10),(int)**(short **)(temp_v2 + 0xc),
                  (int)*(short *)(*(int *)(temp_v4 + 0xc) + 2));
     *(short *)(temp_v0 + (unsigned int)*(unsigned char *)(temp_v0 + 0x480) * 2 + 0x42c) = (short)temp_v5;
     *(char *)(temp_v0 + 0x480) = *(char *)(temp_v0 + 0x480) + '\x01';

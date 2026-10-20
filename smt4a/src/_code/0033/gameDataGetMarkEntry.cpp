@@ -1,22 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `gameDataGetMarkEntry` (_code @ 0x330a80, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f69c; /* 0x57f69c */
+typedef struct MarkEntry {
+    /* 0x00 */ u8 data[100];
+} MarkEntry;
 
+typedef struct GameDataSub {
+    /* 0x00000 */ u8 unk00000[0x27184];
+    /* 0x27184 */ MarkEntry marks[32];
+} GameDataSub;
 
-int gameDataGetMarkEntry(unsigned int param_1)
+typedef struct GameDataBlock {
+    /* 0x00 */ u8 unk00[0x88];
+    /* 0x88 */ GameDataSub sub;
+} GameDataBlock;
 
+typedef struct GameDataBlocks {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ GameDataBlock *block;
+} GameDataBlocks;
+
+extern GameDataBlocks g_gameDataBlocks;
+
+/* Returns mark entry `index` of the game data (NULL when out of range). */
+MarkEntry *gameDataGetMarkEntry(u32 index)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (param_1 < 0x20) {
-    temp_v0 = DAT_0057f69c + param_1 * 100 + 0x2720c;
-  }
-  return temp_v0;
+    MarkEntry *entry = NULL;
+
+    if (index < 32) {
+        u8 *sub = (u8 *)&g_gameDataBlocks.block->sub;
+        u8 *row = sub + index * sizeof(MarkEntry);
+
+        entry = (MarkEntry *)(row + 0x27184);
+    }
+    return entry;
 }
 
 } /* extern "C" */

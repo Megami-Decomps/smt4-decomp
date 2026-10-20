@@ -1,40 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a7170` (_code @ 0x4a7170, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184310(void);
-int dataTable00FindById(void);
+typedef struct Entry {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ s32 rank;
+} Entry;
 
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: dataTable00FindById. */
+typedef struct Record {
+    /* 0x0 */ u8 unk0[6];
+    /* 0x6 */ u16 order;
+} Record;
 
+Entry *dataTable00FindById(u32 id);
+Record *FUN_00184310(u32 id);
 
-int FUN_004a7170(unsigned short *param_1,unsigned short *param_2)
-
+/* Compares two ids by entry rank (ascending), then record order (higher first), then id (ascending). */
+s32 FUN_004a7170(u16 *a, u16 *b)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (unsigned int)*param_1;
-  dataTable00FindById();
-  temp_v1 = (unsigned int)*param_2;
-  dataTable00FindById();
-  temp_v2 = *(int *)(temp_v0 + 8) - *(int *)(temp_v1 + 8);
-  if (temp_v2 == 0) {
-    temp_v0 = (unsigned int)*param_1;
-    FUN_00184310();
-    temp_v1 = (unsigned int)*param_2;
-    FUN_00184310();
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 6) - (unsigned int)*(unsigned short *)(temp_v0 + 6);
-    if (temp_v2 == 0) {
-      temp_v2 = (unsigned int)*param_1 - (unsigned int)*param_2;
+    Entry *entryA = dataTable00FindById(*a);
+    Entry *entryB = dataTable00FindById(*b);
+    s32 diff = entryA->rank - entryB->rank;
+
+    if (diff == 0) {
+        Record *recordA = FUN_00184310(*a);
+        Record *recordB = FUN_00184310(*b);
+
+        diff = recordB->order - recordA->order;
+        if (diff == 0) {
+            diff = *a - *b;
+        }
     }
-  }
-  return temp_v2;
+    return diff;
 }
 
 } /* extern "C" */

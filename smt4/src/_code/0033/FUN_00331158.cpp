@@ -16,7 +16,7 @@ int sortMenuCreate(int, int);
 int FUN_0029ee6c(int, int);
 int FUN_0029efd8(int, int);
 int FUN_0029f5d8(int, unsigned int, int, int, int, int, char [4], int, int);
-int FUN_002bc01c(void);
+int eventQueueAddUniqueIfValid(void);
 int timerStart(...);
 int FUN_002c1658(...);
 
@@ -40,14 +40,14 @@ extern int g_camp; /* 0x43da90 */
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
-extern unsigned int FUN_0029e908(int);
+extern unsigned int objectPartRunUnlessLocked(int);
 /* Supplied declaration required: FUN_0029ee6c. */
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: FUN_0029f5d8. */
 extern unsigned char FUN_002b898c(void);
-/* Supplied declaration required: FUN_002bc01c. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
@@ -86,7 +86,7 @@ void FUN_00331158(int param_1)
       FUN_0029f5d8(temp_v6,temp_v2,temp_v0 + 0xe0c,(int)*(short *)(temp_v0 + 0xe02),
                    (int)*(short *)(temp_v0 + 0xe04),(int)*(short *)(temp_v0 + 0xe06),temp_v7,0,1);
       if ((temp_v3 != 0) || (temp_v3 = temp_v6, FUN_0029efd8(temp_v6,1), temp_v3 != 0)) {
-        temp_v2 = FUN_0029e908(temp_v0 + 0x34);
+        temp_v2 = objectPartRunUnlessLocked(temp_v0 + 0x34);
         FUN_00299218((int)*(char *)(temp_v0 + 0x98),temp_v2);
         FUN_00299900();
         return;
@@ -163,7 +163,7 @@ void FUN_00331158(int param_1)
           FUN_0029cc44(1);
         }
       }
-      FUN_002bc01c();
+      eventQueueAddUniqueIfValid();
       return;
     }
   }

@@ -1,42 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035cea8` (_code @ 0x35cea8, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail stores the temporary copy of *item after computing the header address (ldr r2 / mov r1,sp / add r0 / str r2); built stores it before */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00237a94(int *, int);
-int FUN_00237d64(int, int *);
+typedef struct Record {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ struct Record *next;
+} Record;
 
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
+typedef struct Cursor {
+    /* 0x0 */ Record *record;
+} Cursor;
 
-/* Supplied declaration required: FUN_00237a94. */
-/* Supplied declaration required: FUN_00237d64. */
+typedef struct Slot {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ u8 header[1];
+} Slot;
 
+extern void FUN_00237a94(Slot **slot, void *key);
+extern void FUN_00237d64(void *header, u32 *value);
 
-unsigned int FUN_0035cea8(int *param_1,unsigned int *param_2,int *param_3,unsigned int *param_4)
-
+/* Looks the slot up through `owner`, stores the item's value into it, copies the value to `out` and advances the cursor; 0 on success, 2 when the slot is missing. */
+u32 FUN_0035cea8(Cursor *cursor, u32 *out, u8 **owner, u32 *item)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  FUN_00237a94(&temp_v2,*param_3 + 8);
-  if (temp_v2 == 0) {
-    temp_v0 = 2;
-  }
-  else {
-    temp_v1 = *param_4;
-    FUN_00237d64(temp_v2 + 8,&temp_v1);
-    *param_2 = *param_4;
-    *param_1 = *(int *)(*param_1 + 4);
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    u32 copy;
+    Slot *slot;
+
+    FUN_00237a94(&slot, *owner + 8);
+    if (slot == NULL) {
+        return 2;
+    }
+    copy = *item;
+    FUN_00237d64(slot->header, &copy);
+    *out = *item;
+    cursor->record = cursor->record->next;
+    return 0;
 }
 
 } /* extern "C" */

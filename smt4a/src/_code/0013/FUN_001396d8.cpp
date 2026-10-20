@@ -17,7 +17,7 @@ void FUN_001400ac(void);
 void sysMemClear(void *ptr, u32 size);
 void addressBlockAllocate(AsdMemSystemInit *system, u32 size);
 void rt_memclr(void *ptr, u32 size);
-void FUN_00159110(AsdExpHeapBaseInit *heap, u32 base, u32 size, u32 arg3);
+void heapOwnerCreate(AsdExpHeapBaseInit *heap, u32 base, u32 size, u32 arg3);
 void nn_os_CriticalSection_Initialize(AsdCriticalSectionInit *cs);
 
 extern AsdMemoryApoc g_asdMemory;
@@ -79,7 +79,7 @@ void FUN_001396d8(u32 reserve, u32 heapSize, u32 arg2)
     reserved->mainSize = reserved->blockSize;
     rt_memclr((void *)reserved->blockBase, reserved->blockSize);
     reserved = (AsdMemSystemInit *)g_asdMemory.system;
-    FUN_00159110(&reserved->mainHeap, reserved->mainBase, reserved->mainSize, 256);
+    heapOwnerCreate(&reserved->mainHeap, reserved->mainBase, reserved->mainSize, 256);
     nn_os_CriticalSection_Initialize(&reserved->mainLock);
 }
 

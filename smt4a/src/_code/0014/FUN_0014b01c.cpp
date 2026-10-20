@@ -8,7 +8,7 @@ int FUN_00153f64(...);
 int FUN_00157558(int);
 int FUN_0016242c(...);
 int FUN_0016c4b8(...);
-int FUN_0016c560(int);
+int skinObjectUpdateMatrices(int);
 int camSetMatrixA(int, unsigned char [108]);
 int mtx44Copy(unsigned char [108], unsigned int *);
 int FUN_0019e3d0(...);
@@ -57,7 +57,7 @@ extern unsigned int DAT_0064c0c0; /* 0x64c0c0 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: camSetMatrixA. */
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019e3d0. */
@@ -258,7 +258,7 @@ void FUN_0014b01c(int param_1)
   FUN_0016c4b8(g_renderCtx,temp_v3);
   temp_v4 = DAT_0057f670 | 0xffffff00;
   FUN_0019e3d0(temp_v4,temp_v4,temp_v4,temp_v4,temp_v6,0x40700000,0x40c80000,0x40700000);
-  FUN_0016c560(g_renderCtx);
+  skinObjectUpdateMatrices(g_renderCtx);
   temp_v3 = g_renderCtx;
   piVar5 = (int *)(g_renderCtx + 0x12b8);
   temp_v0 = *piVar5;

@@ -1,19 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035313c` (_code @ 0x35313c, 0x14 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int DAT_00471a50; /* 0x471a50 */
-extern unsigned int DAT_00471a54; /* 0x471a54 */
+typedef struct WordPair {
+    u32 first;
+    u32 second;
+} WordPair;
 
+extern WordPair DAT_00471a50;
 
-void FUN_0035313c(void)
-
+/* Clears the two words of the pair at DAT_00471a50; returns the last one written (0). */
+u32 FUN_0035313c(void)
 {
-  DAT_00471a50 = 0;
-  DAT_00471a54 = 0;
-  return;
+    DAT_00471a50.first = 0;
+    DAT_00471a50.second = 0;
+    return DAT_00471a50.second;
 }
 
-} /* extern "C" */
+}

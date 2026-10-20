@@ -10,7 +10,7 @@ int FUN_00202400(void);
 int FUN_002ae320(void);
 int FUN_003423cc(int);
 int FUN_003d498c(unsigned int, int);
-int FUN_003dc530(void);
+int uiQuestSpritesCreate(void);
 int FUN_003defe0(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -30,7 +30,7 @@ extern int FUN_002a4894(int);
 extern int FUN_002f7730(int, unsigned int);
 /* Supplied declaration required: FUN_003423cc. */
 /* Supplied declaration required: FUN_003d498c. */
-/* Supplied declaration required: FUN_003dc530. */
+/* Supplied declaration required: uiQuestSpritesCreate. */
 /* Supplied declaration required: FUN_003defe0. */
 extern int partyEntryBitsBit4(unsigned int);
 
@@ -61,7 +61,7 @@ void FUN_0031f924(void)
     FUN_003423cc(0xa2);
     return;
   }
-  FUN_003dc530();
+  uiQuestSpritesCreate();
   temp_v1 = FUN_002a4860();
   temp_v2 = FUN_002a4894(temp_v5 + 0x9ac);
   temp_v0 = *(unsigned short *)(temp_v5 + (temp_v2 + temp_v1) * 2 + 0xad6);

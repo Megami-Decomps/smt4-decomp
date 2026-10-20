@@ -15,7 +15,7 @@ int FUN_00256a50(...);
 int FUN_00256c98(...);
 int FUN_00256cd8(...);
 int FUN_00256dbc(...);
-int FUN_00256f88(...);
+int entryListSetPhase(...);
 int FUN_00257320(...);
 int refCountIncrement(...);
 int FUN_00269508(...);
@@ -124,7 +124,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: FUN_00256c98. */
 /* Supplied declaration required: FUN_00256cd8. */
 /* Supplied declaration required: FUN_00256dbc. */
-/* Supplied declaration required: FUN_00256f88. */
+/* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: FUN_00257320. */
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_00269508. */
@@ -293,7 +293,7 @@ void FUN_002dea98(EffectEmitterB *emitter)
   temp_v8 = 0.0625f;
   temp_v11 = 0.0f;
   if (emitter->refB != 0) {
-    FUN_00256f88(emitter->refB,temp_v4);
+    entryListSetPhase(emitter->refB,temp_v4);
     FUN_00256dbc(emitter->refB,&temp_v74);
     temp_v68 = (u32)(temp_v79);
     temp_v89 = (u32)(fStack_9c);

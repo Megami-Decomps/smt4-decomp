@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00229e94(unsigned int *, int);
+int dataTable5Sub3Lookup(unsigned int *, int);
 int devilGetRecord(void);
 int FUN_003c9948(unsigned int, unsigned int, int);
 int FUN_003c9a04(unsigned int, int, int, int);
 
-/* Supplied declaration required: FUN_00229e94. */
+/* Supplied declaration required: dataTable5Sub3Lookup. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_003c9948. */
 /* Supplied declaration required: FUN_003c9a04. */
@@ -38,9 +38,9 @@ unsigned int FUN_003c911c(unsigned int param_1,unsigned short *param_2,unsigned 
   puVar6 = param_3;
   devilGetRecord();
   puVar7 = (unsigned int *)(unsigned int)(unsigned char)puVar5[1];
-  FUN_00229e94(puVar7,*puVar6);
+  dataTable5Sub3Lookup(puVar7,*puVar6);
   puVar8 = (unsigned int *)(unsigned int)(unsigned char)puVar6[1];
-  FUN_00229e94(puVar8,*puVar5);
+  dataTable5Sub3Lookup(puVar8,*puVar5);
   if ((unsigned int)*puVar5 == (unsigned int)*puVar6) {
     return 0;
   }

@@ -10,7 +10,7 @@ int memFill8(unsigned char *, int);
 int timerStart(...);
 int FUN_002bd954(unsigned char *, int, int, unsigned char *, int);
 int FUN_002beed0(...);
-int FUN_002c312c(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
+int paramsInit(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int rt_memclr(unsigned char *, int);
 int asdTMTexTableLoadTmx(int, int);
 int FUN_003eb068(unsigned char *);
@@ -39,7 +39,7 @@ extern unsigned char DAT_00404a9c; /* 0x404a9c */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002beed0. */
 extern int gameGetMapBlock(void);
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_003eb068. */
@@ -71,7 +71,7 @@ void NaviMain_InitInstance(unsigned char *param_1)
   FUN_003eb068(param_1 + 0x56);
   puVar2 = param_1 + 0x5f8;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
-  FUN_002c312c(puVar2,&DAT_00404a24,0x54,&DAT_00404a78,0x24,0,0,0,0,&DAT_00404a9c,0x8c);
+  paramsInit(puVar2,&DAT_00404a24,0x54,&DAT_00404a78,0x24,0,0,0,0,&DAT_00404a9c,0x8c);
   temp_v1 = 0;
   do {
     FUN_002bd954(param_1 + temp_v1 * 0x8c + 0x618,0x1c,0xfa1,puVar2,0x15);

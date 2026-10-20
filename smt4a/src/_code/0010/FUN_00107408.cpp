@@ -16,7 +16,7 @@ int FUN_002eb338(unsigned int [2], unsigned char [40], unsigned char *);
 int FUN_002eed74(...);
 int FUN_002ef34c(int *, int *, int);
 int FUN_002ef584(int, int);
-int FUN_002ef6c4(int *, int, int, int);
+int refSlotInit(int *, int, int, int);
 int FUN_002ef6e2(int, unsigned int);
 int FUN_002ef708(void);
 
@@ -53,7 +53,7 @@ extern int FUN_002ea6fc(unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_002eed74. */
 /* Supplied declaration required: FUN_002ef34c. */
 /* Supplied declaration required: FUN_002ef584. */
-/* Supplied declaration required: FUN_002ef6c4. */
+/* Supplied declaration required: refSlotInit. */
 /* Supplied declaration required: FUN_002ef6e2. */
 /* Supplied declaration required: FUN_002ef708. */
 
@@ -96,7 +96,7 @@ void FUN_00107408(unsigned int *param_1,int *param_2,int param_3,unsigned int pa
     (**(romwright_code **)(*param_2 + 0x58))(param_2,3);
     temp_v12 = param_2 + 0x7a;
     temp_v4 = param_4;
-    FUN_002ef6c4(temp_v12,0,0,temp_v14);
+    refSlotInit(temp_v12,0,0,temp_v14);
     temp_v0 = operatorNew(0x150);
     if (temp_v0 != 0) {
       temp_v4 = 0;

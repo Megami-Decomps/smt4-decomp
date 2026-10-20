@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_004c6c08(...);
+int flagsClearActionBits(...);
 int SCARRY4(unsigned int, int);
 
 extern unsigned int DAT_00573978; /* 0x573978 */
@@ -18,7 +18,7 @@ extern unsigned int DAT_005739a4; /* 0x5739a4 */
 extern int gameGetPlayerData(void);
 extern int gameGetSlotRecord(int);
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_004c6c08. */
+/* Supplied declaration required: flagsClearActionBits. */
 
 
 void FUN_003f135c(int param_1)
@@ -43,7 +43,7 @@ void FUN_003f135c(int param_1)
           ((DAT_005739a0 & temp_v1) == 0 && (DAT_005739a4 & temp_v3) == 0)) &&
          ((temp_v3 & DAT_00573994) == 0 && (DAT_00573990 & temp_v1) == 0)) {
         if (puVar7[0xfe] != 0) {
-          FUN_004c6c08(puVar7[0xfe] + 0x5e);
+          flagsClearActionBits(puVar7[0xfe] + 0x5e);
           temp_v1 = puVar7[0xfe];
           temp_v0 = *(unsigned short *)(temp_v1 + 0x5e);
           if ((temp_v0 & 2) != 0) {
@@ -51,7 +51,7 @@ void FUN_003f135c(int param_1)
           }
         }
         else if (puVar7[0xff] != 0) {
-          FUN_004c6c08(puVar7[0xff] + 0x60);
+          flagsClearActionBits(puVar7[0xff] + 0x60);
           temp_v1 = puVar7[0xff];
           temp_v0 = *(unsigned short *)(temp_v1 + 0x60);
           if ((temp_v0 & 2) != 0) {
@@ -59,7 +59,7 @@ void FUN_003f135c(int param_1)
           }
         }
         else if (puVar7[0x100] != 0) {
-          FUN_004c6c08(puVar7[0x100] + 0x60);
+          flagsClearActionBits(puVar7[0x100] + 0x60);
         }
       }
     }
@@ -75,7 +75,7 @@ LAB_003f1464:
       temp_v2 = gameGetPlayerData();
       temp_v2 = temp_v2 + 0x5e;
       do {
-        FUN_004c6c08(temp_v2);
+        flagsClearActionBits(temp_v2);
         do {
           temp_v5 = temp_v5 + 1;
           if ((int)(unsigned int)*(unsigned char *)(temp_v4 + 0x1ca3) <= temp_v5) {

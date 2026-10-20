@@ -34,7 +34,7 @@ int FUN_00334214(int, int, int);
 int FUN_00336de4(...);
 int FUN_0035ab40(int);
 int FUN_0035da20(...);
-int FUN_0035fc4c(void);
+int btlTalkBustUpReleaseContent(void);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_003f33b0(int, unsigned int, int);
 int FUN_004bcb54(...);
@@ -98,7 +98,7 @@ extern int FUN_0032169c(void);
 /* Supplied declaration required: FUN_00336de4. */
 /* Supplied declaration required: FUN_0035ab40. */
 /* Supplied declaration required: FUN_0035da20. */
-/* Supplied declaration required: FUN_0035fc4c. */
+/* Supplied declaration required: btlTalkBustUpReleaseContent. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: roundObjFinish. */
 /* Supplied declaration required: FUN_003f33b0. */
@@ -158,7 +158,7 @@ void FUN_002f5064(int param_1)
     temp_v20 = param_1 + 0x7500;
     if (*(int *)(param_1 + 0x437c) == 0x10) {
       btlTalkBustUpSetUnk2F4(0);
-      FUN_0035fc4c();
+      btlTalkBustUpReleaseContent();
       *(unsigned char *)(temp_v11 + 0x4578) = 0;
       *(unsigned char *)(temp_v11 + 0x4579) = 0;
       *(unsigned char *)(temp_v11 + 0x457a) = 0;

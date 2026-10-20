@@ -8,7 +8,7 @@ int CONCAT44(double, double);
 int FUN_00234044(...);
 int FUN_002b5cb4(void);
 int libc_strcpy(int, int);
-int FUN_00327678(void);
+int dataTable2aGetEntryWithAoc(void);
 int FUN_00384830(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -24,7 +24,7 @@ extern unsigned char DAT_005f1724; /* 0x5f1724 */
 /* Supplied declaration required: FUN_00234044. */
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_00327678. */
+/* Supplied declaration required: dataTable2aGetEntryWithAoc. */
 /* Supplied declaration required: FUN_00384830. */
 
 
@@ -105,7 +105,7 @@ void FUN_00274e4c(void)
     temp_v3 = temp_v2 + temp_v4 * 0x3c;
     *(int *)(temp_v2 + 0xf14) = (int)*(short *)(temp_v3 + 0x12);
     temp_v2 = (int)*(short *)(temp_v3 + 0x14);
-    FUN_00327678();
+    dataTable2aGetEntryWithAoc();
     temp_v3 = DAT_00581280;
     pcVar4 = (char *)(temp_v2 + 0xc);
     if (pcVar4 != (char *)0x0) {

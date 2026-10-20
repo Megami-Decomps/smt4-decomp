@@ -113,7 +113,7 @@ extern int FUN_0033004c(void);
 /* Supplied declaration required: FUN_00330b7c. */
 extern int FUN_003316b4(int);
 /* Supplied declaration required: FUN_00333474. */
-extern int FUN_00345388(unsigned int);
+extern int gameDataTestFlags(unsigned int);
 extern int dataStoreIsReady(void);
 /* Supplied declaration required: FUN_00359974. */
 extern int playerSummaryIsIncomplete(int);
@@ -268,7 +268,7 @@ joined_r0x003a52e4:
     return temp_v18;
   case 8:
     if (*(char *)(param_1 + 0x7d5) != '\x01') {
-      if ((*(char *)(param_1 + 0x3e4) != '\0') && (temp_v8 = FUN_00345388(0x20), temp_v8 != 0)) {
+      if ((*(char *)(param_1 + 0x3e4) != '\0') && (temp_v8 = gameDataTestFlags(0x20), temp_v8 != 0)) {
         cecProcessCall3();
         temp_v9 = 9;
         *(unsigned int *)(param_1 + 0xa0) = temp_v9;

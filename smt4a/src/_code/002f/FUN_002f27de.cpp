@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], unsigned int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefRelease(unsigned int);
 int wordMoveOut_002f1324(unsigned char [4], int *, int);
 int FUN_002f3ff0(int, unsigned char [4]);
@@ -17,7 +17,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: wordMoveOut_002f1324. */
@@ -50,7 +50,7 @@ void FUN_002f27de(int param_1)
   *(unsigned short *)(param_1 + 0x30) = *(unsigned short *)(param_1 + 0x28);
   *(unsigned short *)(param_1 + 0x38) = *(unsigned short *)(param_1 + 0x28);
   *(unsigned int *)(param_1 + 0x3c) = 0;
-  FUN_002e6e5c(temp_v3);
+  _ZN9Obj55b28cD1Ev(temp_v3);
   return;
 }
 

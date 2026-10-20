@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001a1f7c(int);
 int FUN_001edcf0(void);
 int FUN_00247af8(int, int, int, int, int);
-int FUN_0028727c(void);
+int buttonHelpTexturesUnref(void);
 int buttonHelpCreate(void);
 int FUN_0028d9b0(void);
 int buttonHelpRelease(void);
@@ -27,7 +27,7 @@ extern int FUN_00193c50(void);
 /* Supplied declaration required: FUN_001a1f7c. */
 /* Supplied declaration required: FUN_001edcf0. */
 /* Supplied declaration required: FUN_00247af8. */
-/* Supplied declaration required: FUN_0028727c. */
+/* Supplied declaration required: buttonHelpTexturesUnref. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
 /* Supplied declaration required: buttonHelpRelease. */
@@ -58,7 +58,7 @@ unsigned int FUN_002ef8e4(void)
       }
       FUN_00297050(1);
       buttonHelpRelease();
-      FUN_0028727c();
+      buttonHelpTexturesUnref();
       DAT_0043e2f2 = 1;
       return 0xffffffff;
     }

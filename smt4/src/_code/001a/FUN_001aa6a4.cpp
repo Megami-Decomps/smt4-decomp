@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0019552c(int, int);
 int FUN_00286198(...);
 int mtxMakeTranslation(...);
-int FUN_002880a8(int);
+int layoutApplyForState(int);
 int FUN_002b2144(...);
 int cameraSetViewMatrix(...);
 int FUN_002ba1e0(...);
@@ -67,7 +67,7 @@ extern float DAT_004efd98; /* 0x4efd98 */
 /* Supplied declaration required: FUN_0019552c. */
 /* Supplied declaration required: FUN_00286198. */
 /* Supplied declaration required: mtxMakeTranslation. */
-/* Supplied declaration required: FUN_002880a8. */
+/* Supplied declaration required: layoutApplyForState. */
 extern unsigned int FUN_002a7bc0(void);
 /* Supplied declaration required: FUN_002b2144. */
 /* Supplied declaration required: cameraSetViewMatrix. */
@@ -134,7 +134,7 @@ void FUN_001aa6a4(int param_1)
   if (*(char *)(param_1 + 1000) == '\0') {
     return;
   }
-  FUN_002880a8(g_titleScene);
+  layoutApplyForState(g_titleScene);
   temp_v0 = FUN_002a7bc0();
   mtx44Copy(temp_v18,temp_v0);
   temp_v3 = g_titleScene;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0029e054(void);
+int ifTouchRegionAdd(void);
 
-/* Supplied declaration required: FUN_0029e054. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 
 
 void FUN_002346ac(int param_1,unsigned short param_2,unsigned short param_3,unsigned short param_4,
@@ -17,7 +17,7 @@ void FUN_002346ac(int param_1,unsigned short param_2,unsigned short param_3,unsi
   unsigned short temp_v0;
   
   temp_v0 = param_2;
-  FUN_0029e054();
+  ifTouchRegionAdd();
   *(unsigned short *)(param_1 + 0x58) = temp_v0;
   *(unsigned short *)(param_1 + 0x5c) = param_2;
   *(unsigned short *)(param_1 + 0x5e) = param_3;

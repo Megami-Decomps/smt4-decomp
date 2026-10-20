@@ -1,21 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c28a8` (_code @ 0x3c28a8, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction scheduling only: retail keeps the statements in source order (the flags byte is loaded last), built hoists that load and the constants above the stores. */
+#include "common.h"
 
 extern "C" {
 
+typedef struct Slot {
+    /* 0x00 */ u8 flags;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ s32 state;
+    /* 0x08 */ u8 unk08;
+    /* 0x09 */ u8 counter;
+    /* 0x0A */ u8 valueA;
+    /* 0x0B */ u8 valueB;
+} Slot;
 
-void FUN_003c28a8(unsigned char *param_1,unsigned char param_2)
-
+/* Starts the slot (state 1) with `value` in both value bytes, unless it is already started. */
+void FUN_003c28a8(Slot *slot, u8 value)
 {
-  if (*(int *)(param_1 + 4) != 1) {
-    param_1[10] = param_2;
-    param_1[0xb] = param_2;
-    *(unsigned int *)(param_1 + 4) = 1;
-    param_1[9] = 0;
-    *param_1 = *param_1 | 1;
-  }
-  return;
+    if (slot->state != 1) {
+        slot->valueA = value;
+        slot->valueB = value;
+        slot->state = 1;
+        slot->counter = 0;
+        slot->flags |= 1;
+    }
 }
 
 } /* extern "C" */

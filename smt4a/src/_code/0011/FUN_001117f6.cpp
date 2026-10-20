@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_002fd374(void);
+void _ZN9Obj55a254D1Ev(void);
 
-/* Forwards to FUN_002fd374. */
+/* Forwards to _ZN9Obj55a254D1Ev. */
 void FUN_001117f6(void)
 {
-    FUN_002fd374();
+    _ZN9Obj55a254D1Ev();
 }
 
 } /* extern "C" */

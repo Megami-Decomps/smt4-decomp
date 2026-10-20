@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c5d5c(unsigned int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 
 extern unsigned char LAB_00150d18; /* 0x150d18 */
 extern unsigned char LAB_00150f84; /* 0x150f84 */
@@ -13,7 +13,7 @@ extern unsigned char DAT_00421e94; /* 0x421e94 */
 extern unsigned char DAT_00421ea8; /* 0x421ea8 */
 
 extern unsigned int *FUN_001512e0(void);
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_0014c9b4(void)
@@ -33,9 +33,9 @@ void FUN_0014c9b4(void)
   puVar1[0x11] = (unsigned int)&DAT_00421e94;
   puVar1[0x16] = 0;
   puVar1 = puVar1 + 0x3c;
-  FUN_002c5d5c(puVar1,&LAB_00150f84,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(puVar1,&LAB_00150f84,0x10,4);
   puVar1 = puVar1 + 0x10;
-  FUN_002c5d5c(puVar1,&LAB_00150d18,0xc,4);
+  __aeabi_vec_ctor_nocookie_nodtor(puVar1,&LAB_00150d18,0xc,4);
   temp_v0 = 0;
   temp_v1 = 0;
   do {

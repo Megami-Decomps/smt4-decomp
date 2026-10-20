@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002feac0(int, int *);
+int ringPush(int, int *);
 int FUN_002fec68(unsigned char *, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 extern int rt_malloc(unsigned int);
 extern int onlineSockAddrConstruct(int);
 extern int FUN_002f5928(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002feac0. */
+/* Supplied declaration required: ringPush. */
 /* Supplied declaration required: FUN_002fec68. */
 
 
@@ -51,7 +51,7 @@ int FUN_003110a4(unsigned char *param_1,unsigned int param_2,int param_3,int par
       *(unsigned int *)(temp_v1 + 0x28) = 0;
     }
     temp_v4 = temp_v2;
-    FUN_002feac0(temp_v0 - 0x28,&temp_v4);
+    ringPush(temp_v0 - 0x28,&temp_v4);
   }
   *(unsigned int *)(temp_v0 + 0x38) = 0;
   *(unsigned int *)(temp_v0 + 0x3c) = 0;

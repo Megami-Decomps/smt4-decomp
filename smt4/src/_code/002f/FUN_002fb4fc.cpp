@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_00270028(int a);
 int FUN_00275dec(void);
-int FUN_0028dc68(int a);
+int messageSlotSet(int a);
 int FUN_0028dc98(...);
 int eventQueueAddUnique(int id);
 extern int scrGetCommandFrame(void);
@@ -25,7 +25,7 @@ u8 FUN_002fb4fc(void)
         step = scrGetCommandFrame();
         if (step >= 3) {
             FUN_0028dc98(0xffffffff);
-            FUN_0028dc68(0);
+            messageSlotSet(0);
         }
         return step >= 3;
     }

@@ -15,7 +15,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0023dcb8(void);
-extern int FUN_00292914(int);
+extern int idOwnerHasActiveObject(int);
 /* Supplied declaration required: FUN_00292960. */
 extern int flagBitIsSet(void);
 extern int FUN_00293988(void);
@@ -81,7 +81,7 @@ void FUN_0028e9ec(int param_1)
                   ((pcVar1[0x5b] == '\0' ||
                    (temp_v1 = btlGetMainState(), (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) == 0)))))) {
                 if (*pcVar1 != '\x05') {
-                  if ((*pcVar1 != '\x03') || (temp_v1 = FUN_00292914(temp_v0), temp_v1 != 0)) {
+                  if ((*pcVar1 != '\x03') || (temp_v1 = idOwnerHasActiveObject(temp_v0), temp_v1 != 0)) {
                     temp_v4 = temp_v4 + 1;
                   }
                 }

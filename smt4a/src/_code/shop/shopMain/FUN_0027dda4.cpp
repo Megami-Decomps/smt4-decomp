@@ -15,8 +15,8 @@ int setFlag10(void);
 int FUN_00499338(void);
 int FUN_00499c84(void);
 int FUN_0049c3c0(void);
-int FUN_0049cf9c(int [2]);
-int FUN_0049d004(int [2]);
+int fileSlot17Acquire(int [2]);
+int fileSlot17Release(int [2]);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -44,8 +44,8 @@ extern int isFlag10Set(void);
 /* Supplied declaration required: FUN_00499c84. */
 /* Supplied declaration required: FUN_0049c3c0. */
 extern int storyFlagRangeAnySet(void);
-/* Supplied declaration required: FUN_0049cf9c. */
-/* Supplied declaration required: FUN_0049d004. */
+/* Supplied declaration required: fileSlot17Acquire. */
+/* Supplied declaration required: fileSlot17Release. */
 extern int FUN_004d08d0(int);
 
 
@@ -151,7 +151,7 @@ unsigned int FUN_0027dda4(void)
           temp_v3 = FUN_004d08d0(*(int *)(temp_v4 + 0x18) + 0xb08);
           asdOperatorDelete(temp_v3 - 0xb08);
         }
-        FUN_0049d004(temp_v8);
+        fileSlot17Release(temp_v8);
       }
       temp_v1 = 3;
     }
@@ -175,7 +175,7 @@ unsigned int FUN_0027dda4(void)
     if ((temp_v3 != 0) && (temp_v3 = isFlag10Set(), temp_v3 == 0)) {
       setFlag10();
     }
-    FUN_0049cf9c(temp_v8);
+    fileSlot17Acquire(temp_v8);
     temp_v3 = 0x1605c;
     if (*(char *)(temp_v4 + 6) != '\0') {
       if (*(char *)(temp_v4 + 6) == '\x01') {

@@ -1,31 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004944d0` (_code @ 0x4944d0, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps b in r4, a in r5 and the first key in r6 (then copies b to r6 for the tie-break call); the build uses r5/r6/r4. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0049cad0(...);
+extern int FUN_0049cad0(u32 id);
+extern int FUN_0049c9a0(u32 id);
 
-extern int FUN_0049c9a0(unsigned int);
-/* Supplied declaration required: FUN_0049cad0. */
-
-
-int FUN_004944d0(unsigned int param_1,unsigned int param_2)
-
+/* Compare function for sorting ids: by FUN_0049cad0 (descending), then by FUN_0049c9a0 (ascending). */
+int FUN_004944d0(u32 a, u32 b)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_0049cad0();
-  temp_v1 = FUN_0049cad0(param_2);
-  temp_v1 = temp_v1 - temp_v0;
-  if (temp_v1 == 0) {
-    temp_v1 = FUN_0049c9a0(param_1);
-    temp_v0 = FUN_0049c9a0(param_2);
-    temp_v1 = temp_v1 - temp_v0;
-  }
-  return temp_v1;
+    int keyA = FUN_0049cad0(a);
+    int keyB = FUN_0049cad0(b);
+    int diff = keyB - keyA;
+
+    if (diff != 0) {
+        return diff;
+    }
+    return FUN_0049c9a0(a) - FUN_0049c9a0(b);
 }
 
 } /* extern "C" */

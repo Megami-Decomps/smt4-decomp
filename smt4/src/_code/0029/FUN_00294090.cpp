@@ -9,7 +9,7 @@ int FUN_002be624(...);
 int asdOperatorNew(int, unsigned int);
 int FUN_0033e7c4(unsigned int *, int);
 int FUN_0033f2b8(unsigned int *);
-int FUN_00389bc8(unsigned int, int, unsigned int *, unsigned char [68]);
+int aocQueueType0c(unsigned int, int, unsigned int *, unsigned char [68]);
 int FUN_00389ed8(unsigned int, int, unsigned int *, unsigned char [68]);
 
 extern unsigned char DAT_00420700; /* 0x420700 */
@@ -22,7 +22,7 @@ extern int FUN_0023e3a4(unsigned int, int, unsigned int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_0033e7c4. */
 /* Supplied declaration required: FUN_0033f2b8. */
-/* Supplied declaration required: FUN_00389bc8. */
+/* Supplied declaration required: aocQueueType0c. */
 /* Supplied declaration required: FUN_00389ed8. */
 
 
@@ -83,7 +83,7 @@ unsigned int * FUN_00294090(int param_1,int param_2,unsigned int param_3,unsigne
       puVar2[3] = temp_v0;
       temp_v1 = FUN_0023e330(g_aocSystem,temp_v0,1);
       if (temp_v1 != 0) {
-        FUN_00389bc8(g_aocSystem,temp_v0,puVar2 + 10,temp_v2);
+        aocQueueType0c(g_aocSystem,temp_v0,puVar2 + 10,temp_v2);
         return puVar2;
       }
     }

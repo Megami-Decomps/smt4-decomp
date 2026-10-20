@@ -14,7 +14,7 @@ extern unsigned char DAT_00400574; /* 0x400574 */
 extern unsigned char DAT_0040057c; /* 0x40057c */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int FUN_002201f4(unsigned int);
+extern unsigned int entryTableCallSlot3(unsigned int);
 /* Supplied declaration required: FUN_00256224. */
 /* Supplied declaration required: FUN_002bd06c. */
 extern unsigned int FUN_002bd1fc(void);
@@ -34,7 +34,7 @@ void FUN_003c3238(unsigned int param_1,unsigned int *param_2)
   unsigned int uStack_20;
   
   if (param_2 != (unsigned int *)0x0) {
-    temp_v0 = FUN_002201f4(3);
+    temp_v0 = entryTableCallSlot3(3);
     temp_v2 = 0;
     uStack_28 = 0;
     uStack_24 = 0;

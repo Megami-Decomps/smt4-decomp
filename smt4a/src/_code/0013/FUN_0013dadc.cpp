@@ -1,33 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013dadc` (_code @ 0x13dadc, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int eventTexCallIfMatch(int, unsigned int, int);
-int FUN_00153630(void);
+s32 FUN_00153630(s32 a, u32 b, u32 c, u32 d, s32 e);
+int eventTexCallIfMatch(s32 a, u32 b, s32 c);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: eventTexCallIfMatch. */
-/* Supplied declaration required: FUN_00153630. */
-
-
-unsigned int FUN_0013dadc(int param_1,unsigned int param_2)
-
+/* Calls eventTexCallIfMatch unless FUN_00153630 (given all four arguments and -1) reports non-zero; returns 1. */
+u32 FUN_0013dadc(s32 a, u32 b, u32 c, u32 d)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = param_1;
-  FUN_00153630();
-  if (temp_v0 == 0) {
-    eventTexCallIfMatch(param_1,param_2,0);
-  }
-  return 1;
+    if (FUN_00153630(a, b, c, d, -1) == 0) {
+        eventTexCallIfMatch(a, b, 0);
+    }
+    return 1;
 }
 
 } /* extern "C" */

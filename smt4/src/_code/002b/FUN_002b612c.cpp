@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002c5d5c(int, unsigned char *, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int, unsigned char *, int);
 
 extern unsigned char LAB_00127fa8; /* 0x127fa8 */
 
-/* Supplied declaration required: FUN_002c5d5c. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_002b612c(int param_1)
@@ -23,7 +23,7 @@ void FUN_002b612c(int param_1)
   int temp_v4;
   unsigned char temp_v5;
   
-  FUN_002c5d5c(param_1,&LAB_00127fa8,0x18);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_00127fa8,0x18);
   *(unsigned char *)(param_1 + 0x90) = 0;
   *(unsigned char *)(param_1 + 0x91) = 0;
   *(unsigned char *)(param_1 + 0x92) = 0;

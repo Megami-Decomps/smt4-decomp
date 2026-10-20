@@ -8,7 +8,7 @@ int FUN_00201148(...);
 int FUN_002276f8(...);
 int FUN_0023c6e4(...);
 int FUN_0023ea20(...);
-int FUN_00254a2c(...);
+int animPlayerSetLoopPolicy(...);
 int FUN_0028c618(...);
 int btlGetMainState(...);
 int FUN_00297468(...);
@@ -40,7 +40,7 @@ extern unsigned int DAT_00435d18; /* 0x435d18 */
 /* Supplied declaration required: FUN_0023ea20. */
 extern int FUN_0024a808(int);
 extern int FUN_002522e0(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_00254a2c. */
+/* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00297468. */
@@ -50,7 +50,7 @@ extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002d582c. */
-extern int FUN_002d8214(void);
+extern int gameObjectFlagIsSet(void);
 /* Supplied declaration required: FUN_003da0ec. */
 /* Supplied declaration required: FUN_003daf6c. */
 /* Supplied declaration required: FUN_003dbed8. */
@@ -102,7 +102,7 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
   if ((*(unsigned int *)(param_1 + 0x3028) & 8) != 0) {
     FUN_00201148(temp_v8);
     FUN_0023c6e4(param_2);
-    temp_v2 = FUN_002d8214();
+    temp_v2 = gameObjectFlagIsSet();
     if (temp_v2 == 0) {
       *(unsigned int *)(param_1 + 0x3028) = *(unsigned int *)(param_1 + 0x3028) & 0xfffffff7;
     }
@@ -174,7 +174,7 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
         FUN_0028c618(*(unsigned int *)(*puVar8 + 8),0);
         FUN_0023ea20(*puVar8,0);
         FUN_002d582c(*puVar8);
-        FUN_00254a2c(*(unsigned int *)(*puVar8 + 8),1);
+        animPlayerSetLoopPolicy(*(unsigned int *)(*puVar8 + 8),1);
         puVar8 = (unsigned int *)*puVar8;
         *puVar8 = *puVar8 | 2;
         *(unsigned char *)(*(int *)(puVar8[2] + 0x2c) + 0x1f6) = 0;

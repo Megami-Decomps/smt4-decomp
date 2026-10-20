@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int flagObjAdvance(int);
 int FUN_0047306c(int, int, int, int);
-int FUN_0047314c(int);
+int jobOwnerFreeSlotAndStop(int);
 int FUN_00477d10(...);
 
 typedef int romwright_code(...);
@@ -16,10 +16,10 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: flagObjAdvance. */
 /* Supplied declaration required: FUN_0047306c. */
-/* Supplied declaration required: FUN_0047314c. */
+/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 /* Supplied declaration required: FUN_00477d10. */
 extern int FUN_004d0554(void);
 extern int FUN_004d0584(void);
@@ -44,7 +44,7 @@ void FUN_00477744(int param_1)
   }
   if (temp_v1 != 1) {
     if ((temp_v1 == 2) && (*(char *)(param_1 + 0x167a) != '\0')) {
-      FUN_0047314c(temp_v2);
+      jobOwnerFreeSlotAndStop(temp_v2);
       *(unsigned int *)(param_1 + 4) = 3;
       *(unsigned int *)(param_1 + 8) = 0;
       if (*(int **)(param_1 + 0x208) != (int *)0x0) {
@@ -56,7 +56,7 @@ void FUN_00477744(int param_1)
   else if (*(char *)(param_1 + 0x167a) != '\0') {
     temp_v1 = FUN_004d0584();
     if (temp_v1 != 0) {
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
       FUN_00477d10(param_1,0xffffffff,0);
       flagObjAdvance(temp_v2);
       temp_v0 = 2;
@@ -65,7 +65,7 @@ void FUN_00477744(int param_1)
     }
     temp_v1 = FUN_004d0554();
     if (temp_v1 != 0) {
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
       *(unsigned int *)(param_1 + 4) = 0xf;
       *(unsigned int *)(param_1 + 8) = 0;
       if (*(int **)(param_1 + 0x208) != (int *)0x0) {

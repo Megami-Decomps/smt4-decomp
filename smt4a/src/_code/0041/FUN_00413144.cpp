@@ -19,9 +19,9 @@ int FUN_002f4cd6(...);
 int FUN_00303928(...);
 int FUN_00387edc(...);
 int FUN_004311c0(...);
-int FUN_004336b4(...);
+int _ZN9Obj55aad4D1Ev(...);
 int FUN_0043387c(...);
-int FUN_00433a3c(...);
+int _ZN9Obj55ac68D1Ev(...);
 int FUN_00522a48(...);
 int FUN_00522bf4(...);
 int rt_memcpy_w(...);
@@ -78,7 +78,7 @@ extern unsigned int FUN_002bf520(void);
 extern unsigned int onlineStringConstruct(unsigned char *, unsigned char *);
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: onlineStringAssign. */
-extern int constructObj0055affc(unsigned char *);
+extern int _ZN9Obj55aff4C1Ev(unsigned char *);
 extern unsigned int FUN_002ea100(unsigned char *, unsigned int *);
 /* Supplied declaration required: FUN_002f4cac. */
 /* Supplied declaration required: FUN_002f4cd6. */
@@ -88,9 +88,9 @@ extern int FUN_003038fc(int, unsigned int);
 extern int FUN_0030395c(int, unsigned int);
 /* Supplied declaration required: FUN_00387edc. */
 /* Supplied declaration required: FUN_004311c0. */
-/* Supplied declaration required: FUN_004336b4. */
+/* Supplied declaration required: _ZN9Obj55aad4D1Ev. */
 /* Supplied declaration required: FUN_0043387c. */
-/* Supplied declaration required: FUN_00433a3c. */
+/* Supplied declaration required: _ZN9Obj55ac68D1Ev. */
 /* Supplied declaration required: FUN_00522a48. */
 /* Supplied declaration required: FUN_00522bf4. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -141,7 +141,7 @@ void FUN_00413144(int param_1)
   
   temp_v3 = &DAT_0055aadc;
   temp_v4 = 0;
-  temp_v0 = constructObj0055affc(temp_v7);
+  temp_v0 = _ZN9Obj55aff4C1Ev(temp_v7);
   temp_v11 = 0;
   temp_v12 = 0;
   temp_v13 = 0;
@@ -198,7 +198,7 @@ void FUN_00413144(int param_1)
   *(unsigned int *)(temp_v0 - 8) = 0;
   FUN_0043387c(puVar4);
   FUN_00120648(temp_v0,puVar4);
-  FUN_00433a3c(&temp_v24);
+  _ZN9Obj55ac68D1Ev(&temp_v24);
   temp_v5 = *(unsigned int *)(param_1 + 0x90);
   uStack_254 = *(unsigned int *)(param_1 + 0x94);
   temp_v0 = FUN_00237608();
@@ -251,7 +251,7 @@ void FUN_00413144(int param_1)
     (**(romwright_code **)*puVar4)(puVar4);
   }
   asdOperatorDeleteArray(temp_v14);
-  FUN_004336b4(&temp_v3);
+  _ZN9Obj55aad4D1Ev(&temp_v3);
   return;
 }
 

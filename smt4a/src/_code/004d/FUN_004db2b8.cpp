@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_0039c6d8(unsigned int *, int);
+int dataTable5Sub3Lookup(unsigned int *, int);
 int FUN_004dc154(unsigned int, unsigned int, int);
 int FUN_004dc214(unsigned int, int, int, int);
 
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_0039c6d8. */
+/* Supplied declaration required: dataTable5Sub3Lookup. */
 /* Supplied declaration required: FUN_004dc154. */
 /* Supplied declaration required: FUN_004dc214. */
 
@@ -36,9 +36,9 @@ unsigned int FUN_004db2b8(unsigned int param_1,unsigned short *param_2,unsigned 
   puVar5 = param_3;
   FUN_00184310();
   puVar6 = (unsigned int *)(unsigned int)(unsigned char)puVar4[1];
-  FUN_0039c6d8(puVar6,*puVar5);
+  dataTable5Sub3Lookup(puVar6,*puVar5);
   puVar7 = (unsigned int *)(unsigned int)(unsigned char)puVar5[1];
-  FUN_0039c6d8(puVar7,*puVar4);
+  dataTable5Sub3Lookup(puVar7,*puVar4);
   if ((unsigned int)*puVar4 == (unsigned int)*puVar5) {
     return 0;
   }

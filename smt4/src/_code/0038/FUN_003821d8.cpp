@@ -8,7 +8,7 @@ int FUN_0023547c(int);
 int FUN_00235554(unsigned int *, unsigned char *);
 int FUN_00250d84(int, unsigned int);
 int FUN_00269dc8(void);
-int FUN_0026a704(void);
+int buttonHelpResetSlots(void);
 int FUN_00287528(int);
 int gameFlagSetValue(int, int);
 int FUN_0028eeb8(int);
@@ -58,7 +58,7 @@ extern int FUN_00241990(void);
 /* Supplied declaration required: FUN_00250d84. */
 extern int FUN_00250ec0(unsigned int);
 /* Supplied declaration required: FUN_00269dc8. */
-/* Supplied declaration required: FUN_0026a704. */
+/* Supplied declaration required: buttonHelpResetSlots. */
 extern int FUN_0026b564(void);
 extern int FUN_00282b28(void);
 /* Supplied declaration required: FUN_00287528. */
@@ -321,7 +321,7 @@ LAB_003822fc:
           param_1[5] = (unsigned int)(s_e022_02_0044db24 + temp_v2);
           FUN_0029c3c0(0,10,0xff);
           FUN_0029c3c0(1,10,0xff);
-          FUN_0026a704();
+          buttonHelpResetSlots();
           temp_v4 = 9;
           param_1[2] = temp_v4;
           return;

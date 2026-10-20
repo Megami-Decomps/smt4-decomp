@@ -1,38 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033a264` (_code @ 0x33a264, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0023ea20(unsigned int, int);
-int FUN_0029bb14(void);
+typedef struct Effect {
+    /* 0x00 */ u8 unk00[0x74];
+    /* 0x74 */ f32 scale;
+    /* 0x78 */ f32 unk78;
+} Effect;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct Target {
+    /* 0x0 */ u32 flags;
+    /* 0x4 */ u8 unk4[4];
+    /* 0x8 */ Effect *effect;
+} Target;
 
-/* Supplied declaration required: FUN_0023ea20. */
-/* Supplied declaration required: FUN_0029bb14. */
+typedef struct TargetOwner {
+    /* 0x0000 */ u8 unk0000[0x4398];
+    /* 0x4398 */ Target *target;
+} TargetOwner;
 
+s32 FUN_0029bb14(f32 value);
+s32 FUN_0023ea20(Target *target, s32 arg, f32 value);
 
-void FUN_0033a264(int param_1)
-
+/* Clears the target's pending flag (resetting its effect scale) and then refreshes the target. */
+void FUN_0033a264(TargetOwner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = *(unsigned int **)(param_1 + 0x4398);
-  if (puVar1 != (unsigned int *)0x0) {
-    if ((*puVar1 & 4) != 0) {
-      *puVar1 = *puVar1 & 0xfffffffb;
-      *(unsigned int *)(puVar1[2] + 0x74) = 0x3f800000;
-      FUN_0029bb14();
+    Target *target = owner->target;
+
+    if (target != NULL) {
+        if ((target->flags & 4) != 0) {
+            target->flags &= ~4u;
+            target->effect->scale = 1.0f;
+            FUN_0029bb14(target->effect->unk78);
+        }
+        FUN_0023ea20(owner->target, 0, 0.0f);
     }
-    FUN_0023ea20(*(unsigned int *)(param_1 + 0x4398),0);
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

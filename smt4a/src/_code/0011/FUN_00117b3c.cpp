@@ -12,7 +12,7 @@ extern unsigned char DAT_00559ee4; /* 0x559ee4 */
 /* Supplied declaration required: FUN_0012cfde. */
 extern unsigned int vectorInitEmpty(unsigned char *);
 /* Supplied declaration required: vectorDestroyWords. */
-extern int constructObj0055affc(unsigned int *);
+extern int _ZN9Obj55aff4C1Ev(unsigned int *);
 extern int clearWords2Alt(int);
 extern int FUN_003038fc(int, unsigned int);
 extern int FUN_00303928(int, unsigned int, unsigned int);
@@ -30,7 +30,7 @@ int FUN_00117b3c(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_00559ee4;
   *(unsigned char *)(param_1 + 1) = 0;
-  temp_v0 = constructObj0055affc(param_1 + 6);
+  temp_v0 = _ZN9Obj55aff4C1Ev(param_1 + 6);
   temp_v0 = FUN_003038fc(temp_v0 + 0xc,0);
   temp_v1 = vectorInitEmpty(temp_v2);
   temp_v0 = FUN_00303928(temp_v0 + 0x20,3,temp_v1);

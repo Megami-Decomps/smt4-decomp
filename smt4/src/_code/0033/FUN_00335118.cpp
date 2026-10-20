@@ -1,20 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00335118` (_code @ 0x335118, 0xc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int func_0x0020ffe0(unsigned int);
+u32 FUN_0020ffe0(void *inner);
 
-/* Supplied declaration required: func_0x0020ffe0. */
+typedef struct Node00335118 {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ struct Node00335118 *next;
+} Node00335118;
 
-
-void FUN_00335118(int param_1)
-
+/* Forwards the object two links down (+8, +8) to FUN_0020ffe0. */
+void FUN_00335118(Node00335118 *node)
 {
-/* irregular: 1 native warning(s); review required */
-  func_0x0020ffe0(*(unsigned int *)(*(int *)(param_1 + 8) + 8));
-  return;
+    FUN_0020ffe0(node->next->next);
 }
 
 } /* extern "C" */

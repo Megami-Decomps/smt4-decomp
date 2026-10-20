@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002512c4(...);
-int FUN_0029a268(...);
+int fadeObjectResetIfActive(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002be624(...);
@@ -21,7 +21,7 @@ int CONCAT44(...);
 int FUN_0025117c(...);
 int FUN_0025141c(...);
 int FUN_00251d98(...);
-int FUN_0029e908(...);
+int objectPartRunUnlessLocked(...);
 int FUN_002bed3c(void);
 int vec2GetYInt(...);
 int vec2GetXInt(...);
@@ -58,9 +58,9 @@ extern int FUN_001c36b8(void);
 /* Supplied declaration required: FUN_0025141c. */
 /* Supplied declaration required: FUN_00251d98. */
 extern int FUN_00252180(unsigned int);
-/* Supplied declaration required: FUN_0029a268. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 extern int FUN_0029d65c(int);
-/* Supplied declaration required: FUN_0029e908. */
+/* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int FUN_0029efa8(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002bdf94. */
@@ -191,7 +191,7 @@ unsigned int FUN_00212538(void)
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < 4);
         }
-        temp_v2 = FUN_0029e908(temp_v1 + 0x8dc);
+        temp_v2 = objectPartRunUnlessLocked(temp_v1 + 0x8dc);
         FUN_0025117c(temp_v2,temp_v4,temp_v5,0x79,1);
         break;
       case 6:
@@ -207,7 +207,7 @@ unsigned int FUN_00212538(void)
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < 4);
         }
-        temp_v2 = FUN_0029e908();
+        temp_v2 = objectPartRunUnlessLocked();
         temp_v3 = FUN_0029efa8(temp_v1 + 0x9a4);
         temp_v2 = temp_v2 + temp_v3 * 4 + 4;
         FUN_0025117c(temp_v2,temp_v4,temp_v5,0x79,1);
@@ -250,7 +250,7 @@ unsigned int FUN_00212538(void)
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < 4);
         }
-        temp_v2 = FUN_0029e908();
+        temp_v2 = objectPartRunUnlessLocked();
         temp_v3 = FUN_0029efa8(temp_v1 + 0xa6c);
         FUN_0025117c(temp_v2 + temp_v3 * 4,temp_v4,temp_v5,0x79,1);
         break;
@@ -627,7 +627,7 @@ unsigned int FUN_00212538(void)
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < 4);
         }
-        temp_v3 = FUN_0029e908(temp_v1 + 0x8dc);
+        temp_v3 = objectPartRunUnlessLocked(temp_v1 + 0x8dc);
         FUN_002512c4(temp_v3,0,0,0xab,1);
         break;
       case 6:
@@ -643,7 +643,7 @@ unsigned int FUN_00212538(void)
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < 4);
         }
-        temp_v2 = FUN_0029e908(temp_v1 + 0x940);
+        temp_v2 = objectPartRunUnlessLocked(temp_v1 + 0x940);
         temp_v3 = FUN_0029efa8(temp_v1 + 0x940);
         temp_v3 = temp_v2 + temp_v3 * 4 + 4;
         FUN_002512c4(temp_v3,0,0,0xab,1);
@@ -684,7 +684,7 @@ unsigned int FUN_00212538(void)
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < 4);
         }
-        temp_v3 = FUN_0029e908();
+        temp_v3 = objectPartRunUnlessLocked();
         temp_v2 = FUN_0029efa8(temp_v1 + 0xa08);
         temp_v3 = temp_v3 + temp_v2 * 4;
         FUN_002512c4(temp_v3,0,0,0xab,1);
@@ -764,8 +764,8 @@ unsigned int FUN_00212538(void)
         (**(romwright_code **)(temp_v2 + 0x12c8))();
         *(unsigned char *)(temp_v2 + 0x12c4) = 0;
       }
-      FUN_0029a268(temp_v1 + 0x554);
-      FUN_0029a268(temp_v1 + 0x5e0);
+      fadeObjectResetIfActive(temp_v1 + 0x554);
+      fadeObjectResetIfActive(temp_v1 + 0x5e0);
       temp_v1 = g_titleScene;
       temp_v2 = packNibblesAndByte(6,7,0);
       piVar10 = (int *)(temp_v1 + 0x12ac);

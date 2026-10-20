@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026a69c(void);
+int idMapLookup(void);
 int FUN_00283e48(void);
 int dataTable06Sub1GetRecord(...);
 int FUN_002ae164(void);
@@ -31,7 +31,7 @@ struct fn_001cffd0_arg0 {
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 extern int FUN_0026a604(void);
-/* Supplied declaration required: FUN_0026a69c. */
+/* Supplied declaration required: idMapLookup. */
 /* Supplied declaration required: FUN_00283e48. */
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_002ae164. */
@@ -63,7 +63,7 @@ unsigned int FUN_001cffd0(fn_001cffd0_arg0 *param_1)
     temp_v10 = 1.0f;
     do {
       temp_v1 = (unsigned int)*(unsigned short *)(param_1->field_0x4 + temp_v6 * 2);
-      if ((temp_v1 != 0) && (FUN_0026a69c(), temp_v1 == 6)) {
+      if ((temp_v1 != 0) && (idMapLookup(), temp_v1 == 6)) {
         dataTable06Sub1GetRecord(*(unsigned short *)(param_1->field_0x4 + temp_v6 * 2));
         temp_v4 = (unsigned int)*(unsigned short *)(param_1->field_0x4 + temp_v6 * 2);
         temp_v1 = temp_v4;
@@ -72,7 +72,7 @@ unsigned int FUN_001cffd0(fn_001cffd0_arg0 *param_1)
                                  (*(unsigned char *)(temp_v1 + 3) & 0x1f,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v8 = temp_v8 + temp_v8 * temp_v11;
         temp_v2 = temp_v4;
-        FUN_0026a69c();
+        idMapLookup();
         if (param_1->field_0x2c == temp_v2) {
           temp_v8 = temp_v8 + temp_v10;
         }
@@ -94,7 +94,7 @@ unsigned int FUN_001cffd0(fn_001cffd0_arg0 *param_1)
         if (temp_v5 < param_1->field_0x20) {
           do {
             temp_v4 = (unsigned int)*(unsigned short *)(param_1->field_0x1c + temp_v5 * 2);
-            FUN_0026a69c();
+            idMapLookup();
             if (temp_v4 == temp_v2) {
               temp_v8 = temp_v8 - temp_v10;
             }

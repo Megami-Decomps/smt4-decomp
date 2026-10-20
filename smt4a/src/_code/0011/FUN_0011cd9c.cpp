@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int destroyObj00558be8(int);
+int _ZN9Obj558be0D1Ev(int);
 int FUN_00311024(...);
 int FUN_0031105e(unsigned int *, unsigned int *);
 int FUN_00311082(unsigned int, unsigned int);
@@ -12,7 +12,7 @@ int FUN_00311082(unsigned int, unsigned int);
 typedef int romwright_code(...);
 extern unsigned char DAT_0055a934; /* 0x55a934 */
 
-/* Supplied declaration required: destroyObj00558be8. */
+/* Supplied declaration required: _ZN9Obj558be0D1Ev. */
 /* Supplied declaration required: FUN_00311024. */
 /* Supplied declaration required: FUN_0031105e. */
 /* Supplied declaration required: FUN_00311082. */
@@ -34,7 +34,7 @@ void FUN_0011cd9c(unsigned int *param_1)
   }
   temp_v0 = FUN_00311024(param_1 + 0x76);
   temp_v0 = FUN_00311024(temp_v0 - 0x90);
-  destroyObj00558be8(temp_v0 - 0x148);
+  _ZN9Obj558be0D1Ev(temp_v0 - 0x148);
   return;
 }
 

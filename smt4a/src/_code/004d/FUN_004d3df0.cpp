@@ -9,7 +9,7 @@ int asdListBoxSetIntItem(...);
 int FUN_0031f0f4(...);
 int asdListBoxSetToggleItem(...);
 int FUN_00340edc(...);
-int FUN_004c3c84(...);
+int btlSlotSetStoreValue(...);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -30,14 +30,14 @@ extern unsigned int *asdListBoxGetIntValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: asdListBoxSetIntItem. */
 extern unsigned int FUN_0031cfd0(unsigned short);
 /* Supplied declaration required: FUN_0031f0f4. */
-extern int FUN_0032c430(unsigned int, unsigned int);
+extern int listBoxItemHasOwner(unsigned int, unsigned int);
 /* Supplied declaration required: asdListBoxSetToggleItem. */
 extern unsigned int *asdListBoxGetFloatValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00340edc. */
 extern unsigned int FUN_003874fc(unsigned int);
 extern unsigned int *FUN_003e83b4(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_004c3a98(int, unsigned int);
-/* Supplied declaration required: FUN_004c3c84. */
+/* Supplied declaration required: btlSlotSetStoreValue. */
 
 
 void FUN_004d3df0(int param_1,unsigned int param_2)
@@ -189,7 +189,7 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
     break;
   case 10:
     if (puVar2 != (unsigned int *)0x0) {
-      temp_v2 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10),temp_v0);
+      temp_v2 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
       temp_v1 = DAT_0057162c;
       if (temp_v2 != 0) {
         temp_v1 = DAT_00571628 | *puVar2;
@@ -205,7 +205,7 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
     break;
   case 0xb:
     if (puVar2 != (unsigned int *)0x0) {
-      temp_v2 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10),temp_v0);
+      temp_v2 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
       temp_v1 = DAT_00571634;
       if (temp_v2 == 0) {
         temp_v1 = ~DAT_00571634;
@@ -259,21 +259,21 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
   case 0x10:
     if (puVar2 != (unsigned int *)0x0) {
       puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      FUN_004c3c84((int)*(short *)((int)puVar2 + 0x6e),7,*puVar6);
+      btlSlotSetStoreValue((int)*(short *)((int)puVar2 + 0x6e),7,*puVar6);
       return;
     }
     break;
   case 0x11:
     if (puVar2 != (unsigned int *)0x0) {
       puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      FUN_004c3c84((int)*(short *)((int)puVar2 + 0x6e),8,*puVar6);
+      btlSlotSetStoreValue((int)*(short *)((int)puVar2 + 0x6e),8,*puVar6);
       return;
     }
     break;
   case 0x12:
     if (puVar2 != (unsigned int *)0x0) {
       puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      FUN_004c3c84((int)*(short *)((int)puVar2 + 0x6e),10,*puVar6);
+      btlSlotSetStoreValue((int)*(short *)((int)puVar2 + 0x6e),10,*puVar6);
       return;
     }
     break;
@@ -281,8 +281,8 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
     if (puVar2 != (unsigned int *)0x0) {
       puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
       temp_v0 = *puVar6;
-      FUN_004c3c84((int)*(short *)((int)puVar2 + 0x6e),9,temp_v0);
-      FUN_004c3c84((int)*(short *)((int)puVar2 + 0x6e),0xb,temp_v0);
+      btlSlotSetStoreValue((int)*(short *)((int)puVar2 + 0x6e),9,temp_v0);
+      btlSlotSetStoreValue((int)*(short *)((int)puVar2 + 0x6e),0xb,temp_v0);
       return;
     }
   }

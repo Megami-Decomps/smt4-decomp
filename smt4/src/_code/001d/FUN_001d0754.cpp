@@ -10,7 +10,7 @@ int bibleOpenMode0(...);
 int bibleOpenMode1(...);
 int FUN_00269cb8(...);
 int FUN_00269cd0(void);
-int FUN_00269da0(...);
+int uniteSetMode(...);
 int FUN_0028a368(...);
 int FUN_0028a924(...);
 int FUN_0029e774(void);
@@ -63,7 +63,7 @@ extern int g_camp; /* 0x43da90 */
 /* Supplied declaration required: FUN_00269cb8. */
 /* Supplied declaration required: FUN_00269cd0. */
 extern int FUN_00269d4c(void);
-/* Supplied declaration required: FUN_00269da0. */
+/* Supplied declaration required: uniteSetMode. */
 /* Supplied declaration required: FUN_00269dc8. */
 /* Supplied declaration required: FUN_0026a348. */
 /* Supplied declaration required: FUN_0026a38c. */
@@ -82,7 +82,7 @@ extern int FUN_00299218(int, unsigned int);
 /* Supplied declaration required: FUN_0029e774. */
 /* Supplied declaration required: FUN_0029e788. */
 /* Supplied declaration required: FUN_0029e874. */
-extern unsigned int FUN_0029e908(int);
+extern unsigned int objectPartRunUnlessLocked(int);
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_0029ee6c. */
 extern int FUN_0029efa8(int);
@@ -115,7 +115,7 @@ void FUN_001d0754(int *param_1)
   
   temp_v4 = 0;
   temp_v2 = *param_1;
-  temp_v0 = FUN_0029e908(temp_v2 + 0x34);
+  temp_v0 = objectPartRunUnlessLocked(temp_v2 + 0x34);
   temp_v1 = FUN_00299218((int)*(char *)(temp_v2 + 0x98),temp_v0);
   switch(temp_v1) {
   case 7:
@@ -423,7 +423,7 @@ void FUN_001d0754(int *param_1)
     temp_v1 = FUN_00269d4c();
     if (temp_v1 != 0) {
       FUN_0026a598();
-      FUN_00269da0(0);
+      uniteSetMode(0);
       temp_v1 = g_camp;
       puVar5 = (unsigned int *)(g_camp + 0x18);
       *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
@@ -436,7 +436,7 @@ void FUN_001d0754(int *param_1)
     break;
   case 0x2b:
     FUN_0026a598();
-    FUN_00269da0(1);
+    uniteSetMode(1);
     temp_v1 = g_camp;
     puVar5 = (unsigned int *)(g_camp + 0x18);
     *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
@@ -498,7 +498,7 @@ void FUN_001d0754(int *param_1)
     temp_v1 = FUN_00269d4c();
     if (temp_v1 != 0) {
       FUN_0026a598();
-      FUN_00269da0(3);
+      uniteSetMode(3);
       temp_v1 = g_camp;
       puVar5 = (unsigned int *)(g_camp + 0x18);
       *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
@@ -514,7 +514,7 @@ void FUN_001d0754(int *param_1)
     temp_v1 = FUN_00269d4c();
     if (temp_v1 != 0) {
       FUN_0026a598();
-      FUN_00269da0(4);
+      uniteSetMode(4);
       FUN_00269cd0();
       FUN_002e333c();
       guestWinRequestClose();

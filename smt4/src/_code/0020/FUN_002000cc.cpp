@@ -8,7 +8,7 @@ int FUN_00254600(int);
 int FUN_0025461c(void);
 int FUN_0025463c(void);
 int FUN_002595e0(void);
-int FUN_00259784(void);
+int cecProcessForward(void);
 int FUN_002597c0(void);
 int FUN_00262f68(unsigned int, int);
 int FUN_0026e5ec(int, int);
@@ -30,7 +30,7 @@ extern int campCecEditGetFlag125(void);
 extern int gameDataBlockTestFlag(unsigned int);
 extern int FUN_002595bc(void);
 /* Supplied declaration required: FUN_002595e0. */
-/* Supplied declaration required: FUN_00259784. */
+/* Supplied declaration required: cecProcessForward. */
 /* Supplied declaration required: FUN_002597c0. */
 /* Supplied declaration required: FUN_00262f68. */
 /* Supplied declaration required: FUN_0026e5ec. */
@@ -105,7 +105,7 @@ unsigned int FUN_002000cc(int *param_1,int param_2)
           temp_v1 = FUN_0025463c();
           FUN_002bd2b4(temp_v1,0,0);
           FUN_0025463c();
-          FUN_00259784();
+          cecProcessForward();
           temp_v3 = FUN_0025463c();
           rt_aeabi_memclr(temp_v3 + 0x38,0x14);
           FUN_0025463c();
@@ -193,7 +193,7 @@ unsigned int FUN_002000cc(int *param_1,int param_2)
             temp_v1 = FUN_0025463c();
             FUN_002bd2b4(temp_v1,0,0);
             FUN_0025463c();
-            temp_v3 = FUN_00259784();
+            temp_v3 = cecProcessForward();
             if (temp_v3 == 5) {
               *(unsigned int *)(temp_v4 + 0x38) = 1;
             }

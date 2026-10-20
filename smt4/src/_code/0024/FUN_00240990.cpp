@@ -4,7 +4,7 @@ extern "C" {
 
 int __aeabi_memset4(u32 *dst, int size, u32 value);
 int FUN_0030a728(u32 *dst, int max, u32 seed);
-int FUN_00334838(void *result, void *obj);
+int aocLoaderUpdateRecords(void *result, void *obj);
 int FUN_00336da8(void *obj);
 int FUN_00338318(void *obj, int id);
 int FUN_00339210(void *obj, u32 value);
@@ -59,7 +59,7 @@ void FUN_00240990(Result *result, Obj *obj)
     }
     result->kind = 5;
     result->count = added;
-    FUN_00334838(result, obj);
+    aocLoaderUpdateRecords(result, obj);
 }
 
 } /* extern "C" */

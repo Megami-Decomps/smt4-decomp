@@ -1,37 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdTMTexTableReleaseNode` (_code @ 0x2ae898, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the last two clears use a pre-indexed store and a fresh zero in retail (str r5,[r4,#16]!; mov r0,#0; str r0,[r4,#12]); built stores r5 at 16 and 28. */
+#include "common.h"
 
 extern "C" {
 
-int asdTextureRelease(void);
-int asdMemFree(void);
+typedef struct TexTableNode {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ void *texture;
+    /* 0x0C */ void *buffer;
+    /* 0x10 */ s32 size;
+    /* 0x14 */ u8 unk14[8];
+    /* 0x1C */ s32 flags;
+} TexTableNode;
 
-extern int asdTMTexTableCallFileB(void);
-/* Supplied declaration required: asdTextureRelease. */
-/* Supplied declaration required: asdMemFree. */
+extern TexTableNode *asdTMTexTableCallFileB(s32 table, s32 node);
+extern void asdTextureRelease(void *texture);
+extern void asdMemFree(void *block);
 
-
-void asdTMTexTableReleaseNode(void)
-
+/* Frees the buffer and texture of a texture table node and clears it. */
+void asdTMTexTableReleaseNode(s32 table, s32 node)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = asdTMTexTableCallFileB();
-  if (temp_v0 != 0) {
-    if (*(int *)(temp_v0 + 0xc) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v0 + 0xc) = 0;
+    TexTableNode *entry = asdTMTexTableCallFileB(table, node);
+
+    if (entry != NULL) {
+        if (entry->buffer != NULL) {
+            asdMemFree(entry->buffer);
+            entry->buffer = NULL;
+        }
+        if (entry->texture != NULL) {
+            asdTextureRelease(entry->texture);
+            entry->texture = NULL;
+        }
+        entry->size = 0;
+        entry->flags = 0;
     }
-    if (*(int *)(temp_v0 + 8) != 0) {
-      asdTextureRelease();
-      *(unsigned int *)(temp_v0 + 8) = 0;
-    }
-    *(unsigned int *)(temp_v0 + 0x10) = 0;
-    *(unsigned int *)(temp_v0 + 0x1c) = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

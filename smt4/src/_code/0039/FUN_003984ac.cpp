@@ -11,7 +11,7 @@ int uiSpriteSetImageKeyframe(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
-int FUN_002c312c(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
+int paramsInit(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int asdTMTexTableLoadSprites(int);
 int FUN_002c58c8(int, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
@@ -39,7 +39,7 @@ extern int FUN_00398874(...); /* 0x398874 */
 extern int FUN_00398920(...); /* 0x398920 */
 extern int FUN_00398940(...); /* 0x398940 */
 extern int FUN_00398964(...); /* 0x398964 */
-extern int FUN_003989d4(...); /* 0x3989d4 */
+extern int nameFormApply(...); /* 0x3989d4 */
 extern unsigned char DAT_004055d0; /* 0x4055d0 */
 extern unsigned char DAT_004055e8; /* 0x4055e8 */
 extern unsigned char DAT_0040560c; /* 0x40560c */
@@ -54,7 +54,7 @@ extern unsigned int *FUN_002bd1fc(void);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c58c8. */
 extern unsigned int FUN_002c5c04(unsigned char *);
@@ -83,7 +83,7 @@ void FUN_003984ac(unsigned char *param_1,unsigned char param_2)
   *(unsigned int *)(param_1 + 0x100) = 0;
   *(romwright_code **)(param_1 + 0x104) = FUN_00397514;
   *(unsigned int *)(param_1 + 0x108) = 0;
-  *(romwright_code **)(param_1 + 0x10c) = FUN_003989d4;
+  *(romwright_code **)(param_1 + 0x10c) = nameFormApply;
   *(unsigned int *)(param_1 + 0x110) = 0;
   *(romwright_code **)(param_1 + 0x114) = FUN_00398920;
   *(unsigned int *)(param_1 + 0x118) = 0;
@@ -152,7 +152,7 @@ void FUN_003984ac(unsigned char *param_1,unsigned char param_2)
   *(unsigned int *)(param_1 + 0x654) = temp_v0;
   puVar3 = param_1 + 0x65c;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
-  FUN_002c312c(puVar3,&DAT_004055d0,0x18,&DAT_004055e8,0x24,0,0,0,0,&DAT_0040560c,0x70);
+  paramsInit(puVar3,&DAT_004055d0,0x18,&DAT_004055e8,0x24,0,0,0,0,&DAT_0040560c,0x70);
   FUN_002bd954(param_1 + 0x67c,0x2e,0,puVar3,1);
   FUN_002bee58(param_1 + 0x67c,0);
   FUN_002bd954(param_1 + 0x708,0x2e,0,puVar3,1);

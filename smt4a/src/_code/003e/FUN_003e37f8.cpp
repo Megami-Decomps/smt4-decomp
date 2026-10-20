@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int sysPlaySe(int);
 int FUN_0019de98(int, unsigned int);
 int FUN_00215bd0(void);
@@ -19,7 +19,7 @@ int FUN_00333dc8(int);
 int FUN_003343f0(int);
 int FUN_003e3a20(int, int);
 
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0019de98. */
@@ -64,7 +64,7 @@ void FUN_003e37f8(int param_1)
           else {
             temp_v0 = padButtonIsPressed(0);
             if (temp_v0 != 0) {
-              FUN_001641b4(0x100020e);
+              eventQueueAddUniqueIfValid(0x100020e);
               FUN_003343f0(1);
               FUN_00333dc8(1);
               if (*(int *)(param_1 + 0xa4) <= *(int *)(param_1 + 0xa8)) {

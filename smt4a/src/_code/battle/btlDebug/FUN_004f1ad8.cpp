@@ -1,30 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f1ad8` (_code @ 0x4f1ad8, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int rangeInit(int, int, int);
-int words5Clear(int);
+typedef struct RangeEntry {
+    /* 0x0 */ f32 start;
+    /* 0x4 */ f32 end;
+    /* 0x8 */ s16 duration;
+    /* 0xA */ u8 unk0A[2];
+} RangeEntry;
 
-/* Supplied declaration required: rangeInit. */
-extern int rangeIsValid(int);
-/* Supplied declaration required: words5Clear. */
+typedef struct Object {
+    /* 0x000 */ u8 unk000[0x44];
+    /* 0x044 */ u8 range[0x608];
+    /* 0x64C */ u32 flags;
+} Object;
 
+extern RangeEntry DAT_0057a574[];
 
-void FUN_004f1ad8(int param_1,int param_2)
+s32 rangeIsValid(void *range);
+void words5Clear(void *range);
+void rangeInit(void *range, f32 start, f32 end, s16 duration, s16 delay);
 
+/* Starts the object's range from table entry `index`, clearing it first if it was not valid, and flags it as started. */
+void FUN_004f1ad8(Object *obj, s32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = rangeIsValid(param_1 + 0x44);
-  if (temp_v0 == 0) {
-    words5Clear(param_1 + 0x44);
-  }
-  rangeInit(param_1 + 0x44,(int)*(short *)(param_2 * 0xc + 0x57a57c),0);
-  *(unsigned int *)(param_1 + 0x64c) = *(unsigned int *)(param_1 + 0x64c) | 0x40000;
-  return;
+    if (rangeIsValid(obj->range) == 0) {
+        words5Clear(obj->range);
+    }
+    RangeEntry *entry = DAT_0057a574 + index;
+
+    rangeInit(obj->range, entry->start, entry->end, entry->duration, 0);
+    obj->flags |= 0x40000;
 }
 
 } /* extern "C" */

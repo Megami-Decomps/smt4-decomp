@@ -1,35 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002950a8` (_code @ 0x2950a8, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00152f44(void);
+typedef struct PopupState {
+    /* 0x00 */ s32 mode;
+    /* 0x04 */ s32 unk04;
+    /* 0x08 */ u8 unk08[0x0C];
+    /* 0x14 */ s32 handle;
+    /* 0x18 */ s32 slot;
+} PopupState;
 
-extern int *g_popupState; /* 0x58104c */
+typedef struct SaveSlot {
+    /* 0x000 */ u8 unk000[0x12C];
+    /* 0x12C */ u16 id;
+} SaveSlot;
 
-/* Supplied declaration required: FUN_00152f44. */
-extern int saveSlotFindSelected(void);
-extern int FUN_002d8b58(unsigned int);
+extern PopupState *g_popupState;
 
+extern void FUN_00152f44(void);
+extern SaveSlot *saveSlotFindSelected(void);
+extern s32 FUN_002d8b58(u32 arg);
 
+/* When no popup is active and a save slot is selected, opens popup mode 0x16 for that slot. */
 void FUN_002950a8(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  
-  FUN_00152f44();
-  if ((*g_popupState == 0) && (temp_v0 = saveSlotFindSelected(), piVar1 = g_popupState, temp_v0 != 0)) {
-    *g_popupState = 0x16;
-    piVar1[6] = (unsigned int)*(unsigned short *)(temp_v0 + 300);
-    temp_v0 = FUN_002d8b58(0x19);
-    piVar1 = g_popupState;
-    g_popupState[1] = 0;
-    piVar1[5] = temp_v0;
-  }
-  return;
+    SaveSlot *slot;
+
+    FUN_00152f44();
+    if (g_popupState->mode == 0) {
+        slot = saveSlotFindSelected();
+        if (slot != NULL) {
+            g_popupState->mode = 0x16;
+            g_popupState->slot = slot->id;
+            g_popupState->handle = FUN_002d8b58(0x19);
+            g_popupState->unk04 = 0;
+        }
+    }
 }
 
 } /* extern "C" */

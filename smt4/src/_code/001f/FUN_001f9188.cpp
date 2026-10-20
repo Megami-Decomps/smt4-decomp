@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00291ba4(void);
+int contentEntryGetD(void);
 int VectorSignedToFloat(int, int);
 
 extern int g_mapEnemy; /* 0x447600 */
 extern unsigned char DAT_0049fb1c; /* 0x49fb1c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00291ba4. */
+/* Supplied declaration required: contentEntryGetD. */
 
 
 void FUN_001f9188(void)
@@ -30,7 +30,7 @@ void FUN_001f9188(void)
   
   temp_v0 = g_mapEnemy;
   temp_v1 = (int)(*(short *)((unsigned char *)&DAT_0049fb1c + 0x46));
-  FUN_00291ba4();
+  contentEntryGetD();
   temp_v3 = 0;
   while( 1 ) {
     temp_v2 = temp_v0 + temp_v3 * 0x180;

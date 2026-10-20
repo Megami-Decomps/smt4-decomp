@@ -1,20 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00316dac` (_code @ 0x316dac, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int gameGetMapBlock(void);
+typedef struct MapBitBlock {
+    /* 0x000 */ u8 unk000[0xcd8];
+    /* 0xcd8 */ u32 bits[1];   /* bit set, indexed from 0 */
+} MapBitBlock;
 
+MapBitBlock *gameGetMapBlock(void);
 
-unsigned char FUN_00316dac(int param_1)
-
+/* Tests bit `index` of the bit set. */
+u8 FUN_00316dac(s32 index)
 {
-  int temp_v0;
-  
-  temp_v0 = gameGetMapBlock();
-  return (*(unsigned int *)(temp_v0 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4 + 0xcd8) &
-         (1 << ((param_1 % 0x20) & 0xffU))) != 0;
+    MapBitBlock *block = gameGetMapBlock();
+    s32 word = index / 32;
+    s32 bit = index % 32;
+
+    return (block->bits[word] & (1 << bit)) != 0;
 }
 
 } /* extern "C" */

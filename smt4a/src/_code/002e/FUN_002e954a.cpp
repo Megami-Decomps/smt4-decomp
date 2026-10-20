@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0012ee8c. */
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: onlineStringCopyConstruct. */
-extern unsigned int constructObj0055affc(unsigned char *);
+extern unsigned int _ZN9Obj55aff4C1Ev(unsigned char *);
 /* Supplied declaration required: FUN_0030af1c. */
 
 
@@ -32,7 +32,7 @@ int FUN_002e954a(unsigned int param_1,unsigned int param_2)
   unsigned char temp_v3 [16];
   unsigned char temp_v4 [8];
   
-  temp_v2 = constructObj0055affc(temp_v4);
+  temp_v2 = _ZN9Obj55aff4C1Ev(temp_v4);
   temp_v0 = onlineStringCopyConstruct(temp_v3,param_2);
   temp_v0 = onlineStringCopyConstruct(temp_v0 + 8,temp_v2);
   FUN_0012ee8c(temp_v1,param_1,temp_v0 - 8);

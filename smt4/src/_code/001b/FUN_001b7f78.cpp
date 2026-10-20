@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_0026f950(void);
 int FUN_0026fa30(...);
-int FUN_0026fa44(...);
+int slotFindByPair(...);
 int jobStop(...);
 
 int FUN_0010421c(void);
 int mapEplFree(void);
 int FUN_001b46e0(void);
-int FUN_001e2adc(void);
+int mapGimicReleaseAll(void);
 int FUN_001e2b5c(void);
 int FUN_002148e4(void);
 int FUN_0021e074(void);
@@ -21,7 +21,7 @@ int bgmReleaseStopped(void);
 int FUN_0026faa4(void);
 int FUN_0026fe0c(void);
 int FUN_0026ff54(void);
-int FUN_0026ffe0(void);
+int mapTableRelease(void);
 int FUN_00270028(...);
 int FUN_002700d0(void);
 int FUN_00270194(void);
@@ -48,7 +48,7 @@ int FUN_001fa680(void);
 int FUN_001fa6b8(void);
 int lmapSceneShutdownScript(void);
 int lmapSceneUpdateHandles(void);
-int FUN_002236e0(void);
+int mdlManagerMarkAllDestroy(void);
 int FUN_002701e8(void);
 int FUN_002702a4(void);
 int FUN_002702dc(void);
@@ -231,8 +231,8 @@ int FUN_0027cc6c(void);
 int FUN_0027d0ec(void);
 int FUN_0027d40c(...);
 int FUN_0027d474(...);
-int FUN_0027d490(...);
-int FUN_0027d50c(...);
+int mapEntryTriggerForScene(...);
+int mapSkyTableLoad(...);
 int FUN_0027d5ac(...);
 int FUN_0028527c(...);
 int FUN_0028529c(...);
@@ -461,7 +461,7 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_001d34a8. */
 /* Supplied declaration required: FUN_001d3694. */
 extern int FUN_001e2760(unsigned int);
-/* Supplied declaration required: FUN_001e2adc. */
+/* Supplied declaration required: mapGimicReleaseAll. */
 /* Supplied declaration required: FUN_001e2b5c. */
 /* Supplied declaration required: FUN_001f9334. */
 /* Supplied declaration required: FUN_001fa680. */
@@ -484,17 +484,17 @@ extern int FUN_001fc2b0(int);
 extern int FUN_0021e4bc(void);
 /* Supplied declaration required: FUN_0022101c. */
 /* Supplied declaration required: FUN_002236a4. */
-/* Supplied declaration required: FUN_002236e0. */
+/* Supplied declaration required: mdlManagerMarkAllDestroy. */
 /* Supplied declaration required: FUN_0022373c. */
 /* Supplied declaration required: FUN_0026f950. */
 /* Supplied declaration required: FUN_0026f960. */
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_0026fa30. */
-/* Supplied declaration required: FUN_0026fa44. */
+/* Supplied declaration required: slotFindByPair. */
 /* Supplied declaration required: FUN_0026faa4. */
 /* Supplied declaration required: FUN_0026fe0c. */
 /* Supplied declaration required: FUN_0026ff54. */
-/* Supplied declaration required: FUN_0026ffe0. */
+/* Supplied declaration required: mapTableRelease. */
 /* Supplied declaration required: FUN_00270028. */
 /* Supplied declaration required: FUN_002700d0. */
 /* Supplied declaration required: FUN_00270194. */
@@ -583,12 +583,12 @@ extern int FUN_00276348(int);
 /* Supplied declaration required: FUN_0027cc48. */
 /* Supplied declaration required: FUN_0027cc6c. */
 extern int FUN_0027cda0(void);
-extern int FUN_0027d0c4(unsigned int, unsigned int);
+extern int questMapSetCursor(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027d0ec. */
 /* Supplied declaration required: FUN_0027d40c. */
 /* Supplied declaration required: FUN_0027d474. */
-/* Supplied declaration required: FUN_0027d490. */
-/* Supplied declaration required: FUN_0027d50c. */
+/* Supplied declaration required: mapEntryTriggerForScene. */
+/* Supplied declaration required: mapSkyTableLoad. */
 /* Supplied declaration required: FUN_0027d5ac. */
 /* Supplied declaration required: actorApplyAlpha. */
 extern int FUN_0027d614(unsigned int, unsigned int);
@@ -688,7 +688,7 @@ extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: FUN_002c8acc. */
 /* Supplied declaration required: FUN_002c9b2c. */
 extern int FUN_002c9b90(void);
-extern int FUN_002c9c70(void);
+extern int naviFlag404Active(void);
 /* Supplied declaration required: FUN_002d28a4. */
 extern int FUN_002d400c(void);
 /* Supplied declaration required: FUN_002df86c. */
@@ -1085,8 +1085,8 @@ LAB_001b848c:
       }
     }
     FUN_001fdebc(puVar14);
-    FUN_0027d50c(puVar14[0xb]);
-    FUN_0027d490(puVar14[0xc]);
+    mapSkyTableLoad(puVar14[0xb]);
+    mapEntryTriggerForScene(puVar14[0xc]);
     DAT_0049f928 = puVar14[0xb];
     DAT_0049f92c = puVar14[0xc];
     if (DAT_0049f942 != '\0') {
@@ -1193,7 +1193,7 @@ LAB_001b848c:
       FUN_0027d0ec();
     }
 LAB_001b8a44:
-    if ((DAT_0049fc80 == 0) && (temp_v9 = FUN_0027d0c4(puVar14[0xb],puVar14[0xc]), temp_v9 == 0)) {
+    if ((DAT_0049fc80 == 0) && (temp_v9 = questMapSetCursor(puVar14[0xb],puVar14[0xc]), temp_v9 == 0)) {
       return 0;
     }
     puVar14[9] = puVar14[9] + 1;
@@ -2888,7 +2888,7 @@ LAB_001bb1d4:
           temp_v14 = g_gameState;
         }
         if (((temp_v11 != 0x1f && temp_v14 != 0x24) && (*(int *)(DAT_004474f4 + 0xac) == 0)) &&
-           (temp_v10 = FUN_002c9c70(), temp_v10 != 0)) {
+           (temp_v10 = naviFlag404Active(), temp_v10 != 0)) {
           DAT_0049f934 = 1;
           DAT_0049f93c = 1;
           FUN_0027fa98(0x1c);
@@ -3010,7 +3010,7 @@ LAB_001bb1d4:
     DAT_0049f93e = 0;
     FUN_002757a8();
     FUN_00275714();
-    FUN_0027d490(puVar14[0xc]);
+    mapEntryTriggerForScene(puVar14[0xc]);
     FUN_002755a8();
     FUN_00275364();
     FUN_0027522c();
@@ -5176,7 +5176,7 @@ LAB_001bec78:
     func_0x001e4540();
     func_0x0020d00c();
     mapDepartUpdateHandles();
-    FUN_002236e0();
+    mdlManagerMarkAllDestroy();
     FUN_002c8acc();
     func_0x002dfe64();
     asdModelSlotRelease(0);
@@ -5193,7 +5193,7 @@ LAB_001bec78:
     mapDepartFreeWork();
     FUN_00270194();
     FUN_001b46e0();
-    FUN_001e2adc();
+    mapGimicReleaseAll();
     FUN_002700d0();
     FUN_001e2b5c();
     func_0x001d3818();
@@ -5212,7 +5212,7 @@ LAB_001bec78:
     *(unsigned int *)(DAT_004474f4 + 0xac) = 0;
     func_0x001e39b4();
     FUN_001fdebc(puVar14);
-    FUN_0027d490(puVar14[0xc]);
+    mapEntryTriggerForScene(puVar14[0xc]);
     func_0x001d2f20(puVar14[0xb],puVar14[0xc]);
     temp_v10 = puVar14[9] + 1;
     puVar14[9] = temp_v10;
@@ -5225,7 +5225,7 @@ LAB_001bec78:
     func_0x00208b8c();
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf48c:
-    temp_v9 = FUN_0027d0c4(puVar14[0xb],puVar14[0xc]);
+    temp_v9 = questMapSetCursor(puVar14[0xb],puVar14[0xc]);
     if (temp_v9 == 0) {
       return 0;
     }
@@ -5608,7 +5608,7 @@ joined_r0x001bfcb4:
     func_0x001e4540();
     func_0x0020d00c();
     mapDepartUpdateHandles();
-    FUN_002236e0();
+    mdlManagerMarkAllDestroy();
     FUN_002c8acc();
     func_0x002dfe64();
     NaviMain_Destroy();
@@ -5668,14 +5668,14 @@ joined_r0x001bfcb4:
       mapDepartFreeWork();
       FUN_00270194();
       FUN_001b46e0();
-      FUN_001e2adc();
+      mapGimicReleaseAll();
       FUN_002700d0();
       FUN_001e2b5c();
       func_0x001d3818();
       FUN_002148e4();
       FUN_0021e074();
       func_0x002d3e18();
-      FUN_0026ffe0();
+      mapTableRelease();
       mapEplFree();
       func_0x0021e764();
       puVar23 = g_mapMain;
@@ -5737,7 +5737,7 @@ joined_r0x001bfcb4:
       uStack_1c0 = 0xffffffff;
       uStack_1bc = (unsigned int)((((unsigned int)uStack_1bc >> 8) & 0xff) << 8);
       uStack_1b8 = (unsigned int)(*(unsigned short *)((unsigned char *)&uStack_1b8 + 2)) << 0x10;
-      FUN_0026fa44(puVar14[0xb],puVar14[0xc]);
+      slotFindByPair(puVar14[0xb],puVar14[0xc]);
       uStack_1c8 = uStack_1c8 & 0xffffff00;
       temp_v6 = FUN_002faf78();
       uStack_1c8 = romwright_piece_2_2(temp_v6,(unsigned short)uStack_1c8);

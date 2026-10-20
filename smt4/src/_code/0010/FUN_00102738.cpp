@@ -1,40 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00102738` (_code @ 0x102738, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdGxCommandListBegin(unsigned int);
-int FUN_002c4f8c(unsigned int, unsigned int);
-int FUN_002c501c(void);
+typedef struct TitleDraw {
+    /* 0x00 */ s8 hidden;
+    /* 0x01 */ s8 enabled;
+    /* 0x02 */ u8 unk02[6];
+    /* 0x08 */ u32 commandList;
+} TitleDraw;
 
-extern signed char DAT_00446db0; /* 0x446db0 */
-extern signed char DAT_00446db1; /* 0x446db1 */
-extern unsigned int DAT_00446db8; /* 0x446db8 */
-extern unsigned int g_titleScene; /* 0x44ea00 */
+extern TitleDraw g_titleFlags;
+extern u32 g_titleScene;
 
-/* Supplied declaration required: asdGxCommandListBegin. */
-/* Supplied declaration required: FUN_002c4f8c. */
-/* Supplied declaration required: FUN_002c501c. */
-extern int FUN_002c5210(void);
+extern s32 FUN_002c501c(void);
+extern void FUN_002c4f8c(u32 scene, u32 arg);
+extern s32 FUN_002c5210(void);
+extern void asdGxCommandListBegin(u32 commandList);
 
-
-unsigned int FUN_00102738(void)
-
+/* Per-frame title step: forwards FUN_002c501c's value to the scene and begins the draw command list when enabled; returns 0. */
+u32 FUN_00102738(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_002c501c();
-  if (temp_v0 != 0) {
-    temp_v1 = FUN_002c501c();
-    FUN_002c4f8c(g_titleScene,temp_v1);
-  }
-  if (((DAT_00446db0 == '\0') && (DAT_00446db1 != '\0')) && (temp_v0 = FUN_002c5210(), temp_v0 == 1)) {
-    asdGxCommandListBegin(DAT_00446db8);
-  }
-  return 0;
+    if (FUN_002c501c() != 0) {
+        FUN_002c4f8c(g_titleScene, FUN_002c501c());
+    }
+    if (g_titleFlags.hidden == 0 && g_titleFlags.enabled != 0 && FUN_002c5210() == 1) {
+        asdGxCommandListBegin(g_titleFlags.commandList);
+    }
+    return 0;
 }
 
 } /* extern "C" */

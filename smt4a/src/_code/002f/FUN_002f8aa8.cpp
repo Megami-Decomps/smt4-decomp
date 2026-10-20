@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineStringDestroy(unsigned char [8]);
 int FUN_002ee938(...);
 int FUN_002fd624(...);
@@ -18,7 +18,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineStringDestroy. */
 extern int wordRefsDiffer_002ee774(unsigned int **, unsigned int *);
 /* Supplied declaration required: FUN_002ee938. */
@@ -69,7 +69,7 @@ void FUN_002f8aa8(int param_1,unsigned int param_2)
     onlineStringDestroy(temp_v5);
     onlineStringDestroy(temp_v6);
   } while (!temp_v0);
-  FUN_002e6e5c(temp_v3);
+  _ZN9Obj55b28cD1Ev(temp_v3);
   return;
 }
 

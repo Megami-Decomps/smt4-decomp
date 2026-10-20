@@ -1,42 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00227d18` (_code @ 0x227d18, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int btlMainFindEntryByListedId(unsigned int *, unsigned int);
-int btlGetMainState(void);
-int FUN_00337900(unsigned int, unsigned int *, int);
+typedef struct MainEntry {
+    /* 0x00 */ u32 flags;
+} MainEntry;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+void *btlGetMainState(void);
+MainEntry *btlMainFindEntryByListedId(void *state, u32 id);
+int FUN_00337900(void *state, MainEntry *entry, s32 kind);
 
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_00337900. */
-
-
-void FUN_00227d18(unsigned int param_1)
-
+/* Looks up the main entry for a listed id and runs FUN_00337900 for each of its flag bits 0x2000 (kind 1) and 0x4000 (kind 2). */
+void FUN_00227d18(u32 id)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  puVar1 = (unsigned int *)btlGetMainState();
-  btlMainFindEntryByListedId(puVar1,param_1);
-  if ((*puVar1 & 0x2000) != 0) {
-    temp_v0 = btlGetMainState();
-    FUN_00337900(temp_v0,puVar1,1);
-  }
-  if ((*puVar1 & 0x4000) != 0) {
-    temp_v0 = btlGetMainState();
-    FUN_00337900(temp_v0,puVar1,2);
-    return;
-  }
-  return;
+    MainEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
+
+    if (entry->flags & 0x2000) {
+        FUN_00337900(btlGetMainState(), entry, 1);
+    }
+    if (entry->flags & 0x4000) {
+        FUN_00337900(btlGetMainState(), entry, 2);
+    }
 }
 
 } /* extern "C" */

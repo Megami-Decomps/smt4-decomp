@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [16], unsigned int);
-int FUN_002e6e5c(unsigned char [16]);
+int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int FUN_002ea974(unsigned char [104]);
 int onlineUrlSetAddress(unsigned char [104], unsigned int);
 int onlineUrlDestroy(unsigned char [104]);
@@ -18,7 +18,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002ea974. */
 /* Supplied declaration required: onlineUrlSetAddress. */
@@ -44,7 +44,7 @@ unsigned int FUN_002f9cf2(int param_1,unsigned int param_2,unsigned int param_3)
     temp_v4[0] = *(unsigned int *)(param_1 + 0xd4);
     temp_v1 = wordRefsDiffer_002f3204(temp_v3,temp_v4);
     if (temp_v1 == 0) {
-      FUN_002e6e5c(temp_v5);
+      _ZN9Obj55b28cD1Ev(temp_v5);
       return 1;
     }
     FUN_002ea974(temp_v2);
@@ -55,7 +55,7 @@ unsigned int FUN_002f9cf2(int param_1,unsigned int param_2,unsigned int param_3)
     onlineUrlDestroy(temp_v2);
   }
   onlineUrlDestroy(temp_v2);
-  FUN_002e6e5c(temp_v5);
+  _ZN9Obj55b28cD1Ev(temp_v5);
   return 0;
 }
 

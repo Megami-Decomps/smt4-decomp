@@ -8,7 +8,7 @@ int sysPlaySe(int);
 int sub68OwnerCall3(void);
 int FUN_00379be8(void);
 int FUN_003b61ec(void);
-int FUN_003c5848(void);
+int commonBgReset(void);
 
 extern unsigned char g_gameState; /* 0x5f15fc */
 
@@ -18,7 +18,7 @@ extern int scrGetArg(void);
 /* Supplied declaration required: sub68OwnerCall3. */
 /* Supplied declaration required: FUN_00379be8. */
 /* Supplied declaration required: FUN_003b61ec. */
-/* Supplied declaration required: FUN_003c5848. */
+/* Supplied declaration required: commonBgReset. */
 
 
 unsigned int FUN_0038ae5c(void)
@@ -40,7 +40,7 @@ unsigned int FUN_0038ae5c(void)
     (*(signed char *)((unsigned char *)&g_gameState + 0x295)) = '\0';
     temp_v0 = gameFlagIsSet(0x49a);
     if (temp_v0 != 0) {
-      FUN_003c5848();
+      commonBgReset();
     }
     else {
       FUN_003b61ec();

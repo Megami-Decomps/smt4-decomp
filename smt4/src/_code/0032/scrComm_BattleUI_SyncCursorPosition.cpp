@@ -1,39 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_BattleUI_SyncCursorPosition` (_code @ 0x327b2c, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail does not reuse the first load of the flag word for the clear: it reloads it (ldr r2, [r0]; bic; str) after the test. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00254f58(int);
-int FUN_00338060(int, int);
-int FUN_003af0b0(unsigned int);
+typedef struct BtlMainState {
+    /* 0x0000 */ u8 unk0000[0x4968];
+    /* 0x4968 */ u16 cursorX;
+    /* 0x496A */ u16 cursorY;
+    /* 0x496C */ u8 unk496C[4];
+    /* 0x4970 */ u16 targetX;
+    /* 0x4972 */ u16 targetY;
+} BtlMainState;
 
-extern unsigned int g_btlUiBlock; /* 0x439ca8 */
+extern u32 g_btlUiBlock; /* 0x439ca8 */
+extern BtlMainState *btlGetMainState(void);
+extern int FUN_00254f58(BtlMainState *state);
+extern int FUN_00338060(BtlMainState *state, int arg);
+extern int FUN_003af0b0(u32 block);
 
-/* Supplied declaration required: FUN_00254f58. */
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00338060. */
-/* Supplied declaration required: FUN_003af0b0. */
-
-
-unsigned int scrComm_BattleUI_SyncCursorPosition(void)
-
+/* Copies the target cursor position to the current one and refreshes the battle UI. */
+u32 scrComm_BattleUI_SyncCursorPosition(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  temp_v0 = btlGetMainState();
-  *(unsigned short *)(temp_v0 + 0x4968) = *(unsigned short *)(temp_v0 + 0x4970);
-  *(unsigned short *)(temp_v0 + 0x496a) = *(unsigned short *)(temp_v0 + 0x4972);
-  FUN_003af0b0(g_btlUiBlock);
-  puVar2 = (unsigned int *)(temp_v0 + 0x44a0);
-  if ((*puVar2 & 0x1000) != 0) {
-    *puVar2 = *puVar2 & 0xffffefff;
-    FUN_00254f58(temp_v0);
-  }
-  FUN_00338060(temp_v0,1);
-  return 1;
+    BtlMainState *state = btlGetMainState();
+    u32 *flags;
+
+    state->cursorX = state->targetX;
+    state->cursorY = state->targetY;
+    FUN_003af0b0(g_btlUiBlock);
+    flags = (u32 *)((u8 *)state + 0x44A0);
+    if ((*flags & 0x1000) != 0) {
+        *flags &= ~0x1000;
+        FUN_00254f58(state);
+    }
+    FUN_00338060(state, 1);
+    return 1;
 }
 
 } /* extern "C" */

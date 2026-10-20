@@ -75,7 +75,7 @@ int FUN_00215bd0(void);
 int FUN_002174f4(void);
 int useCounterStart(void);
 int FUN_0023b45c(...);
-int FUN_00284168(...);
+int ifTouchRegionAdd(...);
 int FUN_002a4844(...);
 int FUN_002a4914(...);
 int FUN_002c8538(...);
@@ -111,7 +111,7 @@ int bitsAt60Test(...);
 int FUN_004da77c(...);
 int FUN_004daf18(...);
 
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
 int FUN_001643b4(...);
 int FUN_001834a4(...);
@@ -141,7 +141,7 @@ int FUN_00284ee4(...);
 int FUN_0028a2e8(...);
 int FUN_002c39dc(...);
 int FUN_0031d890(void);
-int FUN_0035dd74(void);
+int contentEntryFindById(void);
 int FUN_003c3e48(...);
 int FUN_004db450(...);
 
@@ -209,7 +209,7 @@ extern int gameDataBlocksGetSaveData(void);
 extern int FUN_00162880(void);
 /* Supplied declaration required: FUN_00163aa4. */
 extern int FUN_00163e84(unsigned int);
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_001643b4. */
 extern int FUN_00167f08(void);
@@ -258,7 +258,7 @@ extern int FUN_0026140c(void);
 extern int FUN_0026272c(void);
 /* Supplied declaration required: FUN_0026f608. */
 /* Supplied declaration required: FUN_00284140. */
-/* Supplied declaration required: FUN_00284168. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_00284ee4. */
 /* Supplied declaration required: FUN_002859d8. */
@@ -338,7 +338,7 @@ extern int FUN_0034abc8(void);
 extern int FUN_0035db94(void);
 /* Supplied declaration required: FUN_0035dc10. */
 /* Supplied declaration required: FUN_0035dd60. */
-/* Supplied declaration required: FUN_0035dd74. */
+/* Supplied declaration required: contentEntryFindById. */
 /* Supplied declaration required: FUN_0035deb0. */
 extern int lmapSceneGetScript(void);
 extern int panelStateIs0(void);
@@ -668,7 +668,7 @@ unsigned int FUN_001f5294(void)
             if ((short)piVar3[0x23de] != 0) {
               do {
                 temp_v7 = (unsigned int)*(unsigned short *)((int)piVar3 + temp_v4 * 2 + 0x8f7c);
-                FUN_0035dd74();
+                contentEntryFindById();
                 temp_v5 = temp_v4 + 1;
                 *(unsigned short *)((int)piVar3 + temp_v4 * 2 + 0x62a0) = *(unsigned short *)(temp_v7 + 0x1a);
                 *piVar19 = *piVar19 + 1;
@@ -810,7 +810,7 @@ unsigned int FUN_001f5294(void)
               do {
                 if (*psVar24 == temp_v16) {
                   if (psVar24 != (short *)0x0) {
-                    FUN_001641b4(0x100020e);
+                    eventQueueAddUniqueIfValid(0x100020e);
                     FUN_002a7b74();
                     FUN_0023c08c(*(unsigned int *)(psVar24 + 2));
                     sysPlaySe(0xa0);
@@ -843,7 +843,7 @@ unsigned int FUN_001f5294(void)
               ifTouchRegionRemove();
               ifTouchRegionRemove();
               ifTouchRegionRemove();
-              FUN_001641b4(0x100020f);
+              eventQueueAddUniqueIfValid(0x100020f);
             }
           }
         }
@@ -997,7 +997,7 @@ unsigned int FUN_001f5294(void)
         ifTouchRegionRemove();
         ifTouchRegionRemove();
         temp_v15 = 0x100020e;
-        FUN_001641b4(temp_v15);
+        eventQueueAddUniqueIfValid(temp_v15);
       }
       else {
         temp_v18 = 1;
@@ -1006,7 +1006,7 @@ unsigned int FUN_001f5294(void)
           FUN_0023c08c(0x11);
           piVar3[0x174] = 0;
         }
-        FUN_001641b4(0x100020e);
+        eventQueueAddUniqueIfValid(0x100020e);
       }
     }
     else {
@@ -1032,7 +1032,7 @@ unsigned int FUN_001f5294(void)
         temp_v18 = 1;
         piVar3[0x172] = 0;
         temp_v15 = 0x100020f;
-        FUN_001641b4(temp_v15);
+        eventQueueAddUniqueIfValid(temp_v15);
       }
       else {
         temp_v15 = FUN_001834a4(0x1a,0x1f0);
@@ -1307,7 +1307,7 @@ joined_r0x001f6a20:
               ifTouchRegionRemove();
               temp_v15 = 0x100020f;
             }
-            FUN_001641b4(temp_v15);
+            eventQueueAddUniqueIfValid(temp_v15);
           }
         }
       }
@@ -1662,7 +1662,7 @@ LAB_001f732c:
             temp_v4 = temp_v4 + 1;
           } while (temp_v4 < 8);
           temp_v15 = 0x100020e;
-          FUN_001641b4(temp_v15);
+          eventQueueAddUniqueIfValid(temp_v15);
         }
         else {
           temp_v4 = 1;
@@ -1679,7 +1679,7 @@ LAB_001f732c:
               temp_v4 = temp_v4 + 1;
             } while (temp_v4 < 8);
             temp_v15 = 0x100020f;
-            FUN_001641b4(temp_v15);
+            eventQueueAddUniqueIfValid(temp_v15);
           }
         }
         if (!temp_v18) {
@@ -1900,7 +1900,7 @@ LAB_001f77ec:
         FUN_0037c8e4(1,0);
         panelSetTarget(-piVar3[0x106],0);
       }
-      FUN_001641b4(0x100020e);
+      eventQueueAddUniqueIfValid(0x100020e);
     }
     else {
       temp_v5 = 10;
@@ -1909,7 +1909,7 @@ LAB_001f77ec:
         piVar3[0x103] = 0xb;
         FUN_0020b908(0x24,1);
         temp_v15 = 0x1000210;
-        FUN_001641b4(temp_v15);
+        eventQueueAddUniqueIfValid(temp_v15);
       }
       else {
         temp_v5 = 1;
@@ -1920,7 +1920,7 @@ LAB_001f77ec:
           FUN_002a7b74();
           FUN_0023c08c(2);
           temp_v15 = 0x100020f;
-          FUN_001641b4(temp_v15);
+          eventQueueAddUniqueIfValid(temp_v15);
         }
         else {
           temp_v5 = 9;
@@ -1929,7 +1929,7 @@ LAB_001f77ec:
             piVar3[0xff] = piVar3[0xff] + 1;
             return 0;
           }
-          FUN_001641b4(0x100020e);
+          eventQueueAddUniqueIfValid(0x100020e);
           FUN_0031f27c(0x11,0);
           FUN_0031f208(1);
           FUN_0031f208(2);
@@ -2019,13 +2019,13 @@ LAB_001f77ec:
         temp_v0 = *(short *)(temp_v6 + 10);
         temp_v6 = FUN_001834a4(0x1a,0x11a);
         temp_v11 = (int)(short)(*(short *)(temp_v6 + 8) + temp_v16);
-        FUN_00284168(temp_v11,(int)(short)(*(short *)(temp_v6 + 10) + temp_v0),
+        ifTouchRegionAdd(temp_v11,(int)(short)(*(short *)(temp_v6 + 10) + temp_v0),
                      (int)**(short **)(temp_v6 + 0xc),(int)(*(short **)(temp_v6 + 0xc))[1]);
         temp_v32 = piVar3 + temp_v5 + 0x100;
         *(short *)((int)piVar3 + temp_v5 * 4 + 0x45e) = (short)temp_v11;
         temp_v6 = FUN_001834a4(0x1a,0x11b);
         temp_v11 = (int)(short)(*(short *)(temp_v6 + 8) + temp_v16);
-        FUN_00284168(temp_v11,(int)(short)(*(short *)(temp_v6 + 10) + temp_v0),
+        ifTouchRegionAdd(temp_v11,(int)(short)(*(short *)(temp_v6 + 10) + temp_v0),
                      (int)**(short **)(temp_v6 + 0xc),(int)(*(short **)(temp_v6 + 0xc))[1]);
         temp_v5 = temp_v5 + 1;
         *(short *)(temp_v32 + 0x18) = (short)temp_v11;
@@ -2283,7 +2283,7 @@ LAB_001f77ec:
         temp_v5 = 4;
         FUN_001517b4(4,1);
         if (temp_v5 != 0) {
-          FUN_001641b4(0x100020d);
+          eventQueueAddUniqueIfValid(0x100020d);
           temp_v12 = (char)piVar3[0x1a0c] - '\x01';
           *(char *)(piVar3 + 0x1a0c) = temp_v12;
           if (temp_v12 < '\0') {
@@ -2295,7 +2295,7 @@ LAB_001f77ec:
           temp_v5 = 3;
           FUN_001517b4(3,1);
           if (temp_v5 != 0) {
-            FUN_001641b4(0x100020d);
+            eventQueueAddUniqueIfValid(0x100020d);
             temp_v12 = (char)piVar3[0x1a0c] + '\x01';
             *(char *)(piVar3 + 0x1a0c) = temp_v12;
             if ('\x02' < temp_v12) {
@@ -2320,21 +2320,21 @@ LAB_001f77ec:
               if (*piVar19 < piVar3[0x106]) {
                 FUN_002a7b74();
                 FUN_0023c08c(0xc);
-                FUN_001641b4(0x100020f);
+                eventQueueAddUniqueIfValid(0x100020f);
               }
               else {
                 temp_v7 = computeCountLimit();
                 if (temp_v7 < (unsigned short)puVar15[3]) {
                   FUN_002a7b74();
                   FUN_0023c08c(8);
-                  FUN_001641b4(0x100020f);
+                  eventQueueAddUniqueIfValid(0x100020f);
                 }
                 else {
                   temp_v4 = slotRecordFindById(*puVar15);
                   if (temp_v4 != 0) {
                     FUN_002a7b74();
                     FUN_0023c08c(9);
-                    FUN_001641b4(0x100020f);
+                    eventQueueAddUniqueIfValid(0x100020f);
                   }
                   else {
                     temp_v4 = FUN_004d0eec();
@@ -2383,7 +2383,7 @@ LAB_001f77ec:
                     }
                     FUN_002a7b74();
                     FUN_0023c08c(10);
-                    FUN_001641b4(0x100020f);
+                    eventQueueAddUniqueIfValid(0x100020f);
                   }
                 }
               }
@@ -2404,13 +2404,13 @@ LAB_001f77ec:
                 FUN_0020b908(0x24,1);
                 temp_v15 = 0x100020f;
 LAB_001f8c54:
-                FUN_001641b4(temp_v15);
+                eventQueueAddUniqueIfValid(temp_v15);
               }
               else {
                 temp_v4 = 9;
                 FUN_001517b4(9,1);
                 if (temp_v4 == 0) goto LAB_001f8d58;
-                FUN_001641b4(0x100020e);
+                eventQueueAddUniqueIfValid(0x100020e);
                 FUN_0031f27c(0x13,0);
                 FUN_0031f208(1);
                 FUN_0031f208(2);
@@ -2452,7 +2452,7 @@ LAB_001f8d58:
       return 0;
     }
     temp_v15 = 0x100020d;
-    FUN_001641b4(temp_v15);
+    eventQueueAddUniqueIfValid(temp_v15);
     piVar3[0xff] = piVar3[0xff] + 1;
     return 0;
   case 0xe:
@@ -2617,7 +2617,7 @@ LAB_001f8d58:
     piVar3[0x103] = 0x13;
     FUN_0020b908(0x24,0);
     temp_v15 = 0x100020e;
-    FUN_001641b4(temp_v15);
+    eventQueueAddUniqueIfValid(temp_v15);
     piVar3[0xff] = piVar3[0xff] + 1;
     return 0;
   case 0x10:
@@ -2781,7 +2781,7 @@ LAB_001f9868:
             FUN_0023c08c(7);
             piVar3[0x100] = 0x14;
             temp_v15 = 0x100020e;
-            FUN_001641b4(temp_v15);
+            eventQueueAddUniqueIfValid(temp_v15);
             piVar3[0xff] = piVar3[0xff] + 1;
             return 0;
           }
@@ -2789,7 +2789,7 @@ LAB_001f9868:
         *(unsigned char *)((int)piVar3 + 0x495) = 0;
         FUN_0023c08c(6);
         temp_v15 = 0x100020e;
-        FUN_001641b4(temp_v15);
+        eventQueueAddUniqueIfValid(temp_v15);
         piVar3[0xff] = piVar3[0xff] + 1;
         return 0;
       }
@@ -2833,7 +2833,7 @@ LAB_001f9868:
           piVar3[0x103] = 0xf;
           FUN_0020b908(0x24,0);
         }
-        FUN_001641b4(0x100020f);
+        eventQueueAddUniqueIfValid(0x100020f);
         piVar3[0xff] = piVar3[0xff] + 1;
         return 0;
       }
@@ -2848,7 +2848,7 @@ LAB_001f9868:
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
     }
-    FUN_001641b4(0x100020e);
+    eventQueueAddUniqueIfValid(0x100020e);
     FUN_002c8550(2);
     FUN_0033449c(0);
     FUN_00184310(*(unsigned short *)((int)piVar3 + 0x66fe));
@@ -3291,7 +3291,7 @@ LAB_001f9868:
       temp_v25 = piVar3 + 0x23ac;
       do {
         temp_v7 = (unsigned int)*(unsigned short *)((int)piVar3 + temp_v5 * 2 + 0x8f7c);
-        FUN_0035dd74();
+        contentEntryFindById();
         temp_v6 = FUN_002a4860(temp_v25);
         temp_v11 = FUN_002a4894(temp_v25);
         if (*(short *)((int)piVar3 + (temp_v11 + temp_v6) * 2 + 0x62a0) == *(short *)(temp_v7 + 0x1a)) {
@@ -3426,7 +3426,7 @@ LAB_001fac50:
           piVar3[0x106] = temp_v6;
           FUN_0037c8e4(1,0);
           panelSetTarget(-piVar3[0x106],0);
-          FUN_001641b4(0x100020e);
+          eventQueueAddUniqueIfValid(0x100020e);
         }
         else {
           temp_v5 = 10;
@@ -3435,13 +3435,13 @@ LAB_001fac50:
             piVar3[0x103] = 0x1b;
             FUN_0020b908(0x24,1);
             temp_v15 = 0x1000210;
-            FUN_001641b4(temp_v15);
+            eventQueueAddUniqueIfValid(temp_v15);
           }
           else {
             temp_v5 = 9;
             FUN_001517b4(9,1);
             if (temp_v5 != 0) {
-              FUN_001641b4(0x100020e);
+              eventQueueAddUniqueIfValid(0x100020e);
               FUN_0031f27c(0x12,0);
               FUN_0031f208(1);
               FUN_0031f208(2);
@@ -3460,7 +3460,7 @@ LAB_001fac50:
               FUN_0020b908(0x28,1);
               temp_v15 = 0x100020f;
               piVar3[0x106] = 0;
-              FUN_001641b4(temp_v15);
+              eventQueueAddUniqueIfValid(temp_v15);
             }
           }
         }
@@ -3504,7 +3504,7 @@ LAB_001fac1c:
       temp_v27 = (unsigned int *)(piVar3 + 0x23ac);
       do {
         temp_v7 = (unsigned int)*(unsigned short *)((int)piVar3 + temp_v4 * 2 + 0x8f7c);
-        FUN_0035dd74();
+        contentEntryFindById();
         temp_v5 = FUN_002a4860(temp_v27);
         temp_v6 = FUN_002a4894(temp_v27);
         if (*(short *)((int)piVar3 + (temp_v5 + temp_v6) * 2 + 0x62a0) == *(short *)(temp_v7 + 0x1a)) {
@@ -3540,7 +3540,7 @@ LAB_001fac1c:
       do {
         temp_v5 = FUN_001834a4(0x1a,temp_v4 + 0x157);
         temp_v6 = (int)*(short *)(temp_v5 + 8);
-        FUN_00284168(temp_v6,(int)*(short *)(temp_v5 + 10),(int)**(short **)(temp_v5 + 0xc),
+        ifTouchRegionAdd(temp_v6,(int)*(short *)(temp_v5 + 10),(int)**(short **)(temp_v5 + 0xc),
                      (int)(*(short **)(temp_v5 + 0xc))[1]);
         temp_v5 = temp_v4 * 2;
         temp_v4 = temp_v4 + 1;
@@ -3673,7 +3673,7 @@ LAB_001fac1c:
         } while (temp_v5 < (int)(unsigned int)*(unsigned short *)((int)piVar3 + 0x8f7a));
       }
       if ((int *)(int)(char)temp_v33[0xc] != temp_v25) {
-        FUN_001641b4(0x100020d);
+        eventQueueAddUniqueIfValid(0x100020d);
       }
       if (temp_v4 != 0) {
         piVar3[0xff] = piVar3[0xff] + 1;
@@ -3694,7 +3694,7 @@ LAB_001fac1c:
       temp_v4 = 4;
       FUN_001517b4(4,1);
       if (temp_v4 != 0) {
-        FUN_001641b4(0x100020d);
+        eventQueueAddUniqueIfValid(0x100020d);
         temp_v12 = (char)temp_v33[0xc] - '\x01';
         *(char *)(piVar3 + 0x1a0c) = temp_v12;
         if (temp_v12 < '\0') {
@@ -3730,7 +3730,7 @@ LAB_001fac1c:
               } while (temp_v4 < 4);
               FUN_00388758(1);
               piVar3[0x106] = 0;
-              FUN_001641b4(0x100020f);
+              eventQueueAddUniqueIfValid(0x100020f);
             }
             piVar3[0xff] = piVar3[0xff] + 1;
             return 0;
@@ -3770,7 +3770,7 @@ LAB_001fac1c:
                   if ((temp_v7 & ~temp_v10) != 0) {
                     FUN_002a7b74();
                     FUN_0023c08c(10);
-                    FUN_001641b4(0x100020f);
+                    eventQueueAddUniqueIfValid(0x100020f);
                     piVar3[0xff] = piVar3[0xff] + 1;
                     return 0;
                   }
@@ -3870,7 +3870,7 @@ LAB_001fb9c4:
                   }
                   FUN_0037e1b0(0xffffffff,1);
                   temp_v15 = 0x100020e;
-                  FUN_001641b4(temp_v15);
+                  eventQueueAddUniqueIfValid(temp_v15);
                   piVar3[0xff] = piVar3[0xff] + 1;
                   return 0;
                 }
@@ -3885,11 +3885,11 @@ LAB_001fb9c4:
             FUN_0023c08c(0xb);
             temp_v15 = 0x100020f;
           }
-          FUN_001641b4(temp_v15);
+          eventQueueAddUniqueIfValid(temp_v15);
           piVar3[0xff] = piVar3[0xff] + 1;
           return 0;
         }
-        FUN_001641b4(0x100020d);
+        eventQueueAddUniqueIfValid(0x100020d);
         temp_v12 = (char)temp_v33[0xc] + '\x01';
         *(char *)(piVar3 + 0x1a0c) = temp_v12;
         if ((int)(unsigned int)*(unsigned short *)((int)piVar3 + 0x8f7a) < (int)temp_v12) {
@@ -4070,7 +4070,7 @@ joined_r0x001fbbe8:
           temp_v28 = piVar3 + 0x23ac;
           do {
             temp_v7 = (unsigned int)*(unsigned short *)((int)piVar3 + temp_v5 * 2 + 0x8f7c);
-            FUN_0035dd74();
+            contentEntryFindById();
             temp_v6 = FUN_002a4860(temp_v28);
             temp_v11 = FUN_002a4894(temp_v28);
             if (*(short *)((int)piVar3 + (temp_v11 + temp_v6) * 2 + 0x62a0) == *(short *)(temp_v7 + 0x1a))

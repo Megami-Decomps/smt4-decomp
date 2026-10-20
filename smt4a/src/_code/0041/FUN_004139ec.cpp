@@ -10,7 +10,7 @@ int FUN_00110b28(unsigned char [16], unsigned char **);
 int FUN_0011b63e(int, unsigned int, unsigned char [5], int);
 int operatorNew(int);
 int FUN_00432b10(unsigned char [5]);
-int FUN_00433650(unsigned char [5]);
+int _ZN9Obj55a5a8D1Ev(unsigned char [5]);
 
 /* stack frame of param_1: 7 slot(s), 17 byte(s) */
 typedef struct {
@@ -34,7 +34,7 @@ extern unsigned char DAT_0055cacc; /* 0x55cacc */
 /* Supplied declaration required: operatorNew. */
 extern unsigned int FUN_002fafd8(int, unsigned int);
 /* Supplied declaration required: FUN_00432b10. */
-/* Supplied declaration required: FUN_00433650. */
+/* Supplied declaration required: _ZN9Obj55a5a8D1Ev. */
 
 
 void FUN_004139ec(int param_1)
@@ -81,7 +81,7 @@ void FUN_004139ec(int param_1)
     FUN_00103f54(temp_v1,puVar2,0,1);
   }
   FUN_0011b63e(param_1 + 4,temp_v1,temp_v2,param_1 + 0xdc);
-  FUN_00433650(temp_v2);
+  _ZN9Obj55a5a8D1Ev(temp_v2);
   return;
 }
 

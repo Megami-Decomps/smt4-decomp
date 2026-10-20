@@ -1,32 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039dd58` (_code @ 0x39dd58, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies the returned pointer into r1 before adding 0x100; built adds straight from r0 */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001568f8(int, unsigned int);
-int scrSetResult(int);
+typedef struct StatusFlags {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u16 bits;
+} StatusFlags;
 
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_001568f8. */
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: scrSetResult. */
+typedef struct BattleActor {
+    /* 0x000 */ u8 unk000[0x100];
+    /* 0x100 */ StatusFlags status;
+} BattleActor;
 
+extern void *btlGetMainState(void);
+extern BattleActor *FUN_001568f8(void *battle, u32 index);
+extern u32 scrGetArg(u32 index);
+extern void scrSetResult(s32 result);
 
-unsigned int FUN_0039dd58(void)
-
+static inline bool statusHasBit(StatusFlags *status, u32 bit)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = btlGetMainState();
-  FUN_001568f8(temp_v2,temp_v0);
-  scrSetResult(((unsigned int)*(unsigned short *)(temp_v2 + 0x110) & (1 << (temp_v1 & 0xff))) != 0);
-  return 1;
+    return (status->bits & (1 << bit)) != 0;
+}
+
+/* Script command: sets the result to whether bit `argument 1` of the status flags of actor `argument 0` is set. */
+u32 FUN_0039dd58(void)
+{
+    u32 index = scrGetArg(0);
+    u32 bit = scrGetArg(1);
+    BattleActor *actor = FUN_001568f8(btlGetMainState(), index);
+
+    scrSetResult(statusHasBit(&actor->status, bit));
+    return 1;
 }
 
 } /* extern "C" */

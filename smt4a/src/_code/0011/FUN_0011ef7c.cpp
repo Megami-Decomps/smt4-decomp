@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002f4f00(unsigned char [64]);
 int strHolderAssignU32Alias(unsigned char [64], unsigned int);
 int FUN_002fbb92(unsigned char [64], unsigned int);
@@ -26,7 +26,7 @@ extern unsigned char *DAT_00630374; /* 0x630374 */
 
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002f4f00. */
 /* Supplied declaration required: strHolderAssignU32Alias. */
 /* Supplied declaration required: FUN_002fbb92. */
@@ -77,11 +77,11 @@ int FUN_0011ef7c(int param_1,int param_2,unsigned int param_3,unsigned int param
     }
     FUN_00303d74(param_1,param_2,temp_v1);
     FUN_002f4f00(temp_v1);
-    FUN_002e6e5c(temp_v2);
+    _ZN9Obj55b28cD1Ev(temp_v2);
   }
   else {
     FUN_002f4f00(temp_v1);
-    FUN_002e6e5c(temp_v2);
+    _ZN9Obj55b28cD1Ev(temp_v2);
     param_1 = 0;
   }
   return param_1;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001bc2ec(...);
-int FUN_001c44b4(int);
+int vramAreaGetBaseAddress(int);
 
 /* stack frame of param_2: 12 slot(s), 48 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_001bc2ec. */
-/* Supplied declaration required: FUN_001c44b4. */
+/* Supplied declaration required: vramAreaGetBaseAddress. */
 
 
 void FUN_001ce8e4(int param_1,int param_2)
@@ -68,7 +68,7 @@ void FUN_001ce8e4(int param_1,int param_2)
   do {
     temp_v8 = temp_v23;
     temp_v3 = temp_v16;
-    FUN_001c44b4(0x20000);
+    vramAreaGetBaseAddress(0x20000);
     temp_v1 = FUN_001bc2ec();
     temp_v4 = temp_v8 + temp_v3 * 4;
     puVar14 = *(unsigned int **)(temp_v4 + 0xc);

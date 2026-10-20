@@ -25,7 +25,7 @@ extern int FUN_00224880(unsigned int);
 extern int FUN_002a4b60(void);
 /* Supplied declaration required: FUN_002a4b74. */
 /* Supplied declaration required: dataTableFindMatching35. */
-extern int FUN_0031d62c(void);
+extern int messageWindowIsState1(void);
 /* Supplied declaration required: FUN_0034913c. */
 extern int FUN_0034919c(void);
 extern int panelIsActiveState2(void);
@@ -52,7 +52,7 @@ void FUN_00468fec(unsigned int *param_1)
   
   temp_v0 = FUN_00224880(*(unsigned int *)param_1[0xad]);
   if (temp_v0 != 2) {
-    temp_v0 = FUN_0031d62c();
+    temp_v0 = messageWindowIsState1();
     if (temp_v0 != 0) {
       temp_v0 = FUN_002a4b60();
       if ((char)param_1[6] == '\0') {

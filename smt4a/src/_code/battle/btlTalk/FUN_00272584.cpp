@@ -8,7 +8,7 @@ int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int jobIsValid(...);
 int __aeabi_memset4(...);
-int FUN_004ab854(...);
+int btlUiPanelStart(...);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: jobIsValid. */
 /* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_004ab854. */
+/* Supplied declaration required: btlUiPanelStart. */
 
 
 void FUN_00272584(unsigned int *param_1,int param_2,int param_3,int param_4)
@@ -56,7 +56,7 @@ void FUN_00272584(unsigned int *param_1,int param_2,int param_3,int param_4)
   piVar1[0x52] = -1;
   piVar1[0xc] = (int)*(short *)(*(int *)(param_2 + 0x28) + 0x1c0);
   __aeabi_memset4(piVar1 + 0xd,0x100,0xffffffff);
-  FUN_004ab854(g_btlUiBlock);
+  btlUiPanelStart(g_btlUiBlock);
   piVar1[6] = 0;
   return;
 }

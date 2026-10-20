@@ -1,26 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021960c` (_code @ 0x21960c, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable08Sub1GetRecord(void);
+struct Record0021960c {
+    /* 0x00 */ u8 unk00[0x6F];
+    /* 0x6F */ u8 key;
+};
 
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
+struct Entry0021960c {
+    /* 0x00 */ u16 id;
+};
 
+Record0021960c *dataTable08Sub1GetRecord(u32 id);
 
-int FUN_0021960c(unsigned short *param_1,unsigned short *param_2)
-
+/* Comparator: the difference of the key bytes (+0x6F) of the records the two entries' ids refer to. */
+s32 FUN_0021960c(Entry0021960c *a, Entry0021960c *b)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = (unsigned int)*param_1;
-  dataTable08Sub1GetRecord();
-  temp_v1 = (unsigned int)*param_2;
-  dataTable08Sub1GetRecord();
-  return (unsigned int)*(unsigned char *)(temp_v0 + 0x6f) - (unsigned int)*(unsigned char *)(temp_v1 + 0x6f);
+    Record0021960c *first = dataTable08Sub1GetRecord(a->id);
+    Record0021960c *second = dataTable08Sub1GetRecord(b->id);
+
+    return first->key - second->key;
 }
 
-} /* extern "C" */
+}

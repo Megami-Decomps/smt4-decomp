@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysMemClear(unsigned short [200], int);
-int FUN_00480838(void);
+int aocRecordLookup83(void);
 
 /* stack frame of param_1: 1 slot(s), 2 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 extern int FUN_00184964(unsigned int, int);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_00480838. */
+/* Supplied declaration required: aocRecordLookup83. */
 extern int flagValueIsPositive(unsigned int);
 
 
@@ -46,13 +46,13 @@ unsigned short FUN_00303bd4(int param_1)
         if ((param_1 != 3) || (temp_v2 < 1)) {
           return 0;
         }
-        FUN_00480838();
+        aocRecordLookup83();
       }
       else {
         if (temp_v2 < 1) {
           return 0;
         }
-        FUN_00480838();
+        aocRecordLookup83();
       }
       temp_v2 = 0;
     }

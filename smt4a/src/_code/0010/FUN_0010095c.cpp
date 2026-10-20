@@ -10,7 +10,7 @@ int FUN_002e3338(unsigned int, unsigned int, int, unsigned int);
 int asdOperatorDeleteB(unsigned int);
 int FUN_002e3ef4(...);
 int FUN_002e3f68(...);
-int FUN_002e3f74(int);
+int holderDeleteObject(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 10 slot(s), 40 byte(s) */
@@ -51,7 +51,7 @@ extern unsigned int FUN_00100dc8(int *);
 /* Supplied declaration required: FUN_002e3ef4. */
 extern int FUN_002e3f2c(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002e3f68. */
-/* Supplied declaration required: FUN_002e3f74. */
+/* Supplied declaration required: holderDeleteObject. */
 
 
 unsigned int FUN_0010095c(unsigned int param_1,unsigned int param_2,int param_3,unsigned int param_4)
@@ -110,7 +110,7 @@ unsigned int FUN_0010095c(unsigned int param_1,unsigned int param_2,int param_3,
        (temp_v3 = *(int *)(temp_v5 + 0x1c) - 1, *(int *)(temp_v5 + 0x1c) = temp_v3, temp_v3 == 0)) {
       asdOperatorDeleteB(*(unsigned int *)(temp_v5 + 0x18));
       asdOperatorDeleteB(*(unsigned int *)(temp_v5 + 8));
-      FUN_002e3f74(temp_v5);
+      holderDeleteObject(temp_v5);
       asdOperatorDelete();
     }
     FUN_002e3f68(&temp_v6);

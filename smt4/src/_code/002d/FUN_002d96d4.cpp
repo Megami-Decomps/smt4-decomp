@@ -84,7 +84,7 @@ extern int FUN_0029b7b8(unsigned int, unsigned int, unsigned char *);
 extern int FUN_0029d644(unsigned int *);
 extern int FUN_0029d65c(int);
 extern unsigned int FUN_0029dde0(void);
-extern int FUN_0029e908(unsigned int *);
+extern int objectPartRunUnlessLocked(unsigned int *);
 extern int FUN_0029e93c(unsigned int *);
 /* Supplied declaration required: FUN_0029ea68. */
 extern int FUN_0029efa8(unsigned int *);
@@ -601,7 +601,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         } while (temp_v13 < temp_v4);
       }
       if (temp_v27 != 0) {
-        temp_v4 = FUN_0029e908(temp_v22);
+        temp_v4 = objectPartRunUnlessLocked(temp_v22);
         temp_v13 = FUN_002bf4f8(0x24,temp_v4 + 0xe3);
         temp_v4 = g_titleScene;
         temp_v10 = packNibblesAndByte(6,1,0);

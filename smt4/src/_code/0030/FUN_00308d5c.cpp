@@ -8,7 +8,7 @@ int FUN_00245a7c(...);
 int FUN_00245d0c(int, int);
 int FUN_00246d38(int, int, int, unsigned int);
 int FUN_00254e4c(...);
-int FUN_00254ec8(...);
+int pickerAdvance(...);
 int FUN_002550d8(...);
 int FUN_00255180(...);
 int FUN_0027de98(void);
@@ -36,7 +36,7 @@ extern unsigned int FUN_00245cc0(unsigned int);
 /* Supplied declaration required: FUN_00245d0c. */
 /* Supplied declaration required: FUN_00246d38. */
 /* Supplied declaration required: FUN_00254e4c. */
-/* Supplied declaration required: FUN_00254ec8. */
+/* Supplied declaration required: pickerAdvance. */
 /* Supplied declaration required: FUN_002550d8. */
 /* Supplied declaration required: FUN_00255180. */
 /* Supplied declaration required: FUN_0027de98. */
@@ -46,7 +46,7 @@ extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: FUN_0033b100. */
 /* Supplied declaration required: FUN_003ae3cc. */
 /* Supplied declaration required: FUN_003af0c4. */
-extern int FUN_003c85f4(void);
+extern int questCurrentGetValue(void);
 /* Supplied declaration required: FUN_003ddc44. */
 
 
@@ -189,7 +189,7 @@ LAB_00308fb8:
                 temp_v4 = FUN_00245c78();
                 temp_v2 = 1;
                 if ((temp_v4 != 0) ||
-                   ((temp_v4 = FUN_00245c78(), temp_v4 == 0 && (temp_v4 = FUN_003c85f4(), temp_v4 != 0)))) {
+                   ((temp_v4 = FUN_00245c78(), temp_v4 == 0 && (temp_v4 = questCurrentGetValue(), temp_v4 != 0)))) {
                   puVar9 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
                   if ((puVar9 == (unsigned int *)0x0) ||
                      (((*puVar9 & 0x80) == 0 && ((*puVar9 & 0x1000) == 0)))) {
@@ -272,7 +272,7 @@ LAB_003092e8:
     }
     if (((*(unsigned int *)(param_1 + 0x44a8) & 0x10) == 0) &&
        ((*puVar8 & 0x80) == 0 && (*puVar8 & 0x1000000) == 0)) {
-      FUN_00254ec8(param_1);
+      pickerAdvance(param_1);
     }
     FUN_00254e4c(g_btlUiBlock);
     *puVar8 = *puVar8 & 0xfeffff7f;

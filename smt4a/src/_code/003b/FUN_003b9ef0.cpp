@@ -12,7 +12,7 @@ int FUN_00272f54(void);
 int FUN_002bcafc(void);
 int FUN_002de99c(...);
 int FUN_00303460(...);
-int FUN_00303504(unsigned int);
+int blockResetAxis(unsigned int);
 int FUN_00313648(...);
 int FUN_00314c38(...);
 int mapPlaceSet(...);
@@ -83,7 +83,7 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002bcafc. */
 /* Supplied declaration required: FUN_002de99c. */
 /* Supplied declaration required: FUN_00303460. */
-/* Supplied declaration required: FUN_00303504. */
+/* Supplied declaration required: blockResetAxis. */
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: FUN_00314c38. */
 /* Supplied declaration required: mapPlaceSet. */
@@ -131,7 +131,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
     }
     DAT_005f1c98 = -1;
     DAT_005f1658 = 0;
-    FUN_00303504(0xffffffff);
+    blockResetAxis(0xffffffff);
   }
   else if (DAT_005f188d != '\0') {
     DAT_005f188d = '\0';
@@ -144,7 +144,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
     }
     DAT_005f1c98 = -1;
     DAT_005f1658 = 0;
-    FUN_00303504(0xffffffff);
+    blockResetAxis(0xffffffff);
   }
   else if (DAT_005f188e != '\0') {
     DAT_005f188e = '\0';
@@ -158,11 +158,11 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
     }
     DAT_005f1c98 = -1;
     DAT_005f1658 = 0;
-    FUN_00303504(0xffffffff);
+    blockResetAxis(0xffffffff);
   }
   else if (DAT_005f188f != '\0') {
     DAT_005f188f = '\0';
-    FUN_00303504(0xffffffff);
+    blockResetAxis(0xffffffff);
   }
   temp_v1 = FUN_00376f84();
   temp_v0 = DAT_005f1858;

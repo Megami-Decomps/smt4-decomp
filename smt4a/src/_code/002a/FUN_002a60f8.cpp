@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00137ea0(...);
 int FUN_001386e8(...);
-int FUN_00138cf8(...);
+int gameDataBlocksMaskClearBits(...);
 int sysPlaySe(int);
 int FUN_00224880(...);
 int gameDataBlocksAddFlags(int);
@@ -31,7 +31,7 @@ extern int DAT_005e2110; /* 0x5e2110 */
 
 /* Supplied declaration required: FUN_00137ea0. */
 /* Supplied declaration required: FUN_001386e8. */
-/* Supplied declaration required: FUN_00138cf8. */
+/* Supplied declaration required: gameDataBlocksMaskClearBits. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00224880. */
 extern int FUN_00239480(void);
@@ -102,7 +102,7 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
   case 4:
     FUN_001386e8(1);
     FUN_00137ea0(1);
-    FUN_00138cf8(1);
+    gameDataBlocksMaskClearBits(1);
     sysPlaySe(0xe8);
     if (DAT_0057f6cc == '\0') {
       campCommonBgAcquire();
@@ -140,7 +140,7 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
     if (DAT_0057f6c9 != '\0') {
       FUN_001386e8(1);
       FUN_00137ea0(1);
-      FUN_00138cf8(1);
+      gameDataBlocksMaskClearBits(1);
       obj04Finish();
       DAT_0057f6cb = 0;
       scrScriptProcessStartEntry(DAT_005e2110,2);
@@ -149,7 +149,7 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
     else {
       FUN_001386e8(1);
       FUN_00137ea0(1);
-      FUN_00138cf8(1);
+      gameDataBlocksMaskClearBits(1);
       obj04Finish();
       DAT_0057f6cb = 0;
       scrScriptProcessStartEntry(DAT_005e2110,5);
@@ -166,7 +166,7 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
   case 9:
     FUN_001386e8(1);
     FUN_00137ea0(1);
-    FUN_00138cf8(1);
+    gameDataBlocksMaskClearBits(1);
     temp_v2 = FUN_00224880(DAT_005e2110);
     if (temp_v2 != 2) {
       return 0;

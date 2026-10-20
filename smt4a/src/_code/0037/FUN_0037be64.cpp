@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0017760c(...);
 int FUN_00184310(void);
 int slotRecordFindById(...);
-int FUN_00239234(...);
+int gameDataCopySaveEntry(...);
 int FUN_002e59f8(int, unsigned int [11], int);
 int rt_aeabi_memclr(int, int);
 int FUN_0031654c(unsigned int, int);
@@ -36,7 +36,7 @@ extern int dataTableGetEntries(void);
 extern unsigned int FUN_0019acdc(short, unsigned int);
 /* Supplied declaration required: slotRecordFindById. */
 extern unsigned int FUN_0019e52c(unsigned short);
-/* Supplied declaration required: FUN_00239234. */
+/* Supplied declaration required: gameDataCopySaveEntry. */
 /* Supplied declaration required: FUN_002e59f8. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_0031654c. */
@@ -86,7 +86,7 @@ void FUN_0037be64(void)
   do {
     temp_v15 = temp_v15 + 1;
     temp_v7 = (unsigned int)temp_v15;
-    FUN_00239234(temp_v7,temp_v20);
+    gameDataCopySaveEntry(temp_v7,temp_v20);
     temp_v0 = temp_v21;
     if (((temp_v21 != 0) && (FUN_00184310(), temp_v7 != 0)) && ((*(unsigned short *)(temp_v7 + 10) & 1) != 0)) {
       temp_v13 = 0;
@@ -153,7 +153,7 @@ LAB_0037c020:;
           temp_v11 = FUN_0019acdc(temp_v2,0);
           temp_v5 = FUN_0036fcd0(temp_v11,0);
           temp_v11 = FUN_0019e52c(temp_v5);
-          FUN_00239234(temp_v1,temp_v20);
+          gameDataCopySaveEntry(temp_v1,temp_v20);
           FUN_0031654c(temp_v11,temp_v21);
           FUN_0034543c(temp_v1);
         }
@@ -173,7 +173,7 @@ LAB_0037c020:;
         if (temp_v4 == temp_v2) {
           temp_v17 = FUN_0019acdc(temp_v2,0);
           temp_v17 = temp_v17 & 0xffff;
-          FUN_00239234(temp_v1,temp_v20);
+          gameDataCopySaveEntry(temp_v1,temp_v20);
           temp_v13 = 0;
 LAB_0037c1b4:
           if (temp_v21 <= (*(unsigned short *)(temp_v6 + temp_v13 * 4 + 0x28362) & 0x3ff)) goto LAB_0037c2a4;

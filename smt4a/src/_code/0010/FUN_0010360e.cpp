@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002e6e34(int *, int);
-int FUN_002e6e5c(int *);
+int _ZN9Obj55b28cD1Ev(int *);
 
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 
 
 void FUN_0010360e(int param_1,int param_2,int param_3,unsigned int param_4)
@@ -32,7 +32,7 @@ void FUN_0010360e(int param_1,int param_2,int param_3,unsigned int param_4)
          (temp_v0 & 0xff);
     *(unsigned short *)(param_3 + 6) = *(unsigned short *)(param_1 + 0x3a);
   }
-  FUN_002e6e5c(&iStack_20);
+  _ZN9Obj55b28cD1Ev(&iStack_20);
   return;
 }
 

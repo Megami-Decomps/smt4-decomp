@@ -1,80 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ab844` (_code @ 0x3ab844, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct BibleScreen {
+    /* 0x000 */ u8 unk000[0x1C];
+    /* 0x01C */ u8 buttonHelpOwned;
+    /* 0x01D */ u8 loadedTex0D;
+    /* 0x01E */ u8 loadedTex1D;
+    /* 0x01F */ u8 unk01F[0x579];
+    /* 0x598 */ void *file0;
+    /* 0x59C */ void *file1;
+} BibleScreen;
+
 int FUN_002898e4(void);
-int FUN_0028c040(void);
-int buttonHelpCreate(void);
+s32 campButtonHelpIsActive(void);
 int FUN_0028d9b0(void);
-int FUN_00297468(...);
-int FUN_0029a128(int);
+int buttonHelpCreate(void);
+s32 *asdTMTexTableGetEntry(u32 id);
+int asdTMTexTableLoadSprites(u32 id);
+int FUN_002c58c8(u32 id, s32 index);
+int FUN_0028c040(void);
+int gameGlobalsSetSelected(s32 arg);
+int FUN_0029e874(s32 arg);
 int FUN_0029e788(void);
-int FUN_0029e874(int);
-int FUN_002a0cc8(int);
-int asdTMTexTableLoadSprites(int);
-int FUN_002c58c8(int, int);
+int FUN_002a0cc8(s32 arg);
+int FUN_00297468(const char *path, void **slot, s32 arg);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned char LAB_003ab928; /* 0x3ab928 */
-
-extern int *asdTMTexTableGetEntry(unsigned int);
-/* Supplied declaration required: FUN_002898e4. */
-extern int campButtonHelpIsActive(void);
-/* Supplied declaration required: FUN_0028c040. */
-/* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: FUN_0028d9b0. */
-/* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_0029a128. */
-/* Supplied declaration required: FUN_0029e788. */
-/* Supplied declaration required: FUN_0029e874. */
-/* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: asdTMTexTableLoadSprites. */
-/* Supplied declaration required: FUN_002c58c8. */
-
-
-void FUN_003ab844(int param_1)
-
+/* Prepares the bible screen: button help, the two sprite tables and the bible.bf / bible.mbm files. */
+void FUN_003ab844(BibleScreen *screen)
 {
-/* irregular: 11 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  
-  FUN_002898e4();
-  *(unsigned char *)(param_1 + 0x1c) = 0;
-  temp_v0 = campButtonHelpIsActive();
-  if (temp_v0 == 0) {
-    *(unsigned char *)(param_1 + 0x1c) = 1;
-    FUN_0028d9b0();
-    buttonHelpCreate();
-  }
-  piVar2 = (int *)asdTMTexTableGetEntry(0xd);
-  if (*piVar2 == 0) {
-    *(unsigned char *)(param_1 + 0x1d) = 1;
-  }
-  piVar2 = (int *)asdTMTexTableGetEntry(0x1d);
-  if (*piVar2 == 0) {
-    asdTMTexTableLoadSprites(0x1d);
-    temp_v0 = 0;
-    do {
-      FUN_002c58c8(0x1d,temp_v0);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 3);
-    *(unsigned char *)(param_1 + 0x1e) = 1;
-  }
-  FUN_0028c040();
-  FUN_0029a128(8);
-  FUN_0029e874(1);
-  FUN_0029e788();
-  FUN_002a0cc8(1);
-  FUN_00297468(&LAB_003ab928,param_1 + 0x598,0);
-  FUN_00297468(0x3ab938,param_1 + 0x59c,0);
-  return;
+    s32 i;
+
+    FUN_002898e4();
+    screen->buttonHelpOwned = 0;
+    if (campButtonHelpIsActive() == 0) {
+        screen->buttonHelpOwned = 1;
+        FUN_0028d9b0();
+        buttonHelpCreate();
+    }
+    if (*asdTMTexTableGetEntry(13) == 0) {
+        screen->loadedTex0D = 1;
+    }
+    if (*asdTMTexTableGetEntry(29) == 0) {
+        asdTMTexTableLoadSprites(29);
+        for (i = 0; i < 3; i++) {
+            FUN_002c58c8(29, i);
+        }
+        screen->loadedTex1D = 1;
+    }
+    FUN_0028c040();
+    gameGlobalsSetSelected(8);
+    FUN_0029e874(1);
+    FUN_0029e788();
+    FUN_002a0cc8(1);
+    FUN_00297468("bible/bible.bf", &screen->file0, 0);
+    FUN_00297468("bible/bible.mbm", &screen->file1, 0);
 }
 
 } /* extern "C" */

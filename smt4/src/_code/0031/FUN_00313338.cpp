@@ -1,26 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00313338` (_code @ 0x313338, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTable08Sub0GetRecord(void);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x54];
+    /* 0x54 */ u8 order;
+} Record;
 
-/* Supplied declaration required: dataTable08Sub0GetRecord. */
+extern Record *dataTable08Sub0GetRecord(u32 id);
 
-
-int FUN_00313338(unsigned short *param_1,unsigned short *param_2)
-
+/* Comparison of two ids by their record's order byte, descending. */
+s32 FUN_00313338(const u16 *a, const u16 *b)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = (unsigned int)*param_1;
-  dataTable08Sub0GetRecord();
-  temp_v1 = (unsigned int)*param_2;
-  dataTable08Sub0GetRecord();
-  return (unsigned int)*(unsigned char *)(temp_v1 + 0x54) - (unsigned int)*(unsigned char *)(temp_v0 + 0x54);
+    Record *recordA = dataTable08Sub0GetRecord(*a);
+    Record *recordB = dataTable08Sub0GetRecord(*b);
+
+    return recordB->order - recordA->order;
 }
 
 } /* extern "C" */

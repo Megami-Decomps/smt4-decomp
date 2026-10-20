@@ -8,7 +8,7 @@ int FUN_00100388(...);
 int sysMemClear(...);
 int FUN_003180c4(...);
 
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_00169548(...);
 int scrScriptProcessStartEntry(...);
 int FUN_002a1f60(...);
@@ -24,7 +24,7 @@ int sub10OwnerStart(unsigned int *);
 int FUN_004d032c(unsigned int *, int);
 int sendEvent100020D(void);
 int selectOwnerReset(unsigned int *);
-int FUN_004d0af0(unsigned int *, unsigned int *);
+int _ZN13ObjBase3c2ef07vfunc0cEv(unsigned int *, unsigned int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
@@ -46,7 +46,7 @@ extern unsigned char LAB_00479b08; /* 0x479b08 */
 extern unsigned int *g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_00169548. */
 extern int FUN_001802d4(int);
 extern int FUN_001d25ec(unsigned int *);
@@ -76,7 +76,7 @@ extern int FUN_004d0058(unsigned int *, unsigned int);
 /* Supplied declaration required: sendEvent100020D. */
 extern unsigned int selectOwnerGetSelected(unsigned int *);
 /* Supplied declaration required: selectOwnerReset. */
-/* Supplied declaration required: FUN_004d0af0. */
+/* Supplied declaration required: _ZN13ObjBase3c2ef07vfunc0cEv. */
 
 
 void FUN_00479358(unsigned int *param_1)
@@ -206,7 +206,7 @@ void FUN_00479358(unsigned int *param_1)
         } while (temp_v4 < (int)param_1[0xb0]);
       }
     }
-    FUN_004d0af0(param_1 + 0xba,param_1 + 0x90);
+    _ZN13ObjBase3c2ef07vfunc0cEv(param_1 + 0xba,param_1 + 0x90);
     temp_v2 = FUN_004cfe4c(param_1 + 0x90);
     if (temp_v2 != temp_v11) {
       temp_v2 = FUN_004cfe4c(param_1 + 0x90);
@@ -242,7 +242,7 @@ LAB_0047996c:
             param_1[2] = 6;
             temp_v1 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_00479af8);
             scrScriptProcessStartEntry(param_1[0xd6],temp_v1);
-            FUN_001641b4(0x100020e);
+            eventQueueAddUniqueIfValid(0x100020e);
             *(unsigned char *)(param_1 + 0xd3) = 0;
             return;
           }
@@ -261,7 +261,7 @@ LAB_004797d0:
         param_1[2] = 2;
         temp_v1 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_00479ab8);
         scrScriptProcessStartEntry(param_1[0xd6],temp_v1);
-        FUN_001641b4(0x100020e);
+        eventQueueAddUniqueIfValid(0x100020e);
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;
       }
@@ -271,7 +271,7 @@ LAB_00479820:
         param_1[2] = 3;
         temp_v1 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_00479ac8);
         scrScriptProcessStartEntry(param_1[0xd6],temp_v1);
-        FUN_001641b4(0x100020e);
+        eventQueueAddUniqueIfValid(0x100020e);
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;
       }
@@ -281,7 +281,7 @@ LAB_00479870:
         param_1[2] = 4;
         temp_v1 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_00479adc);
         scrScriptProcessStartEntry(param_1[0xd6],temp_v1);
-        FUN_001641b4(0x100020e);
+        eventQueueAddUniqueIfValid(0x100020e);
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;
       }
@@ -290,7 +290,7 @@ LAB_00479870:
         param_1[2] = 5;
         temp_v1 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_00479aec);
         scrScriptProcessStartEntry(param_1[0xd6],temp_v1);
-        FUN_001641b4(0x100020e);
+        eventQueueAddUniqueIfValid(0x100020e);
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;
       }
@@ -303,7 +303,7 @@ LAB_00479870:
           param_1[0x82] = 0;
         }
         FUN_00169548(1);
-        FUN_001641b4(0x100020e);
+        eventQueueAddUniqueIfValid(0x100020e);
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;
       }

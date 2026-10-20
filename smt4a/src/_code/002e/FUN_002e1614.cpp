@@ -1,66 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e1614` (_code @ 0x2e1614, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int asdMemFree(void);
-int scrScriptProcessDestroy(void);
-int asdMemFreeSlot(unsigned int);
-int FUN_0023a55c(void);
-int FUN_0028520c(void);
-int FUN_002ef750(void);
-int FUN_0035bea0(void);
-int bustupCutAnimStopJob(void);
+typedef struct Object002e1614 {
+    /* 0x000 */ void *job;
+    /* 0x004 */ u8 unk004[0x94];
+    /* 0x098 */ void *buffer;
+    /* 0x09c */ void *process;
+    /* 0x0a0 */ u32 slot;
+} Object002e1614;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Holder002e1614 {
+    /* 0x00 */ Object002e1614 *object;
+} Holder002e1614;
 
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: asdMemFreeSlot. */
-/* Supplied declaration required: FUN_0023a55c. */
-/* Supplied declaration required: FUN_0028520c. */
-/* Supplied declaration required: FUN_002ef750. */
-/* Supplied declaration required: FUN_0035bea0. */
-/* Supplied declaration required: bustupCutAnimStopJob. */
+void asdMemFree(void *block);
+void asdMemFreeSlot(u32 slot);
+void bustupCutAnimStopJob(void);
+s32 FUN_0028520c(s16 index);
+void FUN_0023a55c(s16 index);
+void FUN_002ef750(void);
+void eventTexReleaseJobs(void);
+void jobStop(void *job, s32 arg);
+void scrScriptProcessDestroy(void *process);
 
-
-void FUN_002e1614(unsigned int *param_1)
-
+/* Tears the object down: frees its slot, stops the bustup animation, releases the 64 entries and frees its buffer and script process. */
+void FUN_002e1614(Holder002e1614 *holder)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  param_1 = (unsigned int *)*param_1;
-  asdMemFreeSlot(param_1[0x28]);
-  FUN_0035bea0();
-  bustupCutAnimStopJob();
-  temp_v1 = 0;
-  do {
-    temp_v0 = (int)(short)temp_v1;
-    FUN_0028520c();
-    if (temp_v0 != 0) {
-      FUN_0023a55c();
+    Object002e1614 *object = holder->object;
+    s32 i;
+
+    asdMemFreeSlot(object->slot);
+    eventTexReleaseJobs();
+    bustupCutAnimStopJob();
+    for (i = 0; i < 64; i++) {
+        if (FUN_0028520c((s16)i) != 0) {
+            FUN_0023a55c((s16)i);
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x40);
-  FUN_002ef750();
-  if (param_1[0x26] != 0) {
-    asdMemFree();
-    param_1[0x26] = 0;
-  }
-  if (param_1[0x27] != 0) {
-    scrScriptProcessDestroy();
-    param_1[0x27] = 0;
-  }
-  jobStop(*param_1,0);
-  return;
+    FUN_002ef750();
+    if (object->buffer != NULL) {
+        asdMemFree(object->buffer);
+        object->buffer = NULL;
+    }
+    if (object->process != NULL) {
+        scrScriptProcessDestroy(object->process);
+        object->process = NULL;
+    }
+    jobStop(object->job, 0);
 }
 
 } /* extern "C" */

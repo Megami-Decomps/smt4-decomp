@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00190e48(void);
 int FUN_001f40fc(...);
-int FUN_0029a268(...);
+int fadeObjectResetIfActive(...);
 int FUN_002b75ec(...);
 int FUN_002be5a4(...);
 int FUN_002bf288(int, int, int, unsigned int, unsigned int, int);
@@ -28,7 +28,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00190e48. */
 /* Supplied declaration required: FUN_001f40fc. */
-/* Supplied declaration required: FUN_0029a268. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: FUN_002be5a4. */
 extern unsigned int vec2GetYInt(int);
@@ -76,8 +76,8 @@ unsigned char FUN_002109cc(void)
     if (((temp_v3 < 2) || (temp_v3 == 2 || temp_v3 == 3)) &&
        (FUN_00190e48(), *(char *)(temp_v1 + 0x4c5) != '\0')) {
       if (*(char *)(temp_v1 + 0x4c8) != '\x01') {
-        FUN_0029a268();
-        FUN_0029a268(temp_v1 + 0x408);
+        fadeObjectResetIfActive();
+        fadeObjectResetIfActive(temp_v1 + 0x408);
       }
       else {
         temp_v5 = vec2GetXInt(temp_v1 + 0x37c);

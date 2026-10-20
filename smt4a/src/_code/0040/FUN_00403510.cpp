@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001517b4(int, int);
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int FUN_00228b04(int, int);
 int FUN_002a4860(int);
 int FUN_002a48e0(int);
@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_002a4860. */
 extern int FUN_002a4894(int);
@@ -43,7 +43,7 @@ void FUN_00403510(int param_1)
       FUN_002a4860(param_1 + 0x28);
       temp_v1 = FUN_002a4894(param_1 + 0x28);
       if ((temp_v1 != 7) && (temp_v1 = FUN_002a4894(param_1 + 0x28), temp_v1 != 0)) {
-        FUN_001641b4(0x100020d);
+        eventQueueAddUniqueIfValid(0x100020d);
       }
       temp_v1 = FUN_002a4860(param_1 + 0x28);
       while ((temp_v1 == temp_v0 &&
@@ -66,7 +66,7 @@ void FUN_00403510(int param_1)
     if (temp_v0 == 0) {
       return;
     }
-    FUN_001641b4(0x100020d);
+    eventQueueAddUniqueIfValid(0x100020d);
     *(int *)(param_1 + 0x8c) = *(int *)(param_1 + 0x8c) - 1;
     FUN_002a48e0(param_1 + 0x28);
   }
@@ -78,7 +78,7 @@ void FUN_00403510(int param_1)
     if ((temp_v0 != temp_v1 - 8) &&
        ((temp_v0 = flaggedEntryGetValueA(param_1 + 0x28), temp_v0 != 0 ||
         (temp_v0 = FUN_002c2c68(param_1 + 0x28), temp_v0 >= 8)))) {
-      FUN_001641b4(0x100020d);
+      eventQueueAddUniqueIfValid(0x100020d);
       *(int *)(param_1 + 0x8c) = *(int *)(param_1 + 0x8c) + 1;
       FUN_002a48e0(param_1 + 0x28);
       return;

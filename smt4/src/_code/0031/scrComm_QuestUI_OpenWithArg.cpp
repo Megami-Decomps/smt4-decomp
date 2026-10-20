@@ -12,7 +12,7 @@ extern s32 scrGetArg(s32 index);
 extern s32 scrGetCommandFrame(void);
 extern void buttonHelpSetPreset(s32 id);
 extern s32 FUN_002c1d5c(void);
-extern void FUN_003490f0(u16 questId, u32 arg);
+extern void flagEntrySetValue(u16 questId, u32 arg);
 
 u8 scrComm_QuestUI_OpenWithArg(void)
 {
@@ -21,7 +21,7 @@ u8 scrComm_QuestUI_OpenWithArg(void)
     s32 result = scrGetCommandFrame();
 
     if (result == 0) {
-        FUN_003490f0(questId, arg);
+        flagEntrySetValue(questId, arg);
         result = FUN_002c1d5c();
         if (result != 0) {
             return 1;

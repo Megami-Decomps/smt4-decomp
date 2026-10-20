@@ -9,7 +9,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00184c40(...);
 int FUN_0019d880(void);
-int FUN_0025c848(...);
+int fadeObjectResetIfActive(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 7 slot(s), 28 byte(s) */
@@ -31,7 +31,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00184c40. */
 /* Supplied declaration required: FUN_0019d880. */
-/* Supplied declaration required: FUN_0025c848. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 
 
 void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
@@ -114,7 +114,7 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
               (**(romwright_code **)(temp_v6 + 0x12d4))();
               *(unsigned char *)(temp_v6 + 0x12d0) = 0;
             }
-            FUN_0025c848(temp_v2);
+            fadeObjectResetIfActive(temp_v2);
             temp_v6 = g_renderCtx;
             temp_v2 = packNibblesAndByte(6,7,0);
             piVar9 = (int *)(temp_v6 + 0x12b8);
@@ -143,7 +143,7 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
           (**(romwright_code **)(temp_v3 + 0x12d4))();
           *(unsigned char *)(temp_v3 + 0x12d0) = 0;
         }
-        FUN_0025c848(temp_v6);
+        fadeObjectResetIfActive(temp_v6);
         temp_v6 = g_renderCtx;
         temp_v3 = packNibblesAndByte(6,7,0);
         piVar9 = (int *)(temp_v6 + 0x12b8);
@@ -166,7 +166,7 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
           (**(romwright_code **)(temp_v6 + 0x12d4))();
           *(unsigned char *)(temp_v6 + 0x12d0) = 0;
         }
-        FUN_0025c848(temp_v2);
+        fadeObjectResetIfActive(temp_v2);
         temp_v6 = g_renderCtx;
         temp_v2 = packNibblesAndByte(6,7,0);
         piVar9 = (int *)(temp_v6 + 0x12b8);
@@ -179,7 +179,7 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
         temp_v6 = FUN_001834a4(0xd,0xfc0);
         FUN_00184c40(param_1 + 0x1c04,(int)(short)(*(short *)(temp_v6 + 8) + temp_v1),
                      (int)(short)(*(short *)(temp_v6 + 10) + temp_v0));
-        FUN_0025c848(param_1 + 0x1c04);
+        fadeObjectResetIfActive(param_1 + 0x1c04);
       }
     }
   }

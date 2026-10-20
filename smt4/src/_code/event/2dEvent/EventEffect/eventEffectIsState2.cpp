@@ -1,22 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `eventEffectIsState2` (_code @ 0x2cd9e4, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the compiler adds one extra `bne` to the return after `moveq r0,#1` (branch layout of the nested condition); registers otherwise identical. */
+#include "common.h"
 
 extern "C" {
 
-extern int g_eventEffect; /* 0x43dee8 */
+typedef struct EventEffect {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 state;
+} EventEffect;
 
+extern EventEffect *g_eventEffect; /* 0x43dee8 */
 
-unsigned int eventEffectIsState2(void)
-
+/* Whether the event effect exists and is in state 2. */
+u32 eventEffectIsState2(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if ((g_eventEffect != 0) && (*(int *)(g_eventEffect + 8) == 2)) {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    u32 result = 0;
+
+    if (g_eventEffect != NULL) {
+        if (g_eventEffect->state == 2) {
+            result = 1;
+        }
+    }
+    return result;
 }
 
 } /* extern "C" */

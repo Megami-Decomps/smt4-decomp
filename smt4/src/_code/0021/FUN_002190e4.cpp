@@ -4,15 +4,15 @@ extern "C" {
 
 #define KEY_NONE 99
 
-int FUN_002503d4(u32 id);
+int recordKindRank(u32 id);
 int FUN_00257568(u32 *a, u32 *b);
 int idIsAbove400(u32 id);
 
-/* Runs FUN_00257568 on two entries when their category keys (99 when idIsAbove400 flags the id, else FUN_002503d4(id)) are equal. */
+/* Runs FUN_00257568 on two entries when their category keys (99 when idIsAbove400 flags the id, else recordKindRank(id)) are equal. */
 void FUN_002190e4(u32 *a, u32 *b)
 {
-    int keyA = (idIsAbove400(*a) != 0) ? KEY_NONE : FUN_002503d4(*a);
-    int keyB = (idIsAbove400(*b) != 0) ? KEY_NONE : FUN_002503d4(*b);
+    int keyA = (idIsAbove400(*a) != 0) ? KEY_NONE : recordKindRank(*a);
+    int keyB = (idIsAbove400(*b) != 0) ? KEY_NONE : recordKindRank(*b);
 
     int diff = keyA - keyB;
 

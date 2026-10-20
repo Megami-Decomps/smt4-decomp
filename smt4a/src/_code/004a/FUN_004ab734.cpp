@@ -1,45 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ab734` (_code @ 0x4ab734, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail recomputes the panel address (`add r0, r4, #9216; add r0, r0, #188`) after FUN_00321500 instead of keeping it in r5, so it pushes only {r4, lr}; built reuses the first computation. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184748(int);
-int FUN_00321500(int);
-int FUN_0039ebcc(void);
+typedef struct BtlUiData {
+    /* 0x0000 */ u8 unk0000[8];
+    /* 0x0008 */ u8 menu[0x24B4];
+    /* 0x24BC */ u8 panel[1];
+} BtlUiData;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+typedef struct BtlUi {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ BtlUiData *data;
+} BtlUi;
 
-extern unsigned char g_btlUi; /* 0x57a9b8 */
+extern BtlUi g_btlUi;
 
-/* Supplied declaration required: FUN_00184748. */
-/* Supplied declaration required: FUN_00321500. */
-extern int menu32ModeIsNot6(int);
-/* Supplied declaration required: FUN_0039ebcc. */
+s32 menu32ModeIsNot6(u8 *menu);
+s32 FUN_0039ebcc(u8 *panel);
+s32 FUN_00321500(u8 *menu);
+s32 FUN_00184748(u8 *panel);
 
-
+/* Refreshes the battle UI menu and panel when the menu is not in mode 6 and FUN_0039ebcc succeeds. */
 void FUN_004ab734(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x10));
-  temp_v1 = menu32ModeIsNot6((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 8);
-  if (temp_v1 != 0) {
-    temp_v1 = temp_v0 + 0x24bc;
-    FUN_0039ebcc();
-    if (temp_v1 != 0) {
-      FUN_00321500(temp_v0 + 8);
-      FUN_00184748(temp_v0 + 0x24bc);
-      return;
+    BtlUiData *data = g_btlUi.data;
+
+    if (menu32ModeIsNot6(data->menu) != 0) {
+        if (FUN_0039ebcc(data->panel) != 0) {
+            FUN_00321500(data->menu);
+            FUN_00184748(data->panel);
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

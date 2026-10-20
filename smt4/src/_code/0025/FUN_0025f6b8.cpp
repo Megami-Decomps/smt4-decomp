@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_0025765c(...);
 int FUN_0026e6a0(...);
-int FUN_00288790(...);
+int messageKindForward(...);
 int FUN_00288844(...);
 int FUN_0028f048(...);
 int FUN_00293f10(...);
-int FUN_0029a268(...);
-int FUN_002b05d0(...);
+int fadeObjectResetIfActive(...);
+int categoryGetColor(...);
 int FUN_002b2650(...);
 int FUN_002b6758(...);
 int FUN_002b6940(...);
@@ -92,19 +92,19 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0026242c. */
 /* Supplied declaration required: FUN_00269bf0. */
 /* Supplied declaration required: FUN_0026e6a0. */
-/* Supplied declaration required: FUN_00288790. */
+/* Supplied declaration required: messageKindForward. */
 /* Supplied declaration required: FUN_00288844. */
 /* Supplied declaration required: FUN_002888a8. */
 extern int isLowThreshold(int, int);
 /* Supplied declaration required: FUN_00288ddc. */
-extern int FUN_0028dba8(unsigned int);
+extern int btlActorIsDown(unsigned int);
 /* Supplied declaration required: FUN_0028f048. */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00293f10. */
 /* Supplied declaration required: FUN_0029a17c. */
-/* Supplied declaration required: FUN_0029a268. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 extern int gameGetUnitRecord(int);
-/* Supplied declaration required: FUN_002b05d0. */
+/* Supplied declaration required: categoryGetColor. */
 /* Supplied declaration required: FUN_002b2650. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002b6758. */
@@ -674,7 +674,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
         }
         if ((temp_v9 & (1 << (temp_v10 & 0xff))) != 0) {
           if (*puVar11 == temp_v17) {
-            FUN_002b05d0((int)(short)temp_v10);
+            categoryGetColor((int)(short)temp_v10);
             drawSetColorFromRGBA8();
             break;
           }
@@ -793,7 +793,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
         FUN_002b2650(temp_v36 + 0x1600,
                      (int)(short)(*(short *)(temp_v12 + 8) + *(short *)(temp_v7 + 0x59a6) + temp_v25),
                      (int)(short)(*(short *)(temp_v12 + 10) + *(short *)(temp_v7 + 0x59b0) + temp_v26));
-        FUN_0029a268(temp_v36 + 0x1600);
+        fadeObjectResetIfActive(temp_v36 + 0x1600);
         temp_v8 = g_titleScene;
         if (*(char *)(temp_v36 + 0x18b5) != '\0') {
           temp_v13 = packNibblesAndByte(6,1,0);
@@ -808,8 +808,8 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
           FUN_002b2650(temp_v8,(int)(short)(*(short *)(temp_v12 + 8) + temp_v25),
                        (int)(short)(*(short *)(temp_v12 + 10) + temp_v26));
           *(unsigned int *)(temp_v8 + 0x30) = *(unsigned int *)(temp_v32 + 0x5964);
-          FUN_0029a268(temp_v8);
-          FUN_0029a268(temp_v8);
+          fadeObjectResetIfActive(temp_v8);
+          fadeObjectResetIfActive(temp_v8);
           temp_v12 = g_titleScene;
           temp_v8 = packNibblesAndByte(6,7,0);
           piVar21 = (int *)(temp_v12 + 0x12ac);
@@ -858,7 +858,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
               temp_v12 = FUN_002bf4f8(0x15,temp_v17 * 2 + 0x28);
               FUN_00288844(*(short *)(temp_v12 + 8) + temp_v6,*(short *)(temp_v12 + 10) + temp_v5,0x24);
               temp_v12 = FUN_002bf4f8(0x15,temp_v17 * 2 + 0x27);
-              FUN_00288790((int)(short)temp_v10,*(short *)(temp_v12 + 8) + temp_v6,
+              messageKindForward((int)(short)temp_v10,*(short *)(temp_v12 + 8) + temp_v6,
                            *(short *)(temp_v12 + 10) + temp_v5,0x24);
             }
           }
@@ -866,7 +866,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
             temp_v12 = FUN_002bf4f8(0x15,temp_v17 * 2 + 0x28);
             FUN_00288844(*(short *)(temp_v12 + 8) + temp_v6,*(short *)(temp_v12 + 10) + temp_v5,0x24);
             temp_v12 = FUN_002bf4f8(0x15,temp_v17 * 2 + 0x27);
-            FUN_00288790((int)(short)temp_v10,*(short *)(temp_v12 + 8) + temp_v6,
+            messageKindForward((int)(short)temp_v10,*(short *)(temp_v12 + 8) + temp_v6,
                          *(short *)(temp_v12 + 10) + temp_v5,0x24);
           }
           temp_v17 = (temp_v17 + 1) & 0xffff;
@@ -980,7 +980,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
     else {
       temp_v15 = FUN_002bf4f8(0x15,0x70);
     }
-    temp_v5 = FUN_0028dba8(*(unsigned int *)(temp_v34 + 0x40));
+    temp_v5 = btlActorIsDown(*(unsigned int *)(temp_v34 + 0x40));
     if ((temp_v5 != 0) && (temp_v5 = FUN_002b6ad0(), temp_v5 != 0)) {
       temp_v5 = vec2GetXInt();
       temp_v6 = temp_v5 + temp_v4 + (int)*(short *)(temp_v15 + 8);
@@ -1044,7 +1044,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
     temp_v15 = FUN_002b6ad0();
     if (temp_v15 != 0) {
       if ((*(unsigned short *)(temp_v3 + 0x44) & 2) != 0) {
-        FUN_002b05d0(1);
+        categoryGetColor(1);
         drawSetColorFromRGBA8();
       }
       temp_v3 = FUN_002b6a54((int)*(short *)(temp_v3 + 0x604),*(unsigned short *)(temp_v3 + 0x606));
@@ -1058,7 +1058,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
     }
     else {
       if ((*(unsigned short *)(temp_v3 + 0x44) & 2) != 0) {
-        FUN_002b05d0(1);
+        categoryGetColor(1);
         drawSetColorFromRGBA8();
       }
       FUN_002b6758((int)*(short *)(temp_v3 + 0x46),*(short *)(temp_v4 + 8) + temp_v5,

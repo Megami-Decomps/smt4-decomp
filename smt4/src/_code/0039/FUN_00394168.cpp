@@ -16,7 +16,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: memClear. */
-extern int FUN_0038c030(int);
+extern int _ZN9Obj422214C1Ev(int);
 /* Supplied declaration required: nn_fnd_DateTime_DateTime_sub_object. */
 
 
@@ -32,7 +32,7 @@ int FUN_00394168(int param_1,unsigned int *param_2,unsigned int param_3)
   
   *param_2 = param_3;
   param_2[1] = param_3;
-  temp_v1 = FUN_0038c030(param_1 + 0x9bc);
+  temp_v1 = _ZN9Obj422214C1Ev(param_1 + 0x9bc);
   memClear(temp_v1 - 0x9bc,0x80);
   memClear(temp_v1 - 0x93c,0x100);
   memClear(temp_v1 - 0x83c,0x800);

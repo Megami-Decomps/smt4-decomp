@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00204ed0(...);
 int FUN_00288e68(...);
-int FUN_0029a268(...);
+int fadeObjectResetIfActive(...);
 int FUN_0029a284(...);
 int FUN_002b6dd8(...);
 int FUN_002b75ec(...);
@@ -66,12 +66,12 @@ extern unsigned long long FUN_0026aa78(void);
 /* Supplied declaration required: FUN_00288e68. */
 /* Supplied declaration required: FUN_00290994. */
 /* Supplied declaration required: FUN_0029a17c. */
-/* Supplied declaration required: FUN_0029a268. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: FUN_0029a284. */
 /* Supplied declaration required: FUN_0029ab54. */
 extern int FUN_0029ac94(void);
 extern unsigned short *FUN_0029acb0(void);
-extern int FUN_0029e908(int);
+extern int objectPartRunUnlessLocked(int);
 extern int FUN_0029e9cc(unsigned short);
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_0029efa8. */
@@ -311,7 +311,7 @@ LAB_001ccb9c:
     temp_v24 = temp_v12;
     temp_v13 = FUN_0029efc0();
     temp_v7 = FUN_0029efa8(temp_v12);
-    temp_v12 = FUN_0029e908(temp_v12);
+    temp_v12 = objectPartRunUnlessLocked(temp_v12);
     FUN_002bf380(2,0x1a,0x10,temp_v1,temp_v2,0xb3);
     FUN_0029ab54(temp_v1,temp_v2);
     temp_v25 = temp_v10 + 0x2200;
@@ -389,7 +389,7 @@ LAB_001ccb9c:
     } while (temp_v12 < 9);
     FUN_002bf538();
     if ((*(int *)(temp_v10 + 0x400) == 0x13) && (0 < *(short *)(temp_v25 + 0x32))) {
-      temp_v12 = FUN_0029e908(temp_v24);
+      temp_v12 = objectPartRunUnlessLocked(temp_v24);
       temp_v10 = FUN_0029efa8(temp_v24);
       temp_v10 = FUN_002bf4f8(0x1a,temp_v12 + temp_v10 * 4 + 0x4ae);
       FUN_002bf538();
@@ -612,7 +612,7 @@ LAB_001cdd1c:
           (**(romwright_code **)(temp_v12 + 0x12c8))();
           *(unsigned char *)(temp_v12 + 0x12c4) = 0;
         }
-        FUN_0029a268(temp_v10 + 0x370);
+        fadeObjectResetIfActive(temp_v10 + 0x370);
         temp_v12 = g_titleScene;
         temp_v10 = packNibblesAndByte(6,7,0);
         piVar16 = (int *)(temp_v12 + 0x12ac);

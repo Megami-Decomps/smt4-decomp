@@ -19,7 +19,7 @@ int asdMdlManagerMarkDestroy(...);
 int FUN_002e08c8(...);
 int faderSetValue(...);
 int FUN_00359370(...);
-int FUN_00359510(...);
+int animPlayerSetLoopPolicy(...);
 int FUN_0037a898(...);
 int gfxObjectDestroy(...);
 int FUN_003ba560(...);
@@ -50,7 +50,7 @@ extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: FUN_002e08c8. */
 /* Supplied declaration required: faderSetValue. */
 /* Supplied declaration required: FUN_00359370. */
-/* Supplied declaration required: FUN_00359510. */
+/* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: FUN_0037a898. */
 extern unsigned int FUN_00387350(char *);
 /* Supplied declaration required: gfxObjectDestroy. */
@@ -94,7 +94,7 @@ unsigned int FUN_002caea0(void)
       *(unsigned int *)(temp_v0 + 0x574) = 1;
       if ((temp_v1 != 0) && (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0)) {
         FUN_00280c5c(temp_v1,1);
-        FUN_00359510(*(unsigned int *)(*piVar4 + 8),1);
+        animPlayerSetLoopPolicy(*(unsigned int *)(*piVar4 + 8),1);
         FUN_001ac2d4(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x574));
         FUN_002e08c8(*(unsigned int *)(*piVar4 + 8));
         faderSetValue(*(unsigned int *)(*piVar4 + 8));

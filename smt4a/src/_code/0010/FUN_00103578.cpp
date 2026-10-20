@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_002e6e34(int **, int);
 int FUN_002e6e50(int);
-int FUN_002e6e5c(int **);
+int _ZN9Obj55b28cD1Ev(int **);
 
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e50. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 
 
 void FUN_00103578(unsigned int param_1,int *param_2,unsigned int param_3,unsigned int param_4)
@@ -33,7 +33,7 @@ void FUN_00103578(unsigned int param_1,int *param_2,unsigned int param_3,unsigne
   if (*(char *)(temp_v1 + 0x22) == '\x02') {
     FUN_002e6e50(temp_v1);
   }
-  FUN_002e6e5c(&piStack_18);
+  _ZN9Obj55b28cD1Ev(&piStack_18);
   return;
 }
 

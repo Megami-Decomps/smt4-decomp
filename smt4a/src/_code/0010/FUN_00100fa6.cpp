@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_4_stack;
 
-extern int FUN_002e49dc(int, int);
+extern int digitValueInBase(int, int);
 
 
 int FUN_00100fa6(unsigned int param_1,unsigned int param_2,int param_3,unsigned int *param_4)
@@ -92,7 +92,7 @@ LAB_0010100e:
     temp_v9 = 10;
   }
 LAB_00101082:
-  while ((0 < temp_v0 && (temp_v6 = FUN_002e49dc(temp_v7,temp_v9), -1 < temp_v6))) {
+  while ((0 < temp_v0 && (temp_v6 = digitValueInBase(temp_v7,temp_v9), -1 < temp_v6))) {
     temp_v0 = temp_v0 - 1;
     temp_v8 = temp_v9 * temp_v8 + temp_v6;
     temp_v1 = temp_v1 + 1;

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002ae164(void);
 
 extern int FUN_0024c5a0(int);
-extern int FUN_002503d4(int);
+extern int recordKindRank(int);
 extern int gameGetUnitRecord(void);
 /* Supplied declaration required: FUN_002ae164. */
 extern int idIsAbove400(int);
@@ -34,7 +34,7 @@ int FUN_002497f8(int *param_1,int *param_2)
   }
   else {
     temp_v0 = FUN_0024c5a0(*param_1);
-    temp_v6 = FUN_002503d4(*param_1);
+    temp_v6 = recordKindRank(*param_1);
     temp_v1 = *param_1;
     FUN_002ae164();
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x2c);
@@ -47,7 +47,7 @@ int FUN_002497f8(int *param_1,int *param_2)
   }
   else {
     temp_v5 = FUN_0024c5a0(*param_2);
-    temp_v1 = FUN_002503d4(*param_2);
+    temp_v1 = recordKindRank(*param_2);
     temp_v2 = *param_2;
     FUN_002ae164();
     temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x2c);

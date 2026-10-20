@@ -8,7 +8,7 @@ int asdTMTexTableLoadSprites(...);
 int gameDataBlocksGetSaveData(void);
 int FUN_0014e188(...);
 int FUN_0014e220(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int asdMemoryAlloc(...);
 int sysPlaySe(...);
 int gameFlagIsSet(...);
@@ -52,7 +52,7 @@ extern int DAT_00588e28; /* 0x588e28 */
 /* Supplied declaration required: gameDataBlocksGetSaveData. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_0014e220. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: gameFlagIsSet. */
@@ -137,7 +137,7 @@ void FUN_0041fe58(int param_1,int param_2,unsigned char param_3)
   *(unsigned int *)(param_1 + 0x54) = temp_v1;
   temp_v2 = param_1 + 0x454;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
-  FUN_001505ac(temp_v2,&DAT_00533d50,0x78,&DAT_00533dc8,0x18,0,0,0,0,&DAT_00533de0,0xe0);
+  paramsInit(temp_v2,&DAT_00533d50,0x78,&DAT_00533dc8,0x18,0,0,0,0,&DAT_00533de0,0xe0);
   FUN_0014e188(param_1 + 0x474,0x2b,1,temp_v2,0xc9);
   FUN_0014e220(param_1 + 0x500,0x2b,0x51,2,temp_v2,2);
   FUN_0014e220(param_1 + 0x58c,0x2b,0x52,2,temp_v2,2);

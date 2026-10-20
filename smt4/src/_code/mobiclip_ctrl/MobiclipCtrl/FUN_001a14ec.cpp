@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002ad61c(...);
-int FUN_0034f06c(unsigned char *, unsigned int *, int, int);
+int _ZN9Obj420a2c12buildEntriesEv(unsigned char *, unsigned int *, int, int);
 int FUN_0034fbc8(unsigned char *, int, unsigned int, unsigned int);
 int FUN_00350ac4(unsigned char *, int);
 int FUN_00350bd0(unsigned char *, unsigned int);
@@ -24,10 +24,10 @@ extern unsigned char DAT_004c3b20; /* 0x4c3b20 */
 extern int DAT_004c4068; /* 0x4c4068 */
 
 /* Supplied declaration required: FUN_002ad61c. */
-/* Supplied declaration required: FUN_0034f06c. */
+/* Supplied declaration required: _ZN9Obj420a2c12buildEntriesEv. */
 extern int FUN_0034f488(unsigned int *, unsigned int *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0034fbc8. */
-extern unsigned int FUN_003503ac(unsigned char *, int);
+extern unsigned int stateObjectClassify(unsigned char *, int);
 extern unsigned int FUN_003505f4(unsigned char *, int);
 extern int FUN_00350614(unsigned char *, unsigned int);
 extern unsigned int FUN_00350ab8(unsigned char *, unsigned int);
@@ -55,7 +55,7 @@ void FUN_001a14ec(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v2 = FUN_00350ab8(&DAT_004c3b20,0);
   temp_v3 = FUN_00350614(&DAT_004c3b20,temp_v2);
   puVar5 = &DAT_004c3a50;
-  FUN_0034f06c(&DAT_004c3a50,&DAT_004c3a44,temp_v3,0);
+  _ZN9Obj420a2c12buildEntriesEv(&DAT_004c3a50,&DAT_004c3a44,temp_v3,0);
   if (puVar5 == (unsigned char *)0x0) {
     FUN_002ad61c();
   }
@@ -72,7 +72,7 @@ void FUN_001a14ec(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v6 = ll_sdiv((int)temp_v0,(int)((unsigned long long)temp_v0 >> 0x20),*(unsigned int *)(temp_v3 + 0xc),0);
   DAT_0044d02c = (int)((unsigned long long)temp_v6 >> 0x20);
   DAT_0044d028 = (unsigned int)temp_v6;
-  temp_v5 = FUN_003503ac(&DAT_004c3b20,temp_v3);
+  temp_v5 = stateObjectClassify(&DAT_004c3b20,temp_v3);
   temp_v1 = DAT_0044d028;
   temp_v3 = ((int)temp_v5 >> 0x1f) * DAT_0044d028 +
           (int)((unsigned long long)DAT_0044d028 * (unsigned long long)temp_v5 >> 0x20);

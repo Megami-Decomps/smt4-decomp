@@ -18,8 +18,8 @@ int FUN_002efe80(unsigned int);
 int FUN_002f27de(int);
 int FUN_002f2834(int);
 int FUN_002f2878(unsigned int *);
-int FUN_002f28bc(void);
-int FUN_002f292c(int);
+int _ZN9Obj558bd0D1Ev(void);
+int _ZN9Obj55b12cD1Ev(int);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -47,9 +47,9 @@ extern int vectorDestroyBytes(int);
 /* Supplied declaration required: FUN_002f27de. */
 /* Supplied declaration required: FUN_002f2834. */
 /* Supplied declaration required: FUN_002f2878. */
-/* Supplied declaration required: FUN_002f28bc. */
-extern int FUN_002f2910(int);
-/* Supplied declaration required: FUN_002f292c. */
+/* Supplied declaration required: _ZN9Obj558bd0D1Ev. */
+extern int ptrVectorFree(int);
+/* Supplied declaration required: _ZN9Obj55b12cD1Ev. */
 
 
 void FUN_001095ec(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -111,17 +111,17 @@ void FUN_001095ec(unsigned int *param_1,unsigned int param_2,unsigned int param_
   temp_v0 = FUN_0010600c(param_1 + -0x50);
   temp_v0 = FUN_0010f1d0(temp_v0 - 0x18);
   temp_v0 = temp_v0 - 0x70;
-  FUN_002f28bc();
+  _ZN9Obj558bd0D1Ev();
   asdOperatorDeleteArray(*(unsigned int *)(temp_v0 - 0x14));
   temp_v0 = vectorDestroyBytes(temp_v0 - 0x3c);
-  temp_v0 = FUN_002f2910(temp_v0 - 0xc);
+  temp_v0 = ptrVectorFree(temp_v0 - 0xc);
   for (temp_v1 = *(int *)(temp_v0 - 0x94); temp_v1 != *(int *)(temp_v0 - 0x90); temp_v1 = temp_v1 + 4) {
   }
   asdOperatorDeleteArray();
   for (temp_v1 = *(int *)(temp_v0 - 0xa0); temp_v1 != *(int *)(temp_v0 - 0x9c); temp_v1 = temp_v1 + 4) {
   }
   asdOperatorDeleteArray();
-  FUN_002f292c(temp_v0 - 0x130);
+  _ZN9Obj55b12cD1Ev(temp_v0 - 0x130);
   return;
 }
 

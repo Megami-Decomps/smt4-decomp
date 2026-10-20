@@ -26,7 +26,7 @@ extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char 
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 extern unsigned int FUN_003054ce(void);
-extern int FUN_00305696(unsigned int);
+extern int ownerChildValue(unsigned int);
 /* Supplied declaration required: FUN_003056f2. */
 /* Supplied declaration required: FUN_003056fc. */
 /* Supplied declaration required: FUN_00310784. */
@@ -54,7 +54,7 @@ void FUN_0011fcb4(int param_1)
   FUN_002e9c0c();
   *(unsigned int *)(param_1 + 0xd8) = *(unsigned int *)(param_1 + 800);
   *(unsigned int *)(param_1 + 0xdc) = *(unsigned int *)(param_1 + 0x324);
-  temp_v0 = FUN_00305696(*(unsigned int *)(param_1 + 400));
+  temp_v0 = ownerChildValue(*(unsigned int *)(param_1 + 400));
   temp_v0 = *(int *)(temp_v0 + 0x18);
   FUN_003056fc(temp_v0,param_1 + 0x80,temp_v2);
   if (temp_v0 != 0) {

@@ -1,31 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b615c` (_code @ 0x3b615c, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_00187168(void);
-extern int FUN_003e4d68(unsigned int);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 id;
+} Record;
 
+extern int FUN_00187168(Record *record);
+extern Record *FUN_003e4d68(u16 index);
 
-int FUN_003b615c(unsigned int param_1)
-
+/* Finds the record (of the 12) with id `id` that FUN_00187168 accepts; NULL when there is none. */
+Record *FUN_003b615c(u32 id)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v2 = 0;
-  while( 1 ) {
-    temp_v0 = FUN_003e4d68(temp_v2 & 0xffff);
-    temp_v1 = FUN_00187168();
-    if ((temp_v1 != 0) && (*(unsigned short *)(temp_v0 + 0x62) == param_1)) break;
-    temp_v2 = temp_v2 + 1;
-    if ((int)temp_v2 >= 0xc) {
-      return 0;
+    s32 i;
+
+    for (i = 0; i < 12; i++) {
+        Record *record = FUN_003e4d68((u16)i);
+
+        if (FUN_00187168(record) != 0 && record->id == id) {
+            return record;
+        }
     }
-  }
-  return temp_v0;
+    return NULL;
 }
 
-} /* extern "C" */
+}

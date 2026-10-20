@@ -1,44 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00417b70` (_code @ 0x417b70, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling/register allocation only: retail orders the two flag-byte updates differently (`orr` before the second `bic`), tests FUN_003de734's result before copying it to r4, and hoists the constant 1 into r6; built differs in those three places and addresses the bitmap byte with `ldrb r0, [r5, r4, lsr #3]`. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00417e08(int);
-int FUN_004bb6d8(unsigned int, int);
+typedef struct FlagEntry {
+    /* 0x0 */ u8 seen : 1;
+    /* 0x0 */ u8 unk0Mid : 4;
+    /* 0x0 */ u8 active : 1;
+    /* 0x0 */ u8 unk0High : 2;
+    /* 0x1 */ u8 unk1;
+    /* 0x2 */ u8 unk2Low : 1;
+    /* 0x2 */ u8 unk2Mid : 4;
+    /* 0x2 */ u8 unk2Top : 1;
+    /* 0x2 */ u8 unk2High : 2;
+    /* 0x3 */ u8 unk3;
+} FlagEntry;
 
-extern int gameFlagBlockGet(void);
-extern int FUN_001bd118(int);
-extern int FUN_003de444(int);
-extern unsigned int FUN_003de734(int);
-/* Supplied declaration required: FUN_00417e08. */
-/* Supplied declaration required: FUN_004bb6d8. */
+typedef struct FlagBlock {
+    /* 0x000 */ u8 bitmap[0x2A0];
+    /* 0x2A0 */ FlagEntry entries[1];
+} FlagBlock;
 
+FlagBlock *gameFlagBlockGet(void);
+s32 FUN_001bd118(s32 id);
+s32 FUN_003de444(s32 id);
+u32 FUN_003de734(s32 id);
+s32 FUN_00417e08(s32 id);
+s32 FUN_004bb6d8(u32 id, s32 arg);
 
-void FUN_00417b70(int param_1)
-
+/* Marks entry `id` as seen and active, runs FUN_00417e08 for ids that qualify, and sets the linked id's bit in the bitmap. */
+void FUN_00417b70(s32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = gameFlagBlockGet();
-  temp_v0 = temp_v0 + param_1 * 4;
-  *(unsigned char *)(temp_v0 + 0x2a1) = 0;
-  *(unsigned char *)(temp_v0 + 0x2a0) = (*(unsigned char *)(temp_v0 + 0x2a0) & 0x3f) | 0x21;
-  *(unsigned char *)(temp_v0 + 0x2a2) = *(unsigned char *)(temp_v0 + 0x2a2) & 0xde;
-  temp_v0 = FUN_001bd118(param_1);
-  if (((temp_v0 != 6 && temp_v0 != 9) && (temp_v0 != 0xb && temp_v0 != 0xc)) &&
-     (temp_v0 = FUN_003de444(param_1), temp_v0 != 0)) {
-    FUN_00417e08(param_1);
-  }
-  temp_v1 = FUN_003de734(param_1);
-  if (temp_v1 != 0) {
-    temp_v0 = gameFlagBlockGet();
-    FUN_004bb6d8(temp_v1,1);
-    *(unsigned char *)(temp_v0 + (temp_v1 >> 3)) = *(unsigned char *)(temp_v0 + (temp_v1 >> 3)) | (unsigned char)(1 << (temp_v1 & 7));
-  }
-  return;
+    FlagEntry *entry = &gameFlagBlockGet()->entries[id];
+    s32 kind;
+    u32 linked;
+
+    entry->unk1 = 0;
+    entry->seen = 1;
+    entry->active = 1;
+    entry->unk0High = 0;
+    entry->unk2Low = 0;
+    entry->unk2Top = 0;
+    kind = FUN_001bd118(id);
+    if (kind != 6 && kind != 9 && kind != 0xB && kind != 0xC && FUN_003de444(id) != 0) {
+        FUN_00417e08(id);
+    }
+    linked = FUN_003de734(id);
+    if (linked != 0) {
+        FlagBlock *block = gameFlagBlockGet();
+
+        FUN_004bb6d8(linked, 1);
+        block->bitmap[linked >> 3] |= 1 << (linked & 7);
+    }
 }
 
 } /* extern "C" */

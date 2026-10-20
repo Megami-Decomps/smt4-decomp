@@ -30,7 +30,7 @@ int gameGetSlotTable(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
-int FUN_002c312c(...);
+int paramsInit(...);
 int __aeabi_memset4(...);
 int memClear(void);
 int asdMemAlloc(int, int, int, int, int);
@@ -88,7 +88,7 @@ extern unsigned int FUN_0026aa78(void);
 /* Supplied declaration required: FUN_00299da0. */
 /* Supplied declaration required: FUN_0029e874. */
 /* Supplied declaration required: FUN_0029e8b8. */
-extern unsigned int FUN_0029e908(void);
+extern unsigned int objectPartRunUnlessLocked(void);
 /* Supplied declaration required: FUN_0029eb5c. */
 extern unsigned int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029f848. */
@@ -97,7 +97,7 @@ extern unsigned int FUN_0029efa8(int);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c312c. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -154,7 +154,7 @@ void FUN_0028a420(void)
   FUN_002d666c(0);
   puVar3 = puVar1 + 0x18a;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
-  FUN_002c312c(puVar3,&DAT_00402648,0x6c,&DAT_004026b4,0x30,0,0,0,0,&DAT_004026e4,0x150);
+  paramsInit(puVar3,&DAT_00402648,0x6c,&DAT_004026b4,0x30,0,0,0,0,&DAT_004026e4,0x150);
   FUN_002bd954(puVar1 + 0x192,0x1d,0,puVar3,0xc9);
   timerStart(puVar1 + 0x192,1,0);
   FUN_002bd954(puVar1 + 0x1b5,0x1d,0,puVar3,0xc9);
@@ -254,7 +254,7 @@ void FUN_0028a420(void)
   if (*(int *)(temp_v6 + 0x20) == 8) {
     if (*(char *)(temp_v6 + 0x42) != '\0') {
       temp_v5 = temp_v6 + 0xa6c;
-      temp_v2 = FUN_0029e908();
+      temp_v2 = objectPartRunUnlessLocked();
       temp_v4 = FUN_0029efa8(temp_v5);
       temp_v0 = 0;
       FUN_001a7d48(0,temp_v2,temp_v4,*(unsigned int *)(temp_v6 + 0x2c));
@@ -320,7 +320,7 @@ LAB_0028b308:
     }
     else {
       temp_v5 = temp_v6 + 0xa08;
-      temp_v2 = FUN_0029e908();
+      temp_v2 = objectPartRunUnlessLocked();
       temp_v4 = FUN_0029efa8(temp_v5);
       temp_v0 = 0;
       FUN_001a7d48(0,temp_v2,temp_v4,*(unsigned int *)(temp_v6 + 0x2c));

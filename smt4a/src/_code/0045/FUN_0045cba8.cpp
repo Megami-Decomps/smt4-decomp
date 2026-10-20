@@ -79,7 +79,7 @@ extern int nw_snd_SoundArchive_IsAvailable(void);
 extern unsigned long long FUN_00178400(unsigned int, int *, unsigned char *);
 /* Supplied declaration required: FUN_0018c87c. */
 extern int FUN_0019472c(unsigned int, int *, unsigned int **);
-extern int FUN_00194784(unsigned int, int *, unsigned int **);
+extern int soundInfoOwnerReadInfo(unsigned int, int *, unsigned int **);
 /* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
 /* Supplied declaration required: FUN_002f5020. */
 extern int FUN_0045b844(unsigned int, int *);
@@ -786,7 +786,7 @@ LAB_0045da60:
           else {
             temp_v52 = (int *)0x0;
             temp_v53 = (int *)((unsigned int)temp_v53 & 0xffff0000);
-            temp_v2 = FUN_00194784(*(unsigned int *)(param_1 + 4),temp_v64,&temp_v51);
+            temp_v2 = soundInfoOwnerReadInfo(*(unsigned int *)(param_1 + 4),temp_v64,&temp_v51);
             if (temp_v2 != 0) {
               temp_v8 = param_1;
               FUN_0045c944(param_1,temp_v47,temp_v36,&temp_v51,temp_v34,temp_v35,temp_v57);

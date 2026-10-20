@@ -13,7 +13,7 @@ typedef struct {
 } void_stack;
 
 extern int FUN_00401654(...); /* 0x401654 */
-extern int FUN_0041306c(...); /* 0x41306c */
+extern int objectRegisterPart(...); /* 0x41306c */
 extern unsigned char LAB_00417a10; /* 0x417a10 */
 extern unsigned char LAB_0045b824; /* 0x45b824 */
 extern int FUN_0045bbdc(...); /* 0x45bbdc */
@@ -41,7 +41,7 @@ void FUN_005115a0(void)
   temp_v0 = temp_v0 + 0x1c0;
   FUN_002f5020(temp_v0,&LAB_00417a10,0x3c,2);
   temp_v0 = temp_v0 + 0x80;
-  FUN_002f5020(temp_v0,FUN_0041306c,0x3c,4);
+  FUN_002f5020(temp_v0,objectRegisterPart,0x3c,4);
   temp_v0 = FUN_0045c0ac(temp_v0 + 0xf0);
   temp_v0 = temp_v0 + 0x3c;
   FUN_002f5020(temp_v0,FUN_0045bbdc,0x88,0x10);

@@ -1,27 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00328210` (_code @ 0x328210, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail's literal pool carries one extra unreferenced word (0x00587F28) before the constants, the early-out branches return r0 (zero) through the shared pop, and the first constant load follows the push; built loads the constants first and ends with an explicit `mov r0, #0`. */
+#include "common.h"
 
 extern "C" {
 
-extern int gameFlagIsSet(unsigned int);
-extern int FUN_004d0524(void);
+s32 gameFlagIsSet(u32 flag);
+s32 FUN_004d0524(void);
 
-
-unsigned int FUN_00328210(void)
-
+/* Returns whether flags 0x49A and 0x404 are set, flag 0x10 is set whenever flag 0xC is, and FUN_004d0524 succeeds. */
+u32 FUN_00328210(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = gameFlagIsSet(0x49a);
-  temp_v1 = 0;
-  if ((((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x404), temp_v1 = 0, temp_v0 != 0)) &&
-      ((temp_v0 = gameFlagIsSet(0xc), temp_v0 == 0 || (temp_v0 = gameFlagIsSet(0x10), temp_v1 = 0, temp_v0 != 0)
-       ))) && (temp_v0 = FUN_004d0524(), temp_v1 = 0, temp_v0 != 0)) {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    return gameFlagIsSet(0x49A) != 0 && gameFlagIsSet(0x404) != 0 && (gameFlagIsSet(0xC) == 0 || gameFlagIsSet(0x10) != 0) &&
+           FUN_004d0524() != 0;
 }
 
 } /* extern "C" */

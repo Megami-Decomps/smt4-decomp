@@ -1,43 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ae584` (_code @ 0x2ae584, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int libc_bsearch(unsigned char [32], unsigned int, unsigned int, int, unsigned char *);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 id;
+    /* 0x22 */ u8 unk22[0x1E];
+} Record;
 
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp30; /* 0x30: local_30 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_1_stack;
+extern u8 LAB_00145c78;
 
-extern unsigned char LAB_00145c78; /* 0x145c78 */
+u32 dataTableGet(u32 id, u32 section);
+Record *dataTableGetEntries(void);
+u32 dataTableGetCount(u32 table);
+Record *libc_bsearch(const Record *key, const Record *base, u32 count, u32 size, const u8 *compare);
 
-/* Supplied declaration required: libc_bsearch. */
-extern unsigned int dataTableGetCount(int);
-extern unsigned int dataTableGetEntries(void);
-extern int dataTableGet(unsigned int, unsigned int);
-
-
-void FUN_002ae584(unsigned short param_1)
-
+/* Binary-searches data table 0xB for the record with id `id` (the result is not used). */
+void FUN_002ae584(u16 id)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3 [32];
-  unsigned short temp_v4;
-  
-  temp_v0 = dataTableGet(0xb,0);
-  if (temp_v0 != 0) {
-    temp_v1 = dataTableGetEntries();
-    temp_v2 = dataTableGetCount(temp_v0);
-    temp_v4 = param_1;
-    libc_bsearch(temp_v3,temp_v1,temp_v2,0x40,&LAB_00145c78);
-  }
-  return;
+    Record key;
+    u32 table = dataTableGet(0xB, 0);
+
+    if (table != 0) {
+        Record *entries = dataTableGetEntries();
+        u32 count = dataTableGetCount(table);
+
+        key.id = id;
+        libc_bsearch(&key, entries, count, 0x40, &LAB_00145c78);
+    }
 }
 
 } /* extern "C" */

@@ -1,29 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003235d4` (_code @ 0x3235d4, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
-int FUN_00394490(int, int, unsigned int);
+extern s32 scrGetArg(void);
+extern u32 scrGetArgString(s32 index);
+extern void FUN_00394490(AocObjC *obj, s32 id, u32 string);
 
-extern int g_aocMain; /* 0x432fc8 */
+extern AocMain *g_aocMain;
 
-extern unsigned int scrGetArgString(unsigned int);
-extern short scrGetArg(void);
-/* Supplied declaration required: FUN_00394490. */
-
-
-unsigned int FUN_003235d4(void)
-
+/* Script command: passes the first argument and the second argument string to FUN_00394490. */
+s32 FUN_003235d4(void)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = scrGetArgString(1);
-  FUN_00394490(g_aocMain + 0xa8,(int)temp_v0,temp_v1);
-  return 1;
+    s16 id = scrGetArg();
+    u32 string = scrGetArgString(1);
+
+    FUN_00394490(&g_aocMain->objC, id, string);
+    return 1;
 }
 
 } /* extern "C" */

@@ -1,3 +1,4 @@
+/* NON_MATCHING: scheduling only: the build hoists the camera load above the done-flag store (retail stores first, then loads) */
 /* Polls the mikado controller's shutdown: returns 1 while its task is running or hasn't finished;
  * otherwise deletes its camera, frees the work area and returns 0. */
 #include "common.h"

@@ -1,47 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b739c` (_code @ 0x3b739c, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184310(void);
-int __aeabi_memset4(int, int, unsigned int);
-int FUN_00203b40(int, unsigned int, int, int, int, int);
-int unitRecordBuild(int, unsigned char [304]);
+typedef struct Unite {
+    /* 0x0000 */ u8 unk0000[0x8DB0];
+    /* 0x8DB0 */ u8 list[0xCC];
+    /* 0x8E7C */ u32 selection;
+    /* 0x8E80 */ u8 unk8E80[0xA];
+    /* 0x8E8A */ u8 listReady;
+    /* 0x8E8B */ u8 unk8E8B;
+    /* 0x8E8C */ u32 slots[8];
+    /* 0x8EAC */ u8 unk8EAC;
+} Unite;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp144; /* 0x144: local_144 */
-    unsigned int sp148; /* 0x148: local_148 */
-} param_1_stack;
+extern Unite *g_unite;
 
-extern int g_unite; /* 0x57f290 */
+u16 *FUN_00184310(void *source);
+int unitRecordBuild(u32 id, u8 *record);
+u32 getUnlockedSlotCount(u8 *record);
+void __aeabi_memset4(void *block, u32 size, u32 value);
+int FUN_00203b40(void *list, u32 count, s32 columns, s32 a, s32 b, s32 c);
 
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: unitRecordBuild. */
-extern unsigned int getUnlockedSlotCount(unsigned char *);
-
-
-void FUN_003b739c(unsigned short *param_1)
-
+/* Rebuilds the unite list for the unit record of `source`: sizes it to the unlocked slot count and clears the slots. */
+void FUN_003b739c(void *source)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2 [304];
-  
-  temp_v0 = g_unite;
-  FUN_00184310();
-  unitRecordBuild(*param_1,temp_v2);
-  temp_v1 = getUnlockedSlotCount(temp_v2);
-  *(unsigned int *)(temp_v0 + 0x8e7c) = 0;
-  FUN_00203b40(temp_v0 + 0x8db0,temp_v1,8,1,1,1);
-  *(unsigned char *)(temp_v0 + 0x8e8a) = 1;
-  __aeabi_memset4(temp_v0 + 0x8e8c,0x20,0xffffffff);
-  *(unsigned char *)(temp_v0 + 0x8eac) = 0;
-  return;
+    Unite *unite = g_unite;
+    u8 record[304];
+
+    u32 slotCount;
+
+    unitRecordBuild(*FUN_00184310(source), record);
+    slotCount = getUnlockedSlotCount(record);
+    unite->selection = 0;
+    FUN_00203b40(unite->list, slotCount, 8, 1, 1, 1);
+    unite->listReady = 1;
+    __aeabi_memset4(unite->slots, sizeof(unite->slots), 0xFFFFFFFF);
+    unite->unk8EAC = 0;
 }
 
 } /* extern "C" */

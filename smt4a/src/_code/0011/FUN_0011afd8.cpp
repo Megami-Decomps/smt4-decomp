@@ -16,7 +16,7 @@ struct fn_0011afd8_arg0 {
 
 extern unsigned char DAT_0055a3c4; /* 0x55a3c4 */
 
-extern int constructObj0055affc(unsigned int *);
+extern int _ZN9Obj55aff4C1Ev(unsigned int *);
 extern unsigned int *FUN_002eca10(fn_0011afd8_arg0 *, unsigned int, unsigned int *);
 
 
@@ -33,7 +33,7 @@ void FUN_0011afd8(fn_0011afd8_arg0 *param_1,unsigned int param_2,unsigned int pa
   puVar1[0x1a] = 0;
   puVar1[0x1b] = 0;
   *puVar1 = (unsigned int)&DAT_0055a3c4;
-  temp_v0 = constructObj0055affc(puVar1 + 0x1c);
+  temp_v0 = _ZN9Obj55aff4C1Ev(puVar1 + 0x1c);
   *(unsigned int *)(temp_v0 + 8) = 0;
   return;
 }

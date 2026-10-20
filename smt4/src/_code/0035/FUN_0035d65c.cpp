@@ -1,50 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035d65c` (_code @ 0x35d65c, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack layout only: retail keeps the copied item pointer at sp+0, the item at sp+4 and the slot reference at sp+8; built puts the slot reference lowest */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00237a7c(int, int *, int);
-int FUN_00237a94(int [2], int);
-int FUN_00237cfc(int *, int *);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ struct Record *next;
+    /* 0x08 */ u8 unk08[2];
+    /* 0x0A */ u8 kind;
+} Record;
 
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_3_stack;
+typedef struct Cursor {
+    /* 0x00 */ Record *record;
+    /* 0x04 */ u8 unk04[0x10];
+    /* 0x14 */ u32 arg;
+} Cursor;
 
-/* Supplied declaration required: FUN_00237a7c. */
-/* Supplied declaration required: FUN_00237a94. */
-/* Supplied declaration required: FUN_00237cfc. */
-extern int FUN_00237d9c(int, unsigned char);
+typedef struct Slot {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u8 header[8];
+    /* 0x10 */ u8 body[1];
+} Slot;
 
+extern void FUN_00237cfc(void **item, Cursor *cursor);
+typedef struct SlotRef {
+    Slot *slot;
+    u32 unk4;
+} SlotRef;
 
-unsigned int FUN_0035d65c(int *param_1,int *param_2,int *param_3)
+extern void FUN_00237a94(SlotRef *ref, void *key);
+extern void FUN_00237a7c(void *header, void **item, u32 arg);
+extern s32 FUN_00237d9c(void *body, u8 kind);
 
+/* Resolves the cursor's item and its slot, fills in the slot and advances the cursor; 0 on success, 2 on failure. */
+s32 FUN_0035d65c(Cursor *cursor, void **result, void **owner)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3 [2];
-  
-  FUN_00237cfc(&temp_v2,param_1);
-  if (temp_v2 != 0) {
-    FUN_00237a94(temp_v3,*param_3 + 8);
-    if (temp_v3[0] != 0) {
-      temp_v1 = temp_v2;
-      FUN_00237a7c(temp_v3[0] + 8,&temp_v1,param_1[5]);
-      temp_v0 = FUN_00237d9c(temp_v3[0] + 0x10,*(unsigned char *)(*param_1 + 10));
-      if (temp_v0 != 0) {
-        *param_2 = temp_v2;
-        *param_1 = *(int *)(*param_1 + 4);
-        return 0;
-      }
+    SlotRef ref;
+    void *item;
+    void *copy;
+
+    FUN_00237cfc(&item, cursor);
+    if (item != NULL) {
+        FUN_00237a94(&ref, (u8 *)*owner + 8);
+        if (ref.slot != NULL) {
+            copy = item;
+            FUN_00237a7c(ref.slot->header, &copy, cursor->arg);
+            if (FUN_00237d9c(ref.slot->body, cursor->record->kind) != 0) {
+                *result = item;
+                cursor->record = cursor->record->next;
+                return 0;
+            }
+        }
     }
-  }
-  return 2;
+    return 2;
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 extern "C" {
 
 int renderCtxResetColorScale(...);
-int FUN_0016c560(...);
+int skinObjectUpdateMatrices(...);
 int FUN_00183bb0(...);
 int FUN_004a5344(...);
 int FUN_004a559c(...);
@@ -34,7 +34,7 @@ typedef struct {
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_004a5344. */
 /* Supplied declaration required: FUN_004a559c. */
@@ -54,7 +54,7 @@ void FUN_004a45e8(fn_004a45e8_arg0 *param_1)
       *(unsigned int *)&param_1->field_0x850 = 0x1f;
       FUN_004a5344(param_1);
     }
-    FUN_0016c560(g_renderCtx);
+    skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     return;
   }

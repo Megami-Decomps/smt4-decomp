@@ -1,7 +1,7 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
-extern s32 DAT_005b3ff4;
+extern AsdGxState g_asdGxState;
 extern AsdGxCommandList *g_asdGxCommandListStack[]; /* lists begun and not yet ended, innermost last */
 
 void FUN_0017d920(u32 param, u32 *out);
@@ -19,8 +19,8 @@ void asdGxCommandListBegin(AsdGxCommandList *list)
     AsdGxCommandList *outer;
 
     FUN_0017d920(0x207, &list->boundList);
-    if (DAT_005b3ff4 != 0) {
-        outer = g_asdGxCommandListStack[DAT_005b3ff4 - 1];
+    if (g_asdGxState.depth != 0) {
+        outer = g_asdGxCommandListStack[g_asdGxState.depth - 1];
         FUN_0017dd84();
         FUN_0017dfa8(&outer->entries[outer->entryCount].values[0], &outer->entries[outer->entryCount].values[1],
                      &outer->entries[outer->entryCount].values[2], &outer->entries[outer->entryCount].values[3]);
@@ -32,8 +32,8 @@ void asdGxCommandListBegin(AsdGxCommandList *list)
     nngxBindCmdlist(list->id);
     FUN_0017df1c();
     list->state = ASD_GX_CMDLIST_ACTIVE;
-    g_asdGxCommandListStack[DAT_005b3ff4] = list;
-    DAT_005b3ff4++;
+    g_asdGxCommandListStack[g_asdGxState.depth] = list;
+    g_asdGxState.depth++;
     nngxGetError();
 }
 

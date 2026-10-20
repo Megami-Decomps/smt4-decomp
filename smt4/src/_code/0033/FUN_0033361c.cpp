@@ -1,33 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033361c` (_code @ 0x33361c, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail sets the result 0 right after the first flag load and reloads the table base for the second entry (the result variable takes r0); this build keeps the base in r0 and returns 0 at the end */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int DAT_004c53e0; /* 0x4c53e0 */
-extern unsigned int DAT_004c5400; /* 0x4c5400 */
+typedef struct Jyoucyu {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ u32 flags;
+} Jyoucyu; /* 0x20 */
 
-extern int jyoucyuGetTableEntry(unsigned int);
+extern Jyoucyu DAT_004c53c4[2];
 
+extern s32 jyoucyuGetTableEntry(u32 index);
 
-unsigned int FUN_0033361c(void)
-
+/* Returns 1 when none is pending and one of the two entries has both flag bits 2 and 0x20 set. */
+u32 FUN_0033361c(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 != 0) {
-    temp_v1 = 0;
-  }
-  else {
-    if (((DAT_004c53e0 & 2) == 0 || (DAT_004c53e0 & 0x20) == 0) &&
-       ((DAT_004c5400 & 2) == 0 || (DAT_004c5400 & 0x20) == 0)) {
-      return 0;
+    s32 i;
+
+    if (jyoucyuGetTableEntry(1) != 0) {
+        return 0;
     }
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    for (i = 0; i < 2; i++) {
+        if ((DAT_004c53c4[i].flags & 2) != 0 && (DAT_004c53c4[i].flags & 0x20) != 0) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 } /* extern "C" */

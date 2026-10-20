@@ -8,7 +8,7 @@ int aocClearDisplayFlag(int);
 int FUN_0027e9c0(int);
 int FUN_0027ea28(int, int, int, int);
 int FUN_0027eafc(void);
-int FUN_0027eb30(int);
+int jobOwnerFreeSlotAndStop(int);
 int FUN_002a126c(int *, int);
 int FUN_002ba9ac(int);
 int FUN_002baa40(unsigned int *, int);
@@ -36,7 +36,7 @@ extern int g_aocSystem; /* 0x433158 */
 extern int strIsEmpty(unsigned int *);
 /* Supplied declaration required: FUN_0027ea28. */
 /* Supplied declaration required: FUN_0027eafc. */
-/* Supplied declaration required: FUN_0027eb30. */
+/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 /* Supplied declaration required: FUN_002a126c. */
 extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002ad1e0(int);
@@ -91,7 +91,7 @@ unsigned int aocBootUpdate(void)
   if ((temp_v5 & 0x10) != 0) {
     *(unsigned char *)(temp_v0 + 8) = 4;
     FUN_002ba9ac(g_aocSystem);
-    FUN_0027eb30(temp_v0 + 0xc);
+    jobOwnerFreeSlotAndStop(temp_v0 + 0xc);
     *(unsigned char *)(temp_v0 + 9) = 0;
     temp_v0 = FUN_002ad1e0(g_aocMain + 0x98);
     if (temp_v0 != 0) {
@@ -150,7 +150,7 @@ unsigned int aocBootUpdate(void)
       }
       *(unsigned char *)(temp_v0 + 8) = 4;
       FUN_002ba9ac(g_aocSystem);
-      FUN_0027eb30(temp_v0 + 0xc);
+      jobOwnerFreeSlotAndStop(temp_v0 + 0xc);
       *(unsigned char *)(temp_v0 + 9) = 0;
       temp_v0 = FUN_002ad1e0(g_aocMain + 0x98);
       if (temp_v0 != 0) {
@@ -174,7 +174,7 @@ unsigned int aocBootUpdate(void)
         if (*(char *)(temp_v0 + 0x4d6) == '\0') {
           return 0;
         }
-        FUN_0027eb30(temp_v0 + 0xc);
+        jobOwnerFreeSlotAndStop(temp_v0 + 0xc);
       }
       aocClearDisplayFlag(g_aocSystem);
       FUN_002a126c(&temp_v7,g_aocSystem);

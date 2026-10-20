@@ -1,26 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031f688` (_code @ 0x31f688, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail materialises the constants 0 and 6 first and writes state/prevState with one `stm r0, {r1, r2}`; built orders the loads differently and stores them separately. */
+#include "common.h"
 
 extern "C" {
 
-extern int g_statusDown; /* 0x588fe8 */
+typedef struct StatusDown {
+    /* 0x000 */ u8 unk000[0x518];
+    /* 0x518 */ s32 state;
+    /* 0x51C */ s32 prevState;
+    /* 0x520 */ u8 unk520[4];
+    /* 0x524 */ u32 unk524;
+} StatusDown;
 
+extern StatusDown *g_statusDown;
 
+/* Moves the status screen to state 6, remembering the previous state. */
 void FUN_0031f688(void)
-
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  
-  temp_v0 = g_statusDown;
-  *(unsigned int *)(g_statusDown + 0x524) = 0;
-  puVar2 = (unsigned int *)(temp_v0 + 0x518);
-  temp_v1 = *puVar2;
-  *puVar2 = 6;
-  *(unsigned int *)(temp_v0 + 0x51c) = temp_v1;
-  return;
+    StatusDown *screen = g_statusDown;
+    s32 previous;
+
+    screen->unk524 = 0;
+    previous = screen->state;
+    screen->state = 6;
+    screen->prevState = previous;
 }
 
 } /* extern "C" */

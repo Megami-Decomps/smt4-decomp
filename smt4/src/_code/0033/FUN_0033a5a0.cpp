@@ -1,23 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033a5a0` (_code @ 0x33a5a0, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the NULL return value into r3 before the loop (mov r3, #0 ... mov r0, r3); built returns a literal 0 */
+#include "common.h"
 
 extern "C" {
 
+typedef struct BtlEntry {
+    /* 0x000 */ u32 flags;      /* bit 0: in use */
+    /* 0x004 */ u8 unk004[0x284];
+} BtlEntry; /* 0x288 */
 
-int FUN_0033a5a0(int param_1)
+typedef struct BtlMainState {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ BtlEntry *entries;
+} BtlMainState;
 
+/* Returns the first unused entry of the dynamic range (entries 4-53); NULL if all are in use. */
+BtlEntry *FUN_0033a5a0(BtlMainState *state)
 {
-  int temp_v0;
-  
-  temp_v0 = 4;
-  do {
-    if ((*(unsigned int *)(*(int *)(param_1 + 0x1fc0) + temp_v0 * 0x288) & 1) == 0) {
-      return *(int *)(param_1 + 0x1fc0) + temp_v0 * 0x288;
-    }
-    temp_v0 = (int)(short)((short)temp_v0 + 1);
-  } while (temp_v0 < 0x36);
-  return 0;
+    s32 i = 4;
+
+    do {
+        if ((state->entries[i].flags & 1) == 0) {
+            return &state->entries[i];
+        }
+        i = (s16)(i + 1);
+    } while (i < 0x36);
+    return NULL;
 }
 
 } /* extern "C" */

@@ -12,7 +12,7 @@ int FUN_002ea704(void);
 int FUN_002eb858(unsigned char [32], unsigned int, int);
 int onlineSockAddrConstruct2(...);
 int FUN_002f2e3c(int, int, int, int, unsigned int);
-int FUN_002f3490(unsigned char [36]);
+int _ZN9Obj558b24D1Ev(unsigned char [36]);
 int FUN_002fa18c(void);
 int FUN_002fa434(unsigned char [36], unsigned int);
 int wordRefsDiffer_002fd750(...);
@@ -47,7 +47,7 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, un
 /* Supplied declaration required: FUN_002eb858. */
 /* Supplied declaration required: onlineSockAddrConstruct2. */
 /* Supplied declaration required: FUN_002f2e3c. */
-/* Supplied declaration required: FUN_002f3490. */
+/* Supplied declaration required: _ZN9Obj558b24D1Ev. */
 /* Supplied declaration required: FUN_002fa18c. */
 /* Supplied declaration required: FUN_002fa434. */
 /* Supplied declaration required: wordRefsDiffer_002fd750. */
@@ -151,7 +151,7 @@ void FUN_00112e7c(int param_1)
     temp_v13 = 0;
   }
   if (temp_v1) {
-    FUN_002f3490(temp_v15);
+    _ZN9Obj558b24D1Ev(temp_v15);
   }
   if (temp_v13 != 0) {
     temp_v6 = 0;

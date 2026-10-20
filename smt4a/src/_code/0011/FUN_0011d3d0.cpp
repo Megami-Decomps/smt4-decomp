@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6e34(unsigned int *, int);
-int FUN_002e6e5c(unsigned int *);
+int _ZN9Obj55b28cD1Ev(unsigned int *);
 int strHolderAssignU32Alias(unsigned int, unsigned int);
 int FUN_00303d3a(unsigned int, int);
 int FUN_00303e66(int, unsigned int);
@@ -19,7 +19,7 @@ extern unsigned char DAT_00630568; /* 0x630568 */
 #endif
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: strHolderAssignU32Alias. */
 extern int FUN_00303d1e(unsigned int, int);
 /* Supplied declaration required: FUN_00303d3a. */
@@ -51,10 +51,10 @@ long long FUN_0011d3d0(int param_1,unsigned int param_2,unsigned int param_3,uns
       FUN_00303e66(param_1,param_6);
     }
     (*(unsigned char * *)((unsigned char *)&DAT_00630568 + 0x8)) = &LAB_0011d21d;
-    FUN_002e6e5c(&uStack_20);
+    _ZN9Obj55b28cD1Ev(&uStack_20);
     return romwright_piece_4_4(uStack_20,1);
   }
-  FUN_002e6e5c(&uStack_20);
+  _ZN9Obj55b28cD1Ev(&uStack_20);
   return (unsigned long long)uStack_20 << 0x20;
 }
 

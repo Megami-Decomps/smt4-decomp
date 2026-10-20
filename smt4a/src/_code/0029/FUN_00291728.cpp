@@ -8,7 +8,7 @@ int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
-int FUN_002c1e9c(void);
+int dataTableResolveEntryVariants(void);
 int libc_strcpy(unsigned char *, unsigned int *);
 int rt_aeabi_memclr(unsigned int *, int);
 int FUN_003f876c(int);
@@ -42,7 +42,7 @@ extern unsigned char DAT_005e1f78; /* 0x5e1f78 */
 extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002c1e9c. */
+/* Supplied declaration required: dataTableResolveEntryVariants. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_003f876c. */
@@ -93,7 +93,7 @@ void FUN_00291728(unsigned int *param_1)
       FUN_003f876c(0x19);
       FUN_003f876c(0x1b);
       FUN_003f876c(0x1c);
-      FUN_002c1e9c();
+      dataTableResolveEntryVariants();
     }
     puVar2 = &LAB_00291920;
     asdProcessCreateSimple(&LAB_00291920,4,0,0,FUN_00298978,&LAB_00328774,0);

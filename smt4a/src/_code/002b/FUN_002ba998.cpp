@@ -87,13 +87,13 @@ int FUN_003de02c(void);
 int FUN_003e9cec(int, unsigned char [688], unsigned int, int);
 int FUN_003e9fe4(int, int, int);
 int FUN_003ea69c(int, unsigned char [688], unsigned int);
-int FUN_003ec580(int, int);
+int btlMainBuffersFree(int, int);
 int FUN_003ecfb4(...);
 int FUN_003ef1e4(int, int);
 int FUN_003f1d74(int);
 int countersAddSaturating(...);
 int FUN_004a8edc(...);
-int FUN_004c621c(void);
+int slotStreakUpdate(void);
 int FUN_004c6298(void);
 int FUN_004ca63c(...);
 
@@ -231,7 +231,7 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_003ea69c. */
 /* Supplied declaration required: FUN_003eaf20. */
 /* Supplied declaration required: FUN_003ebca0. */
-/* Supplied declaration required: FUN_003ec580. */
+/* Supplied declaration required: btlMainBuffersFree. */
 /* Supplied declaration required: FUN_003ecfb4. */
 /* Supplied declaration required: FUN_003ee138. */
 /* Supplied declaration required: FUN_003eee9c. */
@@ -249,7 +249,7 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_004abba8. */
 /* Supplied declaration required: FUN_004abbe8. */
 /* Supplied declaration required: FUN_004bcb54. */
-/* Supplied declaration required: FUN_004c621c. */
+/* Supplied declaration required: slotStreakUpdate. */
 /* Supplied declaration required: FUN_004c6298. */
 /* Supplied declaration required: FUN_004c8b10. */
 /* Supplied declaration required: FUN_004c8e30. */
@@ -328,7 +328,7 @@ void FUN_002ba998(unsigned int param_1)
     FUN_002919b4(temp_v7,0);
     return;
   case 2:
-    FUN_003ec580(temp_v7,*(int *)(temp_v7 + 0xf0) != 0x16a && *(int *)(temp_v7 + 0xf0) != 0x16c);
+    btlMainBuffersFree(temp_v7,*(int *)(temp_v7 + 0xf0) != 0x16a && *(int *)(temp_v7 + 0xf0) != 0x16c);
     if (*(int *)(temp_v7 + 0xf0) >= 1) {
       temp_v10 = DAT_005739e4 | *(unsigned int *)(temp_v7 + 0x45a4);
       temp_v9 = *(unsigned int *)(temp_v7 + 0x45a0) | DAT_005739e0;
@@ -349,7 +349,7 @@ void FUN_002ba998(unsigned int param_1)
     *(unsigned int *)(temp_v7 + 0x124) = 0x3f800000;
     *(unsigned int *)(temp_v7 + 0x128) = 0x3f800000;
     FUN_003e9fe4(temp_v7,temp_v7 + 0xf4,0);
-    FUN_004c621c();
+    slotStreakUpdate();
     FUN_004c6298();
     FUN_003ef1e4(temp_v7,0);
     if (*(short *)(temp_v7 + 0x11c) != 0) {

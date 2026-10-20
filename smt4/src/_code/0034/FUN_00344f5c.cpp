@@ -29,7 +29,7 @@ int FUN_0024057c(...);
 int FUN_002636e4(...);
 int FUN_0026beb4(...);
 int scrScriptProcessStartEntry(...);
-int FUN_002a0cb0(...);
+int buttonHelpGetMode(...);
 int buttonHelpSetPreset(...);
 int FUN_00343f44(...);
 int FUN_003c0d70(...);
@@ -82,7 +82,7 @@ int FUN_00394bbc(...);
 int FUN_003adc64(...);
 int FUN_003aef64(...);
 int FUN_003c0390(...);
-int FUN_003c041c(...);
+int btlMessageStartUnlessFlagged(...);
 int FUN_003d1388(...);
 int VectorSignedToFloat(...);
 
@@ -152,7 +152,7 @@ extern int FUN_0029c3ec(void);
 /* Supplied declaration required: FUN_0029c43c. */
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029e648. */
-/* Supplied declaration required: FUN_002a0cb0. */
+/* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: FUN_002b6b00. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern unsigned int FUN_002bf80c(unsigned int);
@@ -180,12 +180,12 @@ extern unsigned int FUN_0039474c(void);
 /* Supplied declaration required: FUN_003c017c. */
 /* Supplied declaration required: FUN_003c0238. */
 /* Supplied declaration required: FUN_003c0390. */
-/* Supplied declaration required: FUN_003c041c. */
+/* Supplied declaration required: btlMessageStartUnlessFlagged. */
 /* Supplied declaration required: FUN_003c0d70. */
 /* Supplied declaration required: FUN_003c1414. */
 /* Supplied declaration required: FUN_003c149c. */
 /* Supplied declaration required: FUN_003c1a2c. */
-extern int FUN_003d0364(int);
+extern int btlSlotsGetMaxValue(int);
 /* Supplied declaration required: FUN_003d1388. */
 /* Supplied declaration required: FUN_003d6420. */
 /* Supplied declaration required: FUN_003d6644. */
@@ -492,7 +492,7 @@ LAB_00345680:
     }
     else {
       if (*(int *)(psVar2 + 0x14) >= 1) {
-        FUN_003c041c(*(int *)(psVar2 + 0x14),*(unsigned int *)(psVar2 + 0xc));
+        btlMessageStartUnlessFlagged(*(int *)(psVar2 + 0x14),*(unsigned int *)(psVar2 + 0xc));
       }
       else {
         FUN_0027dbc8(*(unsigned int *)(psVar2 + 0x26),1);
@@ -521,7 +521,7 @@ joined_r0x003459c0:
       }
       temp_v1 = 0;
       temp_v11 = 0;
-      temp_v9 = FUN_003d0364(g_btlScriptUnit);
+      temp_v9 = btlSlotsGetMaxValue(g_btlScriptUnit);
       unaff_r5 = (unsigned int *)0x0;
       if (temp_v9 != 5) {
         temp_v3 = FUN_0023c684(*(unsigned int *)(psVar2 + 0x14));
@@ -575,7 +575,7 @@ LAB_0034583c:
         }
         else {
 LAB_00345938:
-          FUN_003c041c(temp_v1,unaff_r5);
+          btlMessageStartUnlessFlagged(temp_v1,unaff_r5);
         }
       }
       else {
@@ -1034,7 +1034,7 @@ LAB_00346258:
     if ((*(int *)(psVar2 + 0x26) == 1) &&
        (temp_v5 = FUN_0019e0c0(*(unsigned int *)(temp_v5 + 0x2254)), temp_v5 == 2)) {
       FUN_0026beb4(0,*(unsigned int *)(psVar2 + 4),0,0,1);
-      FUN_002a0cb0();
+      buttonHelpGetMode();
       buttonHelpSetPreset();
       break;
     }

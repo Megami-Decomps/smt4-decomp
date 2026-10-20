@@ -1,31 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015e874` (_code @ 0x15e874, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: float scheduling only: retail loads the 0.0f constant into s1 before the push and clamps s0 in place before copying it to s16; built copies to s16 first and clamps there. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0017fc38(float *);
+typedef struct FadeState {
+    /* 0x0 */ f32 start;
+    /* 0x4 */ f32 target;
+    /* 0x8 */ u32 id;
+    /* 0xC */ u32 elapsed;
+} FadeState;
 
-/* Supplied declaration required: FUN_0017fc38. */
+typedef struct Fader {
+    /* 0x00 */ u8 unk00[0xB8];
+    /* 0xB8 */ FadeState fade;
+} Fader;
 
+f32 FUN_0017fc38(f32 *value);
 
-void FUN_0015e874(int param_1,unsigned int param_2)
-
+/* Starts a fade from the current value to `target` (clamped to 0 or more) with the given id. */
+void FUN_0015e874(Fader *fader, u32 id, f32 target)
 {
-/* irregular: irregular input(s): in_s0; 2 native warning(s); review required */
-  float in_s0;
-  float temp_v0;
-  
-  if (in_s0 < 0.0f) {
-    in_s0 = 0.0f;
-  }
-  temp_v0 = in_s0;
-  FUN_0017fc38((float *)(param_1 + 0xb8));
-  *(float *)(param_1 + 0xb8) = in_s0;
-  *(float *)(param_1 + 0xbc) = temp_v0;
-  *(unsigned int *)(param_1 + 0xc0) = param_2;
-  *(unsigned int *)(param_1 + 0xc4) = 0;
-  return;
+    FadeState *fade = &fader->fade;
+
+    if (target < 0.0f) {
+        target = 0.0f;
+    }
+    fade->start = FUN_0017fc38(&fade->start);
+    fade->target = target;
+    fade->id = id;
+    fade->elapsed = 0;
 }
 
 } /* extern "C" */

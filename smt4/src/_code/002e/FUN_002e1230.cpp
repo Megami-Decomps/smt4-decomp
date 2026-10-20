@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00254a2c(unsigned int);
+int animPlayerSetLoopPolicy(unsigned int);
 int FUN_002e11f4(unsigned int, int);
 
 typedef int romwright_code(...);
@@ -16,7 +16,7 @@ typedef struct {
 extern int nw_anim_PlayPolicy_Loop(...); /* 0x151500 */
 extern unsigned char LAB_00155650; /* 0x155650 */
 
-/* Supplied declaration required: FUN_00254a2c. */
+/* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: FUN_002e11f4. */
 
 
@@ -27,7 +27,7 @@ void FUN_002e1230(int param_1,int param_2)
   int temp_v0;
   romwright_code *pcVar2;
   
-  FUN_00254a2c(*(unsigned int *)(param_1 + 8));
+  animPlayerSetLoopPolicy(*(unsigned int *)(param_1 + 8));
   FUN_002e11f4(*(unsigned int *)(param_1 + 8),param_2);
   if (((0 < *(int *)(*(int *)(param_1 + 8) + 0x68)) &&
       (temp_v0 = *(int *)(*(int *)(param_1 + 8) + 0x2c), *(int *)(temp_v0 + 0x150) != 0)) &&

@@ -1,44 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fe074` (_code @ 0x2fe074, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184310(void);
+typedef struct Record {
+    /* 0x0 */ u16 id;
+    /* 0x2 */ u8 rank;
+    /* 0x3 */ u8 unk3;
+    /* 0x4 */ u8 unk4[2];
+    /* 0x6 */ u16 order;
+} Record;
 
-/* Supplied declaration required: FUN_00184310. */
-extern unsigned int FUN_002a4b28(unsigned short);
+extern u32 FUN_002a4b28(u16 id);
+extern Record *FUN_00184310(u32 id);
 
-
-int FUN_002fe074(unsigned short *param_1,unsigned short *param_2)
-
+/* Sort comparison of two ids: by their FUN_002a4b28 bit sets (a set containing bits the other lacks sorts first), then by rank ascending, order descending and id ascending. */
+s32 FUN_002fe074(u16 *idA, u16 *idB)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned short *puVar4;
-  unsigned short *puVar5;
-  
-  temp_v0 = FUN_002a4b28(*param_1);
-  temp_v1 = FUN_002a4b28(*param_2);
-  if ((temp_v1 & ~temp_v0) != 0) {
-    temp_v2 = -1;
-  }
-  else if ((temp_v0 & ~temp_v1) != 0) {
-    temp_v2 = 1;
-  }
-  else {
-    puVar4 = (unsigned short *)(unsigned int)*param_1;
-    FUN_00184310();
-    puVar5 = (unsigned short *)(unsigned int)*param_2;
-    FUN_00184310();
-    temp_v2 = (unsigned int)(unsigned char)puVar4[1] - (unsigned int)(unsigned char)puVar5[1];
-    if ((temp_v2 == 0) && (temp_v2 = (unsigned int)puVar5[3] - (unsigned int)puVar4[3], temp_v2 == 0)) {
-      temp_v2 = (unsigned int)*puVar4 - (unsigned int)*puVar5;
+    u32 setA = FUN_002a4b28(*idA);
+    u32 setB = FUN_002a4b28(*idB);
+    Record *recordA;
+    Record *recordB;
+    s32 diff;
+
+    if ((setB & ~setA) != 0) {
+        return -1;
     }
-  }
-  return temp_v2;
+    if ((setA & ~setB) != 0) {
+        return 1;
+    }
+    recordA = FUN_00184310(*idA);
+    recordB = FUN_00184310(*idB);
+    diff = recordA->rank - recordB->rank;
+    if (diff == 0) {
+        diff = recordB->order - recordA->order;
+        if (diff == 0) {
+            diff = recordA->id - recordB->id;
+        }
+    }
+    return diff;
 }
 
 } /* extern "C" */

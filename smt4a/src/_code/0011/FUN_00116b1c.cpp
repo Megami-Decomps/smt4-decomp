@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001068e4(int *, int, char [23], int);
 int FUN_002e6e34(unsigned char [12], int);
-int FUN_002e6e5c(unsigned char [12]);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002e7908(unsigned int, int *);
 int onlineStringAssign(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
@@ -28,7 +28,7 @@ extern char s__V_V_V_V___00589588[23]; /* 0x589588 */
 /* Supplied declaration required: FUN_001068e4. */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: FUN_002e6e5c. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int *operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002e7908. */
 /* Supplied declaration required: onlineStringAssign. */
@@ -89,7 +89,7 @@ void FUN_00116b1c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     temp_v3 = 0x80690009;
     FUN_002e7908(temp_v6,&temp_v3);
   }
-  FUN_002e6e5c(temp_v4);
+  _ZN9Obj55b28cD1Ev(temp_v4);
   return;
 }
 

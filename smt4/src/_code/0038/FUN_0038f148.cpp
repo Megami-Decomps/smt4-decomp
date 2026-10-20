@@ -10,7 +10,7 @@ int jobStopAndClearFlags(unsigned int *);
 int FUN_00233db8(unsigned int *, int);
 int FUN_002340e4(int *);
 int aocClearDisplayFlag(unsigned int);
-int FUN_0027eb30(unsigned int *);
+int jobOwnerFreeSlotAndStop(unsigned int *);
 int FUN_002a126c(int *, unsigned int);
 int FUN_002b8244(int);
 int FUN_002ba9ac(unsigned int);
@@ -35,7 +35,7 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 extern int FUN_0026b564(void);
 /* Supplied declaration required: aocClearDisplayFlag. */
 extern int strIsEmpty(unsigned int *);
-/* Supplied declaration required: FUN_0027eb30. */
+/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 /* Supplied declaration required: FUN_002a126c. */
 extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002ad1e0(int);
@@ -69,7 +69,7 @@ void FUN_0038f148(unsigned int *param_1)
   *(unsigned int *)(g_aocMain + 0x754) = temp_v0 & 0xffffff8f;
   if ((temp_v0 & 0x10) != 0) {
     FUN_0023392c(param_1,0xffffffff,0);
-    FUN_0027eb30(param_1 + 0x46c);
+    jobOwnerFreeSlotAndStop(param_1 + 0x46c);
     jobStopAndClearFlags(param_1);
     param_1[1] = 0x12;
     param_1[2] = 0;

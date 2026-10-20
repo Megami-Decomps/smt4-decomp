@@ -1,64 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023ae58` (_code @ 0x23ae58, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the matrix with `vldmia r1!, {s0-s15}` (base register written back); we emit `vldmia r1, {s0-s15}` */
+#include "common.h"
 
 extern "C" {
 
+typedef struct Mtx4 { u32 v[16]; } Mtx4;
 
-void FUN_0023ae58(unsigned int *param_1,unsigned int *param_2,unsigned int param_3)
-
+/* Rewrites a 4x4 matrix into `dst` with each row reversed and `value` stored in slot 1. */
+void FUN_0023ae58(u32 *dst, const Mtx4 *src, u32 value)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  
-  temp_v0 = *param_2;
-  temp_v1 = param_2[1];
-  temp_v2 = param_2[2];
-  temp_v3 = param_2[3];
-  temp_v4 = param_2[4];
-  temp_v5 = param_2[5];
-  temp_v6 = param_2[6];
-  temp_v7 = param_2[7];
-  temp_v8 = param_2[8];
-  temp_v9 = param_2[9];
-  temp_v10 = param_2[10];
-  temp_v11 = param_2[0xb];
-  temp_v12 = param_2[0xc];
-  temp_v13 = param_2[0xd];
-  temp_v14 = param_2[0xe];
-  temp_v15 = param_2[0xf];
-  param_1[1] = param_3;
-  param_1[4] = temp_v0;
-  param_1[3] = temp_v1;
-  param_1[2] = temp_v2;
-  *param_1 = temp_v3;
-  param_1[8] = temp_v4;
-  param_1[7] = temp_v5;
-  param_1[6] = temp_v6;
-  param_1[5] = temp_v7;
-  param_1[0xc] = temp_v8;
-  param_1[0xb] = temp_v9;
-  param_1[10] = temp_v10;
-  param_1[9] = temp_v11;
-  param_1[0x10] = temp_v12;
-  param_1[0xf] = temp_v13;
-  param_1[0xe] = temp_v14;
-  param_1[0xd] = temp_v15;
-  return;
+    Mtx4 m = *src;
+    dst[1] = value;
+    dst[4] = m.v[0]; dst[3] = m.v[1]; dst[2] = m.v[2]; dst[0] = m.v[3];
+    dst[8] = m.v[4]; dst[7] = m.v[5]; dst[6] = m.v[6]; dst[5] = m.v[7];
+    dst[12] = m.v[8]; dst[11] = m.v[9]; dst[10] = m.v[10]; dst[9] = m.v[11];
+    dst[16] = m.v[12]; dst[15] = m.v[13]; dst[14] = m.v[14]; dst[13] = m.v[15];
 }
 
 } /* extern "C" */

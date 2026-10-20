@@ -1,20 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003821b8` (_code @ 0x3821b8, 0x20 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the compiler adds one extra `bne` to the return after `moveq r0,#4` (branch layout of the nested condition); registers otherwise identical. */
+#include "common.h"
 
 extern "C" {
 
+typedef struct StateInfo {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 kind;
+} StateInfo;
 
-unsigned int FUN_003821b8(int param_1)
+typedef struct StateOwner {
+    /* 0x000 */ u8 unk000[0xDA8];
+    /* 0xDA8 */ StateInfo *info;
+} StateOwner;
 
+/* 4 when the owner's state info is of kind 6, else 5. */
+u32 FUN_003821b8(StateOwner *owner)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 5;
-  if ((*(int *)(param_1 + 0xda8) != 0) && (*(int *)(*(int *)(param_1 + 0xda8) + 4) == 6)) {
-    temp_v0 = 4;
-  }
-  return temp_v0;
+    u32 result = 5;
+
+    if (owner->info != NULL && owner->info->kind == 6) {
+        result = 4;
+    }
+    return result;
 }
 
 } /* extern "C" */

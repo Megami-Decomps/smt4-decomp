@@ -1,34 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00245c78` (_code @ 0x245c78, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int questRecordFindById(unsigned short);
-extern int gameGetOptions(void);
-extern int FUN_002b6b38(void);
+typedef struct Options {
+    /* 0x00 */ u8 unk00[0x46];
+    /* 0x46 */ u16 questId;
+} Options;
 
+typedef struct QuestRecord {
+    /* 0x00 */ u8 unk00[3];
+    /* 0x03 */ u8 done;
+} QuestRecord;
 
-unsigned int FUN_00245c78(void)
+extern QuestRecord *questRecordFindById(u16 id);
+extern Options *gameGetOptions(void);
+extern s32 FUN_002b6b38(void);
 
+/* Returns 1 when FUN_002b6b38 reports mode 1, or mode 2 and the option's quest record is not done. */
+u32 FUN_00245c78(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002b6b38();
-  if (temp_v0 == 0) {
-    return 0;
-  }
-  if (temp_v0 != 1) {
-    if (temp_v0 != 2) {
-      return 0;
+    u32 result = 0;
+
+    switch (FUN_002b6b38()) {
+    case 0:
+        break;
+    case 1:
+        result = 1;
+        break;
+    case 2:
+        if (questRecordFindById(gameGetOptions()->questId)->done == 0) {
+            result = 1;
+        }
+        break;
     }
-    temp_v0 = gameGetOptions();
-    temp_v0 = questRecordFindById(*(unsigned short *)(temp_v0 + 0x46));
-    if (*(char *)(temp_v0 + 3) != '\0') {
-      return 0;
-    }
-  }
-  return 1;
+    return result;
 }
 
 } /* extern "C" */

@@ -13,18 +13,18 @@ typedef struct Slots {
 
 int FUN_001acf98(int kind, u32 id);
 int asdTMTexTableNodeIsLoaded(u32 kind, u32 id);
-u32 FUN_002adba8(int index);
+u32 requestIdToCode(int index);
 
 /* If slot `index` is not yet marked and asdTMTexTableNodeIsLoaded has nothing for it, issues FUN_001acf98 and marks the slot ready. */
 void FUN_0039a3bc(Slots *slots, int index)
 {
-    u32 id = FUN_002adba8(index);
+    u32 id = requestIdToCode(index);
 
     if (asdTMTexTableNodeIsLoaded(0x2e, id) == 0) {
         int *state = &slots->state[index];
 
         if (*state != STATE_BUSY && *state != STATE_READY) {
-            id = FUN_002adba8(index);
+            id = requestIdToCode(index);
             FUN_001acf98(0x2e, id);
             *state = STATE_READY;
         }

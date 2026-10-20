@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_00244bb4(int, int);
-int FUN_002b7af0(int, int);
+int dataTableEntryNameById(int, int);
 int libc_strcpy(...);
 int FUN_0032725c(int, unsigned int, unsigned int);
 
@@ -47,7 +47,7 @@ extern unsigned char DAT_00561547; /* 0x561547 */
 /* Supplied declaration required: FUN_00100388. */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00244bb4. */
-/* Supplied declaration required: FUN_002b7af0. */
+/* Supplied declaration required: dataTableEntryNameById. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_0032725c. */
 
@@ -179,7 +179,7 @@ void FUN_003849cc(int param_1,int param_2,int param_3,unsigned int param_4,unsig
       return;
     }
     if (param_1 == 0x65) {
-      temp_v4 = FUN_002b7af0(0x65,param_2);
+      temp_v4 = dataTableEntryNameById(0x65,param_2);
       libc_strcpy(temp_v7,temp_v4);
       FUN_00100388(temp_v13,&LAB_00384c88,temp_v7);
       FUN_00244bb4(0x65,param_2);
@@ -189,14 +189,14 @@ void FUN_003849cc(int param_1,int param_2,int param_3,unsigned int param_4,unsig
     }
   }
   if ((param_1 != 0xcb) && ((param_1 == 0x65 || (param_1 < 0x66)))) {
-    temp_v4 = FUN_002b7af0(param_1,param_2);
+    temp_v4 = dataTableEntryNameById(param_1,param_2);
     libc_strcpy(temp_v7,temp_v4);
     FUN_00244bb4(param_1,param_2);
     libc_strcpy(temp_v12,param_1);
     FUN_00100388(temp_v13,&LAB_00384c8c,temp_v7,temp_v12);
     return;
   }
-  temp_v4 = FUN_002b7af0(param_1,param_2);
+  temp_v4 = dataTableEntryNameById(param_1,param_2);
   libc_strcpy(temp_v7,temp_v4);
   FUN_00100388(temp_v13,&LAB_00384c88,temp_v7);
   return;

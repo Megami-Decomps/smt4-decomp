@@ -73,7 +73,7 @@ extern short *dataTableGetEntries(void);
 /* Supplied declaration required: dataTableFree. */
 /* Supplied declaration required: FUN_001f4908. */
 /* Supplied declaration required: FUN_0020214c. */
-extern int FUN_002121c4(unsigned int);
+extern int slotIsReady(unsigned int);
 /* Supplied declaration required: bgmFadeOut. */
 /* Supplied declaration required: FUN_00224880. */
 /* Supplied declaration required: npcRoomDestroy. */
@@ -81,7 +81,7 @@ extern int FUN_002121c4(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b60(void);
 extern int FUN_002a4b74(void);
-extern int FUN_0031d62c(void);
+extern int messageWindowIsState1(void);
 extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: FUN_003423cc. */
 /* Supplied declaration required: obj04Finish. */
@@ -205,7 +205,7 @@ unsigned int FUN_00214324(void)
     }
     break;
   case 1:
-    temp_v7 = FUN_002121c4(0);
+    temp_v7 = slotIsReady(0);
     if (temp_v7 != 0) break;
     temp_v7 = puVar2[0x3d];
     if (temp_v7 < 1) {
@@ -253,7 +253,7 @@ LAB_002146c0:
     }
     break;
   case 2:
-    temp_v7 = FUN_0031d62c();
+    temp_v7 = messageWindowIsState1();
     if ((temp_v7 != 0) && (temp_v7 = 0, 0 < (int)puVar2[0x39])) {
       do {
         temp_v5 = FUN_002a4b60();
@@ -415,7 +415,7 @@ LAB_00214b50:
     puVar4[0x3c] = 6;
     break;
   case 6:
-    temp_v7 = FUN_002121c4(0);
+    temp_v7 = slotIsReady(0);
     puVar4 = g_npcRoom;
     if (temp_v7 == 0) {
       g_npcRoom[0x3b] = 0;

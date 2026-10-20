@@ -1,43 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049af90` (_code @ 0x49af90, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail materializes the zero stored to the handle slot (mov r5, #0, r5 saved) before the delete's null test; this build stores it afterwards from r0 */
+#include "common.h"
+
+/* A registered handle object with a virtual destructor (vtable slot 1 is the deleting variant). */
+class RegisteredHandle {
+public:
+    virtual ~RegisteredHandle();
+
+    u32 id;
+};
 
 extern "C" {
 
-int ptrListRemoveClearOwner(unsigned int, unsigned int);
-int FUN_0022e774(void);
-int FUN_00345718(int);
+typedef struct HandleOwner {
+    /* 0x00000 */ u8 unk00000[0x16004];
+    /* 0x16004 */ s32 state;
+    /* 0x16008 */ u8 unk16008[0x20];
+    /* 0x16028 */ RegisteredHandle *handle;
+} HandleOwner;
 
-typedef int romwright_code(...);
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+extern u32 g_handleRegistry;
 
-/* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_0022e774. */
-/* Supplied declaration required: FUN_00345718. */
+void ptrListRemoveClearOwner(u32 list, u32 id);
+void FUN_0022e774(void);
+void FUN_00345718(s32 arg);
 
-
-void FUN_0049af90(int param_1)
-
+void FUN_0049af90(HandleOwner *owner)
 {
-/* irregular: 3 native warning(s); review required */
-  if (*(int *)(param_1 + 0x16004) != 3) {
-    if (*(int *)(param_1 + 0x16004) == 1) {
-      *(unsigned int *)(param_1 + 0x16004) = 4;
-    }
-    else {
-      FUN_0022e774();
-      *(unsigned int *)(param_1 + 0x16004) = 3;
-      FUN_00345718(0);
-      if (*(int *)(param_1 + 0x16028) != 0) {
-        ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0x16028) + 4));
-        if (*(int **)(param_1 + 0x16028) != (int *)0x0) {
-          (**(romwright_code **)(**(int **)(param_1 + 0x16028) + 4))();
-          *(unsigned int *)(param_1 + 0x16028) = 0;
+    if (owner->state != 3) {
+        if (owner->state == 1) {
+            owner->state = 4;
+        } else {
+            FUN_0022e774();
+            owner->state = 3;
+            FUN_00345718(0);
+            if (owner->handle != NULL) {
+                ptrListRemoveClearOwner(g_handleRegistry, owner->handle->id);
+                if (owner->handle != NULL) {
+                    delete owner->handle;
+                    owner->handle = NULL;
+                }
+            }
         }
-      }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

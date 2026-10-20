@@ -37,7 +37,7 @@ int resourceListDestroy(void);
 int asdMemFree(void);
 int jobStop(...);
 int asdSequenceRequest(...);
-int FUN_002cf384(void);
+int useCounterSelectMode2(void);
 
 int FUN_0019e0c0(...);
 int FUN_001d04a4(...);
@@ -72,7 +72,7 @@ int gameDataGetPlayerName(void);
 int FUN_002898e4(void);
 int buttonHelpCreate(void);
 int FUN_00294450(unsigned int, unsigned int, int);
-int FUN_002947c0(void);
+int playerModelListCreate(void);
 int FUN_00295660(...);
 int FUN_00298d50(...);
 int asdMdlManagerCreateLoaded(unsigned char *, int);
@@ -158,8 +158,8 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: uiFadeRelease. */
 extern int FUN_00293edc(unsigned int);
 /* Supplied declaration required: FUN_00294450. */
-/* Supplied declaration required: FUN_002947c0. */
-extern unsigned int *FUN_002947f4(void);
+/* Supplied declaration required: playerModelListCreate. */
+extern unsigned int *_ZN9Obj4206e8C1Ev(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
@@ -220,7 +220,7 @@ extern int FUN_002c2a04(unsigned int);
 extern unsigned int FUN_002c5c04(unsigned char *);
 extern unsigned int asdLoadFileSync(unsigned char *, unsigned char *, unsigned int, unsigned int);
 extern int FUN_002c79c4(unsigned int);
-/* Supplied declaration required: FUN_002cf384. */
+/* Supplied declaration required: useCounterSelectMode2. */
 /* Supplied declaration required: FUN_002cf570. */
 /* Supplied declaration required: FUN_002e2948. */
 /* Supplied declaration required: FUN_002fc008. */
@@ -299,11 +299,11 @@ unsigned int FUN_001d99c0(void)
         asdOperatorNew();
         puVar5 = (unsigned int *)0x0;
         if (temp_v6 != 0) {
-          puVar5 = (unsigned int *)FUN_002947f4();
+          puVar5 = (unsigned int *)_ZN9Obj4206e8C1Ev();
           *puVar5 = (unsigned int)&DAT_004207d8;
         }
         puVar7[0xc] = (unsigned int)puVar5;
-        FUN_002947c0();
+        playerModelListCreate();
         temp_v4 = 0;
         do {
           FUN_00294450(puVar7[0xc],temp_v4 & 0xff,0x1c0);
@@ -936,7 +936,7 @@ LAB_001da638:
       if (temp_v6 == 2) {
         puVar2[4] = 6;
         puVar2[5] = 0;
-        FUN_002cf384();
+        useCounterSelectMode2();
       }
     }
   }

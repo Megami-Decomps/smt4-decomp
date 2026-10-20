@@ -1,36 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003247d8` (_code @ 0x3247d8, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern int *DAT_0057f658; /* 0x57f658 */
+typedef struct Task Task;
 
-extern int jobIsValid(int);
+typedef struct TaskVtable {
+    /* 0x00 */ void (*unk00)(Task *task);
+    /* 0x04 */ void (*release)(Task *task);
+} TaskVtable;
 
+struct Task {
+    /* 0x0 */ TaskVtable *vtable;
+    /* 0x4 */ u32 job;
+};
 
-unsigned int FUN_003247d8(void)
+extern Task *DAT_0057f658;
 
+s32 jobIsValid(u32 job);
+
+/* Returns 1 while the global task's job is valid; once it is not, releases and clears the task. */
+u32 FUN_003247d8(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0;
-  if (DAT_0057f658 != (int *)0x0) {
-    temp_v0 = jobIsValid(DAT_0057f658[1]);
-    if (temp_v0 != 0) {
-      temp_v1 = 1;
+    if (DAT_0057f658 != NULL) {
+        if (jobIsValid(DAT_0057f658->job) != 0) {
+            return 1;
+        }
+        if (DAT_0057f658 != NULL) {
+            DAT_0057f658->vtable->release(DAT_0057f658);
+            DAT_0057f658 = NULL;
+        }
+        return 0;
     }
-    else {
-      if (DAT_0057f658 != (int *)0x0) {
-        (**(romwright_code **)(*DAT_0057f658 + 4))();
-        DAT_0057f658 = (int *)0x0;
-      }
-      temp_v1 = 0;
-    }
-  }
-  return temp_v1;
+    return 0;
 }
 
 } /* extern "C" */

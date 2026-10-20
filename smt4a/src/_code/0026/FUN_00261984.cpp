@@ -1,36 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00261984` (_code @ 0x261984, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W4_Match3_InfoWindow.h"
 
 extern "C" {
 
-int uiSpriteSetKeyframe(int, int);
-int uiSpriteSetImageKeyframe(int, int);
-
-extern int g_infoWin; /* 0x57f574 */
-
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-
+extern void uiSpriteSetKeyframe(void *sprite, s32 keyframe, s32 arg);
+extern void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, s32 arg);
 
 void FUN_00261984(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = g_infoWin;
-  temp_v1 = g_infoWin + 0x54;
-  *(unsigned int *)(g_infoWin + 8) = 1;
-  uiSpriteSetKeyframe(temp_v1,0);
-  uiSpriteSetImageKeyframe(temp_v0 + 0x54,0);
-  *(unsigned char *)(temp_v0 + 0x33) = 1;
-  *(unsigned char *)(temp_v0 + 0x30) = 1;
-  *(unsigned int *)(temp_v0 + 0x20) = 3;
-  *(unsigned int *)(temp_v0 + 0x10) = 0x1e;
-  *(unsigned char *)(temp_v0 + 0x32d) = 0;
-  return;
+    InfoWindow *window = g_infoWin;
+
+    window->state = 1;
+    uiSpriteSetKeyframe(window->sprite, 0, 0);
+    uiSpriteSetImageKeyframe(window->sprite, 0, 0);
+    window->style = 1;
+    window->shown = 1;
+    window->timer = 30;
+    window->active = 3;
+    window->unk32D = 0;
 }
 
 } /* extern "C" */

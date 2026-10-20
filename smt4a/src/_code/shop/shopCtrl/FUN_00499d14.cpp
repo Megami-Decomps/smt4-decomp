@@ -1,83 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00499d14` (_code @ 0x499d14, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00178b04(int, unsigned char *, int);
-int FUN_00284f90(int);
-int FUN_002c7ce8(int);
-int FUN_002c7e6c(void);
-int FUN_002c85b0(unsigned int);
-int FUN_0033449c(int);
-int FUN_00345718(void);
-int FUN_003720a0(unsigned int, int);
-int FUN_00372100(unsigned int, int);
-int FUN_0040aa6c(void);
+typedef struct Scene {
+    /* 0x00000 */ u8 unk00000[0x14];
+    /* 0x00014 */ s32 mode;
+    /* 0x00018 */ u8 unk00018[0x15FEC];
+    /* 0x16004 */ u32 active;
+    /* 0x16008 */ u32 unk16008;
+    /* 0x1600C */ u8 unk1600c[0x1C];
+    /* 0x16028 */ void *secondList;
+} Scene;
 
-typedef struct fn_00499d14_arg0 fn_00499d14_arg0;
-struct fn_00499d14_arg0 {
-    unsigned char pad_0x0[0x14];
-    int field_0x14; /* +0x14 */
-    unsigned char pad_0x18[0x15fec];
-    undefined4 field_0x16004; /* +0x16004 */
-    undefined4 field_0x16008; /* +0x16008 */
-    unsigned char pad_0x1600c[0x1c];
-    int field_0x16028; /* +0x16028 */
-};
+s32 FUN_002c7e6c(void);
+s32 FUN_002c85b0(u32 arg);
+s32 FUN_002c7ce8(s32 arg);
+u32 gameGetPlayerData(void);
+s32 FUN_0033449c(s32 arg);
+s32 FUN_003720a0(u32 data, s32 arg);
+s32 FUN_00372100(u32 data, s32 arg);
+s32 FUN_00345718(void);
+s32 FUN_00284f90(s32 arg);
+void *FUN_00178b04(u32 size, const char *file, s32 line);
+void *FUN_0040ac08(void *memory);
+void FUN_0040aa6c(void *list, const char *name);
 
-extern unsigned char LAB_00499dbc; /* 0x499dbc */
-
-/* Supplied declaration required: FUN_00178b04. */
-extern unsigned int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00284f90. */
-/* Supplied declaration required: FUN_002c7ce8. */
-/* Supplied declaration required: FUN_002c7e6c. */
-/* Supplied declaration required: FUN_002c85b0. */
-/* Supplied declaration required: FUN_0033449c. */
-/* Supplied declaration required: FUN_00345718. */
-/* Supplied declaration required: FUN_003720a0. */
-/* Supplied declaration required: FUN_00372100. */
-/* Supplied declaration required: FUN_0040aa6c. */
-extern int FUN_0040ac08(void);
-
-
-void FUN_00499d14(fn_00499d14_arg0 *param_1)
-
+/* Resets the scene's player state and creates its second model list on first use. */
+void FUN_00499d14(Scene *scene)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  FUN_002c7e6c();
-  if (param_1->field_0x14 == 1) {
-    temp_v0 = 3;
-  }
-  else {
-    temp_v0 = 8;
-  }
-  FUN_002c85b0(temp_v0);
-  FUN_002c7ce8(0);
-  temp_v0 = gameGetPlayerData();
-  FUN_0033449c(1);
-  FUN_003720a0(temp_v0,0);
-  FUN_00372100(temp_v0,0);
-  param_1->field_0x16004 = 1;
-  FUN_00345718();
-  FUN_00284f90(0);
-  if (param_1->field_0x16028 == 0) {
-    temp_v1 = 0x20;
-    FUN_00178b04(0x20,&LAB_00499dbc,0x7cd);
-    temp_v2 = 0;
-    if (temp_v1 != 0) {
-      temp_v2 = FUN_0040ac08();
+    u32 value;
+    u32 player;
+    void *list;
+
+    FUN_002c7e6c();
+    if (scene->mode == 1) {
+        value = 3;
+    } else {
+        value = 8;
     }
-    param_1->field_0x16028 = temp_v2;
-    FUN_0040aa6c();
-  }
-  param_1->field_0x16008 = 0;
-  return;
+    FUN_002c85b0(value);
+    FUN_002c7ce8(0);
+    player = gameGetPlayerData();
+    FUN_0033449c(1);
+    FUN_003720a0(player, 0);
+    FUN_00372100(player, 0);
+    scene->active = 1;
+    FUN_00345718();
+    FUN_00284f90(0);
+    if (scene->secondList == NULL) {
+        list = FUN_00178b04(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\shop\\shopCtrl.cpp", 1997);
+        if (list != NULL) {
+            list = FUN_0040ac08(list);
+        }
+        scene->secondList = list;
+        FUN_0040aa6c(list, "player/pl_dammy.bam");
+    }
+    scene->unk16008 = 0;
 }
 
 } /* extern "C" */

@@ -1,24 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `bitFieldSet` (_code @ 0x2efb6c, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail loads the word address into r3, the mask into r2 and keeps the word in r1 */
+#include "common.h"
 
 extern "C" {
 
+/* A single flag in a word: the word's address and the bit mask. */
+typedef struct BitField {
+    /* 0x00 */ u32 *word;
+    /* 0x04 */ u32 mask;
+} BitField;
 
-void bitFieldSet(unsigned int *param_1,int param_2)
-
+/* Sets or clears the field's bits in its word. */
+void bitFieldSet(BitField *field, s32 value)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = *(unsigned int *)*param_1;
-  if (param_2 != 0) {
-    temp_v0 = temp_v0 | param_1[1];
-  }
-  else {
-    temp_v0 = temp_v0 & ~param_1[1];
-  }
-  *(unsigned int *)*param_1 = temp_v0;
-  return;
+    u32 *word = field->word;
+    u32 mask = field->mask;
+    u32 bits = *word;
+
+    if (value != 0) {
+        bits |= mask;
+    } else {
+        bits &= ~mask;
+    }
+    *word = bits;
 }
 
 } /* extern "C" */

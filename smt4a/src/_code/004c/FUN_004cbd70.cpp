@@ -7,11 +7,11 @@ extern "C" {
 int FUN_0015f490(...);
 int eventQueueAddUnique(...);
 int FUN_0026c3c4(...);
-int FUN_0039c410(...);
+int statusDownEnterState11(...);
 int FUN_004bd6b0(...);
 
 int FUN_001517b4(...);
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int FUN_0019de98(int, unsigned int);
 int FUN_00224880(...);
@@ -34,7 +34,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_0015f490. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int gameFlagIsSet(unsigned int);
@@ -61,8 +61,8 @@ extern int FUN_00371e38(void);
 extern int FUN_0037df64(void);
 /* Supplied declaration required: FUN_0037dfb0. */
 extern int stateHolderStateIs0x12(void);
-/* Supplied declaration required: FUN_0039c410. */
-extern int FUN_003c16b8(void);
+/* Supplied declaration required: statusDownEnterState11. */
+extern int statusDownGetCursorPosition(void);
 extern unsigned int FUN_003d2150(unsigned int);
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: countersAddSaturating. */
@@ -230,9 +230,9 @@ LAB_004cbdc8:
         }
         return;
       }
-      temp_v0 = FUN_003c16b8();
+      temp_v0 = statusDownGetCursorPosition();
       if ((temp_v0 != temp_v4) && (temp_v0 = FUN_0037df64(), temp_v0 == 0)) {
-        FUN_001641b4(0x100020f);
+        eventQueueAddUniqueIfValid(0x100020f);
         return;
       }
       FUN_00333dc8(1);
@@ -263,7 +263,7 @@ LAB_004cbdc8:
       if (temp_v0 != 2) {
         return;
       }
-      FUN_0039c410(1);
+      statusDownEnterState11(1);
       eventQueueAddUnique(0x100021a);
       break;
     case 6:
@@ -292,7 +292,7 @@ LAB_004cbdc8:
     FUN_00333dc8(1);
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x20),0xb);
     FUN_0015f490(*(unsigned short *)(temp_v1 + 0x62),1,1,0);
-    FUN_0039c410(0);
+    statusDownEnterState11(0);
   }
   *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
   return;

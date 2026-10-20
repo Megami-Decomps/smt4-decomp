@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001517b4(...);
 int FUN_00163aa4(int);
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int uiSpriteSelectAnim(int, int);
 int FUN_002007f4(int);
 int FUN_00228b04(int, int);
@@ -24,7 +24,7 @@ extern int g_playLog; /* 0x57f278 */
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -118,7 +118,7 @@ void FUN_0021545c(void)
         temp_v7 = 1;
         FUN_001517b4();
         if (temp_v7 != 0) {
-          FUN_001641b4(0x100020f);
+          eventQueueAddUniqueIfValid(0x100020f);
           temp_v7 = 0;
           do {
             uiSpriteSelectAnim(temp_v0 + temp_v7 * 0x8c + 0x20,1);
@@ -173,7 +173,7 @@ void FUN_0021545c(void)
       temp_v6 = FUN_002a4860(temp_v0 + 0x2dc);
     }
     if (temp_v6 != temp_v7) {
-      FUN_001641b4(0x100020d);
+      eventQueueAddUniqueIfValid(0x100020d);
     }
     break;
   case 2:

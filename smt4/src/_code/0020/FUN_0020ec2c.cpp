@@ -1,43 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020ec2c` (_code @ 0x20ec2c, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail lays the returns out differently (a shared `return 0` at the end, `return 1` right after the first branch); built branches the other way */
+#include "common.h"
 
 extern "C" {
 
-int scrGetArg(...);
-int FUN_002a03d8(int, unsigned int);
+s32 scrGetArg(s32 index);
+s32 scrGetCommandFrame(void);
+s32 FUN_002b89a4(s32 arg);
+s32 FUN_002c1d5c(void);
+void FUN_002a03d8(s32 index, s32 value);
 
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_002a03d8. */
-extern int FUN_002b89a4(unsigned int);
-extern int FUN_002c1d5c(void);
-
-
-unsigned int FUN_0020ec2c(void)
-
+/* Script wait: returns 1 while the condition is still pending. After the first frame it waits for FUN_002b89a4 twice; on the first frame it
+ * starts the effect (FUN_002a03d8 for both indices) unless FUN_002c1d5c holds or script argument 0 is neither 0 nor 1. */
+u32 FUN_0020ec2c(s32 firstArg)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = scrGetCommandFrame();
-  if (temp_v1 != 0) {
-    temp_v1 = FUN_002b89a4(0);
-    if ((temp_v1 == 0) || (temp_v1 = FUN_002b89a4(0), temp_v1 == 0)) {
-      return 0;
+    s32 value = scrGetArg(firstArg);
+
+    s32 mode;
+
+    if (scrGetCommandFrame() != 0) {
+        if (FUN_002b89a4(0) != 0 && FUN_002b89a4(0) != 0) {
+            return 1;
+        }
+        return 0;
     }
-  }
-  else {
-    temp_v1 = FUN_002c1d5c();
-    if ((temp_v1 == 0) && ((temp_v1 = scrGetArg(0), temp_v1 == 0 || (temp_v1 == 1)))) {
-      FUN_002a03d8(0,temp_v0);
-      FUN_002a03d8(1,temp_v0);
-      return 0;
+    if (FUN_002c1d5c() != 0) {
+        return 1;
     }
-  }
-  return 1;
+    mode = scrGetArg(0);
+    if (mode != 0 && mode != 1) {
+        return 1;
+    }
+    FUN_002a03d8(0, value);
+    FUN_002a03d8(1, value);
+    return 0;
 }
 
 } /* extern "C" */

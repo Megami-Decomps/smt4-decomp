@@ -5,17 +5,17 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_0035dd74(void);
+int contentEntryFindById(void);
 int dataTable5Count(void);
 int FUN_0039c64c(unsigned int, int);
-int FUN_0039c6d8(unsigned int *, int);
+int dataTable5Sub3Lookup(unsigned int *, int);
 int FUN_003bb6b0(unsigned int, int);
 
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_0035dd74. */
+/* Supplied declaration required: contentEntryFindById. */
 /* Supplied declaration required: dataTable5Count. */
 /* Supplied declaration required: FUN_0039c64c. */
-/* Supplied declaration required: FUN_0039c6d8. */
+/* Supplied declaration required: dataTable5Sub3Lookup. */
 /* Supplied declaration required: FUN_003bb6b0. */
 
 
@@ -47,7 +47,7 @@ unsigned char FUN_004da980(unsigned int param_1,unsigned short *param_2,unsigned
   if (temp_v1 != 0) {
     do {
       psVar4 = psVar9;
-      FUN_0035dd74();
+      contentEntryFindById();
       if (psVar4 != (short *)0x0) {
         temp_v2 = 0;
         temp_v3 = 0xc;
@@ -84,9 +84,9 @@ unsigned char FUN_004da980(unsigned int param_1,unsigned short *param_2,unsigned
     return (unsigned char)4;
   }
   puVar5 = (unsigned int *)(unsigned int)(unsigned char)param_2[1];
-  FUN_0039c6d8(puVar5,*param_3);
+  dataTable5Sub3Lookup(puVar5,*param_3);
   puVar6 = (unsigned int *)(unsigned int)(unsigned char)param_3[1];
-  FUN_0039c6d8(puVar6,*param_2);
+  dataTable5Sub3Lookup(puVar6,*param_2);
   if (puVar5 != (unsigned int *)0x0) {
     temp_v1 = *puVar5;
   }

@@ -12,7 +12,7 @@ extern unsigned char DAT_00589148; /* 0x589148 */
 
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: eventQueueAddUnique. */
-extern int FUN_002121c4(unsigned int);
+extern int slotIsReady(unsigned int);
 /* Supplied declaration required: scrGetArg. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: scrSetResult. */
@@ -59,8 +59,8 @@ unsigned int FUN_002bd774(void)
       temp_v3 = scrGetArg(1);
       *(unsigned short *)(temp_v5 + 0x10) = temp_v3;
     }
-    temp_v5 = FUN_002121c4(1);
-    if (((temp_v5 != 0) || (temp_v5 = FUN_002121c4(0), temp_v5 != 0)) ||
+    temp_v5 = slotIsReady(1);
+    if (((temp_v5 != 0) || (temp_v5 = slotIsReady(0), temp_v5 != 0)) ||
        ((temp_v5 = padButtonIsPressed(1), temp_v5 == 0 && (temp_v5 = padButtonIsPressed(0), temp_v5 == 0)))) {
       return 0;
     }

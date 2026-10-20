@@ -10,7 +10,7 @@ int FUN_00162790(...);
 int FUN_00167618(float *);
 int renderCtxResetColorScale(int);
 int FUN_0016c4b8(int, int);
-int FUN_0016c560(int);
+int skinObjectUpdateMatrices(int);
 int FUN_003d1fac(void);
 int VectorSignedToFloat(int, int);
 
@@ -35,7 +35,7 @@ extern int jobGetWork(void);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_0016c560. */
+/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_003d1fac. */
 
 
@@ -62,7 +62,7 @@ unsigned int FUN_002c3038(void)
   temp_v7 = 0.0f;
   temp_v6 = 1.0f;
   if (*(int *)(temp_v0 + 0x10) != 1) {
-    FUN_0016c560(g_renderCtx);
+    skinObjectUpdateMatrices(g_renderCtx);
     FUN_00157558(g_renderCtx);
     temp_v1 = *(int *)(temp_v0 + 0x10);
     if (!((temp_v1 == 7 || temp_v1 == 8) || temp_v1 == 0xe)) {
@@ -117,7 +117,7 @@ unsigned int FUN_002c3038(void)
     if (temp_v2 < 10) {
       temp_v1 = temp_v2;
       if (temp_v2 < 1) {
-        FUN_0016c560(g_renderCtx);
+        skinObjectUpdateMatrices(g_renderCtx);
         renderCtxResetColorScale(g_renderCtx);
         return 0;
       }
@@ -139,7 +139,7 @@ unsigned int FUN_002c3038(void)
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < temp_v1);
   }
-  FUN_0016c560(g_renderCtx);
+  skinObjectUpdateMatrices(g_renderCtx);
   renderCtxResetColorScale(g_renderCtx);
   return 0;
 }

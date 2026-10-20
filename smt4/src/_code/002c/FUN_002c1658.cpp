@@ -15,7 +15,7 @@ typedef struct {
 
 extern int DAT_0043da2c; /* 0x43da2c */
 
-extern int FUN_00125084(char);
+extern int buttonHelpKindIsTriggered(char);
 extern int FUN_00125cec(char);
 /* Supplied declaration required: padIsButtonRepeat. */
 /* Supplied declaration required: padIsButtonPressed. */
@@ -120,7 +120,7 @@ LAB_002c17e4:
       return temp_v1;
     }
     if (param_2 == 1) {
-      temp_v1 = FUN_00125084(temp_v3);
+      temp_v1 = buttonHelpKindIsTriggered(temp_v3);
       return temp_v1;
     }
     if (param_2 == 2) {

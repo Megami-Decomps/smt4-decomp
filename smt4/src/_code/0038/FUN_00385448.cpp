@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00235554(...);
-int FUN_0026a704(void);
+int buttonHelpResetSlots(void);
 int FUN_00287704(...);
 int FUN_00296284(...);
 int FUN_0029c3c0(int, int, int);
@@ -35,7 +35,7 @@ extern char s_e021_01_0044daf0[8]; /* 0x44daf0 */
 extern int FUN_0019e0c0(unsigned int);
 extern int FUN_00235414(unsigned char);
 /* Supplied declaration required: FUN_00235554. */
-/* Supplied declaration required: FUN_0026a704. */
+/* Supplied declaration required: buttonHelpResetSlots. */
 extern int FUN_0026b564(void);
 extern int FUN_0027ee9c(void);
 extern int FUN_00282b28(void);
@@ -79,7 +79,7 @@ void FUN_00385448(unsigned int *param_1)
         param_1[5] = (unsigned int)(s_e021_01_0044daf0 + temp_v4);
         FUN_0029c3c0(0,10,0xff);
         FUN_0029c3c0(1,10,0xff);
-        FUN_0026a704();
+        buttonHelpResetSlots();
         param_1[2] = 6;
         return;
       }

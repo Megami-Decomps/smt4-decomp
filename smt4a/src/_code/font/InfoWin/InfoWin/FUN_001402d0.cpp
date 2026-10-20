@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int FUN_00151408(...);
 int taskCreateDraw(...);
 int FUN_001527d8(...);
@@ -39,7 +39,7 @@ extern unsigned int *g_infoWin; /* 0x57f574 */
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: FUN_00151408. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
@@ -72,7 +72,7 @@ void FUN_001402d0(void)
   taskCreateDraw(&LAB_00140538,0xe2,0,0,FUN_00155ca8,0,0,*puVar1);
   puVar1 = g_infoWin;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_infoWin + 0xd);
-  FUN_001505ac(puVar1 + 0xd,&DAT_0052facc,0x48,&DAT_0052fb14,0x18,0,0,0,0,0,0);
+  paramsInit(puVar1 + 0xd,&DAT_0052facc,0x48,&DAT_0052fb14,0x18,0,0,0,0,0,0);
   FUN_0014e188(puVar1 + 0x15,8,0x87,puVar1 + 0xd,1);
   uiSpriteSetKeyframe(puVar1 + 0x15,0);
   FUN_0014e188(puVar1 + 0x5b,8,0x87,puVar1 + 0xd,1);

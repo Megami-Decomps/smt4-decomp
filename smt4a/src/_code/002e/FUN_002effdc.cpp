@@ -1,36 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002effdc` (_code @ 0x2effdc, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: loop layout only: retail enters the left-descent loop with an unconditional branch to its bottom test (no duplicated test) and tests the parent walk at the top; the build duplicates the loop test before the body. */
+#include "common.h"
 
 extern "C" {
 
+typedef struct TreeNode {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ struct TreeNode *parent;
+    /* 0x08 */ struct TreeNode *left;
+    /* 0x0C */ struct TreeNode *right;
+} TreeNode;
 
-void FUN_002effdc(int *param_1)
+typedef struct TreeIterator {
+    /* 0x00 */ TreeNode *node;
+} TreeIterator;
 
+/* Advances an in-order iterator of the red-black tree to the next node. */
+void FUN_002effdc(TreeIterator *it)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = *param_1;
-  temp_v1 = *(int *)(temp_v0 + 0xc);
-  if (temp_v1 != 0) {
-    *param_1 = temp_v1;
-    while (temp_v1 = *(int *)(temp_v1 + 8), temp_v1 != 0) {
-      *param_1 = temp_v1;
+    TreeNode *node = it->node;
+    TreeNode *next = node->right;
+
+    if (next != NULL) {
+        it->node = next;
+        while ((next = next->left) != NULL) {
+            it->node = next;
+        }
+    } else {
+        for (;;) {
+            node = node->parent;
+            if (it->node != node->right) {
+                break;
+            }
+            it->node = node;
+        }
+        if (it->node->right != node) {
+            it->node = node;
+        }
     }
-  }
-  else {
-    while( 1 ) {
-      temp_v0 = *(int *)(temp_v0 + 4);
-      if (*param_1 != *(int *)(temp_v0 + 0xc)) break;
-      *param_1 = temp_v0;
-    }
-    if (*(int *)(*param_1 + 0xc) != temp_v0) {
-      *param_1 = temp_v0;
-      return;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

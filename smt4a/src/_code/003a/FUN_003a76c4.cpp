@@ -1,48 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a76c4` (_code @ 0x3a76c4, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int gameGetSlotRecord(...);
-int scrSetResult(int);
+typedef struct SlotTable {
+    /* 0x0000 */ u8 unk0000[0x1C9F];
+    /* 0x1C9F */ s8 slots[1];
+} SlotTable;
 
-/* Supplied declaration required: gameGetSlotRecord. */
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: scrSetResult. */
+typedef struct SlotRecord {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 value;
+} SlotRecord;
 
+typedef struct Entry {
+    /* 0x0 */ s32 value;
+    /* 0x4 */ u8 unk4[4];
+} Entry;
 
-unsigned int FUN_003a76c4(int *param_1)
+typedef struct Owner {
+    /* 0x000 */ u8 unk000[0x9B8];
+    /* 0x9B8 */ s32 slot;
+    /* 0x9BC */ s32 entry;
+    /* 0x9C0 */ u8 unk9c0[0xC0];
+    /* 0xA80 */ Entry entries[1];
+} Owner;
 
+extern SlotTable *gameGetSlotTable(void);
+extern SlotRecord *gameGetSlotRecord(...);
+extern void scrSetResult(s32 value);
+
+/* Script command: pushes the value of the slot record selected by the owner (its slot, else its entry); returns 1. */
+u32 FUN_003a76c4(Owner **ref)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = *param_1;
-  if (temp_v1 != 0) {
-    if (*(int *)(temp_v1 + 0x9b8) >= 1) {
-      temp_v0 = gameGetSlotTable();
-      if (*(char *)(*(int *)(temp_v1 + 0x9b8) + temp_v0 + 0x1c9f) < '\0') {
-        return 1;
-      }
-      temp_v0 = gameGetSlotTable();
-      temp_v1 = gameGetSlotRecord((int)*(char *)(*(int *)(temp_v1 + 0x9b8) + temp_v0 + 0x1c9f));
+    Owner *owner = *ref;
+    SlotRecord *record;
+
+    if (owner != NULL) {
+        if (owner->slot > 0) {
+            if (gameGetSlotTable()->slots[owner->slot] < 0) {
+                return 1;
+            }
+            record = gameGetSlotRecord(gameGetSlotTable()->slots[owner->slot]);
+        } else {
+            if (owner->entry < 0) {
+                return 1;
+            }
+            if ((s16)owner->entries[owner->entry].value < 0) {
+                return 1;
+            }
+            record = gameGetSlotRecord();
+        }
+        if (record != NULL) {
+            scrSetResult(record->value);
+        }
     }
-    else {
-      if (*(int *)(temp_v1 + 0x9bc) < 0) {
-        return 1;
-      }
-      if ((short)*(unsigned int *)(temp_v1 + *(int *)(temp_v1 + 0x9bc) * 8 + 0xa80) < 0) {
-        return 1;
-      }
-      temp_v1 = gameGetSlotRecord();
-    }
-    if (temp_v1 != 0) {
-      scrSetResult(*(unsigned short *)(temp_v1 + 0x62));
-    }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

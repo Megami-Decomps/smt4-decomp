@@ -11,7 +11,7 @@ int FUN_00178150(unsigned int, int, int);
 int FUN_001782c8(int, int, int);
 int FUN_0017efa4(int, int, int);
 int FUN_0017f87c(int, int, int, int);
-int FUN_001871c0(int);
+int trackAdvance(int);
 int FUN_001881c8(void);
 int FUN_00199f84(...);
 int nn_math_ARMv6_MTX34CopyAsm(...);
@@ -30,7 +30,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001782c8. */
 /* Supplied declaration required: FUN_0017efa4. */
 /* Supplied declaration required: FUN_0017f87c. */
-/* Supplied declaration required: FUN_001871c0. */
+/* Supplied declaration required: trackAdvance. */
 /* Supplied declaration required: FUN_001881c8. */
 /* Supplied declaration required: FUN_00199f84. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
@@ -65,7 +65,7 @@ void FUN_00156994(int param_1,unsigned int param_2)
         }
         FUN_0017f87c(temp_v2,param_1 + 0x10c,param_1 + 0x98,temp_v1);
         FUN_00178150(*(unsigned int *)(param_1 + 0x90),param_1 + 0x10c,param_1 + 0x98);
-        FUN_001871c0(param_1 + 0x84);
+        trackAdvance(param_1 + 0x84);
       }
       temp_v2 = *(int *)(param_1 + 0xc0);
     }
@@ -86,13 +86,13 @@ void FUN_00156994(int param_1,unsigned int param_2)
         }
         FUN_0017f87c(temp_v2,param_1 + 0x10c,param_1 + 0x98,temp_v1);
         FUN_00178150(*(unsigned int *)(param_1 + 0x90),param_1 + 0x10c,param_1 + 0x98);
-        FUN_001871c0(param_1 + 0x84);
+        trackAdvance(param_1 + 0x84);
       }
       temp_v2 = *(int *)(param_1 + 0xc0);
     }
     if (temp_v2 != 0) {
       FUN_001782c8(temp_v2,param_1 + 0x114,param_1 + 200);
-      FUN_001871c0(param_1 + 0xb4);
+      trackAdvance(param_1 + 0xb4);
     }
     temp_v2 = *(int *)(param_1 + *(int *)(param_1 + 0x1c) * 0x30 + 0x30);
     if ((temp_v2 == 0) || (*(short *)(**(int **)(temp_v2 + 0xc) + 6) != 9)) {

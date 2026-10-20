@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001c3600(...);
 int FUN_0029e8b8(...);
-int FUN_0029e908(...);
+int objectPartRunUnlessLocked(...);
 int FUN_0029eb5c(...);
 int FUN_0029f848(...);
 
@@ -22,7 +22,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_001c3600. */
 /* Supplied declaration required: FUN_0029e8b8. */
-/* Supplied declaration required: FUN_0029e908. */
+/* Supplied declaration required: objectPartRunUnlessLocked. */
 /* Supplied declaration required: FUN_0029eb5c. */
 extern unsigned int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029f848. */
@@ -45,10 +45,10 @@ void FUN_002937e0(void)
   
   temp_v1 = g_partyPanel;
   temp_v2 = gameGetSlotTable();
-  temp_v3 = FUN_0029e908(temp_v1 + 0x940);
+  temp_v3 = objectPartRunUnlessLocked(temp_v1 + 0x940);
   temp_v4 = FUN_0029efa8(temp_v1 + 0x940);
   temp_v5 = temp_v1 + 0xa08;
-  temp_v6 = FUN_0029e908();
+  temp_v6 = objectPartRunUnlessLocked();
   temp_v7 = FUN_0029efa8(temp_v5);
   temp_v0 = *(unsigned char *)(temp_v2 + 0x910b);
   temp_v8 = temp_v0 >> 2;

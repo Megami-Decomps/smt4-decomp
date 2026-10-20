@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdProcessCreateSimple(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int FUN_001513ec(...);
 int FUN_00151408(...);
 int taskCreateDraw(...);
@@ -38,7 +38,7 @@ extern unsigned char DAT_005300a0; /* 0x5300a0 */
 
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: FUN_001513ec. */
 /* Supplied declaration required: FUN_00151408. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -113,7 +113,7 @@ unsigned int * FUN_00145280(void)
   taskCreateDraw(&LAB_00145510,0x86,0,0,FUN_0014f3f4,0,puVar1,puVar3);
   taskCreateDraw(&LAB_0014551c,0xe2,0,0,FUN_0014f3f4,0,puVar1,*puVar1);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0x65);
-  FUN_001505ac(puVar1 + 0x65,&DAT_0052fe6c,0x114,&DAT_0052ff80,0xcc,&DAT_0053004c,0x54,0,0,
+  paramsInit(puVar1 + 0x65,&DAT_0052fe6c,0x114,&DAT_0052ff80,0xcc,&DAT_0053004c,0x54,0,0,
                &DAT_005300a0,0x94c);
   return puVar1;
 }

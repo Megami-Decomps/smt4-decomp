@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int sysPlaySe(...);
@@ -49,7 +49,7 @@ extern unsigned int *g_titleConfig; /* 0x589164 */
 extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
 extern int FUN_00162858(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
@@ -62,7 +62,7 @@ extern int FUN_00162858(void);
 /* Supplied declaration required: FUN_002804b0. */
 extern unsigned int FUN_003164ac(unsigned char);
 extern unsigned int FUN_0032b62c(unsigned char);
-extern unsigned int FUN_00358c60(unsigned char);
+extern unsigned int thresholdIndexFind(unsigned char);
 /* Supplied declaration required: fillTwoWordsWithByte. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
@@ -84,7 +84,7 @@ void FUN_0037a2e4(void)
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_0037a588,0xea,0,0,FUN_0032ba8c,0,0,puVar2);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0xf);
-  FUN_001505ac(puVar1 + 0xf,&DAT_00536bec,0x30,&DAT_00536c1c,0x30,0,0,0,0,0,0);
+  paramsInit(puVar1 + 0xf,&DAT_00536bec,0x30,&DAT_00536c1c,0x30,0,0,0,0,0,0);
   temp_v1 = 0x3f800000;
   FUN_0014e188(puVar1 + 0x17,0x24,0,puVar1 + 0xf,0xc9);
   uiSpriteSetKeyframe(puVar1 + 0x17,2,0);
@@ -106,7 +106,7 @@ void FUN_0037a2e4(void)
     puVar1[10] = temp_v1;
     temp_v1 = FUN_003164ac(*(unsigned char *)(temp_v0 + 0x27e91));
     puVar1[0xb] = temp_v1;
-    temp_v1 = FUN_00358c60(*(unsigned char *)(temp_v0 + 0x27e92));
+    temp_v1 = thresholdIndexFind(*(unsigned char *)(temp_v0 + 0x27e92));
     puVar1[0xc] = temp_v1;
     temp_v1 = *(unsigned int *)(temp_v0 + 0x27e94);
     puVar1[0xd] = *(unsigned int *)(temp_v0 + 0x27e90);
@@ -118,7 +118,7 @@ void FUN_0037a2e4(void)
   puVar1[10] = temp_v1;
   temp_v1 = FUN_003164ac(DAT_00588fc1);
   puVar1[0xb] = temp_v1;
-  temp_v1 = FUN_00358c60(DAT_00588fc2);
+  temp_v1 = thresholdIndexFind(DAT_00588fc2);
   puVar1[0xc] = temp_v1;
   wordPairCopy(puVar1 + 0xd,&DAT_00588fc0);
   return;

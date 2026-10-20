@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0029a268(...);
+int fadeObjectResetIfActive(...);
 int FUN_0029a284(...);
 int dataTable00FindById(void);
 int FUN_002b6dd8(...);
@@ -59,7 +59,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0029a17c. */
-/* Supplied declaration required: FUN_0029a268. */
+/* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: FUN_0029a284. */
 /* Supplied declaration required: FUN_0029a924. */
 extern unsigned int FUN_0029a9d4(unsigned short, unsigned int);
@@ -611,7 +611,7 @@ LAB_00187ce0:
       (**(romwright_code **)(temp_v8 + 0x12c8))();
       *(unsigned char *)(temp_v8 + 0x12c4) = 0;
     }
-    FUN_0029a268(temp_v2 + 0x370);
+    fadeObjectResetIfActive(temp_v2 + 0x370);
     temp_v2 = g_titleScene;
     temp_v8 = packNibblesAndByte(6,7,0);
     piVar13 = (int *)(temp_v2 + 0x12ac);

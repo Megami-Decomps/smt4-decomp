@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00288790(...);
+int messageKindForward(...);
 int dataTable08Sub2GetRecord(void);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
@@ -41,7 +41,7 @@ extern unsigned char LAB_00284804; /* 0x284804 */
 extern unsigned char LAB_00284814; /* 0x284814 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00288790. */
+/* Supplied declaration required: messageKindForward. */
 extern unsigned int FUN_0028fb40(int);
 extern int FUN_002995d8(int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
@@ -194,7 +194,7 @@ LAB_00284174:
     FUN_002be5a4(2,0xff,temp_v12,(int)*(short *)(temp_v5 + 10));
     if (*(char *)(temp_v7 + 0x5b) != '\0') {
       temp_v5 = FUN_002bf4f8(0x1d,0x51a);
-      FUN_00288790(*(unsigned char *)(temp_v7 + 0x5b),
+      messageKindForward(*(unsigned char *)(temp_v7 + 0x5b),
                    (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v5 + 8) + param_4 + 0x18,
                    (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,0x6f);
     }

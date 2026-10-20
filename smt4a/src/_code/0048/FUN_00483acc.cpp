@@ -1,35 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00483acc` (_code @ 0x483acc, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling: retail loads `shared` speculatively (ldrne) before the branch and keeps the decrement temporaries in r1; built loads it after the vtable word */
+#include "common.h"
+
+/* A pooled object: slot 1 of its vtable releases it; `shared` is nonzero when it is not counted as an owner. */
+class PoolObject {
+public:
+    virtual void unk00();
+    virtual void release();
+
+    u32 unk04;
+    s32 shared;     /* 0x08 */
+};
+
+typedef struct ObjectPool {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s32 count;          /* live objects */
+    /* 0x14 */ s32 ownedCount;     /* live objects that are not shared */
+    /* 0x18 */ PoolObject *slots[32];
+} ObjectPool;
 
 extern "C" {
 
-typedef int romwright_code(...);
-
-void FUN_00483acc(int param_1)
-
+/* Releases every object in the pool and clears the counts as it goes. */
+void FUN_00483acc(ObjectPool *pool)
 {
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = 0;
-  do {
-    temp_v1 = param_1 + temp_v0 * 4;
-    piVar1 = *(int **)(temp_v1 + 0x18);
-    if (piVar1 != (int *)0x0) {
-      temp_v2 = piVar1[2];
-      (**(romwright_code **)(*piVar1 + 4))();
-      *(unsigned int *)(temp_v1 + 0x18) = 0;
-      if (temp_v2 == 0) {
-        *(int *)(param_1 + 0x14) = *(int *)(param_1 + 0x14) - 1;
-      }
-      *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) - 1;
+    s32 i;
+
+    for (i = 0; i < 32; i++) {
+        PoolObject *object = pool->slots[i];
+
+        if (object != NULL) {
+            s32 shared = object->shared;
+
+            object->release();
+            pool->slots[i] = NULL;
+            if (shared == 0) {
+                pool->ownedCount--;
+            }
+            pool->count--;
+        }
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x20);
-  return;
 }
 
 } /* extern "C" */

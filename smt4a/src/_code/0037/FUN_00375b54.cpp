@@ -1,26 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00375b54` (_code @ 0x375b54, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00192550(void);
+typedef struct Record00375b54 {
+    /* 0x00 */ u8 unk00[0x43];
+    /* 0x43 */ u8 rank;
+} Record00375b54;
 
-/* Supplied declaration required: FUN_00192550. */
+Record00375b54 *FUN_00192550(u32 id);
 
-
-int FUN_00375b54(unsigned short *param_1,unsigned short *param_2)
-
+/* Sort comparator over record ids: higher rank first. */
+s32 FUN_00375b54(const u16 *first, const u16 *second)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = (unsigned int)*param_1;
-  FUN_00192550();
-  temp_v1 = (unsigned int)*param_2;
-  FUN_00192550();
-  return (unsigned int)*(unsigned char *)(temp_v1 + 0x43) - (unsigned int)*(unsigned char *)(temp_v0 + 0x43);
+    Record00375b54 *firstRecord = FUN_00192550(*first);
+    Record00375b54 *secondRecord = FUN_00192550(*second);
+
+    return secondRecord->rank - firstRecord->rank;
 }
 
 } /* extern "C" */

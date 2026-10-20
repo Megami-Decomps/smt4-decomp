@@ -7,7 +7,7 @@ extern "C" {
 int ifTouchRegionRemove(void);
 int FUN_001643b4(...);
 int __aeabi_memset4(int, int, unsigned int);
-int FUN_00284168(int, int, int, int);
+int ifTouchRegionAdd(int, int, int, int);
 
 extern int g_statusDown; /* 0x588fe8 */
 
@@ -16,7 +16,7 @@ extern int g_statusDown; /* 0x588fe8 */
 extern int FUN_001834a4(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_00284168. */
+/* Supplied declaration required: ifTouchRegionAdd. */
 extern int FUN_002c2c68(int);
 
 
@@ -115,7 +115,7 @@ void FUN_00230d30(void)
     temp_v3 = FUN_001834a4(0x12,0x4f1);
     temp_v5 = FUN_001834a4(0x12,0x41f);
     temp_v4 = (int)*(short *)(temp_v3 + 8);
-    FUN_00284168(temp_v4,(int)*(short *)(temp_v3 + 10),(int)**(short **)(temp_v5 + 0xc),
+    ifTouchRegionAdd(temp_v4,(int)*(short *)(temp_v3 + 10),(int)**(short **)(temp_v5 + 0xc),
                  (int)*(short *)(*(int *)(temp_v3 + 0xc) + 2));
     *(short *)(temp_v0 + (unsigned int)*(unsigned char *)(temp_v0 + 0x59a) * 2 + 0x544) = (short)temp_v4;
     *(char *)(temp_v0 + 0x59a) = *(char *)(temp_v0 + 0x59a) + '\x01';

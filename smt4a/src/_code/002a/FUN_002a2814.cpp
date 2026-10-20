@@ -1,22 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a2814` (_code @ 0x2a2814, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail ends the nested test with `moveq r0,#1` only; armcc adds a trailing `bne` to the return. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_campCec; /* 0x57f110 */
+typedef struct CampCecWork {
+    /* 0x000 */ u8 unk000[0x140];
+    /* 0x140 */ s32 state;
+} CampCecWork;
 
+extern struct {
+    u8 unk0[4];
+    CampCecWork *work;
+} g_campCec;
 
-unsigned int FUN_002a2814(void)
-
+/* True while the camp CEC work exists and is in state 12. */
+u32 FUN_002a2814(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (((*(int *)((unsigned char *)&g_campCec + 0x4)) != 0) && (*(int *)((*(int *)((unsigned char *)&g_campCec + 0x4)) + 0x140) == 0xc)) {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    u32 result = 0;
+
+    if (g_campCec.work != NULL && g_campCec.work->state == 12) {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

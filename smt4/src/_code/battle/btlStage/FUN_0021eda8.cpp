@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern unsigned char DAT_004398d0; /* 0x4398d0 */
+extern unsigned char g_btlStage; /* 0x4398d0 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: mdlHandleArrayDestroy. */
@@ -48,9 +48,9 @@ void FUN_0021eda8(void)
   unsigned char temp_v3 [4];
   
   temp_v0 = jobGetWork();
-  temp_v2 = (*(int *)((unsigned char *)&DAT_004398d0 + 0x4));
-  if ((*(int *)((unsigned char *)&DAT_004398d0 + 0x4)) != 0) {
-    uStack_20 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_004398d0 + 0x4)) + 0xa4);
+  temp_v2 = (*(int *)((unsigned char *)&g_btlStage + 0x4));
+  if ((*(int *)((unsigned char *)&g_btlStage + 0x4)) != 0) {
+    uStack_20 = *(unsigned int *)((*(int *)((unsigned char *)&g_btlStage + 0x4)) + 0xa4);
     puVar2 = temp_v3;
     FUN_002c40f8(puVar2,&uStack_20,1,0,0xffffffff,0xffffffff);
     if ((int)puVar2 < 0) {
@@ -82,8 +82,8 @@ void FUN_0021eda8(void)
     FUN_002759bc();
     mdlHandleArrayDestroy(temp_v2);
     *(unsigned int *)(temp_v2 + 0x80) = 0;
-    asdMemFree((*(int *)((unsigned char *)&DAT_004398d0 + 0x4)));
-    (*(int *)((unsigned char *)&DAT_004398d0 + 0x4)) = 0;
+    asdMemFree((*(int *)((unsigned char *)&g_btlStage + 0x4)));
+    (*(int *)((unsigned char *)&g_btlStage + 0x4)) = 0;
   }
   temp_v2 = jobIsValid(*(unsigned int *)(temp_v0 + 0x30));
   if (temp_v2 != 0) {

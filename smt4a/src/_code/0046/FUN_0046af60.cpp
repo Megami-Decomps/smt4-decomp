@@ -8,7 +8,7 @@ int FUN_001517b4(void);
 int sysPlaySe(int);
 int FUN_00183e58(void);
 int FUN_001f4908(int, int, int);
-int FUN_002844e4(void);
+int msgWindowReset(void);
 int FUN_002bf4f4(int);
 int pickObjStart(int, unsigned char *);
 
@@ -26,7 +26,7 @@ extern unsigned char LAB_0046b060; /* 0x46b060 */
 extern int FUN_00224880(unsigned int);
 extern int FUN_00239480(void);
 extern int FUN_002802c8(void);
-/* Supplied declaration required: FUN_002844e4. */
+/* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: FUN_002bf4f4. */
 extern int FUN_002e19f8(void);
 /* Supplied declaration required: pickObjStart. */
@@ -65,7 +65,7 @@ void FUN_0046af60(int param_1)
     temp_v0 = 1;
     FUN_001517b4();
     if ((temp_v0 != 0) && (temp_v0 = FUN_00239480(), temp_v0 != 0)) {
-      FUN_002844e4();
+      msgWindowReset();
       return;
     }
   }

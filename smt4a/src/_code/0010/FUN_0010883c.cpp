@@ -45,7 +45,7 @@ extern unsigned int FUN_002ef9e0(unsigned char *, unsigned short);
 /* Supplied declaration required: vectorInitEmpty3. */
 /* Supplied declaration required: FUN_002f1306. */
 /* Supplied declaration required: wordMoveOut_002f1324. */
-extern int FUN_002f1334(unsigned char *, unsigned char *);
+extern int seq16IsGreaterOrFlag(unsigned char *, unsigned char *);
 extern unsigned int vectorCount8_002f1352(int *);
 /* Supplied declaration required: vectorTeardown_002f135a. */
 
@@ -91,7 +91,7 @@ void FUN_0010883c(int param_1,int param_2)
   do {
     if (temp_v1 != 0) {
       FUN_002eb164(temp_v14,temp_v1);
-      temp_v1 = FUN_002f1334(temp_v13,temp_v14);
+      temp_v1 = seq16IsGreaterOrFlag(temp_v13,temp_v14);
       if (temp_v1 == 0) {
         temp_v0 = 0;
       }

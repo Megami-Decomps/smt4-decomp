@@ -24,7 +24,7 @@ extern int FUN_002b24fc(void);
 /* Supplied declaration required: FUN_002cc228. */
 extern int FUN_003bcf2c(int);
 extern int gameDataFlagTestBit(void);
-extern int FUN_004bd748(int);
+extern int idListHasFlaggedRecord(int);
 
 
 char FUN_003da6ac(int param_1,int param_2)
@@ -65,7 +65,7 @@ char FUN_003da6ac(int param_1,int param_2)
           if (temp_v0 == '\x03') {
             if ((*(short *)(param_1 + *piVar6 * 2 + 0x4210) == -1) || (temp_v4 == 0))
             goto LAB_003da878;
-            temp_v2 = FUN_004bd748(temp_v4);
+            temp_v2 = idListHasFlaggedRecord(temp_v4);
             if ((temp_v2 == 0) &&
                ((((*pcVar3 != '\x03' || ((*(unsigned int *)(pcVar3 + 0x60) & 1) != 0)) ||
                  (temp_v2 = FUN_00291e14(), temp_v2 == 0)) || (temp_v2 = FUN_003bcf2c(temp_v4), temp_v2 == 0))

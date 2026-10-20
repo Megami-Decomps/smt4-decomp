@@ -1,15 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00310578` (_code @ 0x310578, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail builds (a != 1) with `mov ip, #1; moveq ip, #0` and reuses r0 for the masked d; built uses `movne` and r3. */
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_00310578(int param_1,int param_2,int param_3,unsigned int param_4)
-
+/* Packs four fields into one word: bit 0 = (a != 1), a at bit 4, d at bit 8, b at bit 16, c at bit 24. */
+u32 FUN_00310578(s32 a, s32 b, s32 c, u32 d)
 {
-  return (unsigned int)(param_1 != 1) | (param_1 << 4) | ((param_4 & 0xff) << 8) | (param_2 << 0x10) |
-         (param_3 << 0x18);
+    return (a != 1) | (a << 4) | ((d & 0xFF) << 8) | (b << 16) | (c << 24);
 }
 
 } /* extern "C" */

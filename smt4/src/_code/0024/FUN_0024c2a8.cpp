@@ -1,32 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024c2a8` (_code @ 0x24c2a8, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the byte is addressed as base + 0xcf0 with the shifted index as a register offset on both ldrb and strb; retail writes the sum back (ldrb [r0, r4, lsr #3]!) and stores through it. */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0023d2ec(void);
+typedef struct MapBlock {
+    /* 0x000 */ u8 unk000[0xCF0];
+    /* 0xCF0 */ u8 bits[1]; /* bit tables, 8 bytes per group */
+} MapBlock;
 
+extern MapBlock *FUN_0023d2ec(void);
 
-void FUN_0024c2a8(int param_1,unsigned int param_2,int param_3)
-
+/* Sets or clears bit `bit` of group `group`'s bit table. */
+void FUN_0024c2a8(s32 group, u32 bit, s32 set)
 {
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned char *pbVar3;
-  unsigned char temp_v2;
-  
-  temp_v1 = FUN_0023d2ec();
-  pbVar3 = (unsigned char *)(temp_v1 + param_1 * 8 + 0xcf0 + (param_2 >> 3));
-  temp_v0 = *pbVar3;
-  temp_v2 = (unsigned char)(1 << (param_2 & 7));
-  if (param_3 != 0) {
-    temp_v2 = temp_v2 | temp_v0;
-  }
-  else {
-    temp_v2 = temp_v0 & ~temp_v2;
-  }
-  *pbVar3 = temp_v2;
-  return;
+    u8 *table = FUN_0023d2ec()->bits + group * 8;
+    u8 *byte = table + (bit >> 3);
+    u8 mask = 1 << (bit & 7);
+
+    if (set != 0) {
+        *byte = mask | *byte;
+    } else {
+        *byte = *byte & ~mask;
+    }
 }
 
-} /* extern "C" */
+}

@@ -60,7 +60,7 @@ extern int FUN_00295cec(void);
 extern unsigned int FUN_002ae3c4(int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
-extern unsigned int FUN_002b8dc0(int);
+extern unsigned int recordPackedValue(int);
 extern unsigned int FUN_002bce00(void);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: memClear. */
@@ -143,7 +143,7 @@ void FUN_0029212c(int param_1)
         FUN_002be624(&temp_v12,&LAB_0029263c);
       }
       FUN_00295660(0x24,&temp_v12);
-      temp_v4 = FUN_002b8dc0(temp_v5);
+      temp_v4 = recordPackedValue(temp_v5);
       FUN_0029ede8(0x25,temp_v4,0xffffffff,0);
     }
     temp_v12 = 3;

@@ -88,7 +88,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: FUN_001879d0. */
-extern int FUN_0019e130(int);
+extern int markerKindGetColor(int);
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_003482a4. */
@@ -264,7 +264,7 @@ LAB_004b05b8:
         temp_v7 = temp_v7 + 1;
         goto LAB_004b05b8;
       }
-      temp_v4 = FUN_0019e130((int)(short)temp_v14);
+      temp_v4 = markerKindGetColor((int)(short)temp_v14);
 LAB_004b05c4:
       if (temp_v28 != temp_v4) {
         temp_v28 = temp_v4;

@@ -36,7 +36,7 @@ extern unsigned char g_btlAction; /* 0x434278 */
 extern unsigned int g_btlActionReflect; /* 0x434290 */
 
 /* Supplied declaration required: FUN_00229754. */
-extern int FUN_002298a0(void);
+extern int btlNodeListAnyReady(void);
 /* Supplied declaration required: FUN_00229914. */
 /* Supplied declaration required: FUN_00229a3c. */
 /* Supplied declaration required: FUN_0022a5d8. */
@@ -56,9 +56,9 @@ extern int nodeListCountActiveById(unsigned int);
 /* Supplied declaration required: FUN_003c05e8. */
 extern int questGetCurrentRecordValue6(void);
 extern int questGetCurrentRecordValue8(void);
-extern int FUN_003c85f4(void);
+extern int questCurrentGetValue(void);
 extern int FUN_003c8880(void);
-extern unsigned int FUN_003c88b8(void);
+extern unsigned int questRecordValueIfState2(void);
 /* Supplied declaration required: FUN_003cefe0. */
 /* Supplied declaration required: FUN_003cfe14. */
 /* Supplied declaration required: FUN_003d03f8. */
@@ -100,7 +100,7 @@ unsigned int FUN_003cb3e4(int *param_1,unsigned int *param_2)
         temp_v3 = *param_1;
         btlMainFindEntryByListedId(temp_v3,temp_v2);
         if ((*(short *)(temp_v3 + 0x1c8) != 0) && (*(short *)(temp_v3 + 0x1c6) == 0)) {
-          if ((*(int *)(*param_1 + 0x48b8) != 0) && (temp_v2 = FUN_002298a0(), temp_v2 != 0)) {
+          if ((*(int *)(*param_1 + 0x48b8) != 0) && (temp_v2 = btlNodeListAnyReady(), temp_v2 != 0)) {
             return 0;
           }
           break;
@@ -296,8 +296,8 @@ LAB_003cb60c:
       temp_v11 = 0xc;
     }
     else {
-      temp_v2 = FUN_003c85f4();
-      temp_v8 = FUN_003c88b8();
+      temp_v2 = questCurrentGetValue();
+      temp_v8 = questRecordValueIfState2();
       temp_v6 = FUN_00255158((int)*(short *)(param_2[9] + 0x62),0x1d);
       if ((temp_v2 == 0) || (temp_v6 < temp_v8)) goto LAB_003cbb20;
       temp_v11 = FUN_00245cc0(0x1d);

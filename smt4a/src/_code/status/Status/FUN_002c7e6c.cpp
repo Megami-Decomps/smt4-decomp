@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
-int FUN_001505ac(...);
+int paramsInit(...);
 int FUN_00151408(...);
 int taskCreateDraw(...);
 int FUN_001527d8(...);
@@ -53,7 +53,7 @@ extern unsigned int *DAT_00588fd4; /* 0x588fd4 */
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_001505ac. */
+/* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: FUN_00151408. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
@@ -128,7 +128,7 @@ void FUN_002c7e6c(void)
     FUN_001527d8(temp_v0,0xffffffff);
     FUN_00151408(puVar5[0x82d],0,0x646464ff);
     Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 9);
-    FUN_001505ac(puVar1 + 9,&DAT_005362a8,0xe4,&DAT_0053638c,0xcc,0,0,0,0,&DAT_00536458,0x3f0);
+    paramsInit(puVar1 + 9,&DAT_005362a8,0xe4,&DAT_0053638c,0xcc,0,0,0,0,&DAT_00536458,0x3f0);
     FUN_0014e188(puVar1 + 0x106,0xf,0,puVar1 + 9,1);
     uiSpriteSetKeyframe(puVar1 + 0x106,1,0);
     FUN_0014e188(puVar1 + 0x129,0x12,1,puVar1 + 9,1);

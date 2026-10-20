@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001641b4(...);
+int eventQueueAddUniqueIfValid(...);
 int FUN_0035d8a4(void);
-int FUN_003d18e0(...);
+int uiQuestSortListByEntryKind(...);
 
 int FUN_001517b4(...);
 int uiSpriteSelectAnim(...);
@@ -53,7 +53,7 @@ extern signed char DAT_005f1a5f; /* 0x5f1a5f */
 extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_001643b4. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -81,7 +81,7 @@ extern int FUN_002c7c54(void);
 extern int FUN_00335384(int);
 /* Supplied declaration required: FUN_00341f88. */
 /* Supplied declaration required: FUN_0035d8a4. */
-/* Supplied declaration required: FUN_003d18e0. */
+/* Supplied declaration required: uiQuestSortListByEntryKind. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d474c. */
 /* Supplied declaration required: FUN_003d498c. */
@@ -994,7 +994,7 @@ LAB_00217264:
             *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
             *(unsigned int *)(temp_v9 + 4) = 3;
             *(unsigned int *)(temp_v9 + 0x10) = 0;
-            FUN_001641b4(0x100020e);
+            eventQueueAddUniqueIfValid(0x100020e);
             *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
             return 0;
           }
@@ -1012,7 +1012,7 @@ LAB_00217264:
         temp_v7 = 0x100020e;
       }
     }
-    FUN_001641b4(temp_v7);
+    eventQueueAddUniqueIfValid(temp_v7);
     *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
     return 0;
   case 0x1e:
@@ -1020,7 +1020,7 @@ LAB_00217264:
     if (temp_v5 == 0) {
       temp_v5 = FUN_002c7c54();
       if (temp_v5 != 0x69) {
-        FUN_003d18e0((int)*(char *)(temp_v1 + 0x90c));
+        uiQuestSortListByEntryKind((int)*(char *)(temp_v1 + 0x90c));
         if (*(char *)(temp_v1 + 0x90c) != '\0') {
           temp_v5 = temp_v1 + 0xa10;
         }

@@ -9,7 +9,7 @@ typedef struct {
     unsigned int spC; /* 0xc: local_c */
 } param_2_stack;
 
-extern int FUN_004288bc(unsigned int *);
+extern int queryResultFailureOnly(unsigned int *);
 
 
 int FUN_00428308(unsigned int *param_1,unsigned int param_2)
@@ -19,7 +19,7 @@ int FUN_00428308(unsigned int *param_1,unsigned int param_2)
   int temp_v1;
   
   temp_v1 = param_2;
-  temp_v0 = FUN_004288bc((unsigned int *)&temp_v1);
+  temp_v0 = queryResultFailureOnly((unsigned int *)&temp_v1);
   if (-1 < temp_v0) {
     *param_1 = temp_v1;
     temp_v0 = 0;

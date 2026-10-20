@@ -1,16 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `gameDataBlocksGetFlagByte` (_code @ 0x31cf94, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+typedef struct SaveData {
+    /* 0x00000 */ u8 bytes[1];
+} SaveData;
 
+typedef struct DataBlocks {
+    /* 0x00 */ u8 unk00[0x88];
+    /* 0x88 */ SaveData save;
+} DataBlocks;
 
-unsigned char gameDataBlocksGetFlagByte(void)
+typedef struct DataBlocksHolder {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ DataBlocks *blocks;
+} DataBlocksHolder;
 
+extern DataBlocksHolder g_gameDataBlocks;
+
+static __inline SaveData *saveDataGet(void)
 {
-  return *(unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x27e97);
+    return &g_gameDataBlocks.blocks->save;
+}
+
+/* Reads a flag byte of the game's save data. */
+u8 gameDataBlocksGetFlagByte(void)
+{
+    SaveData *save = saveDataGet();
+
+    return save->bytes[0x27E0F];
 }
 
 } /* extern "C" */

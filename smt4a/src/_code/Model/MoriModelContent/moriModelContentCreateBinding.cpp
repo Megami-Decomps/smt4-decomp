@@ -6,7 +6,7 @@
 extern "C" {
 
 void *FUN_00178b04(u32 size, const char *file, int line);   /* allocate with source location */
-extern MoriModelBinding *FUN_00406260(void *mem, u32 unk0C);   /* binding constructor */
+extern MoriModelBinding *_ZN9Obj557b58C1Ev(void *mem, u32 unk0C);   /* binding constructor */
 
 extern char DAT_00526000[];     /* "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelContent.cpp" */
 
@@ -16,7 +16,7 @@ void moriModelContentCreateBinding(MoriModelContent *content)
     MoriModelBinding *binding = NULL;
 
     if (mem != NULL) {
-        binding = FUN_00406260(mem, content->unk0C);
+        binding = _ZN9Obj557b58C1Ev(mem, content->unk0C);
     }
     content->binding = binding;
 }

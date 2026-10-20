@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_001641b4(int);
+int eventQueueAddUniqueIfValid(int);
 int flaggedEntryGetValueB(int);
 int flaggedEntryGetValueA(int);
 int flaggedEntrySetValueB(...);
 int flaggedEntrySetValueA(int, int);
 
-/* Supplied declaration required: FUN_001641b4. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int FUN_001643a0(void);
 extern int FUN_00165070(void);
 extern int FUN_001802d4(int);
@@ -55,7 +55,7 @@ int FUN_00485b14(int param_1)
         *(int *)(param_1 + 0x14) = temp_v4;
         temp_v0 = 1;
         if (*(int *)(param_1 + 0x10) != temp_v8 || temp_v4 != temp_v7) {
-          FUN_001641b4(0x100020d);
+          eventQueueAddUniqueIfValid(0x100020d);
         }
         break;
       }
@@ -91,7 +91,7 @@ int FUN_00485b14(int param_1)
             return 2;
           }
         }
-        FUN_001641b4(0x100020d);
+        eventQueueAddUniqueIfValid(0x100020d);
         return temp_v2;
       }
       temp_v4 = temp_v4 + 1;
