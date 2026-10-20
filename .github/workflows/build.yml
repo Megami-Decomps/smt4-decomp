@@ -1,0 +1,166 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+# Read-only token: the job runs repository build scripts.
+permissions:
+  contents: read
+
+# The progress site extends the history.json files its last deployment served, so pushes to
+# master publish one at a time. Other refs are never queued.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref == 'refs/heads/master' && 'master' || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      publish: ${{ steps.orig.outputs.available == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+          fetch-depth: 0   # the site seeds its history from commit messages
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # armcc is a Windows program: on Linux build.py runs it through wibo, which `fetch`
+      # downloads with objdiff-cli and arm-none-eabi binutils (all pinned by sha256).
+      - name: Cache tools
+        uses: actions/cache@v4
+        with:
+          path: |
+            smt4/build/tools
+            smt4a/build/tools
+          key: tools-${{ runner.os }}-${{ hashFiles('smt4/config/toolchain.json', 'smt4a/config/toolchain.json') }}
+
+      - name: Fetch tools
+        run: |
+          (cd smt4 && python3 build.py fetch)
+          (cd smt4a && python3 build.py fetch)
+
+      # The program images are copyrighted and never committed here. A fork or a public clone
+      # cannot obtain them, so the build, proof and site steps are skipped instead of pretending
+      # to verify anything. To run them, provide a private source through the ORIG_REPO and
+      # ORIG_DEPLOY_KEY secrets: only the NCCH header, exheader and ExeFS are needed.
+      - name: Check for the program images
+        id: orig
+        env:
+          REPO: ${{ secrets.ORIG_REPO }}
+          KEY: ${{ secrets.ORIG_DEPLOY_KEY }}
+        run: |
+          if [ -n "$REPO" ] && [ -n "$KEY" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No program images available: the matching build and relink proof were skipped."
+          fi
+
+      - name: Fetch the program images
+        if: steps.orig.outputs.available == 'true'
+        uses: actions/checkout@v5
+        with:
+          repository: ${{ secrets.ORIG_REPO }}
+          ssh-key: ${{ secrets.ORIG_DEPLOY_KEY }}
+          path: .orig-src
+          persist-credentials: false
+
+      # Fails loudly rather than skipping: the secrets were set, so the files are meant to be there.
+      - name: Place the program images
+        if: steps.orig.outputs.available == 'true'
+        run: |
+          mkdir -p smt4/orig smt4a/orig
+          cp .orig-src/orig/smt4_v1.2.0.cxi smt4/orig/
+          cp .orig-src/orig/smt4a.cxi smt4a/orig/
+          rm -rf .orig-src
+          sha256sum -c - <<'EOF'
+          f2e343cd090bad62526a831e68369d09cd014c74681c2e2aee9f787cd5f7e299  smt4/orig/smt4_v1.2.0.cxi
+          d0d16af8e9bf67067ad8b207faebcc19a5c3892636df1947904b459ea213a12d  smt4a/orig/smt4a.cxi
+          EOF
+
+      # split checks the decompressed .code against config/modules.json before writing anything.
+      - name: Split
+        if: steps.orig.outputs.available == 'true'
+        run: |
+          (cd smt4 && python3 build.py split)
+          (cd smt4a && python3 build.py split)
+
+      - name: Compile
+        if: steps.orig.outputs.available == 'true'
+        run: |
+          (cd smt4 && python3 build.py --strict -j "$(nproc)")
+          (cd smt4a && python3 build.py --strict -j "$(nproc)")
+
+      - name: Report
+        if: steps.orig.outputs.available == 'true'
+        run: |
+          (cd smt4 && python3 build.py report)
+          (cd smt4a && python3 build.py report)
+
+      # Fails unless every function objdiff scores 100% links into a byte-identical .code.
+      - name: Relink proof
+        if: steps.orig.outputs.available == 'true'
+        run: |
+          (cd smt4 && python3 tools/relink.py --matched)
+          (cd smt4a && python3 tools/relink.py --matched)
+
+      - name: Upload reports
+        if: steps.orig.outputs.available == 'true'
+        uses: actions/upload-artifact@v5
+        with:
+          name: reports
+          path: |
+            smt4/build/report.json
+            smt4a/build/report.json
+            smt4/build/relink/proof.json
+            smt4a/build/relink/proof.json
+
+      # A 404 means nothing has been published yet; the history then starts from the commit log.
+      # Any other failure stops the publish rather than reset the history.
+      - name: Build progress site
+        if: steps.orig.outputs.available == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/master'
+        env:
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: |
+          base="https://${GITHUB_REPOSITORY_OWNER,,}.github.io/${REPO_NAME}"
+          history=()
+          for game in smt4 smt4a; do
+            mkdir -p "previous/$game"
+            status=$(curl -sSL -o "previous/$game/history.json" -w '%{http_code}' "$base/$game/history.json")
+            case "$status" in
+              200) history=(--history previous) ;;
+              404) rm -f "previous/$game/history.json" ;;
+              *) echo "fetching $base/$game/history.json failed: HTTP $status" >&2; exit 1 ;;
+            esac
+          done
+          python3 tools/progress_site.py --out build/site "${history[@]}"
+
+      - name: Upload progress site
+        if: steps.orig.outputs.available == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: build/site
+
+  # Kept apart from the build so the job that runs repository scripts never holds a token
+  # that can write anything.
+  deploy:
+    needs: build
+    if: needs.build.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy progress site
+        id: deployment
+        uses: actions/deploy-pages@v5
