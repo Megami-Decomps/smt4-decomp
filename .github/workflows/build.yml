@@ -15,8 +15,13 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Windows: armcc is a Windows program. Under wibo on Linux it crashes on some units (wibo 1.0.3
+  # to 1.2.0 segfault in armcc's heap teardown on smt4 FUN_002aa790), so it runs natively here.
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
     outputs:
       publish: ${{ steps.orig.outputs.available == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     steps:
@@ -31,8 +36,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      # armcc is a Windows program: on Linux build.py runs it through wibo, which `fetch`
-      # downloads with objdiff-cli and arm-none-eabi binutils (all pinned by sha256).
+      # The pinned armcc, objdiff-cli and arm-none-eabi binutils, each checked against its sha256.
       - name: Cache tools
         uses: actions/cache@v4
         with:
@@ -43,8 +47,8 @@ jobs:
 
       - name: Fetch tools
         run: |
-          (cd smt4 && python3 build.py fetch)
-          (cd smt4a && python3 build.py fetch)
+          (cd smt4 && python build.py fetch)
+          (cd smt4a && python build.py fetch)
 
       # The program images are copyrighted and never committed here. A fork or a public clone
       # cannot obtain them, so the build, proof and site steps are skipped instead of pretending
@@ -89,27 +93,27 @@ jobs:
       - name: Split
         if: steps.orig.outputs.available == 'true'
         run: |
-          (cd smt4 && python3 build.py split)
-          (cd smt4a && python3 build.py split)
+          (cd smt4 && python build.py split)
+          (cd smt4a && python build.py split)
 
       - name: Compile
         if: steps.orig.outputs.available == 'true'
         run: |
-          (cd smt4 && python3 build.py --strict -j "$(nproc)")
-          (cd smt4a && python3 build.py --strict -j "$(nproc)")
+          (cd smt4 && python build.py --strict)
+          (cd smt4a && python build.py --strict)
 
       - name: Report
         if: steps.orig.outputs.available == 'true'
         run: |
-          (cd smt4 && python3 build.py report)
-          (cd smt4a && python3 build.py report)
+          (cd smt4 && python build.py report)
+          (cd smt4a && python build.py report)
 
       # Fails unless every function objdiff scores 100% links into a byte-identical .code.
       - name: Relink proof
         if: steps.orig.outputs.available == 'true'
         run: |
-          (cd smt4 && python3 tools/relink.py --matched)
-          (cd smt4a && python3 tools/relink.py --matched)
+          (cd smt4 && python tools/relink.py --matched)
+          (cd smt4a && python tools/relink.py --matched)
 
       - name: Upload reports
         if: steps.orig.outputs.available == 'true'
@@ -140,7 +144,7 @@ jobs:
               *) echo "fetching $base/$game/history.json failed: HTTP $status" >&2; exit 1 ;;
             esac
           done
-          python3 tools/progress_site.py --out build/site "${history[@]}"
+          python tools/progress_site.py --out build/site "${history[@]}"
 
       - name: Upload progress site
         if: steps.orig.outputs.available == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/master'

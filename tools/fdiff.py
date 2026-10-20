@@ -47,7 +47,9 @@ def listing(tool, obj):
     # A call relocation leaves bl/blx to the linker: it emits blx when the callee is in the other
     # instruction set (relink.py links with --use-blx), so the object's choice is not a difference.
     call = re.compile(r"^(\s*[0-9a-f]+: )blx(\s.*\[R_ARM_(?:THM_)?CALL )")
-    return [call.sub(r"\1bl\2", row) for row in rows]
+    # A Thumb halfword 0x0000 is the same bytes whether objdump reads it as code or as a pad.
+    pad = re.compile(r"^(\s*[0-9a-f]+: )(?:\.short\s+0x0000|movs\s+r0, r0)$")
+    return [pad.sub(r"\1movs\tr0, r0", call.sub(r"\1bl\2", row)) for row in rows]
 
 
 def main():

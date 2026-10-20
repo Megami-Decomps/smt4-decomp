@@ -1,9 +1,23 @@
 # Shin Megami Tensei IV & IV: Apocalypse
 
+[![Build Status]][actions]
+[![smt4-functions]][smt4-progress] [![smt4-code]][smt4-progress]
+[![smt4a-functions]][smt4a-progress] [![smt4a-code]][smt4a-progress]
+
+[Build Status]: https://github.com/Megami-Decomps/smt4-decomp/actions/workflows/build.yml/badge.svg
+[actions]: https://github.com/Megami-Decomps/smt4-decomp/actions/workflows/build.yml
+[smt4-functions]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmegami-decomps.github.io%2Fsmt4-decomp%2Fbadges%2Fsmt4-functions.json
+[smt4-code]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmegami-decomps.github.io%2Fsmt4-decomp%2Fbadges%2Fsmt4-code.json
+[smt4a-functions]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmegami-decomps.github.io%2Fsmt4-decomp%2Fbadges%2Fsmt4a-functions.json
+[smt4a-code]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmegami-decomps.github.io%2Fsmt4-decomp%2Fbadges%2Fsmt4a-code.json
+[smt4-progress]: https://megami-decomps.github.io/smt4-decomp/smt4/
+[smt4a-progress]: https://megami-decomps.github.io/smt4-decomp/smt4a/
+
 A work-in-progress **matching decompilation** of *Shin Megami Tensei IV* and *Shin Megami Tensei IV:
 Apocalypse* for Nintendo 3DS. The goal is to understand and document how the games work by
 reconstructing readable source code from their retail binaries. Matching builds verify the
-reconstruction against the original executables.
+reconstruction against the original executables. Progress, per game and per function, is on the
+[progress site](https://megami-decomps.github.io/smt4-decomp/).
 
 > [!IMPORTANT]
 > **This is a binary reconstruction and analysis project for understanding and documenting how the
